@@ -28,7 +28,6 @@ jobs:
         os:
           - ubuntu-22.04
           - windows-2022
-          - macos-13
           - macos-15
         include:
           - os: ubuntu-22.04
@@ -37,9 +36,6 @@ jobs:
           - os: windows-2022
             python: '3.12'
             asset_name: action-server.exe
-          - os: macos-13
-            python: '3.12'
-            asset_name: action-server
           - os: macos-15
             python: '3.12'
             asset_name: action-server
