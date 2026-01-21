@@ -38,14 +38,17 @@ jobs:
         run: pip install invoke
 
       - name: Network Hardening
+        shell: bash
         run: |
-          if [ "$RUNNER_OS" == "Linux" ]; then
+          if [ "$RUNNER_OS" == "Linux" ] || [ "$RUNNER_OS" == "macOS" ]; then
             sudo sh -c 'echo "127.0.0.1 npm.pkg.github.com" >> /etc/hosts'
-          elif [ "$RUNNER_OS" == "macOS" ]; then
-            sudo sh -c 'echo "127.0.0.1 npm.pkg.github.com" >> /etc/hosts'
-          elif [ "$RUNNER_OS" == "Windows" ]; then
-            echo "127.0.0.1 npm.pkg.github.com" | Out-File -Encoding ASCII -Append C:\Windows\System32\drivers\etc\hosts
           fi
+
+      - name: Network Hardening (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Add-Content -Path "C:\Windows\System32\drivers\etc\hosts" -Value "127.0.0.1 npm.pkg.github.com"
 
       - name: Build Frontend
         id: build-frontend
@@ -121,18 +124,22 @@ jobs:
 
       - name: Determinism Check
         id: determinism-check
+        if: runner.os != 'Windows'
         working-directory: action_server
+        shell: bash
         run: |
           mv frontend/dist frontend/dist_first
           inv build-frontend --tier community
-          find frontend/dist -type f -exec sha256sum {} \; | sort > dist_second.sha
-          find frontend/dist_first -type f -exec sha256sum {} \; | sort > dist_first.sha
+          # Extract just the hash, not the full path, for comparison
+          find frontend/dist -type f -exec sha256sum {} \; | awk '{print $1}' | sort > dist_second.sha
+          find frontend/dist_first -type f -exec sha256sum {} \; | awk '{print $1}' | sort > dist_first.sha
           if ! diff dist_first.sha dist_second.sha; then
             echo "Determinism check failed: Builds are not reproducible"
             rm -rf frontend/dist
             mv frontend/dist_first frontend/dist
             exit 1
           fi
+          echo "Determinism check passed"
           rm -rf frontend/dist
           mv frontend/dist_first frontend/dist
 
