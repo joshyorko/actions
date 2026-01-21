@@ -58,6 +58,7 @@ jobs:
       - name: Check Bundle Size
         id: check-bundle-size
         working-directory: action_server/frontend
+        shell: bash
         run: |
           echo "Checking bundle size against threshold (1000KB total, 300KB gzipped)..."
 
@@ -162,6 +163,7 @@ jobs:
 
       - name: Job Summary
         if: always()
+        shell: bash
         run: |
           JOB_STATUS=${{ job.status }}
 
