@@ -229,6 +229,9 @@ class ArgumentsNamespaceStart(ArgumentsNamespaceBaseImportOrStart):
     ssl_certfile: str
     oauth2_settings: str
     auto_reload: bool
+    # Distributed mode (Redis)
+    redis_url: Optional[str]
+    redis_password: Optional[str]
 
 
 class ArgumentsNamespacePackagePush(ArgumentsNamespace):

@@ -26,6 +26,8 @@ import { Textarea } from '@/core/components/ui/Textarea';
 import type { OpenAPIV3_1 } from 'openapi-types';
 import { useActionRunMutation } from '~/queries/actions';
 import { useActionServerContext } from '@/shared/context/actionServerContext';
+import { useWorkItems, useWorkItemStats, useWorkItemQueues, useCreateWorkItem } from '@/queries/workItems';
+import { Select, SelectItem } from '@/core/components/ui/Select';
 import { refreshRuns } from '@/shared/api-client';
 import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
 import { Action, ActionPackage, Run, RunStatus, ServerConfig } from '@/shared/types';
@@ -311,7 +313,17 @@ export const ActionsPage = () => {
   const [apiKey, setApiKey] = useLocalStorage<string>('action-server-api-key', '');
   const [useAdvancedMode, setUseAdvancedMode] = useState(false);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
+  const [workItemQueue, setWorkItemQueue] = useState<string>('');
+  const [showWorkItemsConfig, setShowWorkItemsConfig] = useState(false);
+  const [seedPayload, setSeedPayload] = useState<string>('{}');
+  const [seedError, setSeedError] = useState<string | null>(null);
   const { mutateAsync: runAction, isPending: isRunning } = useActionRunMutation();
+
+  // Work items hooks
+  const { data: workItemQueues } = useWorkItemQueues();
+  const { data: workItemStats } = useWorkItemStats(workItemQueue || undefined);
+  const { data: pendingWorkItems } = useWorkItems(workItemQueue || undefined, 'PENDING', 10);
+  const createWorkItem = useCreateWorkItem();
   
   // Track if component has mounted to prevent re-animation on selection changes
   const hasMounted = useRef(false);
@@ -353,7 +365,7 @@ export const ActionsPage = () => {
     (action: Action) => {
       // Set the selected action first
       setSelectedActionId(action.id);
-      
+
       setRunPayload(buildInitialPayload(action));
       setRunResult(null);
       setRunError(null);
@@ -370,6 +382,12 @@ export const ActionsPage = () => {
         }
       });
       setFormValues(initialValues);
+
+      // Reset work items config
+      setWorkItemQueue('');
+      setShowWorkItemsConfig(false);
+      setSeedPayload('{}');
+      setSeedError(null);
 
       setRunDialogOpen(true);
     },
@@ -445,6 +463,7 @@ export const ActionsPage = () => {
           actionName: selectedAction.name,
           args: parsedPayload as Record<string, unknown>,
           apiKey: apiKey || undefined,
+          workItemQueue: workItemQueue || undefined,
         });
         setRunResult(result);
         setRunError(null);
@@ -458,7 +477,7 @@ export const ActionsPage = () => {
         setRunError(message);
       }
     },
-    [apiKey, runAction, runPayload, selectedAction, selectedPackage, useAdvancedMode, formValues],
+    [apiKey, runAction, runPayload, selectedAction, selectedPackage, useAdvancedMode, formValues, workItemQueue],
   );
 
   if (loadedActions.isPending) {
@@ -870,6 +889,148 @@ export const ActionsPage = () => {
                 )}
               </div>
             )}
+
+            {/* Work Items Configuration */}
+            <details
+              className="rounded-lg border border-border bg-card group"
+              open={showWorkItemsConfig}
+              onToggle={(e) => setShowWorkItemsConfig((e.target as HTMLDetailsElement).open)}
+            >
+              <summary className="p-4 cursor-pointer hover:bg-muted/50 transition-colors duration-150 list-none flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-sm font-semibold text-foreground">
+                    Work Items Queue
+                  </h3>
+                  {workItemQueue && workItemStats && (
+                    <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                      {workItemStats.pending} pending
+                    </span>
+                  )}
+                </div>
+                <svg className="h-4 w-4 text-muted-foreground transition-transform duration-150 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div className="p-4 pt-0 space-y-4 border-t border-border">
+                <p className="text-xs text-muted-foreground">
+                  Configure the work item queue this action will read from. For producer tasks, seed new work items. For consumer tasks, see pending items.
+                </p>
+
+                <div className="grid gap-2">
+                  <label htmlFor="workitem-queue" className="text-sm font-medium text-foreground">
+                    Queue Name
+                  </label>
+                  <div className="flex gap-2">
+                    <Select
+                      value={workItemQueue}
+                      onValueChange={setWorkItemQueue}
+                      className="flex-1"
+                    >
+                      <SelectItem value="">— Select or enter queue —</SelectItem>
+                      {workItemQueues?.map((q) => (
+                        <SelectItem key={q} value={q}>{q}</SelectItem>
+                      ))}
+                    </Select>
+                    <Input
+                      id="workitem-queue"
+                      type="text"
+                      value={workItemQueue}
+                      placeholder="Or enter new queue name"
+                      className="flex-1"
+                      onChange={(e) => setWorkItemQueue(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                {workItemQueue && (
+                  <>
+                    {/* Queue Stats */}
+                    {workItemStats && (
+                      <div className="grid grid-cols-4 gap-2 text-center">
+                        <div className="rounded-md border border-border bg-muted/30 p-2">
+                          <p className="text-lg font-semibold text-card-foreground">{workItemStats.pending}</p>
+                          <p className="text-xs text-muted-foreground">Pending</p>
+                        </div>
+                        <div className="rounded-md border border-border bg-muted/30 p-2">
+                          <p className="text-lg font-semibold text-card-foreground">{workItemStats.in_progress}</p>
+                          <p className="text-xs text-muted-foreground">In Progress</p>
+                        </div>
+                        <div className="rounded-md border border-border bg-muted/30 p-2">
+                          <p className="text-lg font-semibold text-success">{workItemStats.done}</p>
+                          <p className="text-xs text-muted-foreground">Done</p>
+                        </div>
+                        <div className="rounded-md border border-border bg-muted/30 p-2">
+                          <p className="text-lg font-semibold text-destructive">{workItemStats.failed}</p>
+                          <p className="text-xs text-muted-foreground">Failed</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Pending Items Preview */}
+                    {pendingWorkItems && pendingWorkItems.items.length > 0 && (
+                      <div>
+                        <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
+                          Pending Items ({pendingWorkItems.items.length})
+                        </h4>
+                        <ul className="space-y-1 max-h-32 overflow-y-auto">
+                          {pendingWorkItems.items.slice(0, 5).map((item) => (
+                            <li key={item.id} className="text-xs font-mono text-muted-foreground bg-muted/30 rounded px-2 py-1 truncate">
+                              {JSON.stringify(item.payload || {}).slice(0, 80)}...
+                            </li>
+                          ))}
+                          {pendingWorkItems.items.length > 5 && (
+                            <li className="text-xs text-muted-foreground italic">
+                              ... and {pendingWorkItems.items.length - 5} more
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Seed Work Item */}
+                    <div className="space-y-2 pt-2 border-t border-border">
+                      <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Seed New Work Item
+                      </h4>
+                      <Textarea
+                        value={seedPayload}
+                        placeholder='{"key": "value"}'
+                        className="font-mono text-xs"
+                        rows={3}
+                        onChange={(e) => {
+                          setSeedPayload(e.target.value);
+                          setSeedError(null);
+                        }}
+                      />
+                      {seedError && (
+                        <p className="text-xs text-destructive">{seedError}</p>
+                      )}
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={createWorkItem.isPending}
+                        onClick={async () => {
+                          try {
+                            const payload = JSON.parse(seedPayload);
+                            await createWorkItem.mutateAsync({
+                              queue_name: workItemQueue,
+                              payload,
+                            });
+                            setSeedPayload('{}');
+                            setSeedError(null);
+                          } catch (err) {
+                            setSeedError(err instanceof Error ? err.message : 'Invalid JSON');
+                          }
+                        }}
+                      >
+                        {createWorkItem.isPending ? 'Seeding...' : 'Seed Work Item'}
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </details>
 
             {runError && (
               <div className="mb-3">

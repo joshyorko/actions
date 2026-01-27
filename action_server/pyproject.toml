@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sema4ai-action-server"
-version = "1.1.0"
+version = "1.2.0"
 description = """Sema4AI Action Server"""
 authors = [
 	"Sema4.ai, Inc. <dev@sema4.ai>",
@@ -44,6 +44,12 @@ watchfiles = "^1.1.1"
 sema4ai-common = "^0.3.0"
 mcp = "^1.21.0"
 actions-work-items = { path = "../work-items/", develop = true }
+# Scheduling dependencies
+croniter = "^2.0.0"
+pytz = "^2024.1"
+aiosmtplib = "^3.0.0"
+# Redis for control-room-lite mode (bundled so it just works)
+redis = "^5.0.0"
 
 [tool.poetry.group.dev.dependencies]
 sema4ai-devutils = { path = "../devutils/", develop = true }

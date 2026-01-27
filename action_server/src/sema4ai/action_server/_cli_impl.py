@@ -233,6 +233,23 @@ def _add_start_server_command(command_parser, defaults):
         nargs="?",
     )
 
+    # Distributed mode arguments (Redis)
+    start_parser.add_argument(
+        "--redis-url",
+        metavar="URL",
+        help="Redis URL for distributed mode. Example: redis://localhost:6379. "
+        "Can also be set via REDIS_URL or ACTION_SERVER_REDIS_URL environment variables. "
+        "When Redis is available, distributed features (job queue, horizontal scaling) are auto-enabled.",
+        default=None,
+    )
+    start_parser.add_argument(
+        "--redis-password",
+        metavar="PASSWORD",
+        help="Redis password for authentication. Can also be set via ACTION_SERVER_REDIS_PASSWORD "
+        "environment variable.",
+        default=None,
+    )
+
     add_data_args(start_parser, defaults)
     _add_kill_lock_holder_args(start_parser, defaults)
     add_verbose_args(start_parser, defaults)
