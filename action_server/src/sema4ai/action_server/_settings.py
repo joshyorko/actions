@@ -44,6 +44,19 @@ OPENAPI_SPEC_OPERATION_KIND = "x-operation-kind"
 log = logging.getLogger(__name__)
 
 
+def _get_redis_url_from_env() -> Optional[str]:
+    """
+    Auto-detect Redis URL from environment variables.
+
+    Checks multiple common environment variable names for Redis configuration.
+    Returns the first non-empty value found, or None if no Redis URL is configured.
+    """
+    for var in ["ACTION_SERVER_REDIS_URL", "REDIS_URL"]:
+        if url := os.environ.get(var):
+            return url
+    return None
+
+
 def is_frozen():
     if getattr(sys, "frozen", False):
         return True
@@ -271,6 +284,32 @@ class Settings:
     # (so, even if the port is 0, it should map to the actually mapped port).
     base_url: Optional[str] = None
 
+    # Scheduler settings
+    enable_scheduler: bool = True
+    scheduler_check_interval: float = 10.0  # seconds
+    scheduler_max_concurrent_global: int = 10
+
+    # Trigger settings
+    enable_triggers: bool = True
+    trigger_webhook_base_url: Optional[str] = None  # For generating webhook URLs
+
+    # Notification settings
+    smtp_host: Optional[str] = None
+    smtp_port: int = 587
+    smtp_user: Optional[str] = None
+    smtp_password: Optional[str] = None
+    smtp_from: Optional[str] = None
+    smtp_use_tls: bool = True
+
+    # Distributed mode settings (auto-enabled when Redis is available)
+    # Redis URL can be provided via --redis-url flag or REDIS_URL/ACTION_SERVER_REDIS_URL env vars
+    redis_url: Optional[str] = None
+    redis_password: Optional[str] = None
+
+    # Worker settings (distributed mode)
+    worker_concurrency: int = 4
+    worker_poll_timeout: int = 30
+
     @classmethod
     def defaults(cls):
         fields = cls.__dataclass_fields__
@@ -331,6 +370,9 @@ class Settings:
             "ssl_certfile",
             "oauth2_settings",
             "expose_provider",
+            # Distributed mode (Redis)
+            "redis_url",
+            "redis_password",
         ):
             assert hasattr(settings, attr)
             if hasattr(args, attr):
@@ -398,6 +440,25 @@ class Settings:
 
             if not settings.oauth2_settings:
                 settings.oauth2_settings = str(user_path / "oauth2_config.yaml")
+
+            # Auto-detect Redis URL from environment if not provided via CLI
+            if not settings.redis_url:
+                settings.redis_url = _get_redis_url_from_env()
+
+            # Check for redis password from environment if not provided
+            if settings.redis_url and not settings.redis_password:
+                settings.redis_password = os.environ.get(
+                    "ACTION_SERVER_REDIS_PASSWORD"
+                )
+
+            # Log Redis configuration if available
+            if settings.redis_url:
+                log.info(
+                    colored(
+                        f"Distributed mode enabled (Redis: {settings.redis_url})",
+                        attrs=["bold"],
+                    )
+                )
 
         return settings
 
