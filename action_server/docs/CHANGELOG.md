@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 1.2.2 - 2026-01-28
+
+### Fixes
+- Fixed stale work item queue environment variable persisting across runs in preloaded action processes. `RC_WORKITEM_QUEUE_NAME` and `X_ACTION_TRACE` are now explicitly cleared at the start of each action run to prevent unintended queue/trace inheritance from previous requests.
+
 ## 1.1.0 - 2026-01-21
 
 ### Features
