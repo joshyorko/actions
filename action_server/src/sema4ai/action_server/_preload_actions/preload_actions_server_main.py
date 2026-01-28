@@ -215,6 +215,11 @@ class MessagesHandler:
                     os.environ.pop("S4_ACTIONS_SKIP_SESSION_TEARDOWN", None)
                     os.environ.pop("S4_ACTIONS_SKIP_SESSION_SETUP", None)
 
+                # Clear per-request env vars from any previous run to prevent
+                # stale values from affecting subsequent requests
+                os.environ.pop("RC_WORKITEM_QUEUE_NAME", None)
+                os.environ.pop("X_ACTION_TRACE", None)
+
                 if headers:
                     for key, value in headers.items():
                         if key and value and key.upper() == "X_ACTION_TRACE":
