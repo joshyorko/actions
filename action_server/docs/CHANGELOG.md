@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 1.2.2 - 2026-01-28
+
+### Fixes
+- Fixed version number mismatch between pyproject.toml and __init__.py
+
 ## 1.2.1 - 2026-01-28
 
 ### Fixes
