@@ -2,7 +2,7 @@
 
 <samp>[Examples](https://github.com/joshyorko/actions-cookbook) | [Slack](https://join.slack.com/t/actions-community/shared_invite/)</samp>
 
-[![PyPI - Version](https://img.shields.io/pypi/v/sema4ai-actions?label=sema4ai-actions&color=%23733CFF)](https://pypi.org/project/sema4ai-actions)
+[![PyPI - Version](https://img.shields.io/pypi/v/sema4ai-actions?label=sema4ai-actions&color=%23733CFF)](https://pypi.org/project/sema4ai-actions) [![PyPI - Version](https://img.shields.io/pypi/v/actions-work-items?label=actions-work-items&color=%23733CFF)](https://pypi.org/project/actions-work-items)
 [![GitHub issues](https://img.shields.io/github/issues/joshyorko/actions?color=%232080C0)](https://github.com/joshyorko/actions/issues)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
