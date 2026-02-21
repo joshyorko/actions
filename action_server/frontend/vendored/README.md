@@ -91,17 +91,10 @@ The script:
 
 ## How to Update Packages
 
-### Automated Monthly Updates
+### Automated Updates
 
-A GitHub Actions workflow runs monthly to check for updates:
-
-- **Workflow**: `.github/workflows/monthly-vendor-update.yml`
-- **Schedule**: First day of each month at midnight UTC
-- **Process**:
-  1. Checks for newer versions of all vendored packages
-  2. Downloads and vendors updated packages
-  3. Creates a pull request with the updates
-  4. Maintainers review and merge
+Automated monthly update checks are not enabled in the community branch.
+Updating vendored packages requires private GitHub Packages access and is performed manually by maintainers.
 
 ### Manual Updates (Maintainers Only)
 

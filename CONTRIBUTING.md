@@ -78,7 +78,8 @@ If you have access to Sema4.ai's GitHub Packages, you can update vendored packag
 
 #### Automated Updates
 
-A GitHub Actions workflow runs monthly to check for package updates and creates pull requests automatically. See `.github/workflows/monthly-vendor-update.yml`.
+Automated monthly update checks were removed from the community branch because they require access to private `@sema4ai/*` packages.
+Package updates are handled manually by maintainers with GitHub Packages access.
 
 For more details, see the [vendored packages documentation](action_server/frontend/vendored/README.md).
 
