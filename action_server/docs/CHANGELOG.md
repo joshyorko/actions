@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 1.2.3 - 2026-02-21
+
+### Fixes
+- Updated the community RCC integration from `joshyorko/rcc` `v18.16.0` to `v18.17.1` across download/build scripts, test fixtures, and docs.
+
 ## 1.2.2 - 2026-01-28
 
 ### Fixes

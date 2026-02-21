@@ -12,7 +12,7 @@ ACTIVATE_PATH="$SCRIPT_PATH/activate.sh"
 echo
 
 # Get RCC binary based on platform using joshyorko/rcc GitHub releases
-RCC_VERSION="v18.16.0"
+RCC_VERSION="v18.17.1"
 if [[ "$(uname)" == "Darwin" ]]; then
     if [[ "$(uname -m)" == "arm64" ]]; then
         RCC_URL="https://github.com/joshyorko/rcc/releases/download/$RCC_VERSION/rcc-macosarm64"
