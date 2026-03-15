@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 1.2.4 - 2026-03-15
+
+### Fixes
+- Updated the community RCC integration from `joshyorko/rcc` `v18.17.1` to `v18.17.3` across download/build scripts, shared test fixtures, and docs. This picks up the upstream Go 1.25.7 toolchain refresh plus the `v18.17.3` security fixes for archive extraction and TLS handling.
+
 ## 1.2.3 - 2026-02-21
 
 ### Fixes

@@ -215,7 +215,7 @@ This stack is hands down the easiest way to give AI agents more capabilities. It
 
 ## Community Edition
 
-This build uses the **[joshyorko/rcc](https://github.com/joshyorko/rcc)** fork (v18.17.1) - a fully open-source version of RCC with several key benefits:
+This build uses the **[joshyorko/rcc](https://github.com/joshyorko/rcc)** fork (v18.17.3) - a fully open-source version of RCC with several key benefits:
 
 ### Why the Community RCC Fork?
 
@@ -225,7 +225,7 @@ This build uses the **[joshyorko/rcc](https://github.com/joshyorko/rcc)** fork (
 | **Infrastructure Dependencies** | Cloud services | None - fully decoupled |
 | **Telemetry** | Telemetry enabled | Minimal/disabled |
 | **Startup Speed** | Standard | Faster (fewer network calls) |
-| **Go Version** | Varies | 1.23 (latest security patches) |
+| **Go Version** | Varies | 1.25.7 (current upstream toolchain) |
 
 ### Performance Benefits
 
@@ -259,7 +259,7 @@ To clear caches: `action-server env clean-tools-caches`
 - **Node.js**: LTS 20.x (20.9.0 or later)
 - **npm**: 10.x or later (bundled with Node.js)
 - **Python**: 3.11+ (for the Action Server backend)
-- **RCC**: [joshyorko/rcc](https://github.com/joshyorko/rcc) v18.17.1+
+- **RCC**: [joshyorko/rcc](https://github.com/joshyorko/rcc) v18.17.3+
 
 ### Build the Frontend
 
