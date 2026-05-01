@@ -26,42 +26,47 @@ poetry add actions-work-items
 
 ### robocorp-workitems Compatible API
 
+Use `from actions import workitems` for the shortest Robocorp-style API. If you
+want the import name to mirror the `actions-work-items` distribution, use the
+Python-safe underscore alias: `from actions_work_items import workitems`.
+
 ```python
-from actions.work_items import inputs, outputs
+from actions import workitems
 
 # Process work items using singleton pattern
-for item in inputs:
+for item in workitems.inputs:
     data = item.payload
     # Process...
-    outputs.create({"result": "processed"})
+    workitems.outputs.create({"result": "processed"})
     item.done()
 ```
 
 ### Context Manager Pattern (Recommended)
 
 ```python
-from actions.work_items import inputs, outputs, BusinessException
+from actions import workitems
+from actions.work_items import BusinessException
 
-for item in inputs:
+for item in workitems.inputs:
     with item:  # Auto-release on exit
         if not item.payload.get("required_field"):
             raise BusinessException("Missing required field")
 
         # Process item...
-        outputs.create({"status": "success"})
+        workitems.outputs.create({"status": "success"})
         # item.done() called automatically
 ```
 
 ### Explicit Initialization
 
 ```python
-from actions.work_items import init, create_adapter, inputs, outputs
+from actions import workitems
 
 # Create specific adapter
-adapter = create_adapter("sqlite", db_path="./my-workitems.db")
-init(adapter)
+adapter = workitems.create_adapter("sqlite", db_path="./my-workitems.db")
+workitems.init(adapter)
 
-for item in inputs:
+for item in workitems.inputs:
     # Process...
 ```
 
@@ -171,9 +176,9 @@ for data in fetch_data():
 ### File Attachments
 
 ```python
-from actions.work_items import inputs, outputs
+from actions import workitems
 
-for item in inputs:
+for item in workitems.inputs:
     with item:
         # List files
         files = item.list_files()
@@ -193,9 +198,9 @@ for item in inputs:
 ### Email Parsing
 
 ```python
-from actions.work_items import inputs
+from actions import workitems
 
-for item in inputs:
+for item in workitems.inputs:
     with item:
         # Parse email attachment
         email = item.get_email("message.eml")
@@ -208,13 +213,13 @@ for item in inputs:
 ### Error Handling
 
 ```python
+from actions import workitems
 from actions.work_items import (
-    inputs,
     BusinessException,
     ApplicationException,
 )
 
-for item in inputs:
+for item in workitems.inputs:
     with item:
         try:
             process(item.payload)
@@ -247,6 +252,7 @@ curl http://localhost:8080/api/work-items/stats?queue_name=repos
 
 ### Singletons
 
+- `workitems` - Module alias exposing the Robocorp-style API shape
 - `inputs` - Inputs collection singleton
 - `outputs` - Outputs collection singleton
 
@@ -297,11 +303,11 @@ for item in workitems.inputs:
     workitems.outputs.create(payload=item.payload)
     item.done()
 
-# After (actions-work-items) - same API!
-from actions.work_items import inputs, outputs
+# After (actions-work-items) - same API shape
+from actions import workitems
 
-for item in inputs:
-    outputs.create(payload=item.payload)
+for item in workitems.inputs:
+    workitems.outputs.create(payload=item.payload)
     item.done()
 ```
 

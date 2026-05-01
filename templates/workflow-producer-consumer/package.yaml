@@ -10,7 +10,7 @@ dependencies:
     - uv=0.8.17
   pypi:
     - sema4ai-actions=1.6.4
-    - -e ../../work-items  # TODO: Change to 'actions-work-items>=0.2.0' after PyPI publish
+    - actions-work-items>=0.2.4
     - requests>=2.31.0
 
 dev-dependencies:

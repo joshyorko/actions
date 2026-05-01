@@ -12,6 +12,26 @@ def test_package_import_exports_optional_adapters():
     assert work_items.DocumentDBAdapter.__name__ == "DocumentDBAdapter"
 
 
+def test_actions_workitems_alias_exports_work_items_api():
+    """The short actions.workitems alias exposes the same API surface."""
+    from actions import workitems
+
+    assert workitems.inputs is not None
+    assert workitems.outputs is not None
+    assert workitems.create_adapter is not None
+    assert workitems.SQLiteAdapter.__name__ == "SQLiteAdapter"
+
+
+def test_distribution_name_alias_exports_workitems_module():
+    """The underscore package alias works for the hyphenated distribution name."""
+    import actions_work_items
+    from actions_work_items import workitems
+
+    assert actions_work_items.inputs is workitems.inputs
+    assert actions_work_items.outputs is workitems.outputs
+    assert workitems.create_adapter is actions_work_items.create_adapter
+
+
 def test_create_adapter_supports_redis_and_docdb_aliases(monkeypatch):
     """Common adapter aliases select the expected adapter classes."""
     import actions.work_items as work_items

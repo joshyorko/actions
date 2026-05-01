@@ -13,17 +13,14 @@ Usage:
 import os
 import json
 from pathlib import Path
-from typing import Optional
 
 from sema4ai.actions import action, Response
 
+from actions import workitems
 from actions.work_items import (
-    inputs,
-    outputs,
     seed_input,
     get_context,
     init,
-    BusinessException,
     State,
 )
 
@@ -99,7 +96,7 @@ def consumer(max_items: int = 10) -> Response[dict]:
     processed = []
     success_count = 0
 
-    for item in inputs:
+    for item in workitems.inputs:
         if len(processed) >= max_items:
             break
 
@@ -115,7 +112,7 @@ def consumer(max_items: int = 10) -> Response[dict]:
             }
 
             # Create output for downstream steps
-            outputs.create(result)
+            workitems.outputs.create(result)
 
             success_count += 1
             processed.append({
@@ -124,7 +121,7 @@ def consumer(max_items: int = 10) -> Response[dict]:
                 "result": result,
             })
 
-    fail_count = len([i for i in inputs.released if i.state == State.FAILED])
+    fail_count = len([i for i in workitems.inputs.released if i.state == State.FAILED])
 
     return Response(result={
         "status": "completed",
