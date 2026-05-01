@@ -5,8 +5,7 @@ Based on robocorp-workitems (Apache 2.0 License).
 """
 
 from abc import ABC, abstractmethod
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from .._types import ExceptionType, JSONType, State
 
@@ -38,9 +37,9 @@ class BaseAdapter(ABC):
         self,
         item_id: str,
         state: State,
-        exception_type: Optional[ExceptionType] = None,
-        code: Optional[str] = None,
-        message: Optional[str] = None,
+        exception_type: ExceptionType | None = None,
+        code: str | None = None,
+        message: str | None = None,
     ) -> None:
         """
         Release a reserved input work item.
@@ -58,7 +57,7 @@ class BaseAdapter(ABC):
     def create_output(
         self,
         parent_id: str,
-        payload: Optional[JSONType] = None,
+        payload: JSONType | None = None,
     ) -> str:
         """
         Create a new output work item.
@@ -97,7 +96,7 @@ class BaseAdapter(ABC):
         pass
 
     @abstractmethod
-    def list_files(self, item_id: str) -> List[str]:
+    def list_files(self, item_id: str) -> list[str]:
         """
         List files attached to a work item.
 
@@ -157,9 +156,9 @@ class BaseAdapter(ABC):
 
     def seed_input(
         self,
-        payload: Optional[JSONType] = None,
-        files: Optional[Dict[str, bytes]] = None,
-        queue_name: Optional[str] = None,
+        payload: JSONType | None = None,
+        files: dict[str, bytes] | None = None,
+        queue_name: str | None = None,
     ) -> str:
         """
         Seed a new input work item into the queue.
@@ -179,10 +178,10 @@ class BaseAdapter(ABC):
 
     def list_items(
         self,
-        queue_name: Optional[str] = None,
-        state: Optional[State] = None,
+        queue_name: str | None = None,
+        state: State | None = None,
         limit: int = 100,
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """
         List work items in a queue.
 
@@ -196,7 +195,7 @@ class BaseAdapter(ABC):
         """
         raise NotImplementedError("list_items not implemented by this adapter")
 
-    def get_item(self, item_id: str) -> Dict[str, Any]:
+    def get_item(self, item_id: str) -> dict[str, Any]:
         """
         Get detailed info about a work item.
 
@@ -216,3 +215,15 @@ class BaseAdapter(ABC):
             item_id: Work item ID.
         """
         raise NotImplementedError("delete_item not implemented by this adapter")
+
+    def get_queue_stats(self, queue_name: str | None = None) -> dict[str, int]:
+        """
+        Get statistics for a queue.
+
+        Args:
+            queue_name: Queue name (None for default).
+
+        Returns:
+            Dictionary with pending/in_progress/done/failed/total counts.
+        """
+        raise NotImplementedError("get_queue_stats not implemented by this adapter")

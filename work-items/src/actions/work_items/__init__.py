@@ -54,36 +54,38 @@ Environment Variables:
         RC_WORKITEM_OUTPUT_PATH: Output directory (default: ./output/work-items-out)
 """
 
+import importlib
 import logging
 import os
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
-from ._types import State, ExceptionType, JSONType, PathType, Address, Email
-from ._exceptions import (
-    EmptyQueue,
-    WorkItemException,
-    BusinessException,
-    ApplicationException,
-)
-from ._workitem import WorkItem, Input, Output
+from ._adapters import BaseAdapter, DocumentDBAdapter, FileAdapter, RedisAdapter, SQLiteAdapter
 from ._collections import Inputs, Outputs
 from ._context import (
     WorkItemsContext,
-    init as _init,
-    get_context,
-    inputs as _inputs_func,
-    get_input,
     create_output,
+    get_context,
+    get_input,
     seed_input,
 )
-from ._adapters import BaseAdapter, FileAdapter, SQLiteAdapter
+from ._context import (
+    init as _init,
+)
+from ._exceptions import (
+    ApplicationException,
+    BusinessException,
+    EmptyQueue,
+    WorkItemException,
+)
+from ._types import Address, Email, ExceptionType, JSONType, PathType, State
+from ._workitem import Input, Output, WorkItem
 
 if TYPE_CHECKING:
     pass
 
 log = logging.getLogger(__name__)
 
-__version__ = "0.2.0"
+__version__ = "0.2.3"
 
 
 # ============================================================================
@@ -91,7 +93,7 @@ __version__ = "0.2.0"
 # ============================================================================
 
 def create_adapter(
-    adapter_type: Optional[str] = None,
+    adapter_type: str | None = None,
     **kwargs,
 ) -> BaseAdapter:
     """
@@ -111,22 +113,46 @@ def create_adapter(
     Returns:
         Configured adapter instance.
     """
-    # Check explicit type
     if adapter_type is None:
-        adapter_type = os.environ.get("RC_WORKITEM_ADAPTER", "").lower()
+        adapter_type = os.environ.get("RC_WORKITEM_ADAPTER", "")
 
-    # Normalize type names
-    adapter_type = adapter_type.lower() if adapter_type else ""
+    adapter_type = adapter_type.strip() if adapter_type else ""
+    normalized_type = adapter_type.replace("-", "_").lower()
 
     # Map common names
-    if adapter_type in ("file", "fileadapter", "actions.work_items.fileadapter"):
+    if normalized_type in (
+        "file",
+        "fileadapter",
+        "actions.work_items.fileadapter",
+        "actions.work_items._adapters._file.fileadapter",
+    ):
         return FileAdapter(**kwargs)
-    elif adapter_type in ("sqlite", "sqliteadapter", "actions.work_items.sqliteadapter"):
+    elif normalized_type in (
+        "sqlite",
+        "sqliteadapter",
+        "actions.work_items.sqliteadapter",
+        "actions.work_items._adapters._sqlite.sqliteadapter",
+    ):
         return _create_sqlite_adapter(**kwargs)
+    elif normalized_type in (
+        "redis",
+        "redisadapter",
+        "actions.work_items.redisadapter",
+        "actions.work_items._adapters._redis.redisadapter",
+    ):
+        return RedisAdapter(**kwargs)
+    elif normalized_type in (
+        "docdb",
+        "docdbadapter",
+        "documentdb",
+        "documentdbadapter",
+        "actions.work_items.documentdbadapter",
+        "actions.work_items._adapters._docdb.documentdbadapter",
+    ):
+        return DocumentDBAdapter(**kwargs)
     elif adapter_type:
         # Try dynamic import for custom adapters
         try:
-            import importlib
             module_path, class_name = adapter_type.rsplit(".", 1)
             module = importlib.import_module(module_path)
             adapter_cls = getattr(module, class_name)
@@ -174,7 +200,7 @@ class _InputsSingleton:
     on first access.
     """
 
-    _instance: Optional[Inputs] = None
+    _instance: Inputs | None = None
 
     def __iter__(self):
         return iter(self._get_instance())
@@ -208,7 +234,7 @@ class _OutputsSingleton:
     on first access.
     """
 
-    _instance: Optional[Outputs] = None
+    _instance: Outputs | None = None
     _inputs_singleton: _InputsSingleton
 
     def __init__(self, inputs_singleton: _InputsSingleton):
@@ -254,7 +280,7 @@ def _auto_init():
         _init(adapter)
 
 
-def init(adapter: Optional[BaseAdapter] = None) -> WorkItemsContext:
+def init(adapter: BaseAdapter | None = None) -> WorkItemsContext:
     """
     Initialize the work items context.
 
@@ -317,4 +343,6 @@ __all__ = [
     "BaseAdapter",
     "FileAdapter",
     "SQLiteAdapter",
+    "RedisAdapter",
+    "DocumentDBAdapter",
 ]

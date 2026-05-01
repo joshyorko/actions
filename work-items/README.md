@@ -106,6 +106,51 @@ Environment variables:
 - `RC_WORKITEM_INPUT_PATH`: Input directory
 - `RC_WORKITEM_OUTPUT_PATH`: Output directory
 
+### RedisAdapter
+
+Redis-backed storage for distributed workers and shared queues. Install the optional
+dependency before using it:
+
+```bash
+pip install "actions-work-items[redis]"
+```
+
+```python
+from actions.work_items import create_adapter, init
+
+adapter = create_adapter("redis")
+init(adapter)
+```
+
+Environment variables:
+- `RC_REDIS_URL`: Redis connection URL (default: `redis://localhost:6379/0`)
+- `RC_WORKITEM_QUEUE_NAME`: Input queue (default: `default`)
+- `RC_WORKITEM_OUTPUT_QUEUE_NAME`: Output queue (default: `{queue}_output`)
+- `RC_WORKITEM_FILES_DIR`: Directory for large file attachments
+
+### DocumentDBAdapter
+
+MongoDB-compatible storage with GridFS support for large attachments. Install the
+optional dependency before using it:
+
+```bash
+pip install "actions-work-items[docdb]"
+```
+
+```python
+from actions.work_items import create_adapter, init
+
+adapter = create_adapter("documentdb")
+init(adapter)
+```
+
+Environment variables:
+- `DOCDB_URI`: MongoDB/DocumentDB connection URI
+- `DOCDB_DATABASE`: Database name
+- `RC_WORKITEM_QUEUE_NAME`: Input queue (default: `default`)
+- `RC_WORKITEM_OUTPUT_QUEUE_NAME`: Output queue (default: `{queue}_output`)
+- `RC_WORKITEM_FILE_SIZE_THRESHOLD`: Size threshold for GridFS-backed files
+
 ## Features
 
 ### Producer Pattern
@@ -226,6 +271,8 @@ curl http://localhost:8080/api/work-items/stats?queue_name=repos
 - `BaseAdapter` - Abstract interface
 - `SQLiteAdapter` - SQLite storage
 - `FileAdapter` - JSON file storage
+- `RedisAdapter` - Redis-backed queue storage
+- `DocumentDBAdapter` - MongoDB-compatible queue storage
 
 ### Types
 

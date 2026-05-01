@@ -8,13 +8,16 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 # JSON-compatible types
-JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]
+JSONType = str | int | float | bool | None | dict[str, Any] | list[Any]
+
+# Week in seconds
+TTL_WEEK_SECONDS = 604_800
 
 # Path type for file operations
-PathType = Union[Path, str]
+PathType = Path | str
 
 
 class State(str, Enum):
@@ -49,7 +52,7 @@ class Address:
     """Email address with optional display name."""
 
     address: str
-    name: Optional[str] = None
+    name: str | None = None
 
     def __str__(self) -> str:
         if self.name:
@@ -66,17 +69,17 @@ class Email:
     in email-triggered automation workflows.
     """
 
-    sender: Optional[Address] = None
-    recipients: List[Address] = field(default_factory=list)
-    cc: List[Address] = field(default_factory=list)
-    bcc: List[Address] = field(default_factory=list)
-    subject: Optional[str] = None
-    date: Optional[datetime] = None
-    body: Optional[str] = None
-    html: Optional[str] = None
-    reply_to: Optional[Address] = None
-    message_id: Optional[str] = None
-    errors: List[str] = field(default_factory=list)
+    sender: Address | None = None
+    recipients: list[Address] = field(default_factory=list)
+    cc: list[Address] = field(default_factory=list)
+    bcc: list[Address] = field(default_factory=list)
+    subject: str | None = None
+    date: datetime | None = None
+    body: str | None = None
+    html: str | None = None
+    reply_to: Address | None = None
+    message_id: str | None = None
+    errors: list[str] = field(default_factory=list)
 
     @classmethod
     def from_bytes(cls, content: bytes) -> "Email":
@@ -96,7 +99,7 @@ class Email:
         errors = []
         msg = email.message_from_bytes(content)
 
-        def decode_str(value: Optional[str]) -> Optional[str]:
+        def decode_str(value: str | None) -> str | None:
             if not value:
                 return None
             try:
@@ -112,7 +115,7 @@ class Email:
                 errors.append(f"Header decode error: {e}")
                 return value
 
-        def parse_address(value: Optional[str]) -> Optional[Address]:
+        def parse_address(value: str | None) -> Address | None:
             if not value:
                 return None
             name, addr = parseaddr(value)
@@ -120,7 +123,7 @@ class Email:
                 return Address(address=addr, name=decode_str(name) if name else None)
             return None
 
-        def parse_addresses(value: Optional[str]) -> List[Address]:
+        def parse_addresses(value: str | None) -> list[Address]:
             if not value:
                 return []
             addresses = []

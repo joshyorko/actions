@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from actions.work_items import SQLiteAdapter, State, EmptyQueue
+from actions.work_items import EmptyQueue, SQLiteAdapter, State
 
 
 @pytest.fixture
@@ -153,10 +153,10 @@ def test_queue_stats(adapter):
     """Test queue statistics."""
     adapter.seed_input()
     adapter.seed_input()
-    item_id = adapter.seed_input()
+    adapter.seed_input()
 
-    adapter.reserve_input()
-    adapter.release_input(item_id, State.DONE)
+    reserved_id = adapter.reserve_input()
+    adapter.release_input(reserved_id, State.DONE)
 
     stats = adapter.get_queue_stats()
     assert stats["pending"] == 2
