@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 1.2.6 - 2026-08-01
+
+### Fixes
+
+- Updated the community RCC integration from `joshyorko/rcc` `v18.17.6` to `v18.18.0` across Action Server download/build paths, developer bootstrap scripts, docs, and shared RCC tests.
+
 ## 1.2.5 - 2026-06-20
 
 ### Fixes

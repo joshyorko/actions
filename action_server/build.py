@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 
 # Note: referenced here and in sema4ai.action_server._download_rcc
 # Using joshyorko/rcc open-source version
-RCC_VERSION = "18.17.6"
+RCC_VERSION = "18.18.0"
 
 
 CURDIR = Path(__file__).parent.absolute()
