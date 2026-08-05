@@ -60,15 +60,20 @@ def test_work_item_file_api_maps_attachment_errors_and_round_trips(
 
 
 def test_work_items_import_ignores_project_actions_module(tmp_path: Path) -> None:
-    """A conventional project actions.py must not shadow the work-items package."""
+    """A conventional project actions.py must not shadow the REST adapter path."""
     (tmp_path / "actions.py").write_text("PROJECT_ACTIONS = True\n", encoding="utf-8")
     result = subprocess.run(
         [
             sys.executable,
             "-c",
             (
-                "from sema4ai.action_server._work_items_import import load_work_items_types; "
-                "print(load_work_items_types()[0].__name__)"
+                "from pathlib import Path; from types import SimpleNamespace; "
+                "from fastapi import FastAPI; from fastapi.testclient import TestClient; "
+                "from sema4ai.action_server import _api_work_items as api; "
+                "api.get_settings=lambda: SimpleNamespace(datadir=Path.cwd()); "
+                "app=FastAPI(); app.include_router(api.work_items_api_router); "
+                "response=TestClient(app).post('/api/work-items',json={'payload':{}}); "
+                "assert response.status_code == 200, response.text; print(response.json()['state'])"
             ),
         ],
         cwd=tmp_path,
@@ -76,4 +81,17 @@ def test_work_items_import_ignores_project_actions_module(tmp_path: Path) -> Non
         capture_output=True,
         text=True,
     )
-    assert result.stdout.strip() == "SQLiteAdapter"
+    assert result.stdout.strip() == "PENDING"
+
+
+def test_rest_projects_non_object_library_payload_to_null(client: TestClient) -> None:
+    """Library scalar payloads cannot violate the REST object-or-null schema."""
+    item_id = _api_work_items._adapter.seed_input(payload="scalar")
+
+    detail = client.get(f"/api/work-items/{item_id}")
+    assert detail.status_code == 200
+    assert detail.json()["payload"] is None
+
+    listed = client.get("/api/work-items")
+    assert listed.status_code == 200
+    assert listed.json()["items"][0]["payload"] is None

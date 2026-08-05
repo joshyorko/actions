@@ -153,14 +153,13 @@ class SQLiteAdapter(BaseAdapter):
             return State.IN_PROGRESS.value
         return db_state
 
-    def _normalize_payload(self, payload: str | None) -> dict:
-        if not payload:
-            return {}
+    def _normalize_payload(self, payload: str | None) -> JSONType:
+        if payload is None:
+            return None
         try:
-            loaded = json.loads(payload)
-            return loaded if isinstance(loaded, dict) else {"value": loaded}
-        except (TypeError, ValueError):
-            return {}
+            return json.loads(payload)
+        except (TypeError, ValueError) as error:
+            raise ValueError("Malformed stored work item payload") from error
 
     def _require_item(self, conn: sqlite3.Connection, item_id: str) -> None:
         if conn.execute("SELECT 1 FROM work_items WHERE id = ?", (item_id,)).fetchone() is None:

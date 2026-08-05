@@ -259,6 +259,8 @@ Environment variables:
 
 ### Redis
 
+> **Experimental:** Redis is not part of the current release reliability gate and does not yet have service-backed CI coverage.
+
 Install Redis support before using this adapter:
 
 ```bash
@@ -281,6 +283,8 @@ Environment variables:
 - `RC_WORKITEM_FILES_DIR`: File attachment directory.
 
 ### MongoDB / DocumentDB
+
+> **Experimental:** DocumentDB is not part of the current release reliability gate and does not yet have service-backed CI coverage.
 
 Install DocumentDB support before using this adapter:
 

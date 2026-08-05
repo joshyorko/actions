@@ -546,10 +546,10 @@ class TriggerEngine:
         inputs["_triggered_at"] = datetime.now(timezone.utc).isoformat()
 
         try:
+            from sema4ai.action_server._settings import get_settings
             from sema4ai.action_server._work_items_import import load_work_items_types
 
             # Create adapter targeting the action server's work items storage
-            from sema4ai.action_server._settings import get_settings
             settings = get_settings()
 
             # Use action server's data directory for work items

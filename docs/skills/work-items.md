@@ -15,7 +15,7 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 - SQLite reservation must acquire `BEGIN IMMEDIATE` before FIFO selection, order by `created_at ASC, rowid ASC` so equal timestamps retain SQLite insertion order without a schema migration, conditionally update the selected `PENDING` row in that same transaction, and roll back on errors; this claims each pending item once across competing processes while retaining the adapter's 30-second SQLite lock timeout.
 - Queue and output queue names remain explicit across producer, consumer, scheduler, trigger, and preloaded-action boundaries.
 - Action Server REST, scheduler, and trigger paths load the installed Work Items distribution under a private module name so a project-root `actions.py` cannot shadow it; producers seed their datadir-owned SQLite adapter directly instead of mutating library-global context.
-- Python adapters preserve JSON values; the current Action Server REST model may impose a narrower object-or-null boundary.
+- SQLite payload reads preserve every JSON shape exactly and raise `ValueError` for malformed stored JSON; the current Action Server REST model imposes a narrower object-or-null boundary.
 - `State.COMPLETED` compatibility and public aliases are migration-sensitive.
 - FileAdapter's legacy numbered attachment layout requires pre-mutation migration before index-changing deletion; never derive legacy ownership from a post-deletion index.
 

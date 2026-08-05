@@ -23,6 +23,11 @@ log = logging.getLogger(__name__)
 work_items_api_router = APIRouter(prefix="/api/work-items")
 
 
+def _rest_payload(payload: Any) -> dict[str, Any] | None:
+    """Project arbitrary library JSON onto the REST object-or-null contract."""
+    return payload if isinstance(payload, dict) else None
+
+
 # Pydantic models for API
 
 
@@ -128,7 +133,7 @@ async def create_work_item(request: WorkItemCreate):
         id=item["id"],
         queue_name=item["queue_name"],
         state=item["state"],
-        payload=item.get("payload"),
+        payload=_rest_payload(item.get("payload")),
         parent_id=item.get("parent_id"),
         error_code=item.get("error_code"),
         error_message=item.get("error_message"),
@@ -177,7 +182,7 @@ async def list_work_items(
             id=item["id"],
             queue_name=item["queue_name"],
             state=item["state"],
-            payload=item.get("payload"),
+            payload=_rest_payload(item.get("payload")),
             parent_id=item.get("parent_id"),
             error_code=item.get("error_code"),
             error_message=item.get("error_message"),
@@ -224,7 +229,7 @@ async def get_work_item(item_id: str):
         id=item["id"],
         queue_name=item["queue_name"],
         state=item["state"],
-        payload=item.get("payload"),
+        payload=_rest_payload(item.get("payload")),
         parent_id=item.get("parent_id"),
         error_code=item.get("error_code"),
         error_message=item.get("error_message"),

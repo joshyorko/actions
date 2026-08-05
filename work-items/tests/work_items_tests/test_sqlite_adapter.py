@@ -259,6 +259,33 @@ def test_load_save_payload(adapter):
     assert payload == {"updated": "data"}
 
 
+@pytest.mark.parametrize("payload", [None, "text", 42, 3.5, True, False, [1, "two"], {"a": 1}])
+def test_sqlite_preserves_arbitrary_json_payload(adapter, payload):
+    """SQLite round-trips every supported JSON shape without wrapping it."""
+    item_id = adapter.seed_input(payload=payload)
+
+    assert adapter.load_payload(item_id) == payload
+    assert adapter.get_item(item_id)["payload"] == payload
+    assert adapter.list_items()[0]["payload"] == payload
+
+    adapter.save_payload(item_id, payload)
+    assert adapter.load_payload(item_id) == payload
+
+    output_id = adapter.create_output(item_id, payload=payload)
+    assert adapter.get_item(output_id)["payload"] == payload
+
+
+def test_sqlite_rejects_malformed_legacy_payload(adapter):
+    """Malformed stored JSON fails explicitly instead of silently changing shape."""
+    item_id = adapter.seed_input(payload={})
+    with adapter._get_conn() as conn:
+        conn.execute("UPDATE work_items SET payload = ? WHERE id = ?", ("{broken", item_id))
+        conn.commit()
+
+    with pytest.raises(ValueError, match="Malformed stored work item payload"):
+        adapter.load_payload(item_id)
+
+
 def test_release_done(adapter):
     """Test releasing items as done."""
     item_id = adapter.seed_input()
