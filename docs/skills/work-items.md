@@ -33,7 +33,7 @@ docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actio
 
 ## CI Publication and Recovery
 
-The Work Items release workflow verifies relevant pull requests, relevant pushes to `community`, and `actions-work-items-*` tags. Verification uses Python 3.12 and Poetry 2.1.1, synchronizes the committed Work Items lock, runs `verify-work-items work-items/dist`, and uploads the resulting wheel and sdist as `actions-work-items-dist`.
+The Work Items release workflow verifies relevant pull requests, relevant pushes to `community`, and `actions-work-items-*` tags. Verification uses Python 3.12 and Poetry 2.1.1, synchronizes the committed Work Items lock, passes `$GITHUB_WORKSPACE/work-items/dist` to `verify-work-items` as an absolute retained-artifact path, and uploads the resulting wheel and sdist as `actions-work-items-dist`. Caller artifact paths must be absolute because Poetry build commands execute from the package directory.
 
 Do not enable setup-python's Poetry cache before Poetry is installed: the cache initialization resolves the `poetry` executable during setup and fails a fresh GitHub runner. The release workflow deliberately relies on the committed lock and installs Poetry after Python setup without that cache mode.
 

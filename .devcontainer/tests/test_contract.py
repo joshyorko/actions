@@ -197,7 +197,9 @@ class DevContainerContractTest(unittest.TestCase):
         ):
             self.assertIn(action, workflow)
 
-        self.assertIn("verify-work-items work-items/dist", workflow)
+        self.assertIn(
+            'verify-work-items "$GITHUB_WORKSPACE/work-items/dist"', workflow
+        )
         self.assertIn("name: actions-work-items-dist", workflow)
         self.assertIn("needs: verify", workflow)
         self.assertIn("environment: pypi", workflow)
