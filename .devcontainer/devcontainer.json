@@ -1,3 +1,24 @@
 {
-    "image": "ghcr.io/joshyorko/ror:latest"
+    "name": "Actions — Action Server",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "workspaceFolder": "/workspaces/actions",
+    "remoteUser": "vscode",
+    "updateRemoteUserUID": true,
+    "postCreateCommand": ".devcontainer/bin/bootstrap",
+    "mounts": [
+        "source=actions-uv-cache,target=/home/vscode/.cache/uv,type=volume",
+        "source=actions-poetry-cache,target=/home/vscode/.cache/pypoetry,type=volume",
+        "source=actions-npm-cache,target=/home/vscode/.npm,type=volume"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "charliermarsh.ruff"
+            ]
+        }
+    }
 }

@@ -7,12 +7,11 @@ Based on robocorp-workitems (Apache 2.0 License).
 import fnmatch
 import glob as glob_module
 import logging
-import os
 from pathlib import Path
-from typing import Any, Dict, Iterator, List, Optional, TYPE_CHECKING, Union
+from typing import TYPE_CHECKING
 
-from ._exceptions import BusinessException, ApplicationException
-from ._types import Email, ExceptionType, JSONType, PathType, State
+from ._exceptions import ApplicationException, BusinessException
+from ._types import Email, ExceptionType, JSONType, State
 from ._utils import truncate
 
 if TYPE_CHECKING:
@@ -33,7 +32,7 @@ class WorkItem:
         self,
         adapter: "BaseAdapter",
         item_id: str,
-        payload: Optional[JSONType] = None,
+        payload: JSONType | None = None,
     ):
         """
         Initialize a work item.
@@ -77,7 +76,7 @@ class WorkItem:
             self._adapter.save_payload(self._id, self._payload)
             self._payload_modified = False
 
-    def list_files(self) -> List[str]:
+    def list_files(self) -> list[str]:
         """
         List files attached to this work item.
 
@@ -86,7 +85,7 @@ class WorkItem:
         """
         return self._adapter.list_files(self._id)
 
-    def get_file(self, name: str, path: Optional[Path] = None) -> bytes:
+    def get_file(self, name: str, path: Path | None = None) -> bytes:
         """
         Get file content from this work item.
 
@@ -104,10 +103,10 @@ class WorkItem:
 
     def add_file(
         self,
-        path: Optional[Path] = None,
-        name: Optional[str] = None,
-        content: Optional[bytes] = None,
-        original_name: Optional[str] = None,
+        path: Path | None = None,
+        name: str | None = None,
+        content: bytes | None = None,
+        original_name: str | None = None,
     ) -> None:
         """
         Add a file to this work item.
@@ -155,7 +154,7 @@ class WorkItem:
             if not missing_ok:
                 raise
 
-    def add_files(self, pattern: str) -> List[Path]:
+    def add_files(self, pattern: str) -> list[Path]:
         """
         Add multiple files matching a glob pattern.
 
@@ -173,7 +172,7 @@ class WorkItem:
                 added.append(path)
         return added
 
-    def remove_files(self, pattern: str, missing_ok: bool = True) -> List[str]:
+    def remove_files(self, pattern: str, missing_ok: bool = True) -> list[str]:
         """
         Remove files matching a pattern.
 
@@ -231,11 +230,11 @@ class Input(WorkItem):
         self,
         adapter: "BaseAdapter",
         item_id: str,
-        payload: Optional[JSONType] = None,
+        payload: JSONType | None = None,
     ):
         super().__init__(adapter, item_id, payload)
         self._state = State.IN_PROGRESS
-        self._exception: Optional[Exception] = None
+        self._exception: Exception | None = None
 
     def __enter__(self) -> "Input":
         """Enter context manager."""
@@ -294,7 +293,7 @@ class Input(WorkItem):
         return self._state
 
     @property
-    def exception(self) -> Optional[Exception]:
+    def exception(self) -> Exception | None:
         """Exception that caused this input to fail, if any."""
         return self._exception
 
@@ -317,8 +316,8 @@ class Input(WorkItem):
     def fail(
         self,
         exception_type: ExceptionType = ExceptionType.APPLICATION,
-        code: Optional[str] = None,
-        message: Optional[str] = None,
+        code: str | None = None,
+        message: str | None = None,
     ) -> None:
         """
         Mark this input as failed.
@@ -344,7 +343,7 @@ class Input(WorkItem):
         self._state = State.FAILED
         log.info(f"Input {self._id} marked as FAILED: {message}")
 
-    def create_output(self, payload: Optional[JSONType] = None) -> "Output":
+    def create_output(self, payload: JSONType | None = None) -> "Output":
         """
         Create an output work item from this input.
 
@@ -370,7 +369,7 @@ class Output(WorkItem):
         self,
         adapter: "BaseAdapter",
         item_id: str,
-        payload: Optional[JSONType] = None,
+        payload: JSONType | None = None,
     ):
         super().__init__(adapter, item_id, payload)
         # Mark as modified so initial payload gets saved

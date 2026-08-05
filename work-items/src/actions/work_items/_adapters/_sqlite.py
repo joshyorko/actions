@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from .._exceptions import EmptyQueue
+from .._paths import resolve_attachment_path, resolve_item_directory
 from .._types import ExceptionType, JSONType, State
 from ._base import BaseAdapter
 
@@ -152,47 +153,75 @@ class SQLiteAdapter(BaseAdapter):
             return State.IN_PROGRESS.value
         return db_state
 
-    def _normalize_payload(self, payload: str | None) -> dict:
-        if not payload:
-            return {}
+    def _normalize_payload(self, payload: str | None) -> JSONType:
+        if payload is None:
+            return None
         try:
-            loaded = json.loads(payload)
-            return loaded if isinstance(loaded, dict) else {"value": loaded}
-        except (TypeError, ValueError):
-            return {}
+            return json.loads(payload)
+        except (TypeError, ValueError) as error:
+            raise ValueError("Malformed stored work item payload") from error
+
+    def _require_item(self, conn: sqlite3.Connection, item_id: str) -> None:
+        if conn.execute("SELECT 1 FROM work_items WHERE id = ?", (item_id,)).fetchone() is None:
+            raise ValueError(f"Work item not found: {item_id}")
+
+    def _item_directory(self, item_id: str) -> Path:
+        return resolve_item_directory(self._files_dir, item_id)
+
+    def _stored_attachment_path(self, item_id: str, name: str, file_path: str) -> Path:
+        expected = resolve_attachment_path(self._item_directory(item_id), name)
+        if Path(file_path).resolve() != expected:
+            raise ValueError(f"Invalid stored attachment path for {name}")
+        return expected
 
     def reserve_input(self) -> str:
         """Reserve the next available input work item."""
         with self._get_conn() as conn:
-            cursor = conn.execute(
-                """
-                SELECT id FROM work_items
-                WHERE queue_name = ? AND state = ?
-                ORDER BY created_at ASC
-                LIMIT 1
-                """,
-                (self._queue_name, State.PENDING.value),
-            )
-            row = cursor.fetchone()
+            for _ in range(3):
+                try:
+                    conn.execute("BEGIN IMMEDIATE")
+                    row = conn.execute(
+                        """
+                        SELECT id FROM work_items
+                        WHERE queue_name = ? AND state = ?
+                        ORDER BY created_at ASC, rowid ASC
+                        LIMIT 1
+                        """,
+                        (self._queue_name, State.PENDING.value),
+                    ).fetchone()
 
-            if row is None:
-                raise EmptyQueue(f"No work items available in queue: {self._queue_name}")
+                    if row is None:
+                        conn.rollback()
+                        raise EmptyQueue(f"No work items available in queue: {self._queue_name}")
 
-            item_id = row["id"]
-            now = self._now()
+                    item_id = row["id"]
+                    now = self._now()
+                    cursor = conn.execute(
+                        """
+                        UPDATE work_items
+                        SET state = ?, reserved_at = ?, updated_at = ?
+                        WHERE id = ? AND queue_name = ? AND state = ?
+                        """,
+                        (
+                            State.IN_PROGRESS.value,
+                            now,
+                            now,
+                            item_id,
+                            self._queue_name,
+                            State.PENDING.value,
+                        ),
+                    )
+                    if cursor.rowcount == 1:
+                        conn.commit()
+                        log.debug("Reserved work item %s from queue %s", item_id, self._queue_name)
+                        return item_id
+                    conn.rollback()
+                except Exception:
+                    if conn.in_transaction:
+                        conn.rollback()
+                    raise
 
-            conn.execute(
-                """
-                UPDATE work_items
-                SET state = ?, reserved_at = ?, updated_at = ?
-                WHERE id = ?
-                """,
-                (State.IN_PROGRESS.value, now, now, item_id),
-            )
-            conn.commit()
-
-            log.debug("Reserved work item %s from queue %s", item_id, self._queue_name)
-            return item_id
+            raise EmptyQueue(f"No work items available in queue: {self._queue_name}")
 
     def release_input(
         self,
@@ -352,6 +381,7 @@ class SQLiteAdapter(BaseAdapter):
 
     def get_file(self, item_id: str, name: str) -> bytes:
         """Get file content from a work item."""
+        resolve_attachment_path(self._item_directory(item_id), name)
         with self._get_conn() as conn:
             cursor = conn.execute(
                 "SELECT file_path FROM work_item_files WHERE work_item_id = ? AND name = ?",
@@ -362,7 +392,7 @@ class SQLiteAdapter(BaseAdapter):
             if row is None:
                 raise FileNotFoundError(f"File not found: {name} in work item {item_id}")
 
-            file_path = Path(row["file_path"])
+            file_path = self._stored_attachment_path(item_id, name, row["file_path"])
             if not file_path.exists():
                 raise ValueError(f"File missing from filesystem: {file_path}")
 
@@ -376,13 +406,10 @@ class SQLiteAdapter(BaseAdapter):
         content: bytes,
     ) -> None:
         """Add a file to a work item."""
-        file_id = str(uuid.uuid4())
-        now = self._now()
-        item_dir = self._files_dir / item_id
-        item_dir.mkdir(parents=True, exist_ok=True)
-
-        file_path = item_dir / name
         with self._get_conn() as conn:
+            self._require_item(conn, item_id)
+            item_dir = self._item_directory(item_id)
+            file_path = resolve_attachment_path(item_dir, name)
             existing = conn.execute(
                 "SELECT id FROM work_item_files WHERE work_item_id = ? AND name = ?",
                 (item_id, name),
@@ -390,6 +417,9 @@ class SQLiteAdapter(BaseAdapter):
             if existing is not None:
                 raise FileExistsError(f"File already exists: {name} in work item {item_id}")
 
+            item_dir.mkdir(parents=True, exist_ok=True)
+            file_id = str(uuid.uuid4())
+            now = self._now()
             file_path.write_bytes(content)
             conn.execute(
                 """
@@ -405,6 +435,7 @@ class SQLiteAdapter(BaseAdapter):
 
     def remove_file(self, item_id: str, name: str) -> None:
         """Remove a file from a work item."""
+        resolve_attachment_path(self._item_directory(item_id), name)
         with self._get_conn() as conn:
             cursor = conn.execute(
                 "SELECT file_path FROM work_item_files WHERE work_item_id = ? AND name = ?",
@@ -414,7 +445,7 @@ class SQLiteAdapter(BaseAdapter):
             if row is None:
                 raise FileNotFoundError(f"File not found: {name} (work item: {item_id})")
 
-            file_path = Path(row["file_path"])
+            file_path = self._stored_attachment_path(item_id, name, row["file_path"])
             if file_path.exists():
                 file_path.unlink()
 
@@ -486,24 +517,28 @@ class SQLiteAdapter(BaseAdapter):
 
     def delete_item(self, item_id: str) -> None:
         """Delete a work item and its files."""
-        item_dir = self._files_dir / item_id
-        if item_dir.exists():
-            import shutil
-
-            shutil.rmtree(item_dir)
-
         with self._get_conn() as conn:
+            self._require_item(conn, item_id)
+            item_dir = self._item_directory(item_id)
+            for row in conn.execute(
+                "SELECT name, file_path FROM work_item_files WHERE work_item_id = ?", (item_id,)
+            ):
+                self._stored_attachment_path(item_id, row["name"], row["file_path"])
+
+            if item_dir.exists():
+                import shutil
+
+                shutil.rmtree(item_dir)
+
             conn.execute(
                 "DELETE FROM work_item_files WHERE work_item_id = ?",
                 (item_id,),
             )
-            cursor = conn.execute(
+            conn.execute(
                 "DELETE FROM work_items WHERE id = ?",
                 (item_id,),
             )
             conn.commit()
-            if cursor.rowcount == 0:
-                raise ValueError(f"Work item not found: {item_id}")
 
         log.info("Deleted work item %s", item_id)
 

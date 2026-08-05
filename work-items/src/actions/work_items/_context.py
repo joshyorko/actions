@@ -6,10 +6,11 @@ Based on robocorp-workitems (Apache 2.0 License).
 
 import logging
 import os
-from typing import Iterator, Optional, TYPE_CHECKING
+from collections.abc import Iterator
+from typing import TYPE_CHECKING, Optional
 
 from ._exceptions import EmptyQueue
-from ._types import ExceptionType, JSONType, State
+from ._types import JSONType
 from ._workitem import Input, Output
 
 if TYPE_CHECKING:
@@ -34,7 +35,7 @@ class WorkItemsContext:
             adapter: Storage adapter to use.
         """
         self._adapter = adapter
-        self._current_input: Optional[Input] = None
+        self._current_input: Input | None = None
 
     @property
     def adapter(self) -> "BaseAdapter":
@@ -42,7 +43,7 @@ class WorkItemsContext:
         return self._adapter
 
     @property
-    def current_input(self) -> Optional[Input]:
+    def current_input(self) -> Input | None:
         """The currently reserved input work item."""
         return self._current_input
 
@@ -86,8 +87,8 @@ class WorkItemsContext:
 
     def create_output(
         self,
-        payload: Optional[JSONType] = None,
-        files: Optional[dict] = None,
+        payload: JSONType | None = None,
+        files: dict | None = None,
         save: bool = False,
     ) -> Output:
         """
@@ -111,7 +112,7 @@ class WorkItemsContext:
 
         if files:
             for name, value in files.items():
-                if isinstance(value, (str, os.PathLike)):
+                if isinstance(value, str | os.PathLike):
                     output.add_file(path=value, name=name)
                 else:
                     output.add_file(content=value, name=name)
@@ -123,9 +124,9 @@ class WorkItemsContext:
 
     def seed_input(
         self,
-        payload: Optional[JSONType] = None,
-        files: Optional[dict] = None,
-        queue_name: Optional[str] = None,
+        payload: JSONType | None = None,
+        files: dict | None = None,
+        queue_name: str | None = None,
     ) -> str:
         """
         Seed a new input work item.
@@ -142,7 +143,7 @@ class WorkItemsContext:
         if files:
             files_bytes = {}
             for name, value in files.items():
-                if isinstance(value, (str, os.PathLike)):
+                if isinstance(value, str | os.PathLike):
                     from pathlib import Path
                     files_bytes[name] = Path(value).read_bytes()
                 else:
@@ -152,7 +153,7 @@ class WorkItemsContext:
 
 
 # Global context instance
-_context: Optional[WorkItemsContext] = None
+_context: WorkItemsContext | None = None
 
 
 def get_context() -> WorkItemsContext:
@@ -268,8 +269,8 @@ def get_input() -> Input:
 
 
 def create_output(
-    payload: Optional[JSONType] = None,
-    files: Optional[dict] = None,
+    payload: JSONType | None = None,
+    files: dict | None = None,
     save: bool = False,
 ) -> Output:
     """
@@ -289,9 +290,9 @@ def create_output(
 
 
 def seed_input(
-    payload: Optional[JSONType] = None,
-    files: Optional[dict] = None,
-    queue_name: Optional[str] = None,
+    payload: JSONType | None = None,
+    files: dict | None = None,
+    queue_name: str | None = None,
 ) -> str:
     """
     Seed a new input work item.

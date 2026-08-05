@@ -6,7 +6,7 @@ by producer-consumer automation workflows.
 """
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Annotated, Any
 
 import fastapi
 from fastapi import File, UploadFile
@@ -15,9 +15,17 @@ from pydantic import BaseModel
 
 from sema4ai.action_server._settings import get_settings
 
+from ._work_items_import import load_work_items_types
+from ._work_items_paths import validate_attachment_name
+
 log = logging.getLogger(__name__)
 
 work_items_api_router = APIRouter(prefix="/api/work-items")
+
+
+def _rest_payload(payload: Any) -> dict[str, Any] | None:
+    """Project arbitrary library JSON onto the REST object-or-null contract."""
+    return payload if isinstance(payload, dict) else None
 
 
 # Pydantic models for API
@@ -26,8 +34,8 @@ work_items_api_router = APIRouter(prefix="/api/work-items")
 class WorkItemCreate(BaseModel):
     """Request to create/seed a work item."""
 
-    payload: Optional[Dict[str, Any]] = None
-    queue_name: Optional[str] = None
+    payload: dict[str, Any] | None = None
+    queue_name: str | None = None
 
 
 class WorkItemResponse(BaseModel):
@@ -36,11 +44,11 @@ class WorkItemResponse(BaseModel):
     id: str
     queue_name: str
     state: str
-    payload: Optional[Dict[str, Any]] = None
-    parent_id: Optional[str] = None
-    error_code: Optional[str] = None
-    error_message: Optional[str] = None
-    files: List[str] = []
+    payload: dict[str, Any] | None = None
+    parent_id: str | None = None
+    error_code: str | None = None
+    error_message: str | None = None
+    files: list[str] = []
     created_at: str
     updated_at: str
 
@@ -48,7 +56,7 @@ class WorkItemResponse(BaseModel):
 class WorkItemListResponse(BaseModel):
     """Response with list of work items."""
 
-    items: List[WorkItemResponse]
+    items: list[WorkItemResponse]
     total: int
 
 
@@ -78,7 +86,7 @@ def _get_adapter():
         return _adapter
 
     try:
-        from actions.work_items import SQLiteAdapter
+        SQLiteAdapter, _ = load_work_items_types()
     except ImportError:
         log.warning("actions-work-items package not installed, work items API disabled")
         return None
@@ -125,7 +133,7 @@ async def create_work_item(request: WorkItemCreate):
         id=item["id"],
         queue_name=item["queue_name"],
         state=item["state"],
-        payload=item.get("payload"),
+        payload=_rest_payload(item.get("payload")),
         parent_id=item.get("parent_id"),
         error_code=item.get("error_code"),
         error_message=item.get("error_message"),
@@ -137,8 +145,8 @@ async def create_work_item(request: WorkItemCreate):
 
 @work_items_api_router.get("", response_model=WorkItemListResponse)
 async def list_work_items(
-    queue_name: Optional[str] = None,
-    state: Optional[str] = None,
+    queue_name: str | None = None,
+    state: str | None = None,
     limit: int = 100,
 ):
     """
@@ -155,7 +163,7 @@ async def list_work_items(
     state_enum = None
     if state:
         try:
-            from actions.work_items import State
+            _, State = load_work_items_types()
 
             state_enum = State(state.upper())
         except (ValueError, ImportError):
@@ -174,7 +182,7 @@ async def list_work_items(
             id=item["id"],
             queue_name=item["queue_name"],
             state=item["state"],
-            payload=item.get("payload"),
+            payload=_rest_payload(item.get("payload")),
             parent_id=item.get("parent_id"),
             error_code=item.get("error_code"),
             error_message=item.get("error_message"),
@@ -192,7 +200,7 @@ async def list_work_items(
 
 
 @work_items_api_router.get("/stats", response_model=QueueStatsResponse)
-async def get_queue_stats(queue_name: Optional[str] = None):
+async def get_queue_stats(queue_name: str | None = None):
     """Get statistics for a queue."""
     adapter = _check_adapter()
 
@@ -221,7 +229,7 @@ async def get_work_item(item_id: str):
         id=item["id"],
         queue_name=item["queue_name"],
         state=item["state"],
-        payload=item.get("payload"),
+        payload=_rest_payload(item.get("payload")),
         parent_id=item.get("parent_id"),
         error_code=item.get("error_code"),
         error_message=item.get("error_message"),
@@ -249,7 +257,7 @@ async def delete_work_item(item_id: str):
 @work_items_api_router.post("/{item_id}/files")
 async def upload_file(
     item_id: str,
-    file: UploadFile = File(...),
+    file: Annotated[UploadFile, File()],
 ):
     """
     Upload a file attachment to a work item.
@@ -263,13 +271,22 @@ async def upload_file(
             status_code=404, detail=f"Work item not found: {item_id}"
         )
 
-    content = await file.read()
-    adapter.add_file(
-        item_id=item_id,
-        name=file.filename or "unnamed",
-        original_name=file.filename or "unnamed",
-        content=content,
-    )
+    name = file.filename or "unnamed"
+    try:
+        validate_attachment_name(name)
+        content = await file.read()
+        adapter.add_file(
+            item_id=item_id,
+            name=name,
+            original_name=name,
+            content=content,
+        )
+    except ValueError:
+        raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
+    except FileExistsError:
+        raise fastapi.HTTPException(
+            status_code=409, detail=f"File already exists: {name}"
+        )
 
     return {
         "status": "uploaded",
@@ -301,8 +318,13 @@ async def download_file(item_id: str, filename: str):
     adapter = _check_adapter()
 
     try:
-        content = adapter.get_file(item_id, filename)
+        validate_attachment_name(filename)
     except ValueError:
+        raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
+
+    try:
+        content = adapter.get_file(item_id, filename)
+    except (ValueError, FileNotFoundError):
         raise fastapi.HTTPException(
             status_code=404, detail=f"File not found: {filename} in work item {item_id}"
         )
@@ -322,13 +344,27 @@ async def delete_file(item_id: str, filename: str):
     adapter = _check_adapter()
 
     try:
+        validate_attachment_name(filename)
+    except ValueError:
+        raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
+
+    try:
         adapter.get_item(item_id)
     except ValueError:
         raise fastapi.HTTPException(
             status_code=404, detail=f"Work item not found: {item_id}"
         )
 
-    adapter.remove_file(item_id, filename)
+    try:
+        adapter.remove_file(item_id, filename)
+    except FileNotFoundError:
+        raise fastapi.HTTPException(
+            status_code=404, detail=f"File not found: {filename} in work item {item_id}"
+        )
+    except ValueError:
+        raise fastapi.HTTPException(
+            status_code=404, detail=f"File not found: {filename} in work item {item_id}"
+        )
     return {
         "status": "deleted",
         "item_id": item_id,

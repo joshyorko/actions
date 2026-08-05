@@ -655,26 +655,23 @@ class SchedulerEngine:
         inputs["_scheduled_at"] = datetime.now(timezone.utc).isoformat()
 
         try:
-            from actions.work_items import create_adapter, init, seed_input
+            from sema4ai.action_server._settings import get_settings
+            from sema4ai.action_server._work_items_import import load_work_items_types
 
             # Create adapter targeting the action server's work items storage
-            from sema4ai.action_server._settings import get_settings
             settings = get_settings()
 
             # Use action server's data directory for work items
             db_path = str(settings.datadir / "workitems.db")
             files_dir = str(settings.datadir / "work_item_files")
 
-            adapter = create_adapter(
-                adapter_type="sqlite",
+            SQLiteAdapter, _ = load_work_items_types()
+            adapter = SQLiteAdapter(
                 db_path=db_path,
                 queue_name=queue_name,
                 files_dir=files_dir,
             )
-            init(adapter)
-
-            # Seed the work item
-            work_item_id = seed_input(payload=inputs)
+            work_item_id = adapter.seed_input(payload=inputs, queue_name=queue_name)
 
             log.info(
                 f"Schedule {schedule.id}: created work item {work_item_id} "

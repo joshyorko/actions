@@ -32,6 +32,14 @@ def test_distribution_name_alias_exports_workitems_module():
     assert workitems.create_adapter is actions_work_items.create_adapter
 
 
+def test_distribution_name_alias_exports_canonical_version():
+    """The underscore package reports the canonical public version."""
+    import actions.work_items as work_items
+    import actions_work_items
+
+    assert actions_work_items.__version__ == work_items.__version__ == "0.2.4"
+
+
 def test_create_adapter_supports_redis_and_docdb_aliases(monkeypatch):
     """Common adapter aliases select the expected adapter classes."""
     import actions.work_items as work_items

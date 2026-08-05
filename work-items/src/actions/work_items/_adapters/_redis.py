@@ -859,7 +859,7 @@ class RedisAdapter(BaseAdapter):
             FileExistsError: File already exists
             DatabaseTemporarilyUnavailable: Redis connection error (retried)
         """
-        if isinstance(original_name, (bytes, bytearray)):
+        if isinstance(original_name, bytes | bytearray):
             if content is not None:
                 raise TypeError(
                     "add_file received unexpected argument combination; "
