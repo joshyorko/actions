@@ -35,6 +35,8 @@ docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actio
 
 The Work Items release workflow verifies relevant pull requests, relevant pushes to `community`, and `actions-work-items-*` tags. Verification uses Python 3.12 and Poetry 2.1.1, synchronizes the committed Work Items lock, runs `verify-work-items work-items/dist`, and uploads the resulting wheel and sdist as `actions-work-items-dist`.
 
+Do not enable setup-python's Poetry cache before Poetry is installed: the cache initialization resolves the `poetry` executable during setup and fails a fresh GitHub runner. The release workflow deliberately relies on the committed lock and installs Poetry after Python setup without that cache mode.
+
 Publication is tag-only: the `publish` job requires successful verification, accepts only `refs/tags/actions-work-items-*`, fetches `origin/community`, proves that the tagged commit is an ancestor of that branch, checks the tag/package version with `invoke check-tag-version`, downloads `actions-work-items-dist` to `work-items/dist`, and publishes those exact artifacts with `PYPI_TOKEN_ACTIONS_WORK_ITEMS`. It has no manual version input and does not use OIDC.
 
 For 0.3.0, merge the release PR into `community`, confirm the merged verification run is green, then create `actions-work-items-0.3.0` on that exact merged commit. Confirm the tag run passes strict Twine, metadata, alias, version, and ancestry gates before checking PyPI and installing the published wheel in a clean environment. Never move or reuse an accepted artifact or release tag: if publication did not accept the artifacts, merge the fix and use a new version/tag; if it did, publish a new patch version.

@@ -187,6 +187,7 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertNotIn("id-token", workflow)
         self.assertIn("poetry==2.1.1", workflow)
         self.assertIn('python-version: "3.12"', workflow)
+        self.assertNotIn("cache: poetry", workflow)
 
         for action in (
             "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5",
