@@ -1,17 +1,12 @@
-[tool.poetry]
+[project]
 name = "actions-work-items"
-version = "0.2.4"
+version = "0.3.0"
 description = "Drop-in replacement for robocorp-workitems with broader applicability"
-authors = ["Community Contributors"]
+authors = [{name = "Community Contributors"}]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://github.com/joshyorko/actions/tree/community"
-repository = "https://github.com/joshyorko/actions/tree/community"
+requires-python = ">=3.10,<4.0"
 keywords = ["automation", "work-items", "producer-consumer", "rpa", "workflow"]
-packages = [
-    {include = "actions", from = "src"},
-    {include = "actions_work_items", from = "src"},
-]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -24,24 +19,32 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-redis = {version = ">=4.5.0", optional = true}
-pymongo = {version = ">=4.3.0", optional = true}
+[project.urls]
+Homepage = "https://github.com/joshyorko/actions"
+Repository = "https://github.com/joshyorko/actions"
+Documentation = "https://github.com/joshyorko/actions/tree/community/work-items"
+Issues = "https://github.com/joshyorko/actions/issues"
 
-[tool.poetry.extras]
-redis = ["redis"]
-docdb = ["pymongo"]
-documentdb = ["pymongo"]
-all = ["redis", "pymongo"]
+[project.optional-dependencies]
+redis = ["redis>=4.5.0"]
+docdb = ["pymongo>=4.3.0"]
+documentdb = ["pymongo>=4.3.0"]
+all = ["redis>=4.5.0", "pymongo>=4.3.0"]
+
+[tool.poetry]
+packages = [
+    {include = "actions", from = "src"},
+    {include = "actions_work_items", from = "src"},
+]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"
 pytest-asyncio = "^0.21"
 ruff = "^0.12.0"
+twine = "^6.1.0"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]

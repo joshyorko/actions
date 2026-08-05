@@ -1,52 +1,103 @@
 name: Work Items Release
 
 on:
+  pull_request:
+    paths:
+      - "work-items/**"
+      - "action_server/poetry.lock"
+      - ".devcontainer/bin/verify-work-items"
+      - ".devcontainer/tests/**"
+      - ".github/workflows/work_items_release.yml"
+      - "docs/skills/work-items.md"
   push:
+    branches:
+      - community
     tags:
       - "actions-work-items-*"
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to release (must match pyproject.toml)'
-        required: false
-        type: string
-
-permissions:
-  contents: read
-  id-token: write
-
-defaults:
-  run:
-    working-directory: "./work-items"
+    paths:
+      - "work-items/**"
+      - "action_server/poetry.lock"
+      - ".devcontainer/bin/verify-work-items"
+      - ".devcontainer/tests/**"
+      - ".github/workflows/work_items_release.yml"
+      - "docs/skills/work-items.md"
 
 jobs:
-  deploy:
+  verify:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository and submodules
-        uses: actions/checkout@v5
-
-      - name: Install poetry
-        run: pipx install poetry
-
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          python-version: "3.10"
-          cache: "poetry"
+          fetch-depth: 0
 
-      - name: Install project
-        run: poetry install
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+          cache: poetry
 
-      - name: Check tag version
-        if: github.event_name == 'push'
-        run: poetry run invoke check-tag-version
+      - name: Install Poetry
+        run: pipx install poetry==2.1.1
 
-      - name: Build with poetry
-        run: poetry build
+      - name: Synchronize Work Items dependencies
+        run: poetry -C work-items sync --no-interaction
 
-      - name: Upload to PyPI
+      - name: Verify release artifacts
+        run: .devcontainer/bin/verify-work-items work-items/dist
+
+      - name: Upload verified Work Items artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: actions-work-items-dist
+          path: work-items/dist
+
+  publish:
+    needs: verify
+    if: startsWith(github.ref, 'refs/tags/actions-work-items-')
+    permissions:
+      contents: read
+    environment: pypi
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: work-items
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+          cache: poetry
+
+      - name: Install Poetry
+        run: pipx install poetry==2.1.1
+
+      - name: Synchronize Work Items dependencies
+        run: poetry sync --no-interaction
+
+      - name: Verify merged tag provenance
         run: |
-          poetry config pypi-token.pypi  ${{ secrets.PYPI_TOKEN_ACTIONS_WORK_ITEMS }}
-          poetry publish
+          set -Eeuo pipefail
+          git fetch origin community:refs/remotes/origin/community
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/community
+          poetry run invoke check-tag-version
+
+      - name: Download verified Work Items artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: actions-work-items-dist
+          path: work-items/dist
+
+      - name: Publish verified artifacts
+        env:
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN_ACTIONS_WORK_ITEMS }}
+        run: poetry publish --no-interaction

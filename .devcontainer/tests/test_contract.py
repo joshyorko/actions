@@ -1,5 +1,6 @@
 import json
 import os
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -77,6 +78,10 @@ class DevContainerContractTest(unittest.TestCase):
             "ruff check src tests",
             "pytest tests",
             "poetry build",
+            "poetry version --short",
+            "twine check --strict",
+            "zipfile",
+            "email.parser",
             "actions.work_items",
             "actions.workitems",
             "actions_work_items",
@@ -84,9 +89,135 @@ class DevContainerContractTest(unittest.TestCase):
         ):
             self.assertIn(command, verification)
 
+        self.assertIn("(($# > 1))", verification)
+        self.assertIn("usage:", verification)
+        self.assertIn("mktemp -d", verification)
+        self.assertIn("caller-supplied artifact directory must be empty", verification)
+        self.assertIn('artifact_dir_owner="caller"', verification)
+        self.assertIn('artifact_dir_owner="temporary"', verification)
+        self.assertIn('[[ "$artifact_dir_owner" == "temporary" ]]', verification)
+        self.assertLess(
+            verification.index("trap cleanup EXIT"),
+            verification.index('artifact_dir=$(mktemp -d)'),
+        )
+        self.assertLess(
+            verification.index("trap cleanup EXIT"),
+            verification.index('venv_dir=$(mktemp -d)'),
+        )
+        self.assertIn('venv_dir=""', verification)
+        self.assertIn('artifact_dir=""', verification)
+
         self.assertTrue((REPOSITORY_ROOT / "work-items" / "poetry.lock").is_file())
         action_server_lock = (REPOSITORY_ROOT / "action_server" / "poetry.lock").read_text()
-        self.assertIn('name = "actions-work-items"\nversion = "0.2.4"', action_server_lock)
+        self.assertIn('name = "actions-work-items"\nversion = "0.3.0"', action_server_lock)
+
+    def test_work_items_pep_621_metadata_contract(self):
+        pyproject_path = REPOSITORY_ROOT / "work-items" / "pyproject.toml"
+        pyproject = tomllib.loads(pyproject_path.read_text())
+        project = pyproject["project"]
+
+        self.assertEqual(project["name"], "actions-work-items")
+        self.assertEqual(project["version"], "0.3.0")
+        self.assertEqual(project["requires-python"], ">=3.10,<4.0")
+        self.assertEqual(
+            project["urls"],
+            {
+                "Homepage": "https://github.com/joshyorko/actions",
+                "Repository": "https://github.com/joshyorko/actions",
+                "Documentation": "https://github.com/joshyorko/actions/tree/community/work-items",
+                "Issues": "https://github.com/joshyorko/actions/issues",
+            },
+        )
+        self.assertEqual(
+            project["optional-dependencies"],
+            {
+                "redis": ["redis>=4.5.0"],
+                "docdb": ["pymongo>=4.3.0"],
+                "documentdb": ["pymongo>=4.3.0"],
+                "all": ["redis>=4.5.0", "pymongo>=4.3.0"],
+            },
+        )
+        self.assertEqual(
+            pyproject["tool"]["poetry"]["packages"],
+            [
+                {"include": "actions", "from": "src"},
+                {"include": "actions_work_items", "from": "src"},
+            ],
+        )
+        self.assertIn("twine", pyproject["tool"]["poetry"]["group"]["dev"]["dependencies"])
+
+        init_path = REPOSITORY_ROOT / "work-items" / "src" / "actions" / "work_items" / "__init__.py"
+        self.assertIn('__version__ = "0.3.0"', init_path.read_text())
+
+    def test_work_items_pypi_documentation_contract(self):
+        readme = (REPOSITORY_ROOT / "work-items" / "README.md").read_text()
+        changelog = (REPOSITORY_ROOT / "work-items" / "docs" / "CHANGELOG.md").read_text()
+
+        self.assertIn("## Backend Support", readme)
+        for backend in ("SQLite", "FileAdapter", "Redis", "MongoDB / DocumentDB", "Action Server"):
+            self.assertIn(backend, readme)
+        self.assertIn("| SQLite |", readme)
+        self.assertIn("| Redis | Experimental |", readme)
+        self.assertIn("| MongoDB / DocumentDB | Experimental |", readme)
+        for heading in (
+            "## Quick Start",
+            "## Safety and Determinism",
+            "## Migrating from robocorp-workitems",
+        ):
+            self.assertIn(heading, readme)
+        quick_start = readme[readme.index("## Quick Start") : readme.index("## Payloads")]
+        for term in ("seed_input", "reserve", "outputs.create", "item.done()"):
+            self.assertIn(term, quick_start)
+        self.assertIn("actions_work_items", readme)
+        self.assertIn("__version__", readme)
+        self.assertIn("workitems.outputs.create(payload=None, files=None, save=True)", readme)
+        payload = readme[readme.index("## Payloads") : readme.index("## Files")]
+        self.assertNotIn("ExceptionType", payload)
+        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.3.0 - 2026-08-05"))
+
+    def test_work_items_release_workflow_contract(self):
+        workflow = (
+            REPOSITORY_ROOT / ".github" / "workflows" / "work_items_release.yml"
+        ).read_text()
+
+        self.assertIn("pull_request:", workflow)
+        self.assertIn("branches:\n      - community", workflow)
+        self.assertIn('"actions-work-items-*"', workflow)
+        self.assertNotIn("workflow_dispatch", workflow)
+        self.assertNotIn("id-token", workflow)
+        self.assertIn("poetry==2.1.1", workflow)
+        self.assertIn('python-version: "3.12"', workflow)
+
+        for action in (
+            "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5",
+            "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5",
+            "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4",
+            "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4",
+        ):
+            self.assertIn(action, workflow)
+
+        self.assertIn("verify-work-items work-items/dist", workflow)
+        self.assertIn("name: actions-work-items-dist", workflow)
+        self.assertIn("needs: verify", workflow)
+        self.assertIn("environment: pypi", workflow)
+        self.assertIn(
+            "startsWith(github.ref, 'refs/tags/actions-work-items-')", workflow
+        )
+        self.assertIn("git merge-base --is-ancestor", workflow)
+        self.assertIn("origin/community", workflow)
+        self.assertIn("check-tag-version", workflow)
+        self.assertIn("PYPI_TOKEN_ACTIONS_WORK_ITEMS", workflow)
+        self.assertIn("poetry publish --no-interaction", workflow)
+
+        for path in (
+            "work-items/**",
+            "action_server/poetry.lock",
+            ".devcontainer/bin/verify-work-items",
+            ".devcontainer/tests/**",
+            ".github/workflows/work_items_release.yml",
+            "docs/skills/work-items.md",
+        ):
+            self.assertIn(path, workflow)
 
     def test_smoke_contract(self):
         smoke = DEVCONTAINER_ROOT / "bin" / "smoke"

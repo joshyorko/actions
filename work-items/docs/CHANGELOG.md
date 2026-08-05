@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 - 2026-08-05
+
+- Harden attachment confinement, item-directory validation, and persisted-path checks against traversal and symlink escapes.
+- Make SQLite reservation atomic and deterministic with immediate transactions, FIFO ordering, conditional claims, and rollback on errors.
+- Preserve valid JSON payload shapes exactly and reject malformed stored JSON.
+- Load Work Items privately in Action Server paths to resist project-root shadowing, and seed producer integrations from the server-owned datadir.
+- Apply Ruff cleanup compatible with the Python 3.10 floor.
+- Add the pinned Dev Container bootstrap and Poetry-based release gate, including strict artifact and clean-wheel alias/version checks.
+- Publish complete PyPI documentation covering lifecycle, safety, compatibility, and backend boundaries.
+- Redis and MongoDB/DocumentDB remain experimental pending service-backed reliability coverage.
+
 ## 0.2.4 - 2026-05-01
 
 - Add `from actions import workitems` as a Robocorp-style module API for `workitems.inputs`, `workitems.outputs`, `item.done()`, and `item.fail(...)` workflows.

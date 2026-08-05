@@ -1,19 +1,40 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-if (($# != 0)); then
-    printf 'usage: %s\n' "${0##*/}" >&2
+if (($# > 1)); then
+    printf 'usage: %s [artifact-directory]\n' "${0##*/}" >&2
     exit 2
 fi
 
 repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
-artifact_dir=$(mktemp -d)
-venv_dir=$(mktemp -d)
+artifact_dir=""
+artifact_dir_owner="caller"
+venv_dir=""
 
 cleanup() {
-    rm -rf -- "$artifact_dir" "$venv_dir"
+    if [[ -n "$venv_dir" ]]; then
+        rm -rf -- "$venv_dir"
+    fi
+    if [[ "$artifact_dir_owner" == "temporary" ]]; then
+        if [[ -n "$artifact_dir" ]]; then
+            rm -rf -- "$artifact_dir"
+        fi
+    fi
 }
 trap cleanup EXIT
+
+if (($# == 1)); then
+    artifact_dir=$1
+    mkdir -p -- "$artifact_dir"
+    if [[ -n $(find "$artifact_dir" -mindepth 1 -print -quit) ]]; then
+        printf 'caller-supplied artifact directory must be empty: %s\n' "$artifact_dir" >&2
+        exit 2
+    fi
+else
+    artifact_dir=$(mktemp -d)
+    artifact_dir_owner="temporary"
+fi
+venv_dir=$(mktemp -d)
 
 run_in_package() {
     local package_directory=$1
@@ -28,21 +49,53 @@ run_in_package() {
     )
 }
 
+expected_version=$(cd -- "$repo_root/work-items" && poetry version --short)
 run_in_package work-items poetry check --lock
 run_in_package work-items poetry run ruff check src tests
 run_in_package work-items poetry run pytest tests -q
 run_in_package work-items poetry build --output "$artifact_dir"
 
+wheel_path=$(find "$artifact_dir" -maxdepth 1 -type f -name '*.whl' -print -quit)
+sdist_path=$(find "$artifact_dir" -maxdepth 1 -type f -name '*.tar.gz' -print -quit)
+if [[ -z "$wheel_path" || -z "$sdist_path" ]]; then
+    printf 'expected one wheel and one sdist in %s\n' "$artifact_dir" >&2
+    exit 1
+fi
+
+run_in_package work-items poetry run twine check --strict "$wheel_path" "$sdist_path"
+
+python - "$wheel_path" "$expected_version" <<'PY'
+import sys
+import zipfile
+from email.parser import BytesParser
+from email.policy import default
+
+wheel_path, expected_version = sys.argv[1:]
+with zipfile.ZipFile(wheel_path) as wheel:
+    metadata_name = next(name for name in wheel.namelist() if name.endswith('.dist-info/METADATA'))
+    metadata = BytesParser(policy=default).parsebytes(wheel.read(metadata_name))
+
+assert metadata['Name'] == 'actions-work-items'
+assert metadata['Version'] == expected_version
+assert metadata['Description-Content-Type'] == 'text/markdown'
+assert '## Backend Support' in metadata.get_payload()
+PY
+
 python -m venv "$venv_dir"
-"$venv_dir/bin/python" -m pip --disable-pip-version-check install "$artifact_dir"/*.whl
-"$venv_dir/bin/python" - <<'PY'
+"$venv_dir/bin/python" -m pip --disable-pip-version-check install "$wheel_path"
+"$venv_dir/bin/python" - "$expected_version" <<'PY'
+import importlib.metadata
+import sys
+
 import actions.work_items
 import actions.workitems
 import actions_work_items
 
+expected_version = sys.argv[1]
 assert actions.work_items.inputs is actions.workitems.inputs
 assert actions_work_items.workitems is actions.workitems
-assert actions.work_items.__version__ == actions_work_items.__version__ == "0.2.4"
+assert actions.work_items.__version__ == actions_work_items.__version__ == expected_version
+assert importlib.metadata.version('actions-work-items') == expected_version
 PY
 
 (
