@@ -13,6 +13,30 @@ _lock = Lock()
 _cached: ModuleType | None = None
 
 
+def locate_work_items_package() -> Path:
+    """Return the copied or editable Work Items package initializer path."""
+    try:
+        package_path = distribution("actions-work-items").locate_file(
+            "actions/work_items/__init__.py"
+        )
+    except PackageNotFoundError:
+        package_path = None
+
+    if package_path is not None and package_path.is_file():
+        return package_path
+
+    alias_spec = importlib.util.find_spec("actions_work_items")
+    if alias_spec is not None and alias_spec.origin is not None:
+        package_path = (
+            Path(alias_spec.origin).resolve().parent.parent
+            / "actions/work_items/__init__.py"
+        ).resolve()
+        if package_path.is_file():
+            return package_path
+
+    raise ImportError("Unable to locate actions-work-items package")
+
+
 def load_work_items_module() -> ModuleType:
     """Load the installed distribution without importing top-level ``actions``."""
     global _cached
@@ -20,22 +44,7 @@ def load_work_items_module() -> ModuleType:
         if _cached is not None:
             return _cached
 
-        try:
-            work_items_distribution = distribution("actions-work-items")
-            package_path = work_items_distribution.locate_file(
-                "actions/work_items/__init__.py"
-            )
-        except PackageNotFoundError as error:
-            raise ImportError("actions-work-items package not installed") from error
-
-        if not package_path.is_file():
-            editable_path = work_items_distribution.locate_file(
-                "actions_work_items.pth"
-            )
-            if editable_path.is_file():
-                package_path = Path(
-                    editable_path.read_text(encoding="utf-8").strip()
-                ) / "actions/work_items/__init__.py"
+        package_path = locate_work_items_package()
 
         spec = importlib.util.spec_from_file_location(
             _MODULE_NAME,

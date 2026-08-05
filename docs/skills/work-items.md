@@ -29,7 +29,7 @@ docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actio
 
 `verify-work-items` checks the committed lockfile, Ruff, the Work Items test suite, wheel build, clean-wheel public import aliases, and `git diff --check`. uv bootstraps Poetry in the image but never replaces Poetry resolution or the committed `work-items/poetry.lock` authority.
 
-Action Server loads the installed Work Items distribution under a private module name. Poetry's editable install points at `work-items/src` with `actions_work_items.pth`, so that loader resolves the `.pth` source when distribution metadata has no copied `actions/work_items/__init__.py`; this keeps a project-root `actions.py` from shadowing the REST adapter path in Dev Containers.
+Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader queries the `actions_work_items` import spec without importing it and derives the sibling Work Items package from its origin; this keeps a project-root `actions.py` from shadowing the REST adapter path in editable Dev Container installs.
 
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 

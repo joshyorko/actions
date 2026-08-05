@@ -103,6 +103,11 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn('"$repo_root/.devcontainer/bin/bootstrap"', smoke_text)
         self.assertIn('"$repo_root/.devcontainer/bin/verify-work-items"', smoke_text)
 
+    def test_host_docker_command_discovers_the_repository_root(self):
+        guidance = (REPOSITORY_ROOT / "docs/skills/repository-operations.md").read_text()
+        self.assertIn("repo_root=$(git rev-parse --show-toplevel)", guidance)
+        self.assertIn('cd "$repo_root"', guidance)
+
 
 if __name__ == "__main__":
     unittest.main()
