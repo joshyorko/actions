@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if (($# != 0)); then
+    printf 'usage: %s\n' "${0##*/}" >&2
+    exit 2
+fi
+
+repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
+artifact_dir=$(mktemp -d)
+venv_dir=$(mktemp -d)
+
+cleanup() {
+    rm -rf -- "$artifact_dir" "$venv_dir"
+}
+trap cleanup EXIT
+
+run_in_package() {
+    local package_directory=$1
+    shift
+
+    printf '+ (%s) ' "$package_directory"
+    printf '%q ' "$@"
+    printf '\n'
+    (
+        cd -- "$repo_root/$package_directory"
+        "$@"
+    )
+}
+
+run_in_package work-items poetry check --lock
+run_in_package work-items poetry run ruff check src tests
+run_in_package work-items poetry run pytest tests -q
+run_in_package work-items poetry build --output "$artifact_dir"
+
+python -m venv "$venv_dir"
+"$venv_dir/bin/python" -m pip --disable-pip-version-check install "$artifact_dir"/*.whl
+"$venv_dir/bin/python" - <<'PY'
+import actions.work_items
+import actions.workitems
+import actions_work_items
+
+assert actions.work_items.inputs is actions.workitems.inputs
+assert actions_work_items.workitems is actions.workitems
+assert actions.work_items.__version__ == actions_work_items.__version__ == "0.2.4"
+PY
+
+(
+    cd -- "$repo_root"
+    git diff --check
+)

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if (($# != 0)); then
+    printf 'usage: %s\n' "${0##*/}" >&2
+    exit 2
+fi
+
+repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
+
+run_in_package() {
+    local package_directory=$1
+    shift
+
+    printf '+ (%s) ' "$package_directory"
+    printf '%q ' "$@"
+    printf '\n'
+    (
+        cd -- "$repo_root/$package_directory"
+        "$@"
+    )
+}
+
+python --version
+uv --version
+poetry --version
+
+run_in_package work-items poetry install --sync --no-interaction
+run_in_package action_server poetry install --sync --no-interaction

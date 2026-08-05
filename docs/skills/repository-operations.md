@@ -32,9 +32,24 @@ Do not convert a commit message, design proposal, or skipped test into a current
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
-When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate.
+When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification.
+
+The Action Server Dev Container uses uv only to install and cache Poetry; Poetry and committed `poetry.lock` files remain the dependency-resolution and release authorities. Build and use the Task 1 image headlessly from the repository root:
+
+```bash
+docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:task-1 .
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-1 .devcontainer/bin/bootstrap
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-1 .devcontainer/bin/verify-work-items
+```
+
+If dependency cache state is corrupt, remove only the named Dev Container cache volumes, then rebuild the image and rerun bootstrap:
+
+```bash
+docker volume rm actions-uv-cache actions-poetry-cache actions-npm-cache
+docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:task-1 .
+```
 
 Run the dependency-free static configuration gate with unittest discovery because `.devcontainer` is not a valid Python module name:
 

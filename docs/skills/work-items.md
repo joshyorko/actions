@@ -21,7 +21,16 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 
 ## Local Verification
 
-From the repository root when Poetry is unavailable:
+The canonical Work Items release gate runs in the Action Server Dev Container through Poetry:
+
+```bash
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-1 .devcontainer/bin/bootstrap
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-1 .devcontainer/bin/verify-work-items
+```
+
+`verify-work-items` checks the committed lockfile, Ruff, the Work Items test suite, wheel build, clean-wheel public import aliases, and `git diff --check`. uv bootstraps Poetry in the image but never replaces Poetry resolution or the committed `work-items/poetry.lock` authority.
+
+From the repository root when Poetry is unavailable for diagnostic-only host checks:
 
 When Action Server tests consume a locally changed Work Items package without a version bump, reinstall the freshly built package before testing; resolver caches can otherwise exercise stale same-version code.
 
@@ -30,7 +39,7 @@ PYTHONPATH=work-items/src uv run --no-project --with pytest --with pytest-asynci
 uvx ruff check work-items/src work-items/tests
 ```
 
-The package release gate remains Poetry-based and must include `poetry check`, tests, Ruff, build, and clean-wheel alias imports on supported Python versions. Redis/DocumentDB production claims additionally require service-backed tests; deterministic fakes alone are insufficient.
+The package release gate remains Poetry-based and includes `poetry check --lock`, tests, Ruff, build, clean-wheel alias imports, and a clean diff check. Redis/DocumentDB production claims additionally require service-backed tests; deterministic fakes alone are insufficient.
 
 Ruff's configured `UP` fixes in `work-items/src/actions/work_items` are compatible with the package's Python 3.10 floor: built-in generic and `X | None` annotations replace legacy `typing` forms without changing runtime behavior or public aliases.
 

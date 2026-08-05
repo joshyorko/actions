@@ -1,4 +1,5 @@
 import json
+import os
 import unittest
 from pathlib import Path
 
@@ -47,6 +48,32 @@ class DevContainerContractTest(unittest.TestCase):
         for value in forbidden:
             self.assertNotIn(value, configuration_text)
             self.assertNotIn(value, dockerfile_text)
+
+    def test_work_items_poetry_release_gate_contract(self):
+        for script_name in ("bootstrap", "verify-work-items"):
+            script = DEVCONTAINER_ROOT / "bin" / script_name
+            self.assertTrue(script.is_file(), f"missing {script}")
+            self.assertTrue(os.access(script, os.X_OK), f"{script} is not executable")
+
+            script_text = script.read_text()
+            self.assertIn("set -Eeuo pipefail", script_text)
+            self.assertIn('${BASH_SOURCE[0]}', script_text)
+            self.assertNotIn("uv sync", script_text)
+
+        verification = (DEVCONTAINER_ROOT / "bin" / "verify-work-items").read_text()
+        for command in (
+            "poetry check --lock",
+            "ruff check src tests",
+            "pytest tests",
+            "poetry build",
+            "actions.work_items",
+            "actions.workitems",
+            "actions_work_items",
+            "git diff --check",
+        ):
+            self.assertIn(command, verification)
+
+        self.assertTrue((REPOSITORY_ROOT / "work-items" / "poetry.lock").is_file())
 
 
 if __name__ == "__main__":
