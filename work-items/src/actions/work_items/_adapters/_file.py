@@ -14,7 +14,7 @@ import shutil
 import uuid
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from .._exceptions import EmptyQueue
 from .._paths import resolve_attachment_path, resolve_item_directory
@@ -52,8 +52,8 @@ class FileAdapter(BaseAdapter):
 
     def __init__(
         self,
-        input_path: Optional[str] = None,
-        output_path: Optional[str] = None,
+        input_path: str | None = None,
+        output_path: str | None = None,
     ):
         """
         Initialize file adapter.
@@ -84,19 +84,19 @@ class FileAdapter(BaseAdapter):
         self._output_items = self._load_items(self._output_path)
 
         # Track reservation state
-        self._reserved: Dict[str, bool] = {}
+        self._reserved: dict[str, bool] = {}
         self._current_index = 0
 
-    def _load_items(self, path: Path) -> List[Dict[str, Any]]:
+    def _load_items(self, path: Path) -> list[dict[str, Any]]:
         """Load work items from JSON file."""
         items_file = path / "work-items.json"
         if items_file.exists():
-            with open(items_file, "r") as f:
+            with open(items_file) as f:
                 data = json.load(f)
                 return data.get("workItems", data.get("items", []))
         return []
 
-    def _save_items(self, path: Path, items: List[Dict[str, Any]]) -> None:
+    def _save_items(self, path: Path, items: list[dict[str, Any]]) -> None:
         """Save work items to JSON file."""
         items_file = path / "work-items.json"
         with open(items_file, "w") as f:
@@ -111,7 +111,7 @@ class FileAdapter(BaseAdapter):
     def _validate_item_id(self, item_id: str) -> None:
         resolve_item_directory(self._input_path, item_id)
 
-    def _find_item_index(self, items: List[Dict], item_id: str) -> int:
+    def _find_item_index(self, items: list[dict], item_id: str) -> int:
         """Find item index by ID."""
         self._validate_item_id(item_id)
         for i, item in enumerate(items):
@@ -144,9 +144,9 @@ class FileAdapter(BaseAdapter):
         self,
         item_id: str,
         state: State,
-        exception_type: Optional[ExceptionType] = None,
-        code: Optional[str] = None,
-        message: Optional[str] = None,
+        exception_type: ExceptionType | None = None,
+        code: str | None = None,
+        message: str | None = None,
     ) -> None:
         """Release a reserved input work item."""
         try:
@@ -169,7 +169,7 @@ class FileAdapter(BaseAdapter):
     def create_output(
         self,
         parent_id: str,
-        payload: Optional[JSONType] = None,
+        payload: JSONType | None = None,
     ) -> str:
         """Create a new output work item."""
         item_id = str(uuid.uuid4())
@@ -221,7 +221,7 @@ class FileAdapter(BaseAdapter):
 
         raise ValueError(f"Work item not found: {item_id}")
 
-    def list_files(self, item_id: str) -> List[str]:
+    def list_files(self, item_id: str) -> list[str]:
         """List files attached to work item."""
         self._validate_item_id(item_id)
         # Check inputs
@@ -337,9 +337,9 @@ class FileAdapter(BaseAdapter):
 
     def seed_input(
         self,
-        payload: Optional[JSONType] = None,
-        files: Optional[Dict[str, bytes]] = None,
-        queue_name: Optional[str] = None,
+        payload: JSONType | None = None,
+        files: dict[str, bytes] | None = None,
+        queue_name: str | None = None,
     ) -> str:
         """Seed a new input work item."""
         item_id = str(uuid.uuid4())
@@ -369,10 +369,10 @@ class FileAdapter(BaseAdapter):
 
     def list_items(
         self,
-        queue_name: Optional[str] = None,
-        state: Optional[State] = None,
+        queue_name: str | None = None,
+        state: State | None = None,
         limit: int = 100,
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """List work items."""
         items = self._input_items + self._output_items
 
@@ -381,7 +381,7 @@ class FileAdapter(BaseAdapter):
 
         return items[:limit]
 
-    def get_item(self, item_id: str) -> Dict[str, Any]:
+    def get_item(self, item_id: str) -> dict[str, Any]:
         """Get work item details."""
         self._validate_item_id(item_id)
         for item in self._input_items:
@@ -419,7 +419,7 @@ class FileAdapter(BaseAdapter):
 
         raise ValueError(f"Work item not found: {item_id}")
 
-    def get_queue_stats(self, queue_name: Optional[str] = None) -> Dict[str, int]:
+    def get_queue_stats(self, queue_name: str | None = None) -> dict[str, int]:
         """Get queue statistics."""
         all_items = self._input_items + self._output_items
 

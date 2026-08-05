@@ -29,6 +29,8 @@ uvx ruff check work-items/src work-items/tests
 
 The package release gate remains Poetry-based and must include `poetry check`, tests, Ruff, build, and clean-wheel alias imports on supported Python versions. Redis/DocumentDB production claims additionally require service-backed tests; deterministic fakes alone are insufficient.
 
+Ruff's configured `UP` fixes in `work-items/src/actions/work_items` are compatible with the package's Python 3.10 floor: built-in generic and `X | None` annotations replace legacy `typing` forms without changing runtime behavior or public aliases.
+
 ## Required Regression Areas
 
 - Filesystem traversal, malicious IDs, symlinks, persisted escaped paths, duplicate/missing attachments, and HTTP status/header behavior.

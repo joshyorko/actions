@@ -6,7 +6,7 @@ Based on robocorp-workitems (Apache 2.0 License).
 
 import json
 import os
-from typing import Any, Optional
+from typing import Any
 
 
 def truncate(text: str, max_length: int = 1000) -> str:
@@ -25,7 +25,7 @@ def truncate(text: str, max_length: int = 1000) -> str:
     return text[: max_length - 3] + "..."
 
 
-def json_dumps(obj: Any, indent: Optional[int] = None) -> str:
+def json_dumps(obj: Any, indent: int | None = None) -> str:
     """
     Serialize object to JSON string with consistent formatting.
 
@@ -39,7 +39,7 @@ def json_dumps(obj: Any, indent: Optional[int] = None) -> str:
     return json.dumps(obj, indent=indent, default=str, ensure_ascii=False)
 
 
-def required_env(name: str, default: Optional[str] = None) -> str:
+def required_env(name: str, default: str | None = None) -> str:
     """
     Get required environment variable.
 

@@ -8,7 +8,8 @@ Based on robocorp-workitems (Apache 2.0 License).
 """
 
 import logging
-from typing import Dict, Iterator, List, Optional, TYPE_CHECKING, Union
+from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 from ._exceptions import EmptyQueue
 from ._types import JSONType, PathType
@@ -48,12 +49,12 @@ class Inputs:
             adapter: Storage adapter to use.
         """
         self._adapter = adapter
-        self._current: Optional[Input] = None
-        self._items: List[Input] = []
+        self._current: Input | None = None
+        self._items: list[Input] = []
         self._index = 0
 
     @property
-    def current(self) -> Optional[Input]:
+    def current(self) -> Input | None:
         """
         The currently active input work item.
 
@@ -62,7 +63,7 @@ class Inputs:
         return self._current
 
     @property
-    def released(self) -> List[Input]:
+    def released(self) -> list[Input]:
         """List of inputs that have been released (done or failed)."""
         return [item for item in self._items if item.released]
 
@@ -151,10 +152,10 @@ class Outputs:
         """
         self._adapter = adapter
         self._inputs = inputs
-        self._items: List[Output] = []
+        self._items: list[Output] = []
 
     @property
-    def last(self) -> Optional[Output]:
+    def last(self) -> Output | None:
         """
         The most recently created output work item.
 
@@ -187,8 +188,8 @@ class Outputs:
 
     def create(
         self,
-        payload: Optional[JSONType] = None,
-        files: Optional[Dict[str, Union[PathType, bytes]]] = None,
+        payload: JSONType | None = None,
+        files: dict[str, PathType | bytes] | None = None,
         save: bool = True,
     ) -> Output:
         """
