@@ -85,4 +85,35 @@ Documentation improvement:
 - Durable learning captured: Dev Container image verification must inspect copied tool paths and run the built image as UID 1000; when `uv` is copied to `/uv`, expose it on `PATH`, and when Poetry is installed during a root build, set `HOME=/home/vscode` so the non-root runtime can execute it. Node stages should copy only `/usr/local/bin/node` and `/usr/local/lib/node_modules`, recreating package-bin links, rather than copying all of `/usr/local`.
 - Evidence: final `docker build --pull=false ...` exited 0; non-root runtime checks reported UID 1000, `/workspaces/actions`, Python 3.12.11, Node 22.18.0, uv 0.12.1, and Poetry 2.1.1. Node inspection listed unrelated `/usr/local` directories alongside the required paths. The two intermediate build failures demonstrated the `PATH` and root-home issues.
 - Stale or ambiguous guidance removed: the plan's broad “copy `/usr/local/` from the Node stage” instruction was superseded for this task by the narrower, evidence-backed copy rule; no canonical guide was edited because the requested write scope excludes it.
-- Remaining uncertainty: the direct interface example `python -m unittest .devcontainer.tests.test_contract` is not executable because Python treats the leading-dot directory name as an invalid module name; the specified discovery command is the passing static gate. Task 2 bootstrap behavior remains unverified by design.
+- Remaining uncertainty: the direct module-form interface example is not executable because Python treats the leading-dot directory name as an invalid module name; the specified discovery command is the passing static gate. Task 2 bootstrap behavior remains unverified by design.
+
+## Fix round 1/5
+
+Corrected the committed implementation plan's Task 1 interface to the passing discovery command:
+
+```text
+python -m unittest discover -s .devcontainer/tests -p 'test_*.py' -v
+```
+
+The generated scratch brief was not edited. A repository-wide tracked-text search found no remaining advertisement of the invalid direct module command after this correction.
+
+Verification after the fix:
+
+```text
+python -m unittest discover -s .devcontainer/tests -p 'test_*.py' -v
+```
+
+Result: `OK`; one test ran and passed.
+
+```text
+git diff --check
+```
+
+Result: passed with no output.
+
+Documentation improvement:
+- Canonical file changed or proposed: `docs/superpowers/plans/2026-08-05-action-server-devcontainer.md` changed; `docs/skills/repository-operations.md` remains proposed from the original task.
+- Durable learning captured: Python's `unittest` module-name interface cannot address a test beneath the dot-prefixed `.devcontainer` directory; use the repository's discovery command as the static contract interface.
+- Evidence: the reviewer-reported direct command reproduced `ValueError: Empty module name`; the corrected discovery command passed after the plan update.
+- Stale or ambiguous guidance removed: replaced the invalid direct module invocation in the committed plan; the generated scratch brief remains unchanged as requested.
+- Remaining uncertainty: Task 2 bootstrap behavior remains unverified by design.

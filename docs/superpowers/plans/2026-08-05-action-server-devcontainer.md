@@ -28,7 +28,7 @@
 - Modify: `.devcontainer/devcontainer.json`
 
 **Interfaces:**
-- Produces: `python -m unittest .devcontainer.tests.test_contract` as a dependency-free static gate.
+- Produces: `python -m unittest discover -s .devcontainer/tests -p 'test_*.py' -v` as a dependency-free static gate.
 - Produces: image user `vscode`, workspace `/workspaces/actions`, and lifecycle command `.devcontainer/bin/bootstrap`.
 
 - [ ] **Step 1: Write the failing contract test**
