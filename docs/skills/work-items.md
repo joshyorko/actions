@@ -23,6 +23,8 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 
 From the repository root when Poetry is unavailable:
 
+When Action Server tests consume a locally changed Work Items package without a version bump, reinstall the freshly built package before testing; resolver caches can otherwise exercise stale same-version code.
+
 ```bash
 PYTHONPATH=work-items/src uv run --no-project --with pytest --with pytest-asyncio pytest work-items/tests -q
 uvx ruff check work-items/src work-items/tests
