@@ -43,7 +43,7 @@ Expected: FAIL because the current JSON has no `build`, `remoteUser`, lifecycle 
 
 - [ ] **Step 3: Implement the minimal image and configuration**
 
-Use three Dockerfile stages with exact `FROM` references from Global Constraints. Copy `/usr/local/` from the Node stage and `/uv`, `/uvx` from the uv stage. In the Python stage install `ca-certificates curl git build-essential` with `--no-install-recommends`, create UID/GID 1000 user `vscode`, set `UV_TOOL_BIN_DIR=/usr/local/bin`, and run `uv tool install "poetry==${POETRY_VERSION}"`. Add OCI source/title/version labels and switch to `USER vscode`.
+Use three Dockerfile stages with exact `FROM` references from Global Constraints. Copy only Node's runtime binary and `/usr/local/lib/node_modules`, then create the npm/npx/corepack command links; do not copy Node headers, docs, manpages, or the whole `/usr/local` tree. Copy `/uv`, `/uvx` from the uv stage. In the Python stage install `ca-certificates curl git build-essential` with `--no-install-recommends`, create UID/GID 1000 user `vscode`, set `UV_TOOL_BIN_DIR=/usr/local/bin`, and run `uv tool install "poetry==${POETRY_VERSION}"`. Add OCI source/title/version labels and switch to `USER vscode`.
 
 Set Dev Container `name` to `Actions — Action Server`, build `.devcontainer/Dockerfile`, use `/workspaces/actions`, set `remoteUser` to `vscode`, enable `updateRemoteUserUID`, mount named volumes at `/home/vscode/.cache/uv`, `/home/vscode/.cache/pypoetry`, and `/home/vscode/.npm`, and configure Python/Ruff editor extensions without adding runtime features.
 
