@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 - 2026-08-05
+
+- Fix the tag publication workflow to validate the package version without relying on an undeclared Invoke dependency.
+- Supersede the failed pre-publication 0.3.0 tag; no 0.3.0 artifact was accepted by PyPI.
+
 ## 0.3.0 - 2026-08-05
 
 - Harden attachment confinement, item-directory validation, and persisted-path checks against traversal and symlink escapes.

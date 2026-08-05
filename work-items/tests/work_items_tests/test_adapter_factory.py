@@ -37,7 +37,7 @@ def test_distribution_name_alias_exports_canonical_version():
     import actions.work_items as work_items
     import actions_work_items
 
-    assert actions_work_items.__version__ == work_items.__version__ == "0.3.0"
+    assert actions_work_items.__version__ == work_items.__version__ == "0.3.1"
 
 
 def test_create_adapter_supports_redis_and_docdb_aliases(monkeypatch):
