@@ -31,6 +31,9 @@ __pycache__/
 .venv
 venv
 
+# Agent worktrees
+.worktrees/
+
 # Project generated files
 dist/
 
