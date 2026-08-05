@@ -7,11 +7,24 @@ if (($# > 1)); then
 fi
 
 repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
-venv_dir=$(mktemp -d)
+artifact_dir=""
+artifact_dir_owner="caller"
+venv_dir=""
+
+cleanup() {
+    if [[ -n "$venv_dir" ]]; then
+        rm -rf -- "$venv_dir"
+    fi
+    if [[ "$artifact_dir_owner" == "temporary" ]]; then
+        if [[ -n "$artifact_dir" ]]; then
+            rm -rf -- "$artifact_dir"
+        fi
+    fi
+}
+trap cleanup EXIT
 
 if (($# == 1)); then
     artifact_dir=$1
-    artifact_dir_owner="caller"
     mkdir -p -- "$artifact_dir"
     if [[ -n $(find "$artifact_dir" -mindepth 1 -print -quit) ]]; then
         printf 'caller-supplied artifact directory must be empty: %s\n' "$artifact_dir" >&2
@@ -21,14 +34,7 @@ else
     artifact_dir=$(mktemp -d)
     artifact_dir_owner="temporary"
 fi
-
-cleanup() {
-    rm -rf -- "$venv_dir"
-    if [[ "$artifact_dir_owner" == "temporary" ]]; then
-        rm -rf -- "$artifact_dir"
-    fi
-}
-trap cleanup EXIT
+venv_dir=$(mktemp -d)
 
 run_in_package() {
     local package_directory=$1

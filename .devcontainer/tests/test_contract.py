@@ -96,6 +96,16 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn('artifact_dir_owner="caller"', verification)
         self.assertIn('artifact_dir_owner="temporary"', verification)
         self.assertIn('[[ "$artifact_dir_owner" == "temporary" ]]', verification)
+        self.assertLess(
+            verification.index("trap cleanup EXIT"),
+            verification.index('artifact_dir=$(mktemp -d)'),
+        )
+        self.assertLess(
+            verification.index("trap cleanup EXIT"),
+            verification.index('venv_dir=$(mktemp -d)'),
+        )
+        self.assertIn('venv_dir=""', verification)
+        self.assertIn('artifact_dir=""', verification)
 
         self.assertTrue((REPOSITORY_ROOT / "work-items" / "poetry.lock").is_file())
         action_server_lock = (REPOSITORY_ROOT / "action_server" / "poetry.lock").read_text()
