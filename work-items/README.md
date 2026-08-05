@@ -175,6 +175,7 @@ problems that may be retried by the surrounding workflow.
 
 ```python
 from actions import workitems
+from actions.work_items import ExceptionType
 
 
 for item in workitems.inputs:
