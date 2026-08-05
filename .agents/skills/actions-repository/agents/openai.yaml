@@ -1,0 +1,4 @@
+interface:
+  display_name: "Actions Repository"
+  short_description: "Work safely across the Actions monorepo"
+  default_prompt: "Use $actions-repository to implement and verify a change in this repository."
