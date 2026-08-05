@@ -175,6 +175,50 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertNotIn("ExceptionType", payload)
         self.assertTrue(changelog.startswith("# Changelog\n\n## 0.3.0 - 2026-08-05"))
 
+    def test_work_items_release_workflow_contract(self):
+        workflow = (
+            REPOSITORY_ROOT / ".github" / "workflows" / "work_items_release.yml"
+        ).read_text()
+
+        self.assertIn("pull_request:", workflow)
+        self.assertIn("branches:\n      - community", workflow)
+        self.assertIn('"actions-work-items-*"', workflow)
+        self.assertNotIn("workflow_dispatch", workflow)
+        self.assertNotIn("id-token", workflow)
+        self.assertIn("poetry==2.1.1", workflow)
+        self.assertIn('python-version: "3.12"', workflow)
+
+        for action in (
+            "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5",
+            "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5",
+            "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4",
+            "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4",
+        ):
+            self.assertIn(action, workflow)
+
+        self.assertIn("verify-work-items work-items/dist", workflow)
+        self.assertIn("name: actions-work-items-dist", workflow)
+        self.assertIn("needs: verify", workflow)
+        self.assertIn("environment: pypi", workflow)
+        self.assertIn(
+            "startsWith(github.ref, 'refs/tags/actions-work-items-')", workflow
+        )
+        self.assertIn("git merge-base --is-ancestor", workflow)
+        self.assertIn("origin/community", workflow)
+        self.assertIn("check-tag-version", workflow)
+        self.assertIn("PYPI_TOKEN_ACTIONS_WORK_ITEMS", workflow)
+        self.assertIn("poetry publish --no-interaction", workflow)
+
+        for path in (
+            "work-items/**",
+            "action_server/poetry.lock",
+            ".devcontainer/bin/verify-work-items",
+            ".devcontainer/tests/**",
+            ".github/workflows/work_items_release.yml",
+            "docs/skills/work-items.md",
+        ):
+            self.assertIn(path, workflow)
+
     def test_smoke_contract(self):
         smoke = DEVCONTAINER_ROOT / "bin" / "smoke"
         self.assertTrue(smoke.is_file(), f"missing {smoke}")

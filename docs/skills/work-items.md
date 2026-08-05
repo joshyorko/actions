@@ -31,6 +31,28 @@ docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actio
 
 `verify-work-items [artifact-directory]` checks the committed lockfile, Ruff, the Work Items test suite, and builds the wheel and sdist once. It registers cleanup before creating internal temporary directories. With no argument it cleans its temporary artifacts; with an explicit empty artifact directory it retains both artifacts for CI, and rejects a non-empty destination. The gate strictly validates both distributions with Twine, checks the wheel metadata name, version, Markdown README marker, and clean-wheel public aliases/version equality, then runs `git diff --check`. uv bootstraps Poetry in the image but never replaces Poetry resolution or the committed `work-items/poetry.lock` authority.
 
+## CI Publication and Recovery
+
+The Work Items release workflow verifies relevant pull requests, relevant pushes to `community`, and `actions-work-items-*` tags. Verification uses Python 3.12 and Poetry 2.1.1, synchronizes the committed Work Items lock, runs `verify-work-items work-items/dist`, and uploads the resulting wheel and sdist as `actions-work-items-dist`.
+
+Publication is tag-only: the `publish` job requires successful verification, accepts only `refs/tags/actions-work-items-*`, fetches `origin/community`, proves that the tagged commit is an ancestor of that branch, checks the tag/package version with `invoke check-tag-version`, downloads `actions-work-items-dist` to `work-items/dist`, and publishes those exact artifacts with `PYPI_TOKEN_ACTIONS_WORK_ITEMS`. It has no manual version input and does not use OIDC.
+
+For 0.3.0, merge the release PR into `community`, confirm the merged verification run is green, then create `actions-work-items-0.3.0` on that exact merged commit. Confirm the tag run passes strict Twine, metadata, alias, version, and ancestry gates before checking PyPI and installing the published wheel in a clean environment. Never move or reuse an accepted artifact or release tag: if publication did not accept the artifacts, merge the fix and use a new version/tag; if it did, publish a new patch version.
+
+The `pypi` environment is a workflow reference only. Its approval and protection rules are external GitHub configuration and must be created and enforced there before they are relied upon.
+
+For a linked worktree, mount the common Git directory read-only at its original absolute path as well as mounting the worktree. This lets the gate's `git diff --check` resolve worktree Git metadata:
+
+```bash
+repo_root=$(git rev-parse --show-toplevel)
+common_git_dir=$(git rev-parse --path-format=absolute --git-common-dir)
+docker run --rm --user vscode \
+  -v "$repo_root:/workspaces/actions" \
+  -v "$common_git_dir:$common_git_dir:ro" \
+  -w /workspaces/actions actions-devcontainer:test \
+  .devcontainer/bin/verify-work-items /artifacts
+```
+
 Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader accepts only its PEP 610 editable local-file `direct_url.json` root and resolves a contained `src/actions/work_items/__init__.py` or `actions/work_items/__init__.py`; it never consults project import paths, keeping shadow packages from controlling the REST adapter path.
 
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
