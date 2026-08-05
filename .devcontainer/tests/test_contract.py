@@ -41,6 +41,14 @@ class DevContainerContractTest(unittest.TestCase):
         ):
             self.assertIn(digest, self.dockerfile)
         self.assertIn("POETRY_VERSION=2.1.1", self.dockerfile)
+        for cache_environment in (
+            "UV_CACHE_DIR=/home/vscode/.cache/uv",
+            "POETRY_CACHE_DIR=/home/vscode/.cache/pypoetry",
+            "npm_config_cache=/home/vscode/.npm",
+        ):
+            self.assertIn(cache_environment, self.dockerfile)
+        self.assertIn("mkdir -p /home/vscode/.cache/uv /home/vscode/.cache/pypoetry /home/vscode/.npm", self.dockerfile)
+        self.assertIn("chown -R vscode:vscode /home/vscode/.cache /home/vscode/.npm", self.dockerfile)
 
         forbidden = ("ror", "room-of-requirement", "docker-in-docker", "docker-outside-of-docker")
         configuration_text = (DEVCONTAINER_ROOT / "devcontainer.json").read_text().lower()
@@ -61,6 +69,9 @@ class DevContainerContractTest(unittest.TestCase):
             self.assertNotIn("uv sync", script_text)
 
         verification = (DEVCONTAINER_ROOT / "bin" / "verify-work-items").read_text()
+        bootstrap = (DEVCONTAINER_ROOT / "bin" / "bootstrap").read_text()
+        self.assertIn("poetry sync --no-interaction", bootstrap)
+        self.assertNotIn("poetry install --sync", bootstrap)
         for command in (
             "poetry check --lock",
             "ruff check src tests",
@@ -74,6 +85,8 @@ class DevContainerContractTest(unittest.TestCase):
             self.assertIn(command, verification)
 
         self.assertTrue((REPOSITORY_ROOT / "work-items" / "poetry.lock").is_file())
+        action_server_lock = (REPOSITORY_ROOT / "action_server" / "poetry.lock").read_text()
+        self.assertIn('name = "actions-work-items"\nversion = "0.2.4"', action_server_lock)
 
 
 if __name__ == "__main__":

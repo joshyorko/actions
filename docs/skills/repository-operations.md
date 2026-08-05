@@ -36,19 +36,19 @@ When Poetry is unavailable, report that limitation. A temporary `uv` environment
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification.
 
-The Action Server Dev Container uses uv only to install and cache Poetry; Poetry and committed `poetry.lock` files remain the dependency-resolution and release authorities. Build and use the Task 1 image headlessly from the repository root:
+The Action Server Dev Container uses uv only to install and cache Poetry; Poetry and committed `poetry.lock` files remain the dependency-resolution and release authorities. The image declares the uv, Poetry, and npm cache paths and creates them as `vscode` before the runtime user switch, so newly created named volumes are writable. Bootstrap uses `poetry sync --no-interaction`. Build and use the Task 2 image headlessly from the repository root:
 
 ```bash
-docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:task-1 .
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-1 .devcontainer/bin/bootstrap
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-1 .devcontainer/bin/verify-work-items
+docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:task-2 .
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-2 .devcontainer/bin/bootstrap
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-2 .devcontainer/bin/verify-work-items
 ```
 
 If dependency cache state is corrupt, remove only the named Dev Container cache volumes, then rebuild the image and rerun bootstrap:
 
 ```bash
 docker volume rm actions-uv-cache actions-poetry-cache actions-npm-cache
-docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:task-1 .
+docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:task-2 .
 ```
 
 Run the dependency-free static configuration gate with unittest discovery because `.devcontainer` is not a valid Python module name:

@@ -112,7 +112,7 @@ class WorkItemsContext:
 
         if files:
             for name, value in files.items():
-                if isinstance(value, (str, os.PathLike)):
+                if isinstance(value, str | os.PathLike):
                     output.add_file(path=value, name=name)
                 else:
                     output.add_file(content=value, name=name)
@@ -143,7 +143,7 @@ class WorkItemsContext:
         if files:
             files_bytes = {}
             for name, value in files.items():
-                if isinstance(value, (str, os.PathLike)):
+                if isinstance(value, str | os.PathLike):
                     from pathlib import Path
                     files_bytes[name] = Path(value).read_bytes()
                 else:

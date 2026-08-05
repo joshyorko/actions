@@ -35,3 +35,29 @@ def test_distribution_alias_supports_workitems_module_flow():
     assert aliased_workitems.inputs is workitems.inputs
     assert aliased_workitems.outputs is workitems.outputs
     assert aliased_workitems.init is workitems.init
+
+
+def test_context_preserves_path_and_bytes_attachments():
+    """Path and bytes attachments retain their contents through context helpers."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        root = Path(tmpdir)
+        source = root / "source.txt"
+        source.write_bytes(b"from-path")
+        adapter = workitems.SQLiteAdapter(
+            db_path=str(root / "items.db"),
+            files_dir=str(root / "files"),
+        )
+        context = workitems.WorkItemsContext(adapter)
+
+        input_id = context.seed_input(
+            files={"from-path.txt": source, "from-bytes.bin": b"from-bytes"}
+        )
+        assert adapter.get_file(input_id, "from-path.txt") == b"from-path"
+        assert adapter.get_file(input_id, "from-bytes.bin") == b"from-bytes"
+
+        context.get_input()
+        output = context.create_output(
+            files={"output-path.txt": source, "output-bytes.bin": b"output-bytes"}
+        )
+        assert output.get_file("output-path.txt") == b"from-path"
+        assert output.get_file("output-bytes.bin") == b"output-bytes"

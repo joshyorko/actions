@@ -10,7 +10,10 @@ LABEL org.opencontainers.image.source="https://github.com/joshyorko/actions" \
       org.opencontainers.image.title="Actions — Action Server" \
       org.opencontainers.image.version="1"
 
-ENV UV_TOOL_BIN_DIR=/usr/local/bin
+ENV UV_TOOL_BIN_DIR=/usr/local/bin \
+    UV_CACHE_DIR=/home/vscode/.cache/uv \
+    POETRY_CACHE_DIR=/home/vscode/.cache/pypoetry \
+    npm_config_cache=/home/vscode/.npm
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
@@ -33,6 +36,8 @@ RUN ln -sf /uv /usr/local/bin/uv \
 
 RUN groupadd --gid 1000 vscode \
     && useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash vscode \
+    && mkdir -p /home/vscode/.cache/uv /home/vscode/.cache/pypoetry /home/vscode/.npm \
+    && chown -R vscode:vscode /home/vscode/.cache /home/vscode/.npm \
     && HOME=/home/vscode uv tool install "poetry==${POETRY_VERSION}"
 
 WORKDIR /workspaces/actions

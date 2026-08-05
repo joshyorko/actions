@@ -24,8 +24,8 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 The canonical Work Items release gate runs in the Action Server Dev Container through Poetry:
 
 ```bash
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-1 .devcontainer/bin/bootstrap
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-1 .devcontainer/bin/verify-work-items
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-2 .devcontainer/bin/bootstrap
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-2 .devcontainer/bin/verify-work-items
 ```
 
 `verify-work-items` checks the committed lockfile, Ruff, the Work Items test suite, wheel build, clean-wheel public import aliases, and `git diff --check`. uv bootstraps Poetry in the image but never replaces Poetry resolution or the committed `work-items/poetry.lock` authority.
