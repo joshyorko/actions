@@ -11,7 +11,7 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 ## Safety Invariants
 
 - Attachment names are one safe filename component: reject empty/dot names, absolute paths, either path separator, quotes, and C0 controls. Resolve roots and candidates before containment checks so symlink escapes fail.
-- Treat item IDs and persisted SQLite file paths as untrusted. A persisted path must equal the resolved expected `<files_root>/<item_id>/<name>` before read, unlink, or recursive item deletion; verify item existence before deriving or removing its directory.
+- Treat item IDs and persisted SQLite file paths as untrusted. Item directories must resolve to strict descendants of the files root; equality with the root is invalid, so reject IDs such as `""` and `"."`. A persisted path must equal the resolved expected `<files_root>/<item_id>/<name>` before read, unlink, or recursive item deletion; verify item existence before deriving or removing its directory.
 - SQLite reservation must claim one pending item once across competing processes.
 - Queue and output queue names remain explicit across producer, consumer, scheduler, trigger, and preloaded-action boundaries.
 - Python adapters preserve JSON values; the current Action Server REST model may impose a narrower object-or-null boundary.
