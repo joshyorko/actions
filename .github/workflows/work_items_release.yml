@@ -87,7 +87,13 @@ jobs:
           set -Eeuo pipefail
           git fetch origin community:refs/remotes/origin/community
           git merge-base --is-ancestor "$GITHUB_SHA" origin/community
-          poetry run invoke check-tag-version
+          tag_version=${GITHUB_REF_NAME#actions-work-items-}
+          package_version=$(poetry version --short)
+          if [[ "$tag_version" != "$package_version" ]]; then
+            printf 'tag version %s does not match package version %s\n' \
+              "$tag_version" "$package_version" >&2
+            exit 1
+          fi
 
       - name: Download verified Work Items artifacts
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4

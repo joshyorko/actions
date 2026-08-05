@@ -109,7 +109,7 @@ class DevContainerContractTest(unittest.TestCase):
 
         self.assertTrue((REPOSITORY_ROOT / "work-items" / "poetry.lock").is_file())
         action_server_lock = (REPOSITORY_ROOT / "action_server" / "poetry.lock").read_text()
-        self.assertIn('name = "actions-work-items"\nversion = "0.3.0"', action_server_lock)
+        self.assertIn('name = "actions-work-items"\nversion = "0.3.1"', action_server_lock)
 
     def test_work_items_pep_621_metadata_contract(self):
         pyproject_path = REPOSITORY_ROOT / "work-items" / "pyproject.toml"
@@ -117,7 +117,7 @@ class DevContainerContractTest(unittest.TestCase):
         project = pyproject["project"]
 
         self.assertEqual(project["name"], "actions-work-items")
-        self.assertEqual(project["version"], "0.3.0")
+        self.assertEqual(project["version"], "0.3.1")
         self.assertEqual(project["requires-python"], ">=3.10,<4.0")
         self.assertEqual(
             project["urls"],
@@ -147,7 +147,7 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("twine", pyproject["tool"]["poetry"]["group"]["dev"]["dependencies"])
 
         init_path = REPOSITORY_ROOT / "work-items" / "src" / "actions" / "work_items" / "__init__.py"
-        self.assertIn('__version__ = "0.3.0"', init_path.read_text())
+        self.assertIn('__version__ = "0.3.1"', init_path.read_text())
 
     def test_work_items_pypi_documentation_contract(self):
         readme = (REPOSITORY_ROOT / "work-items" / "README.md").read_text()
@@ -173,7 +173,7 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("workitems.outputs.create(payload=None, files=None, save=True)", readme)
         payload = readme[readme.index("## Payloads") : readme.index("## Files")]
         self.assertNotIn("ExceptionType", payload)
-        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.3.0 - 2026-08-05"))
+        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.3.1 - 2026-08-05"))
 
     def test_work_items_release_workflow_contract(self):
         workflow = (
@@ -208,7 +208,9 @@ class DevContainerContractTest(unittest.TestCase):
         )
         self.assertIn("git merge-base --is-ancestor", workflow)
         self.assertIn("origin/community", workflow)
-        self.assertIn("check-tag-version", workflow)
+        self.assertIn('tag_version=${GITHUB_REF_NAME#actions-work-items-}', workflow)
+        self.assertIn("package_version=$(poetry version --short)", workflow)
+        self.assertNotIn("invoke check-tag-version", workflow)
         self.assertIn("PYPI_TOKEN_ACTIONS_WORK_ITEMS", workflow)
         self.assertIn("poetry publish --no-interaction", workflow)
 
