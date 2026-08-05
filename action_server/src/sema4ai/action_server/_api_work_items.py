@@ -6,15 +6,17 @@ by producer-consumer automation workflows.
 """
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Annotated, Any
 
 import fastapi
-from actions.work_items._paths import validate_attachment_name
 from fastapi import File, UploadFile
 from fastapi.routing import APIRouter
 from pydantic import BaseModel
 
 from sema4ai.action_server._settings import get_settings
+
+from ._work_items_import import load_work_items_types
+from ._work_items_paths import validate_attachment_name
 
 log = logging.getLogger(__name__)
 
@@ -27,8 +29,8 @@ work_items_api_router = APIRouter(prefix="/api/work-items")
 class WorkItemCreate(BaseModel):
     """Request to create/seed a work item."""
 
-    payload: Optional[Dict[str, Any]] = None
-    queue_name: Optional[str] = None
+    payload: dict[str, Any] | None = None
+    queue_name: str | None = None
 
 
 class WorkItemResponse(BaseModel):
@@ -37,11 +39,11 @@ class WorkItemResponse(BaseModel):
     id: str
     queue_name: str
     state: str
-    payload: Optional[Dict[str, Any]] = None
-    parent_id: Optional[str] = None
-    error_code: Optional[str] = None
-    error_message: Optional[str] = None
-    files: List[str] = []
+    payload: dict[str, Any] | None = None
+    parent_id: str | None = None
+    error_code: str | None = None
+    error_message: str | None = None
+    files: list[str] = []
     created_at: str
     updated_at: str
 
@@ -49,7 +51,7 @@ class WorkItemResponse(BaseModel):
 class WorkItemListResponse(BaseModel):
     """Response with list of work items."""
 
-    items: List[WorkItemResponse]
+    items: list[WorkItemResponse]
     total: int
 
 
@@ -79,7 +81,7 @@ def _get_adapter():
         return _adapter
 
     try:
-        from actions.work_items import SQLiteAdapter
+        SQLiteAdapter, _ = load_work_items_types()
     except ImportError:
         log.warning("actions-work-items package not installed, work items API disabled")
         return None
@@ -138,8 +140,8 @@ async def create_work_item(request: WorkItemCreate):
 
 @work_items_api_router.get("", response_model=WorkItemListResponse)
 async def list_work_items(
-    queue_name: Optional[str] = None,
-    state: Optional[str] = None,
+    queue_name: str | None = None,
+    state: str | None = None,
     limit: int = 100,
 ):
     """
@@ -156,7 +158,7 @@ async def list_work_items(
     state_enum = None
     if state:
         try:
-            from actions.work_items import State
+            _, State = load_work_items_types()
 
             state_enum = State(state.upper())
         except (ValueError, ImportError):
@@ -193,7 +195,7 @@ async def list_work_items(
 
 
 @work_items_api_router.get("/stats", response_model=QueueStatsResponse)
-async def get_queue_stats(queue_name: Optional[str] = None):
+async def get_queue_stats(queue_name: str | None = None):
     """Get statistics for a queue."""
     adapter = _check_adapter()
 
@@ -250,7 +252,7 @@ async def delete_work_item(item_id: str):
 @work_items_api_router.post("/{item_id}/files")
 async def upload_file(
     item_id: str,
-    file: UploadFile = File(...),
+    file: Annotated[UploadFile, File()],
 ):
     """
     Upload a file attachment to a work item.

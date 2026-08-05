@@ -1,5 +1,7 @@
 """API tests for work-item attachment boundaries."""
 
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -55,3 +57,23 @@ def test_work_item_file_api_maps_attachment_errors_and_round_trips(
     assert download.headers["content-disposition"] == 'attachment; filename="report.txt"'
     delete = client.delete(f"/api/work-items/{item_id}/files/report.txt")
     assert delete.status_code == 200
+
+
+def test_work_items_import_ignores_project_actions_module(tmp_path: Path) -> None:
+    """A conventional project actions.py must not shadow the work-items package."""
+    (tmp_path / "actions.py").write_text("PROJECT_ACTIONS = True\n", encoding="utf-8")
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "from sema4ai.action_server._work_items_import import load_work_items_types; "
+                "print(load_work_items_types()[0].__name__)"
+            ),
+        ],
+        cwd=tmp_path,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert result.stdout.strip() == "SQLiteAdapter"
