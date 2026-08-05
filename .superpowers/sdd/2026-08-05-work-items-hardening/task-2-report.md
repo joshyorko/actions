@@ -62,7 +62,7 @@ uv run --no-project --with dist/actions_work_items-0.2.4-py3-none-any.whl python
 git diff --check
 ```
 
-`poetry` is not installed in this environment, so the package's Poetry release commands and `poetry check` could not run. The documented `uv` fallback was used. Package-wide `uvx ruff check src tests` remains red with 87 existing violations outside this task; changed-file Ruff passes.
+`poetry` is not installed in this environment, so the package's Poetry release commands and `poetry check` could not run. The documented `uv` fallback was used. The follow-up verification below confirms package-wide Ruff passes after the current shared-branch baseline update.
 
 ## Files
 
@@ -76,7 +76,33 @@ git diff --check
 - Confirmed public `reserve_input() -> str` behavior and the 30-second connection timeout are unchanged.
 - Confirmed the conditional update includes item ID, queue, and `PENDING` state, and errors leave no active transaction.
 - The trace seam uses real SQLite connections and the legacy sequence only to reproduce the prior duplicate claim deterministically.
-- No code concerns found. Remaining environment concerns are unavailable Poetry and unrelated package-wide Ruff debt.
+- No code concerns found. Remaining environment concern: Poetry is unavailable.
+
+## Review follow-up: deterministic timestamp ties
+
+Review identified that `created_at ASC` alone leaves timestamp ties unspecified. The FIFO query now orders by `created_at ASC, rowid ASC`, using SQLite's native insertion-order key without a schema migration or public API change. `test_reservation_preserves_insertion_order_when_timestamps_tie` fixes both creation timestamps to `2026-08-05T00:00:00+00:00`, verifies the first inserted item is reserved, and records the executed query's `rowid ASC` tie-breaker.
+
+RED:
+
+```text
+1 failed, 14 deselected in 0.04s
+```
+
+GREEN:
+
+```text
+1 passed, 14 deselected in 0.02s
+15 passed in 0.07s
+```
+
+Follow-up verification:
+
+```text
+20 equal-timestamp focused runs passed
+36 passed in 0.09s
+All checks passed!
+git diff --check: passed
+```
 
 ## Documentation improvement
 
@@ -85,4 +111,11 @@ Documentation improvement:
 - Durable learning captured: SQLite input reservation must acquire `BEGIN IMMEDIATE` before FIFO selection, conditionally update the selected pending row in the same transaction, and roll back errors while retaining the 30-second lock timeout.
 - Evidence: `test_reservation_locks_before_selecting_pending_item`, multiprocessing single-claim/FIFO regressions, and `test_reservation_rolls_back_on_update_error`; 20 repeated concurrency runs and the full package suite pass.
 - Stale or ambiguous guidance removed: Replaced the generic single-claim invariant with the verified transaction, conditional-update, rollback, and timeout requirements.
-- Remaining uncertainty: Poetry is unavailable here, and package-wide Ruff has 87 pre-existing violations outside Task 2.
+- Remaining uncertainty: Poetry is unavailable here.
+
+Documentation improvement:
+- Canonical file changed or proposed: `docs/skills/work-items.md`
+- Durable learning captured: FIFO selection needs `rowid ASC` after `created_at ASC` to retain insertion order when timestamps tie, without schema migration.
+- Evidence: `test_reservation_preserves_insertion_order_when_timestamps_tie` fixes equal timestamps and traces the executed SQLite query; focused RED/GREEN results are recorded above.
+- Stale or ambiguous guidance removed: Replaced timestamp-only FIFO wording with the stable SQLite-native tie-breaker.
+- Remaining uncertainty: Poetry is unavailable here.

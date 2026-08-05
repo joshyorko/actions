@@ -185,7 +185,7 @@ class SQLiteAdapter(BaseAdapter):
                         """
                         SELECT id FROM work_items
                         WHERE queue_name = ? AND state = ?
-                        ORDER BY created_at ASC
+                        ORDER BY created_at ASC, rowid ASC
                         LIMIT 1
                         """,
                         (self._queue_name, State.PENDING.value),

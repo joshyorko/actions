@@ -224,6 +224,27 @@ def test_concurrent_reservation_preserves_fifo_for_two_items(adapter):
     assert reserved_ids == [first_id, second_id]
 
 
+def test_reservation_preserves_insertion_order_when_timestamps_tie(adapter, monkeypatch):
+    """A shared creation timestamp still reserves the first inserted item first."""
+    statements = []
+    original_get_conn = adapter._get_conn
+
+    def traced_connection():
+        conn = original_get_conn()
+        conn.set_trace_callback(statements.append)
+        return conn
+
+    monkeypatch.setattr(adapter, "_get_conn", traced_connection)
+    monkeypatch.setattr(adapter, "_now", lambda: "2026-08-05T00:00:00+00:00")
+    first_id = adapter.seed_input()
+    second_id = adapter.seed_input()
+
+    assert adapter.reserve_input() == first_id
+    assert second_id != first_id
+    select_statement = next(statement for statement in statements if "SELECT id FROM work_items" in statement)
+    assert "ORDER BY created_at ASC, rowid ASC" in select_statement
+
+
 def test_load_save_payload(adapter):
     """Test loading and saving payloads."""
     item_id = adapter.seed_input(payload={"initial": "data"})
