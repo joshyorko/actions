@@ -170,6 +170,7 @@ class DevContainerContractTest(unittest.TestCase):
             self.assertIn(term, quick_start)
         self.assertIn("actions_work_items", readme)
         self.assertIn("__version__", readme)
+        self.assertIn("workitems.outputs.create(payload=None, files=None, save=True)", readme)
         payload = readme[readme.index("## Payloads") : readme.index("## Files")]
         self.assertNotIn("ExceptionType", payload)
         self.assertTrue(changelog.startswith("# Changelog\n\n## 0.3.0 - 2026-08-05"))

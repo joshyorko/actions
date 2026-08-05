@@ -218,7 +218,7 @@ before production claims are appropriate.
 - `workitems.init(adapter=None)`, `create_adapter(type=None, **kwargs)`
 - `workitems.seed_input(payload, files=None, queue_name=None)`
 - `workitems.inputs.reserve()` / `get_input()`
-- `workitems.outputs.create(payload=None, files=None, save=False)`
+- `workitems.outputs.create(payload=None, files=None, save=True)`
 - `Input`, `Output`, `EmptyQueue`, `BusinessException`, and
   `ApplicationException`
 - `State.DONE.value` is `DONE`; incoming `COMPLETED` is accepted as a

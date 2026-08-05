@@ -63,8 +63,10 @@ For HTTP attachments, map invalid names to 400, missing item/file to 404, and du
 PyPI release documentation must keep an evidence-accurate backend support
 matrix, one complete seed/reserve/output/release lifecycle example, used
 imports in every example, explicit Robocorp migration boundaries, and public
-alias/version verification. Future README changes must pass the static
-documentation contracts and strict wheel/sdist rendering checks so the
-published long description matches the tested artifact.
+alias/version verification. API summaries must preserve the public defaults
+implemented by the package, including `outputs.create(..., save=True)`. Future
+README changes must pass the static documentation contracts and strict
+wheel/sdist rendering checks so the published long description matches the
+tested artifact.
 
 The current hardening plan is `docs/superpowers/plans/2026-08-05-work-items-hardening.md`. It records approved target behavior, not delivered behavior. Update this guide only when the corresponding implementation and verification evidence exists.
