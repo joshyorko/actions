@@ -64,3 +64,60 @@ def test_rejects_uncontained_item_id_and_persisted_path(tmp_path: Path) -> None:
         adapter.remove_file(item_id, "safe.txt")
 
     assert sentinel.read_bytes() == b"unchanged"
+
+
+@pytest.mark.parametrize("item_id", ["", "."])
+def test_rejects_storage_root_item_ids_without_deleting_sentinels(
+    tmp_path: Path, item_id: str
+) -> None:
+    """Never let a root-valued ID delete sibling or outside storage."""
+    storage_root = tmp_path / "storage"
+    sibling_sentinel = storage_root / "safe-item" / "keep.txt"
+    outside_sentinel = tmp_path / "outside.txt"
+    sibling_sentinel.parent.mkdir(parents=True)
+    sibling_sentinel.write_bytes(b"sibling")
+    outside_sentinel.write_bytes(b"outside")
+
+    adapter = SQLiteAdapter(
+        db_path=str(tmp_path / "workitems.db"), files_dir=str(storage_root)
+    )
+    with sqlite3.connect(tmp_path / "workitems.db") as conn:
+        conn.execute(
+            """
+            INSERT INTO work_items (id, queue_name, state, created_at, updated_at)
+            VALUES (?, 'default', 'PENDING', '2026-01-01T00:00:00+00:00', '2026-01-01T00:00:00+00:00')
+            """,
+            (item_id,),
+        )
+
+    with pytest.raises(ValueError):
+        adapter.delete_item(item_id)
+
+    assert sibling_sentinel.read_bytes() == b"sibling"
+    assert outside_sentinel.read_bytes() == b"outside"
+
+
+def test_delete_item_rejects_persisted_escaped_path_without_removing_files(
+    tmp_path: Path,
+) -> None:
+    """Reject compromised paths before deleting an otherwise valid item directory."""
+    storage_root = tmp_path / "storage"
+    outside_sentinel = tmp_path / "outside.txt"
+    outside_sentinel.write_bytes(b"outside")
+    adapter = SQLiteAdapter(
+        db_path=str(tmp_path / "workitems.db"), files_dir=str(storage_root)
+    )
+    item_id = adapter.seed_input()
+    adapter.add_file(item_id, "safe.txt", "safe.txt", b"safe")
+    safe_file = storage_root / item_id / "safe.txt"
+    with sqlite3.connect(tmp_path / "workitems.db") as conn:
+        conn.execute(
+            "UPDATE work_item_files SET file_path = ? WHERE work_item_id = ?",
+            (str(outside_sentinel), item_id),
+        )
+
+    with pytest.raises(ValueError):
+        adapter.delete_item(item_id)
+
+    assert outside_sentinel.read_bytes() == b"outside"
+    assert safe_file.read_bytes() == b"safe"

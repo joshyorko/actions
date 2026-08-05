@@ -33,6 +33,10 @@ def test_work_item_file_api_maps_attachment_errors_and_round_trips(
     )
     assert unsafe.status_code == 400
 
+    quoted_name = 'quoted".txt'
+    assert client.get(f"/api/work-items/{item_id}/files/{quoted_name}").status_code == 400
+    assert client.delete(f"/api/work-items/{item_id}/files/{quoted_name}").status_code == 400
+
     missing = client.get(f"/api/work-items/{item_id}/files/missing.txt")
     assert missing.status_code == 404
     assert client.get("/api/work-items/missing/files/missing.txt").status_code == 404

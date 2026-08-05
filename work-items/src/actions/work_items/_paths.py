@@ -31,7 +31,7 @@ def resolve_item_directory(storage_root: Path, item_id: str) -> Path:
     """Resolve an item directory and ensure it remains under storage_root."""
     root = storage_root.resolve()
     candidate = (root / item_id).resolve()
-    if not _is_within(root, candidate):
+    if candidate == root or not _is_within(root, candidate):
         raise ValueError("Invalid work item ID")
     return candidate
 
