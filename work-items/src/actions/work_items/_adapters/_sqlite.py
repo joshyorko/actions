@@ -178,35 +178,51 @@ class SQLiteAdapter(BaseAdapter):
     def reserve_input(self) -> str:
         """Reserve the next available input work item."""
         with self._get_conn() as conn:
-            cursor = conn.execute(
-                """
-                SELECT id FROM work_items
-                WHERE queue_name = ? AND state = ?
-                ORDER BY created_at ASC
-                LIMIT 1
-                """,
-                (self._queue_name, State.PENDING.value),
-            )
-            row = cursor.fetchone()
+            for _ in range(3):
+                try:
+                    conn.execute("BEGIN IMMEDIATE")
+                    row = conn.execute(
+                        """
+                        SELECT id FROM work_items
+                        WHERE queue_name = ? AND state = ?
+                        ORDER BY created_at ASC
+                        LIMIT 1
+                        """,
+                        (self._queue_name, State.PENDING.value),
+                    ).fetchone()
 
-            if row is None:
-                raise EmptyQueue(f"No work items available in queue: {self._queue_name}")
+                    if row is None:
+                        conn.rollback()
+                        raise EmptyQueue(f"No work items available in queue: {self._queue_name}")
 
-            item_id = row["id"]
-            now = self._now()
+                    item_id = row["id"]
+                    now = self._now()
+                    cursor = conn.execute(
+                        """
+                        UPDATE work_items
+                        SET state = ?, reserved_at = ?, updated_at = ?
+                        WHERE id = ? AND queue_name = ? AND state = ?
+                        """,
+                        (
+                            State.IN_PROGRESS.value,
+                            now,
+                            now,
+                            item_id,
+                            self._queue_name,
+                            State.PENDING.value,
+                        ),
+                    )
+                    if cursor.rowcount == 1:
+                        conn.commit()
+                        log.debug("Reserved work item %s from queue %s", item_id, self._queue_name)
+                        return item_id
+                    conn.rollback()
+                except Exception:
+                    if conn.in_transaction:
+                        conn.rollback()
+                    raise
 
-            conn.execute(
-                """
-                UPDATE work_items
-                SET state = ?, reserved_at = ?, updated_at = ?
-                WHERE id = ?
-                """,
-                (State.IN_PROGRESS.value, now, now, item_id),
-            )
-            conn.commit()
-
-            log.debug("Reserved work item %s from queue %s", item_id, self._queue_name)
-            return item_id
+            raise EmptyQueue(f"No work items available in queue: {self._queue_name}")
 
     def release_input(
         self,
