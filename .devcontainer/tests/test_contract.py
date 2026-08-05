@@ -149,6 +149,31 @@ class DevContainerContractTest(unittest.TestCase):
         init_path = REPOSITORY_ROOT / "work-items" / "src" / "actions" / "work_items" / "__init__.py"
         self.assertIn('__version__ = "0.3.0"', init_path.read_text())
 
+    def test_work_items_pypi_documentation_contract(self):
+        readme = (REPOSITORY_ROOT / "work-items" / "README.md").read_text()
+        changelog = (REPOSITORY_ROOT / "work-items" / "docs" / "CHANGELOG.md").read_text()
+
+        self.assertIn("## Backend Support", readme)
+        for backend in ("SQLite", "FileAdapter", "Redis", "MongoDB / DocumentDB", "Action Server"):
+            self.assertIn(backend, readme)
+        self.assertIn("| SQLite |", readme)
+        self.assertIn("| Redis | Experimental |", readme)
+        self.assertIn("| MongoDB / DocumentDB | Experimental |", readme)
+        for heading in (
+            "## Quick Start",
+            "## Safety and Determinism",
+            "## Migrating from robocorp-workitems",
+        ):
+            self.assertIn(heading, readme)
+        quick_start = readme[readme.index("## Quick Start") : readme.index("## Payloads")]
+        for term in ("seed_input", "reserve", "outputs.create", "item.done()"):
+            self.assertIn(term, quick_start)
+        self.assertIn("actions_work_items", readme)
+        self.assertIn("__version__", readme)
+        payload = readme[readme.index("## Payloads") : readme.index("## Files")]
+        self.assertNotIn("ExceptionType", payload)
+        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.3.0 - 2026-08-05"))
+
     def test_smoke_contract(self):
         smoke = DEVCONTAINER_ROOT / "bin" / "smoke"
         self.assertTrue(smoke.is_file(), f"missing {smoke}")
