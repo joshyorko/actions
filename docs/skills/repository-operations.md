@@ -41,3 +41,7 @@ Every dispatch includes the mandatory documentation receipt from root `AGENTS.md
 ## Verification Receipts
 
 Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
+
+## Pull Request Triage
+
+Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
