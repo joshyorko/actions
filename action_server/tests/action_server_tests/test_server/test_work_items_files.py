@@ -1,0 +1,53 @@
+"""API tests for work-item attachment boundaries."""
+
+from pathlib import Path
+
+import pytest
+from actions.work_items import SQLiteAdapter
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+from sema4ai.action_server import _api_work_items
+
+
+@pytest.fixture
+def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> TestClient:
+    adapter = SQLiteAdapter(
+        db_path=str(tmp_path / "workitems.db"), files_dir=str(tmp_path / "files")
+    )
+    monkeypatch.setattr(_api_work_items, "_adapter", adapter)
+    app = FastAPI()
+    app.include_router(_api_work_items.work_items_api_router)
+    return TestClient(app)
+
+
+def test_work_item_file_api_maps_attachment_errors_and_round_trips(
+    client: TestClient,
+) -> None:
+    """Expose stable attachment error mapping and round trips."""
+    item_id = client.post("/api/work-items", json={"payload": {}}).json()["id"]
+
+    unsafe = client.post(
+        f"/api/work-items/{item_id}/files",
+        files={"file": ("../outside.txt", b"blocked")},
+    )
+    assert unsafe.status_code == 400
+
+    missing = client.get(f"/api/work-items/{item_id}/files/missing.txt")
+    assert missing.status_code == 404
+    assert client.get("/api/work-items/missing/files/missing.txt").status_code == 404
+
+    upload = client.post(
+        f"/api/work-items/{item_id}/files", files={"file": ("report.txt", b"report")}
+    )
+    assert upload.status_code == 200
+    assert client.post(
+        f"/api/work-items/{item_id}/files", files={"file": ("report.txt", b"report")}
+    ).status_code == 409
+
+    download = client.get(f"/api/work-items/{item_id}/files/report.txt")
+    assert download.status_code == 200
+    assert download.content == b"report"
+    assert download.headers["content-disposition"] == 'attachment; filename="report.txt"'
+    delete = client.delete(f"/api/work-items/{item_id}/files/report.txt")
+    assert delete.status_code == 200

@@ -9,6 +9,7 @@ import logging
 from typing import Any, Dict, List, Optional
 
 import fastapi
+from actions.work_items._paths import validate_attachment_name
 from fastapi import File, UploadFile
 from fastapi.routing import APIRouter
 from pydantic import BaseModel
@@ -263,13 +264,22 @@ async def upload_file(
             status_code=404, detail=f"Work item not found: {item_id}"
         )
 
-    content = await file.read()
-    adapter.add_file(
-        item_id=item_id,
-        name=file.filename or "unnamed",
-        original_name=file.filename or "unnamed",
-        content=content,
-    )
+    name = file.filename or "unnamed"
+    try:
+        validate_attachment_name(name)
+        content = await file.read()
+        adapter.add_file(
+            item_id=item_id,
+            name=name,
+            original_name=name,
+            content=content,
+        )
+    except ValueError:
+        raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
+    except FileExistsError:
+        raise fastapi.HTTPException(
+            status_code=409, detail=f"File already exists: {name}"
+        )
 
     return {
         "status": "uploaded",
@@ -301,8 +311,13 @@ async def download_file(item_id: str, filename: str):
     adapter = _check_adapter()
 
     try:
-        content = adapter.get_file(item_id, filename)
+        validate_attachment_name(filename)
     except ValueError:
+        raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
+
+    try:
+        content = adapter.get_file(item_id, filename)
+    except (ValueError, FileNotFoundError):
         raise fastapi.HTTPException(
             status_code=404, detail=f"File not found: {filename} in work item {item_id}"
         )
@@ -322,13 +337,27 @@ async def delete_file(item_id: str, filename: str):
     adapter = _check_adapter()
 
     try:
+        validate_attachment_name(filename)
+    except ValueError:
+        raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
+
+    try:
         adapter.get_item(item_id)
     except ValueError:
         raise fastapi.HTTPException(
             status_code=404, detail=f"Work item not found: {item_id}"
         )
 
-    adapter.remove_file(item_id, filename)
+    try:
+        adapter.remove_file(item_id, filename)
+    except FileNotFoundError:
+        raise fastapi.HTTPException(
+            status_code=404, detail=f"File not found: {filename} in work item {item_id}"
+        )
+    except ValueError:
+        raise fastapi.HTTPException(
+            status_code=404, detail=f"File not found: {filename} in work item {item_id}"
+        )
     return {
         "status": "deleted",
         "item_id": item_id,

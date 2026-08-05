@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from .._exceptions import EmptyQueue
+from .._paths import resolve_attachment_path, resolve_item_directory
 from .._types import ExceptionType, JSONType, State
 from ._base import BaseAdapter
 
@@ -103,12 +104,16 @@ class FileAdapter(BaseAdapter):
 
     def _get_files_dir(self, path: Path, index: int) -> Path:
         """Get directory for work item files."""
-        files_dir = path / str(index + 1)  # 1-indexed directories
+        files_dir = resolve_item_directory(path, str(index + 1))
         files_dir.mkdir(parents=True, exist_ok=True)
         return files_dir
 
+    def _validate_item_id(self, item_id: str) -> None:
+        resolve_item_directory(self._input_path, item_id)
+
     def _find_item_index(self, items: List[Dict], item_id: str) -> int:
         """Find item index by ID."""
+        self._validate_item_id(item_id)
         for i, item in enumerate(items):
             if item.get("id") == item_id:
                 return i
@@ -168,7 +173,6 @@ class FileAdapter(BaseAdapter):
     ) -> str:
         """Create a new output work item."""
         item_id = str(uuid.uuid4())
-        index = len(self._output_items)
 
         item = {
             "id": item_id,
@@ -219,12 +223,17 @@ class FileAdapter(BaseAdapter):
 
     def list_files(self, item_id: str) -> List[str]:
         """List files attached to work item."""
+        self._validate_item_id(item_id)
         # Check inputs
         for i, item in enumerate(self._input_items):
             if item.get("id") == item_id:
                 files_dir = self._get_files_dir(self._input_path, i)
                 if files_dir.exists():
-                    return [f.name for f in files_dir.iterdir() if f.is_file()]
+                    return [
+                        f.name
+                        for f in files_dir.iterdir()
+                        if f.is_file() and resolve_attachment_path(files_dir, f.name)
+                    ]
                 return item.get("files", [])
 
         # Check outputs
@@ -232,17 +241,22 @@ class FileAdapter(BaseAdapter):
             if item.get("id") == item_id:
                 files_dir = self._get_files_dir(self._output_path, i)
                 if files_dir.exists():
-                    return [f.name for f in files_dir.iterdir() if f.is_file()]
+                    return [
+                        f.name
+                        for f in files_dir.iterdir()
+                        if f.is_file() and resolve_attachment_path(files_dir, f.name)
+                    ]
                 return item.get("files", [])
 
         raise ValueError(f"Work item not found: {item_id}")
 
     def get_file(self, item_id: str, name: str) -> bytes:
         """Get file content from work item."""
+        self._validate_item_id(item_id)
         # Check inputs
         for i, item in enumerate(self._input_items):
             if item.get("id") == item_id:
-                file_path = self._get_files_dir(self._input_path, i) / name
+                file_path = resolve_attachment_path(self._get_files_dir(self._input_path, i), name)
                 if file_path.exists():
                     return file_path.read_bytes()
                 raise ValueError(f"File not found: {name}")
@@ -250,7 +264,7 @@ class FileAdapter(BaseAdapter):
         # Check outputs
         for i, item in enumerate(self._output_items):
             if item.get("id") == item_id:
-                file_path = self._get_files_dir(self._output_path, i) / name
+                file_path = resolve_attachment_path(self._get_files_dir(self._output_path, i), name)
                 if file_path.exists():
                     return file_path.read_bytes()
                 raise ValueError(f"File not found: {name}")
@@ -265,10 +279,11 @@ class FileAdapter(BaseAdapter):
         content: bytes,
     ) -> None:
         """Add file to work item."""
+        self._validate_item_id(item_id)
         # Check inputs
         for i, item in enumerate(self._input_items):
             if item.get("id") == item_id:
-                file_path = self._get_files_dir(self._input_path, i) / name
+                file_path = resolve_attachment_path(self._get_files_dir(self._input_path, i), name)
                 file_path.write_bytes(content)
                 if "files" not in item:
                     item["files"] = []
@@ -280,7 +295,7 @@ class FileAdapter(BaseAdapter):
         # Check outputs
         for i, item in enumerate(self._output_items):
             if item.get("id") == item_id:
-                file_path = self._get_files_dir(self._output_path, i) / name
+                file_path = resolve_attachment_path(self._get_files_dir(self._output_path, i), name)
                 file_path.write_bytes(content)
                 if "files" not in item:
                     item["files"] = []
@@ -293,10 +308,11 @@ class FileAdapter(BaseAdapter):
 
     def remove_file(self, item_id: str, name: str) -> None:
         """Remove file from work item."""
+        self._validate_item_id(item_id)
         # Check inputs
         for i, item in enumerate(self._input_items):
             if item.get("id") == item_id:
-                file_path = self._get_files_dir(self._input_path, i) / name
+                file_path = resolve_attachment_path(self._get_files_dir(self._input_path, i), name)
                 if file_path.exists():
                     file_path.unlink()
                 if "files" in item and name in item["files"]:
@@ -307,7 +323,7 @@ class FileAdapter(BaseAdapter):
         # Check outputs
         for i, item in enumerate(self._output_items):
             if item.get("id") == item_id:
-                file_path = self._get_files_dir(self._output_path, i) / name
+                file_path = resolve_attachment_path(self._get_files_dir(self._output_path, i), name)
                 if file_path.exists():
                     file_path.unlink()
                 if "files" in item and name in item["files"]:
@@ -343,7 +359,7 @@ class FileAdapter(BaseAdapter):
         if files:
             files_dir = self._get_files_dir(self._input_path, index)
             for name, content in files.items():
-                (files_dir / name).write_bytes(content)
+                resolve_attachment_path(files_dir, name).write_bytes(content)
                 item["files"].append(name)
 
         self._save_items(self._input_path, self._input_items)
@@ -367,6 +383,7 @@ class FileAdapter(BaseAdapter):
 
     def get_item(self, item_id: str) -> Dict[str, Any]:
         """Get work item details."""
+        self._validate_item_id(item_id)
         for item in self._input_items:
             if item.get("id") == item_id:
                 return item
@@ -379,6 +396,7 @@ class FileAdapter(BaseAdapter):
 
     def delete_item(self, item_id: str) -> None:
         """Delete a work item."""
+        self._validate_item_id(item_id)
         # Check inputs
         for i, item in enumerate(self._input_items):
             if item.get("id") == item_id:
