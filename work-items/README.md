@@ -213,7 +213,7 @@ for item in workitems.inputs:
             raise BusinessException("Missing order_id", code="MISSING_ORDER_ID")
 ```
 
-## Backend Adapters
+## Backend Support
 
 The default adapter is SQLite. You can also select an adapter explicitly in code
 or through environment variables.

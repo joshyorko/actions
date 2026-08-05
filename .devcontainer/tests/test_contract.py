@@ -1,5 +1,6 @@
 import json
 import os
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -77,6 +78,10 @@ class DevContainerContractTest(unittest.TestCase):
             "ruff check src tests",
             "pytest tests",
             "poetry build",
+            "poetry version --short",
+            "twine check --strict",
+            "zipfile",
+            "email.parser",
             "actions.work_items",
             "actions.workitems",
             "actions_work_items",
@@ -84,9 +89,55 @@ class DevContainerContractTest(unittest.TestCase):
         ):
             self.assertIn(command, verification)
 
+        self.assertIn("(($# > 1))", verification)
+        self.assertIn("usage:", verification)
+        self.assertIn("mktemp -d", verification)
+        self.assertIn("caller-supplied artifact directory must be empty", verification)
+        self.assertIn('artifact_dir_owner="caller"', verification)
+        self.assertIn('artifact_dir_owner="temporary"', verification)
+        self.assertIn('[[ "$artifact_dir_owner" == "temporary" ]]', verification)
+
         self.assertTrue((REPOSITORY_ROOT / "work-items" / "poetry.lock").is_file())
         action_server_lock = (REPOSITORY_ROOT / "action_server" / "poetry.lock").read_text()
-        self.assertIn('name = "actions-work-items"\nversion = "0.2.4"', action_server_lock)
+        self.assertIn('name = "actions-work-items"\nversion = "0.3.0"', action_server_lock)
+
+    def test_work_items_pep_621_metadata_contract(self):
+        pyproject_path = REPOSITORY_ROOT / "work-items" / "pyproject.toml"
+        pyproject = tomllib.loads(pyproject_path.read_text())
+        project = pyproject["project"]
+
+        self.assertEqual(project["name"], "actions-work-items")
+        self.assertEqual(project["version"], "0.3.0")
+        self.assertEqual(project["requires-python"], ">=3.10,<4.0")
+        self.assertEqual(
+            project["urls"],
+            {
+                "Homepage": "https://github.com/joshyorko/actions",
+                "Repository": "https://github.com/joshyorko/actions",
+                "Documentation": "https://github.com/joshyorko/actions/tree/community/work-items",
+                "Issues": "https://github.com/joshyorko/actions/issues",
+            },
+        )
+        self.assertEqual(
+            project["optional-dependencies"],
+            {
+                "redis": ["redis>=4.5.0"],
+                "docdb": ["pymongo>=4.3.0"],
+                "documentdb": ["pymongo>=4.3.0"],
+                "all": ["redis>=4.5.0", "pymongo>=4.3.0"],
+            },
+        )
+        self.assertEqual(
+            pyproject["tool"]["poetry"]["packages"],
+            [
+                {"include": "actions", "from": "src"},
+                {"include": "actions_work_items", "from": "src"},
+            ],
+        )
+        self.assertIn("twine", pyproject["tool"]["poetry"]["group"]["dev"]["dependencies"])
+
+        init_path = REPOSITORY_ROOT / "work-items" / "src" / "actions" / "work_items" / "__init__.py"
+        self.assertIn('__version__ = "0.3.0"', init_path.read_text())
 
     def test_smoke_contract(self):
         smoke = DEVCONTAINER_ROOT / "bin" / "smoke"
