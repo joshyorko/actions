@@ -21,7 +21,7 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 
 ## Local Verification
 
-The canonical Work Items release gate runs in the Action Server Dev Container through Poetry. Run the complete non-root tool-version and release smoke from any directory in the mounted repository:
+The canonical Work Items release gate runs in the Action Server Dev Container through Poetry. The following is a host-side Docker command; run it from the repository root because its bind mount uses host `$PWD`. The in-container scripts are cwd-independent:
 
 ```bash
 docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:test .devcontainer/bin/smoke

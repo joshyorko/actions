@@ -105,9 +105,18 @@ class DevContainerContractTest(unittest.TestCase):
 
     def test_host_docker_command_requires_the_repository_root(self):
         guidance = (REPOSITORY_ROOT / "docs/skills/repository-operations.md").read_text()
+        work_items_guidance = (REPOSITORY_ROOT / "docs/skills/work-items.md").read_text()
         self.assertIn("Run host Docker commands only from the repository root", guidance)
         self.assertIn("repo_root=$(git rev-parse --show-toplevel)", guidance)
         self.assertIn('cd "$repo_root"', guidance)
+        self.assertNotIn(
+            "from any directory in the mounted repository", work_items_guidance
+        )
+        self.assertIn(
+            "host-side Docker command; run it from the repository root",
+            work_items_guidance,
+        )
+        self.assertIn("in-container scripts are cwd-independent", work_items_guidance)
 
 
 if __name__ == "__main__":
