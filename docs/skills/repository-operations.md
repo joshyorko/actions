@@ -36,22 +36,20 @@ When Poetry is unavailable, report that limitation. A temporary `uv` environment
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification. `.devcontainer/bin/smoke` is strict-shell, rejects root, checks the pinned Python 3.12, Node 22, uv 0.12.1, and Poetry 2.1.1 versions, then runs bootstrap and the Work Items release gate by repository-relative absolute path. uv 0.12.1 adds a platform suffix to its version output, so smoke compares its `uv 0.12.1` prefix fields exactly.
 
-The Action Server Dev Container uses uv only to install and cache Poetry; Poetry and committed `poetry.lock` files remain the dependency-resolution and release authorities. The image declares the uv, Poetry, and npm cache paths and creates them as `vscode` before the runtime user switch, so newly created named volumes are writable. Bootstrap uses `poetry sync --no-interaction`. The host Docker commands must run from the repository root because their bind mount uses host `$PWD`; that requirement is separate from the in-container scripts, which resolve their own repository path and are cwd-independent.
+The Action Server Dev Container uses uv only to install and cache Poetry; Poetry and committed `poetry.lock` files remain the dependency-resolution and release authorities. The image declares the uv, Poetry, and npm cache paths and creates them as `vscode` before the runtime user switch, so newly created named volumes are writable. Bootstrap uses `poetry sync --no-interaction`. Run host Docker commands only from the repository root because their bind mount uses host `$PWD`; that requirement is separate from the in-container scripts, which resolve their own repository path and are cwd-independent.
 
 ```bash
 docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:test .
 docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:test .devcontainer/bin/smoke
 ```
 
-From any directory inside the checkout, discover and enter the repository root before using the host `$PWD` bind mount:
+From a nested directory inside the checkout, first enter the required repository-root host cwd, then run the Docker commands:
 
 ```bash
 repo_root=$(git rev-parse --show-toplevel)
-(
-    cd "$repo_root"
-    docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:test .
-    docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:test .devcontainer/bin/smoke
-)
+cd "$repo_root"
+docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:test .
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:test .devcontainer/bin/smoke
 ```
 
 Also verify lifecycle bootstrap headlessly through the Dev Container CLI:
