@@ -34,21 +34,29 @@ Do not convert a commit message, design proposal, or skipped test into a current
 
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 
-A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification.
+A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification. `.devcontainer/bin/smoke` is strict-shell, rejects root, checks the pinned Python 3.12, Node 22, uv 0.12.1, and Poetry 2.1.1 versions, then runs bootstrap and the Work Items release gate by repository-relative absolute path. uv 0.12.1 adds a platform suffix to its version output, so smoke compares its `uv 0.12.1` prefix fields exactly.
 
-The Action Server Dev Container uses uv only to install and cache Poetry; Poetry and committed `poetry.lock` files remain the dependency-resolution and release authorities. The image declares the uv, Poetry, and npm cache paths and creates them as `vscode` before the runtime user switch, so newly created named volumes are writable. Bootstrap uses `poetry sync --no-interaction`. Build and use the Task 2 image headlessly from the repository root:
+The Action Server Dev Container uses uv only to install and cache Poetry; Poetry and committed `poetry.lock` files remain the dependency-resolution and release authorities. The image declares the uv, Poetry, and npm cache paths and creates them as `vscode` before the runtime user switch, so newly created named volumes are writable. Bootstrap uses `poetry sync --no-interaction`. Build and use the current image headlessly from the repository root:
 
 ```bash
-docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:task-2 .
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-2 .devcontainer/bin/bootstrap
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-2 .devcontainer/bin/verify-work-items
+docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:test .
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:test .devcontainer/bin/smoke
 ```
+
+Also verify lifecycle bootstrap headlessly through the Dev Container CLI:
+
+```bash
+npx --yes @devcontainers/cli up --workspace-folder . --remove-existing-container
+npx --yes @devcontainers/cli exec --workspace-folder . .devcontainer/bin/smoke
+```
+
+Dagger is intentionally absent from the editor image, and the image does not grant editor containers Docker access. A future Dagger workflow may invoke `.devcontainer/bin/verify-work-items`; that preserves Poetry and package ownership rather than moving the release authority into Dagger.
 
 If dependency cache state is corrupt, remove only the named Dev Container cache volumes, then rebuild the image and rerun bootstrap:
 
 ```bash
 docker volume rm actions-uv-cache actions-poetry-cache actions-npm-cache
-docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:task-2 .
+docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:test .
 ```
 
 Run the dependency-free static configuration gate with unittest discovery because `.devcontainer` is not a valid Python module name:

@@ -21,14 +21,17 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 
 ## Local Verification
 
-The canonical Work Items release gate runs in the Action Server Dev Container through Poetry:
+The canonical Work Items release gate runs in the Action Server Dev Container through Poetry. Run the complete non-root tool-version and release smoke from any directory in the mounted repository:
 
 ```bash
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-2 .devcontainer/bin/bootstrap
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:task-2 .devcontainer/bin/verify-work-items
+docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:test .devcontainer/bin/smoke
 ```
 
 `verify-work-items` checks the committed lockfile, Ruff, the Work Items test suite, wheel build, clean-wheel public import aliases, and `git diff --check`. uv bootstraps Poetry in the image but never replaces Poetry resolution or the committed `work-items/poetry.lock` authority.
+
+Action Server loads the installed Work Items distribution under a private module name. Poetry's editable install points at `work-items/src` with `actions_work_items.pth`, so that loader resolves the `.pth` source when distribution metadata has no copied `actions/work_items/__init__.py`; this keeps a project-root `actions.py` from shadowing the REST adapter path in Dev Containers.
+
+Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
 From the repository root when Poetry is unavailable for diagnostic-only host checks:
 

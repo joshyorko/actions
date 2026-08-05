@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if (($# != 0)); then
+    printf 'usage: %s\n' "${0##*/}" >&2
+    exit 2
+fi
+
+if [[ $(id -u) -eq 0 ]]; then
+    printf '%s must run as a non-root user\n' "${0##*/}" >&2
+    exit 1
+fi
+
+repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
+
+python_version=$(python --version)
+node_version=$(node --version)
+uv_version=$(uv --version | awk '{print $1 " " $2}')
+poetry_version=$(poetry --version)
+
+[[ $python_version == "Python 3.12."* ]]
+[[ $node_version == "v22."* ]]
+[[ $uv_version == 'uv 0.12.1' ]]
+[[ $poetry_version == 'Poetry (version 2.1.1)' ]]
+
+"$repo_root/.devcontainer/bin/bootstrap"
+"$repo_root/.devcontainer/bin/verify-work-items"

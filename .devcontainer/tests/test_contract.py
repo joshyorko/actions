@@ -88,6 +88,21 @@ class DevContainerContractTest(unittest.TestCase):
         action_server_lock = (REPOSITORY_ROOT / "action_server" / "poetry.lock").read_text()
         self.assertIn('name = "actions-work-items"\nversion = "0.2.4"', action_server_lock)
 
+    def test_smoke_contract(self):
+        smoke = DEVCONTAINER_ROOT / "bin" / "smoke"
+        self.assertTrue(smoke.is_file(), f"missing {smoke}")
+        self.assertTrue(os.access(smoke, os.X_OK), f"{smoke} is not executable")
+
+        smoke_text = smoke.read_text()
+        self.assertIn("set -Eeuo pipefail", smoke_text)
+        self.assertIn("id -u", smoke_text)
+        self.assertIn("Python 3.12.", smoke_text)
+        self.assertIn("v22.", smoke_text)
+        self.assertIn("uv 0.12.1", smoke_text)
+        self.assertIn("Poetry (version 2.1.1)", smoke_text)
+        self.assertIn('"$repo_root/.devcontainer/bin/bootstrap"', smoke_text)
+        self.assertIn('"$repo_root/.devcontainer/bin/verify-work-items"', smoke_text)
+
 
 if __name__ == "__main__":
     unittest.main()

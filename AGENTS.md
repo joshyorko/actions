@@ -12,6 +12,7 @@ Read [the canonical guide index](docs/skills/README.md) before changing code. Us
 - `invoke install` from the repository root installs all packages.
 - `poetry run pytest` from a package directory runs its complete suite; use `-k <scope>` only while iterating.
 - `poetry run action-server start --auto-reload` starts the local server; add `--log-level debug` for diagnostics.
+- `.devcontainer/bin/smoke` runs the non-root, pinned-tool, Poetry Work Items release gate from any repository subdirectory in the Dev Container.
 - `invoke docs` rebuilds repository documentation bundles.
 - `git diff --check` detects whitespace errors.
 

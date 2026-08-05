@@ -3,6 +3,7 @@
 import importlib.util
 import sys
 from importlib.metadata import PackageNotFoundError, distribution
+from pathlib import Path
 from threading import Lock
 from types import ModuleType
 from typing import Any
@@ -20,11 +21,21 @@ def load_work_items_module() -> ModuleType:
             return _cached
 
         try:
-            package_path = distribution("actions-work-items").locate_file(
+            work_items_distribution = distribution("actions-work-items")
+            package_path = work_items_distribution.locate_file(
                 "actions/work_items/__init__.py"
             )
         except PackageNotFoundError as error:
             raise ImportError("actions-work-items package not installed") from error
+
+        if not package_path.is_file():
+            editable_path = work_items_distribution.locate_file(
+                "actions_work_items.pth"
+            )
+            if editable_path.is_file():
+                package_path = Path(
+                    editable_path.read_text(encoding="utf-8").strip()
+                ) / "actions/work_items/__init__.py"
 
         spec = importlib.util.spec_from_file_location(
             _MODULE_NAME,
