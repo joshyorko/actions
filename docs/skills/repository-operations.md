@@ -36,6 +36,12 @@ When Poetry is unavailable, report that limitation. A temporary `uv` environment
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification.
 
+Run the dependency-free static configuration gate with unittest discovery because `.devcontainer` is not a valid Python module name:
+
+```bash
+python -m unittest discover -s .devcontainer/tests -p 'test_*.py' -v
+```
+
 ## Delegated Lanes
 
 Every dispatch includes the mandatory documentation receipt from root `AGENTS.md`. Mutating lanes update canonical guidance in their branch when write scopes permit. Read-only or isolated lanes propose an exact delta. The integration lane records rejected proposals and the reason; silent discard is forbidden.
