@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import traceback
 
 import pytest
 
@@ -50,6 +51,19 @@ class FakeSession:
 
     def delete(self, url, **kwargs):
         return self._request("DELETE", url, **kwargs)
+
+
+class StatusOnlyResponse:
+    """Response shape without a JSON parser."""
+
+    status_code = 200
+
+
+class NonCallableJsonResponse:
+    """Response shape whose JSON attribute is not a parser."""
+
+    status_code = 200
+    json = {"id": "input-1"}
 
 
 @pytest.fixture
@@ -177,7 +191,36 @@ def test_malformed_success_response_raises_redacted_application_error(yorko_env)
     with pytest.raises(ApplicationException, match="invalid JSON") as error:
         subject.reserve_input()
 
-    assert "secret-token" not in str(error.value)
+    rendered = "".join(traceback.format_exception(error.value))
+    assert error.value.__cause__ is None
+    assert "secret-token" not in rendered
+
+
+@pytest.mark.parametrize(
+    "response",
+    [object(), FakeResponse(status_code="200"), StatusOnlyResponse(), NonCallableJsonResponse()],
+    ids=["missing-status", "non-numeric-status", "missing-json", "non-callable-json"],
+)
+def test_malformed_response_boundaries_are_redacted_application_errors(yorko_env, response):
+    subject = adapter(yorko_env, response)
+
+    with pytest.raises(ApplicationException) as error:
+        subject.reserve_input()
+
+    rendered = "".join(traceback.format_exception(error.value))
+    assert error.value.__cause__ is None
+    assert "secret-token" not in rendered
+
+
+def test_request_errors_do_not_retain_sensitive_causes(yorko_env):
+    subject = adapter(yorko_env, TimeoutError("https://control.example.test/?token=secret-token"))
+
+    with pytest.raises(ApplicationException) as error:
+        subject.reserve_input()
+
+    rendered = "".join(traceback.format_exception(error.value))
+    assert error.value.__cause__ is None
+    assert "secret-token" not in rendered
 
 
 def test_malformed_file_metadata_raises_application_error(yorko_env):
@@ -203,3 +246,25 @@ def test_http_error_is_redacted(yorko_env):
         subject.reserve_input()
 
     assert "secret-token" not in str(error.value)
+
+
+def test_url_components_are_encoded_without_routing_or_query_injection(yorko_env):
+    subject = YorkoAdapter(
+        api_url="https://control.example.test/",
+        api_token="secret-token",
+        workspace_id="workspace/a b%?x=1",
+        worker_id="worker-1",
+        session=FakeSession([FakeResponse(payload={"id": "input-1"}), FakeResponse(content=b"x")]),
+    )
+
+    assert subject.reserve_input() == "input-1"
+    assert subject.get_file("item/a b%?x=1", "file/a b%?x=1") == b"x"
+
+    assert subject.session.calls[0][1] == (
+        "https://control.example.test/api/v1/workspaces/workspace%2Fa%20b%25%3Fx%3D1/work-items/next"
+    )
+    assert subject.session.calls[1][1] == (
+        "https://control.example.test/api/v1/workspaces/workspace%2Fa%20b%25%3Fx%3D1/"
+        "work-items/item%2Fa%20b%25%3Fx%3D1/files/file%2Fa%20b%25%3Fx%3D1"
+    )
+    assert subject.session.calls[0][2]["params"] == {"worker_id": "worker-1"}

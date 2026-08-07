@@ -57,17 +57,29 @@ class YorkoAdapter(BaseAdapter):
         kwargs.setdefault("timeout", self.timeout)
         try:
             response = getattr(self.session, method)(self._url(*parts), **kwargs)
-        except (TimeoutError, requests.RequestException) as error:
-            raise ApplicationException("Yorko request timed out") from error
-        if not 200 <= response.status_code < 300:
-            raise ApplicationException(f"Yorko HTTP {response.status_code}")
+        except (TimeoutError, requests.RequestException):
+            raise ApplicationException("Yorko request timed out") from None
+        try:
+            status_code = response.status_code
+        except Exception:
+            raise ApplicationException("Yorko returned a malformed response") from None
+        if type(status_code) is not int:
+            raise ApplicationException("Yorko returned a malformed response")
+        if not 200 <= status_code < 300:
+            raise ApplicationException(f"Yorko HTTP {status_code}")
         return response
 
     def _json_object(self, response: Any) -> Mapping[str, Any]:
         try:
-            payload = response.json()
-        except ValueError as error:
-            raise ApplicationException("Yorko returned invalid JSON") from error
+            json_method = response.json
+        except Exception:
+            raise ApplicationException("Yorko returned a malformed response") from None
+        if not callable(json_method):
+            raise ApplicationException("Yorko returned a malformed response")
+        try:
+            payload = json_method()
+        except Exception:
+            raise ApplicationException("Yorko returned invalid JSON") from None
         if not isinstance(payload, Mapping):
             raise ApplicationException("Yorko returned malformed JSON")
         return payload
