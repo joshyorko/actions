@@ -28,7 +28,7 @@ import logging
 import os
 import uuid
 from collections.abc import Iterator, MutableMapping
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -332,7 +332,7 @@ class DocumentDBAdapter(BaseAdapter):
     @staticmethod
     def _to_iso(value: Any) -> str:
         if value is None:
-            return datetime.utcnow().isoformat()
+            return datetime.now(timezone.utc).isoformat()
         if isinstance(value, datetime):
             return value.isoformat()
         return str(value)
@@ -416,7 +416,7 @@ class DocumentDBAdapter(BaseAdapter):
                 {
                     "$set": {
                         "state": ProcessingState.RESERVED.value,
-                        "timestamps.reserved_at": datetime.utcnow(),
+                        "timestamps.reserved_at": datetime.now(timezone.utc),
                     }
                 },
                 sort=[("timestamps.created_at", ASCENDING)],
@@ -446,6 +446,7 @@ class DocumentDBAdapter(BaseAdapter):
         exception_type: ExceptionType | None = None,
         code: str | None = None,
         message: str | None = None,
+        exception: dict[str, Any] | None = None,
     ) -> None:
         """Release work item with terminal state.
 
@@ -456,9 +457,15 @@ class DocumentDBAdapter(BaseAdapter):
             code: Error code for failed release
             message: Error message for failed release
         """
+        if exception is not None:
+            if exception_type is not None or code is not None or message is not None:
+                raise TypeError("release_input() received both exception and split exception fields")
+            exception_type = exception
+
+        legacy_exception = None
         if isinstance(exception_type, dict):
             legacy_exception = exception_type
-            exception_type = None
+            exception_type = legacy_exception.get("type")
             if message is None:
                 message = legacy_exception.get("message")
             if code is None:
@@ -476,12 +483,13 @@ class DocumentDBAdapter(BaseAdapter):
             update: dict[str, dict[str, Any]] = {
                 "$set": {
                     "state": state.value,
-                    "timestamps.released_at": datetime.utcnow(),
+                    "timestamps.released_at": datetime.now(timezone.utc),
                 }
             }
 
             if state == State.FAILED:
-                exception_payload = {
+                exception_payload = dict(legacy_exception or {})
+                exception_payload.update({
                     "type": str(
                         exception_type.value
                         if hasattr(exception_type, "value")
@@ -490,7 +498,7 @@ class DocumentDBAdapter(BaseAdapter):
                     or "UnknownException",
                     "code": str(code or ""),
                     "message": str(message or ""),
-                }
+                })
                 update["$set"]["exception"] = exception_payload
             else:
                 update.setdefault("$unset", {})
@@ -542,7 +550,7 @@ class DocumentDBAdapter(BaseAdapter):
                 "state": ProcessingState.PENDING.value,
                 "payload": payload_data,
                 "files": {},
-                "timestamps": {"created_at": datetime.utcnow()},
+                "timestamps": {"created_at": datetime.now(timezone.utc)},
             }
             coll.insert_one(doc)
 
@@ -573,7 +581,7 @@ class DocumentDBAdapter(BaseAdapter):
                 "state": ProcessingState.PENDING.value,
                 "payload": payload_data,
                 "files": {},
-                "timestamps": {"created_at": datetime.utcnow()},
+                "timestamps": {"created_at": datetime.now(timezone.utc)},
             }
             coll.insert_one(doc)
 
@@ -987,7 +995,7 @@ class DocumentDBAdapter(BaseAdapter):
         Returns:
             list[str]: List of recovered work item IDs
         """
-        cutoff_time = datetime.utcnow() - timedelta(minutes=self.orphan_timeout_minutes)
+        cutoff_time = datetime.now(timezone.utc) - timedelta(minutes=self.orphan_timeout_minutes)
 
         LOGGER.info(
             "Recovering orphaned work items (timeout: %d min)",

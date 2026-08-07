@@ -1,6 +1,7 @@
 """Completeness validation for contract ports and the compatibility ledger."""
 
 import ast
+import importlib.util
 import json
 import subprocess
 import sys
@@ -12,6 +13,12 @@ LEDGER = json.loads((ROOT / "contracts" / "compatibility-ledger.json").read_text
 MANIFEST = json.loads((ROOT / "contracts" / "ported-tests.json").read_text())
 SURFACES = json.loads((ROOT / "contracts" / "public-surface-fixtures.json").read_text())
 FAILURES_PATH = ROOT / "contracts" / "expected-red-failures.json"
+_PROVENANCE_SPEC = importlib.util.spec_from_file_location(
+    "contract_port_provenance", ROOT / "scripts" / "check_contract_port_provenance.py"
+)
+assert _PROVENANCE_SPEC and _PROVENANCE_SPEC.loader
+PROVENANCE = importlib.util.module_from_spec(_PROVENANCE_SPEC)
+_PROVENANCE_SPEC.loader.exec_module(PROVENANCE)
 
 PORTS = {
     "robocorp-1.5.0": {
@@ -116,7 +123,7 @@ def test_every_expected_red_parameter_has_exact_owned_failure():
 
     assert failures["schema_version"] == 1
     assert {entry["case_id"] for entry in failures["failures"]} == expected_red
-    assert sum(len(entry["parameter_ids"]) for entry in failures["failures"]) == 11
+    assert sum(len(entry["parameter_ids"]) for entry in failures["failures"]) == 10
     for entry in failures["failures"]:
         assert entry["exception"].count(".") >= 1
         assert entry["parameter_ids"]
@@ -128,10 +135,10 @@ def test_inventory_counts_logical_nodes_separately_from_parametrized_cases():
     assert MANIFEST["counts"] == {
         "logical_nodes": 123,
         "parametrized_cases": 153,
-        "implemented_logical_nodes": 84,
-        "implemented_parametrized_cases": 114,
-        "expected_red_logical_nodes": 11,
-        "expected_red_parametrized_cases": 11,
+        "implemented_logical_nodes": 85,
+        "implemented_parametrized_cases": 115,
+        "expected_red_logical_nodes": 10,
+        "expected_red_parametrized_cases": 10,
         "external_logical_nodes": 28,
         "external_parametrized_cases": 28,
     }
@@ -169,6 +176,40 @@ def test_full_contract_port_provenance_is_current():
         [sys.executable, ROOT / "scripts" / "check_contract_port_provenance.py"],
         check=True,
     )
+
+
+def test_provenance_allows_only_the_adapter_neutral_failed_release_assertion():
+    source = ast.parse(
+        """\
+def test_failed_work_item_release(adapter):
+    exception = {"message": "Invalid data"}
+    reserved_id = adapter.reserve_input()
+    with adapter._pool.acquire() as conn:
+        cursor = conn.execute("SELECT state, exception_message FROM work_items WHERE id = ?", (reserved_id,))
+        row = cursor.fetchone()
+        assert row[0] == State.FAILED.value
+        assert row[1] == exception["message"]
+"""
+    ).body[0]
+    adapted = ast.parse(
+        """\
+def test_failed_work_item_release(adapter):
+    exception = {"message": "Invalid data"}
+    reserved_id = adapter.reserve_input()
+    item = adapter.get_item(reserved_id)
+    assert item["state"] == State.FAILED.value
+    assert item["error_message"] == exception["message"]
+"""
+    ).body[0]
+    unrelated = ast.parse(
+        """\
+def test_other_release(adapter):
+    item = adapter.get_item("different")
+"""
+    ).body[0]
+
+    assert PROVENANCE._normalized_node(source) == PROVENANCE._normalized_node(adapted)
+    assert PROVENANCE._normalized_node(source) != PROVENANCE._normalized_node(unrelated)
 
 
 def test_authoritative_provenance_requires_both_reference_roots(tmp_path):

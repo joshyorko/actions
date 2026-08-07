@@ -7,7 +7,7 @@ import traceback
 
 import pytest
 
-from actions.work_items import ApplicationException, EmptyQueue, ExceptionType, State
+from actions.work_items import ApplicationException, EmptyQueue, ExceptionType, Input, State
 from actions.work_items._adapters._yorko import YorkoAdapter
 
 
@@ -142,6 +142,18 @@ def test_release_creates_expected_completion_and_failure_payloads(yorko_env):
             },
         ),
     ]
+
+
+def test_input_fail_passes_legacy_string_exception_type_to_yorko(yorko_env):
+    subject = adapter(yorko_env, FakeResponse())
+
+    Input(subject, "input-1").fail("application", "E_TIMEOUT", "upstream timed out")
+
+    assert subject.session.calls[0][2]["json"]["exception_data"] == {
+        "type": "APPLICATION",
+        "code": "E_TIMEOUT",
+        "message": "upstream timed out",
+    }
 
 
 def test_create_output_and_payload_operations_use_expected_payloads(yorko_env):

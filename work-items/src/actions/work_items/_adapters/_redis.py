@@ -28,7 +28,7 @@ import json
 import logging
 import os
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -302,7 +302,7 @@ class RedisAdapter(BaseAdapter):
             )
         queue_state = self._public_state(self._decode(raw_state))
         exception_data = self._exception_for_item(item_id, queue_name)
-        created_at = timestamps.get("created_at") or datetime.utcnow().isoformat()
+        created_at = timestamps.get("created_at") or datetime.now(timezone.utc).isoformat()
         updated_at = (
             timestamps.get("released_at")
             or timestamps.get("reserved_at")
@@ -363,7 +363,7 @@ class RedisAdapter(BaseAdapter):
             item_id_str = item_id.decode("utf-8") if isinstance(item_id, bytes) else item_id
 
             # Update timestamps
-            now = datetime.utcnow().isoformat()
+            now = datetime.now(timezone.utc).isoformat()
             self._client.hset(self._key("timestamps", item_id=item_id_str), "reserved_at", now)
 
             # Update state in payload metadata
@@ -392,6 +392,7 @@ class RedisAdapter(BaseAdapter):
         exception_type: ExceptionType | None = None,
         code: str | None = None,
         message: str | None = None,
+        exception: dict[str, Any] | None = None,
     ) -> None:
         """Release work item with terminal state.
 
@@ -409,9 +410,14 @@ class RedisAdapter(BaseAdapter):
             ValueError: Invalid state or missing exception for FAILED
             DatabaseTemporarilyUnavailable: Redis connection error (retried)
         """
+        if exception is not None:
+            if exception_type is not None or code is not None or message is not None:
+                raise TypeError("release_input() received both exception and split exception fields")
+            exception_type = exception
+
         if isinstance(exception_type, dict):
             legacy_exception = exception_type
-            exception_type = None
+            exception_type = legacy_exception.get("type")
             if message is None:
                 message = legacy_exception.get("message")
             if code is None:
@@ -461,7 +467,7 @@ class RedisAdapter(BaseAdapter):
                     self._key("exception", queue=queue_name, item_id=item_id), 86400
                 )
 
-            now = datetime.utcnow().isoformat()
+            now = datetime.now(timezone.utc).isoformat()
             transaction.hset(
                 self._key("timestamps", queue=queue_name, item_id=item_id),
                 "released_at",
@@ -552,7 +558,7 @@ class RedisAdapter(BaseAdapter):
                 )
 
             # Store timestamps
-            now = datetime.utcnow().isoformat()
+            now = datetime.now(timezone.utc).isoformat()
             self._client.hset(
                 self._key("timestamps", queue=output_queue, item_id=item_id),
                 mapping={"created_at": now},
@@ -610,7 +616,7 @@ class RedisAdapter(BaseAdapter):
             )
             self._client.expire(payload_key, TTL_WEEK_SECONDS)
 
-            now = datetime.utcnow().isoformat()
+            now = datetime.now(timezone.utc).isoformat()
             self._client.hset(timestamps_key, mapping={"created_at": now})
             self._client.expire(timestamps_key, TTL_WEEK_SECONDS)
 
@@ -1033,7 +1039,7 @@ class RedisAdapter(BaseAdapter):
         Returns:
             list[str]: List of recovered work item IDs
         """
-        cutoff_time = datetime.utcnow() - timedelta(minutes=self.orphan_timeout_minutes)
+        cutoff_time = datetime.now(timezone.utc) - timedelta(minutes=self.orphan_timeout_minutes)
 
         LOGGER.info(
             "Recovering orphaned work items (timeout: %d min)",
@@ -1063,6 +1069,8 @@ class RedisAdapter(BaseAdapter):
                         else reserved_at_str
                     )
                     reserved_at = datetime.fromisoformat(reserved_at_decoded)
+                    if reserved_at.tzinfo is None:
+                        reserved_at = reserved_at.replace(tzinfo=timezone.utc)
 
                     if reserved_at < cutoff_time:
                         # Move back to pending

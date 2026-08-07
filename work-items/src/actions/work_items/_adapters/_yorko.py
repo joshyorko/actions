@@ -112,10 +112,17 @@ class YorkoAdapter(BaseAdapter):
         self,
         item_id: str,
         state: State,
-        exception_type: ExceptionType | None = None,
+        exception_type: ExceptionType | str | None = None,
         code: str | None = None,
         message: str | None = None,
+        exception: dict[str, Any] | None = None,
     ) -> None:
+        if exception is not None:
+            if exception_type is not None or code is not None or message is not None:
+                raise TypeError("release_input() received both exception and split exception fields")
+            exception_type = exception.get("type")
+            code = exception.get("code")
+            message = exception.get("message")
         base = ("api", "v1", "workspaces", self.workspace_id, "work-items", item_id)
         if state in (State.DONE, State.COMPLETED):
             self._request(
@@ -125,7 +132,9 @@ class YorkoAdapter(BaseAdapter):
         exception_data = {
             key: value
             for key, value in {
-                "type": exception_type.value if exception_type else None,
+                "type": exception_type.value
+                if isinstance(exception_type, ExceptionType)
+                else exception_type,
                 "code": code,
                 "message": message,
             }.items()
