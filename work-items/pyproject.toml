@@ -57,6 +57,7 @@ markers = [
     "redis: contract requiring the Redis backend",
     "integration: backend integration contract",
     "docdb: contract requiring MongoDB or DocumentDB",
+    "persistent_backend_service: requires repository-owned Redis and MongoDB services",
 ]
 
 [tool.ruff]

@@ -1,8 +1,14 @@
 """Compatibility tests for historical persistent-backend records."""
 
+import pytest
+
 from actions.work_items import State
 from actions.work_items._adapters._docdb import DocumentDBAdapter
-from actions.work_items._adapters._redis import RedisAdapter
+from actions.work_items._adapters._redis import (
+    DatabaseTemporarilyUnavailable,
+    RedisAdapter,
+    RedisConnectionError,
+)
 
 
 class _RedisReadFake:
@@ -46,6 +52,54 @@ class _RedisWriteFake:
     def hdel(self, key, *args):
         self.keys.append(key)
 
+    def pipeline(self, transaction=True):
+        assert transaction is True
+        return self
+
+    def execute(self):
+        return []
+
+
+class _FailingRedisPipeline:
+    def __init__(self, client):
+        self.client = client
+        self.commands = []
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        return None
+
+    def __getattr__(self, name):
+        def queue(*args, **kwargs):
+            self.commands.append((name, args, kwargs))
+            return self
+
+        return queue
+
+    def execute(self):
+        raise RedisConnectionError("injected terminal metadata write failure")
+
+
+class _RedisReleaseFailureFake(_RedisWriteFake):
+    def __init__(self):
+        super().__init__()
+        self.values = {
+            "jobs:state:item-1": "FAILED",
+            "jobs:timestamps:item-1": "historical-timestamp",
+            "jobs:exception:item-1": "historical-exception",
+        }
+
+    def pipeline(self, transaction=True):
+        assert transaction is True
+        return _FailingRedisPipeline(self)
+
+    def delete(self, key, *args):
+        super().delete(key, *args)
+        for candidate in (key, *args):
+            self.values.pop(candidate, None)
+
 
 def test_redis_decodes_historical_state_exception_and_scalar_payload():
     adapter = RedisAdapter.__new__(RedisAdapter)
@@ -86,6 +140,24 @@ def test_redis_release_routes_all_metadata_to_output_queue():
     assert "results:timestamps:item-1" in adapter._client.keys
     assert "results:state:item-1" in adapter._client.keys
     assert "jobs:exception:item-1" not in adapter._client.written_keys
+
+
+def test_redis_release_preserves_legacy_metadata_when_current_write_fails():
+    """A failed terminal transaction cannot erase the only lifecycle metadata."""
+    adapter = RedisAdapter.__new__(RedisAdapter)
+    adapter.queue_name = "jobs"
+    adapter.output_queue_name = "results"
+    adapter._queue_cache = {"item-1": "results"}
+    adapter._client = _RedisReleaseFailureFake()
+
+    with pytest.raises(DatabaseTemporarilyUnavailable):
+        adapter.release_input("item-1", State.DONE)
+
+    assert adapter._client.values == {
+        "jobs:state:item-1": "FAILED",
+        "jobs:timestamps:item-1": "historical-timestamp",
+        "jobs:exception:item-1": "historical-exception",
+    }
 
 
 def test_redis_reads_historical_input_queue_metadata_for_output_item():

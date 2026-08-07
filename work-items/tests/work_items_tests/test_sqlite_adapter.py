@@ -516,6 +516,44 @@ def test_rejects_unknown_historical_file_schema_without_data_loss(tmp_path):
         assert conn.execute("SELECT id FROM work_items").fetchone()[0] == "item-1"
 
 
+def test_rejects_recognized_file_schema_with_unknown_extension_without_data_loss(tmp_path):
+    """A known attachment layout plus an unknown column is not silently truncated."""
+    db_path = tmp_path / "extended.db"
+    with sqlite3.connect(db_path) as conn:
+        conn.executescript(
+            """
+            CREATE TABLE work_items (
+                id TEXT PRIMARY KEY, queue_name TEXT NOT NULL, payload TEXT,
+                state TEXT, created_at TEXT
+            );
+            CREATE TABLE work_item_files (
+                work_item_id TEXT NOT NULL, filename TEXT NOT NULL,
+                filepath TEXT NOT NULL, created_at TEXT, retention_policy TEXT NOT NULL
+            );
+            INSERT INTO work_items VALUES ('item-1', 'test_queue', '{}', 'PENDING', NULL);
+            INSERT INTO work_item_files VALUES
+                ('item-1', 'proof.txt', '/tmp/proof.txt', NULL, 'must-survive');
+            """
+        )
+
+    with pytest.raises(ValueError, match="Unsupported work_item_files schema"):
+        SQLiteAdapter(str(db_path), "test_queue", files_dir=str(tmp_path / "files"))
+
+    with sqlite3.connect(db_path) as conn:
+        columns = [row[1] for row in conn.execute("PRAGMA table_info(work_item_files)")]
+        row = conn.execute(
+            "SELECT filename, retention_policy FROM work_item_files"
+        ).fetchone()
+        assert columns == [
+            "work_item_id",
+            "filename",
+            "filepath",
+            "created_at",
+            "retention_policy",
+        ]
+        assert row == ("proof.txt", "must-survive")
+
+
 def test_mid_migration_failure_rolls_back_schema_and_rows(tmp_path, monkeypatch):
     """An injected failure after table rename leaves the historical database untouched."""
     db_path = tmp_path / "interrupted.db"

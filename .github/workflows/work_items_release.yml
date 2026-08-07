@@ -6,6 +6,7 @@ on:
       - "work-items/**"
       - "action_server/poetry.lock"
       - ".devcontainer/bin/verify-work-items"
+      - ".devcontainer/bin/bootstrap"
       - ".devcontainer/tests/**"
       - ".github/workflows/work_items_release.yml"
       - "docs/skills/work-items.md"
@@ -18,6 +19,7 @@ on:
       - "work-items/**"
       - "action_server/poetry.lock"
       - ".devcontainer/bin/verify-work-items"
+      - ".devcontainer/bin/bootstrap"
       - ".devcontainer/tests/**"
       - ".github/workflows/work_items_release.yml"
       - "docs/skills/work-items.md"
@@ -59,7 +61,7 @@ jobs:
         run: pipx install poetry==2.1.1
 
       - name: Synchronize Work Items dependencies
-        run: poetry -C work-items sync --no-interaction
+        run: poetry -C work-items sync --no-interaction --all-extras
 
       - name: Verify contracts against pinned source commits
         run: |

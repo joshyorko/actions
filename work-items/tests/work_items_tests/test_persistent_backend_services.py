@@ -7,15 +7,13 @@ import pytest
 
 from actions.work_items import EmptyQueue, State
 
-pytestmark = pytest.mark.skipif(
-    os.getenv("RUN_PERSISTENT_BACKEND_SERVICES") != "1",
-    reason="set RUN_PERSISTENT_BACKEND_SERVICES=1 with Compose services running",
-)
+pytestmark = pytest.mark.persistent_backend_service
 
 
 @pytest.fixture
 def redis_adapter(tmp_path, monkeypatch):
-    redis = pytest.importorskip("redis")
+    import redis
+
     from actions.work_items import RedisAdapter
 
     url = os.getenv("TEST_REDIS_URL", "redis://127.0.0.1:16379/15")
@@ -34,7 +32,8 @@ def redis_adapter(tmp_path, monkeypatch):
 
 @pytest.fixture
 def mongo_adapter(monkeypatch):
-    pymongo = pytest.importorskip("pymongo")
+    import pymongo
+
     from actions.work_items import DocumentDBAdapter
 
     uri = os.getenv("TEST_MONGODB_URI", "mongodb://127.0.0.1:27027")
@@ -109,11 +108,13 @@ def test_redis_service_atomic_fifo_recovery_attachments_routing_cleanup(redis_ad
     _exercise_attachments_output_and_cleanup(redis_adapter)
     assert list(redis_adapter._client.scan_iter(match="service_*")) == []
     assert list(redis_adapter._client.scan_iter(match="origin:*")) == []
+    assert not any(redis_adapter.files_dir.rglob("*"))
 
 
 def test_mongodb_service_atomic_fifo_recovery_attachments_routing_cleanup(mongo_adapter):
     _exercise_atomic_fifo_recovery(mongo_adapter)
     _exercise_attachments_output_and_cleanup(mongo_adapter)
     assert mongo_adapter._db["fs.files"].count_documents({}) == 0
+    assert mongo_adapter._db["fs.chunks"].count_documents({}) == 0
     assert mongo_adapter._db["service_jobs_work_items"].count_documents({}) == 0
     assert mongo_adapter._db["service_results_work_items"].count_documents({}) == 0

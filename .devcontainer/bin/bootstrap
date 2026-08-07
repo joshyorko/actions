@@ -25,5 +25,5 @@ python --version
 uv --version
 poetry --version
 
-run_in_package work-items poetry sync --no-interaction
+run_in_package work-items poetry sync --no-interaction --all-extras
 run_in_package action_server poetry sync --no-interaction

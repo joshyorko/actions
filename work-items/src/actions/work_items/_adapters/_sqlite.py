@@ -178,9 +178,9 @@ class SQLiteAdapter(BaseAdapter):
             "file_path",
             "created_at",
         }
-        if file_table_exists and not (
-            legacy_file_schema.issubset(file_columns)
-            or current_file_schema.issubset(file_columns)
+        if file_table_exists and file_columns not in (
+            legacy_file_schema,
+            current_file_schema,
         ):
             raise ValueError(
                 "Unsupported work_item_files schema; refusing migration to avoid metadata loss"
