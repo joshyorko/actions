@@ -10,13 +10,8 @@ repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
 artifact_dir=""
 artifact_dir_owner="caller"
 venv_dir=""
-compose_file="$repo_root/work-items/tests/compose.persistent-backends.yaml"
-services_started="false"
 
 cleanup() {
-    if [[ "$services_started" == "true" ]]; then
-        docker compose -f "$compose_file" down --volumes --remove-orphans
-    fi
     if [[ -n "$venv_dir" ]]; then
         rm -rf -- "$venv_dir"
     fi
@@ -27,6 +22,11 @@ cleanup() {
     fi
 }
 trap cleanup EXIT
+
+if [[ -z ${TEST_REDIS_URL:-} || -z ${TEST_MONGODB_URI:-} ]]; then
+    printf 'TEST_REDIS_URL and TEST_MONGODB_URI are required and must identify healthy services\n' >&2
+    exit 2
+fi
 
 if (($# == 1)); then
     artifact_dir=$1
@@ -57,11 +57,7 @@ run_in_package() {
 expected_version=$(cd -- "$repo_root/work-items" && poetry version --short)
 run_in_package work-items poetry check --lock
 run_in_package work-items poetry run ruff check src tests
-services_started="true"
-docker compose -f "$compose_file" up -d --wait
 run_in_package work-items poetry run pytest tests -q
-docker compose -f "$compose_file" down --volumes --remove-orphans
-services_started="false"
 run_in_package work-items poetry build --output "$artifact_dir"
 
 wheel_path=$(find "$artifact_dir" -maxdepth 1 -type f -name '*.whl' -print -quit)

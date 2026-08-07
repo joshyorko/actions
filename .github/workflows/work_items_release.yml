@@ -70,7 +70,18 @@ jobs:
             --custom-root "$GITHUB_WORKSPACE/.contract-references/custom"
 
       - name: Verify release artifacts
-        run: .devcontainer/bin/verify-work-items "$GITHUB_WORKSPACE/work-items/dist"
+        env:
+          TEST_REDIS_URL: redis://127.0.0.1:16379/15
+          TEST_MONGODB_URI: mongodb://127.0.0.1:27027
+        run: |
+          set -Eeuo pipefail
+          compose_file=work-items/tests/compose.persistent-backends.yaml
+          cleanup() {
+            docker compose -f "$compose_file" down --volumes --remove-orphans
+          }
+          trap cleanup EXIT
+          docker compose -f "$compose_file" up -d --wait
+          .devcontainer/bin/verify-work-items "$GITHUB_WORKSPACE/work-items/dist"
 
       - name: Upload verified Work Items artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

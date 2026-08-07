@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if (($# != 0)); then
+    printf 'usage: %s\n' "${0##*/}" >&2
+    exit 2
+fi
+
+repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)
+common_git_dir=$(git -C "$repo_root" rev-parse --path-format=absolute --git-common-dir)
+compose_file="$repo_root/work-items/tests/compose.persistent-backends.yaml"
+devcontainer_image=${ACTIONS_DEVCONTAINER_IMAGE:-actions-devcontainer:test}
+services_started=false
+
+cleanup() {
+    if [[ $services_started == true ]]; then
+        docker compose -f "$compose_file" down --volumes --remove-orphans
+    fi
+}
+trap cleanup EXIT
+
+services_started=true
+docker compose -f "$compose_file" up -d --wait
+docker run --rm --user vscode \
+    --network actions-work-items-persistent-backends_default \
+    -e TEST_REDIS_URL=redis://redis:6379/15 \
+    -e TEST_MONGODB_URI=mongodb://mongodb:27017 \
+    -v "$repo_root:/workspaces/actions" \
+    -v "$common_git_dir:$common_git_dir:ro" \
+    -w /workspaces/actions \
+    "$devcontainer_image" \
+    .devcontainer/bin/smoke

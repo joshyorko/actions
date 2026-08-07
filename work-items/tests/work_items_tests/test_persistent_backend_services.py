@@ -70,6 +70,9 @@ def _exercise_atomic_fifo_recovery(adapter):
     with pytest.raises(EmptyQueue):
         adapter.reserve_input()
 
+    # Put the cutoff strictly after both reservations. MongoDB stores datetimes at
+    # millisecond precision, so a zero-minute cutoff can equal the newest timestamp.
+    adapter.orphan_timeout_minutes = -1
     adapter.recover_orphaned_work_items()
     assert adapter.get_item(first)["state"] == State.PENDING.value
     assert adapter.get_item(second)["state"] == State.PENDING.value
