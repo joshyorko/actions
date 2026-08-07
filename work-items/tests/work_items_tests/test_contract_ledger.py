@@ -2,6 +2,8 @@
 
 import ast
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -97,7 +99,7 @@ def test_every_port_has_exact_task_owner_status_and_classification():
             "task-3" if case["source_test"].startswith("test_adapters.py") else "task-2"
         )
         assert case["implementation_task"] == expected_task
-        assert case["status"] == "expected_red"
+        assert case["status"] in {"expected_red", "implemented"}
         assert case["classification"] == "required_parity"
         assert case["classification"] in allowed
 
@@ -128,3 +130,9 @@ def test_source_pins_match_the_ledger():
         assert metadata["commit"] == LEDGER["baselines"][source]["commit"]
         assert metadata["license"] == "Apache-2.0"
 
+
+def test_full_contract_port_provenance_is_current():
+    subprocess.run(
+        [sys.executable, ROOT / "scripts" / "check_contract_port_provenance.py"],
+        check=True,
+    )

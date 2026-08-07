@@ -93,14 +93,21 @@ hardening, or unsupported external service.
 `ported-tests.json` maps each selected Apache-2.0 upstream test node to an
 implementation task and status. The adapted ports under
 `work-items/tests/work_items_tests/contract_ports/` execute the preserved test
-bodies against `actions-work-items`; pending nodes use `xfail(strict=True)`, so
-their failures come from an exercised production contract and an unexpected
-pass fails the contract gate. The ledger test mechanically compares the adapted
-nodes, preserved source snapshots, manifest ownership/status, explicit
-exclusions, difference IDs, and frozen public-surface fixtures. Never replace a
-pending contract with an unconditional skip. Control Room HTTP, Yorko, and
-Fizzy orchestration remain explicit exclusions required by the consolidation
-boundary.
+bodies against `actions-work-items`. Compatible nodes run normally. Each
+pending node receives its own `xfail(strict=True, raises=...)`, implementation
+owner, and stable contract ID; a different exception is an ordinary failure and
+an unexpected pass fails the contract gate. Never use a file-wide expected-red
+marker or a shared sentinel assertion.
+
+`python work-items/scripts/check_contract_port_provenance.py` is the
+cwd-independent CI check for the checked-in provenance artifact. It hashes the
+complete selected source and adapted functions (including decorators,
+parametrization, fixture declarations, bodies, and assertions), whole source
+and port files, manifest source selection/exclusions, the ledger, and frozen
+public surfaces. After reviewing an intentional baseline or port change,
+regenerate with `--write` using the package's supported Python environment.
+Control Room HTTP, Yorko, and Fizzy orchestration remain explicit exclusions
+required by the consolidation boundary.
 
 For HTTP attachments, map invalid names to 400, missing item/file to 404, and duplicate upload to 409. Construct `Content-Disposition` only from a validated filename.
 

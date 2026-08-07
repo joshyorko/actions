@@ -6,6 +6,20 @@
       "commit": "631f5601617e9935620a72c788a98e1012331323",
       "path": "workitems/tests/workitems_tests",
       "license": "Apache-2.0",
+      "ports": {
+        "test_adapters.py": {
+          "source": "tests/contract_sources/robocorp_file_source.py",
+          "adapted": "tests/work_items_tests/contract_ports/test_robocorp_file.py"
+        },
+        "test_email.py": {
+          "source": "tests/contract_sources/robocorp_email_source.py",
+          "adapted": "tests/work_items_tests/contract_ports/test_robocorp_email.py"
+        },
+        "test_workitems.py": {
+          "source": "tests/contract_sources/robocorp_lifecycle_source.py",
+          "adapted": "tests/work_items_tests/contract_ports/test_robocorp_lifecycle.py"
+        }
+      },
       "excluded": [
         "TestRobocorpAdapter (Control Room HTTP)"
       ]
@@ -14,6 +28,12 @@
       "commit": "c56c70102423a18ed54037221116f81ccccd4f4e",
       "path": "workitems_tests",
       "license": "Apache-2.0",
+      "ports": {
+        "test_adapters.py": {
+          "source": "tests/contract_sources/custom_backends_source.py",
+          "adapted": "tests/work_items_tests/contract_ports/test_custom_backends.py"
+        }
+      },
       "excluded": [
         "TestRobocorpAdapter (Control Room HTTP)",
         "Yorko Control Room",
@@ -109,7 +129,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-3",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_invalid_reporter",
@@ -229,7 +249,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_reserve",
@@ -237,7 +257,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_iter",
@@ -261,7 +281,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_outputs_create_no_save",
@@ -285,7 +305,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_outputs_magic_methods",
@@ -293,7 +313,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_pass",
@@ -437,7 +457,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_context_raise",
@@ -501,7 +521,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_remove_files_input",
@@ -589,7 +609,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_invalid_reporter",
@@ -613,7 +633,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_redis_adapter_requires_dependency",
@@ -637,7 +657,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestAdapterConfig.test_auto_append_output_suffix_defaults_true",
@@ -645,7 +665,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_default_output_queue_name_backward_compatibility",
@@ -653,7 +673,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_auto_append_output_suffix_can_be_disabled_by_constructor",
@@ -661,7 +681,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_auto_append_output_suffix_can_be_disabled_by_env",
@@ -669,7 +689,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_explicit_output_queue_name_overrides_disabled_auto_suffix",
@@ -677,7 +697,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_blank_output_queue_name_falls_back_to_default",
@@ -685,7 +705,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_database_initialization",
@@ -709,7 +729,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_file_operations",
@@ -725,7 +745,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_failed_work_item_release",
@@ -757,7 +777,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_file_already_exists",
@@ -773,7 +793,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_custom_output_queue_name",
@@ -1017,4 +1037,3 @@
     }
   ]
 }
-

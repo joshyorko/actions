@@ -105,11 +105,8 @@ class TestFileAdapter:
     def workitems(self, adapter):
         from actions import workitems
 
-        ctx = workitems.Context(adapter=adapter)
-        ctx.reserve_input()
-
-        with mock.patch("robocorp.workitems._ctx", lambda: ctx):
-            yield workitems
+        workitems.init(adapter)
+        yield workitems
 
     def test_load_data(self, adapter):
         item_id = adapter.reserve_input()
@@ -222,14 +219,14 @@ class TestAdapterFactory:
         assert isinstance(adapter, SQLiteAdapter)
 
     def test_redis_adapter_requires_dependency(self, monkeypatch):
-        module = importlib.import_module("robocorp.workitems._adapters._redis")
+        module = importlib.import_module("actions.work_items._adapters._redis")
         monkeypatch.setattr(module, "_redis_lib", None)
 
         with pytest.raises(ImportError, match=r"robocorp-workitems\[redis\]"):
             RedisAdapter()
 
     def test_documentdb_adapter_requires_dependency(self, monkeypatch):
-        module = importlib.import_module("robocorp.workitems._adapters._docdb")
+        module = importlib.import_module("actions.work_items._adapters._docdb")
         monkeypatch.setattr(module, "_pymongo_available", False)
         monkeypatch.setattr(module, "MongoClient", None)
 
@@ -316,7 +313,7 @@ class FakeMongoClient:
 class TestDocumentDBAdapterOutputQueueConfig:
     @pytest.fixture
     def docdb_module(self, monkeypatch):
-        module = importlib.import_module("robocorp_adapters_custom._docdb")
+        module = importlib.import_module("actions.work_items._adapters._docdb")
         clients = []
 
         def mongo_client(*args, **kwargs):
@@ -427,7 +424,7 @@ class TestSQLiteAdapter:
         from unittest import mock
 
         from actions import workitems
-        from robocorp.workitems._context import Context
+        from actions.work_items import WorkItemsContext
 
         # Seed test data with files (matching FileAdapter pattern)
         item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
@@ -437,14 +434,14 @@ class TestSQLiteAdapter:
         adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
 
         # Create context with our adapter
-        ctx = Context(adapter=adapter)
+        ctx = WorkItemsContext(adapter=adapter)
         ctx.reserve_input()
 
         def _getter():
             return ctx
 
-        with mock.patch("actions.work_items._ctx", _getter):
-            yield workitems
+        workitems.init(adapter)
+        yield workitems
 
     def test_database_initialization(self, adapter):
         """Test that the database initializes with proper schema."""
@@ -752,7 +749,7 @@ class TestRedisAdapter:
         from unittest import mock
 
         from actions import workitems
-        from robocorp.workitems._context import Context
+        from actions.work_items import WorkItemsContext
 
         # Seed test data in INPUT queue with files
         item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
@@ -762,14 +759,14 @@ class TestRedisAdapter:
         adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
 
         # Create context with our adapter
-        ctx = Context(adapter=adapter)
+        ctx = WorkItemsContext(adapter=adapter)
         ctx.reserve_input()
 
         def _getter():
             return ctx
 
-        with mock.patch("actions.work_items._ctx", _getter):
-            yield workitems
+        workitems.init(adapter)
+        yield workitems
 
     def test_redis_connection(self, adapter):
         """Test that Redis connection is established."""
@@ -1017,7 +1014,7 @@ class TestDocumentDBAdapter:
         from unittest import mock
 
         from actions import workitems
-        from robocorp.workitems._context import Context
+        from actions.work_items import WorkItemsContext
 
         # Seed test data with files
         item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
@@ -1027,14 +1024,14 @@ class TestDocumentDBAdapter:
         adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
 
         # Create context with our adapter
-        ctx = Context(adapter=adapter)
+        ctx = WorkItemsContext(adapter=adapter)
         ctx.reserve_input()
 
         def _getter():
             return ctx
 
-        with mock.patch("actions.work_items._ctx", _getter):
-            yield workitems
+        workitems.init(adapter)
+        yield workitems
 
     def test_mongodb_connection(self, adapter):
         """Test MongoDB connection and database access."""
@@ -1310,5 +1307,4 @@ class TestDocumentDBAdapter:
         # Cleanup
         client = MongoClient(mongo_url)
         client.drop_database(mongo_db)
-
 
