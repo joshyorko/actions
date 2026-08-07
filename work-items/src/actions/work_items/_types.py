@@ -25,15 +25,15 @@ class State(str, Enum):
 
     PENDING = "PENDING"
     IN_PROGRESS = "IN_PROGRESS"
-    DONE = "DONE"
+    DONE = "COMPLETED"
     FAILED = "FAILED"
     # Alias for robocorp compatibility
-    COMPLETED = "DONE"
+    COMPLETED = "COMPLETED"
 
     @classmethod
     def _missing_(cls, value):
         """Handle COMPLETED -> DONE mapping."""
-        if isinstance(value, str) and value.upper() == "COMPLETED":
+        if isinstance(value, str) and value.upper() in {"DONE", "COMPLETED"}:
             return cls.DONE
         return None
 
@@ -52,7 +52,7 @@ class Address:
     """Email address with optional display name."""
 
     address: str
-    name: str | None = None
+    name: str = ""
 
     def __str__(self) -> str:
         if self.name:
@@ -69,17 +69,58 @@ class Email:
     in email-triggered automation workflows.
     """
 
-    sender: Address | None = None
-    recipients: list[Address] = field(default_factory=list)
+    from_: Address | None = None
+    to: list[Address] = field(default_factory=list)
     cc: list[Address] = field(default_factory=list)
     bcc: list[Address] = field(default_factory=list)
     subject: str | None = None
     date: datetime | None = None
-    body: str | None = None
+    text: str | None = None
     html: str | None = None
     reply_to: Address | None = None
     message_id: str | None = None
     errors: list[str] = field(default_factory=list)
+
+    @property
+    def sender(self) -> Address | None:
+        return self.from_
+
+    @property
+    def recipients(self) -> list[Address]:
+        return self.to
+
+    @property
+    def body(self) -> str | None:
+        return self.text
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> "Email":
+        def address(field: str, optional: bool = False):
+            raw = value.get(field) if optional else value[field]
+            if raw is None:
+                return None
+            if not isinstance(raw, dict):
+                raise TypeError(f"Expected '{field}' as dict")
+            return Address(name=raw.get("name", ""), address=raw["address"])
+
+        def addresses(field: str):
+            raw = value[field]
+            if not isinstance(raw, list):
+                raise TypeError(f"Expected '{field}' as list")
+            return [Address(name=item.get("name", ""), address=item["address"]) for item in raw]
+
+        reply_key = "replyTo" if "replyTo" in value else "reply_to"
+        return cls(
+            from_=address("from"),
+            to=addresses("to"),
+            cc=addresses("cc"),
+            bcc=addresses("bcc"),
+            subject=value["subject"],
+            date=datetime.fromisoformat(value["date"].replace("Z", "+00:00")),
+            reply_to=address(reply_key, optional=True),
+            message_id=value.get("messageId", value.get("message_id")),
+            text=value.get("text"),
+        )
 
     @classmethod
     def from_bytes(cls, content: bytes) -> "Email":
@@ -178,13 +219,13 @@ class Email:
         body, html = get_body(msg)
 
         return cls(
-            sender=parse_address(msg.get("From")),
-            recipients=parse_addresses(msg.get("To")),
+            from_=parse_address(msg.get("From")),
+            to=parse_addresses(msg.get("To")),
             cc=parse_addresses(msg.get("Cc")),
             bcc=parse_addresses(msg.get("Bcc")),
             subject=decode_str(msg.get("Subject")),
             date=date,
-            body=body,
+            text=body,
             html=html,
             reply_to=parse_address(msg.get("Reply-To")),
             message_id=msg.get("Message-ID"),

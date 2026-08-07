@@ -478,42 +478,42 @@
       "id": "state.done-value",
       "classification": "required_parity",
       "decision": "State.DONE.value is COMPLETED; readers accept DONE and COMPLETED",
-      "status": "expected_red",
+      "status": "implemented",
       "task": "task-2"
     },
     {
       "id": "adapter.protocol-split",
       "classification": "required_parity",
       "decision": "RuntimeAdapter has nine processing methods and ManagedAdapter has six management methods",
-      "status": "expected_red",
+      "status": "implemented",
       "task": "task-2"
     },
     {
       "id": "signature.release-input",
       "classification": "required_parity",
       "decision": "Accept upstream exception object and 0.3.1 split exception keywords through typed overloads",
-      "status": "expected_red",
+      "status": "implemented",
       "task": "task-2"
     },
     {
       "id": "signature.add-file",
       "classification": "required_parity",
       "decision": "Accept three-argument upstream and four-argument 0.3.1 forms",
-      "status": "expected_red",
+      "status": "implemented",
       "task": "task-2"
     },
     {
       "id": "runtime.lifecycle",
       "classification": "required_parity",
       "decision": "Restore upstream current/released/output/context/task lifecycle",
-      "status": "expected_red",
+      "status": "implemented",
       "task": "task-2"
     },
     {
       "id": "runtime.email",
       "classification": "required_parity",
       "decision": "Restore upstream payload email parser and __mail.html behavior",
-      "status": "expected_red",
+      "status": "implemented",
       "task": "task-2"
     },
     {

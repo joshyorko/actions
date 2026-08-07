@@ -9,6 +9,7 @@ Based on robocorp-workitems (Apache 2.0 License).
 
 import logging
 from collections.abc import Iterator
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from ._exceptions import EmptyQueue
@@ -78,10 +79,13 @@ class Inputs:
         Yields:
             Input work items.
         """
+        if self.current is not None and not self.current.released:
+            with self.current as item:
+                yield item
         while True:
             try:
-                item = self.reserve()
-                yield item
+                with self.reserve() as item:
+                    yield item
             except EmptyQueue:
                 break
 
@@ -114,8 +118,11 @@ class Inputs:
         Raises:
             EmptyQueue: If no work items are available.
         """
+        if self.current is not None and not self.current.released:
+            raise RuntimeError("Previous input not released")
         item_id = self._adapter.reserve_input()
         item = Input(self._adapter, item_id)
+        item.load()
         self._current = item
         self._items.append(item)
         return item
@@ -186,10 +193,13 @@ class Outputs:
         """
         return self._items[index]
 
+    def __reversed__(self):
+        return reversed(self._items)
+
     def create(
         self,
         payload: JSONType | None = None,
-        files: dict[str, PathType | bytes] | None = None,
+        files: PathType | list[PathType] | dict[str, PathType | bytes] | None = None,
         save: bool = True,
     ) -> Output:
         """
@@ -218,11 +228,17 @@ class Outputs:
         output = current_input.create_output(payload)
 
         if files:
-            for name, value in files.items():
-                if isinstance(value, bytes):
-                    output.add_file(content=value, name=name)
-                else:
-                    output.add_file(path=value, name=name)
+            if isinstance(files, (str, Path)):
+                output.add_files(files)
+            elif isinstance(files, dict):
+                for name, value in files.items():
+                    if isinstance(value, bytes):
+                        output.add_file(content=value, name=name)
+                    else:
+                        output.add_file(path=value, name=name)
+            else:
+                for path in files:
+                    output.add_file(path=path)
 
         if save:
             output.save()

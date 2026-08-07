@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 from _pytest.outcomes import Failed, XFailed
 
-from actions.work_items import Inputs, Outputs, WorkItemsContext
+from actions.work_items import Inputs, Outputs
 
 from .mocks import MockAdapter
 
@@ -114,12 +114,26 @@ def inputs(adapter):
 
 
 @pytest.fixture
-def context(adapter):
-    context = WorkItemsContext(adapter)
-    context.get_input()
-    yield context
+def outputs(adapter, inputs):
+    yield Outputs(adapter, inputs)
 
 
 @pytest.fixture
-def outputs(adapter, inputs):
-    yield Outputs(adapter, inputs)
+def context(adapter, inputs):
+    class Context:
+        def __init__(self):
+            object.__setattr__(self, "_collection", inputs)
+
+        def __setattr__(self, name, value):
+            if name == "_inputs":
+                self._collection._items = value
+                self._collection._current = value[-1] if value else None
+            else:
+                object.__setattr__(self, name, value)
+
+        @property
+        def current_input(self):
+            return self._collection.current
+
+    context = Context()
+    yield context

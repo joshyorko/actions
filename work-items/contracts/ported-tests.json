@@ -163,7 +163,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_wrong_payload_type",
@@ -171,7 +171,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_optional_field",
@@ -179,7 +179,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_missing_field",
@@ -187,7 +187,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_malformed",
@@ -195,7 +195,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_email_valid",
@@ -203,7 +203,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_email_valid_regression",
@@ -211,7 +211,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_email_failed_raises",
@@ -219,7 +219,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_email_failed_parses",
@@ -227,7 +227,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_html_attachment",
@@ -235,7 +235,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_html_attachment_skip",
@@ -243,7 +243,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_email_extra_field",
@@ -251,7 +251,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_first",
@@ -275,7 +275,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_released",
@@ -283,7 +283,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_outputs_create",
@@ -299,7 +299,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_outputs_create_no_current",
@@ -307,7 +307,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_outputs_last",
@@ -331,7 +331,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_fail",
@@ -339,7 +339,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_create_output",
@@ -347,7 +347,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_list_files",
@@ -355,7 +355,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_get_file",
@@ -363,7 +363,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_download_file_deprecated",
@@ -371,7 +371,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_get_files",
@@ -379,7 +379,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_download_files_deprecated",
@@ -387,7 +387,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_get_file_missing",
@@ -395,7 +395,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_get_files_missing",
@@ -403,7 +403,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_remove_file",
@@ -411,7 +411,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_remove_file_notexist",
@@ -419,7 +419,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_remove_files",
@@ -427,7 +427,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_input_modify_payload",
@@ -435,7 +435,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_outputs_create_files",
@@ -443,7 +443,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_release_work_item_failed",
@@ -451,7 +451,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_duplicate_reserve",
@@ -459,7 +459,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_iter_explicit_release",
@@ -475,7 +475,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_raise_derived_class",
@@ -483,7 +483,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_loop_raise",
@@ -491,7 +491,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_inputs_throw_unknown_exception",
@@ -499,7 +499,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_iter_after_release",
@@ -507,7 +507,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_allow_multiple_saves",
@@ -515,7 +515,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_collect_inputs",
@@ -523,7 +523,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_workitems.module.test_add_files_input",
@@ -539,7 +539,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-2",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_load_data",

@@ -7,6 +7,7 @@ Based on robocorp-workitems (Apache 2.0 License).
 import logging
 import os
 from collections.abc import Iterator
+from contextvars import ContextVar
 from typing import TYPE_CHECKING, Optional
 
 from ._exceptions import EmptyQueue
@@ -36,6 +37,7 @@ class WorkItemsContext:
         """
         self._adapter = adapter
         self._current_input: Input | None = None
+        self._inputs: list[Input] = []
 
     @property
     def adapter(self) -> "BaseAdapter":
@@ -45,7 +47,18 @@ class WorkItemsContext:
     @property
     def current_input(self) -> Input | None:
         """The currently reserved input work item."""
+        if self._inputs:
+            return self._inputs[-1]
         return self._current_input
+
+    @property
+    def outputs(self) -> list[Output]:
+        return [output for item in self._inputs for output in item.outputs]
+
+    def close(self) -> None:
+        for output in self.outputs:
+            if not output.saved:
+                log.warning("%s has unsaved changes that will be discarded", output)
 
     def inputs(self) -> Iterator[Input]:
         """
@@ -153,7 +166,7 @@ class WorkItemsContext:
 
 
 # Global context instance
-_context: WorkItemsContext | None = None
+_context: ContextVar[WorkItemsContext | None] = ContextVar("actions_work_items_context", default=None)
 
 
 def get_context() -> WorkItemsContext:
@@ -166,13 +179,13 @@ def get_context() -> WorkItemsContext:
     Raises:
         RuntimeError: If context not initialized.
     """
-    global _context
-    if _context is None:
+    context = _context.get()
+    if context is None:
         raise RuntimeError(
             "Work items context not initialized. "
             "Call work_items.init() first or set environment variables."
         )
-    return _context
+    return context
 
 
 def init(adapter: Optional["BaseAdapter"] = None) -> WorkItemsContext:
@@ -188,13 +201,17 @@ def init(adapter: Optional["BaseAdapter"] = None) -> WorkItemsContext:
     Returns:
         The initialized context.
     """
-    global _context
-
     if adapter is None:
         adapter = _create_adapter_from_env()
 
-    _context = WorkItemsContext(adapter)
-    return _context
+    context = WorkItemsContext(adapter)
+    _context.set(context)
+    return context
+
+
+def set_context(context: WorkItemsContext) -> None:
+    """Install an existing context in the current execution context."""
+    _context.set(context)
 
 
 def _create_adapter_from_env() -> "BaseAdapter":

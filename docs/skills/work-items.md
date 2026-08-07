@@ -132,6 +132,16 @@ this form before the package gate. Control Room HTTP, Yorko, and Fizzy
 orchestration remain explicit exclusions; live Redis, MongoDB, AWS DocumentDB,
 Yorko, and Control Room behavior is not established by the offline suite.
 
+The runtime facade accepts both adapter generations without forcing persistent
+backends to share one signature: release normalization supports the upstream
+exception dictionary and the 0.3.1 split exception fields, while attachment
+normalization supports upstream three-argument and 0.3.1 four-argument
+`add_file` calls. Runtime processing state is context-local, so separate task or
+`contextvars` executions do not share the current input or output history.
+Explicit `init(adapter)` remains dependency-light; when `robocorp.tasks` is
+installed, its task cache owns teardown, unsaved-output warnings, and failure
+release.
+
 For HTTP attachments, map invalid names to 400, missing item/file to 404, and duplicate upload to 409. Construct `Content-Disposition` only from a validated filename.
 
 ## Evidence
