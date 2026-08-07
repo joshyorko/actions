@@ -28,7 +28,7 @@ def _reserve_input_in_process(db_path, files_dir, start, results):
 
 def _concurrent_reservations(db_path, files_dir, workers):
     """Run independent SQLiteAdapter reservations at the same instant."""
-    context = multiprocessing.get_context()
+    context = multiprocessing.get_context("spawn")
     start = context.Event()
     results = context.Queue()
     processes = [
@@ -85,7 +85,7 @@ def _legacy_reserve_input_in_process(db_path, barrier, results):
 
 def _legacy_concurrent_reservations(db_path):
     """Run the synchronized legacy reservation race once."""
-    context = multiprocessing.get_context()
+    context = multiprocessing.get_context("spawn")
     barrier = context.Barrier(2)
     results = context.Queue()
     processes = [

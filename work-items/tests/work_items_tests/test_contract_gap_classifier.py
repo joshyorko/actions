@@ -7,6 +7,12 @@ pytest_plugins = ("pytester",)
 
 def _install_classifier(pytester):
     pytester.syspathinsert(Path(__file__).resolve().parents[1])
+    pytester.makeini(
+        """
+[pytest]
+asyncio_default_fixture_loop_scope = function
+"""
+    )
     pytester.makeconftest(
         """
 pytest_plugins = ("work_items_tests.contract_ports.conftest",)

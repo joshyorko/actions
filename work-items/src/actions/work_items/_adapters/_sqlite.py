@@ -339,8 +339,16 @@ class SQLiteAdapter(BaseAdapter):
         exception_type: ExceptionType | None = None,
         code: str | None = None,
         message: str | None = None,
+        exception: dict[str, Any] | None = None,
     ) -> None:
         """Release a reserved input work item."""
+        if exception is not None:
+            if exception_type is not None or code is not None or message is not None:
+                raise TypeError("release_input() received both exception and split exception fields")
+            exception_type = exception.get("type")
+            code = exception.get("code")
+            message = exception.get("message")
+
         if state not in {State.DONE, State.FAILED}:
             raise ValueError(f"Release state must be DONE or FAILED, got {state}")
 

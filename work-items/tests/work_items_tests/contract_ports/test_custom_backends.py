@@ -542,15 +542,10 @@ class TestSQLiteAdapter:
         exception = {"type": "ValueError", "message": "Invalid data"}
         adapter.release_input(reserved_id, State.FAILED, exception=exception)
 
-        # Verify state and exception stored
-        with adapter._pool.acquire() as conn:
-            cursor = conn.execute(
-                "SELECT state, exception_message FROM work_items WHERE id = ?",
-                (reserved_id,),
-            )
-            row = cursor.fetchone()
-            assert row[0] == State.FAILED.value
-            assert row[1] == exception["message"]
+        # Verify state and exception stored through the adapter contract.
+        item = adapter.get_item(reserved_id)
+        assert item["state"] == State.FAILED.value
+        assert item["error_message"] == exception["message"]
 
     def test_producer_consumer_workflow(self, workitems):
         """Test full producer-consumer workflow using workitems API."""
@@ -685,7 +680,7 @@ def _create_redis_input_item(adapter, payload):
     """Helper to create item directly in Redis INPUT queue for testing."""
     import json
     import uuid
-    from datetime import datetime
+    from datetime import datetime, timezone
 
     item_id = str(uuid.uuid4())
     payload_json = json.dumps(payload or {})
@@ -699,7 +694,7 @@ def _create_redis_input_item(adapter, payload):
             "state": "PENDING",
         },
     )
-    now = datetime.utcnow().isoformat()
+    now = datetime.now(timezone.utc).isoformat()
     adapter._client.hset(
         adapter._key("timestamps", queue=adapter._config.queue, item_id=item_id),
         mapping={"created_at": now},
@@ -750,10 +745,7 @@ class TestRedisAdapter:
     @pytest.fixture
     def workitems(self, adapter):
         """Create workitems context with RedisAdapter."""
-        from unittest import mock
-
         from actions import workitems
-        from actions.work_items import WorkItemsContext
 
         # Seed test data in INPUT queue with files
         item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
@@ -761,13 +753,6 @@ class TestRedisAdapter:
             adapter.add_file(item1_id, name, name, content)
 
         adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
-
-        # Create context with our adapter
-        ctx = WorkItemsContext(adapter=adapter)
-        ctx.get_input()
-
-        def _getter():
-            return ctx
 
         workitems.init(adapter)
         yield workitems
@@ -1019,10 +1004,7 @@ class TestDocumentDBAdapter:
     @pytest.fixture
     def workitems(self, adapter):
         """Create workitems context with DocumentDBAdapter."""
-        from unittest import mock
-
         from actions import workitems
-        from actions.work_items import WorkItemsContext
 
         # Seed test data with files
         item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
@@ -1030,13 +1012,6 @@ class TestDocumentDBAdapter:
             adapter.add_file(item1_id, name, name, content)
 
         adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
-
-        # Create context with our adapter
-        ctx = WorkItemsContext(adapter=adapter)
-        ctx.get_input()
-
-        def _getter():
-            return ctx
 
         workitems.init(adapter)
         yield workitems

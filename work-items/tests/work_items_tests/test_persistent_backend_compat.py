@@ -1,5 +1,7 @@
 """Compatibility tests for historical persistent-backend records."""
 
+from datetime import datetime, timezone
+
 import pytest
 
 from actions.work_items import State
@@ -27,6 +29,8 @@ class _RedisWriteFake:
     def __init__(self):
         self.keys = []
         self.written_keys = []
+        self.mappings = {}
+        self.values = {}
 
     def _record(self, key, *args, **kwargs):
         self.keys.append(key)
@@ -44,6 +48,10 @@ class _RedisWriteFake:
     def hset(self, key, *args, **kwargs):
         self._record(key, *args, **kwargs)
         self.written_keys.append(key)
+        if "mapping" in kwargs:
+            self.mappings[key] = kwargs["mapping"]
+        elif len(args) == 2:
+            self.values.setdefault(key, {})[args[0]] = args[1]
 
     def hgetall(self, key):
         self.keys.append(key)
@@ -142,6 +150,39 @@ def test_redis_release_routes_all_metadata_to_output_queue():
     assert "jobs:exception:item-1" not in adapter._client.written_keys
 
 
+def test_redis_release_serializes_timezone_aware_timestamp():
+    adapter = RedisAdapter.__new__(RedisAdapter)
+    adapter.queue_name = "jobs"
+    adapter.output_queue_name = "jobs_output"
+    adapter._queue_cache = {"item-1": "jobs"}
+    adapter._client = _RedisWriteFake()
+
+    adapter.release_input("item-1", State.DONE)
+
+    timestamp = adapter._client.values["jobs:timestamps:item-1"]["released_at"]
+    assert datetime.fromisoformat(timestamp).tzinfo == timezone.utc
+
+
+def test_redis_release_accepts_legacy_exception_keyword():
+    adapter = RedisAdapter.__new__(RedisAdapter)
+    adapter.queue_name = "jobs"
+    adapter.output_queue_name = "jobs_output"
+    adapter._queue_cache = {"item-1": "jobs"}
+    adapter._client = _RedisWriteFake()
+
+    adapter.release_input(
+        "item-1",
+        State.FAILED,
+        exception={"type": "RuntimeError", "code": "E1", "message": "failed"},
+    )
+
+    assert adapter._client.mappings["jobs:exception:item-1"] == {
+        "type": "RuntimeError",
+        "code": "E1",
+        "message": "failed",
+    }
+
+
 def test_redis_release_preserves_legacy_metadata_when_current_write_fails():
     """A failed terminal transaction cannot erase the only lifecycle metadata."""
     adapter = RedisAdapter.__new__(RedisAdapter)
@@ -220,3 +261,29 @@ def test_docdb_decodes_flat_historical_state_exception_and_timestamps():
     assert item["error_message"] == "failed"
     assert item["created_at"] == "2026-01-01T00:00:00"
     assert item["updated_at"] == "2026-01-01T00:01:00"
+
+
+def test_docdb_release_accepts_legacy_exception_keyword():
+    class Collection:
+        update = None
+
+        def update_one(self, query, update):
+            self.update = (query, update)
+
+    adapter = DocumentDBAdapter.__new__(DocumentDBAdapter)
+    collection = Collection()
+    adapter._resolve_item_queue = lambda item_id: "jobs"
+    adapter._collection = lambda queue: collection
+
+    adapter.release_input(
+        "item-1",
+        State.FAILED,
+        exception={"type": "RuntimeError", "code": "E1", "message": "failed"},
+    )
+
+    assert collection.update[1]["$set"]["exception"] == {
+        "type": "RuntimeError",
+        "code": "E1",
+        "message": "failed",
+    }
+    assert collection.update[1]["$set"]["timestamps.released_at"].tzinfo == timezone.utc

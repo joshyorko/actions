@@ -178,9 +178,14 @@ class FileAdapter(BaseAdapter):
         exception_type: ExceptionType | dict[str, Any] | None = None,
         code: str | None = None,
         message: str | None = None,
+        exception: dict[str, Any] | None = None,
     ) -> None:
         """Release a reserved input work item."""
         try:
+            if exception is not None:
+                if exception_type is not None or code is not None or message is not None:
+                    raise TypeError("release_input() received both exception and split exception fields")
+                exception_type = exception
             index = self._find_item_index(self._input_items, item_id)
             item = self._input_items[index]
 

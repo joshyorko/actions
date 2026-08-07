@@ -178,7 +178,8 @@ def test_input_download_file_deprecated(inputs):
     item = inputs.current
 
     with temp_filename() as path:
-        result = item.download_file("file2.txt", path)
+        with pytest.warns(DeprecationWarning, match="use get_file"):
+            result = item.download_file("file2.txt", path)
         assert is_same_path(result, path)
         assert result.read_text() == "data2"
 
@@ -205,7 +206,8 @@ def test_input_download_files_deprecated(inputs):
         file1 = os.path.join(outdir, "file1.txt")
         file2 = os.path.join(outdir, "file2.txt")
 
-        paths = item.download_files("*.txt", outdir)
+        with pytest.warns(DeprecationWarning, match="use get_files"):
+            paths = item.download_files("*.txt", outdir)
         assert is_same_path(paths[0], file1)
         assert is_same_path(paths[1], file2)
         assert os.path.exists(file1)
@@ -464,5 +466,4 @@ def test_remove_files_input(inputs, adapter):
     item.remove_files("file1.txt")
     item.save()
     assert sorted(item.files) == ["file2.txt", "file3.png"]
-
 

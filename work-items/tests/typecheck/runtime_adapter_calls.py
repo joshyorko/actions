@@ -5,6 +5,9 @@ from actions.work_items._types import ExceptionType, State
 def valid_runtime_calls(adapter: RuntimeAdapter) -> None:
     adapter.release_input("item", State.DONE, None)
     adapter.release_input(
+        "item", State.FAILED, exception={"type": "APPLICATION", "message": "failed"}
+    )
+    adapter.release_input(
         "item", State.FAILED, ExceptionType.APPLICATION, "E", "failed"
     )
     adapter.add_file("item", "stored.txt", b"data")

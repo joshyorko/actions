@@ -1,8 +1,8 @@
 {
   "files": {
     "contracts/compatibility-ledger.json": "da101446a40d39d232881bc4663c79f8c2b901f7f6be55deb86fc458cef94cdd",
-    "contracts/expected-red-failures.json": "96aff617f08cc44df8f7997746ae2a2f949fb7e5191e25f5be1a3a6a77529206",
-    "contracts/ported-tests.json": "06e0977fe84271bfe78de40e1b15d698679da9b6e8acb1d75dce051ab152c17b",
+    "contracts/expected-red-failures.json": "2420e5fdd3cfee1b87060a9fa00c828d1bb23a3ef08ac100c25afe905b13a183",
+    "contracts/ported-tests.json": "8b55d042cee8939be44997f6819ddbca7d26aeabd3120573d8e519e1b30c538e",
     "contracts/public-surface-fixtures.json": "bd3fd78ab54633ad7dad5b55a08c6cc3a9a571ffbb4c6e99b6e7f8c9ceccba85",
     "tests/contract_sources/custom_backends_source.py": "a36e1bfe6d6576605d8a9e39347c070961a532bfb77942881c4c548179f991e9",
     "tests/contract_sources/robocorp_email_source.py": "f8d13f3dd9d379a1d3b91e1690495d8f96b041d6a409f34e94f00c044346e87e",
@@ -10,10 +10,10 @@
     "tests/contract_sources/robocorp_lifecycle_source.py": "99754b80e54845e4d28d615f08bbb15a19bebf30b28a962f0dcb78e73231a847",
     "tests/work_items_tests/contract_ports/conftest.py": "71aeb014508ee17d64a202d224d41a0aad7a5a40acbd5a498e705222d06631d3",
     "tests/work_items_tests/contract_ports/mocks.py": "ab0516c01c4d52df50269c7915d02352524854c9b0730ba4e2d6ef7b685aa03d",
-    "tests/work_items_tests/contract_ports/test_custom_backends.py": "d9d0566a04409d2cb3ad33be962e5a8efd8ad6a2db483be112ba42b82fdd494f",
+    "tests/work_items_tests/contract_ports/test_custom_backends.py": "81a01fa723efc27b4407a23dfe3ddba78ffaf9e0b1fe513acb4f0eefcb8009af",
     "tests/work_items_tests/contract_ports/test_robocorp_email.py": "e11bb8c14c3f8ea011dc3be4f1eb3c05d85b3f118dfe2e7c068f553490cb46ac",
     "tests/work_items_tests/contract_ports/test_robocorp_file.py": "feb29b94c4d50290ea678504fb754a721cfd242ff9748c902ae068122a3cb986",
-    "tests/work_items_tests/contract_ports/test_robocorp_lifecycle.py": "ae74db6471a4a164c652fdddc5a8473aac229484d0c0b9268750de39284f003d"
+    "tests/work_items_tests/contract_ports/test_robocorp_lifecycle.py": "b72dfcd686b202f4178530283f6c234056f58c8d43771b0dcfd62440ccc79551"
   },
   "ports": {
     "custom-0.1.6": {
@@ -75,7 +75,7 @@
           "test_adapters.py::TestSQLiteAdapter::test_error_handling_file_already_exists": "166f47cccae807d6e7cd06c2e75152a9a59b4f1cd5ed59435c95c3937e390226",
           "test_adapters.py::TestSQLiteAdapter::test_error_handling_file_not_found": "3d62f1d944f3424b8aa7bc14582d250463a4771ef5b3809d5d44a2b20e34bbfa",
           "test_adapters.py::TestSQLiteAdapter::test_error_handling_invalid_work_item": "6440a67933e0efa41a05b5c6373879225a5ecd73428f633571ede20c65af1596",
-          "test_adapters.py::TestSQLiteAdapter::test_failed_work_item_release": "bcd9a92c8589877b7c9bbb25412a1c38bb20a2dd1fc82dd4972ec298cf0686e2",
+          "test_adapters.py::TestSQLiteAdapter::test_failed_work_item_release": "a64360bfc77ac88a209d08309a5436f385430dcb9fea5dbf6fe0bbb3bf107ba9",
           "test_adapters.py::TestSQLiteAdapter::test_fifo_ordering": "871652a380bf863dce47b5606aafcc6ce3563bc04754b2178c0d0005519e2025",
           "test_adapters.py::TestSQLiteAdapter::test_file_operations": "58d6885980b154d6156c7eb93980599cbae78a37c440277d5c299db403b19a12",
           "test_adapters.py::TestSQLiteAdapter::test_payload_operations": "52df77e4eb5d958813a6d59462dc438e46971ea70e2f768cce9eefde435814c2",
@@ -232,8 +232,8 @@
           "test_workitems.py::test_collect_inputs": "d737bc0068868d9ae894f33c3d0c048a894b190090c5c2ea3bbc56cc81536d0d",
           "test_workitems.py::test_duplicate_reserve": "7c16429f2c2f3d03f3c5a1dfaee86cad0d903a034d97d1455ead247f587aca98",
           "test_workitems.py::test_input_create_output": "7896c0a8ee9f8267b129a9a3be531d4c02fff37c079cf5e785c1ece22b8d25e7",
-          "test_workitems.py::test_input_download_file_deprecated": "fadf4ed7a31acbe20d210e6e7cc607b6a1e2a708bfcfbc9d3f1f39c5edcc075f",
-          "test_workitems.py::test_input_download_files_deprecated": "e905f2b2a027b048da1389f1d0f3652ea25a3059fe4dfb4ea4b3a0e6e7f3a1e6",
+          "test_workitems.py::test_input_download_file_deprecated": "08ad60667596746496a71782e43965e4e4ede6523ea6db138d696b77cbb5e142",
+          "test_workitems.py::test_input_download_files_deprecated": "de31113f1ad0ae297c89118c9b71877ca6e8eed3f33bb677299b5628846ec64f",
           "test_workitems.py::test_input_fail": "fd41ce124d35012100424d545a8f9e014507069ca630e45d689a4dc47d79ae27",
           "test_workitems.py::test_input_get_file": "a5c18baa2f21f08d1c92488bddb05a90d146d403d0411910d3776214404c9690",
           "test_workitems.py::test_input_get_file_missing": "dff9921f5d849f4d74aad1af44a6a48482e9c49292fe944460e700e9125b92e0",

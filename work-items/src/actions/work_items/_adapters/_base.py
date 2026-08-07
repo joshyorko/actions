@@ -86,6 +86,7 @@ class BaseAdapter(ABC):
         exception_type: ExceptionType | None = None,
         code: str | None = None,
         message: str | None = None,
+        exception: dict[str, Any] | None = None,
     ) -> None:
         """
         Release a reserved input work item.
@@ -96,6 +97,7 @@ class BaseAdapter(ABC):
             exception_type: Type of exception if failed.
             code: Error code if failed.
             message: Error message if failed.
+            exception: Legacy exception payload with type/code/message keys.
         """
         pass
 

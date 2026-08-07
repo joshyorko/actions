@@ -64,18 +64,6 @@
       }
     },
     {
-      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_failed_work_item_release",
-      "parameter_ids": [
-        null
-      ],
-      "exception": "builtins.TypeError",
-      "predicate": {
-        "contains": [
-          "SQLiteAdapter.release_input() got an unexpected keyword argument 'exception'"
-        ]
-      }
-    },
-    {
       "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_producer_consumer_workflow",
       "parameter_ids": [
         null

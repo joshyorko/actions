@@ -34,6 +34,15 @@ The host wrapper owns `work-items/tests/compose.persistent-backends.yaml`: it st
 
 `work-items/pyproject.toml` uses PEP 621 as the authoritative package metadata, including its Python floor, optional backend extras, and distribution version. Poetry 2.1.1 remains authoritative for resolving and writing the committed lockfile.
 
+Redis and DocumentDB timestamps use timezone-aware UTC values. Redis keeps ISO 8601
+strings (now with an explicit UTC offset) and continues to read historical naive
+strings; DocumentDB stores UTC-aware datetime values for Mongo-compatible date
+queries. The pytest suite fixes `asyncio_default_fixture_loop_scope` to `function`.
+SQLite race tests use the `spawn` multiprocessing context, avoiding a multithreaded
+test runner's unsafe `fork` warning. The v1 `download_file` and `download_files`
+aliases remain public compatibility APIs; their ported tests must capture their
+intentional deprecation warnings rather than leaking them into verification.
+
 `verify-work-items [artifact-directory]` is the in-container verifier; it never starts Docker or services. It requires explicit `TEST_REDIS_URL` and `TEST_MONGODB_URI` endpoints and runs the complete Work Items suite, including the mandatory service tests. It checks the committed lockfile and Ruff, then builds the wheel and sdist once. It registers cleanup before creating internal temporary directories. With no argument it cleans its temporary artifacts; with an explicit empty artifact directory it retains both artifacts for CI, and rejects a non-empty destination. The gate strictly validates both distributions with Twine, checks the wheel metadata name, version, Markdown README marker, and clean-wheel public aliases/version equality, then runs `git diff --check`. uv bootstraps Poetry in the image but never replaces Poetry resolution or the committed `work-items/poetry.lock` authority.
 
 For an ordinary service-free host diagnostic only, exclude the registered service marker explicitly; this is not release or smoke evidence:
@@ -92,8 +101,8 @@ required parity, preserved 0.3.1 compatibility, intentional security
 hardening, or unsupported external service.
 
 `ported-tests.json` maps 123 selected Apache-2.0 logical test nodes to an
-implementation task and status. Pytest expands those nodes to 153 cases: 114
-implemented cases run normally, 11 expected-red cases execute and xfail, and 28
+implementation task and status. Pytest expands those nodes to 153 cases: 115
+implemented cases run normally, 10 expected-red cases execute and xfail, and 28
 Redis/MongoDB service cases retain the pinned source `skipif` decorators. The
 28 service cases are collected but are not backend evidence unless a reachable
 service makes their bodies execute.
@@ -155,6 +164,11 @@ Run `poetry run mypy` from `work-items/` for the focused static call-site
 contract: valid three/four-argument attachment calls and dictionary/split-field
 release calls must type-check, while invalid arities and argument types remain
 rejected through checked `call-overload` expectations.
+Concrete adapters also accept the legacy named
+`release_input(..., exception={"type": ..., "code": ..., "message": ...})`
+form. Do not combine it with split exception fields; that is ambiguous and
+raises `TypeError`. DocumentDB retains additional structured legacy fields
+such as `traceback` when storing a failed item.
 Attachment staging retains a distinct original filename until a four-argument
 adapter call; three-argument upstream adapters receive the stored name and
 bytes because their contract has no original-name field.
