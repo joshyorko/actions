@@ -169,6 +169,22 @@ class SQLiteAdapter(BaseAdapter):
             if file_table_exists
             else set()
         )
+        legacy_file_schema = {"work_item_id", "filename", "filepath", "created_at"}
+        current_file_schema = {
+            "id",
+            "work_item_id",
+            "name",
+            "original_name",
+            "file_path",
+            "created_at",
+        }
+        if file_table_exists and not (
+            legacy_file_schema.issubset(file_columns)
+            or current_file_schema.issubset(file_columns)
+        ):
+            raise ValueError(
+                "Unsupported work_item_files schema; refusing migration to avoid metadata loss"
+            )
 
         for index in (
             "idx_work_items_queue_state",
@@ -194,8 +210,14 @@ class SQLiteAdapter(BaseAdapter):
             f"WHEN 'COMPLETED' THEN '{State.DONE.value}' "
             f"ELSE {column('state', repr(State.PENDING.value))} END"
         )
-        created_at = column("created_at", "CURRENT_TIMESTAMP")
-        updated_at = f"COALESCE({column('updated_at')}, {column('released_at')}, {column('reserved_at')}, {created_at})"
+        created_at = (
+            f"COALESCE({column('created_at')}, {column('reserved_at')}, "
+            f"{column('released_at')}, CURRENT_TIMESTAMP)"
+        )
+        updated_at = (
+            f"COALESCE({column('updated_at')}, {column('released_at')}, "
+            f"{column('reserved_at')}, {created_at})"
+        )
         conn.execute(
             f"""INSERT INTO work_items (
                 id, queue_name, parent_id, state, payload, exception_type, error_code,

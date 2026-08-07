@@ -265,6 +265,10 @@ class RedisAdapter(BaseAdapter):
 
     def _timestamps_for_item(self, item_id: str, queue: str) -> dict[str, str]:
         timestamps = self._client.hgetall(self._key("timestamps", queue=queue, item_id=item_id))
+        if not timestamps and queue != self.queue_name:
+            timestamps = self._client.hgetall(
+                self._key("timestamps", queue=self.queue_name, item_id=item_id)
+            )
         return {self._decode(key): self._decode(value) for key, value in timestamps.items()}
 
     def _item_to_api(self, item_id: str, queue_name: str) -> dict[str, Any]:
@@ -292,6 +296,10 @@ class RedisAdapter(BaseAdapter):
             raw_state = payload_hash.get(b"state")
         if raw_state is None:
             raw_state = self._client.get(self._key("state", queue=queue_name, item_id=item_id))
+        if raw_state is None and queue_name != self.queue_name:
+            raw_state = self._client.get(
+                self._key("state", queue=self.queue_name, item_id=item_id)
+            )
         queue_state = self._public_state(self._decode(raw_state))
         exception_data = self._exception_for_item(item_id, queue_name)
         created_at = timestamps.get("created_at") or datetime.utcnow().isoformat()
@@ -417,6 +425,13 @@ class RedisAdapter(BaseAdapter):
 
         try:
             queue_name = self._resolve_item_queue(item_id)
+
+            if queue_name != self.queue_name:
+                self._client.delete(
+                    self._key("timestamps", queue=self.queue_name, item_id=item_id),
+                    self._key("state", queue=self.queue_name, item_id=item_id),
+                    self._key("exception", queue=self.queue_name, item_id=item_id),
+                )
 
             # Remove from processing list
             self._client.lrem(self._key("processing", queue=queue_name), 0, item_id)
@@ -668,7 +683,7 @@ class RedisAdapter(BaseAdapter):
         self._client.lrem(self._key("processing", queue=queue_name), 0, item_id)
         self._client.srem(self._key("done", queue=queue_name), item_id)
         self._client.srem(self._key("failed", queue=queue_name), item_id)
-        self._client.delete(
+        keys = [
             self._key("payload", queue=queue_name, item_id=item_id),
             self._key("parent", queue=queue_name, item_id=item_id),
             self._key("timestamps", queue=queue_name, item_id=item_id),
@@ -676,7 +691,16 @@ class RedisAdapter(BaseAdapter):
             self._key("exception", queue=queue_name, item_id=item_id),
             self._key("state", queue=queue_name, item_id=item_id),
             f"origin:{item_id}",
-        )
+        ]
+        if queue_name != self.queue_name:
+            keys.extend(
+                [
+                    self._key("timestamps", queue=self.queue_name, item_id=item_id),
+                    self._key("state", queue=self.queue_name, item_id=item_id),
+                    self._key("exception", queue=self.queue_name, item_id=item_id),
+                ]
+            )
+        self._client.delete(*keys)
         self._queue_cache.pop(item_id, None)
 
     def get_queue_stats(self, queue_name: str | None = None) -> dict[str, int]:

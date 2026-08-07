@@ -413,7 +413,7 @@ def test_migrates_historical_custom_schema_transactionally(tmp_path):
                 id TEXT PRIMARY KEY, queue_name TEXT NOT NULL, parent_id TEXT,
                 payload TEXT, state TEXT, created_at TEXT,
                 exception_type TEXT, exception_code TEXT, exception_message TEXT,
-                reserved_at TEXT, released_at TEXT
+                reserved_at TEXT, released_at TEXT, updated_at TEXT
             );
             CREATE TABLE work_item_files (
                 work_item_id TEXT NOT NULL, filename TEXT NOT NULL,
@@ -425,8 +425,11 @@ def test_migrates_historical_custom_schema_transactionally(tmp_path):
             """
         )
         conn.execute(
-            "INSERT INTO work_items VALUES (?, ?, NULL, ?, 'RESERVED', ?, NULL, ?, ?, ?, NULL)",
-            ("legacy-item", "test_queue", '{"legacy": true}', "2026-01-01T00:00:00+00:00", "E1", "failed", "2026-01-01T00:01:00+00:00"),
+            """INSERT INTO work_items
+            (id, queue_name, parent_id, payload, state, created_at, exception_type,
+             exception_code, exception_message, reserved_at, released_at, updated_at)
+            VALUES (?, ?, NULL, ?, 'RESERVED', ?, NULL, ?, ?, ?, NULL, NULL)""",
+            ("legacy-item", "test_queue", '{"legacy": true}', None, "E1", "failed", "2026-01-01T00:01:00+00:00"),
         )
         conn.execute(
             "INSERT INTO work_item_files VALUES (?, ?, ?, ?)",
@@ -439,6 +442,8 @@ def test_migrates_historical_custom_schema_transactionally(tmp_path):
     assert item["state"] == State.IN_PROGRESS.value
     assert item["error_code"] == "E1"
     assert item["error_message"] == "failed"
+    assert item["created_at"] is not None
+    assert item["updated_at"] is not None
     assert migrated.get_file("legacy-item", "report.txt") == b"legacy"
     with sqlite3.connect(db_path) as conn:
         assert conn.execute("SELECT MAX(version) FROM schema_version").fetchone()[0] == 5
@@ -483,3 +488,57 @@ def test_recovery_uses_configured_orphan_timeout(tmp_path, monkeypatch):
     adapter.reserve_input()
 
     assert adapter.recover_orphaned_work_items() == [item_id]
+
+
+def test_rejects_unknown_historical_file_schema_without_data_loss(tmp_path):
+    """Unknown attachment metadata is rejected before tables are renamed or dropped."""
+    db_path = tmp_path / "unknown.db"
+    with sqlite3.connect(db_path) as conn:
+        conn.executescript(
+            """
+            CREATE TABLE work_items (
+                id TEXT PRIMARY KEY, queue_name TEXT NOT NULL, payload TEXT,
+                state TEXT, created_at TEXT
+            );
+            CREATE TABLE work_item_files (
+                work_item_id TEXT NOT NULL, opaque_reference TEXT NOT NULL
+            );
+            INSERT INTO work_items VALUES ('item-1', 'test_queue', '{}', 'PENDING', NULL);
+            INSERT INTO work_item_files VALUES ('item-1', 'must-survive');
+            """
+        )
+
+    with pytest.raises(ValueError, match="Unsupported work_item_files schema"):
+        SQLiteAdapter(str(db_path), "test_queue", files_dir=str(tmp_path / "files"))
+
+    with sqlite3.connect(db_path) as conn:
+        assert conn.execute("SELECT opaque_reference FROM work_item_files").fetchone()[0] == "must-survive"
+        assert conn.execute("SELECT id FROM work_items").fetchone()[0] == "item-1"
+
+
+def test_mid_migration_failure_rolls_back_schema_and_rows(tmp_path, monkeypatch):
+    """An injected failure after table rename leaves the historical database untouched."""
+    db_path = tmp_path / "interrupted.db"
+    with sqlite3.connect(db_path) as conn:
+        conn.executescript(
+            """
+            CREATE TABLE work_items (
+                id TEXT PRIMARY KEY, queue_name TEXT NOT NULL, payload TEXT,
+                state TEXT, created_at TEXT
+            );
+            INSERT INTO work_items VALUES ('item-1', 'test_queue', '{}', 'PENDING', NULL);
+            """
+        )
+
+    def fail_after_rename(conn):
+        raise RuntimeError("injected migration interruption")
+
+    monkeypatch.setattr(SQLiteAdapter, "_create_schema", staticmethod(fail_after_rename))
+    with pytest.raises(RuntimeError, match="injected migration interruption"):
+        SQLiteAdapter(str(db_path), "test_queue", files_dir=str(tmp_path / "files"))
+
+    with sqlite3.connect(db_path) as conn:
+        assert conn.execute("SELECT id FROM work_items").fetchone()[0] == "item-1"
+        assert conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'work_items_migration_source'"
+        ).fetchone() is None

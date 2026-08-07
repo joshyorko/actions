@@ -20,17 +20,31 @@ class _RedisReadFake:
 class _RedisWriteFake:
     def __init__(self):
         self.keys = []
+        self.written_keys = []
 
     def _record(self, key, *args, **kwargs):
         self.keys.append(key)
+        self.keys.extend(arg for arg in args if isinstance(arg, str) and ":" in arg)
 
     lrem = _record
     srem = _record
     sadd = _record
-    delete = _record
-    hset = _record
     expire = _record
     set = _record
+
+    def delete(self, key, *args):
+        self._record(key, *args)
+
+    def hset(self, key, *args, **kwargs):
+        self._record(key, *args, **kwargs)
+        self.written_keys.append(key)
+
+    def hgetall(self, key):
+        self.keys.append(key)
+        return {}
+
+    def hdel(self, key, *args):
+        self.keys.append(key)
 
 
 def test_redis_decodes_historical_state_exception_and_scalar_payload():
@@ -71,7 +85,43 @@ def test_redis_release_routes_all_metadata_to_output_queue():
     assert "results:exception:item-1" in adapter._client.keys
     assert "results:timestamps:item-1" in adapter._client.keys
     assert "results:state:item-1" in adapter._client.keys
-    assert "jobs:exception:item-1" not in adapter._client.keys
+    assert "jobs:exception:item-1" not in adapter._client.written_keys
+
+
+def test_redis_reads_historical_input_queue_metadata_for_output_item():
+    adapter = RedisAdapter.__new__(RedisAdapter)
+    adapter.queue_name = "jobs"
+    adapter.output_queue_name = "results"
+    adapter._queue_cache = {"item-1": "results"}
+    adapter._client = _RedisReadFake(
+        {
+            "results:payload:item-1": {b"payload": b"{}"},
+            "jobs:timestamps:item-1": {b"created_at": b"2026-01-01T00:00:00"},
+            "jobs:exception:item-1": {b"code": b"E1", b"message": b"failed"},
+        },
+        {"jobs:state:item-1": b"FAILED"},
+    )
+    adapter.list_files = lambda item_id: []
+
+    item = adapter._item_to_api("item-1", "results")
+
+    assert item["state"] == State.FAILED.value
+    assert item["created_at"] == "2026-01-01T00:00:00"
+    assert item["error_code"] == "E1"
+
+
+def test_redis_delete_cleans_queue_scoped_and_historical_input_metadata():
+    adapter = RedisAdapter.__new__(RedisAdapter)
+    adapter.queue_name = "jobs"
+    adapter.output_queue_name = "results"
+    adapter._queue_cache = {"item-1": "results"}
+    adapter._client = _RedisWriteFake()
+
+    adapter.delete_item("item-1")
+
+    for suffix in ("timestamps", "state", "exception"):
+        assert f"results:{suffix}:item-1" in adapter._client.keys
+        assert f"jobs:{suffix}:item-1" in adapter._client.keys
 
 
 def test_docdb_decodes_flat_historical_state_exception_and_timestamps():
