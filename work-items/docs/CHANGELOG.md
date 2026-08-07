@@ -1,9 +1,15 @@
 # Changelog
 
+## 0.4.1 - 2026-08-07
+
+- Fix FileAdapter direct-file selection so existing files and paths ending in `.json` use the top-level-list representation instead of being passed to directory creation.
+- Run the pinned upstream FileAdapter contracts against their real direct paths, preserve sibling attachment references and metadata-only removal, and retain the 0.3.1 directory/envelope representation.
+- Accept both upstream and split-field release/add-file call forms in both FileAdapter representations.
+
 ## 0.4.0 - 2026-08-07
 
 - Restore the Robocorp Work Items runtime, lifecycle, email, attachment, and canonical `COMPLETED` semantics while preserving all Actions aliases and management helpers.
-- Add direct top-level-list JSON FileAdapter mode without seeding while retaining the 0.3.1 directory/envelope mode and filesystem containment.
+- Include an incomplete direct top-level-list JSON FileAdapter implementation whose public selector remained unreachable; fixed in 0.4.1.
 - Migrate historical custom/current SQLite data transactionally and preserve historical Redis and MongoDB records.
 - Add mandatory Redis 7 and MongoDB 7 service-backed release coverage.
 - Add the optional experimental Yorko adapter; the official Robocorp Control Room adapter remains excluded.

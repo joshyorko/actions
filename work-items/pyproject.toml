@@ -1,6 +1,6 @@
 [project]
 name = "actions-work-items"
-version = "0.4.0"
+version = "0.4.1"
 description = "Robocorp-compatible runtime and FileAdapter with managed local and distributed backends"
 authors = [{name = "Community Contributors"}]
 license = "Apache-2.0"

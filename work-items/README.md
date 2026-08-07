@@ -176,8 +176,11 @@ init(FileAdapter(
 
 Its environment variables are `RC_WORKITEM_INPUT_PATH` and
 `RC_WORKITEM_OUTPUT_PATH`. Existing files and `.json` paths use the Robocorp
-top-level-list format directly and require no seed step. Directory/non-JSON
-paths retain the 0.3.1 `work-items.json` envelope layout.
+top-level-list format directly and require no seed step or fixture translation.
+The direct input must exist as a non-empty list of objects; a missing output is
+created with its parent when saved. Direct attachments are sibling references
+and removal is metadata-only. Directory/non-JSON paths retain the 0.3.1
+`work-items.json` envelope and adapter-owned attachment layout.
 
 Redis and DocumentDB require their optional extra and can be selected with
 `create_adapter("redis")` or `create_adapter("documentdb")`. Redis uses

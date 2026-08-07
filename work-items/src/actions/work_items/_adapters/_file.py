@@ -50,6 +50,37 @@ class FileAdapter(BaseAdapter):
         RC_WORKITEM_OUTPUT_PATH: Output directory (default: ./output/work-items-out)
     """
 
+    def __new__(
+        cls,
+        input_path: str | None = None,
+        output_path: str | None = None,
+    ):
+        if cls is FileAdapter:
+            raw_input = (
+                input_path
+                or os.environ.get("RC_WORKITEM_INPUT_PATH")
+                or os.environ.get("RPA_INPUT_WORKITEM_PATH")
+            )
+            raw_output = (
+                output_path
+                or os.environ.get("RC_WORKITEM_OUTPUT_PATH")
+                or os.environ.get("RPA_OUTPUT_WORKITEM_PATH")
+            )
+            candidates = (
+                Path(raw_input) if raw_input else None,
+                Path(raw_output) if raw_output else None,
+            )
+            if any(
+                candidate is not None
+                and (
+                    candidate.is_file()
+                    or (not candidate.exists() and candidate.suffix.lower() == ".json")
+                )
+                for candidate in candidates
+            ):
+                return _DirectFileAdapter(raw_input, raw_output)
+        return super().__new__(cls)
+
     def __init__(
         self,
         input_path: str | None = None,
@@ -144,7 +175,7 @@ class FileAdapter(BaseAdapter):
         self,
         item_id: str,
         state: State,
-        exception_type: ExceptionType | None = None,
+        exception_type: ExceptionType | dict[str, Any] | None = None,
         code: str | None = None,
         message: str | None = None,
     ) -> None:
@@ -154,7 +185,13 @@ class FileAdapter(BaseAdapter):
             item = self._input_items[index]
 
             item["state"] = state.value
-            if exception_type:
+            if isinstance(exception_type, dict):
+                exception = dict(exception_type)
+                exception_kind = exception.get("type")
+                if isinstance(exception_kind, ExceptionType):
+                    exception["type"] = exception_kind.value
+                item["exception"] = exception
+            elif exception_type:
                 item["exception"] = {
                     "type": exception_type.value,
                     "code": code,
@@ -275,10 +312,20 @@ class FileAdapter(BaseAdapter):
         self,
         item_id: str,
         name: str,
-        original_name: str,
-        content: bytes,
+        original_name: str | bytes | bytearray | None = None,
+        content: bytes | None = None,
     ) -> None:
         """Add file to work item."""
+        if isinstance(original_name, bytes | bytearray):
+            if content is not None:
+                raise TypeError(
+                    "add_file received unexpected argument combination; "
+                    "use signature (item_id, name, original_name, content)"
+                )
+            content = bytes(original_name)
+            original_name = name
+        if content is None:
+            raise TypeError("File content is required")
         self._validate_item_id(item_id)
         # Check inputs
         for i, item in enumerate(self._input_items):
@@ -424,9 +471,7 @@ class FileAdapter(BaseAdapter):
         all_items = self._input_items + self._output_items
 
         pending = sum(1 for i in all_items if i.get("state") == State.PENDING.value)
-        in_progress = sum(
-            1 for i in all_items if i.get("state") == State.IN_PROGRESS.value
-        )
+        in_progress = sum(1 for i in all_items if i.get("state") == State.IN_PROGRESS.value)
         done = sum(1 for i in all_items if i.get("state") == State.DONE.value)
         failed = sum(1 for i in all_items if i.get("state") == State.FAILED.value)
 
@@ -444,11 +489,18 @@ class _DirectFileAdapter(BaseAdapter):
 
     def __init__(self, input_path: str | None, output_path: str | None):
         if not input_path:
-            raise ValueError("RC_WORKITEM_INPUT_PATH must name an input JSON file")
+            artifacts = Path(os.environ.get("ROBOT_ARTIFACTS") or "output")
+            generated_input = artifacts / "work-items-in" / "workitems.json"
+            generated_input.parent.mkdir(parents=True, exist_ok=True)
+            if not generated_input.exists():
+                self._save(generated_input, [{"payload": None, "files": {}}])
+            input_path = str(generated_input)
         self._input_path = Path(input_path).expanduser().resolve()
-        self._output_path = Path(
-            output_path or self._input_path.with_name("work-items-out.json")
-        ).expanduser().resolve()
+        self._output_path = (
+            Path(output_path or self._input_path.with_name("work-items-out.json"))
+            .expanduser()
+            .resolve()
+        )
         self._inputs = self._load(self._input_path, required=True)
         self._outputs = self._load(self._output_path, required=False)
         self._index = 0
@@ -573,9 +625,19 @@ class _DirectFileAdapter(BaseAdapter):
         self,
         item_id: str,
         name: str,
-        original_name: str,
-        content: bytes,
+        original_name: str | bytes | bytearray | None = None,
+        content: bytes | None = None,
     ) -> None:
+        if isinstance(original_name, bytes | bytearray):
+            if content is not None:
+                raise TypeError(
+                    "add_file received unexpected argument combination; "
+                    "use signature (item_id, name, original_name, content)"
+                )
+            content = bytes(original_name)
+            original_name = name
+        if content is None:
+            raise TypeError("File content is required")
         source, item = self._get_item(item_id)
         root = self._input_path.parent if source == "input" else self._output_path.parent
         path = resolve_attachment_path(root, name)
@@ -630,21 +692,3 @@ class _DirectFileAdapter(BaseAdapter):
     def get_queue_stats(self, queue_name: str | None = None) -> dict[str, int]:
         total = len(self._inputs) + len(self._outputs)
         return {"pending": total, "in_progress": 0, "done": 0, "failed": 0, "total": total}
-    def __new__(
-        cls,
-        input_path: str | None = None,
-        output_path: str | None = None,
-    ):
-        if cls is FileAdapter:
-            raw_input = input_path or os.environ.get("RC_WORKITEM_INPUT_PATH") or os.environ.get("RPA_INPUT_WORKITEM_PATH")
-            raw_output = output_path or os.environ.get("RC_WORKITEM_OUTPUT_PATH") or os.environ.get("RPA_OUTPUT_WORKITEM_PATH")
-            input_candidate = Path(raw_input) if raw_input else None
-            output_candidate = Path(raw_output) if raw_output else None
-            direct = any(
-                candidate is not None
-                and (candidate.is_file() or candidate.suffix.lower() == ".json")
-                for candidate in (input_candidate, output_candidate)
-            )
-            if direct:
-                return _DirectFileAdapter(raw_input, raw_output)
-        return super().__new__(cls)

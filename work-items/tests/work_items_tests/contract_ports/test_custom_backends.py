@@ -26,7 +26,6 @@ from actions.work_items._types import State
 
 from actions.work_items.scripts import config as adapter_config
 
-from .compat import direct_file_adapter
 from .mocks import MOCK_FILES, PAYLOAD_FIRST, PAYLOAD_SECOND
 
 # TTL_WEEK_SECONDS is defined in our local _types module
@@ -100,7 +99,7 @@ class TestFileAdapter:
         with self._mock_work_items() as (items_in, items_out):
             monkeypatch.setenv(request.param[0], str(items_in))
             monkeypatch.setenv(request.param[1], str(items_out))
-            yield direct_file_adapter(FileAdapter, items_in, items_out)
+            yield FileAdapter()
 
     @pytest.fixture
     def workitems(self, adapter):

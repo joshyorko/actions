@@ -18,6 +18,9 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 - SQLite payload reads preserve every JSON shape exactly and raise `ValueError` for malformed stored JSON; the current Action Server REST model imposes a narrower object-or-null boundary.
 - `State.COMPLETED` compatibility and public aliases are migration-sensitive.
 - FileAdapter's legacy numbered attachment layout requires pre-mutation migration before index-changing deletion; never derive legacy ownership from a post-deletion index.
+- FileAdapter detection is representation-preserving: an existing file or either configured path ending in `.json` selects direct-file mode; an existing directory or non-`.json` path selects the 0.3.x directory mode. Direct files remain top-level JSON lists with decimal index IDs and sibling attachment references; directory mode remains a `{\"workItems\": [...]}` envelope with adapter-owned numbered attachment directories. Direct removal changes metadata only, while directory removal deletes adapter-owned files.
+- An explicitly configured direct input file must already exist, contain a non-empty top-level list, and contain only object items; missing, empty, malformed, envelope-shaped, or non-object-item input raises a path-bearing `ValueError`. A missing direct output file is valid and is created with its parent as a top-level list when an output is saved.
+- No seed invariant: a committed top-level-list direct input fixture is itself the queue. Run producer tasks against that unchanged file; do not seed it, wrap it in a directory envelope, or translate it in a compatibility helper.
 
 ## Local Verification
 
@@ -47,8 +50,8 @@ Do not enable setup-python's Poetry cache before Poetry is installed: the cache 
 
 Publication is tag-only: the `publish` job requires successful verification, accepts only `refs/tags/actions-work-items-*`, fetches `origin/community`, proves that the tagged commit is an ancestor of that branch, compares the tag suffix with `poetry version --short`, downloads `actions-work-items-dist` to `work-items/dist`, and publishes those exact artifacts with `PYPI_TOKEN_ACTIONS_WORK_ITEMS`. The publish job must not rely on package-development commands such as Invoke unless they are locked runtime dependencies. It has no manual version input and does not use OIDC.
 
-For 0.4.0, merge the verified pull request into `community`, then create
-`actions-work-items-0.4.0` on that exact merged commit. Never move or reuse an
+For 0.4.1, merge the verified pull request into `community`, then create
+`actions-work-items-0.4.1` on that exact merged commit. Never move or reuse an
 accepted artifact or release tag.
 
 The `pypi` environment is a workflow reference only. Its approval and protection rules are external GitHub configuration and must be created and enforced there before they are relied upon.
@@ -80,7 +83,7 @@ Ruff's configured `UP` fixes in `work-items/src/actions/work_items` are compatib
 
 ## Compatibility Contract Inventory
 
-The 0.4.0 consolidation inventory is machine-readable under
+The 0.4.1 compatibility inventory is machine-readable under
 `work-items/contracts/`. `compatibility-ledger.json` records the immutable
 Robocorp Work Items `631f5601617e9935620a72c788a98e1012331323` and custom
 adapter `c56c70102423a18ed54037221116f81ccccd4f4e` pins alongside the 0.3.1
@@ -89,8 +92,8 @@ required parity, preserved 0.3.1 compatibility, intentional security
 hardening, or unsupported external service.
 
 `ported-tests.json` maps 123 selected Apache-2.0 logical test nodes to an
-implementation task and status. Pytest expands those nodes to 153 cases: 92
-implemented cases run normally, 33 expected-red cases execute and xfail, and 28
+implementation task and status. Pytest expands those nodes to 153 cases: 114
+implemented cases run normally, 11 expected-red cases execute and xfail, and 28
 Redis/MongoDB service cases retain the pinned source `skipif` decorators. The
 28 service cases are collected but are not backend evidence unless a reachable
 service makes their bodies execute.

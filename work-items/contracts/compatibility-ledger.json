@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_target": "0.4.0",
+  "release_target": "0.4.1",
   "baselines": {
     "robocorp-1.5.0": {
       "commit": "631f5601617e9935620a72c788a98e1012331323",
@@ -520,7 +520,7 @@
       "id": "file.direct-mode",
       "classification": "required_parity",
       "decision": "Existing file or .json path selects upstream direct-file representation",
-      "status": "expected_red",
+      "status": "implemented",
       "task": "task-3"
     },
     {
