@@ -1069,6 +1069,8 @@ class RedisAdapter(BaseAdapter):
                         else reserved_at_str
                     )
                     reserved_at = datetime.fromisoformat(reserved_at_decoded)
+                    if reserved_at.tzinfo is None:
+                        reserved_at = reserved_at.replace(tzinfo=timezone.utc)
 
                     if reserved_at < cutoff_time:
                         # Move back to pending

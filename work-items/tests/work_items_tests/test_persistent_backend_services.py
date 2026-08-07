@@ -84,6 +84,19 @@ def _exercise_atomic_fifo_recovery(adapter):
         adapter.delete_item(item_id)
 
 
+def test_redis_recovers_historic_naive_reserved_timestamp(redis_adapter):
+    item_id = redis_adapter.seed_input(payload={"legacy": True})
+    assert redis_adapter.reserve_input() == item_id
+    redis_adapter._client.hset(
+        redis_adapter._key("timestamps", item_id=item_id),
+        "reserved_at",
+        "2020-01-01T00:00:00",
+    )
+
+    assert redis_adapter.recover_orphaned_work_items() == [item_id]
+    assert redis_adapter.get_item(item_id)["state"] == State.PENDING.value
+
+
 def _exercise_attachments_output_and_cleanup(adapter):
     item_id = adapter.seed_input(payload=[1, 2])
     adapter.add_file(item_id, "small.txt", "small.txt", b"small")

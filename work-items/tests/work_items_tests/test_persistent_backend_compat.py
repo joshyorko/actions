@@ -37,6 +37,7 @@ class _RedisWriteFake:
         self.keys.extend(arg for arg in args if isinstance(arg, str) and ":" in arg)
 
     lrem = _record
+    lpush = _record
     srem = _record
     sadd = _record
     expire = _record
@@ -109,6 +110,20 @@ class _RedisReleaseFailureFake(_RedisWriteFake):
             self.values.pop(candidate, None)
 
 
+class _RedisRecoveryFake(_RedisWriteFake):
+    def __init__(self):
+        super().__init__()
+        self.processing = [b"item-1"]
+        self.values = {"jobs:timestamps:item-1": {"reserved_at": "2020-01-01T00:00:00"}}
+
+    def lrange(self, key, start, end):
+        assert (key, start, end) == ("jobs:processing", 0, -1)
+        return self.processing
+
+    def hget(self, key, field):
+        return self.values.get(key, {}).get(field)
+
+
 def test_redis_decodes_historical_state_exception_and_scalar_payload():
     adapter = RedisAdapter.__new__(RedisAdapter)
     adapter.queue_name = "jobs"
@@ -161,6 +176,17 @@ def test_redis_release_serializes_timezone_aware_timestamp():
 
     timestamp = adapter._client.values["jobs:timestamps:item-1"]["released_at"]
     assert datetime.fromisoformat(timestamp).tzinfo == timezone.utc
+
+
+def test_redis_recovers_historic_naive_reserved_timestamp_as_utc():
+    adapter = RedisAdapter.__new__(RedisAdapter)
+    adapter.queue_name = "jobs"
+    adapter.orphan_timeout_minutes = 1
+    adapter._client = _RedisRecoveryFake()
+
+    assert adapter.recover_orphaned_work_items() == ["item-1"]
+    assert "jobs:pending" in adapter._client.keys
+    assert "jobs:timestamps:item-1" in adapter._client.keys
 
 
 def test_redis_release_accepts_legacy_exception_keyword():

@@ -112,7 +112,7 @@ class YorkoAdapter(BaseAdapter):
         self,
         item_id: str,
         state: State,
-        exception_type: ExceptionType | None = None,
+        exception_type: ExceptionType | str | None = None,
         code: str | None = None,
         message: str | None = None,
         exception: dict[str, Any] | None = None,
@@ -132,7 +132,9 @@ class YorkoAdapter(BaseAdapter):
         exception_data = {
             key: value
             for key, value in {
-                "type": exception_type.value if exception_type else None,
+                "type": exception_type.value
+                if isinstance(exception_type, ExceptionType)
+                else exception_type,
                 "code": code,
                 "message": message,
             }.items()
