@@ -31,7 +31,6 @@ REFERENCE_AUXILIARY = {
 ADAPTED_AUXILIARY = (
     ROOT / "tests" / "work_items_tests" / "contract_ports" / "conftest.py",
     ROOT / "tests" / "work_items_tests" / "contract_ports" / "mocks.py",
-    ROOT / "tests" / "work_items_tests" / "contract_ports" / "compat.py",
 )
 
 
