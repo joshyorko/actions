@@ -67,11 +67,11 @@ def _nodes(path, suite):
     tree = ast.parse(path.read_text())
     found = set()
     for node in tree.body:
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_"):
+        if isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef) and node.name.startswith("test_"):
             found.add(f"{suite}.py::{node.name}")
         elif isinstance(node, ast.ClassDef) and node.name.startswith("Test"):
             for child in node.body:
-                if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef)) and child.name.startswith("test_"):
+                if isinstance(child, ast.FunctionDef | ast.AsyncFunctionDef) and child.name.startswith("test_"):
                     found.add(f"{suite}.py::{node.name}::{child.name}")
     return found
 
