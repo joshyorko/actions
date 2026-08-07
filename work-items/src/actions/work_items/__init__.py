@@ -71,6 +71,8 @@ from ._adapters import (
     RedisAdapter,
     RuntimeAdapter,
     SQLiteAdapter,
+    YorkoAdapter,
+    YorkoControlRoomAdapter,
 )
 from ._collections import Inputs, Outputs
 from ._context import (
@@ -95,7 +97,7 @@ from ._workitem import Input, Output, WorkItem
 
 log = logging.getLogger(__name__)
 
-__version__ = "0.3.1"
+__version__ = "0.4.0"
 
 
 def _build_task_context(
@@ -198,6 +200,14 @@ def create_adapter(
         "actions.work_items._adapters._docdb.documentdbadapter",
     ):
         return DocumentDBAdapter(**kwargs)
+    elif normalized_type in (
+        "yorko",
+        "yorkoadapter",
+        "yorkocontrolroomadapter",
+        "actions.work_items.yorkoadapter",
+        "actions.work_items._adapters._yorko.yorkoadapter",
+    ):
+        return YorkoAdapter(**kwargs)
     elif adapter_type:
         # Try dynamic import for custom adapters
         try:
@@ -421,4 +431,6 @@ __all__ = [
     "SQLiteAdapter",
     "RedisAdapter",
     "DocumentDBAdapter",
+    "YorkoAdapter",
+    "YorkoControlRoomAdapter",
 ]

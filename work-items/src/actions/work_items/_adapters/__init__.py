@@ -13,6 +13,7 @@ from ._docdb import DocumentDBAdapter
 from ._file import FileAdapter
 from ._redis import RedisAdapter
 from ._sqlite import SQLiteAdapter
+from ._yorko import YorkoAdapter, YorkoControlRoomAdapter
 
 __all__ = [
     "BaseAdapter",
@@ -22,4 +23,6 @@ __all__ = [
     "SQLiteAdapter",
     "RedisAdapter",
     "DocumentDBAdapter",
+    "YorkoAdapter",
+    "YorkoControlRoomAdapter",
 ]

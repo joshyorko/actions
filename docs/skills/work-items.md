@@ -47,7 +47,9 @@ Do not enable setup-python's Poetry cache before Poetry is installed: the cache 
 
 Publication is tag-only: the `publish` job requires successful verification, accepts only `refs/tags/actions-work-items-*`, fetches `origin/community`, proves that the tagged commit is an ancestor of that branch, compares the tag suffix with `poetry version --short`, downloads `actions-work-items-dist` to `work-items/dist`, and publishes those exact artifacts with `PYPI_TOKEN_ACTIONS_WORK_ITEMS`. The publish job must not rely on package-development commands such as Invoke unless they are locked runtime dependencies. It has no manual version input and does not use OIDC.
 
-For 0.3.1, merge the release fix into `community`, confirm the merged verification run is green, then create `actions-work-items-0.3.1` on that exact merged commit. The 0.3.0 tag failed before PyPI accepted artifacts and remains immutable. Confirm the 0.3.1 tag run passes strict Twine, metadata, alias, version, and ancestry gates before checking PyPI and installing the published wheel in a clean environment. Never move or reuse an accepted artifact or release tag: if publication did not accept the artifacts, merge the fix and use a new version/tag; if it did, publish a new patch version.
+For 0.4.0, merge the verified pull request into `community`, then create
+`actions-work-items-0.4.0` on that exact merged commit. Never move or reuse an
+accepted artifact or release tag.
 
 The `pypi` environment is a workflow reference only. Its approval and protection rules are external GitHub configuration and must be created and enforced there before they are relied upon.
 
@@ -100,10 +102,8 @@ classes or messages remain ordinary failures, and fixture lookup, setup,
 teardown, and collection failures are never gap-classified. A passing open gap
 becomes a strict `XPASS` failure requiring a manifest update. Never use a
 file-wide expected-red marker, broad name-family exception inference, or a
-shared sentinel assertion. The direct-file fixture adapter only translates the
-pinned fixture data into the package's directory layout; selected test bodies,
-decorators, and assertions continue to execute unchanged apart from explicit
-import/name compatibility substitutions.
+shared sentinel assertion. Direct-file fixtures execute through the package's
+top-level-list JSON mode without a seed or directory-layout translation.
 
 `python work-items/scripts/check_contract_port_provenance.py` without reference
 roots validates a checked-in digest for deterministic offline package
@@ -124,9 +124,10 @@ selected nodes, bodies, decorators, assertions, fixture interfaces, exclusions,
 and public symbols/signatures from those trees. It compares stored source nodes,
 adapted ports under import/name-only AST normalization, and the compatibility
 ledger. The Work Items release workflow checks out both exact commits and runs
-this form before the package gate. Control Room HTTP, Yorko, and Fizzy
-orchestration remain explicit exclusions; live Redis, MongoDB, AWS DocumentDB,
-Yorko, and Control Room behavior is not established by the offline suite.
+this form before the package gate. The official Robocorp Control Room HTTP
+adapter and Fizzy orchestration remain explicit exclusions. Yorko is a separate
+experimental optional adapter whose mocked contract does not establish live
+service behavior.
 
 The runtime facade accepts both adapter generations without forcing persistent
 backends to share one signature: release normalization supports the upstream

@@ -437,3 +437,214 @@ class FileAdapter(BaseAdapter):
             "failed": failed,
             "total": len(all_items),
         }
+
+
+class _DirectFileAdapter(BaseAdapter):
+    """Robocorp-compatible top-level-list JSON adapter."""
+
+    def __init__(self, input_path: str | None, output_path: str | None):
+        if not input_path:
+            raise ValueError("RC_WORKITEM_INPUT_PATH must name an input JSON file")
+        self._input_path = Path(input_path).expanduser().resolve()
+        self._output_path = Path(
+            output_path or self._input_path.with_name("work-items-out.json")
+        ).expanduser().resolve()
+        self._inputs = self._load(self._input_path, required=True)
+        self._outputs = self._load(self._output_path, required=False)
+        self._index = 0
+        self._releases: dict[str, tuple[State, dict[str, Any] | None]] = {}
+
+    @staticmethod
+    def _load(path: Path, *, required: bool) -> list[dict[str, Any]]:
+        if not path.exists():
+            if required:
+                raise ValueError(f"Invalid work items file {path}: file does not exist")
+            return []
+        try:
+            text = path.read_text(encoding="utf-8")
+            if not text.strip():
+                raise ValueError("file is empty")
+            data = json.loads(text)
+            if not isinstance(data, list):
+                raise ValueError("expected a top-level list")
+            if any(not isinstance(item, dict) for item in data):
+                raise ValueError("every work item must be an object")
+            if required and not data:
+                raise ValueError("expected at least one work item")
+            return data
+        except (OSError, json.JSONDecodeError, ValueError) as exc:
+            raise ValueError(f"Invalid work items file {path}: {exc}") from exc
+
+    @staticmethod
+    def _save(path: Path, items: list[dict[str, Any]]) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(items, indent=2, default=str), encoding="utf-8")
+
+    def _get_item(self, item_id: str) -> tuple[str, dict[str, Any]]:
+        try:
+            index = int(item_id)
+        except ValueError as exc:
+            raise ValueError(f"Unknown work item ID: {item_id}") from exc
+        if 0 <= index < len(self._inputs):
+            return "input", self._inputs[index]
+        output_index = index - len(self._inputs)
+        if 0 <= output_index < len(self._outputs):
+            return "output", self._outputs[output_index]
+        raise ValueError(f"Unknown work item ID: {item_id}")
+
+    def _save_source(self, source: str) -> None:
+        if source == "input":
+            self._save(self._input_path, self._inputs)
+        else:
+            self._save(self._output_path, self._outputs)
+
+    def _attachment(self, source: str, item: dict[str, Any], name: str) -> Path:
+        files = item.get("files", {})
+        if not isinstance(files, dict) or name not in files:
+            raise ValueError(f"File not found: {name}")
+        reference = Path(str(files[name]))
+        if reference.is_absolute():
+            raise ValueError(f"Unsafe absolute attachment path: {reference}")
+        root = self._input_path.parent if source == "input" else self._output_path.parent
+        candidate = (root / reference).resolve()
+        if candidate == root or root not in candidate.parents:
+            raise ValueError(f"Unsafe attachment path: {reference}")
+        return candidate
+
+    def reserve_input(self) -> str:
+        if self._index >= len(self._inputs):
+            raise EmptyQueue("No work items in the input queue")
+        item_id = str(self._index)
+        self._index += 1
+        return item_id
+
+    def release_input(
+        self,
+        item_id: str,
+        state: State,
+        exception_type: ExceptionType | dict[str, Any] | None = None,
+        code: str | None = None,
+        message: str | None = None,
+    ) -> None:
+        source, _ = self._get_item(item_id)
+        if source != "input":
+            raise ValueError(f"Work item is not an input: {item_id}")
+        if item_id in self._releases:
+            raise ValueError("Work item already released")
+        if isinstance(exception_type, dict):
+            exception = exception_type
+        elif exception_type is not None:
+            exception = {"type": exception_type.value, "code": code, "message": message}
+        else:
+            exception = None
+        self._releases[item_id] = (state, exception)
+
+    def create_output(self, parent_id: str, payload: JSONType | None = None) -> str:
+        source, _ = self._get_item(parent_id)
+        if source != "input" or parent_id in self._releases:
+            raise ValueError(f"Invalid output parent: {parent_id}")
+        self._outputs.append({"payload": payload, "files": {}})
+        self._save(self._output_path, self._outputs)
+        return str(len(self._inputs) + len(self._outputs) - 1)
+
+    def load_payload(self, item_id: str) -> JSONType:
+        return self._get_item(item_id)[1].get("payload")
+
+    def save_payload(self, item_id: str, payload: JSONType) -> None:
+        source, item = self._get_item(item_id)
+        item["payload"] = payload
+        self._save_source(source)
+
+    def list_files(self, item_id: str) -> list[str]:
+        files = self._get_item(item_id)[1].get("files", {})
+        if not isinstance(files, dict):
+            raise ValueError(f"Invalid files mapping for work item {item_id}")
+        return list(files)
+
+    def get_file(self, item_id: str, name: str) -> bytes:
+        source, item = self._get_item(item_id)
+        path = self._attachment(source, item, name)
+        try:
+            return path.read_bytes()
+        except OSError as exc:
+            raise ValueError(f"File not found: {name}") from exc
+
+    def add_file(
+        self,
+        item_id: str,
+        name: str,
+        original_name: str,
+        content: bytes,
+    ) -> None:
+        source, item = self._get_item(item_id)
+        root = self._input_path.parent if source == "input" else self._output_path.parent
+        path = resolve_attachment_path(root, name)
+        if path.exists():
+            raise FileExistsError(name)
+        path.write_bytes(content)
+        files = item.setdefault("files", {})
+        if not isinstance(files, dict):
+            raise ValueError(f"Invalid files mapping for work item {item_id}")
+        files[name] = name
+        self._save_source(source)
+
+    def remove_file(self, item_id: str, name: str) -> None:
+        source, item = self._get_item(item_id)
+        files = item.get("files", {})
+        if not isinstance(files, dict) or name not in files:
+            raise ValueError(f"File not found: {name}")
+        del files[name]
+        self._save_source(source)
+
+    def seed_input(
+        self,
+        payload: JSONType | None = None,
+        files: dict[str, bytes] | None = None,
+        queue_name: str | None = None,
+    ) -> str:
+        item: dict[str, Any] = {"payload": payload, "files": {}}
+        self._inputs.append(item)
+        item_id = str(len(self._inputs) - 1)
+        for name, content in (files or {}).items():
+            self.add_file(item_id, name, name, content)
+        self._save(self._input_path, self._inputs)
+        return item_id
+
+    def list_items(
+        self,
+        queue_name: str | None = None,
+        state: State | None = None,
+        limit: int = 100,
+    ) -> list[dict[str, Any]]:
+        return (self._inputs + self._outputs)[:limit]
+
+    def get_item(self, item_id: str) -> dict[str, Any]:
+        return self._get_item(item_id)[1]
+
+    def delete_item(self, item_id: str) -> None:
+        source, item = self._get_item(item_id)
+        collection = self._inputs if source == "input" else self._outputs
+        collection.remove(item)
+        self._save_source(source)
+
+    def get_queue_stats(self, queue_name: str | None = None) -> dict[str, int]:
+        total = len(self._inputs) + len(self._outputs)
+        return {"pending": total, "in_progress": 0, "done": 0, "failed": 0, "total": total}
+    def __new__(
+        cls,
+        input_path: str | None = None,
+        output_path: str | None = None,
+    ):
+        if cls is FileAdapter:
+            raw_input = input_path or os.environ.get("RC_WORKITEM_INPUT_PATH") or os.environ.get("RPA_INPUT_WORKITEM_PATH")
+            raw_output = output_path or os.environ.get("RC_WORKITEM_OUTPUT_PATH") or os.environ.get("RPA_OUTPUT_WORKITEM_PATH")
+            input_candidate = Path(raw_input) if raw_input else None
+            output_candidate = Path(raw_output) if raw_output else None
+            direct = any(
+                candidate is not None
+                and (candidate.is_file() or candidate.suffix.lower() == ".json")
+                for candidate in (input_candidate, output_candidate)
+            )
+            if direct:
+                return _DirectFileAdapter(raw_input, raw_output)
+        return super().__new__(cls)
