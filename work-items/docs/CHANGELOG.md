@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3 - 2026-08-07
+
+- Keep the public package version aliases synchronized with the built distribution.
+
 ## 0.4.2 - 2026-08-07
 
 - Normalize historic Redis naive reservation timestamps as UTC during orphan recovery.
