@@ -12,6 +12,11 @@ from collections.abc import Mapping
 from typing import Any
 from urllib.parse import quote, urljoin
 
+from .._exceptions import ApplicationException, EmptyQueue
+from .._types import ExceptionType, JSONType, State
+from .._utils import required_env
+from ._base import BaseAdapter
+
 try:  # pragma: no cover - exercised by clean-wheel verification without the extra.
     import requests
 except ImportError:  # pragma: no cover
@@ -20,11 +25,6 @@ except ImportError:  # pragma: no cover
 _REQUEST_EXCEPTIONS = (
     (TimeoutError,) if requests is None else (TimeoutError, requests.RequestException)
 )
-
-from .._exceptions import ApplicationException, EmptyQueue
-from .._types import ExceptionType, JSONType, State
-from .._utils import required_env
-from ._base import BaseAdapter
 
 
 class YorkoAdapter(BaseAdapter):
