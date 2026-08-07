@@ -15,6 +15,8 @@ import pytest
 from actions.work_items._adapters import FileAdapter
 from actions.work_items._types import State
 
+from .compat import direct_file_adapter
+
 ITEMS_JSON = [{"payload": {"a-key": "a-value"}, "files": {"a-file": "file.txt"}}]
 
 
@@ -46,7 +48,7 @@ class TestFileAdapter:
         with self._mock_work_items() as (items_in, items_out):
             monkeypatch.setenv(request.param[0], str(items_in))
             monkeypatch.setenv(request.param[1], str(items_out))
-            yield FileAdapter()
+            yield direct_file_adapter(FileAdapter, items_in, items_out)
 
     @pytest.fixture
     def workitems(self, adapter):
@@ -205,5 +207,4 @@ class TestRobocorpAdapter:
             self.mock_get.return_value.status_code = 200
             self.mock_post.return_value.status_code = 200
             self.mock_put.return_value.status_code = 200
-
 

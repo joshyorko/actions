@@ -1,6 +1,16 @@
 {
   "schema_version": 1,
   "attribution": "Tests derived from Robocorp Work Items and robocorp-adapters-custom; Apache License 2.0. Source pins are immutable.",
+  "counts": {
+    "logical_nodes": 123,
+    "parametrized_cases": 153,
+    "implemented_logical_nodes": 27,
+    "implemented_parametrized_cases": 40,
+    "expected_red_logical_nodes": 68,
+    "expected_red_parametrized_cases": 85,
+    "external_logical_nodes": 28,
+    "external_parametrized_cases": 28
+  },
   "sources": {
     "robocorp-1.5.0": {
       "commit": "631f5601617e9935620a72c788a98e1012331323",
@@ -57,7 +67,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-3",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_list_files",
@@ -65,7 +75,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-3",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_get_file",
@@ -73,7 +83,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-3",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_add_file",
@@ -537,7 +547,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_list_files",
@@ -545,7 +555,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_get_file",
@@ -553,7 +563,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_add_file",
@@ -817,7 +827,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_reserve_and_release_workflow",
@@ -825,7 +835,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_payload_persistence",
@@ -833,7 +843,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_file_operations_inline",
@@ -841,7 +851,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_fifo_ordering",
@@ -849,7 +859,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_concurrent_reservation",
@@ -857,7 +867,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_producer_consumer_workflow",
@@ -865,7 +875,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_exception_handling",
@@ -873,7 +883,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_error_handling_file_not_found",
@@ -881,7 +891,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_error_handling_file_already_exists",
@@ -889,7 +899,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_error_handling_invalid_work_item",
@@ -897,7 +907,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_custom_output_queue_name",
@@ -905,7 +915,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_default_output_queue_name_backward_compatibility",
@@ -913,7 +923,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_mongodb_connection",
@@ -921,7 +931,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_reserve_and_release_workflow",
@@ -929,7 +939,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_payload_operations",
@@ -937,7 +947,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_file_operations_gridfs",
@@ -945,7 +955,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_fifo_ordering",
@@ -953,7 +963,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_atomic_reservation",
@@ -961,7 +971,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_producer_consumer_workflow",
@@ -969,7 +979,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_exception_storage",
@@ -977,7 +987,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_error_handling_file_not_found",
@@ -985,7 +995,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_error_handling_file_already_exists",
@@ -993,7 +1003,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_error_handling_invalid_work_item",
@@ -1001,7 +1011,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_missing_document_during_file_access",
@@ -1009,7 +1019,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_file_size_threshold_inline_vs_gridfs",
@@ -1017,7 +1027,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_custom_output_queue_name",
@@ -1025,7 +1035,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_default_output_queue_name_backward_compatibility",
@@ -1033,7 +1043,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "unsupported_external_service"
     }
   ]
 }

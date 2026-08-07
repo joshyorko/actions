@@ -26,6 +26,7 @@ from actions.work_items._types import State
 
 from actions.work_items.scripts import config as adapter_config
 
+from .compat import direct_file_adapter
 from .mocks import MOCK_FILES, PAYLOAD_FIRST, PAYLOAD_SECOND
 
 # TTL_WEEK_SECONDS is defined in our local _types module
@@ -99,7 +100,7 @@ class TestFileAdapter:
         with self._mock_work_items() as (items_in, items_out):
             monkeypatch.setenv(request.param[0], str(items_in))
             monkeypatch.setenv(request.param[1], str(items_out))
-            yield FileAdapter()
+            yield direct_file_adapter(FileAdapter, items_in, items_out)
 
     @pytest.fixture
     def workitems(self, adapter):
@@ -429,13 +430,13 @@ class TestSQLiteAdapter:
         # Seed test data with files (matching FileAdapter pattern)
         item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
         for name, content in MOCK_FILES["workitem-id-first"].items():
-            adapter.add_file(item1_id, name, content)
+            adapter.add_file(item1_id, name, name, content)
 
         adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
 
         # Create context with our adapter
         ctx = WorkItemsContext(adapter=adapter)
-        ctx.reserve_input()
+        ctx.get_input()
 
         def _getter():
             return ctx
@@ -715,6 +716,10 @@ def _create_redis_input_item(adapter, payload):
 
 
 @pytest.mark.redis
+@pytest.mark.skipif(
+    not _redis_service_available(),
+    reason="Redis integration tests require RC_REDIS_URL or localhost:6379",
+)
 class TestRedisAdapter:
     """Integration tests for RedisAdapter with real Redis instance."""
 
@@ -754,13 +759,13 @@ class TestRedisAdapter:
         # Seed test data in INPUT queue with files
         item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
         for name, content in MOCK_FILES["workitem-id-first"].items():
-            adapter.add_file(item1_id, name, content)
+            adapter.add_file(item1_id, name, name, content)
 
         adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
 
         # Create context with our adapter
         ctx = WorkItemsContext(adapter=adapter)
-        ctx.reserve_input()
+        ctx.get_input()
 
         def _getter():
             return ctx
@@ -975,6 +980,10 @@ class TestRedisAdapter:
 
 @pytest.mark.integration
 @pytest.mark.docdb
+@pytest.mark.skipif(
+    not _mongo_service_available(),
+    reason="DocumentDB integration tests require RC_MONGO_URL or localhost:27017",
+)
 class TestDocumentDBAdapter:
     """Integration tests for DocumentDBAdapter with real MongoDB instance."""
 
@@ -1019,13 +1028,13 @@ class TestDocumentDBAdapter:
         # Seed test data with files
         item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
         for name, content in MOCK_FILES["workitem-id-first"].items():
-            adapter.add_file(item1_id, name, content)
+            adapter.add_file(item1_id, name, name, content)
 
         adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
 
         # Create context with our adapter
         ctx = WorkItemsContext(adapter=adapter)
-        ctx.reserve_input()
+        ctx.get_input()
 
         def _getter():
             return ctx
@@ -1307,4 +1316,3 @@ class TestDocumentDBAdapter:
         # Cleanup
         client = MongoClient(mongo_url)
         client.drop_database(mongo_db)
-

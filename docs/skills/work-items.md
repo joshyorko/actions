@@ -90,24 +90,47 @@ surface, and every recorded difference uses one of four classifications:
 required parity, preserved 0.3.1 compatibility, intentional security
 hardening, or unsupported external service.
 
-`ported-tests.json` maps each selected Apache-2.0 upstream test node to an
-implementation task and status. The adapted ports under
-`work-items/tests/work_items_tests/contract_ports/` execute the preserved test
-bodies against `actions-work-items`. Compatible nodes run normally. Each
-pending node receives its own `xfail(strict=True, raises=...)`, implementation
-owner, and stable contract ID; a different exception is an ordinary failure and
-an unexpected pass fails the contract gate. Never use a file-wide expected-red
-marker or a shared sentinel assertion.
+`ported-tests.json` maps 123 selected Apache-2.0 logical test nodes to an
+implementation task and status. Pytest expands those nodes to 153 cases: 40
+implemented cases run normally, 85 expected-red cases execute and xfail, and 28
+Redis/MongoDB service cases retain the pinned source `skipif` decorators. The
+28 service cases are collected but are not backend evidence unless a reachable
+service makes their bodies execute.
 
-`python work-items/scripts/check_contract_port_provenance.py` is the
-cwd-independent CI check for the checked-in provenance artifact. It hashes the
-complete selected source and adapted functions (including decorators,
-parametrization, fixture declarations, bodies, and assertions), whole source
-and port files, manifest source selection/exclusions, the ledger, and frozen
-public surfaces. After reviewing an intentional baseline or port change,
-regenerate with `--write` using the package's supported Python environment.
-Control Room HTTP, Yorko, and Fizzy orchestration remain explicit exclusions
-required by the consolidation boundary.
+Every expected-red logical node and parameter ID owns one exact exception class
+and a stable message predicate in `expected-red-failures.json`. The custom
+classifier handles only failures raised during the test call phase. Wrong
+classes or messages remain ordinary failures, and fixture lookup, setup,
+teardown, and collection failures are never gap-classified. A passing open gap
+becomes a strict `XPASS` failure requiring a manifest update. Never use a
+file-wide expected-red marker, broad name-family exception inference, or a
+shared sentinel assertion. The direct-file fixture adapter only translates the
+pinned fixture data into the package's directory layout; selected test bodies,
+decorators, and assertions continue to execute unchanged apart from explicit
+import/name compatibility substitutions.
+
+`python work-items/scripts/check_contract_port_provenance.py` without reference
+roots validates a checked-in digest for deterministic offline package
+diagnostics. That digest is mutable repository data and is not immutable source
+authority. After reviewing an intentional local baseline or port change,
+regenerate it with `--write` using the package's supported Python environment.
+
+The authoritative form requires explicit Git roots:
+
+```bash
+python work-items/scripts/check_contract_port_provenance.py \
+  --robocorp-root /path/to/robocorp-at-631f560 \
+  --custom-root /path/to/custom-at-c56c701
+```
+
+It first requires each root's `HEAD` to equal its ledger SHA, then derives the
+selected nodes, bodies, decorators, assertions, fixture interfaces, exclusions,
+and public symbols/signatures from those trees. It compares stored source nodes,
+adapted ports under import/name-only AST normalization, and the compatibility
+ledger. The Work Items release workflow checks out both exact commits and runs
+this form before the package gate. Control Room HTTP, Yorko, and Fizzy
+orchestration remain explicit exclusions; live Redis, MongoDB, AWS DocumentDB,
+Yorko, and Control Room behavior is not established by the offline suite.
 
 For HTTP attachments, map invalid names to 400, missing item/file to 404, and duplicate upload to 409. Construct `Content-Disposition` only from a validated filename.
 

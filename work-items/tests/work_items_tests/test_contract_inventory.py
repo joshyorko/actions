@@ -11,7 +11,8 @@ PORTS = Path(__file__).resolve().parent / "contract_ports"
 def test_expected_red_ports_execute_production_behavior():
     conftest = (PORTS / "conftest.py").read_text()
     assert "State.DONE" not in conftest
-    assert "raises=_expected_exception" in conftest
+    assert "EXPECTED_EXCEPTIONS" not in conftest
+    assert "_expected_exception" not in conftest
     for path in PORTS.glob("test_*.py"):
         tree = ast.parse(path.read_text())
         calls = {node.func.attr for node in ast.walk(tree) if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)}

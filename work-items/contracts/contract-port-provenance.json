@@ -1,15 +1,19 @@
 {
   "files": {
     "contracts/compatibility-ledger.json": "a53a8135db4bbf658f3511ce2ceabe756b34b50ad825c15a5b167d8765b1d6a3",
-    "contracts/ported-tests.json": "c63d4af8366ae00f1bf31a3873c1ef808ce12b27477bf8e58dd9ca0cba188ef1",
+    "contracts/expected-red-failures.json": "42700a7970bee0e1a4e1f5ab50008e284568e4e7e1782529fa4983b8f7039dde",
+    "contracts/ported-tests.json": "f7e566c684cf2b8b52d6ca2e7c663a0ab8b0e0e3e330b41e94829f9024bc0065",
     "contracts/public-surface-fixtures.json": "bd3fd78ab54633ad7dad5b55a08c6cc3a9a571ffbb4c6e99b6e7f8c9ceccba85",
     "tests/contract_sources/custom_backends_source.py": "a36e1bfe6d6576605d8a9e39347c070961a532bfb77942881c4c548179f991e9",
     "tests/contract_sources/robocorp_email_source.py": "f8d13f3dd9d379a1d3b91e1690495d8f96b041d6a409f34e94f00c044346e87e",
     "tests/contract_sources/robocorp_file_source.py": "32650c98aa8b9f7977e1233e6d9d56dbda7e1a3c1344b3fe5cedb3b42e3f4161",
     "tests/contract_sources/robocorp_lifecycle_source.py": "99754b80e54845e4d28d615f08bbb15a19bebf30b28a962f0dcb78e73231a847",
-    "tests/work_items_tests/contract_ports/test_custom_backends.py": "4107b60860b82c4ecdc8f2ddc028cd4dc5edd47d70dc5672a59c4903779b0a17",
+    "tests/work_items_tests/contract_ports/compat.py": "23e3d2444b72148f6acbdb9ea22806b28b4d82dac35be32f72d492e71dd23227",
+    "tests/work_items_tests/contract_ports/conftest.py": "6d8e122fb5295bd7acce6db44cf159cbfdbe82a2b5b0f8aa2282689dca1c17bc",
+    "tests/work_items_tests/contract_ports/mocks.py": "ab0516c01c4d52df50269c7915d02352524854c9b0730ba4e2d6ef7b685aa03d",
+    "tests/work_items_tests/contract_ports/test_custom_backends.py": "c03b7f90b9c611c87b522e81e5dff47e267d9809d2c21e80c8d9b874a034c393",
     "tests/work_items_tests/contract_ports/test_robocorp_email.py": "e11bb8c14c3f8ea011dc3be4f1eb3c05d85b3f118dfe2e7c068f553490cb46ac",
-    "tests/work_items_tests/contract_ports/test_robocorp_file.py": "a01eb71f1456f19c6034dd9f24bc7f5676d376e7d740c30b46352434cf43280a",
+    "tests/work_items_tests/contract_ports/test_robocorp_file.py": "a48c58d241f65a73968227b7a09f8d280fcc7b4937d3ebec7b7c062c6de58914",
     "tests/work_items_tests/contract_ports/test_robocorp_lifecycle.py": "ae74db6471a4a164c652fdddc5a8473aac229484d0c0b9268750de39284f003d"
   },
   "ports": {

@@ -11,6 +11,7 @@ TEST_ROOT = Path(__file__).resolve().parent
 LEDGER = json.loads((ROOT / "contracts" / "compatibility-ledger.json").read_text())
 MANIFEST = json.loads((ROOT / "contracts" / "ported-tests.json").read_text())
 SURFACES = json.loads((ROOT / "contracts" / "public-surface-fixtures.json").read_text())
+FAILURES_PATH = ROOT / "contracts" / "expected-red-failures.json"
 
 PORTS = {
     "robocorp-1.5.0": {
@@ -99,9 +100,41 @@ def test_every_port_has_exact_task_owner_status_and_classification():
             "task-3" if case["source_test"].startswith("test_adapters.py") else "task-2"
         )
         assert case["implementation_task"] == expected_task
-        assert case["status"] in {"expected_red", "implemented"}
+        assert case["status"] in {
+            "expected_red",
+            "implemented",
+            "unsupported_external_service",
+        }
         assert case["classification"] == "required_parity"
         assert case["classification"] in allowed
+
+
+def test_every_expected_red_parameter_has_exact_owned_failure():
+    assert FAILURES_PATH.exists()
+    failures = json.loads(FAILURES_PATH.read_text())
+    expected_red = {case["id"] for case in MANIFEST["cases"] if case["status"] == "expected_red"}
+
+    assert failures["schema_version"] == 1
+    assert {entry["case_id"] for entry in failures["failures"]} == expected_red
+    assert sum(len(entry["parameter_ids"]) for entry in failures["failures"]) == 85
+    for entry in failures["failures"]:
+        assert entry["exception"].count(".") >= 1
+        assert entry["parameter_ids"]
+        assert entry["predicate"]["contains"]
+        assert all(entry["predicate"]["contains"])
+
+
+def test_inventory_counts_logical_nodes_separately_from_parametrized_cases():
+    assert MANIFEST["counts"] == {
+        "logical_nodes": 123,
+        "parametrized_cases": 153,
+        "implemented_logical_nodes": 27,
+        "implemented_parametrized_cases": 40,
+        "expected_red_logical_nodes": 68,
+        "expected_red_parametrized_cases": 85,
+        "external_logical_nodes": 28,
+        "external_parametrized_cases": 28,
+    }
 
 
 def test_exclusions_and_difference_ids_are_explicit_and_exact():
@@ -136,3 +169,53 @@ def test_full_contract_port_provenance_is_current():
         [sys.executable, ROOT / "scripts" / "check_contract_port_provenance.py"],
         check=True,
     )
+
+
+def test_authoritative_provenance_requires_both_reference_roots(tmp_path):
+    result = subprocess.run(
+        [
+            sys.executable,
+            ROOT / "scripts" / "check_contract_port_provenance.py",
+            "--robocorp-root",
+            tmp_path,
+        ],
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 2
+    assert "--robocorp-root and --custom-root are required together" in result.stderr
+
+
+def test_authoritative_provenance_rejects_wrong_git_heads(tmp_path):
+    roots = []
+    for name in ("robocorp", "custom"):
+        root = tmp_path / name
+        root.mkdir()
+        subprocess.run(["git", "init", "-q", root], check=True)
+        subprocess.run(["git", "-C", root, "config", "user.name", "Contract Test"], check=True)
+        subprocess.run(
+            ["git", "-C", root, "config", "user.email", "contract@example.invalid"],
+            check=True,
+        )
+        (root / "README").write_text(name)
+        subprocess.run(["git", "-C", root, "add", "README"], check=True)
+        subprocess.run(["git", "-C", root, "commit", "-qm", "fixture"], check=True)
+        roots.append(root)
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            ROOT / "scripts" / "check_contract_port_provenance.py",
+            "--robocorp-root",
+            roots[0],
+            "--custom-root",
+            roots[1],
+        ],
+        capture_output=True,
+        text=True,
+    )
+
+    assert result.returncode == 1
+    assert "Robocorp reference HEAD" in result.stderr
+    assert MANIFEST["sources"]["robocorp-1.5.0"]["commit"] in result.stderr

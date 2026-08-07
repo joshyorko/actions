@@ -34,6 +34,22 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Checkout pinned Robocorp Work Items reference
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          repository: robocorp/robocorp
+          ref: 631f5601617e9935620a72c788a98e1012331323
+          path: .contract-references/robocorp
+          fetch-depth: 1
+
+      - name: Checkout pinned custom adapter reference
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          repository: joshyorko/robocorp_adapters_custom
+          ref: c56c70102423a18ed54037221116f81ccccd4f4e
+          path: .contract-references/custom
+          fetch-depth: 1
+
       - name: Set up Python 3.12
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
@@ -44,6 +60,12 @@ jobs:
 
       - name: Synchronize Work Items dependencies
         run: poetry -C work-items sync --no-interaction
+
+      - name: Verify contracts against pinned source commits
+        run: |
+          poetry -C work-items run python scripts/check_contract_port_provenance.py \
+            --robocorp-root "$GITHUB_WORKSPACE/.contract-references/robocorp" \
+            --custom-root "$GITHUB_WORKSPACE/.contract-references/custom"
 
       - name: Verify release artifacts
         run: .devcontainer/bin/verify-work-items "$GITHUB_WORKSPACE/work-items/dist"

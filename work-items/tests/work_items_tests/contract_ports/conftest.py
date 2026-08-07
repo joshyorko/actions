@@ -1,76 +1,74 @@
 # Copyright 2022-2026 Robocorp and contributors.
 # Licensed under the Apache License, Version 2.0.
+import importlib
 import json
 from pathlib import Path
 
 import pytest
-from _pytest.fixtures import FixtureLookupError
-from _pytest.outcomes import Failed
+from _pytest.outcomes import Failed, XFailed
 
-from actions.work_items import Inputs, Outputs
+from actions.work_items import Inputs, Outputs, WorkItemsContext
 
 from .mocks import MockAdapter
 
 MANIFEST = json.loads(
     (Path(__file__).resolve().parents[3] / "contracts" / "ported-tests.json").read_text()
 )
+FAILURES = json.loads(
+    (
+        Path(__file__).resolve().parents[3]
+        / "contracts"
+        / "expected-red-failures.json"
+    ).read_text()
+)
 CASES = {
     (case["origin"], case["source_test"]): case for case in MANIFEST["cases"]
 }
+FAILURES_BY_CASE = {failure["case_id"]: failure for failure in FAILURES["failures"]}
 ORIGINS = {
     "test_custom_backends.py": ("custom-0.1.6", "test_adapters.py"),
     "test_robocorp_email.py": ("robocorp-1.5.0", "test_email.py"),
     "test_robocorp_file.py": ("robocorp-1.5.0", "test_adapters.py"),
     "test_robocorp_lifecycle.py": ("robocorp-1.5.0", "test_workitems.py"),
 }
-EXPECTED_EXCEPTIONS = {
-    "custom-0.1.6.test_adapters.TestAdapterFactory.test_documentdb_adapter_requires_dependency": AssertionError,
-    "custom-0.1.6.test_adapters.TestAdapterFactory.test_redis_adapter_requires_dependency": AssertionError,
-    "custom-0.1.6.test_adapters.TestFileAdapter.test_empty_queue": FileExistsError,
-    "custom-0.1.6.test_adapters.TestFileAdapter.test_malformed_queue": FileExistsError,
-    "custom-0.1.6.test_adapters.TestFileAdapter.test_missing_file": Failed,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_database_initialization": AttributeError,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_reserve_and_release_workflow": AttributeError,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_file_operations": TypeError,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_failed_work_item_release": TypeError,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_producer_consumer_workflow": TypeError,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_work_item_with_files": TypeError,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_file_already_exists": TypeError,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_custom_output_queue_name": AttributeError,
-    "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_default_output_queue_name_backward_compatibility": AttributeError,
-    "robocorp-1.5.0.test_adapters.TestFileAdapter.test_empty_queue": FileExistsError,
-    "robocorp-1.5.0.test_adapters.TestFileAdapter.test_malformed_queue": FileExistsError,
-    "robocorp-1.5.0.test_adapters.TestFileAdapter.test_missing_file": Failed,
-    "robocorp-1.5.0.test_workitems.module.test_collect_inputs": AssertionError,
-    "robocorp-1.5.0.test_workitems.module.test_duplicate_reserve": Failed,
-    "robocorp-1.5.0.test_workitems.module.test_input_fail": AssertionError,
-    "robocorp-1.5.0.test_workitems.module.test_input_get_file_missing": KeyError,
-    "robocorp-1.5.0.test_workitems.module.test_input_pass": AssertionError,
-    "robocorp-1.5.0.test_workitems.module.test_input_remove_file_notexist": KeyError,
-    "robocorp-1.5.0.test_workitems.module.test_inputs_iter": AssertionError,
-    "robocorp-1.5.0.test_workitems.module.test_inputs_released": AssertionError,
-    "robocorp-1.5.0.test_workitems.module.test_iter_after_release": AssertionError,
-    "robocorp-1.5.0.test_workitems.module.test_outputs_create_no_current": FixtureLookupError,
-    "robocorp-1.5.0.test_workitems.module.test_outputs_create_no_save": Failed,
-}
+def pytest_configure(config):
+    config.addinivalue_line(
+        "markers",
+        "contract_gap(exception, match/contains): exact call-phase expected-red ownership",
+    )
 
 
-def _expected_exception(case_id):
-    if case_id in EXPECTED_EXCEPTIONS:
-        return EXPECTED_EXCEPTIONS[case_id]
-    if ".TestFileAdapter." in case_id:
-        return FileExistsError
-    if ".TestRedisAdapter." in case_id:
-        return ImportError
-    if ".TestDocumentDBAdapter." in case_id:
-        return ModuleNotFoundError
-    if ".test_email." in case_id:
-        return AttributeError
-    if ".test_workitems." in case_id:
-        if any(token in case_id for token in ("context_raise", "raise_derived", "loop_raise", "throw_unknown", "release_work_item_failed")):
-            return TypeError
-        return AttributeError
-    raise AssertionError(f"Missing expected failure type for {case_id}")
+def _resolve_exception(name):
+    module_name, _, attribute = name.rpartition(".")
+    if not module_name:
+        raise ValueError(f"Contract gap exception must be fully qualified: {name}")
+    return getattr(importlib.import_module(module_name), attribute)
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_call(item):
+    outcome = yield
+    marker = item.get_closest_marker("contract_gap")
+    if marker is None:
+        return
+
+    expected = _resolve_exception(marker.kwargs["exception"])
+    contains = marker.kwargs.get("contains")
+    if contains is None:
+        contains = (marker.kwargs["match"],)
+    reason = marker.kwargs.get("reason", "owned contract gap")
+    if outcome.excinfo is None:
+        outcome.force_exception(
+            Failed(
+                f"[XPASS(strict)] {reason}; manifest update required",
+                pytrace=False,
+            )
+        )
+        return
+
+    exception = outcome.excinfo[1]
+    if type(exception) is expected and all(part in str(exception) for part in contains):
+        outcome.force_exception(XFailed(reason, pytrace=False))
 
 
 def pytest_collection_modifyitems(items):
@@ -86,11 +84,17 @@ def pytest_collection_modifyitems(items):
         case = CASES[(origin, "::".join(parts))]
         item._contract_case = case
         if case["status"] == "expected_red":
+            failure = FAILURES_BY_CASE[case["id"]]
+            parameter_id = item.callspec.id if hasattr(item, "callspec") else None
+            if parameter_id not in failure["parameter_ids"]:
+                raise AssertionError(
+                    f"Undeclared expected-red parameter {case['id']}[{parameter_id}]"
+                )
             item.add_marker(
-                pytest.mark.xfail(
-                    strict=True,
+                pytest.mark.contract_gap(
+                    exception=failure["exception"],
+                    contains=tuple(failure["predicate"]["contains"]),
                     reason=f'{case["implementation_task"]}: {case["id"]}',
-                    raises=_expected_exception(case["id"]),
                 )
             )
 
@@ -107,6 +111,13 @@ def inputs(adapter):
     collection = Inputs(adapter)
     collection.reserve()
     yield collection
+
+
+@pytest.fixture
+def context(adapter):
+    context = WorkItemsContext(adapter)
+    context.get_input()
+    yield context
 
 
 @pytest.fixture
