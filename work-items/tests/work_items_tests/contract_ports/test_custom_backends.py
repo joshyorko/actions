@@ -1,0 +1,1314 @@
+# Copyright 2022-2026 Robocorp and contributors.
+# Licensed under the Apache License, Version 2.0.
+# Executable compatibility port adapted to actions-work-items.
+# ruff: noqa
+# ruff: noqa: E501
+import copy
+import importlib
+import json
+import logging
+import os
+import tempfile
+import time
+from contextlib import contextmanager
+from pathlib import Path
+from unittest import mock
+
+import pytest
+from actions.work_items import create_adapter
+from actions.work_items._adapters import FileAdapter
+from actions.work_items._adapters._docdb import DocumentDBAdapter
+from actions.work_items._adapters._redis import RedisAdapter
+from actions.work_items._adapters._sqlite import SQLiteAdapter
+
+# Import from our local _types module (mapped via sys.modules in __init__.py)
+from actions.work_items._types import State
+
+from actions.work_items.scripts import config as adapter_config
+
+from .mocks import MOCK_FILES, PAYLOAD_FIRST, PAYLOAD_SECOND
+
+# TTL_WEEK_SECONDS is defined in our local _types module
+TTL_WEEK_SECONDS = 604800  # 7 * 24 * 60 * 60
+
+ITEMS_JSON = [{"payload": {"a-key": "a-value"}, "files": {"a-file": "file.txt"}}]
+
+
+def _redis_service_available() -> bool:
+    try:
+        import redis  # type: ignore[import-not-found]
+
+        client = redis.from_url(
+            os.getenv("RC_REDIS_URL", "redis://localhost:6379/0"),
+            socket_connect_timeout=0.5,
+            socket_timeout=0.5,
+        )
+        try:
+            return bool(client.ping())
+        finally:
+            client.close()
+    except Exception:
+        return False
+
+
+def _mongo_service_available() -> bool:
+    try:
+        from pymongo import MongoClient  # type: ignore[import-not-found]
+        from pymongo.errors import PyMongoError  # type: ignore[import-not-found]
+
+        client = MongoClient(
+            os.getenv("RC_MONGO_URL", "mongodb://localhost:27017"),
+            serverSelectionTimeoutMS=500,
+        )
+        try:
+            client.admin.command("ping")
+            return True
+        except PyMongoError:
+            return False
+        finally:
+            client.close()
+    except Exception:
+        return False
+
+
+class TestFileAdapter:
+    """Tests the local dev env `FileAdapter` on Work Items."""
+
+    @contextmanager
+    def _mock_work_items(self):
+        with tempfile.TemporaryDirectory() as items_dir:
+            items_dir = Path(items_dir)
+
+            items_in = items_dir / "items.json"
+            items_out = items_dir / "items.out.json"
+
+            with open(items_in, "w") as fd:
+                json.dump(ITEMS_JSON, fd)
+            with open(os.path.join(items_dir, "file.txt"), "w") as fd:
+                fd.write("some mock content")
+
+            yield items_in, items_out
+
+    @pytest.fixture(
+        params=[
+            ("RC_WORKITEM_INPUT_PATH", "RC_WORKITEM_OUTPUT_PATH"),
+            ("RPA_INPUT_WORKITEM_PATH", "RPA_OUTPUT_WORKITEM_PATH"),
+        ]
+    )
+    def adapter(self, monkeypatch, request):
+        with self._mock_work_items() as (items_in, items_out):
+            monkeypatch.setenv(request.param[0], str(items_in))
+            monkeypatch.setenv(request.param[1], str(items_out))
+            yield FileAdapter()
+
+    @pytest.fixture
+    def workitems(self, adapter):
+        from actions import workitems
+
+        ctx = workitems.Context(adapter=adapter)
+        ctx.reserve_input()
+
+        with mock.patch("robocorp.workitems._ctx", lambda: ctx):
+            yield workitems
+
+    def test_load_data(self, adapter):
+        item_id = adapter.reserve_input()
+        data = adapter.load_payload(item_id)
+        assert data == {"a-key": "a-value"}
+
+    def test_list_files(self, adapter):
+        item_id = adapter.reserve_input()
+        files = adapter.list_files(item_id)
+        assert files == ["a-file"]
+
+    def test_get_file(self, adapter):
+        item_id = adapter.reserve_input()
+        content = adapter.get_file(item_id, "a-file")
+        assert content == b"some mock content"
+
+    def test_add_file(self, adapter):
+        item_id = adapter.create_output("0")
+        adapter.add_file(
+            item_id,
+            "secondfile.txt",
+            content=b"somedata",
+        )
+        assert adapter._outputs[0]["files"]["secondfile.txt"] == "secondfile.txt"
+        assert os.path.isfile(Path(adapter._output_path).parent / "secondfile.txt")
+
+    def test_save_data_input(self, adapter):
+        item_id = adapter.reserve_input()
+        adapter.save_payload(item_id, {"key": "value"})
+        with open(adapter._input_path) as fd:
+            data = json.load(fd)
+            assert data == [{"payload": {"key": "value"}, "files": {"a-file": "file.txt"}}]
+
+    def test_save_data_output(self, adapter):
+        item_id = adapter.create_output("0", {})
+        adapter.save_payload(item_id, {"key": "value"})
+
+        output = adapter._output_path
+        assert os.path.isfile(output)
+        with open(output) as fd:
+            data = json.load(fd)
+            assert data == [{"payload": {"key": "value"}, "files": {}}]
+
+    def test_missing_file(self, monkeypatch):
+        monkeypatch.setenv("RC_WORKITEM_INPUT_PATH", "not-exist.json")
+        with pytest.raises(ValueError):
+            FileAdapter()
+
+    def test_empty_queue(self, monkeypatch):
+        with tempfile.TemporaryDirectory() as items_dir:
+            items = os.path.join(items_dir, "items.json")
+            with open(items, "w") as fd:
+                json.dump([], fd)
+
+            monkeypatch.setenv("RC_WORKITEM_INPUT_PATH", items)
+            with pytest.raises(ValueError):
+                FileAdapter()
+
+    def test_malformed_queue(self, monkeypatch):
+        with tempfile.TemporaryDirectory() as items_dir:
+            items = os.path.join(items_dir, "items.json")
+            with open(items, "w") as fd:
+                json.dump(["not-an-item"], fd)
+
+            monkeypatch.setenv("RC_WORKITEM_INPUT_PATH", items)
+            with pytest.raises(ValueError):
+                FileAdapter()
+
+    def test_missing_parent_directory(self, monkeypatch):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = os.path.join(temp_dir, "not-exist", "output.json")
+            monkeypatch.setenv("RC_WORKITEM_OUTPUT_PATH", output_dir)
+
+            # Should not raise
+            adapter = FileAdapter()
+            adapter.create_output("0", {"key": "value"})
+
+    def test_invalid_reporter(self, workitems):
+        results = []
+        for work_item in workitems.inputs:
+            with work_item:
+                results.append(work_item.payload)
+
+        with pytest.raises(ValueError):
+            output = workitems.outputs.create()
+            output.payload = {"results": results}
+            output.save()
+
+    def test_valid_reporter(self, workitems):
+        output = workitems.outputs.create()
+
+        results = []
+        for work_item in workitems.inputs:
+            with work_item:
+                results.append(work_item.payload)
+
+        output.payload = {"results": results}
+        output.save()
+
+
+class TestAdapterFactory:
+    def test_create_adapter_with_sqlite_alias(self, monkeypatch, tmp_path):
+        db_path = tmp_path / "workitems.db"
+        monkeypatch.setenv("RC_WORKITEM_ADAPTER", "sqlite")
+        monkeypatch.setenv("RC_WORKITEM_DB_PATH", str(db_path))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "qa_forms")
+
+        adapter = create_adapter()
+
+        assert isinstance(adapter, SQLiteAdapter)
+
+    def test_redis_adapter_requires_dependency(self, monkeypatch):
+        module = importlib.import_module("robocorp.workitems._adapters._redis")
+        monkeypatch.setattr(module, "_redis_lib", None)
+
+        with pytest.raises(ImportError, match=r"robocorp-workitems\[redis\]"):
+            RedisAdapter()
+
+    def test_documentdb_adapter_requires_dependency(self, monkeypatch):
+        module = importlib.import_module("robocorp.workitems._adapters._docdb")
+        monkeypatch.setattr(module, "_pymongo_available", False)
+        monkeypatch.setattr(module, "MongoClient", None)
+
+        with pytest.raises(ImportError, match=r"robocorp-workitems\[docdb\]"):
+            DocumentDBAdapter()
+
+
+class TestAdapterConfig:
+    @pytest.mark.parametrize(
+        "value,expected",
+        [
+            ("false", False),
+            ("0", False),
+            ("no", False),
+            ("off", False),
+            ("true", True),
+            ("", True),
+            ("   ", True),
+        ],
+    )
+    def test_auto_append_output_suffix_is_bool(self, monkeypatch, value, expected):
+        monkeypatch.setenv(
+            "RC_WORKITEM_ADAPTER", "robocorp_adapters_custom._docdb.DocumentDBAdapter"
+        )
+        monkeypatch.setenv("RC_WORKITEM_AUTO_APPEND_OUTPUT_SUFFIX", value)
+
+        config = adapter_config.get_adapter_config()
+
+        assert config["auto_append_output_suffix"] is expected
+
+    def test_auto_append_output_suffix_defaults_true(self, monkeypatch):
+        monkeypatch.setenv(
+            "RC_WORKITEM_ADAPTER", "robocorp_adapters_custom._docdb.DocumentDBAdapter"
+        )
+        monkeypatch.delenv("RC_WORKITEM_AUTO_APPEND_OUTPUT_SUFFIX", raising=False)
+
+        config = adapter_config.get_adapter_config()
+
+        assert config["auto_append_output_suffix"] is True
+
+
+class FakeMongoAdmin:
+    def command(self, name):
+        assert name == "ping"
+        return {"ok": 1.0}
+
+
+class FakeMongoCollection:
+    def __init__(self):
+        self.docs = []
+        self.indexes = []
+
+    def create_index(self, *args, **kwargs):
+        self.indexes.append((args, kwargs))
+
+    def insert_one(self, doc):
+        self.docs.append(copy.deepcopy(doc))
+        return mock.Mock(inserted_id=doc.get("_id"))
+
+    def find_one(self, query):
+        for doc in self.docs:
+            if all(doc.get(key) == value for key, value in query.items()):
+                return copy.deepcopy(doc)
+        return None
+
+
+class FakeMongoDatabase:
+    def __init__(self):
+        self.collections = {}
+
+    def __getitem__(self, name):
+        return self.collections.setdefault(name, FakeMongoCollection())
+
+
+class FakeMongoClient:
+    def __init__(self):
+        self.admin = FakeMongoAdmin()
+        self.databases = {}
+
+    def __getitem__(self, name):
+        return self.databases.setdefault(name, FakeMongoDatabase())
+
+
+class TestDocumentDBAdapterOutputQueueConfig:
+    @pytest.fixture
+    def docdb_module(self, monkeypatch):
+        module = importlib.import_module("robocorp_adapters_custom._docdb")
+        clients = []
+
+        def mongo_client(*args, **kwargs):
+            client = FakeMongoClient()
+            clients.append(client)
+            return client
+
+        monkeypatch.setattr(module, "_pymongo_available", True)
+        monkeypatch.setattr(module, "MongoClient", mongo_client)
+        monkeypatch.setattr(module, "GridFS", lambda db: object())
+
+        return module, clients
+
+    @pytest.fixture
+    def docdb_env(self, monkeypatch, tmp_path):
+        monkeypatch.setenv("DOCDB_URI", "mongodb://localhost:27017")
+        monkeypatch.setenv("DOCDB_DATABASE", "workitems_test")
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(tmp_path / "files"))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "qa_forms_input")
+        monkeypatch.delenv("RC_WORKITEM_OUTPUT_QUEUE_NAME", raising=False)
+        monkeypatch.delenv("RC_WORKITEM_AUTO_APPEND_OUTPUT_SUFFIX", raising=False)
+
+    def test_default_output_queue_name_backward_compatibility(self, docdb_module, docdb_env):
+        module, _ = docdb_module
+
+        adapter = module.DocumentDBAdapter()
+
+        assert adapter.output_queue_name == "qa_forms_input_output"
+
+    def test_auto_append_output_suffix_can_be_disabled_by_constructor(
+        self, docdb_module, docdb_env, caplog
+    ):
+        module, clients = docdb_module
+
+        with caplog.at_level(logging.WARNING):
+            adapter = module.DocumentDBAdapter(auto_append_output_suffix=False)
+        item_id = adapter.create_output(None, {"test": "data"})
+
+        assert adapter.output_queue_name == "qa_forms_input"
+        assert "output queue matches input queue" in caplog.text
+        db = clients[0]["workitems_test"]
+        assert set(db.collections) == {"qa_forms_input_work_items"}
+        doc = db["qa_forms_input_work_items"].find_one({"item_id": item_id})
+        assert doc is not None
+        assert doc["queue_name"] == "qa_forms_input"
+
+    def test_auto_append_output_suffix_can_be_disabled_by_env(
+        self, docdb_module, docdb_env, monkeypatch
+    ):
+        module, _ = docdb_module
+        monkeypatch.setenv("RC_WORKITEM_AUTO_APPEND_OUTPUT_SUFFIX", "false")
+
+        adapter = module.DocumentDBAdapter()
+
+        assert adapter.output_queue_name == "qa_forms_input"
+
+    def test_explicit_output_queue_name_overrides_disabled_auto_suffix(
+        self, docdb_module, docdb_env, monkeypatch
+    ):
+        module, _ = docdb_module
+        monkeypatch.setenv("RC_WORKITEM_OUTPUT_QUEUE_NAME", "qa_forms_processing")
+
+        adapter = module.DocumentDBAdapter(auto_append_output_suffix=False)
+
+        assert adapter.output_queue_name == "qa_forms_processing"
+
+    @pytest.mark.parametrize("value", ["", "   "])
+    def test_blank_output_queue_name_falls_back_to_default(
+        self, docdb_module, docdb_env, monkeypatch, value
+    ):
+        module, _ = docdb_module
+        monkeypatch.setenv("RC_WORKITEM_OUTPUT_QUEUE_NAME", value)
+
+        adapter = module.DocumentDBAdapter()
+
+        assert adapter.output_queue_name == "qa_forms_input_output"
+
+
+class TestSQLiteAdapter:
+    """Integration tests for SQLiteAdapter with real database operations.
+
+    Note: SQLite tests require no external services and run on all platforms.
+    """
+
+    @pytest.fixture
+    def adapter(self, tmp_path, monkeypatch):
+        """Create a SQLiteAdapter with a temporary database."""
+        db_path = tmp_path / "test_workitems.db"
+        files_dir = tmp_path / "files"
+        monkeypatch.setenv("RC_WORKITEM_ADAPTER", "sqlite")
+        monkeypatch.setenv("RC_WORKITEM_DB_PATH", str(db_path))
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(files_dir))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "test_queue")
+
+        adapter = SQLiteAdapter()
+        yield adapter
+
+        # Cleanup - close connections if they exist
+        if hasattr(adapter, "_connections"):
+            adapter._connections.close()
+        if db_path.exists():
+            db_path.unlink()
+        # Files directory will be cleaned up automatically with tmp_path
+
+    @pytest.fixture
+    def workitems(self, adapter):
+        """Create workitems context with SQLiteAdapter."""
+        from unittest import mock
+
+        from actions import workitems
+        from robocorp.workitems._context import Context
+
+        # Seed test data with files (matching FileAdapter pattern)
+        item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
+        for name, content in MOCK_FILES["workitem-id-first"].items():
+            adapter.add_file(item1_id, name, content)
+
+        adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
+
+        # Create context with our adapter
+        ctx = Context(adapter=adapter)
+        ctx.reserve_input()
+
+        def _getter():
+            return ctx
+
+        with mock.patch("actions.work_items._ctx", _getter):
+            yield workitems
+
+    def test_database_initialization(self, adapter):
+        """Test that the database initializes with proper schema."""
+        with adapter._pool.acquire() as conn:
+            cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table'")
+            tables = {row[0] for row in cursor.fetchall()}
+
+        assert "work_items" in tables
+        assert "work_item_files" in tables
+        assert "schema_version" in tables
+
+    def test_reserve_and_release_workflow(self, adapter):
+        """Test full reserve → process → release workflow."""
+        # Create item using seed_input helper
+        item_id = adapter.seed_input({"data": "test"})
+
+        # Reserve it
+        reserved_id = adapter.reserve_input()
+        assert reserved_id == item_id
+
+        # Should not reserve again (no more pending items)
+        from actions.work_items._exceptions import EmptyQueue
+
+        with pytest.raises(EmptyQueue):
+            adapter.reserve_input()
+
+        # Release as done
+        adapter.release_input(reserved_id, State.DONE)
+
+        # Verify state
+        with adapter._pool.acquire() as conn:
+            cursor = conn.execute("SELECT state FROM work_items WHERE id = ?", (reserved_id,))
+            row = cursor.fetchone()
+            assert row[0] == State.DONE.value
+
+    def test_payload_operations(self, adapter):
+        """Test payload save and load."""
+        # create_output goes to OUTPUT queue - that's fine for this test
+        item_id = adapter.create_output(None, {"key": "original"})
+
+        # Update payload
+        new_payload = {"key": "updated", "extra": [1, 2, 3]}
+        adapter.save_payload(item_id, new_payload)
+
+        # Load and verify
+        loaded = adapter.load_payload(item_id)
+        assert loaded == new_payload
+
+    def test_file_operations(self, adapter):
+        """Test file upload and download."""
+        item_id = adapter.create_output(None, {})
+
+        # Add files
+        adapter.add_file(item_id, "test.txt", b"Hello World")
+        adapter.add_file(item_id, "data.bin", b"\x00\x01\x02\x03")
+
+        # List files
+        files = adapter.list_files(item_id)
+        assert set(files) == {"test.txt", "data.bin"}
+
+        # Get file content
+        content = adapter.get_file(item_id, "test.txt")
+        assert content == b"Hello World"
+
+        # Remove file
+        adapter.remove_file(item_id, "data.bin")
+        files = adapter.list_files(item_id)
+        assert files == ["test.txt"]
+
+    def test_fifo_ordering(self, adapter):
+        """Test that work items are reserved in FIFO order."""
+
+        # Create multiple items using seed_input
+        ids = []
+        for i in range(5):
+            item_id = adapter.seed_input({"order": i})
+            ids.append(item_id)
+            time.sleep(0.01)  # Ensure different timestamps
+
+        # Reserve them in order
+        reserved = []
+        for _ in range(5):
+            reserved_id = adapter.reserve_input()
+            assert reserved_id is not None
+            reserved.append(reserved_id)
+
+        # Should match creation order
+        assert reserved == ids
+
+    def test_failed_work_item_release(self, adapter):
+        """Test releasing work items as failed."""
+        # Create item using seed_input
+        adapter.seed_input({"will": "fail"})
+
+        reserved_id = adapter.reserve_input()
+
+        # Release as failed with exception
+        exception = {"type": "ValueError", "message": "Invalid data"}
+        adapter.release_input(reserved_id, State.FAILED, exception=exception)
+
+        # Verify state and exception stored
+        with adapter._pool.acquire() as conn:
+            cursor = conn.execute(
+                "SELECT state, exception_message FROM work_items WHERE id = ?",
+                (reserved_id,),
+            )
+            row = cursor.fetchone()
+            assert row[0] == State.FAILED.value
+            assert row[1] == exception["message"]
+
+    def test_producer_consumer_workflow(self, workitems):
+        """Test full producer-consumer workflow using workitems API."""
+        results = []
+
+        # Consumer: process inputs
+        for item in workitems.inputs:
+            with item:
+                results.append(item.payload)
+
+        # Verify we processed both items
+        assert len(results) == 2
+        assert any(r.get("username") == PAYLOAD_FIRST["username"] for r in results)
+        assert any(r.get("username") == PAYLOAD_SECOND["username"] for r in results)
+
+        # Producer: create outputs
+        output = workitems.outputs.create()
+        output.payload = {"processed": len(results), "results": results}
+        output.save()
+
+        # Verify output was created
+        assert len(list(workitems.outputs)) == 1
+
+    def test_work_item_with_files(self, adapter):
+        """Test work item file handling at adapter level (consistent with FileAdapter tests)."""
+        # Create input using seed_input
+        item_id = adapter.seed_input({"has_attachment": True})
+
+        # Test add_file
+        adapter.add_file(item_id, "document.pdf", b"PDF content here")
+
+        # Test list_files
+        files = adapter.list_files(item_id)
+        assert "document.pdf" in files
+
+        # Test get_file - should return bytes like FileAdapter
+        content = adapter.get_file(item_id, "document.pdf")
+        assert content == b"PDF content here"
+
+        # Test remove_file
+        adapter.add_file(item_id, "temp.txt", b"temporary")
+        adapter.remove_file(item_id, "temp.txt")
+        files = adapter.list_files(item_id)
+        assert "temp.txt" not in files
+        assert "document.pdf" in files
+
+    def test_error_handling_file_not_found(self, adapter):
+        """Test FileNotFoundError for non-existent files."""
+        item_id = adapter.seed_input({})
+
+        with pytest.raises(FileNotFoundError):
+            adapter.get_file(item_id, "nonexistent.txt")
+
+        with pytest.raises(FileNotFoundError):
+            adapter.remove_file(item_id, "nonexistent.txt")
+
+    def test_error_handling_file_already_exists(self, adapter):
+        """Test FileExistsError when adding duplicate files."""
+        item_id = adapter.seed_input({})
+        adapter.add_file(item_id, "test.txt", b"content")
+
+        with pytest.raises(FileExistsError):
+            adapter.add_file(item_id, "test.txt", b"different content")
+
+    def test_error_handling_invalid_work_item(self, adapter):
+        """Test operations on non-existent work items."""
+        fake_id = "nonexistent-item-id"
+
+        with pytest.raises(ValueError):
+            adapter.load_payload(fake_id)
+
+    def test_custom_output_queue_name(self, tmp_path, monkeypatch):
+        """Test that RC_WORKITEM_OUTPUT_QUEUE_NAME overrides default output queue naming."""
+        db_path = tmp_path / "test_workitems.db"
+        files_dir = tmp_path / "files"
+
+        # Set custom output queue name
+        monkeypatch.setenv("RC_WORKITEM_DB_PATH", str(db_path))
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(files_dir))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "qa_forms_output")
+        monkeypatch.setenv("RC_WORKITEM_OUTPUT_QUEUE_NAME", "qa_forms_output_processed")
+
+        adapter = SQLiteAdapter()
+
+        # Verify the output queue name is customized
+        assert adapter.output_queue_name == "qa_forms_output_processed"
+        assert adapter.output_queue_name != f"{adapter.queue_name}_output"
+
+        # Create an output item and verify it goes to the custom queue
+        item_id = adapter.create_output(None, {"test": "data"})
+
+        # Check the database to verify the queue name
+        with adapter._pool.acquire() as conn:
+            cursor = conn.execute(
+                "SELECT queue_name FROM work_items WHERE id = ?",
+                (item_id,),
+            )
+            row = cursor.fetchone()
+            assert row is not None
+            assert row[0] == "qa_forms_output_processed"
+
+    def test_default_output_queue_name_backward_compatibility(self, tmp_path, monkeypatch):
+        """Test that output queue defaults to {queue_name}_output for backward compatibility."""
+        db_path = tmp_path / "test_workitems.db"
+        files_dir = tmp_path / "files"
+
+        # Do NOT set RC_WORKITEM_OUTPUT_QUEUE_NAME
+        monkeypatch.setenv("RC_WORKITEM_DB_PATH", str(db_path))
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(files_dir))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "qa_forms")
+
+        adapter = SQLiteAdapter()
+
+        # Verify default behavior is preserved
+        assert adapter.output_queue_name == "qa_forms_output"
+
+        # Create an output item and verify it goes to the default queue
+        item_id = adapter.create_output(None, {"test": "data"})
+
+        # Check the database to verify the queue name
+        with adapter._pool.acquire() as conn:
+            cursor = conn.execute(
+                "SELECT queue_name FROM work_items WHERE id = ?",
+                (item_id,),
+            )
+            row = cursor.fetchone()
+            assert row is not None
+            assert row[0] == "qa_forms_output"
+
+
+def _create_redis_input_item(adapter, payload):
+    """Helper to create item directly in Redis INPUT queue for testing."""
+    import json
+    import uuid
+    from datetime import datetime
+
+    item_id = str(uuid.uuid4())
+    payload_json = json.dumps(payload or {})
+
+    # Create item in INPUT queue (not output)
+    adapter._client.hset(
+        adapter._key("payload", queue=adapter._config.queue, item_id=item_id),
+        mapping={
+            "payload": payload_json,
+            "queue_name": adapter._config.queue,
+            "state": "PENDING",
+        },
+    )
+    now = datetime.utcnow().isoformat()
+    adapter._client.hset(
+        adapter._key("timestamps", queue=adapter._config.queue, item_id=item_id),
+        mapping={"created_at": now},
+    )
+    adapter._client.lpush(adapter._key("pending", queue=adapter._config.queue), item_id)
+    adapter._client.set(
+        adapter._key("origin", item_id=item_id),
+        adapter._config.queue,
+        ex=TTL_WEEK_SECONDS,
+    )
+
+    return item_id
+
+
+@pytest.mark.redis
+class TestRedisAdapter:
+    """Integration tests for RedisAdapter with real Redis instance."""
+
+    @pytest.fixture
+    def adapter(self, monkeypatch):
+        """Create a RedisAdapter connected to test Redis."""
+        import redis  # type: ignore[import-not-found]
+
+        redis_url = os.getenv("RC_REDIS_URL", "redis://localhost:6379/0")
+        monkeypatch.setenv("RC_WORKITEM_ADAPTER", "redis")
+        monkeypatch.setenv("RC_REDIS_URL", redis_url)
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "test_queue")
+
+        # Clean up any existing test data - match actual key pattern
+        client = redis.from_url(redis_url)
+        keys = list(client.scan_iter("test_queue*"))
+        if keys:
+            client.delete(*keys)
+
+        adapter = RedisAdapter()
+        yield adapter
+
+        # Cleanup after tests - match actual key pattern
+        keys = list(client.scan_iter("test_queue*"))
+        if keys:
+            client.delete(*keys)
+        client.close()
+
+    @pytest.fixture
+    def workitems(self, adapter):
+        """Create workitems context with RedisAdapter."""
+        from unittest import mock
+
+        from actions import workitems
+        from robocorp.workitems._context import Context
+
+        # Seed test data in INPUT queue with files
+        item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
+        for name, content in MOCK_FILES["workitem-id-first"].items():
+            adapter.add_file(item1_id, name, content)
+
+        adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
+
+        # Create context with our adapter
+        ctx = Context(adapter=adapter)
+        ctx.reserve_input()
+
+        def _getter():
+            return ctx
+
+        with mock.patch("actions.work_items._ctx", _getter):
+            yield workitems
+
+    def test_redis_connection(self, adapter):
+        """Test that Redis connection is established."""
+        # Should be able to ping
+        assert adapter._client.ping()
+
+    def test_reserve_and_release_workflow(self, adapter):
+        """Test full reserve → process → release workflow with Redis."""
+        item_id = adapter.seed_input({"data": "test"})
+
+        # Reserve
+        reserved_id = adapter.reserve_input()
+        assert reserved_id == item_id
+
+        # Should not reserve again (already reserved - queue is empty)
+        from actions.work_items._exceptions import EmptyQueue
+
+        with pytest.raises(EmptyQueue):
+            adapter.reserve_input()
+
+        # Release as done
+        adapter.release_input(reserved_id, State.DONE)
+
+        # Verify it's marked as done
+        payload = adapter.load_payload(reserved_id)
+        assert payload["data"] == "test"
+
+    def test_payload_persistence(self, adapter):
+        """Test payload save and load with Redis."""
+        item_id = adapter.seed_input({"initial": "value"})
+
+        # Update payload
+        new_payload = {"updated": "data", "complex": {"nested": [1, 2, 3]}}
+        adapter.save_payload(item_id, new_payload)
+
+        # Load and verify
+        loaded = adapter.load_payload(item_id)
+        assert loaded == new_payload
+
+    def test_file_operations_inline(self, adapter):
+        """Test file operations with inline storage."""
+        item_id = adapter.seed_input({})
+
+        # Add files
+        adapter.add_file(item_id, "small.txt", b"Small file content")
+        adapter.add_file(item_id, "data.json", b'{"key": "value"}')
+
+        # List files
+        files = adapter.list_files(item_id)
+        assert set(files) == {"small.txt", "data.json"}
+
+        # Get file
+        content = adapter.get_file(item_id, "small.txt")
+        assert content == b"Small file content"
+
+        # Remove file
+        adapter.remove_file(item_id, "data.json")
+        assert adapter.list_files(item_id) == ["small.txt"]
+
+    def test_fifo_ordering(self, adapter):
+        """Test FIFO queue ordering in Redis."""
+        # Create multiple items
+        ids = []
+        for i in range(5):
+            item_id = adapter.seed_input({"order": i})
+            ids.append(item_id)
+
+        # Reserve in order
+        reserved = []
+        for _ in range(5):
+            reserved_id = adapter.reserve_input()
+            assert reserved_id is not None
+            reserved.append(reserved_id)
+
+        assert reserved == ids
+
+    def test_concurrent_reservation(self, adapter):
+        """Test that concurrent reservations don't conflict."""
+        # Create items
+        for i in range(3):
+            adapter.seed_input({"item": i})
+
+        # First reservation
+        id1 = adapter.reserve_input()
+        assert id1 is not None
+
+        # Second reservation should get different item
+        id2 = adapter.reserve_input()
+        assert id2 is not None
+        assert id2 != id1
+
+    def test_producer_consumer_workflow(self, workitems):
+        """Test full workflow using workitems API with Redis backend."""
+        results = []
+
+        # Consumer
+        for item in workitems.inputs:
+            with item:
+                results.append(item.payload)
+
+        assert len(results) == 2
+        assert any(r.get("username") == PAYLOAD_FIRST["username"] for r in results)
+        assert any(r.get("username") == PAYLOAD_SECOND["username"] for r in results)
+
+        # Producer
+        output = workitems.outputs.create()
+        output.payload = {"results": results}
+        output.save()
+
+    def test_exception_handling(self, adapter):
+        """Test failed item with exception data."""
+        adapter.seed_input({"will": "fail"})
+        reserved_id = adapter.reserve_input()
+
+        exception = {"type": "RuntimeError", "message": "Something went wrong"}
+        adapter.release_input(reserved_id, State.FAILED, exception=exception)
+
+        # Payload should still be accessible
+        payload = adapter.load_payload(reserved_id)
+        assert payload["will"] == "fail"
+
+    def test_error_handling_file_not_found(self, adapter):
+        """Test FileNotFoundError for non-existent files."""
+        item_id = adapter.seed_input({})
+
+        with pytest.raises(FileNotFoundError):
+            adapter.get_file(item_id, "nonexistent.txt")
+
+        with pytest.raises(FileNotFoundError):
+            adapter.remove_file(item_id, "nonexistent.txt")
+
+    def test_error_handling_file_already_exists(self, adapter):
+        """Test FileExistsError when adding duplicate files."""
+        item_id = adapter.seed_input({})
+        adapter.add_file(item_id, "test.txt", b"content")
+
+        with pytest.raises(FileExistsError):
+            adapter.add_file(item_id, "test.txt", b"different content")
+
+    def test_error_handling_invalid_work_item(self, adapter):
+        """Test operations on non-existent work items."""
+        fake_id = "nonexistent-item-id"
+
+        with pytest.raises(ValueError):
+            adapter.load_payload(fake_id)
+
+        with pytest.raises(ValueError):
+            adapter.save_payload(fake_id, {"data": "value"})
+
+    def test_custom_output_queue_name(self, monkeypatch, tmp_path):
+        """Test that RC_WORKITEM_OUTPUT_QUEUE_NAME overrides default output queue naming."""
+        redis_url = os.getenv("RC_REDIS_URL", "redis://localhost:6379/0")
+        files_dir = tmp_path / "files"
+
+        # Set custom output queue name
+        monkeypatch.setenv("RC_REDIS_URL", redis_url)
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(files_dir))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "qa_forms_output")
+        monkeypatch.setenv("RC_WORKITEM_OUTPUT_QUEUE_NAME", "qa_forms_output_processed")
+
+        adapter = RedisAdapter()
+
+        # Verify the output queue name is customized
+        assert adapter.output_queue_name == "qa_forms_output_processed"
+        assert adapter.output_queue_name != f"{adapter.queue_name}_output"
+
+        # Create an output item and verify it goes to the custom queue
+        item_id = adapter.create_output(None, {"test": "data"})
+
+        # Check Redis to verify the queue name
+        payload_key = adapter._key("payload", queue="qa_forms_output_processed", item_id=item_id)
+        payload_data = adapter._client.hget(payload_key, "queue_name")
+        assert payload_data is not None
+        assert payload_data.decode() == "qa_forms_output_processed"
+
+        # Cleanup
+        adapter._client.flushdb()
+
+    def test_default_output_queue_name_backward_compatibility(self, monkeypatch, tmp_path):
+        """Test that output queue defaults to {queue_name}_output for backward compatibility."""
+        redis_url = os.getenv("RC_REDIS_URL", "redis://localhost:6379/0")
+        files_dir = tmp_path / "files"
+
+        # Do NOT set RC_WORKITEM_OUTPUT_QUEUE_NAME
+        monkeypatch.setenv("RC_REDIS_URL", redis_url)
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(files_dir))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "qa_forms")
+
+        adapter = RedisAdapter()
+
+        # Verify default behavior is preserved
+        assert adapter.output_queue_name == "qa_forms_output"
+
+        # Create an output item and verify it goes to the default queue
+        item_id = adapter.create_output(None, {"test": "data"})
+
+        # Check Redis to verify the queue name
+        payload_key = adapter._key("payload", queue="qa_forms_output", item_id=item_id)
+        payload_data = adapter._client.hget(payload_key, "queue_name")
+        assert payload_data is not None
+        assert payload_data.decode() == "qa_forms_output"
+
+        # Cleanup
+        adapter._client.flushdb()
+
+
+@pytest.mark.integration
+@pytest.mark.docdb
+class TestDocumentDBAdapter:
+    """Integration tests for DocumentDBAdapter with real MongoDB instance."""
+
+    @pytest.fixture
+    def adapter(self, monkeypatch, tmp_path):
+        """Create a DocumentDBAdapter connected to test MongoDB."""
+        from pymongo import MongoClient  # type: ignore[import-not-found]
+
+        mongo_url = os.getenv("RC_MONGO_URL", "mongodb://localhost:27017")
+        mongo_db = os.getenv("RC_MONGO_DB", "workitems_test")
+
+        # Set DocumentDBAdapter environment variables
+        monkeypatch.setenv("DOCDB_URI", mongo_url)
+        monkeypatch.setenv("DOCDB_DATABASE", mongo_db)
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "test_queue")
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(tmp_path / "files"))
+
+        # Clean up test database
+        client = MongoClient(mongo_url)
+        db = client[mongo_db]
+        for coll_name in db.list_collection_names():
+            if coll_name.startswith("test_"):
+                db[coll_name].drop()
+
+        adapter = DocumentDBAdapter()
+        yield adapter
+
+        # Cleanup
+        for coll_name in db.list_collection_names():
+            if coll_name.startswith("test_"):
+                db[coll_name].drop()
+        client.close()
+
+    @pytest.fixture
+    def workitems(self, adapter):
+        """Create workitems context with DocumentDBAdapter."""
+        from unittest import mock
+
+        from actions import workitems
+        from robocorp.workitems._context import Context
+
+        # Seed test data with files
+        item1_id = adapter.seed_input(copy.deepcopy(PAYLOAD_FIRST))
+        for name, content in MOCK_FILES["workitem-id-first"].items():
+            adapter.add_file(item1_id, name, content)
+
+        adapter.seed_input(copy.deepcopy(PAYLOAD_SECOND))
+
+        # Create context with our adapter
+        ctx = Context(adapter=adapter)
+        ctx.reserve_input()
+
+        def _getter():
+            return ctx
+
+        with mock.patch("actions.work_items._ctx", _getter):
+            yield workitems
+
+    def test_mongodb_connection(self, adapter):
+        """Test MongoDB connection and database access."""
+        # Should be able to ping
+        result = adapter._client.admin.command("ping")
+        assert result["ok"] == 1.0
+
+    def test_reserve_and_release_workflow(self, adapter):
+        """Test full workflow with DocumentDB."""
+        from actions.work_items._exceptions import EmptyQueue
+
+        item_id = adapter.seed_input({"data": "mongodb"})
+
+        # Reserve
+        reserved_id = adapter.reserve_input()
+        assert reserved_id == item_id
+
+        # Should raise EmptyQueue when no more items
+        with pytest.raises(EmptyQueue):
+            adapter.reserve_input()
+
+        # Release
+        adapter.release_input(reserved_id, State.DONE)
+
+        # Verify in database
+        coll = adapter._collection()
+        doc = coll.find_one({"item_id": reserved_id})
+        assert doc["state"] == State.DONE.value
+
+    def test_payload_operations(self, adapter):
+        """Test payload save/load with MongoDB."""
+        item_id = adapter.seed_input({"initial": "data"})
+
+        # Update with complex payload
+        new_payload = {
+            "updated": True,
+            "nested": {"array": [1, 2, 3], "string": "value"},
+            "number": 42.5,
+        }
+        adapter.save_payload(item_id, new_payload)
+
+        # Load and verify
+        loaded = adapter.load_payload(item_id)
+        assert loaded == new_payload
+
+    def test_file_operations_gridfs(self, adapter):
+        """Test file operations using GridFS."""
+        item_id = adapter.seed_input({})
+
+        # Add files (will use GridFS for larger files)
+        large_content = b"X" * 10000  # Force GridFS usage
+        adapter.add_file(item_id, "large.bin", large_content)
+        adapter.add_file(item_id, "small.txt", b"Small")
+
+        # List files
+        files = adapter.list_files(item_id)
+        assert set(files) == {"large.bin", "small.txt"}
+
+        # Get file from GridFS
+        content = adapter.get_file(item_id, "large.bin")
+        assert content == large_content
+
+        # Remove file
+        adapter.remove_file(item_id, "large.bin")
+        files = adapter.list_files(item_id)
+        assert files == ["small.txt"]
+
+    def test_fifo_ordering(self, adapter):
+        """Test FIFO ordering with MongoDB queries."""
+        ids = []
+        for i in range(5):
+            item_id = adapter.seed_input({"order": i})
+            ids.append(item_id)
+
+        # Reserve in order
+        reserved = []
+        for _ in range(5):
+            reserved_id = adapter.reserve_input()
+            assert reserved_id is not None
+            reserved.append(reserved_id)
+
+        assert reserved == ids
+
+    def test_atomic_reservation(self, adapter):
+        """Test that find_one_and_update provides atomic reservations."""
+        # Create items
+        for i in range(3):
+            adapter.seed_input({"item": i})
+
+        # Multiple reservations should get unique items
+        id1 = adapter.reserve_input()
+        id2 = adapter.reserve_input()
+        id3 = adapter.reserve_input()
+
+        assert len({id1, id2, id3}) == 3  # All unique
+
+    def test_producer_consumer_workflow(self, workitems):
+        """Test full workflow using workitems API with DocumentDB backend."""
+        results = []
+
+        # Consumer
+        for item in workitems.inputs:
+            with item:
+                results.append(item.payload)
+
+        assert len(results) == 2
+        assert any(r.get("username") == PAYLOAD_FIRST["username"] for r in results)
+        assert any(r.get("username") == PAYLOAD_SECOND["username"] for r in results)
+
+        # Producer
+        output = workitems.outputs.create()
+        output.payload = {"results": results, "count": len(results)}
+        output.save()
+
+        # Verify in database
+        outputs = list(workitems.outputs)
+        assert len(outputs) == 1
+        assert outputs[0].payload["count"] == 2
+
+    def test_exception_storage(self, adapter):
+        """Test storing exception data in MongoDB."""
+        adapter.seed_input({})
+        reserved_id = adapter.reserve_input()
+
+        exception = {
+            "type": "Exception",
+            "message": "Test error",
+            "traceback": "line 1\nline 2\nline 3",
+        }
+        adapter.release_input(reserved_id, State.FAILED, exception=exception)
+
+        # Verify exception stored
+        coll = adapter._collection()
+        doc = coll.find_one({"item_id": reserved_id})
+        assert doc["state"] == State.FAILED.value
+        assert "exception" in doc
+        assert exception["message"] in str(doc["exception"])
+
+    def test_error_handling_file_not_found(self, adapter):
+        """Test FileNotFoundError for non-existent files."""
+        item_id = adapter.seed_input({})
+
+        with pytest.raises(FileNotFoundError):
+            adapter.get_file(item_id, "nonexistent.txt")
+
+        with pytest.raises(FileNotFoundError):
+            adapter.remove_file(item_id, "nonexistent.txt")
+
+    def test_error_handling_file_already_exists(self, adapter):
+        """Test FileExistsError when adding duplicate files."""
+        item_id = adapter.seed_input({})
+        adapter.add_file(item_id, "test.txt", b"content")
+
+        with pytest.raises(FileExistsError):
+            adapter.add_file(item_id, "test.txt", b"different content")
+
+    def test_error_handling_invalid_work_item(self, adapter):
+        """Test operations on non-existent work items."""
+        fake_id = "nonexistent-item-id"
+
+        with pytest.raises(ValueError):
+            adapter.load_payload(fake_id)
+
+        with pytest.raises(ValueError):
+            adapter.save_payload(fake_id, {"data": "value"})
+
+    def test_missing_document_during_file_access(self, adapter):
+        """Ensure cached queue entries still raise clean errors when docs vanish."""
+
+        item_id = adapter.seed_input({"with": "files"})
+
+        # Populate cache by listing files (forces queue resolution)
+        adapter.list_files(item_id)
+
+        # Remove the document directly to simulate an external deletion
+        adapter._collection().delete_one({"item_id": item_id})
+
+        with pytest.raises(ValueError):
+            adapter.get_file(item_id, "ghost.txt")
+
+        with pytest.raises(ValueError):
+            adapter.remove_file(item_id, "ghost.txt")
+
+    def test_file_size_threshold_inline_vs_gridfs(self, adapter):
+        """Test that files are stored inline vs GridFS based on size threshold."""
+        item_id = adapter.seed_input({})
+
+        # Small file - should be inline (base64)
+        small_content = b"Small file content"
+        adapter.add_file(item_id, "small.txt", small_content)
+
+        # Large file - should use GridFS (over 1MB threshold)
+        large_content = b"X" * (adapter._config.file_threshold + 1000)
+        adapter.add_file(item_id, "large.bin", large_content)
+
+        # Both should be retrievable
+        assert adapter.get_file(item_id, "small.txt") == small_content
+        assert adapter.get_file(item_id, "large.bin") == large_content
+
+        # Check storage method by inspecting document
+        coll = adapter._collection()
+        doc = coll.find_one({"item_id": item_id})
+
+        # Small file should be base64 string
+        assert isinstance(doc["files"]["small.txt"], str)
+
+        # Large file should be GridFS reference
+        assert isinstance(doc["files"]["large.bin"], dict)
+        assert "gridfs_id" in doc["files"]["large.bin"]
+
+    def test_custom_output_queue_name(self, monkeypatch, tmp_path):
+        """Test that RC_WORKITEM_OUTPUT_QUEUE_NAME overrides default output queue naming."""
+        from pymongo import MongoClient  # type: ignore[import-not-found]
+
+        mongo_url = os.getenv("RC_MONGO_URL", "mongodb://localhost:27017")
+        mongo_db = os.getenv("RC_MONGO_DB", "workitems_test")
+        files_dir = tmp_path / "files"
+
+        # Set custom output queue name
+        monkeypatch.setenv("DOCDB_URI", mongo_url)
+        monkeypatch.setenv("DOCDB_DATABASE", mongo_db)
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(files_dir))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "qa_forms_output")
+        monkeypatch.setenv("RC_WORKITEM_OUTPUT_QUEUE_NAME", "qa_forms_output_processed")
+
+        adapter = DocumentDBAdapter()
+
+        # Verify the output queue name is customized
+        assert adapter.output_queue_name == "qa_forms_output_processed"
+        assert adapter.output_queue_name != f"{adapter.queue_name}_output"
+
+        # Create an output item and verify it goes to the custom queue
+        item_id = adapter.create_output(None, {"test": "data"})
+
+        # Check MongoDB to verify the queue name
+        coll = adapter._collection(queue="qa_forms_output_processed")
+        doc = coll.find_one({"item_id": item_id})
+        assert doc is not None
+        assert doc["queue_name"] == "qa_forms_output_processed"
+
+        # Cleanup
+        client = MongoClient(mongo_url)
+        client.drop_database(mongo_db)
+
+    def test_default_output_queue_name_backward_compatibility(self, monkeypatch, tmp_path):
+        """Test that output queue defaults to {queue_name}_output for backward compatibility."""
+        from pymongo import MongoClient  # type: ignore[import-not-found]
+
+        mongo_url = os.getenv("RC_MONGO_URL", "mongodb://localhost:27017")
+        mongo_db = os.getenv("RC_MONGO_DB", "workitems_test")
+        files_dir = tmp_path / "files"
+
+        # Do NOT set RC_WORKITEM_OUTPUT_QUEUE_NAME
+        monkeypatch.setenv("DOCDB_URI", mongo_url)
+        monkeypatch.setenv("DOCDB_DATABASE", mongo_db)
+        monkeypatch.setenv("RC_WORKITEM_FILES_DIR", str(files_dir))
+        monkeypatch.setenv("RC_WORKITEM_QUEUE_NAME", "qa_forms")
+
+        adapter = DocumentDBAdapter()
+
+        # Verify default behavior is preserved
+        assert adapter.output_queue_name == "qa_forms_output"
+
+        # Create an output item and verify it goes to the default queue
+        item_id = adapter.create_output(None, {"test": "data"})
+
+        # Check MongoDB to verify the queue name
+        coll = adapter._collection(queue="qa_forms_output")
+        doc = coll.find_one({"item_id": item_id})
+        assert doc is not None
+        assert doc["queue_name"] == "qa_forms_output"
+
+        # Cleanup
+        client = MongoClient(mongo_url)
+        client.drop_database(mongo_db)
+
+

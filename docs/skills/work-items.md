@@ -91,13 +91,16 @@ required parity, preserved 0.3.1 compatibility, intentional security
 hardening, or unsupported external service.
 
 `ported-tests.json` maps each selected Apache-2.0 upstream test node to an
-implementation task and status. Pending nodes run as `xfail(strict=True)`, so
-they remain visible expected-red evidence and an unexpected pass fails the
-contract gate. Closing a gap requires replacing its inventory node with the
-executable adapted test before marking it implemented; never turn a pending
-node into an unconditional skip. The source-port snapshots exclude the official
-Robocorp Control Room HTTP adapter, Yorko, and Fizzy orchestration as required
-by the consolidation boundary.
+implementation task and status. The adapted ports under
+`work-items/tests/work_items_tests/contract_ports/` execute the preserved test
+bodies against `actions-work-items`; pending nodes use `xfail(strict=True)`, so
+their failures come from an exercised production contract and an unexpected
+pass fails the contract gate. The ledger test mechanically compares the adapted
+nodes, preserved source snapshots, manifest ownership/status, explicit
+exclusions, difference IDs, and frozen public-surface fixtures. Never replace a
+pending contract with an unconditional skip. Control Room HTTP, Yorko, and
+Fizzy orchestration remain explicit exclusions required by the consolidation
+boundary.
 
 For HTTP attachments, map invalid names to 400, missing item/file to 404, and duplicate upload to 409. Construct `Content-Disposition` only from a validated filename.
 

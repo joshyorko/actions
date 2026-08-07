@@ -52,6 +52,11 @@ testpaths = ["tests"]
 python_files = "test_*.py"
 python_functions = "test_*"
 asyncio_mode = "auto"
+markers = [
+    "redis: contract requiring the Redis backend",
+    "integration: backend integration contract",
+    "docdb: contract requiring MongoDB or DocumentDB",
+]
 
 [tool.ruff]
 line-length = 100

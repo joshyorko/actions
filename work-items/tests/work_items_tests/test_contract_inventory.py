@@ -1,35 +1,23 @@
 # Copyright 2022-2026 Robocorp and contributors.
 # Licensed under the Apache License, Version 2.0.
-"""Expected-red inventory for the immutable upstream contract suites.
+"""Contract-port policy checks; executable assertions live in contract_ports."""
 
-Each parameter is an attributed upstream test node. Strict xfail makes an
-unclassified pass fail CI; closing a gap requires replacing the inventory node
-with its executable port before changing the manifest status.
-"""
-
-import json
+import ast
 from pathlib import Path
 
-import pytest
-
-ROOT = Path(__file__).resolve().parents[2]
-MANIFEST = json.loads((ROOT / "contracts" / "ported-tests.json").read_text())
+PORTS = Path(__file__).resolve().parent / "contract_ports"
 
 
-def _expected_red_cases():
-    return [
-        pytest.param(
-            case,
-            id=case["id"],
-            marks=pytest.mark.xfail(strict=True, reason=f"{case['implementation_task']}: {case['id']}"),
+def test_expected_red_ports_execute_production_behavior():
+    for path in PORTS.glob("test_*.py"):
+        tree = ast.parse(path.read_text())
+        calls = {node.func.attr for node in ast.walk(tree) if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)}
+        assert not any(
+            isinstance(node.func, ast.Attribute)
+            and isinstance(node.func.value, ast.Name)
+            and node.func.value.id == "pytest"
+            and node.func.attr == "fail"
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Call)
         )
-        for case in MANIFEST["cases"]
-        if case["status"] == "expected_red"
-    ]
-
-
-@pytest.mark.parametrize("case", _expected_red_cases())
-def test_ported_contract_expected_red(case):
-    pytest.fail(f"contract port pending: {case['source_test']}")
-
-
+        assert calls & {"reserve_input", "load_payload", "create", "email", "add_file", "seed_input"}

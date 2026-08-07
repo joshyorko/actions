@@ -1,30 +1,11 @@
 {
   "schema_version": 1,
-  "release_target": "0.4.0",
-  "baselines": {
+  "generation": "AST inventory from immutable pinned source trees; Yorko/Fizzy excluded by plan.",
+  "surfaces": {
     "robocorp-1.5.0": {
-      "commit": "631f5601617e9935620a72c788a98e1012331323",
-      "license": "Apache-2.0",
-      "role": "canonical runtime, lifecycle, email, attachment, and direct-file contracts"
-    },
-    "custom-0.1.6": {
-      "commit": "c56c70102423a18ed54037221116f81ccccd4f4e",
-      "license": "Apache-2.0",
-      "role": "persistent backend, factory, queue, recovery, migration, concurrency, and attachment contracts"
-    },
-    "actions-0.3.1": {
-      "version": "0.3.1",
-      "role": "aliases, management API, atomic SQLite reservation, filesystem hardening, and Action Server isolation"
-    }
-  },
-  "classifications": [
-    "required_parity",
-    "preserved_0_3_1_compatibility",
-    "intentional_security_hardening",
-    "unsupported_external_service"
-  ],
-  "public_surfaces": {
-    "robocorp-1.5.0": {
+      "aliases": [
+        "robocorp.workitems"
+      ],
       "symbols": [
         "ApplicationException",
         "BaseAdapter",
@@ -105,51 +86,15 @@
         "RobocorpAdapter.save_payload": "(self, item_id: str, payload: JSONType)",
         "State": "class"
       },
-      "environment": [
-        "RC_WORKITEM_ADAPTER",
-        "RPA_WORKITEMS_ADAPTER",
-        "RC_WORKITEM_INPUT_PATH",
-        "RC_WORKITEM_OUTPUT_PATH",
-        "RPA_INPUT_WORKITEM_PATH",
-        "RPA_OUTPUT_WORKITEM_PATH"
-      ],
-      "states": {
-        "DONE": "COMPLETED",
-        "FAILED": "FAILED"
-      },
-      "exceptions": [
-        "EmptyQueue",
-        "BusinessException",
-        "ApplicationException",
-        "ValueError",
-        "RuntimeError"
-      ],
-      "persisted_shapes": [
-        "direct FileAdapter input/output: top-level list of {payload, files}",
-        "FileAdapter item IDs: decimal list indexes",
-        "FileAdapter files: logical-name to sibling-path mapping"
-      ],
-      "lifecycle": [
-        "one current input",
-        "reserve raises while current input unreleased",
-        "iteration releases through context manager",
-        "output requires current input",
-        "output parent is current input",
-        "outputs.create defaults save=True",
-        "successful context exits done",
-        "exceptional context exits failed",
-        "released inputs retained",
-        "unsaved outputs warn at task teardown"
-      ],
-      "aliases": [
-        "robocorp.workitems"
-      ],
       "values": {
         "__version__": "1.5.0",
         "version_info": "[int(x) for x in __version__.split('.')]"
       }
     },
     "custom-0.1.6": {
+      "aliases": [
+        "robocorp_adapters_custom"
+      ],
       "symbols": [
         "AdapterError",
         "BaseAdapter",
@@ -216,51 +161,18 @@
         "is_custom_adapter_enabled": "() -> bool",
         "load_adapter_class": "(adapter_class_path: str) -> type[BaseAdapter]"
       },
-      "environment": [
-        "RC_WORKITEM_ADAPTER",
-        "RC_WORKITEM_DB_PATH",
-        "RC_WORKITEM_QUEUE_NAME",
-        "RC_WORKITEM_OUTPUT_QUEUE_NAME",
-        "RC_WORKITEM_FILES_DIR",
-        "RC_WORKITEM_ORPHAN_TIMEOUT_MINUTES",
-        "RC_WORKITEM_AUTO_APPEND_OUTPUT_SUFFIX",
-        "RC_REDIS_URL",
-        "RC_WORKITEM_FILE_SIZE_THRESHOLD"
-      ],
-      "states": {
-        "PENDING": "PENDING",
-        "IN_PROGRESS": "IN_PROGRESS",
-        "DONE": "COMPLETED",
-        "FAILED": "FAILED"
-      },
-      "exceptions": [
-        "EmptyQueue",
-        "AdapterError",
-        "DatabaseTemporarilyUnavailable",
-        "ConnectionPoolExhausted",
-        "SchemaVersionMismatch"
-      ],
-      "persisted_shapes": [
-        "SQLite schema-version metadata plus work_items and attachments",
-        "Redis queue/item/payload/file keys with TTL and origin metadata",
-        "MongoDB work item documents plus inline/GridFS attachment split"
-      ],
-      "lifecycle": [
-        "atomic FIFO claim",
-        "explicit input/output queues",
-        "parent-linked outputs",
-        "orphan timeout recovery",
-        "duplicate attachment rejection",
-        "output suffix normalization"
-      ],
-      "aliases": [
-        "robocorp_adapters_custom"
-      ],
       "values": {
         "__version__": "0.1.6"
       }
     },
     "actions-0.3.1": {
+      "aliases": [
+        "actions.work_items",
+        "actions.workitems",
+        "actions_work_items",
+        "actions_work_items.workitems",
+        "from actions import workitems"
+      ],
       "symbols": [
         "Address",
         "ApplicationException",
@@ -424,181 +336,9 @@
         "inputs": "() -> Iterator[Input]",
         "seed_input": "(payload: JSONType | None = None, files: dict | None = None, queue_name: str | None = None) -> str"
       },
-      "environment": [
-        "RC_WORKITEM_ADAPTER",
-        "RC_WORKITEM_INPUT_PATH",
-        "RC_WORKITEM_OUTPUT_PATH",
-        "RC_WORKITEM_DB_PATH",
-        "RC_WORKITEM_QUEUE_NAME",
-        "RC_WORKITEM_OUTPUT_QUEUE_NAME",
-        "RC_WORKITEM_FILES_DIR",
-        "RC_REDIS_URL",
-        "RC_WORKITEM_FILE_SIZE_THRESHOLD"
-      ],
-      "states": {
-        "PENDING": "PENDING",
-        "IN_PROGRESS": "IN_PROGRESS",
-        "DONE": "DONE",
-        "COMPLETED": "DONE",
-        "FAILED": "FAILED"
-      },
-      "exceptions": [
-        "EmptyQueue",
-        "WorkItemException",
-        "BusinessException",
-        "ApplicationException",
-        "ValueError",
-        "RuntimeError"
-      ],
-      "persisted_shapes": [
-        "directory FileAdapter work-items.json envelope {workItems: [...]}",
-        "SQLite work_items rows with JSON payload and attachment paths",
-        "item-owned attachment directories"
-      ],
-      "lifecycle": [
-        "explicit init plus lazy singleton initialization",
-        "managed seed/list/get/delete/stats API",
-        "BEGIN IMMEDIATE SQLite claim",
-        "queue/datadir isolation"
-      ],
-      "aliases": [
-        "actions.work_items",
-        "actions.workitems",
-        "actions_work_items",
-        "actions_work_items.workitems",
-        "from actions import workitems"
-      ],
       "values": {
         "__version__": "0.3.1"
       }
     }
-  },
-  "differences": [
-    {
-      "id": "state.done-value",
-      "classification": "required_parity",
-      "decision": "State.DONE.value is COMPLETED; readers accept DONE and COMPLETED",
-      "status": "expected_red",
-      "task": "task-2"
-    },
-    {
-      "id": "adapter.protocol-split",
-      "classification": "required_parity",
-      "decision": "RuntimeAdapter has nine processing methods and ManagedAdapter has six management methods",
-      "status": "expected_red",
-      "task": "task-2"
-    },
-    {
-      "id": "signature.release-input",
-      "classification": "required_parity",
-      "decision": "Accept upstream exception object and 0.3.1 split exception keywords through typed overloads",
-      "status": "expected_red",
-      "task": "task-2"
-    },
-    {
-      "id": "signature.add-file",
-      "classification": "required_parity",
-      "decision": "Accept three-argument upstream and four-argument 0.3.1 forms",
-      "status": "expected_red",
-      "task": "task-2"
-    },
-    {
-      "id": "runtime.lifecycle",
-      "classification": "required_parity",
-      "decision": "Restore upstream current/released/output/context/task lifecycle",
-      "status": "expected_red",
-      "task": "task-2"
-    },
-    {
-      "id": "runtime.email",
-      "classification": "required_parity",
-      "decision": "Restore upstream payload email parser and __mail.html behavior",
-      "status": "expected_red",
-      "task": "task-2"
-    },
-    {
-      "id": "file.direct-mode",
-      "classification": "required_parity",
-      "decision": "Existing file or .json path selects upstream direct-file representation",
-      "status": "expected_red",
-      "task": "task-3"
-    },
-    {
-      "id": "file.directory-mode",
-      "classification": "preserved_0_3_1_compatibility",
-      "decision": "Existing directory or non-JSON path preserves envelope and item-owned files",
-      "status": "implemented",
-      "task": "task-3"
-    },
-    {
-      "id": "file.path-containment",
-      "classification": "intentional_security_hardening",
-      "decision": "Reject absolute, traversal, separator, quote, control, and symlink escapes in both modes",
-      "status": "implemented",
-      "task": "task-3"
-    },
-    {
-      "id": "sqlite.atomic-claim",
-      "classification": "preserved_0_3_1_compatibility",
-      "decision": "BEGIN IMMEDIATE, conditional FIFO claim, deterministic rowid tie break",
-      "status": "implemented",
-      "task": "task-4"
-    },
-    {
-      "id": "sqlite.historical-migrations",
-      "classification": "required_parity",
-      "decision": "Open custom 0.1.6 and actions 0.3.1 schemas transactionally and idempotently",
-      "status": "expected_red",
-      "task": "task-4"
-    },
-    {
-      "id": "redis.contract",
-      "classification": "required_parity",
-      "decision": "Preserve custom keys, TTL, origins, routing, atomic reservation, recovery, and attachments",
-      "status": "expected_red",
-      "task": "task-4"
-    },
-    {
-      "id": "mongodb.contract",
-      "classification": "required_parity",
-      "decision": "Preserve custom documents, indexes, atomic claim, routing, recovery, and inline/GridFS attachments",
-      "status": "expected_red",
-      "task": "task-4"
-    },
-    {
-      "id": "aws-documentdb.live",
-      "classification": "unsupported_external_service",
-      "decision": "AWS DocumentDB-specific behavior remains unverified and experimental",
-      "status": "unsupported_external_service",
-      "task": "task-4"
-    },
-    {
-      "id": "robocorp-control-room",
-      "classification": "unsupported_external_service",
-      "decision": "Official Robocorp Control Room HTTP adapter is excluded",
-      "status": "unsupported_external_service",
-      "task": "none"
-    },
-    {
-      "id": "yorko.live",
-      "classification": "unsupported_external_service",
-      "decision": "Yorko remains optional and experimental until a live gate exists",
-      "status": "unsupported_external_service",
-      "task": "task-5"
-    },
-    {
-      "id": "aliases",
-      "classification": "preserved_0_3_1_compatibility",
-      "decision": "Preserve actions.work_items, actions.workitems, actions_work_items, and from actions import workitems",
-      "status": "implemented",
-      "task": "task-2"
-    },
-    {
-      "id": "management-api",
-      "classification": "preserved_0_3_1_compatibility",
-      "decision": "Preserve seed/list/get/delete/stats/recovery for managed adapters and Action Server",
-      "status": "implemented",
-      "task": "task-2"
-    }
-  ]
+  }
 }
