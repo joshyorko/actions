@@ -240,17 +240,28 @@ class RedisAdapter(BaseAdapter):
         """Normalize internal storage state to API state."""
         if state == ProcessingState.RESERVED.value:
             return State.IN_PROGRESS.value
-        if state == ProcessingState.COMPLETED.value:
+        if state in {ProcessingState.COMPLETED.value, "COMPLETED"}:
             return State.DONE.value
         if state == State.FAILED.value:
             return State.FAILED.value
         return state or State.PENDING.value
 
-    def _exception_for_item(self, item_id: str) -> dict[str, str]:
-        exception_data = self._client.hgetall(self._key("exception", item_id=item_id))
+    def _exception_for_item(self, item_id: str, queue: str) -> dict[str, str]:
+        exception_data = self._client.hgetall(
+            self._key("exception", queue=queue, item_id=item_id)
+        )
+        if not exception_data and queue != self.queue_name:
+            exception_data = self._client.hgetall(self._key("exception", item_id=item_id))
         if not exception_data:
             return {}
-        return {self._decode(key): self._decode(value) for key, value in exception_data.items()}
+        decoded = {
+            self._decode(key): self._decode(value) for key, value in exception_data.items()
+        }
+        return {
+            "type": decoded.get("type", decoded.get("exception_type", "")),
+            "code": decoded.get("code", decoded.get("exception_code", "")),
+            "message": decoded.get("message", decoded.get("exception_message", "")),
+        }
 
     def _timestamps_for_item(self, item_id: str, queue: str) -> dict[str, str]:
         timestamps = self._client.hgetall(self._key("timestamps", queue=queue, item_id=item_id))
@@ -279,8 +290,10 @@ class RedisAdapter(BaseAdapter):
         raw_state = payload_hash.get("state")
         if raw_state is None and isinstance(payload_hash, dict):
             raw_state = payload_hash.get(b"state")
+        if raw_state is None:
+            raw_state = self._client.get(self._key("state", queue=queue_name, item_id=item_id))
         queue_state = self._public_state(self._decode(raw_state))
-        exception_data = self._exception_for_item(item_id)
+        exception_data = self._exception_for_item(item_id, queue_name)
         created_at = timestamps.get("created_at") or datetime.utcnow().isoformat()
         updated_at = (
             timestamps.get("released_at")
@@ -291,12 +304,16 @@ class RedisAdapter(BaseAdapter):
         parent_id = payload_hash.get("parent_id")
         if parent_id is None and isinstance(payload_hash, dict):
             parent_id = payload_hash.get(b"parent_id")
+        if parent_id is None:
+            parent_id = self._client.get(
+                self._key("parent", queue=queue_name, item_id=item_id)
+            )
 
         return {
             "id": self._decode(item_id),
             "queue_name": queue_name,
             "state": queue_state,
-            "payload": payload_data if isinstance(payload_data, dict) else {"value": payload_data},
+            "payload": payload_data,
             "parent_id": self._decode(parent_id),
             "error_code": exception_data.get("code"),
             "error_message": exception_data.get("message"),
@@ -413,7 +430,9 @@ class RedisAdapter(BaseAdapter):
 
             if state == State.DONE:
                 self._client.srem(self._key("failed", queue=queue_name), item_id)
-                self._client.delete(self._key("exception", item_id=item_id))
+                self._client.delete(
+                    self._key("exception", queue=queue_name, item_id=item_id)
+                )
                 self._client.sadd(self._key("done", queue=queue_name), item_id)
             else:
                 self._client.srem(self._key("done", queue=queue_name), item_id)
@@ -423,21 +442,29 @@ class RedisAdapter(BaseAdapter):
                     exception_type.value if hasattr(exception_type, "value") else exception_type
                 )
                 self._client.hset(
-                    self._key("exception", item_id=item_id),
+                    self._key("exception", queue=queue_name, item_id=item_id),
                     mapping={
                         "type": str(exception_type_value or "UnknownException"),
                         "code": str(code or ""),
                         "message": str(message or ""),
                     },
                 )
-                self._client.expire(self._key("exception", item_id=item_id), 86400)
+                self._client.expire(
+                    self._key("exception", queue=queue_name, item_id=item_id), 86400
+                )
 
             # Update timestamps
             now = datetime.utcnow().isoformat()
-            self._client.hset(self._key("timestamps", item_id=item_id), "released_at", now)
+            self._client.hset(
+                self._key("timestamps", queue=queue_name, item_id=item_id),
+                "released_at",
+                now,
+            )
 
             # Store terminal state
-            self._client.set(self._key("state", item_id=item_id), state.value)
+            self._client.set(
+                self._key("state", queue=queue_name, item_id=item_id), state.value
+            )
             self._client.hset(
                 self._key("payload", queue=queue_name, item_id=item_id),
                 "state",
@@ -646,8 +673,8 @@ class RedisAdapter(BaseAdapter):
             self._key("parent", queue=queue_name, item_id=item_id),
             self._key("timestamps", queue=queue_name, item_id=item_id),
             self._key("files", queue=queue_name, item_id=item_id),
-            self._key("exception", item_id=item_id),
-            self._key("state", item_id=item_id),
+            self._key("exception", queue=queue_name, item_id=item_id),
+            self._key("state", queue=queue_name, item_id=item_id),
             f"origin:{item_id}",
         )
         self._queue_cache.pop(item_id, None)

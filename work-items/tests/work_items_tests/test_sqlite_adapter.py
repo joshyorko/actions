@@ -396,3 +396,90 @@ def test_queue_stats(adapter):
     assert stats["pending"] == 2
     assert stats["done"] == 1
     assert stats["total"] == 3
+
+
+def test_migrates_historical_custom_schema_transactionally(tmp_path):
+    """The versioned custom-adapter schema upgrades without losing item or file data."""
+    db_path = tmp_path / "legacy.db"
+    files_dir = tmp_path / "files"
+    item_dir = files_dir / "legacy-item"
+    item_dir.mkdir(parents=True)
+    file_path = item_dir / "report.txt"
+    file_path.write_bytes(b"legacy")
+    with sqlite3.connect(db_path) as conn:
+        conn.executescript(
+            """
+            CREATE TABLE work_items (
+                id TEXT PRIMARY KEY, queue_name TEXT NOT NULL, parent_id TEXT,
+                payload TEXT, state TEXT, created_at TEXT,
+                exception_type TEXT, exception_code TEXT, exception_message TEXT,
+                reserved_at TEXT, released_at TEXT
+            );
+            CREATE TABLE work_item_files (
+                work_item_id TEXT NOT NULL, filename TEXT NOT NULL,
+                filepath TEXT NOT NULL UNIQUE, created_at TEXT,
+                PRIMARY KEY (work_item_id, filename)
+            );
+            CREATE TABLE schema_version (version INTEGER PRIMARY KEY, applied_at TEXT);
+            INSERT INTO schema_version(version) VALUES (4);
+            """
+        )
+        conn.execute(
+            "INSERT INTO work_items VALUES (?, ?, NULL, ?, 'RESERVED', ?, NULL, ?, ?, ?, NULL)",
+            ("legacy-item", "test_queue", '{"legacy": true}', "2026-01-01T00:00:00+00:00", "E1", "failed", "2026-01-01T00:01:00+00:00"),
+        )
+        conn.execute(
+            "INSERT INTO work_item_files VALUES (?, ?, ?, ?)",
+            ("legacy-item", "report.txt", str(file_path), "2026-01-01T00:00:00+00:00"),
+        )
+
+    migrated = SQLiteAdapter(str(db_path), "test_queue", files_dir=str(files_dir))
+
+    item = migrated.get_item("legacy-item")
+    assert item["state"] == State.IN_PROGRESS.value
+    assert item["error_code"] == "E1"
+    assert item["error_message"] == "failed"
+    assert migrated.get_file("legacy-item", "report.txt") == b"legacy"
+    with sqlite3.connect(db_path) as conn:
+        assert conn.execute("SELECT MAX(version) FROM schema_version").fetchone()[0] == 5
+    SQLiteAdapter(str(db_path), "test_queue", files_dir=str(files_dir))
+
+
+def test_migrates_current_unversioned_schema_without_losing_data(tmp_path):
+    """The current unversioned schema is adopted and versioned in place."""
+    db_path = tmp_path / "current.db"
+    with sqlite3.connect(db_path) as conn:
+        conn.executescript(
+            """
+            CREATE TABLE work_items (
+                id TEXT PRIMARY KEY, queue_name TEXT NOT NULL, parent_id TEXT,
+                state TEXT NOT NULL DEFAULT 'PENDING', payload TEXT,
+                created_at TEXT NOT NULL, updated_at TEXT
+            );
+            CREATE TABLE work_item_files (
+                id TEXT PRIMARY KEY, work_item_id TEXT NOT NULL, name TEXT NOT NULL,
+                original_name TEXT NOT NULL, file_path TEXT NOT NULL, created_at TEXT NOT NULL
+            );
+            INSERT INTO work_items VALUES
+                ('existing', 'test_queue', NULL, 'PENDING', '[1, 2]', '2026-01-01', NULL);
+            """
+        )
+
+    migrated = SQLiteAdapter(str(db_path), "test_queue", files_dir=str(tmp_path / "files"))
+
+    assert migrated.load_payload("existing") == [1, 2]
+    assert migrated.reserve_input() == "existing"
+    with sqlite3.connect(db_path) as conn:
+        assert conn.execute("SELECT MAX(version) FROM schema_version").fetchone()[0] == 5
+
+
+def test_recovery_uses_configured_orphan_timeout(tmp_path, monkeypatch):
+    """SQLite orphan recovery honors RC_WORKITEM_ORPHAN_TIMEOUT_MINUTES."""
+    monkeypatch.setenv("RC_WORKITEM_ORPHAN_TIMEOUT_MINUTES", "0")
+    adapter = SQLiteAdapter(
+        str(tmp_path / "items.db"), "test_queue", files_dir=str(tmp_path / "files")
+    )
+    item_id = adapter.seed_input()
+    adapter.reserve_input()
+
+    assert adapter.recover_orphaned_work_items() == [item_id]
