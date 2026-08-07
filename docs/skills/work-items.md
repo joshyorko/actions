@@ -89,8 +89,8 @@ required parity, preserved 0.3.1 compatibility, intentional security
 hardening, or unsupported external service.
 
 `ported-tests.json` maps 123 selected Apache-2.0 logical test nodes to an
-implementation task and status. Pytest expands those nodes to 153 cases: 40
-implemented cases run normally, 85 expected-red cases execute and xfail, and 28
+implementation task and status. Pytest expands those nodes to 153 cases: 44
+implemented cases run normally, 81 expected-red cases execute and xfail, and 28
 Redis/MongoDB service cases retain the pinned source `skipif` decorators. The
 28 service cases are collected but are not backend evidence unless a reachable
 service makes their bodies execute.

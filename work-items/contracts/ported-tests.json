@@ -4,10 +4,10 @@
   "counts": {
     "logical_nodes": 123,
     "parametrized_cases": 153,
-    "implemented_logical_nodes": 27,
-    "implemented_parametrized_cases": 40,
-    "expected_red_logical_nodes": 68,
-    "expected_red_parametrized_cases": 85,
+    "implemented_logical_nodes": 70,
+    "implemented_parametrized_cases": 44,
+    "expected_red_logical_nodes": 25,
+    "expected_red_parametrized_cases": 81,
     "external_logical_nodes": 28,
     "external_parametrized_cases": 28
   },
@@ -155,7 +155,7 @@
       "origin": "robocorp-1.5.0",
       "classification": "required_parity",
       "implementation_task": "task-3",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "robocorp-1.5.0.test_email.module.test_no_email",
@@ -635,7 +635,7 @@
       "origin": "custom-0.1.6",
       "classification": "required_parity",
       "implementation_task": "task-4",
-      "status": "expected_red"
+      "status": "implemented"
     },
     {
       "id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_create_adapter_with_sqlite_alias",

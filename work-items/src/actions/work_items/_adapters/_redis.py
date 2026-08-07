@@ -240,7 +240,7 @@ class RedisAdapter(BaseAdapter):
         """Normalize internal storage state to API state."""
         if state == ProcessingState.RESERVED.value:
             return State.IN_PROGRESS.value
-        if state in {ProcessingState.COMPLETED.value, "COMPLETED"}:
+        if state in {ProcessingState.COMPLETED.value, "COMPLETED", "DONE"}:
             return State.DONE.value
         if state == State.FAILED.value:
             return State.FAILED.value

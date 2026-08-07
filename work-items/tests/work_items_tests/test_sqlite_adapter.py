@@ -294,7 +294,7 @@ def test_release_done(adapter):
     adapter.release_input(item_id, State.DONE)
 
     item = adapter.get_item(item_id)
-    assert item["state"] == "DONE"
+    assert item["state"] == State.DONE.value
 
 
 def test_release_failed(adapter):

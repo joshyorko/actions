@@ -116,7 +116,7 @@ def test_every_expected_red_parameter_has_exact_owned_failure():
 
     assert failures["schema_version"] == 1
     assert {entry["case_id"] for entry in failures["failures"]} == expected_red
-    assert sum(len(entry["parameter_ids"]) for entry in failures["failures"]) == 85
+    assert sum(len(entry["parameter_ids"]) for entry in failures["failures"]) == 81
     for entry in failures["failures"]:
         assert entry["exception"].count(".") >= 1
         assert entry["parameter_ids"]
@@ -128,10 +128,10 @@ def test_inventory_counts_logical_nodes_separately_from_parametrized_cases():
     assert MANIFEST["counts"] == {
         "logical_nodes": 123,
         "parametrized_cases": 153,
-        "implemented_logical_nodes": 27,
-        "implemented_parametrized_cases": 40,
-        "expected_red_logical_nodes": 68,
-        "expected_red_parametrized_cases": 85,
+        "implemented_logical_nodes": 70,
+        "implemented_parametrized_cases": 44,
+        "expected_red_logical_nodes": 25,
+        "expected_red_parametrized_cases": 81,
         "external_logical_nodes": 28,
         "external_parametrized_cases": 28,
     }
