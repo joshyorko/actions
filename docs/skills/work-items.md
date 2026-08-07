@@ -6,7 +6,7 @@
 
 The community Action Server management API currently owns SQLite storage under its datadir. Do not imply that its UI/API manages Redis, DocumentDB, or arbitrary custom adapters unless code and integration tests establish that behavior.
 
-SQLite is the release-critical local/server backend. FileAdapter is intended for local, single-process workflows. Redis and DocumentDB exist as optional backends but lack sufficient service-backed reliability coverage on this branch; describe them as experimental until those gates land.
+SQLite is the release-critical local/server backend. FileAdapter is intended for local, single-process workflows. Redis 7 and MongoDB 7 have mandatory repository-owned service gates covering competing and FIFO claims, orphan recovery, attachment storage and cleanup, duplicate rejection, output routing, and backend cleanup. AWS DocumentDB-specific production support remains experimental until a production-compatible service gate establishes it.
 
 ## Safety Invariants
 
@@ -21,15 +21,23 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 
 ## Local Verification
 
-The canonical Work Items release gate runs in the Action Server Dev Container through Poetry. The following is a host-side Docker command; run it from the repository root because its bind mount uses host `$PWD`. The in-container scripts are cwd-independent:
+The canonical Bluefin host gate is cwd-independent:
 
 ```bash
-docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:test .devcontainer/bin/smoke
+.devcontainer/bin/smoke-host
 ```
+
+The host wrapper owns `work-items/tests/compose.persistent-backends.yaml`: it starts healthy Redis and MongoDB services, attaches the Dev Container image to the named `actions-work-items-persistent-backends_default` network, and passes service-DNS endpoints to the container. It does not mount the Docker socket. Its exit trap removes services, volumes, and orphans after successful and failed verification. In linked worktrees, it also mounts the common Git directory read-only at its original absolute path so the in-container diff check can resolve worktree metadata.
 
 `work-items/pyproject.toml` uses PEP 621 as the authoritative package metadata, including its Python floor, optional backend extras, and distribution version. Poetry 2.1.1 remains authoritative for resolving and writing the committed lockfile.
 
-`verify-work-items [artifact-directory]` checks the committed lockfile, Ruff, the Work Items test suite, and builds the wheel and sdist once. It registers cleanup before creating internal temporary directories. With no argument it cleans its temporary artifacts; with an explicit empty artifact directory it retains both artifacts for CI, and rejects a non-empty destination. The gate strictly validates both distributions with Twine, checks the wheel metadata name, version, Markdown README marker, and clean-wheel public aliases/version equality, then runs `git diff --check`. uv bootstraps Poetry in the image but never replaces Poetry resolution or the committed `work-items/poetry.lock` authority.
+`verify-work-items [artifact-directory]` is the in-container verifier; it never starts Docker or services. It requires explicit `TEST_REDIS_URL` and `TEST_MONGODB_URI` endpoints and runs the complete Work Items suite, including the mandatory service tests. It checks the committed lockfile and Ruff, then builds the wheel and sdist once. It registers cleanup before creating internal temporary directories. With no argument it cleans its temporary artifacts; with an explicit empty artifact directory it retains both artifacts for CI, and rejects a non-empty destination. The gate strictly validates both distributions with Twine, checks the wheel metadata name, version, Markdown README marker, and clean-wheel public aliases/version equality, then runs `git diff --check`. uv bootstraps Poetry in the image but never replaces Poetry resolution or the committed `work-items/poetry.lock` authority.
+
+For an ordinary service-free host diagnostic only, exclude the registered service marker explicitly; this is not release or smoke evidence:
+
+```bash
+PYTHONPATH=work-items/src uv run --no-project --with pytest --with pytest-asyncio pytest work-items/tests -q -m 'not persistent_backend_service'
+```
 
 ## CI Publication and Recovery
 
@@ -42,18 +50,6 @@ Publication is tag-only: the `publish` job requires successful verification, acc
 For 0.3.1, merge the release fix into `community`, confirm the merged verification run is green, then create `actions-work-items-0.3.1` on that exact merged commit. The 0.3.0 tag failed before PyPI accepted artifacts and remains immutable. Confirm the 0.3.1 tag run passes strict Twine, metadata, alias, version, and ancestry gates before checking PyPI and installing the published wheel in a clean environment. Never move or reuse an accepted artifact or release tag: if publication did not accept the artifacts, merge the fix and use a new version/tag; if it did, publish a new patch version.
 
 The `pypi` environment is a workflow reference only. Its approval and protection rules are external GitHub configuration and must be created and enforced there before they are relied upon.
-
-For a linked worktree, mount the common Git directory read-only at its original absolute path as well as mounting the worktree. This lets the gate's `git diff --check` resolve worktree Git metadata:
-
-```bash
-repo_root=$(git rev-parse --show-toplevel)
-common_git_dir=$(git rev-parse --path-format=absolute --git-common-dir)
-docker run --rm --user vscode \
-  -v "$repo_root:/workspaces/actions" \
-  -v "$common_git_dir:$common_git_dir:ro" \
-  -w /workspaces/actions actions-devcontainer:test \
-  .devcontainer/bin/verify-work-items /artifacts
-```
 
 Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader accepts only its PEP 610 editable local-file `direct_url.json` root and resolves a contained `src/actions/work_items/__init__.py` or `actions/work_items/__init__.py`; it never consults project import paths, keeping shadow packages from controlling the REST adapter path.
 
@@ -68,7 +64,7 @@ PYTHONPATH=work-items/src uv run --no-project --with pytest --with pytest-asynci
 uvx ruff check work-items/src work-items/tests
 ```
 
-The package release gate remains Poetry-based and includes `poetry check --lock`, tests, Ruff, build, clean-wheel alias imports, and a clean diff check. Redis/DocumentDB production claims additionally require service-backed tests; deterministic fakes alone are insufficient.
+The package release gate remains Poetry-based and includes `poetry check --lock`, mandatory Redis 7 and MongoDB 7 service tests, Ruff, build, clean-wheel alias imports, and a clean diff check. AWS DocumentDB production claims still require a production-compatible service gate; deterministic fakes and MongoDB 7 alone are insufficient.
 
 Ruff's configured `UP` fixes in `work-items/src/actions/work_items` are compatible with the package's Python 3.10 floor: built-in generic and `X | None` annotations replace legacy `typing` forms without changing runtime behavior or public aliases.
 
