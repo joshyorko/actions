@@ -1,0 +1,1020 @@
+{
+  "schema_version": 1,
+  "attribution": "Tests derived from Robocorp Work Items and robocorp-adapters-custom; Apache License 2.0. Source pins are immutable.",
+  "sources": {
+    "robocorp-1.5.0": {
+      "commit": "631f5601617e9935620a72c788a98e1012331323",
+      "path": "workitems/tests/workitems_tests",
+      "license": "Apache-2.0",
+      "excluded": [
+        "TestRobocorpAdapter (Control Room HTTP)"
+      ]
+    },
+    "custom-0.1.6": {
+      "commit": "c56c70102423a18ed54037221116f81ccccd4f4e",
+      "path": "workitems_tests",
+      "license": "Apache-2.0",
+      "excluded": [
+        "TestRobocorpAdapter (Control Room HTTP)",
+        "Yorko Control Room",
+        "Fizzy orchestration"
+      ]
+    }
+  },
+  "expected_red_policy": {
+    "pytest": "xfail(strict=True)",
+    "closed_gap_rule": "Replace the inventory case with its executable port before setting status to implemented.",
+    "allowed_statuses": [
+      "expected_red",
+      "implemented",
+      "unsupported_external_service"
+    ]
+  },
+  "cases": [
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_load_data",
+      "source_test": "test_adapters.py::TestFileAdapter::test_load_data",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_list_files",
+      "source_test": "test_adapters.py::TestFileAdapter::test_list_files",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_get_file",
+      "source_test": "test_adapters.py::TestFileAdapter::test_get_file",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_add_file",
+      "source_test": "test_adapters.py::TestFileAdapter::test_add_file",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_save_data_input",
+      "source_test": "test_adapters.py::TestFileAdapter::test_save_data_input",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_save_data_output",
+      "source_test": "test_adapters.py::TestFileAdapter::test_save_data_output",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_missing_file",
+      "source_test": "test_adapters.py::TestFileAdapter::test_missing_file",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_empty_queue",
+      "source_test": "test_adapters.py::TestFileAdapter::test_empty_queue",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_malformed_queue",
+      "source_test": "test_adapters.py::TestFileAdapter::test_malformed_queue",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_missing_parent_directory",
+      "source_test": "test_adapters.py::TestFileAdapter::test_missing_parent_directory",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_invalid_reporter",
+      "source_test": "test_adapters.py::TestFileAdapter::test_invalid_reporter",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_valid_reporter",
+      "source_test": "test_adapters.py::TestFileAdapter::test_valid_reporter",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-3",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_no_email",
+      "source_test": "test_email.py::test_no_email",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_wrong_payload_type",
+      "source_test": "test_email.py::test_wrong_payload_type",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_optional_field",
+      "source_test": "test_email.py::test_optional_field",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_missing_field",
+      "source_test": "test_email.py::test_missing_field",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_malformed",
+      "source_test": "test_email.py::test_malformed",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_email_valid",
+      "source_test": "test_email.py::test_email_valid",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_email_valid_regression",
+      "source_test": "test_email.py::test_email_valid_regression",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_email_failed_raises",
+      "source_test": "test_email.py::test_email_failed_raises",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_email_failed_parses",
+      "source_test": "test_email.py::test_email_failed_parses",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_html_attachment",
+      "source_test": "test_email.py::test_html_attachment",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_html_attachment_skip",
+      "source_test": "test_email.py::test_html_attachment_skip",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_email.module.test_email_extra_field",
+      "source_test": "test_email.py::test_email_extra_field",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_first",
+      "source_test": "test_workitems.py::test_inputs_first",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_reserve",
+      "source_test": "test_workitems.py::test_inputs_reserve",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_iter",
+      "source_test": "test_workitems.py::test_inputs_iter",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_released",
+      "source_test": "test_workitems.py::test_inputs_released",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_outputs_create",
+      "source_test": "test_workitems.py::test_outputs_create",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_outputs_create_no_save",
+      "source_test": "test_workitems.py::test_outputs_create_no_save",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_outputs_create_no_current",
+      "source_test": "test_workitems.py::test_outputs_create_no_current",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_outputs_last",
+      "source_test": "test_workitems.py::test_outputs_last",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_outputs_magic_methods",
+      "source_test": "test_workitems.py::test_outputs_magic_methods",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_pass",
+      "source_test": "test_workitems.py::test_input_pass",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_fail",
+      "source_test": "test_workitems.py::test_input_fail",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_create_output",
+      "source_test": "test_workitems.py::test_input_create_output",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_list_files",
+      "source_test": "test_workitems.py::test_input_list_files",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_get_file",
+      "source_test": "test_workitems.py::test_input_get_file",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_download_file_deprecated",
+      "source_test": "test_workitems.py::test_input_download_file_deprecated",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_get_files",
+      "source_test": "test_workitems.py::test_input_get_files",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_download_files_deprecated",
+      "source_test": "test_workitems.py::test_input_download_files_deprecated",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_get_file_missing",
+      "source_test": "test_workitems.py::test_input_get_file_missing",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_get_files_missing",
+      "source_test": "test_workitems.py::test_input_get_files_missing",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_remove_file",
+      "source_test": "test_workitems.py::test_input_remove_file",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_remove_file_notexist",
+      "source_test": "test_workitems.py::test_input_remove_file_notexist",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_remove_files",
+      "source_test": "test_workitems.py::test_input_remove_files",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_input_modify_payload",
+      "source_test": "test_workitems.py::test_input_modify_payload",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_outputs_create_files",
+      "source_test": "test_workitems.py::test_outputs_create_files",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_release_work_item_failed",
+      "source_test": "test_workitems.py::test_release_work_item_failed",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_duplicate_reserve",
+      "source_test": "test_workitems.py::test_duplicate_reserve",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_iter_explicit_release",
+      "source_test": "test_workitems.py::test_inputs_iter_explicit_release",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_context_raise",
+      "source_test": "test_workitems.py::test_inputs_context_raise",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_raise_derived_class",
+      "source_test": "test_workitems.py::test_inputs_raise_derived_class",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_loop_raise",
+      "source_test": "test_workitems.py::test_inputs_loop_raise",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_inputs_throw_unknown_exception",
+      "source_test": "test_workitems.py::test_inputs_throw_unknown_exception",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_iter_after_release",
+      "source_test": "test_workitems.py::test_iter_after_release",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_allow_multiple_saves",
+      "source_test": "test_workitems.py::test_allow_multiple_saves",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_collect_inputs",
+      "source_test": "test_workitems.py::test_collect_inputs",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_add_files_input",
+      "source_test": "test_workitems.py::test_add_files_input",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "robocorp-1.5.0.test_workitems.module.test_remove_files_input",
+      "source_test": "test_workitems.py::test_remove_files_input",
+      "origin": "robocorp-1.5.0",
+      "classification": "required_parity",
+      "implementation_task": "task-2",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_load_data",
+      "source_test": "test_adapters.py::TestFileAdapter::test_load_data",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_list_files",
+      "source_test": "test_adapters.py::TestFileAdapter::test_list_files",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_get_file",
+      "source_test": "test_adapters.py::TestFileAdapter::test_get_file",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_add_file",
+      "source_test": "test_adapters.py::TestFileAdapter::test_add_file",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_save_data_input",
+      "source_test": "test_adapters.py::TestFileAdapter::test_save_data_input",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_save_data_output",
+      "source_test": "test_adapters.py::TestFileAdapter::test_save_data_output",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_missing_file",
+      "source_test": "test_adapters.py::TestFileAdapter::test_missing_file",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_empty_queue",
+      "source_test": "test_adapters.py::TestFileAdapter::test_empty_queue",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_malformed_queue",
+      "source_test": "test_adapters.py::TestFileAdapter::test_malformed_queue",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_missing_parent_directory",
+      "source_test": "test_adapters.py::TestFileAdapter::test_missing_parent_directory",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_invalid_reporter",
+      "source_test": "test_adapters.py::TestFileAdapter::test_invalid_reporter",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestFileAdapter.test_valid_reporter",
+      "source_test": "test_adapters.py::TestFileAdapter::test_valid_reporter",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_create_adapter_with_sqlite_alias",
+      "source_test": "test_adapters.py::TestAdapterFactory::test_create_adapter_with_sqlite_alias",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_redis_adapter_requires_dependency",
+      "source_test": "test_adapters.py::TestAdapterFactory::test_redis_adapter_requires_dependency",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_documentdb_adapter_requires_dependency",
+      "source_test": "test_adapters.py::TestAdapterFactory::test_documentdb_adapter_requires_dependency",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestAdapterConfig.test_auto_append_output_suffix_is_bool",
+      "source_test": "test_adapters.py::TestAdapterConfig::test_auto_append_output_suffix_is_bool",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestAdapterConfig.test_auto_append_output_suffix_defaults_true",
+      "source_test": "test_adapters.py::TestAdapterConfig::test_auto_append_output_suffix_defaults_true",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_default_output_queue_name_backward_compatibility",
+      "source_test": "test_adapters.py::TestDocumentDBAdapterOutputQueueConfig::test_default_output_queue_name_backward_compatibility",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_auto_append_output_suffix_can_be_disabled_by_constructor",
+      "source_test": "test_adapters.py::TestDocumentDBAdapterOutputQueueConfig::test_auto_append_output_suffix_can_be_disabled_by_constructor",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_auto_append_output_suffix_can_be_disabled_by_env",
+      "source_test": "test_adapters.py::TestDocumentDBAdapterOutputQueueConfig::test_auto_append_output_suffix_can_be_disabled_by_env",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_explicit_output_queue_name_overrides_disabled_auto_suffix",
+      "source_test": "test_adapters.py::TestDocumentDBAdapterOutputQueueConfig::test_explicit_output_queue_name_overrides_disabled_auto_suffix",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapterOutputQueueConfig.test_blank_output_queue_name_falls_back_to_default",
+      "source_test": "test_adapters.py::TestDocumentDBAdapterOutputQueueConfig::test_blank_output_queue_name_falls_back_to_default",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_database_initialization",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_database_initialization",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_reserve_and_release_workflow",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_reserve_and_release_workflow",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_payload_operations",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_payload_operations",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_file_operations",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_file_operations",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_fifo_ordering",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_fifo_ordering",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_failed_work_item_release",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_failed_work_item_release",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_producer_consumer_workflow",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_producer_consumer_workflow",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_work_item_with_files",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_work_item_with_files",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_file_not_found",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_error_handling_file_not_found",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_file_already_exists",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_error_handling_file_already_exists",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_invalid_work_item",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_error_handling_invalid_work_item",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_custom_output_queue_name",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_custom_output_queue_name",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_default_output_queue_name_backward_compatibility",
+      "source_test": "test_adapters.py::TestSQLiteAdapter::test_default_output_queue_name_backward_compatibility",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_redis_connection",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_redis_connection",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_reserve_and_release_workflow",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_reserve_and_release_workflow",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_payload_persistence",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_payload_persistence",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_file_operations_inline",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_file_operations_inline",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_fifo_ordering",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_fifo_ordering",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_concurrent_reservation",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_concurrent_reservation",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_producer_consumer_workflow",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_producer_consumer_workflow",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_exception_handling",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_exception_handling",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_error_handling_file_not_found",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_error_handling_file_not_found",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_error_handling_file_already_exists",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_error_handling_file_already_exists",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_error_handling_invalid_work_item",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_error_handling_invalid_work_item",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_custom_output_queue_name",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_custom_output_queue_name",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestRedisAdapter.test_default_output_queue_name_backward_compatibility",
+      "source_test": "test_adapters.py::TestRedisAdapter::test_default_output_queue_name_backward_compatibility",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_mongodb_connection",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_mongodb_connection",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_reserve_and_release_workflow",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_reserve_and_release_workflow",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_payload_operations",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_payload_operations",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_file_operations_gridfs",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_file_operations_gridfs",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_fifo_ordering",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_fifo_ordering",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_atomic_reservation",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_atomic_reservation",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_producer_consumer_workflow",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_producer_consumer_workflow",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_exception_storage",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_exception_storage",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_error_handling_file_not_found",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_error_handling_file_not_found",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_error_handling_file_already_exists",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_error_handling_file_already_exists",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_error_handling_invalid_work_item",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_error_handling_invalid_work_item",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_missing_document_during_file_access",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_missing_document_during_file_access",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_file_size_threshold_inline_vs_gridfs",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_file_size_threshold_inline_vs_gridfs",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_custom_output_queue_name",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_custom_output_queue_name",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    },
+    {
+      "id": "custom-0.1.6.test_adapters.TestDocumentDBAdapter.test_default_output_queue_name_backward_compatibility",
+      "source_test": "test_adapters.py::TestDocumentDBAdapter::test_default_output_queue_name_backward_compatibility",
+      "origin": "custom-0.1.6",
+      "classification": "required_parity",
+      "implementation_task": "task-4",
+      "status": "expected_red"
+    }
+  ]
+}
+

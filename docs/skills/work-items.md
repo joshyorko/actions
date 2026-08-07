@@ -80,6 +80,25 @@ Ruff's configured `UP` fixes in `work-items/src/actions/work_items` are compatib
 - FileAdapter queue/state filtering, restart behavior, stable attachment ownership, and legacy migration.
 - Action Server datadir/queue isolation, triggers, scheduler, process environment clearing, and absent-package behavior.
 
+## Compatibility Contract Inventory
+
+The 0.4.0 consolidation inventory is machine-readable under
+`work-items/contracts/`. `compatibility-ledger.json` records the immutable
+Robocorp Work Items `631f5601617e9935620a72c788a98e1012331323` and custom
+adapter `c56c70102423a18ed54037221116f81ccccd4f4e` pins alongside the 0.3.1
+surface, and every recorded difference uses one of four classifications:
+required parity, preserved 0.3.1 compatibility, intentional security
+hardening, or unsupported external service.
+
+`ported-tests.json` maps each selected Apache-2.0 upstream test node to an
+implementation task and status. Pending nodes run as `xfail(strict=True)`, so
+they remain visible expected-red evidence and an unexpected pass fails the
+contract gate. Closing a gap requires replacing its inventory node with the
+executable adapted test before marking it implemented; never turn a pending
+node into an unconditional skip. The source-port snapshots exclude the official
+Robocorp Control Room HTTP adapter, Yorko, and Fizzy orchestration as required
+by the consolidation boundary.
+
 For HTTP attachments, map invalid names to 400, missing item/file to 404, and duplicate upload to 409. Construct `Content-Disposition` only from a validated filename.
 
 ## Evidence
