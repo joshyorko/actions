@@ -151,6 +151,33 @@ class _CompatibilityNames(ast.NodeTransformer):
             return node.body
         return node
 
+    def visit_FunctionDef(self, node):  # noqa: N802
+        node = self.generic_visit(node)
+        if node.name == "test_failed_work_item_release" and self._is_sqlite_release_assertion(node):
+            node.body[-1:] = ast.parse(
+                """\
+item = adapter.get_item(reserved_id)
+assert item["state"] == State.FAILED.value
+assert item["error_message"] == exception["message"]
+"""
+            ).body
+        return node
+
+    @staticmethod
+    def _is_sqlite_release_assertion(node: ast.FunctionDef) -> bool:
+        if not node.body or not isinstance(node.body[-1], ast.With):
+            return False
+        context = node.body[-1].items[0].context_expr
+        return (
+            isinstance(context, ast.Call)
+            and isinstance(context.func, ast.Attribute)
+            and context.func.attr == "acquire"
+            and isinstance(context.func.value, ast.Attribute)
+            and context.func.value.attr == "_pool"
+            and isinstance(context.func.value.value, ast.Name)
+            and context.func.value.value.id == "adapter"
+        )
+
     @staticmethod
     def _is_deprecation_warning_wrapper(node: ast.With) -> bool:
         if len(node.items) != 1 or len(node.body) != 1:
