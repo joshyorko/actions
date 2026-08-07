@@ -21,6 +21,8 @@ from ._base import BaseAdapter
 
 log = logging.getLogger(__name__)
 
+SCHEMA_VERSION = 5
+
 
 class SQLiteAdapter(BaseAdapter):
     """SQLite-based storage adapter for work items.
@@ -56,6 +58,9 @@ class SQLiteAdapter(BaseAdapter):
             or f"{self._queue_name}_output"
         )
         self._files_dir = Path(files_dir or os.environ.get("RC_WORKITEM_FILES_DIR", "./work_item_files"))
+        self._orphan_timeout_minutes = int(
+            os.environ.get("RC_WORKITEM_ORPHAN_TIMEOUT_MINUTES", "30")
+        )
 
         # Ensure directories exist
         self._db_path.parent.mkdir(parents=True, exist_ok=True)
@@ -71,11 +76,53 @@ class SQLiteAdapter(BaseAdapter):
         return conn
 
     def _init_db(self) -> None:
-        """Initialize the database schema."""
+        """Create or transactionally migrate the database to the canonical schema."""
         with self._get_conn() as conn:
-            conn.executescript(
-                """
-                CREATE TABLE IF NOT EXISTS work_items (
+            conn.execute("PRAGMA foreign_keys = OFF")
+            conn.execute("BEGIN IMMEDIATE")
+            try:
+                version_table_exists = conn.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'schema_version'"
+                ).fetchone()
+                if version_table_exists:
+                    version = conn.execute("SELECT MAX(version) FROM schema_version").fetchone()[0]
+                    if version is not None and version > SCHEMA_VERSION:
+                        raise ValueError(
+                            f"Database schema version {version} is newer than supported "
+                            f"version {SCHEMA_VERSION}"
+                        )
+
+                work_items_exists = conn.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'work_items'"
+                ).fetchone()
+                if work_items_exists:
+                    self._migrate_existing_schema(conn)
+                else:
+                    self._create_schema(conn)
+
+                conn.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS schema_version (
+                        version INTEGER PRIMARY KEY,
+                        applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+                    )
+                    """
+                )
+                conn.execute(
+                    "INSERT OR IGNORE INTO schema_version(version) VALUES (?)",
+                    (SCHEMA_VERSION,),
+                )
+                conn.commit()
+            except Exception:
+                conn.rollback()
+                raise
+            finally:
+                conn.execute("PRAGMA foreign_keys = ON")
+
+    @staticmethod
+    def _create_schema(conn: sqlite3.Connection) -> None:
+        conn.execute(
+            """CREATE TABLE work_items (
                     id TEXT PRIMARY KEY,
                     queue_name TEXT NOT NULL,
                     parent_id TEXT,
@@ -89,15 +136,10 @@ class SQLiteAdapter(BaseAdapter):
                     reserved_at TEXT,
                     released_at TEXT,
                     FOREIGN KEY (parent_id) REFERENCES work_items(id)
-                );
-
-                CREATE INDEX IF NOT EXISTS idx_work_items_queue_state
-                ON work_items(queue_name, state);
-
-                CREATE INDEX IF NOT EXISTS idx_work_items_parent
-                ON work_items(parent_id);
-
-                CREATE TABLE IF NOT EXISTS work_item_files (
+                )"""
+        )
+        conn.execute(
+            """CREATE TABLE work_item_files (
                     id TEXT PRIMARY KEY,
                     work_item_id TEXT NOT NULL,
                     name TEXT NOT NULL,
@@ -105,42 +147,109 @@ class SQLiteAdapter(BaseAdapter):
                     file_path TEXT NOT NULL,
                     created_at TEXT NOT NULL,
                     FOREIGN KEY (work_item_id) REFERENCES work_items(id)
-                );
+                )"""
+        )
+        conn.execute(
+            "CREATE INDEX idx_work_items_queue_state ON work_items(queue_name, state)"
+        )
+        conn.execute("CREATE INDEX idx_work_items_parent ON work_items(parent_id)")
+        conn.execute("CREATE INDEX idx_work_item_files_item ON work_item_files(work_item_id)")
+        conn.execute(
+            "CREATE UNIQUE INDEX idx_work_item_files_name ON work_item_files(work_item_id, name)"
+        )
 
-                CREATE INDEX IF NOT EXISTS idx_work_item_files_item
-                ON work_item_files(work_item_id);
-
-                CREATE UNIQUE INDEX IF NOT EXISTS idx_work_item_files_name
-                ON work_item_files(work_item_id, name);
-            """
+    def _migrate_existing_schema(self, conn: sqlite3.Connection) -> None:
+        """Rebuild either historical layout without exposing a partial migration."""
+        item_columns = {row[1] for row in conn.execute("PRAGMA table_info(work_items)")}
+        file_table_exists = conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'work_item_files'"
+        ).fetchone()
+        file_columns = (
+            {row[1] for row in conn.execute("PRAGMA table_info(work_item_files)")}
+            if file_table_exists
+            else set()
+        )
+        legacy_file_schema = {"work_item_id", "filename", "filepath", "created_at"}
+        current_file_schema = {
+            "id",
+            "work_item_id",
+            "name",
+            "original_name",
+            "file_path",
+            "created_at",
+        }
+        if file_table_exists and file_columns not in (
+            legacy_file_schema,
+            current_file_schema,
+        ):
+            raise ValueError(
+                "Unsupported work_item_files schema; refusing migration to avoid metadata loss"
             )
-            conn.commit()
 
-            # Backwards-compatible migration from legacy schema in older copies.
-            existing = {
-                row[1]
-                for row in conn.execute("PRAGMA table_info(work_items)")
-            }
-            if "updated_at" not in existing:
-                conn.execute("ALTER TABLE work_items ADD COLUMN updated_at TEXT")
-            if "exception_type" not in existing:
-                conn.execute("ALTER TABLE work_items ADD COLUMN exception_type TEXT")
-            if "error_code" not in existing:
-                conn.execute("ALTER TABLE work_items ADD COLUMN error_code TEXT")
-            if "error_message" not in existing:
-                conn.execute("ALTER TABLE work_items ADD COLUMN error_message TEXT")
-            if "reserved_at" not in existing:
-                conn.execute("ALTER TABLE work_items ADD COLUMN reserved_at TEXT")
-            if "released_at" not in existing:
-                conn.execute("ALTER TABLE work_items ADD COLUMN released_at TEXT")
-            conn.commit()
+        for index in (
+            "idx_work_items_queue_state",
+            "idx_work_items_parent",
+            "idx_work_item_files_item",
+            "idx_work_item_files_name",
+            "idx_queue_state",
+            "idx_parent",
+            "idx_orphan_check",
+        ):
+            conn.execute(f'DROP INDEX IF EXISTS "{index}"')
+        conn.execute("ALTER TABLE work_items RENAME TO work_items_migration_source")
+        if file_table_exists:
+            conn.execute("ALTER TABLE work_item_files RENAME TO work_item_files_migration_source")
+        self._create_schema(conn)
 
-            # Normalize legacy reserved state if present.
-            conn.execute(
-                "UPDATE work_items SET state = ? WHERE state = ?",
-                (State.IN_PROGRESS.value, "RESERVED"),
-            )
-            conn.commit()
+        def column(name: str, fallback: str = "NULL") -> str:
+            return f'"{name}"' if name in item_columns else fallback
+
+        state = (
+            f"CASE {column('state', repr(State.PENDING.value))} "
+            f"WHEN 'RESERVED' THEN '{State.IN_PROGRESS.value}' "
+            f"WHEN 'COMPLETED' THEN '{State.DONE.value}' "
+            f"ELSE {column('state', repr(State.PENDING.value))} END"
+        )
+        created_at = (
+            f"COALESCE({column('created_at')}, {column('reserved_at')}, "
+            f"{column('released_at')}, CURRENT_TIMESTAMP)"
+        )
+        updated_at = (
+            f"COALESCE({column('updated_at')}, {column('released_at')}, "
+            f"{column('reserved_at')}, {created_at})"
+        )
+        conn.execute(
+            f"""INSERT INTO work_items (
+                id, queue_name, parent_id, state, payload, exception_type, error_code,
+                error_message, created_at, updated_at, reserved_at, released_at
+            ) SELECT
+                id, queue_name, {column('parent_id')}, {state}, {column('payload')},
+                {column('exception_type')}, {column('error_code', column('exception_code'))},
+                {column('error_message', column('exception_message'))}, {created_at},
+                {updated_at}, {column('reserved_at')}, {column('released_at')}
+            FROM work_items_migration_source ORDER BY rowid"""
+        )
+
+        if file_table_exists:
+            if {"filename", "filepath"}.issubset(file_columns):
+                conn.execute(
+                    """INSERT INTO work_item_files
+                    (id, work_item_id, name, original_name, file_path, created_at)
+                    SELECT lower(hex(randomblob(16))), work_item_id, filename, filename,
+                           filepath, COALESCE(created_at, CURRENT_TIMESTAMP)
+                    FROM work_item_files_migration_source ORDER BY rowid"""
+                )
+            elif {"id", "name", "file_path"}.issubset(file_columns):
+                original_name = "original_name" if "original_name" in file_columns else "name"
+                conn.execute(
+                    f"""INSERT INTO work_item_files
+                    (id, work_item_id, name, original_name, file_path, created_at)
+                    SELECT id, work_item_id, name, {original_name}, file_path,
+                           COALESCE(created_at, CURRENT_TIMESTAMP)
+                    FROM work_item_files_migration_source ORDER BY rowid"""
+                )
+            conn.execute("DROP TABLE work_item_files_migration_source")
+        conn.execute("DROP TABLE work_items_migration_source")
 
     def _now(self) -> str:
         """Get current UTC timestamp as ISO string."""
@@ -583,11 +692,11 @@ class SQLiteAdapter(BaseAdapter):
 
     def recover_orphaned_work_items(self) -> list[str]:
         """Recover orphaned work items and return recovered IDs."""
-        cutoff = datetime.now(timezone.utc).timestamp() - (30 * 60)
+        cutoff = datetime.now(timezone.utc).timestamp() - (self._orphan_timeout_minutes * 60)
         with self._get_conn() as conn:
             rows = conn.execute(
                 """
-                SELECT id FROM work_items
+                SELECT id, reserved_at FROM work_items
                 WHERE state = ? AND reserved_at IS NOT NULL
                 """,
                 (State.IN_PROGRESS.value,),

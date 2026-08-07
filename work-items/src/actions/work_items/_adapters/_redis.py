@@ -240,20 +240,35 @@ class RedisAdapter(BaseAdapter):
         """Normalize internal storage state to API state."""
         if state == ProcessingState.RESERVED.value:
             return State.IN_PROGRESS.value
-        if state == ProcessingState.COMPLETED.value:
+        if state in {ProcessingState.COMPLETED.value, "COMPLETED", "DONE"}:
             return State.DONE.value
         if state == State.FAILED.value:
             return State.FAILED.value
         return state or State.PENDING.value
 
-    def _exception_for_item(self, item_id: str) -> dict[str, str]:
-        exception_data = self._client.hgetall(self._key("exception", item_id=item_id))
+    def _exception_for_item(self, item_id: str, queue: str) -> dict[str, str]:
+        exception_data = self._client.hgetall(
+            self._key("exception", queue=queue, item_id=item_id)
+        )
+        if not exception_data and queue != self.queue_name:
+            exception_data = self._client.hgetall(self._key("exception", item_id=item_id))
         if not exception_data:
             return {}
-        return {self._decode(key): self._decode(value) for key, value in exception_data.items()}
+        decoded = {
+            self._decode(key): self._decode(value) for key, value in exception_data.items()
+        }
+        return {
+            "type": decoded.get("type", decoded.get("exception_type", "")),
+            "code": decoded.get("code", decoded.get("exception_code", "")),
+            "message": decoded.get("message", decoded.get("exception_message", "")),
+        }
 
     def _timestamps_for_item(self, item_id: str, queue: str) -> dict[str, str]:
         timestamps = self._client.hgetall(self._key("timestamps", queue=queue, item_id=item_id))
+        if not timestamps and queue != self.queue_name:
+            timestamps = self._client.hgetall(
+                self._key("timestamps", queue=self.queue_name, item_id=item_id)
+            )
         return {self._decode(key): self._decode(value) for key, value in timestamps.items()}
 
     def _item_to_api(self, item_id: str, queue_name: str) -> dict[str, Any]:
@@ -279,8 +294,14 @@ class RedisAdapter(BaseAdapter):
         raw_state = payload_hash.get("state")
         if raw_state is None and isinstance(payload_hash, dict):
             raw_state = payload_hash.get(b"state")
+        if raw_state is None:
+            raw_state = self._client.get(self._key("state", queue=queue_name, item_id=item_id))
+        if raw_state is None and queue_name != self.queue_name:
+            raw_state = self._client.get(
+                self._key("state", queue=self.queue_name, item_id=item_id)
+            )
         queue_state = self._public_state(self._decode(raw_state))
-        exception_data = self._exception_for_item(item_id)
+        exception_data = self._exception_for_item(item_id, queue_name)
         created_at = timestamps.get("created_at") or datetime.utcnow().isoformat()
         updated_at = (
             timestamps.get("released_at")
@@ -291,12 +312,16 @@ class RedisAdapter(BaseAdapter):
         parent_id = payload_hash.get("parent_id")
         if parent_id is None and isinstance(payload_hash, dict):
             parent_id = payload_hash.get(b"parent_id")
+        if parent_id is None:
+            parent_id = self._client.get(
+                self._key("parent", queue=queue_name, item_id=item_id)
+            )
 
         return {
             "id": self._decode(item_id),
             "queue_name": queue_name,
             "state": queue_state,
-            "payload": payload_data if isinstance(payload_data, dict) else {"value": payload_data},
+            "payload": payload_data,
             "parent_id": self._decode(parent_id),
             "error_code": exception_data.get("code"),
             "error_message": exception_data.get("message"),
@@ -400,49 +425,64 @@ class RedisAdapter(BaseAdapter):
 
         try:
             queue_name = self._resolve_item_queue(item_id)
-
-            # Remove from processing list
-            self._client.lrem(self._key("processing", queue=queue_name), 0, item_id)
-
-            # Add to appropriate terminal set
             lifecycle_state = (
                 ProcessingState.COMPLETED.value
                 if state == State.DONE
                 else ProcessingState.FAILED.value
             )
+            transaction = self._client.pipeline(transaction=True)
+
+            # Persist all current terminal metadata atomically before deleting any
+            # historical input-queue metadata used as a read fallback.
+            transaction.lrem(self._key("processing", queue=queue_name), 0, item_id)
 
             if state == State.DONE:
-                self._client.srem(self._key("failed", queue=queue_name), item_id)
-                self._client.delete(self._key("exception", item_id=item_id))
-                self._client.sadd(self._key("done", queue=queue_name), item_id)
+                transaction.srem(self._key("failed", queue=queue_name), item_id)
+                transaction.delete(
+                    self._key("exception", queue=queue_name, item_id=item_id)
+                )
+                transaction.sadd(self._key("done", queue=queue_name), item_id)
             else:
-                self._client.srem(self._key("done", queue=queue_name), item_id)
-                self._client.sadd(self._key("failed", queue=queue_name), item_id)
+                transaction.srem(self._key("done", queue=queue_name), item_id)
+                transaction.sadd(self._key("failed", queue=queue_name), item_id)
 
                 exception_type_value = (
                     exception_type.value if hasattr(exception_type, "value") else exception_type
                 )
-                self._client.hset(
-                    self._key("exception", item_id=item_id),
+                transaction.hset(
+                    self._key("exception", queue=queue_name, item_id=item_id),
                     mapping={
                         "type": str(exception_type_value or "UnknownException"),
                         "code": str(code or ""),
                         "message": str(message or ""),
                     },
                 )
-                self._client.expire(self._key("exception", item_id=item_id), 86400)
+                transaction.expire(
+                    self._key("exception", queue=queue_name, item_id=item_id), 86400
+                )
 
-            # Update timestamps
             now = datetime.utcnow().isoformat()
-            self._client.hset(self._key("timestamps", item_id=item_id), "released_at", now)
-
-            # Store terminal state
-            self._client.set(self._key("state", item_id=item_id), state.value)
-            self._client.hset(
+            transaction.hset(
+                self._key("timestamps", queue=queue_name, item_id=item_id),
+                "released_at",
+                now,
+            )
+            transaction.set(
+                self._key("state", queue=queue_name, item_id=item_id), state.value
+            )
+            transaction.hset(
                 self._key("payload", queue=queue_name, item_id=item_id),
                 "state",
                 lifecycle_state,
             )
+            transaction.execute()
+
+            if queue_name != self.queue_name:
+                self._client.delete(
+                    self._key("timestamps", queue=self.queue_name, item_id=item_id),
+                    self._key("state", queue=self.queue_name, item_id=item_id),
+                    self._key("exception", queue=self.queue_name, item_id=item_id),
+                )
 
             log_func = LOGGER.error if state == State.FAILED else LOGGER.info
             log_func(
@@ -628,28 +668,45 @@ class RedisAdapter(BaseAdapter):
         queue_name = self._resolve_item_queue(item_id)
 
         file_refs = self._client.hgetall(self._key("files", queue=queue_name, item_id=item_id))
+        filesystem_directories: set[Path] = set()
         for file_name, file_ref in file_refs.items():
             file_ref_str = self._decode(file_ref)
             if file_ref_str.startswith("file://"):
                 filepath = Path(file_ref_str[7:])
+                filesystem_directories.add(filepath.parent)
                 if filepath.exists():
                     filepath.unlink()
 
             self._client.hdel(self._key("files", queue=queue_name, item_id=item_id), file_name)
 
+        for directory in filesystem_directories:
+            try:
+                directory.rmdir()
+            except OSError:
+                pass
+
         self._client.lrem(self._key("pending", queue=queue_name), 0, item_id)
         self._client.lrem(self._key("processing", queue=queue_name), 0, item_id)
         self._client.srem(self._key("done", queue=queue_name), item_id)
         self._client.srem(self._key("failed", queue=queue_name), item_id)
-        self._client.delete(
+        keys = [
             self._key("payload", queue=queue_name, item_id=item_id),
             self._key("parent", queue=queue_name, item_id=item_id),
             self._key("timestamps", queue=queue_name, item_id=item_id),
             self._key("files", queue=queue_name, item_id=item_id),
-            self._key("exception", item_id=item_id),
-            self._key("state", item_id=item_id),
+            self._key("exception", queue=queue_name, item_id=item_id),
+            self._key("state", queue=queue_name, item_id=item_id),
             f"origin:{item_id}",
-        )
+        ]
+        if queue_name != self.queue_name:
+            keys.extend(
+                [
+                    self._key("timestamps", queue=self.queue_name, item_id=item_id),
+                    self._key("state", queue=self.queue_name, item_id=item_id),
+                    self._key("exception", queue=self.queue_name, item_id=item_id),
+                ]
+            )
+        self._client.delete(*keys)
         self._queue_cache.pop(item_id, None)
 
     def get_queue_stats(self, queue_name: str | None = None) -> dict[str, int]:

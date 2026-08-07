@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 - 2026-08-07
+
+- Restore the Robocorp Work Items runtime, lifecycle, email, attachment, and canonical `COMPLETED` semantics while preserving all Actions aliases and management helpers.
+- Add direct top-level-list JSON FileAdapter mode without seeding while retaining the 0.3.1 directory/envelope mode and filesystem containment.
+- Migrate historical custom/current SQLite data transactionally and preserve historical Redis and MongoDB records.
+- Add mandatory Redis 7 and MongoDB 7 service-backed release coverage.
+- Add the optional experimental Yorko adapter; the official Robocorp Control Room adapter remains excluded.
+
 ## 0.3.1 - 2026-08-05
 
 - Fix the tag publication workflow to validate the package version without relying on an undeclared Invoke dependency.

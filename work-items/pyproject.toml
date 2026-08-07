@@ -1,7 +1,7 @@
 [project]
 name = "actions-work-items"
-version = "0.3.1"
-description = "Drop-in replacement for robocorp-workitems with broader applicability"
+version = "0.4.0"
+description = "Robocorp-compatible runtime and FileAdapter with managed local and distributed backends"
 authors = [{name = "Community Contributors"}]
 license = "Apache-2.0"
 readme = "README.md"
@@ -29,7 +29,8 @@ Issues = "https://github.com/joshyorko/actions/issues"
 redis = ["redis>=4.5.0"]
 docdb = ["pymongo>=4.3.0"]
 documentdb = ["pymongo>=4.3.0"]
-all = ["redis>=4.5.0", "pymongo>=4.3.0"]
+yorko = ["requests>=2.31.0"]
+all = ["redis>=4.5.0", "pymongo>=4.3.0", "requests>=2.31.0"]
 
 [tool.poetry]
 packages = [
@@ -42,6 +43,7 @@ pytest = "^7.0"
 pytest-asyncio = "^0.21"
 ruff = "^0.12.0"
 twine = "^6.1.0"
+mypy = "1.17.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -52,6 +54,12 @@ testpaths = ["tests"]
 python_files = "test_*.py"
 python_functions = "test_*"
 asyncio_mode = "auto"
+markers = [
+    "redis: contract requiring the Redis backend",
+    "integration: backend integration contract",
+    "docdb: contract requiring MongoDB or DocumentDB",
+    "persistent_backend_service: requires repository-owned Redis and MongoDB services",
+]
 
 [tool.ruff]
 line-length = 100
@@ -60,3 +68,9 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B"]
 ignore = ["E501"]
+
+[tool.mypy]
+files = ["tests/typecheck/runtime_adapter_calls.py"]
+mypy_path = "src"
+follow_imports = "silent"
+warn_unused_ignores = true

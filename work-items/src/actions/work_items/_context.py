@@ -4,19 +4,31 @@ Global context for work item management.
 Based on robocorp-workitems (Apache 2.0 License).
 """
 
+import asyncio
 import logging
 import os
+import threading
 from collections.abc import Iterator
-from typing import TYPE_CHECKING, Optional
+from contextvars import ContextVar
+from dataclasses import dataclass, replace
+from typing import TYPE_CHECKING, cast
 
 from ._exceptions import EmptyQueue
 from ._types import JSONType
 from ._workitem import Input, Output
 
 if TYPE_CHECKING:
-    from ._adapters._base import BaseAdapter
+    from ._adapters._base import ManagedAdapter, RuntimeAdapter
+    from ._collections import Inputs
 
 log = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True)
+class _ContextState:
+    current_input: Input | None = None
+    inputs: tuple[Input, ...] = ()
+    input_collection: "Inputs | None" = None
 
 
 class WorkItemsContext:
@@ -27,7 +39,7 @@ class WorkItemsContext:
     including the current input queue and adapter.
     """
 
-    def __init__(self, adapter: "BaseAdapter"):
+    def __init__(self, adapter: "RuntimeAdapter"):
         """
         Initialize the context.
 
@@ -35,17 +47,83 @@ class WorkItemsContext:
             adapter: Storage adapter to use.
         """
         self._adapter = adapter
-        self._current_input: Input | None = None
+        self._state: ContextVar[tuple[object, _ContextState] | None] = ContextVar(
+            f"actions_work_items_context_state_{id(self)}", default=None
+        )
+
+    @staticmethod
+    def _owner() -> object:
+        try:
+            task = asyncio.current_task()
+        except RuntimeError:
+            task = None
+        return task if task is not None else threading.current_thread()
+
+    def _get_state(self) -> "_ContextState":
+        stored = self._state.get()
+        owner = self._owner()
+        if stored is None or stored[0] is not owner:
+            state = _ContextState()
+            self._state.set((owner, state))
+            return state
+        return stored[1]
+
+    def _set_state(self, state: "_ContextState") -> None:
+        self._state.set((self._owner(), state))
 
     @property
-    def adapter(self) -> "BaseAdapter":
+    def _current_input(self) -> Input | None:
+        return self._get_state().current_input
+
+    @_current_input.setter
+    def _current_input(self, value: Input | None) -> None:
+        self._set_state(replace(self._get_state(), current_input=value))
+
+    @property
+    def _inputs(self) -> list[Input]:
+        return list(self._get_state().inputs)
+
+    @_inputs.setter
+    def _inputs(self, value: list[Input]) -> None:
+        self._set_state(replace(self._get_state(), inputs=tuple(value)))
+
+    @property
+    def adapter(self) -> "RuntimeAdapter":
         """The storage adapter."""
         return self._adapter
+
+    def bind_collections(self, inputs: "Inputs") -> None:
+        """Bind public execution-local collections for live lifecycle reads."""
+        self._set_state(replace(self._get_state(), input_collection=inputs))
 
     @property
     def current_input(self) -> Input | None:
         """The currently reserved input work item."""
-        return self._current_input
+        state = self._get_state()
+        if state.input_collection is not None:
+            return state.input_collection.current
+        if state.inputs:
+            return state.inputs[-1]
+        return state.current_input
+
+    @property
+    def outputs(self) -> list[Output]:
+        state = self._get_state()
+        if state.input_collection is not None:
+            return [
+                output
+                for input_item in state.input_collection._all
+                for output in input_item.outputs
+            ]
+        items = state.inputs
+        if not items and state.current_input is not None:
+            items = (state.current_input,)
+        return [output for item in items for output in item.outputs]
+
+    def close(self) -> None:
+        for output in self.outputs:
+            if not output.saved:
+                log.warning("%s has unsaved changes that will be discarded", output)
 
     def inputs(self) -> Iterator[Input]:
         """
@@ -149,11 +227,12 @@ class WorkItemsContext:
                 else:
                     files_bytes[name] = value
 
-        return self._adapter.seed_input(payload, files_bytes, queue_name)
+        managed = cast("ManagedAdapter", self._adapter)
+        return managed.seed_input(payload, files_bytes, queue_name)
 
 
 # Global context instance
-_context: WorkItemsContext | None = None
+_context: ContextVar[WorkItemsContext | None] = ContextVar("actions_work_items_context", default=None)
 
 
 def get_context() -> WorkItemsContext:
@@ -166,16 +245,16 @@ def get_context() -> WorkItemsContext:
     Raises:
         RuntimeError: If context not initialized.
     """
-    global _context
-    if _context is None:
+    context = _context.get()
+    if context is None:
         raise RuntimeError(
             "Work items context not initialized. "
             "Call work_items.init() first or set environment variables."
         )
-    return _context
+    return context
 
 
-def init(adapter: Optional["BaseAdapter"] = None) -> WorkItemsContext:
+def init(adapter: "RuntimeAdapter | None" = None) -> WorkItemsContext:
     """
     Initialize the global work items context.
 
@@ -188,16 +267,20 @@ def init(adapter: Optional["BaseAdapter"] = None) -> WorkItemsContext:
     Returns:
         The initialized context.
     """
-    global _context
-
     if adapter is None:
         adapter = _create_adapter_from_env()
 
-    _context = WorkItemsContext(adapter)
-    return _context
+    context = WorkItemsContext(adapter)
+    _context.set(context)
+    return context
 
 
-def _create_adapter_from_env() -> "BaseAdapter":
+def set_context(context: WorkItemsContext) -> None:
+    """Install an existing context in the current execution context."""
+    _context.set(context)
+
+
+def _create_adapter_from_env() -> "RuntimeAdapter":
     """
     Create an adapter based on environment variables.
 

@@ -325,7 +325,7 @@ class DocumentDBAdapter(BaseAdapter):
     def _public_state(state: str | None) -> str:
         if state == ProcessingState.RESERVED.value:
             return State.IN_PROGRESS.value
-        if state == ProcessingState.COMPLETED.value:
+        if state in {ProcessingState.COMPLETED.value, "COMPLETED"}:
             return State.DONE.value
         return state or State.PENDING.value
 
@@ -358,16 +358,25 @@ class DocumentDBAdapter(BaseAdapter):
 
     def _item_to_api(self, doc: dict[str, Any]) -> dict[str, Any]:
         timestamps = doc.get("timestamps", {}) or {}
-        created_at = self._to_iso(timestamps.get("created_at"))
+        created_value = timestamps.get("created_at") or doc.get("created_at")
+        reserved_value = timestamps.get("reserved_at") or doc.get("reserved_at")
+        released_value = timestamps.get("released_at") or doc.get("released_at")
+        created_at = self._to_iso(created_value)
         updated_at = self._to_iso(
-            timestamps.get("released_at")
-            or timestamps.get("reserved_at")
-            or timestamps.get("created_at")
+            released_value
+            or reserved_value
+            or created_value
         )
 
         exception = doc.get("exception") or {}
         if isinstance(exception, list):
             exception = {}
+        error_code = exception.get("code") or doc.get("error_code") or doc.get("exception_code")
+        error_message = (
+            exception.get("message")
+            or doc.get("error_message")
+            or doc.get("exception_message")
+        )
 
         return {
             "id": doc["item_id"],
@@ -375,8 +384,8 @@ class DocumentDBAdapter(BaseAdapter):
             "state": self._public_state(doc.get("state")),
             "payload": doc.get("payload", {}),
             "parent_id": doc.get("parent_id"),
-            "error_code": exception.get("code"),
-            "error_message": exception.get("message"),
+            "error_code": error_code,
+            "error_message": error_message,
             "files": self._files_for_item(doc),
             "created_at": created_at,
             "updated_at": updated_at,

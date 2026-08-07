@@ -17,7 +17,7 @@ class WorkItemException(Exception):
     def __init__(
         self,
         message: str = "",
-        code: str = "",
+        code: str | None = None,
     ):
         super().__init__(message)
         self.message = message
@@ -45,3 +45,12 @@ class ApplicationException(WorkItemException):
     """
 
     pass
+
+
+def to_exception_type(exc_type):
+    """Classify library exceptions while treating unknown failures as application errors."""
+    from ._types import ExceptionType
+
+    if issubclass(exc_type, BusinessException):
+        return ExceptionType.BUSINESS
+    return ExceptionType.APPLICATION

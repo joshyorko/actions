@@ -23,6 +23,11 @@ cleanup() {
 }
 trap cleanup EXIT
 
+if [[ -z ${TEST_REDIS_URL:-} || -z ${TEST_MONGODB_URI:-} ]]; then
+    printf 'TEST_REDIS_URL and TEST_MONGODB_URI are required and must identify healthy services\n' >&2
+    exit 2
+fi
+
 if (($# == 1)); then
     artifact_dir=$1
     mkdir -p -- "$artifact_dir"

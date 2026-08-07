@@ -5,6 +5,7 @@ adapters, including connection pooling, retry logic, and migration helpers.
 """
 
 import functools
+import inspect
 import logging
 import threading
 import time
@@ -17,6 +18,39 @@ from ._exceptions import ApplicationException
 LOGGER = logging.getLogger(__name__)
 
 T = TypeVar("T")
+
+
+@functools.cache
+def _method_has_parameter(
+    adapter_type: type, method_name: str, parameter_name: str, fallback: bool
+) -> bool:
+    """Inspect an adapter generation once, with a deterministic legacy fallback."""
+    try:
+        method = inspect.unwrap(getattr(adapter_type, method_name))
+        return parameter_name in inspect.signature(method).parameters
+    except (AttributeError, TypeError, ValueError):
+        return fallback
+
+
+def release_input(adapter, item_id, state, exception):
+    """Normalize the upstream exception-dict and 0.3.1 split-field protocols."""
+    if _method_has_parameter(type(adapter), "release_input", "exception", False):
+        return adapter.release_input(item_id, state, exception=exception)
+    exception = exception or {}
+    return adapter.release_input(
+        item_id,
+        state,
+        exception_type=exception.get("type"),
+        code=exception.get("code"),
+        message=exception.get("message"),
+    )
+
+
+def add_file(adapter, item_id, name, original_name, content):
+    """Normalize upstream three-argument and 0.3.1 four-argument file calls."""
+    if _method_has_parameter(type(adapter), "add_file", "original_name", True):
+        return adapter.add_file(item_id, name, original_name, content)
+    return adapter.add_file(item_id, name, content)
 
 
 class ThreadLocalConnectionPool(Generic[T]):

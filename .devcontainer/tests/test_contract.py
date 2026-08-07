@@ -109,7 +109,7 @@ class DevContainerContractTest(unittest.TestCase):
 
         self.assertTrue((REPOSITORY_ROOT / "work-items" / "poetry.lock").is_file())
         action_server_lock = (REPOSITORY_ROOT / "action_server" / "poetry.lock").read_text()
-        self.assertIn('name = "actions-work-items"\nversion = "0.3.1"', action_server_lock)
+        self.assertIn('name = "actions-work-items"\nversion = "0.4.0"', action_server_lock)
 
     def test_work_items_pep_621_metadata_contract(self):
         pyproject_path = REPOSITORY_ROOT / "work-items" / "pyproject.toml"
@@ -117,7 +117,7 @@ class DevContainerContractTest(unittest.TestCase):
         project = pyproject["project"]
 
         self.assertEqual(project["name"], "actions-work-items")
-        self.assertEqual(project["version"], "0.3.1")
+        self.assertEqual(project["version"], "0.4.0")
         self.assertEqual(project["requires-python"], ">=3.10,<4.0")
         self.assertEqual(
             project["urls"],
@@ -147,7 +147,7 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("twine", pyproject["tool"]["poetry"]["group"]["dev"]["dependencies"])
 
         init_path = REPOSITORY_ROOT / "work-items" / "src" / "actions" / "work_items" / "__init__.py"
-        self.assertIn('__version__ = "0.3.1"', init_path.read_text())
+        self.assertIn('__version__ = "0.4.0"', init_path.read_text())
 
     def test_work_items_pypi_documentation_contract(self):
         readme = (REPOSITORY_ROOT / "work-items" / "README.md").read_text()
@@ -173,12 +173,19 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("workitems.outputs.create(payload=None, files=None, save=True)", readme)
         payload = readme[readme.index("## Payloads") : readme.index("## Files")]
         self.assertNotIn("ExceptionType", payload)
-        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.3.1 - 2026-08-05"))
+        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.4.0 - 2026-08-07"))
 
     def test_work_items_release_workflow_contract(self):
         workflow = (
             REPOSITORY_ROOT / ".github" / "workflows" / "work_items_release.yml"
         ).read_text()
+
+        pull_request_paths = workflow[
+            workflow.index("  pull_request:") : workflow.index("  push:")
+        ]
+        push_paths = workflow[workflow.index("  push:") : workflow.index("\njobs:")]
+        for trigger_paths in (pull_request_paths, push_paths):
+            self.assertIn('.devcontainer/bin/smoke-host', trigger_paths)
 
         self.assertIn("pull_request:", workflow)
         self.assertIn("branches:\n      - community", workflow)
@@ -239,20 +246,18 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn('"$repo_root/.devcontainer/bin/bootstrap"', smoke_text)
         self.assertIn('"$repo_root/.devcontainer/bin/verify-work-items"', smoke_text)
 
-    def test_host_docker_command_requires_the_repository_root(self):
+    def test_work_items_host_smoke_guidance_matches_orchestration_contract(self):
         guidance = (REPOSITORY_ROOT / "docs/skills/repository-operations.md").read_text()
         work_items_guidance = (REPOSITORY_ROOT / "docs/skills/work-items.md").read_text()
         self.assertIn("Run host Docker commands only from the repository root", guidance)
         self.assertIn("repo_root=$(git rev-parse --show-toplevel)", guidance)
         self.assertIn('cd "$repo_root"', guidance)
-        self.assertNotIn(
-            "from any directory in the mounted repository", work_items_guidance
-        )
-        self.assertIn(
-            "host-side Docker command; run it from the repository root",
-            work_items_guidance,
-        )
-        self.assertIn("in-container scripts are cwd-independent", work_items_guidance)
+        self.assertIn("The canonical Bluefin host gate is cwd-independent", work_items_guidance)
+        self.assertIn(".devcontainer/bin/smoke-host", work_items_guidance)
+        self.assertIn("It does not mount the Docker socket", work_items_guidance)
+        self.assertIn("services, volumes, and orphans", work_items_guidance)
+        self.assertIn("common Git directory read-only", work_items_guidance)
+        self.assertNotIn("docker run --rm --user vscode", work_items_guidance)
 
 
 if __name__ == "__main__":

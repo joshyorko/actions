@@ -168,17 +168,25 @@ FileAdapter setup:
 from actions.work_items import FileAdapter, init
 
 
-init(FileAdapter(input_path="./output/work-items-in", output_path="./output/work-items-out"))
+init(FileAdapter(
+    input_path="./devdata/work-items-in/work-items.json",
+    output_path="./output/work-items-out/work-items.json",
+))
 ```
 
 Its environment variables are `RC_WORKITEM_INPUT_PATH` and
-`RC_WORKITEM_OUTPUT_PATH`.
+`RC_WORKITEM_OUTPUT_PATH`. Existing files and `.json` paths use the Robocorp
+top-level-list format directly and require no seed step. Directory/non-JSON
+paths retain the 0.3.1 `work-items.json` envelope layout.
 
 Redis and DocumentDB require their optional extra and can be selected with
 `create_adapter("redis")` or `create_adapter("documentdb")`. Redis uses
 `RC_REDIS_URL`; DocumentDB uses `DOCDB_URI`, `DOCDB_DATABASE`, and the queue
 variables. `RC_WORKITEM_ADAPTER` can name an adapter class; without an explicit
 adapter, environment-based selection falls back to SQLite.
+Yorko is available through the experimental `yorko` extra and
+`create_adapter("yorko")`; it is not release-supported without a live service
+gate. The official Robocorp Control Room adapter is not included.
 
 ## Action Server Integration
 
@@ -210,8 +218,8 @@ DocumentDB, or custom adapters.
   scheduler, trigger, and preloaded-action boundaries.
 
 These guarantees are covered by the package's filesystem, SQLite, serializer,
-and integration tests; Redis and DocumentDB still require service-backed gates
-before production claims are appropriate.
+and integration tests. Redis 7 and MongoDB 7 are covered by the release service
+suite; AWS DocumentDB-specific behavior remains experimental.
 
 ## API Summary
 
@@ -221,8 +229,8 @@ before production claims are appropriate.
 - `workitems.outputs.create(payload=None, files=None, save=True)`
 - `Input`, `Output`, `EmptyQueue`, `BusinessException`, and
   `ApplicationException`
-- `State.DONE.value` is `DONE`; incoming `COMPLETED` is accepted as a
-  compatibility alias.
+- `State.DONE.value` is `COMPLETED`; persisted `DONE` and `COMPLETED` are both
+  accepted during migration and reads.
 
 ## Migrating from robocorp-workitems
 

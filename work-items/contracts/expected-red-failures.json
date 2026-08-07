@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "failures": [
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestFileAdapter.test_add_file",
+      "parameter_ids": [
+        "adapter0",
+        "adapter1"
+      ],
+      "exception": "builtins.TypeError",
+      "predicate": {
+        "contains": [
+          "FileAdapter.add_file() missing 1 required positional argument: 'original_name'"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestFileAdapter.test_save_data_input",
+      "parameter_ids": [
+        "adapter0",
+        "adapter1"
+      ],
+      "exception": "builtins.IsADirectoryError",
+      "predicate": {
+        "contains": [
+          "Is a directory",
+          "work-items-in"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestFileAdapter.test_save_data_output",
+      "parameter_ids": [
+        "adapter0",
+        "adapter1"
+      ],
+      "exception": "builtins.AssertionError",
+      "predicate": {
+        "contains": [
+          "assert False"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestFileAdapter.test_missing_file",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "_pytest.outcomes.Failed",
+      "predicate": {
+        "contains": [
+          "DID NOT RAISE <class 'ValueError'>"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestFileAdapter.test_empty_queue",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.FileExistsError",
+      "predicate": {
+        "contains": [
+          "File exists",
+          "items.json"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestFileAdapter.test_malformed_queue",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.FileExistsError",
+      "predicate": {
+        "contains": [
+          "File exists",
+          "items.json"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestFileAdapter.test_invalid_reporter",
+      "parameter_ids": [
+        "adapter0",
+        "adapter1"
+      ],
+      "exception": "_pytest.outcomes.Failed",
+      "predicate": {
+        "contains": [
+          "DID NOT RAISE <class 'ValueError'>"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_redis_adapter_requires_dependency",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.AssertionError",
+      "predicate": {
+        "contains": [
+          "Regex pattern did not match",
+          "robocorp-workitems"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_documentdb_adapter_requires_dependency",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.AssertionError",
+      "predicate": {
+        "contains": [
+          "Regex pattern did not match",
+          "robocorp-workitems"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_database_initialization",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.AttributeError",
+      "predicate": {
+        "contains": [
+          "'SQLiteAdapter' object has no attribute '_pool'"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_reserve_and_release_workflow",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.AttributeError",
+      "predicate": {
+        "contains": [
+          "'SQLiteAdapter' object has no attribute '_pool'"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_file_operations",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.TypeError",
+      "predicate": {
+        "contains": [
+          "SQLiteAdapter.add_file() missing 1 required positional argument: 'content'"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_failed_work_item_release",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.TypeError",
+      "predicate": {
+        "contains": [
+          "SQLiteAdapter.release_input() got an unexpected keyword argument 'exception'"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_producer_consumer_workflow",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.AssertionError",
+      "predicate": {
+        "contains": [
+          "assert 1 == 2"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_work_item_with_files",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.TypeError",
+      "predicate": {
+        "contains": [
+          "SQLiteAdapter.add_file() missing 1 required positional argument: 'content'"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_file_already_exists",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.TypeError",
+      "predicate": {
+        "contains": [
+          "SQLiteAdapter.add_file() missing 1 required positional argument: 'content'"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_custom_output_queue_name",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.AttributeError",
+      "predicate": {
+        "contains": [
+          "'SQLiteAdapter' object has no attribute 'output_queue_name'"
+        ]
+      }
+    },
+    {
+      "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_default_output_queue_name_backward_compatibility",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.AttributeError",
+      "predicate": {
+        "contains": [
+          "'SQLiteAdapter' object has no attribute 'output_queue_name'"
+        ]
+      }
+    },
+    {
+      "case_id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_add_file",
+      "parameter_ids": [
+        "adapter0",
+        "adapter1"
+      ],
+      "exception": "builtins.TypeError",
+      "predicate": {
+        "contains": [
+          "FileAdapter.add_file() missing 1 required positional argument: 'original_name'"
+        ]
+      }
+    },
+    {
+      "case_id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_save_data_input",
+      "parameter_ids": [
+        "adapter0",
+        "adapter1"
+      ],
+      "exception": "builtins.IsADirectoryError",
+      "predicate": {
+        "contains": [
+          "Is a directory",
+          "work-items-in"
+        ]
+      }
+    },
+    {
+      "case_id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_save_data_output",
+      "parameter_ids": [
+        "adapter0",
+        "adapter1"
+      ],
+      "exception": "builtins.AssertionError",
+      "predicate": {
+        "contains": [
+          "assert False"
+        ]
+      }
+    },
+    {
+      "case_id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_missing_file",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "_pytest.outcomes.Failed",
+      "predicate": {
+        "contains": [
+          "DID NOT RAISE <class 'ValueError'>"
+        ]
+      }
+    },
+    {
+      "case_id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_empty_queue",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.FileExistsError",
+      "predicate": {
+        "contains": [
+          "File exists",
+          "items.json"
+        ]
+      }
+    },
+    {
+      "case_id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_malformed_queue",
+      "parameter_ids": [
+        null
+      ],
+      "exception": "builtins.FileExistsError",
+      "predicate": {
+        "contains": [
+          "File exists",
+          "items.json"
+        ]
+      }
+    },
+    {
+      "case_id": "robocorp-1.5.0.test_adapters.TestFileAdapter.test_invalid_reporter",
+      "parameter_ids": [
+        "adapter0",
+        "adapter1"
+      ],
+      "exception": "_pytest.outcomes.Failed",
+      "predicate": {
+        "contains": [
+          "DID NOT RAISE <class 'ValueError'>"
+        ]
+      }
+    }
+  ]
+}
