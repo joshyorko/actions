@@ -12,12 +12,14 @@ from collections.abc import Mapping
 from typing import Any
 from urllib.parse import quote, urljoin
 
-try:  # pragma: no cover - the optional extra owns this dependency at integration.
+try:  # pragma: no cover - exercised by clean-wheel verification without the extra.
     import requests
-except ImportError as error:  # pragma: no cover
-    raise ImportError(
-        "Yorko support requires requests. Install actions-work-items[yorko]."
-    ) from error
+except ImportError:  # pragma: no cover
+    requests = None  # type: ignore[assignment]
+
+_REQUEST_EXCEPTIONS = (
+    (TimeoutError,) if requests is None else (TimeoutError, requests.RequestException)
+)
 
 from .._exceptions import ApplicationException, EmptyQueue
 from .._types import ExceptionType, JSONType, State
@@ -42,7 +44,13 @@ class YorkoAdapter(BaseAdapter):
         self.workspace_id = workspace_id or required_env("YORKO_WORKSPACE_ID")
         self.worker_id = worker_id or required_env("YORKO_WORKER_ID")
         self.timeout = timeout if timeout is not None else float(os.getenv("YORKO_REQUEST_TIMEOUT", "30"))
-        self.session = session or requests.Session()
+        if session is None:
+            if requests is None:
+                raise ImportError(
+                    "Yorko support requires requests. Install actions-work-items[yorko]."
+                )
+            session = requests.Session()
+        self.session = session
 
     @property
     def _headers(self) -> dict[str, str]:
@@ -57,7 +65,7 @@ class YorkoAdapter(BaseAdapter):
         kwargs.setdefault("timeout", self.timeout)
         try:
             response = getattr(self.session, method)(self._url(*parts), **kwargs)
-        except (TimeoutError, requests.RequestException):
+        except _REQUEST_EXCEPTIONS:
             raise ApplicationException("Yorko request timed out") from None
         try:
             status_code = response.status_code

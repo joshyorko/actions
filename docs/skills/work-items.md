@@ -127,7 +127,9 @@ ledger. The Work Items release workflow checks out both exact commits and runs
 this form before the package gate. The official Robocorp Control Room HTTP
 adapter and Fizzy orchestration remain explicit exclusions. Yorko is a separate
 experimental optional adapter whose mocked contract does not establish live
-service behavior.
+service behavior. Public Yorko symbols remain importable without the `yorko`
+extra; constructing the adapter without an injected HTTP session checks for
+`requests` and reports the required extra.
 
 The runtime facade accepts both adapter generations without forcing persistent
 backends to share one signature: release normalization supports the upstream
