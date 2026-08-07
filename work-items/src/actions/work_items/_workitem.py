@@ -20,7 +20,7 @@ from ._types import Email, ExceptionType, JSONType, PathType, State
 from ._utils import truncate
 
 if TYPE_CHECKING:
-    from ._adapters._base import BaseAdapter
+    from ._adapters._base import RuntimeAdapter
 
 LOGGER = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ LOGGER = logging.getLogger(__name__)
 class WorkItem:
     def __init__(
         self,
-        adapter: "BaseAdapter",
+        adapter: "RuntimeAdapter",
         item_id: str | None = None,
         payload: JSONType = None,
         parent_id: str | None = None,
@@ -38,7 +38,7 @@ class WorkItem:
         self._parent_id = parent_id
         self._payload = payload
         self._files: list[str] = []
-        self._files_to_add: dict[str, Path | bytes] = {}
+        self._files_to_add: dict[str, tuple[str, Path | bytes]] = {}
         self._files_to_remove: set[str] = set()
         self._saved = False
 
@@ -83,9 +83,9 @@ class WorkItem:
             raise RuntimeError("Invalid work item state (no id or parent_id)")
 
         assert self.id is not None
-        for name, source in self._files_to_add.items():
+        for name, (original_name, source) in self._files_to_add.items():
             content = source if isinstance(source, bytes) else source.read_bytes()
-            adapter_add_file(self._adapter, self.id, name, content)
+            adapter_add_file(self._adapter, self.id, name, original_name, content)
         for name in self._files_to_remove:
             self._adapter.remove_file(self.id, name)
 
@@ -118,7 +118,7 @@ class WorkItem:
             raise ValueError("Either path or content must be provided")
 
         self._saved = False
-        self._files_to_add[name] = source
+        self._files_to_add[name] = (original_name or name, source)
         return resolved
 
     def add_files(self, pattern: PathType) -> list[Path]:
@@ -147,7 +147,8 @@ class WorkItem:
         return self.files
 
     def get_file(self, name: str) -> bytes:
-        pending = self._files_to_add.get(name)
+        staged = self._files_to_add.get(name)
+        pending = staged[1] if staged is not None else None
         if pending is not None:
             return pending if isinstance(pending, bytes) else pending.read_bytes()
         if self.id is None:
@@ -159,7 +160,7 @@ class WorkItem:
 
 
 class Input(WorkItem):
-    def __init__(self, adapter: "BaseAdapter", item_id: str, payload: JSONType = None):
+    def __init__(self, adapter: "RuntimeAdapter", item_id: str, payload: JSONType = None):
         super().__init__(adapter, item_id=item_id, payload=payload)
         self._state: State | None = None
         self._exception: dict[str, Any] | None = None
@@ -301,7 +302,7 @@ class Input(WorkItem):
 
 
 class Output(WorkItem):
-    def __init__(self, adapter: "BaseAdapter", item_id: str | None = None, payload: JSONType = None, parent_id: str | None = None):
+    def __init__(self, adapter: "RuntimeAdapter", item_id: str | None = None, payload: JSONType = None, parent_id: str | None = None):
         super().__init__(adapter, item_id=item_id, payload=payload, parent_id=parent_id)
 
     def __enter__(self) -> "Output":

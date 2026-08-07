@@ -17,7 +17,7 @@ from ._types import JSONType, PathType
 from ._workitem import Input, Output
 
 if TYPE_CHECKING:
-    from ._adapters._base import BaseAdapter
+    from ._adapters._base import RuntimeAdapter
 
 log = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class Inputs:
         item = inputs.reserve()
     """
 
-    def __init__(self, adapter: "BaseAdapter"):
+    def __init__(self, adapter: "RuntimeAdapter"):
         """
         Initialize inputs collection.
 
@@ -149,7 +149,7 @@ class Outputs:
         )
     """
 
-    def __init__(self, adapter: "BaseAdapter", inputs: Inputs):
+    def __init__(self, adapter: "RuntimeAdapter", inputs: Inputs):
         """
         Initialize outputs collection.
 

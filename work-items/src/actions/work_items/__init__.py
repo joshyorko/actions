@@ -54,11 +54,14 @@ Environment Variables:
         RC_WORKITEM_OUTPUT_PATH: Output directory (default: ./output/work-items-out)
 """
 
+import asyncio
 import importlib
 import logging
 import os
+import threading
+from collections.abc import Callable
 from contextvars import ContextVar
-from typing import TYPE_CHECKING
+from typing import Any
 
 from ._adapters import (
     BaseAdapter,
@@ -90,22 +93,23 @@ from ._exceptions import (
 from ._types import Address, Email, ExceptionType, JSONType, PathType, State
 from ._workitem import Input, Output, WorkItem
 
-if TYPE_CHECKING:
-    pass
-
 log = logging.getLogger(__name__)
 
 __version__ = "0.3.1"
 
 
-try:
-    from robocorp.tasks import get_current_task, task_cache
-except ImportError:  # pragma: no cover - optional integration
-    _task_context = None
-else:  # pragma: no cover - exercised by robocorp.tasks integration
+def _build_task_context(
+    task_cache: Callable[[Callable[..., Any]], Callable[..., Any]] | None,
+    get_current_task: Callable[[], Any] | None,
+    adapter_factory: Callable[[], RuntimeAdapter],
+):
+    """Register the optional task-owned context without importing it eagerly."""
+    if task_cache is None or get_current_task is None:
+        return None
+
     @task_cache
-    def _cached_task_context():
-        context = WorkItemsContext(create_adapter())
+    def cached_task_context():
+        context = WorkItemsContext(adapter_factory())
         yield context
         context.close()
         current = context.current_input
@@ -121,7 +125,15 @@ else:  # pragma: no cover - exercised by robocorp.tasks integration
             getattr(exc_value, "message", str(exc_value)),
         )
 
-    _task_context = _cached_task_context
+    return cached_task_context
+
+
+try:
+    from robocorp.tasks import get_current_task, task_cache
+except ImportError:
+    _task_context = _build_task_context(None, None, lambda: create_adapter())
+else:
+    _task_context = _build_task_context(task_cache, get_current_task, lambda: create_adapter())
 
 
 # ============================================================================
@@ -236,7 +248,17 @@ class _InputsSingleton:
     on first access.
     """
 
-    _instance: ContextVar[Inputs | None] = ContextVar("actions_work_items_inputs", default=None)
+    _instance: ContextVar[tuple[object, Inputs] | None] = ContextVar(
+        "actions_work_items_inputs", default=None
+    )
+
+    @staticmethod
+    def _owner() -> object:
+        try:
+            task = asyncio.current_task()
+        except RuntimeError:
+            task = None
+        return task if task is not None else threading.current_thread()
 
     def __iter__(self):
         return iter(self._get_instance())
@@ -251,15 +273,17 @@ class _InputsSingleton:
         return getattr(self._get_instance(), name)
 
     def _get_instance(self) -> Inputs:
-        instance = self._instance.get()
-        if instance is None:
+        stored = self._instance.get()
+        owner = self._owner()
+        if stored is None or stored[0] is not owner:
             _auto_init()
             ctx = get_context()
             instance = Inputs(ctx.adapter)
             instance.reserve()
             ctx._inputs = instance._items
-            self._instance.set(instance)
-        return instance
+            self._instance.set((owner, instance))
+            return instance
+        return stored[1]
 
     def _reset(self):
         """Reset singleton for testing."""
@@ -274,7 +298,9 @@ class _OutputsSingleton:
     on first access.
     """
 
-    _instance: ContextVar[Outputs | None] = ContextVar("actions_work_items_outputs", default=None)
+    _instance: ContextVar[tuple[object, Outputs] | None] = ContextVar(
+        "actions_work_items_outputs", default=None
+    )
     _inputs_singleton: _InputsSingleton
 
     def __init__(self, inputs_singleton: _InputsSingleton):
@@ -293,15 +319,17 @@ class _OutputsSingleton:
         return getattr(self._get_instance(), name)
 
     def _get_instance(self) -> Outputs:
-        instance = self._instance.get()
-        if instance is None:
+        stored = self._instance.get()
+        owner = self._inputs_singleton._owner()
+        if stored is None or stored[0] is not owner:
             _auto_init()
             ctx = get_context()
             # Ensure inputs singleton is initialized
             inputs_instance = self._inputs_singleton._get_instance()
             instance = Outputs(ctx.adapter, inputs_instance)
-            self._instance.set(instance)
-        return instance
+            self._instance.set((owner, instance))
+            return instance
+        return stored[1]
 
     def _reset(self):
         """Reset singleton for testing."""
@@ -325,7 +353,7 @@ def _auto_init():
             _init(adapter)
 
 
-def init(adapter: BaseAdapter | None = None) -> WorkItemsContext:
+def init(adapter: RuntimeAdapter | None = None) -> WorkItemsContext:
     """
     Initialize the work items context.
 

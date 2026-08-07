@@ -20,10 +20,21 @@ LOGGER = logging.getLogger(__name__)
 T = TypeVar("T")
 
 
+@functools.cache
+def _method_has_parameter(
+    adapter_type: type, method_name: str, parameter_name: str, fallback: bool
+) -> bool:
+    """Inspect an adapter generation once, with a deterministic legacy fallback."""
+    try:
+        method = inspect.unwrap(getattr(adapter_type, method_name))
+        return parameter_name in inspect.signature(method).parameters
+    except (AttributeError, TypeError, ValueError):
+        return fallback
+
+
 def release_input(adapter, item_id, state, exception):
     """Normalize the upstream exception-dict and 0.3.1 split-field protocols."""
-    parameters = inspect.signature(adapter.release_input).parameters
-    if "exception" in parameters:
+    if _method_has_parameter(type(adapter), "release_input", "exception", False):
         return adapter.release_input(item_id, state, exception=exception)
     exception = exception or {}
     return adapter.release_input(
@@ -35,11 +46,10 @@ def release_input(adapter, item_id, state, exception):
     )
 
 
-def add_file(adapter, item_id, name, content):
+def add_file(adapter, item_id, name, original_name, content):
     """Normalize upstream three-argument and 0.3.1 four-argument file calls."""
-    parameters = inspect.signature(adapter.add_file).parameters
-    if "original_name" in parameters:
-        return adapter.add_file(item_id, name, name, content)
+    if _method_has_parameter(type(adapter), "add_file", "original_name", True):
+        return adapter.add_file(item_id, name, original_name, content)
     return adapter.add_file(item_id, name, content)
 
 

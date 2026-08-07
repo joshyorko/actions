@@ -136,11 +136,20 @@ The runtime facade accepts both adapter generations without forcing persistent
 backends to share one signature: release normalization supports the upstream
 exception dictionary and the 0.3.1 split exception fields, while attachment
 normalization supports upstream three-argument and 0.3.1 four-argument
-`add_file` calls. Runtime processing state is context-local, so separate task or
-`contextvars` executions do not share the current input or output history.
-Explicit `init(adapter)` remains dependency-light; when `robocorp.tasks` is
-installed, its task cache owns teardown, unsaved-output warnings, and failure
-release.
+`add_file` calls. Runtime processing state is execution-local: inherited
+asyncio tasks receive separate current-input, released-input, output-history,
+and last-output state, while a copied synchronous `contextvars` context installs
+its own adapter and state with `init(adapter)`. The exported `inputs` and
+`outputs` singleton identities remain stable. Explicit `init(adapter)` remains
+dependency-light; when `robocorp.tasks` is installed, its task cache owns
+context reuse and teardown, warns about unsaved outputs before releasing an
+active input after task failure, and the unavailable-dependency path performs
+no registration.
+
+The runtime protocol publishes typed overloads for both adapter generations.
+Attachment staging retains a distinct original filename until a four-argument
+adapter call; three-argument upstream adapters receive the stored name and
+bytes because their contract has no original-name field.
 
 For HTTP attachments, map invalid names to 400, missing item/file to 404, and duplicate upload to 409. Construct `Content-Disposition` only from a validated filename.
 
