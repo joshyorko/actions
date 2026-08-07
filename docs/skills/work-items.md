@@ -138,15 +138,21 @@ exception dictionary and the 0.3.1 split exception fields, while attachment
 normalization supports upstream three-argument and 0.3.1 four-argument
 `add_file` calls. Runtime processing state is execution-local: inherited
 asyncio tasks receive separate current-input, released-input, output-history,
-and last-output state, while a copied synchronous `contextvars` context installs
-its own adapter and state with `init(adapter)`. The exported `inputs` and
-`outputs` singleton identities remain stable. Explicit `init(adapter)` remains
-dependency-light; when `robocorp.tasks` is installed, its task cache owns
+and last-output state. A copied synchronous `contextvars` context inherits the
+adapter but uses immutable copy-on-write lifecycle state, so reserve, release,
+and output mutations remain isolated without another `init()` call; calling
+`init(adapter)` additionally installs a different adapter in that copy. The
+exported `inputs` and `outputs` singleton identities remain stable. Explicit
+`init(adapter)` remains dependency-light; when `robocorp.tasks` is installed, its task cache owns
 context reuse and teardown, warns about unsaved outputs before releasing an
-active input after task failure, and the unavailable-dependency path performs
-no registration.
+active input after task failure (including the latest item in a multi-reserve
+sequence), and the unavailable-dependency path performs no registration.
 
 The runtime protocol publishes typed overloads for both adapter generations.
+Run `poetry run mypy` from `work-items/` for the focused static call-site
+contract: valid three/four-argument attachment calls and dictionary/split-field
+release calls must type-check, while invalid arities and argument types remain
+rejected through checked `call-overload` expectations.
 Attachment staging retains a distinct original filename until a four-argument
 adapter call; three-argument upstream adapters receive the stored name and
 bytes because their contract has no original-name field.

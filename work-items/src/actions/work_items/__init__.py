@@ -280,7 +280,7 @@ class _InputsSingleton:
             ctx = get_context()
             instance = Inputs(ctx.adapter)
             instance.reserve()
-            ctx._inputs = instance._items
+            ctx.bind_collections(instance)
             self._instance.set((owner, instance))
             return instance
         return stored[1]
@@ -327,6 +327,7 @@ class _OutputsSingleton:
             # Ensure inputs singleton is initialized
             inputs_instance = self._inputs_singleton._get_instance()
             instance = Outputs(ctx.adapter, inputs_instance)
+            ctx.bind_collections(inputs_instance)
             self._instance.set((owner, instance))
             return instance
         return stored[1]

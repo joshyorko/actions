@@ -19,6 +19,7 @@ from ._workitem import Input, Output
 
 if TYPE_CHECKING:
     from ._adapters._base import ManagedAdapter, RuntimeAdapter
+    from ._collections import Inputs
 
 log = logging.getLogger(__name__)
 
@@ -27,6 +28,7 @@ log = logging.getLogger(__name__)
 class _ContextState:
     current_input: Input | None = None
     inputs: tuple[Input, ...] = ()
+    input_collection: "Inputs | None" = None
 
 
 class WorkItemsContext:
@@ -90,10 +92,16 @@ class WorkItemsContext:
         """The storage adapter."""
         return self._adapter
 
+    def bind_collections(self, inputs: "Inputs") -> None:
+        """Bind public execution-local collections for live lifecycle reads."""
+        self._set_state(replace(self._get_state(), input_collection=inputs))
+
     @property
     def current_input(self) -> Input | None:
         """The currently reserved input work item."""
         state = self._get_state()
+        if state.input_collection is not None:
+            return state.input_collection.current
         if state.inputs:
             return state.inputs[-1]
         return state.current_input
@@ -101,6 +109,12 @@ class WorkItemsContext:
     @property
     def outputs(self) -> list[Output]:
         state = self._get_state()
+        if state.input_collection is not None:
+            return [
+                output
+                for input_item in state.input_collection._all
+                for output in input_item.outputs
+            ]
         items = state.inputs
         if not items and state.current_input is not None:
             items = (state.current_input,)

@@ -4,11 +4,15 @@ Lifecycle and attachment behavior is derived from robocorp-workitems 1.5.0
 (Apache-2.0) while retaining the actions-work-items adapter contract.
 """
 
+import asyncio
 import fnmatch
 import json
 import logging
 import os
+import threading
 import warnings
+from contextvars import ContextVar
+from dataclasses import dataclass, replace
 from glob import glob
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
@@ -23,6 +27,13 @@ if TYPE_CHECKING:
     from ._adapters._base import RuntimeAdapter
 
 LOGGER = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True)
+class _InputState:
+    state: State | None = None
+    exception: dict[str, Any] | None = None
+    outputs: tuple["Output", ...] = ()
 
 
 class WorkItem:
@@ -162,9 +173,29 @@ class WorkItem:
 class Input(WorkItem):
     def __init__(self, adapter: "RuntimeAdapter", item_id: str, payload: JSONType = None):
         super().__init__(adapter, item_id=item_id, payload=payload)
-        self._state: State | None = None
-        self._exception: dict[str, Any] | None = None
-        self._outputs: list[Output] = []
+        self._lifecycle: ContextVar[tuple[object, _InputState] | None] = ContextVar(
+            f"actions_work_items_input_state_{id(self)}", default=None
+        )
+
+    @staticmethod
+    def _owner() -> object:
+        try:
+            task = asyncio.current_task()
+        except RuntimeError:
+            task = None
+        return task if task is not None else threading.current_thread()
+
+    def _get_lifecycle(self) -> _InputState:
+        stored = self._lifecycle.get()
+        owner = self._owner()
+        if stored is None or stored[0] is not owner:
+            state = _InputState()
+            self._lifecycle.set((owner, state))
+            return state
+        return stored[1]
+
+    def _set_lifecycle(self, state: _InputState) -> None:
+        self._lifecycle.set((self._owner(), state))
 
     def __repr__(self) -> str:
         payload = truncate(json.dumps(self.payload), 64)
@@ -183,15 +214,15 @@ class Input(WorkItem):
         code = getattr(exc_value, "code", None)
         message = getattr(exc_value, "message", str(exc_value))
         self.fail(exception_type, code, message)
-        return issubclass(exc_type, (ApplicationException, BusinessException))
+        return issubclass(exc_type, ApplicationException | BusinessException)
 
     @property
     def state(self) -> State | None:
-        return self._state
+        return self._get_lifecycle().state
 
     @property
     def exception(self) -> dict[str, Any] | None:
-        return self._exception
+        return self._get_lifecycle().exception
 
     @property
     def released(self) -> bool:
@@ -199,7 +230,7 @@ class Input(WorkItem):
 
     @property
     def outputs(self) -> list["Output"]:
-        return list(self._outputs)
+        return list(self._get_lifecycle().outputs)
 
     def email(self, html: bool = True, encoding: str = "utf-8", ignore_errors: bool = False) -> Email:
         email = self._parse_email()
@@ -259,7 +290,8 @@ class Input(WorkItem):
         item = Output(self._adapter, parent_id=self.id)
         if payload is not None:
             item.payload = payload
-        self._outputs.append(item)
+        state = self._get_lifecycle()
+        self._set_lifecycle(replace(state, outputs=(*state.outputs, item)))
         return item
 
     def done(self) -> None:
@@ -267,7 +299,7 @@ class Input(WorkItem):
             raise RuntimeError("Work item already released")
         assert self.id is not None
         release_input(self._adapter, self.id, State.DONE, None)
-        self._state = State.DONE
+        self._set_lifecycle(replace(self._get_lifecycle(), state=State.DONE))
 
     def fail(
         self,
@@ -281,8 +313,9 @@ class Input(WorkItem):
         exception = {"type": type_.value, "code": code, "message": message}
         assert self.id is not None
         release_input(self._adapter, self.id, State.FAILED, exception)
-        self._state = State.FAILED
-        self._exception = exception
+        self._set_lifecycle(
+            replace(self._get_lifecycle(), state=State.FAILED, exception=exception)
+        )
 
     def download_file(self, name: str, path: PathType | None = None) -> Path:
         warnings.warn(

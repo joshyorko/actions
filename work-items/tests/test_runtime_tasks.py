@@ -66,5 +66,25 @@ def test_optional_task_hook_registers_once_reuses_cache_and_closes_before_failur
     assert "unsaved changes that will be discarded" in caplog.text
 
 
+def test_optional_task_hook_fails_latest_unreleased_reserved_input(monkeypatch):
+    adapter = MockAdapter()
+    adapter.reset()
+    cache = FakeTaskCache()
+    task = SimpleNamespace(exc_info=(ValueError, ValueError("broken"), None))
+    hook = work_items._build_task_context(cache, lambda: task, lambda: adapter)
+    context = hook()
+    work_items.set_context(context)
+    work_items.inputs._reset()
+    work_items.outputs._reset()
+    first = work_items.inputs.current
+    first.done()
+    second = work_items.inputs.reserve()
+
+    cache.teardown()
+
+    assert adapter.releases[-1][0] == second.id
+    assert second.released
+
+
 def test_optional_task_hook_is_none_when_dependency_is_unavailable():
     assert work_items._build_task_context(None, None, lambda: None) is None
