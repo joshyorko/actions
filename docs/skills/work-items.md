@@ -116,6 +116,9 @@ becomes a strict `XPASS` failure requiring a manifest update. Never use a
 file-wide expected-red marker, broad name-family exception inference, or a
 shared sentinel assertion. Direct-file fixtures execute through the package's
 top-level-list JSON mode without a seed or directory-layout translation.
+The two deprecated v1 download compatibility ports wrap only their matching
+`DeprecationWarning`; provenance normalization treats those exact wrappers as
+warning assertions rather than behavior changes.
 
 `python work-items/scripts/check_contract_port_provenance.py` without reference
 roots validates a checked-in digest for deterministic offline package

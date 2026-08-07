@@ -145,6 +145,40 @@ class _CompatibilityNames(ast.NodeTransformer):
             node.value = self.STRINGS.get(node.value, node.value)
         return node
 
+    def visit_With(self, node):  # noqa: N802
+        node = self.generic_visit(node)
+        if self._is_deprecation_warning_wrapper(node):
+            return node.body
+        return node
+
+    @staticmethod
+    def _is_deprecation_warning_wrapper(node: ast.With) -> bool:
+        if len(node.items) != 1 or len(node.body) != 1:
+            return False
+        context = node.items[0].context_expr
+        if not (
+            isinstance(context, ast.Call)
+            and isinstance(context.func, ast.Attribute)
+            and isinstance(context.func.value, ast.Name)
+            and context.func.value.id == "pytest"
+            and context.func.attr == "warns"
+            and len(context.args) == 1
+            and isinstance(context.args[0], ast.Name)
+            and context.args[0].id == "DeprecationWarning"
+            and len(context.keywords) == 1
+            and context.keywords[0].arg == "match"
+            and isinstance(context.keywords[0].value, ast.Constant)
+        ):
+            return False
+        warning = context.keywords[0].value.value
+        statement = node.body[0]
+        call = statement.value if isinstance(statement, ast.Assign) else None
+        method = call.func.attr if isinstance(call, ast.Call) and isinstance(call.func, ast.Attribute) else None
+        return (method, warning) in {
+            ("download_file", "use get_file"),
+            ("download_files", "use get_files"),
+        }
+
 
 def _normalized_node(node: ast.AST) -> str:
     normalized = _CompatibilityNames().visit(copy.deepcopy(node))
