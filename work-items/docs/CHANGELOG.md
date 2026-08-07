@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.2 - 2026-08-07
+
+- Normalize historic Redis naive reservation timestamps as UTC during orphan recovery.
+- Preserve Yorko failed-release exception types when the runtime passes its legacy string form.
+- Keep contract-port provenance strict while recognizing the documented adapter-neutral failed-release assertion.
+
 ## 0.4.1 - 2026-08-07
 
 - Fix FileAdapter direct-file selection so existing files and paths ending in `.json` use the top-level-list representation instead of being passed to directory creation.
