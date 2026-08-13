@@ -7,6 +7,7 @@ way to synchronize state across multiple processes.
 import logging
 import threading
 import typing
+import uuid
 from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, Literal, Optional
@@ -27,14 +28,28 @@ class RunChangeEvent:
 
 
 class RunRuntimeInfo:
-    def __init__(self, run_id: str):
+    def __init__(self, run_id: str, ownership=None, lease=None):
         from actions.server._robo_utils.callback import Callback
 
         self._run_id = run_id
         self._canceled = False
         self.on_cancel = Callback()
+        self._ownership = ownership
+        self._lease = lease
+        self._monitor_stop = threading.Event()
+        if ownership is not None and lease is not None:
+            threading.Thread(target=self._monitor_control, daemon=True).start()
+
+    def _monitor_control(self):
+        while not self._monitor_stop.wait(0.25):
+            self._ownership.renew(self._run_id, self._lease.epoch)
+            if self._ownership.control_requested(self._run_id, self._lease.epoch):
+                self.cancel()
+                return
 
     def cancel(self):
+        if self._canceled:
+            return
         self._canceled = True
 
         if not len(self.on_cancel):
@@ -43,6 +58,9 @@ class RunRuntimeInfo:
             )
 
         self.on_cancel()  # Notify all listeners that the run was canceled.
+
+    def close(self):
+        self._monitor_stop.set()
 
     def is_canceled(self) -> bool:
         return self._canceled
@@ -71,6 +89,16 @@ class RunsState:
 
         self._db = db
         self._run_id_to_runtime_info: dict[str, RunRuntimeInfo] = {}
+        from .run_ownership import RunOwnershipStore
+
+        self.ownership = RunOwnershipStore(
+            db.db_path, owner_id=f"runtime-{uuid.uuid4()}"
+        )
+        from ._models import Run
+
+        with db.connect():
+            for run in db.all(Run):
+                self.ownership.create_run(run.id)
 
     def get_current_run_state(self, offset: int = 0, limit: int = 200) -> list["Run"]:
         from ._database import Database
@@ -135,6 +163,7 @@ class RunsState:
         from ._models import Run
 
         run_copy = Run(**asdict(run))
+        self.ownership.create_run(run.id)
         with self.semaphore:
             for listener in self._run_listeners.keys():
                 listener(RunChangeEvent("added", run_copy))
@@ -143,7 +172,9 @@ class RunsState:
         """
         Creates the runtime info for a run and returns it.
         """
-        runtime_info = RunRuntimeInfo(run_id)
+        self.ownership.create_run(run_id)
+        lease = self.ownership.claim(run_id)
+        runtime_info = RunRuntimeInfo(run_id, self.ownership, lease)
         assert run_id not in self._run_id_to_runtime_info
         self._run_id_to_runtime_info[run_id] = runtime_info
         return runtime_info
@@ -155,13 +186,25 @@ class RunsState:
         from ._models import Run
 
         run_copy = Run(**asdict(run))
+        runtime_info = self._run_id_to_runtime_info.get(run_copy.id)
+        if runtime_info is not None and "status" in changes:
+            self.ownership.set_status(
+                run_copy.id,
+                runtime_info._lease.epoch,
+                "running" if changes["status"] == RunStatus.RUNNING else "finished",
+            )
         with self.semaphore:
             for listener in self._run_listeners.keys():
                 listener(RunChangeEvent("changed", run_copy, changes))
 
             if run_copy.status not in (RunStatus.RUNNING, RunStatus.NOT_RUN):
                 # Finished run, remove from runtime info.
-                self._run_id_to_runtime_info.pop(run_copy.id, None)
+                runtime_info = self._run_id_to_runtime_info.pop(run_copy.id, None)
+                if runtime_info is not None:
+                    runtime_info.close()
+                    self.ownership.reconcile(
+                        run_copy.id, runtime_info._lease.epoch, "running"
+                    )
 
     def cancel_run(self, run_id: str) -> bool:
         """
@@ -180,8 +223,9 @@ class RunsState:
                 log.info(f"Cancelling run {run_id}.")
                 runtime_info.cancel()
                 return True
-            log.info(f"Unable to cancel run {run_id} (no runtime info found).")
-            return False
+            requested = self.ownership.request_cancel(run_id)
+            log.info("Durable cancellation for %s: %s", run_id, requested)
+            return requested
 
 
 _runs_state: Optional[RunsState] = None

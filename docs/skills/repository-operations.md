@@ -124,6 +124,16 @@ A Dev Container counts as release evidence only after its repository-owned confi
 
 The Action Server Dev Container uses uv only to install and cache Poetry; Poetry and committed `poetry.lock` files remain the dependency-resolution and release authorities. The image declares the uv, Poetry, and npm cache paths and creates them as `vscode` before the runtime user switch, so newly created named volumes are writable. Bootstrap uses `poetry sync --no-interaction`. Run host Docker commands only from the repository root because their bind mount uses host `$PWD`; that requirement is separate from the in-container scripts, which resolve their own repository path and are cwd-independent.
 
+Action Run records are durable SQLite state, but execution callbacks and process
+handles are Runtime-local. The `run_ownership` table is the coordination seam:
+each Runtime uses a generated owner ID and fenced epoch lease, while remote
+control writes durable intent for the owner to observe. Expired owners may be
+reclaimed with a higher epoch; stale owners cannot release or update a newer
+lease. This preserves single-node SQLite/local-process behavior and does not
+use client IDs, PIDs, or MCP transport sessions as ownership identity. The
+backend ownership tests include two independent Python processes; full Action
+Server integration still requires the repository RCC bootstrap.
+
 ```bash
 docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:test .
 docker run --rm --user vscode -v "$PWD:/workspaces/actions" -w /workspaces/actions actions-devcontainer:test .devcontainer/bin/smoke
