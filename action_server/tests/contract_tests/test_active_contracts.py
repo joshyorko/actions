@@ -233,7 +233,7 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
 
     for order in (("actions-runtime", "actions-core"), ("actions-core", "actions-runtime")):
         env_dir = tmp_path / ("venv-" + "-".join(order))
-        venv.create(env_dir, with_pip=True)
+        subprocess.run([str(runtime_python), "-m", "venv", str(env_dir)], check=True)
         python = env_dir / "bin/python"
         _install_and_probe(python, wheels)
         environment = os.environ.copy()
