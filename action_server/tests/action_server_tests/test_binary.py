@@ -26,7 +26,7 @@ def test_binary_build():
     import shutil
     import sys
 
-    from sema4ai.common.run_in_thread import run_in_thread
+    from actions.server._common.run_in_thread import run_in_thread
 
     CURDIR = Path(__file__).absolute().parent
     action_server_dir = CURDIR.parent.parent

@@ -19,7 +19,7 @@ from typing import Any, AsyncGenerator, Dict, Iterator, Literal, Optional, Tuple
 from mcp import ClientSession
 
 if typing.TYPE_CHECKING:
-    from sema4ai.action_server._robo_utils.process import Process
+    from actions.server._robo_utils.process import Process
 
 
 def is_debugger_active() -> bool:
@@ -98,8 +98,8 @@ class ActionServerProcess:
         verbose="-v",
         use_https: bool = False,
     ) -> None:
-        from sema4ai.action_server._robo_utils.process import Process
-        from sema4ai.action_server._settings import is_frozen
+        from actions.server._robo_utils.process import Process
+        from actions.server._settings import is_frozen
 
         if self.started:
             raise RuntimeError("The action process was already started.")
@@ -122,7 +122,7 @@ class ActionServerProcess:
             base_args = [
                 sys.executable,
                 "-m",
-                "sema4ai.action_server",
+                "actions.server",
             ]
         new_args = base_args + [
             "start",
@@ -438,7 +438,7 @@ class ActionServerClient:
         assert result.status_code == status_code
 
 
-def sema4ai_action_server_run(
+def actions_server_run(
     cmdline,
     returncode: Optional[Union[Literal["error"], int]],
     cwd=None,
@@ -446,7 +446,7 @@ def sema4ai_action_server_run(
     timeout=None,
     capture_output=True,
 ) -> CompletedProcess:
-    from sema4ai.action_server._settings import is_frozen
+    from actions.server._settings import is_frozen
 
     for entry in cmdline:
         if entry is None:
@@ -475,7 +475,7 @@ def sema4ai_action_server_run(
         )
     else:
         return run_python_module(
-            "sema4ai.action_server",
+            "actions.server",
             cmdline,
             returncode,
             cwd,
@@ -559,7 +559,7 @@ def check_secrets_simple(
     client: ActionServerClient,
     verbose: bool = False,
 ):
-    from sema4ai.action_server._settings import is_frozen
+    from actions.server._settings import is_frozen
 
     curdir = os.path.abspath(".")
     try:
@@ -568,7 +568,7 @@ def check_secrets_simple(
             print(f"is_frozen(): {is_frozen()}")
             print(f"Creating template project in: {tmpdir}")
 
-        contents_with_encryption = '''from sema4ai.actions import Secret, action
+        contents_with_encryption = '''from actions import Secret, action
 
 @action
 def get_private(private_info: Secret) -> str:
@@ -601,7 +601,7 @@ dependencies:
   - python=3.10.14
   - uv=0.2.6
   pypi:
-  - sema4ai-actions=0.10.0
+  - actions-core=0.10.0
 
 packaging:
   # By default, all files and folders in this directory are packaged when uploaded.
@@ -652,7 +652,7 @@ packaging:
             timeout=60 * 5,  # May need to bootstrap environment
         )
 
-        from sema4ai.action_server._encryption import make_encrypted_data_envelope
+        from actions.server._encryption import make_encrypted_data_envelope
 
         ctx_info = make_encrypted_data_envelope(
             keys[0], {"secrets": {"private_info": "my-secret-value"}}
@@ -678,7 +678,7 @@ def check_new_template(
     client: ActionServerClient,
     verbose: bool = False,
 ) -> None:
-    from sema4ai.action_server._settings import is_frozen
+    from actions.server._settings import is_frozen
 
     curdir = os.path.abspath(".")
     try:
@@ -687,7 +687,7 @@ def check_new_template(
             print(f"is_frozen(): {is_frozen()}")
             print(f"Creating template project in: {tmpdir}")
 
-        output = sema4ai_action_server_run(
+        output = actions_server_run(
             ["new", "--name=my_project", "--template=minimal"],
             returncode=0,
             cwd=str(tmpdir),
@@ -789,7 +789,7 @@ def do_selftest():
     print(f"Running selftest on python: {sys.version}")
     retcode = 0
 
-    from sema4ai.action_server._download_rcc import get_default_rcc_location
+    from actions.server._download_rcc import get_default_rcc_location
 
     rcc_location = get_default_rcc_location()
     assert rcc_location.exists(), f"Expected rcc to be available in: {rcc_location}."

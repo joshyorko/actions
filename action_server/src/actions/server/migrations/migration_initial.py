@@ -1,4 +1,4 @@
-from sema4ai.action_server._database import Database
+from actions.server._database import Database
 
 
 def migrate(db: Database) -> None:

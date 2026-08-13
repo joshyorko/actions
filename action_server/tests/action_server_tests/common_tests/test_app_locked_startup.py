@@ -2,9 +2,9 @@ def test_obtain_app_mutex(tmpdir):
     import sys
     from pathlib import Path
 
-    from sema4ai.common.app_mutex import obtain_app_mutex
-    from sema4ai.common.process import Process
-    from sema4ai.common.wait_for import wait_for_expected_func_return
+    from actions.server._common.app_mutex import obtain_app_mutex
+    from actions.server._common.process import Process
+    from actions.server._common.wait_for import wait_for_expected_func_return
 
     lock_basename = "test_app_locked_startup.lock"
     mutex = obtain_app_mutex(
@@ -42,7 +42,7 @@ def test_obtain_app_mutex(tmpdir):
     # Now, create a separate process that holds the lock
 
     code = f"""
-from sema4ai.common.app_mutex import obtain_app_mutex
+from actions.server._common.app_mutex import obtain_app_mutex
 from pathlib import Path
 import os
 import sys

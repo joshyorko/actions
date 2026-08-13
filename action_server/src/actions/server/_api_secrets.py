@@ -6,7 +6,7 @@ from fastapi.routing import APIRouter
 from pydantic.main import BaseModel
 
 if typing.TYPE_CHECKING:
-    from sema4ai.action_server._models import Action, ActionPackage
+    from actions.server._models import Action, ActionPackage
 
 log = logging.getLogger(__name__)
 
@@ -31,7 +31,7 @@ class InMemorySecrets:
     def update_headers(
         self, action_package: "ActionPackage", action: "Action", headers: dict[str, str]
     ):
-        from sema4ai.action_server._encryption import (
+        from actions.server._encryption import (
             get_encryption_keys,
             make_encrypted_data_envelope,
             make_unencrypted_data_envelope,
@@ -75,7 +75,7 @@ class InMemorySecrets:
         secrets: dict[str, str],
         scope: Literal["global"] | ActionPackageScopeTypedDict,
     ):
-        from sema4ai.action_server._models import ActionPackage, get_db
+        from actions.server._models import ActionPackage, get_db
 
         if scope == "global":
             # Note: resets previous values
@@ -123,7 +123,7 @@ async def set_secrets(data: SetSecretData) -> str:
     returns:
         'ok' string if it worked (if it didn't work an exception is thrown with an error message).
     """
-    from sema4ai.action_server._encryption import MaybeEncryptedJsonData
+    from actions.server._encryption import MaybeEncryptedJsonData
 
     encrypted_data = MaybeEncryptedJsonData(data.data)
     value = encrypted_data.value

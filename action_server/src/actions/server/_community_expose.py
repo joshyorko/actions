@@ -92,7 +92,7 @@ def download_bore(target: Optional[str] = None, force: bool = False) -> Path:
 
     try:
         import actions_http
-        from sema4ai.common.system_mutex import timed_acquire_mutex
+        from actions.server._common.system_mutex import timed_acquire_mutex
 
         timeout = 120.0
         with timed_acquire_mutex(
@@ -242,7 +242,7 @@ def download_cloudflared(target: Optional[str] = None, force: bool = False) -> P
 
     try:
         import actions_http
-        from sema4ai.common.system_mutex import timed_acquire_mutex
+        from actions.server._common.system_mutex import timed_acquire_mutex
 
         timeout = 120.0
         with timed_acquire_mutex(

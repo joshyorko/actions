@@ -18,7 +18,7 @@ import sys
 
 import pytest
 
-from sema4ai.common import uris
+from actions.server._common import uris
 
 unix_only = pytest.mark.skipif(sys.platform == "win32", reason="Unix only")
 windows_only = pytest.mark.skipif(sys.platform != "win32", reason="Windows only")
@@ -97,7 +97,7 @@ def test_uri_with(uri, kwargs, new_uri):
 
 
 def test_normalize_drive():
-    from sema4ai.common.uris import normalize_drive
+    from actions.server._common.uris import normalize_drive
 
     if sys.platform == "win32":
         assert normalize_drive("c:/teMp") == "c:/teMp"

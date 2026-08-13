@@ -14,7 +14,7 @@ import os
 import json
 from pathlib import Path
 
-from sema4ai.actions import action, Response
+from actions import action, Response
 
 from actions import workitems
 from actions.work_items import (
@@ -32,7 +32,7 @@ def _ensure_init():
     except RuntimeError:
         if not os.environ.get("RC_WORKITEM_DB_PATH"):
             # Support both neutral and legacy env var names
-            datadir = os.environ.get("ACTION_SERVER_DATADIR") or os.environ.get("SEMA4AI_ACTION_SERVER_DATADIR", ".")
+            datadir = os.environ.get("ACTION_SERVER_DATADIR") or os.environ.get("ACTIONS_RUNTIME_DATADIR", ".")
             os.environ["RC_WORKITEM_DB_PATH"] = str(Path(datadir) / "workitems.db")
         init()
 

@@ -41,6 +41,20 @@ class RoundtripPyProject:
         self.poetry_lock.write_bytes(self.poetry_lock_original)
 
 
+OWNED_DISTRIBUTION_DIRECTORIES = {
+    "actions-core": "actions",
+    "actions-runtime": "action_server",
+    "actions-http-helper": "actions-http-helper",
+    "actions-work-items": "work-items",
+    "actions-local-devutils": "devutils",
+}
+
+
+def owned_distribution_directory(distribution: str) -> str | None:
+    """Return the repository directory for an owned distribution."""
+    return OWNED_DISTRIBUTION_DIRECTORIES.get(distribution)
+
+
 def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
     if found is None:
         found = set()
@@ -50,33 +64,27 @@ def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
     contents: dict = tomlkit.loads(root_pyproject.read_bytes().decode("utf-8"))
     dependencies = contents["tool"]["poetry"]["dependencies"]
     for key in dependencies:
-        if key.startswith("sema4ai-") or key == "actions-http-helper":
-            dep_name = key[len("sema4ai-") :] if key.startswith("sema4ai-") else key
+        directory = owned_distribution_directory(key)
+        if directory is None:
+            continue
 
-            # Special case for http-helper
-            if dep_name == "http-helper":
-                dep_pyproject = root_pyproject.parent.parent / key / "pyproject.toml"
-            else:
-                dep_pyproject = (
-                    root_pyproject.parent.parent / dep_name / "pyproject.toml"
-                )
-
-            assert dep_pyproject.exists(), f"Expected {dep_pyproject} to exist."
-            if dep_pyproject not in found:
-                found.add(dep_pyproject)
-                yield dep_pyproject
-                yield from collect_deps_pyprojects(dep_pyproject, found)
+        dep_pyproject = root_pyproject.parent.parent / directory / "pyproject.toml"
+        assert dep_pyproject.exists(), f"Expected {dep_pyproject} to exist."
+        if dep_pyproject not in found:
+            found.add(dep_pyproject)
+            yield dep_pyproject
+            yield from collect_deps_pyprojects(dep_pyproject, found)
 
 
 def get_tag(tag_prefix: str) -> str:
     """
     Args:
-        tag_prefix: The tag prefix to match (i.e.: "sema4ai-actions")
+        tag_prefix: The tag prefix to match (i.e.: "actions-core")
     """
     # Get the last tagged version.
     cmd = f"git describe --tags --abbrev=0 --match {tag_prefix}-[0-9]*"
     proc = subprocess.run(shlex.split(cmd), capture_output=True, text=True)
-    # Something like 'sema4ai-actions-0.0.1'
+    # Something like 'actions-core-0.0.1'
     return proc.stdout.strip()
 
 
@@ -144,7 +152,7 @@ def _env_in_conda(env_name) -> bool:
     If the given environment name exists in conda, return True, otherwise False.
 
     :param env_name:
-        The name of the env to check (example: 'sema4ai-actions').
+        The name of the env to check (example: 'actions-core').
     """
     return env_name in _conda_env_name_to_conda_prefix()
 
@@ -168,8 +176,8 @@ def build_common_tasks(
         source_directories: Default Python source directories.
     """
     if tag_prefix is None:
-        # The tag for releases should be `sema4ai-actions-{version}`
-        # i.e.: sema4ai-actions-0.1.1
+        # The tag for releases should be `actions-core-{version}`
+        # i.e.: actions-core-0.1.1
         # Here we just want the prefix.
         tag_prefix = package_name.replace(".", "-")
 
@@ -250,11 +258,7 @@ def build_common_tasks(
         if update:
             poetry(ctx, "update", verbose=verbose)
 
-        projects = (
-            [package.replace("sema4ai-", "") for package in local.split(",")]
-            if local
-            else None
-        )
+        projects = [package.strip() for package in local.split(",")] if local else None
         if projects:
             with mark_as_develop_mode(projects):
                 poetry(ctx, "lock")
@@ -296,19 +300,11 @@ def build_common_tasks(
                     dependencies = contents["tool"]["poetry"]["dependencies"]
 
                     for key, value in tuple(dependencies.items()):
-                        if not (
-                            key.startswith("sema4ai-") or key == "actions-http-helper"
-                        ):
+                        dir_name = owned_distribution_directory(key)
+                        if dir_name is None:
                             continue
 
-                        # Changes something as:
-                        # sema4ai-actions = "0.1.0"
-                        # to:
-                        # sema4ai-actions = {path = "../actions/", develop = true
-                        # Special case for http-helper which keeps the sema4ai- prefix
-                        name = key[len("sema4ai-") :] if key.startswith("sema4ai-") else key
-                        dir_name = key if name == "http-helper" else name
-                        if all_packages or (projects and name in projects):
+                        if all_packages or (projects and key in projects):
                             dependencies[key] = dict(
                                 path=f"../{dir_name}/", develop=True
                             )

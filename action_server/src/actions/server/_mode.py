@@ -71,7 +71,7 @@ class ModeConfig:
         except ImportError:
             raise ImportError(
                 "Redis package required for distributed mode. "
-                "Install with: pip install sema4ai-action-server[distributed]"
+                "Install with: pip install actions-runtime[distributed]"
             )
 
     @property
@@ -208,7 +208,7 @@ def _test_redis_connection(redis_url: str, redis_password: Optional[str]) -> boo
     except ImportError:
         log.warning(
             "Redis package not installed. "
-            "Install with: pip install sema4ai-action-server[distributed]"
+            "Install with: pip install actions-runtime[distributed]"
         )
         return False
     except Exception as e:

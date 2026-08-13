@@ -11,16 +11,16 @@ from pathlib import Path
 from queue import Queue
 from typing import TYPE_CHECKING, Dict, Iterator, List, Optional, Set
 
-from sema4ai.actions._action_context import ActionContext
+from actions._action_context import ActionContext
 from termcolor import colored
 
-from sema4ai.action_server._models import Action, ActionPackage, Run
-from sema4ai.action_server._protocols import JSONValue
+from actions.server._models import Action, ActionPackage, Run
+from actions.server._protocols import JSONValue
 
 from ._settings import Settings, is_frozen
 
 if TYPE_CHECKING:
-    from sema4ai.action_server._runs_state_cache import RunRuntimeInfo
+    from actions.server._runs_state_cache import RunRuntimeInfo
 
 log = logging.getLogger(__name__)
 
@@ -97,11 +97,11 @@ class ProcessHandle:
         action_package: ActionPackage,
         post_run_args: Optional[tuple[str, ...]],
     ):
-        from sema4ai.action_server._preload_actions.preload_actions_streams import (
+        from actions.server._preload_actions.preload_actions_streams import (
             JsonRpcStreamWriter,
         )
-        from sema4ai.action_server._robo_utils.callback import Callback
-        from sema4ai.action_server._robo_utils.run_in_thread import run_in_thread
+        from actions.server._robo_utils.callback import Callback
+        from actions.server._robo_utils.run_in_thread import run_in_thread
 
         from ._actions_run_helpers import (
             _add_preload_actions_dir_to_env_pythonpath,
@@ -131,7 +131,7 @@ class ProcessHandle:
         env.pop("ROBOT_ROOT", None)
 
         # Pass datadir to actions so work-items use the shared database
-        env["SEMA4AI_ACTION_SERVER_DATADIR"] = str(settings.datadir)
+        env["ACTIONS_RUNTIME_DATADIR"] = str(settings.datadir)
         # Also set RC_WORKITEM_DB_PATH directly for actions-work-items compatibility
         env["RC_WORKITEM_DB_PATH"] = str(settings.datadir / "workitems.db")
 
@@ -308,19 +308,19 @@ class ProcessHandle:
         cookies: dict,
         reuse_process: bool,
     ) -> int:
-        from sema4ai.action_server._api_oauth2 import (
+        from actions.server._api_oauth2 import (
             get_resolved_provider_settings,
             refresh_tokens,
         )
-        from sema4ai.action_server._api_secrets import IN_MEMORY_SECRETS
-        from sema4ai.action_server._encryption import (
+        from actions.server._api_secrets import IN_MEMORY_SECRETS
+        from actions.server._encryption import (
             decrypt_simple,
             get_encryption_keys,
             make_encrypted_data_envelope,
             make_unencrypted_data_envelope,
         )
-        from sema4ai.action_server._models import OAuth2UserData, get_db
-        from sema4ai.action_server._user_session import (
+        from actions.server._models import OAuth2UserData, get_db
+        from actions.server._user_session import (
             COOKIE_SESSION_ID,
             get_user_session_from_id,
         )
@@ -478,9 +478,9 @@ class ProcessHandle:
         import shlex
         from string import Template
 
-        from sema4ai.action_server._robo_utils import process, run_in_thread
-        from sema4ai.action_server._robo_utils.process import build_python_launch_env
-        from sema4ai.action_server._settings import get_settings
+        from actions.server._robo_utils import process, run_in_thread
+        from actions.server._robo_utils.process import build_python_launch_env
+        from actions.server._settings import get_settings
 
         settings = get_settings()
 
@@ -510,7 +510,7 @@ class ProcessHandle:
         try:
             cwd = None
             mapping_as_env_vars = {
-                f"SEMA4AI_ACTION_SERVER_POST_RUN_{k.upper()}": f"{v}"
+                f"ACTIONS_RUNTIME_POST_RUN_{k.upper()}": f"{v}"
                 for k, v in mapping.items()
             }
             env = build_python_launch_env(mapping_as_env_vars)
@@ -607,18 +607,18 @@ class ActionsProcessPool:
         self._settings = settings
         self.action_package_id_to_action_package = action_package_id_to_action_package
 
-        post_run_cmd = os.environ.get("SEMA4AI_ACTION_SERVER_POST_RUN_CMD")
+        post_run_cmd = os.environ.get("ACTIONS_RUNTIME_POST_RUN_CMD")
         if not post_run_cmd:
             log.debug(
-                "SEMA4AI_ACTION_SERVER_POST_RUN_CMD not set (post run will be skipped)."
+                "ACTIONS_RUNTIME_POST_RUN_CMD not set (post run will be skipped)."
             )
             self._post_run_cmd_args = None
         else:
-            log.debug("SEMA4AI_ACTION_SERVER_POST_RUN_CMD set to: '%s'", post_run_cmd)
+            log.debug("ACTIONS_RUNTIME_POST_RUN_CMD set to: '%s'", post_run_cmd)
             try:
                 post_run_cmd_args = shlex.split(post_run_cmd)
             except Exception:
-                error_msg = f"Error. Unable to parse SEMA4AI_ACTION_SERVER_POST_RUN_CMD: '{post_run_cmd}' with shlex."
+                error_msg = f"Error. Unable to parse ACTIONS_RUNTIME_POST_RUN_CMD: '{post_run_cmd}' with shlex."
                 log.exception(error_msg)
                 raise RuntimeError(error_msg)
 

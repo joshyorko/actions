@@ -1,6 +1,6 @@
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
 @pytest.mark.integration_test
@@ -16,7 +16,7 @@ def test_server_post_run(
     from action_server_tests.fixtures import get_in_resources
     from devutils.fixtures import wait_for_non_error_condition
 
-    from sema4ai.action_server._encryption import make_unencrypted_data_envelope
+    from actions.server._encryption import make_unencrypted_data_envelope
 
     post_run_script = datadir / "post_run_script.py"
     assert os.path.exists(post_run_script)
@@ -26,7 +26,7 @@ def test_server_post_run(
     output_json = Path(datadir / "output.json")
     cmd = f"{Path(sys.executable).as_posix()} {post_run_script.as_posix()} {output_json.as_posix()} $base_artifacts_dir $run_artifacts_dir $run_id $agent_id"
 
-    env = {"SEMA4AI_ACTION_SERVER_POST_RUN_CMD": cmd}
+    env = {"ACTIONS_RUNTIME_POST_RUN_CMD": cmd}
     action_server_process.start(
         cwd=pack, actions_sync=True, db_file="server.db", env=env
     )
@@ -81,7 +81,7 @@ def test_server_post_run_on_failure(
     from action_server_tests.fixtures import get_in_resources
     from devutils.fixtures import wait_for_non_error_condition
 
-    from sema4ai.action_server._encryption import make_unencrypted_data_envelope
+    from actions.server._encryption import make_unencrypted_data_envelope
 
     post_run_script = datadir / "post_run_script.py"
     assert os.path.exists(post_run_script)
@@ -91,7 +91,7 @@ def test_server_post_run_on_failure(
     output_json = Path(datadir / "output.json")
     cmd = f"{Path(sys.executable).as_posix()} {post_run_script.as_posix()} {output_json.as_posix()} $base_artifacts_dir $run_artifacts_dir $run_id $agent_id"
 
-    env = {"SEMA4AI_ACTION_SERVER_POST_RUN_CMD": cmd}
+    env = {"ACTIONS_RUNTIME_POST_RUN_CMD": cmd}
     action_server_process.start(
         cwd=pack, actions_sync=True, db_file="server.db", env=env
     )
@@ -143,7 +143,7 @@ def test_server_bad_post_run_command(
 
     from action_server_tests.fixtures import get_in_resources
 
-    from sema4ai.action_server._encryption import make_unencrypted_data_envelope
+    from actions.server._encryption import make_unencrypted_data_envelope
 
     post_run_script = datadir / "post_run_script-not-there.py"
 
@@ -152,7 +152,7 @@ def test_server_bad_post_run_command(
     output_json = Path(datadir / "output.json")
     cmd = f"{Path(sys.executable).as_posix()} {post_run_script.as_posix()} {output_json.as_posix()} $base_artifacts_dir $run_artifacts_dir $run_id $agent_id"
 
-    env = {"SEMA4AI_ACTION_SERVER_POST_RUN_CMD": cmd}
+    env = {"ACTIONS_RUNTIME_POST_RUN_CMD": cmd}
     action_server_process.start(
         cwd=pack, actions_sync=True, db_file="server.db", env=env
     )

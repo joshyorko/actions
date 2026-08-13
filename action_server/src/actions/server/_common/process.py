@@ -16,7 +16,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Dict, List, Optional, Protocol, Sequence, Union
 
-from sema4ai.common.protocols import IMonitor
+from actions.server._common.protocols import IMonitor
 
 from .callback import Callback
 

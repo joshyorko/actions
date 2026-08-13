@@ -4,7 +4,7 @@ import pytest
 def test_process_is_process_alive():
     import os
 
-    from sema4ai.common.process import is_process_alive
+    from actions.server._common.process import is_process_alive
 
     assert is_process_alive(os.getpid())
 
@@ -12,8 +12,8 @@ def test_process_is_process_alive():
 def test_process_start():
     import sys
 
-    from sema4ai.common.process import Process
-    from sema4ai.common.wait_for import wait_for_condition
+    from actions.server._common.process import Process
+    from actions.server._common.wait_for import wait_for_condition
 
     p = Process([sys.executable, "-c", "import time; time.sleep(20);print(20)"])
     p.start()
@@ -36,9 +36,9 @@ def test_launch_and_return_future(scenario):
     import sys
     from concurrent.futures import CancelledError, TimeoutError
 
-    from sema4ai.common.monitor import Monitor
-    from sema4ai.common.process import ProcessResultStatus, launch_and_return_future
-    from sema4ai.common.wait_for import wait_for_condition
+    from actions.server._common.monitor import Monitor
+    from actions.server._common.process import ProcessResultStatus, launch_and_return_future
+    from actions.server._common.wait_for import wait_for_condition
 
     code = """
 import time

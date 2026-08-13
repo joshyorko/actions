@@ -2,7 +2,7 @@ import typing
 from getpass import getpass
 from logging import getLogger
 
-from sema4ai.action_server.package._package_publish import Organization
+from actions.server.package._package_publish import Organization
 
 log = getLogger(__name__)
 
@@ -32,7 +32,7 @@ def ask_user_to_provide_access_credentials() -> str:
     Returns:
         Control Room access credentials in valid form.
     """
-    from sema4ai.action_server.vendored_deps.termcolors import bold_red
+    from actions.server.vendored_deps.termcolors import bold_red
 
     while True:
         try:
@@ -64,7 +64,7 @@ def ask_user_to_choose_organization(
     Returns:
         Organization ID.
     """
-    from sema4ai.action_server.vendored_deps.termcolors import bold_red, colored
+    from actions.server.vendored_deps.termcolors import bold_red, colored
 
     for index, name in enumerate(
         [organization.name for organization in organizations], start=1
@@ -89,8 +89,8 @@ def ask_user_for_hostname() -> str:
     """
     from urllib.parse import urlparse
 
-    from sema4ai.action_server._storage import get_hostname
-    from sema4ai.action_server.vendored_deps.termcolors import bold_red
+    from actions.server._storage import get_hostname
+    from actions.server.vendored_deps.termcolors import bold_red
 
     while True:
         default_hostname = get_hostname()

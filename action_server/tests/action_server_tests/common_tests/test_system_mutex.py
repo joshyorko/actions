@@ -8,7 +8,7 @@ def test_system_mutex():
     import pytest
     from _pytest.outcomes import Failed
 
-    from sema4ai.common.system_mutex import (
+    from actions.server._common.system_mutex import (
         SystemMutex,
         _mutex_name_to_info,
         timed_acquire_mutex,
@@ -103,7 +103,7 @@ def test_system_mutex():
 
         # Must also fail from another process.
         code = """
-from sema4ai.common.system_mutex import timed_acquire_mutex
+from actions.server._common.system_mutex import timed_acquire_mutex
 mutex_name = "mutex_name_test_system_mutex"
 with timed_acquire_mutex(mutex_name, timeout=1, raise_error_on_timeout=True):
     pass
@@ -115,7 +115,7 @@ with timed_acquire_mutex(mutex_name, timeout=1, raise_error_on_timeout=True):
 
 
 def test_gen_mutex_name_from_path():
-    from sema4ai.common.system_mutex import generate_mutex_name
+    from actions.server._common.system_mutex import generate_mutex_name
 
     mutex_name = "my/snth\\nsth"
     mutex_name = generate_mutex_name(mutex_name, prefix="my_")
@@ -126,7 +126,7 @@ def test_system_mutex_error_on_timeout():
     import os
     import threading
 
-    from sema4ai.common.system_mutex import SystemMutex
+    from actions.server._common.system_mutex import SystemMutex
 
     mutex = SystemMutex("test_system_mutex_error_on_timeout")
     assert mutex.get_mutex_aquired()
@@ -148,7 +148,7 @@ def test_system_mutex_error_on_timeout():
 def test_system_mutex_timed_acquire_no_error_on_timeout():
     import threading
 
-    from sema4ai.common.system_mutex import SystemMutex, timed_acquire_mutex
+    from actions.server._common.system_mutex import SystemMutex, timed_acquire_mutex
 
     event_mutex_acquired = threading.Event()
     event_terminate_thread = threading.Event()
@@ -182,7 +182,7 @@ def test_system_mutex_timed_acquire_no_error_on_timeout():
             if "acquired after 1 seconds" in "".join(self._msg):
                 event_terminate_thread.set()
 
-    logger = logging.getLogger("sema4ai.common.system_mutex")
+    logger = logging.getLogger("actions.server._common.system_mutex")
     logger.setLevel(logging.INFO)
     handler = _CustomStreamHandler()
     logger.addHandler(handler)
@@ -201,15 +201,15 @@ def test_system_mutex_locked_on_subprocess():
     import subprocess
     import sys
 
-    from sema4ai.common.process import kill_process_and_subprocesses
-    from sema4ai.common.system_mutex import SystemMutex
-    from sema4ai.common.wait_for import wait_for_condition, wait_for_non_error_condition
+    from actions.server._common.process import kill_process_and_subprocesses
+    from actions.server._common.system_mutex import SystemMutex
+    from actions.server._common.wait_for import wait_for_condition, wait_for_non_error_condition
 
     code = """
 import sys
 import time
 print('initialized')
-from sema4ai.common.system_mutex import SystemMutex
+from actions.server._common.system_mutex import SystemMutex
 mutex = SystemMutex('test_system_mutex_locked_on_subprocess')
 assert mutex.get_mutex_aquired()
 print('acquired mutex')
@@ -246,7 +246,7 @@ time.sleep(30)
 
 
 def test_custom_info_to_mutex(tmpdir):
-    from sema4ai.common.system_mutex import SystemMutex
+    from actions.server._common.system_mutex import SystemMutex
 
     mutex = SystemMutex(
         "test_custom_info_to_mutex",

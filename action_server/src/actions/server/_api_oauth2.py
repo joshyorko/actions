@@ -38,8 +38,8 @@ from starlette.responses import HTMLResponse, RedirectResponse, Response
 if typing.TYPE_CHECKING:
     from requests_oauthlib import OAuth2Session  # type: ignore
 
-    from sema4ai.action_server._models import OAuth2UserData
-    from sema4ai.action_server.vendored_deps.oauth2_settings import (
+    from actions.server._models import OAuth2UserData
+    from actions.server.vendored_deps.oauth2_settings import (
         OAuth2ProviderSettingsResolved,
     )
 
@@ -56,8 +56,8 @@ class StatusResponseModel(BaseModel):
 def get_resolved_provider_settings(provider: str) -> "OAuth2ProviderSettingsResolved":
     import os
 
-    from sema4ai.action_server._settings import get_settings
-    from sema4ai.action_server.vendored_deps.oauth2_settings import (
+    from actions.server._settings import get_settings
+    from actions.server.vendored_deps.oauth2_settings import (
         get_oauthlib2_provider_settings,
     )
 
@@ -83,9 +83,9 @@ async def oauth2_logout(
     response: Response,
     reference_id: str = "",
 ) -> StatusResponseModel:
-    from sema4ai.action_server._encryption import decrypt_simple
-    from sema4ai.action_server._models import OAuth2UserData, get_db
-    from sema4ai.action_server._user_session import (
+    from actions.server._encryption import decrypt_simple
+    from actions.server._models import OAuth2UserData, get_db
+    from actions.server._user_session import (
         referenced_session_scope,
         session_scope,
     )
@@ -174,10 +174,10 @@ async def oauth2_login(
         log.info(
             "comma (,) found in scopes. Note that it's expected that a space separator is used."
         )
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import get_db
-    from sema4ai.action_server._settings import get_settings
-    from sema4ai.action_server._user_session import session_scope
+    from actions.server._database import Database
+    from actions.server._models import get_db
+    from actions.server._settings import get_settings
+    from actions.server._user_session import session_scope
 
     if callback_url:
 
@@ -262,10 +262,10 @@ async def oauth2_status(
     """
     import asyncio.futures
 
-    from sema4ai.action_server._encryption import decrypt_simple
-    from sema4ai.action_server._models import OAuth2UserData, get_db
-    from sema4ai.action_server._robo_utils.run_in_thread import run_in_thread_asyncio
-    from sema4ai.action_server._user_session import (
+    from actions.server._encryption import decrypt_simple
+    from actions.server._models import OAuth2UserData, get_db
+    from actions.server._robo_utils.run_in_thread import run_in_thread_asyncio
+    from actions.server._user_session import (
         referenced_session_scope,
         session_scope,
     )
@@ -374,7 +374,7 @@ def _refresh_token(use_id: str, oauth2_user_data: "OAuth2UserData") -> "OAuth2Us
     Updates the information in the database and returns a new OAuth2UserData
     instance with the updated values (the input instance will be unchanged).
     """
-    from sema4ai.action_server._encryption import decrypt_simple
+    from actions.server._encryption import decrypt_simple
 
     settings = get_resolved_provider_settings(oauth2_user_data.provider)
     code_verifier = oauth2_user_data.code_verifier
@@ -423,7 +423,7 @@ def _can_renew(oauth2_user_data: "OAuth2UserData") -> bool:
     Returns:
         True if the oauth2 access_token should be renewed and False otherwise.
     """
-    from sema4ai.action_server._encryption import decrypt_simple
+    from actions.server._encryption import decrypt_simple
 
     if not oauth2_user_data.refresh_token:
         # Unable to renew in this case as there's no refresh_token to renew.
@@ -449,7 +449,7 @@ def _should_renew(oauth2_user_data: "OAuth2UserData") -> bool:
     Returns:
         True if the oauth2 access_token should be renewed and False otherwise.
     """
-    from sema4ai.action_server._user_session import iso_to_datetime
+    from actions.server._user_session import iso_to_datetime
 
     if not _can_renew(oauth2_user_data):
         return False
@@ -473,7 +473,7 @@ async def create_reference_id() -> CreatedReferenceId:
     Creates a new reference ID (using this reference it's later possible
     to obtain the access_token and query the state of the OAuth2 authentication).
     """
-    from sema4ai.action_server._user_session import create_user_session
+    from actions.server._user_session import create_user_session
 
     response = CreatedReferenceId(reference_id=create_user_session(external=True).id)
     return response
@@ -488,7 +488,7 @@ def _create_oauth2_session(
 ) -> "OAuth2Session":
     from requests_oauthlib import OAuth2Session  # type: ignore
 
-    from sema4ai.action_server._settings import get_settings
+    from actions.server._settings import get_settings
 
     settings = get_resolved_provider_settings(provider)
 
@@ -520,10 +520,10 @@ def _create_oauth2_session(
 def _update_db_with_token(
     use_id: str, provider: str, token, *, code_verifier: str
 ) -> "OAuth2UserData":
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._encryption import encrypt_simple
-    from sema4ai.action_server._models import OAuth2UserData, get_db
-    from sema4ai.action_server._user_session import datetime_to_iso
+    from actions.server._database import Database
+    from actions.server._encryption import encrypt_simple
+    from actions.server._models import OAuth2UserData, get_db
+    from actions.server._user_session import datetime_to_iso
 
     access_token = token.get("access_token", "")
 
@@ -586,7 +586,7 @@ async def oauth2_redirect(request: Request, state: str = "") -> HTMLResponse:
     complete the authentication flow.
     """
 
-    from sema4ai.action_server._user_session import session_scope
+    from actions.server._user_session import session_scope
 
     with session_scope(request) as session:
         oauth_state = session.get_session_data(f"oauth_state-${state}", drop=True)

@@ -22,8 +22,8 @@ def handle_new_project(
         template_name: Template to use for the new project.
         force: If true, the project will be created even if the directory already exists or is not empty.
     """
-    from sema4ai.action_server.package.package_exclude import PackageExcludeHandler
-    from sema4ai.action_server.vendored_deps.termcolors import bold_red, bold_yellow
+    from actions.server.package.package_exclude import PackageExcludeHandler
+    from actions.server.vendored_deps.termcolors import bold_red, bold_yellow
 
     from ._new_project_helpers import (
         _ensure_latest_templates,
@@ -59,7 +59,7 @@ def handle_new_project(
                 from pathlib import Path
 
                 # Consider empty only if the directory has files that don't match the exclusion patterns.
-                from sema4ai.actions._collect_actions import DEFAULT_EXCLUSION_PATTERNS
+                from actions._collect_actions import DEFAULT_EXCLUSION_PATTERNS
 
                 package_exclude_handler = PackageExcludeHandler()
                 package_exclude_handler.fill_exclude_patterns(
@@ -115,7 +115,7 @@ def handle_list_templates(output_json: bool = False) -> int:
     """
     import sys
 
-    from sema4ai.action_server.vendored_deps.termcolors import bold_red
+    from actions.server.vendored_deps.termcolors import bold_red
 
     from ._new_project_helpers import (
         ActionTemplate,

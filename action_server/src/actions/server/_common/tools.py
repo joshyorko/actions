@@ -3,7 +3,7 @@ import os
 import sys
 from pathlib import Path
 
-from sema4ai.common.process import ProcessRunResult
+from actions.server._common.process import ProcessRunResult
 
 log = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class BaseTool:
         downloaded if `download` is True (otherwise it will be checked if the executable
         exists and is executable).
         """
-        from sema4ai.common.locations import get_default_executable_path
+        from actions.server._common.locations import get_default_executable_path
 
         target_location = get_default_executable_path(
             name=cls.executable_name, version=version
@@ -113,7 +113,7 @@ class BaseTool:
 
 
 def _get_tool_version(tool: BaseTool, location: str) -> ProcessRunResult:
-    from sema4ai.common.process import launch_and_return_future
+    from actions.server._common.process import launch_and_return_future
 
     version_command = tool.version_command
 
@@ -206,7 +206,7 @@ def _download_tool(
 
     from actions_http import download_with_resume
 
-    from sema4ai.common.system_mutex import timed_acquire_mutex
+    from actions.server._common.system_mutex import timed_acquire_mutex
 
     if not force:
         if _verify_tool_downloaded_ok(
@@ -300,7 +300,7 @@ class RccTool(BaseTool):
 
         from actions_http import download_with_resume
 
-        from sema4ai.common.system_mutex import timed_acquire_mutex
+        from actions.server._common.system_mutex import timed_acquire_mutex
 
         location = self._target_location
         tool_version = self._tool_version

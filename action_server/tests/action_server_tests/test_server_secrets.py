@@ -1,6 +1,6 @@
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 # Used in test so that the information is static (no random key or iv).
 USE_STATIC_INFO = False
@@ -12,7 +12,7 @@ def test_secrets_simple(
 ):
     from pathlib import Path
 
-    from sema4ai.action_server._selftest import check_secrets_simple
+    from actions.server._selftest import check_secrets_simple
 
     check_secrets_simple(Path(tmpdir), action_server_process, client, verbose=False)
 
@@ -57,7 +57,7 @@ def test_secrets_encrypted(
         env=env,
     )
 
-    from sema4ai.action_server._encryption import make_encrypted_data_envelope
+    from actions.server._encryption import make_encrypted_data_envelope
 
     ctx_info = make_encrypted_data_envelope(
         keys[0], {"secrets": {"private_info": "my-secret-value"}}
@@ -80,7 +80,7 @@ def test_secrets_not_encrypted(
     import json
 
     # Verify that things work if the X-Action-Context is not encrypted.
-    from sema4ai.action_server._encryption import make_unencrypted_data_envelope
+    from actions.server._encryption import make_unencrypted_data_envelope
 
     pack = datadir / "pack_encryption"
 
@@ -178,7 +178,7 @@ def test_secrets_encrypted_set_through_separate_post_request_env_var_or_header(
 
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-    from sema4ai.action_server._encryption import make_encrypted_data_envelope
+    from actions.server._encryption import make_encrypted_data_envelope
 
     pack = datadir / "pack_encryption"
 
@@ -292,7 +292,7 @@ def test_secrets_encrypted_oauth2(
         env=env,
     )
 
-    from sema4ai.action_server._encryption import make_encrypted_data_envelope
+    from actions.server._encryption import make_encrypted_data_envelope
 
     ctx_info = make_encrypted_data_envelope(
         keys[0],
@@ -326,7 +326,7 @@ def test_secrets_oauth2_encrypted_set_through_separate_post_request(
 
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-    from sema4ai.action_server._encryption import make_encrypted_data_envelope
+    from actions.server._encryption import make_encrypted_data_envelope
 
     pack = datadir / "pack_encryption_oauth2"
 

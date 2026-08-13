@@ -34,10 +34,10 @@ def build_package(
     """
     import yaml
 
-    from sema4ai.action_server._ask_user import ask_user_input_to_proceed
-    from sema4ai.action_server._cli_impl import _main_retcode
-    from sema4ai.action_server._slugify import slugify
-    from sema4ai.action_server.package.package_exclude import PackageExcludeHandler
+    from actions.server._ask_user import ask_user_input_to_proceed
+    from actions.server._cli_impl import _main_retcode
+    from actions.server._slugify import slugify
+    from actions.server.package.package_exclude import PackageExcludeHandler
 
     from .._errors_action_server import ActionServerValidationError
 

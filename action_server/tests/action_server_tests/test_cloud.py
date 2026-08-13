@@ -4,13 +4,13 @@ import os
 def test_cloud_list_organizations(data_regression):
     import json
 
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
     access_credentials = os.environ.get("ACTION_SERVER_TEST_ACCESS_CREDENTIALS")
     assert (
         access_credentials
     ), "ACTION_SERVER_TEST_ACCESS_CREDENTIALS environment required for test."
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "cloud",
             "list-organizations",

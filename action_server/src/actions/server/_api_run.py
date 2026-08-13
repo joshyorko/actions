@@ -9,7 +9,7 @@ from fastapi.params import Param
 from fastapi.routing import APIRouter
 from starlette.responses import FileResponse
 
-from sema4ai.action_server._models import Run, RunDetailModel, RunListItemModel
+from actions.server._models import Run, RunDetailModel, RunListItemModel
 
 log = logging.getLogger(__name__)
 run_api_router = APIRouter(prefix="/api/runs")
@@ -194,7 +194,7 @@ for a given run (i.e.: [{'name': '__action_server_output.txt', 'size_in_bytes': 
 """
     ),
 ]:
-    from sema4ai.action_server._settings import get_settings
+    from actions.server._settings import get_settings
 
     settings = get_settings()
     run = get_run_by_id(run_id)
@@ -358,7 +358,7 @@ return new TextDecoder().decode(mergedArray);
 
 
 def _get_artifacts_dir_for_run_id(run_id: str) -> Optional[Path]:
-    from sema4ai.action_server._settings import get_settings
+    from actions.server._settings import get_settings
 
     settings = get_settings()
     run = get_run_by_id(run_id)
@@ -450,7 +450,7 @@ def get_run_artifact_binary(
         title="Artifact name for which the content should be gotten."
     ),
 ):
-    from sema4ai.action_server._settings import get_settings
+    from actions.server._settings import get_settings
 
     settings = get_settings()
     run = get_run_by_id(run_id)

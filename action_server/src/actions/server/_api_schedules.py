@@ -391,7 +391,7 @@ def _get_related_names(
     db, schedule: "Schedule"
 ) -> tuple[Optional[str], Optional[str], Optional[str]]:
     """Get related entity names for a schedule."""
-    from sema4ai.action_server._models import Action, Schedule, ScheduleGroup
+    from actions.server._models import Action, Schedule, ScheduleGroup
 
     action_name = None
     depends_on_name = None
@@ -444,7 +444,7 @@ async def list_schedules(
     schedule_type: Optional[str] = None,
 ):
     """List all schedules with optional filters."""
-    from sema4ai.action_server._models import Action, Schedule, ScheduleGroup, get_db
+    from actions.server._models import Action, Schedule, ScheduleGroup, get_db
 
     db = get_db()
     with db.connect():
@@ -492,8 +492,8 @@ async def get_schedule_stats():
     """Get schedule statistics for dashboard."""
     from datetime import timedelta
 
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._models import (
+    from actions.server._database import datetime_to_str
+    from actions.server._models import (
         Schedule,
         ScheduleExecution,
         ScheduleExecutionStatus,
@@ -582,10 +582,10 @@ async def get_schedule_stats():
 @schedules_api_router.post("", response_model=ScheduleResponse)
 async def create_schedule(request: ScheduleCreateRequest):
     """Create a new schedule."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._gen_ids import gen_uuid
-    from sema4ai.action_server._models import Action, Schedule, ScheduleGroup, get_db
-    from sema4ai.action_server._scheduler import get_scheduler
+    from actions.server._database import datetime_to_str
+    from actions.server._gen_ids import gen_uuid
+    from actions.server._models import Action, Schedule, ScheduleGroup, get_db
+    from actions.server._scheduler import get_scheduler
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -699,7 +699,7 @@ async def create_schedule(request: ScheduleCreateRequest):
 @schedules_api_router.get("/{schedule_id}", response_model=ScheduleResponse)
 async def get_schedule(schedule_id: str):
     """Get a specific schedule by ID."""
-    from sema4ai.action_server._models import Schedule, get_db
+    from actions.server._models import Schedule, get_db
 
     db = get_db()
     with db.connect():
@@ -720,9 +720,9 @@ async def get_schedule(schedule_id: str):
 @schedules_api_router.patch("/{schedule_id}", response_model=ScheduleResponse)
 async def update_schedule(schedule_id: str, request: ScheduleUpdateRequest):
     """Update an existing schedule."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._models import Action, Schedule, ScheduleGroup, get_db
-    from sema4ai.action_server._scheduler import get_scheduler
+    from actions.server._database import datetime_to_str
+    from actions.server._models import Action, Schedule, ScheduleGroup, get_db
+    from actions.server._scheduler import get_scheduler
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -885,7 +885,7 @@ async def update_schedule(schedule_id: str, request: ScheduleUpdateRequest):
 @schedules_api_router.delete("/{schedule_id}")
 async def delete_schedule(schedule_id: str):
     """Delete a schedule."""
-    from sema4ai.action_server._models import Schedule, ScheduleExecution, get_db
+    from actions.server._models import Schedule, ScheduleExecution, get_db
 
     db = get_db()
     with db.connect():
@@ -911,15 +911,15 @@ async def delete_schedule(schedule_id: str):
 @schedules_api_router.post("/{schedule_id}/trigger", response_model=ExecutionResponse)
 async def trigger_schedule(schedule_id: str):
     """Manually trigger a schedule execution."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._gen_ids import gen_uuid
-    from sema4ai.action_server._models import (
+    from actions.server._database import datetime_to_str
+    from actions.server._gen_ids import gen_uuid
+    from actions.server._models import (
         Schedule,
         ScheduleExecution,
         ScheduleExecutionStatus,
         get_db,
     )
-    from sema4ai.action_server._scheduler import get_scheduler
+    from actions.server._scheduler import get_scheduler
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -973,9 +973,9 @@ async def trigger_schedule(schedule_id: str):
 @schedules_api_router.post("/{schedule_id}/enable")
 async def enable_schedule(schedule_id: str):
     """Enable a schedule."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._models import Schedule, get_db
-    from sema4ai.action_server._scheduler import get_scheduler
+    from actions.server._database import datetime_to_str
+    from actions.server._models import Schedule, get_db
+    from actions.server._scheduler import get_scheduler
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -1010,8 +1010,8 @@ async def enable_schedule(schedule_id: str):
 @schedules_api_router.post("/{schedule_id}/disable")
 async def disable_schedule(schedule_id: str):
     """Disable a schedule."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._models import Schedule, get_db
+    from actions.server._database import datetime_to_str
+    from actions.server._models import Schedule, get_db
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -1041,9 +1041,9 @@ async def disable_schedule(schedule_id: str):
 @schedules_api_router.post("/{schedule_id}/duplicate", response_model=ScheduleResponse)
 async def duplicate_schedule(schedule_id: str, new_name: Optional[str] = None):
     """Duplicate/clone a schedule."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._gen_ids import gen_uuid
-    from sema4ai.action_server._models import Schedule, get_db
+    from actions.server._database import datetime_to_str
+    from actions.server._gen_ids import gen_uuid
+    from actions.server._models import Schedule, get_db
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -1117,7 +1117,7 @@ async def duplicate_schedule(schedule_id: str, new_name: Optional[str] = None):
 )
 async def list_executions(schedule_id: str, limit: int = 50, offset: int = 0):
     """Get execution history for a schedule."""
-    from sema4ai.action_server._models import Schedule, ScheduleExecution, get_db
+    from actions.server._models import Schedule, ScheduleExecution, get_db
 
     db = get_db()
     with db.connect():
@@ -1203,7 +1203,7 @@ async def validate_cron(request: CronValidateRequest):
         pass
 
     # Get next runs
-    from sema4ai.action_server._scheduler import SchedulerEngine
+    from actions.server._scheduler import SchedulerEngine
 
     scheduler = SchedulerEngine()
     next_runs = []
@@ -1236,8 +1236,8 @@ async def validate_cron(request: CronValidateRequest):
 @schedules_api_router.post("/preview-runs", response_model=PreviewRunsResponse)
 async def preview_runs(request: PreviewRunsRequest):
     """Preview next run times for a schedule configuration."""
-    from sema4ai.action_server._models import Schedule
-    from sema4ai.action_server._scheduler import SchedulerEngine
+    from actions.server._models import Schedule
+    from actions.server._scheduler import SchedulerEngine
 
     # Create a temporary schedule object
     schedule = Schedule(
@@ -1298,7 +1298,7 @@ async def list_timezones():
 @schedule_groups_api_router.get("", response_model=GroupListResponse)
 async def list_groups():
     """List all schedule groups."""
-    from sema4ai.action_server._models import Schedule, ScheduleGroup, get_db
+    from actions.server._models import Schedule, ScheduleGroup, get_db
 
     db = get_db()
     with db.connect():
@@ -1333,9 +1333,9 @@ async def list_groups():
 @schedule_groups_api_router.post("", response_model=GroupResponse)
 async def create_group(request: GroupCreateRequest):
     """Create a new schedule group."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._gen_ids import gen_uuid
-    from sema4ai.action_server._models import ScheduleGroup, get_db
+    from actions.server._database import datetime_to_str
+    from actions.server._gen_ids import gen_uuid
+    from actions.server._models import ScheduleGroup, get_db
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -1384,7 +1384,7 @@ async def create_group(request: GroupCreateRequest):
 @schedule_groups_api_router.patch("/{group_id}", response_model=GroupResponse)
 async def update_group(group_id: str, request: GroupUpdateRequest):
     """Update a schedule group."""
-    from sema4ai.action_server._models import ScheduleGroup, get_db
+    from actions.server._models import ScheduleGroup, get_db
 
     db = get_db()
 
@@ -1456,7 +1456,7 @@ async def update_group(group_id: str, request: GroupUpdateRequest):
 @schedule_groups_api_router.delete("/{group_id}")
 async def delete_group(group_id: str):
     """Delete a schedule group."""
-    from sema4ai.action_server._models import Schedule, ScheduleGroup, get_db
+    from actions.server._models import Schedule, ScheduleGroup, get_db
 
     db = get_db()
     with db.connect():

@@ -27,9 +27,9 @@ def check_regexp_in_lines(text, regexp):
 
 
 def test_package_zip(datadir):
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "build",
@@ -72,9 +72,9 @@ def test_package_zip(datadir):
     extract_to = datadir / "extracted"
 
     def extract():
-        from sema4ai.action_server import __version__
+        from actions.server import __version__
 
-        sema4ai_action_server_run(
+        actions_server_run(
             [
                 "package",
                 "extract",
@@ -107,9 +107,9 @@ def test_package_zip(datadir):
 
 
 def test_package_zip_no_actions(datadir):
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "build",
@@ -125,9 +125,9 @@ def test_package_zip_no_actions(datadir):
 
 
 def test_package_pack_v2_fields_but_not_v2_marked(datadir):
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "build",
@@ -146,9 +146,9 @@ def test_package_pack_v2_fields_but_not_v2_marked(datadir):
 
 
 def test_package_metadata(datadir, data_regression):
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "metadata",
@@ -164,9 +164,9 @@ def test_package_metadata(datadir, data_regression):
 
 
 def test_package_metadata_external_endpoints(datadir, data_regression):
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "metadata",
@@ -184,9 +184,9 @@ def test_package_metadata_external_endpoints(datadir, data_regression):
 def test_package_metadata_external_endpoints_bad(datadir, data_regression):
     import itertools
 
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "metadata",
@@ -206,9 +206,9 @@ def test_package_metadata_external_endpoints_bad(datadir, data_regression):
 
 
 def test_package_metadata_oauth2_secrets(datadir, data_regression):
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "metadata",
@@ -222,9 +222,9 @@ def test_package_metadata_oauth2_secrets(datadir, data_regression):
 
 
 def test_package_metadata_secrets(datadir, data_regression):
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "metadata",
@@ -238,7 +238,7 @@ def test_package_metadata_secrets(datadir, data_regression):
 
 
 def test_package_metadata_api(datadir, data_regression):
-    from sema4ai.action_server import api
+    from actions.server import api
 
     action_package_dir = Path(datadir / "pack_secrets")
     found = api.package_metadata(action_package_dir, datadir=Path(datadir / "data"))
@@ -249,10 +249,10 @@ def test_package_metadata_api(datadir, data_regression):
 def test_package_upload(datadir, data_regression):
     raise pytest.skip(reason="Skip package upload test")
 
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
     # Build the action package first
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "package",
             "build",
@@ -268,7 +268,7 @@ def test_package_upload(datadir, data_regression):
     zip_path = Path(datadir, zip_name)
     assert os.path.exists(zip_path)
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "upload",
@@ -297,9 +297,9 @@ def test_package_upload(datadir, data_regression):
 def test_package_status(data_regression):
     raise pytest.skip(reason="Skip package upload test")
 
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "status",
@@ -335,9 +335,9 @@ def test_package_status(data_regression):
 def test_package_set_changelog(data_regression):
     raise pytest.skip(reason="Skip package upload test")
 
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "set-changelog",

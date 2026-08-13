@@ -1,7 +1,7 @@
 import sys
 
 if __name__ == "__main__":
-    from sema4ai.action_server.cli import main
+    from actions.server.cli import main
 
     args = None
     # args = "start --https --ssl-self-signed --full-openapi-spec".split()

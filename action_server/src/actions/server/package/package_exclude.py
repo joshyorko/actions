@@ -21,7 +21,7 @@ class PackageExcludeHandler:
                 in this function (as it usually comes from the package.yaml file
                 and thus is untrusted at this point).
         """
-        from sema4ai.action_server._errors_action_server import (
+        from actions.server._errors_action_server import (
             ActionServerValidationError,
         )
 

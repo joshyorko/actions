@@ -1,8 +1,8 @@
 from pathlib import Path
 from typing import Any, TypedDict
 
-from sema4ai.common.null import NULL
-from sema4ai.common.protocols import ActionResult, IMonitor
+from actions.server._common.null import NULL
+from actions.server._common.protocols import ActionResult, IMonitor
 
 
 class _ListPackageVersionMetadata(TypedDict):

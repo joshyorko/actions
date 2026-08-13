@@ -9,8 +9,8 @@ from typing import Iterator, Optional
 
 from termcolor import colored
 
-from sema4ai.action_server._protocols import ArgumentsNamespaceDevEnvTask
-from sema4ai.action_server.vendored_deps.termcolors import bold_red
+from actions.server._protocols import ArgumentsNamespaceDevEnvTask
+from actions.server.vendored_deps.termcolors import bold_red
 
 from ._protocols import ArgumentsNamespaceRequiringDatadir
 
@@ -95,7 +95,7 @@ def is_community_build() -> bool:
     # Enterprise builds will have a specific marker file or module
     try:
         # Try to import enterprise-specific module
-        import sema4ai.action_server._enterprise_marker  # type: ignore # noqa: F401
+        import actions.server._enterprise_marker  # type: ignore # noqa: F401
 
         return False
     except ImportError:
@@ -325,7 +325,7 @@ class Settings:
     def _create(
         cls, args: ArgumentsNamespaceRequiringDatadir | ArgumentsNamespaceDevEnvTask
     ) -> "Settings":
-        from sema4ai.action_server._errors_action_server import (
+        from actions.server._errors_action_server import (
             ActionServerValidationError,
         )
 
@@ -413,14 +413,14 @@ class Settings:
 
             if settings.use_https:
                 if settings.ssl_self_signed:
-                    from sema4ai.action_server.vendored_deps import gen_certificate
-                    from sema4ai.action_server.vendored_deps.termcolors import bold
+                    from actions.server.vendored_deps import gen_certificate
+                    from actions.server.vendored_deps.termcolors import bold
 
                     private_path = user_path / "action-server-private-keyfile.pem"
                     public_path = user_path / "action-server-public-certfile.pem"
 
                     if not private_path.exists() or not public_path.exists():
-                        from sema4ai.action_server._storage import KEY_FILE_PERMISSIONS
+                        from actions.server._storage import KEY_FILE_PERMISSIONS
 
                         public, private = gen_certificate.gen_self_signed_certificate()
 

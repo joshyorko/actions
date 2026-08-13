@@ -6,7 +6,7 @@ https://github.com/sema4ai/actions/blob/master/README.md
 
 """
 
-from sema4ai.actions import action
+from actions import action
 
 
 @action

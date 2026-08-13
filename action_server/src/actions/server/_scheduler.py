@@ -148,8 +148,8 @@ class SchedulerEngine:
 
     async def _check_and_execute_schedules(self) -> None:
         """Check for due schedules and execute them."""
-        from sema4ai.action_server._database import datetime_to_str
-        from sema4ai.action_server._models import Schedule, get_db
+        from actions.server._database import datetime_to_str
+        from actions.server._models import Schedule, get_db
 
         now = datetime.now(timezone.utc)
         now_str = datetime_to_str(now)
@@ -185,7 +185,7 @@ class SchedulerEngine:
             schedule: The schedule to process
             now: Current time
         """
-        from sema4ai.action_server._models import (
+        from actions.server._models import (
             ScheduleExecution,
             ScheduleExecutionStatus,
             ScheduleSkipReason,
@@ -193,8 +193,8 @@ class SchedulerEngine:
         )
 
         # Import here to avoid circular imports
-        from sema4ai.action_server._database import datetime_to_str
-        from sema4ai.action_server._gen_ids import gen_uuid
+        from actions.server._database import datetime_to_str
+        from actions.server._gen_ids import gen_uuid
 
         schedule_id = schedule.id
 
@@ -285,7 +285,7 @@ class SchedulerEngine:
         if not schedule.depends_on_schedule_id:
             return True
 
-        from sema4ai.action_server._models import (
+        from actions.server._models import (
             ScheduleExecution,
             ScheduleExecutionStatus,
             get_db,
@@ -342,9 +342,9 @@ class SchedulerEngine:
         reason: str,
     ) -> None:
         """Record a skipped execution."""
-        from sema4ai.action_server._database import datetime_to_str
-        from sema4ai.action_server._gen_ids import gen_uuid
-        from sema4ai.action_server._models import (
+        from actions.server._database import datetime_to_str
+        from actions.server._gen_ids import gen_uuid
+        from actions.server._models import (
             ScheduleExecution,
             ScheduleExecutionStatus,
             get_db,
@@ -392,8 +392,8 @@ class SchedulerEngine:
         now: datetime,
     ) -> None:
         """Execute a schedule with retry support."""
-        from sema4ai.action_server._database import datetime_to_str
-        from sema4ai.action_server._models import (
+        from actions.server._database import datetime_to_str
+        from actions.server._models import (
             Schedule,
             ScheduleExecution,
             ScheduleExecutionStatus,
@@ -497,8 +497,8 @@ class SchedulerEngine:
         Returns:
             Tuple of (success, result, error_message)
         """
-        from sema4ai.action_server._database import datetime_to_str
-        from sema4ai.action_server._models import (
+        from actions.server._database import datetime_to_str
+        from actions.server._models import (
             ScheduleExecution,
             ScheduleExecutionStatus,
             get_db,
@@ -564,13 +564,13 @@ class SchedulerEngine:
 
         Returns the run ID.
         """
-        from sema4ai.action_server._actions_run import (
+        from actions.server._actions_run import (
             _create_run,
             _create_run_artifacts_dir,
             execute_action_for_scheduler,
         )
-        from sema4ai.action_server._gen_ids import gen_uuid
-        from sema4ai.action_server._models import Action, ActionPackage, get_db
+        from actions.server._gen_ids import gen_uuid
+        from actions.server._models import Action, ActionPackage, get_db
 
         if not schedule.action_id:
             raise ValueError("Schedule has no action_id configured")
@@ -655,8 +655,8 @@ class SchedulerEngine:
         inputs["_scheduled_at"] = datetime.now(timezone.utc).isoformat()
 
         try:
-            from sema4ai.action_server._settings import get_settings
-            from sema4ai.action_server._work_items_import import load_work_items_types
+            from actions.server._settings import get_settings
+            from actions.server._work_items_import import load_work_items_types
 
             # Create adapter targeting the action server's work items storage
             settings = get_settings()
@@ -734,7 +734,7 @@ class SchedulerEngine:
 
         # Update notification status
         if schedule.notification_webhook_url or schedule.notification_email:
-            from sema4ai.action_server._models import ScheduleExecution, get_db
+            from actions.server._models import ScheduleExecution, get_db
 
             db = get_db()
             with db.connect():
@@ -791,7 +791,7 @@ class SchedulerEngine:
         """Send an email notification."""
         # Email notification requires SMTP configuration
         # This is handled by the NotificationService
-        from sema4ai.action_server._notifications import get_notification_service
+        from actions.server._notifications import get_notification_service
 
         service = get_notification_service()
         if service is None:
@@ -977,8 +977,8 @@ async def initialize_schedule_next_runs() -> None:
 
     This should be called on server startup.
     """
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._models import Schedule, get_db
+    from actions.server._database import datetime_to_str
+    from actions.server._models import Schedule, get_db
 
     scheduler = get_scheduler()
     if scheduler is None:

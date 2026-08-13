@@ -29,7 +29,7 @@ def download_rcc(
     """
     import os
 
-    from sema4ai.common.system_mutex import timed_acquire_mutex
+    from actions.server._common.system_mutex import timed_acquire_mutex
 
     if target:
         rcc_path = Path(target)
@@ -72,9 +72,9 @@ def download_rcc(
 
     timeout = 300.0
 
-    if "SEMA4AI_ACTION_SERVER_RCC_DOWNLOAD_TIMEOUT" in os.environ:
+    if "ACTIONS_RUNTIME_RCC_DOWNLOAD_TIMEOUT" in os.environ:
         # Users can override timeout by setting the environment variable.
-        timeout = float(os.environ["SEMA4AI_ACTION_SERVER_RCC_DOWNLOAD_TIMEOUT"])
+        timeout = float(os.environ["ACTIONS_RUNTIME_RCC_DOWNLOAD_TIMEOUT"])
 
     with timed_acquire_mutex(
         "action_server_rcc_download", timeout=timeout, raise_error_on_timeout=True
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     log.info("Logging setup")
 
     ret = download_rcc(
-        target="/Users/fabioz/Desktop/sema4aiws/actions/action_server/src/sema4ai/action_server/bin/rcc-17.28.4",
+        target="/tmp/actions-runtime/bin/rcc-17.28.4",
         force=True,
     )
     log.info("Downloaded: %s", ret)

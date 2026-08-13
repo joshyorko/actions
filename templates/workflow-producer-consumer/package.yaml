@@ -9,7 +9,7 @@ dependencies:
     - python=3.12.12
     - uv=0.8.17
   pypi:
-    - sema4ai-actions=1.6.4
+    - actions-core=1.6.4
     - actions-work-items>=0.2.4
     - requests>=2.31.0
 

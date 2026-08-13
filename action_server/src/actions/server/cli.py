@@ -1,7 +1,7 @@
 """
 Important: 
 
-sema4ai.action_server.cli.main() 
+actions.server.cli.main()
 
 is the only public API supported from the action-server.
 
@@ -41,7 +41,7 @@ def main(args: Optional[list[str]] = None, *, exit=True) -> int:  # noqa
                 "passed, rcc will be downloaded."
             )
 
-            from sema4ai.action_server._download_rcc import download_rcc
+            from actions.server._download_rcc import download_rcc
 
             download_rcc(force=True)
 

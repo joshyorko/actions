@@ -75,7 +75,7 @@ def build_and_sign_executable(
     import shutil
     import sys
 
-    from sema4ai.build_common.process_call import run_and_capture_output
+    from actions.server._build_common.process_call import run_and_capture_output
 
     from .build_executable import build_executable_with_pyinstaller
     from .entitlements import make_entitlements_file

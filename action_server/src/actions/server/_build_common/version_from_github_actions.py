@@ -30,7 +30,7 @@ def get_version_from_github_actions() -> str:
     - GITHUB_REF_NAME: ${{ github.ref_name }}
     - GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
     """
-    from sema4ai.build_common.workflows import is_in_github_actions
+    from actions.server._build_common.workflows import is_in_github_actions
 
     # Get environment variables from GitHub Actions
     event_name = os.environ.get("GITHUB_EVENT_NAME", "")
@@ -58,7 +58,7 @@ def get_version_from_github_actions() -> str:
 
 
 def get_release_channel_from_github_actions() -> str:
-    from sema4ai.build_common.workflows import is_in_github_actions
+    from actions.server._build_common.workflows import is_in_github_actions
 
     event_name = os.environ.get("GITHUB_EVENT_NAME", "")
     ref_name = os.environ.get("GITHUB_REF_NAME", "")

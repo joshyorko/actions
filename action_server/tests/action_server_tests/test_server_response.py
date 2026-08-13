@@ -5,7 +5,7 @@ from concurrent.futures.thread import ThreadPoolExecutor
 
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
 @pytest.mark.integration_test
@@ -123,7 +123,7 @@ def test_action_package_json(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action, Response
+from actions import action, Response
 from pydantic import BaseModel, Extra
 from datetime import datetime
 

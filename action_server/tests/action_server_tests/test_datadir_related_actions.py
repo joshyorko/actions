@@ -8,10 +8,10 @@ def test_datadir_related_actions(
     tmpdir,
     action_server_datadir: Path,
 ) -> None:
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import Action, load_db
+    from actions.server._database import Database
+    from actions.server._models import Action, load_db
 
     action_server_datadir.mkdir(parents=True, exist_ok=True)
     db_path = action_server_datadir / "server.db"
@@ -21,7 +21,7 @@ def test_datadir_related_actions(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -34,7 +34,7 @@ def calculator_subtract(v1: float, v2: float) -> float:
     )
 
     def import_action(action_name: str) -> None:
-        sema4ai_action_server_run(
+        actions_server_run(
             [
                 "import",
                 f"--dir={calculator.parent}",
@@ -50,7 +50,7 @@ def calculator_subtract(v1: float, v2: float) -> float:
         )
 
     def clear_actions() -> None:
-        sema4ai_action_server_run(
+        actions_server_run(
             [
                 "datadir",
                 "clear-actions",

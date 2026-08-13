@@ -61,7 +61,7 @@ def _create_run(
     relative_artifacts_dir: str,
     request_id: str,
 ) -> "Run":
-    from sema4ai.action_server._models import RUN_ID_COUNTER, Counter
+    from actions.server._models import RUN_ID_COUNTER, Counter
 
     from ._database import datetime_to_str
     from ._models import Run, RunStatus, get_db
@@ -105,7 +105,7 @@ def _create_run(
 
 
 def _update_run(run: "Run", initial_time: float, run_finished: bool, **changes):
-    from sema4ai.action_server._settings import get_settings
+    from actions.server._settings import get_settings
 
     from ._models import get_db
     from ._runs_state_cache import get_global_runs_state
@@ -239,8 +239,8 @@ class _ActionsRunner:
         from concurrent.futures import Future
         from typing import Optional
 
-        from sema4ai.action_server._gen_ids import gen_uuid
-        from sema4ai.action_server._models import Run
+        from actions.server._gen_ids import gen_uuid
+        from actions.server._models import Run
 
         self.action_package = action_package
         self.action = action
@@ -301,7 +301,7 @@ class _ActionsRunner:
         assert self._future is None, "Future already set"
         from concurrent.futures import TimeoutError
 
-        from sema4ai.action_server._robo_utils import run_in_thread
+        from actions.server._robo_utils import run_in_thread
 
         self.response_handler.set_run_id(self._run_id)
 
@@ -386,11 +386,11 @@ class _ActionsRunner:
         from concurrent.futures import CancelledError
         from typing import Literal
 
-        from sema4ai.action_server._actions_process_pool import (
+        from actions.server._actions_process_pool import (
             ActionsProcessPool,
             ProcessHandle,
         )
-        from sema4ai.action_server._runs_state_cache import get_global_runs_state
+        from actions.server._runs_state_cache import get_global_runs_state
 
         action_package: "ActionPackage" = self.action_package
         action: "Action" = self.action
@@ -399,7 +399,7 @@ class _ActionsRunner:
         headers: dict = self.headers
         cookies: dict = self.cookies
 
-        from sema4ai.action_server._settings import get_settings
+        from actions.server._settings import get_settings
 
         from ._actions_process_pool import get_actions_process_pool
         from ._models import get_db
@@ -771,13 +771,13 @@ async def execute_action_for_scheduler(
     """
     from concurrent.futures import CancelledError
 
-    from sema4ai.action_server._actions_process_pool import (
+    from actions.server._actions_process_pool import (
         ActionsProcessPool,
         ProcessHandle,
         get_actions_process_pool,
     )
-    from sema4ai.action_server._runs_state_cache import get_global_runs_state
-    from sema4ai.action_server._settings import get_settings
+    from actions.server._runs_state_cache import get_global_runs_state
+    from actions.server._settings import get_settings
 
     from ._models import Run, get_db
 
@@ -895,7 +895,7 @@ async def execute_action_for_scheduler(
                 return (False, str(e))
 
     # Run in thread pool to avoid blocking async loop
-    from sema4ai.action_server._robo_utils import run_in_thread
+    from actions.server._robo_utils import run_in_thread
     from concurrent.futures import Future
 
     future: Future = run_in_thread.run_in_thread(_execute_in_thread)

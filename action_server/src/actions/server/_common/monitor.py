@@ -1,6 +1,6 @@
 import logging
 
-from sema4ai.common.protocols import ICancelMonitorListener, IMonitor
+from actions.server._common.protocols import ICancelMonitorListener, IMonitor
 
 log = logging.getLogger(__name__)
 
@@ -36,6 +36,6 @@ class Monitor:
         return self._cancelled
 
     def __typecheckself__(self) -> None:
-        from sema4ai.common.protocols import check_implements
+        from actions.server._common.protocols import check_implements
 
         _: IMonitor = check_implements(self)

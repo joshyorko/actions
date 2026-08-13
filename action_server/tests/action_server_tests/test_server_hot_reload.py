@@ -1,6 +1,6 @@
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
 @pytest.mark.integration_test
@@ -16,7 +16,7 @@ def test_server_hot_reload(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -49,7 +49,7 @@ def calculator_sum(v1: float, v2: float) -> float:
     # Change file.
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 
 @action

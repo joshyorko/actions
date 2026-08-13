@@ -13,7 +13,7 @@ from fastapi import File, UploadFile
 from fastapi.routing import APIRouter
 from pydantic import BaseModel
 
-from sema4ai.action_server._settings import get_settings
+from actions.server._settings import get_settings
 
 from ._work_items_import import load_work_items_types
 from ._work_items_paths import validate_attachment_name

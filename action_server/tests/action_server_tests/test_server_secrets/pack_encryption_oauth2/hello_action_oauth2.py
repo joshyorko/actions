@@ -1,6 +1,6 @@
 from typing import Literal
 
-from sema4ai.actions import OAuth2Secret, action
+from actions import OAuth2Secret, action
 
 
 @action(display_name="Display hello greeting")

@@ -1,4 +1,4 @@
-from sema4ai.actions import Secret, action
+from actions import Secret, action
 
 
 @action

@@ -8,7 +8,7 @@ from typing import Literal
 
 from pydantic.main import BaseModel
 
-from sema4ai.action_server._settings import (
+from actions.server._settings import (
     get_default_settings_dir,
     get_user_sema4_path,
 )
@@ -92,7 +92,7 @@ def get_key(purpose: Literal["local", "ui"] = "local") -> bytes:
 def encrypt_value(
     value: str, purpose: Literal["local", "ui"] = "local"
 ) -> StorageEncryptedValue:
-    from sema4ai.action_server._encryption import encrypt
+    from actions.server._encryption import encrypt
 
     key = get_key(purpose)
 
@@ -108,7 +108,7 @@ def encrypt_value(
 def decrypt_value(
     encrypted_value: StorageEncryptedValue, purpose: Literal["local", "ui"] = "local"
 ) -> str:
-    from sema4ai.action_server._encryption import decrypt
+    from actions.server._encryption import decrypt
 
     key = get_key(purpose)
 
@@ -161,7 +161,7 @@ def save_storage(storage: Storage):
 
 
 def get_access_credentials() -> typing.Optional[str]:
-    from sema4ai.action_server.vendored_deps.termcolors import bold_red
+    from actions.server.vendored_deps.termcolors import bold_red
 
     try:
         storage = load_storage()
@@ -176,7 +176,7 @@ def get_access_credentials() -> typing.Optional[str]:
 
 
 def get_hostname() -> str:
-    from sema4ai.action_server.vendored_deps.termcolors import bold_red
+    from actions.server.vendored_deps.termcolors import bold_red
 
     try:
         storage = load_storage()

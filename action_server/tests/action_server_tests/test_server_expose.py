@@ -11,7 +11,7 @@ from typing import Iterator, Optional, TypeVar
 
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerProcess
+from actions.server._selftest import ActionServerProcess
 
 T = TypeVar("T")
 
@@ -41,7 +41,7 @@ def manual_test_server_expose(
     """
     from action_server_tests.fixtures import BUILD_ENV_IN_TESTS_TIMEOUT
 
-    from sema4ai.action_server._selftest import ActionServerClient
+    from actions.server._selftest import ActionServerClient
 
     additional_args = ["--expose"]
     if use_https:
@@ -72,7 +72,7 @@ def manual_test_server_expose(
 
     data_regression.check(openapi)
 
-    from sema4ai.action_server._robo_utils.run_in_thread import run_in_thread
+    from actions.server._robo_utils.run_in_thread import run_in_thread
 
     def call_sleep(time_to_sleep: float):
         def func():
@@ -129,7 +129,7 @@ class WranglerProcess:
     def __init__(self) -> None:
         import subprocess
 
-        from sema4ai.action_server._robo_utils.process import Process
+        from actions.server._robo_utils.process import Process
 
         self.host = "127.0.0.1"
         self.port = 8788
@@ -149,7 +149,7 @@ class WranglerProcess:
 
     def start(self):
         assert self.process is None, "Process is already started"
-        from sema4ai.action_server._robo_utils.process import Process
+        from actions.server._robo_utils.process import Process
 
         self.process = Process(
             ["npm", "run", "dev", "--", f"--port={self.port}", f"--ip={self.host}"],
@@ -196,10 +196,10 @@ def test_server_expose_local(
     """
     from action_server_tests.fixtures import BUILD_ENV_IN_TESTS_TIMEOUT
 
-    from sema4ai.action_server import _server_expose
-    from sema4ai.action_server._robo_utils.run_in_thread import run_in_thread
-    from sema4ai.action_server._selftest import ActionServerClient
-    from sema4ai.action_server._server_expose import (
+    from actions.server import _server_expose
+    from actions.server._robo_utils.run_in_thread import run_in_thread
+    from actions.server._selftest import ActionServerClient
+    from actions.server._server_expose import (
         EventAsyncIOLoop,
         EventConnected,
         EventSessionPayload,
@@ -310,7 +310,7 @@ def test_server_expose_local(
 
 
 # def manual_tests_on_url():
-#     from sema4ai.action_server._selftest import ActionServerClient
+#     from actions.server._selftest import ActionServerClient
 #
 #     url = "https://twenty-four-tame-rabbits.sema4ai.link"
 #     client = ActionServerClient(url)

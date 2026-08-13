@@ -1,6 +1,6 @@
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
 @pytest.mark.integration_test
@@ -22,11 +22,11 @@ def test_server_headers_in_body(
 
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-    from sema4ai.action_server._settings import HEADER_ACTION_INVOCATION_CONTEXT
+    from actions.server._settings import HEADER_ACTION_INVOCATION_CONTEXT
 
     key = AESGCM.generate_key(256)
 
-    from sema4ai.action_server._encryption import make_encrypted_data_envelope
+    from actions.server._encryption import make_encrypted_data_envelope
 
     env = dict(
         ACTION_SERVER_DECRYPT_KEYS=json.dumps([base64.b64encode(key).decode("ascii")]),

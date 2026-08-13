@@ -18,7 +18,7 @@ class _Checker:
 def test_wait_for_non_error_condition():
     import sys
 
-    from sema4ai.common.wait_for import wait_for_non_error_condition
+    from actions.server._common.wait_for import wait_for_non_error_condition
 
     wait_for_non_error_condition(_Checker(10).generate_error_or_none)
 
@@ -31,7 +31,7 @@ def test_wait_for_non_error_condition():
 def test_wait_for_condition():
     import sys
 
-    from sema4ai.common.wait_for import wait_for_condition
+    from actions.server._common.wait_for import wait_for_condition
 
     checker = _Checker(10)
 

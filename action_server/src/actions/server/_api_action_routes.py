@@ -6,7 +6,7 @@ from starlette.middleware import Middleware
 from starlette.requests import HTTPConnection
 from starlette.types import Receive, Scope, Send
 
-from sema4ai.action_server._app import _CustomFastAPI
+from actions.server._app import _CustomFastAPI
 
 log = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ def _make_name_user_friendly(name: str) -> str:
 
 
 def _name_to_url(name: str) -> str:
-    from sema4ai.action_server._slugify import slugify
+    from actions.server._slugify import slugify
 
     return slugify(name.replace("_", "-"))
 
@@ -99,8 +99,8 @@ class _ActionRoutes:
         from mcp.server.sse import SseServerTransport
         from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
 
-        from sema4ai.action_server._models import Action, ActionPackage
-        from sema4ai.action_server.mcp.setup_mcp_server_from_actions import (
+        from actions.server._models import Action, ActionPackage
+        from actions.server.mcp.setup_mcp_server_from_actions import (
             McpServerSetupHelper,
         )
 
@@ -119,7 +119,7 @@ class _ActionRoutes:
         """
         from starlette.middleware.authentication import AuthenticationMiddleware
 
-        from sema4ai.action_server._app import get_app
+        from actions.server._app import get_app
 
         app = get_app()
 
@@ -233,7 +233,7 @@ class _ActionRoutes:
     def register_actions(self) -> None:
         import json
 
-        from sema4ai.action_server._settings import (
+        from actions.server._settings import (
             OPENAPI_SPEC_IS_CONSEQUENTIAL,
             OPENAPI_SPEC_OPERATION_KIND,
         )
@@ -333,7 +333,7 @@ class _ActionRoutes:
         self.registered_route_names = registered_route_names
 
     def unregister_actions(self):
-        from sema4ai.action_server._app import get_app
+        from actions.server._app import get_app
 
         # We need to iterate backwards to remove with indexes.
         app = get_app()

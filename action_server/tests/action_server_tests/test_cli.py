@@ -7,20 +7,20 @@ from action_server_tests.fixtures import ActionServerClient, ActionServerProcess
 
 @pytest.mark.integration_test
 def test_version() -> None:
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
-    from sema4ai.action_server import __version__
+    from actions.server import __version__
 
-    result = sema4ai_action_server_run(["version"], returncode=0)
+    result = actions_server_run(["version"], returncode=0)
     assert result.stdout.strip() == __version__
 
 
 @pytest.mark.integration_test
 def test_download_rcc(tmpdir) -> None:
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
     rcc_location = tmpdir / ("rcc.exe" if sys.platform == "win32" else "rcc")
-    sema4ai_action_server_run(["download-rcc", "--file", rcc_location], returncode=0)
+    actions_server_run(["download-rcc", "--file", rcc_location], returncode=0)
     assert os.path.exists(rcc_location)
 
 
@@ -28,7 +28,7 @@ def test_download_rcc(tmpdir) -> None:
 def test_new(
     tmpdir, action_server_process: ActionServerProcess, client: ActionServerClient
 ) -> None:
-    from sema4ai.action_server._selftest import check_new_template
+    from actions.server._selftest import check_new_template
 
     check_new_template(tmpdir, action_server_process, client)
 
@@ -37,9 +37,9 @@ def test_new(
 def test_new_list_templates(tmpdir) -> None:
     import json
 
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         ["new", "list-templates"], returncode=0, cwd=tmpdir
     )
 
@@ -47,7 +47,7 @@ def test_new_list_templates(tmpdir) -> None:
     assert "Basic" in output.stderr
     assert "Advanced" in output.stderr
 
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         ["new", "list-templates", "--json"], returncode=0, cwd=tmpdir
     )
 
@@ -81,9 +81,9 @@ def fix_eol(text: str) -> str:
 def test_help(args, str_regression, datadir):
     import re
 
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
-    result = sema4ai_action_server_run(args, returncode=0)
+    result = actions_server_run(args, returncode=0)
     out = re.sub(r"\(\d+.\d+.\d+\)", "(<version>)", result.stdout)
     out = fix_eol(out)
     v2_expected = datadir / f"test_help_{args[0]}_v2.txt"
@@ -97,13 +97,13 @@ def test_help(args, str_regression, datadir):
 
 @pytest.mark.integration_test
 def test_migrate(database_v0):
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
-    from sema4ai.action_server.migrations import MigrationStatus, db_migration_status
+    from actions.server.migrations import MigrationStatus, db_migration_status
 
     db_path = database_v0
     assert db_migration_status(db_path) == MigrationStatus.NEEDS_MIGRATION
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "migrate",
             "--datadir",
@@ -120,8 +120,8 @@ def test_migrate(database_v0):
 def test_default_datadir(tmpdir):
     from pathlib import Path
 
-    from sema4ai.action_server._cli_impl import _create_parser
-    from sema4ai.action_server._settings import setup_settings
+    from actions.server._cli_impl import _create_parser
+    from actions.server._settings import setup_settings
 
     use_dir = Path(tmpdir) / "foobar"
     curdir = Path(".").absolute()
@@ -141,8 +141,8 @@ def test_default_datadir(tmpdir):
 def test_datadir_user_specified(tmpdir):
     from pathlib import Path
 
-    from sema4ai.action_server._cli_impl import _create_parser
-    from sema4ai.action_server._settings import setup_settings
+    from actions.server._cli_impl import _create_parser
+    from actions.server._settings import setup_settings
 
     use_dir = Path(tmpdir) / "foobar"
 
@@ -160,7 +160,7 @@ def test_datadir_user_specified(tmpdir):
 def test_package_update(tmpdir, str_regression, op):
     from pathlib import Path
 
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
     tmp = Path(tmpdir)
 
@@ -197,11 +197,11 @@ dependencies:
 
     assert (
         "Command for package operation not specified."
-        in sema4ai_action_server_run(["package"], returncode=1).stderr
+        in actions_server_run(["package"], returncode=1).stderr
     )
 
     if op == "dry_run.no_backup":
-        result = sema4ai_action_server_run(
+        result = actions_server_run(
             ["package", "update", "--dry-run", "--no-backup"], returncode=0, cwd=tmp
         )
         assert (tmp / "robot.yaml").exists()
@@ -209,7 +209,7 @@ dependencies:
         assert not (tmp / "package.yaml").exists()
 
     elif op == "dry_run.backup":
-        result = sema4ai_action_server_run(
+        result = actions_server_run(
             ["package", "update", "--dry-run"], returncode=0, cwd=tmp
         )
         assert (tmp / "robot.yaml").exists()
@@ -217,13 +217,13 @@ dependencies:
         assert not (tmp / "package.yaml").exists()
 
     elif op == "update.backup":
-        result = sema4ai_action_server_run(["package", "update"], returncode=0, cwd=tmp)
+        result = actions_server_run(["package", "update"], returncode=0, cwd=tmp)
         assert (tmp / "robot.yaml.bak").exists()
         assert (tmp / "conda.yaml.bak").exists()
         assert (tmp / "package.yaml").exists()
 
     elif op == "update.no_backup":
-        result = sema4ai_action_server_run(
+        result = actions_server_run(
             ["package", "update", "--no-backup"], returncode=0, cwd=tmp
         )
         assert not (tmp / "robot.yaml.bak").exists()
@@ -237,11 +237,11 @@ dependencies:
 
 @pytest.mark.integration_test
 def test_oauth2_sema4ai_config(tmpdir) -> None:
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
-    output = sema4ai_action_server_run(["oauth2"], returncode=1, cwd=tmpdir)
+    output = actions_server_run(["oauth2"], returncode=1, cwd=tmpdir)
 
     assert "Command for oauth2 operation not specified." in output.stderr
 
     # Return code assertion happens inside the call.
-    sema4ai_action_server_run(["oauth2", "sema4ai-config"], returncode=0, cwd=tmpdir)
+    actions_server_run(["oauth2", "sema4ai-config"], returncode=0, cwd=tmpdir)

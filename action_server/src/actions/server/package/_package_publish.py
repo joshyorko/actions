@@ -33,8 +33,8 @@ class ActionPackageEntity(ConfiguredBaseModel):
 
 
 def list_organizations(access_credentials: str, hostname: str) -> List[Organization]:
-    from sema4ai.action_server._errors_action_server import ActionServerValidationError
-    from sema4ai.action_server.package._package_publish_api import (
+    from actions.server._errors_action_server import ActionServerValidationError
+    from actions.server.package._package_publish_api import (
         LIST_ORGANIZATIONS_URL,
         request_organizations,
     )
@@ -71,7 +71,7 @@ def upload_package(
     access_credentials: str,
     hostname: str,
 ) -> ActionPackageEntity:
-    from sema4ai.action_server.package._package_publish_api import (
+    from actions.server.package._package_publish_api import (
         create_package,
         get_upload_url,
         mark_upload_completed,
@@ -93,7 +93,7 @@ def upload_package(
 def get_package_status(
     organization_id: str, package_id: str, access_credentials: str, hostname: str
 ) -> ActionPackageEntity:
-    from sema4ai.action_server.package._package_publish_api import (
+    from actions.server.package._package_publish_api import (
         request_package_status,
     )
 
@@ -111,7 +111,7 @@ def update_package_changelog(
     hostname: str,
     changelog: str,
 ) -> ActionPackageEntity:
-    from sema4ai.action_server.package._package_publish_api import (
+    from actions.server.package._package_publish_api import (
         request_package_changelog_update,
     )
 

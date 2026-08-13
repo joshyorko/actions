@@ -9,7 +9,7 @@ import pytest
 def test_action_server_tool(tmpdir):
     import sys
 
-    from sema4ai.common.tools import ActionServerTool
+    from actions.server._common.tools import ActionServerTool
 
     suffix = ".exe" if sys.platform == "win32" else ""
 
@@ -38,7 +38,7 @@ def test_action_server_tool(tmpdir):
 def setup_logging():
     import logging
 
-    logger = logging.getLogger("sema4ai.common.tools")
+    logger = logging.getLogger("actions.server._common.tools")
     logger.setLevel(logging.DEBUG)
     handler = logging.StreamHandler()
     handler.setLevel(logging.DEBUG)
@@ -54,7 +54,7 @@ def setup_logging():
 def test_agent_cli_tool(tmpdir):
     import sys
 
-    from sema4ai.common.tools import AgentCliTool
+    from actions.server._common.tools import AgentCliTool
 
     suffix = ".exe" if sys.platform == "win32" else ""
 
@@ -74,7 +74,7 @@ def test_agent_cli_tool(tmpdir):
 def test_rcc_tool(tmpdir):
     import sys
 
-    from sema4ai.common.tools import RccTool
+    from actions.server._common.tools import RccTool
 
     suffix = ".exe" if sys.platform == "win32" else ""
 
@@ -102,7 +102,7 @@ def test_rcc_tool(tmpdir):
 def test_data_server_tool(tmpdir):
     import sys
 
-    from sema4ai.common.tools import DataServerTool
+    from actions.server._common.tools import DataServerTool
 
     suffix = ".exe" if sys.platform == "win32" else ""
 

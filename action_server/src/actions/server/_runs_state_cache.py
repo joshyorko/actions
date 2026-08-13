@@ -28,7 +28,7 @@ class RunChangeEvent:
 
 class RunRuntimeInfo:
     def __init__(self, run_id: str):
-        from sema4ai.action_server._robo_utils.callback import Callback
+        from actions.server._robo_utils.callback import Callback
 
         self._run_id = run_id
         self._canceled = False
@@ -149,7 +149,7 @@ class RunsState:
         return runtime_info
 
     def on_run_changed(self, run: "Run", changes: Dict[str, Any]):
-        from sema4ai.action_server._models import RunStatus
+        from actions.server._models import RunStatus
 
         # Semaphore is acquired internally in this case.
         from ._models import Run

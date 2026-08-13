@@ -3,7 +3,7 @@ import json
 import os
 from typing import Any, Dict, List, Optional
 
-from sema4ai.actions._protocols import JSONValue
+from actions._protocols import JSONValue
 
 
 def _get_str_list_from_env(env_name: str, env) -> List[str]:
@@ -268,7 +268,7 @@ def encrypt_simple(data: JSONValue, key: bytes = b"") -> str:
     Returns:
         A base-64 string with the encrypted contents.
     """
-    from sema4ai.action_server._storage import get_key
+    from actions.server._storage import get_key
 
     if not key:
         key = get_key()
@@ -283,7 +283,7 @@ def decrypt_simple(data: str, key: bytes = b"") -> JSONValue:
 
     If the key is not passed, the default storage key is used.
     """
-    from sema4ai.action_server._storage import get_key
+    from actions.server._storage import get_key
 
     if not key:
         key = get_key()

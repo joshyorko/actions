@@ -8,13 +8,13 @@ from typing import Literal
 
 from termcolor import colored
 
-from sema4ai.action_server._robo_utils.callback import Callback, OnExitContextManager
-from sema4ai.action_server.vendored_deps.termcolors import bold_yellow
+from actions.server._robo_utils.callback import Callback, OnExitContextManager
+from actions.server.vendored_deps.termcolors import bold_yellow
 
 if typing.TYPE_CHECKING:
-    from sema4ai.actions._protocols import ActionsListActionTypedDict
+    from actions._protocols import ActionsListActionTypedDict
 
-    from sema4ai.action_server._models import ActionPackage
+    from actions.server._models import ActionPackage
 
 log = logging.getLogger(__name__)
 
@@ -73,7 +73,7 @@ def import_action_package(
         environment.
     """
 
-    from sema4ai.action_server._whitelist import accept_action_package
+    from actions.server._whitelist import accept_action_package
 
     from ._action_package_handler import ActionPackageHandler
     from ._errors_action_server import ActionServerValidationError
@@ -126,9 +126,9 @@ def import_action_package(
     env = build_python_launch_env(use_env)
 
     try:
-        # any sema4ai.actions version will do at this point.
+        # any actions version will do at this point.
         actions_library_version = _get_actions_version(
-            env, import_path, "sema4ai.actions"
+            env, import_path, "actions"
         )
     except Exception:
         ### TODO: Remove in the future!
@@ -141,10 +141,10 @@ def import_action_package(
             )
             log.critical(
                 "Important: 'robocorp.actions' is deprecated!\n"
-                "Please change the 'robocorp-actions' dependency to 'sema4ai-actions'\n"
+                "Please change the 'robocorp-actions' dependency to 'actions-core'\n"
                 "in your package.yaml\n"
                 "(note: the public API should be the same with the exception that the\n"
-                "imports should come from 'sema4ai.actions' instead of 'robocorp.actions).\n"
+                "imports should come from 'actions' instead of 'robocorp.actions).\n"
                 "On future versions of the Action Server, using 'robocorp-actions' will no\n"
                 "longer be supported.\n"
             )
@@ -153,7 +153,7 @@ def import_action_package(
             pass
 
         if not found_actions:
-            raise  # The sema4ai.actions error, not the robocorp.actions one.
+            raise  # The actions error, not the robocorp.actions one.
 
         expected_version = (0, 0, 7)
         expected_version_str = ".".join(str(x) for x in expected_version)
@@ -202,9 +202,9 @@ def import_action_package(
 
 
 def _get_actions_version(
-    env, cwd, libname: Literal["robocorp.actions"] | Literal["sema4ai.actions"]
+    env, cwd, libname: Literal["robocorp.actions"] | Literal["actions"]
 ) -> tuple[int, ...]:
-    from sema4ai.action_server._settings import get_python_exe_from_env
+    from actions.server._settings import get_python_exe_from_env
 
     python = get_python_exe_from_env(env)
     cmdline: list[str] = [
@@ -249,13 +249,13 @@ def _add_actions_to_db(
 ):
     from dataclasses import asdict
 
-    from sema4ai.actions._lint_action import format_lint_results
+    from actions._lint_action import format_lint_results
 
-    from sema4ai.action_server._errors_action_server import ActionServerValidationError
-    from sema4ai.action_server._gen_ids import gen_uuid
-    from sema4ai.action_server._models import Action, ActionPackage, get_db
-    from sema4ai.action_server._settings import get_python_exe_from_env
-    from sema4ai.action_server._whitelist import accept_action
+    from actions.server._errors_action_server import ActionServerValidationError
+    from actions.server._gen_ids import gen_uuid
+    from actions.server._models import Action, ActionPackage, get_db
+    from actions.server._settings import get_python_exe_from_env
+    from actions.server._whitelist import accept_action
 
     python = get_python_exe_from_env(env)
 
@@ -267,7 +267,7 @@ def _add_actions_to_db(
     if skip_lint:
         code = f"""
 try:
-    from sema4ai.actions import cli
+    from actions import cli
 except:
     from robocorp.actions import cli
 
@@ -276,7 +276,7 @@ cli.main(["{command}", "--skip-lint"])
     else:
         code = f"""
 try:
-    from sema4ai.actions import cli
+    from actions import cli
 except:
     from robocorp.actions import cli
 
@@ -337,24 +337,24 @@ cli.main(["{command}"])
             metadata_result = actions_list_result
             if not isinstance(metadata_result, dict):
                 raise RuntimeError(
-                    f"Expected sema4ai.actions metadata to provide dictionary. Found: >>{stdout!r}<<"
+                    f"Expected actions metadata to provide dictionary. Found: >>{stdout!r}<<"
                 )
             actions_list_result = metadata_result.get("actions")
             if not isinstance(actions_list_result, list):
                 raise RuntimeError(
-                    f"Expected sema4ai.actions metadata to provide dictionary with 'actions' key. Found: >>{stdout!r}<<"
+                    f"Expected actions metadata to provide dictionary with 'actions' key. Found: >>{stdout!r}<<"
                 )
             data_package_metadata = metadata_result.get("data")
             if data_package_metadata is not None:
                 if not isinstance(data_package_metadata, dict):
                     raise RuntimeError(
-                        f"Expected sema4ai.actions metadata to provide dictionary with 'data' key. Found: >>{stdout!r}<<"
+                        f"Expected actions metadata to provide dictionary with 'data' key. Found: >>{stdout!r}<<"
                     )
 
         elif command == "list":
             if not isinstance(actions_list_result, list):
                 raise RuntimeError(
-                    f"Expected sema4ai.actions list to provide a list. Found: >>{stdout!r}<<"
+                    f"Expected actions list to provide a list. Found: >>{stdout!r}<<"
                 )
 
         hook_on_actions_list(

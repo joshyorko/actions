@@ -3,10 +3,10 @@ def test_data_package_metadata(datadir, data_regression):
 
     from action_server_tests.fixtures import fix_metadata, get_in_resources
 
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
     data_package = get_in_resources("data_package")
-    output = sema4ai_action_server_run(
+    output = actions_server_run(
         [
             "package",
             "metadata",

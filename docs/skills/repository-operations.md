@@ -51,6 +51,22 @@ Prefer evidence in this order:
 
 Do not convert a commit message, design proposal, or skipped test into a current-behavior claim.
 
+## Clean-break package boundaries
+
+The source package identities are `actions-core` (`actions` and `actions.mcp`),
+`actions-runtime` (`actions.server`), `actions-http-helper` (`actions_http`),
+and `actions-work-items` (`actions.work_items`). Core owns the sole
+`actions/__init__.py`; Work Items must omit that file from its wheel so the two
+distributions can be installed in either order. Runtime-only common and build
+helpers live privately under `actions.server._common` and
+`actions.server._build_common`; they are not standalone distributions.
+
+The devinstall dependency walker uses an explicit distribution-to-directory
+map rather than stripping a vendor prefix. When a package identity or source
+namespace changes, do not regenerate publication-dependent locks or Runtime
+freeze inputs until the renamed distributions have been published; use source
+imports, wheel contents, and package-local tests for the interim gate.
+
 ## Development Loop
 
 1. Inspect branch/status and package configuration.

@@ -27,10 +27,7 @@ updates:
   - action_server
   - actions
   - actions-http-helper
-  - build_common
-  - common
   - devutils
-  - mcp
   - templates/advanced
   - work-items
   schedule:

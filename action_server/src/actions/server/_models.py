@@ -6,10 +6,10 @@ from typing import Iterator, Optional, Union
 from pydantic import BaseModel
 from pydantic.dataclasses import dataclass
 
-from sema4ai.action_server._database import DBRules
+from actions.server._database import DBRules
 
 if typing.TYPE_CHECKING:
-    from sema4ai.action_server._database import Database
+    from actions.server._database import Database
 
 
 _db_rules = DBRules()
@@ -415,7 +415,7 @@ def run_status_to_str(run_status: int) -> str:
 
 
 def get_all_model_classes():
-    from sema4ai.action_server.migrations import Migration
+    from actions.server.migrations import Migration
 
     return [
         Migration,
@@ -449,7 +449,7 @@ def load_db(db_path: Union[Path, str]) -> Iterator["Database"]:
     models, besides setting this db as the global db for the duration
     of the context manager.
     """
-    from sema4ai.action_server._database import Database
+    from actions.server._database import Database
 
     global _global_db
 
@@ -472,7 +472,7 @@ def create_db(db_path: Union[Path, str]) -> Iterator["Database"]:
     Creates the database and sets this db as the global db for the duration
     of the context manager.
     """
-    from sema4ai.action_server.migrations import (
+    from actions.server.migrations import (
         CURRENT_VERSION,
         MIGRATION_ID_TO_NAME,
         Migration,

@@ -13,7 +13,7 @@ from typing import List
 
 from fastapi.routing import APIRouter
 
-from sema4ai.action_server._models import RunStatus, get_db
+from actions.server._models import RunStatus, get_db
 
 log = logging.getLogger(__name__)
 analytics_api_router = APIRouter(prefix="/api/analytics")

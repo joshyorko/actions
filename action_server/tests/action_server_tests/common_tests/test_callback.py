@@ -1,5 +1,5 @@
 def test_callback():
-    from sema4ai.common.callback import Callback
+    from actions.server._common.callback import Callback
 
     callback = Callback()
 
@@ -15,7 +15,7 @@ def test_callback():
 
 
 def test_callback_reverse():
-    from sema4ai.common.callback import Callback
+    from actions.server._common.callback import Callback
 
     callback = Callback(reversed=True)
 

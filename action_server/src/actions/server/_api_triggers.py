@@ -152,7 +152,7 @@ class SecretResponse(BaseModel):
 
 def _get_webhook_base_url() -> str:
     """Get the base URL for webhook endpoints."""
-    from sema4ai.action_server._settings import get_settings
+    from actions.server._settings import get_settings
 
     settings = get_settings()
     base_url = settings.base_url or settings.server_url
@@ -206,7 +206,7 @@ async def list_triggers(
     action_id: Optional[str] = None,
 ):
     """List all triggers with optional filters."""
-    from sema4ai.action_server._models import Action, Trigger, get_db
+    from actions.server._models import Action, Trigger, get_db
 
     db = get_db()
     with db.connect():
@@ -257,10 +257,10 @@ async def list_triggers(
 @triggers_api_router.post("", response_model=TriggerResponse)
 async def create_trigger(request: TriggerCreateRequest):
     """Create a new trigger."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._gen_ids import gen_uuid
-    from sema4ai.action_server._models import Action, Trigger, get_db
-    from sema4ai.action_server._triggers import get_trigger_engine
+    from actions.server._database import datetime_to_str
+    from actions.server._gen_ids import gen_uuid
+    from actions.server._models import Action, Trigger, get_db
+    from actions.server._triggers import get_trigger_engine
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -318,7 +318,7 @@ async def create_trigger(request: TriggerCreateRequest):
 @triggers_api_router.get("/{trigger_id}", response_model=TriggerResponse)
 async def get_trigger(trigger_id: str):
     """Get a specific trigger by ID."""
-    from sema4ai.action_server._models import Action, Trigger, get_db
+    from actions.server._models import Action, Trigger, get_db
 
     db = get_db()
     with db.connect():
@@ -349,8 +349,8 @@ async def get_trigger(trigger_id: str):
 @triggers_api_router.patch("/{trigger_id}", response_model=TriggerResponse)
 async def update_trigger(trigger_id: str, request: TriggerUpdateRequest):
     """Update an existing trigger."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._models import Action, Trigger, get_db
+    from actions.server._database import datetime_to_str
+    from actions.server._models import Action, Trigger, get_db
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -430,7 +430,7 @@ async def update_trigger(trigger_id: str, request: TriggerUpdateRequest):
 @triggers_api_router.delete("/{trigger_id}")
 async def delete_trigger(trigger_id: str):
     """Delete a trigger."""
-    from sema4ai.action_server._models import Trigger, TriggerInvocation, get_db
+    from actions.server._models import Trigger, TriggerInvocation, get_db
 
     db = get_db()
     with db.connect():
@@ -458,7 +458,7 @@ async def delete_trigger(trigger_id: str):
 )
 async def list_invocations(trigger_id: str, limit: int = 50, offset: int = 0):
     """Get invocation history for a trigger."""
-    from sema4ai.action_server._models import Trigger, TriggerInvocation, get_db
+    from actions.server._models import Trigger, TriggerInvocation, get_db
 
     db = get_db()
     with db.connect():
@@ -500,7 +500,7 @@ async def list_invocations(trigger_id: str, limit: int = 50, offset: int = 0):
 @triggers_api_router.get("/{trigger_id}/secret", response_model=SecretResponse)
 async def get_trigger_secret(trigger_id: str):
     """Get the webhook secret for a trigger."""
-    from sema4ai.action_server._models import Trigger, get_db
+    from actions.server._models import Trigger, get_db
 
     db = get_db()
     with db.connect():
@@ -524,9 +524,9 @@ async def get_trigger_secret(trigger_id: str):
 @triggers_api_router.post("/{trigger_id}/regenerate-secret", response_model=SecretResponse)
 async def regenerate_trigger_secret(trigger_id: str):
     """Regenerate the webhook secret for a trigger."""
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._models import Trigger, get_db
-    from sema4ai.action_server._triggers import get_trigger_engine
+    from actions.server._database import datetime_to_str
+    from actions.server._models import Trigger, get_db
+    from actions.server._triggers import get_trigger_engine
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -570,7 +570,7 @@ async def invoke_webhook(trigger_id: str, request: Request):
 
     This endpoint is called by external systems to invoke a trigger.
     """
-    from sema4ai.action_server._triggers import get_trigger_engine
+    from actions.server._triggers import get_trigger_engine
 
     # Get payload
     content_type = request.headers.get("content-type", "")
@@ -637,7 +637,7 @@ async def test_trigger(trigger_id: str, payload: Optional[Dict[str, Any]] = None
 
     This is for testing triggers from the UI without needing external calls.
     """
-    from sema4ai.action_server._triggers import get_trigger_engine
+    from actions.server._triggers import get_trigger_engine
 
     engine = get_trigger_engine()
     result = await engine.handle_webhook(

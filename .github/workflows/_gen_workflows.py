@@ -54,32 +54,43 @@ def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
 
     contents: dict = tomlkit.loads(root_pyproject.read_bytes().decode("utf-8"))
 
-    dependencies = list(contents["tool"]["poetry"]["dependencies"])
-    try:
-        dependencies.extend(contents["tool"]["poetry"]["group"]["dev"]["dependencies"])
-    except Exception:
-        pass  # Ignore if it's not there.
+    poetry = contents.get("tool", {}).get("poetry", {})
+    project = contents.get("project", {})
+    dependencies = list(poetry.get("dependencies", {}))
+    dependencies.extend(poetry.get("group", {}).get("dev", {}).get("dependencies", {}))
+    dependencies.extend(
+        dependency.partition(">=")[0].partition("[")[0].strip()
+        for dependency in project.get("dependencies", [])
+    )
+    for optional in project.get("optional-dependencies", {}).values():
+        dependencies.extend(
+            dependency.partition(">=")[0].partition("[")[0].strip()
+            for dependency in optional
+        )
+    owned_directories = {
+        "actions-core": "actions",
+        "actions-runtime": "action_server",
+        "actions-http-helper": "actions-http-helper",
+        "actions-work-items": "work-items",
+        "actions-local-devutils": "devutils",
+    }
     for key in dependencies:
-        if key.startswith("sema4ai-") or key == "actions-http-helper":
-            if key == "sema4ai-data":
-                continue
-            if key == "actions-http-helper":
-                dep_name = key
-            else:
-                dep_name = key[len("sema4ai-") :].replace("-", "_")
-            dep_pyproject = root_pyproject.parent.parent / dep_name / "pyproject.toml"
-            assert dep_pyproject.exists(), f"Expected {dep_pyproject} to exist."
-            if dep_pyproject not in found:
-                found.add(dep_pyproject)
-                yield dep_pyproject
-                yield from collect_deps_pyprojects(dep_pyproject, found)
+        directory = owned_directories.get(key)
+        if directory is None:
+            continue
+        dep_pyproject = root_pyproject.parent.parent / directory / "pyproject.toml"
+        assert dep_pyproject.exists(), f"Expected {dep_pyproject} to exist."
+        if dep_pyproject not in found:
+            found.add(dep_pyproject)
+            yield dep_pyproject
+            yield from collect_deps_pyprojects(dep_pyproject, found)
 
 
 def get_python_version(pyproject):
     import tomlkit
 
     contents: dict = tomlkit.loads(pyproject.read_bytes().decode("utf-8"))
-    dependencies = contents["tool"]["poetry"]["dependencies"]
+    dependencies = contents.get("tool", {}).get("poetry", {}).get("dependencies", {})
     for key, value in dependencies.items():
         if key == "python":
             version = value.strip("^")
@@ -96,6 +107,11 @@ def get_python_version(pyproject):
                 7,
             ), f"Bad version: {version}. pyproject: {pyproject}"
             return version
+    requires_python = contents.get("project", {}).get("requires-python")
+    if requires_python:
+        version = requires_python.lstrip(">=").split(",")[0]
+        assert tuple(int(x) for x in version.split(".")) > (3, 7)
+        return version
     raise RuntimeError(f"Unable to get python version in: {pyproject}")
 
 
@@ -537,7 +553,7 @@ class BaseTests(BaseWorkflow):
 
 class ActionServerTests(BaseTests):
     name = "Action Server Tests"
-    target = "action_server_tests.yml"
+    target = "actions_runtime_tests.yml"
     project_name = "action_server"
     require_node = True
     require_go = True
@@ -582,7 +598,7 @@ class ActionServerTests(BaseTests):
 
 class ActionServerPyPiRelease(BaseWorkflow):
     name = "Action Server PYPI Release"
-    target = "action_server_pypi_release.yml"
+    target = "actions_runtime_pypi_release.yml"
     project_name = "action_server"
     fail_fast = True
 
@@ -591,7 +607,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "tags": ["sema4ai-action_server-*"],
+                    "tags": ["actions-runtime-*"],
                     "branches": ["*-beta"],
                 },
             }
@@ -633,7 +649,7 @@ rm src/sema4ai/bin/rcc* -f
         return {
             "name": "Upload to PyPI",
             "run": f"""
-{run_in_env}poetry config pypi-token.pypi  ${{{{ secrets.PYPI_TOKEN_SEMA4AI_ACTION_SERVER }}}}
+{run_in_env}poetry config pypi-token.pypi  ${{{{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}}}
 {run_in_env}poetry publish
 """,
             "env": {
@@ -662,7 +678,7 @@ rm src/sema4ai/bin/rcc* -f
 
 class ActionServerBinaryRelease(BaseWorkflow):
     name = "Action Server BINARY Release"
-    target = "action_server_binary_release.yml"
+    target = "actions_runtime_binary_release.yml"
     project_name = "action_server"
     fail_fast = True
 
@@ -671,7 +687,7 @@ class ActionServerBinaryRelease(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "tags": ["sema4ai-action_server-*"],
+                    "tags": ["actions-runtime-*"],
                     "branches": ["*-beta"],
                 },
             }
@@ -1008,7 +1024,7 @@ fi
 
 class ActionServerManylinuxRelease(BaseWorkflow):
     name = "Action Server MANYLINUX Release"
-    target = "action_server_manylinux_release.yml"
+    target = "actions_runtime_manylinux_release.yml"
     project_name = "action_server"
     fail_fast = True
 
@@ -1017,7 +1033,7 @@ class ActionServerManylinuxRelease(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "tags": ["sema4ai-action_server-*"],
+                    "tags": ["actions-runtime-*"],
                     "branches": ["*-beta"],
                 },
             }
@@ -1062,7 +1078,7 @@ class ActionServerManylinuxRelease(BaseWorkflow):
             "if": NOT_BETA_IF_CLAUSE,
             "env": {
                 "TWINE_USERNAME": "__token__",
-                "TWINE_PASSWORD": "${{ secrets.PYPI_TOKEN_SEMA4AI_ACTION_SERVER }}",
+                "TWINE_PASSWORD": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}",
             },
         }
 
@@ -1086,21 +1102,9 @@ class ActionServerManylinuxRelease(BaseWorkflow):
 
 class ActionsTests(BaseTests):
     name = "Actions Tests"
-    target = "actions_tests.yml"
+    target = "actions_core_tests.yml"
     project_name = "actions"
     require_node = True
-
-
-class CommonTests(BaseTests):
-    name = "Common Tests"
-    target = "common_tests.yml"
-    project_name = "common"
-
-
-class MCPTests(BaseTests):
-    name = "MCP Tests"
-    target = "mcp_tests.yml"
-    project_name = "mcp"
 
 
 class HttpHelperTests(BaseTests):
@@ -1113,8 +1117,6 @@ TARGETS = [
     ActionServerTests(),
     ActionsTests(),
     HttpHelperTests(),
-    CommonTests(),
-    MCPTests(),
     ActionServerPyPiRelease(),
     ActionServerBinaryRelease(),
     ActionServerManylinuxRelease(),

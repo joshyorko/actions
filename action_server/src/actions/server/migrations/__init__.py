@@ -18,7 +18,7 @@ from typing import Dict, Optional, Union
 log = logging.getLogger(__name__)
 
 if typing.TYPE_CHECKING:
-    from sema4ai.action_server._database import Database
+    from actions.server._database import Database
 
 MIGRATION_ID_TO_NAME: Dict[int, str] = {
     # we'll look for a 'migration_initial' module based on this.
@@ -56,7 +56,7 @@ def _migrate_to(db: "Database", db_migration_version: int) -> None:
     from importlib import import_module
 
     name = MIGRATION_ID_TO_NAME[db_migration_version]
-    mod = import_module(f"sema4ai.action_server.migrations.migration_{name}")
+    mod = import_module(f"actions.server.migrations.migration_{name}")
     mod.migrate(db)
 
 
@@ -91,8 +91,8 @@ def migrate_db(
 
     shutil.copyfile(path, backup_file)
 
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import get_all_model_classes
+    from actions.server._database import Database
+    from actions.server._models import get_all_model_classes
 
     db = Database(db_path)
     with db.connect():
@@ -156,7 +156,7 @@ def _db_migration_status(db: "Database") -> MigrationStatus:
 
 
 def db_migration_status(db_path: Union[Path, str]) -> MigrationStatus:
-    from sema4ai.action_server._database import Database
+    from actions.server._database import Database
 
     if db_path == ":memory:":
         raise RuntimeError("Migration support not available for in-memory database.")

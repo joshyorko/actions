@@ -63,7 +63,7 @@ def test_import_gallery_action_packages(data_regression, tmpdir):
     import os
     from pathlib import Path
 
-    from sema4ai.common.gallery import GalleryActionPackages
+    from actions.server._common.gallery import GalleryActionPackages
 
     gallery_actions = GalleryActionPackages(example_metadata)
     found = gallery_actions.list_packages()

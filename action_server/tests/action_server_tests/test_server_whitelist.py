@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
-from sema4ai.action_server._whitelist import accept_action
+from actions.server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._whitelist import accept_action
 
 
 def test_whitelist_exact_match():
@@ -46,10 +46,10 @@ def test_whitelist_on_import(
     action_server_datadir: Path,
     client: ActionServerClient,
 ) -> None:
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import Action, load_db
+    from actions.server._database import Database
+    from actions.server._models import Action, load_db
 
     action_server_datadir.mkdir(parents=True, exist_ok=True)
     db_path = action_server_datadir / "server.db"
@@ -59,7 +59,7 @@ def test_whitelist_on_import(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -71,7 +71,7 @@ def calculator_subtract(v1: float, v2: float) -> float:
 """
     )
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={calculator.parent}",
@@ -106,7 +106,7 @@ def test_whitelist_on_start(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -141,13 +141,13 @@ def test_whitelist_on_start_run(
 ) -> None:
     from action_server_tests.fixtures import fix_openapi_json
 
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
     calculator = Path(tmpdir) / "v1" / "calculator" / "action_calculator.py"
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -159,7 +159,7 @@ def calculator_subtract(v1: float, v2: float) -> float:
 """
     )
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={calculator.parent}",

@@ -1,6 +1,6 @@
 import logging
 
-from sema4ai.action_server._protocols import ArgumentsNamespaceDatadir
+from actions.server._protocols import ArgumentsNamespaceDatadir
 
 log = logging.getLogger(__name__)
 
@@ -23,7 +23,7 @@ def _clear_all_actions():
     Returns:
         None
     """
-    from sema4ai.action_server._models import Action, get_db
+    from actions.server._models import Action, get_db
 
     try:
         db = get_db()

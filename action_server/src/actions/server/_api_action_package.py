@@ -4,7 +4,7 @@ from typing import List
 
 from fastapi.routing import APIRouter
 
-from sema4ai.action_server._models import Action, ActionPackage
+from actions.server._models import Action, ActionPackage
 
 action_package_api_router = APIRouter(prefix="/api/actionPackages")
 log = logging.getLogger(__name__)
@@ -22,9 +22,9 @@ class ActionPackageApi:
 def list_action_packages():
     import yaml
 
-    from sema4ai.action_server._actions_run_helpers import get_action_package_cwd
-    from sema4ai.action_server._models import get_db
-    from sema4ai.action_server._settings import get_settings
+    from actions.server._actions_run_helpers import get_action_package_cwd
+    from actions.server._models import get_db
+    from actions.server._settings import get_settings
 
     db = get_db()
     settings = get_settings()

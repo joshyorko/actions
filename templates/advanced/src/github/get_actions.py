@@ -7,7 +7,7 @@ https://github.com/sema4ai/actions/blob/master/README.md
 """
 
 import requests
-from sema4ai.actions import ActionError, Response, Secret, action
+from actions import ActionError, Response, Secret, action
 
 from .models import RepositoryInfo
 

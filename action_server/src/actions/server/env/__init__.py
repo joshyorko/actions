@@ -1,10 +1,10 @@
 import logging
 import typing
 
-from sema4ai.action_server._protocols import ArgumentsNamespace, ArgumentsNamespaceEnv
+from actions.server._protocols import ArgumentsNamespace, ArgumentsNamespaceEnv
 
 if typing.TYPE_CHECKING:
-    from sema4ai.action_server._rcc import Rcc
+    from actions.server._rcc import Rcc
 
 log = logging.getLogger(__name__)
 

@@ -1,5 +1,5 @@
-from sema4ai.actions import Request, action
-from sema4ai.actions._secret import Secret
+from actions import Request, action
+from actions._secret import Secret
 
 
 @action

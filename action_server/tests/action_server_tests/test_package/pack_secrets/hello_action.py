@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from sema4ai.actions import Secret, SecretSpec, action
+from actions import Secret, SecretSpec, action
 
 AnnotatedSecret = Annotated[Secret, SecretSpec(tag="special-secret")]
 DocumentIntelligenceSecret = Annotated[Secret, SecretSpec(tag="document-intelligence")]

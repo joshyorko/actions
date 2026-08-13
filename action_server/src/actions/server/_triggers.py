@@ -51,9 +51,9 @@ class TriggerEngine:
         Returns:
             Dict with status and any created run/work_item IDs
         """
-        from sema4ai.action_server._database import datetime_to_str
-        from sema4ai.action_server._gen_ids import gen_uuid
-        from sema4ai.action_server._models import (
+        from actions.server._database import datetime_to_str
+        from actions.server._gen_ids import gen_uuid
+        from actions.server._models import (
             Trigger,
             TriggerInvocation,
             TriggerInvocationStatus,
@@ -443,8 +443,8 @@ class TriggerEngine:
         error_message: Optional[str] = None,
     ) -> None:
         """Record a trigger invocation in the database."""
-        from sema4ai.action_server._database import datetime_to_str
-        from sema4ai.action_server._models import TriggerInvocation, get_db
+        from actions.server._database import datetime_to_str
+        from actions.server._models import TriggerInvocation, get_db
 
         db = get_db()
 
@@ -480,12 +480,12 @@ class TriggerEngine:
         inputs: Dict[str, Any],
     ) -> str:
         """Create an action run for a trigger."""
-        from sema4ai.action_server._actions_run import (
+        from actions.server._actions_run import (
             _create_run,
             _create_run_artifacts_dir,
         )
-        from sema4ai.action_server._gen_ids import gen_uuid
-        from sema4ai.action_server._models import Action, get_db
+        from actions.server._gen_ids import gen_uuid
+        from actions.server._models import Action, get_db
 
         if not trigger.action_id:
             raise ValueError("Trigger has no action_id configured")
@@ -546,8 +546,8 @@ class TriggerEngine:
         inputs["_triggered_at"] = datetime.now(timezone.utc).isoformat()
 
         try:
-            from sema4ai.action_server._settings import get_settings
-            from sema4ai.action_server._work_items_import import load_work_items_types
+            from actions.server._settings import get_settings
+            from actions.server._work_items_import import load_work_items_types
 
             # Create adapter targeting the action server's work items storage
             settings = get_settings()

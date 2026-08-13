@@ -164,7 +164,7 @@ def _os_exit(retcode: int):
                 log.debug(f"Exception when collecting process names: {e}")
                 names = "<unable to get>"
 
-            log.info(f"sema4ai-action-server killing processes after run: {names}")
+            log.info(f"actions-runtime killing processes after run: {names}")
             for p in children_processes:
                 try:
                     p.kill()

@@ -1,5 +1,5 @@
 def test_resource_template_matches():
-    from sema4ai.action_server.mcp.setup_mcp_server_from_actions import (
+    from actions.server.mcp.setup_mcp_server_from_actions import (
         McpServerSetupHelper,
     )
 
@@ -31,8 +31,8 @@ def test_collect_and_call_resource():
     from action_server_tests.fixtures import run_async_in_new_thread
     from pydantic.networks import AnyUrl
 
-    from sema4ai.action_server._models import Action
-    from sema4ai.action_server.mcp.setup_mcp_server_from_actions import (
+    from actions.server._models import Action
+    from actions.server.mcp.setup_mcp_server_from_actions import (
         McpServerSetupHelper,
     )
 
@@ -98,8 +98,8 @@ def test_collect_and_call_prompt():
 
     from action_server_tests.fixtures import run_async_in_new_thread
 
-    from sema4ai.action_server._models import Action
-    from sema4ai.action_server.mcp.setup_mcp_server_from_actions import (
+    from actions.server._models import Action
+    from actions.server.mcp.setup_mcp_server_from_actions import (
         McpServerSetupHelper,
     )
 

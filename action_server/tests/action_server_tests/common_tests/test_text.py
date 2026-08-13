@@ -1,5 +1,5 @@
 def test_slugify():
-    from sema4ai.common.text import slugify
+    from actions.server._common.text import slugify
 
     assert slugify("ação", allow_unicode=True) == "ação"
     assert slugify("ação", allow_unicode=False) == "acao"

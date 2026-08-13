@@ -10,8 +10,8 @@ from typing import Literal, Optional, Sequence, Union
 
 from termcolor import colored
 
-from sema4ai.action_server._protocols import IBeforeStartCallback
-from sema4ai.action_server.vendored_deps.termcolors import bold_red
+from actions.server._protocols import IBeforeStartCallback
+from actions.server.vendored_deps.termcolors import bold_red
 
 from . import __version__
 from ._errors_action_server import ActionServerValidationError
@@ -26,8 +26,8 @@ from ._protocols import (
 )
 
 if typing.TYPE_CHECKING:
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._rcc import Rcc
+    from actions.server._database import Database
+    from actions.server._rcc import Rcc
 
     from ._settings import Settings
 
@@ -64,7 +64,7 @@ def str2bool(v):
 
 
 def _add_start_server_command(command_parser, defaults):
-    from sema4ai.action_server._cli_helpers import add_data_args, add_verbose_args
+    from actions.server._cli_helpers import add_data_args, add_verbose_args
 
     start_parser = command_parser.add_parser(
         "start",
@@ -266,7 +266,7 @@ def _add_kill_lock_holder_args(parser, defaults):
 
 
 def _add_migrate_command(command_subparser, defaults):
-    from sema4ai.action_server._cli_helpers import add_data_args, add_verbose_args
+    from actions.server._cli_helpers import add_data_args, add_verbose_args
 
     migration_parser = command_subparser.add_parser(
         "migrate",
@@ -278,7 +278,7 @@ def _add_migrate_command(command_subparser, defaults):
 
 
 def _add_import_command(command_subparser, defaults):
-    from sema4ai.action_server._cli_helpers import add_data_args, add_verbose_args
+    from actions.server._cli_helpers import add_data_args, add_verbose_args
 
     import_parser = command_subparser.add_parser(
         "import",
@@ -299,7 +299,7 @@ def _add_import_command(command_subparser, defaults):
 
 
 def _add_devenv_command(command_subparser, defaults):
-    from sema4ai.action_server._cli_helpers import add_datadir_arg, add_verbose_args
+    from actions.server._cli_helpers import add_datadir_arg, add_verbose_args
 
     # Ok, now add the `devenv` command. It should then have a
     # `task` subcommand which will receive the task name to run.
@@ -327,7 +327,7 @@ def _add_devenv_command(command_subparser, defaults):
 
 
 def _add_new_command(command_subparser, defaults):
-    from sema4ai.action_server._cli_helpers import (
+    from actions.server._cli_helpers import (
         add_json_output_args,
         add_verbose_args,
     )
@@ -366,7 +366,7 @@ def _add_new_command(command_subparser, defaults):
 
 
 def _add_cloud_command(command_subparser, defaults):
-    from sema4ai.action_server._cli_helpers import (
+    from actions.server._cli_helpers import (
         add_json_output_args,
         add_login_args,
         add_verbose_args,
@@ -401,7 +401,7 @@ def _add_cloud_command(command_subparser, defaults):
 
 
 def _add_oauth2_command(command_subparser, defaults):
-    from sema4ai.action_server._cli_helpers import add_json_output_args
+    from actions.server._cli_helpers import add_json_output_args
 
     oauth2_parser = command_subparser.add_parser(
         "oauth2",
@@ -423,7 +423,7 @@ def _add_oauth2_command(command_subparser, defaults):
 
 
 def _add_datadir_command(command_subparser, defaults):
-    from sema4ai.action_server._cli_helpers import add_data_args, add_verbose_args
+    from actions.server._cli_helpers import add_data_args, add_verbose_args
 
     datadir_parser = command_subparser.add_parser(
         "datadir",
@@ -443,7 +443,7 @@ def _add_datadir_command(command_subparser, defaults):
 
 
 def _create_parser():
-    from sema4ai.action_server.package._package_build_cli import add_package_command
+    from actions.server.package._package_build_cli import add_package_command
 
     from ._settings import Settings
 
@@ -536,7 +536,7 @@ def _setup_global_logging():
 def _setup_stderr_logging(log_level):
     from logging import StreamHandler
 
-    from sema4ai.action_server._robo_utils.log_formatter import (
+    from actions.server._robo_utils.log_formatter import (
         UvicornAccessDisableOAuth2LogFilter,
     )
 
@@ -564,7 +564,7 @@ def _setup_stderr_logging(log_level):
 def _setup_logging(datadir: Path, log_level):
     from logging.handlers import RotatingFileHandler
 
-    from sema4ai.action_server._robo_utils.log_formatter import (
+    from actions.server._robo_utils.log_formatter import (
         UvicornAccessDisableOAuth2LogFilter,
     )
 
@@ -727,8 +727,8 @@ def _main_retcode(
         download_rcc(target=download_args.file, force=True)
         return 0
 
-    from sema4ai.action_server._rcc import initialize_rcc_actions, initialize_rcc_robots
-    from sema4ai.action_server._settings import get_actions_home, get_robots_home
+    from actions.server._rcc import initialize_rcc_actions, initialize_rcc_robots
+    from actions.server._settings import get_actions_home, get_robots_home
 
     rcc_location = download_rcc()
     actions_home = get_actions_home()
@@ -739,19 +739,19 @@ def _main_retcode(
         with initialize_rcc_actions(rcc_location, actions_home) as rcc:
             with initialize_rcc_robots(rcc_location, robots_home):
                 if command == "package":
-                    from sema4ai.action_server.package._package_build_cli import (
+                    from actions.server.package._package_build_cli import (
                         handle_package_command,
                     )
 
                     return handle_package_command(base_args)
 
                 if command == "env":
-                    from sema4ai.action_server.env import handle_env_command
+                    from actions.server.env import handle_env_command
 
                     return handle_env_command(base_args, rcc)
 
                 if command == "cloud":
-                    from sema4ai.action_server._actions_cloud import (
+                    from actions.server._actions_cloud import (
                         handle_cloud_command,
                     )
 
@@ -835,13 +835,13 @@ def _command_requiring_datadir(
     use_db: Optional["Database"] = None,
     before_start: Sequence[IBeforeStartCallback] = (),
 ) -> int:
-    from sema4ai.common.app_mutex import obtain_app_mutex
-    from sema4ai.common.process import kill_subprocesses
+    from actions.server._common.app_mutex import obtain_app_mutex
+    from actions.server._common.process import kill_subprocesses
 
-    from sema4ai.action_server._preload_actions.preload_actions_autoexit import (
+    from actions.server._preload_actions.preload_actions_autoexit import (
         exit_when_pid_exists,
     )
-    from sema4ai.action_server.migrations import MigrationStatus
+    from actions.server.migrations import MigrationStatus
 
     from ._models import Run, RunStatus, run_status_to_str
     from ._runs_state_cache import use_runs_state_ctx
@@ -870,8 +870,8 @@ def _command_requiring_datadir(
         else:
             db_path = settings.db_file
 
-        from sema4ai.action_server._models import create_db, load_db
-        from sema4ai.action_server.migrations import db_migration_status, migrate_db
+        from actions.server._models import create_db, load_db
+        from actions.server.migrations import db_migration_status, migrate_db
 
         is_new = db_path == ":memory:" or not os.path.exists(db_path)
 
@@ -926,7 +926,7 @@ information from this datadir.
                 )
 
             elif command == "datadir":
-                from sema4ai.action_server._datadir_commands import datadir_command
+                from actions.server._datadir_commands import datadir_command
 
                 return datadir_command(
                     typing.cast(ArgumentsNamespaceDatadir, base_args),
@@ -949,7 +949,7 @@ information from this datadir.
                 # This is for subprocesses to automatically exit too (inherited
                 # by the preload actions modules) -- when the action server exits,
                 # all the running actions processes should exit too.
-                os.environ["SEMA4AI_ACTION_SERVER_PARENT_PID"] = str(os.getpid())
+                os.environ["ACTIONS_RUNTIME_PARENT_PID"] = str(os.getpid())
 
                 if start_args.auto_reload:
                     if not start_args.actions_sync:

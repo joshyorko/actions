@@ -25,7 +25,7 @@ def exit_when_pid_exits(
         pid: The pid of the process to watch.
         interval: The interval to check if the process is alive.
     """
-    from sema4ai.common.process import is_process_alive
+    from actions.server._common.process import is_process_alive
 
     pid = int(pid)
     if pid:
@@ -66,7 +66,7 @@ def _os_exit(retcode: int, soft_kill_timeout: float = 2) -> None:
     """
     Kills subprocesses and exits with the given returncode.
     """
-    from sema4ai.common.process import kill_subprocesses
+    from actions.server._common.process import kill_subprocesses
 
     try:
         kill_subprocesses(soft_kill_timeout=soft_kill_timeout)

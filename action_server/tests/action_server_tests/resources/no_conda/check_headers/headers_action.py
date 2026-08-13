@@ -1,6 +1,6 @@
 import json
 
-from sema4ai.actions import Request, action
+from actions import Request, action
 
 
 @action

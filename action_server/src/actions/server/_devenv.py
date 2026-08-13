@@ -1,6 +1,6 @@
 import logging
 
-from sema4ai.action_server._protocols import (
+from actions.server._protocols import (
     ArgumentsNamespace,
     ArgumentsNamespaceDevEnvTask,
 )
@@ -15,7 +15,7 @@ def _handle_devenv_task_command(devenv_args: ArgumentsNamespaceDevEnvTask) -> in
     import sys
     from pathlib import Path
 
-    from sema4ai.action_server._robo_utils.process import build_python_launch_env
+    from actions.server._robo_utils.process import build_python_launch_env
 
     from ._action_package_handler import ActionPackageHandler
     from ._settings import setup_settings
@@ -144,7 +144,7 @@ def _handle_devenv_task_command(devenv_args: ArgumentsNamespaceDevEnvTask) -> in
 def handle_devenv_command(base_args: ArgumentsNamespace) -> int:
     import typing
 
-    from sema4ai.action_server._protocols import ArgumentsNamespaceDevEnv
+    from actions.server._protocols import ArgumentsNamespaceDevEnv
 
     devenv_args: ArgumentsNamespaceDevEnv = typing.cast(
         ArgumentsNamespaceDevEnv, base_args

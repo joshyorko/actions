@@ -520,7 +520,7 @@ def main(
         _setup_logging(verbose)
 
     if parent_pid:
-        from sema4ai.action_server._preload_actions.preload_actions_autoexit import (
+        from actions.server._preload_actions.preload_actions_autoexit import (
             exit_when_pid_exists,
         )
 

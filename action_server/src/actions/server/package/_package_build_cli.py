@@ -6,7 +6,7 @@ import typing
 from logging import getLogger
 from pathlib import Path
 
-from sema4ai.action_server._protocols import (
+from actions.server._protocols import (
     ArgumentsNamespace,
     ArgumentsNamespacePackage,
     ArgumentsNamespacePackageBuild,
@@ -33,8 +33,8 @@ def __wait_until_package_validated(
     access_credentials: str,
     hostname: str,
 ) -> None:
-    from sema4ai.action_server._errors_action_server import ActionServerValidationError
-    from sema4ai.action_server.package._package_publish import (
+    from actions.server._errors_action_server import ActionServerValidationError
+    from actions.server.package._package_publish import (
         ActionPackageEntity,
         get_package_status,
     )
@@ -86,7 +86,7 @@ def __wait_until_package_validated(
 
 
 def add_package_command(command_subparser, defaults):
-    from sema4ai.action_server._cli_helpers import (
+    from actions.server._cli_helpers import (
         add_data_args,
         add_json_output_args,
         add_login_args,
@@ -251,10 +251,10 @@ def add_package_command(command_subparser, defaults):
 
 
 def handle_package_command(base_args: ArgumentsNamespace):
-    from sema4ai.action_server._ask_user import ask_user_input_to_proceed
-    from sema4ai.action_server._errors_action_server import ActionServerValidationError
-    from sema4ai.action_server._storage import get_access_credentials, get_hostname
-    from sema4ai.action_server.vendored_deps.termcolors import bold_red
+    from actions.server._ask_user import ask_user_input_to_proceed
+    from actions.server._errors_action_server import ActionServerValidationError
+    from actions.server._storage import get_access_credentials, get_hostname
+    from actions.server.vendored_deps.termcolors import bold_red
 
     package_args: ArgumentsNamespacePackage = typing.cast(
         ArgumentsNamespacePackage, base_args
@@ -269,7 +269,7 @@ def handle_package_command(base_args: ArgumentsNamespace):
             ArgumentsNamespacePackageUpdate, base_args
         )
 
-        from sema4ai.action_server.vendored_deps.action_package_handling import (
+        from actions.server.vendored_deps.action_package_handling import (
             update_package,
         )
 
@@ -281,7 +281,7 @@ def handle_package_command(base_args: ArgumentsNamespace):
         return 0
 
     elif package_command == "build":
-        from sema4ai.action_server.package._package_build import build_package
+        from actions.server.package._package_build import build_package
 
         package_build_args: ArgumentsNamespacePackageBuild = typing.cast(
             ArgumentsNamespacePackageBuild, base_args
@@ -343,7 +343,7 @@ def handle_package_command(base_args: ArgumentsNamespace):
         return 0
 
     elif package_command == "metadata":
-        from sema4ai.action_server.package._package_metadata import (
+        from actions.server.package._package_metadata import (
             collect_package_metadata,
         )
 
@@ -383,8 +383,8 @@ def handle_package_command(base_args: ArgumentsNamespace):
         return retcode
 
     elif package_command == "upload":
-        from sema4ai.action_server.package._package_publish import upload_package
-        from sema4ai.action_server.package._package_reader import read_package_name
+        from actions.server.package._package_publish import upload_package
+        from actions.server.package._package_reader import read_package_name
 
         package_push_args: ArgumentsNamespacePackagePush = typing.cast(
             ArgumentsNamespacePackagePush, base_args
@@ -446,7 +446,7 @@ def handle_package_command(base_args: ArgumentsNamespace):
         return 0
 
     elif package_command == "status":
-        from sema4ai.action_server.package._package_publish import get_package_status
+        from actions.server.package._package_publish import get_package_status
 
         package_status_args: ArgumentsNamespacePackageStatus = typing.cast(
             ArgumentsNamespacePackageStatus, base_args
@@ -498,10 +498,10 @@ def handle_package_command(base_args: ArgumentsNamespace):
         return 0
 
     elif package_command == "set-changelog":
-        from sema4ai.action_server.package._package_publish import (
+        from actions.server.package._package_publish import (
             update_package_changelog,
         )
-        from sema4ai.action_server.package._package_reader import read_package_name
+        from actions.server.package._package_reader import read_package_name
 
         package_changelog_args: ArgumentsNamespacePackageChangelog = typing.cast(
             ArgumentsNamespacePackageChangelog, base_args
@@ -553,16 +553,16 @@ def handle_package_command(base_args: ArgumentsNamespace):
         return 0
 
     elif package_command == "publish":
-        from sema4ai.action_server._ask_user import (
+        from actions.server._ask_user import (
             ask_user_to_choose_organization,
             ask_user_to_provide_access_credentials,
         )
-        from sema4ai.action_server.package._package_publish import (
+        from actions.server.package._package_publish import (
             list_organizations,
             update_package_changelog,
             upload_package,
         )
-        from sema4ai.action_server.package._package_reader import read_package_name
+        from actions.server.package._package_reader import read_package_name
 
         package_publish_args: ArgumentsNamespacePackagePublish = typing.cast(
             ArgumentsNamespacePackagePublish, base_args

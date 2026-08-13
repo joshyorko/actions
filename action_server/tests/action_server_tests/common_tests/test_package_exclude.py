@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from sema4ai.common.package_exclude import ExclusionPatternError, PackageExcludeHandler
+from actions.server._common.package_exclude import ExclusionPatternError, PackageExcludeHandler
 
 
 def _touch(path: Path) -> None:

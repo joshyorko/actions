@@ -141,7 +141,7 @@ class MessagesHandler:
         # Collect actions so that it's ready to go when requested.
         # s = io.StringIO()
         # try:
-        #     from sema4ai.actions import cli
+        #     from actions import cli
         #
         #     with redirect_stdout(s), redirect_stderr(s):
         #         cli.main(["list"], exit=False)
@@ -159,7 +159,7 @@ class MessagesHandler:
         # cmdline: List[str] = [
         #     python,
         #     "-m",
-        #     "sema4ai.actions",
+        #     "actions",
         #     "run",
         #     "--preload-module",
         #     "preload_actions",
@@ -178,7 +178,7 @@ class MessagesHandler:
         if command == "run_action":
             try:
                 # new
-                from sema4ai.actions import cli
+                from actions import cli
             except ImportError:
                 # old (deprecated)
                 from robocorp.actions import cli  # type: ignore
@@ -257,12 +257,12 @@ class MessagesHandler:
     def _plugin_manager_kwargs(self, managed_parameters) -> Dict[str, Any]:
         try:
             # new
-            from sema4ai.actions._customization._extension_points import (
+            from actions._customization._extension_points import (
                 EPManagedParameters,
             )
-            from sema4ai.actions._customization._plugin_manager import PluginManager
-            from sema4ai.actions._managed_parameters import ManagedParameters
-            from sema4ai.actions._request import Request
+            from actions._customization._plugin_manager import PluginManager
+            from actions._managed_parameters import ManagedParameters
+            from actions._request import Request
 
         except ImportError:
             # old (deprecated: using robocorp-actions).
@@ -319,7 +319,7 @@ def main(args=None):
     except ImportError:
         from . import preload_actions_autoexit  # noqa
 
-    pid = os.environ.get("SEMA4AI_ACTION_SERVER_PARENT_PID", 0)
+    pid = os.environ.get("ACTIONS_RUNTIME_PARENT_PID", 0)
     if pid:
         preload_actions_autoexit.exit_when_pid_exists(pid)
     server = MessagesHandler(rfile, wfile)

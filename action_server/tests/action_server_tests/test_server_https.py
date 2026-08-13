@@ -1,8 +1,8 @@
 import pytest
 import requests
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
-from sema4ai.action_server._settings import get_user_sema4_path
+from actions.server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._settings import get_user_sema4_path
 
 
 @pytest.mark.integration_test

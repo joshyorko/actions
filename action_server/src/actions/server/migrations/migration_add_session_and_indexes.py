@@ -1,9 +1,9 @@
-from sema4ai.action_server._database import Database
-from sema4ai.action_server.migrations import Migration
+from actions.server._database import Database
+from actions.server.migrations import Migration
 
 
 def migrate(db: Database) -> None:
-    from sema4ai.action_server.migrations import MIGRATION_ID_TO_NAME
+    from actions.server.migrations import MIGRATION_ID_TO_NAME
 
     sqls = [
         "CREATE INDEX action_action_package_id_non_unique_index ON action(action_package_id);",

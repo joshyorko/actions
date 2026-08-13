@@ -189,7 +189,7 @@ async def handle_connect(sid: str):
 @_socket_server.on("disconnect")
 async def handle_disconnect(sid: str):
     # print("Disconnected", sid)
-    from sema4ai.action_server._runs_state_cache import get_global_runs_state
+    from actions.server._runs_state_cache import get_global_runs_state
 
     global_runs_state = get_global_runs_state()
 
@@ -240,7 +240,7 @@ async def handle_request(sid: str, request_data):
 
 @_socket_server.on("start_listen_run_events")
 async def handle_start_listen_run_events(sid: str):
-    from sema4ai.action_server._runs_state_cache import get_global_runs_state
+    from actions.server._runs_state_cache import get_global_runs_state
 
     global_runs_state = get_global_runs_state()
     loop = asyncio.get_running_loop()
@@ -313,7 +313,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 
 def _list_actions_in_threadpool(on_response_run_coroutine, message_id):
-    from sema4ai.action_server._api_action_package import list_action_packages
+    from actions.server._api_action_package import list_action_packages
 
     try:
         action_packages = list_action_packages()

@@ -17,7 +17,7 @@ from mcp.types import (
 from pydantic.networks import AnyUrl
 
 if typing.TYPE_CHECKING:
-    from sema4ai.action_server._models import Action, ActionPackage
+    from actions.server._models import Action, ActionPackage
 
 log = logging.getLogger(__name__)
 
@@ -94,7 +94,7 @@ class McpServerSetupHelper:
             arguments: dict[str, Any],
         ) -> tuple[Any, Any]:
             try:
-                from sema4ai.action_server._actions_run import IInternalFuncAPI
+                from actions.server._actions_run import IInternalFuncAPI
 
                 headers, cookies = get_headers_and_cookies()
                 action_info = self._tool_name_to_action_info[name]

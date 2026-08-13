@@ -6,11 +6,11 @@ from typing import Iterator, Optional
 from starlette.requests import Request
 from starlette.responses import Response
 
-from sema4ai.action_server._protocols import JSONValue
+from actions.server._protocols import JSONValue
 
 if typing.TYPE_CHECKING:
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import UserSession
+    from actions.server._database import Database
+    from actions.server._models import UserSession
 
 # Expected value in session data: isodate formatted string.
 KEY_CREATED_AT = "created-at"
@@ -50,7 +50,7 @@ def create_user_session(external: bool) -> "UserSession":
             tokens to be queried (other sessions don't allow external
             clients to request the actual token).
     """
-    from sema4ai.action_server._models import UserSession, get_db
+    from actions.server._models import UserSession, get_db
 
     db = get_db()
     with db.connect():
@@ -87,7 +87,7 @@ def create_user_session(external: bool) -> "UserSession":
 def get_user_session_from_id(
     session_id: str, db: "Database"
 ) -> "Optional[UserSession]":
-    from sema4ai.action_server._models import UserSession
+    from actions.server._models import UserSession
 
     try:
         return db.first(
@@ -98,7 +98,7 @@ def get_user_session_from_id(
 
 
 def _get_session_id(request: Request) -> str:
-    from sema4ai.action_server._models import get_db
+    from actions.server._models import get_db
 
     db = get_db()
     with db.connect(), db.transaction():
@@ -153,7 +153,7 @@ def _set_session_data(
 ) -> None:
     import json
 
-    from sema4ai.action_server._models import TempUserSessionData, get_db
+    from actions.server._models import TempUserSessionData, get_db
 
     db = get_db()
     with db.connect(), db.transaction():
@@ -176,7 +176,7 @@ def _get_session_data(session_id: str, key: str, drop: bool) -> JSONValue:
     """
     import json
 
-    from sema4ai.action_server._models import TempUserSessionData, get_db
+    from actions.server._models import TempUserSessionData, get_db
 
     db = get_db()
     with db.connect(), db.transaction():
@@ -205,7 +205,7 @@ def _get_session_data(session_id: str, key: str, drop: bool) -> JSONValue:
 def _temp_session_data_cleanup(
     db: "Database", now_datetime: datetime.datetime | None = None
 ):
-    from sema4ai.action_server._models import TempUserSessionData
+    from actions.server._models import TempUserSessionData
 
     if now_datetime is None:
         now_datetime = datetime.datetime.now()
@@ -237,7 +237,7 @@ class ReferencedScopeContext(_BaseScopeContext):
     """
 
     def __init__(self, reference_id: str):
-        from sema4ai.action_server._models import get_db
+        from actions.server._models import get_db
 
         super().__init__(session_id=reference_id)
         db = get_db()

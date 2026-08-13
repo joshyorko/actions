@@ -6,7 +6,7 @@ from typing import Any
 log = logging.getLogger(__name__)
 
 if typing.TYPE_CHECKING:
-    from sema4ai.common.system_mutex import SystemMutex
+    from actions.server._common.system_mutex import SystemMutex
 
 
 def obtain_app_mutex(
@@ -56,8 +56,8 @@ def obtain_app_mutex(
     import re
     import time
 
-    from sema4ai.common.process import is_process_alive, kill_process_and_subprocesses
-    from sema4ai.common.system_mutex import SystemMutex
+    from actions.server._common.process import is_process_alive, kill_process_and_subprocesses
+    from actions.server._common.system_mutex import SystemMutex
 
     shown_first_message = False
     timeout_at = time.monotonic() + timeout

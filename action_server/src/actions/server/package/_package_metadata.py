@@ -3,7 +3,7 @@ import logging
 from pathlib import Path
 from typing import Any, Dict
 
-from sema4ai.action_server.vendored_deps.package_deps._deps_protocols import (
+from actions.server.vendored_deps.package_deps._deps_protocols import (
     ICondaCloud,
     IOnFinished,
     IPackageData,
@@ -57,12 +57,12 @@ def collect_package_metadata(package_dir: Path, datadir: str) -> str | int:
     Returns: Either the package metadata to be printed or an error code.
     """
     from fastapi.applications import FastAPI
-    from sema4ai.actions._protocols import ActionsListActionTypedDict
+    from actions._protocols import ActionsListActionTypedDict
 
-    from sema4ai.action_server._actions_import import hook_on_actions_list
-    from sema4ai.action_server._cli_impl import _main_retcode
-    from sema4ai.action_server._errors_action_server import ActionServerValidationError
-    from sema4ai.action_server._models import Action, ActionPackage, create_db
+    from actions.server._actions_import import hook_on_actions_list
+    from actions.server._cli_impl import _main_retcode
+    from actions.server._errors_action_server import ActionServerValidationError
+    from actions.server._models import Action, ActionPackage, create_db
 
     args = ["start", "--db-file", ":memory:", "--dir", str(package_dir)]
     if datadir:
@@ -76,9 +76,9 @@ def collect_package_metadata(package_dir: Path, datadir: str) -> str | int:
         actions_list_result: list[ActionsListActionTypedDict],
         data_package_metadata: dict | None,
     ):
-        from sema4ai.action_server._api_action_routes import build_url_api_run
-        from sema4ai.action_server.vendored_deps.ls_protocols import _DiagnosticSeverity
-        from sema4ai.action_server.vendored_deps.package_deps.analyzer import (
+        from actions.server._api_action_routes import build_url_api_run
+        from actions.server.vendored_deps.ls_protocols import _DiagnosticSeverity
+        from actions.server.vendored_deps.package_deps.analyzer import (
             PackageYamlAnalyzer,
         )
 

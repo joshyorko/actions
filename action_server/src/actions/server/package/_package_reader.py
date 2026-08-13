@@ -26,7 +26,7 @@ def read_package_name(package_path: Path) -> str:
     """
     import yaml
 
-    from sema4ai.action_server._errors_action_server import ActionServerValidationError
+    from actions.server._errors_action_server import ActionServerValidationError
 
     with tempfile.TemporaryDirectory() as tmpdirname:
         __extract_package(Path(tmpdirname), package_path)

@@ -64,7 +64,7 @@ def print_user_oauth2_config_path(output_json: bool = False) -> int:
         return 0
 
     except Exception as e:
-        from sema4ai.action_server.vendored_deps.termcolors import bold_red
+        from actions.server.vendored_deps.termcolors import bold_red
 
         log.critical(bold_red(f"\nError retrieving user OAuth2 config path: {e}"))
 

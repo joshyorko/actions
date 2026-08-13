@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 try:
-    from sema4ai.actions import IAction, teardown
+    from actions import IAction, teardown
 except ImportError:
     # old
     from robocorp.actions import IAction, teardown  # type:ignore

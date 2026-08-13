@@ -68,7 +68,7 @@ def start_server(
     settings = get_settings()
 
     # Initialize operating mode (auto-detects from Redis URL)
-    from sema4ai.action_server._mode import initialize_mode
+    from actions.server._mode import initialize_mode
 
     initialize_mode(
         redis_url=settings.redis_url,
@@ -152,7 +152,7 @@ def start_server(
         This information is not expected to be changed after the action
         server is started.
         """
-        from sema4ai.action_server import __version__
+        from actions.server import __version__
 
         from ._server_expose import get_expose_session_payload, read_expose_session_json
 
@@ -194,9 +194,9 @@ def start_server(
             Returns:
                 True if the reload was successful and False otherwise.
             """
-            from sema4ai.action_server._cli_impl import _import_actions
-            from sema4ai.action_server._models import get_db
-            from sema4ai.action_server._server_websockets import report_mtime_changed
+            from actions.server._cli_impl import _import_actions
+            from actions.server._models import get_db
+            from actions.server._server_websockets import report_mtime_changed
 
             db = get_db()
             with _reload_lock, db.connect():
@@ -266,7 +266,7 @@ def start_server(
 
         import base64
 
-        from sema4ai.action_server._storage import get_key
+        from actions.server._storage import get_key
 
         from . import __version__, _static_contents
 
@@ -289,7 +289,7 @@ def start_server(
         return _cache["cached"]
 
     async def serve_index(request: Request):
-        from sema4ai.action_server._user_session import session_scope
+        from actions.server._user_session import session_scope
 
         with session_scope(request) as session:
             response = HTMLResponse(_index_contents())
@@ -334,7 +334,7 @@ def start_server(
         return (host, port)
 
     def expose_later(loop):
-        from sema4ai.action_server._settings import is_community_build, is_frozen
+        from actions.server._settings import is_community_build, is_frozen
 
         nonlocal expose_subprocess
 
@@ -362,7 +362,7 @@ def start_server(
             args = [
                 sys.executable,
                 "-m",
-                "sema4ai.action_server",
+                "actions.server",
             ]
 
         args += [
@@ -482,7 +482,7 @@ def start_server(
             file_watcher.stop()
 
         log.info("Stopping action server...")
-        from sema4ai.action_server._robo_utils.process import (
+        from actions.server._robo_utils.process import (
             kill_process_and_subprocesses,
         )
 
@@ -518,11 +518,11 @@ def start_server(
         Starts the scheduler engine and notification service on startup,
         and stops them gracefully on shutdown.
         """
-        from sema4ai.action_server._notifications import (
+        from actions.server._notifications import (
             NotificationService,
             set_notification_service,
         )
-        from sema4ai.action_server._scheduler import (
+        from actions.server._scheduler import (
             SchedulerEngine,
             initialize_schedule_next_runs,
             set_scheduler,

@@ -5,15 +5,15 @@ log = logging.getLogger(__name__)
 
 
 def _raise_deprecated_conda(found: Path):
-    from sema4ai.action_server._settings import is_frozen
-    from sema4ai.action_server.vendored_deps.action_package_handling.cli_errors import (
+    from actions.server._settings import is_frozen
+    from actions.server.vendored_deps.action_package_handling.cli_errors import (
         ActionPackageError,
     )
 
     if is_frozen():
         cmd = "action-server"
     else:
-        cmd = "python -m sema4ai.action_server"
+        cmd = "python -m actions.server"
     raise ActionPackageError(
         "Deprecated: The file for defining the environment is now `package.yaml`.\n"
         f"Using {found} is no longer supported.\n"
@@ -29,7 +29,7 @@ class ActionPackageHandler:
 
         import yaml
 
-        from sema4ai.action_server.vendored_deps.action_package_handling.cli_errors import (
+        from actions.server.vendored_deps.action_package_handling.cli_errors import (
             ActionPackageError,
         )
 
@@ -141,7 +141,7 @@ class ActionPackageHandler:
         if self._pythonpath_entries is not None:
             return self._pythonpath_entries
 
-        from sema4ai.action_server._errors_action_server import (
+        from actions.server._errors_action_server import (
             ActionServerValidationError,
         )
 
@@ -185,13 +185,13 @@ class ActionPackageHandler:
         """
         import os
 
-        from sema4ai.action_server._errors_action_server import (
+        from actions.server._errors_action_server import (
             ActionServerValidationError,
         )
-        from sema4ai.action_server.vendored_deps.action_package_handling.cli_errors import (
+        from actions.server.vendored_deps.action_package_handling.cli_errors import (
             ActionPackageError,
         )
-        from sema4ai.action_server.vendored_deps.termcolors import bold_yellow
+        from actions.server.vendored_deps.termcolors import bold_yellow
 
         if not self.package_yaml_exists:
             log.info(

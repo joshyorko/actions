@@ -22,7 +22,7 @@ sys.setrecursionlimit(sys.getrecursionlimit() * 5)
 
 logger.info("Collecting action_server dependencies...")
 action_server_datas, _action_server_binaries, action_server_hiddenimports = collect_all(
-    "sema4ai.action_server"
+    "actions.server"
 )
 
 # Collect redis submodules for control-room-lite mode
@@ -65,7 +65,7 @@ logger.info("Starting main Analysis...")
 logger.info("Collecting action server submodules...")
 
 a = Analysis(
-    ["src/sema4ai/action_server/__main__.py"],
+    ["src/actions/server/__main__.py"],
     pathex=[],
     binaries=[],
     datas=[

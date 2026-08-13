@@ -10,7 +10,7 @@ from types import ModuleType
 from typing import Any
 from urllib.parse import unquote, urlparse
 
-_MODULE_NAME = "_sema4ai_action_server_work_items"
+_MODULE_NAME = "_actions_server_work_items"
 _lock = Lock()
 _cached: ModuleType | None = None
 

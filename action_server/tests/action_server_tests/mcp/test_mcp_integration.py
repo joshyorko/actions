@@ -4,14 +4,14 @@ import pytest
 from action_server_tests.fixtures import run_async_in_new_thread
 from mcp import ClientSession
 
-from sema4ai.action_server._selftest import ActionServerProcess
+from actions.server._selftest import ActionServerProcess
 
 
 async def check_mcp_server(
     port: int,
     connection_mode: Literal["mcp", "sse"],
     headers: dict[str, str] | None = None,
-    use_sema4ai_mcp: bool = True,
+    use_actions_mcp: bool = True,
 ):
     """
     This method is meant to check that the `resources/no_conda/mcp` implementation
@@ -128,7 +128,7 @@ async def check_mcp_server(
                 {
                     "name": "name",
                     "description": (
-                        "The name of the person to greet." if use_sema4ai_mcp else None
+                        "The name of the person to greet." if use_actions_mcp else None
                     ),
                     "required": False,
                 }
@@ -147,7 +147,7 @@ async def check_mcp_server(
                 {
                     "name": "name",
                     "description": (
-                        "The name of the person to greet." if use_sema4ai_mcp else None
+                        "The name of the person to greet." if use_actions_mcp else None
                     ),
                     "required": True,
                 }
@@ -163,7 +163,7 @@ async def check_mcp_server(
             assert isinstance(prompt_result, GetPromptResult)
 
             # The format differs between sema4ai MCP and standard MCP
-            if use_sema4ai_mcp:
+            if use_actions_mcp:
                 # sema4ai MCP now includes the prompt's description from docstring (first line)
                 expected_prompt_result = {
                     "meta": None,
@@ -342,8 +342,8 @@ def mcp_server_port():
     import sys
 
     from action_server_tests.fixtures import get_in_resources
-    from sema4ai.common.process import Process
-    from sema4ai.common.wait_for import wait_for_condition
+    from actions.server._common.process import Process
+    from actions.server._common.wait_for import wait_for_condition
 
     cp = os.environ.copy()
     cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
@@ -396,7 +396,7 @@ def test_mcp_integration(mcp_server_port: int) -> None:
                 check_mcp_server,
                 mcp_server_port,
                 "mcp",
-                use_sema4ai_mcp=False,
+                use_actions_mcp=False,
             )
         )
         == "ok"
@@ -408,7 +408,7 @@ def test_mcp_integration_with_actions_in_no_conda_greeter(
     action_server_process: ActionServerProcess,
 ) -> None:
     """
-    Tests that run the mcp server based on `sema4ai.mcp` bundled in the
+    Tests that run the mcp server based on `actions.mcp` bundled in the
     action server.
     """
     from functools import partial

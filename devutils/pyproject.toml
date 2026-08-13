@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "sema4ai-devutils"
+name = "actions-local-devutils"
 version = "0.0.1"
 description = "Utilities for development in monorepo."
 authors = [

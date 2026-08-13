@@ -97,7 +97,7 @@ class _CustomFastAPI(FastAPI):
 
 @cache
 def get_app() -> _CustomFastAPI:
-    from sema4ai.action_server import __version__
+    from actions.server import __version__
 
     settings = get_settings()
 

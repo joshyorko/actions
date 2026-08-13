@@ -4,7 +4,7 @@ from pathlib import Path
 def test_sorting_robolog():
     """Test the sorting of robolog files."""
 
-    from sema4ai.action_server._api_run import _sort_robolog_files
+    from actions.server._api_run import _sort_robolog_files
 
     # Create test file paths
     test_files = [
