@@ -50,6 +50,13 @@ to repository directories and must not redirect `sema4ai-actions` to the new
 Core verification must unset inherited `VIRTUAL_ENV` and select the requested
 matrix interpreter explicitly before invoking Poetry.
 
+Core console integration helpers must resolve the Poetry-installed `actions`
+launcher from the executable search path rather than assuming it is beside an
+outer uv test-runner interpreter. Core release verification builds once, runs
+`twine check --strict dist/*` in the verify job, and uploads only after that
+check succeeds; the publish job downloads those verified artifacts without
+rebuilding them.
+
 ## Evidence Ladder
 
 Prefer evidence in this order:

@@ -1,4 +1,5 @@
 import os.path
+import shutil
 import subprocess
 import sys
 from contextlib import nullcontext
@@ -291,10 +292,7 @@ def actions_run(
     timeout=None,
 ) -> CompletedProcess:
     """Run the installed actions-core console script."""
-    executable_name = "actions.exe" if sys.platform == "win32" else "actions"
-    executable = Path(sys.executable).parent / executable_name
-    if not executable.exists():
-        raise AssertionError(f"Missing installed actions console script: {executable}")
+    executable = _actions_executable()
 
     cp = os.environ.copy()
     cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
@@ -325,6 +323,16 @@ def actions_run(
 
 """
     )
+
+
+def _actions_executable() -> Path:
+    executable_name = "actions.exe" if sys.platform == "win32" else "actions"
+    executable = shutil.which(executable_name)
+    if executable is None:
+        raise AssertionError(
+            f"Missing installed actions console script on PATH: {executable_name}"
+        )
+    return Path(executable)
 
 
 def python_run(

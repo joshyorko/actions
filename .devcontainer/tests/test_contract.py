@@ -235,6 +235,7 @@ class DevContainerContractTest(unittest.TestCase):
         workflow = (
             REPOSITORY_ROOT / ".github" / "workflows" / "actions_release.yml"
         ).read_text()
+        verify = workflow[workflow.index("  verify:") : workflow.index("\n  publish:")]
 
         self.assertIn('"actions-core-*"', workflow)
         self.assertIn('poetry==2.1.1', workflow)
@@ -253,6 +254,13 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("PYPI_TOKEN_ACTIONS_CORE", workflow)
         self.assertIn("poetry publish --no-interaction", workflow)
         self.assertNotIn("poetry build", workflow[workflow.index("  publish:") :])
+        self.assertIn("poetry run python -m pip install twine", verify)
+        self.assertIn("poetry run twine check --strict dist/*", verify)
+        self.assertLess(verify.index("poetry build"), verify.index("poetry run twine check --strict dist/*"))
+        self.assertLess(
+            verify.index("poetry run twine check --strict dist/*"),
+            verify.index("name: Upload verified Core artifacts"),
+        )
 
     def test_smoke_contract(self):
         smoke = DEVCONTAINER_ROOT / "bin" / "smoke"
