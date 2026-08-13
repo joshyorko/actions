@@ -23,6 +23,15 @@ resolving a local development install. Published package metadata must use
 versioned distributions; a clean wheel install is required before calling the
 Runtime/Core interoperability contract complete.
 
+The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
+callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
+The Python API exposes snake-case fields such as `resource_templates`,
+`uri_template`, and `input_schema`; wire aliases remain protocol camelCase.
+The host checkout currently verifies this with isolated SDK source inspection
+because the Action Server Poetry environment is not installed. Publication-
+dependent lock regeneration and clean-install MCP verification remain
+deferred until the renamed Runtime graph is published.
+
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The active
 `actions/poetry.lock` and `actions-http-helper/poetry.lock` files are intentionally

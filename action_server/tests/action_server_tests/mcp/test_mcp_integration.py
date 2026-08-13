@@ -18,7 +18,7 @@ async def check_mcp_server(
     is working.
     """
     from mcp.client.sse import sse_client
-    from mcp.client.streamable_http import streamablehttp_client
+    from mcp.client.streamable_http import streamable_http_client
     from mcp.types import (
         CallToolResult,
         GetPromptResult,
@@ -31,7 +31,7 @@ async def check_mcp_server(
 
     client_protocol: Any
     if connection_mode == "mcp":
-        client_protocol = streamablehttp_client
+        client_protocol = streamable_http_client
     else:
         assert connection_mode == "sse"
         client_protocol = sse_client
@@ -57,7 +57,7 @@ async def check_mcp_server(
                 greet_tool is not None
             ), f"'greet_mcp' tool not found. Available tools: {tool_names}"
 
-            input_schema = greet_tool.inputSchema
+            input_schema = greet_tool.input_schema
             expected_action_server = {
                 "properties": {
                     "name": {
@@ -222,15 +222,15 @@ async def check_mcp_server(
             # -- Test resources (template).
 
             resource_templates_list = await session.list_resource_templates()
-            resource_templates = resource_templates_list.resourceTemplates
+            resource_templates = resource_templates_list.resource_templates
             uris = [
-                str(resource_template.uriTemplate)
+                str(resource_template.uri_template)
                 for resource_template in resource_templates
             ]
             assert ["custom://my/resource/{name}"] == uris
 
             # Read (template) resource.
-            uri_template: str = resource_templates[0].uriTemplate
+            uri_template: str = resource_templates[0].uri_template
             uri: AnyUrl = AnyUrl(uri_template.replace("{name}", "John"))
             resource = await session.read_resource(uri)
             assert isinstance(resource, ReadResourceResult)
@@ -252,12 +252,12 @@ async def check_mcp_server_with_actions(
     """
 
     from mcp.client.sse import sse_client
-    from mcp.client.streamable_http import streamablehttp_client
+    from mcp.client.streamable_http import streamable_http_client
     from mcp.types import CallToolResult, TextContent
 
     client_protocol: Any
     if connection_mode == "mcp":
-        client_protocol = streamablehttp_client
+        client_protocol = streamable_http_client
     else:
         assert connection_mode == "sse"
         client_protocol = sse_client
@@ -283,7 +283,7 @@ async def check_mcp_server_with_actions(
                 greet_tool is not None
             ), f"'greet' tool not found. Available tools: {tool_names}"
 
-            input_schema = greet_tool.inputSchema
+            input_schema = greet_tool.input_schema
             expected_action_server = {
                 "properties": {
                     "name": {
@@ -404,6 +404,56 @@ def test_mcp_integration(mcp_server_port: int) -> None:
 
 
 @pytest.mark.integration_test
+def test_modern_mcp_lists_tools_without_initialization(
+    action_server_process: ActionServerProcess,
+) -> None:
+    """The v2 request envelope lists tools directly on the stateless /mcp route."""
+    from action_server_tests.fixtures import get_in_resources
+
+    root_dir = get_in_resources("no_conda", "greeter")
+    action_server_process.start(
+        db_file="server.db",
+        cwd=str(root_dir),
+        actions_sync=True,
+        timeout=60 * 10,
+    )
+
+    async def request_tools() -> None:
+        import httpx
+
+        body = {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "tools/list",
+            "params": {
+                "_meta": {
+                    "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+                    "io.modelcontextprotocol/clientCapabilities": {},
+                }
+            },
+        }
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"http://localhost:{action_server_process.port}/mcp",
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Mcp-Protocol-Version": "2026-07-28",
+                    "Mcp-Method": "tools/list",
+                },
+                json=body,
+            )
+
+        assert response.status_code == 200, response.text
+        assert "Mcp-Session-Id" not in response.headers
+        payload = response.json()
+        assert payload["result"]["tools"]
+        assert any(tool["name"] == "greet" for tool in payload["result"]["tools"])
+
+    run_async_in_new_thread(request_tools)
+
+
+@pytest.mark.integration_test
 def test_mcp_integration_with_actions_in_no_conda_greeter(
     action_server_process: ActionServerProcess,
 ) -> None:
@@ -508,10 +558,10 @@ def test_mcp_integration_with_structured_output(
     )
 
     async def check_with_structured_output():
-        from mcp.client.streamable_http import streamablehttp_client
+        from mcp.client.streamable_http import streamable_http_client
         from mcp.types import CallToolResult
 
-        client_protocol = streamablehttp_client
+        client_protocol = streamable_http_client
 
         async with client_protocol(
             f"http://localhost:{action_server_process.port}/mcp", headers={}
@@ -572,10 +622,10 @@ def test_mcp_integration_secrets(
     )
 
     async def check_with_secrets():
-        from mcp.client.streamable_http import streamablehttp_client
+        from mcp.client.streamable_http import streamable_http_client
 
         port = action_server_process.port
-        async with streamablehttp_client(
+        async with streamable_http_client(
             f"http://localhost:{port}/mcp",
             headers={"x-my-secret": "FooSecret"}
             if scenario == "request_header"

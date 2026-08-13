@@ -42,7 +42,7 @@ websockets = "^15.0.1"
 cryptography = "^46.0.3"
 requests_oauthlib = "^2.0"
 watchfiles = "^1.1.1"
-mcp = "^1.21.0"
+mcp = "^2.0.0"
 actions-work-items = "^0.4.3"
 # Scheduling dependencies
 croniter = "^2.0.0"

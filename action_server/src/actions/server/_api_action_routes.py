@@ -96,9 +96,6 @@ class _ActionRoutes:
             endpoint_dependencies: The dependencies for the endpoint (which will require the API key).
             api_key: The API key to use for the endpoint.
         """
-        from mcp.server.sse import SseServerTransport
-        from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
-
         from actions.server._models import Action, ActionPackage
         from actions.server.mcp.setup_mcp_server_from_actions import (
             McpServerSetupHelper,
@@ -106,12 +103,11 @@ class _ActionRoutes:
 
         self.whitelist = whitelist
         self.endpoint_dependencies = endpoint_dependencies
+        self._api_key: str | None = None
         self.action_package_id_to_action_package: dict[str, ActionPackage] = {}
         self.actions: list[Action] = []
         self.registered_route_names: set[str] = set()
         self.mcp_server_setup_helper: McpServerSetupHelper = McpServerSetupHelper()
-        self._session_manager: StreamableHTTPSessionManager | None = None
-        self._sse_transport: SseServerTransport | None = None
 
     def setup_mcp_server(self, api_key: str | None) -> None:
         """
@@ -122,6 +118,7 @@ class _ActionRoutes:
         from actions.server._app import get_app
 
         app = get_app()
+        self._api_key = api_key
 
         middleware: list[Middleware] = []
         if api_key:
@@ -133,102 +130,25 @@ class _ActionRoutes:
             )
 
         self._setup_mcp_streamable_route(app, middleware)
-        self._setup_mcp_sse_route(app, middleware)
 
     def _setup_mcp_streamable_route(
         self, app: _CustomFastAPI, middleware: list[Middleware]
     ):
-        from contextlib import asynccontextmanager
+        from starlette.routing import Mount
 
-        from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
-        from starlette.applications import Starlette
-        from starlette.routing import Mount, Route
-
-        assert self._session_manager is None
-        self._session_manager = StreamableHTTPSessionManager(
-            app=self.mcp_server_setup_helper.server,
-            event_store=None,
+        self.streamable_http_server = self.mcp_server_setup_helper.server.streamable_http_app(
+            streamable_http_path="/mcp",
             json_response=True,
-            stateless=True,
+            stateless_http=True,
         )
+        if self._api_key:
+            from starlette.middleware.authentication import AuthenticationMiddleware
 
-        async def handle_streamable_http(
-            scope: Scope, receive: Receive, send: Send
-        ) -> None:
-            assert self._session_manager is not None
-            await self._session_manager.handle_request(scope, receive, send)
-
-        routes: list[Route | Mount] = []
-
-        routes.append(
-            Mount(
-                "/",
-                app=handle_streamable_http,
+            self.streamable_http_server.add_middleware(
+                AuthenticationMiddleware,
+                backend=APIKeyAuthBackend(api_key=self._api_key),
             )
-        )
-
-        @asynccontextmanager
-        async def lifespan(app):
-            async with self._session_manager.run():
-                yield
-
-        app.custom_lifespan.register(lifespan)
-
-        # Passing the lifespan to the Starlette constructor doesn't work at this point
-        # (as it's not the "main" Starlette instance).
-        self.streamable_http_server = Starlette(
-            debug=False,
-            routes=routes,
-            middleware=middleware,
-        )
-
-        app.mount("/mcp", self.streamable_http_server)
-
-    def _setup_mcp_sse_route(self, app: _CustomFastAPI, middleware: list[Middleware]):
-        from mcp.server.sse import SseServerTransport
-        from starlette.applications import Starlette
-        from starlette.routing import Mount, Route
-
-        # -- Setup SSE
-        sse = SseServerTransport("/messages/")
-        routes: list[Route | Mount] = []
-
-        from starlette.requests import Request
-        from starlette.responses import Response
-
-        async def handle_sse(scope: Scope, receive: Receive, send: Send):
-            async with sse.connect_sse(
-                scope,
-                receive,
-                send,
-            ) as streams:
-                await self.mcp_server_setup_helper.server.run(
-                    streams[0],
-                    streams[1],
-                    self.mcp_server_setup_helper.server.create_initialization_options(),
-                )
-            return Response()
-
-        async def sse_endpoint(request: Request) -> Response:
-            # Convert the Starlette request to ASGI parameters
-            return await handle_sse(request.scope, request.receive, request._send)  # type: ignore[reportPrivateUsage]
-
-        routes.append(
-            Route(
-                "/",
-                endpoint=sse_endpoint,
-                methods=["GET"],
-            )
-        )
-        routes.append(
-            Mount(
-                "/messages/",
-                app=sse.handle_post_message,
-            )
-        )
-
-        self.sse_server = Starlette(debug=False, routes=routes, middleware=middleware)
-        app.mount("/sse", self.sse_server)
+        app.mount("", self.streamable_http_server)
 
     def register_actions(self) -> None:
         import json

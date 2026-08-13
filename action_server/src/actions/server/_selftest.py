@@ -242,11 +242,11 @@ class ActionServerProcess:
         """
 
         from mcp.client.sse import sse_client
-        from mcp.client.streamable_http import streamablehttp_client
+        from mcp.client.streamable_http import streamable_http_client
 
         client_protocol: Any
         if connection_mode == "mcp":
-            client_protocol = streamablehttp_client
+            client_protocol = streamable_http_client
         else:
             assert connection_mode == "sse"
             client_protocol = sse_client
