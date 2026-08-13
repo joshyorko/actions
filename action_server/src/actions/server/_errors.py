@@ -113,6 +113,7 @@ async def http500_error_handler(
             allow_methods=["*"],
             allow_headers=["*"],
             allow_credentials=True,
+            expose_headers=["X-Request-ID"],
         )
         response.headers.update(cors.simple_headers)
         if cors.allow_all_origins and "cookie" in request.headers:

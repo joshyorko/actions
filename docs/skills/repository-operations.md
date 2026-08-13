@@ -40,23 +40,32 @@ The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
 
-The stateless `/mcp` route validates `Mcp-Method` and `Mcp-Name` against the
+The stateless `/mcp` route inspects `Mcp-Method` and `Mcp-Name` against the
 parsed JSON-RPC body in `actions.server.mcp.gateway_metadata`. Inspection buffers
-at most 1 MiB and returns HTTP 413 without forwarding an oversized body. Trusted
-metadata is available through `scope["state"]["actions.mcp.request_metadata"]`,
-`get_mcp_request_metadata()`, and the bounded observer callback, with
-`actions.mcp.method`, `actions.mcp.name`, and `actions.correlation_id` attributes.
-JSON-RPC 2.0 objects and allowlisted methods are required; method/name strings
-are length-bounded. Header names are case-insensitive, values are exact with no
-surrounding whitespace, and duplicate identity/correlation headers return HTTP
-400. Missing identity headers are normalized from the body; mismatches and
-identity headers on malformed/error bodies return HTTP 400. `X-Request-ID` is
+at most 1 MiB and returns HTTP 413 without forwarding an oversized body, including
+when the declared content length exceeds the boundary. Non-empty UTF-8 method
+strings are bounded but are not finite-allowlisted, so MCP v2 and future
+extensions remain reachable. Requests and notifications are inspected for
+trusted identity; valid JSON-RPC response/error objects pass through without
+metadata rejection, including in bounded batches. Parser, nesting, numeric-ID,
+and observer failures do not replace SDK-owned protocol responses; only an
+invalid metadata boundary returns HTTP 400.
+
+Trusted metadata is available through
+`scope["state"]["actions.mcp.request_metadata"]`, `get_mcp_request_metadata()`,
+and the completion observer, with bounded method, finite method-class,
+sanitized name, status, latency, and correlation attributes. Resource identifiers
+omit URI userinfo, query, and fragments before logging. Header names are
+case-insensitive, selected values are exact with no surrounding whitespace, and
+duplicate identity/correlation headers return HTTP 400. Missing identity headers
+are normalized from the body; mismatches are rejected. `X-Request-ID` is
 preserved only when it is a canonical UUID, otherwise a UUID is generated and
-returned on the response. The route's API-key authentication wraps this
-middleware and therefore retains its existing rejection order. Method is safe
-for metrics; the optional name attribute is intended for logs/traces and is
-length-bounded to avoid unbounded metric cardinality. The body is replayed in
-its original ASGI chunks and returns an empty terminal request after exhaustion.
+returned as the single canonical response header; CORS exposes that header.
+Observer callback failures are isolated, logged with only a bounded exception
+diagnostic, and cannot fail the MCP request. The
+route's API-key authentication wraps this middleware and therefore retains its
+existing rejection order. The body is replayed in its original ASGI chunks and
+returns an empty terminal request after exhaustion.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The

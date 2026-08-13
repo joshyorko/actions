@@ -690,6 +690,46 @@ def test_modern_mcp_requests_can_move_between_independent_replicas(tmpdir) -> No
 
 
 @pytest.mark.integration_test
+def test_mcp_v2_routes_accept_discover_and_subscription_methods(
+    action_server_process: ActionServerProcess,
+) -> None:
+    """The live MCP v2 SDK routes are not blocked by gateway method inspection."""
+    from action_server_tests.fixtures import get_in_resources, run_async_in_new_thread
+
+    root_dir = get_in_resources("no_conda", "greeter")
+    action_server_process.start(
+        db_file="server.db", cwd=root_dir, actions_sync=True, timeout=60 * 10
+    )
+
+    async def check_routes() -> None:
+        import httpx2
+
+        requests = (
+            ("server/discover", 1, None),
+            (
+                "subscriptions/listen",
+                2,
+                {"notifications": {"toolsListChanged": True}},
+            ),
+        )
+        async with httpx2.AsyncClient() as client:
+            for method, request_id, params in requests:
+                headers, body = _modern_request(method, request_id, params)
+                response = await client.post(
+                    f"http://localhost:{action_server_process.port}/mcp",
+                    headers=headers,
+                    json=body,
+                )
+                expected_status = 406 if method == "subscriptions/listen" else 200
+                assert response.status_code == expected_status, response.text
+                if method == "server/discover":
+                    payload = response.json()
+                    assert "result" in payload, payload
+
+    run_async_in_new_thread(check_routes)
+
+
+@pytest.mark.integration_test
 def test_mcp_test_gateway_observes_tool_routing_metadata(
     action_server_process: ActionServerProcess,
 ) -> None:
