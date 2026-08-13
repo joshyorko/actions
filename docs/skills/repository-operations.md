@@ -40,6 +40,18 @@ The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
 
+Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
+tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
+x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
+and the committed lock remain authoritative; cibuildwheel 2.23.1 must clean-test
+each wheel with `python -m pip check` and `python -m actions.server version`.
+One final `pypi` job downloads the exact artifacts, rejects duplicate or
+unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
+the tag is an ancestor of `origin/community` and matches `poetry version
+--short`, then uploads the downloaded files once. Binary release names use
+GitHub expressions containing `${{ github.ref_name }}`; shell literals such as
+`$tag-linux64` are not valid action inputs.
+
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
 `actions/poetry.lock` and `actions-http-helper/poetry.lock` files must exist and
