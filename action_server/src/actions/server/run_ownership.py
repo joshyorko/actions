@@ -82,28 +82,32 @@ class RunOwnershipStore:
         now = time.time()
         expires_at = now + self.lease_seconds
         with self._connect() as db:
-            db.execute("BEGIN IMMEDIATE")
-            row = db.execute(
-                "SELECT owner_id, owner_epoch, lease_expires_at FROM run_ownership "
-                "WHERE run_id = ?",
-                (run_id,),
-            ).fetchone()
-            if row is None:
+            try:
+                db.execute("BEGIN IMMEDIATE")
+                row = db.execute(
+                    "SELECT owner_id, owner_epoch, lease_expires_at FROM run_ownership "
+                    "WHERE run_id = ?",
+                    (run_id,),
+                ).fetchone()
+                if row is None:
+                    raise KeyError(run_id)
+                current_owner, current_epoch, current_expiry = row
+                if current_owner not in (None, self.owner_id) and (
+                    current_expiry is not None and current_expiry > now
+                ):
+                    raise RuntimeError(
+                        f"run {run_id} is owned by another live Runtime"
+                    )
+                epoch = current_epoch + 1
+                db.execute(
+                    "UPDATE run_ownership SET owner_id=?, owner_epoch=?, lease_expires_at=? "
+                    "WHERE run_id=?",
+                    (self.owner_id, epoch, expires_at, run_id),
+                )
+                db.commit()
+            except Exception:
                 db.rollback()
-                raise KeyError(run_id)
-            current_owner, current_epoch, current_expiry = row
-            if current_owner not in (None, self.owner_id) and (
-                current_expiry is not None and current_expiry > now
-            ):
-                db.rollback()
-                raise RuntimeError(f"run {run_id} is owned by another live Runtime")
-            epoch = current_epoch + 1
-            db.execute(
-                "UPDATE run_ownership SET owner_id=?, owner_epoch=?, lease_expires_at=? "
-                "WHERE run_id=?",
-                (self.owner_id, epoch, expires_at, run_id),
-            )
-            db.commit()
+                raise
         return RunLease(run_id, self.owner_id, epoch, expires_at)
 
     def renew(self, run_id: str, epoch: int) -> bool:
