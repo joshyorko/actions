@@ -637,8 +637,6 @@ rm src/actions/server/bin/rcc* -f
 """,
             "env": {
                 "CI": True,
-                "NODE_AUTH_TOKEN": "${{ secrets.GH_PAT_READ_PACKAGES }}",
-                "GH_TOKEN": "${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}",
                 "ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": True,
             },
         }
@@ -730,13 +728,14 @@ sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runti
         return [
             self.checkout_repo(pinned=True),
             *self.setup_python(pinned=True),
-            self.install_devutils(),
+            {**self.install_devutils(), "working-directory": "action_server"},
             {"name": "Verify merged tag provenance and version", "if": "github.event_name == 'push'", "run": provenance},
             {"name": "Download sdist artifact", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"name": "action-server-dist", "path": "action_server/dist/downloads/sdist"}},
             {"name": "Download wheel artifacts separately", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"pattern": "*-wheels", "path": "action_server/dist/downloads/wheels", "merge-multiple": False}},
             {"name": "Verify exact Runtime artifact inventory", "run": inventory},
             {"name": "Install Twine 6.2.0", "run": f"{run_in_env}python -m pip install --break-system-packages twine==6.2.0"},
             {"name": "Verify Runtime artifacts", "run": f"{run_in_env}twine check --strict action_server/dist/*.whl action_server/dist/*.tar.gz"},
+            {"name": "Canary local Runtime verifier", "run": f"{run_in_env}python action_server/scripts/publish_verified_runtime.py --dist-dir action_server/dist --dry-run"},
             self.upload_artifact(name="actions-runtime-dist", path="action_server/dist/*", pinned=True),
             {"name": "Check Runtime publish credential", "id": "runtime-token", "if": "github.event_name == 'push'", "env": {"RUNTIME_TOKEN": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"}, "run": "if [[ -n \"${RUNTIME_TOKEN:-}\" ]]; then echo 'enabled=true' >> \"$GITHUB_OUTPUT\"; else echo 'enabled=false' >> \"$GITHUB_OUTPUT\"; fi"},
             {"name": "Publish verified artifacts", "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'", "run": f"{run_in_env}twine upload action_server/dist/*.whl action_server/dist/*.tar.gz", "env": {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": "${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}"}},

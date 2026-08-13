@@ -13,9 +13,9 @@ from pathlib import Path
 MANIFEST_NAME = "actions-runtime-manifest.sha256"
 ARTIFACT_PATTERNS = (
     re.compile(r"^actions_runtime-[0-9][^/]*\.tar\.gz$"),
-    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-manylinux[^/]*x86_64\.whl$"),
-    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-macosx[^/]*arm64\.whl$"),
-    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-win_amd64\.whl$"),
+    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-cp\1-manylinux_[^/]*x86_64\.whl$"),
+    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-cp\1-macosx_12_0_arm64\.whl$"),
+    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-cp\1-win_amd64\.whl$"),
 )
 
 

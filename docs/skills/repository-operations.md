@@ -68,6 +68,15 @@ command with `--publish`. Binary release names use GitHub expressions
 containing `${{ github.ref_name }}`; shell literals such as `$tag-linux64` are
 not valid action inputs.
 
+The publish job installs repository-root devutils requirements with an explicit
+`action_server` working directory, then runs the local verifier in dry-run mode
+after manifest creation and Twine checking, before artifact retention or upload.
+The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
+cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
+rejecting mismatched ABI tags. The sdist and wheel build steps expose only
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`; credentials remain scoped to the
+frontend/OAuth setup steps that use them.
+
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
 `actions/poetry.lock` and `actions-http-helper/poetry.lock` files must exist and

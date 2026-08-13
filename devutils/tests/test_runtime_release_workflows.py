@@ -101,22 +101,60 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
         in publish_job.group()
     )
     assert "GITHUB_OUTPUT" in publish_job.group()
+    assert "working-directory: action_server" in publish_job.group()
+    canary_steps = [
+        step
+        for step in workflow["jobs"]["publish"]["steps"]
+        if step.get("name") == "Canary local Runtime verifier"
+    ]
+    assert canary_steps == [
+        {
+            "name": "Canary local Runtime verifier",
+            "run": "uv run --no-project --python ${{ matrix.python }} python action_server/scripts/publish_verified_runtime.py --dist-dir action_server/dist --dry-run",
+        }
+    ]
     assert publish_job.group().index(
         "Verify Runtime artifacts"
     ) < publish_job.group().index("actions-runtime-dist")
     assert publish_job.group().count("name: actions-runtime-dist") == 1
+    assert "name: Build sdist" in pypi
+    sdist_step = pypi[
+        pypi.index("name: Build sdist") : pypi.index(
+            "name: 'Upload artifact: action_server/dist/*'"
+        )
+    ]
+    assert "NODE_AUTH_TOKEN" not in sdist_step
+    assert "GH_TOKEN" not in sdist_step
+    assert "ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD" in sdist_step
+    wheel_build_step = next(
+        step
+        for step in workflow["jobs"]["build-wheels"]["steps"]
+        if step.get("name") == "Build and clean-test wheels"
+    )
+    assert "env" not in wheel_build_step or not {
+        "NODE_AUTH_TOKEN",
+        "GH_TOKEN",
+    } & set(wheel_build_step["env"])
+    publish_step_names = [
+        step.get("name") for step in workflow["jobs"]["publish"]["steps"]
+    ]
+    assert (
+        publish_step_names.index("Verify Runtime artifacts")
+        < publish_step_names.index("Canary local Runtime verifier")
+        < publish_step_names.index("Upload artifact: action_server/dist/*")
+    )
 
 
 def test_runtime_publisher_verifies_manifest_and_rejects_bad_inventory(tmp_path):
     publisher = load_publisher()
     artifacts = [
         "actions_runtime-1.0.0.tar.gz",
-        "actions_runtime-1.0.0-cp312-manylinux_2_28_x86_64.whl",
-        "actions_runtime-1.0.0-cp313-manylinux_2_28_x86_64.whl",
-        "actions_runtime-1.0.0-cp312-macosx_11_0_arm64.whl",
-        "actions_runtime-1.0.0-cp313-macosx_11_0_arm64.whl",
-        "actions_runtime-1.0.0-cp312-win_amd64.whl",
-        "actions_runtime-1.0.0-cp313-win_amd64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_28_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
     ]
     for name in artifacts:
         (tmp_path / name).write_bytes(name.encode())
@@ -131,9 +169,31 @@ def test_runtime_publisher_verifies_manifest_and_rejects_bad_inventory(tmp_path)
     (tmp_path / "unexpected.txt").write_text("extra")
     with pytest.raises(publisher.VerificationError, match="seven artifacts"):
         publisher.verify_artifacts(tmp_path)
-    (tmp_path / "unexpected.txt").unlink()
-    (tmp_path / artifacts[-1]).unlink()
-    with pytest.raises(publisher.VerificationError, match="seven artifacts"):
+
+
+def test_runtime_publisher_accepts_real_cibuildwheel_names_and_rejects_bad_abi(
+    tmp_path,
+):
+    publisher = load_publisher()
+    artifacts = [
+        "actions_runtime-1.0.0.tar.gz",
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_28_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+    ]
+    for name in artifacts:
+        (tmp_path / name).write_bytes(name.encode())
+    publisher.write_manifest(tmp_path)
+    assert publisher.verify_artifacts(tmp_path) == sorted(artifacts)
+
+    bad_name = "actions_runtime-1.0.0-cp312-abi3-manylinux_2_28_x86_64.whl"
+    (tmp_path / artifacts[1]).rename(tmp_path / bad_name)
+    with pytest.raises(
+        publisher.VerificationError, match="unexpected artifact filename"
+    ):
         publisher.verify_artifacts(tmp_path)
 
 
