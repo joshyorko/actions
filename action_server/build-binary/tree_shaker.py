@@ -37,40 +37,33 @@ def scan_imports(file_path: str) -> list[ImportViolation]:
     if "/enterprise/" in str(path) or "\\enterprise\\" in str(path):
         return violations
     
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            lines = f.readlines()
-            
-        for line_num, line in enumerate(lines, start=1):
-            # Check for @sema4ai/* imports
-            sema4ai_match = re.search(r'["\'](@sema4ai/[^"\']+)["\']', line)
-            if sema4ai_match:
-                violations.append(
-                    ImportViolation(
-                        file_path=file_path,
-                        line_number=line_num,
-                        import_statement=line.strip(),
-                        prohibited_module=sema4ai_match.group(1),  # Group 1 excludes quotes
-                        severity="error",
-                    )
+    with open(file_path, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    for line_num, line in enumerate(lines, start=1):
+        sema4ai_match = re.search(r'["\'](@sema4ai/[^"\']+)["\']', line)
+        if sema4ai_match:
+            violations.append(
+                ImportViolation(
+                    file_path=file_path,
+                    line_number=line_num,
+                    import_statement=line.strip(),
+                    prohibited_module=sema4ai_match.group(1),
+                    severity="error",
                 )
-            
-            # Check for @/enterprise imports
-            enterprise_match = re.search(r'["\'](@/enterprise[^"\']*)["\']', line)
-            if enterprise_match:
-                violations.append(
-                    ImportViolation(
-                        file_path=file_path,
-                        line_number=line_num,
-                        import_statement=line.strip(),
-                        prohibited_module=enterprise_match.group(1),  # Group 1 excludes quotes
-                        severity="error",
-                    )
+            )
+
+        enterprise_match = re.search(r'["\'](@/enterprise[^"\']*)["\']', line)
+        if enterprise_match:
+            violations.append(
+                ImportViolation(
+                    file_path=file_path,
+                    line_number=line_num,
+                    import_statement=line.strip(),
+                    prohibited_module=enterprise_match.group(1),
+                    severity="error",
                 )
-                
-    except Exception as e:
-        # If file can't be read, skip it
-        pass
+            )
     
     return violations
 
@@ -176,6 +169,9 @@ class TreeShaker:
         violations = []
         dir_path = Path(directory)
         
+        if not dir_path.is_dir():
+            raise NotADirectoryError(f"Import scan target is not a directory: {dir_path}")
+
         # Scan all TypeScript/JavaScript files
         for pattern in ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]:
             for file_path in dir_path.glob(pattern):

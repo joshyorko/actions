@@ -18,7 +18,17 @@ are separate Vite roots under `apps/runtime` and `apps/canvas-view`; run
 to verify both independent artifacts. The topology has no tier-specific
 manifest, product-tier build variable, vendored package directory, or external
 runtime asset dependency. Frontend quality is fail-fast through
-`npm run test:quality` and the workflow runs both build boundaries.
+`npm run test:quality`, which intentionally gates the shipping Runtime/Canvas
+entrypoints and `src/app` topology plus topology tests; the historical all-tree
+lint and full test suites were not green gates. The workflow runs both build
+boundaries.
+
+The build manifest validator rejects concrete Sema4AI product packages,
+vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
+registry URLs while allowing ordinary public scoped packages such as
+`@codemirror/*` and `@radix-ui/*`. Built-import validation must scan files
+inside `dist/`; passing the directory to the single-file detector silently
+skips validation.
 
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of

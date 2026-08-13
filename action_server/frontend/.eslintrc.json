@@ -33,6 +33,7 @@
   "rules": {
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "warn",
+    "react/react-in-jsx-scope": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.ts"] }],
     "no-restricted-imports": "off"
   },

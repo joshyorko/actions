@@ -401,3 +401,38 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
         assert "src/core/Dashboard.tsx:3" in report
         assert "@sema4ai/components" in report
         assert "error" in report.lower()
+
+    def test_scan_directory_reports_prohibited_imports_in_built_tree(self, tmp_path):
+        dist_dir = tmp_path / "dist"
+        dist_dir.mkdir()
+        bundle = dist_dir / "index.js"
+        bundle.write_text("import '@sema4ai/theme';")
+
+        shaker = TreeShaker(tier=COMMUNITY, root_dir=tmp_path)
+
+        violations = shaker.scan_directory(dist_dir)
+
+        assert [violation.prohibited_module for violation in violations] == [
+            "@sema4ai/theme"
+        ]
+
+    def test_scan_directory_does_not_swallow_read_errors(self, tmp_path, monkeypatch):
+        dist_dir = tmp_path / "dist"
+        dist_dir.mkdir()
+        bundle = dist_dir / "index.js"
+        bundle.write_text("import '@sema4ai/theme';")
+
+        import builtins
+
+        original_open = builtins.open
+
+        def fail_for_bundle(path, *args, **kwargs):
+            if Path(path) == bundle:
+                raise PermissionError("permission denied")
+            return original_open(path, *args, **kwargs)
+
+        monkeypatch.setattr(builtins, "open", fail_for_bundle)
+        shaker = TreeShaker(tier=COMMUNITY, root_dir=tmp_path)
+
+        with pytest.raises(PermissionError, match="permission denied"):
+            shaker.scan_directory(dist_dir)

@@ -207,7 +207,7 @@ def validate_imports(ctx: Context, json_output: bool = False):
     from pathlib import Path
     
     sys.path.insert(0, str(CURDIR / "build-binary"))
-    from tree_shaker import scan_imports, detect_enterprise_imports
+    from tree_shaker import TreeShaker
     
     dist_path = CURDIR / "frontend" / "dist"
     if not dist_path.exists():
@@ -218,8 +218,9 @@ def validate_imports(ctx: Context, json_output: bool = False):
             print(f"[ERROR] {msg}")
         sys.exit(2)
     
-    # Scan all built files for enterprise imports
-    violations = detect_enterprise_imports(str(dist_path))
+    # Scan each built source file; passing the directory to the file scanner
+    # silently skipped the entire validation when it could not be opened.
+    violations = TreeShaker(tier="community", root_dir=dist_path).scan_directory(dist_path)
     
     if violations:
         msg = f"Found {len(violations)} removed product import(s) in Runtime build"

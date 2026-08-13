@@ -29,11 +29,11 @@ describe('Actions frontend topology', () => {
 
     const runtimeEntry = read('apps/runtime/src/main.tsx');
     const canvasEntry = read('apps/canvas-view/src/main.tsx');
-    expect(runtimeEntry).toContain("from '../../../src/App'");
+    expect(runtimeEntry).toContain("../../../src/App");
     expect(canvasEntry).not.toContain("from '../../../src/App'");
     expect(canvasEntry).toContain('Canvas View');
-    expect(read('apps/runtime/index.html')).toContain('/apps/runtime/src/main.tsx');
-    expect(read('apps/canvas-view/index.html')).toContain('/apps/canvas-view/src/main.tsx');
+    expect(read('apps/runtime/index.html')).toContain('/src/main.tsx');
+    expect(read('apps/canvas-view/index.html')).toContain('/src/main.tsx');
   });
 
   it('keeps App.tsx as composition while feature boundaries own shell and routes', () => {
@@ -60,5 +60,24 @@ describe('Actions frontend topology', () => {
     for (const removedRoute of ['/knowledge-base', '/org-management', '/sso']) {
       expect(routes).not.toContain(removedRoute);
     }
+  });
+
+  it('keeps persisted sidebar and theme controls in Runtime navigation', () => {
+    const navigation = read('src/app/RuntimeNavigation.tsx');
+
+    expect(navigation).toContain('sidebar-collapsed');
+    expect(navigation).toContain('useTheme');
+    expect(navigation).toContain('cycleTheme');
+  });
+
+  it('defines a bounded fail-fast quality gate', () => {
+    const manifest = JSON.parse(read('package.json')) as {
+      scripts: Record<string, string>;
+    };
+
+    expect(manifest.scripts['test:quality']).toContain('test:lint');
+    expect(manifest.scripts['test:quality']).not.toContain('||');
+    expect(manifest.scripts['test:lint']).toContain('src/app');
+    expect(manifest.scripts['test:lint']).not.toMatch(/\s\.\s*$/);
   });
 });

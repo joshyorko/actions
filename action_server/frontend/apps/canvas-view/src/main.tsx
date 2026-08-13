@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
 const CanvasViewBoundary = () => (
   <main aria-labelledby="canvas-view-title">
@@ -7,7 +7,7 @@ const CanvasViewBoundary = () => (
   </main>
 );
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 
 if (container) {
   createRoot(container).render(<CanvasViewBoundary />);

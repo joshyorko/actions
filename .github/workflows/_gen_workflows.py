@@ -368,8 +368,6 @@ echo "::set-output name=is_beta::$is_beta"
             "uses": "actions/setup-node@v4",
             "with": {
                 "node-version": "20.x",
-                "registry-url": "https://npm.pkg.github.com",
-                "scope": "@robocorp",
             },
         }
 
@@ -389,7 +387,6 @@ echo "::set-output name=is_beta::$is_beta"
             "run": f"{run_in_env}inv build-frontend",
             "env": {
                 "CI": True,
-                "NODE_AUTH_TOKEN": "${{ secrets.GH_PAT_READ_PACKAGES }}",
             },
         }
 
@@ -634,7 +631,6 @@ rm src/actions/server/bin/rcc* -f
 """,
             "env": {
                 "CI": True,
-                "NODE_AUTH_TOKEN": "${{ secrets.GH_PAT_READ_PACKAGES }}",
                 "GH_TOKEN": "${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}",
                 "ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": True,
             },

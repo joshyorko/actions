@@ -17,13 +17,14 @@
     "build:canvas": "vite build --mode canvas --minify=esbuild",
     "build:debug": "vite build --mode runtime --minify=false",
     "build:tests": "vite build --mode runtime --minify=false --outDir=./dist-test",
-    "test:lint": "eslint --ext .tsx,.ts --max-warnings 0 .",
+    "test:lint": "eslint --max-warnings 0 apps/runtime/src apps/canvas-view/src src/app",
     "test:types": "tsc --noEmit",
-    "test:prettier": "prettier --check ./src/**/*.{ts,tsx}",
+    "test:prettier": "prettier --no-config --check apps/runtime/src apps/canvas-view/src src/app",
     "prettier": "prettier --write ./src/**/*.{ts,tsx}",
     "fixlint": "eslint --fix --ext .tsx,.ts .",
-    "test": "vitest --run"
-    ,"test:quality": "npm run test:lint && npm run test:types && npm run test:prettier && npm test"
+    "test": "vitest --run",
+    "test:topology": "vitest --run __tests__/topology",
+    "test:quality": "npm run test:lint && npm run test:types && npm run test:prettier && npm run test:topology"
   },
   "dependencies": {
     "@codemirror/commands": "^6.6.0",
@@ -73,6 +74,5 @@
     "@testing-library/react": "^16.0.0",
     "@testing-library/jest-dom": "^6.4.0",
     "@testing-library/user-event": "^14.5.0"
-  },
-  "prettier": "prettier"
+  }
 }

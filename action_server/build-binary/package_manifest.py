@@ -52,9 +52,22 @@ class PackageManifest:
         errors: list[str] = []
         if not self.locked:
             errors.append("package-lock.json is required beside package.json")
-        if any(name.startswith("@") and "actions" not in name for name in {**self.dependencies, **self.dev_dependencies}):
-            errors.append("Actions frontend manifest must not reference private product packages")
-        for name, version in {**self.dependencies, **self.dev_dependencies}.items():
+        packages = {**self.dependencies, **self.dev_dependencies}
+        prohibited_names = {
+            name
+            for name in packages
+            if name.startswith("@sema4ai/")
+            or name in {"actions-runtime-components", "actions-runtime-icons"}
+        }
+        prohibited_urls = {
+            name
+            for name, version in packages.items()
+            if isinstance(version, str)
+            and (version.startswith("file:") or "npm.pkg.github.com" in version)
+        }
+        for name in sorted(prohibited_names | prohibited_urls):
+            errors.append(f"Actions frontend manifest contains prohibited package {name!r}")
+        for name, version in packages.items():
             if version in {"*", "latest"}:
                 errors.append(f"Package {name} uses unsupported version {version!r}")
         return ValidationResult(not errors, errors, [])

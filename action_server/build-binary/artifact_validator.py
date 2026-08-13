@@ -70,7 +70,12 @@ def validate_imports(artifact_path: Path, tier: str) -> ValidationCheck:
             severity="info",
         )
     
-    violations = tree_shaker.detect_enterprise_imports(str(artifact_path))
+    if artifact_path.is_dir():
+        violations = tree_shaker.TreeShaker("community", artifact_path).scan_directory(
+            artifact_path
+        )
+    else:
+        violations = tree_shaker.detect_enterprise_imports(str(artifact_path))
     
     if violations:
         messages = [
