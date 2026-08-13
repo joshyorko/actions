@@ -157,9 +157,14 @@ class _ActionRoutes:
         mcp_endpoint = mcp_route.endpoint
         from actions.server.mcp.gateway_metadata import McpRequestMetadataMiddleware
 
+        def _observe_mcp_metadata(metadata):
+            log.info("MCP request metadata", extra=metadata.telemetry_attributes)
+
         # Authentication remains the outer middleware so unauthenticated requests
         # are rejected before their body is inspected for routing metadata.
-        mcp_endpoint = McpRequestMetadataMiddleware(mcp_endpoint)
+        mcp_endpoint = McpRequestMetadataMiddleware(
+            mcp_endpoint, metadata_observer=_observe_mcp_metadata
+        )
         if self._api_key:
             from starlette.middleware.authentication import AuthenticationMiddleware
 
@@ -248,9 +253,9 @@ class _ActionRoutes:
             openapi_extra[OPENAPI_SPEC_OPERATION_KIND] = action_kind
 
             route_name = build_url_api_run(action_package.name, action.name)
-            assert route_name not in registered_route_names, (
-                f"Route: {route_name} already registered."
-            )
+            assert (
+                route_name not in registered_route_names
+            ), f"Route: {route_name} already registered."
             app.add_api_route(
                 route_name,
                 func_fast_api,

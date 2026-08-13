@@ -41,16 +41,22 @@ distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
 
 The stateless `/mcp` route validates `Mcp-Method` and `Mcp-Name` against the
-parsed JSON-RPC body in `actions.server.mcp.gateway_metadata`. Trusted metadata
-is available through `scope["state"]["actions.mcp.request_metadata"]` and
-`get_mcp_request_metadata()`, with `actions.mcp.method`, `actions.mcp.name`,
-and `actions.correlation_id` telemetry attributes. Missing identity headers are
-normalized from the body; mismatches and identity headers on malformed/error
-bodies return HTTP 400. `X-Request-ID` is preserved only when it is a canonical
-UUID; otherwise a UUID is generated. API-key authentication wraps this
+parsed JSON-RPC body in `actions.server.mcp.gateway_metadata`. Inspection buffers
+at most 1 MiB and returns HTTP 413 without forwarding an oversized body. Trusted
+metadata is available through `scope["state"]["actions.mcp.request_metadata"]`,
+`get_mcp_request_metadata()`, and the bounded observer callback, with
+`actions.mcp.method`, `actions.mcp.name`, and `actions.correlation_id` attributes.
+JSON-RPC 2.0 objects and allowlisted methods are required; method/name strings
+are length-bounded. Header names are case-insensitive, values are exact with no
+surrounding whitespace, and duplicate identity/correlation headers return HTTP
+400. Missing identity headers are normalized from the body; mismatches and
+identity headers on malformed/error bodies return HTTP 400. `X-Request-ID` is
+preserved only when it is a canonical UUID, otherwise a UUID is generated and
+returned on the response. The route's API-key authentication wraps this
 middleware and therefore retains its existing rejection order. Method is safe
 for metrics; the optional name attribute is intended for logs/traces and is
-length-bounded to avoid unbounded metric cardinality.
+length-bounded to avoid unbounded metric cardinality. The body is replayed in
+its original ASGI chunks and returns an empty terminal request after exhaustion.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
