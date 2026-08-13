@@ -298,7 +298,10 @@ def actions_run(
     cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
     if additional_env:
         cp.update(additional_env)
-    args = [str(executable)] + cmdline
+    if sys.platform == "win32":
+        args = [sys.executable, "-c", _ACTIONS_BOOTSTRAP] + cmdline
+    else:
+        args = [str(executable)] + cmdline
     result = subprocess.run(args, capture_output=True, env=cp, cwd=cwd, timeout=timeout)
 
     if returncode == "any":
@@ -332,6 +335,24 @@ def _actions_executable() -> Path:
             "Missing installed actions console script on PATH: actions"
         )
     return Path(executable)
+
+
+_ACTIONS_BOOTSTRAP = """\
+import importlib.metadata
+
+distribution = importlib.metadata.distribution("actions-core")
+entry_points = [
+    entry_point
+    for entry_point in distribution.entry_points
+    if entry_point.group == "console_scripts" and entry_point.name == "actions"
+]
+if len(entry_points) != 1:
+    raise RuntimeError("actions-core must define exactly one actions console script")
+entry_point = entry_points[0]
+if entry_point.value != "actions.cli:main":
+    raise RuntimeError("actions console script must target actions.cli:main")
+raise SystemExit(entry_point.load()())
+"""
 
 
 def python_run(
