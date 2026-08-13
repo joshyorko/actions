@@ -32,6 +32,7 @@ def test_validate_artifact_task_rejects_removed_product_imports(
 
     dist = tmp_path / "frontend" / "dist"
     dist.mkdir(parents=True)
+    (tmp_path / "frontend" / "dist-canvas").mkdir()
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
     (dist / "index.js").write_text(
         "import '@sema4ai/components';\n" "import '@/enterprise/private';\n",
@@ -66,6 +67,91 @@ def test_validate_artifact_task_accepts_clean_artifact(tmp_path, monkeypatch):
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
 
     tasks.validate_artifact.body(Context(), json_output=False)
+
+
+def test_validate_artifact_builds_missing_default_canvas_once(tmp_path, monkeypatch):
+    """The default task repairs a missing Canvas artifact before validation."""
+    action_server = Path(__file__).parents[2]
+    sys.path.insert(0, str(action_server))
+    import tasks
+    from invoke import Context
+
+    dist = tmp_path / "frontend" / "dist"
+    canvas = tmp_path / "frontend" / "dist-canvas"
+    dist.mkdir(parents=True)
+    (dist / "index.js").write_text("import 'react';", encoding="utf-8")
+    (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
+    monkeypatch.setattr(tasks, "CURDIR", tmp_path)
+    commands = []
+
+    def build_canvas(ctx, *args, **kwargs):
+        commands.append(args)
+        canvas.mkdir()
+        (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+
+    monkeypatch.setattr(tasks, "run", build_canvas)
+
+    tasks.validate_artifact.body(Context(), json_output=False)
+
+    assert commands == [("npm", "run", "build:canvas")]
+
+
+def test_validate_artifact_propagates_default_canvas_build_failure(
+    tmp_path, monkeypatch
+):
+    """A failed owned Canvas build must stop validation."""
+    action_server = Path(__file__).parents[2]
+    sys.path.insert(0, str(action_server))
+    import tasks
+    from invoke import Context
+
+    dist = tmp_path / "frontend" / "dist"
+    dist.mkdir(parents=True)
+    (dist / "index.js").write_text("import 'react';", encoding="utf-8")
+    (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
+    monkeypatch.setattr(tasks, "CURDIR", tmp_path)
+    monkeypatch.setattr(
+        tasks,
+        "run",
+        lambda *args, **kwargs: (_ for _ in ()).throw(
+            RuntimeError("Canvas build failed")
+        ),
+    )
+
+    with pytest.raises(RuntimeError, match="Canvas build failed"):
+        tasks.validate_artifact.body(Context(), json_output=False)
+
+
+def test_validate_artifact_does_not_build_explicit_missing_root(tmp_path, monkeypatch):
+    """Explicit artifact roots are validation-only and fail when missing."""
+    action_server = Path(__file__).parents[2]
+    sys.path.insert(0, str(action_server))
+    import tasks
+    from invoke import Context
+
+    runtime = tmp_path / "runtime"
+    canvas = tmp_path / "canvas"
+    runtime.mkdir()
+    canvas.mkdir()
+    (runtime / "index.js").write_text("import 'react';", encoding="utf-8")
+    (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+    (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
+    monkeypatch.setattr(tasks, "CURDIR", tmp_path)
+    monkeypatch.setattr(
+        tasks,
+        "run",
+        lambda *args, **kwargs: pytest.fail("explicit roots must not build"),
+    )
+
+    with pytest.raises(SystemExit) as raised:
+        tasks.validate_artifact.body(
+            Context(),
+            runtime_artifact=str(tmp_path / "missing-runtime"),
+            canvas_artifact=str(canvas),
+            json_output=False,
+        )
+
+    assert raised.value.code == 2
 
 
 def test_validate_artifact_task_rejects_poisoned_runtime_html(

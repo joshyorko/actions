@@ -256,10 +256,17 @@ def validate_imports(ctx: Context, json_output: bool = False):
 
 
 @task
-def validate_artifact(ctx: Context, json_output: bool = False):
+def validate_artifact(
+    ctx: Context,
+    runtime_artifact: Optional[str] = None,
+    canvas_artifact: Optional[str] = None,
+    json_output: bool = False,
+):
     """Validate built artifacts meet all requirements.
     
     Args:
+        runtime_artifact: Optional Runtime root to validate without building.
+        canvas_artifact: Optional Canvas root to validate without building.
         json_output: Output validation result as JSON
     """
     import json as json_lib
@@ -268,10 +275,28 @@ def validate_artifact(ctx: Context, json_output: bool = False):
     from artifact_validator import validate_artifact as validate_artifact_func
     
     baseline_path = CURDIR / "tests" / "performance_tests" / "baseline.json"
-    artifact_paths = [
-        CURDIR / "frontend" / "dist",
-        CURDIR / "frontend" / "dist-canvas",
+    artifact_specs = [
+        (
+            Path(runtime_artifact) if runtime_artifact else CURDIR / "frontend" / "dist",
+            runtime_artifact is not None,
+            "build:runtime",
+        ),
+        (
+            Path(canvas_artifact)
+            if canvas_artifact
+            else CURDIR / "frontend" / "dist-canvas",
+            canvas_artifact is not None,
+            "build:canvas",
+        ),
     ]
+
+    for artifact_path, explicit_path, build_command in artifact_specs:
+        if not explicit_path and not artifact_path.exists():
+            print(f"[BUILD] Missing default artifact; running npm run {build_command}")
+            with _change_to_frontend_dir():
+                run(ctx, "npm", "run", build_command)
+
+    artifact_paths = [path for path, _, _ in artifact_specs]
     results = []
     all_passed = True
 
