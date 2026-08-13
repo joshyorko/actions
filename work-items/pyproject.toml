@@ -6,6 +6,7 @@ authors = [{name = "Community Contributors"}]
 license = "Apache-2.0"
 readme = "README.md"
 requires-python = ">=3.10,<4.0"
+dependencies = ["typing-extensions>=4.6.0"]
 keywords = ["automation", "work-items", "producer-consumer", "rpa", "workflow"]
 classifiers = [
     "Development Status :: 4 - Beta",

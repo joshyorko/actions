@@ -1,4 +1,4 @@
-from typing import get_overloads
+from typing_extensions import get_overloads
 
 from actions.work_items import Output, RuntimeAdapter
 from actions.work_items._support import add_file, release_input

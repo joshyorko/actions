@@ -53,6 +53,17 @@ PYTHONPATH=work-items/src uv run --no-project --with pytest --with pytest-asynci
 
 ## CI Publication and Recovery
 
+### 0.4.4 namespace-release audit
+
+The `actions-work-items==0.4.4` wheel and sdist must contribute only child
+namespaces (`actions.work_items`, `actions.workitems`, and
+`actions_work_items`); they must not contain `actions/__init__.py`, which is
+owned exclusively by `actions-core`. In addition to `verify-work-items`, a
+release audit must inspect wheel `RECORD`, sdist members, `pip check`, and both
+package uninstall orders in a fresh environment. The package declares
+`typing-extensions` at runtime because its overload protocol must expose the
+same introspection contract on Python 3.10 as on newer interpreters.
+
 The Work Items release workflow verifies relevant pull requests, relevant pushes to `community`, and `actions-work-items-*` tags. Verification uses Python 3.12 and Poetry 2.1.1, synchronizes the committed Work Items lock, passes `$GITHUB_WORKSPACE/work-items/dist` to `verify-work-items` as an absolute retained-artifact path, and uploads the resulting wheel and sdist as `actions-work-items-dist`. Caller artifact paths must be absolute because Poetry build commands execute from the package directory.
 
 Do not enable setup-python's Poetry cache before Poetry is installed: the cache initialization resolves the `poetry` executable during setup and fails a fresh GitHub runner. The release workflow deliberately relies on the committed lock and installs Poetry after Python setup without that cache mode.
