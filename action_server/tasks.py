@@ -267,51 +267,66 @@ def validate_artifact(ctx: Context, json_output: bool = False):
     sys.path.insert(0, str(CURDIR / "build-binary"))
     from artifact_validator import validate_artifact as validate_artifact_func
     
-    artifact_path = CURDIR / "frontend" / "dist"
-    if not artifact_path.exists():
-        msg = f"Artifact path not found: {artifact_path}"
-        if json_output:
-            print(json_lib.dumps({"status": "error", "message": msg}, indent=2))
-        else:
-            print(f"[ERROR] {msg}")
-        sys.exit(2)
-    
     baseline_path = CURDIR / "tests" / "performance_tests" / "baseline.json"
-    
-    try:
-        all_passed, checks = validate_artifact_func(
-            artifact_path,
-            baseline_path if baseline_path.exists() else None,
-            json_output
-        )
-        
-        if json_output:
-            output = {
-                "status": "passed" if all_passed else "failed",
-                "checks": [
-                    {
-                        "name": check.name,
-                        "passed": check.passed,
-                        "message": check.message,
-                        "severity": check.severity
-                    }
-                    for check in checks
-                ]
-            }
-            print(json_lib.dumps(output, indent=2))
+    artifact_paths = [
+        CURDIR / "frontend" / "dist",
+        CURDIR / "frontend" / "dist-canvas",
+    ]
+    results = []
+    all_passed = True
+
+    for artifact_path in artifact_paths:
+        if not artifact_path.exists():
+            results.append(
+                (artifact_path, False, [], f"Artifact path not found: {artifact_path}")
+            )
+            all_passed = False
+            continue
+
+        try:
+            artifact_passed, checks = validate_artifact_func(
+                artifact_path,
+                baseline_path if baseline_path.exists() else None,
+                json_output,
+            )
+        except Exception as exc:
+            results.append((artifact_path, False, [], f"Validation error: {exc}"))
+            all_passed = False
         else:
+            results.append((artifact_path, artifact_passed, checks, None))
+            all_passed = all_passed and artifact_passed
+
+    if json_output:
+        print(json_lib.dumps({
+            "status": "passed" if all_passed else "failed",
+            "artifacts": [
+                {
+                    "path": str(path),
+                    "passed": passed,
+                    "message": error,
+                    "checks": [
+                        {
+                            "name": check.name,
+                            "passed": check.passed,
+                            "message": check.message,
+                            "severity": check.severity,
+                        }
+                        for check in checks
+                    ],
+                }
+                for path, passed, checks, error in results
+            ],
+        }, indent=2))
+    else:
+        for artifact_path, artifact_passed, checks, error in results:
+            print(f"[ARTIFACT] {artifact_path}")
+            if error:
+                print(f"[ERROR] {error}")
             for check in checks:
                 status = "[OK]" if check.passed else "[ERROR]"
                 print(f"{status} {check.name}: {check.message}")
-        
-        if not all_passed:
-            sys.exit(2)
-    
-    except Exception as e:
-        if json_output:
-            print(json_lib.dumps({"status": "error", "message": str(e)}, indent=2))
-        else:
-            print(f"[ERROR] Validation error: {e}")
+
+    if not all_passed:
         sys.exit(2)
 
 

@@ -26,10 +26,17 @@ boundaries.
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
 registry URLs while allowing ordinary public scoped packages such as
-`@codemirror/*` and `@radix-ui/*`. Built-import validation scans every
-supported source file inside `dist/` and uses the same Actions-owned contract
-for Runtime and Canvas artifacts. Scanner read errors fail validation; passing
-the directory to a single-file detector must not be used.
+`@codemirror/*` and `@radix-ui/*`. Built-import validation scans every `.html`,
+`.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`, and `.css` file inside each artifact
+directory in deterministic path order, while ignoring arbitrary assets and
+source maps. It uses the same Actions-owned contract for Runtime and Canvas
+artifacts, with no path-based enterprise exemption. Scanner read errors fail
+validation; passing the directory to a single-file detector must not be used.
+
+The default `inv validate-artifact` task visits `frontend/dist` and
+`frontend/dist-canvas` independently and fails if either is missing or has an
+import/read validation failure. Its output identifies each artifact, so a
+passing Runtime check cannot hide an unscanned or failed Canvas artifact.
 
 The `validate-artifact` Invoke task prepends `action_server/build-binary` to
 `sys.path` and imports `artifact_validator` as a top-level module. Its helper

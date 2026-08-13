@@ -6,7 +6,6 @@ imports in community builds.
 """
 
 from pathlib import Path
-from unittest.mock import Mock, patch
 
 import pytest
 
@@ -32,7 +31,8 @@ class TestScanImports:
         """Test detecting enterprise import in core/ file."""
         # Arrange
         test_file = tmp_path / "Dashboard.tsx"
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import React from 'react';
 import { Button } from '@sema4ai/components';  // VIOLATION
 import { Table } from '@/core/components/ui/Table';
@@ -40,7 +40,8 @@ import { Table } from '@/core/components/ui/Table';
 export function Dashboard() {
     return <div><Button>Click</Button></div>;
 }
-""")
+"""
+        )
 
         # Act
         violations = scan_imports(test_file)
@@ -57,11 +58,13 @@ export function Dashboard() {
         """Test detecting multiple enterprise imports in one file."""
         # Arrange
         test_file = tmp_path / "Analytics.tsx"
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import { Button } from '@sema4ai/components';
 import { Icon } from '@sema4ai/icons';
 import { theme } from '@sema4ai/theme';
-""")
+"""
+        )
 
         # Act
         violations = scan_imports(test_file)
@@ -78,10 +81,12 @@ import { theme } from '@sema4ai/theme';
         # Arrange
         test_file = tmp_path / "core" / "Dashboard.tsx"
         test_file.parent.mkdir(parents=True)
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import React from 'react';
 import { KBSearch } from '@/enterprise/pages/KnowledgeBase';  // VIOLATION
-""")
+"""
+        )
 
         # Act
         violations = scan_imports(test_file)
@@ -94,12 +99,14 @@ import { KBSearch } from '@/enterprise/pages/KnowledgeBase';  // VIOLATION
         """Test no violations for valid core/ imports."""
         # Arrange
         test_file = tmp_path / "Dashboard.tsx"
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import React from 'react';
 import { Button } from '@radix-ui/react-button';
 import { Table } from '@/core/components/ui/Table';
 import { useAPI } from '@/shared/hooks/useAPI';
-""")
+"""
+        )
 
         # Act
         violations = scan_imports(test_file)
@@ -107,21 +114,53 @@ import { useAPI } from '@/shared/hooks/useAPI';
         # Assert
         assert len(violations) == 0
 
-    def test_no_violation_for_enterprise_imports_in_enterprise_files(self, tmp_path):
-        """Test enterprise imports are allowed in enterprise/ files."""
+    def test_enterprise_path_does_not_bypass_import_validation(self, tmp_path):
+        """Test enterprise paths cannot bypass forbidden import validation."""
         # Arrange
         test_file = tmp_path / "enterprise" / "Analytics.tsx"
         test_file.parent.mkdir(parents=True)
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import { Button } from '@sema4ai/components';  // ALLOWED
 import { Chart } from '@/enterprise/components/Chart';  // ALLOWED
-""")
+"""
+        )
 
-        # Act - should only scan core/ files
+        # Act
         violations = scan_imports(test_file)
 
-        # Assert - enterprise files can import enterprise code
-        assert len(violations) == 0
+        # Assert
+        assert len(violations) == 2
+
+    @pytest.mark.parametrize(
+        "extension", ["html", "js", "jsx", "ts", "tsx", "mjs", "cjs", "css"]
+    )
+    def test_scan_directory_scans_shipped_text_extensions(self, tmp_path, extension):
+        """Test every shipped source-like extension is scanned for imports."""
+        dist_dir = tmp_path / "dist"
+        dist_dir.mkdir()
+        (dist_dir / f"index.{extension}").write_text(
+            '"@sema4ai/components"\n', encoding="utf-8"
+        )
+
+        violations = TreeShaker(tier=COMMUNITY, root_dir=tmp_path).scan_directory(
+            dist_dir
+        )
+
+        assert [violation.prohibited_module for violation in violations] == [
+            "@sema4ai/components"
+        ]
+
+    def test_scan_directory_ignores_non_source_assets(self, tmp_path):
+        """Test arbitrary assets and source maps are not import-scanned."""
+        dist_dir = tmp_path / "dist"
+        dist_dir.mkdir()
+        (dist_dir / "asset.svg").write_text("@sema4ai/components", encoding="utf-8")
+        (dist_dir / "index.js.map").write_text("@sema4ai/components", encoding="utf-8")
+
+        assert (
+            TreeShaker(tier=COMMUNITY, root_dir=tmp_path).scan_directory(dist_dir) == []
+        )
 
 
 class TestDetectEnterpriseImports:
@@ -131,12 +170,14 @@ class TestDetectEnterpriseImports:
         """Test detecting @sema4ai imports in built JS bundle."""
         # Arrange
         bundle_file = tmp_path / "index.js"
-        bundle_file.write_text("""
+        bundle_file.write_text(
+            """
 (function() {
     const Button = require('@sema4ai/components').Button;
     // ... rest of bundle
 })();
-""")
+"""
+        )
 
         # Act
         violations = detect_enterprise_imports(bundle_file)
@@ -149,9 +190,11 @@ class TestDetectEnterpriseImports:
         """Test detecting @/enterprise imports in built bundle."""
         # Arrange
         bundle_file = tmp_path / "index.js"
-        bundle_file.write_text("""
+        bundle_file.write_text(
+            """
 import { KBSearch } from '@/enterprise/pages/KnowledgeBase';
-""")
+"""
+        )
 
         # Act
         violations = detect_enterprise_imports(bundle_file)
@@ -164,13 +207,15 @@ import { KBSearch } from '@/enterprise/pages/KnowledgeBase';
         """Test no violations in clean community bundle."""
         # Arrange
         bundle_file = tmp_path / "index.js"
-        bundle_file.write_text("""
+        bundle_file.write_text(
+            """
 (function() {
     const Button = require('@radix-ui/react-button').Button;
     const React = require('react');
     // ... rest of bundle
 })();
-""")
+"""
+        )
 
         # Act
         violations = detect_enterprise_imports(bundle_file)
@@ -204,7 +249,7 @@ class TestGenerateViteExternalConfig:
         # Assert
         assert "rollupOptions" in config
         assert "external" in config["rollupOptions"]
-        
+
         external = config["rollupOptions"]["external"]
         # Should be a regex pattern or list of patterns
         if isinstance(external, list):
@@ -253,7 +298,7 @@ class TestImportViolation:
             line_number=5,
             import_statement="import { Button } from '@sema4ai/components';",
             prohibited_module="@sema4ai/components",
-            severity="error"
+            severity="error",
         )
 
         # Assert
@@ -271,7 +316,7 @@ class TestImportViolation:
             line_number=1,
             import_statement="import foo",
             prohibited_module="foo",
-            severity="error"
+            severity="error",
         )
 
         warning_violation = ImportViolation(
@@ -279,7 +324,7 @@ class TestImportViolation:
             line_number=1,
             import_statement="import foo",
             prohibited_module="foo",
-            severity="warning"
+            severity="warning",
         )
 
         # Assert
@@ -290,67 +335,43 @@ class TestImportViolation:
 class TestFeatureBoundaryEnforcement:
     """Test feature boundary enforcement with feature-boundaries.json."""
 
-    @patch("action_server.build_binary.tree_shaker.load_feature_boundaries")
-    def test_enforce_boundaries_blocks_enterprise_in_core(self, mock_load_boundaries, tmp_path):
+    def test_enforce_boundaries_blocks_enterprise_in_core(self, tmp_path):
         """Test feature boundaries block enterprise imports in core files."""
         # Arrange
-        mock_load_boundaries.return_value = {
-            "features": [
-                {
-                    "feature_id": "design_system",
-                    "tier": "enterprise",
-                    "module_path": "frontend/src/enterprise/components/ds",
-                    "import_pattern": "@sema4ai/.*"
-                },
-                {
-                    "feature_id": "action_ui",
-                    "tier": "core",
-                    "module_path": "frontend/src/core/pages/actions",
-                    "import_pattern": "@/core/.*"
-                }
-            ]
-        }
-
         test_file = tmp_path / "core" / "Dashboard.tsx"
         test_file.parent.mkdir(parents=True)
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import { Button } from '@sema4ai/components';  // VIOLATION
-""")
+"""
+        )
 
         # Act
         violations = scan_imports(test_file)
 
         # Assert
         assert len(violations) > 0
-        assert any("design_system" in str(v) or "@sema4ai" in v.import_statement 
-                   for v in violations)
+        assert any(
+            "design_system" in str(v) or "@sema4ai" in v.import_statement
+            for v in violations
+        )
 
-    @patch("action_server.build_binary.tree_shaker.load_feature_boundaries")
-    def test_enterprise_features_allowed_in_enterprise_dir(self, mock_load_boundaries, tmp_path):
-        """Test enterprise features are allowed in enterprise/ directory."""
+    def test_enterprise_features_are_not_exempt_in_enterprise_dir(self, tmp_path):
+        """Test enterprise paths do not exempt forbidden imports."""
         # Arrange
-        mock_load_boundaries.return_value = {
-            "features": [
-                {
-                    "feature_id": "design_system",
-                    "tier": "enterprise",
-                    "module_path": "frontend/src/enterprise/components/ds",
-                    "import_pattern": "@sema4ai/.*"
-                }
-            ]
-        }
-
         test_file = tmp_path / "enterprise" / "Analytics.tsx"
         test_file.parent.mkdir(parents=True)
-        test_file.write_text("""
+        test_file.write_text(
+            """
 import { Button } from '@sema4ai/components';  // ALLOWED
-""")
+"""
+        )
 
         # Act
         violations = scan_imports(test_file)
 
         # Assert
-        assert len(violations) == 0
+        assert len(violations) == 1
 
 
 class TestTreeShakerIntegration:
@@ -363,15 +384,21 @@ class TestTreeShakerIntegration:
         core_dir.mkdir(parents=True)
 
         # Create multiple files with violations
-        (core_dir / "Dashboard.tsx").write_text("""
+        (core_dir / "Dashboard.tsx").write_text(
+            """
 import { Button } from '@sema4ai/components';  // VIOLATION
-""")
-        (core_dir / "Actions.tsx").write_text("""
+"""
+        )
+        (core_dir / "Actions.tsx").write_text(
+            """
 import { Table } from '@radix-ui/react-table';  // OK
-""")
-        (core_dir / "Logs.tsx").write_text("""
+"""
+        )
+        (core_dir / "Logs.tsx").write_text(
+            """
 import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
-""")
+"""
+        )
 
         # Act
         shaker = TreeShaker(tier=COMMUNITY, root_dir=tmp_path)
@@ -389,7 +416,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
                 line_number=3,
                 import_statement="import { Button } from '@sema4ai/components';",
                 prohibited_module="@sema4ai/components",
-                severity="error"
+                severity="error",
             )
         ]
 
@@ -415,6 +442,20 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
         assert [violation.prohibited_module for violation in violations] == [
             "@sema4ai/theme"
         ]
+
+    def test_detect_enterprise_imports_does_not_swallow_read_errors(
+        self, tmp_path, monkeypatch
+    ):
+        bundle = tmp_path / "index.js"
+        bundle.write_text("import '@sema4ai/theme';", encoding="utf-8")
+
+        def fail_read(*args, **kwargs):
+            raise PermissionError("permission denied")
+
+        monkeypatch.setattr("builtins.open", fail_read)
+
+        with pytest.raises(PermissionError, match="permission denied"):
+            detect_enterprise_imports(bundle)
 
     def test_scan_directory_does_not_swallow_read_errors(self, tmp_path, monkeypatch):
         dist_dir = tmp_path / "dist"
