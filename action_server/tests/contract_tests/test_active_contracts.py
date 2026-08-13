@@ -177,6 +177,7 @@ def _install_and_probe(python: Path, wheels: list[Path]) -> None:
         check=True,
         env=environment,
     )
+    subprocess.run([str(python), "-m", "pip", "check"], check=True, env=environment)
     checkout = str(REPO.resolve())
     probe = f"""
 import importlib
