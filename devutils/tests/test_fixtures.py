@@ -36,6 +36,7 @@ def test_actions_run_uses_resolved_command_and_preserves_tokens_on_non_windows(
     assert captured["args"] == [str(resolved_command), "run", "*.py|**/*.py"]
     assert captured["kwargs"]["cwd"] == tmp_path
     assert captured["kwargs"]["timeout"] == 17
+    assert captured["kwargs"]["stdin"] is fixtures.subprocess.DEVNULL
     assert captured["kwargs"].get("shell", False) is False
 
 
@@ -67,7 +68,44 @@ def test_actions_run_uses_metadata_bootstrap_and_preserves_tokens_on_windows(
     assert 'entry_point.group == "console_scripts"' in args[2]
     assert 'entry_point.name == "actions"' in args[2]
     assert 'entry_point.value != "actions.cli:main"' in args[2]
+    assert 'if sys.path and sys.path[0] == "":' in args[2]
+    assert 'del sys.path[0]' in args[2]
+    assert captured["kwargs"]["stdin"] is fixtures.subprocess.DEVNULL
     assert "shell" not in captured["kwargs"]
+
+
+def test_actions_run_uses_finite_default_timeout(monkeypatch, tmp_path):
+    from devutils import fixtures
+
+    captured = {}
+
+    def run(args, **kwargs):
+        captured["kwargs"] = kwargs
+        return fixtures.CompletedProcess(args, 0, b"", b"")
+
+    monkeypatch.setattr(fixtures, "_actions_executable", lambda: tmp_path / "actions")
+    monkeypatch.setattr(fixtures.subprocess, "run", run)
+
+    fixtures.actions_run(["list"], "any", cwd=tmp_path)
+
+    assert captured["kwargs"]["timeout"] == fixtures.ACTIONS_RUN_TIMEOUT
+
+
+def test_actions_run_preserves_explicit_timeout(monkeypatch, tmp_path):
+    from devutils import fixtures
+
+    captured = {}
+
+    def run(args, **kwargs):
+        captured["kwargs"] = kwargs
+        return fixtures.CompletedProcess(args, 0, b"", b"")
+
+    monkeypatch.setattr(fixtures, "_actions_executable", lambda: tmp_path / "actions")
+    monkeypatch.setattr(fixtures.subprocess, "run", run)
+
+    fixtures.actions_run(["list"], "any", cwd=tmp_path, timeout=17)
+
+    assert captured["kwargs"]["timeout"] == 17
 
 
 def test_actions_run_bootstrap_has_no_shell_or_cmd_invocation():

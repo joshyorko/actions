@@ -91,6 +91,7 @@ def sema4ai_home(tmpdir_factory) -> str:
 
 # Using joshyorko/rcc open-source version
 RCC_VERSION = "v18.18.1"
+ACTIONS_RUN_TIMEOUT = 60
 
 
 def _download_rcc(location: str, force: bool = False) -> None:
@@ -293,6 +294,7 @@ def actions_run(
 ) -> CompletedProcess:
     """Run the installed actions-core console script."""
     executable = _actions_executable()
+    timeout = ACTIONS_RUN_TIMEOUT if timeout is None else timeout
 
     cp = os.environ.copy()
     cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
@@ -302,7 +304,14 @@ def actions_run(
         args = [sys.executable, "-c", _ACTIONS_BOOTSTRAP] + cmdline
     else:
         args = [str(executable)] + cmdline
-    result = subprocess.run(args, capture_output=True, env=cp, cwd=cwd, timeout=timeout)
+    result = subprocess.run(
+        args,
+        capture_output=True,
+        env=cp,
+        cwd=cwd,
+        stdin=subprocess.DEVNULL,
+        timeout=timeout,
+    )
 
     if returncode == "any":
         return result
@@ -339,6 +348,10 @@ def _actions_executable() -> Path:
 
 _ACTIONS_BOOTSTRAP = """\
 import importlib.metadata
+import sys
+
+if sys.path and sys.path[0] == "":
+    del sys.path[0]
 
 distribution = importlib.metadata.distribution("actions-core")
 entry_points = [
@@ -367,7 +380,14 @@ def python_run(
     if additional_env:
         cp.update(additional_env)
     args = [sys.executable] + cmdline
-    result = subprocess.run(args, capture_output=True, env=cp, cwd=cwd, timeout=timeout)
+    result = subprocess.run(
+        args,
+        capture_output=True,
+        env=cp,
+        cwd=cwd,
+        stdin=subprocess.DEVNULL,
+        timeout=timeout,
+    )
 
     if returncode == "any":
         return result
