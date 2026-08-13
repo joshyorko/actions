@@ -30,6 +30,11 @@ registry URLs while allowing ordinary public scoped packages such as
 inside `dist/`; passing the directory to the single-file detector silently
 skips validation.
 
+The `validate-artifact` Invoke task prepends `action_server/build-binary` to
+`sys.path` and imports `artifact_validator` as a top-level module. Its helper
+imports must therefore remain top-level as well; the contract is covered by a
+subprocess test executed with `build-binary` as the working directory.
+
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
 the form `actions_http-<version>` and the repository secret

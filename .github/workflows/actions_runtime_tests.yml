@@ -88,10 +88,13 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 20.x
+        registry-url: https://npm.pkg.github.com
+        scope: '@robocorp'
     - name: Build frontend
       run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
       env:
         CI: true
+        NODE_AUTH_TOKEN: ${{ secrets.GH_PAT_READ_PACKAGES }}
     - name: Build OAuth2 config
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
       env:
@@ -171,3 +174,4 @@ jobs:
 # make sure that you update the `_gen_workflows.py`
 # script to match the changes you made here
 # and rerun the script).
+

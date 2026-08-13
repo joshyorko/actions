@@ -8,7 +8,7 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Optional
 
-from . import tree_shaker
+import tree_shaker
 
 
 @dataclass
