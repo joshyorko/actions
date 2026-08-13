@@ -230,7 +230,14 @@ def validate_release_run(
         raise RuntimeError("--ref must be an actions-runtime version tag")
     if metadata.get("workflowName") != "Action Server PYPI Release":
         raise RuntimeError("the selected run is not the Runtime PyPI release workflow")
-    if metadata.get("workflowDatabaseId") != workflow_id:
+    selected_workflow_id = metadata.get("workflowDatabaseId")
+    if (
+        isinstance(selected_workflow_id, bool)
+        or not isinstance(selected_workflow_id, int)
+        or selected_workflow_id <= 0
+    ):
+        raise RuntimeError("the selected run has no valid workflow database ID")
+    if selected_workflow_id != workflow_id:
         raise RuntimeError(
             "the selected run is not the canonical Runtime PyPI workflow"
         )

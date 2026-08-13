@@ -337,6 +337,125 @@ def test_runtime_publisher_validates_immutable_release_run_metadata():
         )
 
 
+@pytest.mark.parametrize(
+    "selected_workflow_id",
+    [
+        333870965.0,
+        "333870965",
+        True,
+        0,
+        -1,
+        None,
+        [],
+        {},
+        pytest.param("missing", id="missing"),
+    ],
+)
+def test_runtime_publisher_rejects_non_exact_selected_workflow_id_directly(
+    selected_workflow_id,
+):
+    publisher = load_publisher()
+    metadata = {
+        "headSha": "good-sha",
+        "headBranch": "actions-runtime-1.0.0",
+        "workflowName": "Action Server PYPI Release",
+        "workflowDatabaseId": 333870965,
+        "event": "push",
+        "conclusion": "success",
+        "artifactExpired": False,
+    }
+    if selected_workflow_id == "missing":
+        metadata.pop("workflowDatabaseId")
+    else:
+        metadata["workflowDatabaseId"] = selected_workflow_id
+
+    with pytest.raises(RuntimeError, match="workflow"):
+        publisher.validate_release_run(
+            metadata,
+            sha="good-sha",
+            ref="actions-runtime-1.0.0",
+            workflow_id=333870965,
+        )
+
+
+@pytest.mark.parametrize(
+    "selected_workflow_id",
+    [
+        333870965.0,
+        "333870965",
+        True,
+        0,
+        -1,
+        None,
+        pytest.param("missing", id="missing"),
+        [],
+        {},
+    ],
+)
+def test_runtime_publisher_rejects_malformed_selected_workflow_id_before_download(
+    monkeypatch, selected_workflow_id
+):
+    publisher = load_publisher()
+    calls = []
+
+    class Result:
+        stdout = ""
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        result = Result()
+        if command == [
+            "gh",
+            "api",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_pypi_release.yml",
+            "--jq",
+            "{id,path,state}",
+        ]:
+            result.stdout = '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}'
+        elif command[1:3] == ["run", "view"]:
+            metadata = {
+                "headSha": "good-sha",
+                "headBranch": "actions-runtime-1.0.0",
+                "workflowName": "Action Server PYPI Release",
+                "workflowDatabaseId": 333870965,
+                "event": "push",
+                "conclusion": "success",
+            }
+            if selected_workflow_id == "missing":
+                metadata.pop("workflowDatabaseId")
+            else:
+                metadata["workflowDatabaseId"] = selected_workflow_id
+            result.stdout = json.dumps(metadata)
+        elif command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/runs/123/artifacts",
+        ]:
+            result.stdout = '{"artifactExpired":false}'
+        return result
+
+    monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(publisher, "verify_artifacts", lambda directory: ["artifact"])
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_verified_runtime.py",
+            "--run-id",
+            "123",
+            "--repo",
+            "joshyorko/actions",
+            "--ref",
+            "actions-runtime-1.0.0",
+            "--sha",
+            "good-sha",
+            "--dry-run",
+        ],
+    )
+    with pytest.raises(RuntimeError, match="workflow"):
+        publisher.main()
+    assert all(command[1:3] != ["run", "download"] for command in calls)
+
+
 def test_runtime_publisher_rejects_fake_gh_metadata_before_download(monkeypatch):
     publisher = load_publisher()
     calls = []

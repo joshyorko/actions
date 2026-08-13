@@ -69,7 +69,10 @@ supported filename identifier `actions_runtime_pypi_release.yml` in the requeste
 The returned workflow metadata must contain a positive integer database ID and the exact
 canonical path `.github/workflows/actions_runtime_pypi_release.yml`; the returned state must
 be exactly the string `active` (missing, null, non-string, and every other value fail closed).
-That immutable workflow database ID must match the selected run,
+That immutable workflow database ID must match the selected run; selected-run
+`workflowDatabaseId` metadata must itself be a positive JSON/Python integer
+(not a boolean, float, string, null, missing value, or collection) before the
+equality check,
 in addition to exact SHA, tag ref, successful tag-push conclusion, the generated Runtime
 PyPI workflow, and a non-expired retained artifact before downloading. The display name is
 not an identity binding. Binary release names use GitHub expressions
