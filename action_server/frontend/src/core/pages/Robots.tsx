@@ -1,12 +1,12 @@
-import { useState, useCallback, useRef } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Loading } from '@/core/components/ui/Loading';
-import { ErrorBanner } from '@/core/components/ui/ErrorBanner';
-import { Button } from '@/core/components/ui/Button';
-import { Badge } from '@/core/components/ui/Badge';
-import { Input } from '@/core/components/ui/Input';
-import { Textarea } from '@/core/components/ui/Textarea';
-import { Select, SelectItem } from '@/core/components/ui/Select';
+import { useState, useCallback, useRef } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Loading } from "@/core/components/ui/Loading";
+import { ErrorBanner } from "@/core/components/ui/ErrorBanner";
+import { Button } from "@/core/components/ui/Button";
+import { Badge } from "@/core/components/ui/Badge";
+import { Input } from "@/core/components/ui/Input";
+import { Textarea } from "@/core/components/ui/Textarea";
+import { Select, SelectItem } from "@/core/components/ui/Select";
 import {
   Dialog,
   DialogContent,
@@ -14,11 +14,16 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from '@/core/components/ui/Dialog';
-import { cn } from '@/shared/utils/cn';
-import { useRobotCatalog } from '@/queries/robots';
-import { useWorkItems, useWorkItemStats, useWorkItemQueues, useCreateWorkItem } from '@/queries/workItems';
-import type { RobotPackageDetailAPI, RobotTaskInfoAPI } from '@/shared/types';
+} from "@/core/components/ui/Dialog";
+import { cn } from "@/shared/utils/cn";
+import { useRobotCatalog } from "@/queries/robots";
+import {
+  useWorkItems,
+  useWorkItemStats,
+  useWorkItemQueues,
+  useCreateWorkItem,
+} from "@/queries/workItems";
+import type { RobotPackageDetailAPI, RobotTaskInfoAPI } from "@/shared/types";
 
 // Icon Props type
 interface IconProps {
@@ -29,7 +34,7 @@ interface IconProps {
 function SvgIcon({
   className,
   size = "16",
-  children
+  children,
 }: IconProps & {
   size?: string;
   children: React.ReactNode;
@@ -158,18 +163,18 @@ function RobotTask({ task, robotPath, onRun }: RobotTaskProps): JSX.Element {
           <TaskIcon className="h-4 w-4 text-primary" />
         </div>
         <div>
-          <div className="font-medium text-sm text-card-foreground">{task.name}</div>
+          <div className="font-medium text-sm text-card-foreground">
+            {task.name}
+          </div>
           {task.docs && (
-            <div className="text-xs text-muted-foreground line-clamp-1">{task.docs}</div>
+            <div className="text-xs text-muted-foreground line-clamp-1">
+              {task.docs}
+            </div>
           )}
         </div>
       </div>
       {onRun && (
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => onRun(task.name)}
-        >
+        <Button variant="outline" size="sm" onClick={() => onRun(task.name)}>
           <PlayIcon className="h-3 w-3 mr-1" />
           Run
         </Button>
@@ -185,42 +190,59 @@ interface RunTaskDialogProps {
   robotPath: string;
   taskName: string;
   robotName: string;
-  taskEnv?: Record<string, string>;  // Environment variables from robot.yaml task definition
+  taskEnv?: Record<string, string>; // Environment variables from robot.yaml task definition
 }
 
-function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, taskEnv }: RunTaskDialogProps): JSX.Element {
+function RunTaskDialog({
+  open,
+  onOpenChange,
+  robotPath,
+  taskName,
+  robotName,
+  taskEnv,
+}: RunTaskDialogProps): JSX.Element {
   // Get preconfigured queue name from task env vars
-  const preconfiguredQueue = taskEnv?.RC_WORKITEM_QUEUE_NAME || '';
+  const preconfiguredQueue = taskEnv?.RC_WORKITEM_QUEUE_NAME || "";
 
   const [runId, setRunId] = useState<string | null>(null);
-  const [status, setStatus] = useState<'idle' | 'starting' | 'running' | 'completed' | 'failed'>('idle');
+  const [status, setStatus] = useState<
+    "idle" | "starting" | "running" | "completed" | "failed"
+  >("idle");
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   // Work items state - initialize with preconfigured queue if available
-  const [workItemQueue, setWorkItemQueue] = useState<string>(preconfiguredQueue);
-  const [showWorkItemsConfig, setShowWorkItemsConfig] = useState(!!preconfiguredQueue);
-  const [seedPayload, setSeedPayload] = useState<string>('{}');
+  const [workItemQueue, setWorkItemQueue] =
+    useState<string>(preconfiguredQueue);
+  const [showWorkItemsConfig, setShowWorkItemsConfig] =
+    useState(!!preconfiguredQueue);
+  const [seedPayload, setSeedPayload] = useState<string>("{}");
   const [seedError, setSeedError] = useState<string | null>(null);
 
   // Work items hooks
   const { data: workItemQueues } = useWorkItemQueues();
   const { data: workItemStats } = useWorkItemStats(workItemQueue || undefined);
-  const { data: pendingWorkItems } = useWorkItems(workItemQueue || undefined, 'PENDING', 10);
+  const { data: pendingWorkItems } = useWorkItems(
+    workItemQueue || undefined,
+    "PENDING",
+    10,
+  );
   const createWorkItem = useCreateWorkItem();
 
   const runMutation = useMutation({
     mutationFn: async () => {
-      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
 
       // Pass work item queue configuration
       if (workItemQueue) {
-        headers['x-workitem-queue'] = workItemQueue;
+        headers["x-workitem-queue"] = workItemQueue;
       }
 
-      const response = await fetch('/api/robots/run', {
-        method: 'POST',
+      const response = await fetch("/api/robots/run", {
+        method: "POST",
         headers,
         body: JSON.stringify({
           robot_package_path: robotPath,
@@ -232,20 +254,20 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
 
       if (!response.ok) {
         const err = await response.json().catch(() => ({}));
-        throw new Error(err.message || 'Failed to start task');
+        throw new Error(err.message || "Failed to start task");
       }
 
       return response.json();
     },
     onSuccess: (data) => {
       setRunId(data.run_id);
-      setStatus('running');
+      setStatus("running");
       // Create new abort controller for this polling session
       abortControllerRef.current = new AbortController();
       pollRunStatus(data.run_id, abortControllerRef.current.signal);
     },
     onError: (err: Error) => {
-      setStatus('failed');
+      setStatus("failed");
       setError(err.message);
     },
   });
@@ -272,28 +294,31 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
       try {
         const response = await fetch(`/api/runs/${id}`);
         if (!response.ok) {
-          throw new Error('Failed to fetch run status');
+          throw new Error("Failed to fetch run status");
         }
         const run = await response.json();
 
         // Backend returns integer status values
         if (run.status === RUN_STATUS.PASSED) {
-          setStatus('completed');
-          setResult(run.result || 'Task completed successfully');
-        } else if (run.status === RUN_STATUS.FAILED || run.status === RUN_STATUS.CANCELLED) {
-          setStatus('failed');
-          setError(run.error_message || 'Task failed');
+          setStatus("completed");
+          setResult(run.result || "Task completed successfully");
+        } else if (
+          run.status === RUN_STATUS.FAILED ||
+          run.status === RUN_STATUS.CANCELLED
+        ) {
+          setStatus("failed");
+          setError(run.error_message || "Task failed");
         } else if (attempts < maxAttempts && !abortSignal.aborted) {
           attempts++;
           setTimeout(poll, 1000);
         } else if (!abortSignal.aborted) {
-          setStatus('failed');
-          setError('Task timed out');
+          setStatus("failed");
+          setError("Task timed out");
         }
       } catch (err) {
         if (!abortSignal.aborted) {
-          setStatus('failed');
-          setError(err instanceof Error ? err.message : 'Unknown error');
+          setStatus("failed");
+          setError(err instanceof Error ? err.message : "Unknown error");
         }
       }
     };
@@ -302,7 +327,7 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
   };
 
   const handleRun = () => {
-    setStatus('starting');
+    setStatus("starting");
     setError(null);
     setResult(null);
     runMutation.mutate();
@@ -314,14 +339,14 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
       abortControllerRef.current.abort();
       abortControllerRef.current = null;
     }
-    setStatus('idle');
+    setStatus("idle");
     setRunId(null);
     setResult(null);
     setError(null);
     // Reset work items state to preconfigured values
     setWorkItemQueue(preconfiguredQueue);
     setShowWorkItemsConfig(!!preconfiguredQueue);
-    setSeedPayload('{}');
+    setSeedPayload("{}");
     setSeedError(null);
     onOpenChange(false);
   };
@@ -336,9 +361,7 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
             </div>
             Run Task: {taskName}
           </DialogTitle>
-          <DialogDescription>
-            Execute task from {robotName}
-          </DialogDescription>
+          <DialogDescription>Execute task from {robotName}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
@@ -346,7 +369,9 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
           <details
             className="rounded-lg border border-border bg-card group"
             open={showWorkItemsConfig}
-            onToggle={(e) => setShowWorkItemsConfig((e.target as HTMLDetailsElement).open)}
+            onToggle={(e) =>
+              setShowWorkItemsConfig((e.target as HTMLDetailsElement).open)
+            }
           >
             <summary className="p-4 cursor-pointer hover:bg-muted/50 transition-colors duration-150 list-none flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -359,26 +384,44 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
                   </span>
                 )}
               </div>
-              <svg className="h-4 w-4 text-muted-foreground transition-transform duration-150 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className="h-4 w-4 text-muted-foreground transition-transform duration-150 group-open:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </summary>
             <div className="p-4 pt-0 space-y-4 border-t border-border">
               <p className="text-xs text-muted-foreground">
-                Configure the work item queue this task will read from. For producer tasks, seed new work items. For consumer tasks, see pending items.
+                Configure the work item queue this task will read from. For
+                producer tasks, seed new work items. For consumer tasks, see
+                pending items.
               </p>
 
               {preconfiguredQueue && (
                 <div className="flex items-center gap-2 rounded-md bg-primary/10 border border-primary/20 px-3 py-2">
                   <CheckIcon className="h-4 w-4 text-primary flex-shrink-0" />
                   <span className="text-xs text-primary">
-                    Preconfigured queue from robot.yaml: <code className="font-mono font-semibold">{preconfiguredQueue}</code>
+                    Preconfigured queue from robot.yaml:{" "}
+                    <code className="font-mono font-semibold">
+                      {preconfiguredQueue}
+                    </code>
                   </span>
                 </div>
               )}
 
               <div className="grid gap-2">
-                <label htmlFor="workitem-queue" className="text-sm font-medium text-foreground">
+                <label
+                  htmlFor="workitem-queue"
+                  className="text-sm font-medium text-foreground"
+                >
                   Queue Name
                 </label>
                 <div className="flex gap-2">
@@ -389,7 +432,9 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
                   >
                     <SelectItem value="">— Select or enter queue —</SelectItem>
                     {workItemQueues?.map((q) => (
-                      <SelectItem key={q} value={q}>{q}</SelectItem>
+                      <SelectItem key={q} value={q}>
+                        {q}
+                      </SelectItem>
                     ))}
                   </Select>
                   <Input
@@ -409,19 +454,29 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
                   {workItemStats && (
                     <div className="grid grid-cols-4 gap-2 text-center">
                       <div className="rounded-md border border-border bg-muted/30 p-2">
-                        <p className="text-lg font-semibold text-card-foreground">{workItemStats.pending}</p>
+                        <p className="text-lg font-semibold text-card-foreground">
+                          {workItemStats.pending}
+                        </p>
                         <p className="text-xs text-muted-foreground">Pending</p>
                       </div>
                       <div className="rounded-md border border-border bg-muted/30 p-2">
-                        <p className="text-lg font-semibold text-card-foreground">{workItemStats.in_progress}</p>
-                        <p className="text-xs text-muted-foreground">In Progress</p>
+                        <p className="text-lg font-semibold text-card-foreground">
+                          {workItemStats.in_progress}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          In Progress
+                        </p>
                       </div>
                       <div className="rounded-md border border-border bg-muted/30 p-2">
-                        <p className="text-lg font-semibold text-success">{workItemStats.done}</p>
+                        <p className="text-lg font-semibold text-success">
+                          {workItemStats.done}
+                        </p>
                         <p className="text-xs text-muted-foreground">Done</p>
                       </div>
                       <div className="rounded-md border border-border bg-muted/30 p-2">
-                        <p className="text-lg font-semibold text-destructive">{workItemStats.failed}</p>
+                        <p className="text-lg font-semibold text-destructive">
+                          {workItemStats.failed}
+                        </p>
                         <p className="text-xs text-muted-foreground">Failed</p>
                       </div>
                     </div>
@@ -435,7 +490,10 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
                       </h4>
                       <ul className="space-y-1 max-h-32 overflow-y-auto">
                         {pendingWorkItems.items.slice(0, 5).map((item) => (
-                          <li key={item.id} className="text-xs font-mono text-muted-foreground bg-muted/30 rounded px-2 py-1 truncate">
+                          <li
+                            key={item.id}
+                            className="text-xs font-mono text-muted-foreground bg-muted/30 rounded px-2 py-1 truncate"
+                          >
                             {JSON.stringify(item.payload || {}).slice(0, 80)}...
                           </li>
                         ))}
@@ -478,14 +536,18 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
                             queue_name: workItemQueue,
                             payload,
                           });
-                          setSeedPayload('{}');
+                          setSeedPayload("{}");
                           setSeedError(null);
                         } catch (err) {
-                          setSeedError(err instanceof Error ? err.message : 'Invalid JSON');
+                          setSeedError(
+                            err instanceof Error ? err.message : "Invalid JSON",
+                          );
                         }
                       }}
                     >
-                      {createWorkItem.isPending ? 'Seeding...' : 'Seed Work Item'}
+                      {createWorkItem.isPending
+                        ? "Seeding..."
+                        : "Seed Work Item"}
                     </Button>
                   </div>
                 </>
@@ -494,7 +556,7 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
           </details>
 
           {/* Status Display */}
-          {status === 'idle' && (
+          {status === "idle" && (
             <div className="rounded-lg border border-border bg-muted/30 p-4 text-center">
               <TaskIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
@@ -503,19 +565,21 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
             </div>
           )}
 
-          {(status === 'starting' || status === 'running') && (
+          {(status === "starting" || status === "running") && (
             <div className="rounded-lg border border-primary/30 bg-primary/5 p-4 text-center">
               <div className="animate-spin h-8 w-8 mx-auto mb-2 border-2 border-primary border-t-transparent rounded-full" />
               <p className="text-sm text-primary font-medium">
-                {status === 'starting' ? 'Starting task...' : 'Task running...'}
+                {status === "starting" ? "Starting task..." : "Task running..."}
               </p>
               {runId && (
-                <p className="text-xs text-muted-foreground mt-1">Run ID: {runId}</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Run ID: {runId}
+                </p>
               )}
             </div>
           )}
 
-          {status === 'completed' && (
+          {status === "completed" && (
             <div className="rounded-lg border border-success/30 bg-success/5 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <CheckIcon className="h-5 w-5 text-success flex-shrink-0" />
@@ -526,14 +590,24 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
                   {(() => {
                     try {
                       // Parse the JSON result
-                      const parsed = typeof result === 'string' ? JSON.parse(result) : result;
+                      const parsed =
+                        typeof result === "string"
+                          ? JSON.parse(result)
+                          : result;
                       // Extract output and strip ANSI escape codes
-                      const output = parsed.output || parsed.result || JSON.stringify(parsed, null, 2);
+                      const output =
+                        parsed.output ||
+                        parsed.result ||
+                        JSON.stringify(parsed, null, 2);
                       // Strip ANSI escape codes (e.g., \u001b[96m)
-                      return String(output).replace(/\u001b\[[0-9;]*m/g, '').trim();
+                      return String(output)
+                        .replace(/\u001b\[[0-9;]*m/g, "")
+                        .trim();
                     } catch {
                       // If parsing fails, just strip ANSI codes from the raw string
-                      return String(result).replace(/\u001b\[[0-9;]*m/g, '').trim();
+                      return String(result)
+                        .replace(/\u001b\[[0-9;]*m/g, "")
+                        .trim();
                     }
                   })()}
                 </pre>
@@ -541,15 +615,19 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
             </div>
           )}
 
-          {status === 'failed' && (
+          {status === "failed" && (
             <div className="rounded-lg border border-destructive/30 bg-destructive/5 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <XIcon className="h-5 w-5 text-destructive flex-shrink-0" />
-                <span className="font-medium text-destructive">Task Failed</span>
+                <span className="font-medium text-destructive">
+                  Task Failed
+                </span>
               </div>
               {error && (
                 <pre className="text-xs bg-muted/50 rounded p-2 overflow-auto max-h-64 text-destructive whitespace-pre-wrap break-all font-mono">
-                  {String(error).replace(/\u001b\[[0-9;]*m/g, '').trim()}
+                  {String(error)
+                    .replace(/\u001b\[[0-9;]*m/g, "")
+                    .trim()}
                 </pre>
               )}
             </div>
@@ -558,12 +636,14 @@ function RunTaskDialog({ open, onOpenChange, robotPath, taskName, robotName, tas
 
         <DialogFooter>
           <Button variant="outline" onClick={handleClose}>
-            {status === 'completed' || status === 'failed' ? 'Close' : 'Cancel'}
+            {status === "completed" || status === "failed" ? "Close" : "Cancel"}
           </Button>
-          {(status === 'idle' || status === 'completed' || status === 'failed') && (
+          {(status === "idle" ||
+            status === "completed" ||
+            status === "failed") && (
             <Button onClick={handleRun} disabled={runMutation.isPending}>
               <PlayIcon className="h-4 w-4 mr-1" />
-              {status === 'idle' ? 'Run Task' : 'Run Again'}
+              {status === "idle" ? "Run Task" : "Run Again"}
             </Button>
           )}
         </DialogFooter>
@@ -579,11 +659,13 @@ interface RobotPackageCardProps {
 
 function RobotPackageCard({ robot }: RobotPackageCardProps): JSX.Element {
   const [runDialogOpen, setRunDialogOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<RobotTaskInfoAPI | null>(null);
+  const [selectedTask, setSelectedTask] = useState<RobotTaskInfoAPI | null>(
+    null,
+  );
 
   const handleRunTask = (taskName: string) => {
-    const task = robot.tasks?.find(t => t.name === taskName);
-    setSelectedTask(task || { name: taskName, docs: '' });
+    const task = robot.tasks?.find((t) => t.name === taskName);
+    setSelectedTask(task || { name: taskName, docs: "" });
     setRunDialogOpen(true);
   };
 
@@ -598,15 +680,17 @@ function RobotPackageCard({ robot }: RobotPackageCardProps): JSX.Element {
                 <RobotIcon className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-card-foreground">{robot.name}</h3>
+                <h3 className="font-semibold text-card-foreground">
+                  {robot.name}
+                </h3>
                 {robot.description && (
-                  <p className="text-sm text-muted-foreground mt-0.5">{robot.description}</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">
+                    {robot.description}
+                  </p>
                 )}
               </div>
             </div>
-            <Badge variant="outline">
-              {robot.tasks?.length || 0} tasks
-            </Badge>
+            <Badge variant="neutral">{robot.tasks?.length || 0} tasks</Badge>
           </div>
         </div>
 
@@ -654,7 +738,7 @@ function RobotPackageCard({ robot }: RobotPackageCardProps): JSX.Element {
 }
 
 // Import Mode Type
-type ImportMode = 'upload' | 'url';
+type ImportMode = "upload" | "url";
 
 // Import Robot Dialog Component
 interface ImportRobotDialogProps {
@@ -662,9 +746,12 @@ interface ImportRobotDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.Element {
-  const [mode, setMode] = useState<ImportMode>('upload');
-  const [url, setUrl] = useState('');
+function ImportRobotDialog({
+  open,
+  onOpenChange,
+}: ImportRobotDialogProps): JSX.Element {
+  const [mode, setMode] = useState<ImportMode>("upload");
+  const [url, setUrl] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -675,32 +762,32 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
     mutationFn: async (data: { file?: File; url?: string }) => {
       const formData = new FormData();
       if (data.file) {
-        formData.append('file', data.file);
+        formData.append("file", data.file);
       } else if (data.url) {
-        formData.append('url', data.url);
+        formData.append("url", data.url);
       }
 
-      const response = await fetch('/api/robots/import', {
-        method: 'POST',
+      const response = await fetch("/api/robots/import", {
+        method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
         const error = await response.json().catch(() => ({}));
-        throw new Error(error.message || 'Failed to import robot');
+        throw new Error(error.message || "Failed to import robot");
       }
 
       const result = await response.json();
 
       // API returns {success: false, message: "..."} for validation errors
       if (!result.success) {
-        throw new Error(result.message || 'Import failed');
+        throw new Error(result.message || "Import failed");
       }
 
       return result;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['robotCatalog'] });
+      queryClient.invalidateQueries({ queryKey: ["robotCatalog"] });
       handleClose();
     },
     onError: (err: Error) => {
@@ -710,9 +797,9 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
 
   const handleClose = () => {
     setSelectedFile(null);
-    setUrl('');
+    setUrl("");
     setError(null);
-    setMode('upload');
+    setMode("upload");
     onOpenChange(false);
   };
 
@@ -737,10 +824,10 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
     const files = e.dataTransfer.files;
     if (files.length > 0) {
       const file = files[0];
-      if (file.name.endsWith('.zip')) {
+      if (file.name.endsWith(".zip")) {
         setSelectedFile(file);
       } else {
-        setError('Please upload a .zip file');
+        setError("Please upload a .zip file");
       }
     }
   }, []);
@@ -750,24 +837,24 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
     const files = e.target.files;
     if (files && files.length > 0) {
       const file = files[0];
-      if (file.name.endsWith('.zip')) {
+      if (file.name.endsWith(".zip")) {
         setSelectedFile(file);
       } else {
-        setError('Please upload a .zip file');
+        setError("Please upload a .zip file");
       }
     }
   };
 
   const handleImport = () => {
     setError(null);
-    if (mode === 'upload' && selectedFile) {
+    if (mode === "upload" && selectedFile) {
       importMutation.mutate({ file: selectedFile });
-    } else if (mode === 'url' && url.trim()) {
+    } else if (mode === "url" && url.trim()) {
       importMutation.mutate({ url: url.trim() });
     }
   };
 
-  const isValid = mode === 'upload' ? !!selectedFile : url.trim().length > 0;
+  const isValid = mode === "upload" ? !!selectedFile : url.trim().length > 0;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -780,31 +867,38 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
             Import Robot Package
           </DialogTitle>
           <DialogDescription>
-            Add a robot package by uploading a .zip file or importing from a URL.
+            Add a robot package by uploading a .zip file or importing from a
+            URL.
           </DialogDescription>
         </DialogHeader>
 
         {/* Mode Tabs */}
         <div className="flex gap-1 p-1 bg-muted/50 rounded-lg">
           <button
-            onClick={() => { setMode('upload'); setError(null); }}
+            onClick={() => {
+              setMode("upload");
+              setError(null);
+            }}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-all',
-              mode === 'upload'
-                ? 'bg-card text-card-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+              "flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-all",
+              mode === "upload"
+                ? "bg-card text-card-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
             )}
           >
             <UploadIcon className="h-4 w-4" />
             Upload File
           </button>
           <button
-            onClick={() => { setMode('url'); setError(null); }}
+            onClick={() => {
+              setMode("url");
+              setError(null);
+            }}
             className={cn(
-              'flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-all',
-              mode === 'url'
-                ? 'bg-card text-card-foreground shadow-sm'
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+              "flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-all",
+              mode === "url"
+                ? "bg-card text-card-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
             )}
           >
             <LinkIcon className="h-4 w-4" />
@@ -813,7 +907,7 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
         </div>
 
         {/* Upload Mode */}
-        {mode === 'upload' && (
+        {mode === "upload" && (
           <div className="space-y-4">
             {/* Drop Zone */}
             <div
@@ -822,11 +916,11 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
               className={cn(
-                'relative flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-8 cursor-pointer transition-all',
+                "relative flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-8 cursor-pointer transition-all",
                 isDragging
-                  ? 'border-primary bg-primary/5 scale-[1.02]'
-                  : 'border-border hover:border-primary/50 hover:bg-muted/30',
-                selectedFile && 'border-success bg-success/5'
+                  ? "border-primary bg-primary/5 scale-[1.02]"
+                  : "border-border hover:border-primary/50 hover:bg-muted/30",
+                selectedFile && "border-success bg-success/5",
               )}
             >
               <input
@@ -861,17 +955,23 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
                 </>
               ) : (
                 <>
-                  <div className={cn(
-                    'rounded-full p-3 mb-3 transition-colors',
-                    isDragging ? 'bg-primary/20' : 'bg-muted/50'
-                  )}>
-                    <UploadIcon className={cn(
-                      'h-6 w-6 transition-colors',
-                      isDragging ? 'text-primary' : 'text-muted-foreground'
-                    )} />
+                  <div
+                    className={cn(
+                      "rounded-full p-3 mb-3 transition-colors",
+                      isDragging ? "bg-primary/20" : "bg-muted/50",
+                    )}
+                  >
+                    <UploadIcon
+                      className={cn(
+                        "h-6 w-6 transition-colors",
+                        isDragging ? "text-primary" : "text-muted-foreground",
+                      )}
+                    />
                   </div>
                   <p className="text-sm font-medium text-card-foreground">
-                    {isDragging ? 'Drop your file here' : 'Drag & drop your robot package'}
+                    {isDragging
+                      ? "Drop your file here"
+                      : "Drag & drop your robot package"}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     or click to browse • .zip files only
@@ -883,7 +983,7 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
         )}
 
         {/* URL Mode */}
-        {mode === 'url' && (
+        {mode === "url" && (
           <div className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-medium text-card-foreground">
@@ -892,13 +992,16 @@ function ImportRobotDialog({ open, onOpenChange }: ImportRobotDialogProps): JSX.
               <input
                 type="url"
                 value={url}
-                onChange={(e) => { setUrl(e.target.value); setError(null); }}
+                onChange={(e) => {
+                  setUrl(e.target.value);
+                  setError(null);
+                }}
                 placeholder="https://github.com/org/robot-package or .zip URL"
                 className={cn(
-                  'w-full px-3 py-2.5 rounded-lg border bg-background text-sm',
-                  'placeholder:text-muted-foreground',
-                  'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background',
-                  'transition-all'
+                  "w-full px-3 py-2.5 rounded-lg border bg-background text-sm",
+                  "placeholder:text-muted-foreground",
+                  "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background",
+                  "transition-all",
                 )}
               />
               <p className="text-xs text-muted-foreground">
@@ -958,7 +1061,7 @@ export function RobotsPage(): JSX.Element {
     return (
       <div className="p-6">
         <ErrorBanner
-          message={`Unable to load robots: ${error instanceof Error ? error.message : 'Unknown error'}`}
+          message={`Unable to load robots: ${error instanceof Error ? error.message : "Unknown error"}`}
         />
       </div>
     );
@@ -977,10 +1080,7 @@ export function RobotsPage(): JSX.Element {
           <p className="mt-2 max-w-sm text-sm text-muted-foreground">
             Import a robot package to get started with automation workflows.
           </p>
-          <Button
-            className="mt-6"
-            onClick={() => setImportDialogOpen(true)}
-          >
+          <Button className="mt-6" onClick={() => setImportDialogOpen(true)}>
             <PlusIcon className="h-4 w-4 mr-2" />
             Import Robot
           </Button>
@@ -1021,7 +1121,7 @@ export function RobotsPage(): JSX.Element {
 
       {/* Robot Cards Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {data.robots.map((robot, index) => (
+        {data.robots.map((robot: RobotPackageDetailAPI, index: number) => (
           <div
             key={robot.name + robot.path}
             className="animate-fadeInUp"

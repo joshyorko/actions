@@ -1,5 +1,5 @@
 # Core Pages
 
-Community tier pages for action execution, logs, and artifacts.
+Runtime pages for action execution, logs, and artifacts.
 
-These pages are available in both Community and Enterprise builds.
+These pages are part of the Runtime application.

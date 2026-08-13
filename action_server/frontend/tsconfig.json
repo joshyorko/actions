@@ -17,10 +17,10 @@
     "paths": {
       "~/*": ["*"],
       "@/core/*": ["core/*"],
-      "@/enterprise/*": ["enterprise/*"],
       "@/shared/*": ["shared/*"],
       "@/queries/*": ["queries/*"]
     },
-    "types": ["vite/client", "node"]
-  }
+    "types": ["vite/client", "node", "vitest/globals"]
+  },
+  "exclude": ["__tests__/visual", "playwright.config.ts"]
 }

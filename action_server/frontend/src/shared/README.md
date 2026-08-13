@@ -1,5 +1,5 @@
 # Shared Utilities
 
-Tier-agnostic utilities used by both Community and Enterprise builds.
+Shared utilities used by the Runtime application and future frontend apps.
 
 This includes common types, utilities, and helpers.

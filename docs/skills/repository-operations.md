@@ -10,6 +10,45 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
+The Action Server frontend uses `action_server/frontend/package.json` and its
+lock as the sole package metadata. `npm ci` is the offline-install contract;
+`LICENSE` is the retained Actions-owned provenance. Runtime and Canvas View
+are separate Vite roots under `apps/runtime` and `apps/canvas-view`; run
+`npm run build:runtime` and `npm run build:canvas` from the frontend directory
+to verify both independent artifacts. The topology has no tier-specific
+manifest, product-tier build variable, vendored package directory, or external
+runtime asset dependency. Frontend quality is fail-fast through
+`npm run test:quality`, which intentionally gates the shipping Runtime/Canvas
+entrypoints and `src/app` topology plus topology tests; the historical all-tree
+lint and full test suites were not green gates. The workflow runs both build
+boundaries.
+
+The build manifest validator rejects concrete Sema4AI product packages,
+vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
+registry URLs while allowing ordinary public scoped packages such as
+`@codemirror/*` and `@radix-ui/*`. Built-import validation scans every `.html`,
+`.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`, and `.css` file inside each artifact
+directory in deterministic path order, while ignoring arbitrary assets and
+source maps. It uses the same Actions-owned contract for Runtime and Canvas
+artifacts, with no path-based enterprise exemption. Scanner read errors fail
+validation; passing the directory to a single-file detector must not be used.
+
+The default `inv validate-artifact` task ensures `frontend/dist` and
+`frontend/dist-canvas` exist, building only a missing canonical root with its
+exact owned `npm run build:runtime` or `npm run build:canvas` command, then
+validates both independently. Explicit `--runtime-artifact` and
+`--canvas-artifact` roots are validation-only and must resolve to existing
+directories; files, missing paths, and broken symlinks fail before scanning.
+Directory symlinks are resolved before the recursive scan. Its output
+identifies each artifact, so a passing Runtime check cannot hide an unscanned
+or failed Canvas artifact.
+
+The `validate-artifact` Invoke task prepends `action_server/build-binary` to
+`sys.path` and imports `artifact_validator` as a top-level module. Its helper
+imports must therefore remain top-level as well; the contract is covered by a
+subprocess test executed with `build-binary` as the working directory and a
+task-entrypoint regression that rejects injected removed-product imports.
+
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
 the form `actions_http-<version>` and the repository secret
