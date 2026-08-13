@@ -17,7 +17,7 @@ This is a monorepo with several Python packages:
 - `mcp/` - MCP protocol implementation with `@tool`, `@resource`, `@prompt` decorators
 - `common/` - Shared utilities across packages
 - `build_common/` - Shared build utilities
-- `sema4ai-http-helper/` - HTTP helper utilities
+- `actions-http-helper/` - HTTP helper utilities
 - `templates/` - Project templates for `action-server new`
 
 ## Development Commands

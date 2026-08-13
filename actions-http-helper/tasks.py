@@ -12,4 +12,4 @@ except ImportError:
 
 from devutils.invoke_utils import build_common_tasks
 
-globals().update(build_common_tasks(ROOT, "sema4ai_http"))
+globals().update(build_common_tasks(ROOT, "actions_http", tag_prefix="actions_http"))

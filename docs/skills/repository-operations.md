@@ -10,6 +10,31 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
+The HTTP helper is the independently publishable `actions-http-helper`
+distribution, imported as `actions_http`. Its release workflow expects tags of
+the form `actions_http-<version>` and the repository secret
+`PYPI_TOKEN_ACTIONS_HTTP_HELPER`; neither publishing nor secret discovery is
+performed by local verification. The helper reads network settings from
+`~/.actions/network-settings.yaml` on Linux/macOS and
+`%LOCALAPPDATA%/actions/network-settings.yaml` on Windows.
+`devinstall`/develop mode substitutes the in-tree `actions-http-helper`
+distribution by path, in addition to the existing `sema4ai-*` internal
+distributions. Consumer lockfiles remain publication-gated until the helper
+exists in the configured package index.
+
+The helper-only release must leave
+`action_server/developer/tmp/environment_linux_amd64_freeze.yaml` identical to
+the `community` base. That Action Server freeze is regenerated only after the
+published helper is resolvable and its dependency lock selects the helper's
+resolved `truststore` version.
+
+The helper migration cannot produce consumer Poetry locks until
+`actions-http-helper==1.0.0` exists in the configured package index: Poetry
+does not resolve a version-only requirement from this checkout, and this
+repository has no release-staging/index procedure. Keep the consumer
+requirements publication-ready, record the resolver error, and regenerate all
+affected locks immediately after the helper’s first normal release.
+
 ## Evidence Ladder
 
 Prefer evidence in this order:

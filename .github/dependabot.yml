@@ -25,13 +25,12 @@ updates:
 - package-ecosystem: pip
   directories:
   - action_server
-  - action_server/frontend/node_modules/libxmljs2/node_modules/node-gyp/gyp
   - actions
+  - actions-http-helper
   - build_common
   - common
   - devutils
   - mcp
-  - sema4ai-http-helper
   - templates/advanced
   - work-items
   schedule:

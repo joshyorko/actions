@@ -50,8 +50,8 @@ def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
     contents: dict = tomlkit.loads(root_pyproject.read_bytes().decode("utf-8"))
     dependencies = contents["tool"]["poetry"]["dependencies"]
     for key in dependencies:
-        if key.startswith("sema4ai-"):
-            dep_name = key[len("sema4ai-") :]
+        if key.startswith("sema4ai-") or key == "actions-http-helper":
+            dep_name = key[len("sema4ai-") :] if key.startswith("sema4ai-") else key
 
             # Special case for http-helper
             if dep_name == "http-helper":
@@ -296,7 +296,9 @@ def build_common_tasks(
                     dependencies = contents["tool"]["poetry"]["dependencies"]
 
                     for key, value in tuple(dependencies.items()):
-                        if not key.startswith("sema4ai-"):
+                        if not (
+                            key.startswith("sema4ai-") or key == "actions-http-helper"
+                        ):
                             continue
 
                         # Changes something as:
@@ -304,7 +306,7 @@ def build_common_tasks(
                         # to:
                         # sema4ai-actions = {path = "../actions/", develop = true
                         # Special case for http-helper which keeps the sema4ai- prefix
-                        name = key[len("sema4ai-") :]
+                        name = key[len("sema4ai-") :] if key.startswith("sema4ai-") else key
                         dir_name = key if name == "http-helper" else name
                         if all_packages or (projects and name in projects):
                             dependencies[key] = dict(

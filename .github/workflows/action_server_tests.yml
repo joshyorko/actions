@@ -26,7 +26,7 @@ permissions:
     - .github/workflows/action_server_tests.yml
     - devutils/**
     - actions/**
-    - sema4ai-http-helper/**
+    - actions-http-helper/**
     - common/**
     - build_common/**
     - mcp/**
@@ -38,7 +38,7 @@ permissions:
     - .github/workflows/action_server_tests.yml
     - devutils/**
     - actions/**
-    - sema4ai-http-helper/**
+    - actions-http-helper/**
     - common/**
     - build_common/**
     - mcp/**

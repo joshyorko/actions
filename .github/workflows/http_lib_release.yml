@@ -3,7 +3,7 @@ name: HTTP Helper Release
 on:
   push:
     tags:
-      - "sema4ai_http-*"
+      - "actions_http-*"
 
 permissions:
   contents: read
@@ -11,7 +11,7 @@ permissions:
 
 defaults:
   run:
-    working-directory: "./sema4ai-http-helper"
+    working-directory: "./actions-http-helper"
 
 jobs:
   deploy:
@@ -41,5 +41,5 @@ jobs:
 
       - name: Upload to PyPI
         run: |
-          poetry config pypi-token.pypi  ${{ secrets.PYPI_TOKEN_SEMA4AI_HTTP_HELPER }}
+          poetry config pypi-token.pypi  ${{ secrets.PYPI_TOKEN_ACTIONS_HTTP_HELPER }}
           poetry publish

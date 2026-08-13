@@ -2,7 +2,7 @@
 
 ## Overview
 
-`sema4ai_http` -library provides HTTPS request handling that works inside enterprise networks that use MITM firewalls/proxies for outbound traffic.
+`actions_http` -library provides HTTPS request handling that works inside enterprise networks that use MITM firewalls/proxies for outbound traffic.
 
 ### The Problem:
 
@@ -29,13 +29,20 @@ The key features of the library are:
 - Resumable file downloads with retry logic and error handling.
 - Support for making downloaded files executable.
 
+Network settings are read from `~/.actions/network-settings.yaml` on Linux and
+macOS, or `%LOCALAPPDATA%/actions/network-settings.yaml` on Windows.
+The configuration root changed from `.sema4ai` to `.actions`; move the file to
+the path above. There is deliberately no legacy `.sema4ai` fallback. In the
+profile's `proxy-settings`, the persisted no-proxy key is `no-proxy` and its
+value is a comma-separated list.
+
 ## Usage Examples
 
 ### File Download Example
 
 ```python
 from pathlib import Path
-from sema4ai_http import download_with_resume
+from actions_http import download_with_resume
 
 url = "https://example.com/file.zip"
 target = Path("/path/to/save/file.zip")
@@ -142,7 +149,7 @@ A `NamedTuple` that stores the results of a download operation. It contains:
 You can use the `get_network_profile()` method to set up proxy connections with httpx:
 
 ```python
-from sema4ai_http import get_network_profile
+from actions_http import get_network_profile
 from itertools import chain
 import httpx
 
