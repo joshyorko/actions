@@ -74,6 +74,7 @@ a = Analysis(
     hiddenimports=[
         *action_server_hiddenimports,
         *redis_hiddenimports,
+        "termcolor",
         "pydantic.deprecated.decorator",
     ],
     hookspath=[],

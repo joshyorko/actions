@@ -21,6 +21,12 @@ def get_internal_version_location(version: str) -> Path:
     return Path(target_path) / version
 
 
+def test_binary_spec_includes_termcolor_hidden_import():
+    spec_path = Path(__file__).parents[2] / "action-server.spec"
+
+    assert '"termcolor",' in spec_path.read_text()
+
+
 def test_binary_build():
     import os
     import shutil

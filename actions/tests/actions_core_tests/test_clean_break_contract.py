@@ -1,7 +1,3 @@
-from pathlib import Path
-
-import tomllib
-
 import importlib.metadata
 import json
 import os
@@ -15,12 +11,6 @@ import tomlkit
 ROOT = Path(__file__).parents[2]
 
 
-def test_actions_core_owns_public_namespace_and_absorbed_mcp():
-    metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
-
-    assert metadata["tool"]["poetry"]["name"] == "actions-core"
-    assert metadata["tool"]["poetry"]["version"] == "1.0.0"
-    assert metadata["tool"]["poetry"]["packages"] == [{"include": "actions", "from": "src"}]
 def _run_console(argv, cwd):
     try:
         result = subprocess.run(

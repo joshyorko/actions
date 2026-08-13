@@ -41,12 +41,12 @@ distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
 
 The source migration PR contains the helper and its direct consumers together;
-the helper commit is not independently mergeable or release-ready. The active
-`actions/poetry.lock` and `actions-http-helper/poetry.lock` files are intentionally
-absent during this migration; regenerate affected locks with
-repository-authoritative Poetry 2.1.1 from published prerequisites. Never
-hand-edit lock hashes or add path/direct-URL production dependencies. Runtime
-freeze inputs remain a separate post-candidate gate.
+the helper commit is not independently mergeable or release-ready. The
+`actions/poetry.lock` and `actions-http-helper/poetry.lock` files must exist and
+be regenerated normally with repository-authoritative Poetry 2.1.1 from
+published prerequisites. Never hand-edit lock hashes or add path/direct-URL
+production dependencies. Runtime freeze inputs remain a separate post-candidate
+gate.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement
