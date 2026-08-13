@@ -130,6 +130,15 @@ The direct two-instance/concurrent-update and concurrent-startup acceptance is
 in `action_server/tests/action_server_tests/test_database_shared.py` and
 requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.
 
+The shared PostgreSQL adapter translates only unquoted `?` parameter markers;
+SQL literals, quoted identifiers, comments, dollar-quoted bodies, escaped
+markers, and JSON operators remain unchanged, and marker/value counts are
+validated before execution. PostgreSQL model DDL uses native `BOOLEAN` while
+SQLite retains integer booleans. PostgreSQL schema inspection reads
+`information_schema` and `pg_index`, and analytics uses explicit PostgreSQL
+timestamp/date expressions. The Action Server PyInstaller spec explicitly
+collects `psycopg`, `psycopg_binary`, and its native libraries.
+
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification. `.devcontainer/bin/smoke` is strict-shell, rejects root, checks the pinned Python 3.12, Node 22, uv 0.12.1, and Poetry 2.1.1 versions, then runs bootstrap and the Work Items release gate by repository-relative absolute path. uv 0.12.1 adds a platform suffix to its version output, so smoke compares its `uv 0.12.1` prefix fields exactly.

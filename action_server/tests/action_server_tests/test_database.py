@@ -212,7 +212,12 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
                 "migration",
                 "o_auth2_user_data",
                 "run",
+                "schedule",
+                "schedule_execution",
+                "schedule_group",
                 "temp_user_session_data",
+                "trigger",
+                "trigger_invocation",
                 "user_session",
             ]
         )

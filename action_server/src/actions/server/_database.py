@@ -536,17 +536,22 @@ WHERE table_schema = 'public'
 
     def list_table_and_columns(self) -> Dict[str, List[str]]:
         with self.cursor() as cursor:
-            self.execute_query(
-                cursor,
-                """
+            sql = """
 SELECT m.name as tableName, 
        p.name as columnName
 FROM sqlite_master m
 left outer join pragma_table_info((m.name)) p
      on m.name <> p.name
 order by tableName, columnName;
-""",
-            )
+"""
+            if self.backend_name == "postgresql":
+                sql = """
+SELECT table_name, column_name
+FROM information_schema.columns
+WHERE table_schema = 'public'
+ORDER BY table_name, ordinal_position;
+"""
+            self.execute_query(cursor, sql)
             found: Dict[str, List[str]] = {}
             for table_name, column_name in cursor.fetchall():
                 columns = found.get(table_name)
@@ -557,9 +562,7 @@ order by tableName, columnName;
 
     def list_indexes(self) -> List[List[str]]:
         with self.cursor() as cursor:
-            self.execute_query(
-                cursor,
-                """
+            sql = """
 SELECT 
     m.tbl_name as table_name,
     il.name as index_name,
@@ -583,8 +586,28 @@ GROUP BY
     il.origin,
     il.partial,
     il.seq
-ORDER BY index_name,il.seq,ii.seqno""",
-            )
+ORDER BY index_name,il.seq,ii.seqno"""
+            if self.backend_name == "postgresql":
+                sql = """
+SELECT tbl.relname AS table_name,
+       idx.relname AS index_name,
+       att.attname AS column_name,
+       CASE WHEN ind.indisprimary THEN 1 ELSE 0 END AS is_primary_key,
+       CASE WHEN ind.indisunique THEN 0 ELSE 1 END AS non_unique,
+       CASE WHEN ind.indisunique THEN 1 ELSE 0 END AS is_unique,
+       ind.indpred IS NOT NULL AS partial,
+       keys.ordinality AS sequence_in_index,
+       keys.ordinality AS sequence_in_column
+FROM pg_index ind
+JOIN pg_class tbl ON tbl.oid = ind.indrelid
+JOIN pg_namespace ns ON ns.oid = tbl.relnamespace
+JOIN pg_class idx ON idx.oid = ind.indexrelid
+CROSS JOIN LATERAL unnest(ind.indkey) WITH ORDINALITY AS keys(attnum, ordinality)
+JOIN pg_attribute att ON att.attrelid = tbl.oid AND att.attnum = keys.attnum
+WHERE ns.nspname = 'public'
+ORDER BY table_name, index_name, sequence_in_index;
+"""
+            self.execute_query(cursor, sql)
             return [x for x in cursor.fetchall()]
 
     def list_whole_db(self) -> Dict[str, List[Dict[str, Any]]]:
@@ -619,8 +642,93 @@ ORDER BY index_name,il.seq,ii.seqno""",
             print(msg, file=sys.stderr)
         raise DBError(msg)
 
-    def _adapt_sql(self, sql: str) -> str:
-        return sql.replace("?", "%s") if self.backend_name == "postgresql" else sql
+    def _adapt_sql(self, sql: str, values: Optional[Sequence[Any]] = None) -> str:
+        if self.backend_name != "postgresql":
+            return sql
+        adapted: list[str] = []
+        placeholders = 0
+        i = 0
+        state = "normal"
+        dollar_quote: Optional[str] = None
+        while i < len(sql):
+            char = sql[i]
+            next_char = sql[i + 1] if i + 1 < len(sql) else ""
+            if state == "normal":
+                if char == "'":
+                    state = "single"
+                elif char == '"':
+                    state = "double"
+                elif char == "-" and next_char == "-":
+                    state = "line_comment"
+                elif char == "/" and next_char == "*":
+                    state = "block_comment"
+                elif char == "$":
+                    match = re.match(r"\$[A-Za-z_][A-Za-z0-9_]*\$|\$\$", sql[i:])
+                    if match:
+                        dollar_quote = match.group(0)
+                        state = "dollar_quote"
+                        adapted.append(dollar_quote)
+                        i += len(dollar_quote)
+                        continue
+                elif char == "?" and (not next_char or next_char not in "|&"):
+                    previous = next((x for x in reversed(adapted) if not x.isspace()), "")
+                    following = next((x for x in sql[i + 1 :] if not x.isspace()), "")
+                    is_json_operator = (
+                        (previous.isalnum() or previous in ")]}'\"")
+                        and following in "'\""
+                    )
+                    if not is_json_operator and (i == 0 or sql[i - 1] != "\\"):
+                        adapted.append("%s")
+                        placeholders += 1
+                        i += 1
+                        continue
+                adapted.append(char)
+            elif state == "single":
+                adapted.append(char)
+                if char == "\\" and next_char:
+                    adapted.append(next_char)
+                    i += 2
+                    continue
+                if char == "'":
+                    if next_char == "'":
+                        adapted.append(next_char)
+                        i += 2
+                        continue
+                    state = "normal"
+            elif state == "double":
+                adapted.append(char)
+                if char == '"':
+                    if next_char == '"':
+                        adapted.append(next_char)
+                        i += 2
+                        continue
+                    state = "normal"
+            elif state == "line_comment":
+                adapted.append(char)
+                if char == "\n":
+                    state = "normal"
+            elif state == "block_comment":
+                adapted.append(char)
+                if char == "*" and next_char == "/":
+                    adapted.append(next_char)
+                    i += 2
+                    state = "normal"
+                    continue
+            else:
+                if dollar_quote and sql.startswith(dollar_quote, i):
+                    adapted.append(dollar_quote)
+                    i += len(dollar_quote)
+                    state = "normal"
+                    dollar_quote = None
+                    continue
+                adapted.append(char)
+            i += 1
+        if values is not None and placeholders != len(values):
+            raise DBError(
+                f"PostgreSQL query has {placeholders} parameter placeholders; "
+                f"expected {placeholders} parameters, got {len(values)}"
+            )
+        return "".join(adapted)
 
     def execute_query(
         self, cursor: Any, sql: str, values: Optional[list] = None
@@ -634,11 +742,13 @@ ORDER BY index_name,il.seq,ii.seqno""",
             self._print_sql(sql, values)
 
         try:
-            sql = self._adapt_sql(sql)
+            sql = self._adapt_sql(sql, values)
             if values:
                 cursor.execute(sql, values)
             else:
                 cursor.execute(sql)
+        except DBError:
+            raise
         except Exception:
             self._raise_execute_error(
                 f"Error running sql query: {sql!r} with values: {values!r}"
@@ -661,11 +771,13 @@ ORDER BY index_name,il.seq,ii.seqno""",
                     "a transaction is in place."
                 )
             with self._write_lock:
-                sql = self._adapt_sql(sql)
+                sql = self._adapt_sql(sql, values)
                 if values:
                     cursor.execute(sql, values)
                 else:
                     cursor.execute(sql)
+        except DBError:
+            raise
         except Exception:
             self._raise_execute_error(
                 f"Error running sql: {sql!r} with values: {values!r}"
@@ -690,11 +802,13 @@ ORDER BY index_name,il.seq,ii.seqno""",
             conn = self._tlocal.conn
             assert conn is not None
             with self._write_lock:
-                sql = self._adapt_sql(sql)
+                sql = self._adapt_sql(sql, values)
                 if values:
                     conn.execute(sql, values)
                 else:
                     conn.execute(sql)
+        except DBError:
+            raise
         except Exception:
             self._raise_execute_error(
                 f"Error running sql: {sql!r} with values: {values!r}"
@@ -834,18 +948,30 @@ CREATE TABLE IF NOT EXISTS {table_name}(
             use = "TEXT"
 
         elif field_cls == bool and not not_null:
-            use = "INTEGER"
+            use = "BOOLEAN" if self.backend_name == "postgresql" else "INTEGER"
 
         elif field_cls == bool and not_null:
             try:
                 default_value = getattr(cls, name)
                 if default_value:
-                    use = f"INTEGER CHECK({name} IN (0, 1)) NOT NULL DEFAULT 1"
+                    use = (
+                        "BOOLEAN NOT NULL DEFAULT TRUE"
+                        if self.backend_name == "postgresql"
+                        else f"INTEGER CHECK({name} IN (0, 1)) NOT NULL DEFAULT 1"
+                    )
                 else:
-                    use = f"INTEGER CHECK({name} IN (0, 1)) NOT NULL DEFAULT 0"
+                    use = (
+                        "BOOLEAN NOT NULL DEFAULT FALSE"
+                        if self.backend_name == "postgresql"
+                        else f"INTEGER CHECK({name} IN (0, 1)) NOT NULL DEFAULT 0"
+                    )
             except AttributeError:
                 # No default
-                use = f"INTEGER CHECK({name} IN (0, 1)) NOT NULL"
+                use = (
+                    "BOOLEAN NOT NULL"
+                    if self.backend_name == "postgresql"
+                    else f"INTEGER CHECK({name} IN (0, 1)) NOT NULL"
+                )
 
         elif field_cls == datetime.datetime:
             raise RuntimeError(

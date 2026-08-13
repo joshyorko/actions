@@ -5,10 +5,11 @@ from actions.server.migrations import Migration
 def migrate(db: Database) -> None:
     from actions.server.migrations import MIGRATION_ID_TO_NAME
 
+    column_type = "BOOLEAN" if db.backend_name == "postgresql" else "INTEGER CHECK(enabled IN (0, 1))"
     db.execute(
-        """
+        f"""
 ALTER TABLE action 
-ADD COLUMN enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1;
+ADD COLUMN enabled {column_type} NOT NULL DEFAULT {"TRUE" if db.backend_name == "postgresql" else "1"};
 """
     )
 

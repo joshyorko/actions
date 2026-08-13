@@ -205,6 +205,23 @@ CREATE TABLE IF NOT EXISTS trigger_invocation (
     ]
 
     for sql in sqls:
+        if db.backend_name == "postgresql":
+            for column in (
+                "enabled",
+                "skip_if_running",
+                "retry_enabled",
+                "rate_limit_enabled",
+                "notify_on_failure",
+                "notify_on_success",
+                "notification_sent",
+            ):
+                sql = sql.replace(
+                    f"{column} INTEGER CHECK({column} IN (0, 1)) NOT NULL DEFAULT 1",
+                    f"{column} BOOLEAN NOT NULL DEFAULT TRUE",
+                ).replace(
+                    f"{column} INTEGER CHECK({column} IN (0, 1)) NOT NULL DEFAULT 0",
+                    f"{column} BOOLEAN NOT NULL DEFAULT FALSE",
+                )
         db.execute(sql)
 
     db.insert(Migration(id=10, name=MIGRATION_ID_TO_NAME[10]))

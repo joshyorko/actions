@@ -27,6 +27,14 @@ def test_binary_spec_includes_termcolor_hidden_import():
     assert '"termcolor",' in spec_path.read_text()
 
 
+def test_binary_spec_collects_postgresql_runtime_modules():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert 'collect_submodules("psycopg")' in spec
+    assert 'collect_submodules("psycopg_binary")' in spec
+    assert 'collect_dynamic_libs("psycopg_binary")' in spec
+
+
 def test_binary_build():
     import os
     import shutil

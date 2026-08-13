@@ -14,7 +14,12 @@ import PyInstaller.config
 from PyInstaller.building.api import COLLECT, EXE, PYZ
 from PyInstaller.building.build_main import Analysis
 from PyInstaller.log import logger
-from PyInstaller.utils.hooks import collect_all, collect_submodules, copy_metadata
+from PyInstaller.utils.hooks import (
+    collect_all,
+    collect_dynamic_libs,
+    collect_submodules,
+    copy_metadata,
+)
 
 PyInstaller.config.CONF["excludes"] = ["_pyi_rth_nltk"]
 
@@ -30,6 +35,13 @@ logger.info("Collecting redis submodules...")
 redis_hiddenimports = collect_submodules("redis")
 for h in redis_hiddenimports:
     logger.info(f"Collected redis hiddenimport: {h}")
+
+# psycopg imports its binary implementation dynamically at runtime.
+psycopg_hiddenimports = [
+    *collect_submodules("psycopg"),
+    *collect_submodules("psycopg_binary"),
+]
+psycopg_binaries = collect_dynamic_libs("psycopg_binary")
 new_datas = []
 for data in action_server_datas:
     if ".mypy_cache" in data[0]:
@@ -67,13 +79,14 @@ logger.info("Collecting action server submodules...")
 a = Analysis(
     ["src/actions/server/__main__.py"],
     pathex=[],
-    binaries=[],
     datas=[
         *action_server_datas,
     ],
+    binaries=[*psycopg_binaries],
     hiddenimports=[
         *action_server_hiddenimports,
         *redis_hiddenimports,
+        *psycopg_hiddenimports,
         "termcolor",
         "pydantic.deprecated.decorator",
     ],
