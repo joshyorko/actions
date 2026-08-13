@@ -15,9 +15,8 @@ Given that this will always regenerate the workflows, feel free to make
 refactorings in the structure as needed.
 """
 
-import subprocess
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 import yaml
 from typing_extensions import override
@@ -208,16 +207,19 @@ class BaseWorkflow:
                 {
                     "os": UBUNTU_VERSION,
                     "python": pyversion,
+                    "name": "linux",
                     "asset_path": "action_server/dist/final/action-server",
                 },
                 {
                     "os": "windows-2022",
                     "python": pyversion,
+                    "name": "windows",
                     "asset_path": "action_server/dist/final/action-server.exe",
                 },
                 {
                     "os": "macos-15",
                     "python": pyversion,
+                    "name": "macos",
                     "asset_path": "action_server/dist/final/action-server",
                 },
             ],
@@ -334,7 +336,7 @@ class BaseWorkflow:
             "run": """
 is_beta=${{ endsWith(github.ref_name, '-beta') }}
 echo "is_beta: $is_beta"
-echo "::set-output name=is_beta::$is_beta"
+echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
 """,
         }
         return step
@@ -406,7 +408,7 @@ echo "::set-output name=is_beta::$is_beta"
             "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09" if pinned else "actions/checkout@v5",
         }
 
-    def install_devutils(self, additional_packages: list[str] = []):
+    def install_devutils(self, additional_packages: list[str] | None = None):
         run = f"{run_in_env} python -m pip install --break-system-packages -r ../devutils/requirements.txt"
         if additional_packages:
             run += f"\n{run_in_env} python -m pip install --break-system-packages {' '.join(additional_packages)}"
@@ -609,6 +611,18 @@ class ActionServerPyPiRelease(BaseWorkflow):
                 "push": {
                     "tags": ["actions-runtime-*"],
                 },
+                "pull_request": {
+                    "branches": ["community"],
+                    "paths": [
+                        ".github/workflows/_gen_workflows.py",
+                        ".github/workflows/actions_runtime_pypi_release.yml",
+                        ".github/workflows/actions_runtime_binary_release.yml",
+                        ".github/workflows/actions_runtime_manylinux_release.yml",
+                        "devutils/tests/test_runtime_release_workflows.py",
+                        "docs/skills/repository-operations.md",
+                        "action_server/scripts/publish_verified_runtime.py",
+                    ],
+                },
             }
         }
 
@@ -636,7 +650,13 @@ rm src/actions/server/bin/rcc* -f
         steps = [self.checkout_repo(pinned=True)] + self.setup_python(pinned=True) + [self.install_devutils()]
         steps.extend(self.install(env={"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "true"}))
         steps.append(self.setup_node(pinned=True))
-        steps.append(self.check_tag_version())
+        steps.append(
+            {
+                "name": "Check tag version",
+                "run": f"{run_in_env}poetry run inv check-tag-version",
+                "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
+            }
+        )
         steps.append(self.build_frontend())
         steps.append(self.build_oauth2_config())
         return steps
@@ -678,20 +698,41 @@ rm src/actions/server/bin/rcc* -f
 
     def publish_steps(self):
         provenance = "set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor \"$GITHUB_SHA\" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(poetry version --short)\nif [[ \"$tag_version\" != \"$package_version\" ]]; then printf 'tag version %s does not match package version %s\\n' \"$tag_version\" \"$package_version\" >&2; exit 1; fi"
-        inventory = "set -Eeuo pipefail\ncd action_server\ntest \"$(find dist -maxdepth 1 -type f | wc -l)\" -eq 7\nfind dist -maxdepth 1 -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts\ntest \"$(uniq -d /tmp/runtime-artifacts | wc -l)\" -eq 0\ntest \"$(grep -Ec '^actions_runtime-[0-9].*\\.tar\\.gz$' /tmp/runtime-artifacts)\" -eq 1\ntest \"$(grep -Ec '^actions_runtime-.*-cp(312|313)-.*\\.whl$' /tmp/runtime-artifacts)\" -eq 6\ntest \"$(grep -Ec '^actions_runtime-.*manylinux.*x86_64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2\ntest \"$(grep -Ec '^actions_runtime-.*macosx.*arm64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2\ntest \"$(grep -Ec '^actions_runtime-.*win_amd64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2"
+        inventory = """set -Eeuo pipefail
+cd action_server
+rm -rf dist/verified
+mkdir -p dist/verified
+find dist/downloads -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts
+test \"$(wc -l < /tmp/runtime-artifacts)\" -eq 7
+test -z \"$(uniq -d /tmp/runtime-artifacts)\"
+test \"$(grep -Ec '^actions_runtime-[0-9].*\\.tar\\.gz$' /tmp/runtime-artifacts)\" -eq 1
+test \"$(grep -Ec '^actions_runtime-.*-cp(312|313)-.*\\.whl$' /tmp/runtime-artifacts)\" -eq 6
+test \"$(grep -Ec '^actions_runtime-.*manylinux.*x86_64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2
+test \"$(grep -Ec '^actions_runtime-.*macosx.*arm64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2
+test \"$(grep -Ec '^actions_runtime-.*win_amd64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2
+while IFS= read -r basename; do
+  source=$(find dist/downloads -type f -name \"$basename\" -print -quit)
+  test -n \"$source\"
+  cp -- \"$source\" dist/verified/\"$basename\"
+done < /tmp/runtime-artifacts
+mv dist/verified/* dist/
+rmdir dist/verified
+rm -rf dist/downloads
+sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runtime-manifest.sha256
+"""
         return [
             self.checkout_repo(pinned=True),
             *self.setup_python(pinned=True),
             self.install_devutils(),
-            {"name": "Verify merged tag provenance and version", "run": provenance},
-            {"name": "Download sdist artifact", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"name": "action-server-dist", "path": "action_server/dist"}},
-            {"name": "Download wheel artifacts", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"pattern": "*-wheels", "path": "action_server/dist", "merge-multiple": True}},
+            {"name": "Verify merged tag provenance and version", "if": "github.event_name == 'push'", "run": provenance},
+            {"name": "Download sdist artifact", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"name": "action-server-dist", "path": "action_server/dist/downloads/sdist"}},
+            {"name": "Download wheel artifacts separately", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"pattern": "*-wheels", "path": "action_server/dist/downloads/wheels", "merge-multiple": False}},
             {"name": "Verify exact Runtime artifact inventory", "run": inventory},
             {"name": "Install Twine 6.2.0", "run": f"{run_in_env}python -m pip install --break-system-packages twine==6.2.0"},
-            {"name": "Verify Runtime artifacts", "run": f"{run_in_env}twine check --strict action_server/dist/*"},
+            {"name": "Verify Runtime artifacts", "run": f"{run_in_env}twine check --strict action_server/dist/*.whl action_server/dist/*.tar.gz"},
             self.upload_artifact(name="actions-runtime-dist", path="action_server/dist/*", pinned=True),
-            {"name": "Check Runtime publish credential", "id": "runtime-token", "env": {"RUNTIME_TOKEN": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"}, "run": "if [[ -n \"${RUNTIME_TOKEN:-}\" ]]; then echo 'enabled=true' >> \"$GITHUB_OUTPUT\"; else echo 'enabled=false' >> \"$GITHUB_OUTPUT\"; fi"},
-            {"name": "Publish verified artifacts", "if": "steps.runtime-token.outputs.enabled == 'true'", "run": f"{run_in_env}twine upload action_server/dist/*", "env": {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": "${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}"}},
+            {"name": "Check Runtime publish credential", "id": "runtime-token", "if": "github.event_name == 'push'", "env": {"RUNTIME_TOKEN": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"}, "run": "if [[ -n \"${RUNTIME_TOKEN:-}\" ]]; then echo 'enabled=true' >> \"$GITHUB_OUTPUT\"; else echo 'enabled=false' >> \"$GITHUB_OUTPUT\"; fi"},
+            {"name": "Publish verified artifacts", "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'", "run": f"{run_in_env}twine upload action_server/dist/*.whl action_server/dist/*.tar.gz", "env": {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": "${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}"}},
         ]
 
     @override
@@ -1004,8 +1045,8 @@ mv build/macos-arm64 s3-drop/
 mv build/linux64 s3-drop/
 mv build/windows64 s3-drop/
 ls -l s3-drop/
-ver=`cat s3-drop/version.txt`
-echo "actionServerVersion=${ver}" >> $GITHUB_ENV
+ver=$(cat s3-drop/version.txt)
+echo "actionServerVersion=${ver}" >> "$GITHUB_ENV"
 """,
             }
         )
@@ -1021,7 +1062,7 @@ echo "actionServerVersion=${ver}" >> $GITHUB_ENV
         ret.append(
             {
                 "name": "Configure AWS credentials Dropbox bucket",
-                "uses": "aws-actions/configure-aws-credentials@v4",
+                "uses": "aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df",
                 "with": {
                     "aws-region": "eu-west-1",
                     "role-to-assume": "arn:aws:iam::710450854638:role/github-action-robocorp-action-server",

@@ -38,12 +38,15 @@ jobs:
         include:
         - os: ubuntu-22.04
           python: '3.12'
+          name: linux
           asset_path: action_server/dist/final/action-server
         - os: windows-2022
           python: '3.12'
+          name: windows
           asset_path: action_server/dist/final/action-server.exe
         - os: macos-15
           python: '3.12'
+          name: macos
           asset_path: action_server/dist/final/action-server
     steps:
     - name: Checkout repository and submodules
@@ -166,7 +169,7 @@ jobs:
 
         echo "is_beta: $is_beta"
 
-        echo "::set-output name=is_beta::$is_beta"
+        echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
 
         '
     - name: Download artifact windows-2022
@@ -210,9 +213,9 @@ jobs:
 
         ls -l s3-drop/
 
-        ver=`cat s3-drop/version.txt`
+        ver=$(cat s3-drop/version.txt)
 
-        echo "actionServerVersion=${ver}" >> $GITHUB_ENV
+        echo "actionServerVersion=${ver}" >> "$GITHUB_ENV"
 
         '
     - name: 'Upload artifact: action_server/s3-drop'
@@ -221,7 +224,7 @@ jobs:
         name: action-server-artifacts-for-s3-${{ env.actionServerVersion }}
         path: action_server/s3-drop
     - name: Configure AWS credentials Dropbox bucket
-      uses: aws-actions/configure-aws-credentials@v4
+      uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df
       with:
         aws-region: eu-west-1
         role-to-assume: arn:aws:iam::710450854638:role/github-action-robocorp-action-server

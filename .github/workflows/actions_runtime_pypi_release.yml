@@ -20,6 +20,17 @@ permissions:
   push:
     tags:
     - actions-runtime-*
+  pull_request:
+    branches:
+    - community
+    paths:
+    - .github/workflows/_gen_workflows.py
+    - .github/workflows/actions_runtime_pypi_release.yml
+    - .github/workflows/actions_runtime_binary_release.yml
+    - .github/workflows/actions_runtime_manylinux_release.yml
+    - devutils/tests/test_runtime_release_workflows.py
+    - docs/skills/repository-operations.md
+    - action_server/scripts/publish_verified_runtime.py
 defaults:
   run:
     working-directory: ./action_server
@@ -64,7 +75,7 @@ jobs:
         scope: '@robocorp'
     - name: Check tag version
       run: uv run --no-project --python ${{ matrix.python }} poetry run inv check-tag-version
-      if: ${{ !endsWith(github.ref_name, '-beta') }}
+      if: ${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}
     - name: Build frontend
       run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
       env:
@@ -145,7 +156,7 @@ jobs:
         scope: '@robocorp'
     - name: Check tag version
       run: uv run --no-project --python ${{ matrix.python }} poetry run inv check-tag-version
-      if: ${{ !endsWith(github.ref_name, '-beta') }}
+      if: ${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}
     - name: Build frontend
       run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
       env:
@@ -203,6 +214,7 @@ jobs:
       run: uv run --no-project --python ${{ matrix.python }}  python -m pip install
         --break-system-packages -r ../devutils/requirements.txt
     - name: Verify merged tag provenance and version
+      if: github.event_name == 'push'
       run: 'set -Eeuo pipefail
 
         git fetch origin community:refs/remotes/origin/community
@@ -222,44 +234,34 @@ jobs:
       uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
       with:
         name: action-server-dist
-        path: action_server/dist
-    - name: Download wheel artifacts
+        path: action_server/dist/downloads/sdist
+    - name: Download wheel artifacts separately
       uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
       with:
         pattern: '*-wheels'
-        path: action_server/dist
-        merge-multiple: true
+        path: action_server/dist/downloads/wheels
+        merge-multiple: false
     - name: Verify exact Runtime artifact inventory
-      run: 'set -Eeuo pipefail
-
-        cd action_server
-
-        test "$(find dist -maxdepth 1 -type f | wc -l)" -eq 7
-
-        find dist -maxdepth 1 -type f -printf ''%f\n'' | sort > /tmp/runtime-artifacts
-
-        test "$(uniq -d /tmp/runtime-artifacts | wc -l)" -eq 0
-
-        test "$(grep -Ec ''^actions_runtime-[0-9].*\.tar\.gz$'' /tmp/runtime-artifacts)"
-        -eq 1
-
-        test "$(grep -Ec ''^actions_runtime-.*-cp(312|313)-.*\.whl$'' /tmp/runtime-artifacts)"
-        -eq 6
-
-        test "$(grep -Ec ''^actions_runtime-.*manylinux.*x86_64.*\.whl$'' /tmp/runtime-artifacts)"
-        -eq 2
-
-        test "$(grep -Ec ''^actions_runtime-.*macosx.*arm64.*\.whl$'' /tmp/runtime-artifacts)"
-        -eq 2
-
-        test "$(grep -Ec ''^actions_runtime-.*win_amd64.*\.whl$'' /tmp/runtime-artifacts)"
-        -eq 2'
+      run: "set -Eeuo pipefail\ncd action_server\nrm -rf dist/verified\nmkdir -p dist/verified\n\
+        find dist/downloads -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts\n\
+        test \"$(wc -l < /tmp/runtime-artifacts)\" -eq 7\ntest -z \"$(uniq -d /tmp/runtime-artifacts)\"\
+        \ntest \"$(grep -Ec '^actions_runtime-[0-9].*\\.tar\\.gz$' /tmp/runtime-artifacts)\"\
+        \ -eq 1\ntest \"$(grep -Ec '^actions_runtime-.*-cp(312|313)-.*\\.whl$' /tmp/runtime-artifacts)\"\
+        \ -eq 6\ntest \"$(grep -Ec '^actions_runtime-.*manylinux.*x86_64.*\\.whl$'\
+        \ /tmp/runtime-artifacts)\" -eq 2\ntest \"$(grep -Ec '^actions_runtime-.*macosx.*arm64.*\\\
+        .whl$' /tmp/runtime-artifacts)\" -eq 2\ntest \"$(grep -Ec '^actions_runtime-.*win_amd64.*\\\
+        .whl$' /tmp/runtime-artifacts)\" -eq 2\nwhile IFS= read -r basename; do\n\
+        \  source=$(find dist/downloads -type f -name \"$basename\" -print -quit)\n\
+        \  test -n \"$source\"\n  cp -- \"$source\" dist/verified/\"$basename\"\n\
+        done < /tmp/runtime-artifacts\nmv dist/verified/* dist/\nrmdir dist/verified\n\
+        rm -rf dist/downloads\nsha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##'\
+        \ | sort > dist/actions-runtime-manifest.sha256\n"
     - name: Install Twine 6.2.0
       run: uv run --no-project --python ${{ matrix.python }} python -m pip install
         --break-system-packages twine==6.2.0
     - name: Verify Runtime artifacts
       run: uv run --no-project --python ${{ matrix.python }} twine check --strict
-        action_server/dist/*
+        action_server/dist/*.whl action_server/dist/*.tar.gz
     - name: 'Upload artifact: action_server/dist/*'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
@@ -267,13 +269,15 @@ jobs:
         path: action_server/dist/*
     - name: Check Runtime publish credential
       id: runtime-token
+      if: github.event_name == 'push'
       env:
         RUNTIME_TOKEN: ${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}
       run: if [[ -n "${RUNTIME_TOKEN:-}" ]]; then echo 'enabled=true' >> "$GITHUB_OUTPUT";
         else echo 'enabled=false' >> "$GITHUB_OUTPUT"; fi
     - name: Publish verified artifacts
-      if: steps.runtime-token.outputs.enabled == 'true'
-      run: uv run --no-project --python ${{ matrix.python }} twine upload action_server/dist/*
+      if: github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'
+      run: uv run --no-project --python ${{ matrix.python }} twine upload action_server/dist/*.whl
+        action_server/dist/*.tar.gz
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}

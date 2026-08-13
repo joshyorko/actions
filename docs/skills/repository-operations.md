@@ -50,10 +50,20 @@ unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches `poetry version
 --short`, then retains that verified directory as `actions-runtime-dist`. The
 workflow publishes the same set once when the Runtime secret is configured;
-without it, verification and retention remain green for local publication with
-the approved `PYPI` value from the local `.env`. Binary release names use
-GitHub expressions containing `${{ github.ref_name }}`; shell literals such as
-`$tag-linux64` are not valid action inputs.
+without it, verification and retention remain green. Approved local publication
+is executable only through `action_server/scripts/publish_verified_runtime.py`:
+it downloads the retained `actions-runtime-dist` for an explicit run ID,
+repository, and optional ref, or accepts an already downloaded directory; it
+never rebuilds. It verifies the exact seven artifacts and retained
+`actions-runtime-manifest.sha256` before running Twine 6.2.0. With `--publish`,
+the script reads only `PYPI` from the process environment or ignored repo-root
+`.env`, never prints or puts the token in arguments, and injects it only into
+Twine's child environment. Example commands are:
+`python action_server/scripts/publish_verified_runtime.py --run-id RUN_ID
+--repo joshyorko/actions --ref actions-runtime-1.0.0 --dry-run` and the same
+command with `--publish`. Binary release names use GitHub expressions
+containing `${{ github.ref_name }}`; shell literals such as `$tag-linux64` are
+not valid action inputs.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
