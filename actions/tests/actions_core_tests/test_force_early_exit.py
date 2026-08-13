@@ -6,11 +6,11 @@ import pytest
 
 @pytest.mark.parametrize("kill", ["", "before-teardown", "after-teardown"])
 def test_force_early_exit_cmdline(pyfile, kill):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     @pyfile
     def check():
-        from sema4ai.actions import action, session_cache
+        from actions import action, session_cache
 
         @action
         def my_task():
@@ -37,7 +37,7 @@ def test_force_early_exit_cmdline(pyfile, kill):
     if kill:
         cmdline.append(f"--os-exit={kill}")
 
-    result = sema4ai_actions_run(cmdline, returncode=0, cwd=os.path.dirname(check))
+    result = actions_run(cmdline, returncode=0, cwd=os.path.dirname(check))
     stderr = result.stderr.decode("utf-8")
 
     assert stderr.count("Executed") == 1
@@ -54,11 +54,11 @@ def test_force_early_exit_cmdline(pyfile, kill):
 
 @pytest.mark.parametrize("kill", ["", "before-teardown", "after-teardown"])
 def test_force_early_exit(pyfile, kill):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     @pyfile
     def check():
-        from sema4ai.actions import action, session_cache
+        from actions import action, session_cache
 
         @action
         def my_action():
@@ -82,7 +82,7 @@ def test_force_early_exit(pyfile, kill):
             atexit.register(write_on_exit)
 
     env = dict(RC_OS_EXIT=kill)
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", check, "--console-colors=plain"],
         returncode=0,
         cwd=os.path.dirname(check),
@@ -112,11 +112,11 @@ def test_force_early_exit(pyfile, kill):
 
 @pytest.mark.parametrize("kill", ["after-teardown"])
 def test_force_early_exit_with_error(pyfile, kill):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     @pyfile
     def check():
-        from sema4ai.actions import action
+        from actions import action
 
         @action
         def my_task():
@@ -133,7 +133,7 @@ def test_force_early_exit_with_error(pyfile, kill):
             raise RuntimeError("Something bad happened (retcode should be 1)")
 
     env = dict(RC_OS_EXIT=kill)
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", check, "--console-colors=plain"],
         returncode=1,
         cwd=os.path.dirname(check),
@@ -157,11 +157,11 @@ def test_force_early_exit_with_error(pyfile, kill):
 
 @pytest.mark.parametrize("kill", ["", "after-teardown"])
 def test_force_early_exit_kills_subprocesses(pyfile, kill):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     @pyfile
     def check():
-        from sema4ai.actions import action
+        from actions import action
 
         @action
         def my_task():
@@ -192,7 +192,7 @@ def test_force_early_exit_kills_subprocesses(pyfile, kill):
             atexit.register(write_on_exit)
 
     env = dict(RC_OS_EXIT=kill)
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", check], returncode=0, cwd=os.path.dirname(check), additional_env=env
     )
     stderr = result.stderr.decode("utf-8")

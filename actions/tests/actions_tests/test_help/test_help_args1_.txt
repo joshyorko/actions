@@ -1,4 +1,4 @@
-usage: sema4ai.actions run [-h] [--glob GLOB] [-a ACTION_NAME] [-o OUTPUT_DIR]
+usage: actions run [-h] [--glob GLOB] [-a ACTION_NAME] [-o OUTPUT_DIR]
                            [--max-log-files MAX_LOG_FILES]
                            [--max-log-file-size MAX_LOG_FILE_SIZE]
                            [--console-colors {auto,plain,ansi}]

@@ -8,7 +8,7 @@
       character: 4
       line: 3
   severity: 2
-  source: sema4ai.actions
+  source: actions
 - message: '@query without a `return` (`@query` must have a return value).'
   range:
     end:
@@ -18,7 +18,7 @@
       character: 4
       line: 3
   severity: 1
-  source: sema4ai.actions
+  source: actions
 - message: '@query docstring not found. Please define it as this is what an LLM would
     use to decide whether to call this query.'
   range:
@@ -29,7 +29,7 @@
       character: 4
       line: 3
   severity: 1
-  source: sema4ai.actions
+  source: actions
 - message: The @predict decorator is deprecated. Use @query or @action instead.
   range:
     end:
@@ -39,7 +39,7 @@
       character: 4
       line: 7
   severity: 2
-  source: sema4ai.actions
+  source: actions
 - message: '@predict without return annotation defined (`str` considered as the return
     type).'
   range:
@@ -50,7 +50,7 @@
       character: 4
       line: 7
   severity: 2
-  source: sema4ai.actions
+  source: actions
 - message: '@predict without a `return` (`@predict` must have a return value).'
   range:
     end:
@@ -60,7 +60,7 @@
       character: 4
       line: 7
   severity: 1
-  source: sema4ai.actions
+  source: actions
 - message: '@predict docstring not found. Please define it as this is what an LLM
     would use to decide whether to call this predict.'
   range:
@@ -71,4 +71,4 @@
       character: 4
       line: 7
   severity: 1
-  source: sema4ai.actions
+  source: actions

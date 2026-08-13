@@ -1,4 +1,4 @@
-from sema4ai.actions import action, teardown
+from actions import action, teardown
 
 
 @teardown

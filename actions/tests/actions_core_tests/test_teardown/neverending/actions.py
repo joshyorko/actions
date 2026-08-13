@@ -1,6 +1,6 @@
 import time
 
-from sema4ai.actions import action, action_cache
+from actions import action, action_cache
 
 
 @action_cache

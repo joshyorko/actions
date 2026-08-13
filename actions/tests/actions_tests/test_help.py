@@ -12,6 +12,6 @@ def test_help(args, str_regression):
         raise RuntimeError(
             f"This test must be migrated to {v} (always the major version supported should be tested)"
         )
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    str_regression.check(sema4ai_actions_run(args, returncode=0).stdout.decode("utf-8"))
+    str_regression.check(actions_run(args, returncode=0).stdout.decode("utf-8"))

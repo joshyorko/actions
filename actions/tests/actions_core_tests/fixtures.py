@@ -20,7 +20,7 @@ def _fix_pythonpath() -> Iterator[None]:
         # remove it.
         del sys.modules["actions"]
 
-    from sema4ai.actions._collect_actions import clear_previously_collected_actions
+    from actions._collect_actions import clear_previously_collected_actions
 
     clear_previously_collected_actions()
 

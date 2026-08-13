@@ -1,4 +1,4 @@
-from sema4ai.actions import setup
+from actions import setup
 
 print("In my_config 1")
 

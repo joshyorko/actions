@@ -1,4 +1,4 @@
-usage: sema4ai.actions list [-h] [--glob GLOB] [--skip-lint] [path]
+usage: actions list [-h] [--glob GLOB] [--skip-lint] [path]
 
 positional arguments:
   path         The directory or file from where the actions should be listed

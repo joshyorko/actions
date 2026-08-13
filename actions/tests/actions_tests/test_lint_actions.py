@@ -6,7 +6,7 @@ import pytest
 
 
 def test_lint_action_no_docstring(data_regression):
-    from sema4ai.actions._lint_action import iter_lint_errors
+    from actions._lint_action import iter_lint_errors
 
     contents = """
 @action
@@ -18,7 +18,7 @@ def my_action():
 
 
 def test_lint_action_no_docstring_in_query_and_predict(data_regression):
-    from sema4ai.actions._lint_action import iter_lint_errors
+    from actions._lint_action import iter_lint_errors
 
     contents = """
 @query
@@ -34,7 +34,7 @@ def my_action():
 
 
 def test_lint_action_docstring_not_matching(data_regression):
-    from sema4ai.actions._lint_action import iter_lint_errors
+    from actions._lint_action import iter_lint_errors
 
     contents = """
 @action
@@ -60,7 +60,7 @@ def my_action(param1: str) -> str:
 
 
 def test_lint_action_no_description(data_regression):
-    from sema4ai.actions.api import collect_lint_errors
+    from actions.api import collect_lint_errors
 
     contents = """
 @action
@@ -76,7 +76,7 @@ def my_action(param1) -> str:
 
 
 def test_lint_action_argument_untyped(data_regression):
-    from sema4ai.actions._lint_action import iter_lint_errors
+    from actions._lint_action import iter_lint_errors
 
     contents = """
 @action
@@ -94,10 +94,10 @@ def my_action(param1) -> str:
 
 
 def test_lint_action_with_is_consequential(data_regression):
-    from sema4ai.actions._lint_action import iter_lint_errors
+    from actions._lint_action import iter_lint_errors
 
     contents = """
-from sema4ai.actions import action
+from actions import action
 
 @action(is_consequential=True)
 def my_action(param1: str) -> str:
@@ -111,9 +111,9 @@ def my_action(param1: str) -> str:
 
 
 def test_lint_action_big_description(data_regression, monkeypatch):
-    from sema4ai.actions._lint_action import iter_lint_errors
+    from actions._lint_action import iter_lint_errors
 
-    monkeypatch.setattr("sema4ai.actions._lint_action.MAX_DOCS_LENGTH", 300)
+    monkeypatch.setattr("actions._lint_action.MAX_DOCS_LENGTH", 300)
 
     contents = """
 @action
@@ -145,14 +145,14 @@ def clean_filename_to_basename(obj: Any) -> Any:
 def find_issues_in_actions_list(datadir: Path, contents: str) -> list:
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     cwd = datadir / "cwd"
     os.makedirs(cwd)
     act = cwd / "act.py"
     act.write_text(contents)
 
-    result = sema4ai_actions_run(["list"], returncode="any", cwd=str(cwd))
+    result = actions_run(["list"], returncode="any", cwd=str(cwd))
     try:
         found = json.loads(result.stdout)
     except Exception:
@@ -169,9 +169,9 @@ def find_issues_in_actions_list(datadir: Path, contents: str) -> list:
 def test_lint_action_integrated(datadir, data_regression):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(["list"], returncode="error", cwd=str(datadir))
+    result = actions_run(["list"], returncode="error", cwd=str(datadir))
     try:
         found = json.loads(result.stdout)
     except Exception:
@@ -191,14 +191,14 @@ def test_lint_action_integrated(datadir, data_regression):
 
 
 def test_lint_action_secret(data_regression, datadir):
-    from sema4ai.actions._customization._extension_points import EPManagedParameters
-    from sema4ai.actions._customization._plugin_manager import PluginManager
-    from sema4ai.actions._lint_action import iter_lint_errors
-    from sema4ai.actions._managed_parameters import ManagedParameters
+    from actions._customization._extension_points import EPManagedParameters
+    from actions._customization._plugin_manager import PluginManager
+    from actions._lint_action import iter_lint_errors
+    from actions._managed_parameters import ManagedParameters
 
     contents = """
 from typing import Annotated
-from sema4ai.actions import Secret, SecretSpec, action
+from actions import Secret, SecretSpec, action
 from sema4ai import actions
 
 DocumentIntelligenceSecret = Annotated[Secret, SecretSpec(tag="document-intelligence")]
@@ -228,16 +228,16 @@ def my_action(
 
 
 def test_lint_action_oauth2_secret(data_regression, datadir):
-    from sema4ai.actions._customization._extension_points import EPManagedParameters
-    from sema4ai.actions._customization._plugin_manager import PluginManager
-    from sema4ai.actions._lint_action import iter_lint_errors
-    from sema4ai.actions._managed_parameters import ManagedParameters
+    from actions._customization._extension_points import EPManagedParameters
+    from actions._customization._plugin_manager import PluginManager
+    from actions._lint_action import iter_lint_errors
+    from actions._managed_parameters import ManagedParameters
 
     contents = """
 from typing import Literal
 
 from sema4ai import actions
-from sema4ai.actions import OAuth2Secret
+from actions import OAuth2Secret
 
 
 @actions.action
@@ -264,10 +264,10 @@ def my_action(
 
 @pytest.mark.parametrize("scenario", ["simple", "inline", "union"])
 def test_lint_data_source_docstring_not_required(data_regression, datadir, scenario):
-    from sema4ai.actions._customization._extension_points import EPManagedParameters
-    from sema4ai.actions._customization._plugin_manager import PluginManager
-    from sema4ai.actions._lint_action import iter_lint_errors
-    from sema4ai.actions._managed_parameters import ManagedParameters
+    from actions._customization._extension_points import EPManagedParameters
+    from actions._customization._plugin_manager import PluginManager
+    from actions._lint_action import iter_lint_errors
+    from actions._managed_parameters import ManagedParameters
 
     if scenario == "simple":
         contents = """

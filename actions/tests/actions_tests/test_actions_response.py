@@ -1,9 +1,9 @@
 def test_actions_response_list(datadir, data_regression):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
     )
     found = json.loads(result.stdout)
@@ -21,9 +21,9 @@ def test_actions_response_list(datadir, data_regression):
 
 
 def test_actions_return_response_ok_action(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", "-a=return_response_ok_action", "--print-result"],
         returncode=0,
         cwd=str(datadir),
@@ -32,9 +32,9 @@ def test_actions_return_response_ok_action(datadir, data_regression):
 
 
 def test_actions_return_response_error_action(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", "-a=return_response_error_action", "--print-result"],
         returncode=1,
         cwd=str(datadir),
@@ -44,9 +44,9 @@ def test_actions_return_response_error_action(datadir, data_regression):
 
 
 def test_actions_raise_other_error_action(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", "-a=raise_other_error_action", "--print-result"],
         returncode=1,
         cwd=str(datadir),
@@ -56,23 +56,23 @@ def test_actions_raise_other_error_action(datadir, data_regression):
 
 
 def test_actions_raise_error_bad_schema(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", "-a=bad_schema", "--print-result"],
         returncode=0,
         cwd=str(datadir),
     )
     assert (
-        "Although the action: 'bad_schema' ran properly, it returned a value of type <class 'int'> whereas the expected return type is <class 'sema4ai.actions._response.Response[str]'>."
+        "Although the action: 'bad_schema' ran properly, it returned a value of type <class 'int'> whereas the expected return type is <class 'actions._response.Response[str]'>."
         in result.stdout.decode("utf-8")
     )
 
 
 def test_actions_raise_action_error_action(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", "-a=raise_action_error_action", "--print-result"],
         returncode=1,
         cwd=str(datadir),

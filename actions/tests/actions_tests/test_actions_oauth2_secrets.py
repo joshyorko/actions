@@ -5,7 +5,7 @@ def test_actions_oauth2_secret_run_with_request(datadir: Path):
     import base64
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     datadir = datadir / "good"
 
@@ -41,14 +41,14 @@ def test_actions_oauth2_secret_run_with_request(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json.loads(json_output.read_text()) == secret_data
 
 
 def test_actions_oauth2_secret_run_with_input(datadir: Path):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     datadir = datadir / "good"
 
@@ -73,14 +73,14 @@ def test_actions_oauth2_secret_run_with_input(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json.loads(json_output.read_text()) == secret_data
 
 
 def test_actions_oauth2_secret_run_with_input_not_full(datadir: Path):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     datadir = datadir / "good"
 
@@ -103,7 +103,7 @@ def test_actions_oauth2_secret_run_with_input_not_full(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json.loads(json_output.read_text()) == {
         "access_token": "this-is-the-access-token",
         "provider": "<unavailable>",
@@ -115,11 +115,11 @@ def test_actions_oauth2_secret_run_with_input_not_full(datadir: Path):
 def test_actions_oauth2_secret_list(datadir, data_regression):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     datadir = datadir / "good"
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
     )
     found = json.loads(result.stdout)
@@ -137,11 +137,11 @@ def test_actions_oauth2_secret_list(datadir, data_regression):
 
 
 def test_actions_oauth2_secret_list_bad(datadir):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     datadir = datadir / "bad"
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["list", "--skip-lint"], returncode=1, cwd=str(datadir)
     )
     assert "Invalid OAuth2Secret annotation found." in result.stderr.decode("utf-8")

@@ -16,7 +16,7 @@ def agent_dummy_server():
 
 def test_list_data_frames_api(agent_dummy_server):
     """Test list_data_frames with dummy server."""
-    from sema4ai.actions.agent import list_data_frames
+    from actions.agent import list_data_frames
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -26,7 +26,7 @@ def test_list_data_frames_api(agent_dummy_server):
     # Mock get_thread_id to return a test thread ID
     from unittest.mock import patch
 
-    with patch("sema4ai.actions.agent.get_thread_id", return_value="test-thread-123"):
+    with patch("actions.agent.get_thread_id", return_value="test-thread-123"):
         # Call list_data_frames
         result = list_data_frames()
 
@@ -51,7 +51,7 @@ def test_get_data_frame_api(agent_dummy_server):
     """Test get_data_frame with dummy server."""
     from unittest.mock import patch
 
-    from sema4ai.actions.agent import get_data_frame
+    from actions.agent import get_data_frame
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -59,9 +59,9 @@ def test_get_data_frame_api(agent_dummy_server):
     ] = f"http://localhost:{agent_dummy_server.get_port()}"
 
     # Mock PyArrow as unavailable to force JSON format
-    with patch("sema4ai.actions.agent._is_pyarrow_available", return_value=False):
+    with patch("actions.agent._is_pyarrow_available", return_value=False):
         with patch(
-            "sema4ai.actions.agent.get_thread_id", return_value="test-thread-456"
+            "actions.agent.get_thread_id", return_value="test-thread-456"
         ):
             # Call get_data_frame
             result = get_data_frame("q1_sales", limit=5000)
@@ -85,8 +85,8 @@ def test_get_data_frame_not_found(agent_dummy_server):
     """Test get_data_frame raises ActionError when dataframe not found (404)."""
     from unittest.mock import patch
 
-    from sema4ai.actions._response import ActionError
-    from sema4ai.actions.agent import get_data_frame
+    from actions._response import ActionError
+    from actions.agent import get_data_frame
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -94,7 +94,7 @@ def test_get_data_frame_not_found(agent_dummy_server):
     ] = f"http://localhost:{agent_dummy_server.get_port()}"
 
     # Mock get_thread_id
-    with patch("sema4ai.actions.agent.get_thread_id", return_value="test-thread-789"):
+    with patch("actions.agent.get_thread_id", return_value="test-thread-789"):
         # Call get_data_frame - should raise ActionError
         with pytest.raises(ActionError) as exc_info:
             get_data_frame("nonexistent_df")
@@ -113,12 +113,12 @@ def test_get_data_frame_outside_context():
     """Test get_data_frame raises ActionError when called outside action context."""
     from unittest.mock import patch
 
-    from sema4ai.actions._response import ActionError
-    from sema4ai.actions.agent import get_data_frame
+    from actions._response import ActionError
+    from actions.agent import get_data_frame
 
     # Mock get_thread_id to raise ActionError (simulating no context)
     with patch(
-        "sema4ai.actions.agent.get_thread_id",
+        "actions.agent.get_thread_id",
         side_effect=ActionError("Unable to get the thread_id"),
     ):
         # Call get_data_frame - should raise ActionError
@@ -133,7 +133,7 @@ def test_data_frame_api_with_limit(agent_dummy_server):
     """Test get_data_frame respects the limit parameter."""
     from unittest.mock import patch
 
-    from sema4ai.actions.agent import get_data_frame
+    from actions.agent import get_data_frame
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -141,9 +141,9 @@ def test_data_frame_api_with_limit(agent_dummy_server):
     ] = f"http://localhost:{agent_dummy_server.get_port()}"
 
     # Mock PyArrow as unavailable to force JSON format
-    with patch("sema4ai.actions.agent._is_pyarrow_available", return_value=False):
+    with patch("actions.agent._is_pyarrow_available", return_value=False):
         with patch(
-            "sema4ai.actions.agent.get_thread_id", return_value="test-thread-limit"
+            "actions.agent.get_thread_id", return_value="test-thread-limit"
         ):
             # Call get_data_frame with custom limit
             result = get_data_frame("test_data", limit=100)
@@ -164,7 +164,7 @@ def test_get_data_frame_with_additional_parameters(agent_dummy_server):
     """Test get_data_frame with offset, column_names, and order_by parameters."""
     from unittest.mock import patch
 
-    from sema4ai.actions.agent import get_data_frame
+    from actions.agent import get_data_frame
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -172,9 +172,9 @@ def test_get_data_frame_with_additional_parameters(agent_dummy_server):
     ] = f"http://localhost:{agent_dummy_server.get_port()}"
 
     # Mock PyArrow as unavailable to force JSON format
-    with patch("sema4ai.actions.agent._is_pyarrow_available", return_value=False):
+    with patch("actions.agent._is_pyarrow_available", return_value=False):
         with patch(
-            "sema4ai.actions.agent.get_thread_id", return_value="test-thread-params"
+            "actions.agent.get_thread_id", return_value="test-thread-params"
         ):
             result = get_data_frame(
                 "sales_data",
@@ -206,7 +206,7 @@ def test_get_data_frame_requests_json_format_when_pyarrow_unavailable(
     """Test get_data_frame requests JSON format when PyArrow is not available."""
     from unittest.mock import patch
 
-    from sema4ai.actions.agent import get_data_frame
+    from actions.agent import get_data_frame
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -214,9 +214,9 @@ def test_get_data_frame_requests_json_format_when_pyarrow_unavailable(
     ] = f"http://localhost:{agent_dummy_server.get_port()}"
 
     # Mock PyArrow as unavailable
-    with patch("sema4ai.actions.agent._is_pyarrow_available", return_value=False):
+    with patch("actions.agent._is_pyarrow_available", return_value=False):
         with patch(
-            "sema4ai.actions.agent.get_thread_id", return_value="test-thread-json"
+            "actions.agent.get_thread_id", return_value="test-thread-json"
         ):
             result = get_data_frame("test_data")
 
@@ -236,7 +236,7 @@ def test_get_data_frame_requests_parquet_format_when_pyarrow_available(
     """
     from unittest.mock import patch
 
-    from sema4ai.actions.agent import get_data_frame
+    from actions.agent import get_data_frame
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -245,9 +245,9 @@ def test_get_data_frame_requests_parquet_format_when_pyarrow_available(
 
     # Mock PyArrow as available and mock the parquet parsing function
     # to avoid trying to parse JSON as Parquet
-    with patch("sema4ai.actions.agent._is_pyarrow_available", return_value=True):
+    with patch("actions.agent._is_pyarrow_available", return_value=True):
         with patch(
-            "sema4ai.actions.agent._parse_dataframe_response_from_parquet"
+            "actions.agent._parse_dataframe_response_from_parquet"
         ) as mock_parse:
             # Make the mock return valid data
             mock_parse.return_value = {
@@ -258,7 +258,7 @@ def test_get_data_frame_requests_parquet_format_when_pyarrow_available(
             }
 
             with patch(
-                "sema4ai.actions.agent.get_thread_id",
+                "actions.agent.get_thread_id",
                 return_value="test-thread-parquet",
             ):
                 result = get_data_frame("test_data")
