@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 
-# module `sema4ai.actions.cli`
+# module `actions.cli`
 
 # Functions
 
@@ -8,7 +8,7 @@ ______________________________________________________________________
 
 ## `main`
 
-Entry point for running actions from sema4ai-actions.
+Entry point for running actions from actions-core.
 
 **Args:**
 
@@ -21,7 +21,7 @@ Entry point for running actions from sema4ai-actions.
 **Returns:**
 The exit code for the process.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/cli.py#L20)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/cli.py#L20)
 
 ```python
 main(

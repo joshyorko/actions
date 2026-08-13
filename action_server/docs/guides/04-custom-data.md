@@ -1,6 +1,6 @@
 # Dealing with custom data models
 
-Starting with `sema4ai-actions 0.0.8` and `Action Server 0.0.28`, custom
+Starting with `actions-core 0.0.8` and `Action Server 0.0.28`, custom
 pydantic models may be used to define a schema containing complex objects as
 the input/output of a an `@action`.
 
@@ -17,7 +17,7 @@ Below is an example which defines an `@action` with a custom input and output:
 from typing import Annotated
 
 from pydantic import BaseModel, Field
-from sema4ai.actions import action
+from actions import action
 
 class InputData(BaseModel):
     name: Annotated[str, Field(description="This is the name.")]
@@ -34,6 +34,6 @@ def accept_data(data: InputData) -> OutputData:
 
 ## Note
 
-From `sema4ai-actions 0.8.0`, `pydantic v2` is a required dependency. On previous
+From `actions-core 0.8.0`, `pydantic v2` is a required dependency. On previous
 versions `pydantic v2` needed to be included as a custom dependency in projects
 that require custom data models.

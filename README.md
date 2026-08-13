@@ -2,7 +2,7 @@
 
 <samp>[Examples](https://github.com/joshyorko/actions-cookbook) | [Slack](https://join.slack.com/t/actions-community/shared_invite/)</samp>
 
-[![PyPI - Version](https://img.shields.io/pypi/v/sema4ai-actions?label=sema4ai-actions&color=%23733CFF)](https://pypi.org/project/sema4ai-actions) [![PyPI - Version](https://img.shields.io/pypi/v/actions-work-items?label=actions-work-items&color=%23733CFF)](https://pypi.org/project/actions-work-items)
+[![PyPI - Version](https://img.shields.io/pypi/v/actions-core?label=actions-core&color=%23733CFF)](https://pypi.org/project/actions-core) [![PyPI - Version](https://img.shields.io/pypi/v/actions-work-items?label=actions-work-items&color=%23733CFF)](https://pypi.org/project/actions-work-items)
 [![GitHub issues](https://img.shields.io/github/issues/joshyorko/actions?color=%232080C0)](https://github.com/joshyorko/actions/issues)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -44,7 +44,7 @@ rcc run -r action_server/developer/toolkit.yaml -t community
 Using an existing Python installation, run:
 
 ```sh
-pip install sema4ai-action-server
+pip install actions-runtime
 ```
 
 After installed the `action-server` executable should be in the `Scripts` or `bin`
@@ -95,8 +95,7 @@ dependencies:
     - python=3.12.10
     - uv=0.6.11
   pypi:
-    - sema4ai-actions=1.3.15
-    - sema4ai-mcp=0.0.1
+    - actions-core=1.0.0
     - pytz=2024.1
 
 pythonpath:
@@ -150,10 +149,10 @@ You will probably not want run the Actions just on your machine, so by using `pa
 
 2. [@tool decorator](./mcp) or [@action decorator](./action) that determines the **tool or action entry point** and [Type hints and docstring](./actions#describe-your-action) to let AI agents know **what the Tool/Action does** in natural language
 
-Note: any function decorated as `@action` imported from `sema4ai.actions` is also available as a `@tool` imported from `sema4ai.mcp` and vice-versa (besides, there are other custom decorators for other functionalities such as `@resource`, `@prompt` for mcp and `@query` for actions).
+Note: any function decorated as `@action` imported from `actions` is also available as a `@tool` imported from `actions.mcp` and vice-versa (besides, there are other custom decorators for other functionalities such as `@resource`, `@prompt` for mcp and `@query` for actions).
 
 ```py
-from sema4ai.mcp import tool
+from actions.mcp import tool
 
 @tool
 def greeting(name: str) -> str:
@@ -288,7 +287,7 @@ ls action_server/dist/final/action-server
 
 ### Why No Credentials Needed?
 
-The frontend uses three private design system packages (`@sema4ai/components`, `@sema4ai/icons`, `@sema4ai/theme`) that are normally hosted in a private GitHub Packages registry. These packages are **vendored** (copied) directly into the repository at `action_server/frontend/vendored/`, making them available to all contributors.
+The frontend uses three internal vendored design-system packages (`actions-runtime-components`, `actions-runtime-icons`, `actions-runtime-theme`) from `action_server/frontend/vendored/`, making them available to all contributors without a registry dependency.
 
 This approach enables:
 - External contributors can build without credentials

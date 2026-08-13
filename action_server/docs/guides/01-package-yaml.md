@@ -34,12 +34,12 @@ dependencies:
     - uv=0.4.19
 
   pypi:
-    # This section is required: at least `sema4ai-actions` must
+    # This section is required: at least `actions-core` must
     # be specified.
-    # Note: sema4ai-actions is special case because the `Action Server`
+    # Note: actions-core is special case because the `Action Server`
     # has coupling with the library (so, a newer version of the `Action Server`
-    # might require a newer version of `sema4ai-actions`).
-    - sema4ai-actions=1.3.13
+    # might require a newer version of `actions-core`).
+    - actions-core=1.0.0
     - robocorp=1.4.3
     - pytz=2023.3
 

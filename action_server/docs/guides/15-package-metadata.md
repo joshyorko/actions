@@ -32,14 +32,14 @@ metadata: # Note: optional as no additional metadata may be needed
       actionPackage: <action-package-name>
       secrets:
         <secret-name>:
-          description: <secret description -- only available when used with sema4ai-actions 0.5.0 onwards>
+          description: <secret description -- only available when used with actions-core 0.5.0 onwards>
           type: Secret
     <url-for-oauth2-secret>:
       action: <action-name>
       actionPackage: <action-package-name>
       secrets:
         <oauth2-secret-name>:
-          description: <secret description -- only available when used with sema4ai-actions 0.5.0 onwards>
+          description: <secret description -- only available when used with actions-core 0.5.0 onwards>
           type: OAuth2Secret
           provider: <oauth2-provider-name>
           scopes: <list of scopes>

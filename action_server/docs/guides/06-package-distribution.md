@@ -28,7 +28,7 @@ dependencies:
     - uv=0.4.19
 
   pypi:
-    - sema4ai-actions=1.3.13
+    - actions-core=1.0.0
     - robocorp=1.4.3
 
 packaging:

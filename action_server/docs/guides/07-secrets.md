@@ -1,6 +1,6 @@
 ## Secrets
 
-**Important**: Requires `sema4ai-actions 0.3.1` onwards to work.
+**Important**: Requires `actions-core 0.3.1` onwards to work.
 
 ### Receiving a Secret
 
@@ -10,7 +10,7 @@ To receive secrets using actions, it's possible to add a parameter with a
 i.e.:
 
 ```
-from sema4ai.actions import action, Secret
+from actions import action, Secret
 
 @action
 def my_action(my_secret: Secret):
@@ -164,7 +164,7 @@ be json-dumped/encrypted/put in the json envelope/converted to base64).
 
 ## OAuth2 Secrets
 
-Starting with `Sema4.ai Action Server 0.9.0` and `sema4ai-actions 0.6.0`, OAuth2 secrets
+Starting with `Sema4.ai Action Server 0.9.0` and `actions-core 0.6.0`, OAuth2 secrets
 may be passed to the action server (note: it's up to the client to actually manage
 the user/tokens, the action server will just receive the `access_token` and related
 information collected by the client).
@@ -178,7 +178,7 @@ i.e.:
 
 ```python
 from typing import Literal
-from sema4ai.actions import OAuth2Secret, action
+from actions import OAuth2Secret, action
 
 @action
 def read_spreadsheet(
@@ -234,7 +234,7 @@ pull the appropriate configurations.
 
 ```python
 from typing import Annotated
-from sema4ai.actions import action, Secret, SecretSpec
+from actions import action, Secret, SecretSpec
 
 @action
 def analyze_document(
@@ -259,7 +259,7 @@ For cleaner code, you can create a type alias for commonly used tagged secrets:
 
 ```python
 from typing import Annotated
-from sema4ai.actions import action, Secret, SecretSpec
+from actions import action, Secret, SecretSpec
 
 # Create a reusable type alias
 DocumentIntelligenceSecret = Annotated[Secret, SecretSpec(tag="document-intelligence")]

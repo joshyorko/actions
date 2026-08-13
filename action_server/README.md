@@ -1,4 +1,4 @@
-# sema4ai-action-server
+# actions-runtime
 
 [Sema4.ai Action Server](https://github.com/sema4ai/actions#readme) is a Python framework designed to provide your Python functions to AI Agents. It works both as an MCP Server (hosting tools, resources and prompts) and also provides an OpenAPI compatible API.
 
@@ -8,16 +8,15 @@ The `Sema4.ai Action Server` automatically provides a `/mcp` endpoint for connec
 
 ## 1. Install Action Server
 
-Action Server is available as a stand-alone fully signed executable and via `pip install sema4ai-action-server`.
+Action Server is available as a stand-alone fully signed executable and via `pip install actions-runtime`.
 
 > We recommend the executable to prevent confusion in case you have multiple/crowded Python environments, etc.
 
 #### For macOS
 
 ```sh
-# Install Sema4.ai Action Server
-brew update
-brew install sema4ai/tools/action-server
+# Install Actions Runtime
+python -m pip install actions-runtime
 ```
 
 #### For Windows
@@ -57,7 +56,7 @@ action-server start
 
 ## What do you need in your Action Package
 
-An `Action Package` is currently defined as a local folder that contains at least one Python file containing an action entry point (a Python function marked with `@action` -decorator from `sema4ai.actions`).
+An `Action Package` is currently defined as a local folder that contains at least one Python file containing an action entry point (a Python function marked with `@action` -decorator from `actions`).
 
 The `package.yaml` file is required for specifying the Python environment and dependencies for your Action ([RCC](https://github.com/joshyorko/rcc/) will be used to automatically bootstrap it and keep it updated given the `package.yaml` contents).
 
@@ -79,7 +78,7 @@ Start new projects with:
 
 `action-server new`
 
-Note: the `action-server` executable should be automatically added to your python installation after `pip install sema4ai-action-server`, but if for some reason it wasn't pip-installed, it's also possible to use `python -m sema4ai.action_server` instead of `action-server`.
+Note: the `action-server` executable should be automatically added to your Python installation after `pip install actions-runtime`; if it was not, use `python -m actions.server` instead.
 
 After creating the project, it's possible to serve the actions under the current directory with:
 

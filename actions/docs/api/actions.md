@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 
-# module `sema4ai.actions`
+# module `actions`
 
 Sema4.ai Actions enables running your AI actions in the Sema4.ai Action Server.
 
@@ -9,7 +9,7 @@ To use:
 Mark actions with:
 
 ```
-from sema4ai.actions import action
+from actions import action
 
 @action
 def my_action():
@@ -22,15 +22,15 @@ Note that it's also possible to programmatically run actions (without the Action
 
 Run all the actions in a .py file:
 
-`python -m sema4ai.actions run <path_to_file>`
+`python -m actions run <path_to_file>`
 
 Run all the actions in files named *action*.py:
 
-`python -m sema4ai.actions run <directory>`
+`python -m actions run <directory>`
 
 Run only actions with a given name:
 
-`python -m sema4ai.actions run <directory or file> -t <action_name>`
+`python -m actions run <directory or file> -t <action_name>`
 
 # Variables
 
@@ -42,31 +42,31 @@ ______________________________________________________________________
 
 ## `action`
 
-Decorator for actions (entry points) which can be executed by `sema4ai.actions`.
+Decorator for actions (entry points) which can be executed by `actions`.
 
 i.e.:
 
 If a file such as actions.py has the contents below:
 
 ```python
-from sema4ai.actions import action
+from actions import action
 
 @action
 def enter_user() -> str:
     ...
 ```
 
-It'll be executable by sema4ai actions as:
+It'll be executable by Actions Core as:
 
-python -m sema4ai.actions run actions.py -a enter_user
+python -m actions run actions.py -a enter_user
 
 **Args:**
 
-- <b>`func`</b>: A function which is an action to `sema4ai.actions`.
+- <b>`func`</b>: A function which is an action to `actions`.
 - <b>`is_consequential`</b>: Whether the action is consequential or not. This will add `x-openai-isConsequential: true` to the action metadata and shown in OpenApi spec.
 - <b>`display_name`</b>: A name to be displayed for this action. If given will be used as the openapi.json summary for this action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/__init__.py#L61)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L61)
 
 ```python
 action(*args, **kwargs)
@@ -78,7 +78,7 @@ ______________________________________________________________________
 
 Provides decorator which caches return and clears it automatically when the current action has been run.
 
-A decorator which automatically cache the result of the given function and will return it on any new invocation until sema4ai-actions finishes running the current action.
+A decorator which automatically cache the result of the given function and will return it on any new invocation until actions-core finishes running the current action.
 
 The function may be either a generator with a single yield (so, the first yielded value will be returned and when the cache is released the generator will be resumed) or a function returning some value.
 
@@ -86,7 +86,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/__init__.py#L157)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L157)
 
 ```python
 action_cache(func)
@@ -98,7 +98,7 @@ ______________________________________________________________________
 
 Provides the action which is being currently run or None if not currently running an action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/__init__.py#L192)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L192)
 
 ```python
 get_current_action() → Optional[IAction]
@@ -110,7 +110,7 @@ ______________________________________________________________________
 
 Provide the output directory being used for the run or None if there's no output dir configured.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/__init__.py#L179)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L179)
 
 ```python
 get_output_dir() → Optional[Path]
@@ -122,7 +122,7 @@ ______________________________________________________________________
 
 Provides decorator which caches return and clears automatically when all actions have been run.
 
-A decorator which automatically cache the result of the given function and will return it on any new invocation until sema4ai-actions finishes running all actions.
+A decorator which automatically cache the result of the given function and will return it on any new invocation until actions-core finishes running all actions.
 
 The function may be either a generator with a single yield (so, the first yielded value will be returned and when the cache is released the generator will be resumed) or a function returning some value.
 
@@ -130,7 +130,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/__init__.py#L135)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L135)
 
 ```python
 session_cache(func)
@@ -147,7 +147,7 @@ Receives as an argument the action or actions that will be run.
 Can be used as a decorator without arguments:
 
 ```python
-from sema4ai.actions import setup
+from actions import setup
 
 @setup
 def my_fixture(action):
@@ -157,7 +157,7 @@ def my_fixture(action):
 Alternatively, can be called with a `scope` argument to decide when the fixture is run:
 
 ```python
-from sema4ai.actions import setup
+from actions import setup
 
 @setup(scope="action")
 def before_each(action):
@@ -174,7 +174,7 @@ The `setup` fixture also allows running code after the execution, if it `yield`s
 
 ```python
 import time
-from sema4ai.actions import setup
+from actions import setup
 
 @setup
 def measure_time(action):
@@ -190,7 +190,7 @@ def my_long_action():
 
 **Note:** If fixtures are defined in another file, they need to be imported in the main actions file to be taken into use
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_fixtures.py#L26)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_fixtures.py#L26)
 
 ```python
 setup(
@@ -210,7 +210,7 @@ Receives as an argument the action or actions that were executed, which contain 
 Can be used as a decorator without arguments:
 
 ```python
-from sema4ai.actions import teardown
+from actions import teardown
 
 @teardown
 def my_fixture(action):
@@ -220,7 +220,7 @@ def my_fixture(action):
 Alternatively, can be called with a `scope` argument to decide when the fixture is run:
 
 ```python
-from sema4ai.actions import teardown
+from actions import teardown
 
 @teardown(scope="action")
 def after_each(action):
@@ -235,7 +235,7 @@ By default, runs teardowns in `action` scope.
 
 **Note:** If fixtures are defined in another file, they need to be imported in the main actions file to be taken into use
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_fixtures.py#L150)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_fixtures.py#L150)
 
 ```python
 teardown(
@@ -320,7 +320,7 @@ ______________________________________________________________________
 
 Runs the action and returns its result.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_protocols.py#L138)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_protocols.py#L138)
 
 ```python
 run() → Any
@@ -337,7 +337,7 @@ The way to use it is by declaring a variable with the 'OAuth2Secret' type in the
 **Example:**
 
 ```
-from sema4ai.actions import action, OAuth2Secret
+from actions import action, OAuth2Secret
 
 @action
 def add_column_to_spreadsheet(
@@ -383,7 +383,7 @@ Creates an OAuth2 Secret given the action context (which may be encrypted in mem
 
 Return: An OAuth2Secret instance collected from the passed action context.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_secret/__init__.py#L206)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L206)
 
 ```python
 from_action_context(action_context: 'ActionContext', path: str) → OAuth2Secret
@@ -403,7 +403,7 @@ Return: An OAuth2Secret instance with the given value.
 
 Note: the model_validate method is used for compatibility with the pydantic API.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_secret/__init__.py#L181)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L181)
 
 ```python
 model_validate(value: dict) → OAuth2Secret
@@ -433,7 +433,7 @@ ______________________________________________________________________
 
 ### `model_validate`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_request.py#L100)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_request.py#L100)
 
 ```python
 model_validate(dct: dict) → Request
@@ -480,7 +480,7 @@ The way to use it is by declaring a variable with the 'Secret' type in the @acti
 **Example:**
 
 ```
-from sema4ai.actions import action, Secret
+from actions import action, Secret
 
 @action
 def my_action(password: Secret):
@@ -509,7 +509,7 @@ Creates a secret given the action context (which may be encrypted in memory unti
 
 Return: A Secret instance collected from the passed action context.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_secret/__init__.py#L87)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L87)
 
 ```python
 from_action_context(
@@ -532,7 +532,7 @@ Return: A Secret instance with the given value.
 
 Note: the model_validate method is used for compatibility with the pydantic API.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_secret/__init__.py#L69)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L69)
 
 ```python
 model_validate(value: str) → Secret
@@ -550,7 +550,7 @@ The secret will still have the same API as Secret (i.e., .value property which c
 
 ### `__init__`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_secret/__init__.py#L123)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L123)
 
 ```python
 __init__(tag: str)
@@ -573,7 +573,7 @@ It's meant to be used to represent the result of a table-like operation.
 - <b>`name`</b>: Optional name for the table (e.g., "sales_data").
 - <b>`description`</b>: Optional description (e.g., "Sales records for Q1 2024").
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_table.py#L21)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L21)
 
 ```python
 __init__(
@@ -615,7 +615,7 @@ Get a row from the table as a dictionary.
 **Returns:**
 The row at the given index as a dictionary.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_table.py#L90)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L90)
 
 ```python
 get_row_as_dict(
@@ -632,7 +632,7 @@ Iterate over the rows of the table as dictionaries.
 **Returns:**
 An iterator over the rows of the table as dictionaries.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_table.py#L59)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L59)
 
 ```python
 iter_as_dicts() → Iterator[dict[str, str | int | float | bool | list | dict | None]]
@@ -642,7 +642,7 @@ ______________________________________________________________________
 
 ### `model_dump`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_table.py#L135)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L135)
 
 ```python
 model_dump(**kwargs)
@@ -652,7 +652,7 @@ ______________________________________________________________________
 
 ### `model_dump_json`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/_table.py#L142)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L142)
 
 ```python
 model_dump_json(**kwargs)
@@ -666,9 +666,9 @@ ______________________________________________________________________
 
 This is a custom error which actions returning a `Response` are expected to raise if an "expected" exception happens.
 
-When this exception is raised sema4ai-actions will automatically convert it to an "expected" where its error message is the exception.
+When this exception is raised actions-core will automatically convert it to an "expected" where its error message is the exception.
 
-i.e.: sema4ai-actions does something as:
+i.e.: actions-core does something as:
 
 ```python
 try

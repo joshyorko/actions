@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 
-# module `sema4ai.actions.api`
+# module `actions.api`
 
 This module contains the public API for the actions.
 
@@ -21,7 +21,7 @@ Provides lint errors from the contents of a file containing the `@action`s.
 **Returns:**
 A list with the diagnostics found.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/sema4ai/actions/api.py#L68)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/api.py#L68)
 
 ```python
 collect_lint_errors(contents_to_lint: str) → list[DiagnosticsTypedDict]

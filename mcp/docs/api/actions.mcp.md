@@ -1,12 +1,12 @@
 <!-- markdownlint-disable -->
 
-# module `sema4ai.mcp`
+# module `actions.mcp`
 
 Sema4.ai MCP (Model Context Protocol) bindings for Python.
 
 This package provides the concepts around MCP (such as tools, resources, and prompts), but unlike other MCP packages, it can be run standalone (without being a real service).
 
-Packages developed with sema4ai.mcp can run as an actual MCP server, by loading it into the `Sema4.ai Action Server`, which loads this package and provides the actual MCP server implementation.
+Packages developed with actions.mcp can run as an actual MCP server, by loading it into the `Sema4.ai Action Server`, which loads this package and provides the actual MCP server implementation.
 
 This approach enables: 1. Automatic generation of the environment to run the server (the Action Server will read the related `package.yaml` and then run the tools/resources/prompts in thetarget environment, enabling multiple MCPs to have different environments).2. Automated logging and execution tracking (i.e.: `robocorp.log` is used to automatically log the Python execution and the results of the tools/resources/prompts).3. It's possible to inspect in the Action Server all the tools/resources/prompts calls made and inspect the details on the execution.
 
@@ -35,7 +35,7 @@ If False, the tool's domain of interaction is closed. For example, the world of 
 **Example:**
 
 ```python
-from sema4ai.mcp import tool
+from actions.mcp import tool
 
 @tool
 def assign_ticket(ticket_id: str, user_id: str) -> bool:
@@ -53,11 +53,11 @@ def assign_ticket(ticket_id: str, user_id: str) -> bool:
     return True
 ```
 
-Note that a tool needs sema4ai actions to be executed. The command line to execute it is:
+Note that a tool needs Actions Core to be executed. The command line to execute it is:
 
-python -m sema4ai.actions run actions.py -a assign_ticket
+python -m actions run actions.py -a assign_ticket
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/mcp/src/sema4ai/mcp/__init__.py#L91)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/mcp/src/actions/mcp/__init__.py#L91)
 
 ```python
 tool(*args, **kwargs)
@@ -84,7 +84,7 @@ If called without any argument, an automatic uri is created based on the functio
 **Example:**
 
 ```python
-from sema4ai.mcp import resource
+from actions.mcp import resource
 
 @resource("tickets://{ticket_id}")
 def get_ticket(ticket_id: str) -> dict[str, str]:
@@ -100,13 +100,13 @@ def get_ticket(ticket_id: str) -> dict[str, str]:
     return {"id": ticket_id, "summary": "This is a test ticket"}
 ```
 
-Note that a resource needs sema4ai actions to be executed. The command line to execute it is:
+Note that a resource needs Actions Core to be executed. The command line to execute it is:
 
-python -m sema4ai.actions run actions.py -a get_ticket
+python -m actions run actions.py -a get_ticket
 
 See: https://modelcontextprotocol.io/docs/concepts/resources
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/mcp/src/sema4ai/mcp/__init__.py#L206)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/mcp/src/actions/mcp/__init__.py#L206)
 
 ```python
 resource(*args, **kwargs) → Callable
@@ -127,7 +127,7 @@ Note that each argument in the function signature is automatically added as a re
 **Example:**
 
 ```python
-from sema4ai.mcp import prompt
+from actions.mcp import prompt
 
 @prompt
 def make_a_summary(text: str) -> str:
@@ -140,11 +140,11 @@ def make_a_summary(text: str) -> str:
     return "Please make a summary of the following text: {text}"
 ```
 
-Note that a prompt needs sema4ai actions to be executed. The command line to execute it is:
+Note that a prompt needs Actions Core to be executed. The command line to execute it is:
 
-python -m sema4ai.actions run actions.py -a make_a_summary
+python -m actions run actions.py -a make_a_summary
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/mcp/src/sema4ai/mcp/__init__.py#L318)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/mcp/src/actions/mcp/__init__.py#L318)
 
 ```python
 prompt(*args, **kwargs)

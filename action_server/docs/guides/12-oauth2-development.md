@@ -3,8 +3,8 @@
 In this case, a developer must create an application in the proper service
 (say, `google` and `slack`), and fill in the details in the `OAuth2 Settings YAML`.
 
-- On Windows it's default location is `%LOCALAPPDATA%/sema4ai/action-server/oauth2_config.yaml`.
-- On Linux/Mac it's default location is `~/.sema4ai/action-server/oauth2_config.yaml`.
+- On Windows it's default location is `%LOCALAPPDATA%/actions/action-server/oauth2_config.yaml`.
+- On Linux/Mac it's default location is `~/.actions/action-server/oauth2_config.yaml`.
 - It's also possible to specify a different `oauth2_config.yaml` location in the `start` arguments.
 
 Below is an example showing how to configure it.
@@ -23,10 +23,10 @@ oauth2Config:
   # For the localhost development to work the redirect urls must be set when registering the OAuth applications
   # and also known by the applications.
   # For Sema4 Ai tools the valid redirect url list is as follows:
-  # - http://localhost:61080/sema4ai/oauth2/
-  # - http://localhost:61081/sema4ai/oauth2/
-  # - https://localhost:61080/sema4ai/oauth2/
-  # - https://localhost:61081/sema4ai/oauth2/
+  # - http://localhost:61080/actions/oauth2/
+  # - http://localhost:61081/actions/oauth2/
+  # - https://localhost:61080/actions/oauth2/
+  # - https://localhost:61081/actions/oauth2/
   #
   # We need to have two ports to mitigate potential port collisiont and we need the ´http://´ and `https://`
   # Variants because some OAuth providers demand https even in localhost.
@@ -53,7 +53,7 @@ oauth2Config:
     # There are hardcoded features to the names listed here.
     microsoft:
       # This mode uses a validated OAuth app provided and configured by Sema4 Ai
-      mode: sema4ai
+      mode: actions
 
     slack:
       mode: custom
@@ -128,12 +128,12 @@ Note that when running the action a browser window will automatically open
 for each provider requested in the action.
 
 Also make sure that when registering the OAuth2 client/secret the proper
-redirect uris are added ( `http://localhost:61080/sema4ai/oauth2/`, `http://localhost:61081/sema4ai/oauth2/`,
-`https://localhost:61080/sema4ai/oauth2/`, `https://localhost:61081/sema4ai/oauth2/`)
+redirect uris are added ( `http://localhost:61080/actions/oauth2/`, `http://localhost:61081/actions/oauth2/`,
+`https://localhost:61080/actions/oauth2/`, `https://localhost:61081/actions/oauth2/`)
 note that to use the oauth2 authentication from the action server itself, the url with the port used
 by the Action Server must also be registered -- so, for instance, if the default port: `8080` is
-used, then a redirect url such as `http://localhost:8080/sema4ai/oauth2/` or  
-`https://localhost:8080/sema4ai/oauth2/` must also be added).
+used, then a redirect url such as `http://localhost:8080/actions/oauth2/` or
+`https://localhost:8080/actions/oauth2/` must also be added).
 
 It's possible to use the VSCode command `Sema4.ai: Open OAuth2 Settings` to
 create a file in the proper place with the default structure to be filled
