@@ -4,7 +4,6 @@ import tomllib
 import unittest
 from pathlib import Path
 
-
 REPOSITORY_ROOT = Path(__file__).parents[2]
 DEVCONTAINER_ROOT = REPOSITORY_ROOT / ".devcontainer"
 
@@ -231,6 +230,29 @@ class DevContainerContractTest(unittest.TestCase):
             "docs/skills/work-items.md",
         ):
             self.assertIn(path, workflow)
+
+    def test_actions_core_release_workflow_contract(self):
+        workflow = (
+            REPOSITORY_ROOT / ".github" / "workflows" / "actions_release.yml"
+        ).read_text()
+
+        self.assertIn('"actions-core-*"', workflow)
+        self.assertIn('poetry==2.1.1', workflow)
+        self.assertIn('fetch-depth: 0', workflow)
+        self.assertIn("name: Upload verified Core artifacts", workflow)
+        self.assertIn("name: actions-core-dist", workflow)
+        self.assertIn("actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4", workflow)
+        self.assertIn("needs: verify", workflow)
+        self.assertIn("if: startsWith(github.ref, 'refs/tags/actions-core-')", workflow)
+        self.assertIn("environment: pypi", workflow)
+        self.assertIn("git fetch origin community:refs/remotes/origin/community", workflow)
+        self.assertIn('git merge-base --is-ancestor "$GITHUB_SHA" origin/community', workflow)
+        self.assertIn('tag_version=${GITHUB_REF_NAME#actions-core-}', workflow)
+        self.assertIn('package_version=$(poetry version --short)', workflow)
+        self.assertIn("actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4", workflow)
+        self.assertIn("PYPI_TOKEN_ACTIONS_CORE", workflow)
+        self.assertIn("poetry publish --no-interaction", workflow)
+        self.assertNotIn("poetry build", workflow[workflow.index("  publish:") :])
 
     def test_smoke_contract(self):
         smoke = DEVCONTAINER_ROOT / "bin" / "smoke"
