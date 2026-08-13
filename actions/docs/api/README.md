@@ -18,6 +18,7 @@
 - [`_secret.OAuth2Secret`](./actions._secret.md#class-oauth2secret): This class should be used to specify that OAuth2 secrets should be received.
 - [`_request.Request`](./actions._request.md#class-request): Contains the information exposed in a request (such as headers and cookies).
 - [`_response.Response`](./actions._response.md#class-response): The response class provides a way for the user to signal that the action
+- [`builtins.list`](./builtins.md#class-list): Built-in mutable sequence.
 - [`_secret.Secret`](./actions._secret.md#class-secret): This class should be used to receive secrets.
 - [`_secret.SecretSpec`](./actions._secret.md#class-secretspec): Metadata for secrets that specifies a tag for identification by external clients.
 - [`_protocols.Status`](./actions._protocols.md#class-status): Action state

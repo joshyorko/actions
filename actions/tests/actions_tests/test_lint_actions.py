@@ -3,7 +3,6 @@ from pathlib import Path
 from typing import Any
 
 
-
 def test_lint_action_no_docstring(data_regression):
     from actions._lint_action import iter_lint_errors
 
@@ -221,7 +220,6 @@ def my_action(
     data_regression.check(
         [x.to_lsp_diagnostic() for x in iter_lint_errors(contents, pm=pm)]
     )
-
 
     issues = find_issues_in_actions_list(datadir, contents)
     data_regression.check(issues, basename="test_lint_action_secret_list_issues")
