@@ -24,11 +24,15 @@ versioned distributions; a clean wheel install is required before calling the
 Runtime/Core interoperability contract complete.
 
 The source migration PR contains the helper and its direct consumers together;
-the helper commit is not independently mergeable or release-ready. Publication-
-dependent source locks and Runtime freeze inputs are deferred until the renamed
-distributions exist in the configured package index; do not hand-edit hashes or
-regenerate them prematurely. Regenerate the affected locks after publication,
-then regenerate the Runtime freeze before releasing Runtime or MCP artifacts.
+the helper commit is not independently mergeable or release-ready. The active
+`actions/poetry.lock` and `actions-http-helper/poetry.lock` files are intentionally
+absent during this migration: their previous graphs retained removed
+`sema4ai-*` distributions, and the current test/release workflows do not
+consume those paths. This is a deferred lock gate, not a green lock check.
+After the renamed distributions are published in the configured package index,
+regenerate both locks with Poetry; do not hand-edit hashes. Runtime freeze
+inputs remain separately deferred until the renamed distributions are
+published.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement
