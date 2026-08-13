@@ -1,5 +1,6 @@
 import importlib.util
 import re
+import sys
 from pathlib import Path
 
 import pytest
@@ -41,6 +42,7 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert "Publish verified artifacts" in pypi
     assert "cibuildwheel==2.23.1" in pypi
     assert "twine==6.2.0" in pypi
+    assert "id-token: write" not in pypi
     assert "cp312-*macos*arm64" in pypi
     assert "cp313-*macos*arm64" in pypi
     assert "cp312-*manylinux*x86_64" in pypi
@@ -143,14 +145,18 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
         < publish_step_names.index("Canary local Runtime verifier")
         < publish_step_names.index("Upload artifact: action_server/dist/*")
     )
+    for job_name in ("build-sdist", "build-wheels"):
+        for step in workflow["jobs"][job_name]["steps"]:
+            if "secrets." in str(step):
+                assert step.get("if") == "github.event_name == 'push'"
 
 
 def test_runtime_publisher_verifies_manifest_and_rejects_bad_inventory(tmp_path):
     publisher = load_publisher()
     artifacts = [
         "actions_runtime-1.0.0.tar.gz",
-        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_28_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
         "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
         "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
         "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
@@ -177,8 +183,8 @@ def test_runtime_publisher_accepts_real_cibuildwheel_names_and_rejects_bad_abi(
     publisher = load_publisher()
     artifacts = [
         "actions_runtime-1.0.0.tar.gz",
-        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_28_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
         "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
         "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
         "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
@@ -195,6 +201,29 @@ def test_runtime_publisher_accepts_real_cibuildwheel_names_and_rejects_bad_abi(
         publisher.VerificationError, match="unexpected artifact filename"
     ):
         publisher.verify_artifacts(tmp_path)
+
+
+def test_runtime_publisher_rejects_mixed_versions_and_duplicate_matrix_rows(tmp_path):
+    publisher = load_publisher()
+    artifacts = [
+        "actions_runtime-1.0.0.tar.gz",
+        "actions_runtime-1.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+    ]
+    for name in artifacts:
+        (tmp_path / name).write_bytes(name.encode())
+    with pytest.raises(publisher.VerificationError, match="version"):
+        publisher.write_manifest(tmp_path)
+
+    (tmp_path / artifacts[1]).rename(
+        tmp_path / "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl"
+    )
+    with pytest.raises(publisher.VerificationError, match="seven artifacts"):
+        publisher.write_manifest(tmp_path)
 
 
 def test_runtime_publisher_rejects_duplicate_basenames_before_merge(tmp_path):
@@ -244,11 +273,99 @@ def test_runtime_publisher_injects_token_only_into_twine_child(monkeypatch, tmp_
     assert calls[0][0] == ["twine", "--version"]
     check_command, check_kwargs = calls[1]
     assert check_command[1:3] == ["check", "--strict"]
-    assert "env" not in check_kwargs
+    assert "PYPI" not in check_kwargs["env"]
+    assert "TWINE_PASSWORD" not in check_kwargs["env"]
     upload_command, upload_kwargs = calls[2]
     assert "secret-token" not in upload_command
     assert upload_kwargs["env"]["TWINE_USERNAME"] == "__token__"
     assert upload_kwargs["env"]["TWINE_PASSWORD"] == "secret-token"
+    assert "PYPI" not in upload_kwargs["env"]
+
+
+def test_runtime_publisher_requires_exact_twine_version(monkeypatch, tmp_path):
+    publisher = load_publisher()
+
+    class Result:
+        stdout = "twine version 16.2.0"
+        stderr = ""
+
+    monkeypatch.setattr(publisher.subprocess, "run", lambda *args, **kwargs: Result())
+    with pytest.raises(RuntimeError, match="exact Twine"):
+        publisher._run_twine(tmp_path, publish=False, token=None)
+
+
+def test_runtime_publisher_validates_immutable_release_run_metadata():
+    publisher = load_publisher()
+    metadata = {
+        "headSha": "good-sha",
+        "headBranch": "actions-runtime-1.0.0",
+        "workflowName": "Action Server PYPI Release",
+        "event": "push",
+        "conclusion": "success",
+        "artifactExpired": False,
+    }
+    publisher.validate_release_run(
+        metadata,
+        sha="good-sha",
+        ref="actions-runtime-1.0.0",
+    )
+    for field, value in (
+        ("headSha", "wrong-sha"),
+        ("workflowName", "Other workflow"),
+        ("event", "pull_request"),
+        ("conclusion", "failure"),
+        ("headBranch", "other-ref"),
+    ):
+        invalid = metadata | {field: value}
+        with pytest.raises(RuntimeError):
+            publisher.validate_release_run(
+                invalid,
+                sha="good-sha",
+                ref="actions-runtime-1.0.0",
+            )
+    with pytest.raises(RuntimeError, match="expired"):
+        publisher.validate_release_run(
+            metadata | {"artifactExpired": True},
+            sha="good-sha",
+            ref="actions-runtime-1.0.0",
+        )
+
+
+def test_runtime_publisher_rejects_fake_gh_metadata_before_download(monkeypatch):
+    publisher = load_publisher()
+    calls = []
+
+    class Result:
+        stdout = '{"headSha":"wrong-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","event":"push","conclusion":"success"}'
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        if command[1:3] == ["api", "repos/joshyorko/actions/actions/runs/123/artifacts"]:
+            result = Result()
+            result.stdout = '{"artifactExpired":false}'
+            return result
+        return Result()
+
+    monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_verified_runtime.py",
+            "--run-id",
+            "123",
+            "--repo",
+            "joshyorko/actions",
+            "--ref",
+            "actions-runtime-1.0.0",
+            "--sha",
+            "good-sha",
+            "--dry-run",
+        ],
+    )
+    with pytest.raises(RuntimeError, match="--sha"):
+        publisher.main()
+    assert all(command[1:3] != ["run", "download"] for command in calls)
 
 
 def test_binary_release_matrix_and_aws_pin_are_actionlint_safe():

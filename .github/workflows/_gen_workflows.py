@@ -141,7 +141,10 @@ class BaseWorkflow:
 
         self.full = {}
         self.full.update({"name": self.name})
-        self.full.update({"permissions": {"contents": "read", "id-token": "write"}})
+        permissions = {"contents": "read", "id-token": "write"}
+        if self.target == "actions_runtime_pypi_release.yml":
+            permissions = {"contents": "read"}
+        self.full.update({"permissions": permissions})
         self.full.update(self.on_part(paths))
         self.full.update(self.defaults_part())
         self.full.update(self.jobs_part())
@@ -655,9 +658,30 @@ rm src/actions/server/bin/rcc* -f
                 "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
             }
         )
-        steps.append(self.build_frontend())
-        steps.append(self.build_oauth2_config())
+        steps.extend(self.secret_scoped_build_frontend())
+        steps.extend(self.secret_scoped_build_oauth2_config())
         return steps
+
+    def secret_scoped_build_frontend(self):
+        release_step = self.build_frontend()
+        release_step["if"] = "github.event_name == 'push'"
+        canary_step = {
+            "name": "Build frontend (PR)",
+            "run": release_step["run"],
+            "if": "github.event_name == 'pull_request'",
+            "env": {"CI": True},
+        }
+        return [release_step, canary_step]
+
+    def secret_scoped_build_oauth2_config(self):
+        release_step = self.build_oauth2_config()
+        release_step["if"] = "github.event_name == 'push'"
+        canary_step = {
+            "name": "Build OAuth2 config (PR)",
+            "run": release_step["run"],
+            "if": "github.event_name == 'pull_request'",
+        }
+        return [release_step, canary_step]
 
     def build_sdist_steps(self):
         steps = self.common_build_steps()
@@ -710,11 +734,19 @@ mkdir -p dist/verified
 find dist/downloads -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts
 test \"$(wc -l < /tmp/runtime-artifacts)\" -eq 7
 test -z \"$(uniq -d /tmp/runtime-artifacts)\"
-test \"$(grep -Ec '^actions_runtime-[0-9].*\\.tar\\.gz$' /tmp/runtime-artifacts)\" -eq 1
-test \"$(grep -Ec '^actions_runtime-.*-cp(312|313)-.*\\.whl$' /tmp/runtime-artifacts)\" -eq 6
-test \"$(grep -Ec '^actions_runtime-.*manylinux.*x86_64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2
-test \"$(grep -Ec '^actions_runtime-.*macosx.*arm64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2
-test \"$(grep -Ec '^actions_runtime-.*win_amd64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2
+sdist=$(grep -E '^actions_runtime-[0-9][^/]*\\.tar\\.gz$' /tmp/runtime-artifacts)
+test \"$(printf '%s\\n' \"$sdist\" | wc -l)\" -eq 1
+version=${sdist#actions_runtime-}
+version=${version%.tar.gz}
+printf '%s\\n' \\
+  \"actions_runtime-$version.tar.gz\" \\
+  \"actions_runtime-$version-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\" \\
+  \"actions_runtime-$version-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\" \\
+  \"actions_runtime-$version-cp312-cp312-macosx_12_0_arm64.whl\" \\
+  \"actions_runtime-$version-cp313-cp313-macosx_12_0_arm64.whl\" \\
+  \"actions_runtime-$version-cp312-cp312-win_amd64.whl\" \\
+  \"actions_runtime-$version-cp313-cp313-win_amd64.whl\" | sort > /tmp/runtime-expected
+diff -u /tmp/runtime-expected /tmp/runtime-artifacts
 while IFS= read -r basename; do
   source=$(find dist/downloads -type f -name \"$basename\" -print -quit)
   test -n \"$source\"

@@ -63,8 +63,10 @@ the script reads only `PYPI` from the process environment or ignored repo-root
 `.env`, never prints or puts the token in arguments, and injects it only into
 Twine's child environment. Example commands are:
 `python action_server/scripts/publish_verified_runtime.py --run-id RUN_ID
---repo joshyorko/actions --ref actions-runtime-1.0.0 --dry-run` and the same
-command with `--publish`. Binary release names use GitHub expressions
+--repo joshyorko/actions --ref actions-runtime-1.0.0 --sha MERGED_SHA --dry-run`
+and the same command with `--publish`. Run downloads require exact SHA, tag ref,
+successful tag-push conclusion, the generated Runtime PyPI workflow, and a
+non-expired retained artifact before downloading. Binary release names use GitHub expressions
 containing `${{ github.ref_name }}`; shell literals such as `$tag-linux64` are
 not valid action inputs.
 
@@ -74,8 +76,10 @@ after manifest creation and Twine checking, before artifact retention or upload.
 The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
 cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
 rejecting mismatched ABI tags. The sdist and wheel build steps expose only
-`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`; credentials remain scoped to the
-frontend/OAuth setup steps that use them.
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run equivalent frontend and
+OAuth generation without credentials; PAT-bearing variants are limited to tag
+pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+from the child environment, while upload receives only the exact PyPI token.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The

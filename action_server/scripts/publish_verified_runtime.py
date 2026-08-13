@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import os
 import re
 import subprocess
@@ -12,11 +13,25 @@ from pathlib import Path
 
 MANIFEST_NAME = "actions-runtime-manifest.sha256"
 ARTIFACT_PATTERNS = (
-    re.compile(r"^actions_runtime-[0-9][^/]*\.tar\.gz$"),
-    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-cp\1-manylinux_[^/]*x86_64\.whl$"),
-    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-cp\1-macosx_12_0_arm64\.whl$"),
-    re.compile(r"^actions_runtime-[^-]+-cp(312|313)-cp\1-win_amd64\.whl$"),
+    re.compile(r"^actions_runtime-(?P<version>[0-9][^/]*)\.tar\.gz$"),
+    re.compile(
+        r"^actions_runtime-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-manylinux_2_17_x86_64\.manylinux_2_5_x86_64\.manylinux1_x86_64\.manylinux2014_x86_64\.whl$"
+    ),
+    re.compile(
+        r"^actions_runtime-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-macosx_12_0_arm64\.whl$"
+    ),
+    re.compile(
+        r"^actions_runtime-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-win_amd64\.whl$"
+    ),
 )
+EXPECTED_WHEEL_ROWS = {
+    ("312", "manylinux"),
+    ("313", "manylinux"),
+    ("312", "macos"),
+    ("313", "macos"),
+    ("312", "windows"),
+    ("313", "windows"),
+}
 
 
 class VerificationError(ValueError):
@@ -29,14 +44,48 @@ def _artifact_names(directory: Path) -> list[str]:
         files.remove(MANIFEST_NAME)
     if len(files) != 7:
         raise VerificationError(f"expected seven artifacts, found {len(files)}")
-    if not all(
-        any(pattern.fullmatch(name) for pattern in ARTIFACT_PATTERNS) for name in files
-    ):
+    matches = [
+        next(
+            (
+                pattern.fullmatch(name)
+                for pattern in ARTIFACT_PATTERNS
+                if pattern.fullmatch(name)
+            ),
+            None,
+        )
+        for name in files
+    ]
+    if not all(matches):
         raise VerificationError("unexpected artifact filename")
     if sum(name.endswith(".tar.gz") for name in files) != 1:
         raise VerificationError("expected one sdist")
     if sum(name.endswith(".whl") for name in files) != 6:
         raise VerificationError("expected six wheels")
+    sdist_match = ARTIFACT_PATTERNS[0].fullmatch(
+        next(name for name in files if name.endswith(".tar.gz"))
+    )
+    version = sdist_match.group("version")
+    rows = set()
+    for name in files:
+        if not name.endswith(".whl"):
+            continue
+        match = next(
+            pattern.fullmatch(name)
+            for pattern in ARTIFACT_PATTERNS[1:]
+            if pattern.fullmatch(name)
+        )
+        if match.group("version") != version:
+            raise VerificationError("artifact versions do not match sdist version")
+        platform = (
+            "manylinux"
+            if "manylinux" in name
+            else "macos"
+            if "macosx" in name
+            else "windows"
+        )
+        rows.add((match.group("python"), platform))
+    if rows != EXPECTED_WHEEL_ROWS:
+        raise VerificationError("wheel matrix does not match the approved Runtime rows")
     return files
 
 
@@ -138,20 +187,49 @@ def twine_command(directory: Path, *, publish: bool) -> list[str]:
 
 
 def _run_twine(directory: Path, *, publish: bool, token: str | None) -> None:
+    child_env = {
+        key: value
+        for key, value in os.environ.items()
+        if key != "PYPI" and not key.startswith("TWINE_")
+    }
     version = subprocess.run(
-        ["twine", "--version"], check=True, capture_output=True, text=True
+        ["twine", "--version"],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=child_env,
     )
-    if "6.2.0" not in version.stdout + version.stderr:
+    match = re.search(
+        r"\btwine version ([0-9]+\.[0-9]+\.[0-9]+)(?![.0-9A-Za-z-])",
+        version.stdout + version.stderr,
+    )
+    if not match or match.group(1) != "6.2.0":
         raise RuntimeError("exact Twine 6.2.0 is required")
     check_command = twine_command(directory, publish=False)
-    subprocess.run(check_command, check=True)
+    subprocess.run(check_command, check=True, env=child_env)
     if not publish:
         return
     if not token:
         raise RuntimeError("PYPI credential is required with --publish")
-    child_env = os.environ.copy()
-    child_env.update(TWINE_USERNAME="__token__", TWINE_PASSWORD=token)
-    subprocess.run(twine_command(directory, publish=True), check=True, env=child_env)
+    upload_env = child_env | {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": token}
+    subprocess.run(twine_command(directory, publish=True), check=True, env=upload_env)
+
+
+def validate_release_run(metadata: dict, *, sha: str, ref: str) -> None:
+    if metadata.get("headSha") != sha:
+        raise RuntimeError("the selected run does not match --sha")
+    if metadata.get("headBranch") != ref:
+        raise RuntimeError("the selected run does not match --ref")
+    if not re.fullmatch(r"actions-runtime-[0-9]+(?:\.[0-9]+)+(?:[-A-Za-z0-9.]*)", ref):
+        raise RuntimeError("--ref must be an actions-runtime version tag")
+    if metadata.get("workflowName") != "Action Server PYPI Release":
+        raise RuntimeError("the selected run is not the Runtime PyPI release workflow")
+    if metadata.get("event") != "push":
+        raise RuntimeError("the selected run is not a tag push")
+    if metadata.get("conclusion") != "success":
+        raise RuntimeError("the selected run did not succeed")
+    if metadata.get("artifactExpired"):
+        raise RuntimeError("the Runtime artifact is expired")
 
 
 def main() -> int:
@@ -161,6 +239,7 @@ def main() -> int:
     source.add_argument("--run-id")
     parser.add_argument("--repo", default=None)
     parser.add_argument("--ref", default=None)
+    parser.add_argument("--sha", default=None)
     parser.add_argument(
         "--env-file", type=Path, default=Path(__file__).resolve().parents[2] / ".env"
     )
@@ -172,26 +251,45 @@ def main() -> int:
         if not args.repo:
             parser.error("--repo is required with --run-id")
         directory = Path.cwd() / "actions-runtime-dist"
-        if args.ref:
-            result = subprocess.run(
-                [
-                    "gh",
-                    "run",
-                    "view",
-                    args.run_id,
-                    "--repo",
-                    args.repo,
-                    "--json",
-                    "headBranch",
-                    "--jq",
-                    ".headBranch",
-                ],
-                check=True,
-                capture_output=True,
-                text=True,
-            )
-            if result.stdout.strip() != args.ref:
-                raise RuntimeError("the selected run does not match --ref")
+        if not args.ref or not args.sha:
+            parser.error("--ref and --sha are required with --run-id")
+        result = subprocess.run(
+            [
+                "gh",
+                "run",
+                "view",
+                args.run_id,
+                "--repo",
+                args.repo,
+                "--json",
+                "headSha,headBranch,workflowName,event,conclusion",
+                "--jq",
+                "{headSha,headBranch,workflowName,event,conclusion}",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        metadata = json.loads(result.stdout)
+        artifact_result = subprocess.run(
+            [
+                "gh",
+                "api",
+                f"repos/{args.repo}/actions/runs/{args.run_id}/artifacts",
+                "--jq",
+                '.artifacts[] | select(.name == "actions-runtime-dist") | {artifactExpired:.expired}',
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        artifact_lines = [
+            line for line in artifact_result.stdout.splitlines() if line.strip()
+        ]
+        if len(artifact_lines) != 1:
+            raise RuntimeError("the selected run has no unique Runtime artifact")
+        metadata["artifactExpired"] = json.loads(artifact_lines[0])["artifactExpired"]
+        validate_release_run(metadata, sha=args.sha, ref=args.ref)
         command = [
             "gh",
             "run",
