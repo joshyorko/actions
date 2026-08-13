@@ -108,10 +108,13 @@ jobs:
         include:
         - os: ubuntu-22.04
           python: '3.12'
+          name: ubuntu
         - os: windows-2022
           python: '3.12'
+          name: windows
         - os: macos-15
           python: '3.12'
+          name: macos
     steps:
     - name: Checkout repository and submodules
       uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
@@ -202,7 +205,7 @@ jobs:
     - name: Verify merged tag provenance and version
       run: 'set -Eeuo pipefail
 
-        git fetch origin community
+        git fetch origin community:refs/remotes/origin/community
 
         git merge-base --is-ancestor "$GITHUB_SHA" origin/community
 

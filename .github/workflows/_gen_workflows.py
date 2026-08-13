@@ -670,8 +670,14 @@ rm src/actions/server/bin/rcc* -f
         steps.append(self.upload_artifact_manylinux_wheels())
         return steps
 
+    def matrix_runtime_wheels(self, pyversion: str):
+        matrix = self.matrix_cibuildwheel(pyversion)
+        for name, row in zip(("ubuntu", "windows", "macos"), matrix["include"]):
+            row["name"] = name
+        return matrix
+
     def publish_steps(self):
-        provenance = "set -Eeuo pipefail\ngit fetch origin community\ngit merge-base --is-ancestor \"$GITHUB_SHA\" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(poetry version --short)\nif [[ \"$tag_version\" != \"$package_version\" ]]; then printf 'tag version %s does not match package version %s\\n' \"$tag_version\" \"$package_version\" >&2; exit 1; fi"
+        provenance = "set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor \"$GITHUB_SHA\" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(poetry version --short)\nif [[ \"$tag_version\" != \"$package_version\" ]]; then printf 'tag version %s does not match package version %s\\n' \"$tag_version\" \"$package_version\" >&2; exit 1; fi"
         inventory = "set -Eeuo pipefail\ncd action_server\ntest \"$(find dist -maxdepth 1 -type f | wc -l)\" -eq 7\nfind dist -maxdepth 1 -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts\ntest \"$(uniq -d /tmp/runtime-artifacts | wc -l)\" -eq 0\ntest \"$(grep -Ec '^actions_runtime-[0-9].*\\.tar\\.gz$' /tmp/runtime-artifacts)\" -eq 1\ntest \"$(grep -Ec '^actions_runtime-.*-cp(312|313)-.*\\.whl$' /tmp/runtime-artifacts)\" -eq 6\ntest \"$(grep -Ec '^actions_runtime-.*manylinux.*x86_64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2\ntest \"$(grep -Ec '^actions_runtime-.*macosx.*arm64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2\ntest \"$(grep -Ec '^actions_runtime-.*win_amd64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2"
         return [
             self.checkout_repo(pinned=True),
@@ -692,7 +698,7 @@ rm src/actions/server/bin/rcc* -f
     def jobs_part(self):
         return {"jobs": {
             "build-sdist": {"runs-on": "${{ matrix.os }}", "strategy": {"matrix": self.matrix_ubuntu(self.minimum_python_version)}, "steps": self.build_sdist_steps()},
-            "build-wheels": {"runs-on": "${{ matrix.os }}", "strategy": {"fail-fast": self.fail_fast, "matrix": self.matrix_cibuildwheel(self.minimum_python_version)}, "steps": self.build_wheels_steps()},
+            "build-wheels": {"runs-on": "${{ matrix.os }}", "strategy": {"fail-fast": self.fail_fast, "matrix": self.matrix_runtime_wheels(self.minimum_python_version)}, "steps": self.build_wheels_steps()},
             "publish": {"needs": ["build-sdist", "build-wheels"], "permissions": {"contents": "read"}, "environment": "pypi", "runs-on": UBUNTU_VERSION, "defaults": {"run": {"working-directory": "."}}, "strategy": {"matrix": {"python": [self.minimum_python_version]}}, "steps": self.publish_steps()},
         }}
 

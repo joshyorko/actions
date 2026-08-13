@@ -1,6 +1,8 @@
 import re
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).parents[2]
 WORKFLOWS = ROOT / ".github" / "workflows"
 
@@ -18,6 +20,7 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert generator.count("PYPI_TOKEN_ACTIONS_RUNTIME") == 1
     assert pypi.count("PYPI_TOKEN_ACTIONS_RUNTIME") == 1
     assert pypi.count("twine check --strict") == 1
+    assert "git fetch origin community:refs/remotes/origin/community" in pypi
     assert 'git merge-base --is-ancestor "$GITHUB_SHA" origin/community' in pypi
     assert "poetry version --short" in pypi
     assert "python -m pip check" in pypi
@@ -34,6 +37,15 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert "cp313-*manylinux*x86_64" in pypi
     assert "cp312-*win*amd64" in pypi
     assert "cp313-*win*amd64" in pypi
+
+    workflow = yaml.safe_load(pypi)
+    wheel_matrix = workflow["jobs"]["build-wheels"]["strategy"]["matrix"]
+    assert [row["name"] for row in wheel_matrix["include"]] == [
+        "ubuntu",
+        "windows",
+        "macos",
+    ]
+    assert all("-devmode" not in row["name"] for row in wheel_matrix["include"])
 
     publish_job = re.search(r"(?ms)^  publish:\n.*", pypi)
     assert publish_job
