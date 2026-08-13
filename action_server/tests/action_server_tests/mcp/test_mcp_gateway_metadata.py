@@ -529,6 +529,46 @@ def test_observability_record_is_bounded_redacted_and_has_outcome_fields():
     assert raw_uri not in str(attributes)
 
 
+def test_resource_telemetry_redacts_opaque_and_sensitive_identifiers():
+    cases = (
+        ("mailto:alice:mailto-secret@example.test", "mailto-secret"),
+        ("data:text/plain,embedded-secret", "embedded-secret"),
+        ("urn:secret:credential-value", "credential-value"),
+        ("custom+opaque:scheme-specific-secret", "scheme-specific-secret"),
+        ("https://user:password@example.test/public", "password"),
+        (
+            "https://example.test/public?token=query-secret#fragment-secret",
+            "query-secret",
+            "fragment-secret",
+        ),
+        ("https://example.test/public/token-path-secret", "token-path-secret"),
+    )
+
+    for raw_uri, *sentinels in cases:
+        records = []
+        seen, sent = asyncio.run(
+            _run(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "resources/read",
+                    "params": {"uri": raw_uri},
+                },
+                {MCP_METHOD_HEADER: "resources/read", MCP_NAME_HEADER: raw_uri},
+                request_observer=records.append,
+            )
+        )
+
+        assert sent[0]["status"] == 204
+        assert len(records) == 1
+        metadata = seen["state"][MCP_REQUEST_STATE_KEY]
+        emitted = str(metadata) + str(metadata.telemetry_attributes)
+        emitted += str(records[0].telemetry_attributes)
+        assert len(metadata.name) <= 128
+        for sentinel in sentinels:
+            assert sentinel not in emitted
+
+
 def test_observer_exceptions_are_non_fatal_and_do_not_emit_request_data(caplog):
     def fail_metadata_observer(_metadata):
         raise OverflowError("body-secret")

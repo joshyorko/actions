@@ -36,6 +36,21 @@ _MAX_HEADER_VALUE_LENGTH = 256
 _MAX_OBSERVATION_NAME_LENGTH = 128
 _MAX_LATENCY_MS = 24 * 60 * 60 * 1000
 _LOGGER = logging.getLogger(__name__)
+_REDACTED_IDENTIFIER = "<redacted>"
+_SAFE_RESOURCE_SCHEMES = frozenset({"http", "https", "resource"})
+_SENSITIVE_IDENTIFIER_MARKERS = frozenset(
+    {
+        "access",
+        "api",
+        "auth",
+        "credential",
+        "key",
+        "password",
+        "secret",
+        "sig",
+        "token",
+    }
+)
 
 _RESOURCE_METHODS = frozenset(
     {"resources/read", "resources/subscribe", "resources/unsubscribe"}
@@ -72,7 +87,12 @@ class McpRequestMetadata:
     def __post_init__(self) -> None:
         object.__setattr__(self, "method", _sanitize_method(self.method))
         if self.name is not None:
-            object.__setattr__(self, "name", _sanitize_identifier(self.name))
+            sanitizer = (
+                _sanitize_resource_identifier
+                if self.method in _RESOURCE_METHODS
+                else _sanitize_identifier
+            )
+            object.__setattr__(self, "name", sanitizer(self.name))
 
     @property
     def method_classification(self) -> str:
@@ -249,24 +269,51 @@ def _inspect_payload(payload: Any) -> _PayloadInspection:
 
 
 def _sanitize_identifier(value: str) -> str:
-    try:
-        parsed = urlsplit(value)
-        if parsed.scheme or parsed.netloc or "?" in value or "#" in value:
-            if parsed.scheme or parsed.netloc:
-                host = parsed.hostname or ""
-                if parsed.netloc:
-                    value = f"{parsed.scheme.lower()}://{host}{parsed.path}"
-                else:
-                    value = f"{parsed.scheme.lower()}:{parsed.path}"
-            else:
-                value = value.split("?", 1)[0].split("#", 1)[0]
-    except ValueError:
-        value = "redacted-identifier"
     value = "".join(
         character if ord(character) >= 0x20 and ord(character) != 0x7F else "_"
         for character in value
     )
     return value[:_MAX_OBSERVATION_NAME_LENGTH]
+
+
+def _sanitize_resource_identifier(value: str) -> str:
+    try:
+        parsed = urlsplit(value)
+        scheme = parsed.scheme.lower()
+        if scheme not in _SAFE_RESOURCE_SCHEMES or not parsed.netloc:
+            return _REDACTED_IDENTIFIER
+        if parsed.username is not None or parsed.password is not None:
+            return _REDACTED_IDENTIFIER
+        host = parsed.hostname or ""
+        if (
+            not host
+            or _looks_sensitive(host)
+            or any(
+                character
+                not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-_~"
+                for character in host
+            )
+        ):
+            return _REDACTED_IDENTIFIER
+        path = parsed.path
+        if _looks_sensitive(path) or "?" in value or "#" in value:
+            return f"{scheme}://{host}" if scheme == "resource" else scheme
+        if scheme == "resource":
+            value = f"{scheme}://{host}"
+        else:
+            value = scheme
+    except ValueError:
+        return _REDACTED_IDENTIFIER
+    value = "".join(
+        character if ord(character) >= 0x20 and ord(character) != 0x7F else "_"
+        for character in value
+    )
+    return value[:_MAX_OBSERVATION_NAME_LENGTH]
+
+
+def _looks_sensitive(value: str) -> bool:
+    lowered = value.lower()
+    return any(marker in lowered for marker in _SENSITIVE_IDENTIFIER_MARKERS)
 
 
 def _sanitize_method(value: str) -> str:
