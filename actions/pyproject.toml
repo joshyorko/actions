@@ -16,7 +16,7 @@ robocorp-truststore = ">=0.8.0"
 psutil = ">=5.0,<8.0"
 docstring_parser_fork = "^0.0.5"
 pydantic = "^2.11.7"
-sema4ai-http-helper = "^2.0.1"
+actions-http-helper = "^1.0.0"
 pyyaml = "^6.0"
 
 [tool.poetry.group.optional.dependencies]

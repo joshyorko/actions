@@ -11,14 +11,14 @@ from typing import NamedTuple
 
 import urllib3
 
-from sema4ai_http.types import NetworkConfigType, ProfileType
+from actions_http.types import NetworkConfigType, ProfileType
 
 _DEFAULT_LOGGER = logging.getLogger(__name__)
 
 
 _TYPE_BODY = typing.Union[bytes, typing.IO[typing.Any], typing.Iterable[bytes], str]
 
-__version__ = "2.1.2"
+__version__ = "1.0.0"
 
 
 class _SSLContextFactory:
@@ -109,22 +109,21 @@ class _NetworkConfig:
             localappdata = os.environ.get("LOCALAPPDATA")
             if not localappdata:
                 raise RuntimeError("Error. LOCALAPPDATA not defined in environment!")
-            sema4_home = Path(localappdata) / "sema4ai"
+            actions_home = Path(localappdata) / "actions"
         else:
             # Linux/Mac
-            sema4_home = Path("~/.sema4ai").expanduser()
+            actions_home = Path("~/.actions").expanduser()
 
-        return sema4_home / "network-settings.yaml"
+        return actions_home / "network-settings.yaml"
 
     def get_ssl_context(self) -> ssl.SSLContext:
         return _SSLContextFactory(self.profile_config).build_ssl_context(
             ssl.PROTOCOL_TLS_CLIENT
         )
 
-    # TODO: add support for no-proxy setting
     def _build_connection_pool(self) -> urllib3.PoolManager | urllib3.ProxyManager:
         ssl_context = self.get_ssl_context()
-        connection_pool = None
+        connection_pool: urllib3.PoolManager | urllib3.ProxyManager | None = None
 
         if "proxy-settings" in self.profile_config:
             proxy_settings = self.profile_config["proxy-settings"]
@@ -134,15 +133,15 @@ class _NetworkConfig:
             )
 
             if proxy_url:
-                self.connection_pool = urllib3.ProxyManager(
+                connection_pool = urllib3.ProxyManager(
                     proxy_url=proxy_url,
                     ssl_context=ssl_context,
                 )
 
         if connection_pool is None:
-            self.connection_pool = urllib3.PoolManager(ssl_context=ssl_context)
+            connection_pool = urllib3.PoolManager(ssl_context=ssl_context)
 
-        return self.connection_pool
+        return connection_pool
 
 
 @lru_cache
@@ -172,7 +171,7 @@ class ProxyConfig:
         if proxy_settings := network_config.profile_config.get("proxy-settings"):
             http_proxy = _parse_proxy_value(proxy_settings.get("http-proxy"))  # type: ignore
             https_proxy = _parse_proxy_value(proxy_settings.get("https-proxy"))  # type: ignore
-            no_proxy = _parse_proxy_value(proxy_settings.get("no_proxy"))  # type: ignore
+            no_proxy = _parse_proxy_value(proxy_settings.get("no-proxy"))  # type: ignore
         else:
             http_proxy = []
             https_proxy = []
@@ -259,7 +258,7 @@ def get(
     Perform a GET request using urllib3.
 
     It utilizes PoolManager or ProxyManager depending on the network settings
-    defined in `$HOME/.sema4ai/network-settings.yaml`.
+    defined in `$HOME/.actions/network-settings.yaml`.
     """
     return ResponseWrapper(
         _get_connection_manager().request(
@@ -287,7 +286,7 @@ def post(
     Perform a POST request using urllib3.
 
     It utilizes PoolManager or ProxyManager depending on the network settings
-    defined in `$HOME/.sema4ai/network-settings.yaml`.
+    defined in `$HOME/.actions/network-settings.yaml`.
     """
     return ResponseWrapper(
         _get_connection_manager().request(
@@ -315,7 +314,7 @@ def put(
     Perform a PUT request using urllib3.
 
     It utilizes PoolManager or ProxyManager depending on the network settings
-    defined in `$HOME/.sema4ai/network-settings.yaml`.
+    defined in `$HOME/.actions/network-settings.yaml`.
     """
     return ResponseWrapper(
         _get_connection_manager().request(
@@ -343,7 +342,7 @@ def patch(
     Perform a PATCH request using urllib3.
 
     It utilizes PoolManager or ProxyManager depending on the network settings
-    defined in `$HOME/.sema4ai/network-settings.yaml`.
+    defined in `$HOME/.actions/network-settings.yaml`.
     """
     return ResponseWrapper(
         _get_connection_manager().request(
@@ -371,7 +370,7 @@ def delete(
     Perform a DELETE request using urllib3.
 
     It utilizes PoolManager or ProxyManager depending on the network settings
-    defined in `$HOME/.sema4ai/network-settings.yaml`.
+    defined in `$HOME/.actions/network-settings.yaml`.
     """
     return ResponseWrapper(
         _get_connection_manager().request(

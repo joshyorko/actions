@@ -79,10 +79,10 @@ class GalleryActionPackages:
                     f"Package {package_name} has no zip url in metadata. Found: {json.dumps(package_metadata, indent=2)}"
                 )
 
-            import sema4ai_http
+            import actions_http
 
             try:
-                response = sema4ai_http.get(package_metadata["zip"])
+                response = actions_http.get(package_metadata["zip"])
                 if response.status != 200:
                     raise Exception(
                         f"Failed to download package {package_name}. Status: {response.status}. Data: {response.data.decode('utf-8', errors='backslashreplace')}"
@@ -177,7 +177,7 @@ class GalleryActionPackages:
 
         May throw an exception if the metadata cannot be loaded.
         """
-        from sema4ai_http import get
+        from actions_http import get
 
         if self._metadata:
             # Ok, we have loaded it before

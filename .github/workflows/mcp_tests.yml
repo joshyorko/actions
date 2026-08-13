@@ -26,7 +26,7 @@ permissions:
     - .github/workflows/mcp_tests.yml
     - devutils/**
     - actions/**
-    - sema4ai-http-helper/**
+    - actions-http-helper/**
   pull_request:
     branches:
     - master
@@ -35,7 +35,7 @@ permissions:
     - .github/workflows/mcp_tests.yml
     - devutils/**
     - actions/**
-    - sema4ai-http-helper/**
+    - actions-http-helper/**
 defaults:
   run:
     working-directory: ./mcp

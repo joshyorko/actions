@@ -10,6 +10,35 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
+The HTTP helper is the independently publishable `actions-http-helper`
+distribution, imported as `actions_http`. Its release workflow expects tags of
+the form `actions_http-<version>` and the repository secret
+`PYPI_TOKEN_ACTIONS_HTTP_HELPER`; neither publishing nor secret discovery is
+performed by local verification. The helper reads network settings from
+`~/.actions/network-settings.yaml` on Linux/macOS and
+`%LOCALAPPDATA%/actions/network-settings.yaml` on Windows.
+`devinstall`/develop mode substitutes the in-tree `actions-http-helper`
+distribution by path, in addition to the existing `sema4ai-*` internal
+distributions. Consumer lockfiles remain publication-gated until the helper
+exists in the configured package index.
+
+The source migration PR contains the helper and its direct consumers together;
+the helper commit is not independently mergeable or release-ready. Its
+consumer lockfiles remain unchanged until after the source PR is merged and
+`actions-http-helper==1.0.0` exists in the configured package index: Poetry
+does not resolve a version-only requirement from this checkout, and this
+repository has no release-staging/index procedure. Keep the consumer
+requirements publication-ready, record the resolver error, and regenerate all
+affected locks immediately after the helper’s first normal release. Then
+regenerate the Action Server freeze before releasing Action Server or MCP
+artifacts.
+
+For a clean source archive, `poetry run invoke devinstall` must discover the
+sibling `actions-http-helper/pyproject.toml`, replace the version requirement
+with that local path before Poetry resolves, and install the helper from the
+archive. This applies at minimum to `actions/` and `action_server/`; it must
+not depend on a `sema4ai-http-helper` directory or requirement.
+
 ## Evidence Ladder
 
 Prefer evidence in this order:

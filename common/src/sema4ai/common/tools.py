@@ -204,7 +204,7 @@ def _download_tool(
 
     from pathlib import Path
 
-    from sema4ai_http import download_with_resume
+    from actions_http import download_with_resume
 
     from sema4ai.common.system_mutex import timed_acquire_mutex
 
@@ -298,7 +298,7 @@ class RccTool(BaseTool):
         import platform
         from pathlib import Path
 
-        from sema4ai_http import download_with_resume
+        from actions_http import download_with_resume
 
         from sema4ai.common.system_mutex import timed_acquire_mutex
 

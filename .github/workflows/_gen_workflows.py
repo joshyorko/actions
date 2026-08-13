@@ -60,10 +60,10 @@ def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
     except Exception:
         pass  # Ignore if it's not there.
     for key in dependencies:
-        if key.startswith("sema4ai-"):
+        if key.startswith("sema4ai-") or key == "actions-http-helper":
             if key == "sema4ai-data":
                 continue
-            if key == "sema4ai-http-helper":
+            if key == "actions-http-helper":
                 dep_name = key
             else:
                 dep_name = key[len("sema4ai-") :].replace("-", "_")
@@ -1106,7 +1106,7 @@ class MCPTests(BaseTests):
 class HttpHelperTests(BaseTests):
     name = "HTTP Helper Tests"
     target = "http_helper_tests.yml"
-    project_name = "sema4ai-http-helper"
+    project_name = "actions-http-helper"
 
 
 TARGETS = [

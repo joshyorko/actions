@@ -354,7 +354,7 @@ class _ActionsRunner:
             if self.callback_url:
                 post_result = None
                 try:
-                    import sema4ai_http
+                    import actions_http
 
                     headers: dict[str, str] = {
                         HEADER_ACTION_SERVER_RUN_ID: self._run_id,
@@ -364,7 +364,7 @@ class _ActionsRunner:
                         headers[HEADER_ACTIONS_REQUEST_ID] = self.request_id
 
                     for _i in range(3):  # Try up to 3 times before giving up.
-                        post_result = sema4ai_http.post(
+                        post_result = actions_http.post(
                             self.callback_url,
                             json=result,
                             headers=headers,

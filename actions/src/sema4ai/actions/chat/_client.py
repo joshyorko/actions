@@ -73,7 +73,7 @@ files will be stored to or accessed from."""
             # should later send the upload complete notification.
             import urllib
 
-            import sema4ai_http
+            import actions_http
 
             url = f"{self._url}/threads/{thread_id}/file-by-ref"
             headers = {
@@ -82,7 +82,7 @@ files will be stored to or accessed from."""
             }
 
             # Send the initial request
-            response = sema4ai_http.get(
+            response = actions_http.get(
                 url, fields={"file_ref": filename}, headers=headers
             )
             self._raise_for_status(
@@ -102,7 +102,7 @@ files will be stored to or accessed from."""
                 p = Path(_uris.to_fs_path(file_url))
                 return p.read_bytes()
             else:
-                response = sema4ai_http.get(file_url)
+                response = actions_http.get(file_url)
                 self._raise_for_status(
                     f"Failed to get file {filename} from {file_url}. ",
                     response,
@@ -161,7 +161,7 @@ files will be stored to or accessed from."""
             import json
             import urllib
 
-            import sema4ai_http
+            import actions_http
 
             url = f"{self._url}/threads/{thread_id}/files/request-upload"
             headers = {
@@ -173,7 +173,7 @@ files will be stored to or accessed from."""
             ).encode("utf-8")
 
             # Send the initial request
-            response = sema4ai_http.post(url, body=data, headers=headers)
+            response = actions_http.post(url, body=data, headers=headers)
             self._raise_for_status(
                 f"Failed when requesting upload for file {filename} to {url}.",
                 response,
@@ -208,7 +208,7 @@ files will be stored to or accessed from."""
 
                 encoded_data, content_type = encode_multipart_formdata(fields)
 
-                response = sema4ai_http.post(
+                response = actions_http.post(
                     file_url, body=encoded_data, headers={"Content-Type": content_type}
                 )
 
@@ -227,7 +227,7 @@ files will be stored to or accessed from."""
             data = json.dumps({"file_ref": file_ref, "file_id": file_id}).encode(
                 "utf-8"
             )
-            response = sema4ai_http.post(url, body=data, headers=headers)
+            response = actions_http.post(url, body=data, headers=headers)
             self._raise_for_status(
                 f"Failed when completing upload for file {filename} to {url}.",
                 response,
@@ -268,7 +268,7 @@ files will be stored to or accessed from."""
             return files
         else:
             # In remote mode, call the file management server API
-            import sema4ai_http
+            import actions_http
 
             url = f"{self._url}/threads/{thread_id}/files"
             headers = {
@@ -276,7 +276,7 @@ files will be stored to or accessed from."""
                 "x-action-invocation-context": get_x_action_invocation_context(),
             }
 
-            response = sema4ai_http.get(url, headers=headers)
+            response = actions_http.get(url, headers=headers)
             self._raise_for_status(
                 f"Failed to list files from thread {thread_id}.", response, (200,)
             )
