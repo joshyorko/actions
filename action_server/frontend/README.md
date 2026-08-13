@@ -1,59 +1,30 @@
-# sema4ai-server-frontend
+# Actions frontend
 
-## Dual-Tier Build System
+The frontend has one canonical manifest and lock at this directory. It contains
+two independently buildable application boundaries:
 
-This frontend supports two build tiers:
-- **Community**: Open-source build using Radix UI + Tailwind CSS (no proprietary dependencies)
-- **Enterprise**: Internal build using @sema4ai design system packages
+- `apps/runtime` builds the Runtime administration UI and preserves its routes.
+- `apps/canvas-view` builds the separate Canvas View boundary. Product behavior
+  for Canvas View is intentionally outside this topology change.
 
-### Package Manifest Precedence
+Shared Runtime source lives under `src/`; shell composition is in
+`src/app/RuntimeShell.tsx` and route composition is exposed through
+`src/app/RuntimeRoutes.tsx`.
 
-The build system uses tier-specific package manifests:
-- `package.json.community` - Community tier dependencies (Radix UI, Tailwind, OSI-licensed packages only)
-- `package.json.enterprise` - Enterprise tier dependencies (includes @sema4ai/* packages from vendored/)
-- `package.json` - Active manifest (copied from tier-specific file during build)
-
-**Important**: Do not manually edit `package.json`. Always edit the tier-specific files (`package.json.community` or `package.json.enterprise`).
-
-### Pre-Commit Hooks (Optional)
-
-To enable local tier separation validation, install the pre-commit hook:
+## Install and run
 
 ```bash
-cd action_server
-invoke setup-hooks
-```
-
-The hook checks for:
-- Enterprise imports (`@sema4ai/*`, `@/enterprise`) in `core/` files
-- Enterprise file modifications on community branches
-
-To bypass the hook when needed: `git commit --no-verify`
-
-**Note**: The hook is optional for local development, but CI enforces these rules mandatory.
-
-## Installation
-
-Install dependencies:
-
-```
-npm install
-```
-
-## Development
-
-1. Start the dev server:
-
-```
+npm ci
 npm run dev
 ```
 
-3. Open your browser at http://localhost:8080
+The Runtime dev server listens on port 8085. Build the two independent
+artifacts with:
 
-## Production
-
-To build the production code, run:
-
-```
+```bash
 npm run build
+npm run build:canvas
 ```
+
+The outputs are `dist/` and `dist-canvas/`. Neither build uses a tier-specific
+manifest or product-tier environment variable.

@@ -10,6 +10,12 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
+The Action Server frontend uses `action_server/frontend/package.json` and its
+lock as the sole package metadata. Runtime and Canvas View are separate Vite
+roots under `apps/runtime` and `apps/canvas-view`; run `npm run build` and
+`npm run build:canvas` from the frontend directory to verify both artifacts.
+The topology has no tier-specific manifest or product-tier build variable.
+
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
 the form `actions_http-<version>` and the repository secret
