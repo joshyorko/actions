@@ -1,6 +1,6 @@
 from robocorp import log
 
-from sema4ai.actions import action
+from actions import action
 
 
 def another_method_at_line_5(a):

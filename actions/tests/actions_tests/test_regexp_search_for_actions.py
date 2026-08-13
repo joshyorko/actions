@@ -1,6 +1,6 @@
 import re
 
-from sema4ai.actions._constants import REGEXP_TO_LOAD_FOR_DEFINITIONS
+from actions._constants import REGEXP_TO_LOAD_FOR_DEFINITIONS
 
 
 def test_should_match_decorators_with_parameters():

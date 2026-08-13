@@ -3,11 +3,9 @@ from pathlib import Path
 
 
 def test_actions_request_list(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     assert len(found) == 1
     # Note: the request does not appear in the schema!
@@ -15,7 +13,7 @@ def test_actions_request_list(datadir, data_regression):
 
 
 def test_actions_request_run(datadir: Path):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -37,7 +35,7 @@ def test_actions_request_run(datadir: Path):
         "--print-result",
     ]
 
-    result = sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    result = actions_run(args, returncode=0, cwd=str(datadir))
     assert json_output.read_text() == "value-in-header"
     output = result.stdout.decode("utf-8")
     assert '"The result is value-in-header"' in output

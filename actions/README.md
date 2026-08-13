@@ -1,4 +1,4 @@
-# ⚡️ sema4ai-actions
+# ⚡️ actions-core
 
 A Python library designed to simplify the development of Python actions _(AI or otherwise)_ to be run with the [Sema4.ai Action Server](https://github.com/sema4ai/actions#readme).
 
@@ -9,7 +9,7 @@ If you have not setup Action Server already, see the [🏃‍♂️ Quickstart](
 Decorate your Python function with the `@action` decorator:
 
 ```py
-from sema4ai.actions import action
+from actions import action
 
 @action
 def sum_numbers(a: float, b: float) -> float:
@@ -60,10 +60,10 @@ def get_weather_forecast(city: str, days: int, scale: str = "celsius") -> str:
 
 ### Working with Secrets
 
-Actions can work with sensitive credentials by using the `Secret` type from the `sema4ai.actions` library. Secrets are handled securely and will not be exposed in logs or the API documentation.
+Actions can work with sensitive credentials by using the `Secret` type from the `actions` library. Secrets are handled securely and will not be exposed in logs or the API documentation.
 
 ```py
-from sema4ai.actions import action, Secret
+from actions import action, Secret
 
 @action
 def process_document(document_url: str, credentials: Secret) -> str:
@@ -79,7 +79,7 @@ For more details on secrets, including tagged secrets with `SecretSpec`, OAuth2 
 To get the full benefits of your actions, the suggested way to run them is using Action Server. But it's also possible to do that directly in command line by passing the named arguments:
 
 ```sh
-python -m sema4ai.actions run -- --city=Helsinki --days=3
+actions run -- --city=Helsinki --days=3
 ```
 
 ## Guides

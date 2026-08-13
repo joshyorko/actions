@@ -1,3 +1,3 @@
-from sema4ai.actions.cli import main
+from actions.cli import main
 
 main(["run", "simple.py"])

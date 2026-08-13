@@ -4,7 +4,6 @@ import tomllib
 import unittest
 from pathlib import Path
 
-
 REPOSITORY_ROOT = Path(__file__).parents[2]
 DEVCONTAINER_ROOT = REPOSITORY_ROOT / ".devcontainer"
 
@@ -117,7 +116,7 @@ class DevContainerContractTest(unittest.TestCase):
         project = pyproject["project"]
 
         self.assertEqual(project["name"], "actions-work-items")
-        self.assertEqual(project["version"], "0.4.0")
+        self.assertEqual(project["version"], "0.4.4")
         self.assertEqual(project["requires-python"], ">=3.10,<4.0")
         self.assertEqual(
             project["urls"],
@@ -134,7 +133,8 @@ class DevContainerContractTest(unittest.TestCase):
                 "redis": ["redis>=4.5.0"],
                 "docdb": ["pymongo>=4.3.0"],
                 "documentdb": ["pymongo>=4.3.0"],
-                "all": ["redis>=4.5.0", "pymongo>=4.3.0"],
+                "yorko": ["requests>=2.31.0"],
+                "all": ["redis>=4.5.0", "pymongo>=4.3.0", "requests>=2.31.0"],
             },
         )
         self.assertEqual(
@@ -147,7 +147,7 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("twine", pyproject["tool"]["poetry"]["group"]["dev"]["dependencies"])
 
         init_path = REPOSITORY_ROOT / "work-items" / "src" / "actions" / "work_items" / "__init__.py"
-        self.assertIn('__version__ = "0.4.0"', init_path.read_text())
+        self.assertIn('__version__ = "0.4.4"', init_path.read_text())
 
     def test_work_items_pypi_documentation_contract(self):
         readme = (REPOSITORY_ROOT / "work-items" / "README.md").read_text()
@@ -173,7 +173,7 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("workitems.outputs.create(payload=None, files=None, save=True)", readme)
         payload = readme[readme.index("## Payloads") : readme.index("## Files")]
         self.assertNotIn("ExceptionType", payload)
-        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.4.0 - 2026-08-07"))
+        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.4.4 - 2026-08-13"))
 
     def test_work_items_release_workflow_contract(self):
         workflow = (
@@ -230,6 +230,68 @@ class DevContainerContractTest(unittest.TestCase):
             "docs/skills/work-items.md",
         ):
             self.assertIn(path, workflow)
+
+    def test_actions_core_release_workflow_contract(self):
+        workflow = (
+            REPOSITORY_ROOT / ".github" / "workflows" / "actions_release.yml"
+        ).read_text()
+        verifier = REPOSITORY_ROOT / "actions" / "scripts" / "verify_clean_wheel.py"
+        clean_break = (
+            REPOSITORY_ROOT
+            / "actions"
+            / "tests"
+            / "actions_core_tests"
+            / "test_clean_break_contract.py"
+        ).read_text()
+        verify = workflow[workflow.index("  verify:") : workflow.index("\n  publish:")]
+
+        self.assertIn('"actions-core-*"', workflow)
+        self.assertIn('poetry==2.1.1', workflow)
+        self.assertIn('fetch-depth: 0', workflow)
+        self.assertIn("name: Upload verified Core artifacts", workflow)
+        self.assertIn("name: actions-core-dist", workflow)
+        self.assertIn("actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4", workflow)
+        self.assertIn("needs: verify", workflow)
+        self.assertIn("if: startsWith(github.ref, 'refs/tags/actions-core-')", workflow)
+        self.assertIn("environment: pypi", workflow)
+        self.assertIn("git fetch origin community:refs/remotes/origin/community", workflow)
+        self.assertIn('git merge-base --is-ancestor "$GITHUB_SHA" origin/community', workflow)
+        self.assertIn('tag_version=${GITHUB_REF_NAME#actions-core-}', workflow)
+        self.assertIn('package_version=$(poetry version --short)', workflow)
+        self.assertIn("actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4", workflow)
+        self.assertIn("PYPI_TOKEN_ACTIONS_CORE", workflow)
+        self.assertIn("poetry publish --no-interaction", workflow)
+        self.assertNotIn("poetry build", workflow[workflow.index("  publish:") :])
+        self.assertIn("poetry run python -m pip install twine==6.2.0", verify)
+        self.assertIn("poetry run twine check --strict dist/*", verify)
+        self.assertLess(verify.index("poetry build"), verify.index("poetry run python -m pip install twine==6.2.0"))
+        self.assertLess(verify.index("poetry run python -m pip install twine==6.2.0"), verify.index("poetry run twine check --strict dist/*"))
+        self.assertTrue(verifier.is_file())
+        self.assertIn("verify_clean_wheel.py", verify)
+        self.assertIn("actions-core", verifier.read_text())
+        self.assertIn("console_scripts", verifier.read_text())
+        self.assertIn("direct_url", verifier.read_text())
+        self.assertIn('"list"', verifier.read_text())
+        self.assertIn('"run"', verifier.read_text())
+        self.assertIn("stdin=subprocess.DEVNULL", clean_break)
+        self.assertIn("timeout=", clean_break)
+        self.assertIn("returncode", clean_break)
+        self.assertIn("stdout", clean_break)
+        self.assertIn("stderr", clean_break)
+        self.assertLess(
+            verify.index("poetry run twine check --strict dist/*"),
+            verify.index("name: Upload verified Core artifacts"),
+        )
+
+    def test_shared_devutils_requirements_pin_poetry_exactly(self):
+        requirements = (REPOSITORY_ROOT / "devutils" / "requirements.txt").read_text()
+        self.assertIn("poetry==2.1.1", requirements)
+        self.assertNotIn("poetry~=2.1.1", requirements)
+
+        generated_core_workflow = (
+            REPOSITORY_ROOT / ".github" / "workflows" / "actions_core_tests.yml"
+        ).read_text()
+        self.assertIn("../devutils/requirements.txt", generated_core_workflow)
 
     def test_smoke_contract(self):
         smoke = DEVCONTAINER_ROOT / "bin" / "smoke"

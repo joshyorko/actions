@@ -7,11 +7,9 @@ def _fix_file(entry):
 
 
 def test_actions_list(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     for entry in found:
         _fix_file(entry)
@@ -21,9 +19,9 @@ def test_actions_list(datadir, data_regression):
 
 
 def test_actions_run(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         [
             "run",
             "-a",

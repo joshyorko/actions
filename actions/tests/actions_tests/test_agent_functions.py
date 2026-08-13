@@ -16,7 +16,7 @@ def test_prompt_generate_with_thread_id(agent_dummy_server):
     """Test prompt_generate with thread_id parameter."""
     import os
 
-    from sema4ai.actions.agent import prompt_generate
+    from actions.agent import prompt_generate
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -68,7 +68,7 @@ def test_prompt_generate_with_agent_id_and_model_name(agent_dummy_server):
     """Test prompt_generate with agent_id parameter."""
     import os
 
-    from sema4ai.actions.agent import prompt_generate
+    from actions.agent import prompt_generate
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -117,7 +117,7 @@ def test_prompt_generate_with_platform_config(agent_dummy_server):
     """Test prompt_generate with platform_config parameter."""
     import os
 
-    from sema4ai.actions.agent import OpenAIPlatformParameters, prompt_generate
+    from actions.agent import OpenAIPlatformParameters, prompt_generate
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -166,7 +166,7 @@ def test_prompt_generate_complex_prompt(agent_dummy_server):
     """Test prompt_generate with the complex prompt structure from the user query."""
     import os
 
-    from sema4ai.actions.agent import prompt_generate
+    from actions.agent import prompt_generate
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -254,12 +254,12 @@ def test_get_thread_id_from_headers(datadir: Path):
     """Test get_thread_id function using headers."""
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Create a simple action inline for testing
     action_code = '''
-from sema4ai.actions import action
-from sema4ai.actions.agent import get_thread_id
+from actions import action
+from actions.agent import get_thread_id
 
 @action
 def action_get_thread_id():
@@ -294,7 +294,7 @@ def action_get_thread_id():
         "--print-result",
     ]
 
-    result = sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    result = actions_run(args, returncode=0, cwd=str(datadir))
     output = result.stdout.decode("utf-8")
     assert "thread_id: thread-id-from-header" in output
 
@@ -303,12 +303,12 @@ def test_get_agent_id_from_headers(datadir: Path):
     """Test get_agent_id function using headers."""
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Create a simple action inline for testing
     action_code = '''
-from sema4ai.actions import action
-from sema4ai.actions.agent import get_agent_id
+from actions import action
+from actions.agent import get_agent_id
 
 @action
 def action_get_agent_id():
@@ -343,7 +343,7 @@ def action_get_agent_id():
         "--print-result",
     ]
 
-    result = sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    result = actions_run(args, returncode=0, cwd=str(datadir))
     output = result.stdout.decode("utf-8")
     assert "agent_id: agent-id-from-header" in output
 
@@ -353,12 +353,12 @@ def test_get_thread_id_from_invocation_context(datadir: Path):
     import base64
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Create a simple action inline for testing
     action_code = '''
-from sema4ai.actions import action
-from sema4ai.actions.agent import get_thread_id
+from actions import action
+from actions.agent import get_thread_id
 
 @action
 def action_get_thread_id():
@@ -398,7 +398,7 @@ def action_get_thread_id():
         "--print-result",
     ]
 
-    result = sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    result = actions_run(args, returncode=0, cwd=str(datadir))
     output = result.stdout.decode("utf-8")
     assert "thread_id: thread-id-from-context" in output
 
@@ -408,12 +408,12 @@ def test_get_agent_id_from_invocation_context(datadir: Path):
     import base64
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Create a simple action inline for testing
     action_code = '''
-from sema4ai.actions import action
-from sema4ai.actions.agent import get_agent_id
+from actions import action
+from actions.agent import get_agent_id
 
 @action
 def action_get_agent_id():
@@ -453,7 +453,7 @@ def action_get_agent_id():
         "--print-result",
     ]
 
-    result = sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    result = actions_run(args, returncode=0, cwd=str(datadir))
     output = result.stdout.decode("utf-8")
     assert "agent_id: agent-id-from-context" in output
 
@@ -462,7 +462,7 @@ def test_prompt_no_validation_with_dicts(agent_dummy_server):
     """Test that prompt_generate handles validation correctly: dicts are not validated."""
     import os
 
-    from sema4ai.actions.agent import prompt_generate
+    from actions.agent import prompt_generate
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -522,7 +522,7 @@ def test_prompt_generate_with_pydantic_models(agent_dummy_server):
     """Test prompt_generate with Pydantic models to ensure validation and model_dump() works correctly."""
     import os
 
-    from sema4ai.actions.agent import (
+    from actions.agent import (
         OpenAIPlatformParameters,
         Prompt,
         PromptTextContent,
@@ -574,7 +574,7 @@ def test_prompt_generate_with_dicts_no_validation(agent_dummy_server):
     """Test that prompt_generate accepts invalid dicts without validation (escape hatch behavior)."""
     import os
 
-    from sema4ai.actions.agent import prompt_generate
+    from actions.agent import prompt_generate
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -629,7 +629,7 @@ def test_prompt_generate_pydantic_validation_errors(agent_dummy_server):
     import pytest
     from pydantic import ValidationError
 
-    from sema4ai.actions.agent import (
+    from actions.agent import (
         Prompt,
         PromptTextContent,
         PromptUserMessage,
@@ -700,7 +700,7 @@ def test_prompt_generate_mixed_dict_and_pydantic(agent_dummy_server):
     """Test prompt_generate with mixed dict and Pydantic model inputs."""
     import os
 
-    from sema4ai.actions.agent import OpenAIPlatformParameters, prompt_generate
+    from actions.agent import OpenAIPlatformParameters, prompt_generate
 
     # Set the environment variable to point to our dummy server
     os.environ[
@@ -753,7 +753,7 @@ def test_prompt_generate_model_dump_behavior(agent_dummy_server):
     """Test that model_dump() is called correctly for Pydantic models."""
     import os
 
-    from sema4ai.actions.agent import (
+    from actions.agent import (
         OpenAIPlatformParameters,
         Prompt,
         PromptTextContent,

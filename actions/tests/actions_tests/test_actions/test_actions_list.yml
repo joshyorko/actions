@@ -58,7 +58,7 @@
     required:
     - name
     type: object
-  line: 34
+  line: 27
   managed_params_schema: {}
   name: greet
   options:

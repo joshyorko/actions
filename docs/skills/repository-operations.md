@@ -39,6 +39,32 @@ with that local path before Poetry resolves, and install the helper from the
 archive. This applies at minimum to `actions/` and `action_server/`; it must
 not depend on a `sema4ai-http-helper` directory or requirement.
 
+The clean-break prerequisites can merge before the Runtime migration. During
+that split, `actions-core` owns `actions/__init__.py` and includes `actions.mcp`,
+while `actions-work-items` contributes only `actions.work_items`. The existing
+`community` Action Server and standalone `mcp/` package remain on their
+published `sema4ai-actions`/`sema4ai-mcp` graph until the Runtime PR lands.
+Local dependency substitution must therefore map explicit distribution names
+to repository directories and must not redirect `sema4ai-actions` to the new
+`actions-core` source tree.
+Core verification must unset inherited `VIRTUAL_ENV` and select the requested
+matrix interpreter explicitly before invoking Poetry.
+
+Core console integration helpers must resolve the installed `actions` command
+from the executable search path and validate its `actions-core` ownership and
+`actions = actions.cli:main` entry point. Launcher filenames are implementation
+details; tests resolve the command name `actions` and do not encode a launcher
+filename. Core test workflows consume
+`../devutils/requirements.txt`, which exact-pins Poetry 2.1.1. Core release
+verification builds once, installs exact Twine 6.2.0, runs
+`twine check --strict dist/*`, installs the exact wheel in a fresh venv outside
+the checkout, and executes benign `actions list` and `actions run` fixture
+commands before uploading. The clean-wheel verifier clears source
+`PYTHONPATH`, rejects editable/source `direct_url` metadata while retaining
+wheel archive provenance, and bounds subprocesses
+with closed stdin and a finite timeout. The publish job downloads those
+verified artifacts without rebuilding them.
+
 ## Evidence Ladder
 
 Prefer evidence in this order:

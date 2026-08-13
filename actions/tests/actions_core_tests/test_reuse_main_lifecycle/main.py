@@ -1,6 +1,6 @@
 import os
 
-from sema4ai.actions.cli import main
+from actions.cli import main
 
 if __name__ == "__main__":
     os.environ["S4_ACTIONS_SKIP_SESSION_TEARDOWN"] = "1"

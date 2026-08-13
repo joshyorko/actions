@@ -1,4 +1,4 @@
-from sema4ai.actions import Response, Table, action
+from actions import Response, Table, action
 
 
 @action

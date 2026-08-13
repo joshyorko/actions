@@ -12,4 +12,4 @@ except ImportError:
 
 from devutils.invoke_utils import build_common_tasks
 
-globals().update(build_common_tasks(ROOT, "sema4ai.actions"))
+globals().update(build_common_tasks(ROOT, "actions", tag_prefix="actions-core"))

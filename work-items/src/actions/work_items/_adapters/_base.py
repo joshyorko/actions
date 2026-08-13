@@ -5,7 +5,9 @@ Based on robocorp-workitems (Apache 2.0 License).
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Protocol, overload, runtime_checkable
+from typing import Any, Protocol, runtime_checkable
+
+from typing_extensions import overload
 
 from .._types import ExceptionType, JSONType, State
 

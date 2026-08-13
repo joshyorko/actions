@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Annotated
 
-from sema4ai.actions import Request, Secret, SecretSpec, action
+from actions import Request, Secret, SecretSpec, action
 
 # Type alias for a Secret with a custom tag
 DocumentIntelligenceSecret = Annotated[Secret, SecretSpec(tag="document-intelligence")]

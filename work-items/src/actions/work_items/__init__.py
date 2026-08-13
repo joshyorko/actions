@@ -97,7 +97,7 @@ from ._workitem import Input, Output, WorkItem
 
 log = logging.getLogger(__name__)
 
-__version__ = "0.4.3"
+__version__ = "0.4.4"
 
 
 def _build_task_context(

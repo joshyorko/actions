@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from sema4ai.actions._collect_actions import FindActionPaths
+from actions._collect_actions import FindActionPaths
 
 
 def create_test_structure(tmpdir):

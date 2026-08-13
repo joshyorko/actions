@@ -1,6 +1,6 @@
 import itertools
 
-from sema4ai.actions import action, action_cache
+from actions import action, action_cache
 
 _counter = itertools.count()
 

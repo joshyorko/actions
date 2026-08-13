@@ -1,4 +1,4 @@
-from sema4ai.actions import OAuth2Secret, action
+from actions import OAuth2Secret, action
 
 
 @action

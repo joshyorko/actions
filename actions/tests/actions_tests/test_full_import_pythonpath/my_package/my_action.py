@@ -1,6 +1,6 @@
 from my_package import my_lib  # type: ignore
 
-from sema4ai.actions import action
+from actions import action
 
 from .my_lib import MyClass
 

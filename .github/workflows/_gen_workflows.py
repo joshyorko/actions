@@ -1085,10 +1085,25 @@ class ActionServerManylinuxRelease(BaseWorkflow):
 
 
 class ActionsTests(BaseTests):
-    name = "Actions Tests"
-    target = "actions_tests.yml"
+    name = "Actions Core Tests"
+    target = "actions_core_tests.yml"
     project_name = "actions"
     require_node = True
+
+    @override
+    def on_part(self, dep_paths):
+        return {
+            "on": {
+                "push": {
+                    "branches": ["community", "wip"],
+                    "paths": dep_paths[:],
+                },
+                "pull_request": {
+                    "branches": ["community"],
+                    "paths": dep_paths[:],
+                },
+            }
+        }
 
 
 class CommonTests(BaseTests):

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from sema4ai.actions import ActionError, Response, action
+from actions import ActionError, Response, action
 
 
 class SomeData(BaseModel):

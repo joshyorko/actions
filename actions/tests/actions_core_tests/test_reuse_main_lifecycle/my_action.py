@@ -1,6 +1,6 @@
 from typing import Sequence
 
-from sema4ai.actions import IAction, action, setup, teardown
+from actions import IAction, action, setup, teardown
 
 session_setup = 0
 task_setup = 0
