@@ -50,12 +50,15 @@ to repository directories and must not redirect `sema4ai-actions` to the new
 Core verification must unset inherited `VIRTUAL_ENV` and select the requested
 matrix interpreter explicitly before invoking Poetry.
 
-Core console integration helpers must resolve the Poetry-installed `actions`
-launcher from the executable search path rather than assuming it is beside an
-outer uv test-runner interpreter. Core release verification builds once, runs
-`twine check --strict dist/*` in the verify job, and uploads only after that
-check succeeds; the publish job downloads those verified artifacts without
-rebuilding them.
+Core console integration helpers must resolve the installed `actions` command
+from the executable search path and validate its `actions-core` ownership and
+`actions = actions.cli:main` entry point. Poetry editable installs on Windows
+provide `actions`/`actions.cmd`; tests must not assume `actions.exe`, while a
+clean wheel may use a platform wrapper. Core test workflows consume
+`../devutils/requirements.txt`, which exact-pins Poetry 2.1.1. Core release
+verification builds once, installs exact Twine 6.2.0, runs
+`twine check --strict dist/*`, and uploads only after that check succeeds; the
+publish job downloads those verified artifacts without rebuilding them.
 
 ## Evidence Ladder
 

@@ -254,13 +254,24 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("PYPI_TOKEN_ACTIONS_CORE", workflow)
         self.assertIn("poetry publish --no-interaction", workflow)
         self.assertNotIn("poetry build", workflow[workflow.index("  publish:") :])
-        self.assertIn("poetry run python -m pip install twine", verify)
+        self.assertIn("poetry run python -m pip install twine==6.2.0", verify)
         self.assertIn("poetry run twine check --strict dist/*", verify)
-        self.assertLess(verify.index("poetry build"), verify.index("poetry run twine check --strict dist/*"))
+        self.assertLess(verify.index("poetry build"), verify.index("poetry run python -m pip install twine==6.2.0"))
+        self.assertLess(verify.index("poetry run python -m pip install twine==6.2.0"), verify.index("poetry run twine check --strict dist/*"))
         self.assertLess(
             verify.index("poetry run twine check --strict dist/*"),
             verify.index("name: Upload verified Core artifacts"),
         )
+
+    def test_shared_devutils_requirements_pin_poetry_exactly(self):
+        requirements = (REPOSITORY_ROOT / "devutils" / "requirements.txt").read_text()
+        self.assertIn("poetry==2.1.1", requirements)
+        self.assertNotIn("poetry~=2.1.1", requirements)
+
+        generated_core_workflow = (
+            REPOSITORY_ROOT / ".github" / "workflows" / "actions_core_tests.yml"
+        ).read_text()
+        self.assertIn("../devutils/requirements.txt", generated_core_workflow)
 
     def test_smoke_contract(self):
         smoke = DEVCONTAINER_ROOT / "bin" / "smoke"

@@ -1,10 +1,10 @@
 from pathlib import Path
 
 
-def test_actions_executable_resolves_installed_windows_launcher(monkeypatch, tmp_path):
+def test_actions_executable_resolves_command_name_on_windows(monkeypatch, tmp_path):
     from devutils import fixtures
 
-    poetry_launcher = tmp_path / "poetry" / "Scripts" / "actions.exe"
+    poetry_launcher = tmp_path / "poetry" / "Scripts" / "actions.cmd"
     poetry_launcher.parent.mkdir(parents=True)
     poetry_launcher.touch()
 
@@ -13,7 +13,7 @@ def test_actions_executable_resolves_installed_windows_launcher(monkeypatch, tmp
     monkeypatch.setattr(
         fixtures.shutil,
         "which",
-        lambda name: str(poetry_launcher) if name == "actions.exe" else None,
+        lambda name: str(poetry_launcher) if name == "actions" else None,
     )
 
     assert fixtures._actions_executable() == Path(poetry_launcher)

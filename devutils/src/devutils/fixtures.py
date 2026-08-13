@@ -326,11 +326,10 @@ def actions_run(
 
 
 def _actions_executable() -> Path:
-    executable_name = "actions.exe" if sys.platform == "win32" else "actions"
-    executable = shutil.which(executable_name)
+    executable = shutil.which("actions")
     if executable is None:
         raise AssertionError(
-            f"Missing installed actions console script on PATH: {executable_name}"
+            "Missing installed actions console script on PATH: actions"
         )
     return Path(executable)
 
