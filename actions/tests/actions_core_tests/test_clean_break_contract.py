@@ -54,12 +54,6 @@ def test_installed_console_script_collects_and_executes_conventional_actions_py(
 
     scripts_dir = Path(sys.executable).parent
     executable = shutil.which("actions")
-    if executable is None:
-        candidates = [scripts_dir / "actions"]
-        if sys.platform == "win32":
-            candidates.append(scripts_dir / "actions.cmd")
-        executable_path = next((path for path in candidates if path.exists()), None)
-        executable = str(executable_path) if executable_path else None
 
     if executable is None:
         entry_points = distribution.read_text("entry_points.txt") or ""
@@ -71,7 +65,6 @@ def test_installed_console_script_collects_and_executes_conventional_actions_py(
             f"sys.prefix={sys.prefix}\n"
             f"PATH={os.pathsep.join(os.environ.get('PATH', '').split(os.pathsep))}\n"
             f"which(actions)={shutil.which('actions')}\n"
-            f"which(actions.cmd)={shutil.which('actions.cmd')}\n"
             f"scripts_dir={scripts_dir}\n"
             f"scripts_dir_filenames={scripts}\n"
             f"distribution_location={distribution.locate_file('')}\n"

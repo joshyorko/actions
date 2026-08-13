@@ -52,9 +52,9 @@ matrix interpreter explicitly before invoking Poetry.
 
 Core console integration helpers must resolve the installed `actions` command
 from the executable search path and validate its `actions-core` ownership and
-`actions = actions.cli:main` entry point. Poetry editable installs on Windows
-provide `actions`/`actions.cmd`; tests must not assume `actions.exe`, while a
-clean wheel may use a platform wrapper. Core test workflows consume
+`actions = actions.cli:main` entry point. Launcher filenames are implementation
+details; tests resolve the command name `actions` and do not encode a launcher
+filename. Core test workflows consume
 `../devutils/requirements.txt`, which exact-pins Poetry 2.1.1. Core release
 verification builds once, installs exact Twine 6.2.0, runs
 `twine check --strict dist/*`, and uploads only after that check succeeds; the

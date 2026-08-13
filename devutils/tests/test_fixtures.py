@@ -1,19 +1,14 @@
-from pathlib import Path
-
-
-def test_actions_executable_resolves_command_name_on_windows(monkeypatch, tmp_path):
+def test_actions_executable_resolves_command_name(monkeypatch, tmp_path):
     from devutils import fixtures
 
-    poetry_launcher = tmp_path / "poetry" / "Scripts" / "actions.cmd"
-    poetry_launcher.parent.mkdir(parents=True)
-    poetry_launcher.touch()
+    resolved_command = tmp_path / "opaque-launcher"
+    lookup_names = []
 
-    monkeypatch.setattr(fixtures.sys, "platform", "win32")
-    monkeypatch.setattr(fixtures.sys, "executable", str(tmp_path / "uv" / "python.exe"))
     monkeypatch.setattr(
         fixtures.shutil,
         "which",
-        lambda name: str(poetry_launcher) if name == "actions" else None,
+        lambda name: lookup_names.append(name) or str(resolved_command),
     )
 
-    assert fixtures._actions_executable() == Path(poetry_launcher)
+    assert fixtures._actions_executable() == resolved_command
+    assert lookup_names == ["actions"]
