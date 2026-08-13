@@ -280,8 +280,7 @@ def validate_artifact(ctx: Context, json_output: bool = False):
     
     try:
         all_passed, checks = validate_artifact_func(
-            artifact_path, 
-            "runtime",
+            artifact_path,
             baseline_path if baseline_path.exists() else None,
             json_output
         )

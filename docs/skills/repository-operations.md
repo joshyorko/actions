@@ -26,14 +26,16 @@ boundaries.
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
 registry URLs while allowing ordinary public scoped packages such as
-`@codemirror/*` and `@radix-ui/*`. Built-import validation must scan files
-inside `dist/`; passing the directory to the single-file detector silently
-skips validation.
+`@codemirror/*` and `@radix-ui/*`. Built-import validation scans every
+supported source file inside `dist/` and uses the same Actions-owned contract
+for Runtime and Canvas artifacts. Scanner read errors fail validation; passing
+the directory to a single-file detector must not be used.
 
 The `validate-artifact` Invoke task prepends `action_server/build-binary` to
 `sys.path` and imports `artifact_validator` as a top-level module. Its helper
 imports must therefore remain top-level as well; the contract is covered by a
-subprocess test executed with `build-binary` as the working directory.
+subprocess test executed with `build-binary` as the working directory and a
+task-entrypoint regression that rejects injected removed-product imports.
 
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of

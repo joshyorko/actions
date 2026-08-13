@@ -1,10 +1,10 @@
-"""Artifact validation for dual-tier build system."""
+"""Validation for Actions-owned frontend build artifacts."""
 
 import argparse
 import hashlib
 import json
 import sys
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
@@ -60,22 +60,14 @@ class BuildArtifact:
         return json.dumps(metadata, indent=2)
 
 
-def validate_imports(artifact_path: Path, tier: str) -> ValidationCheck:
-    """Validate that community artifacts have no enterprise imports."""
-    if tier != "community":
-        return ValidationCheck(
-            name="imports",
-            passed=True,
-            message="Enterprise tier allows enterprise imports",
-            severity="info",
-        )
-    
+def validate_imports(artifact_path: Path) -> ValidationCheck:
+    """Validate that an artifact has no removed product imports."""
     if artifact_path.is_dir():
-        violations = tree_shaker.TreeShaker("community", artifact_path).scan_directory(
+        violations = tree_shaker.TreeShaker("actions", artifact_path).scan_directory(
             artifact_path
         )
     else:
-        violations = tree_shaker.detect_enterprise_imports(str(artifact_path))
+        violations = tree_shaker.scan_imports(str(artifact_path))
     
     if violations:
         messages = [
@@ -139,7 +131,6 @@ def validate_size(artifact_path: Path, baseline_path: Optional[Path]) -> Validat
 
 def validate_artifact(
     artifact_path: Path,
-    tier: str,
     baseline_path: Optional[Path] = None,
     json_output: bool = False,
 ) -> tuple[bool, list[ValidationCheck]]:
@@ -147,7 +138,6 @@ def validate_artifact(
     
     Args:
         artifact_path: Path to artifact to validate
-        tier: Build tier
         baseline_path: Optional path to baseline.json
         json_output: Output results as JSON
         
@@ -157,7 +147,7 @@ def validate_artifact(
     checks = []
     
     # Run validation checks
-    checks.append(validate_imports(artifact_path, tier))
+    checks.append(validate_imports(artifact_path))
     checks.append(validate_size(artifact_path, baseline_path))
     
     # Determine overall result
@@ -172,7 +162,6 @@ def main():
     """CLI entry point for artifact validation."""
     parser = argparse.ArgumentParser(description="Validate build artifacts")
     parser.add_argument("--artifact", required=True, help="Path to artifact")
-    parser.add_argument("--tier", required=True, choices=["community", "enterprise"])
     parser.add_argument("--baseline", help="Path to baseline.json")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
     
@@ -186,7 +175,7 @@ def main():
     baseline_path = Path(args.baseline) if args.baseline else None
     
     all_passed, checks = validate_artifact(
-        artifact_path, args.tier, baseline_path, args.json
+        artifact_path, baseline_path, args.json
     )
     
     if args.json:
