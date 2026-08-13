@@ -865,7 +865,10 @@ def _command_requiring_datadir(
 
     try:
         db_path: Union[Path, str]
-        if settings.db_file != ":memory:":
+        if settings.database_url:
+            db_path = settings.database_url
+            log.info("Using shared database backend: postgresql")
+        elif settings.db_file != ":memory:":
             db_path = settings.datadir / settings.db_file
         else:
             db_path = settings.db_file
@@ -873,7 +876,9 @@ def _command_requiring_datadir(
         from actions.server._models import create_db, load_db
         from actions.server.migrations import db_migration_status, migrate_db
 
-        is_new = db_path == ":memory:" or not os.path.exists(db_path)
+        is_new = db_path == ":memory:" or (
+            not settings.database_url and not os.path.exists(db_path)
+        )
 
         if use_db is not None:
 

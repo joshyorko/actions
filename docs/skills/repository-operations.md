@@ -118,6 +118,18 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+### Action Server shared database
+
+Action Server keeps SQLite as the default datadir-local backend. A shared
+PostgreSQL backend is selected explicitly with `--database-url` or
+`ACTION_SERVER_DATABASE_URL`; a requested PostgreSQL URL never falls back to
+SQLite, and logs identify only the backend rather than credentials. The
+database facade preserves the existing model and parameterized SQL contract,
+while PostgreSQL migration startup takes a transaction-scoped advisory lock.
+The direct two-instance/concurrent-update and concurrent-startup acceptance is
+in `action_server/tests/action_server_tests/test_database_shared.py` and
+requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.
+
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification. `.devcontainer/bin/smoke` is strict-shell, rejects root, checks the pinned Python 3.12, Node 22, uv 0.12.1, and Poetry 2.1.1 versions, then runs bootstrap and the Work Items release gate by repository-relative absolute path. uv 0.12.1 adds a platform suffix to its version output, so smoke compares its `uv 0.12.1` prefix fields exactly.

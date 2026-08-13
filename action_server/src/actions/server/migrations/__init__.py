@@ -71,7 +71,13 @@ def migrate_db(
 
     :param database: Expected to be passed when dealing with an in-memory database.
     """
-    assert os.path.exists(db_path), f"Unable to do migration. {db_path} does not exist."
+    is_postgresql = isinstance(db_path, str) and db_path.startswith(
+        ("postgresql://", "postgres://")
+    )
+    if not is_postgresql:
+        assert os.path.exists(
+            db_path
+        ), f"Unable to do migration. {db_path} does not exist."
 
     migration_status = db_migration_status(db_path)
     if migration_status == MigrationStatus.UP_TO_DATE:
@@ -80,30 +86,44 @@ def migrate_db(
     import shutil
     import time
 
-    path = Path(db_path)
-    # Ok, we need to do a migration. The first thing is creating a backup,
-    # just in case something goes bad.
-    parent_dir = path.parent
-    name = path.name
-    log.info("Preparing to migrate database at: %s", db_path)
-    backup_file = parent_dir / f"{name}-pre-migration-{to_version}-{time.time()}.bak"
-    log.info("Creating backup at: %s", backup_file)
-
-    shutil.copyfile(path, backup_file)
+    path = Path(db_path) if not is_postgresql else None
+    if path is not None:
+        parent_dir = path.parent
+        name = path.name
+        log.info("Preparing to migrate database at: %s", db_path)
+        backup_file = parent_dir / f"{name}-pre-migration-{to_version}-{time.time()}.bak"
+        log.info("Creating backup at: %s", backup_file)
+        shutil.copyfile(path, backup_file)
 
     from actions.server._database import Database
-    from actions.server._models import get_all_model_classes
+    from actions.server._models import get_all_model_classes, get_model_db_rules
 
-    db = Database(db_path)
+    db = database or Database(db_path)
     with db.connect():
         with db.transaction():
+            if db.backend_name == "postgresql":
+                db.execute(
+                    "SELECT pg_advisory_xact_lock(hashtext(?))",
+                    ["actions-runtime-schema-migrations"],
+                )
+                if "migration" in db.list_table_names() and db.all(Migration):
+                    if max(x.id for x in db.all(Migration)) >= to_version:
+                        return True
             db.initialize(get_all_model_classes())
             if "migration" not in db.list_table_names():
-                raise RuntimeError(
-                    f"""Error: 
+                if db.backend_name != "postgresql":
+                    raise RuntimeError(
+                        f"""Error:
 It seems that this version of the database ({db.db_path}) is too old.
 Please erase it and recreate it from scratch."""
-                )
+                    )
+                db.create_tables(get_model_db_rules())
+                db.insert(Migration(CURRENT_VERSION, MIGRATION_ID_TO_NAME[CURRENT_VERSION]))
+                from actions.server._models import ALL_COUNTERS, Counter
+
+                for counter in ALL_COUNTERS:
+                    db.insert(Counter(counter, 0))
+                db_migration_version = CURRENT_VERSION
             else:
                 migrations = db.all(Migration)
                 if not migrations:
@@ -161,8 +181,11 @@ def db_migration_status(db_path: Union[Path, str]) -> MigrationStatus:
     if db_path == ":memory:":
         raise RuntimeError("Migration support not available for in-memory database.")
 
-    path = Path(db_path)
-    if not path.exists():
+    is_postgresql = isinstance(db_path, str) and db_path.startswith(
+        ("postgresql://", "postgres://")
+    )
+    path = Path(db_path) if not is_postgresql else None
+    if path is not None and not path.exists():
         raise RuntimeError(
             f"Unable to check if migration is pending because file: {db_path} does not exist."
         )
@@ -170,6 +193,6 @@ def db_migration_status(db_path: Union[Path, str]) -> MigrationStatus:
     # Ok, it already exists. Check the migration status.
     db = Database(db_path)
     with db.connect():
-        log.info("Checking migration status for database at: %s", db_path)
+        log.info("Checking migration status for database backend: %s", db.backend_name)
         db.log_internal_info()
         return _db_migration_status(db)

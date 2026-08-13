@@ -258,6 +258,7 @@ class Settings:
     port: int = 8080
     verbose: bool = False
     db_file: str = "server.db"
+    database_url: Optional[str] = None
     expose_url: str = "actions.link"
     expose_provider: str = "auto"  # 'auto', 'localhost.run', 'bore', 'cloudflare', 'actions' (enterprise only)
     server_url: str = "<generated -- i.e.: http://localhost:8080>"
@@ -369,6 +370,7 @@ class Settings:
             # Distributed mode (Redis)
             "redis_url",
             "redis_password",
+            "database_url",
         ):
             assert hasattr(settings, attr)
             if hasattr(args, attr):
@@ -401,6 +403,8 @@ class Settings:
 
         if hasattr(args, "db_file"):
             settings.db_file = args.db_file
+        if not settings.database_url:
+            settings.database_url = os.environ.get("ACTION_SERVER_DATABASE_URL")
 
         if args.command == "start":
             # At this point, if using a self-signed certificate, it'll be

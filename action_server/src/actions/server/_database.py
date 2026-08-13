@@ -20,6 +20,7 @@ from typing import (
     Type,
     TypeVar,
     Union,
+    cast,
 )
 
 log = logging.getLogger(__name__)
@@ -87,12 +88,17 @@ class Database:
 
     def __init__(self, db_path: Optional[Union[Path, str]] = None):
         self._cls_to_type_hint: Dict[type, dict] = {}
+        self._db_path: Union[Path, str]
         if not db_path:
             from ._settings import get_settings
 
             self._db_path = get_settings().datadir / "server.db"
         else:
-            self._db_path = Path(db_path)
+            self._db_path = db_path if self._is_postgresql_url(db_path) else Path(db_path)
+
+        self._backend_name = (
+            "postgresql" if isinstance(self._db_path, str) else "sqlite"
+        )
 
         self._table_name_to_cls: Dict[str, type] = {}
         self._tlocal = threading.local()
@@ -100,12 +106,23 @@ class Database:
         self._write_lock = threading.RLock()
         self._classes: List[type] = []
 
+    @staticmethod
+    def _is_postgresql_url(value: Union[Path, str]) -> bool:
+        return isinstance(value, str) and value.startswith(("postgresql://", "postgres://"))
+
     @property
-    def db_path(self) -> Path:
+    def backend_name(self) -> str:
+        return self._backend_name
+
+    @property
+    def db_path(self) -> Union[Path, str]:
         return self._db_path
 
     def log_internal_info(self):
-        log.debug("sqlite version: %s", sqlite3.sqlite_version)
+        if self.backend_name == "sqlite":
+            log.debug("sqlite version: %s", sqlite3.sqlite_version)
+        else:
+            log.debug("database backend: postgresql")
 
     def _get_type_hints(self, cls) -> dict:
         try:
@@ -134,8 +151,18 @@ class Database:
             yield
             return
 
-        with closing(sqlite3.connect(self._db_path, isolation_level=None)) as conn:
+        if self.backend_name == "postgresql":
+            try:
+                import psycopg
+            except ImportError as e:
+                raise RuntimeError(
+                    "PostgreSQL support requires the actions-runtime PostgreSQL extra."
+                ) from e
+            conn = psycopg.connect(cast(str, self._db_path))
+        else:
+            conn = sqlite3.connect(self._db_path, isolation_level=None)
             conn.execute("PRAGMA foreign_keys = ON")
+        with closing(conn):
             self._tlocal.conn = conn
             try:
                 yield
@@ -146,7 +173,7 @@ class Database:
         return f"savepoint_{next(self._counter)}"
 
     @contextmanager
-    def cursor(self) -> Iterator[sqlite3.Cursor]:
+    def cursor(self) -> Iterator[Any]:
         """
         A cursor should be requested to do queries.
         """
@@ -488,9 +515,7 @@ VALUES
 
     def list_table_names(self) -> List[str]:
         with self.cursor() as cursor:
-            self.execute_query(
-                cursor,
-                """
+            sql = """
 SELECT
     name
 FROM
@@ -498,8 +523,15 @@ FROM
 WHERE
     type ='table' AND
     name NOT LIKE 'sqlite_%';
-""",
-            )
+"""
+            if self.backend_name == "postgresql":
+                sql = """
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public'
+  AND table_type = 'BASE TABLE';
+"""
+            self.execute_query(cursor, sql)
             return [x[0] for x in cursor.fetchall()]
 
     def list_table_and_columns(self) -> Dict[str, List[str]]:
@@ -587,8 +619,11 @@ ORDER BY index_name,il.seq,ii.seqno""",
             print(msg, file=sys.stderr)
         raise DBError(msg)
 
+    def _adapt_sql(self, sql: str) -> str:
+        return sql.replace("?", "%s") if self.backend_name == "postgresql" else sql
+
     def execute_query(
-        self, cursor: sqlite3.Cursor, sql: str, values: Optional[list] = None
+        self, cursor: Any, sql: str, values: Optional[list] = None
     ):
         """
         Executes a query which will NOT change the database (and should return values).
@@ -599,6 +634,7 @@ ORDER BY index_name,il.seq,ii.seqno""",
             self._print_sql(sql, values)
 
         try:
+            sql = self._adapt_sql(sql)
             if values:
                 cursor.execute(sql, values)
             else:
@@ -609,7 +645,7 @@ ORDER BY index_name,il.seq,ii.seqno""",
             )
 
     def execute_update_returning(
-        self, cursor: sqlite3.Cursor, sql: str, values: Optional[list] = None
+        self, cursor: Any, sql: str, values: Optional[list] = None
     ):
         """
         Executes a query which will NOT change the database (and should return values).
@@ -625,6 +661,7 @@ ORDER BY index_name,il.seq,ii.seqno""",
                     "a transaction is in place."
                 )
             with self._write_lock:
+                sql = self._adapt_sql(sql)
                 if values:
                     cursor.execute(sql, values)
                 else:
@@ -653,6 +690,7 @@ ORDER BY index_name,il.seq,ii.seqno""",
             conn = self._tlocal.conn
             assert conn is not None
             with self._write_lock:
+                sql = self._adapt_sql(sql)
                 if values:
                     conn.execute(sql, values)
                 else:

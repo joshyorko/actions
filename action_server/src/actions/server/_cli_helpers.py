@@ -21,6 +21,14 @@ def add_data_args(parser, defaults):
         ),
         default=defaults["db_file"],
     )
+    parser.add_argument(
+        "--database-url",
+        help=(
+            "Shared PostgreSQL database URL. When set, this takes precedence over "
+            "--db-file and never falls back to SQLite."
+        ),
+        default=defaults["database_url"],
+    )
 
 
 def add_verbose_args(parser, defaults):
