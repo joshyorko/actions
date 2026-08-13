@@ -1,4 +1,4 @@
-from sema4ai.actions import ActionError, Response, Table
+from actions import ActionError, Response, Table
 from sema4ai.data import query, get_connection
 
 

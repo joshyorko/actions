@@ -1,6 +1,6 @@
 import { FC, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Badge, Drawer, Tabs, Tooltip } from '@sema4ai/components';
+import { Badge, Drawer, Tabs, Tooltip } from 'actions-runtime-components';
 
 import { useActionServerContext } from '@/shared/context/actionServerContext';
 import { ActionRun } from './ActionRun';

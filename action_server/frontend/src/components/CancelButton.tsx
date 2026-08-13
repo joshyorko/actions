@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
-import { Button, Tooltip } from '@sema4ai/components';
-import { IconStop } from '@sema4ai/icons';
+import { Button, Tooltip } from 'actions-runtime-components';
+import { IconStop } from 'actions-runtime-icons';
 import { cancelRun } from '@/shared/api-client';
 import { RunStatus } from '@/shared/types';
 

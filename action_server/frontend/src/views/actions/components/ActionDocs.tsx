@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Header } from '@sema4ai/components';
+import { Header } from 'actions-runtime-components';
 
 import { Code } from '~/components';
 import { prettyPrint } from '@/shared/utils/helpers';

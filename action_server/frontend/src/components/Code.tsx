@@ -1,5 +1,5 @@
 import { ComponentProps, FC, useEffect, useMemo, useRef } from 'react';
-import { Code as BaseCode, Box, EditorView } from '@sema4ai/components';
+import { Code as BaseCode, Box, EditorView } from 'actions-runtime-components';
 import { StreamLanguage } from '@codemirror/language';
 import { shell } from '@codemirror/legacy-modes/mode/shell';
 import { json } from '@codemirror/lang-json';

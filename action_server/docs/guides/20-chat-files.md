@@ -1,6 +1,9 @@
-## Working with Files in Chat Actions
+## Historical: Working with Files in Chat Actions
 
-The `sema4ai.actions.chat` module provides functionality to attach and retrieve files during chat interactions.
+This guide is retained for provenance only. Its legacy editor integration and
+environment-variable contract are not part of the current Actions Runtime.
+
+The `actions.chat` module provides functionality to attach and retrieve files during chat interactions.
 
 ### Why These APIs Are Needed
 
@@ -9,7 +12,7 @@ These APIs are essential because when running in the cloud (Workroom), actions d
 `CAVEAT`: It's possible to access files locally when developing an action in VSCode, but then, later on, when running in the cloud, where
 multiple servers may be involved, files stored in one action will NOT be available in a new action invocation.
 
-As such, the `sema4ai.actions.chat` module was created to provide a consistent way to handle files across both local and cloud environments.
+As such, the `actions.chat` module was created to provide a consistent way to handle files across both local and cloud environments.
 
 `NOTE`: Data shared through these APIs are properly isolated between different chat threads, so, for instance, files uploaded in one chat thread are not available in another.
 
@@ -20,7 +23,7 @@ The module provides several functions to work with files:
 1. **Attaching Files**:
 
    ```python
-   from sema4ai.actions.chat import attach_file, attach_file_content, attach_json, attach_text
+   from actions.chat import attach_file, attach_file_content, attach_json, attach_text
 
    # Attach an existing file
    attach_file("/full/path/to/file.txt")
@@ -38,7 +41,7 @@ The module provides several functions to work with files:
 2. **Retrieving Files**:
 
    ```python
-   from sema4ai.actions.chat import get_file, get_file_content, get_json, get_text
+   from actions.chat import get_file, get_file_content, get_json, get_text
 
    # Get file as Path object
    # Note: under the scenes this will `get_file_content`, create a temp file and return a Path object for the temporary file.
@@ -66,8 +69,8 @@ and may not contain any path separators (like `/`, `\`, `:`, `*`, `?`, `"`, `<`,
 Here's a complete example showing how to make an action that can add data and retrieve it later:
 
 ```python
-from sema4ai.actions import action, Response
-from sema4ai.actions.chat import get_json, attach_json
+from actions import action, Response
+from actions.chat import get_json, attach_json
 
 
 @action

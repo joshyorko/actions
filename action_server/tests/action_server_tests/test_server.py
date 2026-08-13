@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 from action_server_tests.fixtures import ActionServerClient, ActionServerProcess
 
-from sema4ai.action_server._settings import HEADER_ACTION_SERVER_RUN_ID
+from actions.server._settings import HEADER_ACTION_SERVER_RUN_ID
 
 
 @pytest.mark.integration_test
@@ -204,9 +204,9 @@ def test_import_action_server_strategies(
     action_server_datadir: Path,
     strategy: str,
 ) -> None:
-    from action_server_tests.fixtures import get_in_resources, sema4ai_action_server_run
+    from action_server_tests.fixtures import get_in_resources, actions_server_run
 
-    from sema4ai.action_server._models import Action, ActionPackage, load_db
+    from actions.server._models import Action, ActionPackage, load_db
 
     if strategy == "package.yaml":
         root_dir = get_in_resources("hello")
@@ -216,7 +216,7 @@ def test_import_action_server_strategies(
         assert strategy == "no-conda"
         root_dir = get_in_resources("no_conda", "greeter")
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={root_dir}",
@@ -261,10 +261,10 @@ def test_import_default_value(
     tmpdir,
     action_server_datadir: Path,
 ) -> None:
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import Action, load_db
+    from actions.server._database import Database
+    from actions.server._models import Action, load_db
 
     action_server_datadir.mkdir(parents=True, exist_ok=True)
     db_path = action_server_datadir / "server.db"
@@ -274,7 +274,7 @@ def test_import_default_value(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: int = 5) -> float:
@@ -282,7 +282,7 @@ def calculator_sum(v1: int = 5) -> float:
 """
     )
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={calculator.parent}",
@@ -331,7 +331,7 @@ def test_is_consequential_openapi_spec(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action(is_consequential=False)
 def calculator_sum(v1: float, v2: float) -> float:
@@ -354,10 +354,10 @@ def test_import_no_conda(
     action_server_datadir: Path,
     client: ActionServerClient,
 ) -> None:
-    from action_server_tests.fixtures import fix_openapi_json, sema4ai_action_server_run
+    from action_server_tests.fixtures import fix_openapi_json, actions_server_run
 
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import Action, load_db
+    from actions.server._database import Database
+    from actions.server._models import Action, load_db
 
     action_server_datadir.mkdir(parents=True, exist_ok=True)
     db_path = action_server_datadir / "server.db"
@@ -367,7 +367,7 @@ def test_import_no_conda(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -375,7 +375,7 @@ def calculator_sum(v1: float, v2: float) -> float:
 """
     )
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={calculator.parent}",
@@ -396,7 +396,7 @@ def calculator_sum(v1: float, v2: float) -> float:
 
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: str, v2: str) -> str:
@@ -408,7 +408,7 @@ def another_action(a1: str, a2: str) -> str:
 """
     )
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={calculator.parent}",
@@ -436,7 +436,7 @@ def another_action(a1: str, a2: str) -> str:
 
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -478,8 +478,8 @@ def test_full_run(
     from action_server_tests.fixtures import fix_openapi_json
     from robocorp.log._log_formatting import pretty_format_logs_from_log_html_contents
 
-    from sema4ai.action_server._database import Database, str_to_datetime
-    from sema4ai.action_server._models import Run, RunStatus, load_db
+    from actions.server._database import Database, str_to_datetime
+    from actions.server._models import Run, RunStatus, load_db
 
     openapi_json = client.get_openapi_json()
     data_regression.check(fix_openapi_json(json.loads(openapi_json)))
@@ -615,8 +615,8 @@ def test_routes(action_server_process: ActionServerProcess, data_regression):
     from action_server_tests.fixtures import fix_openapi_json
     from action_server_tests.sample_data import ACTION, ACTION_PACKAGE, RUN, RUN2
 
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import create_db
+    from actions.server._database import Database
+    from actions.server._models import create_db
 
     action_server_process.datadir.mkdir(parents=True, exist_ok=True)
     db_path = action_server_process.datadir / "server.db"
@@ -724,7 +724,7 @@ def test_subprocesses_killed(
     import requests
     from action_server_tests.fixtures import get_in_resources
 
-    from sema4ai.action_server._robo_utils.run_in_thread import run_in_thread
+    from actions.server._robo_utils.run_in_thread import run_in_thread
 
     no_conda_dir = get_in_resources("no_conda")
     action_server_process.start(
@@ -799,10 +799,10 @@ def test_import_task_options(
     action_server_datadir: Path,
     client: ActionServerClient,
 ) -> None:
-    from action_server_tests.fixtures import sema4ai_action_server_run
+    from action_server_tests.fixtures import actions_server_run
 
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import Action, load_db
+    from actions.server._database import Database
+    from actions.server._models import Action, load_db
 
     action_server_datadir.mkdir(parents=True, exist_ok=True)
     db_path = action_server_datadir / "server.db"
@@ -812,7 +812,7 @@ def test_import_task_options(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -820,7 +820,7 @@ def calculator_sum(v1: float, v2: float) -> float:
 """
     )
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={calculator.parent}",
@@ -842,7 +842,7 @@ def calculator_sum(v1: float, v2: float) -> float:
 
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action(is_consequential=True)
 def calculator_sum(v1: str, v2: str) -> str:
@@ -850,7 +850,7 @@ def calculator_sum(v1: str, v2: str) -> str:
 """
     )
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={calculator.parent}",
@@ -871,7 +871,7 @@ def calculator_sum(v1: str, v2: str) -> str:
 
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action(is_consequential=False)
 def calculator_sum(v1: str, v2: str) -> str:
@@ -879,7 +879,7 @@ def calculator_sum(v1: str, v2: str) -> str:
 """
     )
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={calculator.parent}",
@@ -901,9 +901,9 @@ def calculator_sum(v1: str, v2: str) -> str:
 
 @pytest.mark.integration_test
 def test_port_in_use(action_server_process: ActionServerProcess, tmpdir):
-    from sema4ai.action_server._selftest import ActionServerExitedError
+    from actions.server._selftest import ActionServerExitedError
 
-    action_server_datadir = tmpdir / ".sema4ai_action_server_2"
+    action_server_datadir = tmpdir / ".actions_runtime_2"
     process2 = ActionServerProcess(Path(action_server_datadir))
     action_server_process.start()
     try:
@@ -931,7 +931,7 @@ def test_action_package_rename(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -971,12 +971,12 @@ def test_action_package_cwd(
     action_server_process: ActionServerProcess, client: ActionServerClient, tmpdir
 ):
     def create_action(package_dir: Path):
-        from sema4ai.action_server._selftest import sema4ai_action_server_run
+        from actions.server._selftest import actions_server_run
 
         package_dir.mkdir(parents=True, exist_ok=True)
         (package_dir / "action.py").write_text(
             """
-from sema4ai.actions import action
+from actions import action
 from pathlib import Path
 import os
 
@@ -995,7 +995,7 @@ def do_it() -> str:
 """
         )
 
-        sema4ai_action_server_run(
+        actions_server_run(
             [
                 "import",
                 f"--dir={package_dir}",
@@ -1034,7 +1034,7 @@ def do_it() -> str:
 def test_kill_lock_holder(
     action_server_process: ActionServerProcess, tmpdir, action_server_datadir
 ):
-    from sema4ai.common.wait_for import wait_for_condition
+    from actions.server._common.wait_for import wait_for_condition
 
     action_server_process.start(
         actions_sync=True,

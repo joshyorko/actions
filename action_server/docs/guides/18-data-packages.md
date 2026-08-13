@@ -1,4 +1,8 @@
-# Data Packages
+# Retired: Data Packages
+
+This historical guide is retained for provenance only. The `sema4ai-data`
+package and the related data-access templates are not part of the supported
+clean-break template set.
 
 ## Data Package Structure and Concepts
 

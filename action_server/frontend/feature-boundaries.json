@@ -4,7 +4,7 @@
       "id": "design_system",
       "name": "Design System",
       "tier": "enterprise",
-      "description": "Proprietary @sema4ai design system components"
+      "description": "Internal vendored design system components"
     },
     {
       "id": "kb_ui",

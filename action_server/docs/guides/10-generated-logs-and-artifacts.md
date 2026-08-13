@@ -72,7 +72,7 @@ implementation of that is also used in typescript in the `log.html` itself to sh
 
 ## Customizing the `log.html` contents for an `Action Package`
 
-`sema4ai.actions` will use `robocorp.log` to generate logs. `Action` authors may
+`actions` will use `robocorp.log` to generate logs. `Action` authors may
 customize what's actually logged though.
 
 By default, logging is generated for all user code executed and calls into

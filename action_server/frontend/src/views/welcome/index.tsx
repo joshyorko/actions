@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Typography } from '@sema4ai/components';
+import { Box, Typography } from 'actions-runtime-components';
 import { styled } from '~/vendor/sema4ai-theme';
 
 import { Code } from '~/components';

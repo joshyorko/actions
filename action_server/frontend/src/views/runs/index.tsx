@@ -16,14 +16,14 @@ import {
   Tooltip,
   Badge,
   Select,
-} from '@sema4ai/components';
+} from 'actions-runtime-components';
 import {
   IconArrowUpRight,
   IconExpandSmall,
   IconFileText,
   IconInformation,
   IconSearch,
-} from '@sema4ai/icons';
+} from 'actions-runtime-icons';
 
 import { Run, RunStatus, RunTableEntry, Action, ActionPackage, AsyncLoaded } from '@/shared/types';
 import { useActionServerContext } from '@/shared/context/actionServerContext';

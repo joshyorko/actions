@@ -22,7 +22,7 @@ def test_package_update(tmpdir, data_regression):
 
     import yaml
 
-    from sema4ai.action_server.vendored_deps.action_package_handling import (
+    from actions.server.vendored_deps.action_package_handling import (
         update_package,
     )
 

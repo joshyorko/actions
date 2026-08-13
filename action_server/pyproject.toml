@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "sema4ai-action-server"
-version = "1.2.7"
+name = "actions-runtime"
+version = "1.0.0"
 description = """Community Action Server"""
 authors = [
 	"Sema4.ai, Inc. <dev@sema4.ai>",
@@ -9,16 +9,16 @@ authors = [
 readme = "README.md"
 repository = "https://github.com/joshyorko/actions/tree/community"
 license = "Apache-2.0"
-packages = [{ include = "sema4ai", from = "src" }]
+packages = [{ include = "actions", from = "src" }]
 include = [
-	"src/sema4ai/action_server/_static_contents.py",
-	"src/sema4ai/action_server/_oauth2_config.py",
-	"src/sema4ai/action_server/bin/rcc*",
+	"src/actions/server/_static_contents.py",
+	"src/actions/server/_oauth2_config.py",
+	"src/actions/server/bin/rcc*",
 ]
 homepage = "https://github.com/joshyorko/actions/tree/community"
 
 [tool.poetry.scripts]
-action-server = "sema4ai.action_server.cli:main"
+action-server = "actions.server.cli:main"
 
 
 [tool.poetry.dependencies]
@@ -34,7 +34,7 @@ pydantic = "^2.12.4"
 pyyaml = "^6.0.3"
 python = ">=3.12,<3.14"
 requests = "^2"
-sema4ai-actions = "^1.6.4"
+actions-core = "^1.0.0"
 actions-http-helper = "^1.0.0"
 termcolor = "^3.2.0"
 uvicorn = "^0.38.0"
@@ -42,9 +42,8 @@ websockets = "^15.0.1"
 cryptography = "^46.0.3"
 requests_oauthlib = "^2.0"
 watchfiles = "^1.1.1"
-sema4ai-common = "^0.3.0"
-mcp = "^1.21.0"
-actions-work-items = { path = "../work-items/", develop = true }
+mcp = "^2.0.0"
+actions-work-items = "^0.4.4"
 # Scheduling dependencies
 croniter = "^2.0.0"
 pytz = "^2024.1"
@@ -53,17 +52,14 @@ aiosmtplib = "^3.0.0"
 redis = "^5.0.0"
 
 [tool.poetry.group.dev.dependencies]
-sema4ai-devutils = { path = "../devutils/", develop = true }
-sema4ai-build-common = { path = "../build_common/", develop = true }
+actions-local-devutils = { path = "../devutils/", develop = true }
 types-requests = "^2"
 types-PyYAML = "^6"
 robocorp-log-pytest = "^0.0.2"
 types-psutil = "^7"
 types-jsonschema = "^4.22.0"
-sema4ai-data = "^1.2.1"
 pyinstaller = "6.16.0"
 pyinstaller-hooks-contrib = "2025.9"
-sema4ai-mcp = { path = "../mcp/", develop = true }
 
 [tool.mypy]
 mypy_path = "src:tests"

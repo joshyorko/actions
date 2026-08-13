@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Header, Link } from '@sema4ai/components';
+import { Header, Link } from 'actions-runtime-components';
 import { baseUrl } from '@/shared/api-client';
 import { ActionRunConsole, Code } from '~/components';
-import { IconFileText } from '@sema4ai/icons';
+import { IconFileText } from 'actions-runtime-icons';
 
 type Props = {
   result: string;

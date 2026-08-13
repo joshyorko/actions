@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)
 
 # No real build, just download RCC at this point.
 
-# Note: referenced here and in sema4ai.action_server._download_rcc
+# Note: referenced here and in actions.server._download_rcc
 # Using joshyorko/rcc open-source version
 RCC_VERSION = "18.18.1"
 
@@ -129,14 +129,14 @@ def _download_rcc():
         rcc_path = (
             CURDIR
             / "src"
-            / "sema4ai"
-            / "action_server"
+            / "actions"
+            / "server"
             / "bin"
             / f"rcc-{RCC_VERSION}.exe"
         )
     else:
         rcc_path = (
-            CURDIR / "src" / "sema4ai" / "action_server" / "bin" / f"rcc-{RCC_VERSION}"
+            CURDIR / "src" / "actions" / "server" / "bin" / f"rcc-{RCC_VERSION}"
         )
 
     machine = platform.machine()

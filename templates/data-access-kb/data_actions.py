@@ -1,4 +1,4 @@
-from sema4ai.actions import Response, ActionError
+from actions import Response, ActionError
 from sema4ai.data import query, get_connection
 from typing import Dict, Any, List
 from models import (

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Box, Progress } from '@sema4ai/components';
+import { Box, Progress } from 'actions-runtime-components';
 
 type Props = {
   /**

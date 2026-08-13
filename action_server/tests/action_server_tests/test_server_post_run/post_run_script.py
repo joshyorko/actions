@@ -11,8 +11,8 @@ if __name__ == "__main__":
     run_id = args[3]
     agent_id = args[4]
 
-    thread_id = os.environ.get("SEMA4AI_ACTION_SERVER_POST_RUN_THREAD_ID")
-    action_name = os.environ.get("SEMA4AI_ACTION_SERVER_POST_RUN_ACTION_NAME")
+    thread_id = os.environ.get("ACTIONS_RUNTIME_POST_RUN_THREAD_ID")
+    action_name = os.environ.get("ACTIONS_RUNTIME_POST_RUN_ACTION_NAME")
 
     output_json.write_text(
         json.dumps(

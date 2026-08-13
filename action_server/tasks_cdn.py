@@ -44,7 +44,7 @@ version: 0.1.0
     
     # Create dummy action
     dummy_action = temp_dir / "dummy_action.py"
-    dummy_action.write_text("""from sema4ai.actions import action
+    dummy_action.write_text("""from actions import action
 
 @action
 def dummy():

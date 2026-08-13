@@ -13,7 +13,7 @@ Note that the access to headers and cookies is case-insensitive.
 ### Example:
 
 ```
-from sema4ai.actions import action, Request
+from actions import action, Request
 
 @action
 def my_action(request: Request):

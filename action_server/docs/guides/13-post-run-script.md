@@ -1,4 +1,7 @@
-# Post run scripts
+# Historical: Post run scripts
+
+This guide is retained for provenance only. The current Actions Runtime has
+no post-run script contract.
 
 In the `Action Server`, it's possible to customize a command to be invoked right after
 an action is run by setting the `SEMA4AI_ACTION_SERVER_POST_RUN_CMD` environment variable.

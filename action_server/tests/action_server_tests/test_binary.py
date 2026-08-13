@@ -21,12 +21,18 @@ def get_internal_version_location(version: str) -> Path:
     return Path(target_path) / version
 
 
+def test_binary_spec_includes_termcolor_hidden_import():
+    spec_path = Path(__file__).parents[2] / "action-server.spec"
+
+    assert '"termcolor",' in spec_path.read_text()
+
+
 def test_binary_build():
     import os
     import shutil
     import sys
 
-    from sema4ai.common.run_in_thread import run_in_thread
+    from actions.server._common.run_in_thread import run_in_thread
 
     CURDIR = Path(__file__).absolute().parent
     action_server_dir = CURDIR.parent.parent

@@ -887,13 +887,13 @@ paths:
                 type: string
           description: Successful Response
       summary: Serve Index
-  /sema4ai/oauth2:
+  /actions/oauth2:
     get:
       description: 'Callback that should''ve been registered in the OAuth2 callback
         to
 
         complete the authentication flow.'
-      operationId: oauth2_redirect_sema4ai_oauth2_get
+      operationId: oauth2_redirect_actions_oauth2_get
       parameters:
       - in: query
         name: state

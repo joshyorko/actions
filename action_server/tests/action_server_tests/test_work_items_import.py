@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from sema4ai.action_server import _work_items_import
+from actions.server import _work_items_import
 
 
 class _Distribution:

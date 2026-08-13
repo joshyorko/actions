@@ -4,8 +4,8 @@ from pathlib import Path
 import pytest
 from robocorp.log._log_formatting import pretty_format_logs_from_log_html_contents
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
-from sema4ai.action_server._settings import HEADER_ACTION_SERVER_RUN_ID
+from actions.server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._settings import HEADER_ACTION_SERVER_RUN_ID
 
 
 @pytest.mark.integration_test
@@ -19,7 +19,7 @@ def test_logs_dont_contain_secrets(
 
     action_file.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def handle_secret(username: str, password: str) -> str:

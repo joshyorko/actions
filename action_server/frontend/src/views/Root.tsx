@@ -1,7 +1,7 @@
-import { SideNavigation, Box, Link, Scroll, useSystemTheme } from '@sema4ai/components';
+import { SideNavigation, Box, Link, Scroll, useSystemTheme } from 'actions-runtime-components';
 import { MouseEvent, StrictMode, useCallback, useEffect, useMemo, useState } from 'react';
 import { ThemeOverrides, ThemeProvider, styled } from '~/vendor/sema4ai-theme';
-import { IconBolt, IconGlobe, IconShare, IconUnorderedList, IconGithub } from '@sema4ai/icons';
+import { IconBolt, IconGlobe, IconShare, IconUnorderedList, IconGithub } from 'actions-runtime-icons';
 import {
   Outlet,
   RouterProvider,

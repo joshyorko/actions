@@ -4,8 +4,8 @@ To expose a local running action server for public access, it's possible
 to use `action-server start --expose`.
 
 By doing so, the `action-server` will automatically connect to a
-server and you'll get a public reference to it on the `sema4ai.link` domain
-(for instance `https://twently-cuddly-dinosaurs.sema4ai.link`).
+server and you'll get a public reference to it on the `actions.link` domain
+(for instance `https://twently-cuddly-dinosaurs.actions.link`).
 
 Note: if the server is stopped and restarted, it'll ask to reconnect to
 the same server afterwards as url/access secret is stored in the datadir.

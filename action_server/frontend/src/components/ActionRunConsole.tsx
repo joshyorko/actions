@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { collectRunArtifacts } from '@/shared/api-client';
 import { LoadedArtifacts } from '@/shared/types';
-import { Progress } from '@sema4ai/components';
+import { Progress } from 'actions-runtime-components';
 import { Code } from '~/components';
 
 type Props = {

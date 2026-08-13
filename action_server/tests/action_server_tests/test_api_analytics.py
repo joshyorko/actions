@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from sema4ai.action_server._api_analytics import (
+from actions.server._api_analytics import (
     AnalyticsSummary,
     RunsByAction,
     RunsByDay,
@@ -14,7 +14,7 @@ from sema4ai.action_server._api_analytics import (
     get_runs_by_action,
     get_runs_by_day,
 )
-from sema4ai.action_server._models import (
+from actions.server._models import (
     Action,
     ActionPackage,
     Run,

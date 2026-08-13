@@ -1,5 +1,5 @@
 import requests
-from sema4ai.actions import ActionError, Response, Secret, action
+from actions import ActionError, Response, Secret, action
 
 from .models import CreateIssueData, RepositoryInfo
 

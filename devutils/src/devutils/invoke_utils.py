@@ -43,17 +43,15 @@ class RoundtripPyProject:
 
 OWNED_DISTRIBUTION_DIRECTORIES = {
     "actions-core": "actions",
-    "actions-http-helper": "actions-http-helper",
     "actions-runtime": "action_server",
+    "actions-http-helper": "actions-http-helper",
     "actions-work-items": "work-items",
-    "sema4ai-build-common": "build_common",
-    "sema4ai-common": "common",
-    "sema4ai-mcp": "mcp",
+    "actions-local-devutils": "devutils",
 }
 
 
 def owned_distribution_directory(distribution: str) -> str | None:
-    """Return the repository directory for a locally substitutable package."""
+    """Return the repository directory for an owned distribution."""
     return OWNED_DISTRIBUTION_DIRECTORIES.get(distribution)
 
 
@@ -81,12 +79,12 @@ def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
 def get_tag(tag_prefix: str) -> str:
     """
     Args:
-        tag_prefix: The tag prefix to match (i.e.: "sema4ai-actions")
+        tag_prefix: The tag prefix to match (i.e.: "actions-core")
     """
     # Get the last tagged version.
     cmd = f"git describe --tags --abbrev=0 --match {tag_prefix}-[0-9]*"
     proc = subprocess.run(shlex.split(cmd), capture_output=True, text=True)
-    # Something like 'sema4ai-actions-0.0.1'
+    # Something like 'actions-core-0.0.1'
     return proc.stdout.strip()
 
 
@@ -154,7 +152,7 @@ def _env_in_conda(env_name) -> bool:
     If the given environment name exists in conda, return True, otherwise False.
 
     :param env_name:
-        The name of the env to check (example: 'sema4ai-actions').
+        The name of the env to check (example: 'actions-core').
     """
     return env_name in _conda_env_name_to_conda_prefix()
 
@@ -178,8 +176,8 @@ def build_common_tasks(
         source_directories: Default Python source directories.
     """
     if tag_prefix is None:
-        # The tag for releases should be `sema4ai-actions-{version}`
-        # i.e.: sema4ai-actions-0.1.1
+        # The tag for releases should be `actions-core-{version}`
+        # i.e.: actions-core-0.1.1
         # Here we just want the prefix.
         tag_prefix = package_name.replace(".", "-")
 

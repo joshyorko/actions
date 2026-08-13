@@ -1,6 +1,6 @@
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
 @pytest.mark.integration_test
@@ -16,7 +16,7 @@ def test_server_hot_reload(
     calculator.parent.mkdir(parents=True, exist_ok=True)
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
@@ -36,7 +36,7 @@ def calculator_sum(v1: float, v2: float) -> float:
     assert float(found) == 1.0 + 2.0
 
     async def check_mcp_tools():
-        async with action_server_process.mcp_client("mcp") as mcp_session:
+        async with action_server_process.mcp_client() as mcp_session:
             tools_result = await mcp_session.list_tools()
             tools_list = tools_result.tools
             assert len(tools_list) == 1
@@ -49,7 +49,7 @@ def calculator_sum(v1: float, v2: float) -> float:
     # Change file.
     calculator.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 
 @action
@@ -67,7 +67,7 @@ def calculator_subtract(v1: float, v2: float) -> float:
     wait_for_non_error_condition(check_reloaded)
 
     async def check_mcp_tools_after_reload():
-        async with action_server_process.mcp_client("mcp") as mcp_session:
+        async with action_server_process.mcp_client() as mcp_session:
             tools_result = await mcp_session.list_tools()
             tools_list = tools_result.tools
             assert len(tools_list) == 1, "Expected 1 tool. Found: " + str(tools_list)

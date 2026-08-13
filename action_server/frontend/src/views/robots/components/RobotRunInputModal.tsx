@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Box, Text, Button, Input, IconButton } from '@sema4ai/components';
+import { Modal, Box, Text, Button, Input, IconButton } from 'actions-runtime-components';
 import { Plus, Trash } from 'lucide-react';
 
 interface RobotRunInputModalProps {

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, ViewLoader, ViewError } from '@sema4ai/components';
+import { Box, ViewLoader, ViewError } from 'actions-runtime-components';
 import { useRobotCatalog } from '~/queries/robots';
 import { RobotPackageDisplay } from './components/RobotPackageDisplay';
 

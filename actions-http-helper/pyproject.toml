@@ -16,7 +16,7 @@ pyyaml = ">=5.0"
 types-PyYAML = ">=6.0.0"
 
 [tool.poetry.group.dev.dependencies]
-sema4ai-devutils = { path = "../devutils/", develop = true }
+actions-local-devutils = { path = "../devutils/", develop = true }
 
 [tool.mypy]
 mypy_path = "src:tests"

@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
-import { Button, ButtonProps, Input, InputProps, Tooltip, useClipboard } from '@sema4ai/components';
-import { IconCheck2, IconCopy } from '@sema4ai/icons';
+import { Button, ButtonProps, Input, InputProps, Tooltip, useClipboard } from 'actions-runtime-components';
+import { IconCheck2, IconCopy } from 'actions-runtime-icons';
 
 type Props = {
   value: string;

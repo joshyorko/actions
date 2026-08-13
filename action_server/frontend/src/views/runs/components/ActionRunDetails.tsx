@@ -1,4 +1,4 @@
-import { Drawer, Header, Link } from '@sema4ai/components';
+import { Drawer, Header, Link } from 'actions-runtime-components';
 import { FC, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logError } from '@/shared/utils/helpers';
@@ -11,7 +11,7 @@ import {
   Code,
 } from '~/components';
 import { baseUrl } from '@/shared/api-client';
-import { IconFileText } from '@sema4ai/icons';
+import { IconFileText } from 'actions-runtime-icons';
 import { CancelButton } from '~/components/CancelButton';
 import { useActionRunsContext } from './context';
 

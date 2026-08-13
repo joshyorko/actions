@@ -1,13 +1,13 @@
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerProcess
+from actions.server._selftest import ActionServerProcess
 
 
 @pytest.mark.integration_test
 def test_package_yaml_structure_too_new(
     action_server_process: ActionServerProcess, datadir
 ):
-    from sema4ai.action_server._selftest import ActionServerExitedError
+    from actions.server._selftest import ActionServerExitedError
 
     with pytest.raises(ActionServerExitedError):
         action_server_process.start(cwd=datadir / "pack_too_new", actions_sync=True)

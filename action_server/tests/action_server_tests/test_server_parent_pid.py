@@ -1,8 +1,8 @@
 import pytest
 from devutils.fixtures import wait_for_condition
 
-from sema4ai.action_server._robo_utils.process import Process
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._robo_utils.process import Process
+from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
 @pytest.mark.integration_test
@@ -11,7 +11,7 @@ def test_action_server_parent_pid(
 ):
     from action_server_tests.fixtures import get_in_resources
 
-    from sema4ai.action_server._robo_utils.process import kill_process_and_subprocesses
+    from actions.server._robo_utils.process import kill_process_and_subprocesses
 
     process = Process(["python", "-c", "import time;time.sleep(1000000)"])
     process.start()

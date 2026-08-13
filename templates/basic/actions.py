@@ -9,7 +9,7 @@ https://github.com/sema4ai/actions/blob/master/README.md
 import os
 
 from robocorp import browser
-from sema4ai.actions import Response, action
+from actions import Response, action
 
 HEADLESS_BROWSER = not os.getenv("HEADLESS_BROWSER")
 

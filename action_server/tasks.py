@@ -18,7 +18,8 @@ from devutils.invoke_utils import build_common_tasks
 globals().update(
     build_common_tasks(
         ROOT,
-        "sema4ai.action_server",
+        "actions.server",
+        tag_prefix="actions-runtime",
         ruff_format_arguments=r"--exclude=_static_contents.py,_oauth2_config.py",
     )
 )
@@ -172,7 +173,7 @@ def build_frontend(
         index_src = CURDIR / "frontend" / "dist" / "index.html"
         assert index_src.exists(), f"Expected: {index_src} to exist."
         dest_static_contents = (
-            CURDIR / "src" / "sema4ai" / "action_server" / "_static_contents.py"
+            CURDIR / "src" / "actions" / "server" / "_static_contents.py"
         )
 
         file_contents = {"index.html": index_src.read_bytes()}
@@ -470,7 +471,7 @@ def build_frontend_cdn(ctx: Context, version: str = "latest"):
         
         # Write to file
         dest_static_contents = (
-            CURDIR / "src" / "sema4ai" / "action_server" / "_static_contents.py"
+            CURDIR / "src" / "actions" / "server" / "_static_contents.py"
         )
         file_contents = {"index.html": html_content}
         with open(dest_static_contents, "w", encoding="utf-8") as stream:
@@ -500,22 +501,22 @@ def build_oauth2_config(ctx: Context):
     """Build static OAuth2 .yaml config."""
     import subprocess
 
-    sema4ai_config_file_name = "sema4ai-oauth-config.yaml"
+    actions_config_file_name = "actions-oauth-config.yaml"
     default_user_config_file_name = "oauth-config.yaml"
-    sema4ai_config_local_file_path = CURDIR / sema4ai_config_file_name
+    actions_config_local_file_path = CURDIR / actions_config_file_name
     default_user_config_local_file_path = CURDIR / default_user_config_file_name
 
     base_api_url = "repos/Sema4AI/oauth-public-configs/contents"
 
-    dest_path = CURDIR / "src" / "sema4ai" / "action_server" / "_oauth2_config.py"
+    dest_path = CURDIR / "src" / "actions" / "server" / "_oauth2_config.py"
 
-    result_sema4ai_config_contents = subprocess.run(
+    result_actions_config_contents = subprocess.run(
         [
             "gh",
             "api",
             "-H",
             "Accept: application/vnd.github.raw",
-            f"{base_api_url}/{sema4ai_config_file_name}",
+            f"{base_api_url}/{actions_config_file_name}",
         ],
         stdout=subprocess.PIPE,
     ).stdout.decode("utf-8")
@@ -532,7 +533,7 @@ def build_oauth2_config(ctx: Context):
     ).stdout.decode("utf-8")
 
     file_contents = {
-        "sema4ai_config": result_sema4ai_config_contents,
+        "actions_config": result_actions_config_contents,
         "default_user_config": default_user_config_contents,
     }
 
@@ -571,11 +572,11 @@ def build_executable(
     go_wrapper_name: str | None = None,
 ) -> None:
     """Build the project executable via PyInstaller."""
-    from sema4ai.build_common.root_dir import get_root_dir
-    from sema4ai.build_common.workflows import build_and_sign_executable
+    from actions.server._build_common.root_dir import get_root_dir
+    from actions.server._build_common.workflows import build_and_sign_executable
 
     if version is None:
-        from sema4ai.action_server import __version__
+        from actions.server import __version__
 
         version = __version__
 
@@ -598,8 +599,8 @@ def build_executable(
 @task
 def clean(ctx: Context):
     """Clean build artifacts."""
-    from sema4ai.build_common.root_dir import get_root_dir
-    from sema4ai.build_common.workflows import clean_common_build_artifacts
+    from actions.server._build_common.root_dir import get_root_dir
+    from actions.server._build_common.workflows import clean_common_build_artifacts
 
     clean_common_build_artifacts(get_root_dir())
 
@@ -626,7 +627,7 @@ def download_rcc(ctx: Context, system: Optional[str] = None) -> None:
     env = os.environ.copy()
     curr_pythonpath = env.get("PYTHONPATH", "")
     env["PYTHONPATH"] = curr_pythonpath + os.pathsep + str(CURDIR / "src")
-    run(ctx, "python -m sema4ai.action_server download-rcc", env=env)
+    run(ctx, "python -m actions.server download-rcc", env=env)
 
 
 def _replace_deps(content, new_deps):
@@ -654,8 +655,8 @@ def _replace_deps(content, new_deps):
 
 @task
 def test_not_integration(ctx: Context):
-    from sema4ai.build_common.process_call import run
-    from sema4ai.build_common.root_dir import get_root_dir
+    from actions.server._build_common.process_call import run
+    from actions.server._build_common.root_dir import get_root_dir
 
     action_server_dir = get_root_dir()
     run(
@@ -680,8 +681,8 @@ def test_binary(ctx: Context, test: str = "", jobs: str = "auto"):
     """Test the binary"""
     import subprocess
 
-    from sema4ai.build_common.process_call import run
-    from sema4ai.build_common.root_dir import get_root_dir
+    from actions.server._build_common.process_call import run
+    from actions.server._build_common.root_dir import get_root_dir
 
     # The binary should be in the dist directory already.
     # Run all the tests using pytest -m integration_test
@@ -737,7 +738,7 @@ def set_rcc_version(ctx: Context, version: str):
     # Files to update
     files_to_update = [
         CURDIR / "build.py",
-        CURDIR / "src" / "sema4ai" / "action_server" / "_download_rcc.py"
+        CURDIR / "src" / "actions" / "server" / "_download_rcc.py"
     ]
     
     for file_path in files_to_update:
@@ -830,8 +831,8 @@ def test_run_in_parallel(ctx: Context):
     """
     import subprocess
 
-    from sema4ai.build_common.process_call import run
-    from sema4ai.build_common.root_dir import get_root_dir
+    from actions.server._build_common.process_call import run
+    from actions.server._build_common.root_dir import get_root_dir
 
     # The binary should be in the dist directory already.
     action_server_dir = get_root_dir()

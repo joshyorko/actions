@@ -9,7 +9,7 @@ from actions.work_items import SQLiteAdapter
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from sema4ai.action_server import _api_work_items
+from actions.server import _api_work_items
 
 
 @pytest.fixture
@@ -69,7 +69,7 @@ def test_work_items_import_ignores_project_actions_module(tmp_path: Path) -> Non
             (
                 "from pathlib import Path; from types import SimpleNamespace; "
                 "from fastapi import FastAPI; from fastapi.testclient import TestClient; "
-                "from sema4ai.action_server import _api_work_items as api; "
+                "from actions.server import _api_work_items as api; "
                 "api.get_settings=lambda: SimpleNamespace(datadir=Path.cwd()); "
                 "app=FastAPI(); app.include_router(api.work_items_api_router); "
                 "response=TestClient(app).post('/api/work-items',json={'payload':{}}); "

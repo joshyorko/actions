@@ -6,15 +6,15 @@ from unittest import mock
 import pytest
 from action_server_tests.fixtures import get_in_resources
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
 def _verify_oauth2_settings() -> Path:
     import yaml
 
-    from sema4ai.action_server._settings import get_user_sema4_path
+    from actions.server._settings import get_user_actions_path
 
-    user = get_user_sema4_path()
+    user = get_user_actions_path()
     yaml_location = user / "oauth2_config.yaml"
     assert (
         yaml_location.exists()
@@ -52,9 +52,9 @@ def manual_test_oauth2_vscode(
     """
     import webbrowser
 
-    from sema4ai.action_server._encryption import make_unencrypted_data_envelope
-    from sema4ai.action_server._user_session import COOKIE_SESSION_ID, iso_to_datetime
-    from sema4ai.action_server.vendored_deps.url_callback_server import (
+    from actions.server._encryption import make_unencrypted_data_envelope
+    from actions.server._user_session import COOKIE_SESSION_ID, iso_to_datetime
+    from actions.server.vendored_deps.url_callback_server import (
         start_server_in_thread,
     )
 
@@ -166,7 +166,7 @@ def manual_test_oauth2_action_server_ui(
     """
     import webbrowser
 
-    from sema4ai.action_server.vendored_deps.url_callback_server import (
+    from actions.server.vendored_deps.url_callback_server import (
         start_server_in_thread,
     )
 
@@ -223,7 +223,7 @@ def manual_test_oauth2_action_server_ui(
 def test_settings(tmpdir):
     import yaml
 
-    from sema4ai.action_server.vendored_deps.oauth2_settings import (
+    from actions.server.vendored_deps.oauth2_settings import (
         get_oauthlib2_provider_settings,
     )
 
@@ -278,7 +278,7 @@ def test_settings(tmpdir):
 
 
 def test_oauth2_provider_settings():
-    from sema4ai.action_server.vendored_deps.oauth2_settings import (
+    from actions.server.vendored_deps.oauth2_settings import (
         OAuth2ProviderSettings,
     )
 
@@ -293,7 +293,7 @@ def test_oauth2_provider_settings():
 def test_print_user_oauth2_config_path(
     print_mock: mock.MagicMock, buffer_write_mock: mock.MagicMock, tmpdir
 ) -> None:
-    from sema4ai.action_server._oauth2 import (
+    from actions.server._oauth2 import (
         USER_CONFIG_FILE_NAME,
         print_user_oauth2_config_path,
     )
@@ -305,7 +305,7 @@ def test_print_user_oauth2_config_path(
     os.makedirs(mock_settings_dir)
 
     with mock.patch(
-        "sema4ai.action_server._settings.get_default_settings_dir"
+        "actions.server._settings.get_default_settings_dir"
     ) as mock_get_default_settings_dir:
         mock_get_default_settings_dir.return_value = mock_settings_dir
 

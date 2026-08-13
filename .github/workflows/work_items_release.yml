@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - "work-items/**"
-      - "action_server/poetry.lock"
       - ".devcontainer/bin/verify-work-items"
       - ".devcontainer/bin/smoke-host"
       - ".devcontainer/bin/bootstrap"
@@ -18,7 +17,6 @@ on:
       - "actions-work-items-*"
     paths:
       - "work-items/**"
-      - "action_server/poetry.lock"
       - ".devcontainer/bin/verify-work-items"
       - ".devcontainer/bin/smoke-host"
       - ".devcontainer/bin/bootstrap"

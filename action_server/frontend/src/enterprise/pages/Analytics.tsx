@@ -1,5 +1,5 @@
-import { Box, Card, Grid, Header, Typography } from '@sema4ai/components';
-import { IconChartAnalytics } from '@sema4ai/icons';
+import { Box, Card, Grid, Header, Typography } from 'actions-runtime-components';
+import { IconChartAnalytics } from 'actions-runtime-icons';
 
 const chartPlaceholders = [
   { title: 'Run Health', description: 'Track success rate across action packages.' },

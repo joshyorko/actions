@@ -22,7 +22,7 @@ dependencies:
     - python=3.10.14
     - uv=0.4.17
   pypi:
-    - sema4ai-actions=1.3.13
+    - actions-core=1.0.0
 
 dev-dependencies:
   conda-forge:

@@ -18,20 +18,35 @@ performed by local verification. The helper reads network settings from
 `~/.actions/network-settings.yaml` on Linux/macOS and
 `%LOCALAPPDATA%/actions/network-settings.yaml` on Windows.
 `devinstall`/develop mode substitutes the in-tree `actions-http-helper`
-distribution by path, in addition to the existing `sema4ai-*` internal
-distributions. Consumer lockfiles remain publication-gated until the helper
-exists in the configured package index.
+distribution and the other clean-break distributions by path only while
+resolving a local development install. Published package metadata must use
+versioned distributions; a clean wheel install is required before calling the
+Runtime/Core interoperability contract complete.
+
+The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
+callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
+The Python API exposes snake-case fields such as `resource_templates`,
+`uri_template`, and `input_schema`; wire aliases remain protocol camelCase.
+The supported wire contract is MCP `2026-07-28`: discover, then make stateless
+per-request `/mcp` calls without `initialize`/`initialized` or
+`Mcp-Session-Id`; `/sse` is intentionally absent. SDK v2 catalog results carry
+`ttlMs: 0` and `cacheScope: private`, so they are immediately stale rather than
+indefinitely cacheable. Acceptance tests exercise independent replicas, a real
+forwarding gateway's `Mcp-Method`/`Mcp-Name` observation, header/cookie
+forwarding, catalog reload freshness, and Action option `_meta` propagation to
+the corresponding MCP definitions/results. Do not add Canvas behavior merely
+to maintain this adapter seam.
+The accepted source and integration candidate use published clean-break
+distributions; lock regeneration is authoritative through Poetry 2.1.1 against
+PyPI, with clean-install verification kept as a separate release gate.
 
 The source migration PR contains the helper and its direct consumers together;
-the helper commit is not independently mergeable or release-ready. Its
-consumer lockfiles remain unchanged until after the source PR is merged and
-`actions-http-helper==1.0.0` exists in the configured package index: Poetry
-does not resolve a version-only requirement from this checkout, and this
-repository has no release-staging/index procedure. Keep the consumer
-requirements publication-ready, record the resolver error, and regenerate all
-affected locks immediately after the helper’s first normal release. Then
-regenerate the Action Server freeze before releasing Action Server or MCP
-artifacts.
+the helper commit is not independently mergeable or release-ready. The
+`actions/poetry.lock` and `actions-http-helper/poetry.lock` files must exist and
+be regenerated normally with repository-authoritative Poetry 2.1.1 from
+published prerequisites. Never hand-edit lock hashes or add path/direct-URL
+production dependencies. Runtime freeze inputs remain a separate post-candidate
+gate.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement
@@ -76,6 +91,22 @@ Prefer evidence in this order:
 5. External upstream documentation pinned to the inspected version.
 
 Do not convert a commit message, design proposal, or skipped test into a current-behavior claim.
+
+## Clean-break package boundaries
+
+The source package identities are `actions-core` (`actions` and `actions.mcp`),
+`actions-runtime` (`actions.server`), `actions-http-helper` (`actions_http`),
+and `actions-work-items` (`actions.work_items`). Core owns the sole
+`actions/__init__.py`; Work Items must omit that file from its wheel so the two
+distributions can be installed in either order. Runtime-only common and build
+helpers live privately under `actions.server._common` and
+`actions.server._build_common`; they are not standalone distributions.
+
+The devinstall dependency walker uses an explicit distribution-to-directory
+map rather than stripping a vendor prefix. When a package identity or source
+namespace changes, regenerate locks only from published versioned distributions;
+use source imports, wheel contents, and package-local tests for the interim
+candidate gate.
 
 ## Development Loop
 

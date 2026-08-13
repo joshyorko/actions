@@ -54,32 +54,43 @@ def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
 
     contents: dict = tomlkit.loads(root_pyproject.read_bytes().decode("utf-8"))
 
-    dependencies = list(contents["tool"]["poetry"]["dependencies"])
-    try:
-        dependencies.extend(contents["tool"]["poetry"]["group"]["dev"]["dependencies"])
-    except Exception:
-        pass  # Ignore if it's not there.
+    poetry = contents.get("tool", {}).get("poetry", {})
+    project = contents.get("project", {})
+    dependencies = list(poetry.get("dependencies", {}))
+    dependencies.extend(poetry.get("group", {}).get("dev", {}).get("dependencies", {}))
+    dependencies.extend(
+        dependency.partition(">=")[0].partition("[")[0].strip()
+        for dependency in project.get("dependencies", [])
+    )
+    for optional in project.get("optional-dependencies", {}).values():
+        dependencies.extend(
+            dependency.partition(">=")[0].partition("[")[0].strip()
+            for dependency in optional
+        )
+    owned_directories = {
+        "actions-core": "actions",
+        "actions-runtime": "action_server",
+        "actions-http-helper": "actions-http-helper",
+        "actions-work-items": "work-items",
+        "actions-local-devutils": "devutils",
+    }
     for key in dependencies:
-        if key.startswith("sema4ai-") or key == "actions-http-helper":
-            if key == "sema4ai-data":
-                continue
-            if key == "actions-http-helper":
-                dep_name = key
-            else:
-                dep_name = key[len("sema4ai-") :].replace("-", "_")
-            dep_pyproject = root_pyproject.parent.parent / dep_name / "pyproject.toml"
-            assert dep_pyproject.exists(), f"Expected {dep_pyproject} to exist."
-            if dep_pyproject not in found:
-                found.add(dep_pyproject)
-                yield dep_pyproject
-                yield from collect_deps_pyprojects(dep_pyproject, found)
+        directory = owned_directories.get(key)
+        if directory is None:
+            continue
+        dep_pyproject = root_pyproject.parent.parent / directory / "pyproject.toml"
+        assert dep_pyproject.exists(), f"Expected {dep_pyproject} to exist."
+        if dep_pyproject not in found:
+            found.add(dep_pyproject)
+            yield dep_pyproject
+            yield from collect_deps_pyprojects(dep_pyproject, found)
 
 
 def get_python_version(pyproject):
     import tomlkit
 
     contents: dict = tomlkit.loads(pyproject.read_bytes().decode("utf-8"))
-    dependencies = contents["tool"]["poetry"]["dependencies"]
+    dependencies = contents.get("tool", {}).get("poetry", {}).get("dependencies", {})
     for key, value in dependencies.items():
         if key == "python":
             version = value.strip("^")
@@ -96,6 +107,11 @@ def get_python_version(pyproject):
                 7,
             ), f"Bad version: {version}. pyproject: {pyproject}"
             return version
+    requires_python = contents.get("project", {}).get("requires-python")
+    if requires_python:
+        version = requires_python.lstrip(">=").split(",")[0]
+        assert tuple(int(x) for x in version.split(".")) > (3, 7)
+        return version
     raise RuntimeError(f"Unable to get python version in: {pyproject}")
 
 
@@ -440,17 +456,17 @@ echo "::set-output name=is_beta::$is_beta"
             "env": {
                 "RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC": "true",
                 "RC_ACTION_SERVER_DO_SELFTEST": "true",
-                "MACOS_SIGNING_CERT": "${{ secrets.MACOS_SIGNING_CERT_SEMA4AI }}",
-                "MACOS_SIGNING_CERT_PASSWORD": "${{ secrets.MACOS_SIGNING_CERT_PASSWORD_SEMA4AI }}",
-                "MACOS_SIGNING_CERT_NAME": "${{ secrets.MACOS_SIGNING_CERT_NAME_SEMA4AI }}",
-                "APPLEID": "${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_SEMA4AI }}",
-                "APPLETEAMID": "${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_SEMA4AI }}",
-                "APPLEIDPASS": "${{ secrets.MACOS_APP_ID_PASSWORD_FOR_NOTARIZATION_SEMA4AI }}",
-                "VAULT_URL": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_SEMA4AI }}",
-                "CLIENT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_SEMA4AI }}",
-                "TENANT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_SEMA4AI }}",
-                "CLIENT_SECRET": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_SEMA4AI }}",
-                "CERTIFICATE_NAME": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_SEMA4AI }}",
+                "MACOS_SIGNING_CERT": "${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}",
+                "MACOS_SIGNING_CERT_PASSWORD": "${{ secrets.MACOS_SIGNING_CERT_PASSWORD_ACTIONS_RUNTIME }}",
+                "MACOS_SIGNING_CERT_NAME": "${{ secrets.MACOS_SIGNING_CERT_NAME_ACTIONS_RUNTIME }}",
+                "APPLEID": "${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}",
+                "APPLETEAMID": "${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}",
+                "APPLEIDPASS": "${{ secrets.MACOS_APP_ID_PASSWORD_ACTIONS_RUNTIME }}",
+                "VAULT_URL": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}",
+                "CLIENT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_ACTIONS_RUNTIME }}",
+                "TENANT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_ACTIONS_RUNTIME }}",
+                "CLIENT_SECRET": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_ACTIONS_RUNTIME }}",
+                "CERTIFICATE_NAME": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_ACTIONS_RUNTIME }}",
                 "GITHUB_EVENT_NAME": "${{ github.event_name }}",
                 "GITHUB_REF_NAME": "${{ github.ref_name }}",
                 "GITHUB_PR_NUMBER": "${{ github.event.pull_request.number }}",
@@ -537,7 +553,7 @@ class BaseTests(BaseWorkflow):
 
 class ActionServerTests(BaseTests):
     name = "Action Server Tests"
-    target = "action_server_tests.yml"
+    target = "actions_runtime_tests.yml"
     project_name = "action_server"
     require_node = True
     require_go = True
@@ -582,7 +598,7 @@ class ActionServerTests(BaseTests):
 
 class ActionServerPyPiRelease(BaseWorkflow):
     name = "Action Server PYPI Release"
-    target = "action_server_pypi_release.yml"
+    target = "actions_runtime_pypi_release.yml"
     project_name = "action_server"
     fail_fast = True
 
@@ -591,7 +607,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "tags": ["sema4ai-action_server-*"],
+                    "tags": ["actions-runtime-*"],
                     "branches": ["*-beta"],
                 },
             }
@@ -612,7 +628,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
             "name": "Build sdist",
             "run": f"""
 # Make sure that we have no binaries present when doing the build.
-rm src/sema4ai/bin/rcc* -f
+rm src/actions/server/bin/rcc* -f
 # Just sdist here, wheels are built in the manylinux job.
 {run_in_env}poetry build -f sdist
 """,
@@ -633,7 +649,7 @@ rm src/sema4ai/bin/rcc* -f
         return {
             "name": "Upload to PyPI",
             "run": f"""
-{run_in_env}poetry config pypi-token.pypi  ${{{{ secrets.PYPI_TOKEN_SEMA4AI_ACTION_SERVER }}}}
+{run_in_env}poetry config pypi-token.pypi  ${{{{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}}}
 {run_in_env}poetry publish
 """,
             "env": {
@@ -662,7 +678,7 @@ rm src/sema4ai/bin/rcc* -f
 
 class ActionServerBinaryRelease(BaseWorkflow):
     name = "Action Server BINARY Release"
-    target = "action_server_binary_release.yml"
+    target = "actions_runtime_binary_release.yml"
     project_name = "action_server"
     fail_fast = True
 
@@ -671,7 +687,7 @@ class ActionServerBinaryRelease(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "tags": ["sema4ai-action_server-*"],
+                    "tags": ["actions-runtime-*"],
                     "branches": ["*-beta"],
                 },
             }
@@ -1008,7 +1024,7 @@ fi
 
 class ActionServerManylinuxRelease(BaseWorkflow):
     name = "Action Server MANYLINUX Release"
-    target = "action_server_manylinux_release.yml"
+    target = "actions_runtime_manylinux_release.yml"
     project_name = "action_server"
     fail_fast = True
 
@@ -1017,7 +1033,7 @@ class ActionServerManylinuxRelease(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "tags": ["sema4ai-action_server-*"],
+                    "tags": ["actions-runtime-*"],
                     "branches": ["*-beta"],
                 },
             }
@@ -1062,7 +1078,7 @@ class ActionServerManylinuxRelease(BaseWorkflow):
             "if": NOT_BETA_IF_CLAUSE,
             "env": {
                 "TWINE_USERNAME": "__token__",
-                "TWINE_PASSWORD": "${{ secrets.PYPI_TOKEN_SEMA4AI_ACTION_SERVER }}",
+                "TWINE_PASSWORD": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}",
             },
         }
 
@@ -1106,18 +1122,6 @@ class ActionsTests(BaseTests):
         }
 
 
-class CommonTests(BaseTests):
-    name = "Common Tests"
-    target = "common_tests.yml"
-    project_name = "common"
-
-
-class MCPTests(BaseTests):
-    name = "MCP Tests"
-    target = "mcp_tests.yml"
-    project_name = "mcp"
-
-
 class HttpHelperTests(BaseTests):
     name = "HTTP Helper Tests"
     target = "http_helper_tests.yml"
@@ -1128,8 +1132,6 @@ TARGETS = [
     ActionServerTests(),
     ActionsTests(),
     HttpHelperTests(),
-    CommonTests(),
-    MCPTests(),
     ActionServerPyPiRelease(),
     ActionServerBinaryRelease(),
     ActionServerManylinuxRelease(),
@@ -1209,7 +1211,11 @@ def generate_dependabot_config():
     pyproject_dirs = {
         str(f.parent.relative_to(root))
         for f in root.rglob("pyproject.toml")
-        if ("/tests/" not in f.as_posix() and "/.venv/" not in f.as_posix())
+        if (
+            "/tests/" not in f.as_posix()
+            and "/.venv/" not in f.as_posix()
+            and "/node_modules/" not in f.as_posix()
+        )
     }
     package_json_dirs = {
         str(f.parent.relative_to(root))

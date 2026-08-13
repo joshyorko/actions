@@ -10,7 +10,7 @@ from typing import Optional
 import pytest
 from pydantic.dataclasses import dataclass
 
-from sema4ai.action_server._database import Database, DBRules, datetime_to_str
+from actions.server._database import Database, DBRules, datetime_to_str
 
 _db_rules = DBRules()
 
@@ -55,7 +55,7 @@ class SomeRun:
 
 
 def test_foreign_keys_validation(tmpdir) -> None:
-    from sema4ai.action_server._database import DBError
+    from actions.server._database import DBError
 
     db = Database(tmpdir / "test_foreign_keys_validation.db")
     with db.connect():
@@ -77,7 +77,7 @@ def test_foreign_keys_validation(tmpdir) -> None:
 
 
 def test_database_schema_evolution(str_regression) -> None:
-    from sema4ai.action_server._models import get_all_model_classes, get_model_db_rules
+    from actions.server._models import get_all_model_classes, get_model_db_rules
 
     db = Database(":memory:")
     all_model_classes = get_all_model_classes()
@@ -103,7 +103,7 @@ def test_database_schema_evolution(str_regression) -> None:
 
 
 def test_counters(tmpdir) -> None:
-    from sema4ai.action_server._database import DBError
+    from actions.server._database import DBError
 
     @dataclass
     class Counter:
@@ -181,8 +181,8 @@ def test_counters(tmpdir) -> None:
 
 
 def test_migrate(database_v0: Path, tmpdir) -> None:
-    from sema4ai.action_server._models import Action, create_db
-    from sema4ai.action_server.migrations import (
+    from actions.server._models import Action, create_db
+    from actions.server.migrations import (
         CURRENT_VERSION,
         MIGRATION_ID_TO_NAME,
         Migration,
@@ -467,8 +467,8 @@ def test_database_concurrency(datadir):
 
 
 def test_database_temp_session_data_cleanup(tmpdir):
-    from sema4ai.action_server._models import TempUserSessionData
-    from sema4ai.action_server._user_session import (
+    from actions.server._models import TempUserSessionData
+    from actions.server._user_session import (
         _temp_session_data_cleanup,
         datetime_to_iso,
     )

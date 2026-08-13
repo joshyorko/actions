@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerProcess
-from sema4ai.action_server.migrations import MigrationStatus
+from actions.server._selftest import ActionServerProcess
+from actions.server.migrations import MigrationStatus
 
 
 @pytest.mark.integration_test
@@ -14,9 +14,9 @@ def test_automigrate(
 
     from action_server_tests.fixtures import get_in_resources
 
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
-    from sema4ai.action_server.migrations import (
+    from actions.server._database import Database
+    from actions.server._selftest import actions_server_run
+    from actions.server.migrations import (
         CURRENT_VERSION,
         Migration,
         db_migration_status,
@@ -31,7 +31,7 @@ def test_automigrate(
 
     assert db_migration_status(target_db) == MigrationStatus.NEEDS_MIGRATION
     root_dir = get_in_resources("no_conda", "greeter")
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "import",
             f"--dir={root_dir}",
@@ -51,7 +51,7 @@ def test_automigrate(
         with db.transaction():
             db.insert(Migration(id=CURRENT_VERSION + 1, name="dummy-test"))
 
-    result = sema4ai_action_server_run(
+    result = actions_server_run(
         [
             "import",
             f"--dir={root_dir}",

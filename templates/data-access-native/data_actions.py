@@ -1,4 +1,4 @@
-from sema4ai.actions import Response, Table
+from actions import Response, Table
 from sema4ai.data import query
 from data_sources import PostgresCustomersDataSource
 

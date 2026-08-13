@@ -13,7 +13,7 @@ Example:
 `action.py` contents:
 
 ```python
-from sema4ai.actions import action
+from actions import action
 
 
 @action
@@ -63,8 +63,8 @@ clashes with other standard library modules).
 
 # Using `Response` and `ActionError`
 
-`sema4ai-actions 0.8.0` introduced 2 new classes:
-`sema4ai.actions.Response` and `sema4ai.actions.ActionError`.
+`actions-core 0.8.0` introduced 2 new classes:
+`actions.Response` and `actions.ActionError`.
 
 These classes can be used to have more control of what's returned to an LLM and
 can be used to give error messages that are more meaningful to the LLM.
@@ -80,7 +80,7 @@ The example below shows an example and explains what is expected to happen in di
 circumstances.
 
 ```python
-from sema4ai.actions import ActionError, Response, action
+from actions import ActionError, Response, action
 
 
 @action

@@ -1,5 +1,5 @@
 import { forwardRef, useMemo } from 'react';
-import { IconProps } from '@sema4ai/icons';
+import { IconProps } from 'actions-runtime-icons';
 import { styled } from '~/vendor/sema4ai-theme';
 
 const IconStyled = styled.span`

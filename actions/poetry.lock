@@ -19,6 +19,35 @@ types-PyYAML = ">=6.0.0"
 urllib3 = ">=2.5.0"
 
 [[package]]
+name = "actions-local-devutils"
+version = "0.0.1"
+description = "Utilities for development in monorepo."
+optional = false
+python-versions = "^3.8"
+groups = ["dev"]
+files = []
+develop = true
+
+[package.dependencies]
+invoke = "^2.2.0"
+isort = {version = "^5.12.0", markers = "python_version >= \"3.8\" and python_version < \"4.0\""}
+lazydocs = {git = "https://github.com/robocorp/lazydocs.git"}
+mypy = "^1.1.1"
+pydocstyle = {git = "https://github.com/robocorp/pydocstyle"}
+pylint = "^2.17.4"
+pytest = "^8.0"
+pytest-regressions = "1.0.6"
+pytest-xdist = "^3.2.1"
+ruff = "^0.1.14"
+semver = "^3.0.0"
+tomlkit = "^0.11.8"
+types-invoke = "^2.0"
+
+[package.source]
+type = "directory"
+url = "../devutils"
+
+[[package]]
 name = "annotated-doc"
 version = "0.0.5"
 description = "Document parameters, class attributes, return types, and variables inline, with Annotated."
@@ -1429,35 +1458,6 @@ files = [
 ]
 
 [[package]]
-name = "sema4ai-devutils"
-version = "0.0.1"
-description = "Utilities for development in monorepo."
-optional = false
-python-versions = "^3.8"
-groups = ["dev"]
-files = []
-develop = true
-
-[package.dependencies]
-invoke = "^2.2.0"
-isort = {version = "^5.12.0", markers = "python_version >= \"3.8\" and python_version < \"4.0\""}
-lazydocs = {git = "https://github.com/robocorp/lazydocs.git"}
-mypy = "^1.1.1"
-pydocstyle = {git = "https://github.com/robocorp/pydocstyle"}
-pylint = "^2.17.4"
-pytest = "^8.0"
-pytest-regressions = "1.0.6"
-pytest-xdist = "^3.2.1"
-ruff = "^0.1.14"
-semver = "^3.0.0"
-tomlkit = "^0.11.8"
-types-invoke = "^2.0"
-
-[package.source]
-type = "directory"
-url = "../devutils"
-
-[[package]]
 name = "semver"
 version = "3.0.4"
 description = "Python helper for Semantic Versioning (https://semver.org)"
@@ -1792,4 +1792,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "fab5a57e92feb0ed60c661e368c5c101700c5f51c5ad2c1d2ead76f6124b24c2"
+content-hash = "83e007a31d362b038bd94bf0d84c1be53f1eb9eed661da9ac88694768f01d076"

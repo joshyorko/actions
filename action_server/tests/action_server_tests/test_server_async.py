@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from sema4ai.action_server._selftest import ActionServerClient, ActionServerProcess
-from sema4ai.action_server._settings import (
+from actions.server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._settings import (
     HEADER_ACTION_ASYNC_COMPLETION,
     HEADER_ACTION_SERVER_RUN_ID,
     HEADER_ACTIONS_ASYNC_CALLBACK,
@@ -21,7 +21,7 @@ def test_server_async_api_requests_while_waiting_for_action_to_complete(
     """
     from devutils.fixtures import wait_for_non_error_condition
 
-    from sema4ai.action_server.vendored_deps.url_callback_server import (
+    from actions.server.vendored_deps.url_callback_server import (
         start_server_in_thread,
     )
 
@@ -110,7 +110,7 @@ def test_server_async_api(
     """
     from action_server_tests.fixtures import get_in_resources
 
-    from sema4ai.action_server.vendored_deps.url_callback_server import (
+    from actions.server.vendored_deps.url_callback_server import (
         start_server_in_thread,
     )
 

@@ -9,17 +9,17 @@ from typing import Iterator
 
 import pytest
 
-from sema4ai.action_server._actions_process_pool import (
+from actions.server._actions_process_pool import (
     ActionsProcessPool,
     ProcessHandle,
 )
-from sema4ai.action_server._robo_utils.run_in_thread import run_in_thread
+from actions.server._robo_utils.run_in_thread import run_in_thread
 
 
 @pytest.fixture
 def actions_process_pool(tmpdir):
-    from sema4ai.action_server._models import Action, ActionPackage
-    from sema4ai.action_server._settings import Settings
+    from actions.server._models import Action, ActionPackage
+    from actions.server._settings import Settings
 
     datadir = Path(tmpdir / "datadir")
     artifacts_dir = datadir / "artifacts"
@@ -36,7 +36,7 @@ def actions_process_pool(tmpdir):
     action_file = action_package_dir / "action.py"
     action_file.write_text(
         """
-from sema4ai.actions import action
+from actions import action
 
 @action
 def greet(name: str, title="Mr.") -> str:
@@ -118,8 +118,8 @@ def _create_run(
 
     from starlette.requests import Request
 
-    from sema4ai.action_server._database import datetime_to_str
-    from sema4ai.action_server._models import Run, RunStatus
+    from actions.server._database import datetime_to_str
+    from actions.server._models import Run, RunStatus
 
     p = Path(tmpdir)
     robot_artifacts = p / f"artifacts_{i}"

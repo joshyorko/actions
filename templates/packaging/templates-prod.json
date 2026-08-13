@@ -17,21 +17,6 @@
             "desc": "An example showcasing more advanced configuration features of Actions."
         },
         {
-            "id": "data-access-query",
-            "name": "Data Access/Query",
-            "desc": "Give agents access to various data sources using named queries."
-        },
-        {
-            "id": "data-access-native",
-            "name": "Data Access/Native Query",
-            "desc": "Give agents access to a data source using native (named) queries."
-        },
-        {
-            "id": "data-access-kb",
-            "name": "Data Access/Knowledge Base",
-            "desc": "Give agents access to knowledge base."
-        },
-        {
             "id": "workflow-producer-consumer",
             "name": "Workflow/Producer-Consumer",
             "desc": "Producer-consumer workflow pattern using work items."

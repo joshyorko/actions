@@ -6,10 +6,10 @@ from typing import Any, Iterator
 
 import pytest
 
-from sema4ai.action_server._selftest import (
+from actions.server._selftest import (
     ActionServerClient,
     ActionServerProcess,
-    sema4ai_action_server_run,
+    actions_server_run,
 )
 
 BUILD_ENV_IN_TESTS_TIMEOUT = 600
@@ -66,7 +66,7 @@ def fix_metadata(metadata: dict) -> dict:
 
 
 def fix_openapi_json(openapi: dict) -> dict:
-    from sema4ai.action_server import __version__
+    from actions.server import __version__
 
     info = openapi.get("info")
     assert info is not None, "Expected info to be in the openapi.json"
@@ -97,8 +97,8 @@ def rcc_config_location(temp_directory_session) -> Path:
 
 @pytest.fixture(scope="session", autouse=True)
 def disable_feedback(temp_directory_session, rcc_config_location) -> None:
-    from sema4ai.action_server._download_rcc import get_default_rcc_location
-    from sema4ai.action_server._rcc import Rcc
+    from actions.server._download_rcc import get_default_rcc_location
+    from actions.server._rcc import Rcc
 
     sema4ai_home = temp_directory_session / ".sema4ai_home"
     sema4ai_home.mkdir(parents=True, exist_ok=True)
@@ -180,8 +180,8 @@ def temp_directory_session(tmp_path_factory):
 def base_case(
     action_server_process: ActionServerProcess, tmpdir, temp_directory_session
 ) -> Iterator[CaseInfo]:
-    from sema4ai.action_server._database import Database
-    from sema4ai.action_server._models import (
+    from actions.server._database import Database
+    from actions.server._models import (
         Action,
         ActionPackage,
         get_all_model_classes,
@@ -201,7 +201,7 @@ def base_case(
         pack2 = get_in_resources("greeter")
         # Will have to generate the environment...
 
-        sema4ai_action_server_run(
+        actions_server_run(
             [
                 "import",
                 f"--dir={pack1}",
@@ -239,7 +239,7 @@ def client(action_server_process: ActionServerProcess) -> Iterator[ActionServerC
 
 @pytest.fixture
 def database_v0(tmpdir):
-    from sema4ai.action_server._database import Database
+    from actions.server._database import Database
 
     db_path = Path(tmpdir) / "temp.db"
     initial_sql = [
@@ -403,7 +403,7 @@ CREATE UNIQUE INDEX counter_id_index ON counter(id);
 def run_async_in_new_thread(async_func: Any) -> Any:
     import asyncio
 
-    from sema4ai.common.run_in_thread import run_in_thread
+    from actions.server._common.run_in_thread import run_in_thread
 
     def func_in_thread():
         return asyncio.run(async_func())

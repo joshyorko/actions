@@ -26,7 +26,7 @@ pyyaml = "^6.0"
 pyarrow = "^15.0"
 
 [tool.poetry.group.dev.dependencies]
-sema4ai-devutils = { path = "../devutils/", develop = true }
+actions-local-devutils = { path = "../devutils/", develop = true }
 types-psutil = ">=5.9,<8.0"
 types-PyYAML = "6.0"
 

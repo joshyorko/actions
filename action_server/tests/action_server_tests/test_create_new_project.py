@@ -4,7 +4,7 @@ from unittest import mock
 
 import requests
 
-import sema4ai.action_server._new_project
+import actions.server._new_project
 
 
 @mock.patch(
@@ -12,23 +12,23 @@ import sema4ai.action_server._new_project
     side_effect=requests.exceptions.HTTPError,
 )
 @mock.patch(
-    "sema4ai.action_server._new_project.log.critical",
-    wraps=sema4ai.action_server._new_project.log.critical,
+    "actions.server._new_project.log.critical",
+    wraps=actions.server._new_project.log.critical,
 )
 @mock.patch(
-    "sema4ai.action_server._new_project.log.warning",
-    wraps=sema4ai.action_server._new_project.log.warning,
+    "actions.server._new_project.log.warning",
+    wraps=actions.server._new_project.log.warning,
 )
 def test_create_new_project_download_metadata_fail(
     log_warning_mock: mock.MagicMock, log_critical_mock: mock.MagicMock, _, tmpdir
 ) -> None:
-    from sema4ai.action_server._new_project import handle_new_project
+    from actions.server._new_project import handle_new_project
 
     templates_path = tmpdir / "action-templates"
     project_path = tmpdir / "my_project"
 
     with mock.patch(
-        "sema4ai.action_server._new_project_helpers._get_action_templates_dir_path",
+        "actions.server._new_project_helpers._get_action_templates_dir_path",
     ) as mock_get_action_templates_dir_path:
         mock_get_action_templates_dir_path.return_value = templates_path
 
@@ -48,16 +48,16 @@ def test_create_new_project_download_metadata_fail(
     side_effect=requests.exceptions.HTTPError,
 )
 @mock.patch(
-    "sema4ai.action_server._new_project.log.critical",
-    wraps=sema4ai.action_server._new_project.log.critical,
+    "actions.server._new_project.log.critical",
+    wraps=actions.server._new_project.log.critical,
 )
 @mock.patch(
-    "sema4ai.action_server._new_project.log.warning",
-    wraps=sema4ai.action_server._new_project.log.warning,
+    "actions.server._new_project.log.warning",
+    wraps=actions.server._new_project.log.warning,
 )
 @mock.patch(
-    "sema4ai.action_server._new_project.log.info",
-    wraps=sema4ai.action_server._new_project.log.info,
+    "actions.server._new_project.log.info",
+    wraps=actions.server._new_project.log.info,
 )
 def test_create_new_project_download_metadata_fail_with_cached_templates(
     log_info_mock: mock.MagicMock,
@@ -68,7 +68,7 @@ def test_create_new_project_download_metadata_fail_with_cached_templates(
 ) -> None:
     from action_server_tests.fixtures import get_in_resources
 
-    from sema4ai.action_server._new_project import handle_new_project
+    from actions.server._new_project import handle_new_project
 
     templates_path = tmpdir / "action-templates"
     project_path = tmpdir / "my_project"
@@ -86,7 +86,7 @@ def test_create_new_project_download_metadata_fail_with_cached_templates(
     )
 
     with mock.patch(
-        "sema4ai.action_server._new_project_helpers._get_action_templates_dir_path",
+        "actions.server._new_project_helpers._get_action_templates_dir_path",
     ) as mock_get_action_templates_dir_path:
         mock_get_action_templates_dir_path.return_value = templates_path
 
@@ -127,22 +127,22 @@ def test_create_new_project_download_metadata_fail_with_cached_templates(
 # It's important to mock the _ensure_latest_templates() here, so the test case does not attempt to
 # download them to default storage directory.
 @mock.patch(
-    "sema4ai.action_server._new_project_helpers._ensure_latest_templates",
+    "actions.server._new_project_helpers._ensure_latest_templates",
     side_effect=None,
 )
 @mock.patch(
-    "sema4ai.action_server._new_project.log.info",
-    wraps=sema4ai.action_server._new_project.log.info,
+    "actions.server._new_project.log.info",
+    wraps=actions.server._new_project.log.info,
 )
 @mock.patch("sys.stdout.buffer.write")
 def test_list_templates_no_templates_available(
     print_mock: mock.MagicMock, log_info_mock: mock.MagicMock, _, tmpdir
 ) -> None:
-    from sema4ai.action_server._new_project import handle_list_templates
-    from sema4ai.action_server._new_project_helpers import ActionTemplatesMetadata
+    from actions.server._new_project import handle_list_templates
+    from actions.server._new_project_helpers import ActionTemplatesMetadata
 
     with mock.patch(
-        "sema4ai.action_server._new_project_helpers._get_local_templates_metadata"
+        "actions.server._new_project_helpers._get_local_templates_metadata"
     ) as mock_get_local_templates_metadata:
         mock_get_local_templates_metadata.return_value = ActionTemplatesMetadata(
             hash="test_hash",
@@ -165,7 +165,7 @@ def test_list_templates_no_templates_available(
 
 
 def test_action_server_new_force_flag(datadir):
-    from sema4ai.action_server._selftest import sema4ai_action_server_run
+    from actions.server._selftest import actions_server_run
 
     project_path = datadir / "my_project"
     project_path.mkdir()
@@ -173,7 +173,7 @@ def test_action_server_new_force_flag(datadir):
     package_yaml_path.write_text("foo", encoding="utf-8")
     assert package_yaml_path.read_text(encoding="utf-8") == "foo"
 
-    sema4ai_action_server_run(
+    actions_server_run(
         [
             "new",
             "--name",
