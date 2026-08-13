@@ -4,7 +4,6 @@ from fastapi import FastAPI, params
 from starlette.authentication import AuthCredentials, AuthenticationBackend, BaseUser
 from starlette.middleware import Middleware
 from starlette.requests import HTTPConnection
-from starlette.types import Receive, Scope, Send
 
 from actions.server._app import _CustomFastAPI
 
@@ -138,18 +137,14 @@ class _ActionRoutes:
 
         from starlette.routing import Route
 
-        self.streamable_http_server = self.mcp_server_setup_helper.server.streamable_http_app(
-            streamable_http_path="/mcp",
-            json_response=True,
-            stateless_http=True,
-        )
-        if self._api_key:
-            from starlette.middleware.authentication import AuthenticationMiddleware
-
-            self.streamable_http_server.add_middleware(
-                AuthenticationMiddleware,
-                backend=APIKeyAuthBackend(api_key=self._api_key),
+        self.streamable_http_server = (
+            self.mcp_server_setup_helper.server.streamable_http_app(
+                streamable_http_path="/mcp",
+                json_response=True,
+                stateless_http=True,
             )
+        )
+
         @asynccontextmanager
         async def _mcp_lifespan(_main_app: FastAPI):
             async with self.streamable_http_server.router.lifespan_context(
@@ -159,8 +154,15 @@ class _ActionRoutes:
 
         app.custom_lifespan.register(_mcp_lifespan)
         mcp_route = self.streamable_http_server.routes[0]
+        mcp_endpoint = mcp_route.endpoint
+        if self._api_key:
+            from starlette.middleware.authentication import AuthenticationMiddleware
+
+            mcp_endpoint = AuthenticationMiddleware(
+                app=mcp_endpoint, backend=APIKeyAuthBackend(api_key=self._api_key)
+            )
         app.router.routes.append(
-            Route("/mcp", endpoint=mcp_route.endpoint, methods=["GET", "POST", "DELETE"])
+            Route("/mcp", endpoint=mcp_endpoint, methods=["GET", "POST", "DELETE"])
         )
 
     def register_actions(self) -> None:
@@ -241,9 +243,9 @@ class _ActionRoutes:
             openapi_extra[OPENAPI_SPEC_OPERATION_KIND] = action_kind
 
             route_name = build_url_api_run(action_package.name, action.name)
-            assert (
-                route_name not in registered_route_names
-            ), f"Route: {route_name} already registered."
+            assert route_name not in registered_route_names, (
+                f"Route: {route_name} already registered."
+            )
             app.add_api_route(
                 route_name,
                 func_fast_api,

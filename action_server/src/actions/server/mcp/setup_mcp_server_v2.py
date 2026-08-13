@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Any, Callable, Literal
 
 from mcp.types import (
+    CallToolResult,
     GetPromptResult,
     ListPromptsResult,
     ListResourcesResult,
@@ -83,12 +84,14 @@ class McpServerSetupHelper:
                 cookies=cookies,
             )
             if action_info.output_schema_kind == "string":
-                return {"content": [TextContent(type="text", text=result)]}
+                return CallToolResult(content=[TextContent(type="text", text=result)])
             if action_info.output_schema_kind == "object":
-                return {"content": [], "structured_content": result}
+                return CallToolResult(content=[], structuredContent=result)
             if action_info.output_schema_kind == "wrap-in-result-object":
-                return {"content": [], "structured_content": {"result": result}}
-            raise ValueError(f"Unknown output schema kind: {action_info.output_schema_kind}")
+                return CallToolResult(content=[], structuredContent={"result": result})
+            raise ValueError(
+                f"Unknown output schema kind: {action_info.output_schema_kind}"
+            )
         except Exception:
             log.exception("Error calling tool %s", params.name)
             raise
@@ -99,7 +102,9 @@ class McpServerSetupHelper:
     async def _list_resource_templates(
         self, _ctx: Any, _params: Any
     ) -> ListResourceTemplatesResult:
-        return ListResourceTemplatesResult(resource_templates=list(self._resource_templates))
+        return ListResourceTemplatesResult(
+            resource_templates=list(self._resource_templates)
+        )
 
     async def _read_resource(self, ctx: Any, params: Any) -> ReadResourceResult:
         uri = str(params.uri)
@@ -111,7 +116,9 @@ class McpServerSetupHelper:
             mime_type = resource.mime_type if resource else None
         else:
             for template in self._resource_templates:
-                found_params = self._resource_template_matches(template.uri_template, uri)
+                found_params = self._resource_template_matches(
+                    template.uri_template, uri
+                )
                 if found_params:
                     mime_type = template.mime_type
                     inputs = found_params
@@ -160,7 +167,9 @@ class McpServerSetupHelper:
         return GetPromptResult(
             description=action_info.doc_desc,
             messages=[
-                PromptMessage(role="user", content=TextContent(type="text", text=result))
+                PromptMessage(
+                    role="user", content=TextContent(type="text", text=result)
+                )
             ],
         )
 

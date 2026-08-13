@@ -29,8 +29,6 @@ def test_collect_and_call_resource():
     import json
 
     from action_server_tests.fixtures import run_async_in_new_thread
-    from pydantic.networks import AnyUrl
-
     from actions.server._models import Action
     from actions.server.mcp.setup_mcp_server_from_actions import (
         McpServerSetupHelper,
@@ -75,16 +73,14 @@ def test_collect_and_call_resource():
     assert len(setup._resource_templates) == 1
 
     async def call():
-        from mcp.types import ReadResourceRequest, ReadResourceRequestParams
+        from types import SimpleNamespace
 
-        handler = setup.server.request_handlers[ReadResourceRequest]
-        request = ReadResourceRequest(
-            method="resources/read",
-            params=ReadResourceRequestParams(
-                uri=AnyUrl("https://example.com/resource/123")
-            ),
+        from mcp.types import ReadResourceRequestParams
+
+        result = await setup._read_resource(
+            SimpleNamespace(request=None),
+            ReadResourceRequestParams(uri="https://example.com/resource/123"),
         )
-        result = await handler(request)
         return result
 
     result = run_async_in_new_thread(call)
@@ -139,16 +135,16 @@ def test_collect_and_call_prompt():
     )
 
     async def call():
-        from mcp.types import GetPromptRequest, GetPromptRequestParams
+        from types import SimpleNamespace
 
-        handler = setup.server.request_handlers[GetPromptRequest]
-        request = GetPromptRequest(
-            method="prompts/get",
-            params=GetPromptRequestParams(
+        from mcp.types import GetPromptRequestParams
+
+        result = await setup._get_prompt(
+            SimpleNamespace(request=None),
+            GetPromptRequestParams(
                 name="test_prompt", arguments={"text": "test input"}
             ),
         )
-        result = await handler(request)
         return result
 
     result = run_async_in_new_thread(call)
