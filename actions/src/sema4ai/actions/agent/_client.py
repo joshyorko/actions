@@ -5,7 +5,7 @@ import sys
 from copy import copy
 from urllib.parse import urlencode, urljoin, urlparse
 
-import sema4ai_http
+import actions_http
 
 from sema4ai.actions._action import get_x_action_invocation_context
 from sema4ai.actions._response import ActionError
@@ -93,7 +93,7 @@ class _AgentAPIClient:
             request_headers = {
                 "x-action-invocation-context": get_x_action_invocation_context()
             }
-            sema4ai_http.get(url, timeout=1, headers=request_headers).raise_for_status()
+            actions_http.get(url, timeout=1, headers=request_headers).raise_for_status()
             return True
         except Exception:
             return False
@@ -136,7 +136,7 @@ class _AgentAPIClient:
         json_data: dict | None = None,
         headers: dict | None = None,
         query_params: dict | None = None,
-    ) -> sema4ai_http.ResponseWrapper:
+    ) -> actions_http.ResponseWrapper:
         """Make an API request with common error handling.
 
         Args:
@@ -147,7 +147,7 @@ class _AgentAPIClient:
             query_params: Optional query parameters
 
         Returns:
-            sema4ai_http.ResponseWrapper object
+            actions_http.ResponseWrapper object
 
         Raises:
            ValueError: for unsupported HTTP methods
@@ -169,11 +169,11 @@ class _AgentAPIClient:
             extra={"json_data": json_data, "request_headers": request_headers},
         )
         if method == "GET":
-            response = sema4ai_http.get(url, json=json_data, headers=request_headers)
+            response = actions_http.get(url, json=json_data, headers=request_headers)
         elif method == "POST":
-            response = sema4ai_http.post(url, json=json_data, headers=request_headers)
+            response = actions_http.post(url, json=json_data, headers=request_headers)
         elif method == "DELETE":
-            response = sema4ai_http.delete(url, headers=request_headers)
+            response = actions_http.delete(url, headers=request_headers)
         else:
             raise ValueError(f"Unsupported HTTP method: {method}")
 

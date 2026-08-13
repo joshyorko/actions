@@ -83,14 +83,14 @@ def download_rcc(
             # It was downloaded by some other process while we were waiting for the mutex.
             return rcc_path
 
-        import sema4ai_http
+        import actions_http
 
-        status = sema4ai_http.download_with_resume(
+        status = actions_http.download_with_resume(
             rcc_url, rcc_path, make_executable=True, overwrite_existing=True
         )
         if status.status in (
-            sema4ai_http.DownloadStatus.HTTP_ERROR,
-            sema4ai_http.DownloadStatus.PARTIAL,
+            actions_http.DownloadStatus.HTTP_ERROR,
+            actions_http.DownloadStatus.PARTIAL,
         ):
             raise RuntimeError(f"Failed to download RCC: {status.status}")
 

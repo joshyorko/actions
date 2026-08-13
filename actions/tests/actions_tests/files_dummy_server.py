@@ -122,7 +122,7 @@ class _SimpleFileServer(BaseHTTPRequestHandler):
             return
 
     def do_POST(self):
-        import sema4ai_http
+        import actions_http
 
         parsed_path = urllib.parse.urlparse(self.path)
         path_parts = parsed_path.path.split("/")[1:]
@@ -210,7 +210,7 @@ class _SimpleFileServer(BaseHTTPRequestHandler):
                         s.strip() for s in gen_headers.split(":")
                     ]
                     headers[header_key] = header_value
-                    response = sema4ai_http.post(
+                    response = actions_http.post(
                         gen_url,
                         headers=headers,
                         body=json.dumps(

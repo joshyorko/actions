@@ -91,7 +91,7 @@ def download_bore(target: Optional[str] = None, force: bool = False) -> Path:
     bore_url = f"https://github.com/ekzhang/bore/releases/download/v{BORE_VERSION}/{asset_name}"
 
     try:
-        import sema4ai_http
+        import actions_http
         from sema4ai.common.system_mutex import timed_acquire_mutex
 
         timeout = 120.0
@@ -108,7 +108,7 @@ def download_bore(target: Optional[str] = None, force: bool = False) -> Path:
                 archive_path = Path(tmpdir) / asset_name
 
                 log.info(f"Downloading bore from {bore_url}")
-                status = sema4ai_http.download_with_resume(
+                status = actions_http.download_with_resume(
                     bore_url,
                     archive_path,
                     make_executable=False,
@@ -116,8 +116,8 @@ def download_bore(target: Optional[str] = None, force: bool = False) -> Path:
                 )
 
                 if status.status in (
-                    sema4ai_http.DownloadStatus.HTTP_ERROR,
-                    sema4ai_http.DownloadStatus.PARTIAL,
+                    actions_http.DownloadStatus.HTTP_ERROR,
+                    actions_http.DownloadStatus.PARTIAL,
                 ):
                     raise RuntimeError(f"Failed to download bore: {status.status}")
 
@@ -151,7 +151,7 @@ def download_bore(target: Optional[str] = None, force: bool = False) -> Path:
                 log.info(f"bore downloaded successfully to {bore_path}")
 
     except ImportError:
-        # Fallback without sema4ai_http - use urllib
+        # Fallback without actions_http - use urllib
         import tarfile
         import tempfile
         import urllib.request
@@ -241,7 +241,7 @@ def download_cloudflared(target: Optional[str] = None, force: bool = False) -> P
     cf_url = f"https://github.com/cloudflare/cloudflared/releases/download/{CLOUDFLARED_VERSION}/{asset_name}"
 
     try:
-        import sema4ai_http
+        import actions_http
         from sema4ai.common.system_mutex import timed_acquire_mutex
 
         timeout = 120.0
@@ -259,12 +259,12 @@ def download_cloudflared(target: Optional[str] = None, force: bool = False) -> P
                 if direct_binary:
                     # Direct binary download
                     log.info(f"Downloading cloudflared from {cf_url}")
-                    status = sema4ai_http.download_with_resume(
+                    status = actions_http.download_with_resume(
                         cf_url, cf_path, make_executable=True, overwrite_existing=True
                     )
                     if status.status in (
-                        sema4ai_http.DownloadStatus.HTTP_ERROR,
-                        sema4ai_http.DownloadStatus.PARTIAL,
+                        actions_http.DownloadStatus.HTTP_ERROR,
+                        actions_http.DownloadStatus.PARTIAL,
                     ):
                         raise RuntimeError(
                             f"Failed to download cloudflared: {status.status}"
@@ -273,15 +273,15 @@ def download_cloudflared(target: Optional[str] = None, force: bool = False) -> P
                     # Tarball download (macOS)
                     archive_path = Path(tmpdir) / asset_name
                     log.info(f"Downloading cloudflared from {cf_url}")
-                    status = sema4ai_http.download_with_resume(
+                    status = actions_http.download_with_resume(
                         cf_url,
                         archive_path,
                         make_executable=False,
                         overwrite_existing=True,
                     )
                     if status.status in (
-                        sema4ai_http.DownloadStatus.HTTP_ERROR,
-                        sema4ai_http.DownloadStatus.PARTIAL,
+                        actions_http.DownloadStatus.HTTP_ERROR,
+                        actions_http.DownloadStatus.PARTIAL,
                     ):
                         raise RuntimeError(
                             f"Failed to download cloudflared: {status.status}"
@@ -303,7 +303,7 @@ def download_cloudflared(target: Optional[str] = None, force: bool = False) -> P
                 log.info(f"cloudflared downloaded successfully to {cf_path}")
 
     except ImportError:
-        # Fallback without sema4ai_http
+        # Fallback without actions_http
         import tempfile
         import urllib.request
 

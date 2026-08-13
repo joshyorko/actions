@@ -22,18 +22,22 @@ distribution by path, in addition to the existing `sema4ai-*` internal
 distributions. Consumer lockfiles remain publication-gated until the helper
 exists in the configured package index.
 
-The helper-only release must leave
-`action_server/developer/tmp/environment_linux_amd64_freeze.yaml` identical to
-the `community` base. That Action Server freeze is regenerated only after the
-published helper is resolvable and its dependency lock selects the helper's
-resolved `truststore` version.
-
-The helper migration cannot produce consumer Poetry locks until
+The source migration PR contains the helper and its direct consumers together;
+the helper commit is not independently mergeable or release-ready. Its
+consumer lockfiles remain unchanged until after the source PR is merged and
 `actions-http-helper==1.0.0` exists in the configured package index: Poetry
 does not resolve a version-only requirement from this checkout, and this
 repository has no release-staging/index procedure. Keep the consumer
 requirements publication-ready, record the resolver error, and regenerate all
-affected locks immediately after the helper’s first normal release.
+affected locks immediately after the helper’s first normal release. Then
+regenerate the Action Server freeze before releasing Action Server or MCP
+artifacts.
+
+For a clean source archive, `poetry run invoke devinstall` must discover the
+sibling `actions-http-helper/pyproject.toml`, replace the version requirement
+with that local path before Poetry resolves, and install the helper from the
+archive. This applies at minimum to `actions/` and `action_server/`; it must
+not depend on a `sema4ai-http-helper` directory or requirement.
 
 ## Evidence Ladder
 
