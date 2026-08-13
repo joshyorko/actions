@@ -11,10 +11,14 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
 The Action Server frontend uses `action_server/frontend/package.json` and its
-lock as the sole package metadata. Runtime and Canvas View are separate Vite
-roots under `apps/runtime` and `apps/canvas-view`; run `npm run build` and
-`npm run build:canvas` from the frontend directory to verify both artifacts.
-The topology has no tier-specific manifest or product-tier build variable.
+lock as the sole package metadata. `npm ci` is the offline-install contract;
+`LICENSE` is the retained Actions-owned provenance. Runtime and Canvas View
+are separate Vite roots under `apps/runtime` and `apps/canvas-view`; run
+`npm run build:runtime` and `npm run build:canvas` from the frontend directory
+to verify both independent artifacts. The topology has no tier-specific
+manifest, product-tier build variable, vendored package directory, or external
+runtime asset dependency. Frontend quality is fail-fast through
+`npm run test:quality` and the workflow runs both build boundaries.
 
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
