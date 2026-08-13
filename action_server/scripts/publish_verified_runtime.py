@@ -38,6 +38,9 @@ class VerificationError(ValueError):
     """The retained directory is not the exact verified Runtime artifact set."""
 
 
+CANONICAL_WORKFLOW_PATH = ".github/workflows/actions_runtime_pypi_release.yml"
+
+
 def _artifact_names(directory: Path) -> list[str]:
     files = sorted(path.name for path in directory.iterdir() if path.is_file())
     if MANIFEST_NAME in files:
@@ -215,7 +218,9 @@ def _run_twine(directory: Path, *, publish: bool, token: str | None) -> None:
     subprocess.run(twine_command(directory, publish=True), check=True, env=upload_env)
 
 
-def validate_release_run(metadata: dict, *, sha: str, ref: str) -> None:
+def validate_release_run(
+    metadata: dict, *, sha: str, ref: str, workflow_id: int
+) -> None:
     if metadata.get("headSha") != sha:
         raise RuntimeError("the selected run does not match --sha")
     if metadata.get("headBranch") != ref:
@@ -224,12 +229,45 @@ def validate_release_run(metadata: dict, *, sha: str, ref: str) -> None:
         raise RuntimeError("--ref must be an actions-runtime version tag")
     if metadata.get("workflowName") != "Action Server PYPI Release":
         raise RuntimeError("the selected run is not the Runtime PyPI release workflow")
+    if metadata.get("workflowDatabaseId") != workflow_id:
+        raise RuntimeError(
+            "the selected run is not the canonical Runtime PyPI workflow"
+        )
     if metadata.get("event") != "push":
         raise RuntimeError("the selected run is not a tag push")
     if metadata.get("conclusion") != "success":
         raise RuntimeError("the selected run did not succeed")
     if metadata.get("artifactExpired"):
         raise RuntimeError("the Runtime artifact is expired")
+
+
+def canonical_workflow_id(repo: str) -> int:
+    try:
+        result = subprocess.run(
+            [
+                "gh",
+                "api",
+                f"repos/{repo}/actions/workflows/{CANONICAL_WORKFLOW_PATH}",
+                "--jq",
+                "{id}",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        payload = json.loads(result.stdout)
+    except (subprocess.CalledProcessError, json.JSONDecodeError) as error:
+        raise RuntimeError(
+            "could not resolve the canonical Runtime PyPI workflow"
+        ) from error
+    workflow_id = payload.get("id") if isinstance(payload, dict) else None
+    if (
+        isinstance(workflow_id, bool)
+        or not isinstance(workflow_id, int)
+        or workflow_id <= 0
+    ):
+        raise RuntimeError("canonical Runtime PyPI workflow has no valid database ID")
+    return workflow_id
 
 
 def main() -> int:
@@ -262,15 +300,16 @@ def main() -> int:
                 "--repo",
                 args.repo,
                 "--json",
-                "headSha,headBranch,workflowName,event,conclusion",
+                "headSha,headBranch,workflowName,workflowDatabaseId,event,conclusion",
                 "--jq",
-                "{headSha,headBranch,workflowName,event,conclusion}",
+                "{headSha,headBranch,workflowName,workflowDatabaseId,event,conclusion}",
             ],
             check=True,
             capture_output=True,
             text=True,
         )
         metadata = json.loads(result.stdout)
+        workflow_id = canonical_workflow_id(args.repo)
         artifact_result = subprocess.run(
             [
                 "gh",
@@ -289,7 +328,9 @@ def main() -> int:
         if len(artifact_lines) != 1:
             raise RuntimeError("the selected run has no unique Runtime artifact")
         metadata["artifactExpired"] = json.loads(artifact_lines[0])["artifactExpired"]
-        validate_release_run(metadata, sha=args.sha, ref=args.ref)
+        validate_release_run(
+            metadata, sha=args.sha, ref=args.ref, workflow_id=workflow_id
+        )
         command = [
             "gh",
             "run",

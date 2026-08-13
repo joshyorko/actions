@@ -1,5 +1,7 @@
 import importlib.util
+import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -300,6 +302,7 @@ def test_runtime_publisher_validates_immutable_release_run_metadata():
         "headSha": "good-sha",
         "headBranch": "actions-runtime-1.0.0",
         "workflowName": "Action Server PYPI Release",
+        "workflowDatabaseId": 333870965,
         "event": "push",
         "conclusion": "success",
         "artifactExpired": False,
@@ -308,6 +311,7 @@ def test_runtime_publisher_validates_immutable_release_run_metadata():
         metadata,
         sha="good-sha",
         ref="actions-runtime-1.0.0",
+        workflow_id=333870965,
     )
     for field, value in (
         ("headSha", "wrong-sha"),
@@ -322,12 +326,14 @@ def test_runtime_publisher_validates_immutable_release_run_metadata():
                 invalid,
                 sha="good-sha",
                 ref="actions-runtime-1.0.0",
+                workflow_id=333870965,
             )
     with pytest.raises(RuntimeError, match="expired"):
         publisher.validate_release_run(
             metadata | {"artifactExpired": True},
             sha="good-sha",
             ref="actions-runtime-1.0.0",
+            workflow_id=333870965,
         )
 
 
@@ -336,11 +342,21 @@ def test_runtime_publisher_rejects_fake_gh_metadata_before_download(monkeypatch)
     calls = []
 
     class Result:
-        stdout = '{"headSha":"wrong-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","event":"push","conclusion":"success"}'
+        stdout = '{"headSha":"wrong-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
 
     def fake_run(command, **kwargs):
         calls.append(command)
-        if command[1:3] == ["api", "repos/joshyorko/actions/actions/runs/123/artifacts"]:
+        if command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/workflows/.github/workflows/actions_runtime_pypi_release.yml",
+        ]:
+            result = Result()
+            result.stdout = '{"id": 333870965}'
+            return result
+        if command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/runs/123/artifacts",
+        ]:
             result = Result()
             result.stdout = '{"artifactExpired":false}'
             return result
@@ -366,6 +382,182 @@ def test_runtime_publisher_rejects_fake_gh_metadata_before_download(monkeypatch)
     with pytest.raises(RuntimeError, match="--sha"):
         publisher.main()
     assert all(command[1:3] != ["run", "download"] for command in calls)
+
+
+def test_runtime_publisher_rejects_canonical_workflow_lookup_failure_before_download(
+    monkeypatch,
+):
+    publisher = load_publisher()
+    calls = []
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        if command[1:3] == ["run", "view"]:
+
+            class Result:
+                stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
+
+            return Result()
+        raise subprocess.CalledProcessError(1, command)
+
+    monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_verified_runtime.py",
+            "--run-id",
+            "123",
+            "--repo",
+            "joshyorko/actions",
+            "--ref",
+            "actions-runtime-1.0.0",
+            "--sha",
+            "good-sha",
+            "--dry-run",
+        ],
+    )
+    with pytest.raises(RuntimeError, match="resolve"):
+        publisher.main()
+    assert all(command[1:3] != ["run", "download"] for command in calls)
+
+
+def test_runtime_publisher_rejects_same_name_from_wrong_workflow_before_download(
+    monkeypatch,
+):
+    publisher = load_publisher()
+    calls = []
+
+    class Result:
+        stdout = ""
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        result = Result()
+        if command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/workflows/.github/workflows/actions_runtime_pypi_release.yml",
+        ]:
+            result.stdout = '{"id": 333870965}'
+        elif command[1:3] == ["run", "view"]:
+            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":999,"event":"push","conclusion":"success"}'
+        elif command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/runs/123/artifacts",
+        ]:
+            result.stdout = '{"artifactExpired":false}'
+        return result
+
+    monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_verified_runtime.py",
+            "--run-id",
+            "123",
+            "--repo",
+            "joshyorko/actions",
+            "--ref",
+            "actions-runtime-1.0.0",
+            "--sha",
+            "good-sha",
+            "--dry-run",
+        ],
+    )
+    with pytest.raises(RuntimeError, match="workflow"):
+        publisher.main()
+    assert all(command[1:3] != ["run", "download"] for command in calls)
+
+
+@pytest.mark.parametrize("workflow_response", ["", '{"id":"333870965"}', "{}"])
+def test_runtime_publisher_rejects_malformed_canonical_workflow_before_download(
+    monkeypatch, workflow_response
+):
+    publisher = load_publisher()
+    calls = []
+
+    class Result:
+        stdout = ""
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        result = Result()
+        if command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/workflows/.github/workflows/actions_runtime_pypi_release.yml",
+        ]:
+            result.stdout = workflow_response
+        return result
+
+    monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_verified_runtime.py",
+            "--run-id",
+            "123",
+            "--repo",
+            "joshyorko/actions",
+            "--ref",
+            "actions-runtime-1.0.0",
+            "--sha",
+            "good-sha",
+            "--dry-run",
+        ],
+    )
+    with pytest.raises((RuntimeError, json.JSONDecodeError)):
+        publisher.main()
+    assert all(command[1:3] != ["run", "download"] for command in calls)
+
+
+def test_runtime_publisher_proceeds_with_canonical_workflow_id(monkeypatch, tmp_path):
+    publisher = load_publisher()
+    calls = []
+
+    class Result:
+        stdout = ""
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        result = Result()
+        if command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/workflows/.github/workflows/actions_runtime_pypi_release.yml",
+        ]:
+            result.stdout = '{"id": 333870965}'
+        elif command[1:3] == ["run", "view"]:
+            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
+        elif command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/runs/123/artifacts",
+        ]:
+            result.stdout = '{"artifactExpired":false}'
+        elif command[1:3] == ["run", "download"]:
+            tmp_path.mkdir(exist_ok=True)
+        return result
+
+    monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(publisher, "verify_artifacts", lambda directory: ["artifact"])
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_verified_runtime.py",
+            "--run-id",
+            "123",
+            "--repo",
+            "joshyorko/actions",
+            "--ref",
+            "actions-runtime-1.0.0",
+            "--sha",
+            "good-sha",
+            "--dry-run",
+        ],
+    )
+    assert publisher.main() == 0
+    assert any(command[1:3] == ["run", "download"] for command in calls)
 
 
 def test_binary_release_matrix_and_aws_pin_are_actionlint_safe():
