@@ -172,6 +172,9 @@ jobs:
 
         uv run --no-project --python ${{ matrix.python }}  python -m pip install --break-system-packages
         cibuildwheel==2.23.1'
+    - name: Set macOS deployment target
+      if: ${{ matrix.name == 'macos' }}
+      run: echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> "$GITHUB_ENV"
     - name: Build and clean-test wheels
       run: uv run --no-project --python ${{ matrix.python }} python -m cibuildwheel
         --output-dir wheelhouse

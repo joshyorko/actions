@@ -57,6 +57,25 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     ]
     assert all("-devmode" not in row["name"] for row in wheel_matrix["include"])
 
+    wheel_steps = workflow["jobs"]["build-wheels"]["steps"]
+    deployment_target_steps = [
+        step
+        for step in wheel_steps
+        if step.get("name") == "Set macOS deployment target"
+    ]
+    assert deployment_target_steps == [
+        {
+            "name": "Set macOS deployment target",
+            "if": "${{ matrix.name == 'macos' }}",
+            "run": "echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> \"$GITHUB_ENV\"",
+        }
+    ]
+    assert all(
+        "MACOSX_DEPLOYMENT_TARGET" not in step.get("run", "")
+        for step in wheel_steps
+        if step.get("name") != "Set macOS deployment target"
+    )
+
     publish_job = re.search(r"(?ms)^  publish:\n.*", pypi)
     assert publish_job
     assert "poetry build" not in publish_job.group()

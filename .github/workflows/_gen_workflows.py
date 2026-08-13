@@ -686,6 +686,13 @@ rm src/actions/server/bin/rcc* -f
     def build_wheels_steps(self):
         steps = self.common_build_steps()
         steps.append(self.install_devutils(additional_packages=["cibuildwheel==2.23.1"]))
+        steps.append(
+            {
+                "name": "Set macOS deployment target",
+                "if": "${{ matrix.name == 'macos' }}",
+                "run": "echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> \"$GITHUB_ENV\"",
+            }
+        )
         steps.append(self.build_manylinux_wheels())
         steps.append(self.upload_artifact_manylinux_wheels())
         return steps

@@ -45,6 +45,9 @@ tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
 and the committed lock remain authoritative; cibuildwheel 2.23.1 must clean-test
 each wheel with `python -m pip check` and `python -m actions.server version`.
+The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
+before cibuildwheel; Linux and Windows rows do not receive that platform-specific
+environment setup.
 One final `pypi` job downloads the exact artifacts, rejects duplicate or
 unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches `poetry version
