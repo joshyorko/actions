@@ -228,38 +228,20 @@ class ActionServerProcess:
 
     @asynccontextmanager
     async def mcp_client(
-        self, connection_mode: Literal["mcp", "sse"], headers: Optional[dict] = None
+        self, headers: Optional[dict] = None
     ) -> AsyncGenerator[ClientSession, None]:
-        """
-        Returns a client that can be used to interact with the MCP server.
-
-        Example:
-        ```python
-        async with client.mcp_client("mcp") as session:
-            tools_list = await session.list_tools()
-            print(tools_list)
-        ```
-        """
-
-        from mcp.client.sse import sse_client
+        """Return a modern stateless `/mcp` client session."""
+        import httpx2
         from mcp.client.streamable_http import streamable_http_client
 
-        client_protocol: Any
-        if connection_mode == "mcp":
-            client_protocol = streamable_http_client
-        else:
-            assert connection_mode == "sse"
-            client_protocol = sse_client
-
-        port = self.port
-
-        async with client_protocol(
-            f"http://localhost:{port}/{connection_mode}", headers=(headers or {})
-        ) as connection_info:
-            read_stream, write_stream = connection_info[:2]
-            async with ClientSession(read_stream, write_stream) as session:
-                await session.initialize()
-                yield session
+        async with httpx2.AsyncClient(headers=headers) as http_client:
+            async with streamable_http_client(
+                f"http://localhost:{self.port}/mcp", http_client=http_client
+            ) as connection_info:
+                read_stream, write_stream = connection_info[:2]
+                async with ClientSession(read_stream, write_stream) as session:
+                    await session.discover()
+                    yield session
 
 
 class ActionServerClient:

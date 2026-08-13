@@ -36,7 +36,7 @@ def calculator_sum(v1: float, v2: float) -> float:
     assert float(found) == 1.0 + 2.0
 
     async def check_mcp_tools():
-        async with action_server_process.mcp_client("mcp") as mcp_session:
+        async with action_server_process.mcp_client() as mcp_session:
             tools_result = await mcp_session.list_tools()
             tools_list = tools_result.tools
             assert len(tools_list) == 1
@@ -67,7 +67,7 @@ def calculator_subtract(v1: float, v2: float) -> float:
     wait_for_non_error_condition(check_reloaded)
 
     async def check_mcp_tools_after_reload():
-        async with action_server_process.mcp_client("mcp") as mcp_session:
+        async with action_server_process.mcp_client() as mcp_session:
             tools_result = await mcp_session.list_tools()
             tools_list = tools_result.tools
             assert len(tools_list) == 1, "Expected 1 tool. Found: " + str(tools_list)

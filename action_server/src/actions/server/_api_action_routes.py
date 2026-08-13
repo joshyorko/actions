@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import params
+from fastapi import FastAPI, params
 from starlette.authentication import AuthCredentials, AuthenticationBackend, BaseUser
 from starlette.middleware import Middleware
 from starlette.requests import HTTPConnection
@@ -134,7 +134,9 @@ class _ActionRoutes:
     def _setup_mcp_streamable_route(
         self, app: _CustomFastAPI, middleware: list[Middleware]
     ):
-        from starlette.routing import Mount
+        from contextlib import asynccontextmanager
+
+        from starlette.routing import Route
 
         self.streamable_http_server = self.mcp_server_setup_helper.server.streamable_http_app(
             streamable_http_path="/mcp",
@@ -148,7 +150,18 @@ class _ActionRoutes:
                 AuthenticationMiddleware,
                 backend=APIKeyAuthBackend(api_key=self._api_key),
             )
-        app.mount("", self.streamable_http_server)
+        @asynccontextmanager
+        async def _mcp_lifespan(_main_app: FastAPI):
+            async with self.streamable_http_server.router.lifespan_context(
+                self.streamable_http_server
+            ):
+                yield
+
+        app.custom_lifespan.register(_mcp_lifespan)
+        mcp_route = self.streamable_http_server.routes[0]
+        app.router.routes.append(
+            Route("/mcp", endpoint=mcp_route.endpoint, methods=["GET", "POST", "DELETE"])
+        )
 
     def register_actions(self) -> None:
         import json
