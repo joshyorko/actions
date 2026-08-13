@@ -215,10 +215,15 @@ jobs:
         if [[ "$tag_version" != "$package_version" ]]; then printf ''tag version %s
         does not match package version %s\n'' "$tag_version" "$package_version" >&2;
         exit 1; fi'
-    - name: Download exact Runtime artifacts
+    - name: Download sdist artifact
       uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
       with:
-        pattern: action-server-*
+        name: action-server-dist
+        path: action_server/dist
+    - name: Download wheel artifacts
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      with:
+        pattern: '*-wheels'
         path: action_server/dist
         merge-multiple: true
     - name: Verify exact Runtime artifact inventory
@@ -236,18 +241,39 @@ jobs:
         -eq 1
 
         test "$(grep -Ec ''^actions_runtime-.*-cp(312|313)-.*\.whl$'' /tmp/runtime-artifacts)"
-        -eq 6'
+        -eq 6
+
+        test "$(grep -Ec ''^actions_runtime-.*manylinux.*x86_64.*\.whl$'' /tmp/runtime-artifacts)"
+        -eq 2
+
+        test "$(grep -Ec ''^actions_runtime-.*macosx.*arm64.*\.whl$'' /tmp/runtime-artifacts)"
+        -eq 2
+
+        test "$(grep -Ec ''^actions_runtime-.*win_amd64.*\.whl$'' /tmp/runtime-artifacts)"
+        -eq 2'
     - name: Install Twine 6.2.0
       run: uv run --no-project --python ${{ matrix.python }} python -m pip install
         --break-system-packages twine==6.2.0
     - name: Verify Runtime artifacts
       run: uv run --no-project --python ${{ matrix.python }} twine check --strict
         action_server/dist/*
+    - name: 'Upload artifact: action_server/dist/*'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: actions-runtime-dist
+        path: action_server/dist/*
+    - name: Check Runtime publish credential
+      id: runtime-token
+      env:
+        RUNTIME_TOKEN: ${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}
+      run: if [[ -n "${RUNTIME_TOKEN:-}" ]]; then echo 'enabled=true' >> "$GITHUB_OUTPUT";
+        else echo 'enabled=false' >> "$GITHUB_OUTPUT"; fi
     - name: Publish verified artifacts
+      if: steps.runtime-token.outputs.enabled == 'true'
       run: uv run --no-project --python ${{ matrix.python }} twine upload action_server/dist/*
       env:
         TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}
+        TWINE_PASSWORD: ${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}
 
 
 # Important!!

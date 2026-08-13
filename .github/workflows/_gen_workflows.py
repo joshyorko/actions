@@ -672,17 +672,20 @@ rm src/actions/server/bin/rcc* -f
 
     def publish_steps(self):
         provenance = "set -Eeuo pipefail\ngit fetch origin community\ngit merge-base --is-ancestor \"$GITHUB_SHA\" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(poetry version --short)\nif [[ \"$tag_version\" != \"$package_version\" ]]; then printf 'tag version %s does not match package version %s\\n' \"$tag_version\" \"$package_version\" >&2; exit 1; fi"
-        inventory = "set -Eeuo pipefail\ncd action_server\ntest \"$(find dist -maxdepth 1 -type f | wc -l)\" -eq 7\nfind dist -maxdepth 1 -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts\ntest \"$(uniq -d /tmp/runtime-artifacts | wc -l)\" -eq 0\ntest \"$(grep -Ec '^actions_runtime-[0-9].*\\.tar\\.gz$' /tmp/runtime-artifacts)\" -eq 1\ntest \"$(grep -Ec '^actions_runtime-.*-cp(312|313)-.*\\.whl$' /tmp/runtime-artifacts)\" -eq 6"
+        inventory = "set -Eeuo pipefail\ncd action_server\ntest \"$(find dist -maxdepth 1 -type f | wc -l)\" -eq 7\nfind dist -maxdepth 1 -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts\ntest \"$(uniq -d /tmp/runtime-artifacts | wc -l)\" -eq 0\ntest \"$(grep -Ec '^actions_runtime-[0-9].*\\.tar\\.gz$' /tmp/runtime-artifacts)\" -eq 1\ntest \"$(grep -Ec '^actions_runtime-.*-cp(312|313)-.*\\.whl$' /tmp/runtime-artifacts)\" -eq 6\ntest \"$(grep -Ec '^actions_runtime-.*manylinux.*x86_64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2\ntest \"$(grep -Ec '^actions_runtime-.*macosx.*arm64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2\ntest \"$(grep -Ec '^actions_runtime-.*win_amd64.*\\.whl$' /tmp/runtime-artifacts)\" -eq 2"
         return [
             self.checkout_repo(pinned=True),
             *self.setup_python(pinned=True),
             self.install_devutils(),
             {"name": "Verify merged tag provenance and version", "run": provenance},
-            {"name": "Download exact Runtime artifacts", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"pattern": "action-server-*", "path": "action_server/dist", "merge-multiple": True}},
+            {"name": "Download sdist artifact", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"name": "action-server-dist", "path": "action_server/dist"}},
+            {"name": "Download wheel artifacts", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"pattern": "*-wheels", "path": "action_server/dist", "merge-multiple": True}},
             {"name": "Verify exact Runtime artifact inventory", "run": inventory},
             {"name": "Install Twine 6.2.0", "run": f"{run_in_env}python -m pip install --break-system-packages twine==6.2.0"},
             {"name": "Verify Runtime artifacts", "run": f"{run_in_env}twine check --strict action_server/dist/*"},
-            {"name": "Publish verified artifacts", "run": f"{run_in_env}twine upload action_server/dist/*", "env": {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"}},
+            self.upload_artifact(name="actions-runtime-dist", path="action_server/dist/*", pinned=True),
+            {"name": "Check Runtime publish credential", "id": "runtime-token", "env": {"RUNTIME_TOKEN": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"}, "run": "if [[ -n \"${RUNTIME_TOKEN:-}\" ]]; then echo 'enabled=true' >> \"$GITHUB_OUTPUT\"; else echo 'enabled=false' >> \"$GITHUB_OUTPUT\"; fi"},
+            {"name": "Publish verified artifacts", "if": "steps.runtime-token.outputs.enabled == 'true'", "run": f"{run_in_env}twine upload action_server/dist/*", "env": {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": "${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}"}},
         ]
 
     @override
@@ -1040,84 +1043,6 @@ fi
         )
 
         return ret
-
-
-class ActionServerManylinuxRelease(BaseWorkflow):
-    name = "Action Server MANYLINUX Release"
-    target = "actions_runtime_manylinux_release.yml"
-    project_name = "action_server"
-    fail_fast = True
-
-    @override
-    def on_part(self, dep_paths):
-        return {
-            "on": {
-                "push": {
-                    "tags": ["actions-runtime-*"],
-                    "branches": ["*-beta"],
-                },
-            }
-        }
-
-    @override
-    def runs_on_and_strategy_part(self):
-        return {
-            "runs-on": "${{ matrix.os }}",
-            "strategy": {
-                "fail-fast": self.fail_fast,
-                "matrix": self.matrix_cibuildwheel(self.minimum_python_version),
-            },
-        }
-
-    def build_manylinux_wheels(self):
-        CIBW_BUILD = "cp312-*macos*arm64 "
-        CIBW_BUILD += "cp313-*macos*arm64 "
-        CIBW_BUILD += "cp312-*manylinux*x86_64 "
-        CIBW_BUILD += "cp313-*manylinux*x86_64 "
-        CIBW_BUILD += "cp312-*win*amd64 "
-        CIBW_BUILD += "cp313-*win*amd64"
-        return {
-            "name": "Build wheels",
-            "run": f"{run_in_env} python -m cibuildwheel --output-dir wheelhouse",
-            "env": {
-                "CIBW_SKIP": "pp*",
-                "CIBW_BUILD": CIBW_BUILD,
-                "CIBW_BUILD_VERBOSITY": 1,
-            },
-        }
-
-    def upload_artifact_manylinux_wheels(self):
-        return self.upload_artifact(
-            name="${{ runner.os }}-wheels", path="action_server/wheelhouse/*"
-        )
-
-    def upload_wheels_to_pypi(self):
-        return {
-            "name": "Upload to PyPI .whl",
-            "run": f"{run_in_env}twine upload wheelhouse/*.whl",
-            "if": NOT_BETA_IF_CLAUSE,
-            "env": {
-                "TWINE_USERNAME": "__token__",
-                "TWINE_PASSWORD": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}",
-            },
-        }
-
-    @override
-    def build_steps(self) -> list[dict]:
-        steps = [self.checkout_repo()]
-        steps.extend(self.setup_python())
-        steps.append(
-            self.install_devutils(additional_packages=["cibuildwheel==2.23.1", "twine"])
-        )
-        steps.extend(self.install(env={"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "true"}))
-        steps.append(self.check_tag_version())
-        steps.append(self.setup_node())
-        steps.append(self.build_frontend())
-        steps.append(self.build_oauth2_config())
-        steps.append(self.build_manylinux_wheels())
-        steps.append(self.upload_artifact_manylinux_wheels())
-        steps.append(self.upload_wheels_to_pypi())
-        return steps
 
 
 class ActionsTests(BaseTests):

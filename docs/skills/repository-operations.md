@@ -48,7 +48,10 @@ each wheel with `python -m pip check` and `python -m actions.server version`.
 One final `pypi` job downloads the exact artifacts, rejects duplicate or
 unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches `poetry version
---short`, then uploads the downloaded files once. Binary release names use
+--short`, then retains that verified directory as `actions-runtime-dist`. The
+workflow publishes the same set once when the Runtime secret is configured;
+without it, verification and retention remain green for local publication with
+the approved `PYPI` value from the local `.env`. Binary release names use
 GitHub expressions containing `${{ github.ref_name }}`; shell literals such as
 `$tag-linux64` are not valid action inputs.
 
