@@ -132,12 +132,17 @@ requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.
 
 The shared PostgreSQL adapter translates only unquoted `?` parameter markers;
 SQL literals, quoted identifiers, comments, dollar-quoted bodies, escaped
-markers, and JSON operators remain unchanged, and marker/value counts are
-validated before execution. PostgreSQL model DDL uses native `BOOLEAN` while
+markers, JSON operators (`?`, `?|`, `?&`), and bound array expressions remain
+unchanged, and marker/value counts are validated before execution. Database
+settings reject malformed or unsupported URL schemes without logging the URL;
+plain paths remain SQLite and `postgres://` is normalized to PostgreSQL.
+PostgreSQL model DDL uses native `BOOLEAN` while
 SQLite retains integer booleans. PostgreSQL schema inspection reads
 `information_schema` and `pg_index`, and analytics uses explicit PostgreSQL
-timestamp/date expressions. The Action Server PyInstaller spec explicitly
-collects `psycopg`, `psycopg_binary`, and its native libraries.
+timestamp/date expressions. SQLite migration version 11 reconciles legacy
+schedule/trigger/run index names before parity is checked. The Action Server
+PyInstaller spec explicitly collects `uvicorn`, `psycopg`, `psycopg_binary`,
+and its native libraries.
 
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 

@@ -41,6 +41,8 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     9: "add_robot_run_columns",
     # we'll look for a 'migration_add_schedules' module based on this.
     10: "add_schedules",
+    # we'll look for a 'migration_reconcile_schema' module based on this.
+    11: "reconcile_schema",
 }
 
 CURRENT_VERSION: int = max(MIGRATION_ID_TO_NAME.keys())
@@ -71,9 +73,10 @@ def migrate_db(
 
     :param database: Expected to be passed when dealing with an in-memory database.
     """
-    is_postgresql = isinstance(db_path, str) and db_path.startswith(
-        ("postgresql://", "postgres://")
-    )
+    from actions.server._database import normalize_database_url
+
+    db_path = normalize_database_url(db_path)
+    is_postgresql = isinstance(db_path, str) and db_path.startswith("postgresql://")
     if not is_postgresql:
         assert os.path.exists(
             db_path
@@ -181,9 +184,10 @@ def db_migration_status(db_path: Union[Path, str]) -> MigrationStatus:
     if db_path == ":memory:":
         raise RuntimeError("Migration support not available for in-memory database.")
 
-    is_postgresql = isinstance(db_path, str) and db_path.startswith(
-        ("postgresql://", "postgres://")
-    )
+    from actions.server._database import normalize_database_url
+
+    db_path = normalize_database_url(db_path)
+    is_postgresql = isinstance(db_path, str) and db_path.startswith("postgresql://")
     path = Path(db_path) if not is_postgresql else None
     if path is not None and not path.exists():
         raise RuntimeError(

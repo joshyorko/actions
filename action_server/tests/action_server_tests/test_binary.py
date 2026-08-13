@@ -35,6 +35,12 @@ def test_binary_spec_collects_postgresql_runtime_modules():
     assert 'collect_dynamic_libs("psycopg_binary")' in spec
 
 
+def test_binary_spec_collects_runtime_server_module():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert '"uvicorn",' in spec
+
+
 def test_binary_build():
     import os
     import shutil

@@ -87,6 +87,7 @@ a = Analysis(
         *action_server_hiddenimports,
         *redis_hiddenimports,
         *psycopg_hiddenimports,
+        "uvicorn",
         "termcolor",
         "pydantic.deprecated.decorator",
     ],

@@ -22,6 +22,7 @@ from typing import (
     Union,
     cast,
 )
+from urllib.parse import urlsplit
 
 log = logging.getLogger(__name__)
 
@@ -72,6 +73,25 @@ class DBRules:
         self.foreign_keys: Set[str] = set()
 
 
+def normalize_database_url(value: Union[Path, str]) -> Union[Path, str]:
+    if not isinstance(value, str):
+        return value
+
+    try:
+        parsed = urlsplit(value)
+    except ValueError as exc:
+        raise ValueError("Invalid database URL") from exc
+    if parsed.scheme in {"postgresql", "postgres"}:
+        if not parsed.netloc or not parsed.hostname:
+            raise ValueError("Invalid PostgreSQL database URL")
+        if parsed.scheme == "postgres":
+            return "postgresql://" + value.split("://", 1)[1]
+        return value
+    if parsed.scheme:
+        raise ValueError("Unsupported database URL; only PostgreSQL URLs are supported")
+    return value
+
+
 class Database:
     """
     Some notes:
@@ -94,7 +114,10 @@ class Database:
 
             self._db_path = get_settings().datadir / "server.db"
         else:
-            self._db_path = db_path if self._is_postgresql_url(db_path) else Path(db_path)
+            normalized = normalize_database_url(db_path)
+            self._db_path = (
+                normalized if self._is_postgresql_url(normalized) else Path(normalized)
+            )
 
         self._backend_name = (
             "postgresql" if isinstance(self._db_path, str) else "sqlite"
@@ -673,9 +696,8 @@ ORDER BY table_name, index_name, sequence_in_index;
                 elif char == "?" and (not next_char or next_char not in "|&"):
                     previous = next((x for x in reversed(adapted) if not x.isspace()), "")
                     following = next((x for x in sql[i + 1 :] if not x.isspace()), "")
-                    is_json_operator = (
-                        (previous.isalnum() or previous in ")]}'\"")
-                        and following in "'\""
+                    is_json_operator = (previous.isalnum() or previous in ")]}'\"") and (
+                        following in "'\"?"
                     )
                     if not is_json_operator and (i == 0 or sql[i - 1] != "\\"):
                         adapted.append("%s")

@@ -21,6 +21,24 @@ def test_database_selects_postgres_for_explicit_url():
     assert db.backend_name == "postgresql"
 
 
+@pytest.mark.parametrize(
+    "value", ["mysql://localhost/actions_test", "example://db", "postgresql://[bad"]
+)
+def test_database_rejects_unsupported_url_schemes(value):
+    with pytest.raises(ValueError) as error:
+        Database(value)
+
+    assert "localhost" not in str(error.value)
+    assert "bad" not in str(error.value)
+
+
+def test_database_rejects_malformed_postgresql_url_without_exposing_credentials():
+    with pytest.raises(ValueError, match="Invalid PostgreSQL database URL") as error:
+        Database("postgresql://user:secret@")
+
+    assert "secret" not in str(error.value)
+
+
 def test_cli_accepts_explicit_shared_database_url():
     from actions.server._cli_impl import _create_parser
 
@@ -44,6 +62,37 @@ def test_postgresql_placeholder_adapter_only_rewrites_parameters():
 
     with pytest.raises(DBError, match="expected 2 parameters, got 1"):
         db._adapt_sql(sql, ["only-one"])
+
+
+def test_postgresql_placeholder_adapter_preserves_json_operators_and_array_rhs():
+    db = Database("postgresql://localhost/actions_test")
+
+    assert db._adapt_sql("payload ? ? AND payload ?| ? AND payload ?& ?", [1, 2, 3]) == (
+        "payload ? %s AND payload ?| %s AND payload ?& %s"
+    )
+    assert db._adapt_sql("? = ANY(?)", ["key", ["key", "other"]]) == "%s = ANY(%s)"
+
+
+@pytest.mark.integration_test
+@pytest.mark.postgresql
+def test_postgresql_bound_json_operators_and_array_rhs_execute():
+    url = os.environ.get("ACTIONS_TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("ACTIONS_TEST_DATABASE_URL is not configured")
+
+    db = Database(url)
+    with db.connect():
+        db.execute("CREATE TEMP TABLE json_operator_probe (payload JSONB)")
+        db.execute(
+            "INSERT INTO json_operator_probe VALUES (?::jsonb)",
+            ['{"key": "value"}'],
+        )
+        assert db.execute(
+            "SELECT payload ? ? FROM json_operator_probe", ["key"]
+        ).fetchone()[0]
+        assert db.execute(
+            "SELECT ? = ANY(?)", ["key", ["other", "key"]]
+        ).fetchone()[0]
 
 
 def test_postgresql_boolean_schema_uses_native_boolean_without_changing_sqlite():

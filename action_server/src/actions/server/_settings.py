@@ -405,6 +405,10 @@ class Settings:
             settings.db_file = args.db_file
         if not settings.database_url:
             settings.database_url = os.environ.get("ACTION_SERVER_DATABASE_URL")
+        if settings.database_url:
+            from ._database import normalize_database_url
+
+            settings.database_url = str(normalize_database_url(settings.database_url))
 
         if args.command == "start":
             # At this point, if using a self-signed certificate, it'll be
