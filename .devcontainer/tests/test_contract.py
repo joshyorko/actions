@@ -117,7 +117,7 @@ class DevContainerContractTest(unittest.TestCase):
         project = pyproject["project"]
 
         self.assertEqual(project["name"], "actions-work-items")
-        self.assertEqual(project["version"], "0.4.0")
+        self.assertEqual(project["version"], "0.4.4")
         self.assertEqual(project["requires-python"], ">=3.10,<4.0")
         self.assertEqual(
             project["urls"],
@@ -134,7 +134,8 @@ class DevContainerContractTest(unittest.TestCase):
                 "redis": ["redis>=4.5.0"],
                 "docdb": ["pymongo>=4.3.0"],
                 "documentdb": ["pymongo>=4.3.0"],
-                "all": ["redis>=4.5.0", "pymongo>=4.3.0"],
+                "yorko": ["requests>=2.31.0"],
+                "all": ["redis>=4.5.0", "pymongo>=4.3.0", "requests>=2.31.0"],
             },
         )
         self.assertEqual(
@@ -147,7 +148,7 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("twine", pyproject["tool"]["poetry"]["group"]["dev"]["dependencies"])
 
         init_path = REPOSITORY_ROOT / "work-items" / "src" / "actions" / "work_items" / "__init__.py"
-        self.assertIn('__version__ = "0.4.0"', init_path.read_text())
+        self.assertIn('__version__ = "0.4.4"', init_path.read_text())
 
     def test_work_items_pypi_documentation_contract(self):
         readme = (REPOSITORY_ROOT / "work-items" / "README.md").read_text()
@@ -173,7 +174,7 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("workitems.outputs.create(payload=None, files=None, save=True)", readme)
         payload = readme[readme.index("## Payloads") : readme.index("## Files")]
         self.assertNotIn("ExceptionType", payload)
-        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.4.0 - 2026-08-07"))
+        self.assertTrue(changelog.startswith("# Changelog\n\n## 0.4.4 - 2026-08-13"))
 
     def test_work_items_release_workflow_contract(self):
         workflow = (

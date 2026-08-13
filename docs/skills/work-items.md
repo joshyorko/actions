@@ -70,8 +70,8 @@ Do not enable setup-python's Poetry cache before Poetry is installed: the cache 
 
 Publication is tag-only: the `publish` job requires successful verification, accepts only `refs/tags/actions-work-items-*`, fetches `origin/community`, proves that the tagged commit is an ancestor of that branch, compares the tag suffix with `poetry version --short`, downloads `actions-work-items-dist` to `work-items/dist`, and publishes those exact artifacts with `PYPI_TOKEN_ACTIONS_WORK_ITEMS`. The publish job must not rely on package-development commands such as Invoke unless they are locked runtime dependencies. It has no manual version input and does not use OIDC.
 
-For 0.4.1, merge the verified pull request into `community`, then create
-`actions-work-items-0.4.1` on that exact merged commit. Never move or reuse an
+For 0.4.4, merge the verified pull request into `community`, then create
+`actions-work-items-0.4.4` on that exact merged commit. Never move or reuse an
 accepted artifact or release tag.
 
 The `pypi` environment is a workflow reference only. Its approval and protection rules are external GitHub configuration and must be created and enforced there before they are relied upon.

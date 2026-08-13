@@ -5,7 +5,6 @@ from pathlib import Path
 
 import tomlkit
 
-
 ROOT = Path(__file__).parents[2]
 
 

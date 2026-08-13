@@ -4,9 +4,7 @@ from typing import Optional
 
 if typing.TYPE_CHECKING:
     # Don't add to public API here.
-    from actions._customization._plugin_manager import (
-        PluginManager as _PluginManager,
-    )
+    from actions._customization._plugin_manager import PluginManager as _PluginManager
 
 
 if sys.platform == "win32":

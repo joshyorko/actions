@@ -376,10 +376,7 @@ def run(
     )
     from actions._interrupts import interrupt_on_timeout
     from actions._log_auto_setup import setup_cli_auto_logging
-    from actions._log_output_setup import (
-        setup_log_output,
-        setup_log_output_to_port,
-    )
+    from actions._log_output_setup import setup_log_output, setup_log_output_to_port
     from actions._protocols import Status
 
     if not output_dir:
@@ -795,9 +792,7 @@ def _validate_and_convert_kwargs(
     from typing import get_type_hints
 
     from actions._exceptions import InvalidArgumentsError
-    from actions._variables_scope import (
-        create_validate_and_convert_kwargs_scope,
-    )
+    from actions._variables_scope import create_validate_and_convert_kwargs_scope
 
     target_method = action.method
     sig = inspect.signature(target_method)
@@ -833,9 +828,7 @@ def _validate_and_convert_kwargs(
                 if param_type not in SUPPORTED_TYPES_IN_SCHEMA:
                     model_validate = getattr(param_type, "model_validate", None)
                     if model_validate is None:
-                        from actions._raw_types_handler import (
-                            _obtain_raw_types_handler,
-                        )
+                        from actions._raw_types_handler import _obtain_raw_types_handler
 
                         try:
                             model_validate = _obtain_raw_types_handler(

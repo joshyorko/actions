@@ -21,7 +21,7 @@ Entry point for running actions from actions-core.
 **Returns:**
 The exit code for the process.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/cli.py#L20)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/cli.py#L18)
 
 ```python
 main(

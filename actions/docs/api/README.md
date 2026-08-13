@@ -4,11 +4,12 @@
 
 ## Modules
 
-- [`actions`](./actions.md#module-actions): Actions Core enables running your AI actions in the Actions Runtime.
+- [`actions`](./actions.md#module-actions): Sema4.ai Actions enables running your AI actions in the Sema4.ai Action Server.
 - [`actions.agent`](./actions.agent.md#module-actionsagent)
 - [`actions.api`](./actions.api.md#module-actionsapi): This module contains the public API for the actions.
 - [`actions.chat`](./actions.chat.md#module-actionschat)
 - [`actions.cli`](./actions.cli.md#module-actionscli)
+- [`actions.mcp`](./actions.mcp.md#module-actionsmcp): Sema4.ai MCP (Model Context Protocol) bindings for Python.
 
 ## Classes
 
@@ -81,3 +82,6 @@
 - [`chat.get_text`](./actions.chat.md#function-get_text): Get the text content of a file in the current action chat.
 - [`chat.list_files`](./actions.chat.md#function-list_files): Lists all files in the current chat thread.
 - [`cli.main`](./actions.cli.md#function-main): Entry point for running actions from actions-core.
+- [`mcp.prompt`](./actions.mcp.md#function-prompt): Decorator for functions that generate prompts for the LLM.
+- [`mcp.resource`](./actions.mcp.md#function-resource): Decorator for resources which provide data to the LLM.
+- [`mcp.tool`](./actions.mcp.md#function-tool): Decorator for tools which can be used by AI agents to perform actions.

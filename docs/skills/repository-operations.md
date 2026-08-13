@@ -47,6 +47,8 @@ published `sema4ai-actions`/`sema4ai-mcp` graph until the Runtime PR lands.
 Local dependency substitution must therefore map explicit distribution names
 to repository directories and must not redirect `sema4ai-actions` to the new
 `actions-core` source tree.
+Core verification must unset inherited `VIRTUAL_ENV` and select the requested
+matrix interpreter explicitly before invoking Poetry.
 
 ## Evidence Ladder
 

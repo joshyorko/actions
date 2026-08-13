@@ -121,17 +121,17 @@ def generate_ticket_summary(ticket_id: str) -> str:
     ticket_data = get_ticket_details(ticket_id)
     return f"""
     Please provide a concise summary of the following ticket:
-    
+
     Ticket ID: {ticket_data.id}
     Title: {ticket_data.title}
     Priority: {ticket_data.priority}
     Status: {ticket_data.status}
     Created At: {ticket_data.created_at}
     Assigned To: {ticket_data.assigned_to or 'Unassigned'}
-    
+
     Description:
     {ticket_data.description}
-    
+
     Please summarize the key points and suggest next steps.
     """
 
