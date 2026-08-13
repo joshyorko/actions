@@ -1,5 +1,6 @@
 import asyncio
 import json
+import logging
 import uuid
 
 from actions.server.mcp.gateway_metadata import (
@@ -137,9 +138,9 @@ def test_accepts_mcp_v2_and_future_method_names_without_a_finite_allowlist():
 
 
 def test_extracts_named_resource_and_prompt_from_validated_params():
-    for method, params, name in (
-        ("resources/read", {"uri": "resource://greet"}, "resource://greet"),
-        ("prompts/get", {"name": "friendly"}, "friendly"),
+    for method, params, name, expected_name in (
+        ("resources/read", {"uri": "resource://greet"}, "resource://greet", "resource"),
+        ("prompts/get", {"name": "friendly"}, "friendly", "friendly"),
     ):
         seen, _ = asyncio.run(
             _run(
@@ -148,7 +149,7 @@ def test_extracts_named_resource_and_prompt_from_validated_params():
             )
         )
         metadata = seen["state"][MCP_REQUEST_STATE_KEY]
-        assert (metadata.method, metadata.name) == (method, name)
+        assert (metadata.method, metadata.name) == (method, expected_name)
 
 
 def test_batch_metadata_is_bounded_and_notifications_are_supported():
@@ -567,6 +568,79 @@ def test_resource_telemetry_redacts_opaque_and_sensitive_identifiers():
         assert len(metadata.name) <= 128
         for sentinel in sentinels:
             assert sentinel not in emitted
+
+
+def test_resource_telemetry_never_emits_authorities_or_uri_payloads(caplog):
+    cases = (
+        (
+            "resource://0123456789abcdef0123456789abcdef",
+            "0123456789abcdef0123456789abcdef",
+        ),
+        (
+            "https://example.test/550e8400-e29b-41d4-a716-446655440000",
+            "550e8400-e29b-41d4-a716-446655440000",
+        ),
+        (
+            "resource://abcdef0123456789abcdef0123456789abcdef0123456789",
+            "abcdef0123456789abcdef0123456789abcdef0123456789",
+        ),
+        ("resource://QWxhZGRpbjpvcGVuIHNlc2FtZQ", "QWxhZGRpbjpvcGVuIHNlc2FtZQ"),
+        ("resource://example.test/%2Fsecret", "%2Fsecret"),
+        ("RESOURCE://MixedCaseAuthority", "MixedCaseAuthority"),
+        ("resource://例え.テスト/秘密", "例え.テスト"),
+        ("resource://example.test/control\x01value", "control"),
+        ("resource://example.test/readable/path", "example.test"),
+        ("mailto:alice@example.test", "alice@example.test"),
+        ("data:text/plain,embedded-secret", "embedded-secret"),
+        ("urn:example:animal:ferret:nose", "animal:ferret:nose"),
+        ("custom://opaque.example/payload", "opaque.example"),
+        ("https://user:password@example.test/private", "password"),
+        (
+            "https://example.test/private?token=query-secret#fragment-secret",
+            "query-secret",
+        ),
+    )
+
+    outputs = set()
+    for raw_uri, sentinel in cases:
+        records = []
+        caplog.clear()
+
+        def observe(observation):
+            records.append(observation)
+            logging.getLogger("test.resource.telemetry").info(
+                "observed %s", observation.telemetry_attributes
+            )
+
+        with caplog.at_level(logging.INFO, logger="test.resource.telemetry"):
+            seen, sent = asyncio.run(
+                _run(
+                    {
+                        "jsonrpc": "2.0",
+                        "id": 1,
+                        "method": "resources/read",
+                        "params": {"uri": raw_uri},
+                    },
+                    {MCP_METHOD_HEADER: "resources/read"},
+                    request_observer=observe,
+                )
+            )
+
+        metadata = seen["state"][MCP_REQUEST_STATE_KEY]
+        outputs.add(metadata.name)
+        emitted = " ".join(
+            [
+                repr(metadata),
+                repr(metadata.telemetry_attributes),
+                repr(records[0].telemetry_attributes),
+                caplog.text,
+            ]
+        )
+        assert sent[0]["status"] == 204
+        assert sentinel not in emitted
+
+    assert outputs <= {"resource", "http", "https", "<redacted>"}
+    assert len(outputs) <= 4
 
 
 def test_observer_exceptions_are_non_fatal_and_do_not_emit_request_data(caplog):

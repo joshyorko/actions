@@ -55,10 +55,11 @@ Trusted metadata is available through
 `scope["state"]["actions.mcp.request_metadata"]`, `get_mcp_request_metadata()`,
 and the completion observer, with bounded method, finite method-class,
 sanitized name, status, latency, and correlation attributes. Resource telemetry
-uses only the explicit `http`, `https`, and `resource` scheme classes; opaque
-schemes, userinfo, credentials, query, fragments, token-looking paths, and
-otherwise unprovable URI content become a bounded redaction or scheme sentinel
-before logging. Header names are
+uses only the explicit `http`, `https`, and `resource` scheme classes; it never
+emits a resource URI authority, host, path, or payload. Opaque schemes, userinfo,
+credentials, query, fragments, percent-encoded content, non-ASCII/control
+content, invalid hosts, and otherwise unprovable URI content become the constant
+`<redacted>` class before logging. Header names are
 case-insensitive, selected values are exact with no surrounding whitespace, and
 duplicate identity/correlation headers return HTTP 400. Missing identity headers
 are normalized from the body; mismatches are rejected. `X-Request-ID` is

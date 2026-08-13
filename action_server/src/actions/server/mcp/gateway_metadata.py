@@ -38,20 +38,6 @@ _MAX_LATENCY_MS = 24 * 60 * 60 * 1000
 _LOGGER = logging.getLogger(__name__)
 _REDACTED_IDENTIFIER = "<redacted>"
 _SAFE_RESOURCE_SCHEMES = frozenset({"http", "https", "resource"})
-_SENSITIVE_IDENTIFIER_MARKERS = frozenset(
-    {
-        "access",
-        "api",
-        "auth",
-        "credential",
-        "key",
-        "password",
-        "secret",
-        "sig",
-        "token",
-    }
-)
-
 _RESOURCE_METHODS = frozenset(
     {"resources/read", "resources/subscribe", "resources/unsubscribe"}
 )
@@ -280,40 +266,30 @@ def _sanitize_resource_identifier(value: str) -> str:
     try:
         parsed = urlsplit(value)
         scheme = parsed.scheme.lower()
-        if scheme not in _SAFE_RESOURCE_SCHEMES or not parsed.netloc:
+        if (
+            scheme not in _SAFE_RESOURCE_SCHEMES
+            or not parsed.netloc
+            or any(
+                ord(character) < 0x20 or ord(character) == 0x7F for character in value
+            )
+            or "%" in value
+            or parsed.query
+            or parsed.fragment
+        ):
             return _REDACTED_IDENTIFIER
         if parsed.username is not None or parsed.password is not None:
             return _REDACTED_IDENTIFIER
         host = parsed.hostname or ""
-        if (
-            not host
-            or _looks_sensitive(host)
-            or any(
-                character
-                not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-_~"
-                for character in host
-            )
+        if not host or any(
+            character
+            not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-_~"
+            for character in host
         ):
             return _REDACTED_IDENTIFIER
-        path = parsed.path
-        if _looks_sensitive(path) or "?" in value or "#" in value:
-            return f"{scheme}://{host}" if scheme == "resource" else scheme
-        if scheme == "resource":
-            value = f"{scheme}://{host}"
-        else:
-            value = scheme
+        parsed.port
     except ValueError:
         return _REDACTED_IDENTIFIER
-    value = "".join(
-        character if ord(character) >= 0x20 and ord(character) != 0x7F else "_"
-        for character in value
-    )
-    return value[:_MAX_OBSERVATION_NAME_LENGTH]
-
-
-def _looks_sensitive(value: str) -> bool:
-    lowered = value.lower()
-    return any(marker in lowered for marker in _SENSITIVE_IDENTIFIER_MARKERS)
+    return scheme
 
 
 def _sanitize_method(value: str) -> str:
