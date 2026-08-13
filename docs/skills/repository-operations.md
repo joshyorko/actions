@@ -64,12 +64,14 @@ the script reads only `PYPI` from the process environment or ignored repo-root
 Twine's child environment. Example commands are:
 `python action_server/scripts/publish_verified_runtime.py --run-id RUN_ID
 --repo joshyorko/actions --ref actions-runtime-1.0.0 --sha MERGED_SHA --dry-run`
-and the same command with `--publish`. Run downloads resolve the canonical
-`.github/workflows/actions_runtime_pypi_release.yml` endpoint in the requested repository
-and require its immutable workflow database ID to match the selected run, in addition to
-exact SHA, tag ref, successful tag-push conclusion, the generated Runtime PyPI workflow,
-and a non-expired retained artifact before downloading. The display name is not an identity
-binding. Binary release names use GitHub expressions
+and the same command with `--publish`. Run downloads resolve the canonical workflow by the
+supported filename identifier `actions_runtime_pypi_release.yml` in the requested repository.
+The returned workflow metadata must contain a positive integer database ID and the exact
+canonical path `.github/workflows/actions_runtime_pypi_release.yml`; a returned state, when
+present, must be `active`. That immutable workflow database ID must match the selected run,
+in addition to exact SHA, tag ref, successful tag-push conclusion, the generated Runtime
+PyPI workflow, and a non-expired retained artifact before downloading. The display name is
+not an identity binding. Binary release names use GitHub expressions
 containing `${{ github.ref_name }}`; shell literals such as `$tag-linux64` are
 not valid action inputs.
 

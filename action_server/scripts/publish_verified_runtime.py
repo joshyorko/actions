@@ -39,6 +39,7 @@ class VerificationError(ValueError):
 
 
 CANONICAL_WORKFLOW_PATH = ".github/workflows/actions_runtime_pypi_release.yml"
+WORKFLOW_API_IDENTIFIER = "actions_runtime_pypi_release.yml"
 
 
 def _artifact_names(directory: Path) -> list[str]:
@@ -247,9 +248,9 @@ def canonical_workflow_id(repo: str) -> int:
             [
                 "gh",
                 "api",
-                f"repos/{repo}/actions/workflows/{CANONICAL_WORKFLOW_PATH}",
+                f"repos/{repo}/actions/workflows/{WORKFLOW_API_IDENTIFIER}",
                 "--jq",
-                "{id}",
+                "{id,path,state}",
             ],
             check=True,
             capture_output=True,
@@ -260,13 +261,19 @@ def canonical_workflow_id(repo: str) -> int:
         raise RuntimeError(
             "could not resolve the canonical Runtime PyPI workflow"
         ) from error
-    workflow_id = payload.get("id") if isinstance(payload, dict) else None
+    if not isinstance(payload, dict):
+        raise RuntimeError("canonical Runtime PyPI workflow metadata is malformed")
+    workflow_id = payload.get("id")
     if (
         isinstance(workflow_id, bool)
         or not isinstance(workflow_id, int)
         or workflow_id <= 0
     ):
         raise RuntimeError("canonical Runtime PyPI workflow has no valid database ID")
+    if payload.get("path") != CANONICAL_WORKFLOW_PATH:
+        raise RuntimeError("canonical Runtime PyPI workflow has an unexpected path")
+    if payload.get("state") is not None and payload["state"] != "active":
+        raise RuntimeError("canonical Runtime PyPI workflow is not active")
     return workflow_id
 
 

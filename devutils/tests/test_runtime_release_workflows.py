@@ -346,12 +346,15 @@ def test_runtime_publisher_rejects_fake_gh_metadata_before_download(monkeypatch)
 
     def fake_run(command, **kwargs):
         calls.append(command)
-        if command[1:3] == [
+        if command == [
+            "gh",
             "api",
-            "repos/joshyorko/actions/actions/workflows/.github/workflows/actions_runtime_pypi_release.yml",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_pypi_release.yml",
+            "--jq",
+            "{id,path,state}",
         ]:
             result = Result()
-            result.stdout = '{"id": 333870965}'
+            result.stdout = '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}'
             return result
         if command[1:3] == [
             "api",
@@ -434,11 +437,14 @@ def test_runtime_publisher_rejects_same_name_from_wrong_workflow_before_download
     def fake_run(command, **kwargs):
         calls.append(command)
         result = Result()
-        if command[1:3] == [
+        if command == [
+            "gh",
             "api",
-            "repos/joshyorko/actions/actions/workflows/.github/workflows/actions_runtime_pypi_release.yml",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_pypi_release.yml",
+            "--jq",
+            "{id,path,state}",
         ]:
-            result.stdout = '{"id": 333870965}'
+            result.stdout = '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}'
         elif command[1:3] == ["run", "view"]:
             result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":999,"event":"push","conclusion":"success"}'
         elif command[1:3] == [
@@ -470,7 +476,17 @@ def test_runtime_publisher_rejects_same_name_from_wrong_workflow_before_download
     assert all(command[1:3] != ["run", "download"] for command in calls)
 
 
-@pytest.mark.parametrize("workflow_response", ["", '{"id":"333870965"}', "{}"])
+@pytest.mark.parametrize(
+    "workflow_response",
+    [
+        "",
+        '{"id":"333870965","path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}',
+        '{"id":333870965,"state":"active"}',
+        '{"id":333870965,"path":".github/workflows/wrong.yml","state":"active"}',
+        '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"disabled"}',
+        '{"id":0,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}',
+    ],
+)
 def test_runtime_publisher_rejects_malformed_canonical_workflow_before_download(
     monkeypatch, workflow_response
 ):
@@ -483,9 +499,12 @@ def test_runtime_publisher_rejects_malformed_canonical_workflow_before_download(
     def fake_run(command, **kwargs):
         calls.append(command)
         result = Result()
-        if command[1:3] == [
+        if command == [
+            "gh",
             "api",
-            "repos/joshyorko/actions/actions/workflows/.github/workflows/actions_runtime_pypi_release.yml",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_pypi_release.yml",
+            "--jq",
+            "{id,path,state}",
         ]:
             result.stdout = workflow_response
         return result
@@ -522,11 +541,14 @@ def test_runtime_publisher_proceeds_with_canonical_workflow_id(monkeypatch, tmp_
     def fake_run(command, **kwargs):
         calls.append(command)
         result = Result()
-        if command[1:3] == [
+        if command == [
+            "gh",
             "api",
-            "repos/joshyorko/actions/actions/workflows/.github/workflows/actions_runtime_pypi_release.yml",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_pypi_release.yml",
+            "--jq",
+            "{id,path,state}",
         ]:
-            result.stdout = '{"id": 333870965}'
+            result.stdout = '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}'
         elif command[1:3] == ["run", "view"]:
             result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
         elif command[1:3] == [
