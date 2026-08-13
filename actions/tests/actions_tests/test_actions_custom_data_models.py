@@ -1,11 +1,9 @@
 def test_actions_table_list(datadir, data_regression):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     assert len(found) == 5
     data = {}
@@ -22,7 +20,7 @@ def test_actions_table_list(datadir, data_regression):
 def test_table_model_dump():
     import json
 
-    from sema4ai.actions import Table
+    from actions import Table
 
     table = Table(columns=["a", "b"], rows=[[1, "2"], [3, "4"]])
     use_input = table.model_dump()
@@ -48,9 +46,9 @@ def test_table_model_dump():
 def test_table_result(datadir, data_regression, tmpdir):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    from sema4ai.actions import Table
+    from actions import Table
 
     table = Table(columns=["a", "b"], rows=[[1, "2"], [3, "4"]])
     use_input = table.model_dump()
@@ -60,7 +58,7 @@ def test_table_result(datadir, data_regression, tmpdir):
     with open(input_file, "w") as f:
         json.dump({"table": use_input}, f)
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         [
             "run",
             "-a=action_table_in_out",
@@ -81,11 +79,11 @@ def test_table_result(datadir, data_regression, tmpdir):
 def test_table_with_response(datadir, data_regression, tmpdir):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     output_file = tmpdir.join("output.json")
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         [
             "run",
             "-a=action_table_response",
@@ -105,7 +103,7 @@ def test_table_with_response(datadir, data_regression, tmpdir):
 def test_table(file_regression):
     import pytest
 
-    from sema4ai.actions import Table
+    from actions import Table
 
     table = Table(
         columns=["a", "b"],
@@ -156,7 +154,7 @@ def test_table(file_regression):
 
 def test_table_validation_all_rows_valid():
     """Test that tables with many valid rows are accepted."""
-    from sema4ai.actions import Table
+    from actions import Table
 
     # Create a table with 100 rows, all valid
     columns = ["col1", "col2", "col3"]
@@ -172,7 +170,7 @@ def test_table_validation_fails_on_row_50():
     """Test that validation catches errors beyond the first 5 rows."""
     import pytest
 
-    from sema4ai.actions import Table
+    from actions import Table
 
     # Create 100 rows where row 50 has wrong column count
     columns = ["col1", "col2", "col3"]
@@ -192,7 +190,7 @@ def test_table_validation_fails_on_last_row():
     """Test that validation catches errors on the very last row."""
     import pytest
 
-    from sema4ai.actions import Table
+    from actions import Table
 
     # Create 20 rows where the last row (row 19) has wrong column count
     columns = ["a", "b"]
@@ -212,7 +210,7 @@ def test_table_validation_performance():
     """Test that validation with 10k rows completes in reasonable time."""
     import time
 
-    from sema4ai.actions import Table
+    from actions import Table
 
     # Create a table with 10,000 rows
     columns = ["col1", "col2", "col3", "col4", "col5"]
@@ -233,7 +231,7 @@ def test_table_validation_performance():
 
 def test_table_with_name_and_description():
     """Test that tables can have optional name and description metadata."""
-    from sema4ai.actions import Table
+    from actions import Table
 
     # Create table with name and description
     table = Table(
@@ -251,7 +249,7 @@ def test_table_with_name_and_description():
 
 def test_table_backward_compatibility():
     """Test that tables without name/description still work (backward compatibility)."""
-    from sema4ai.actions import Table
+    from actions import Table
 
     # Create table without name/description (old way)
     table = Table(
@@ -270,7 +268,7 @@ def test_table_serialization():
     """Test that Table with name/description can be serialized and deserialized."""
     import json
 
-    from sema4ai.actions import Table
+    from actions import Table
 
     # Test 1: Table WITH metadata
     with_metadata = Table(
@@ -321,7 +319,7 @@ def test_table_serialization():
 
 
 def test_custom_pydantic_type():
-    from sema4ai.actions._raw_types_handler import _obtain_raw_types_handler
+    from actions._raw_types_handler import _obtain_raw_types_handler
 
     NewClass = _obtain_raw_types_handler("lst", list[int])
 
@@ -340,7 +338,7 @@ def test_custom_pydantic_type():
 def test_list_in_input_output(datadir, data_regression, tmpdir):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     use_input = [1, 2, 3]
 
@@ -349,7 +347,7 @@ def test_list_in_input_output(datadir, data_regression, tmpdir):
     with open(input_file, "w") as f:
         json.dump({"lst": use_input}, f)
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         [
             "run",
             "-a=action_python_structures",
@@ -370,11 +368,11 @@ def test_list_in_input_output(datadir, data_regression, tmpdir):
 def test_list_with_response(datadir, data_regression, tmpdir):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     output_file = tmpdir.join("output.json")
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         [
             "run",
             "-a=action_python_structure_response",

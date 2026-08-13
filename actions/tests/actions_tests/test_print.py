@@ -1,5 +1,5 @@
 def test_print_result(datadir):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     args = [
         "run",
@@ -10,7 +10,7 @@ def test_print_result(datadir):
         "--print-result",
     ]
 
-    result = sema4ai_actions_run(args, returncode=1, cwd=str(datadir))
+    result = actions_run(args, returncode=1, cwd=str(datadir))
     output = result.stdout.decode("utf-8")
     assert "result:" in output
     assert '"result": null' in output

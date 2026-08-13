@@ -283,6 +283,50 @@ def sema4ai_actions_run(
     )
 
 
+def actions_run(
+    cmdline,
+    returncode: Union[Literal["error"], Literal["any"], int],
+    cwd=None,
+    additional_env: Optional[Dict[str, str]] = None,
+    timeout=None,
+) -> CompletedProcess:
+    """Run the installed actions-core console script."""
+    executable_name = "actions.exe" if sys.platform == "win32" else "actions"
+    executable = Path(sys.executable).parent / executable_name
+    if not executable.exists():
+        raise AssertionError(f"Missing installed actions console script: {executable}")
+
+    cp = os.environ.copy()
+    cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+    if additional_env:
+        cp.update(additional_env)
+    args = [str(executable)] + cmdline
+    result = subprocess.run(args, capture_output=True, env=cp, cwd=cwd, timeout=timeout)
+
+    if returncode == "any":
+        return result
+
+    if returncode == "error" and result.returncode:
+        return result
+
+    if result.returncode == returncode:
+        return result
+
+    raise AssertionError(
+        f"""Expected returncode: {returncode}. Found: {result.returncode}.
+=== stdout:
+{result.stdout.decode('utf-8')}
+
+=== stderr:
+{result.stderr.decode('utf-8')}
+
+=== Args:
+{args}
+
+"""
+    )
+
+
 def python_run(
     cmdline,
     returncode: Union[Literal["error"], Literal["any"], int],

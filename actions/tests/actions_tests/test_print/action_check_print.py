@@ -1,4 +1,4 @@
-from sema4ai.actions import Response, action
+from actions import Response, action
 
 
 @action
@@ -9,6 +9,6 @@ def greet_fail_with_action_error() -> Response[str]:
     Returns:
         The greeting for the person.
     """
-    from sema4ai.actions import ActionError
+    from actions import ActionError
 
     raise ActionError("Sorry, this must fail.")

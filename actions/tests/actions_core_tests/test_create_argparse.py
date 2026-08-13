@@ -5,7 +5,7 @@ import pytest
 
 
 def test_argparse():
-    from sema4ai.actions._args_dispatcher import _ActionsArgDispatcher
+    from actions._args_dispatcher import _ActionsArgDispatcher
 
     arg_dispatch = _ActionsArgDispatcher()
     parser = arg_dispatch._create_argparser()
@@ -57,7 +57,7 @@ def test_argparse():
 
 
 def test_argparse_command_invalid():
-    from sema4ai.actions.cli import main
+    from actions.cli import main
 
     s = io.StringIO()
     with redirect_stdout(s):

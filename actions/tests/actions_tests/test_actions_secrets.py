@@ -4,11 +4,9 @@ from pathlib import Path
 
 
 def test_actions_secret_list(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     assert len(found) == 4  # Updated to 4 actions (added type alias action)
     # # Note: the secret does not appear in the schema!
@@ -24,7 +22,7 @@ def test_actions_secret_list(datadir, data_regression):
 
 
 def test_actions_secret_run_just_secret(datadir: Path):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -43,12 +41,12 @@ def test_actions_secret_run_just_secret(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json_output.read_text() == "this-is-the-secret"
 
 
 def test_actions_secret_run_with_annotated_secret(datadir: Path):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -67,12 +65,12 @@ def test_actions_secret_run_with_annotated_secret(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json_output.read_text() == '{"value": "this-is-the-secret"}'
 
 
 def test_actions_secret_run_with_request(datadir: Path):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -99,12 +97,12 @@ def test_actions_secret_run_with_request(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json_output.read_text() == "this-is-the-secret"
 
 
 def test_actions_secret_without_request_with_data_in_headers(datadir: Path):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -131,12 +129,12 @@ def test_actions_secret_without_request_with_data_in_headers(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json_output.read_text() == "this-is-the-secret"
 
 
 def test_actions_secret_in_env(datadir: Path):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -147,7 +145,7 @@ def test_actions_secret_in_env(datadir: Path):
         "action_with_secret",
     ]
 
-    sema4ai_actions_run(
+    actions_run(
         args,
         returncode=0,
         cwd=str(datadir),
@@ -157,7 +155,7 @@ def test_actions_secret_in_env(datadir: Path):
 
 
 def test_actions_secret_without_request_in_header_directly(datadir: Path):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -176,12 +174,12 @@ def test_actions_secret_without_request_in_header_directly(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json_output.read_text() == "this-is-the-secret"
 
 
 def test_actions_secret_with_type_alias(datadir: Path):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Test with type alias (DocumentIntelligenceSecret)
     json_output = datadir / "json.output"
@@ -200,5 +198,5 @@ def test_actions_secret_with_type_alias(datadir: Path):
         f"--json-input={input_json}",
     ]
 
-    sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    actions_run(args, returncode=0, cwd=str(datadir))
     assert json_output.read_text() == "this-is-the-docint-secret"

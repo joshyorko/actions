@@ -3,7 +3,7 @@ name: Actions Release
 on:
   push:
     tags:
-      - "sema4ai-actions-*"
+      - "actions-core-*"
 
 permissions:
   contents: read
@@ -41,5 +41,5 @@ jobs:
 
       - name: Upload to PyPI
         run: |
-          poetry config pypi-token.pypi  ${{ secrets.PYPI_TOKEN_SEMA4AI_ACTIONS }}
+          poetry config pypi-token.pypi  ${{ secrets.PYPI_TOKEN_ACTIONS_CORE }}
           poetry publish

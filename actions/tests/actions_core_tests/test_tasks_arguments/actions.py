@@ -2,7 +2,7 @@ from typing import Annotated, Tuple, Union
 
 from pydantic import BaseModel, Field
 
-from sema4ai.actions import action
+from actions import action
 
 
 @action

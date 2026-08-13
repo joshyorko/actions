@@ -2,8 +2,8 @@ import itertools
 
 import pytest
 
-from sema4ai.actions import session_cache
-from sema4ai.actions._hooks import (
+from actions import session_cache
+from actions._hooks import (
     after_action_run,
     after_all_actions_run,
     before_action_run,
@@ -87,9 +87,9 @@ def test_session_cache_return():
 
 
 def test_integrated(datadir, str_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
+    result = actions_run(
         ["run", "-a", "task1", "--console-colors=plain"],
         returncode=0,
         cwd=str(datadir),

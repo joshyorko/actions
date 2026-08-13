@@ -3,7 +3,7 @@ from typing import Annotated
 
 from pydantic import BaseModel, Field
 
-from sema4ai.actions import Request, action
+from actions import Request, action
 
 
 class InputData(BaseModel):

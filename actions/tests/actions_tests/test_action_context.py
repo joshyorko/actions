@@ -29,7 +29,7 @@ def encrypt(key: bytes, plaintext: bytes) -> tuple[bytes, bytes, bytes]:
 def test_secrets_encryption_raw() -> None:
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-    from sema4ai.actions._action_context import _decrypt
+    from actions._action_context import _decrypt
 
     # Example usage
     key = AESGCM.generate_key(256)
@@ -43,7 +43,7 @@ def test_action_context_predefined() -> None:
     import base64
     import json
 
-    from sema4ai.actions._action_context import _decrypt
+    from actions._action_context import _decrypt
 
     encoded_payload = "eyJhbGdvcml0aG0iOiJhZXMyNTYtZ2NtIiwiYXV0aC10YWciOiJEN09qRkZYUVVMd2JndE9WRmtvWmx3PT0iLCJjaXBoZXIiOiJVdFBIajFEMExMME5BQVpLaEdGQnZKQ2dvL1lCeUM4a3Z4QmwwY2pZbE1ubzArLytyR2VjNlJGdE9rOUtqQlBTIiwiaXYiOiIvQVF4b1VaNUdOMlg3ZllsIn0="
     encoded_key = "TkgAGaN1mNKMHnD1ss/yf5f9CC39nCyuQyrpYRBksW4="
@@ -66,7 +66,7 @@ def test_action_context() -> None:
 
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-    from sema4ai.actions._action_context import ActionContext, _decrypt
+    from actions._action_context import ActionContext, _decrypt
 
     keys = [AESGCM.generate_key(256), AESGCM.generate_key(256)]
     if USE_STATIC_INFO:

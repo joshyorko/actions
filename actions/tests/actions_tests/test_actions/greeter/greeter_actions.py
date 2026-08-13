@@ -1,4 +1,4 @@
-from sema4ai.actions import (
+from actions import (
     IAction,
     action,
     action_cache,

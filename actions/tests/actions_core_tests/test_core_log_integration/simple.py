@@ -1,6 +1,6 @@
 import difflib
 
-from sema4ai.actions import action
+from actions import action
 
 
 @action

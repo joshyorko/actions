@@ -5,7 +5,7 @@ def test_pydantic_models(datadir):
 
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_input_contents = {}
@@ -25,7 +25,7 @@ def test_pydantic_models(datadir):
         f"--json-output={output_json}",
     ]
 
-    result = sema4ai_actions_run(args, returncode=0, cwd=str(datadir))
+    result = actions_run(args, returncode=0, cwd=str(datadir))
     output = result.stdout.decode("utf-8")
     loaded = json.loads(output_json.read_text())
     assert loaded == {
@@ -45,11 +45,9 @@ def _fix_file(entry):
 def test_pydantic_models_list(datadir, data_regression):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
-    result = sema4ai_actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     for entry in found:
         _fix_file(entry)

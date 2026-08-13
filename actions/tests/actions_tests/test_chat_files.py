@@ -15,7 +15,7 @@ def dummy_server(tmpdir):
 
 
 def test_client_local_mode(tmpdir):
-    from sema4ai.actions.chat import _client
+    from actions.chat import _client
 
     p = Path(tmpdir)
     uri = p.as_uri()
@@ -27,7 +27,7 @@ def test_client_local_mode(tmpdir):
 
 
 def test_client_local_mode_list_files(tmpdir):
-    from sema4ai.actions.chat import _client
+    from actions.chat import _client
 
     p = Path(tmpdir)
     uri = p.as_uri()
@@ -52,7 +52,7 @@ def test_client_local_mode_list_files(tmpdir):
 
 
 def test_client_server_write_to_local(dummy_server):
-    from sema4ai.actions.chat import _client
+    from actions.chat import _client
 
     uri = f"http://localhost:{dummy_server.get_port()}"
     client = _client._Client(uri)
@@ -63,7 +63,7 @@ def test_client_server_write_to_local(dummy_server):
 
 
 def test_client_server_list_files(dummy_server):
-    from sema4ai.actions.chat import _client
+    from actions.chat import _client
 
     uri = f"http://localhost:{dummy_server.get_port()}"
     client = _client._Client(uri)
@@ -87,7 +87,7 @@ def test_client_server_list_files(dummy_server):
 
 
 def test_client_server_write_to_url(dummy_server):
-    from sema4ai.actions.chat import _client
+    from actions.chat import _client
 
     dummy_server.set_write_to_local(False)
 
@@ -105,7 +105,7 @@ def test_client_server_write_to_url(dummy_server):
 def test_actions_file_api(monkeypatch, tmpdir):
     monkeypatch.setenv("SEMA4AI_FILE_MANAGEMENT_URL", Path(tmpdir).as_uri())
 
-    from sema4ai.actions import chat
+    from actions import chat
 
     chat.attach_file_content("my-file.txt", b"some text")
     assert chat.get_file_content("my-file.txt") == b"some text"
@@ -120,7 +120,7 @@ def test_actions_file_api(monkeypatch, tmpdir):
 def test_actions_list_files_api(monkeypatch, tmpdir):
     monkeypatch.setenv("SEMA4AI_FILE_MANAGEMENT_URL", Path(tmpdir).as_uri())
 
-    from sema4ai.actions import chat
+    from actions import chat
 
     # Initially empty
     files = chat.list_files()
@@ -142,7 +142,7 @@ def test_actions_list_files_api(monkeypatch, tmpdir):
 def test_actions_with_agent_headers_call_from_agent_server(datadir: Path):
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -174,9 +174,7 @@ def test_actions_with_agent_headers_call_from_agent_server(datadir: Path):
     env = {
         "SEMA4AI_FILE_MANAGEMENT_URL": "http://localhost:8000",
     }
-    result = sema4ai_actions_run(
-        args, returncode=0, cwd=str(datadir), additional_env=env
-    )
+    result = actions_run(args, returncode=0, cwd=str(datadir), additional_env=env)
     # assert json_output.read_text() == "value-in-header"
     output = result.stdout.decode("utf-8")
     assert "thread_id: thread-id-95542b5c" in output
@@ -186,7 +184,7 @@ def test_actions_with_agent_headers_call_with_invocation_context(datadir: Path):
     import base64
     import json
 
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     # Specifies the request in the json input.
     json_output = datadir / "json.output"
@@ -224,9 +222,7 @@ def test_actions_with_agent_headers_call_with_invocation_context(datadir: Path):
     env = {
         "SEMA4AI_FILE_MANAGEMENT_URL": "http://localhost:8000",
     }
-    result = sema4ai_actions_run(
-        args, returncode=0, cwd=str(datadir), additional_env=env
-    )
+    result = actions_run(args, returncode=0, cwd=str(datadir), additional_env=env)
     # assert json_output.read_text() == "value-in-header"
     output = result.stdout.decode("utf-8")
     assert "thread_id: thread-id-123" in output
@@ -238,7 +234,7 @@ class TestFilenameValidationWindows:
     @patch("sys.platform", new="win32")
     def test_valid_names(self):
         """Test valid filenames that should pass on Windows."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         valid_names = [
             "valid_name.txt",
@@ -280,7 +276,7 @@ class TestFilenameValidationWindows:
     @patch("sys.platform", new="win32")
     def test_invalid_characters(self, filename):
         """Test rejection of invalid characters on Windows."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         with pytest.raises(ValueError, match="invalid characters"):
             _check_that_name_is_valid_in_filesystem(filename)
@@ -288,7 +284,7 @@ class TestFilenameValidationWindows:
     @patch("sys.platform", new="win32")
     def test_control_characters(self):
         """Test rejection of control characters on Windows."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         # Test various control characters
         for i in range(32):
@@ -330,7 +326,7 @@ class TestFilenameValidationWindows:
     @patch("sys.platform", new="win32")
     def test_invalid_names(self, invalid_name):
         """Test rejection of Windows invalid names."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         # Test uppercase
         with pytest.raises(ValueError):
@@ -390,7 +386,7 @@ class TestFilenameValidationUnix:
     @patch("sys.platform", new="linux")
     def test_valid_unix_names(self, valid_name):
         """Test that Unix allows characters restricted on Windows."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         _check_that_name_is_valid_in_filesystem(valid_name)  # Should not raise
 
@@ -404,7 +400,7 @@ class TestFilenameValidationUnix:
     @patch("sys.platform", new="linux")
     def test_invalid_unix_names(self, invalid_name):
         """Test rejection of forward slash on Unix."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         with pytest.raises(ValueError):
             _check_that_name_is_valid_in_filesystem(invalid_name)
@@ -416,7 +412,7 @@ class TestFilenameValidationEdgeCases:
     @patch("sys.platform", new="linux")
     def test_empty_string(self):
         """Test rejection of empty string."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         with pytest.raises(ValueError, match="is not valid"):
             _check_that_name_is_valid_in_filesystem("")
@@ -424,7 +420,7 @@ class TestFilenameValidationEdgeCases:
     @patch("sys.platform", new="linux")
     def test_current_directory_dot(self):
         """Test rejection of current directory reference."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         with pytest.raises(ValueError, match="is not valid"):
             _check_that_name_is_valid_in_filesystem(".")
@@ -432,7 +428,7 @@ class TestFilenameValidationEdgeCases:
     @patch("sys.platform", new="linux")
     def test_parent_directory_dotdot(self):
         """Test rejection of parent directory reference."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         with pytest.raises(ValueError, match="is not valid"):
             _check_that_name_is_valid_in_filesystem("..")
@@ -440,7 +436,7 @@ class TestFilenameValidationEdgeCases:
     @patch("sys.platform", new="linux")
     def test_unicode_characters(self):
         """Test that Unicode characters are allowed."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         unicode_names = [
             "文件.txt",
@@ -455,7 +451,7 @@ class TestFilenameValidationEdgeCases:
     @patch("sys.platform", new="linux")
     def test_very_long_name(self):
         """Test very long filename (most filesystems have limits, but we don't enforce them)."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         # Most filesystems limit to 255 bytes, but we don't enforce that
         long_name = "a" * 300 + ".txt"
@@ -464,7 +460,7 @@ class TestFilenameValidationEdgeCases:
     @patch("sys.platform", new="win32")
     def test_windows_backslash_rejected(self):
         """Test that backslash is rejected on Windows."""
-        from sema4ai.actions.chat import _check_that_name_is_valid_in_filesystem
+        from actions.chat import _check_that_name_is_valid_in_filesystem
 
         with pytest.raises(ValueError, match="invalid characters"):
             _check_that_name_is_valid_in_filesystem("file\\name.txt")

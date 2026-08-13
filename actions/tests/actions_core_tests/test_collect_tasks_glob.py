@@ -19,13 +19,13 @@ def _fix_file(entry):
     ],
 )
 def test_collect_tasks_glob(datadir, data_regression, glob_pattern):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     cmdline = ["list", str(datadir), "--skip-lint"]
     if glob_pattern:
         cmdline.extend(("--glob", glob_pattern))
 
-    result = sema4ai_actions_run(cmdline, returncode=0, cwd=datadir)
+    result = actions_run(cmdline, returncode=0, cwd=datadir)
     found = json.loads(result.stdout)
     for entry in found:
         _fix_file(entry)
@@ -34,7 +34,7 @@ def test_collect_tasks_glob(datadir, data_regression, glob_pattern):
 
 
 def test_run_tasks_glob(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     cmdline = [
         "run",
@@ -44,13 +44,13 @@ def test_run_tasks_glob(datadir, data_regression):
         "--console-colors=plain",
     ]
 
-    result = sema4ai_actions_run(cmdline, returncode=1, cwd=datadir)
+    result = actions_run(cmdline, returncode=1, cwd=datadir)
     output = result.stdout.decode("utf-8")
     assert "Expected a single action to be run." in output
 
 
 def test_run_tasks_glob_multiple_matches(datadir, data_regression):
-    from devutils.fixtures import sema4ai_actions_run
+    from devutils.fixtures import actions_run
 
     cmdline = [
         "run",
@@ -60,6 +60,6 @@ def test_run_tasks_glob_multiple_matches(datadir, data_regression):
         "--console-colors=plain",
     ]
 
-    result = sema4ai_actions_run(cmdline, returncode=1, cwd=datadir)
+    result = actions_run(cmdline, returncode=1, cwd=datadir)
     output = result.stdout.decode("utf-8")
     assert "Expected a single action to be run." in output

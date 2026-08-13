@@ -39,6 +39,15 @@ with that local path before Poetry resolves, and install the helper from the
 archive. This applies at minimum to `actions/` and `action_server/`; it must
 not depend on a `sema4ai-http-helper` directory or requirement.
 
+The clean-break prerequisites can merge before the Runtime migration. During
+that split, `actions-core` owns `actions/__init__.py` and includes `actions.mcp`,
+while `actions-work-items` contributes only `actions.work_items`. The existing
+`community` Action Server and standalone `mcp/` package remain on their
+published `sema4ai-actions`/`sema4ai-mcp` graph until the Runtime PR lands.
+Local dependency substitution must therefore map explicit distribution names
+to repository directories and must not redirect `sema4ai-actions` to the new
+`actions-core` source tree.
+
 ## Evidence Ladder
 
 Prefer evidence in this order:
