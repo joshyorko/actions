@@ -85,7 +85,7 @@ def handle_oauth2_command(base_args: ArgumentsNamespace) -> int:
         log.critical("Command for oauth2 operation not specified.")
         return 1
 
-    if oauth2_command == "sema4ai-config":
+    if oauth2_command == "actions-config":
         return _print_sema4ai_oauth2_config()
 
     if oauth2_command == "user-config-path":

@@ -155,7 +155,7 @@ def get_oauthlib2_user_settings(
     return contents
 
 
-_SEMA4AI_PROVIDED_OAUTH2_CONFIG_GETTER = None
+_ACTIONS_PROVIDED_OAUTH2_CONFIG_GETTER = None
 
 
 def set_sema4ai_provided_oauth2_config_getter(getter: Callable[[], str]) -> None:
@@ -163,18 +163,18 @@ def set_sema4ai_provided_oauth2_config_getter(getter: Callable[[], str]) -> None
     Sets a function that will be called to get the Sema4.ai provided oauth2
     config.
 
-    Usually something running: `action-server oauth2 sema4ai-config`.
+    Usually something running: `action-server oauth2 actions-config`.
     """
-    global _SEMA4AI_PROVIDED_OAUTH2_CONFIG_GETTER
-    _SEMA4AI_PROVIDED_OAUTH2_CONFIG_GETTER = getter
+    global _ACTIONS_PROVIDED_OAUTH2_CONFIG_GETTER
+    _ACTIONS_PROVIDED_OAUTH2_CONFIG_GETTER = getter
 
 
 def get_sema4ai_provided_oauth2_config() -> str:
-    if _SEMA4AI_PROVIDED_OAUTH2_CONFIG_GETTER is None:
+    if _ACTIONS_PROVIDED_OAUTH2_CONFIG_GETTER is None:
         raise RuntimeError(
-            "Sema4.ai provided oauth2 config getter not set -- note: `action-server oauth2 sema4ai-config` can be used to get it."
+            "Provided oauth2 config getter not set -- note: `action-server oauth2 actions-config` can be used to get it."
         )
-    return _SEMA4AI_PROVIDED_OAUTH2_CONFIG_GETTER()
+    return _ACTIONS_PROVIDED_OAUTH2_CONFIG_GETTER()
 
 
 def _get_oauthlib2_sema4ai_settings(provider: str) -> dict:

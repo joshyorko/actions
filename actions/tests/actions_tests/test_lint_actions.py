@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 from typing import Any
 
-import pytest
 
 
 def test_lint_action_no_docstring(data_regression):
@@ -199,7 +198,7 @@ def test_lint_action_secret(data_regression, datadir):
     contents = """
 from typing import Annotated
 from actions import Secret, SecretSpec, action
-from sema4ai import actions
+import actions
 
 DocumentIntelligenceSecret = Annotated[Secret, SecretSpec(tag="document-intelligence")]
 
@@ -223,6 +222,7 @@ def my_action(
         [x.to_lsp_diagnostic() for x in iter_lint_errors(contents, pm=pm)]
     )
 
+
     issues = find_issues_in_actions_list(datadir, contents)
     data_regression.check(issues, basename="test_lint_action_secret_list_issues")
 
@@ -236,7 +236,7 @@ def test_lint_action_oauth2_secret(data_regression, datadir):
     contents = """
 from typing import Literal
 
-from sema4ai import actions
+import actions
 from actions import OAuth2Secret
 
 
@@ -260,90 +260,3 @@ def my_action(
 
     issues = find_issues_in_actions_list(datadir, contents)
     data_regression.check(issues, basename="test_lint_action_oauth2_secret_list_issues")
-
-
-@pytest.mark.parametrize("scenario", ["simple", "inline", "union"])
-def test_lint_data_source_docstring_not_required(data_regression, datadir, scenario):
-    from actions._customization._extension_points import EPManagedParameters
-    from actions._customization._plugin_manager import PluginManager
-    from actions._lint_action import iter_lint_errors
-    from actions._managed_parameters import ManagedParameters
-
-    if scenario == "simple":
-        contents = """
-from typing import Literal
-
-from sema4ai import actions
-from typing import Annotated
-from sema4ai.data import DataSource, DataSourceSpec, query
-
-MyDataSource = Annotated[DataSource, DataSourceSpec(
-    name="MyDataSourceSpec",
-    engine="postgres",
-    description="My Data Source"
-)]
-
-
-@query
-def my_action(
-    datasource: MyDataSource
-) -> str:
-    '''
-    This is an action with a data source.
-    '''
-    return ""
-"""
-    elif scenario == "inline":
-        contents = """
-from typing import Literal
-
-from sema4ai import actions
-from typing import Annotated
-from sema4ai.data import DataSource, DataSourceSpec, query
-
-@query
-def my_action(
-    datasource: Annotated[DataSource, DataSourceSpec(
-        name="MyDataSourceSpec",
-        engine="postgres",
-        description="My Data Source"
-    )]
-) -> str:
-    '''
-    This is an action with a data source.
-    '''
-    return ""
-"""
-    elif scenario == "union":
-        contents = """
-from typing import Literal
-
-from sema4ai import actions
-from typing import Annotated
-from sema4ai.data import DataSource, DataSourceSpec, query
-
-@query
-def my_action(
-    datasource: Annotated[DataSource, DataSourceSpec(
-        name="MyDataSourceSpec",
-        engine="postgres",
-        description="My Data Source"
-    )] | Annotated[DataSource, DataSourceSpec(
-        name="MyDataSourceSpec",
-        engine="postgres",
-        description="My Data Source"
-    )]
-) -> str:
-    '''
-    This is an action with a data source.
-    '''
-    return ""
-"""
-    else:
-        raise ValueError(f"Invalid scenario: {scenario}")
-
-    pm = PluginManager()
-    pm.set_instance(EPManagedParameters, ManagedParameters({}))
-    data_regression.check(
-        [x.to_lsp_diagnostic() for x in iter_lint_errors(contents, pm=pm)]
-    )

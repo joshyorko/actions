@@ -82,7 +82,7 @@ jobs:
 
         # Make sure that we have no binaries present when doing the build.
 
-        rm src/sema4ai/bin/rcc* -f
+        rm src/actions/server/bin/rcc* -f
 
         # Just sdist here, wheels are built in the manylinux job.
 

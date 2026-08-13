@@ -302,12 +302,12 @@ class ArgumentsNamespaceCloudOrganizations(ArgumentsNamespace):
 
 class ArgumentsNamespaceOAuth2(ArgumentsNamespace):
     command: Literal["oauth2"]
-    oauth2_command: Literal["sema4ai-config", "user-config-path"]
+    oauth2_command: Literal["actions-config", "user-config-path"]
 
 
 class ArgumentsNamespaceOAuth2Sema4aiConfig(ArgumentsNamespace):
     command: Literal["oauth2"]
-    oauth2_command: Literal["sema4ai-config"]
+    oauth2_command: Literal["actions-config"]
 
 
 class ArgumentsNamespaceOAuth2UserConfigPath(ArgumentsNamespace):

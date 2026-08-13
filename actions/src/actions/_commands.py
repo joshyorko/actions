@@ -44,7 +44,6 @@ def metadata(
             },
             ...
         ]
-        // This is added by sema4ai-data
         'data_spec_version': 'v2',
         'data': {
             'datasources': [
@@ -106,17 +105,6 @@ def metadata(
                     "options": action.options,
                 }
                 actions_found.append(entry)
-
-            try:
-                from sema4ai.data import metadata as data_metadata  # type: ignore
-                from sema4ai.data import version_info
-            except ImportError:
-                pass
-            else:
-                if tuple(version_info[:3]) == (0, 0, 1):
-                    metadata_found.update(data_metadata())
-                else:
-                    metadata_found.update(data_metadata(p.absolute()))
 
             write_to.write(json.dumps(metadata_found))
             write_to.flush()

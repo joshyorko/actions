@@ -411,7 +411,7 @@ def _add_oauth2_command(command_subparser, defaults):
     oauth2_subparsers = oauth2_parser.add_subparsers(dest="oauth2_command")
 
     oauth2_subparsers.add_parser(
-        "sema4ai-config",
+        "actions-config",
         help="Returns Sema4.ai OAuth2 configuration",
     )
 

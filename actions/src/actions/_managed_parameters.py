@@ -175,15 +175,12 @@ class ManagedParameterHeuristicDataSource(ManagedParameterHeuristic):
         original_kwargs: Dict[str, Any],
         param_name: str,
     ) -> Any:
-        try:
-            from sema4ai.data import DataSource  # type: ignore
-        except Exception:
-            return None
+        return None
 
         use_class: Optional[Any] = None
         datasource_name = self._get_datasource_name(annotation)
         if datasource_name is not None:
-            use_class = DataSource
+            use_class = Any
 
         if use_class is not None:
             # Handle a datasource
@@ -232,12 +229,12 @@ class ManagedParameterHeuristicDataSource(ManagedParameterHeuristic):
         from typing import Annotated
 
         try:
-            from sema4ai.data import DataSource, DataSourceSpec  # type: ignore
+            return None
         except Exception:
             return None
 
         try:
-            if issubclass(cls, DataSource):
+            if issubclass(cls, Any):
                 return ""  # i.e. DataSource is not bound to a namespace as it's not annotated.
         except TypeError:
             pass
@@ -261,7 +258,7 @@ class ManagedParameterHeuristicDataSource(ManagedParameterHeuristic):
                 # Handle Annotated[DataSource, DataSourceSpec(...)]
                 found_type, first_arg = type_and_first_arg
                 try:
-                    if issubclass(found_type, DataSource):
+                    if issubclass(found_type, Any):
                         raise ValueError(
                             'DataSource should not be parametrized, it must be annotated with a DataSourceSpec. i.e.: `Annotated[DataSource, DataSourceSpec(name="datasource_name", engine="postgres")]`.\nFound: `{cls}`'
                         )
@@ -269,7 +266,7 @@ class ManagedParameterHeuristicDataSource(ManagedParameterHeuristic):
                     pass
 
                 if found_type == Annotated:
-                    if issubclass(first_arg, DataSource):
+                    if issubclass(first_arg, Any):
                         args = typing.get_args(cls)
 
                         if len(args) <= 1:
@@ -283,7 +280,7 @@ class ManagedParameterHeuristicDataSource(ManagedParameterHeuristic):
                             )
 
                         datasource_spec = args[1]
-                        if not isinstance(datasource_spec, DataSourceSpec):
+                        if not isinstance(datasource_spec, Any):
                             if typing.get_origin(datasource_spec) == typing.Union:
                                 return ""  # Union means that more than one DataSource is being queried (thus it's not bound to a namespace)
 
@@ -302,12 +299,12 @@ class ManagedParameterHeuristicDataSource(ManagedParameterHeuristic):
 
     def get_managed_param_type_from_annotation(self, annotation: type) -> type | None:
         try:
-            from sema4ai.data import DataSource  # type: ignore
+            return None
         except Exception:
             return None
 
         if self._is_data_source_annotation(annotation):
-            return DataSource
+            return Any
 
         return None
 

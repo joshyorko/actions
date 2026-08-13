@@ -236,7 +236,7 @@ dependencies:
 
 
 @pytest.mark.integration_test
-def test_oauth2_sema4ai_config(tmpdir) -> None:
+def test_oauth2_actions_config(tmpdir) -> None:
     from actions.server._selftest import actions_server_run
 
     output = actions_server_run(["oauth2"], returncode=1, cwd=tmpdir)
@@ -244,4 +244,4 @@ def test_oauth2_sema4ai_config(tmpdir) -> None:
     assert "Command for oauth2 operation not specified." in output.stderr
 
     # Return code assertion happens inside the call.
-    actions_server_run(["oauth2", "sema4ai-config"], returncode=0, cwd=tmpdir)
+    actions_server_run(["oauth2", "actions-config"], returncode=0, cwd=tmpdir)

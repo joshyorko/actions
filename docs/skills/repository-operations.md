@@ -18,20 +18,17 @@ performed by local verification. The helper reads network settings from
 `~/.actions/network-settings.yaml` on Linux/macOS and
 `%LOCALAPPDATA%/actions/network-settings.yaml` on Windows.
 `devinstall`/develop mode substitutes the in-tree `actions-http-helper`
-distribution by path, in addition to the existing `sema4ai-*` internal
-distributions. Consumer lockfiles remain publication-gated until the helper
-exists in the configured package index.
+distribution and the other clean-break distributions by path only while
+resolving a local development install. Published package metadata must use
+versioned distributions; a clean wheel install is required before calling the
+Runtime/Core interoperability contract complete.
 
 The source migration PR contains the helper and its direct consumers together;
-the helper commit is not independently mergeable or release-ready. Its
-consumer lockfiles remain unchanged until after the source PR is merged and
-`actions-http-helper==1.0.0` exists in the configured package index: Poetry
-does not resolve a version-only requirement from this checkout, and this
-repository has no release-staging/index procedure. Keep the consumer
-requirements publication-ready, record the resolver error, and regenerate all
-affected locks immediately after the helper’s first normal release. Then
-regenerate the Action Server freeze before releasing Action Server or MCP
-artifacts.
+the helper commit is not independently mergeable or release-ready. Publication-
+dependent source locks and Runtime freeze inputs are deferred until the renamed
+distributions exist in the configured package index; do not hand-edit hashes or
+regenerate them prematurely. Regenerate the affected locks after publication,
+then regenerate the Runtime freeze before releasing Runtime or MCP artifacts.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement

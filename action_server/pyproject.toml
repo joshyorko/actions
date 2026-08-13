@@ -43,7 +43,7 @@ cryptography = "^46.0.3"
 requests_oauthlib = "^2.0"
 watchfiles = "^1.1.1"
 mcp = "^1.21.0"
-actions-work-items = { path = "../work-items/", develop = true }
+actions-work-items = "^0.4.3"
 # Scheduling dependencies
 croniter = "^2.0.0"
 pytz = "^2024.1"
@@ -58,7 +58,6 @@ types-PyYAML = "^6"
 robocorp-log-pytest = "^0.0.2"
 types-psutil = "^7"
 types-jsonschema = "^4.22.0"
-sema4ai-data = "^1.2.1"
 pyinstaller = "6.16.0"
 pyinstaller-hooks-contrib = "2025.9"
 

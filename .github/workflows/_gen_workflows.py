@@ -456,17 +456,17 @@ echo "::set-output name=is_beta::$is_beta"
             "env": {
                 "RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC": "true",
                 "RC_ACTION_SERVER_DO_SELFTEST": "true",
-                "MACOS_SIGNING_CERT": "${{ secrets.MACOS_SIGNING_CERT_SEMA4AI }}",
-                "MACOS_SIGNING_CERT_PASSWORD": "${{ secrets.MACOS_SIGNING_CERT_PASSWORD_SEMA4AI }}",
-                "MACOS_SIGNING_CERT_NAME": "${{ secrets.MACOS_SIGNING_CERT_NAME_SEMA4AI }}",
-                "APPLEID": "${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_SEMA4AI }}",
-                "APPLETEAMID": "${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_SEMA4AI }}",
-                "APPLEIDPASS": "${{ secrets.MACOS_APP_ID_PASSWORD_FOR_NOTARIZATION_SEMA4AI }}",
-                "VAULT_URL": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_SEMA4AI }}",
-                "CLIENT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_SEMA4AI }}",
-                "TENANT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_SEMA4AI }}",
-                "CLIENT_SECRET": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_SEMA4AI }}",
-                "CERTIFICATE_NAME": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_SEMA4AI }}",
+                "MACOS_SIGNING_CERT": "${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}",
+                "MACOS_SIGNING_CERT_PASSWORD": "${{ secrets.MACOS_SIGNING_CERT_PASSWORD_ACTIONS_RUNTIME }}",
+                "MACOS_SIGNING_CERT_NAME": "${{ secrets.MACOS_SIGNING_CERT_NAME_ACTIONS_RUNTIME }}",
+                "APPLEID": "${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}",
+                "APPLETEAMID": "${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}",
+                "APPLEIDPASS": "${{ secrets.MACOS_APP_ID_PASSWORD_ACTIONS_RUNTIME }}",
+                "VAULT_URL": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}",
+                "CLIENT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_ACTIONS_RUNTIME }}",
+                "TENANT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_ACTIONS_RUNTIME }}",
+                "CLIENT_SECRET": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_ACTIONS_RUNTIME }}",
+                "CERTIFICATE_NAME": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_ACTIONS_RUNTIME }}",
                 "GITHUB_EVENT_NAME": "${{ github.event_name }}",
                 "GITHUB_REF_NAME": "${{ github.ref_name }}",
                 "GITHUB_PR_NUMBER": "${{ github.event.pull_request.number }}",
@@ -628,7 +628,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
             "name": "Build sdist",
             "run": f"""
 # Make sure that we have no binaries present when doing the build.
-rm src/sema4ai/bin/rcc* -f
+rm src/actions/server/bin/rcc* -f
 # Just sdist here, wheels are built in the manylinux job.
 {run_in_env}poetry build -f sdist
 """,
