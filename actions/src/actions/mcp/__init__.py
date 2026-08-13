@@ -29,7 +29,6 @@ version_info = [int(x) for x in __version__.split(".")]
 
 def _validate_collected_actions(actions: list[IAction]):
     from actions._exceptions import ActionsCollectError
-
     from actions.mcp._validate_prompt import _validate_prompt
     from actions.mcp._validate_resource import _validate_resource
 
