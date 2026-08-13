@@ -12,14 +12,14 @@
 # and rerun the script).
 
 
-name: Actions Tests
+name: Actions Core Tests
 permissions:
   contents: read
   id-token: write
 'on':
   push:
     branches:
-    - master
+    - community
     - wip
     paths:
     - actions/**
@@ -28,7 +28,7 @@ permissions:
     - actions-http-helper/**
   pull_request:
     branches:
-    - master
+    - community
     paths:
     - actions/**
     - .github/workflows/actions_core_tests.yml

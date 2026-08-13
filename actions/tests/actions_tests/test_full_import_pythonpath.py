@@ -9,9 +9,7 @@ def test_actions_list_relative_import(datadir, data_regression):
 
     from devutils.fixtures import actions_run
 
-    result = actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     print(result.stderr.decode("utf-8"))
     for entry in found:

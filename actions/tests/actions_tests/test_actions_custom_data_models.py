@@ -3,9 +3,7 @@ def test_actions_table_list(datadir, data_regression):
 
     from devutils.fixtures import actions_run
 
-    result = actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     assert len(found) == 5
     data = {}

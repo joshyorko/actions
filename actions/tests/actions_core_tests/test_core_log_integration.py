@@ -101,9 +101,7 @@ default_library_filter_kind = "exclude"
 def test_core_log_integration_lines(datadir, str_regression) -> None:
     from robocorp.log._log_formatting import pretty_format_logs_from_log_html
 
-    result = actions_run(
-        ["run", "main_check_lines.py"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["run", "main_check_lines.py"], returncode=0, cwd=str(datadir))
 
     decoded = result.stdout.decode("utf-8", "replace")
     assert "Log (html)" in decoded

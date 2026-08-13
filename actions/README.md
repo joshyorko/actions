@@ -79,7 +79,7 @@ For more details on secrets, including tagged secrets with `SecretSpec`, OAuth2 
 To get the full benefits of your actions, the suggested way to run them is using Action Server. But it's also possible to do that directly in command line by passing the named arguments:
 
 ```sh
-python -m actions run -- --city=Helsinki --days=3
+actions run -- --city=Helsinki --days=3
 ```
 
 ## Guides

@@ -119,9 +119,7 @@ def test_actions_oauth2_secret_list(datadir, data_regression):
 
     datadir = datadir / "good"
 
-    result = actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     assert len(found) == 1
     # # Note: the secret does not appear in the schema!
@@ -141,7 +139,5 @@ def test_actions_oauth2_secret_list_bad(datadir):
 
     datadir = datadir / "bad"
 
-    result = actions_run(
-        ["list", "--skip-lint"], returncode=1, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=1, cwd=str(datadir))
     assert "Invalid OAuth2Secret annotation found." in result.stderr.decode("utf-8")

@@ -8,6 +8,9 @@ repository = "https://github.com/Sema4AI/actions/"
 license = "Apache-2.0"
 packages = [{ include = "actions", from = "src" }]
 
+[tool.poetry.scripts]
+actions = "actions.cli:main"
+
 [tool.poetry.dependencies]
 python = "^3.10"
 cryptography = ">=44.0.1"

@@ -1,5 +1,6 @@
 import fnmatch
 import glob
+import hashlib
 import itertools
 import os
 import sys
@@ -353,9 +354,25 @@ def import_path(
     path = path.absolute()
     root = root.absolute()
     module_name = module_name_from_path(path, root)
+    import_name = module_name
     mod = sys.modules.get(module_name)
     if mod is not None:
-        return mod
+        module_file = getattr(mod, "__file__", None)
+        if module_file is not None:
+            try:
+                if os.path.samefile(module_file, path):
+                    return mod
+            except OSError:
+                pass
+
+        if module_name == "actions":
+            path_digest = hashlib.sha256(str(path).encode("utf-8")).hexdigest()[:16]
+            import_name = f"_actions_user_module_{path_digest}"
+            mod = sys.modules.get(import_name)
+            if mod is not None:
+                return mod
+        else:
+            return mod
 
     for meta_importer in sys.meta_path:
         spec = meta_importer.find_spec(module_name, [str(path.parent)])
@@ -370,14 +387,14 @@ def import_path(
         )
     try:
         mod = importlib.util.module_from_spec(spec)
-        sys.modules[module_name] = mod
+        sys.modules[import_name] = mod
         spec.loader.exec_module(mod)  # type: ignore[union-attr]
     except Exception:
         log.critical(
             f"Error when importing module '{module_name}'\n  at location '{path}'\n  (with root: '{root}')."
         )
         raise
-    insert_missing_modules(sys.modules, module_name)
+    insert_missing_modules(sys.modules, import_name)
     return mod
 
 

@@ -5,9 +5,7 @@ from pathlib import Path
 def test_actions_request_list(datadir, data_regression):
     from devutils.fixtures import actions_run
 
-    result = actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     assert len(found) == 1
     # Note: the request does not appear in the schema!

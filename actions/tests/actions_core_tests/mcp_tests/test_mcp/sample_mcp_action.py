@@ -128,7 +128,6 @@ def generate_ticket_summary(ticket_id: str) -> str:
     Status: {ticket_data.status}
     Created At: {ticket_data.created_at}
     Assigned To: {ticket_data.assigned_to or 'Unassigned'}
-    
     Description:
     {ticket_data.description}
     

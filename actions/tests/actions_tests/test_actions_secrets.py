@@ -6,9 +6,7 @@ from pathlib import Path
 def test_actions_secret_list(datadir, data_regression):
     from devutils.fixtures import actions_run
 
-    result = actions_run(
-        ["list", "--skip-lint"], returncode=0, cwd=str(datadir)
-    )
+    result = actions_run(["list", "--skip-lint"], returncode=0, cwd=str(datadir))
     found = json.loads(result.stdout)
     assert len(found) == 4  # Updated to 4 actions (added type alias action)
     # # Note: the secret does not appear in the schema!

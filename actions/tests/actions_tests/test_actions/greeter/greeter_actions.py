@@ -1,11 +1,4 @@
-from actions import (
-    IAction,
-    action,
-    action_cache,
-    session_cache,
-    setup,
-    teardown,
-)
+from actions import IAction, action, action_cache, session_cache, setup, teardown
 
 
 @setup

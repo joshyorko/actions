@@ -62,7 +62,7 @@ def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
     import tomlkit  # allows roundtrip of toml files
 
     contents: dict = tomlkit.loads(root_pyproject.read_bytes().decode("utf-8"))
-    dependencies = contents["tool"]["poetry"]["dependencies"]
+    dependencies = contents.get("tool", {}).get("poetry", {}).get("dependencies", {})
     for key in dependencies:
         directory = owned_distribution_directory(key)
         if directory is None:
@@ -297,7 +297,9 @@ def build_common_tasks(
                 roundtrips.append(roundtrip_py_project)
 
                 with roundtrip_py_project.update() as contents:
-                    dependencies = contents["tool"]["poetry"]["dependencies"]
+                    dependencies = contents.get("tool", {}).get("poetry", {}).get(
+                        "dependencies", {}
+                    )
 
                     for key, value in tuple(dependencies.items()):
                         dir_name = owned_distribution_directory(key)

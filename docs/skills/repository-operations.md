@@ -36,27 +36,49 @@ forwarding gateway's `Mcp-Method`/`Mcp-Name` observation, header/cookie
 forwarding, catalog reload freshness, and Action option `_meta` propagation to
 the corresponding MCP definitions/results. Do not add Canvas behavior merely
 to maintain this adapter seam.
-The host checkout currently verifies this with isolated SDK source inspection
-because the Action Server Poetry environment is not installed. Publication-
-dependent lock regeneration and clean-install MCP verification remain
-deferred until the renamed Runtime graph is published.
+The accepted source and integration candidate use published clean-break
+distributions; lock regeneration is authoritative through Poetry 2.1.1 against
+PyPI, with clean-install verification kept as a separate release gate.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The active
 `actions/poetry.lock` and `actions-http-helper/poetry.lock` files are intentionally
-absent during this migration: their previous graphs retained removed
-`sema4ai-*` distributions, and the current test/release workflows do not
-consume those paths. This is a deferred lock gate, not a green lock check.
-After the renamed distributions are published in the configured package index,
-regenerate both locks with Poetry; do not hand-edit hashes. Runtime freeze
-inputs remain separately deferred until the renamed distributions are
-published.
+absent during this migration; regenerate affected locks with
+repository-authoritative Poetry 2.1.1 from published prerequisites. Never
+hand-edit lock hashes or add path/direct-URL production dependencies. Runtime
+freeze inputs remain a separate post-candidate gate.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement
 with that local path before Poetry resolves, and install the helper from the
 archive. This applies at minimum to `actions/` and `action_server/`; it must
 not depend on a `sema4ai-http-helper` directory or requirement.
+
+The clean-break prerequisites can merge before the Runtime migration. During
+that split, `actions-core` owns `actions/__init__.py` and includes `actions.mcp`,
+while `actions-work-items` contributes only `actions.work_items`. The existing
+`community` Action Server and standalone `mcp/` package remain on their
+published `sema4ai-actions`/`sema4ai-mcp` graph until the Runtime PR lands.
+Local dependency substitution must therefore map explicit distribution names
+to repository directories and must not redirect `sema4ai-actions` to the new
+`actions-core` source tree.
+Core verification must unset inherited `VIRTUAL_ENV` and select the requested
+matrix interpreter explicitly before invoking Poetry.
+
+Core console integration helpers must resolve the installed `actions` command
+from the executable search path and validate its `actions-core` ownership and
+`actions = actions.cli:main` entry point. Launcher filenames are implementation
+details; tests resolve the command name `actions` and do not encode a launcher
+filename. Core test workflows consume
+`../devutils/requirements.txt`, which exact-pins Poetry 2.1.1. Core release
+verification builds once, installs exact Twine 6.2.0, runs
+`twine check --strict dist/*`, installs the exact wheel in a fresh venv outside
+the checkout, and executes benign `actions list` and `actions run` fixture
+commands before uploading. The clean-wheel verifier clears source
+`PYTHONPATH`, rejects editable/source `direct_url` metadata while retaining
+wheel archive provenance, and bounds subprocesses
+with closed stdin and a finite timeout. The publish job downloads those
+verified artifacts without rebuilding them.
 
 ## Evidence Ladder
 
@@ -82,9 +104,9 @@ helpers live privately under `actions.server._common` and
 
 The devinstall dependency walker uses an explicit distribution-to-directory
 map rather than stripping a vendor prefix. When a package identity or source
-namespace changes, do not regenerate publication-dependent locks or Runtime
-freeze inputs until the renamed distributions have been published; use source
-imports, wheel contents, and package-local tests for the interim gate.
+namespace changes, regenerate locks only from published versioned distributions;
+use source imports, wheel contents, and package-local tests for the interim
+candidate gate.
 
 ## Development Loop
 

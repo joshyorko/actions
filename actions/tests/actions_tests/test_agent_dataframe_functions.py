@@ -60,9 +60,7 @@ def test_get_data_frame_api(agent_dummy_server):
 
     # Mock PyArrow as unavailable to force JSON format
     with patch("actions.agent._is_pyarrow_available", return_value=False):
-        with patch(
-            "actions.agent.get_thread_id", return_value="test-thread-456"
-        ):
+        with patch("actions.agent.get_thread_id", return_value="test-thread-456"):
             # Call get_data_frame
             result = get_data_frame("q1_sales", limit=5000)
 
@@ -142,9 +140,7 @@ def test_data_frame_api_with_limit(agent_dummy_server):
 
     # Mock PyArrow as unavailable to force JSON format
     with patch("actions.agent._is_pyarrow_available", return_value=False):
-        with patch(
-            "actions.agent.get_thread_id", return_value="test-thread-limit"
-        ):
+        with patch("actions.agent.get_thread_id", return_value="test-thread-limit"):
             # Call get_data_frame with custom limit
             result = get_data_frame("test_data", limit=100)
 
@@ -173,9 +169,7 @@ def test_get_data_frame_with_additional_parameters(agent_dummy_server):
 
     # Mock PyArrow as unavailable to force JSON format
     with patch("actions.agent._is_pyarrow_available", return_value=False):
-        with patch(
-            "actions.agent.get_thread_id", return_value="test-thread-params"
-        ):
+        with patch("actions.agent.get_thread_id", return_value="test-thread-params"):
             result = get_data_frame(
                 "sales_data",
                 limit=50,
@@ -215,9 +209,7 @@ def test_get_data_frame_requests_json_format_when_pyarrow_unavailable(
 
     # Mock PyArrow as unavailable
     with patch("actions.agent._is_pyarrow_available", return_value=False):
-        with patch(
-            "actions.agent.get_thread_id", return_value="test-thread-json"
-        ):
+        with patch("actions.agent.get_thread_id", return_value="test-thread-json"):
             result = get_data_frame("test_data")
 
             # Verify JSON format was requested

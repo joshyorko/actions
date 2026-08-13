@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 1.0.0 - 2026-08-13
+
+- Publish the independent `actions-core` distribution, which exclusively owns
+  `actions/__init__.py` and provides the `actions` and `actions.mcp` APIs.
+- Depend only on the neutral `actions-http-helper` distribution for HTTP and
+  certificate-store integration.
+
 ## 1.6.6 - 2025-12-17
 
 - CVE updates

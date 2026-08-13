@@ -174,9 +174,7 @@ def test_actions_with_agent_headers_call_from_agent_server(datadir: Path):
     env = {
         "SEMA4AI_FILE_MANAGEMENT_URL": "http://localhost:8000",
     }
-    result = actions_run(
-        args, returncode=0, cwd=str(datadir), additional_env=env
-    )
+    result = actions_run(args, returncode=0, cwd=str(datadir), additional_env=env)
     # assert json_output.read_text() == "value-in-header"
     output = result.stdout.decode("utf-8")
     assert "thread_id: thread-id-95542b5c" in output
@@ -224,9 +222,7 @@ def test_actions_with_agent_headers_call_with_invocation_context(datadir: Path):
     env = {
         "SEMA4AI_FILE_MANAGEMENT_URL": "http://localhost:8000",
     }
-    result = actions_run(
-        args, returncode=0, cwd=str(datadir), additional_env=env
-    )
+    result = actions_run(args, returncode=0, cwd=str(datadir), additional_env=env)
     # assert json_output.read_text() == "value-in-header"
     output = result.stdout.decode("utf-8")
     assert "thread_id: thread-id-123" in output

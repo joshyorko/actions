@@ -22,15 +22,15 @@ Note that it's also possible to programmatically run actions (without the Action
 
 Run all the actions in a .py file:
 
-`python -m actions run <path_to_file>`
+`actions run <path_to_file>`
 
 Run all the actions in files named *action*.py:
 
-`python -m actions run <directory>`
+`actions run <directory>`
 
 Run only actions with a given name:
 
-`python -m actions run <directory or file> -t <action_name>`
+`actions run <directory or file> -t <action_name>`
 
 # Variables
 
@@ -58,7 +58,7 @@ def enter_user() -> str:
 
 It'll be executable by Actions Core as:
 
-python -m actions run actions.py -a enter_user
+actions run actions.py -a enter_user
 
 **Args:**
 
@@ -66,7 +66,7 @@ python -m actions run actions.py -a enter_user
 - <b>`is_consequential`</b>: Whether the action is consequential or not. This will add `x-openai-isConsequential: true` to the action metadata and shown in OpenApi spec.
 - <b>`display_name`</b>: A name to be displayed for this action. If given will be used as the openapi.json summary for this action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L61)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L64)
 
 ```python
 action(*args, **kwargs)
@@ -86,7 +86,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L157)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L160)
 
 ```python
 action_cache(func)
@@ -98,7 +98,7 @@ ______________________________________________________________________
 
 Provides the action which is being currently run or None if not currently running an action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L192)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L195)
 
 ```python
 get_current_action() → Optional[IAction]
@@ -110,7 +110,7 @@ ______________________________________________________________________
 
 Provide the output directory being used for the run or None if there's no output dir configured.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L179)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L182)
 
 ```python
 get_output_dir() → Optional[Path]
@@ -130,7 +130,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L135)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L138)
 
 ```python
 session_cache(func)

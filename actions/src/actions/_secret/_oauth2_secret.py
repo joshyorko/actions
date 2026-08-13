@@ -151,9 +151,7 @@ class _RawOauth2Secret(_BaseInternalOAuth2Secret):
             value: A dict with the values meant to be wrapped in this class.
         """
         from actions._action import get_provider_and_scope_from_annotation_args
-        from actions._variables_scope import (
-            get_validate_and_convert_kwargs_scope,
-        )
+        from actions._variables_scope import get_validate_and_convert_kwargs_scope
 
         access_token = value.get("access_token")
         if not access_token:

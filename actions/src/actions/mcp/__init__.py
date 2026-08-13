@@ -132,7 +132,7 @@ def tool(*args, **kwargs):
     Note that a tool needs sema4ai actions to be executed.
     The command line to execute it is:
 
-    python -m actions run actions.py -a assign_ticket
+    actions run actions.py -a assign_ticket
     """
 
     def decorator(func, **kwargs):
@@ -247,7 +247,7 @@ def resource(*args, **kwargs) -> Callable:
     Note that a resource needs sema4ai actions to be executed.
     The command line to execute it is:
 
-    python -m actions run actions.py -a get_ticket
+    actions run actions.py -a get_ticket
 
     See: https://modelcontextprotocol.io/docs/concepts/resources
     """
@@ -345,7 +345,7 @@ def prompt(*args, **kwargs):
     Note that a prompt needs sema4ai actions to be executed.
     The command line to execute it is:
 
-    python -m actions run actions.py -a make_a_summary
+    actions run actions.py -a make_a_summary
     """
 
     def decorator(func):

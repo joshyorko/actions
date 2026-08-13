@@ -159,9 +159,7 @@ class Action:
                     # Not a pydantic type (nor anything with a `model_json_schema`).
                     # We need to convert it to a pydantic type.
 
-                    from actions._raw_types_handler import (
-                        _obtain_raw_types_handler,
-                    )
+                    from actions._raw_types_handler import _obtain_raw_types_handler
 
                     if param_name is None:
                         param_name = "return_value"

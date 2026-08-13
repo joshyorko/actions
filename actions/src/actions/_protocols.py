@@ -273,7 +273,7 @@ class IAfterActionRunCallback(ICallback, typing.Protocol):
 
 class ActionsListActionTypedDict(TypedDict):
     """
-    When python -m actions list is run, the output is a
+    When `actions list` is run, the output is a
     list[ActionsListActionTypedDict].
     """
 

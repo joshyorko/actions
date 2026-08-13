@@ -1,4 +1,5 @@
 import os.path
+import shutil
 import subprocess
 import sys
 from contextlib import nullcontext
@@ -90,6 +91,7 @@ def sema4ai_home(tmpdir_factory) -> str:
 
 # Using joshyorko/rcc open-source version
 RCC_VERSION = "v18.18.1"
+ACTIONS_RUN_TIMEOUT = 60
 
 
 def _download_rcc(location: str, force: bool = False) -> None:
@@ -283,6 +285,89 @@ def actions_run(
     )
 
 
+def actions_run(
+    cmdline,
+    returncode: Union[Literal["error"], Literal["any"], int],
+    cwd=None,
+    additional_env: Optional[Dict[str, str]] = None,
+    timeout=None,
+) -> CompletedProcess:
+    """Run the installed actions-core console script."""
+    executable = _actions_executable()
+    timeout = ACTIONS_RUN_TIMEOUT if timeout is None else timeout
+
+    cp = os.environ.copy()
+    cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+    if additional_env:
+        cp.update(additional_env)
+    if sys.platform == "win32":
+        args = [sys.executable, "-c", _ACTIONS_BOOTSTRAP] + cmdline
+    else:
+        args = [str(executable)] + cmdline
+    result = subprocess.run(
+        args,
+        capture_output=True,
+        env=cp,
+        cwd=cwd,
+        stdin=subprocess.DEVNULL,
+        timeout=timeout,
+    )
+
+    if returncode == "any":
+        return result
+
+    if returncode == "error" and result.returncode:
+        return result
+
+    if result.returncode == returncode:
+        return result
+
+    raise AssertionError(
+        f"""Expected returncode: {returncode}. Found: {result.returncode}.
+=== stdout:
+{result.stdout.decode('utf-8')}
+
+=== stderr:
+{result.stderr.decode('utf-8')}
+
+=== Args:
+{args}
+
+"""
+    )
+
+
+def _actions_executable() -> Path:
+    executable = shutil.which("actions")
+    if executable is None:
+        raise AssertionError(
+            "Missing installed actions console script on PATH: actions"
+        )
+    return Path(executable)
+
+
+_ACTIONS_BOOTSTRAP = """\
+import importlib.metadata
+import sys
+
+if sys.path and sys.path[0] == "":
+    del sys.path[0]
+
+distribution = importlib.metadata.distribution("actions-core")
+entry_points = [
+    entry_point
+    for entry_point in distribution.entry_points
+    if entry_point.group == "console_scripts" and entry_point.name == "actions"
+]
+if len(entry_points) != 1:
+    raise RuntimeError("actions-core must define exactly one actions console script")
+entry_point = entry_points[0]
+if entry_point.value != "actions.cli:main":
+    raise RuntimeError("actions console script must target actions.cli:main")
+raise SystemExit(entry_point.load()())
+"""
+
+
 def python_run(
     cmdline,
     returncode: Union[Literal["error"], Literal["any"], int],
@@ -295,7 +380,14 @@ def python_run(
     if additional_env:
         cp.update(additional_env)
     args = [sys.executable] + cmdline
-    result = subprocess.run(args, capture_output=True, env=cp, cwd=cwd, timeout=timeout)
+    result = subprocess.run(
+        args,
+        capture_output=True,
+        env=cp,
+        cwd=cwd,
+        stdin=subprocess.DEVNULL,
+        timeout=timeout,
+    )
 
     if returncode == "any":
         return result

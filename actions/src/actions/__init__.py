@@ -20,15 +20,15 @@ Server) with:
 
 Run all the actions in a .py file:
 
-  `python -m actions run <path_to_file>`
+  `actions run <path_to_file>`
 
 Run all the actions in files named *action*.py:
 
-  `python -m actions run <directory>`
+  `actions run <directory>`
 
 Run only actions with a given name:
 
-  `python -m actions run <directory or file> -t <action_name>`
+  `actions run <directory or file> -t <action_name>`
 
 """
 
@@ -79,7 +79,7 @@ def action(*args, **kwargs):
 
     It'll be executable by sema4ai actions as:
 
-    python -m actions run actions.py -a enter_user
+    actions run actions.py -a enter_user
 
     Args:
         func: A function which is an action to `actions`.

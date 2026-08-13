@@ -43,7 +43,7 @@ cryptography = "^46.0.3"
 requests_oauthlib = "^2.0"
 watchfiles = "^1.1.1"
 mcp = "^2.0.0"
-actions-work-items = "^0.4.3"
+actions-work-items = "^0.4.4"
 # Scheduling dependencies
 croniter = "^2.0.0"
 pytz = "^2024.1"

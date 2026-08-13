@@ -82,9 +82,7 @@ def collect_lint_errors(contents_to_lint: str) -> list[DiagnosticsTypedDict]:
     from actions._customization._plugin_manager import (  # noqa #type: ignore
         PluginManager,
     )
-    from actions._managed_parameters import (  # noqa #type: ignore
-        ManagedParameters,
-    )
+    from actions._managed_parameters import ManagedParameters  # noqa #type: ignore
 
     pm = PluginManager()
     pm.set_instance(EPManagedParameters, ManagedParameters({}))

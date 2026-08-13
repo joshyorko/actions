@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.4 - 2026-08-13
+
+- Stop shipping `actions/__init__.py`; `actions-core` exclusively owns the root
+  package while Work Items contributes only `actions.work_items`.
+
 ## 0.4.3 - 2026-08-07
 
 - Keep the public package version aliases synchronized with the built distribution.

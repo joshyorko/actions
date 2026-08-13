@@ -1,5 +1,4 @@
 from actions._secret import Secret
-
 from actions.mcp import prompt, resource
 
 
