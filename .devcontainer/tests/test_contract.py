@@ -235,6 +235,14 @@ class DevContainerContractTest(unittest.TestCase):
         workflow = (
             REPOSITORY_ROOT / ".github" / "workflows" / "actions_release.yml"
         ).read_text()
+        verifier = REPOSITORY_ROOT / "actions" / "scripts" / "verify_clean_wheel.py"
+        clean_break = (
+            REPOSITORY_ROOT
+            / "actions"
+            / "tests"
+            / "actions_core_tests"
+            / "test_clean_break_contract.py"
+        ).read_text()
         verify = workflow[workflow.index("  verify:") : workflow.index("\n  publish:")]
 
         self.assertIn('"actions-core-*"', workflow)
@@ -258,6 +266,18 @@ class DevContainerContractTest(unittest.TestCase):
         self.assertIn("poetry run twine check --strict dist/*", verify)
         self.assertLess(verify.index("poetry build"), verify.index("poetry run python -m pip install twine==6.2.0"))
         self.assertLess(verify.index("poetry run python -m pip install twine==6.2.0"), verify.index("poetry run twine check --strict dist/*"))
+        self.assertTrue(verifier.is_file())
+        self.assertIn("verify_clean_wheel.py", verify)
+        self.assertIn("actions-core", verifier.read_text())
+        self.assertIn("console_scripts", verifier.read_text())
+        self.assertIn("direct_url", verifier.read_text())
+        self.assertIn('"list"', verifier.read_text())
+        self.assertIn('"run"', verifier.read_text())
+        self.assertIn("stdin=subprocess.DEVNULL", clean_break)
+        self.assertIn("timeout=", clean_break)
+        self.assertIn("returncode", clean_break)
+        self.assertIn("stdout", clean_break)
+        self.assertIn("stderr", clean_break)
         self.assertLess(
             verify.index("poetry run twine check --strict dist/*"),
             verify.index("name: Upload verified Core artifacts"),

@@ -45,6 +45,9 @@ jobs:
       - name: Verify Core artifacts
         run: poetry run twine check --strict dist/*
 
+      - name: Verify clean installed Core wheel
+        run: python scripts/verify_clean_wheel.py "$(find dist -maxdepth 1 -name 'actions_core-*.whl' -print -quit)"
+
       - name: Upload verified Core artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

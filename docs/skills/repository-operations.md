@@ -57,8 +57,13 @@ details; tests resolve the command name `actions` and do not encode a launcher
 filename. Core test workflows consume
 `../devutils/requirements.txt`, which exact-pins Poetry 2.1.1. Core release
 verification builds once, installs exact Twine 6.2.0, runs
-`twine check --strict dist/*`, and uploads only after that check succeeds; the
-publish job downloads those verified artifacts without rebuilding them.
+`twine check --strict dist/*`, installs the exact wheel in a fresh venv outside
+the checkout, and executes benign `actions list` and `actions run` fixture
+commands before uploading. The clean-wheel verifier clears source
+`PYTHONPATH`, rejects editable/source `direct_url` metadata while retaining
+wheel archive provenance, and bounds subprocesses
+with closed stdin and a finite timeout. The publish job downloads those
+verified artifacts without rebuilding them.
 
 ## Evidence Ladder
 

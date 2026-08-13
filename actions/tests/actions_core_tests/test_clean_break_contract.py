@@ -11,6 +11,31 @@ import tomlkit
 ROOT = Path(__file__).parents[2]
 
 
+def _run_console(argv, cwd):
+    try:
+        result = subprocess.run(
+            argv,
+            cwd=cwd,
+            stdin=subprocess.DEVNULL,
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+    except subprocess.TimeoutExpired as error:
+        raise AssertionError(
+            f"actions command timed out: argv={argv!r}, cwd={cwd}, "
+            f"returncode=None, stdout={error.stdout!r}, stderr={error.stderr!r}"
+        ) from error
+
+    if result.returncode != 0:
+        raise AssertionError(
+            f"actions command failed: argv={argv!r}, cwd={cwd}, "
+            f"returncode={result.returncode}, stdout={result.stdout!r}, "
+            f"stderr={result.stderr!r}"
+        )
+    return result
+
+
 def test_actions_core_owns_public_namespace_and_absorbed_mcp():
     metadata = tomlkit.parse((ROOT / "pyproject.toml").read_text())
 
@@ -73,20 +98,16 @@ def test_installed_console_script_collects_and_executes_conventional_actions_py(
         )
 
     executable = Path(executable)
+    assert executable.parent == scripts_dir
 
-    result = subprocess.run(
-        [str(executable), "list", str(action_file), "--skip-lint"],
-        cwd=tmp_path,
-        capture_output=True,
-        text=True,
+    result = _run_console(
+        [str(executable), "list", str(action_file), "--skip-lint"], tmp_path
     )
-
-    assert result.returncode == 0, result.stderr
     listed = json.loads(result.stdout)
     assert [entry["name"] for entry in listed] == ["hello"]
 
     output_file = tmp_path / "result.json"
-    result = subprocess.run(
+    result = _run_console(
         [
             str(executable),
             "run",
@@ -95,12 +116,8 @@ def test_installed_console_script_collects_and_executes_conventional_actions_py(
             "hello",
             f"--json-output={output_file}",
         ],
-        cwd=tmp_path,
-        capture_output=True,
-        text=True,
+        tmp_path,
     )
-
-    assert result.returncode == 0, result.stderr
     assert json.loads(output_file.read_text()) == {
         "result": "Hello, world!",
         "message": "",
