@@ -34,6 +34,7 @@ class ActionInfo:
     display_name: str
     doc_desc: str
     output_schema_kind: OutputSchemaKind
+    mcp_meta: dict[str, Any] | None
 
 
 class McpResponseHandler:
@@ -84,11 +85,20 @@ class McpServerSetupHelper:
                 cookies=cookies,
             )
             if action_info.output_schema_kind == "string":
-                return CallToolResult(content=[TextContent(type="text", text=result)])
+                return CallToolResult(
+                    content=[TextContent(type="text", text=result)],
+                    _meta=action_info.mcp_meta,
+                )
             if action_info.output_schema_kind == "object":
-                return CallToolResult(content=[], structuredContent=result)
+                return CallToolResult(
+                    content=[], structuredContent=result, _meta=action_info.mcp_meta
+                )
             if action_info.output_schema_kind == "wrap-in-result-object":
-                return CallToolResult(content=[], structuredContent={"result": result})
+                return CallToolResult(
+                    content=[],
+                    structuredContent={"result": result},
+                    _meta=action_info.mcp_meta,
+                )
             raise ValueError(
                 f"Unknown output schema kind: {action_info.output_schema_kind}"
             )
@@ -145,11 +155,12 @@ class McpServerSetupHelper:
             text = json.dumps(result, indent=2)
             default_mime = "application/json"
         return ReadResourceResult(
+            _meta=action_info.mcp_meta,
             contents=[
                 TextResourceContents(
                     uri=uri, text=text, mime_type=mime_type or default_mime
                 )
-            ]
+            ],
         )
 
     async def _list_prompts(self, _ctx: Any, _params: Any) -> ListPromptsResult:
@@ -165,6 +176,7 @@ class McpServerSetupHelper:
             cookies=cookies,
         )
         return GetPromptResult(
+            _meta=action_info.mcp_meta,
             description=action_info.doc_desc,
             messages=[
                 PromptMessage(
@@ -189,6 +201,9 @@ class McpServerSetupHelper:
         doc_desc: str,
     ) -> None:
         options = json.loads(action.options) if action.options else {}
+        mcp_meta = options.get("_meta")
+        if mcp_meta is not None and not isinstance(mcp_meta, dict):
+            raise ValueError(f"MCP _meta for {action.name} must be an object")
         kind = options.get("kind", "action")
         if kind == "resource":
             uri = options.get("uri")
@@ -201,10 +216,11 @@ class McpServerSetupHelper:
                         name=action.name,
                         description=doc_desc,
                         mime_type=options.get("mime_type"),
+                        _meta=mcp_meta,
                     )
                 )
                 self._resource_template_to_action_info[uri] = ActionInfo(
-                    func, action, display_name, doc_desc, "string"
+                    func, action, display_name, doc_desc, "string", mcp_meta
                 )
             else:
                 resource_uri = uri
@@ -214,9 +230,10 @@ class McpServerSetupHelper:
                     description=doc_desc,
                     mime_type=options.get("mime_type"),
                     size=options.get("size"),
+                    _meta=mcp_meta,
                 )
                 self._resource_to_action_info[uri] = ActionInfo(
-                    func, action, display_name, doc_desc, "string"
+                    func, action, display_name, doc_desc, "string", mcp_meta
                 )
             return
         if kind == "prompt":
@@ -234,10 +251,11 @@ class McpServerSetupHelper:
                         )
                         for name, prop in schema.get("properties", {}).items()
                     ],
+                    _meta=mcp_meta,
                 )
             )
             self._prompt_name_to_action_info[action.name] = ActionInfo(
-                func, action, display_name, doc_desc, "string"
+                func, action, display_name, doc_desc, "string", mcp_meta
             )
             return
 
@@ -268,10 +286,11 @@ class McpServerSetupHelper:
                     idempotent_hint=options.get("idempotent_hint", False),
                     open_world_hint=options.get("open_world_hint", True),
                 ),
+                _meta=mcp_meta,
             )
         )
         self._tool_name_to_action_info[action.name] = ActionInfo(
-            func, action, display_name, doc_desc, output_schema_kind
+            func, action, display_name, doc_desc, output_schema_kind, mcp_meta
         )
 
     def unregister_actions(self) -> None:

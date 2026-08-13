@@ -54,6 +54,14 @@ action-server start
 
 👉 You should now have an Action Server running locally at: [http://localhost:8080](http://localhost:8080), so open that in your browser and the web UI will guide you further.
 
+### MCP compatibility
+
+`/mcp` supports the MCP `2026-07-28` per-request contract through the Python
+MCP SDK v2. Clients use `server/discover` and then send calls without an
+`initialize`/`initialized` exchange or `Mcp-Session-Id`. The legacy `/sse`
+endpoint and initialization/session-era compatibility path are intentionally
+not provided.
+
 ## What do you need in your Action Package
 
 An `Action Package` is currently defined as a local folder that contains at least one Python file containing an action entry point (a Python function marked with `@action` -decorator from `actions`).

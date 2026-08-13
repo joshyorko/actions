@@ -110,7 +110,7 @@ class _ActionRoutes:
 
     def setup_mcp_server(self, api_key: str | None) -> None:
         """
-        Setup the MCP server with both streamable HTTP and SSE support.
+        Set up the stateless streamable HTTP MCP endpoint.
         """
         from starlette.middleware.authentication import AuthenticationMiddleware
 

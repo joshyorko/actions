@@ -27,6 +27,15 @@ The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
 callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
 The Python API exposes snake-case fields such as `resource_templates`,
 `uri_template`, and `input_schema`; wire aliases remain protocol camelCase.
+The supported wire contract is MCP `2026-07-28`: discover, then make stateless
+per-request `/mcp` calls without `initialize`/`initialized` or
+`Mcp-Session-Id`; `/sse` is intentionally absent. SDK v2 catalog results carry
+`ttlMs: 0` and `cacheScope: private`, so they are immediately stale rather than
+indefinitely cacheable. Acceptance tests exercise independent replicas, a real
+forwarding gateway's `Mcp-Method`/`Mcp-Name` observation, header/cookie
+forwarding, catalog reload freshness, and Action option `_meta` propagation to
+the corresponding MCP definitions/results. Do not add Canvas behavior merely
+to maintain this adapter seam.
 The host checkout currently verifies this with isolated SDK source inspection
 because the Action Server Poetry environment is not installed. Publication-
 dependent lock regeneration and clean-install MCP verification remain

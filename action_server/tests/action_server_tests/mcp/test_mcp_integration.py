@@ -605,3 +605,273 @@ def test_mcp_integration_secrets(
         return "ok"
 
     assert run_async_in_new_thread(partial(check_with_secrets)) == "ok"
+
+
+_MODERN_PROTOCOL_VERSION = "2026-07-28"
+
+
+def _modern_request(
+    method: str, request_id: int, params: dict | None = None
+) -> tuple[dict, dict]:
+    use_params = dict(params or {})
+    use_params["_meta"] = {
+        "io.modelcontextprotocol/protocolVersion": _MODERN_PROTOCOL_VERSION,
+        "io.modelcontextprotocol/clientCapabilities": {},
+    }
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Mcp-Protocol-Version": _MODERN_PROTOCOL_VERSION,
+        "Mcp-Method": method,
+    }
+    if method == "tools/call":
+        headers["Mcp-Name"] = use_params["name"]
+    return headers, {
+        "jsonrpc": "2.0",
+        "id": request_id,
+        "method": method,
+        "params": use_params,
+    }
+
+
+async def _post_modern_mcp(
+    url: str, method: str, request_id: int, params: dict | None = None
+):
+    import httpx
+
+    headers, body = _modern_request(method, request_id, params)
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, headers=headers, json=body)
+    assert response.status_code == 200, response.text
+    assert "Mcp-Session-Id" not in response.headers
+    payload = response.json()
+    assert "error" not in payload, payload
+    return payload["result"]
+
+
+@pytest.mark.integration_test
+def test_modern_mcp_requests_can_move_between_independent_replicas(tmpdir) -> None:
+    """A 2026-07-28 request can move between independent stateless replicas."""
+    from pathlib import Path
+
+    from action_server_tests.fixtures import get_in_resources, run_async_in_new_thread
+    from actions.server._selftest import ActionServerProcess
+
+    root_dir = get_in_resources("no_conda", "greeter")
+    first = ActionServerProcess(Path(tmpdir) / "first-runtime")
+    second = ActionServerProcess(Path(tmpdir) / "second-runtime")
+    try:
+        first.start(
+            db_file="server.db", cwd=root_dir, actions_sync=True, timeout=60 * 10
+        )
+        second.start(
+            db_file="server.db", cwd=root_dir, actions_sync=True, timeout=60 * 10
+        )
+
+        async def call_each_replica() -> list[str]:
+            results = []
+            for port, name in ((first.port, "First"), (second.port, "Second")):
+                result = await _post_modern_mcp(
+                    f"http://localhost:{port}/mcp",
+                    "tools/call",
+                    request_id=1,
+                    params={"name": "greet", "arguments": {"name": name}},
+                )
+                results.append(result["content"][0]["text"])
+            return results
+
+        assert run_async_in_new_thread(call_each_replica) == [
+            "Hello Mr. First.",
+            "Hello Mr. Second.",
+        ]
+    finally:
+        second.stop()
+        first.stop()
+
+
+@pytest.mark.integration_test
+def test_mcp_test_gateway_observes_tool_routing_metadata(
+    action_server_process: ActionServerProcess,
+) -> None:
+    """A real forwarding gateway observes the route metadata sent over HTTP."""
+    from contextlib import asynccontextmanager
+
+    from action_server_tests.fixtures import get_in_resources, run_async_in_new_thread
+
+    root_dir = get_in_resources("no_conda", "greeter")
+    action_server_process.start(
+        db_file="server.db", cwd=root_dir, actions_sync=True, timeout=60 * 10
+    )
+
+    @asynccontextmanager
+    async def test_gateway(target_url: str):
+        from aiohttp import ClientSession, web
+
+        observed: list[dict[str, str]] = []
+
+        async def forward(request: web.Request) -> web.Response:
+            body = await request.read()
+            observed.append(
+                {key.lower(): value for key, value in request.headers.items()}
+            )
+            async with ClientSession() as upstream_client:
+                async with upstream_client.request(
+                    request.method,
+                    target_url + request.rel_url.path_qs,
+                    data=body,
+                    headers=dict(request.headers),
+                ) as upstream_response:
+                    response_headers = {
+                        key: value
+                        for key, value in upstream_response.headers.items()
+                        if key.lower()
+                        not in {"connection", "content-length", "transfer-encoding"}
+                    }
+                    return web.Response(
+                        status=upstream_response.status,
+                        headers=response_headers,
+                        body=await upstream_response.read(),
+                    )
+
+        app = web.Application()
+        app.router.add_route("*", "/{path:.*}", forward)
+        runner = web.AppRunner(app)
+        await runner.setup()
+        site = web.TCPSite(runner, "127.0.0.1", 0)
+        await site.start()
+        port = site._server.sockets[0].getsockname()[1]
+        try:
+            yield f"http://127.0.0.1:{port}", observed
+        finally:
+            await runner.cleanup()
+
+    async def call_through_gateway() -> list[dict[str, str]]:
+        import httpx2
+        from mcp.client.streamable_http import streamable_http_client
+
+        target_url = f"http://localhost:{action_server_process.port}"
+        async with test_gateway(target_url) as (gateway_url, observed):
+            async with httpx2.AsyncClient() as http_client:
+                async with streamable_http_client(
+                    f"{gateway_url}/mcp", http_client=http_client
+                ) as connection_info:
+                    async with ClientSession(
+                        connection_info[0], connection_info[1]
+                    ) as session:
+                        await session.discover()
+                        result = await session.call_tool("greet", {"name": "Gateway"})
+                        assert result.content[0].text == "Hello Mr. Gateway."
+            return observed
+
+    observed = run_async_in_new_thread(call_through_gateway)
+    tool_call = next(
+        headers for headers in observed if headers.get("mcp-method") == "tools/call"
+    )
+    assert tool_call["mcp-name"] == "greet"
+
+
+@pytest.mark.integration_test
+def test_mcp_forwards_headers_and_cookies_to_actions(
+    action_server_process: ActionServerProcess,
+) -> None:
+    from functools import partial
+
+    from action_server_tests.fixtures import get_in_resources
+
+    root_dir = get_in_resources("no_conda", "check_headers")
+    action_server_process.start(
+        db_file="server.db", cwd=root_dir, actions_sync=True, timeout=60 * 10
+    )
+
+    async def call_action():
+        import json
+
+        async with action_server_process.mcp_client(
+            headers={
+                "X-Mcp-Acceptance": "forwarded",
+                "Cookie": "mcp_acceptance_cookie=present",
+            }
+        ) as session:
+            result = await session.call_tool("check_headers", {"name": "Header"})
+        return json.loads(result.content[0].text)
+
+    observed = run_async_in_new_thread(partial(call_action))
+    observed_headers = {
+        key.lower(): value for key, value in observed["headers"].items()
+    }
+    observed_cookies = {
+        key.lower(): value for key, value in observed["cookies"].items()
+    }
+    assert observed_headers["x-mcp-acceptance"] == "forwarded", observed
+    assert observed_cookies["mcp_acceptance_cookie"] == "present", observed
+
+
+@pytest.mark.integration_test
+def test_mcp_catalogs_are_fresh_after_action_reload(
+    action_server_process: ActionServerProcess, tmpdir
+) -> None:
+    from pathlib import Path
+
+    from action_server_tests.fixtures import run_async_in_new_thread
+    from devutils.fixtures import wait_for_non_error_condition
+
+    actions_file = Path(tmpdir) / "catalog" / "catalog_actions.py"
+    actions_file.parent.mkdir(parents=True)
+
+    def write_catalog(suffix: str) -> None:
+        actions_file.write_text(
+            f"""\
+from actions import mcp
+
+@mcp.tool()
+def tool_{suffix}() -> str:
+    return "tool {suffix}"
+
+@mcp.resource("catalog://{suffix}")
+def resource_{suffix}() -> str:
+    return "resource {suffix}"
+
+@mcp.prompt()
+def prompt_{suffix}() -> str:
+    return "prompt {suffix}"
+"""
+        )
+
+    write_catalog("before")
+    action_server_process.start(
+        db_file="server.db",
+        cwd=actions_file.parent,
+        actions_sync=True,
+        timeout=60 * 10,
+        additional_args=["--auto-reload"],
+    )
+
+    async def catalog_names() -> dict[str, list[str]]:
+        base_url = f"http://localhost:{action_server_process.port}/mcp"
+        tools = await _post_modern_mcp(base_url, "tools/list", 1)
+        resources = await _post_modern_mcp(base_url, "resources/list", 2)
+        prompts = await _post_modern_mcp(base_url, "prompts/list", 3)
+        for result in (tools, resources, prompts):
+            assert result["ttlMs"] == 0
+            assert result["cacheScope"] == "private"
+        return {
+            "tools": [tool["name"] for tool in tools["tools"]],
+            "resources": [resource["uri"] for resource in resources["resources"]],
+            "prompts": [prompt["name"] for prompt in prompts["prompts"]],
+        }
+
+    assert run_async_in_new_thread(catalog_names) == {
+        "tools": ["tool_before"],
+        "resources": ["catalog://before"],
+        "prompts": ["prompt_before"],
+    }
+    write_catalog("after")
+
+    def assert_fresh_catalogs() -> None:
+        assert run_async_in_new_thread(catalog_names) == {
+            "tools": ["tool_after"],
+            "resources": ["catalog://after"],
+            "prompts": ["prompt_after"],
+        }
+
+    wait_for_non_error_condition(assert_fresh_catalogs)

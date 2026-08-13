@@ -150,3 +150,126 @@ def test_collect_and_call_prompt():
     result = run_async_in_new_thread(call)
     assert received_inputs == {"text": "test input"}
     assert "prompt result" in str(result)
+
+
+def test_preserves_declared_mcp_meta_on_tool_and_result():
+    import json
+
+    from action_server_tests.fixtures import run_async_in_new_thread
+    from actions.server._models import Action
+    from actions.server.mcp.setup_mcp_server_from_actions import (
+        McpServerSetupHelper,
+    )
+
+    declared_meta = {"ui": {"resourceUri": "ui://action-canvas/v1/canvas.html"}}
+    action = Action(
+        id="123",
+        action_package_id="456",
+        name="canvas_preview",
+        docs="preview",
+        file="test.py",
+        lineno=1,
+        input_schema=json.dumps({"type": "object", "properties": {}}),
+        output_schema=json.dumps({"type": "string"}),
+        enabled=True,
+        is_consequential=None,
+        managed_params_schema=None,
+        options=json.dumps({"kind": "tool", "_meta": declared_meta}),
+    )
+    setup = McpServerSetupHelper()
+
+    async def run(**kwargs):
+        return "preview ready"
+
+    setup.register_action(
+        func=run,
+        action_package=None,
+        action=action,
+        display_name="Canvas preview",
+        doc_desc="preview",
+    )
+
+    assert setup._tools[0].meta == declared_meta
+
+    async def call():
+        from types import SimpleNamespace
+
+        from mcp.types import CallToolRequestParams
+
+        return await setup._call_tool(
+            SimpleNamespace(request=None),
+            CallToolRequestParams(name="canvas_preview", arguments={}),
+        )
+
+    result = run_async_in_new_thread(call)
+    assert result.meta == declared_meta
+
+
+def test_preserves_declared_mcp_meta_on_resources_and_prompts():
+    import json
+
+    from action_server_tests.fixtures import run_async_in_new_thread
+    from actions.server._models import Action
+    from actions.server.mcp.setup_mcp_server_from_actions import (
+        McpServerSetupHelper,
+    )
+
+    declared_meta = {"ui": {"resourceUri": "ui://action-canvas/v1/canvas.html"}}
+    setup = McpServerSetupHelper()
+
+    async def run(**kwargs):
+        return "result"
+
+    for name, options in (
+        ("resource", {"kind": "resource", "uri": "https://canvas.example/direct"}),
+        (
+            "template",
+            {"kind": "resource", "uri": "https://canvas.example/{id}"},
+        ),
+        ("prompt", {"kind": "prompt"}),
+    ):
+        setup.register_action(
+            func=run,
+            action_package=None,
+            action=Action(
+                id=name,
+                action_package_id="456",
+                name=name,
+                docs=name,
+                file="test.py",
+                lineno=1,
+                input_schema=json.dumps({"type": "object", "properties": {}}),
+                output_schema=json.dumps({"type": "string"}),
+                enabled=True,
+                is_consequential=None,
+                managed_params_schema=None,
+                options=json.dumps({**options, "_meta": declared_meta}),
+            ),
+            display_name=name,
+            doc_desc=name,
+        )
+
+    assert setup._resources["https://canvas.example/direct"].meta == declared_meta
+    assert setup._resource_templates[0].meta == declared_meta
+    assert setup._prompts[0].meta == declared_meta
+
+    async def call():
+        from types import SimpleNamespace
+
+        from mcp.types import GetPromptRequestParams, ReadResourceRequestParams
+
+        ctx = SimpleNamespace(request=None)
+        return (
+            await setup._read_resource(
+                ctx, ReadResourceRequestParams(uri="https://canvas.example/direct")
+            ),
+            await setup._read_resource(
+                ctx, ReadResourceRequestParams(uri="https://canvas.example/123")
+            ),
+            await setup._get_prompt(ctx, GetPromptRequestParams(name="prompt")),
+        )
+
+    direct_result, template_result, prompt_result = run_async_in_new_thread(call)
+    assert direct_result.meta == declared_meta
+    assert template_result.meta == declared_meta
+    assert prompt_result.meta == declared_meta
