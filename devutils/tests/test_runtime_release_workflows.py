@@ -483,6 +483,8 @@ def test_runtime_publisher_rejects_same_name_from_wrong_workflow_before_download
         '{"id":"333870965","path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}',
         '{"id":333870965,"state":"active"}',
         '{"id":333870965,"path":".github/workflows/wrong.yml","state":"active"}',
+        '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml"}',
+        '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":null}',
         '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"disabled"}',
         '{"id":0,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}',
     ],
@@ -507,9 +509,17 @@ def test_runtime_publisher_rejects_malformed_canonical_workflow_before_download(
             "{id,path,state}",
         ]:
             result.stdout = workflow_response
+        elif command[1:3] == ["run", "view"]:
+            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
+        elif command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/runs/123/artifacts",
+        ]:
+            result.stdout = '{"artifactExpired":false}'
         return result
 
     monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(publisher, "verify_artifacts", lambda directory: ["artifact"])
     monkeypatch.setattr(
         sys,
         "argv",

@@ -67,8 +67,9 @@ Twine's child environment. Example commands are:
 and the same command with `--publish`. Run downloads resolve the canonical workflow by the
 supported filename identifier `actions_runtime_pypi_release.yml` in the requested repository.
 The returned workflow metadata must contain a positive integer database ID and the exact
-canonical path `.github/workflows/actions_runtime_pypi_release.yml`; a returned state, when
-present, must be `active`. That immutable workflow database ID must match the selected run,
+canonical path `.github/workflows/actions_runtime_pypi_release.yml`; the returned state must
+be exactly the string `active` (missing, null, non-string, and every other value fail closed).
+That immutable workflow database ID must match the selected run,
 in addition to exact SHA, tag ref, successful tag-push conclusion, the generated Runtime
 PyPI workflow, and a non-expired retained artifact before downloading. The display name is
 not an identity binding. Binary release names use GitHub expressions

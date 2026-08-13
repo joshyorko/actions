@@ -272,7 +272,7 @@ def canonical_workflow_id(repo: str) -> int:
         raise RuntimeError("canonical Runtime PyPI workflow has no valid database ID")
     if payload.get("path") != CANONICAL_WORKFLOW_PATH:
         raise RuntimeError("canonical Runtime PyPI workflow has an unexpected path")
-    if payload.get("state") is not None and payload["state"] != "active":
+    if payload.get("state") != "active":
         raise RuntimeError("canonical Runtime PyPI workflow is not active")
     return workflow_id
 
