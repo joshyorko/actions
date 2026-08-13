@@ -1196,7 +1196,11 @@ def generate_dependabot_config():
     pyproject_dirs = {
         str(f.parent.relative_to(root))
         for f in root.rglob("pyproject.toml")
-        if ("/tests/" not in f.as_posix() and "/.venv/" not in f.as_posix())
+        if (
+            "/tests/" not in f.as_posix()
+            and "/.venv/" not in f.as_posix()
+            and "/node_modules/" not in f.as_posix()
+        )
     }
     package_json_dirs = {
         str(f.parent.relative_to(root))
