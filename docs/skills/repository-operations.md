@@ -40,6 +40,18 @@ The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
 
+The stateless `/mcp` route validates `Mcp-Method` and `Mcp-Name` against the
+parsed JSON-RPC body in `actions.server.mcp.gateway_metadata`. Trusted metadata
+is available through `scope["state"]["actions.mcp.request_metadata"]` and
+`get_mcp_request_metadata()`, with `actions.mcp.method`, `actions.mcp.name`,
+and `actions.correlation_id` telemetry attributes. Missing identity headers are
+normalized from the body; mismatches and identity headers on malformed/error
+bodies return HTTP 400. `X-Request-ID` is preserved only when it is a canonical
+UUID; otherwise a UUID is generated. API-key authentication wraps this
+middleware and therefore retains its existing rejection order. Method is safe
+for metrics; the optional name attribute is intended for logs/traces and is
+length-bounded to avoid unbounded metric cardinality.
+
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
 `actions/poetry.lock` and `actions-http-helper/poetry.lock` files must exist and

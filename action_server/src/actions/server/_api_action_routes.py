@@ -155,6 +155,11 @@ class _ActionRoutes:
         app.custom_lifespan.register(_mcp_lifespan)
         mcp_route = self.streamable_http_server.routes[0]
         mcp_endpoint = mcp_route.endpoint
+        from actions.server.mcp.gateway_metadata import McpRequestMetadataMiddleware
+
+        # Authentication remains the outer middleware so unauthenticated requests
+        # are rejected before their body is inspected for routing metadata.
+        mcp_endpoint = McpRequestMetadataMiddleware(mcp_endpoint)
         if self._api_key:
             from starlette.middleware.authentication import AuthenticationMiddleware
 
