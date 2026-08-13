@@ -73,15 +73,15 @@ def is_community_build() -> bool:
     Check if this is a community build.
 
     Community builds use open-source tunnel providers (localhost.run, bore, cloudflare).
-    Enterprise builds use the proprietary sema4ai.link service.
+    Enterprise builds use the proprietary actions.link service.
 
     Detection is based on:
-    1. SEMA4AI_BUILD_TIER environment variable (if set)
+    1. ACTIONS_BUILD_TIER environment variable (if set)
     2. Presence of enterprise-specific markers in the frozen binary
     3. Default to community if running from source
     """
     # Check environment variable first
-    tier = os.environ.get("SEMA4AI_BUILD_TIER", "").lower()
+    tier = os.environ.get("ACTIONS_BUILD_TIER", "").lower()
     if tier == "enterprise":
         return False
     if tier == "community":
@@ -135,7 +135,7 @@ def _legacy_get_default_settings_dir() -> Path:
 @lru_cache
 def get_default_settings_dir() -> Path:
     # Check for env vars (support both new and legacy)
-    home_env_var = os.environ.get("ACTIONS_HOME") or os.environ.get("SEMA4AI_HOME")
+    home_env_var = os.environ.get("ACTIONS_HOME")
     if home_env_var:
         home = Path(home_env_var)
     else:
@@ -180,7 +180,7 @@ so that this message is no longer shown.
 @lru_cache
 def get_user_actions_path() -> Path:
     """Get user's actions home directory."""
-    home_env_var = os.environ.get("ACTIONS_HOME") or os.environ.get("SEMA4AI_HOME")
+    home_env_var = os.environ.get("ACTIONS_HOME")
     if home_env_var:
         home = Path(home_env_var)
     elif sys.platform == "win32":
@@ -195,10 +195,6 @@ def get_user_actions_path() -> Path:
     user_actions_path = home / "action-server"
     user_actions_path.mkdir(parents=True, exist_ok=True)
     return user_actions_path
-
-
-# Legacy alias for compatibility
-get_user_sema4_path = get_user_actions_path
 
 
 @lru_cache
@@ -256,14 +252,14 @@ class Settings:
     artifacts_dir: Path
     datadir: Path
 
-    title: str = "Sema4.ai Action Server"
+    title: str = "Actions Runtime"
 
     address: str = "localhost"
     port: int = 8080
     verbose: bool = False
     db_file: str = "server.db"
-    expose_url: str = "sema4ai.link"
-    expose_provider: str = "auto"  # 'auto', 'localhost.run', 'bore', 'cloudflare', 'sema4ai' (enterprise only)
+    expose_url: str = "actions.link"
+    expose_provider: str = "auto"  # 'auto', 'localhost.run', 'bore', 'cloudflare', 'actions' (enterprise only)
     server_url: str = "<generated -- i.e.: http://localhost:8080>"
 
     min_processes: int = 2
@@ -409,7 +405,7 @@ class Settings:
         if args.command == "start":
             # At this point, if using a self-signed certificate, it'll be
             # created and ssl_keyfile/ssl_certfile will be set.
-            user_path = get_user_sema4_path()
+            user_path = get_user_actions_path()
 
             if settings.use_https:
                 if settings.ssl_self_signed:

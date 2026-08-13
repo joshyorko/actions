@@ -346,12 +346,12 @@ def start_server(
         url = f"{protocol}://{host}:{port}"
 
         # Check if we should use community expose (open source tunnels)
-        if is_community_build() or settings.expose_provider != "sema4ai":
+        if is_community_build() or settings.expose_provider != "actions":
             # Use community expose with open source tunnel providers
             asyncio.create_task(_start_community_expose(port, settings))
             return
 
-        # Enterprise expose using sema4ai.link
+        # Enterprise expose using actions.link
         parent_pid = os.getpid()
 
         if is_frozen():
@@ -377,7 +377,7 @@ def start_server(
         ]
         settings.use_https
         env = os.environ.copy()
-        env["SEMA4AI-SERVER-HTTPS-INFO"] = json.dumps(
+        env["ACTIONS-SERVER-HTTPS-INFO"] = json.dumps(
             {"use_https": settings.use_https, "ssl_certfile": settings.ssl_certfile}
         )
         expose_subprocess = subprocess.Popen(args, env=env)

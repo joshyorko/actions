@@ -124,13 +124,13 @@ def _wrap_socket(
 
 
 @lru_cache
-def _get_action_server_user_sema4_path() -> Path:
+def _get_action_server_user_actions_path() -> Path:
     """
     Note: use the same folder as the action server (to reuse the certificate
     that was generated there if available).
     """
     # Check for env vars (support both new and legacy)
-    home_env_var = os.environ.get("ACTIONS_HOME") or os.environ.get("SEMA4AI_HOME")
+    home_env_var = os.environ.get("ACTIONS_HOME")
     if home_env_var:
         home = Path(home_env_var)
     elif sys.platform == "win32":
@@ -193,7 +193,7 @@ def _start_server(
         if ssl_self_signed:
             from . import gen_certificate
 
-            user_path = _get_action_server_user_sema4_path()
+            user_path = _get_action_server_user_actions_path()
 
             # Note: Same paths from the action server.
 

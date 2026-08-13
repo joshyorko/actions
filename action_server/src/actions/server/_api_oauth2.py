@@ -6,7 +6,7 @@ We need to cover 2 use-cases here:
       oauth urls as well as in the index)
     - A pop-up browser window is opened at `/oauth2/login`
     - The user provides his information
-    - A `/sema4ai/oauth2` request is received as a callback, at which
+    - A `/actions/oauth2` request is received as a callback, at which
       point the session id will be connected to the token and a
       call to the action server should automatically add the required
       tokens when the action is called (and refresh them as needed).
@@ -18,7 +18,7 @@ We need to cover 2 use-cases here:
       can be retrieved later.
       -- The `reference_id` must also be passed so that the login state can be checked
       later on.
-    - After the `/sema4ai/oauth2` is triggered by the browser the `callback_url`
+    - After the `/actions/oauth2` is triggered by the browser the `callback_url`
       will be triggered in succession.
 """
 
@@ -496,7 +496,7 @@ def _create_oauth2_session(
     app_settings = get_settings()
     base_url = app_settings.base_url
     assert base_url, "Internal error: `base_url` not available from app settings."
-    redirect_uri = f"{base_url}/sema4ai/oauth2/"
+    redirect_uri = f"{base_url}/actions/oauth2/"
 
     kwargs: dict[str, Any] = {}
 
@@ -579,7 +579,7 @@ def _update_db_with_token(
     return data
 
 
-@oauth2_api_router.get("/sema4ai/oauth2")
+@oauth2_api_router.get("/actions/oauth2")
 async def oauth2_redirect(request: Request, state: str = "") -> HTMLResponse:
     """
     Callback that should've been registered in the OAuth2 callback to

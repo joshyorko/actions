@@ -312,7 +312,7 @@ def test_server_expose_local(
 # def manual_tests_on_url():
 #     from actions.server._selftest import ActionServerClient
 #
-#     url = "https://twenty-four-tame-rabbits.sema4ai.link"
+#     url = "https://twenty-four-tame-rabbits.actions.link"
 #     client = ActionServerClient(url)
 #     print(client.get_openapi_json())
 #     print(

@@ -61,9 +61,9 @@ class UvicornAccessDisableOAuth2LogFilter(Filter):
                     args = list(record.args)
                     args[2] = "/oauth2/login/?..."
                     record.args = tuple(args)
-                elif record.args[2].startswith("/sema4ai/oauth2"):
+                elif record.args[2].startswith("/actions/oauth2"):
                     args = list(record.args)
-                    args[2] = "/sema4ai/oauth2/?..."
+                    args[2] = "/actions/oauth2/?..."
                     record.args = tuple(args)
                 return True
         return True

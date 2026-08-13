@@ -12,9 +12,9 @@ from actions.server._selftest import ActionServerClient, ActionServerProcess
 def _verify_oauth2_settings() -> Path:
     import yaml
 
-    from actions.server._settings import get_user_sema4_path
+    from actions.server._settings import get_user_actions_path
 
-    user = get_user_sema4_path()
+    user = get_user_actions_path()
     yaml_location = user / "oauth2_config.yaml"
     assert (
         yaml_location.exists()

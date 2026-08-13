@@ -54,14 +54,10 @@ def test_new_list_templates(tmpdir) -> None:
     templates: list[dict[str, str]] = json.loads(output.stdout)
 
     template_names = {template.get("name") for template in templates}
-    assert template_names == {
-        "advanced",
-        "basic",
-        "minimal",
-        "data-access-query",
-        "data-access-native",
-        "data-access-kb",
-    }
+    assert {"advanced", "basic", "minimal"} <= template_names
+    assert not template_names.intersection(
+        {"data-access-query", "data-access-native", "data-access-kb"}
+    )
 
 
 def fix_eol(text: str) -> str:

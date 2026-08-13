@@ -5,7 +5,7 @@ from typing import Any
 
 @dataclass
 class OAuth2ProviderSettings:
-    mode: str | None = None  # custom/sema4ai
+    mode: str | None = None  # custom/actions
     name: str | None = None
     clientId: str | None = None
     clientSecret: str | None = None
@@ -155,15 +155,15 @@ def get_oauthlib2_user_settings(
     return contents
 
 
-def _get_oauthlib2_sema4ai_settings(provider: str) -> dict:
+def _get_oauthlib2_actions_settings(provider: str) -> dict:
     import yaml
 
-    from .._oauth2 import get_sema4ai_provided_oauth2_config
+    from .._oauth2 import get_actions_provided_oauth2_config
 
-    contents = get_sema4ai_provided_oauth2_config()
+    contents = get_actions_provided_oauth2_config()
     dct = yaml.safe_load(contents)
     if not isinstance(dct, dict):
-        raise RuntimeError("Expected the Sema4.ai oauth2 config to be a yaml.")
+        raise RuntimeError("Expected the Actions oauth2 config to be a yaml.")
 
     oauth2_config = _require("oauth2Config", dct)
     providers = _require("providers", oauth2_config)
@@ -172,7 +172,7 @@ def _get_oauthlib2_sema4ai_settings(provider: str) -> dict:
 
     if not settings:
         raise RuntimeError(
-            f"Found no OAuth2 info for provider {provider} in sema4ai settings (either the provider name is mistyped or it's an unsupported provider and thus must be 'custom')."
+            f"Found no OAuth2 info for provider {provider} in actions settings (either the provider name is mistyped or it's an unsupported provider and thus must be 'custom')."
         )
 
     if not isinstance(settings, dict):
@@ -212,16 +212,16 @@ def get_oauthlib2_provider_settings(
     mode = settings.get("mode")
     if not mode:
         raise RuntimeError(
-            f"'mode' not specified for provider: {provider} (expected either 'sema4ai' or 'custom' to be set as the mode)."
+            f"'mode' not specified for provider: {provider} (expected either 'actions' or 'custom' to be set as the mode)."
         )
 
-    if mode not in ("custom", "sema4ai"):
+    if mode not in ("custom", "actions"):
         raise RuntimeError(
-            f"Invalid 'mode': {mode!r} specified for provider: {provider} (expected either 'sema4ai' or 'custom' to be set as the mode)."
+            f"Invalid 'mode': {mode!r} specified for provider: {provider} (expected either 'actions' or 'custom' to be set as the mode)."
         )
 
-    if mode == "sema4ai":
-        settings = _get_oauthlib2_sema4ai_settings(provider)
+    if mode == "actions":
+        settings = _get_oauthlib2_actions_settings(provider)
 
     if "clientId" not in settings:
         raise RuntimeError(

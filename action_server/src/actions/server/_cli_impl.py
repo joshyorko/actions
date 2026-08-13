@@ -69,7 +69,7 @@ def _add_start_server_command(command_parser, defaults):
     start_parser = command_parser.add_parser(
         "start",
         help=(
-            "Starts the Sema4.ai Action Server (importing the actions in the "
+            "Starts the Actions Runtime (importing the actions in the "
             "current directory by default)."
         ),
     )
@@ -412,7 +412,7 @@ def _add_oauth2_command(command_subparser, defaults):
 
     oauth2_subparsers.add_parser(
         "actions-config",
-        help="Returns Sema4.ai OAuth2 configuration",
+        help="Returns Actions OAuth2 configuration",
     )
 
     user_config_path_parser = oauth2_subparsers.add_parser(
@@ -450,7 +450,7 @@ def _create_parser():
     defaults = Settings.defaults()
     base_parser = argparse.ArgumentParser(
         prog="action-server",
-        description=f"Sema4.ai Action Server ({__version__})",
+        description=f"Actions Runtime ({__version__})",
         formatter_class=argparse.RawTextHelpFormatter,
     )
 
@@ -467,7 +467,7 @@ def _create_parser():
         "download-rcc",
         help=(
             "Downloads RCC (by default to the location required by the "
-            "Sema4.ai Action Server)"
+            "Actions Runtime)"
         ),
     )
 

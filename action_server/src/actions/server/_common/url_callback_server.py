@@ -118,7 +118,7 @@ def _wrap_socket(
 
 
 @lru_cache
-def _get_action_server_user_sema4_path() -> Path:
+def _get_action_server_user_actions_path() -> Path:
     """
     Note: use the same folder as the action server (to reuse the certificate
     that was generated there if available).
@@ -127,14 +127,14 @@ def _get_action_server_user_sema4_path() -> Path:
         localappdata = os.environ.get("LOCALAPPDATA")
         if not localappdata:
             raise RuntimeError("Error. LOCALAPPDATA not defined in environment!")
-        home = Path(localappdata) / "sema4ai"
+        home = Path(localappdata) / "actions"
     else:
         # Linux/Mac
-        home = Path("~/.sema4ai").expanduser()
+        home = Path("~/.actions").expanduser()
 
-    user_sema4_path = home / "action-server"
-    user_sema4_path.mkdir(parents=True, exist_ok=True)
-    return user_sema4_path
+    user_actions_path = home / "action-server"
+    user_actions_path.mkdir(parents=True, exist_ok=True)
+    return user_actions_path
 
 
 def _start_server(
@@ -183,7 +183,7 @@ def _start_server(
         if ssl_self_signed:
             from . import gen_certificate
 
-            user_path = _get_action_server_user_sema4_path()
+            user_path = _get_action_server_user_actions_path()
 
             # Note: Same paths from the action server.
 

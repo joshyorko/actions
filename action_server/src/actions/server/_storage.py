@@ -10,7 +10,7 @@ from pydantic.main import BaseModel
 
 from actions.server._settings import (
     get_default_settings_dir,
-    get_user_sema4_path,
+    get_user_actions_path,
 )
 
 log = getLogger(__name__)
@@ -49,9 +49,9 @@ def get_storage_path() -> Path:
 @lru_cache
 def get_key_file_path(purpose: Literal["local", "ui"] = "local") -> Path:
     if purpose == "local":
-        return get_user_sema4_path() / ".storage.key"
+        return get_user_actions_path() / ".storage.key"
     elif purpose == "ui":
-        return get_user_sema4_path() / ".ui.storage.key"
+        return get_user_actions_path() / ".ui.storage.key"
 
     raise AssertionError(f"Unexpected purpose: {purpose}")
 
