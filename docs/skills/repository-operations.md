@@ -37,7 +37,9 @@ The default `inv validate-artifact` task ensures `frontend/dist` and
 `frontend/dist-canvas` exist, building only a missing canonical root with its
 exact owned `npm run build:runtime` or `npm run build:canvas` command, then
 validates both independently. Explicit `--runtime-artifact` and
-`--canvas-artifact` roots are validation-only and fail if missing. Its output
+`--canvas-artifact` roots are validation-only and must resolve to existing
+directories; files, missing paths, and broken symlinks fail before scanning.
+Directory symlinks are resolved before the recursive scan. Its output
 identifies each artifact, so a passing Runtime check cannot hide an unscanned
 or failed Canvas artifact.
 

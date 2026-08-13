@@ -154,6 +154,95 @@ def test_validate_artifact_does_not_build_explicit_missing_root(tmp_path, monkey
     assert raised.value.code == 2
 
 
+@pytest.mark.parametrize("root_kind", ["file", "missing", "broken-symlink"])
+def test_validate_artifact_rejects_unsuitable_explicit_runtime_root(
+    tmp_path, monkeypatch, root_kind
+):
+    """Explicit artifact roots must be existing directories."""
+    action_server = Path(__file__).parents[2]
+    sys.path.insert(0, str(action_server))
+    import tasks
+    from invoke import Context
+
+    canvas = tmp_path / "canvas"
+    canvas.mkdir()
+    (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+    runtime = tmp_path / "runtime"
+    if root_kind == "file":
+        runtime.write_text("import 'react';", encoding="utf-8")
+    elif root_kind == "broken-symlink":
+        runtime.symlink_to(tmp_path / "does-not-exist")
+    monkeypatch.setattr(tasks, "CURDIR", tmp_path)
+    (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
+
+    with pytest.raises(SystemExit) as raised:
+        tasks.validate_artifact.body(
+            Context(),
+            runtime_artifact=str(runtime),
+            canvas_artifact=str(canvas),
+            json_output=False,
+        )
+
+    assert raised.value.code == 2
+
+
+def test_validate_artifact_explicit_directory_scans_all_source_files(
+    tmp_path, monkeypatch, capsys
+):
+    """Explicit directories are recursively scanned for forbidden imports."""
+    action_server = Path(__file__).parents[2]
+    sys.path.insert(0, str(action_server))
+    import tasks
+    from invoke import Context
+
+    runtime = tmp_path / "runtime"
+    canvas = tmp_path / "canvas"
+    (runtime / "safe").mkdir(parents=True)
+    canvas.mkdir()
+    (runtime / "safe" / "index.js").write_text("import 'react';", encoding="utf-8")
+    (runtime / "poison.html").write_text(
+        '"@sema4ai/components"', encoding="utf-8"
+    )
+    (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+    monkeypatch.setattr(tasks, "CURDIR", tmp_path)
+    (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
+
+    with pytest.raises(SystemExit) as raised:
+        tasks.validate_artifact.body(
+            Context(),
+            runtime_artifact=str(runtime),
+            canvas_artifact=str(canvas),
+            json_output=False,
+        )
+
+    assert raised.value.code == 2
+    assert "@sema4ai/components" in capsys.readouterr().out
+
+
+def test_validate_artifact_accepts_clean_explicit_directories(tmp_path, monkeypatch):
+    """Clean explicit Runtime and Canvas directories pass validation."""
+    action_server = Path(__file__).parents[2]
+    sys.path.insert(0, str(action_server))
+    import tasks
+    from invoke import Context
+
+    runtime = tmp_path / "runtime"
+    canvas = tmp_path / "canvas"
+    runtime.mkdir()
+    canvas.mkdir()
+    (runtime / "index.html").write_text("<main>runtime</main>", encoding="utf-8")
+    (canvas / "index.html").write_text("<main>canvas</main>", encoding="utf-8")
+    monkeypatch.setattr(tasks, "CURDIR", tmp_path)
+    (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
+
+    tasks.validate_artifact.body(
+        Context(),
+        runtime_artifact=str(runtime),
+        canvas_artifact=str(canvas),
+        json_output=False,
+    )
+
+
 def test_validate_artifact_task_rejects_poisoned_runtime_html(
     tmp_path, monkeypatch, capsys
 ):

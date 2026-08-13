@@ -301,16 +301,35 @@ def validate_artifact(
     all_passed = True
 
     for artifact_path in artifact_paths:
-        if not artifact_path.exists():
+        try:
+            resolved_artifact_path = artifact_path.resolve(strict=True)
+        except OSError as exc:
             results.append(
-                (artifact_path, False, [], f"Artifact path not found: {artifact_path}")
+                (
+                    artifact_path,
+                    False,
+                    [],
+                    f"Artifact root cannot be resolved: {artifact_path} ({exc})",
+                )
+            )
+            all_passed = False
+            continue
+
+        if not resolved_artifact_path.is_dir():
+            results.append(
+                (
+                    artifact_path,
+                    False,
+                    [],
+                    f"Artifact root must be a directory: {artifact_path}",
+                )
             )
             all_passed = False
             continue
 
         try:
             artifact_passed, checks = validate_artifact_func(
-                artifact_path,
+                resolved_artifact_path,
                 baseline_path if baseline_path.exists() else None,
                 json_output,
             )
