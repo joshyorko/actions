@@ -6,9 +6,9 @@ This directory contains vendored npm packages for the Action Server frontend des
 
 The following packages are vendored in this directory:
 
-- **@sema4ai/components** (v0.1.1) - UI component library
-- **@sema4ai/icons** (v0.1.2) - Icon library
-- **@sema4ai/theme** (v0.1.1-RC1) - Theming system
+- **actions-runtime-components** (v0.1.1) - UI component library
+- **actions-runtime-icons** (v0.1.2) - Icon library
+- **actions-runtime-theme** (v0.1.1-RC1) - Theming system
 
 ## Why These Packages are Vendored
 
@@ -26,15 +26,15 @@ This approach follows the Constitution V (Vendored Builds) requirement for repro
 ```
 vendored/
 ├── manifest.json           # Package metadata and checksums
-├── components/             # @sema4ai/components package
+├── components/             # actions-runtime-components package
 │   ├── package.json
 │   ├── dist/              # Compiled JS/CSS
 │   └── LICENSE
-├── icons/                  # @sema4ai/icons package
+├── icons/                  # actions-runtime-icons package
 │   ├── package.json
 │   ├── dist/
 │   └── LICENSE
-└── theme/                  # @sema4ai/theme package
+└── theme/                  # actions-runtime-theme package
     ├── package.json
     ├── dist/
     └── LICENSE
@@ -75,7 +75,7 @@ cd action_server
 
 # Vendor a single package
 python build-binary/vendor-frontend.py \
-  --package @sema4ai/components \
+  --package actions-runtime-components \
   --version 0.1.1
 
 # Or update all packages
@@ -116,7 +116,7 @@ If you have GitHub Packages access and need to update immediately:
 3. **Update a specific package**:
    ```bash
    python build-binary/vendor-frontend.py \
-     --package @sema4ai/components \
+     --package actions-runtime-components \
      --version 0.1.2
    ```
 
@@ -144,7 +144,7 @@ All vendored packages are proprietary to Sema4.ai, Inc. and licensed under "SEE 
 
 ## Troubleshooting
 
-### Build fails with "Cannot find module '@sema4ai/components'"
+### Build fails with "Cannot find module 'actions-runtime-components'"
 
 **Cause**: npm didn't properly install the local packages.
 
@@ -166,7 +166,7 @@ git checkout action_server/frontend/vendored/
 
 # Or re-vendor the packages (requires credentials)
 cd action_server
-python build-binary/vendor-frontend.py --package @sema4ai/components --version 0.1.1
+python build-binary/vendor-frontend.py --package actions-runtime-components --version 0.1.1
 ```
 
 ### Monthly update workflow fails

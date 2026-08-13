@@ -1,5 +1,5 @@
-import { Box, Card, Header, List, Typography } from '@sema4ai/components';
-import { IconUsers } from '@sema4ai/icons';
+import { Box, Card, Header, List, Typography } from 'actions-runtime-components';
+import { IconUsers } from 'actions-runtime-icons';
 
 const OrgManagementPage = () => {
   return (

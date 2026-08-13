@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Badge } from '@sema4ai/components';
+import { Badge } from 'actions-runtime-components';
 
 import { RunStatus } from '@/shared/types';
 

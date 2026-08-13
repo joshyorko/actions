@@ -1,12 +1,12 @@
 import { FC, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Badge, Column, Header, Table, TableRowProps } from '@sema4ai/components';
+import { Badge, Column, Header, Table, TableRowProps } from 'actions-runtime-components';
 
 import { useActionServerContext } from '@/shared/context/actionServerContext';
 import { Action, ActionPackage, Run } from '@/shared/types';
 import { ViewError, ViewLoader } from '~/components';
 
-import { IconPlay, IconUnorderedList } from '@sema4ai/icons';
+import { IconPlay, IconUnorderedList } from 'actions-runtime-icons';
 import { ActionDetails } from './components/ActionDetails';
 import { Welcome } from '../welcome';
 

@@ -1,5 +1,5 @@
 import { ComponentProps, RefObject } from 'react';
-import { componentWithRef, Grid } from '@sema4ai/components';
+import { componentWithRef, Grid } from 'actions-runtime-components';
 import { styled } from '~/vendor/sema4ai-theme';
 import { DefinitionListKey, DefinitionListValue } from './components/Item';
 

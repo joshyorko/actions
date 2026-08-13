@@ -9,7 +9,7 @@ const tier = process.env.TIER || 'community';
 const isCommunity = tier === 'community';
 
 // Vendored packages that are allowed in community builds
-const VENDORED_PACKAGES = ['@sema4ai/components', '@sema4ai/icons'];
+const VENDORED_PACKAGES = ['actions-runtime-components', 'actions-runtime-icons'];
 
 // Custom plugin to enforce tier separation
 function tierSeparationPlugin() {
@@ -19,11 +19,11 @@ function tierSeparationPlugin() {
     resolveId(source, importer) {
       // Block enterprise imports in community builds
       if (isCommunity) {
-        // Allow vendored @sema4ai packages
+        // Allow internal vendored packages
         if (VENDORED_PACKAGES.some(pkg => source.startsWith(pkg))) {
           return null; // Allow these
         }
-        if (source.includes('@sema4ai/') ||
+        if (source.includes('actions-runtime-') ||
             source.includes('@/enterprise') ||
             source.includes('../enterprise')) {
           console.error(`❌ Enterprise import detected in community build: ${source}`);
@@ -82,7 +82,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       // Tree-shake enterprise code in community builds
-      // Note: Vendored packages (@sema4ai/components, @sema4ai/icons) are NOT externalized
+      // Note: Vendored packages (actions-runtime-components, actions-runtime-icons) are NOT externalized
       external: isCommunity ? [
         /@\/enterprise\/.*/,
       ] : [],

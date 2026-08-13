@@ -18,8 +18,8 @@ import {
   Select,
   Switch,
   Typography,
-} from '@sema4ai/components';
-import { IconBolt, IconLoading, IconLogIn, IconLogOut } from '@sema4ai/icons';
+} from 'actions-runtime-components';
+import { IconBolt, IconLoading, IconLogIn, IconLogOut } from 'actions-runtime-icons';
 
 import { Action, ActionPackage, AsyncLoaded, RunStatus, ServerConfig } from '@/shared/types';
 import { toKebabCase } from '@/shared/utils/helpers';

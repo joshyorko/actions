@@ -1,5 +1,5 @@
-import { Box, Card, Form, Header, Input, Stack, Switch, Typography } from '@sema4ai/components';
-import { IconLock } from '@sema4ai/icons';
+import { Box, Card, Form, Header, Input, Stack, Switch, Typography } from 'actions-runtime-components';
+import { IconLock } from 'actions-runtime-icons';
 
 const SsoPage = () => {
   return (

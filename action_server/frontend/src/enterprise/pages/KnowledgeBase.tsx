@@ -1,5 +1,5 @@
-import { Box, Card, Header, Link, Typography } from '@sema4ai/components';
-import { IconBook } from '@sema4ai/icons';
+import { Box, Card, Header, Link, Typography } from 'actions-runtime-components';
+import { IconBook } from 'actions-runtime-icons';
 
 const KnowledgeBasePage = () => {
   return (

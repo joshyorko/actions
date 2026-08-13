@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
-import { Box, Button } from '@sema4ai/components';
+import { Box, Button } from 'actions-runtime-components';
 import { styled } from '~/vendor/sema4ai-theme';
-import { IconMenu, IconSun } from '@sema4ai/icons';
+import { IconMenu, IconSun } from 'actions-runtime-icons';
 import { useActionServerContext } from '@/shared/context/actionServerContext';
 
 const StyledTopNavigationButton = styled(Button)`

@@ -1,6 +1,6 @@
 /* eslint-disable styled-components-a11y/no-static-element-interactions */
 /* eslint-disable styled-components-a11y/click-events-have-key-events */
-import { Box, Typography } from '@sema4ai/components';
+import { Box, Typography } from 'actions-runtime-components';
 import { Color, styled } from '~/vendor/sema4ai-theme';
 
 const Card = styled.div<{ $color: Color }>`

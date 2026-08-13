@@ -1,9 +1,9 @@
 {
-  "name": "@sema4ai/icons",
+  "name": "actions-runtime-icons",
   "version": "0.1.2",
   "main": "dist/index.js",
   "license": "SEE LICENSE IN LICENSE",
-  "description": "Stub package for @sema4ai/icons",
+  "description": "Stub package for actions-runtime-icons",
   "exports": {
     ".": "./dist/index.js",
     "./logos": "./dist/logos.js"

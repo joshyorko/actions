@@ -3,7 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
 
-import { Button, Dialog, Tooltip } from '@sema4ai/components';
+import { Button, Dialog, Tooltip } from 'actions-runtime-components';
 import { FC, useCallback, useState } from 'react';
 import { ServerConfig } from '@/shared/types';
 

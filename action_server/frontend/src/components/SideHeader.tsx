@@ -1,6 +1,6 @@
 import { FC, useCallback } from 'react';
-import { Box, Typography, usePopover } from '@sema4ai/components';
-import { IconGlobe, IconLink, IconWifiNoConnection } from '@sema4ai/icons';
+import { Box, Typography, usePopover } from 'actions-runtime-components';
+import { IconGlobe, IconLink, IconWifiNoConnection } from 'actions-runtime-icons';
 import { styled } from '~/vendor/sema4ai-theme';
 
 import { useActionServerContext } from '@/shared/context/actionServerContext';
