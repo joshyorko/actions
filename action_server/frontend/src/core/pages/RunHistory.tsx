@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Button } from '@/core/components/ui/Button';
@@ -12,7 +13,8 @@ import { Select, SelectItem } from '@/core/components/ui/Select';
 import { useActionServerContext } from '@/shared/context/actionServerContext';
 import { Run, RunStatus } from '@/shared/types';
 import { cn } from '@/shared/utils/cn';
-import { baseUrl, refreshRuns } from '@/shared/api-client';
+import { baseUrl } from '@/shared/api-client';
+import { runtimeQueryKeys } from '@/shared/runtime-query-keys';
 
 // Status styles are now handled by Badge component variants
 
@@ -55,13 +57,14 @@ export const RunHistoryPage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { loadedRuns, loadedActions } = useActionServerContext();
+  const queryClient = useQueryClient();
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
     try {
-      await refreshRuns();
+      await queryClient.invalidateQueries({ queryKey: runtimeQueryKeys.runs() });
     } finally {
       // Short delay to show feedback
       setTimeout(() => setIsRefreshing(false), 300);

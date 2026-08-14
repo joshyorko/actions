@@ -79,6 +79,38 @@ The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
 
+The stateless `/mcp` route inspects `Mcp-Method` and `Mcp-Name` against the
+parsed JSON-RPC body in `actions.server.mcp.gateway_metadata`. Inspection buffers
+at most 1 MiB and returns HTTP 413 without forwarding an oversized body, including
+when the declared content length exceeds the boundary. Non-empty UTF-8 method
+strings are bounded but are not finite-allowlisted, so MCP v2 and future
+extensions remain reachable. Requests and notifications are inspected for
+trusted identity; valid JSON-RPC response/error objects pass through without
+metadata rejection, including in bounded batches. Parser, nesting, numeric-ID,
+and observer failures do not replace SDK-owned protocol responses; only an
+invalid metadata boundary returns HTTP 400.
+
+Trusted metadata is available through
+`scope["state"]["actions.mcp.request_metadata"]`, `get_mcp_request_metadata()`,
+and the completion observer, with bounded method, finite method-class,
+sanitized name, status, latency, and correlation attributes. Any name derived
+from `params.uri` is strictly resource-sanitized by field provenance, including
+for future, extension, unrelated, or malformed method strings; it never emits
+a resource URI authority, host, path, or payload. Resource telemetry uses only
+the explicit `http`, `https`, and `resource` scheme classes. Opaque schemes, userinfo,
+credentials, query, fragments, percent-encoded content, non-ASCII/control
+content, invalid hosts, and otherwise unprovable URI content become the constant
+`<redacted>` class before logging. Header names are
+case-insensitive, selected values are exact with no surrounding whitespace, and
+duplicate identity/correlation headers return HTTP 400. Missing identity headers
+are normalized from the body; mismatches are rejected. `X-Request-ID` is
+preserved only when it is a canonical UUID, otherwise a UUID is generated and
+returned as the single canonical response header; CORS exposes that header.
+Observer callback failures are isolated, logged with only a bounded exception
+diagnostic, and cannot fail the MCP request. The
+route's API-key authentication wraps this middleware and therefore retains its
+existing rejection order. The body is replayed in its original ASGI chunks and
+returns an empty terminal request after exhaustion.
 Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
 tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
@@ -160,6 +192,27 @@ be regenerated normally with repository-authoritative Poetry 2.1.1 from
 published prerequisites. Never hand-edit lock hashes or add path/direct-URL
 production dependencies. Runtime freeze inputs remain a separate post-candidate
 gate.
+
+The Runtime frontend data-access contract is query-authoritative: typed calls
+in `action_server/frontend/src/shared/runtime-api.ts` feed the canonical keys
+in `src/shared/runtime-query-keys.ts` through `src/queries/runtime.ts`. The
+Runtime provider owns the only `QueryClient`; its WebSocket adapter invalidates
+the same keys without writing a parallel mutable store. Focused Vitest coverage exercises list,
+detail, mutation, HTTP error, cancellation, reconnect, and out-of-order event
+paths. Canvas remains a separate Vite entrypoint and is not a consumer of this
+cache.
+
+The current backend event contract has no sequence field: `runs_collected`
+contains a run list, `run_added` contains `{run}`, and `run_changed` contains
+`{run_id, changes}`. Treat every event as a freshness signal and invalidate
+canonical queries; never apply event payloads directly to cached data. The run
+cancellation endpoint returns the literal union `"cancelled" | "not-running"`.
+Legacy artifact query parameters use repeated keys for readonly string arrays
+(for example, `artifact_names=a&artifact_names=b`). Provider-owned QueryClients
+are created per mounted Runtime provider and cleared during teardown; WebSocket
+reconnect timers are cancelled, single-flight per active connection generation
+even if duplicate close callbacks arrive, and guarded against stale connection
+generations.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement
@@ -284,3 +337,12 @@ Final reports list exact commands and outcomes, external/service tests skipped, 
 ## Pull Request Triage
 
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
+
+## MCP gateway metadata
+
+The `/mcp` metadata middleware forwards any valid JSON-RPC method, but stores
+only an exact known protocol method or the constant `extension` sentinel.
+Identifier-bearing requests store only the finite provenance classes `tool`,
+`prompt`, `resource`, `template`, or `<redacted>`; raw method/name values are
+used only transiently for payload/header agreement. MCP integration tests use
+the declared `httpx2` compatibility package, including direct HTTP clients.
