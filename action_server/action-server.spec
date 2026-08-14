@@ -41,6 +41,12 @@ redis_hiddenimports = collect_submodules("redis")
 for h in redis_hiddenimports:
     logger.info(f"Collected redis hiddenimport: {h}")
 
+fastapi_hiddenimports = collect_submodules("fastapi")
+psutil_hiddenimports = collect_submodules("psutil")
+actions_hiddenimports = collect_submodules("actions")
+starlette_hiddenimports = collect_submodules("starlette")
+mcp_hiddenimports = collect_submodules("mcp")
+
 # psycopg imports its binary implementation dynamically at runtime.
 psycopg_hiddenimports = [
     *collect_submodules("psycopg"),
@@ -102,8 +108,16 @@ a = Analysis(
         *action_server_hiddenimports,
         *actions_http_hiddenimports,
         *redis_hiddenimports,
+        *fastapi_hiddenimports,
+        *psutil_hiddenimports,
+        *actions_hiddenimports,
+        *starlette_hiddenimports,
+        *mcp_hiddenimports,
         *psycopg_hiddenimports,
         "uvicorn",
+        "fastapi",
+        "sqlite3",
+        "_sqlite3",
         "termcolor",
         "pydantic.deprecated.decorator",
     ],

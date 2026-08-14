@@ -76,7 +76,9 @@ def migrate_db(
     from actions.server._database import normalize_database_url, redact_database_url
 
     db_path = normalize_database_url(db_path)
-    is_postgresql = isinstance(db_path, str) and db_path.startswith("postgresql://")
+    is_postgresql = isinstance(db_path, str) and db_path.lower().startswith(
+        "postgresql://"
+    )
     if not is_postgresql:
         assert os.path.exists(
             db_path

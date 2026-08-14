@@ -161,7 +161,7 @@ class SchedulerEngine:
                 Schedule,
                 """
                 SELECT * FROM schedule
-                WHERE enabled = 1
+                WHERE enabled = TRUE
                   AND next_run_at IS NOT NULL
                   AND next_run_at <= ?
                 ORDER BY priority DESC, next_run_at ASC
@@ -993,7 +993,7 @@ async def initialize_schedule_next_runs() -> None:
             Schedule,
             """
             SELECT * FROM schedule
-            WHERE enabled = 1 AND next_run_at IS NULL
+            WHERE enabled = TRUE AND next_run_at IS NULL
             """,
         )
 

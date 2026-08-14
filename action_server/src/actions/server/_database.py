@@ -79,7 +79,7 @@ def redact_database_url(value: Union[Path, str]) -> Union[Path, str]:
 
     try:
         parsed = urlsplit(value)
-        if parsed.scheme not in {"postgresql", "postgres"}:
+        if parsed.scheme.lower() not in {"postgresql", "postgres"}:
             return value
         hostname = parsed.hostname
         port = parsed.port
@@ -105,7 +105,8 @@ def normalize_database_url(value: Union[Path, str]) -> Union[Path, str]:
         if value.lower().startswith(("postgresql:", "postgres:")):
             raise ValueError("Invalid PostgreSQL database URL") from exc
         raise ValueError("Invalid database URL") from exc
-    if parsed.scheme in {"postgresql", "postgres"}:
+    scheme = parsed.scheme.lower()
+    if scheme in {"postgresql", "postgres"}:
         try:
             hostname = parsed.hostname
             port = parsed.port
@@ -120,7 +121,7 @@ def normalize_database_url(value: Union[Path, str]) -> Union[Path, str]:
             or (port is not None and not 1 <= port <= 65535)
         ):
             raise ValueError("Invalid PostgreSQL database URL")
-        if parsed.scheme == "postgres":
+        if scheme == "postgres":
             return "postgresql://" + value.split("://", 1)[1]
         return value
     if parsed.scheme:
@@ -167,7 +168,9 @@ class Database:
 
     @staticmethod
     def _is_postgresql_url(value: Union[Path, str]) -> bool:
-        return isinstance(value, str) and value.startswith(("postgresql://", "postgres://"))
+        return isinstance(value, str) and value.lower().startswith(
+            ("postgresql://", "postgres://")
+        )
 
     @property
     def backend_name(self) -> str:
@@ -704,6 +707,119 @@ ORDER BY table_name, index_name, sequence_in_index;
     def _adapt_sql(self, sql: str, values: Optional[Sequence[Any]] = None) -> str:
         if self.backend_name != "postgresql":
             return sql
+
+        tokens: list[tuple[str, int]] = []
+        i = 0
+        while i < len(sql):
+            if sql.startswith("--", i):
+                end = sql.find("\n", i + 2)
+                i = len(sql) if end < 0 else end
+                continue
+            if sql.startswith("/*", i):
+                end = sql.find("*/", i + 2)
+                i = len(sql) if end < 0 else end + 2
+                continue
+            char = sql[i]
+            if char.isspace():
+                i += 1
+                continue
+            if char in "'\"":
+                quote = char
+                i += 1
+                while i < len(sql):
+                    if sql[i] == "\\" and quote == "'":
+                        i += 2
+                    elif sql[i] == quote:
+                        if i + 1 < len(sql) and sql[i + 1] == quote:
+                            i += 2
+                        else:
+                            i += 1
+                            break
+                    else:
+                        i += 1
+                tokens.append(("expr", i))
+                continue
+            if char == "$":
+                match = re.match(r"\$[A-Za-z_][A-Za-z0-9_]*\$|\$\$", sql[i:])
+                if match:
+                    delimiter = match.group(0)
+                    end = sql.find(delimiter, i + len(delimiter))
+                    i = len(sql) if end < 0 else end + len(delimiter)
+                    tokens.append(("expr", i))
+                    continue
+            if char == "\\" and i + 1 < len(sql) and sql[i + 1] == "?":
+                tokens.append(("other", i))
+                i += 2
+                continue
+            if char == "?":
+                kind = "operator" if sql[i : i + 2] in {"?|", "?&"} else "question"
+                tokens.append((kind, i))
+                i += 2 if kind == "operator" else 1
+                continue
+            if char in ")]}" or char.isalnum() or char in "_$.":
+                end = i + 1
+                while end < len(sql) and (sql[end].isalnum() or sql[end] in "_$."):
+                    end += 1
+                word = sql[i:end].upper()
+                kind = (
+                    "operator"
+                    if word
+                    in {
+                        "AND",
+                        "OR",
+                        "NOT",
+                        "IS",
+                        "IN",
+                        "LIKE",
+                        "ILIKE",
+                        "BETWEEN",
+                        "THEN",
+                        "ELSE",
+                        "WHEN",
+                        "END",
+                        "FROM",
+                        "WHERE",
+                        "ORDER",
+                        "GROUP",
+                        "LIMIT",
+                        "OFFSET",
+                        "JOIN",
+                        "ON",
+                        "VALUES",
+                        "SET",
+                        "RETURNING",
+                        "UNION",
+                        "ALL",
+                        "DISTINCT",
+                        "HAVING",
+                        "NULL",
+                        "TRUE",
+                        "FALSE",
+                    }
+                    else "expr"
+                )
+                tokens.append((kind, i))
+                i = end
+                continue
+            elif char in "([{":
+                tokens.append(("expr_start", i))
+            else:
+                tokens.append(("operator", i))
+            i += 1
+
+        expression_end = {"expr", "question"}
+        expression_start = {"expr", "expr_start"}
+        markers: set[int] = set()
+        for index, (kind, position) in enumerate(tokens):
+            if kind != "question":
+                continue
+            previous = tokens[index - 1][0] if index else None
+            following = tokens[index + 1][0] if index + 1 < len(tokens) else None
+            if previous not in expression_end or (
+                following not in expression_start and following != "question"
+            ):
+                markers.add(position)
+
         adapted: list[str] = []
         placeholders = 0
         i = 0
@@ -729,17 +845,11 @@ ORDER BY table_name, index_name, sequence_in_index;
                         adapted.append(dollar_quote)
                         i += len(dollar_quote)
                         continue
-                elif char == "?" and (not next_char or next_char not in "|&"):
-                    previous = next((x for x in reversed(adapted) if not x.isspace()), "")
-                    following = next((x for x in sql[i + 1 :] if not x.isspace()), "")
-                    is_json_operator = (previous.isalnum() or previous in ")]}'\"") and (
-                        following in "'\"?"
-                    )
-                    if not is_json_operator and (i == 0 or sql[i - 1] != "\\"):
-                        adapted.append("%s")
-                        placeholders += 1
-                        i += 1
-                        continue
+                elif char == "?" and i in markers:
+                    adapted.append("%s")
+                    placeholders += 1
+                    i += 1
+                    continue
                 adapted.append(char)
             elif state == "single":
                 adapted.append(char)

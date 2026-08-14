@@ -29,6 +29,14 @@ def test_database_selects_postgres_for_explicit_url():
     assert db.backend_name == "postgresql"
 
 
+def test_database_selects_postgres_for_case_insensitive_url_without_exposing_it_as_path():
+    value = "POSTGRESQL://SENTINEL_USER:SENTINEL_PASSWORD@localhost/actions_test"
+    db = Database(value)
+
+    assert db.backend_name == "postgresql"
+    assert db.db_path == value
+
+
 @pytest.mark.parametrize(
     "value", ["mysql://localhost/actions_test", "example://db", "postgresql://[bad"]
 )
@@ -86,6 +94,7 @@ def test_database_accepts_valid_postgresql_urls_without_mutating_connection_valu
     [
         "postgresql://SENTINEL_USER:SENTINEL_PASSWORD@db.example:55432/actions?secret=SENTINEL_QUERY",
         "postgres://SENTINEL_USER%40encoded:SENTINEL_PASSWORD%21@db.example/actions?secret=SENTINEL_QUERY",
+        "POSTGRESQL://SENTINEL_USER:SENTINEL_PASSWORD@db.example/actions#SENTINEL_FRAGMENT",
     ],
 )
 def test_redact_database_url_removes_credentials_and_query(value):
@@ -202,6 +211,23 @@ def test_postgresql_placeholder_adapter_preserves_json_operators_and_array_rhs()
         "payload ? %s AND payload ?| %s AND payload ?& %s"
     )
     assert db._adapt_sql("? = ANY(?)", ["key", ["key", "other"]]) == "%s = ANY(%s)"
+
+
+def test_postgresql_placeholder_adapter_handles_lexical_json_operator_contexts():
+    db = Database("postgresql://localhost/actions_test")
+    sql = (
+        "payload /* before */ ? /* after */ (('key')) AND "
+        "payload ?::text AND payload ? 'key' AND "
+        "payload ?| ARRAY[?] AND payload ?& (?::text) AND "
+        "? = ANY(?) AND '\\?' = ? AND \"?\" = ? AND $$ ? $$ = ?"
+    )
+
+    assert db._adapt_sql(sql, list(range(8))) == (
+        "payload /* before */ ? /* after */ (('key')) AND "
+        "payload %s::text AND payload ? 'key' AND "
+        "payload ?| ARRAY[%s] AND payload ?& (%s::text) AND "
+        "%s = ANY(%s) AND '\\?' = %s AND \"?\" = %s AND $$ ? $$ = %s"
+    )
 
 
 @pytest.mark.integration_test

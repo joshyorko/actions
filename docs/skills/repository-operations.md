@@ -229,14 +229,21 @@ validation rejects missing PostgreSQL hosts, malformed authorities, and ports
 outside `1..65535` before connection or SQLite fallback. CLI argument, datadir,
 and migration diagnostics must use the database URL redactor, which removes
 userinfo, query, and fragment data without changing the connection value.
+Scheme detection and redaction are case-insensitive, while the validated
+connection string passed to psycopg retains its original bytes. Marker
+translation is based on lexical SQL tokens and expression boundaries, so
+parenthesized or comment-separated JSON operator RHS expressions remain
+operators while true markers are converted and counted.
 PostgreSQL model DDL uses native `BOOLEAN` while
 SQLite retains integer booleans. PostgreSQL schema inspection reads
 `information_schema` and `pg_index`, and analytics uses explicit PostgreSQL
 timestamp/date expressions. SQLite migration version 11 reconciles legacy
 schedule/trigger/run index names before parity is checked. The Action Server
-PyInstaller spec explicitly collects `uvicorn`, `actions_http`, `psycopg`,
-`psycopg_binary`, their native libraries, and repository-owned `rcc-*` package
-data. Exact schema snapshots and the v0-to-current migration test compare the
+PyInstaller spec explicitly collects `uvicorn`, `fastapi`, `starlette`,
+`mcp`, `actions`, `actions_http`, `psycopg`, `psycopg_binary`,
+`sqlite3`, `psutil`, their native libraries, and repository-owned `rcc-*`
+package data. PostgreSQL scheduler predicates use `TRUE` so native boolean
+columns work in both backends. Exact schema snapshots and the v0-to-current migration test compare the
 fresh current table/column/index set; formatting-only fixture changes must not
 weaken that expected schema. Static collection tests do not establish packaged
 runtime behavior: if the exact PyInstaller gate is blocked by host storage,
