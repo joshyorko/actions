@@ -115,6 +115,7 @@ def get_app() -> _CustomFastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
         allow_credentials=True,
+        expose_headers=["X-Request-ID"],
     )
 
     app.add_exception_handler(_errors.RequestError, _errors.request_error_handler)  # type: ignore
