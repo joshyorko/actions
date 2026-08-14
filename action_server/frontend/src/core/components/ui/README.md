@@ -1,8 +1,8 @@
 # UI Components Documentation
 
-This directory contains the core UI components for the Sema4.ai Action Server frontend. All components are built with accessibility, performance, and consistent design in mind.
+This directory contains the core UI components for the Actions Runtime frontend. All components are built with accessibility, performance, and consistent design in mind.
 
-Community tier components using Radix UI + Tailwind CSS. These components are available in both Community and Enterprise builds.
+Runtime components using Radix UI and Tailwind CSS.
 
 ## Table of Contents
 
@@ -61,7 +61,7 @@ All interactive components must support:
 
 ## Safe Color Pairings
 
-The following color pairings were validated against WCAG AA contrast requirements (minimum 4.5:1 ratio) and are the recommended defaults used by the community UI components. Do not change these pairings without re-validating contrast ratios.
+The following color pairings were validated against WCAG AA contrast requirements (minimum 4.5:1 ratio) and are the recommended defaults used by the Runtime UI components. Do not change these pairings without re-validating contrast ratios.
 
 | Component / Context | Background | Text Color | Contrast Ratio | WCAG Level |
 |---|---:|---:|---:|---:|
@@ -79,7 +79,7 @@ The following color pairings were validated against WCAG AA contrast requirement
 
 **Validation Tool**: [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 
-Refer to `specs/004-community-ui-enhancement/data-model.md` for the full validation table and rationale.
+Refer to the frontend design specification for the full validation table and rationale.
 
 ---
 

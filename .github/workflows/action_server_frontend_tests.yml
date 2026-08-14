@@ -24,16 +24,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@robocorp"
 
       - name: Run Tests
         run: |
           npm ci
-          npm run build
-          npm run test:lint || echo "Lint check completed with warnings"
-          npm run test:types || echo "Type check completed with warnings"
-          npm run test:prettier || echo "Prettier check completed with warnings"
-          npm run test || echo "Tests completed with failures (pre-existing test/implementation mismatches)"
+          npm run build:runtime
+          npm run build:canvas
+          npm run test:quality
         env:
           CI: true

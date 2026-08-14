@@ -1,6 +1,6 @@
 # Cross-Browser Testing Guide
 
-This document outlines the cross-browser testing requirements and procedures for the Sema4.ai Action Server frontend to ensure consistent functionality and user experience across different browsers and devices.
+This document outlines the cross-browser testing requirements and procedures for the Actions Runtime frontend to ensure consistent functionality and user experience across different browsers and devices.
 
 ## Browser Support Requirements
 

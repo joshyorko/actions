@@ -1,4 +1,4 @@
-import { logError } from './helpers';
+import { logError } from "./helpers";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
@@ -33,9 +33,11 @@ function base64ToUint8Array(base64: string): Uint8Array {
 /**
  * Generate AES key used to encrypt the secret value
  */
-export const getAESKey = async (key?: Uint8Array | undefined): Promise<CryptoKey> => {
+export const getAESKey = async (
+  key?: Uint8Array | undefined,
+): Promise<CryptoKey> => {
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const algo = { name: 'AES-GCM', iv };
+  const algo = { name: "AES-GCM", iv };
 
   let useKey: Uint8Array;
   if (!key) {
@@ -43,7 +45,7 @@ export const getAESKey = async (key?: Uint8Array | undefined): Promise<CryptoKey
     const keyBas64 = window.ENCRYPTION_KEY;
     if (!keyBas64) {
       throw new Error(
-        'Unable to encrypt because ENCRYPTION_KEY is not available and was not passed as a parameter.',
+        "Unable to encrypt because ENCRYPTION_KEY is not available and was not passed as a parameter.",
       );
     }
     useKey = base64ToUint8Array(keyBas64);
@@ -51,7 +53,10 @@ export const getAESKey = async (key?: Uint8Array | undefined): Promise<CryptoKey
     useKey = key;
   }
 
-  return crypto.subtle.importKey('raw', useKey, algo, false, ['encrypt', 'decrypt']);
+  return crypto.subtle.importKey("raw", useKey as BufferSource, algo, false, [
+    "encrypt",
+    "decrypt",
+  ]);
 };
 
 interface EncryptedValue {
@@ -78,12 +83,12 @@ export const encrypt = async (
   const encodedValue: Uint8Array = encoder.encode(data);
   const encryptedValueBuf = await crypto.subtle.encrypt(
     {
-      name: 'AES-GCM',
-      iv: generatedIv,
+      name: "AES-GCM",
+      iv: generatedIv as BufferSource,
       tagLength: 128,
     },
     useKey,
-    encodedValue,
+    encodedValue as BufferSource,
   );
 
   // WEB Crypto API attaches the auth tag at the end of the encrypted value but does not offer a function to export the GCM auth tag
@@ -91,7 +96,10 @@ export const encrypt = async (
   const authTagBuf = encryptedValueBuf.slice(encryptedValueBuf.byteLength - 16);
 
   // We will also trim the encrytped value to not contain the auth tag as backend does not support it
-  const trimmedEncryptedValueBuf = encryptedValueBuf.slice(0, encryptedValueBuf.byteLength - 16);
+  const trimmedEncryptedValueBuf = encryptedValueBuf.slice(
+    0,
+    encryptedValueBuf.byteLength - 16,
+  );
 
   // Encode the string to base64
   const value = btoa(ab2str(trimmedEncryptedValueBuf));
@@ -131,11 +139,11 @@ export const decrypt = async (
   try {
     const valueBuffer: ArrayBuffer = await crypto.subtle.decrypt(
       {
-        name: 'AES-GCM',
+        name: "AES-GCM",
         iv: str2ab(atob(encryptedSecret.iv)),
       },
       useKey,
-      encodedValue,
+      encodedValue as BufferSource,
     );
     const value = decoder.decode(valueBuffer);
     return value;

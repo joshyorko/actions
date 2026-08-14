@@ -10,6 +10,45 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
+The Action Server frontend uses `action_server/frontend/package.json` and its
+lock as the sole package metadata. `npm ci` is the offline-install contract;
+`LICENSE` is the retained Actions-owned provenance. Runtime and Canvas View
+are separate Vite roots under `apps/runtime` and `apps/canvas-view`; run
+`npm run build:runtime` and `npm run build:canvas` from the frontend directory
+to verify both independent artifacts. The topology has no tier-specific
+manifest, product-tier build variable, vendored package directory, or external
+runtime asset dependency. Frontend quality is fail-fast through
+`npm run test:quality`, which intentionally gates the shipping Runtime/Canvas
+entrypoints and `src/app` topology plus topology tests; the historical all-tree
+lint and full test suites were not green gates. The workflow runs both build
+boundaries.
+
+The build manifest validator rejects concrete Sema4AI product packages,
+vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
+registry URLs while allowing ordinary public scoped packages such as
+`@codemirror/*` and `@radix-ui/*`. Built-import validation scans every `.html`,
+`.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`, and `.css` file inside each artifact
+directory in deterministic path order, while ignoring arbitrary assets and
+source maps. It uses the same Actions-owned contract for Runtime and Canvas
+artifacts, with no path-based enterprise exemption. Scanner read errors fail
+validation; passing the directory to a single-file detector must not be used.
+
+The default `inv validate-artifact` task ensures `frontend/dist` and
+`frontend/dist-canvas` exist, building only a missing canonical root with its
+exact owned `npm run build:runtime` or `npm run build:canvas` command, then
+validates both independently. Explicit `--runtime-artifact` and
+`--canvas-artifact` roots are validation-only and must resolve to existing
+directories; files, missing paths, and broken symlinks fail before scanning.
+Directory symlinks are resolved before the recursive scan. Its output
+identifies each artifact, so a passing Runtime check cannot hide an unscanned
+or failed Canvas artifact.
+
+The `validate-artifact` Invoke task prepends `action_server/build-binary` to
+`sys.path` and imports `artifact_validator` as a top-level module. Its helper
+imports must therefore remain top-level as well; the contract is covered by a
+subprocess test executed with `build-binary` as the working directory and a
+task-entrypoint regression that rejects injected removed-product imports.
+
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
 the form `actions_http-<version>` and the repository secret
@@ -39,6 +78,56 @@ to maintain this adapter seam.
 The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
+
+Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
+tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
+x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
+and the committed lock remain authoritative; cibuildwheel 2.23.1 must clean-test
+each wheel with `python -m pip check` and `python -m actions.server version`.
+The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
+before cibuildwheel; Linux and Windows rows do not receive that platform-specific
+environment setup.
+One final `pypi` job downloads the exact artifacts, rejects duplicate or
+unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
+the tag is an ancestor of `origin/community` and matches `poetry version
+--short`, then retains that verified directory as `actions-runtime-dist`. The
+workflow publishes the same set once when the Runtime secret is configured;
+without it, verification and retention remain green. Approved local publication
+is executable only through `action_server/scripts/publish_verified_runtime.py`:
+it downloads the retained `actions-runtime-dist` for an explicit run ID,
+repository, and optional ref, or accepts an already downloaded directory; it
+never rebuilds. It verifies the exact seven artifacts and retained
+`actions-runtime-manifest.sha256` before running Twine 6.2.0. With `--publish`,
+the script reads only `PYPI` from the process environment or ignored repo-root
+`.env`, never prints or puts the token in arguments, and injects it only into
+Twine's child environment. Example commands are:
+`python action_server/scripts/publish_verified_runtime.py --run-id RUN_ID
+--repo joshyorko/actions --ref actions-runtime-1.0.0 --sha MERGED_SHA --dry-run`
+and the same command with `--publish`. Run downloads resolve the canonical workflow by the
+supported filename identifier `actions_runtime_pypi_release.yml` in the requested repository.
+The returned workflow metadata must contain a positive integer database ID and the exact
+canonical path `.github/workflows/actions_runtime_pypi_release.yml`; the returned state must
+be exactly the string `active` (missing, null, non-string, and every other value fail closed).
+That immutable workflow database ID must match the selected run; selected-run
+`workflowDatabaseId` metadata must itself be a positive JSON/Python integer
+(not a boolean, float, string, null, missing value, or collection) before the
+equality check,
+in addition to exact SHA, tag ref, successful tag-push conclusion, the generated Runtime
+PyPI workflow, and a non-expired retained artifact before downloading. The display name is
+not an identity binding. Binary release names use GitHub expressions
+containing `${{ github.ref_name }}`; shell literals such as `$tag-linux64` are
+not valid action inputs.
+
+The publish job installs repository-root devutils requirements with an explicit
+`action_server` working directory, then runs the local verifier in dry-run mode
+after manifest creation and Twine checking, before artifact retention or upload.
+The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
+cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
+rejecting mismatched ABI tags. The sdist and wheel build steps expose only
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run equivalent frontend and
+OAuth generation without credentials; PAT-bearing variants are limited to tag
+pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+from the child environment, while upload receives only the exact PyPI token.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
