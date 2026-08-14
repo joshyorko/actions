@@ -287,6 +287,8 @@ connection string passed to psycopg retains its original bytes. Marker
 translation is based on lexical SQL tokens and expression boundaries, so
 parenthesized or comment-separated JSON operator RHS expressions remain
 operators while true markers are converted and counted.
+Migration status checks use the same case-insensitive PostgreSQL scheme
+classification before treating a database target as a filesystem path.
 PostgreSQL model DDL uses native `BOOLEAN` while
 SQLite retains integer booleans. PostgreSQL schema inspection reads
 `information_schema` and `pg_index`, and analytics uses explicit PostgreSQL
