@@ -28,7 +28,6 @@ import { useActionRunMutation } from '~/queries/actions';
 import { useActionServerContext } from '@/shared/context/actionServerContext';
 import { useWorkItems, useWorkItemStats, useWorkItemQueues, useCreateWorkItem } from '@/queries/workItems';
 import { Select, SelectItem } from '@/core/components/ui/Select';
-import { refreshRuns } from '@/shared/api-client';
 import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
 import { Action, ActionPackage, Run, RunStatus, ServerConfig } from '@/shared/types';
 import { formDataToPayload, propertiesToFormData } from '@/shared/utils/formData';
@@ -468,10 +467,6 @@ export const ActionsPage = () => {
         setRunResult(result);
         setRunError(null);
         
-        // Immediately refresh runs list so the new run appears without waiting for WebSocket
-        refreshRuns().catch(() => {
-          // Silently ignore - WebSocket will eventually update the list
-        });
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Failed to run action';
         setRunError(message);

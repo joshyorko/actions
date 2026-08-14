@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { logError } from './helpers';
+import { logError } from "./helpers";
 
 /**
  * A socket.io-like interface for websockets.
@@ -23,6 +23,12 @@ export class WebsocketConn {
    * Flag indicating whether it's currently connecting.
    */
   private connecting = false;
+
+  private closed = false;
+
+  private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+
+  private generation = 0;
 
   /**
    * Handlers to manage received events.
@@ -106,6 +112,11 @@ export class WebsocketConn {
   }
 
   public connect(): Promise<void> {
+    this.closed = false;
+    if (this.reconnectTimer !== null) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+    }
     if (this.connecting) {
       // console.log('Websocket: connect ignored (already connecting).');
       return Promise.resolve(undefined);
@@ -117,25 +128,28 @@ export class WebsocketConn {
     // console.log('Websocket: starting connection.');
     this.connecting = true;
 
+    const generation = ++this.generation;
     return new Promise((resolve, reject) => {
       // console.log('Websocket: connecting to: ', this.url);
       this.ws = new WebSocket(this.url);
 
       this.ws.onopen = () => {
+        if (generation !== this.generation) return;
         // console.log('Websocket: connection opened (marking as connected)');
         this.connected = true;
         this.connecting = false;
-        this.notify('connect');
+        this.notify("connect");
         resolve();
       };
 
       this.ws.onmessage = this.handleMessage;
-      this.ws.onclose = this.handleClose;
+      this.ws.onclose = () => this.handleClose(generation);
       const markNotConnectingAndReject = () => {
+        if (generation !== this.generation) return;
         // console.log('Websocket: connection on error');
         this.connected = false;
         this.connecting = false;
-        this.notify('disconnect');
+        this.notify("disconnect");
         reject();
       };
       this.ws.onerror = markNotConnectingAndReject;
@@ -165,7 +179,8 @@ export class WebsocketConn {
    * is always called even if it doesn't connect
    * (so, it's used as a way to re-connect later on).
    */
-  private handleClose = () => {
+  private handleClose = (generation: number) => {
+    if (generation !== this.generation) return;
     // console.log('closing');
     this.connected = false;
     this.connecting = false;
@@ -173,8 +188,27 @@ export class WebsocketConn {
 
     // Auto-reconnect quickly as the connection was broken for some reason.
     // Reduced from 5000ms to 1000ms for faster recovery.
-    setTimeout(() => {
-      this.connect();
-    }, 1000);
+    if (!this.closed) {
+      if (this.reconnectTimer !== null) return;
+      this.reconnectTimer = setTimeout(() => {
+        this.reconnectTimer = null;
+        if (this.closed || generation !== this.generation) return;
+        this.connect();
+      }, 1000);
+    }
   };
+
+  public disconnect() {
+    this.closed = true;
+    this.generation += 1;
+    if (this.reconnectTimer !== null) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+    }
+    this.messages = [];
+    this.ws?.close();
+    this.ws = null;
+    this.connected = false;
+    this.connecting = false;
+  }
 }
