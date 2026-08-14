@@ -643,6 +643,73 @@ def test_resource_telemetry_never_emits_authorities_or_uri_payloads(caplog):
     assert len(outputs) <= 4
 
 
+def test_every_uri_derived_name_is_strictly_sanitized_across_metadata_sinks(caplog):
+    cases = (
+        ("resources/custom", True),
+        ("resources/custom", False),
+        ("x/resources/read", True),
+        ("x/resources/read", False),
+        ("tools/list", True),
+        ("tools/list", False),
+        ("resources/", True),
+        ("resources/", False),
+        ("resources?uri=malformed-method", True),
+        ("resources?uri=malformed-method", False),
+    )
+
+    outputs = set()
+    for index, (method, include_header_name) in enumerate(cases):
+        sentinel = f"uri-sentinel-{index}-attacker.example"
+        raw_uri = f"https://user:password@{sentinel}/path?token={sentinel}#{sentinel}"
+        records = []
+        observed = []
+
+        def observe_metadata(metadata):
+            observed.append(metadata)
+
+        def observe_request(record):
+            records.append(record)
+            logging.getLogger("test.uri-derived.metadata").info("observed %r", record)
+
+        caplog.clear()
+        headers = {MCP_METHOD_HEADER: method}
+        if include_header_name:
+            headers[MCP_NAME_HEADER] = raw_uri
+        with caplog.at_level(logging.INFO, logger="test.uri-derived.metadata"):
+            seen, sent = asyncio.run(
+                _run(
+                    {
+                        "jsonrpc": "2.0",
+                        "id": 1,
+                        "method": method,
+                        "params": {"uri": raw_uri},
+                    },
+                    headers,
+                    observer=observe_metadata,
+                    request_observer=observe_request,
+                )
+            )
+
+        metadata = seen["state"][MCP_REQUEST_STATE_KEY]
+        emitted = " ".join(
+            [
+                repr(metadata),
+                repr(metadata.telemetry_attributes),
+                repr(observed),
+                repr(records),
+                caplog.text,
+            ]
+        )
+        assert sent[0]["status"] == 204
+        assert metadata.name == "<redacted>"
+        assert len(observed) == 1
+        assert len(records) == 1
+        assert sentinel not in emitted
+        outputs.add(metadata.name)
+
+    assert outputs == {"<redacted>"}
+
+
 def test_observer_exceptions_are_non_fatal_and_do_not_emit_request_data(caplog):
     def fail_metadata_observer(_metadata):
         raise OverflowError("body-secret")

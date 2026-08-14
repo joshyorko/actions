@@ -54,9 +54,11 @@ invalid metadata boundary returns HTTP 400.
 Trusted metadata is available through
 `scope["state"]["actions.mcp.request_metadata"]`, `get_mcp_request_metadata()`,
 and the completion observer, with bounded method, finite method-class,
-sanitized name, status, latency, and correlation attributes. Resource telemetry
-uses only the explicit `http`, `https`, and `resource` scheme classes; it never
-emits a resource URI authority, host, path, or payload. Opaque schemes, userinfo,
+sanitized name, status, latency, and correlation attributes. Any name derived
+from `params.uri` is strictly resource-sanitized by field provenance, including
+for future, extension, unrelated, or malformed method strings; it never emits
+a resource URI authority, host, path, or payload. Resource telemetry uses only
+the explicit `http`, `https`, and `resource` scheme classes. Opaque schemes, userinfo,
 credentials, query, fragments, percent-encoded content, non-ASCII/control
 content, invalid hosts, and otherwise unprovable URI content become the constant
 `<redacted>` class before logging. Header names are

@@ -69,13 +69,14 @@ class McpRequestMetadata:
     method: str
     name: str | None
     correlation_id: str
+    name_is_resource: bool = False
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "method", _sanitize_method(self.method))
         if self.name is not None:
             sanitizer = (
                 _sanitize_resource_identifier
-                if self.method in _RESOURCE_METHODS
+                if self.name_is_resource
                 else _sanitize_identifier
             )
             object.__setattr__(self, "name", sanitizer(self.name))
@@ -200,7 +201,7 @@ def _request_name(entry: dict[str, Any]) -> Any:
         or len(name.encode("utf-8")) > _MAX_NAME_LENGTH
     ):
         return _INVALID_NAME
-    return name
+    return name, key == "uri"
 
 
 _INVALID_NAME = object()
@@ -208,7 +209,7 @@ _INVALID_NAME = object()
 
 @dataclass(frozen=True)
 class _PayloadInspection:
-    identity: tuple[str, str | None] | None
+    identity: tuple[str, str | None, bool] | None
     response_only: bool
     is_batch: bool
 
@@ -236,6 +237,7 @@ def _inspect_payload(payload: Any) -> _PayloadInspection:
         else "batch"
     )
     first_name: str | None = None
+    first_name_is_resource = False
     multiple_names = False
     for entry in requests:
         name = _request_name(entry)
@@ -243,12 +245,18 @@ def _inspect_payload(payload: Any) -> _PayloadInspection:
             return _PayloadInspection(None, False, isinstance(payload, list))
         if name is None:
             continue
+        name, name_is_resource = name
         if first_name is None:
             first_name = name
+            first_name_is_resource = name_is_resource
         elif name != first_name:
             multiple_names = True
     return _PayloadInspection(
-        (method, None if multiple_names else first_name),
+        (
+            method,
+            None if multiple_names else first_name,
+            first_name_is_resource and not multiple_names,
+        ),
         False,
         isinstance(payload, list),
     )
@@ -433,7 +441,7 @@ class McpRequestMetadataMiddleware:
                 await _reject(send)
                 return
         else:
-            method, raw_name = identity
+            method, raw_name, _name_is_resource = identity
             if (
                 method_header is not None
                 and method_header != method
@@ -448,7 +456,10 @@ class McpRequestMetadataMiddleware:
         metadata = None
         if identity is not None:
             metadata = McpRequestMetadata(
-                identity[0], identity[1], _correlation_id(correlation_header)
+                identity[0],
+                identity[1],
+                _correlation_id(correlation_header),
+                identity[2],
             )
             scope.setdefault("state", {})[MCP_REQUEST_STATE_KEY] = metadata
 
