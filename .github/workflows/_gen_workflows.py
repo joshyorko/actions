@@ -160,7 +160,9 @@ class BaseWorkflow:
             # },
             {
                 "name": "Install the latest version of uv",
-                "uses": "astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081" if pinned else "astral-sh/setup-uv@v5",
+                "uses": "astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081"
+                if pinned
+                else "astral-sh/setup-uv@v5",
                 "with": {
                     "enable-cache": True,
                 },
@@ -370,7 +372,9 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
     def setup_node(self, pinned=False):
         return {
             "name": "Setup node",
-            "uses": "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020" if pinned else "actions/setup-node@v4",
+            "uses": "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+            if pinned
+            else "actions/setup-node@v4",
             "with": {
                 "node-version": "20.x",
                 "registry-url": "https://npm.pkg.github.com",
@@ -381,7 +385,9 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
     def setup_go(self, pinned=False):
         return {
             "name": "Setup go",
-            "uses": "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff" if pinned else "actions/setup-go@v5",
+            "uses": "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+            if pinned
+            else "actions/setup-go@v5",
             "with": {
                 "go-version": "1.23",
                 "cache-dependency-path": "action_server/go-wrapper/go.sum",
@@ -408,7 +414,9 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
     def checkout_repo(self, pinned=False):
         return {
             "name": "Checkout repository and submodules",
-            "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09" if pinned else "actions/checkout@v5",
+            "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
+            if pinned
+            else "actions/checkout@v5",
         }
 
     def install_devutils(self, additional_packages: list[str] | None = None):
@@ -479,6 +487,66 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
             "run": f'if [ -n "$MACOS_SIGNING_CERT" ] || [ -n "$VAULT_URL" ]; then {run_in_env}poetry run inv build-executable --sign --go-wrapper; else {run_in_env}poetry run inv build-executable --go-wrapper; fi',
         }
 
+    def build_action_server_binary_cross_platform(
+        self, *, ref_name="${{ github.ref_name }}"
+    ):
+        common_env = {
+            "RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC": "true",
+            "RC_ACTION_SERVER_DO_SELFTEST": "true",
+            "GITHUB_EVENT_NAME": "${{ github.event_name }}",
+            "GITHUB_REF_NAME": ref_name,
+            "GITHUB_PR_NUMBER": "${{ github.event.pull_request.number }}",
+        }
+        signing_env = common_env | {
+            "MACOS_SIGNING_CERT": "${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}",
+            "MACOS_SIGNING_CERT_PASSWORD": "${{ secrets.MACOS_SIGNING_CERT_PASSWORD_ACTIONS_RUNTIME }}",
+            "MACOS_SIGNING_CERT_NAME": "${{ secrets.MACOS_SIGNING_CERT_NAME_ACTIONS_RUNTIME }}",
+            "APPLEID": "${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}",
+            "APPLETEAMID": "${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}",
+            "APPLEIDPASS": "${{ secrets.MACOS_APP_ID_PASSWORD_ACTIONS_RUNTIME }}",
+            "VAULT_URL": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}",
+            "CLIENT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_ACTIONS_RUNTIME }}",
+            "TENANT_ID": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_ACTIONS_RUNTIME }}",
+            "CLIENT_SECRET": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_ACTIONS_RUNTIME }}",
+            "CERTIFICATE_NAME": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_ACTIONS_RUNTIME }}",
+        }
+        return [
+            {
+                "name": "Check signing availability",
+                "id": "signing",
+                "shell": "bash",
+                "env": {
+                    "SIGNING_EVENT": "${{ github.event_name }}",
+                    "SIGNING_OS": "${{ matrix.os }}",
+                    "MACOS_SIGNING_CERT": "${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}",
+                    "VAULT_URL": "${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}",
+                },
+                "run": """set -Eeuo pipefail
+signed=false
+if [[ "$SIGNING_EVENT" == "push" || "$SIGNING_EVENT" == "workflow_dispatch" ]]; then
+  if [[ "$SIGNING_OS" == "macos-15" && -n "${MACOS_SIGNING_CERT:-}" ]]; then
+    signed=true
+  elif [[ "$SIGNING_OS" == "windows-2022" && -n "${VAULT_URL:-}" ]]; then
+    signed=true
+  fi
+fi
+echo "signed=$signed" >> "$GITHUB_OUTPUT"
+""",
+            },
+            {
+                "name": "Build binary (signed)",
+                "if": "${{ steps.signing.outputs.signed == 'true' }}",
+                "env": signing_env,
+                "run": f"{run_in_env}poetry run inv build-executable --sign --go-wrapper",
+            },
+            {
+                "name": "Build binary (unsigned)",
+                "if": "${{ steps.signing.outputs.signed != 'true' }}",
+                "env": common_env,
+                "run": f"{run_in_env}poetry run inv build-executable --go-wrapper",
+            },
+        ]
+
     def build_steps(self) -> list[dict]:
         raise NotImplementedError("Subclasses must implement this method")
 
@@ -493,7 +561,9 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
         """
         ret = {
             "name": f"Upload artifact: {path}",
-            "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02" if pinned else "actions/upload-artifact@v4",
+            "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+            if pinned
+            else "actions/upload-artifact@v4",
             "with": {
                 "name": name,
                 "path": path,
@@ -645,10 +715,16 @@ rm src/actions/server/bin/rcc* -f
         }
 
     def upload_artifact_action_server_dist(self):
-        return self.upload_artifact(name="action-server-dist", path="action_server/dist/*", pinned=True)
+        return self.upload_artifact(
+            name="action-server-dist", path="action_server/dist/*", pinned=True
+        )
 
     def common_build_steps(self):
-        steps = [self.checkout_repo(pinned=True)] + self.setup_python(pinned=True) + [self.install_devutils()]
+        steps = (
+            [self.checkout_repo(pinned=True)]
+            + self.setup_python(pinned=True)
+            + [self.install_devutils()]
+        )
         steps.extend(self.install(env={"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "true"}))
         steps.append(self.setup_node(pinned=True))
         steps.append(
@@ -703,11 +779,17 @@ rm src/actions/server/bin/rcc* -f
         }
 
     def upload_artifact_manylinux_wheels(self):
-        return self.upload_artifact(name="${{ runner.os }}-wheels", path="action_server/wheelhouse/*", pinned=True)
+        return self.upload_artifact(
+            name="${{ runner.os }}-wheels",
+            path="action_server/wheelhouse/*",
+            pinned=True,
+        )
 
     def build_wheels_steps(self):
         steps = self.common_build_steps()
-        steps.append(self.install_devutils(additional_packages=["cibuildwheel==2.23.1"]))
+        steps.append(
+            self.install_devutils(additional_packages=["cibuildwheel==2.23.1"])
+        )
         steps.append(
             {
                 "name": "Set macOS deployment target",
@@ -726,7 +808,7 @@ rm src/actions/server/bin/rcc* -f
         return matrix
 
     def publish_steps(self):
-        provenance = "set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor \"$GITHUB_SHA\" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(poetry version --short)\nif [[ \"$tag_version\" != \"$package_version\" ]]; then printf 'tag version %s does not match package version %s\\n' \"$tag_version\" \"$package_version\" >&2; exit 1; fi"
+        provenance = 'set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor "$GITHUB_SHA" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(uv run --no-project --python 3.12 poetry version --short)\nif [[ "$tag_version" != "$package_version" ]]; then printf \'tag version %s does not match package version %s\\n\' "$tag_version" "$package_version" >&2; exit 1; fi'
         inventory = """set -Eeuo pipefail
 cd action_server
 rm -rf dist/verified
@@ -761,25 +843,94 @@ sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runti
             self.checkout_repo(pinned=True),
             *self.setup_python(pinned=True),
             {**self.install_devutils(), "working-directory": "action_server"},
-            {"name": "Verify merged tag provenance and version", "if": "github.event_name == 'push'", "run": provenance},
-            {"name": "Download sdist artifact", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"name": "action-server-dist", "path": "action_server/dist/downloads/sdist"}},
-            {"name": "Download wheel artifacts separately", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"pattern": "*-wheels", "path": "action_server/dist/downloads/wheels", "merge-multiple": False}},
+            {
+                "name": "Verify merged tag provenance and version",
+                "if": "github.event_name == 'push'",
+                "run": provenance,
+            },
+            {
+                "name": "Download sdist artifact",
+                "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+                "with": {
+                    "name": "action-server-dist",
+                    "path": "action_server/dist/downloads/sdist",
+                },
+            },
+            {
+                "name": "Download wheel artifacts separately",
+                "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+                "with": {
+                    "pattern": "*-wheels",
+                    "path": "action_server/dist/downloads/wheels",
+                    "merge-multiple": False,
+                },
+            },
             {"name": "Verify exact Runtime artifact inventory", "run": inventory},
-            {"name": "Install Twine 6.2.0", "run": f"{run_in_env}python -m pip install --break-system-packages twine==6.2.0"},
-            {"name": "Verify Runtime artifacts", "run": f"{run_in_env}twine check --strict action_server/dist/*.whl action_server/dist/*.tar.gz"},
-            {"name": "Canary local Runtime verifier", "run": f"{run_in_env}python action_server/scripts/publish_verified_runtime.py --dist-dir action_server/dist --dry-run"},
-            self.upload_artifact(name="actions-runtime-dist", path="action_server/dist/*", pinned=True),
-            {"name": "Check Runtime publish credential", "id": "runtime-token", "if": "github.event_name == 'push'", "env": {"RUNTIME_TOKEN": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"}, "run": "if [[ -n \"${RUNTIME_TOKEN:-}\" ]]; then echo 'enabled=true' >> \"$GITHUB_OUTPUT\"; else echo 'enabled=false' >> \"$GITHUB_OUTPUT\"; fi"},
-            {"name": "Publish verified artifacts", "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'", "run": f"{run_in_env}twine upload action_server/dist/*.whl action_server/dist/*.tar.gz", "env": {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": "${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}"}},
+            {
+                "name": "Install Twine 6.2.0",
+                "run": f"{run_in_env}python -m pip install --break-system-packages twine==6.2.0",
+            },
+            {
+                "name": "Verify Runtime artifacts",
+                "run": f"{run_in_env}twine check --strict action_server/dist/*.whl action_server/dist/*.tar.gz",
+            },
+            {
+                "name": "Canary local Runtime verifier",
+                "run": f"{run_in_env}python action_server/scripts/publish_verified_runtime.py --dist-dir action_server/dist --dry-run",
+            },
+            self.upload_artifact(
+                name="actions-runtime-dist", path="action_server/dist/*", pinned=True
+            ),
+            {
+                "name": "Check Runtime publish credential",
+                "id": "runtime-token",
+                "if": "github.event_name == 'push'",
+                "env": {"RUNTIME_TOKEN": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"},
+                "run": 'if [[ -n "${RUNTIME_TOKEN:-}" ]]; then echo \'enabled=true\' >> "$GITHUB_OUTPUT"; else echo \'enabled=false\' >> "$GITHUB_OUTPUT"; fi',
+            },
+            {
+                "name": "Publish verified artifacts",
+                "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'",
+                "run": f"{run_in_env}twine upload action_server/dist/*.whl action_server/dist/*.tar.gz",
+                "env": {
+                    "TWINE_USERNAME": "__token__",
+                    "TWINE_PASSWORD": "${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}",
+                },
+            },
         ]
 
     @override
     def jobs_part(self):
-        return {"jobs": {
-            "build-sdist": {"runs-on": "${{ matrix.os }}", "strategy": {"matrix": self.matrix_ubuntu(self.minimum_python_version)}, "steps": self.build_sdist_steps()},
-            "build-wheels": {"runs-on": "${{ matrix.os }}", "strategy": {"fail-fast": self.fail_fast, "matrix": self.matrix_runtime_wheels(self.minimum_python_version)}, "steps": self.build_wheels_steps()},
-            "publish": {"needs": ["build-sdist", "build-wheels"], "permissions": {"contents": "read"}, "environment": "pypi", "runs-on": UBUNTU_VERSION, "defaults": {"run": {"working-directory": "."}}, "strategy": {"matrix": {"python": [self.minimum_python_version]}}, "steps": self.publish_steps()},
-        }}
+        return {
+            "jobs": {
+                "build-sdist": {
+                    "runs-on": "${{ matrix.os }}",
+                    "strategy": {
+                        "matrix": self.matrix_ubuntu(self.minimum_python_version)
+                    },
+                    "steps": self.build_sdist_steps(),
+                },
+                "build-wheels": {
+                    "runs-on": "${{ matrix.os }}",
+                    "strategy": {
+                        "fail-fast": self.fail_fast,
+                        "matrix": self.matrix_runtime_wheels(
+                            self.minimum_python_version
+                        ),
+                    },
+                    "steps": self.build_wheels_steps(),
+                },
+                "publish": {
+                    "needs": ["build-sdist", "build-wheels"],
+                    "permissions": {"contents": "read"},
+                    "environment": "pypi",
+                    "runs-on": UBUNTU_VERSION,
+                    "defaults": {"run": {"working-directory": "."}},
+                    "strategy": {"matrix": {"python": [self.minimum_python_version]}},
+                    "steps": self.publish_steps(),
+                },
+            }
+        }
 
 
 class ActionServerBinaryRelease(BaseWorkflow):
@@ -811,14 +962,16 @@ class ActionServerBinaryRelease(BaseWorkflow):
 
     def upload_artifact_with_asset_path(self):
         return self.upload_artifact(
-            name="action-server-${{ matrix.os }}", path="action_server/dist/final/", pinned=True
+            name="action-server-${{ matrix.os }}",
+            path="action_server/dist/final/",
+            pinned=True,
         )
 
     def set_version_on_ubuntu(self):
         return {
             "name": "Set version",
             "run": f"""
-{run_in_env}poetry version | awk '{{print $2}}' > version.txt
+{run_in_env}poetry version --short > version.txt
 VERSION=$(cat version.txt)
 
 echo "Version: $VERSION"
@@ -838,7 +991,11 @@ echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         )
 
     def build_steps(self) -> list[dict]:
-        steps = [self.checkout_repo(pinned=True)] + self.setup_python(pinned=True) + [self.install_devutils()]
+        steps = (
+            [self.checkout_repo(pinned=True)]
+            + self.setup_python(pinned=True)
+            + [self.install_devutils()]
+        )
 
         steps.extend(self.install())
 
@@ -850,7 +1007,7 @@ echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         steps.append(self.build_oauth2_config())
 
         steps.append(self.set_version_on_ubuntu())
-        steps.append(self.build_action_server_binary())
+        steps.extend(self.build_action_server_binary_cross_platform())
         steps.append(self.upload_artifact_with_asset_path())
         steps.append(self.upload_artifact_action_server_version_on_ubuntu())
 
@@ -919,7 +1076,9 @@ while true; do
                 "defaults": {"run": {"working-directory": "."}},
                 "runs-on": UBUNTU_VERSION,
                 "steps": [
-                    {"uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"},
+                    {
+                        "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
+                    },
                     {
                         "name": "Create GitHub release",
                         "uses": "Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803",
@@ -1039,7 +1198,7 @@ while true; do
             ret.append(
                 {
                     "name": f"Download artifact {os}",
-                        "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+                    "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
                     "with": {
                         "name": f"action-server-{os}",
                         "path": f"action_server/build/{path}/",
@@ -1130,6 +1289,415 @@ fi
         return ret
 
 
+class ActionServerRuntimeRecovery(BaseWorkflow):
+    name = "Action Server Runtime Recovery"
+    target = "actions_runtime_recovery.yml"
+    project_name = "action_server"
+    recovery_run_in_env = "uv run --no-project --python 3.12 "
+
+    def __init__(self):
+        super().__init__()
+        self.full["permissions"] = {"contents": "read", "actions": "read"}
+        self.full["run-name"] = (
+            "Runtime recovery: ${{ inputs.release_ref }} @ ${{ inputs.release_sha }}"
+        )
+
+    @override
+    def on_part(self, dep_paths):
+        return {
+            "on": {
+                "workflow_dispatch": {
+                    "inputs": {
+                        "release_ref": {
+                            "description": "Immutable actions-runtime release tag",
+                            "required": True,
+                            "type": "string",
+                        },
+                        "release_sha": {
+                            "description": "Full 40-hex commit resolved by the release tag",
+                            "required": True,
+                            "type": "string",
+                        },
+                        "pypi_source_run_id": {
+                            "description": "Failed canonical PyPI run whose successful component artifacts are reused",
+                            "required": False,
+                            "default": "31755673247",
+                            "type": "string",
+                        },
+                        "pypi_source_workflow_id": {
+                            "description": "Canonical Runtime PyPI workflow database ID",
+                            "required": False,
+                            "default": "333870965",
+                            "type": "string",
+                        },
+                    }
+                }
+            }
+        }
+
+    @override
+    def defaults_part(self):
+        return {"defaults": {"run": {"working-directory": "."}}}
+
+    def recovery_install_devutils(self):
+        step = self.install_devutils()
+        step["run"] = step["run"].replace(run_in_env, self.recovery_run_in_env)
+        return step
+
+    def checkout_recovery_code(self):
+        return {
+            "name": "Checkout merged recovery code",
+            "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "with": {
+                "ref": "${{ github.workflow_sha }}",
+                "path": "recovery-code",
+                "fetch-depth": 0,
+                "persist-credentials": False,
+            },
+        }
+
+    def checkout_release_source(self):
+        return {
+            "name": "Checkout immutable release source",
+            "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "with": {
+                "ref": "${{ inputs.release_sha }}",
+                "path": "release-source",
+                "fetch-depth": 0,
+                "persist-credentials": False,
+            },
+        }
+
+    def recovery_source_guard(self):
+        return {
+            "name": "Verify immutable tag, ancestry, and package version",
+            "working-directory": ".",
+            "env": {
+                "RELEASE_REF": "${{ inputs.release_ref }}",
+                "RELEASE_SHA": "${{ inputs.release_sha }}",
+            },
+            "run": r"""set -Eeuo pipefail
+[[ "$RELEASE_REF" =~ ^actions-runtime-[0-9]+\.[0-9]+\.[0-9]+$ ]]
+[[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+test "$(git -C release-source rev-parse HEAD)" = "$RELEASE_SHA"
+git -C release-source fetch --no-tags origin "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF" "refs/heads/community:refs/remotes/origin/community"
+test "$(git -C release-source rev-parse "refs/tags/$RELEASE_REF^{commit}")" = "$RELEASE_SHA"
+git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
+tag_version="${RELEASE_REF#actions-runtime-}"
+cd release-source/action_server
+package_version=$(uv run --no-project --python 3.12 poetry version --short)
+test "$package_version" = "$tag_version"
+""",
+        }
+
+    def recovery_checkouts_and_guard(self):
+        steps = [
+            self.checkout_recovery_code(),
+            self.checkout_release_source(),
+        ]
+        steps.extend(self.setup_python(pinned=True))
+        steps.append(
+            {
+                **self.recovery_install_devutils(),
+                "working-directory": "release-source/action_server",
+            }
+        )
+        steps.append(self.recovery_source_guard())
+        return steps
+
+    def validate_job_part(self):
+        steps = self.recovery_checkouts_and_guard()
+        return {
+            "runs-on": UBUNTU_VERSION,
+            "permissions": {"contents": "read"},
+            "defaults": {"run": {"working-directory": "."}},
+            "steps": steps,
+        }
+
+    def pypi_source_validation(self):
+        return {
+            "name": "Validate retained failed-run PyPI components",
+            "env": {
+                "PYPI_SOURCE_RUN_ID": "${{ inputs.pypi_source_run_id }}",
+                "PYPI_SOURCE_WORKFLOW_ID": "${{ inputs.pypi_source_workflow_id }}",
+                "RELEASE_REF": "${{ inputs.release_ref }}",
+                "RELEASE_SHA": "${{ inputs.release_sha }}",
+                "GH_TOKEN": "${{ github.token }}",
+            },
+            "run": """set -Eeuo pipefail
+test -n "$PYPI_SOURCE_RUN_ID"
+test -n "$PYPI_SOURCE_WORKFLOW_ID"
+workflow_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/actions_runtime_pypi_release.yml")
+test "$(jq -r '.id' <<<"$workflow_json")" = "$PYPI_SOURCE_WORKFLOW_ID"
+test "$(jq -r '.path' <<<"$workflow_json")" = ".github/workflows/actions_runtime_pypi_release.yml"
+test "$(jq -r '.state' <<<"$workflow_json")" = "active"
+run_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID")
+jq -e --arg sha "$RELEASE_SHA" --arg ref "$RELEASE_REF" --arg workflow "$PYPI_SOURCE_WORKFLOW_ID" --arg run "$PYPI_SOURCE_RUN_ID" '
+  .id == ($run | tonumber)
+  and .workflow_id == ($workflow | tonumber)
+  and .path == ".github/workflows/actions_runtime_pypi_release.yml"
+  and .head_sha == $sha
+  and .head_branch == $ref
+  and .event == "push"
+  and .conclusion == "failure"
+' <<<"$run_json"
+jobs_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/jobs?per_page=100")
+jq -e --argjson required '["build-sdist (ubuntu-py3.12)", "build-wheels (macos-15)", "build-wheels (ubuntu-22.04)", "build-wheels (windows-2022)"]' '
+  [.jobs[] | select(.name as $name | ($required | index($name)) != null)] as $selected
+  | ($selected | length == 4)
+  and (($selected | map(.name) | sort) == ($required | sort))
+  and ($selected | all(.[]; .status == "completed" and .conclusion == "success"))
+  and ([.jobs[] | select(.name == "publish (3.12)")] | length == 1)
+  and ([.jobs[] | select(.name == "publish (3.12)")][0].conclusion == "failure")
+' <<<"$jobs_json"
+artifacts_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/artifacts?per_page=100")
+jq -e --argjson expected '["Linux-wheels", "Windows-wheels", "action-server-dist", "macOS-wheels"]' '
+  [.artifacts[] | select(.name as $name | ($expected | index($name)) != null)] as $selected
+  | ($selected | length == 4)
+  and (($selected | map(.name) | sort) == ($expected | sort))
+  and ($selected | all(.[]; .expired == false))
+' <<<"$artifacts_json"
+""",
+        }
+
+    def pypi_download_steps(self):
+        downloads = []
+        for name, path in (
+            ("action-server-dist", "pypi-components/sdist"),
+            ("Linux-wheels", "pypi-components/linux"),
+            ("macOS-wheels", "pypi-components/macos"),
+            ("Windows-wheels", "pypi-components/windows"),
+        ):
+            downloads.append(
+                {
+                    "name": f"Download retained {name}",
+                    "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+                    "with": {
+                        "name": name,
+                        "path": path,
+                        "repository": "${{ github.repository }}",
+                        "run-id": "${{ inputs.pypi_source_run_id }}",
+                        "github-token": "${{ github.token }}",
+                    },
+                }
+            )
+        return downloads
+
+    def pypi_recovery_job_part(self):
+        steps = self.recovery_checkouts_and_guard()
+        steps.extend(
+            [
+                self.pypi_source_validation(),
+                *self.pypi_download_steps(),
+                {
+                    "name": "Combine and verify exact Runtime artifacts",
+                    "run": self.recovery_run_in_env
+                    + "python recovery-code/action_server/scripts/publish_verified_runtime.py --download-root pypi-components --dry-run",
+                },
+                {
+                    "name": "Install Twine 6.2.0",
+                    "run": self.recovery_run_in_env
+                    + "python -m pip install --break-system-packages twine==6.2.0",
+                },
+                {
+                    "name": "Verify Runtime artifacts",
+                    "run": self.recovery_run_in_env
+                    + "twine check --strict actions-runtime-dist/*.whl actions-runtime-dist/*.tar.gz",
+                },
+                {
+                    "name": "Clean-install Runtime and run checks",
+                    "run": """set -Eeuo pipefail
+rm -rf /tmp/actions-runtime-recovery-venv
+uv venv --python 3.12 /tmp/actions-runtime-recovery-venv
+linux_wheel=$(find actions-runtime-dist -type f -name '*-cp312-cp312-manylinux*.whl' -print)
+test "$(printf '%s\\n' "$linux_wheel" | sed '/^$/d' | wc -l)" -eq 1
+uv pip install --python /tmp/actions-runtime-recovery-venv/bin/python "$linux_wheel"
+/tmp/actions-runtime-recovery-venv/bin/python -m pip check
+/tmp/actions-runtime-recovery-venv/bin/python -m actions.server version
+""",
+                },
+                self.upload_artifact(
+                    name="actions-runtime-dist",
+                    path="actions-runtime-dist/*",
+                    pinned=True,
+                ),
+            ]
+        )
+        return {
+            "needs": ["validate"],
+            "if": "${{ needs.validate.result == 'success' }}",
+            "runs-on": UBUNTU_VERSION,
+            "permissions": {"contents": "read", "actions": "read"},
+            "defaults": {"run": {"working-directory": "."}},
+            "steps": steps,
+        }
+
+    def binary_recovery_build_steps(self):
+        steps = self.recovery_checkouts_and_guard()
+        build_frontend = self.build_frontend()
+        build_oauth2_config = self.build_oauth2_config()
+        steps.extend(
+            [
+                {
+                    "name": "Install immutable Runtime source",
+                    "run": self.recovery_run_in_env + "inv install",
+                    "working-directory": "release-source/action_server",
+                },
+                self.setup_node(pinned=True),
+                {
+                    **self.setup_go(pinned=True),
+                    "with": {
+                        **self.setup_go(pinned=True)["with"],
+                        "cache-dependency-path": "release-source/action_server/go-wrapper/go.sum",
+                    },
+                },
+                {
+                    "name": "Build frontend from immutable source",
+                    "run": build_frontend["run"],
+                    "env": build_frontend["env"],
+                    "working-directory": "release-source/action_server",
+                },
+                {
+                    "name": "Build OAuth2 config from immutable source",
+                    "run": build_oauth2_config["run"],
+                    "env": build_oauth2_config["env"],
+                    "working-directory": "release-source/action_server",
+                },
+                {
+                    "name": "Verify immutable Runtime source version",
+                    "env": {"RELEASE_REF": "${{ inputs.release_ref }}"},
+                    "run": """set -Eeuo pipefail
+tag_version="${RELEASE_REF#actions-runtime-}"
+package_version=$(uv run --no-project --python 3.12 poetry version --short)
+test "$package_version" = "$tag_version"
+""",
+                    "working-directory": "release-source/action_server",
+                },
+                *self.build_action_server_binary_cross_platform(
+                    ref_name="${{ inputs.release_ref }}"
+                ),
+                self.upload_artifact(
+                    name="actions-runtime-binary-${{ matrix.name }}",
+                    path="release-source/action_server/dist/final/*",
+                    pinned=True,
+                ),
+            ]
+        )
+        return steps
+
+    def binary_release_normalize(self):
+        return {
+            "name": "Validate exact binary set",
+            "env": {"RELEASE_REF": "${{ inputs.release_ref }}"},
+            "run": """set -Eeuo pipefail
+rm -rf release-assets
+mkdir -p release-assets
+test "$(find binaries/linux -type f | wc -l)" -eq 1
+test "$(find binaries/macos -type f | wc -l)" -eq 1
+test "$(find binaries/windows -type f | wc -l)" -eq 1
+test -s binaries/linux/action-server
+test -s binaries/macos/action-server
+test -s binaries/windows/action-server.exe
+cp binaries/linux/action-server "release-assets/${RELEASE_REF}-linux64"
+cp binaries/macos/action-server "release-assets/${RELEASE_REF}-macos-arm64"
+cp binaries/windows/action-server.exe "release-assets/${RELEASE_REF}-windows64.exe"
+find release-assets -maxdepth 1 -type f -printf '%f\\n' | sort > /tmp/runtime-binary-assets
+printf '%s\\n' "${RELEASE_REF}-linux64" "${RELEASE_REF}-macos-arm64" "${RELEASE_REF}-windows64.exe" | sort > /tmp/runtime-binary-expected
+diff -u /tmp/runtime-binary-expected /tmp/runtime-binary-assets
+test "$(wc -l < /tmp/runtime-binary-assets)" -eq 3
+test -z "$(uniq -d /tmp/runtime-binary-assets)"
+""",
+        }
+
+    def binary_release_publish(self):
+        return {
+            "name": "Create or update the complete GitHub release",
+            "env": {
+                "RELEASE_REF": "${{ inputs.release_ref }}",
+                "RELEASE_SHA": "${{ inputs.release_sha }}",
+                "GH_TOKEN": "${{ github.token }}",
+            },
+            "run": """set -Eeuo pipefail
+release_json=""
+if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF"); then
+  test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
+  existing_assets=$(jq -r '.assets[].name' <<<"$release_json" | sort)
+  if [[ -n "$existing_assets" ]]; then
+    diff -u /tmp/runtime-binary-assets <(printf '%s\\n' "$existing_assets")
+  fi
+else
+  gh release create "$RELEASE_REF" --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes "Runtime binaries recovered from immutable $RELEASE_REF at $RELEASE_SHA."
+fi
+gh release upload "$RELEASE_REF" release-assets/* --clobber
+""",
+        }
+
+    def binary_recovery_release_steps(self):
+        steps = self.recovery_checkouts_and_guard()
+        for name, path in (
+            ("linux", "binaries/linux"),
+            ("macos", "binaries/macos"),
+            ("windows", "binaries/windows"),
+        ):
+            steps.append(
+                {
+                    "name": f"Download immutable {name} binary",
+                    "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+                    "with": {
+                        "name": f"actions-runtime-binary-{name}",
+                        "path": path,
+                    },
+                }
+            )
+        steps.extend([self.binary_release_normalize(), self.binary_release_publish()])
+        return steps
+
+    @override
+    def jobs_part(self):
+        return {
+            "jobs": {
+                "validate": self.validate_job_part(),
+                "pypi-recovery": self.pypi_recovery_job_part(),
+                "binary-build": {
+                    "needs": ["validate"],
+                    "if": "${{ needs.validate.result == 'success' }}",
+                    "runs-on": "${{ matrix.os }}",
+                    "permissions": {"contents": "read"},
+                    "defaults": {
+                        "run": {"working-directory": "release-source/action_server"}
+                    },
+                    "strategy": {
+                        "fail-fast": False,
+                        "matrix": {
+                            "include": [
+                                {
+                                    "os": UBUNTU_VERSION,
+                                    "name": "linux",
+                                    "python": "3.12",
+                                },
+                                {"os": "macos-15", "name": "macos", "python": "3.12"},
+                                {
+                                    "os": "windows-2022",
+                                    "name": "windows",
+                                    "python": "3.12",
+                                },
+                            ]
+                        },
+                    },
+                    "steps": self.binary_recovery_build_steps(),
+                },
+                "binary-release": {
+                    "needs": ["validate", "binary-build"],
+                    "if": "${{ needs.binary-build.result == 'success' }}",
+                    "runs-on": UBUNTU_VERSION,
+                    "permissions": {"contents": "write"},
+                    "defaults": {"run": {"working-directory": "."}},
+                    "steps": self.binary_recovery_release_steps(),
+                },
+            }
+        }
+
+
 class ActionsTests(BaseTests):
     name = "Actions Core Tests"
     target = "actions_core_tests.yml"
@@ -1164,6 +1732,7 @@ TARGETS = [
     HttpHelperTests(),
     ActionServerPyPiRelease(),
     ActionServerBinaryRelease(),
+    ActionServerRuntimeRecovery(),
 ]
 
 

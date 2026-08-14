@@ -89,13 +89,14 @@ before cibuildwheel; Linux and Windows rows do not receive that platform-specifi
 environment setup.
 One final `pypi` job downloads the exact artifacts, rejects duplicate or
 unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
-the tag is an ancestor of `origin/community` and matches `poetry version
---short`, then retains that verified directory as `actions-runtime-dist`. The
+the tag is an ancestor of `origin/community` and matches
+`uv run --no-project --python 3.12 poetry version --short`, then retains that
+verified directory as `actions-runtime-dist`. The
 workflow publishes the same set once when the Runtime secret is configured;
 without it, verification and retention remain green. Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
-repository, and optional ref, or accepts an already downloaded directory; it
+repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
 never rebuilds. It verifies the exact seven artifacts and retained
 `actions-runtime-manifest.sha256` before running Twine 6.2.0. With `--publish`,
 the script reads only `PYPI` from the process environment or ignored repo-root
@@ -114,9 +115,31 @@ That immutable workflow database ID must match the selected run; selected-run
 equality check,
 in addition to exact SHA, tag ref, successful tag-push conclusion, the generated Runtime
 PyPI workflow, and a non-expired retained artifact before downloading. The display name is
-not an identity binding. Binary release names use GitHub expressions
-containing `${{ github.ref_name }}`; shell literals such as `$tag-linux64` are
-not valid action inputs.
+not an identity binding. Binary signing selection is split into expression-gated signed
+and unsigned steps so POSIX test syntax is never sent to the Windows PowerShell shell.
+Binary release names use GitHub expressions containing `${{ github.ref_name }}`; shell
+literals such as `$tag-linux64` are not valid action inputs.
+
+The generated `actions_runtime_recovery.yml` workflow is the only recovery lane for an
+immutable Runtime tag. Its required `release_ref` and full 40-hex `release_sha` inputs
+are checked against the exact tag object and `origin/community` ancestry before any
+source operation. Each job checks out merged recovery code separately from
+`release-source` at the immutable SHA and verifies the package version. PyPI recovery
+defaults to the retained component artifacts from failed run `31755673247`, but accepts
+them only after binding workflow database ID `333870965`, path, run SHA/ref/event,
+successful component jobs, and the exact non-expired four-component inventory; it then
+combines the exact seven artifacts, verifies the manifest, Twine metadata, clean install,
+`pip check`, and CLI version before retaining `actions-runtime-dist`. It has no PyPI
+credential or upload step. Binary recovery builds the Linux, macOS arm64, and Windows
+rows from the immutable source and creates or updates the release only after the exact
+three-asset set passes validation. The recovery workflow is rerunnable without moving
+the tag.
+
+The local verifier also accepts a successful canonical recovery dispatch, but only after
+binding the active recovery workflow's exact database ID/path, successful dispatch
+conclusion, immutable release inputs when exposed by run metadata, and one non-expired
+`actions-runtime-dist`; failed canonical tag runs and arbitrary display names remain
+ineligible.
 
 The publish job installs repository-root devutils requirements with an explicit
 `action_server` working directory, then runs the local verifier in dry-run mode

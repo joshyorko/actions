@@ -92,8 +92,8 @@ jobs:
     - name: Set version
       run: '
 
-        uv run --no-project --python ${{ matrix.python }} poetry version | awk ''{print
-        $2}'' > version.txt
+        uv run --no-project --python ${{ matrix.python }} poetry version --short >
+        version.txt
 
         VERSION=$(cat version.txt)
 
@@ -105,10 +105,28 @@ jobs:
         '
       id: set_version
       if: ${{ matrix.os == 'ubuntu-22.04' }}
-    - name: Build binary
+    - name: Check signing availability
+      id: signing
+      shell: bash
+      env:
+        SIGNING_EVENT: ${{ github.event_name }}
+        SIGNING_OS: ${{ matrix.os }}
+        MACOS_SIGNING_CERT: ${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}
+        VAULT_URL: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}
+      run: "set -Eeuo pipefail\nsigned=false\nif [[ \"$SIGNING_EVENT\" == \"push\"\
+        \ || \"$SIGNING_EVENT\" == \"workflow_dispatch\" ]]; then\n  if [[ \"$SIGNING_OS\"\
+        \ == \"macos-15\" && -n \"${MACOS_SIGNING_CERT:-}\" ]]; then\n    signed=true\n\
+        \  elif [[ \"$SIGNING_OS\" == \"windows-2022\" && -n \"${VAULT_URL:-}\" ]];\
+        \ then\n    signed=true\n  fi\nfi\necho \"signed=$signed\" >> \"$GITHUB_OUTPUT\"\
+        \n"
+    - name: Build binary (signed)
+      if: ${{ steps.signing.outputs.signed == 'true' }}
       env:
         RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
         RC_ACTION_SERVER_DO_SELFTEST: 'true'
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
+        GITHUB_REF_NAME: ${{ github.ref_name }}
+        GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
         MACOS_SIGNING_CERT: ${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}
         MACOS_SIGNING_CERT_PASSWORD: ${{ secrets.MACOS_SIGNING_CERT_PASSWORD_ACTIONS_RUNTIME
           }}
@@ -126,13 +144,18 @@ jobs:
           }}
         CERTIFICATE_NAME: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_ACTIONS_RUNTIME
           }}
+      run: uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable
+        --sign --go-wrapper
+    - name: Build binary (unsigned)
+      if: ${{ steps.signing.outputs.signed != 'true' }}
+      env:
+        RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
+        RC_ACTION_SERVER_DO_SELFTEST: 'true'
         GITHUB_EVENT_NAME: ${{ github.event_name }}
         GITHUB_REF_NAME: ${{ github.ref_name }}
         GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
-      run: if [ -n "$MACOS_SIGNING_CERT" ] || [ -n "$VAULT_URL" ]; then uv run --no-project
-        --python ${{ matrix.python }} poetry run inv build-executable --sign --go-wrapper;
-        else uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable
-        --go-wrapper; fi
+      run: uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable
+        --go-wrapper
     - name: 'Upload artifact: action_server/dist/final/'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:

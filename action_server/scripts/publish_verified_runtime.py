@@ -40,6 +40,9 @@ class VerificationError(ValueError):
 
 CANONICAL_WORKFLOW_PATH = ".github/workflows/actions_runtime_pypi_release.yml"
 WORKFLOW_API_IDENTIFIER = "actions_runtime_pypi_release.yml"
+RECOVERY_WORKFLOW_PATH = ".github/workflows/actions_runtime_recovery.yml"
+RECOVERY_WORKFLOW_API_IDENTIFIER = "actions_runtime_recovery.yml"
+RECOVERY_WORKFLOW_NAME = "Action Server Runtime Recovery"
 
 
 def _artifact_names(directory: Path) -> list[str]:
@@ -249,13 +252,62 @@ def validate_release_run(
         raise RuntimeError("the Runtime artifact is expired")
 
 
-def canonical_workflow_id(repo: str) -> int:
+def validate_recovery_run(
+    metadata: dict, *, sha: str, ref: str, workflow_id: int
+) -> None:
+    if not re.fullmatch(r"actions-runtime-[0-9]+\.[0-9]+\.[0-9]+", ref):
+        raise RuntimeError("--ref must be an actions-runtime version tag")
+    if not re.fullmatch(r"[0-9a-f]{40}", sha):
+        raise RuntimeError("--sha must be a full 40-hex release SHA")
+    if not re.fullmatch(r"[0-9a-f]{40}", str(metadata.get("headSha", ""))):
+        raise RuntimeError("the recovery run has no valid workflow head SHA")
+    if metadata.get("headBranch") != "community":
+        raise RuntimeError("the recovery run was not dispatched from community")
+    if metadata.get("workflowName") != RECOVERY_WORKFLOW_NAME:
+        raise RuntimeError("the selected run is not the Runtime recovery workflow")
+    selected_workflow_id = metadata.get("workflowDatabaseId")
+    if (
+        isinstance(selected_workflow_id, bool)
+        or not isinstance(selected_workflow_id, int)
+        or selected_workflow_id <= 0
+    ):
+        raise RuntimeError(
+            "the selected recovery run has no valid workflow database ID"
+        )
+    if selected_workflow_id != workflow_id:
+        raise RuntimeError(
+            "the selected run is not the canonical Runtime recovery workflow"
+        )
+    if metadata.get("event") != "workflow_dispatch":
+        raise RuntimeError("the selected recovery run is not a manual dispatch")
+    if metadata.get("conclusion") != "success":
+        raise RuntimeError("the selected recovery run did not succeed")
+    if metadata.get("artifactExpired"):
+        raise RuntimeError("the Runtime recovery artifact is expired")
+    inputs = metadata.get("inputs")
+    if inputs is not None and (
+        not isinstance(inputs, dict)
+        or inputs.get("release_ref") != ref
+        or inputs.get("release_sha") != sha
+    ):
+        raise RuntimeError("the recovery inputs do not match --ref and --sha")
+    display_title = metadata.get("displayTitle")
+    if (
+        display_title is not None
+        and display_title != f"Runtime recovery: {ref} @ {sha}"
+    ):
+        raise RuntimeError("the recovery run title does not match its inputs")
+
+
+def workflow_database_id(
+    repo: str, *, api_identifier: str, expected_path: str, workflow_label: str
+) -> int:
     try:
         result = subprocess.run(
             [
                 "gh",
                 "api",
-                f"repos/{repo}/actions/workflows/{WORKFLOW_API_IDENTIFIER}",
+                f"repos/{repo}/actions/workflows/{api_identifier}",
                 "--jq",
                 "{id,path,state}",
             ],
@@ -266,22 +318,42 @@ def canonical_workflow_id(repo: str) -> int:
         payload = json.loads(result.stdout)
     except (subprocess.CalledProcessError, json.JSONDecodeError) as error:
         raise RuntimeError(
-            "could not resolve the canonical Runtime PyPI workflow"
+            f"could not resolve the {workflow_label} workflow"
         ) from error
     if not isinstance(payload, dict):
-        raise RuntimeError("canonical Runtime PyPI workflow metadata is malformed")
+        raise RuntimeError(  # noqa: TRY004 - preserve the CLI's fail-closed error type
+            f"{workflow_label} workflow metadata is malformed"
+        )
     workflow_id = payload.get("id")
     if (
         isinstance(workflow_id, bool)
         or not isinstance(workflow_id, int)
         or workflow_id <= 0
     ):
-        raise RuntimeError("canonical Runtime PyPI workflow has no valid database ID")
-    if payload.get("path") != CANONICAL_WORKFLOW_PATH:
-        raise RuntimeError("canonical Runtime PyPI workflow has an unexpected path")
+        raise RuntimeError(f"{workflow_label} workflow has no valid database ID")
+    if payload.get("path") != expected_path:
+        raise RuntimeError(f"{workflow_label} workflow has an unexpected path")
     if payload.get("state") != "active":
-        raise RuntimeError("canonical Runtime PyPI workflow is not active")
+        raise RuntimeError(f"{workflow_label} workflow is not active")
     return workflow_id
+
+
+def canonical_workflow_id(repo: str) -> int:
+    return workflow_database_id(
+        repo,
+        api_identifier=WORKFLOW_API_IDENTIFIER,
+        expected_path=CANONICAL_WORKFLOW_PATH,
+        workflow_label="canonical Runtime PyPI",
+    )
+
+
+def recovery_workflow_id(repo: str) -> int:
+    return workflow_database_id(
+        repo,
+        api_identifier=RECOVERY_WORKFLOW_API_IDENTIFIER,
+        expected_path=RECOVERY_WORKFLOW_PATH,
+        workflow_label="Runtime recovery",
+    )
 
 
 def main() -> int:
@@ -289,6 +361,7 @@ def main() -> int:
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--dist-dir", type=Path)
     source.add_argument("--run-id")
+    source.add_argument("--download-root", type=Path)
     parser.add_argument("--repo", default=None)
     parser.add_argument("--ref", default=None)
     parser.add_argument("--sha", default=None)
@@ -299,7 +372,11 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     directory = args.dist_dir
-    if args.run_id:
+    if args.download_root:
+        directory = Path.cwd() / "actions-runtime-dist"
+        merge_downloads(args.download_root, directory)
+        write_manifest(directory)
+    elif args.run_id:
         if not args.repo:
             parser.error("--repo is required with --run-id")
         directory = Path.cwd() / "actions-runtime-dist"
@@ -314,16 +391,28 @@ def main() -> int:
                 "--repo",
                 args.repo,
                 "--json",
-                "headSha,headBranch,workflowName,workflowDatabaseId,event,conclusion",
+                "headSha,headBranch,workflowName,workflowDatabaseId,event,conclusion,displayTitle",
                 "--jq",
-                "{headSha,headBranch,workflowName,workflowDatabaseId,event,conclusion}",
+                "{headSha,headBranch,workflowName,workflowDatabaseId,event,conclusion,displayTitle}",
             ],
             check=True,
             capture_output=True,
             text=True,
         )
         metadata = json.loads(result.stdout)
-        workflow_id = canonical_workflow_id(args.repo)
+        canonical_id = canonical_workflow_id(args.repo)
+        selected_workflow_id = metadata.get("workflowDatabaseId")
+        if selected_workflow_id == canonical_id:
+            validate_run = validate_release_run
+            workflow_id = canonical_id
+        else:
+            workflow_id = recovery_workflow_id(args.repo)
+            if selected_workflow_id != workflow_id:
+                raise RuntimeError(
+                    "the selected run is not a recognized Runtime workflow"
+                )
+            validate_run = validate_recovery_run
+        validate_run(metadata, sha=args.sha, ref=args.ref, workflow_id=workflow_id)
         artifact_result = subprocess.run(
             [
                 "gh",
@@ -342,9 +431,7 @@ def main() -> int:
         if len(artifact_lines) != 1:
             raise RuntimeError("the selected run has no unique Runtime artifact")
         metadata["artifactExpired"] = json.loads(artifact_lines[0])["artifactExpired"]
-        validate_release_run(
-            metadata, sha=args.sha, ref=args.ref, workflow_id=workflow_id
-        )
+        validate_run(metadata, sha=args.sha, ref=args.ref, workflow_id=workflow_id)
         command = [
             "gh",
             "run",
@@ -358,7 +445,8 @@ def main() -> int:
             str(directory),
         ]
         subprocess.run(command, check=True)
-    assert directory is not None
+    if directory is None:
+        raise RuntimeError("an artifact directory is required")
     names = verify_artifacts(directory)
     print(f"verified {len(names)} Runtime artifacts and {MANIFEST_NAME}")
     if args.dry_run:
