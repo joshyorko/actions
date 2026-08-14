@@ -813,7 +813,7 @@ def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
     )
 
     retained_names = [
-        step["with"]["name"]
+        step["name"].removeprefix("Download retained ")
         for step in jobs["pypi-recovery"]["steps"]
         if step.get("name", "").startswith("Download retained")
     ]
@@ -901,12 +901,13 @@ def test_runtime_publisher_validates_recovery_identity_and_inputs():
         ref="actions-runtime-1.0.0",
         workflow_id=444444444,
     )
-    publisher.validate_recovery_run(
-        metadata | {"inputs": None},
-        sha=release_sha,
-        ref="actions-runtime-1.0.0",
-        workflow_id=444444444,
-    )
+    with pytest.raises(RuntimeError, match="inputs"):
+        publisher.validate_recovery_run(
+            metadata | {"inputs": None},
+            sha=release_sha,
+            ref="actions-runtime-1.0.0",
+            workflow_id=444444444,
+        )
     for field, value in (
         ("headBranch", "factory/other"),
         ("event", "push"),
@@ -924,6 +925,77 @@ def test_runtime_publisher_validates_recovery_identity_and_inputs():
                 ref="actions-runtime-1.0.0",
                 workflow_id=444444444,
             )
+
+
+@pytest.mark.parametrize(
+    "inputs",
+    [
+        None,
+        [],
+        {"release_ref": "actions-runtime-1.0.0", "release_sha": "4" * 39},
+        {"release_ref": "ACTIONS-RUNTIME-1.0.0", "release_sha": "4" * 40},
+    ],
+)
+def test_recovery_run_requires_exact_dispatch_inputs(inputs):
+    publisher = load_publisher()
+    with pytest.raises(RuntimeError, match="inputs"):
+        publisher.validate_recovery_run(
+            {
+                "headSha": "f" * 40,
+                "headBranch": "community",
+                "workflowName": "Action Server Runtime Recovery",
+                "workflowDatabaseId": 444444444,
+                "event": "workflow_dispatch",
+                "conclusion": "success",
+                "artifactExpired": False,
+                "inputs": inputs,
+            },
+            sha="4" * 40,
+            ref="actions-runtime-1.0.0",
+            workflow_id=444444444,
+        )
+
+
+def test_recovery_workflow_admits_only_merged_community_workflow_code():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
+    for text in (generator, recovery):
+        assert "github.workflow_ref" in text
+        assert "refs/heads/community" in text
+        assert "github.workflow_sha" in text
+        assert "refs/remotes/origin/community" in text
+    assert (
+        "joshyorko/actions/.github/workflows/actions_runtime_recovery.yml@refs/heads/community"
+        in generator
+    )
+
+
+def test_recovery_reuses_pinned_artifact_ids_and_digests_without_clobber():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
+    for text in (generator, recovery):
+        assert "31755673247" in text
+        assert "run_attempt" in text
+        assert "artifact_id" in text or "ARTIFACT_ID" in text or "artifact-id" in text
+        assert "sha256" in text
+    assert "run-id: ${{ inputs.pypi_source_run_id }}" not in recovery
+    assert "actions/artifacts/$ARTIFACT_ID/zip" in recovery
+    assert "--clobber" not in generator
+    assert "--clobber" not in recovery
+
+
+def test_generated_recovery_run_blocks_are_bash_syntax_valid():
+    workflow = yaml.safe_load((WORKFLOWS / "actions_runtime_recovery.yml").read_text())
+    blocks = []
+    for job in workflow["jobs"].values():
+        blocks.extend(step["run"] for step in job["steps"] if "run" in step)
+    assert blocks
+    for block in blocks:
+        normalized = re.sub(r"\$\{\{.*?\}\}", "placeholder", block)
+        result = subprocess.run(
+            ["bash", "-n"], input=normalized, text=True, capture_output=True
+        )
+        assert result.returncode == 0, result.stderr
 
 
 def test_runtime_publisher_accepts_successful_recovery_without_rebuilding(
@@ -949,6 +1021,10 @@ def test_runtime_publisher_accepts_successful_recovery_without_rebuilding(
                     "workflowDatabaseId": 444444444,
                     "event": "workflow_dispatch",
                     "conclusion": "success",
+                    "inputs": {
+                        "release_ref": "actions-runtime-1.0.0",
+                        "release_sha": release_sha,
+                    },
                     "displayTitle": f"Runtime recovery: actions-runtime-1.0.0 @ {release_sha}",
                 }
             )

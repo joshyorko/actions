@@ -123,17 +123,18 @@ literals such as `$tag-linux64` are not valid action inputs.
 The generated `actions_runtime_recovery.yml` workflow is the only recovery lane for an
 immutable Runtime tag. Its required `release_ref` and full 40-hex `release_sha` inputs
 are checked against the exact tag object and `origin/community` ancestry before any
-source operation. Each job checks out merged recovery code separately from
-`release-source` at the immutable SHA and verifies the package version. PyPI recovery
-defaults to the retained component artifacts from failed run `31755673247`, but accepts
-them only after binding workflow database ID `333870965`, path, run SHA/ref/event,
-successful component jobs, and the exact non-expired four-component inventory; it then
-combines the exact seven artifacts, verifies the manifest, Twine metadata, clean install,
-`pip check`, and CLI version before retaining `actions-runtime-dist`. It has no PyPI
-credential or upload step. Binary recovery builds the Linux, macOS arm64, and Windows
-rows from the immutable source and creates or updates the release only after the exact
-three-asset set passes validation. The recovery workflow is rerunnable without moving
-the tag.
+source operation. Every job admits only the exact repository workflow path at
+`refs/heads/community`, and proves checked-out `github.workflow_sha` equals the single
+fetched `origin/community` tip before using recovery code. Each job checks out merged
+recovery code separately from `release-source` at the immutable SHA and verifies the
+package version. PyPI recovery is pinned to failed run `31755673247`, attempt 1,
+workflow `333870965`, the canonical repository/ref/SHA/event, the four live artifact
+IDs, sizes, and API digests; it downloads through artifact-ID endpoints, rejects
+unexpected or expired artifacts, and has no PyPI credential or upload step. Binary
+recovery requires signing credentials and a signed macOS/Windows build, while Linux
+may remain unsigned. Its draft release path hashes all three assets first, compares
+existing release asset names/digests byte-for-byte, never clobbers, and publishes only
+after complete verification against the immutable SHA.
 
 The local verifier also accepts a successful canonical recovery dispatch, but only after
 binding the active recovery workflow's exact database ID/path, successful dispatch

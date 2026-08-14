@@ -523,12 +523,13 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
                 },
                 "run": """set -Eeuo pipefail
 signed=false
-if [[ "$SIGNING_EVENT" == "push" || "$SIGNING_EVENT" == "workflow_dispatch" ]]; then
-  if [[ "$SIGNING_OS" == "macos-15" && -n "${MACOS_SIGNING_CERT:-}" ]]; then
-    signed=true
-  elif [[ "$SIGNING_OS" == "windows-2022" && -n "${VAULT_URL:-}" ]]; then
-    signed=true
-  fi
+if [[ "$SIGNING_EVENT" == "workflow_dispatch" ]]; then
+  if [[ "$SIGNING_OS" == "macos-15" && -n "${MACOS_SIGNING_CERT:-}" ]]; then signed=true; fi
+  if [[ "$SIGNING_OS" == "windows-2022" && -n "${VAULT_URL:-}" ]]; then signed=true; fi
+fi
+if [[ "$SIGNING_OS" != "ubuntu-22.04" && "$signed" != true ]]; then
+  echo "release signing credentials are required" >&2
+  exit 1
 fi
 echo "signed=$signed" >> "$GITHUB_OUTPUT"
 """,
@@ -1294,6 +1295,28 @@ class ActionServerRuntimeRecovery(BaseWorkflow):
     target = "actions_runtime_recovery.yml"
     project_name = "action_server"
     recovery_run_in_env = "uv run --no-project --python 3.12 "
+    pypi_artifacts = {
+        "action-server-dist": (
+            9202638277,
+            "848656",
+            "sha256:e68002161c7c05c7558339816733e56fc953fd8fe1bbf02f99f1f70c4a575072",
+        ),
+        "Linux-wheels": (
+            9202661215,
+            "26180637",
+            "sha256:e63ebadb20107adba8a6c76489105339337c1406db96ff328161dda9baf0c34e",
+        ),
+        "macOS-wheels": (
+            9202659672,
+            "24523055",
+            "sha256:5bba95082475ec108a6c764891a7a905ac135fd3fc58246be0f0244b53e281e",
+        ),
+        "Windows-wheels": (
+            9202679653,
+            "21134688",
+            "sha256:24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359",
+        ),
+    }
 
     def __init__(self):
         super().__init__()
@@ -1390,9 +1413,28 @@ test "$package_version" = "$tag_version"
 """,
         }
 
+    def recovery_admission_guard(self):
+        return {
+            "name": "Admit only merged community recovery code",
+            "env": {
+                "WORKFLOW_REF": "${{ github.workflow_ref }}",
+                "WORKFLOW_SHA": "${{ github.workflow_sha }}",
+                "REPOSITORY": "${{ github.repository }}",
+            },
+            "run": r"""set -Eeuo pipefail
+test "$REPOSITORY" = "joshyorko/actions"
+test "$WORKFLOW_REF" = "joshyorko/actions/.github/workflows/actions_runtime_recovery.yml@refs/heads/community"
+[[ "$WORKFLOW_SHA" =~ ^[0-9a-f]{40}$ ]]
+git -C recovery-code fetch --no-tags origin "refs/heads/community:refs/remotes/origin/community"
+test "$(git -C recovery-code rev-parse HEAD)" = "$WORKFLOW_SHA"
+test "$(git -C recovery-code rev-parse refs/remotes/origin/community)" = "$WORKFLOW_SHA"
+""",
+        }
+
     def recovery_checkouts_and_guard(self):
         steps = [
             self.checkout_recovery_code(),
+            self.recovery_admission_guard(),
             self.checkout_release_source(),
         ]
         steps.extend(self.setup_python(pinned=True))
@@ -1432,14 +1474,17 @@ test "$(jq -r '.id' <<<"$workflow_json")" = "$PYPI_SOURCE_WORKFLOW_ID"
 test "$(jq -r '.path' <<<"$workflow_json")" = ".github/workflows/actions_runtime_pypi_release.yml"
 test "$(jq -r '.state' <<<"$workflow_json")" = "active"
 run_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID")
-jq -e --arg sha "$RELEASE_SHA" --arg ref "$RELEASE_REF" --arg workflow "$PYPI_SOURCE_WORKFLOW_ID" --arg run "$PYPI_SOURCE_RUN_ID" '
+jq -e --arg sha "$RELEASE_SHA" --arg ref "$RELEASE_REF" --arg workflow "$PYPI_SOURCE_WORKFLOW_ID" --arg run "$PYPI_SOURCE_RUN_ID" --arg repo "$GITHUB_REPOSITORY" '
   .id == ($run | tonumber)
+  and .run_attempt == 1
   and .workflow_id == ($workflow | tonumber)
   and .path == ".github/workflows/actions_runtime_pypi_release.yml"
   and .head_sha == $sha
   and .head_branch == $ref
   and .event == "push"
   and .conclusion == "failure"
+  and .repository.full_name == $repo
+  and .head_repository.full_name == $repo
 ' <<<"$run_json"
 jobs_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/jobs?per_page=100")
 jq -e --argjson required '["build-sdist (ubuntu-py3.12)", "build-wheels (macos-15)", "build-wheels (ubuntu-22.04)", "build-wheels (windows-2022)"]' '
@@ -1449,13 +1494,19 @@ jq -e --argjson required '["build-sdist (ubuntu-py3.12)", "build-wheels (macos-1
   and ($selected | all(.[]; .status == "completed" and .conclusion == "success"))
   and ([.jobs[] | select(.name == "publish (3.12)")] | length == 1)
   and ([.jobs[] | select(.name == "publish (3.12)")][0].conclusion == "failure")
+  and ([.jobs[] | select(.name == "publish (3.12)")][0].steps[] | select(.name == "Verify merged tag provenance and version") | .conclusion) == ["failure"]
 ' <<<"$jobs_json"
 artifacts_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/artifacts?per_page=100")
-jq -e --argjson expected '["Linux-wheels", "Windows-wheels", "action-server-dist", "macOS-wheels"]' '
-  [.artifacts[] | select(.name as $name | ($expected | index($name)) != null)] as $selected
-  | ($selected | length == 4)
-  and (($selected | map(.name) | sort) == ($expected | sort))
-  and ($selected | all(.[]; .expired == false))
+jq -e --arg repo "$GITHUB_REPOSITORY" '
+  [.artifacts[] | select(.workflow_run.id == 31755673247)] as $all
+  | ($all | length == 4)
+  and ($all | all(.expired == false))
+  and ($all | map({id,name,size_in_bytes,digest}) | sort_by(.name) == [
+    {id:9202638277,name:"action-server-dist",size_in_bytes:848656,digest:"sha256:e68002161c7c05c7558339816733e56fc953fd8fe1bbf02f99f1f70c4a575072"},
+    {id:9202661215,name:"Linux-wheels",size_in_bytes:26180637,digest:"sha256:e63ebadb20107adba8a6c76489105339337c1406db96ff328161dda9baf0c34e"},
+    {id:9202659672,name:"macOS-wheels",size_in_bytes:24523055,digest:"sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e"},
+    {id:9202679653,name:"Windows-wheels",size_in_bytes:21134688,digest:"sha256:24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359"}
+  ])
 ' <<<"$artifacts_json"
 """,
         }
@@ -1468,17 +1519,16 @@ jq -e --argjson expected '["Linux-wheels", "Windows-wheels", "action-server-dist
             ("macOS-wheels", "pypi-components/macos"),
             ("Windows-wheels", "pypi-components/windows"),
         ):
+            artifact_id, _, _ = self.pypi_artifacts[name]
             downloads.append(
                 {
                     "name": f"Download retained {name}",
-                    "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
-                    "with": {
-                        "name": name,
-                        "path": path,
-                        "repository": "${{ github.repository }}",
-                        "run-id": "${{ inputs.pypi_source_run_id }}",
-                        "github-token": "${{ github.token }}",
+                    "env": {
+                        "ARTIFACT_ID": str(artifact_id),
+                        "DESTINATION": path,
+                        "GH_TOKEN": "${{ github.token }}",
                     },
+                    "run": 'set -Eeuo pipefail\nmkdir -p "$DESTINATION"\ngh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runtime-artifact.zip\nunzip -q /tmp/runtime-artifact.zip -d "$DESTINATION"',
                 }
             )
         return downloads
@@ -1618,17 +1668,24 @@ test -z "$(uniq -d /tmp/runtime-binary-assets)"
                 "GH_TOKEN": "${{ github.token }}",
             },
             "run": """set -Eeuo pipefail
+manifest=$(mktemp)
+sha256sum release-assets/* | sed 's#release-assets/##' | sort > "$manifest"
 release_json=""
 if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF"); then
   test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
-  existing_assets=$(jq -r '.assets[].name' <<<"$release_json" | sort)
-  if [[ -n "$existing_assets" ]]; then
-    diff -u /tmp/runtime-binary-assets <(printf '%s\\n' "$existing_assets")
-  fi
+  test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
+  expected=$(jq -Rn '[inputs | split("  ") | {name:.[1],digest:("sha256:" + .[0])}]' < "$manifest")
+  jq -e --argjson expected "$expected" '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name)) and ([.assets[].name] | length == 3)' <<<"$release_json"
+  while read -r digest name; do
+    test "$(jq -r --arg name "$name" '.assets[] | select(.name == $name) | .digest' <<<"$release_json")" = "sha256:$digest"
+  done < "$manifest"
 else
-  gh release create "$RELEASE_REF" --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes "Runtime binaries recovered from immutable $RELEASE_REF at $RELEASE_SHA."
+  gh release create "$RELEASE_REF" --draft --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes "Runtime binaries recovered from immutable $RELEASE_REF at $RELEASE_SHA."
+  gh release upload "$RELEASE_REF" release-assets/*
+  release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")
+  test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
+  gh release edit "$RELEASE_REF" --draft=false
 fi
-gh release upload "$RELEASE_REF" release-assets/* --clobber
 """,
         }
 
