@@ -87,6 +87,16 @@ published prerequisites. Never hand-edit lock hashes or add path/direct-URL
 production dependencies. Runtime freeze inputs remain a separate post-candidate
 gate.
 
+The Runtime frontend data-access contract is query-authoritative: typed calls
+in `action_server/frontend/src/shared/runtime-api.ts` feed the canonical keys
+in `src/shared/runtime-query-keys.ts` through `src/queries/runtime.ts`. The
+Runtime provider owns the only `QueryClient`; its WebSocket adapter invalidates
+the same keys and deduplicates older or repeated event sequences without
+writing a parallel mutable store. Focused Vitest coverage exercises list,
+detail, mutation, HTTP error, cancellation, reconnect, and out-of-order event
+paths. Canvas remains a separate Vite entrypoint and is not a consumer of this
+cache.
+
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement
 with that local path before Poetry resolves, and install the helper from the

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { logError } from './helpers';
+import { logError } from "./helpers";
 
 /**
  * A socket.io-like interface for websockets.
@@ -23,6 +23,8 @@ export class WebsocketConn {
    * Flag indicating whether it's currently connecting.
    */
   private connecting = false;
+
+  private closed = false;
 
   /**
    * Handlers to manage received events.
@@ -106,6 +108,7 @@ export class WebsocketConn {
   }
 
   public connect(): Promise<void> {
+    this.closed = false;
     if (this.connecting) {
       // console.log('Websocket: connect ignored (already connecting).');
       return Promise.resolve(undefined);
@@ -125,7 +128,7 @@ export class WebsocketConn {
         // console.log('Websocket: connection opened (marking as connected)');
         this.connected = true;
         this.connecting = false;
-        this.notify('connect');
+        this.notify("connect");
         resolve();
       };
 
@@ -135,7 +138,7 @@ export class WebsocketConn {
         // console.log('Websocket: connection on error');
         this.connected = false;
         this.connecting = false;
-        this.notify('disconnect');
+        this.notify("disconnect");
         reject();
       };
       this.ws.onerror = markNotConnectingAndReject;
@@ -173,8 +176,19 @@ export class WebsocketConn {
 
     // Auto-reconnect quickly as the connection was broken for some reason.
     // Reduced from 5000ms to 1000ms for faster recovery.
-    setTimeout(() => {
-      this.connect();
-    }, 1000);
+    if (!this.closed) {
+      setTimeout(() => {
+        this.connect();
+      }, 1000);
+    }
   };
+
+  public disconnect() {
+    this.closed = true;
+    this.messages = [];
+    this.ws?.close();
+    this.ws = null;
+    this.connected = false;
+    this.connecting = false;
+  }
 }
