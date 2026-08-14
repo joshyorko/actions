@@ -189,6 +189,7 @@ export class WebsocketConn {
     // Auto-reconnect quickly as the connection was broken for some reason.
     // Reduced from 5000ms to 1000ms for faster recovery.
     if (!this.closed) {
+      if (this.reconnectTimer !== null) return;
       this.reconnectTimer = setTimeout(() => {
         this.reconnectTimer = null;
         if (this.closed || generation !== this.generation) return;

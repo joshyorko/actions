@@ -104,7 +104,9 @@ cancellation endpoint returns the literal union `"cancelled" | "not-running"`.
 Legacy artifact query parameters use repeated keys for readonly string arrays
 (for example, `artifact_names=a&artifact_names=b`). Provider-owned QueryClients
 are created per mounted Runtime provider and cleared during teardown; WebSocket
-reconnect timers are cancelled and guarded against stale connection generations.
+reconnect timers are cancelled, single-flight per active connection generation
+even if duplicate close callbacks arrive, and guarded against stale connection
+generations.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement

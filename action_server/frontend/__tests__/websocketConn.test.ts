@@ -40,14 +40,63 @@ describe("WebsocketConn", () => {
     expect(FakeWebSocket.instances).toHaveLength(1);
   });
 
-  it("handles duplicate close and error notifications without duplicate reconnects", async () => {
+  it("schedules only one reconnect when the same socket closes twice", async () => {
+    const socket = new WebsocketConn("ws://example.test");
+    const connecting = socket.connect();
+    FakeWebSocket.instances[0].onopen?.();
+    await connecting;
+
+    FakeWebSocket.instances[0].onclose?.();
+    FakeWebSocket.instances[0].onclose?.();
+
+    expect(vi.getTimerCount()).toBe(1);
+    await vi.advanceTimersByTimeAsync(1000);
+
+    expect(FakeWebSocket.instances).toHaveLength(2);
+  });
+
+  it("handles close and error notifications without duplicate reconnects", async () => {
     const socket = new WebsocketConn("ws://example.test");
     const connecting = socket.connect();
     FakeWebSocket.instances[0].onerror?.();
     await expect(connecting).rejects.toBeUndefined();
     FakeWebSocket.instances[0].onclose?.();
+    expect(vi.getTimerCount()).toBe(1);
     await vi.advanceTimersByTimeAsync(1000);
 
     expect(FakeWebSocket.instances).toHaveLength(2);
+  });
+
+  it("ignores a stale close after a newer socket is active", async () => {
+    const socket = new WebsocketConn("ws://example.test");
+    const connecting = socket.connect();
+    FakeWebSocket.instances[0].onopen?.();
+    await connecting;
+    const oldSocket = FakeWebSocket.instances[0];
+    oldSocket.onclose?.();
+    await vi.advanceTimersByTimeAsync(1000);
+
+    const reconnecting = socket.connect();
+    FakeWebSocket.instances[1].onopen?.();
+    await reconnecting;
+    oldSocket.onclose?.();
+
+    expect(vi.getTimerCount()).toBe(0);
+    expect(FakeWebSocket.instances).toHaveLength(2);
+  });
+
+  it("does not reconnect after repeated disconnect disposes a scheduled retry", async () => {
+    const socket = new WebsocketConn("ws://example.test");
+    const connecting = socket.connect();
+    FakeWebSocket.instances[0].onopen?.();
+    await connecting;
+    FakeWebSocket.instances[0].onclose?.();
+
+    socket.disconnect();
+    socket.disconnect();
+    await vi.advanceTimersByTimeAsync(1000);
+
+    expect(vi.getTimerCount()).toBe(0);
+    expect(FakeWebSocket.instances).toHaveLength(1);
   });
 });
