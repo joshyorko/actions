@@ -169,6 +169,27 @@ published prerequisites. Never hand-edit lock hashes or add path/direct-URL
 production dependencies. Runtime freeze inputs remain a separate post-candidate
 gate.
 
+The Runtime frontend data-access contract is query-authoritative: typed calls
+in `action_server/frontend/src/shared/runtime-api.ts` feed the canonical keys
+in `src/shared/runtime-query-keys.ts` through `src/queries/runtime.ts`. The
+Runtime provider owns the only `QueryClient`; its WebSocket adapter invalidates
+the same keys without writing a parallel mutable store. Focused Vitest coverage exercises list,
+detail, mutation, HTTP error, cancellation, reconnect, and out-of-order event
+paths. Canvas remains a separate Vite entrypoint and is not a consumer of this
+cache.
+
+The current backend event contract has no sequence field: `runs_collected`
+contains a run list, `run_added` contains `{run}`, and `run_changed` contains
+`{run_id, changes}`. Treat every event as a freshness signal and invalidate
+canonical queries; never apply event payloads directly to cached data. The run
+cancellation endpoint returns the literal union `"cancelled" | "not-running"`.
+Legacy artifact query parameters use repeated keys for readonly string arrays
+(for example, `artifact_names=a&artifact_names=b`). Provider-owned QueryClients
+are created per mounted Runtime provider and cleared during teardown; WebSocket
+reconnect timers are cancelled, single-flight per active connection generation
+even if duplicate close callbacks arrive, and guarded against stale connection
+generations.
+
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement
 with that local path before Poetry resolves, and install the helper from the

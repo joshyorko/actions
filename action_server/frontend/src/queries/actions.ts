@@ -1,10 +1,11 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { runtimeQueryKeys } from "@/shared/runtime-query-keys";
 
 // Convert string to kebab-case (matches backend URL format)
 const toKebabCase = (str: string): string => {
-  return str.replace(/[\s_]+/g, '-').toLowerCase();
+  return str.replace(/[\s_]+/g, "-").toLowerCase();
 };
 
 export type ActionRunPayload = {
@@ -18,6 +19,7 @@ export type ActionRunPayload = {
 };
 
 export const useActionRunMutation = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({
       actionPackageName,
@@ -41,25 +43,30 @@ export const useActionRunMutation = () => {
         }
       }
 
-      headers['x-action-context'] = btoa(JSON.stringify({ secrets: secretDataAsObject }));
+      headers["x-action-context"] = btoa(
+        JSON.stringify({ secrets: secretDataAsObject }),
+      );
 
       if (requestId) {
-        headers['x-actions-request-id'] = requestId;
+        headers["x-actions-request-id"] = requestId;
       }
 
       // Pass work item queue configuration
       if (workItemQueue) {
-        headers['x-workitem-queue'] = workItemQueue;
+        headers["x-workitem-queue"] = workItemQueue;
       }
 
-      const request = await fetch(`/api/actions/${toKebabCase(actionPackageName)}/${toKebabCase(actionName)}/run`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(args),
-      });
+      const request = await fetch(
+        `/api/actions/${toKebabCase(actionPackageName)}/${toKebabCase(actionName)}/run`,
+        {
+          method: "POST",
+          headers,
+          body: JSON.stringify(args),
+        },
+      );
 
-      const runId = request.headers.get('X-Action-Server-Run-Id') || '';
-      let response = '';
+      const runId = request.headers.get("X-Action-Server-Run-Id") || "";
+      let response = "";
 
       try {
         const json = await request.json();
@@ -73,5 +80,7 @@ export const useActionRunMutation = () => {
         response,
       };
     },
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: runtimeQueryKeys.runs() }),
   });
 };

@@ -1,64 +1,58 @@
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  ActionServerContext,
-  defaultActionServerState,
-} from "@/shared/context/actionServerContext";
+import { ActionServerContext } from "@/shared/context/actionServerContext";
 import type { ViewSettings } from "@/shared/context/actionServerContext";
 import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
 import {
-  startTrackActions,
-  startTrackRuns,
-  startTrackServerConfig,
-  stopTrackActions,
-  stopTrackRuns,
-  stopTrackServerConfig,
-} from "@/shared/api-client";
-import type {
-  LoadedActionsPackages,
-  LoadedRuns,
-  LoadedServerConfig,
-} from "@/shared/types";
+  useRuntimeActions,
+  useRuntimeConfig,
+  useRuntimeRuns,
+} from "@/queries/runtime";
+import { subscribeRuntimeEvents } from "@/shared/runtime-events";
 
-const queryClient = new QueryClient();
-
-const ActionServerProvider = ({ children }: { children: ReactNode }) => {
+const ActionServerProvider = ({
+  children,
+  queryClient,
+}: {
+  children: ReactNode;
+  queryClient: QueryClient;
+}) => {
   const [viewSettings, setViewSettings] = useLocalStorage<ViewSettings>(
     "view-settings",
     { theme: "dark" },
   );
-  const [loadedRuns, setLoadedRuns] = useState<LoadedRuns>(
-    defaultActionServerState.loadedRuns,
-  );
-  const [loadedActions, setLoadedActions] = useState<LoadedActionsPackages>(
-    defaultActionServerState.loadedActions,
-  );
-  const [loadedServerConfig, setLoadedServerConfig] =
-    useState<LoadedServerConfig>(defaultActionServerState.loadedServerConfig);
+  const actions = useRuntimeActions();
+  const runs = useRuntimeRuns();
+  const config = useRuntimeConfig();
 
   useEffect(() => {
-    startTrackActions(setLoadedActions);
-    startTrackRuns(setLoadedRuns);
-    startTrackServerConfig(setLoadedServerConfig);
-    return () => {
-      stopTrackActions(setLoadedActions);
-      stopTrackRuns(setLoadedRuns);
-      stopTrackServerConfig(setLoadedServerConfig);
-    };
-  }, []);
+    return subscribeRuntimeEvents(queryClient);
+  }, [queryClient]);
 
   return (
     <ActionServerContext.Provider
       value={{
         viewSettings,
         setViewSettings,
-        loadedRuns,
-        setLoadedRuns,
-        loadedActions,
-        setLoadedActions,
-        loadedServerConfig,
-        setLoadedServerConfig,
+        loadedRuns: {
+          data: runs.data,
+          isPending: runs.isPending,
+          errorMessage: runs.error?.message,
+        },
+        loadedActions: {
+          data: actions.data,
+          isPending: actions.isPending,
+          errorMessage: actions.error?.message,
+        },
+        loadedServerConfig: {
+          data: config.data,
+          isPending: config.isPending,
+          errorMessage: config.error?.message,
+        },
+        setLoadedRuns: () => undefined,
+        setLoadedActions: () => undefined,
+        setLoadedServerConfig: () => undefined,
       }}
     >
       {children}
@@ -66,8 +60,23 @@ const ActionServerProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const RuntimeProviders = ({ children }: { children: ReactNode }) => (
-  <QueryClientProvider client={queryClient}>
-    <ActionServerProvider>{children}</ActionServerProvider>
-  </QueryClientProvider>
-);
+export const RuntimeProviders = ({ children }: { children: ReactNode }) => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: { staleTime: 30_000, refetchOnWindowFocus: false },
+        },
+      }),
+  );
+
+  useEffect(() => () => queryClient.clear(), [queryClient]);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ActionServerProvider queryClient={queryClient}>
+        {children}
+      </ActionServerProvider>
+    </QueryClientProvider>
+  );
+};
