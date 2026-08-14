@@ -192,7 +192,9 @@ def db_migration_status(db_path: Union[Path, str]) -> MigrationStatus:
     from actions.server._database import normalize_database_url
 
     db_path = normalize_database_url(db_path)
-    is_postgresql = isinstance(db_path, str) and db_path.startswith("postgresql://")
+    is_postgresql = isinstance(db_path, str) and db_path.lower().startswith(
+        "postgresql://"
+    )
     path = Path(db_path) if not is_postgresql else None
     if path is not None and not path.exists():
         raise RuntimeError(

@@ -14,7 +14,7 @@ from actions.server._database import (
     normalize_database_url,
     redact_database_url,
 )
-from actions.server.migrations import db_migration_status, migrate_db
+from actions.server.migrations import MigrationStatus, db_migration_status, migrate_db
 
 
 @dataclass
@@ -35,6 +35,36 @@ def test_database_selects_postgres_for_case_insensitive_url_without_exposing_it_
 
     assert db.backend_name == "postgresql"
     assert db.db_path == value
+
+
+def test_migration_status_accepts_case_insensitive_postgresql_url(monkeypatch):
+    value = "POSTGRESQL://localhost/actions_test"
+
+    class FakeDatabase:
+        backend_name = "postgresql"
+
+        def __init__(self, db_path):
+            assert db_path == value
+
+        def connect(self):
+            return self
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def log_internal_info(self):
+            pass
+
+    monkeypatch.setattr("actions.server._database.Database", FakeDatabase)
+    monkeypatch.setattr(
+        "actions.server.migrations._db_migration_status",
+        lambda database: MigrationStatus.UP_TO_DATE,
+    )
+
+    assert db_migration_status(value) is MigrationStatus.UP_TO_DATE
 
 
 @pytest.mark.parametrize(
