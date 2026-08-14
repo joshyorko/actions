@@ -2,96 +2,54 @@
 import { defineConfig } from 'vite';
 import { viteSingleFile } from 'vite-plugin-singlefile';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import react from '@vitejs/plugin-react';
 
-// Get tier from environment variable (set by build task)
-const tier = process.env.TIER || 'community';
-const isCommunity = tier === 'community';
+const frontendRoot = path.dirname(fileURLToPath(import.meta.url));
 
-// Vendored packages that are allowed in community builds
-const VENDORED_PACKAGES = ['actions-runtime-components', 'actions-runtime-icons'];
+export default defineConfig(({ mode }) => {
+  const isCanvas = mode === 'canvas';
+  const appRoot = path.join(frontendRoot, 'apps', isCanvas ? 'canvas-view' : 'runtime');
 
-// Custom plugin to enforce tier separation
-function tierSeparationPlugin() {
   return {
-    name: 'tier-separation',
-    enforce: 'pre',
-    resolveId(source, importer) {
-      // Block enterprise imports in community builds
-      if (isCommunity) {
-        // Allow internal vendored packages
-        if (VENDORED_PACKAGES.some(pkg => source.startsWith(pkg))) {
-          return null; // Allow these
-        }
-        if (source.includes('actions-runtime-') ||
-            source.includes('@/enterprise') ||
-            source.includes('../enterprise')) {
-          console.error(`❌ Enterprise import detected in community build: ${source}`);
-          console.error(`   From: ${importer}`);
-          throw new Error(
-            `Enterprise imports not allowed in community tier: ${source}\n` +
-            `This violates tier separation. Move shared code to @/shared or create a community alternative.`
-          );
-        }
-      }
-      return null;
-    }
+    root: appRoot,
+    server: {
+      port: isCanvas ? 8086 : 8085,
+      proxy: {
+        '/api': 'http://localhost:8080',
+        '/openapi.json': 'http://localhost:8080',
+        '/config': 'http://localhost:8080',
+        '/api/ws': { target: 'ws://localhost:8080', ws: true },
+      },
+    },
+    resolve: {
+      alias: {
+        '~': path.join(frontendRoot, 'src'),
+        '@/core': path.join(frontendRoot, 'src/core'),
+        '@/shared': path.join(frontendRoot, 'src/shared'),
+        '@/queries': path.join(frontendRoot, 'src/queries'),
+      },
+      mainFields: ['module', 'main', 'browser'],
+    },
+    plugins: [react(), viteSingleFile()],
+    test: {
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: path.join(frontendRoot, '__tests__/a11y/setup.ts'),
+      include: [path.join(frontendRoot, '__tests__/**/*.test.{ts,tsx}')],
+      exclude: ['**/node_modules/**', '**/__tests__/visual/**', '**/*.backup'],
+      coverage: { provider: 'v8', reporter: ['text', 'lcov'] },
+    },
+    build: {
+      outDir: path.join(frontendRoot, isCanvas ? 'dist-canvas' : 'dist'),
+      emptyOutDir: true,
+      rollupOptions: {
+        output: {
+          entryFileNames: 'assets/[name]-[hash].js',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          assetFileNames: 'assets/[name]-[hash].[ext]',
+        },
+      },
+    },
   };
-}
-
-export default defineConfig({
-  define: {
-    // Global __TIER__ variable for runtime checks
-    __TIER__: JSON.stringify(tier),
-  },
-  server: {
-    port: 8085,
-    proxy: {
-      '/api': 'http://localhost:8080',
-      '/openapi.json': 'http://localhost:8080',
-      '/config': 'http://localhost:8080',
-      '/api/ws': {
-        target: 'ws://localhost:8080',
-        ws: true,
-      },
-    },
-  },
-  resolve: {
-    alias: {
-      '~': path.join(__dirname, 'src'),
-      '@/core': path.join(__dirname, 'src/core'),
-      '@/enterprise': path.join(__dirname, 'src/enterprise'),
-      '@/shared': path.join(__dirname, 'src/shared'),
-      '@/queries': path.join(__dirname, 'src/queries'),
-    },
-    mainFields: ['module', 'main', 'browser'],
-  },
-  plugins: [react(), tierSeparationPlugin(), viteSingleFile()],
-  test: {
-    environment: 'jsdom',
-    globals: true,
-    setupFiles: './__tests__/a11y/setup.ts',
-    include: ['__tests__/**/*.test.{ts,tsx}', '__tests__/**/*.spec.{ts,tsx}'],
-    // Exclude node_modules and visual tests (Playwright)
-    exclude: ['**/node_modules/**', '**/__tests__/visual/**', '**/*.backup'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'lcov'],
-    },
-  },
-  build: {
-    rollupOptions: {
-      // Tree-shake enterprise code in community builds
-      // Note: Vendored packages (actions-runtime-components, actions-runtime-icons) are NOT externalized
-      external: isCommunity ? [
-        /@\/enterprise\/.*/,
-      ] : [],
-      output: {
-        // Deterministic bundle naming
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
-      },
-    },
-  },
 });

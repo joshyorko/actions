@@ -88,17 +88,9 @@ def build_frontend(
     ctx: Context,
     debug: bool = False,
     install: bool = True,
-    tier: str = None,
     json_output: bool = False,
 ):
-    """Build static .html frontend with tier-based configuration.
-    
-    Args:
-        debug: Build in debug mode (not minified)
-        install: Run npm ci before build
-        tier: Build tier ('community' or 'enterprise'), defaults to 'community' if not set via env var
-        json_output: Output build result as JSON
-    """
+    """Build the canonical Runtime frontend and embed its static entrypoint."""
     import json as json_lib
     import os
     import sys
@@ -106,17 +98,12 @@ def build_frontend(
     
     # Import build system modules
     sys.path.insert(0, str(CURDIR / "build-binary"))
-    from tier_selector import select_tier, ConfigurationError
     from package_manifest import PackageManifest
     from determinism import set_source_date_epoch
     
     try:
-        # Step 1: Select tier
-        env_tier = os.environ.get("TIER")
-        build_tier = select_tier(cli_flag=tier, env_var=env_tier)
-        
         if not json_output:
-            print(f"[BUILD] Building with tier: {build_tier.name.value}")
+            print("[BUILD] Building Runtime frontend")
         
         # Step 2: Set deterministic timestamp
         timestamp = set_source_date_epoch(CURDIR.parent)
@@ -125,7 +112,7 @@ def build_frontend(
         
         # Step 3: Load and validate manifest
         frontend_dir = CURDIR / "frontend"
-        manifest = PackageManifest.load(build_tier.name.value, frontend_dir)
+        manifest = PackageManifest.load(frontend_dir)
         
         validation_result = manifest.validate()
         if not validation_result.passed:
@@ -136,33 +123,20 @@ def build_frontend(
             if json_output:
                 result = {
                     "status": "error",
-                    "tier": build_tier.name.value,
                     "error": "Manifest validation failed",
                     "details": validation_result.errors,
                 }
                 print(json_lib.dumps(result, indent=2))
             sys.exit(3)  # Config error
         
-        # Step 4: Copy manifest to root
-        manifest.copy_to_root(frontend_dir)
-        
-        if not json_output:
-            print(f"[OK] Using {build_tier.name.value} package manifest")
-        
-        # Step 5: Install and build
         with _change_to_frontend_dir():
             if install:
                 if not json_output:
                     print("[INSTALL] Installing dependencies...")
-                # Restore package files from git to ensure they're not modified by external processes
-                run(ctx, "git", "checkout", "HEAD", "--", "package.json", "package-lock.json")
                 run(ctx, "npm", "ci", "--no-audit", "--no-fund")
             
             if not json_output:
                 print("[BUILD] Building frontend...")
-            
-            # Set TIER environment variable for Vite
-            os.environ["TIER"] = build_tier.name.value
             
             if debug:
                 run(ctx, "npm", "run", "build:debug")
@@ -197,7 +171,6 @@ FILE_CONTENTS = {repr(file_contents)}
         if json_output:
             result = {
                 "status": "success",
-                "tier": build_tier.name.value,
                 "artifact": {
                     "path": str(index_src),
                     "size_bytes": index_src.stat().st_size,
@@ -206,19 +179,8 @@ FILE_CONTENTS = {repr(file_contents)}
             }
             print(json_lib.dumps(result, indent=2))
         else:
-            print(f"[SUCCESS] Frontend built successfully ({build_tier.name.value} tier)")
+            print("[SUCCESS] Runtime frontend built successfully")
     
-    except ConfigurationError as e:
-        if json_output:
-            result = {
-                "status": "error",
-                "error": "Configuration error",
-                "message": str(e),
-            }
-            print(json_lib.dumps(result, indent=2))
-        else:
-            print(f"[ERROR] Configuration error: {e}")
-        sys.exit(3)
     except Exception as e:
         if json_output:
             result = {
@@ -232,57 +194,20 @@ FILE_CONTENTS = {repr(file_contents)}
         sys.exit(1)
 
 
-@task
-def build_frontend_community(ctx: Context, debug: bool = False, install: bool = True, json_output: bool = False):
-    """Build frontend with community tier (alias for build-frontend --tier=community)."""
-    build_frontend(ctx, debug=debug, install=install, tier="community", json_output=json_output)
 
 
 @task
-def build_frontend_enterprise(ctx: Context, debug: bool = False, install: bool = True, json_output: bool = False):
-    """Build frontend with enterprise tier (alias for build-frontend --tier=enterprise)."""
-    build_frontend(ctx, debug=debug, install=install, tier="enterprise", json_output=json_output)
-
-
-@task
-def build_community(ctx: Context, debug: bool = False, install: bool = True, go_wrapper: bool = True):
-    """Build full action-server with community tier (frontend + executable + go wrapper).
-
-    Args:
-        debug: Build in debug mode
-        install: Run npm ci before build
-        go_wrapper: Build Go wrapper for final distributable (default: True)
-    """
-    build_frontend(ctx, debug=debug, install=install, tier="community", json_output=False)
-    build_executable(ctx, debug=debug, go_wrapper=go_wrapper)
-
-
-@task
-def build_enterprise(ctx: Context, debug: bool = False, install: bool = True, go_wrapper: bool = True):
-    """Build full action-server with enterprise tier (frontend + executable + go wrapper).
-
-    Args:
-        debug: Build in debug mode
-        install: Run npm ci before build
-        go_wrapper: Build Go wrapper for final distributable (default: True)
-    """
-    build_frontend(ctx, debug=debug, install=install, tier="enterprise", json_output=False)
-    build_executable(ctx, debug=debug, go_wrapper=go_wrapper)
-
-
-@task
-def validate_imports(ctx: Context, tier: str = "community", json_output: bool = False):
-    """Validate that community artifacts have no enterprise imports.
+def validate_imports(ctx: Context, json_output: bool = False):
+    """Validate that the Runtime artifact has no removed product imports.
     
     Args:
-        tier: Build tier to validate (typically 'community')
         json_output: Output validation result as JSON
     """
     import json as json_lib
     from pathlib import Path
     
     sys.path.insert(0, str(CURDIR / "build-binary"))
-    from tree_shaker import scan_imports, detect_enterprise_imports
+    from tree_shaker import TreeShaker
     
     dist_path = CURDIR / "frontend" / "dist"
     if not dist_path.exists():
@@ -293,11 +218,12 @@ def validate_imports(ctx: Context, tier: str = "community", json_output: bool = 
             print(f"[ERROR] {msg}")
         sys.exit(2)
     
-    # Scan all built files for enterprise imports
-    violations = detect_enterprise_imports(str(dist_path))
+    # Scan each built source file; passing the directory to the file scanner
+    # silently skipped the entire validation when it could not be opened.
+    violations = TreeShaker(tier="community", root_dir=dist_path).scan_directory(dist_path)
     
     if violations:
-        msg = f"Found {len(violations)} enterprise import(s) in {tier} build"
+        msg = f"Found {len(violations)} removed product import(s) in Runtime build"
         details = []
         for v in violations:
             details.append({
@@ -323,18 +249,24 @@ def validate_imports(ctx: Context, tier: str = "community", json_output: bool = 
     if json_output:
         print(json_lib.dumps({
             "status": "passed",
-            "message": f"No enterprise imports found in {tier} build"
+            "message": "No removed product imports found in Runtime build"
         }, indent=2))
     else:
-        print(f"[OK] No enterprise imports found in {tier} build")
+        print("[OK] No removed product imports found in Runtime build")
 
 
 @task
-def validate_artifact(ctx: Context, tier: str = "community", json_output: bool = False):
+def validate_artifact(
+    ctx: Context,
+    runtime_artifact: Optional[str] = None,
+    canvas_artifact: Optional[str] = None,
+    json_output: bool = False,
+):
     """Validate built artifacts meet all requirements.
     
     Args:
-        tier: Build tier to validate
+        runtime_artifact: Optional Runtime root to validate without building.
+        canvas_artifact: Optional Canvas root to validate without building.
         json_output: Output validation result as JSON
     """
     import json as json_lib
@@ -342,52 +274,103 @@ def validate_artifact(ctx: Context, tier: str = "community", json_output: bool =
     sys.path.insert(0, str(CURDIR / "build-binary"))
     from artifact_validator import validate_artifact as validate_artifact_func
     
-    artifact_path = CURDIR / "frontend" / "dist"
-    if not artifact_path.exists():
-        msg = f"Artifact path not found: {artifact_path}"
-        if json_output:
-            print(json_lib.dumps({"status": "error", "message": msg}, indent=2))
-        else:
-            print(f"[ERROR] {msg}")
-        sys.exit(2)
-    
     baseline_path = CURDIR / "tests" / "performance_tests" / "baseline.json"
-    
-    try:
-        all_passed, checks = validate_artifact_func(
-            artifact_path, 
-            tier, 
-            baseline_path if baseline_path.exists() else None,
-            json_output
-        )
-        
-        if json_output:
-            output = {
-                "status": "passed" if all_passed else "failed",
-                "checks": [
-                    {
-                        "name": check.name,
-                        "passed": check.passed,
-                        "message": check.message,
-                        "severity": check.severity
-                    }
-                    for check in checks
-                ]
-            }
-            print(json_lib.dumps(output, indent=2))
+    artifact_specs = [
+        (
+            Path(runtime_artifact) if runtime_artifact else CURDIR / "frontend" / "dist",
+            runtime_artifact is not None,
+            "build:runtime",
+        ),
+        (
+            Path(canvas_artifact)
+            if canvas_artifact
+            else CURDIR / "frontend" / "dist-canvas",
+            canvas_artifact is not None,
+            "build:canvas",
+        ),
+    ]
+
+    for artifact_path, explicit_path, build_command in artifact_specs:
+        if not explicit_path and not artifact_path.exists():
+            print(f"[BUILD] Missing default artifact; running npm run {build_command}")
+            with _change_to_frontend_dir():
+                run(ctx, "npm", "run", build_command)
+
+    artifact_paths = [path for path, _, _ in artifact_specs]
+    results = []
+    all_passed = True
+
+    for artifact_path in artifact_paths:
+        try:
+            resolved_artifact_path = artifact_path.resolve(strict=True)
+        except OSError as exc:
+            results.append(
+                (
+                    artifact_path,
+                    False,
+                    [],
+                    f"Artifact root cannot be resolved: {artifact_path} ({exc})",
+                )
+            )
+            all_passed = False
+            continue
+
+        if not resolved_artifact_path.is_dir():
+            results.append(
+                (
+                    artifact_path,
+                    False,
+                    [],
+                    f"Artifact root must be a directory: {artifact_path}",
+                )
+            )
+            all_passed = False
+            continue
+
+        try:
+            artifact_passed, checks = validate_artifact_func(
+                resolved_artifact_path,
+                baseline_path if baseline_path.exists() else None,
+                json_output,
+            )
+        except Exception as exc:
+            results.append((artifact_path, False, [], f"Validation error: {exc}"))
+            all_passed = False
         else:
+            results.append((artifact_path, artifact_passed, checks, None))
+            all_passed = all_passed and artifact_passed
+
+    if json_output:
+        print(json_lib.dumps({
+            "status": "passed" if all_passed else "failed",
+            "artifacts": [
+                {
+                    "path": str(path),
+                    "passed": passed,
+                    "message": error,
+                    "checks": [
+                        {
+                            "name": check.name,
+                            "passed": check.passed,
+                            "message": check.message,
+                            "severity": check.severity,
+                        }
+                        for check in checks
+                    ],
+                }
+                for path, passed, checks, error in results
+            ],
+        }, indent=2))
+    else:
+        for artifact_path, artifact_passed, checks, error in results:
+            print(f"[ARTIFACT] {artifact_path}")
+            if error:
+                print(f"[ERROR] {error}")
             for check in checks:
                 status = "[OK]" if check.passed else "[ERROR]"
                 print(f"{status} {check.name}: {check.message}")
-        
-        if not all_passed:
-            sys.exit(2)
-    
-    except Exception as e:
-        if json_output:
-            print(json_lib.dumps({"status": "error", "message": str(e)}, indent=2))
-        else:
-            print(f"[ERROR] Validation error: {e}")
+
+    if not all_passed:
         sys.exit(2)
 
 

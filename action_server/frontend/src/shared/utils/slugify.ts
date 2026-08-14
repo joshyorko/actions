@@ -2,7 +2,7 @@
  * Slugify utility functions for URL generation.
  *
  * These functions match the backend's URL slug transformation logic from:
- * sema4ai/action_server/_slugify.py and _api_action_routes.py
+ * Action Server's upstream _slugify.py and _api_action_routes.py
  *
  * The backend registers action routes with slugified names, so the frontend
  * must apply the same transformation when building API URLs.

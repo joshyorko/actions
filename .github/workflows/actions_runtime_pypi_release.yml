@@ -15,21 +15,28 @@
 name: Action Server PYPI Release
 permissions:
   contents: read
-  id-token: write
 'on':
   push:
     tags:
     - actions-runtime-*
+  pull_request:
     branches:
-    - '*-beta'
+    - community
+    paths:
+    - .github/workflows/_gen_workflows.py
+    - .github/workflows/actions_runtime_pypi_release.yml
+    - .github/workflows/actions_runtime_binary_release.yml
+    - .github/workflows/actions_runtime_manylinux_release.yml
+    - devutils/tests/test_runtime_release_workflows.py
+    - docs/skills/repository-operations.md
+    - action_server/scripts/publish_verified_runtime.py
 defaults:
   run:
     working-directory: ./action_server
 jobs:
-  build:
+  build-sdist:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: true
       matrix:
         name:
         - ubuntu-py3.12
@@ -39,9 +46,9 @@ jobs:
           os: ubuntu-22.04
     steps:
     - name: Checkout repository and submodules
-      uses: actions/checkout@v5
+      uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
     - name: Install the latest version of uv
-      uses: astral-sh/setup-uv@v5
+      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
         enable-cache: true
     - name: Install Python 3.12
@@ -60,23 +67,33 @@ jobs:
       env:
         ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD: 'true'
     - name: Setup node
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
       with:
         node-version: 20.x
         registry-url: https://npm.pkg.github.com
         scope: '@robocorp'
     - name: Check tag version
       run: uv run --no-project --python ${{ matrix.python }} poetry run inv check-tag-version
-      if: ${{ !endsWith(github.ref_name, '-beta') }}
+      if: ${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}
     - name: Build frontend
       run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
       env:
         CI: true
         NODE_AUTH_TOKEN: ${{ secrets.GH_PAT_READ_PACKAGES }}
+      if: github.event_name == 'push'
+    - name: Build frontend (PR)
+      run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
+      if: github.event_name == 'pull_request'
+      env:
+        CI: true
     - name: Build OAuth2 config
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
       env:
         GH_TOKEN: ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}
+      if: github.event_name == 'push'
+    - name: Build OAuth2 config (PR)
+      run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
+      if: github.event_name == 'pull_request'
     - name: Build sdist
       run: '
 
@@ -84,33 +101,213 @@ jobs:
 
         rm src/actions/server/bin/rcc* -f
 
-        # Just sdist here, wheels are built in the manylinux job.
+        # Wheels are built in the matrix job.
 
         uv run --no-project --python ${{ matrix.python }} poetry build -f sdist
 
         '
       env:
         CI: true
-        NODE_AUTH_TOKEN: ${{ secrets.GH_PAT_READ_PACKAGES }}
-        GH_TOKEN: ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}
         ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD: true
     - name: 'Upload artifact: action_server/dist/*'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
         name: action-server-dist
         path: action_server/dist/*
-    - name: Upload to PyPI
-      run: '
-
-        uv run --no-project --python ${{ matrix.python }} poetry config pypi-token.pypi  ${{
-        secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}
-
-        uv run --no-project --python ${{ matrix.python }} poetry publish
-
-        '
+  build-wheels:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os:
+        - ubuntu-22.04
+        - windows-2022
+        - macos-15
+        include:
+        - os: ubuntu-22.04
+          python: '3.12'
+          name: ubuntu
+        - os: windows-2022
+          python: '3.12'
+          name: windows
+        - os: macos-15
+          python: '3.12'
+          name: macos
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
+      with:
+        enable-cache: true
+    - name: Install Python 3.12
+      run: uv python install 3.12
+    - name: Install devutils requirements
+      run: uv run --no-project --python ${{ matrix.python }}  python -m pip install
+        --break-system-packages -r ../devutils/requirements.txt
+    - name: Install project (not dev)
+      if: contains(matrix.name, '-devmode') == false
+      run: uv run --no-project --python ${{ matrix.python }} inv install
       env:
-        ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD: true
-      if: ${{ !endsWith(github.ref_name, '-beta') }}
+        ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD: 'true'
+    - name: Install project (dev)
+      if: contains(matrix.name, '-devmode')
+      run: uv run --no-project --python ${{ matrix.python }} inv devinstall
+      env:
+        ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD: 'true'
+    - name: Setup node
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 20.x
+        registry-url: https://npm.pkg.github.com
+        scope: '@robocorp'
+    - name: Check tag version
+      run: uv run --no-project --python ${{ matrix.python }} poetry run inv check-tag-version
+      if: ${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}
+    - name: Build frontend
+      run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
+      env:
+        CI: true
+        NODE_AUTH_TOKEN: ${{ secrets.GH_PAT_READ_PACKAGES }}
+      if: github.event_name == 'push'
+    - name: Build frontend (PR)
+      run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
+      if: github.event_name == 'pull_request'
+      env:
+        CI: true
+    - name: Build OAuth2 config
+      run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
+      env:
+        GH_TOKEN: ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}
+      if: github.event_name == 'push'
+    - name: Build OAuth2 config (PR)
+      run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
+      if: github.event_name == 'pull_request'
+    - name: Install devutils requirements
+      run: 'uv run --no-project --python ${{ matrix.python }}  python -m pip install
+        --break-system-packages -r ../devutils/requirements.txt
+
+        uv run --no-project --python ${{ matrix.python }}  python -m pip install --break-system-packages
+        cibuildwheel==2.23.1'
+    - name: Set macOS deployment target
+      if: ${{ matrix.name == 'macos' }}
+      run: echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> "$GITHUB_ENV"
+    - name: Build and clean-test wheels
+      run: uv run --no-project --python ${{ matrix.python }} python -m cibuildwheel
+        --output-dir wheelhouse
+      env:
+        CIBW_SKIP: pp*
+        CIBW_BUILD: cp312-*macos*arm64 cp313-*macos*arm64 cp312-*manylinux*x86_64
+          cp313-*manylinux*x86_64 cp312-*win*amd64 cp313-*win*amd64
+        CIBW_BUILD_VERBOSITY: 1
+        CIBW_TEST_COMMAND: python -m pip check && python -m actions.server version
+    - name: 'Upload artifact: action_server/wheelhouse/*'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: ${{ runner.os }}-wheels
+        path: action_server/wheelhouse/*
+  publish:
+    needs:
+    - build-sdist
+    - build-wheels
+    permissions:
+      contents: read
+    environment: pypi
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: .
+    strategy:
+      matrix:
+        python:
+        - '3.12'
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
+      with:
+        enable-cache: true
+    - name: Install Python 3.12
+      run: uv python install 3.12
+    - name: Install devutils requirements
+      run: uv run --no-project --python ${{ matrix.python }}  python -m pip install
+        --break-system-packages -r ../devutils/requirements.txt
+      working-directory: action_server
+    - name: Verify merged tag provenance and version
+      if: github.event_name == 'push'
+      run: 'set -Eeuo pipefail
+
+        git fetch origin community:refs/remotes/origin/community
+
+        git merge-base --is-ancestor "$GITHUB_SHA" origin/community
+
+        tag_version=${GITHUB_REF_NAME#actions-runtime-}
+
+        cd action_server
+
+        package_version=$(poetry version --short)
+
+        if [[ "$tag_version" != "$package_version" ]]; then printf ''tag version %s
+        does not match package version %s\n'' "$tag_version" "$package_version" >&2;
+        exit 1; fi'
+    - name: Download sdist artifact
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      with:
+        name: action-server-dist
+        path: action_server/dist/downloads/sdist
+    - name: Download wheel artifacts separately
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      with:
+        pattern: '*-wheels'
+        path: action_server/dist/downloads/wheels
+        merge-multiple: false
+    - name: Verify exact Runtime artifact inventory
+      run: "set -Eeuo pipefail\ncd action_server\nrm -rf dist/verified\nmkdir -p dist/verified\n\
+        find dist/downloads -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts\n\
+        test \"$(wc -l < /tmp/runtime-artifacts)\" -eq 7\ntest -z \"$(uniq -d /tmp/runtime-artifacts)\"\
+        \nsdist=$(grep -E '^actions_runtime-[0-9][^/]*\\.tar\\.gz$' /tmp/runtime-artifacts)\n\
+        test \"$(printf '%s\\n' \"$sdist\" | wc -l)\" -eq 1\nversion=${sdist#actions_runtime-}\n\
+        version=${version%.tar.gz}\nprintf '%s\\n' \\\n  \"actions_runtime-$version.tar.gz\"\
+        \ \\\n  \"actions_runtime-$version-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\"\
+        \ \\\n  \"actions_runtime-$version-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\"\
+        \ \\\n  \"actions_runtime-$version-cp312-cp312-macosx_12_0_arm64.whl\" \\\n\
+        \  \"actions_runtime-$version-cp313-cp313-macosx_12_0_arm64.whl\" \\\n  \"\
+        actions_runtime-$version-cp312-cp312-win_amd64.whl\" \\\n  \"actions_runtime-$version-cp313-cp313-win_amd64.whl\"\
+        \ | sort > /tmp/runtime-expected\ndiff -u /tmp/runtime-expected /tmp/runtime-artifacts\n\
+        while IFS= read -r basename; do\n  source=$(find dist/downloads -type f -name\
+        \ \"$basename\" -print -quit)\n  test -n \"$source\"\n  cp -- \"$source\"\
+        \ dist/verified/\"$basename\"\ndone < /tmp/runtime-artifacts\nmv dist/verified/*\
+        \ dist/\nrmdir dist/verified\nrm -rf dist/downloads\nsha256sum dist/*.whl\
+        \ dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runtime-manifest.sha256\n"
+    - name: Install Twine 6.2.0
+      run: uv run --no-project --python ${{ matrix.python }} python -m pip install
+        --break-system-packages twine==6.2.0
+    - name: Verify Runtime artifacts
+      run: uv run --no-project --python ${{ matrix.python }} twine check --strict
+        action_server/dist/*.whl action_server/dist/*.tar.gz
+    - name: Canary local Runtime verifier
+      run: uv run --no-project --python ${{ matrix.python }} python action_server/scripts/publish_verified_runtime.py
+        --dist-dir action_server/dist --dry-run
+    - name: 'Upload artifact: action_server/dist/*'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: actions-runtime-dist
+        path: action_server/dist/*
+    - name: Check Runtime publish credential
+      id: runtime-token
+      if: github.event_name == 'push'
+      env:
+        RUNTIME_TOKEN: ${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}
+      run: if [[ -n "${RUNTIME_TOKEN:-}" ]]; then echo 'enabled=true' >> "$GITHUB_OUTPUT";
+        else echo 'enabled=false' >> "$GITHUB_OUTPUT"; fi
+    - name: Publish verified artifacts
+      if: github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'
+      run: uv run --no-project --python ${{ matrix.python }} twine upload action_server/dist/*.whl
+        action_server/dist/*.tar.gz
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}
 
 
 # Important!!

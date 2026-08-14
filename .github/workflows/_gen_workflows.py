@@ -15,9 +15,8 @@ Given that this will always regenerate the workflows, feel free to make
 refactorings in the structure as needed.
 """
 
-import subprocess
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 import yaml
 from typing_extensions import override
@@ -142,12 +141,15 @@ class BaseWorkflow:
 
         self.full = {}
         self.full.update({"name": self.name})
-        self.full.update({"permissions": {"contents": "read", "id-token": "write"}})
+        permissions = {"contents": "read", "id-token": "write"}
+        if self.target == "actions_runtime_pypi_release.yml":
+            permissions = {"contents": "read"}
+        self.full.update({"permissions": permissions})
         self.full.update(self.on_part(paths))
         self.full.update(self.defaults_part())
         self.full.update(self.jobs_part())
 
-    def setup_python(self):
+    def setup_python(self, pinned=False):
         return [
             # {
             # "name": "Set up Python ${{ matrix.python }}",
@@ -158,7 +160,7 @@ class BaseWorkflow:
             # },
             {
                 "name": "Install the latest version of uv",
-                "uses": "astral-sh/setup-uv@v5",
+                "uses": "astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081" if pinned else "astral-sh/setup-uv@v5",
                 "with": {
                     "enable-cache": True,
                 },
@@ -208,16 +210,19 @@ class BaseWorkflow:
                 {
                     "os": UBUNTU_VERSION,
                     "python": pyversion,
+                    "name": "linux",
                     "asset_path": "action_server/dist/final/action-server",
                 },
                 {
                     "os": "windows-2022",
                     "python": pyversion,
+                    "name": "windows",
                     "asset_path": "action_server/dist/final/action-server.exe",
                 },
                 {
                     "os": "macos-15",
                     "python": pyversion,
+                    "name": "macos",
                     "asset_path": "action_server/dist/final/action-server",
                 },
             ],
@@ -334,7 +339,7 @@ class BaseWorkflow:
             "run": """
 is_beta=${{ endsWith(github.ref_name, '-beta') }}
 echo "is_beta: $is_beta"
-echo "::set-output name=is_beta::$is_beta"
+echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
 """,
         }
         return step
@@ -362,10 +367,10 @@ echo "::set-output name=is_beta::$is_beta"
     def install(self, env: dict | None = None) -> list[dict]:
         return [self.install_with_devmode(env), self.install_without_devmode(env)]
 
-    def setup_node(self):
+    def setup_node(self, pinned=False):
         return {
             "name": "Setup node",
-            "uses": "actions/setup-node@v4",
+            "uses": "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020" if pinned else "actions/setup-node@v4",
             "with": {
                 "node-version": "20.x",
                 "registry-url": "https://npm.pkg.github.com",
@@ -373,10 +378,10 @@ echo "::set-output name=is_beta::$is_beta"
             },
         }
 
-    def setup_go(self):
+    def setup_go(self, pinned=False):
         return {
             "name": "Setup go",
-            "uses": "actions/setup-go@v5",
+            "uses": "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff" if pinned else "actions/setup-go@v5",
             "with": {
                 "go-version": "1.23",
                 "cache-dependency-path": "action_server/go-wrapper/go.sum",
@@ -400,13 +405,13 @@ echo "::set-output name=is_beta::$is_beta"
             "env": {"GH_TOKEN": "${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}"},
         }
 
-    def checkout_repo(self):
+    def checkout_repo(self, pinned=False):
         return {
             "name": "Checkout repository and submodules",
-            "uses": "actions/checkout@v5",
+            "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09" if pinned else "actions/checkout@v5",
         }
 
-    def install_devutils(self, additional_packages: list[str] = []):
+    def install_devutils(self, additional_packages: list[str] | None = None):
         run = f"{run_in_env} python -m pip install --break-system-packages -r ../devutils/requirements.txt"
         if additional_packages:
             run += f"\n{run_in_env} python -m pip install --break-system-packages {' '.join(additional_packages)}"
@@ -478,7 +483,7 @@ echo "::set-output name=is_beta::$is_beta"
         raise NotImplementedError("Subclasses must implement this method")
 
     def upload_artifact(
-        self, name: str, path: str, if_clause: str | None = None
+        self, name: str, path: str, if_clause: str | None = None, pinned=False
     ) -> dict:
         """Helper method to create a standardized artifact upload step.
 
@@ -488,7 +493,7 @@ echo "::set-output name=is_beta::$is_beta"
         """
         ret = {
             "name": f"Upload artifact: {path}",
-            "uses": "actions/upload-artifact@v4",
+            "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02" if pinned else "actions/upload-artifact@v4",
             "with": {
                 "name": name,
                 "path": path,
@@ -608,19 +613,20 @@ class ActionServerPyPiRelease(BaseWorkflow):
             "on": {
                 "push": {
                     "tags": ["actions-runtime-*"],
-                    "branches": ["*-beta"],
+                },
+                "pull_request": {
+                    "branches": ["community"],
+                    "paths": [
+                        ".github/workflows/_gen_workflows.py",
+                        ".github/workflows/actions_runtime_pypi_release.yml",
+                        ".github/workflows/actions_runtime_binary_release.yml",
+                        ".github/workflows/actions_runtime_manylinux_release.yml",
+                        "devutils/tests/test_runtime_release_workflows.py",
+                        "docs/skills/repository-operations.md",
+                        "action_server/scripts/publish_verified_runtime.py",
+                    ],
                 },
             }
-        }
-
-    @override
-    def runs_on_and_strategy_part(self):
-        return {
-            "runs-on": "${{ matrix.os }}",
-            "strategy": {
-                "fail-fast": self.fail_fast,
-                "matrix": self.matrix_ubuntu(self.minimum_python_version),
-            },
         }
 
     def build_sdist(self):
@@ -629,51 +635,151 @@ class ActionServerPyPiRelease(BaseWorkflow):
             "run": f"""
 # Make sure that we have no binaries present when doing the build.
 rm src/actions/server/bin/rcc* -f
-# Just sdist here, wheels are built in the manylinux job.
+# Wheels are built in the matrix job.
 {run_in_env}poetry build -f sdist
 """,
             "env": {
                 "CI": True,
-                "NODE_AUTH_TOKEN": "${{ secrets.GH_PAT_READ_PACKAGES }}",
-                "GH_TOKEN": "${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}",
                 "ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": True,
             },
         }
 
     def upload_artifact_action_server_dist(self):
-        return self.upload_artifact(
-            name="action-server-dist", path="action_server/dist/*"
-        )
+        return self.upload_artifact(name="action-server-dist", path="action_server/dist/*", pinned=True)
 
-    def upload_to_pypi(self):
-        return {
-            "name": "Upload to PyPI",
-            "run": f"""
-{run_in_env}poetry config pypi-token.pypi  ${{{{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}}}
-{run_in_env}poetry publish
-""",
-            "env": {
-                "ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": True,
-            },
-            "if": NOT_BETA_IF_CLAUSE,
-        }
-
-    @override
-    def build_steps(self) -> list[dict]:
-        steps = [self.checkout_repo()] + self.setup_python() + [self.install_devutils()]
-
+    def common_build_steps(self):
+        steps = [self.checkout_repo(pinned=True)] + self.setup_python(pinned=True) + [self.install_devutils()]
         steps.extend(self.install(env={"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "true"}))
+        steps.append(self.setup_node(pinned=True))
+        steps.append(
+            {
+                "name": "Check tag version",
+                "run": f"{run_in_env}poetry run inv check-tag-version",
+                "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
+            }
+        )
+        steps.extend(self.secret_scoped_build_frontend())
+        steps.extend(self.secret_scoped_build_oauth2_config())
+        return steps
 
-        steps.append(self.setup_node())
+    def secret_scoped_build_frontend(self):
+        release_step = self.build_frontend()
+        release_step["if"] = "github.event_name == 'push'"
+        canary_step = {
+            "name": "Build frontend (PR)",
+            "run": release_step["run"],
+            "if": "github.event_name == 'pull_request'",
+            "env": {"CI": True},
+        }
+        return [release_step, canary_step]
 
-        steps.append(self.check_tag_version())
-        steps.append(self.build_frontend())
-        steps.append(self.build_oauth2_config())
+    def secret_scoped_build_oauth2_config(self):
+        release_step = self.build_oauth2_config()
+        release_step["if"] = "github.event_name == 'push'"
+        canary_step = {
+            "name": "Build OAuth2 config (PR)",
+            "run": release_step["run"],
+            "if": "github.event_name == 'pull_request'",
+        }
+        return [release_step, canary_step]
+
+    def build_sdist_steps(self):
+        steps = self.common_build_steps()
         steps.append(self.build_sdist())
         steps.append(self.upload_artifact_action_server_dist())
-        steps.append(self.upload_to_pypi())
-
         return steps
+
+    def build_manylinux_wheels(self):
+        CIBW_BUILD = "cp312-*macos*arm64 cp313-*macos*arm64 cp312-*manylinux*x86_64 cp313-*manylinux*x86_64 cp312-*win*amd64 cp313-*win*amd64"
+        return {
+            "name": "Build and clean-test wheels",
+            "run": f"{run_in_env}python -m cibuildwheel --output-dir wheelhouse",
+            "env": {
+                "CIBW_SKIP": "pp*",
+                "CIBW_BUILD": CIBW_BUILD,
+                "CIBW_BUILD_VERBOSITY": 1,
+                "CIBW_TEST_COMMAND": "python -m pip check && python -m actions.server version",
+            },
+        }
+
+    def upload_artifact_manylinux_wheels(self):
+        return self.upload_artifact(name="${{ runner.os }}-wheels", path="action_server/wheelhouse/*", pinned=True)
+
+    def build_wheels_steps(self):
+        steps = self.common_build_steps()
+        steps.append(self.install_devutils(additional_packages=["cibuildwheel==2.23.1"]))
+        steps.append(
+            {
+                "name": "Set macOS deployment target",
+                "if": "${{ matrix.name == 'macos' }}",
+                "run": "echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> \"$GITHUB_ENV\"",
+            }
+        )
+        steps.append(self.build_manylinux_wheels())
+        steps.append(self.upload_artifact_manylinux_wheels())
+        return steps
+
+    def matrix_runtime_wheels(self, pyversion: str):
+        matrix = self.matrix_cibuildwheel(pyversion)
+        for name, row in zip(("ubuntu", "windows", "macos"), matrix["include"]):
+            row["name"] = name
+        return matrix
+
+    def publish_steps(self):
+        provenance = "set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor \"$GITHUB_SHA\" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(poetry version --short)\nif [[ \"$tag_version\" != \"$package_version\" ]]; then printf 'tag version %s does not match package version %s\\n' \"$tag_version\" \"$package_version\" >&2; exit 1; fi"
+        inventory = """set -Eeuo pipefail
+cd action_server
+rm -rf dist/verified
+mkdir -p dist/verified
+find dist/downloads -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts
+test \"$(wc -l < /tmp/runtime-artifacts)\" -eq 7
+test -z \"$(uniq -d /tmp/runtime-artifacts)\"
+sdist=$(grep -E '^actions_runtime-[0-9][^/]*\\.tar\\.gz$' /tmp/runtime-artifacts)
+test \"$(printf '%s\\n' \"$sdist\" | wc -l)\" -eq 1
+version=${sdist#actions_runtime-}
+version=${version%.tar.gz}
+printf '%s\\n' \\
+  \"actions_runtime-$version.tar.gz\" \\
+  \"actions_runtime-$version-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\" \\
+  \"actions_runtime-$version-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\" \\
+  \"actions_runtime-$version-cp312-cp312-macosx_12_0_arm64.whl\" \\
+  \"actions_runtime-$version-cp313-cp313-macosx_12_0_arm64.whl\" \\
+  \"actions_runtime-$version-cp312-cp312-win_amd64.whl\" \\
+  \"actions_runtime-$version-cp313-cp313-win_amd64.whl\" | sort > /tmp/runtime-expected
+diff -u /tmp/runtime-expected /tmp/runtime-artifacts
+while IFS= read -r basename; do
+  source=$(find dist/downloads -type f -name \"$basename\" -print -quit)
+  test -n \"$source\"
+  cp -- \"$source\" dist/verified/\"$basename\"
+done < /tmp/runtime-artifacts
+mv dist/verified/* dist/
+rmdir dist/verified
+rm -rf dist/downloads
+sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runtime-manifest.sha256
+"""
+        return [
+            self.checkout_repo(pinned=True),
+            *self.setup_python(pinned=True),
+            {**self.install_devutils(), "working-directory": "action_server"},
+            {"name": "Verify merged tag provenance and version", "if": "github.event_name == 'push'", "run": provenance},
+            {"name": "Download sdist artifact", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"name": "action-server-dist", "path": "action_server/dist/downloads/sdist"}},
+            {"name": "Download wheel artifacts separately", "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093", "with": {"pattern": "*-wheels", "path": "action_server/dist/downloads/wheels", "merge-multiple": False}},
+            {"name": "Verify exact Runtime artifact inventory", "run": inventory},
+            {"name": "Install Twine 6.2.0", "run": f"{run_in_env}python -m pip install --break-system-packages twine==6.2.0"},
+            {"name": "Verify Runtime artifacts", "run": f"{run_in_env}twine check --strict action_server/dist/*.whl action_server/dist/*.tar.gz"},
+            {"name": "Canary local Runtime verifier", "run": f"{run_in_env}python action_server/scripts/publish_verified_runtime.py --dist-dir action_server/dist --dry-run"},
+            self.upload_artifact(name="actions-runtime-dist", path="action_server/dist/*", pinned=True),
+            {"name": "Check Runtime publish credential", "id": "runtime-token", "if": "github.event_name == 'push'", "env": {"RUNTIME_TOKEN": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"}, "run": "if [[ -n \"${RUNTIME_TOKEN:-}\" ]]; then echo 'enabled=true' >> \"$GITHUB_OUTPUT\"; else echo 'enabled=false' >> \"$GITHUB_OUTPUT\"; fi"},
+            {"name": "Publish verified artifacts", "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'", "run": f"{run_in_env}twine upload action_server/dist/*.whl action_server/dist/*.tar.gz", "env": {"TWINE_USERNAME": "__token__", "TWINE_PASSWORD": "${{ secrets[format('PYPI_TOKEN_{0}', 'ACTIONS_RUNTIME')] }}"}},
+        ]
+
+    @override
+    def jobs_part(self):
+        return {"jobs": {
+            "build-sdist": {"runs-on": "${{ matrix.os }}", "strategy": {"matrix": self.matrix_ubuntu(self.minimum_python_version)}, "steps": self.build_sdist_steps()},
+            "build-wheels": {"runs-on": "${{ matrix.os }}", "strategy": {"fail-fast": self.fail_fast, "matrix": self.matrix_runtime_wheels(self.minimum_python_version)}, "steps": self.build_wheels_steps()},
+            "publish": {"needs": ["build-sdist", "build-wheels"], "permissions": {"contents": "read"}, "environment": "pypi", "runs-on": UBUNTU_VERSION, "defaults": {"run": {"working-directory": "."}}, "strategy": {"matrix": {"python": [self.minimum_python_version]}}, "steps": self.publish_steps()},
+        }}
 
 
 class ActionServerBinaryRelease(BaseWorkflow):
@@ -705,7 +811,7 @@ class ActionServerBinaryRelease(BaseWorkflow):
 
     def upload_artifact_with_asset_path(self):
         return self.upload_artifact(
-            name="action-server-${{ matrix.os }}", path="action_server/dist/final/"
+            name="action-server-${{ matrix.os }}", path="action_server/dist/final/", pinned=True
         )
 
     def set_version_on_ubuntu(self):
@@ -728,15 +834,16 @@ echo "version=$VERSION" >> "$GITHUB_OUTPUT"
             name="action-server-version",
             path="action_server/version.txt",
             if_clause="${{ matrix.os == '" + UBUNTU_VERSION + "' }}",
+            pinned=True,
         )
 
     def build_steps(self) -> list[dict]:
-        steps = [self.checkout_repo()] + self.setup_python() + [self.install_devutils()]
+        steps = [self.checkout_repo(pinned=True)] + self.setup_python(pinned=True) + [self.install_devutils()]
 
         steps.extend(self.install())
 
-        steps.append(self.setup_node())
-        steps.append(self.setup_go())
+        steps.append(self.setup_node(pinned=True))
+        steps.append(self.setup_go(pinned=True))
 
         steps.append(self.check_tag_version())
         steps.append(self.build_frontend())
@@ -812,7 +919,7 @@ while true; do
                 "defaults": {"run": {"working-directory": "."}},
                 "runs-on": UBUNTU_VERSION,
                 "steps": [
-                    {"uses": "actions/checkout@v4"},
+                    {"uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"},
                     {
                         "name": "Create GitHub release",
                         "uses": "Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803",
@@ -824,21 +931,21 @@ while true; do
                         "env": {"GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"},
                     },
                     {
-                        "uses": "actions/download-artifact@v4",
+                        "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
                         "with": {
                             "name": "action-server-windows-2022",
                             "path": "windows64/",
                         },
                     },
                     {
-                        "uses": "actions/download-artifact@v4",
+                        "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
                         "with": {
                             "name": "action-server-macos-15",
                             "path": "macos-arm64/",
                         },
                     },
                     {
-                        "uses": "actions/download-artifact@v4",
+                        "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
                         "with": {
                             "name": f"action-server-{UBUNTU_VERSION}",
                             "path": "linux64/",
@@ -868,7 +975,7 @@ while true; do
                         "with": {
                             "repo_token": "${{ secrets.GITHUB_TOKEN }}",
                             "file": "./linux64/action-server",
-                            "asset_name": "$tag-linux64",
+                            "asset_name": "${{ github.ref_name }}-linux64",
                             "tag": "${{ github.ref }}",
                             "overwrite": True,
                         },
@@ -879,7 +986,7 @@ while true; do
                         "with": {
                             "repo_token": "${{ secrets.GITHUB_TOKEN }}",
                             "file": "./macos-arm64/action-server",
-                            "asset_name": "$tag-macos-arm64",
+                            "asset_name": "${{ github.ref_name }}-macos-arm64",
                             "tag": "${{ github.ref }}",
                             "overwrite": True,
                         },
@@ -890,7 +997,7 @@ while true; do
                         "with": {
                             "repo_token": "${{ secrets.GITHUB_TOKEN }}",
                             "file": "./windows64/action-server.exe",
-                            "asset_name": "$tag-windows64",
+                            "asset_name": "${{ github.ref_name }}-windows64.exe",
                             "tag": "${{ github.ref }}",
                             "overwrite": True,
                         },
@@ -932,7 +1039,7 @@ while true; do
             ret.append(
                 {
                     "name": f"Download artifact {os}",
-                    "uses": "actions/download-artifact@v4",
+                        "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
                     "with": {
                         "name": f"action-server-{os}",
                         "path": f"action_server/build/{path}/",
@@ -943,7 +1050,7 @@ while true; do
         ret.append(
             {
                 "name": "Download artifact version",
-                "uses": "actions/download-artifact@v4",
+                "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
                 "with": {
                     "name": "action-server-version",
                     "path": "action_server/build/",
@@ -954,7 +1061,7 @@ while true; do
 
     def deploy_s3_job_steps(self):
         steps = []
-        steps.append(self.checkout_repo())
+        steps.append(self.checkout_repo(pinned=True))
         steps.append(self.is_beta_in_steps())
         steps.extend(self.download_artifacts())
         steps.extend(self.upload_to_s3())
@@ -976,8 +1083,8 @@ mv build/macos-arm64 s3-drop/
 mv build/linux64 s3-drop/
 mv build/windows64 s3-drop/
 ls -l s3-drop/
-ver=`cat s3-drop/version.txt`
-echo "actionServerVersion=${ver}" >> $GITHUB_ENV
+ver=$(cat s3-drop/version.txt)
+echo "actionServerVersion=${ver}" >> "$GITHUB_ENV"
 """,
             }
         )
@@ -986,13 +1093,14 @@ echo "actionServerVersion=${ver}" >> $GITHUB_ENV
             self.upload_artifact(
                 name="action-server-artifacts-for-s3-${{ env.actionServerVersion }}",
                 path="action_server/s3-drop",
+                pinned=True,
             )
         )
 
         ret.append(
             {
                 "name": "Configure AWS credentials Dropbox bucket",
-                "uses": "aws-actions/configure-aws-credentials@v4",
+                "uses": "aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df",
                 "with": {
                     "aws-region": "eu-west-1",
                     "role-to-assume": "arn:aws:iam::710450854638:role/github-action-robocorp-action-server",
@@ -1020,84 +1128,6 @@ fi
         )
 
         return ret
-
-
-class ActionServerManylinuxRelease(BaseWorkflow):
-    name = "Action Server MANYLINUX Release"
-    target = "actions_runtime_manylinux_release.yml"
-    project_name = "action_server"
-    fail_fast = True
-
-    @override
-    def on_part(self, dep_paths):
-        return {
-            "on": {
-                "push": {
-                    "tags": ["actions-runtime-*"],
-                    "branches": ["*-beta"],
-                },
-            }
-        }
-
-    @override
-    def runs_on_and_strategy_part(self):
-        return {
-            "runs-on": "${{ matrix.os }}",
-            "strategy": {
-                "fail-fast": self.fail_fast,
-                "matrix": self.matrix_cibuildwheel(self.minimum_python_version),
-            },
-        }
-
-    def build_manylinux_wheels(self):
-        CIBW_BUILD = "cp312-*macos*arm64 "
-        CIBW_BUILD += "cp313-*macos*arm64 "
-        CIBW_BUILD += "cp312-*manylinux*x86_64 "
-        CIBW_BUILD += "cp313-*manylinux*x86_64 "
-        CIBW_BUILD += "cp312-*win*amd64 "
-        CIBW_BUILD += "cp313-*win*amd64"
-        return {
-            "name": "Build wheels",
-            "run": f"{run_in_env} python -m cibuildwheel --output-dir wheelhouse",
-            "env": {
-                "CIBW_SKIP": "pp*",
-                "CIBW_BUILD": CIBW_BUILD,
-                "CIBW_BUILD_VERBOSITY": 1,
-            },
-        }
-
-    def upload_artifact_manylinux_wheels(self):
-        return self.upload_artifact(
-            name="${{ runner.os }}-wheels", path="action_server/wheelhouse/*"
-        )
-
-    def upload_wheels_to_pypi(self):
-        return {
-            "name": "Upload to PyPI .whl",
-            "run": f"{run_in_env}twine upload wheelhouse/*.whl",
-            "if": NOT_BETA_IF_CLAUSE,
-            "env": {
-                "TWINE_USERNAME": "__token__",
-                "TWINE_PASSWORD": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}",
-            },
-        }
-
-    @override
-    def build_steps(self) -> list[dict]:
-        steps = [self.checkout_repo()]
-        steps.extend(self.setup_python())
-        steps.append(
-            self.install_devutils(additional_packages=["cibuildwheel==2.23.1", "twine"])
-        )
-        steps.extend(self.install(env={"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "true"}))
-        steps.append(self.check_tag_version())
-        steps.append(self.setup_node())
-        steps.append(self.build_frontend())
-        steps.append(self.build_oauth2_config())
-        steps.append(self.build_manylinux_wheels())
-        steps.append(self.upload_artifact_manylinux_wheels())
-        steps.append(self.upload_wheels_to_pypi())
-        return steps
 
 
 class ActionsTests(BaseTests):
@@ -1134,7 +1164,6 @@ TARGETS = [
     HttpHelperTests(),
     ActionServerPyPiRelease(),
     ActionServerBinaryRelease(),
-    ActionServerManylinuxRelease(),
 ]
 
 
