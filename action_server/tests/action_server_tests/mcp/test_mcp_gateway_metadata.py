@@ -93,7 +93,7 @@ async def _run(
     return seen, sent
 
 
-def test_exposes_validated_tool_identity_to_state_and_context():
+def test_exposes_privacy_safe_tool_class_to_state_and_context():
     seen, sent = asyncio.run(
         _run(
             {
@@ -108,22 +108,22 @@ def test_exposes_validated_tool_identity_to_state_and_context():
 
     metadata = seen["state"][MCP_REQUEST_STATE_KEY]
     assert metadata.method == "tools/call"
-    assert metadata.name == "greet"
+    assert metadata.name == "tool"
     assert seen["context"] == metadata
     assert metadata.telemetry_attributes == {
         MCP_METHOD_ATTRIBUTE: "tools/call",
-        MCP_NAME_ATTRIBUTE: "greet",
+        MCP_NAME_ATTRIBUTE: "tool",
         MCP_CORRELATION_ID_ATTRIBUTE: metadata.correlation_id,
     }
     assert sent[0]["status"] == 204
 
 
-def test_accepts_mcp_v2_and_future_method_names_without_a_finite_allowlist():
+def test_accepts_mcp_v2_and_future_method_names_with_finite_telemetry():
     for method, expected_method, expected_class in (
         ("server/discover", "server/discover", "server"),
         ("subscriptions/listen", "subscriptions/listen", "subscriptions"),
-        ("vendor/future", "vendor/future", "extension"),
-        ("line\nfeed", "line_feed", "extension"),
+        ("vendor/future", "extension", "extension"),
+        ("line\nfeed", "extension", "extension"),
     ):
         seen, sent = asyncio.run(
             _run(
@@ -140,7 +140,7 @@ def test_accepts_mcp_v2_and_future_method_names_without_a_finite_allowlist():
 def test_extracts_named_resource_and_prompt_from_validated_params():
     for method, params, name, expected_name in (
         ("resources/read", {"uri": "resource://greet"}, "resource://greet", "resource"),
-        ("prompts/get", {"name": "friendly"}, "friendly", "friendly"),
+        ("prompts/get", {"name": "friendly"}, "friendly", "prompt"),
     ):
         seen, _ = asyncio.run(
             _run(
@@ -150,6 +150,93 @@ def test_extracts_named_resource_and_prompt_from_validated_params():
         )
         metadata = seen["state"][MCP_REQUEST_STATE_KEY]
         assert (metadata.method, metadata.name) == (method, expected_name)
+
+
+def test_metadata_sinks_have_finite_privacy_safe_values_for_all_provenances(caplog):
+    cases = (
+        ("tools/call", {"name": "tool-secret"}, "tool-secret", "tools/call", "tool"),
+        (
+            "prompts/get",
+            {"name": "prompt-secret"},
+            "prompt-secret",
+            "prompts/get",
+            "prompt",
+        ),
+        (
+            "resources/read",
+            {"uri": "resource://resource-secret"},
+            "resource-secret",
+            "resources/read",
+            "resource",
+        ),
+        (
+            "resources/templates/list",
+            {"name": "template-secret"},
+            "template-secret",
+            "resources/templates/list",
+            "template",
+        ),
+        (
+            "vendor/future",
+            {"name": "extension-secret"},
+            "extension-secret",
+            "extension",
+            "<redacted>",
+        ),
+    )
+
+    methods = set()
+    names = set()
+    for method, params, sentinel, header_method, expected_name in cases:
+        observed = []
+        records = []
+
+        def observe_metadata(metadata):
+            observed.append(metadata)
+
+        def observe_request(record):
+            records.append(record)
+            logging.getLogger("test.metadata.privacy").info("observed %r", record)
+
+        with caplog.at_level(logging.INFO, logger="test.metadata.privacy"):
+            seen, sent = asyncio.run(
+                _run(
+                    {"jsonrpc": "2.0", "id": 1, "method": method, "params": params},
+                    {
+                        MCP_METHOD_HEADER: method,
+                        MCP_NAME_HEADER: next(iter(params.values())),
+                    },
+                    observer=observe_metadata,
+                    request_observer=observe_request,
+                )
+            )
+        metadata = seen["state"][MCP_REQUEST_STATE_KEY]
+        emitted = " ".join(
+            [
+                repr(metadata),
+                repr(metadata.telemetry_attributes),
+                repr(observed),
+                repr(records),
+                repr(seen),
+                repr(sent),
+                caplog.text,
+            ]
+        )
+        assert sent[0]["status"] == 204
+        assert metadata.method == header_method
+        assert metadata.name == expected_name
+        assert sentinel not in emitted
+        methods.add(metadata.method)
+        names.add(metadata.name)
+
+    assert methods == {
+        "tools/call",
+        "prompts/get",
+        "resources/read",
+        "resources/templates/list",
+        "extension",
+    }
+    assert names == {"tool", "prompt", "resource", "template", "<redacted>"}
 
 
 def test_batch_metadata_is_bounded_and_notifications_are_supported():
@@ -237,7 +324,7 @@ def test_missing_headers_are_normalized_from_body():
         )
     )
     metadata = seen["state"][MCP_REQUEST_STATE_KEY]
-    assert (metadata.method, metadata.name) == ("tools/call", "greet")
+    assert (metadata.method, metadata.name) == ("tools/call", "tool")
 
 
 def test_correlation_id_preserves_valid_uuid_and_generates_for_arbitrary_input():
@@ -639,8 +726,7 @@ def test_resource_telemetry_never_emits_authorities_or_uri_payloads(caplog):
         assert sent[0]["status"] == 204
         assert sentinel not in emitted
 
-    assert outputs <= {"resource", "http", "https", "<redacted>"}
-    assert len(outputs) <= 4
+    assert outputs == {"resource"}
 
 
 def test_every_uri_derived_name_is_strictly_sanitized_across_metadata_sinks(caplog):

@@ -43,14 +43,14 @@ async def check_mcp_server(
             assert len(tools) > 0
 
             tool_names = [tool.name for tool in tools]
-            assert "greet_mcp" in tool_names, (
-                f"greet_mcp tool not found. Available tools: {tool_names}"
-            )
+            assert (
+                "greet_mcp" in tool_names
+            ), f"greet_mcp tool not found. Available tools: {tool_names}"
 
             greet_tool = next(tool for tool in tools if tool.name == "greet_mcp")
-            assert greet_tool is not None, (
-                f"'greet_mcp' tool not found. Available tools: {tool_names}"
-            )
+            assert (
+                greet_tool is not None
+            ), f"'greet_mcp' tool not found. Available tools: {tool_names}"
 
             input_schema = greet_tool.input_schema
             expected_action_server = {
@@ -97,9 +97,9 @@ async def check_mcp_server(
             assert isinstance(tool_result, CallToolResult)
             tool_content = tool_result.content[0]
             assert isinstance(tool_content, TextContent)
-            assert tool_content.text == "Hello Mr. John.", (
-                f"Expected: Hello Mr. John., got: {tool_content.text}"
-            )
+            assert (
+                tool_content.text == "Hello Mr. John."
+            ), f"Expected: Hello Mr. John., got: {tool_content.text}"
 
             # -- Test prompts.
 
@@ -128,9 +128,9 @@ async def check_mcp_server(
                     "required": False,
                 }
             ]
-            assert as_dict["arguments"] == expected_arguments, (
-                f"Found: {as_dict['arguments']}. Expected: {expected_arguments}"
-            )
+            assert (
+                as_dict["arguments"] == expected_arguments
+            ), f"Found: {as_dict['arguments']}. Expected: {expected_arguments}"
 
             # Check the schema of the prompt without optional argument.
             prompt_without_optional_arg: Prompt = next(
@@ -147,9 +147,9 @@ async def check_mcp_server(
                     "required": True,
                 }
             ]
-            assert as_dict["arguments"] == expected_arguments, (
-                f"Found: {as_dict['arguments']}. Expected: {expected_arguments}"
-            )
+            assert (
+                as_dict["arguments"] == expected_arguments
+            ), f"Found: {as_dict['arguments']}. Expected: {expected_arguments}"
 
             # Get the prompt.
             prompt_result = await session.get_prompt(
@@ -273,14 +273,14 @@ async def check_mcp_server_with_actions(
             assert len(tools) > 0
 
             tool_names = [tool.name for tool in tools]
-            assert "greet" in tool_names, (
-                f"greet tool not found. Available tools: {tool_names}"
-            )
+            assert (
+                "greet" in tool_names
+            ), f"greet tool not found. Available tools: {tool_names}"
 
             greet_tool = next(tool for tool in tools if tool.name == "greet")
-            assert greet_tool is not None, (
-                f"'greet' tool not found. Available tools: {tool_names}"
-            )
+            assert (
+                greet_tool is not None
+            ), f"'greet' tool not found. Available tools: {tool_names}"
 
             input_schema = greet_tool.input_schema
             expected_action_server = {
@@ -327,9 +327,9 @@ async def check_mcp_server_with_actions(
             assert isinstance(tool_result, CallToolResult)
             tool_content = tool_result.content[0]
             assert isinstance(tool_content, TextContent)
-            assert tool_content.text == "Hello Mr. John.", (
-                f"Expected: Hello Mr. John., got: {tool_content.text}"
-            )
+            assert (
+                tool_content.text == "Hello Mr. John."
+            ), f"Expected: Hello Mr. John., got: {tool_content.text}"
 
             return "ok"
 
@@ -350,7 +350,7 @@ def test_modern_mcp_lists_tools_without_initialization(
     )
 
     async def request_tools() -> None:
-        import httpx
+        import httpx2 as httpx
 
         body = {
             "jsonrpc": "2.0",
@@ -530,9 +530,9 @@ def test_mcp_integration_with_structured_output(
 
                     # Find the structured data tool
                     tool_names = [tool.name for tool in tools]
-                    assert "get_structured_data" in tool_names, (
-                        f"get_structured_data tool not found. Available tools: {tool_names}"
-                    )
+                    assert (
+                        "get_structured_data" in tool_names
+                    ), f"get_structured_data tool not found. Available tools: {tool_names}"
 
                     structured_tool = next(
                         tool for tool in tools if tool.name == "get_structured_data"
@@ -595,13 +595,13 @@ def test_mcp_integration_secrets(
                     await session.discover()
                     tools_list = await session.list_tools()
                     tool_names = [tool.name for tool in tools_list.tools]
-                    assert "check_secrets" in tool_names, (
-                        f"'check_secrets' tool not found. Available tools: {tool_names}"
-                    )
+                    assert (
+                        "check_secrets" in tool_names
+                    ), f"'check_secrets' tool not found. Available tools: {tool_names}"
                     result = await session.call_tool("check_secrets", {})
-                    assert result.content[0].text == "FooSecret", (
-                        f"Expected 'FooSecret', got: {result.content[0].text}"
-                    )
+                    assert (
+                        result.content[0].text == "FooSecret"
+                    ), f"Expected 'FooSecret', got: {result.content[0].text}"
         return "ok"
 
     assert run_async_in_new_thread(partial(check_with_secrets)) == "ok"
@@ -637,7 +637,7 @@ def _modern_request(
 async def _post_modern_mcp(
     url: str, method: str, request_id: int, params: dict | None = None
 ):
-    import httpx
+    import httpx2 as httpx
 
     headers, body = _modern_request(method, request_id, params)
     async with httpx.AsyncClient() as client:

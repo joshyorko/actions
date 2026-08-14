@@ -12,7 +12,6 @@ import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
-from urllib.parse import urlsplit
 
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
@@ -33,15 +32,47 @@ MCP_LATENCY_ATTRIBUTE = "actions.mcp.latency_ms"
 _MAX_NAME_LENGTH = 256
 _MAX_BODY_LENGTH = 1024 * 1024
 _MAX_HEADER_VALUE_LENGTH = 256
-_MAX_OBSERVATION_NAME_LENGTH = 128
 _MAX_LATENCY_MS = 24 * 60 * 60 * 1000
 _LOGGER = logging.getLogger(__name__)
 _REDACTED_IDENTIFIER = "<redacted>"
-_SAFE_RESOURCE_SCHEMES = frozenset({"http", "https", "resource"})
 _RESOURCE_METHODS = frozenset(
     {"resources/read", "resources/subscribe", "resources/unsubscribe"}
 )
 _NAMED_METHODS = frozenset({"tools/call", "prompts/get"})
+_KNOWN_METHODS = frozenset(
+    {
+        "batch",
+        "completion/complete",
+        "elicitation/create",
+        "initialize",
+        "logging/setLevel",
+        "notifications/cancelled",
+        "notifications/initialized",
+        "notifications/message",
+        "notifications/progress",
+        "notifications/prompts/list_changed",
+        "notifications/resources/list_changed",
+        "notifications/roots/list_changed",
+        "notifications/tools/list_changed",
+        "ping",
+        "prompts/get",
+        "prompts/list",
+        "resources/list",
+        "resources/read",
+        "resources/subscribe",
+        "resources/templates/list",
+        "resources/unsubscribe",
+        "roots/list",
+        "sampling/createMessage",
+        "server/discover",
+        "subscriptions/listen",
+        "tasks/cancel",
+        "tasks/get",
+        "tasks/list",
+        "tools/call",
+        "tools/list",
+    }
+)
 _METHOD_CLASSES = frozenset(
     {
         "batch",
@@ -72,14 +103,14 @@ class McpRequestMetadata:
     name_is_resource: bool = False
 
     def __post_init__(self) -> None:
-        object.__setattr__(self, "method", _sanitize_method(self.method))
+        raw_method = self.method
+        object.__setattr__(self, "method", _sanitize_method(raw_method))
         if self.name is not None:
-            sanitizer = (
-                _sanitize_resource_identifier
-                if self.name_is_resource
-                else _sanitize_identifier
+            object.__setattr__(
+                self,
+                "name",
+                _sanitize_name(self.name, raw_method, self.name_is_resource),
             )
-            object.__setattr__(self, "name", sanitizer(self.name))
 
     @property
     def method_classification(self) -> str:
@@ -262,49 +293,20 @@ def _inspect_payload(payload: Any) -> _PayloadInspection:
     )
 
 
-def _sanitize_identifier(value: str) -> str:
-    value = "".join(
-        character if ord(character) >= 0x20 and ord(character) != 0x7F else "_"
-        for character in value
-    )
-    return value[:_MAX_OBSERVATION_NAME_LENGTH]
-
-
-def _sanitize_resource_identifier(value: str) -> str:
-    try:
-        parsed = urlsplit(value)
-        scheme = parsed.scheme.lower()
-        if (
-            scheme not in _SAFE_RESOURCE_SCHEMES
-            or not parsed.netloc
-            or any(
-                ord(character) < 0x20 or ord(character) == 0x7F for character in value
-            )
-            or "%" in value
-            or parsed.query
-            or parsed.fragment
-        ):
-            return _REDACTED_IDENTIFIER
-        if parsed.username is not None or parsed.password is not None:
-            return _REDACTED_IDENTIFIER
-        host = parsed.hostname or ""
-        if not host or any(
-            character
-            not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-_~"
-            for character in host
-        ):
-            return _REDACTED_IDENTIFIER
-        parsed.port
-    except ValueError:
-        return _REDACTED_IDENTIFIER
-    return scheme
+def _sanitize_name(_value: str, method: str, _name_is_resource: bool) -> str:
+    if method == "resources/templates/list":
+        return "template"
+    if method in _RESOURCE_METHODS:
+        return "resource"
+    if method == "tools/call":
+        return "tool"
+    if method == "prompts/get":
+        return "prompt"
+    return _REDACTED_IDENTIFIER
 
 
 def _sanitize_method(value: str) -> str:
-    return "".join(
-        character if ord(character) >= 0x20 and ord(character) != 0x7F else "_"
-        for character in value
-    )[:_MAX_NAME_LENGTH]
+    return value if value in _KNOWN_METHODS else "extension"
 
 
 _LARGE_NUMBER = object()

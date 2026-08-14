@@ -292,3 +292,12 @@ Final reports list exact commands and outcomes, external/service tests skipped, 
 ## Pull Request Triage
 
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
+
+## MCP gateway metadata
+
+The `/mcp` metadata middleware forwards any valid JSON-RPC method, but stores
+only an exact known protocol method or the constant `extension` sentinel.
+Identifier-bearing requests store only the finite provenance classes `tool`,
+`prompt`, `resource`, `template`, or `<redacted>`; raw method/name values are
+used only transiently for payload/header agreement. MCP integration tests use
+the declared `httpx2` compatibility package, including direct HTTP clients.
