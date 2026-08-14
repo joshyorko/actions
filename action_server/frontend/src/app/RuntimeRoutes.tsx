@@ -7,13 +7,15 @@ import { RobotsPage } from "@/core/pages/Robots";
 import { RunHistoryPage } from "@/core/pages/RunHistory";
 import { SchedulesPage } from "@/core/pages/Schedules";
 import { WorkItemsPage } from "@/core/pages/WorkItems";
+import { OverviewPage } from "@/core/pages/Overview";
 
 export const RuntimeRoutes = () => {
   const location = useLocation();
   return (
     <div key={location.pathname} className="page-transition-wrapper h-full">
       <Routes location={location}>
-        <Route path="/" element={<Navigate to="/actions" replace />} />
+        <Route path="/" element={<Navigate to="/overview" replace />} />
+        <Route path="/overview" element={<OverviewPage />} />
         <Route path="/actions" element={<ActionsPage />} />
         <Route path="/runs" element={<RunHistoryPage />} />
         <Route path="/schedules" element={<SchedulesPage />} />
@@ -22,7 +24,7 @@ export const RuntimeRoutes = () => {
         <Route path="/analytics" element={<AnalyticsPage />} />
         <Route path="/logs/:runId" element={<LogsPage />} />
         <Route path="/artifacts/:runId" element={<ArtifactsPage />} />
-        <Route path="*" element={<Navigate to="/actions" replace />} />
+        <Route path="*" element={<Navigate to="/overview" replace />} />
       </Routes>
     </div>
   );

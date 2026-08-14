@@ -2,28 +2,49 @@ import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/shared/utils/cn";
 import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
 import { useTheme } from "@/shared/hooks/useTheme";
+import { useActionServerContext } from "@/shared/context/actionServerContext";
 
 const items = [
-  ["Actions", "/actions"],
-  ["Runs", "/runs"],
-  ["Schedules", "/schedules"],
-  ["Robots", "/robots"],
-  ["Work Items", "/work-items"],
-  ["Analytics", "/analytics"],
+  ["Overview", "/overview", "overview"],
+  ["Actions", "/actions", "actions"],
+  ["Runs", "/runs", "runs"],
+  ["Schedules", "/schedules", "schedules"],
+  ["Robots", "/robots", "robots"],
+  ["Work Items", "/work-items", "work_items"],
+  ["Analytics", "/analytics", "analytics"],
 ] as const;
 
-export const RuntimeNavigation = () => {
+export const RuntimeNavigation = ({
+  isMobileOpen = false,
+}: {
+  isMobileOpen?: boolean;
+}) => {
   const location = useLocation();
+  const { loadedServerConfig } = useActionServerContext();
   const [isCollapsed, setIsCollapsed] = useLocalStorage(
     "sidebar-collapsed",
     false,
   );
   const { theme, cycleTheme } = useTheme();
+  const capabilities = loadedServerConfig.data?.capabilities;
+  const visibleItems = items.filter(([, , capability]) => {
+    if (capability === "overview") return true;
+    if (capabilities) {
+      const enabled = capabilities[capability as keyof typeof capabilities];
+      return (
+        enabled === true ||
+        (enabled === undefined &&
+          (capability === "actions" || capability === "runs"))
+      );
+    }
+    return capability === "actions" || capability === "runs";
+  });
   return (
     <aside
       className={cn(
         "sidebar flex flex-col border-r border-sidebar-border/50 transition-all duration-200",
         isCollapsed ? "w-16" : "w-64",
+        isMobileOpen && "open",
       )}
     >
       <div
@@ -34,7 +55,7 @@ export const RuntimeNavigation = () => {
       >
         {!isCollapsed && (
           <span className="text-base font-semibold text-sidebar-foreground">
-            Action Server
+            Actions Runtime
           </span>
         )}
         <button
@@ -66,7 +87,7 @@ export const RuntimeNavigation = () => {
         className={cn("flex-1 space-y-1 py-2", isCollapsed ? "px-2" : "px-3")}
         aria-label="Runtime navigation"
       >
-        {items.map(([label, path]) => (
+        {visibleItems.map(([label, path]) => (
           <Link
             key={path}
             to={path}
