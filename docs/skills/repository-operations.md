@@ -179,11 +179,12 @@ paths. Canvas remains a separate Vite entrypoint and is not a consumer of this
 cache.
 
 The Runtime shell overview reads the provider-owned config/actions/runs queries;
-it does not create a second cache or invent metrics. `/config.capabilities`
-controls optional navigation: absent optional flags remain hidden, while the
-core Actions and Runs surfaces retain compatibility when the capability object
-is omitted. A config failure renders a degraded overview and leaves only safe
-overview/core navigation visible. The Runtime entry document is titled
+it does not create a second cache or invent metrics. The current backend `/config`
+payload has no capability metadata, so optional navigation remains hidden and
+only Overview, Actions, and Runs are exposed until a truthful capability source
+is implemented. A config failure renders a degraded overview and leaves only
+safe overview/core navigation visible; Runtime queries disable retries so that
+failure state is observable promptly. The Runtime entry document is titled
 `Actions Runtime`; Canvas View remains an independent entrypoint.
 
 The current backend event contract has no sequence field: `runs_collected`

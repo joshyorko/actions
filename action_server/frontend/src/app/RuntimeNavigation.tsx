@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/shared/utils/cn";
 import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
 import { useTheme } from "@/shared/hooks/useTheme";
-import { useActionServerContext } from "@/shared/context/actionServerContext";
 
 const items = [
   ["Overview", "/overview", "overview"],
@@ -20,23 +19,13 @@ export const RuntimeNavigation = ({
   isMobileOpen?: boolean;
 }) => {
   const location = useLocation();
-  const { loadedServerConfig } = useActionServerContext();
   const [isCollapsed, setIsCollapsed] = useLocalStorage(
     "sidebar-collapsed",
     false,
   );
   const { theme, cycleTheme } = useTheme();
-  const capabilities = loadedServerConfig.data?.capabilities;
   const visibleItems = items.filter(([, , capability]) => {
     if (capability === "overview") return true;
-    if (capabilities) {
-      const enabled = capabilities[capability as keyof typeof capabilities];
-      return (
-        enabled === true ||
-        (enabled === undefined &&
-          (capability === "actions" || capability === "runs"))
-      );
-    }
     return capability === "actions" || capability === "runs";
   });
   return (

@@ -86,16 +86,6 @@ export type ServerConfig = {
   auth_enabled: boolean;
   version: string; // The version for the action server (if it changes a full window reload would be needed).
   mtime_uuid: string; // The mtime of the action server (if it changes all data needs to be reloaded).
-  capabilities?: RuntimeCapabilities;
-};
-
-export type RuntimeCapabilities = {
-  actions?: boolean;
-  runs?: boolean;
-  schedules?: boolean;
-  robots?: boolean;
-  work_items?: boolean;
-  analytics?: boolean;
 };
 
 // Robot Catalog Types

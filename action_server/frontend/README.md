@@ -4,7 +4,8 @@ The frontend has one canonical manifest and lock at this directory. It contains
 two independently buildable application boundaries:
 
 - `apps/runtime` builds the Actions Runtime shell and overview, with navigation
-  limited by the capabilities advertised by `/config`.
+  limited to the backend-supported core until `/config` exposes a truthful
+  optional-capability contract.
 - `apps/canvas-view` builds the separate Canvas View boundary. Product behavior
   for Canvas View is intentionally outside this topology change.
 
