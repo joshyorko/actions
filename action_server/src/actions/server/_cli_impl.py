@@ -631,6 +631,26 @@ def _get_log_level(base_args):
     return log_level
 
 
+def _redact_cli_arguments(args: Sequence[str]) -> list[str]:
+    from actions.server._database import redact_database_url
+
+    redacted: list[str] = []
+    redact_next = False
+    for argument in args:
+        if redact_next:
+            redacted.append(str(redact_database_url(argument)))
+            redact_next = False
+        elif argument == "--database-url":
+            redacted.append(argument)
+            redact_next = True
+        elif argument.startswith("--database-url="):
+            option, value = argument.split("=", 1)
+            redacted.append(f"{option}={redact_database_url(value)}")
+        else:
+            redacted.append(argument)
+    return redacted
+
+
 def _main_retcode(
     args: Optional[list[str]],
     is_subcommand: bool = False,
@@ -674,7 +694,10 @@ def _main_retcode(
                 expose_server_api_key,
             ) = args[1:]
         except Exception:
-            raise RuntimeError(f"Unable to initialize server with sys.argv: {sys.argv}")
+            raise RuntimeError(
+                "Unable to initialize server with sys.argv: "
+                f"{_redact_cli_arguments(sys.argv)}"
+            )
 
         _server_expose.main(
             expose_server_parent_pid,
@@ -714,7 +737,10 @@ def _main_retcode(
         if log_level == logging.DEBUG:
             import subprocess
 
-            log.debug(f"Arguments: {subprocess.list2cmdline(sys.argv)}")
+            log.debug(
+                "Arguments: %s",
+                subprocess.list2cmdline(_redact_cli_arguments(sys.argv)),
+            )
             log.debug(f"CWD: {os.path.abspath(os.getcwd())}")
 
     from ._download_rcc import download_rcc
@@ -837,6 +863,7 @@ def _command_requiring_datadir(
 ) -> int:
     from actions.server._common.app_mutex import obtain_app_mutex
     from actions.server._common.process import kill_subprocesses
+    from actions.server._database import redact_database_url
 
     from actions.server._preload_actions.preload_actions_autoexit import (
         exit_when_pid_exists,
@@ -867,7 +894,10 @@ def _command_requiring_datadir(
         db_path: Union[Path, str]
         if settings.database_url:
             db_path = settings.database_url
-            log.info("Using shared database backend: postgresql")
+            log.info(
+                "Using shared database backend: %s",
+                redact_database_url(db_path),
+            )
         elif settings.db_file != ":memory:":
             db_path = settings.datadir / settings.db_file
         else:
@@ -889,7 +919,10 @@ def _command_requiring_datadir(
             use_db_ctx = _use_db_ctx
 
         elif is_new:
-            log.info("Database file does not exist. Creating it at: %s", db_path)
+            log.info(
+                "Database file does not exist. Creating it at: %s",
+                redact_database_url(db_path),
+            )
             use_db_ctx = create_db
         else:
             use_db_ctx = load_db

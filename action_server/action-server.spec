@@ -30,6 +30,11 @@ action_server_datas, _action_server_binaries, action_server_hiddenimports = coll
     "actions.server"
 )
 
+logger.info("Collecting actions_http dependencies...")
+actions_http_datas, _actions_http_binaries, actions_http_hiddenimports = collect_all(
+    "actions_http"
+)
+
 # Collect redis submodules for control-room-lite mode
 logger.info("Collecting redis submodules...")
 redis_hiddenimports = collect_submodules("redis")
@@ -43,12 +48,17 @@ psycopg_hiddenimports = [
 ]
 psycopg_binaries = collect_dynamic_libs("psycopg_binary")
 new_datas = []
+rcc_datas = [
+    data
+    for data in action_server_datas
+    if data[1] == "actions/server/bin" and os.path.basename(data[0]).startswith("rcc-")
+]
 for data in action_server_datas:
     if ".mypy_cache" in data[0]:
         continue
     if "__pycache__" in data[0]:
         continue
-    if not data[0].endswith(".py"):
+    if not data[0].endswith(".py") and data not in rcc_datas:
         continue
     logger.info(f"Collected data: {data}")
     new_datas.append(data)
@@ -81,10 +91,16 @@ a = Analysis(
     pathex=[],
     datas=[
         *action_server_datas,
+        *actions_http_datas,
     ],
-    binaries=[*psycopg_binaries],
+    binaries=[
+        *_action_server_binaries,
+        *_actions_http_binaries,
+        *psycopg_binaries,
+    ],
     hiddenimports=[
         *action_server_hiddenimports,
+        *actions_http_hiddenimports,
         *redis_hiddenimports,
         *psycopg_hiddenimports,
         "uvicorn",

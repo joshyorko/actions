@@ -135,14 +135,24 @@ SQL literals, quoted identifiers, comments, dollar-quoted bodies, escaped
 markers, JSON operators (`?`, `?|`, `?&`), and bound array expressions remain
 unchanged, and marker/value counts are validated before execution. Database
 settings reject malformed or unsupported URL schemes without logging the URL;
-plain paths remain SQLite and `postgres://` is normalized to PostgreSQL.
+plain paths remain SQLite and `postgres://` is normalized to PostgreSQL. URL
+validation rejects missing PostgreSQL hosts, malformed authorities, and ports
+outside `1..65535` before connection or SQLite fallback. CLI argument, datadir,
+and migration diagnostics must use the database URL redactor, which removes
+userinfo, query, and fragment data without changing the connection value.
 PostgreSQL model DDL uses native `BOOLEAN` while
 SQLite retains integer booleans. PostgreSQL schema inspection reads
 `information_schema` and `pg_index`, and analytics uses explicit PostgreSQL
 timestamp/date expressions. SQLite migration version 11 reconciles legacy
 schedule/trigger/run index names before parity is checked. The Action Server
-PyInstaller spec explicitly collects `uvicorn`, `psycopg`, `psycopg_binary`,
-and its native libraries.
+PyInstaller spec explicitly collects `uvicorn`, `actions_http`, `psycopg`,
+`psycopg_binary`, their native libraries, and repository-owned `rcc-*` package
+data. Exact schema snapshots and the v0-to-current migration test compare the
+fresh current table/column/index set; formatting-only fixture changes must not
+weaken that expected schema. Static collection tests do not establish packaged
+runtime behavior: if the exact PyInstaller gate is blocked by host storage,
+preserve its build log and report packaged `version`, `migrate`, and `start`
+checks as unverified.
 
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 

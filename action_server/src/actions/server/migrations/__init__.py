@@ -73,14 +73,14 @@ def migrate_db(
 
     :param database: Expected to be passed when dealing with an in-memory database.
     """
-    from actions.server._database import normalize_database_url
+    from actions.server._database import normalize_database_url, redact_database_url
 
     db_path = normalize_database_url(db_path)
     is_postgresql = isinstance(db_path, str) and db_path.startswith("postgresql://")
     if not is_postgresql:
         assert os.path.exists(
             db_path
-        ), f"Unable to do migration. {db_path} does not exist."
+        ), f"Unable to do migration. {redact_database_url(db_path)} does not exist."
 
     migration_status = db_migration_status(db_path)
     if migration_status == MigrationStatus.UP_TO_DATE:
@@ -93,7 +93,10 @@ def migrate_db(
     if path is not None:
         parent_dir = path.parent
         name = path.name
-        log.info("Preparing to migrate database at: %s", db_path)
+        log.info(
+            "Preparing to migrate database at: %s",
+            redact_database_url(db_path),
+        )
         backup_file = parent_dir / f"{name}-pre-migration-{to_version}-{time.time()}.bak"
         log.info("Creating backup at: %s", backup_file)
         shutil.copyfile(path, backup_file)
@@ -117,7 +120,7 @@ def migrate_db(
                 if db.backend_name != "postgresql":
                     raise RuntimeError(
                         f"""Error:
-It seems that this version of the database ({db.db_path}) is too old.
+It seems that this version of the database ({redact_database_url(db.db_path)}) is too old.
 Please erase it and recreate it from scratch."""
                     )
                 db.create_tables(get_model_db_rules())
@@ -132,7 +135,7 @@ Please erase it and recreate it from scratch."""
                 if not migrations:
                     raise RuntimeError(
                         f"""Error: 
-It seems that this version of the database ({db.db_path}) is too old.
+It seems that this version of the database ({redact_database_url(db.db_path)}) is too old.
 Please erase it and recreate it from scratch."""
                     )
 

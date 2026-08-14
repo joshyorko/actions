@@ -22,7 +22,7 @@ from typing import (
     Union,
     cast,
 )
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, urlunsplit
 
 log = logging.getLogger(__name__)
 
@@ -73,6 +73,28 @@ class DBRules:
         self.foreign_keys: Set[str] = set()
 
 
+def redact_database_url(value: Union[Path, str]) -> Union[Path, str]:
+    if not isinstance(value, str):
+        return value
+
+    try:
+        parsed = urlsplit(value)
+        if parsed.scheme not in {"postgresql", "postgres"}:
+            return value
+        hostname = parsed.hostname
+        port = parsed.port
+    except ValueError:
+        return "<redacted PostgreSQL database URL>"
+
+    if not hostname:
+        return "<redacted PostgreSQL database URL>"
+
+    if ":" in hostname and not hostname.startswith("["):
+        hostname = f"[{hostname}]"
+    netloc = hostname if port is None else f"{hostname}:{port}"
+    return urlunsplit((parsed.scheme, netloc, parsed.path, "", ""))
+
+
 def normalize_database_url(value: Union[Path, str]) -> Union[Path, str]:
     if not isinstance(value, str):
         return value
@@ -80,9 +102,23 @@ def normalize_database_url(value: Union[Path, str]) -> Union[Path, str]:
     try:
         parsed = urlsplit(value)
     except ValueError as exc:
+        if value.lower().startswith(("postgresql:", "postgres:")):
+            raise ValueError("Invalid PostgreSQL database URL") from exc
         raise ValueError("Invalid database URL") from exc
     if parsed.scheme in {"postgresql", "postgres"}:
-        if not parsed.netloc or not parsed.hostname:
+        try:
+            hostname = parsed.hostname
+            port = parsed.port
+        except ValueError as exc:
+            raise ValueError("Invalid PostgreSQL database URL") from exc
+
+        authority = parsed.netloc.rsplit("@", 1)[-1]
+        if (
+            not parsed.netloc
+            or not hostname
+            or authority.endswith(":")
+            or (port is not None and not 1 <= port <= 65535)
+        ):
             raise ValueError("Invalid PostgreSQL database URL")
         if parsed.scheme == "postgres":
             return "postgresql://" + value.split("://", 1)[1]
@@ -940,7 +976,7 @@ CREATE INDEX {table_name}_{column}_non_unique_index ON {table_name}({column});
         fields_str = ",\n    ".join(fields)
         sql = f"""
 CREATE TABLE IF NOT EXISTS {table_name}(
-    {fields_str}  
+    {fields_str}
 )
         """
         return sql

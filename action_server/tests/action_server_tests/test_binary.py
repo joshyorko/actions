@@ -41,6 +41,23 @@ def test_binary_spec_collects_runtime_server_module():
     assert '"uvicorn",' in spec
 
 
+def test_binary_spec_collects_actions_http_runtime_modules_and_data():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert '"actions_http"' in spec
+    assert "collect_all" in spec
+    assert "actions_http_hiddenimports" in spec
+    assert "actions_http_datas" in spec
+
+
+def test_binary_spec_bundles_repository_owned_rcc_asset():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert "rcc_datas" in spec
+    assert 'startswith("rcc-")' in spec
+    assert '"actions/server/bin"' in spec
+
+
 def test_binary_build():
     import os
     import shutil

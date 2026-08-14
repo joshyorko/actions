@@ -1,11 +1,19 @@
 import os
+import subprocess
+import sys
 import uuid
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 
 import pytest
 from pydantic.dataclasses import dataclass
 
-from actions.server._database import DBError, Database
+from actions.server._database import (
+    DBError,
+    Database,
+    normalize_database_url,
+    redact_database_url,
+)
 from actions.server.migrations import db_migration_status, migrate_db
 
 
@@ -37,6 +45,129 @@ def test_database_rejects_malformed_postgresql_url_without_exposing_credentials(
         Database("postgresql://user:secret@")
 
     assert "secret" not in str(error.value)
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "postgresql://SENTINEL_USER:SENTINEL_PASSWORD@db.example:abc/actions",
+        "postgresql://SENTINEL_USER:SENTINEL_PASSWORD@db.example:0/actions",
+        "postgresql://SENTINEL_USER:SENTINEL_PASSWORD@db.example:65536/actions",
+        "postgresql://SENTINEL_USER:SENTINEL_PASSWORD@:5432/actions",
+        "postgresql:/SENTINEL_USER:SENTINEL_PASSWORD@db.example/actions",
+    ],
+)
+def test_database_rejects_invalid_postgresql_urls_before_connection(value):
+    with pytest.raises(ValueError, match="Invalid PostgreSQL database URL") as error:
+        Database(value)
+
+    message = str(error.value)
+    assert "SENTINEL_USER" not in message
+    assert "SENTINEL_PASSWORD" not in message
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "postgresql://user:password@db.example:1/actions?sslmode=require",
+        "postgres://user:password@db.example:5432/actions?sslmode=require",
+    ],
+)
+def test_database_accepts_valid_postgresql_urls_without_mutating_connection_value(value):
+    normalized = normalize_database_url(value)
+    database = Database(value)
+
+    assert isinstance(normalized, str)
+    assert database.db_path == normalized
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "postgresql://SENTINEL_USER:SENTINEL_PASSWORD@db.example:55432/actions?secret=SENTINEL_QUERY",
+        "postgres://SENTINEL_USER%40encoded:SENTINEL_PASSWORD%21@db.example/actions?secret=SENTINEL_QUERY",
+    ],
+)
+def test_redact_database_url_removes_credentials_and_query(value):
+    redacted = redact_database_url(value)
+
+    assert "SENTINEL_USER" not in redacted
+    assert "SENTINEL_PASSWORD" not in redacted
+    assert "SENTINEL_QUERY" not in redacted
+    assert "@" not in redacted.split("://", 1)[1].split("/", 1)[0]
+    assert "?" not in redacted
+
+
+def test_cli_database_url_credentials_are_redacted_from_early_and_datadir_logs(
+    tmp_path: Path,
+):
+    database_url = (
+        "postgresql://SENTINEL_USER%40encoded:SENTINEL_PASSWORD%21@"
+        "127.0.0.1:1/actions?secret=SENTINEL_QUERY"
+    )
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "actions.server",
+            "migrate",
+            "--datadir",
+            str(tmp_path),
+            "--database-url",
+            database_url,
+            "-v",
+        ],
+        cwd=Path(__file__).parents[2],
+        capture_output=True,
+        text=True,
+        timeout=15,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    log_contents = (tmp_path / "server_log.txt").read_text()
+    for output in (result.stdout, result.stderr, log_contents):
+        assert "SENTINEL_USER" not in output
+        assert "SENTINEL_PASSWORD" not in output
+        assert "SENTINEL_QUERY" not in output
+
+
+def test_cli_argument_error_does_not_echo_database_url_credentials():
+    database_url = (
+        "postgres://SENTINEL_USER:SENTINEL_PASSWORD@127.0.0.1:1/actions"
+    )
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "actions.server",
+            "server-expose",
+            "--database-url",
+            database_url,
+        ],
+        cwd=Path(__file__).parents[2],
+        capture_output=True,
+        text=True,
+        timeout=15,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "SENTINEL_USER" not in result.stderr
+    assert "SENTINEL_PASSWORD" not in result.stderr
+
+
+def test_legacy_migration_error_does_not_echo_database_url_credentials():
+    from actions.server.migrations.migration_initial import migrate
+
+    database = Database(
+        "postgresql://SENTINEL_USER:SENTINEL_PASSWORD@db.example/actions"
+    )
+    with pytest.raises(RuntimeError) as error:
+        migrate(database)
+
+    assert "SENTINEL_USER" not in str(error.value)
+    assert "SENTINEL_PASSWORD" not in str(error.value)
 
 
 def test_cli_accepts_explicit_shared_database_url():
@@ -82,17 +213,21 @@ def test_postgresql_bound_json_operators_and_array_rhs_execute():
 
     db = Database(url)
     with db.connect():
-        db.execute("CREATE TEMP TABLE json_operator_probe (payload JSONB)")
-        db.execute(
-            "INSERT INTO json_operator_probe VALUES (?::jsonb)",
-            ['{"key": "value"}'],
-        )
-        assert db.execute(
-            "SELECT payload ? ? FROM json_operator_probe", ["key"]
-        ).fetchone()[0]
-        assert db.execute(
-            "SELECT ? = ANY(?)", ["key", ["other", "key"]]
-        ).fetchone()[0]
+        with db.transaction():
+            db.execute("CREATE TEMP TABLE json_operator_probe (payload JSONB)")
+            db.execute(
+                "INSERT INTO json_operator_probe VALUES (?::jsonb)",
+                ['{"key": "value"}'],
+            )
+            with db.cursor() as cursor:
+                db.execute_query(
+                    cursor,
+                    "SELECT payload ? ? FROM json_operator_probe",
+                    ["key"],
+                )
+                assert cursor.fetchone()[0]
+                db.execute_query(cursor, "SELECT ? = ANY(?)", ["key", ["other", "key"]])
+                assert cursor.fetchone()[0]
 
 
 def test_postgresql_boolean_schema_uses_native_boolean_without_changing_sqlite():
