@@ -50,9 +50,13 @@ describe("Runtime API", () => {
       .mockResolvedValueOnce(
         new Response(JSON.stringify({ detail: "nope" }), { status: 409 }),
       )
-      .mockResolvedValueOnce(new Response(JSON.stringify({}), { status: 200 }));
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify("cancelled"), { status: 200 }),
+      );
     await expect(listRuntimeActions()).rejects.toBeInstanceOf(RuntimeApiError);
-    await cancelRuntimeRun("run-1", controller.signal);
+    await expect(cancelRuntimeRun("run-1", controller.signal)).resolves.toBe(
+      "cancelled",
+    );
     expect(fetchMock.mock.calls[1][1]).toMatchObject({
       method: "POST",
       signal: controller.signal,

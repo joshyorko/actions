@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ActionServerContext } from "@/shared/context/actionServerContext";
 import type { ViewSettings } from "@/shared/context/actionServerContext";
@@ -11,13 +11,13 @@ import {
 } from "@/queries/runtime";
 import { subscribeRuntimeEvents } from "@/shared/runtime-events";
 
-export const runtimeQueryClient = new QueryClient({
-  defaultOptions: {
-    queries: { staleTime: 30_000, refetchOnWindowFocus: false },
-  },
-});
-
-const ActionServerProvider = ({ children }: { children: ReactNode }) => {
+const ActionServerProvider = ({
+  children,
+  queryClient,
+}: {
+  children: ReactNode;
+  queryClient: QueryClient;
+}) => {
   const [viewSettings, setViewSettings] = useLocalStorage<ViewSettings>(
     "view-settings",
     { theme: "dark" },
@@ -27,8 +27,8 @@ const ActionServerProvider = ({ children }: { children: ReactNode }) => {
   const config = useRuntimeConfig();
 
   useEffect(() => {
-    return subscribeRuntimeEvents(runtimeQueryClient);
-  }, []);
+    return subscribeRuntimeEvents(queryClient);
+  }, [queryClient]);
 
   return (
     <ActionServerContext.Provider
@@ -60,8 +60,23 @@ const ActionServerProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const RuntimeProviders = ({ children }: { children: ReactNode }) => (
-  <QueryClientProvider client={runtimeQueryClient}>
-    <ActionServerProvider>{children}</ActionServerProvider>
-  </QueryClientProvider>
-);
+export const RuntimeProviders = ({ children }: { children: ReactNode }) => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: { staleTime: 30_000, refetchOnWindowFocus: false },
+        },
+      }),
+  );
+
+  useEffect(() => () => queryClient.clear(), [queryClient]);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ActionServerProvider queryClient={queryClient}>
+        {children}
+      </ActionServerProvider>
+    </QueryClientProvider>
+  );
+};

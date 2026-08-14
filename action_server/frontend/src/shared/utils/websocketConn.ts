@@ -26,6 +26,10 @@ export class WebsocketConn {
 
   private closed = false;
 
+  private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+
+  private generation = 0;
+
   /**
    * Handlers to manage received events.
    */
@@ -109,6 +113,10 @@ export class WebsocketConn {
 
   public connect(): Promise<void> {
     this.closed = false;
+    if (this.reconnectTimer !== null) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+    }
     if (this.connecting) {
       // console.log('Websocket: connect ignored (already connecting).');
       return Promise.resolve(undefined);
@@ -120,11 +128,13 @@ export class WebsocketConn {
     // console.log('Websocket: starting connection.');
     this.connecting = true;
 
+    const generation = ++this.generation;
     return new Promise((resolve, reject) => {
       // console.log('Websocket: connecting to: ', this.url);
       this.ws = new WebSocket(this.url);
 
       this.ws.onopen = () => {
+        if (generation !== this.generation) return;
         // console.log('Websocket: connection opened (marking as connected)');
         this.connected = true;
         this.connecting = false;
@@ -133,8 +143,9 @@ export class WebsocketConn {
       };
 
       this.ws.onmessage = this.handleMessage;
-      this.ws.onclose = this.handleClose;
+      this.ws.onclose = () => this.handleClose(generation);
       const markNotConnectingAndReject = () => {
+        if (generation !== this.generation) return;
         // console.log('Websocket: connection on error');
         this.connected = false;
         this.connecting = false;
@@ -168,7 +179,8 @@ export class WebsocketConn {
    * is always called even if it doesn't connect
    * (so, it's used as a way to re-connect later on).
    */
-  private handleClose = () => {
+  private handleClose = (generation: number) => {
+    if (generation !== this.generation) return;
     // console.log('closing');
     this.connected = false;
     this.connecting = false;
@@ -177,7 +189,9 @@ export class WebsocketConn {
     // Auto-reconnect quickly as the connection was broken for some reason.
     // Reduced from 5000ms to 1000ms for faster recovery.
     if (!this.closed) {
-      setTimeout(() => {
+      this.reconnectTimer = setTimeout(() => {
+        this.reconnectTimer = null;
+        if (this.closed || generation !== this.generation) return;
         this.connect();
       }, 1000);
     }
@@ -185,6 +199,11 @@ export class WebsocketConn {
 
   public disconnect() {
     this.closed = true;
+    this.generation += 1;
+    if (this.reconnectTimer !== null) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+    }
     this.messages = [];
     this.ws?.close();
     this.ws = null;

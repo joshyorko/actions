@@ -2,13 +2,14 @@ import type { QueryClient } from "@tanstack/react-query";
 import { runtimeQueryKeys } from "./runtime-query-keys";
 import { WEBSOCKET_BASE_URL } from "./constants";
 import { WebsocketConn } from "./utils/websocketConn";
+import type { Run } from "./types";
 
 export type RuntimeEvent =
-  | { type: "connect" | "mtime_changed"; sequence: number }
-  | { type: "runs_collected" | "run_added"; sequence: number }
+  | { type: "connect" | "mtime_changed" }
+  | { type: "runs_collected"; runs: Run[] }
+  | { type: "run_added"; run: Run }
   | {
       type: "run_changed";
-      sequence: number;
       run_id: string;
       changes: Record<string, unknown>;
     };
@@ -35,14 +36,7 @@ export const applyRuntimeEvent = async (
 };
 
 export const createRuntimeEventAdapter = (queryClient: QueryClient) => {
-  const latestSequence = new Map<string, number>();
   return async (event: RuntimeEvent) => {
-    const identity =
-      event.type === "run_changed"
-        ? `${event.type}:${event.run_id}`
-        : event.type;
-    if ((latestSequence.get(identity) ?? -1) >= event.sequence) return;
-    latestSequence.set(identity, event.sequence);
     return applyRuntimeEvent(queryClient, event);
   };
 };
@@ -50,20 +44,23 @@ export const createRuntimeEventAdapter = (queryClient: QueryClient) => {
 export const subscribeRuntimeEvents = (queryClient: QueryClient) => {
   const socket = new WebsocketConn(`${WEBSOCKET_BASE_URL}/api/ws`);
   const adapter = createRuntimeEventAdapter(queryClient);
-  let sequence = 0;
-  const event =
-    (type: RuntimeEvent["type"]) =>
-    (data?: Omit<RuntimeEvent, "type" | "sequence">) =>
-      adapter({ type, sequence: ++sequence, ...(data ?? {}) } as RuntimeEvent);
 
   socket.on("connect", () => {
-    void adapter({ type: "connect", sequence: ++sequence });
+    void adapter({ type: "connect" });
     void socket.emit("start_listen_run_events");
   });
-  socket.on("runs_collected", event("runs_collected"));
-  socket.on("run_added", event("run_added"));
-  socket.on("run_changed", event("run_changed"));
-  socket.on("mtime_changed", event("mtime_changed"));
+  socket.on("runs_collected", (runs: Run[]) =>
+    adapter({ type: "runs_collected", runs }),
+  );
+  socket.on("run_added", ({ run }: { run: Run }) =>
+    adapter({ type: "run_added", run }),
+  );
+  socket.on(
+    "run_changed",
+    (data: Omit<Extract<RuntimeEvent, { type: "run_changed" }>, "type">) =>
+      adapter({ type: "run_changed", ...data }),
+  );
+  socket.on("mtime_changed", () => adapter({ type: "mtime_changed" }));
   void socket.connect();
   return () => socket.disconnect();
 };

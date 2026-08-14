@@ -13,7 +13,6 @@ describe("Runtime event freshness adapter", () => {
     const adapter = createRuntimeEventAdapter(client);
     await adapter({
       type: "run_changed",
-      sequence: 2,
       run_id: "run-1",
       changes: {},
     });
@@ -25,7 +24,7 @@ describe("Runtime event freshness adapter", () => {
     });
   });
 
-  it("ignores duplicate and older events so stale events cannot regress cache data", async () => {
+  it("treats duplicate and out-of-order events as freshness signals only", async () => {
     const client = new QueryClient();
     client.setQueryData(runtimeQueryKeys.run("run-1"), {
       id: "run-1",
@@ -37,23 +36,20 @@ describe("Runtime event freshness adapter", () => {
       .mockResolvedValue();
     await adapter({
       type: "run_changed",
-      sequence: 3,
       run_id: "run-1",
       changes: { status: "latest" },
     });
     await adapter({
       type: "run_changed",
-      sequence: 3,
       run_id: "run-1",
       changes: { status: "stale" },
     });
     await adapter({
       type: "run_changed",
-      sequence: 2,
       run_id: "run-1",
       changes: { status: "staler" },
     });
-    expect(invalidate).toHaveBeenCalledTimes(2);
+    expect(invalidate).toHaveBeenCalledTimes(6);
     expect(client.getQueryData(runtimeQueryKeys.run("run-1"))).toEqual({
       id: "run-1",
       status: "new",
@@ -65,8 +61,8 @@ describe("Runtime event freshness adapter", () => {
     const invalidate = vi
       .spyOn(client, "invalidateQueries")
       .mockResolvedValue();
-    await applyRuntimeEvent(client, { type: "connect", sequence: 1 });
-    await applyRuntimeEvent(client, { type: "mtime_changed", sequence: 2 });
+    await applyRuntimeEvent(client, { type: "connect" });
+    await applyRuntimeEvent(client, { type: "mtime_changed" });
     expect(invalidate).toHaveBeenCalledWith({
       queryKey: runtimeQueryKeys.root,
     });

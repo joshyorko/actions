@@ -8,8 +8,22 @@ export const baseUrl = API_BASE_URL;
 
 interface Opts {
   body?: string;
-  params?: Record<string, string>;
+  params?: Record<string, string | readonly string[]>;
 }
+
+const serializeParams = (
+  params: Record<string, string | readonly string[]>,
+) => {
+  const searchParams = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (typeof value === "string") {
+      searchParams.append(key, value);
+    } else {
+      value.forEach((item) => searchParams.append(key, item));
+    }
+  });
+  return searchParams;
+};
 
 type CachedModel<T> = AsyncLoaded<T>;
 
@@ -21,7 +35,7 @@ const loadAsync = async <T>(
 ): Promise<CachedModel<T>> => {
   try {
     let requestURL = url;
-    if (opts?.params) requestURL += `?${new URLSearchParams(opts.params)}`;
+    if (opts?.params) requestURL += `?${serializeParams(opts.params)}`;
     const response = await fetch(requestURL, {
       method,
       headers: {
@@ -49,7 +63,7 @@ const loadAsync = async <T>(
 export const collectRunArtifacts = async (
   runId: string,
   setLoaded: Dispatch<SetStateAction<AsyncLoaded<any>>>,
-  params: Record<string, string>,
+  params: Record<string, string | readonly string[]>,
 ) => {
   setLoaded({ isPending: true, data: undefined });
   setLoaded(
@@ -76,7 +90,7 @@ export const fetchRunArtifactsList = async (
 
 export const collectOAuth2Status = async (
   setLoaded: Dispatch<SetStateAction<AsyncLoaded<any>>>,
-  params: Record<string, string>,
+  params: Record<string, string | readonly string[]>,
 ) => {
   setLoaded({ isPending: true, data: undefined });
   setLoaded(await loadAsync(`${baseUrl}/oauth2/status`, "GET", { params }));

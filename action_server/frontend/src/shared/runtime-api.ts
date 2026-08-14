@@ -15,6 +15,8 @@ export type RuntimeActionRunResponse = {
   [key: string]: unknown;
 };
 
+export type CancelRuntimeRunResponse = "cancelled" | "not-running";
+
 export class RuntimeApiError extends Error {
   constructor(
     public readonly status: number,
@@ -75,7 +77,7 @@ export const runRuntimeAction = (
   );
 
 export const cancelRuntimeRun = (runId: string, signal?: AbortSignal) =>
-  requestJson<Record<string, unknown>>(
+  requestJson<CancelRuntimeRunResponse>(
     `/api/runs/${encodeURIComponent(runId)}/cancel`,
     {
       method: "POST",
