@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent, waitFor } from '../../utils/test-utils';
+import { render, screen, userEvent, waitFor, fireEvent } from '../../utils/test-utils';
 import { describe, it, expect, vi } from 'vitest';
 
 import {
@@ -29,7 +29,7 @@ describe('DropdownMenu', () => {
       expect(getByText('Menu Item')).toBeTruthy();
     });
 
-    it('closes content when trigger is clicked again', async () => {
+    it('closes content with Escape after opening', async () => {
       const user = userEvent.setup();
       const { getByText, queryByText } = render(
         <DropdownMenu>
@@ -48,8 +48,8 @@ describe('DropdownMenu', () => {
       await user.click(trigger);
       expect(getByText('Menu Item')).toBeTruthy();
 
-      // Close
-      await user.click(trigger);
+      // Close without leaving the modal focus scope
+      await user.keyboard('{Escape}');
       await waitFor(() => {
         expect(queryByText('Menu Item')).toBeNull();
       });
@@ -76,7 +76,7 @@ describe('DropdownMenu', () => {
       expect(getByText('Menu Item')).toBeTruthy();
 
       // Click outside
-      await user.click(getByText('Outside'));
+      fireEvent.pointerDown(getByText('Outside'));
       await waitFor(() => {
         expect(queryByText('Menu Item')).toBeNull();
       });
@@ -220,13 +220,57 @@ describe('DropdownMenu', () => {
       await user.click(getByText('Open'));
       const item = getByText('Disabled Item');
 
-      expect(item.getAttribute('data-disabled')).toBeTruthy();
+      expect(item.getAttribute('data-disabled')).toBe('');
       await user.click(item);
       expect(onSelect).not.toHaveBeenCalled();
     });
   });
 
   describe('Keyboard Navigation', () => {
+    it('isolates focus by default and restores the trigger after keyboard close', async () => {
+      const user = userEvent.setup();
+      const { getByRole, findByRole, queryByRole } = render(
+        <div>
+          <button>Background control</button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button>Menu</button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>First</DropdownMenuItem>
+              <DropdownMenuItem>Last</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>,
+      );
+
+      const background = getByRole('button', { name: 'Background control' });
+      const trigger = getByRole('button', { name: 'Menu' });
+      trigger.focus();
+      await user.keyboard('{Enter}');
+
+      const menu = await findByRole('menu');
+      await waitFor(() => {
+        expect(background.closest('[aria-hidden="true"]')).toBeTruthy();
+      });
+      expect(menu.contains(document.activeElement)).toBe(true);
+
+      await user.keyboard('{ArrowDown}');
+      expect(document.activeElement?.textContent).toBe('Last');
+
+      await user.keyboard('{ArrowUp}');
+      expect(document.activeElement?.textContent).toBe('First');
+
+      await user.keyboard('{Tab}');
+      expect(menu.contains(document.activeElement)).toBe(true);
+
+      await user.keyboard('{Escape}');
+      await waitFor(() => {
+        expect(queryByRole('menu')).toBeNull();
+        expect(document.activeElement).toBe(trigger);
+      });
+    });
+
     it('opens menu when pressing Enter on trigger', async () => {
       const user = userEvent.setup();
       const { getByText } = render(
