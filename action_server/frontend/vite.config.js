@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'vite';
-import { viteSingleFile } from 'vite-plugin-singlefile';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import react from '@vitejs/plugin-react';
@@ -9,6 +8,8 @@ const frontendRoot = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
   const isCanvas = mode === 'canvas';
+  const artifact = isCanvas ? 'canvas-mcp-app' : 'runtime-admin';
+  const contentType = isCanvas ? 'text/html;profile=mcp-app' : 'text/html';
   const appRoot = path.join(frontendRoot, 'apps', isCanvas ? 'canvas-view' : 'runtime');
 
   return {
@@ -31,7 +32,7 @@ export default defineConfig(({ mode }) => {
       },
       mainFields: ['module', 'main', 'browser'],
     },
-    plugins: [react(), viteSingleFile()],
+    plugins: [react()],
     test: {
       environment: 'jsdom',
       globals: true,
@@ -43,6 +44,7 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: path.join(frontendRoot, isCanvas ? 'dist-canvas' : 'dist'),
       emptyOutDir: true,
+      sourcemap: false,
       rollupOptions: {
         output: {
           entryFileNames: 'assets/[name]-[hash].js',
@@ -51,5 +53,6 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    define: { __ACTIONS_FRONTEND_ARTIFACT__: JSON.stringify(artifact), __ACTIONS_FRONTEND_CONTENT_TYPE__: JSON.stringify(contentType) },
   };
 });

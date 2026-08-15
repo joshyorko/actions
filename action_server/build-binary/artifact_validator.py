@@ -90,7 +90,8 @@ def validate_imports(artifact_path: Path) -> ValidationCheck:
 
 def validate_size(artifact_path: Path, baseline_path: Optional[Path]) -> ValidationCheck:
     """Validate artifact size against baseline (warn if >120%)."""
-    size_mb = artifact_path.stat().st_size / (1024 * 1024)
+    files = [artifact_path] if artifact_path.is_file() else list(artifact_path.rglob("*"))
+    size_mb = sum(file.stat().st_size for file in files if file.is_file()) / (1024 * 1024)
     
     if not baseline_path or not baseline_path.exists():
         return ValidationCheck(
@@ -129,6 +130,28 @@ def validate_size(artifact_path: Path, baseline_path: Optional[Path]) -> Validat
     )
 
 
+def validate_build_metadata(artifact_path: Path) -> list[ValidationCheck]:
+    """Validate release metadata when produced by the frontend build pipeline."""
+    if not artifact_path.is_dir():
+        return []
+    manifest_path = artifact_path / "artifact-manifest.json"
+    if not manifest_path.exists():
+        return [ValidationCheck("metadata", True, "No build manifest (fixture or legacy artifact)", "warning")]
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        files = manifest["files"]
+        names = {item["path"] for item in files}
+        checks = [ValidationCheck("metadata", manifest.get("schemaVersion") == 1 and bool(files), "Build manifest is present and non-empty")]
+        checks.append(ValidationCheck("source-maps", not manifest.get("sourceMaps") and not any(name.endswith(".map") for name in names), "Source maps are disabled"))
+        checks.append(ValidationCheck("sbom", (artifact_path / "sbom.json").is_file(), "CycloneDX SBOM is present"))
+        content_type = manifest.get("contentType")
+        checks.append(ValidationCheck("content-type", content_type in {"text/html", "text/html;profile=mcp-app"}, f"Declared content type: {content_type}"))
+        checks.append(ValidationCheck("hashes", all(hashlib.sha256((artifact_path / item["path"]).read_bytes()).hexdigest() == item["sha256"] for item in files), "Manifest hashes match artifact files"))
+        return checks
+    except (OSError, KeyError, TypeError, ValueError) as exc:
+        return [ValidationCheck("metadata", False, f"Invalid build manifest: {exc}")]
+
+
 def validate_artifact(
     artifact_path: Path,
     baseline_path: Optional[Path] = None,
@@ -149,6 +172,7 @@ def validate_artifact(
     # Run validation checks
     checks.append(validate_imports(artifact_path))
     checks.append(validate_size(artifact_path, baseline_path))
+    checks.extend(validate_build_metadata(artifact_path))
     
     # Determine overall result
     all_passed = all(

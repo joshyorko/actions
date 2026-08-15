@@ -21,7 +21,13 @@ runtime asset dependency. Frontend quality is fail-fast through
 `npm run test:quality`, which intentionally gates the shipping Runtime/Canvas
 entrypoints and `src/app` topology plus topology tests; the historical all-tree
 lint and full test suites were not green gates. The workflow runs both build
-boundaries.
+boundaries. The release command `npm run build:artifacts` also generates a
+CycloneDX `sbom.json` in each root. Runtime is post-processed into one
+`dist/index.html` for the existing frozen/PyInstaller embedding seam; Canvas
+remains a hashed multi-file root and declares `text/html;profile=mcp-app`.
+Each root records a sorted `artifact-manifest.json` with SHA-256 entries,
+disables source maps, and is checked by `npm run validate:artifacts` against a
+1 MiB total-size budget.
 
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm

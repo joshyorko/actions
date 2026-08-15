@@ -141,7 +141,7 @@ def build_frontend(
             if debug:
                 run(ctx, "npm", "run", "build:debug")
             else:
-                run(ctx, "npm", "run", "build")
+                run(ctx, "npm", "run", "build:artifacts")
         
         # Step 6: Write static contents
         index_src = CURDIR / "frontend" / "dist" / "index.html"
