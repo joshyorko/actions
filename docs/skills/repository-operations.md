@@ -27,7 +27,11 @@ CycloneDX `sbom.json` in each root. Runtime is post-processed into one
 remains a hashed multi-file root and declares `text/html;profile=mcp-app`.
 Each root records a sorted `artifact-manifest.json` with SHA-256 entries,
 disables source maps, and is checked by `npm run validate:artifacts` against a
-1 MiB total-size budget.
+1 MiB raw / 300 KiB gzip executable-payload budget. The manifest `files` list is
+the canonical shipped-payload inventory: retained `artifact-manifest.json` and
+`sbom.json` metadata are excluded from that budget. The hosted frontend build
+must invoke this same dual-root validator rather than recursively summing a
+`dist` directory.
 
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm

@@ -31,3 +31,11 @@ def test_artifact_validator_checks_manifests_and_directory_budgets():
     assert "sbom.json" in validator
     assert "rglob" in validator
     assert "text/html;profile=mcp-app" in validator
+
+
+def test_hosted_bundle_budget_uses_the_manifest_payload_for_both_artifacts():
+    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
+
+    assert "npm run validate:artifacts" in workflow
+    assert "du -sb dist" not in workflow
+    assert "Get-ChildItem -Path dist -Recurse -File" not in workflow

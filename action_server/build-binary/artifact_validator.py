@@ -1,6 +1,7 @@
 """Validation for Actions-owned frontend build artifacts."""
 
 import argparse
+import gzip
 import hashlib
 import json
 import sys
@@ -9,6 +10,10 @@ from pathlib import Path
 from typing import Optional
 
 import tree_shaker
+
+
+FRONTEND_PAYLOAD_MAX_BYTES = 1024 * 1024
+FRONTEND_PAYLOAD_GZIP_MAX_BYTES = 300 * 1024
 
 
 @dataclass
@@ -147,6 +152,9 @@ def validate_build_metadata(artifact_path: Path) -> list[ValidationCheck]:
         content_type = manifest.get("contentType")
         checks.append(ValidationCheck("content-type", content_type in {"text/html", "text/html;profile=mcp-app"}, f"Declared content type: {content_type}"))
         checks.append(ValidationCheck("hashes", all(hashlib.sha256((artifact_path / item["path"]).read_bytes()).hexdigest() == item["sha256"] for item in files), "Manifest hashes match artifact files"))
+        payload_bytes = sum(item["bytes"] for item in files)
+        payload_gzip_bytes = sum(len(gzip.compress((artifact_path / item["path"]).read_bytes(), mtime=0)) for item in files)
+        checks.append(ValidationCheck("payload-budget", payload_bytes <= FRONTEND_PAYLOAD_MAX_BYTES and payload_gzip_bytes <= FRONTEND_PAYLOAD_GZIP_MAX_BYTES, f"Executable payload: {payload_bytes} bytes raw, {payload_gzip_bytes} bytes gzip"))
         return checks
     except (OSError, KeyError, TypeError, ValueError) as exc:
         return [ValidationCheck("metadata", False, f"Invalid build manifest: {exc}")]
