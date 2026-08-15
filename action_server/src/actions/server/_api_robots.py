@@ -577,6 +577,8 @@ async def run_robot_task(
             run = Run(**run_kwargs)  # type: ignore[arg-type]
             db.insert(run)
 
+    get_artifact_storage().bind_run(run.id, run.relative_artifacts_dir, run.__dict__)
+
     # Notify run state listeners
     get_global_runs_state().on_run_inserted(run)
 

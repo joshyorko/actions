@@ -7,7 +7,7 @@ from typing import Annotated, Dict, List, Literal, Optional, Sequence
 import fastapi
 from fastapi.params import Param
 from fastapi.routing import APIRouter
-from starlette.responses import FileResponse, Response
+from starlette.responses import FileResponse
 
 from actions.server._models import Run, RunDetailModel, RunListItemModel
 
@@ -39,6 +39,12 @@ def get_run_by_id(run_id: str) -> Run:
         with global_runs_state.semaphore:
             return global_runs_state.get_run_from_id(run_id)
     except KeyError as err:
+        from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
+
+        try:
+            return Run(**get_artifact_storage().run_metadata(run_id))
+        except (ArtifactStorageNotFoundError, TypeError, KeyError, ValueError):
+            pass
         from fastapi.exceptions import HTTPException
         from starlette import status
 
@@ -426,11 +432,9 @@ def get_run_artifact_binary(
 
     run = get_run_by_id(run_id)
     try:
-        contents = get_artifact_storage().read_bytes(
-            run.relative_artifacts_dir, artifact_name
-        )
+        path = get_artifact_storage().read_path(run.relative_artifacts_dir, artifact_name)
     except ArtifactStorageNotFoundError:
         log.critical("Unable to get missing artifact: %s", artifact_name)
         return None
     media_type = mimetypes.guess_type(artifact_name)[0] or "application/octet-stream"
-    return Response(content=contents, media_type=media_type)
+    return FileResponse(path, media_type=media_type)

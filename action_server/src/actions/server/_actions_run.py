@@ -94,6 +94,11 @@ def _create_run(
         run = Run(**run_kwargs)
         db.insert(run)
 
+    # Publish the durable cross-process binding before exposing the run.
+    from ._artifact_storage import get_artifact_storage
+
+    get_artifact_storage().bind_run(run.id, run.relative_artifacts_dir, run.__dict__)
+
     # Ok, transaction finished properly. Let's add it to our in-memory cache.
     global_runs_state = get_global_runs_state()
     global_runs_state.on_run_inserted(run)

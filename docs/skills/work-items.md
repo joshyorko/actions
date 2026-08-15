@@ -10,6 +10,24 @@ SQLite is the release-critical local/server backend. FileAdapter is intended for
 
 ## Safety Invariants
 
+Action Server filesystem artifacts use canonical, root-relative run keys. The
+resolved storage root must be an existing non-symlink directory; run and file
+keys reject aliases, dot segments, absolute paths, symlinks, and resolved
+escapes at creation, listing, reading, writing, and stat boundaries. Artifact
+writes use a temporary file plus `os.replace`, so readers see either the old
+or complete new file. Binary API responses return `FileResponse`, preserving
+Starlette conditional and HTTP Range behavior without eagerly loading the
+artifact.
+
+Shared filesystem storage publishes an atomically replaced
+`.action-server-run-bindings.json` manifest, guarded by an OS file lock. It
+binds each run ID to one canonical artifact key and serialized Run metadata;
+conflicting, corrupt, or mismatched bindings fail closed. This storage-side
+binding lets independently configured runtimes discover runs without sharing
+the Action Server database. The binding is written after the local Run record
+is committed, so a partially published run is not exposed as a valid remote
+Run.
+
 - Attachment names are one safe filename component: reject empty/dot names, absolute paths, either path separator, quotes, and C0 controls. Resolve roots and candidates before containment checks so symlink escapes fail.
 - Treat item IDs and persisted SQLite file paths as untrusted. Item directories must resolve to strict descendants of the files root; equality with the root is invalid, so reject IDs such as `""` and `"."`. A persisted path must equal the resolved expected `<files_root>/<item_id>/<name>` before read, unlink, or recursive item deletion; verify item existence before deriving or removing its directory.
 - SQLite reservation must acquire `BEGIN IMMEDIATE` before FIFO selection, order by `created_at ASC, rowid ASC` so equal timestamps retain SQLite insertion order without a schema migration, conditionally update the selected `PENDING` row in that same transaction, and roll back on errors; this claims each pending item once across competing processes while retaining the adapter's 30-second SQLite lock timeout.
