@@ -32,6 +32,12 @@ the canonical shipped-payload inventory: retained `artifact-manifest.json` and
 `sbom.json` metadata are excluded from that budget. The hosted frontend build
 must invoke this same dual-root validator rather than recursively summing a
 `dist` directory.
+CycloneDX generation uses its `--output-reproducible` mode for both retained
+SBOMs, and the hosted determinism check runs the second clean build on Linux,
+macOS, and Windows. The Canvas manifest command passes
+`text/html;profile=mcp-app` as one double-quoted shell argument, avoiding POSIX
+single-quote semantics so `cmd.exe` preserves the exact identity string;
+validators remain strict about that identity.
 
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm

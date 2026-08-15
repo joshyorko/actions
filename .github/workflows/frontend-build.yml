@@ -54,7 +54,6 @@ jobs:
 
       - name: Determinism Check
         id: determinism-check
-        if: runner.os != 'Windows'
         working-directory: action_server
         shell: bash
         run: |

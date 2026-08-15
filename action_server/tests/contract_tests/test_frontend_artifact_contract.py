@@ -39,3 +39,18 @@ def test_hosted_bundle_budget_uses_the_manifest_payload_for_both_artifacts():
     assert "npm run validate:artifacts" in workflow
     assert "du -sb dist" not in workflow
     assert "Get-ChildItem -Path dist -Recurse -File" not in workflow
+
+
+def test_frontend_release_metadata_and_canvas_identity_are_cross_platform():
+    package = json.loads((FRONTEND / "package.json").read_text())
+    scripts = package["scripts"]
+
+    assert scripts["sbom"].count("--output-reproducible") == 2
+    assert "'text/html;profile=mcp-app'" not in scripts["build:canvas"]
+    assert '"text/html;profile=mcp-app"' in scripts["build:canvas"]
+
+
+def test_hosted_determinism_check_covers_every_matrix_os():
+    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
+
+    assert "if: runner.os != 'Windows'" not in workflow
