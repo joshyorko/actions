@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => {
       environment: 'jsdom',
       globals: true,
       setupFiles: path.join(frontendRoot, '__tests__/a11y/setup.ts'),
-      include: [path.join(frontendRoot, '__tests__/**/*.test.{ts,tsx}')],
+      include: [path.join(frontendRoot, '__tests__/**/*.test.{ts,tsx}').replaceAll(path.sep, '/')],
       exclude: ['**/node_modules/**', '**/__tests__/visual/**', '**/*.backup'],
       coverage: { provider: 'v8', reporter: ['text', 'lcov'] },
     },

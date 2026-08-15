@@ -98,6 +98,8 @@ def test_frontend_quality_uses_cross_platform_prettier_eol_contract():
     assert scripts["test:topology"] == (
         'vitest --run --testNamePattern "Actions frontend topology"'
     )
+    vite_config = (FRONTEND / "vite.config.js").read_text()
+    assert "replaceAll(path.sep, '/')" in vite_config
 
 
 def test_validators_prove_manifest_inventory_and_metadata(tmp_path):
