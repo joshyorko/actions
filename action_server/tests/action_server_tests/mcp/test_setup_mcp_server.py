@@ -1,3 +1,6 @@
+import pytest
+
+
 def test_resource_template_matches():
     from actions.server.mcp.setup_mcp_server_from_actions import (
         McpServerSetupHelper,
@@ -273,3 +276,228 @@ def test_preserves_declared_mcp_meta_on_resources_and_prompts():
     assert direct_result.meta == declared_meta
     assert template_result.meta == declared_meta
     assert prompt_result.meta == declared_meta
+
+
+def test_catalogs_are_sorted_and_revisioned_independently_of_registration_order():
+    import asyncio
+    import json
+
+    from actions.server._models import Action
+    from actions.server.mcp.setup_mcp_server_from_actions import (
+        McpServerSetupHelper,
+    )
+
+    first = McpServerSetupHelper()
+    second = McpServerSetupHelper()
+    # The helper must derive the catalog from registered MCP definitions, not
+    # from the order in which the Action rows happened to be loaded.
+    for helper, names in (
+        (first, ["zulu", "alpha"]),
+        (second, ["alpha", "zulu"]),
+    ):
+        for name in names:
+            action = Action(
+                id=name,
+                action_package_id="package",
+                name=name,
+                docs=name,
+                file="actions.py",
+                lineno=1,
+                input_schema=json.dumps({"type": "object", "properties": {}}),
+                output_schema=json.dumps({"type": "string"}),
+                enabled=True,
+                is_consequential=None,
+                managed_params_schema=None,
+                options=json.dumps({"kind": "tool"}),
+            )
+            helper.register_action(
+                func=lambda **kwargs: "result",
+                action=action,
+                action_package=None,
+                display_name=name,
+                doc_desc=name,
+            )
+
+    assert [tool.name for tool in first._tools] == ["alpha", "zulu"]
+    assert [tool.name for tool in second._tools] == ["alpha", "zulu"]
+    assert first.catalog_revision == second.catalog_revision
+
+    result = asyncio.run(first._list_tools(None, None))
+    assert result.meta["actions.catalogRevision"] == first.catalog_revision
+
+
+def test_catalog_revision_changes_when_surface_changes_and_reload_clears_cache():
+    import json
+
+    from actions.server._models import Action
+    from actions.server.mcp.setup_mcp_server_from_actions import (
+        McpServerSetupHelper,
+    )
+
+    helper = McpServerSetupHelper()
+    action = Action(
+        id="one",
+        action_package_id="package",
+        name="one",
+        docs="one",
+        file="actions.py",
+        lineno=1,
+        input_schema=json.dumps({"type": "object", "properties": {}}),
+        output_schema=json.dumps({"type": "string"}),
+        enabled=True,
+        is_consequential=None,
+        managed_params_schema=None,
+        options=json.dumps({"kind": "tool"}),
+    )
+    helper.register_action(
+        func=lambda **kwargs: "result",
+        action=action,
+        action_package=None,
+        display_name="one",
+        doc_desc="one",
+    )
+    before = helper.catalog_revision
+    helper.unregister_actions()
+    assert helper.catalog_revision != before
+    assert helper._tools == []
+
+
+def _catalog_action(
+    *,
+    action_id: str,
+    name: str,
+    options: dict,
+    docs: str,
+    input_schema: dict | None = None,
+):
+    import json
+
+    from actions.server._models import Action
+
+    return Action(
+        id=action_id,
+        action_package_id="package",
+        name=name,
+        docs=docs,
+        file="actions.py",
+        lineno=1,
+        input_schema=json.dumps(input_schema or {"type": "object", "properties": {}}),
+        output_schema=json.dumps({"type": "string"}),
+        enabled=True,
+        is_consequential=None,
+        managed_params_schema=None,
+        options=json.dumps(options),
+    )
+
+
+def _register_catalog_action(helper, action):
+    helper.register_action(
+        func=lambda **kwargs: "result",
+        action=action,
+        action_package=None,
+        display_name=action.name,
+        doc_desc=action.docs,
+    )
+
+
+@pytest.mark.parametrize(
+    ("options", "names", "duplicate_key"),
+    [
+        ({"kind": "tool"}, ("duplicate", "duplicate"), "tool name"),
+        (
+            {"kind": "resource", "uri": "catalog://direct"},
+            ("first", "second"),
+            "resource URI",
+        ),
+        (
+            {"kind": "resource", "uri": "catalog://{item}"},
+            ("first", "second"),
+            "resource template URI",
+        ),
+        ({"kind": "prompt"}, ("duplicate", "duplicate"), "prompt name"),
+    ],
+)
+def test_duplicate_catalog_keys_are_rejected_in_opposite_registration_orders(
+    options, names, duplicate_key
+):
+    actions = [
+        _catalog_action(
+            action_id=f"{name}-{index}",
+            name=name,
+            options=options,
+            docs=f"definition {index}",
+        )
+        for index, name in enumerate(names)
+    ]
+
+    for registration_order in (actions, list(reversed(actions))):
+        from actions.server.mcp.setup_mcp_server_from_actions import (
+            McpServerSetupHelper,
+        )
+
+        helper = McpServerSetupHelper()
+        _register_catalog_action(helper, registration_order[0])
+        with pytest.raises(ValueError, match=f"duplicate {duplicate_key}"):
+            _register_catalog_action(helper, registration_order[1])
+
+
+def test_catalog_revision_changes_for_schema_and_meta_changes():
+    from actions.server.mcp.setup_mcp_server_from_actions import (
+        McpServerSetupHelper,
+    )
+
+    def revision_for(input_schema, mcp_meta):
+        helper = McpServerSetupHelper()
+        _register_catalog_action(
+            helper,
+            _catalog_action(
+                action_id="tool",
+                name="tool",
+                options={"kind": "tool", "_meta": mcp_meta},
+                docs="tool",
+                input_schema=input_schema,
+            ),
+        )
+        return helper.catalog_revision
+
+    base_schema = {
+        "type": "object",
+        "properties": {"value": {"type": "string"}},
+    }
+    changed_schema = {
+        "type": "object",
+        "properties": {"value": {"type": "integer"}},
+    }
+    base_meta = {"ui": {"resourceUri": "ui://base"}}
+    changed_meta = {"ui": {"resourceUri": "ui://changed"}}
+
+    base_revision = revision_for(base_schema, base_meta)
+    assert revision_for(changed_schema, base_meta) != base_revision
+    assert revision_for(base_schema, changed_meta) != base_revision
+
+
+def test_large_catalog_revision_is_bounded():
+    import time
+
+    from actions.server.mcp.setup_mcp_server_from_actions import (
+        McpServerSetupHelper,
+    )
+
+    helper = McpServerSetupHelper()
+    for index in range(1000):
+        _register_catalog_action(
+            helper,
+            _catalog_action(
+                action_id=f"tool-{index}",
+                name=f"tool_{index:04d}",
+                options={"kind": "tool"},
+                docs=f"tool {index}",
+            ),
+        )
+
+    started = time.perf_counter()
+    revision = helper.catalog_revision
+    elapsed = time.perf_counter() - started
+
+    assert len(revision) == 64
+    assert elapsed < 2.0, f"large catalog revision took {elapsed:.3f}s"
