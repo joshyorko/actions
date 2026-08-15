@@ -231,6 +231,49 @@ class Database:
             finally:
                 self._tlocal.conn = None
 
+    @contextmanager
+    def try_claim_schedule(self, schedule_id: str) -> Iterator[bool]:
+        """Hold a PostgreSQL session lock while a due schedule is processed.
+
+        SQLite retains its existing process-local coordination. PostgreSQL uses
+        a session-level advisory lock so commits made while the schedule runs do
+        not release ownership, while closing the process connection releases it
+        deterministically after normal completion or process failure.
+        """
+        if self.backend_name != "postgresql":
+            yield True
+            return
+
+        import psycopg
+
+        claim_connection = psycopg.connect(
+            cast(str, self._db_path),
+            autocommit=True,
+        )
+        lock_key = f"actions-runtime-schedule:{schedule_id}"
+        acquired = False
+        try:
+            with claim_connection.cursor() as cursor:
+                cursor.execute(
+                    "SELECT pg_try_advisory_lock(hashtext(%s))",
+                    (lock_key,),
+                )
+                result = cursor.fetchone()
+                acquired = bool(result and result[0])
+
+            yield acquired
+        finally:
+            if acquired:
+                try:
+                    with claim_connection.cursor() as cursor:
+                        cursor.execute(
+                            "SELECT pg_advisory_unlock(hashtext(%s))",
+                            (lock_key,),
+                        )
+                except Exception:
+                    log.debug("Unable to release PostgreSQL schedule claim", exc_info=True)
+            claim_connection.close()
+
     def _next_savepoint_name(self):
         return f"savepoint_{next(self._counter)}"
 
@@ -590,7 +633,7 @@ WHERE
                 sql = """
 SELECT table_name
 FROM information_schema.tables
-WHERE table_schema = 'public'
+WHERE table_schema = current_schema()
   AND table_type = 'BASE TABLE';
 """
             self.execute_query(cursor, sql)
@@ -610,7 +653,7 @@ order by tableName, columnName;
                 sql = """
 SELECT table_name, column_name
 FROM information_schema.columns
-WHERE table_schema = 'public'
+WHERE table_schema = current_schema()
 ORDER BY table_name, ordinal_position;
 """
             self.execute_query(cursor, sql)
@@ -666,7 +709,7 @@ JOIN pg_namespace ns ON ns.oid = tbl.relnamespace
 JOIN pg_class idx ON idx.oid = ind.indexrelid
 CROSS JOIN LATERAL unnest(ind.indkey) WITH ORDINALITY AS keys(attnum, ordinality)
 JOIN pg_attribute att ON att.attrelid = tbl.oid AND att.attnum = keys.attnum
-WHERE ns.nspname = 'public'
+WHERE ns.nspname = current_schema()
 ORDER BY table_name, index_name, sequence_in_index;
 """
             self.execute_query(cursor, sql)

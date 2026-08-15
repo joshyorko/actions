@@ -1,9 +1,14 @@
+import json
 import os
 import subprocess
 import sys
+import textwrap
+import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import pytest
 from pydantic.dataclasses import dataclass
@@ -14,7 +19,13 @@ from actions.server._database import (
     normalize_database_url,
     redact_database_url,
 )
-from actions.server.migrations import MigrationStatus, db_migration_status, migrate_db
+from actions.server.migrations import (
+    CURRENT_VERSION,
+    MIGRATION_ID_TO_NAME,
+    MigrationStatus,
+    db_migration_status,
+    migrate_db,
+)
 
 
 @dataclass
@@ -65,6 +76,84 @@ def test_migration_status_accepts_case_insensitive_postgresql_url(monkeypatch):
     )
 
     assert db_migration_status(value) is MigrationStatus.UP_TO_DATE
+
+
+def test_historical_migration_nine_retains_run_output_columns(tmp_path: Path):
+    from actions.server.migrations import Migration
+    from actions.server.migrations.migration_add_robot_run_columns import migrate
+
+    db = Database(tmp_path / "migration-nine.db")
+    with db.connect():
+        db.initialize([Migration])
+        with db.transaction():
+            db.execute(
+                """
+                CREATE TABLE migration (
+                    id INTEGER NOT NULL PRIMARY KEY,
+                    name TEXT NOT NULL
+                )
+                """
+            )
+            db.execute(
+                """
+                CREATE TABLE run (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    status INTEGER NOT NULL,
+                    action_id TEXT NOT NULL,
+                    start_time TEXT NOT NULL,
+                    run_time REAL,
+                    inputs TEXT NOT NULL,
+                    result TEXT,
+                    error_message TEXT,
+                    relative_artifacts_dir TEXT NOT NULL,
+                    numbered_id INTEGER NOT NULL,
+                    request_id TEXT NOT NULL DEFAULT ''
+                )
+                """
+            )
+            db.insert(Migration(8, "add_request_id_to_run"))
+            migrate(db)
+
+        with db.cursor() as cursor:
+            db.execute_query(cursor, "PRAGMA table_info(run)")
+            columns = [row[1] for row in cursor.fetchall()]
+
+    assert columns[-4:] == [
+        "run_type",
+        "robot_package_path",
+        "robot_task_name",
+        "robot_env_hash",
+    ]
+    assert "stdout" not in columns
+    assert "stderr" not in columns
+
+
+def test_forward_schema_repair_removes_accidental_run_output_columns(tmp_path: Path):
+    from actions.server.migrations import Migration
+    from actions.server.migrations.migration_reconcile_run_columns import migrate
+
+    db = Database(tmp_path / "migration-repair.db")
+    with db.connect():
+        db.initialize([Migration])
+        with db.transaction():
+            db.execute("CREATE TABLE migration (id INTEGER PRIMARY KEY, name TEXT NOT NULL)")
+            db.execute(
+                "CREATE TABLE run (id TEXT PRIMARY KEY, result TEXT, "
+                "stdout TEXT, stderr TEXT)"
+            )
+            migrate(db)
+
+        with db.cursor() as cursor:
+            db.execute_query(cursor, "PRAGMA table_info(run)")
+            columns = [row[1] for row in cursor.fetchall()]
+
+    assert columns == ["id", "result"]
+
+
+def test_forward_schema_repair_is_registered_after_historical_migration_nine():
+    assert CURRENT_VERSION == 12
+    assert MIGRATION_ID_TO_NAME[9] == "add_robot_run_columns"
+    assert MIGRATION_ID_TO_NAME[12] == "reconcile_run_columns"
 
 
 @pytest.mark.parametrize(
@@ -284,6 +373,296 @@ def test_postgresql_bound_json_operators_and_array_rhs_execute():
                 assert cursor.fetchone()[0]
                 db.execute_query(cursor, "SELECT ? = ANY(?)", ["key", ["other", "key"]])
                 assert cursor.fetchone()[0]
+
+
+@pytest.mark.integration_test
+@pytest.mark.postgresql
+def test_postgresql_schema_introspection_uses_effective_search_path():
+    url = os.environ.get("ACTIONS_TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("ACTIONS_TEST_DATABASE_URL is not configured")
+
+    schema = f"actions_schema_{uuid.uuid4().hex}"
+    database = Database(url)
+    try:
+        with database.connect():
+            with database.transaction():
+                database.execute(f"CREATE SCHEMA {schema}")
+                database.execute(
+                    f"CREATE TABLE {schema}.introspection_probe "
+                    "(id TEXT PRIMARY KEY, value TEXT NOT NULL)"
+                )
+                database.execute(
+                    f"CREATE INDEX introspection_probe_value_idx "
+                    f"ON {schema}.introspection_probe(value)"
+                )
+
+        parts = urlsplit(url)
+        query = dict(parse_qsl(parts.query, keep_blank_values=True))
+        query["options"] = f"-csearch_path={schema}"
+        schema_url = urlunsplit(
+            (
+                parts.scheme,
+                parts.netloc,
+                parts.path,
+                urlencode(query),
+                parts.fragment,
+            )
+        )
+        schema_database = Database(schema_url)
+        with schema_database.connect():
+            assert schema_database.list_table_names() == ["introspection_probe"]
+            assert schema_database.list_table_and_columns() == {
+                "introspection_probe": ["id", "value"]
+            }
+            assert any(
+                row[0] == "introspection_probe"
+                for row in schema_database.list_indexes()
+            )
+    finally:
+        with database.connect():
+            with database.transaction():
+                database.execute(f"DROP SCHEMA IF EXISTS {schema} CASCADE")
+
+
+def _runtime_schedule_worker_code() -> str:
+    return textwrap.dedent(
+        """
+        import asyncio
+        import sys
+        import time
+        from pathlib import Path
+
+        import actions.server._settings as settings_module
+        from actions.server._actions_process_pool import (
+            get_actions_process_pool,
+            setup_actions_process_pool,
+        )
+        from actions.server._models import Action, ActionPackage, load_db
+        from actions.server._scheduler import SchedulerEngine
+        from actions.server._settings import Settings
+
+        url, datadir_value, ready_value, go_value = sys.argv[1:]
+        datadir = Path(datadir_value)
+        datadir.mkdir(parents=True, exist_ok=True)
+        settings = Settings(
+            datadir=datadir,
+            artifacts_dir=datadir / "artifacts",
+            database_url=url,
+            min_processes=0,
+            max_processes=1,
+            reuse_processes=False,
+        )
+        settings_module._global_settings = settings
+
+        with load_db(url) as database:
+            with database.connect():
+                packages = {
+                    package.id: package for package in database.all(ActionPackage)
+                }
+                actions = database.all(Action)
+
+            with setup_actions_process_pool(settings, packages, actions):
+                Path(ready_value).touch()
+                deadline = time.monotonic() + 30
+                while not Path(go_value).exists():
+                    if time.monotonic() >= deadline:
+                        raise TimeoutError("runtime worker start barrier timed out")
+                    time.sleep(0.01)
+
+                try:
+                    scheduler = SchedulerEngine(
+                        check_interval=0.01,
+                        max_concurrent_global=1,
+                    )
+                    asyncio.run(scheduler._check_and_execute_schedules())
+                finally:
+                    get_actions_process_pool().dispose()
+
+        print("runtime worker complete", flush=True)
+        """
+    )
+
+
+@pytest.mark.integration_test
+@pytest.mark.postgresql
+def test_two_runtime_processes_claim_one_due_schedule(tmp_path: Path):
+    url = os.environ.get("ACTIONS_TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("ACTIONS_TEST_DATABASE_URL is not configured")
+
+    from actions.server._models import Action, ActionPackage, Schedule
+
+    migrate_db(url)
+    suffix = uuid.uuid4().hex
+    package_id = f"package-schedule-{suffix}"
+    action_id = f"action-schedule-{suffix}"
+    schedule_id = f"schedule-{suffix}"
+    request_id = f"schedule:{schedule_id}"
+    now = datetime.now(timezone.utc)
+    now_string = now.isoformat()
+    scheduled_time = (now - timedelta(seconds=1)).isoformat()
+    package_directory = Path(__file__).parent / "resources" / "no_conda" / "slow"
+    package = ActionPackage(
+        id=package_id,
+        name=f"schedule-package-{suffix}",
+        directory=str(package_directory),
+        conda_hash="test",
+        env_json="{}",
+    )
+    action = Action(
+        id=action_id,
+        action_package_id=package_id,
+        name="long_running",
+        docs="A scheduled test action.",
+        file="action_slow.py",
+        lineno=4,
+        input_schema='{"type":"object","properties":{"duration":{"type":"number"}}}',
+        output_schema='{"type":"string"}',
+    )
+    schedule = Schedule(
+        id=schedule_id,
+        name=f"schedule-{suffix}",
+        description="",
+        action_id=action_id,
+        execution_mode="run",
+        work_item_queue=None,
+        inputs_json=json.dumps({"duration": 2.0}),
+        schedule_type="once",
+        cron_expression=None,
+        interval_seconds=None,
+        weekday_config_json=None,
+        once_at=scheduled_time,
+        timezone="UTC",
+        enabled=True,
+        created_at=now_string,
+        updated_at=now_string,
+        next_run_at=scheduled_time,
+    )
+    database = Database(url)
+    processes = []
+    process_outputs = {}
+    try:
+        with database.connect():
+            database.initialize([ActionPackage, Action, Schedule])
+            with database.transaction():
+                database.insert(package)
+                database.insert(action)
+                database.insert(schedule)
+
+        worker_code = _runtime_schedule_worker_code()
+        ready_paths = [tmp_path / "runtime-a.ready", tmp_path / "runtime-b.ready"]
+        go_path = tmp_path / "runtime.go"
+        datadirs = [tmp_path / "runtime-a", tmp_path / "runtime-b"]
+        for datadir, ready_path in zip(datadirs, ready_paths):
+            processes.append(
+                subprocess.Popen(
+                    [
+                        sys.executable,
+                        "-c",
+                        worker_code,
+                        url,
+                        str(datadir),
+                        str(ready_path),
+                        str(go_path),
+                    ],
+                    cwd=Path(__file__).parents[2],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                )
+            )
+
+        deadline = time.monotonic() + 30
+        while not all(path.exists() for path in ready_paths):
+            if any(process.poll() is not None for process in processes):
+                break
+            if time.monotonic() >= deadline:
+                raise TimeoutError("runtime worker readiness barrier timed out")
+            time.sleep(0.02)
+        process_statuses = [worker_process.poll() for worker_process in processes]
+        assert all(path.exists() for path in ready_paths), process_statuses
+        go_path.touch()
+
+        for index, process in enumerate(processes):
+            process_outputs[index] = process.communicate(timeout=45)
+        for index, (stdout, stderr) in process_outputs.items():
+            (tmp_path / f"runtime-{index}.stdout.log").write_text(stdout)
+            (tmp_path / f"runtime-{index}.stderr.log").write_text(stderr)
+        assert all(process.returncode == 0 for process in processes), process_outputs
+
+        with database.connect():
+            with database.cursor() as cursor:
+                database.execute_query(
+                    cursor,
+                    "SELECT COUNT(*) FROM schedule_execution WHERE schedule_id=?",
+                    [schedule_id],
+                )
+                execution_count = cursor.fetchone()[0]
+                database.execute_query(
+                    cursor,
+                    "SELECT COUNT(*) FROM run WHERE request_id=?",
+                    [request_id],
+                )
+                run_count = cursor.fetchone()[0]
+                database.execute_query(
+                    cursor,
+                    "SELECT status FROM schedule_execution WHERE schedule_id=?",
+                    [schedule_id],
+                )
+                execution_statuses = [row[0] for row in cursor.fetchall()]
+                database.execute_query(
+                    cursor,
+                    "SELECT enabled, next_run_at FROM schedule WHERE id=?",
+                    [schedule_id],
+                )
+                schedule_state = cursor.fetchone()
+
+        assert execution_count == 1
+        assert run_count == 1
+        assert len(execution_statuses) == 1
+        assert execution_statuses[0] in {"completed", "failed"}
+        assert schedule_state == (False, None)
+    finally:
+        for process in processes:
+            if process.poll() is None:
+                process.terminate()
+                try:
+                    process.wait(timeout=10)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    process.wait(timeout=10)
+        for index, process in enumerate(processes):
+            if index not in process_outputs:
+                process_outputs[index] = process.communicate()
+            stdout, stderr = process_outputs[index]
+            (tmp_path / f"runtime-{index}.stdout.log").write_text(stdout)
+            (tmp_path / f"runtime-{index}.stderr.log").write_text(stderr)
+        with database.connect():
+            with database.transaction():
+                database.execute(
+                    "DELETE FROM schedule_execution WHERE schedule_id=?",
+                    [schedule_id],
+                )
+                database.execute("DELETE FROM run WHERE request_id=?", [request_id])
+                database.execute("DELETE FROM schedule WHERE id=?", [schedule_id])
+                database.execute("DELETE FROM action WHERE id=?", [action_id])
+                database.execute(
+                    "DELETE FROM action_package WHERE id=?", [package_id]
+                )
+            with database.cursor() as cursor:
+                database.execute_query(
+                    cursor,
+                    "SELECT COUNT(*) FROM schedule WHERE id=?",
+                    [schedule_id],
+                )
+                assert cursor.fetchone()[0] == 0
+                database.execute_query(
+                    cursor,
+                    "SELECT COUNT(*) FROM schedule_execution WHERE schedule_id=?",
+                    [schedule_id],
+                )
+                assert cursor.fetchone()[0] == 0
 
 
 def test_postgresql_boolean_schema_uses_native_boolean_without_changing_sqlite():

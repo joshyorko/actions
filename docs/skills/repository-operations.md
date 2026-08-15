@@ -271,6 +271,12 @@ while PostgreSQL migration startup takes a transaction-scoped advisory lock.
 The direct two-instance/concurrent-update and concurrent-startup acceptance is
 in `action_server/tests/action_server_tests/test_database_shared.py` and
 requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.
+Shared PostgreSQL acceptance requires immutable historical migrations and two
+independent Runtime processes proving one due schedule creates exactly one execution;
+threaded `Database` tests are insufficient. The process-level check also proves
+exactly one run, while PostgreSQL due schedules use a session-level database
+claim held through processing; closing that connection releases ownership, and
+SQLite keeps its existing single-node path.
 
 The shared PostgreSQL adapter translates only unquoted `?` parameter markers;
 SQL literals, quoted identifiers, comments, dollar-quoted bodies, escaped

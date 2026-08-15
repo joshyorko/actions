@@ -178,6 +178,40 @@ class SchedulerEngine:
     async def _process_schedule(
         self, schedule: "Schedule", now: datetime
     ) -> None:
+        """Claim a schedule across PostgreSQL Runtime processes before processing it."""
+        from actions.server._database import datetime_to_str
+        from actions.server._models import Schedule, get_db
+
+        db = get_db()
+        if db.backend_name != "postgresql":
+            await self._process_schedule_claimed(schedule, now)
+            return
+
+        with db.try_claim_schedule(schedule.id) as claimed:
+            if not claimed:
+                return
+
+            with db.connect():
+                try:
+                    schedule = db.first(
+                        Schedule,
+                        """
+                        SELECT * FROM schedule
+                        WHERE id = ?
+                          AND enabled = TRUE
+                          AND next_run_at IS NOT NULL
+                          AND next_run_at <= ?
+                        """,
+                        [schedule.id, datetime_to_str(now)],
+                    )
+                except KeyError:
+                    return
+
+            await self._process_schedule_claimed(schedule, now)
+
+    async def _process_schedule_claimed(
+        self, schedule: Any, now: datetime
+    ) -> None:
         """
         Process a single schedule - check constraints and execute if allowed.
 

@@ -43,6 +43,8 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     10: "add_schedules",
     # we'll look for a 'migration_reconcile_schema' module based on this.
     11: "reconcile_schema",
+    # we'll look for a 'migration_reconcile_run_columns' module based on this.
+    12: "reconcile_run_columns",
 }
 
 CURRENT_VERSION: int = max(MIGRATION_ID_TO_NAME.keys())
