@@ -124,6 +124,10 @@ export default {
           from: { opacity: '0', transform: 'scale(0.96)' },
           to: { opacity: '1', transform: 'scale(1)' },
         },
+        'dialog-scale-in': {
+          from: { opacity: '0', transform: 'translate(-50%, -50%) scale(0.96)' },
+          to: { opacity: '1', transform: 'translate(-50%, -50%) scale(1)' },
+        },
         'zoom-in-95': {
           from: { transform: 'scale(0.95)' },
           to: { transform: 'scale(1)' },
@@ -157,6 +161,7 @@ export default {
         'slide-in-left': 'slide-in-left 0.15s ease-out',
         'slide-in-right': 'slide-in-right 0.15s ease-out',
         'scale-in': 'scale-in 0.15s ease-out',
+        'dialog-scale-in': 'dialog-scale-in 0.15s ease-out',
         'zoom-in-95': 'zoom-in-95 0.15s ease-out',
         'zoom-out-95': 'zoom-out-95 0.1s ease-out',
         'shimmer': 'shimmer 1.5s infinite',

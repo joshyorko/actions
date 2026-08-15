@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
 import React from 'react';
 import { render, userEvent, waitFor } from '../../utils/test-utils';
 import { describe, it, expect, beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
@@ -9,6 +12,10 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/core/components/ui/Dialog';
+
+const frontendRoot = resolve(__dirname, '../../..');
+const dialogSource = readFileSync(resolve(frontendRoot, 'src/core/components/ui/Dialog.tsx'), 'utf8');
+const tailwindConfig = readFileSync(resolve(frontendRoot, 'tailwind.config.js'), 'utf8');
 
 describe('Dialog Animation Tests', () => {
   describe('Animation Duration - FR-UI-006', () => {
@@ -190,6 +197,13 @@ describe('Dialog Animation Tests', () => {
   });
 
   describe('Zoom and Fade Animations', () => {
+    it('preserves Dialog centering while scaling', () => {
+      expect(dialogSource).toContain('data-[state=open]:animate-dialog-scale-in');
+      expect(tailwindConfig).toMatch(
+        /'dialog-scale-in':[\s\S]*?transform: 'translate\(-50%, -50%\) scale\(0\.96\)'[\s\S]*?transform: 'translate\(-50%, -50%\) scale\(1\)'/,
+      );
+    });
+
     it('Dialog content has fade animation support', async () => {
       const { findByRole } = render(
         <Dialog defaultOpen>
