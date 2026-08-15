@@ -18,6 +18,12 @@ ALTER TABLE run ADD COLUMN robot_task_name TEXT DEFAULT NULL;
         """
 ALTER TABLE run ADD COLUMN robot_env_hash TEXT DEFAULT '';
 """,
+        """
+ALTER TABLE run ADD COLUMN stdout TEXT DEFAULT NULL;
+""",
+        """
+ALTER TABLE run ADD COLUMN stderr TEXT DEFAULT NULL;
+""",
     ]
     for sql in sqls:
         db.execute(sql)

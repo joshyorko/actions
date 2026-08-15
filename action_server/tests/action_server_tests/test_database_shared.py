@@ -118,15 +118,14 @@ def test_historical_migration_nine_retains_run_output_columns(tmp_path: Path):
             db.execute_query(cursor, "PRAGMA table_info(run)")
             columns = [row[1] for row in cursor.fetchall()]
 
-    assert columns[-4:] == [
-        "run_type",
-        "robot_package_path",
-        "robot_task_name",
-        "robot_env_hash",
-    ]
-    assert "stdout" not in columns
-    assert "stderr" not in columns
-
+        assert columns[-6:] == [
+            "run_type",
+            "robot_package_path",
+            "robot_task_name",
+            "robot_env_hash",
+            "stdout",
+            "stderr",
+        ]
 
 def test_forward_schema_repair_removes_accidental_run_output_columns(tmp_path: Path):
     from actions.server.migrations import Migration
