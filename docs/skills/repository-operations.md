@@ -70,11 +70,16 @@ The supported wire contract is MCP `2026-07-28`: discover, then make stateless
 per-request `/mcp` calls without `initialize`/`initialized` or
 `Mcp-Session-Id`; `/sse` is intentionally absent. SDK v2 catalog results carry
 `ttlMs: 0` and `cacheScope: private`, so they are immediately stale rather than
-indefinitely cacheable. Acceptance tests exercise independent replicas, a real
-forwarding gateway's `Mcp-Method`/`Mcp-Name` observation, header/cookie
-forwarding, catalog reload freshness, and Action option `_meta` propagation to
-the corresponding MCP definitions/results. Do not add Canvas behavior merely
-to maintain this adapter seam.
+indefinitely cacheable. Each tools/resources/resource-templates/prompts result
+also carries the same `actions.catalogRevision` SHA-256 fingerprint, computed
+from the canonical sorted MCP surface. Re-registering actions on reload
+therefore changes the revision when the surface changes, while independent
+Runtime processes with equivalent Actions produce the same revision. Acceptance
+tests exercise independent replicas, a real forwarding gateway's
+`Mcp-Method`/`Mcp-Name` observation, header/cookie forwarding, catalog reload
+freshness, deterministic ordering, and Action option `_meta` propagation to the
+corresponding MCP definitions/results. Do not add Canvas behavior merely to
+maintain this adapter seam.
 The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.

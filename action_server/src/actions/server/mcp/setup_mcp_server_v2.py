@@ -1,8 +1,10 @@
 import json
 import logging
 import re
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable, Literal
+from hashlib import sha256
+from typing import Any, Literal
 
 from mcp.types import (
     CallToolResult,
@@ -24,6 +26,9 @@ from mcp.types import (
 )
 
 log = logging.getLogger(__name__)
+CATALOG_REVISION_META_KEY = "actions.catalogRevision"
+CATALOG_TTL_MS = 0
+CATALOG_CACHE_SCOPE = "private"
 OutputSchemaKind = Literal["string", "object", "wrap-in-result-object"]
 
 
@@ -69,7 +74,9 @@ class McpServerSetupHelper:
         return dict(request.headers), dict(request.cookies)
 
     async def _list_tools(self, _ctx: Any, _params: Any) -> ListToolsResult:
-        return ListToolsResult(tools=list(self._tools))
+        return ListToolsResult(
+            tools=list(self._tools), **self._catalog_result_metadata()
+        )
 
     async def _call_tool(self, ctx: Any, params: Any):
         try:
@@ -107,13 +114,19 @@ class McpServerSetupHelper:
             raise
 
     async def _list_resources(self, _ctx: Any, _params: Any) -> ListResourcesResult:
-        return ListResourcesResult(resources=list(self._resources.values()))
+        return ListResourcesResult(
+            resources=sorted(self._resources.values(), key=lambda item: str(item.uri)),
+            **self._catalog_result_metadata(),
+        )
 
     async def _list_resource_templates(
         self, _ctx: Any, _params: Any
     ) -> ListResourceTemplatesResult:
         return ListResourceTemplatesResult(
-            resource_templates=list(self._resource_templates)
+            resource_templates=sorted(
+                self._resource_templates, key=lambda item: item.uri_template
+            ),
+            **self._catalog_result_metadata(),
         )
 
     async def _read_resource(self, ctx: Any, params: Any) -> ReadResourceResult:
@@ -164,7 +177,43 @@ class McpServerSetupHelper:
         )
 
     async def _list_prompts(self, _ctx: Any, _params: Any) -> ListPromptsResult:
-        return ListPromptsResult(prompts=list(self._prompts))
+        return ListPromptsResult(
+            prompts=list(self._prompts), **self._catalog_result_metadata()
+        )
+
+    @property
+    def catalog_revision(self) -> str:
+        catalog = {
+            "prompts": [
+                item.model_dump(by_alias=True, mode="json", exclude_none=True)
+                for item in sorted(self._prompts, key=lambda item: item.name)
+            ],
+            "resources": [
+                item.model_dump(by_alias=True, mode="json", exclude_none=True)
+                for item in sorted(
+                    self._resources.values(), key=lambda item: str(item.uri)
+                )
+            ],
+            "resourceTemplates": [
+                item.model_dump(by_alias=True, mode="json", exclude_none=True)
+                for item in sorted(
+                    self._resource_templates, key=lambda item: item.uri_template
+                )
+            ],
+            "tools": [
+                item.model_dump(by_alias=True, mode="json", exclude_none=True)
+                for item in sorted(self._tools, key=lambda item: item.name)
+            ],
+        }
+        canonical = json.dumps(catalog, sort_keys=True, separators=(",", ":"))
+        return sha256(canonical.encode("utf-8")).hexdigest()
+
+    def _catalog_result_metadata(self) -> dict[str, Any]:
+        return {
+            "_meta": {CATALOG_REVISION_META_KEY: self.catalog_revision},
+            "ttlMs": CATALOG_TTL_MS,
+            "cacheScope": CATALOG_CACHE_SCOPE,
+        }
 
     async def _get_prompt(self, ctx: Any, params: Any) -> GetPromptResult:
         action_info = self._prompt_name_to_action_info[params.name]
@@ -222,6 +271,7 @@ class McpServerSetupHelper:
                 self._resource_template_to_action_info[uri] = ActionInfo(
                     func, action, display_name, doc_desc, "string", mcp_meta
                 )
+                self._resource_templates.sort(key=lambda item: item.uri_template)
             else:
                 resource_uri = uri
                 self._resources[resource_uri] = Resource(
@@ -257,6 +307,7 @@ class McpServerSetupHelper:
             self._prompt_name_to_action_info[action.name] = ActionInfo(
                 func, action, display_name, doc_desc, "string", mcp_meta
             )
+            self._prompts.sort(key=lambda item: item.name)
             return
 
         output_schema = json.loads(action.output_schema)
@@ -292,6 +343,7 @@ class McpServerSetupHelper:
         self._tool_name_to_action_info[action.name] = ActionInfo(
             func, action, display_name, doc_desc, output_schema_kind, mcp_meta
         )
+        self._tools.sort(key=lambda item: item.name)
 
     def unregister_actions(self) -> None:
         self._init_state()
