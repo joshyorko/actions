@@ -272,23 +272,26 @@ jobs:
       run: "set -Eeuo pipefail\nmkdir -p \"$DESTINATION\"\ngh api \"repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
         \ > /tmp/runtime-artifact.zip\ntest \"$(sha256sum /tmp/runtime-artifact.zip\
         \ | cut -d' ' -f1)\" = \"e68002161c7c05c7558339816733e56fc953fd8fe1bbf02f99f1f70c4a575072\"\
-        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport stat\nimport\
-        \ zipfile\nfrom pathlib import PurePosixPath\n\ndestination = os.environ[\"\
-        DESTINATION\"]\nroot = os.path.realpath(destination)\nwith zipfile.ZipFile(\"\
-        /tmp/runtime-artifact.zip\") as source:\n    for member in source.infolist():\n\
-        \        path = PurePosixPath(member.filename)\n        if path.is_absolute()\
+        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport posixpath\n\
+        import stat\nimport zipfile\nfrom pathlib import PurePosixPath\n\ndestination\
+        \ = os.environ[\"DESTINATION\"]\nroot = os.path.realpath(destination)\nseen_members\
+        \ = set()\nwith zipfile.ZipFile(\"/tmp/runtime-artifact.zip\") as source:\n\
+        \    for member in source.infolist():\n        canonical_name = posixpath.normpath(member.filename)\n\
+        \        path = PurePosixPath(canonical_name)\n        if path.is_absolute()\
         \ or \"..\" in path.parts or \"\\x00\" in member.filename:\n            raise\
         \ SystemExit(f\"unsafe archive member: {member.filename!r}\")\n        mode\
         \ = (member.external_attr >> 16) & 0o177777\n        if mode and stat.S_IFMT(mode)\
         \ not in (0, stat.S_IFDIR, stat.S_IFREG):\n            raise SystemExit(f\"\
-        unsafe archive link or special member: {member.filename!r}\")\n        target\
-        \ = os.path.realpath(os.path.join(destination, *path.parts))\n        if os.path.commonpath((root,\
-        \ target)) != root:\n            raise SystemExit(f\"archive member escapes\
-        \ destination: {member.filename!r}\")\n        if member.is_dir():\n     \
-        \       os.makedirs(target, exist_ok=True)\n            continue\n       \
-        \ os.makedirs(os.path.dirname(target), exist_ok=True)\n        with source.open(member)\
-        \ as input_file, open(target, \"xb\") as output_file:\n            output_file.write(input_file.read())\n\
-        PY\n"
+        unsafe archive link or special member: {member.filename!r}\")\n        if\
+        \ canonical_name in seen_members:\n            raise SystemExit(f\"duplicate\
+        \ archive member: {member.filename!r}\")\n        seen_members.add(canonical_name)\n\
+        \        target = os.path.realpath(os.path.join(destination, *path.parts))\n\
+        \        if os.path.commonpath((root, target)) != root:\n            raise\
+        \ SystemExit(f\"archive member escapes destination: {member.filename!r}\"\
+        )\n        if member.is_dir():\n            os.makedirs(target, exist_ok=True)\n\
+        \            continue\n        os.makedirs(os.path.dirname(target), exist_ok=True)\n\
+        \        with source.open(member) as input_file, open(target, \"xb\") as output_file:\n\
+        \            output_file.write(input_file.read())\nPY\n"
     - name: Download retained Linux-wheels
       env:
         ARTIFACT_ID: '9202661215'
@@ -297,23 +300,26 @@ jobs:
       run: "set -Eeuo pipefail\nmkdir -p \"$DESTINATION\"\ngh api \"repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
         \ > /tmp/runtime-artifact.zip\ntest \"$(sha256sum /tmp/runtime-artifact.zip\
         \ | cut -d' ' -f1)\" = \"e63ebadb20107adba8a6c76489105339337c1406db96ff328161dda9baf0c34e\"\
-        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport stat\nimport\
-        \ zipfile\nfrom pathlib import PurePosixPath\n\ndestination = os.environ[\"\
-        DESTINATION\"]\nroot = os.path.realpath(destination)\nwith zipfile.ZipFile(\"\
-        /tmp/runtime-artifact.zip\") as source:\n    for member in source.infolist():\n\
-        \        path = PurePosixPath(member.filename)\n        if path.is_absolute()\
+        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport posixpath\n\
+        import stat\nimport zipfile\nfrom pathlib import PurePosixPath\n\ndestination\
+        \ = os.environ[\"DESTINATION\"]\nroot = os.path.realpath(destination)\nseen_members\
+        \ = set()\nwith zipfile.ZipFile(\"/tmp/runtime-artifact.zip\") as source:\n\
+        \    for member in source.infolist():\n        canonical_name = posixpath.normpath(member.filename)\n\
+        \        path = PurePosixPath(canonical_name)\n        if path.is_absolute()\
         \ or \"..\" in path.parts or \"\\x00\" in member.filename:\n            raise\
         \ SystemExit(f\"unsafe archive member: {member.filename!r}\")\n        mode\
         \ = (member.external_attr >> 16) & 0o177777\n        if mode and stat.S_IFMT(mode)\
         \ not in (0, stat.S_IFDIR, stat.S_IFREG):\n            raise SystemExit(f\"\
-        unsafe archive link or special member: {member.filename!r}\")\n        target\
-        \ = os.path.realpath(os.path.join(destination, *path.parts))\n        if os.path.commonpath((root,\
-        \ target)) != root:\n            raise SystemExit(f\"archive member escapes\
-        \ destination: {member.filename!r}\")\n        if member.is_dir():\n     \
-        \       os.makedirs(target, exist_ok=True)\n            continue\n       \
-        \ os.makedirs(os.path.dirname(target), exist_ok=True)\n        with source.open(member)\
-        \ as input_file, open(target, \"xb\") as output_file:\n            output_file.write(input_file.read())\n\
-        PY\n"
+        unsafe archive link or special member: {member.filename!r}\")\n        if\
+        \ canonical_name in seen_members:\n            raise SystemExit(f\"duplicate\
+        \ archive member: {member.filename!r}\")\n        seen_members.add(canonical_name)\n\
+        \        target = os.path.realpath(os.path.join(destination, *path.parts))\n\
+        \        if os.path.commonpath((root, target)) != root:\n            raise\
+        \ SystemExit(f\"archive member escapes destination: {member.filename!r}\"\
+        )\n        if member.is_dir():\n            os.makedirs(target, exist_ok=True)\n\
+        \            continue\n        os.makedirs(os.path.dirname(target), exist_ok=True)\n\
+        \        with source.open(member) as input_file, open(target, \"xb\") as output_file:\n\
+        \            output_file.write(input_file.read())\nPY\n"
     - name: Download retained macOS-wheels
       env:
         ARTIFACT_ID: '9202659672'
@@ -322,23 +328,26 @@ jobs:
       run: "set -Eeuo pipefail\nmkdir -p \"$DESTINATION\"\ngh api \"repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
         \ > /tmp/runtime-artifact.zip\ntest \"$(sha256sum /tmp/runtime-artifact.zip\
         \ | cut -d' ' -f1)\" = \"5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e\"\
-        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport stat\nimport\
-        \ zipfile\nfrom pathlib import PurePosixPath\n\ndestination = os.environ[\"\
-        DESTINATION\"]\nroot = os.path.realpath(destination)\nwith zipfile.ZipFile(\"\
-        /tmp/runtime-artifact.zip\") as source:\n    for member in source.infolist():\n\
-        \        path = PurePosixPath(member.filename)\n        if path.is_absolute()\
+        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport posixpath\n\
+        import stat\nimport zipfile\nfrom pathlib import PurePosixPath\n\ndestination\
+        \ = os.environ[\"DESTINATION\"]\nroot = os.path.realpath(destination)\nseen_members\
+        \ = set()\nwith zipfile.ZipFile(\"/tmp/runtime-artifact.zip\") as source:\n\
+        \    for member in source.infolist():\n        canonical_name = posixpath.normpath(member.filename)\n\
+        \        path = PurePosixPath(canonical_name)\n        if path.is_absolute()\
         \ or \"..\" in path.parts or \"\\x00\" in member.filename:\n            raise\
         \ SystemExit(f\"unsafe archive member: {member.filename!r}\")\n        mode\
         \ = (member.external_attr >> 16) & 0o177777\n        if mode and stat.S_IFMT(mode)\
         \ not in (0, stat.S_IFDIR, stat.S_IFREG):\n            raise SystemExit(f\"\
-        unsafe archive link or special member: {member.filename!r}\")\n        target\
-        \ = os.path.realpath(os.path.join(destination, *path.parts))\n        if os.path.commonpath((root,\
-        \ target)) != root:\n            raise SystemExit(f\"archive member escapes\
-        \ destination: {member.filename!r}\")\n        if member.is_dir():\n     \
-        \       os.makedirs(target, exist_ok=True)\n            continue\n       \
-        \ os.makedirs(os.path.dirname(target), exist_ok=True)\n        with source.open(member)\
-        \ as input_file, open(target, \"xb\") as output_file:\n            output_file.write(input_file.read())\n\
-        PY\n"
+        unsafe archive link or special member: {member.filename!r}\")\n        if\
+        \ canonical_name in seen_members:\n            raise SystemExit(f\"duplicate\
+        \ archive member: {member.filename!r}\")\n        seen_members.add(canonical_name)\n\
+        \        target = os.path.realpath(os.path.join(destination, *path.parts))\n\
+        \        if os.path.commonpath((root, target)) != root:\n            raise\
+        \ SystemExit(f\"archive member escapes destination: {member.filename!r}\"\
+        )\n        if member.is_dir():\n            os.makedirs(target, exist_ok=True)\n\
+        \            continue\n        os.makedirs(os.path.dirname(target), exist_ok=True)\n\
+        \        with source.open(member) as input_file, open(target, \"xb\") as output_file:\n\
+        \            output_file.write(input_file.read())\nPY\n"
     - name: Download retained Windows-wheels
       env:
         ARTIFACT_ID: '9202679653'
@@ -347,23 +356,26 @@ jobs:
       run: "set -Eeuo pipefail\nmkdir -p \"$DESTINATION\"\ngh api \"repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
         \ > /tmp/runtime-artifact.zip\ntest \"$(sha256sum /tmp/runtime-artifact.zip\
         \ | cut -d' ' -f1)\" = \"24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359\"\
-        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport stat\nimport\
-        \ zipfile\nfrom pathlib import PurePosixPath\n\ndestination = os.environ[\"\
-        DESTINATION\"]\nroot = os.path.realpath(destination)\nwith zipfile.ZipFile(\"\
-        /tmp/runtime-artifact.zip\") as source:\n    for member in source.infolist():\n\
-        \        path = PurePosixPath(member.filename)\n        if path.is_absolute()\
+        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport posixpath\n\
+        import stat\nimport zipfile\nfrom pathlib import PurePosixPath\n\ndestination\
+        \ = os.environ[\"DESTINATION\"]\nroot = os.path.realpath(destination)\nseen_members\
+        \ = set()\nwith zipfile.ZipFile(\"/tmp/runtime-artifact.zip\") as source:\n\
+        \    for member in source.infolist():\n        canonical_name = posixpath.normpath(member.filename)\n\
+        \        path = PurePosixPath(canonical_name)\n        if path.is_absolute()\
         \ or \"..\" in path.parts or \"\\x00\" in member.filename:\n            raise\
         \ SystemExit(f\"unsafe archive member: {member.filename!r}\")\n        mode\
         \ = (member.external_attr >> 16) & 0o177777\n        if mode and stat.S_IFMT(mode)\
         \ not in (0, stat.S_IFDIR, stat.S_IFREG):\n            raise SystemExit(f\"\
-        unsafe archive link or special member: {member.filename!r}\")\n        target\
-        \ = os.path.realpath(os.path.join(destination, *path.parts))\n        if os.path.commonpath((root,\
-        \ target)) != root:\n            raise SystemExit(f\"archive member escapes\
-        \ destination: {member.filename!r}\")\n        if member.is_dir():\n     \
-        \       os.makedirs(target, exist_ok=True)\n            continue\n       \
-        \ os.makedirs(os.path.dirname(target), exist_ok=True)\n        with source.open(member)\
-        \ as input_file, open(target, \"xb\") as output_file:\n            output_file.write(input_file.read())\n\
-        PY\n"
+        unsafe archive link or special member: {member.filename!r}\")\n        if\
+        \ canonical_name in seen_members:\n            raise SystemExit(f\"duplicate\
+        \ archive member: {member.filename!r}\")\n        seen_members.add(canonical_name)\n\
+        \        target = os.path.realpath(os.path.join(destination, *path.parts))\n\
+        \        if os.path.commonpath((root, target)) != root:\n            raise\
+        \ SystemExit(f\"archive member escapes destination: {member.filename!r}\"\
+        )\n        if member.is_dir():\n            os.makedirs(target, exist_ok=True)\n\
+        \            continue\n        os.makedirs(os.path.dirname(target), exist_ok=True)\n\
+        \        with source.open(member) as input_file, open(target, \"xb\") as output_file:\n\
+        \            output_file.write(input_file.read())\nPY\n"
     - name: Combine and verify exact Runtime artifacts
       run: uv run --no-project --python 3.12 python recovery-code/action_server/scripts/publish_verified_runtime.py
         --download-root pypi-components --dry-run

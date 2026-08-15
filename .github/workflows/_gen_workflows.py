@@ -1544,20 +1544,26 @@ gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runt
 test "$(sha256sum /tmp/runtime-artifact.zip | cut -d' ' -f1)" = "{digest.split(':', 1)[1]}"
 DESTINATION="$DESTINATION" python - <<'PY'
 import os
+import posixpath
 import stat
 import zipfile
 from pathlib import PurePosixPath
 
 destination = os.environ["DESTINATION"]
 root = os.path.realpath(destination)
+seen_members = set()
 with zipfile.ZipFile("/tmp/runtime-artifact.zip") as source:
     for member in source.infolist():
-        path = PurePosixPath(member.filename)
+        canonical_name = posixpath.normpath(member.filename)
+        path = PurePosixPath(canonical_name)
         if path.is_absolute() or ".." in path.parts or "\\x00" in member.filename:
             raise SystemExit(f"unsafe archive member: {{member.filename!r}}")
         mode = (member.external_attr >> 16) & 0o177777
         if mode and stat.S_IFMT(mode) not in (0, stat.S_IFDIR, stat.S_IFREG):
             raise SystemExit(f"unsafe archive link or special member: {{member.filename!r}}")
+        if canonical_name in seen_members:
+            raise SystemExit(f"duplicate archive member: {{member.filename!r}}")
+        seen_members.add(canonical_name)
         target = os.path.realpath(os.path.join(destination, *path.parts))
         if os.path.commonpath((root, target)) != root:
             raise SystemExit(f"archive member escapes destination: {{member.filename!r}}")

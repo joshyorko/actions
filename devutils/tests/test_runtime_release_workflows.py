@@ -1019,6 +1019,18 @@ def test_recovery_download_hashes_and_safely_extracts_archives():
     assert 'open(target, "xb")' in generator
 
 
+def test_recovery_rejects_duplicate_directory_members_before_creation():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    assert "seen_members = set()" in generator
+    assert "if canonical_name in seen_members:" in generator
+
+
+def test_recovery_rejects_normalized_archive_member_aliases():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    assert "posixpath.normpath(member.filename)" in generator
+    assert "seen_members.add(canonical_name)" in generator
+
+
 def test_recovery_partial_draft_uploads_only_missing_assets_and_rejects_conflicts():
     generator = (WORKFLOWS / "_gen_workflows.py").read_text()
     assert "test \"$(jq -r '.draft'" in generator

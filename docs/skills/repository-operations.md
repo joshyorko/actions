@@ -172,8 +172,10 @@ one final re-fetch proves draft state, the exact three-name inventory, every ass
 digest, and the release target/SHA against the immutable inputs; fresh and resumed
 drafts use that same finalization gate. Retained artifact ZIP bytes are
 hashed against their pinned digests before extraction; archive members are rejected
-when absolute, traversal-based, symlink/hardlink, or otherwise unsafe. API digest
-metadata alone is not artifact proof.
+when absolute, traversal-based, symlink/hardlink, duplicate, normalized-alias, or
+otherwise unsafe. Every member is canonicalized and tracked before directory
+creation or file extraction, so duplicate directory records fail closed like
+duplicate regular files. API digest metadata alone is not artifact proof.
 
 The local verifier also accepts a successful canonical recovery dispatch, but only after
 binding the active recovery workflow's exact database ID/path, successful dispatch
