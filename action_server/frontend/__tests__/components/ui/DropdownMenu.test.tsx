@@ -220,7 +220,7 @@ describe('DropdownMenu', () => {
       await user.click(getByText('Open'));
       const item = getByText('Disabled Item');
 
-      expect(item.getAttribute('data-disabled')).toBeTruthy();
+      expect(item.getAttribute('data-disabled')).toBe('');
       await user.click(item);
       expect(onSelect).not.toHaveBeenCalled();
     });

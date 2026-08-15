@@ -56,7 +56,7 @@ describe('Dialog Animation Tests', () => {
       await findByRole('dialog');
 
       // Find the overlay element
-      const overlay = container.querySelector('[class*="backdrop-blur"]');
+      const overlay = document.body.querySelector('[class*="backdrop-blur"]');
       expect(overlay).toBeTruthy();
 
       const overlayClasses = overlay?.className || '';
@@ -151,8 +151,8 @@ describe('Dialog Animation Tests', () => {
       await userEvent.click(getByText('Open Dialog'));
       await findByRole('dialog');
 
-      const overlay = container.querySelector('[class*="backdrop-blur"]');
-      const dialog = container.querySelector('[role="dialog"]');
+      const overlay = document.body.querySelector('[class*="backdrop-blur"]');
+      const dialog = document.body.querySelector('[role="dialog"]');
 
       // Both should be in open state
       expect(overlay?.getAttribute('data-state')).toBe('open');
@@ -219,7 +219,7 @@ describe('Dialog Animation Tests', () => {
 
       await findByRole('dialog');
 
-      const overlay = container.querySelector('[class*="backdrop-blur"]');
+      const overlay = document.body.querySelector('[class*="backdrop-blur"]');
       const overlayClasses = overlay?.className || '';
 
       expect(overlayClasses).toMatch(/transition-opacity/);
@@ -328,7 +328,7 @@ describe('Dialog Animation Tests', () => {
       );
 
       await waitFor(() => {
-        const overlay = container.querySelector('[class*="backdrop-blur"]');
+        const overlay = document.body.querySelector('[class*="backdrop-blur"]');
         expect(overlay).toBeTruthy();
 
         // Overlay should still have transition classes with motion-reduce support
@@ -404,8 +404,8 @@ describe('Dialog Animation Tests', () => {
       );
 
       await waitFor(() => {
-        const dialog = container.querySelector('[role="dialog"]');
-        const overlay = container.querySelector('[class*="backdrop-blur"]');
+        const dialog = document.body.querySelector('[role="dialog"]');
+        const overlay = document.body.querySelector('[class*="backdrop-blur"]');
 
         expect(dialog).toBeTruthy();
         expect(overlay).toBeTruthy();
@@ -415,7 +415,7 @@ describe('Dialog Animation Tests', () => {
         expect(overlayClasses).toContain('motion-reduce:transition-none');
 
         // Check close button has motion-reduce support
-        const closeButton = Array.from(container.querySelectorAll('button')).find(
+        const closeButton = Array.from(document.body.querySelectorAll('button')).find(
           (btn) => btn.textContent?.includes('×')
         );
         const closeButtonClasses = closeButton?.className || '';
@@ -439,7 +439,7 @@ describe('Dialog Animation Tests', () => {
       );
 
       await waitFor(() => {
-        const dialog = container.querySelector('[role="dialog"]');
+        const dialog = document.body.querySelector('[role="dialog"]');
         const classes = dialog?.className || '';
 
         // Fixed positioning with transforms
@@ -461,8 +461,8 @@ describe('Dialog Animation Tests', () => {
       );
 
       await waitFor(() => {
-        const overlay = container.querySelector('[class*="backdrop-blur"]');
-        const dialog = container.querySelector('[role="dialog"]');
+        const overlay = document.body.querySelector('[class*="backdrop-blur"]');
+        const dialog = document.body.querySelector('[role="dialog"]');
 
         const overlayClasses = overlay?.className || '';
         const dialogClasses = dialog?.className || '';
@@ -489,7 +489,7 @@ describe('Dialog Animation Tests', () => {
       await userEvent.click(getByText('Open Dialog'));
 
       await waitFor(() => {
-        const overlay = container.querySelector('[class*="backdrop-blur"]');
+        const overlay = document.body.querySelector('[class*="backdrop-blur"]');
         const overlayClasses = overlay?.className || '';
 
         expect(overlayClasses).toContain('backdrop-blur-sm');
@@ -497,7 +497,7 @@ describe('Dialog Animation Tests', () => {
       });
 
       // During open state
-      const overlay = container.querySelector('[class*="backdrop-blur"]');
+      const overlay = document.body.querySelector('[class*="backdrop-blur"]');
       expect(overlay?.getAttribute('data-state')).toBe('open');
     });
 
@@ -512,7 +512,7 @@ describe('Dialog Animation Tests', () => {
 
       await waitFor(() => {
         // Find the close button (the × button)
-        const closeButton = Array.from(container.querySelectorAll('button')).find(
+      const closeButton = Array.from(document.body.querySelectorAll('button')).find(
           (btn) => btn.textContent?.includes('×')
         );
 
@@ -535,8 +535,8 @@ describe('Dialog Animation Tests', () => {
       );
 
       await waitFor(() => {
-        const dialog = container.querySelector('[role="dialog"]');
-        const overlay = container.querySelector('[class*="backdrop-blur"]');
+        const dialog = document.body.querySelector('[role="dialog"]');
+        const overlay = document.body.querySelector('[class*="backdrop-blur"]');
 
         const dialogClasses = dialog?.className || '';
         const overlayClasses = overlay?.className || '';
@@ -563,8 +563,8 @@ describe('Dialog Animation Tests', () => {
       );
 
       await waitFor(() => {
-        const dialog = container.querySelector('[role="dialog"]');
-        const overlay = container.querySelector('[class*="backdrop-blur"]');
+        const dialog = document.body.querySelector('[role="dialog"]');
+        const overlay = document.body.querySelector('[class*="backdrop-blur"]');
 
         const dialogClasses = dialog?.className || '';
         const overlayClasses = overlay?.className || '';
