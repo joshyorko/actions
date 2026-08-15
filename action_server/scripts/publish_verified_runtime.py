@@ -284,24 +284,11 @@ def validate_recovery_run(
         raise RuntimeError("the selected recovery run did not succeed")
     if metadata.get("artifactExpired"):
         raise RuntimeError("the Runtime recovery artifact is expired")
-    inputs = metadata.get("inputs")
-    if (
-        not isinstance(inputs, dict)
-        or "release_ref" not in inputs
-        or "release_sha" not in inputs
-        or not isinstance(inputs["release_ref"], str)
-        or not isinstance(inputs["release_sha"], str)
-        or inputs["release_ref"] != ref
-        or inputs["release_sha"] != sha
-        or not re.fullmatch(r"[0-9a-f]{40}", inputs["release_sha"])
-    ):
-        raise RuntimeError("the recovery inputs do not match --ref and --sha")
     display_title = metadata.get("displayTitle")
-    if (
-        display_title is not None
-        and display_title != f"Runtime recovery: {ref} @ {sha}"
+    if not isinstance(display_title, str) or display_title != (
+        f"Runtime recovery: {ref} @ {sha}"
     ):
-        raise RuntimeError("the recovery run title does not match its inputs")
+        raise RuntimeError("the recovery run title does not match --ref and --sha")
 
 
 def workflow_database_id(

@@ -895,7 +895,7 @@ def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
     assert unsigned["if"] == "${{ steps.signing.outputs.signed != 'true' }}"
 
 
-def test_runtime_publisher_validates_recovery_identity_and_inputs():
+def test_runtime_publisher_validates_recovery_identity_and_display_title():
     publisher = load_publisher()
     release_sha = "4" * 40
     recovery_sha = "f" * 40
@@ -907,7 +907,6 @@ def test_runtime_publisher_validates_recovery_identity_and_inputs():
         "event": "workflow_dispatch",
         "conclusion": "success",
         "artifactExpired": False,
-        "inputs": {"release_ref": "actions-runtime-1.0.0", "release_sha": release_sha},
         "displayTitle": f"Runtime recovery: actions-runtime-1.0.0 @ {release_sha}",
     }
     publisher.validate_recovery_run(
@@ -916,22 +915,11 @@ def test_runtime_publisher_validates_recovery_identity_and_inputs():
         ref="actions-runtime-1.0.0",
         workflow_id=444444444,
     )
-    with pytest.raises(RuntimeError, match="inputs"):
-        publisher.validate_recovery_run(
-            metadata | {"inputs": None},
-            sha=release_sha,
-            ref="actions-runtime-1.0.0",
-            workflow_id=444444444,
-        )
     for field, value in (
         ("headBranch", "factory/other"),
         ("event", "push"),
         ("conclusion", "failure"),
         ("displayTitle", "Runtime recovery: actions-runtime-1.0.0 @ wrong"),
-        (
-            "inputs",
-            {"release_ref": "actions-runtime-1.0.0", "release_sha": "0" * 40},
-        ),
     ):
         with pytest.raises(RuntimeError):
             publisher.validate_recovery_run(
@@ -943,28 +931,30 @@ def test_runtime_publisher_validates_recovery_identity_and_inputs():
 
 
 @pytest.mark.parametrize(
-    "inputs",
+    "display_title",
     [
-        None,
-        [],
-        {"release_ref": "actions-runtime-1.0.0", "release_sha": "4" * 39},
-        {"release_ref": "ACTIONS-RUNTIME-1.0.0", "release_sha": "4" * 40},
+        pytest.param("missing", id="missing"),
+        pytest.param(None, id="null"),
+        pytest.param(123, id="non-string"),
+        pytest.param("Runtime recovery: actions-runtime-1.0.0 @ wrong", id="mismatch"),
     ],
 )
-def test_recovery_run_requires_exact_dispatch_inputs(inputs):
+def test_recovery_run_requires_exact_supported_display_title(display_title):
     publisher = load_publisher()
-    with pytest.raises(RuntimeError, match="inputs"):
+    metadata = {
+        "headSha": "f" * 40,
+        "headBranch": "community",
+        "workflowName": "Action Server Runtime Recovery",
+        "workflowDatabaseId": 444444444,
+        "event": "workflow_dispatch",
+        "conclusion": "success",
+        "artifactExpired": False,
+    }
+    if display_title != "missing":
+        metadata["displayTitle"] = display_title
+    with pytest.raises(RuntimeError, match="title"):
         publisher.validate_recovery_run(
-            {
-                "headSha": "f" * 40,
-                "headBranch": "community",
-                "workflowName": "Action Server Runtime Recovery",
-                "workflowDatabaseId": 444444444,
-                "event": "workflow_dispatch",
-                "conclusion": "success",
-                "artifactExpired": False,
-                "inputs": inputs,
-            },
+            metadata,
             sha="4" * 40,
             ref="actions-runtime-1.0.0",
             workflow_id=444444444,
@@ -1112,10 +1102,6 @@ def test_runtime_publisher_accepts_successful_recovery_without_rebuilding(
                     "workflowDatabaseId": 444444444,
                     "event": "workflow_dispatch",
                     "conclusion": "success",
-                    "inputs": {
-                        "release_ref": "actions-runtime-1.0.0",
-                        "release_sha": release_sha,
-                    },
                     "displayTitle": f"Runtime recovery: actions-runtime-1.0.0 @ {release_sha}",
                 }
             )
@@ -1169,7 +1155,7 @@ def test_runtime_publisher_accepts_successful_recovery_without_rebuilding(
     )
 
 
-def test_runtime_publisher_rejects_recovery_input_mismatch_before_download(monkeypatch):
+def test_runtime_publisher_rejects_recovery_title_mismatch_before_download(monkeypatch):
     publisher = load_publisher()
     release_sha = "4" * 40
     recovery_sha = "f" * 40
@@ -1190,10 +1176,7 @@ def test_runtime_publisher_rejects_recovery_input_mismatch_before_download(monke
                     "workflowDatabaseId": 444444444,
                     "event": "workflow_dispatch",
                     "conclusion": "success",
-                    "inputs": {
-                        "release_ref": "actions-runtime-1.0.0",
-                        "release_sha": "0" * 40,
-                    },
+                    "displayTitle": "Runtime recovery: actions-runtime-1.0.0 @ wrong",
                 }
             )
         elif command == [
@@ -1231,6 +1214,6 @@ def test_runtime_publisher_rejects_recovery_input_mismatch_before_download(monke
             "--dry-run",
         ],
     )
-    with pytest.raises(RuntimeError, match="inputs"):
+    with pytest.raises(RuntimeError, match="title"):
         publisher.main()
     assert all(command[1:3] != ["run", "download"] for command in calls)

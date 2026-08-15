@@ -187,10 +187,11 @@ creation or file extraction, so duplicate directory records fail closed like
 duplicate regular files. API digest metadata alone is not artifact proof.
 
 The local verifier also accepts a successful canonical recovery dispatch, but only after
-binding the active recovery workflow's exact database ID/path, successful dispatch
-conclusion, immutable release inputs when exposed by run metadata, and one non-expired
-`actions-runtime-dist`; failed canonical tag runs and arbitrary display names remain
-ineligible.
+binding the active recovery workflow's exact database ID/path, supported run metadata,
+manual-dispatch conclusion, immutable head SHA/community branch, exact
+`displayTitle` (`Runtime recovery: <ref> @ <sha>`), and one non-expired
+`actions-runtime-dist`; failed canonical tag runs, missing or non-string titles, and
+arbitrary display names remain ineligible.
 
 The publish job installs repository-root devutils requirements with an explicit
 `action_server` working directory, then runs the local verifier in dry-run mode
