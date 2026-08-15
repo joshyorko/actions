@@ -246,7 +246,7 @@ jobs:
 
         cd action_server
 
-        package_version=$(poetry version --short)
+        package_version=$(uv run --no-project --python 3.12 poetry version --short)
 
         if [[ "$tag_version" != "$package_version" ]]; then printf ''tag version %s
         does not match package version %s\n'' "$tag_version" "$package_version" >&2;

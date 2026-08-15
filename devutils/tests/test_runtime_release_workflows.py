@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import os
 import re
 import subprocess
 import sys
@@ -11,10 +12,35 @@ import yaml
 ROOT = Path(__file__).parents[2]
 WORKFLOWS = ROOT / ".github" / "workflows"
 PUBLISHER = ROOT / "action_server" / "scripts" / "publish_verified_runtime.py"
+BASELINE_REF = os.environ.get("RUNTIME_RELEASE_TEST_BASELINE")
+
+
+def repository_text(relative_path):
+    if BASELINE_REF:
+        try:
+            return subprocess.run(
+                ["git", "show", f"{BASELINE_REF}:{relative_path}"],
+                check=True,
+                capture_output=True,
+                text=True,
+                cwd=ROOT,
+            ).stdout
+        except subprocess.CalledProcessError:
+            return ""
+    return (ROOT / relative_path).read_text()
 
 
 def load_publisher():
     spec = importlib.util.spec_from_file_location("publish_verified_runtime", PUBLISHER)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_workflow_generator():
+    path = WORKFLOWS / "_gen_workflows.py"
+    spec = importlib.util.spec_from_file_location("workflow_generator", path)
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -36,6 +62,11 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert "git fetch origin community:refs/remotes/origin/community" in pypi
     assert 'git merge-base --is-ancestor "$GITHUB_SHA" origin/community' in pypi
     assert "poetry version --short" in pypi
+    assert (
+        "package_version=$(uv run --no-project --python 3.12 poetry version --short)"
+        in pypi
+    )
+    assert "package_version=$(poetry version --short)" not in pypi
     assert "python -m pip check" in pypi
     assert "python -m actions.server version" in pypi
     assert "actions/upload-artifact@" in pypi
@@ -734,3 +765,455 @@ def test_binary_release_uses_explicit_tag_asset_names():
     assert "asset_name: ${{ github.ref_name }}-linux64" in binary
     assert "asset_name: ${{ github.ref_name }}-macos-arm64" in binary
     assert "asset_name: ${{ github.ref_name }}-windows64.exe" in binary
+
+
+def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
+    generator = repository_text(".github/workflows/_gen_workflows.py")
+    recovery_text = repository_text(".github/workflows/actions_runtime_recovery.yml")
+    assert "class ActionServerRuntimeRecovery" in generator
+    workflow = yaml.safe_load(recovery_text)
+    assert workflow
+
+    dispatch = workflow["on"]["workflow_dispatch"]
+    inputs = dispatch["inputs"]
+    assert inputs["release_ref"] == {
+        "description": "Immutable actions-runtime release tag",
+        "required": True,
+        "type": "string",
+    }
+    assert inputs["release_sha"] == {
+        "description": "Full 40-hex commit resolved by the release tag",
+        "required": True,
+        "type": "string",
+    }
+    assert inputs["pypi_source_run_id"]["default"] == "31755673247"
+    assert inputs["pypi_source_workflow_id"]["default"] == "333870965"
+
+    jobs = workflow["jobs"]
+    assert set(jobs) == {"validate", "pypi-recovery", "binary-build", "binary-release"}
+    for job_name in jobs:
+        steps = jobs[job_name]["steps"]
+        step_names = [step.get("name") for step in steps]
+        assert {
+            step.get("with", {}).get("ref")
+            for step in steps
+            if step.get("name") == "Checkout merged recovery code"
+        } == {"${{ github.workflow_sha }}"}
+        assert {
+            step.get("with", {}).get("ref")
+            for step in steps
+            if step.get("name") == "Checkout immutable release source"
+        } == {"${{ inputs.release_sha }}"}
+        assert step_names.index(
+            "Verify immutable tag, ancestry, and package version"
+        ) < step_names.index("Install devutils requirements")
+
+    source_guard = next(
+        step["run"]
+        for step in jobs["validate"]["steps"]
+        if step.get("name") == "Verify immutable tag, ancestry, and package version"
+    )
+    assert "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF" in source_guard
+    assert "refs/heads/community:refs/remotes/origin/community" in source_guard
+    assert 'rev-parse "refs/tags/$RELEASE_REF^{commit}"' in source_guard
+    assert (
+        'merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community'
+        in source_guard
+    )
+    version_guard = next(
+        step["run"]
+        for step in jobs["validate"]["steps"]
+        if step.get("name") == "Verify immutable Runtime source version"
+    )
+    assert "package_version=$(uv run --no-project --python 3.12 poetry version --short)" in version_guard
+
+    retained_names = [
+        step["name"].removeprefix("Download retained ")
+        for step in jobs["pypi-recovery"]["steps"]
+        if step.get("name", "").startswith("Download retained")
+    ]
+    assert retained_names == [
+        "action-server-dist",
+        "Linux-wheels",
+        "macOS-wheels",
+        "Windows-wheels",
+    ]
+    assert any(
+        step.get("with", {}).get("name") == "actions-runtime-dist"
+        for step in jobs["pypi-recovery"]["steps"]
+    )
+    assert "PYPI_TOKEN" not in "\n".join(
+        str(step) for step in jobs["pypi-recovery"]["steps"]
+    )
+    assert "twine upload" not in recovery_text
+
+    binary_artifact_names = [
+        step["with"]["name"]
+        for step in jobs["binary-build"]["steps"]
+        if step.get("name")
+        == "Upload artifact: release-source/action_server/dist/final/*"
+    ]
+    assert binary_artifact_names == ["actions-runtime-binary-${{ matrix.name }}"]
+    assert {
+        step["with"]["name"]
+        for step in jobs["binary-release"]["steps"]
+        if step.get("name", "").startswith("Download immutable")
+    } == {
+        "actions-runtime-binary-linux",
+        "actions-runtime-binary-macos",
+        "actions-runtime-binary-windows",
+    }
+    assert "${RELEASE_REF}-linux64" in recovery_text
+    assert "${RELEASE_REF}-macos-arm64" in recovery_text
+    assert "${RELEASE_REF}-windows64.exe" in recovery_text
+    assert "gh release" in recovery_text
+
+    signing_check = next(
+        step
+        for step in jobs["binary-build"]["steps"]
+        if step.get("name") == "Check signing availability"
+    )
+    signed = next(
+        step
+        for step in jobs["binary-build"]["steps"]
+        if step.get("name") == "Build binary (signed)"
+    )
+    unsigned = next(
+        step
+        for step in jobs["binary-build"]["steps"]
+        if step.get("name") == "Build binary (unsigned)"
+    )
+    assert signing_check["shell"] == "bash"
+    assert set(signing_check["env"]) == {
+        "SIGNING_EVENT",
+        "SIGNING_OS",
+        "MACOS_SIGNING_CERT",
+        "VAULT_URL",
+    }
+    assert "[ -n" not in signed["run"] + unsigned["run"]
+    assert signed["if"] == "${{ steps.signing.outputs.signed == 'true' }}"
+    assert unsigned["if"] == "${{ steps.signing.outputs.signed != 'true' }}"
+
+
+def test_runtime_publisher_validates_recovery_identity_and_display_title():
+    publisher = load_publisher()
+    release_sha = "4" * 40
+    recovery_sha = "f" * 40
+    metadata = {
+        "headSha": recovery_sha,
+        "headBranch": "community",
+        "workflowName": "Action Server Runtime Recovery",
+        "workflowDatabaseId": 444444444,
+        "event": "workflow_dispatch",
+        "conclusion": "success",
+        "artifactExpired": False,
+        "displayTitle": f"Runtime recovery: actions-runtime-1.0.0 @ {release_sha}",
+    }
+    publisher.validate_recovery_run(
+        metadata,
+        sha=release_sha,
+        ref="actions-runtime-1.0.0",
+        workflow_id=444444444,
+    )
+    for field, value in (
+        ("headBranch", "factory/other"),
+        ("event", "push"),
+        ("conclusion", "failure"),
+        ("displayTitle", "Runtime recovery: actions-runtime-1.0.0 @ wrong"),
+    ):
+        with pytest.raises(RuntimeError):
+            publisher.validate_recovery_run(
+                metadata | {field: value},
+                sha=release_sha,
+                ref="actions-runtime-1.0.0",
+                workflow_id=444444444,
+            )
+
+
+@pytest.mark.parametrize(
+    "display_title",
+    [
+        pytest.param("missing", id="missing"),
+        pytest.param(None, id="null"),
+        pytest.param(123, id="non-string"),
+        pytest.param("Runtime recovery: actions-runtime-1.0.0 @ wrong", id="mismatch"),
+    ],
+)
+def test_recovery_run_requires_exact_supported_display_title(display_title):
+    publisher = load_publisher()
+    metadata = {
+        "headSha": "f" * 40,
+        "headBranch": "community",
+        "workflowName": "Action Server Runtime Recovery",
+        "workflowDatabaseId": 444444444,
+        "event": "workflow_dispatch",
+        "conclusion": "success",
+        "artifactExpired": False,
+    }
+    if display_title != "missing":
+        metadata["displayTitle"] = display_title
+    with pytest.raises(RuntimeError, match="title"):
+        publisher.validate_recovery_run(
+            metadata,
+            sha="4" * 40,
+            ref="actions-runtime-1.0.0",
+            workflow_id=444444444,
+        )
+
+
+def test_recovery_workflow_admits_only_merged_community_workflow_code():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
+    for text in (generator, recovery):
+        assert "github.workflow_ref" in text
+        assert "refs/heads/community" in text
+        assert "github.workflow_sha" in text
+        assert "refs/remotes/origin/community" in text
+    assert (
+        "joshyorko/actions/.github/workflows/actions_runtime_recovery.yml@refs/heads/community"
+        in generator
+    )
+
+
+def test_recovery_reuses_pinned_artifact_ids_and_digests_without_clobber():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
+    for text in (generator, recovery):
+        assert "31755673247" in text
+        assert "run_attempt" in text
+        assert "artifact_id" in text or "ARTIFACT_ID" in text or "artifact-id" in text
+        assert "sha256" in text
+    assert "run-id: ${{ inputs.pypi_source_run_id }}" not in recovery
+    assert "actions/artifacts/$ARTIFACT_ID/zip" in recovery
+    assert "--clobber" not in generator
+    assert "--clobber" not in recovery
+
+
+def test_recovery_generator_and_generated_digest_are_identical():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
+    digest = "sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e"
+    stale = "sha256:5bba95082475ec108a6c764891a7a905ac135fd3fc58246be0f0244b53e281e"
+    assert digest in generator and digest in recovery
+    assert stale not in generator and stale not in recovery
+
+
+def test_recovery_download_hashes_and_safely_extracts_archives():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    assert "sha256sum /tmp/runtime-artifact.zip" in generator
+    assert "zipfile.ZipFile" in generator
+    assert "PurePosixPath" in generator
+    assert "path.is_absolute()" in generator
+    assert '".." in path.parts' in generator
+    assert "stat.S_IFMT" in generator
+    assert 'open(target, "xb")' in generator
+
+
+def test_recovery_rejects_duplicate_directory_members_before_creation():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    assert "seen_members = set()" in generator
+    assert "if canonical_name in seen_members:" in generator
+
+
+def test_recovery_rejects_normalized_archive_member_aliases():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    assert "posixpath.normpath(member.filename)" in generator
+    assert "seen_members.add(canonical_name)" in generator
+
+
+def test_recovery_partial_draft_uploads_only_missing_assets_and_rejects_conflicts():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    assert "test \"$(jq -r '.draft'" in generator
+    assert 'gh release upload "$RELEASE_REF" "release-assets/$name"' in generator
+    assert 'test "$existing_digest" = "sha256:$digest"' in generator
+    assert "actual_names=$(jq -r" in generator
+    assert 'gh release upload "$RELEASE_REF" release-assets/*' in generator
+
+
+def test_recovery_fresh_draft_uses_the_same_final_manifest_gate_before_publish():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    publish = generator[generator.index('name": "Create or update the complete GitHub release') :]
+    fresh_branch = publish[publish.rindex("\nelse\n") : publish.index("\nfi\n", publish.rindex("\nelse\n"))]
+    final_edit = publish.index('gh release edit "$RELEASE_REF" --draft=false')
+    finalization = publish[:final_edit]
+    assert finalization.rfind('release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")') > finalization.rfind("fi")
+    assert 'test "$(jq -r \'.target_commitish\' <<<"$release_json")" = "$RELEASE_SHA"' in finalization
+    assert 'test "$(jq -r \'.draft\' <<<"$release_json")" = "true"' in finalization
+    assert 'test "$actual_names" = "$expected_names"' in finalization
+    assert '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' in finalization
+    assert 'gh release upload "$RELEASE_REF" release-assets/*' in fresh_branch
+    assert 'gh release edit "$RELEASE_REF" --draft=false' not in fresh_branch
+    assert publish.count('gh release edit "$RELEASE_REF" --draft=false') == 1
+
+
+def test_generated_recovery_is_rendered_and_byte_identical_to_generator(tmp_path):
+    generator = load_workflow_generator()
+    workflow = generator.ActionServerRuntimeRecovery()
+    original_dir = generator.CURDIR
+    try:
+        with pytest.MonkeyPatch.context() as patch:
+            patch.setattr(generator, "CURDIR", tmp_path)
+            workflow.generate()
+            rendered = (tmp_path / "actions_runtime_recovery.yml").read_bytes()
+    finally:
+        generator.CURDIR = original_dir
+    assert rendered == (WORKFLOWS / "actions_runtime_recovery.yml").read_bytes()
+    assert not rendered.endswith(b"\n\n")
+
+
+def test_generated_recovery_has_no_trailing_blank_line():
+    assert not (WORKFLOWS / "actions_runtime_recovery.yml").read_bytes().endswith(b"\n\n")
+
+
+def test_generated_recovery_run_blocks_are_bash_syntax_valid():
+    workflow = yaml.safe_load((WORKFLOWS / "actions_runtime_recovery.yml").read_text())
+    blocks = []
+    for job in workflow["jobs"].values():
+        blocks.extend(step["run"] for step in job["steps"] if "run" in step)
+    assert blocks
+    for block in blocks:
+        normalized = re.sub(r"\$\{\{.*?\}\}", "placeholder", block)
+        result = subprocess.run(
+            ["bash", "-n"], input=normalized, text=True, capture_output=True
+        )
+        assert result.returncode == 0, result.stderr
+
+
+def test_runtime_publisher_accepts_successful_recovery_without_rebuilding(
+    monkeypatch, tmp_path
+):
+    publisher = load_publisher()
+    release_sha = "4" * 40
+    recovery_sha = "f" * 40
+    calls = []
+
+    class Result:
+        stdout = ""
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        result = Result()
+        if command[:3] == ["gh", "run", "view"]:
+            result.stdout = json.dumps(
+                {
+                    "headSha": recovery_sha,
+                    "headBranch": "community",
+                    "workflowName": "Action Server Runtime Recovery",
+                    "workflowDatabaseId": 444444444,
+                    "event": "workflow_dispatch",
+                    "conclusion": "success",
+                    "displayTitle": f"Runtime recovery: actions-runtime-1.0.0 @ {release_sha}",
+                }
+            )
+        elif command == [
+            "gh",
+            "api",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_pypi_release.yml",
+            "--jq",
+            "{id,path,state}",
+        ]:
+            result.stdout = '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}'
+        elif command == [
+            "gh",
+            "api",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_recovery.yml",
+            "--jq",
+            "{id,path,state}",
+        ]:
+            result.stdout = '{"id":444444444,"path":".github/workflows/actions_runtime_recovery.yml","state":"active"}'
+        elif command[1:3] == [
+            "api",
+            "repos/joshyorko/actions/actions/runs/123/artifacts",
+        ]:
+            result.stdout = '{"artifactExpired":false}'
+        elif command[1:3] == ["run", "download"]:
+            tmp_path.mkdir(exist_ok=True)
+        return result
+
+    monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(publisher, "verify_artifacts", lambda directory: ["artifact"])
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_verified_runtime.py",
+            "--run-id",
+            "123",
+            "--repo",
+            "joshyorko/actions",
+            "--ref",
+            "actions-runtime-1.0.0",
+            "--sha",
+            release_sha,
+            "--dry-run",
+        ],
+    )
+    assert publisher.main() == 0
+    assert any(command[1:3] == ["run", "download"] for command in calls)
+    assert not any(
+        "poetry" in part or "build" in part for command in calls for part in command
+    )
+
+
+def test_runtime_publisher_rejects_recovery_title_mismatch_before_download(monkeypatch):
+    publisher = load_publisher()
+    release_sha = "4" * 40
+    recovery_sha = "f" * 40
+    calls = []
+
+    class Result:
+        stdout = ""
+
+    def fake_run(command, **kwargs):
+        calls.append(command)
+        result = Result()
+        if command[:3] == ["gh", "run", "view"]:
+            result.stdout = json.dumps(
+                {
+                    "headSha": recovery_sha,
+                    "headBranch": "community",
+                    "workflowName": "Action Server Runtime Recovery",
+                    "workflowDatabaseId": 444444444,
+                    "event": "workflow_dispatch",
+                    "conclusion": "success",
+                    "displayTitle": "Runtime recovery: actions-runtime-1.0.0 @ wrong",
+                }
+            )
+        elif command == [
+            "gh",
+            "api",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_pypi_release.yml",
+            "--jq",
+            "{id,path,state}",
+        ]:
+            result.stdout = '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}'
+        elif command == [
+            "gh",
+            "api",
+            "repos/joshyorko/actions/actions/workflows/actions_runtime_recovery.yml",
+            "--jq",
+            "{id,path,state}",
+        ]:
+            result.stdout = '{"id":444444444,"path":".github/workflows/actions_runtime_recovery.yml","state":"active"}'
+        return result
+
+    monkeypatch.setattr(publisher.subprocess, "run", fake_run)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "publish_verified_runtime.py",
+            "--run-id",
+            "123",
+            "--repo",
+            "joshyorko/actions",
+            "--ref",
+            "actions-runtime-1.0.0",
+            "--sha",
+            release_sha,
+            "--dry-run",
+        ],
+    )
+    with pytest.raises(RuntimeError, match="title"):
+        publisher.main()
+    assert all(command[1:3] != ["run", "download"] for command in calls)
