@@ -84,16 +84,6 @@ jobs:
         path: release-source
         fetch-depth: 0
         persist-credentials: false
-    - name: Install the latest version of uv
-      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
-      with:
-        enable-cache: true
-    - name: Install Python 3.12
-      run: uv python install 3.12
-    - name: Install devutils requirements
-      run: uv run --no-project --python 3.12  python -m pip install --break-system-packages
-        -r ../devutils/requirements.txt
-      working-directory: release-source/action_server
     - name: Verify immutable tag, ancestry, and package version
       working-directory: .
       env:
@@ -115,9 +105,24 @@ jobs:
 
         git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
 
-        tag_version="${RELEASE_REF#actions-runtime-}"
+        '
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
+      with:
+        enable-cache: true
+    - name: Install Python 3.12
+      run: uv python install 3.12
+    - name: Install devutils requirements
+      run: uv run --no-project --python 3.12  python -m pip install --break-system-packages
+        -r ../devutils/requirements.txt
+      working-directory: release-source/action_server
+    - name: Verify immutable Runtime source version
+      env:
+        RELEASE_REF: ${{ inputs.release_ref }}
+      working-directory: release-source/action_server
+      run: 'set -Eeuo pipefail
 
-        cd release-source/action_server
+        tag_version="${RELEASE_REF#actions-runtime-}"
 
         package_version=$(uv run --no-project --python 3.12 poetry version --short)
 
@@ -170,16 +175,6 @@ jobs:
         path: release-source
         fetch-depth: 0
         persist-credentials: false
-    - name: Install the latest version of uv
-      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
-      with:
-        enable-cache: true
-    - name: Install Python 3.12
-      run: uv python install 3.12
-    - name: Install devutils requirements
-      run: uv run --no-project --python 3.12  python -m pip install --break-system-packages
-        -r ../devutils/requirements.txt
-      working-directory: release-source/action_server
     - name: Verify immutable tag, ancestry, and package version
       working-directory: .
       env:
@@ -201,9 +196,24 @@ jobs:
 
         git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
 
-        tag_version="${RELEASE_REF#actions-runtime-}"
+        '
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
+      with:
+        enable-cache: true
+    - name: Install Python 3.12
+      run: uv python install 3.12
+    - name: Install devutils requirements
+      run: uv run --no-project --python 3.12  python -m pip install --break-system-packages
+        -r ../devutils/requirements.txt
+      working-directory: release-source/action_server
+    - name: Verify immutable Runtime source version
+      env:
+        RELEASE_REF: ${{ inputs.release_ref }}
+      working-directory: release-source/action_server
+      run: 'set -Eeuo pipefail
 
-        cd release-source/action_server
+        tag_version="${RELEASE_REF#actions-runtime-}"
 
         package_version=$(uv run --no-project --python 3.12 poetry version --short)
 
@@ -445,16 +455,6 @@ jobs:
         path: release-source
         fetch-depth: 0
         persist-credentials: false
-    - name: Install the latest version of uv
-      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
-      with:
-        enable-cache: true
-    - name: Install Python 3.12
-      run: uv python install 3.12
-    - name: Install devutils requirements
-      run: uv run --no-project --python 3.12  python -m pip install --break-system-packages
-        -r ../devutils/requirements.txt
-      working-directory: release-source/action_server
     - name: Verify immutable tag, ancestry, and package version
       working-directory: .
       env:
@@ -476,9 +476,24 @@ jobs:
 
         git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
 
-        tag_version="${RELEASE_REF#actions-runtime-}"
+        '
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
+      with:
+        enable-cache: true
+    - name: Install Python 3.12
+      run: uv python install 3.12
+    - name: Install devutils requirements
+      run: uv run --no-project --python 3.12  python -m pip install --break-system-packages
+        -r ../devutils/requirements.txt
+      working-directory: release-source/action_server
+    - name: Verify immutable Runtime source version
+      env:
+        RELEASE_REF: ${{ inputs.release_ref }}
+      working-directory: release-source/action_server
+      run: 'set -Eeuo pipefail
 
-        cd release-source/action_server
+        tag_version="${RELEASE_REF#actions-runtime-}"
 
         package_version=$(uv run --no-project --python 3.12 poetry version --short)
 
@@ -626,16 +641,6 @@ jobs:
         path: release-source
         fetch-depth: 0
         persist-credentials: false
-    - name: Install the latest version of uv
-      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
-      with:
-        enable-cache: true
-    - name: Install Python 3.12
-      run: uv python install 3.12
-    - name: Install devutils requirements
-      run: uv run --no-project --python 3.12  python -m pip install --break-system-packages
-        -r ../devutils/requirements.txt
-      working-directory: release-source/action_server
     - name: Verify immutable tag, ancestry, and package version
       working-directory: .
       env:
@@ -657,9 +662,24 @@ jobs:
 
         git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
 
-        tag_version="${RELEASE_REF#actions-runtime-}"
+        '
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
+      with:
+        enable-cache: true
+    - name: Install Python 3.12
+      run: uv python install 3.12
+    - name: Install devutils requirements
+      run: uv run --no-project --python 3.12  python -m pip install --break-system-packages
+        -r ../devutils/requirements.txt
+      working-directory: release-source/action_server
+    - name: Verify immutable Runtime source version
+      env:
+        RELEASE_REF: ${{ inputs.release_ref }}
+      working-directory: release-source/action_server
+      run: 'set -Eeuo pipefail
 
-        cd release-source/action_server
+        tag_version="${RELEASE_REF#actions-runtime-}"
 
         package_version=$(uv run --no-project --python 3.12 poetry version --short)
 
@@ -726,33 +746,31 @@ jobs:
         RELEASE_SHA: ${{ inputs.release_sha }}
         GH_TOKEN: ${{ github.token }}
       run: "set -Eeuo pipefail\nmanifest=$(mktemp)\nsha256sum release-assets/* | sed\
-        \ 's#release-assets/##' | sort > \"$manifest\"\nrelease_json=\"\"\nif release_json=$(gh\
-        \ api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"); then\n  test\
-        \ \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\n  test\
-        \ \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
-        \n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\n  expected=$(jq\
-        \ -Rn '[inputs | split(\"  \") | {name:.[1],digest:(\"sha256:\" + .[0])}]'\
-        \ < \"$manifest\")\n  jq -e --argjson expected \"$expected\" '([.assets[].name]\
-        \ - [$expected[].name] | length == 0) and ([.assets[].name] | unique | length\
-        \ == length)' <<<\"$release_json\"\n  while read -r digest name; do\n    existing_digest=$(jq\
-        \ -r --arg name \"$name\" '.assets[] | select(.name == $name) | .digest' <<<\"\
-        $release_json\")\n    if [ \"$existing_digest\" = \"null\" ]; then\n     \
-        \ gh release upload \"$RELEASE_REF\" \"release-assets/$name\"\n    else\n\
-        \      test \"$existing_digest\" = \"sha256:$digest\"\n    fi\n  done < \"\
-        $manifest\"\n  release_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
-        )\n  expected_names=$(awk '{print $2}' \"$manifest\" | sort)\n  actual_names=$(jq\
-        \ -r '.assets[].name' <<<\"$release_json\" | sort)\n  test \"$actual_names\"\
-        \ = \"$expected_names\"\n  jq -e --argjson expected \"$expected\" '([.assets[]\
-        \ | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' <<<\"\
-        $release_json\"\n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\
-        \nelse\n  gh release create \"$RELEASE_REF\" --draft --verify-tag --target\
-        \ \"$RELEASE_SHA\" --title \"$RELEASE_REF\" --notes \"Runtime binaries recovered\
-        \ from immutable $RELEASE_REF at $RELEASE_SHA.\"\n  gh release upload \"$RELEASE_REF\"\
-        \ release-assets/*\n  release_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
-        )\n  test \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\
+        \ 's#release-assets/##' | sort > \"$manifest\"\nexpected=$(jq -Rn '[inputs\
+        \ | split(\"  \") | {name:.[1],digest:(\"sha256:\" + .[0])}]' < \"$manifest\"\
+        )\nrelease_json=\"\"\nif release_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
+        ); then\n  test \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\
         \n  test \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
-        \n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\n  gh release\
-        \ edit \"$RELEASE_REF\" --draft=false\nfi\n"
+        \n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\n  jq -e --argjson\
+        \ expected \"$expected\" '([.assets[].name] - [$expected[].name] | length\
+        \ == 0) and ([.assets[].name] | unique | length == length)' <<<\"$release_json\"\
+        \n  while read -r digest name; do\n    existing_digest=$(jq -r --arg name\
+        \ \"$name\" '.assets[] | select(.name == $name) | .digest' <<<\"$release_json\"\
+        )\n    if [ \"$existing_digest\" = \"null\" ]; then\n      gh release upload\
+        \ \"$RELEASE_REF\" \"release-assets/$name\"\n    else\n      test \"$existing_digest\"\
+        \ = \"sha256:$digest\"\n    fi\n  done < \"$manifest\"\nelse\n  gh release\
+        \ create \"$RELEASE_REF\" --draft --verify-tag --target \"$RELEASE_SHA\" --title\
+        \ \"$RELEASE_REF\" --notes \"Runtime binaries recovered from immutable $RELEASE_REF\
+        \ at $RELEASE_SHA.\"\n  gh release upload \"$RELEASE_REF\" release-assets/*\n\
+        fi\nrelease_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
+        )\ntest \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\n\
+        test \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
+        \ntest \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\nexpected_names=$(awk\
+        \ '{print $2}' \"$manifest\" | sort)\nactual_names=$(jq -r '.assets[].name'\
+        \ <<<\"$release_json\" | sort)\ntest \"$actual_names\" = \"$expected_names\"\
+        \njq -e --argjson expected \"$expected\" '([.assets[] | {name,digest}] | sort_by(.name))\
+        \ == ($expected | sort_by(.name))' <<<\"$release_json\"\ngh release edit \"\
+        $RELEASE_REF\" --draft=false\n"
 run-name: 'Runtime recovery: ${{ inputs.release_ref }} @ ${{ inputs.release_sha }}'
 
 

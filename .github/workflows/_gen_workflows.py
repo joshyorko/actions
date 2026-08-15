@@ -1407,8 +1407,16 @@ test "$(git -C release-source rev-parse HEAD)" = "$RELEASE_SHA"
 git -C release-source fetch --no-tags origin "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF" "refs/heads/community:refs/remotes/origin/community"
 test "$(git -C release-source rev-parse "refs/tags/$RELEASE_REF^{commit}")" = "$RELEASE_SHA"
 git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
+""",
+        }
+
+    def recovery_source_version_guard(self):
+        return {
+            "name": "Verify immutable Runtime source version",
+            "env": {"RELEASE_REF": "${{ inputs.release_ref }}"},
+            "working-directory": "release-source/action_server",
+            "run": """set -Eeuo pipefail
 tag_version="${RELEASE_REF#actions-runtime-}"
-cd release-source/action_server
 package_version=$(uv run --no-project --python 3.12 poetry version --short)
 test "$package_version" = "$tag_version"
 """,
@@ -1438,6 +1446,7 @@ test "$(git -C recovery-code rev-parse refs/remotes/origin/community)" = "$WORKF
             self.recovery_admission_guard(),
             self.checkout_release_source(),
         ]
+        steps.append(self.recovery_source_guard())
         steps.extend(self.setup_python(pinned=True))
         steps.append(
             {
@@ -1445,7 +1454,7 @@ test "$(git -C recovery-code rev-parse refs/remotes/origin/community)" = "$WORKF
                 "working-directory": "release-source/action_server",
             }
         )
-        steps.append(self.recovery_source_guard())
+        steps.append(self.recovery_source_version_guard())
         return steps
 
     def validate_job_part(self):
@@ -1701,12 +1710,12 @@ test -z "$(uniq -d /tmp/runtime-binary-assets)"
             "run": """set -Eeuo pipefail
 manifest=$(mktemp)
 sha256sum release-assets/* | sed 's#release-assets/##' | sort > "$manifest"
+expected=$(jq -Rn '[inputs | split("  ") | {name:.[1],digest:("sha256:" + .[0])}]' < "$manifest")
 release_json=""
 if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF"); then
   test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
   test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
   test "$(jq -r '.draft' <<<"$release_json")" = "true"
-  expected=$(jq -Rn '[inputs | split("  ") | {name:.[1],digest:("sha256:" + .[0])}]' < "$manifest")
   jq -e --argjson expected "$expected" '([.assets[].name] - [$expected[].name] | length == 0) and ([.assets[].name] | unique | length == length)' <<<"$release_json"
   while read -r digest name; do
     existing_digest=$(jq -r --arg name "$name" '.assets[] | select(.name == $name) | .digest' <<<"$release_json")
@@ -1716,21 +1725,19 @@ if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF");
       test "$existing_digest" = "sha256:$digest"
     fi
   done < "$manifest"
-  release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")
-  expected_names=$(awk '{print $2}' "$manifest" | sort)
-  actual_names=$(jq -r '.assets[].name' <<<"$release_json" | sort)
-  test "$actual_names" = "$expected_names"
-  jq -e --argjson expected "$expected" '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' <<<"$release_json"
-  test "$(jq -r '.draft' <<<"$release_json")" = "true"
 else
   gh release create "$RELEASE_REF" --draft --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes "Runtime binaries recovered from immutable $RELEASE_REF at $RELEASE_SHA."
   gh release upload "$RELEASE_REF" release-assets/*
-  release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")
-  test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
-  test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
-  test "$(jq -r '.draft' <<<"$release_json")" = "true"
-  gh release edit "$RELEASE_REF" --draft=false
 fi
+release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")
+test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
+test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
+test "$(jq -r '.draft' <<<"$release_json")" = "true"
+expected_names=$(awk '{print $2}' "$manifest" | sort)
+actual_names=$(jq -r '.assets[].name' <<<"$release_json" | sort)
+test "$actual_names" = "$expected_names"
+jq -e --argjson expected "$expected" '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' <<<"$release_json"
+gh release edit "$RELEASE_REF" --draft=false
 """,
         }
 

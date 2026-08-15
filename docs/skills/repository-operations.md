@@ -155,7 +155,8 @@ literals such as `$tag-linux64` are not valid action inputs.
 The generated `actions_runtime_recovery.yml` workflow is the only recovery lane for an
 immutable Runtime tag. Its required `release_ref` and full 40-hex `release_sha` inputs
 are checked against the exact tag object and `origin/community` ancestry before any
-source operation. Every job admits only the exact repository workflow path at
+source-controlled dependency installation or execution. Every job admits only the
+exact repository workflow path at
 `refs/heads/community`, and proves checked-out `github.workflow_sha` equals the single
 fetched `origin/community` tip before using recovery code. Each job checks out merged
 recovery code separately from `release-source` at the immutable SHA and verifies the
@@ -167,7 +168,9 @@ recovery requires signing credentials and a signed macOS/Windows build, while Li
 may remain unsigned. Its draft release path hashes all three assets first, resumes an
 existing draft by uploading only missing exact assets, rejects published releases,
 conflicting digests, and extraneous names, never clobbers, and publishes only after
-complete verification against the immutable SHA. Retained artifact ZIP bytes are
+one final re-fetch proves draft state, the exact three-name inventory, every asset
+digest, and the release target/SHA against the immutable inputs; fresh and resumed
+drafts use that same finalization gate. Retained artifact ZIP bytes are
 hashed against their pinned digests before extraction; archive members are rejected
 when absolute, traversal-based, symlink/hardlink, or otherwise unsafe. API digest
 metadata alone is not artifact proof.

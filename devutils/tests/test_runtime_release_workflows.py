@@ -38,6 +38,15 @@ def load_publisher():
     return module
 
 
+def load_workflow_generator():
+    path = WORKFLOWS / "_gen_workflows.py"
+    spec = importlib.util.spec_from_file_location("workflow_generator", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     generator = (WORKFLOWS / "_gen_workflows.py").read_text()
     pypi = (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
@@ -797,9 +806,13 @@ def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
         } == {"${{ inputs.release_sha }}"}
         assert step_names.index(
             "Verify immutable tag, ancestry, and package version"
-        ) > step_names.index("Install devutils requirements")
+        ) < step_names.index("Install devutils requirements")
 
-    source_guard = jobs["validate"]["steps"][-1]["run"]
+    source_guard = next(
+        step["run"]
+        for step in jobs["validate"]["steps"]
+        if step.get("name") == "Verify immutable tag, ancestry, and package version"
+    )
     assert "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF" in source_guard
     assert "refs/heads/community:refs/remotes/origin/community" in source_guard
     assert 'rev-parse "refs/tags/$RELEASE_REF^{commit}"' in source_guard
@@ -807,10 +820,12 @@ def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
         'merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community'
         in source_guard
     )
-    assert (
-        "package_version=$(uv run --no-project --python 3.12 poetry version --short)"
-        in source_guard
+    version_guard = next(
+        step["run"]
+        for step in jobs["validate"]["steps"]
+        if step.get("name") == "Verify immutable Runtime source version"
     )
+    assert "package_version=$(uv run --no-project --python 3.12 poetry version --short)" in version_guard
 
     retained_names = [
         step["name"].removeprefix("Download retained ")
@@ -851,7 +866,7 @@ def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
     assert "${RELEASE_REF}-linux64" in recovery_text
     assert "${RELEASE_REF}-macos-arm64" in recovery_text
     assert "${RELEASE_REF}-windows64.exe" in recovery_text
-    assert "gh release create" in recovery_text
+    assert "gh release" in recovery_text
 
     signing_check = next(
         step
@@ -1011,6 +1026,37 @@ def test_recovery_partial_draft_uploads_only_missing_assets_and_rejects_conflict
     assert 'test "$existing_digest" = "sha256:$digest"' in generator
     assert "actual_names=$(jq -r" in generator
     assert 'gh release upload "$RELEASE_REF" release-assets/*' in generator
+
+
+def test_recovery_fresh_draft_uses_the_same_final_manifest_gate_before_publish():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    publish = generator[generator.index('name": "Create or update the complete GitHub release') :]
+    fresh_branch = publish[publish.rindex("\nelse\n") : publish.index("\nfi\n", publish.rindex("\nelse\n"))]
+    final_edit = publish.index('gh release edit "$RELEASE_REF" --draft=false')
+    finalization = publish[:final_edit]
+    assert finalization.rfind('release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")') > finalization.rfind("fi")
+    assert 'test "$(jq -r \'.target_commitish\' <<<"$release_json")" = "$RELEASE_SHA"' in finalization
+    assert 'test "$(jq -r \'.draft\' <<<"$release_json")" = "true"' in finalization
+    assert 'test "$actual_names" = "$expected_names"' in finalization
+    assert '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' in finalization
+    assert 'gh release upload "$RELEASE_REF" release-assets/*' in fresh_branch
+    assert 'gh release edit "$RELEASE_REF" --draft=false' not in fresh_branch
+    assert publish.count('gh release edit "$RELEASE_REF" --draft=false') == 1
+
+
+def test_generated_recovery_is_rendered_and_byte_identical_to_generator(tmp_path):
+    generator = load_workflow_generator()
+    workflow = generator.ActionServerRuntimeRecovery()
+    original_dir = generator.CURDIR
+    try:
+        with pytest.MonkeyPatch.context() as patch:
+            patch.setattr(generator, "CURDIR", tmp_path)
+            workflow.generate()
+            rendered = (tmp_path / "actions_runtime_recovery.yml").read_bytes()
+    finally:
+        generator.CURDIR = original_dir
+    assert rendered == (WORKFLOWS / "actions_runtime_recovery.yml").read_bytes()
+    assert not rendered.endswith(b"\n\n")
 
 
 def test_generated_recovery_has_no_trailing_blank_line():
