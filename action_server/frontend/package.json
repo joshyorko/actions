@@ -26,7 +26,7 @@
     "prettier": "prettier --write ./src/**/*.{ts,tsx}",
     "fixlint": "eslint --fix --ext .tsx,.ts .",
     "test": "vitest --run",
-    "test:topology": "vitest --run __tests__/**/frontend-topology.test.ts",
+    "test:topology": "vitest --run --testNamePattern \"Actions frontend topology\"",
     "test:quality": "npm run test:lint && npm run test:types && npm run test:prettier && npm run test:topology",
     "validate:artifacts": "node scripts/validate-artifacts.mjs",
     "sbom": "cyclonedx-npm --output-format json --output-reproducible --output-file dist/sbom.json && cyclonedx-npm --output-format json --output-reproducible --output-file dist-canvas/sbom.json"
