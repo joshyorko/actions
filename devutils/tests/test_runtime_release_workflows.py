@@ -975,6 +975,87 @@ def test_recovery_workflow_admits_only_merged_community_workflow_code():
     )
 
 
+def test_binary_recovery_admission_runs_from_workspace_root_before_release_checkout():
+    workflow = yaml.safe_load((WORKFLOWS / "actions_runtime_recovery.yml").read_text())
+    binary = workflow["jobs"]["binary-build"]
+    assert binary["defaults"]["run"]["working-directory"] == "release-source/action_server"
+    steps = binary["steps"]
+    admission_index = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("name") == "Admit only merged community recovery code"
+    )
+    release_checkout_index = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("name") == "Checkout immutable release source"
+    )
+    admission = steps[admission_index]
+    assert admission["working-directory"] == "."
+    assert admission_index < release_checkout_index
+
+
+def test_pypi_recovery_admission_canonicalizes_api_order_and_rejects_metadata_drift():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
+    expected = [
+        {
+            "id": 9202638277,
+            "name": "action-server-dist",
+            "size_in_bytes": 848656,
+            "digest": "sha256:e68002161c7c05c7558339816733e56fc953fd8fe1bbf02f99f1f70c4a575072",
+        },
+        {
+            "id": 9202661215,
+            "name": "Linux-wheels",
+            "size_in_bytes": 26180637,
+            "digest": "sha256:e63ebadb20107adba8a6c76489105339337c1406db96ff328161dda9baf0c34e",
+        },
+        {
+            "id": 9202659672,
+            "name": "macOS-wheels",
+            "size_in_bytes": 24523055,
+            "digest": "sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e",
+        },
+        {
+            "id": 9202679653,
+            "name": "Windows-wheels",
+            "size_in_bytes": 21134688,
+            "digest": "sha256:24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359",
+        },
+    ]
+    api_order_fixture = list(reversed(expected))
+    jq_filter = "map({id,name,size_in_bytes,digest}) | sort_by(.name) == ($expected | sort_by(.name))"
+    assert "map({id,name,size_in_bytes,digest}) | sort_by(.name) == ([" in generator
+    assert generator.count("sort_by(.name)") >= 3
+    assert recovery.count("sort_by(.name)") >= 3
+    result = subprocess.run(
+        ["jq", "-e", "--argjson", "expected", json.dumps(expected), jq_filter],
+        input=json.dumps(api_order_fixture),
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode == 0, result.stderr
+    for field, value in (("name", "extra"), ("size_in_bytes", 1), ("digest", "sha256:wrong")):
+        invalid = list(expected)
+        invalid[0] = invalid[0] | {field: value}
+        result = subprocess.run(
+            ["jq", "-e", "--argjson", "expected", json.dumps(expected), jq_filter],
+            input=json.dumps(invalid),
+            text=True,
+            capture_output=True,
+        )
+        assert result.returncode != 0
+    missing = expected[:-1]
+    result = subprocess.run(
+        ["jq", "-e", "--argjson", "expected", json.dumps(expected), jq_filter],
+        input=json.dumps(missing),
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode != 0
+
+
 def test_recovery_reuses_pinned_artifact_ids_and_digests_without_clobber():
     generator = (WORKFLOWS / "_gen_workflows.py").read_text()
     recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()

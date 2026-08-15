@@ -186,6 +186,12 @@ otherwise unsafe. Every member is canonicalized and tracked before directory
 creation or file extraction, so duplicate directory records fail closed like
 duplicate regular files. API digest metadata alone is not artifact proof.
 
+The recovery workflow's binary matrix defaults to the immutable source directory,
+so its pre-checkout merged-community admission step explicitly runs from the
+workspace root. PyPI artifact admission sorts both the API collection and the
+canonical four-artifact expectation by name before comparing exact IDs, names,
+sizes, and digests; it still requires exactly four non-expired artifacts.
+
 The local verifier also accepts a successful canonical recovery dispatch, but only after
 binding the active recovery workflow's exact database ID/path, supported run metadata,
 manual-dispatch conclusion, immutable head SHA/community branch, exact
