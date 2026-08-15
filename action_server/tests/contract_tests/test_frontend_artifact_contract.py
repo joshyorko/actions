@@ -96,7 +96,7 @@ def test_frontend_quality_uses_cross_platform_prettier_eol_contract():
         "npm run test:prettier && npm run test:topology"
     )
     assert scripts["test:topology"] == (
-        "vitest --run ../../__tests__/topology/frontend-topology.test.ts"
+        "vitest --run __tests__/**/frontend-topology.test.ts"
     )
 
 
