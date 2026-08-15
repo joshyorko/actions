@@ -24,6 +24,7 @@
     "fixlint": "eslint --fix --ext .tsx,.ts .",
     "test": "vitest --run",
     "test:topology": "vitest --run __tests__/topology",
+    "test:product-evidence": "npm run build:runtime && playwright test --config=playwright.product-evidence.config.ts",
     "test:quality": "npm run test:lint && npm run test:types && npm run test:prettier && npm run test:topology"
   },
   "dependencies": {
@@ -73,6 +74,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "@testing-library/react": "^16.0.0",
     "@testing-library/jest-dom": "^6.4.0",
-    "@testing-library/user-event": "^14.5.0"
+    "@testing-library/user-event": "^14.5.0",
+    "@playwright/test": "^1.55.0"
   }
 }
