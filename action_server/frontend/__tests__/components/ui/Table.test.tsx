@@ -1,6 +1,6 @@
-import React from 'react';
-import { render, screen } from '../../utils/test-utils';
-import { describe, it, expect } from 'vitest';
+import React from "react";
+import { render, screen } from "../../utils/test-utils";
+import { describe, it, expect } from "vitest";
 
 import {
   Table,
@@ -9,11 +9,11 @@ import {
   TableRow,
   TableHead,
   TableCell,
-} from '@/core/components/ui/Table';
+} from "@/core/components/ui/Table";
 
-describe('Table component — visual and interaction contracts', () => {
-  describe('Header styling', () => {
-    it('applies bg-muted/50, border-b, and font-medium to header cells', () => {
+describe("Table component — visual and interaction contracts", () => {
+  describe("Header styling", () => {
+    it("applies bg-muted/50, border-b, and font-medium to header cells", () => {
       const { getByText } = render(
         <Table>
           <TableHeader>
@@ -25,13 +25,13 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const nameHead = getByText('Name');
-      expect(nameHead.className).toContain('bg-muted/50');
-      expect(nameHead.className).toContain('border-b');
-      expect(nameHead.className).toContain('font-medium');
+      const nameHead = getByText("Name");
+      expect(nameHead.className).toContain("bg-muted/50");
+      expect(nameHead.className).toContain("border-b");
+      expect(nameHead.className).toContain("font-medium");
     });
 
-    it('applies uppercase and tracking-wide to header text', () => {
+    it("applies uppercase and tracking-wide to header text", () => {
       const { getByText } = render(
         <Table>
           <TableHeader>
@@ -42,12 +42,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const header = getByText('Header');
-      expect(header.className).toContain('uppercase');
-      expect(header.className).toContain('tracking-wide');
+      const header = getByText("Header");
+      expect(header.className).toContain("uppercase");
+      expect(header.className).toContain("tracking-wide");
     });
 
-    it('applies text-muted-foreground color to header text', () => {
+    it("applies text-muted-foreground color to header text", () => {
       const { getByText } = render(
         <Table>
           <TableHeader>
@@ -58,13 +58,13 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const header = getByText('Column');
-      expect(header.className).toContain('text-muted-foreground');
+      const header = getByText("Column");
+      expect(header.className).toContain("text-muted-foreground");
     });
   });
 
-  describe('Row hover states', () => {
-    it('applies hover:bg-muted/50 to table rows', () => {
+  describe("Row hover states", () => {
+    it("applies hover:bg-muted/50 to table rows", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -75,12 +75,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const row = getByText('Regular row').closest('tr') as HTMLElement;
+      const row = getByText("Regular row").closest("tr") as HTMLElement;
       expect(row).toBeTruthy();
-      expect(row.className).toContain('hover:bg-muted/50');
+      expect(row.className).toContain("hover:bg-muted/50");
     });
 
-    it('applies transition-colors to table rows for smooth hover effect', () => {
+    it("applies transition-colors to table rows for smooth hover effect", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -91,14 +91,14 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const row = getByText('Transition row').closest('tr') as HTMLElement;
+      const row = getByText("Transition row").closest("tr") as HTMLElement;
       expect(row).toBeTruthy();
-      expect(row.className).toContain('transition-colors');
+      expect(row.className).toContain("transition-colors");
     });
   });
 
-  describe('Selected row state', () => {
-    it('applies bg-primary/8 when selected prop is true', () => {
+  describe("Selected row state", () => {
+    it("applies bg-primary/8 when selected prop is true", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -109,9 +109,9 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const selected = getByText('Selected row').closest('tr') as HTMLElement;
+      const selected = getByText("Selected row").closest("tr") as HTMLElement;
       expect(selected).toBeTruthy();
-      expect(selected.className).toContain('bg-primary/8');
+      expect(selected.className).toContain("bg-primary/8");
     });
 
     it('sets data-state="selected" when selected prop is true', () => {
@@ -125,12 +125,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const row = getByText('Selected row').closest('tr') as HTMLElement;
+      const row = getByText("Selected row").closest("tr") as HTMLElement;
       expect(row).toBeTruthy();
-      expect(row.getAttribute('data-state')).toBe('selected');
+      expect(row.getAttribute("data-state")).toBe("selected");
     });
 
-    it('does not set data-state when selected is false', () => {
+    it("does not set data-state when selected is false", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -141,12 +141,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const row = getByText('Not selected').closest('tr') as HTMLElement;
+      const row = getByText("Not selected").closest("tr") as HTMLElement;
       expect(row).toBeTruthy();
-      expect(row.getAttribute('data-state')).toBeNull();
+      expect(row.getAttribute("data-state")).toBeNull();
     });
 
-    it('maintains hover state on selected rows', () => {
+    it("maintains hover state on selected rows", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -157,15 +157,15 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const row = getByText('Selected with hover').closest('tr') as HTMLElement;
+      const row = getByText("Selected with hover").closest("tr") as HTMLElement;
       expect(row).toBeTruthy();
-      expect(row.className).toContain('bg-primary/8');
-      expect(row.className).toContain('hover:bg-muted/50');
+      expect(row.className).toContain("bg-primary/8");
+      expect(row.className).toContain("hover:bg-muted/50");
     });
   });
 
-  describe('Clickable cursor', () => {
-    it('applies cursor-pointer when clickable prop is true', () => {
+  describe("Clickable cursor", () => {
+    it("applies cursor-pointer when clickable prop is true", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -176,12 +176,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const el = getByText('Clickable row').closest('tr') as HTMLElement;
+      const el = getByText("Clickable row").closest("tr") as HTMLElement;
       expect(el).toBeTruthy();
-      expect(el.className).toContain('cursor-pointer');
+      expect(el.className).toContain("cursor-pointer");
     });
 
-    it('does not apply cursor-pointer when clickable prop is false', () => {
+    it("does not apply cursor-pointer when clickable prop is false", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -192,12 +192,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const el = getByText('Not clickable').closest('tr') as HTMLElement;
+      const el = getByText("Not clickable").closest("tr") as HTMLElement;
       expect(el).toBeTruthy();
-      expect(el.className).not.toContain('cursor-pointer');
+      expect(el.className).not.toContain("cursor-pointer");
     });
 
-    it('applies cursor-pointer on selected and clickable rows', () => {
+    it("applies cursor-pointer on selected and clickable rows", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -208,15 +208,17 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const row = getByText('Selected and clickable').closest('tr') as HTMLElement;
+      const row = getByText("Selected and clickable").closest(
+        "tr",
+      ) as HTMLElement;
       expect(row).toBeTruthy();
-      expect(row.className).toContain('cursor-pointer');
-      expect(row.className).toContain('bg-primary/8');
+      expect(row.className).toContain("cursor-pointer");
+      expect(row.className).toContain("bg-primary/8");
     });
   });
 
-  describe('Last row border removal', () => {
-    it('applies last:border-0 class to rows', () => {
+  describe("Last row border removal", () => {
+    it("applies last:border-0 class to rows", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -230,12 +232,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const lastRow = getByText('Last').closest('tr') as HTMLElement;
+      const lastRow = getByText("Last").closest("tr") as HTMLElement;
       expect(lastRow).toBeTruthy();
       expect(lastRow.className).toMatch(/last:border-0|border-0/);
     });
 
-    it('applies border-b to non-last rows', () => {
+    it("applies border-b to non-last rows", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -249,14 +251,14 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const firstRow = getByText('First').closest('tr') as HTMLElement;
+      const firstRow = getByText("First").closest("tr") as HTMLElement;
       expect(firstRow).toBeTruthy();
-      expect(firstRow.className).toContain('border-b');
+      expect(firstRow.className).toContain("border-b");
     });
   });
 
-  describe('Semantic HTML structure', () => {
-    it('renders thead element for TableHeader', () => {
+  describe("Semantic HTML structure", () => {
+    it("renders thead element for TableHeader", () => {
       const { container } = render(
         <Table>
           <TableHeader>
@@ -267,11 +269,11 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const thead = container.querySelector('thead');
+      const thead = container.querySelector("thead");
       expect(thead).toBeTruthy();
     });
 
-    it('renders tbody element for TableBody', () => {
+    it("renders tbody element for TableBody", () => {
       const { container } = render(
         <Table>
           <TableBody>
@@ -282,11 +284,11 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const tbody = container.querySelector('tbody');
+      const tbody = container.querySelector("tbody");
       expect(tbody).toBeTruthy();
     });
 
-    it('renders th elements for TableHead', () => {
+    it("renders th elements for TableHead", () => {
       const { getByText } = render(
         <Table>
           <TableHeader>
@@ -297,11 +299,11 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const header = getByText('Column Header');
-      expect(header.tagName).toBe('TH');
+      const header = getByText("Column Header");
+      expect(header.tagName).toBe("TH");
     });
 
-    it('renders td elements for TableCell', () => {
+    it("renders td elements for TableCell", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -312,11 +314,11 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const cell = getByText('Cell Content');
-      expect(cell.tagName).toBe('TD');
+      const cell = getByText("Cell Content");
+      expect(cell.tagName).toBe("TD");
     });
 
-    it('renders a complete table structure', () => {
+    it("renders a complete table structure", () => {
       const { container } = render(
         <Table>
           <TableHeader>
@@ -338,11 +340,11 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const table = container.querySelector('table');
-      const thead = container.querySelector('thead');
-      const tbody = container.querySelector('tbody');
-      const ths = container.querySelectorAll('th');
-      const tds = container.querySelectorAll('td');
+      const table = container.querySelector("table");
+      const thead = container.querySelector("thead");
+      const tbody = container.querySelector("tbody");
+      const ths = container.querySelectorAll("th");
+      const tds = container.querySelectorAll("td");
 
       expect(table).toBeTruthy();
       expect(thead).toBeTruthy();
@@ -352,8 +354,8 @@ describe('Table component — visual and interaction contracts', () => {
     });
   });
 
-  describe('Table base styles', () => {
-    it('applies w-full to table', () => {
+  describe("Table base styles", () => {
+    it("applies w-full to table", () => {
       const { container } = render(
         <Table>
           <TableBody>
@@ -364,12 +366,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const table = container.querySelector('table');
+      const table = container.querySelector("table");
       expect(table).toBeTruthy();
-      expect(table?.className).toContain('w-full');
+      expect(table?.className).toContain("w-full");
     });
 
-    it('applies text-sm to table', () => {
+    it("applies text-sm to table", () => {
       const { container } = render(
         <Table>
           <TableBody>
@@ -380,12 +382,12 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const table = container.querySelector('table');
+      const table = container.querySelector("table");
       expect(table).toBeTruthy();
-      expect(table?.className).toContain('text-sm');
+      expect(table?.className).toContain("text-sm");
     });
 
-    it('wraps table in overflow-auto container', () => {
+    it("wraps table in overflow-auto container", () => {
       const { container } = render(
         <Table>
           <TableBody>
@@ -396,13 +398,13 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const wrapper = container.querySelector('.overflow-auto');
+      const wrapper = container.querySelector(".overflow-x-auto");
       expect(wrapper).toBeTruthy();
     });
   });
 
-  describe('Cell styling', () => {
-    it('applies text-card-foreground to table cells', () => {
+  describe("Cell styling", () => {
+    it("applies text-card-foreground to table cells", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -413,11 +415,11 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const cell = getByText('Data');
-      expect(cell.className).toContain('text-card-foreground');
+      const cell = getByText("Data");
+      expect(cell.className).toContain("text-card-foreground");
     });
 
-    it('applies proper padding to cells', () => {
+    it("applies proper padding to cells", () => {
       const { getByText } = render(
         <Table>
           <TableBody>
@@ -428,11 +430,11 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const cell = getByText('Padded cell');
-      expect(cell.className).toContain('p-4');
+      const cell = getByText("Padded cell");
+      expect(cell.className).toContain("p-4");
     });
 
-    it('applies proper padding to header cells', () => {
+    it("applies proper padding to header cells", () => {
       const { getByText } = render(
         <Table>
           <TableHeader>
@@ -443,13 +445,13 @@ describe('Table component — visual and interaction contracts', () => {
         </Table>,
       );
 
-      const header = getByText('Header');
-      expect(header.className).toContain('px-4');
+      const header = getByText("Header");
+      expect(header.className).toContain("px-4");
     });
   });
 
-  describe('Component exports', () => {
-    it('exports all required table components', () => {
+  describe("Component exports", () => {
+    it("exports all required table components", () => {
       expect(Table).toBeDefined();
       expect(TableHeader).toBeDefined();
       expect(TableBody).toBeDefined();
@@ -458,13 +460,13 @@ describe('Table component — visual and interaction contracts', () => {
       expect(TableCell).toBeDefined();
     });
 
-    it('all components have display names', () => {
-      expect(Table.displayName).toBe('Table');
-      expect(TableHeader.displayName).toBe('TableHeader');
-      expect(TableBody.displayName).toBe('TableBody');
-      expect(TableRow.displayName).toBe('TableRow');
-      expect(TableHead.displayName).toBe('TableHead');
-      expect(TableCell.displayName).toBe('TableCell');
+    it("all components have display names", () => {
+      expect(Table.displayName).toBe("Table");
+      expect(TableHeader.displayName).toBe("TableHeader");
+      expect(TableBody.displayName).toBe("TableBody");
+      expect(TableRow.displayName).toBe("TableRow");
+      expect(TableHead.displayName).toBe("TableHead");
+      expect(TableCell.displayName).toBe("TableCell");
     });
   });
 });
