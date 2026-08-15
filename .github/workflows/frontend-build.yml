@@ -76,6 +76,7 @@ jobs:
               second = fingerprint(Path('frontend') / name)
               if first != second:
                   raise SystemExit(f'Determinism check failed for {name}')
+          PY
           echo "Determinism check passed"
           rm -rf frontend/dist
           mv frontend/dist_first frontend/dist

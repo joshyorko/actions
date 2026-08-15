@@ -22,7 +22,7 @@
     "build:tests": "vite build --mode runtime --minify=false --outDir=./dist-test",
     "test:lint": "eslint --max-warnings 0 apps/runtime/src apps/canvas-view/src src/app",
     "test:types": "tsc --noEmit",
-    "test:prettier": "prettier --no-config --check apps/runtime/src apps/canvas-view/src src/app",
+    "test:prettier": "prettier --end-of-line auto --check apps/runtime/src apps/canvas-view/src src/app",
     "prettier": "prettier --write ./src/**/*.{ts,tsx}",
     "fixlint": "eslint --fix --ext .tsx,.ts .",
     "test": "vitest --run",

@@ -19,7 +19,10 @@ to verify both independent artifacts. The topology has no tier-specific
 manifest, product-tier build variable, vendored package directory, or external
 runtime asset dependency. Frontend quality is fail-fast through
 `npm run test:quality`, which intentionally gates the shipping Runtime/Canvas
-entrypoints and `src/app` topology plus topology tests; the historical all-tree
+entrypoints and `src/app` topology plus topology tests. Its Prettier check uses
+the package-owned `--end-of-line auto` contract so the same quality invocation
+accepts the checkout's native LF or CRLF representation on every matrix OS; the
+historical all-tree
 lint and full test suites were not green gates. The workflow runs both build
 boundaries. The release command `npm run build:artifacts` also generates a
 CycloneDX `sbom.json` in each root. Runtime is post-processed into one

@@ -73,6 +73,30 @@ def test_hosted_workflow_runs_frontend_quality_and_compares_both_roots():
     assert "actualFiles" in validator
 
 
+def test_hosted_determinism_block_closes_heredoc_before_restoring_artifacts():
+    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
+    python_start = workflow.index("          python - <<'PY'")
+    heredoc_end = workflow.index("          PY\n", python_start)
+    restoration = workflow.index("          rm -rf frontend/dist", heredoc_end)
+
+    assert heredoc_end > python_start
+    assert restoration > heredoc_end
+
+
+def test_frontend_quality_uses_cross_platform_prettier_eol_contract():
+    package = json.loads((FRONTEND / "package.json").read_text())
+    scripts = package["scripts"]
+
+    assert scripts["test:prettier"] == (
+        "prettier --end-of-line auto --check "
+        "apps/runtime/src apps/canvas-view/src src/app"
+    )
+    assert scripts["test:quality"] == (
+        "npm run test:lint && npm run test:types && "
+        "npm run test:prettier && npm run test:topology"
+    )
+
+
 def test_validators_prove_manifest_inventory_and_metadata(tmp_path):
     build_binary = FRONTEND.parent / "build-binary"
     sys.path.insert(0, str(build_binary))
