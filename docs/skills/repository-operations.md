@@ -182,10 +182,13 @@ The Runtime shell overview reads the provider-owned config/actions/runs queries;
 it does not create a second cache or invent metrics. The current backend `/config`
 payload has no capability metadata, so optional navigation remains hidden and
 only Overview, Actions, and Runs are exposed until a truthful capability source
-is implemented. A config failure renders a degraded overview and leaves only
-safe overview/core navigation visible; Runtime queries disable retries so that
-failure state is observable promptly. The Runtime entry document is titled
-`Actions Runtime`; Canvas View remains an independent entrypoint.
+is implemented. Navigation visibility and route reachability must use the same
+truthful capability contract: hiding an item is not route authorization, and
+unsupported optional direct links must fall back to Overview. A config failure
+renders a degraded overview and leaves only safe overview/core navigation
+visible; Runtime queries disable retries so that failure state is observable
+promptly. The Runtime entry document is titled `Actions Runtime`; Canvas View
+remains an independent entrypoint.
 
 The current backend event contract has no sequence field: `runs_collected`
 contains a run list, `run_added` contains `{run}`, and `run_changed` contains

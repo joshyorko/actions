@@ -1,12 +1,8 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { ActionsPage } from "@/core/pages/Actions";
-import { AnalyticsPage } from "@/core/pages/Analytics";
 import { ArtifactsPage } from "@/core/pages/Artifacts";
 import { LogsPage } from "@/core/pages/Logs";
-import { RobotsPage } from "@/core/pages/Robots";
 import { RunHistoryPage } from "@/core/pages/RunHistory";
-import { SchedulesPage } from "@/core/pages/Schedules";
-import { WorkItemsPage } from "@/core/pages/WorkItems";
 import { OverviewPage } from "@/core/pages/Overview";
 
 export const RuntimeRoutes = () => {
@@ -18,10 +14,20 @@ export const RuntimeRoutes = () => {
         <Route path="/overview" element={<OverviewPage />} />
         <Route path="/actions" element={<ActionsPage />} />
         <Route path="/runs" element={<RunHistoryPage />} />
-        <Route path="/schedules" element={<SchedulesPage />} />
-        <Route path="/robots" element={<RobotsPage />} />
-        <Route path="/work-items" element={<WorkItemsPage />} />
-        <Route path="/analytics" element={<AnalyticsPage />} />
+        {/* Optional routes stay fail-closed until /config exposes capabilities. */}
+        <Route
+          path="/schedules"
+          element={<Navigate to="/overview" replace />}
+        />
+        <Route path="/robots" element={<Navigate to="/overview" replace />} />
+        <Route
+          path="/work-items"
+          element={<Navigate to="/overview" replace />}
+        />
+        <Route
+          path="/analytics"
+          element={<Navigate to="/overview" replace />}
+        />
         <Route path="/logs/:runId" element={<LogsPage />} />
         <Route path="/artifacts/:runId" element={<ArtifactsPage />} />
         <Route path="*" element={<Navigate to="/overview" replace />} />

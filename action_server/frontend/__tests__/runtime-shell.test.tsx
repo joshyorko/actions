@@ -1,6 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
+import { MemoryRouter } from "react-router-dom";
+import { render as rtlRender } from "@testing-library/react";
 import { RuntimeLayout } from "../src/app/RuntimeLayout";
 import { RuntimeRoutes } from "../src/app/RuntimeRoutes";
 import { RuntimeProviders } from "../src/app/RuntimeProviders";
@@ -15,6 +17,35 @@ const runtimeConfig = {
 
 beforeEach(() => {
   vi.restoreAllMocks();
+  vi.stubGlobal(
+    "WebSocket",
+    class {
+      onopen: (() => void) | null = null;
+      onclose: (() => void) | null = null;
+      onerror: (() => void) | null = null;
+      onmessage: ((event: MessageEvent) => void) | null = null;
+
+      constructor() {
+        queueMicrotask(() => this.onopen?.());
+      }
+
+      close() {
+        this.onclose?.();
+      }
+
+      send() {}
+    },
+  );
+  const storage = new Map<string, string>();
+  Object.defineProperty(window, "localStorage", {
+    configurable: true,
+    value: {
+      getItem: (key: string) => storage.get(key) ?? null,
+      setItem: (key: string, value: string) => storage.set(key, value),
+      removeItem: (key: string) => storage.delete(key),
+      clear: () => storage.clear(),
+    },
+  });
   vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
     const path = String(input);
     if (path.endsWith("/config")) {
@@ -39,6 +70,17 @@ const renderRuntime = () =>
     </RuntimeProviders>,
   );
 
+const renderRuntimeAt = (path: string) =>
+  rtlRender(
+    <MemoryRouter initialEntries={[path]}>
+      <RuntimeProviders>
+        <RuntimeLayout>
+          <RuntimeRoutes />
+        </RuntimeLayout>
+      </RuntimeProviders>
+    </MemoryRouter>,
+  );
+
 describe("Actions Runtime shell", () => {
   it("identifies the product and lands on a useful overview", async () => {
     renderRuntime();
@@ -49,8 +91,10 @@ describe("Actions Runtime shell", () => {
         screen.getByRole("heading", { name: "Overview" }),
       ).toBeInTheDocument(),
     );
-    expect(screen.getByText("No runs yet")).toBeInTheDocument();
-    expect(screen.getByText("No actions available")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText("No runs yet")).toBeInTheDocument();
+      expect(screen.getByText("No actions available")).toBeInTheDocument();
+    });
   });
 
   it("keeps optional navigation hidden when the real config has no capabilities", async () => {
@@ -88,5 +132,31 @@ describe("Actions Runtime shell", () => {
     );
     expect(screen.getByText(/could not be loaded/i)).toBeInTheDocument();
     expect(screen.getAllByText("Actions Runtime").length).toBeGreaterThan(0);
+  });
+
+  it.each(["/schedules", "/robots", "/work-items", "/analytics"])(
+    "redirects unsupported direct link %s to the truthful overview",
+    async (path) => {
+      renderRuntimeAt(path);
+
+      await waitFor(() =>
+        expect(screen.getByRole("heading", { name: "Overview" })).toBeInTheDocument(),
+      );
+      expect(screen.queryByRole("heading", { name: "Schedules" })).not.toBeInTheDocument();
+      expect(screen.queryByRole("heading", { name: "Analytics" })).not.toBeInTheDocument();
+      expect(screen.queryByText("Work Items")).not.toBeInTheDocument();
+      expect(screen.queryByText("Robots")).not.toBeInTheDocument();
+    },
+  );
+
+  it.each([
+    ["/actions", /No actions available yet/],
+    ["/runs", /No runs recorded yet/],
+    ["/logs/run-1", /was not found in the local cache/],
+    ["/artifacts/run-1", /could not be found/],
+  ])("preserves supported deep link %s", async (path, content) => {
+    renderRuntimeAt(path);
+
+    await waitFor(() => expect(screen.getByText(content)).toBeInTheDocument());
   });
 });
