@@ -203,6 +203,16 @@ otherwise unsafe. Every member is canonicalized and tracked before directory
 creation or file extraction, so duplicate directory records fail closed like
 duplicate regular files. API digest metadata alone is not artifact proof.
 
+The recovery workflow's binary matrix defaults to the immutable source directory,
+so its pre-checkout merged-community admission step explicitly runs from the
+workspace root with `shell: bash` on every matrix OS. PyPI artifact admission
+uses GitHub's explicit JSON media type and `2022-11-28` API version headers, then
+fail-closed validates exactly four artifacts scoped to the source run. Each
+artifact must have one pinned ID, name, size, SHA-256 digest, `expired: false`,
+and the source workflow-run identity; API order is irrelevant. The raw response
+must contain exactly four entries, and a mismatch emits only a fixed bounded
+failure message without artifact names, URLs, or payload metadata.
+
 The local verifier also accepts a successful canonical recovery dispatch, but only after
 binding the active recovery workflow's exact database ID/path, supported run metadata,
 manual-dispatch conclusion, immutable head SHA/community branch, exact

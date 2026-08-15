@@ -249,6 +249,19 @@ def _add_start_server_command(command_parser, defaults):
         "environment variable.",
         default=None,
     )
+    start_parser.add_argument(
+        "--artifact-storage-backend",
+        choices=("local", "shared-filesystem"),
+        default="local",
+        help="Artifact storage backend. Shared filesystem requires --artifact-storage-root.",
+    )
+    start_parser.add_argument(
+        "--artifact-storage-root",
+        metavar="PATH",
+        type=Path,
+        default=None,
+        help="Root directory for artifact storage; required by shared-filesystem.",
+    )
 
     add_data_args(start_parser, defaults)
     _add_kill_lock_holder_args(start_parser, defaults)

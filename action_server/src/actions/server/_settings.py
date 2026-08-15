@@ -252,6 +252,9 @@ class Settings:
     artifacts_dir: Path
     datadir: Path
 
+    artifact_storage_backend: str = "local"
+    artifact_storage_root: Optional[Path] = None
+
     title: str = "Actions Runtime"
 
     address: str = "localhost"
@@ -352,6 +355,7 @@ class Settings:
         settings = Settings(
             datadir=datadir,
             artifacts_dir=datadir / "artifacts",
+            artifact_storage_root=datadir / "artifacts",
         )
 
         # Optional (just in 'start' command, not in 'import')
@@ -371,10 +375,20 @@ class Settings:
             "redis_url",
             "redis_password",
             "database_url",
+            "artifact_storage_backend",
+            "artifact_storage_root",
         ):
             assert hasattr(settings, attr)
             if hasattr(args, attr):
                 setattr(settings, attr, getattr(args, attr))
+
+        if settings.artifact_storage_backend == "shared-filesystem":
+            if settings.artifact_storage_root is None:
+                raise ActionServerValidationError(
+                    "--artifact-storage-root is required with --artifact-storage-backend shared-filesystem."
+                )
+        elif settings.artifact_storage_root is None:
+            settings.artifact_storage_root = settings.artifacts_dir
 
         if hasattr(args, "https"):
             settings.use_https = args.https

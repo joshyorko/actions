@@ -10,6 +10,7 @@ from functools import partial
 from typing import Optional, Sequence
 
 from fastapi.applications import FastAPI
+from fastapi.staticfiles import StaticFiles
 from termcolor import colored
 
 from ._protocols import ArgumentsNamespaceStart, IBeforeStartCallback
@@ -18,6 +19,11 @@ if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
 log = logging.getLogger(__name__)
+
+
+def _mount_artifact_static_files(app: FastAPI, backend: str, root: os.PathLike) -> None:
+    if backend == "local":
+        app.mount("/artifacts", StaticFiles(directory=root), name="artifacts")
 
 
 class _LoopHolder:
@@ -39,7 +45,6 @@ def start_server(
     import uvicorn
     from fastapi import Depends, HTTPException, Security, params
     from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-    from fastapi.staticfiles import StaticFiles
     from starlette.requests import Request
     from starlette.responses import HTMLResponse
 
@@ -81,13 +86,11 @@ def start_server(
 
     app = get_app()
 
-    artifacts_dir = settings.artifacts_dir
+    from actions.server._artifact_storage import get_artifact_storage
 
-    app.mount(
-        "/artifacts",
-        StaticFiles(directory=artifacts_dir),
-        name="artifacts",
-    )
+    artifacts_dir = get_artifact_storage().root
+
+    _mount_artifact_static_files(app, settings.artifact_storage_backend, artifacts_dir)
 
     def verify_api_key(
         token: HTTPAuthorizationCredentials = Security(HTTPBearer(auto_error=True)),
