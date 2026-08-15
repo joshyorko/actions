@@ -886,11 +886,16 @@ def prompt_{suffix}() -> str:
         additional_args=["--auto-reload"],
     )
 
-    async def catalog_names() -> dict[str, list[str]]:
+    async def catalog_names() -> dict[str, object]:
         base_url = f"http://localhost:{action_server_process.port}/mcp"
         tools = await _post_modern_mcp(base_url, "tools/list", 1)
         resources = await _post_modern_mcp(base_url, "resources/list", 2)
         prompts = await _post_modern_mcp(base_url, "prompts/list", 3)
+        revisions = {
+            result["_meta"]["actions.catalogRevision"]
+            for result in (tools, resources, prompts)
+        }
+        assert len(revisions) == 1
         for result in (tools, resources, prompts):
             assert result["ttlMs"] == 0
             assert result["cacheScope"] == "private"
@@ -898,20 +903,26 @@ def prompt_{suffix}() -> str:
             "tools": [tool["name"] for tool in tools["tools"]],
             "resources": [resource["uri"] for resource in resources["resources"]],
             "prompts": [prompt["name"] for prompt in prompts["prompts"]],
+            "revision": revisions.pop(),
         }
 
-    assert run_async_in_new_thread(catalog_names) == {
+    before = run_async_in_new_thread(catalog_names)
+    assert before == {
         "tools": ["tool_before"],
         "resources": ["catalog://before"],
         "prompts": ["prompt_before"],
+        "revision": before["revision"],
     }
     write_catalog("after")
 
     def assert_fresh_catalogs() -> None:
-        assert run_async_in_new_thread(catalog_names) == {
+        after = run_async_in_new_thread(catalog_names)
+        assert after == {
             "tools": ["tool_after"],
             "resources": ["catalog://after"],
             "prompts": ["prompt_after"],
+            "revision": after["revision"],
         }
+        assert after["revision"] != before["revision"]
 
     wait_for_non_error_condition(assert_fresh_catalogs)

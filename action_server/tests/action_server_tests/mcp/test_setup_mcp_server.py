@@ -273,3 +273,87 @@ def test_preserves_declared_mcp_meta_on_resources_and_prompts():
     assert direct_result.meta == declared_meta
     assert template_result.meta == declared_meta
     assert prompt_result.meta == declared_meta
+
+
+def test_catalogs_are_sorted_and_revisioned_independently_of_registration_order():
+    import asyncio
+    import json
+
+    from actions.server._models import Action
+    from actions.server.mcp.setup_mcp_server_from_actions import (
+        McpServerSetupHelper,
+    )
+
+    first = McpServerSetupHelper()
+    second = McpServerSetupHelper()
+    # The helper must derive the catalog from registered MCP definitions, not
+    # from the order in which the Action rows happened to be loaded.
+    for helper, names in (
+        (first, ["zulu", "alpha"]),
+        (second, ["alpha", "zulu"]),
+    ):
+        for name in names:
+            action = Action(
+                id=name,
+                action_package_id="package",
+                name=name,
+                docs=name,
+                file="actions.py",
+                lineno=1,
+                input_schema=json.dumps({"type": "object", "properties": {}}),
+                output_schema=json.dumps({"type": "string"}),
+                enabled=True,
+                is_consequential=None,
+                managed_params_schema=None,
+                options=json.dumps({"kind": "tool"}),
+            )
+            helper.register_action(
+                func=lambda **kwargs: "result",
+                action=action,
+                action_package=None,
+                display_name=name,
+                doc_desc=name,
+            )
+
+    assert [tool.name for tool in first._tools] == ["alpha", "zulu"]
+    assert [tool.name for tool in second._tools] == ["alpha", "zulu"]
+    assert first.catalog_revision == second.catalog_revision
+
+    result = asyncio.run(first._list_tools(None, None))
+    assert result.meta["actions.catalogRevision"] == first.catalog_revision
+
+
+def test_catalog_revision_changes_when_surface_changes_and_reload_clears_cache():
+    import json
+
+    from actions.server._models import Action
+    from actions.server.mcp.setup_mcp_server_from_actions import (
+        McpServerSetupHelper,
+    )
+
+    helper = McpServerSetupHelper()
+    action = Action(
+        id="one",
+        action_package_id="package",
+        name="one",
+        docs="one",
+        file="actions.py",
+        lineno=1,
+        input_schema=json.dumps({"type": "object", "properties": {}}),
+        output_schema=json.dumps({"type": "string"}),
+        enabled=True,
+        is_consequential=None,
+        managed_params_schema=None,
+        options=json.dumps({"kind": "tool"}),
+    )
+    helper.register_action(
+        func=lambda **kwargs: "result",
+        action=action,
+        action_package=None,
+        display_name="one",
+        doc_desc="one",
+    )
+    before = helper.catalog_revision
+    helper.unregister_actions()
+    assert helper.catalog_revision != before
+    assert helper._tools == []
