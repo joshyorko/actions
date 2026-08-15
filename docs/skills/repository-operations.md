@@ -321,17 +321,26 @@ exactly one run, while PostgreSQL due schedules use a session-level database
 claim held through processing; closing that connection releases ownership, and
 SQLite keeps its existing single-node path.
 
-The shared PostgreSQL adapter translates only unquoted `?` parameter markers and
-rewrites the legacy SQLite boolean/check DDL emitted by historical migrations
-at the database execution boundary; historical migration files remain byte-
-immutable. The all-1-through-10 SHA-256 regression and the SQLite v0-to-current
-plus PostgreSQL fresh/existing/concurrent migration acceptance live in
-`action_server/tests/action_server_tests/test_database_shared.py` and
-`test_database.py`.
-SQL literals, quoted identifiers, comments, dollar-quoted bodies, escaped
-markers, JSON operators (`?`, `?|`, `?&`), and bound array expressions remain
-unchanged, and marker/value counts are validated before execution. Database
-settings reject malformed or unsupported URL schemes without logging the URL;
+The shared PostgreSQL adapter tokenizes SQL once and translates only unquoted
+parameter markers and exact legacy SQLite boolean/check DDL token sequences from
+historical migrations at the database execution boundary; historical migration
+files remain byte-immutable. The DDL adaptation is restricted to executable
+`ALTER TABLE`/`CREATE TABLE` statements, is idempotent, and never rewrites SQL
+literals, quoted identifiers, comments, dollar-quoted bodies, escaped markers,
+JSON operators (`?`, `?|`, `?&`), or bound array expressions. Marker/value counts
+are validated before execution. The all-1-through-10 SHA-256 regression and the
+SQLite v0-to-current plus PostgreSQL fresh/existing/concurrent migration
+acceptance live in `action_server/tests/action_server_tests/test_database_shared.py`
+and `test_database.py`.
+Migration 12 checks for non-null legacy `run.stdout`/`run.stderr` values before
+dropping those accidental columns. When data exists, it transactionally creates
+`run_legacy_output_archive` keyed by `run_id`, copies each non-null legacy row
+with `ON CONFLICT DO NOTHING`, and leaves the archive available for read-back;
+null-only or no-column databases do not create an archive. The migration record
+insert and archive copy are rerun-safe, and the final `run` schema has neither
+accidental column. PostgreSQL startup serialization uses the existing advisory
+lock, so concurrent migration startup archives populated legacy data once.
+Database settings reject malformed or unsupported URL schemes without logging the URL;
 plain paths remain SQLite and `postgres://` is normalized to PostgreSQL. URL
 validation rejects missing PostgreSQL hosts, malformed authorities, and ports
 outside `1..65535` before connection or SQLite fallback. CLI argument, datadir,

@@ -160,18 +160,104 @@ def test_forward_schema_repair_removes_accidental_run_output_columns(tmp_path: P
     with db.connect():
         db.initialize([Migration])
         with db.transaction():
-            db.execute("CREATE TABLE migration (id INTEGER PRIMARY KEY, name TEXT NOT NULL)")
+            db.execute(
+                "CREATE TABLE migration (id INTEGER PRIMARY KEY, name TEXT NOT NULL)"
+            )
             db.execute(
                 "CREATE TABLE run (id TEXT PRIMARY KEY, result TEXT, "
                 "stdout TEXT, stderr TEXT)"
+            )
+            db.execute(
+                "INSERT INTO run (id, result, stdout, stderr) VALUES (?, ?, ?, ?)",
+                ["empty-run", None, None, None],
             )
             migrate(db)
 
         with db.cursor() as cursor:
             db.execute_query(cursor, "PRAGMA table_info(run)")
             columns = [row[1] for row in cursor.fetchall()]
+            db.execute_query(
+                cursor,
+                "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+                ["run_legacy_output_archive"],
+            )
+            archive = cursor.fetchone()
 
     assert columns == ["id", "result"]
+    assert archive is None
+
+
+def test_forward_schema_repair_without_run_output_columns_has_no_archive(
+    tmp_path: Path,
+):
+    from actions.server.migrations import Migration
+    from actions.server.migrations.migration_reconcile_run_columns import migrate
+
+    db = Database(tmp_path / "migration-repair-fresh.db")
+    with db.connect():
+        db.initialize([Migration])
+        with db.transaction():
+            db.execute(
+                "CREATE TABLE migration (id INTEGER PRIMARY KEY, name TEXT NOT NULL)"
+            )
+            migrate(db)
+
+        assert "run_legacy_output_archive" not in db.list_table_names()
+
+
+def test_forward_schema_repair_archives_populated_outputs_without_overwrite(
+    tmp_path: Path,
+):
+    from actions.server.migrations import Migration
+    from actions.server.migrations.migration_reconcile_run_columns import migrate
+
+    db = Database(tmp_path / "migration-repair-populated.db")
+    with db.connect():
+        db.initialize([Migration])
+        with db.transaction():
+            db.execute("CREATE TABLE migration (id INTEGER PRIMARY KEY, name TEXT NOT NULL)")
+            db.execute(
+                "CREATE TABLE run (id TEXT PRIMARY KEY, result TEXT, "
+                "stdout TEXT, stderr TEXT)"
+            )
+            db.execute(
+                "CREATE TABLE run_legacy_output_archive ("
+                "run_id TEXT PRIMARY KEY, stdout TEXT, stderr TEXT)"
+            )
+            db.execute(
+                "INSERT INTO run_legacy_output_archive VALUES (?, ?, ?)",
+                ["run-1", "existing stdout", "existing stderr"],
+            )
+            for values in (
+                ["run-1", "result-1", "new stdout", "new stderr"],
+                ["run-2", "result-2", "only stdout", None],
+                ["run-3", "result-3", None, "only stderr"],
+                ["run-4", "result-4", None, None],
+            ):
+                db.execute(
+                    "INSERT INTO run (id, result, stdout, stderr) VALUES (?, ?, ?, ?)",
+                    values,
+                )
+
+            migrate(db)
+            migrate(db)
+
+        with db.cursor() as cursor:
+            db.execute_query(cursor, "PRAGMA table_info(run)")
+            run_columns = [row[1] for row in cursor.fetchall()]
+            db.execute_query(
+                cursor,
+                "SELECT run_id, stdout, stderr FROM run_legacy_output_archive "
+                "ORDER BY run_id",
+            )
+            archived = cursor.fetchall()
+
+    assert run_columns == ["id", "result"]
+    assert archived == [
+        ("run-1", "existing stdout", "existing stderr"),
+        ("run-2", "only stdout", None),
+        ("run-3", None, "only stderr"),
+    ]
 
 
 def test_forward_schema_repair_is_registered_after_historical_migration_nine():
@@ -334,6 +420,51 @@ def test_postgresql_placeholder_adapter_only_rewrites_parameters():
         db._adapt_sql(sql, ["only-one"])
 
 
+def test_postgresql_ddl_adapter_is_lexical_and_ddl_scoped():
+    db = Database("postgresql://localhost/actions_test")
+
+    sql = (
+        "SELECT 'enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1', "
+        '"enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1", '
+        "/* external INTEGER CHECK(external IN (0, 1)) NOT NULL */ "
+        "-- is_consequential INTEGER\n"
+        "$$enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1$$; "
+        "CREATE TABLE legacy_flags ("
+        "enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1, "
+        "external INTEGER CHECK(external IN (0, 1)) NOT NULL"
+        ");"
+    )
+
+    assert db._adapt_sql(sql) == (
+        "SELECT 'enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1', "
+        '"enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1", '
+        "/* external INTEGER CHECK(external IN (0, 1)) NOT NULL */ "
+        "-- is_consequential INTEGER\n"
+        "$$enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1$$; "
+        "CREATE TABLE legacy_flags ("
+        "enabled BOOLEAN NOT NULL DEFAULT TRUE, "
+        "external BOOLEAN NOT NULL"
+        ");"
+    )
+
+
+def test_postgresql_ddl_adapter_is_idempotent_and_marker_count_safe():
+    db = Database("postgresql://localhost/actions_test")
+    ddl = (
+        "CREATE TABLE legacy_flags ("
+        "enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1)"
+    )
+    sql = ddl + "; SELECT payload ? ? AND payload ?| ? AND payload ?& ?"
+
+    adapted = db._adapt_sql(sql, [1, 2, 3])
+
+    assert adapted == (
+        "CREATE TABLE legacy_flags (enabled BOOLEAN NOT NULL DEFAULT TRUE); "
+        "SELECT payload ? %s AND payload ?| %s AND payload ?& %s"
+    )
+    assert db._adapt_sql(db._adapt_sql(ddl)) == db._adapt_sql(ddl)
+
+
 def test_postgresql_sql_adapter_translates_legacy_boolean_ddl():
     db = Database("postgresql://localhost/actions_test")
 
@@ -406,6 +537,136 @@ def test_postgresql_bound_json_operators_and_array_rhs_execute():
                 assert cursor.fetchone()[0]
                 db.execute_query(cursor, "SELECT ? = ANY(?)", ["key", ["other", "key"]])
                 assert cursor.fetchone()[0]
+
+
+def _postgresql_schema_url(url: str, schema: str) -> str:
+    parts = urlsplit(url)
+    query = dict(parse_qsl(parts.query, keep_blank_values=True))
+    query["options"] = f"-csearch_path={schema}"
+    return urlunsplit(
+        (parts.scheme, parts.netloc, parts.path, urlencode(query), parts.fragment)
+    )
+
+
+def _create_postgresql_legacy_run_schema(url: str) -> tuple[Database, str, str]:
+    schema = f"actions_run_output_{uuid.uuid4().hex}"
+    database = Database(url)
+    with database.connect():
+        with database.transaction():
+            database.execute(f"CREATE SCHEMA {schema}")
+            database.execute(
+                f"CREATE TABLE {schema}.migration ("
+                "id INTEGER PRIMARY KEY, name TEXT NOT NULL)"
+            )
+            database.execute(
+                f"CREATE TABLE {schema}.run ("
+                "id TEXT PRIMARY KEY, result TEXT, stdout TEXT, stderr TEXT)"
+            )
+            database.execute(
+                f"INSERT INTO {schema}.migration VALUES (?, ?)",
+                [11, "reconcile_schema"],
+            )
+            for values in (
+                ["run-1", "result-1", "postgres stdout", "postgres stderr"],
+                ["run-2", "result-2", "only postgres stdout", None],
+                ["run-3", "result-3", None, "only postgres stderr"],
+                ["run-4", "result-4", None, None],
+            ):
+                database.execute(
+                    f"INSERT INTO {schema}.run "
+                    "(id, result, stdout, stderr) VALUES (?, ?, ?, ?)",
+                    values,
+                )
+    return database, schema, _postgresql_schema_url(url, schema)
+
+
+def _drop_postgresql_schema(database: Database, schema: str) -> None:
+    with database.connect():
+        with database.transaction():
+            database.execute(f"DROP SCHEMA IF EXISTS {schema} CASCADE")
+
+
+@pytest.mark.integration_test
+@pytest.mark.postgresql
+def test_postgresql_run_output_archive_preserves_values_and_reruns():
+    url = os.environ.get("ACTIONS_TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("ACTIONS_TEST_DATABASE_URL is not configured")
+
+    from actions.server.migrations.migration_reconcile_run_columns import migrate
+
+    owner, schema, schema_url = _create_postgresql_legacy_run_schema(url)
+    database = Database(schema_url)
+    try:
+        with database.connect():
+            with database.transaction():
+                migrate(database)
+            with database.transaction():
+                migrate(database)
+
+            columns = database.list_table_and_columns()
+            with database.cursor() as cursor:
+                database.execute_query(
+                    cursor,
+                    "SELECT run_id, stdout, stderr FROM run_legacy_output_archive "
+                    "ORDER BY run_id",
+                )
+                archived = cursor.fetchall()
+
+        assert columns["run"] == ["id", "result"]
+        assert columns["run_legacy_output_archive"] == [
+            "run_id",
+            "stdout",
+            "stderr",
+        ]
+        assert archived == [
+            ("run-1", "postgres stdout", "postgres stderr"),
+            ("run-2", "only postgres stdout", None),
+            ("run-3", None, "only postgres stderr"),
+        ]
+    finally:
+        _drop_postgresql_schema(owner, schema)
+
+
+@pytest.mark.integration_test
+@pytest.mark.postgresql
+def test_concurrent_postgresql_startup_archives_legacy_run_outputs_once():
+    url = os.environ.get("ACTIONS_TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("ACTIONS_TEST_DATABASE_URL is not configured")
+
+    owner, schema, schema_url = _create_postgresql_legacy_run_schema(url)
+    try:
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            results = list(executor.map(lambda _: migrate_db(schema_url), range(2)))
+
+        database = Database(schema_url)
+        with database.connect():
+            columns = database.list_table_and_columns()
+            with database.cursor() as cursor:
+                database.execute_query(
+                    cursor,
+                    "SELECT run_id, stdout, stderr FROM run_legacy_output_archive "
+                    "ORDER BY run_id",
+                )
+                archived = cursor.fetchall()
+                database.execute_query(
+                    cursor,
+                    "SELECT COUNT(*) FROM migration WHERE id=?",
+                    [12],
+                )
+                migration_count = cursor.fetchone()[0]
+
+        assert results == [True, True]
+        assert columns["run"] == ["id", "result"]
+        assert archived == [
+            ("run-1", "postgres stdout", "postgres stderr"),
+            ("run-2", "only postgres stdout", None),
+            ("run-3", None, "only postgres stderr"),
+        ]
+        assert migration_count == 1
+    finally:
+        _drop_postgresql_schema(owner, schema)
 
 
 @pytest.mark.integration_test

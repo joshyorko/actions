@@ -32,6 +32,227 @@ _RE_ALL_CAP = re.compile("([a-z0-9])([A-Z])")
 
 T = TypeVar("T")
 
+_SQLToken = Tuple[str, int, int, str]
+_SQL_OPERATOR_WORDS = {
+    "AND",
+    "OR",
+    "NOT",
+    "IS",
+    "IN",
+    "LIKE",
+    "ILIKE",
+    "BETWEEN",
+    "THEN",
+    "ELSE",
+    "WHEN",
+    "END",
+    "FROM",
+    "WHERE",
+    "ORDER",
+    "GROUP",
+    "LIMIT",
+    "OFFSET",
+    "JOIN",
+    "ON",
+    "VALUES",
+    "SET",
+    "RETURNING",
+    "UNION",
+    "ALL",
+    "DISTINCT",
+    "HAVING",
+    "NULL",
+    "TRUE",
+    "FALSE",
+}
+_LEGACY_BOOLEAN_COLUMNS = {
+    "ENABLED",
+    "SKIP_IF_RUNNING",
+    "RETRY_ENABLED",
+    "RATE_LIMIT_ENABLED",
+    "NOTIFY_ON_FAILURE",
+    "NOTIFY_ON_SUCCESS",
+    "NOTIFICATION_SENT",
+}
+
+
+def _tokenize_sql(sql: str) -> List[_SQLToken]:
+    """Tokenize executable SQL while leaving lexical regions opaque."""
+    tokens: List[_SQLToken] = []
+    i = 0
+    while i < len(sql):
+        if sql.startswith("--", i):
+            end = sql.find("\n", i + 2)
+            i = len(sql) if end < 0 else end
+            continue
+        if sql.startswith("/*", i):
+            end = sql.find("*/", i + 2)
+            i = len(sql) if end < 0 else end + 2
+            continue
+
+        char = sql[i]
+        if char.isspace():
+            i += 1
+            continue
+
+        start = i
+        if char in "'\"":
+            quote = char
+            i += 1
+            while i < len(sql):
+                if sql[i] == "\\" and quote == "'":
+                    i += 2
+                elif sql[i] == quote:
+                    if i + 1 < len(sql) and sql[i + 1] == quote:
+                        i += 2
+                    else:
+                        i += 1
+                        break
+                else:
+                    i += 1
+            tokens.append(("expr", start, i, sql[start:i]))
+            continue
+
+        if char == "$":
+            match = re.match(r"\$[A-Za-z_][A-Za-z0-9_]*\$|\$\$", sql[i:])
+            if match:
+                delimiter = match.group(0)
+                end = sql.find(delimiter, i + len(delimiter))
+                i = len(sql) if end < 0 else end + len(delimiter)
+                tokens.append(("expr", start, i, sql[start:i]))
+                continue
+
+        if char == "\\" and i + 1 < len(sql) and sql[i + 1] == "?":
+            i += 2
+            tokens.append(("other", start, i, sql[start:i]))
+            continue
+
+        if char == "?":
+            kind = "operator" if sql[i : i + 2] in {"?|", "?&"} else "question"
+            i += 2 if kind == "operator" else 1
+            tokens.append((kind, start, i, sql[start:i]))
+            continue
+
+        if char in ")]}" or char.isalnum() or char in "_$.":
+            end = i + 1
+            while end < len(sql) and (sql[end].isalnum() or sql[end] in "_$."):
+                end += 1
+            word = sql[i:end].upper()
+            kind = "operator" if word in _SQL_OPERATOR_WORDS else "expr"
+            tokens.append((kind, start, end, sql[start:end]))
+            i = end
+            continue
+
+        kind = "expr_start" if char in "([{" else "operator"
+        i += 1
+        tokens.append((kind, start, i, sql[start:i]))
+
+    return tokens
+
+
+def _legacy_boolean_ddl_replacements(
+    sql: str, tokens: List[_SQLToken]
+) -> List[Tuple[int, int, str]]:
+    replacements: List[Tuple[int, int, str]] = []
+    statement_start = 0
+    statement_ranges: List[Tuple[int, int]] = []
+    for index, token in enumerate(tokens):
+        if token[3] == ";":
+            statement_ranges.append((statement_start, index))
+            statement_start = index + 1
+    statement_ranges.append((statement_start, len(tokens)))
+
+    for start, end in statement_ranges:
+        statement_tokens = tokens[start:end]
+        words = [token[3].upper() for token in statement_tokens]
+        if len(words) < 2 or words[:2] not in (["ALTER", "TABLE"], ["CREATE", "TABLE"]):
+            continue
+        is_alter = words[:2] == ["ALTER", "TABLE"]
+
+        for index in range(len(statement_tokens)):
+            column = words[index]
+            if column in _LEGACY_BOOLEAN_COLUMNS:
+                prefix = [
+                    column,
+                    "INTEGER",
+                    "CHECK",
+                    "(",
+                    column,
+                    "IN",
+                    "(",
+                    "0",
+                    ",",
+                    "1",
+                    ")",
+                    ")",
+                    "NOT",
+                    "NULL",
+                    "DEFAULT",
+                ]
+                prefix_end = index + len(prefix)
+                if (
+                    prefix_end < len(words)
+                    and words[index:prefix_end] == prefix
+                    and words[prefix_end] in {"0", "1"}
+                ):
+                    first = statement_tokens[index]
+                    last = statement_tokens[prefix_end]
+                    if (
+                        "--" not in sql[first[1] : last[2]]
+                        and "/*" not in sql[first[1] : last[2]]
+                    ):
+                        default = "TRUE" if words[prefix_end] == "1" else "FALSE"
+                        replacements.append(
+                            (
+                                first[1],
+                                last[2],
+                                f"{first[3]} BOOLEAN NOT NULL DEFAULT {default}",
+                            )
+                        )
+
+            if is_alter and words[index : index + 4] == [
+                "ADD",
+                "COLUMN",
+                "IS_CONSEQUENTIAL",
+                "INTEGER",
+            ]:
+                integer_token = statement_tokens[index + 3]
+                replacements.append((integer_token[1], integer_token[2], "BOOLEAN"))
+
+            external_prefix = [
+                "EXTERNAL",
+                "INTEGER",
+                "CHECK",
+                "(",
+                "EXTERNAL",
+                "IN",
+                "(",
+                "0",
+                ",",
+                "1",
+                ")",
+                ")",
+                "NOT",
+                "NULL",
+            ]
+            external_end = index + len(external_prefix)
+            if words[index:external_end] == external_prefix:
+                first = statement_tokens[index]
+                last = statement_tokens[external_end - 1]
+                if (
+                    "--" not in sql[first[1] : last[2]]
+                    and "/*" not in sql[first[1] : last[2]]
+                ):
+                    replacements.append(
+                        (
+                            first[1],
+                            last[2],
+                            f"{first[3]} BOOLEAN NOT NULL",
+                        )
+                    )
+
+    return sorted(replacements)
+
 
 def _make_table_name(cls: type):
     cls_name = cls.__name__
@@ -751,130 +972,12 @@ ORDER BY table_name, index_name, sequence_in_index;
         if self.backend_name != "postgresql":
             return sql
 
-        sql = re.sub(
-            r"(?P<column>enabled|skip_if_running|retry_enabled|rate_limit_enabled|"
-            r"notify_on_failure|notify_on_success|notification_sent)"
-            r" INTEGER CHECK\((?P=column) IN \(0, 1\)\) NOT NULL DEFAULT (?P<default>[01])",
-            lambda match: (
-                f"{match.group('column')} BOOLEAN NOT NULL DEFAULT "
-                f"{'TRUE' if match.group('default') == '1' else 'FALSE'}"
-            ),
-            sql,
-        )
-        sql = re.sub(
-            r"external INTEGER CHECK\(external IN \(0, 1\)\) NOT NULL",
-            "external BOOLEAN NOT NULL",
-            sql,
-        )
-        sql = re.sub(
-            r"(ADD COLUMN is_consequential) INTEGER\b",
-            r"\1 BOOLEAN",
-            sql,
-        )
-
-        tokens: list[tuple[str, int]] = []
-        i = 0
-        while i < len(sql):
-            if sql.startswith("--", i):
-                end = sql.find("\n", i + 2)
-                i = len(sql) if end < 0 else end
-                continue
-            if sql.startswith("/*", i):
-                end = sql.find("*/", i + 2)
-                i = len(sql) if end < 0 else end + 2
-                continue
-            char = sql[i]
-            if char.isspace():
-                i += 1
-                continue
-            if char in "'\"":
-                quote = char
-                i += 1
-                while i < len(sql):
-                    if sql[i] == "\\" and quote == "'":
-                        i += 2
-                    elif sql[i] == quote:
-                        if i + 1 < len(sql) and sql[i + 1] == quote:
-                            i += 2
-                        else:
-                            i += 1
-                            break
-                    else:
-                        i += 1
-                tokens.append(("expr", i))
-                continue
-            if char == "$":
-                match = re.match(r"\$[A-Za-z_][A-Za-z0-9_]*\$|\$\$", sql[i:])
-                if match:
-                    delimiter = match.group(0)
-                    end = sql.find(delimiter, i + len(delimiter))
-                    i = len(sql) if end < 0 else end + len(delimiter)
-                    tokens.append(("expr", i))
-                    continue
-            if char == "\\" and i + 1 < len(sql) and sql[i + 1] == "?":
-                tokens.append(("other", i))
-                i += 2
-                continue
-            if char == "?":
-                kind = "operator" if sql[i : i + 2] in {"?|", "?&"} else "question"
-                tokens.append((kind, i))
-                i += 2 if kind == "operator" else 1
-                continue
-            if char in ")]}" or char.isalnum() or char in "_$.":
-                end = i + 1
-                while end < len(sql) and (sql[end].isalnum() or sql[end] in "_$."):
-                    end += 1
-                word = sql[i:end].upper()
-                kind = (
-                    "operator"
-                    if word
-                    in {
-                        "AND",
-                        "OR",
-                        "NOT",
-                        "IS",
-                        "IN",
-                        "LIKE",
-                        "ILIKE",
-                        "BETWEEN",
-                        "THEN",
-                        "ELSE",
-                        "WHEN",
-                        "END",
-                        "FROM",
-                        "WHERE",
-                        "ORDER",
-                        "GROUP",
-                        "LIMIT",
-                        "OFFSET",
-                        "JOIN",
-                        "ON",
-                        "VALUES",
-                        "SET",
-                        "RETURNING",
-                        "UNION",
-                        "ALL",
-                        "DISTINCT",
-                        "HAVING",
-                        "NULL",
-                        "TRUE",
-                        "FALSE",
-                    }
-                    else "expr"
-                )
-                tokens.append((kind, i))
-                i = end
-                continue
-            elif char in "([{":
-                tokens.append(("expr_start", i))
-            else:
-                tokens.append(("operator", i))
-            i += 1
+        tokens = _tokenize_sql(sql)
 
         expression_end = {"expr", "question"}
         expression_start = {"expr", "expr_start"}
         markers: set[int] = set()
-        for index, (kind, position) in enumerate(tokens):
+        for index, (kind, position, _end, _value) in enumerate(tokens):
             if kind != "question":
                 continue
             previous = tokens[index - 1][0] if index else None
@@ -884,81 +987,24 @@ ORDER BY table_name, index_name, sequence_in_index;
             ):
                 markers.add(position)
 
-        adapted: list[str] = []
-        placeholders = 0
-        i = 0
-        state = "normal"
-        dollar_quote: Optional[str] = None
-        while i < len(sql):
-            char = sql[i]
-            next_char = sql[i + 1] if i + 1 < len(sql) else ""
-            if state == "normal":
-                if char == "'":
-                    state = "single"
-                elif char == '"':
-                    state = "double"
-                elif char == "-" and next_char == "-":
-                    state = "line_comment"
-                elif char == "/" and next_char == "*":
-                    state = "block_comment"
-                elif char == "$":
-                    match = re.match(r"\$[A-Za-z_][A-Za-z0-9_]*\$|\$\$", sql[i:])
-                    if match:
-                        dollar_quote = match.group(0)
-                        state = "dollar_quote"
-                        adapted.append(dollar_quote)
-                        i += len(dollar_quote)
-                        continue
-                elif char == "?" and i in markers:
-                    adapted.append("%s")
-                    placeholders += 1
-                    i += 1
-                    continue
-                adapted.append(char)
-            elif state == "single":
-                adapted.append(char)
-                if char == "\\" and next_char:
-                    adapted.append(next_char)
-                    i += 2
-                    continue
-                if char == "'":
-                    if next_char == "'":
-                        adapted.append(next_char)
-                        i += 2
-                        continue
-                    state = "normal"
-            elif state == "double":
-                adapted.append(char)
-                if char == '"':
-                    if next_char == '"':
-                        adapted.append(next_char)
-                        i += 2
-                        continue
-                    state = "normal"
-            elif state == "line_comment":
-                adapted.append(char)
-                if char == "\n":
-                    state = "normal"
-            elif state == "block_comment":
-                adapted.append(char)
-                if char == "*" and next_char == "/":
-                    adapted.append(next_char)
-                    i += 2
-                    state = "normal"
-                    continue
-            else:
-                if dollar_quote and sql.startswith(dollar_quote, i):
-                    adapted.append(dollar_quote)
-                    i += len(dollar_quote)
-                    state = "normal"
-                    dollar_quote = None
-                    continue
-                adapted.append(char)
-            i += 1
-        if values is not None and placeholders != len(values):
+        changes = _legacy_boolean_ddl_replacements(sql, tokens)
+        changes.extend((position, position + 1, "%s") for position in markers)
+        changes.sort()
+
+        adapted: List[str] = []
+        cursor = 0
+        for start, end, replacement in changes:
+            if start < cursor:
+                continue
+            adapted.append(sql[cursor:start])
+            adapted.append(replacement)
+            cursor = end
+        adapted.append(sql[cursor:])
+
+        if values is not None and len(markers) != len(values):
             raise DBError(
-                f"PostgreSQL query has {placeholders} parameter placeholders; "
-                f"expected {placeholders} parameters, got {len(values)}"
+                f"PostgreSQL query has {len(markers)} parameter placeholders; "
+                f"expected {len(markers)} parameters, got {len(values)}"
             )
         return "".join(adapted)
 
