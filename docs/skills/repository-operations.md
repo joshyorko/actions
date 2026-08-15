@@ -23,6 +23,23 @@ entrypoints and `src/app` topology plus topology tests; the historical all-tree
 lint and full test suites were not green gates. The workflow runs both build
 boundaries.
 
+The frontend UI system is Actions-owned under `action_server/frontend/src` and
+must remain consumable by both entrypoints without a network presentation
+dependency. `src/index.css` is the semantic token and reduced-motion boundary:
+it uses the intentional system font stack, keeps light and `.dark` token values
+together, and disables authored animation under `prefers-reduced-motion`. The
+Canvas entrypoint must remain free of remote URLs, inline event handlers, and
+inline styles so it can render under an offline, CSP-constrained host. The
+`__tests__/ui-system.test.ts` contract test is a local fast regression gate
+for these invariants, and the UI component tests cover Radix modal focus
+isolation/return, centering-preserving Dialog animation, and dark muted-text
+contrast. Run those tests explicitly with Vitest; `ui-system.test.ts` is not
+yet part of `npm run test:quality` or the hosted workflow because that command
+and workflow integration belong to #98/PR #115. Do not duplicate those
+adjacent package/workflow edits in the #97 UI lane. These local contracts do
+not replace real-browser accessibility, responsive, contrast, or screenshot
+verification.
+
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
 registry URLs while allowing ordinary public scoped packages such as
