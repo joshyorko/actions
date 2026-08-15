@@ -992,11 +992,11 @@ def test_binary_recovery_admission_runs_from_workspace_root_before_release_check
     )
     admission = steps[admission_index]
     assert admission["working-directory"] == "."
+    assert admission["shell"] == "bash"
     assert admission_index < release_checkout_index
 
 
-def test_pypi_recovery_admission_canonicalizes_api_order_and_rejects_metadata_drift():
-    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+def test_pypi_recovery_admission_is_auditable_and_fail_closed():
     recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
     expected = [
         {
@@ -1024,36 +1024,45 @@ def test_pypi_recovery_admission_canonicalizes_api_order_and_rejects_metadata_dr
             "digest": "sha256:24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359",
         },
     ]
-    api_order_fixture = list(reversed(expected))
-    jq_filter = "map({id,name,size_in_bytes,digest}) | sort_by(.name) == ($expected | sort_by(.name))"
-    assert "map({id,name,size_in_bytes,digest}) | sort_by(.name) == ([" in generator
-    assert generator.count("sort_by(.name)") >= 3
-    assert recovery.count("sort_by(.name)") >= 3
-    result = subprocess.run(
-        ["jq", "-e", "--argjson", "expected", json.dumps(expected), jq_filter],
-        input=json.dumps(api_order_fixture),
-        text=True,
-        capture_output=True,
+    validation = next(
+        step["run"]
+        for step in yaml.safe_load(recovery)["jobs"]["pypi-recovery"]["steps"]
+        if step.get("name") == "Validate retained failed-run PyPI components"
     )
-    assert result.returncode == 0, result.stderr
-    for field, value in (("name", "extra"), ("size_in_bytes", 1), ("digest", "sha256:wrong")):
-        invalid = list(expected)
-        invalid[0] = invalid[0] | {field: value}
+    assert 'Accept: application/vnd.github+json' in validation
+    assert 'X-GitHub-Api-Version: 2022-11-28' in validation
+    assert "workflow_run_id" in validation
+    assert "actual artifact metadata" in validation
+    assert "sort_by(.name)" not in validation
+
+    def payload(items):
+        return {"artifacts": items}
+
+    base = [item | {"expired": False, "workflow_run": {"id": 31755673247}} for item in expected]
+    fixtures = [("reordered", list(reversed(base)), True)]
+    for label, replacement in (
+        ("extra", base + [base[0] | {"name": "unexpected"}]),
+        ("missing", base[:-1]),
+        ("duplicate", base[:-1] + [base[0]]),
+        ("wrong", base[:1] + [base[1] | {"digest": "sha256:wrong"}] + base[2:]),
+        ("omitted-id", base[:1] + [{key: value for key, value in base[1].items() if key != "id"}] + base[2:]),
+        ("null-name", base[:1] + [base[1] | {"name": None}] + base[2:]),
+        ("wrong-size", base[:1] + [base[1] | {"size_in_bytes": 1}] + base[2:]),
+        ("null-digest", base[:1] + [base[1] | {"digest": None}] + base[2:]),
+        ("expired", base[:1] + [base[1] | {"expired": True}] + base[2:]),
+        ("wrong-workflow", base[:1] + [base[1] | {"workflow_run": {"id": 9}}] + base[2:]),
+    ):
+        fixtures.append((label, replacement, False))
+
+    jq_filter = re.search(r"jq_filter='(.*?)'\nif ! jq", validation, re.DOTALL).group(1)
+    for label, items, should_pass in fixtures:
         result = subprocess.run(
-            ["jq", "-e", "--argjson", "expected", json.dumps(expected), jq_filter],
-            input=json.dumps(invalid),
+            ["jq", "-e", "--argjson", "expected", json.dumps(expected), "--arg", "run", "31755673247", jq_filter],
+            input=json.dumps(payload(items)),
             text=True,
             capture_output=True,
         )
-        assert result.returncode != 0
-    missing = expected[:-1]
-    result = subprocess.run(
-        ["jq", "-e", "--argjson", "expected", json.dumps(expected), jq_filter],
-        input=json.dumps(missing),
-        text=True,
-        capture_output=True,
-    )
-    assert result.returncode != 0
+        assert (result.returncode == 0) is should_pass, label
 
 
 def test_recovery_reuses_pinned_artifact_ids_and_digests_without_clobber():
