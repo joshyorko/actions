@@ -536,10 +536,11 @@ async def run_robot_task(
 
     run_id = f"run-{uuid.uuid4()}"
     relative_artifacts_path = f"runs/{run_id}"
-    artifacts_dir = settings.artifacts_dir / relative_artifacts_path
+    from actions.server._artifact_storage import get_artifact_storage
 
-    # Ensure artifacts directory exists
-    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    artifacts_dir = get_artifact_storage().create_run_artifacts_dir(
+        relative_artifacts_path
+    )
 
     # Create initial run record
     run_kwargs = dict(

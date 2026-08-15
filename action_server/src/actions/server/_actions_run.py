@@ -44,13 +44,10 @@ def _create_run_artifacts_dir(action: "Action", run_id: str) -> str:
         The path, relative to the settings.artifacts_dir which should be used
         to store the output of the given run.
     """
-    from ._settings import get_settings
-
-    settings = get_settings()
-    artifacts_dir = settings.artifacts_dir
     path = run_id
-    target_dir = artifacts_dir / path
-    target_dir.mkdir(parents=True, exist_ok=False)
+    from ._artifact_storage import get_artifact_storage
+
+    get_artifact_storage().create_run_artifacts_dir(path)
     return path
 
 
@@ -402,9 +399,11 @@ class _ActionsRunner:
         from actions.server._settings import get_settings
 
         from ._actions_process_pool import get_actions_process_pool
+        from ._artifact_storage import get_artifact_storage
         from ._models import get_db
 
         settings = get_settings()
+        artifact_storage = get_artifact_storage()
 
         global_runs_state = get_global_runs_state()
         runtime_info = global_runs_state.create_run_runtime_info(self._run_id)
@@ -425,26 +424,13 @@ class _ActionsRunner:
                 )
                 with process_handle_ctx as process_handle:
                     initial_time = time.monotonic()
-                    input_json = (
-                        settings.artifacts_dir
-                        / relative_artifacts_path
-                        / "__action_server_inputs.json"
+                    run_artifacts_dir = artifact_storage.run_artifacts_dir(
+                        relative_artifacts_path
                     )
+                    input_json = run_artifacts_dir / "__action_server_inputs.json"
                     input_json.write_bytes(json.dumps(inputs).encode("utf-8"))
-
-                    run_artifacts_dir = settings.artifacts_dir / relative_artifacts_path
-
-                    result_json = (
-                        settings.artifacts_dir
-                        / relative_artifacts_path
-                        / "__action_server_result.json"
-                    )
-
-                    output_file = (
-                        settings.artifacts_dir
-                        / relative_artifacts_path
-                        / "__action_server_output.txt"
-                    )
+                    result_json = run_artifacts_dir / "__action_server_result.json"
+                    output_file = run_artifacts_dir / "__action_server_output.txt"
 
                     returncode: int | Literal["<unset>"] = "<unset>"
                     _set_run_as_running(run, initial_time)
@@ -782,6 +768,9 @@ async def execute_action_for_scheduler(
     from ._models import Run, get_db
 
     settings = get_settings()
+    from ._artifact_storage import get_artifact_storage
+
+    artifact_storage = get_artifact_storage()
     global_runs_state = get_global_runs_state()
     runtime_info = global_runs_state.create_run_runtime_info(run_id)
 
@@ -802,26 +791,13 @@ async def execute_action_for_scheduler(
                 )
                 with process_handle_ctx as process_handle:
                     initial_time = time.monotonic()
-                    input_json = (
-                        settings.artifacts_dir
-                        / relative_artifacts_dir
-                        / "__action_server_inputs.json"
+                    run_artifacts_dir = artifact_storage.run_artifacts_dir(
+                        relative_artifacts_dir
                     )
+                    input_json = run_artifacts_dir / "__action_server_inputs.json"
                     input_json.write_bytes(json.dumps(inputs).encode("utf-8"))
-
-                    run_artifacts_dir = settings.artifacts_dir / relative_artifacts_dir
-
-                    result_json = (
-                        settings.artifacts_dir
-                        / relative_artifacts_dir
-                        / "__action_server_result.json"
-                    )
-
-                    output_file = (
-                        settings.artifacts_dir
-                        / relative_artifacts_dir
-                        / "__action_server_output.txt"
-                    )
+                    result_json = run_artifacts_dir / "__action_server_result.json"
+                    output_file = run_artifacts_dir / "__action_server_output.txt"
 
                     _set_run_as_running(run, initial_time)
 

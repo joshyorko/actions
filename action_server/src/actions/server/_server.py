@@ -81,7 +81,9 @@ def start_server(
 
     app = get_app()
 
-    artifacts_dir = settings.artifacts_dir
+    from actions.server._artifact_storage import get_artifact_storage
+
+    artifacts_dir = get_artifact_storage().root
 
     app.mount(
         "/artifacts",

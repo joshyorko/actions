@@ -480,12 +480,10 @@ class ProcessHandle:
 
         from actions.server._robo_utils import process, run_in_thread
         from actions.server._robo_utils.process import build_python_launch_env
-        from actions.server._settings import get_settings
-
-        settings = get_settings()
+        from actions.server._artifact_storage import get_artifact_storage
 
         mapping = {
-            "base_artifacts_dir": settings.artifacts_dir,
+            "base_artifacts_dir": get_artifact_storage().root,
             "run_id": run.id,
             "run_artifacts_dir": msg["robot_artifacts"],
             "action_name": msg["action_name"],
