@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 import subprocess
@@ -28,10 +29,34 @@ from actions.server.migrations import (
 )
 
 
+HISTORICAL_MIGRATION_SHA256 = {
+    1: "d5efbc8d68b73fa73cecaa669d5c68741f90ec57c20aabbca4b1c406696011a0",
+    2: "96e6449f06e9393de851142d2bfc4c5cb7e52433d30981811eb91a95fcd75f12",
+    3: "4f00c4896f6ac858135871b2c2f4d7c514b0bbadcc6c7c5d35896ab709d1683b",
+    4: "d175f9320afbd22e1ef2818eba8b09685b829f4578e97f7482be85ed72b7b298",
+    5: "695fec4aa4dc15e16d6947da52b34773a1c313bd6de89ff3f6b17a7673a48f2c",
+    6: "2b16365078de37ca3dddde01dccc07d97e539725b4cff09196fedca38960ca84",
+    7: "e983e4777b73ed0dcb64ac274229711ec96ab9dd7e9258de03c4f9f5f581b532",
+    8: "6b46cc310473eb2feb6269bf4fa3d80d2550f20a24d7a410f66d7e2ebe68c2df",
+    9: "df8e518b5c49d12cec47d4ecdd122227ae1034e1234ef14aa23fce065ae3bdf4",
+    10: "864b9dfea5365e3dc873e83c8b935eae59aa74de6dab0b05ed8e1473e21e3515",
+}
+
+
 @dataclass
 class SharedCounter:
     id: str
     value: int
+
+
+def test_historical_migration_contents_are_immutable():
+    migrations_dir = Path(__file__).parents[2] / "src/actions/server/migrations"
+
+    for migration_id, expected_sha256 in HISTORICAL_MIGRATION_SHA256.items():
+        migration_name = MIGRATION_ID_TO_NAME[migration_id]
+        content = (migrations_dir / f"migration_{migration_name}.py").read_bytes()
+
+        assert hashlib.sha256(content).hexdigest() == expected_sha256
 
 
 def test_database_selects_postgres_for_explicit_url():
@@ -284,19 +309,6 @@ def test_cli_argument_error_does_not_echo_database_url_credentials():
     assert "SENTINEL_PASSWORD" not in result.stderr
 
 
-def test_legacy_migration_error_does_not_echo_database_url_credentials():
-    from actions.server.migrations.migration_initial import migrate
-
-    database = Database(
-        "postgresql://SENTINEL_USER:SENTINEL_PASSWORD@db.example/actions"
-    )
-    with pytest.raises(RuntimeError) as error:
-        migrate(database)
-
-    assert "SENTINEL_USER" not in str(error.value)
-    assert "SENTINEL_PASSWORD" not in str(error.value)
-
-
 def test_cli_accepts_explicit_shared_database_url():
     from actions.server._cli_impl import _create_parser
 
@@ -320,6 +332,28 @@ def test_postgresql_placeholder_adapter_only_rewrites_parameters():
 
     with pytest.raises(DBError, match="expected 2 parameters, got 1"):
         db._adapt_sql(sql, ["only-one"])
+
+
+def test_postgresql_sql_adapter_translates_legacy_boolean_ddl():
+    db = Database("postgresql://localhost/actions_test")
+
+    assert db._adapt_sql(
+        "ALTER TABLE action ADD COLUMN enabled "
+        "INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1;"
+    ) == "ALTER TABLE action ADD COLUMN enabled BOOLEAN NOT NULL DEFAULT TRUE;"
+    assert db._adapt_sql(
+        "ALTER TABLE action ADD COLUMN is_consequential INTEGER;"
+    ) == "ALTER TABLE action ADD COLUMN is_consequential BOOLEAN;"
+    assert db._adapt_sql(
+        "CREATE TABLE user_session (external INTEGER CHECK(external IN (0, 1)) NOT NULL)"
+    ) == "CREATE TABLE user_session (external BOOLEAN NOT NULL)"
+    assert db._adapt_sql(
+        "CREATE TABLE schedule (enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1, "
+        "retry_enabled INTEGER CHECK(retry_enabled IN (0, 1)) NOT NULL DEFAULT 0)"
+    ) == (
+        "CREATE TABLE schedule (enabled BOOLEAN NOT NULL DEFAULT TRUE, "
+        "retry_enabled BOOLEAN NOT NULL DEFAULT FALSE)"
+    )
 
 
 def test_postgresql_placeholder_adapter_preserves_json_operators_and_array_rhs():

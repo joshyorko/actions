@@ -751,6 +751,27 @@ ORDER BY table_name, index_name, sequence_in_index;
         if self.backend_name != "postgresql":
             return sql
 
+        sql = re.sub(
+            r"(?P<column>enabled|skip_if_running|retry_enabled|rate_limit_enabled|"
+            r"notify_on_failure|notify_on_success|notification_sent)"
+            r" INTEGER CHECK\((?P=column) IN \(0, 1\)\) NOT NULL DEFAULT (?P<default>[01])",
+            lambda match: (
+                f"{match.group('column')} BOOLEAN NOT NULL DEFAULT "
+                f"{'TRUE' if match.group('default') == '1' else 'FALSE'}"
+            ),
+            sql,
+        )
+        sql = re.sub(
+            r"external INTEGER CHECK\(external IN \(0, 1\)\) NOT NULL",
+            "external BOOLEAN NOT NULL",
+            sql,
+        )
+        sql = re.sub(
+            r"(ADD COLUMN is_consequential) INTEGER\b",
+            r"\1 BOOLEAN",
+            sql,
+        )
+
         tokens: list[tuple[str, int]] = []
         i = 0
         while i < len(sql):

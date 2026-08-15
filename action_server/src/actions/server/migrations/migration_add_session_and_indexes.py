@@ -5,20 +5,16 @@ from actions.server.migrations import Migration
 def migrate(db: Database) -> None:
     from actions.server.migrations import MIGRATION_ID_TO_NAME
 
-    external_type = (
-        "BOOLEAN" if db.backend_name == "postgresql" else "INTEGER CHECK(external IN (0, 1))"
-    )
-
     sqls = [
         "CREATE INDEX action_action_package_id_non_unique_index ON action(action_package_id);",
         "CREATE INDEX run_status_non_unique_index ON run(status);",
         "CREATE INDEX run_action_id_non_unique_index ON run(action_id);",
-        f"""
+        """
 CREATE TABLE IF NOT EXISTS user_session(
     id TEXT NOT NULL PRIMARY KEY,
     created_at TEXT NOT NULL,
     accessed_at TEXT NOT NULL,
-    external {external_type} NOT NULL
+    external INTEGER CHECK(external IN (0, 1)) NOT NULL  
 )
 """,
         """

@@ -287,7 +287,13 @@ exactly one run, while PostgreSQL due schedules use a session-level database
 claim held through processing; closing that connection releases ownership, and
 SQLite keeps its existing single-node path.
 
-The shared PostgreSQL adapter translates only unquoted `?` parameter markers;
+The shared PostgreSQL adapter translates only unquoted `?` parameter markers and
+rewrites the legacy SQLite boolean/check DDL emitted by historical migrations
+at the database execution boundary; historical migration files remain byte-
+immutable. The all-1-through-10 SHA-256 regression and the SQLite v0-to-current
+plus PostgreSQL fresh/existing/concurrent migration acceptance live in
+`action_server/tests/action_server_tests/test_database_shared.py` and
+`test_database.py`.
 SQL literals, quoted identifiers, comments, dollar-quoted bodies, escaped
 markers, JSON operators (`?`, `?|`, `?&`), and bound array expressions remain
 unchanged, and marker/value counts are validated before execution. Database
@@ -295,10 +301,12 @@ settings reject malformed or unsupported URL schemes without logging the URL;
 plain paths remain SQLite and `postgres://` is normalized to PostgreSQL. URL
 validation rejects missing PostgreSQL hosts, malformed authorities, and ports
 outside `1..65535` before connection or SQLite fallback. CLI argument, datadir,
-and migration diagnostics must use the database URL redactor, which removes
+and new migration diagnostics must use the database URL redactor, which removes
 userinfo, query, and fragment data without changing the connection value.
 Scheme detection and redaction are case-insensitive, while the validated
-connection string passed to psycopg retains its original bytes. Marker
+connection string passed to psycopg retains its original bytes. New migration
+status and CLI diagnostics use the redactor; the byte-immutable legacy
+`migration_initial.py` error retains the community behavior. Marker
 translation is based on lexical SQL tokens and expression boundaries, so
 parenthesized or comment-separated JSON operator RHS expressions remain
 operators while true markers are converted and counted.
