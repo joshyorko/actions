@@ -2,6 +2,7 @@ import asyncio
 import logging
 import os
 import socket
+import stat
 import subprocess
 import sys
 import typing
@@ -10,6 +11,7 @@ from functools import partial
 from typing import Optional, Sequence
 
 from fastapi.applications import FastAPI
+from fastapi.staticfiles import StaticFiles
 from termcolor import colored
 
 from ._protocols import ArgumentsNamespaceStart, IBeforeStartCallback
@@ -18,6 +20,29 @@ if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
 log = logging.getLogger(__name__)
+
+
+class _ArtifactStaticFiles(StaticFiles):
+    def lookup_path(self, path: str):
+        root = os.fspath(self.directory)
+        current = root
+        for component in path.split("/"):
+            if component in ("", "."):
+                continue
+
+            current = os.path.join(current, component)
+            try:
+                info = os.lstat(current)
+            except FileNotFoundError:
+                break
+            except OSError:
+                return "", None
+
+            if os.path.commonpath((root, current)) != root:
+                return "", None
+            if stat.S_ISLNK(info.st_mode):
+                return "", None
+        return super().lookup_path(path)
 
 
 class _LoopHolder:
@@ -39,7 +64,6 @@ def start_server(
     import uvicorn
     from fastapi import Depends, HTTPException, Security, params
     from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-    from fastapi.staticfiles import StaticFiles
     from starlette.requests import Request
     from starlette.responses import HTMLResponse
 
@@ -87,7 +111,7 @@ def start_server(
 
     app.mount(
         "/artifacts",
-        StaticFiles(directory=artifacts_dir),
+        _ArtifactStaticFiles(directory=artifacts_dir),
         name="artifacts",
     )
 
