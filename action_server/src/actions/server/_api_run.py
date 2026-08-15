@@ -39,6 +39,12 @@ def get_run_by_id(run_id: str) -> Run:
         with global_runs_state.semaphore:
             return global_runs_state.get_run_from_id(run_id)
     except KeyError as err:
+        from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
+
+        try:
+            return Run(**get_artifact_storage().run_metadata(run_id))
+        except (ArtifactStorageNotFoundError, TypeError, KeyError, ValueError):
+            pass
         from fastapi.exceptions import HTTPException
         from starlette import status
 
@@ -194,27 +200,18 @@ for a given run (i.e.: [{'name': '__action_server_output.txt', 'size_in_bytes': 
 """
     ),
 ]:
-    from actions.server._settings import get_settings
-
-    settings = get_settings()
     run = get_run_by_id(run_id)
-    artifacts_dir = settings.artifacts_dir
+    from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
 
-    if not settings.artifacts_dir:
+    storage = get_artifact_storage()
+    try:
+        artifacts = storage.list_files(run.relative_artifacts_dir)
+    except ArtifactStorageNotFoundError:
         log.critical(
-            "Unable to get artifacts because the settings artifacts_dir is not defined."
+            "Unable to get artifacts because the run artifact directory does not exist."
         )
         return []
-
-    artifacts_in = artifacts_dir / run.relative_artifacts_dir
-    if not artifacts_in.exists():
-        log.critical(
-            f"Unable to get artifacts because the artifacts_dir ({artifacts_in}) "
-            "does not exist."
-        )
-        return []
-
-    return _get_file_info_in_path(artifacts_in)
+    return [ArtifactInfo(name, size) for name, size in artifacts]
 
 
 @run_api_router.get("/{run_id}/log.html")
@@ -358,27 +355,16 @@ return new TextDecoder().decode(mergedArray);
 
 
 def _get_artifacts_dir_for_run_id(run_id: str) -> Optional[Path]:
-    from actions.server._settings import get_settings
-
-    settings = get_settings()
     run = get_run_by_id(run_id)
-    artifacts_dir = settings.artifacts_dir
+    from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
 
-    if not settings.artifacts_dir:
+    try:
+        return get_artifact_storage().run_artifacts_dir(run.relative_artifacts_dir)
+    except ArtifactStorageNotFoundError:
         log.critical(
-            "Unable to get artifacts because the settings artifacts_dir is not defined."
+            "Unable to get artifacts because the run artifact directory does not exist."
         )
         return None
-
-    artifacts_in = (artifacts_dir / run.relative_artifacts_dir).absolute()
-    if not artifacts_in.exists():
-        log.critical(
-            f"Unable to get artifacts because the artifacts_dir ({artifacts_in}) "
-            "does not exist."
-        )
-        return None
-
-    return artifacts_in
 
 
 @run_api_router.get("/{run_id}/artifacts/text-content")
@@ -392,8 +378,13 @@ def get_run_artifact_text(
         title="A regexp to match artifact names.",
     ),
 ) -> Dict[str, str]:
-    artifacts_in = _get_artifacts_dir_for_run_id(run_id)
-    if artifacts_in is None:
+    from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
+
+    run = get_run_by_id(run_id)
+    storage = get_artifact_storage()
+    try:
+        storage.run_artifacts_dir(run.relative_artifacts_dir)
+    except ArtifactStorageNotFoundError:
         return {}
     if artifact_names is None:
         artifact_names = []
@@ -407,9 +398,9 @@ def get_run_artifact_text(
 
         # We can't use glob directly because users would be able to get contents
         # out of the artifacts dir with that.
-        for artifact_info in _get_file_info_in_path(artifacts_in):
-            if pattern.match(artifact_info.name):
-                artifact_names.append(artifact_info.name)
+        for name, _size in storage.list_files(run.relative_artifacts_dir):
+            if pattern.match(name):
+                artifact_names.append(name)
 
     ret: Dict[str, str] = {}
     for name in artifact_names:
@@ -417,27 +408,12 @@ def get_run_artifact_text(
             continue
         checked.add(name)
 
-        f = (artifacts_in / name).absolute()
-        if not f.exists():
-            log.critical(f"Unable to get artifact because it does not exist: {f}")
-            continue
-
         try:
-            Path(f).relative_to(artifacts_in)
-        except ValueError:
-            log.critical(
-                "Unable to get artifact (%s) because it does not point to a folder "
-                "inside of the artifacts dir (%s).",
-                f,
-                artifacts_in,
-            )
-            continue
-
-        try:
-            ret[name] = f.read_text("utf-8", "replace")
+            ret[name] = storage.read_text(run.relative_artifacts_dir, name)
+        except ArtifactStorageNotFoundError:
+            log.critical("Unable to read missing artifact: %s", name)
         except Exception:
-            log.critical("Unable to read artifact: %s as text.", f)
-
+            log.exception("Unable to read artifact: %s as text.", name)
             continue
 
     return ret
@@ -450,40 +426,15 @@ def get_run_artifact_binary(
         title="Artifact name for which the content should be gotten."
     ),
 ):
-    from actions.server._settings import get_settings
+    import mimetypes
 
-    settings = get_settings()
+    from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
+
     run = get_run_by_id(run_id)
-    artifacts_dir = settings.artifacts_dir
-
-    if not settings.artifacts_dir:
-        log.critical(
-            "Unable to get artifacts because the settings artifacts_dir is not defined."
-        )
-        return None
-
-    artifacts_in = artifacts_dir / run.relative_artifacts_dir
-    if not artifacts_in.exists():
-        log.critical(
-            f"Unable to get artifacts because the artifacts_dir ({artifacts_in}) "
-            "does not exist."
-        )
-        return None
-
-    f = (artifacts_in / artifact_name).absolute()
-    if not f.exists():
-        log.critical(f"Unable to get artifact because it does not exist: {f}")
-        return None
-
     try:
-        Path(f).relative_to(artifacts_in)
-    except ValueError:
-        log.critical(
-            "Unable to get artifact (%s) because it does not point to a folder "
-            "inside of the artifacts dir (%s).",
-            f,
-            artifacts_dir,
-        )
+        path = get_artifact_storage().read_path(run.relative_artifacts_dir, artifact_name)
+    except ArtifactStorageNotFoundError:
+        log.critical("Unable to get missing artifact: %s", artifact_name)
         return None
-
-    return FileResponse(f)
+    media_type = mimetypes.guess_type(artifact_name)[0] or "application/octet-stream"
+    return FileResponse(path, media_type=media_type)
