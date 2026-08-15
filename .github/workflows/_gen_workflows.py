@@ -1425,6 +1425,7 @@ test "$package_version" = "$tag_version"
     def recovery_admission_guard(self):
         return {
             "name": "Admit only merged community recovery code",
+            "working-directory": ".",
             "env": {
                 "WORKFLOW_REF": "${{ github.workflow_ref }}",
                 "WORKFLOW_SHA": "${{ github.workflow_sha }}",
@@ -1511,12 +1512,12 @@ jq -e --arg repo "$GITHUB_REPOSITORY" '
   [.artifacts[] | select(.workflow_run.id == 31755673247)] as $all
   | ($all | length == 4)
   and ($all | all(.expired == false))
-  and ($all | map({id,name,size_in_bytes,digest}) | sort_by(.name) == [
+  and ($all | map({id,name,size_in_bytes,digest}) | sort_by(.name) == ([
     {id:9202638277,name:"action-server-dist",size_in_bytes:848656,digest:"sha256:e68002161c7c05c7558339816733e56fc953fd8fe1bbf02f99f1f70c4a575072"},
     {id:9202661215,name:"Linux-wheels",size_in_bytes:26180637,digest:"sha256:e63ebadb20107adba8a6c76489105339337c1406db96ff328161dda9baf0c34e"},
     {id:9202659672,name:"macOS-wheels",size_in_bytes:24523055,digest:"sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e"},
     {id:9202679653,name:"Windows-wheels",size_in_bytes:21134688,digest:"sha256:24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359"}
-  ])
+  ] | sort_by(.name)))
 ' <<<"$artifacts_json"
 """,
         }
