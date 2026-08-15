@@ -95,6 +95,9 @@ def test_frontend_quality_uses_cross_platform_prettier_eol_contract():
         "npm run test:lint && npm run test:types && "
         "npm run test:prettier && npm run test:topology"
     )
+    assert scripts["test:topology"] == (
+        "vitest --run __tests__/topology/frontend-topology.test.ts"
+    )
 
 
 def test_validators_prove_manifest_inventory_and_metadata(tmp_path):

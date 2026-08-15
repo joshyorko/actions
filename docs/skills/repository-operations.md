@@ -22,7 +22,8 @@ runtime asset dependency. Frontend quality is fail-fast through
 entrypoints and `src/app` topology plus topology tests. Its Prettier check uses
 the package-owned `--end-of-line auto` contract so the same quality invocation
 accepts the checkout's native LF or CRLF representation on every matrix OS; the
-historical all-tree
+topology gate targets its exact test file so Vitest resolves the same test on
+Windows and POSIX project roots; the historical all-tree
 lint and full test suites were not green gates. The workflow runs both build
 boundaries. The release command `npm run build:artifacts` also generates a
 CycloneDX `sbom.json` in each root. Runtime is post-processed into one
