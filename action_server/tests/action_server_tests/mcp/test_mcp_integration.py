@@ -926,3 +926,90 @@ def prompt_{suffix}() -> str:
         assert after["revision"] != before["revision"]
 
     wait_for_non_error_condition(assert_fresh_catalogs)
+
+
+@pytest.mark.integration_test
+def test_mcp_catalog_revisions_match_across_independent_runtime_processes(
+    tmpdir,
+) -> None:
+    """Independent Runtime processes fingerprint equivalent surfaces alike."""
+    from pathlib import Path
+
+    from action_server_tests.fixtures import run_async_in_new_thread
+
+    def write_catalog(directory: Path, *, reverse: bool, differing: bool) -> None:
+        definitions = [
+            '''@mcp.tool()\ndef alpha() -> str:\n    """Alpha tool."""\n    return "alpha"\n''',
+            '''@mcp.resource("catalog://direct")\ndef direct_resource() -> str:\n    """Direct resource."""\n    return "direct"\n''',
+            '''@mcp.resource("catalog://{item}")\ndef templated_resource(item: str) -> str:\n    """Templated resource."""\n    return item\n''',
+            '''@mcp.prompt()\ndef explain() -> str:\n    """Explain prompt."""\n    return "explain"\n''',
+            '''@mcp.tool()\ndef bravo() -> str:\n    """Bravo tool."""\n    return "bravo"\n''',
+        ]
+        if differing:
+            definitions.append(
+                '''@mcp.tool()\ndef charlie() -> str:\n    """Different tool."""\n    return "charlie"\n'''
+            )
+        if reverse:
+            definitions.reverse()
+        (directory / "catalog_actions.py").write_text(
+            "from actions import mcp\n\n" + "\n".join(definitions),
+            encoding="utf-8",
+        )
+
+    directories = [Path(tmpdir) / name for name in ("first", "second", "different")]
+    for directory in directories:
+        directory.mkdir()
+    write_catalog(directories[0], reverse=False, differing=False)
+    write_catalog(directories[1], reverse=True, differing=False)
+    write_catalog(directories[2], reverse=False, differing=True)
+
+    processes = [ActionServerProcess(directory) for directory in directories]
+    try:
+        for process, directory in zip(processes, directories):
+            process.start(
+                db_file="server.db",
+                cwd=directory,
+                actions_sync=True,
+                timeout=60 * 10,
+            )
+
+        async def catalog_for(process: ActionServerProcess) -> dict[str, object]:
+            base_url = f"http://localhost:{process.port}/mcp"
+            results = [
+                await _post_modern_mcp(base_url, method, request_id)
+                for request_id, method in enumerate(
+                    (
+                        "tools/list",
+                        "resources/list",
+                        "resources/templates/list",
+                        "prompts/list",
+                    ),
+                    start=1,
+                )
+            ]
+            revisions = {
+                result["_meta"]["actions.catalogRevision"] for result in results
+            }
+            assert len(revisions) == 1
+            return {
+                "revision": revisions.pop(),
+                "tools": [tool["name"] for tool in results[0]["tools"]],
+                "resources": [resource["uri"] for resource in results[1]["resources"]],
+                "templates": [
+                    template["uriTemplate"]
+                    for template in results[2]["resourceTemplates"]
+                ],
+                "prompts": [prompt["name"] for prompt in results[3]["prompts"]],
+            }
+
+        first, second, different = (
+            run_async_in_new_thread(lambda: catalog_for(processes[0])),
+            run_async_in_new_thread(lambda: catalog_for(processes[1])),
+            run_async_in_new_thread(lambda: catalog_for(processes[2])),
+        )
+        assert first == second
+        assert first["revision"] != different["revision"]
+        assert first["tools"] != different["tools"]
+    finally:
+        for process in reversed(processes):
+            process.stop()

@@ -259,6 +259,8 @@ class McpServerSetupHelper:
             if not uri:
                 raise ValueError(f"Resource {action.name} has no URI")
             if "{" in uri and "}" in uri:
+                if uri in self._resource_template_to_action_info:
+                    raise ValueError(f"duplicate resource template URI: {uri}")
                 self._resource_templates.append(
                     ResourceTemplate(
                         uri_template=uri,
@@ -274,6 +276,8 @@ class McpServerSetupHelper:
                 self._resource_templates.sort(key=lambda item: item.uri_template)
             else:
                 resource_uri = uri
+                if resource_uri in self._resources:
+                    raise ValueError(f"duplicate resource URI: {resource_uri}")
                 self._resources[resource_uri] = Resource(
                     uri=resource_uri,
                     name=action.name,
@@ -287,6 +291,8 @@ class McpServerSetupHelper:
                 )
             return
         if kind == "prompt":
+            if action.name in self._prompt_name_to_action_info:
+                raise ValueError(f"duplicate prompt name: {action.name}")
             schema = json.loads(action.input_schema)
             required = schema.get("required", [])
             self._prompts.append(
@@ -310,6 +316,8 @@ class McpServerSetupHelper:
             self._prompts.sort(key=lambda item: item.name)
             return
 
+        if action.name in self._tool_name_to_action_info:
+            raise ValueError(f"duplicate tool name: {action.name}")
         output_schema = json.loads(action.output_schema)
         if output_schema.get("type") == "string":
             output_schema_kind: OutputSchemaKind = "string"
