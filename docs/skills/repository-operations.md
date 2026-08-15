@@ -338,6 +338,9 @@ PostgreSQL backend is selected explicitly with `--database-url` or
 SQLite, and logs identify only the backend rather than credentials. The
 database facade preserves the existing model and parameterized SQL contract,
 while PostgreSQL migration startup takes a transaction-scoped advisory lock.
+Local artifact storage creates the default `artifacts_dir` on first use when
+the caller supplies `Settings` directly; an explicitly configured artifact
+storage root remains required to exist and pass containment validation.
 The direct two-instance/concurrent-update and concurrent-startup acceptance is
 in `action_server/tests/action_server_tests/test_database_shared.py` and
 requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.
