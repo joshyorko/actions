@@ -975,6 +975,111 @@ def test_recovery_workflow_admits_only_merged_community_workflow_code():
     )
 
 
+def test_binary_recovery_admission_runs_from_workspace_root_before_release_checkout():
+    workflow = yaml.safe_load((WORKFLOWS / "actions_runtime_recovery.yml").read_text())
+    binary = workflow["jobs"]["binary-build"]
+    assert binary["defaults"]["run"]["working-directory"] == "release-source/action_server"
+    steps = binary["steps"]
+    admission_index = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("name") == "Admit only merged community recovery code"
+    )
+    release_checkout_index = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("name") == "Checkout immutable release source"
+    )
+    admission = steps[admission_index]
+    assert admission["working-directory"] == "."
+    assert admission["shell"] == "bash"
+    assert admission_index < release_checkout_index
+
+
+def test_pypi_recovery_admission_is_auditable_and_fail_closed():
+    recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
+    expected = [
+        {
+            "id": 9202638277,
+            "name": "action-server-dist",
+            "size_in_bytes": 848656,
+            "digest": "sha256:e68002161c7c05c7558339816733e56fc953fd8fe1bbf02f99f1f70c4a575072",
+        },
+        {
+            "id": 9202661215,
+            "name": "Linux-wheels",
+            "size_in_bytes": 26180637,
+            "digest": "sha256:e63ebadb20107adba8a6c76489105339337c1406db96ff328161dda9baf0c34e",
+        },
+        {
+            "id": 9202659672,
+            "name": "macOS-wheels",
+            "size_in_bytes": 24523055,
+            "digest": "sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e",
+        },
+        {
+            "id": 9202679653,
+            "name": "Windows-wheels",
+            "size_in_bytes": 21134688,
+            "digest": "sha256:24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359",
+        },
+    ]
+    validation = next(
+        step["run"]
+        for step in yaml.safe_load(recovery)["jobs"]["pypi-recovery"]["steps"]
+        if step.get("name") == "Validate retained failed-run PyPI components"
+    )
+    assert 'Accept: application/vnd.github+json' in validation
+    assert 'X-GitHub-Api-Version: 2022-11-28' in validation
+    assert "workflow_run_id" in validation
+    assert "raw metadata withheld" in validation
+    assert "jq -c '[.artifacts[]? | {id,name" not in validation
+    assert "sort_by(.name)" not in validation
+
+    def payload(items):
+        return {"artifacts": items}
+
+    base = [item | {"expired": False, "workflow_run": {"id": 31755673247}} for item in expected]
+    fixtures = [("reordered", list(reversed(base)), True)]
+    for label, replacement in (
+        ("extra", base + [base[0] | {"name": "unexpected"}]),
+        ("extra-wrong-run", base + [base[0] | {"name": "unexpected", "workflow_run": {"id": 9}}]),
+        ("missing", base[:-1]),
+        ("missing-run", base[:1] + [{key: value for key, value in base[1].items() if key != "workflow_run"}] + base[2:]),
+        ("duplicate", base[:-1] + [base[0]]),
+        ("wrong", base[:1] + [base[1] | {"digest": "sha256:wrong"}] + base[2:]),
+        ("omitted-id", base[:1] + [{key: value for key, value in base[1].items() if key != "id"}] + base[2:]),
+        ("null-name", base[:1] + [base[1] | {"name": None}] + base[2:]),
+        ("wrong-size", base[:1] + [base[1] | {"size_in_bytes": 1}] + base[2:]),
+        ("null-digest", base[:1] + [base[1] | {"digest": None}] + base[2:]),
+        ("expired", base[:1] + [base[1] | {"expired": True}] + base[2:]),
+        ("wrong-workflow", base[:1] + [base[1] | {"workflow_run": {"id": 9}}] + base[2:]),
+        ("string-workflow-id", base[:1] + [base[1] | {"workflow_run": {"id": "31755673247"}}] + base[2:]),
+        ("null-workflow-id", base[:1] + [base[1] | {"workflow_run": {"id": None}}] + base[2:]),
+        ("object-workflow-id", base[:1] + [base[1] | {"workflow_run": {"id": {"value": 31755673247}}}] + base[2:]),
+        ("fractional-artifact-id", base[:1] + [base[1] | {"id": 9202661215.5}] + base[2:]),
+        ("fractional-size", base[:1] + [base[1] | {"size_in_bytes": 1.5}] + base[2:]),
+        ("malformed-artifact", base[:1] + [None] + base[2:]),
+        ("malformed-workflow-run", base[:1] + [base[1] | {"workflow_run": None}] + base[2:]),
+        ("url-shaped-name", base[:1] + [base[1] | {"name": "https://token.example/unsafe?secret=redacted"}] + base[2:]),
+    ):
+        fixtures.append((label, replacement, False))
+
+    jq_filter = re.search(r"jq_filter='(.*?)'\nif ! jq", validation, re.DOTALL).group(1)
+    for label, items, should_pass in fixtures:
+        result = subprocess.run(
+            ["jq", "-e", "--argjson", "expected", json.dumps(expected), "--argjson", "run", "31755673247", jq_filter],
+            input=json.dumps(payload(items)),
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert (result.returncode == 0) is should_pass, label
+
+    unsafe_name = "https://token.example/unsafe?secret=redacted"
+    assert unsafe_name not in validation
+
+
 def test_recovery_reuses_pinned_artifact_ids_and_digests_without_clobber():
     generator = (WORKFLOWS / "_gen_workflows.py").read_text()
     recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()

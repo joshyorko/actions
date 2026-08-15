@@ -2,7 +2,11 @@
  * Shared icon components used throughout the application
  */
 
-export function ActionsIcon({ className }: { className?: string }): JSX.Element {
+export function ActionsIcon({
+  className,
+}: {
+  className?: string;
+}): JSX.Element {
   return (
     <svg
       className={className}
@@ -43,7 +47,11 @@ export function RunsIcon({ className }: { className?: string }): JSX.Element {
   );
 }
 
-export function OpenApiIcon({ className }: { className?: string }): JSX.Element {
+export function OpenApiIcon({
+  className,
+}: {
+  className?: string;
+}): JSX.Element {
   return (
     <svg
       className={className}
@@ -127,7 +135,11 @@ export function MoonIcon({ className }: { className?: string }): JSX.Element {
   );
 }
 
-export function MonitorIcon({ className }: { className?: string }): JSX.Element {
+export function MonitorIcon({
+  className,
+}: {
+  className?: string;
+}): JSX.Element {
   return (
     <svg
       className={className}
@@ -147,7 +159,11 @@ export function MonitorIcon({ className }: { className?: string }): JSX.Element 
   );
 }
 
-export function SettingsIcon({ className }: { className?: string }): JSX.Element {
+export function SettingsIcon({
+  className,
+}: {
+  className?: string;
+}): JSX.Element {
   return (
     <svg
       className={className}
@@ -162,6 +178,94 @@ export function SettingsIcon({ className }: { className?: string }): JSX.Element
     >
       <circle cx="12" cy="12" r="3" />
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </svg>
+  );
+}
+
+export type StatusName =
+  | "connected"
+  | "degraded"
+  | "unavailable"
+  | "loading"
+  | "stale"
+  | "running"
+  | "passed"
+  | "failed"
+  | "cancelled"
+  | "empty"
+  | "no-results";
+const statusLabels: Record<StatusName, string> = {
+  connected: "Connected",
+  degraded: "Degraded",
+  unavailable: "Unavailable",
+  loading: "Loading",
+  stale: "Stale",
+  running: "Running",
+  passed: "Passed",
+  failed: "Failed",
+  cancelled: "Cancelled",
+  empty: "Empty",
+  "no-results": "No results",
+};
+const statusPaths: Record<StatusName, JSX.Element> = {
+  connected: <path d="m5 12 4 4L19 6" />,
+  degraded: <path d="M12 8v4m0 4h.01" />,
+  unavailable: <path d="m6 6 12 12M18 6 6 18" />,
+  loading: <path d="M12 3a9 9 0 1 0 9 9" />,
+  stale: (
+    <>
+      <path d="M12 6v6l4 2" />
+      <circle cx="12" cy="12" r="9" />
+    </>
+  ),
+  running: (
+    <>
+      <path d="m8 5 11 7-11 7V5Z" />
+      <path d="M4 5v14" />
+    </>
+  ),
+  passed: <path d="m5 12 4 4L19 6" />,
+  failed: <path d="m6 6 12 12M18 6 6 18" />,
+  cancelled: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 8 8 8" />
+    </>
+  ),
+  empty: (
+    <>
+      <path d="M4 5h16v14H4z" />
+      <path d="M8 9h8M8 13h5" />
+    </>
+  ),
+  "no-results": (
+    <>
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m16 16 4 4" />
+    </>
+  ),
+};
+export function StatusIcon({
+  status,
+  size = 16,
+}: {
+  status: StatusName;
+  size?: 16 | 18 | 20;
+}): JSX.Element {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      role="img"
+      aria-label={statusLabels[status]}
+    >
+      {statusPaths[status]}
     </svg>
   );
 }

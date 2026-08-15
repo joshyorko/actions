@@ -48,6 +48,23 @@ macOS, and Windows. The Canvas manifest command passes
 single-quote semantics so `cmd.exe` preserves the exact identity string;
 validators remain strict about that identity.
 
+The frontend UI system is Actions-owned under `action_server/frontend/src` and
+must remain consumable by both entrypoints without a network presentation
+dependency. `src/index.css` is the semantic token and reduced-motion boundary:
+it uses the intentional system font stack, keeps light and `.dark` token values
+together, and disables authored animation under `prefers-reduced-motion`. The
+Canvas entrypoint must remain free of remote URLs, inline event handlers, and
+inline styles so it can render under an offline, CSP-constrained host. The
+`__tests__/ui-system.test.ts` contract test is a local fast regression gate
+for these invariants, and the UI component tests cover Radix modal focus
+isolation/return, centering-preserving Dialog animation, and dark muted-text
+contrast. Run those tests explicitly with Vitest; `ui-system.test.ts` is not
+yet part of `npm run test:quality` or the hosted workflow because that command
+and workflow integration belong to #98/PR #115. Do not duplicate those
+adjacent package/workflow edits in the #97 UI lane. These local contracts do
+not replace real-browser accessibility, responsive, contrast, or screenshot
+verification.
+
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
 registry URLs while allowing ordinary public scoped packages such as
@@ -210,6 +227,16 @@ when absolute, traversal-based, symlink/hardlink, duplicate, normalized-alias, o
 otherwise unsafe. Every member is canonicalized and tracked before directory
 creation or file extraction, so duplicate directory records fail closed like
 duplicate regular files. API digest metadata alone is not artifact proof.
+
+The recovery workflow's binary matrix defaults to the immutable source directory,
+so its pre-checkout merged-community admission step explicitly runs from the
+workspace root with `shell: bash` on every matrix OS. PyPI artifact admission
+uses GitHub's explicit JSON media type and `2022-11-28` API version headers, then
+fail-closed validates exactly four artifacts scoped to the source run. Each
+artifact must have one pinned ID, name, size, SHA-256 digest, `expired: false`,
+and the source workflow-run identity; API order is irrelevant. The raw response
+must contain exactly four entries, and a mismatch emits only a fixed bounded
+failure message without artifact names, URLs, or payload metadata.
 
 The local verifier also accepts a successful canonical recovery dispatch, but only after
 binding the active recovery workflow's exact database ID/path, supported run metadata,
