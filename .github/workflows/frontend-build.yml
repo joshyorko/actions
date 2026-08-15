@@ -42,6 +42,10 @@ jobs:
         working-directory: action_server
         run: inv build-frontend
 
+      - name: Frontend Quality
+        working-directory: action_server/frontend
+        run: npm run test:quality
+
       - name: Check Bundle Size
         id: check-bundle-size
         working-directory: action_server/frontend
@@ -58,36 +62,38 @@ jobs:
         shell: bash
         run: |
           mv frontend/dist frontend/dist_first
+          mv frontend/dist-canvas frontend/dist-canvas_first
           inv build-frontend
-          # Extract just the hash, not the full path, for comparison
-          find frontend/dist -type f -exec sha256sum {} \; | awk '{print $1}' | sort > dist_second.sha
-          find frontend/dist_first -type f -exec sha256sum {} \; | awk '{print $1}' | sort > dist_first.sha
-          if ! diff dist_first.sha dist_second.sha; then
-            echo "Determinism check failed: Builds are not reproducible"
-            rm -rf frontend/dist
-            mv frontend/dist_first frontend/dist
-            exit 1
-          fi
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          def fingerprint(root):
+              return sorted((path.relative_to(root).as_posix(), hashlib.sha256(path.read_bytes()).hexdigest()) for path in root.rglob('*') if path.is_file())
+
+          for name in ('dist', 'dist-canvas'):
+              first = fingerprint(Path('frontend') / f'{name}_first')
+              second = fingerprint(Path('frontend') / name)
+              if first != second:
+                  raise SystemExit(f'Determinism check failed for {name}')
           echo "Determinism check passed"
           rm -rf frontend/dist
           mv frontend/dist_first frontend/dist
+          rm -rf frontend/dist-canvas
+          mv frontend/dist-canvas_first frontend/dist-canvas
 
       - name: Validate Artifact
         id: validate-artifact
-        working-directory: action_server
-        run: inv validate-artifact
-
-      - name: Generate SBOM
-        run: |
-          npm install -g @cyclonedx/cyclonedx-npm
-          cd action_server/frontend
-          cyclonedx-npm --output-file sbom.json
+        working-directory: action_server/frontend
+        run: npm run validate:artifacts
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: frontend-runtime-${{ matrix.os }}-${{ github.sha }}
-          path: action_server/frontend/dist/**
+          path: |
+            action_server/frontend/dist/**
+            action_server/frontend/dist-canvas/**
 
       - name: Job Summary
         if: always()

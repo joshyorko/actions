@@ -32,6 +32,11 @@ the canonical shipped-payload inventory: retained `artifact-manifest.json` and
 `sbom.json` metadata are excluded from that budget. The hosted frontend build
 must invoke this same dual-root validator rather than recursively summing a
 `dist` directory.
+The JavaScript and Python validators independently enumerate shipped files,
+require sorted normalized relative paths with an exact directory inventory, and
+recompute every file's byte length and SHA-256. Hash multisets are insufficient:
+omission, extra files, path swaps, reordering, wrong sizes, and wrong hashes
+fail validation.
 CycloneDX generation uses its `--output-reproducible` mode for both retained
 SBOMs, and the hosted determinism check runs the second clean build on Linux,
 macOS, and Windows. The Canvas manifest command passes

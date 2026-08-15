@@ -11,7 +11,6 @@ from typing import Optional
 
 import tree_shaker
 
-
 FRONTEND_PAYLOAD_MAX_BYTES = 1024 * 1024
 FRONTEND_PAYLOAD_GZIP_MAX_BYTES = 300 * 1024
 
@@ -145,15 +144,40 @@ def validate_build_metadata(artifact_path: Path) -> list[ValidationCheck]:
     try:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         files = manifest["files"]
-        names = {item["path"] for item in files}
+        names = [item["path"] for item in files]
+        expected_names = sorted(
+            path.relative_to(artifact_path).as_posix()
+            for path in artifact_path.rglob("*")
+            if path.is_file() and path.name not in {"artifact-manifest.json", "sbom.json"}
+        )
+        safe_names = all(
+            isinstance(name, str)
+            and name == name.replace("\\", "/")
+            and not name.startswith("/")
+            and ".." not in Path(name).parts
+            for name in names
+        )
         checks = [ValidationCheck("metadata", manifest.get("schemaVersion") == 1 and bool(files), "Build manifest is present and non-empty")]
         checks.append(ValidationCheck("source-maps", not manifest.get("sourceMaps") and not any(name.endswith(".map") for name in names), "Source maps are disabled"))
         checks.append(ValidationCheck("sbom", (artifact_path / "sbom.json").is_file(), "CycloneDX SBOM is present"))
         content_type = manifest.get("contentType")
         checks.append(ValidationCheck("content-type", content_type in {"text/html", "text/html;profile=mcp-app"}, f"Declared content type: {content_type}"))
-        checks.append(ValidationCheck("hashes", all(hashlib.sha256((artifact_path / item["path"]).read_bytes()).hexdigest() == item["sha256"] for item in files), "Manifest hashes match artifact files"))
-        payload_bytes = sum(item["bytes"] for item in files)
-        payload_gzip_bytes = sum(len(gzip.compress((artifact_path / item["path"]).read_bytes(), mtime=0)) for item in files)
+        checks.append(ValidationCheck("inventory", safe_names and names == sorted(names) and names == expected_names, "Manifest inventory is complete and sorted"))
+        actual_bytes = []
+        actual_hashes = []
+        for item in files:
+            path = artifact_path / item["path"]
+            data = path.read_bytes()
+            actual_bytes.append(len(data) == item["bytes"])
+            actual_hashes.append(hashlib.sha256(data).hexdigest() == item["sha256"])
+        checks.append(ValidationCheck("sizes", all(actual_bytes), "Manifest byte sizes match artifact files"))
+        checks.append(ValidationCheck("hashes", all(actual_hashes), "Manifest hashes match artifact files"))
+        payload = [
+            (artifact_path / item["path"]).read_bytes()
+            for item in files
+        ]
+        payload_bytes = sum(len(data) for data in payload)
+        payload_gzip_bytes = sum(len(gzip.compress(data, mtime=0)) for data in payload)
         checks.append(ValidationCheck("payload-budget", payload_bytes <= FRONTEND_PAYLOAD_MAX_BYTES and payload_gzip_bytes <= FRONTEND_PAYLOAD_GZIP_MAX_BYTES, f"Executable payload: {payload_bytes} bytes raw, {payload_gzip_bytes} bytes gzip"))
         return checks
     except (OSError, KeyError, TypeError, ValueError) as exc:
