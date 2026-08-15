@@ -759,7 +759,6 @@ async def execute_action_for_scheduler(
 
     from actions.server._actions_process_pool import (
         ActionsProcessPool,
-        ProcessHandle,
         get_actions_process_pool,
     )
     from actions.server._runs_state_cache import get_global_runs_state
@@ -834,7 +833,7 @@ async def execute_action_for_scheduler(
                         try:
                             result_contents = json.loads(run_result_str)
                         except Exception:
-                            error_msg = f"Error parsing action result as JSON."
+                            error_msg = "Error parsing action result as JSON."
 
                     if error_msg is not None:
                         if runtime_info.is_canceled():
@@ -863,7 +862,7 @@ async def execute_action_for_scheduler(
                         return (False, error_msg)
 
             except CancelledError as e:
-                _set_run_as_cancelled(run, str(e), time.monotonic())
+                _set_run_as_finished_cancelled(run, str(e), time.monotonic())
                 return (False, str(e))
             except Exception as e:
                 log.exception(f"Error executing scheduled action {action.name}")

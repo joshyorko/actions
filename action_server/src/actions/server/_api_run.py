@@ -7,7 +7,7 @@ from typing import Annotated, Dict, List, Literal, Optional, Sequence
 import fastapi
 from fastapi.params import Param
 from fastapi.routing import APIRouter
-from starlette.responses import FileResponse
+from starlette.responses import FileResponse, Response
 
 from actions.server._models import Run, RunDetailModel, RunListItemModel
 
@@ -194,9 +194,6 @@ for a given run (i.e.: [{'name': '__action_server_output.txt', 'size_in_bytes': 
 """
     ),
 ]:
-    from actions.server._settings import get_settings
-
-    settings = get_settings()
     run = get_run_by_id(run_id)
     from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
 
@@ -352,8 +349,6 @@ return new TextDecoder().decode(mergedArray);
 
 
 def _get_artifacts_dir_for_run_id(run_id: str) -> Optional[Path]:
-    from actions.server._settings import get_settings
-
     run = get_run_by_id(run_id)
     from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
 
