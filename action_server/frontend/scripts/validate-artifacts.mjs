@@ -1,4 +1,4 @@
-import { readdir, readFile } from 'node:fs/promises';
+import { lstat, readdir, readFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
 import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -8,11 +8,13 @@ const GZIP_BUDGET = 300 * 1024;
 
 for (const [directory, expectedArtifact, expectedType] of [['dist', 'runtime-admin', 'text/html'], ['dist-canvas', 'canvas-mcp-app', 'text/html;profile=mcp-app']]) {
   const root = join(process.cwd(), directory);
+  if ((await lstat(root)).isSymbolicLink()) throw new Error(`${directory}: symlink root is forbidden`);
   const manifest = JSON.parse(await readFile(join(root, 'artifact-manifest.json')));
   async function files(dir) {
     const entries = await readdir(dir, { withFileTypes: true });
     const nested = await Promise.all(entries.map(async entry => {
       const path = join(dir, entry.name);
+      if (entry.isSymbolicLink()) throw new Error(`${directory}: symlink entry is forbidden: ${path}`);
       return entry.isDirectory() ? files(path) : [path];
     }));
     return nested.flat();

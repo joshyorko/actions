@@ -66,6 +66,9 @@ class BuildArtifact:
 
 def validate_imports(artifact_path: Path) -> ValidationCheck:
     """Validate that an artifact has no removed product imports."""
+    symlinks = _find_symlinks(artifact_path)
+    if symlinks:
+        return ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")
     if artifact_path.is_dir():
         violations = tree_shaker.TreeShaker("actions", artifact_path).scan_directory(
             artifact_path
@@ -90,6 +93,15 @@ def validate_imports(artifact_path: Path) -> ValidationCheck:
         message="No enterprise imports detected",
         severity="info",
     )
+
+
+def _find_symlinks(artifact_path: Path) -> list[Path]:
+    """Return the root or any descendant symlink without following it."""
+    if artifact_path.is_symlink():
+        return [artifact_path]
+    if not artifact_path.is_dir():
+        return []
+    return [path for path in artifact_path.rglob("*") if path.is_symlink()]
 
 
 def validate_size(artifact_path: Path, baseline_path: Optional[Path]) -> ValidationCheck:
@@ -134,8 +146,15 @@ def validate_size(artifact_path: Path, baseline_path: Optional[Path]) -> Validat
     )
 
 
-def validate_build_metadata(artifact_path: Path) -> list[ValidationCheck]:
+def validate_build_metadata(
+    artifact_path: Path,
+    expected_artifact: Optional[str] = None,
+    expected_content_type: Optional[str] = None,
+) -> list[ValidationCheck]:
     """Validate release metadata when produced by the frontend build pipeline."""
+    symlinks = _find_symlinks(artifact_path)
+    if symlinks:
+        return [ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")]
     if not artifact_path.is_dir():
         return []
     manifest_path = artifact_path / "artifact-manifest.json"
@@ -161,7 +180,8 @@ def validate_build_metadata(artifact_path: Path) -> list[ValidationCheck]:
         checks.append(ValidationCheck("source-maps", not manifest.get("sourceMaps") and not any(name.endswith(".map") for name in names), "Source maps are disabled"))
         checks.append(ValidationCheck("sbom", (artifact_path / "sbom.json").is_file(), "CycloneDX SBOM is present"))
         content_type = manifest.get("contentType")
-        checks.append(ValidationCheck("content-type", content_type in {"text/html", "text/html;profile=mcp-app"}, f"Declared content type: {content_type}"))
+        checks.append(ValidationCheck("artifact", expected_artifact is not None and manifest.get("artifact") == expected_artifact, f"Declared artifact: {manifest.get('artifact')}"))
+        checks.append(ValidationCheck("content-type", expected_content_type is not None and content_type == expected_content_type, f"Declared content type: {content_type}"))
         checks.append(ValidationCheck("inventory", safe_names and names == sorted(names) and names == expected_names, "Manifest inventory is complete and sorted"))
         actual_bytes = []
         actual_hashes = []
@@ -188,6 +208,8 @@ def validate_artifact(
     artifact_path: Path,
     baseline_path: Optional[Path] = None,
     json_output: bool = False,
+    expected_artifact: Optional[str] = None,
+    expected_content_type: Optional[str] = None,
 ) -> tuple[bool, list[ValidationCheck]]:
     """Validate build artifact.
     
@@ -200,11 +222,15 @@ def validate_artifact(
         Tuple of (all_passed, checks)
     """
     checks = []
+
+    symlinks = _find_symlinks(artifact_path)
+    if symlinks:
+        return False, [ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")]
     
     # Run validation checks
     checks.append(validate_imports(artifact_path))
     checks.append(validate_size(artifact_path, baseline_path))
-    checks.extend(validate_build_metadata(artifact_path))
+    checks.extend(validate_build_metadata(artifact_path, expected_artifact, expected_content_type))
     
     # Determine overall result
     all_passed = all(
