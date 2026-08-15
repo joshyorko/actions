@@ -1032,7 +1032,8 @@ def test_pypi_recovery_admission_is_auditable_and_fail_closed():
     assert 'Accept: application/vnd.github+json' in validation
     assert 'X-GitHub-Api-Version: 2022-11-28' in validation
     assert "workflow_run_id" in validation
-    assert "actual artifact metadata" in validation
+    assert "raw metadata withheld" in validation
+    assert "jq -c '[.artifacts[]? | {id,name" not in validation
     assert "sort_by(.name)" not in validation
 
     def payload(items):
@@ -1042,7 +1043,9 @@ def test_pypi_recovery_admission_is_auditable_and_fail_closed():
     fixtures = [("reordered", list(reversed(base)), True)]
     for label, replacement in (
         ("extra", base + [base[0] | {"name": "unexpected"}]),
+        ("extra-wrong-run", base + [base[0] | {"name": "unexpected", "workflow_run": {"id": 9}}]),
         ("missing", base[:-1]),
+        ("missing-run", base[:1] + [{key: value for key, value in base[1].items() if key != "workflow_run"}] + base[2:]),
         ("duplicate", base[:-1] + [base[0]]),
         ("wrong", base[:1] + [base[1] | {"digest": "sha256:wrong"}] + base[2:]),
         ("omitted-id", base[:1] + [{key: value for key, value in base[1].items() if key != "id"}] + base[2:]),
@@ -1051,18 +1054,30 @@ def test_pypi_recovery_admission_is_auditable_and_fail_closed():
         ("null-digest", base[:1] + [base[1] | {"digest": None}] + base[2:]),
         ("expired", base[:1] + [base[1] | {"expired": True}] + base[2:]),
         ("wrong-workflow", base[:1] + [base[1] | {"workflow_run": {"id": 9}}] + base[2:]),
+        ("string-workflow-id", base[:1] + [base[1] | {"workflow_run": {"id": "31755673247"}}] + base[2:]),
+        ("null-workflow-id", base[:1] + [base[1] | {"workflow_run": {"id": None}}] + base[2:]),
+        ("object-workflow-id", base[:1] + [base[1] | {"workflow_run": {"id": {"value": 31755673247}}}] + base[2:]),
+        ("fractional-artifact-id", base[:1] + [base[1] | {"id": 9202661215.5}] + base[2:]),
+        ("fractional-size", base[:1] + [base[1] | {"size_in_bytes": 1.5}] + base[2:]),
+        ("malformed-artifact", base[:1] + [None] + base[2:]),
+        ("malformed-workflow-run", base[:1] + [base[1] | {"workflow_run": None}] + base[2:]),
+        ("url-shaped-name", base[:1] + [base[1] | {"name": "https://token.example/unsafe?secret=redacted"}] + base[2:]),
     ):
         fixtures.append((label, replacement, False))
 
     jq_filter = re.search(r"jq_filter='(.*?)'\nif ! jq", validation, re.DOTALL).group(1)
     for label, items, should_pass in fixtures:
         result = subprocess.run(
-            ["jq", "-e", "--argjson", "expected", json.dumps(expected), "--arg", "run", "31755673247", jq_filter],
+            ["jq", "-e", "--argjson", "expected", json.dumps(expected), "--argjson", "run", "31755673247", jq_filter],
             input=json.dumps(payload(items)),
             text=True,
             capture_output=True,
+            check=False,
         )
         assert (result.returncode == 0) is should_pass, label
+
+    unsafe_name = "https://token.example/unsafe?secret=redacted"
+    assert unsafe_name not in validation
 
 
 def test_recovery_reuses_pinned_artifact_ids_and_digests_without_clobber():

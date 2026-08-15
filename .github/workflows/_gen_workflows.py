@@ -1525,13 +1525,27 @@ jq -e --argjson required '["build-sdist (ubuntu-py3.12)", "build-wheels (macos-1
 artifacts_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/artifacts?per_page=100" "${gh_api_headers[@]}")
 expected_artifacts='__EXPECTED_ARTIFACTS__'
 # shellcheck disable=SC2016
-jq_filter='[.artifacts[]? | select((.workflow_run?.id? | tostring) == $run) | {id,name,size_in_bytes,digest,expired,workflow_run_id:.workflow_run.id}] as $actual
-  | ($actual | length == 4)
-  and ($actual | all(.[]; (.id | type == "number" and . > 0) and (.name | type == "string" and length > 0) and (.size_in_bytes | type == "number" and . >= 0) and (.digest | type == "string" and test("^sha256:[0-9a-f]{64}$")) and (.expired == false) and (.workflow_run_id | tostring) == $run))
-  and ($expected | all(.[]; . as $wanted | ([$actual[] | select(.name == $wanted.name)] | length == 1 and .[0].id == $wanted.id and .[0].name == $wanted.name and .[0].size_in_bytes == $wanted.size_in_bytes and .[0].digest == $wanted.digest)))'
-if ! jq -e --arg run "$PYPI_SOURCE_RUN_ID" --argjson expected "$expected_artifacts" "$jq_filter" <<<"$artifacts_json"; then
-  echo "actual artifact metadata:" >&2
-  jq -c '[.artifacts[]? | {id,name,size_in_bytes,digest,expired,workflow_run_id:.workflow_run.id}]' <<<"$artifacts_json" >&2 || true
+jq_filter='(.artifacts | type == "array" and length == 4) as $shape
+  | if ($shape | not) then false
+    else ([.artifacts[] | if type != "object" then false
+      else (has("id") and has("name") and has("size_in_bytes") and has("digest") and has("expired") and has("workflow_run")
+        and (.id | type == "number" and floor == . and . > 0)
+        and (.name | type == "string" and length > 0)
+        and (.size_in_bytes | type == "number" and floor == . and . >= 0)
+        and (.digest | type == "string" and test("^sha256:[0-9a-f]{64}$"))
+        and (.expired == false)
+        and (if (.workflow_run | type) != "object" then false
+          else (.workflow_run | has("id"))
+            and (.workflow_run.id | type == "number" and floor == . and . == $run)
+          end)
+      ) end] | all) as $valid
+      | if ($valid | not) then false
+        else ([.artifacts[] | {id,name,size_in_bytes,digest,expired,workflow_run_id:.workflow_run.id}] as $actual
+          | ($expected | all(.[]; . as $wanted | ([$actual[] | select(.name == $wanted.name)] | length == 1 and .[0].id == $wanted.id and .[0].name == $wanted.name and .[0].size_in_bytes == $wanted.size_in_bytes and .[0].digest == $wanted.digest))))
+        end
+    end'
+if ! jq -e --argjson run "$PYPI_SOURCE_RUN_ID" --argjson expected "$expected_artifacts" "$jq_filter" <<<"$artifacts_json"; then
+  echo "artifact inventory validation failed; raw metadata withheld" >&2
   exit 1
 fi
 """.replace("__EXPECTED_ARTIFACTS__", expected_artifacts),

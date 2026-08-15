@@ -209,9 +209,9 @@ workspace root with `shell: bash` on every matrix OS. PyPI artifact admission
 uses GitHub's explicit JSON media type and `2022-11-28` API version headers, then
 fail-closed validates exactly four artifacts scoped to the source run. Each
 artifact must have one pinned ID, name, size, SHA-256 digest, `expired: false`,
-and the source workflow-run identity; API order is irrelevant. A mismatch emits
-only sanitized artifact ID/name/size/digest/expiry/workflow-run fields before
-any artifact download.
+and the source workflow-run identity; API order is irrelevant. The raw response
+must contain exactly four entries, and a mismatch emits only a fixed bounded
+failure message without artifact names, URLs, or payload metadata.
 
 The local verifier also accepts a successful canonical recovery dispatch, but only after
 binding the active recovery workflow's exact database ID/path, supported run metadata,

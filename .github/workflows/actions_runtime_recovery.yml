@@ -266,20 +266,26 @@ jobs:
         digest\":\"sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e\"\
         },{\"id\":9202679653,\"name\":\"Windows-wheels\",\"size_in_bytes\":21134688,\"\
         digest\":\"sha256:24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359\"\
-        }]'\n# shellcheck disable=SC2016\njq_filter='[.artifacts[]? | select((.workflow_run?.id?\
-        \ | tostring) == $run) | {id,name,size_in_bytes,digest,expired,workflow_run_id:.workflow_run.id}]\
-        \ as $actual\n  | ($actual | length == 4)\n  and ($actual | all(.[]; (.id\
-        \ | type == \"number\" and . > 0) and (.name | type == \"string\" and length\
-        \ > 0) and (.size_in_bytes | type == \"number\" and . >= 0) and (.digest |\
-        \ type == \"string\" and test(\"^sha256:[0-9a-f]{64}$\")) and (.expired ==\
-        \ false) and (.workflow_run_id | tostring) == $run))\n  and ($expected | all(.[];\
-        \ . as $wanted | ([$actual[] | select(.name == $wanted.name)] | length ==\
-        \ 1 and .[0].id == $wanted.id and .[0].name == $wanted.name and .[0].size_in_bytes\
-        \ == $wanted.size_in_bytes and .[0].digest == $wanted.digest)))'\nif ! jq\
-        \ -e --arg run \"$PYPI_SOURCE_RUN_ID\" --argjson expected \"$expected_artifacts\"\
-        \ \"$jq_filter\" <<<\"$artifacts_json\"; then\n  echo \"actual artifact metadata:\"\
-        \ >&2\n  jq -c '[.artifacts[]? | {id,name,size_in_bytes,digest,expired,workflow_run_id:.workflow_run.id}]'\
-        \ <<<\"$artifacts_json\" >&2 || true\n  exit 1\nfi\n"
+        }]'\n# shellcheck disable=SC2016\njq_filter='(.artifacts | type == \"array\"\
+        \ and length == 4) as $shape\n  | if ($shape | not) then false\n    else ([.artifacts[]\
+        \ | if type != \"object\" then false\n      else (has(\"id\") and has(\"name\"\
+        ) and has(\"size_in_bytes\") and has(\"digest\") and has(\"expired\") and\
+        \ has(\"workflow_run\")\n        and (.id | type == \"number\" and floor ==\
+        \ . and . > 0)\n        and (.name | type == \"string\" and length > 0)\n\
+        \        and (.size_in_bytes | type == \"number\" and floor == . and . >=\
+        \ 0)\n        and (.digest | type == \"string\" and test(\"^sha256:[0-9a-f]{64}$\"\
+        ))\n        and (.expired == false)\n        and (if (.workflow_run | type)\
+        \ != \"object\" then false\n          else (.workflow_run | has(\"id\"))\n\
+        \            and (.workflow_run.id | type == \"number\" and floor == . and\
+        \ . == $run)\n          end)\n      ) end] | all) as $valid\n      | if ($valid\
+        \ | not) then false\n        else ([.artifacts[] | {id,name,size_in_bytes,digest,expired,workflow_run_id:.workflow_run.id}]\
+        \ as $actual\n          | ($expected | all(.[]; . as $wanted | ([$actual[]\
+        \ | select(.name == $wanted.name)] | length == 1 and .[0].id == $wanted.id\
+        \ and .[0].name == $wanted.name and .[0].size_in_bytes == $wanted.size_in_bytes\
+        \ and .[0].digest == $wanted.digest))))\n        end\n    end'\nif ! jq -e\
+        \ --argjson run \"$PYPI_SOURCE_RUN_ID\" --argjson expected \"$expected_artifacts\"\
+        \ \"$jq_filter\" <<<\"$artifacts_json\"; then\n  echo \"artifact inventory\
+        \ validation failed; raw metadata withheld\" >&2\n  exit 1\nfi\n"
     - name: Download retained action-server-dist
       env:
         ARTIFACT_ID: '9202638277'
