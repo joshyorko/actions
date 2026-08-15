@@ -984,6 +984,39 @@ def test_recovery_reuses_pinned_artifact_ids_and_digests_without_clobber():
     assert "--clobber" not in recovery
 
 
+def test_recovery_generator_and_generated_digest_are_identical():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    recovery = (WORKFLOWS / "actions_runtime_recovery.yml").read_text()
+    digest = "sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e"
+    stale = "sha256:5bba95082475ec108a6c764891a7a905ac135fd3fc58246be0f0244b53e281e"
+    assert digest in generator and digest in recovery
+    assert stale not in generator and stale not in recovery
+
+
+def test_recovery_download_hashes_and_safely_extracts_archives():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    assert "sha256sum /tmp/runtime-artifact.zip" in generator
+    assert "zipfile.ZipFile" in generator
+    assert "PurePosixPath" in generator
+    assert "path.is_absolute()" in generator
+    assert '".." in path.parts' in generator
+    assert "stat.S_IFMT" in generator
+    assert 'open(target, "xb")' in generator
+
+
+def test_recovery_partial_draft_uploads_only_missing_assets_and_rejects_conflicts():
+    generator = (WORKFLOWS / "_gen_workflows.py").read_text()
+    assert "test \"$(jq -r '.draft'" in generator
+    assert 'gh release upload "$RELEASE_REF" "release-assets/$name"' in generator
+    assert 'test "$existing_digest" = "sha256:$digest"' in generator
+    assert "actual_names=$(jq -r" in generator
+    assert 'gh release upload "$RELEASE_REF" release-assets/*' in generator
+
+
+def test_generated_recovery_has_no_trailing_blank_line():
+    assert not (WORKFLOWS / "actions_runtime_recovery.yml").read_bytes().endswith(b"\n\n")
+
+
 def test_generated_recovery_run_blocks_are_bash_syntax_valid():
     workflow = yaml.safe_load((WORKFLOWS / "actions_runtime_recovery.yml").read_text())
     blocks = []

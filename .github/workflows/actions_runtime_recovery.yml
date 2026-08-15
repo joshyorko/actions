@@ -259,49 +259,101 @@ jobs:
         ARTIFACT_ID: '9202638277'
         DESTINATION: pypi-components/sdist
         GH_TOKEN: ${{ github.token }}
-      run: 'set -Eeuo pipefail
-
-        mkdir -p "$DESTINATION"
-
-        gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runtime-artifact.zip
-
-        unzip -q /tmp/runtime-artifact.zip -d "$DESTINATION"'
+      run: "set -Eeuo pipefail\nmkdir -p \"$DESTINATION\"\ngh api \"repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
+        \ > /tmp/runtime-artifact.zip\ntest \"$(sha256sum /tmp/runtime-artifact.zip\
+        \ | cut -d' ' -f1)\" = \"e68002161c7c05c7558339816733e56fc953fd8fe1bbf02f99f1f70c4a575072\"\
+        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport stat\nimport\
+        \ zipfile\nfrom pathlib import PurePosixPath\n\ndestination = os.environ[\"\
+        DESTINATION\"]\nroot = os.path.realpath(destination)\nwith zipfile.ZipFile(\"\
+        /tmp/runtime-artifact.zip\") as source:\n    for member in source.infolist():\n\
+        \        path = PurePosixPath(member.filename)\n        if path.is_absolute()\
+        \ or \"..\" in path.parts or \"\\x00\" in member.filename:\n            raise\
+        \ SystemExit(f\"unsafe archive member: {member.filename!r}\")\n        mode\
+        \ = (member.external_attr >> 16) & 0o177777\n        if mode and stat.S_IFMT(mode)\
+        \ not in (0, stat.S_IFDIR, stat.S_IFREG):\n            raise SystemExit(f\"\
+        unsafe archive link or special member: {member.filename!r}\")\n        target\
+        \ = os.path.realpath(os.path.join(destination, *path.parts))\n        if os.path.commonpath((root,\
+        \ target)) != root:\n            raise SystemExit(f\"archive member escapes\
+        \ destination: {member.filename!r}\")\n        if member.is_dir():\n     \
+        \       os.makedirs(target, exist_ok=True)\n            continue\n       \
+        \ os.makedirs(os.path.dirname(target), exist_ok=True)\n        with source.open(member)\
+        \ as input_file, open(target, \"xb\") as output_file:\n            output_file.write(input_file.read())\n\
+        PY\n"
     - name: Download retained Linux-wheels
       env:
         ARTIFACT_ID: '9202661215'
         DESTINATION: pypi-components/linux
         GH_TOKEN: ${{ github.token }}
-      run: 'set -Eeuo pipefail
-
-        mkdir -p "$DESTINATION"
-
-        gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runtime-artifact.zip
-
-        unzip -q /tmp/runtime-artifact.zip -d "$DESTINATION"'
+      run: "set -Eeuo pipefail\nmkdir -p \"$DESTINATION\"\ngh api \"repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
+        \ > /tmp/runtime-artifact.zip\ntest \"$(sha256sum /tmp/runtime-artifact.zip\
+        \ | cut -d' ' -f1)\" = \"e63ebadb20107adba8a6c76489105339337c1406db96ff328161dda9baf0c34e\"\
+        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport stat\nimport\
+        \ zipfile\nfrom pathlib import PurePosixPath\n\ndestination = os.environ[\"\
+        DESTINATION\"]\nroot = os.path.realpath(destination)\nwith zipfile.ZipFile(\"\
+        /tmp/runtime-artifact.zip\") as source:\n    for member in source.infolist():\n\
+        \        path = PurePosixPath(member.filename)\n        if path.is_absolute()\
+        \ or \"..\" in path.parts or \"\\x00\" in member.filename:\n            raise\
+        \ SystemExit(f\"unsafe archive member: {member.filename!r}\")\n        mode\
+        \ = (member.external_attr >> 16) & 0o177777\n        if mode and stat.S_IFMT(mode)\
+        \ not in (0, stat.S_IFDIR, stat.S_IFREG):\n            raise SystemExit(f\"\
+        unsafe archive link or special member: {member.filename!r}\")\n        target\
+        \ = os.path.realpath(os.path.join(destination, *path.parts))\n        if os.path.commonpath((root,\
+        \ target)) != root:\n            raise SystemExit(f\"archive member escapes\
+        \ destination: {member.filename!r}\")\n        if member.is_dir():\n     \
+        \       os.makedirs(target, exist_ok=True)\n            continue\n       \
+        \ os.makedirs(os.path.dirname(target), exist_ok=True)\n        with source.open(member)\
+        \ as input_file, open(target, \"xb\") as output_file:\n            output_file.write(input_file.read())\n\
+        PY\n"
     - name: Download retained macOS-wheels
       env:
         ARTIFACT_ID: '9202659672'
         DESTINATION: pypi-components/macos
         GH_TOKEN: ${{ github.token }}
-      run: 'set -Eeuo pipefail
-
-        mkdir -p "$DESTINATION"
-
-        gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runtime-artifact.zip
-
-        unzip -q /tmp/runtime-artifact.zip -d "$DESTINATION"'
+      run: "set -Eeuo pipefail\nmkdir -p \"$DESTINATION\"\ngh api \"repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
+        \ > /tmp/runtime-artifact.zip\ntest \"$(sha256sum /tmp/runtime-artifact.zip\
+        \ | cut -d' ' -f1)\" = \"5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e\"\
+        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport stat\nimport\
+        \ zipfile\nfrom pathlib import PurePosixPath\n\ndestination = os.environ[\"\
+        DESTINATION\"]\nroot = os.path.realpath(destination)\nwith zipfile.ZipFile(\"\
+        /tmp/runtime-artifact.zip\") as source:\n    for member in source.infolist():\n\
+        \        path = PurePosixPath(member.filename)\n        if path.is_absolute()\
+        \ or \"..\" in path.parts or \"\\x00\" in member.filename:\n            raise\
+        \ SystemExit(f\"unsafe archive member: {member.filename!r}\")\n        mode\
+        \ = (member.external_attr >> 16) & 0o177777\n        if mode and stat.S_IFMT(mode)\
+        \ not in (0, stat.S_IFDIR, stat.S_IFREG):\n            raise SystemExit(f\"\
+        unsafe archive link or special member: {member.filename!r}\")\n        target\
+        \ = os.path.realpath(os.path.join(destination, *path.parts))\n        if os.path.commonpath((root,\
+        \ target)) != root:\n            raise SystemExit(f\"archive member escapes\
+        \ destination: {member.filename!r}\")\n        if member.is_dir():\n     \
+        \       os.makedirs(target, exist_ok=True)\n            continue\n       \
+        \ os.makedirs(os.path.dirname(target), exist_ok=True)\n        with source.open(member)\
+        \ as input_file, open(target, \"xb\") as output_file:\n            output_file.write(input_file.read())\n\
+        PY\n"
     - name: Download retained Windows-wheels
       env:
         ARTIFACT_ID: '9202679653'
         DESTINATION: pypi-components/windows
         GH_TOKEN: ${{ github.token }}
-      run: 'set -Eeuo pipefail
-
-        mkdir -p "$DESTINATION"
-
-        gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runtime-artifact.zip
-
-        unzip -q /tmp/runtime-artifact.zip -d "$DESTINATION"'
+      run: "set -Eeuo pipefail\nmkdir -p \"$DESTINATION\"\ngh api \"repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
+        \ > /tmp/runtime-artifact.zip\ntest \"$(sha256sum /tmp/runtime-artifact.zip\
+        \ | cut -d' ' -f1)\" = \"24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359\"\
+        \nDESTINATION=\"$DESTINATION\" python - <<'PY'\nimport os\nimport stat\nimport\
+        \ zipfile\nfrom pathlib import PurePosixPath\n\ndestination = os.environ[\"\
+        DESTINATION\"]\nroot = os.path.realpath(destination)\nwith zipfile.ZipFile(\"\
+        /tmp/runtime-artifact.zip\") as source:\n    for member in source.infolist():\n\
+        \        path = PurePosixPath(member.filename)\n        if path.is_absolute()\
+        \ or \"..\" in path.parts or \"\\x00\" in member.filename:\n            raise\
+        \ SystemExit(f\"unsafe archive member: {member.filename!r}\")\n        mode\
+        \ = (member.external_attr >> 16) & 0o177777\n        if mode and stat.S_IFMT(mode)\
+        \ not in (0, stat.S_IFDIR, stat.S_IFREG):\n            raise SystemExit(f\"\
+        unsafe archive link or special member: {member.filename!r}\")\n        target\
+        \ = os.path.realpath(os.path.join(destination, *path.parts))\n        if os.path.commonpath((root,\
+        \ target)) != root:\n            raise SystemExit(f\"archive member escapes\
+        \ destination: {member.filename!r}\")\n        if member.is_dir():\n     \
+        \       os.makedirs(target, exist_ok=True)\n            continue\n       \
+        \ os.makedirs(os.path.dirname(target), exist_ok=True)\n        with source.open(member)\
+        \ as input_file, open(target, \"xb\") as output_file:\n            output_file.write(input_file.read())\n\
+        PY\n"
     - name: Combine and verify exact Runtime artifacts
       run: uv run --no-project --python 3.12 python recovery-code/action_server/scripts/publish_verified_runtime.py
         --download-root pypi-components --dry-run
@@ -678,18 +730,29 @@ jobs:
         \ api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"); then\n  test\
         \ \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\n  test\
         \ \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
-        \n  expected=$(jq -Rn '[inputs | split(\"  \") | {name:.[1],digest:(\"sha256:\"\
-        \ + .[0])}]' < \"$manifest\")\n  jq -e --argjson expected \"$expected\" '([.assets[]\
-        \ | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name)) and ([.assets[].name]\
-        \ | length == 3)' <<<\"$release_json\"\n  while read -r digest name; do\n\
-        \    test \"$(jq -r --arg name \"$name\" '.assets[] | select(.name == $name)\
-        \ | .digest' <<<\"$release_json\")\" = \"sha256:$digest\"\n  done < \"$manifest\"\
+        \n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\n  expected=$(jq\
+        \ -Rn '[inputs | split(\"  \") | {name:.[1],digest:(\"sha256:\" + .[0])}]'\
+        \ < \"$manifest\")\n  jq -e --argjson expected \"$expected\" '([.assets[].name]\
+        \ - [$expected[].name] | length == 0) and ([.assets[].name] | unique | length\
+        \ == length)' <<<\"$release_json\"\n  while read -r digest name; do\n    existing_digest=$(jq\
+        \ -r --arg name \"$name\" '.assets[] | select(.name == $name) | .digest' <<<\"\
+        $release_json\")\n    if [ \"$existing_digest\" = \"null\" ]; then\n     \
+        \ gh release upload \"$RELEASE_REF\" \"release-assets/$name\"\n    else\n\
+        \      test \"$existing_digest\" = \"sha256:$digest\"\n    fi\n  done < \"\
+        $manifest\"\n  release_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
+        )\n  expected_names=$(awk '{print $2}' \"$manifest\" | sort)\n  actual_names=$(jq\
+        \ -r '.assets[].name' <<<\"$release_json\" | sort)\n  test \"$actual_names\"\
+        \ = \"$expected_names\"\n  jq -e --argjson expected \"$expected\" '([.assets[]\
+        \ | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' <<<\"\
+        $release_json\"\n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\
         \nelse\n  gh release create \"$RELEASE_REF\" --draft --verify-tag --target\
         \ \"$RELEASE_SHA\" --title \"$RELEASE_REF\" --notes \"Runtime binaries recovered\
         \ from immutable $RELEASE_REF at $RELEASE_SHA.\"\n  gh release upload \"$RELEASE_REF\"\
         \ release-assets/*\n  release_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
-        )\n  test \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
-        \n  gh release edit \"$RELEASE_REF\" --draft=false\nfi\n"
+        )\n  test \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\
+        \n  test \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
+        \n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\n  gh release\
+        \ edit \"$RELEASE_REF\" --draft=false\nfi\n"
 run-name: 'Runtime recovery: ${{ inputs.release_ref }} @ ${{ inputs.release_sha }}'
 
 
@@ -705,4 +768,3 @@ run-name: 'Runtime recovery: ${{ inputs.release_ref }} @ ${{ inputs.release_sha 
 # make sure that you update the `_gen_workflows.py`
 # script to match the changes you made here
 # and rerun the script).
-

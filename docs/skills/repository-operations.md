@@ -164,9 +164,13 @@ workflow `333870965`, the canonical repository/ref/SHA/event, the four live arti
 IDs, sizes, and API digests; it downloads through artifact-ID endpoints, rejects
 unexpected or expired artifacts, and has no PyPI credential or upload step. Binary
 recovery requires signing credentials and a signed macOS/Windows build, while Linux
-may remain unsigned. Its draft release path hashes all three assets first, compares
-existing release asset names/digests byte-for-byte, never clobbers, and publishes only
-after complete verification against the immutable SHA.
+may remain unsigned. Its draft release path hashes all three assets first, resumes an
+existing draft by uploading only missing exact assets, rejects published releases,
+conflicting digests, and extraneous names, never clobbers, and publishes only after
+complete verification against the immutable SHA. Retained artifact ZIP bytes are
+hashed against their pinned digests before extraction; archive members are rejected
+when absolute, traversal-based, symlink/hardlink, or otherwise unsafe. API digest
+metadata alone is not artifact proof.
 
 The local verifier also accepts a successful canonical recovery dispatch, but only after
 binding the active recovery workflow's exact database ID/path, successful dispatch

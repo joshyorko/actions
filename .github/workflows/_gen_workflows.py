@@ -310,13 +310,14 @@ class BaseWorkflow:
     def generate(self):
         contents = yaml.safe_dump(self.full, sort_keys=False)
         path = CURDIR / self.target
+        final_header = AUTO_GEN_HEADER.rstrip("\n") if self.target == "actions_runtime_recovery.yml" else AUTO_GEN_HEADER
         print("Writing to ", path)
         path.write_text(
             f"""{AUTO_GEN_HEADER}
 
 {contents}
 
-{AUTO_GEN_HEADER}
+{final_header}
 """,
             "utf-8",
         )
@@ -1309,7 +1310,7 @@ class ActionServerRuntimeRecovery(BaseWorkflow):
         "macOS-wheels": (
             9202659672,
             "24523055",
-            "sha256:5bba95082475ec108a6c764891a7a905ac135fd3fc58246be0f0244b53e281e",
+            "sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e",
         ),
         "Windows-wheels": (
             9202679653,
@@ -1519,7 +1520,7 @@ jq -e --arg repo "$GITHUB_REPOSITORY" '
             ("macOS-wheels", "pypi-components/macos"),
             ("Windows-wheels", "pypi-components/windows"),
         ):
-            artifact_id, _, _ = self.pypi_artifacts[name]
+            artifact_id, _, digest = self.pypi_artifacts[name]
             downloads.append(
                 {
                     "name": f"Download retained {name}",
@@ -1528,7 +1529,37 @@ jq -e --arg repo "$GITHUB_REPOSITORY" '
                         "DESTINATION": path,
                         "GH_TOKEN": "${{ github.token }}",
                     },
-                    "run": 'set -Eeuo pipefail\nmkdir -p "$DESTINATION"\ngh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runtime-artifact.zip\nunzip -q /tmp/runtime-artifact.zip -d "$DESTINATION"',
+                    "run": f'''set -Eeuo pipefail
+mkdir -p "$DESTINATION"
+gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" > /tmp/runtime-artifact.zip
+test "$(sha256sum /tmp/runtime-artifact.zip | cut -d' ' -f1)" = "{digest.split(':', 1)[1]}"
+DESTINATION="$DESTINATION" python - <<'PY'
+import os
+import stat
+import zipfile
+from pathlib import PurePosixPath
+
+destination = os.environ["DESTINATION"]
+root = os.path.realpath(destination)
+with zipfile.ZipFile("/tmp/runtime-artifact.zip") as source:
+    for member in source.infolist():
+        path = PurePosixPath(member.filename)
+        if path.is_absolute() or ".." in path.parts or "\\x00" in member.filename:
+            raise SystemExit(f"unsafe archive member: {{member.filename!r}}")
+        mode = (member.external_attr >> 16) & 0o177777
+        if mode and stat.S_IFMT(mode) not in (0, stat.S_IFDIR, stat.S_IFREG):
+            raise SystemExit(f"unsafe archive link or special member: {{member.filename!r}}")
+        target = os.path.realpath(os.path.join(destination, *path.parts))
+        if os.path.commonpath((root, target)) != root:
+            raise SystemExit(f"archive member escapes destination: {{member.filename!r}}")
+        if member.is_dir():
+            os.makedirs(target, exist_ok=True)
+            continue
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        with source.open(member) as input_file, open(target, "xb") as output_file:
+            output_file.write(input_file.read())
+PY
+''',
                 }
             )
         return downloads
@@ -1674,16 +1705,30 @@ release_json=""
 if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF"); then
   test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
   test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
+  test "$(jq -r '.draft' <<<"$release_json")" = "true"
   expected=$(jq -Rn '[inputs | split("  ") | {name:.[1],digest:("sha256:" + .[0])}]' < "$manifest")
-  jq -e --argjson expected "$expected" '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name)) and ([.assets[].name] | length == 3)' <<<"$release_json"
+  jq -e --argjson expected "$expected" '([.assets[].name] - [$expected[].name] | length == 0) and ([.assets[].name] | unique | length == length)' <<<"$release_json"
   while read -r digest name; do
-    test "$(jq -r --arg name "$name" '.assets[] | select(.name == $name) | .digest' <<<"$release_json")" = "sha256:$digest"
+    existing_digest=$(jq -r --arg name "$name" '.assets[] | select(.name == $name) | .digest' <<<"$release_json")
+    if [ "$existing_digest" = "null" ]; then
+      gh release upload "$RELEASE_REF" "release-assets/$name"
+    else
+      test "$existing_digest" = "sha256:$digest"
+    fi
   done < "$manifest"
+  release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")
+  expected_names=$(awk '{print $2}' "$manifest" | sort)
+  actual_names=$(jq -r '.assets[].name' <<<"$release_json" | sort)
+  test "$actual_names" = "$expected_names"
+  jq -e --argjson expected "$expected" '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' <<<"$release_json"
+  test "$(jq -r '.draft' <<<"$release_json")" = "true"
 else
   gh release create "$RELEASE_REF" --draft --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes "Runtime binaries recovered from immutable $RELEASE_REF at $RELEASE_SHA."
   gh release upload "$RELEASE_REF" release-assets/*
   release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")
+  test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
   test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
+  test "$(jq -r '.draft' <<<"$release_json")" = "true"
   gh release edit "$RELEASE_REF" --draft=false
 fi
 """,
