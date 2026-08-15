@@ -1,0 +1,19 @@
+{
+  "candidate_sha": "318c0996baa0e969309506005592c1679a9fc86b",
+  "worktree": "/tmp/actions-pr114-luna-review-318c09",
+  "tracked_status": "clean; pre-existing untracked .serena preserved",
+  "artifacts": {
+    "runtime": {"path": "action_server/frontend/dist/index.html", "sha256": "490967b9a0c4a7aee452baf3f3dbeb7356d8a7f2a8c01f5ef0fdf5667decb476", "build": "npm run build:runtime"},
+    "canvas": {"path": "action_server/frontend/dist-canvas/index.html", "sha256": "8f640469558c4e2a0191211259bb299c6f0166f30b2e49932e1918f4ecdc3064", "build": "npm run build:canvas", "applicable": false}
+  },
+  "captures": [
+    {"filename": "runtime-actions-degraded.png", "sha256": "1662b3f87fd047a0d39c018c9217d48b0afe0f27e3c9c70e32989998a47de9eb", "dimensions": "1280x720", "viewport": "1280x720", "route": "/actions", "theme": "dark", "fixture_state": "real built Runtime; backend unavailable; degraded/error state", "provenance": "real-artifact", "artifact_sha256": "490967b9a0c4a7aee452baf3f3dbeb7356d8a7f2a8c01f5ef0fdf5667decb476", "acceptance": ["semantic status/error banner", "navigation hierarchy", "dark token rendering"]},
+    {"filename": "primitive-desktop-light.png", "sha256": "7632b94e0460ae1821e09a891ec773a239c1f916917e9f9158d97eb840670dda", "dimensions": "1440x900", "viewport": "1440x900", "route": "/", "theme": "light", "fixture_state": "loaded representative primitive/state matrix; Dialog and DropdownMenu closed", "provenance": "isolated-primitive-fixture", "acceptance": ["Button variants", "Badge status variants", "Loading and ErrorBanner", "Table and status icons", "token/animation rendering"]},
+    {"filename": "primitive-desktop-dark.png", "sha256": "2eb61410963cf495de823d1e5e24318014466d4ae48b8670dc671061505e1939", "dimensions": "1440x900", "viewport": "1440x900", "route": "/", "theme": "dark", "fixture_state": "loaded representative primitive/state matrix; Dialog and DropdownMenu closed", "provenance": "isolated-primitive-fixture", "acceptance": ["dark token parity", "Button/Badge states", "Loading/ErrorBanner", "Table and status icons", "animation classes"]},
+    {"filename": "primitive-mobile-dark.png", "sha256": "64e77977f97d34a6b8a7d0a9e9fb72a2b3cb24ef333bcdc7effe95c018aefc3e", "dimensions": "390x844", "viewport": "390x844", "route": "/", "theme": "dark", "fixture_state": "constrained mobile matrix; Dialog and DropdownMenu closed", "provenance": "isolated-primitive-fixture", "acceptance": ["responsive wrapping", "constrained overflow/truncation", "focus-visible hierarchy CSS present"]},
+    {"filename": "primitive-dialog-light.png", "sha256": "36780799ec25cdc571b421a2f717ecc8e0d22dbc559dc915c6ae0093951aa3c3", "dimensions": "1440x900", "viewport": "1440x900", "route": "/", "theme": "light", "fixture_state": "Dialog open with candidate overlay, centered content, focus return/close controls", "provenance": "isolated-primitive-fixture", "acceptance": ["Dialog overlay", "centered Dialog content", "Dialog animation class", "focused close control"]},
+    {"filename": "primitive-dropdown-dark.png", "sha256": "53018b5940c9741c83f7e5c52bb3cb027e33c39940ba96fb3637861bd5c4f29b", "dimensions": "1440x900", "viewport": "1440x900", "route": "/", "theme": "dark", "fixture_state": "DropdownMenu open with candidate menu content and keyboard-focus attempt", "provenance": "isolated-primitive-fixture", "acceptance": ["DropdownMenu open state", "dark popover tokens", "menu item hierarchy", "keyboard interaction surface"]}
+  ],
+  "fixture": {"path": "action_server/frontend/.visual-receipt", "server": "Vite preview on 127.0.0.1:4173", "imports": "exact candidate src/index.css, UI primitives, status icons, aliases, node_modules, PostCSS and Tailwind theme"},
+  "original_evidence_violation": "PR #114 merged without a durable attached visual receipt; this is retrospective evidence and does not repair that historical process violation."
+}
