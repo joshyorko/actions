@@ -130,13 +130,14 @@ before cibuildwheel; Linux and Windows rows do not receive that platform-specifi
 environment setup.
 One final `pypi` job downloads the exact artifacts, rejects duplicate or
 unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
-the tag is an ancestor of `origin/community` and matches `poetry version
---short`, then retains that verified directory as `actions-runtime-dist`. The
+the tag is an ancestor of `origin/community` and matches
+`uv run --no-project --python 3.12 poetry version --short`, then retains that
+verified directory as `actions-runtime-dist`. The
 workflow publishes the same set once when the Runtime secret is configured;
 without it, verification and retention remain green. Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
-repository, and optional ref, or accepts an already downloaded directory; it
+repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
 never rebuilds. It verifies the exact seven artifacts and retained
 `actions-runtime-manifest.sha256` before running Twine 6.2.0. With `--publish`,
 the script reads only `PYPI` from the process environment or ignored repo-root
@@ -155,9 +156,42 @@ That immutable workflow database ID must match the selected run; selected-run
 equality check,
 in addition to exact SHA, tag ref, successful tag-push conclusion, the generated Runtime
 PyPI workflow, and a non-expired retained artifact before downloading. The display name is
-not an identity binding. Binary release names use GitHub expressions
-containing `${{ github.ref_name }}`; shell literals such as `$tag-linux64` are
-not valid action inputs.
+not an identity binding. Binary signing selection is split into expression-gated signed
+and unsigned steps so POSIX test syntax is never sent to the Windows PowerShell shell.
+Binary release names use GitHub expressions containing `${{ github.ref_name }}`; shell
+literals such as `$tag-linux64` are not valid action inputs.
+
+The generated `actions_runtime_recovery.yml` workflow is the only recovery lane for an
+immutable Runtime tag. Its required `release_ref` and full 40-hex `release_sha` inputs
+are checked against the exact tag object and `origin/community` ancestry before any
+source-controlled dependency installation or execution. Every job admits only the
+exact repository workflow path at
+`refs/heads/community`, and proves checked-out `github.workflow_sha` equals the single
+fetched `origin/community` tip before using recovery code. Each job checks out merged
+recovery code separately from `release-source` at the immutable SHA and verifies the
+package version. PyPI recovery is pinned to failed run `31755673247`, attempt 1,
+workflow `333870965`, the canonical repository/ref/SHA/event, the four live artifact
+IDs, sizes, and API digests; it downloads through artifact-ID endpoints, rejects
+unexpected or expired artifacts, and has no PyPI credential or upload step. Binary
+recovery requires signing credentials and a signed macOS/Windows build, while Linux
+may remain unsigned. Its draft release path hashes all three assets first, resumes an
+existing draft by uploading only missing exact assets, rejects published releases,
+conflicting digests, and extraneous names, never clobbers, and publishes only after
+one final re-fetch proves draft state, the exact three-name inventory, every asset
+digest, and the release target/SHA against the immutable inputs; fresh and resumed
+drafts use that same finalization gate. Retained artifact ZIP bytes are
+hashed against their pinned digests before extraction; archive members are rejected
+when absolute, traversal-based, symlink/hardlink, duplicate, normalized-alias, or
+otherwise unsafe. Every member is canonicalized and tracked before directory
+creation or file extraction, so duplicate directory records fail closed like
+duplicate regular files. API digest metadata alone is not artifact proof.
+
+The local verifier also accepts a successful canonical recovery dispatch, but only after
+binding the active recovery workflow's exact database ID/path, supported run metadata,
+manual-dispatch conclusion, immutable head SHA/community branch, exact
+`displayTitle` (`Runtime recovery: <ref> @ <sha>`), and one non-expired
+`actions-runtime-dist`; failed canonical tag runs, missing or non-string titles, and
+arbitrary display names remain ineligible.
 
 The publish job installs repository-root devutils requirements with an explicit
 `action_server` working directory, then runs the local verifier in dry-run mode
