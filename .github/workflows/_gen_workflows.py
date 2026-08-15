@@ -15,6 +15,7 @@ Given that this will always regenerate the workflows, feel free to make
 refactorings in the structure as needed.
 """
 
+import json
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -1426,6 +1427,7 @@ test "$package_version" = "$tag_version"
         return {
             "name": "Admit only merged community recovery code",
             "working-directory": ".",
+            "shell": "bash",
             "env": {
                 "WORKFLOW_REF": "${{ github.workflow_ref }}",
                 "WORKFLOW_SHA": "${{ github.workflow_sha }}",
@@ -1468,6 +1470,18 @@ test "$(git -C recovery-code rev-parse refs/remotes/origin/community)" = "$WORKF
         }
 
     def pypi_source_validation(self):
+        expected_artifacts = json.dumps(
+            [
+                {
+                    "id": artifact_id,
+                    "name": name,
+                    "size_in_bytes": int(size),
+                    "digest": digest,
+                }
+                for name, (artifact_id, size, digest) in self.pypi_artifacts.items()
+            ],
+            separators=(",", ":"),
+        )
         return {
             "name": "Validate retained failed-run PyPI components",
             "env": {
@@ -1480,11 +1494,12 @@ test "$(git -C recovery-code rev-parse refs/remotes/origin/community)" = "$WORKF
             "run": """set -Eeuo pipefail
 test -n "$PYPI_SOURCE_RUN_ID"
 test -n "$PYPI_SOURCE_WORKFLOW_ID"
-workflow_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/actions_runtime_pypi_release.yml")
+gh_api_headers=(-H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28")
+workflow_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/actions_runtime_pypi_release.yml" "${gh_api_headers[@]}")
 test "$(jq -r '.id' <<<"$workflow_json")" = "$PYPI_SOURCE_WORKFLOW_ID"
 test "$(jq -r '.path' <<<"$workflow_json")" = ".github/workflows/actions_runtime_pypi_release.yml"
 test "$(jq -r '.state' <<<"$workflow_json")" = "active"
-run_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID")
+run_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID" "${gh_api_headers[@]}")
 jq -e --arg sha "$RELEASE_SHA" --arg ref "$RELEASE_REF" --arg workflow "$PYPI_SOURCE_WORKFLOW_ID" --arg run "$PYPI_SOURCE_RUN_ID" --arg repo "$GITHUB_REPOSITORY" '
   .id == ($run | tonumber)
   and .run_attempt == 1
@@ -1497,7 +1512,7 @@ jq -e --arg sha "$RELEASE_SHA" --arg ref "$RELEASE_REF" --arg workflow "$PYPI_SO
   and .repository.full_name == $repo
   and .head_repository.full_name == $repo
 ' <<<"$run_json"
-jobs_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/jobs?per_page=100")
+jobs_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/jobs?per_page=100" "${gh_api_headers[@]}")
 jq -e --argjson required '["build-sdist (ubuntu-py3.12)", "build-wheels (macos-15)", "build-wheels (ubuntu-22.04)", "build-wheels (windows-2022)"]' '
   [.jobs[] | select(.name as $name | ($required | index($name)) != null)] as $selected
   | ($selected | length == 4)
@@ -1507,19 +1522,33 @@ jq -e --argjson required '["build-sdist (ubuntu-py3.12)", "build-wheels (macos-1
   and ([.jobs[] | select(.name == "publish (3.12)")][0].conclusion == "failure")
   and ([.jobs[] | select(.name == "publish (3.12)")][0].steps[] | select(.name == "Verify merged tag provenance and version") | .conclusion) == ["failure"]
 ' <<<"$jobs_json"
-artifacts_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/artifacts?per_page=100")
-jq -e --arg repo "$GITHUB_REPOSITORY" '
-  [.artifacts[] | select(.workflow_run.id == 31755673247)] as $all
-  | ($all | length == 4)
-  and ($all | all(.expired == false))
-  and ($all | map({id,name,size_in_bytes,digest}) | sort_by(.name) == ([
-    {id:9202638277,name:"action-server-dist",size_in_bytes:848656,digest:"sha256:e68002161c7c05c7558339816733e56fc953fd8fe1bbf02f99f1f70c4a575072"},
-    {id:9202661215,name:"Linux-wheels",size_in_bytes:26180637,digest:"sha256:e63ebadb20107adba8a6c76489105339337c1406db96ff328161dda9baf0c34e"},
-    {id:9202659672,name:"macOS-wheels",size_in_bytes:24523055,digest:"sha256:5bba95082475ec10810edc3cf51a7a905ac135fd3fc58246be0f0244b53e281e"},
-    {id:9202679653,name:"Windows-wheels",size_in_bytes:21134688,digest:"sha256:24daf1623d5b770b877b6e6d0b590b90b7b6d75f258b39cc1a20e30ca584f359"}
-  ] | sort_by(.name)))
-' <<<"$artifacts_json"
-""",
+artifacts_json=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PYPI_SOURCE_RUN_ID/artifacts?per_page=100" "${gh_api_headers[@]}")
+expected_artifacts='__EXPECTED_ARTIFACTS__'
+# shellcheck disable=SC2016
+jq_filter='(.artifacts | type == "array" and length == 4) as $shape
+  | if ($shape | not) then false
+    else ([.artifacts[] | if type != "object" then false
+      else (has("id") and has("name") and has("size_in_bytes") and has("digest") and has("expired") and has("workflow_run")
+        and (.id | type == "number" and floor == . and . > 0)
+        and (.name | type == "string" and length > 0)
+        and (.size_in_bytes | type == "number" and floor == . and . >= 0)
+        and (.digest | type == "string" and test("^sha256:[0-9a-f]{64}$"))
+        and (.expired == false)
+        and (if (.workflow_run | type) != "object" then false
+          else (.workflow_run | has("id"))
+            and (.workflow_run.id | type == "number" and floor == . and . == $run)
+          end)
+      ) end] | all) as $valid
+      | if ($valid | not) then false
+        else ([.artifacts[] | {id,name,size_in_bytes,digest,expired,workflow_run_id:.workflow_run.id}] as $actual
+          | ($expected | all(.[]; . as $wanted | ([$actual[] | select(.name == $wanted.name)] | length == 1 and .[0].id == $wanted.id and .[0].name == $wanted.name and .[0].size_in_bytes == $wanted.size_in_bytes and .[0].digest == $wanted.digest))))
+        end
+    end'
+if ! jq -e --argjson run "$PYPI_SOURCE_RUN_ID" --argjson expected "$expected_artifacts" "$jq_filter" <<<"$artifacts_json"; then
+  echo "artifact inventory validation failed; raw metadata withheld" >&2
+  exit 1
+fi
+""".replace("__EXPECTED_ARTIFACTS__", expected_artifacts),
         }
 
     def pypi_download_steps(self):
