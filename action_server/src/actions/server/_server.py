@@ -2,7 +2,6 @@ import asyncio
 import logging
 import os
 import socket
-import stat
 import subprocess
 import sys
 import typing
@@ -22,27 +21,9 @@ if typing.TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
-class _ArtifactStaticFiles(StaticFiles):
-    def lookup_path(self, path: str):
-        root = os.fspath(self.directory)
-        current = root
-        for component in path.split("/"):
-            if component in ("", "."):
-                continue
-
-            current = os.path.join(current, component)
-            try:
-                info = os.lstat(current)
-            except FileNotFoundError:
-                break
-            except OSError:
-                return "", None
-
-            if os.path.commonpath((root, current)) != root:
-                return "", None
-            if stat.S_ISLNK(info.st_mode):
-                return "", None
-        return super().lookup_path(path)
+def _mount_artifact_static_files(app: FastAPI, backend: str, root: os.PathLike) -> None:
+    if backend == "local":
+        app.mount("/artifacts", StaticFiles(directory=root), name="artifacts")
 
 
 class _LoopHolder:
@@ -109,11 +90,7 @@ def start_server(
 
     artifacts_dir = get_artifact_storage().root
 
-    app.mount(
-        "/artifacts",
-        _ArtifactStaticFiles(directory=artifacts_dir),
-        name="artifacts",
-    )
+    _mount_artifact_static_files(app, settings.artifact_storage_backend, artifacts_dir)
 
     def verify_api_key(
         token: HTTPAuthorizationCredentials = Security(HTTPBearer(auto_error=True)),

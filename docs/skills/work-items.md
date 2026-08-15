@@ -19,10 +19,12 @@ or complete new file. Binary API responses return `FileResponse`, preserving
 Starlette conditional and HTTP Range behavior without eagerly loading the
 artifact.
 
-The Action Server `/artifacts` static mount performs an `lstat` check on every
-existing request-path component before delegating to Starlette. Any symlinked
-directory or file component is rejected with 404, while Starlette retains
-`FileResponse` range and conditional-serving behavior for ordinary files.
+The Action Server `/artifacts` static mount preserves the pre-artifact-storage
+local backend behavior and Starlette's `FileResponse` range and conditional
+serving for local files. Shared filesystem storage deliberately leaves this
+mount unavailable and returns 404; shared static serving with descriptor-stable
+path validation remains residual #86 work. Use the artifact API for shared
+filesystem list, text, and binary reads.
 
 Shared filesystem storage publishes an atomically replaced
 `.action-server-run-bindings.json` manifest, guarded by an OS file lock. It

@@ -5,17 +5,17 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from actions.server._server import _ArtifactStaticFiles
 from actions.server._artifact_storage import (
     ArtifactStorageConfigurationError,
     ArtifactStorageNotFoundError,
     create_artifact_storage,
 )
+from actions.server._server import _mount_artifact_static_files
 
 
-def _static_client(root: Path) -> TestClient:
+def _static_client(root: Path, backend: str = "local") -> TestClient:
     app = FastAPI()
-    app.mount("/artifacts", _ArtifactStaticFiles(directory=root), name="artifacts")
+    _mount_artifact_static_files(app, backend, root)
     return TestClient(app)
 
 
@@ -37,49 +37,15 @@ def test_static_artifacts_preserve_file_and_range_responses(tmp_path):
     assert response.headers["content-range"] == "bytes 2-5/10"
 
 
-def test_static_artifacts_reject_in_root_symlink_alias(tmp_path):
+def test_shared_static_artifacts_are_unavailable(tmp_path):
     (tmp_path / "run-a").mkdir()
-    (tmp_path / "run-b").mkdir()
-    (tmp_path / "run-b" / "private.bin").write_bytes(b"private")
-    (tmp_path / "run-a" / "alias").symlink_to(
-        tmp_path / "run-b" / "private.bin"
+    (tmp_path / "run-a" / "payload.bin").write_bytes(b"shared artifact")
+
+    response = _static_client(tmp_path, backend="shared-filesystem").get(
+        "/artifacts/run-a/payload.bin"
     )
 
-    response = _static_client(tmp_path).get("/artifacts/run-a/alias")
-
     assert response.status_code == 404
-    assert b"private" not in response.content
-
-
-def test_static_artifacts_reject_escaping_symlink_alias(tmp_path):
-    outside = tmp_path / "outside"
-    outside.mkdir()
-    (outside / "secret.bin").write_bytes(b"secret")
-    (tmp_path / "run-a").mkdir()
-    (tmp_path / "run-a" / "escape").symlink_to(outside, target_is_directory=True)
-
-    response = _static_client(tmp_path).get("/artifacts/run-a/escape/secret.bin")
-
-    assert response.status_code == 404
-    assert b"secret" not in response.content
-
-
-@pytest.mark.parametrize("request_path", ["run-a/link/payload.bin", "run-a/link"])
-def test_static_artifacts_reject_symlink_directory_and_final_file(tmp_path, request_path):
-    (tmp_path / "run-a").mkdir()
-    (tmp_path / "run-b").mkdir()
-    (tmp_path / "run-b" / "payload.bin").write_bytes(b"private")
-    (tmp_path / "run-a" / "link").symlink_to(
-        tmp_path / "run-b" / "payload.bin"
-        if request_path.endswith("link")
-        else tmp_path / "run-b",
-        target_is_directory=not request_path.endswith("link"),
-    )
-
-    response = _static_client(tmp_path).get(f"/artifacts/{request_path}")
-
-    assert response.status_code == 404
-    assert b"private" not in response.content
 
 
 def test_local_storage_creates_and_reads_run_artifacts(tmp_path):
@@ -230,8 +196,8 @@ def test_storage_manifest_is_durable_and_collision_safe(tmp_path):
 
 def test_independent_storage_api_reads_durable_run_binding_and_range_file(tmp_path, monkeypatch):
     import asyncio
-    from actions.server import _api_run, _artifact_storage
-    from actions.server import _runs_state_cache
+
+    from actions.server import _api_run, _artifact_storage, _runs_state_cache
     from actions.server._models import Run, RunStatus
 
     run = Run(
