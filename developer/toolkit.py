@@ -14,15 +14,40 @@ REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
 RCC_VERSION = "v18.18.1"
 PACKAGES = ("actions", "actions-http-helper", "devutils", "work-items", "action_server")
 PYPROJECTS = ("actions", "actions-http-helper", "devutils", "work-items", "action_server")
+ACTIVE_ENVIRONMENT_VARIABLES = (
+    "VIRTUAL_ENV",
+    "POETRY_ACTIVE",
+    "CONDA_PREFIX",
+    "CONDA_DEFAULT_ENV",
+    "CONDA_PROMPT_MODIFIER",
+    "CONDA_SHLVL",
+    "CONDA_EXE",
+    "_CE_CONDA",
+    "_CE_M",
+    "PYTHONHOME",
+    "PYTHONPATH",
+)
+
+
+def package_environment() -> dict[str, str]:
+    """Keep package Poetry environments separate from RCC's holotree."""
+    environment = os.environ.copy()
+    for name in ACTIVE_ENVIRONMENT_VARIABLES:
+        environment.pop(name, None)
+    environment.update(
+        {
+            "POETRY_VIRTUALENVS_CREATE": "true",
+            "POETRY_VIRTUALENVS_IN_PROJECT": "true",
+            "POETRY_VIRTUALENVS_OPTIONS_SYSTEM_SITE_PACKAGES": "false",
+        }
+    )
+    return environment
 
 
 def run(command: list[str], cwd: Path = REPOSITORY_ROOT) -> None:
     """Run a command without shell parsing so it works on every RCC platform."""
     print("+", " ".join(command), f"(in {cwd})", flush=True)
-    environment = os.environ.copy()
-    environment.pop("VIRTUAL_ENV", None)
-    environment.pop("POETRY_ACTIVE", None)
-    subprocess.run(command, cwd=cwd, env=environment, check=True)
+    subprocess.run(command, cwd=cwd, env=package_environment(), check=True)
 
 
 def poetry(package: str, *arguments: str) -> None:
@@ -72,7 +97,9 @@ def package_task(task: str) -> None:
             elif task == "lint":
                 poetry(package, "run", "ruff", "check", "src", "tests")
             elif task == "typecheck":
-                poetry(package, "run", "mypy", "--strict", "src")
+                # devutils has no configured package typecheck gate. Do not
+                # invent a stricter command than the package declares.
+                continue
             else:
                 raise ValueError(f"Unsupported devutils task: {task}")
         else:

@@ -346,14 +346,22 @@ focused contracts, then use `Test`, `Lint`, `Typecheck`, `Docs`, `CheckAll`,
 `FrontendTest`, or `BuildCommunity` through
 `rcc run -r developer/toolkit.yaml --dev -t <Task>`. The Python dispatcher uses argument
 arrays and resolves the repository root independently of the caller's cwd, so it does not
-depend on Bash or Batch activation scripts. It removes host `VIRTUAL_ENV` and
-`POETRY_ACTIVE` markers before delegating to package-local Poetry. `ToolkitTest` runs Ruff
-and pytest against the gateway itself; the full `Test` task runs it first and also covers
-`devutils`, whose package does not provide an Invoke task collection.
+depend on Bash or Batch activation scripts. It removes host `VIRTUAL_ENV`,
+`POETRY_ACTIVE`, Conda activation, `PYTHONHOME`, and `PYTHONPATH` markers before
+delegating. It also forces Poetry environment creation, in-project `.venv` placement, and
+system-site-packages isolation. This boundary applies to root `invoke install` as well as
+direct package commands: RCC owns the outer holotree toolchain while each package owns an
+independent `.venv` resolved from its committed lockfile. Without it, sequential Poetry
+installs can rewrite RCC's active holotree and make tools such as Mypy disappear from later
+package gates. `ToolkitTest` runs Ruff and pytest against the gateway itself; the full
+`Test` task runs it first and also covers `devutils`, whose package does not provide an
+Invoke task collection. `Typecheck` runs only package-declared typecheck gates; `devutils`
+has no such gate and is not assigned an invented strict-Mypy contract.
 
 `Doctor` and `ToolkitTest` validate the RCC environment and dispatcher contracts. Gateway
-CI runs `Bootstrap` and the full package `Test` smoke on Linux, while all three runners
-run manifest diagnostics and `ToolkitTest`. `BuildCommunity` invokes the public
+CI runs `Bootstrap`, verifies all five package `.venv` interpreters, reruns `ToolkitTest`
+to prove the RCC toolchain survived Bootstrap, and runs the full package `Test` smoke on
+Linux. All three runners run manifest diagnostics and `ToolkitTest`. `BuildCommunity` invokes the public
 `build-frontend` task without a tier option (community is its default); binary builds
 remain in a dedicated build gate.
 

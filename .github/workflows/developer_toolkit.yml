@@ -72,6 +72,17 @@ jobs:
         env:
           ROBOCORP_HOME: ${{ runner.temp }}/robocorp
         run: rcc run -r developer/toolkit.yaml --dev -t Bootstrap
+      - name: Verify isolated package environments (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+        run: |
+          set -Eeuo pipefail
+          for package in actions actions-http-helper devutils work-items action_server; do
+            test -x "${package}/.venv/bin/python"
+          done
+          rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
       - name: Package task smoke (Linux)
         if: runner.os == 'Linux'
         shell: bash

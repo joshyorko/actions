@@ -29,6 +29,19 @@ def test_manifest_defines_cross_platform_developer_tasks() -> None:
     assert manifest["environmentConfigs"] == ["setup.yaml"]
 
 
+def test_ci_verifies_bootstrap_environment_isolation() -> None:
+    workflow = (
+        REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+    ).read_text()
+
+    bootstrap = workflow.index("- name: Bootstrap toolkit (Linux)")
+    isolation = workflow.index("- name: Verify isolated package environments (Linux)")
+    package_smoke = workflow.index("- name: Package task smoke (Linux)")
+    assert bootstrap < isolation < package_smoke
+    assert 'test -x "${package}/.venv/bin/python"' in workflow
+    assert "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest" in workflow[isolation:]
+
+
 def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
     shell = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.sh").read_text()
     batch = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.bat").read_text()
@@ -67,18 +80,46 @@ def test_dispatcher_resolves_repository_root() -> None:
     }
 
 
-def test_run_does_not_use_a_shell_or_inherit_virtual_env() -> None:
+def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
     with patch.dict(
         "os.environ",
-        {"VIRTUAL_ENV": "/host/venv", "POETRY_ACTIVE": "1"},
+        {
+            "VIRTUAL_ENV": "/host/venv",
+            "POETRY_ACTIVE": "1",
+            "CONDA_PREFIX": "/rcc/holotree",
+            "CONDA_DEFAULT_ENV": "rcc",
+            "CONDA_PROMPT_MODIFIER": "(rcc)",
+            "CONDA_SHLVL": "1",
+            "CONDA_EXE": "/rcc/micromamba",
+            "_CE_CONDA": "1",
+            "_CE_M": "1",
+            "PYTHONHOME": "/host/python",
+            "PYTHONPATH": "/host/pythonpath",
+        },
     ), patch(
         "toolkit.subprocess.run"
     ) as run:
         toolkit.run(["python", "--version"])
 
     assert "shell" not in run.call_args.kwargs
-    assert "VIRTUAL_ENV" not in run.call_args.kwargs["env"]
-    assert "POETRY_ACTIVE" not in run.call_args.kwargs["env"]
+    environment = run.call_args.kwargs["env"]
+    for name in (
+        "VIRTUAL_ENV",
+        "POETRY_ACTIVE",
+        "CONDA_PREFIX",
+        "CONDA_DEFAULT_ENV",
+        "CONDA_PROMPT_MODIFIER",
+        "CONDA_SHLVL",
+        "CONDA_EXE",
+        "_CE_CONDA",
+        "_CE_M",
+        "PYTHONHOME",
+        "PYTHONPATH",
+    ):
+        assert name not in environment
+    assert environment["POETRY_VIRTUALENVS_CREATE"] == "true"
+    assert environment["POETRY_VIRTUALENVS_IN_PROJECT"] == "true"
+    assert environment["POETRY_VIRTUALENVS_OPTIONS_SYSTEM_SITE_PACKAGES"] == "false"
 
 
 def test_build_community_uses_public_invoke_contract() -> None:
@@ -88,4 +129,16 @@ def test_build_community_uses_public_invoke_contract() -> None:
     assert [call.args for call in poetry.call_args_list] == [
         ("action_server", "run", "invoke", "build-frontend"),
         ("action_server", "run", "invoke", "build-executable", "--go-wrapper"),
+    ]
+
+
+def test_typecheck_uses_only_package_configured_gates() -> None:
+    with patch.object(toolkit, "poetry") as poetry:
+        toolkit.typecheck()
+
+    assert [call.args for call in poetry.call_args_list] == [
+        ("actions", "run", "invoke", "typecheck"),
+        ("actions-http-helper", "run", "invoke", "typecheck"),
+        ("work-items", "run", "invoke", "typecheck"),
+        ("action_server", "run", "invoke", "typecheck"),
     ]
