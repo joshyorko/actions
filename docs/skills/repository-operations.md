@@ -338,6 +338,38 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+## RCC Developer Toolkit
+
+The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
+macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's
+focused contracts, then use `Test`, `Lint`, `Typecheck`, `Docs`, `CheckAll`,
+`FrontendTest`, or `BuildCommunity` through
+`rcc run -r developer/toolkit.yaml --dev -t <Task>`. The Python dispatcher uses argument
+arrays and resolves the repository root independently of the caller's cwd, so it does not
+depend on Bash or Batch activation scripts. It removes host `VIRTUAL_ENV` and
+`POETRY_ACTIVE` markers before delegating to package-local Poetry. `ToolkitTest` runs Ruff
+and pytest against the gateway itself; the full `Test` task runs it first and also covers
+`devutils`, whose package does not provide an Invoke task collection.
+
+`Doctor` and `ToolkitTest` validate the RCC environment and dispatcher contracts. Gateway
+CI runs `Bootstrap` and the full package `Test` smoke on Linux, while all three runners
+run manifest diagnostics and `ToolkitTest`. `BuildCommunity` invokes the public
+`build-frontend` task without a tier option (community is its default); binary builds
+remain in a dedicated build gate.
+
+For a host without RCC, `devutils/bin/develop.sh` and `develop.bat` are bootstrap
+launchers. On Linux and macOS, the shell launcher prefers the `joshyorko/tools/rcc`
+Homebrew cask (backed by `joshyorko/homebrew-tools`) when Brew is available, then falls
+back to the pinned release asset. Windows downloads the pinned release asset. Downloaded
+binaries live in the ignored `devutils/bin/` location; launchers verify the version on
+later runs and invoke the root toolkit without creating a separate activation environment.
+
+RCC owns the isolated toolchain and holotree cache. Poetry and committed package lockfiles
+remain the dependency and release authorities. Set `ROBOCORP_HOME` to a writable,
+repository- or CI-scoped cache when diagnosing environment resolution, then run
+`rcc robot diagnostics -r developer/toolkit.yaml --json` and
+`rcc ht vars -r developer/toolkit.yaml` before debugging Python tasks.
+
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification. `.devcontainer/bin/smoke` is strict-shell, rejects root, checks the pinned Python 3.12, Node 22, uv 0.12.1, and Poetry 2.1.1 versions, then runs bootstrap and the Work Items release gate by repository-relative absolute path. uv 0.12.1 adds a platform suffix to its version output, so smoke compares its `uv 0.12.1` prefix fields exactly.

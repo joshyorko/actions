@@ -31,7 +31,7 @@ git clone https://github.com/joshyorko/actions.git
 cd actions
 
 # Build the action-server binary
-rcc run -r action_server/developer/toolkit.yaml -t community
+rcc run -r developer/toolkit.yaml --dev -t BuildCommunity
 
 # The binary is at: action_server/dist/final/action-server
 ```
@@ -279,7 +279,7 @@ The build output will be in `action_server/frontend/dist/`.
 
 ```sh
 # From repository root
-rcc run -r action_server/developer/toolkit.yaml -t community
+rcc run -r developer/toolkit.yaml --dev -t BuildCommunity
 
 # Binary location
 ls action_server/dist/final/action-server

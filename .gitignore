@@ -55,5 +55,8 @@ build/
 .vscode/
 Thumbs.db
 *.tmp
+developer/tmp/
 *.swp
 test-actions/
+.codex
+.serena
