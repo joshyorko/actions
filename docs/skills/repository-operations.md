@@ -409,6 +409,14 @@ installed runtime libraries without stubs use targeted module overrides rather t
 global missing-import exemption. MCP SDK model constructors use Python field names such
 as `structured_content`; camelCase aliases remain wire-format names.
 
+Action Server keeps deprecation warnings actionable: repository-owned Pydantic models
+use `ConfigDict`, and build timestamps are timezone-aware UTC values. Pytest suppresses
+no deprecation-warning category globally. `robocorp-log-pytest` 0.0.5 permits
+`robocorp-log` 3.x, but forced log-AST regeneration still uses deprecated Python 3.12
+AST compatibility APIs. Keep filters limited to the three confirmed warning messages
+and their exact `robocorp.log` modules so other dependency and repository warnings
+remain visible.
+
 `Doctor` and `ToolkitTest` validate the RCC environment and dispatcher contracts. Gateway
 CI runs `Bootstrap`, verifies all five package `.venv` interpreters, reruns `ToolkitTest`
 to prove the RCC toolchain survived Bootstrap, and runs the full package `Test` smoke on

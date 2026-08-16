@@ -13,6 +13,10 @@ The default local attachment directory is `./work_item_files` (overridable with
 `work-items/work_item_files/<uuid>/`; this runtime output is ignored and must not be
 committed.
 
+The locked pytest-asyncio 0.21 runtime supports `asyncio_mode = "auto"` but not
+`asyncio_default_fixture_loop_scope`; do not add unsupported pytest options that are
+silently ignored with `PytestConfigWarning`.
+
 ## Safety Invariants
 
 Action Server filesystem artifacts use canonical, root-relative run keys. The
@@ -60,6 +64,13 @@ The canonical Bluefin host gate is cwd-independent:
 .devcontainer/bin/smoke-host
 ```
 
+It expects the local `actions-devcontainer:test` image. If Docker reports that
+the image is unavailable, build it from the repository root and rerun the gate:
+
+```bash
+docker build --pull=false -f .devcontainer/Dockerfile -t actions-devcontainer:test .
+```
+
 The host wrapper owns `work-items/tests/compose.persistent-backends.yaml`: it starts healthy Redis and MongoDB services, attaches the Dev Container image to the named `actions-work-items-persistent-backends_default` network, and passes service-DNS endpoints to the container. It does not mount the Docker socket. Its exit trap removes services, volumes, and orphans after successful and failed verification. In linked worktrees, it also mounts the common Git directory read-only at its original absolute path so the in-container diff check can resolve worktree metadata.
 
 `work-items/pyproject.toml` uses PEP 621 as the authoritative package metadata, including its Python floor, optional backend extras, and distribution version. Poetry 2.1.1 remains authoritative for resolving and writing the committed lockfile.
@@ -67,7 +78,8 @@ The host wrapper owns `work-items/tests/compose.persistent-backends.yaml`: it st
 Redis and DocumentDB timestamps use timezone-aware UTC values. Redis keeps ISO 8601
 strings (now with an explicit UTC offset) and normalizes historical naive strings
 as UTC before orphan-recovery comparisons; DocumentDB stores UTC-aware datetime values for Mongo-compatible date
-queries. The pytest suite fixes `asyncio_default_fixture_loop_scope` to `function`.
+queries. The pytest suite keeps `asyncio_mode = "auto"`; its locked
+pytest-asyncio 0.21 runtime does not support a default fixture-loop-scope option.
 SQLite race tests use the `spawn` multiprocessing context, avoiding a multithreaded
 test runner's unsafe `fork` warning. The v1 `download_file` and `download_files`
 aliases remain public compatibility APIs; their ported tests must capture their

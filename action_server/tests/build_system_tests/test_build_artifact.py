@@ -6,7 +6,7 @@ Tests artifact naming, hashing, metadata generation, and SBOM validation.
 
 import hashlib
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import Mock, patch
 
@@ -197,13 +197,13 @@ class TestBuildArtifactCreation:
         artifact_file.write_bytes(b"content")
 
         # Act
-        before = datetime.utcnow()
+        before = datetime.now(timezone.utc)
         artifact = BuildArtifact.create(
             artifact_type=ArtifactType.FRONTEND,
             tier=COMMUNITY,
             file_path=artifact_file
         )
-        after = datetime.utcnow()
+        after = datetime.now(timezone.utc)
 
         # Assert
         assert artifact.build_timestamp is not None

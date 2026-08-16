@@ -5,7 +5,7 @@ This module handles artifact naming, hashing, metadata generation, and SBOM vali
 
 import hashlib
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Optional, Union
@@ -88,7 +88,7 @@ class BuildArtifact:
         
         # Use current timestamp if not provided
         if build_timestamp is None:
-            build_timestamp = datetime.now()
+            build_timestamp = datetime.now(timezone.utc)
         
         # Auto-detect git commit if not provided
         if git_commit is None:
