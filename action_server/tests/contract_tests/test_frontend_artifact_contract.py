@@ -104,6 +104,63 @@ def test_frontend_quality_uses_cross_platform_prettier_eol_contract():
     assert "replaceAll(path.sep, '/')" in vite_config
 
 
+def test_runtime_inliner_preserves_adversarial_bundle_text_and_raw_text_boundaries(
+    tmp_path,
+):
+    script = FRONTEND / "scripts/inline-runtime-assets.mjs"
+    root = tmp_path / "dist"
+    assets = root / "assets"
+    assets.mkdir(parents=True)
+    js_name = "index-test.js"
+    css_name = "index-test.css"
+    (root / "index.html").write_text(
+        """<!doctype html>
+<html><head>
+<script type="module" crossorigin src="/assets/index-test.js"></script>
+<link rel="stylesheet" crossorigin href="/assets/index-test.css">
+</head><body><div id="root"></div></body></html>
+""",
+        encoding="utf-8",
+    )
+    (assets / js_name).write_text(
+        r'''const values = ["</script>", "<!--", "<!doctype html>", "$'", "$&", "$`"];
+// </script> in a comment must remain inside this script.
+//# sourceMappingURL=data:text/javascript,/* </script> */
+window.__inlineFixture = values;
+''',
+        encoding="utf-8",
+    )
+    (assets / css_name).write_text(
+        r'''/* </style> in a comment must remain inside this style. */
+:root { --inline-fixture: "$'"; }
+''',
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        ["node", str(script)],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    rendered = (root / "index.html").read_text(encoding="utf-8")
+    assert "/assets/index-test.js" not in rendered
+    assert "/assets/index-test.css" not in rendered
+    assert not list(assets.iterdir())
+    assert rendered.count("</script>") == 1
+    assert rendered.count("</style>") == 1
+    assert r"\x3C/script>" in rendered
+    assert r"\x3C!--" in rendered
+    assert r"\x3C!doctype html>" in rendered
+    assert r"\3C/style>" in rendered
+    assert "$'" in rendered
+    assert "$&" in rendered
+    assert "$`" in rendered
+
+
 def test_validators_prove_manifest_inventory_and_metadata(tmp_path):
     build_binary = FRONTEND.parent / "build-binary"
     sys.path.insert(0, str(build_binary))

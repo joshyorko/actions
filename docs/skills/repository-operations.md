@@ -29,6 +29,13 @@ boundaries. The release command `npm run build:artifacts` also generates a
 CycloneDX `sbom.json` in each root. Runtime is post-processed into one
 `dist/index.html` for the existing frozen/PyInstaller embedding seam; Canvas
 remains a hashed multi-file root and declares `text/html;profile=mcp-app`.
+Runtime inlining must use exact asset markers with callback replacement, escape
+raw-text terminators and HTML-like opener sequences in inline JavaScript/CSS,
+and fail closed when a marker is missing or duplicated. Static build,
+manifest, and import checks do not catch malformed post-inline HTML: serve the
+exact Runtime artifact through a real browser before visual acceptance and
+prove the root renders, no external JS/CSS request remains, no console/page
+error occurs, and the inline script contains no raw HTML boundary.
 Each root records a sorted `artifact-manifest.json` with SHA-256 entries,
 disables source maps, and is checked by `npm run validate:artifacts` against a
 1 MiB raw / 300 KiB gzip executable-payload budget. The manifest `files` list is
