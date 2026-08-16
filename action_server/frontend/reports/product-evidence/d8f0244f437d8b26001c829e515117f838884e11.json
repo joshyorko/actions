@@ -1,0 +1,283 @@
+{
+  "schema": 2,
+  "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+  "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+  "fixture": "runtime-product-evidence-v1",
+  "records": [
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/actions",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "dark",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "error",
+      "state_details": "error",
+      "claim": "Runtime /actions rendered fixture-backed error data",
+      "screenshot": "reports/product-evidence/actions-error-dark-1440x900.png",
+      "png_sha256": "0d877568d8c020898adda8b1f3d460bf2f33434229ce22f096f1e7d4b76549d7",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/actions",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "dark",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "loaded",
+      "state_details": "loaded",
+      "claim": "Runtime /actions rendered fixture-backed loaded data",
+      "screenshot": "reports/product-evidence/actions-loaded-dark-1440x900.png",
+      "png_sha256": "c787c54f47f2e0739e4d72ca74c124d1699ff3bf0cefad3d765f97d4fa091fdb",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/actions",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "dark",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "loading",
+      "state_details": "loading",
+      "claim": "Runtime /actions rendered fixture-backed loading data",
+      "screenshot": "reports/product-evidence/actions-loading-dark-1440x900.png",
+      "png_sha256": "aba5a5e5866a5ecf29268ae9aa02457dbc9fa20c28562c38dfb8ca73320992b8",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/actions",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "action-detail-execute",
+      "state_details": "action-detail-execute",
+      "claim": "Runtime action detail and execute form are connected to the fixture-backed action catalog",
+      "screenshot": "reports/product-evidence/actions-action-detail-execute-light-1440x900.png",
+      "png_sha256": "659b45e022ff9ed3839356d9eb651a21a8e311583ce78a85cf1b69c102bbcb87",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/actions",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "empty",
+      "state_details": "empty",
+      "claim": "Runtime /actions rendered fixture-backed empty data",
+      "screenshot": "reports/product-evidence/actions-empty-light-1440x900.png",
+      "png_sha256": "abc0e88d2472e106e250fdb9bd3a135ac4c1281a1e6882cc4eb2c722cf350f94",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/actions",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "loaded-menu-open",
+      "state_details": "loaded with mobile navigation open",
+      "claim": "Runtime /actions rendered fixture-backed loaded-menu-open data",
+      "screenshot": "reports/product-evidence/actions-loaded-menu-open-dark-390x844.png",
+      "png_sha256": "2d209802f698e5003889da92652a5761880efc06880bee5903d3e425ad25e1c0",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/actions",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "unavailable",
+      "state_details": "unavailable",
+      "claim": "Runtime /actions rendered fixture-backed unavailable data",
+      "screenshot": "reports/product-evidence/actions-unavailable-light-390x844.png",
+      "png_sha256": "964439dd50fd5ee804197a41c1ffb59a886a38a36cf5990003b2375fbc4b5e1d",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/artifacts/run-passed",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "loaded",
+      "state_details": "loaded",
+      "claim": "Runtime /artifacts/run-passed rendered fixture-backed loaded data",
+      "screenshot": "reports/product-evidence/artifacts-run-passed-loaded-light-390x844.png",
+      "png_sha256": "63945cb77b2eef348503a90c371511c991c3b3ae51db2544670c41ce4ce90a07",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/logs/run-failed",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "loaded",
+      "state_details": "loaded",
+      "claim": "Runtime /logs/run-failed rendered fixture-backed loaded data",
+      "screenshot": "reports/product-evidence/logs-run-failed-loaded-dark-390x844.png",
+      "png_sha256": "3dcfecf73529566e1ceb094f79e8886fa731720039a8785c4569afcafb780609",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/overview",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "dark",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "loaded",
+      "state_details": "loaded",
+      "claim": "Runtime /overview rendered fixture-backed loaded data",
+      "screenshot": "reports/product-evidence/overview-loaded-dark-1440x900.png",
+      "png_sha256": "28e8f16a75f997ed7e4783795a80b4753fde1f931b0ad32f0fb5403346ad974f",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    },
+    {
+      "schema": 2,
+      "source_sha": "d8f0244f437d8b26001c829e515117f838884e11",
+      "artifact_sha256": "53ad5001111b6aa42f6f5fc65ace3e3ed3afa6f081b9160ad9e88d94c5502ad1",
+      "route": "/runs",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "theme": "light",
+      "fixture": "runtime-product-evidence-v1",
+      "state": "loaded",
+      "state_details": "loaded",
+      "claim": "Runtime /runs rendered fixture-backed loaded data",
+      "screenshot": "reports/product-evidence/runs-loaded-light-1440x900.png",
+      "png_sha256": "b8202f5d2ccdce78a7641b15bf32f8b963e2c984d51b252fbdbc1459379be11f",
+      "browser": "Playwright Chromium",
+      "os": "linux",
+      "node": "v26.7.0",
+      "provenance": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.7922.34 Safari/537.36",
+        "font_family": "system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "document_fonts": "loaded"
+      }
+    }
+  ]
+}
