@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --execution-accent: 16 78% 48%; --workbench-rule: 35 12% 82%; --radius-panel: 0.75rem; --radius-control: 0.35rem;
     --background: 40 20% 98%; --foreground: 220 16% 16%;
     --card: 0 0% 100%; --card-foreground: 220 16% 16%;
     --popover: 0 0% 100%; --popover-foreground: 220 16% 16%;
@@ -25,6 +26,7 @@
     --sidebar: 0 0% 100%; --sidebar-foreground: 220 16% 16%; --sidebar-muted: 40 12% 93%; --sidebar-accent: 190 83% 32%; --sidebar-border: 35 10% 84%;
   }
   .dark {
+    --execution-accent: 28 88% 62%; --workbench-rule: 220 10% 28%;
     --background: 220 16% 11%; --foreground: 40 20% 94%;
     --card: 220 14% 15%; --card-foreground: 40 20% 94%;
     --popover: 220 14% 13%; --popover-foreground: 40 20% 94%;
@@ -46,6 +48,60 @@
   body { @apply bg-background text-foreground; font-family: var(--font-sans); }
   code, pre, .font-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
   :focus-visible { outline: 2px solid hsl(var(--focus)); outline-offset: 2px; }
+}
+
+@layer components {
+  .runtime-frame { @apply flex min-h-screen bg-background; }
+  .runtime-main { @apply min-w-0 flex-1 overflow-auto; }
+  .sidebar { @apply sticky top-0 z-40 flex h-screen w-64 shrink-0 flex-col border-r border-border px-4 py-5; background: hsl(var(--sidebar)); }
+  .sidebar.collapsed { @apply w-20; }
+  .sidebar-head { @apply flex items-start justify-between gap-2 border-b border-border pb-5; }
+  .sidebar-head strong { @apply text-base tracking-tight; }
+  .theme-toggle, .menu-close { @apply rounded p-1 text-muted-foreground hover:bg-muted; }
+  .menu-close { @apply hidden; }
+  .sidebar-nav { @apply flex-1 space-y-1 py-5; }
+  .nav-group-label { @apply mb-2 mt-5 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground; }
+  .sidebar-nav-item { @apply flex min-h-10 items-center rounded-md px-3 py-2 text-sm text-sidebar-foreground/70 transition-colors; }
+  .sidebar-nav-item:hover, .sidebar-nav-item.active { @apply bg-muted text-foreground; }
+  .sidebar-nav-item.active { box-shadow: inset 3px 0 hsl(var(--execution-accent)); }
+  .collapse-toggle { @apply border-t border-border pt-4 text-left text-xs text-muted-foreground; }
+  .workbench-page { @apply mx-auto max-w-6xl space-y-10 px-6 py-8 lg:px-12 lg:py-12; }
+  .workbench-header { @apply flex flex-wrap items-end justify-between gap-6 border-b border-border pb-8; }
+  .workbench-header h1 { @apply max-w-3xl text-4xl font-semibold tracking-[-0.04em] lg:text-5xl; }
+  .eyebrow { @apply mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground; }
+  .lede { @apply mt-3 max-w-2xl text-base leading-7 text-muted-foreground; }
+  .mono { @apply font-mono text-xs; }
+  .runtime-note { @apply flex items-center gap-2 rounded-md border border-border px-3 py-2 text-xs text-muted-foreground; }
+  .status-mark, .trace-dot { @apply inline-block h-2 w-2 rounded-full; background: hsl(var(--execution-accent)); }
+  .workbench-section { @apply space-y-4; }
+  .section-heading { @apply flex flex-wrap items-end justify-between gap-4 border-b border-border pb-3; }
+  .section-heading h2, .next-action h2 { @apply text-xl font-semibold tracking-tight; }
+  .object-list { @apply divide-y divide-border border-y border-border; }
+  .object-row { @apply flex min-h-16 items-center justify-between gap-4 py-3 transition-colors hover:bg-muted/40; }
+  .object-row > span:first-child { @apply flex min-w-0 flex-col gap-1; }
+  .object-row strong { @apply truncate text-sm font-medium; }
+  .object-row small { @apply text-xs text-muted-foreground; }
+  .status { @apply shrink-0 text-xs font-medium; }
+  .status-failed { @apply text-destructive; } .status-passed { @apply text-success; } .status-running { color: hsl(var(--execution-accent)); } .status-muted { @apply text-muted-foreground; }
+  .empty-frame { @apply border-y border-dashed border-border py-8; } .empty-frame h3 { @apply font-medium; } .empty-frame p, .prose { @apply mt-2 text-sm leading-6 text-muted-foreground; }
+  .next-action { @apply flex flex-wrap items-center justify-between gap-6 border-t-2 border-foreground/10 pt-6; }
+  .next-action p:not(.eyebrow) { @apply mt-2 max-w-2xl text-sm text-muted-foreground; }
+  .button-primary { @apply inline-flex min-h-10 items-center justify-center rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50; }
+  .text-link, .side-links a { @apply text-sm font-medium underline decoration-border underline-offset-4 hover:decoration-foreground; }
+  .breadcrumb, .breadcrumb-shell { @apply flex flex-wrap items-center gap-2 text-xs text-muted-foreground; } .breadcrumb strong { @apply text-foreground; }
+  .breadcrumb-shell { @apply mx-auto max-w-6xl px-6 pt-5 lg:px-12; }
+  .workbench-tabs { @apply flex flex-wrap gap-5 border-b border-border; } .workbench-tabs a { @apply border-b-2 border-transparent py-3 text-sm text-muted-foreground; } .workbench-tabs a.selected { @apply border-foreground text-foreground; }
+  .code-panel { @apply overflow-auto rounded-md border border-border bg-muted/30 p-4 font-mono text-xs leading-6; }
+  .trace-layout { @apply grid gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(18rem,0.75fr)]; } .trace-list { @apply space-y-0 border-l border-border; } .trace-list li { @apply relative flex gap-4 border-b border-border py-5 pl-6; } .trace-list .trace-dot { @apply absolute -left-[5px] top-7 ring-4 ring-background; } .trace-list strong, .trace-list small { @apply block; } .trace-list small { @apply mt-1 text-sm text-muted-foreground; } .trace-failed { @apply text-destructive; } .trace-side { @apply space-y-4; } .side-links { @apply flex flex-wrap gap-4; }
+  .mobile-toolbar { @apply hidden; }
+  .menu-backdrop { @apply pointer-events-none fixed inset-0 z-30 bg-foreground/40 opacity-0 transition-opacity; }
+  .menu-backdrop.visible { @apply pointer-events-auto opacity-100; }
+}
+
+@media (max-width: 768px) {
+  .sidebar { @apply fixed -translate-x-full transition-transform; } .sidebar.open { @apply translate-x-0; } .sidebar .menu-close { @apply block; } .sidebar .collapse-toggle { @apply hidden; }
+  .mobile-toolbar { @apply sticky top-0 z-20 flex items-center justify-between border-b border-border bg-background px-5 py-4; } .menu-trigger { @apply rounded-md border border-border px-3 py-2 text-xs font-medium; } .mobile-brand { @apply text-sm font-semibold; }
+  .breadcrumb-shell { @apply px-5; } .workbench-page { @apply gap-8 px-5 py-7; } .workbench-header h1 { @apply text-3xl; } .object-row { @apply items-start; }
 }
 
 @layer components {

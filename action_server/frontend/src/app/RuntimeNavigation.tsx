@@ -3,92 +3,112 @@ import { cn } from "@/shared/utils/cn";
 import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
 import { useTheme } from "@/shared/hooks/useTheme";
 
-const items = [
+const primary = [
+  ["Overview", "/"],
   ["Actions", "/actions"],
   ["Runs", "/runs"],
+] as const;
+const operations = [
   ["Schedules", "/schedules"],
   ["Robots", "/robots"],
   ["Work Items", "/work-items"],
-  ["Analytics", "/analytics"],
 ] as const;
 
-export const RuntimeNavigation = () => {
+export const RuntimeNavigation = ({
+  menuOpen = false,
+  onMenuChange,
+}: {
+  menuOpen?: boolean;
+  onMenuChange?: (open: boolean) => void;
+}) => {
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useLocalStorage(
     "sidebar-collapsed",
     false,
   );
   const { theme, cycleTheme } = useTheme();
+  const links = (items: readonly (readonly [string, string])[]) =>
+    items.map(([label, path]) => (
+      <Link
+        key={path}
+        to={path}
+        onClick={() => onMenuChange?.(false)}
+        className={cn(
+          "sidebar-nav-item",
+          location.pathname === path ||
+            (path !== "/" && location.pathname.startsWith(path))
+            ? "active"
+            : "",
+        )}
+        aria-current={location.pathname === path ? "page" : undefined}
+      >
+        {label}
+      </Link>
+    ));
   return (
-    <aside
-      className={cn(
-        "sidebar flex flex-col border-r border-sidebar-border/50 transition-all duration-200",
-        isCollapsed ? "w-16" : "w-64",
-      )}
-    >
+    <>
       <div
+        data-testid="mobile-menu-backdrop"
+        className={cn("menu-backdrop", menuOpen && "visible")}
+        onClick={() => onMenuChange?.(false)}
+      />
+      <aside
         className={cn(
-          "flex h-16 items-center border-b border-sidebar-border/30",
-          isCollapsed ? "justify-center px-2" : "justify-between px-4",
+          "sidebar",
+          menuOpen && "open",
+          isCollapsed && "collapsed",
         )}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") onMenuChange?.(false);
+        }}
       >
-        {!isCollapsed && (
-          <span className="text-base font-semibold text-sidebar-foreground">
-            Action Server
-          </span>
-        )}
+        <div className="sidebar-head">
+          <div>
+            <p className="eyebrow">Local tool</p>
+            <strong>Actions Runtime</strong>
+          </div>
+          <button
+            type="button"
+            className="menu-close"
+            aria-label="Close Runtime menu"
+            autoFocus={menuOpen}
+            onClick={() => onMenuChange?.(false)}
+          >
+            ×
+          </button>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={cycleTheme}
+            aria-label={`Toggle theme (current: ${theme})`}
+          >
+            {theme === "dark" ? "☾" : "☀"}
+          </button>
+        </div>
+        <nav className="sidebar-nav" aria-label="Runtime navigation">
+          <p className="nav-group-label">Primary</p>
+          {links(primary)}
+          <p className="nav-group-label">Operations</p>
+          {links(operations)}
+          <p className="nav-group-label">Reference</p>
+          {links([["Analytics", "/analytics"]])}
+          <button
+            type="button"
+            className="sidebar-nav-item"
+            onClick={() => window.open("/openapi.json", "_blank")}
+          >
+            OpenAPI spec
+          </button>
+        </nav>
         <button
           type="button"
-          onClick={cycleTheme}
-          className="rounded-lg p-2 text-sidebar-foreground/70 hover:bg-sidebar-accent/20"
-          aria-label={`Toggle theme (current: ${theme})`}
-          title={`Theme: ${theme}`}
-        >
-          {theme === "dark" ? "☾" : theme === "light" ? "☀" : "◐"}
-        </button>
-      </div>
-      <div
-        className={cn(
-          "flex py-2",
-          isCollapsed ? "justify-center" : "justify-end px-3",
-        )}
-      >
-        <button
-          type="button"
+          className="collapse-toggle"
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="rounded-md px-2 py-1 text-sidebar-foreground/70 hover:bg-sidebar-accent/20"
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
-          {isCollapsed ? "→" : "←"}
+          {isCollapsed ? "→" : "Collapse"}
         </button>
-      </div>
-      <nav
-        className={cn("flex-1 space-y-1 py-2", isCollapsed ? "px-2" : "px-3")}
-        aria-label="Runtime navigation"
-      >
-        {items.map(([label, path]) => (
-          <Link
-            key={path}
-            to={path}
-            className={cn(
-              "sidebar-nav-item sidebar-nav-item-lg",
-              location.pathname.startsWith(path) && "active",
-              isCollapsed && "justify-center px-0",
-            )}
-            title={isCollapsed ? label : undefined}
-          >
-            {!isCollapsed && label}
-          </Link>
-        ))}
-        <button
-          type="button"
-          className="sidebar-nav-item sidebar-nav-item-lg w-full"
-          onClick={() => window.open("/openapi.json", "_blank")}
-          title={isCollapsed ? "OpenAPI spec" : undefined}
-        >
-          {!isCollapsed && "OpenAPI spec"}
-        </button>
-      </nav>
-    </aside>
+      </aside>
+    </>
   );
 };

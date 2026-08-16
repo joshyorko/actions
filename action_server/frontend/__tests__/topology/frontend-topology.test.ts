@@ -62,6 +62,36 @@ describe('Actions frontend topology', () => {
     }
   });
 
+  it('defines the calm workbench route and object-to-run context contract', () => {
+    const routes = read('src/app/RuntimeRoutes.tsx');
+    const navigation = read('src/app/RuntimeNavigation.tsx');
+    const layout = read('src/app/RuntimeLayout.tsx');
+
+    expect(routes).toContain('path="/"');
+    expect(routes).toContain('Overview');
+    expect(routes).toContain('path="/actions/:actionId"');
+    expect(routes).toContain('path="/runs/:runId"');
+    expect(navigation).toContain('Actions Runtime');
+    expect(navigation).toContain('aria-label="Close Runtime menu"');
+    expect(navigation).toContain('Primary');
+    expect(navigation).toContain('Reference');
+    expect(layout).toContain('aria-label="Breadcrumb"');
+    expect(layout).toContain('aria-label="Open Runtime menu"');
+    expect(navigation).toContain('data-testid="mobile-menu-backdrop"');
+  });
+
+  it('defines the visual contract as a calm, offline-safe workbench', () => {
+    const css = read('src/index.css');
+
+    expect(css).toContain('--execution-accent');
+    expect(css).toContain('--workbench-rule');
+    expect(css).toContain('--radius-panel');
+    expect(css).toContain('--radius-control');
+    expect(css).not.toMatch(/https?:\/\//);
+    expect(css).not.toMatch(/gradient|glow/i);
+    expect(css).toContain('prefers-reduced-motion: reduce');
+  });
+
   it('keeps persisted sidebar and theme controls in Runtime navigation', () => {
     const navigation = read('src/app/RuntimeNavigation.tsx');
 

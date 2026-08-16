@@ -164,7 +164,7 @@ const server = createServer((req, res) => {
   if (url.pathname === "/api/actionPackages" && state === "loading")
     return delayed(res, actions);
   if (url.pathname === "/api/actionPackages")
-    return state === "error"
+    return ["error", "unavailable"].includes(state)
       ? send(res, 500, {
           detail: "Fixture API error: action packages unavailable.",
         })
@@ -182,7 +182,9 @@ const server = createServer((req, res) => {
     url.pathname.startsWith("/api/runs/") &&
     url.pathname.endsWith("/artifacts")
   )
-    return send(res, 200, state === "empty" ? [] : artifactList);
+    return state === "degraded"
+      ? send(res, 503, { detail: "Fixture artifact store is degraded." })
+      : send(res, 200, state === "empty" ? [] : artifactList);
   if (
     url.pathname.startsWith("/api/runs/") &&
     url.pathname.endsWith("/artifacts/text-content")

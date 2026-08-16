@@ -30,17 +30,35 @@ const capture = async (
   await expect(page).toHaveURL(new RegExp(`${route.replaceAll("/", "\\/")}$`));
   const expected =
     state === "loaded"
-      ? route === "/actions"
-        ? "Action Packages"
-        : route === "/runs"
-          ? "Run History"
-          : "Run #"
+      ? route === "/"
+        ? "Ready for the next run"
+        : route === "/actions"
+          ? "Action Packages"
+          : route.startsWith("/actions/")
+            ? "Run action"
+            : route === "/runs"
+              ? "Run History"
+              : "Run #"
       : state === "empty"
         ? "No actions available yet"
         : state === "loading"
           ? "Loading actions..."
-          : "Unable to load action packages";
+          : state === "degraded"
+            ? "Artifacts"
+            : "Unable to load action packages";
   await expect(page.locator("body")).toContainText(expected);
+  if (viewport.width === 390) {
+    const menu = page.getByRole("button", { name: "Open Runtime menu" });
+    await menu.click();
+    await expect(page.getByTestId("mobile-menu-backdrop")).toHaveClass(
+      /visible/,
+    );
+    await expect(
+      page.getByRole("button", { name: "Close Runtime menu" }),
+    ).toBeVisible();
+    await page.getByRole("button", { name: "Close Runtime menu" }).click();
+    await expect(menu).toBeFocused();
+  }
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -76,7 +94,8 @@ test.beforeEach(async ({ context, page }) => {
   page.on("console", (message) => {
     if (
       message.type() === "error" &&
-      !message.text().includes("status of 500")
+      !message.text().includes("status of 500") &&
+      !message.text().includes("status of 503")
     ) {
       throw new Error(`Unexpected browser console error: ${message.text()}`);
     }
@@ -117,6 +136,10 @@ test("captures the loading product state", async ({ context, page }) => {
     width: 1440,
     height: 900,
   });
+  await capture(page, "/actions", "loading", "light", {
+    width: 390,
+    height: 844,
+  });
 });
 
 test.afterAll(() => {
@@ -129,11 +152,47 @@ test.afterAll(() => {
 });
 
 test("captures loaded desktop and mobile product routes", async ({ page }) => {
+  await capture(page, "/", "loaded", "light", { width: 1440, height: 900 });
+  await capture(page, "/", "loaded", "dark", { width: 1440, height: 900 });
+  await capture(page, "/", "loaded", "light", { width: 390, height: 844 });
   await capture(page, "/actions", "loaded", "dark", {
     width: 1440,
     height: 900,
   });
+  await capture(page, "/actions", "loaded", "light", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/actions", "loaded", "light", {
+    width: 390,
+    height: 844,
+  });
+  await capture(page, "/actions/action-sum", "loaded", "light", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/actions/action-sum", "loaded", "dark", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/actions/action-sum", "loaded", "light", {
+    width: 390,
+    height: 844,
+  });
   await capture(page, "/runs", "loaded", "light", { width: 1440, height: 900 });
+  await capture(page, "/runs", "loaded", "dark", { width: 390, height: 844 });
+  await capture(page, "/runs/run-failed", "loaded", "light", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/runs/run-failed", "loaded", "dark", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/runs/run-failed", "loaded", "light", {
+    width: 390,
+    height: 844,
+  });
   await capture(page, "/logs/run-failed", "loaded", "dark", {
     width: 390,
     height: 844,
@@ -156,6 +215,10 @@ test("captures empty and API error product states", async ({
     width: 1440,
     height: 900,
   });
+  await capture(page, "/actions", "empty", "light", {
+    width: 390,
+    height: 844,
+  });
   await context.clearCookies();
   await context.addCookies([
     { name: "product-evidence", value: "error", url: "http://127.0.0.1:4174" },
@@ -163,5 +226,53 @@ test("captures empty and API error product states", async ({
   await capture(page, "/actions", "error", "dark", {
     width: 1440,
     height: 900,
+  });
+  await capture(page, "/actions", "error", "light", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/actions", "error", "light", {
+    width: 390,
+    height: 844,
+  });
+  await context.clearCookies();
+  await context.addCookies([
+    {
+      name: "product-evidence",
+      value: "unavailable",
+      url: "http://127.0.0.1:4174",
+    },
+  ]);
+  await capture(page, "/actions", "unavailable", "light", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/actions", "unavailable", "dark", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/actions", "unavailable", "light", {
+    width: 390,
+    height: 844,
+  });
+  await context.clearCookies();
+  await context.addCookies([
+    {
+      name: "product-evidence",
+      value: "degraded",
+      url: "http://127.0.0.1:4174",
+    },
+  ]);
+  await capture(page, "/artifacts/run-passed", "degraded", "dark", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/artifacts/run-passed", "degraded", "light", {
+    width: 1440,
+    height: 900,
+  });
+  await capture(page, "/artifacts/run-passed", "degraded", "light", {
+    width: 390,
+    height: 844,
   });
 });
