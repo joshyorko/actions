@@ -239,6 +239,14 @@ published prerequisites. Never hand-edit lock hashes or add path/direct-URL
 production dependencies. Runtime freeze inputs remain a separate post-candidate
 gate.
 
+For `devutils`, regenerate from that package directory with
+`uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
+`uvx --from poetry==2.1.1 poetry check --lock`. Run the lock command a second
+time and compare the lockfile SHA-256 to prove byte-idempotence; the committed
+lockfile is the provenance artifact for the exact PyPI resolution. Do not use
+`inv lock` as a consistency check because it mutates stale locks, and never
+hand-edit generated entries or hashes.
+
 The Runtime frontend data-access contract is query-authoritative: typed calls
 in `action_server/frontend/src/shared/runtime-api.ts` feed the canonical keys
 in `src/shared/runtime-query-keys.ts` through `src/queries/runtime.ts`. The
