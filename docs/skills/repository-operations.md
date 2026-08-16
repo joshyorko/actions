@@ -385,11 +385,17 @@ and `test_database.py`.
 Migration 12 checks for non-null legacy `run.stdout`/`run.stderr` values before
 dropping those accidental columns. When data exists, it transactionally creates
 `run_legacy_output_archive` keyed by `run_id`, copies each non-null legacy row
-with `ON CONFLICT DO NOTHING`, and leaves the archive available for read-back;
-null-only or no-column databases do not create an archive. The migration record
-insert and archive copy are rerun-safe, and the final `run` schema has neither
-accidental column. PostgreSQL startup serialization uses the existing advisory
-lock, so concurrent migration startup archives populated legacy data once.
+with fieldwise null-fill semantics, and leaves the archive available for
+read-back; null-only or no-column databases do not create an archive. Before
+dropping either source column, any same-`run_id` archive/source pair with
+unequal non-null `stdout` or `stderr` aborts the transaction, preserving both
+rows for operator resolution. Equal non-null values are idempotent, archive
+nulls are filled from non-null source values, and source nulls retain archive
+values. After resolution, the migration record insert and archive copy are
+rerun-safe, and the final `run` schema has neither accidental column.
+PostgreSQL startup serialization uses the existing advisory lock, so concurrent
+migration startup archives populated legacy data once without overwriting or
+silently losing output.
 Database settings reject malformed or unsupported URL schemes without logging the URL;
 plain paths remain SQLite and `postgres://` is normalized to PostgreSQL. URL
 validation rejects missing PostgreSQL hosts, malformed authorities, and ports

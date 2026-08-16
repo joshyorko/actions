@@ -226,10 +226,10 @@ def test_forward_schema_repair_archives_populated_outputs_without_overwrite(
             )
             db.execute(
                 "INSERT INTO run_legacy_output_archive VALUES (?, ?, ?)",
-                ["run-1", "existing stdout", "existing stderr"],
+                ["run-1", None, "existing stderr"],
             )
             for values in (
-                ["run-1", "result-1", "new stdout", "new stderr"],
+                ["run-1", "result-1", "new stdout", "existing stderr"],
                 ["run-2", "result-2", "only stdout", None],
                 ["run-3", "result-3", None, "only stderr"],
                 ["run-4", "result-4", None, None],
@@ -254,10 +254,79 @@ def test_forward_schema_repair_archives_populated_outputs_without_overwrite(
 
     assert run_columns == ["id", "result"]
     assert archived == [
-        ("run-1", "existing stdout", "existing stderr"),
+        ("run-1", "new stdout", "existing stderr"),
         ("run-2", "only stdout", None),
         ("run-3", None, "only stderr"),
     ]
+
+
+@pytest.mark.parametrize("collision_column", ["stdout", "stderr"])
+def test_forward_schema_repair_aborts_on_archive_collision_and_retries(
+    tmp_path: Path, collision_column: str
+):
+    from actions.server.migrations import Migration
+    from actions.server.migrations.migration_reconcile_run_columns import migrate
+
+    db = Database(tmp_path / f"migration-repair-{collision_column}-collision.db")
+    with db.connect():
+        db.initialize([Migration])
+        with db.transaction():
+            db.execute(
+                "CREATE TABLE migration (id INTEGER PRIMARY KEY, name TEXT NOT NULL)"
+            )
+            db.execute(
+                "CREATE TABLE run (id TEXT PRIMARY KEY, result TEXT, "
+                "stdout TEXT, stderr TEXT)"
+            )
+            db.execute(
+                "CREATE TABLE run_legacy_output_archive ("
+                "run_id TEXT PRIMARY KEY, stdout TEXT, stderr TEXT)"
+            )
+            db.execute(
+                "INSERT INTO run_legacy_output_archive VALUES (?, ?, ?)",
+                [
+                    "run-1",
+                    "archived stdout" if collision_column == "stdout" else "source stdout",
+                    "archived stderr" if collision_column == "stderr" else "source stderr",
+                ],
+            )
+            db.execute(
+                "INSERT INTO run VALUES (?, ?, ?, ?)",
+                ["run-1", "result-1", "source stdout", "source stderr"],
+            )
+
+        with pytest.raises(ValueError, match="run-1"):
+            with db.transaction():
+                migrate(db)
+
+        assert "stdout" in db.list_table_and_columns()["run"]
+        assert "stderr" in db.list_table_and_columns()["run"]
+        with db.cursor() as cursor:
+            db.execute_query(
+                cursor,
+                "SELECT stdout, stderr FROM run_legacy_output_archive WHERE run_id=?",
+                ["run-1"],
+            )
+            assert cursor.fetchone() == (
+                "archived stdout" if collision_column == "stdout" else "source stdout",
+                "archived stderr" if collision_column == "stderr" else "source stderr",
+            )
+
+        with db.transaction():
+            db.execute(
+                f"UPDATE run_legacy_output_archive SET {collision_column}=? WHERE run_id=?",
+                ["source " + collision_column, "run-1"],
+            )
+            migrate(db)
+
+        assert db.list_table_and_columns()["run"] == ["id", "result"]
+        with db.cursor() as cursor:
+            db.execute_query(
+                cursor,
+                "SELECT stdout, stderr FROM run_legacy_output_archive WHERE run_id=?",
+                ["run-1"],
+            )
+            assert cursor.fetchone() == ("source stdout", "source stderr")
 
 
 def test_forward_schema_repair_is_registered_after_historical_migration_nine():
@@ -624,6 +693,60 @@ def test_postgresql_run_output_archive_preserves_values_and_reruns():
             ("run-2", "only postgres stdout", None),
             ("run-3", None, "only postgres stderr"),
         ]
+    finally:
+        _drop_postgresql_schema(owner, schema)
+
+
+@pytest.mark.integration_test
+@pytest.mark.postgresql
+@pytest.mark.parametrize("collision_column", ["stdout", "stderr"])
+def test_postgresql_run_output_archive_collision_preserves_data_and_retries(
+    collision_column: str,
+):
+    url = os.environ.get("ACTIONS_TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("ACTIONS_TEST_DATABASE_URL is not configured")
+
+    from actions.server.migrations.migration_reconcile_run_columns import migrate
+
+    owner, schema, schema_url = _create_postgresql_legacy_run_schema(url)
+    database = Database(schema_url)
+    try:
+        with database.connect():
+            with database.transaction():
+                database.execute(
+                    "CREATE TABLE run_legacy_output_archive ("
+                    "run_id TEXT PRIMARY KEY, stdout TEXT, stderr TEXT)"
+                )
+                database.execute(
+                    "INSERT INTO run_legacy_output_archive VALUES (?, ?, ?)",
+                    [
+                        "run-1",
+                        "archived stdout"
+                        if collision_column == "stdout"
+                        else "postgres stdout",
+                        "archived stderr"
+                        if collision_column == "stderr"
+                        else "postgres stderr",
+                    ],
+                )
+
+            with pytest.raises(ValueError, match="run-1"):
+                with database.transaction():
+                    migrate(database)
+
+            assert "stdout" in database.list_table_and_columns()["run"]
+            assert "stderr" in database.list_table_and_columns()["run"]
+
+            with database.transaction():
+                database.execute(
+                    f"UPDATE run_legacy_output_archive SET {collision_column}=? "
+                    "WHERE run_id=?",
+                    ["postgres " + collision_column, "run-1"],
+                )
+                migrate(database)
+
+            assert database.list_table_and_columns()["run"] == ["id", "result"]
     finally:
         _drop_postgresql_schema(owner, schema)
 

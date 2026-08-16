@@ -33,13 +33,37 @@ CREATE TABLE IF NOT EXISTS {_ARCHIVE_TABLE} (
 )
 """
             )
+            conflict_conditions = [
+                f"archive.{column} IS NOT NULL"
+                f" AND run.{column} IS NOT NULL"
+                f" AND archive.{column} <> run.{column}"
+                for column in legacy_columns
+            ]
+            with db.cursor() as cursor:
+                db.execute_query(
+                    cursor,
+                    f"""
+SELECT archive.run_id
+FROM {_ARCHIVE_TABLE} AS archive
+JOIN run ON run.id = archive.run_id
+WHERE {" OR ".join(conflict_conditions)}
+LIMIT 1
+""",
+                )
+                conflict = cursor.fetchone()
+            if conflict is not None:
+                raise ValueError(
+                    f"Cannot reconcile run output archive collision for {conflict[0]}"
+                )
             db.execute(
                 f"""
 INSERT INTO {_ARCHIVE_TABLE} (run_id, stdout, stderr)
 SELECT id, {stdout_expression}, {stderr_expression}
 FROM run
 WHERE {non_null_condition}
-ON CONFLICT (run_id) DO NOTHING
+ON CONFLICT (run_id) DO UPDATE SET
+    stdout = COALESCE({_ARCHIVE_TABLE}.stdout, excluded.stdout),
+    stderr = COALESCE({_ARCHIVE_TABLE}.stderr, excluded.stderr)
 """
             )
 
