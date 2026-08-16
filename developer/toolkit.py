@@ -26,6 +26,8 @@ ACTIVE_ENVIRONMENT_VARIABLES = (
     "_CE_M",
     "PYTHONHOME",
     "PYTHONPATH",
+    "ROBOT_ARTIFACTS",
+    "ROBOT_ROOT",
 )
 
 
@@ -106,6 +108,15 @@ def package_task(task: str) -> None:
             poetry(package, "run", "ruff", "check", "src", "tests")
         elif package == "work-items" and task == "typecheck":
             poetry(package, "run", "mypy")
+        elif package == "work-items" and task == "test":
+            poetry(
+                package,
+                "run",
+                "pytest",
+                "tests",
+                "-m",
+                "not persistent_backend_service",
+            )
         else:
             poetry(package, "run", "invoke", task)
 

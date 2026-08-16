@@ -29,6 +29,12 @@ def test_manifest_defines_cross_platform_developer_tasks() -> None:
     assert manifest["environmentConfigs"] == ["setup.yaml"]
 
 
+def test_rcc_toolchain_includes_external_test_utilities() -> None:
+    setup = yaml.safe_load((TOOLKIT_ROOT / "setup.yaml").read_text())
+
+    assert "jq=1.7.1" in setup["dependencies"]
+
+
 def test_ci_verifies_bootstrap_environment_isolation() -> None:
     workflow = (
         REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
@@ -95,6 +101,8 @@ def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
             "_CE_M": "1",
             "PYTHONHOME": "/host/python",
             "PYTHONPATH": "/host/pythonpath",
+            "ROBOT_ARTIFACTS": "/rcc/artifacts",
+            "ROBOT_ROOT": "/rcc/robot",
         },
     ), patch(
         "toolkit.subprocess.run"
@@ -115,6 +123,8 @@ def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
         "_CE_M",
         "PYTHONHOME",
         "PYTHONPATH",
+        "ROBOT_ARTIFACTS",
+        "ROBOT_ROOT",
     ):
         assert name not in environment
     assert environment["POETRY_VIRTUALENVS_CREATE"] == "true"
@@ -154,4 +164,26 @@ def test_lint_uses_package_configured_gates() -> None:
         ("devutils", "run", "ruff", "check", "src", "tests"),
         ("work-items", "run", "ruff", "check", "src", "tests"),
         ("action_server", "run", "invoke", "lint"),
+    ]
+
+
+def test_test_uses_package_configured_gates() -> None:
+    with patch.object(toolkit, "toolkit_test"), patch.object(
+        toolkit, "poetry"
+    ) as poetry:
+        toolkit.test()
+
+    assert [call.args for call in poetry.call_args_list] == [
+        ("actions", "run", "invoke", "test"),
+        ("actions-http-helper", "run", "invoke", "test"),
+        ("devutils", "run", "pytest", "tests"),
+        (
+            "work-items",
+            "run",
+            "pytest",
+            "tests",
+            "-m",
+            "not persistent_backend_service",
+        ),
+        ("action_server", "run", "invoke", "test"),
     ]

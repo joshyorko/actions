@@ -353,10 +353,14 @@ system-site-packages isolation. This boundary applies to root `invoke install` a
 direct package commands: RCC owns the outer holotree toolchain while each package owns an
 independent `.venv` resolved from its committed lockfile. Without it, sequential Poetry
 installs can rewrite RCC's active holotree and make tools such as Mypy disappear from later
-package gates. `ToolkitTest` runs Ruff and pytest against the gateway itself; the full
-`Test` task runs it first and also covers `devutils`, whose package does not provide an
-Invoke task collection. `Typecheck` runs only package-declared typecheck gates; `devutils`
-has no such gate and is not assigned an invented strict-Mypy contract.
+package gates. The dispatcher also removes RCC's `ROBOT_ROOT` and `ROBOT_ARTIFACTS` from
+package subprocesses; otherwise Actions CLI tests inherit the toolkit artifact directory
+instead of exercising their documented `./output` default. `ToolkitTest` runs Ruff and
+pytest against the gateway itself; the full `Test` task runs it first and also covers
+`devutils`, whose package does not provide an Invoke task collection. The RCC toolchain
+includes pinned `jq` because the devutils workflow-contract suite executes its admission
+filters. `Typecheck` runs only package-declared typecheck gates; `devutils` has no such gate
+and is not assigned an invented strict-Mypy contract.
 
 `Lint` is fail-fast across package boundaries: report which packages completed and which
 were not reached whenever it fails. The shared package task must call the explicit
@@ -364,7 +368,9 @@ were not reached whenever it fails. The shared package task must call the explic
 locks; the legacy `ruff <paths>` form fails under newer Ruff. Work Items uses its
 release-authoritative `ruff check src tests` and focused, configuration-driven Mypy gates;
 the developer toolkit must not widen those into the generic formatter/isort or whole-tree
-Mypy tasks. A non-empty, ignored
+Mypy tasks. Its portable RCC test smoke runs plain Pytest and excludes
+`persistent_backend_service`; the complete Redis/Mongo service contract remains owned by
+the repository's `verify-work-items` service gate. A non-empty, ignored
 `developer/tmp/` produces an RCC artifact warning during repeated developer runs but is
 not a lint or packaging failure. Production bundles must still start with clean artifacts.
 
