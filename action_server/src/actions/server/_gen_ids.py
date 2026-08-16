@@ -13,7 +13,20 @@ def get_counter(counter_name: Optional[str] = None):
         return _counters[counter_name]
 
 
-def gen_uuid(counter_name: Optional[Literal["action_package", "action", "run"]] = None):
+def gen_uuid(
+    counter_name: Optional[
+        Literal[
+            "action_package",
+            "action",
+            "run",
+            "schedule",
+            "schedule_execution",
+            "schedule_group",
+            "trigger",
+            "trigger_invocation",
+        ]
+    ] = None,
+):
     if not counter_name:
         prefix = ""
     elif counter_name == "action_package":

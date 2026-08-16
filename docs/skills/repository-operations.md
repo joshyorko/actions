@@ -373,6 +373,13 @@ database/model import cycles. Model names used only by annotations belong behind
 `TYPE_CHECKING`; moving runtime imports to module scope merely to satisfy Ruff changes the
 import boundary and is not an acceptable lint repair.
 
+Action Server Mypy scans product source and ordinary tests but excludes executable
+`resources/data_package/` fixtures whose optional `sema4ai.data` dependency is not part of
+the Runtime environment. Generated `_oauth2_config`/`_static_contents` modules and
+installed runtime libraries without stubs use targeted module overrides rather than a
+global missing-import exemption. MCP SDK model constructors use Python field names such
+as `structured_content`; camelCase aliases remain wire-format names.
+
 `Doctor` and `ToolkitTest` validate the RCC environment and dispatcher contracts. Gateway
 CI runs `Bootstrap`, verifies all five package `.venv` interpreters, reruns `ToolkitTest`
 to prove the RCC toolchain survived Bootstrap, and runs the full package `Test` smoke on

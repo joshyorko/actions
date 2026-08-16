@@ -381,7 +381,7 @@ async def _download_from_url(url: str) -> tuple[bool, str, Optional[Path]]:
 
     Returns: (success, message, downloaded_path)
     """
-    import httpx
+    import httpx2 as httpx
 
     parsed = urlparse(url)
 

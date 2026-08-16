@@ -215,7 +215,7 @@ async def list_triggers(
     with db.connect():
         # Build query
         conditions = []
-        values = []
+        values: List[Any] = []
 
         if enabled is not None:
             conditions.append("enabled = ?")
@@ -368,7 +368,7 @@ async def update_trigger(trigger_id: str, request: TriggerUpdateRequest):
                 status_code=404, detail=f"Trigger not found: {trigger_id}"
             )
 
-        updates = {"updated_at": datetime_to_str(now)}
+        updates: Dict[str, Any] = {"updated_at": datetime_to_str(now)}
 
         if request.name is not None:
             updates["name"] = request.name

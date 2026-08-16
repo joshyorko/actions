@@ -147,6 +147,7 @@ def _wheel_files(wheel: Path) -> dict[str, str]:
 
 def _runtime_python() -> Path:
     configured = os.environ.get("ACTIONS_RUNTIME_TEST_PYTHON")
+    candidate: Path | None
     if configured:
         candidate = Path(configured)
     else:

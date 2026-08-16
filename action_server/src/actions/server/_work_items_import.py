@@ -19,8 +19,8 @@ def locate_work_items_package() -> Path:
     """Return the copied or editable Work Items package initializer path."""
     try:
         work_items_distribution = distribution("actions-work-items")
-        package_path = work_items_distribution.locate_file(
-            "actions/work_items/__init__.py"
+        package_path = Path(
+            str(work_items_distribution.locate_file("actions/work_items/__init__.py"))
         )
     except PackageNotFoundError as error:
         raise ImportError("Unable to locate actions-work-items package") from error
@@ -29,7 +29,10 @@ def locate_work_items_package() -> Path:
         return package_path
 
     try:
-        direct_url = json.loads(work_items_distribution.read_text("direct_url.json"))
+        direct_url_text = work_items_distribution.read_text("direct_url.json")
+        if direct_url_text is None:
+            raise ImportError("Unable to locate actions-work-items package")
+        direct_url = json.loads(direct_url_text)
         url = direct_url["url"]
         editable = direct_url["dir_info"]["editable"]
     except (json.JSONDecodeError, KeyError, TypeError):

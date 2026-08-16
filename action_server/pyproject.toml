@@ -63,6 +63,7 @@ pyinstaller-hooks-contrib = "2025.9"
 
 [tool.mypy]
 mypy_path = "src:tests"
+exclude = ["tests/action_server_tests/resources/data_package/"]
 
 [tool.black]
 skip-string-normalization = false
@@ -102,6 +103,16 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "robocorp.tasks.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "actions.server._oauth2_config",
+    "actions.server._static_contents",
+    "croniter",
+    "cronstrue",
+    "pytz",
+]
 ignore_missing_imports = true
 
 

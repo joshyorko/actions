@@ -427,7 +427,7 @@ class SchedulerEngine:
 
             with db.connect():
                 with db.transaction():
-                    update_fields = {
+                    update_fields: Dict[str, Any] = {
                         "actual_end_time": datetime_to_str(end_time),
                         "duration_ms": duration_ms,
                         "status": (
@@ -446,7 +446,7 @@ class SchedulerEngine:
 
                     # Update schedule timestamps
                     next_run = self.compute_next_run(schedule, end_time)
-                    schedule_updates = {
+                    schedule_updates: Dict[str, Any] = {
                         "last_run_at": datetime_to_str(now),
                         "updated_at": datetime_to_str(end_time),
                     }
@@ -744,6 +744,8 @@ class SchedulerEngine:
         """Send a webhook notification."""
         import aiohttp
 
+        assert schedule.notification_webhook_url is not None
+
         payload = {
             "schedule_id": schedule.id,
             "schedule_name": schedule.name,
@@ -783,6 +785,7 @@ class SchedulerEngine:
         if service is None:
             log.warning("Email notifications not configured (no SMTP settings)")
             return
+        assert schedule.notification_email is not None
 
         subject = (
             f"[{'SUCCESS' if success else 'FAILURE'}] " f"Schedule: {schedule.name}"
@@ -832,17 +835,20 @@ Duration: {execution.duration_ms}ms
         schedule_type = schedule.schedule_type
 
         if schedule_type == ScheduleType.CRON:
+            assert schedule.cron_expression is not None
             return self._compute_cron_next(
                 schedule.cron_expression,
                 schedule.timezone,
                 after,
             )
         elif schedule_type == ScheduleType.INTERVAL:
+            assert schedule.interval_seconds is not None
             return self._compute_interval_next(
                 schedule.interval_seconds,
                 after,
             )
         elif schedule_type == ScheduleType.WEEKDAY:
+            assert schedule.weekday_config_json is not None
             return self._compute_weekday_next(
                 schedule.weekday_config_json,
                 schedule.timezone,

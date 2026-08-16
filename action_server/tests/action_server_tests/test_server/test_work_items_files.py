@@ -97,6 +97,7 @@ def test_work_items_import_ignores_project_actions_module(tmp_path: Path) -> Non
 
 def test_rest_projects_non_object_library_payload_to_null(client: TestClient) -> None:
     """Library scalar payloads cannot violate the REST object-or-null schema."""
+    assert _api_work_items._adapter is not None
     item_id = _api_work_items._adapter.seed_input(payload="scalar")
 
     detail = client.get(f"/api/work-items/{item_id}")

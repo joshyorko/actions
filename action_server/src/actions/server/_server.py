@@ -271,7 +271,7 @@ def start_server(
 
         from actions.server._storage import get_key
 
-        from . import __version__, _static_contents
+        from . import __version__, _static_contents  # type: ignore[attr-defined]
 
         if IN_DEV:
             # Always reload in dev mode.

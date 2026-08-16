@@ -453,7 +453,7 @@ async def list_schedules(
     with db.connect():
         # Build query
         conditions = []
-        values = []
+        values: List[Any] = []
 
         if enabled is not None:
             conditions.append("enabled = ?")
@@ -739,7 +739,7 @@ async def update_schedule(schedule_id: str, request: ScheduleUpdateRequest):
             )
 
         # Build update dict
-        updates = {"updated_at": datetime_to_str(now)}
+        updates: Dict[str, Any] = {"updated_at": datetime_to_str(now)}
 
         # Handle each field
         if request.name is not None:
@@ -1388,7 +1388,7 @@ async def update_group(group_id: str, request: GroupUpdateRequest):
         except KeyError:
             raise HTTPException(status_code=404, detail=f"Group not found: {group_id}")
 
-        updates = {}
+        updates: Dict[str, Any] = {}
         if request.name is not None:
             updates["name"] = request.name
         if request.description is not None:
