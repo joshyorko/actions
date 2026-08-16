@@ -3,6 +3,8 @@ import { expect, test, type Page } from "@playwright/test";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { readFileSync, mkdirSync, writeFileSync, existsSync } from "node:fs";
+import { request as httpRequest } from "node:http";
+import { connect } from "node:net";
 import { join, relative, resolve } from "node:path";
 
 const root = process.cwd();
@@ -15,6 +17,83 @@ const runtimeSha = createHash("sha256")
   .digest("hex");
 const records: Array<Record<string, unknown>> = [];
 const runtimeOrigin = "http://127.0.0.1:4175";
+type Body = string | Buffer | readonly (string | Buffer)[];
+
+const boundedHttpRequest = (
+  path: string,
+  headers: Record<string, string>,
+  body: Body = "",
+  chunked = false,
+) =>
+  new Promise<{ status: number; body: string }>((resolveProbe, reject) => {
+    let settled = false;
+    const finish = (callback: () => void) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      callback();
+    };
+    const client = httpRequest(
+      {
+        host: "127.0.0.1",
+        port: 4175,
+        path,
+        method: "GET",
+        headers,
+      },
+      (response) => {
+        const chunks: Buffer[] = [];
+        response.on("data", (chunk: Buffer) => chunks.push(chunk));
+        response.on("end", () =>
+          finish(() =>
+            resolveProbe({
+              status: response.statusCode || 0,
+              body: Buffer.concat(chunks).toString(),
+            }),
+          ),
+        );
+      },
+    );
+    const timer = setTimeout(() => {
+      client.destroy();
+      finish(() => reject(new Error(`HTTP body probe timed out: ${path}`)));
+    }, 900);
+    client.once("error", (error) => finish(() => reject(error)));
+    if (chunked) {
+      for (const chunk of Array.isArray(body) ? body : [body])
+        client.write(chunk);
+      client.end();
+    } else {
+      client.end(body as string | Buffer);
+    }
+  });
+
+const boundedRawRequest = (raw: string) =>
+  new Promise<string>((resolveProbe, reject) => {
+    let settled = false;
+    let response = "";
+    const socket = connect(4175, "127.0.0.1");
+    const finish = (callback: () => void) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      socket.destroy();
+      callback();
+    };
+    const timer = setTimeout(() => {
+      finish(() => reject(new Error("Raw body probe timed out")));
+    }, 900);
+    socket.once("connect", () => socket.end(raw));
+    socket.on("data", (chunk) => {
+      response += chunk.toString();
+    });
+    socket.once("close", () => finish(() => resolveProbe(response)));
+    socket.once("error", (error) => finish(() => reject(error)));
+  });
+
+const responseDetail = (body: string) => JSON.parse(body).detail as string;
+const rawStatus = (response: string) =>
+  Number(response.match(/^HTTP\/1\.1 (\d+)/)?.[1] || 0);
 
 const capture = async (
   page: Page,
@@ -205,7 +284,7 @@ test("rejects drifted Runtime and legacy client requests", async ({
   }
   for (const response of [
     await request.get("/api/runs?unexpected=1"),
-    await request.post("/api/actionPackages", { data: {} }),
+    await request.post("/api/actionPackages"),
     await request.get("/api/runs/run-passed/artifacts/text-content"),
     await request.get("/api/runs/run-passed/artifacts/result.json?download=1"),
   ]) {
@@ -214,6 +293,55 @@ test("rejects drifted Runtime and legacy client requests", async ({
       "Unsupported fixture request",
     );
   }
+  expect(
+    await boundedHttpRequest("/config", { "Content-Length": "0" }),
+  ).toMatchObject({ status: 200 });
+  for (const probe of [
+    await boundedHttpRequest("/config", { "Content-Length": "1" }, "x"),
+    await boundedHttpRequest(
+      "/config",
+      { "Transfer-Encoding": "chunked" },
+      "x",
+      true,
+    ),
+    await boundedHttpRequest(
+      "/not-a-real-static-route.js",
+      { "Content-Length": "1" },
+      "x",
+    ),
+  ]) {
+    expect(probe.status).toBe(400);
+    expect(responseDetail(probe.body)).toContain("empty request body");
+  }
+  const oversized = await boundedHttpRequest(
+    "/config",
+    { "Content-Length": String(65 * 1024) },
+    Buffer.alloc(65 * 1024, 97),
+  );
+  expect(oversized.status).toBe(413);
+  expect(responseDetail(oversized.body)).toContain("64 KiB");
+  const streamedOverflow = await boundedHttpRequest(
+    "/config",
+    { "Transfer-Encoding": "chunked" },
+    [Buffer.alloc(64 * 1024, 98), "x"],
+    true,
+  );
+  expect(streamedOverflow.status).toBe(413);
+  expect(responseDetail(streamedOverflow.body)).toContain("64 KiB");
+  for (const raw of [
+    "GET /config HTTP/1.1\r\nHost: 127.0.0.1\r\nContent-Length: nope\r\nConnection: close\r\n\r\n",
+    "GET /config HTTP/1.1\r\nHost: 127.0.0.1\r\nContent-Length: -1\r\nConnection: close\r\n\r\n",
+    "GET /config HTTP/1.1\r\nHost: 127.0.0.1\r\nContent-Length: 1\r\nContent-Length: 2\r\nConnection: close\r\n\r\nx",
+  ]) {
+    const response = await boundedRawRequest(raw);
+    expect(rawStatus(response)).toBe(400);
+    expect(response).toContain("Content-Length");
+  }
+  const aborted = await boundedRawRequest(
+    "GET /config HTTP/1.1\r\nHost: 127.0.0.1\r\nContent-Length: 2\r\nConnection: close\r\n\r\nx",
+  );
+  expect(rawStatus(aborted)).toBe(400);
+  expect(aborted).toContain("request body was aborted");
 });
 
 test.afterAll(() => {

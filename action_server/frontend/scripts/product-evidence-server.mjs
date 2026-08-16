@@ -1,4 +1,4 @@
-/* global URL, process, setTimeout, clearTimeout */
+/* global Buffer, URL, process, setTimeout, clearTimeout */
 import { createHash } from "node:crypto";
 import { createReadStream, existsSync, readFileSync, statSync } from "node:fs";
 import { createServer } from "node:http";
@@ -160,7 +160,96 @@ const delayed = (req, res, value) => {
   return timer;
 };
 const reject = (res, status, message) => send(res, status, { detail: message });
-const server = createServer((req, res) => {
+const MAX_REQUEST_BODY_BYTES = 64 * 1024;
+const bodyAdmissionError = (status, detail) => ({ status, detail });
+const contentLengthValues = (req) =>
+  req.rawHeaders.reduce((values, header, index) => {
+    if (header.toLowerCase() === "content-length")
+      values.push(req.rawHeaders[index + 1]);
+    return values;
+  }, []);
+const admitEmptyRequestBody = (req) => {
+  const lengths = contentLengthValues(req);
+  if (lengths.length > 1 && new Set(lengths).size > 1)
+    return Promise.resolve(
+      bodyAdmissionError(400, "Contradictory Content-Length headers"),
+    );
+  const rawLength = lengths[0] ?? req.headers["content-length"];
+  if (rawLength !== undefined && !/^\d+$/.test(rawLength))
+    return Promise.resolve(
+      bodyAdmissionError(400, "Malformed Content-Length header"),
+    );
+  const expected = rawLength === undefined ? undefined : Number(rawLength);
+  if (expected !== undefined && !Number.isSafeInteger(expected))
+    return Promise.resolve(
+      bodyAdmissionError(400, "Malformed Content-Length header"),
+    );
+  if (expected !== undefined && expected > MAX_REQUEST_BODY_BYTES)
+    return Promise.resolve(
+      bodyAdmissionError(
+        413,
+        `Request body exceeds ${MAX_REQUEST_BODY_BYTES / 1024} KiB`,
+      ),
+    );
+  return new Promise((resolve) => {
+    let received = 0;
+    let settled = false;
+    const finish = (result) => {
+      if (settled) return;
+      settled = true;
+      req.off("data", onData);
+      req.off("end", onEnd);
+      req.off("aborted", onAborted);
+      req.off("error", onError);
+      resolve(result);
+    };
+    const onData = (chunk) => {
+      received += chunk.length;
+      if (received > MAX_REQUEST_BODY_BYTES)
+        finish(
+          bodyAdmissionError(
+            413,
+            `Request body exceeds ${MAX_REQUEST_BODY_BYTES / 1024} KiB`,
+          ),
+        );
+    };
+    const onEnd = () =>
+      finish(
+        expected !== undefined && expected !== received
+          ? bodyAdmissionError(
+              400,
+              "Content-Length does not match request body",
+            )
+          : received === 0
+            ? null
+            : bodyAdmissionError(
+                400,
+                "Only an empty request body is supported",
+              ),
+      );
+    const onAborted = () =>
+      finish(bodyAdmissionError(400, "The request body was aborted"));
+    const onError = () =>
+      finish(bodyAdmissionError(400, "The request body could not be read"));
+    req.on("data", onData);
+    req.once("end", onEnd);
+    req.once("aborted", onAborted);
+    req.once("error", onError);
+    req.resume();
+  });
+};
+const rejectBody = (req, res, status, message) => {
+  if (res.destroyed || res.writableEnded) return;
+  const body = JSON.stringify({ detail: message });
+  res.writeHead(status, {
+    "Content-Type": "application/json",
+    "Cache-Control": "no-store",
+    Connection: "close",
+    "Content-Length": Buffer.byteLength(body),
+  });
+  res.end(body, () => req.destroy());
+};
+const dispatchRequest = (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const state = mode(req);
   if (req.method === "GET" && url.pathname === "/config" && !url.search)
@@ -332,6 +421,31 @@ const server = createServer((req, res) => {
     "Content-Type": extname(file) === ".html" ? "text/html" : "text/javascript",
   });
   createReadStream(file).pipe(res);
+};
+const server = createServer((req, res) => {
+  admitEmptyRequestBody(req)
+    .then((error) => {
+      if (error) return rejectBody(req, res, error.status, error.detail);
+      dispatchRequest(req, res);
+    })
+    .catch(() =>
+      rejectBody(req, res, 400, "The request body could not be read"),
+    );
+});
+server.on("clientError", (error, socket) => {
+  if (!socket.writable) return socket.destroy();
+  const detail =
+    error.code === "HPE_UNEXPECTED_CONTENT_LENGTH"
+      ? "Contradictory Content-Length headers"
+      : error.code === "HPE_INVALID_EOF_STATE"
+        ? "The request body was aborted"
+        : error.code === "HPE_INVALID_CONTENT_LENGTH"
+          ? "Malformed or negative Content-Length header"
+          : "Malformed request headers";
+  const body = JSON.stringify({ detail });
+  socket.end(
+    `HTTP/1.1 400 Bad Request\r\nContent-Type: application/json\r\nCache-Control: no-store\r\nConnection: close\r\nContent-Length: ${Buffer.byteLength(body)}\r\n\r\n${body}`,
+  );
 });
 server.listen(port, "127.0.0.1");
 process.on("SIGTERM", () => {
