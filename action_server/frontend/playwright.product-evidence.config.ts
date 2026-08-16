@@ -8,7 +8,7 @@ export default defineConfig({
   fullyParallel: false,
   expect: { timeout: 15_000 },
   use: {
-    baseURL: "http://127.0.0.1:4174",
+    baseURL: "http://127.0.0.1:4175",
     headless: true,
     locale: "en-US",
     timezoneId: "UTC",
@@ -19,8 +19,9 @@ export default defineConfig({
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
-    command: "node scripts/product-evidence-server.mjs",
-    url: "http://127.0.0.1:4174/config",
+    command:
+      "PRODUCT_EVIDENCE_PORT=4175 node scripts/product-evidence-server.mjs",
+    url: "http://127.0.0.1:4175/config",
     reuseExistingServer: false,
     timeout: 30_000,
   },

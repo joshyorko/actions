@@ -1,3 +1,4 @@
+/* global URL, process, setTimeout, clearTimeout */
 import { createHash } from "node:crypto";
 import { createReadStream, existsSync, readFileSync, statSync } from "node:fs";
 import { createServer } from "node:http";
@@ -150,47 +151,83 @@ const send = (res, status, value, type = "application/json") => {
 };
 const mode = (req) =>
   (req.headers.cookie || "").match(/product-evidence=([^;]+)/)?.[1] || "ready";
-const delayed = (res, value) => setTimeout(() => send(res, 200, value), 10_000);
+const delayed = (req, res, value) => {
+  const timer = setTimeout(() => send(res, 200, value), 10_000);
+  const release = () => clearTimeout(timer);
+  req.once("aborted", release);
+  res.once("close", release);
+  return timer;
+};
+const reject = (res, status, message) => send(res, status, { detail: message });
 const server = createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const state = mode(req);
-  if (url.pathname === "/config")
+  if (req.method === "GET" && url.pathname === "/config" && !url.search)
     return send(res, 200, {
       expose_url: "",
       auth_enabled: false,
       version: "fixture-v1",
       mtime_uuid: "fixture-v1",
     });
-  if (url.pathname === "/api/actionPackages" && state === "loading")
-    return delayed(res, actions);
-  if (url.pathname === "/api/actionPackages")
+  if (
+    req.method === "GET" &&
+    url.pathname === "/api/actionPackages" &&
+    !url.search &&
+    state === "loading"
+  )
+    return delayed(req, res, actions);
+  if (
+    req.method === "GET" &&
+    url.pathname === "/api/actionPackages" &&
+    !url.search
+  )
     return state === "error"
       ? send(res, 500, {
           detail: "Fixture API error: action packages unavailable.",
         })
       : send(res, 200, state === "empty" ? [] : actions);
   if (
-    (url.pathname === "/api/runs" || url.pathname.startsWith("/api/runs?")) &&
+    req.method === "GET" &&
+    url.pathname === "/api/runs" &&
+    [...url.searchParams.keys()].every((key) => key === "run_type") &&
+    url.searchParams.getAll("run_type").length <= 1 &&
     state === "loading"
   )
-    return delayed(res, runs);
-  if (url.pathname === "/api/runs" || url.pathname.startsWith("/api/runs?"))
+    return delayed(req, res, runs);
+  if (
+    req.method === "GET" &&
+    url.pathname === "/api/runs" &&
+    [...url.searchParams.keys()].every((key) => key === "run_type") &&
+    url.searchParams.getAll("run_type").length <= 1
+  )
     return state === "error"
       ? send(res, 500, { detail: "Fixture API error: runs unavailable." })
       : send(res, 200, state === "empty" ? [] : runs);
   if (
-    url.pathname.startsWith("/api/runs/") &&
-    url.pathname.endsWith("/artifacts")
+    req.method === "GET" &&
+    /^\/api\/runs\/[^/]+\/artifacts$/.test(url.pathname) &&
+    !url.search
   )
     return send(res, 200, state === "empty" ? [] : artifactList);
   if (
-    url.pathname.startsWith("/api/runs/") &&
-    url.pathname.endsWith("/artifacts/text-content")
+    req.method === "GET" &&
+    /^\/api\/runs\/[^/]+\/artifacts\/text-content$/.test(url.pathname) &&
+    url.searchParams.getAll("artifact_names").length === 1 &&
+    url.searchParams.get("artifact_names") === "__action_server_output.txt"
   )
     return send(res, 200, state === "empty" ? {} : artifactText);
   if (
-    url.pathname.startsWith("/api/runs/") &&
-    url.pathname.endsWith("/log.html")
+    req.method === "GET" &&
+    /^\/api\/runs\/[^/]+\/artifacts\/(result\.json|nested%2Ftrace\.txt)$/.test(
+      url.pathname,
+    ) &&
+    !url.search
+  )
+    return send(res, 200, '{"result":5}\n', "application/octet-stream");
+  if (
+    req.method === "GET" &&
+    /^\/api\/runs\/[^/]+\/log\.html$/.test(url.pathname) &&
+    !url.search
   )
     return send(
       res,
@@ -198,7 +235,11 @@ const server = createServer((req, res) => {
       "<!doctype html><title>Fixture log</title><pre>deterministic-v1</pre>",
       "text/html",
     );
-  if (url.pathname.startsWith("/api/analytics/"))
+  if (
+    req.method === "GET" &&
+    /^\/api\/analytics\/(summary|[^/]+)$/.test(url.pathname) &&
+    !url.search
+  )
     return send(
       res,
       200,
@@ -211,13 +252,57 @@ const server = createServer((req, res) => {
           }
         : [],
     );
-  if (url.pathname === "/api/ws")
+  if (req.method === "GET" && url.pathname === "/api/ws" && !url.search)
     return send(res, 426, { detail: "WebSocket upgrade required" });
-  if (url.pathname.startsWith("/api/runs/"))
+  if (
+    req.method === "GET" &&
+    url.pathname === "/api/work-items" &&
+    [...url.searchParams.keys()].every(
+      (key) => key === "limit" || key === "state",
+    ) &&
+    url.searchParams.getAll("limit").length === 1 &&
+    url.searchParams.get("limit") === "1000"
+  )
+    return send(res, 200, []);
+  if (
+    req.method === "GET" &&
+    url.pathname === "/api/work-items" &&
+    [...url.searchParams.keys()].every(
+      (key) => key === "limit" || key === "state",
+    ) &&
+    url.searchParams.getAll("limit").length === 1 &&
+    url.searchParams.get("limit") === "10" &&
+    url.searchParams.getAll("state").length === 1 &&
+    url.searchParams.get("state") === "PENDING"
+  )
+    return send(res, 200, []);
+  if (
+    req.method === "GET" &&
+    url.pathname === "/api/work-items/stats" &&
+    !url.search
+  )
+    return send(res, 200, { total: 0, pending: 0, completed: 0, failed: 0 });
+  if (
+    req.method === "GET" &&
+    /^\/api\/runs\/[^/]+$/.test(url.pathname) &&
+    !url.search
+  )
     return send(
       res,
       200,
       runs.find((run) => url.pathname.endsWith(run.id)) || runs[0],
+    );
+  if (url.pathname.startsWith("/api/") || url.pathname === "/config")
+    return reject(
+      res,
+      404,
+      `Unsupported fixture request: ${req.method} ${url.pathname}${url.search}`,
+    );
+  if (req.method !== "GET" || url.search)
+    return reject(
+      res,
+      404,
+      `Unsupported fixture request: ${req.method} ${url.pathname}${url.search}`,
     );
   const requested = normalize(
     join(dist, url.pathname === "/" ? "index.html" : url.pathname),
