@@ -3,6 +3,7 @@ import pytest
 from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
+@pytest.mark.integration_test
 def test_devenv(datadir):
     from pathlib import Path
 

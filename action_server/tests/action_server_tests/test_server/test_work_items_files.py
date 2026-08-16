@@ -76,6 +76,7 @@ def test_work_items_import_ignores_project_actions_module(tmp_path: Path) -> Non
     result = subprocess.run(
         [
             sys.executable,
+            "-P",
             "-c",
             (
                 "from pathlib import Path; from types import SimpleNamespace; "

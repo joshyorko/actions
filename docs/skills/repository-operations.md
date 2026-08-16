@@ -366,7 +366,24 @@ and is not assigned an invented strict-Mypy contract.
 The portable Action Server source-tree test gate is its declared `test-not-integration`
 Invoke task. Binary-only, credentialed cloud, frontend-build, and tier integration tests
 remain in their dedicated package gates; the RCC `Test` task must not fold them into the
-portable smoke by calling the generic shared `test` task.
+portable smoke by calling the generic shared `test` task. Tests that execute Invoke from
+an isolated build directory, run Node/Vite/ESLint, require generated OAuth configuration,
+or validate prebuilt frontend/binary artifacts carry the `integration_test` marker. The
+portable FastAPI/Starlette `TestClient` contracts require `httpx` in Action Server's
+locked development dependencies. Managed `package.yaml` fixtures use published,
+compatible Actions package versions rather than nonexistent future pins.
+
+Database migrations are complete only when an upgraded legacy database has the same
+tables, columns, and index definitions as a database freshly generated from current
+models. Add a forward migration when model fields or generated index names diverge;
+`test_migrate` compares both schemas exactly, while the CLI and server auto-migration
+tests verify the operational upgrade entry points. Schema-alignment migrations must
+inspect columns and indexes before dropping or creating them so model-created v10
+databases without legacy `run` columns or schedule indexes can upgrade. Because
+`create_db` seeds one row at `CURRENT_VERSION`, focused migration fixtures downgrade
+that row to represent an older database rather than inserting a duplicate ID. Xdist tests that acquire OS-level
+mutexes use process-qualified names so concurrent workers and repeated suites cannot
+share global lock state.
 
 `Lint` is fail-fast across package boundaries: report which packages completed and which
 were not reached whenever it fails. The shared package task must call the explicit

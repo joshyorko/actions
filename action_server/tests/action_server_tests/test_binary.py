@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 
 def get_internal_version_location(version: str) -> Path:
     import os
@@ -27,6 +29,7 @@ def test_binary_spec_includes_termcolor_hidden_import():
     assert '"termcolor",' in spec_path.read_text()
 
 
+@pytest.mark.integration_test
 def test_binary_build():
     import os
     import shutil

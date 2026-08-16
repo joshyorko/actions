@@ -101,7 +101,7 @@ def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
 def test_runtime_metadata_uses_published_active_dependencies():
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     dependencies = metadata["tool"]["poetry"]["dependencies"]
-    assert dependencies["actions-work-items"] == "^0.4.3"
+    assert dependencies["actions-work-items"] == "^0.4.4"
 
 
 def _build_wheels(output: Path, python: Path) -> list[Path]:

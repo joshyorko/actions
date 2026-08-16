@@ -58,5 +58,6 @@ Thumbs.db
 developer/tmp/
 *.swp
 test-actions/
+/work-items/work_item_files/
 .codex
 .serena

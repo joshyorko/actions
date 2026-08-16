@@ -212,7 +212,12 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
                 "migration",
                 "o_auth2_user_data",
                 "run",
+                "schedule",
+                "schedule_execution",
+                "schedule_group",
                 "temp_user_session_data",
+                "trigger",
+                "trigger_invocation",
                 "user_session",
             ]
         )
@@ -228,6 +233,28 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
         assert len(actions) > 0
         for action in actions:
             assert action.enabled
+
+
+def test_migrate_v10_schema_without_legacy_columns_or_indexes(tmpdir) -> None:
+    from actions.server._models import create_db
+    from actions.server.migrations import Migration
+    from actions.server.migrations.migration_align_schema_indexes import migrate
+
+    db_path = tmpdir / "v10.db"
+    with create_db(db_path) as db:
+        with db.connect():
+            with db.transaction():
+                db.execute("DROP INDEX run_run_type_non_unique_index;")
+                db.execute("DROP INDEX trigger_trigger_type_non_unique_index;")
+                db.execute(
+                    "UPDATE migration SET id = ?, name = ? WHERE id = ?;",
+                    [10, "add_schedules", 11],
+                )
+                migrate(db)
+
+            assert "stdout" not in db.list_table_and_columns()["run"]
+            assert "stderr" not in db.list_table_and_columns()["run"]
+            assert db.first(Migration, "SELECT * FROM migration WHERE id = 11")
 
 
 def test_database_create_table(str_regression) -> None:

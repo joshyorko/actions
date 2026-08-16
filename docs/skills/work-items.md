@@ -8,6 +8,11 @@ The community Action Server management API currently owns SQLite storage under i
 
 SQLite is the release-critical local/server backend. FileAdapter is intended for local, single-process workflows. Redis 7 and MongoDB 7 have mandatory repository-owned service gates covering competing and FIFO claims, orphan recovery, attachment storage and cleanup, duplicate rejection, output routing, and backend cleanup. AWS DocumentDB-specific production support remains experimental until a production-compatible service gate establishes it.
 
+The default local attachment directory is `./work_item_files` (overridable with
+`RC_WORKITEM_FILES_DIR`). Repository-root package tests may therefore create
+`work-items/work_item_files/<uuid>/`; this runtime output is ignored and must not be
+committed.
+
 ## Safety Invariants
 
 Action Server filesystem artifacts use canonical, root-relative run keys. The

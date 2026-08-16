@@ -187,6 +187,7 @@ def test_system_mutex_timed_acquire_no_error_on_timeout():
 
 
 def test_system_mutex_locked_on_subprocess():
+    import os
     import subprocess
     import sys
 
@@ -195,12 +196,13 @@ def test_system_mutex_locked_on_subprocess():
     from actions.server._robo_utils.process import kill_process_and_subprocesses
     from actions.server._robo_utils.system_mutex import SystemMutex
 
-    code = """
+    mutex_name = f"test_system_mutex_locked_on_subprocess_robo_{os.getpid()}"
+    code = f"""
 import sys
 import time
 print('initialized')
 from actions.server._robo_utils.system_mutex import SystemMutex
-mutex = SystemMutex('test_system_mutex_locked_on_subprocess')
+mutex = SystemMutex('{mutex_name}')
 assert mutex.get_mutex_aquired()
 print('acquired mutex')
 sys.stdout.flush()
@@ -210,14 +212,14 @@ time.sleep(30)
         [sys.executable, "-c", code], stdout=subprocess.PIPE, stdin=subprocess.PIPE
     )
     wait_for_condition(lambda: p.stdout.readline().strip() == b"acquired mutex")
-    mutex = SystemMutex("test_system_mutex_locked_on_subprocess")
+    mutex = SystemMutex(mutex_name)
     assert not mutex.get_mutex_aquired()
 
     # i.e.: check that we can acquire the mutex if the related process dies.
     kill_process_and_subprocesses(p.pid)
 
     def acquire_mutex():
-        mutex = SystemMutex("test_system_mutex_locked_on_subprocess")
+        mutex = SystemMutex(mutex_name)
         return mutex.get_mutex_aquired()
 
     wait_for_condition(acquire_mutex, timeout=5)

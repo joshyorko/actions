@@ -53,6 +53,7 @@ redis = "^5.0.0"
 
 [tool.poetry.group.dev.dependencies]
 actions-local-devutils = { path = "../devutils/", develop = true }
+httpx = "^0.28.1"
 types-requests = "^2"
 types-PyYAML = "^6"
 robocorp-log-pytest = "^0.0.2"

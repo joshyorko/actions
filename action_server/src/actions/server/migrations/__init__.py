@@ -41,6 +41,8 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     9: "add_robot_run_columns",
     # we'll look for a 'migration_add_schedules' module based on this.
     10: "add_schedules",
+    # we'll look for a 'migration_align_schema_indexes' module based on this.
+    11: "align_schema_indexes",
 }
 
 CURRENT_VERSION: int = max(MIGRATION_ID_TO_NAME.keys())

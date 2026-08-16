@@ -284,6 +284,7 @@ def test_oauth2_provider_settings():
 
 @mock.patch("builtins.print")
 @mock.patch("sys.stdout.buffer.write")
+@pytest.mark.integration_test
 def test_print_user_oauth2_config_path(
     print_mock: mock.MagicMock, buffer_write_mock: mock.MagicMock, tmpdir
 ) -> None:

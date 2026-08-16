@@ -1,3 +1,8 @@
+import pytest
+
+pytestmark = pytest.mark.integration_test
+
+
 def test_data_package_metadata(datadir, data_regression):
     import json
 
