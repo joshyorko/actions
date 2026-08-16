@@ -137,6 +137,7 @@ const runs = [
     robot_task_name: "Evidence robot task",
   },
 ];
+const knownRunIds = new Set(runs.map((run) => run.id));
 const artifactList = [
   { name: "result.json", size_in_bytes: 128 },
   { name: "nested/trace.txt", size_in_bytes: 512 },
@@ -203,6 +204,13 @@ const server = createServer((req, res) => {
     return state === "error"
       ? send(res, 500, { detail: "Fixture API error: runs unavailable." })
       : send(res, 200, state === "empty" ? [] : runs);
+  const runId = url.pathname.match(/^\/api\/runs\/([^/]+)/)?.[1];
+  if (runId && !knownRunIds.has(runId) && !url.search)
+    return reject(
+      res,
+      404,
+      `Unsupported fixture request: ${req.method} ${url.pathname}${url.search}`,
+    );
   if (
     req.method === "GET" &&
     /^\/api\/runs\/[^/]+\/artifacts$/.test(url.pathname) &&
@@ -237,7 +245,7 @@ const server = createServer((req, res) => {
     );
   if (
     req.method === "GET" &&
-    /^\/api\/analytics\/(summary|[^/]+)$/.test(url.pathname) &&
+    url.pathname === "/api/analytics/summary" &&
     !url.search
   )
     return send(

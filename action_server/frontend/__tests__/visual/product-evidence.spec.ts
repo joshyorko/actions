@@ -194,6 +194,16 @@ test("rejects drifted Runtime and legacy client requests", async ({
     "__action_server_output.txt": expect.any(String),
   });
   for (const response of [
+    await request.get("/api/runs/run-unknown/artifacts"),
+    await request.get("/api/runs/run-unknown"),
+    await request.get("/api/analytics/unknown-resource"),
+  ]) {
+    expect(response.status()).toBe(404);
+    expect((await response.json()).detail).toContain(
+      "Unsupported fixture request",
+    );
+  }
+  for (const response of [
     await request.get("/api/runs?unexpected=1"),
     await request.post("/api/actionPackages", { data: {} }),
     await request.get("/api/runs/run-passed/artifacts/text-content"),
@@ -208,7 +218,10 @@ test("rejects drifted Runtime and legacy client requests", async ({
 
 test.afterAll(() => {
   records.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
-  if (records.length !== 7) return;
+  if (records.length !== 7)
+    throw new Error(
+      `Product-evidence manifest requires exactly seven records; got ${records.length}`,
+    );
   for (const record of records) {
     const screenshot = String(record.screenshot);
     if (
@@ -250,7 +263,10 @@ test.afterAll(() => {
   );
 });
 
-test("captures loaded desktop and mobile product routes", async ({ page }) => {
+test("captures loaded desktop and mobile product routes", async ({
+  page,
+  request,
+}) => {
   await capture(page, "/actions", "loaded", "dark", {
     width: 1440,
     height: 900,
@@ -269,7 +285,15 @@ test("captures loaded desktop and mobile product routes", async ({ page }) => {
     "href",
     "/api/runs/run-passed/artifacts/result.json",
   );
-  await artifactLink.click({ noWaitAfter: true });
+  const [download, response] = await Promise.all([
+    page.waitForEvent("download"),
+    request.get("/api/runs/run-passed/artifacts/result.json"),
+    artifactLink.click({ noWaitAfter: true }),
+  ]);
+  expect(download.suggestedFilename()).toBe("result.json");
+  expect(response.status()).toBe(200);
+  expect(response.headers()["content-type"]).toBe("application/octet-stream");
+  expect((await response.body()).toString()).toBe('{"result":5}\n');
 });
 
 test("captures empty and API error product states", async ({
