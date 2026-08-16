@@ -2,13 +2,12 @@ import json
 import os
 import shutil
 import subprocess
+import tomllib
 import venv
 import zipfile
 from pathlib import Path
 
 import pytest
-import tomllib
-
 
 ROOT = Path(__file__).resolve().parents[2]
 REPO = ROOT.parent

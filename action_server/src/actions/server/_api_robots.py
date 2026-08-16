@@ -519,13 +519,7 @@ async def run_robot_task(
     import uuid
     from pathlib import Path
 
-    from actions.server._models import (
-        RUN_ID_COUNTER,
-        Counter,
-        Run,
-        RunStatus,
-        get_db,
-    )
+    from actions.server._models import RUN_ID_COUNTER, Counter, Run, RunStatus, get_db
 
     # Get settings for paths
     settings = get_settings()

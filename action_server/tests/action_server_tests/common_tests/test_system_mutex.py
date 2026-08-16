@@ -203,7 +203,10 @@ def test_system_mutex_locked_on_subprocess():
 
     from actions.server._common.process import kill_process_and_subprocesses
     from actions.server._common.system_mutex import SystemMutex
-    from actions.server._common.wait_for import wait_for_condition, wait_for_non_error_condition
+    from actions.server._common.wait_for import (
+        wait_for_condition,
+        wait_for_non_error_condition,
+    )
 
     code = """
 import sys

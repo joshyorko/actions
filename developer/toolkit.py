@@ -102,6 +102,10 @@ def package_task(task: str) -> None:
                 continue
             else:
                 raise ValueError(f"Unsupported devutils task: {task}")
+        elif package == "work-items" and task == "lint":
+            poetry(package, "run", "ruff", "check", "src", "tests")
+        elif package == "work-items" and task == "typecheck":
+            poetry(package, "run", "mypy")
         else:
             poetry(package, "run", "invoke", task)
 

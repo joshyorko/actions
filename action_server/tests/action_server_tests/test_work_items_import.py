@@ -40,7 +40,9 @@ def test_locate_work_items_package_prefers_copied_package(
     assert _work_items_import.locate_work_items_package() == package_path
 
 
-@pytest.mark.parametrize("relative_path", ["src/actions/work_items", "actions/work_items"])
+@pytest.mark.parametrize(
+    "relative_path", ["src/actions/work_items", "actions/work_items"]
+)
 def test_locate_work_items_package_resolves_editable_direct_url(
     relative_path: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -52,7 +54,9 @@ def test_locate_work_items_package_resolves_editable_direct_url(
     monkeypatch.setattr(
         _work_items_import,
         "distribution",
-        lambda _: _Distribution(tmp_path / "missing/__init__.py", _direct_url(editable_root)),
+        lambda _: _Distribution(
+            tmp_path / "missing/__init__.py", _direct_url(editable_root)
+        ),
     )
     monkeypatch.setattr(
         _work_items_import.importlib.util,
@@ -67,7 +71,12 @@ def test_locate_work_items_package_resolves_editable_direct_url(
     "direct_url",
     [
         "not json",
-        json.dumps({"url": "https://example.invalid/work-items", "dir_info": {"editable": True}}),
+        json.dumps(
+            {
+                "url": "https://example.invalid/work-items",
+                "dir_info": {"editable": True},
+            }
+        ),
         json.dumps({"url": "file:///tmp/work-items", "dir_info": {"editable": False}}),
         json.dumps({"url": "file:///bad%00path", "dir_info": {"editable": True}}),
     ],
@@ -82,7 +91,9 @@ def test_locate_work_items_package_rejects_untrusted_editable_metadata(
         lambda _: _Distribution(tmp_path / "missing/__init__.py", direct_url),
     )
 
-    with pytest.raises(ImportError, match="Unable to locate actions-work-items package"):
+    with pytest.raises(
+        ImportError, match="Unable to locate actions-work-items package"
+    ):
         _work_items_import.locate_work_items_package()
 
 
@@ -95,8 +106,12 @@ def test_locate_work_items_package_rejects_editable_root_without_initializer(
     monkeypatch.setattr(
         _work_items_import,
         "distribution",
-        lambda _: _Distribution(tmp_path / "missing/__init__.py", _direct_url(editable_root)),
+        lambda _: _Distribution(
+            tmp_path / "missing/__init__.py", _direct_url(editable_root)
+        ),
     )
 
-    with pytest.raises(ImportError, match="Unable to locate actions-work-items package"):
+    with pytest.raises(
+        ImportError, match="Unable to locate actions-work-items package"
+    ):
         _work_items_import.locate_work_items_package()

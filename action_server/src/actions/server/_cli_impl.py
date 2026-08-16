@@ -340,10 +340,7 @@ def _add_devenv_command(command_subparser, defaults):
 
 
 def _add_new_command(command_subparser, defaults):
-    from actions.server._cli_helpers import (
-        add_json_output_args,
-        add_verbose_args,
-    )
+    from actions.server._cli_helpers import add_json_output_args, add_verbose_args
 
     new_parser = command_subparser.add_parser(
         "new",
@@ -764,9 +761,7 @@ def _main_retcode(
                     return handle_env_command(base_args, rcc)
 
                 if command == "cloud":
-                    from actions.server._actions_cloud import (
-                        handle_cloud_command,
-                    )
+                    from actions.server._actions_cloud import handle_cloud_command
 
                     return handle_cloud_command(base_args)
 
@@ -850,7 +845,6 @@ def _command_requiring_datadir(
 ) -> int:
     from actions.server._common.app_mutex import obtain_app_mutex
     from actions.server._common.process import kill_subprocesses
-
     from actions.server._preload_actions.preload_actions_autoexit import (
         exit_when_pid_exists,
     )

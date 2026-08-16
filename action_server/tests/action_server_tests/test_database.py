@@ -468,10 +468,7 @@ def test_database_concurrency(datadir):
 
 def test_database_temp_session_data_cleanup(tmpdir):
     from actions.server._models import TempUserSessionData
-    from actions.server._user_session import (
-        _temp_session_data_cleanup,
-        datetime_to_iso,
-    )
+    from actions.server._user_session import _temp_session_data_cleanup, datetime_to_iso
 
     db = Database(":memory:")
     with db.connect():

@@ -358,6 +358,21 @@ package gates. `ToolkitTest` runs Ruff and pytest against the gateway itself; th
 Invoke task collection. `Typecheck` runs only package-declared typecheck gates; `devutils`
 has no such gate and is not assigned an invented strict-Mypy contract.
 
+`Lint` is fail-fast across package boundaries: report which packages completed and which
+were not reached whenever it fails. The shared package task must call the explicit
+`ruff check` subcommand, which is supported by both the repository's Ruff 0.1 and 0.12
+locks; the legacy `ruff <paths>` form fails under newer Ruff. Work Items uses its
+release-authoritative `ruff check src tests` and focused, configuration-driven Mypy gates;
+the developer toolkit must not widen those into the generic formatter/isort or whole-tree
+Mypy tasks. A non-empty, ignored
+`developer/tmp/` produces an RCC artifact warning during repeated developer runs but is
+not a lint or packaging failure. Production bundles must still start with clean artifacts.
+
+Action Server's schedule and trigger modules keep runtime model imports local to avoid
+database/model import cycles. Model names used only by annotations belong behind
+`TYPE_CHECKING`; moving runtime imports to module scope merely to satisfy Ruff changes the
+import boundary and is not an acceptable lint repair.
+
 `Doctor` and `ToolkitTest` validate the RCC environment and dispatcher contracts. Gateway
 CI runs `Bootstrap`, verifies all five package `.venv` interpreters, reruns `ToolkitTest`
 to prove the RCC toolchain survived Bootstrap, and runs the full package `Test` smoke on

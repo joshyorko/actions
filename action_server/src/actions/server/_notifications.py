@@ -163,9 +163,10 @@ class NotificationService:
     ) -> bool:
         """Send email using aiosmtplib."""
         try:
-            import aiosmtplib
             from email.mime.multipart import MIMEMultipart
             from email.mime.text import MIMEText
+
+            import aiosmtplib
         except ImportError:
             raise ImportError(
                 "aiosmtplib is required for async email notifications. "

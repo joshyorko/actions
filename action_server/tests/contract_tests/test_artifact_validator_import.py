@@ -27,8 +27,9 @@ def test_validate_artifact_task_rejects_removed_product_imports(
     """The real Invoke task rejects injected imports in a built artifact."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     dist = tmp_path / "frontend" / "dist"
     dist.mkdir(parents=True)
@@ -53,8 +54,9 @@ def test_validate_artifact_task_accepts_clean_artifact(tmp_path, monkeypatch):
     """The real Invoke task accepts an artifact with public imports."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     dist = tmp_path / "frontend" / "dist"
     canvas = tmp_path / "frontend" / "dist-canvas"
@@ -73,8 +75,9 @@ def test_validate_artifact_builds_missing_default_canvas_once(tmp_path, monkeypa
     """The default task repairs a missing Canvas artifact before validation."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     dist = tmp_path / "frontend" / "dist"
     canvas = tmp_path / "frontend" / "dist-canvas"
@@ -102,8 +105,9 @@ def test_validate_artifact_propagates_default_canvas_build_failure(
     """A failed owned Canvas build must stop validation."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     dist = tmp_path / "frontend" / "dist"
     dist.mkdir(parents=True)
@@ -126,8 +130,9 @@ def test_validate_artifact_does_not_build_explicit_missing_root(tmp_path, monkey
     """Explicit artifact roots are validation-only and fail when missing."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     runtime = tmp_path / "runtime"
     canvas = tmp_path / "canvas"
@@ -161,8 +166,9 @@ def test_validate_artifact_rejects_unsuitable_explicit_runtime_root(
     """Explicit artifact roots must be existing directories."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     canvas = tmp_path / "canvas"
     canvas.mkdir()
@@ -192,8 +198,9 @@ def test_validate_artifact_explicit_directory_scans_all_source_files(
     """Explicit directories are recursively scanned for forbidden imports."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     runtime = tmp_path / "runtime"
     canvas = tmp_path / "canvas"
@@ -223,8 +230,9 @@ def test_validate_artifact_accepts_clean_explicit_directories(tmp_path, monkeypa
     """Clean explicit Runtime and Canvas directories pass validation."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     runtime = tmp_path / "runtime"
     canvas = tmp_path / "canvas"
@@ -249,8 +257,9 @@ def test_validate_artifact_task_rejects_poisoned_runtime_html(
     """The default task scans Runtime HTML, not only JavaScript."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     dist = tmp_path / "frontend" / "dist"
     canvas = tmp_path / "frontend" / "dist-canvas"
@@ -273,8 +282,9 @@ def test_validate_artifact_task_rejects_poisoned_canvas_html(
     """The default task scans Canvas independently of Runtime."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     dist = tmp_path / "frontend" / "dist"
     canvas = tmp_path / "frontend" / "dist-canvas"
@@ -297,8 +307,9 @@ def test_validate_artifact_task_rejects_poisoned_enterprise_path(
     """The default task cannot bypass validation with an enterprise path."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     dist = tmp_path / "frontend" / "dist"
     canvas = tmp_path / "frontend" / "dist-canvas"
@@ -321,8 +332,9 @@ def test_validate_artifact_task_fails_closed_on_read_error(tmp_path, monkeypatch
     """The default task fails when an artifact source file cannot be read."""
     action_server = Path(__file__).parents[2]
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     dist = tmp_path / "frontend" / "dist"
     canvas = tmp_path / "frontend" / "dist-canvas"

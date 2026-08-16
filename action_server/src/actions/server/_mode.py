@@ -59,9 +59,7 @@ class ModeConfig:
 
         if mode == OperatingMode.DISTRIBUTED:
             if not redis_url:
-                raise ValueError(
-                    "--redis-url is required for distributed mode"
-                )
+                raise ValueError("--redis-url is required for distributed mode")
             self._validate_redis_available()
 
     def _validate_redis_available(self) -> None:

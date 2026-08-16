@@ -7,13 +7,16 @@ Provides REST endpoints for managing webhook triggers.
 import json
 import logging
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 from fastapi import HTTPException, Request
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field
 
 log = logging.getLogger(__name__)
+
+if TYPE_CHECKING:
+    from actions.server._models import Trigger
 
 triggers_api_router = APIRouter(prefix="/api/triggers")
 
@@ -406,9 +409,7 @@ async def update_trigger(trigger_id: str, request: TriggerUpdateRequest):
             db.update_by_id(Trigger, trigger_id, updates)
 
         # Refresh
-        trigger = db.first(
-            Trigger, "SELECT * FROM trigger WHERE id = ?", [trigger_id]
-        )
+        trigger = db.first(Trigger, "SELECT * FROM trigger WHERE id = ?", [trigger_id])
 
         action_name = None
         if trigger.action_id:
@@ -430,7 +431,7 @@ async def update_trigger(trigger_id: str, request: TriggerUpdateRequest):
 @triggers_api_router.delete("/{trigger_id}")
 async def delete_trigger(trigger_id: str):
     """Delete a trigger."""
-    from actions.server._models import Trigger, TriggerInvocation, get_db
+    from actions.server._models import Trigger, get_db
 
     db = get_db()
     with db.connect():
@@ -521,7 +522,9 @@ async def get_trigger_secret(trigger_id: str):
     return SecretResponse(webhook_secret=trigger.webhook_secret)
 
 
-@triggers_api_router.post("/{trigger_id}/regenerate-secret", response_model=SecretResponse)
+@triggers_api_router.post(
+    "/{trigger_id}/regenerate-secret", response_model=SecretResponse
+)
 async def regenerate_trigger_secret(trigger_id: str):
     """Regenerate the webhook secret for a trigger."""
     from actions.server._database import datetime_to_str

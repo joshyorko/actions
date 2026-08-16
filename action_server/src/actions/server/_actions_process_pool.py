@@ -478,9 +478,9 @@ class ProcessHandle:
         import shlex
         from string import Template
 
+        from actions.server._artifact_storage import get_artifact_storage
         from actions.server._robo_utils import process, run_in_thread
         from actions.server._robo_utils.process import build_python_launch_env
-        from actions.server._artifact_storage import get_artifact_storage
 
         mapping = {
             "base_artifacts_dir": get_artifact_storage().root,

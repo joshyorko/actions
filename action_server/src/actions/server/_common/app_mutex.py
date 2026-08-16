@@ -56,7 +56,10 @@ def obtain_app_mutex(
     import re
     import time
 
-    from actions.server._common.process import is_process_alive, kill_process_and_subprocesses
+    from actions.server._common.process import (
+        is_process_alive,
+        kill_process_and_subprocesses,
+    )
     from actions.server._common.system_mutex import SystemMutex
 
     shown_first_message = False

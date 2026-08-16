@@ -336,7 +336,7 @@ class Rcc(object):
                     )
 
                     return account
-        except:
+        except Exception:
             log.exception("Error loading credentials from: %s", output)
 
         # Found no valid credential

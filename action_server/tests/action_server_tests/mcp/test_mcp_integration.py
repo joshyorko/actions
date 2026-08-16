@@ -16,6 +16,7 @@ async def check_mcp_server(
     This method is meant to check that the `resources/no_conda/mcp` implementation
     is working.
     """
+    import httpx2
     from mcp.client.streamable_http import streamable_http_client
     from mcp.types import (
         CallToolResult,
@@ -26,8 +27,6 @@ async def check_mcp_server(
         TextResourceContents,
     )
     from pydantic.networks import AnyUrl
-
-    import httpx2
 
     async with httpx2.AsyncClient(headers=headers or {}) as http_client:
         async with (
@@ -254,10 +253,9 @@ async def check_mcp_server_with_actions(
     work as mcp tools.
     """
 
+    import httpx2
     from mcp.client.streamable_http import streamable_http_client
     from mcp.types import CallToolResult, TextContent
-
-    import httpx2
 
     async with httpx2.AsyncClient(headers=headers or {}) as http_client:
         async with (
@@ -655,6 +653,7 @@ def test_modern_mcp_requests_can_move_between_independent_replicas(tmpdir) -> No
     from pathlib import Path
 
     from action_server_tests.fixtures import get_in_resources, run_async_in_new_thread
+
     from actions.server._selftest import ActionServerProcess
 
     root_dir = get_in_resources("no_conda", "greeter")

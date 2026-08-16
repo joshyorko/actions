@@ -152,10 +152,7 @@ def test_system_mutex_timed_acquire_no_error_on_timeout():
     import threading
 
     from actions.server._robo_utils import log_custom_handler, system_mutex
-    from actions.server._robo_utils.system_mutex import (
-        SystemMutex,
-        timed_acquire_mutex,
-    )
+    from actions.server._robo_utils.system_mutex import SystemMutex, timed_acquire_mutex
 
     event_mutex_acquired = threading.Event()
     event_terminate_thread = threading.Event()

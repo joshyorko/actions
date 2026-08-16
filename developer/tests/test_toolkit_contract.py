@@ -139,6 +139,19 @@ def test_typecheck_uses_only_package_configured_gates() -> None:
     assert [call.args for call in poetry.call_args_list] == [
         ("actions", "run", "invoke", "typecheck"),
         ("actions-http-helper", "run", "invoke", "typecheck"),
-        ("work-items", "run", "invoke", "typecheck"),
+        ("work-items", "run", "mypy"),
         ("action_server", "run", "invoke", "typecheck"),
+    ]
+
+
+def test_lint_uses_package_configured_gates() -> None:
+    with patch.object(toolkit, "poetry") as poetry:
+        toolkit.lint()
+
+    assert [call.args for call in poetry.call_args_list] == [
+        ("actions", "run", "invoke", "lint"),
+        ("actions-http-helper", "run", "invoke", "lint"),
+        ("devutils", "run", "ruff", "check", "src", "tests"),
+        ("work-items", "run", "ruff", "check", "src", "tests"),
+        ("action_server", "run", "invoke", "lint"),
     ]

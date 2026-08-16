@@ -4,13 +4,13 @@ import logging
 import uuid
 
 from actions.server.mcp.gateway_metadata import (
+    MCP_CORRELATION_ID_ATTRIBUTE,
     MCP_CORRELATION_ID_HEADER,
+    MCP_METHOD_ATTRIBUTE,
     MCP_METHOD_HEADER,
+    MCP_NAME_ATTRIBUTE,
     MCP_NAME_HEADER,
     MCP_REQUEST_STATE_KEY,
-    MCP_CORRELATION_ID_ATTRIBUTE,
-    MCP_METHOD_ATTRIBUTE,
-    MCP_NAME_ATTRIBUTE,
     McpRequestMetadataMiddleware,
     get_mcp_request_metadata,
 )

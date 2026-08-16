@@ -842,7 +842,9 @@ async def execute_action_for_scheduler(
 
                     if error_msg is not None:
                         if runtime_info.is_canceled():
-                            raise CancelledError(f"Run cancelled, action: {action.name}")
+                            raise CancelledError(
+                                f"Run cancelled, action: {action.name}"
+                            )
                         _set_run_as_finished_failed(run, error_msg, initial_time)
                         return (False, error_msg)
 
@@ -854,7 +856,9 @@ async def execute_action_for_scheduler(
                         return (True, ret)
                     else:
                         if runtime_info.is_canceled():
-                            raise CancelledError(f"Run cancelled, action: {action.name}")
+                            raise CancelledError(
+                                f"Run cancelled, action: {action.name}"
+                            )
 
                         if ret:
                             _set_run_as_finished_failed_with_response(
@@ -862,7 +866,9 @@ async def execute_action_for_scheduler(
                             )
                             return (False, ret)
 
-                        error_msg = result_contents.get("message", f"Action failed with return code {returncode}")
+                        error_msg = result_contents.get(
+                            "message", f"Action failed with return code {returncode}"
+                        )
                         _set_run_as_finished_failed(run, error_msg, initial_time)
                         return (False, error_msg)
 
@@ -875,8 +881,9 @@ async def execute_action_for_scheduler(
                 return (False, str(e))
 
     # Run in thread pool to avoid blocking async loop
-    from actions.server._robo_utils import run_in_thread
     from concurrent.futures import Future
+
+    from actions.server._robo_utils import run_in_thread
 
     future: Future = run_in_thread.run_in_thread(_execute_in_thread)
     return future.result()
