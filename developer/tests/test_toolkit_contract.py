@@ -101,6 +101,7 @@ def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
             "_CE_M": "1",
             "PYTHONHOME": "/host/python",
             "PYTHONPATH": "/host/pythonpath",
+            "PYTHON_EXE": "/rcc/holotree/bin/python3",
             "ROBOT_ARTIFACTS": "/rcc/artifacts",
             "ROBOT_ROOT": "/rcc/robot",
         },
@@ -123,6 +124,7 @@ def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
         "_CE_M",
         "PYTHONHOME",
         "PYTHONPATH",
+        "PYTHON_EXE",
         "ROBOT_ARTIFACTS",
         "ROBOT_ROOT",
     ):
@@ -130,6 +132,20 @@ def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
     assert environment["POETRY_VIRTUALENVS_CREATE"] == "true"
     assert environment["POETRY_VIRTUALENVS_IN_PROJECT"] == "true"
     assert environment["POETRY_VIRTUALENVS_OPTIONS_SYSTEM_SITE_PACKAGES"] == "false"
+
+
+def test_run_puts_package_virtualenv_first_on_path(tmp_path: Path) -> None:
+    (tmp_path / "pyproject.toml").touch()
+    scripts = tmp_path / ".venv" / ("Scripts" if sys.platform == "win32" else "bin")
+
+    with patch.dict("os.environ", {"PATH": "/rcc/holotree/bin"}), patch(
+        "toolkit.subprocess.run"
+    ) as run:
+        toolkit.run(["python", "--version"], cwd=tmp_path)
+
+    assert run.call_args.kwargs["env"]["PATH"].split(toolkit.os.pathsep)[0] == str(
+        scripts
+    )
 
 
 def test_build_community_uses_public_invoke_contract() -> None:
@@ -185,5 +201,5 @@ def test_test_uses_package_configured_gates() -> None:
             "-m",
             "not persistent_backend_service",
         ),
-        ("action_server", "run", "invoke", "test"),
+        ("action_server", "run", "invoke", "test-not-integration"),
     ]

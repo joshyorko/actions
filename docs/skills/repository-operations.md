@@ -347,7 +347,8 @@ focused contracts, then use `Test`, `Lint`, `Typecheck`, `Docs`, `CheckAll`,
 `rcc run -r developer/toolkit.yaml --dev -t <Task>`. The Python dispatcher uses argument
 arrays and resolves the repository root independently of the caller's cwd, so it does not
 depend on Bash or Batch activation scripts. It removes host `VIRTUAL_ENV`,
-`POETRY_ACTIVE`, Conda activation, `PYTHONHOME`, and `PYTHONPATH` markers before
+`POETRY_ACTIVE`, Conda activation, `PYTHONHOME`, `PYTHONPATH`, and RCC's
+`PYTHON_EXE` marker before
 delegating. It also forces Poetry environment creation, in-project `.venv` placement, and
 system-site-packages isolation. This boundary applies to root `invoke install` as well as
 direct package commands: RCC owns the outer holotree toolchain while each package owns an
@@ -361,6 +362,11 @@ pytest against the gateway itself; the full `Test` task runs it first and also c
 includes pinned `jq` because the devutils workflow-contract suite executes its admission
 filters. `Typecheck` runs only package-declared typecheck gates; `devutils` has no such gate
 and is not assigned an invented strict-Mypy contract.
+
+The portable Action Server source-tree test gate is its declared `test-not-integration`
+Invoke task. Binary-only, credentialed cloud, frontend-build, and tier integration tests
+remain in their dedicated package gates; the RCC `Test` task must not fold them into the
+portable smoke by calling the generic shared `test` task.
 
 `Lint` is fail-fast across package boundaries: report which packages completed and which
 were not reached whenever it fails. The shared package task must call the explicit

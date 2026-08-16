@@ -26,12 +26,13 @@ ACTIVE_ENVIRONMENT_VARIABLES = (
     "_CE_M",
     "PYTHONHOME",
     "PYTHONPATH",
+    "PYTHON_EXE",
     "ROBOT_ARTIFACTS",
     "ROBOT_ROOT",
 )
 
 
-def package_environment() -> dict[str, str]:
+def package_environment(cwd: Path = REPOSITORY_ROOT) -> dict[str, str]:
     """Keep package Poetry environments separate from RCC's holotree."""
     environment = os.environ.copy()
     for name in ACTIVE_ENVIRONMENT_VARIABLES:
@@ -43,13 +44,18 @@ def package_environment() -> dict[str, str]:
             "POETRY_VIRTUALENVS_OPTIONS_SYSTEM_SITE_PACKAGES": "false",
         }
     )
+    if (cwd / "pyproject.toml").is_file():
+        scripts = cwd / ".venv" / ("Scripts" if sys.platform == "win32" else "bin")
+        environment["PATH"] = os.pathsep.join(
+            (str(scripts), environment.get("PATH", ""))
+        )
     return environment
 
 
 def run(command: list[str], cwd: Path = REPOSITORY_ROOT) -> None:
     """Run a command without shell parsing so it works on every RCC platform."""
     print("+", " ".join(command), f"(in {cwd})", flush=True)
-    subprocess.run(command, cwd=cwd, env=package_environment(), check=True)
+    subprocess.run(command, cwd=cwd, env=package_environment(cwd), check=True)
 
 
 def poetry(package: str, *arguments: str) -> None:
@@ -117,6 +123,8 @@ def package_task(task: str) -> None:
                 "-m",
                 "not persistent_backend_service",
             )
+        elif package == "action_server" and task == "test":
+            poetry(package, "run", "invoke", "test-not-integration")
         else:
             poetry(package, "run", "invoke", task)
 
