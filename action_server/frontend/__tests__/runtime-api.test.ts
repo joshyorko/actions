@@ -40,7 +40,32 @@ describe("Runtime API", () => {
       args: { value: 1 },
     });
     expect(String(fetchMock.mock.calls[0][0])).toContain("run_type=robot");
-    expect(fetchMock.mock.calls[1][1]).toMatchObject({ method: "POST" });
+    expect(fetchMock.mock.calls[1][1]).toMatchObject({
+      method: "POST",
+      body: JSON.stringify({ value: 1 }),
+    });
+  });
+
+  it("preserves typed input values in the action execution request", async () => {
+    const fetchMock = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ run_id: "run-2" }), { status: 200 }),
+      );
+
+    await runRuntimeAction({
+      actionPackageName: "My Package",
+      actionName: "Do Work",
+      args: { count: 2, enabled: true, nested: { name: "Ada" } },
+    });
+
+    expect(String(fetchMock.mock.calls[0][0])).toBe(
+      "/api/actions/my-package/do-work/run",
+    );
+    expect(fetchMock.mock.calls[0][1]).toMatchObject({
+      method: "POST",
+      body: JSON.stringify({ count: 2, enabled: true, nested: { name: "Ada" } }),
+    });
   });
 
   it("turns HTTP errors into typed errors and forwards cancellation", async () => {

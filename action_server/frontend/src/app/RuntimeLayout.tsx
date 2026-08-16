@@ -6,6 +6,7 @@ export const RuntimeLayout = ({ children }: { children: ReactNode }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const hadMenuOpen = useRef(false);
+  const mainRef = useRef<HTMLElement>(null);
   const location = useLocation();
   useEffect(() => {
     if (menuOpen) {
@@ -14,13 +15,22 @@ export const RuntimeLayout = ({ children }: { children: ReactNode }) => {
           .querySelector<HTMLButtonElement>('[aria-label="Close Runtime menu"]')
           ?.focus();
       }, 0);
-    } else if (hadMenuOpen.current) menuButtonRef.current?.focus();
+    } else if (hadMenuOpen.current) {
+      window.setTimeout(() => menuButtonRef.current?.focus(), 20);
+    }
     hadMenuOpen.current = menuOpen;
+  }, [menuOpen]);
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.toggleAttribute("inert", menuOpen);
+      if (menuOpen) mainRef.current.setAttribute("aria-hidden", "true");
+      else mainRef.current.removeAttribute("aria-hidden");
+    }
   }, [menuOpen]);
   return (
     <div className="runtime-frame">
       <RuntimeNavigation menuOpen={menuOpen} onMenuChange={setMenuOpen} />
-      <main className="runtime-main">
+      <div className="runtime-content">
         <div className="mobile-toolbar">
           <button
             ref={menuButtonRef}
@@ -35,17 +45,19 @@ export const RuntimeLayout = ({ children }: { children: ReactNode }) => {
             Actions Runtime
           </Link>
         </div>
-        <nav className="breadcrumb-shell" aria-label="Breadcrumb">
-          <Link to="/">Overview</Link>
-          <span>/</span>
-          <span>
-            {location.pathname === "/"
-              ? "Ready"
-              : location.pathname.split("/")[1] || "Runtime"}
-          </span>
-        </nav>
-        {children}
-      </main>
+        <main ref={mainRef} className="runtime-main">
+          <nav className="breadcrumb-shell" aria-label="Breadcrumb">
+            <Link to="/">Overview</Link>
+            <span>/</span>
+            <span>
+              {location.pathname === "/"
+                ? "Ready"
+                : location.pathname.split("/")[1] || "Runtime"}
+            </span>
+          </nav>
+          {children}
+        </main>
+      </div>
     </div>
   );
 };

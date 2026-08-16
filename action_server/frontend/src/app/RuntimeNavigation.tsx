@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/shared/utils/cn";
 import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
@@ -27,6 +28,38 @@ export const RuntimeNavigation = ({
     false,
   );
   const { theme, cycleTheme } = useTheme();
+  const sidebarRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const sidebar = sidebarRef.current;
+    if (!sidebar) return;
+    const focusable = () =>
+      Array.from(
+        sidebar.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onMenuChange?.(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    sidebar.addEventListener("keydown", handleKeyDown);
+    return () => sidebar.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen, onMenuChange]);
   const links = (items: readonly (readonly [string, string])[]) =>
     items.map(([label, path]) => (
       <Link
@@ -53,6 +86,8 @@ export const RuntimeNavigation = ({
         onClick={() => onMenuChange?.(false)}
       />
       <aside
+        ref={sidebarRef}
+        aria-hidden={!menuOpen ? undefined : false}
         className={cn(
           "sidebar",
           menuOpen && "open",

@@ -11,14 +11,14 @@ export const RunInspectionPage = () => {
     .find((item) => item.id === run?.action_id);
   if (isPending)
     return (
-      <div className="workbench-page" aria-busy="true">
+      <div className="workbench-page" aria-busy="true" role="status">
         <p className="eyebrow">Run inspection</p>
         <h1>Loading run evidence</h1>
       </div>
     );
   if (error || !run)
     return (
-      <div className="workbench-page">
+      <div className="workbench-page state-unavailable" role="alert">
         <p className="eyebrow">Run inspection / unavailable</p>
         <h1>Run evidence is unavailable</h1>
         <p className="lede">
@@ -75,17 +75,18 @@ export const RunInspectionPage = () => {
         <div className="trace-main">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">Trace</p>
-              <h2>Execution sequence</h2>
+              <p className="eyebrow">Lifecycle evidence</p>
+              <h2>Recorded run state</h2>
             </div>
             <span className="mono">run/{run.numbered_id}</span>
           </div>
+          <p className="trace-unavailable" role="status">Trace telemetry is unavailable for this run; the runtime currently exposes lifecycle fields only.</p>
           <ol className="trace-list">
             <li>
               <span className="trace-dot" aria-hidden="true" />
               <div>
-                <strong>Action accepted</strong>
-                <small className="mono">request received</small>
+                <strong>Run recorded</strong>
+                <small className="mono">lifecycle evidence</small>
               </div>
             </li>
             <li className={failed ? "trace-failed" : ""}>
@@ -93,10 +94,10 @@ export const RunInspectionPage = () => {
               <div>
                 <strong>
                   {failed
-                    ? "Action failed"
+                    ? "Run marked failed"
                     : passed
-                      ? "Action completed"
-                      : "Action is running"}
+                       ? "Run marked passed"
+                       : "Run remains active"}
                 </strong>
                 <small>
                   {run.error_message ||
@@ -121,6 +122,7 @@ export const RunInspectionPage = () => {
               "No output recorded yet."}
           </pre>
           <div className="side-links">
+            <Link to={`/runs/${run.id}`}>Run overview</Link>
             <Link to={`/logs/${run.id}`}>Open full logs</Link>
             <Link to={`/artifacts/${run.id}`}>View artifacts</Link>
           </div>

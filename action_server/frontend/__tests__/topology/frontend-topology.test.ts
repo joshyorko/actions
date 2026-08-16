@@ -78,6 +78,24 @@ describe('Actions frontend topology', () => {
     expect(layout).toContain('aria-label="Breadcrumb"');
     expect(layout).toContain('aria-label="Open Runtime menu"');
     expect(navigation).toContain('data-testid="mobile-menu-backdrop"');
+    expect(navigation).toContain('event.key !== "Tab"');
+    expect(layout).toContain('aria-hidden');
+    expect(layout).toContain('inert');
+  });
+
+  it('keeps run evidence truthful and preserves one contextual hierarchy', () => {
+    const inspection = read('src/core/pages/RunInspection.tsx');
+    const logs = read('src/core/pages/Logs.tsx');
+    const artifacts = read('src/core/pages/Artifacts.tsx');
+    const detail = read('src/core/pages/ActionDetail.tsx');
+
+    expect(inspection).toContain('Lifecycle evidence');
+    expect(inspection).toContain('Trace telemetry is unavailable');
+    expect(logs).toContain('/runs/${runId}');
+    expect(artifacts).toContain('/runs/${runId}');
+    expect(detail).toContain('formDataToPayload');
+    expect(detail).toContain('Run started');
+    expect(detail).toContain('role="status"');
   });
 
   it('defines the visual contract as a calm, offline-safe workbench', () => {

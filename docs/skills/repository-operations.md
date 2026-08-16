@@ -42,6 +42,8 @@ verification.
 
 The Runtime product-evidence lane is fixture-backed rather than a visual baseline: `npm run test:product-evidence` builds the actual Runtime bundle, serves it through `scripts/product-evidence-server.mjs`, and drives the shipping routes with the versioned `runtime-product-evidence-v1` API contract. It writes ignored screenshots and a manifest under `frontend/reports/product-evidence/`; the manifest records the source SHA, Runtime artifact hash, route, viewport, theme, state, fixture version, and claim. This proves deterministic Runtime rendering against the declared fixture, not a live Action Server deployment. Existing component visual specs remain separate and are not product evidence.
 
+Runtime object links must preserve the hierarchy `action -> run -> logs/artifacts`: `/runs/:runId` is the contextual inspection route, while `/logs/:runId` and `/artifacts/:runId` resolve the run through the typed detail query so a deep link does not depend on the list query having already loaded. The current Runtime API exposes lifecycle fields but no typed trace-event stream; inspection UIs must label lifecycle evidence and state trace telemetry unavailability rather than inventing event records. Action execution must serialize the existing schema-derived form payload and visibly distinguish pending, success-without-run-id, mutation failure, API-unavailable, and empty states.
+
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
 registry URLs while allowing ordinary public scoped packages such as

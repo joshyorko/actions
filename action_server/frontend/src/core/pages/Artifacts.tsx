@@ -14,6 +14,7 @@ import {
 import { useActionServerContext } from "@/shared/context/actionServerContext";
 import { baseUrl, fetchRunArtifactsList } from "@/shared/api-client";
 import { ArtifactInfo, AsyncLoaded } from "@/shared/types";
+import { useRuntimeRun } from "@/queries/runtime";
 
 const formatBytes = (size: number) => {
   if (!size) {
@@ -32,6 +33,7 @@ export const ArtifactsPage = () => {
   const navigate = useNavigate();
   const { runId } = useParams<{ runId: string }>();
   const { loadedRuns } = useActionServerContext();
+  const { data: queriedRun, isPending: runPending, error: runError } = useRuntimeRun(runId || "");
   const [artifactState, setArtifactState] = useState<
     AsyncLoaded<ArtifactInfo[]>
   >({
@@ -40,8 +42,8 @@ export const ArtifactsPage = () => {
   });
 
   const run = useMemo(() => {
-    return loadedRuns.data?.find((item) => item.id === runId);
-  }, [loadedRuns.data, runId]);
+    return queriedRun || loadedRuns.data?.find((item) => item.id === runId);
+  }, [loadedRuns.data, queriedRun, runId]);
 
   useEffect(() => {
     if (!runId) {
@@ -58,7 +60,7 @@ export const ArtifactsPage = () => {
     );
   }
 
-  if (loadedRuns.isPending) {
+  if (loadedRuns.isPending || runPending) {
     return (
       <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
         Loading run metadata…
@@ -66,12 +68,11 @@ export const ArtifactsPage = () => {
     );
   }
 
-  if (!run) {
+  if (runError || !run) {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="max-w-md rounded-md border border-destructive/20 bg-destructive/5 p-6 text-center text-sm text-destructive">
-          Run <span className="font-mono font-semibold">{runId}</span> could not
-          be found.
+          {runError ? "Artifact metadata is unavailable from the runtime." : <>Run <span className="font-mono font-semibold">{runId}</span> could not be found.</>}
           <div className="mt-4">
             <Button variant="secondary" onClick={() => navigate("/runs")}>
               Back to run history
@@ -92,9 +93,7 @@ export const ArtifactsPage = () => {
             execution.
           </p>
         </div>
-        <Button variant="ghost" onClick={() => navigate("/runs")}>
-          Back to run history
-        </Button>
+        <div className="side-links"><Button variant="ghost" onClick={() => navigate(`/runs/${runId}`)}>Run overview</Button><Button variant="ghost" onClick={() => navigate("/runs")}>Back to run history</Button></div>
       </div>
 
       <div className="rounded-lg border border-border bg-card shadow-sm">

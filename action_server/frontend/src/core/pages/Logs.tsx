@@ -10,6 +10,7 @@ import { AsyncLoaded, Run, RunStatus } from '@/shared/types';
 import { Badge } from '@/core/components/ui/Badge';
 import { cn } from '@/shared/utils/cn';
 import { copyToClipboard } from '@/shared/utils/helpers';
+import { useRuntimeRun } from '@/queries/runtime';
 
 const OUTPUT_ARTIFACT_NAME = '__action_server_output.txt';
 
@@ -154,6 +155,7 @@ export const LogsPage = () => {
   const navigate = useNavigate();
   const { runId } = useParams<{ runId: string }>();
   const { loadedRuns } = useActionServerContext();
+  const { data: queriedRun, isPending: runPending, error: runError } = useRuntimeRun(runId || '');
   const [artifactsState, setArtifactsState] = useState<AsyncLoaded<Record<string, string>>>({
     isPending: true,
     data: {},
@@ -162,8 +164,8 @@ export const LogsPage = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const run = useMemo<Run | undefined>(() => {
-    return loadedRuns.data?.find((item) => item.id === runId);
-  }, [loadedRuns.data, runId]);
+    return queriedRun || loadedRuns.data?.find((item) => item.id === runId);
+  }, [loadedRuns.data, queriedRun, runId]);
 
   useEffect(() => {
     if (!runId) {
@@ -182,7 +184,7 @@ export const LogsPage = () => {
     );
   }
 
-  if (loadedRuns.isPending) {
+  if (loadedRuns.isPending || runPending) {
     return (
       <div className="flex h-full items-center justify-center">
         <Loading text="Loading run details..." />
@@ -190,11 +192,11 @@ export const LogsPage = () => {
     );
   }
 
-  if (!run) {
+  if (runError || !run) {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="max-w-md rounded-lg p-8 text-center">
-          <ErrorBanner message={`Run ${runId} was not found in the local cache.`} />
+          <ErrorBanner message={runError ? 'Run logs are unavailable from the runtime.' : `Run ${runId} was not found.`} />
           <div className="mt-6">
             <Button variant="secondary" size="lg" onClick={() => navigate('/runs')}>
               Back to run history
@@ -223,9 +225,7 @@ export const LogsPage = () => {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="ghost" onClick={() => navigate('/runs')}>
-            Back to run history
-          </Button>
+          <div className="side-links"><Button variant="ghost" onClick={() => navigate(`/runs/${runId}`)}>Run overview</Button><Button variant="ghost" onClick={() => navigate('/runs')}>Back to run history</Button></div>
         </div>
       </div>
 
