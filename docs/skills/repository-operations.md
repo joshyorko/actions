@@ -361,6 +361,15 @@ threaded `Database` tests are insufficient. The process-level check also proves
 exactly one run, while PostgreSQL due schedules use a session-level database
 claim held through processing; closing that connection releases ownership, and
 SQLite keeps its existing single-node path.
+Run the service-free SQLite/database/artifact scope separately from
+`poetry run pytest tests/action_server_tests/test_database_shared.py -m postgresql`
+against a fresh PostgreSQL service. Preserve the complete pytest output and the
+database server log before removing only the named verification container and
+network; a passing SQLite run does not establish PostgreSQL process ownership.
+The pinned Dev Container does not install Go or `jq`: `test_binary_build` needs
+Go, and the Runtime recovery contract test directly executes `jq`. Treat those
+as environment prerequisites rather than changing product code or committed
+locks to make the tests pass.
 
 The shared PostgreSQL adapter tokenizes SQL once and translates only unquoted
 parameter markers and exact legacy SQLite boolean/check DDL token sequences from
