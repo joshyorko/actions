@@ -10,6 +10,13 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
+Every template `package.yaml` pins the published `actions-core=1.0.0`.
+The producer-consumer template additionally pins
+`actions-work-items=0.4.4`. `actions-http-helper` remains a transitive Core
+dependency, and `actions-runtime` is the server distribution rather than a
+template library. Keep the static template-manifest contract synchronized
+with these package boundaries when a published version changes.
+
 The Action Server frontend uses `action_server/frontend/package.json` and its
 lock as the sole package metadata. `npm ci` is the offline-install contract;
 `LICENSE` is the retained Actions-owned provenance. Runtime and Canvas View
@@ -420,9 +427,25 @@ remain visible.
 `Doctor` and `ToolkitTest` validate the RCC environment and dispatcher contracts. Gateway
 CI runs `Bootstrap`, verifies all five package `.venv` interpreters, reruns `ToolkitTest`
 to prove the RCC toolchain survived Bootstrap, and runs the full package `Test` smoke on
-Linux. All three runners run manifest diagnostics and `ToolkitTest`. `BuildCommunity` invokes the public
-`build-frontend` task without a tier option (community is its default); binary builds
-remain in a dedicated build gate.
+Linux. All three runners run manifest diagnostics and `ToolkitTest`. The Linux runner
+also executes `BuildCommunity`: it invokes the public `build-frontend` task without a
+tier option (community is its default), builds the Go-wrapped Action Server with the
+`community-local` asset version, and launches `dist/final/action-server new --help`. Developer
+builds must retain a version containing the word `local`: the Go wrapper then replaces a
+same-version extraction whose embedded hash differs. A release-style version reuses the
+old extraction after warning, so it can make a newly built wrapper launch stale code. A
+successful file-producing build without the final startup check is not a passing community
+binary gate.
+
+Action Server is a `pkgutil` extension beneath the `actions-core` package. PyInstaller's
+module graph does not discover that in-tree extension from normal search paths alone; the
+`pyinstaller-hooks/pre_find_module_path/hook-actions.server.py` hook binds
+`actions.server` to `src/actions` before analysis. Without that hook, server files copied as
+data can make `version` pass while commands that initialize logging fail on an uncollected
+dependency such as `uvicorn`. The developer binary smoke therefore runs `new --help`, and
+the binary integration test requires all three concurrent wrapper launches to exit zero.
+Wrapper extraction assertions use `.actions/bin/action-server/internal` on POSIX and
+`%LOCALAPPDATA%/actions/bin/action-server/internal` on Windows.
 
 For a host without RCC, `devutils/bin/develop.sh` and `develop.bat` are bootstrap
 launchers. On Linux and macOS, the shell launcher prefers the `joshyorko/tools/rcc`

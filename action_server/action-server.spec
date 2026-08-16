@@ -77,7 +77,7 @@ a = Analysis(
         "termcolor",
         "pydantic.deprecated.decorator",
     ],
-    hookspath=[],
+    hookspath=["pyinstaller-hooks"],
     hooksconfig={},
     runtime_hooks=[],
     excludes=["pandas", "pyarrow"],  # Exclude to avoid NumPy 2.x compatibility errors during analysis

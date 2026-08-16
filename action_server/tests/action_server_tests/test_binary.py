@@ -12,12 +12,12 @@ def get_internal_version_location(version: str) -> Path:
         if not app_data_dir:
             raise RuntimeError("LOCALAPPDATA environment variable is not set")
         target_path = os.path.join(
-            app_data_dir, "sema4ai", "bin", "action-server", "internal"
+            app_data_dir, "actions", "bin", "action-server", "internal"
         )
     else:
         home_dir = os.path.expanduser("~")
         target_path = os.path.join(
-            home_dir, ".sema4ai", "bin", "action-server", "internal"
+            home_dir, ".actions", "bin", "action-server", "internal"
         )
 
     return Path(target_path) / version
@@ -100,11 +100,12 @@ def test_binary_build():
             stderr=subprocess.STDOUT,
         )
         stdout, _ = proc.communicate()
-        return stdout.decode("utf-8", errors="replace")
+        return proc.returncode, stdout.decode("utf-8", errors="replace")
 
     extracted_location = get_internal_version_location(version)
     if extracted_location.exists():
-        shutil.rmtree(extracted_location)
+        if extracted_location.exists():
+            shutil.rmtree(extracted_location)
 
     try:
         fut1 = run_in_thread(run_executable)
@@ -113,7 +114,11 @@ def test_binary_build():
 
         futures = [fut1, fut2, fut3]
 
-        outputs = [fut.result() for fut in futures]
+        results = [fut.result() for fut in futures]
+        outputs = [output for _, output in results]
+        assert [returncode for returncode, _ in results] == [0, 0, 0], "\n".join(
+            outputs
+        )
         skipped = 0
         extracted = 0
         for output in outputs:

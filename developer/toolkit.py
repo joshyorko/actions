@@ -168,7 +168,25 @@ def build_community() -> None:
     # task contract; it has no tier option. Keep this wiring explicit so an
     # Invoke CLI option drift is caught by the dispatcher contract test.
     poetry("action_server", "run", "invoke", "build-frontend")
-    poetry("action_server", "run", "invoke", "build-executable", "--go-wrapper")
+    poetry(
+        "action_server",
+        "run",
+        "invoke",
+        "build-executable",
+        "--go-wrapper",
+        "--version",
+        "community-local",
+    )
+    executable = "action-server.exe" if sys.platform == "win32" else "action-server"
+    action_server_root = REPOSITORY_ROOT / "action_server"
+    run(
+        [
+            str(action_server_root / "dist" / "final" / executable),
+            "new",
+            "--help",
+        ],
+        action_server_root,
+    )
 
 
 COMMANDS = {

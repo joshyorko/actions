@@ -48,6 +48,15 @@ def test_ci_verifies_bootstrap_environment_isolation() -> None:
     assert "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest" in workflow[isolation:]
 
 
+def test_ci_builds_and_launches_community_binary_on_linux() -> None:
+    workflow = (
+        REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+    ).read_text()
+
+    assert "- name: Build and verify community binary (Linux)" in workflow
+    assert "rcc run -r developer/toolkit.yaml --dev -t BuildCommunity" in workflow
+
+
 def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
     shell = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.sh").read_text()
     batch = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.bat").read_text()
@@ -149,13 +158,30 @@ def test_run_puts_package_virtualenv_first_on_path(tmp_path: Path) -> None:
 
 
 def test_build_community_uses_public_invoke_contract() -> None:
-    with patch.object(toolkit, "poetry") as poetry:
+    executable = "action-server.exe" if toolkit.sys.platform == "win32" else "action-server"
+    with patch.object(toolkit, "poetry") as poetry, patch.object(toolkit, "run") as run:
         toolkit.build_community()
 
     assert [call.args for call in poetry.call_args_list] == [
         ("action_server", "run", "invoke", "build-frontend"),
-        ("action_server", "run", "invoke", "build-executable", "--go-wrapper"),
+        (
+            "action_server",
+            "run",
+            "invoke",
+            "build-executable",
+            "--go-wrapper",
+            "--version",
+            "community-local",
+        ),
     ]
+    run.assert_called_once_with(
+        [
+            str(REPOSITORY_ROOT / "action_server" / "dist" / "final" / executable),
+            "new",
+            "--help",
+        ],
+        REPOSITORY_ROOT / "action_server",
+    )
 
 
 def test_typecheck_uses_only_package_configured_gates() -> None:

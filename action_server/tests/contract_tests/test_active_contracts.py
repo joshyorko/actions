@@ -104,6 +104,34 @@ def test_runtime_metadata_uses_published_active_dependencies():
     assert dependencies["actions-work-items"] == "^0.4.4"
 
 
+def test_template_manifests_use_published_actions_dependencies():
+    manifests = sorted((REPO / "templates").glob("*/package.yaml"))
+    assert manifests
+
+    for manifest in manifests:
+        dependencies = {
+            line.strip()[2:]
+            for line in manifest.read_text().splitlines()
+            if line.strip().startswith("- actions-")
+        }
+        assert "actions-core=1.0.0" in dependencies, str(manifest)
+        assert not any(
+            dependency.startswith("actions-core") and dependency != "actions-core=1.0.0"
+            for dependency in dependencies
+        ), str(manifest)
+
+        expected_work_items = (
+            {"actions-work-items=0.4.4"}
+            if manifest.parent.name == "workflow-producer-consumer"
+            else set()
+        )
+        assert {
+            dependency
+            for dependency in dependencies
+            if dependency.startswith("actions-work-items")
+        } == expected_work_items, str(manifest)
+
+
 def _build_wheels(output: Path, python: Path) -> list[Path]:
     for name in ("actions", "actions-http-helper", "work-items", "action_server"):
         package = REPO / name
