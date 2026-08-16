@@ -335,7 +335,10 @@ candidate gate.
 Action Server keeps SQLite as the default datadir-local backend. A shared
 PostgreSQL backend is selected explicitly with `--database-url` or
 `ACTION_SERVER_DATABASE_URL`; a requested PostgreSQL URL never falls back to
-SQLite, and logs identify only the backend rather than credentials. The
+SQLite, and logs identify only the backend rather than credentials. Verbose
+server-start settings diagnostics redact only the serialized `database_url`
+field through `redact_database_url`, leaving the live `Settings` value
+unchanged. The
 database facade preserves the existing model and parameterized SQL contract,
 while PostgreSQL migration startup takes a transaction-scoped advisory lock.
 Local artifact storage creates the default `artifacts_dir` on first use when
