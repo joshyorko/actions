@@ -31,7 +31,9 @@ CycloneDX `sbom.json` in each root. Runtime is post-processed into one
 remains a hashed multi-file root and declares `text/html;profile=mcp-app`.
 Runtime inlining must use exact asset markers with callback replacement, escape
 raw-text terminators and HTML-like opener sequences in inline JavaScript/CSS,
-and fail closed when a marker is missing or duplicated. Static build,
+and fail closed when a marker is missing or duplicated. After successful
+inlining, the generated `dist/assets` directory is removed; cleanup fails if
+any payload remains unprocessed. Static build,
 manifest, and import checks do not catch malformed post-inline HTML: serve the
 exact Runtime artifact through a real browser before visual acceptance and
 prove the root renders, no external JS/CSS request remains, no console/page
@@ -43,8 +45,9 @@ the canonical shipped-payload inventory: retained `artifact-manifest.json` and
 `sbom.json` metadata are excluded from that budget. The hosted frontend build
 must invoke this same dual-root validator rather than recursively summing a
 `dist` directory.
-The JavaScript and Python validators independently enumerate shipped files,
-require sorted normalized relative paths with an exact directory inventory, and
+The JavaScript and Python validators independently enumerate shipped files and
+structural directories, require sorted normalized relative paths with an exact
+directory inventory, and
 recompute every file's byte length and SHA-256. Hash multisets are insufficient:
 omission, extra files, path swaps, reordering, wrong sizes, and wrong hashes
 fail validation.

@@ -23,9 +23,26 @@ for (const [directory, expectedArtifact, expectedType] of [['dist', 'runtime-adm
     .map(file => relative(root, file).replaceAll('\\', '/'))
     .filter(file => !['artifact-manifest.json', 'sbom.json'].includes(file))
     .sort();
+  const actualDirectories = [];
+  async function directories(dir) {
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        actualDirectories.push(relative(root, path).replaceAll('\\', '/'));
+        await directories(path);
+      }
+    }
+  }
+  await directories(root);
   const manifestFiles = manifest.files.map(file => file.path);
+  const expectedDirectories = [...new Set(manifestFiles.flatMap(file => {
+    const parts = file.split('/');
+    return parts.slice(0, -1).map((_, index) => parts.slice(0, index + 1).join('/'));
+  }))].sort();
   if (manifest.artifact !== expectedArtifact || manifest.contentType !== expectedType) throw new Error(`${directory}: invalid artifact identity`);
   if (JSON.stringify(manifestFiles) !== JSON.stringify([...manifestFiles].sort()) || JSON.stringify(manifestFiles) !== JSON.stringify(actualFiles)) throw new Error(`${directory}: manifest inventory is incomplete or unsorted`);
+  if (JSON.stringify(actualDirectories.sort()) !== JSON.stringify(expectedDirectories)) throw new Error(`${directory}: undeclared structural path`);
   if (manifest.sourceMaps || manifest.files.some(file => file.path.endsWith('.map'))) throw new Error(`${directory}: source maps are forbidden`);
   const payload = await Promise.all(manifest.files.map(async file => {
     const bytes = await readFile(join(root, file.path));

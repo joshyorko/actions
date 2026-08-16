@@ -1,4 +1,4 @@
-import { readFile, readdir, unlink, writeFile } from 'node:fs/promises';
+import { readFile, readdir, rmdir, unlink, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const root = join(process.cwd(), 'dist');
@@ -25,6 +25,7 @@ const replaceAsset = (document, marker, replacement, file) => {
 
 for (const file of (await readdir(join(root, 'assets'))).sort()) {
   const path = join(root, 'assets', file);
+  if (!file.endsWith('.js') && !file.endsWith('.css')) continue;
   const source = await readFile(path, 'utf8');
   if (file.endsWith('.js')) {
     const marker = `<script type="module" crossorigin src="/assets/${file}"></script>`;
@@ -46,4 +47,5 @@ for (const file of (await readdir(join(root, 'assets'))).sort()) {
   }
   await unlink(path);
 }
+await rmdir(join(root, 'assets'));
 await writeFile(join(root, 'index.html'), html);

@@ -169,6 +169,19 @@ def validate_build_metadata(
             for path in artifact_path.rglob("*")
             if path.is_file() and path.name not in {"artifact-manifest.json", "sbom.json"}
         )
+        expected_directories = sorted(
+            {
+                parent.as_posix()
+                for name in names
+                for parent in Path(name).parents
+                if parent.as_posix() != "."
+            }
+        )
+        actual_directories = sorted(
+            path.relative_to(artifact_path).as_posix()
+            for path in artifact_path.rglob("*")
+            if path.is_dir()
+        )
         safe_names = all(
             isinstance(name, str)
             and name == name.replace("\\", "/")
@@ -182,7 +195,7 @@ def validate_build_metadata(
         content_type = manifest.get("contentType")
         checks.append(ValidationCheck("artifact", expected_artifact is not None and manifest.get("artifact") == expected_artifact, f"Declared artifact: {manifest.get('artifact')}"))
         checks.append(ValidationCheck("content-type", expected_content_type is not None and content_type == expected_content_type, f"Declared content type: {content_type}"))
-        checks.append(ValidationCheck("inventory", safe_names and names == sorted(names) and names == expected_names, "Manifest inventory is complete and sorted"))
+        checks.append(ValidationCheck("inventory", safe_names and names == sorted(names) and names == expected_names and actual_directories == expected_directories, "Manifest inventory is complete and sorted"))
         actual_bytes = []
         actual_hashes = []
         for item in files:

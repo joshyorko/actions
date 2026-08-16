@@ -149,7 +149,7 @@ window.__inlineFixture = values;
     rendered = (root / "index.html").read_text(encoding="utf-8")
     assert "/assets/index-test.js" not in rendered
     assert "/assets/index-test.css" not in rendered
-    assert not list(assets.iterdir())
+    assert not assets.exists()
     assert rendered.count("</script>") == 1
     assert rendered.count("</style>") == 1
     assert r"\x3C/script>" in rendered
@@ -159,6 +159,22 @@ window.__inlineFixture = values;
     assert "$'" in rendered
     assert "$&" in rendered
     assert "$`" in rendered
+
+
+def test_runtime_inliner_fails_on_unprocessed_asset_payload(tmp_path):
+    script = FRONTEND / "scripts/inline-runtime-assets.mjs"
+    root = tmp_path / "dist"
+    assets = root / "assets"
+    assets.mkdir(parents=True)
+    (root / "index.html").write_text("<html></html>", encoding="utf-8")
+    (assets / "unexpected.bin").write_bytes(b"unexpected")
+
+    result = subprocess.run(
+        ["node", str(script)], cwd=tmp_path, capture_output=True, text=True, check=False
+    )
+
+    assert result.returncode != 0
+    assert "ENOTEMPTY" in result.stderr
 
 
 def test_validators_prove_manifest_inventory_and_metadata(tmp_path):
@@ -195,6 +211,54 @@ def test_validators_prove_manifest_inventory_and_metadata(tmp_path):
     assert any(check.name == "inventory" and not check.passed for check in checks)
     assert any(check.name == "hashes" and not check.passed for check in checks)
     assert any(check.name == "sizes" and not check.passed for check in checks)
+
+
+def test_python_validator_rejects_empty_structural_extras(tmp_path):
+    build_binary = FRONTEND.parent / "build-binary"
+    sys.path.insert(0, str(build_binary))
+    from artifact_validator import validate_build_metadata
+
+    root = tmp_path / "artifact"
+    root.mkdir()
+    payload = b"runtime"
+    (root / "index.html").write_bytes(payload)
+    (root / "assets").mkdir()
+    _write_manifest(
+        root,
+        "runtime-admin",
+        "text/html",
+        [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+    )
+
+    checks = validate_build_metadata(root, "runtime-admin", "text/html")
+
+    assert any(check.name == "inventory" and not check.passed for check in checks)
+
+
+def test_javascript_validator_rejects_empty_structural_extras(tmp_path):
+    script = FRONTEND / "scripts" / "validate-artifacts.mjs"
+    for directory, artifact, content_type in (
+        ("dist", "runtime-admin", "text/html"),
+        ("dist-canvas", "canvas-mcp-app", "text/html;profile=mcp-app"),
+    ):
+        root = tmp_path / directory
+        root.mkdir()
+        payload = f"<html>{content_type}</html>".encode()
+        (root / "index.html").write_bytes(payload)
+        (root / "assets").mkdir()
+        _write_manifest(
+            root,
+            artifact,
+            content_type,
+            [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+        )
+
+    result = subprocess.run(
+        ["node", str(script)], cwd=tmp_path, capture_output=True, text=True, check=False
+    )
+
+    assert result.returncode != 0
+    assert "dist" in (result.stderr + result.stdout)
 
 
 @pytest.mark.parametrize("mutation", ["omission", "extra", "path-swap", "reorder"])
