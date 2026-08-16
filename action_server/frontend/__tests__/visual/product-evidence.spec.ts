@@ -14,6 +14,7 @@ const artifactSha = createHash("sha256")
   .update(readFileSync(join(root, "dist/index.html")))
   .digest("hex");
 const records: Array<Record<string, unknown>> = [];
+let expectedHttpStatuses = new Set<number>();
 
 const capture = async (
   page: Page,
@@ -21,7 +22,20 @@ const capture = async (
   state: string,
   theme: "light" | "dark",
   viewport: { width: number; height: number },
+  options: {
+    expected?: string;
+    claim?: string;
+    state_details?: string;
+    openMobileMenu?: boolean;
+    openRunDialog?: boolean;
+  } = {},
 ) => {
+  expectedHttpStatuses =
+    state === "error"
+      ? new Set([500])
+      : state === "unavailable"
+        ? new Set([503])
+        : new Set();
   await page.setViewportSize(viewport);
   await page.addInitScript((value) => {
     localStorage.setItem("view-settings", JSON.stringify({ theme: value }));
@@ -29,18 +43,48 @@ const capture = async (
   await page.goto(route, { waitUntil: "domcontentloaded" });
   await expect(page).toHaveURL(new RegExp(`${route.replaceAll("/", "\\/")}$`));
   const expected =
-    state === "loaded"
+    options.expected ??
+    (state === "loaded"
       ? route === "/actions"
         ? "Action Packages"
         : route === "/runs"
           ? "Run History"
-          : "Run #"
+          : route === "/overview"
+            ? "Execution console"
+            : "Run #"
       : state === "empty"
         ? "No actions available yet"
         : state === "loading"
           ? "Loading actions..."
-          : "Unable to load action packages";
+          : "Unable to load action packages");
   await expect(page.locator("body")).toContainText(expected);
+  if (options.openRunDialog) {
+    await page.getByRole("button", { name: "Run action" }).first().click();
+    await expect(page.getByRole("dialog")).toContainText("Run");
+  }
+  if (options.openMobileMenu) {
+    await page.getByRole("button", { name: "Open Runtime navigation" }).click();
+    await expect(
+      page.getByRole("button", { name: "Close Runtime navigation" }),
+    ).toBeVisible();
+    expect(
+      await page.evaluate(() => {
+        const scrim = document.querySelector<HTMLElement>(
+          ".runtime-mobile-scrim",
+        );
+        const sidebar = document.querySelector<HTMLElement>(".sidebar.open");
+        const rect = scrim?.getBoundingClientRect();
+        return Boolean(
+          scrim &&
+          sidebar &&
+          rect &&
+          rect.width >= window.innerWidth &&
+          rect.height >= window.innerHeight &&
+          document.documentElement.scrollWidth <= window.innerWidth,
+        );
+      }),
+    ).toBe(true);
+  }
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -52,10 +96,18 @@ const capture = async (
     path: join(root, screenshot),
     animations: "disabled",
     caret: "hide",
-    fullPage: true,
+    fullPage: false,
   });
+  const pngSha256 = createHash("sha256")
+    .update(readFileSync(join(root, screenshot)))
+    .digest("hex");
+  const provenance = await page.evaluate(() => ({
+    user_agent: navigator.userAgent,
+    font_family: getComputedStyle(document.body).fontFamily,
+    document_fonts: document.fonts?.status ?? "unavailable",
+  }));
   records.push({
-    schema: 1,
+    schema: 2,
     source_sha: sourceSha,
     artifact_sha256: artifactSha,
     route,
@@ -63,8 +115,15 @@ const capture = async (
     theme,
     fixture: "runtime-product-evidence-v1",
     state,
-    claim: `Runtime ${route} rendered fixture-backed ${state} data`,
+    state_details: options.state_details ?? state,
+    claim:
+      options.claim ?? `Runtime ${route} rendered fixture-backed ${state} data`,
     screenshot,
+    png_sha256: pngSha256,
+    browser: "Playwright Chromium",
+    os: process.platform,
+    node: process.version,
+    provenance,
   });
 };
 
@@ -74,9 +133,10 @@ test.beforeEach(async ({ context, page }) => {
     throw error;
   });
   page.on("console", (message) => {
+    const status = message.text().match(/status of (\d{3})/)?.[1];
     if (
       message.type() === "error" &&
-      !message.text().includes("status of 500")
+      !(status && expectedHttpStatuses.has(Number(status)))
     ) {
       throw new Error(`Unexpected browser console error: ${message.text()}`);
     }
@@ -124,15 +184,32 @@ test.afterAll(() => {
   mkdirSync(output, { recursive: true });
   writeFileSync(
     join(output, `${sourceSha}.json`),
-    `${JSON.stringify({ schema: 1, source_sha: sourceSha, artifact_sha256: artifactSha, fixture: "runtime-product-evidence-v1", records }, null, 2)}\n`,
+    `${JSON.stringify({ schema: 2, source_sha: sourceSha, artifact_sha256: artifactSha, fixture: "runtime-product-evidence-v1", records }, null, 2)}\n`,
   );
 });
 
 test("captures loaded desktop and mobile product routes", async ({ page }) => {
+  await capture(page, "/overview", "loaded", "dark", {
+    width: 1440,
+    height: 900,
+  });
   await capture(page, "/actions", "loaded", "dark", {
     width: 1440,
     height: 900,
   });
+  await capture(
+    page,
+    "/actions",
+    "action-detail-execute",
+    "light",
+    { width: 1440, height: 900 },
+    {
+      expected: "Action Packages",
+      claim:
+        "Runtime action detail and execute form are connected to the fixture-backed action catalog",
+      openRunDialog: true,
+    },
+  );
   await capture(page, "/runs", "loaded", "light", { width: 1440, height: 900 });
   await capture(page, "/logs/run-failed", "loaded", "dark", {
     width: 390,
@@ -142,6 +219,21 @@ test("captures loaded desktop and mobile product routes", async ({ page }) => {
     width: 390,
     height: 844,
   });
+  await capture(
+    page,
+    "/actions",
+    "loaded-menu-open",
+    "dark",
+    {
+      width: 390,
+      height: 844,
+    },
+    {
+      expected: "Action Packages",
+      state_details: "loaded with mobile navigation open",
+      openMobileMenu: true,
+    },
+  );
 });
 
 test("captures empty and API error product states", async ({
@@ -164,4 +256,23 @@ test("captures empty and API error product states", async ({
     width: 1440,
     height: 900,
   });
+  await context.clearCookies();
+  await context.addCookies([
+    {
+      name: "product-evidence",
+      value: "unavailable",
+      url: "http://127.0.0.1:4174",
+    },
+  ]);
+  await capture(
+    page,
+    "/actions",
+    "unavailable",
+    "light",
+    {
+      width: 390,
+      height: 844,
+    },
+    { expected: "Unable to load action packages:" },
+  );
 });

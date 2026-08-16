@@ -164,9 +164,12 @@ const server = createServer((req, res) => {
   if (url.pathname === "/api/actionPackages" && state === "loading")
     return delayed(res, actions);
   if (url.pathname === "/api/actionPackages")
-    return state === "error"
-      ? send(res, 500, {
-          detail: "Fixture API error: action packages unavailable.",
+    return state === "error" || state === "unavailable"
+      ? send(res, state === "unavailable" ? 503 : 500, {
+          detail:
+            state === "unavailable"
+              ? "Fixture runtime unavailable: action packages cannot be reached."
+              : "Fixture API error: action packages unavailable.",
         })
       : send(res, 200, state === "empty" ? [] : actions);
   if (
@@ -175,8 +178,13 @@ const server = createServer((req, res) => {
   )
     return delayed(res, runs);
   if (url.pathname === "/api/runs" || url.pathname.startsWith("/api/runs?"))
-    return state === "error"
-      ? send(res, 500, { detail: "Fixture API error: runs unavailable." })
+    return state === "error" || state === "unavailable"
+      ? send(res, state === "unavailable" ? 503 : 500, {
+          detail:
+            state === "unavailable"
+              ? "Fixture runtime unavailable: runs cannot be reached."
+              : "Fixture API error: runs unavailable.",
+        })
       : send(res, 200, state === "empty" ? [] : runs);
   if (
     url.pathname.startsWith("/api/runs/") &&
