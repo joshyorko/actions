@@ -38,7 +38,14 @@ yet part of `npm run test:quality` or the hosted workflow because that command
 and workflow integration belong to #98/PR #115. Do not duplicate those
 adjacent package/workflow edits in the #97 UI lane. These local contracts do
 not replace real-browser accessibility, responsive, contrast, or screenshot
-verification.
+verification. Runtime visual experiments must capture the real built Runtime
+route against the versioned `runtime-product-evidence-v1` fixture. Every
+manifest record binds the exact source SHA, Runtime artifact SHA-256, route,
+viewport, theme, fixture version, state, claim, and screenshot path. Matched
+loaded, loading, empty, unavailable/error, and mobile captures are product
+claims; isolated primitive matrices and historical screenshots are references
+only. Record strict console/network/CSP and horizontal-overflow results, and
+regenerate pixels whenever the source SHA changes.
 
 The Runtime product-evidence lane is fixture-backed rather than a visual baseline: `npm run test:product-evidence` builds the actual Runtime bundle, serves it through `scripts/product-evidence-server.mjs`, and drives the shipping routes with the versioned `runtime-product-evidence-v1` API contract. It writes ignored screenshots and a manifest under `frontend/reports/product-evidence/`; the manifest records the source SHA, Runtime artifact hash, route, viewport, theme, state, fixture version, and claim. This proves deterministic Runtime rendering against the declared fixture, not a live Action Server deployment. Existing component visual specs remain separate and are not product evidence.
 
