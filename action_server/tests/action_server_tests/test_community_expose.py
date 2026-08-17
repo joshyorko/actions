@@ -1,4 +1,5 @@
 import asyncio
+from types import SimpleNamespace
 
 from actions.server._community_expose import (
     BaseTunnelProvider,
@@ -6,6 +7,7 @@ from actions.server._community_expose import (
     TunnelManager,
     TunnelProvider,
 )
+from actions.server._server import _start_community_expose_impl
 
 
 class _FakeProvider(BaseTunnelProvider):
@@ -59,3 +61,29 @@ def test_tunnel_manager_falls_back_after_provider_start_failure():
     assert tunnel.provider is TunnelProvider.BORE
     assert failed.started_ports == [8080]
     assert working.started_ports == [8080]
+
+
+def test_server_expose_suppresses_all_provider_failure_without_active_tunnel(
+    monkeypatch, caplog
+):
+    failed = _FakeProvider(
+        TunnelProvider.LOCALHOST_RUN, failure=RuntimeError("offline")
+    )
+    failed_again = _FakeProvider(TunnelProvider.BORE, failure=RuntimeError("blocked"))
+    manager = TunnelManager()
+    manager._providers = [failed, failed_again]
+
+    monkeypatch.setattr(
+        "actions.server._community_expose.TunnelManager", lambda **_: manager
+    )
+
+    with caplog.at_level("ERROR"):
+        result = asyncio.run(
+            _start_community_expose_impl(
+                8080, SimpleNamespace(expose_provider="auto"), None
+            )
+        )
+
+    assert result is manager
+    assert not manager.is_active
+    assert "Failed to start tunnel: All tunnel providers failed" in caplog.text

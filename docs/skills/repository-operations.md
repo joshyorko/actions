@@ -384,6 +384,10 @@ includes the two embedded files so Poetry and PyInstaller builds retain this off
 contract. Template modules must import the
 published `actions-core` package via `from actions ...`; do not name an action module
 `actions.py`, because that shadows the installed package during project execution.
+Community `--expose` startup tries the selected or available open-source tunnel
+providers, logs a bounded failure when all providers fail, and leaves the
+`TunnelManager` inactive; the wrapper boundary is covered separately from provider
+selection and direct cleanup tests.
 
 The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
 macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's

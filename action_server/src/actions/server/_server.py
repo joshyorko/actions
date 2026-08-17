@@ -24,6 +24,48 @@ def _mount_artifact_static_files(app: FastAPI, backend: str, root: os.PathLike) 
         app.mount("/artifacts", StaticFiles(directory=root), name="artifacts")
 
 
+async def _start_community_expose_impl(port: int, settings, api_key: str | None = None):
+    """Start community expose and suppress provider startup failures."""
+    from ._community_expose import TunnelManager, TunnelProvider
+
+    provider_map = {
+        "auto": TunnelProvider.AUTO,
+        "localhost.run": TunnelProvider.LOCALHOST_RUN,
+        "bore": TunnelProvider.BORE,
+        "cloudflare": TunnelProvider.CLOUDFLARE,
+    }
+    provider = provider_map.get(settings.expose_provider, TunnelProvider.AUTO)
+    community_tunnel_manager = TunnelManager(preferred_provider=provider)
+
+    try:
+        tunnel = await community_tunnel_manager.start(port)
+
+        log.info(
+            colored("\n  🌍 Public URL: ", "green", attrs=["bold"])
+            + colored(tunnel.public_url, "light_blue")
+        )
+
+        if api_key:
+            log.info(
+                colored("  🔑 API Authorization Bearer key: ", attrs=["bold"])
+                + f"{api_key}\n"
+            )
+
+        log.info(colored(f"     (using {tunnel.provider.value})", attrs=["dark"]))
+
+    except Exception as e:
+        log.error(f"Failed to start tunnel: {e}")
+        log.info(
+            colored(
+                "     Tip: Install 'bore' for simple tunneling: ",
+                attrs=["dark"],
+            )
+            + colored("https://github.com/ekzhang/bore", "light_blue")
+        )
+
+    return community_tunnel_manager
+
+
 class _LoopHolder:
     loop: Optional["AbstractEventLoop"] = None
 
@@ -327,45 +369,9 @@ def start_server(
     async def _start_community_expose(port: int, settings):
         """Start community expose using open source tunnel providers."""
         nonlocal community_tunnel_manager
-
-        from ._community_expose import TunnelManager, TunnelProvider
-
-        # Map settings.expose_provider to TunnelProvider
-        provider_map = {
-            "auto": TunnelProvider.AUTO,
-            "localhost.run": TunnelProvider.LOCALHOST_RUN,
-            "bore": TunnelProvider.BORE,
-            "cloudflare": TunnelProvider.CLOUDFLARE,
-        }
-
-        provider = provider_map.get(settings.expose_provider, TunnelProvider.AUTO)
-
-        try:
-            community_tunnel_manager = TunnelManager(preferred_provider=provider)
-            tunnel = await community_tunnel_manager.start(port)
-
-            log.info(
-                colored("\n  🌍 Public URL: ", "green", attrs=["bold"])
-                + colored(tunnel.public_url, "light_blue")
-            )
-
-            if api_key:
-                log.info(
-                    colored("  🔑 API Authorization Bearer key: ", attrs=["bold"])
-                    + f"{api_key}\n"
-                )
-
-            log.info(colored(f"     (using {tunnel.provider.value})", attrs=["dark"]))
-
-        except Exception as e:
-            log.error(f"Failed to start tunnel: {e}")
-            log.info(
-                colored(
-                    "     Tip: Install 'bore' for simple tunneling: ",
-                    attrs=["dark"],
-                )
-                + colored("https://github.com/ekzhang/bore", "light_blue")
-            )
+        community_tunnel_manager = await _start_community_expose_impl(
+            port, settings, api_key
+        )
 
     protocol = "https" if settings.use_https else "http"
 
