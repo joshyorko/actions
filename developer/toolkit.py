@@ -7,6 +7,7 @@ import os
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -95,6 +96,50 @@ def doctor() -> None:
 
 def bootstrap() -> None:
     run(["invoke", "install"])
+
+
+def community_executable_name() -> str:
+    return "action-server.exe" if sys.platform == "win32" else "action-server"
+
+
+def resolve_install_target(path_value: str | None = None) -> Path:
+    executable = community_executable_name()
+    resolved = shutil.which(executable, path=path_value)
+    if resolved:
+        return Path(resolved).resolve()
+    if sys.platform == "win32":
+        local_app_data = os.environ.get("LOCALAPPDATA")
+        if not local_app_data:
+            raise SystemExit("LOCALAPPDATA is required to install Action Server")
+        directory = Path(local_app_data) / "Programs" / "Actions" / "bin"
+    else:
+        directory = Path.home() / ".local" / "bin"
+    entries = [
+        Path(entry).resolve()
+        for entry in (path_value or os.environ.get("PATH", "")).split(os.pathsep)
+        if entry
+    ]
+    if directory.resolve() not in entries:
+        raise SystemExit(f"Install directory is not on PATH: {directory}")
+    return directory / executable
+
+
+def install_executable(source: Path, target: Path) -> None:
+    temp_path: Path | None = None
+    try:
+        temporary = tempfile.NamedTemporaryFile(
+            dir=target.parent, prefix=f".{target.name}.", delete=False
+        )
+        temp_path = Path(temporary.name)
+        temporary.close()
+        shutil.copy2(source, temp_path)
+        if sys.platform != "win32":
+            temp_path.chmod(temp_path.stat().st_mode | 0o111)
+        os.replace(temp_path, target)
+    except Exception as error:
+        if temp_path is not None:
+            temp_path.unlink(missing_ok=True)
+        raise SystemExit(f"Unable to install Action Server at {target}: {error}")
 
 
 def package_task(task: str) -> None:

@@ -2,6 +2,7 @@ import sys
 from pathlib import Path
 from unittest.mock import patch
 
+import pytest
 import yaml
 
 TOOLKIT_ROOT = Path(__file__).parents[1]
@@ -206,6 +207,81 @@ def test_build_community_uses_public_invoke_contract() -> None:
         ],
         REPOSITORY_ROOT / "action_server",
     )
+
+
+def test_resolve_install_target_uses_existing_executable() -> None:
+    with patch.object(
+        toolkit.shutil,
+        "which",
+        return_value="/home/linuxbrew/.linuxbrew/bin/action-server",
+    ):
+        assert toolkit.resolve_install_target() == Path(
+            "/home/linuxbrew/.linuxbrew/bin/action-server"
+        )
+
+
+def test_resolve_install_target_uses_posix_fallback_on_path() -> None:
+    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
+        toolkit.Path, "home", return_value=Path("/home/user")
+    ), patch.dict("os.environ", {"PATH": "/home/user/.local/bin:/usr/bin"}):
+        assert toolkit.resolve_install_target() == Path(
+            "/home/user/.local/bin/action-server"
+        )
+
+
+def test_resolve_install_target_uses_windows_fallback_on_path() -> None:
+    local_app_data = Path("/local/appdata")
+    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
+        toolkit.sys, "platform", "win32"
+    ), patch.dict(
+        "os.environ",
+        {
+            "LOCALAPPDATA": str(local_app_data),
+            "PATH": str(local_app_data / "Programs" / "Actions" / "bin"),
+        },
+    ):
+        assert toolkit.resolve_install_target() == Path(
+            "/local/appdata/Programs/Actions/bin/action-server.exe"
+        )
+
+
+def test_resolve_install_target_rejects_fallback_directory_not_on_path() -> None:
+    with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
+        toolkit.Path, "home", return_value=Path("/home/user")
+    ), patch.dict("os.environ", {"PATH": "/usr/bin"}):
+        error = pytest.raises(SystemExit, toolkit.resolve_install_target)
+
+    assert "/home/user/.local/bin" in str(error.value)
+
+
+def test_install_executable_atomically_replaces_target(tmp_path: Path) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / "target"
+    source.write_bytes(b"new")
+    target.write_bytes(b"old")
+    target.chmod(0o755)
+
+    toolkit.install_executable(source, target)
+
+    assert target.read_bytes() == b"new"
+    assert target.stat().st_mode & 0o111
+    assert list(tmp_path.glob(f".{target.name}.*")) == []
+
+
+def test_install_executable_preserves_old_target_on_replace_failure(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / "target"
+    source.write_bytes(b"new")
+    target.write_bytes(b"old")
+
+    with patch.object(toolkit.os, "replace", side_effect=PermissionError("denied")):
+        error = pytest.raises(SystemExit, toolkit.install_executable, source, target)
+
+    assert target.read_bytes() == b"old"
+    assert str(target) in str(error.value)
+    assert list(tmp_path.glob(f".{target.name}.*")) == []
 
 
 def test_typecheck_uses_only_package_configured_gates() -> None:
