@@ -288,24 +288,6 @@ class ActionContext(BaseContext):
                         log.hide_from_output(repr(secret_value))
 
 
-class DataContext(BaseContext):
-    @classmethod
-    def _header_name(cls) -> str:
-        return "x-data-context"
-
-    def _hide_secrets(self):
-        data_server_config = self._raw_data.get("data-server")
-        if data_server_config and isinstance(data_server_config, dict):
-            if _is_robocorp_log_available():
-                from robocorp import log
-
-                if isinstance(data_server_config, dict):
-                    secret_value = data_server_config.get("password")
-                    if isinstance(secret_value, str):
-                        log.hide_from_output(secret_value)
-                        log.hide_from_output(repr(secret_value))
-
-
 class InvocationContext(BaseContext):
     """
     The invocation context should have a dict with the following keys:
@@ -325,21 +307,12 @@ class InvocationContext(BaseContext):
 class RequestContexts:
     def __init__(self, request: Optional["Request"]):
         self._request = request
-        self._data_context: Optional[DataContext] = None
         self._action_context: Optional[ActionContext] = None
         self._invocation_context: Optional[InvocationContext] = None
 
     @property
     def request(self) -> Optional["Request"]:
         return self._request
-
-    @property
-    def data_context(self) -> Optional[DataContext]:
-        if self._data_context is None and self._request is not None:
-            self._data_context = typing.cast(
-                DataContext, DataContext.from_request(self._request)
-            )
-        return self._data_context
 
     @property
     def action_context(self) -> Optional[ActionContext]:

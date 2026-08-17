@@ -443,12 +443,11 @@ database/model import cycles. Model names used only by annotations belong behind
 `TYPE_CHECKING`; moving runtime imports to module scope merely to satisfy Ruff changes the
 import boundary and is not an acceptable lint repair.
 
-Action Server Mypy scans product source and ordinary tests but excludes executable
-`resources/data_package/` fixtures whose optional `sema4ai.data` dependency is not part of
-the Runtime environment. Generated `_oauth2_config`/`_static_contents` modules and
-installed runtime libraries without stubs use targeted module overrides rather than a
-global missing-import exemption. MCP SDK model constructors use Python field names such
-as `structured_content`; camelCase aliases remain wire-format names.
+Action Server Mypy scans product source and ordinary tests. Generated
+`_oauth2_config`/`_static_contents` modules and installed runtime libraries without stubs
+use targeted module overrides rather than a global missing-import exemption. MCP SDK
+model constructors use Python field names such as `structured_content`; camelCase aliases
+remain wire-format names.
 
 Action Server keeps deprecation warnings actionable: repository-owned Pydantic models
 use `ConfigDict`, and build timestamps are timezone-aware UTC values. Pytest suppresses

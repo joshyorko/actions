@@ -3,7 +3,6 @@ import os
 import shutil
 import subprocess
 import tomllib
-import venv
 import zipfile
 from pathlib import Path
 
@@ -110,19 +109,36 @@ def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
 
 
 def test_removed_product_paths_do_not_exist():
-    assert not [str(path.relative_to(REPO)) for path in REMOVED_PRODUCT_PATHS if path.exists()]
+    remaining_paths = [
+        str(path.relative_to(REPO)) for path in REMOVED_PRODUCT_PATHS if path.exists()
+    ]
+    assert not remaining_paths
 
 
 def test_runtime_has_no_data_server_or_data_context_compatibility():
     sources = {
         "tools": (REPO / "action_server/src/actions/server/_common/tools.py").read_text(),
         "contexts": (REPO / "actions/src/actions/_action_context.py").read_text(),
+        "managed_parameters": (
+            REPO / "actions/src/actions/_managed_parameters.py"
+        ).read_text(),
         "run": (REPO / "action_server/src/actions/server/_actions_run.py").read_text(),
+        "import": (
+            REPO / "action_server/src/actions/server/_actions_import.py"
+        ).read_text(),
+        "package_metadata": (
+            REPO / "action_server/src/actions/server/package/_package_metadata.py"
+        ).read_text(),
     }
     violations = {
         f"{name}:{token}"
         for name, text in sources.items()
-        for token in ("DataServerTool", "DataContext", "x-data-context")
+        for token in (
+            "DataServerTool",
+            "DataContext",
+            "x-data-context",
+            "data_package_metadata",
+        )
         if token in text
     }
     assert not violations, sorted(violations)
@@ -159,7 +175,8 @@ def test_active_guidance_and_ci_have_no_private_product_lane():
         )
         if token in path.read_text()
     }
-    assert not violations, sorted(violations)
+    sorted_violations = sorted(violations)
+    assert not sorted_violations
 
 
 def test_runtime_metadata_uses_published_active_dependencies():
