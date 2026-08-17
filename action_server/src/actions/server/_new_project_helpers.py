@@ -60,8 +60,7 @@ def _install_bundle(
             if any(not _safe_zip_member(member) for member in members):
                 return False
             extracted: dict[str, bytes] = {
-                Path(member.filename).stem: archive.read(member)
-                for member in members
+                Path(member.filename).stem: archive.read(member) for member in members
             }
         for name, content in extracted.items():
             with zipfile.ZipFile(io.BytesIO(content)) as template_archive:
@@ -89,11 +88,19 @@ def _embedded_assets() -> tuple[ActionTemplatesMetadata, bytes]:
 
 
 def _metadata_bytes(metadata: ActionTemplatesMetadata) -> bytes:
-    return (yaml.safe_dump({
-        "schema": 1,
-        "hash": metadata.hash,
-        "templates": {item.name: item.description for item in sorted(metadata.templates, key=lambda item: item.name)},
-    }, sort_keys=False)).encode("utf-8")
+    return (
+        yaml.safe_dump(
+            {
+                "schema": 1,
+                "hash": metadata.hash,
+                "templates": {
+                    item.name: item.description
+                    for item in sorted(metadata.templates, key=lambda item: item.name)
+                },
+            },
+            sort_keys=False,
+        )
+    ).encode("utf-8")
 
 
 def _cache_is_valid(

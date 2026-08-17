@@ -295,7 +295,6 @@ def start_server(
         if not callback(app):
             return
 
-
     def _get_currrent_host():
         port = settings.port if settings.port != 0 else None
         host = settings.address

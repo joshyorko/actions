@@ -3,7 +3,6 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-
 BUILD_BINARY = Path(__file__).resolve().parents[2] / "build-binary"
 sys.path.insert(0, str(BUILD_BINARY))
 

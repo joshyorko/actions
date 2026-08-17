@@ -1,6 +1,6 @@
-import json
 import hashlib
 import io
+import json
 import subprocess
 import sys
 import zipfile
@@ -9,7 +9,6 @@ from unittest import mock
 
 import pytest
 import yaml
-
 
 REPO = Path(__file__).resolve().parents[3]
 PACKAGER = REPO / "templates/packaging/build_embedded_bundle.py"

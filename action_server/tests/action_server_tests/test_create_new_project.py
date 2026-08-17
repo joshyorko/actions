@@ -14,7 +14,7 @@ def test_create_new_project_uses_embedded_template(tmpdir) -> None:
         "actions.server._new_project_helpers._get_action_templates_dir_path",
         return_value=templates_path,
     ):
-        assert handle_new_project(project_path, "minimal") == 0
+        assert handle_new_project(str(project_path), "minimal") == 0
 
     assert os.path.isfile(project_path / "package.yaml")
     assert os.path.isfile(templates_path / "minimal.zip")
