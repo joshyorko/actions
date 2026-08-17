@@ -132,6 +132,24 @@ def test_template_manifests_use_published_actions_dependencies():
         } == expected_work_items, str(manifest)
 
 
+def test_template_sources_use_actions_core_without_module_name_collision():
+    template_roots = sorted(
+        path.parent for path in (REPO / "templates").glob("*/package.yaml")
+    )
+    assert template_roots
+
+    violations = []
+    for template_root in template_roots:
+        for source in sorted(template_root.rglob("*.py")):
+            text = source.read_text()
+            if "sema4ai.actions" in text or "robocorp.actions" in text:
+                violations.append(str(source.relative_to(REPO)))
+        if (template_root / "actions.py").exists():
+            violations.append(str((template_root / "actions.py").relative_to(REPO)))
+
+    assert not violations, ", ".join(violations)
+
+
 def _build_wheels(output: Path, python: Path) -> list[Path]:
     for name in ("actions", "actions-http-helper", "work-items", "action_server"):
         package = REPO / name
