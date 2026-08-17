@@ -96,6 +96,34 @@ def test_embedded_templates_are_available_without_network_transport(
     )
 
 
+def test_symlinked_template_cache_is_reseeded_without_writing_target(
+    monkeypatch, tmp_path
+):
+    from actions.server import _new_project_helpers as helpers
+
+    target = tmp_path / "target"
+    target.mkdir()
+    cache = tmp_path / "action-templates"
+    cache.symlink_to(target, target_is_directory=True)
+    monkeypatch.setattr(helpers, "_get_action_templates_dir_path", lambda: cache)
+
+    helpers._ensure_latest_templates()
+
+    assert cache.is_dir()
+    assert not cache.is_symlink()
+    assert not (target / "minimal.zip").exists()
+    assert (cache / "minimal.zip").is_file()
+
+
+@pytest.mark.parametrize("templates", [[], None])
+def test_malformed_template_metadata_is_invalid_without_raising(templates):
+    from actions.server import _new_project_helpers as helpers
+
+    metadata = yaml.safe_dump({"hash": "hash", "templates": templates})
+
+    assert helpers._parse_templates_metadata(metadata) is None
+
+
 def test_invalid_template_archive_never_writes_outside_destination(tmp_path):
     from actions.server import _new_project_helpers as helpers
 

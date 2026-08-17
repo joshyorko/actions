@@ -29,6 +29,8 @@ class ActionTemplatesMetadata(BaseModel):
 def _ensure_latest_templates() -> None:
     """Seed an invalid or missing cache from verified embedded assets."""
     action_templates_dir_path = _get_action_templates_dir_path()
+    if action_templates_dir_path.is_symlink():
+        action_templates_dir_path.unlink()
     action_templates_dir_path.mkdir(parents=True, exist_ok=True)
     embedded_metadata, embedded_package = _embedded_assets()
     local_metadata = _get_local_templates_metadata()
@@ -177,9 +179,13 @@ def _parse_templates_metadata(yaml_content: str) -> ActionTemplatesMetadata | No
         if not isinstance(metadata, dict):
             return None
 
+        template_values = metadata.get("templates", {})
+        if not isinstance(template_values, dict):
+            return None
+
         templates: list[ActionTemplate] = []
 
-        for name, description in metadata.get("templates", {}).items():
+        for name, description in template_values.items():
             templates.append(ActionTemplate(name=name, description=description))
 
         return ActionTemplatesMetadata(

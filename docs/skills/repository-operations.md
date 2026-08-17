@@ -376,7 +376,10 @@ The embedded bundle is the sole runtime authority: project creation performs no
 metadata or archive network request. Production owns exactly `minimal`, `basic`,
 `advanced`, and `workflow-producer-consumer`; `templates-beta.json` is not a production
 generator input. A cache hash mismatch, byte mismatch, traversal path, duplicate member,
-or symlink causes reseeding from the embedded bundle. `action_server/pyproject.toml`
+or symlink causes reseeding from the embedded bundle. A symlinked cache directory is
+unlinked before reseeding, so embedded files are never written through its target.
+Metadata whose `templates` value is not a mapping is invalid and also triggers offline
+reseeding. `action_server/pyproject.toml`
 includes the two embedded files so Poetry and PyInstaller builds retain this offline
 contract. Template modules must import the
 published `actions-core` package via `from actions ...`; do not name an action module
