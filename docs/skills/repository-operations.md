@@ -142,8 +142,15 @@ returned as the single canonical response header; CORS exposes that header.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
-existing rejection order. The body is replayed in its original ASGI chunks and
-returns an empty terminal request after exhaustion.
+existing rejection order. The body is replayed exactly once in its original ASGI
+chunks. After buffered chunks are exhausted, the wrapper delegates to the original
+receive callable so disconnect delivery and ASGI backpressure are preserved. Never
+synthesize an immediately-ready terminal `http.request` for every later read:
+streaming/SSE disconnect watchers can spin without yielding, starve the server event
+loop, and prevent unrelated HTTP work and graceful signal shutdown from progressing.
+The lifecycle regression boundary opens a raw `GET /mcp` SSE connection and, while it
+remains open, proves that an unrelated HTTP route responds within a finite bound,
+`SIGTERM` terminates Action Server, and its observed preload children stop.
 Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
 tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
@@ -474,9 +481,13 @@ version reuses the old extraction after warning, so it can make a newly built wr
 launch stale code.
 
 Before reinstalling or restarting Action Server, inspect the process table and listening
-sockets. A deleted controlling PTY together with dead or zombie preload workers, sustained
-CPU, listening sockets, and HTTP timeouts is an orphaned broken process: terminate it
-before reinstalling or restarting. Installation does not repair that lifecycle failure.
+sockets. A `GET /mcp` SSE request can expose receive-wrapper event-loop starvation when
+buffer exhaustion is followed by an endlessly ready synthetic `http.request`; sustained
+CPU, retained listening sockets, unrelated HTTP timeouts, and stalled `SIGTERM` are its
+direct symptoms. A deleted controlling PTY explains how such a foreground server can
+become orphaned, while dead or zombie preload workers are secondary evidence rather than
+the primary cause. Terminate the broken process tree before reinstalling or restarting;
+installation does not repair a running lifecycle failure.
 
 Action Server is a `pkgutil` extension beneath the `actions-core` package. PyInstaller's
 module graph does not discover that in-tree extension from normal search paths alone; the
