@@ -70,6 +70,8 @@ a = Analysis(
     binaries=[],
     datas=[
         *action_server_datas,
+        ("src/actions/server/templates/action-templates.zip", "actions/server/templates"),
+        ("src/actions/server/templates/action-templates.yaml", "actions/server/templates"),
     ],
     hiddenimports=[
         *action_server_hiddenimports,

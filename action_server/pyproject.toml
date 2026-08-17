@@ -14,6 +14,8 @@ include = [
 	"src/actions/server/_static_contents.py",
 	"src/actions/server/_oauth2_config.py",
 	"src/actions/server/bin/rcc*",
+	"src/actions/server/templates/action-templates.zip",
+	"src/actions/server/templates/action-templates.yaml",
 ]
 homepage = "https://github.com/joshyorko/actions/tree/community"
 

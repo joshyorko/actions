@@ -347,6 +347,29 @@ candidate gate.
 
 ## RCC Developer Toolkit
 
+### Repository-owned Action Server templates
+
+The supported Action Server templates are generated from `templates/packaging/templates-prod.json`
+with `templates/packaging/build_embedded_bundle.py`. The generator sorts archive members,
+uses fixed ZIP timestamps and permissions, and writes `action-templates.zip` plus YAML
+metadata containing its SHA-256. Regenerate the checked-in assets with:
+
+```bash
+python templates/packaging/build_embedded_bundle.py \
+  --config templates/packaging/templates-prod.json \
+  --template-root templates \
+  --output-dir action_server/src/actions/server/templates
+```
+
+Action Server seeds its settings cache from these package-owned assets, validates the
+bundle hash and every archive member, and atomically installs only verified archives.
+It may refresh from `downloads.robocorp.com`; network failure, malformed metadata,
+hash mismatch, or unsafe archive content leaves the embedded or previously valid cache
+usable. `action_server/pyproject.toml` includes the two embedded files so Poetry and
+PyInstaller builds retain the offline fallback. Template modules must import the
+published `actions-core` package via `from actions ...`; do not name an action module
+`actions.py`, because that shadows the installed package during project execution.
+
 The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
 macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's
 focused contracts, then use `Test`, `Lint`, `Typecheck`, `Docs`, `CheckAll`,
