@@ -230,13 +230,15 @@ def test_resolve_install_target_uses_existing_executable(tmp_path: Path) -> None
         assert toolkit.resolve_install_target() == executable.resolve()
 
 
-def test_resolve_install_target_uses_posix_fallback_on_path() -> None:
+def test_resolve_install_target_uses_posix_fallback_on_path(tmp_path: Path) -> None:
+    install_directory = tmp_path / ".local" / "bin"
     with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
-        toolkit.Path, "home", return_value=Path("/home/user")
-    ), patch.dict("os.environ", {"PATH": "/home/user/.local/bin:/usr/bin"}):
-        assert toolkit.resolve_install_target() == Path(
-            "/home/user/.local/bin/action-server"
-        )
+        toolkit.sys, "platform", "linux"
+    ), patch.object(toolkit.Path, "home", return_value=tmp_path), patch.dict(
+        "os.environ",
+        {"PATH": toolkit.os.pathsep.join((str(install_directory), str(tmp_path)))},
+    ):
+        assert toolkit.resolve_install_target() == install_directory / "action-server"
 
 
 def test_resolve_install_target_uses_windows_fallback_on_path() -> None:
@@ -255,13 +257,18 @@ def test_resolve_install_target_uses_windows_fallback_on_path() -> None:
         )
 
 
-def test_resolve_install_target_rejects_fallback_directory_not_on_path() -> None:
+def test_resolve_install_target_rejects_fallback_directory_not_on_path(
+    tmp_path: Path,
+) -> None:
+    install_directory = tmp_path / ".local" / "bin"
     with patch.object(toolkit.shutil, "which", return_value=None), patch.object(
-        toolkit.Path, "home", return_value=Path("/home/user")
-    ), patch.dict("os.environ", {"PATH": "/usr/bin"}):
+        toolkit.sys, "platform", "linux"
+    ), patch.object(toolkit.Path, "home", return_value=tmp_path), patch.dict(
+        "os.environ", {"PATH": str(tmp_path / "elsewhere")}
+    ):
         error = pytest.raises(SystemExit, toolkit.resolve_install_target)
 
-    assert "/home/user/.local/bin" in str(error.value)
+    assert str(install_directory) in str(error.value)
 
 
 def test_install_executable_atomically_replaces_target(tmp_path: Path) -> None:
@@ -274,7 +281,8 @@ def test_install_executable_atomically_replaces_target(tmp_path: Path) -> None:
     toolkit.install_executable(source, target)
 
     assert target.read_bytes() == b"new"
-    assert target.stat().st_mode & 0o111
+    if sys.platform != "win32":
+        assert target.stat().st_mode & 0o111
     assert list(tmp_path.glob(f".{target.name}.*")) == []
 
 
