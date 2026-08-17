@@ -96,6 +96,19 @@ def test_mcp_sse_does_not_starve_server_or_sigterm(
         if process.returncode is None:
             kill_process_and_subprocesses(process.pid)
             process.join()
+        for child_pid in child_pids:
+            if _is_live_process(child_pid):
+                kill_process_and_subprocesses(child_pid)
+        cleanup_deadline = time.monotonic() + 5
+        while (
+            any(_is_live_process(pid) for pid in child_pids)
+            and time.monotonic() < cleanup_deadline
+        ):
+            time.sleep(0.05)
+        surviving_child_pids = [pid for pid in child_pids if _is_live_process(pid)]
+        assert (
+            not surviving_child_pids
+        ), f"recorded child processes survived cleanup: {surviving_child_pids}"
 
 
 @pytest.mark.integration_test
