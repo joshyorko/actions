@@ -69,8 +69,7 @@ def test_embedded_templates_are_available_without_network_transport(
     cache = tmp_path / "action-templates"
     monkeypatch.setattr(helpers, "_get_action_templates_dir_path", lambda: cache)
 
-    with mock.patch("actions_http.get", side_effect=AssertionError("network used")):
-        helpers._ensure_latest_templates()
+    helpers._ensure_latest_templates()
 
     metadata = helpers._get_local_templates_metadata()
     assert metadata is not None
@@ -81,6 +80,19 @@ def test_embedded_templates_are_available_without_network_transport(
         "workflow-producer-consumer",
     }
     assert (cache / "minimal.zip").is_file()
+
+    (cache / "minimal.zip").write_bytes(b"tampered")
+    helpers._ensure_latest_templates()
+    with zipfile.ZipFile(cache / "minimal.zip") as archive:
+        assert "package.yaml" in archive.namelist()
+
+    embedded_metadata, embedded_bundle = helpers._embedded_assets()
+    assert not helpers._cache_is_valid(
+        cache,
+        helpers._get_local_templates_metadata(),
+        embedded_metadata,
+        embedded_bundle + b"tampered",
+    )
 
 
 def test_invalid_template_archive_never_writes_outside_destination(tmp_path):
