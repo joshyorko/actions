@@ -24,7 +24,7 @@ def test_manifest_defines_cross_platform_developer_tasks() -> None:
         "Docs",
         "CheckAll",
         "FrontendTest",
-        "BuildCommunity",
+        "InstallCommunity",
     }
     assert manifest["ignoreFiles"] == ["../.gitignore"]
     assert manifest["environmentConfigs"] == [
@@ -79,7 +79,9 @@ def test_ci_builds_and_launches_community_binary_on_linux() -> None:
     ).read_text()
 
     assert "- name: Build and verify community binary (Linux)" in workflow
-    assert "rcc run -r developer/toolkit.yaml --dev -t BuildCommunity" in workflow
+    assert "rcc run -r developer/toolkit.yaml --dev -t InstallCommunity" in workflow
+    assert "BuildCommunity" not in workflow
+    assert "build-community" not in workflow
 
 
 def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
@@ -116,7 +118,7 @@ def test_dispatcher_resolves_repository_root() -> None:
         "docs",
         "check-all",
         "frontend-test",
-        "build-community",
+        "install-community",
     }
 
 
@@ -182,10 +184,13 @@ def test_run_puts_package_virtualenv_first_on_path(tmp_path: Path) -> None:
     )
 
 
-def test_build_community_uses_public_invoke_contract() -> None:
+def test_install_community_builds_installs_and_verifies() -> None:
     executable = "action-server.exe" if toolkit.sys.platform == "win32" else "action-server"
-    with patch.object(toolkit, "poetry") as poetry, patch.object(toolkit, "run") as run:
-        toolkit.build_community()
+    target = Path("/custom/bin") / executable
+    with patch.object(toolkit, "poetry") as poetry, patch.object(toolkit, "run") as run, patch.object(
+        toolkit, "resolve_install_target", return_value=target
+    ) as resolve, patch.object(toolkit, "install_executable") as install:
+        toolkit.install_community()
 
     assert [call.args for call in poetry.call_args_list] == [
         ("action_server", "run", "invoke", "build-frontend"),
@@ -199,7 +204,7 @@ def test_build_community_uses_public_invoke_contract() -> None:
             "community-local",
         ),
     ]
-    run.assert_called_once_with(
+    run.assert_any_call(
         [
             str(REPOSITORY_ROOT / "action_server" / "dist" / "final" / executable),
             "new",
@@ -207,6 +212,12 @@ def test_build_community_uses_public_invoke_contract() -> None:
         ],
         REPOSITORY_ROOT / "action_server",
     )
+    resolve.assert_called_once_with()
+    install.assert_called_once_with(
+        REPOSITORY_ROOT / "action_server" / "dist" / "final" / executable, target
+    )
+    assert run.call_args_list[-2].args == ([str(target), "version"],)
+    assert run.call_args_list[-1].args == ([str(target), "new", "--help"],)
 
 
 def test_resolve_install_target_uses_existing_executable() -> None:

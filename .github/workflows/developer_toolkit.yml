@@ -94,4 +94,4 @@ jobs:
         shell: bash
         env:
           ROBOCORP_HOME: ${{ runner.temp }}/robocorp
-        run: rcc run -r developer/toolkit.yaml --dev -t BuildCommunity
+        run: rcc run -r developer/toolkit.yaml --dev -t InstallCommunity

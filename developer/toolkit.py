@@ -208,7 +208,7 @@ def frontend_test() -> None:
     run(["npm", "run", "test"], REPOSITORY_ROOT / "action_server" / "frontend")
 
 
-def build_community() -> None:
+def install_community() -> None:
     # ``build-frontend`` is the community build in the public Action Server
     # task contract; it has no tier option. Keep this wiring explicit so an
     # Invoke CLI option drift is caught by the dispatcher contract test.
@@ -232,6 +232,10 @@ def build_community() -> None:
         ],
         action_server_root,
     )
+    target = resolve_install_target()
+    install_executable(action_server_root / "dist" / "final" / executable, target)
+    run([str(target), "version"])
+    run([str(target), "new", "--help"])
 
 
 COMMANDS = {
@@ -244,7 +248,7 @@ COMMANDS = {
     "docs": docs,
     "check-all": check_all,
     "frontend-test": frontend_test,
-    "build-community": build_community,
+    "install-community": install_community,
 }
 
 

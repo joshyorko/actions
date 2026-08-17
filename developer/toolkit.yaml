@@ -26,8 +26,8 @@ devTasks:
     shell: python toolkit.py check-all
   FrontendTest:
     shell: python toolkit.py frontend-test
-  BuildCommunity:
-    shell: python toolkit.py build-community
+  InstallCommunity:
+    shell: python toolkit.py install-community
 
 environmentConfigs:
   - setup_windows_amd64.yaml
