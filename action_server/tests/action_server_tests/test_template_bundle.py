@@ -54,20 +54,22 @@ def test_template_bundle_generation_is_byte_for_byte_deterministic(tmp_path):
 def test_embedded_metadata_covers_all_production_templates():
     assert (EMBEDDED / "action-templates.zip").is_file()
     metadata = yaml.safe_load((EMBEDDED / "action-templates.yaml").read_text())
-    expected = {
-        template["id"]
-        for template in json.loads(CONFIG.read_text())["templates"]
-    }
+    expected = {"advanced", "basic", "minimal", "workflow-producer-consumer"}
+    assert {
+        template["id"] for template in json.loads(CONFIG.read_text())["templates"]
+    } == expected
     assert set(metadata["templates"]) == expected
 
 
-def test_network_failure_keeps_embedded_templates_available(monkeypatch, tmp_path):
+def test_embedded_templates_are_available_without_network_transport(
+    monkeypatch, tmp_path
+):
     from actions.server import _new_project_helpers as helpers
 
     cache = tmp_path / "action-templates"
     monkeypatch.setattr(helpers, "_get_action_templates_dir_path", lambda: cache)
 
-    with mock.patch("actions_http.get", side_effect=OSError("offline")):
+    with mock.patch("actions_http.get", side_effect=AssertionError("network used")):
         helpers._ensure_latest_templates()
 
     metadata = helpers._get_local_templates_metadata()
