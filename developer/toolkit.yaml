@@ -30,6 +30,7 @@ devTasks:
     shell: python toolkit.py build-community
 
 environmentConfigs:
+  - setup_windows_amd64.yaml
   - setup.yaml
 
 artifactsDir: tmp

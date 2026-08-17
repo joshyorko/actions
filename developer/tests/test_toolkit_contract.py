@@ -26,7 +26,31 @@ def test_manifest_defines_cross_platform_developer_tasks() -> None:
         "BuildCommunity",
     }
     assert manifest["ignoreFiles"] == ["../.gitignore"]
-    assert manifest["environmentConfigs"] == ["setup.yaml"]
+    assert manifest["environmentConfigs"] == [
+        "setup_windows_amd64.yaml",
+        "setup.yaml",
+    ]
+
+
+def test_windows_toolchain_uses_available_jq_distribution() -> None:
+    windows_setup = yaml.safe_load(
+        (TOOLKIT_ROOT / "setup_windows_amd64.yaml").read_text()
+    )
+    generic_setup = yaml.safe_load((TOOLKIT_ROOT / "setup.yaml").read_text())
+
+    assert windows_setup["channels"] == generic_setup["channels"]
+    assert windows_setup["dependencies"] == [
+        "m2w64-jq=1.6" if dependency == "jq=1.7.1" else dependency
+        for dependency in generic_setup["dependencies"]
+    ]
+
+
+def test_toolkit_workflow_cache_tracks_all_environment_configs() -> None:
+    workflow = (
+        REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+    ).read_text()
+
+    assert "'developer/setup_windows_amd64.yaml'" in workflow
 
 
 def test_rcc_toolchain_includes_external_test_utilities() -> None:

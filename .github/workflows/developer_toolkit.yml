@@ -27,7 +27,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/robocorp
-          key: rcc-${{ runner.os }}-${{ runner.arch }}-v18.18.1-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml') }}
+          key: rcc-${{ runner.os }}-${{ runner.arch }}-v18.18.1-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml', 'developer/setup_windows_amd64.yaml') }}
       - name: Install pinned RCC
         shell: bash
         env:

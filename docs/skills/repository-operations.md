@@ -390,7 +390,11 @@ instead of exercising their documented `./output` default. `ToolkitTest` runs Ru
 pytest against the gateway itself; the full `Test` task runs it first and also covers
 `devutils`, whose package does not provide an Invoke task collection. The RCC toolchain
 includes pinned `jq` because the devutils workflow-contract suite executes its admission
-filters. `Typecheck` runs only package-declared typecheck gates; `devutils` has no such gate
+filters. The generic environment pins `jq=1.7.1`; Windows amd64 selects the preceding
+`setup_windows_amd64.yaml` through RCC's OS/architecture filename matching and uses
+conda-forge's Windows-native `m2w64-jq=1.6`. Keep every platform-specific environment
+configuration in the workflow's RCC holotree cache hash so dependency changes invalidate
+the matching runner cache. `Typecheck` runs only package-declared typecheck gates; `devutils` has no such gate
 and is not assigned an invented strict-Mypy contract.
 
 The portable Action Server source-tree test gate is its declared `test-not-integration`
