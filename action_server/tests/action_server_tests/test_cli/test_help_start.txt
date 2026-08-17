@@ -1,5 +1,5 @@
 usage: action-server start [-h] [-a ADDRESS] [-p PORT] [--expose]
-                           [--server-url SERVER_URL] [--expose-allow-reuse]
+                           [--server-url SERVER_URL]
                            [--expose-provider {auto,localhost.run,bore,cloudflare}]
                            [--api-key API_KEY] [--actions-sync ACTIONS_SYNC]
                            [--dir PATH] [--skip-lint]
@@ -24,7 +24,6 @@ options:
   --server-url SERVER_URL
                         Explicit server url to be defined in the OpenAPI spec
                         'servers' section. Defaults to the localhost url.
-  --expose-allow-reuse  Always answer yes to expose reuse confirmation
   --expose-provider {auto,localhost.run,bore,cloudflare}
                         Tunnel provider for --expose. Options: auto (try all),
                         localhost.run (SSH-based), bore (Rust binary),

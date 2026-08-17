@@ -1,8 +1,5 @@
 """
-Unit tests for TreeShaker import detection and Vite configuration.
-
-Tests the tree-shaking functionality for detecting and excluding enterprise
-imports in community builds.
+Unit tests for removed-product import detection.
 """
 
 from pathlib import Path
@@ -11,12 +8,10 @@ import pytest
 
 # Import will fail until implementation exists (TDD)
 try:
-    from tier_selector import COMMUNITY, ENTERPRISE
     from tree_shaker import (
         ImportViolation,
         TreeShaker,
-        detect_enterprise_imports,
-        generate_vite_external_config,
+        detect_removed_product_imports,
         scan_imports,
     )
 except ImportError:
@@ -143,9 +138,7 @@ import { Chart } from '@/enterprise/components/Chart';  // ALLOWED
             '"@sema4ai/components"\n', encoding="utf-8"
         )
 
-        violations = TreeShaker(tier=COMMUNITY, root_dir=tmp_path).scan_directory(
-            dist_dir
-        )
+        violations = TreeShaker(root_dir=tmp_path).scan_directory(dist_dir)
 
         assert [violation.prohibited_module for violation in violations] == [
             "@sema4ai/components"
@@ -159,12 +152,12 @@ import { Chart } from '@/enterprise/components/Chart';  // ALLOWED
         (dist_dir / "index.js.map").write_text("@sema4ai/components", encoding="utf-8")
 
         assert (
-            TreeShaker(tier=COMMUNITY, root_dir=tmp_path).scan_directory(dist_dir) == []
+            TreeShaker(root_dir=tmp_path).scan_directory(dist_dir) == []
         )
 
 
-class TestDetectEnterpriseImports:
-    """Test detect_enterprise_imports() for built bundle scanning."""
+class TestDetectRemovedProductImports:
+    """Test built-bundle removed-product scanning."""
 
     def test_detect_sema4ai_import_in_bundle(self, tmp_path):
         """Test detecting @sema4ai imports in built JS bundle."""
@@ -180,7 +173,7 @@ class TestDetectEnterpriseImports:
         )
 
         # Act
-        violations = detect_enterprise_imports(bundle_file)
+        violations = detect_removed_product_imports(bundle_file)
 
         # Assert
         assert len(violations) > 0
@@ -197,7 +190,7 @@ import { KBSearch } from '@/enterprise/pages/KnowledgeBase';
         )
 
         # Act
-        violations = detect_enterprise_imports(bundle_file)
+        violations = detect_removed_product_imports(bundle_file)
 
         # Assert
         assert len(violations) > 0
@@ -218,7 +211,7 @@ import { KBSearch } from '@/enterprise/pages/KnowledgeBase';
         )
 
         # Act
-        violations = detect_enterprise_imports(bundle_file)
+        violations = detect_removed_product_imports(bundle_file)
 
         # Assert
         assert len(violations) == 0
@@ -232,59 +225,10 @@ import { KBSearch } from '@/enterprise/pages/KnowledgeBase';
         )
 
         # Act
-        violations = detect_enterprise_imports(bundle_file)
+        violations = detect_removed_product_imports(bundle_file)
 
         # Assert
         assert len(violations) > 0
-
-
-class TestGenerateViteExternalConfig:
-    """Test generate_vite_external_config() for Vite tree-shaking."""
-
-    def test_community_tier_excludes_enterprise_modules(self):
-        """Test community tier config excludes enterprise modules."""
-        # Act
-        config = generate_vite_external_config(COMMUNITY)
-
-        # Assert
-        assert "rollupOptions" in config
-        assert "external" in config["rollupOptions"]
-
-        external = config["rollupOptions"]["external"]
-        # Should be a regex pattern or list of patterns
-        if isinstance(external, list):
-            assert any("@sema4ai" in str(pattern) for pattern in external)
-            assert any("@/enterprise" in str(pattern) for pattern in external)
-        else:
-            # Could be a regex pattern
-            assert "@sema4ai" in str(external) or "@/enterprise" in str(external)
-
-    def test_enterprise_tier_allows_all_modules(self):
-        """Test enterprise tier config doesn't exclude enterprise modules."""
-        # Act
-        config = generate_vite_external_config(ENTERPRISE)
-
-        # Assert
-        # Enterprise tier should not have restrictive external config
-        # or should be empty/minimal
-        if "rollupOptions" in config and "external" in config["rollupOptions"]:
-            external = config["rollupOptions"]["external"]
-            # Should not exclude enterprise modules
-            if isinstance(external, list):
-                assert not any("@sema4ai" in str(pattern) for pattern in external)
-            else:
-                assert "@sema4ai" not in str(external)
-
-    def test_config_includes_output_settings(self):
-        """Test config includes deterministic output settings."""
-        # Act
-        config = generate_vite_external_config(COMMUNITY)
-
-        # Assert - should include deterministic file naming
-        if "rollupOptions" in config and "output" in config["rollupOptions"]:
-            output = config["rollupOptions"]["output"]
-            # Deterministic naming (no random hashes)
-            assert "entryFileNames" in output or "chunkFileNames" in output
 
 
 class TestImportViolation:
@@ -401,7 +345,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
         )
 
         # Act
-        shaker = TreeShaker(tier=COMMUNITY, root_dir=tmp_path)
+        shaker = TreeShaker(root_dir=tmp_path)
         violations = shaker.scan_directory(core_dir)
 
         # Assert
@@ -421,7 +365,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
         ]
 
         # Act
-        shaker = TreeShaker(tier=COMMUNITY, root_dir=tmp_path)
+        shaker = TreeShaker(root_dir=tmp_path)
         report = shaker.generate_report(violations)
 
         # Assert
@@ -435,7 +379,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
         bundle = dist_dir / "index.js"
         bundle.write_text("import '@sema4ai/theme';")
 
-        shaker = TreeShaker(tier=COMMUNITY, root_dir=tmp_path)
+        shaker = TreeShaker(root_dir=tmp_path)
 
         violations = shaker.scan_directory(dist_dir)
 
@@ -443,7 +387,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
             "@sema4ai/theme"
         ]
 
-    def test_detect_enterprise_imports_does_not_swallow_read_errors(
+    def test_detect_removed_product_imports_does_not_swallow_read_errors(
         self, tmp_path, monkeypatch
     ):
         bundle = tmp_path / "index.js"
@@ -455,7 +399,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
         monkeypatch.setattr("builtins.open", fail_read)
 
         with pytest.raises(PermissionError, match="permission denied"):
-            detect_enterprise_imports(bundle)
+            detect_removed_product_imports(bundle)
 
     def test_scan_directory_does_not_swallow_read_errors(self, tmp_path, monkeypatch):
         dist_dir = tmp_path / "dist"
@@ -473,7 +417,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
             return original_open(path, *args, **kwargs)
 
         monkeypatch.setattr(builtins, "open", fail_for_bundle)
-        shaker = TreeShaker(tier=COMMUNITY, root_dir=tmp_path)
+        shaker = TreeShaker(root_dir=tmp_path)
 
         with pytest.raises(PermissionError, match="permission denied"):
             shaker.scan_directory(dist_dir)

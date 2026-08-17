@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
-from typing import Optional, Union
+from typing import Optional
 
 
 class ArtifactType(str, Enum):
@@ -25,7 +25,6 @@ class BuildArtifact:
     """Represents a build artifact with its properties."""
     
     artifact_type: ArtifactType
-    tier: Union[str, object]
     platform: Optional[str]
     file_path: Path
     sha256: Optional[str] = None
@@ -56,7 +55,6 @@ class BuildArtifact:
     def create(
         cls,
         artifact_type: ArtifactType,
-        tier,
         file_path: Path,
         platform: Optional[str] = None,
         build_timestamp: Optional[datetime] = None,
@@ -68,7 +66,6 @@ class BuildArtifact:
         
         Args:
             artifact_type: Type of artifact
-            tier: Build tier (BuildTier object or string)
             file_path: Path to artifact file
             platform: Platform name for executables
             build_timestamp: Timestamp of build (defaults to now)
@@ -122,7 +119,6 @@ class BuildArtifact:
         
         return cls(
             artifact_type=artifact_type,
-            tier=tier,
             platform=platform,
             file_path=file_path,
             sha256=sha256,
@@ -139,14 +135,8 @@ class BuildArtifact:
         Returns:
             Metadata dictionary
         """
-        # Get tier name
-        tier_name = self.tier
-        if hasattr(self.tier, 'name'):
-            tier_name = self.tier.name.value if hasattr(self.tier.name, 'value') else str(self.tier.name)
-        
         metadata = {
             "artifact_type": self.artifact_type.value,
-            "tier": tier_name,
             "file_path": str(self.file_path),
             "sha256": self.sha256,
             "size_bytes": self.file_size,  # Use "size_bytes" for API compatibility
@@ -208,7 +198,6 @@ class BuildArtifact:
 
 def generate_artifact_name(
     artifact_type: ArtifactType,
-    tier,
     platform: Optional[str] = None,
     commit: Optional[str] = None,
     git_commit: Optional[str] = None,  # Accept both names for compatibility
@@ -217,7 +206,6 @@ def generate_artifact_name(
     
     Args:
         artifact_type: Type of artifact to name
-        tier: Build tier (BuildTier object or string "community"/"enterprise")
         platform: Platform name for executables (ubuntu, macos, windows)
         commit: Git commit SHA for executables (deprecated, use git_commit)
         git_commit: Git commit SHA for executables
@@ -225,24 +213,19 @@ def generate_artifact_name(
     Returns:
         Artifact name string
     """
-    # Get tier name
-    tier_name = tier
-    if hasattr(tier, 'name'):
-        tier_name = tier.name.value if hasattr(tier.name, 'value') else str(tier.name)
-    
     # Use git_commit or commit (for backwards compatibility)
     commit_sha = git_commit or commit
     
     if artifact_type in (ArtifactType.FRONTEND, ArtifactType.FRONTEND_BUNDLE):
-        return f"frontend-dist-{tier_name}.tar.gz"
+        return "frontend-dist.tar.gz"
     elif artifact_type == ArtifactType.EXECUTABLE:
         if not platform or not commit_sha:
             raise ValueError("Executable artifacts require platform and git_commit")
         if len(commit_sha) != 7:
             raise ValueError("Executable artifact git_commit must contain 7 characters")
-        return f"action-server-{tier_name}-{platform}-{commit_sha}.zip"
+        return f"action-server-{platform}-{commit_sha}.zip"
     elif artifact_type == ArtifactType.METADATA:
-        return f"artifact-metadata-{tier_name}.json"
+        return "artifact-metadata.json"
     else:
         raise ValueError(f"Unknown artifact type: {artifact_type}")
 
@@ -252,23 +235,13 @@ def validate_artifact_name(name: str, artifact_type: ArtifactType) -> bool:
     import re
 
     patterns = {
-        ArtifactType.FRONTEND: r"frontend-dist-(community|enterprise)\.tar\.gz",
+        ArtifactType.FRONTEND: r"frontend-dist\.tar\.gz",
         ArtifactType.EXECUTABLE: (
-            r"action-server-(community|enterprise)-(linux|macos|windows)-[^.]{7}\.zip"
+            r"action-server-(linux|macos|windows)-[^.]{7}\.zip"
         ),
     }
     pattern = patterns.get(artifact_type)
     return pattern is not None and re.fullmatch(pattern, name) is not None
-
-
-def extract_tier_from_name(name: str) -> str:
-    """Extract a validated artifact tier."""
-    import re
-
-    match = re.search(r"(?:frontend-dist|action-server)-(community|enterprise)", name)
-    if not match:
-        raise ValueError(f"Invalid artifact name: {name}")
-    return match.group(1)
 
 
 def extract_platform_from_name(name: str) -> str:
@@ -276,7 +249,7 @@ def extract_platform_from_name(name: str) -> str:
     import re
 
     match = re.fullmatch(
-        r"action-server-(?:community|enterprise)-(linux|macos|windows)-[^.]{7}\.zip",
+        r"action-server-(linux|macos|windows)-[^.]{7}\.zip",
         name,
     )
     if not match:
@@ -289,7 +262,7 @@ def extract_commit_from_name(name: str) -> str:
     import re
 
     match = re.fullmatch(
-        r"action-server-(?:community|enterprise)-(?:linux|macos|windows)-([^.]{7})\.zip",
+        r"action-server-(?:linux|macos|windows)-([^.]{7})\.zip",
         name,
     )
     if not match:

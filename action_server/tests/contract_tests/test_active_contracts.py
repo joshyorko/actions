@@ -35,6 +35,7 @@ FORBIDDEN_ACTIVE_CONTRACTS = (
     "mode: sema4ai",
     "/sema4ai/oauth2",
     "sema4ai.link",
+    "actions.link",
     "src/sema4ai",
 )
 

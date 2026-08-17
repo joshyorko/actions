@@ -43,7 +43,7 @@ def test_runtime_and_canvas_artifact_contracts_are_explicit():
 
 def test_integrity_contract_is_actions_owned_and_offline():
     integrity = (
-        ROOT / "tests" / "action_server_tests" / "test_vendored_integrity.py"
+        ROOT / "tests" / "action_server_tests" / "test_frontend_integrity.py"
     ).read_text()
 
     assert "package.json" in integrity

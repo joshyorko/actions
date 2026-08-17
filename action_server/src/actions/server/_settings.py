@@ -68,43 +68,6 @@ def is_frozen():
     return False
 
 
-def is_community_build() -> bool:
-    """
-    Check if this is a community build.
-
-    Community builds use open-source tunnel providers (localhost.run, bore, cloudflare).
-    Enterprise builds use the proprietary actions.link service.
-
-    Detection is based on:
-    1. ACTIONS_BUILD_TIER environment variable (if set)
-    2. Presence of enterprise-specific markers in the frozen binary
-    3. Default to community if running from source
-    """
-    # Check environment variable first
-    tier = os.environ.get("ACTIONS_BUILD_TIER", "").lower()
-    if tier == "enterprise":
-        return False
-    if tier == "community":
-        return True
-
-    # When running from source, default to community
-    if not is_frozen():
-        return True
-
-    # For frozen builds, check for enterprise marker
-    # Enterprise builds will have a specific marker file or module
-    try:
-        # Try to import enterprise-specific module
-        import actions.server._enterprise_marker  # type: ignore # noqa: F401
-
-        return False
-    except ImportError:
-        pass
-
-    # Default to community for frozen builds without marker
-    return True
-
-
 def get_python_exe_from_env(env):
     python = env.get("PYTHON_EXE")
     if not python:
@@ -261,8 +224,7 @@ class Settings:
     port: int = 8080
     verbose: bool = False
     db_file: str = "server.db"
-    expose_url: str = "actions.link"
-    expose_provider: str = "auto"  # 'auto', 'localhost.run', 'bore', 'cloudflare', 'actions' (enterprise only)
+    expose_provider: str = "auto"
     server_url: str = "<generated -- i.e.: http://localhost:8080>"
 
     min_processes: int = 2

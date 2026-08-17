@@ -377,11 +377,7 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
             "uses": "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
             if pinned
             else "actions/setup-node@v4",
-            "with": {
-                "node-version": "20.x",
-                "registry-url": "https://npm.pkg.github.com",
-                "scope": "@robocorp",
-            },
+            "with": {"node-version": "20.x"},
         }
 
     def setup_go(self, pinned=False):
@@ -400,10 +396,7 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
         return {
             "name": "Build frontend",
             "run": f"{run_in_env}inv build-frontend",
-            "env": {
-                "CI": True,
-                "NODE_AUTH_TOKEN": "${{ secrets.GH_PAT_READ_PACKAGES }}",
-            },
+            "env": {"CI": True},
         }
 
     def build_oauth2_config(self):

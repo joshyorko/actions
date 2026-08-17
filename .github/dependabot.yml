@@ -38,9 +38,6 @@ updates:
 - package-ecosystem: npm
   directories:
   - action_server/frontend
-  - action_server/frontend/vendored/components
-  - action_server/frontend/vendored/icons
-  - action_server/frontend/vendored/theme
   schedule:
     interval: daily
   open-pull-requests-limit: 0

@@ -2,8 +2,6 @@ import asyncio
 import logging
 import os
 import socket
-import subprocess
-import sys
 import typing
 from contextlib import asynccontextmanager
 from functools import partial
@@ -33,10 +31,8 @@ class _LoopHolder:
 def start_server(
     start_args: ArgumentsNamespaceStart,
     api_key: str | None,
-    expose_session: str | None,
     before_start: Sequence[IBeforeStartCallback],
 ) -> None:
-    import json
     import threading
     from dataclasses import asdict
     from functools import lru_cache
@@ -157,8 +153,6 @@ def start_server(
         """
         from actions.server import __version__
 
-        from ._server_expose import get_expose_session_payload, read_expose_session_json
-
         payload = {
             "expose_url": False,
             "auth_enabled": False,
@@ -170,21 +164,6 @@ def start_server(
         if api_key:
             payload["auth_enabled"] = True
 
-        if expose:
-            current_expose_session = read_expose_session_json(
-                datadir=str(settings.datadir)
-            )
-
-            expose_session_payload = (
-                get_expose_session_payload(current_expose_session.expose_session)
-                if current_expose_session
-                else None
-            )
-
-            if expose_session_payload:
-                payload[
-                    "expose_url"
-                ] = f"https://{expose_session_payload.sessionId}.{settings.expose_url}"
         return payload
 
     if start_args.auto_reload:
@@ -316,7 +295,6 @@ def start_server(
         if not callback(app):
             return
 
-    expose_subprocess = None
 
     def _get_currrent_host():
         port = settings.port if settings.port != 0 else None
@@ -337,53 +315,12 @@ def start_server(
         return (host, port)
 
     def expose_later(loop):
-        from actions.server._settings import is_community_build, is_frozen
-
-        nonlocal expose_subprocess
-
         if not server.started:
             loop.call_later(1 / 15.0, partial(expose_later, loop))
             return
 
-        (host, port) = _get_currrent_host()
-        url = f"{protocol}://{host}:{port}"
-
-        # Check if we should use community expose (open source tunnels)
-        if is_community_build() or settings.expose_provider != "actions":
-            # Use community expose with open source tunnel providers
-            asyncio.create_task(_start_community_expose(port, settings))
-            return
-
-        # Enterprise expose using actions.link
-        parent_pid = os.getpid()
-
-        if is_frozen():
-            # The executable is 'action-server.exe'.
-            args = [sys.executable]
-        else:
-            # The executable is 'python'.
-            args = [
-                sys.executable,
-                "-m",
-                "actions.server",
-            ]
-
-        args += [
-            "server-expose",
-            str(parent_pid),
-            url,
-            "" if not settings.verbose else "v",
-            settings.expose_url,
-            settings.datadir,
-            str(expose_session),
-            api_key,
-        ]
-        settings.use_https
-        env = os.environ.copy()
-        env["ACTIONS-SERVER-HTTPS-INFO"] = json.dumps(
-            {"use_https": settings.use_https, "ssl_certfile": settings.ssl_certfile}
-        )
-        expose_subprocess = subprocess.Popen(args, env=env)
+        (_, port) = _get_currrent_host()
+        asyncio.create_task(_start_community_expose(port, settings))
 
     # Community expose task holder
     community_tunnel_manager = None
@@ -487,12 +424,6 @@ def start_server(
         log.info("Stopping action server...")
         from actions.server._robo_utils.process import kill_process_and_subprocesses
 
-        expose_pid = None
-        if expose_subprocess is not None:
-            log.info("Shutting down expose subprocess: %s", expose_subprocess.pid)
-            expose_pid = expose_subprocess.pid
-            kill_process_and_subprocesses(expose_pid)
-
         p = psutil.Process(os.getpid())
         try:
             children_processes = list(p.children(recursive=True))
@@ -500,14 +431,13 @@ def start_server(
             log.exception("Error listing subprocesses.")
 
         for child in children_processes:
-            if child.pid != expose_pid:  # If it's still around, don't kill it again.
-                log.info(
-                    f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
-                )
-                try:
-                    kill_process_and_subprocesses(child.pid)
-                except Exception:
-                    log.exception("Error killing subprocess: %s", child.pid)
+            log.info(
+                f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
+            )
+            try:
+                kill_process_and_subprocesses(child.pid)
+            except Exception:
+                log.exception("Error killing subprocess: %s", child.pid)
 
     app.custom_lifespan.register(_expose_and_shutdown)
 
