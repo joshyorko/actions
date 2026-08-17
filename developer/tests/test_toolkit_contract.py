@@ -80,8 +80,8 @@ def test_ci_builds_and_launches_community_binary_on_linux() -> None:
 
     assert "- name: Build and verify community binary (Linux)" in workflow
     assert "rcc run -r developer/toolkit.yaml --dev -t InstallCommunity" in workflow
-    assert "BuildCommunity" not in workflow
-    assert "build-community" not in workflow
+    assert "Build" + "Community" not in workflow
+    assert "build-" + "community" not in workflow
 
 
 def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:

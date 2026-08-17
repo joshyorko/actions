@@ -30,10 +30,10 @@ This community edition builds entirely from source without any proprietary depen
 git clone https://github.com/joshyorko/actions.git
 cd actions
 
-# Build the action-server binary
-rcc run -r developer/toolkit.yaml --dev -t BuildCommunity
+# Build and install the action-server binary
+rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
 
-# The binary is at: action_server/dist/final/action-server
+# The built binary is installed at the current PATH-selected action-server target.
 ```
 
 </details>
@@ -278,11 +278,11 @@ The build output will be in `action_server/frontend/dist/`.
 ### Build the Full Binary
 
 ```sh
-# From repository root
-rcc run -r developer/toolkit.yaml --dev -t BuildCommunity
+# From repository root, build and install the binary
+rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
 
-# Binary location
-ls action_server/dist/final/action-server
+# Confirm the installed PATH target
+command -v action-server
 ```
 
 ### Why No Credentials Needed?

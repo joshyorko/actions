@@ -373,7 +373,7 @@ published `actions-core` package via `from actions ...`; do not name an action m
 The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
 macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's
 focused contracts, then use `Test`, `Lint`, `Typecheck`, `Docs`, `CheckAll`,
-`FrontendTest`, or `BuildCommunity` through
+`FrontendTest`, or `InstallCommunity` through
 `rcc run -r developer/toolkit.yaml --dev -t <Task>`. The Python dispatcher uses argument
 arrays and resolves the repository root independently of the caller's cwd, so it does not
 depend on Bash or Batch activation scripts. It removes host `VIRTUAL_ENV`,
@@ -455,14 +455,28 @@ remain visible.
 CI runs `Bootstrap`, verifies all five package `.venv` interpreters, reruns `ToolkitTest`
 to prove the RCC toolchain survived Bootstrap, and runs the full package `Test` smoke on
 Linux. All three runners run manifest diagnostics and `ToolkitTest`. The Linux runner
-also executes `BuildCommunity`: it invokes the public `build-frontend` task without a
+also executes `InstallCommunity`: it invokes the public `build-frontend` task without a
 tier option (community is its default), builds the Go-wrapped Action Server with the
-`community-local` asset version, and launches `dist/final/action-server new --help`. Developer
-builds must retain a version containing the word `local`: the Go wrapper then replaces a
-same-version extraction whose embedded hash differs. A release-style version reuses the
-old extraction after warning, so it can make a newly built wrapper launch stale code. A
-successful file-producing build without the final startup check is not a passing community
-binary gate.
+`community-local` asset version, and runs the source binary's
+`dist/final/action-server new --help` smoke check before installation. It then resolves
+the installed target from the current `PATH`'s `action-server` entry. If none exists, it
+uses `~/.local/bin/action-server` on POSIX or
+`%LOCALAPPDATA%/Programs/Actions/bin/action-server.exe` on Windows, but only when that
+fallback directory is already on `PATH`; Windows also requires `LOCALAPPDATA`. The task
+does not create directories or elevate privileges. It copies the built executable to a
+temporary sibling and atomically replaces the resolved target, so replacement failure
+leaves the prior target intact. The installed-target smoke checks are
+`action-server version` and `action-server new --help`; a successful file-producing build
+without the source and installed startup checks is not a passing community installation
+gate. Developer builds must retain a version containing the word `local`: the Go wrapper
+then replaces a same-version extraction whose embedded hash differs. A release-style
+version reuses the old extraction after warning, so it can make a newly built wrapper
+launch stale code.
+
+Before reinstalling or restarting Action Server, inspect the process table and listening
+sockets. A deleted controlling PTY together with dead or zombie preload workers, sustained
+CPU, listening sockets, and HTTP timeouts is an orphaned broken process: terminate it
+before reinstalling or restarting. Installation does not repair that lifecycle failure.
 
 Action Server is a `pkgutil` extension beneath the `actions-core` package. PyInstaller's
 module graph does not discover that in-tree extension from normal search paths alone; the
