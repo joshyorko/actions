@@ -1,4 +1,6 @@
 import json
+import hashlib
+import io
 import subprocess
 import sys
 import zipfile
@@ -112,3 +114,23 @@ def test_invalid_template_archive_never_writes_outside_destination(tmp_path):
             helpers._unpack_template("minimal", destination)
 
     assert not (tmp_path / "outside.py").exists()
+
+
+def test_duplicate_bundle_member_is_rejected(tmp_path):
+    from actions.server import _new_project_helpers as helpers
+
+    metadata, embedded_bundle = helpers._embedded_assets()
+    duplicate_bundle = io.BytesIO()
+    with zipfile.ZipFile(io.BytesIO(embedded_bundle)) as source, zipfile.ZipFile(
+        duplicate_bundle, "w"
+    ) as destination:
+        for member in source.infolist():
+            destination.writestr(member, source.read(member))
+        with pytest.warns(UserWarning, match="Duplicate name"):
+            destination.writestr("minimal.zip", source.read("minimal.zip"))
+
+    bundle = duplicate_bundle.getvalue()
+    duplicate_metadata = metadata.model_copy(
+        update={"hash": hashlib.sha256(bundle).hexdigest()}
+    )
+    assert not helpers._install_bundle(tmp_path, duplicate_metadata, bundle)

@@ -51,8 +51,11 @@ def _install_bundle(
     try:
         with zipfile.ZipFile(io.BytesIO(bundle)) as archive:
             members = archive.infolist()
+            member_names = [member.filename for member in members]
+            if len(member_names) != len(set(member_names)):
+                return False
             expected = {f"{template.name}.zip" for template in metadata.templates}
-            if {member.filename for member in members} != expected:
+            if set(member_names) != expected:
                 return False
             if any(not _safe_zip_member(member) for member in members):
                 return False
@@ -62,7 +65,11 @@ def _install_bundle(
             }
         for name, content in extracted.items():
             with zipfile.ZipFile(io.BytesIO(content)) as template_archive:
-                if any(not _safe_zip_member(member) for member in template_archive.infolist()):
+                template_members = template_archive.infolist()
+                template_names = [member.filename for member in template_members]
+                if len(template_names) != len(set(template_names)):
+                    return False
+                if any(not _safe_zip_member(member) for member in template_members):
                     return False
             _write_atomic(action_templates_dir / f"{name}.zip", content)
         _write_atomic(_get_action_templates_metadata_path(), _metadata_bytes(metadata))
