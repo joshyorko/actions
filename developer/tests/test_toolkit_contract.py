@@ -220,15 +220,14 @@ def test_install_community_builds_installs_and_verifies() -> None:
     assert run.call_args_list[-1].args == ([str(target), "new", "--help"],)
 
 
-def test_resolve_install_target_uses_existing_executable() -> None:
+def test_resolve_install_target_uses_existing_executable(tmp_path: Path) -> None:
+    executable = tmp_path / "action-server"
     with patch.object(
         toolkit.shutil,
         "which",
-        return_value="/home/linuxbrew/.linuxbrew/bin/action-server",
+        return_value=str(executable),
     ):
-        assert toolkit.resolve_install_target() == Path(
-            "/home/linuxbrew/.linuxbrew/bin/action-server"
-        )
+        assert toolkit.resolve_install_target() == executable.resolve()
 
 
 def test_resolve_install_target_uses_posix_fallback_on_path() -> None:
