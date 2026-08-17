@@ -1,9 +1,6 @@
 import logging
 
-from actions.server._protocols import (
-    ArgumentsNamespace,
-    ArgumentsNamespaceDevEnvTask,
-)
+from actions.server._protocols import ArgumentsNamespace, ArgumentsNamespaceDevEnvTask
 
 log = logging.getLogger(__name__)
 

@@ -1,0 +1,97 @@
+name: RCC developer toolkit
+
+on:
+  pull_request:
+  push:
+    branches: [community]
+
+jobs:
+  toolkit:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            asset: rcc-linux64
+            sha256: ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf
+          - os: macos-15
+            asset: rcc-macosarm64
+            sha256: 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d
+          - os: windows-2022
+            asset: rcc-windows64.exe
+            sha256: 705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache RCC holotree
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/robocorp
+          key: rcc-${{ runner.os }}-${{ runner.arch }}-v18.18.1-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml', 'developer/setup_windows_amd64.yaml') }}
+      - name: Install pinned RCC
+        shell: bash
+        env:
+          RCC_VERSION: 18.18.1
+          RCC_ASSET: ${{ matrix.asset }}
+          RCC_SHA256: ${{ matrix.sha256 }}
+        run: |
+          set -Eeuo pipefail
+          curl --fail --location --silent --show-error \
+            "https://github.com/joshyorko/rcc/releases/download/v${RCC_VERSION}/${RCC_ASSET}" \
+            --output rcc.download
+          if command -v sha256sum >/dev/null 2>&1; then
+            printf '%s  %s\n' "${RCC_SHA256}" rcc.download | sha256sum --check --status -
+          else
+            printf '%s  %s\n' "${RCC_SHA256}" rcc.download | shasum -a 256 --check --status -
+          fi
+          if [[ "${RCC_ASSET}" == *.exe ]]; then
+            mv rcc.download rcc.exe
+          else
+            mv rcc.download rcc
+            chmod +x rcc
+          fi
+          echo "$PWD" >> "$GITHUB_PATH"
+      - name: Validate RCC manifest
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+        run: rcc robot diagnostics -r developer/toolkit.yaml --json
+      - name: Run toolkit doctor
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+        run: rcc run -r developer/toolkit.yaml --dev -t Doctor
+      - name: Run toolkit contract tests
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+        run: rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
+      - name: Bootstrap toolkit (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+        run: rcc run -r developer/toolkit.yaml --dev -t Bootstrap
+      - name: Verify isolated package environments (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+        run: |
+          set -Eeuo pipefail
+          for package in actions actions-http-helper devutils work-items action_server; do
+            test -x "${package}/.venv/bin/python"
+          done
+          rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
+      - name: Package task smoke (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+        run: rcc run -r developer/toolkit.yaml --dev -t Test
+      - name: Build and verify community binary (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+        run: rcc run -r developer/toolkit.yaml --dev -t InstallCommunity

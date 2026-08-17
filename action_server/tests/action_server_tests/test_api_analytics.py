@@ -14,13 +14,7 @@ from actions.server._api_analytics import (
     get_runs_by_action,
     get_runs_by_day,
 )
-from actions.server._models import (
-    Action,
-    ActionPackage,
-    Run,
-    RunStatus,
-    create_db,
-)
+from actions.server._models import Action, ActionPackage, Run, RunStatus, create_db
 
 
 @pytest.fixture

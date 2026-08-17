@@ -56,8 +56,8 @@ def collect_package_metadata(package_dir: Path, datadir: str) -> str | int:
 
     Returns: Either the package metadata to be printed or an error code.
     """
-    from fastapi.applications import FastAPI
     from actions._protocols import ActionsListActionTypedDict
+    from fastapi.applications import FastAPI
 
     from actions.server._actions_import import hook_on_actions_list
     from actions.server._cli_impl import _main_retcode

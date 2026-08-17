@@ -204,7 +204,7 @@ def test_import_action_server_strategies(
     action_server_datadir: Path,
     strategy: str,
 ) -> None:
-    from action_server_tests.fixtures import get_in_resources, actions_server_run
+    from action_server_tests.fixtures import actions_server_run, get_in_resources
 
     from actions.server._models import Action, ActionPackage, load_db
 
@@ -354,7 +354,7 @@ def test_import_no_conda(
     action_server_datadir: Path,
     client: ActionServerClient,
 ) -> None:
-    from action_server_tests.fixtures import fix_openapi_json, actions_server_run
+    from action_server_tests.fixtures import actions_server_run, fix_openapi_json
 
     from actions.server._database import Database
     from actions.server._models import Action, load_db

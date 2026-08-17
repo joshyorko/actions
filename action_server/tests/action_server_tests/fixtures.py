@@ -181,11 +181,7 @@ def base_case(
     action_server_process: ActionServerProcess, tmpdir, temp_directory_session
 ) -> Iterator[CaseInfo]:
     from actions.server._database import Database
-    from actions.server._models import (
-        Action,
-        ActionPackage,
-        get_all_model_classes,
-    )
+    from actions.server._models import Action, ActionPackage, get_all_model_classes
 
     p = Path(str(tmpdir)) / ".sema4ai-test-action-server"
     p.mkdir(parents=True, exist_ok=True)

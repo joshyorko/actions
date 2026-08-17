@@ -12,9 +12,12 @@ import re
 import secrets
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 log = logging.getLogger(__name__)
+
+if TYPE_CHECKING:
+    from actions.server._models import Trigger
 
 
 class TriggerEngine:
@@ -53,12 +56,7 @@ class TriggerEngine:
         """
         from actions.server._database import datetime_to_str
         from actions.server._gen_ids import gen_uuid
-        from actions.server._models import (
-            Trigger,
-            TriggerInvocation,
-            TriggerInvocationStatus,
-            get_db,
-        )
+        from actions.server._models import Trigger, TriggerInvocationStatus, get_db
 
         now = datetime.now(timezone.utc)
         invocation_id = gen_uuid("trigger_invocation")
@@ -190,9 +188,7 @@ class TriggerEngine:
             if work_item_id:
                 result["work_item_id"] = work_item_id
 
-            log.info(
-                f"Trigger {trigger_id} ({trigger.name}) invoked successfully"
-            )
+            log.info(f"Trigger {trigger_id} ({trigger.name}) invoked successfully")
             return result
 
         except Exception as e:
@@ -296,12 +292,14 @@ class TriggerEngine:
         # Clean up old entries (keep last minute)
         minute_ago = now - timedelta(minutes=1)
         self._rate_limit_tracker[trigger.id] = [
-            ts for ts in self._rate_limit_tracker[trigger.id]
-            if ts > minute_ago
+            ts for ts in self._rate_limit_tracker[trigger.id] if ts > minute_ago
         ]
 
         # Check limit
-        if len(self._rate_limit_tracker[trigger.id]) >= trigger.rate_limit_max_per_minute:
+        if (
+            len(self._rate_limit_tracker[trigger.id])
+            >= trigger.rate_limit_max_per_minute
+        ):
             return False
 
         # Record this invocation
@@ -480,10 +478,7 @@ class TriggerEngine:
         inputs: Dict[str, Any],
     ) -> str:
         """Create an action run for a trigger."""
-        from actions.server._actions_run import (
-            _create_run,
-            _create_run_artifacts_dir,
-        )
+        from actions.server._actions_run import _create_run, _create_run_artifacts_dir
         from actions.server._gen_ids import gen_uuid
         from actions.server._models import Action, get_db
 
@@ -509,7 +504,7 @@ class TriggerEngine:
         relative_artifacts_dir = _create_run_artifacts_dir(action, run_id)
 
         with db.connect():
-            run = _create_run(
+            _create_run(
                 action=action,
                 run_id=run_id,
                 inputs=inputs,
@@ -517,9 +512,7 @@ class TriggerEngine:
                 request_id=f"trigger:{trigger.id}",
             )
 
-        log.info(
-            f"Trigger {trigger.id}: created run {run_id} for action {action.name}"
-        )
+        log.info(f"Trigger {trigger.id}: created run {run_id} for action {action.name}")
 
         return run_id
 
@@ -577,9 +570,7 @@ class TriggerEngine:
             )
             return None
         except Exception as e:
-            log.error(
-                f"Trigger {trigger.id}: failed to create work item: {e}"
-            )
+            log.error(f"Trigger {trigger.id}: failed to create work item: {e}")
             return None
 
     def generate_webhook_secret(self, length: int = 32) -> str:

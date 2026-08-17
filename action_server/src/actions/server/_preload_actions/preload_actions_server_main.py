@@ -257,9 +257,7 @@ class MessagesHandler:
     def _plugin_manager_kwargs(self, managed_parameters) -> Dict[str, Any]:
         try:
             # new
-            from actions._customization._extension_points import (
-                EPManagedParameters,
-            )
+            from actions._customization._extension_points import EPManagedParameters
             from actions._customization._plugin_manager import PluginManager
             from actions._managed_parameters import ManagedParameters
             from actions._request import Request

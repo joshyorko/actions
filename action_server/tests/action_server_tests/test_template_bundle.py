@@ -1,0 +1,100 @@
+import json
+import subprocess
+import sys
+import zipfile
+from pathlib import Path
+from unittest import mock
+
+import pytest
+import yaml
+
+
+REPO = Path(__file__).resolve().parents[3]
+PACKAGER = REPO / "templates/packaging/build_embedded_bundle.py"
+CONFIG = REPO / "templates/packaging/templates-prod.json"
+TEMPLATES = REPO / "templates"
+EMBEDDED = REPO / "action_server/src/actions/server/templates"
+
+
+def _run_packager(output_dir: Path) -> None:
+    subprocess.run(
+        [
+            sys.executable,
+            str(PACKAGER),
+            "--config",
+            str(CONFIG),
+            "--template-root",
+            str(TEMPLATES),
+            "--output-dir",
+            str(output_dir),
+        ],
+        check=True,
+    )
+
+
+def test_template_bundle_generation_is_byte_for_byte_deterministic(tmp_path):
+    assert PACKAGER.is_file(), "repository-owned template packager is missing"
+
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    _run_packager(first)
+    _run_packager(second)
+
+    first_files = sorted(path.relative_to(first) for path in first.rglob("*"))
+    second_files = sorted(path.relative_to(second) for path in second.rglob("*"))
+    assert first_files == second_files
+    assert first_files
+    assert all(
+        (first / relative).read_bytes() == (second / relative).read_bytes()
+        for relative in first_files
+        if (first / relative).is_file()
+    )
+
+
+def test_embedded_metadata_covers_all_production_templates():
+    assert (EMBEDDED / "action-templates.zip").is_file()
+    metadata = yaml.safe_load((EMBEDDED / "action-templates.yaml").read_text())
+    expected = {
+        template["id"]
+        for template in json.loads(CONFIG.read_text())["templates"]
+    }
+    assert set(metadata["templates"]) == expected
+
+
+def test_network_failure_keeps_embedded_templates_available(monkeypatch, tmp_path):
+    from actions.server import _new_project_helpers as helpers
+
+    cache = tmp_path / "action-templates"
+    monkeypatch.setattr(helpers, "_get_action_templates_dir_path", lambda: cache)
+
+    with mock.patch("actions_http.get", side_effect=OSError("offline")):
+        helpers._ensure_latest_templates()
+
+    metadata = helpers._get_local_templates_metadata()
+    assert metadata is not None
+    assert {template.name for template in metadata.templates} == {
+        "advanced",
+        "basic",
+        "minimal",
+        "workflow-producer-consumer",
+    }
+    assert (cache / "minimal.zip").is_file()
+
+
+def test_invalid_template_archive_never_writes_outside_destination(tmp_path):
+    from actions.server import _new_project_helpers as helpers
+
+    cache = tmp_path / "cache"
+    cache.mkdir()
+    archive = cache / "minimal.zip"
+    with zipfile.ZipFile(archive, "w") as writer:
+        writer.writestr("../outside.py", "print('escape')")
+
+    destination = tmp_path / "project"
+    with pytest.raises((ValueError, RuntimeError)):
+        with mock.patch.object(
+            helpers, "_get_action_templates_dir_path", return_value=cache
+        ):
+            helpers._unpack_template("minimal", destination)
+
+    assert not (tmp_path / "outside.py").exists()

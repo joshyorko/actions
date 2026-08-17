@@ -2,9 +2,7 @@ import pytest
 
 
 def test_resource_template_matches():
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     setup = McpServerSetupHelper()
     assert setup._resource_template_matches(
@@ -32,10 +30,9 @@ def test_collect_and_call_resource():
     import json
 
     from action_server_tests.fixtures import run_async_in_new_thread
+
     from actions.server._models import Action
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     action = Action(
         id="123",
@@ -98,9 +95,7 @@ def test_collect_and_call_prompt():
     from action_server_tests.fixtures import run_async_in_new_thread
 
     from actions.server._models import Action
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     action = Action(
         id="123",
@@ -159,10 +154,9 @@ def test_preserves_declared_mcp_meta_on_tool_and_result():
     import json
 
     from action_server_tests.fixtures import run_async_in_new_thread
+
     from actions.server._models import Action
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     declared_meta = {"ui": {"resourceUri": "ui://action-canvas/v1/canvas.html"}}
     action = Action(
@@ -212,10 +206,9 @@ def test_preserves_declared_mcp_meta_on_resources_and_prompts():
     import json
 
     from action_server_tests.fixtures import run_async_in_new_thread
+
     from actions.server._models import Action
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     declared_meta = {"ui": {"resourceUri": "ui://action-canvas/v1/canvas.html"}}
     setup = McpServerSetupHelper()
@@ -283,9 +276,7 @@ def test_catalogs_are_sorted_and_revisioned_independently_of_registration_order(
     import json
 
     from actions.server._models import Action
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     first = McpServerSetupHelper()
     second = McpServerSetupHelper()
@@ -330,9 +321,7 @@ def test_catalog_revision_changes_when_surface_changes_and_reload_clears_cache()
     import json
 
     from actions.server._models import Action
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     helper = McpServerSetupHelper()
     action = Action(
@@ -442,9 +431,7 @@ def test_duplicate_catalog_keys_are_rejected_in_opposite_registration_orders(
 
 
 def test_catalog_revision_changes_for_schema_and_meta_changes():
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     def revision_for(input_schema, mcp_meta):
         helper = McpServerSetupHelper()
@@ -479,9 +466,7 @@ def test_catalog_revision_changes_for_schema_and_meta_changes():
 def test_large_catalog_revision_is_bounded():
     import time
 
-    from actions.server.mcp.setup_mcp_server_from_actions import (
-        McpServerSetupHelper,
-    )
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
     helper = McpServerSetupHelper()
     for index in range(1000):

@@ -9,10 +9,7 @@ from typing import Iterator
 
 import pytest
 
-from actions.server._actions_process_pool import (
-    ActionsProcessPool,
-    ProcessHandle,
-)
+from actions.server._actions_process_pool import ActionsProcessPool, ProcessHandle
 from actions.server._robo_utils.run_in_thread import run_in_thread
 
 

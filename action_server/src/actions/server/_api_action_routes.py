@@ -154,6 +154,7 @@ class _ActionRoutes:
 
         app.custom_lifespan.register(_mcp_lifespan)
         mcp_route = self.streamable_http_server.routes[0]
+        assert isinstance(mcp_route, Route)
         mcp_endpoint = mcp_route.endpoint
         from actions.server.mcp.gateway_metadata import (
             McpRequestMetadataMiddleware,

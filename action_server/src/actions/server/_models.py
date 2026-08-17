@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Iterator, Optional, Union
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from pydantic.dataclasses import dataclass
 
 from actions.server._database import DBRules
@@ -508,6 +508,8 @@ def get_action_package_from_action(action: Action) -> ActionPackage:
 
 
 class RunListItemModel(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     status: int
     action_id: str
@@ -526,9 +528,6 @@ class RunListItemModel(BaseModel):
     robot_env_hash: Optional[str] = None
     stdout: Optional[str] = None
     stderr: Optional[str] = None
-
-    class Config:
-        from_attributes = True
 
 
 class RunDetailModel(RunListItemModel):

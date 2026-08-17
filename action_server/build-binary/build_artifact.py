@@ -5,7 +5,7 @@ This module handles artifact naming, hashing, metadata generation, and SBOM vali
 
 import hashlib
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Optional, Union
@@ -88,7 +88,7 @@ class BuildArtifact:
         
         # Use current timestamp if not provided
         if build_timestamp is None:
-            build_timestamp = datetime.now()
+            build_timestamp = datetime.now(timezone.utc)
         
         # Auto-detect git commit if not provided
         if git_commit is None:
@@ -110,12 +110,11 @@ class BuildArtifact:
         if provenance_url is None:
             import os
             # GitHub Actions
-            if os.getenv("GITHUB_ACTIONS") == "true":
-                server_url = os.getenv("GITHUB_SERVER_URL", "https://github.com")
-                repository = os.getenv("GITHUB_REPOSITORY", "")
-                run_id = os.getenv("GITHUB_RUN_ID", "")
-                if repository and run_id:
-                    provenance_url = f"{server_url}/{repository}/actions/runs/{run_id}"
+            server_url = os.getenv("GITHUB_SERVER_URL", "https://github.com")
+            repository = os.getenv("GITHUB_REPOSITORY", "")
+            run_id = os.getenv("GITHUB_RUN_ID", "")
+            if repository and run_id:
+                provenance_url = f"{server_url}/{repository}/actions/runs/{run_id}"
         
         # Validate SBOM if provided
         if sbom_path and not sbom_path.exists():
@@ -239,11 +238,63 @@ def generate_artifact_name(
     elif artifact_type == ArtifactType.EXECUTABLE:
         if not platform or not commit_sha:
             raise ValueError("Executable artifacts require platform and git_commit")
+        if len(commit_sha) != 7:
+            raise ValueError("Executable artifact git_commit must contain 7 characters")
         return f"action-server-{tier_name}-{platform}-{commit_sha}.zip"
     elif artifact_type == ArtifactType.METADATA:
         return f"artifact-metadata-{tier_name}.json"
     else:
         raise ValueError(f"Unknown artifact type: {artifact_type}")
+
+
+def validate_artifact_name(name: str, artifact_type: ArtifactType) -> bool:
+    """Return whether an artifact name follows the published naming contract."""
+    import re
+
+    patterns = {
+        ArtifactType.FRONTEND: r"frontend-dist-(community|enterprise)\.tar\.gz",
+        ArtifactType.EXECUTABLE: (
+            r"action-server-(community|enterprise)-(linux|macos|windows)-[^.]{7}\.zip"
+        ),
+    }
+    pattern = patterns.get(artifact_type)
+    return pattern is not None and re.fullmatch(pattern, name) is not None
+
+
+def extract_tier_from_name(name: str) -> str:
+    """Extract a validated artifact tier."""
+    import re
+
+    match = re.search(r"(?:frontend-dist|action-server)-(community|enterprise)", name)
+    if not match:
+        raise ValueError(f"Invalid artifact name: {name}")
+    return match.group(1)
+
+
+def extract_platform_from_name(name: str) -> str:
+    """Extract a validated executable platform."""
+    import re
+
+    match = re.fullmatch(
+        r"action-server-(?:community|enterprise)-(linux|macos|windows)-[^.]{7}\.zip",
+        name,
+    )
+    if not match:
+        raise ValueError(f"Invalid executable artifact name: {name}")
+    return match.group(1)
+
+
+def extract_commit_from_name(name: str) -> str:
+    """Extract a validated executable commit identifier."""
+    import re
+
+    match = re.fullmatch(
+        r"action-server-(?:community|enterprise)-(?:linux|macos|windows)-([^.]{7})\.zip",
+        name,
+    )
+    if not match:
+        raise ValueError(f"Invalid executable artifact name: {name}")
+    return match.group(1)
 
 
 def compute_sha256(file_path: Path) -> str:

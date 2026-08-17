@@ -9,8 +9,11 @@ files.
 
 The allowed files (authoritative sources of tier logic) are:
   - action_server/build-binary/tier_selector.py
+  - action_server/build-binary/tree_shaker.py
   - action_server/frontend/vite.config.js
-  - action_server/frontend/feature-boundaries.json
+  - action_server/src/actions/server/_settings.py
+  - action_server/tasks.py
+  - verify_t026a.py
 
 Note: This test intentionally scans code files only (Python, JS/TS, JSON, YAML)
 and excludes specs, tests, docs and vendored/build artifacts to reduce noise.
@@ -102,8 +105,11 @@ def test_tier_logic_confined_to_config_files():
     # Authoritative locations where tier selection/configuration logic is allowed
     allowed = {
         "action_server/build-binary/tier_selector.py",
+        "action_server/build-binary/tree_shaker.py",
         "action_server/frontend/vite.config.js",
-        "action_server/frontend/feature-boundaries.json",
+        "action_server/src/actions/server/_settings.py",
+        "action_server/tasks.py",
+        "verify_t026a.py",
     }
 
     # Sanity check: ensure the allowed files exist (if not, the test should

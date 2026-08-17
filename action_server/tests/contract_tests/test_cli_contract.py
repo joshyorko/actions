@@ -12,6 +12,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
+pytestmark = pytest.mark.integration_test
+
 # Import will fail until implementation exists (TDD)
 try:
     from invoke import Context

@@ -12,6 +12,10 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
+pytestmark = pytest.mark.integration_test
+
 
 def test_community_tier_logging_explicit():
     """Test that community tier is explicitly logged when specified."""

@@ -87,119 +87,86 @@ For more details, see the [vendored packages documentation](action_server/fronte
 
 ### Prerequisites
 
-The tool used for Python dependency management is Poetry (`poetry`), and the commands to manage the project are run
-with Invoke (`invoke` / `inv`).
+RCC is the cross-platform developer gateway. It supplies the isolated toolchain and
+dispatches package commands to Poetry and Invoke; Poetry remains authoritative for each
+package's dependencies and lockfile.
 
-These, along the rest of the other required initial dependencies, should be installed from our
-[requirements.txt][requirements] file.
-
-```
-pip install -r devutils/requirements.txt
-```
-
-> Note that Invoke will automatically call its commands under the Poetry context (`poetry run` prefix), therefore you
-> don't need to usually activate any virtual environment before running such commands.
-
-#### Environment isolation
-
-Sometimes you don't want to end up with development dependencies in your system's Python, or simply, you want to be in
-control of the interpreter version you use without affecting the default Python.
-
-Therefore, you have a couple of flexible options to achieve this top-level isolation:
-
-##### RCC
-
-Leveraging `rcc venv` power on creating ready-for-development virtual environments with a simple script run.
-
-###### Mac / Linux
+Install RCC v18.18.1, then run from the repository root:
 
 ```bash
-% ./devutils/bin/develop.sh
-% . ./devutils/bin/develop.sh
+rcc run -r developer/toolkit.yaml --dev -t Doctor
+rcc run -r developer/toolkit.yaml --dev -t Bootstrap
 ```
 
-###### Windows
+If RCC is not installed, the repository launchers run `Bootstrap` directly. On Linux and
+macOS the shell launcher prefers the `joshyorko/tools/rcc` Homebrew cask when Brew is
+available, then falls back to the pinned Josh RCC release asset:
 
-```bat
-> .\devutils\bin\develop.bat
+```bash
+./devutils/bin/develop.sh
 ```
 
-##### Conda
-
-While `conda` is not always required (if not found, a _.venv_ will be created by Poetry based on the global Python
-found), if it's found, running commands with Invoke, will prefix them with `conda run -n <package-name>`, thus
-`inv install` will create the adjacent environment automatically.
-
-##### Pyenv
-
-After [installing](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation) `pyenv`, you should be able to pick
-and configure your desired interpreter version, isolated from the system.
-
-This step is required once, right from the repository root directory:
-
-```
-pyenv install 3.10.12
-pyenv local 3.10.12
-```
-
-Check with `pyenv versions` your currently active interpreter to be used as default under any package, and with
-`pyenv which <executable>` the absolute path to the resolved executable you want to run.
-
-> When using Conda or Pyenv, Poetry and Invoke should have been installed in the base environment by _pip_ installing
-> the [requirements.txt][requirements] first.
+On Windows, run `devutils\bin\develop.bat`. Pass another toolkit task name, such as
+`Doctor`, as the first argument when bootstrap is not required.
 
 ### Development
 
-To start working on a library, you need to install the project's development-time dependencies. This can be done by
-navigating to the package's folder and running:
+To start working on a library, bootstrap all package environments through RCC from the
+repository root:
 
 ```
-inv install
+rcc run -r developer/toolkit.yaml --dev -t Bootstrap
 ```
 
-💡 This will create/set up an environment for that project, either in a new local _.venv_ dir (Pyenv approach), or in the
-currently active virtual environment (RCC/Conda approach).
+The toolkit runs package-local Poetry environments inside RCC and never requires a host
+virtual-environment activation.
 
-### Calling Invoke tasks
+### Calling toolkit tasks
 
-To see all the available tasks, run `invoke --list` (`inv -l` for short).
+Run toolkit tasks from the repository root:
 
 For instance, linting can be run with:
 
 ```
-inv lint
+rcc run -r developer/toolkit.yaml --dev -t Lint
 ```
 
-If linting fails, auto-format can be applied with:
+Run the focused gateway contracts with:
 
 ```
-inv pretty
+rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
+```
+
+Run the complete static and test gate with:
+
+```
+rcc run -r developer/toolkit.yaml --dev -t CheckAll
 ```
 
 Type-checking can be checked with:
 
 ```
-inv typecheck
+rcc run -r developer/toolkit.yaml --dev -t Typecheck
 ```
 
 Docs should be generated after each change with:
 
 ```
-inv docs
+rcc run -r developer/toolkit.yaml --dev -t Docs
 ```
 
 And everything combined with:
 
 ```
-inv check-all
+rcc run -r developer/toolkit.yaml --dev -t CheckAll
 ```
 
 ### Testing
 
 Testing is done with `pytest` for the Python libraries. For javascript `jest` is the used one.
 
-To run all tests for a given project, go to the project's folder in the monorepo and then run `inv test`. If you want
-a specific test to be run, then `inv test -t path/to/test.py::function_name` would do it.
+Run the complete Python suite with the toolkit's `Test` task. Frontend tests are
+available through `rcc run -r developer/toolkit.yaml --dev -t FrontendTest`.
 
 > It's recommended that you configure your favorite editor/IDE to use the test framework inside your IDE.
 
@@ -207,7 +174,7 @@ a specific test to be run, then `inv test -t path/to/test.py::function_name` wou
 
 To make a new release for a library, ensure the following steps are accomplished in order:
 
-1. Documentation is up-to-date in the _docs_ dir through the `inv docs` command and `inv check-all` is passing.
+1. Documentation is up-to-date through the toolkit's `Docs` task and `CheckAll` is passing.
 2. The version is bumped according to [semantic versioning](https://semver.org/). This can be done by running
    `inv set-version <version>`, which updates all relevant files with the new version number, then adds an entry to the
    _docs/CHANGELOG.md_ describing the changes.
@@ -219,6 +186,3 @@ To make a new release for a library, ensure the following steps are accomplished
 > To trigger a release, a commit should be tagged with the name and version of the library. The tag can be generated
 > and pushed automatically with `inv make-release`. After the tag has been pushed, a corresponding GitHub Actions 
 > workflow will be triggered that builds the library and publishes it to PyPI.
-
-
-[requirements]: <devutils/requirements.txt>

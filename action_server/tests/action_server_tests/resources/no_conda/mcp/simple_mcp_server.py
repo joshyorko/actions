@@ -1,7 +1,6 @@
-from actions import Response, Table
 from actions._secret import Secret
 
-from actions import mcp
+from actions import Response, Table, mcp
 
 
 @mcp.tool()

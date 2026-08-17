@@ -8,10 +8,7 @@ from typing import Literal
 
 from pydantic.main import BaseModel
 
-from actions.server._settings import (
-    get_default_settings_dir,
-    get_user_actions_path,
-)
+from actions.server._settings import get_default_settings_dir, get_user_actions_path
 
 log = getLogger(__name__)
 

@@ -6,6 +6,7 @@ Provides webhook and email notifications for schedule executions.
 
 import asyncio
 import logging
+from email.message import Message
 from typing import Optional
 
 log = logging.getLogger(__name__)
@@ -163,9 +164,10 @@ class NotificationService:
     ) -> bool:
         """Send email using aiosmtplib."""
         try:
-            import aiosmtplib
             from email.mime.multipart import MIMEMultipart
             from email.mime.text import MIMEText
+
+            import aiosmtplib
         except ImportError:
             raise ImportError(
                 "aiosmtplib is required for async email notifications. "
@@ -173,6 +175,7 @@ class NotificationService:
             )
 
         # Build message
+        msg: Message
         if html_body:
             msg = MIMEMultipart("alternative")
             msg.attach(MIMEText(body, "plain"))
@@ -213,6 +216,7 @@ class NotificationService:
         from email.mime.text import MIMEText
 
         # Build message
+        msg: Message
         if html_body:
             msg = MIMEMultipart("alternative")
             msg.attach(MIMEText(body, "plain"))
@@ -225,11 +229,13 @@ class NotificationService:
         msg["To"] = to
 
         try:
+            smtp_host = self._smtp_host
+            assert smtp_host is not None
             if self._smtp_use_tls:
-                server = smtplib.SMTP(self._smtp_host, self._smtp_port)
+                server = smtplib.SMTP(smtp_host, self._smtp_port)
                 server.starttls()
             else:
-                server = smtplib.SMTP(self._smtp_host, self._smtp_port)
+                server = smtplib.SMTP(smtp_host, self._smtp_port)
 
             if self._smtp_user and self._smtp_password:
                 server.login(self._smtp_user, self._smtp_password)
@@ -252,12 +258,14 @@ class NotificationService:
         """
         if not self.email_configured:
             return False, "SMTP not configured"
+        smtp_host = self._smtp_host
+        assert smtp_host is not None
 
         try:
             import aiosmtplib
 
             smtp = aiosmtplib.SMTP(
-                hostname=self._smtp_host,
+                hostname=smtp_host,
                 port=self._smtp_port,
             )
             await smtp.connect()
@@ -272,7 +280,7 @@ class NotificationService:
             import smtplib
 
             try:
-                server = smtplib.SMTP(self._smtp_host, self._smtp_port, timeout=10)
+                server = smtplib.SMTP(smtp_host, self._smtp_port, timeout=10)
                 if self._smtp_use_tls:
                     server.starttls()
                 if self._smtp_user and self._smtp_password:
