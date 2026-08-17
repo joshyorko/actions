@@ -251,7 +251,7 @@ To clear caches: `action-server env clean-tools-caches`
 
 ## Building from Source
 
-**Good news!** The Action Server can be built from source without any private credentials. The frontend design system packages are vendored directly in the repository.
+The Action Server builds from the checked-in public npm manifest and lockfile without private credentials.
 
 ### Prerequisites
 

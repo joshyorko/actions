@@ -18,7 +18,9 @@ template library. Keep the static template-manifest contract synchronized
 with these package boundaries when a published version changes.
 
 The Action Server frontend uses `action_server/frontend/package.json` and its
-lock as the sole package metadata. `npm ci` is the offline-install contract;
+lock as the sole package metadata. `npm ci` is the reproducible,
+credential-free install contract; after the public dependency cache is warm,
+the frontend can be rebuilt without registry access.
 `LICENSE` is the retained Actions-owned provenance. Runtime and Canvas View
 are separate Vite roots under `apps/runtime` and `apps/canvas-view`; run
 `npm run build:runtime` and `npm run build:canvas` from the frontend directory
@@ -54,7 +56,7 @@ registry URLs while allowing ordinary public scoped packages such as
 `.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`, and `.css` file inside each artifact
 directory in deterministic path order, while ignoring arbitrary assets and
 source maps. It uses the same Actions-owned contract for Runtime and Canvas
-artifacts, with no path-based enterprise exemption. Scanner read errors fail
+artifacts, with no path-based exemption for removed private product paths. Scanner read errors fail
 validation; passing the directory to a single-file detector must not be used.
 
 The default `inv validate-artifact` task ensures `frontend/dist` and
@@ -370,10 +372,13 @@ python templates/packaging/build_embedded_bundle.py \
 
 Action Server seeds its settings cache from these package-owned assets, validates the
 bundle hash and every archive member, and atomically installs only verified archives.
-It may refresh from `downloads.robocorp.com`; network failure, malformed metadata,
-hash mismatch, or unsafe archive content leaves the embedded or previously valid cache
-usable. `action_server/pyproject.toml` includes the two embedded files so Poetry and
-PyInstaller builds retain the offline fallback. Template modules must import the
+The embedded bundle is the sole runtime authority: project creation performs no
+metadata or archive network request. Production owns exactly `minimal`, `basic`,
+`advanced`, and `workflow-producer-consumer`; `templates-beta.json` is not a production
+generator input. A cache hash mismatch, byte mismatch, traversal path, duplicate member,
+or symlink causes reseeding from the embedded bundle. `action_server/pyproject.toml`
+includes the two embedded files so Poetry and PyInstaller builds retain this offline
+contract. Template modules must import the
 published `actions-core` package via `from actions ...`; do not name an action module
 `actions.py`, because that shadows the installed package during project execution.
 
@@ -405,7 +410,7 @@ the matching runner cache. `Typecheck` runs only package-declared typecheck gate
 and is not assigned an invented strict-Mypy contract.
 
 The portable Action Server source-tree test gate is its declared `test-not-integration`
-Invoke task. Binary-only, credentialed cloud, frontend-build, and tier integration tests
+Invoke task. Binary-only, credentialed cloud, and frontend-build integration tests
 remain in their dedicated package gates; the RCC `Test` task must not fold them into the
 portable smoke by calling the generic shared `test` task. Tests that execute Invoke from
 an isolated build directory, run Node/Vite/ESLint, require generated OAuth configuration,
@@ -462,7 +467,7 @@ CI runs `Bootstrap`, verifies all five package `.venv` interpreters, reruns `Too
 to prove the RCC toolchain survived Bootstrap, and runs the full package `Test` smoke on
 Linux. All three runners run manifest diagnostics and `ToolkitTest`. The Linux runner
 also executes `InstallCommunity`: it invokes the public `build-frontend` task without a
-tier option (community is its default), builds the Go-wrapped Action Server with the
+product-tier option, builds the Go-wrapped Action Server with the
 `community-local` asset version, and runs the source binary's
 `dist/final/action-server new --help` smoke check before installation. It then resolves
 the installed target from the current `PATH`'s `action-server` entry. If none exists, it
