@@ -51,14 +51,16 @@ def test_mcp_sse_does_not_starve_server_or_sigterm(
         min_processes=2,
     )
     process = action_server_process.process
-    import psutil
-
-    child_pids = [child.pid for child in psutil.Process(process.pid).children()]
-    assert len(child_pids) >= 2
-    sse_connection = socket.create_connection(
-        (action_server_process.host, action_server_process.port), timeout=2
-    )
+    child_pids: list[int] = []
+    sse_connection: socket.socket | None = None
     try:
+        import psutil
+
+        child_pids = [child.pid for child in psutil.Process(process.pid).children()]
+        assert len(child_pids) >= 2
+        sse_connection = socket.create_connection(
+            (action_server_process.host, action_server_process.port), timeout=2
+        )
         sse_connection.sendall(
             (
                 "GET /mcp HTTP/1.1\r\n"
@@ -92,7 +94,8 @@ def test_mcp_sse_does_not_starve_server_or_sigterm(
             time.sleep(0.05)
         assert not any(_is_live_process(pid) for pid in child_pids)
     finally:
-        sse_connection.close()
+        if sse_connection is not None:
+            sse_connection.close()
         if process.returncode is None:
             kill_process_and_subprocesses(process.pid)
             process.join()
