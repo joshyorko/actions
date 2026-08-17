@@ -127,6 +127,7 @@ def resolve_install_target(path_value: str | None = None) -> Path:
 def install_executable(source: Path, target: Path) -> None:
     temp_path: Path | None = None
     try:
+        target.parent.mkdir(parents=True, exist_ok=True)
         temporary = tempfile.NamedTemporaryFile(
             dir=target.parent, prefix=f".{target.name}.", delete=False
         )

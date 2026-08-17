@@ -286,6 +286,16 @@ def test_install_executable_atomically_replaces_target(tmp_path: Path) -> None:
     assert list(tmp_path.glob(f".{target.name}.*")) == []
 
 
+def test_install_executable_creates_missing_target_directory(tmp_path: Path) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / ".local" / "bin" / "action-server"
+    source.write_bytes(b"new")
+
+    toolkit.install_executable(source, target)
+
+    assert target.read_bytes() == b"new"
+
+
 def test_install_executable_preserves_old_target_on_replace_failure(
     tmp_path: Path,
 ) -> None:
