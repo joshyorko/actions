@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/vitest";
 import { MemoryRouter } from "react-router-dom";
 import { render as rtlRender } from "@testing-library/react";
@@ -82,6 +83,31 @@ const renderRuntimeAt = (path: string) =>
   );
 
 describe("Actions Runtime shell", () => {
+  it("closes mobile navigation with Escape and returns focus to the menu button", async () => {
+    const user = userEvent.setup();
+    renderRuntime();
+
+    const menuButton = screen.getByRole("button", { name: "Open menu" });
+    await user.click(menuButton);
+    expect(menuButton).toHaveAttribute("aria-expanded", "true");
+
+    await user.keyboard("{Escape}");
+
+    expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    expect(menuButton).toHaveFocus();
+  });
+
+  it("closes mobile navigation when a route is selected", async () => {
+    const user = userEvent.setup();
+    renderRuntime();
+
+    const menuButton = screen.getByRole("button", { name: "Open menu" });
+    await user.click(menuButton);
+    await user.click(screen.getByRole("link", { name: "Actions" }));
+
+    expect(menuButton).toHaveAttribute("aria-expanded", "false");
+  });
+
   it("identifies the product and lands on a useful overview", async () => {
     renderRuntime();
 
