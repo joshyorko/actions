@@ -26,6 +26,20 @@ def test_empty_denominators_are_null():
     assert report["approval_rate"] is None
 
 
+def test_boolean_issue_number_is_rejected(tmp_path):
+    source = tmp_path / "records.jsonl"
+    source.write_text(json.dumps({"number": True}) + "\n")
+    with pytest.raises(ValueError, match="integer number"):
+        load_records(source)
+
+
+def test_review_flags_must_be_booleans(tmp_path):
+    source = tmp_path / "records.jsonl"
+    source.write_text(json.dumps({"number": 1, "approved": "yes"}) + "\n")
+    with pytest.raises(ValueError, match="approved must be boolean"):
+        load_records(source)
+
+
 def test_invalid_record_is_rejected(tmp_path):
     source = tmp_path / "records.jsonl"
     source.write_text(json.dumps({"number": "not-an-int"}) + "\n")

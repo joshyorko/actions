@@ -18,7 +18,7 @@ jobs:
         run: |
           {
             echo "commit=$(git rev-parse HEAD)"
-            echo "changed_files=$(git diff --name-only HEAD^ HEAD | wc -l)"
+            echo "changed_files=$(git diff --name-only "${{ github.event.pull_request.base.sha || github.event.before }}" "${{ github.event.pull_request.head.sha || github.sha }}" | wc -l)"
             echo "diff_check=running"
             git diff --check
             echo "diff_check=passed"

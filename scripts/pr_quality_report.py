@@ -24,8 +24,11 @@ def load_records(path: Path) -> list[dict[str, Any]]:
             record = json.loads(line)
         except json.JSONDecodeError as exc:
             raise ValueError(f"{path}:{line_number}: invalid JSON: {exc.msg}") from exc
-        if not isinstance(record, dict) or not isinstance(record.get("number"), int):
+        if not isinstance(record, dict) or isinstance(record.get("number"), bool) or not isinstance(record.get("number"), int):
             raise ValueError(f"{path}:{line_number}: record needs integer number")
+        for field in ("approved", "changes_requested"):
+            if field in record and not isinstance(record[field], bool):
+                raise ValueError(f"{path}:{line_number}: {field} must be boolean")
         records.append(record)
     return records
 

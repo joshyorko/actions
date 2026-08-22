@@ -17,7 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build report
-        run: python scripts/pr_quality_report.py "${{ inputs.records }}" --output quality-report.json
+        env:
+          RECORDS_PATH: ${{ inputs.records }}
+        run: |
+          case "$RECORDS_PATH" in
+            /*|*..*|*[!A-Za-z0-9_./-]*) echo "records must be a repository-relative path without traversal or metacharacters" >&2; exit 2 ;;
+          esac
+          test -f "$RECORDS_PATH" || { echo "records file does not exist: $RECORDS_PATH" >&2; exit 2; }
+          python scripts/pr_quality_report.py "$RECORDS_PATH" --output quality-report.json
+      - name: Run dependency-free focused tests
+        run: PYTHONPATH=scripts python -m unittest scripts/test_pr_quality_report_stdlib.py -v
       - uses: actions/upload-artifact@v4
         with:
           name: pr-quality-report
