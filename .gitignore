@@ -55,5 +55,10 @@ build/
 .vscode/
 Thumbs.db
 *.tmp
+developer/tmp/
 *.swp
 test-actions/
+/work-items/work_item_files/
+.codex
+.serena
+.clawpatch

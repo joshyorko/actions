@@ -324,9 +324,7 @@ class Settings:
     def _create(
         cls, args: ArgumentsNamespaceRequiringDatadir | ArgumentsNamespaceDevEnvTask
     ) -> "Settings":
-        from actions.server._errors_action_server import (
-            ActionServerValidationError,
-        )
+        from actions.server._errors_action_server import ActionServerValidationError
 
         user_specified_datadir = args.datadir
         if not user_specified_datadir:
@@ -457,9 +455,7 @@ class Settings:
 
             # Check for redis password from environment if not provided
             if settings.redis_url and not settings.redis_password:
-                settings.redis_password = os.environ.get(
-                    "ACTION_SERVER_REDIS_PASSWORD"
-                )
+                settings.redis_password = os.environ.get("ACTION_SERVER_REDIS_PASSWORD")
 
             # Log Redis configuration if available
             if settings.redis_url:

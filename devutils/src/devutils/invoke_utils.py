@@ -345,7 +345,7 @@ def build_common_tasks(
         Args:
             strict: Whether to enable the more strict Pylint as well.
         """
-        poetry(ctx, f"run ruff {TARGETS}")
+        poetry(ctx, f"run ruff check {TARGETS}")
         poetry(ctx, f"run ruff format --check {RUFF_ARGS} {TARGETS}")
         poetry(ctx, f"run isort --check {TARGETS}")
         if strict:
@@ -384,7 +384,7 @@ def build_common_tasks(
     @task
     def pretty(ctx):
         """Auto-format code and sort imports"""
-        poetry(ctx, f"run ruff --fix {TARGETS}")
+        poetry(ctx, f"run ruff check --fix {TARGETS}")
         poetry(ctx, f"run ruff format {RUFF_ARGS} {TARGETS}")
         poetry(ctx, f"run isort {TARGETS}")
 

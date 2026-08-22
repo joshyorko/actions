@@ -54,7 +54,7 @@ openapi.json:
         title: ValidationError
         type: object
   info:
-    title: Sema4.ai Action Server
+    title: Actions Runtime
     version: <removed-for-compare>
   openapi: 3.1.0
   paths:

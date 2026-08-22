@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).parents[2]
 FRONTEND = ROOT / "frontend"
 
@@ -14,7 +13,9 @@ def test_frontend_uses_one_canonical_manifest_and_lock():
     assert not (FRONTEND / "package.json.enterprise").exists()
     assert not (FRONTEND / "feature-boundaries.json").exists()
     assert not (FRONTEND / "src/enterprise").exists()
-    assert not any(name.startswith("@sema") for name in manifest.get("dependencies", {}))
+    assert not any(
+        name.startswith("@sema") for name in manifest.get("dependencies", {})
+    )
 
 
 def test_build_helpers_use_canonical_frontend_entry():
@@ -41,7 +42,9 @@ def test_runtime_and_canvas_artifact_contracts_are_explicit():
 
 
 def test_integrity_contract_is_actions_owned_and_offline():
-    integrity = (ROOT / "tests" / "action_server_tests" / "test_vendored_integrity.py").read_text()
+    integrity = (
+        ROOT / "tests" / "action_server_tests" / "test_vendored_integrity.py"
+    ).read_text()
 
     assert "package.json" in integrity
     assert "package-lock.json" in integrity

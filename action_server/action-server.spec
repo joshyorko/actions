@@ -70,6 +70,8 @@ a = Analysis(
     binaries=[],
     datas=[
         *action_server_datas,
+        ("src/actions/server/templates/action-templates.zip", "actions/server/templates"),
+        ("src/actions/server/templates/action-templates.yaml", "actions/server/templates"),
     ],
     hiddenimports=[
         *action_server_hiddenimports,
@@ -77,7 +79,7 @@ a = Analysis(
         "termcolor",
         "pydantic.deprecated.decorator",
     ],
-    hookspath=[],
+    hookspath=["pyinstaller-hooks"],
     hooksconfig={},
     runtime_hooks=[],
     excludes=["pandas", "pyarrow"],  # Exclude to avoid NumPy 2.x compatibility errors during analysis

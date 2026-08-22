@@ -1,0 +1,19 @@
+# RCC developer toolchain for Windows amd64. Package dependencies remain
+# Poetry-owned.
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - git=2.46.0
+  - nodejs=20.18.0
+  - go=1.23.6
+  - m2w64-jq=1.6
+  - uv=0.9.26
+  - pip=25.0
+  - pip:
+      - invoke==2.2.0
+      - poetry==2.1.1
+      - pyyaml==6.0.2
+      - pytest==8.3.4
+      - ruff==0.8.6

@@ -16,6 +16,7 @@ async def check_mcp_server(
     This method is meant to check that the `resources/no_conda/mcp` implementation
     is working.
     """
+    import httpx2
     from mcp.client.streamable_http import streamable_http_client
     from mcp.types import (
         CallToolResult,
@@ -26,8 +27,6 @@ async def check_mcp_server(
         TextResourceContents,
     )
     from pydantic.networks import AnyUrl
-
-    import httpx2
 
     async with httpx2.AsyncClient(headers=headers or {}) as http_client:
         async with (
@@ -254,10 +253,9 @@ async def check_mcp_server_with_actions(
     work as mcp tools.
     """
 
+    import httpx2
     from mcp.client.streamable_http import streamable_http_client
     from mcp.types import CallToolResult, TextContent
-
-    import httpx2
 
     async with httpx2.AsyncClient(headers=headers or {}) as http_client:
         async with (
@@ -655,6 +653,7 @@ def test_modern_mcp_requests_can_move_between_independent_replicas(tmpdir) -> No
     from pathlib import Path
 
     from action_server_tests.fixtures import get_in_resources, run_async_in_new_thread
+
     from actions.server._selftest import ActionServerProcess
 
     root_dir = get_in_resources("no_conda", "greeter")
@@ -779,7 +778,10 @@ def test_mcp_test_gateway_observes_tool_routing_metadata(
         await runner.setup()
         site = web.TCPSite(runner, "127.0.0.1", 0)
         await site.start()
-        port = site._server.sockets[0].getsockname()[1]
+        assert site._server is not None
+        sockets = getattr(site._server, "sockets", None)
+        assert sockets
+        port = sockets[0].getsockname()[1]
         try:
             yield f"http://127.0.0.1:{port}", observed
         finally:
@@ -788,6 +790,7 @@ def test_mcp_test_gateway_observes_tool_routing_metadata(
     async def call_through_gateway() -> list[dict[str, str]]:
         import httpx2
         from mcp.client.streamable_http import streamable_http_client
+        from mcp.types import TextContent
 
         target_url = f"http://localhost:{action_server_process.port}"
         async with test_gateway(target_url) as (gateway_url, observed):
@@ -800,6 +803,7 @@ def test_mcp_test_gateway_observes_tool_routing_metadata(
                     ) as session:
                         await session.discover()
                         result = await session.call_tool("greet", {"name": "Gateway"})
+                        assert isinstance(result.content[0], TextContent)
                         assert result.content[0].text == "Hello Mr. Gateway."
             return observed
 

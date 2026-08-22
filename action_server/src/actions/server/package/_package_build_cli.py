@@ -269,9 +269,7 @@ def handle_package_command(base_args: ArgumentsNamespace):
             ArgumentsNamespacePackageUpdate, base_args
         )
 
-        from actions.server.vendored_deps.action_package_handling import (
-            update_package,
-        )
+        from actions.server.vendored_deps.action_package_handling import update_package
 
         update_package(
             Path(".").absolute(),
@@ -343,9 +341,7 @@ def handle_package_command(base_args: ArgumentsNamespace):
         return 0
 
     elif package_command == "metadata":
-        from actions.server.package._package_metadata import (
-            collect_package_metadata,
-        )
+        from actions.server.package._package_metadata import collect_package_metadata
 
         package_metadata_args: ArgumentsNamespacePackageMetadata = typing.cast(
             ArgumentsNamespacePackageBuild, base_args
@@ -498,9 +494,7 @@ def handle_package_command(base_args: ArgumentsNamespace):
         return 0
 
     elif package_command == "set-changelog":
-        from actions.server.package._package_publish import (
-            update_package_changelog,
-        )
+        from actions.server.package._package_publish import update_package_changelog
         from actions.server.package._package_reader import read_package_name
 
         package_changelog_args: ArgumentsNamespacePackageChangelog = typing.cast(

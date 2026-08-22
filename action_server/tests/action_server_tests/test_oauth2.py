@@ -54,9 +54,7 @@ def manual_test_oauth2_vscode(
 
     from actions.server._encryption import make_unencrypted_data_envelope
     from actions.server._user_session import COOKIE_SESSION_ID, iso_to_datetime
-    from actions.server.vendored_deps.url_callback_server import (
-        start_server_in_thread,
-    )
+    from actions.server.vendored_deps.url_callback_server import start_server_in_thread
 
     _verify_oauth2_settings()
     pack = get_in_resources("no_conda", "oauth2")
@@ -166,9 +164,7 @@ def manual_test_oauth2_action_server_ui(
     """
     import webbrowser
 
-    from actions.server.vendored_deps.url_callback_server import (
-        start_server_in_thread,
-    )
+    from actions.server.vendored_deps.url_callback_server import start_server_in_thread
 
     settings_file = _verify_oauth2_settings()
 
@@ -278,9 +274,7 @@ def test_settings(tmpdir):
 
 
 def test_oauth2_provider_settings():
-    from actions.server.vendored_deps.oauth2_settings import (
-        OAuth2ProviderSettings,
-    )
+    from actions.server.vendored_deps.oauth2_settings import OAuth2ProviderSettings
 
     settings = OAuth2ProviderSettings(clientId="foo")
     dumped = settings.model_dump()
@@ -290,6 +284,7 @@ def test_oauth2_provider_settings():
 
 @mock.patch("builtins.print")
 @mock.patch("sys.stdout.buffer.write")
+@pytest.mark.integration_test
 def test_print_user_oauth2_config_path(
     print_mock: mock.MagicMock, buffer_write_mock: mock.MagicMock, tmpdir
 ) -> None:

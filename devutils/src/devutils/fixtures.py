@@ -280,18 +280,6 @@ def actions_run(
     additional_env: Optional[Dict[str, str]] = None,
     timeout=None,
 ) -> CompletedProcess:
-    return python_run(
-        ["-m", "actions"] + cmdline, returncode, cwd, additional_env, timeout
-    )
-
-
-def actions_run(
-    cmdline,
-    returncode: Union[Literal["error"], Literal["any"], int],
-    cwd=None,
-    additional_env: Optional[Dict[str, str]] = None,
-    timeout=None,
-) -> CompletedProcess:
     """Run the installed actions-core console script."""
     executable = _actions_executable()
     timeout = ACTIONS_RUN_TIMEOUT if timeout is None else timeout

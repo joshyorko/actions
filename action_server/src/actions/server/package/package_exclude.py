@@ -21,9 +21,7 @@ class PackageExcludeHandler:
                 in this function (as it usually comes from the package.yaml file
                 and thus is untrusted at this point).
         """
-        from actions.server._errors_action_server import (
-            ActionServerValidationError,
-        )
+        from actions.server._errors_action_server import ActionServerValidationError
 
         if exclude_list:
             if not isinstance(exclude_list, list):

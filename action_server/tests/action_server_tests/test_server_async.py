@@ -21,9 +21,7 @@ def test_server_async_api_requests_while_waiting_for_action_to_complete(
     """
     from devutils.fixtures import wait_for_non_error_condition
 
-    from actions.server.vendored_deps.url_callback_server import (
-        start_server_in_thread,
-    )
+    from actions.server.vendored_deps.url_callback_server import start_server_in_thread
 
     fut_uri, fut_address = start_server_in_thread(port=0)
     action_server_process.start(
@@ -110,9 +108,7 @@ def test_server_async_api(
     """
     from action_server_tests.fixtures import get_in_resources
 
-    from actions.server.vendored_deps.url_callback_server import (
-        start_server_in_thread,
-    )
+    from actions.server.vendored_deps.url_callback_server import start_server_in_thread
 
     fut_uri, fut_address = start_server_in_thread(port=0)
 

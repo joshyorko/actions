@@ -127,9 +127,7 @@ def import_action_package(
 
     try:
         # any actions version will do at this point.
-        actions_library_version = _get_actions_version(
-            env, import_path, "actions"
-        )
+        actions_library_version = _get_actions_version(env, import_path, "actions")
     except Exception:
         ### TODO: Remove in the future!
 

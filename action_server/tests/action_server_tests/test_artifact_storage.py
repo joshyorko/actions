@@ -95,7 +95,11 @@ def _write_from_process(root, relative_key):
 def _bind_from_process(root, run_id):
     storage = create_artifact_storage("shared-filesystem", root)
     storage.create_run_artifacts_dir(f"runs/{run_id}")
-    storage.bind_run(run_id, f"runs/{run_id}", {"id": run_id, "relative_artifacts_dir": f"runs/{run_id}"})
+    storage.bind_run(
+        run_id,
+        f"runs/{run_id}",
+        {"id": run_id, "relative_artifacts_dir": f"runs/{run_id}"},
+    )
 
 
 def test_shared_filesystem_process_a_write_process_b_read(tmp_path):
@@ -111,7 +115,10 @@ def test_shared_filesystem_process_a_write_process_b_read(tmp_path):
 
 def test_concurrent_manifest_publication_is_complete_and_recoverable(tmp_path):
     ctx = multiprocessing.get_context("spawn")
-    processes = [ctx.Process(target=_bind_from_process, args=(tmp_path, f"run-{i}")) for i in range(2)]
+    processes = [
+        ctx.Process(target=_bind_from_process, args=(tmp_path, f"run-{i}"))
+        for i in range(2)
+    ]
     for process in processes:
         process.start()
     for process in processes:
@@ -156,7 +163,9 @@ def test_storage_rejects_symlinked_run_and_artifact_paths(tmp_path):
         storage.read_text("run-a", "escape/secret.txt")
 
 
-@pytest.mark.parametrize("root_factory", [lambda p: p / "missing", lambda p: p / "file"])
+@pytest.mark.parametrize(
+    "root_factory", [lambda p: p / "missing", lambda p: p / "file"]
+)
 def test_storage_rejects_invalid_roots(tmp_path, root_factory):
     root = root_factory(tmp_path)
     if root.name == "file":
@@ -177,7 +186,9 @@ def test_storage_rejects_symlinked_root(tmp_path):
 
 
 def test_storage_rejects_inaccessible_root(tmp_path, monkeypatch):
-    monkeypatch.setattr("actions.server._artifact_storage.os.access", lambda *args: False)
+    monkeypatch.setattr(
+        "actions.server._artifact_storage.os.access", lambda *args: False
+    )
 
     with pytest.raises(ArtifactStorageConfigurationError):
         create_artifact_storage("shared-filesystem", tmp_path)
@@ -194,7 +205,9 @@ def test_storage_manifest_is_durable_and_collision_safe(tmp_path):
         restarted.bind_run("run-a", "runs/run-b")
 
 
-def test_independent_storage_api_reads_durable_run_binding_and_range_file(tmp_path, monkeypatch):
+def test_independent_storage_api_reads_durable_run_binding_and_range_file(
+    tmp_path, monkeypatch
+):
     import asyncio
 
     from actions.server import _api_run, _artifact_storage, _runs_state_cache
@@ -221,12 +234,18 @@ def test_independent_storage_api_reads_durable_run_binding_and_range_file(tmp_pa
     monkeypatch.setattr(_artifact_storage, "get_artifact_storage", lambda: reader)
 
     class MissingRunState:
-        semaphore = type("Semaphore", (), {"__enter__": lambda self: self, "__exit__": lambda *args: None})()
+        semaphore = type(
+            "Semaphore",
+            (),
+            {"__enter__": lambda self: self, "__exit__": lambda *args: None},
+        )()
 
         def get_run_from_id(self, run_id):
             raise KeyError(run_id)
 
-    monkeypatch.setattr(_runs_state_cache, "get_global_runs_state", lambda: MissingRunState())
+    monkeypatch.setattr(
+        _runs_state_cache, "get_global_runs_state", lambda: MissingRunState()
+    )
     assert _api_run.get_run_by_id(run.id).relative_artifacts_dir == "runs/run-a"
     assert _api_run.get_run_artifacts(run.id) == [
         _api_run.ArtifactInfo(name="payload.bin", size_in_bytes=10)
@@ -248,7 +267,13 @@ def test_independent_storage_api_reads_durable_run_binding_and_range_file(tmp_pa
 
     asyncio.run(
         response(
-            {"type": "http", "method": "GET", "path": "/", "headers": [(b"range", b"bytes=2-5")], "asgi": {"spec_version": "2.4"}},
+            {
+                "type": "http",
+                "method": "GET",
+                "path": "/",
+                "headers": [(b"range", b"bytes=2-5")],
+                "asgi": {"spec_version": "2.4"},
+            },
             receive,
             send,
         )

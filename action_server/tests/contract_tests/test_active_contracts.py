@@ -2,13 +2,12 @@ import json
 import os
 import shutil
 import subprocess
+import tomllib
 import venv
 import zipfile
 from pathlib import Path
 
 import pytest
-import tomllib
-
 
 ROOT = Path(__file__).resolve().parents[2]
 REPO = ROOT.parent
@@ -102,7 +101,53 @@ def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
 def test_runtime_metadata_uses_published_active_dependencies():
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     dependencies = metadata["tool"]["poetry"]["dependencies"]
-    assert dependencies["actions-work-items"] == "^0.4.3"
+    assert dependencies["actions-work-items"] == "^0.4.4"
+
+
+def test_template_manifests_use_published_actions_dependencies():
+    manifests = sorted((REPO / "templates").glob("*/package.yaml"))
+    assert manifests
+
+    for manifest in manifests:
+        dependencies = {
+            line.strip()[2:]
+            for line in manifest.read_text().splitlines()
+            if line.strip().startswith("- actions-")
+        }
+        assert "actions-core=1.0.0" in dependencies, str(manifest)
+        assert not any(
+            dependency.startswith("actions-core") and dependency != "actions-core=1.0.0"
+            for dependency in dependencies
+        ), str(manifest)
+
+        expected_work_items = (
+            {"actions-work-items=0.4.4"}
+            if manifest.parent.name == "workflow-producer-consumer"
+            else set()
+        )
+        assert {
+            dependency
+            for dependency in dependencies
+            if dependency.startswith("actions-work-items")
+        } == expected_work_items, str(manifest)
+
+
+def test_template_sources_use_actions_core_without_module_name_collision():
+    template_roots = sorted(
+        path.parent for path in (REPO / "templates").glob("*/package.yaml")
+    )
+    assert template_roots
+
+    violations = []
+    for template_root in template_roots:
+        for source in sorted(template_root.rglob("*.py")):
+            text = source.read_text()
+            if "sema4ai.actions" in text or "robocorp.actions" in text:
+                violations.append(str(source.relative_to(REPO)))
+        if (template_root / "actions.py").exists():
+            violations.append(str((template_root / "actions.py").relative_to(REPO)))
+
+    assert not violations, ", ".join(violations)
 
 
 def _build_wheels(output: Path, python: Path) -> list[Path]:
@@ -148,6 +193,7 @@ def _wheel_files(wheel: Path) -> dict[str, str]:
 
 def _runtime_python() -> Path:
     configured = os.environ.get("ACTIONS_RUNTIME_TEST_PYTHON")
+    candidate: Path | None
     if configured:
         candidate = Path(configured)
     else:

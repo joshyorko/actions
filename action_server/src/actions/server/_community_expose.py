@@ -92,6 +92,7 @@ def download_bore(target: Optional[str] = None, force: bool = False) -> Path:
 
     try:
         import actions_http
+
         from actions.server._common.system_mutex import timed_acquire_mutex
 
         timeout = 120.0
@@ -242,6 +243,7 @@ def download_cloudflared(target: Optional[str] = None, force: bool = False) -> P
 
     try:
         import actions_http
+
         from actions.server._common.system_mutex import timed_acquire_mutex
 
         timeout = 120.0
@@ -682,9 +684,7 @@ class CloudflareProvider(BaseTunnelProvider):
 
         # Match cloudflared quick tunnel URLs like https://random-words.trycloudflare.com
         # Exclude www.cloudflare.com which appears in privacy policy messages
-        url_pattern = re.compile(
-            r"https://(?!www\.)[a-zA-Z0-9-]+\.trycloudflare\.com"
-        )
+        url_pattern = re.compile(r"https://(?!www\.)[a-zA-Z0-9-]+\.trycloudflare\.com")
 
         start_time = time.time()
         last_progress_log = start_time
@@ -707,8 +707,12 @@ class CloudflareProvider(BaseTunnelProvider):
                 except Exception:
                     pass
 
-                error_output = "\n".join(collected_errors) if collected_errors else "None"
-                stdout_output = "\n".join(collected_output) if collected_output else "None"
+                error_output = (
+                    "\n".join(collected_errors) if collected_errors else "None"
+                )
+                stdout_output = (
+                    "\n".join(collected_output) if collected_output else "None"
+                )
 
                 raise RuntimeError(
                     f"cloudflared exited with code {process.returncode}.\n"
@@ -726,7 +730,9 @@ class CloudflareProvider(BaseTunnelProvider):
 
             # Log progress every 10 seconds
             if current_time - last_progress_log > 10:
-                log.info(f"Still waiting for Cloudflare tunnel URL... ({int(elapsed)}s elapsed)")
+                log.info(
+                    f"Still waiting for Cloudflare tunnel URL... ({int(elapsed)}s elapsed)"
+                )
                 last_progress_log = current_time
 
             # cloudflared outputs the tunnel URL to stderr, not stdout!

@@ -271,7 +271,7 @@ def start_server(
 
         from actions.server._storage import get_key
 
-        from . import __version__, _static_contents
+        from . import __version__, _static_contents  # type: ignore[attr-defined]
 
         if IN_DEV:
             # Always reload in dev mode.
@@ -485,9 +485,7 @@ def start_server(
             file_watcher.stop()
 
         log.info("Stopping action server...")
-        from actions.server._robo_utils.process import (
-            kill_process_and_subprocesses,
-        )
+        from actions.server._robo_utils.process import kill_process_and_subprocesses
 
         expose_pid = None
         if expose_subprocess is not None:

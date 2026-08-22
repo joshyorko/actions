@@ -39,9 +39,7 @@ def test_new_list_templates(tmpdir) -> None:
 
     from actions.server._selftest import actions_server_run
 
-    output = actions_server_run(
-        ["new", "list-templates"], returncode=0, cwd=tmpdir
-    )
+    output = actions_server_run(["new", "list-templates"], returncode=0, cwd=tmpdir)
 
     assert "Minimal" in output.stderr
     assert "Basic" in output.stderr

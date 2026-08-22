@@ -12,7 +12,15 @@ import pytest
 
 # Import will fail until implementation exists (TDD)
 try:
-    from build_artifact import ArtifactType, BuildArtifact, generate_artifact_name
+    from build_artifact import (
+        ArtifactType,
+        BuildArtifact,
+        extract_commit_from_name,
+        extract_platform_from_name,
+        extract_tier_from_name,
+        generate_artifact_name,
+        validate_artifact_name,
+    )
     from tier_selector import COMMUNITY, ENTERPRISE
 except ImportError:
     pytest.skip("Artifact naming not yet implemented", allow_module_level=True)
@@ -348,36 +356,3 @@ class TestArtifactNameExtraction:
 
         # Assert
         assert commit == "a3f9b12"
-
-
-# Helper functions (will fail until implemented - TDD)
-def validate_artifact_name(name, artifact_type):
-    """
-    Validate artifact name matches expected pattern.
-    Will fail until implemented (TDD).
-    """
-    raise NotImplementedError("validate_artifact_name not yet implemented")
-
-
-def extract_tier_from_name(name):
-    """
-    Extract tier from artifact name.
-    Will fail until implemented (TDD).
-    """
-    raise NotImplementedError("extract_tier_from_name not yet implemented")
-
-
-def extract_platform_from_name(name):
-    """
-    Extract platform from artifact name.
-    Will fail until implemented (TDD).
-    """
-    raise NotImplementedError("extract_platform_from_name not yet implemented")
-
-
-def extract_commit_from_name(name):
-    """
-    Extract git commit from artifact name.
-    Will fail until implemented (TDD).
-    """
-    raise NotImplementedError("extract_commit_from_name not yet implemented")

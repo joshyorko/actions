@@ -37,7 +37,10 @@ def test_launch_and_return_future(scenario):
     from concurrent.futures import CancelledError, TimeoutError
 
     from actions.server._common.monitor import Monitor
-    from actions.server._common.process import ProcessResultStatus, launch_and_return_future
+    from actions.server._common.process import (
+        ProcessResultStatus,
+        launch_and_return_future,
+    )
     from actions.server._common.wait_for import wait_for_condition
 
     code = """
