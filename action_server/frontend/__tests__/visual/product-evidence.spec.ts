@@ -298,6 +298,7 @@ test("rejects drifted Runtime and legacy client requests", async ({
   ).toMatchObject({ status: 200 });
   for (const probe of [
     await boundedHttpRequest("/config", { "Content-Length": "1" }, "x"),
+    await boundedHttpRequest("/api/runs", { "Content-Length": "1" }, "x"),
     await boundedHttpRequest(
       "/config",
       { "Transfer-Encoding": "chunked" },
