@@ -1,0 +1,29 @@
+name: AI audit evidence
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Capture bounded audit evidence
+        run: |
+          {
+            echo "commit=$(git rev-parse HEAD)"
+            echo "changed_files=$(git diff --name-only HEAD^ HEAD | wc -l)"
+            echo "diff_check=running"
+            git diff --check
+            echo "diff_check=passed"
+          } | tee ai-audit.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-audit-evidence
+          path: ai-audit.txt

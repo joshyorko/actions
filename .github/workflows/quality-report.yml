@@ -1,0 +1,24 @@
+name: Quality report
+
+on:
+  workflow_dispatch:
+    inputs:
+      records:
+        description: Path to a checked-in or generated JSONL export
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build report
+        run: python scripts/pr_quality_report.py "${{ inputs.records }}" --output quality-report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr-quality-report
+          path: quality-report.json
