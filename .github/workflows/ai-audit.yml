@@ -13,14 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Capture bounded audit evidence
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
+          [[ "$BASE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "invalid BASE_SHA" >&2; exit 2; }
+          [[ "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "invalid HEAD_SHA" >&2; exit 2; }
           {
-            echo "commit=$(git rev-parse HEAD)"
-            echo "changed_files=$(git diff --name-only "${{ github.event.pull_request.base.sha || github.event.before }}" "${{ github.event.pull_request.head.sha || github.sha }}" | wc -l)"
+            echo "commit=$HEAD_SHA"
+            echo "changed_files=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | wc -l)"
             echo "diff_check=running"
-            git diff --check
+            git diff --check "$BASE_SHA" "$HEAD_SHA"
             echo "diff_check=passed"
           } | tee ai-audit.txt
       - uses: actions/upload-artifact@v4
