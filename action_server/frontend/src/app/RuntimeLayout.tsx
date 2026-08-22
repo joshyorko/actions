@@ -19,9 +19,8 @@ export const RuntimeLayout = ({ children }: { children: ReactNode }) => {
   }, [mobileNavigationOpen]);
 
   useEffect(() => {
-    if (!mobileNavigationOpen) return;
     setMobileNavigationOpen(false);
-  }, [location.pathname, mobileNavigationOpen]);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!mobileNavigationOpen) menuButtonRef.current?.focus();
