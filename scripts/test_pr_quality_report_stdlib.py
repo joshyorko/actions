@@ -10,6 +10,7 @@ class PrQualityReportTest(unittest.TestCase):
     def test_audit_workflow_checks_submitted_range(self):
         workflow = Path(__file__).parents[1] / ".github/workflows/ai-audit.yml"
         text = workflow.read_text()
+        self.assertNotIn("workflow_dispatch", text)
         self.assertIn("fetch-depth: 0", text)
         self.assertIn('git diff --name-only "$BASE_SHA" "$HEAD_SHA"', text)
         self.assertIn('git diff --check "$BASE_SHA" "$HEAD_SHA"', text)
