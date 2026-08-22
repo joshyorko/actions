@@ -117,6 +117,14 @@ absolute paths, symlinks, duplicate names, and oversized members.
 
 ## Verification matrix
 
+The dependency-free `devutils.runtime_conformance` module is the repository's
+small executable contract for this boundary. It canonicalizes exact-subject
+fingerprints, captures one immutable admission decision, selects only an
+explicitly declared Deployment Runtime Plan, and rejects workers that lack the
+selected runtime kind or required features. Its tests also verify changed
+subjects and missing plans fail closed; adapters must build richer receipts on
+top of these primitives rather than implement a second admission gate.
+
 Contract tests must cover one collapsed and one split execution with an RCC
 adapter and one non-RCC adapter; retry/Attempt linkage; RCC local/provider/
 cold/warm preparation; admission off/shadow/enforce and exact-subject
