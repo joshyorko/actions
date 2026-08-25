@@ -341,6 +341,10 @@ except:
 cli.main(["{command}"])
 """
     if runtime_descriptor is not None:
+        code = code.replace(
+            f'cli.main(["{command}"',
+            f'cli.main(["{command}", {str(import_path)!r}',
+        )
         metadata_file = import_path / f".rcc-action-metadata-{uuid.uuid4().hex}.json"
         code = (
             "import contextlib\n"

@@ -62,6 +62,92 @@ def test_failed_publish_is_phase_error_without_fallback(tmp_path):
         publish_artifact(Path("/does/not/exist"), Path("/tmp/rcc"), runner=lambda *args: (1, "", "no"))
 
 
+def test_acquire_rejects_missing_or_conflicting_identity():
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, acquire_artifact
+
+    digest = "sha256:" + "e" * 64
+    for result in ({}, {"artifactDigest": "sha256:" + "f" * 64}):
+        with pytest.raises(RccRuntimeError, match="artifact"):
+            acquire_artifact(
+                digest,
+                Path("/opt/rcc"),
+                runner=lambda *args, result=result: (0, json.dumps(result), ""),
+            )
+
+
+def test_rcc_version_mismatch_fails_closed():
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, verify_rcc_version
+
+    with pytest.raises(RccRuntimeError, match="unsupported RCC version"):
+        verify_rcc_version(
+            Path("/opt/rcc"), runner=lambda *args: (0, "v18.19.1\n", "")
+        )
+
+
+def test_receipt_requires_identity_verification_and_lease(tmp_path):
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, read_receipt
+
+    digest = "sha256:" + "1" * 64
+    receipt = tmp_path / "receipt.json"
+    receipt.write_text(
+        json.dumps(
+            {
+                "artifactDigest": digest,
+                "verification": {"valid": True},
+                "leaseId": "lease-1",
+            }
+        )
+    )
+    assert read_receipt(receipt, digest)["leaseId"] == "lease-1"
+    receipt.write_text(
+        json.dumps(
+            {
+                "artifactDigest": digest,
+                "verification": {"valid": False},
+                "leaseId": "lease-1",
+            }
+        )
+    )
+    with pytest.raises(RccRuntimeError, match="verification"):
+        read_receipt(receipt, digest)
+
+
+def test_spec_v2_without_provider_preserves_legacy_bootstrap(monkeypatch, tmp_path):
+    from actions.server._action_package_handler import ActionPackageHandler
+    from actions.server._protocols import ActionResult
+    from actions.server._rcc import EnvInfo
+
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_PROVIDER", raising=False)
+    monkeypatch.delenv("ACTIONS_REAL_RCC_ARTIFACT_TEST", raising=False)
+    package_dir = tmp_path / "package"
+    package_dir.mkdir()
+    (package_dir / "package.yaml").write_text(
+        "version: 0.1\nspec-version: v2\ndependencies: {}\n"
+    )
+
+    class LegacyRcc:
+        def get_package_yaml_hash(self, package_yaml, devenv):
+            return "legacy-hash"
+
+        def create_env_and_get_vars(self, datadir, package_yaml, package_hash, devenv):
+            return ActionResult(True, None, EnvInfo({"PYTHON_EXE": "/legacy/python"}))
+
+    monkeypatch.setattr(
+        "actions.server._rcc.get_rcc", lambda: LegacyRcc()
+    )
+    monkeypatch.setattr(
+        "actions.server._rcc_runtime_adapter.prepare_runtime",
+        lambda *args, **kwargs: pytest.fail("RCC artifact mode was selected without an opt-in"),
+    )
+    assert ActionPackageHandler(str(package_dir), tmp_path / "data").bootstrap_environment() == (
+        "legacy-hash",
+        {
+            "PYTHON_EXE": "/legacy/python",
+            "PYTHONPATH": str(package_dir),
+        },
+    )
+
+
 def test_process_handle_kill_waits_for_wrapper(tmp_path):
     from actions.server._rcc_runtime_adapter import RccProcessHandle
 
@@ -85,6 +171,7 @@ def test_real_rcc_artifact_action_vertical(tmp_path):
     from actions.server._actions_process_pool import ActionsProcessPool
     from actions.server._database import Database
     from actions.server._models import Action, ActionPackage, Run, RunStatus, get_model_db_rules
+    from actions.server._rcc_runtime_adapter import read_receipt
     import actions.server._models as models
     from actions.server._settings import Settings
 
@@ -121,6 +208,18 @@ dependencies:
             package = db.all(ActionPackage)[0]
             action = db.all(Action)[0]
             descriptor = json.loads(package.env_json)["runtime"]
+            expected_artifact_digest = "sha256:81fa0aea1b1efe5232cf787725e1bad1258831cb90458469b2f7581f0e11cd01"
+            assert descriptor["artifact_digest"] == expected_artifact_digest
+            assert descriptor["kind"] == "rcc"
+            assert descriptor["rcc_version"] == "v18.19.2"
+            for forbidden in (
+                "PYTHON_EXE",
+                "CONDA_PREFIX",
+                "ROBOCORP_HOME",
+                "holotree",
+                "materialization",
+            ):
+                assert forbidden not in package.env_json
             settings = Settings(datadir=tmp_path / "data", artifacts_dir=tmp_path / "artifacts")
             settings.reuse_processes = False
             settings.min_processes = 0
@@ -146,7 +245,10 @@ dependencies:
                     assert json.loads(result_json.read_text())["result"] == "rcc-v18.19.2"
                     receipt = handle._rcc_wrapper.receipt_file
                 assert receipt.exists()
-                assert receipt.read_text().find('"artifactDigest":"sha256:') >= 0
+                parsed_receipt = read_receipt(receipt, expected_artifact_digest)
+                assert parsed_receipt["status"] == "failed"
+                assert parsed_receipt["exitCode"] == -1
+                assert parsed_receipt["reason"] == "child exited non-zero"
             finally:
                 pool.dispose()
         finally:

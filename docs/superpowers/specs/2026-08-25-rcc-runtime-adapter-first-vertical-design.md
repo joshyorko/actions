@@ -24,6 +24,15 @@ persisted `PYTHON_EXE`, Holotree activation cache, or another runtime when
 publish, acquire, import, or exec fails. Packages without package.yaml retain
 the existing unmanaged behavior.
 
+RCC v18.19.2 starts `env exec` children in the materialized artifact directory;
+the import adapter therefore passes the package source path explicitly to
+`actions metadata` for discovery. The worker Action result is the authoritative
+execution result: after a `PASS`, pool teardown may intentionally cancel the
+persistent RCC wrapper, producing a receipt with `status: failed` and
+`exitCode: -1`. That teardown receipt remains acceptable only after its exact
+artifact digest, valid verification, and non-empty lease identity pass
+validation.
+
 ## Provisional interfaces
 
 `actions.server._rcc_runtime_adapter` owns strict JSON identity parsing,

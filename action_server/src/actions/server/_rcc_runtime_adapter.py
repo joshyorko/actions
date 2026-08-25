@@ -190,8 +190,6 @@ def build_exec_command(
     receipt_file: Path | None,
     json_output: bool = True,
 ) -> list[str]:
-    if receipt_file is None and command[:2] == ["python", "-c"]:
-        pass
     args = [
         str(rcc_location), "env", "exec", "--artifact", descriptor.artifact_digest,
         "--permissive-local",

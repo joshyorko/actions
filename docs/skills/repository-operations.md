@@ -584,6 +584,15 @@ action_server/tests/action_server_tests/test_rcc_runtime_adapter.py -m real_rcc
 
 Record the exact digest, Action result, and wrapper receipt from that run; a
 mocked parser or RCC health/version check is not acceptance evidence.
+RCC v18.19.2 materializes `env exec` children with the artifact as their
+current directory, so import/discovery must pass the package source directory
+explicitly to `actions metadata`; `PYTHONPATH` alone does not make discovery
+scan the source tree. A successful Action can still leave its receipt with
+`status: failed`, `exitCode: -1`, and `reason: child exited non-zero` when the
+pool intentionally terminates the persistent wrapper after the Action returns
+`PASS`. Treat that as wrapper teardown evidence only when the receipt's exact
+artifact digest, `verification.valid == true`, and non-empty lease identity
+also validate.
 
 ## Pull Request Triage
 
