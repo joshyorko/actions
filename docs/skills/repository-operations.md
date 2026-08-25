@@ -392,6 +392,11 @@ includes the two embedded files so Poetry and PyInstaller builds retain this off
 contract. Template modules must import the
 published `actions-core` package via `from actions ...`; do not name an action module
 `actions.py`, because that shadows the installed package during project execution.
+The beta and production template deployment workflows change into
+`templates/packaging` and directly execute `./create-templates-package.sh`.
+Preserve that script's tracked executable mode (`100755`); a checkout that loses
+the mode fails before Python starts with shell exit 126. The active contract test
+checks both the executable bit and each workflow's direct invocation.
 Community `--expose` startup tries the selected or available open-source tunnel
 providers, logs a bounded failure when all providers fail, and leaves the
 `TunnelManager` inactive; the wrapper boundary is covered separately from provider
