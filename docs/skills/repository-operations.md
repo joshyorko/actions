@@ -629,6 +629,12 @@ pool intentionally terminates the persistent wrapper after the Action returns
 artifact digest, `verification.valid == true`, and non-empty lease identity
 also validate.
 
+With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
+recorded digest through the same provider and each returned the exact digest
+with `verification.valid: true`. After the provider's digest-addressed
+manifest was tampered with, a fresh consumer received a provider HTTP 500 and
+the adapter rejected the acquisition; the manifest was restored afterward.
+
 ## Pull Request Triage
 
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
