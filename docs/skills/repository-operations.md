@@ -577,6 +577,7 @@ The gated real proof is run with the released RCC binary and explicit gate:
 ```bash
 ACTIONS_REAL_RCC_ARTIFACT_TEST=1 \
 ACTIONS_RUNTIME_RCC_BINARY=/home/linuxbrew/.linuxbrew/bin/rcc \
+ACTIONS_RUNTIME_RCC_PROVIDER=http://127.0.0.1:PORT \
 action_server/.venv/bin/python -m pytest -q \
 action_server/tests/action_server_tests/test_rcc_runtime_adapter.py -m real_rcc
 ```
