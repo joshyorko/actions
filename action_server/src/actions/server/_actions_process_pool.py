@@ -109,6 +109,13 @@ class ProcessHandle:
         )
         from ._preload_actions.preload_actions_streams import JsonRpcStreamReaderThread
         from ._robo_utils.process import build_python_launch_env
+        from ._rcc_runtime_adapter import (
+            RccProcessHandle,
+            build_exec_command,
+            get_rcc_location,
+            load_descriptor,
+            new_receipt_path,
+        )
 
         self._post_run_args = post_run_args
 
@@ -122,7 +129,11 @@ class ProcessHandle:
         # (upon reloading all running processes are marked as non-reusable).
         self.can_reuse = True
 
-        env = json.loads(action_package.env_json)
+        persisted_env = json.loads(action_package.env_json)
+        runtime_descriptor = load_descriptor(action_package.env_json)
+        env = {
+            key: value for key, value in persisted_env.items() if key != "runtime"
+        }
         _add_preload_actions_dir_to_env_pythonpath(env)
         env = build_python_launch_env(env)
         # Shouldn't be there, but just making sure... if it is it can
@@ -140,7 +151,9 @@ class ProcessHandle:
             # the process doesn't exit!
             env["RC_DUMP_THREADS_AFTER_RUN"] = "0"
 
-        if "PYTHON_EXE" in env:
+        if runtime_descriptor is not None:
+            python_exe = None
+        elif "PYTHON_EXE" in env:
             python_exe = env["PYTHON_EXE"]
         else:
             if is_frozen():
@@ -186,14 +199,24 @@ class ProcessHandle:
         if use_tcp:
             server_socket = _create_server_socket("127.0.0.1", 0)
             host, port = server_socket.getsockname()
-            cmdline = [
-                python_exe,
+            worker_command = [
+                "python" if runtime_descriptor is not None else python_exe,
                 "-m",
                 "preload_actions_server_main",
                 "--tcp",
                 f"--host={host}",
                 f"--port={port}",
             ]
+            receipt_file = new_receipt_path(settings.datadir)
+            if runtime_descriptor is not None:
+                cmdline = build_exec_command(
+                    get_rcc_location(),
+                    runtime_descriptor,
+                    worker_command,
+                    receipt_file=receipt_file,
+                )
+            else:
+                cmdline = worker_command
 
             def accept_connection():
                 server_socket.listen(1)
@@ -203,6 +226,11 @@ class ProcessHandle:
             connection_future = run_in_thread(accept_connection)
 
             self._process = subprocess.Popen(cmdline, **subprocess_kwargs)
+            self._rcc_wrapper = (
+                RccProcessHandle(self._process, receipt_file)
+                if runtime_descriptor is not None
+                else None
+            )
             self._on_output = Callback()
 
             pid = self._process.pid
@@ -238,14 +266,29 @@ class ProcessHandle:
             )
         else:
             # Will start things using the stdin/stdout for communicating.
-            cmdline = [
-                python_exe,
+            worker_command = [
+                "python" if runtime_descriptor is not None else python_exe,
                 "-m",
                 "preload_actions_server_main",
             ]
+            receipt_file = new_receipt_path(settings.datadir)
+            if runtime_descriptor is not None:
+                cmdline = build_exec_command(
+                    get_rcc_location(),
+                    runtime_descriptor,
+                    worker_command,
+                    receipt_file=receipt_file,
+                )
+            else:
+                cmdline = worker_command
             subprocess_kwargs["stdin"] = subprocess.PIPE
 
             self._process = subprocess.Popen(cmdline, **subprocess_kwargs)
+            self._rcc_wrapper = (
+                RccProcessHandle(self._process, receipt_file)
+                if runtime_descriptor is not None
+                else None
+            )
             self._on_output = Callback()
 
             pid = self._process.pid
@@ -294,7 +337,10 @@ class ProcessHandle:
         self._kill_called = True
 
         log.info("Subprocess kill [pid=%s]", self._process.pid)
-        kill_process_and_subprocesses(self._process.pid)
+        if getattr(self, "_rcc_wrapper", None) is not None:
+            self._rcc_wrapper.kill()
+        else:
+            kill_process_and_subprocesses(self._process.pid)
 
     def _do_run_action(
         self,

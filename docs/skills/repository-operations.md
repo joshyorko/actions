@@ -562,6 +562,28 @@ Every dispatch includes the mandatory documentation receipt from root `AGENTS.md
 
 Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
 
+## RCC Environment Artifact execution
+
+Managed spec-v2 Action packages use the provisional RCC runtime adapter. Their
+durable runtime authority is the exact `sha256:` Environment Artifact digest
+and RCC `env exec`; persisted activation paths (`PYTHON_EXE`, `CONDA_PREFIX`,
+`ROBOCORP_HOME`, and Holotree/materialization paths) are not authority. The
+existing process pool starts workers with RCC
+`env exec --artifact DIGEST --permissive-local --inherit-streams
+--receipt-file PATH -- ...` and must reap that wrapper before release.
+
+The gated real proof is run with the released RCC binary and explicit gate:
+
+```bash
+ACTIONS_REAL_RCC_ARTIFACT_TEST=1 \
+ACTIONS_RUNTIME_RCC_BINARY=/home/linuxbrew/.linuxbrew/bin/rcc \
+action_server/.venv/bin/python -m pytest -q \
+action_server/tests/action_server_tests/test_rcc_runtime_adapter.py -m real_rcc
+```
+
+Record the exact digest, Action result, and wrapper receipt from that run; a
+mocked parser or RCC health/version check is not acceptance evidence.
+
 ## Pull Request Triage
 
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.

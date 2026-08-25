@@ -220,24 +220,39 @@ class ActionPackageHandler:
                 "Action package seems ok. "
                 "Bootstrapping RCC environment (please wait, this can take a long time)."
             )
-            rcc = get_rcc()
-
-            condahash = rcc.get_package_yaml_hash(self._original_package_yaml, devenv)
-
-            env_info = rcc.create_env_and_get_vars(
-                self._datadir, self._original_package_yaml, condahash, devenv
+            spec_version = (
+                self._package_yaml_contents.get("spec-version")
+                if self._package_yaml_contents
+                else None
             )
-            if not env_info.success:
-                raise ActionPackageError(
-                    f"It was not possible to bootstrap the RCC environment. "
-                    f"Error: {env_info.message}"
+            if spec_version == "v2" and not devenv:
+                from ._rcc_runtime_adapter import get_rcc_location, prepare_runtime
+
+                descriptor = prepare_runtime(
+                    self._original_package_yaml,
+                    get_rcc_location(),
+                    provider=os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER"),
                 )
-            if not env_info.result:
-                raise ActionPackageError(
-                    "It was not possible to get the environment when "
-                    "bootstrapping RCC environment."
+                condahash = descriptor.artifact_digest
+                use_env = descriptor.to_dict()
+            else:
+                rcc = get_rcc()
+                condahash = rcc.get_package_yaml_hash(self._original_package_yaml, devenv)
+
+                env_info = rcc.create_env_and_get_vars(
+                    self._datadir, self._original_package_yaml, condahash, devenv
                 )
-            use_env = env_info.result.env
+                if not env_info.success:
+                    raise ActionPackageError(
+                        f"It was not possible to bootstrap the RCC environment. "
+                        f"Error: {env_info.message}"
+                    )
+                if not env_info.result:
+                    raise ActionPackageError(
+                        "It was not possible to get the environment when "
+                        "bootstrapping RCC environment."
+                    )
+                use_env = env_info.result.env
 
         pythonpath_entries = self.get_pythonpath_entries()
 

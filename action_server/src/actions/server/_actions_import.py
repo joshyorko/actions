@@ -80,6 +80,7 @@ def import_action_package(
     from ._gen_ids import gen_uuid
     from ._models import ActionPackage
     from ._robo_utils.process import build_python_launch_env
+    from ._rcc_runtime_adapter import load_descriptor
 
     log.debug("Importing action package from: %s", action_package_dir)
 
@@ -110,6 +111,7 @@ def import_action_package(
 
     action_package_id = gen_uuid("action_package")
 
+    runtime_descriptor = load_descriptor(json.dumps(use_env))
     python_exe = use_env.get("PYTHON_EXE")
     if python_exe:
         log.info(colored(f"Python interpreter path: {python_exe}", attrs=["dark"]))
@@ -123,19 +125,24 @@ def import_action_package(
     )
     log.debug(f"Collecting actions for Action Package: {action_package_name}.")
 
-    env = build_python_launch_env(use_env)
+    launch_env = {key: value for key, value in use_env.items() if key != "runtime"}
+    env = build_python_launch_env(launch_env)
 
     try:
         # any actions version will do at this point.
-        actions_library_version = _get_actions_version(env, import_path, "actions")
+        actions_library_version = _get_actions_version(
+            env, import_path, "actions", runtime_descriptor=runtime_descriptor
+        )
     except Exception:
+        if runtime_descriptor is not None:
+            raise
         ### TODO: Remove in the future!
 
         found_actions = False
         # Still support robocorp.actions for now (but warn the user).
         try:
             actions_library_version = _get_actions_version(
-                env, import_path, "robocorp.actions"
+                env, import_path, "robocorp.actions", runtime_descriptor=runtime_descriptor
             )
             log.critical(
                 "Important: 'robocorp.actions' is deprecated!\n"
@@ -196,20 +203,35 @@ def import_action_package(
         skip_lint=skip_lint,
         whitelist=whitelist,
         actions_library_version=actions_library_version,
+        runtime_descriptor=runtime_descriptor,
     )
 
 
 def _get_actions_version(
-    env, cwd, libname: Literal["robocorp.actions"] | Literal["actions"]
+    env,
+    cwd,
+    libname: Literal["robocorp.actions"] | Literal["actions"],
+    runtime_descriptor=None,
 ) -> tuple[int, ...]:
-    from actions.server._settings import get_python_exe_from_env
+    if runtime_descriptor is None:
+        from actions.server._settings import get_python_exe_from_env
 
-    python = get_python_exe_from_env(env)
-    cmdline: list[str] = [
-        python,
-        "-c",
-        f"import {libname};print({libname}.__version__)",
-    ]
+        python = get_python_exe_from_env(env)
+        cmdline: list[str] = [
+            python,
+            "-c",
+            f"import {libname};print({libname}.__version__)",
+        ]
+    else:
+        from ._rcc_runtime_adapter import build_exec_command, get_rcc_location
+
+        python = "RCC Environment Artifact"
+        cmdline = build_exec_command(
+            get_rcc_location(),
+            runtime_descriptor,
+            ["python", "-c", f"import {libname};print({libname}.__version__)"],
+            receipt_file=None,
+        )
     msg = f"""Unable to get {libname} version.
 
 This usually means that `{libname}` is not installed in the python
@@ -221,14 +243,20 @@ Python executable being used:
 """
 
     try:
-        output = subprocess.check_output(
-            cmdline,
-            env=env,
-            cwd=cwd,
-        )
+        output = subprocess.check_output(cmdline, env=env, cwd=cwd)
     except Exception:
         raise RuntimeError(msg)
     str_output = output.decode("utf-8", "replace")
+    if runtime_descriptor is not None:
+        try:
+            result = json.loads(str_output)
+            if isinstance(result, dict):
+                for key in ("stdout", "output", "result"):
+                    if isinstance(result.get(key), str):
+                        str_output = result[key]
+                        break
+        except json.JSONDecodeError:
+            raise RuntimeError(msg)
     try:
         return tuple(int(x) for x in str_output.strip().split("."))
     except Exception:
@@ -244,6 +272,7 @@ def _add_actions_to_db(
     skip_lint: bool,
     whitelist: str,
     actions_library_version: tuple[int, ...],
+    runtime_descriptor=None,
 ):
     from dataclasses import asdict
 
@@ -252,10 +281,22 @@ def _add_actions_to_db(
     from actions.server._errors_action_server import ActionServerValidationError
     from actions.server._gen_ids import gen_uuid
     from actions.server._models import Action, ActionPackage, get_db
-    from actions.server._settings import get_python_exe_from_env
     from actions.server._whitelist import accept_action
 
-    python = get_python_exe_from_env(env)
+    if runtime_descriptor is None:
+        from actions.server._settings import get_python_exe_from_env
+
+        python = get_python_exe_from_env(env)
+        command_prefix = [python]
+    else:
+        from ._rcc_runtime_adapter import build_exec_command, get_rcc_location
+
+        command_prefix = build_exec_command(
+            get_rcc_location(),
+            runtime_descriptor,
+            ["python"],
+            receipt_file=None,
+        )[:-1]
 
     if actions_library_version > (1, 0, 1):
         command = "metadata"
@@ -280,7 +321,10 @@ except:
 
 cli.main(["{command}"])
 """
-    cmdline = [python, "-c", code]
+    if runtime_descriptor is None:
+        cmdline = [*command_prefix, "-c", code]
+    else:
+        cmdline = [*command_prefix, "python", "-c", code]
 
     popen = subprocess.Popen(
         cmdline,

@@ -86,6 +86,7 @@ generate-setup-file = true
 [tool.pytest.ini_options]
 norecursedirs = "tests/action_server_tests/test_devenv/* dist build build-binary"
 testpaths = ["tests"]
+markers = ["real_rcc: gated real RCC Environment Artifact execution proof"]
 filterwarnings = [
     "ignore:ast.Str is deprecated.*:DeprecationWarning:robocorp\\.log\\._ast_utils",
     "ignore:ast.Str is deprecated.*:DeprecationWarning:robocorp\\.log\\._rewrite_ast_add_callbacks",
