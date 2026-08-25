@@ -115,8 +115,15 @@ Runner = Callable[..., tuple[int, str, str]]
 def _subprocess_runner(*args: str) -> tuple[int, str, str]:
     try:
         completed = subprocess.run(
-            list(args), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False
+            list(args),
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+            timeout=float(os.environ.get("ACTIONS_RUNTIME_RCC_TIMEOUT", "900")),
         )
+    except subprocess.TimeoutExpired as exc:
+        raise RccRuntimeError("rcc", "command timed out") from exc
     except OSError as exc:
         raise RccRuntimeError("rcc", str(exc)) from exc
     return completed.returncode, completed.stdout, completed.stderr
