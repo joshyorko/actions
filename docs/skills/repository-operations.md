@@ -354,6 +354,13 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+When integrating a preserved branch with a moving `community` base, fetch the
+named base and inspect a hypothetical merge with
+`git merge-tree --write-tree HEAD origin/community` before creating the merge
+commit. A conflict-free merge tree does not prove that affected behavior was
+preserved: compare the affected paths against both parents and rerun their
+focused and package gates after the ordinary merge.
+
 ## RCC Developer Toolkit
 
 ### Repository-owned Action Server templates
