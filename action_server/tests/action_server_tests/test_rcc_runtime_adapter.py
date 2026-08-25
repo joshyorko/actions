@@ -81,9 +81,11 @@ def test_real_rcc_artifact_action_vertical(tmp_path):
     if not provider:
         pytest.fail("ACTIONS_RUNTIME_RCC_PROVIDER must name the cache provider for real proof")
 
+    from actions.server._actions_import import import_action_package
     from actions.server._actions_process_pool import ActionsProcessPool
-    from actions.server._models import Action, ActionPackage, Run, RunStatus
-    from actions.server._rcc_runtime_adapter import get_rcc_location, prepare_runtime
+    from actions.server._database import Database
+    from actions.server._models import Action, ActionPackage, Run, RunStatus, get_model_db_rules
+    import actions.server._models as models
     from actions.server._settings import Settings
 
     package_dir = tmp_path / "package"
@@ -103,44 +105,49 @@ dependencies:
     action_file.write_text(
         "from actions import action\n\n@action\ndef answer() -> str:\n    return 'rcc-v18.19.2'\n"
     )
-    descriptor = prepare_runtime(
-        package_yaml, get_rcc_location(), provider=provider, source_generation="real-test"
-    )
-    persisted = descriptor.to_dict()
-    persisted["PYTHONPATH"] = str(package_dir)
-    package = ActionPackage(
-        id="rcc-real-package", name="rcc-real-package", directory=str(package_dir),
-        conda_hash=descriptor.artifact_digest, env_json=json.dumps(persisted),
-    )
-    action = Action(
-        id="rcc-real-action", action_package_id=package.id, name="answer", docs="",
-        file=str(action_file), lineno=0, input_schema="{}", output_schema="{}",
-    )
-    settings = Settings(datadir=tmp_path / "data", artifacts_dir=tmp_path / "artifacts")
-    settings.reuse_processes = False
-    settings.min_processes = 0
-    settings.max_processes = 1
-    pool = ActionsProcessPool(settings, {package.id: package}, [action])
-    try:
-        run_dir = tmp_path / "run"
-        run_dir.mkdir()
-        input_json = run_dir / "input.json"
-        result_json = run_dir / "result.json"
-        output_file = run_dir / "output.txt"
-        input_json.write_text("{}")
-        run = Run(
-            id="rcc-real-run", status=RunStatus.NOT_RUN, action_id=action.id,
-            start_time="", run_time=None, inputs="{}", result=None,
-            error_message=None, relative_artifacts_dir="", numbered_id=1,
-        )
-        with pool.obtain_process_for_action(action) as handle:
-            assert handle.run_action(
-                run, package, action, input_json, run_dir, output_file, result_json,
-                {}, {}, False
-            ) == 0
-            assert json.loads(result_json.read_text())["result"] == "rcc-v18.19.2"
-            receipt = handle._rcc_wrapper.receipt_file
-        assert receipt.exists()
-        assert descriptor.artifact_digest.startswith("sha256:")
-    finally:
-        pool.dispose()
+    db = Database(tmp_path / "server.db")
+    with db.connect():
+        db.initialize([ActionPackage, Action])
+        db.create_tables(get_model_db_rules())
+        models._global_db = db
+        try:
+            import_action_package(
+                datadir=tmp_path / "data",
+                action_package_dir=str(package_dir),
+                disable_not_imported=False,
+                skip_lint=True,
+                whitelist="",
+            )
+            package = db.all(ActionPackage)[0]
+            action = db.all(Action)[0]
+            descriptor = json.loads(package.env_json)["runtime"]
+            settings = Settings(datadir=tmp_path / "data", artifacts_dir=tmp_path / "artifacts")
+            settings.reuse_processes = False
+            settings.min_processes = 0
+            settings.max_processes = 1
+            pool = ActionsProcessPool(settings, {package.id: package}, [action])
+            try:
+                run_dir = tmp_path / "run"
+                run_dir.mkdir()
+                input_json = run_dir / "input.json"
+                result_json = run_dir / "result.json"
+                output_file = run_dir / "output.txt"
+                input_json.write_text("{}")
+                run = Run(
+                    id="rcc-real-run", status=RunStatus.NOT_RUN, action_id=action.id,
+                    start_time="", run_time=None, inputs="{}", result=None,
+                    error_message=None, relative_artifacts_dir="", numbered_id=1,
+                )
+                with pool.obtain_process_for_action(action) as handle:
+                    assert handle.run_action(
+                        run, package, action, input_json, run_dir, output_file, result_json,
+                        {}, {}, False
+                    ) == 0
+                    assert json.loads(result_json.read_text())["result"] == "rcc-v18.19.2"
+                    receipt = handle._rcc_wrapper.receipt_file
+                assert receipt.exists()
+                assert receipt.read_text().find('"artifactDigest":"sha256:') >= 0
+            finally:
+                pool.dispose()
+        finally:
+            models._global_db = None

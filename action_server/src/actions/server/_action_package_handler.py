@@ -225,7 +225,10 @@ class ActionPackageHandler:
                 if self._package_yaml_contents
                 else None
             )
-            if spec_version == "v2" and not devenv:
+            artifact_mode = os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER") or os.environ.get(
+                "ACTIONS_REAL_RCC_ARTIFACT_TEST"
+            )
+            if spec_version == "v2" and not devenv and artifact_mode:
                 from ._rcc_runtime_adapter import get_rcc_location, prepare_runtime
 
                 descriptor = prepare_runtime(

@@ -14,7 +14,7 @@ import subprocess
 import uuid
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Callable, Mapping, Sequence
+from typing import Callable, Sequence
 
 RCC_VERSION = "v18.19.2"
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
@@ -160,10 +160,7 @@ def acquire_artifact(artifact_digest: str, rcc_location: Path, *, provider: str 
     if provider:
         args.extend(["--provider", provider])
     result = _run_json("acquire", args, runner)
-    try:
-        returned = parse_artifact_digest(result)
-    except RccRuntimeError:
-        returned = artifact_digest
+    returned = parse_artifact_digest(result)
     if returned != artifact_digest:
         raise RccRuntimeError("acquire", "RCC returned a different artifact identity")
     return result
@@ -191,6 +188,7 @@ def build_exec_command(
     command: Sequence[str],
     *,
     receipt_file: Path | None,
+    json_output: bool = True,
 ) -> list[str]:
     if receipt_file is None and command[:2] == ["python", "-c"]:
         pass
@@ -198,9 +196,9 @@ def build_exec_command(
         str(rcc_location), "env", "exec", "--artifact", descriptor.artifact_digest,
         "--permissive-local",
     ]
-    if receipt_file is None:
+    if receipt_file is None and json_output:
         args.append("--json")
-    else:
+    elif receipt_file is not None:
         args.extend(["--inherit-streams", "--receipt-file", str(receipt_file)])
     args.extend(["--", *map(str, command)])
     return args
@@ -250,10 +248,39 @@ def get_rcc_location() -> Path:
         path = Path(override)
         if not path.is_file() or not os.access(path, os.X_OK):
             raise RccRuntimeError("rcc", "ACTIONS_RUNTIME_RCC_BINARY is not executable")
+        verify_rcc_version(path)
         return path
     from actions.server._download_rcc import get_default_rcc_location
 
     path = get_default_rcc_location()
     if not path.is_file() or not os.access(path, os.X_OK):
         raise RccRuntimeError("rcc", f"RCC executable unavailable for {RCC_VERSION}")
+    verify_rcc_version(path)
     return path
+
+
+def verify_rcc_version(rcc_location: Path, runner: Runner = _subprocess_runner) -> str:
+    """Require the selected executable to be the released RCC contract."""
+
+    code, stdout, stderr = runner(str(rcc_location), "--version")
+    if code:
+        raise RccRuntimeError("rcc", "unable to verify RCC version")
+    version = stdout.strip()
+    if version != RCC_VERSION:
+        raise RccRuntimeError("rcc", f"unsupported RCC version {version!r}")
+    return version
+
+
+def read_receipt(receipt_file: Path, artifact_digest: str) -> dict:
+    try:
+        receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        raise RccRuntimeError("receipt", "missing or malformed RCC receipt") from exc
+    if not isinstance(receipt, dict) or receipt.get("artifactDigest") != artifact_digest:
+        raise RccRuntimeError("receipt", "receipt artifact identity mismatch")
+    verification = receipt.get("verification")
+    if not isinstance(verification, dict) or verification.get("valid") is not True:
+        raise RccRuntimeError("receipt", "receipt verification is not valid")
+    if not isinstance(receipt.get("leaseId"), str) or not receipt["leaseId"]:
+        raise RccRuntimeError("receipt", "receipt lease identity is missing")
+    return receipt

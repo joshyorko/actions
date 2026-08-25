@@ -2,6 +2,7 @@ import json
 import logging
 import subprocess
 import sys
+import uuid
 import typing
 from pathlib import Path
 from typing import Literal
@@ -226,10 +227,15 @@ def _get_actions_version(
         from ._rcc_runtime_adapter import build_exec_command, get_rcc_location
 
         python = "RCC Environment Artifact"
+        version_file = Path(cwd) / f".rcc-action-version-{uuid.uuid4().hex}"
+        version_code = (
+            f"import {libname}; from pathlib import Path; "
+            f"Path({str(version_file)!r}).write_text({libname}.__version__)"
+        )
         cmdline = build_exec_command(
             get_rcc_location(),
             runtime_descriptor,
-            ["python", "-c", f"import {libname};print({libname}.__version__)"],
+            ["python", "-c", version_code],
             receipt_file=None,
         )
     msg = f"""Unable to get {libname} version.
@@ -246,17 +252,30 @@ Python executable being used:
         output = subprocess.check_output(cmdline, env=env, cwd=cwd)
     except Exception:
         raise RuntimeError(msg)
-    str_output = output.decode("utf-8", "replace")
     if runtime_descriptor is not None:
         try:
-            result = json.loads(str_output)
+            str_output = version_file.read_text(encoding="utf-8")
+        finally:
+            version_file.unlink(missing_ok=True)
+    else:
+        str_output = output.decode("utf-8", "replace")
+    if runtime_descriptor is not None:
+        decoded_results = []
+        decoder = json.JSONDecoder()
+        for index, character in enumerate(str_output):
+            if character != "{":
+                continue
+            try:
+                result, _end = decoder.raw_decode(str_output[index:])
+            except json.JSONDecodeError:
+                continue
             if isinstance(result, dict):
-                for key in ("stdout", "output", "result"):
-                    if isinstance(result.get(key), str):
-                        str_output = result[key]
-                        break
-        except json.JSONDecodeError:
-            raise RuntimeError(msg)
+                decoded_results.append(result)
+        for result in reversed(decoded_results):
+            for key in ("stdout", "output", "result"):
+                if isinstance(result.get(key), str):
+                    str_output = result[key]
+                    break
     try:
         return tuple(int(x) for x in str_output.strip().split("."))
     except Exception:
@@ -321,6 +340,14 @@ except:
 
 cli.main(["{command}"])
 """
+    if runtime_descriptor is not None:
+        metadata_file = import_path / f".rcc-action-metadata-{uuid.uuid4().hex}.json"
+        code = (
+            "import contextlib\n"
+            f"with open({str(metadata_file)!r}, 'w', encoding='utf-8') as _out, "
+            "contextlib.redirect_stdout(_out):\n"
+            + "    " + code.replace("\n", "\n    ")
+        )
     if runtime_descriptor is None:
         cmdline = [*command_prefix, "-c", code]
     else:
@@ -335,6 +362,11 @@ cli.main(["{command}"])
         shell=False,
     )
     stdout, stderr = popen.communicate()
+    if runtime_descriptor is not None:
+        try:
+            stdout = metadata_file.read_bytes()
+        finally:
+            metadata_file.unlink(missing_ok=True)
     if popen.poll() != 0:
         if popen.poll() == 1:
             # Let's see if we have linting issues.

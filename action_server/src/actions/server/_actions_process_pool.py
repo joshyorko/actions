@@ -256,7 +256,16 @@ class ProcessHandle:
                 log.exception(
                     "Process that runs action did not connect back in the available timeout."
                 )
+                server_socket.close()
+                if getattr(self, "_rcc_wrapper", None) is not None:
+                    self._rcc_wrapper.kill()
+                elif getattr(self, "_process", None) is not None:
+                    from ._robo_utils.process import kill_process_and_subprocesses
+
+                    kill_process_and_subprocesses(self._process.pid)
                 raise
+            finally:
+                server_socket.close()
             read_from = s.makefile("rb")
             write_to = s.makefile("wb")
 
@@ -939,7 +948,6 @@ class ActionsProcessPool:
         try:
             yield process_handle
         finally:
-            self._processes_running_semaphore.release()
             with self._lock:
                 self._remove_from_running_processes(process_handle)
                 if process_handle.is_alive():
@@ -974,6 +982,9 @@ class ActionsProcessPool:
             # especially when not reusing processes, but if some process
             # crashes it's also needed).
             self._warmup_processes()
+            # Return capacity only after a terminated RCC wrapper has been
+            # waited on, preventing overlap with the next claimant.
+            self._processes_running_semaphore.release()
 
 
 _actions_process_pool: Optional[ActionsProcessPool] = None
