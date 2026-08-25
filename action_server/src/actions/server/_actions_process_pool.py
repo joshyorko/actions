@@ -808,6 +808,11 @@ class ActionsProcessPool:
         with self._lock:
             return getattr(self, "_generation", 0)
 
+    def restore_generation(self, generation: int) -> None:
+        """Restore the token when route registration rolls a reload back."""
+        with self._lock:
+            self._generation = generation
+
     @property
     def _reuse_processes(self) -> bool:
         """

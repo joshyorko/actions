@@ -560,9 +560,14 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
     class FakePool:
         def __init__(self):
             self.reloads = []
+            self.generation = 4
 
         def on_reload(self, packages, actions):
             self.reloads.append((packages, actions))
+            self.generation += 1
+
+        def restore_generation(self, generation):
+            self.generation = generation
 
     routes = FakeRoutes()
     pool = FakePool()
@@ -576,6 +581,7 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
         ({"new": "new-package"}, ["new-action"]),
         ({"old": "old-package"}, ["old-action"]),
     ]
+    assert pool.generation == 4
 
 
 def test_receipt_requires_identity_verification_and_lease(tmp_path):

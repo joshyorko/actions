@@ -42,6 +42,7 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
         old_actions = action_routes.actions
         old_routes = list(app.router.routes)
         old_route_state = dict(action_routes.__dict__)
+        old_process_generation = getattr(actions_process_pool, "generation", None)
         helper = action_routes.mcp_server_setup_helper
         old_helper_state = {
             key: copy(value)
@@ -69,6 +70,12 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
             if pool_committed:
                 try:
                     actions_process_pool.on_reload(old_packages, old_actions)
+                    if old_process_generation is not None:
+                        restore_generation = getattr(
+                            actions_process_pool, "restore_generation", None
+                        )
+                        if restore_generation is not None:
+                            restore_generation(old_process_generation)
                 except BaseException:
                     log.exception("Unable to roll back the process generation reload.")
             raise
