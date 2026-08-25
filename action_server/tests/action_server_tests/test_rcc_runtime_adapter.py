@@ -84,6 +84,103 @@ def test_rcc_version_mismatch_fails_closed():
         )
 
 
+def test_source_only_reload_reuses_artifact_without_rcc_calls(tmp_path):
+    from actions.server._rcc_runtime_adapter import prepare_runtime
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text(
+        "spec-version: v2\n"
+        "dependencies:\n"
+        "  conda-forge:\n"
+        "    - python=3.11\n"
+    )
+    digest = "sha256:" + "a" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        if args[2] == "publish":
+            return 0, json.dumps({"artifact": digest}), ""
+        return 0, json.dumps({"artifactDigest": digest}), ""
+
+    first = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        source_generation="source-1",
+        runner=runner,
+    )
+    second = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        source_generation="source-2",
+        runner=runner,
+    )
+
+    assert len(calls) == 2
+    assert first.artifact_digest == second.artifact_digest == digest
+    assert second.source_generation == "source-2"
+
+
+def test_environment_change_does_not_reuse_cached_artifact(tmp_path):
+    from actions.server._rcc_runtime_adapter import prepare_runtime
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    calls = []
+    digests = iter(("sha256:" + "a" * 64, "sha256:" + "b" * 64))
+
+    def runner(*args):
+        calls.append(args)
+        if args[2] == "publish":
+            return 0, json.dumps({"artifact": next(digests)}), ""
+        digest = args[4]
+        return 0, json.dumps({"artifactDigest": digest}), ""
+
+    first = prepare_runtime(package_yaml, Path("/opt/rcc"), runner=runner)
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    second = prepare_runtime(package_yaml, Path("/opt/rcc"), runner=runner)
+
+    assert len(calls) == 4
+    assert first.artifact_digest != second.artifact_digest
+
+
+def test_environment_fingerprint_classifies_pythonpath_as_source_change(tmp_path):
+    from actions.server._rcc_runtime_adapter import classify_environment_change
+
+    before = tmp_path / "before.yaml"
+    after = tmp_path / "after.yaml"
+    before.write_text(
+        "spec-version: v2\ndependencies: {python: '3.11'}\npythonpath: [src]\n"
+    )
+    after.write_text(
+        "spec-version: v2\ndependencies: {python: '3.11'}\npythonpath: [src, tests]\n"
+    )
+
+    assert classify_environment_change(before, after) == "source"
+
+
+def test_reload_marks_running_generation_non_reusable():
+    from actions.server import _actions_process_pool as process_pool
+
+    class OldProcess:
+        can_reuse = True
+
+    old_process = OldProcess()
+    pool = process_pool.ActionsProcessPool.__new__(process_pool.ActionsProcessPool)
+    pool._lock = process_pool.threading.Lock()
+    pool._idle_processes = {}
+    pool._running_processes = {"old": {old_process}}
+    pool._warmup_processes = lambda: None
+    pool.action_package_id_to_action_package = {"old": "old-package"}
+    pool.actions = ["old-action"]
+    new_action = type("Action", (), {"enabled": True, "name": "new-action"})()
+    pool.on_reload({"new": "new-package"}, [new_action])
+
+    assert old_process.can_reuse is False
+    assert pool.action_package_id_to_action_package == {"new": "new-package"}
+    assert pool.actions == [new_action]
+
+
 def test_receipt_requires_identity_verification_and_lease(tmp_path):
     from actions.server._rcc_runtime_adapter import RccRuntimeError, read_receipt
 

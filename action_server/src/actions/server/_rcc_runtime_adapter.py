@@ -11,14 +11,26 @@ import json
 import os
 import re
 import subprocess
+import threading
 import uuid
+from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Callable, Sequence
+from typing import Literal
 
 RCC_VERSION = "v18.19.2"
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
+_ENVIRONMENT_FIELDS = (
+    "spec-version",
+    "dependencies",
+    "dev-dependencies",
+    "post-install",
+)
+_prepared_runtime_cache: dict[
+    tuple[Path, str, str | None], tuple[str, RccRuntimeDescriptor]
+] = {}
+_prepared_runtime_cache_lock = threading.Lock()
 
 
 class RccRuntimeError(RuntimeError):
@@ -112,6 +124,52 @@ def parse_artifact_digest(payload: object) -> str:
 Runner = Callable[..., tuple[int, str, str]]
 
 
+def environment_spec_fingerprint(environment: Path) -> str:
+    """Return a deterministic fingerprint of package environment inputs."""
+
+    try:
+        import yaml
+
+        package = yaml.safe_load(environment.read_text(encoding="utf-8"))
+    except (OSError, TypeError, ValueError) as exc:
+        raise RccRuntimeError("resolve", "unable to read package environment") from exc
+    if not isinstance(package, dict):
+        raise RccRuntimeError("resolve", "package environment must be a mapping")
+    normalized = {key: package[key] for key in _ENVIRONMENT_FIELDS if key in package}
+    encoded = json.dumps(
+        normalized, sort_keys=True, separators=(",", ":"), default=str
+    )
+    return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
+
+
+def classify_environment_change(
+    previous: Path, current: Path
+) -> Literal["environment", "source"]:
+    """Classify package changes using only the normalized environment inputs."""
+
+    if environment_spec_fingerprint(previous) != environment_spec_fingerprint(current):
+        return "environment"
+    return "source"
+
+
+def compute_source_generation(package_dir: Path) -> str:
+    """Hash package source files without making local paths part of identity."""
+
+    digest = hashlib.sha256()
+    for path in sorted(package_dir.rglob("*")):
+        if not path.is_file() or path.name == "package.yaml":
+            continue
+        if "__pycache__" in path.parts or path.name.endswith(".pyc"):
+            continue
+        relative = path.relative_to(package_dir).as_posix().encode("utf-8")
+        digest.update(len(relative).to_bytes(8, "big"))
+        digest.update(relative)
+        content = path.read_bytes()
+        digest.update(len(content).to_bytes(8, "big"))
+        digest.update(content)
+    return digest.hexdigest()
+
+
 def _subprocess_runner(*args: str) -> tuple[int, str, str]:
     try:
         completed = subprocess.run(
@@ -174,12 +232,34 @@ def prepare_runtime(
     provider: str | None = None,
     runner: Runner = _subprocess_runner,
 ) -> RccRuntimeDescriptor:
+    environment = environment.resolve()
+    environment_fingerprint = environment_spec_fingerprint(environment)
+    cache_key = (environment, environment_fingerprint, provider)
+    source_hash = source_generation
+    if source_hash == "unknown":
+        source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
+    with _prepared_runtime_cache_lock:
+        cached = _prepared_runtime_cache.get(cache_key)
+    if cached is not None:
+        _, descriptor = cached
+        return RccRuntimeDescriptor(
+            artifact_digest=descriptor.artifact_digest,
+            source_generation=source_generation,
+            source_hash=source_hash,
+            preparation_class=descriptor.preparation_class,
+            rcc_version=descriptor.rcc_version,
+            runtime_kind=descriptor.runtime_kind,
+            contract_version=descriptor.contract_version,
+        )
+
     digest = publish_artifact(environment, rcc_location, provider=provider, runner=runner)
     acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
-    source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
-    return RccRuntimeDescriptor(
+    descriptor = RccRuntimeDescriptor(
         artifact_digest=digest, source_generation=source_generation, source_hash=source_hash
     )
+    with _prepared_runtime_cache_lock:
+        _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
+    return descriptor
 
 
 def build_exec_command(

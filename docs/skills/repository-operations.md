@@ -582,6 +582,15 @@ exception. Process-pool capacity is released after wrapper cleanup and is
 guaranteed even if warmup recovery raises; the exception-path regressions live
 in the RCC adapter focused test module.
 
+The provisional adapter classifies reload inputs from normalized environment
+fields (`spec-version`, dependency sets, and post-install commands), not from
+the entire package descriptor. A source-only change therefore reuses the
+verified Artifact descriptor without RCC publish/acquire/provider calls while
+refreshing the source generation. Environment changes use a distinct
+fingerprint and reacquire beside the old generation. The process pool marks
+running old-generation workers non-reusable during routing reload; they remain
+leased until their call completes and the wrapper is reaped.
+
 The gated real proof is run with the released RCC binary and explicit gate:
 
 ```bash

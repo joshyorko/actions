@@ -229,11 +229,16 @@ class ActionPackageHandler:
                 "ACTIONS_REAL_RCC_ARTIFACT_TEST"
             )
             if spec_version == "v2" and not devenv and artifact_mode:
-                from ._rcc_runtime_adapter import get_rcc_location, prepare_runtime
+                from ._rcc_runtime_adapter import (
+                    compute_source_generation,
+                    get_rcc_location,
+                    prepare_runtime,
+                )
 
                 descriptor = prepare_runtime(
                     self._original_package_yaml,
                     get_rcc_location(),
+                    source_generation=compute_source_generation(self._import_path),
                     provider=os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER"),
                 )
                 condahash = descriptor.artifact_digest
