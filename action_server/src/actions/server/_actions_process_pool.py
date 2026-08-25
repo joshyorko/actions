@@ -198,57 +198,105 @@ class ProcessHandle:
 
         if use_tcp:
             server_socket = _create_server_socket("127.0.0.1", 0)
-            host, port = server_socket.getsockname()
-            worker_command = [
-                "python" if runtime_descriptor is not None else python_exe,
-                "-m",
-                "preload_actions_server_main",
-                "--tcp",
-                f"--host={host}",
-                f"--port={port}",
-            ]
-            receipt_file = new_receipt_path(settings.datadir)
-            if runtime_descriptor is not None:
-                cmdline = build_exec_command(
-                    get_rcc_location(),
-                    runtime_descriptor,
-                    worker_command,
-                    receipt_file=receipt_file,
+            connection_future = None
+            startup_cancelled = threading.Event()
+
+            def cleanup_startup():
+                startup_cancelled.set()
+                try:
+                    try:
+                        server_socket.shutdown(socket_module.SHUT_RDWR)
+                    except (AttributeError, OSError):
+                        pass
+                finally:
+                    try:
+                        server_socket.close()
+                    except (AttributeError, OSError):
+                        pass
+
+                if connection_future is not None:
+                    try:
+                        connection_future.cancel()
+                    except BaseException:
+                        log.debug("Unable to cancel the TCP accept future.", exc_info=True)
+                    try:
+                        connection_future.result(timeout=1)
+                    except BaseException:
+                        log.debug("TCP accept future finished during startup cleanup.", exc_info=True)
+
+            def cleanup_process():
+                try:
+                    if getattr(self, "_rcc_wrapper", None) is not None:
+                        self._rcc_wrapper.kill()
+                    elif getattr(self, "_process", None) is not None:
+                        from ._robo_utils.process import kill_process_and_subprocesses
+
+                        kill_process_and_subprocesses(self._process.pid)
+                except BaseException:
+                    log.exception("Unable to clean up the failed TCP worker startup.")
+
+            try:
+                host, port = server_socket.getsockname()
+                worker_command = [
+                    "python" if runtime_descriptor is not None else python_exe,
+                    "-m",
+                    "preload_actions_server_main",
+                    "--tcp",
+                    f"--host={host}",
+                    f"--port={port}",
+                ]
+                receipt_file = new_receipt_path(settings.datadir)
+                if runtime_descriptor is not None:
+                    cmdline = build_exec_command(
+                        get_rcc_location(),
+                        runtime_descriptor,
+                        worker_command,
+                        receipt_file=receipt_file,
+                    )
+                else:
+                    cmdline = worker_command
+
+                def accept_connection():
+                    server_socket.listen(1)
+                    server_socket.settimeout(0.2)
+                    while not startup_cancelled.is_set():
+                        try:
+                            sock, _addr = server_socket.accept()
+                        except socket_module.timeout:
+                            continue
+                        return sock
+                    raise RuntimeError("TCP worker startup was cancelled")
+
+                connection_future = run_in_thread(accept_connection)
+
+                self._process = subprocess.Popen(cmdline, **subprocess_kwargs)
+                self._rcc_wrapper = (
+                    RccProcessHandle(self._process, receipt_file)
+                    if runtime_descriptor is not None
+                    else None
                 )
-            else:
-                cmdline = worker_command
+                self._on_output = Callback()
 
-            def accept_connection():
-                server_socket.listen(1)
-                sock, _addr = server_socket.accept()
-                return sock
+                pid = self._process.pid
 
-            connection_future = run_in_thread(accept_connection)
+                stderr = self._process.stderr
+                stdout = self._process.stdout
 
-            self._process = subprocess.Popen(cmdline, **subprocess_kwargs)
-            self._rcc_wrapper = (
-                RccProcessHandle(self._process, receipt_file)
-                if runtime_descriptor is not None
-                else None
-            )
-            self._on_output = Callback()
+                t = threading.Thread(
+                    target=_process_stream_reader, args=(stderr,), daemon=True
+                )
+                t.name = f"Stderr reader (pid: {pid})"
+                t.start()
 
-            pid = self._process.pid
-
-            stderr = self._process.stderr
-            stdout = self._process.stdout
-
-            t = threading.Thread(
-                target=_process_stream_reader, args=(stderr,), daemon=True
-            )
-            t.name = f"Stderr reader (pid: {pid})"
-            t.start()
-
-            t = threading.Thread(
-                target=_process_stream_reader, args=(stdout,), daemon=True
-            )
-            t.name = f"Stdout reader (pid: {pid})"
-            t.start()
+                t = threading.Thread(
+                    target=_process_stream_reader, args=(stdout,), daemon=True
+                )
+                t.name = f"Stdout reader (pid: {pid})"
+                t.start()
+            except BaseException:
+                cleanup_startup()
+                cleanup_process()
+                raise
 
             try:
                 s = connection_future.result(10)
@@ -256,16 +304,15 @@ class ProcessHandle:
                 log.exception(
                     "Process that runs action did not connect back in the available timeout."
                 )
-                server_socket.close()
-                if getattr(self, "_rcc_wrapper", None) is not None:
-                    self._rcc_wrapper.kill()
-                elif getattr(self, "_process", None) is not None:
-                    from ._robo_utils.process import kill_process_and_subprocesses
-
-                    kill_process_and_subprocesses(self._process.pid)
+                cleanup_startup()
+                cleanup_process()
                 raise
             finally:
-                server_socket.close()
+                startup_cancelled.set()
+                try:
+                    server_socket.close()
+                except (AttributeError, OSError):
+                    pass
             read_from = s.makefile("rb")
             write_to = s.makefile("wb")
 
@@ -981,10 +1028,13 @@ class ActionsProcessPool:
             # If needed recreate idle processes which were removed (needed
             # especially when not reusing processes, but if some process
             # crashes it's also needed).
-            self._warmup_processes()
-            # Return capacity only after a terminated RCC wrapper has been
-            # waited on, preventing overlap with the next claimant.
-            self._processes_running_semaphore.release()
+            try:
+                self._warmup_processes()
+            finally:
+                # Return capacity only after a terminated RCC wrapper has been
+                # waited on, preventing overlap with the next claimant. The
+                # release is guaranteed even when warmup cannot recover.
+                self._processes_running_semaphore.release()
 
 
 _actions_process_pool: Optional[ActionsProcessPool] = None

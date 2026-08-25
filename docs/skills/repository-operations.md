@@ -564,13 +564,23 @@ Final reports list exact commands and outcomes, external/service tests skipped, 
 
 ## RCC Environment Artifact execution
 
-Managed spec-v2 Action packages use the provisional RCC runtime adapter. Their
-durable runtime authority is the exact `sha256:` Environment Artifact digest
-and RCC `env exec`; persisted activation paths (`PYTHON_EXE`, `CONDA_PREFIX`,
-`ROBOCORP_HOME`, and Holotree/materialization paths) are not authority. The
-existing process pool starts workers with RCC
-`env exec --artifact DIGEST --permissive-local --inherit-streams
---receipt-file PATH -- ...` and must reap that wrapper before release.
+Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
+explicitly opts into artifact mode. Without either opt-in, legacy bootstrap
+remains active. In artifact mode, durable runtime authority is the exact
+`sha256:` Environment Artifact digest and RCC `env exec`; persisted activation
+paths (`PYTHON_EXE`, `CONDA_PREFIX`, `ROBOCORP_HOME`, and
+Holotree/materialization paths) are not authority. The existing process pool
+starts workers with RCC `env exec --artifact DIGEST --permissive-local
+--inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
+release.
+
+TCP worker startup owns its listener, accept future, and spawned wrapper. Any
+failure after listener creation closes the listener, cancels and observes the
+accept future, and reaps the owned wrapper without replacing the primary
+exception. Process-pool capacity is released after wrapper cleanup and is
+guaranteed even if warmup recovery raises; the exception-path regressions live
+in the RCC adapter focused test module.
 
 The gated real proof is run with the released RCC binary and explicit gate:
 

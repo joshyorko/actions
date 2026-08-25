@@ -157,6 +157,143 @@ def test_process_handle_kill_waits_for_wrapper(tmp_path):
     assert process.poll() is not None
 
 
+def test_process_startup_failure_closes_listener_and_accept_future(monkeypatch, tmp_path):
+    from types import SimpleNamespace
+
+    from actions.server import _actions_process_pool as process_pool
+
+    class FakeSocket:
+        def __init__(self):
+            self.closed = False
+
+        def getsockname(self):
+            return ("127.0.0.1", 12345)
+
+        def close(self):
+            self.closed = True
+
+    class FakeFuture:
+        def __init__(self):
+            self.cancel_called = False
+            self.result_timeouts = []
+
+        def cancel(self):
+            self.cancel_called = True
+            return True
+
+        def result(self, timeout=None):
+            self.result_timeouts.append(timeout)
+            raise RuntimeError("accept worker stopped")
+
+    fake_socket = FakeSocket()
+    fake_future = FakeFuture()
+    monkeypatch.setattr(process_pool, "_create_server_socket", lambda *args: fake_socket)
+    monkeypatch.setattr(
+        "actions.server._robo_utils.run_in_thread.run_in_thread",
+        lambda *args, **kwargs: fake_future,
+    )
+    monkeypatch.setattr(process_pool.subprocess, "Popen", lambda *args, **kwargs: (_ for _ in ()).throw(OSError("forced Popen failure")))
+    monkeypatch.setattr(process_pool, "_get_process_handle_key", lambda *args: "key")
+    monkeypatch.setattr(
+        "actions.server._actions_run_helpers.get_action_package_cwd",
+        lambda *args: tmp_path,
+    )
+    monkeypatch.setattr(
+        "actions.server._robo_utils.process.build_subprocess_kwargs",
+        lambda **kwargs: {},
+    )
+    monkeypatch.setattr(
+        "actions.server._robo_utils.process.build_python_launch_env",
+        lambda env: env,
+    )
+    monkeypatch.setattr(
+        "actions.server._actions_run_helpers._add_preload_actions_dir_to_env_pythonpath",
+        lambda env: None,
+    )
+    monkeypatch.setattr(
+        "actions.server._rcc_runtime_adapter.load_descriptor",
+        lambda env_json: object(),
+    )
+    monkeypatch.setattr(
+        "actions.server._rcc_runtime_adapter.get_rcc_location",
+        lambda: Path("/opt/rcc"),
+    )
+    monkeypatch.setattr(
+        "actions.server._rcc_runtime_adapter.build_exec_command",
+        lambda *args, **kwargs: ["/opt/rcc"],
+    )
+    monkeypatch.setattr(
+        "actions.server._rcc_runtime_adapter.new_receipt_path",
+        lambda datadir: tmp_path / "receipt.json",
+    )
+
+    settings = SimpleNamespace(datadir=tmp_path, reuse_processes=False)
+    package = SimpleNamespace(id="package", env_json=json.dumps({"runtime": {}}), directory=str(tmp_path))
+    with pytest.raises(OSError, match="forced Popen failure"):
+        process_pool.ProcessHandle(settings, package, None)
+
+    assert fake_socket.closed is True
+    assert fake_future.cancel_called is True
+    assert fake_future.result_timeouts
+
+
+def test_process_pool_releases_capacity_when_warmup_fails(monkeypatch):
+    from types import SimpleNamespace
+
+    from actions.server import _actions_process_pool as process_pool
+
+    class FakeProcess:
+        can_reuse = True
+        pid = 123
+        key = "key"
+
+        def __init__(self):
+            self.killed = False
+            self.reaped = False
+
+        def is_alive(self):
+            return True
+
+        def kill(self):
+            self.killed = True
+            self.reaped = True
+
+    class TrackingSemaphore:
+        def __init__(self):
+            self.acquired = False
+            self.release_count = 0
+
+        def acquire(self, timeout=None):
+            assert not self.acquired
+            self.acquired = True
+            return True
+
+        def release(self):
+            assert fake_process.reaped
+            self.acquired = False
+            self.release_count += 1
+
+    fake_process = FakeProcess()
+    pool = process_pool.ActionsProcessPool.__new__(process_pool.ActionsProcessPool)
+    pool._settings = SimpleNamespace(reuse_processes=False)
+    pool._lock = process_pool.threading.Lock()
+    pool._running_processes = {}
+    pool._idle_processes = {"key": {fake_process}}
+    semaphore = TrackingSemaphore()
+    pool._processes_running_semaphore = semaphore
+    pool.action_package_id_to_action_package = {"package": SimpleNamespace(id="package")}
+    pool._remove_from_running_processes = lambda process: None
+    pool._warmup_processes = lambda: (_ for _ in ()).throw(RuntimeError("forced warmup failure"))
+    monkeypatch.setattr(process_pool, "_get_process_handle_key", lambda *args: "key")
+    action = SimpleNamespace(action_package_id="package", name="action")
+
+    with pytest.raises(RuntimeError, match="forced warmup failure"), pool.obtain_process_for_action(action):
+        pass
+
+    assert fake_process.killed is True
+    assert semaphore.release_count == 1
+
+
 @pytest.mark.real_rcc
 def test_real_rcc_artifact_action_vertical(tmp_path):
     import os
