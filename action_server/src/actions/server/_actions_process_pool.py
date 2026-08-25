@@ -708,6 +708,10 @@ class ActionsProcessPool:
         import shlex
 
         self._settings = settings
+        # Route handlers capture this monotonically increasing token.  A
+        # handler admitted before reload can therefore keep using its exact
+        # package generation after this pool has switched to a new one.
+        self._generation = 0
         self.action_package_id_to_action_package = action_package_id_to_action_package
 
         post_run_cmd = os.environ.get("ACTIONS_RUNTIME_POST_RUN_CMD")
@@ -796,6 +800,13 @@ class ActionsProcessPool:
             for running_processes in self._running_processes.values():
                 for process in running_processes:
                     process.can_reuse = False
+            self._generation = getattr(self, "_generation", 0) + 1
+
+    @property
+    def generation(self) -> int:
+        """Current process-generation token used by registered route handlers."""
+        with self._lock:
+            return getattr(self, "_generation", 0)
 
     @property
     def _reuse_processes(self) -> bool:
@@ -818,16 +829,20 @@ class ActionsProcessPool:
     def min_processes(self) -> int:
         return self._settings.min_processes
 
-    def _create_process(self, action: Action):
-        action_package: ActionPackage = self.action_package_id_to_action_package[
-            action.action_package_id
-        ]
+    def _create_process(
+        self, action: Action, action_package: Optional[ActionPackage] = None
+    ) -> ProcessHandle:
+        if action_package is None:
+            action_package = self.action_package_id_to_action_package[
+                action.action_package_id
+            ]
 
         process_handle = ProcessHandle(
             self._settings, action_package, self._post_run_cmd_args
         )
         assert self._lock.locked(), "Lock must be acquired at this point."
         self._add_to_idle_processes(process_handle)
+        return process_handle
 
     def dispose(self):
         with self._lock:
@@ -913,14 +928,24 @@ class ActionsProcessPool:
 
     @contextmanager
     def obtain_process_for_action(
-        self, action: Action, runtime_info: Optional["RunRuntimeInfo"] = None
+        self,
+        action: Action,
+        runtime_info: Optional["RunRuntimeInfo"] = None,
+        *,
+        generation: Optional[int] = None,
+        action_package: Optional[ActionPackage] = None,
     ) -> Iterator[ProcessHandle]:
         import time
         from concurrent.futures import CancelledError
 
-        action_package: ActionPackage = self.action_package_id_to_action_package[
-            action.action_package_id
-        ]
+        current_generation = self.generation
+        request_generation = (
+            current_generation if generation is None else generation
+        )
+        if action_package is None:
+            action_package = self.action_package_id_to_action_package[
+                action.action_package_id
+            ]
 
         key = _get_process_handle_key(self._settings, action_package)
         process_handle: Optional[ProcessHandle] = None
@@ -957,7 +982,16 @@ class ActionsProcessPool:
                 acquired_process_semaphore = True
 
                 with self._lock:
-                    processes = self._idle_processes.get(key)
+                    current_generation = getattr(self, "_generation", 0)
+                    # Idle workers belong to the currently routed generation.
+                    # A stale route may still run, but it must spawn against
+                    # its captured package and never borrow a new-generation
+                    # worker (or return its worker for reuse).
+                    processes = (
+                        self._idle_processes.get(key)
+                        if request_generation == current_generation
+                        else None
+                    )
                     if processes:
                         # Get any process from the (compatible) idle processes.
                         process_handle = processes.pop()
@@ -977,10 +1011,18 @@ class ActionsProcessPool:
                         # No compatible process: we need to create one now.
                         n_running = self._get_running_processes_count_unlocked()
                         if n_running < self.max_processes:
-                            self._create_process(action)
-                            processes = self._idle_processes.get(key)
-                            assert processes, f"Expected idle processes bound to key: {key} at this point!"
-                            process_handle = processes.pop()
+                            created_process = self._create_process(action, action_package)
+                            if request_generation != current_generation:
+                                # A stale route may share a key with the new
+                                # generation.  Remove exactly the worker just
+                                # created instead of taking an arbitrary idle
+                                # worker from that shared key.
+                                process_handle = created_process
+                                self._idle_processes[key].remove(created_process)
+                            else:
+                                processes = self._idle_processes.get(key)
+                                assert processes, f"Expected idle processes bound to key: {key} at this point!"
+                                process_handle = processes.pop()
                             log.debug(
                                 f"Process Pool: Created process ({process_handle.pid})."
                             )
@@ -992,6 +1034,8 @@ class ActionsProcessPool:
                                 )
                                 continue
                             self._add_to_running_processes(process_handle)
+                            if request_generation != current_generation:
+                                process_handle.can_reuse = False
                         else:
                             log.critical(
                                 f"Unable to run: {action.name} because "

@@ -598,8 +598,11 @@ completes and the wrapper is reaped.
 
 Auto-reload prepares the process generation before changing HTTP/MCP action
 routes. Route and pool updates are serialized as one generation transition;
-if route registration fails, the prior route snapshot and process generation
-are restored and the watcher reports an unsuccessful reload.
+each registered handler captures its process-generation token and package, so a
+request admitted through an old route cannot look up a new pool generation
+after reload. If route registration fails, the prior route snapshot and
+process generation are restored and the watcher reports an unsuccessful
+reload. The reload lock alone does not provide this request-level pinning.
 
 On Runtime restart, a persisted descriptor may skip republish only when its
 environment fingerprint exactly matches the current normalized package inputs;

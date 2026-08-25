@@ -36,24 +36,29 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
 
     from ._app import get_app
 
-    app = get_app()
-    old_packages = action_routes.action_package_id_to_action_package
-    old_actions = action_routes.actions
-    old_routes = list(app.router.routes)
-    old_route_state = dict(action_routes.__dict__)
-    helper = action_routes.mcp_server_setup_helper
-    old_helper_state = {
-        key: copy(value)
-        for key, value in helper.__dict__.items()
-        if key.startswith("_")
-    }
-
     with _reload_generation_lock:
+        app = get_app()
+        old_packages = action_routes.action_package_id_to_action_package
+        old_actions = action_routes.actions
+        old_routes = list(app.router.routes)
+        old_route_state = dict(action_routes.__dict__)
+        helper = action_routes.mcp_server_setup_helper
+        old_helper_state = {
+            key: copy(value)
+            for key, value in helper.__dict__.items()
+            if key.startswith("_")
+        }
         pool_committed = False
         try:
             # No new route is exposed until the new worker generation is ready.
             actions_process_pool.on_reload(packages, actions)
             pool_committed = True
+            old_generation = getattr(action_routes, "_process_pool_generation", 0)
+            action_routes._process_pool_generation = getattr(
+                actions_process_pool,
+                "generation",
+                old_generation + 1,
+            )
             action_routes.unregister_actions()
             action_routes.register_actions()
         except BaseException:

@@ -286,6 +286,22 @@ def test_acquire_rejects_invalid_artifact_verification():
         )
 
 
+def test_acquire_rejects_missing_artifact_verification():
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, acquire_artifact
+
+    digest = "sha256:" + "e" * 64
+    with pytest.raises(RccRuntimeError, match="verification"):
+        acquire_artifact(
+            digest,
+            Path("/opt/rcc"),
+            runner=lambda *args: (
+                0,
+                json.dumps({"artifactDigest": digest}),
+                "",
+            ),
+        )
+
+
 def test_reload_marks_running_generation_non_reusable(monkeypatch):
     import sys
     from types import SimpleNamespace
@@ -402,6 +418,101 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
     assert events[:3] == ["pool-prepare", "routes-unregister", "routes-register"]
     assert events[-1] == "old-call-complete"
     assert app.router.routes == ["old-route"]
+
+
+@pytest.mark.asyncio
+async def test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch):
+    """A request admitted before reload must retain its route generation."""
+    import asyncio
+    from threading import Event
+    from types import SimpleNamespace
+
+    from fastapi import Response
+    from starlette.requests import Request
+
+    from actions.server import _actions_run
+
+    started = Event()
+    release = Event()
+    lookups = []
+
+    class FakePool:
+        generation = 2
+
+        def obtain_process_for_action(
+            self, action, runtime_info=None, *, generation=None, action_package=None
+        ):
+            lookups.append((generation, action_package))
+
+            class Context:
+                def __enter__(self):
+                    return SimpleNamespace()
+
+                def __exit__(self, *args):
+                    return False
+
+            return Context()
+
+    pool = FakePool()
+    monkeypatch.setattr(
+        "actions.server._actions_process_pool.get_actions_process_pool",
+        lambda: pool,
+    )
+
+    class FakeRunner:
+        def __init__(self, *args, **kwargs):
+            self.action_package = args[0]
+            self.action = args[1]
+            self.process_pool_generation = kwargs["process_pool_generation"]
+
+        def run_in_thread(self):
+            started.set()
+            assert release.wait(timeout=2)
+            with pool.obtain_process_for_action(
+                self.action,
+                generation=self.process_pool_generation,
+                action_package=self.action_package,
+            ):
+                return "old-result"
+
+    monkeypatch.setattr(_actions_run, "_ActionsRunner", FakeRunner)
+    package = SimpleNamespace(id="old-package")
+    action = SimpleNamespace(
+        action_package_id="old-package",
+        input_schema=json.dumps({"type": "object"}),
+        output_schema=json.dumps({"type": "string"}),
+    )
+    fast_api, _internal, _ = _actions_run.generate_func_from_action(
+        package, action, "Old Action", process_pool_generation=1
+    )
+
+    request_messages = iter(
+        [{"type": "http.request", "body": b"{}", "more_body": False}]
+    )
+
+    async def receive():
+        return next(request_messages)
+
+    request = Request(
+        {
+            "type": "http",
+            "method": "POST",
+            "path": "/old",
+            "headers": [],
+            "query_string": b"",
+            "scheme": "http",
+            "server": ("127.0.0.1", 80),
+            "client": ("127.0.0.1", 1),
+        },
+        receive=receive,
+    )
+    task = asyncio.create_task(fast_api(Response(), request))
+    await asyncio.to_thread(started.wait, 2)
+    # The pool has already advanced, but this admitted request still carries
+    # generation 1 and its old package into the process lookup.
+    release.set()
+    assert await task == "old-result"
+    assert lookups == [(1, package)]
 
 
 def test_route_registration_failure_restores_routes_and_pool_generation(monkeypatch):

@@ -106,6 +106,9 @@ class _ActionRoutes:
         self.action_package_id_to_action_package: dict[str, ActionPackage] = {}
         self.actions: list[Action] = []
         self.registered_route_names: set[str] = set()
+        # The initial process pool generation is zero.  Reload advances this
+        # token before registering the replacement handlers.
+        self._process_pool_generation = 0
         self.mcp_server_setup_helper: McpServerSetupHelper = McpServerSetupHelper()
 
     def setup_mcp_server(self, api_key: str | None) -> None:
@@ -249,7 +252,10 @@ class _ActionRoutes:
                 func_internal,
                 openapi_extra,
             ) = _actions_run.generate_func_from_action(
-                action_package, action, display_name
+                action_package,
+                action,
+                display_name,
+                process_pool_generation=self._process_pool_generation,
             )
 
             if action.is_consequential is not None:
