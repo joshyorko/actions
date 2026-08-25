@@ -1,0 +1,33 @@
+name: Quality report
+
+on:
+  workflow_dispatch:
+    inputs:
+      records:
+        description: Path to a checked-in or generated JSONL export
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build report
+        env:
+          RECORDS_PATH: ${{ inputs.records }}
+        run: |
+          case "$RECORDS_PATH" in
+            /*|*..*|*[!A-Za-z0-9_./-]*) echo "records must be a repository-relative path without traversal or metacharacters" >&2; exit 2 ;;
+          esac
+          test -f "$RECORDS_PATH" || { echo "records file does not exist: $RECORDS_PATH" >&2; exit 2; }
+          python scripts/pr_quality_report.py "$RECORDS_PATH" --output quality-report.json
+      - name: Run dependency-free focused tests
+        run: PYTHONPATH=scripts python -m unittest scripts/test_pr_quality_report_stdlib.py -v
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr-quality-report
+          path: quality-report.json

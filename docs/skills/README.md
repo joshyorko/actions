@@ -6,6 +6,7 @@ Repository-local operational knowledge lives here. Read root `AGENTS.md` first, 
 |---|---|
 | [Repository operations](repository-operations.md) | Package boundaries, environments, testing, commits, releases, and evidence rules |
 | [Work Items](work-items.md) | `actions-work-items`, adapters, queues, attachments, Action Server integration, and backend support |
+| [Provenance and observability](provenance-observability.md) | Runtime evidence, audit records, OpenTelemetry, receipts, privacy, and support exports |
 
 Update an existing guide before creating another. Add every new canonical guide to this index in the same commit.
 
