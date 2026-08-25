@@ -85,32 +85,37 @@ async def _community_expose_lifespan(
     else:
         log.debug("Not exposing action server...")
 
-    yield
-
-    community_tunnel_manager = get_tunnel_manager()
-    if community_tunnel_manager is not None:
-        await community_tunnel_manager.stop()
-
-    if file_watcher is not None:
-        file_watcher.stop()
-
-    log.info("Stopping action server...")
-    from actions.server._robo_utils.process import kill_process_and_subprocesses
-
-    p = psutil.Process(os.getpid())
     try:
-        children_processes = list(p.children(recursive=True))
-    except Exception:
-        log.exception("Error listing subprocesses.")
+        yield
+    finally:
+        community_tunnel_manager = get_tunnel_manager()
+        if community_tunnel_manager is not None:
+            try:
+                await community_tunnel_manager.stop()
+            except Exception:
+                log.exception("Error stopping community tunnel manager.")
 
-    for child in children_processes:
-        log.info(
-            f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
-        )
+        if file_watcher is not None:
+            file_watcher.stop()
+
+        log.info("Stopping action server...")
+        from actions.server._robo_utils.process import kill_process_and_subprocesses
+
+        p = psutil.Process(os.getpid())
+        children_processes = []
         try:
-            kill_process_and_subprocesses(child.pid)
+            children_processes = list(p.children(recursive=True))
         except Exception:
-            log.exception("Error killing subprocess: %s", child.pid)
+            log.exception("Error listing subprocesses.")
+
+        for child in children_processes:
+            log.info(
+                f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
+            )
+            try:
+                kill_process_and_subprocesses(child.pid)
+            except Exception:
+                log.exception("Error killing subprocess: %s", child.pid)
 
 
 class _LoopHolder:

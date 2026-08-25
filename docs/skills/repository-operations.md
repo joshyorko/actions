@@ -389,7 +389,11 @@ providers, logs a bounded failure when all providers fail, and leaves the
 `TunnelManager` inactive; the wrapper boundary is covered separately from provider
 selection and direct cleanup tests. A direct `TunnelManager.stop()` test is
 insufficient for lifecycle coverage: the Action Server lifespan must await the
-created manager's stop before the final child-process cleanup runs.
+created manager's stop before the final child-process cleanup runs. Lifespan
+teardown runs in `finally`, so body exceptions still trigger manager, watcher,
+and child cleanup; manager-stop failures are logged and isolated so they do
+not replace the body exception or skip later cleanup. Failed child enumeration
+logs and treats the child set as empty.
 
 The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
 macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's

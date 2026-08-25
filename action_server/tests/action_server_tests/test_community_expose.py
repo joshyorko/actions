@@ -1,6 +1,8 @@
 import asyncio
 from types import SimpleNamespace
 
+import pytest
+
 from actions.server._community_expose import (
     BaseTunnelProvider,
     TunnelInfo,
@@ -137,3 +139,144 @@ def test_community_expose_lifespan_awaits_manager_before_child_cleanup(monkeypat
         "children_listed",
         "child_killed",
     ]
+
+
+def test_community_expose_lifespan_preserves_body_error_and_runs_cleanup(
+    monkeypatch, caplog
+):
+    events = []
+
+    class _FailingManager:
+        async def stop(self):
+            events.append("tunnel_stop")
+            raise RuntimeError("stop failure")
+
+    class _FileWatcher:
+        def stop(self):
+            events.append("watcher_stop")
+
+    class _Child:
+        pid = 42
+
+        def name(self):
+            return "tunnel-provider"
+
+    class _Process:
+        def children(self, recursive):
+            assert recursive
+            events.append("children_listed")
+            return [_Child()]
+
+    monkeypatch.setattr("psutil.Process", lambda _pid: _Process())
+    monkeypatch.setattr(
+        "actions.server._robo_utils.process.kill_process_and_subprocesses",
+        lambda _pid: events.append("child_killed"),
+    )
+
+    async def run_lifespan():
+        async with _community_expose_lifespan(
+            None,
+            expose=False,
+            file_watcher=_FileWatcher(),
+            expose_later=lambda _loop: None,
+            get_tunnel_manager=lambda: _FailingManager(),
+        ):
+            events.append("running")
+            raise RuntimeError("body failure")
+
+    with caplog.at_level("ERROR"), pytest.raises(
+        RuntimeError, match="body failure"
+    ):
+        asyncio.run(run_lifespan())
+
+    assert events == [
+        "running",
+        "tunnel_stop",
+        "watcher_stop",
+        "children_listed",
+        "child_killed",
+    ]
+    assert "Error stopping community tunnel manager" in caplog.text
+
+
+def test_community_expose_lifespan_isolates_tunnel_stop_failure(
+    monkeypatch, caplog
+):
+    events = []
+
+    class _FailingManager:
+        async def stop(self):
+            events.append("tunnel_stop")
+            raise RuntimeError("stop failure")
+
+    class _FileWatcher:
+        def stop(self):
+            events.append("watcher_stop")
+
+    class _Child:
+        pid = 42
+
+        def name(self):
+            return "tunnel-provider"
+
+    class _Process:
+        def children(self, recursive):
+            assert recursive
+            events.append("children_listed")
+            return [_Child()]
+
+    monkeypatch.setattr("psutil.Process", lambda _pid: _Process())
+    monkeypatch.setattr(
+        "actions.server._robo_utils.process.kill_process_and_subprocesses",
+        lambda _pid: events.append("child_killed"),
+    )
+
+    async def run_lifespan():
+        async with _community_expose_lifespan(
+            None,
+            expose=False,
+            file_watcher=_FileWatcher(),
+            expose_later=lambda _loop: None,
+            get_tunnel_manager=lambda: _FailingManager(),
+        ):
+            events.append("running")
+
+    with caplog.at_level("ERROR"):
+        asyncio.run(run_lifespan())
+
+    assert events == [
+        "running",
+        "tunnel_stop",
+        "watcher_stop",
+        "children_listed",
+        "child_killed",
+    ]
+    assert "Error stopping community tunnel manager" in caplog.text
+
+
+def test_community_expose_lifespan_handles_child_list_failure(monkeypatch, caplog):
+    events = []
+
+    class _Process:
+        def children(self, recursive):
+            assert recursive
+            events.append("children_listed")
+            raise RuntimeError("process lookup failed")
+
+    monkeypatch.setattr("psutil.Process", lambda _pid: _Process())
+
+    async def run_lifespan():
+        async with _community_expose_lifespan(
+            None,
+            expose=False,
+            file_watcher=None,
+            expose_later=lambda _loop: None,
+            get_tunnel_manager=lambda: None,
+        ):
+            events.append("running")
+
+    with caplog.at_level("ERROR"):
+        asyncio.run(run_lifespan())
+
+    assert events == ["running", "children_listed"]
+    assert "Error listing subprocesses" in caplog.text
