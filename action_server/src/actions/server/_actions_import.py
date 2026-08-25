@@ -79,7 +79,7 @@ def import_action_package(
     from ._action_package_handler import ActionPackageHandler
     from ._errors_action_server import ActionServerValidationError
     from ._gen_ids import gen_uuid
-    from ._models import ActionPackage
+    from ._models import ActionPackage, get_db
     from ._robo_utils.process import build_python_launch_env
     from ._rcc_runtime_adapter import load_descriptor
 
@@ -91,6 +91,18 @@ def import_action_package(
     original_package_yaml = action_package_handler.original_package_yaml
     import_path = action_package_handler.import_path
 
+    previous_descriptor = None
+    try:
+        existing_package = get_db().first(
+            ActionPackage,
+            "SELECT * FROM action_package WHERE name = ?",
+            [action_package_name],
+        )
+    except (KeyError, RuntimeError):
+        pass
+    else:
+        previous_descriptor = load_descriptor(existing_package.env_json)
+
     if whitelist:
         if not accept_action_package(whitelist, action_package_name):
             log.info(
@@ -98,7 +110,9 @@ def import_action_package(
             )
             return
 
-    condahash, use_env = action_package_handler.bootstrap_environment()
+    condahash, use_env = action_package_handler.bootstrap_environment(
+        previous_descriptor=previous_descriptor
+    )
 
     # Ok, we bootstrapped, now, let's collect the actions.
     try:

@@ -46,6 +46,7 @@ class RccRuntimeDescriptor:
     artifact_digest: str
     source_generation: str = "unknown"
     source_hash: str = "unknown"
+    environment_fingerprint: str = ""
     preparation_class: str = "local"
     rcc_version: str = RCC_VERSION
     runtime_kind: str = "rcc"
@@ -58,6 +59,10 @@ class RccRuntimeDescriptor:
             raise RccRuntimeError("descriptor", "unsupported runtime kind")
         if self.contract_version != RCC_CONTRACT_VERSION:
             raise RccRuntimeError("descriptor", "unsupported adapter contract")
+        if self.environment_fingerprint and not re.fullmatch(
+            r"[0-9a-f]{64}", self.environment_fingerprint
+        ):
+            raise RccRuntimeError("descriptor", "invalid environment fingerprint")
 
     def to_dict(self) -> dict[str, object]:
         runtime = asdict(self)
@@ -221,6 +226,9 @@ def acquire_artifact(artifact_digest: str, rcc_location: Path, *, provider: str 
     returned = parse_artifact_digest(result)
     if returned != artifact_digest:
         raise RccRuntimeError("acquire", "RCC returned a different artifact identity")
+    verification = result.get("verification")
+    if not isinstance(verification, dict) or verification.get("valid") is not True:
+        raise RccRuntimeError("acquire", "artifact verification is not valid")
     return result
 
 
@@ -230,6 +238,7 @@ def prepare_runtime(
     *,
     source_generation: str = "unknown",
     provider: str | None = None,
+    previous_descriptor: RccRuntimeDescriptor | None = None,
     runner: Runner = _subprocess_runner,
 ) -> RccRuntimeDescriptor:
     environment = environment.resolve()
@@ -238,6 +247,26 @@ def prepare_runtime(
     source_hash = source_generation
     if source_hash == "unknown":
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
+    if (
+        previous_descriptor is not None
+        and previous_descriptor.environment_fingerprint == environment_fingerprint
+    ):
+        acquire_artifact(
+            previous_descriptor.artifact_digest,
+            rcc_location,
+            provider=provider,
+            runner=runner,
+        )
+        descriptor = RccRuntimeDescriptor(
+            artifact_digest=previous_descriptor.artifact_digest,
+            source_generation=source_generation,
+            source_hash=source_hash,
+            environment_fingerprint=environment_fingerprint,
+            preparation_class="warm-reuse",
+        )
+        with _prepared_runtime_cache_lock:
+            _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
+        return descriptor
     with _prepared_runtime_cache_lock:
         cached = _prepared_runtime_cache.get(cache_key)
     if cached is not None:
@@ -246,6 +275,7 @@ def prepare_runtime(
             artifact_digest=descriptor.artifact_digest,
             source_generation=source_generation,
             source_hash=source_hash,
+            environment_fingerprint=environment_fingerprint,
             preparation_class=descriptor.preparation_class,
             rcc_version=descriptor.rcc_version,
             runtime_kind=descriptor.runtime_kind,
@@ -255,7 +285,10 @@ def prepare_runtime(
     digest = publish_artifact(environment, rcc_location, provider=provider, runner=runner)
     acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
     descriptor = RccRuntimeDescriptor(
-        artifact_digest=digest, source_generation=source_generation, source_hash=source_hash
+        artifact_digest=digest,
+        source_generation=source_generation,
+        source_hash=source_hash,
+        environment_fingerprint=environment_fingerprint,
     )
     with _prepared_runtime_cache_lock:
         _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)

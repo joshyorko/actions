@@ -169,7 +169,9 @@ class ActionPackageHandler:
         self._pythonpath_entries = tuple(pythonpath_entries)
         return self._pythonpath_entries
 
-    def bootstrap_environment(self, devenv: bool = False) -> tuple[str, dict]:
+    def bootstrap_environment(
+        self, devenv: bool = False, previous_descriptor=None
+    ) -> tuple[str, dict]:
         """
         Args:
             devenv: Whether the environment is being bootstrapped for the dev
@@ -240,6 +242,7 @@ class ActionPackageHandler:
                     get_rcc_location(),
                     source_generation=compute_source_generation(self._import_path),
                     provider=os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER"),
+                    previous_descriptor=previous_descriptor,
                 )
                 condahash = descriptor.artifact_digest
                 use_env = descriptor.to_dict()

@@ -591,6 +591,12 @@ fingerprint and reacquire beside the old generation. The process pool marks
 running old-generation workers non-reusable during routing reload; they remain
 leased until their call completes and the wrapper is reaped.
 
+On Runtime restart, a persisted descriptor may skip republish only when its
+environment fingerprint exactly matches the current normalized package inputs;
+it is reacquired by Artifact digest and never by a persisted executable or
+materialization path. RCC acquire results must include exact identity and
+`verification.valid == true`; missing or invalid verification fails closed.
+
 The gated real proof is run with the released RCC binary and explicit gate:
 
 ```bash

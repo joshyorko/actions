@@ -101,7 +101,7 @@ def test_source_only_reload_reuses_artifact_without_rcc_calls(tmp_path):
         calls.append(args)
         if args[2] == "publish":
             return 0, json.dumps({"artifact": digest}), ""
-        return 0, json.dumps({"artifactDigest": digest}), ""
+        return 0, json.dumps({"artifactDigest": digest, "verification": {"valid": True}}), ""
 
     first = prepare_runtime(
         package_yaml,
@@ -134,7 +134,7 @@ def test_environment_change_does_not_reuse_cached_artifact(tmp_path):
         if args[2] == "publish":
             return 0, json.dumps({"artifact": next(digests)}), ""
         digest = args[4]
-        return 0, json.dumps({"artifactDigest": digest}), ""
+        return 0, json.dumps({"artifactDigest": digest, "verification": {"valid": True}}), ""
 
     first = prepare_runtime(package_yaml, Path("/opt/rcc"), runner=runner)
     package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
@@ -157,6 +157,57 @@ def test_environment_fingerprint_classifies_pythonpath_as_source_change(tmp_path
     )
 
     assert classify_environment_change(before, after) == "source"
+
+
+def test_restart_reacquires_existing_artifact_without_republishing(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        environment_spec_fingerprint,
+        prepare_runtime,
+    )
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    digest = "sha256:" + "c" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return 0, json.dumps({"artifactDigest": digest, "verification": {"valid": True}}), ""
+
+    previous = RccRuntimeDescriptor(
+        artifact_digest=digest,
+        environment_fingerprint=environment_spec_fingerprint(package_yaml),
+    )
+    prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        previous_descriptor=previous,
+        runner=runner,
+    )
+
+    assert [call[2] for call in calls] == ["acquire"]
+
+
+def test_acquire_rejects_invalid_artifact_verification():
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, acquire_artifact
+
+    digest = "sha256:" + "d" * 64
+    with pytest.raises(RccRuntimeError, match="verification"):
+        acquire_artifact(
+            digest,
+            Path("/opt/rcc"),
+            runner=lambda *args: (
+                0,
+                json.dumps(
+                    {
+                        "artifactDigest": digest,
+                        "verification": {"valid": False},
+                    }
+                ),
+                "",
+            ),
+        )
 
 
 def test_reload_marks_running_generation_non_reusable():
