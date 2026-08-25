@@ -36,8 +36,9 @@ _prepared_runtime_cache_lock = threading.Lock()
 class RccRuntimeError(RuntimeError):
     """A bounded failure at one RCC runtime preparation/execution phase."""
 
-    def __init__(self, phase: str, message: str):
+    def __init__(self, phase: str, message: str, *, retryable: bool = False):
         self.phase = phase
+        self.retryable = retryable
         super().__init__(f"RCC {phase} failed: {message}")
 
 
@@ -196,7 +197,10 @@ def _run_json(phase: str, args: Sequence[str], runner: Runner = _subprocess_runn
     code, stdout, stderr = runner(*args)
     if code:
         detail = (stderr or stdout).strip().splitlines()[-1:] or ["command failed"]
-        raise RccRuntimeError(phase, detail[0][:400])
+        # A command-level failure (for example, a missing local materialization)
+        # may be recovered by publishing a fresh artifact.  Identity and
+        # verification failures below remain non-retryable and fail closed.
+        raise RccRuntimeError(phase, detail[0][:400], retryable=True)
     try:
         loaded = json.loads(stdout)
     except (TypeError, ValueError, json.JSONDecodeError) as exc:
@@ -251,19 +255,38 @@ def prepare_runtime(
         previous_descriptor is not None
         and previous_descriptor.environment_fingerprint == environment_fingerprint
     ):
-        acquire_artifact(
-            previous_descriptor.artifact_digest,
-            rcc_location,
-            provider=provider,
-            runner=runner,
-        )
-        descriptor = RccRuntimeDescriptor(
-            artifact_digest=previous_descriptor.artifact_digest,
-            source_generation=source_generation,
-            source_hash=source_hash,
-            environment_fingerprint=environment_fingerprint,
-            preparation_class="warm-reuse",
-        )
+        try:
+            acquire_artifact(
+                previous_descriptor.artifact_digest,
+                rcc_location,
+                provider=provider,
+                runner=runner,
+            )
+        except RccRuntimeError as exc:
+            if not exc.retryable:
+                raise
+            # The durable descriptor is an identity hint, not an activation
+            # path.  If RCC cannot materialize that identity, publish a new
+            # artifact and validate its exact identity before using it.
+            digest = publish_artifact(
+                environment, rcc_location, provider=provider, runner=runner
+            )
+            acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+            descriptor = RccRuntimeDescriptor(
+                artifact_digest=digest,
+                source_generation=source_generation,
+                source_hash=source_hash,
+                environment_fingerprint=environment_fingerprint,
+                preparation_class="rebuild",
+            )
+        else:
+            descriptor = RccRuntimeDescriptor(
+                artifact_digest=previous_descriptor.artifact_digest,
+                source_generation=source_generation,
+                source_hash=source_hash,
+                environment_fingerprint=environment_fingerprint,
+                preparation_class="warm-reuse",
+            )
         with _prepared_runtime_cache_lock:
             _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
         return descriptor
@@ -271,6 +294,33 @@ def prepare_runtime(
         cached = _prepared_runtime_cache.get(cache_key)
     if cached is not None:
         _, descriptor = cached
+        try:
+            acquire_artifact(
+                descriptor.artifact_digest,
+                rcc_location,
+                provider=provider,
+                runner=runner,
+            )
+        except RccRuntimeError as exc:
+            if not exc.retryable:
+                raise
+            digest = publish_artifact(
+                environment, rcc_location, provider=provider, runner=runner
+            )
+            acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+            descriptor = RccRuntimeDescriptor(
+                artifact_digest=digest,
+                source_generation=source_generation,
+                source_hash=source_hash,
+                environment_fingerprint=environment_fingerprint,
+                preparation_class="rebuild",
+            )
+            with _prepared_runtime_cache_lock:
+                _prepared_runtime_cache[cache_key] = (
+                    environment_fingerprint,
+                    descriptor,
+                )
+            return descriptor
         return RccRuntimeDescriptor(
             artifact_digest=descriptor.artifact_digest,
             source_generation=source_generation,

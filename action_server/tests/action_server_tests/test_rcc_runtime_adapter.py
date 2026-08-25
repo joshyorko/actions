@@ -84,7 +84,7 @@ def test_rcc_version_mismatch_fails_closed():
         )
 
 
-def test_source_only_reload_reuses_artifact_without_rcc_calls(tmp_path):
+def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_path):
     from actions.server._rcc_runtime_adapter import prepare_runtime
 
     package_yaml = tmp_path / "package.yaml"
@@ -116,9 +116,47 @@ def test_source_only_reload_reuses_artifact_without_rcc_calls(tmp_path):
         runner=runner,
     )
 
-    assert len(calls) == 2
+    assert [call[2] for call in calls] == ["publish", "acquire", "acquire"]
     assert first.artifact_digest == second.artifact_digest == digest
     assert second.source_generation == "source-2"
+
+
+def test_cached_artifact_is_revalidated_and_rebuilt_when_materialization_disappears(
+    tmp_path,
+):
+    from actions.server._rcc_runtime_adapter import prepare_runtime
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    first_digest = "sha256:" + "a" * 64
+    replacement_digest = "sha256:" + "b" * 64
+    calls = []
+    missing = False
+
+    def runner(*args):
+        nonlocal missing
+        calls.append(args)
+        if args[2] == "publish":
+            return 0, json.dumps({"artifact": replacement_digest if missing else first_digest}), ""
+        if missing and args[4] == first_digest:
+            return 1, "", "artifact is not materialized"
+        digest = replacement_digest if missing else first_digest
+        return 0, json.dumps(
+            {"artifactDigest": digest, "verification": {"valid": True}}
+        ), ""
+
+    prepare_runtime(package_yaml, Path("/opt/rcc"), runner=runner)
+    missing = True
+    descriptor = prepare_runtime(package_yaml, Path("/opt/rcc"), runner=runner)
+
+    assert descriptor.artifact_digest == replacement_digest
+    assert [call[2] for call in calls] == [
+        "publish",
+        "acquire",
+        "acquire",
+        "publish",
+        "acquire",
+    ]
 
 
 def test_environment_change_does_not_reuse_cached_artifact(tmp_path):
@@ -189,6 +227,44 @@ def test_restart_reacquires_existing_artifact_without_republishing(tmp_path):
     assert [call[2] for call in calls] == ["acquire"]
 
 
+def test_missing_persisted_artifact_republishes_and_acquires_new_identity(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        environment_spec_fingerprint,
+        prepare_runtime,
+    )
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    old_digest = "sha256:" + "a" * 64
+    new_digest = "sha256:" + "b" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        if args[2] == "acquire" and args[4] == old_digest:
+            return 1, "", "artifact is not materialized"
+        if args[2] == "publish":
+            return 0, json.dumps({"artifact": new_digest}), ""
+        return 0, json.dumps(
+            {"artifactDigest": new_digest, "verification": {"valid": True}}
+        ), ""
+
+    previous = RccRuntimeDescriptor(
+        artifact_digest=old_digest,
+        environment_fingerprint=environment_spec_fingerprint(package_yaml),
+    )
+    descriptor = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        previous_descriptor=previous,
+        runner=runner,
+    )
+
+    assert descriptor.artifact_digest == new_digest
+    assert [call[2] for call in calls] == ["acquire", "publish", "acquire"]
+
+
 def test_acquire_rejects_invalid_artifact_verification():
     from actions.server._rcc_runtime_adapter import RccRuntimeError, acquire_artifact
 
@@ -210,7 +286,13 @@ def test_acquire_rejects_invalid_artifact_verification():
         )
 
 
-def test_reload_marks_running_generation_non_reusable():
+def test_reload_marks_running_generation_non_reusable(monkeypatch):
+    import sys
+    from types import SimpleNamespace
+
+    monkeypatch.setitem(
+        sys.modules, "termcolor", SimpleNamespace(colored=lambda value, **kwargs: value)
+    )
     from actions.server import _actions_process_pool as process_pool
 
     class OldProcess:
@@ -221,15 +303,152 @@ def test_reload_marks_running_generation_non_reusable():
     pool._lock = process_pool.threading.Lock()
     pool._idle_processes = {}
     pool._running_processes = {"old": {old_process}}
-    pool._warmup_processes = lambda: None
+    pool._warmup_processes_unlocked = lambda **kwargs: None
     pool.action_package_id_to_action_package = {"old": "old-package"}
     pool.actions = ["old-action"]
+    pool._cycle_actions_iterator = iter(pool.actions)
     new_action = type("Action", (), {"enabled": True, "name": "new-action"})()
     pool.on_reload({"new": "new-package"}, [new_action])
 
     assert old_process.can_reuse is False
     assert pool.action_package_id_to_action_package == {"new": "new-package"}
     assert pool.actions == [new_action]
+
+
+def test_reload_rolls_back_routing_when_new_generation_warmup_fails(monkeypatch):
+    import sys
+    from types import SimpleNamespace
+
+    monkeypatch.setitem(
+        sys.modules, "termcolor", SimpleNamespace(colored=lambda value, **kwargs: value)
+    )
+    from actions.server import _actions_process_pool as process_pool
+
+    class OldProcess:
+        can_reuse = True
+
+    old_process = OldProcess()
+    old_map = {"old": "old-package"}
+    old_action = type("Action", (), {"enabled": True, "name": "old-action"})()
+    pool = process_pool.ActionsProcessPool.__new__(process_pool.ActionsProcessPool)
+    pool._lock = process_pool.threading.Lock()
+    pool._idle_processes = {}
+    pool._running_processes = {"old": {old_process}}
+    pool.action_package_id_to_action_package = old_map
+    pool.actions = [old_action]
+    pool._cycle_actions_iterator = iter([old_action])
+
+    def fail_warmup(**kwargs):
+        raise RuntimeError("new generation failed")
+
+    pool._warmup_processes_unlocked = fail_warmup
+    new_action = type("Action", (), {"enabled": True, "name": "new-action"})()
+
+    with pytest.raises(RuntimeError, match="new generation failed"):
+        pool.on_reload({"new": "new-package"}, [new_action])
+
+    assert pool.action_package_id_to_action_package is old_map
+    assert pool.actions == [old_action]
+    assert old_process.can_reuse is True
+
+
+def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
+    from threading import Event, Thread
+    from types import SimpleNamespace
+
+    from actions.server import _server
+
+    class FakeApp:
+        def __init__(self):
+            self.router = SimpleNamespace(routes=["old-route"])
+
+    app = FakeApp()
+    monkeypatch.setattr("actions.server._app.get_app", lambda: app)
+    events = []
+    old_call_started = Event()
+    release_old_call = Event()
+
+    class FakeRoutes:
+        def __init__(self):
+            self.action_package_id_to_action_package = {"old": "old-package"}
+            self.actions = ["old-action"]
+            self.registered_route_names = {"old-route"}
+            self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
+
+        def unregister_actions(self):
+            events.append("routes-unregister")
+
+        def register_actions(self):
+            events.append("routes-register")
+
+    class FakePool:
+        def on_reload(self, packages, actions):
+            events.append("pool-prepare")
+
+    def old_call():
+        old_call_started.set()
+        release_old_call.wait(timeout=2)
+        events.append("old-call-complete")
+
+    old_call_thread = Thread(target=old_call)
+    old_call_thread.start()
+    assert old_call_started.wait(timeout=2)
+
+    routes = FakeRoutes()
+    _server._reload_action_generation(routes, FakePool(), ["new-action"], {"new": "new"})
+    release_old_call.set()
+    old_call_thread.join(timeout=2)
+
+    assert events[:3] == ["pool-prepare", "routes-unregister", "routes-register"]
+    assert events[-1] == "old-call-complete"
+    assert app.router.routes == ["old-route"]
+
+
+def test_route_registration_failure_restores_routes_and_pool_generation(monkeypatch):
+    from types import SimpleNamespace
+
+    from actions.server import _server
+
+    class FakeApp:
+        def __init__(self):
+            self.router = SimpleNamespace(routes=["old-route"])
+
+    app = FakeApp()
+    monkeypatch.setattr("actions.server._app.get_app", lambda: app)
+
+    class FakeRoutes:
+        def __init__(self):
+            self.action_package_id_to_action_package = {"old": "old-package"}
+            self.actions = ["old-action"]
+            self.registered_route_names = {"old-route"}
+            self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
+
+        def unregister_actions(self):
+            app.router.routes[:] = []
+
+        def register_actions(self):
+            app.router.routes.append("new-route")
+            raise RuntimeError("route preparation failed")
+
+    class FakePool:
+        def __init__(self):
+            self.reloads = []
+
+        def on_reload(self, packages, actions):
+            self.reloads.append((packages, actions))
+
+    routes = FakeRoutes()
+    pool = FakePool()
+    with pytest.raises(RuntimeError, match="route preparation failed"):
+        _server._reload_action_generation(
+            routes, pool, ["new-action"], {"new": "new-package"}
+        )
+
+    assert app.router.routes == ["old-route"]
+    assert pool.reloads == [
+        ({"new": "new-package"}, ["new-action"]),
+        ({"old": "old-package"}, ["old-action"]),
+    ]
 
 
 def test_receipt_requires_identity_verification_and_lease(tmp_path):

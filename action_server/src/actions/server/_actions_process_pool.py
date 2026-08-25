@@ -748,30 +748,54 @@ class ActionsProcessPool:
         actions: List[Action],
     ):
         """
-        On a reload, we need to kill all the related, idle processes and mark
-        any running process as non-reusable.
+        Prepare a new process generation before committing the routing switch.
+
+        Running old-generation processes remain leased until their current
+        call completes.  If preparation fails, newly-created idle workers are
+        discarded and the old routing/idle generation is restored unchanged.
         """
         with self._lock:
-            for key, idle_processes in tuple(self._idle_processes.items()):
-                for process in idle_processes:
-                    process.kill()
-                self._idle_processes.pop(key)
+            old_action_packages = self.action_package_id_to_action_package
+            old_actions = self.actions
+            old_cycle_actions_iterator = self._cycle_actions_iterator
+            old_idle_processes = self._idle_processes
 
-            for key, running_processes in tuple(self._running_processes.items()):
-                for process in running_processes:
-                    process.can_reuse = False
-
+            # Keep old idle workers out of the staged warmup, while retaining
+            # them for rollback until the new generation is ready.
+            self._idle_processes = {}
             self.action_package_id_to_action_package = (
                 action_package_id_to_action_package
             )
-
-            # We just want the actions which are enabled.
             self.actions = [action for action in actions if action.enabled]
-
-            # An iterator which keeps cycling over the actions.
             self._cycle_actions_iterator = itertools.cycle(self.actions)
 
-        self._warmup_processes()
+            try:
+                self._warmup_processes_unlocked(include_running=False)
+            except BaseException:
+                new_idle_processes = self._idle_processes
+                self._idle_processes = old_idle_processes
+                self.action_package_id_to_action_package = old_action_packages
+                self.actions = old_actions
+                self._cycle_actions_iterator = old_cycle_actions_iterator
+                for idle_processes in new_idle_processes.values():
+                    for process in idle_processes:
+                        try:
+                            process.kill()
+                        except BaseException:
+                            log.exception(
+                                "Unable to clean up failed reload process."
+                            )
+                raise
+
+            # The routing switch is committed only after all new workers have
+            # started successfully.  Old running workers drain naturally and
+            # cannot be returned to the new idle generation.
+            for idle_processes in old_idle_processes.values():
+                for process in idle_processes:
+                    process.kill()
+            for running_processes in self._running_processes.values():
+                for process in running_processes:
+                    process.can_reuse = False
 
     @property
     def _reuse_processes(self) -> bool:
@@ -867,14 +891,25 @@ class ActionsProcessPool:
             return
         processes.discard(process_handle)
 
-    def _warmup_processes(self):
+    def _warmup_processes_unlocked(self, *, include_running: bool = True):
+        assert self._lock.locked(), "Lock must be acquired at this point."
         if not self.actions:
             return
 
+        while True:
+            current = (
+                self._count_total_processes()
+                if include_running
+                else self._get_idle_processes_count_unlocked()
+            )
+            if current >= self._settings.min_processes:
+                return
+            one_action = next(self._cycle_actions_iterator)
+            self._create_process(one_action)
+
+    def _warmup_processes(self):
         with self._lock:
-            while self._count_total_processes() < self._settings.min_processes:
-                one_action = next(self._cycle_actions_iterator)
-                self._create_process(one_action)
+            self._warmup_processes_unlocked()
 
     @contextmanager
     def obtain_process_for_action(
