@@ -1,6 +1,7 @@
 import json
 import os
 import shutil
+import stat
 import subprocess
 import tomllib
 import zipfile
@@ -107,6 +108,18 @@ def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
     _assert_no_legacy_contracts(
         {str(path.relative_to(REPO)): path.read_text(errors="replace") for path in _active_surface_files()}
     )
+
+
+def test_template_package_script_is_executable_for_direct_workflow_invocation():
+    script = REPO / "templates/packaging/create-templates-package.sh"
+    assert script.stat().st_mode & stat.S_IXUSR, script
+
+    for workflow_name, config_name in (
+        ("deploy-beta-templates.yml", "templates-beta.json"),
+        ("deploy-templates.yml", "templates-prod.json"),
+    ):
+        workflow = (REPO / ".github/workflows" / workflow_name).read_text()
+        assert f"./create-templates-package.sh {config_name}" in workflow
 
 
 def test_removed_product_paths_do_not_exist():
