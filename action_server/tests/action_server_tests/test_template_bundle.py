@@ -1,3 +1,5 @@
+import hashlib
+import io
 import json
 import subprocess
 import sys
@@ -7,7 +9,6 @@ from unittest import mock
 
 import pytest
 import yaml
-
 
 REPO = Path(__file__).resolve().parents[3]
 PACKAGER = REPO / "templates/packaging/build_embedded_bundle.py"
@@ -54,21 +55,117 @@ def test_template_bundle_generation_is_byte_for_byte_deterministic(tmp_path):
 def test_embedded_metadata_covers_all_production_templates():
     assert (EMBEDDED / "action-templates.zip").is_file()
     metadata = yaml.safe_load((EMBEDDED / "action-templates.yaml").read_text())
-    expected = {
-        template["id"]
-        for template in json.loads(CONFIG.read_text())["templates"]
-    }
+    expected = {"advanced", "basic", "minimal", "workflow-producer-consumer"}
+    assert {
+        template["id"] for template in json.loads(CONFIG.read_text())["templates"]
+    } == expected
     assert set(metadata["templates"]) == expected
 
 
-def test_network_failure_keeps_embedded_templates_available(monkeypatch, tmp_path):
+def test_embedded_templates_are_available_without_network_transport(
+    monkeypatch, tmp_path
+):
     from actions.server import _new_project_helpers as helpers
 
     cache = tmp_path / "action-templates"
     monkeypatch.setattr(helpers, "_get_action_templates_dir_path", lambda: cache)
 
-    with mock.patch("actions_http.get", side_effect=OSError("offline")):
-        helpers._ensure_latest_templates()
+    helpers._ensure_latest_templates()
+
+    metadata = helpers._get_local_templates_metadata()
+    assert metadata is not None
+    assert {template.name for template in metadata.templates} == {
+        "advanced",
+        "basic",
+        "minimal",
+        "workflow-producer-consumer",
+    }
+    assert (cache / "minimal.zip").is_file()
+
+    (cache / "minimal.zip").write_bytes(b"tampered")
+    helpers._ensure_latest_templates()
+    with zipfile.ZipFile(cache / "minimal.zip") as archive:
+        assert "package.yaml" in archive.namelist()
+
+    embedded_metadata, embedded_bundle = helpers._embedded_assets()
+    assert not helpers._cache_is_valid(
+        cache,
+        helpers._get_local_templates_metadata(),
+        embedded_metadata,
+        embedded_bundle + b"tampered",
+    )
+
+
+def test_symlinked_template_cache_is_reseeded_without_writing_target(
+    monkeypatch, tmp_path
+):
+    from actions.server import _new_project_helpers as helpers
+
+    target = tmp_path / "target"
+    target.mkdir()
+    cache = tmp_path / "action-templates"
+    cache.symlink_to(target, target_is_directory=True)
+    monkeypatch.setattr(helpers, "_get_action_templates_dir_path", lambda: cache)
+
+    helpers._ensure_latest_templates()
+
+    assert cache.is_dir()
+    assert not cache.is_symlink()
+    assert not (target / "minimal.zip").exists()
+    assert (cache / "minimal.zip").is_file()
+
+
+@pytest.mark.parametrize("templates", [[], None])
+def test_malformed_template_metadata_is_invalid_without_raising(templates):
+    from actions.server import _new_project_helpers as helpers
+
+    metadata = yaml.safe_dump({"hash": "hash", "templates": templates})
+
+    assert helpers._parse_templates_metadata(metadata) is None
+
+
+def test_parseable_template_metadata_validation_error_is_invalid_without_raising():
+    from actions.server import _new_project_helpers as helpers
+
+    metadata = yaml.safe_dump(
+        {"hash": ["not-a-string"], "templates": {"minimal": "Minimal"}}
+    )
+
+    assert helpers._parse_templates_metadata(metadata) is None
+
+
+def test_template_metadata_read_error_is_treated_as_missing(monkeypatch, tmp_path):
+    from actions.server import _new_project_helpers as helpers
+
+    metadata_path = tmp_path / "action-templates.yaml"
+    metadata_path.write_text("hash: valid\ntemplates: {}\n")
+    monkeypatch.setattr(
+        helpers, "_get_action_templates_metadata_path", lambda: metadata_path
+    )
+    original_read_text = Path.read_text
+
+    def fail_for_metadata(path, *args, **kwargs):
+        if path == metadata_path:
+            raise OSError("metadata disappeared")
+        return original_read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", fail_for_metadata)
+
+    assert helpers._get_local_templates_metadata() is None
+
+
+def test_malformed_local_metadata_is_reseeded_from_embedded_bundle(monkeypatch, tmp_path):
+    from actions.server import _new_project_helpers as helpers
+
+    cache = tmp_path / "action-templates"
+    monkeypatch.setattr(helpers, "_get_action_templates_dir_path", lambda: cache)
+
+    helpers._ensure_latest_templates()
+    (cache / "action-templates.yaml").write_text(
+        "hash: [not-a-string]\ntemplates: {minimal: Minimal}\n"
+    )
+
+    helpers._ensure_latest_templates()
 
     metadata = helpers._get_local_templates_metadata()
     assert metadata is not None
@@ -98,3 +195,23 @@ def test_invalid_template_archive_never_writes_outside_destination(tmp_path):
             helpers._unpack_template("minimal", destination)
 
     assert not (tmp_path / "outside.py").exists()
+
+
+def test_duplicate_bundle_member_is_rejected(tmp_path):
+    from actions.server import _new_project_helpers as helpers
+
+    metadata, embedded_bundle = helpers._embedded_assets()
+    duplicate_bundle = io.BytesIO()
+    with zipfile.ZipFile(io.BytesIO(embedded_bundle)) as source, zipfile.ZipFile(
+        duplicate_bundle, "w"
+    ) as destination:
+        for member in source.infolist():
+            destination.writestr(member, source.read(member))
+        with pytest.warns(UserWarning, match="Duplicate name"):
+            destination.writestr("minimal.zip", source.read("minimal.zip"))
+
+    bundle = duplicate_bundle.getvalue()
+    duplicate_metadata = metadata.model_copy(
+        update={"hash": hashlib.sha256(bundle).hexdigest()}
+    )
+    assert not helpers._install_bundle(tmp_path, duplicate_metadata, bundle)

@@ -25,7 +25,6 @@ class IHookOnActionsListCallback(typing.Protocol):
         self,
         action_package: "ActionPackage",
         actions_list_result: list["ActionsListActionTypedDict"],
-        data_package_metadata: dict | None,
     ):
         ...
 
@@ -41,12 +40,11 @@ class IHookOnActionsList(typing.Protocol):
         self,
         action_package: "ActionPackage",
         actions_list_result: list["ActionsListActionTypedDict"],
-        data_package_metadata: dict | None,
     ):
         ...
 
 
-# Called as: hook_on_actions_list(action_package, actions_list_result, data_package_metadata)
+# Called as: hook_on_actions_list(action_package, actions_list_result)
 hook_on_actions_list: IHookOnActionsList = Callback(raise_exceptions=True)
 
 
@@ -424,7 +422,6 @@ cli.main(["{command}"])
             f"It was not possible to load as json the contents >>{stdout!r}<<"
         )
     else:
-        data_package_metadata = None
         if command == "metadata":
             metadata_result = actions_list_result
             if not isinstance(metadata_result, dict):
@@ -436,13 +433,6 @@ cli.main(["{command}"])
                 raise RuntimeError(
                     f"Expected actions metadata to provide dictionary with 'actions' key. Found: >>{stdout!r}<<"
                 )
-            data_package_metadata = metadata_result.get("data")
-            if data_package_metadata is not None:
-                if not isinstance(data_package_metadata, dict):
-                    raise RuntimeError(
-                        f"Expected actions metadata to provide dictionary with 'data' key. Found: >>{stdout!r}<<"
-                    )
-
         elif command == "list":
             if not isinstance(actions_list_result, list):
                 raise RuntimeError(
@@ -452,7 +442,6 @@ cli.main(["{command}"])
         hook_on_actions_list(
             action_package,
             typing.cast(list["ActionsListActionTypedDict"], actions_list_result),
-            data_package_metadata,
         )
 
         actions = []

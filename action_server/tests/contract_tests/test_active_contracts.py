@@ -1,9 +1,9 @@
 import json
 import os
 import shutil
+import stat
 import subprocess
 import tomllib
-import venv
 import zipfile
 from pathlib import Path
 
@@ -36,7 +36,19 @@ FORBIDDEN_ACTIVE_CONTRACTS = (
     "mode: sema4ai",
     "/sema4ai/oauth2",
     "sema4ai.link",
+    "actions.link",
     "src/sema4ai",
+)
+
+REMOVED_PRODUCT_PATHS = (
+    REPO / "templates/data-access-query",
+    REPO / "templates/data-access-native",
+    REPO / "templates/data-access-kb",
+    REPO / "action_server/build-binary/tier_selector.py",
+    REPO / "action_server/build-binary/vendor-frontend.py",
+    REPO / ".github/workflows/vendor-integrity-check.yml",
+    REPO / "action_server/tests/action_server_tests/test_data_package.py",
+    REPO / "action_server/tests/action_server_tests/resources/data_package",
 )
 
 
@@ -96,6 +108,89 @@ def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
     _assert_no_legacy_contracts(
         {str(path.relative_to(REPO)): path.read_text(errors="replace") for path in _active_surface_files()}
     )
+
+
+def test_template_package_script_is_executable_for_direct_workflow_invocation():
+    script = REPO / "templates/packaging/create-templates-package.sh"
+    assert script.stat().st_mode & stat.S_IXUSR, script
+
+    for workflow_name, config_name in (
+        ("deploy-beta-templates.yml", "templates-beta.json"),
+        ("deploy-templates.yml", "templates-prod.json"),
+    ):
+        workflow = (REPO / ".github/workflows" / workflow_name).read_text()
+        assert f"./create-templates-package.sh {config_name}" in workflow
+
+
+def test_removed_product_paths_do_not_exist():
+    remaining_paths = [
+        str(path.relative_to(REPO)) for path in REMOVED_PRODUCT_PATHS if path.exists()
+    ]
+    assert not remaining_paths
+
+
+def test_runtime_has_no_data_server_or_data_context_compatibility():
+    sources = {
+        "tools": (REPO / "action_server/src/actions/server/_common/tools.py").read_text(),
+        "contexts": (REPO / "actions/src/actions/_action_context.py").read_text(),
+        "managed_parameters": (
+            REPO / "actions/src/actions/_managed_parameters.py"
+        ).read_text(),
+        "run": (REPO / "action_server/src/actions/server/_actions_run.py").read_text(),
+        "import": (
+            REPO / "action_server/src/actions/server/_actions_import.py"
+        ).read_text(),
+        "package_metadata": (
+            REPO / "action_server/src/actions/server/package/_package_metadata.py"
+        ).read_text(),
+    }
+    violations = {
+        f"{name}:{token}"
+        for name, text in sources.items()
+        for token in (
+            "DataServerTool",
+            "DataContext",
+            "x-data-context",
+            "data_package_metadata",
+        )
+        if token in text
+    }
+    assert not violations, sorted(violations)
+
+
+def test_project_templates_use_embedded_assets_without_hosted_update_transport():
+    helpers = (
+        REPO / "action_server/src/actions/server/_new_project_helpers.py"
+    ).read_text()
+    assert "downloads.robocorp.com" not in helpers
+    assert "TEMPLATES_METADATA_URL" not in helpers
+    assert "TEMPLATES_PACKAGE_URL" not in helpers
+    assert "actions_http.get" not in helpers
+
+
+def test_active_guidance_and_ci_have_no_private_product_lane():
+    roots = (
+        REPO / "docs/BUILD_INSTRUCTIONS.md",
+        REPO / "docs/COMMUNITY_UI_SPEC.md",
+        REPO / ".github/copilot-instructions.md",
+        REPO / ".github/workflows/copilot-setup-steps.yml",
+        REPO / ".github/workflows/frontend-build-unauthenticated.yml",
+    )
+    violations = {
+        f"{path.relative_to(REPO)}:{token}"
+        for path in roots
+        if path.exists()
+        for token in (
+            "NPM_TOKEN",
+            "npm.pkg.github.com",
+            "--tier=enterprise",
+            "source=vendored",
+            "source=registry",
+        )
+        if token in path.read_text()
+    }
+    sorted_violations = sorted(violations)
+    assert not sorted_violations
 
 
 def test_runtime_metadata_uses_published_active_dependencies():

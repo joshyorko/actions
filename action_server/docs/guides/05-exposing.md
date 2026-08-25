@@ -3,16 +3,10 @@
 To expose a local running action server for public access, it's possible
 to use `action-server start --expose`.
 
-By doing so, the `action-server` will automatically connect to a
-server and you'll get a public reference to it on the `actions.link` domain
-(for instance `https://twently-cuddly-dinosaurs.actions.link`).
-
-Note: if the server is stopped and restarted, it'll ask to reconnect to
-the same server afterwards as url/access secret is stored in the datadir.
-If you say `No`, a new url/access secret will be generated and the old
-one will be lost, so, it may be interesting to backup the `expose_session.json`
-from your datadir if you plan to keep using the same url later on (the datadir is
-printed in the console whenever you start your action server).
+The server selects an available public tunnel provider. Use
+`--expose-provider` to choose `localhost.run`, `bore`, or `cloudflare`
+explicitly. Tunnel URLs are provider-owned and are not guaranteed to remain
+stable after the server stops.
 
 ### Authentication
 

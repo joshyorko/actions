@@ -655,7 +655,7 @@ def generate_func_from_action(
         #
         # This is done because headers have a size restriction and we don't want to
         # hit it (so, we enable passing things that are conceptually headers, such as
-        # `x-action-context` and `x-data-context`, in the body of the request)
+        # `x-action-context` in the body of the request)
         invocation_context = headers.get(HEADER_ACTION_INVOCATION_CONTEXT)
         if invocation_context:  # Anything there means we expect the body to contain the additional contexts.
             if isinstance(inputs, dict):
