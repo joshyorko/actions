@@ -66,6 +66,53 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
     return community_tunnel_manager
 
 
+@asynccontextmanager
+async def _community_expose_lifespan(
+    app: FastAPI,
+    *,
+    expose: bool,
+    file_watcher,
+    expose_later: typing.Callable[[typing.Any], None],
+    get_tunnel_manager: typing.Callable[[], typing.Any],
+):
+    import psutil
+
+    loop = asyncio.get_event_loop()
+    _LoopHolder.loop = loop
+    if expose:
+        log.debug("Exposing action server...")
+        loop.call_later(1 / 15.0, partial(expose_later, loop))
+    else:
+        log.debug("Not exposing action server...")
+
+    yield
+
+    community_tunnel_manager = get_tunnel_manager()
+    if community_tunnel_manager is not None:
+        await community_tunnel_manager.stop()
+
+    if file_watcher is not None:
+        file_watcher.stop()
+
+    log.info("Stopping action server...")
+    from actions.server._robo_utils.process import kill_process_and_subprocesses
+
+    p = psutil.Process(os.getpid())
+    try:
+        children_processes = list(p.children(recursive=True))
+    except Exception:
+        log.exception("Error listing subprocesses.")
+
+    for child in children_processes:
+        log.info(
+            f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
+        )
+        try:
+            kill_process_and_subprocesses(child.pid)
+        except Exception:
+            log.exception("Error killing subprocess: %s", child.pid)
+
+
 class _LoopHolder:
     loop: Optional["AbstractEventLoop"] = None
 
@@ -411,38 +458,14 @@ def start_server(
 
     @asynccontextmanager
     async def _expose_and_shutdown(app: FastAPI):
-        import psutil
-
-        loop = asyncio.get_event_loop()
-        _LoopHolder.loop = loop
-        if expose:
-            log.debug("Exposing action server...")
-            loop.call_later(1 / 15.0, partial(expose_later, loop))
-        else:
-            log.debug("Not exposing action server...")
-
-        yield
-
-        if file_watcher is not None:
-            file_watcher.stop()
-
-        log.info("Stopping action server...")
-        from actions.server._robo_utils.process import kill_process_and_subprocesses
-
-        p = psutil.Process(os.getpid())
-        try:
-            children_processes = list(p.children(recursive=True))
-        except Exception:
-            log.exception("Error listing subprocesses.")
-
-        for child in children_processes:
-            log.info(
-                f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
-            )
-            try:
-                kill_process_and_subprocesses(child.pid)
-            except Exception:
-                log.exception("Error killing subprocess: %s", child.pid)
+        async with _community_expose_lifespan(
+            app,
+            expose=expose,
+            file_watcher=file_watcher,
+            expose_later=expose_later,
+            get_tunnel_manager=lambda: community_tunnel_manager,
+        ):
+            yield
 
     app.custom_lifespan.register(_expose_and_shutdown)
 

@@ -387,7 +387,9 @@ published `actions-core` package via `from actions ...`; do not name an action m
 Community `--expose` startup tries the selected or available open-source tunnel
 providers, logs a bounded failure when all providers fail, and leaves the
 `TunnelManager` inactive; the wrapper boundary is covered separately from provider
-selection and direct cleanup tests.
+selection and direct cleanup tests. A direct `TunnelManager.stop()` test is
+insufficient for lifecycle coverage: the Action Server lifespan must await the
+created manager's stop before the final child-process cleanup runs.
 
 The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
 macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's

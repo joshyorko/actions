@@ -7,7 +7,10 @@ from actions.server._community_expose import (
     TunnelManager,
     TunnelProvider,
 )
-from actions.server._server import _start_community_expose_impl
+from actions.server._server import (
+    _community_expose_lifespan,
+    _start_community_expose_impl,
+)
 
 
 class _FakeProvider(BaseTunnelProvider):
@@ -87,3 +90,50 @@ def test_server_expose_suppresses_all_provider_failure_without_active_tunnel(
     assert result is manager
     assert not manager.is_active
     assert "Failed to start tunnel: All tunnel providers failed" in caplog.text
+
+
+def test_community_expose_lifespan_awaits_manager_before_child_cleanup(monkeypatch):
+    events = []
+
+    class _StartedManager:
+        async def stop(self):
+            events.append("tunnel_stop")
+
+    manager = _StartedManager()
+
+    class _Child:
+        pid = 42
+
+        def name(self):
+            return "tunnel-provider"
+
+    class _Process:
+        def children(self, recursive):
+            assert recursive
+            events.append("children_listed")
+            return [_Child()]
+
+    monkeypatch.setattr("psutil.Process", lambda _pid: _Process())
+    monkeypatch.setattr(
+        "actions.server._robo_utils.process.kill_process_and_subprocesses",
+        lambda _pid: events.append("child_killed"),
+    )
+
+    async def run_lifespan():
+        async with _community_expose_lifespan(
+            None,
+            expose=False,
+            file_watcher=None,
+            expose_later=lambda _loop: None,
+            get_tunnel_manager=lambda: manager,
+        ):
+            events.append("running")
+
+    asyncio.run(run_lifespan())
+
+    assert events == [
+        "running",
+        "tunnel_stop",
+        "children_listed",
+        "child_killed",
+    ]
