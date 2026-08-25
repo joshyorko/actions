@@ -7,6 +7,7 @@ import zipfile
 from pathlib import Path
 
 import yaml
+from pydantic import ValidationError
 from pydantic.main import BaseModel
 
 from ._settings import get_default_settings_dir
@@ -170,7 +171,12 @@ def _get_local_templates_metadata() -> ActionTemplatesMetadata | None:
     if not os.path.isfile(action_templates_metadata_path):
         return None
 
-    return _parse_templates_metadata(action_templates_metadata_path.read_text())
+    try:
+        contents = action_templates_metadata_path.read_text(encoding="utf-8")
+    except OSError as e:
+        log.warning(f"Error reading local template metadata: {e}")
+        return None
+    return _parse_templates_metadata(contents)
 
 
 def _parse_templates_metadata(yaml_content: str) -> ActionTemplatesMetadata | None:
@@ -192,7 +198,7 @@ def _parse_templates_metadata(yaml_content: str) -> ActionTemplatesMetadata | No
             hash=metadata.get("hash", ""),
             templates=templates,
         )
-    except yaml.YAMLError as e:
+    except (ValidationError, TypeError, ValueError, yaml.YAMLError) as e:
         log.warning(f"Error reading metadata: {e}")
         return None
 

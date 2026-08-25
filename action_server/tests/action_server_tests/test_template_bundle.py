@@ -124,6 +124,60 @@ def test_malformed_template_metadata_is_invalid_without_raising(templates):
     assert helpers._parse_templates_metadata(metadata) is None
 
 
+def test_parseable_template_metadata_validation_error_is_invalid_without_raising():
+    from actions.server import _new_project_helpers as helpers
+
+    metadata = yaml.safe_dump(
+        {"hash": ["not-a-string"], "templates": {"minimal": "Minimal"}}
+    )
+
+    assert helpers._parse_templates_metadata(metadata) is None
+
+
+def test_template_metadata_read_error_is_treated_as_missing(monkeypatch, tmp_path):
+    from actions.server import _new_project_helpers as helpers
+
+    metadata_path = tmp_path / "action-templates.yaml"
+    metadata_path.write_text("hash: valid\ntemplates: {}\n")
+    monkeypatch.setattr(
+        helpers, "_get_action_templates_metadata_path", lambda: metadata_path
+    )
+    original_read_text = Path.read_text
+
+    def fail_for_metadata(path, *args, **kwargs):
+        if path == metadata_path:
+            raise OSError("metadata disappeared")
+        return original_read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", fail_for_metadata)
+
+    assert helpers._get_local_templates_metadata() is None
+
+
+def test_malformed_local_metadata_is_reseeded_from_embedded_bundle(monkeypatch, tmp_path):
+    from actions.server import _new_project_helpers as helpers
+
+    cache = tmp_path / "action-templates"
+    monkeypatch.setattr(helpers, "_get_action_templates_dir_path", lambda: cache)
+
+    helpers._ensure_latest_templates()
+    (cache / "action-templates.yaml").write_text(
+        "hash: [not-a-string]\ntemplates: {minimal: Minimal}\n"
+    )
+
+    helpers._ensure_latest_templates()
+
+    metadata = helpers._get_local_templates_metadata()
+    assert metadata is not None
+    assert {template.name for template in metadata.templates} == {
+        "advanced",
+        "basic",
+        "minimal",
+        "workflow-producer-consumer",
+    }
+    assert (cache / "minimal.zip").is_file()
+
+
 def test_invalid_template_archive_never_writes_outside_destination(tmp_path):
     from actions.server import _new_project_helpers as helpers
 

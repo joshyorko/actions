@@ -386,7 +386,8 @@ generator input. A cache hash mismatch, byte mismatch, traversal path, duplicate
 or symlink causes reseeding from the embedded bundle. A symlinked cache directory is
 unlinked before reseeding, so embedded files are never written through its target.
 Metadata whose `templates` value is not a mapping is invalid and also triggers offline
-reseeding. `action_server/pyproject.toml`
+reseeding. Parseable metadata that fails model validation, or metadata that cannot be
+read, is treated as missing and also triggers offline reseeding. `action_server/pyproject.toml`
 includes the two embedded files so Poetry and PyInstaller builds retain this offline
 contract. Template modules must import the
 published `actions-core` package via `from actions ...`; do not name an action module
