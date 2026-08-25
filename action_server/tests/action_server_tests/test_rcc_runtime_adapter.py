@@ -424,39 +424,52 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
 async def test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch):
     """A request admitted before reload must retain its route generation."""
     import asyncio
-    from threading import Event
+    from threading import Event, Lock, Semaphore
     from types import SimpleNamespace
 
     from fastapi import Response
     from starlette.requests import Request
 
     from actions.server import _actions_run
+    from actions.server import _actions_process_pool as process_pool
 
     started = Event()
     release = Event()
     lookups = []
 
-    class FakePool:
-        generation = 2
+    class FakeProcess:
+        def __init__(self, _settings, action_package, _post_run_args):
+            self.action_package = action_package
+            self.key = action_package.id
+            self.can_reuse = True
+            self.pid = 123
+            self.killed = False
 
-        def obtain_process_for_action(
-            self, action, runtime_info=None, *, generation=None, action_package=None
-        ):
-            lookups.append((generation, action_package))
+        def is_alive(self):
+            return not self.killed
 
-            class Context:
-                def __enter__(self):
-                    return SimpleNamespace()
+        def kill(self):
+            self.killed = True
 
-                def __exit__(self, *args):
-                    return False
-
-            return Context()
-
-    pool = FakePool()
+    monkeypatch.setattr(process_pool, "ProcessHandle", FakeProcess)
     monkeypatch.setattr(
-        "actions.server._actions_process_pool.get_actions_process_pool",
-        lambda: pool,
+        process_pool, "_get_process_handle_key", lambda _settings, package: package.id
+    )
+    pool = process_pool.ActionsProcessPool.__new__(process_pool.ActionsProcessPool)
+    pool._settings = SimpleNamespace(max_processes=1, min_processes=0, reuse_processes=True)
+    pool._generation = 2
+    pool._lock = Lock()
+    pool._processes_running_semaphore = Semaphore(1)
+    pool._running_processes = {}
+    pool._idle_processes = {}
+    pool._post_run_cmd_args = None
+    pool.action_package_id_to_action_package = {
+        "new-package": SimpleNamespace(id="new-package")
+    }
+    pool.actions = []
+    pool._cycle_actions_iterator = iter(())
+    monkeypatch.setattr(
+        process_pool, "get_actions_process_pool", lambda: pool
     )
 
     class FakeRunner:
@@ -472,7 +485,10 @@ async def test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch)
                 self.action,
                 generation=self.process_pool_generation,
                 action_package=self.action_package,
-            ):
+            ) as process:
+                lookups.append(
+                    (self.process_pool_generation, process.action_package)
+                )
                 return "old-result"
 
     monkeypatch.setattr(_actions_run, "_ActionsRunner", FakeRunner)
