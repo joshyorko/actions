@@ -88,7 +88,7 @@ def parse_artifact_digest(payload: object) -> str:
 
     candidates: list[object] = []
     if isinstance(payload, dict):
-        for key in ("artifact", "artifact_digest", "digest"):
+        for key in ("artifact", "artifact_digest", "artifactDigest", "digest"):
             if key in payload:
                 candidates.append(payload[key])
         artifact = payload.get("artifact")
@@ -212,7 +212,7 @@ def load_descriptor(env_json: str) -> RccRuntimeDescriptor | None:
     except (TypeError, ValueError, json.JSONDecodeError):
         return None
     if isinstance(value, dict) and "runtime" in value:
-        return RccRuntimeDescriptor.from_dict(value)
+        return RccRuntimeDescriptor.from_dict({"runtime": value["runtime"]})
     return None
 
 

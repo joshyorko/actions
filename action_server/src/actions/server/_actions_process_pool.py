@@ -633,7 +633,10 @@ def _get_process_handle_key(settings: Settings, action_package: ActionPackage) -
     """
     from ._actions_run_helpers import get_action_package_cwd
 
-    env = tuple(sorted(json.loads(action_package.env_json).items()))
+    # Runtime descriptors namespace structured RCC evidence beneath ``runtime``;
+    # canonical JSON keeps the legacy pool key hashable without making local
+    # activation paths part of runtime identity.
+    env = json.dumps(json.loads(action_package.env_json), sort_keys=True)
     cwd = get_action_package_cwd(settings, action_package)
     return _Key(action_package.id, env, cwd)
 

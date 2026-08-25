@@ -10,6 +10,7 @@ def test_artifact_digest_parser_accepts_only_exact_identity():
 
     assert parse_artifact_digest({"artifact": "sha256:" + "a" * 64}) == "sha256:" + "a" * 64
     assert parse_artifact_digest({"artifact": {"digest": "sha256:" + "b" * 64}}) == "sha256:" + "b" * 64
+    assert parse_artifact_digest({"artifactDigest": "sha256:" + "c" * 64}) == "sha256:" + "c" * 64
     for payload in ({}, {"artifact": "not-a-digest"}, {"digest": "sha256:" + "a" * 63}):
         with pytest.raises(RccRuntimeError, match="artifact"):
             parse_artifact_digest(payload)
