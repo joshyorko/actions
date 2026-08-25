@@ -782,6 +782,8 @@ async def execute_action_for_scheduler(
     from ._models import Run, get_db
 
     settings = get_settings()
+    actions_process_pool: ActionsProcessPool = get_actions_process_pool()
+    process_pool_generation = actions_process_pool.generation
     from ._artifact_storage import get_artifact_storage
 
     artifact_storage = get_artifact_storage()
@@ -796,12 +798,13 @@ async def execute_action_for_scheduler(
 
     def _execute_in_thread():
         with db.connect():
-            actions_process_pool: ActionsProcessPool = get_actions_process_pool()
-
             try:
                 initial_time = time.monotonic()
                 process_handle_ctx = actions_process_pool.obtain_process_for_action(
-                    action, runtime_info
+                    action,
+                    runtime_info,
+                    generation=process_pool_generation,
+                    action_package=action_package,
                 )
                 with process_handle_ctx as process_handle:
                     initial_time = time.monotonic()

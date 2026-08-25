@@ -1,6 +1,70 @@
 import pytest
 
 
+def test_call_tool_uses_admitted_catalog_during_concurrent_reload(monkeypatch):
+    import asyncio
+    import threading
+    from types import SimpleNamespace
+
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
+
+    def action(name):
+        return SimpleNamespace(
+            name=name,
+            options="{}",
+            input_schema="{}",
+            output_schema='{"type": "string"}',
+        )
+
+    helper = McpServerSetupHelper()
+    observed = []
+    old_started = threading.Event()
+    release_old = threading.Event()
+
+    async def old_action(**_kwargs):
+        observed.append("old")
+        return "old-result"
+
+    async def new_action(**_kwargs):
+        observed.append("new")
+        return "new-result"
+
+    helper.register_action(old_action, None, action("tool"), "Tool", "old")
+    replacement = McpServerSetupHelper()
+    replacement.register_action(new_action, None, action("tool"), "Tool", "new")
+
+    def request_values(_ctx):
+        old_started.set()
+        release_old.wait(timeout=5)
+        return {}, {}
+
+    monkeypatch.setattr(helper, "_request_values", request_values)
+    call_result = {}
+
+    def invoke():
+        async def call():
+            return await helper._call_tool(
+                SimpleNamespace(request=None),
+                SimpleNamespace(name="tool", arguments={}),
+            )
+
+        try:
+            call_result["value"] = asyncio.run(call())
+        except BaseException as exc:  # pragma: no cover - surfaced below
+            call_result["error"] = exc
+
+    thread = threading.Thread(target=invoke)
+    thread.start()
+    assert old_started.wait(timeout=5)
+    helper.replace_catalog(replacement)
+    release_old.set()
+    thread.join(timeout=5)
+
+    assert "error" not in call_result
+    assert call_result["value"].content[0].text == "old-result"
+    assert observed == ["old"]
+
+
 def test_resource_template_matches():
     from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 

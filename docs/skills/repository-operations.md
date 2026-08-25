@@ -604,6 +604,16 @@ after reload. If route registration fails, the prior route snapshot and
 process generation are restored and the watcher reports an unsuccessful
 reload. The reload lock alone does not provide this request-level pinning.
 
+Scheduled executions capture the current process-pool object, generation token,
+and ActionPackage before dispatching their worker thread; a reload that replaces
+the global pool therefore cannot redirect an already-admitted schedule to the
+new package. The persistent MCP endpoint stages a complete catalog in a
+separate helper and publishes one catalog pointer after route registration;
+MCP callbacks capture that pointer before lookup, so unregister/register cannot
+expose an empty or partially populated catalog to an admitted call. The
+standalone `unregister_actions()` reset remains available for explicit teardown
+outside reload.
+
 On Runtime restart, a persisted descriptor may skip republish only when its
 environment fingerprint exactly matches the current normalized package inputs;
 it is reacquired by Artifact digest and never by a persisted executable or

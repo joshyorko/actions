@@ -391,6 +391,9 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
             self.registered_route_names = {"old-route"}
             self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
 
+        def unregister_http_actions(self):
+            events.append("routes-unregister")
+
         def unregister_actions(self):
             events.append("routes-unregister")
 
@@ -420,8 +423,151 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
     assert app.router.routes == ["old-route"]
 
 
-@pytest.mark.asyncio
-async def test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch):
+def test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch):
+    import asyncio
+
+    asyncio.run(_test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch))
+
+
+def test_scheduler_admission_pins_pool_and_package_across_reload(monkeypatch, tmp_path):
+    """A scheduled run keeps its admitted pool and package during reload."""
+    import asyncio
+    import threading
+    from contextlib import nullcontext
+    from types import SimpleNamespace
+
+    from actions.server import _actions_process_pool, _actions_run, _artifact_storage
+    from actions.server import _models, _runs_state_cache, _settings
+    from actions.server._robo_utils import run_in_thread
+
+    class RuntimeInfo:
+        class OnCancel:
+            def register(self, _callback):
+                return nullcontext()
+
+        on_cancel = OnCancel()
+
+        def is_canceled(self):
+            return False
+
+    class Handle:
+        pid = 123
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+        def run_action(
+            self, _run, _package, _action, _input, _artifacts, _output,
+            result_json, *_args
+        ):
+            result_json.write_text('{"result": "old-generation"}')
+            return 0
+
+    class Pool:
+        def __init__(self, generation):
+            self.generation = generation
+            self.calls = []
+
+        def obtain_process_for_action(
+            self, action, runtime_info, *, generation, action_package
+        ):
+            self.calls.append((action, runtime_info, generation, action_package))
+            return Handle()
+
+    class DB:
+        def connect(self):
+            return nullcontext()
+
+        def first(self, *_args):
+            return run
+
+    class ArtifactStorage:
+        def run_artifacts_dir(self, _relative):
+            return tmp_path
+
+    class RunsState:
+        def create_run_runtime_info(self, _run_id):
+            return RuntimeInfo()
+
+    old_pool = Pool(4)
+    new_pool = Pool(5)
+    current_pool = old_pool
+    worker_started = threading.Event()
+    allow_worker = threading.Event()
+
+    def dispatch(func):
+        result = {}
+
+        def worker():
+            worker_started.set()
+            allow_worker.wait(timeout=5)
+            try:
+                result["value"] = func()
+            except BaseException as exc:  # pragma: no cover - surfaced by result()
+                result["error"] = exc
+
+        thread = threading.Thread(target=worker)
+        thread.start()
+
+        class Future:
+            def result(self):
+                thread.join(timeout=5)
+                if "error" in result:
+                    raise result["error"]
+                return result["value"]
+
+        return Future()
+
+    def get_pool():
+        return current_pool
+
+    run = SimpleNamespace()
+    action = SimpleNamespace(name="scheduled", id="action-id")
+    old_package = SimpleNamespace(id="old-package")
+    result = {}
+
+    monkeypatch.setattr(
+        _settings,
+        "get_settings",
+        lambda: SimpleNamespace(datadir=tmp_path, reuse_processes=False),
+    )
+    monkeypatch.setattr(
+        _runs_state_cache, "get_global_runs_state", lambda: RunsState()
+    )
+    monkeypatch.setattr(
+        _artifact_storage, "get_artifact_storage", lambda: ArtifactStorage()
+    )
+    monkeypatch.setattr(_actions_process_pool, "get_actions_process_pool", get_pool)
+    monkeypatch.setattr(_models, "get_db", lambda: DB())
+    monkeypatch.setattr(_actions_run, "_set_run_as_running", lambda *_args: None)
+    monkeypatch.setattr(_actions_run, "_set_run_as_finished_ok", lambda *_args: None)
+    monkeypatch.setattr(_actions_run, "_set_run_as_finished_failed", lambda *_args: None)
+    monkeypatch.setattr(run_in_thread, "run_in_thread", dispatch)
+
+    async def run_scheduled():
+        return await _actions_run.execute_action_for_scheduler(
+            action, old_package, "run-id", {}, "artifacts"
+        )
+
+    task = threading.Thread(
+        target=lambda: result.update(value=asyncio.run(run_scheduled()))
+    )
+    task.start()
+    assert worker_started.wait(timeout=5)
+    current_pool = new_pool
+    allow_worker.set()
+    task.join(timeout=5)
+
+    assert result["value"] == (True, "old-generation")
+    assert len(old_pool.calls) == 1
+    assert old_pool.calls[0][2:] == (4, old_package)
+    assert not new_pool.calls
+
+
+async def _test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch):
     """A request admitted before reload must retain its route generation."""
     import asyncio
     from threading import Event, Lock, Semaphore
@@ -551,6 +697,9 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
             self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
 
         def unregister_actions(self):
+            app.router.routes[:] = []
+
+        def unregister_http_actions(self):
             app.router.routes[:] = []
 
         def register_actions(self):

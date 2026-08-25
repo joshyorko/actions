@@ -60,7 +60,7 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
                 "generation",
                 old_generation + 1,
             )
-            action_routes.unregister_actions()
+            action_routes.unregister_http_actions()
             action_routes.register_actions()
         except BaseException:
             app.router.routes[:] = old_routes
