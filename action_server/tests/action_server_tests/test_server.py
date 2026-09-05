@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 import sys
@@ -795,6 +796,169 @@ def test_configured_api_key_protects_assembled_surfaces(
 
     client.get_error("/config", 200)
     client.get_error("/", 200)
+
+
+@pytest.mark.integration_test
+def test_configured_api_key_boundary_covers_exceptions_and_uploads(
+    action_server_process: ActionServerProcess,
+):
+    import requests
+    from action_server_tests.fixtures import get_in_resources
+
+    pack = get_in_resources("no_conda", "greeter")
+    temp_dir = action_server_process.datadir / "request-temp"
+    temp_dir.mkdir(parents=True)
+    action_server_process.start(
+        cwd=pack,
+        actions_sync=True,
+        db_file="server.db",
+        additional_args=["--api-key=Foo"],
+        env={"TMPDIR": str(temp_dir)},
+    )
+
+    client = ActionServerClient(action_server_process)
+    base_url = client.base_url
+    authorized = {"Authorization": "Bearer Foo"}
+    invalid = {"Authorization": "Bearer wrong"}
+
+    protected_oauth_paths = (
+        "/oauth2/logout?provider=google",
+        "/oauth2/status",
+        "/oauth2/create-reference-id",
+    )
+    for path in ("/api/runs", "/api/robots/catalog", *protected_oauth_paths):
+        for headers in ({}, invalid):
+            response = requests.get(f"{base_url}{path}", headers=headers, timeout=10)
+            assert response.status_code == 403, f"{path}: {response.text}"
+
+    for path in protected_oauth_paths:
+        response = requests.get(f"{base_url}{path}", headers=authorized, timeout=10)
+        assert response.status_code == 200, f"{path}: {response.text}"
+
+    robot_response = requests.post(
+        f"{base_url}/api/robots/import",
+        files={"file": ("probe.zip", b"not a zip")},
+        timeout=10,
+    )
+    assert robot_response.status_code == 403
+    work_item_response = requests.post(
+        f"{base_url}/api/work-items/missing/files",
+        files={"file": ("probe.txt", b"probe")},
+        timeout=10,
+    )
+    assert work_item_response.status_code == 403
+    assert not (action_server_process.datadir / "workitems.db").exists()
+    assert not (action_server_process.datadir / "work_item_files").exists()
+    assert list(temp_dir.iterdir()) == []
+
+    authorized_robot_response = requests.post(
+        f"{base_url}/api/robots/import",
+        files={"file": ("probe.zip", b"not a zip")},
+        headers=authorized,
+        timeout=10,
+    )
+    assert authorized_robot_response.status_code == 200
+
+    work_item_create_response = requests.post(
+        f"{base_url}/api/work-items",
+        json={"payload": {"probe": "authorized"}},
+        headers=authorized,
+        timeout=10,
+    )
+    assert work_item_create_response.status_code == 200
+    item_id = work_item_create_response.json()["id"]
+    authorized_upload_response = requests.post(
+        f"{base_url}/api/work-items/{item_id}/files",
+        files={"file": ("probe.txt", b"probe")},
+        headers=authorized,
+        timeout=10,
+    )
+    assert authorized_upload_response.status_code == 200
+
+    # OAuth login and callback are browser-facing local flow exceptions. They
+    # must execute their own validation instead of being rejected by API auth.
+    login_response = requests.get(
+        f"{base_url}/oauth2/login",
+        params={"provider": "missing", "scopes": "openid"},
+        allow_redirects=False,
+        timeout=10,
+    )
+    assert login_response.status_code != 403
+    callback_response = requests.get(
+        f"{base_url}/actions/oauth2?state=missing",
+        timeout=10,
+    )
+    assert callback_response.status_code != 403
+
+    trigger_response = requests.post(
+        f"{base_url}/api/triggers",
+        json={
+            "name": "public-webhook",
+            "execution_mode": "work_item",
+            "webhook_secret": "",
+        },
+        headers=authorized,
+        timeout=10,
+    )
+    assert trigger_response.status_code == 200, trigger_response.text
+    trigger_id = trigger_response.json()["id"]
+
+    webhook_response = requests.post(
+        f"{base_url}/api/triggers/webhook/{trigger_id}",
+        json={"probe": "public"},
+        timeout=10,
+    )
+    assert webhook_response.status_code == 200, webhook_response.text
+
+    admin_response = requests.get(f"{base_url}/api/triggers", timeout=10)
+    assert admin_response.status_code == 403
+
+
+def test_configured_api_key_rejects_before_body_receive():
+    from actions.server._server import _ConfiguredAPIKeyMiddleware
+
+    receive_called = False
+    handler_called = False
+
+    async def app(scope, receive, send):
+        nonlocal handler_called
+        handler_called = True
+
+    wrapped = _ConfiguredAPIKeyMiddleware(app, api_key="secret")
+    scope = {
+        "type": "http",
+        "method": "POST",
+        "path": "/api/robots/import",
+        "headers": [
+            (b"content-type", b"multipart/form-data; boundary=probe"),
+        ],
+    }
+
+    async def receive():
+        nonlocal receive_called
+        receive_called = True
+        return {"type": "http.request", "body": b"probe", "more_body": False}
+
+    messages = []
+
+    async def send(message):
+        messages.append(message)
+
+    asyncio.run(wrapped(scope, receive, send))
+
+    assert messages[0]["status"] == 403
+    assert not receive_called
+    assert not handler_called
+
+    scope["headers"] = [
+        (b"authorization", b"Bearer secret"),
+        (b"authorization", b"Bearer wrong"),
+    ]
+    asyncio.run(wrapped(scope, receive, send))
+
+    assert messages[-2]["status"] == 403
+    assert not receive_called
+    assert not handler_called
 
 
 @pytest.mark.integration_test

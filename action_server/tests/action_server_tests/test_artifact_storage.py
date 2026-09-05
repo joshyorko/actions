@@ -41,6 +41,10 @@ def test_configured_static_artifacts_require_auth_and_are_run_scoped(tmp_path):
     storage = create_artifact_storage("local", tmp_path)
     storage.create_run_artifacts_dir("runs/run-a")
     storage.write_text("runs/run-a", "payload.txt", "authorized artifact")
+    (tmp_path / "unrelated.txt").write_text("outside run", encoding="utf-8")
+    outside = tmp_path / "outside.txt"
+    outside.write_text("outside root", encoding="utf-8")
+    (tmp_path / "runs" / "run-a" / "linked.txt").symlink_to(outside)
     storage.bind_run(
         "run-a",
         "runs/run-a",
@@ -60,6 +64,23 @@ def test_configured_static_artifacts_require_auth_and_are_run_scoped(tmp_path):
     )
     assert response.status_code == 200
     assert response.text == "authorized artifact"
+
+    assert (
+        client.get(
+            "/artifacts/run-a/payload.txt",
+            headers={"Authorization": "Bearer wrong"},
+        ).status_code
+        == 403
+    )
+    for path in (
+        "/artifacts/unrelated.txt",
+        "/artifacts/run-a/../unrelated.txt",
+        "/artifacts/run-a/linked.txt",
+    ):
+        assert (
+            client.get(path, headers={"Authorization": "Bearer secret"}).status_code
+            == 404
+        )
 
     response = client.get(
         "/artifacts/.action-server-run-bindings.json",

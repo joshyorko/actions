@@ -10,6 +10,7 @@ from typing import Optional, Sequence
 
 from fastapi.applications import FastAPI
 from fastapi.staticfiles import StaticFiles
+from starlette.responses import PlainTextResponse
 from termcolor import colored
 
 from ._protocols import ArgumentsNamespaceStart, IBeforeStartCallback
@@ -18,6 +19,50 @@ if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
 log = logging.getLogger(__name__)
+
+
+class _ConfiguredAPIKeyMiddleware:
+    """Reject protected requests before FastAPI can parse their body."""
+
+    def __init__(self, app, api_key: str):
+        self.app = app
+        self.api_key = api_key
+
+    @staticmethod
+    def _is_public(path: str) -> bool:
+        return path in {
+            "/config",
+            "/oauth2/login",
+            "/oauth2/login/",
+            "/actions/oauth2",
+            "/actions/oauth2/",
+        } or path.startswith("/api/triggers/webhook/")
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        path = scope.get("path", "")
+        protected = path.startswith("/api/") or path.startswith("/oauth2/")
+        if protected and not self._is_public(path):
+            authorization_headers = [
+                value.decode("latin-1")
+                for name, value in scope.get("headers", [])
+                if name.lower() == b"authorization"
+            ]
+            if (
+                len(authorization_headers) != 1
+                or not authorization_headers[0].lower().startswith("bearer ")
+                or authorization_headers[0][7:] != self.api_key
+            ):
+                response = PlainTextResponse(
+                    "Invalid or missing API Key", status_code=403
+                )
+                await response(scope, receive, send)
+                return
+
+        await self.app(scope, receive, send)
 
 
 def _mount_artifact_static_files(
@@ -199,7 +244,7 @@ def start_server(
     from ._api_run import run_api_router
     from ._api_schedules import schedule_groups_api_router, schedules_api_router
     from ._api_secrets import secrets_api_router
-    from ._api_triggers import triggers_api_router
+    from ._api_triggers import public_triggers_api_router, triggers_api_router
     from ._api_work_items import work_items_api_router
     from ._app import get_app
     from ._server_websockets import websocket_api_router
@@ -227,6 +272,9 @@ def start_server(
     log.debug(f"Starting server. Settings:\n{settings_str}")
 
     app = get_app()
+
+    if api_key:
+        app.add_middleware(_ConfiguredAPIKeyMiddleware, api_key=api_key)
 
     from actions.server._artifact_storage import get_artifact_storage
 
@@ -336,6 +384,10 @@ def start_server(
         triggers_api_router,
         include_in_schema=settings.full_openapi_spec,
         dependencies=endpoint_dependencies,
+    )
+    app.include_router(
+        public_triggers_api_router,
+        include_in_schema=settings.full_openapi_spec,
     )
 
     @lru_cache
