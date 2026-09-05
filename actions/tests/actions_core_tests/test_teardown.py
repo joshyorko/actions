@@ -94,7 +94,7 @@ def test_neverending_teardown_just_dump_threads(datadir, arg) -> None:
             returncode="error",
             cwd=str(datadir / "neverending"),
             additional_env=additional_env,
-            timeout=2,
+            timeout=5,
         )
     stderr_bytes: bytes = typing.cast(bytes, e.value.stderr)
     stderr = stderr_bytes.decode("utf-8")

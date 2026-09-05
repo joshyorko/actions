@@ -1,0 +1,6 @@
+# Default review ownership for the community repository.
+* @joshyorko
+
+# CI and repository policy changes require the repository owner review.
+/.github/ @joshyorko
+/.editorconfig @joshyorko

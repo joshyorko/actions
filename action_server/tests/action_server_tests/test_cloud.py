@@ -1,5 +1,9 @@
 import os
 
+import pytest
+
+pytestmark = pytest.mark.integration_test
+
 
 def test_cloud_list_organizations(data_regression):
     import json

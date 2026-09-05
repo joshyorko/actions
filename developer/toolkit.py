@@ -1,0 +1,265 @@
+"""Cross-platform RCC developer task dispatcher."""
+
+from __future__ import annotations
+
+import argparse
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+
+REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
+RCC_VERSION = "v18.18.1"
+PACKAGES = ("actions", "actions-http-helper", "devutils", "work-items", "action_server")
+PYPROJECTS = ("actions", "actions-http-helper", "devutils", "work-items", "action_server")
+ACTIVE_ENVIRONMENT_VARIABLES = (
+    "VIRTUAL_ENV",
+    "POETRY_ACTIVE",
+    "CONDA_PREFIX",
+    "CONDA_DEFAULT_ENV",
+    "CONDA_PROMPT_MODIFIER",
+    "CONDA_SHLVL",
+    "CONDA_EXE",
+    "_CE_CONDA",
+    "_CE_M",
+    "PYTHONHOME",
+    "PYTHONPATH",
+    "PYTHON_EXE",
+    "ROBOT_ARTIFACTS",
+    "ROBOT_ROOT",
+)
+
+
+def package_environment(cwd: Path = REPOSITORY_ROOT) -> dict[str, str]:
+    """Keep package Poetry environments separate from RCC's holotree."""
+    environment = os.environ.copy()
+    for name in ACTIVE_ENVIRONMENT_VARIABLES:
+        environment.pop(name, None)
+    environment.update(
+        {
+            "POETRY_VIRTUALENVS_CREATE": "true",
+            "POETRY_VIRTUALENVS_IN_PROJECT": "true",
+            "POETRY_VIRTUALENVS_OPTIONS_SYSTEM_SITE_PACKAGES": "false",
+        }
+    )
+    if (cwd / "pyproject.toml").is_file():
+        scripts = cwd / ".venv" / ("Scripts" if sys.platform == "win32" else "bin")
+        environment["PATH"] = os.pathsep.join(
+            (str(scripts), environment.get("PATH", ""))
+        )
+    return environment
+
+
+def run(command: list[str], cwd: Path = REPOSITORY_ROOT) -> None:
+    """Run a command without shell parsing so it works on every RCC platform."""
+    print("+", " ".join(command), f"(in {cwd})", flush=True)
+    subprocess.run(command, cwd=cwd, env=package_environment(cwd), check=True)
+
+
+def poetry(package: str, *arguments: str) -> None:
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+
+
+def doctor() -> None:
+    required = ("python", "poetry", "invoke", "node", "go", "git")
+    missing = [name for name in required if shutil.which(name) is None]
+    if missing:
+        raise SystemExit(f"RCC toolkit environment is missing: {', '.join(missing)}")
+
+    active_rcc_version = os.environ.get("RCC_VERSION")
+    if active_rcc_version and active_rcc_version != RCC_VERSION:
+        raise SystemExit(
+            f"RCC toolkit requires {RCC_VERSION}, active RCC is {active_rcc_version}"
+        )
+
+    print(f"Python: {sys.version.split()[0]}")
+    commands = (
+        ("poetry", "--version"),
+        ("invoke", "--version"),
+        ("node", "--version"),
+        ("go", "version"),
+    )
+    for command in commands:
+        run(list(command))
+
+    for package in PYPROJECTS:
+        directory = REPOSITORY_ROOT / package
+        if not (directory / "pyproject.toml").is_file():
+            raise SystemExit(f"Missing pyproject.toml: {directory}")
+        if not (directory / "poetry.lock").is_file():
+            raise SystemExit(f"Missing poetry.lock: {directory}")
+    print("RCC developer toolkit checks passed.")
+
+
+def bootstrap() -> None:
+    run(["invoke", "install"])
+
+
+def community_executable_name() -> str:
+    return "action-server.exe" if sys.platform == "win32" else "action-server"
+
+
+def resolve_install_target(path_value: str | None = None) -> Path:
+    executable = community_executable_name()
+    resolved = shutil.which(executable, path=path_value)
+    if resolved:
+        return Path(resolved).resolve()
+    if sys.platform == "win32":
+        local_app_data = os.environ.get("LOCALAPPDATA")
+        if not local_app_data:
+            raise SystemExit("LOCALAPPDATA is required to install Action Server")
+        directory = Path(local_app_data) / "Programs" / "Actions" / "bin"
+    else:
+        directory = Path.home() / ".local" / "bin"
+    entries = [
+        Path(entry).resolve()
+        for entry in (path_value or os.environ.get("PATH", "")).split(os.pathsep)
+        if entry
+    ]
+    if directory.resolve() not in entries:
+        raise SystemExit(f"Install directory is not on PATH: {directory}")
+    return directory / executable
+
+
+def install_executable(source: Path, target: Path) -> None:
+    temp_path: Path | None = None
+    try:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        temporary = tempfile.NamedTemporaryFile(
+            dir=target.parent, prefix=f".{target.name}.", delete=False
+        )
+        temp_path = Path(temporary.name)
+        temporary.close()
+        shutil.copy2(source, temp_path)
+        if sys.platform != "win32":
+            temp_path.chmod(temp_path.stat().st_mode | 0o111)
+        os.replace(temp_path, target)
+    except Exception as error:
+        if temp_path is not None:
+            temp_path.unlink(missing_ok=True)
+        raise SystemExit(f"Unable to install Action Server at {target}: {error}")
+
+
+def package_task(task: str) -> None:
+    for package in PACKAGES:
+        if package == "devutils":
+            if task == "test":
+                poetry(package, "run", "pytest", "tests")
+            elif task == "lint":
+                poetry(package, "run", "ruff", "check", "src", "tests")
+            elif task == "typecheck":
+                # devutils has no configured package typecheck gate. Do not
+                # invent a stricter command than the package declares.
+                continue
+            else:
+                raise ValueError(f"Unsupported devutils task: {task}")
+        elif package == "work-items" and task == "lint":
+            poetry(package, "run", "ruff", "check", "src", "tests")
+        elif package == "work-items" and task == "typecheck":
+            poetry(package, "run", "mypy")
+        elif package == "work-items" and task == "test":
+            poetry(
+                package,
+                "run",
+                "pytest",
+                "tests",
+                "-m",
+                "not persistent_backend_service",
+            )
+        elif package == "action_server" and task == "test":
+            poetry(package, "run", "invoke", "test-not-integration")
+        else:
+            poetry(package, "run", "invoke", task)
+
+
+def test() -> None:
+    toolkit_test()
+    package_task("test")
+
+
+def toolkit_test() -> None:
+    run([sys.executable, "-m", "ruff", "check", "developer"])
+    run([sys.executable, "-m", "pytest", "developer/tests"])
+
+
+def lint() -> None:
+    package_task("lint")
+
+
+def typecheck() -> None:
+    package_task("typecheck")
+
+
+def docs() -> None:
+    run(["invoke", "docs"])
+
+
+def check_all() -> None:
+    doctor()
+    lint()
+    typecheck()
+    test()
+
+
+def frontend_test() -> None:
+    run(["npm", "ci", "--no-audit", "--no-fund"], REPOSITORY_ROOT / "action_server" / "frontend")
+    run(["npm", "run", "test"], REPOSITORY_ROOT / "action_server" / "frontend")
+
+
+def install_community() -> None:
+    # ``build-frontend`` is the community build in the public Action Server
+    # task contract; it has no tier option. Keep this wiring explicit so an
+    # Invoke CLI option drift is caught by the dispatcher contract test.
+    poetry("action_server", "run", "invoke", "build-frontend")
+    poetry(
+        "action_server",
+        "run",
+        "invoke",
+        "build-executable",
+        "--go-wrapper",
+        "--version",
+        "community-local",
+    )
+    executable = "action-server.exe" if sys.platform == "win32" else "action-server"
+    action_server_root = REPOSITORY_ROOT / "action_server"
+    run(
+        [
+            str(action_server_root / "dist" / "final" / executable),
+            "new",
+            "--help",
+        ],
+        action_server_root,
+    )
+    target = resolve_install_target()
+    install_executable(action_server_root / "dist" / "final" / executable, target)
+    run([str(target), "version"])
+    run([str(target), "new", "--help"])
+
+
+COMMANDS = {
+    "doctor": doctor,
+    "bootstrap": bootstrap,
+    "test": test,
+    "toolkit-test": toolkit_test,
+    "lint": lint,
+    "typecheck": typecheck,
+    "docs": docs,
+    "check-all": check_all,
+    "frontend-test": frontend_test,
+    "install-community": install_community,
+}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("task", choices=sorted(COMMANDS))
+    arguments = parser.parse_args()
+    COMMANDS[arguments.task]()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

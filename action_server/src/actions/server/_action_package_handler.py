@@ -141,9 +141,7 @@ class ActionPackageHandler:
         if self._pythonpath_entries is not None:
             return self._pythonpath_entries
 
-        from actions.server._errors_action_server import (
-            ActionServerValidationError,
-        )
+        from actions.server._errors_action_server import ActionServerValidationError
 
         pythonpath_entries: list[str] = []
         if not self._package_yaml_contents:
@@ -185,9 +183,7 @@ class ActionPackageHandler:
         """
         import os
 
-        from actions.server._errors_action_server import (
-            ActionServerValidationError,
-        )
+        from actions.server._errors_action_server import ActionServerValidationError
         from actions.server.vendored_deps.action_package_handling.cli_errors import (
             ActionPackageError,
         )

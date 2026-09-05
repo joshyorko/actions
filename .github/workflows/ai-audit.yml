@@ -1,0 +1,33 @@
+name: AI audit evidence
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Capture bounded audit evidence
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          [[ "$BASE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "invalid BASE_SHA" >&2; exit 2; }
+          [[ "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "invalid HEAD_SHA" >&2; exit 2; }
+          {
+            echo "commit=$HEAD_SHA"
+            echo "changed_files=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" | wc -l)"
+            echo "diff_check=running"
+            git diff --check "$BASE_SHA" "$HEAD_SHA"
+            echo "diff_check=passed"
+          } | tee ai-audit.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-audit-evidence
+          path: ai-audit.txt

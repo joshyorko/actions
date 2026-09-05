@@ -1,0 +1,36 @@
+# Review classification for pull requests in this repository.
+# This file documents the policy; GitHub branch protection remains the
+# enforcement point for required reviews and status checks.
+version: 1
+
+tiers:
+  tier-1:
+    name: maintenance
+    examples:
+      - documentation-only changes
+      - tests that do not alter shipped behavior
+      - formatting and repository metadata
+    required_review: 1
+  tier-2:
+    name: behavioral
+    examples:
+      - package or action-server behavior
+      - GitHub Actions workflow changes
+      - templates and generated workflow sources
+    required_review: 1
+    required_checks: true
+  tier-3:
+    name: sensitive
+    examples:
+      - release and publishing workflows
+      - dependency or security changes
+      - public API or cross-package changes
+      - changes involving credentials or external services
+    required_review: 2
+    required_checks: true
+
+classification:
+  default: tier-2
+  highest_applicable_tier_wins: true
+  author_documents_tier: true
+  maintainers_may_raise_tier: true

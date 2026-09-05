@@ -381,7 +381,7 @@ async def _download_from_url(url: str) -> tuple[bool, str, Optional[Path]]:
 
     Returns: (success, message, downloaded_path)
     """
-    import httpx
+    import httpx2 as httpx
 
     parsed = urlparse(url)
 
@@ -519,13 +519,7 @@ async def run_robot_task(
     import uuid
     from pathlib import Path
 
-    from actions.server._models import (
-        RUN_ID_COUNTER,
-        Counter,
-        Run,
-        RunStatus,
-        get_db,
-    )
+    from actions.server._models import RUN_ID_COUNTER, Counter, Run, RunStatus, get_db
 
     # Get settings for paths
     settings = get_settings()

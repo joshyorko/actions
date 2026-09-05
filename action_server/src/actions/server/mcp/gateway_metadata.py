@@ -466,11 +466,9 @@ class McpRequestMetadataMiddleware:
             scope.setdefault("state", {})[MCP_REQUEST_STATE_KEY] = metadata
 
         async def replay() -> Message:
-            return (
-                messages.pop(0)
-                if messages
-                else {"type": "http.request", "body": b"", "more_body": False}
-            )
+            if messages:
+                return messages.pop(0)
+            return await receive()
 
         response_status: int | None = None
 

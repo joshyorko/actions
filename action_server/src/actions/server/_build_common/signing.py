@@ -90,7 +90,7 @@ def _sign_macos_executable(root_dir: Path, target_executable: Path) -> None:
     Sign the macOS executable.
     """
 
-    from .process_call import run, run_and_capture_output
+    from .process_call import run_and_capture_output
 
     # Sign the binary with the certificate
     print("Signing binary...")

@@ -1,58 +1,89 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+set -Eeuo pipefail
 
-# Store the script directory path
-SCRIPT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$SCRIPT_PATH"
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+repo_root=$(cd -- "$script_dir/../.." && pwd)
+rcc_path=""
+downloaded_rcc_path="$script_dir/rcc"
+rcc_version="v18.18.1"
+task=${1:-Bootstrap}
 
-PROJECT_NAME="action-server"
-RCC_PATH="$SCRIPT_PATH/rcc"
-CONDA_YAML="$SCRIPT_PATH/develop.yaml"
-ACTIVATE_PATH="$SCRIPT_PATH/activate.sh"
+case "$(uname -s):$(uname -m)" in
+    Darwin:arm64) asset=rcc-macosarm64 ;;
+    Darwin:x86_64) asset=rcc-macos64 ;;
+    Linux:x86_64 | Linux:amd64) asset=rcc-linux64 ;;
+    *)
+        printf 'Unsupported RCC developer platform: %s %s\n' "$(uname -s)" "$(uname -m)" >&2
+        exit 2
+        ;;
+esac
 
-echo
+download_rcc() {
+    local temporary_path="${downloaded_rcc_path}.download.$$"
+    trap 'rm -f -- "$temporary_path"' RETURN
+    curl --fail --location --retry 3 --silent --show-error \
+        "https://github.com/joshyorko/rcc/releases/download/${rcc_version}/${asset}" \
+        --output "$temporary_path"
+    chmod +x "$temporary_path"
+    mv -f -- "$temporary_path" "$downloaded_rcc_path"
+    if [[ $($downloaded_rcc_path version 2>/dev/null || true) != "$rcc_version" ]]; then
+        rm -f -- "$downloaded_rcc_path"
+        printf 'Downloaded RCC did not report version %s.\n' "$rcc_version" >&2
+        return 1
+    fi
+    trap - RETURN
+}
 
-# Get RCC binary based on platform using joshyorko/rcc GitHub releases
-RCC_VERSION="v18.18.1"
-if [[ "$(uname)" == "Darwin" ]]; then
-    if [[ "$(uname -m)" == "arm64" ]]; then
-        RCC_URL="https://github.com/joshyorko/rcc/releases/download/$RCC_VERSION/rcc-macosarm64"
+path_rcc=$(command -v rcc 2>/dev/null || true)
+path_rcc_version=""
+if [[ -n "$path_rcc" ]]; then
+    path_rcc_version=$($path_rcc version 2>/dev/null || true)
+fi
+
+if command -v brew >/dev/null 2>&1; then
+    brew_rcc=""
+    brew_version=""
+    if brew list --cask rcc >/dev/null 2>&1; then
+        brew_rcc=$(command -v rcc 2>/dev/null || true)
+        if [[ -n "$brew_rcc" ]]; then
+            brew_version=$($brew_rcc version 2>/dev/null || true)
+        fi
+    fi
+    if [[ "$brew_version" != "$rcc_version" ]]; then
+        printf 'Installing RCC %s from joshyorko/tools...\n' "$rcc_version"
+        brew tap joshyorko/tools
+        if brew list --cask rcc >/dev/null 2>&1; then
+            brew upgrade --cask joshyorko/tools/rcc || true
+        else
+            brew install --cask joshyorko/tools/rcc || true
+        fi
+        hash -r 2>/dev/null || true
+        brew_rcc=$(command -v rcc 2>/dev/null || true)
+        if [[ -n "$brew_rcc" ]]; then
+            brew_version=$($brew_rcc version 2>/dev/null || true)
+        fi
+    fi
+    if [[ "$brew_version" == "$rcc_version" ]]; then
+        rcc_path=$brew_rcc
     else
-        RCC_URL="https://github.com/joshyorko/rcc/releases/download/$RCC_VERSION/rcc-macos64"
+        printf 'Homebrew did not provide RCC %s; using the release asset fallback.\n' "$rcc_version" >&2
     fi
-else
-    RCC_URL="https://github.com/joshyorko/rcc/releases/download/$RCC_VERSION/rcc-linux64"
 fi
 
-# Download RCC if it doesn't exist
-if [ ! -f "$RCC_PATH" ]; then
-    curl -o "$RCC_PATH" "$RCC_URL" --fail || {
-        echo -e "\nDevelopment environment setup failed!"
-        exit 1
-    }
-    chmod +x "$RCC_PATH"
+if [[ -z "$rcc_path" && "$path_rcc_version" == "$rcc_version" ]]; then
+    rcc_path=$path_rcc
 fi
 
-# Check if environment exists and ask for clean environment
-if [ -f "$ACTIVATE_PATH" ]; then
-    echo "Detected existing development environment."
-    read -p "Do you want to create a clean environment? [y/N] " response
-    if [[ "$response" =~ ^[Yy]$ ]]; then
-        echo "Creating a clean environment..."
-        echo "command: $RCC_PATH ht vars $CONDA_YAML --space $PROJECT_NAME --sema4ai > $ACTIVATE_PATH"
-        "$RCC_PATH" ht vars "$CONDA_YAML" --space "$PROJECT_NAME" --sema4ai > "$ACTIVATE_PATH"
+if [[ -z "$rcc_path" ]]; then
+    downloaded_version=""
+    if [[ -x "$downloaded_rcc_path" ]]; then
+        downloaded_version=$($downloaded_rcc_path version 2>/dev/null || true)
     fi
-else
-    echo "Creating a clean environment..."
-    echo "command: $RCC_PATH ht vars $CONDA_YAML --space $PROJECT_NAME --sema4ai > $ACTIVATE_PATH"
-    "$RCC_PATH" ht vars "$CONDA_YAML" --space "$PROJECT_NAME" --sema4ai > "$ACTIVATE_PATH"
+    if [[ "$downloaded_version" != "$rcc_version" ]]; then
+        printf 'Installing RCC %s (%s)...\n' "$rcc_version" "$asset"
+        download_rcc
+    fi
+    rcc_path=$downloaded_rcc_path
 fi
 
-# Activate the virtual environment and install dependencies everytime.
-echo "calling: source $ACTIVATE_PATH"
-chmod +x "$ACTIVATE_PATH"
-source "$ACTIVATE_PATH"
-
-echo -e "\nDeveloper env. ready!"
-
-# Clean up variables
-unset RCC_PATH CONDA_YAML ACTIVATE_PATH SCRIPT_PATH PROJECT_NAME
+exec "$rcc_path" run -r "$repo_root/developer/toolkit.yaml" --dev -t "$task"

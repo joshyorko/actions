@@ -1,8 +1,26 @@
 from pathlib import Path
+from unittest.mock import Mock
 
 import tomlkit
+from invoke import Context
 
 from devutils.invoke_utils import build_common_tasks, collect_deps_pyprojects
+
+
+def test_common_quality_tasks_use_current_ruff_subcommands(
+    tmp_path: Path, monkeypatch
+):
+    monkeypatch.chdir(tmp_path)
+    context = Context()
+    context.run = Mock()
+    tasks = build_common_tasks(tmp_path, "example")
+
+    tasks["lint"](context)
+    tasks["pretty"](context)
+
+    commands = [call.args[0] for call in context.run.call_args_list]
+    assert commands[0] == "poetry run ruff check src tests"
+    assert "poetry run ruff check --fix src tests" in commands
 
 
 def test_collects_neutral_helper_without_legacy_directory(tmp_path: Path):

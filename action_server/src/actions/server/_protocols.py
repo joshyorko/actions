@@ -218,7 +218,6 @@ class ArgumentsNamespaceStart(ArgumentsNamespaceBaseImportOrStart):
     command: Literal["start"]
     actions_sync: bool
     expose: bool
-    expose_allow_reuse: bool
     api_key: str
     parent_pid: int
     port: bool

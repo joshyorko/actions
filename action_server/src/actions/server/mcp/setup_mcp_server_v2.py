@@ -98,12 +98,12 @@ class McpServerSetupHelper:
                 )
             if action_info.output_schema_kind == "object":
                 return CallToolResult(
-                    content=[], structuredContent=result, _meta=action_info.mcp_meta
+                    content=[], structured_content=result, _meta=action_info.mcp_meta
                 )
             if action_info.output_schema_kind == "wrap-in-result-object":
                 return CallToolResult(
                     content=[],
-                    structuredContent={"result": result},
+                    structured_content={"result": result},
                     _meta=action_info.mcp_meta,
                 )
             raise ValueError(

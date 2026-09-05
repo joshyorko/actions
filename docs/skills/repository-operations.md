@@ -10,8 +10,17 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
+Every template `package.yaml` pins the published `actions-core=1.0.0`.
+The producer-consumer template additionally pins
+`actions-work-items=0.4.4`. `actions-http-helper` remains a transitive Core
+dependency, and `actions-runtime` is the server distribution rather than a
+template library. Keep the static template-manifest contract synchronized
+with these package boundaries when a published version changes.
+
 The Action Server frontend uses `action_server/frontend/package.json` and its
-lock as the sole package metadata. `npm ci` is the offline-install contract;
+lock as the sole package metadata. `npm ci` is the reproducible,
+credential-free install contract; after the public dependency cache is warm,
+the frontend can be rebuilt without registry access.
 `LICENSE` is the retained Actions-owned provenance. Runtime and Canvas View
 are separate Vite roots under `apps/runtime` and `apps/canvas-view`; run
 `npm run build:runtime` and `npm run build:canvas` from the frontend directory
@@ -47,7 +56,7 @@ registry URLs while allowing ordinary public scoped packages such as
 `.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`, and `.css` file inside each artifact
 directory in deterministic path order, while ignoring arbitrary assets and
 source maps. It uses the same Actions-owned contract for Runtime and Canvas
-artifacts, with no path-based enterprise exemption. Scanner read errors fail
+artifacts, with no path-based exemption for removed private product paths. Scanner read errors fail
 validation; passing the directory to a single-file detector must not be used.
 
 The default `inv validate-artifact` task ensures `frontend/dist` and
@@ -135,8 +144,15 @@ returned as the single canonical response header; CORS exposes that header.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
-existing rejection order. The body is replayed in its original ASGI chunks and
-returns an empty terminal request after exhaustion.
+existing rejection order. The body is replayed exactly once in its original ASGI
+chunks. After buffered chunks are exhausted, the wrapper delegates to the original
+receive callable so disconnect delivery and ASGI backpressure are preserved. Never
+synthesize an immediately-ready terminal `http.request` for every later read:
+streaming/SSE disconnect watchers can spin without yielding, starve the server event
+loop, and prevent unrelated HTTP work and graceful signal shutdown from progressing.
+The lifecycle regression boundary opens a raw `GET /mcp` SSE connection and, while it
+remains open, proves that an unrelated HTTP route responds within a finite bound,
+`SIGTERM` terminates Action Server, and its observed preload children stop.
 Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
 tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
@@ -426,6 +442,193 @@ weaken that expected schema. Static collection tests do not establish packaged
 runtime behavior: if the exact PyInstaller gate is blocked by host storage,
 preserve its build log and report packaged `version`, `migrate`, and `start`
 checks as unverified.
+When integrating a preserved branch with a moving `community` base, fetch the
+named base and inspect a hypothetical merge with
+`git merge-tree --write-tree HEAD origin/community` before creating the merge
+commit. A conflict-free merge tree does not prove that affected behavior was
+preserved: compare the affected paths against both parents and rerun their
+focused and package gates after the ordinary merge.
+
+## RCC Developer Toolkit
+
+### Repository-owned Action Server templates
+
+The supported Action Server templates are generated from `templates/packaging/templates-prod.json`
+with `templates/packaging/build_embedded_bundle.py`. The generator sorts archive members,
+uses fixed ZIP timestamps and permissions, and writes `action-templates.zip` plus YAML
+metadata containing its SHA-256. Regenerate the checked-in assets with:
+
+```bash
+python templates/packaging/build_embedded_bundle.py \
+  --config templates/packaging/templates-prod.json \
+  --template-root templates \
+  --output-dir action_server/src/actions/server/templates
+```
+
+Action Server seeds its settings cache from these package-owned assets, validates the
+bundle hash and every archive member, and atomically installs only verified archives.
+The embedded bundle is the sole runtime authority: project creation performs no
+metadata or archive network request. Production owns exactly `minimal`, `basic`,
+`advanced`, and `workflow-producer-consumer`; `templates-beta.json` is not a production
+generator input. A cache hash mismatch, byte mismatch, traversal path, duplicate member,
+or symlink causes reseeding from the embedded bundle. A symlinked cache directory is
+unlinked before reseeding, so embedded files are never written through its target.
+Metadata whose `templates` value is not a mapping is invalid and also triggers offline
+reseeding. Parseable metadata that fails model validation, or metadata that cannot be
+read, is treated as missing and also triggers offline reseeding. `action_server/pyproject.toml`
+includes the two embedded files so Poetry and PyInstaller builds retain this offline
+contract. Template modules must import the
+published `actions-core` package via `from actions ...`; do not name an action module
+`actions.py`, because that shadows the installed package during project execution.
+The beta and production template deployment workflows change into
+`templates/packaging` and directly execute `./create-templates-package.sh`.
+Preserve that script's tracked executable mode (`100755`); a checkout that loses
+the mode fails before Python starts with shell exit 126. The active contract test
+checks both the executable bit and each workflow's direct invocation.
+Community `--expose` startup tries the selected or available open-source tunnel
+providers, logs a bounded failure when all providers fail, and leaves the
+`TunnelManager` inactive; the wrapper boundary is covered separately from provider
+selection and direct cleanup tests. A direct `TunnelManager.stop()` test is
+insufficient for lifecycle coverage: the Action Server lifespan must await the
+created manager's stop before the final child-process cleanup runs. Lifespan
+teardown runs in `finally`, so body exceptions still trigger manager, watcher,
+and child cleanup; manager-stop failures are logged and isolated so they do
+not replace the body exception or skip later cleanup. Failed child enumeration
+logs and treats the child set as empty.
+
+The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
+macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's
+focused contracts, then use `Test`, `Lint`, `Typecheck`, `Docs`, `CheckAll`,
+`FrontendTest`, or `InstallCommunity` through
+`rcc run -r developer/toolkit.yaml --dev -t <Task>`. The Python dispatcher uses argument
+arrays and resolves the repository root independently of the caller's cwd, so it does not
+depend on Bash or Batch activation scripts. It removes host `VIRTUAL_ENV`,
+`POETRY_ACTIVE`, Conda activation, `PYTHONHOME`, `PYTHONPATH`, and RCC's
+`PYTHON_EXE` marker before
+delegating. It also forces Poetry environment creation, in-project `.venv` placement, and
+system-site-packages isolation. This boundary applies to root `invoke install` as well as
+direct package commands: RCC owns the outer holotree toolchain while each package owns an
+independent `.venv` resolved from its committed lockfile. Without it, sequential Poetry
+installs can rewrite RCC's active holotree and make tools such as Mypy disappear from later
+package gates. The dispatcher also removes RCC's `ROBOT_ROOT` and `ROBOT_ARTIFACTS` from
+package subprocesses; otherwise Actions CLI tests inherit the toolkit artifact directory
+instead of exercising their documented `./output` default. `ToolkitTest` runs Ruff and
+pytest against the gateway itself; the full `Test` task runs it first and also covers
+`devutils`, whose package does not provide an Invoke task collection. The RCC toolchain
+includes pinned `jq` because the devutils workflow-contract suite executes its admission
+filters. The generic environment pins `jq=1.7.1`; Windows amd64 selects the preceding
+`setup_windows_amd64.yaml` through RCC's OS/architecture filename matching and uses
+conda-forge's Windows-native `m2w64-jq=1.6`. Keep every platform-specific environment
+configuration in the workflow's RCC holotree cache hash so dependency changes invalidate
+the matching runner cache. `Typecheck` runs only package-declared typecheck gates; `devutils` has no such gate
+and is not assigned an invented strict-Mypy contract.
+
+The portable Action Server source-tree test gate is its declared `test-not-integration`
+Invoke task. Binary-only, credentialed cloud, and frontend-build integration tests
+remain in their dedicated package gates; the RCC `Test` task must not fold them into the
+portable smoke by calling the generic shared `test` task. Tests that execute Invoke from
+an isolated build directory, run Node/Vite/ESLint, require generated OAuth configuration,
+or validate prebuilt frontend/binary artifacts carry the `integration_test` marker. The
+portable FastAPI/Starlette `TestClient` contracts require `httpx` in Action Server's
+locked development dependencies. Managed `package.yaml` fixtures use published,
+compatible Actions package versions rather than nonexistent future pins.
+
+Database migrations are complete only when an upgraded legacy database has the same
+tables, columns, and index definitions as a database freshly generated from current
+models. Add a forward migration when model fields or generated index names diverge;
+`test_migrate` compares both schemas exactly, while the CLI and server auto-migration
+tests verify the operational upgrade entry points. Schema-alignment migrations must
+inspect columns and indexes before dropping or creating them so model-created v10
+databases without legacy `run` columns or schedule indexes can upgrade. Because
+`create_db` seeds one row at `CURRENT_VERSION`, focused migration fixtures downgrade
+that row to represent an older database rather than inserting a duplicate ID. Xdist tests that acquire OS-level
+mutexes use process-qualified names so concurrent workers and repeated suites cannot
+share global lock state.
+
+`Lint` is fail-fast across package boundaries: report which packages completed and which
+were not reached whenever it fails. The shared package task must call the explicit
+`ruff check` subcommand, which is supported by both the repository's Ruff 0.1 and 0.12
+locks; the legacy `ruff <paths>` form fails under newer Ruff. Work Items uses its
+release-authoritative `ruff check src tests` and focused, configuration-driven Mypy gates;
+the developer toolkit must not widen those into the generic formatter/isort or whole-tree
+Mypy tasks. Its portable RCC test smoke runs plain Pytest and excludes
+`persistent_backend_service`; the complete Redis/Mongo service contract remains owned by
+the repository's `verify-work-items` service gate. A non-empty, ignored
+`developer/tmp/` produces an RCC artifact warning during repeated developer runs but is
+not a lint or packaging failure. Production bundles must still start with clean artifacts.
+
+Action Server's schedule and trigger modules keep runtime model imports local to avoid
+database/model import cycles. Model names used only by annotations belong behind
+`TYPE_CHECKING`; moving runtime imports to module scope merely to satisfy Ruff changes the
+import boundary and is not an acceptable lint repair.
+
+Action Server Mypy scans product source and ordinary tests. Generated
+`_oauth2_config`/`_static_contents` modules and installed runtime libraries without stubs
+use targeted module overrides rather than a global missing-import exemption. MCP SDK
+model constructors use Python field names such as `structured_content`; camelCase aliases
+remain wire-format names.
+
+Action Server keeps deprecation warnings actionable: repository-owned Pydantic models
+use `ConfigDict`, and build timestamps are timezone-aware UTC values. Pytest suppresses
+no deprecation-warning category globally. `robocorp-log-pytest` 0.0.5 permits
+`robocorp-log` 3.x, but forced log-AST regeneration still uses deprecated Python 3.12
+AST compatibility APIs. Keep filters limited to the three confirmed warning messages
+and their exact `robocorp.log` modules so other dependency and repository warnings
+remain visible.
+
+`Doctor` and `ToolkitTest` validate the RCC environment and dispatcher contracts. Gateway
+CI runs `Bootstrap`, verifies all five package `.venv` interpreters, reruns `ToolkitTest`
+to prove the RCC toolchain survived Bootstrap, and runs the full package `Test` smoke on
+Linux. All three runners run manifest diagnostics and `ToolkitTest`. The Linux runner
+also executes `InstallCommunity`: it invokes the public `build-frontend` task without a
+product-tier option, builds the Go-wrapped Action Server with the
+`community-local` asset version, and runs the source binary's
+`dist/final/action-server new --help` smoke check before installation. It then resolves
+the installed target from the current `PATH`'s `action-server` entry. If none exists, it
+uses `~/.local/bin/action-server` on POSIX or
+`%LOCALAPPDATA%/Programs/Actions/bin/action-server.exe` on Windows, but only when that
+fallback directory is already on `PATH`; Windows also requires `LOCALAPPDATA`. The task
+does not create directories or elevate privileges. It copies the built executable to a
+temporary sibling and atomically replaces the resolved target, so replacement failure
+leaves the prior target intact. The installed-target smoke checks are
+`action-server version` and `action-server new --help`; a successful file-producing build
+without the source and installed startup checks is not a passing community installation
+gate. Developer builds must retain a version containing the word `local`: the Go wrapper
+then replaces a same-version extraction whose embedded hash differs. A release-style
+version reuses the old extraction after warning, so it can make a newly built wrapper
+launch stale code.
+
+Before reinstalling or restarting Action Server, inspect the process table and listening
+sockets. A `GET /mcp` SSE request can expose receive-wrapper event-loop starvation when
+buffer exhaustion is followed by an endlessly ready synthetic `http.request`; sustained
+CPU, retained listening sockets, unrelated HTTP timeouts, and stalled `SIGTERM` are its
+direct symptoms. A deleted controlling PTY explains how such a foreground server can
+become orphaned, while dead or zombie preload workers are secondary evidence rather than
+the primary cause. Terminate the broken process tree before reinstalling or restarting;
+installation does not repair a running lifecycle failure.
+
+Action Server is a `pkgutil` extension beneath the `actions-core` package. PyInstaller's
+module graph does not discover that in-tree extension from normal search paths alone; the
+`pyinstaller-hooks/pre_find_module_path/hook-actions.server.py` hook binds
+`actions.server` to `src/actions` before analysis. Without that hook, server files copied as
+data can make `version` pass while commands that initialize logging fail on an uncollected
+dependency such as `uvicorn`. The developer binary smoke therefore runs `new --help`, and
+the binary integration test requires all three concurrent wrapper launches to exit zero.
+Wrapper extraction assertions use `.actions/bin/action-server/internal` on POSIX and
+`%LOCALAPPDATA%/actions/bin/action-server/internal` on Windows.
+
+For a host without RCC, `devutils/bin/develop.sh` and `develop.bat` are bootstrap
+launchers. On Linux and macOS, the shell launcher prefers the `joshyorko/tools/rcc`
+Homebrew cask (backed by `joshyorko/homebrew-tools`) when Brew is available, then falls
+back to the pinned release asset. Windows downloads the pinned release asset. Downloaded
+binaries live in the ignored `devutils/bin/` location; launchers verify the version on
+later runs and invoke the root toolkit without creating a separate activation environment.
+
+RCC owns the isolated toolchain and holotree cache. Poetry and committed package lockfiles
+remain the dependency and release authorities. Set `ROBOCORP_HOME` to a writable,
+repository- or CI-scoped cache when diagnosing environment resolution, then run
+`rcc robot diagnostics -r developer/toolkit.yaml --json` and
+`rcc ht vars -r developer/toolkit.yaml` before debugging Python tasks.
 
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 

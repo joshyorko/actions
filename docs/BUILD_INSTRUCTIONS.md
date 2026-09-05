@@ -1,8 +1,8 @@
 # Action Server Build Instructions
 
-## Quick Build (Community Edition)
+## Quick Build
 
-This builds the **open-source community edition** with Radix UI + Tailwind CSS (no proprietary components).
+This builds the open-source Runtime and Canvas frontends from public dependencies.
 
 ### Prerequisites
 
@@ -24,7 +24,7 @@ uv run --no-project --python 3.12 python -m pip install --break-system-packages 
 # 3. Install project dependencies (this installs all monorepo packages)
 uv run --no-project --python 3.12 inv install
 
-# 4. Build frontend (community tier - default)
+# 4. Build the public frontend
 uv run --no-project --python 3.12 inv build-frontend
 # Output: frontend/dist/index.html (single-file, ~291 KB)
 
@@ -47,40 +47,16 @@ uv run --no-project --python 3.12 poetry run inv build-executable --go-wrapper
 ./dist/final/action-server start --port=8080
 ```
 
-## Enterprise Build (Internal Only)
-
-For building with proprietary `@sema4ai/*` design system components:
-
-```bash
-# Setup npm authentication
-npm config set @sema4ai:registry https://npm.pkg.github.com/
-npm config set //npm.pkg.github.com/:_authToken "${NPM_TOKEN}"
-
-# Build enterprise frontend
-uv run --no-project --python 3.12 inv build-frontend --tier=enterprise
-
-# Rest of build is the same
-uv run --no-project --python 3.12 inv build-oauth2-config
-uv run --no-project --python 3.12 poetry run inv build-executable --go-wrapper
-```
-
 ## What Gets Built
 
-### Community Edition
-- **Frontend**: `frontend/src/core/` components only
+### Frontend
+- **Runtime and Canvas**: built from the single public manifest and lockfile
   - UI: Radix UI primitives + Tailwind CSS
   - Features: Action execution, logs, artifacts, run history
   - Dependencies: Public npm packages only
   - Size: ~291 KB (single HTML file)
 
-### Enterprise Edition
-- **Frontend**: `frontend/src/core/` + `frontend/src/enterprise/`
-  - UI: @sema4ai/components design system
-  - Features: Community features + KB, analytics, org management, SSO
-  - Dependencies: Public npm + @sema4ai/* private packages
-  - Size: ~418 KB (larger due to design system)
-
-### Backend (Same for Both Tiers)
+### Backend
 - Python action execution engine
 - FastAPI server
 - Embedded frontend HTML
@@ -104,7 +80,7 @@ After successful build:
 - `dist/final/action-server` - Final distributable binary (Linux/macOS)
 - `dist/final/action-server.exe` - Final distributable binary (Windows)
 - `frontend/dist/index.html` - Standalone frontend (for debugging)
-- `src/sema4ai/action_server/_static_contents.py` - Embedded frontend Python module
+- `src/actions/server/_static_contents.py` - Embedded frontend Python module
 
 ## Verification
 
@@ -137,14 +113,13 @@ ls -lh dist/final/action-server
 ### Issue: "dist/final/ doesn't exist"
 **Solution**: You must use `--go-wrapper` flag for final build
 
-### Issue: "Enterprise imports detected in community build"
-**Solution**: Check `frontend/src/core/` doesn't import from `@sema4ai/*` or `../enterprise/`
+### Issue: "Removed product imports detected"
+**Solution**: Build from the checked-in public manifest and remove the reported private import.
 
 ## CI/CD
 
 The CI workflow (`.github/workflows/action_server_binary_release.yml`) builds:
 - **4 platforms**: ubuntu-22.04, windows-2022, macos-13, macos-15
-- **Community tier only** (for external contributors)
-- **Enterprise tier** (internal PRs only, requires NPM_TOKEN)
+- **One public Runtime/Canvas build** with no registry credentials
 
 Artifacts are uploaded to S3 and GitHub Releases.

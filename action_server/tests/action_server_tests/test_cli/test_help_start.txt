@@ -1,5 +1,6 @@
 usage: action-server start [-h] [-a ADDRESS] [-p PORT] [--expose]
-                           [--server-url SERVER_URL] [--expose-allow-reuse]
+                           [--server-url SERVER_URL]
+                           [--expose-provider {auto,localhost.run,bore,cloudflare}]
                            [--api-key API_KEY] [--actions-sync ACTIONS_SYNC]
                            [--dir PATH] [--skip-lint]
                            [--min-processes MIN_PROCESSES]
@@ -8,8 +9,11 @@ usage: action-server start [-h] [-a ADDRESS] [-p PORT] [--expose]
                            [--parent-pid PARENT_PID] [--https]
                            [--ssl-self-signed] [--ssl-keyfile [PATH]]
                            [--ssl-certfile [PATH]] [--oauth2-settings [PATH]]
-                           [-d PATH] [--db-file DB_FILE] [--kill-lock-holder]
-                           [-v] [--whitelist WHITELIST]
+                           [--redis-url URL] [--redis-password PASSWORD]
+                           [--artifact-storage-backend {local,shared-filesystem}]
+                           [--artifact-storage-root PATH] [-d PATH]
+                           [--db-file DB_FILE] [--kill-lock-holder] [-v]
+                           [--whitelist WHITELIST]
 
 options:
   -h, --help            show this help message and exit
@@ -20,7 +24,10 @@ options:
   --server-url SERVER_URL
                         Explicit server url to be defined in the OpenAPI spec
                         'servers' section. Defaults to the localhost url.
-  --expose-allow-reuse  Always answer yes to expose reuse confirmation
+  --expose-provider {auto,localhost.run,bore,cloudflare}
+                        Tunnel provider for --expose. Options: auto (try all),
+                        localhost.run (SSH-based), bore (Rust binary),
+                        cloudflare (cloudflared). (default: auto)
   --api-key API_KEY     Adds authentication. Pass it as `{"Authorization":
                         "Bearer <API_KEY>"}` header. Pass `--api-key None` to
                         disable authentication.
@@ -78,6 +85,20 @@ options:
                         A yaml file with the OAuth2 settings with a mapping
                         from the provider name to the provider information
                         (such as clientId and clientSecret).
+  --redis-url URL       Redis URL for distributed mode. Example:
+                        redis://localhost:6379. Can also be set via REDIS_URL
+                        or ACTION_SERVER_REDIS_URL environment variables. When
+                        Redis is available, distributed features (job queue,
+                        horizontal scaling) are auto-enabled.
+  --redis-password PASSWORD
+                        Redis password for authentication. Can also be set via
+                        ACTION_SERVER_REDIS_PASSWORD environment variable.
+  --artifact-storage-backend {local,shared-filesystem}
+                        Artifact storage backend. Shared filesystem requires
+                        --artifact-storage-root.
+  --artifact-storage-root PATH
+                        Root directory for artifact storage; required by
+                        shared-filesystem.
   -d PATH, --datadir PATH
                         Directory to store the data for operating the actions
                         server (by default a datadir will be generated based

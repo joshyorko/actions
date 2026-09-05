@@ -1,4 +1,4 @@
-"""Tree shaking and import detection for dual-tier build system."""
+"""Import detection for removed private product dependencies."""
 
 import re
 from dataclasses import dataclass
@@ -32,9 +32,7 @@ class ImportViolation:
 
 
 def scan_imports(file_path: str) -> list[ImportViolation]:
-    """Scan a TypeScript/JavaScript file for enterprise imports.
-
-    Scan a shipped source-like text file for removed product imports.
+    """Scan a shipped source-like text file for removed product imports.
 
     Args:
         file_path: Path to file to scan
@@ -74,8 +72,8 @@ def scan_imports(file_path: str) -> list[ImportViolation]:
     return violations
 
 
-def detect_enterprise_imports(bundle_path: str) -> list[ImportViolation]:
-    """Scan a built bundle for enterprise imports.
+def detect_removed_product_imports(bundle_path: str) -> list[ImportViolation]:
+    """Scan a built bundle for removed product imports.
 
     Args:
         bundle_path: Path to built JavaScript bundle
@@ -100,7 +98,7 @@ def detect_enterprise_imports(bundle_path: str) -> list[ImportViolation]:
             )
         )
 
-    # Search for @/enterprise references
+    # Search for removed private frontend path references.
     for match in re.finditer(r"@/enterprise/[\w/-]+", content):
         violations.append(
             ImportViolation(
@@ -115,48 +113,15 @@ def detect_enterprise_imports(bundle_path: str) -> list[ImportViolation]:
     return violations
 
 
-def generate_vite_external_config(tier) -> dict:
-    """Generate Vite external configuration for tree-shaking.
-
-    Args:
-        tier: Build tier (BuildTier object or string "community"/"enterprise")
-
-    Returns:
-        Dictionary for Vite rollupOptions configuration
-    """
-    # Handle both BuildTier objects and strings
-    tier_name = tier
-    if hasattr(tier, "name"):
-        # BuildTier object with TierName enum
-        tier_name = tier.name.value if hasattr(tier.name, "value") else str(tier.name)
-
-    if tier_name == "community":
-        # Exclude enterprise code from community builds
-        return {
-            "rollupOptions": {
-                "external": [
-                    re.compile(r"^@sema4ai/"),
-                    re.compile(r"^@/enterprise/"),
-                    re.compile(r"\.\./enterprise/"),
-                ]
-            }
-        }
-    else:
-        # Enterprise builds include everything
-        return {}
-
-
 class TreeShaker:
     """Tree shaker for detecting and enforcing import boundaries."""
 
-    def __init__(self, tier, root_dir: Path):
+    def __init__(self, root_dir: Path):
         """Initialize TreeShaker.
 
         Args:
-            tier: BuildTier instance (COMMUNITY or ENTERPRISE)
             root_dir: Root directory to scan
         """
-        self.tier = tier
         self.root_dir = Path(root_dir)
 
     def scan_directory(self, directory: Path) -> list[ImportViolation]:

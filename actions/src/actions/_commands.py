@@ -850,7 +850,7 @@ def _validate_and_convert_kwargs(
                     continue
 
                 check_type = param_type
-                if param_type == float:
+                if param_type is float:
                     check_type = (float, int)
                 if not isinstance(passed_value, check_type):
                     raise InvalidArgumentsError(
@@ -1038,7 +1038,7 @@ def _normalize_arguments(
                     f"Error. The param type '{param_type.__name__}' in '{method_name}' is not supported. Supported parameter types: str, int, float, bool and pydantic.Model."
                 )
 
-            if param_type == bool:
+            if param_type is bool:
                 param_type = check_boolean
             if param.default is not inspect.Parameter.empty:
                 parser.add_argument(

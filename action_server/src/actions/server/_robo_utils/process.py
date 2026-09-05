@@ -12,10 +12,7 @@ from typing import Dict, List, Optional, Protocol, Union
 
 # Note: keep this import for backward compatibility
 from actions.server._common.process import kill_process_and_subprocesses
-
-from actions.server._preload_actions.preload_actions_autoexit import (
-    is_process_alive,
-)
+from actions.server._preload_actions.preload_actions_autoexit import is_process_alive
 
 from .callback import Callback
 

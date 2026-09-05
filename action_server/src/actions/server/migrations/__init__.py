@@ -41,8 +41,8 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     9: "add_robot_run_columns",
     # we'll look for a 'migration_add_schedules' module based on this.
     10: "add_schedules",
-    # we'll look for a 'migration_reconcile_schema' module based on this.
-    11: "reconcile_schema",
+    # we'll look for a 'migration_align_schema_indexes' module based on this.
+    11: "align_schema_indexes",
     # we'll look for a 'migration_reconcile_run_columns' module based on this.
     12: "reconcile_run_columns",
 }

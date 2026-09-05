@@ -14,7 +14,7 @@ from concurrent.futures import TimeoutError
 from contextlib import asynccontextmanager, contextmanager
 from pathlib import Path
 from subprocess import CompletedProcess
-from typing import Any, AsyncGenerator, Dict, Iterator, Literal, Optional, Tuple, Union
+from typing import AsyncGenerator, Dict, Iterator, Literal, Optional, Tuple, Union
 
 from mcp import ClientSession
 

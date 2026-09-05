@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Sema4.ai Actions is a Python framework for extending AI agent capabilities through MCP Tools and Actions. It enables developers to create Python functions that can be called by AI agents via protocols like MCP (Model Context Protocol), OpenAI GPTs, and LangChain.
+Actions is a Python framework for extending AI agent capabilities through MCP Tools and Actions. It enables developers to create Python functions that can be called by AI agents through MCP and HTTP APIs.
 
 The key abstraction is the `@tool` or `@action` decorator that turns Python functions into AI-callable endpoints. Type hints and docstrings are used to describe parameters to AI agents.
 
@@ -13,7 +13,7 @@ The key abstraction is the `@tool` or `@action` decorator that turns Python func
 This is a monorepo with several Python packages:
 
 - `action_server/` - The main Action Server that hosts and exposes actions via HTTP/MCP
-- `actions/` - Core `sema4ai-actions` library with `@action` decorator
+- `actions/` - Core `actions-core` library with `@action` decorator and MCP v2 surface
 - `mcp/` - MCP protocol implementation with `@tool`, `@resource`, `@prompt` decorators
 - `common/` - Shared utilities across packages
 - `build_common/` - Shared build utilities
@@ -41,14 +41,14 @@ inv check-all    # Run lint, typecheck, and tests
 inv docs         # Generate documentation
 ```
 
-### Root-Level Tasks
-From repository root:
+### Repository Toolkit
+From repository root, use the RCC-owned task boundary:
 
 ```bash
-inv install              # Install all packages
-inv install --skip=devutils  # Skip specific packages
-inv docs                 # Regenerate docs for all packages
-inv lock                 # Update poetry.lock for all packages
+rcc run -r developer/toolkit.yaml --dev -t Doctor
+rcc run -r developer/toolkit.yaml --dev -t CheckAll
+rcc run -r developer/toolkit.yaml --dev -t FrontendTest
+rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
 ```
 
 ### Frontend Build (Action Server)
@@ -58,9 +58,11 @@ npm ci && npm run build      # Production build
 
 # Or via invoke:
 cd action_server
-inv build-frontend --tier=community   # Community tier (default)
-inv build-frontend --tier=enterprise  # Enterprise tier (requires NPM_TOKEN)
+inv build-frontend                    # Build and embed Runtime
 inv build-frontend --debug            # Debug build (not minified)
+
+# Verify the separate Canvas artifact:
+cd frontend && npm run build:canvas
 ```
 
 ### Frontend Development
@@ -87,7 +89,7 @@ inv test-binary              # Test the built binary
 Functions become AI-callable through decorators:
 
 ```python
-from sema4ai.mcp import tool
+from actions.mcp import tool
 
 @tool
 def greeting(name: str) -> str:
@@ -106,12 +108,11 @@ def greeting(name: str) -> str:
 ### Environment Management
 Python environments are defined via `package.yaml` files (not requirements.txt). The RCC tool manages reproducible environments.
 
-### Frontend Tiers
-The Action Server has two frontend tiers:
-- **Community**: Open-source, uses vendored packages from `action_server/frontend/vendored/`
-- **Enterprise**: Uses private `@sema4ai/*` design system packages (requires NPM_TOKEN)
-
-Vendored packages allow building without private registry access.
+### Frontend Boundary
+Runtime and Canvas are separate Vite roots backed by one public manifest and
+lockfile. The build has no product tier, private registry, or vendored product
+package mode. Project creation is embedded-only and exposes exactly the four
+manifest-owned community templates.
 
 ### Testing Structure
 - Unit tests: `inv test`

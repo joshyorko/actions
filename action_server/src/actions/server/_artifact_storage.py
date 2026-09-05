@@ -20,15 +20,20 @@ class ArtifactStorageNotFoundError(ArtifactStorageError, FileNotFoundError):
 class ArtifactStorage(Protocol):
     root: Path
 
-    def create_run_artifacts_dir(self, relative_artifacts_dir: str) -> Path: ...
+    def create_run_artifacts_dir(self, relative_artifacts_dir: str) -> Path:
+        ...
 
-    def run_artifacts_dir(self, relative_artifacts_dir: str) -> Path: ...
+    def run_artifacts_dir(self, relative_artifacts_dir: str) -> Path:
+        ...
 
-    def list_files(self, relative_artifacts_dir: str) -> list[tuple[str, int]]: ...
+    def list_files(self, relative_artifacts_dir: str) -> list[tuple[str, int]]:
+        ...
 
-    def read_text(self, relative_artifacts_dir: str, name: str) -> str: ...
+    def read_text(self, relative_artifacts_dir: str, name: str) -> str:
+        ...
 
-    def read_bytes(self, relative_artifacts_dir: str, name: str) -> bytes: ...
+    def read_bytes(self, relative_artifacts_dir: str, name: str) -> bytes:
+        ...
 
 
 class FilesystemArtifactStorage:
@@ -87,16 +92,24 @@ class FilesystemArtifactStorage:
     def _run_dir(self, relative_artifacts_dir: str, *, require_exists: bool) -> Path:
         key = self._canonical_key(relative_artifacts_dir, "artifact run key")
         return self._contained(
-            self.root.joinpath(*key.parts), "Artifact run path", require_exists=require_exists
+            self.root.joinpath(*key.parts),
+            "Artifact run path",
+            require_exists=require_exists,
         )
 
     def _manifest_path(self, *, require_exists: bool) -> Path:
-        return self._contained(self.root / self._MANIFEST, "Artifact binding manifest", require_exists=require_exists)
+        return self._contained(
+            self.root / self._MANIFEST,
+            "Artifact binding manifest",
+            require_exists=require_exists,
+        )
 
     def _file(self, relative_artifacts_dir: str, name: str) -> Path:
         run_dir = self.run_artifacts_dir(relative_artifacts_dir)
         self._canonical_key(name, "artifact name")
-        path = self._contained(run_dir / Path(name), "Artifact path", require_exists=False)
+        path = self._contained(
+            run_dir / Path(name), "Artifact path", require_exists=False
+        )
         if not path.is_file():
             raise ArtifactStorageNotFoundError(str(path))
         return path
@@ -124,7 +137,9 @@ class FilesystemArtifactStorage:
                 self._contained(path, "Artifact path", require_exists=True)
             elif path.is_file():
                 resolved = self._contained(path, "Artifact path", require_exists=True)
-                files.append((resolved.relative_to(run_dir).as_posix(), resolved.stat().st_size))
+                files.append(
+                    (resolved.relative_to(run_dir).as_posix(), resolved.stat().st_size)
+                )
         return sorted(files)
 
     def read_path(self, relative_artifacts_dir: str, name: str) -> Path:
@@ -139,9 +154,13 @@ class FilesystemArtifactStorage:
     def _write(self, relative_artifacts_dir: str, name: str, content: bytes) -> None:
         run_dir = self.run_artifacts_dir(relative_artifacts_dir)
         self._canonical_key(name, "artifact name")
-        parent = self._contained((run_dir / Path(name)).parent, "Artifact directory", require_exists=False)
+        parent = self._contained(
+            (run_dir / Path(name)).parent, "Artifact directory", require_exists=False
+        )
         parent.mkdir(parents=True, exist_ok=True)
-        target = self._contained(run_dir / Path(name), "Artifact path", require_exists=False)
+        target = self._contained(
+            run_dir / Path(name), "Artifact path", require_exists=False
+        )
         fd, temporary = tempfile.mkstemp(dir=parent, prefix=".artifact-")
         try:
             with os.fdopen(fd, "wb") as stream:
@@ -156,10 +175,17 @@ class FilesystemArtifactStorage:
     def write_text(self, relative_artifacts_dir: str, name: str, content: str) -> None:
         self._write(relative_artifacts_dir, name, content.encode("utf-8"))
 
-    def write_bytes(self, relative_artifacts_dir: str, name: str, content: bytes) -> None:
+    def write_bytes(
+        self, relative_artifacts_dir: str, name: str, content: bytes
+    ) -> None:
         self._write(relative_artifacts_dir, name, content)
 
-    def bind_run(self, run_id: str, relative_artifacts_dir: str, metadata: dict[str, Any] | None = None) -> None:
+    def bind_run(
+        self,
+        run_id: str,
+        relative_artifacts_dir: str,
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
         self._canonical_key(run_id, "run ID")
         key = self._canonical_key(relative_artifacts_dir, "artifact run key")
         manifest = self._manifest_path(require_exists=False)
@@ -174,16 +200,22 @@ class FilesystemArtifactStorage:
                 except FileNotFoundError:
                     bindings = {}
                 except (OSError, json.JSONDecodeError) as error:
-                    raise ArtifactStorageConfigurationError("Corrupt artifact run binding manifest") from error
+                    raise ArtifactStorageConfigurationError(
+                        "Corrupt artifact run binding manifest"
+                    ) from error
                 record = {"key": key.as_posix(), "metadata": metadata or {}}
                 if run_id in bindings and bindings[run_id] != record:
-                    raise ArtifactStorageConfigurationError(f"Conflicting artifact binding for run: {run_id}")
+                    raise ArtifactStorageConfigurationError(
+                        f"Conflicting artifact binding for run: {run_id}"
+                    )
                 self.run_artifacts_dir(relative_artifacts_dir)
                 bindings[run_id] = record
                 fd, temporary = tempfile.mkstemp(dir=self.root, prefix=".bindings-")
                 try:
                     with os.fdopen(fd, "w", encoding="utf-8") as output:
-                        json.dump(bindings, output, sort_keys=True, separators=(",", ":"))
+                        json.dump(
+                            bindings, output, sort_keys=True, separators=(",", ":")
+                        )
                         output.flush()
                         os.fsync(output.fileno())
                     os.replace(temporary, manifest)
@@ -195,30 +227,44 @@ class FilesystemArtifactStorage:
 
     def run_storage_key(self, run_id: str) -> str:
         try:
-            record = json.loads(self._manifest_path(require_exists=True).read_text())[run_id]
+            record = json.loads(self._manifest_path(require_exists=True).read_text())[
+                run_id
+            ]
             key = record["key"]
         except (FileNotFoundError, KeyError) as error:
             raise ArtifactStorageNotFoundError(run_id) from error
         except (OSError, TypeError, json.JSONDecodeError) as error:
-            raise ArtifactStorageConfigurationError("Corrupt artifact run binding manifest") from error
+            raise ArtifactStorageConfigurationError(
+                "Corrupt artifact run binding manifest"
+            ) from error
         self._run_dir(key, require_exists=True)
         return key
 
     def run_metadata(self, run_id: str) -> dict[str, Any]:
         key = self.run_storage_key(run_id)
-        metadata = json.loads(self._manifest_path(require_exists=True).read_text())[run_id]["metadata"]
+        metadata = json.loads(self._manifest_path(require_exists=True).read_text())[
+            run_id
+        ]["metadata"]
         if not isinstance(metadata, dict) or metadata.get("id") != run_id:
             raise ArtifactStorageConfigurationError("Corrupt artifact run metadata")
         if metadata.get("relative_artifacts_dir") != key:
-            raise ArtifactStorageConfigurationError("Artifact run metadata key mismatch")
+            raise ArtifactStorageConfigurationError(
+                "Artifact run metadata key mismatch"
+            )
         return metadata
 
 
-def create_artifact_storage(backend: str, root: Path | None) -> FilesystemArtifactStorage:
+def create_artifact_storage(
+    backend: str, root: Path | None
+) -> FilesystemArtifactStorage:
     if backend not in {"local", "shared-filesystem"}:
-        raise ArtifactStorageConfigurationError(f"Unsupported artifact storage backend: {backend}")
+        raise ArtifactStorageConfigurationError(
+            f"Unsupported artifact storage backend: {backend}"
+        )
     if backend == "shared-filesystem" and root is None:
-        raise ArtifactStorageConfigurationError("artifact_storage_root is required for the shared-filesystem backend")
+        raise ArtifactStorageConfigurationError(
+            "artifact_storage_root is required for the shared-filesystem backend"
+        )
     if root is None:
         raise ArtifactStorageConfigurationError("artifact storage root is required")
     return FilesystemArtifactStorage(root)

@@ -18,15 +18,19 @@ import json
 import logging
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Set
 
 log = logging.getLogger(__name__)
+
+if TYPE_CHECKING:
+    from actions.server._models import Schedule, ScheduleExecution
 
 
 def _get_croniter():
     """Lazy import croniter to avoid import errors if not installed."""
     try:
         from croniter import croniter
+
         return croniter
     except ImportError:
         raise ImportError(
@@ -39,11 +43,13 @@ def _get_pytz():
     """Lazy import pytz for timezone handling."""
     try:
         import pytz
+
         return pytz
     except ImportError:
         # Fall back to zoneinfo from stdlib (Python 3.9+)
         try:
             from zoneinfo import ZoneInfo
+
             return ZoneInfo
         except ImportError:
             raise ImportError(
@@ -53,6 +59,7 @@ def _get_pytz():
 
 class ScheduleType:
     """Schedule type constants."""
+
     CRON = "cron"
     INTERVAL = "interval"
     WEEKDAY = "weekday"
@@ -173,7 +180,9 @@ class SchedulerEngine:
             try:
                 await self._process_schedule(schedule, now)
             except Exception:
-                log.exception(f"Error processing schedule {schedule.id} ({schedule.name})")
+                log.exception(
+                    f"Error processing schedule {schedule.id} ({schedule.name})"
+                )
 
     async def _process_schedule(
         self, schedule: "Schedule", now: datetime
@@ -219,16 +228,9 @@ class SchedulerEngine:
             schedule: The schedule to process
             now: Current time
         """
-        from actions.server._models import (
-            ScheduleExecution,
-            ScheduleExecutionStatus,
-            ScheduleSkipReason,
-            get_db,
-        )
-
         # Import here to avoid circular imports
-        from actions.server._database import datetime_to_str
         from actions.server._gen_ids import gen_uuid
+        from actions.server._models import ScheduleSkipReason
 
         schedule_id = schedule.id
 
@@ -239,23 +241,17 @@ class SchedulerEngine:
 
         # Check concurrent execution limit for this schedule
         if not await self._check_concurrent_limit(schedule):
-            await self._record_skip(
-                schedule, now, ScheduleSkipReason.PREVIOUS_RUNNING
-            )
+            await self._record_skip(schedule, now, ScheduleSkipReason.PREVIOUS_RUNNING)
             return
 
         # Check rate limits
         if not await self._check_rate_limit(schedule, now):
-            await self._record_skip(
-                schedule, now, ScheduleSkipReason.RATE_LIMITED
-            )
+            await self._record_skip(schedule, now, ScheduleSkipReason.RATE_LIMITED)
             return
 
         # Check dependencies
         if not await self._check_dependencies(schedule):
-            await self._record_skip(
-                schedule, now, ScheduleSkipReason.DEPENDENCY_FAILED
-            )
+            await self._record_skip(schedule, now, ScheduleSkipReason.DEPENDENCY_FAILED)
             return
 
         # All checks passed - execute the schedule
@@ -275,9 +271,7 @@ class SchedulerEngine:
                     return False
             return True
 
-    async def _check_rate_limit(
-        self, schedule: "Schedule", now: datetime
-    ) -> bool:
+    async def _check_rate_limit(self, schedule: "Schedule", now: datetime) -> bool:
         """Check if the schedule's rate limits allow execution."""
         if not schedule.rate_limit_enabled:
             return True
@@ -415,9 +409,7 @@ class SchedulerEngine:
                         },
                     )
 
-        log.info(
-            f"Schedule {schedule.id} ({schedule.name}) skipped: {reason}"
-        )
+        log.info(f"Schedule {schedule.id} ({schedule.name}) skipped: {reason}")
 
     async def _execute_schedule(
         self,
@@ -471,7 +463,7 @@ class SchedulerEngine:
 
             with db.connect():
                 with db.transaction():
-                    update_fields = {
+                    update_fields: Dict[str, Any] = {
                         "actual_end_time": datetime_to_str(end_time),
                         "duration_ms": duration_ms,
                         "status": (
@@ -490,7 +482,7 @@ class SchedulerEngine:
 
                     # Update schedule timestamps
                     next_run = self.compute_next_run(schedule, end_time)
-                    schedule_updates = {
+                    schedule_updates: Dict[str, Any] = {
                         "last_run_at": datetime_to_str(now),
                         "updated_at": datetime_to_str(end_time),
                     }
@@ -531,7 +523,6 @@ class SchedulerEngine:
         Returns:
             Tuple of (success, result, error_message)
         """
-        from actions.server._database import datetime_to_str
         from actions.server._models import (
             ScheduleExecution,
             ScheduleExecutionStatus,
@@ -631,7 +622,9 @@ class SchedulerEngine:
                     [action.action_package_id],
                 )
             except KeyError:
-                raise ValueError(f"Action package not found: {action.action_package_id}")
+                raise ValueError(
+                    f"Action package not found: {action.action_package_id}"
+                )
 
         # Parse inputs
         inputs = json.loads(schedule.inputs_json) if schedule.inputs_json else {}
@@ -641,7 +634,7 @@ class SchedulerEngine:
         relative_artifacts_dir = _create_run_artifacts_dir(action, run_id)
 
         with db.connect():
-            run = _create_run(
+            _create_run(
                 action=action,
                 run_id=run_id,
                 inputs=inputs,
@@ -720,9 +713,7 @@ class SchedulerEngine:
             )
             return None
         except Exception as e:
-            log.error(
-                f"Schedule {schedule.id}: failed to create work item: {e}"
-            )
+            log.error(f"Schedule {schedule.id}: failed to create work item: {e}")
             return None
 
     async def _send_notifications(
@@ -733,9 +724,8 @@ class SchedulerEngine:
         error: Optional[str],
     ) -> None:
         """Send notifications based on schedule configuration."""
-        should_notify = (
-            (success and schedule.notify_on_success)
-            or (not success and schedule.notify_on_failure)
+        should_notify = (success and schedule.notify_on_success) or (
+            not success and schedule.notify_on_failure
         )
 
         if not should_notify:
@@ -756,9 +746,7 @@ class SchedulerEngine:
         # Email notification
         if schedule.notification_email:
             try:
-                await self._send_email_notification(
-                    schedule, execution, success, error
-                )
+                await self._send_email_notification(schedule, execution, success, error)
             except Exception as e:
                 if notification_error:
                     notification_error += f"; Email failed: {e}"
@@ -791,6 +779,8 @@ class SchedulerEngine:
     ) -> None:
         """Send a webhook notification."""
         import aiohttp
+
+        assert schedule.notification_webhook_url is not None
 
         payload = {
             "schedule_id": schedule.id,
@@ -831,10 +821,10 @@ class SchedulerEngine:
         if service is None:
             log.warning("Email notifications not configured (no SMTP settings)")
             return
+        assert schedule.notification_email is not None
 
         subject = (
-            f"[{'SUCCESS' if success else 'FAILURE'}] "
-            f"Schedule: {schedule.name}"
+            f"[{'SUCCESS' if success else 'FAILURE'}] " f"Schedule: {schedule.name}"
         )
 
         body = f"""
@@ -881,17 +871,20 @@ Duration: {execution.duration_ms}ms
         schedule_type = schedule.schedule_type
 
         if schedule_type == ScheduleType.CRON:
+            assert schedule.cron_expression is not None
             return self._compute_cron_next(
                 schedule.cron_expression,
                 schedule.timezone,
                 after,
             )
         elif schedule_type == ScheduleType.INTERVAL:
+            assert schedule.interval_seconds is not None
             return self._compute_interval_next(
                 schedule.interval_seconds,
                 after,
             )
         elif schedule_type == ScheduleType.WEEKDAY:
+            assert schedule.weekday_config_json is not None
             return self._compute_weekday_next(
                 schedule.weekday_config_json,
                 schedule.timezone,
@@ -915,9 +908,11 @@ Duration: {execution.duration_ms}ms
 
         try:
             import pytz
+
             tz = pytz.timezone(timezone_str)
         except ImportError:
             from zoneinfo import ZoneInfo
+
             tz = ZoneInfo(timezone_str)
 
         # Convert to local timezone for cron calculation
@@ -929,7 +924,7 @@ Duration: {execution.duration_ms}ms
         next_local = cron.get_next(datetime)
 
         # Convert back to UTC
-        if hasattr(next_local, 'astimezone'):
+        if hasattr(next_local, "astimezone"):
             return next_local.astimezone(timezone.utc)
         else:
             # Handle naive datetime
@@ -959,9 +954,11 @@ Duration: {execution.duration_ms}ms
 
         try:
             import pytz
+
             tz = pytz.timezone(timezone_str)
         except ImportError:
             from zoneinfo import ZoneInfo
+
             tz = ZoneInfo(timezone_str)
 
         # Parse time
@@ -973,9 +970,7 @@ Duration: {execution.duration_ms}ms
         local_after = after.astimezone(tz)
 
         # Find next occurrence
-        current = local_after.replace(
-            hour=hour, minute=minute, second=0, microsecond=0
-        )
+        current = local_after.replace(hour=hour, minute=minute, second=0, microsecond=0)
 
         # If current time is past today's scheduled time, start from tomorrow
         if current <= local_after:

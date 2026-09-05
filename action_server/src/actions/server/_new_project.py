@@ -37,9 +37,9 @@ def handle_new_project(
     except Exception as e:
         log.warning(
             bold_yellow(
-                "Refreshing templates failed, reason: \n"
+                "Loading embedded templates failed, reason: \n"
                 + f"{e}\n"
-                + "Already cached templates will be used if available."
+                + "A verified embedded template bundle is required."
             )
         )
 
@@ -47,7 +47,7 @@ def handle_new_project(
         metadata = _get_local_templates_metadata()
 
         if not metadata:
-            raise RuntimeError("No cached or remote templates available.")
+            raise RuntimeError("No verified embedded templates available.")
 
         if not directory:
             directory = input("Name of the project: ")
@@ -99,10 +99,7 @@ def handle_new_project(
         return 0
     except Exception as e:
         log.critical(bold_red(f"\nError creating the project: {e}"))
-        log.info(
-            "If the problem persists, the list of available templates can be found here: "
-            "https://github.com/Sema4AI/actions/tree/master/templates"
-        )
+        log.info("Reinstall Action Server to restore its embedded template bundle.")
 
         return 1
 
