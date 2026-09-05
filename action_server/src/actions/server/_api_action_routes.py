@@ -1,4 +1,5 @@
 import logging
+from collections.abc import Iterable
 
 from fastapi import FastAPI, params
 from starlette.authentication import AuthCredentials, AuthenticationBackend, BaseUser
@@ -40,6 +41,21 @@ def get_action_description_from_docs(docs: str) -> str:
     return doc_desc
 
 
+def _get_bearer_token(headers: Iterable[tuple[bytes, bytes]]) -> str | None:
+    authorization_headers = [
+        value.decode("latin-1")
+        for name, value in headers
+        if name.lower() == b"authorization"
+    ]
+    if len(authorization_headers) != 1:
+        return None
+
+    authorization = authorization_headers[0]
+    if not authorization.lower().startswith("bearer "):
+        return None
+    return authorization[7:]
+
+
 class APIKeyAuthBackend(AuthenticationBackend):
     """
     Authentication backend that validates API key.
@@ -58,20 +74,11 @@ class APIKeyAuthBackend(AuthenticationBackend):
         from starlette.exceptions import HTTPException
         from starlette.status import HTTP_403_FORBIDDEN
 
-        auth_header = next(
-            (
-                conn.headers.get(key)
-                for key in conn.headers
-                if key.lower() == "authorization"
-            ),
-            None,
-        )
-        if not auth_header or not auth_header.lower().startswith("bearer "):
+        token = _get_bearer_token(conn.headers.raw)
+        if token is None:
             raise HTTPException(
                 status_code=HTTP_403_FORBIDDEN, detail="Not authenticated"
             )
-
-        token = auth_header[7:]  # Remove "Bearer " prefix
 
         # Validate the token with the provider
         if token != self.api_key:

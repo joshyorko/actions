@@ -46,16 +46,9 @@ class _ConfiguredAPIKeyMiddleware:
         path = scope.get("path", "")
         protected = path.startswith("/api/") or path.startswith("/oauth2/")
         if protected and not self._is_public(path):
-            authorization_headers = [
-                value.decode("latin-1")
-                for name, value in scope.get("headers", [])
-                if name.lower() == b"authorization"
-            ]
-            if (
-                len(authorization_headers) != 1
-                or not authorization_headers[0].lower().startswith("bearer ")
-                or authorization_headers[0][7:] != self.api_key
-            ):
+            from ._api_action_routes import _get_bearer_token
+
+            if _get_bearer_token(scope.get("headers", [])) != self.api_key:
                 response = PlainTextResponse(
                     "Invalid or missing API Key", status_code=403
                 )
@@ -237,7 +230,7 @@ def start_server(
 
     from . import _actions_process_pool
     from ._api_action_package import action_package_api_router
-    from ._api_action_routes import _ActionRoutes
+    from ._api_action_routes import _ActionRoutes, _get_bearer_token
     from ._api_analytics import analytics_api_router
     from ._api_oauth2 import oauth2_api_router
     from ._api_robots import robots_api_router
@@ -305,10 +298,7 @@ def start_server(
         endpoint_dependencies.append(Depends(verify_api_key))
 
         async def verify_websocket_api_key(websocket: WebSocket) -> None:
-            authorization = websocket.headers.get("authorization", "")
-            if not authorization.lower().startswith("bearer "):
-                raise WebSocketException(code=1008)
-            if authorization[7:] != api_key:
+            if _get_bearer_token(websocket.headers.raw) != api_key:
                 raise WebSocketException(code=1008)
 
         websocket_dependencies.append(Depends(verify_websocket_api_key))

@@ -228,6 +228,24 @@ def test_configured_api_key_protects_websocket(
             ):
                 pass
 
+        for headers in (
+            [
+                ("Authorization", "Bearer Foo"),
+                ("Authorization", "Bearer wrong"),
+            ],
+            [
+                ("Authorization", "Bearer wrong"),
+                ("Authorization", "Bearer Foo"),
+            ],
+        ):
+            with pytest.raises(InvalidStatus):
+                async with websockets.connect(
+                    url,
+                    additional_headers=headers,
+                    open_timeout=_get_timeout(),
+                ):
+                    pass
+
         async with websockets.connect(
             url,
             additional_headers={"Authorization": "Bearer Foo"},
