@@ -66,7 +66,6 @@ def test_verbose_server_startup_redacts_database_url_credentials(
     start_server(
         SimpleNamespace(expose=False, whitelist=None, auto_reload=False),
         api_key=None,
-        expose_session=None,
         before_start=(),
     )
     output = caplog.text
