@@ -1,12 +1,13 @@
 import json
 from pathlib import Path
 from types import SimpleNamespace
-from typing import ClassVar
+from typing import Any, ClassVar, cast
 
 import pytest
 from robocorp.log._log_formatting import pretty_format_logs_from_log_html_contents
 
 from actions.server._selftest import ActionServerClient, ActionServerProcess
+from actions.server._protocols import ArgumentsNamespaceStart
 from actions.server._settings import HEADER_ACTION_SERVER_RUN_ID
 
 
@@ -38,8 +39,8 @@ def test_verbose_server_startup_redacts_database_url_credentials(
     )
 
     class FakeActionRoutes:
-        action_package_id_to_action_package: ClassVar = {}
-        actions: ClassVar = []
+        action_package_id_to_action_package: ClassVar[dict[str, Any]] = {}
+        actions: ClassVar[list[Any]] = []
 
         def __init__(self, *args):
             pass
@@ -64,7 +65,10 @@ def test_verbose_server_startup_redacts_database_url_credentials(
 
     caplog.set_level("DEBUG")
     start_server(
-        SimpleNamespace(expose=False, whitelist=None, auto_reload=False),
+        cast(
+            ArgumentsNamespaceStart,
+            SimpleNamespace(expose=False, whitelist=None, auto_reload=False),
+        ),
         api_key=None,
         before_start=(),
     )
