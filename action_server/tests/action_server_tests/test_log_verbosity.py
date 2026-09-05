@@ -34,6 +34,7 @@ def test_verbose_server_startup_redacts_database_url_credentials(
     )
     settings.artifacts_dir.mkdir()
     monkeypatch.setattr("actions.server._settings.get_settings", lambda: settings)
+    monkeypatch.setattr("actions.server._app.get_settings", lambda: settings)
     monkeypatch.setattr(
         "actions.server._server.asyncio.run", lambda coroutine: coroutine.close()
     )
