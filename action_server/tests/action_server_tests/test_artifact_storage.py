@@ -65,6 +65,22 @@ def test_configured_static_artifacts_require_auth_and_are_run_scoped(tmp_path):
     assert response.status_code == 200
     assert response.text == "authorized artifact"
 
+    assert client.head("/artifacts/run-a/payload.txt").status_code == 403
+    assert (
+        client.head(
+            "/artifacts/run-a/payload.txt",
+            headers={"Authorization": "Bearer wrong"},
+        ).status_code
+        == 403
+    )
+    assert (
+        client.head(
+            "/artifacts/run-a/payload.txt",
+            headers={"Authorization": "Bearer secret"},
+        ).status_code
+        == 200
+    )
+
     assert (
         client.get(
             "/artifacts/run-a/payload.txt",

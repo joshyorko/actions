@@ -220,6 +220,14 @@ def test_configured_api_key_protects_websocket(
             async with websockets.connect(url, open_timeout=_get_timeout()):
                 pass
 
+        with pytest.raises(InvalidStatus):
+            async with websockets.connect(
+                url,
+                additional_headers={"Authorization": "Bearer wrong"},
+                open_timeout=_get_timeout(),
+            ):
+                pass
+
         async with websockets.connect(
             url,
             additional_headers={"Authorization": "Bearer Foo"},
