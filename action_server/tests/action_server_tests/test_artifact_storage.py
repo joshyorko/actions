@@ -37,6 +37,37 @@ def test_static_artifacts_preserve_file_and_range_responses(tmp_path):
     assert response.headers["content-range"] == "bytes 2-5/10"
 
 
+def test_configured_static_artifacts_require_auth_and_are_run_scoped(tmp_path):
+    storage = create_artifact_storage("local", tmp_path)
+    storage.create_run_artifacts_dir("runs/run-a")
+    storage.write_text("runs/run-a", "payload.txt", "authorized artifact")
+    storage.bind_run(
+        "run-a",
+        "runs/run-a",
+        {"id": "run-a", "relative_artifacts_dir": "runs/run-a"},
+    )
+
+    app = FastAPI()
+    _mount_artifact_static_files(app, "local", tmp_path, api_key="secret")
+    client = TestClient(app)
+
+    response = client.get("/artifacts/run-a/payload.txt")
+    assert response.status_code == 403
+
+    response = client.get(
+        "/artifacts/run-a/payload.txt",
+        headers={"Authorization": "Bearer secret"},
+    )
+    assert response.status_code == 200
+    assert response.text == "authorized artifact"
+
+    response = client.get(
+        "/artifacts/.action-server-run-bindings.json",
+        headers={"Authorization": "Bearer secret"},
+    )
+    assert response.status_code == 404
+
+
 def test_shared_static_artifacts_are_unavailable(tmp_path):
     (tmp_path / "run-a").mkdir()
     (tmp_path / "run-a" / "payload.bin").write_bytes(b"shared artifact")

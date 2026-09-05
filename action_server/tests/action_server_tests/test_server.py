@@ -697,6 +697,107 @@ def test_auth_routes(action_server_process: ActionServerProcess, data_regression
 
 
 @pytest.mark.integration_test
+def test_configured_api_key_protects_assembled_surfaces(
+    action_server_process: ActionServerProcess,
+):
+    import actions_http
+    from action_server_tests.fixtures import get_in_resources
+
+    from actions.server._artifact_storage import create_artifact_storage
+
+    pack = get_in_resources("no_conda", "greeter")
+    action_server_process.start(
+        cwd=pack,
+        actions_sync=True,
+        db_file="server.db",
+        additional_args=["--api-key=Foo"],
+    )
+
+    client = ActionServerClient(action_server_process)
+    authorized = {"Authorization": "Bearer Foo"}
+
+    for path in (
+        "/api/actionPackages",
+        "/api/runs",
+        "/api/analytics/summary",
+        "/api/robots/catalog",
+        "/api/work-items",
+        "/api/schedules",
+        "/api/schedule-groups",
+        "/api/triggers",
+    ):
+        client.get_error(path, 403)
+        response = client.get_get_response(path, None, headers=authorized)
+        assert response.status_code == 200, (path, response.text)
+
+    unauthenticated_work_item = client.post_error(
+        "/api/work-items", 403, {"payload": {"probe": "unauthorized"}}
+    )
+    assert unauthenticated_work_item.status_code == 403
+    work_items = client.get_json("/api/work-items", headers=authorized)
+    assert work_items["total"] == 0
+
+    schedule_payload = {
+        "name": "unauthorized-schedule",
+        "schedule_type": "interval",
+        "interval_seconds": 60,
+    }
+    client.post_error("/api/schedules", 403, schedule_payload)
+    schedules = client.get_json("/api/schedules", headers=authorized)
+    assert all(
+        item["name"] != schedule_payload["name"] for item in schedules["schedules"]
+    )
+
+    from actions.server._encryption import make_unencrypted_data_envelope
+
+    secret_payload = {
+        "data": make_unencrypted_data_envelope(
+            {"secrets": {"probe": "authorized"}, "scope": "global"}
+        )
+    }
+    secret_url = client.build_full_url("/api/secrets")
+    secret_response = actions_http.post(
+        secret_url,
+        json=secret_payload,
+        **client.requests_kwargs(),
+    )
+    assert secret_response.status_code == 403
+    secret_response = actions_http.post(
+        secret_url,
+        json=secret_payload,
+        headers=authorized,
+        **client.requests_kwargs(),
+    )
+    assert secret_response.status_code == 200
+
+    artifact_storage = create_artifact_storage(
+        "local", action_server_process.datadir / "artifacts"
+    )
+    artifact_storage.create_run_artifacts_dir("runs/run-a")
+    artifact_storage.write_text("runs/run-a", "payload.txt", "authorized artifact")
+    artifact_storage.bind_run(
+        "run-a",
+        "runs/run-a",
+        {"id": "run-a", "relative_artifacts_dir": "runs/run-a"},
+    )
+    client.get_error("/artifacts/run-a/payload.txt", 403)
+    artifact_response = client.get_get_response(
+        "/artifacts/run-a/payload.txt", None, headers=authorized
+    )
+    assert artifact_response.status_code == 200
+    assert artifact_response.text == "authorized artifact"
+    bindings_response = actions_http.get(
+        client.build_full_url("/artifacts/.action-server-run-bindings.json"),
+        headers=authorized,
+        **client.requests_kwargs(),
+    )
+    assert bindings_response.status_code == 404
+
+    client.get_error("/config", 200)
+    client.get_error("/", 200)
+
+
+@pytest.mark.integration_test
 def test_server_process_pool(
     action_server_process: ActionServerProcess, data_regression
 ):

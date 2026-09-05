@@ -196,3 +196,39 @@ def test_server_websockets(
 
         else:
             raise AssertionError(curr)
+
+
+@pytest.mark.integration_test
+def test_configured_api_key_protects_websocket(
+    action_server_process: ActionServerProcess,
+):
+    from action_server_tests.fixtures import get_in_resources
+
+    action_server_process.start(
+        cwd=get_in_resources("no_conda", "greeter"),
+        actions_sync=True,
+        db_file="server.db",
+        additional_args=["--api-key=Foo"],
+    )
+
+    async def probe():
+        import websockets
+        from websockets.exceptions import InvalidStatus
+
+        url = build_ws_url(action_server_process)
+        with pytest.raises(InvalidStatus):
+            async with websockets.connect(url, open_timeout=_get_timeout()):
+                pass
+
+        async with websockets.connect(
+            url,
+            additional_headers={"Authorization": "Bearer Foo"},
+            open_timeout=_get_timeout(),
+        ) as ws:
+            await ws.send(json.dumps({"event": "echo", "data": "authorized"}))
+            assert json.loads(await ws.recv()) == {
+                "event": "echo",
+                "data": "authorized",
+            }
+
+    asyncio.run(probe())
