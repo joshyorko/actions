@@ -101,12 +101,6 @@ def _add_start_server_command(command_parser, defaults):
         default=None,
     )
     start_parser.add_argument(
-        "--expose-allow-reuse",
-        dest="expose_allow_reuse",
-        action="store_true",
-        help="Always answer yes to expose reuse confirmation",
-    )
-    start_parser.add_argument(
         "--expose-provider",
         dest="expose_provider",
         choices=["auto", "localhost.run", "bore", "cloudflare"],
@@ -667,36 +661,6 @@ def _main_retcode(
     if args is None:
         args = sys.argv[1:]
 
-    if args and args[0] == "server-expose":
-        # The process is being called by to make the server expose.
-        # Internal usage only, so, don't even do argument parsing
-        # for it.
-        from . import _server_expose
-
-        try:
-            (
-                expose_server_parent_pid,
-                expose_server_url,
-                expose_server_verbose,
-                expose_server_expose_url,
-                expose_server_datadir,
-                expose_server_expose_session,
-                expose_server_api_key,
-            ) = args[1:]
-        except Exception:
-            raise RuntimeError(f"Unable to initialize server with sys.argv: {sys.argv}")
-
-        _server_expose.main(
-            expose_server_parent_pid,
-            expose_server_url,
-            expose_server_verbose,
-            expose_server_expose_url,
-            expose_server_datadir,
-            expose_server_expose_session,
-            expose_server_api_key,
-        )
-        return 0
-
     parser = _create_parser()
     base_args: ArgumentsNamespace = parser.parse_args(args)
 
@@ -1000,28 +964,6 @@ information from this datadir.
 
                     settings.artifacts_dir.mkdir(parents=True, exist_ok=True)
 
-                    expose_session = None
-                    if start_args.expose:
-                        from ._server_expose import read_expose_session_json
-
-                        expose_session = read_expose_session_json(
-                            datadir=str(settings.datadir)
-                        )
-                        if expose_session and not start_args.expose_allow_reuse:
-                            confirm = input(
-                                colored(
-                                    "> Resume previous expose URL ",
-                                    attrs=["bold"],
-                                )
-                                + colored(expose_session.url, "light_blue")
-                                + colored(" Y/N?", attrs=["bold"])
-                                + colored(" [Y]", attrs=["dark"])
-                            )
-                            if confirm.lower() == "y" or confirm == "":
-                                log.debug("Resuming previous expose session")
-                            else:
-                                expose_session = None
-
                     api_key = None
                     if start_args.api_key:
                         api_key = start_args.api_key
@@ -1034,9 +976,6 @@ information from this datadir.
                         start_server(
                             start_args=start_args,
                             api_key=api_key,
-                            expose_session=expose_session.expose_session
-                            if expose_session
-                            else None,
                             before_start=before_start,
                         )
                     except KeyboardInterrupt:

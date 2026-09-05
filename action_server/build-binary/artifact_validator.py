@@ -29,7 +29,6 @@ class ValidationCheck:
 class BuildArtifact:
     """Represents a build artifact with metadata."""
     
-    tier: str
     platform: str
     file_path: Path
     sha256: Optional[str] = None
@@ -55,7 +54,6 @@ class BuildArtifact:
     def to_metadata_json(self) -> str:
         """Generate metadata JSON for artifact."""
         metadata = {
-            "tier": self.tier,
             "platform": self.platform,
             "sha256": self.sha256 or self.compute_hash(),
             "size_bytes": self.size_bytes or self.compute_size(),
@@ -70,9 +68,7 @@ def validate_imports(artifact_path: Path) -> ValidationCheck:
     if symlinks:
         return ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")
     if artifact_path.is_dir():
-        violations = tree_shaker.TreeShaker("actions", artifact_path).scan_directory(
-            artifact_path
-        )
+        violations = tree_shaker.TreeShaker(artifact_path).scan_directory(artifact_path)
     else:
         violations = tree_shaker.scan_imports(str(artifact_path))
     
@@ -83,14 +79,14 @@ def validate_imports(artifact_path: Path) -> ValidationCheck:
         return ValidationCheck(
             name="imports",
             passed=False,
-            message=f"Enterprise imports detected: {', '.join(messages)}",
+            message=f"Removed product imports detected: {', '.join(messages)}",
             severity="error",
         )
     
     return ValidationCheck(
         name="imports",
         passed=True,
-        message="No enterprise imports detected",
+        message="No removed product imports detected",
         severity="info",
     )
 

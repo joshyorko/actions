@@ -229,7 +229,7 @@ def validate_imports(ctx: Context, json_output: bool = False):
         if not root.is_dir():
             results.append({"root": name, "status": "failed", "message": f"Distribution directory not found: {root}", "violations": []})
             continue
-        violations = TreeShaker(tier="community", root_dir=root).scan_directory(root)
+        violations = TreeShaker(root_dir=root).scan_directory(root)
         details = [
             {"file": str(v.file_path), "line": v.line_number, "import": v.import_statement, "module": v.prohibited_module, "severity": v.severity}
             for v in violations
@@ -780,7 +780,7 @@ def setup_hooks(ctx: Context):
     """Setup git hooks for local development (optional).
     
     This task symlinks the pre-commit hook from .githooks/ to .git/hooks/
-    to enable local tier separation validation.
+    to enable local removed-product import validation.
     """
     import os
     import subprocess
@@ -814,7 +814,7 @@ def setup_hooks(ctx: Context):
         print(f"[OK] Symlinked pre-commit hook to {dest_hook}")
     
     print("Pre-commit hook installed successfully!")
-    print("The hook will check for enterprise imports in core/ files.")
+    print("The hook will check for removed private product imports.")
     print("To bypass the hook, use: git commit --no-verify")
 
 

@@ -71,7 +71,6 @@ def build_bundle(config_path: Path, template_root: Path, output_dir: Path) -> No
     metadata = {
         "schema": 1,
         "hash": hashlib.sha256(bundle).hexdigest(),
-        "url": config.get("templateBundleUrl", ""),
         "templates": {name: descriptions[name] for name in sorted(descriptions)},
     }
     metadata_bytes = (
