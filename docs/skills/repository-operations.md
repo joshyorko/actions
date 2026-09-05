@@ -60,6 +60,11 @@ directory inventory, and
 recompute every file's byte length and SHA-256. Hash multisets are insufficient:
 omission, extra files, path swaps, reordering, wrong sizes, and wrong hashes
 fail validation.
+Release-bound Python validation, including `inv validate-artifact`, treats a
+missing `artifact-manifest.json` as an error when artifact identity and content
+type are expected. It validates path safety, sorted exact inventory, and
+structural directories before reading any payload bytes; invalid inventory
+skips payload size/hash/budget reads rather than inspecting undeclared paths.
 CycloneDX generation uses its `--output-reproducible` mode for both retained
 SBOMs, and the hosted determinism check runs the second clean build on Linux,
 macOS, and Windows. The Canvas manifest command passes

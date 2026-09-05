@@ -155,7 +155,17 @@ def validate_build_metadata(
         return []
     manifest_path = artifact_path / "artifact-manifest.json"
     if not manifest_path.exists():
-        return [ValidationCheck("metadata", True, "No build manifest (fixture or legacy artifact)", "warning")]
+        strict = expected_artifact is not None or expected_content_type is not None
+        return [
+            ValidationCheck(
+                "metadata",
+                not strict,
+                "Build manifest is required for release artifacts"
+                if strict
+                else "No build manifest (fixture or legacy artifact)",
+                "error" if strict else "warning",
+            )
+        ]
     try:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         files = manifest["files"]
@@ -185,13 +195,44 @@ def validate_build_metadata(
             and ".." not in Path(name).parts
             for name in names
         )
-        checks = [ValidationCheck("metadata", manifest.get("schemaVersion") == 1 and bool(files), "Build manifest is present and non-empty")]
+        checks = [
+            ValidationCheck(
+                "metadata",
+                manifest.get("schemaVersion") == 1 and bool(files),
+                "Build manifest is present and non-empty",
+            )
+        ]
         checks.append(ValidationCheck("source-maps", not manifest.get("sourceMaps") and not any(name.endswith(".map") for name in names), "Source maps are disabled"))
         checks.append(ValidationCheck("sbom", (artifact_path / "sbom.json").is_file(), "CycloneDX SBOM is present"))
         content_type = manifest.get("contentType")
         checks.append(ValidationCheck("artifact", expected_artifact is not None and manifest.get("artifact") == expected_artifact, f"Declared artifact: {manifest.get('artifact')}"))
         checks.append(ValidationCheck("content-type", expected_content_type is not None and content_type == expected_content_type, f"Declared content type: {content_type}"))
-        checks.append(ValidationCheck("inventory", safe_names and names == sorted(names) and names == expected_names and actual_directories == expected_directories, "Manifest inventory is complete and sorted"))
+        inventory_valid = (
+            safe_names
+            and names == sorted(names)
+            and names == expected_names
+            and actual_directories == expected_directories
+        )
+        checks.append(
+            ValidationCheck(
+                "inventory",
+                inventory_valid,
+                "Manifest inventory is complete and sorted",
+            )
+        )
+        if not inventory_valid:
+            checks.extend(
+                [
+                    ValidationCheck("sizes", False, "Skipped because manifest inventory is invalid"),
+                    ValidationCheck("hashes", False, "Skipped because manifest inventory is invalid"),
+                    ValidationCheck(
+                        "payload-budget",
+                        False,
+                        "Skipped because manifest inventory is invalid",
+                    ),
+                ]
+            )
+            return checks
         actual_bytes = []
         actual_hashes = []
         for item in files:

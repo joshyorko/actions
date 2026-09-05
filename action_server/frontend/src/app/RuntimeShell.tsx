@@ -4,11 +4,11 @@ import { RuntimeProviders } from "./RuntimeProviders";
 import { RuntimeRoutes } from "./RuntimeRoutes";
 
 export const RuntimeShell = () => (
-  <RuntimeProviders>
-    <BrowserRouter>
-      <RuntimeLayout>
-        <RuntimeRoutes />
-      </RuntimeLayout>
-    </BrowserRouter>
-  </RuntimeProviders>
+    <RuntimeProviders>
+        <BrowserRouter>
+            <RuntimeLayout>
+                <RuntimeRoutes />
+            </RuntimeLayout>
+        </BrowserRouter>
+    </RuntimeProviders>
 );

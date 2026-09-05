@@ -213,6 +213,63 @@ def test_validators_prove_manifest_inventory_and_metadata(tmp_path):
     assert any(check.name == "sizes" and not check.passed for check in checks)
 
 
+def test_python_validator_rejects_missing_manifest_in_release_mode(tmp_path):
+    build_binary = FRONTEND.parent / "build-binary"
+    sys.path.insert(0, str(build_binary))
+    from artifact_validator import validate_build_metadata
+
+    root = tmp_path / "artifact"
+    root.mkdir()
+    (root / "index.html").write_bytes(b"runtime")
+
+    checks = validate_build_metadata(root, "runtime-admin", "text/html")
+
+    metadata = next(check for check in checks if check.name == "metadata")
+    assert metadata.passed is False
+    assert metadata.severity == "error"
+
+
+def test_python_validator_rejects_unsafe_manifest_before_payload_reads(
+    monkeypatch, tmp_path
+):
+    build_binary = FRONTEND.parent / "build-binary"
+    sys.path.insert(0, str(build_binary))
+    from artifact_validator import validate_build_metadata
+
+    root = tmp_path / "artifact"
+    root.mkdir()
+    outside = tmp_path / "outside.js"
+    outside.write_bytes(b"outside")
+    manifest = {
+        "schemaVersion": 1,
+        "artifact": "runtime-admin",
+        "contentType": "text/html",
+        "sourceMaps": False,
+        "files": [
+            {
+                "path": "../outside.js",
+                "bytes": outside.stat().st_size,
+                "sha256": hashlib.sha256(outside.read_bytes()).hexdigest(),
+            }
+        ],
+    }
+    (root / "artifact-manifest.json").write_text(json.dumps(manifest))
+    (root / "sbom.json").write_text("{}")
+
+    reads = []
+    original_read_bytes = Path.read_bytes
+
+    def track_read(path):
+        reads.append(path)
+        return original_read_bytes(path)
+
+    monkeypatch.setattr(Path, "read_bytes", track_read)
+    checks = validate_build_metadata(root, "runtime-admin", "text/html")
+
+    assert any(check.name == "inventory" and not check.passed for check in checks)
+    assert outside.resolve() not in {path.resolve() for path in reads}
+
+
 def test_python_validator_rejects_empty_structural_extras(tmp_path):
     build_binary = FRONTEND.parent / "build-binary"
     sys.path.insert(0, str(build_binary))
