@@ -425,6 +425,9 @@ status and CLI diagnostics use the redactor; the byte-immutable legacy
 translation is based on lexical SQL tokens and expression boundaries, so
 parenthesized or comment-separated JSON operator RHS expressions remain
 operators while true markers are converted and counted.
+The lexer treats `SELECT` and `AS` as SQL boundary words, so an aliased
+parameter such as `SELECT ? AS value` is counted and translated before its
+values are checked; this remains a lexical adapter, not a general SQL parser.
 Migration status checks use the same case-insensitive PostgreSQL scheme
 classification before treating a database target as a filesystem path.
 PostgreSQL model DDL uses native `BOOLEAN` while

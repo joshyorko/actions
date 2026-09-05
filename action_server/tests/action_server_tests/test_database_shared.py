@@ -489,6 +489,17 @@ def test_postgresql_placeholder_adapter_only_rewrites_parameters():
         db._adapt_sql(sql, ["only-one"])
 
 
+def test_postgresql_placeholder_adapter_counts_aliased_select_parameter():
+    db = Database("postgresql://localhost/actions_test")
+    sql = "SELECT ? AS value"
+
+    adapted_without_values = db._adapt_sql(sql)
+    adapted_with_value = db._adapt_sql(sql, ["x"])
+
+    assert adapted_without_values.count("%s") == 1
+    assert adapted_with_value == "SELECT %s AS value"
+
+
 def test_postgresql_ddl_adapter_is_lexical_and_ddl_scoped():
     db = Database("postgresql://localhost/actions_test")
 

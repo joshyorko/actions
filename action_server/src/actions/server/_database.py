@@ -61,6 +61,8 @@ _SQL_OPERATOR_WORDS = {
     "ALL",
     "DISTINCT",
     "HAVING",
+    "SELECT",
+    "AS",
     "NULL",
     "TRUE",
     "FALSE",
