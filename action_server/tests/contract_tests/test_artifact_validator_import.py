@@ -1,10 +1,43 @@
 """Regression coverage for the build-binary top-level import contract."""
 
+import hashlib
+import json
 import subprocess
 import sys
 from pathlib import Path
 
 import pytest
+
+
+def _write_valid_manifest(root, artifact, content_type):
+    files = []
+    for path in sorted(
+        (path for path in root.rglob("*") if path.is_file()),
+        key=lambda path: path.relative_to(root).as_posix(),
+    ):
+        if path.name in {"artifact-manifest.json", "sbom.json"}:
+            continue
+        data = path.read_bytes()
+        files.append(
+            {
+                "path": path.relative_to(root).as_posix(),
+                "bytes": len(data),
+                "sha256": hashlib.sha256(data).hexdigest(),
+            }
+        )
+    (root / "artifact-manifest.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "artifact": artifact,
+                "contentType": content_type,
+                "sourceMaps": False,
+                "files": files,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (root / "sbom.json").write_text("{}", encoding="utf-8")
 
 
 def test_artifact_validator_imports_from_build_binary_directory():
@@ -66,6 +99,9 @@ def test_validate_artifact_task_accepts_clean_artifact(tmp_path, monkeypatch):
     (dist / "index.js").write_text(
         "import '@radix-ui/react-dialog';\n", encoding="utf-8"
     )
+    (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+    _write_valid_manifest(dist, "runtime-admin", "text/html")
+    _write_valid_manifest(canvas, "canvas-mcp-app", "text/html;profile=mcp-app")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
 
     tasks.validate_artifact.body(Context(), json_output=False)
@@ -83,6 +119,7 @@ def test_validate_artifact_builds_missing_default_canvas_once(tmp_path, monkeypa
     canvas = tmp_path / "frontend" / "dist-canvas"
     dist.mkdir(parents=True)
     (dist / "index.js").write_text("import 'react';", encoding="utf-8")
+    _write_valid_manifest(dist, "runtime-admin", "text/html")
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
     commands = []
@@ -91,6 +128,7 @@ def test_validate_artifact_builds_missing_default_canvas_once(tmp_path, monkeypa
         commands.append(args)
         canvas.mkdir()
         (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+        _write_valid_manifest(canvas, "canvas-mcp-app", "text/html;profile=mcp-app")
 
     monkeypatch.setattr(tasks, "run", build_canvas)
 
@@ -207,9 +245,7 @@ def test_validate_artifact_explicit_directory_scans_all_source_files(
     (runtime / "safe").mkdir(parents=True)
     canvas.mkdir()
     (runtime / "safe" / "index.js").write_text("import 'react';", encoding="utf-8")
-    (runtime / "poison.html").write_text(
-        '"@sema4ai/components"', encoding="utf-8"
-    )
+    (runtime / "poison.html").write_text('"@sema4ai/components"', encoding="utf-8")
     (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
@@ -240,6 +276,8 @@ def test_validate_artifact_accepts_clean_explicit_directories(tmp_path, monkeypa
     canvas.mkdir()
     (runtime / "index.html").write_text("<main>runtime</main>", encoding="utf-8")
     (canvas / "index.html").write_text("<main>canvas</main>", encoding="utf-8")
+    _write_valid_manifest(runtime, "runtime-admin", "text/html")
+    _write_valid_manifest(canvas, "canvas-mcp-app", "text/html;profile=mcp-app")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
 

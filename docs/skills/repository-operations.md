@@ -107,7 +107,9 @@ validates both independently. Explicit `--runtime-artifact` and
 directories; files, missing paths, and broken symlinks fail before scanning.
 Directory symlinks are resolved before the recursive scan. Its output
 identifies each artifact, so a passing Runtime check cannot hide an unscanned
-or failed Canvas artifact.
+or failed Canvas artifact. Contract fixtures that exercise this task must model
+release artifacts with bound manifests and retained SBOM files; bare HTML or
+JavaScript directories are intentionally rejected in this strict path.
 
 The `validate-artifact` Invoke task prepends `action_server/build-binary` to
 `sys.path` and imports `artifact_validator` as a top-level module. Its helper
