@@ -382,6 +382,10 @@ Run the service-free SQLite/database/artifact scope separately from
 against a fresh PostgreSQL service. Preserve the complete pytest output and the
 database server log before removing only the named verification container and
 network; a passing SQLite run does not establish PostgreSQL process ownership.
+PostgreSQL-marked tests skipped because `ACTIONS_TEST_DATABASE_URL` is absent
+are unverified, not passing. Report source/SQLite, package,
+clean-environment, service, and remote-CI evidence as separate classes; no
+class substitutes for another.
 The pinned Dev Container does not install Go or `jq`: `test_binary_build` needs
 Go, and the Runtime recovery contract test directly executes `jq`. Treat those
 as environment prerequisites rather than changing product code or committed
