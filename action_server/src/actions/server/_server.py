@@ -372,7 +372,18 @@ def start_server(
             session.response = response
         return response
 
-    index_routes = ["/", "/runs/{full_path:path}", "/actions/{full_path:path}"]
+    index_routes = [
+        "/",
+        "/overview",
+        "/actions/{full_path:path}",
+        "/runs/{full_path:path}",
+        "/schedules",
+        "/robots",
+        "/work-items",
+        "/analytics",
+        "/logs/{full_path:path}",
+        "/artifacts/{full_path:path}",
+    ]
     for index_route in index_routes:
         app.add_api_route(
             index_route,

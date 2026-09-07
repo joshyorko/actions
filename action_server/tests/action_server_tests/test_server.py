@@ -644,6 +644,31 @@ def test_routes(action_server_process: ActionServerProcess, data_regression):
 
 
 @pytest.mark.integration_test
+@pytest.mark.parametrize(
+    "path",
+    [
+        "/overview",
+        "/schedules",
+        "/robots",
+        "/work-items",
+        "/analytics",
+        "/logs/run-1",
+        "/artifacts/run-1",
+    ],
+)
+def test_runtime_deep_links_serve_frontend_index(
+    action_server_process: ActionServerProcess,
+    client: ActionServerClient,
+    path: str,
+) -> None:
+    action_server_process.start()
+
+    response = client.get_str(path)
+
+    assert '<div id="root"></div>' in response
+
+
+@pytest.mark.integration_test
 def test_server_url_flag(action_server_process: ActionServerProcess, data_regression):
     from action_server_tests.fixtures import fix_openapi_json
 

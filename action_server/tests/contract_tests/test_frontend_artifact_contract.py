@@ -127,6 +127,14 @@ def test_hosted_quality_gate_includes_offline_ui_system_contract():
     assert "npm run test:quality" in workflow
 
 
+def test_runtime_mobile_sidebar_has_no_closed_focus_or_breakpoint_gap():
+    css = (FRONTEND / "src/index.css").read_text()
+
+    assert "@media (max-width: 767px)" in css
+    assert ".sidebar:not(.open)" in css
+    assert "visibility: hidden" in css
+
+
 def test_runtime_inliner_preserves_adversarial_bundle_text_and_raw_text_boundaries(
     tmp_path,
 ):
