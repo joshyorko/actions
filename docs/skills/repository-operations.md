@@ -376,6 +376,14 @@ with that local path before Poetry resolves, and install the helper from the
 archive. This applies at minimum to `actions/` and `action_server/`; it must
 not depend on a `sema4ai-http-helper` directory or requirement.
 
+Robot ZIP import currently preflights archive member paths and filesystem entry
+types before extraction. Parent/absolute/drive-qualified paths, alternate
+separators, duplicate or case-colliding names, and link/special entries fail
+closed; a single package root is resolved and contained under the temporary
+staging directory before validation or copy. Byte/time/expansion limits and
+remote-origin policy remain separate acceptance gates and must not be inferred
+from this path/root boundary.
+
 The clean-break prerequisites can merge before the Runtime migration. During
 that split, `actions-core` owns `actions/__init__.py` and includes `actions.mcp`,
 while `actions-work-items` contributes only `actions.work_items`. The existing

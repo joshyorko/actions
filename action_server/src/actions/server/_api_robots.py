@@ -1,8 +1,11 @@
 import logging
+import stat
 import shutil
 import tempfile
+import unicodedata
 import zipfile
 from pathlib import Path
+from pathlib import PurePosixPath, PureWindowsPath
 from typing import Dict, List, Optional
 from urllib.parse import urlparse
 
@@ -224,6 +227,51 @@ class RobotImportResponseAPI(BaseModel):
     robot_name: Optional[str] = None
 
 
+def _validate_zip_members(
+    members: list[zipfile.ZipInfo],
+) -> tuple[bool, str, set[str]]:
+    normalized_paths: set[str] = set()
+    root_dirs: set[str] = set()
+
+    for member in members:
+        name = member.filename
+        if not name or "\x00" in name:
+            return False, "Zip contains an invalid member path", set()
+        if "\\" in name:
+            return False, "Zip contains an ambiguous path separator", set()
+
+        path = PurePosixPath(name)
+        if path.is_absolute() or PureWindowsPath(name).drive:
+            return False, "Zip contains an absolute or drive-qualified path", set()
+
+        raw_parts = name.rstrip("/").split("/")
+        if not raw_parts or any(part in {"", ".", ".."} for part in raw_parts):
+            return False, "Zip contains an unsafe package root path", set()
+
+        normalized = unicodedata.normalize("NFC", "/".join(raw_parts)).casefold()
+        if normalized in normalized_paths:
+            return False, "Zip contains duplicate or case-colliding paths", set()
+        normalized_paths.add(normalized)
+
+        entry_type = stat.S_IFMT((member.external_attr >> 16) & 0xFFFF)
+        if entry_type not in {0, stat.S_IFREG, stat.S_IFDIR}:
+            return False, "Zip contains a link or special filesystem entry", set()
+
+        root_dirs.add(raw_parts[0])
+
+    return True, "", root_dirs
+
+
+def _confined_package_root(staging_root: Path, root_name: str) -> Optional[Path]:
+    staging = staging_root.resolve()
+    package_root = (staging_root / root_name).resolve()
+    try:
+        package_root.relative_to(staging)
+    except ValueError:
+        return None
+    return package_root
+
+
 def _validate_robot_package(package_dir: Path) -> tuple[bool, str, Optional[str]]:
     """
     Validate that a directory contains a valid robot package.
@@ -308,18 +356,13 @@ def _extract_zip_to_robots(
 
     try:
         with zipfile.ZipFile(zip_path, "r") as zip_ref:
-            # Get the list of files in the zip
-            namelist = zip_ref.namelist()
-
-            if not namelist:
+            members = zip_ref.infolist()
+            if not members:
                 return False, "Zip file is empty", None
 
-            # Check if there's a single root directory
-            root_dirs = set()
-            for name in namelist:
-                parts = name.split("/")
-                if parts[0]:
-                    root_dirs.add(parts[0])
+            valid, message, root_dirs = _validate_zip_members(members)
+            if not valid:
+                return False, message, None
 
             # Create a temp directory for extraction
             with tempfile.TemporaryDirectory() as temp_dir:
@@ -328,8 +371,11 @@ def _extract_zip_to_robots(
 
                 # Determine the package directory
                 if len(root_dirs) == 1:
-                    # Single root directory in zip
-                    package_dir = temp_path / list(root_dirs)[0]
+                    package_dir = _confined_package_root(
+                        temp_path, next(iter(root_dirs))
+                    )
+                    if package_dir is None:
+                        return False, "Zip package root escapes staging", None
                 else:
                     # Multiple files/dirs at root - treat temp_dir as package
                     package_dir = temp_path
