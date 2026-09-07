@@ -101,11 +101,14 @@ React route declarations do not prove that a browser can reach a route by direct
 URL. The assembled Action Server must register SPA fallbacks for every shipped
 Runtime route family, including `/overview`, `/schedules`, `/robots`,
 `/work-items`, `/analytics`, `/logs/{full_path:path}`, and
-`/artifacts/{full_path:path}`, and an HTTP integration test must exercise each
-family. The mobile sidebar breakpoint is `max-width: 767px`, matching the
-Tailwind `md` boundary at 768px; a closed mobile sidebar must be hidden from
-visibility and focus until it is opened. Contract tests should cover both
-invariants, while real-browser verification remains a separate acceptance gate.
+the exact Runtime UI route `/artifacts/{run_id}`, and an HTTP integration test
+must exercise each family. When local artifacts are mounted at `/artifacts`,
+register that exact UI route before the mount so nested
+`/artifacts/<runId>/<filename>` requests remain raw file downloads. The mobile
+sidebar breakpoint is `max-width: 767px`, matching the Tailwind `md` boundary
+at 768px; a closed mobile sidebar must be hidden from visibility and focus until
+it is opened. Contract tests should cover both invariants, while real-browser
+verification remains a separate acceptance gate.
 
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm

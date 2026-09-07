@@ -669,6 +669,20 @@ def test_runtime_deep_links_serve_frontend_index(
 
 
 @pytest.mark.integration_test
+def test_runtime_artifact_download_survives_frontend_fallback(
+    action_server_process: ActionServerProcess,
+    client: ActionServerClient,
+) -> None:
+    artifact = action_server_process.datadir / "artifacts" / "run-1" / "payload.bin"
+    artifact.parent.mkdir(parents=True)
+    artifact.write_bytes(b"raw artifact")
+    action_server_process.start()
+
+    assert '<div id="root"></div>' in client.get_str("/artifacts/run-1")
+    assert client.get_str("/artifacts/run-1/payload.bin") == "raw artifact"
+
+
+@pytest.mark.integration_test
 def test_server_url_flag(action_server_process: ActionServerProcess, data_regression):
     from action_server_tests.fixtures import fix_openapi_json
 
