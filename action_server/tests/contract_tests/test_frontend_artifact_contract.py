@@ -496,7 +496,7 @@ def test_javascript_validator_rejects_malformed_sbom(tmp_path):
 
     assert result.returncode != 0
     assert "invalid CycloneDX SBOM" in (result.stderr + result.stdout)
-    
+
 
 def _write_manifest(root, artifact, content_type, files):
     (root / "artifact-manifest.json").write_text(
