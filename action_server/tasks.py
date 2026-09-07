@@ -141,7 +141,7 @@ def build_frontend(
             if debug:
                 run(ctx, "npm", "run", "build:debug")
             else:
-                run(ctx, "npm", "run", "build")
+                run(ctx, "npm", "run", "build:artifacts")
         
         # Step 6: Write static contents
         index_src = CURDIR / "frontend" / "dist" / "index.html"
@@ -198,61 +198,55 @@ FILE_CONTENTS = {repr(file_contents)}
 
 @task
 def validate_imports(ctx: Context, json_output: bool = False):
-    """Validate that the Runtime artifact has no removed product imports.
+    """Validate that Runtime and Canvas artifacts have no removed imports.
     
     Args:
         json_output: Output validation result as JSON
     """
     import json as json_lib
-    from pathlib import Path
     
     sys.path.insert(0, str(CURDIR / "build-binary"))
+    from artifact_validator import _find_symlinks
     from tree_shaker import TreeShaker
     
-    dist_path = CURDIR / "frontend" / "dist"
-    if not dist_path.exists():
-        msg = f"Distribution directory not found: {dist_path}"
-        if json_output:
-            print(json_lib.dumps({"status": "error", "message": msg}, indent=2))
-        else:
-            print(f"[ERROR] {msg}")
-        sys.exit(2)
-    
-    # Scan each built source file; passing the directory to the file scanner
-    # silently skipped the entire validation when it could not be opened.
-    violations = TreeShaker(root_dir=dist_path).scan_directory(dist_path)
-    
-    if violations:
-        msg = f"Found {len(violations)} removed product import(s) in Runtime build"
-        details = []
-        for v in violations:
-            details.append({
-                "file": str(v.file_path),
-                "line": v.line_number,
-                "import": v.import_statement,
-                "module": v.prohibited_module,
-                "severity": v.severity
-            })
-        
-        if json_output:
-            print(json_lib.dumps({
-                "status": "failed",
-                "message": msg,
-                "violations": details
-            }, indent=2))
-        else:
-            print(f"[ERROR] {msg}")
-            for v in violations:
-                print(f"  {v.file_path}:{v.line_number}: {v.import_statement}")
-        sys.exit(2)
-    
+    roots = {
+        "Runtime": CURDIR / "frontend" / "dist",
+        "Canvas": CURDIR / "frontend" / "dist-canvas",
+    }
+    results = []
+    for name, root in roots.items():
+        symlinks = _find_symlinks(root)
+        if symlinks:
+            results.append(
+                {
+                    "root": name,
+                    "status": "failed",
+                    "message": f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}",
+                    "violations": [],
+                }
+            )
+            continue
+        if not root.is_dir():
+            results.append({"root": name, "status": "failed", "message": f"Distribution directory not found: {root}", "violations": []})
+            continue
+        violations = TreeShaker(root_dir=root).scan_directory(root)
+        details = [
+            {"file": str(v.file_path), "line": v.line_number, "import": v.import_statement, "module": v.prohibited_module, "severity": v.severity}
+            for v in violations
+        ]
+        results.append({"root": name, "status": "failed" if violations else "passed", "message": f"Found {len(violations)} removed product import(s) in {name} build", "violations": details})
+
+    all_passed = all(result["status"] == "passed" for result in results) and len(results) == len(roots)
     if json_output:
-        print(json_lib.dumps({
-            "status": "passed",
-            "message": "No removed product imports found in Runtime build"
-        }, indent=2))
+        print(json_lib.dumps({"status": "passed" if all_passed else "failed", "roots": results}, indent=2))
     else:
-        print("[OK] No removed product imports found in Runtime build")
+        for result in results:
+            prefix = "[OK]" if result["status"] == "passed" else "[ERROR]"
+            print(f"{prefix} {result['root']}: {result['message']}")
+            for violation in result["violations"]:
+                print(f"  {violation['file']}:{violation['line']}: {violation['import']}")
+    if not all_passed:
+        sys.exit(2)
 
 
 @task
@@ -280,6 +274,8 @@ def validate_artifact(
             Path(runtime_artifact) if runtime_artifact else CURDIR / "frontend" / "dist",
             runtime_artifact is not None,
             "build:runtime",
+            "runtime-admin",
+            "text/html",
         ),
         (
             Path(canvas_artifact)
@@ -287,20 +283,34 @@ def validate_artifact(
             else CURDIR / "frontend" / "dist-canvas",
             canvas_artifact is not None,
             "build:canvas",
+            "canvas-mcp-app",
+            "text/html;profile=mcp-app",
         ),
     ]
 
-    for artifact_path, explicit_path, build_command in artifact_specs:
+    for artifact_path, explicit_path, build_command, _, _ in artifact_specs:
+        if artifact_path.is_symlink():
+            continue
         if not explicit_path and not artifact_path.exists():
             print(f"[BUILD] Missing default artifact; running npm run {build_command}")
             with _change_to_frontend_dir():
                 run(ctx, "npm", "run", build_command)
 
-    artifact_paths = [path for path, _, _ in artifact_specs]
     results = []
     all_passed = True
 
-    for artifact_path in artifact_paths:
+    for artifact_path, _, _, expected_artifact, expected_content_type in artifact_specs:
+        if artifact_path.is_symlink():
+            results.append(
+                (
+                    artifact_path,
+                    False,
+                    [],
+                    f"Artifact root must not be a symlink: {artifact_path}",
+                )
+            )
+            all_passed = False
+            continue
         try:
             resolved_artifact_path = artifact_path.resolve(strict=True)
         except OSError as exc:
@@ -332,6 +342,8 @@ def validate_artifact(
                 resolved_artifact_path,
                 baseline_path if baseline_path.exists() else None,
                 json_output,
+                expected_artifact,
+                expected_content_type,
             )
         except Exception as exc:
             results.append((artifact_path, False, [], f"Validation error: {exc}"))

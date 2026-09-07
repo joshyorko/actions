@@ -20,7 +20,9 @@ from typing import (
     Type,
     TypeVar,
     Union,
+    cast,
 )
+from urllib.parse import urlsplit, urlunsplit
 
 log = logging.getLogger(__name__)
 
@@ -29,6 +31,229 @@ _RE_ALL_CAP = re.compile("([a-z0-9])([A-Z])")
 
 
 T = TypeVar("T")
+
+_SQLToken = Tuple[str, int, int, str]
+_SQL_OPERATOR_WORDS = {
+    "AND",
+    "OR",
+    "NOT",
+    "IS",
+    "IN",
+    "LIKE",
+    "ILIKE",
+    "BETWEEN",
+    "THEN",
+    "ELSE",
+    "WHEN",
+    "END",
+    "FROM",
+    "WHERE",
+    "ORDER",
+    "GROUP",
+    "LIMIT",
+    "OFFSET",
+    "JOIN",
+    "ON",
+    "VALUES",
+    "SET",
+    "RETURNING",
+    "UNION",
+    "ALL",
+    "DISTINCT",
+    "HAVING",
+    "SELECT",
+    "AS",
+    "NULL",
+    "TRUE",
+    "FALSE",
+}
+_LEGACY_BOOLEAN_COLUMNS = {
+    "ENABLED",
+    "SKIP_IF_RUNNING",
+    "RETRY_ENABLED",
+    "RATE_LIMIT_ENABLED",
+    "NOTIFY_ON_FAILURE",
+    "NOTIFY_ON_SUCCESS",
+    "NOTIFICATION_SENT",
+}
+
+
+def _tokenize_sql(sql: str) -> List[_SQLToken]:
+    """Tokenize executable SQL while leaving lexical regions opaque."""
+    tokens: List[_SQLToken] = []
+    i = 0
+    while i < len(sql):
+        if sql.startswith("--", i):
+            end = sql.find("\n", i + 2)
+            i = len(sql) if end < 0 else end
+            continue
+        if sql.startswith("/*", i):
+            end = sql.find("*/", i + 2)
+            i = len(sql) if end < 0 else end + 2
+            continue
+
+        char = sql[i]
+        if char.isspace():
+            i += 1
+            continue
+
+        start = i
+        if char in "'\"":
+            quote = char
+            i += 1
+            while i < len(sql):
+                if sql[i] == "\\" and quote == "'":
+                    i += 2
+                elif sql[i] == quote:
+                    if i + 1 < len(sql) and sql[i + 1] == quote:
+                        i += 2
+                    else:
+                        i += 1
+                        break
+                else:
+                    i += 1
+            tokens.append(("expr", start, i, sql[start:i]))
+            continue
+
+        if char == "$":
+            match = re.match(r"\$[A-Za-z_][A-Za-z0-9_]*\$|\$\$", sql[i:])
+            if match:
+                delimiter = match.group(0)
+                end = sql.find(delimiter, i + len(delimiter))
+                i = len(sql) if end < 0 else end + len(delimiter)
+                tokens.append(("expr", start, i, sql[start:i]))
+                continue
+
+        if char == "\\" and i + 1 < len(sql) and sql[i + 1] == "?":
+            i += 2
+            tokens.append(("other", start, i, sql[start:i]))
+            continue
+
+        if char == "?":
+            kind = "operator" if sql[i : i + 2] in {"?|", "?&"} else "question"
+            i += 2 if kind == "operator" else 1
+            tokens.append((kind, start, i, sql[start:i]))
+            continue
+
+        if char in ")]}" or char.isalnum() or char in "_$.":
+            end = i + 1
+            while end < len(sql) and (sql[end].isalnum() or sql[end] in "_$."):
+                end += 1
+            word = sql[i:end].upper()
+            kind = "operator" if word in _SQL_OPERATOR_WORDS else "expr"
+            tokens.append((kind, start, end, sql[start:end]))
+            i = end
+            continue
+
+        kind = "expr_start" if char in "([{" else "operator"
+        i += 1
+        tokens.append((kind, start, i, sql[start:i]))
+
+    return tokens
+
+
+def _legacy_boolean_ddl_replacements(
+    sql: str, tokens: List[_SQLToken]
+) -> List[Tuple[int, int, str]]:
+    replacements: List[Tuple[int, int, str]] = []
+    statement_start = 0
+    statement_ranges: List[Tuple[int, int]] = []
+    for index, token in enumerate(tokens):
+        if token[3] == ";":
+            statement_ranges.append((statement_start, index))
+            statement_start = index + 1
+    statement_ranges.append((statement_start, len(tokens)))
+
+    for start, end in statement_ranges:
+        statement_tokens = tokens[start:end]
+        words = [token[3].upper() for token in statement_tokens]
+        if len(words) < 2 or words[:2] not in (["ALTER", "TABLE"], ["CREATE", "TABLE"]):
+            continue
+        is_alter = words[:2] == ["ALTER", "TABLE"]
+
+        for index in range(len(statement_tokens)):
+            column = words[index]
+            if column in _LEGACY_BOOLEAN_COLUMNS:
+                prefix = [
+                    column,
+                    "INTEGER",
+                    "CHECK",
+                    "(",
+                    column,
+                    "IN",
+                    "(",
+                    "0",
+                    ",",
+                    "1",
+                    ")",
+                    ")",
+                    "NOT",
+                    "NULL",
+                    "DEFAULT",
+                ]
+                prefix_end = index + len(prefix)
+                if (
+                    prefix_end < len(words)
+                    and words[index:prefix_end] == prefix
+                    and words[prefix_end] in {"0", "1"}
+                ):
+                    first = statement_tokens[index]
+                    last = statement_tokens[prefix_end]
+                    if (
+                        "--" not in sql[first[1] : last[2]]
+                        and "/*" not in sql[first[1] : last[2]]
+                    ):
+                        default = "TRUE" if words[prefix_end] == "1" else "FALSE"
+                        replacements.append(
+                            (
+                                first[1],
+                                last[2],
+                                f"{first[3]} BOOLEAN NOT NULL DEFAULT {default}",
+                            )
+                        )
+
+            if is_alter and words[index : index + 4] == [
+                "ADD",
+                "COLUMN",
+                "IS_CONSEQUENTIAL",
+                "INTEGER",
+            ]:
+                integer_token = statement_tokens[index + 3]
+                replacements.append((integer_token[1], integer_token[2], "BOOLEAN"))
+
+            external_prefix = [
+                "EXTERNAL",
+                "INTEGER",
+                "CHECK",
+                "(",
+                "EXTERNAL",
+                "IN",
+                "(",
+                "0",
+                ",",
+                "1",
+                ")",
+                ")",
+                "NOT",
+                "NULL",
+            ]
+            external_end = index + len(external_prefix)
+            if words[index:external_end] == external_prefix:
+                first = statement_tokens[index]
+                last = statement_tokens[external_end - 1]
+                if (
+                    "--" not in sql[first[1] : last[2]]
+                    and "/*" not in sql[first[1] : last[2]]
+                ):
+                    replacements.append(
+                        (
+                            first[1],
+                            last[2],
+                            f"{first[3]} BOOLEAN NOT NULL",
+                        )
+                    )
+
+    return sorted(replacements)
 
 
 def _make_table_name(cls: type):
@@ -56,6 +281,47 @@ class DBError(Exception):
     pass
 
 
+class ScheduleClaimLost(DBError):
+    pass
+
+
+class ScheduleClaim:
+    def __init__(self, connection: Any, lock_key: str):
+        self._connection = connection
+        self._lock_key = lock_key
+        self._lost = False
+
+    def __bool__(self) -> bool:
+        return not self._lost
+
+    def ensure_alive(self) -> None:
+        if self._lost or getattr(self._connection, "closed", False):
+            self._lost = True
+            raise ScheduleClaimLost("PostgreSQL schedule claim connection lost")
+        try:
+            with self._connection.cursor() as cursor:
+                cursor.execute("SELECT 1")
+                if not cursor.fetchone():
+                    raise RuntimeError("claim connection health check returned no row")
+        except Exception as exc:
+            self._lost = True
+            if isinstance(exc, ScheduleClaimLost):
+                raise
+            raise ScheduleClaimLost(
+                "PostgreSQL schedule claim connection lost"
+            ) from exc
+
+    async def wait_lost(self) -> None:
+        import asyncio
+
+        while True:
+            await asyncio.sleep(0.25)
+            try:
+                self.ensure_alive()
+            except ScheduleClaimLost:
+                return
+
+
 class DBRules:
     def __init__(self) -> None:
         # Fields which should have unique indexes in the format:
@@ -69,6 +335,62 @@ class DBRules:
         # Fields which are foreign keys in the format:
         # "Class.field_name"
         self.foreign_keys: Set[str] = set()
+
+
+def redact_database_url(value: Union[Path, str]) -> Union[Path, str]:
+    if not isinstance(value, str):
+        return value
+
+    try:
+        parsed = urlsplit(value)
+        if parsed.scheme.lower() not in {"postgresql", "postgres"}:
+            return value
+        hostname = parsed.hostname
+        port = parsed.port
+    except ValueError:
+        return "<redacted PostgreSQL database URL>"
+
+    if not hostname:
+        return "<redacted PostgreSQL database URL>"
+
+    if ":" in hostname and not hostname.startswith("["):
+        hostname = f"[{hostname}]"
+    netloc = hostname if port is None else f"{hostname}:{port}"
+    return urlunsplit((parsed.scheme, netloc, parsed.path, "", ""))
+
+
+def normalize_database_url(value: Union[Path, str]) -> Union[Path, str]:
+    if not isinstance(value, str):
+        return value
+
+    try:
+        parsed = urlsplit(value)
+    except ValueError as exc:
+        if value.lower().startswith(("postgresql:", "postgres:")):
+            raise ValueError("Invalid PostgreSQL database URL") from exc
+        raise ValueError("Invalid database URL") from exc
+    scheme = parsed.scheme.lower()
+    if scheme in {"postgresql", "postgres"}:
+        try:
+            hostname = parsed.hostname
+            port = parsed.port
+        except ValueError as exc:
+            raise ValueError("Invalid PostgreSQL database URL") from exc
+
+        authority = parsed.netloc.rsplit("@", 1)[-1]
+        if (
+            not parsed.netloc
+            or not hostname
+            or authority.endswith(":")
+            or (port is not None and not 1 <= port <= 65535)
+        ):
+            raise ValueError("Invalid PostgreSQL database URL")
+        if scheme == "postgres":
+            return "postgresql://" + value.split("://", 1)[1]
+        return value
+    if parsed.scheme:
+        raise ValueError("Unsupported database URL; only PostgreSQL URLs are supported")
+    return value
 
 
 class Database:
@@ -87,12 +409,20 @@ class Database:
 
     def __init__(self, db_path: Optional[Union[Path, str]] = None):
         self._cls_to_type_hint: Dict[type, dict] = {}
+        self._db_path: Union[Path, str]
         if not db_path:
             from ._settings import get_settings
 
             self._db_path = get_settings().datadir / "server.db"
         else:
-            self._db_path = Path(db_path)
+            normalized = normalize_database_url(db_path)
+            self._db_path = (
+                normalized if self._is_postgresql_url(normalized) else Path(normalized)
+            )
+
+        self._backend_name = (
+            "postgresql" if isinstance(self._db_path, str) else "sqlite"
+        )
 
         self._table_name_to_cls: Dict[str, type] = {}
         self._tlocal = threading.local()
@@ -100,12 +430,25 @@ class Database:
         self._write_lock = threading.RLock()
         self._classes: List[type] = []
 
+    @staticmethod
+    def _is_postgresql_url(value: Union[Path, str]) -> bool:
+        return isinstance(value, str) and value.lower().startswith(
+            ("postgresql://", "postgres://")
+        )
+
     @property
-    def db_path(self) -> Path:
+    def backend_name(self) -> str:
+        return self._backend_name
+
+    @property
+    def db_path(self) -> Union[Path, str]:
         return self._db_path
 
     def log_internal_info(self):
-        log.debug("sqlite version: %s", sqlite3.sqlite_version)
+        if self.backend_name == "sqlite":
+            log.debug("sqlite version: %s", sqlite3.sqlite_version)
+        else:
+            log.debug("database backend: postgresql")
 
     def _get_type_hints(self, cls) -> dict:
         try:
@@ -134,19 +477,72 @@ class Database:
             yield
             return
 
-        with closing(sqlite3.connect(self._db_path, isolation_level=None)) as conn:
+        if self.backend_name == "postgresql":
+            try:
+                import psycopg
+            except ImportError as e:
+                raise RuntimeError(
+                    "PostgreSQL support requires the actions-runtime PostgreSQL extra."
+                ) from e
+            conn = psycopg.connect(cast(str, self._db_path))
+        else:
+            conn = sqlite3.connect(self._db_path, isolation_level=None)
             conn.execute("PRAGMA foreign_keys = ON")
+        with closing(conn):
             self._tlocal.conn = conn
             try:
                 yield
             finally:
                 self._tlocal.conn = None
 
+    @contextmanager
+    def try_claim_schedule(self, schedule_id: str) -> Iterator[Any]:
+        """Hold a PostgreSQL session lock while a due schedule is processed.
+
+        SQLite retains its existing process-local coordination. PostgreSQL uses
+        a session-level advisory lock plus a health-checked claim object. The
+        scheduler cancels processing when the claim connection is lost, while
+        closing the connection releases ownership deterministically.
+        """
+        if self.backend_name != "postgresql":
+            yield True
+            return
+
+        import psycopg
+
+        claim_connection = psycopg.connect(
+            cast(str, self._db_path),
+            autocommit=True,
+        )
+        lock_key = f"actions-runtime-schedule:{schedule_id}"
+        acquired = False
+        try:
+            with claim_connection.cursor() as cursor:
+                cursor.execute(
+                    "SELECT pg_try_advisory_lock(hashtext(%s))",
+                    (lock_key,),
+                )
+                result = cursor.fetchone()
+                acquired = bool(result and result[0])
+
+            yield ScheduleClaim(claim_connection, lock_key) if acquired else None
+        finally:
+            if acquired:
+                try:
+                    with claim_connection.cursor() as cursor:
+                        cursor.execute(
+                            "SELECT pg_advisory_unlock(hashtext(%s))",
+                            (lock_key,),
+                        )
+                except Exception:
+                    log.debug("Unable to release PostgreSQL schedule claim", exc_info=True)
+            claim_connection.close()
+
     def _next_savepoint_name(self):
         return f"savepoint_{next(self._counter)}"
 
     @contextmanager
-    def cursor(self) -> Iterator[sqlite3.Cursor]:
+    def cursor(self) -> Iterator[Any]:
         """
         A cursor should be requested to do queries.
         """
@@ -488,9 +884,7 @@ VALUES
 
     def list_table_names(self) -> List[str]:
         with self.cursor() as cursor:
-            self.execute_query(
-                cursor,
-                """
+            sql = """
 SELECT
     name
 FROM
@@ -498,23 +892,35 @@ FROM
 WHERE
     type ='table' AND
     name NOT LIKE 'sqlite_%';
-""",
-            )
+"""
+            if self.backend_name == "postgresql":
+                sql = """
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = current_schema()
+  AND table_type = 'BASE TABLE';
+"""
+            self.execute_query(cursor, sql)
             return [x[0] for x in cursor.fetchall()]
 
     def list_table_and_columns(self) -> Dict[str, List[str]]:
         with self.cursor() as cursor:
-            self.execute_query(
-                cursor,
-                """
+            sql = """
 SELECT m.name as tableName, 
        p.name as columnName
 FROM sqlite_master m
 left outer join pragma_table_info((m.name)) p
      on m.name <> p.name
 order by tableName, columnName;
-""",
-            )
+"""
+            if self.backend_name == "postgresql":
+                sql = """
+SELECT table_name, column_name
+FROM information_schema.columns
+WHERE table_schema = current_schema()
+ORDER BY table_name, ordinal_position;
+"""
+            self.execute_query(cursor, sql)
             found: Dict[str, List[str]] = {}
             for table_name, column_name in cursor.fetchall():
                 columns = found.get(table_name)
@@ -525,9 +931,7 @@ order by tableName, columnName;
 
     def list_indexes(self) -> List[List[str]]:
         with self.cursor() as cursor:
-            self.execute_query(
-                cursor,
-                """
+            sql = """
 SELECT 
     m.tbl_name as table_name,
     il.name as index_name,
@@ -551,8 +955,28 @@ GROUP BY
     il.origin,
     il.partial,
     il.seq
-ORDER BY index_name,il.seq,ii.seqno""",
-            )
+ORDER BY index_name,il.seq,ii.seqno"""
+            if self.backend_name == "postgresql":
+                sql = """
+SELECT tbl.relname AS table_name,
+       idx.relname AS index_name,
+       att.attname AS column_name,
+       CASE WHEN ind.indisprimary THEN 1 ELSE 0 END AS is_primary_key,
+       CASE WHEN ind.indisunique THEN 0 ELSE 1 END AS non_unique,
+       CASE WHEN ind.indisunique THEN 1 ELSE 0 END AS is_unique,
+       ind.indpred IS NOT NULL AS partial,
+       keys.ordinality AS sequence_in_index,
+       keys.ordinality AS sequence_in_column
+FROM pg_index ind
+JOIN pg_class tbl ON tbl.oid = ind.indrelid
+JOIN pg_namespace ns ON ns.oid = tbl.relnamespace
+JOIN pg_class idx ON idx.oid = ind.indexrelid
+CROSS JOIN LATERAL unnest(ind.indkey) WITH ORDINALITY AS keys(attnum, ordinality)
+JOIN pg_attribute att ON att.attrelid = tbl.oid AND att.attnum = keys.attnum
+WHERE ns.nspname = current_schema()
+ORDER BY table_name, index_name, sequence_in_index;
+"""
+            self.execute_query(cursor, sql)
             return [x for x in cursor.fetchall()]
 
     def list_whole_db(self) -> Dict[str, List[Dict[str, Any]]]:
@@ -587,8 +1011,48 @@ ORDER BY index_name,il.seq,ii.seqno""",
             print(msg, file=sys.stderr)
         raise DBError(msg)
 
+    def _adapt_sql(self, sql: str, values: Optional[Sequence[Any]] = None) -> str:
+        if self.backend_name != "postgresql":
+            return sql
+
+        tokens = _tokenize_sql(sql)
+
+        expression_end = {"expr", "question"}
+        expression_start = {"expr", "expr_start"}
+        markers: set[int] = set()
+        for index, (kind, position, _end, _value) in enumerate(tokens):
+            if kind != "question":
+                continue
+            previous = tokens[index - 1][0] if index else None
+            following = tokens[index + 1][0] if index + 1 < len(tokens) else None
+            if previous not in expression_end or (
+                following not in expression_start and following != "question"
+            ):
+                markers.add(position)
+
+        changes = _legacy_boolean_ddl_replacements(sql, tokens)
+        changes.extend((position, position + 1, "%s") for position in markers)
+        changes.sort()
+
+        adapted: List[str] = []
+        cursor = 0
+        for start, end, replacement in changes:
+            if start < cursor:
+                continue
+            adapted.append(sql[cursor:start])
+            adapted.append(replacement)
+            cursor = end
+        adapted.append(sql[cursor:])
+
+        if values is not None and len(markers) != len(values):
+            raise DBError(
+                f"PostgreSQL query has {len(markers)} parameter placeholders; "
+                f"expected {len(markers)} parameters, got {len(values)}"
+            )
+        return "".join(adapted)
+
     def execute_query(
-        self, cursor: sqlite3.Cursor, sql: str, values: Optional[list] = None
+        self, cursor: Any, sql: str, values: Optional[list] = None
     ):
         """
         Executes a query which will NOT change the database (and should return values).
@@ -599,17 +1063,20 @@ ORDER BY index_name,il.seq,ii.seqno""",
             self._print_sql(sql, values)
 
         try:
+            sql = self._adapt_sql(sql, values)
             if values:
                 cursor.execute(sql, values)
             else:
                 cursor.execute(sql)
+        except DBError:
+            raise
         except Exception:
             self._raise_execute_error(
                 f"Error running sql query: {sql!r} with values: {values!r}"
             )
 
     def execute_update_returning(
-        self, cursor: sqlite3.Cursor, sql: str, values: Optional[list] = None
+        self, cursor: Any, sql: str, values: Optional[list] = None
     ):
         """
         Executes a query which will NOT change the database (and should return values).
@@ -625,10 +1092,13 @@ ORDER BY index_name,il.seq,ii.seqno""",
                     "a transaction is in place."
                 )
             with self._write_lock:
+                sql = self._adapt_sql(sql, values)
                 if values:
                     cursor.execute(sql, values)
                 else:
                     cursor.execute(sql)
+        except DBError:
+            raise
         except Exception:
             self._raise_execute_error(
                 f"Error running sql: {sql!r} with values: {values!r}"
@@ -653,10 +1123,13 @@ ORDER BY index_name,il.seq,ii.seqno""",
             conn = self._tlocal.conn
             assert conn is not None
             with self._write_lock:
+                sql = self._adapt_sql(sql, values)
                 if values:
                     conn.execute(sql, values)
                 else:
                     conn.execute(sql)
+        except DBError:
+            raise
         except Exception:
             self._raise_execute_error(
                 f"Error running sql: {sql!r} with values: {values!r}"
@@ -766,7 +1239,7 @@ CREATE INDEX {table_name}_{column}_non_unique_index ON {table_name}({column});
         fields_str = ",\n    ".join(fields)
         sql = f"""
 CREATE TABLE IF NOT EXISTS {table_name}(
-    {fields_str}  
+    {fields_str}
 )
         """
         return sql
@@ -796,18 +1269,30 @@ CREATE TABLE IF NOT EXISTS {table_name}(
             use = "TEXT"
 
         elif field_cls == bool and not not_null:
-            use = "INTEGER"
+            use = "BOOLEAN" if self.backend_name == "postgresql" else "INTEGER"
 
         elif field_cls == bool and not_null:
             try:
                 default_value = getattr(cls, name)
                 if default_value:
-                    use = f"INTEGER CHECK({name} IN (0, 1)) NOT NULL DEFAULT 1"
+                    use = (
+                        "BOOLEAN NOT NULL DEFAULT TRUE"
+                        if self.backend_name == "postgresql"
+                        else f"INTEGER CHECK({name} IN (0, 1)) NOT NULL DEFAULT 1"
+                    )
                 else:
-                    use = f"INTEGER CHECK({name} IN (0, 1)) NOT NULL DEFAULT 0"
+                    use = (
+                        "BOOLEAN NOT NULL DEFAULT FALSE"
+                        if self.backend_name == "postgresql"
+                        else f"INTEGER CHECK({name} IN (0, 1)) NOT NULL DEFAULT 0"
+                    )
             except AttributeError:
                 # No default
-                use = f"INTEGER CHECK({name} IN (0, 1)) NOT NULL"
+                use = (
+                    "BOOLEAN NOT NULL"
+                    if self.backend_name == "postgresql"
+                    else f"INTEGER CHECK({name} IN (0, 1)) NOT NULL"
+                )
 
         elif field_cls == datetime.datetime:
             raise RuntimeError(

@@ -29,6 +29,55 @@ def test_binary_spec_includes_termcolor_hidden_import():
     assert '"termcolor",' in spec_path.read_text()
 
 
+def test_binary_spec_collects_postgresql_runtime_modules():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert 'collect_submodules("psycopg")' in spec
+    assert 'collect_submodules("psycopg_binary")' in spec
+    assert 'collect_dynamic_libs("psycopg_binary")' in spec
+
+
+def test_binary_spec_collects_sqlite_runtime_modules():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert '"sqlite3",' in spec
+    assert '"_sqlite3",' in spec
+
+
+def test_binary_spec_collects_fastapi_runtime_module():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert '"fastapi",' in spec
+    assert 'collect_submodules("fastapi")' in spec
+    assert 'collect_submodules("psutil")' in spec
+    assert 'collect_submodules("actions")' in spec
+    assert 'collect_submodules("starlette")' in spec
+    assert 'collect_submodules("mcp")' in spec
+
+
+def test_binary_spec_collects_runtime_server_module():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert '"uvicorn",' in spec
+
+
+def test_binary_spec_collects_actions_http_runtime_modules_and_data():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert '"actions_http"' in spec
+    assert "collect_all" in spec
+    assert "actions_http_hiddenimports" in spec
+    assert "actions_http_datas" in spec
+
+
+def test_binary_spec_bundles_repository_owned_rcc_asset():
+    spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
+
+    assert "rcc_datas" in spec
+    assert 'startswith("rcc-")' in spec
+    assert '"actions/server/bin"' in spec
+
+
 @pytest.mark.integration_test
 def test_binary_build():
     import os

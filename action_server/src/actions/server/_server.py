@@ -6,10 +6,12 @@ import threading
 import typing
 from contextlib import asynccontextmanager
 from functools import partial
+from pathlib import Path
 from typing import Optional, Sequence
 
 from fastapi.applications import FastAPI
 from fastapi.staticfiles import StaticFiles
+from starlette.responses import PlainTextResponse
 from termcolor import colored
 
 from ._protocols import ArgumentsNamespaceStart, IBeforeStartCallback
@@ -73,9 +75,90 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
             raise
 
 
-def _mount_artifact_static_files(app: FastAPI, backend: str, root: os.PathLike) -> None:
+class _ConfiguredAPIKeyMiddleware:
+    """Reject protected requests before FastAPI can parse their body."""
+
+    def __init__(self, app, api_key: str):
+        self.app = app
+        self.api_key = api_key
+
+    @staticmethod
+    def _is_public(path: str) -> bool:
+        return path in {
+            "/config",
+            "/oauth2/login",
+            "/oauth2/login/",
+            "/actions/oauth2",
+            "/actions/oauth2/",
+        } or path.startswith("/api/triggers/webhook/")
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            await self.app(scope, receive, send)
+            return
+
+        path = scope.get("path", "")
+        protected = path.startswith("/api/") or path.startswith("/oauth2/")
+        if protected and not self._is_public(path):
+            from ._api_action_routes import _get_bearer_token
+
+            if _get_bearer_token(scope.get("headers", [])) != self.api_key:
+                response = PlainTextResponse(
+                    "Invalid or missing API Key", status_code=403
+                )
+                await response(scope, receive, send)
+                return
+
+        await self.app(scope, receive, send)
+
+
+def _mount_artifact_static_files(
+    app: FastAPI,
+    backend: str,
+    root: os.PathLike,
+    api_key: str | None = None,
+) -> None:
     if backend == "local":
-        app.mount("/artifacts", StaticFiles(directory=root), name="artifacts")
+        from starlette.types import ASGIApp
+
+        static_files: ASGIApp = StaticFiles(directory=root)
+        if api_key:
+            from starlette._utils import get_route_path
+            from starlette.middleware.authentication import AuthenticationMiddleware
+            from starlette.responses import PlainTextResponse
+
+            from ._api_action_routes import APIKeyAuthBackend
+            from ._artifact_storage import ArtifactStorageError, create_artifact_storage
+
+            storage = create_artifact_storage(backend, Path(root))
+
+            async def run_scoped_static_files(scope, receive, send):
+                path_parts = [part for part in get_route_path(scope).split("/") if part]
+                if len(path_parts) < 2 or path_parts[0].startswith("."):
+                    response = PlainTextResponse("Not Found", status_code=404)
+                    await response(scope, receive, send)
+                    return
+
+                try:
+                    relative_artifacts_dir = storage.run_storage_key(path_parts[0])
+                except ArtifactStorageError:
+                    response = PlainTextResponse("Not Found", status_code=404)
+                    await response(scope, receive, send)
+                    return
+
+                scoped_scope = dict(scope)
+                scoped_scope["path"] = "/" + "/".join(path_parts[1:])
+                scoped_static_files = StaticFiles(
+                    directory=storage.root.joinpath(*relative_artifacts_dir.split("/"))
+                )
+                await scoped_static_files(scoped_scope, receive, send)
+
+            static_files = AuthenticationMiddleware(
+                run_scoped_static_files,
+                backend=APIKeyAuthBackend(api_key=api_key),
+            )
+
+        app.mount("/artifacts", static_files, name="artifacts")
 
 
 async def _start_community_expose_impl(port: int, settings, api_key: str | None = None):
@@ -187,23 +270,31 @@ def start_server(
     from typing import Any
 
     import uvicorn
-    from fastapi import Depends, HTTPException, Security, params
+    from fastapi import (
+        Depends,
+        HTTPException,
+        Security,
+        WebSocket,
+        WebSocketException,
+        params,
+    )
     from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
     from starlette.requests import Request
     from starlette.responses import HTMLResponse
 
     from . import _actions_process_pool
     from ._api_action_package import action_package_api_router
-    from ._api_action_routes import _ActionRoutes
+    from ._api_action_routes import _ActionRoutes, _get_bearer_token
     from ._api_analytics import analytics_api_router
     from ._api_oauth2 import oauth2_api_router
     from ._api_robots import robots_api_router
     from ._api_run import run_api_router
     from ._api_schedules import schedule_groups_api_router, schedules_api_router
     from ._api_secrets import secrets_api_router
-    from ._api_triggers import triggers_api_router
+    from ._api_triggers import public_triggers_api_router, triggers_api_router
     from ._api_work_items import work_items_api_router
     from ._app import get_app
+    from ._database import redact_database_url
     from ._server_websockets import websocket_api_router
     from ._settings import get_settings
 
@@ -225,16 +316,21 @@ def start_server(
     )
 
     settings_dict = asdict(settings)
+    if settings_dict["database_url"] is not None:
+        settings_dict["database_url"] = redact_database_url(
+            settings_dict["database_url"]
+        )
     settings_str = "\n".join(f"    {k} = {v!r}" for k, v in settings_dict.items())
     log.debug(f"Starting server. Settings:\n{settings_str}")
 
     app = get_app()
 
+    if api_key:
+        app.add_middleware(_ConfiguredAPIKeyMiddleware, api_key=api_key)
+
     from actions.server._artifact_storage import get_artifact_storage
 
     artifacts_dir = get_artifact_storage().root
-
-    _mount_artifact_static_files(app, settings.artifact_storage_backend, artifacts_dir)
 
     def verify_api_key(
         token: HTTPAuthorizationCredentials = Security(HTTPBearer(auto_error=True)),
@@ -248,9 +344,16 @@ def start_server(
             return token
 
     endpoint_dependencies: list[params.Depends] = []
+    websocket_dependencies: list[params.Depends] = []
 
     if api_key:
         endpoint_dependencies.append(Depends(verify_api_key))
+
+        async def verify_websocket_api_key(websocket: WebSocket) -> None:
+            if _get_bearer_token(websocket.headers.raw) != api_key:
+                raise WebSocketException(code=1008)
+
+        websocket_dependencies.append(Depends(verify_websocket_api_key))
 
     action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
     action_routes.setup_mcp_server(api_key)
@@ -266,31 +369,67 @@ def start_server(
 
             _thread.interrupt_main()
 
-        app.add_api_route("/api/shutdown/", shutdown, methods=["POST"])
+        app.add_api_route(
+            "/api/shutdown/",
+            shutdown,
+            methods=["POST"],
+            dependencies=endpoint_dependencies,
+        )
 
-    app.include_router(run_api_router, include_in_schema=settings.full_openapi_spec)
     app.include_router(
-        action_package_api_router, include_in_schema=settings.full_openapi_spec
-    )
-    app.include_router(robots_api_router, include_in_schema=settings.full_openapi_spec)
-    app.include_router(
-        work_items_api_router, include_in_schema=settings.full_openapi_spec
+        run_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
     )
     app.include_router(
-        analytics_api_router, include_in_schema=settings.full_openapi_spec
+        action_package_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
     )
-    app.include_router(websocket_api_router)
-    app.include_router(secrets_api_router, include_in_schema=settings.full_openapi_spec)
+    app.include_router(
+        robots_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
+    )
+    app.include_router(
+        work_items_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
+    )
+    app.include_router(
+        analytics_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
+    )
+    app.include_router(
+        websocket_api_router,
+        dependencies=websocket_dependencies,
+    )
+    app.include_router(
+        secrets_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
+    )
     app.include_router(oauth2_api_router, include_in_schema=settings.full_openapi_spec)
     # Scheduling and triggers
     app.include_router(
-        schedules_api_router, include_in_schema=settings.full_openapi_spec
+        schedules_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
     )
     app.include_router(
-        schedule_groups_api_router, include_in_schema=settings.full_openapi_spec
+        schedule_groups_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
     )
     app.include_router(
-        triggers_api_router, include_in_schema=settings.full_openapi_spec
+        triggers_api_router,
+        include_in_schema=settings.full_openapi_spec,
+        dependencies=endpoint_dependencies,
+    )
+    app.include_router(
+        public_triggers_api_router,
+        include_in_schema=settings.full_openapi_spec,
     )
 
     @lru_cache
@@ -433,7 +572,22 @@ def start_server(
             session.response = response
         return response
 
-    index_routes = ["/", "/runs/{full_path:path}", "/actions/{full_path:path}"]
+    async def serve_artifact_index(request: Request, run_id: str):
+        if run_id.startswith("."):
+            return PlainTextResponse("Not Found", status_code=404)
+        return await serve_index(request)
+
+    index_routes = [
+        "/",
+        "/overview",
+        "/actions/{full_path:path}",
+        "/runs/{full_path:path}",
+        "/schedules",
+        "/robots",
+        "/work-items",
+        "/analytics",
+        "/logs/{full_path:path}",
+    ]
     for index_route in index_routes:
         app.add_api_route(
             index_route,
@@ -441,6 +595,20 @@ def start_server(
             response_class=HTMLResponse,
             include_in_schema=settings.full_openapi_spec,
         )
+
+    app.add_api_route(
+        "/artifacts/{run_id}",
+        serve_artifact_index,
+        response_class=HTMLResponse,
+        include_in_schema=settings.full_openapi_spec,
+    )
+
+    _mount_artifact_static_files(
+        app,
+        settings.artifact_storage_backend,
+        artifacts_dir,
+        api_key=api_key,
+    )
 
     # At this point the FastAPI app should be configured. What's missing now
     # is setup callbacks related to the startup and actuall start the async

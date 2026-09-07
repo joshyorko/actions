@@ -101,6 +101,11 @@ def get_analytics_summary() -> AnalyticsSummary:
     db = get_db()
     with db.connect():
         with db.cursor() as cursor:
+            today_expression = (
+                "start_time::timestamp >= CURRENT_DATE"
+                if db.backend_name == "postgresql"
+                else "start_time >= date('now', 'start of day')"
+            )
             # Get all statistics in a single query for better performance
             db.execute_query(
                 cursor,
@@ -115,12 +120,12 @@ def get_analytics_summary() -> AnalyticsSummary:
                         ELSE NULL
                     END) as avg_duration,
                     SUM(CASE
-                        WHEN start_time >= date('now', 'start of day')
+                        WHEN {today_expression}
                         THEN 1
                         ELSE 0
                     END) as runs_today
                 FROM run
-                """,
+                """.format(today_expression=today_expression),
                 [
                     RunStatus.PASSED,
                     RunStatus.FAILED,
@@ -150,26 +155,40 @@ def get_runs_by_day(days: int = 30) -> List[RunsByDay]:
     db = get_db()
     with db.connect():
         with db.cursor() as cursor:
+            if db.backend_name == "postgresql":
+                date_expression = "start_time::timestamp::date"
+                start_time_expression = "start_time::timestamp"
+                cutoff_expression = "CURRENT_DATE - (? * INTERVAL '1 day')"
+                cutoff_values = [days]
+            else:
+                date_expression = "date(start_time)"
+                start_time_expression = "start_time"
+                cutoff_expression = "date('now', ? || ' days')"
+                cutoff_values = [-days]
             # Use SQLite date functions for cleaner date handling
             db.execute_query(
                 cursor,
                 """
                 SELECT
-                    date(start_time) as run_date,
+                    {date_expression} as run_date,
                     COUNT(*) as total,
                     SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) as passed,
                     SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) as failed
                 FROM run
-                WHERE start_time >= date('now', ? || ' days')
-                GROUP BY date(start_time)
+                WHERE {start_time_expression} >= {cutoff_expression}
+                GROUP BY {date_expression}
                 ORDER BY run_date ASC
-                """,
-                [RunStatus.PASSED, RunStatus.FAILED, -days],
+                """.format(
+                    date_expression=date_expression,
+                    start_time_expression=start_time_expression,
+                    cutoff_expression=cutoff_expression,
+                ),
+                [RunStatus.PASSED, RunStatus.FAILED, *cutoff_values],
             )
 
             return [
                 RunsByDay(
-                    date=row[0],
+                    date=row[0].isoformat() if hasattr(row[0], "isoformat") else row[0],
                     total=row[1],
                     passed=row[2] or 0,
                     failed=row[3] or 0,

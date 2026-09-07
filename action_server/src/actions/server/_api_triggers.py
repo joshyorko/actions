@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from actions.server._models import Trigger
 
 triggers_api_router = APIRouter(prefix="/api/triggers")
+public_triggers_api_router = APIRouter(prefix="/api/triggers")
 
 
 # ============================================================================
@@ -565,8 +566,12 @@ async def regenerate_trigger_secret(trigger_id: str):
 # ============================================================================
 
 
-@triggers_api_router.post("/webhook/{trigger_id}", response_model=WebhookInvokeResponse)
-@triggers_api_router.put("/webhook/{trigger_id}", response_model=WebhookInvokeResponse)
+@public_triggers_api_router.post(
+    "/webhook/{trigger_id}", response_model=WebhookInvokeResponse
+)
+@public_triggers_api_router.put(
+    "/webhook/{trigger_id}", response_model=WebhookInvokeResponse
+)
 async def invoke_webhook(trigger_id: str, request: Request):
     """
     Public webhook endpoint for triggering actions.

@@ -79,7 +79,7 @@
 .skeleton { @apply min-h-4 overflow-hidden bg-muted; }
 .loading-pulse { animation: tracePulse var(--motion-trace) ease-in-out infinite; }
 
-@media (max-width: 768px) { .sidebar { @apply fixed inset-y-0 left-0 z-50 w-64 -translate-x-full; transition: transform var(--motion-pane); } .sidebar.open { @apply translate-x-0; } }
+@media (max-width: 767px) { .sidebar { @apply fixed inset-y-0 left-0 z-50 w-64 -translate-x-full; transition: transform var(--motion-pane); } .sidebar:not(.open) { visibility: hidden; } .sidebar.open { @apply translate-x-0; visibility: visible; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

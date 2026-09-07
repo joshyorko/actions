@@ -378,6 +378,8 @@ cd action_server && inv build-frontend
 cd action_server
 python build-binary/artifact_validator.py \
   --artifact=frontend/dist \
+  --expected-artifact=runtime-admin \
+  --expected-content-type=text/html \
   --json
 ```
 
