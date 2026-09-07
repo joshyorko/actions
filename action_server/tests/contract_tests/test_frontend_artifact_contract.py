@@ -29,6 +29,7 @@ def test_product_evidence_binds_dual_artifacts_and_repeats_outputs():
         "node scripts/run-product-evidence.mjs"
     )
     assert '"build:artifacts"' in runner
+    assert '"validate:artifacts"' in runner
     assert "execFileSync" in runner
     assert "PRODUCT_EVIDENCE_OUTPUT_DIR" in runner
     assert "JSON.stringify" in runner

@@ -16,9 +16,14 @@ const outputDirectories = [
 ];
 
 execFileSync(npm, ["run", "build:artifacts"], {
-    cwd: root,
-    env: process.env,
-    stdio: "inherit",
+  cwd: root,
+  env: process.env,
+  stdio: "inherit",
+});
+execFileSync(npm, ["run", "validate:artifacts"], {
+  cwd: root,
+  env: process.env,
+  stdio: "inherit",
 });
 
 for (const outputDirectory of outputDirectories) {
