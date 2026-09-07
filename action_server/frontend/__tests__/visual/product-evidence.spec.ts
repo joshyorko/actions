@@ -8,12 +8,20 @@ import { connect } from "node:net";
 import { join, relative, resolve } from "node:path";
 
 const root = process.cwd();
-const output = join(root, "reports/product-evidence");
+const output = join(
+  root,
+  process.env.PRODUCT_EVIDENCE_OUTPUT_DIR || "reports/product-evidence",
+);
 const sourceSha = execFileSync("git", ["rev-parse", "HEAD"], {
   encoding: "utf8",
 }).trim();
 const runtimeSha = createHash("sha256")
   .update(readFileSync(join(root, "dist/index.html")))
+  .digest("hex");
+const canvasArtifactSha = createHash("sha256")
+  .update(readFileSync(join(root, "dist-canvas/artifact-manifest.json")))
+  .update("\n")
+  .update(readFileSync(join(root, "dist-canvas/sbom.json")))
   .digest("hex");
 const records: Array<Record<string, unknown>> = [];
 const runtimeOrigin = "http://127.0.0.1:4175";
@@ -139,6 +147,7 @@ const capture = async (
     schema: 1,
     source_sha: sourceSha,
     artifact_sha256: runtimeSha,
+    canvas_artifact_sha256: canvasArtifactSha,
     route,
     viewport,
     theme,
@@ -371,6 +380,7 @@ test.afterAll(() => {
     for (const key of [
       "source_sha",
       "artifact_sha256",
+      "canvas_artifact_sha256",
       "route",
       "viewport",
       "theme",
@@ -388,7 +398,7 @@ test.afterAll(() => {
   mkdirSync(output, { recursive: true });
   writeFileSync(
     join(output, `${sourceSha}.json`),
-    `${JSON.stringify({ schema: 1, source_sha: sourceSha, artifact_sha256: runtimeSha, fixture: "runtime-product-evidence-v1", records }, null, 2)}\n`,
+    `${JSON.stringify({ schema: 1, source_sha: sourceSha, artifact_sha256: runtimeSha, canvas_artifact_sha256: canvasArtifactSha, fixture: "runtime-product-evidence-v1", records }, null, 2)}\n`,
   );
 });
 
