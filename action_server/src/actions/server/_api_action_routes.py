@@ -113,6 +113,9 @@ class _ActionRoutes:
         self.action_package_id_to_action_package: dict[str, ActionPackage] = {}
         self.actions: list[Action] = []
         self.registered_route_names: set[str] = set()
+        # The initial process pool generation is zero.  Reload advances this
+        # token before registering the replacement handlers.
+        self._process_pool_generation = 0
         self.mcp_server_setup_helper: McpServerSetupHelper = McpServerSetupHelper()
 
     def setup_mcp_server(self, api_key: str | None) -> None:
@@ -197,6 +200,7 @@ class _ActionRoutes:
         from . import _actions_run
         from ._app import get_app
         from ._models import Action, ActionPackage, get_db
+        from .mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
         db = get_db()
         app = get_app()
@@ -208,6 +212,7 @@ class _ActionRoutes:
 
         actions = db.all(Action)
         registered_route_names: set[str] = set()
+        next_mcp_server_setup_helper = McpServerSetupHelper()
         for action in actions:
             if not action.enabled:
                 # Disabled actions should not be registered.
@@ -256,7 +261,10 @@ class _ActionRoutes:
                 func_internal,
                 openapi_extra,
             ) = _actions_run.generate_func_from_action(
-                action_package, action, display_name
+                action_package,
+                action,
+                display_name,
+                process_pool_generation=self._process_pool_generation,
             )
 
             if action.is_consequential is not None:
@@ -280,15 +288,19 @@ class _ActionRoutes:
             )
             registered_route_names.add(route_name)
 
-            self.mcp_server_setup_helper.register_action(
+            next_mcp_server_setup_helper.register_action(
                 func_internal, action_package, action, display_name, doc_desc
             )
 
+        # Build the complete catalog off to the side. The persistent MCP
+        # endpoint publishes it in one pointer swap, so an admitted callback
+        # can continue using its old generation while reload registers routes.
+        self.mcp_server_setup_helper.replace_catalog(next_mcp_server_setup_helper)
         self.action_package_id_to_action_package = action_package_id_to_action_package
         self.actions = actions
         self.registered_route_names = registered_route_names
 
-    def unregister_actions(self):
+    def unregister_http_actions(self):
         from actions.server._app import get_app
 
         # We need to iterate backwards to remove with indexes.
@@ -300,4 +312,6 @@ class _ActionRoutes:
                 log.debug("Unregistering route: %s", route.path_format)
                 del app.router.routes[i]
 
+    def unregister_actions(self):
+        self.unregister_http_actions()
         self.mcp_server_setup_helper.unregister_actions()

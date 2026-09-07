@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 
 # Note: referenced here and in actions.server._download_rcc
 # Using joshyorko/rcc open-source version
-RCC_VERSION = "18.18.1"
+RCC_VERSION = "18.19.3"
 
 
 CURDIR = Path(__file__).parent.absolute()

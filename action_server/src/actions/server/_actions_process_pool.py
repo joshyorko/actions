@@ -109,6 +109,13 @@ class ProcessHandle:
         )
         from ._preload_actions.preload_actions_streams import JsonRpcStreamReaderThread
         from ._robo_utils.process import build_python_launch_env
+        from ._rcc_runtime_adapter import (
+            RccProcessHandle,
+            build_exec_command,
+            get_rcc_location,
+            load_descriptor,
+            new_receipt_path,
+        )
 
         self._post_run_args = post_run_args
 
@@ -122,7 +129,11 @@ class ProcessHandle:
         # (upon reloading all running processes are marked as non-reusable).
         self.can_reuse = True
 
-        env = json.loads(action_package.env_json)
+        persisted_env = json.loads(action_package.env_json)
+        runtime_descriptor = load_descriptor(action_package.env_json)
+        env = {
+            key: value for key, value in persisted_env.items() if key != "runtime"
+        }
         _add_preload_actions_dir_to_env_pythonpath(env)
         env = build_python_launch_env(env)
         # Shouldn't be there, but just making sure... if it is it can
@@ -140,7 +151,9 @@ class ProcessHandle:
             # the process doesn't exit!
             env["RC_DUMP_THREADS_AFTER_RUN"] = "0"
 
-        if "PYTHON_EXE" in env:
+        if runtime_descriptor is not None:
+            python_exe = None
+        elif "PYTHON_EXE" in env:
             python_exe = env["PYTHON_EXE"]
         else:
             if is_frozen():
@@ -185,42 +198,105 @@ class ProcessHandle:
 
         if use_tcp:
             server_socket = _create_server_socket("127.0.0.1", 0)
-            host, port = server_socket.getsockname()
-            cmdline = [
-                python_exe,
-                "-m",
-                "preload_actions_server_main",
-                "--tcp",
-                f"--host={host}",
-                f"--port={port}",
-            ]
+            connection_future = None
+            startup_cancelled = threading.Event()
 
-            def accept_connection():
-                server_socket.listen(1)
-                sock, _addr = server_socket.accept()
-                return sock
+            def cleanup_startup():
+                startup_cancelled.set()
+                try:
+                    try:
+                        server_socket.shutdown(socket_module.SHUT_RDWR)
+                    except (AttributeError, OSError):
+                        pass
+                finally:
+                    try:
+                        server_socket.close()
+                    except (AttributeError, OSError):
+                        pass
 
-            connection_future = run_in_thread(accept_connection)
+                if connection_future is not None:
+                    try:
+                        connection_future.cancel()
+                    except BaseException:
+                        log.debug("Unable to cancel the TCP accept future.", exc_info=True)
+                    try:
+                        connection_future.result(timeout=1)
+                    except BaseException:
+                        log.debug("TCP accept future finished during startup cleanup.", exc_info=True)
 
-            self._process = subprocess.Popen(cmdline, **subprocess_kwargs)
-            self._on_output = Callback()
+            def cleanup_process():
+                try:
+                    if getattr(self, "_rcc_wrapper", None) is not None:
+                        self._rcc_wrapper.kill()
+                    elif getattr(self, "_process", None) is not None:
+                        from ._robo_utils.process import kill_process_and_subprocesses
 
-            pid = self._process.pid
+                        kill_process_and_subprocesses(self._process.pid)
+                except BaseException:
+                    log.exception("Unable to clean up the failed TCP worker startup.")
 
-            stderr = self._process.stderr
-            stdout = self._process.stdout
+            try:
+                host, port = server_socket.getsockname()
+                worker_command = [
+                    "python" if runtime_descriptor is not None else python_exe,
+                    "-m",
+                    "preload_actions_server_main",
+                    "--tcp",
+                    f"--host={host}",
+                    f"--port={port}",
+                ]
+                receipt_file = new_receipt_path(settings.datadir)
+                if runtime_descriptor is not None:
+                    cmdline = build_exec_command(
+                        get_rcc_location(),
+                        runtime_descriptor,
+                        worker_command,
+                        receipt_file=receipt_file,
+                    )
+                else:
+                    cmdline = worker_command
 
-            t = threading.Thread(
-                target=_process_stream_reader, args=(stderr,), daemon=True
-            )
-            t.name = f"Stderr reader (pid: {pid})"
-            t.start()
+                def accept_connection():
+                    server_socket.listen(1)
+                    server_socket.settimeout(0.2)
+                    while not startup_cancelled.is_set():
+                        try:
+                            sock, _addr = server_socket.accept()
+                        except socket_module.timeout:
+                            continue
+                        return sock
+                    raise RuntimeError("TCP worker startup was cancelled")
 
-            t = threading.Thread(
-                target=_process_stream_reader, args=(stdout,), daemon=True
-            )
-            t.name = f"Stdout reader (pid: {pid})"
-            t.start()
+                connection_future = run_in_thread(accept_connection)
+
+                self._process = subprocess.Popen(cmdline, **subprocess_kwargs)
+                self._rcc_wrapper = (
+                    RccProcessHandle(self._process, receipt_file)
+                    if runtime_descriptor is not None
+                    else None
+                )
+                self._on_output = Callback()
+
+                pid = self._process.pid
+
+                stderr = self._process.stderr
+                stdout = self._process.stdout
+
+                t = threading.Thread(
+                    target=_process_stream_reader, args=(stderr,), daemon=True
+                )
+                t.name = f"Stderr reader (pid: {pid})"
+                t.start()
+
+                t = threading.Thread(
+                    target=_process_stream_reader, args=(stdout,), daemon=True
+                )
+                t.name = f"Stdout reader (pid: {pid})"
+                t.start()
+            except BaseException:
+                cleanup_startup()
+                cleanup_process()
+                raise
 
             try:
                 s = connection_future.result(10)
@@ -228,7 +304,15 @@ class ProcessHandle:
                 log.exception(
                     "Process that runs action did not connect back in the available timeout."
                 )
+                cleanup_startup()
+                cleanup_process()
                 raise
+            finally:
+                startup_cancelled.set()
+                try:
+                    server_socket.close()
+                except (AttributeError, OSError):
+                    pass
             read_from = s.makefile("rb")
             write_to = s.makefile("wb")
 
@@ -238,14 +322,29 @@ class ProcessHandle:
             )
         else:
             # Will start things using the stdin/stdout for communicating.
-            cmdline = [
-                python_exe,
+            worker_command = [
+                "python" if runtime_descriptor is not None else python_exe,
                 "-m",
                 "preload_actions_server_main",
             ]
+            receipt_file = new_receipt_path(settings.datadir)
+            if runtime_descriptor is not None:
+                cmdline = build_exec_command(
+                    get_rcc_location(),
+                    runtime_descriptor,
+                    worker_command,
+                    receipt_file=receipt_file,
+                )
+            else:
+                cmdline = worker_command
             subprocess_kwargs["stdin"] = subprocess.PIPE
 
             self._process = subprocess.Popen(cmdline, **subprocess_kwargs)
+            self._rcc_wrapper = (
+                RccProcessHandle(self._process, receipt_file)
+                if runtime_descriptor is not None
+                else None
+            )
             self._on_output = Callback()
 
             pid = self._process.pid
@@ -294,7 +393,10 @@ class ProcessHandle:
         self._kill_called = True
 
         log.info("Subprocess kill [pid=%s]", self._process.pid)
-        kill_process_and_subprocesses(self._process.pid)
+        if getattr(self, "_rcc_wrapper", None) is not None:
+            self._rcc_wrapper.kill()
+        else:
+            kill_process_and_subprocesses(self._process.pid)
 
     def _do_run_action(
         self,
@@ -587,7 +689,10 @@ def _get_process_handle_key(settings: Settings, action_package: ActionPackage) -
     """
     from ._actions_run_helpers import get_action_package_cwd
 
-    env = tuple(sorted(json.loads(action_package.env_json).items()))
+    # Runtime descriptors namespace structured RCC evidence beneath ``runtime``;
+    # canonical JSON keeps the legacy pool key hashable without making local
+    # activation paths part of runtime identity.
+    env = json.dumps(json.loads(action_package.env_json), sort_keys=True)
     cwd = get_action_package_cwd(settings, action_package)
     return _Key(action_package.id, env, cwd)
 
@@ -603,6 +708,10 @@ class ActionsProcessPool:
         import shlex
 
         self._settings = settings
+        # Route handlers capture this monotonically increasing token.  A
+        # handler admitted before reload can therefore keep using its exact
+        # package generation after this pool has switched to a new one.
+        self._generation = 0
         self.action_package_id_to_action_package = action_package_id_to_action_package
 
         post_run_cmd = os.environ.get("ACTIONS_RUNTIME_POST_RUN_CMD")
@@ -643,30 +752,66 @@ class ActionsProcessPool:
         actions: List[Action],
     ):
         """
-        On a reload, we need to kill all the related, idle processes and mark
-        any running process as non-reusable.
+        Prepare a new process generation before committing the routing switch.
+
+        Running old-generation processes remain leased until their current
+        call completes.  If preparation fails, newly-created idle workers are
+        discarded and the old routing/idle generation is restored unchanged.
         """
         with self._lock:
-            for key, idle_processes in tuple(self._idle_processes.items()):
-                for process in idle_processes:
-                    process.kill()
-                self._idle_processes.pop(key)
+            old_action_packages = self.action_package_id_to_action_package
+            old_actions = self.actions
+            old_cycle_actions_iterator = self._cycle_actions_iterator
+            old_idle_processes = self._idle_processes
 
-            for key, running_processes in tuple(self._running_processes.items()):
-                for process in running_processes:
-                    process.can_reuse = False
-
+            # Keep old idle workers out of the staged warmup, while retaining
+            # them for rollback until the new generation is ready.
+            self._idle_processes = {}
             self.action_package_id_to_action_package = (
                 action_package_id_to_action_package
             )
-
-            # We just want the actions which are enabled.
             self.actions = [action for action in actions if action.enabled]
-
-            # An iterator which keeps cycling over the actions.
             self._cycle_actions_iterator = itertools.cycle(self.actions)
 
-        self._warmup_processes()
+            try:
+                self._warmup_processes_unlocked(include_running=False)
+            except BaseException:
+                new_idle_processes = self._idle_processes
+                self._idle_processes = old_idle_processes
+                self.action_package_id_to_action_package = old_action_packages
+                self.actions = old_actions
+                self._cycle_actions_iterator = old_cycle_actions_iterator
+                for idle_processes in new_idle_processes.values():
+                    for process in idle_processes:
+                        try:
+                            process.kill()
+                        except BaseException:
+                            log.exception(
+                                "Unable to clean up failed reload process."
+                            )
+                raise
+
+            # The routing switch is committed only after all new workers have
+            # started successfully.  Old running workers drain naturally and
+            # cannot be returned to the new idle generation.
+            for idle_processes in old_idle_processes.values():
+                for process in idle_processes:
+                    process.kill()
+            for running_processes in self._running_processes.values():
+                for process in running_processes:
+                    process.can_reuse = False
+            self._generation = getattr(self, "_generation", 0) + 1
+
+    @property
+    def generation(self) -> int:
+        """Current process-generation token used by registered route handlers."""
+        with self._lock:
+            return getattr(self, "_generation", 0)
+
+    def restore_generation(self, generation: int) -> None:
+        """Restore the token when route registration rolls a reload back."""
+        with self._lock:
+            self._generation = generation
 
     @property
     def _reuse_processes(self) -> bool:
@@ -689,16 +834,20 @@ class ActionsProcessPool:
     def min_processes(self) -> int:
         return self._settings.min_processes
 
-    def _create_process(self, action: Action):
-        action_package: ActionPackage = self.action_package_id_to_action_package[
-            action.action_package_id
-        ]
+    def _create_process(
+        self, action: Action, action_package: Optional[ActionPackage] = None
+    ) -> ProcessHandle:
+        if action_package is None:
+            action_package = self.action_package_id_to_action_package[
+                action.action_package_id
+            ]
 
         process_handle = ProcessHandle(
             self._settings, action_package, self._post_run_cmd_args
         )
         assert self._lock.locked(), "Lock must be acquired at this point."
         self._add_to_idle_processes(process_handle)
+        return process_handle
 
     def dispose(self):
         with self._lock:
@@ -762,25 +911,46 @@ class ActionsProcessPool:
             return
         processes.discard(process_handle)
 
-    def _warmup_processes(self):
+    def _warmup_processes_unlocked(self, *, include_running: bool = True):
+        assert self._lock.locked(), "Lock must be acquired at this point."
         if not self.actions:
             return
 
+        while True:
+            current = (
+                self._count_total_processes()
+                if include_running
+                else self._get_idle_processes_count_unlocked()
+            )
+            if current >= self._settings.min_processes:
+                return
+            one_action = next(self._cycle_actions_iterator)
+            self._create_process(one_action)
+
+    def _warmup_processes(self):
         with self._lock:
-            while self._count_total_processes() < self._settings.min_processes:
-                one_action = next(self._cycle_actions_iterator)
-                self._create_process(one_action)
+            self._warmup_processes_unlocked()
 
     @contextmanager
     def obtain_process_for_action(
-        self, action: Action, runtime_info: Optional["RunRuntimeInfo"] = None
+        self,
+        action: Action,
+        runtime_info: Optional["RunRuntimeInfo"] = None,
+        *,
+        generation: Optional[int] = None,
+        action_package: Optional[ActionPackage] = None,
     ) -> Iterator[ProcessHandle]:
         import time
         from concurrent.futures import CancelledError
 
-        action_package: ActionPackage = self.action_package_id_to_action_package[
-            action.action_package_id
-        ]
+        current_generation = self.generation
+        request_generation = (
+            current_generation if generation is None else generation
+        )
+        if action_package is None:
+            action_package = self.action_package_id_to_action_package[
+                action.action_package_id
+            ]
 
         key = _get_process_handle_key(self._settings, action_package)
         process_handle: Optional[ProcessHandle] = None
@@ -817,7 +987,16 @@ class ActionsProcessPool:
                 acquired_process_semaphore = True
 
                 with self._lock:
-                    processes = self._idle_processes.get(key)
+                    current_generation = getattr(self, "_generation", 0)
+                    # Idle workers belong to the currently routed generation.
+                    # A stale route may still run, but it must spawn against
+                    # its captured package and never borrow a new-generation
+                    # worker (or return its worker for reuse).
+                    processes = (
+                        self._idle_processes.get(key)
+                        if request_generation == current_generation
+                        else None
+                    )
                     if processes:
                         # Get any process from the (compatible) idle processes.
                         process_handle = processes.pop()
@@ -837,10 +1016,18 @@ class ActionsProcessPool:
                         # No compatible process: we need to create one now.
                         n_running = self._get_running_processes_count_unlocked()
                         if n_running < self.max_processes:
-                            self._create_process(action)
-                            processes = self._idle_processes.get(key)
-                            assert processes, f"Expected idle processes bound to key: {key} at this point!"
-                            process_handle = processes.pop()
+                            created_process = self._create_process(action, action_package)
+                            if request_generation != current_generation:
+                                # A stale route may share a key with the new
+                                # generation.  Remove exactly the worker just
+                                # created instead of taking an arbitrary idle
+                                # worker from that shared key.
+                                process_handle = created_process
+                                self._idle_processes[key].remove(created_process)
+                            else:
+                                processes = self._idle_processes.get(key)
+                                assert processes, f"Expected idle processes bound to key: {key} at this point!"
+                                process_handle = processes.pop()
                             log.debug(
                                 f"Process Pool: Created process ({process_handle.pid})."
                             )
@@ -852,6 +1039,8 @@ class ActionsProcessPool:
                                 )
                                 continue
                             self._add_to_running_processes(process_handle)
+                            if request_generation != current_generation:
+                                process_handle.can_reuse = False
                         else:
                             log.critical(
                                 f"Unable to run: {action.name} because "
@@ -890,7 +1079,6 @@ class ActionsProcessPool:
         try:
             yield process_handle
         finally:
-            self._processes_running_semaphore.release()
             with self._lock:
                 self._remove_from_running_processes(process_handle)
                 if process_handle.is_alive():
@@ -924,7 +1112,13 @@ class ActionsProcessPool:
             # If needed recreate idle processes which were removed (needed
             # especially when not reusing processes, but if some process
             # crashes it's also needed).
-            self._warmup_processes()
+            try:
+                self._warmup_processes()
+            finally:
+                # Return capacity only after a terminated RCC wrapper has been
+                # waited on, preventing overlap with the next claimant. The
+                # release is guaranteed even when warmup cannot recover.
+                self._processes_running_semaphore.release()
 
 
 _actions_process_pool: Optional[ActionsProcessPool] = None

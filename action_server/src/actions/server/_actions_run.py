@@ -234,6 +234,7 @@ class _ActionsRunner:
         response_handler: IResponseHandler,
         headers: dict,
         cookies: dict,
+        process_pool_generation: int,
     ) -> None:
         """
         Constructor. Still running in the main thread.
@@ -254,6 +255,7 @@ class _ActionsRunner:
         self.response_handler = response_handler
         self.headers = headers
         self.cookies = cookies
+        self.process_pool_generation = process_pool_generation
 
         timeout = headers.get(HEADER_ACTIONS_ASYNC_TIMEOUT, None)
         if timeout is not None:
@@ -425,7 +427,10 @@ class _ActionsRunner:
                 # running in parallel (i.e.: the process pool may be full).
                 initial_time = time.monotonic()  # Initial time
                 process_handle_ctx = actions_process_pool.obtain_process_for_action(
-                    action, runtime_info
+                    action,
+                    runtime_info,
+                    generation=self.process_pool_generation,
+                    action_package=action_package,
                 )
                 with process_handle_ctx as process_handle:
                     initial_time = time.monotonic()
@@ -553,7 +558,11 @@ def _name_as_class_name(name):
 
 
 def generate_func_from_action(
-    action_package: "ActionPackage", action: "Action", display_name: str
+    action_package: "ActionPackage",
+    action: "Action",
+    display_name: str,
+    *,
+    process_pool_generation: int = 0,
 ) -> Tuple[
     Callable[[Response, Request], Any],
     IInternalFuncAPI,
@@ -688,6 +697,7 @@ def generate_func_from_action(
             response_handler,
             headers,
             cookies,
+            process_pool_generation=process_pool_generation,
         )
         return await run_in_threadpool(runner.run_in_thread)
 
@@ -772,6 +782,8 @@ async def execute_action_for_scheduler(
     from ._models import Run, get_db
 
     settings = get_settings()
+    actions_process_pool: ActionsProcessPool = get_actions_process_pool()
+    process_pool_generation = actions_process_pool.generation
     from ._artifact_storage import get_artifact_storage
 
     artifact_storage = get_artifact_storage()
@@ -786,12 +798,13 @@ async def execute_action_for_scheduler(
 
     def _execute_in_thread():
         with db.connect():
-            actions_process_pool: ActionsProcessPool = get_actions_process_pool()
-
             try:
                 initial_time = time.monotonic()
                 process_handle_ctx = actions_process_pool.obtain_process_for_action(
-                    action, runtime_info
+                    action,
+                    runtime_info,
+                    generation=process_pool_generation,
+                    action_package=action_package,
                 )
                 with process_handle_ctx as process_handle:
                     initial_time = time.monotonic()

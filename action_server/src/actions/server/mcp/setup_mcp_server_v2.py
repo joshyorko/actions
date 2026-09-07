@@ -42,6 +42,18 @@ class ActionInfo:
     mcp_meta: dict[str, Any] | None
 
 
+@dataclass
+class _McpCatalog:
+    tools: list[Tool]
+    tool_name_to_action_info: dict[str, ActionInfo]
+    resources: dict[str, Resource]
+    resource_to_action_info: dict[str, ActionInfo]
+    resource_templates: list[ResourceTemplate]
+    resource_template_to_action_info: dict[str, ActionInfo]
+    prompts: list[Prompt]
+    prompt_name_to_action_info: dict[str, ActionInfo]
+
+
 class McpResponseHandler:
     def set_run_id(self, run_id: str):
         pass
@@ -74,16 +86,18 @@ class McpServerSetupHelper:
         return dict(request.headers), dict(request.cookies)
 
     async def _list_tools(self, _ctx: Any, _params: Any) -> ListToolsResult:
+        catalog = self._catalog
         return ListToolsResult(
-            tools=list(self._tools), **self._catalog_result_metadata()
+            tools=list(catalog.tools), **self._catalog_result_metadata(catalog)
         )
 
     async def _call_tool(self, ctx: Any, params: Any):
+        catalog = self._catalog
         try:
             from actions.server._actions_run import IInternalFuncAPI
 
             headers, cookies = self._request_values(ctx)
-            action_info = self._tool_name_to_action_info[params.name]
+            action_info = catalog.tool_name_to_action_info[params.name]
             func: IInternalFuncAPI = action_info.func
             result = await func(
                 response_handler=McpResponseHandler(),
@@ -114,38 +128,41 @@ class McpServerSetupHelper:
             raise
 
     async def _list_resources(self, _ctx: Any, _params: Any) -> ListResourcesResult:
+        catalog = self._catalog
         return ListResourcesResult(
-            resources=sorted(self._resources.values(), key=lambda item: str(item.uri)),
-            **self._catalog_result_metadata(),
+            resources=sorted(catalog.resources.values(), key=lambda item: str(item.uri)),
+            **self._catalog_result_metadata(catalog),
         )
 
     async def _list_resource_templates(
         self, _ctx: Any, _params: Any
     ) -> ListResourceTemplatesResult:
+        catalog = self._catalog
         return ListResourceTemplatesResult(
             resource_templates=sorted(
-                self._resource_templates, key=lambda item: item.uri_template
+                catalog.resource_templates, key=lambda item: item.uri_template
             ),
-            **self._catalog_result_metadata(),
+            **self._catalog_result_metadata(catalog),
         )
 
     async def _read_resource(self, ctx: Any, params: Any) -> ReadResourceResult:
+        catalog = self._catalog
         uri = str(params.uri)
-        action_info = self._resource_to_action_info.get(uri)
+        action_info = catalog.resource_to_action_info.get(uri)
         mime_type = None
         inputs: dict[str, Any] = {}
         if action_info:
-            resource = self._resources.get(params.uri)
+            resource = catalog.resources.get(params.uri)
             mime_type = resource.mime_type if resource else None
         else:
-            for template in self._resource_templates:
+            for template in catalog.resource_templates:
                 found_params = self._resource_template_matches(
                     template.uri_template, uri
                 )
                 if found_params:
                     mime_type = template.mime_type
                     inputs = found_params
-                    action_info = self._resource_template_to_action_info[
+                    action_info = catalog.resource_template_to_action_info[
                         template.uri_template
                     ]
                     break
@@ -177,46 +194,54 @@ class McpServerSetupHelper:
         )
 
     async def _list_prompts(self, _ctx: Any, _params: Any) -> ListPromptsResult:
+        catalog = self._catalog
         return ListPromptsResult(
-            prompts=list(self._prompts), **self._catalog_result_metadata()
+            prompts=list(catalog.prompts), **self._catalog_result_metadata(catalog)
         )
 
     @property
     def catalog_revision(self) -> str:
+        return self._catalog_revision(self._catalog)
+
+    @staticmethod
+    def _catalog_revision(catalog: _McpCatalog) -> str:
         catalog = {
             "prompts": [
                 item.model_dump(by_alias=True, mode="json", exclude_none=True)
-                for item in sorted(self._prompts, key=lambda item: item.name)
+                for item in sorted(catalog.prompts, key=lambda item: item.name)
             ],
             "resources": [
                 item.model_dump(by_alias=True, mode="json", exclude_none=True)
                 for item in sorted(
-                    self._resources.values(), key=lambda item: str(item.uri)
+                    catalog.resources.values(), key=lambda item: str(item.uri)
                 )
             ],
             "resourceTemplates": [
                 item.model_dump(by_alias=True, mode="json", exclude_none=True)
                 for item in sorted(
-                    self._resource_templates, key=lambda item: item.uri_template
+                    catalog.resource_templates, key=lambda item: item.uri_template
                 )
             ],
             "tools": [
                 item.model_dump(by_alias=True, mode="json", exclude_none=True)
-                for item in sorted(self._tools, key=lambda item: item.name)
+                for item in sorted(catalog.tools, key=lambda item: item.name)
             ],
         }
         canonical = json.dumps(catalog, sort_keys=True, separators=(",", ":"))
         return sha256(canonical.encode("utf-8")).hexdigest()
 
-    def _catalog_result_metadata(self) -> dict[str, Any]:
+    def _catalog_result_metadata(self, catalog: _McpCatalog | None = None) -> dict[str, Any]:
+        if catalog is None:
+            catalog = self._catalog
         return {
-            "_meta": {CATALOG_REVISION_META_KEY: self.catalog_revision},
+            "_meta": {CATALOG_REVISION_META_KEY: self._catalog_revision(catalog)},
             "ttlMs": CATALOG_TTL_MS,
             "cacheScope": CATALOG_CACHE_SCOPE,
         }
 
     async def _get_prompt(self, ctx: Any, params: Any) -> GetPromptResult:
-        action_info = self._prompt_name_to_action_info[params.name]
+        catalog = self._catalog
+        action_info = catalog.prompt_name_to_action_info[params.name]
         headers, cookies = self._request_values(ctx)
         result = await action_info.func(
             response_handler=McpResponseHandler(),
@@ -249,6 +274,7 @@ class McpServerSetupHelper:
         display_name: str,
         doc_desc: str,
     ) -> None:
+        catalog = self._catalog
         options = json.loads(action.options) if action.options else {}
         mcp_meta = options.get("_meta")
         if mcp_meta is not None and not isinstance(mcp_meta, dict):
@@ -259,9 +285,9 @@ class McpServerSetupHelper:
             if not uri:
                 raise ValueError(f"Resource {action.name} has no URI")
             if "{" in uri and "}" in uri:
-                if uri in self._resource_template_to_action_info:
+                if uri in catalog.resource_template_to_action_info:
                     raise ValueError(f"duplicate resource template URI: {uri}")
-                self._resource_templates.append(
+                catalog.resource_templates.append(
                     ResourceTemplate(
                         uri_template=uri,
                         name=action.name,
@@ -270,15 +296,15 @@ class McpServerSetupHelper:
                         _meta=mcp_meta,
                     )
                 )
-                self._resource_template_to_action_info[uri] = ActionInfo(
+                catalog.resource_template_to_action_info[uri] = ActionInfo(
                     func, action, display_name, doc_desc, "string", mcp_meta
                 )
-                self._resource_templates.sort(key=lambda item: item.uri_template)
+                catalog.resource_templates.sort(key=lambda item: item.uri_template)
             else:
                 resource_uri = uri
-                if resource_uri in self._resources:
+                if resource_uri in catalog.resources:
                     raise ValueError(f"duplicate resource URI: {resource_uri}")
-                self._resources[resource_uri] = Resource(
+                catalog.resources[resource_uri] = Resource(
                     uri=resource_uri,
                     name=action.name,
                     description=doc_desc,
@@ -286,16 +312,16 @@ class McpServerSetupHelper:
                     size=options.get("size"),
                     _meta=mcp_meta,
                 )
-                self._resource_to_action_info[uri] = ActionInfo(
+                catalog.resource_to_action_info[uri] = ActionInfo(
                     func, action, display_name, doc_desc, "string", mcp_meta
                 )
             return
         if kind == "prompt":
-            if action.name in self._prompt_name_to_action_info:
+            if action.name in catalog.prompt_name_to_action_info:
                 raise ValueError(f"duplicate prompt name: {action.name}")
             schema = json.loads(action.input_schema)
             required = schema.get("required", [])
-            self._prompts.append(
+            catalog.prompts.append(
                 Prompt(
                     name=action.name,
                     description=doc_desc,
@@ -310,13 +336,13 @@ class McpServerSetupHelper:
                     _meta=mcp_meta,
                 )
             )
-            self._prompt_name_to_action_info[action.name] = ActionInfo(
+            catalog.prompt_name_to_action_info[action.name] = ActionInfo(
                 func, action, display_name, doc_desc, "string", mcp_meta
             )
-            self._prompts.sort(key=lambda item: item.name)
+            catalog.prompts.sort(key=lambda item: item.name)
             return
 
-        if action.name in self._tool_name_to_action_info:
+        if action.name in catalog.tool_name_to_action_info:
             raise ValueError(f"duplicate tool name: {action.name}")
         output_schema = json.loads(action.output_schema)
         if output_schema.get("type") == "string":
@@ -332,7 +358,7 @@ class McpServerSetupHelper:
                 "properties": {"result": output_schema},
                 "required": ["result"],
             }
-        self._tools.append(
+        catalog.tools.append(
             Tool(
                 name=action.name,
                 description=doc_desc,
@@ -348,20 +374,34 @@ class McpServerSetupHelper:
                 _meta=mcp_meta,
             )
         )
-        self._tool_name_to_action_info[action.name] = ActionInfo(
+        catalog.tool_name_to_action_info[action.name] = ActionInfo(
             func, action, display_name, doc_desc, output_schema_kind, mcp_meta
         )
-        self._tools.sort(key=lambda item: item.name)
+        catalog.tools.sort(key=lambda item: item.name)
+
+    def replace_catalog(self, replacement: "McpServerSetupHelper") -> None:
+        """Atomically publish a fully built catalog for the persistent server."""
+        catalog = replacement._catalog
+        self._catalog = catalog
+        self._tools = catalog.tools
+        self._tool_name_to_action_info = catalog.tool_name_to_action_info
+        self._resources = catalog.resources
+        self._resource_to_action_info = catalog.resource_to_action_info
+        self._resource_templates = catalog.resource_templates
+        self._resource_template_to_action_info = catalog.resource_template_to_action_info
+        self._prompts = catalog.prompts
+        self._prompt_name_to_action_info = catalog.prompt_name_to_action_info
 
     def unregister_actions(self) -> None:
         self._init_state()
 
     def _init_state(self) -> None:
-        self._tools: list[Tool] = []
-        self._tool_name_to_action_info: dict[str, ActionInfo] = {}
-        self._resources: dict[str, Resource] = {}
-        self._resource_to_action_info: dict[str, ActionInfo] = {}
-        self._resource_templates: list[ResourceTemplate] = []
-        self._resource_template_to_action_info: dict[str, ActionInfo] = {}
-        self._prompts: list[Prompt] = []
-        self._prompt_name_to_action_info: dict[str, ActionInfo] = {}
+        self._catalog = _McpCatalog([], {}, {}, {}, [], {}, [], {})
+        self._tools = self._catalog.tools
+        self._tool_name_to_action_info = self._catalog.tool_name_to_action_info
+        self._resources = self._catalog.resources
+        self._resource_to_action_info = self._catalog.resource_to_action_info
+        self._resource_templates = self._catalog.resource_templates
+        self._resource_template_to_action_info = self._catalog.resource_template_to_action_info
+        self._prompts = self._catalog.prompts
+        self._prompt_name_to_action_info = self._catalog.prompt_name_to_action_info

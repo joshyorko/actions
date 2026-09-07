@@ -553,6 +553,27 @@ focused and package gates after the ordinary merge.
 
 ## RCC Developer Toolkit
 
+### RCC release acceptance pins
+
+The latest published stable release from `joshyorko/rcc` is `v18.19.3`,
+published 2026-08-28, with tag target
+`4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`; the GitHub release is neither a
+draft nor a prerelease. Direct downloads matched the publisher API digests:
+`rcc-linux64` `7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428`,
+`rcc-macosarm64` `778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266`,
+`rcc-macos64` `e5be77c162946b022f3f244e3506ce353e7016b9b23f1e798c673616c2e99efe`,
+and `rcc-windows64.exe`
+`523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4`.
+
+The primary developer-toolkit matrix uses `v18.19.3` with the Linux, macOS
+arm64, and Windows pins above; its separate N-1 matrix retains `v18.18.1` with the
+published `rcc-linux64`, `rcc-macosarm64`, and `rcc-windows64.exe` digests
+`ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf`,
+`57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d`, and
+`705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b`.
+The Action Server build/downloader and RCC runtime adapter use `v18.19.3`;
+the release-byte receipt does not replace native, provider, or package gates.
+
 ### Repository-owned Action Server templates
 
 The supported Action Server templates are generated from `templates/packaging/templates-prod.json`
@@ -784,6 +805,93 @@ Every dispatch includes the mandatory documentation receipt from root `AGENTS.md
 ## Verification Receipts
 
 Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
+
+## RCC Environment Artifact execution
+
+Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
+explicitly opts into artifact mode. Without either opt-in, legacy bootstrap
+remains active. In artifact mode, durable runtime authority is the exact
+`sha256:` Environment Artifact digest and RCC `env exec`; persisted activation
+paths (`PYTHON_EXE`, `CONDA_PREFIX`, `ROBOCORP_HOME`, and
+Holotree/materialization paths) are not authority. The existing process pool
+starts workers with RCC `env exec --artifact DIGEST --permissive-local
+--inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
+release.
+
+TCP worker startup owns its listener, accept future, and spawned wrapper. Any
+failure after listener creation closes the listener, cancels and observes the
+accept future, and reaps the owned wrapper without replacing the primary
+exception. Process-pool capacity is released after wrapper cleanup and is
+guaranteed even if warmup recovery raises; the exception-path regressions live
+in the RCC adapter focused test module.
+
+The provisional adapter classifies reload inputs from normalized environment
+fields (`spec-version`, dependency sets, and post-install commands), not from
+the entire package descriptor. A source-only change therefore reuses the
+verified in-process Artifact descriptor without republishing or reacquiring
+while refreshing the source generation. A persisted descriptor on restart is
+reacquired by exact digest. Only the explicit RCC `not materialized` acquire
+failure permits publishing and validating a replacement identity; permission,
+provider, identity, and verification failures remain fail-closed. Environment
+changes use a distinct fingerprint and reacquire beside the old generation.
+The process pool stages new workers before committing routing, marks running
+old-generation workers non-reusable only after successful warmup, and restores
+the old routing/idle generation if preparation fails; old workers remain leased
+until their call completes and the wrapper is reaped.
+
+Auto-reload prepares the process generation before changing HTTP/MCP action
+routes. Route and pool updates are serialized as one generation transition;
+each registered handler captures its process-generation token and package, so a
+request admitted through an old route cannot look up a new pool generation
+after reload. If route registration fails, the prior route snapshot and
+process generation are restored and the watcher reports an unsuccessful
+reload. The reload lock alone does not provide this request-level pinning.
+
+Scheduled executions capture the current process-pool object, generation token,
+and ActionPackage before dispatching their worker thread; a reload that replaces
+the global pool therefore cannot redirect an already-admitted schedule to the
+new package. The persistent MCP endpoint stages a complete catalog in a
+separate helper and publishes one catalog pointer after route registration;
+MCP callbacks capture that pointer before lookup, so unregister/register cannot
+expose an empty or partially populated catalog to an admitted call. The
+standalone `unregister_actions()` reset remains available for explicit teardown
+outside reload.
+
+On Runtime restart, a persisted descriptor may skip republish only when its
+environment fingerprint exactly matches the current normalized package inputs;
+it is reacquired by Artifact digest and never by a persisted executable or
+materialization path. RCC acquire results must include exact identity and
+`verification.valid == true`; missing or invalid verification fails closed.
+
+The gated real proof is run with the released RCC binary and explicit gate:
+
+```bash
+ACTIONS_REAL_RCC_ARTIFACT_TEST=1 \
+ACTIONS_RUNTIME_RCC_BINARY=/home/linuxbrew/.linuxbrew/bin/rcc \
+ACTIONS_RUNTIME_RCC_PROVIDER=http://127.0.0.1:PORT \
+action_server/.venv/bin/python -m pytest -q \
+action_server/tests/action_server_tests/test_rcc_runtime_adapter.py -m real_rcc
+```
+
+Record the exact provider-generated digest, Action result, and wrapper receipt
+from that run; do not reuse a digest from another disposable provider root. A
+mocked parser or RCC health/version check is not acceptance evidence.
+RCC v18.19.2 materializes `env exec` children with the artifact as their
+current directory, so import/discovery must pass the package source directory
+explicitly to `actions metadata`; `PYTHONPATH` alone does not make discovery
+scan the source tree. A successful Action can still leave its receipt with
+`status: failed`, `exitCode: -1`, and `reason: child exited non-zero` when the
+pool intentionally terminates the persistent wrapper after the Action returns
+`PASS`. Treat that as wrapper teardown evidence only when the receipt's exact
+artifact digest, `verification.valid == true`, and non-empty lease identity
+also validate.
+
+With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
+recorded digest through the same provider and each returned the exact digest
+with `verification.valid: true`. After the provider's digest-addressed
+manifest was tampered with, a fresh consumer received a provider HTTP 500 and
+the adapter rejected the acquisition; the manifest was restored afterward.
 
 ## Pull Request Triage
 

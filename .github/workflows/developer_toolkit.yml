@@ -11,27 +11,50 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-22.04
+          - lane: primary
+            rcc_version: 18.19.3
+            os: ubuntu-22.04
+            asset: rcc-linux64
+            sha256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
+          - lane: primary
+            rcc_version: 18.19.3
+            os: macos-15
+            asset: rcc-macosarm64
+            sha256: 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266
+          - lane: primary
+            rcc_version: 18.19.3
+            os: windows-2022
+            asset: rcc-windows64.exe
+            sha256: 523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4
+          - lane: n-1
+            rcc_version: 18.18.1
+            os: ubuntu-22.04
             asset: rcc-linux64
             sha256: ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf
-          - os: macos-15
+          - lane: n-1
+            rcc_version: 18.18.1
+            os: macos-15
             asset: rcc-macosarm64
             sha256: 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d
-          - os: windows-2022
+          - lane: n-1
+            rcc_version: 18.18.1
+            os: windows-2022
             asset: rcc-windows64.exe
             sha256: 705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b
     runs-on: ${{ matrix.os }}
+    env:
+      ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}
     steps:
       - uses: actions/checkout@v4
       - name: Cache RCC holotree
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}/robocorp
-          key: rcc-${{ runner.os }}-${{ runner.arch }}-v18.18.1-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml', 'developer/setup_windows_amd64.yaml') }}
+          key: rcc-${{ runner.os }}-${{ runner.arch }}-${{ matrix.lane }}-v${{ matrix.rcc_version }}-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml', 'developer/setup_windows_amd64.yaml') }}
       - name: Install pinned RCC
         shell: bash
         env:
-          RCC_VERSION: 18.18.1
+          RCC_VERSION: ${{ matrix.rcc_version }}
           RCC_ASSET: ${{ matrix.asset }}
           RCC_SHA256: ${{ matrix.sha256 }}
         run: |

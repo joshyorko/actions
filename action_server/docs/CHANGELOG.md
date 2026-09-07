@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixes
+
+- Updated the primary Action Server RCC integration to `joshyorko/rcc` `v18.19.3`; the developer toolkit retains an explicit `v18.18.1` N-1 CI lane.
+
 ## 1.2.7 - 2026-08-05
 
 ### Fixes

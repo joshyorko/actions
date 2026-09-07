@@ -2,6 +2,7 @@ import asyncio
 import logging
 import os
 import socket
+import threading
 import typing
 from contextlib import asynccontextmanager
 from functools import partial
@@ -19,6 +20,59 @@ if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
 log = logging.getLogger(__name__)
+
+
+_reload_generation_lock = threading.RLock()
+
+
+def _reload_action_generation(action_routes, actions_process_pool, actions, packages):
+    """Atomically commit a prepared process and HTTP/MCP route generation."""
+    from copy import copy
+
+    from ._app import get_app
+
+    with _reload_generation_lock:
+        app = get_app()
+        old_packages = action_routes.action_package_id_to_action_package
+        old_actions = action_routes.actions
+        old_routes = list(app.router.routes)
+        old_route_state = dict(action_routes.__dict__)
+        old_process_generation = getattr(actions_process_pool, "generation", None)
+        helper = action_routes.mcp_server_setup_helper
+        old_helper_state = {
+            key: copy(value)
+            for key, value in helper.__dict__.items()
+            if key.startswith("_")
+        }
+        pool_committed = False
+        try:
+            actions_process_pool.on_reload(packages, actions)
+            pool_committed = True
+            old_generation = getattr(action_routes, "_process_pool_generation", 0)
+            action_routes._process_pool_generation = getattr(
+                actions_process_pool,
+                "generation",
+                old_generation + 1,
+            )
+            action_routes.unregister_http_actions()
+            action_routes.register_actions()
+        except BaseException:
+            app.router.routes[:] = old_routes
+            action_routes.__dict__.clear()
+            action_routes.__dict__.update(old_route_state)
+            helper.__dict__.update(old_helper_state)
+            if pool_committed:
+                try:
+                    actions_process_pool.on_reload(old_packages, old_actions)
+                    if old_process_generation is not None:
+                        restore_generation = getattr(
+                            actions_process_pool, "restore_generation", None
+                        )
+                        if restore_generation is not None:
+                            restore_generation(old_process_generation)
+                except BaseException:
+                    log.exception("Unable to roll back the process generation reload.")
+            raise
 
 
 class _ConfiguredAPIKeyMiddleware:
@@ -410,7 +464,7 @@ def start_server(
                 True if the reload was successful and False otherwise.
             """
             from actions.server._cli_impl import _import_actions
-            from actions.server._models import get_db
+            from actions.server._models import Action, ActionPackage, get_db
             from actions.server._server_websockets import report_mtime_changed
 
             db = get_db()
@@ -433,14 +487,21 @@ def start_server(
                     )
                     return False
 
-                action_routes.unregister_actions()
-                action_routes.register_actions()
-
                 actions_process_pool = _actions_process_pool.get_actions_process_pool()
-                actions_process_pool.on_reload(
-                    action_routes.action_package_id_to_action_package,
-                    action_routes.actions,
-                )
+                next_packages = {
+                    package.id: package for package in db.all(ActionPackage)
+                }
+                next_actions = db.all(Action)
+                try:
+                    _reload_action_generation(
+                        action_routes,
+                        actions_process_pool,
+                        next_actions,
+                        next_packages,
+                    )
+                except BaseException:
+                    log.exception("Unable to commit action generation reload.")
+                    return False
                 app.update_mtime_uuid()
                 assert _LoopHolder.loop is not None
                 report_mtime_changed(_LoopHolder.loop)
