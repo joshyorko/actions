@@ -660,7 +660,8 @@ action_server/.venv/bin/python -m pytest -q \
 action_server/tests/action_server_tests/test_rcc_runtime_adapter.py -m real_rcc
 ```
 
-Record the exact digest, Action result, and wrapper receipt from that run; a
+Record the exact provider-generated digest, Action result, and wrapper receipt
+from that run; do not reuse a digest from another disposable provider root. A
 mocked parser or RCC health/version check is not acceptance evidence.
 RCC v18.19.2 materializes `env exec` children with the artifact as their
 current directory, so import/discovery must pass the package source directory
