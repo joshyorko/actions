@@ -116,7 +116,7 @@ def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_pa
         runner=runner,
     )
 
-    assert [call[2] for call in calls] == ["publish", "acquire", "acquire"]
+    assert [call[2] for call in calls] == ["publish", "acquire"]
     assert first.artifact_digest == second.artifact_digest == digest
     assert second.source_generation == "source-2"
 
@@ -157,6 +157,40 @@ def test_cached_artifact_is_revalidated_and_rebuilt_when_materialization_disappe
         "publish",
         "acquire",
     ]
+
+
+def test_non_materialization_acquire_failure_does_not_replace_pinned_identity(
+    tmp_path,
+):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        RccRuntimeError,
+        environment_spec_fingerprint,
+        prepare_runtime,
+    )
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    digest = "sha256:" + "c" * 64
+    calls = []
+    previous = RccRuntimeDescriptor(
+        artifact_digest=digest,
+        environment_fingerprint=environment_spec_fingerprint(package_yaml),
+    )
+
+    def runner(*args):
+        calls.append(args)
+        return 1, "", "permission denied by provider"
+
+    with pytest.raises(RccRuntimeError, match="acquire"):
+        prepare_runtime(
+            package_yaml,
+            Path("/opt/rcc"),
+            previous_descriptor=previous,
+            runner=runner,
+        )
+
+    assert [call[2] for call in calls] == ["acquire"]
 
 
 def test_environment_change_does_not_reuse_cached_artifact(tmp_path):
@@ -976,7 +1010,7 @@ dependencies:
     )
     action_file = package_dir / "action.py"
     action_file.write_text(
-        "from actions import action\n\n@action\ndef answer() -> str:\n    return 'rcc-v18.19.2'\n"
+        "from actions import action\n\n@action\ndef answer() -> str:\n    return 'rcc-v18.19.3'\n"
     )
     db = Database(tmp_path / "server.db")
     with db.connect():
@@ -998,7 +1032,7 @@ dependencies:
             assert expected_artifact_digest.startswith("sha256:")
             assert len(expected_artifact_digest) == len("sha256:") + 64
             assert descriptor["kind"] == "rcc"
-            assert descriptor["rcc_version"] == "v18.19.2"
+            assert descriptor["rcc_version"] == "v18.19.3"
             for forbidden in (
                 "PYTHON_EXE",
                 "CONDA_PREFIX",
@@ -1029,7 +1063,7 @@ dependencies:
                         run, package, action, input_json, run_dir, output_file, result_json,
                         {}, {}, False
                     ) == 0
-                    assert json.loads(result_json.read_text())["result"] == "rcc-v18.19.2"
+                    assert json.loads(result_json.read_text())["result"] == "rcc-v18.19.3"
                     receipt = handle._rcc_wrapper.receipt_file
                 assert receipt.exists()
                 parsed_receipt = read_receipt(receipt, expected_artifact_digest)

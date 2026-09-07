@@ -4,7 +4,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 set "scriptPath=%~dp0"
 for %%I in ("%scriptPath%\..\..") do set "repoRoot=%%~fI"
 set "rccPath=%scriptPath%rcc.exe"
-set "rccVersion=v18.18.1"
+set "rccVersion=v18.19.3"
 set "rccUrl=https://github.com/joshyorko/rcc/releases/download/%rccVersion%/rcc-windows64.exe"
 set "task=%~1"
 if not defined task set "task=Bootstrap"

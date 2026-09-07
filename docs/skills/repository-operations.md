@@ -363,6 +363,27 @@ focused and package gates after the ordinary merge.
 
 ## RCC Developer Toolkit
 
+### RCC release acceptance pins
+
+The latest published stable release from `joshyorko/rcc` is `v18.19.3`,
+published 2026-08-28, with tag target
+`4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`; the GitHub release is neither a
+draft nor a prerelease. Direct downloads matched the publisher API digests:
+`rcc-linux64` `7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428`,
+`rcc-macosarm64` `778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266`,
+`rcc-macos64` `e5be77c162946b022f3f244e3506ce353e7016b9b23f1e798c673616c2e99efe`,
+and `rcc-windows64.exe`
+`523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4`.
+
+The primary developer-toolkit matrix uses `v18.19.3` with the Linux, macOS
+arm64, and Windows pins above; its separate N-1 matrix retains `v18.18.1` with the
+published `rcc-linux64`, `rcc-macosarm64`, and `rcc-windows64.exe` digests
+`ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf`,
+`57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d`, and
+`705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b`.
+The Action Server build/downloader and RCC runtime adapter use `v18.19.3`;
+the release-byte receipt does not replace native, provider, or package gates.
+
 ### Repository-owned Action Server templates
 
 The supported Action Server templates are generated from `templates/packaging/templates-prod.json`

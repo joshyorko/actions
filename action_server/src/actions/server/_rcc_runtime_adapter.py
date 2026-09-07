@@ -18,7 +18,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Literal
 
-RCC_VERSION = "v18.19.2"
+RCC_VERSION = "v18.19.3"
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 _ENVIRONMENT_FIELDS = (

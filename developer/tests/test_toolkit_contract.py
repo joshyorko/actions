@@ -54,6 +54,59 @@ def test_toolkit_workflow_cache_tracks_all_environment_configs() -> None:
     assert "'developer/setup_windows_amd64.yaml'" in workflow
 
 
+def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
+    workflow = yaml.safe_load(
+        (
+            REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
+        ).read_text()
+    )
+    entries = workflow["jobs"]["toolkit"]["strategy"]["matrix"]["include"]
+
+    assert {
+        (entry["lane"], entry["os"], entry["asset"], entry["rcc_version"]): entry[
+            "sha256"
+        ]
+        for entry in entries
+    } == {
+        (
+            "primary",
+            "ubuntu-22.04",
+            "rcc-linux64",
+            "18.19.3",
+        ): "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        (
+            "primary",
+            "macos-15",
+            "rcc-macosarm64",
+            "18.19.3",
+        ): "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+        (
+            "primary",
+            "windows-2022",
+            "rcc-windows64.exe",
+            "18.19.3",
+        ): "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        (
+            "n-1",
+            "ubuntu-22.04",
+            "rcc-linux64",
+            "18.18.1",
+        ): "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf",
+        (
+            "n-1",
+            "macos-15",
+            "rcc-macosarm64",
+            "18.18.1",
+        ): "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d",
+        (
+            "n-1",
+            "windows-2022",
+            "rcc-windows64.exe",
+            "18.18.1",
+        ): "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b",
+    }
+
+
 def test_rcc_toolchain_includes_external_test_utilities() -> None:
     setup = yaml.safe_load((TOOLKIT_ROOT / "setup.yaml").read_text())
 
@@ -89,7 +142,7 @@ def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
     batch = (REPOSITORY_ROOT / "devutils" / "bin" / "develop.bat").read_text()
 
     for launcher in (shell, batch):
-        assert "v18.18.1" in launcher
+        assert "v18.19.3" in launcher
         assert "joshyorko/rcc/releases/download" in launcher
         assert "developer" in launcher
         assert "toolkit.yaml" in launcher
@@ -100,7 +153,7 @@ def test_bootstrap_launchers_download_pinned_rcc_and_run_toolkit() -> None:
 
 def test_dispatcher_resolves_repository_root() -> None:
     assert toolkit.REPOSITORY_ROOT == REPOSITORY_ROOT
-    assert toolkit.RCC_VERSION == "v18.18.1"
+    assert toolkit.RCC_VERSION == "v18.19.3"
     assert toolkit.PACKAGES == (
         "actions",
         "actions-http-helper",

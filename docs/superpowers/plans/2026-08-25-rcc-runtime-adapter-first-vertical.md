@@ -9,7 +9,7 @@
 - [x] Route the existing `ProcessHandle` TCP worker through
   `env exec --inherit-streams --receipt-file`, and reap the RCC wrapper after
   cancellation/kill.
-- [x] Update RCC source/build lookup to v18.19.2 and verify the release binary.
+- [x] Update RCC source/build lookup to v18.19.3 and verify the release binary.
 - [x] Run the gated proof with
   `ACTIONS_REAL_RCC_ARTIFACT_TEST=1 poetry run pytest -q
   tests/action_server_tests/test_rcc_runtime_adapter.py -m real_rcc` and record
