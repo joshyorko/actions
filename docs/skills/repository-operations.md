@@ -87,13 +87,15 @@ it uses the intentional system font stack, keeps light and `.dark` token values
 together, and disables authored animation under `prefers-reduced-motion`. The
 Canvas entrypoint must remain free of remote URLs, inline event handlers, and
 inline styles so it can render under an offline, CSP-constrained host. The
-`__tests__/ui-system.test.ts` contract test is included in
-`npm run test:quality` and the hosted workflow for these invariants, and the
-UI component tests cover Radix modal focus isolation/return,
-centering-preserving Dialog animation, and dark muted-text contrast. Do not
-duplicate those adjacent package/workflow edits in the #97 UI lane. These local
-contracts do not replace real-browser accessibility, responsive, contrast, or
-screenshot verification.
+`__tests__/ui-system.test.ts` contract test is a local fast regression gate
+for these invariants, and the UI component tests cover Radix modal focus
+isolation/return, centering-preserving Dialog animation, and dark muted-text
+contrast. Run those tests explicitly with Vitest; `ui-system.test.ts` is not
+yet part of `npm run test:quality` or the hosted workflow because that command
+and workflow integration belong to #98/PR #115. Do not duplicate those
+adjacent package/workflow edits in the #97 UI lane. These local contracts do
+not replace real-browser accessibility, responsive, contrast, or screenshot
+verification.
 
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
@@ -116,9 +118,6 @@ identifies each artifact, so a passing Runtime check cannot hide an unscanned
 or failed Canvas artifact. Contract fixtures that exercise this task must model
 release artifacts with bound manifests and retained SBOM files; bare HTML or
 JavaScript directories are intentionally rejected in this strict path.
-The standalone Python validator likewise rejects a non-directory path whenever
-release identity and content type are bound; this prevents a clean single file
-from bypassing manifest, inventory, and SBOM checks.
 
 The `validate-artifact` Invoke task prepends `action_server/build-binary` to
 `sys.path` and imports `artifact_validator` as a top-level module. Its helper
@@ -479,7 +478,9 @@ instead of exercising their documented `./output` default. `ToolkitTest` runs Ru
 pytest against the gateway itself; the full `Test` task runs it first and also covers
 `devutils`, whose package does not provide an Invoke task collection. The RCC toolchain
 includes pinned `jq` because the devutils workflow-contract suite executes its admission
-filters. The generic environment pins `jq=1.7.1`; Windows amd64 selects the preceding
+filters. The generic environment pins `jq=1.7.1`. Its Node pin is `nodejs=20.19.0`,
+matching the frontend package's `engines.node` lower bound; Windows amd64 must keep the
+same Node version while selecting the preceding
 `setup_windows_amd64.yaml` through RCC's OS/architecture filename matching and uses
 conda-forge's Windows-native `m2w64-jq=1.6`. Keep every platform-specific environment
 configuration in the workflow's RCC holotree cache hash so dependency changes invalidate

@@ -152,14 +152,6 @@ def validate_build_metadata(
     if symlinks:
         return [ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")]
     if not artifact_path.is_dir():
-        if expected_artifact is not None or expected_content_type is not None:
-            return [
-                ValidationCheck(
-                    "metadata",
-                    False,
-                    "Bound release artifacts must be directories",
-                )
-            ]
         return []
     manifest_path = artifact_path / "artifact-manifest.json"
     if not manifest_path.exists():

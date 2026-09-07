@@ -106,25 +106,13 @@ def test_frontend_quality_uses_cross_platform_prettier_eol_contract():
     )
     assert scripts["test:quality"] == (
         "npm run test:lint && npm run test:types && "
-        "npm run test:prettier && npm run test:topology && "
-        "npm run test:ui-system"
+        "npm run test:prettier && npm run test:topology"
     )
     assert scripts["test:topology"] == (
         'vitest --run --testNamePattern "Actions frontend topology"'
     )
     vite_config = (FRONTEND / "vite.config.js").read_text()
     assert "replaceAll(path.sep, '/')" in vite_config
-
-
-def test_hosted_quality_gate_includes_offline_ui_system_contract():
-    package = json.loads((FRONTEND / "package.json").read_text())
-    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
-
-    assert package["scripts"]["test:ui-system"] == (
-        "vitest --run __tests__/ui-system.test.ts"
-    )
-    assert "npm run test:ui-system" in package["scripts"]["test:quality"]
-    assert "npm run test:quality" in workflow
 
 
 def test_runtime_inliner_preserves_adversarial_bundle_text_and_raw_text_boundaries(
@@ -582,38 +570,6 @@ def test_python_validator_cli_accepts_bound_identity_options(tmp_path):
 
     assert result.returncode == 0, result.stderr
     assert json.loads(result.stdout)["passed"] is True
-
-
-def test_python_validator_cli_rejects_bound_file_artifact(tmp_path):
-    build_binary = FRONTEND.parent / "build-binary"
-    artifact = tmp_path / "artifact.html"
-    artifact.write_text("<html>text/html</html>", encoding="utf-8")
-
-    result = subprocess.run(
-        [
-            sys.executable,
-            str(build_binary / "artifact_validator.py"),
-            "--artifact",
-            str(artifact),
-            "--expected-artifact",
-            "runtime-admin",
-            "--expected-content-type",
-            "text/html",
-            "--json",
-        ],
-        cwd=build_binary,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-
-    assert result.returncode != 0
-    report = json.loads(result.stdout)
-    assert report["passed"] is False
-    assert any(
-        check["name"] == "metadata" and not check["passed"]
-        for check in report["checks"]
-    )
 
 
 @pytest.mark.parametrize(

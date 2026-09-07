@@ -60,6 +60,20 @@ def test_rcc_toolchain_includes_external_test_utilities() -> None:
     assert "jq=1.7.1" in setup["dependencies"]
 
 
+def test_toolchain_node_version_satisfies_frontend_engine() -> None:
+    package = yaml.safe_load(
+        (REPOSITORY_ROOT / "action_server" / "frontend" / "package.json").read_text()
+    )
+    setup = yaml.safe_load((TOOLKIT_ROOT / "setup.yaml").read_text())
+    windows_setup = yaml.safe_load(
+        (TOOLKIT_ROOT / "setup_windows_amd64.yaml").read_text()
+    )
+
+    assert package["engines"]["node"] == ">=20.19.0"
+    assert "nodejs=20.19.0" in setup["dependencies"]
+    assert "nodejs=20.19.0" in windows_setup["dependencies"]
+
+
 def test_ci_verifies_bootstrap_environment_isolation() -> None:
     workflow = (
         REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml"
