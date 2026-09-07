@@ -222,6 +222,7 @@ class ArgumentsNamespaceStart(ArgumentsNamespaceBaseImportOrStart):
     parent_pid: int
     port: bool
     server_url: str
+    cors_allow_origins: Sequence[str]
     https: bool
     ssl_self_signed: bool
     ssl_keyfile: str

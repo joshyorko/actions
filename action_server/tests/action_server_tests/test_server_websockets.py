@@ -208,7 +208,10 @@ def test_configured_api_key_protects_websocket(
         cwd=get_in_resources("no_conda", "greeter"),
         actions_sync=True,
         db_file="server.db",
-        additional_args=["--api-key=Foo"],
+        additional_args=[
+            "--api-key=Foo",
+            "--cors-allow-origin=http://allowed.example",
+        ],
     )
 
     async def probe():
@@ -224,6 +227,15 @@ def test_configured_api_key_protects_websocket(
             async with websockets.connect(
                 url,
                 additional_headers={"Authorization": "Bearer wrong"},
+                open_timeout=_get_timeout(),
+            ):
+                pass
+
+        with pytest.raises(InvalidStatus):
+            async with websockets.connect(
+                url,
+                origin="http://denied.example",
+                additional_headers={"Authorization": "Bearer Foo"},
                 open_timeout=_get_timeout(),
             ):
                 pass
@@ -248,6 +260,7 @@ def test_configured_api_key_protects_websocket(
 
         async with websockets.connect(
             url,
+            origin="http://allowed.example:80",
             additional_headers={"Authorization": "Bearer Foo"},
             open_timeout=_get_timeout(),
         ) as ws:

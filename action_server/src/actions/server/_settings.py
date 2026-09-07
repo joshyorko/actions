@@ -5,7 +5,8 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
-from typing import Iterator, Optional
+from typing import Iterator, Optional, Sequence
+from urllib.parse import urlsplit
 
 from termcolor import colored
 
@@ -42,6 +43,74 @@ OPENAPI_SPEC_IS_CONSEQUENTIAL = "x-openai-isConsequential"
 OPENAPI_SPEC_OPERATION_KIND = "x-operation-kind"
 
 log = logging.getLogger(__name__)
+
+_DEFAULT_ORIGIN_PORTS = {"http": 80, "https": 443}
+
+
+@dataclass(frozen=True, slots=True)
+class _ParsedOrigin:
+    scheme: str
+    hostname: str
+    port: int
+
+
+def _parse_origin(origin: str) -> _ParsedOrigin:
+    if not isinstance(origin, str) or not origin or origin != origin.strip():
+        raise ValueError("Invalid CORS origin.")
+    if origin.lower() == "null" or any(
+        character.isspace() or ord(character) < 0x20 or ord(character) == 0x7F
+        for character in origin
+    ):
+        raise ValueError("Invalid CORS origin.")
+    if "?" in origin or "#" in origin or "\\" in origin:
+        raise ValueError("Invalid CORS origin.")
+
+    try:
+        parsed = urlsplit(origin)
+        scheme = parsed.scheme.lower()
+        if scheme not in _DEFAULT_ORIGIN_PORTS:
+            raise ValueError("Invalid CORS origin.")
+        if (
+            not parsed.netloc
+            or parsed.username is not None
+            or parsed.password is not None
+        ):
+            raise ValueError("Invalid CORS origin.")
+        if parsed.path:
+            raise ValueError("Invalid CORS origin.")
+        hostname = parsed.hostname
+        if not hostname or "%" in parsed.netloc:
+            raise ValueError("Invalid CORS origin.")
+        if parsed.netloc.endswith(":"):
+            raise ValueError("Invalid CORS origin.")
+        port = parsed.port
+    except (ValueError, UnicodeError) as error:
+        raise ValueError("Invalid CORS origin.") from error
+
+    return _ParsedOrigin(
+        scheme=scheme,
+        hostname=hostname.lower(),
+        port=port if port is not None else _DEFAULT_ORIGIN_PORTS[scheme],
+    )
+
+
+class OriginPolicy:
+    """Allow only explicitly configured, parsed browser origins."""
+
+    def __init__(self, origins: Sequence[str] = ()) -> None:
+        self._allowed = frozenset(_parse_origin(origin) for origin in origins)
+
+    def allows(self, origin: str) -> bool:
+        try:
+            return _parse_origin(origin) in self._allowed
+        except ValueError:
+            return False
+
+
+def validate_cors_origins(origins: Sequence[str]) -> tuple[str, ...]:
+    """Validate configured origins without including their values in errors."""
+    OriginPolicy(origins)
+    return tuple(origins)
 
 
 def _get_redis_url_from_env() -> Optional[str]:
@@ -227,6 +296,7 @@ class Settings:
     database_url: Optional[str] = None
     expose_provider: str = "auto"
     server_url: str = "<generated -- i.e.: http://localhost:8080>"
+    cors_allow_origins: tuple[str, ...] = ()
 
     min_processes: int = 2
     max_processes: int = 20
@@ -331,6 +401,7 @@ class Settings:
             "ssl_certfile",
             "oauth2_settings",
             "expose_provider",
+            "cors_allow_origins",
             # Distributed mode (Redis)
             "redis_url",
             "redis_password",
@@ -341,6 +412,15 @@ class Settings:
             assert hasattr(settings, attr)
             if hasattr(args, attr):
                 setattr(settings, attr, getattr(args, attr))
+
+        try:
+            settings.cors_allow_origins = validate_cors_origins(
+                settings.cors_allow_origins
+            )
+        except ValueError as error:
+            raise ActionServerValidationError(
+                "Invalid --cors-allow-origin value."
+            ) from error
 
         if settings.artifact_storage_backend == "shared-filesystem":
             if settings.artifact_storage_root is None:

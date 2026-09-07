@@ -18,6 +18,16 @@ log = logging.getLogger(__name__)
 websocket_api_router = APIRouter(prefix="/api/ws")
 
 
+async def verify_websocket_origin(websocket: WebSocket) -> None:
+    origin = websocket.headers.get("origin")
+    if origin is not None and not websocket.scope[
+        "app"
+    ].state.cors_origin_policy.allows(origin):
+        from fastapi import WebSocketException
+
+        raise WebSocketException(code=1008)
+
+
 class SocketServer:
     """
     Websocket acting as a server with a socket.io-like API.

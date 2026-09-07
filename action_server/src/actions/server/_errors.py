@@ -5,7 +5,6 @@ from typing import Any, Dict, Union
 
 from fastapi import status
 from fastapi.exceptions import HTTPException, RequestValidationError
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.constants import REF_PREFIX
 from fastapi.openapi.utils import validation_error_response_definition
 from fastapi.requests import Request
@@ -104,23 +103,14 @@ async def http500_error_handler(
     )
 
     # CORSMiddleware is not used for unhandled server exceptions
-    # in FastAPI/Starlette, so we set it manually here
+    # in FastAPI/Starlette, so we set allowed headers manually here.
     origin = request.headers.get("origin")
-    if origin:
-        cors = CORSMiddleware(
-            app=request.app,
-            allow_origins=["*"],
-            allow_methods=["*"],
-            allow_headers=["*"],
-            allow_credentials=True,
-            expose_headers=["X-Request-ID"],
-        )
-        response.headers.update(cors.simple_headers)
-        if cors.allow_all_origins and "cookie" in request.headers:
-            response.headers["Access-Control-Allow-Origin"] = origin
-        elif not cors.allow_all_origins and cors.is_allowed_origin(origin=origin):
-            response.headers["Access-Control-Allow-Origin"] = origin
-            response.headers.add_vary_header("Origin")
+    origin_policy = getattr(request.app.state, "cors_origin_policy", None)
+    if origin and origin_policy is not None and origin_policy.allows(origin):
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Expose-Headers"] = "X-Request-ID"
+        response.headers.add_vary_header("Origin")
 
     return response
 
