@@ -636,16 +636,16 @@ in the RCC adapter focused test module.
 The provisional adapter classifies reload inputs from normalized environment
 fields (`spec-version`, dependency sets, and post-install commands), not from
 the entire package descriptor. A source-only change therefore reuses the
-verified Artifact descriptor without republishing or rebuilding while
-refreshing the source generation; the cached identity is revalidated through
-RCC acquire. If RCC reports a command-level missing materialization, the
-adapter publishes and validates a replacement identity. Identity or
-verification mismatches remain fail-closed. Environment changes use a distinct
-fingerprint and reacquire beside the old generation. The process pool stages
-new workers before committing routing, marks running old-generation workers
-non-reusable only after successful warmup, and restores the old routing/idle
-generation if preparation fails; old workers remain leased until their call
-completes and the wrapper is reaped.
+verified in-process Artifact descriptor without republishing or reacquiring
+while refreshing the source generation. A persisted descriptor on restart is
+reacquired by exact digest. Only the explicit RCC `not materialized` acquire
+failure permits publishing and validating a replacement identity; permission,
+provider, identity, and verification failures remain fail-closed. Environment
+changes use a distinct fingerprint and reacquire beside the old generation.
+The process pool stages new workers before committing routing, marks running
+old-generation workers non-reusable only after successful warmup, and restores
+the old routing/idle generation if preparation fails; old workers remain leased
+until their call completes and the wrapper is reaped.
 
 Auto-reload prepares the process generation before changing HTTP/MCP action
 routes. Route and pool updates are serialized as one generation transition;

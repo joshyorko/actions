@@ -113,6 +113,7 @@ def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_pa
         package_yaml,
         Path("/opt/rcc"),
         source_generation="source-2",
+        previous_descriptor=first,
         runner=runner,
     )
 

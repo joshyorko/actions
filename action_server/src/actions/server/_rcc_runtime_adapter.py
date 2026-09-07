@@ -197,10 +197,7 @@ def _run_json(phase: str, args: Sequence[str], runner: Runner = _subprocess_runn
     code, stdout, stderr = runner(*args)
     if code:
         detail = (stderr or stdout).strip().splitlines()[-1:] or ["command failed"]
-        # A command-level failure (for example, a missing local materialization)
-        # may be recovered by publishing a fresh artifact.  Identity and
-        # verification failures below remain non-retryable and fail closed.
-        raise RccRuntimeError(phase, detail[0][:400], retryable=True)
+        raise RccRuntimeError(phase, detail[0][:400])
     try:
         loaded = json.loads(stdout)
     except (TypeError, ValueError, json.JSONDecodeError) as exc:
@@ -226,7 +223,12 @@ def acquire_artifact(artifact_digest: str, rcc_location: Path, *, provider: str 
     ]
     if provider:
         args.extend(["--provider", provider])
-    result = _run_json("acquire", args, runner)
+    try:
+        result = _run_json("acquire", args, runner)
+    except RccRuntimeError as exc:
+        if "not materialized" in str(exc).casefold():
+            raise RccRuntimeError("acquire", str(exc), retryable=True) from exc
+        raise
     returned = parse_artifact_digest(result)
     if returned != artifact_digest:
         raise RccRuntimeError("acquire", "RCC returned a different artifact identity")
@@ -251,6 +253,27 @@ def prepare_runtime(
     source_hash = source_generation
     if source_hash == "unknown":
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
+    with _prepared_runtime_cache_lock:
+        cached = _prepared_runtime_cache.get(cache_key)
+    if (
+        cached is not None
+        and source_generation != "unknown"
+        and source_generation != cached[1].source_generation
+    ):
+        cached_descriptor = cached[1]
+        descriptor = RccRuntimeDescriptor(
+            artifact_digest=cached_descriptor.artifact_digest,
+            source_generation=source_generation,
+            source_hash=source_hash,
+            environment_fingerprint=environment_fingerprint,
+            preparation_class="source-reuse",
+            rcc_version=cached_descriptor.rcc_version,
+            runtime_kind=cached_descriptor.runtime_kind,
+            contract_version=cached_descriptor.contract_version,
+        )
+        with _prepared_runtime_cache_lock:
+            _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
+        return descriptor
     if (
         previous_descriptor is not None
         and previous_descriptor.environment_fingerprint == environment_fingerprint
@@ -290,8 +313,6 @@ def prepare_runtime(
         with _prepared_runtime_cache_lock:
             _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
         return descriptor
-    with _prepared_runtime_cache_lock:
-        cached = _prepared_runtime_cache.get(cache_key)
     if cached is not None:
         _, descriptor = cached
         try:
