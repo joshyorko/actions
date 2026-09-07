@@ -278,13 +278,6 @@ def start_server(
 
     artifacts_dir = get_artifact_storage().root
 
-    _mount_artifact_static_files(
-        app,
-        settings.artifact_storage_backend,
-        artifacts_dir,
-        api_key=api_key,
-    )
-
     def verify_api_key(
         token: HTTPAuthorizationCredentials = Security(HTTPBearer(auto_error=True)),
     ) -> HTTPAuthorizationCredentials:
@@ -518,7 +511,22 @@ def start_server(
             session.response = response
         return response
 
-    index_routes = ["/", "/runs/{full_path:path}", "/actions/{full_path:path}"]
+    async def serve_artifact_index(request: Request, run_id: str):
+        if run_id.startswith("."):
+            return PlainTextResponse("Not Found", status_code=404)
+        return await serve_index(request)
+
+    index_routes = [
+        "/",
+        "/overview",
+        "/actions/{full_path:path}",
+        "/runs/{full_path:path}",
+        "/schedules",
+        "/robots",
+        "/work-items",
+        "/analytics",
+        "/logs/{full_path:path}",
+    ]
     for index_route in index_routes:
         app.add_api_route(
             index_route,
@@ -526,6 +534,20 @@ def start_server(
             response_class=HTMLResponse,
             include_in_schema=settings.full_openapi_spec,
         )
+
+    app.add_api_route(
+        "/artifacts/{run_id}",
+        serve_artifact_index,
+        response_class=HTMLResponse,
+        include_in_schema=settings.full_openapi_spec,
+    )
+
+    _mount_artifact_static_files(
+        app,
+        settings.artifact_storage_backend,
+        artifacts_dir,
+        api_key=api_key,
+    )
 
     # At this point the FastAPI app should be configured. What's missing now
     # is setup callbacks related to the startup and actuall start the async
