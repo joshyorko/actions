@@ -37,6 +37,83 @@ def test_static_artifacts_preserve_file_and_range_responses(tmp_path):
     assert response.headers["content-range"] == "bytes 2-5/10"
 
 
+def test_configured_static_artifacts_require_auth_and_are_run_scoped(tmp_path):
+    storage = create_artifact_storage("local", tmp_path)
+    storage.create_run_artifacts_dir("runs/run-a")
+    storage.write_text("runs/run-a", "payload.txt", "authorized artifact")
+    (tmp_path / "unrelated.txt").write_text("outside run", encoding="utf-8")
+    outside = tmp_path / "outside.txt"
+    outside.write_text("outside root", encoding="utf-8")
+    (tmp_path / "runs" / "run-a" / "linked.txt").symlink_to(outside)
+    storage.bind_run(
+        "run-a",
+        "runs/run-a",
+        {"id": "run-a", "relative_artifacts_dir": "runs/run-a"},
+    )
+
+    app = FastAPI()
+    _mount_artifact_static_files(app, "local", tmp_path, api_key="secret")
+    client = TestClient(app)
+
+    response = client.get("/artifacts/run-a/payload.txt")
+    assert response.status_code == 403
+
+    response = client.get(
+        "/artifacts/run-a/payload.txt",
+        headers={"Authorization": "Bearer secret"},
+    )
+    assert response.status_code == 200
+    assert response.text == "authorized artifact"
+
+    for headers in (
+        [("Authorization", "Bearer secret"), ("Authorization", "Bearer wrong")],
+        [("Authorization", "Bearer wrong"), ("Authorization", "Bearer secret")],
+    ):
+        assert (
+            client.get("/artifacts/run-a/payload.txt", headers=headers).status_code
+            == 403
+        )
+
+    assert client.head("/artifacts/run-a/payload.txt").status_code == 403
+    assert (
+        client.head(
+            "/artifacts/run-a/payload.txt",
+            headers={"Authorization": "Bearer wrong"},
+        ).status_code
+        == 403
+    )
+    assert (
+        client.head(
+            "/artifacts/run-a/payload.txt",
+            headers={"Authorization": "Bearer secret"},
+        ).status_code
+        == 200
+    )
+
+    assert (
+        client.get(
+            "/artifacts/run-a/payload.txt",
+            headers={"Authorization": "Bearer wrong"},
+        ).status_code
+        == 403
+    )
+    for path in (
+        "/artifacts/unrelated.txt",
+        "/artifacts/run-a/../unrelated.txt",
+        "/artifacts/run-a/linked.txt",
+    ):
+        assert (
+            client.get(path, headers={"Authorization": "Bearer secret"}).status_code
+            == 404
+        )
+
+    response = client.get(
+        "/artifacts/.action-server-run-bindings.json",
+        headers={"Authorization": "Bearer secret"},
+    )
+    assert response.status_code == 404
+
+
 def test_shared_static_artifacts_are_unavailable(tmp_path):
     (tmp_path / "run-a").mkdir()
     (tmp_path / "run-a" / "payload.bin").write_bytes(b"shared artifact")
