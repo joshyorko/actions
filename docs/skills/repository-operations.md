@@ -397,6 +397,14 @@ links/special files, and atomically renamed into the robot root; failed copies
 are removed before a response is returned. These limits and policies are the
 immediate importer boundary, not the later immutable Package Revision/compiler
 acceptance in #148.
+The URL importer validates the caller-supplied URL before converting GitHub
+repository shorthand, so credentials and fragments cannot be discarded by
+normalization. Its DNS check remains a pre-request address-policy check; the
+mocked URL tests are not proof that the HTTP connection is pinned against DNS
+rebinding, so real URL/SSRF acceptance remains a separate gate. In the RCC
+developer toolkit, Linux `Package task smoke (Linux)` must pass before
+`Build and verify community binary (Linux)` can run; a package-test failure
+therefore leaves the frozen/native gate skipped rather than failed.
 
 The clean-break prerequisites can merge before the Runtime migration. During
 that split, `actions-core` owns `actions/__init__.py` and includes `actions.mcp`,

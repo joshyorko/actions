@@ -676,6 +676,10 @@ async def _download_from_url(url: str) -> tuple[bool, str, Optional[Path]]:
     except ValueError:
         return False, "Robot download URL is invalid", None
 
+    valid_url, message = _validate_download_url(url)
+    if not valid_url:
+        return False, message, None
+
     if parsed_hostname in {"github.com", "www.github.com"}:
         path_parts = parsed.path.strip("/").split("/")
         if len(path_parts) >= 2:

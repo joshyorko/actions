@@ -395,9 +395,7 @@ def test_robot_upload_rejects_actual_bytes_above_limit(
 
     assert response.success is False
     assert "limit" in response.message.lower() or "large" in response.message.lower()
-    assert not (tmp_path / "robots").exists() or not any(
-        (tmp_path / "robots").iterdir()
-    )
+    assert not (tmp_path / "robots").exists()
 
 
 def test_url_download_streams_and_validates_each_redirect(
@@ -447,6 +445,55 @@ def test_url_download_rejects_private_destination_before_request(
         or "private" in message.lower()
     )
     assert not _FakeHTTPXClient.instances
+
+
+def test_url_download_preserves_valid_github_repository_normalization(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    _fake_httpx2(monkeypatch)
+    _allow_test_download_host(monkeypatch)
+    source = "https://github.com/owner/repo"
+    normalized = "https://github.com/owner/repo/archive/refs/heads/main.zip"
+    _FakeHTTPXClient.responses = {
+        normalized: _FakeResponse(
+            200,
+            headers={"content-type": "application/zip"},
+            chunks=(b"PK", b"\x03\x04payload"),
+        )
+    }
+    monkeypatch.setattr(_api_robots.tempfile, "gettempdir", lambda: str(tmp_path))
+
+    success, message, downloaded = asyncio.run(_api_robots._download_from_url(source))
+
+    assert success is True, message
+    assert downloaded is not None
+    assert _FakeHTTPXClient.instances[0].urls == [normalized]
+    downloaded.unlink()
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://user:secret@github.com/owner/repo",
+        "https://github.com/owner/repo#fragment",
+    ],
+)
+def test_url_download_rejects_unsafe_original_github_url(
+    monkeypatch: pytest.MonkeyPatch, url: str
+) -> None:
+    from actions.server import _api_robots
+
+    _fake_httpx2(monkeypatch)
+    _allow_test_download_host(monkeypatch)
+
+    success, message, downloaded = asyncio.run(_api_robots._download_from_url(url))
+
+    assert success is False
+    assert downloaded is None
+    assert not _FakeHTTPXClient.instances
+    assert "url" in message.lower() or "credential" in message.lower()
 
 
 @pytest.mark.parametrize(
