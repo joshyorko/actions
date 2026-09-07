@@ -12,7 +12,7 @@
 # and rerun the script).
 
 
-name: Action Server PYPI Release
+name: Actions Runtime PYPI Release
 permissions:
   contents: read
 'on':
@@ -27,6 +27,7 @@ permissions:
     - .github/workflows/actions_runtime_pypi_release.yml
     - .github/workflows/actions_runtime_binary_release.yml
     - .github/workflows/actions_runtime_manylinux_release.yml
+    - devutils/tests/test_actions_runtime_release_line.py
     - devutils/tests/test_runtime_release_workflows.py
     - docs/skills/repository-operations.md
     - action_server/scripts/publish_verified_runtime.py
@@ -236,6 +237,8 @@ jobs:
 
         git merge-base --is-ancestor "$GITHUB_SHA" origin/community
 
+        test "$(git rev-parse "$GITHUB_SHA^{commit}")" = "$(git rev-parse origin/community)"
+
         tag_version=${GITHUB_REF_NAME#actions-runtime-}
 
         cd action_server
@@ -293,8 +296,9 @@ jobs:
       if: github.event_name == 'push'
       env:
         RUNTIME_TOKEN: ${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}
-      run: if [[ -n "${RUNTIME_TOKEN:-}" ]]; then echo 'enabled=true' >> "$GITHUB_OUTPUT";
-        else echo 'enabled=false' >> "$GITHUB_OUTPUT"; fi
+      run: "set -Eeuo pipefail\nif [[ -z \"${RUNTIME_TOKEN:-}\" ]]; then\n  echo \"\
+        PYPI_TOKEN_ACTIONS_RUNTIME is required for a tagged Actions Runtime release\"\
+        \ >&2\n  exit 1\nfi\necho 'enabled=true' >> \"$GITHUB_OUTPUT\""
     - name: Publish verified artifacts
       if: github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'
       run: uv run --no-project --python ${{ matrix.python }} twine upload action_server/dist/*.whl

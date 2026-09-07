@@ -12,7 +12,7 @@
 # and rerun the script).
 
 
-name: Action Server BINARY Release
+name: Actions Runtime BINARY Release
 permissions:
   contents: read
   id-token: write
@@ -78,6 +78,16 @@ jobs:
     - name: Check tag version
       run: uv run --no-project --python ${{ matrix.python }} poetry run inv check-tag-version
       if: ${{ !endsWith(github.ref_name, '-beta') }}
+    - name: Verify Runtime tag matches current community
+      shell: bash
+      run: 'set -Eeuo pipefail
+
+        git fetch origin community:refs/remotes/origin/community
+
+        test "$(git rev-parse "$GITHUB_SHA^{commit}")" = "$(git rev-parse origin/community)"
+
+        '
+      if: ${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}
     - name: Build frontend
       run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
       env:
@@ -214,31 +224,13 @@ jobs:
         name: action-server-version
         path: action_server/build/
     - name: Put files in s3-drop
-      run: '
-
-        ls -l
-
-        pwd
-
-        ls -l build
-
-        mkdir s3-drop
-
-        mv build/version.txt s3-drop/
-
-        mv build/macos-arm64 s3-drop/
-
-        mv build/linux64 s3-drop/
-
-        mv build/windows64 s3-drop/
-
-        ls -l s3-drop/
-
-        ver=$(cat s3-drop/version.txt)
-
-        echo "actionServerVersion=${ver}" >> "$GITHUB_ENV"
-
-        '
+      run: "\nls -l\npwd\nls -l build\nmkdir s3-drop\nmv build/version.txt s3-drop/\n\
+        mv build/macos-arm64 s3-drop/\nmv build/linux64 s3-drop/\nmv build/windows64\
+        \ s3-drop/\nls -l s3-drop/\nver=$(cat s3-drop/version.txt)\necho \"actionServerVersion=${ver}\"\
+        \ >> \"$GITHUB_ENV\"\nif [[ \"$GITHUB_REF_NAME\" == actions-runtime-* ]];\
+        \ then\n  test \"$ver\" = \"${GITHUB_REF_NAME#actions-runtime-}\"\nfi\ntest\
+        \ \"$(find s3-drop -type f | wc -l)\" -eq 4\ntest -f s3-drop/linux64/action-server\n\
+        test -f s3-drop/macos-arm64/action-server\ntest -f s3-drop/windows64/action-server.exe\n"
     - name: 'Upload artifact: action_server/s3-drop'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
@@ -303,9 +295,9 @@ jobs:
       uses: Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803
       with:
         release_title: ${{ github.ref_name }}
-        changelog_file: action_server/docs/CHANGELOG.md
-        release_text: Binaries available as assets. Run `action-server -h` for usage
-          instructions.
+        changelog_file: action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md
+        release_text: Actions Runtime binaries are available as assets. Run `action-server
+          -h` for usage instructions.
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
@@ -326,6 +318,14 @@ jobs:
         \    echo \"MacOS-arm64:\"\n          ls -l\n          cd ../linux64\n   \
         \       echo \"Linux64:\"\n          ls -l\n          cd ..\n          echo\
         \ \"GitHub ref: ${{ github.ref }}\"\n          "
+    - name: Verify Runtime binary inventory
+      shell: bash
+      run: "set -Eeuo pipefail\nfor pair in   \"linux64/action-server linux64\"  \
+        \ \"macos-arm64/action-server macos-arm64\"   \"windows64/action-server.exe\
+        \ windows64\"; do\n  set -- $pair\n  binary=$1\n  directory=$2\n  test -f\
+        \ \"$binary\"\n  test ! -L \"$binary\"\n  test \"$(find \"$directory\" -mindepth\
+        \ 1 -maxdepth 1 | wc -l)\" -eq 1\ndone\nsha256sum linux64/action-server macos-arm64/action-server\
+        \ windows64/action-server.exe | sort > runtime-binary-manifest.sha256\n"
     - name: Upload Linux binary
       uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd
       with:

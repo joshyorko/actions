@@ -12,7 +12,7 @@
 # and rerun the script).
 
 
-name: Action Server Runtime Recovery
+name: Actions Runtime Recovery
 permissions:
   contents: read
   actions: read
