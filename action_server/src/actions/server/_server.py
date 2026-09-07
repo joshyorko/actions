@@ -240,6 +240,7 @@ def start_server(
     from ._api_triggers import public_triggers_api_router, triggers_api_router
     from ._api_work_items import work_items_api_router
     from ._app import get_app
+    from ._database import redact_database_url
     from ._server_websockets import websocket_api_router
     from ._settings import get_settings
 
@@ -261,6 +262,10 @@ def start_server(
     )
 
     settings_dict = asdict(settings)
+    if settings_dict["database_url"] is not None:
+        settings_dict["database_url"] = redact_database_url(
+            settings_dict["database_url"]
+        )
     settings_str = "\n".join(f"    {k} = {v!r}" for k, v in settings_dict.items())
     log.debug(f"Starting server. Settings:\n{settings_str}")
 

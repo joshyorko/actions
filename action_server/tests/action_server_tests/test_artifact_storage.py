@@ -135,6 +135,19 @@ def test_local_storage_creates_and_reads_run_artifacts(tmp_path):
     assert storage.read_bytes("run-a", "nested/data.bin") == b"binary"
 
 
+def test_default_local_storage_creates_missing_artifacts_root(tmp_path, monkeypatch):
+    from actions.server import _artifact_storage, _settings
+    from actions.server._settings import Settings
+
+    settings = Settings(datadir=tmp_path, artifacts_dir=tmp_path / "artifacts")
+    monkeypatch.setattr(_settings, "_global_settings", settings)
+
+    storage = _artifact_storage.get_artifact_storage()
+
+    assert storage.root == tmp_path / "artifacts"
+    assert storage.root.is_dir()
+
+
 def test_shared_storage_requires_a_root_and_is_selected_explicitly(tmp_path):
     with pytest.raises(ArtifactStorageConfigurationError):
         create_artifact_storage("shared-filesystem", None)

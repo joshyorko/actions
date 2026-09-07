@@ -168,7 +168,7 @@ class SchedulerEngine:
                 Schedule,
                 """
                 SELECT * FROM schedule
-                WHERE enabled = 1
+                WHERE enabled = TRUE
                   AND next_run_at IS NOT NULL
                   AND next_run_at <= ?
                 ORDER BY priority DESC, next_run_at ASC
@@ -184,7 +184,59 @@ class SchedulerEngine:
                     f"Error processing schedule {schedule.id} ({schedule.name})"
                 )
 
-    async def _process_schedule(self, schedule: "Schedule", now: datetime) -> None:
+    async def _process_schedule(
+        self, schedule: "Schedule", now: datetime
+    ) -> None:
+        """Claim a schedule across PostgreSQL Runtime processes before processing it."""
+        from actions.server._database import datetime_to_str
+        from actions.server._models import Schedule, get_db
+
+        db = get_db()
+        if db.backend_name != "postgresql":
+            await self._process_schedule_claimed(schedule, now)
+            return
+
+        with db.try_claim_schedule(schedule.id) as claim:
+            if not claim:
+                return
+            claim.ensure_alive()
+
+            with db.connect():
+                try:
+                    schedule = db.first(
+                        Schedule,
+                        """
+                        SELECT * FROM schedule
+                        WHERE id = ?
+                          AND enabled = TRUE
+                          AND next_run_at IS NOT NULL
+                          AND next_run_at <= ?
+                        """,
+                        [schedule.id, datetime_to_str(now)],
+                    )
+                except KeyError:
+                    return
+
+            process_task = asyncio.create_task(
+                self._process_schedule_claimed(schedule, now, claim)
+            )
+            claim_lost_task = asyncio.create_task(claim.wait_lost())
+            done, pending = await asyncio.wait(
+                (process_task, claim_lost_task),
+                return_when=asyncio.FIRST_COMPLETED,
+            )
+            for task in pending:
+                task.cancel()
+            await asyncio.gather(*pending, return_exceptions=True)
+            if claim_lost_task in done:
+                process_task.cancel()
+                await asyncio.gather(process_task, return_exceptions=True)
+                raise RuntimeError("PostgreSQL schedule claim was lost")
+            await process_task
+
+    async def _process_schedule_claimed(
+        self, schedule: Any, now: datetime, claim: Any = None
+    ) -> None:
         """
         Process a single schedule - check constraints and execute if allowed.
 
@@ -197,6 +249,8 @@ class SchedulerEngine:
         from actions.server._models import ScheduleSkipReason
 
         schedule_id = schedule.id
+        if claim is not None:
+            claim.ensure_alive()
 
         # Check global concurrent limit
         if self._global_running_count >= self._max_concurrent_global:
@@ -205,22 +259,28 @@ class SchedulerEngine:
 
         # Check concurrent execution limit for this schedule
         if not await self._check_concurrent_limit(schedule):
-            await self._record_skip(schedule, now, ScheduleSkipReason.PREVIOUS_RUNNING)
+            await self._record_skip(
+                schedule, now, ScheduleSkipReason.PREVIOUS_RUNNING, claim
+            )
             return
 
         # Check rate limits
         if not await self._check_rate_limit(schedule, now):
-            await self._record_skip(schedule, now, ScheduleSkipReason.RATE_LIMITED)
+            await self._record_skip(schedule, now, ScheduleSkipReason.RATE_LIMITED, claim)
             return
 
         # Check dependencies
         if not await self._check_dependencies(schedule):
-            await self._record_skip(schedule, now, ScheduleSkipReason.DEPENDENCY_FAILED)
+            await self._record_skip(
+                schedule, now, ScheduleSkipReason.DEPENDENCY_FAILED, claim
+            )
             return
 
         # All checks passed - execute the schedule
+        if claim is not None:
+            claim.ensure_alive()
         execution_id = gen_uuid("schedule_execution")
-        await self._execute_schedule(schedule, execution_id, now)
+        await self._execute_schedule(schedule, execution_id, now, claim)
 
     async def _check_concurrent_limit(self, schedule: "Schedule") -> bool:
         """Check if the schedule's concurrent execution limit allows execution."""
@@ -332,6 +392,7 @@ class SchedulerEngine:
         schedule: "Schedule",
         now: datetime,
         reason: str,
+        claim: Any = None,
     ) -> None:
         """Record a skipped execution."""
         from actions.server._database import datetime_to_str
@@ -344,6 +405,8 @@ class SchedulerEngine:
 
         execution_id = gen_uuid("schedule_execution")
         db = get_db()
+        if claim is not None:
+            claim.ensure_alive()
 
         with db.connect():
             with db.transaction():
@@ -380,6 +443,7 @@ class SchedulerEngine:
         schedule: "Schedule",
         execution_id: str,
         now: datetime,
+        claim: Any = None,
     ) -> None:
         """Execute a schedule with retry support."""
         from actions.server._database import datetime_to_str
@@ -399,6 +463,8 @@ class SchedulerEngine:
         db = get_db()
 
         try:
+            if claim is not None:
+                claim.ensure_alive()
             # Create initial execution record
             with db.connect():
                 with db.transaction():
@@ -418,10 +484,12 @@ class SchedulerEngine:
 
             # Execute with retry logic
             success, result, error = await self._execute_with_retry(
-                schedule, execution_id, now
+                schedule, execution_id, now, claim
             )
 
             # Update execution record
+            if claim is not None:
+                claim.ensure_alive()
             end_time = datetime.now(timezone.utc)
             duration_ms = int((end_time - now).total_seconds() * 1000)
 
@@ -480,6 +548,7 @@ class SchedulerEngine:
         schedule: "Schedule",
         execution_id: str,
         start_time: datetime,
+        claim: Any = None,
     ) -> tuple[bool, Optional[Any], Optional[str]]:
         """
         Execute the schedule action with retry logic.
@@ -500,6 +569,8 @@ class SchedulerEngine:
         last_error = None
         for attempt in range(1, max_attempts + 1):
             try:
+                if claim is not None:
+                    claim.ensure_alive()
                 # Update attempt number
                 if attempt > 1:
                     db = get_db()
@@ -515,7 +586,7 @@ class SchedulerEngine:
                             )
 
                 # Execute the action
-                result = await self._trigger_action(schedule)
+                result = await self._trigger_action(schedule, claim)
                 return True, result, None
 
             except Exception as e:
@@ -534,20 +605,24 @@ class SchedulerEngine:
 
         return False, None, last_error
 
-    async def _trigger_action(self, schedule: "Schedule") -> Optional[Any]:
+    async def _trigger_action(
+        self, schedule: "Schedule", claim: Any = None
+    ) -> Optional[Any]:
         """
         Trigger the action for a schedule.
 
         Returns the result of the action execution.
         """
         if schedule.execution_mode == "run":
-            return await self._create_action_run(schedule)
+            return await self._create_action_run(schedule, claim)
         elif schedule.execution_mode == "work_item":
-            return await self._create_work_item(schedule)
+            return await self._create_work_item(schedule, claim)
         else:
             raise ValueError(f"Unknown execution mode: {schedule.execution_mode}")
 
-    async def _create_action_run(self, schedule: "Schedule") -> Optional[str]:
+    async def _create_action_run(
+        self, schedule: "Schedule", claim: Any = None
+    ) -> Optional[str]:
         """
         Create and execute an action run for a schedule.
 
@@ -594,6 +669,8 @@ class SchedulerEngine:
         inputs = json.loads(schedule.inputs_json) if schedule.inputs_json else {}
 
         # Create the run
+        if claim is not None:
+            claim.ensure_alive()
         run_id = gen_uuid("run")
         relative_artifacts_dir = _create_run_artifacts_dir(action, run_id)
 
@@ -612,6 +689,8 @@ class SchedulerEngine:
 
         # Actually execute the action
         try:
+            if claim is not None:
+                claim.ensure_alive()
             success, result = await execute_action_for_scheduler(
                 action=action,
                 action_package=action_package,
@@ -628,7 +707,9 @@ class SchedulerEngine:
 
         return run_id
 
-    async def _create_work_item(self, schedule: "Schedule") -> Optional[str]:
+    async def _create_work_item(
+        self, schedule: "Schedule", claim: Any = None
+    ) -> Optional[str]:
         """
         Create a work item for a schedule.
 
@@ -646,6 +727,8 @@ class SchedulerEngine:
         inputs["_scheduled_at"] = datetime.now(timezone.utc).isoformat()
 
         try:
+            if claim is not None:
+                claim.ensure_alive()
             from actions.server._settings import get_settings
             from actions.server._work_items_import import load_work_items_types
 
@@ -986,7 +1069,7 @@ async def initialize_schedule_next_runs() -> None:
             Schedule,
             """
             SELECT * FROM schedule
-            WHERE enabled = 1 AND next_run_at IS NULL
+            WHERE enabled = TRUE AND next_run_at IS NULL
             """,
         )
 
