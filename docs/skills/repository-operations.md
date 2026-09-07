@@ -402,8 +402,11 @@ are validated before execution. The all-1-through-10 SHA-256 regression and the
 SQLite v0-to-current plus PostgreSQL fresh/existing/concurrent migration
 acceptance live in `action_server/tests/action_server_tests/test_database_shared.py`
 and `test_database.py`.
-Migration 12 checks for non-null legacy `run.stdout`/`run.stderr` values before
-dropping those accidental columns. When data exists, it transactionally creates
+Before immutable migration 11 runs, the migration executor checks for non-null
+legacy `run.stdout`/`run.stderr` values and archives them before the historical
+index-alignment migration can drop those accidental columns. Migration 12
+repeats the same recovery boundary for databases that still expose the columns.
+When data exists, it transactionally creates
 `run_legacy_output_archive` keyed by `run_id`, copies each non-null legacy row
 with fieldwise null-fill semantics, and leaves the archive available for
 read-back; null-only or no-column databases do not create an archive. Before

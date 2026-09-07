@@ -153,6 +153,12 @@ Please erase it and recreate it from scratch."""
                     db_migration_version,
                     MIGRATION_ID_TO_NAME[db_migration_version],
                 )
+                if db_migration_version == 11:
+                    from actions.server.migrations.migration_reconcile_run_columns import (
+                        archive_legacy_run_output,
+                    )
+
+                    archive_legacy_run_output(db)
                 _migrate_to(db, db_migration_version)
 
     return True

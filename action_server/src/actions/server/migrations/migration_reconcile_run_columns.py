@@ -4,9 +4,7 @@ from actions.server._database import Database
 _ARCHIVE_TABLE = "run_legacy_output_archive"
 
 
-def migrate(db: Database) -> None:
-    from actions.server.migrations import MIGRATION_ID_TO_NAME
-
+def archive_legacy_run_output(db: Database) -> None:
     columns = set(db.list_table_and_columns().get("run", []))
     legacy_columns = [column for column in ("stdout", "stderr") if column in columns]
     if legacy_columns:
@@ -67,8 +65,13 @@ ON CONFLICT (run_id) DO UPDATE SET
 """
             )
 
-    for column in legacy_columns:
-        db.execute(f"ALTER TABLE run DROP COLUMN {column}")
+def migrate(db: Database) -> None:
+    from actions.server.migrations import MIGRATION_ID_TO_NAME
+
+    archive_legacy_run_output(db)
+    for column in ("stdout", "stderr"):
+        if column in db.list_table_and_columns().get("run", []):
+            db.execute(f"ALTER TABLE run DROP COLUMN {column}")
 
     db.execute(
         "INSERT INTO migration (id, name) VALUES (?, ?) ON CONFLICT (id) DO NOTHING",

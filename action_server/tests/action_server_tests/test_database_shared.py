@@ -40,6 +40,7 @@ HISTORICAL_MIGRATION_SHA256 = {
     8: "6b46cc310473eb2feb6269bf4fa3d80d2550f20a24d7a410f66d7e2ebe68c2df",
     9: "df8e518b5c49d12cec47d4ecdd122227ae1034e1234ef14aa23fce065ae3bdf4",
     10: "864b9dfea5365e3dc873e83c8b935eae59aa74de6dab0b05ed8e1473e21e3515",
+    11: "f36d49332b84553fdd6f7ae6b86ab9f8822831cb3c82583b51526db55b387079",
 }
 
 
@@ -185,6 +186,51 @@ def test_forward_schema_repair_removes_accidental_run_output_columns(tmp_path: P
 
     assert columns == ["id", "result"]
     assert archive is None
+
+
+def test_migrate_archives_legacy_output_before_historical_migration_11(
+    tmp_path: Path,
+):
+    from actions.server._models import Run, create_db
+    from actions.server.migrations import CURRENT_VERSION, migrate_db
+
+    db_path = tmp_path / "migration-v10-populated.db"
+    with create_db(db_path) as db:
+        with db.transaction():
+            db.execute("UPDATE migration SET id = ?, name = ?", [10, "add_schedules"])
+            db.execute("ALTER TABLE run ADD COLUMN stdout TEXT")
+            db.execute("ALTER TABLE run ADD COLUMN stderr TEXT")
+            db.insert(
+                Run(
+                    id="legacy-run",
+                    status=2,
+                    action_id="action",
+                    start_time="2026-01-01T00:00:00+00:00",
+                    run_time=1.0,
+                    inputs="{}",
+                    result="{}",
+                    error_message=None,
+                    relative_artifacts_dir="",
+                    numbered_id=1,
+                    stdout="legacy stdout",
+                    stderr="legacy stderr",
+                )
+            )
+            db.execute(
+                "UPDATE run SET stdout=?, stderr=? WHERE id=?",
+                ["legacy stdout", "legacy stderr", "legacy-run"],
+            )
+
+    assert migrate_db(db_path, CURRENT_VERSION)
+    db = Database(db_path)
+    with db.connect():
+        with db.cursor() as cursor:
+            db.execute_query(
+                cursor,
+                "SELECT stdout, stderr FROM run_legacy_output_archive WHERE run_id=?",
+                ["legacy-run"],
+            )
+            assert cursor.fetchone() == ("legacy stdout", "legacy stderr")
 
 
 def test_forward_schema_repair_without_run_output_columns_has_no_archive(
