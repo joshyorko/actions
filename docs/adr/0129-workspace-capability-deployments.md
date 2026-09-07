@@ -122,3 +122,4 @@ mode changes object identity or pinning semantics.
   package-provided adapter authority is rejected.
 - RCC keeps its namespaced Environment/provider policy; a non-RCC plan has no
   fake RCC identity. Local mode exercises the same lifecycle.
+
