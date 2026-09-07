@@ -216,6 +216,15 @@ duplicate identity/correlation headers return HTTP 400. Missing identity headers
 are normalized from the body; mismatches are rejected. `X-Request-ID` is
 preserved only when it is a canonical UUID, otherwise a UUID is generated and
 returned as the single canonical response header; CORS exposes that header.
+Action Server CORS has an empty cross-origin allowlist by default, so same-origin
+browser requests and non-browser requests without `Origin` remain usable without
+advertising wildcard credentialed access. Repeatable `--cors-allow-origin` values
+must be explicit `http`/`https` origins with exact scheme, hostname, and effective
+port; credentials, paths, queries, fragments, `null`, and lookalike origins fail
+closed. CORS preflight admission is independent of API-key authentication, while
+the actual request remains authenticated. The same allowlist protects browser
+WebSocket handshakes; no-`Origin` WebSocket clients retain the existing
+non-browser path.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
@@ -375,6 +384,27 @@ sibling `actions-http-helper/pyproject.toml`, replace the version requirement
 with that local path before Poetry resolves, and install the helper from the
 archive. This applies at minimum to `actions/` and `action_server/`; it must
 not depend on a `sema4ai-http-helper` directory or requirement.
+
+Robot ZIP import preflights every member before extraction and rejects parent,
+absolute, drive-qualified, alternate-separator, duplicate/case-colliding, link,
+and special-file entries. Uploads, downloads, and extracted members are read in
+bounded chunks with actual-byte limits; archives also enforce entry, per-file,
+expanded-size, expansion-ratio, and elapsed-time limits. URL imports require
+HTTPS, reject embedded credentials and unverified/private destinations, and
+validate every redirect hop with redirects disabled in the HTTP client. A
+validated package is copied to a hidden sibling staging directory, checked for
+links/special files, and atomically renamed into the robot root; failed copies
+are removed before a response is returned. These limits and policies are the
+immediate importer boundary, not the later immutable Package Revision/compiler
+acceptance in #148.
+The URL importer validates the caller-supplied URL before converting GitHub
+repository shorthand, so credentials and fragments cannot be discarded by
+normalization. Its DNS check remains a pre-request address-policy check; the
+mocked URL tests are not proof that the HTTP connection is pinned against DNS
+rebinding, so real URL/SSRF acceptance remains a separate gate. In the RCC
+developer toolkit, Linux `Package task smoke (Linux)` must pass before
+`Build and verify community binary (Linux)` can run; a package-test failure
+therefore leaves the frozen/native gate skipped rather than failed.
 
 The clean-break prerequisites can merge before the Runtime migration. During
 that split, `actions-core` owns `actions/__init__.py` and includes `actions.mcp`,
