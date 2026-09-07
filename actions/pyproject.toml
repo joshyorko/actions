@@ -2,9 +2,11 @@
 name = "actions-core"
 version = "1.0.0"
 description = "Actions Core"
-authors = ["Sema4.ai, Inc. <dev@sema4.ai>"]
+authors = ["Joshua Yorko"]
+maintainers = ["Joshua Yorko"]
 readme = "README.md"
-repository = "https://github.com/Sema4AI/actions/"
+repository = "https://github.com/joshyorko/actions"
+homepage = "https://github.com/joshyorko/actions"
 license = "Apache-2.0"
 packages = [{ include = "actions", from = "src" }]
 

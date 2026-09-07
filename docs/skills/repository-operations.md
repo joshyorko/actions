@@ -2,6 +2,13 @@
 
 ## Package Boundaries
 
+Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as
+author and maintainer. Their PyPI descriptions come from package-local README files;
+product links must target the community repository and its released assets. Preserve
+upstream attribution in LICENSE and NOTICE.md. Changing source metadata does not
+modify previously uploaded PyPI releases; verify built METADATA/PKG-INFO before a
+new upload and never replace an existing tag or distribution file.
+
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
 - `action_server/`: CLI, FastAPI service, frontend, build and bundled RCC.
