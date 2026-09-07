@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -17,6 +18,16 @@ def test_frontend_manifest_declares_modern_dual_artifact_contract():
     assert "validate:artifacts" in manifest["scripts"]
     assert "@vitejs/plugin-react" in manifest["devDependencies"]
     assert "vite-plugin-singlefile" not in manifest["devDependencies"]
+
+
+def test_each_default_build_script_emits_its_own_release_sbom():
+    scripts = json.loads((FRONTEND / "package.json").read_text())["scripts"]
+
+    assert "npm run sbom:runtime" in scripts["build:runtime"]
+    assert "npm run sbom:canvas" in scripts["build:canvas"]
+    assert scripts["build:artifacts"] == (
+        "npm run build:runtime && npm run build:canvas"
+    )
 
 
 def test_vite_config_keeps_runtime_embeddable_and_canvas_mcp_view_distinct():
@@ -270,6 +281,45 @@ def test_python_validator_rejects_unsafe_manifest_before_payload_reads(
     assert outside.resolve() not in {path.resolve() for path in reads}
 
 
+def test_python_validator_preflights_inventory_before_import_scan(
+    monkeypatch, tmp_path
+):
+    build_binary = FRONTEND.parent / "build-binary"
+    sys.path.insert(0, str(build_binary))
+    import artifact_validator
+
+    root = tmp_path / "artifact"
+    root.mkdir()
+    (root / "index.js").write_text(
+        "import '@sema4ai/components';", encoding="utf-8"
+    )
+    _write_manifest(
+        root,
+        "runtime-admin",
+        "text/html",
+        [{"path": "../outside.js", "bytes": 0, "sha256": "0" * 64}],
+    )
+
+    def unexpected_scan(_self, _root):
+        pytest.fail("payload import scanning must follow metadata preflight")
+
+    monkeypatch.setattr(
+        artifact_validator.tree_shaker.TreeShaker,
+        "scan_directory",
+        unexpected_scan,
+    )
+
+    passed, checks = artifact_validator.validate_artifact(
+        root,
+        expected_artifact="runtime-admin",
+        expected_content_type="text/html",
+    )
+
+    assert not passed
+    assert any(check.name == "inventory" and not check.passed for check in checks)
+    assert any(check.name == "imports" and not check.passed for check in checks)
+
+
 def test_python_validator_rejects_empty_structural_extras(tmp_path):
     build_binary = FRONTEND.parent / "build-binary"
     sys.path.insert(0, str(build_binary))
@@ -350,6 +400,36 @@ def test_manifest_contract_rejects_inventory_mutations(tmp_path, mutation):
     checks = validate_build_metadata(root)
 
     assert any(not check.passed for check in checks)
+
+
+def test_python_validator_treats_nested_metadata_as_payload_inventory(tmp_path):
+    build_binary = FRONTEND.parent / "build-binary"
+    sys.path.insert(0, str(build_binary))
+    from artifact_validator import validate_build_metadata
+
+    root = tmp_path / "artifact"
+    nested = root / "nested"
+    nested.mkdir(parents=True)
+    payload = b"<html>text/html</html>"
+    nested_metadata = b"{}"
+    (root / "index.html").write_bytes(payload)
+    (nested / "artifact-manifest.json").write_bytes(nested_metadata)
+    files = [
+        {
+            "path": path,
+            "bytes": len(data),
+            "sha256": hashlib.sha256(data).hexdigest(),
+        }
+        for path, data in (
+            ("index.html", payload),
+            ("nested/artifact-manifest.json", nested_metadata),
+        )
+    ]
+    _write_manifest(root, "runtime-admin", "text/html", files)
+
+    checks = validate_build_metadata(root, "runtime-admin", "text/html")
+
+    assert any(check.name == "inventory" and check.passed for check in checks)
 
 
 def _write_manifest(root, artifact, content_type, files):
@@ -451,6 +531,47 @@ def test_python_validator_binds_artifact_identity_and_content_type(
     assert any(check.name == "content-type" and not check.passed for check in unbound_checks)
 
 
+def test_python_validator_cli_accepts_bound_identity_options(tmp_path):
+    build_binary = FRONTEND.parent / "build-binary"
+    root = tmp_path / "artifact"
+    root.mkdir()
+    payload = b"<html>text/html</html>"
+    (root / "index.html").write_bytes(payload)
+    _write_manifest(
+        root,
+        "runtime-admin",
+        "text/html",
+        [
+            {
+                "path": "index.html",
+                "bytes": len(payload),
+                "sha256": hashlib.sha256(payload).hexdigest(),
+            }
+        ],
+    )
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(build_binary / "artifact_validator.py"),
+            "--artifact",
+            str(root),
+            "--expected-artifact",
+            "runtime-admin",
+            "--expected-content-type",
+            "text/html",
+            "--json",
+        ],
+        cwd=build_binary,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout)["passed"] is True
+
+
 @pytest.mark.parametrize(
     "link_kind", ["file", "directory", "broken"]
 )
@@ -547,6 +668,92 @@ def test_javascript_validator_rejects_symlink_root(tmp_path):
     assert result.returncode != 0
     assert "dist" in (result.stderr + result.stdout)
     assert "symlink root" in (result.stderr + result.stdout).lower()
+
+
+def test_javascript_validator_rejects_unsupported_manifest_schema(tmp_path):
+    script = FRONTEND / "scripts" / "validate-artifacts.mjs"
+    for directory, artifact, content_type in (
+        ("dist", "runtime-admin", "text/html"),
+        ("dist-canvas", "canvas-mcp-app", "text/html;profile=mcp-app"),
+    ):
+        root = tmp_path / directory
+        root.mkdir()
+        payload = f"<html>{content_type}</html>".encode()
+        (root / "index.html").write_bytes(payload)
+        _write_manifest(
+            root,
+            artifact,
+            content_type,
+            [
+                {
+                    "path": "index.html",
+                    "bytes": len(payload),
+                    "sha256": hashlib.sha256(payload).hexdigest(),
+                }
+            ],
+        )
+    manifest_path = tmp_path / "dist" / "artifact-manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["schemaVersion"] = 2
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    result = subprocess.run(
+        ["node", str(script)],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "schema" in (result.stderr + result.stdout).lower()
+
+
+@pytest.mark.skipif(not hasattr(os, "mkfifo"), reason="requires POSIX special files")
+def test_javascript_validator_rejects_non_regular_inventory_entries(tmp_path):
+    script = FRONTEND / "scripts" / "validate-artifacts.mjs"
+    for directory, artifact, content_type in (
+        ("dist", "runtime-admin", "text/html"),
+        ("dist-canvas", "canvas-mcp-app", "text/html;profile=mcp-app"),
+    ):
+        root = tmp_path / directory
+        root.mkdir()
+        payload = f"<html>{content_type}</html>".encode()
+        (root / "index.html").write_bytes(payload)
+        special = root / "payload.pipe"
+        os.mkfifo(special)
+        _write_manifest(
+            root,
+            artifact,
+            content_type,
+            [
+                {
+                    "path": "index.html",
+                    "bytes": len(payload),
+                    "sha256": hashlib.sha256(payload).hexdigest(),
+                },
+                {
+                    "path": "payload.pipe",
+                    "bytes": 0,
+                    "sha256": hashlib.sha256(b"").hexdigest(),
+                },
+            ],
+        )
+
+    try:
+        result = subprocess.run(
+            ["node", str(script)],
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=3,
+        )
+    except subprocess.TimeoutExpired as exc:
+        pytest.fail(f"validator attempted to read a non-regular entry: {exc}")
+
+    assert result.returncode != 0
+    assert "regular file" in (result.stderr + result.stdout).lower()
 
 
 def test_invoke_validator_rejects_explicit_root_alias_before_resolution(

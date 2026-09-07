@@ -10,12 +10,15 @@ for (const [directory, expectedArtifact, expectedType] of [['dist', 'runtime-adm
   const root = join(process.cwd(), directory);
   if ((await lstat(root)).isSymbolicLink()) throw new Error(`${directory}: symlink root is forbidden`);
   const manifest = JSON.parse(await readFile(join(root, 'artifact-manifest.json')));
+  if (manifest.schemaVersion !== 1) throw new Error(`${directory}: unsupported manifest schema`);
   async function files(dir) {
     const entries = await readdir(dir, { withFileTypes: true });
     const nested = await Promise.all(entries.map(async entry => {
       const path = join(dir, entry.name);
       if (entry.isSymbolicLink()) throw new Error(`${directory}: symlink entry is forbidden: ${path}`);
-      return entry.isDirectory() ? files(path) : [path];
+      if (entry.isDirectory()) return files(path);
+      if (!entry.isFile()) throw new Error(`${directory}: non-regular file entry is forbidden: ${path}`);
+      return [path];
     }));
     return nested.flat();
   }

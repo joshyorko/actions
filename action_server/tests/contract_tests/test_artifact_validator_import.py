@@ -72,6 +72,15 @@ def test_validate_artifact_task_rejects_removed_product_imports(
         "import '@sema4ai/components';\n" "import '@/enterprise/private';\n",
         encoding="utf-8",
     )
+    (tmp_path / "frontend" / "dist-canvas" / "index.js").write_text(
+        "import 'react';", encoding="utf-8"
+    )
+    _write_valid_manifest(dist, "runtime-admin", "text/html")
+    _write_valid_manifest(
+        tmp_path / "frontend" / "dist-canvas",
+        "canvas-mcp-app",
+        "text/html;profile=mcp-app",
+    )
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
 
     with pytest.raises(SystemExit) as raised:
@@ -247,6 +256,8 @@ def test_validate_artifact_explicit_directory_scans_all_source_files(
     (runtime / "safe" / "index.js").write_text("import 'react';", encoding="utf-8")
     (runtime / "poison.html").write_text('"@sema4ai/components"', encoding="utf-8")
     (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+    _write_valid_manifest(runtime, "runtime-admin", "text/html")
+    _write_valid_manifest(canvas, "canvas-mcp-app", "text/html;profile=mcp-app")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
 
@@ -304,6 +315,9 @@ def test_validate_artifact_task_rejects_poisoned_runtime_html(
     dist.mkdir(parents=True)
     canvas.mkdir()
     (dist / "index.html").write_text('"@sema4ai/components"', encoding="utf-8")
+    (canvas / "index.html").write_text("<main>canvas</main>", encoding="utf-8")
+    _write_valid_manifest(dist, "runtime-admin", "text/html")
+    _write_valid_manifest(canvas, "canvas-mcp-app", "text/html;profile=mcp-app")
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
 
@@ -328,7 +342,10 @@ def test_validate_artifact_task_rejects_poisoned_canvas_html(
     canvas = tmp_path / "frontend" / "dist-canvas"
     dist.mkdir(parents=True)
     canvas.mkdir()
+    (dist / "index.html").write_text("<main>runtime</main>", encoding="utf-8")
     (canvas / "index.html").write_text('"@sema4ai/components"', encoding="utf-8")
+    _write_valid_manifest(dist, "runtime-admin", "text/html")
+    _write_valid_manifest(canvas, "canvas-mcp-app", "text/html;profile=mcp-app")
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
 
@@ -356,6 +373,9 @@ def test_validate_artifact_task_rejects_poisoned_enterprise_path(
     (dist / "enterprise" / "index.js").write_text(
         "import '@sema4ai/components';", encoding="utf-8"
     )
+    (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+    _write_valid_manifest(dist, "runtime-admin", "text/html")
+    _write_valid_manifest(canvas, "canvas-mcp-app", "text/html;profile=mcp-app")
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
 
@@ -379,6 +399,9 @@ def test_validate_artifact_task_fails_closed_on_read_error(tmp_path, monkeypatch
     dist.mkdir(parents=True)
     canvas.mkdir()
     (dist / "index.js").write_text("import 'react';", encoding="utf-8")
+    (canvas / "index.js").write_text("import 'react';", encoding="utf-8")
+    _write_valid_manifest(dist, "runtime-admin", "text/html")
+    _write_valid_manifest(canvas, "canvas-mcp-app", "text/html;profile=mcp-app")
     (tmp_path / "build-binary").symlink_to(action_server / "build-binary")
     monkeypatch.setattr(tasks, "CURDIR", tmp_path)
 

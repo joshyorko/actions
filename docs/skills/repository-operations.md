@@ -47,6 +47,10 @@ manifest, and import checks do not catch malformed post-inline HTML: serve the
 exact Runtime artifact through a real browser before visual acceptance and
 prove the root renders, no external JS/CSS request remains, no console/page
 error occurs, and the inline script contains no raw HTML boundary.
+Each standalone `build:runtime` and `build:canvas` command also emits the
+corresponding reproducible CycloneDX `sbom.json`; `build:artifacts` composes
+those per-root commands. This keeps the default missing-root repair path
+complete without relying on a separate all-roots command.
 Each root records a sorted `artifact-manifest.json` with SHA-256 entries,
 disables source maps, and is checked by `npm run validate:artifacts` against a
 1 MiB raw / 300 KiB gzip executable-payload budget. The manifest `files` list is
@@ -60,6 +64,10 @@ directory inventory, and
 recompute every file's byte length and SHA-256. Hash multisets are insufficient:
 omission, extra files, path swaps, reordering, wrong sizes, and wrong hashes
 fail validation.
+Both validators require manifest `schemaVersion` 1 and reject symlink or
+non-regular inventory entries before payload reads. The standalone Python
+validator binds a release artifact with `--expected-artifact` and
+`--expected-content-type`; supply both options together when using its CLI.
 Release-bound Python validation, including `inv validate-artifact`, treats a
 missing `artifact-manifest.json` as an error when artifact identity and content
 type are expected. It validates path safety, sorted exact inventory, and

@@ -15,9 +15,9 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run build:runtime",
-    "build:runtime": "vite build --mode runtime --minify=esbuild && node scripts/inline-runtime-assets.mjs && node scripts/write-artifact-manifest.mjs dist runtime-admin text/html",
-    "build:canvas": "vite build --mode canvas --minify=esbuild && node scripts/write-artifact-manifest.mjs dist-canvas canvas-mcp-app \"text/html;profile=mcp-app\"",
-    "build:artifacts": "npm run build:runtime && npm run build:canvas && npm run sbom",
+    "build:runtime": "vite build --mode runtime --minify=esbuild && node scripts/inline-runtime-assets.mjs && node scripts/write-artifact-manifest.mjs dist runtime-admin text/html && npm run sbom:runtime",
+    "build:canvas": "vite build --mode canvas --minify=esbuild && node scripts/write-artifact-manifest.mjs dist-canvas canvas-mcp-app \"text/html;profile=mcp-app\" && npm run sbom:canvas",
+    "build:artifacts": "npm run build:runtime && npm run build:canvas",
     "build:debug": "vite build --mode runtime --minify=false",
     "build:tests": "vite build --mode runtime --minify=false --outDir=./dist-test",
     "test:lint": "eslint --max-warnings 0 apps/runtime/src apps/canvas-view/src src/app",
@@ -29,6 +29,8 @@
     "test:topology": "vitest --run --testNamePattern \"Actions frontend topology\"",
     "test:quality": "npm run test:lint && npm run test:types && npm run test:prettier && npm run test:topology",
     "validate:artifacts": "node scripts/validate-artifacts.mjs",
+    "sbom:runtime": "cyclonedx-npm --output-format json --output-reproducible --output-file dist/sbom.json",
+    "sbom:canvas": "cyclonedx-npm --output-format json --output-reproducible --output-file dist-canvas/sbom.json",
     "sbom": "cyclonedx-npm --output-format json --output-reproducible --output-file dist/sbom.json && cyclonedx-npm --output-format json --output-reproducible --output-file dist-canvas/sbom.json"
   },
   "dependencies": {

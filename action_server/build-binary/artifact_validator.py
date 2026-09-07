@@ -170,11 +170,15 @@ def validate_build_metadata(
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         files = manifest["files"]
         names = [item["path"] for item in files]
-        expected_names = sorted(
-            path.relative_to(artifact_path).as_posix()
-            for path in artifact_path.rglob("*")
-            if path.is_file() and path.name not in {"artifact-manifest.json", "sbom.json"}
-        )
+        expected_names = []
+        for path in artifact_path.rglob("*"):
+            if not path.is_file():
+                continue
+            relative_path = path.relative_to(artifact_path).as_posix()
+            if relative_path in {"artifact-manifest.json", "sbom.json"}:
+                continue
+            expected_names.append(relative_path)
+        expected_names.sort()
         expected_directories = sorted(
             {
                 parent.as_posix()
@@ -273,14 +277,24 @@ def validate_artifact(
     """
     checks = []
 
-    symlinks = _find_symlinks(artifact_path)
-    if symlinks:
-        return False, [ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")]
-    
-    # Run validation checks
-    checks.append(validate_imports(artifact_path))
+    metadata_checks = validate_build_metadata(
+        artifact_path, expected_artifact, expected_content_type
+    )
+    checks.extend(metadata_checks)
+    metadata_failed = any(
+        not check.passed and check.severity == "error" for check in metadata_checks
+    )
+    if metadata_failed:
+        checks.append(
+            ValidationCheck(
+                "imports",
+                False,
+                "Skipped because artifact metadata preflight failed",
+            )
+        )
+    else:
+        checks.append(validate_imports(artifact_path))
     checks.append(validate_size(artifact_path, baseline_path))
-    checks.extend(validate_build_metadata(artifact_path, expected_artifact, expected_content_type))
     
     # Determine overall result
     all_passed = all(
@@ -295,6 +309,14 @@ def main():
     parser = argparse.ArgumentParser(description="Validate build artifacts")
     parser.add_argument("--artifact", required=True, help="Path to artifact")
     parser.add_argument("--baseline", help="Path to baseline.json")
+    parser.add_argument(
+        "--expected-artifact",
+        help="Expected bound artifact identity, such as runtime-admin",
+    )
+    parser.add_argument(
+        "--expected-content-type",
+        help="Expected bound artifact content type, such as text/html",
+    )
     parser.add_argument("--json", action="store_true", help="Output as JSON")
     
     args = parser.parse_args()
@@ -305,9 +327,18 @@ def main():
         sys.exit(2)
     
     baseline_path = Path(args.baseline) if args.baseline else None
+
+    if (args.expected_artifact is None) != (args.expected_content_type is None):
+        parser.error(
+            "--expected-artifact and --expected-content-type must be provided together"
+        )
     
     all_passed, checks = validate_artifact(
-        artifact_path, baseline_path, args.json
+        artifact_path,
+        baseline_path,
+        args.json,
+        args.expected_artifact,
+        args.expected_content_type,
     )
     
     if args.json:
