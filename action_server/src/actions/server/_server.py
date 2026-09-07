@@ -512,6 +512,8 @@ def start_server(
         return response
 
     async def serve_artifact_index(request: Request, run_id: str):
+        if run_id.startswith("."):
+            return PlainTextResponse("Not Found", status_code=404)
         return await serve_index(request)
 
     index_routes = [
