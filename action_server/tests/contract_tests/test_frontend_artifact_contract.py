@@ -815,6 +815,84 @@ def test_javascript_validator_rejects_unsupported_manifest_schema(tmp_path):
     assert "schema" in (result.stderr + result.stdout).lower()
 
 
+@pytest.mark.parametrize("metadata_name", ["artifact-manifest.json", "sbom.json"])
+def test_javascript_validator_rejects_symlinked_metadata_before_parsing(
+    tmp_path, metadata_name
+):
+    script = FRONTEND / "scripts" / "validate-artifacts.mjs"
+    for directory, artifact, content_type in (
+        ("dist", "runtime-admin", "text/html"),
+        ("dist-canvas", "canvas-mcp-app", "text/html;profile=mcp-app"),
+    ):
+        root = tmp_path / directory
+        root.mkdir()
+        payload = f"<html>{content_type}</html>".encode()
+        (root / "index.html").write_bytes(payload)
+        _write_manifest(
+            root,
+            artifact,
+            content_type,
+            [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+        )
+
+    invalid_metadata = tmp_path / "invalid-metadata.json"
+    invalid_metadata.write_text("not-json", encoding="utf-8")
+    (tmp_path / "dist" / metadata_name).unlink()
+    try:
+        (tmp_path / "dist" / metadata_name).symlink_to(invalid_metadata)
+    except OSError as exc:
+        pytest.skip(f"symlink creation unavailable: {exc}")
+
+    result = subprocess.run(
+        ["node", str(script)], cwd=tmp_path, capture_output=True, text=True, check=False
+    )
+
+    assert result.returncode != 0
+    output = (result.stderr + result.stdout).lower()
+    assert "symlink" in output
+    assert "unexpected token" not in output
+
+
+@pytest.mark.skipif(not hasattr(os, "mkfifo"), reason="requires POSIX special files")
+@pytest.mark.parametrize("metadata_name", ["artifact-manifest.json", "sbom.json"])
+def test_javascript_validator_rejects_fifo_metadata_before_read(
+    tmp_path, metadata_name
+):
+    script = FRONTEND / "scripts" / "validate-artifacts.mjs"
+    for directory, artifact, content_type in (
+        ("dist", "runtime-admin", "text/html"),
+        ("dist-canvas", "canvas-mcp-app", "text/html;profile=mcp-app"),
+    ):
+        root = tmp_path / directory
+        root.mkdir()
+        payload = f"<html>{content_type}</html>".encode()
+        (root / "index.html").write_bytes(payload)
+        _write_manifest(
+            root,
+            artifact,
+            content_type,
+            [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+        )
+
+    (tmp_path / "dist" / metadata_name).unlink()
+    os.mkfifo(tmp_path / "dist" / metadata_name)
+
+    try:
+        result = subprocess.run(
+            ["node", str(script)],
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=3,
+        )
+    except subprocess.TimeoutExpired as exc:
+        pytest.fail(f"validator read non-regular metadata before preflight: {exc}")
+
+    assert result.returncode != 0
+    assert "regular" in (result.stderr + result.stdout).lower()
+
+
 @pytest.mark.skipif(not hasattr(os, "mkfifo"), reason="requires POSIX special files")
 def test_javascript_validator_rejects_non_regular_inventory_entries(tmp_path):
     script = FRONTEND / "scripts" / "validate-artifacts.mjs"

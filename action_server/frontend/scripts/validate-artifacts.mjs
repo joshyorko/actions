@@ -9,9 +9,18 @@ const GZIP_BUDGET = 300 * 1024;
 for (const [directory, expectedArtifact, expectedType] of [['dist', 'runtime-admin', 'text/html'], ['dist-canvas', 'canvas-mcp-app', 'text/html;profile=mcp-app']]) {
   const root = join(process.cwd(), directory);
   if ((await lstat(root)).isSymbolicLink()) throw new Error(`${directory}: symlink root is forbidden`);
-  const manifest = JSON.parse(await readFile(join(root, 'artifact-manifest.json')));
+  async function metadataFile(name) {
+    const path = join(root, name);
+    const entry = await lstat(path);
+    if (entry.isSymbolicLink()) throw new Error(`${directory}: symlink metadata is forbidden: ${path}`);
+    if (!entry.isFile()) throw new Error(`${directory}: non-regular metadata entry is forbidden: ${path}`);
+    return path;
+  }
+  const manifestPath = await metadataFile('artifact-manifest.json');
+  const sbomPath = await metadataFile('sbom.json');
+  const manifest = JSON.parse(await readFile(manifestPath));
   if (manifest.schemaVersion !== 1) throw new Error(`${directory}: unsupported manifest schema`);
-  const sbom = JSON.parse(await readFile(join(root, 'sbom.json')));
+  const sbom = JSON.parse(await readFile(sbomPath));
   if (sbom.bomFormat !== 'CycloneDX' || !sbom.specVersion) throw new Error(`${directory}: invalid CycloneDX SBOM`);
   async function files(dir) {
     const entries = await readdir(dir, { withFileTypes: true });
