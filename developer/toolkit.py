@@ -70,9 +70,12 @@ def doctor() -> None:
         raise SystemExit(f"RCC toolkit environment is missing: {', '.join(missing)}")
 
     active_rcc_version = os.environ.get("RCC_VERSION")
-    if active_rcc_version and active_rcc_version != RCC_VERSION:
+    expected_rcc_version = os.environ.get(
+        "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION", RCC_VERSION
+    )
+    if active_rcc_version and active_rcc_version != expected_rcc_version:
         raise SystemExit(
-            f"RCC toolkit requires {RCC_VERSION}, active RCC is {active_rcc_version}"
+            f"RCC toolkit requires {expected_rcc_version}, active RCC is {active_rcc_version}"
         )
 
     print(f"Python: {sys.version.split()[0]}")

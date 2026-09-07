@@ -61,6 +61,10 @@ def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
         ).read_text()
     )
     entries = workflow["jobs"]["toolkit"]["strategy"]["matrix"]["include"]
+    assert (
+        "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: ${{ matrix.rcc_version }}"
+        in (REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml").read_text()
+    )
 
     assert {
         (entry["lane"], entry["os"], entry["asset"], entry["rcc_version"]): entry[
@@ -173,6 +177,19 @@ def test_dispatcher_resolves_repository_root() -> None:
         "frontend-test",
         "install-community",
     }
+
+
+def test_doctor_accepts_the_explicit_n_minus_one_matrix_version() -> None:
+    with patch.dict(
+        "os.environ",
+        {
+            "RCC_VERSION": "v18.18.1",
+            "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION": "v18.18.1",
+        },
+    ), patch("toolkit.shutil.which", return_value="/usr/bin/tool"), patch(
+        "toolkit.run"
+    ):
+        toolkit.doctor()
 
 
 def test_run_isolates_package_poetry_from_rcc_and_host_environments() -> None:
