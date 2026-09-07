@@ -310,7 +310,13 @@ existing draft by uploading only missing exact assets, rejects published release
 conflicting digests, and extraneous names, never clobbers, and publishes only after
 one final re-fetch proves draft state, the exact three-name inventory, every asset
 digest, and the release target/SHA against the immutable inputs; fresh and resumed
-drafts use that same finalization gate. Retained artifact ZIP bytes are
+drafts use that same finalization gate.
+Recovery publication runs outside the nested checkouts, so every `gh release`
+command supplies the repository explicitly. Authenticated paginated release listing
+discovers drafts; final verification fetches the numeric release ID because the
+tag endpoint may return 404 for a draft. A listing failure must stop publication,
+not be interpreted as an absent release.
+Retained artifact ZIP bytes are
 hashed against their pinned digests before extraction; archive members are rejected
 when absolute, traversal-based, symlink/hardlink, duplicate, normalized-alias, or
 otherwise unsafe. Every member is canonicalized and tracked before directory

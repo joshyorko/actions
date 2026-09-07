@@ -1843,8 +1843,13 @@ for platform in linux macos windows; do
 done
 printf '\\nSHA-256:\\n' >> "$notes"
 cat "$manifest" >> "$notes"
-release_json=""
-if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF"); then
+lookup_release() {
+  local releases
+  releases=$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/releases?per_page=100") || return
+  jq -c --arg tag "$RELEASE_REF" '[.[][] | select(.tag_name == $tag)] | if length > 1 then error("duplicate release tag") else .[0] end' <<<"$releases"
+}
+release_json=$(lookup_release)
+if [[ "$release_json" != "null" ]]; then
   test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
   test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
   test "$(jq -r '.draft' <<<"$release_json")" = "true"
@@ -1852,16 +1857,18 @@ if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF");
   while read -r digest name; do
     existing_digest=$(jq -r --arg name "$name" '[.assets[] | select(.name == $name)][0].digest' <<<"$release_json")
     if [ "$existing_digest" = "null" ]; then
-      gh release upload "$RELEASE_REF" "release-assets/$name"
+      gh release upload "$RELEASE_REF" "release-assets/$name" --repo "$GITHUB_REPOSITORY"
     else
       test "$existing_digest" = "sha256:$digest"
     fi
   done < "$manifest"
 else
-  gh release create "$RELEASE_REF" --draft --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes-file "$notes"
-  gh release upload "$RELEASE_REF" release-assets/*
+  gh release create "$RELEASE_REF" --draft --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes-file "$notes" --repo "$GITHUB_REPOSITORY"
+  gh release upload "$RELEASE_REF" release-assets/* --repo "$GITHUB_REPOSITORY"
 fi
-release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")
+release_json=$(lookup_release)
+release_id=$(jq -er '.id | select(type == "number" and . > 0 and floor == .)' <<<"$release_json")
+release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/$release_id")
 test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
 test "$(jq -r '.target_commitish' <<<"$release_json")" = "$RELEASE_SHA"
 test "$(jq -r '.draft' <<<"$release_json")" = "true"
@@ -1869,7 +1876,7 @@ expected_names=$(awk '{print $2}' "$manifest" | sort)
 actual_names=$(jq -r '.assets[].name' <<<"$release_json" | sort)
 test "$actual_names" = "$expected_names"
 jq -e --argjson expected "$expected" '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' <<<"$release_json"
-gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes"
+gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes" --repo "$GITHUB_REPOSITORY"
 """,
         }
 
