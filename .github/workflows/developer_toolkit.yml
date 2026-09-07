@@ -43,7 +43,7 @@ jobs:
             sha256: 705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b
     runs-on: ${{ matrix.os }}
     env:
-      ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: ${{ matrix.rcc_version }}
+      ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}
     steps:
       - uses: actions/checkout@v4
       - name: Cache RCC holotree

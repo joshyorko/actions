@@ -62,7 +62,7 @@ def test_toolkit_workflow_pins_primary_and_n_minus_one_rcc_assets() -> None:
     )
     entries = workflow["jobs"]["toolkit"]["strategy"]["matrix"]["include"]
     assert (
-        "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: ${{ matrix.rcc_version }}"
+        "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}"
         in (REPOSITORY_ROOT / ".github" / "workflows" / "developer_toolkit.yml").read_text()
     )
 
