@@ -278,12 +278,6 @@ def start_server(
 
     artifacts_dir = get_artifact_storage().root
 
-    _mount_artifact_static_files(
-        app,
-        settings.artifact_storage_backend,
-        artifacts_dir,
-        api_key=api_key,
-    )
     def verify_api_key(
         token: HTTPAuthorizationCredentials = Security(HTTPBearer(auto_error=True)),
     ) -> HTTPAuthorizationCredentials:
@@ -546,7 +540,12 @@ def start_server(
         include_in_schema=settings.full_openapi_spec,
     )
 
-    _mount_artifact_static_files(app, settings.artifact_storage_backend, artifacts_dir)
+    _mount_artifact_static_files(
+        app,
+        settings.artifact_storage_backend,
+        artifacts_dir,
+        api_key=api_key,
+    )
 
     # At this point the FastAPI app should be configured. What's missing now
     # is setup callbacks related to the startup and actuall start the async

@@ -110,6 +110,8 @@ the exact Runtime UI route `/artifacts/{run_id}`, and an HTTP integration test
 must exercise each family. When local artifacts are mounted at `/artifacts`,
 register that exact UI route before the mount so nested
 `/artifacts/<runId>/<filename>` requests remain raw file downloads. The mobile
+When API-key auth is enabled, pass the same key to this post-fallback mount;
+an earlier duplicate mount preempts the UI route.
 sidebar breakpoint is `max-width: 767px`, matching the Tailwind `md` boundary
 at 768px; a closed mobile sidebar must be hidden from visibility and focus until
 it is opened. Contract tests should cover both invariants, while real-browser
