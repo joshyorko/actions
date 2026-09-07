@@ -14,7 +14,12 @@ import PyInstaller.config
 from PyInstaller.building.api import COLLECT, EXE, PYZ
 from PyInstaller.building.build_main import Analysis
 from PyInstaller.log import logger
-from PyInstaller.utils.hooks import collect_all, collect_submodules, copy_metadata
+from PyInstaller.utils.hooks import (
+    collect_all,
+    collect_dynamic_libs,
+    collect_submodules,
+    copy_metadata,
+)
 
 PyInstaller.config.CONF["excludes"] = ["_pyi_rth_nltk"]
 
@@ -25,18 +30,41 @@ action_server_datas, _action_server_binaries, action_server_hiddenimports = coll
     "actions.server"
 )
 
+logger.info("Collecting actions_http dependencies...")
+actions_http_datas, _actions_http_binaries, actions_http_hiddenimports = collect_all(
+    "actions_http"
+)
+
 # Collect redis submodules for control-room-lite mode
 logger.info("Collecting redis submodules...")
 redis_hiddenimports = collect_submodules("redis")
 for h in redis_hiddenimports:
     logger.info(f"Collected redis hiddenimport: {h}")
+
+fastapi_hiddenimports = collect_submodules("fastapi")
+psutil_hiddenimports = collect_submodules("psutil")
+actions_hiddenimports = collect_submodules("actions")
+starlette_hiddenimports = collect_submodules("starlette")
+mcp_hiddenimports = collect_submodules("mcp")
+
+# psycopg imports its binary implementation dynamically at runtime.
+psycopg_hiddenimports = [
+    *collect_submodules("psycopg"),
+    *collect_submodules("psycopg_binary"),
+]
+psycopg_binaries = collect_dynamic_libs("psycopg_binary")
 new_datas = []
+rcc_datas = [
+    data
+    for data in action_server_datas
+    if data[1] == "actions/server/bin" and os.path.basename(data[0]).startswith("rcc-")
+]
 for data in action_server_datas:
     if ".mypy_cache" in data[0]:
         continue
     if "__pycache__" in data[0]:
         continue
-    if not data[0].endswith(".py"):
+    if not data[0].endswith(".py") and data not in rcc_datas:
         continue
     logger.info(f"Collected data: {data}")
     new_datas.append(data)
@@ -67,15 +95,31 @@ logger.info("Collecting action server submodules...")
 a = Analysis(
     ["src/actions/server/__main__.py"],
     pathex=[],
-    binaries=[],
     datas=[
         *action_server_datas,
+        *actions_http_datas,
+    ],
+    binaries=[
+        *_action_server_binaries,
+        *_actions_http_binaries,
+        *psycopg_binaries,
         ("src/actions/server/templates/action-templates.zip", "actions/server/templates"),
         ("src/actions/server/templates/action-templates.yaml", "actions/server/templates"),
     ],
     hiddenimports=[
         *action_server_hiddenimports,
+        *actions_http_hiddenimports,
         *redis_hiddenimports,
+        *fastapi_hiddenimports,
+        *psutil_hiddenimports,
+        *actions_hiddenimports,
+        *starlette_hiddenimports,
+        *mcp_hiddenimports,
+        *psycopg_hiddenimports,
+        "uvicorn",
+        "fastapi",
+        "sqlite3",
+        "_sqlite3",
         "termcolor",
         "pydantic.deprecated.decorator",
     ],

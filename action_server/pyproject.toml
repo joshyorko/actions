@@ -52,6 +52,7 @@ pytz = "^2024.1"
 aiosmtplib = "^3.0.0"
 # Redis for control-room-lite mode (bundled so it just works)
 redis = "^5.0.0"
+psycopg = { version = "^3.2.0", extras = ["binary"] }
 
 [tool.poetry.group.dev.dependencies]
 actions-local-devutils = { path = "../devutils/", develop = true }
@@ -85,6 +86,7 @@ generate-setup-file = true
 [tool.pytest.ini_options]
 norecursedirs = "tests/action_server_tests/test_devenv/* dist build build-binary"
 testpaths = ["tests"]
+markers = ["postgresql: requires a PostgreSQL service"]
 filterwarnings = [
     "ignore:ast.Str is deprecated.*:DeprecationWarning:robocorp\\.log\\._ast_utils",
     "ignore:ast.Str is deprecated.*:DeprecationWarning:robocorp\\.log\\._rewrite_ast_add_callbacks",

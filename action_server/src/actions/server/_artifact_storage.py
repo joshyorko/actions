@@ -274,5 +274,7 @@ def get_artifact_storage() -> FilesystemArtifactStorage:
     from ._settings import get_settings
 
     settings = get_settings()
+    if settings.artifact_storage_root is None:
+        settings.artifacts_dir.mkdir(parents=True, exist_ok=True)
     root = settings.artifact_storage_root or settings.artifacts_dir
     return create_artifact_storage(settings.artifact_storage_backend, root)
