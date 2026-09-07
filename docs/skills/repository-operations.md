@@ -65,7 +65,12 @@ recompute every file's byte length and SHA-256. Hash multisets are insufficient:
 omission, extra files, path swaps, reordering, wrong sizes, and wrong hashes
 fail validation.
 Both validators require manifest `schemaVersion` 1 and reject symlink or
-non-regular inventory entries before payload reads.
+non-regular inventory entries before payload reads. The JavaScript validator
+`lstat`s both root `artifact-manifest.json` and `sbom.json` paths, requiring
+ordinary regular non-symlink files, before any metadata `readFile`, JSON parse,
+inventory scan, or payload read; this prevents FIFO/device/socket metadata from
+blocking the validator. Keep this root-metadata preflight semantically aligned
+with Python's symlink/non-regular preflight.
 Both validators parse retained `sbom.json` and require CycloneDX `bomFormat`
 and a non-empty `specVersion`; file presence alone is not a passing SBOM check. The standalone Python
 validator binds a release artifact with `--expected-artifact` and
