@@ -11,6 +11,9 @@ new upload and never replace an existing tag or distribution file.
 Publish dependency releases before changing template pins. After publication,
 update the source templates and regenerate the embedded template ZIP and its
 SHA-256 metadata together; source YAML changes alone do not update shipped templates.
+The Core clean-wheel verifier compares the installed version with the input wheel's
+METADATA rather than a historical release number, so patch releases exercise the
+same isolated-install and action-execution checks.
 
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
@@ -20,7 +23,7 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
-Every template `package.yaml` pins the published `actions-core=1.0.0`.
+Every template `package.yaml` pins the published `actions-core=1.0.1`.
 The producer-consumer template additionally pins
 `actions-work-items=0.4.4`. `actions-http-helper` remains a transitive Core
 dependency, and `actions-runtime` is the server distribution rather than a
