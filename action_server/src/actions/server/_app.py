@@ -8,9 +8,18 @@ from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
 from . import _errors
-from ._settings import get_settings
+from ._settings import OriginPolicy, get_settings
 
 LOGGER = logging.getLogger(__name__)
+
+
+class _OriginPolicyCORSMiddleware(CORSMiddleware):
+    def __init__(self, app, *, origin_policy: OriginPolicy, **kwargs) -> None:
+        self._origin_policy = origin_policy
+        super().__init__(app, **kwargs)
+
+    def is_allowed_origin(self, origin: str) -> bool:
+        return self._origin_policy.allows(origin)
 
 
 class _CustomLifespan:
@@ -100,6 +109,7 @@ def get_app() -> _CustomFastAPI:
     from actions.server import __version__
 
     settings = get_settings()
+    origin_policy = OriginPolicy(settings.cors_allow_origins)
 
     server = {"url": settings.server_url}
 
@@ -108,10 +118,12 @@ def get_app() -> _CustomFastAPI:
         servers=[server],
         version=__version__,
     )
+    app.state.cors_origin_policy = origin_policy
 
     app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
+        _OriginPolicyCORSMiddleware,  # type: ignore[arg-type]
+        origin_policy=origin_policy,
+        allow_origins=[],
         allow_methods=["*"],
         allow_headers=["*"],
         allow_credentials=True,

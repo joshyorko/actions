@@ -99,7 +99,13 @@ class _ConfiguredAPIKeyMiddleware:
 
         path = scope.get("path", "")
         protected = path.startswith("/api/") or path.startswith("/oauth2/")
-        if protected and not self._is_public(path):
+        headers = dict(scope.get("headers", []))
+        is_cors_preflight = (
+            scope.get("method") == "OPTIONS"
+            and b"origin" in headers
+            and b"access-control-request-method" in headers
+        )
+        if protected and not self._is_public(path) and not is_cors_preflight:
             from ._api_action_routes import _get_bearer_token
 
             if _get_bearer_token(scope.get("headers", [])) != self.api_key:
@@ -295,7 +301,7 @@ def start_server(
     from ._api_work_items import work_items_api_router
     from ._app import get_app
     from ._database import redact_database_url
-    from ._server_websockets import websocket_api_router
+    from ._server_websockets import verify_websocket_origin, websocket_api_router
     from ._settings import get_settings
 
     if typing.TYPE_CHECKING:
@@ -324,7 +330,6 @@ def start_server(
     log.debug(f"Starting server. Settings:\n{settings_str}")
 
     app = get_app()
-
     if api_key:
         app.add_middleware(_ConfiguredAPIKeyMiddleware, api_key=api_key)
 
@@ -354,6 +359,8 @@ def start_server(
                 raise WebSocketException(code=1008)
 
         websocket_dependencies.append(Depends(verify_websocket_api_key))
+
+    websocket_dependencies.append(Depends(verify_websocket_origin))
 
     action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
     action_routes.setup_mcp_server(api_key)

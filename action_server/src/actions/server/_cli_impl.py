@@ -101,6 +101,18 @@ def _add_start_server_command(command_parser, defaults):
         default=None,
     )
     start_parser.add_argument(
+        "--cors-allow-origin",
+        dest="cors_allow_origins",
+        action="append",
+        metavar="ORIGIN",
+        default=list(defaults["cors_allow_origins"]),
+        help=(
+            "Allow a browser Origin for credentialed CORS and WebSocket handshakes. "
+            "May be repeated; origins must be explicit http(s) scheme/host/port "
+            "values without credentials, paths, queries, or fragments."
+        ),
+    )
+    start_parser.add_argument(
         "--expose-provider",
         dest="expose_provider",
         choices=["auto", "localhost.run", "bore", "cloudflare"],
