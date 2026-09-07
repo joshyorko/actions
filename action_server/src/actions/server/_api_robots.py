@@ -1,10 +1,18 @@
+import asyncio
+import ipaddress
 import logging
+import os
 import shutil
+import socket
+import stat
 import tempfile
+import time
+import unicodedata
+import uuid
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Dict, List, Optional
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 import fastapi
 import yaml
@@ -21,6 +29,22 @@ log = logging.getLogger(__name__)
 
 # Directory where imported robots are stored
 ROBOTS_DIR = Path.home() / ".robots"
+
+_ROBOT_IO_CHUNK_SIZE = 64 * 1024
+_MAX_UPLOAD_BYTES = 100 * 1024 * 1024
+_MAX_DOWNLOAD_BYTES = 100 * 1024 * 1024
+_MAX_ARCHIVE_INPUT_BYTES = 100 * 1024 * 1024
+_MAX_ARCHIVE_ENTRIES = 10_000
+_MAX_ARCHIVE_MEMBER_BYTES = 50 * 1024 * 1024
+_MAX_ARCHIVE_EXPANDED_BYTES = 500 * 1024 * 1024
+_MAX_ARCHIVE_EXPANSION_RATIO = 100.0
+_MAX_ARCHIVE_SECONDS = 60.0
+_MAX_REDIRECTS = 5
+_ALLOWED_ZIP_CONTENT_TYPES = {
+    "application/zip",
+    "application/x-zip-compressed",
+    "application/octet-stream",
+}
 
 robots_api_router = APIRouter(prefix="/api/robots")
 
@@ -224,6 +248,236 @@ class RobotImportResponseAPI(BaseModel):
     robot_name: Optional[str] = None
 
 
+class _RobotImportLimitError(ValueError):
+    pass
+
+
+def _validate_zip_members(
+    members: list[zipfile.ZipInfo],
+) -> tuple[bool, str, set[str]]:
+    normalized_paths: set[str] = set()
+    normalized_prefixes: dict[str, str] = {}
+    normalized_directories: set[str] = set()
+    root_dirs: set[str] = set()
+    advertised_expanded_bytes = 0
+
+    if len(members) > _MAX_ARCHIVE_ENTRIES:
+        return False, "Zip contains too many entries", set()
+
+    for member in members:
+        name = member.filename
+        if not name or "\x00" in name:
+            return False, "Zip contains an invalid member path", set()
+        if "\\" in name:
+            return False, "Zip contains an ambiguous path separator", set()
+
+        path = PurePosixPath(name)
+        if path.is_absolute() or PureWindowsPath(name).drive:
+            return False, "Zip contains an absolute or drive-qualified path", set()
+
+        raw_parts = name.rstrip("/").split("/")
+        if not raw_parts or any(part in {"", ".", ".."} for part in raw_parts):
+            return False, "Zip contains an unsafe package root path", set()
+
+        normalized_parts = [
+            unicodedata.normalize("NFC", part).casefold() for part in raw_parts
+        ]
+        normalized = "/".join(normalized_parts)
+        for index in range(1, len(normalized_parts) + 1):
+            normalized_prefix = "/".join(normalized_parts[:index])
+            raw_prefix = "/".join(raw_parts[:index])
+            previous_prefix = normalized_prefixes.get(normalized_prefix)
+            if previous_prefix is not None and previous_prefix != raw_prefix:
+                return False, "Zip contains duplicate or case-colliding paths", set()
+            normalized_prefixes[normalized_prefix] = raw_prefix
+            if (
+                index < len(normalized_parts)
+                and normalized_prefix in normalized_paths
+                and normalized_prefix not in normalized_directories
+            ):
+                return False, "Zip contains a file used as a directory", set()
+        if normalized in normalized_paths:
+            return False, "Zip contains duplicate or case-colliding paths", set()
+        normalized_paths.add(normalized)
+
+        entry_type = stat.S_IFMT((member.external_attr >> 16) & 0xFFFF)
+        if entry_type not in {0, stat.S_IFREG, stat.S_IFDIR}:
+            return False, "Zip contains a link or special filesystem entry", set()
+
+        if member.file_size < 0 or member.compress_size < 0:
+            return False, "Zip contains invalid size metadata", set()
+        if member.file_size > _MAX_ARCHIVE_MEMBER_BYTES:
+            return False, "Zip member exceeds the size limit", set()
+        advertised_expanded_bytes += member.file_size
+        if advertised_expanded_bytes > _MAX_ARCHIVE_EXPANDED_BYTES:
+            return False, "Zip expanded size exceeds the limit", set()
+        if member.file_size and not member.compress_size:
+            return False, "Zip member has invalid compression metadata", set()
+        if member.compress_size and (
+            member.file_size / member.compress_size > _MAX_ARCHIVE_EXPANSION_RATIO
+        ):
+            return False, "Zip expansion ratio exceeds the limit", set()
+
+        if entry_type == stat.S_IFDIR and not member.is_dir():
+            return False, "Zip contains invalid directory metadata", set()
+        if member.is_dir():
+            normalized_directories.add(normalized)
+
+        root_dirs.add(raw_parts[0])
+
+    return True, "", root_dirs
+
+
+def _confined_staging_path(staging_root: Path, member_name: str) -> Path:
+    parts = member_name.rstrip("/").split("/")
+    candidate = staging_root.joinpath(*parts)
+    staging = staging_root.resolve()
+    resolved_candidate = candidate.resolve()
+    try:
+        resolved_candidate.relative_to(staging)
+    except ValueError:
+        raise _RobotImportLimitError("Zip member escapes staging")
+
+    current = staging
+    for part in parts[:-1]:
+        current = current / part
+        try:
+            current_stat = current.lstat()
+        except FileNotFoundError:
+            current.mkdir()
+        else:
+            if stat.S_ISLNK(current_stat.st_mode) or not stat.S_ISDIR(
+                current_stat.st_mode
+            ):
+                raise _RobotImportLimitError("Zip member uses an unsafe staging path")
+
+    return candidate
+
+
+def _validate_staged_tree(root: Path) -> None:
+    root_stat = root.lstat()
+    if stat.S_ISLNK(root_stat.st_mode) or not stat.S_ISDIR(root_stat.st_mode):
+        raise _RobotImportLimitError("Staged robot package is not a directory")
+
+    for entry in root.rglob("*"):
+        entry_stat = entry.lstat()
+        if stat.S_ISLNK(entry_stat.st_mode):
+            raise _RobotImportLimitError("Staged robot package contains a link")
+        if not (stat.S_ISDIR(entry_stat.st_mode) or stat.S_ISREG(entry_stat.st_mode)):
+            raise _RobotImportLimitError(
+                "Staged robot package contains a special filesystem entry"
+            )
+
+
+def _sanitized_robot_name(value: Optional[str]) -> str:
+    name = "".join(c for c in (value or "") if c.isalnum() or c in "._- ").strip()
+    if name in {"", ".", ".."}:
+        return "imported_robot"
+    return name[:128]
+
+
+def _publish_robot_package(
+    package_dir: Path, robot_name: Optional[str], extracted_name: Optional[str]
+) -> tuple[str, Path]:
+    robots_root = ROBOTS_DIR.resolve()
+    base_name = _sanitized_robot_name(robot_name or extracted_name)
+
+    for _ in range(100):
+        final_name = base_name
+        target_dir = robots_root / final_name
+        if os.path.lexists(target_dir):
+            final_name = f"{base_name}_{uuid.uuid4().hex[:8]}"
+            target_dir = robots_root / final_name
+            if os.path.lexists(target_dir):
+                continue
+
+        temporary_target = robots_root / f".{final_name}.staging-{uuid.uuid4().hex}"
+        try:
+            shutil.copytree(package_dir, temporary_target, symlinks=True)
+            _validate_staged_tree(temporary_target)
+            if os.path.lexists(target_dir):
+                raise FileExistsError(target_dir)
+            os.replace(temporary_target, target_dir)
+            return final_name, target_dir
+        except FileExistsError:
+            if not os.path.lexists(target_dir):
+                raise
+        finally:
+            if os.path.lexists(temporary_target):
+                if temporary_target.is_dir() and not temporary_target.is_symlink():
+                    shutil.rmtree(temporary_target)
+                else:
+                    temporary_target.unlink()
+
+    raise _RobotImportLimitError("Unable to allocate a safe robot publication path")
+
+
+def _validate_download_url(url: str) -> tuple[bool, str]:
+    try:
+        parsed = urlparse(url)
+        scheme = parsed.scheme.lower()
+        hostname = parsed.hostname
+        port = parsed.port
+    except (TypeError, ValueError):
+        return False, "Robot download URL is invalid"
+
+    if scheme != "https" or not hostname:
+        return False, "Robot download URL must use an allowed HTTPS host"
+    if parsed.username or parsed.password or parsed.fragment:
+        return False, "Robot download URL contains disallowed credentials or fragment"
+    if any(ord(character) < 0x20 for character in url):
+        return False, "Robot download URL contains invalid characters"
+    if port is not None and not 1 <= port <= 65535:
+        return False, "Robot download URL has an invalid port"
+
+    normalized_host = hostname.rstrip(".").lower()
+    if normalized_host in {"localhost", "localhost.localdomain"}:
+        return False, "Robot download URL targets a private host"
+
+    try:
+        addresses = {str(ipaddress.ip_address(normalized_host))}
+    except ValueError:
+        try:
+            address_info = socket.getaddrinfo(
+                normalized_host, port, type=socket.SOCK_STREAM
+            )
+            addresses = {str(ipaddress.ip_address(item[4][0])) for item in address_info}
+        except (OSError, UnicodeError, ValueError):
+            return False, "Robot download URL host cannot be verified"
+
+    if not addresses or any(
+        not ipaddress.ip_address(address).is_global for address in addresses
+    ):
+        return False, "Robot download URL targets a private host"
+
+    return True, ""
+
+
+async def _save_uploaded_robot(file: UploadFile) -> Path:
+    temporary_path: Optional[Path] = None
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".zip", delete=False) as tmp_file:
+            temporary_path = Path(tmp_file.name)
+            total_bytes = 0
+            while True:
+                chunk = await file.read(_ROBOT_IO_CHUNK_SIZE)
+                if not chunk:
+                    break
+                if len(chunk) > _ROBOT_IO_CHUNK_SIZE:
+                    raise _RobotImportLimitError("Robot upload chunk exceeds the limit")
+                total_bytes += len(chunk)
+                if total_bytes > _MAX_UPLOAD_BYTES:
+                    raise _RobotImportLimitError("Robot upload exceeds the size limit")
+                tmp_file.write(chunk)
+            tmp_file.flush()
+            os.fsync(tmp_file.fileno())
+        return temporary_path
+    except Exception:
+        if temporary_path is not None and temporary_path.exists():
+            temporary_path.unlink()
+        raise
+
+
 def _validate_robot_package(package_dir: Path) -> tuple[bool, str, Optional[str]]:
     """
     Validate that a directory contains a valid robot package.
@@ -304,34 +558,79 @@ def _extract_zip_to_robots(
 
     Returns: (success, message, extracted_path)
     """
-    ROBOTS_DIR.mkdir(parents=True, exist_ok=True)
-
     try:
-        with zipfile.ZipFile(zip_path, "r") as zip_ref:
-            # Get the list of files in the zip
-            namelist = zip_ref.namelist()
+        if not zip_path.is_file():
+            return False, "Zip file is not a regular file", None
+        if zip_path.stat().st_size > _MAX_ARCHIVE_INPUT_BYTES:
+            return False, "Zip input exceeds the size limit", None
 
-            if not namelist:
+        ROBOTS_DIR.mkdir(parents=True, exist_ok=True)
+        with zipfile.ZipFile(zip_path, "r") as zip_ref:
+            members = zip_ref.infolist()
+            if not members:
                 return False, "Zip file is empty", None
 
-            # Check if there's a single root directory
-            root_dirs = set()
-            for name in namelist:
-                parts = name.split("/")
-                if parts[0]:
-                    root_dirs.add(parts[0])
+            valid, message, _root_dirs = _validate_zip_members(members)
+            if not valid:
+                return False, message, None
 
             # Create a temp directory for extraction
             with tempfile.TemporaryDirectory() as temp_dir:
                 temp_path = Path(temp_dir)
-                zip_ref.extractall(temp_path)
+                started_at = time.monotonic()
+                expanded_bytes = 0
+                for member in members:
+                    if time.monotonic() - started_at > _MAX_ARCHIVE_SECONDS:
+                        raise _RobotImportLimitError(
+                            "Zip extraction exceeded the time limit"
+                        )
 
-                # Determine the package directory
-                if len(root_dirs) == 1:
-                    # Single root directory in zip
-                    package_dir = temp_path / list(root_dirs)[0]
+                    member_path = _confined_staging_path(temp_path, member.filename)
+                    if member.is_dir():
+                        member_path.mkdir(exist_ok=True)
+                        continue
+
+                    actual_member_bytes = 0
+                    with zip_ref.open(member, "r") as source, member_path.open(
+                        "xb"
+                    ) as destination:
+                        while True:
+                            chunk = source.read(_ROBOT_IO_CHUNK_SIZE)
+                            if not chunk:
+                                break
+                            actual_member_bytes += len(chunk)
+                            expanded_bytes += len(chunk)
+                            if actual_member_bytes > _MAX_ARCHIVE_MEMBER_BYTES:
+                                raise _RobotImportLimitError(
+                                    "Zip member exceeds the size limit"
+                                )
+                            if expanded_bytes > _MAX_ARCHIVE_EXPANDED_BYTES:
+                                raise _RobotImportLimitError(
+                                    "Zip expanded size exceeds the limit"
+                                )
+                            if time.monotonic() - started_at > _MAX_ARCHIVE_SECONDS:
+                                raise _RobotImportLimitError(
+                                    "Zip extraction exceeded the time limit"
+                                )
+                            destination.write(chunk)
+
+                    if actual_member_bytes != member.file_size:
+                        raise _RobotImportLimitError(
+                            "Zip member size could not be verified"
+                        )
+                    if member.compress_size and (
+                        actual_member_bytes / member.compress_size
+                        > _MAX_ARCHIVE_EXPANSION_RATIO
+                    ):
+                        raise _RobotImportLimitError(
+                            "Zip expansion ratio exceeds the limit"
+                        )
+
+                _validate_staged_tree(temp_path)
+                top_level = list(temp_path.iterdir())
+                if len(top_level) == 1 and top_level[0].is_dir():
+                    package_dir = top_level[0]
                 else:
-                    # Multiple files/dirs at root - treat temp_dir as package
                     package_dir = temp_path
 
                 # Validate the package
@@ -339,31 +638,14 @@ def _extract_zip_to_robots(
                 if not is_valid:
                     return False, message, None
 
-                # Determine final name
-                final_name = robot_name or extracted_name or package_dir.name
-
-                # Sanitize name for filesystem
-                final_name = "".join(
-                    c for c in final_name if c.isalnum() or c in "._- "
-                ).strip()
-                if not final_name:
-                    final_name = "imported_robot"
-
-                # Check if target already exists
-                target_dir = ROBOTS_DIR / final_name
-                if target_dir.exists():
-                    # Add suffix to make unique
-                    import uuid
-
-                    suffix = str(uuid.uuid4())[:8]
-                    final_name = f"{final_name}_{suffix}"
-                    target_dir = ROBOTS_DIR / final_name
-
-                # Move the package to robots directory
-                shutil.copytree(package_dir, target_dir)
+                final_name, target_dir = _publish_robot_package(
+                    package_dir, robot_name, extracted_name
+                )
 
                 return True, f"Successfully imported robot '{final_name}'", target_dir
 
+    except _RobotImportLimitError as e:
+        return False, str(e), None
     except zipfile.BadZipFile:
         return False, "Invalid zip file", None
     except Exception as e:
@@ -383,39 +665,135 @@ async def _download_from_url(url: str) -> tuple[bool, str, Optional[Path]]:
     """
     import httpx2 as httpx
 
-    parsed = urlparse(url)
+    try:
+        parsed = urlparse(url)
+    except (TypeError, ValueError):
+        return False, "Robot download URL is invalid", None
 
-    # Handle GitHub URLs
-    if "github.com" in parsed.netloc:
-        # Convert GitHub repo URL to zip download URL
-        # https://github.com/owner/repo -> https://github.com/owner/repo/archive/refs/heads/main.zip
+    # Handle GitHub repository URLs, while keeping the host match exact.
+    try:
+        parsed_hostname = parsed.hostname
+    except ValueError:
+        return False, "Robot download URL is invalid", None
+
+    valid_url, message = _validate_download_url(url)
+    if not valid_url:
+        return False, message, None
+
+    if parsed_hostname in {"github.com", "www.github.com"}:
         path_parts = parsed.path.strip("/").split("/")
         if len(path_parts) >= 2:
             owner, repo = path_parts[0], path_parts[1]
-            # Remove .git suffix if present
-            if repo.endswith(".git"):
-                repo = repo[:-4]
+            repo = repo.removesuffix(".git")
             url = f"https://github.com/{owner}/{repo}/archive/refs/heads/main.zip"
 
+    valid_url, message = _validate_download_url(url)
+    if not valid_url:
+        return False, message, None
+
+    temporary_path: Optional[Path] = None
+    download_succeeded = False
     try:
-        async with httpx.AsyncClient(follow_redirects=True, timeout=60.0) as client:
-            response = await client.get(url)
-            response.raise_for_status()
+        async with asyncio.timeout(_MAX_ARCHIVE_SECONDS):
+            async with httpx.AsyncClient(
+                follow_redirects=False, timeout=_MAX_ARCHIVE_SECONDS
+            ) as client:
+                current_url = url
+                for redirect_count in range(_MAX_REDIRECTS + 1):
+                    valid_url, message = _validate_download_url(current_url)
+                    if not valid_url:
+                        return False, message, None
 
-            # Save to temp file
-            with tempfile.NamedTemporaryFile(suffix=".zip", delete=False) as tmp_file:
-                tmp_file.write(response.content)
-                tmp_path = Path(tmp_file.name)
+                    async with client.stream("GET", current_url) as response:
+                        if response.status_code in {301, 302, 303, 307, 308}:
+                            location = response.headers.get("location")
+                            if not location:
+                                return False, "Robot download redirect is invalid", None
+                            if redirect_count >= _MAX_REDIRECTS:
+                                return (
+                                    False,
+                                    "Robot download has too many redirects",
+                                    None,
+                                )
+                            current_url = urljoin(current_url, location)
+                            continue
 
-            return True, "Downloaded successfully", tmp_path
+                        if response.status_code >= 400:
+                            return False, f"HTTP error: {response.status_code}", None
 
-    except httpx.HTTPStatusError as e:
-        return False, f"HTTP error: {e.response.status_code}", None
-    except httpx.RequestError as e:
-        return False, f"Request failed: {e}", None
-    except Exception as e:
-        log.exception("Error downloading robot package")
-        return False, f"Download error: {e}", None
+                        content_type = response.headers.get("content-type", "")
+                        content_type = content_type.split(";", 1)[0].strip().lower()
+                        if (
+                            content_type
+                            and content_type not in _ALLOWED_ZIP_CONTENT_TYPES
+                        ):
+                            return False, "Robot download is not a ZIP archive", None
+
+                        content_length = response.headers.get("content-length")
+                        if content_length is not None:
+                            try:
+                                advertised_length = int(content_length)
+                            except ValueError:
+                                return (
+                                    False,
+                                    "Robot download has invalid size metadata",
+                                    None,
+                                )
+                            if (
+                                advertised_length < 0
+                                or advertised_length > _MAX_DOWNLOAD_BYTES
+                            ):
+                                return (
+                                    False,
+                                    "Robot download exceeds the size limit",
+                                    None,
+                                )
+
+                        with tempfile.NamedTemporaryFile(
+                            suffix=".zip", delete=False
+                        ) as tmp_file:
+                            temporary_path = Path(tmp_file.name)
+                            total_bytes = 0
+                            started_at = time.monotonic()
+                            async for chunk in response.aiter_bytes(
+                                chunk_size=_ROBOT_IO_CHUNK_SIZE
+                            ):
+                                if len(chunk) > _ROBOT_IO_CHUNK_SIZE:
+                                    raise _RobotImportLimitError(
+                                        "Robot download chunk exceeds the limit"
+                                    )
+                                total_bytes += len(chunk)
+                                if total_bytes > _MAX_DOWNLOAD_BYTES:
+                                    raise _RobotImportLimitError(
+                                        "Robot download exceeds the size limit"
+                                    )
+                                if time.monotonic() - started_at > _MAX_ARCHIVE_SECONDS:
+                                    raise _RobotImportLimitError(
+                                        "Robot download exceeded the time limit"
+                                    )
+                                tmp_file.write(chunk)
+                            tmp_file.flush()
+                            os.fsync(tmp_file.fileno())
+
+                        download_succeeded = True
+                        return True, "Downloaded successfully", temporary_path
+
+    except _RobotImportLimitError as e:
+        return False, str(e), None
+    except asyncio.TimeoutError:
+        return False, "Robot download exceeded the time limit", None
+    except httpx.RequestError:
+        return False, "Robot download request failed", None
+    except Exception:
+        log.warning("Robot package download failed")
+        return False, "Robot download failed", None
+    finally:
+        if (
+            not download_succeeded
+            and temporary_path is not None
+            and temporary_path.exists()
+        ):
+            temporary_path.unlink(missing_ok=True)
 
 
 @robots_api_router.post("/import", response_model=RobotImportResponseAPI)
@@ -447,11 +825,7 @@ async def import_robot(
                     message="File must be a .zip archive",
                 )
 
-            # Save uploaded file to temp location
-            with tempfile.NamedTemporaryFile(suffix=".zip", delete=False) as tmp_file:
-                content = await file.read()
-                tmp_file.write(content)
-                temp_zip_path = Path(tmp_file.name)
+            temp_zip_path = await _save_uploaded_robot(file)
 
         elif url:
             # Handle URL download
@@ -480,6 +854,8 @@ async def import_robot(
                 message=message,
             )
 
+    except _RobotImportLimitError as e:
+        return RobotImportResponseAPI(success=False, message=str(e))
     finally:
         # Clean up temp file
         if temp_zip_path and temp_zip_path.exists():

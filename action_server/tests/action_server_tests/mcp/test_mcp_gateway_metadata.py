@@ -942,7 +942,7 @@ def test_cors_exposes_the_canonical_mcp_request_id(tmp_path, monkeypatch):
         cors = next(
             middleware
             for middleware in app.user_middleware
-            if middleware.cls is CORSMiddleware
+            if issubclass(middleware.cls, CORSMiddleware)
         )
         assert "X-Request-ID" in cors.kwargs["expose_headers"]
     finally:
