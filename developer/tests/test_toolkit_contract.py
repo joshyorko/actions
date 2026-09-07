@@ -70,8 +70,8 @@ def test_toolchain_node_version_satisfies_frontend_engine() -> None:
     )
 
     assert package["engines"]["node"] == ">=20.19.0"
-    assert "nodejs=20.19.0" in setup["dependencies"]
-    assert "nodejs=20.19.0" in windows_setup["dependencies"]
+    assert "nodejs=20.19.3" in setup["dependencies"]
+    assert "nodejs=20.19.3" in windows_setup["dependencies"]
 
 
 def test_ci_verifies_bootstrap_environment_isolation() -> None:

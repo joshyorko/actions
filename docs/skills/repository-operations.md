@@ -478,7 +478,7 @@ instead of exercising their documented `./output` default. `ToolkitTest` runs Ru
 pytest against the gateway itself; the full `Test` task runs it first and also covers
 `devutils`, whose package does not provide an Invoke task collection. The RCC toolchain
 includes pinned `jq` because the devutils workflow-contract suite executes its admission
-filters. The generic environment pins `jq=1.7.1`. Its Node pin is `nodejs=20.19.0`,
+filters. The generic environment pins `jq=1.7.1`. Its Node pin is `nodejs=20.19.3`,
 matching the frontend package's `engines.node` lower bound; Windows amd64 must keep the
 same Node version while selecting the preceding
 `setup_windows_amd64.yaml` through RCC's OS/architecture filename matching and uses

@@ -6,7 +6,7 @@ channels:
 dependencies:
   - python=3.12
   - git=2.46.0
-  - nodejs=20.19.0
+  - nodejs=20.19.3
   - go=1.23.6
   - m2w64-jq=1.6
   - uv=0.9.26
