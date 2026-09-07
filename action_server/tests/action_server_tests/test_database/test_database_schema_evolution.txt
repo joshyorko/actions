@@ -4,7 +4,7 @@ IMPORTANT: If this file changes a new migration must be put in place!
 '''
 CREATE TABLE IF NOT EXISTS migration(
     id INTEGER NOT NULL PRIMARY KEY,
-    name TEXT NOT NULL  
+    name TEXT NOT NULL
 )
 ''',
 
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS action_package(
     name TEXT NOT NULL,
     directory TEXT NOT NULL,
     conda_hash TEXT NOT NULL,
-    env_json TEXT NOT NULL  
+    env_json TEXT NOT NULL
 )
 ''',
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS action(
     is_consequential INTEGER,
     managed_params_schema TEXT DEFAULT NULL,
     options TEXT NOT NULL DEFAULT '',
-    FOREIGN KEY (action_package_id) REFERENCES action_package(id)  
+    FOREIGN KEY (action_package_id) REFERENCES action_package(id)
 )
 ''',
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS run(
     run_type TEXT NOT NULL DEFAULT 'action',
     robot_package_path TEXT DEFAULT NULL,
     robot_task_name TEXT DEFAULT NULL,
-    robot_env_hash TEXT DEFAULT NULL  
+    robot_env_hash TEXT DEFAULT NULL
 )
 ''',
 
@@ -113,7 +113,7 @@ CREATE INDEX run_run_type_non_unique_index ON run(run_type);
 '''
 CREATE TABLE IF NOT EXISTS counter(
     id TEXT NOT NULL PRIMARY KEY,
-    value INTEGER NOT NULL  
+    value INTEGER NOT NULL
 )
 ''',
 
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS user_session(
     id TEXT NOT NULL PRIMARY KEY,
     created_at TEXT NOT NULL,
     accessed_at TEXT NOT NULL,
-    external INTEGER CHECK(external IN (0, 1)) NOT NULL  
+    external INTEGER CHECK(external IN (0, 1)) NOT NULL
 )
 ''',
 
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS temp_user_session_data(
     key TEXT NOT NULL,
     data TEXT NOT NULL,
     expires_at TEXT NOT NULL,
-    FOREIGN KEY (user_session_id) REFERENCES user_session(id)  
+    FOREIGN KEY (user_session_id) REFERENCES user_session(id)
 )
 ''',
 
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS o_auth2_user_data(
     token_type TEXT NOT NULL,
     scopes TEXT NOT NULL,
     metadata TEXT NOT NULL DEFAULT '',
-    code_verifier TEXT NOT NULL DEFAULT ''  
+    code_verifier TEXT NOT NULL DEFAULT ''
 )
 ''',
 
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS schedule_group(
     description TEXT,
     parent_id TEXT,
     color TEXT,
-    created_at TEXT NOT NULL  
+    created_at TEXT NOT NULL
 )
 ''',
 
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS schedule(
     notification_email TEXT DEFAULT NULL,
     group_id TEXT DEFAULT NULL,
     tags_json TEXT NOT NULL DEFAULT '[]',
-    priority INTEGER NOT NULL  
+    priority INTEGER NOT NULL
 )
 ''',
 
@@ -281,7 +281,7 @@ CREATE TABLE IF NOT EXISTS schedule_execution(
     skip_reason TEXT DEFAULT NULL,
     result_json TEXT DEFAULT NULL,
     notification_sent INTEGER CHECK(notification_sent IN (0, 1)) NOT NULL DEFAULT 0,
-    notification_error TEXT DEFAULT NULL  
+    notification_error TEXT DEFAULT NULL
 )
 ''',
 
@@ -319,7 +319,7 @@ CREATE TABLE IF NOT EXISTS trigger(
     last_triggered_at TEXT DEFAULT NULL,
     trigger_count INTEGER NOT NULL,
     rate_limit_enabled INTEGER CHECK(rate_limit_enabled IN (0, 1)) NOT NULL DEFAULT 0,
-    rate_limit_max_per_minute INTEGER NOT NULL  
+    rate_limit_max_per_minute INTEGER NOT NULL
 )
 ''',
 
@@ -350,7 +350,7 @@ CREATE TABLE IF NOT EXISTS trigger_invocation(
     status TEXT NOT NULL,
     run_id TEXT,
     work_item_id TEXT,
-    error_message TEXT  
+    error_message TEXT
 )
 ''',
 
