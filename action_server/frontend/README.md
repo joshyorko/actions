@@ -7,6 +7,13 @@ two independently buildable application boundaries:
 - `apps/canvas-view` builds the separate Canvas View boundary. Product behavior
   for Canvas View is intentionally outside this topology change.
 
+`npm run build:artifacts` produces `dist/` as the single-file `runtime-admin`
+artifact for Runtime wheel/frozen embedding and `dist-canvas/` as the separate
+`canvas-mcp-app` resource. Both roots contain deterministic
+`artifact-manifest.json` SHA-256 inventories and a CycloneDX `sbom.json`; source
+maps are disabled. `npm run validate:artifacts` enforces the 1 MiB per-artifact
+budget and the Canvas `text/html;profile=mcp-app` content type.
+
 Shared Runtime source lives under `src/`; shell composition is in
 `src/app/RuntimeShell.tsx` and route composition is exposed through
 `src/app/RuntimeRoutes.tsx`.

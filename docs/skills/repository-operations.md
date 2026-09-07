@@ -28,9 +28,64 @@ to verify both independent artifacts. The topology has no tier-specific
 manifest, product-tier build variable, vendored package directory, or external
 runtime asset dependency. Frontend quality is fail-fast through
 `npm run test:quality`, which intentionally gates the shipping Runtime/Canvas
-entrypoints and `src/app` topology plus topology tests; the historical all-tree
+entrypoints and `src/app` topology plus topology tests. Its Prettier check uses
+the package-owned `--end-of-line auto` contract so the same quality invocation
+accepts the checkout's native LF or CRLF representation on every matrix OS; the
+topology gate targets its exact test file so Vitest resolves the same test on
+Windows and POSIX project roots; the historical all-tree
 lint and full test suites were not green gates. The workflow runs both build
-boundaries.
+boundaries. The release command `npm run build:artifacts` also generates a
+CycloneDX `sbom.json` in each root. Runtime is post-processed into one
+`dist/index.html` for the existing frozen/PyInstaller embedding seam; Canvas
+remains a hashed multi-file root and declares `text/html;profile=mcp-app`.
+Runtime inlining must use exact asset markers with callback replacement, escape
+raw-text terminators and HTML-like opener sequences in inline JavaScript/CSS,
+and fail closed when a marker is missing or duplicated. After successful
+inlining, the generated `dist/assets` directory is removed; cleanup fails if
+any payload remains unprocessed. Static build,
+manifest, and import checks do not catch malformed post-inline HTML: serve the
+exact Runtime artifact through a real browser before visual acceptance and
+prove the root renders, no external JS/CSS request remains, no console/page
+error occurs, and the inline script contains no raw HTML boundary.
+Each standalone `build:runtime` and `build:canvas` command also emits the
+corresponding reproducible CycloneDX `sbom.json`; `build:artifacts` composes
+those per-root commands. This keeps the default missing-root repair path
+complete without relying on a separate all-roots command.
+Each root records a sorted `artifact-manifest.json` with SHA-256 entries,
+disables source maps, and is checked by `npm run validate:artifacts` against a
+1 MiB raw / 300 KiB gzip executable-payload budget. The manifest `files` list is
+the canonical shipped-payload inventory: retained `artifact-manifest.json` and
+`sbom.json` metadata are excluded from that budget. The hosted frontend build
+must invoke this same dual-root validator rather than recursively summing a
+`dist` directory.
+The JavaScript and Python validators independently enumerate shipped files and
+structural directories, require sorted normalized relative paths with an exact
+directory inventory, and
+recompute every file's byte length and SHA-256. Hash multisets are insufficient:
+omission, extra files, path swaps, reordering, wrong sizes, and wrong hashes
+fail validation.
+Both validators require manifest `schemaVersion` 1 and reject symlink or
+non-regular inventory entries before payload reads. The JavaScript validator
+`lstat`s both root `artifact-manifest.json` and `sbom.json` paths, requiring
+ordinary regular non-symlink files, before any metadata `readFile`, JSON parse,
+inventory scan, or payload read; this prevents FIFO/device/socket metadata from
+blocking the validator. Keep this root-metadata preflight semantically aligned
+with Python's symlink/non-regular preflight.
+Both validators parse retained `sbom.json` and require CycloneDX `bomFormat`
+and a non-empty `specVersion`; file presence alone is not a passing SBOM check. The standalone Python
+validator binds a release artifact with `--expected-artifact` and
+`--expected-content-type`; supply both options together when using its CLI.
+Release-bound Python validation, including `inv validate-artifact`, treats a
+missing `artifact-manifest.json` as an error when artifact identity and content
+type are expected. It validates path safety, sorted exact inventory, and
+structural directories before reading any payload bytes; invalid inventory
+skips payload size/hash/budget reads rather than inspecting undeclared paths.
+CycloneDX generation uses its `--output-reproducible` mode for both retained
+SBOMs, and the hosted determinism check runs the second clean build on Linux,
+macOS, and Windows. The Canvas manifest command passes
+`text/html;profile=mcp-app` as one double-quoted shell argument, avoiding POSIX
+single-quote semantics so `cmd.exe` preserves the exact identity string;
+validators remain strict about that identity.
 
 The frontend UI system is Actions-owned under `action_server/frontend/src` and
 must remain consumable by both entrypoints without a network presentation
@@ -39,15 +94,13 @@ it uses the intentional system font stack, keeps light and `.dark` token values
 together, and disables authored animation under `prefers-reduced-motion`. The
 Canvas entrypoint must remain free of remote URLs, inline event handlers, and
 inline styles so it can render under an offline, CSP-constrained host. The
-`__tests__/ui-system.test.ts` contract test is a local fast regression gate
-for these invariants, and the UI component tests cover Radix modal focus
-isolation/return, centering-preserving Dialog animation, and dark muted-text
-contrast. Run those tests explicitly with Vitest; `ui-system.test.ts` is not
-yet part of `npm run test:quality` or the hosted workflow because that command
-and workflow integration belong to #98/PR #115. Do not duplicate those
-adjacent package/workflow edits in the #97 UI lane. These local contracts do
-not replace real-browser accessibility, responsive, contrast, or screenshot
-verification.
+`__tests__/ui-system.test.ts` contract test is included in
+`npm run test:quality` and the hosted workflow for these invariants, and the
+UI component tests cover Radix modal focus isolation/return,
+centering-preserving Dialog animation, and dark muted-text contrast. Do not
+duplicate those adjacent package/workflow edits in the #97 UI lane. These local
+contracts do not replace real-browser accessibility, responsive, contrast, or
+screenshot verification.
 
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
@@ -67,7 +120,12 @@ validates both independently. Explicit `--runtime-artifact` and
 directories; files, missing paths, and broken symlinks fail before scanning.
 Directory symlinks are resolved before the recursive scan. Its output
 identifies each artifact, so a passing Runtime check cannot hide an unscanned
-or failed Canvas artifact.
+or failed Canvas artifact. Contract fixtures that exercise this task must model
+release artifacts with bound manifests and retained SBOM files; bare HTML or
+JavaScript directories are intentionally rejected in this strict path.
+The standalone Python validator likewise rejects a non-directory path whenever
+release identity and content type are bound; this prevents a clean single file
+from bypassing manifest, inventory, and SBOM checks.
 
 The `validate-artifact` Invoke task prepends `action_server/build-binary` to
 `sys.path` and imports `artifact_validator` as a top-level module. Its helper
@@ -532,7 +590,9 @@ instead of exercising their documented `./output` default. `ToolkitTest` runs Ru
 pytest against the gateway itself; the full `Test` task runs it first and also covers
 `devutils`, whose package does not provide an Invoke task collection. The RCC toolchain
 includes pinned `jq` because the devutils workflow-contract suite executes its admission
-filters. The generic environment pins `jq=1.7.1`; Windows amd64 selects the preceding
+filters. The generic environment pins `jq=1.7.1`. Its Node pin is `nodejs=20.19.3`,
+matching the frontend package's `engines.node` lower bound; Windows amd64 must keep the
+same Node version while selecting the preceding
 `setup_windows_amd64.yaml` through RCC's OS/architecture filename matching and uses
 conda-forge's Windows-native `m2w64-jq=1.6`. Keep every platform-specific environment
 configuration in the workflow's RCC holotree cache hash so dependency changes invalidate
