@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actions-core"
-version = "1.0.0"
+version = "1.0.1"
 description = "Actions Core"
 authors = ["Joshua Yorko"]
 maintainers = ["Joshua Yorko"]

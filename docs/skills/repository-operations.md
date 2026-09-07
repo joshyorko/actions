@@ -8,6 +8,9 @@ product links must target the community repository and its released assets. Pres
 upstream attribution in LICENSE and NOTICE.md. Changing source metadata does not
 modify previously uploaded PyPI releases; verify built METADATA/PKG-INFO before a
 new upload and never replace an existing tag or distribution file.
+Publish dependency releases before changing template pins. After publication,
+update the source templates and regenerate the embedded template ZIP and its
+SHA-256 metadata together; source YAML changes alone do not update shipped templates.
 
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 

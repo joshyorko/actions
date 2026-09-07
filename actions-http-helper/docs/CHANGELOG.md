@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 - 2026-09-07
+
+- Correct distribution author and maintainer metadata to Joshua Yorko.
+
 ## Unreleased
 
 - Migration: move `network-settings.yaml` from `~/.sema4ai` to
