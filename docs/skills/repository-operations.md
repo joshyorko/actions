@@ -259,9 +259,10 @@ One final `pypi` job downloads the exact artifacts, rejects duplicate or
 unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches
 `uv run --no-project --python 3.12 poetry version --short`, then retains that
-verified directory as `actions-runtime-dist`. The
-workflow publishes the same set once when the Runtime secret is configured;
-without it, verification and retention remain green. Approved local publication
+verified directory as `actions-runtime-dist`. The workflow publishes the same
+set once when the Runtime secret is configured; without it, the tagged job fails
+at the credential check before PyPI upload, so no release success may be claimed.
+Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
 repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
