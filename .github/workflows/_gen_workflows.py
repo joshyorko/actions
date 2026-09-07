@@ -998,6 +998,27 @@ sha256sum linux64/action-server macos-arm64/action-server windows64/action-serve
 """,
         }
 
+    def verify_binary_release_inventory_before_handoff(self):
+        return {
+            "name": "Verify Runtime binary inventory before handoff",
+            "shell": "bash",
+            "run": """set -Eeuo pipefail
+cd build
+for pair in \
+  "linux64/action-server linux64" \
+  "macos-arm64/action-server macos-arm64" \
+  "windows64/action-server.exe windows64"; do
+  set -- $pair
+  binary=$1
+  directory=$2
+  test -f "$binary"
+  test ! -L "$binary"
+  test "$(find "$directory" -mindepth 1 -maxdepth 1 | wc -l)" -eq 1
+done
+sha256sum linux64/action-server macos-arm64/action-server windows64/action-server.exe | sort > runtime-binary-manifest.sha256
+""",
+        }
+
     def set_version_on_ubuntu(self):
         return {
             "name": "Set version",
@@ -1070,11 +1091,11 @@ echo "version=$VERSION" >> "$GITHUB_OUTPUT"
                         "name": "Wait for Downloads S3 Bucket to have the right content",
                         "timeout-minutes": 5,
                         "run": """
-VERSION_URL="https://cdn.sema4.ai/action-server/releases/latest/version.txt"
 EXPECTED_VERSION=${{ needs.build.outputs.version }}
+VERSION_URL="https://cdn.sema4.ai/action-server/releases/${EXPECTED_VERSION}/version.txt"
 echo "Expected version: $EXPECTED_VERSION"
 while true; do
-  DOWNLOADED_VERSION=$(curl -sS $VERSION_URL)
+  DOWNLOADED_VERSION=$(curl -fsS --max-time 10 "$VERSION_URL")
   echo "Downloaded version: $DOWNLOADED_VERSION"
   echo "Expected version: $EXPECTED_VERSION"
     if [ "$DOWNLOADED_VERSION" = "$EXPECTED_VERSION" ]; then
@@ -1256,6 +1277,7 @@ while true; do
         steps.append(self.checkout_repo(pinned=True))
         steps.append(self.is_beta_in_steps())
         steps.extend(self.download_artifacts())
+        steps.append(self.verify_binary_release_inventory_before_handoff())
         steps.extend(self.upload_to_s3())
         return steps
 

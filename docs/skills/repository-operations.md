@@ -271,7 +271,7 @@ the script reads only `PYPI` from the process environment or ignored repo-root
 `.env`, never prints or puts the token in arguments, and injects it only into
 Twine's child environment. Example commands are:
 `python action_server/scripts/publish_verified_runtime.py --run-id RUN_ID
---repo joshyorko/actions --ref actions-runtime-1.0.0 --sha MERGED_SHA --dry-run`
+--repo joshyorko/actions --ref actions-runtime-1.0.1 --sha MERGED_SHA --dry-run`
 and the same command with `--publish`. Run downloads resolve the canonical workflow by the
 supported filename identifier `actions_runtime_pypi_release.yml` in the requested repository.
 The returned workflow metadata must contain a positive integer database ID and the exact

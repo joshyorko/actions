@@ -27,7 +27,7 @@ def test_actions_runtime_has_a_dedicated_release_changelog():
     assert changelog.is_file()
     text = changelog.read_text()
     assert "actions-runtime-*" in text
-    assert "## 1.0.0 - " in text
+    assert "## 1.0.1 - " in text
     assert (
         'RUNTIME_CHANGELOG_PATH = "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md"'
         in GENERATOR
@@ -47,8 +47,8 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.0.0"
-    assert '__version__ = "1.0.0"' in runtime_init
+    assert pyproject["version"] == "1.0.1"
+    assert '__version__ = "1.0.1"' in runtime_init
     assert 'RCC_VERSION = "18.19.3"' in rcc_download
     assert "joshyorko/rcc/releases/download/v{RCC_VERSION}" in rcc_download
 
@@ -89,7 +89,11 @@ def test_runtime_artifact_matrix_and_handoffs_are_explicit():
     assert (
         'RCC_VERSION = "18.19.3"' in (ROOT / "action_server" / "build.py").read_text()
     )
-    assert "cdn.sema4.ai/action-server/releases/latest/version.txt" in BINARY_WORKFLOW
+    assert (
+        "cdn.sema4.ai/action-server/releases/${EXPECTED_VERSION}/version.txt"
+        in BINARY_WORKFLOW
+    )
+    assert "action-server/releases/latest/version.txt" not in BINARY_WORKFLOW
     assert (
         "sema4ai/homebrew-tools/actions/workflows/publish.yml/dispatches"
         in BINARY_WORKFLOW
@@ -112,6 +116,14 @@ def test_runtime_artifact_matrix_and_handoffs_are_explicit():
         for step in binary_workflow["jobs"]["deploy-s3"]["steps"]
         if step.get("name") == "Put files in s3-drop"
     )
+    deploy_steps = binary_workflow["jobs"]["deploy-s3"]["steps"]
+    deploy_names = [step.get("name") for step in deploy_steps]
+    assert deploy_names.index(
+        "Verify Runtime binary inventory before handoff"
+    ) < deploy_names.index("Put files in s3-drop")
+    assert deploy_names.index(
+        "Verify Runtime binary inventory before handoff"
+    ) < deploy_names.index("AWS S3 copies")
     assert 'test "$ver" = "${GITHUB_REF_NAME#actions-runtime-}"' in handoff_step["run"]
 
 

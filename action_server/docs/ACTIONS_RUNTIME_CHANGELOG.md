@@ -15,12 +15,13 @@ an Actions Runtime release.
 - Runtime release artifacts are named and verified as `actions-runtime` assets;
   the existing `action-server` CDN/S3 paths remain compatibility handoff paths.
 
-## 1.0.0 - 2026-09-07
+## 1.0.1 - 2026-09-07
 
-### First clean-break Runtime release
+### First publishable clean-break Runtime release
 
-- Publishes the Community Actions Runtime package as `actions-runtime`.
-- Uses the `actions-runtime-1.0.0` tag and the generated Runtime PyPI and
+- Defines the Community Actions Runtime package as `actions-runtime` for its
+  first public release.
+- Uses the `actions-runtime-1.0.1` tag and the generated Runtime PyPI and
   native-release workflows.
 - Retains the existing Action Server binary download, CDN, S3 drop-box, and
   Homebrew handoff paths as compatibility delivery surfaces for this Runtime.
