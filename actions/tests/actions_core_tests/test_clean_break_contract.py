@@ -40,7 +40,9 @@ def test_actions_core_owns_public_namespace_and_absorbed_mcp():
     metadata = tomlkit.parse((ROOT / "pyproject.toml").read_text())
 
     assert metadata["tool"]["poetry"]["name"] == "actions-core"
-    assert metadata["tool"]["poetry"]["version"] == "1.0.0"
+    from actions import __version__
+
+    assert metadata["tool"]["poetry"]["version"] == __version__
     assert metadata["tool"]["poetry"]["packages"] == [
         {"include": "actions", "from": "src"}
     ]

@@ -8,6 +8,8 @@ import shutil
 import subprocess
 import tempfile
 import venv
+import zipfile
+from email.parser import BytesParser
 from pathlib import Path
 
 
@@ -47,6 +49,13 @@ def verify(wheel):
     wheel = Path(wheel).resolve()
     if wheel.suffix != ".whl" or not wheel.is_file():
         raise ValueError(f"expected an existing wheel: {wheel}")
+    with zipfile.ZipFile(wheel) as archive:
+        metadata_paths = [name for name in archive.namelist() if name.endswith(".dist-info/METADATA")]
+        if len(metadata_paths) != 1:
+            raise ValueError("expected exactly one wheel METADATA file")
+        expected = BytesParser().parsebytes(archive.read(metadata_paths[0]))
+        if expected["Name"] != "actions-core" or not expected["Version"]:
+            raise ValueError("expected actions-core wheel metadata")
 
     with tempfile.TemporaryDirectory(prefix="actions-core-clean-") as temporary:
         root = Path(temporary)
@@ -80,7 +89,7 @@ def verify(wheel):
                 environment,
             ).stdout
         )
-        if metadata["name"] != "actions-core" or metadata["version"] != "1.0.0":
+        if metadata["name"] != "actions-core" or metadata["version"] != expected["Version"]:
             raise AssertionError(f"unexpected installed distribution: {metadata!r}")
         scripts = [
             script for script in metadata["scripts"] if script["name"] == "actions"

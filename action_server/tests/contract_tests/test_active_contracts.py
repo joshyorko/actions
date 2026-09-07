@@ -209,9 +209,9 @@ def test_template_manifests_use_published_actions_dependencies():
             for line in manifest.read_text().splitlines()
             if line.strip().startswith("- actions-")
         }
-        assert "actions-core=1.0.0" in dependencies, str(manifest)
+        assert "actions-core=1.0.1" in dependencies, str(manifest)
         assert not any(
-            dependency.startswith("actions-core") and dependency != "actions-core=1.0.0"
+            dependency.startswith("actions-core") and dependency != "actions-core=1.0.1"
             for dependency in dependencies
         ), str(manifest)
 

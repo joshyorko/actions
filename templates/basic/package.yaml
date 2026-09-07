@@ -14,7 +14,7 @@ dependencies:
     - python=3.12.12
     - uv=0.8.17
   pypi:
-    - actions-core=1.0.0
+    - actions-core=1.0.1
     - robocorp-browser=2.3.5
 
 dev-dependencies:
