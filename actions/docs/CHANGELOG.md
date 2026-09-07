@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 1.0.1 - 2026-09-07
+
+- Correct author and maintainer metadata to Joshua Yorko and point the PyPI
+  description and project links to the community Actions repository.
+
 ## 1.0.0 - 2026-08-13
 
 - Publish the independent `actions-core` distribution, which exclusively owns

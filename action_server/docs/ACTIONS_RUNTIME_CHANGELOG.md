@@ -8,6 +8,12 @@ an Actions Runtime release.
 
 ## Unreleased
 
+## 1.0.2 - 2026-09-07
+
+- Correct author and maintainer metadata to Joshua Yorko and replace legacy
+  product branding and download links in the PyPI description.
+- Preserve existing Runtime 1.0.1 artifacts and tags.
+
 ### Fixes
 
 - The clean-break Runtime release uses RCC `v18.19.3` as its primary bundled

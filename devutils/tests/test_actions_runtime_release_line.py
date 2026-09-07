@@ -27,7 +27,7 @@ def test_actions_runtime_has_a_dedicated_release_changelog():
     assert changelog.is_file()
     text = changelog.read_text()
     assert "actions-runtime-*" in text
-    assert "## 1.0.1 - " in text
+    assert "## 1.0.2 - " in text
     assert (
         'RUNTIME_CHANGELOG_PATH = "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md"'
         in GENERATOR
@@ -47,8 +47,8 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.0.1"
-    assert '__version__ = "1.0.1"' in runtime_init
+    assert pyproject["version"] == "1.0.2"
+    assert '__version__ = "1.0.2"' in runtime_init
     assert 'RCC_VERSION = "18.19.3"' in rcc_download
     assert "joshyorko/rcc/releases/download/v{RCC_VERSION}" in rcc_download
 
