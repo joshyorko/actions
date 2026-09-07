@@ -87,27 +87,19 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
     - name: Verify immutable tag, ancestry, and package version
+      shell: bash
       working-directory: .
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
         RELEASE_SHA: ${{ inputs.release_sha }}
-      run: 'set -Eeuo pipefail
-
-        [[ "$RELEASE_REF" =~ ^actions-runtime-[0-9]+\.[0-9]+\.[0-9]+$ ]]
-
-        [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
-
-        test "$(git -C release-source rev-parse HEAD)" = "$RELEASE_SHA"
-
-        git -C release-source fetch --no-tags origin "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF"
-        "refs/heads/community:refs/remotes/origin/community"
-
-        test "$(git -C release-source rev-parse "refs/tags/$RELEASE_REF^{commit}")"
-        = "$RELEASE_SHA"
-
-        git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
-
-        '
+      run: "set -Eeuo pipefail\n[[ \"$RELEASE_REF\" =~ ^actions-runtime-[0-9]+\\.[0-9]+\\\
+        .[0-9]+$ ]]\n[[ \"$RELEASE_SHA\" =~ ^[0-9a-f]{40}$ ]]\nif [[ \"$RELEASE_REF\"\
+        \ == \"actions-runtime-1.0.1\" ]]; then\n  test \"$RELEASE_SHA\" = \"0accc8f8cd1590957dec63d94e091aa945653614\"\
+        \nfi\ntest \"$(git -C release-source rev-parse HEAD)\" = \"$RELEASE_SHA\"\n\
+        git -C release-source fetch --no-tags origin \"refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF\"\
+        \ \"refs/heads/community:refs/remotes/origin/community\"\ntest \"$(git -C\
+        \ release-source rev-parse \"refs/tags/$RELEASE_REF^{commit}\")\" = \"$RELEASE_SHA\"\
+        \ngit -C release-source merge-base --is-ancestor \"$RELEASE_SHA\" refs/remotes/origin/community\n"
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -119,6 +111,7 @@ jobs:
         -r ../devutils/requirements.txt
       working-directory: release-source/action_server
     - name: Verify immutable Runtime source version
+      shell: bash
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
       working-directory: release-source/action_server
@@ -134,7 +127,8 @@ jobs:
   pypi-recovery:
     needs:
     - validate
-    if: ${{ needs.validate.result == 'success' }}
+    if: ${{ needs.validate.result == 'success' && inputs.release_ref != 'actions-runtime-1.0.1'
+      }}
     runs-on: ubuntu-22.04
     permissions:
       contents: read
@@ -180,27 +174,19 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
     - name: Verify immutable tag, ancestry, and package version
+      shell: bash
       working-directory: .
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
         RELEASE_SHA: ${{ inputs.release_sha }}
-      run: 'set -Eeuo pipefail
-
-        [[ "$RELEASE_REF" =~ ^actions-runtime-[0-9]+\.[0-9]+\.[0-9]+$ ]]
-
-        [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
-
-        test "$(git -C release-source rev-parse HEAD)" = "$RELEASE_SHA"
-
-        git -C release-source fetch --no-tags origin "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF"
-        "refs/heads/community:refs/remotes/origin/community"
-
-        test "$(git -C release-source rev-parse "refs/tags/$RELEASE_REF^{commit}")"
-        = "$RELEASE_SHA"
-
-        git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
-
-        '
+      run: "set -Eeuo pipefail\n[[ \"$RELEASE_REF\" =~ ^actions-runtime-[0-9]+\\.[0-9]+\\\
+        .[0-9]+$ ]]\n[[ \"$RELEASE_SHA\" =~ ^[0-9a-f]{40}$ ]]\nif [[ \"$RELEASE_REF\"\
+        \ == \"actions-runtime-1.0.1\" ]]; then\n  test \"$RELEASE_SHA\" = \"0accc8f8cd1590957dec63d94e091aa945653614\"\
+        \nfi\ntest \"$(git -C release-source rev-parse HEAD)\" = \"$RELEASE_SHA\"\n\
+        git -C release-source fetch --no-tags origin \"refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF\"\
+        \ \"refs/heads/community:refs/remotes/origin/community\"\ntest \"$(git -C\
+        \ release-source rev-parse \"refs/tags/$RELEASE_REF^{commit}\")\" = \"$RELEASE_SHA\"\
+        \ngit -C release-source merge-base --is-ancestor \"$RELEASE_SHA\" refs/remotes/origin/community\n"
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -212,6 +198,7 @@ jobs:
         -r ../devutils/requirements.txt
       working-directory: release-source/action_server
     - name: Verify immutable Runtime source version
+      shell: bash
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
       working-directory: release-source/action_server
@@ -441,6 +428,7 @@ jobs:
     defaults:
       run:
         working-directory: release-source/action_server
+        shell: bash
     strategy:
       fail-fast: false
       matrix:
@@ -492,27 +480,19 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
     - name: Verify immutable tag, ancestry, and package version
+      shell: bash
       working-directory: .
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
         RELEASE_SHA: ${{ inputs.release_sha }}
-      run: 'set -Eeuo pipefail
-
-        [[ "$RELEASE_REF" =~ ^actions-runtime-[0-9]+\.[0-9]+\.[0-9]+$ ]]
-
-        [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
-
-        test "$(git -C release-source rev-parse HEAD)" = "$RELEASE_SHA"
-
-        git -C release-source fetch --no-tags origin "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF"
-        "refs/heads/community:refs/remotes/origin/community"
-
-        test "$(git -C release-source rev-parse "refs/tags/$RELEASE_REF^{commit}")"
-        = "$RELEASE_SHA"
-
-        git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
-
-        '
+      run: "set -Eeuo pipefail\n[[ \"$RELEASE_REF\" =~ ^actions-runtime-[0-9]+\\.[0-9]+\\\
+        .[0-9]+$ ]]\n[[ \"$RELEASE_SHA\" =~ ^[0-9a-f]{40}$ ]]\nif [[ \"$RELEASE_REF\"\
+        \ == \"actions-runtime-1.0.1\" ]]; then\n  test \"$RELEASE_SHA\" = \"0accc8f8cd1590957dec63d94e091aa945653614\"\
+        \nfi\ntest \"$(git -C release-source rev-parse HEAD)\" = \"$RELEASE_SHA\"\n\
+        git -C release-source fetch --no-tags origin \"refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF\"\
+        \ \"refs/heads/community:refs/remotes/origin/community\"\ntest \"$(git -C\
+        \ release-source rev-parse \"refs/tags/$RELEASE_REF^{commit}\")\" = \"$RELEASE_SHA\"\
+        \ngit -C release-source merge-base --is-ancestor \"$RELEASE_SHA\" refs/remotes/origin/community\n"
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -524,6 +504,7 @@ jobs:
         -r ../devutils/requirements.txt
       working-directory: release-source/action_server
     - name: Verify immutable Runtime source version
+      shell: bash
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
       working-directory: release-source/action_server
@@ -559,6 +540,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}
       working-directory: release-source/action_server
     - name: Verify immutable Runtime source version
+      shell: bash
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
       run: 'set -Eeuo pipefail
@@ -575,17 +557,40 @@ jobs:
       id: signing
       shell: bash
       env:
+        RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
+        RC_ACTION_SERVER_DO_SELFTEST: 'true'
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
+        GITHUB_REF_NAME: ${{ inputs.release_ref }}
+        GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+        MACOS_SIGNING_CERT: ${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}
+        MACOS_SIGNING_CERT_PASSWORD: ${{ secrets.MACOS_SIGNING_CERT_PASSWORD_ACTIONS_RUNTIME
+          }}
+        MACOS_SIGNING_CERT_NAME: ${{ secrets.MACOS_SIGNING_CERT_NAME_ACTIONS_RUNTIME
+          }}
+        APPLEID: ${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}
+        APPLETEAMID: ${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}
+        APPLEIDPASS: ${{ secrets.MACOS_APP_ID_PASSWORD_ACTIONS_RUNTIME }}
+        VAULT_URL: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}
+        CLIENT_ID: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_ACTIONS_RUNTIME
+          }}
+        TENANT_ID: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_ACTIONS_RUNTIME
+          }}
+        CLIENT_SECRET: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_ACTIONS_RUNTIME
+          }}
+        CERTIFICATE_NAME: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_ACTIONS_RUNTIME
+          }}
         SIGNING_EVENT: ${{ github.event_name }}
         SIGNING_OS: ${{ matrix.os }}
-        MACOS_SIGNING_CERT: ${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}
-        VAULT_URL: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}
-      run: "set -Eeuo pipefail\nsigned=false\nif [[ \"$SIGNING_EVENT\" == \"workflow_dispatch\"\
-        \ ]]; then\n  if [[ \"$SIGNING_OS\" == \"macos-15\" && -n \"${MACOS_SIGNING_CERT:-}\"\
-        \ ]]; then signed=true; fi\n  if [[ \"$SIGNING_OS\" == \"windows-2022\" &&\
-        \ -n \"${VAULT_URL:-}\" ]]; then signed=true; fi\nfi\nif [[ \"$SIGNING_OS\"\
-        \ != \"ubuntu-22.04\" && \"$signed\" != true ]]; then\n  echo \"release signing\
-        \ credentials are required\" >&2\n  exit 1\nfi\necho \"signed=$signed\" >>\
-        \ \"$GITHUB_OUTPUT\"\n"
+      run: "set -Eeuo pipefail\nsigned=false\ncase \"$SIGNING_OS\" in\n  macos-15)\
+        \ keys=\"MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME\
+        \ APPLEID APPLETEAMID APPLEIDPASS\" ;;\n  windows-2022) keys=\"VAULT_URL CLIENT_ID\
+        \ TENANT_ID CLIENT_SECRET CERTIFICATE_NAME\" ;;\n  ubuntu-22.04) keys=\"\"\
+        \ ;;\n  *) exit 1 ;;\nesac\npresent=0\nmissing=0\nfor key in $keys; do\n \
+        \ if [[ -n \"${!key:-}\" ]]; then present=$((present + 1)); else missing=$((missing\
+        \ + 1)); fi\ndone\nif (( present > 0 && missing > 0 )); then\n  echo \"partial\
+        \ signing credentials configured\" >&2\n  exit 1\nfi\nif (( present > 0 ));\
+        \ then signed=true; else echo \"all signing credentials absent; using unsigned\
+        \ binary\"; fi\necho \"signed=$signed\" >> \"$GITHUB_OUTPUT\"\n"
     - name: Build binary (signed)
       if: ${{ steps.signing.outputs.signed == 'true' }}
       env:
@@ -623,6 +628,15 @@ jobs:
         GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
       run: uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable
         --go-wrapper
+    - name: Record native signing status
+      env:
+        SIGNED: ${{ steps.signing.outputs.signed }}
+      run: printf '%s\n' "$SIGNED" > signing-status.txt
+    - name: 'Upload artifact: release-source/action_server/signing-status.txt'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: native-signing-${{ matrix.name }}
+        path: release-source/action_server/signing-status.txt
     - name: 'Upload artifact: release-source/action_server/dist/final/*'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
@@ -636,6 +650,7 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       contents: write
+      id-token: write
     defaults:
       run:
         working-directory: .
@@ -677,27 +692,19 @@ jobs:
         fetch-depth: 0
         persist-credentials: false
     - name: Verify immutable tag, ancestry, and package version
+      shell: bash
       working-directory: .
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
         RELEASE_SHA: ${{ inputs.release_sha }}
-      run: 'set -Eeuo pipefail
-
-        [[ "$RELEASE_REF" =~ ^actions-runtime-[0-9]+\.[0-9]+\.[0-9]+$ ]]
-
-        [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
-
-        test "$(git -C release-source rev-parse HEAD)" = "$RELEASE_SHA"
-
-        git -C release-source fetch --no-tags origin "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF"
-        "refs/heads/community:refs/remotes/origin/community"
-
-        test "$(git -C release-source rev-parse "refs/tags/$RELEASE_REF^{commit}")"
-        = "$RELEASE_SHA"
-
-        git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origin/community
-
-        '
+      run: "set -Eeuo pipefail\n[[ \"$RELEASE_REF\" =~ ^actions-runtime-[0-9]+\\.[0-9]+\\\
+        .[0-9]+$ ]]\n[[ \"$RELEASE_SHA\" =~ ^[0-9a-f]{40}$ ]]\nif [[ \"$RELEASE_REF\"\
+        \ == \"actions-runtime-1.0.1\" ]]; then\n  test \"$RELEASE_SHA\" = \"0accc8f8cd1590957dec63d94e091aa945653614\"\
+        \nfi\ntest \"$(git -C release-source rev-parse HEAD)\" = \"$RELEASE_SHA\"\n\
+        git -C release-source fetch --no-tags origin \"refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF\"\
+        \ \"refs/heads/community:refs/remotes/origin/community\"\ntest \"$(git -C\
+        \ release-source rev-parse \"refs/tags/$RELEASE_REF^{commit}\")\" = \"$RELEASE_SHA\"\
+        \ngit -C release-source merge-base --is-ancestor \"$RELEASE_SHA\" refs/remotes/origin/community\n"
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081
       with:
@@ -709,6 +716,7 @@ jobs:
         -r ../devutils/requirements.txt
       working-directory: release-source/action_server
     - name: Verify immutable Runtime source version
+      shell: bash
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
       working-directory: release-source/action_server
@@ -736,6 +744,21 @@ jobs:
       with:
         name: actions-runtime-binary-windows
         path: binaries/windows
+    - name: Download linux signing receipt
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      with:
+        name: native-signing-linux
+        path: native-signing/linux
+    - name: Download macos signing receipt
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      with:
+        name: native-signing-macos
+        path: native-signing/macos
+    - name: Download windows signing receipt
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      with:
+        name: native-signing-windows
+        path: native-signing/windows
     - name: Validate exact binary set
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
@@ -783,21 +806,28 @@ jobs:
       run: "set -Eeuo pipefail\nmanifest=$(mktemp)\nsha256sum release-assets/* | sed\
         \ 's#release-assets/##' | sort > \"$manifest\"\nexpected=$(jq -Rn '[inputs\
         \ | split(\"  \") | {name:.[1],digest:(\"sha256:\" + .[0])}]' < \"$manifest\"\
-        )\nrelease_json=\"\"\nif release_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
-        ); then\n  test \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\
-        \n  test \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
+        )\nnotes=$(mktemp)\nprintf 'Runtime %s recovered from immutable source %s.\\\
+        n\\n' \"$RELEASE_REF\" \"$RELEASE_SHA\" > \"$notes\"\nfor platform in linux\
+        \ macos windows; do\n  signed=$(cat \"native-signing/$platform/signing-status.txt\"\
+        )\n  case \"$signed\" in\n    true) printf '%s: signed.\\n' \"$platform\"\
+        \ >> \"$notes\" ;;\n    false) printf '%s: UNSIGNED; no publisher code signature\
+        \ or notarization.\\n' \"$platform\" >> \"$notes\" ;;\n    *) echo 'Invalid\
+        \ signing receipt' >&2; exit 1 ;;\n  esac\ndone\nprintf '\\nSHA-256:\\n' >>\
+        \ \"$notes\"\ncat \"$manifest\" >> \"$notes\"\nrelease_json=\"\"\nif release_json=$(gh\
+        \ api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"); then\n  test\
+        \ \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\n  test\
+        \ \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
         \n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\n  jq -e --argjson\
         \ expected \"$expected\" '([.assets[].name] - [$expected[].name] | length\
         \ == 0) and ([.assets[].name] | unique | length == length)' <<<\"$release_json\"\
         \n  while read -r digest name; do\n    existing_digest=$(jq -r --arg name\
-        \ \"$name\" '.assets[] | select(.name == $name) | .digest' <<<\"$release_json\"\
+        \ \"$name\" '[.assets[] | select(.name == $name)][0].digest' <<<\"$release_json\"\
         )\n    if [ \"$existing_digest\" = \"null\" ]; then\n      gh release upload\
         \ \"$RELEASE_REF\" \"release-assets/$name\"\n    else\n      test \"$existing_digest\"\
         \ = \"sha256:$digest\"\n    fi\n  done < \"$manifest\"\nelse\n  gh release\
         \ create \"$RELEASE_REF\" --draft --verify-tag --target \"$RELEASE_SHA\" --title\
-        \ \"$RELEASE_REF\" --notes \"Runtime binaries recovered from immutable $RELEASE_REF\
-        \ at $RELEASE_SHA.\"\n  gh release upload \"$RELEASE_REF\" release-assets/*\n\
-        fi\nrelease_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
+        \ \"$RELEASE_REF\" --notes-file \"$notes\"\n  gh release upload \"$RELEASE_REF\"\
+        \ release-assets/*\nfi\nrelease_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
         )\ntest \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\n\
         test \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
         \ntest \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\nexpected_names=$(awk\
@@ -805,7 +835,61 @@ jobs:
         \ <<<\"$release_json\" | sort)\ntest \"$actual_names\" = \"$expected_names\"\
         \njq -e --argjson expected \"$expected\" '([.assets[] | {name,digest}] | sort_by(.name))\
         \ == ($expected | sort_by(.name))' <<<\"$release_json\"\ngh release edit \"\
-        $RELEASE_REF\" --draft=false\n"
+        $RELEASE_REF\" --draft=false --notes-file \"$notes\"\n"
+    - name: Stage recovered binaries for existing handoffs
+      env:
+        RELEASE_REF: ${{ inputs.release_ref }}
+      run: mkdir -p build && cp -R binaries/linux build/linux64 && cp -R binaries/macos
+        build/macos-arm64 && cp -R binaries/windows build/windows64 && printf '%s\n'
+        "${RELEASE_REF#actions-runtime-}" > build/version.txt
+    - name: Put files in s3-drop
+      run: "\nls -l\npwd\nls -l build\nmkdir s3-drop\nmv build/version.txt s3-drop/\n\
+        mv build/macos-arm64 s3-drop/\nmv build/linux64 s3-drop/\nmv build/windows64\
+        \ s3-drop/\nls -l s3-drop/\nver=$(cat s3-drop/version.txt)\necho \"actionServerVersion=${ver}\"\
+        \ >> \"$GITHUB_ENV\"\nif [[ \"$GITHUB_REF_NAME\" == actions-runtime-* ]];\
+        \ then\n  test \"$ver\" = \"${GITHUB_REF_NAME#actions-runtime-}\"\nfi\ntest\
+        \ \"$(find s3-drop -type f | wc -l)\" -eq 4\ntest -f s3-drop/linux64/action-server\n\
+        test -f s3-drop/macos-arm64/action-server\ntest -f s3-drop/windows64/action-server.exe\n"
+    - name: 'Upload artifact: action_server/s3-drop'
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: action-server-artifacts-for-s3-${{ env.actionServerVersion }}
+        path: s3-drop
+    - name: Configure AWS credentials Dropbox bucket
+      uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df
+      with:
+        aws-region: eu-west-1
+        role-to-assume: arn:aws:iam::710450854638:role/github-action-robocorp-action-server
+    - name: AWS S3 copies
+      run: "\nif [ \"false\" = \"false\" ]; then\n  echo \"Normal release, aws sync\
+        \ to drop-box, full pipeline\"\n  aws s3 sync s3-drop s3://robocorp-action-server-build-drop-box\n\
+        else\n  echo \"BETA RELEASE, only copy the executable for testing\"\n  S3_BASE_URL=\"\
+        s3://downloads.robocorp.com/action-server/beta\"\n  aws s3 cp s3-drop/version.txt\
+        \ $S3_BASE_URL/version.txt --cache-control max-age=120 --content-type \"text/plain\"\
+        \n  aws s3 cp s3-drop/windows64/action-server.exe $S3_BASE_URL/windows64/action-server.exe\
+        \ --cache-control max-age=120 --content-type \"application/octet-stream\"\n\
+        \  aws s3 cp s3-drop/macos-arm64/action-server $S3_BASE_URL/macos-arm64/action-server\
+        \ --cache-control max-age=120 --content-type \"application/octet-stream\"\n\
+        \  aws s3 cp s3-drop/linux64/action-server $S3_BASE_URL/linux64/action-server\
+        \ --cache-control max-age=120 --content-type \"application/octet-stream\"\n\
+        fi\n"
+    - name: Wait for Downloads S3 Bucket to have the right content
+      timeout-minutes: 5
+      run: "\nEXPECTED_VERSION=${RELEASE_REF#actions-runtime-}\nVERSION_URL=\"https://cdn.sema4.ai/action-server/releases/${EXPECTED_VERSION}/version.txt\"\
+        \necho \"Expected version: $EXPECTED_VERSION\"\nwhile true; do\n  DOWNLOADED_VERSION=$(curl\
+        \ -fsS --max-time 10 \"$VERSION_URL\")\n  echo \"Downloaded version: $DOWNLOADED_VERSION\"\
+        \n  echo \"Expected version: $EXPECTED_VERSION\"\n    if [ \"$DOWNLOADED_VERSION\"\
+        \ = \"$EXPECTED_VERSION\" ]; then\n      echo \"Versions match.\"\n      break\n\
+        \    else\n      echo \"Versions do not match. Retrying in 30 seconds.\"\n\
+        \    fi\n    sleep 30\n    done\n"
+      env:
+        RELEASE_REF: ${{ inputs.release_ref }}
+    - name: Trigger Brew Deploy Workflow
+      run: 'curl --fail-with-body --max-time 30 -X POST            -H "Authorization:
+        token ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}"            -H "Accept: application/vnd.github.v3+json"            https://api.github.com/repos/sema4ai/homebrew-tools/actions/workflows/publish.yml/dispatches            -d
+        "$(jq -cn --arg version "${RELEASE_REF#actions-runtime-}" ''{ref:"main",inputs:{version:$version}}'')"'
+      env:
+        RELEASE_REF: ${{ inputs.release_ref }}
 run-name: 'Runtime recovery: ${{ inputs.release_ref }} @ ${{ inputs.release_sha }}'
 
 

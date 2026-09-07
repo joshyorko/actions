@@ -301,8 +301,11 @@ package version. PyPI recovery is pinned to failed run `31755673247`, attempt 1,
 workflow `333870965`, the canonical repository/ref/SHA/event, the four live artifact
 IDs, sizes, and API digests; it downloads through artifact-ID endpoints, rejects
 unexpected or expired artifacts, and has no PyPI credential or upload step. Binary
-recovery requires signing credentials and a signed macOS/Windows build, while Linux
-may remain unsigned. Its draft release path hashes all three assets first, resumes an
+recovery builds unsigned binaries when all platform signing credentials are absent,
+signs when the complete set is present, and rejects partial configuration. Recovery
+of 1.0.1 verifies its pinned source SHA and skips PyPI recovery. Native recovery reuses
+the regular S3/CDN/Homebrew helpers after GitHub asset verification. Its draft release
+path hashes all three assets first, resumes an
 existing draft by uploading only missing exact assets, rejects published releases,
 conflicting digests, and extraneous names, never clobbers, and publishes only after
 one final re-fetch proves draft state, the exact three-name inventory, every asset
