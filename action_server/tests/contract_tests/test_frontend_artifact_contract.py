@@ -20,6 +20,23 @@ def test_frontend_manifest_declares_modern_dual_artifact_contract():
     assert "vite-plugin-singlefile" not in manifest["devDependencies"]
 
 
+def test_product_evidence_binds_dual_artifacts_and_repeats_outputs():
+    package = json.loads((FRONTEND / "package.json").read_text())
+    runner = (FRONTEND / "scripts" / "run-product-evidence.mjs").read_text()
+    spec = (FRONTEND / "__tests__" / "visual" / "product-evidence.spec.ts").read_text()
+
+    assert package["scripts"]["test:product-evidence"] == (
+        "node scripts/run-product-evidence.mjs"
+    )
+    assert '"build:artifacts"' in runner
+    assert '"validate:artifacts"' in runner
+    assert "execFileSync" in runner
+    assert "PRODUCT_EVIDENCE_OUTPUT_DIR" in runner
+    assert "JSON.stringify" in runner
+    assert "dist-canvas" in spec
+    assert "canvas_artifact_sha256" in spec
+
+
 def test_each_default_build_script_emits_its_own_release_sbom():
     scripts = json.loads((FRONTEND / "package.json").read_text())["scripts"]
 
