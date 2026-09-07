@@ -9,6 +9,7 @@ import uuid
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import pytest
@@ -212,8 +213,6 @@ def test_migrate_archives_legacy_output_before_historical_migration_11(
                     error_message=None,
                     relative_artifacts_dir="",
                     numbered_id=1,
-                    stdout="legacy stdout",
-                    stderr="legacy stderr",
                 )
             )
             db.execute(
@@ -431,6 +430,44 @@ def test_database_accepts_valid_postgresql_urls_without_mutating_connection_valu
 
     assert isinstance(normalized, str)
     assert database.db_path == normalized
+
+
+def test_postgresql_schedule_claim_fences_connection_loss(monkeypatch):
+    class Cursor:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def execute(self, *_args):
+            return None
+
+        def fetchone(self):
+            return (True,)
+
+    class Connection:
+        closed = False
+
+        def cursor(self):
+            return Cursor()
+
+        def close(self):
+            self.closed = True
+
+    connection = Connection()
+    monkeypatch.setitem(
+        sys.modules,
+        "psycopg",
+        SimpleNamespace(connect=lambda *_args, **_kwargs: connection),
+    )
+
+    database = Database("postgresql://localhost/actions_test")
+    with database.try_claim_schedule("schedule-1") as claim:
+        assert claim
+        connection.closed = True
+        with pytest.raises(DBError, match="schedule claim connection"):
+            claim.ensure_alive()
 
 
 @pytest.mark.parametrize(

@@ -375,8 +375,10 @@ Shared PostgreSQL acceptance requires immutable historical migrations and two
 independent Runtime processes proving one due schedule creates exactly one execution;
 threaded `Database` tests are insufficient. The process-level check also proves
 exactly one run, while PostgreSQL due schedules use a session-level database
-claim held through processing; closing that connection releases ownership, and
-SQLite keeps its existing single-node path.
+claim held through processing; the claim is health-checked before side effects
+and a lost claim cancels the scheduler processing task before it can continue.
+Closing that connection releases ownership, and SQLite keeps its existing
+single-node path.
 Run the service-free SQLite/database/artifact scope separately from
 `poetry run pytest tests/action_server_tests/test_database_shared.py -m postgresql`
 against a fresh PostgreSQL service. Preserve the complete pytest output and the

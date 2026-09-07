@@ -281,6 +281,47 @@ class DBError(Exception):
     pass
 
 
+class ScheduleClaimLost(DBError):
+    pass
+
+
+class ScheduleClaim:
+    def __init__(self, connection: Any, lock_key: str):
+        self._connection = connection
+        self._lock_key = lock_key
+        self._lost = False
+
+    def __bool__(self) -> bool:
+        return not self._lost
+
+    def ensure_alive(self) -> None:
+        if self._lost or getattr(self._connection, "closed", False):
+            self._lost = True
+            raise ScheduleClaimLost("PostgreSQL schedule claim connection lost")
+        try:
+            with self._connection.cursor() as cursor:
+                cursor.execute("SELECT 1")
+                if not cursor.fetchone():
+                    raise RuntimeError("claim connection health check returned no row")
+        except Exception as exc:
+            self._lost = True
+            if isinstance(exc, ScheduleClaimLost):
+                raise
+            raise ScheduleClaimLost(
+                "PostgreSQL schedule claim connection lost"
+            ) from exc
+
+    async def wait_lost(self) -> None:
+        import asyncio
+
+        while True:
+            await asyncio.sleep(0.25)
+            try:
+                self.ensure_alive()
+            except ScheduleClaimLost:
+                return
+
+
 class DBRules:
     def __init__(self) -> None:
         # Fields which should have unique indexes in the format:
@@ -455,13 +496,13 @@ class Database:
                 self._tlocal.conn = None
 
     @contextmanager
-    def try_claim_schedule(self, schedule_id: str) -> Iterator[bool]:
+    def try_claim_schedule(self, schedule_id: str) -> Iterator[Any]:
         """Hold a PostgreSQL session lock while a due schedule is processed.
 
         SQLite retains its existing process-local coordination. PostgreSQL uses
-        a session-level advisory lock so commits made while the schedule runs do
-        not release ownership, while closing the process connection releases it
-        deterministically after normal completion or process failure.
+        a session-level advisory lock plus a health-checked claim object. The
+        scheduler cancels processing when the claim connection is lost, while
+        closing the connection releases ownership deterministically.
         """
         if self.backend_name != "postgresql":
             yield True
@@ -484,7 +525,7 @@ class Database:
                 result = cursor.fetchone()
                 acquired = bool(result and result[0])
 
-            yield acquired
+            yield ScheduleClaim(claim_connection, lock_key) if acquired else None
         finally:
             if acquired:
                 try:
