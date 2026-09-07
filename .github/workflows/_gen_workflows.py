@@ -525,6 +525,7 @@ test "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/commu
                 "id": "signing",
                 "shell": "bash",
                 "env": {
+                    **signing_env,
                     "SIGNING_EVENT": "${{ github.event_name }}",
                     "SIGNING_OS": "${{ matrix.os }}",
                     "MACOS_SIGNING_CERT": "${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}",
@@ -532,14 +533,22 @@ test "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/commu
                 },
                 "run": """set -Eeuo pipefail
 signed=false
-if [[ "$SIGNING_EVENT" == "workflow_dispatch" ]]; then
-  if [[ "$SIGNING_OS" == "macos-15" && -n "${MACOS_SIGNING_CERT:-}" ]]; then signed=true; fi
-  if [[ "$SIGNING_OS" == "windows-2022" && -n "${VAULT_URL:-}" ]]; then signed=true; fi
-fi
-if [[ "$SIGNING_OS" != "ubuntu-22.04" && "$signed" != true ]]; then
-  echo "release signing credentials are required" >&2
+case "$SIGNING_OS" in
+  macos-15) keys="MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME APPLEID APPLETEAMID APPLEIDPASS" ;;
+  windows-2022) keys="VAULT_URL CLIENT_ID TENANT_ID CLIENT_SECRET CERTIFICATE_NAME" ;;
+  ubuntu-22.04) keys="" ;;
+  *) exit 1 ;;
+esac
+present=0
+missing=0
+for key in $keys; do
+  if [[ -n "${!key:-}" ]]; then present=$((present + 1)); else missing=$((missing + 1)); fi
+done
+if (( present > 0 && missing > 0 )); then
+  echo "partial signing credentials configured" >&2
   exit 1
 fi
+if (( present > 0 )); then signed=true; else echo "all signing credentials absent; using unsigned binary"; fi
 echo "signed=$signed" >> "$GITHUB_OUTPUT"
 """,
             },
@@ -1455,6 +1464,7 @@ class ActionServerRuntimeRecovery(BaseWorkflow):
     def recovery_source_guard(self):
         return {
             "name": "Verify immutable tag, ancestry, and package version",
+            "shell": "bash",
             "working-directory": ".",
             "env": {
                 "RELEASE_REF": "${{ inputs.release_ref }}",
@@ -1463,6 +1473,9 @@ class ActionServerRuntimeRecovery(BaseWorkflow):
             "run": r"""set -Eeuo pipefail
 [[ "$RELEASE_REF" =~ ^actions-runtime-[0-9]+\.[0-9]+\.[0-9]+$ ]]
 [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+if [[ "$RELEASE_REF" == "actions-runtime-1.0.1" ]]; then
+  test "$RELEASE_SHA" = "0accc8f8cd1590957dec63d94e091aa945653614"
+fi
 test "$(git -C release-source rev-parse HEAD)" = "$RELEASE_SHA"
 git -C release-source fetch --no-tags origin "refs/tags/$RELEASE_REF:refs/tags/$RELEASE_REF" "refs/heads/community:refs/remotes/origin/community"
 test "$(git -C release-source rev-parse "refs/tags/$RELEASE_REF^{commit}")" = "$RELEASE_SHA"
@@ -1473,6 +1486,7 @@ git -C release-source merge-base --is-ancestor "$RELEASE_SHA" refs/remotes/origi
     def recovery_source_version_guard(self):
         return {
             "name": "Verify immutable Runtime source version",
+            "shell": "bash",
             "env": {"RELEASE_REF": "${{ inputs.release_ref }}"},
             "working-directory": "release-source/action_server",
             "run": """set -Eeuo pipefail
@@ -1710,7 +1724,7 @@ uv pip install --python /tmp/actions-runtime-recovery-venv/bin/python "$linux_wh
         )
         return {
             "needs": ["validate"],
-            "if": "${{ needs.validate.result == 'success' }}",
+            "if": "${{ needs.validate.result == 'success' && inputs.release_ref != 'actions-runtime-1.0.1' }}",
             "runs-on": UBUNTU_VERSION,
             "permissions": {"contents": "read", "actions": "read"},
             "defaults": {"run": {"working-directory": "."}},
@@ -1750,6 +1764,7 @@ uv pip install --python /tmp/actions-runtime-recovery-venv/bin/python "$linux_wh
                 },
                 {
                     "name": "Verify immutable Runtime source version",
+                    "shell": "bash",
                     "env": {"RELEASE_REF": "${{ inputs.release_ref }}"},
                     "run": """set -Eeuo pipefail
 tag_version="${RELEASE_REF#actions-runtime-}"
@@ -1760,6 +1775,16 @@ test "$package_version" = "$tag_version"
                 },
                 *self.build_action_server_binary_cross_platform(
                     ref_name="${{ inputs.release_ref }}"
+                ),
+                {
+                    "name": "Record native signing status",
+                    "env": {"SIGNED": "${{ steps.signing.outputs.signed }}"},
+                    "run": "printf '%s\\n' \"$SIGNED\" > signing-status.txt",
+                },
+                self.upload_artifact(
+                    name="native-signing-${{ matrix.name }}",
+                    path="release-source/action_server/signing-status.txt",
+                    pinned=True,
                 ),
                 self.upload_artifact(
                     name="actions-runtime-binary-${{ matrix.name }}",
@@ -1806,6 +1831,18 @@ test -z "$(uniq -d /tmp/runtime-binary-assets)"
 manifest=$(mktemp)
 sha256sum release-assets/* | sed 's#release-assets/##' | sort > "$manifest"
 expected=$(jq -Rn '[inputs | split("  ") | {name:.[1],digest:("sha256:" + .[0])}]' < "$manifest")
+notes=$(mktemp)
+printf 'Runtime %s recovered from immutable source %s.\\n\\n' "$RELEASE_REF" "$RELEASE_SHA" > "$notes"
+for platform in linux macos windows; do
+  signed=$(cat "native-signing/$platform/signing-status.txt")
+  case "$signed" in
+    true) printf '%s: signed.\\n' "$platform" >> "$notes" ;;
+    false) printf '%s: UNSIGNED; no publisher code signature or notarization.\\n' "$platform" >> "$notes" ;;
+    *) echo 'Invalid signing receipt' >&2; exit 1 ;;
+  esac
+done
+printf '\\nSHA-256:\\n' >> "$notes"
+cat "$manifest" >> "$notes"
 release_json=""
 if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF"); then
   test "$(jq -r '.tag_name' <<<"$release_json")" = "$RELEASE_REF"
@@ -1813,7 +1850,7 @@ if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF");
   test "$(jq -r '.draft' <<<"$release_json")" = "true"
   jq -e --argjson expected "$expected" '([.assets[].name] - [$expected[].name] | length == 0) and ([.assets[].name] | unique | length == length)' <<<"$release_json"
   while read -r digest name; do
-    existing_digest=$(jq -r --arg name "$name" '.assets[] | select(.name == $name) | .digest' <<<"$release_json")
+    existing_digest=$(jq -r --arg name "$name" '[.assets[] | select(.name == $name)][0].digest' <<<"$release_json")
     if [ "$existing_digest" = "null" ]; then
       gh release upload "$RELEASE_REF" "release-assets/$name"
     else
@@ -1821,7 +1858,7 @@ if release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF");
     fi
   done < "$manifest"
 else
-  gh release create "$RELEASE_REF" --draft --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes "Runtime binaries recovered from immutable $RELEASE_REF at $RELEASE_SHA."
+  gh release create "$RELEASE_REF" --draft --verify-tag --target "$RELEASE_SHA" --title "$RELEASE_REF" --notes-file "$notes"
   gh release upload "$RELEASE_REF" release-assets/*
 fi
 release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")
@@ -1832,7 +1869,7 @@ expected_names=$(awk '{print $2}' "$manifest" | sort)
 actual_names=$(jq -r '.assets[].name' <<<"$release_json" | sort)
 test "$actual_names" = "$expected_names"
 jq -e --argjson expected "$expected" '([.assets[] | {name,digest}] | sort_by(.name)) == ($expected | sort_by(.name))' <<<"$release_json"
-gh release edit "$RELEASE_REF" --draft=false
+gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes"
 """,
         }
 
@@ -1853,7 +1890,38 @@ gh release edit "$RELEASE_REF" --draft=false
                     },
                 }
             )
+        for platform in ("linux", "macos", "windows"):
+            steps.append({
+                "name": f"Download {platform} signing receipt",
+                "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+                "with": {"name": f"native-signing-{platform}", "path": f"native-signing/{platform}"},
+            })
         steps.extend([self.binary_release_normalize(), self.binary_release_publish()])
+        # Reuse the normal handoff implementation with the immutable version.
+        handoff = ActionServerBinaryRelease()
+        steps.append({
+            "name": "Stage recovered binaries for existing handoffs",
+            "env": {"RELEASE_REF": "${{ inputs.release_ref }}"},
+            "run": "mkdir -p build && cp -R binaries/linux build/linux64 && cp -R binaries/macos build/macos-arm64 && cp -R binaries/windows build/windows64 && printf '%s\\n' \"${RELEASE_REF#actions-runtime-}\" > build/version.txt",
+        })
+        for step in handoff.upload_to_s3():
+            step = dict(step)
+            if "run" in step:
+                step["run"] = step["run"].replace("${{ steps.check_beta.outputs.is_beta }}", "false")
+            if "with" in step and "path" in step["with"]:
+                step["with"] = dict(step["with"])
+                step["with"]["path"] = "s3-drop"
+            steps.append(step)
+        for step in handoff.trigger_brew_workflow_job_part()["trigger-brew-workflow"]["steps"]:
+            step = dict(step)
+            step["env"] = {"RELEASE_REF": "${{ inputs.release_ref }}"}
+            step["run"] = step["run"].replace("${{ needs.build.outputs.version }}", "${RELEASE_REF#actions-runtime-}")
+            if step["name"] == "Trigger Brew Deploy Workflow":
+                step["run"] = step["run"].replace("curl -X POST", "curl --fail-with-body --max-time 30 -X POST").replace(
+                    "-d '{\"ref\":\"main\",\"inputs\":{\"version\":\"${RELEASE_REF#actions-runtime-}\"}}'",
+                    "-d \"$(jq -cn --arg version \"${RELEASE_REF#actions-runtime-}\" '{ref:\"main\",inputs:{version:$version}}')\"",
+                )
+            steps.append(step)
         return steps
 
     @override
@@ -1868,7 +1936,7 @@ gh release edit "$RELEASE_REF" --draft=false
                     "runs-on": "${{ matrix.os }}",
                     "permissions": {"contents": "read"},
                     "defaults": {
-                        "run": {"working-directory": "release-source/action_server"}
+                        "run": {"working-directory": "release-source/action_server", "shell": "bash"}
                     },
                     "strategy": {
                         "fail-fast": False,
@@ -1894,7 +1962,7 @@ gh release edit "$RELEASE_REF" --draft=false
                     "needs": ["validate", "binary-build"],
                     "if": "${{ needs.binary-build.result == 'success' }}",
                     "runs-on": UBUNTU_VERSION,
-                    "permissions": {"contents": "write"},
+                    "permissions": {"contents": "write", "id-token": "write"},
                     "defaults": {"run": {"working-directory": "."}},
                     "steps": self.binary_recovery_release_steps(),
                 },

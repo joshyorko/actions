@@ -758,6 +758,29 @@ def test_binary_release_matrix_and_aws_pin_are_actionlint_safe():
     assert "matrix.name" not in binary or "name:" in binary
 
 
+@pytest.mark.parametrize("platform", ["macos-15", "windows-2022"])
+@pytest.mark.parametrize("configured", ["absent", "complete", "partial"])
+def test_optional_native_signing_executes_policy(tmp_path, platform, configured):
+    generator = load_workflow_generator()
+    step = generator.ActionServerRuntimeRecovery().build_action_server_binary_cross_platform()[0]
+    keys = (
+        ["MACOS_SIGNING_CERT", "MACOS_SIGNING_CERT_PASSWORD", "MACOS_SIGNING_CERT_NAME", "APPLEID", "APPLETEAMID", "APPLEIDPASS"]
+        if platform == "macos-15"
+        else ["VAULT_URL", "CLIENT_ID", "TENANT_ID", "CLIENT_SECRET", "CERTIFICATE_NAME"]
+    )
+    output = tmp_path / "output"
+    env = {"PATH": os.environ["PATH"], "SIGNING_OS": platform, "SIGNING_EVENT": "push", "GITHUB_OUTPUT": str(output)}
+    for key in keys if configured == "complete" else keys[:1] if configured == "partial" else []:
+        env[key] = "test-value"
+    result = subprocess.run(["bash", "-c", step["run"]], env=env, capture_output=True, text=True)
+    if configured == "partial":
+        assert result.returncode != 0
+        assert "partial signing credentials" in result.stderr
+    else:
+        assert result.returncode == 0, result.stderr
+        assert output.read_text().strip() == f"signed={str(configured == 'complete').lower()}"
+
+
 def test_binary_release_uses_explicit_tag_asset_names():
     binary = (WORKFLOWS / "actions_runtime_binary_release.yml").read_text()
 
@@ -884,7 +907,7 @@ def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
         if step.get("name") == "Build binary (unsigned)"
     )
     assert signing_check["shell"] == "bash"
-    assert set(signing_check["env"]) == {
+    assert set(signing_check["env"]) >= {
         "SIGNING_EVENT",
         "SIGNING_OS",
         "MACOS_SIGNING_CERT",

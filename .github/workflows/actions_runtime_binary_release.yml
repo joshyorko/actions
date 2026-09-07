@@ -116,17 +116,40 @@ jobs:
       id: signing
       shell: bash
       env:
+        RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
+        RC_ACTION_SERVER_DO_SELFTEST: 'true'
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
+        GITHUB_REF_NAME: ${{ github.ref_name }}
+        GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+        MACOS_SIGNING_CERT: ${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}
+        MACOS_SIGNING_CERT_PASSWORD: ${{ secrets.MACOS_SIGNING_CERT_PASSWORD_ACTIONS_RUNTIME
+          }}
+        MACOS_SIGNING_CERT_NAME: ${{ secrets.MACOS_SIGNING_CERT_NAME_ACTIONS_RUNTIME
+          }}
+        APPLEID: ${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}
+        APPLETEAMID: ${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}
+        APPLEIDPASS: ${{ secrets.MACOS_APP_ID_PASSWORD_ACTIONS_RUNTIME }}
+        VAULT_URL: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}
+        CLIENT_ID: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_ACTIONS_RUNTIME
+          }}
+        TENANT_ID: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_ACTIONS_RUNTIME
+          }}
+        CLIENT_SECRET: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_ACTIONS_RUNTIME
+          }}
+        CERTIFICATE_NAME: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_ACTIONS_RUNTIME
+          }}
         SIGNING_EVENT: ${{ github.event_name }}
         SIGNING_OS: ${{ matrix.os }}
-        MACOS_SIGNING_CERT: ${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}
-        VAULT_URL: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}
-      run: "set -Eeuo pipefail\nsigned=false\nif [[ \"$SIGNING_EVENT\" == \"workflow_dispatch\"\
-        \ ]]; then\n  if [[ \"$SIGNING_OS\" == \"macos-15\" && -n \"${MACOS_SIGNING_CERT:-}\"\
-        \ ]]; then signed=true; fi\n  if [[ \"$SIGNING_OS\" == \"windows-2022\" &&\
-        \ -n \"${VAULT_URL:-}\" ]]; then signed=true; fi\nfi\nif [[ \"$SIGNING_OS\"\
-        \ != \"ubuntu-22.04\" && \"$signed\" != true ]]; then\n  echo \"release signing\
-        \ credentials are required\" >&2\n  exit 1\nfi\necho \"signed=$signed\" >>\
-        \ \"$GITHUB_OUTPUT\"\n"
+      run: "set -Eeuo pipefail\nsigned=false\ncase \"$SIGNING_OS\" in\n  macos-15)\
+        \ keys=\"MACOS_SIGNING_CERT MACOS_SIGNING_CERT_PASSWORD MACOS_SIGNING_CERT_NAME\
+        \ APPLEID APPLETEAMID APPLEIDPASS\" ;;\n  windows-2022) keys=\"VAULT_URL CLIENT_ID\
+        \ TENANT_ID CLIENT_SECRET CERTIFICATE_NAME\" ;;\n  ubuntu-22.04) keys=\"\"\
+        \ ;;\n  *) exit 1 ;;\nesac\npresent=0\nmissing=0\nfor key in $keys; do\n \
+        \ if [[ -n \"${!key:-}\" ]]; then present=$((present + 1)); else missing=$((missing\
+        \ + 1)); fi\ndone\nif (( present > 0 && missing > 0 )); then\n  echo \"partial\
+        \ signing credentials configured\" >&2\n  exit 1\nfi\nif (( present > 0 ));\
+        \ then signed=true; else echo \"all signing credentials absent; using unsigned\
+        \ binary\"; fi\necho \"signed=$signed\" >> \"$GITHUB_OUTPUT\"\n"
     - name: Build binary (signed)
       if: ${{ steps.signing.outputs.signed == 'true' }}
       env:
