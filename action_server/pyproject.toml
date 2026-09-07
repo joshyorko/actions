@@ -1,11 +1,9 @@
 [tool.poetry]
 name = "actions-runtime"
 version = "1.0.1"
-description = """Community Action Server"""
-authors = [
-	"Sema4.ai, Inc. <dev@sema4.ai>",
-	"Fabio Z. <fabio@sema4.ai>"
-]
+description = "Actions Runtime — serve Python actions through HTTP and MCP"
+authors = ["Joshua Yorko"]
+maintainers = ["Joshua Yorko"]
 readme = "README.md"
 repository = "https://github.com/joshyorko/actions/tree/community"
 license = "Apache-2.0"

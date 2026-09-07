@@ -1,10 +1,10 @@
 # ⚡️ actions-core
 
-A Python library designed to simplify the development of Python actions _(AI or otherwise)_ to be run with the [Sema4.ai Action Server](https://github.com/sema4ai/actions#readme).
+A Python library designed to simplify the development of Python actions _(AI or otherwise)_ to be run with the [Actions Runtime](https://github.com/joshyorko/actions).
 
 ## Getting started
 
-If you have not setup Action Server already, see the [🏃‍♂️ Quickstart](https://github.com/sema4ai/actions#quickstart) on how to do that.
+If you have not setup Action Server already, see the [🏃‍♂️ Quickstart](https://github.com/joshyorko/actions/blob/community/action_server/README.md) on how to do that.
 
 Decorate your Python function with the `@action` decorator:
 
@@ -72,7 +72,7 @@ def process_document(document_url: str, credentials: Secret) -> str:
     ...
 ```
 
-For more details on secrets, including tagged secrets with `SecretSpec`, OAuth2 secrets, and passing secrets in development and production modes, see the [Secrets Guide](https://github.com/sema4ai/actions/blob/master/action_server/docs/guides/07-secrets.md).
+For more details on secrets, including tagged secrets with `SecretSpec`, OAuth2 secrets, and passing secrets in development and production modes, see the [Secrets Guide](https://github.com/joshyorko/actions/blob/community/action_server/docs/guides/07-secrets.md).
 
 ### Execution
 
@@ -84,12 +84,18 @@ actions run -- --city=Helsinki --days=3
 
 ## Guides
 
-- [Request headers](https://github.com/sema4ai/actions/blob/master/actions/docs/guides/00-request.md)
+- [Request headers](https://github.com/joshyorko/actions/blob/community/actions/docs/guides/00-request.md)
 
 ## API Reference
 
-Explore our [API](https://github.com/sema4ai/actions/blob/master/actions/docs/api/README.md) for extensive documentation.
+Explore our [API](https://github.com/joshyorko/actions/blob/community/actions/docs/api/README.md) for extensive documentation.
 
 ## Changelog
 
-A list of releases and corresponding changes can be found in the [changelog](https://github.com/sema4ai/actions/blob/master/actions/docs/CHANGELOG.md).
+A list of releases and corresponding changes can be found in the [changelog](https://github.com/joshyorko/actions/blob/community/actions/docs/CHANGELOG.md).
+
+## Maintainer and attribution
+
+Maintained by Joshua Yorko. Upstream copyright and license attribution is preserved in
+[NOTICE.md](https://github.com/joshyorko/actions/blob/community/NOTICE.md) and
+[LICENSE](https://github.com/joshyorko/actions/blob/community/LICENSE).
