@@ -226,7 +226,7 @@ def test_validators_prove_manifest_inventory_and_metadata(tmp_path):
         ),
         encoding="utf-8",
     )
-    (root / "sbom.json").write_text("{}", encoding="utf-8")
+    (root / "sbom.json").write_text('{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8")
 
     checks = validate_build_metadata(root)
 
@@ -277,7 +277,7 @@ def test_python_validator_rejects_unsafe_manifest_before_payload_reads(
         ],
     }
     (root / "artifact-manifest.json").write_text(json.dumps(manifest))
-    (root / "sbom.json").write_text("{}")
+    (root / "sbom.json").write_text('{"bomFormat": "CycloneDX", "specVersion": "1.6"}')
 
     reads = []
     original_read_bytes = Path.read_bytes
@@ -407,7 +407,7 @@ def test_manifest_contract_rejects_inventory_mutations(tmp_path, mutation):
         json.dumps({"schemaVersion": 1, "contentType": "text/html", "files": files}),
         encoding="utf-8",
     )
-    (root / "sbom.json").write_text("{}", encoding="utf-8")
+    (root / "sbom.json").write_text('{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8")
 
     checks = validate_build_metadata(root)
 
@@ -444,6 +444,60 @@ def test_python_validator_treats_nested_metadata_as_payload_inventory(tmp_path):
     assert any(check.name == "inventory" and check.passed for check in checks)
 
 
+
+@pytest.mark.skipif(not hasattr(os, "mkfifo"), reason="requires POSIX special files")
+def test_python_validator_rejects_unlisted_non_regular_entries(tmp_path):
+    build_binary = FRONTEND.parent / "build-binary"
+    sys.path.insert(0, str(build_binary))
+    from artifact_validator import validate_build_metadata
+
+    root = tmp_path / "artifact"
+    root.mkdir()
+    payload = b"<html>text/html</html>"
+    (root / "index.html").write_bytes(payload)
+    os.mkfifo(root / "payload.pipe")
+    _write_manifest(
+        root,
+        "runtime-admin",
+        "text/html",
+        [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+    )
+
+    checks = validate_build_metadata(root, "runtime-admin", "text/html")
+
+    assert any(check.name == "inventory" and not check.passed for check in checks)
+
+
+def test_javascript_validator_rejects_malformed_sbom(tmp_path):
+    script = FRONTEND / "scripts" / "validate-artifacts.mjs"
+    for directory, artifact, content_type in (
+        ("dist", "runtime-admin", "text/html"),
+        ("dist-canvas", "canvas-mcp-app", "text/html;profile=mcp-app"),
+    ):
+        root = tmp_path / directory
+        root.mkdir()
+        payload = f"<html>{content_type}</html>".encode()
+        (root / "index.html").write_bytes(payload)
+        _write_manifest(
+            root,
+            artifact,
+            content_type,
+            [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+        )
+    (tmp_path / "dist" / "sbom.json").write_text("{}", encoding="utf-8")
+
+    result = subprocess.run(
+        ["node", str(script)],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "invalid CycloneDX SBOM" in (result.stderr + result.stdout)
+    
+
 def _write_manifest(root, artifact, content_type, files):
     (root / "artifact-manifest.json").write_text(
         json.dumps(
@@ -457,7 +511,7 @@ def _write_manifest(root, artifact, content_type, files):
         ),
         encoding="utf-8",
     )
-    (root / "sbom.json").write_text("{}", encoding="utf-8")
+    (root / "sbom.json").write_text('{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8")
 
 
 @pytest.mark.parametrize("link_kind", ["file", "directory", "broken"])

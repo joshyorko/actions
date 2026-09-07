@@ -100,6 +100,37 @@ def _find_symlinks(artifact_path: Path) -> list[Path]:
     return [path for path in artifact_path.rglob("*") if path.is_symlink()]
 
 
+def _find_non_regular_entries(artifact_path: Path) -> list[Path]:
+    """Return descendant entries that are neither regular files nor directories."""
+    if not artifact_path.is_dir():
+        return []
+    return [
+        path
+        for path in artifact_path.rglob("*")
+        if not path.is_symlink() and not path.is_file() and not path.is_dir()
+    ]
+
+
+def _validate_sbom(sbom_path: Path) -> ValidationCheck:
+    """Require readable CycloneDX metadata rather than file presence alone."""
+    if not sbom_path.is_file():
+        return ValidationCheck("sbom", False, "CycloneDX SBOM is missing")
+    try:
+        sbom = json.loads(sbom_path.read_text(encoding="utf-8"))
+    except (OSError, TypeError, ValueError) as exc:
+        return ValidationCheck("sbom", False, f"Invalid CycloneDX SBOM: {exc}")
+    valid = (
+        isinstance(sbom, dict)
+        and sbom.get("bomFormat") == "CycloneDX"
+        and bool(sbom.get("specVersion"))
+    )
+    return ValidationCheck(
+        "sbom",
+        valid,
+        "CycloneDX SBOM is present and valid" if valid else "Invalid CycloneDX SBOM",
+    )
+
+
 def validate_size(artifact_path: Path, baseline_path: Optional[Path]) -> ValidationCheck:
     """Validate artifact size against baseline (warn if >120%)."""
     files = [artifact_path] if artifact_path.is_file() else list(artifact_path.rglob("*"))
@@ -151,6 +182,9 @@ def validate_build_metadata(
     symlinks = _find_symlinks(artifact_path)
     if symlinks:
         return [ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")]
+    non_regular = _find_non_regular_entries(artifact_path)
+    if non_regular:
+        return [ValidationCheck("inventory", False, f"Non-regular entries are forbidden: {', '.join(map(str, non_regular))}")]
     if not artifact_path.is_dir():
         if expected_artifact is not None or expected_content_type is not None:
             return [
@@ -215,7 +249,7 @@ def validate_build_metadata(
             )
         ]
         checks.append(ValidationCheck("source-maps", not manifest.get("sourceMaps") and not any(name.endswith(".map") for name in names), "Source maps are disabled"))
-        checks.append(ValidationCheck("sbom", (artifact_path / "sbom.json").is_file(), "CycloneDX SBOM is present"))
+        checks.append(_validate_sbom(artifact_path / "sbom.json"))
         content_type = manifest.get("contentType")
         checks.append(ValidationCheck("artifact", expected_artifact is not None and manifest.get("artifact") == expected_artifact, f"Declared artifact: {manifest.get('artifact')}"))
         checks.append(ValidationCheck("content-type", expected_content_type is not None and content_type == expected_content_type, f"Declared content type: {content_type}"))

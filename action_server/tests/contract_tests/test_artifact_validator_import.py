@@ -37,7 +37,7 @@ def _write_valid_manifest(root, artifact, content_type):
         ),
         encoding="utf-8",
     )
-    (root / "sbom.json").write_text("{}", encoding="utf-8")
+    (root / "sbom.json").write_text('{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8")
 
 
 def test_artifact_validator_imports_from_build_binary_directory():

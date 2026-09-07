@@ -65,7 +65,9 @@ recompute every file's byte length and SHA-256. Hash multisets are insufficient:
 omission, extra files, path swaps, reordering, wrong sizes, and wrong hashes
 fail validation.
 Both validators require manifest `schemaVersion` 1 and reject symlink or
-non-regular inventory entries before payload reads. The standalone Python
+non-regular inventory entries before payload reads.
+Both validators parse retained `sbom.json` and require CycloneDX `bomFormat`
+and a non-empty `specVersion`; file presence alone is not a passing SBOM check. The standalone Python
 validator binds a release artifact with `--expected-artifact` and
 `--expected-content-type`; supply both options together when using its CLI.
 Release-bound Python validation, including `inv validate-artifact`, treats a

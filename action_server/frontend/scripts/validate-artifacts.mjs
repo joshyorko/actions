@@ -11,6 +11,8 @@ for (const [directory, expectedArtifact, expectedType] of [['dist', 'runtime-adm
   if ((await lstat(root)).isSymbolicLink()) throw new Error(`${directory}: symlink root is forbidden`);
   const manifest = JSON.parse(await readFile(join(root, 'artifact-manifest.json')));
   if (manifest.schemaVersion !== 1) throw new Error(`${directory}: unsupported manifest schema`);
+  const sbom = JSON.parse(await readFile(join(root, 'sbom.json')));
+  if (sbom.bomFormat !== 'CycloneDX' || !sbom.specVersion) throw new Error(`${directory}: invalid CycloneDX SBOM`);
   async function files(dir) {
     const entries = await readdir(dir, { withFileTypes: true });
     const nested = await Promise.all(entries.map(async entry => {
@@ -58,6 +60,5 @@ for (const [directory, expectedArtifact, expectedType] of [['dist', 'runtime-adm
   if (total > RAW_BUDGET || gzipTotal > GZIP_BUDGET) throw new Error(`${directory}: executable payload is ${total} raw / ${gzipTotal} gzip bytes`);
   const html = await readFile(join(root, 'index.html'), 'utf8');
   if (!html.includes(expectedType)) throw new Error(`${directory}: missing content type marker`);
-  await readFile(join(root, 'sbom.json'));
   console.log(`${directory}: ${manifest.files.length} files, ${total} raw / ${gzipTotal} gzip bytes, ${manifest.contentType}`);
 }
