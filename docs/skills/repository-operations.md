@@ -87,15 +87,13 @@ it uses the intentional system font stack, keeps light and `.dark` token values
 together, and disables authored animation under `prefers-reduced-motion`. The
 Canvas entrypoint must remain free of remote URLs, inline event handlers, and
 inline styles so it can render under an offline, CSP-constrained host. The
-`__tests__/ui-system.test.ts` contract test is a local fast regression gate
-for these invariants, and the UI component tests cover Radix modal focus
-isolation/return, centering-preserving Dialog animation, and dark muted-text
-contrast. Run those tests explicitly with Vitest; `ui-system.test.ts` is not
-yet part of `npm run test:quality` or the hosted workflow because that command
-and workflow integration belong to #98/PR #115. Do not duplicate those
-adjacent package/workflow edits in the #97 UI lane. These local contracts do
-not replace real-browser accessibility, responsive, contrast, or screenshot
-verification.
+`__tests__/ui-system.test.ts` contract test is included in
+`npm run test:quality` and the hosted workflow for these invariants, and the
+UI component tests cover Radix modal focus isolation/return,
+centering-preserving Dialog animation, and dark muted-text contrast. Do not
+duplicate those adjacent package/workflow edits in the #97 UI lane. These local
+contracts do not replace real-browser accessibility, responsive, contrast, or
+screenshot verification.
 
 The build manifest validator rejects concrete Sema4AI product packages,
 vendored `actions-runtime-*` packages, `file:` dependencies, and GitHub npm
@@ -118,6 +116,9 @@ identifies each artifact, so a passing Runtime check cannot hide an unscanned
 or failed Canvas artifact. Contract fixtures that exercise this task must model
 release artifacts with bound manifests and retained SBOM files; bare HTML or
 JavaScript directories are intentionally rejected in this strict path.
+The standalone Python validator likewise rejects a non-directory path whenever
+release identity and content type are bound; this prevents a clean single file
+from bypassing manifest, inventory, and SBOM checks.
 
 The `validate-artifact` Invoke task prepends `action_server/build-binary` to
 `sys.path` and imports `artifact_validator` as a top-level module. Its helper
