@@ -1164,7 +1164,7 @@ def test_recovery_fresh_draft_uses_the_same_final_manifest_gate_before_publish()
     fresh_branch = publish[publish.rindex("\nelse\n") : publish.index("\nfi\n", publish.rindex("\nelse\n"))]
     final_edit = publish.index('gh release edit "$RELEASE_REF" --draft=false')
     finalization = publish[:final_edit]
-    assert finalization.rfind('release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF")') > finalization.rfind("fi")
+    assert finalization.rfind('release_json=$(gh api "repos/$GITHUB_REPOSITORY/releases/$release_id")') > finalization.rfind("fi")
     assert 'test "$(jq -r \'.target_commitish\' <<<"$release_json")" = "$RELEASE_SHA"' in finalization
     assert 'test "$(jq -r \'.draft\' <<<"$release_json")" = "true"' in finalization
     assert 'test "$actual_names" = "$expected_names"' in finalization
@@ -1172,6 +1172,72 @@ def test_recovery_fresh_draft_uses_the_same_final_manifest_gate_before_publish()
     assert 'gh release upload "$RELEASE_REF" release-assets/*' in fresh_branch
     assert 'gh release edit "$RELEASE_REF" --draft=false' not in fresh_branch
     assert publish.count('gh release edit "$RELEASE_REF" --draft=false') == 1
+
+
+@pytest.mark.parametrize("state", ["fresh", "draft", "published", "list-error", "bad-hash"])
+def test_recovery_publication_outside_checkout(tmp_path, state):
+    """Exercise the actual shell with draft tag lookup unavailable."""
+    import hashlib
+
+    assets = tmp_path / "release-assets"
+    assets.mkdir()
+    expected = []
+    for platform in ("linux", "macos", "windows"):
+        name = f"runtime-{platform}"
+        (assets / name).write_bytes(platform.encode())
+        expected.append({"name": name, "digest": "sha256:" + hashlib.sha256(platform.encode()).hexdigest()})
+        receipt = tmp_path / "native-signing" / platform
+        receipt.mkdir(parents=True)
+        (receipt / "signing-status.txt").write_text("false\n")
+    release = {"id": 42, "tag_name": "actions-runtime-1.0.1", "target_commitish": "a" * 40, "draft": state != "published", "assets": expected}
+    if state == "bad-hash":
+        release["assets"][0]["digest"] = "sha256:" + "0" * 64
+    (tmp_path / "state.json").write_text(json.dumps(None if state == "fresh" else release))
+    fake = tmp_path / "gh"
+    fake.write_text(
+        f"#!{sys.executable}\n" + '''import hashlib, json, pathlib, sys
+a = sys.argv[1:]
+p = pathlib.Path("state.json")
+r = json.loads(p.read_text())
+with open("calls", "a") as f: f.write(json.dumps(a) + "\\n")
+if a[0] == "api":
+    endpoint = a[-1]
+    if "--paginate" in a:
+        if pathlib.Path("list-error").exists(): sys.exit(1)
+        print(json.dumps([[r] if r else []]))
+    elif endpoint == "repos/joshyorko/actions/releases/42": print(json.dumps(r))
+    else: sys.exit(1)
+elif a[0] == "release":
+    assert "--repo" in a and a[a.index("--repo") + 1] == "joshyorko/actions"
+    if a[1] == "create":
+        assert r is None
+        r = {"id":42,"tag_name":a[2],"target_commitish":a[a.index("--target")+1],"draft":True,"assets":[]}
+    elif a[1] == "upload":
+        for file in a[3:a.index("--repo")]:
+            q = pathlib.Path(file)
+            r["assets"].append({"name":q.name,"digest":"sha256:"+hashlib.sha256(q.read_bytes()).hexdigest()})
+    elif a[1] == "edit": r["draft"] = False
+    else: sys.exit(1)
+    p.write_text(json.dumps(r))
+else: sys.exit(1)
+'''
+    )
+    fake.chmod(0o755)
+    if state == "list-error":
+        (tmp_path / "list-error").touch()
+    step = load_workflow_generator().ActionServerRuntimeRecovery().binary_release_publish()
+    env = {"PATH": str(tmp_path) + os.pathsep + os.environ["PATH"], "GITHUB_REPOSITORY": "joshyorko/actions", "RELEASE_REF": "actions-runtime-1.0.1", "RELEASE_SHA": "a" * 40}
+    result = subprocess.run(["bash", "-c", step["run"]], cwd=tmp_path, env=env, capture_output=True, text=True)
+    calls = [json.loads(line) for line in (tmp_path / "calls").read_text().splitlines()]
+    edits = [call for call in calls if call[:2] == ["release", "edit"]]
+    if state in ("fresh", "draft"):
+        assert result.returncode == 0, result.stderr
+        assert len(edits) == 1
+        assert json.loads((tmp_path / "state.json").read_text())["draft"] is False
+    else:
+        assert result.returncode != 0
+        assert not edits
+    assert not any("/releases/tags/" in arg for call in calls for arg in call)
 
 
 def test_generated_recovery_is_rendered_and_byte_identical_to_generator(tmp_path):

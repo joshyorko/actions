@@ -813,21 +813,27 @@ jobs:
         \ >> \"$notes\" ;;\n    false) printf '%s: UNSIGNED; no publisher code signature\
         \ or notarization.\\n' \"$platform\" >> \"$notes\" ;;\n    *) echo 'Invalid\
         \ signing receipt' >&2; exit 1 ;;\n  esac\ndone\nprintf '\\nSHA-256:\\n' >>\
-        \ \"$notes\"\ncat \"$manifest\" >> \"$notes\"\nrelease_json=\"\"\nif release_json=$(gh\
-        \ api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"); then\n  test\
-        \ \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\n  test\
-        \ \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
-        \n  test \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\n  jq -e --argjson\
-        \ expected \"$expected\" '([.assets[].name] - [$expected[].name] | length\
-        \ == 0) and ([.assets[].name] | unique | length == length)' <<<\"$release_json\"\
-        \n  while read -r digest name; do\n    existing_digest=$(jq -r --arg name\
-        \ \"$name\" '[.assets[] | select(.name == $name)][0].digest' <<<\"$release_json\"\
-        )\n    if [ \"$existing_digest\" = \"null\" ]; then\n      gh release upload\
-        \ \"$RELEASE_REF\" \"release-assets/$name\"\n    else\n      test \"$existing_digest\"\
-        \ = \"sha256:$digest\"\n    fi\n  done < \"$manifest\"\nelse\n  gh release\
-        \ create \"$RELEASE_REF\" --draft --verify-tag --target \"$RELEASE_SHA\" --title\
-        \ \"$RELEASE_REF\" --notes-file \"$notes\"\n  gh release upload \"$RELEASE_REF\"\
-        \ release-assets/*\nfi\nrelease_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_REF\"\
+        \ \"$notes\"\ncat \"$manifest\" >> \"$notes\"\nlookup_release() {\n  local\
+        \ releases\n  releases=$(gh api --paginate --slurp \"repos/$GITHUB_REPOSITORY/releases?per_page=100\"\
+        ) || return\n  jq -c --arg tag \"$RELEASE_REF\" '[.[][] | select(.tag_name\
+        \ == $tag)] | if length > 1 then error(\"duplicate release tag\") else .[0]\
+        \ end' <<<\"$releases\"\n}\nrelease_json=$(lookup_release)\nif [[ \"$release_json\"\
+        \ != \"null\" ]]; then\n  test \"$(jq -r '.tag_name' <<<\"$release_json\"\
+        )\" = \"$RELEASE_REF\"\n  test \"$(jq -r '.target_commitish' <<<\"$release_json\"\
+        )\" = \"$RELEASE_SHA\"\n  test \"$(jq -r '.draft' <<<\"$release_json\")\"\
+        \ = \"true\"\n  jq -e --argjson expected \"$expected\" '([.assets[].name]\
+        \ - [$expected[].name] | length == 0) and ([.assets[].name] | unique | length\
+        \ == length)' <<<\"$release_json\"\n  while read -r digest name; do\n    existing_digest=$(jq\
+        \ -r --arg name \"$name\" '[.assets[] | select(.name == $name)][0].digest'\
+        \ <<<\"$release_json\")\n    if [ \"$existing_digest\" = \"null\" ]; then\n\
+        \      gh release upload \"$RELEASE_REF\" \"release-assets/$name\" --repo\
+        \ \"$GITHUB_REPOSITORY\"\n    else\n      test \"$existing_digest\" = \"sha256:$digest\"\
+        \n    fi\n  done < \"$manifest\"\nelse\n  gh release create \"$RELEASE_REF\"\
+        \ --draft --verify-tag --target \"$RELEASE_SHA\" --title \"$RELEASE_REF\"\
+        \ --notes-file \"$notes\" --repo \"$GITHUB_REPOSITORY\"\n  gh release upload\
+        \ \"$RELEASE_REF\" release-assets/* --repo \"$GITHUB_REPOSITORY\"\nfi\nrelease_json=$(lookup_release)\n\
+        release_id=$(jq -er '.id | select(type == \"number\" and . > 0 and floor ==\
+        \ .)' <<<\"$release_json\")\nrelease_json=$(gh api \"repos/$GITHUB_REPOSITORY/releases/$release_id\"\
         )\ntest \"$(jq -r '.tag_name' <<<\"$release_json\")\" = \"$RELEASE_REF\"\n\
         test \"$(jq -r '.target_commitish' <<<\"$release_json\")\" = \"$RELEASE_SHA\"\
         \ntest \"$(jq -r '.draft' <<<\"$release_json\")\" = \"true\"\nexpected_names=$(awk\
@@ -835,7 +841,8 @@ jobs:
         \ <<<\"$release_json\" | sort)\ntest \"$actual_names\" = \"$expected_names\"\
         \njq -e --argjson expected \"$expected\" '([.assets[] | {name,digest}] | sort_by(.name))\
         \ == ($expected | sort_by(.name))' <<<\"$release_json\"\ngh release edit \"\
-        $RELEASE_REF\" --draft=false --notes-file \"$notes\"\n"
+        $RELEASE_REF\" --draft=false --notes-file \"$notes\" --repo \"$GITHUB_REPOSITORY\"\
+        \n"
     - name: Stage recovered binaries for existing handoffs
       env:
         RELEASE_REF: ${{ inputs.release_ref }}
