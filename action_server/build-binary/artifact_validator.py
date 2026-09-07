@@ -1,6 +1,7 @@
 """Validation for Actions-owned frontend build artifacts."""
 
 import argparse
+import gzip
 import hashlib
 import json
 import sys
@@ -9,6 +10,9 @@ from pathlib import Path
 from typing import Optional
 
 import tree_shaker
+
+FRONTEND_PAYLOAD_MAX_BYTES = 1024 * 1024
+FRONTEND_PAYLOAD_GZIP_MAX_BYTES = 300 * 1024
 
 
 @dataclass
@@ -25,7 +29,6 @@ class ValidationCheck:
 class BuildArtifact:
     """Represents a build artifact with metadata."""
     
-    tier: str
     platform: str
     file_path: Path
     sha256: Optional[str] = None
@@ -51,7 +54,6 @@ class BuildArtifact:
     def to_metadata_json(self) -> str:
         """Generate metadata JSON for artifact."""
         metadata = {
-            "tier": self.tier,
             "platform": self.platform,
             "sha256": self.sha256 or self.compute_hash(),
             "size_bytes": self.size_bytes or self.compute_size(),
@@ -62,10 +64,11 @@ class BuildArtifact:
 
 def validate_imports(artifact_path: Path) -> ValidationCheck:
     """Validate that an artifact has no removed product imports."""
+    symlinks = _find_symlinks(artifact_path)
+    if symlinks:
+        return ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")
     if artifact_path.is_dir():
-        violations = tree_shaker.TreeShaker("actions", artifact_path).scan_directory(
-            artifact_path
-        )
+        violations = tree_shaker.TreeShaker(artifact_path).scan_directory(artifact_path)
     else:
         violations = tree_shaker.scan_imports(str(artifact_path))
     
@@ -76,21 +79,62 @@ def validate_imports(artifact_path: Path) -> ValidationCheck:
         return ValidationCheck(
             name="imports",
             passed=False,
-            message=f"Enterprise imports detected: {', '.join(messages)}",
+            message=f"Removed product imports detected: {', '.join(messages)}",
             severity="error",
         )
     
     return ValidationCheck(
         name="imports",
         passed=True,
-        message="No enterprise imports detected",
+        message="No removed product imports detected",
         severity="info",
+    )
+
+
+def _find_symlinks(artifact_path: Path) -> list[Path]:
+    """Return the root or any descendant symlink without following it."""
+    if artifact_path.is_symlink():
+        return [artifact_path]
+    if not artifact_path.is_dir():
+        return []
+    return [path for path in artifact_path.rglob("*") if path.is_symlink()]
+
+
+def _find_non_regular_entries(artifact_path: Path) -> list[Path]:
+    """Return descendant entries that are neither regular files nor directories."""
+    if not artifact_path.is_dir():
+        return []
+    return [
+        path
+        for path in artifact_path.rglob("*")
+        if not path.is_symlink() and not path.is_file() and not path.is_dir()
+    ]
+
+
+def _validate_sbom(sbom_path: Path) -> ValidationCheck:
+    """Require readable CycloneDX metadata rather than file presence alone."""
+    if not sbom_path.is_file():
+        return ValidationCheck("sbom", False, "CycloneDX SBOM is missing")
+    try:
+        sbom = json.loads(sbom_path.read_text(encoding="utf-8"))
+    except (OSError, TypeError, ValueError) as exc:
+        return ValidationCheck("sbom", False, f"Invalid CycloneDX SBOM: {exc}")
+    valid = (
+        isinstance(sbom, dict)
+        and sbom.get("bomFormat") == "CycloneDX"
+        and bool(sbom.get("specVersion"))
+    )
+    return ValidationCheck(
+        "sbom",
+        valid,
+        "CycloneDX SBOM is present and valid" if valid else "Invalid CycloneDX SBOM",
     )
 
 
 def validate_size(artifact_path: Path, baseline_path: Optional[Path]) -> ValidationCheck:
     """Validate artifact size against baseline (warn if >120%)."""
-    size_mb = artifact_path.stat().st_size / (1024 * 1024)
+    files = [artifact_path] if artifact_path.is_file() else list(artifact_path.rglob("*"))
+    size_mb = sum(file.stat().st_size for file in files if file.is_file()) / (1024 * 1024)
     
     if not baseline_path or not baseline_path.exists():
         return ValidationCheck(
@@ -129,10 +173,139 @@ def validate_size(artifact_path: Path, baseline_path: Optional[Path]) -> Validat
     )
 
 
+def validate_build_metadata(
+    artifact_path: Path,
+    expected_artifact: Optional[str] = None,
+    expected_content_type: Optional[str] = None,
+) -> list[ValidationCheck]:
+    """Validate release metadata when produced by the frontend build pipeline."""
+    symlinks = _find_symlinks(artifact_path)
+    if symlinks:
+        return [ValidationCheck("symlinks", False, f"Symlink entries are forbidden: {', '.join(map(str, symlinks))}")]
+    non_regular = _find_non_regular_entries(artifact_path)
+    if non_regular:
+        return [ValidationCheck("inventory", False, f"Non-regular entries are forbidden: {', '.join(map(str, non_regular))}")]
+    if not artifact_path.is_dir():
+        if expected_artifact is not None or expected_content_type is not None:
+            return [
+                ValidationCheck(
+                    "metadata",
+                    False,
+                    "Bound release artifacts must be directories",
+                )
+            ]
+        return []
+    manifest_path = artifact_path / "artifact-manifest.json"
+    if not manifest_path.exists():
+        strict = expected_artifact is not None or expected_content_type is not None
+        return [
+            ValidationCheck(
+                "metadata",
+                not strict,
+                "Build manifest is required for release artifacts"
+                if strict
+                else "No build manifest (fixture or legacy artifact)",
+                "error" if strict else "warning",
+            )
+        ]
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        files = manifest["files"]
+        names = [item["path"] for item in files]
+        expected_names = []
+        for path in artifact_path.rglob("*"):
+            if not path.is_file():
+                continue
+            relative_path = path.relative_to(artifact_path).as_posix()
+            if relative_path in {"artifact-manifest.json", "sbom.json"}:
+                continue
+            expected_names.append(relative_path)
+        expected_names.sort()
+        expected_directories = sorted(
+            {
+                parent.as_posix()
+                for name in names
+                for parent in Path(name).parents
+                if parent.as_posix() != "."
+            }
+        )
+        actual_directories = sorted(
+            path.relative_to(artifact_path).as_posix()
+            for path in artifact_path.rglob("*")
+            if path.is_dir()
+        )
+        safe_names = all(
+            isinstance(name, str)
+            and name == name.replace("\\", "/")
+            and not name.startswith("/")
+            and ".." not in Path(name).parts
+            for name in names
+        )
+        checks = [
+            ValidationCheck(
+                "metadata",
+                manifest.get("schemaVersion") == 1 and bool(files),
+                "Build manifest is present and non-empty",
+            )
+        ]
+        checks.append(ValidationCheck("source-maps", not manifest.get("sourceMaps") and not any(name.endswith(".map") for name in names), "Source maps are disabled"))
+        checks.append(_validate_sbom(artifact_path / "sbom.json"))
+        content_type = manifest.get("contentType")
+        checks.append(ValidationCheck("artifact", expected_artifact is not None and manifest.get("artifact") == expected_artifact, f"Declared artifact: {manifest.get('artifact')}"))
+        checks.append(ValidationCheck("content-type", expected_content_type is not None and content_type == expected_content_type, f"Declared content type: {content_type}"))
+        inventory_valid = (
+            safe_names
+            and names == sorted(names)
+            and names == expected_names
+            and actual_directories == expected_directories
+        )
+        checks.append(
+            ValidationCheck(
+                "inventory",
+                inventory_valid,
+                "Manifest inventory is complete and sorted",
+            )
+        )
+        if not inventory_valid:
+            checks.extend(
+                [
+                    ValidationCheck("sizes", False, "Skipped because manifest inventory is invalid"),
+                    ValidationCheck("hashes", False, "Skipped because manifest inventory is invalid"),
+                    ValidationCheck(
+                        "payload-budget",
+                        False,
+                        "Skipped because manifest inventory is invalid",
+                    ),
+                ]
+            )
+            return checks
+        actual_bytes = []
+        actual_hashes = []
+        for item in files:
+            path = artifact_path / item["path"]
+            data = path.read_bytes()
+            actual_bytes.append(len(data) == item["bytes"])
+            actual_hashes.append(hashlib.sha256(data).hexdigest() == item["sha256"])
+        checks.append(ValidationCheck("sizes", all(actual_bytes), "Manifest byte sizes match artifact files"))
+        checks.append(ValidationCheck("hashes", all(actual_hashes), "Manifest hashes match artifact files"))
+        payload = [
+            (artifact_path / item["path"]).read_bytes()
+            for item in files
+        ]
+        payload_bytes = sum(len(data) for data in payload)
+        payload_gzip_bytes = sum(len(gzip.compress(data, mtime=0)) for data in payload)
+        checks.append(ValidationCheck("payload-budget", payload_bytes <= FRONTEND_PAYLOAD_MAX_BYTES and payload_gzip_bytes <= FRONTEND_PAYLOAD_GZIP_MAX_BYTES, f"Executable payload: {payload_bytes} bytes raw, {payload_gzip_bytes} bytes gzip"))
+        return checks
+    except (OSError, KeyError, TypeError, ValueError) as exc:
+        return [ValidationCheck("metadata", False, f"Invalid build manifest: {exc}")]
+
+
 def validate_artifact(
     artifact_path: Path,
     baseline_path: Optional[Path] = None,
     json_output: bool = False,
+    expected_artifact: Optional[str] = None,
+    expected_content_type: Optional[str] = None,
 ) -> tuple[bool, list[ValidationCheck]]:
     """Validate build artifact.
     
@@ -145,9 +318,24 @@ def validate_artifact(
         Tuple of (all_passed, checks)
     """
     checks = []
-    
-    # Run validation checks
-    checks.append(validate_imports(artifact_path))
+
+    metadata_checks = validate_build_metadata(
+        artifact_path, expected_artifact, expected_content_type
+    )
+    checks.extend(metadata_checks)
+    metadata_failed = any(
+        not check.passed and check.severity == "error" for check in metadata_checks
+    )
+    if metadata_failed:
+        checks.append(
+            ValidationCheck(
+                "imports",
+                False,
+                "Skipped because artifact metadata preflight failed",
+            )
+        )
+    else:
+        checks.append(validate_imports(artifact_path))
     checks.append(validate_size(artifact_path, baseline_path))
     
     # Determine overall result
@@ -163,6 +351,14 @@ def main():
     parser = argparse.ArgumentParser(description="Validate build artifacts")
     parser.add_argument("--artifact", required=True, help="Path to artifact")
     parser.add_argument("--baseline", help="Path to baseline.json")
+    parser.add_argument(
+        "--expected-artifact",
+        help="Expected bound artifact identity, such as runtime-admin",
+    )
+    parser.add_argument(
+        "--expected-content-type",
+        help="Expected bound artifact content type, such as text/html",
+    )
     parser.add_argument("--json", action="store_true", help="Output as JSON")
     
     args = parser.parse_args()
@@ -173,9 +369,18 @@ def main():
         sys.exit(2)
     
     baseline_path = Path(args.baseline) if args.baseline else None
+
+    if (args.expected_artifact is None) != (args.expected_content_type is None):
+        parser.error(
+            "--expected-artifact and --expected-content-type must be provided together"
+        )
     
     all_passed, checks = validate_artifact(
-        artifact_path, baseline_path, args.json
+        artifact_path,
+        baseline_path,
+        args.json,
+        args.expected_artifact,
+        args.expected_content_type,
     )
     
     if args.json:

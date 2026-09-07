@@ -30,10 +30,10 @@ This community edition builds entirely from source without any proprietary depen
 git clone https://github.com/joshyorko/actions.git
 cd actions
 
-# Build the action-server binary
-rcc run -r action_server/developer/toolkit.yaml -t community
+# Build and install the action-server binary
+rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
 
-# The binary is at: action_server/dist/final/action-server
+# The built binary is installed at the current PATH-selected action-server target.
 ```
 
 </details>
@@ -251,7 +251,7 @@ To clear caches: `action-server env clean-tools-caches`
 
 ## Building from Source
 
-**Good news!** The Action Server can be built from source without any private credentials. The frontend design system packages are vendored directly in the repository.
+The Action Server builds from the checked-in public npm manifest and lockfile without private credentials.
 
 ### Prerequisites
 
@@ -278,24 +278,17 @@ The build output will be in `action_server/frontend/dist/`.
 ### Build the Full Binary
 
 ```sh
-# From repository root
-rcc run -r action_server/developer/toolkit.yaml -t community
+# From repository root, build and install the binary
+rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
 
-# Binary location
-ls action_server/dist/final/action-server
+# Confirm the installed PATH target
+command -v action-server
 ```
 
-### Why No Credentials Needed?
+### Why No Credentials Are Needed
 
-The frontend uses three internal vendored design-system packages (`actions-runtime-components`, `actions-runtime-icons`, `actions-runtime-theme`) from `action_server/frontend/vendored/`, making them available to all contributors without a registry dependency.
-
-This approach enables:
-- External contributors can build without credentials
-- Offline builds work after initial clone
-- Reproducible builds with exact package versions
-- Air-gapped environments are supported
-
-For more details, see the [vendored packages documentation](action_server/frontend/vendored/README.md).
+Runtime and Canvas use the checked-in public npm manifest and lockfile. No private
+registry configuration or package credential is part of the build.
 
 <div id="contribute"></div>
 

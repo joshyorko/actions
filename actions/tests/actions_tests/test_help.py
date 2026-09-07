@@ -6,9 +6,9 @@ import pytest
 @pytest.mark.parametrize("args", [["-h"], ["run", "-h"], ["list", "-h"]])
 def test_help(args, str_regression):
     v = sys.version_info[:2]
-    if v < (3, 10):
+    if v < (3, 12):
         return
-    if v > (3, 10):
+    if v > (3, 12):
         raise RuntimeError(
             f"This test must be migrated to {v} (always the major version supported should be tested)"
         )

@@ -14,6 +14,8 @@ include = [
 	"src/actions/server/_static_contents.py",
 	"src/actions/server/_oauth2_config.py",
 	"src/actions/server/bin/rcc*",
+	"src/actions/server/templates/action-templates.zip",
+	"src/actions/server/templates/action-templates.yaml",
 ]
 homepage = "https://github.com/joshyorko/actions/tree/community"
 
@@ -53,9 +55,10 @@ redis = "^5.0.0"
 
 [tool.poetry.group.dev.dependencies]
 actions-local-devutils = { path = "../devutils/", develop = true }
+httpx = "^0.28.1"
 types-requests = "^2"
 types-PyYAML = "^6"
-robocorp-log-pytest = "^0.0.2"
+robocorp-log-pytest = "^0.0.5"
 types-psutil = "^7"
 types-jsonschema = "^4.22.0"
 pyinstaller = "6.16.0"
@@ -82,6 +85,11 @@ generate-setup-file = true
 [tool.pytest.ini_options]
 norecursedirs = "tests/action_server_tests/test_devenv/* dist build build-binary"
 testpaths = ["tests"]
+filterwarnings = [
+    "ignore:ast.Str is deprecated.*:DeprecationWarning:robocorp\\.log\\._ast_utils",
+    "ignore:ast.Str is deprecated.*:DeprecationWarning:robocorp\\.log\\._rewrite_ast_add_callbacks",
+    "ignore:Attribute s is deprecated.*:DeprecationWarning:robocorp\\.log\\._rewrite_ast_add_callbacks",
+]
 
 # This is for backward compatibility.
 [[tool.mypy.overrides]]
@@ -102,6 +110,16 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "robocorp.tasks.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "actions.server._oauth2_config",
+    "actions.server._static_contents",
+    "croniter",
+    "cronstrue",
+    "pytz",
+]
 ignore_missing_imports = true
 
 

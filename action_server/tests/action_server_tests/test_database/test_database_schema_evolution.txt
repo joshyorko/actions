@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS action(
     output_schema TEXT NOT NULL,
     enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1,
     is_consequential INTEGER,
-    managed_params_schema TEXT DEFAULT None,
+    managed_params_schema TEXT DEFAULT NULL,
     options TEXT NOT NULL DEFAULT '',
     FOREIGN KEY (action_package_id) REFERENCES action_package(id)  
 )
@@ -73,10 +73,9 @@ CREATE TABLE IF NOT EXISTS run(
     numbered_id INTEGER NOT NULL,
     request_id TEXT NOT NULL DEFAULT '',
     run_type TEXT NOT NULL DEFAULT 'action',
-    robot_package_path TEXT DEFAULT None,
-    robot_task_name TEXT DEFAULT None,
-    robot_env_hash TEXT DEFAULT None,
-    FOREIGN KEY (action_id) REFERENCES action(id)  
+    robot_package_path TEXT DEFAULT NULL,
+    robot_task_name TEXT DEFAULT NULL,
+    robot_env_hash TEXT DEFAULT NULL  
 )
 ''',
 
@@ -177,5 +176,191 @@ CREATE TABLE IF NOT EXISTS o_auth2_user_data(
     metadata TEXT NOT NULL DEFAULT '',
     code_verifier TEXT NOT NULL DEFAULT ''  
 )
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS schedule_group(
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT,
+    parent_id TEXT,
+    color TEXT,
+    created_at TEXT NOT NULL  
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX schedule_group_id_index ON schedule_group(id);
+''',
+
+
+'''
+CREATE INDEX schedule_group_parent_id_non_unique_index ON schedule_group(parent_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS schedule(
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT,
+    action_id TEXT,
+    execution_mode TEXT NOT NULL,
+    work_item_queue TEXT,
+    inputs_json TEXT NOT NULL,
+    schedule_type TEXT NOT NULL,
+    cron_expression TEXT,
+    interval_seconds INTEGER,
+    weekday_config_json TEXT,
+    once_at TEXT,
+    timezone TEXT NOT NULL,
+    enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL DEFAULT '',
+    updated_at TEXT NOT NULL DEFAULT '',
+    last_run_at TEXT DEFAULT NULL,
+    next_run_at TEXT DEFAULT NULL,
+    skip_if_running INTEGER CHECK(skip_if_running IN (0, 1)) NOT NULL DEFAULT 0,
+    max_concurrent INTEGER NOT NULL,
+    timeout_seconds INTEGER NOT NULL,
+    retry_enabled INTEGER CHECK(retry_enabled IN (0, 1)) NOT NULL DEFAULT 0,
+    retry_max_attempts INTEGER NOT NULL,
+    retry_delay_seconds INTEGER NOT NULL,
+    retry_backoff_multiplier REAL NOT NULL,
+    rate_limit_enabled INTEGER CHECK(rate_limit_enabled IN (0, 1)) NOT NULL DEFAULT 0,
+    rate_limit_max_per_hour INTEGER,
+    rate_limit_max_per_day INTEGER,
+    depends_on_schedule_id TEXT DEFAULT NULL,
+    dependency_mode TEXT NOT NULL DEFAULT 'after_success',
+    notify_on_failure INTEGER CHECK(notify_on_failure IN (0, 1)) NOT NULL DEFAULT 0,
+    notify_on_success INTEGER CHECK(notify_on_success IN (0, 1)) NOT NULL DEFAULT 0,
+    notification_webhook_url TEXT DEFAULT NULL,
+    notification_email TEXT DEFAULT NULL,
+    group_id TEXT DEFAULT NULL,
+    tags_json TEXT NOT NULL DEFAULT '[]',
+    priority INTEGER NOT NULL  
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX schedule_id_index ON schedule(id);
+''',
+
+
+'''
+CREATE INDEX schedule_action_id_non_unique_index ON schedule(action_id);
+''',
+
+
+'''
+CREATE INDEX schedule_depends_on_schedule_id_non_unique_index ON schedule(depends_on_schedule_id);
+''',
+
+
+'''
+CREATE INDEX schedule_group_id_non_unique_index ON schedule(group_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS schedule_execution(
+    id TEXT NOT NULL PRIMARY KEY,
+    schedule_id TEXT NOT NULL,
+    run_id TEXT,
+    work_item_id TEXT,
+    scheduled_time TEXT NOT NULL,
+    actual_start_time TEXT NOT NULL,
+    actual_end_time TEXT,
+    duration_ms INTEGER,
+    status TEXT NOT NULL,
+    attempt_number INTEGER NOT NULL,
+    error_message TEXT DEFAULT NULL,
+    error_code TEXT DEFAULT NULL,
+    skip_reason TEXT DEFAULT NULL,
+    result_json TEXT DEFAULT NULL,
+    notification_sent INTEGER CHECK(notification_sent IN (0, 1)) NOT NULL DEFAULT 0,
+    notification_error TEXT DEFAULT NULL  
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX schedule_execution_id_index ON schedule_execution(id);
+''',
+
+
+'''
+CREATE INDEX schedule_execution_schedule_id_non_unique_index ON schedule_execution(schedule_id);
+''',
+
+
+'''
+CREATE INDEX schedule_execution_status_non_unique_index ON schedule_execution(status);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS trigger(
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT,
+    action_id TEXT,
+    execution_mode TEXT NOT NULL,
+    work_item_queue TEXT,
+    inputs_template_json TEXT NOT NULL,
+    trigger_type TEXT NOT NULL,
+    webhook_secret TEXT,
+    webhook_method TEXT NOT NULL,
+    enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL DEFAULT '',
+    updated_at TEXT NOT NULL DEFAULT '',
+    last_triggered_at TEXT DEFAULT NULL,
+    trigger_count INTEGER NOT NULL,
+    rate_limit_enabled INTEGER CHECK(rate_limit_enabled IN (0, 1)) NOT NULL DEFAULT 0,
+    rate_limit_max_per_minute INTEGER NOT NULL  
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX trigger_id_index ON trigger(id);
+''',
+
+
+'''
+CREATE INDEX trigger_action_id_non_unique_index ON trigger(action_id);
+''',
+
+
+'''
+CREATE INDEX trigger_trigger_type_non_unique_index ON trigger(trigger_type);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS trigger_invocation(
+    id TEXT NOT NULL PRIMARY KEY,
+    trigger_id TEXT NOT NULL,
+    invoked_at TEXT NOT NULL,
+    source_ip TEXT,
+    payload_json TEXT,
+    headers_json TEXT,
+    status TEXT NOT NULL,
+    run_id TEXT,
+    work_item_id TEXT,
+    error_message TEXT  
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX trigger_invocation_id_index ON trigger_invocation(id);
+''',
+
+
+'''
+CREATE INDEX trigger_invocation_trigger_id_non_unique_index ON trigger_invocation(trigger_id);
 ''',
 ]

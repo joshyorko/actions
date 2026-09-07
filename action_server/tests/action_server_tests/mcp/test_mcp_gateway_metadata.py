@@ -4,13 +4,13 @@ import logging
 import uuid
 
 from actions.server.mcp.gateway_metadata import (
+    MCP_CORRELATION_ID_ATTRIBUTE,
     MCP_CORRELATION_ID_HEADER,
+    MCP_METHOD_ATTRIBUTE,
     MCP_METHOD_HEADER,
+    MCP_NAME_ATTRIBUTE,
     MCP_NAME_HEADER,
     MCP_REQUEST_STATE_KEY,
-    MCP_CORRELATION_ID_ATTRIBUTE,
-    MCP_METHOD_ATTRIBUTE,
-    MCP_NAME_ATTRIBUTE,
     McpRequestMetadataMiddleware,
     get_mcp_request_metadata,
 )
@@ -415,7 +415,7 @@ def test_valid_jsonrpc_responses_with_metadata_headers_reach_the_sdk():
         assert sent[0]["status"] == 204
 
 
-def test_fragmented_body_is_replayed_and_empty_after_downstream_reads_past_end():
+def test_fragmented_body_is_replayed_once_then_original_receive_is_delegated():
     body = json.dumps({"jsonrpc": "2.0", "id": 1, "method": "tools/list"}).encode()
     seen, _ = asyncio.run(
         _run(
@@ -423,16 +423,13 @@ def test_fragmented_body_is_replayed_and_empty_after_downstream_reads_past_end()
             receive_messages=[
                 {"type": "http.request", "body": body[:9], "more_body": True},
                 {"type": "http.request", "body": body[9:], "more_body": False},
+                {"type": "http.disconnect"},
             ],
             replay_reads=3,
         )
     )
     assert [chunk["body"] for chunk in seen["replayed"][:2]] == [body[:9], body[9:]]
-    assert seen["replayed"][2] == {
-        "type": "http.request",
-        "body": b"",
-        "more_body": False,
-    }
+    assert seen["replayed"][2] == {"type": "http.disconnect"}
 
 
 def test_oversized_body_is_rejected_without_forwarding_body():

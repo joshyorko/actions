@@ -9,7 +9,7 @@
     ],
     "metadata": {
         "actionName": "get_wikipedia_article_summary",
-        "actionRelativePath": "actions.py",
+        "actionRelativePath": "wikipedia_actions.py",
         "schemaDescription": [
             "article_url: string: URL of the article to get the summary of."
         ],

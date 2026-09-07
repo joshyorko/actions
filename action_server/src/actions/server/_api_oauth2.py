@@ -85,10 +85,7 @@ async def oauth2_logout(
 ) -> StatusResponseModel:
     from actions.server._encryption import decrypt_simple
     from actions.server._models import OAuth2UserData, get_db
-    from actions.server._user_session import (
-        referenced_session_scope,
-        session_scope,
-    )
+    from actions.server._user_session import referenced_session_scope, session_scope
 
     use_session_scope: Any
     if reference_id:
@@ -265,10 +262,7 @@ async def oauth2_status(
     from actions.server._encryption import decrypt_simple
     from actions.server._models import OAuth2UserData, get_db
     from actions.server._robo_utils.run_in_thread import run_in_thread_asyncio
-    from actions.server._user_session import (
-        referenced_session_scope,
-        session_scope,
-    )
+    from actions.server._user_session import referenced_session_scope, session_scope
 
     use_session_scope: Any
     if reference_id:

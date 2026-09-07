@@ -2,8 +2,6 @@ import asyncio
 import logging
 import os
 import socket
-import subprocess
-import sys
 import typing
 from contextlib import asynccontextmanager
 from functools import partial
@@ -26,6 +24,100 @@ def _mount_artifact_static_files(app: FastAPI, backend: str, root: os.PathLike) 
         app.mount("/artifacts", StaticFiles(directory=root), name="artifacts")
 
 
+async def _start_community_expose_impl(port: int, settings, api_key: str | None = None):
+    """Start community expose and suppress provider startup failures."""
+    from ._community_expose import TunnelManager, TunnelProvider
+
+    provider_map = {
+        "auto": TunnelProvider.AUTO,
+        "localhost.run": TunnelProvider.LOCALHOST_RUN,
+        "bore": TunnelProvider.BORE,
+        "cloudflare": TunnelProvider.CLOUDFLARE,
+    }
+    provider = provider_map.get(settings.expose_provider, TunnelProvider.AUTO)
+    community_tunnel_manager = TunnelManager(preferred_provider=provider)
+
+    try:
+        tunnel = await community_tunnel_manager.start(port)
+
+        log.info(
+            colored("\n  🌍 Public URL: ", "green", attrs=["bold"])
+            + colored(tunnel.public_url, "light_blue")
+        )
+
+        if api_key:
+            log.info(
+                colored("  🔑 API Authorization Bearer key: ", attrs=["bold"])
+                + f"{api_key}\n"
+            )
+
+        log.info(colored(f"     (using {tunnel.provider.value})", attrs=["dark"]))
+
+    except Exception as e:
+        log.error(f"Failed to start tunnel: {e}")
+        log.info(
+            colored(
+                "     Tip: Install 'bore' for simple tunneling: ",
+                attrs=["dark"],
+            )
+            + colored("https://github.com/ekzhang/bore", "light_blue")
+        )
+
+    return community_tunnel_manager
+
+
+@asynccontextmanager
+async def _community_expose_lifespan(
+    app: FastAPI,
+    *,
+    expose: bool,
+    file_watcher,
+    expose_later: typing.Callable[[typing.Any], None],
+    get_tunnel_manager: typing.Callable[[], typing.Any],
+):
+    import psutil
+
+    loop = asyncio.get_event_loop()
+    _LoopHolder.loop = loop
+    if expose:
+        log.debug("Exposing action server...")
+        loop.call_later(1 / 15.0, partial(expose_later, loop))
+    else:
+        log.debug("Not exposing action server...")
+
+    try:
+        yield
+    finally:
+        community_tunnel_manager = get_tunnel_manager()
+        if community_tunnel_manager is not None:
+            try:
+                await community_tunnel_manager.stop()
+            except Exception:
+                log.exception("Error stopping community tunnel manager.")
+
+        if file_watcher is not None:
+            file_watcher.stop()
+
+        log.info("Stopping action server...")
+        from actions.server._robo_utils.process import kill_process_and_subprocesses
+
+        p = psutil.Process(os.getpid())
+        children_processes = []
+        try:
+            children_processes = list(p.children(recursive=True))
+        except Exception:
+            log.exception("Error listing subprocesses.")
+
+        for child in children_processes:
+            log.info(
+                f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
+            )
+            try:
+                kill_process_and_subprocesses(child.pid)
+            except Exception:
+                log.exception("Error killing subprocess: %s", child.pid)
+
+
 class _LoopHolder:
     loop: Optional["AbstractEventLoop"] = None
 
@@ -33,10 +125,8 @@ class _LoopHolder:
 def start_server(
     start_args: ArgumentsNamespaceStart,
     api_key: str | None,
-    expose_session: str | None,
     before_start: Sequence[IBeforeStartCallback],
 ) -> None:
-    import json
     import threading
     from dataclasses import asdict
     from functools import lru_cache
@@ -89,8 +179,6 @@ def start_server(
     from actions.server._artifact_storage import get_artifact_storage
 
     artifacts_dir = get_artifact_storage().root
-
-    _mount_artifact_static_files(app, settings.artifact_storage_backend, artifacts_dir)
 
     def verify_api_key(
         token: HTTPAuthorizationCredentials = Security(HTTPBearer(auto_error=True)),
@@ -157,8 +245,6 @@ def start_server(
         """
         from actions.server import __version__
 
-        from ._server_expose import get_expose_session_payload, read_expose_session_json
-
         payload = {
             "expose_url": False,
             "auth_enabled": False,
@@ -170,21 +256,6 @@ def start_server(
         if api_key:
             payload["auth_enabled"] = True
 
-        if expose:
-            current_expose_session = read_expose_session_json(
-                datadir=str(settings.datadir)
-            )
-
-            expose_session_payload = (
-                get_expose_session_payload(current_expose_session.expose_session)
-                if current_expose_session
-                else None
-            )
-
-            if expose_session_payload:
-                payload[
-                    "expose_url"
-                ] = f"https://{expose_session_payload.sessionId}.{settings.expose_url}"
         return payload
 
     if start_args.auto_reload:
@@ -271,7 +342,7 @@ def start_server(
 
         from actions.server._storage import get_key
 
-        from . import __version__, _static_contents
+        from . import __version__, _static_contents  # type: ignore[attr-defined]
 
         if IN_DEV:
             # Always reload in dev mode.
@@ -299,7 +370,20 @@ def start_server(
             session.response = response
         return response
 
-    index_routes = ["/", "/runs/{full_path:path}", "/actions/{full_path:path}"]
+    async def serve_artifact_index(request: Request, run_id: str):
+        return await serve_index(request)
+
+    index_routes = [
+        "/",
+        "/overview",
+        "/actions/{full_path:path}",
+        "/runs/{full_path:path}",
+        "/schedules",
+        "/robots",
+        "/work-items",
+        "/analytics",
+        "/logs/{full_path:path}",
+    ]
     for index_route in index_routes:
         app.add_api_route(
             index_route,
@@ -308,6 +392,15 @@ def start_server(
             include_in_schema=settings.full_openapi_spec,
         )
 
+    app.add_api_route(
+        "/artifacts/{run_id}",
+        serve_artifact_index,
+        response_class=HTMLResponse,
+        include_in_schema=settings.full_openapi_spec,
+    )
+
+    _mount_artifact_static_files(app, settings.artifact_storage_backend, artifacts_dir)
+
     # At this point the FastAPI app should be configured. What's missing now
     # is setup callbacks related to the startup and actuall start the async
     # loop.
@@ -315,8 +408,6 @@ def start_server(
     for callback in before_start:
         if not callback(app):
             return
-
-    expose_subprocess = None
 
     def _get_currrent_host():
         port = settings.port if settings.port != 0 else None
@@ -337,53 +428,12 @@ def start_server(
         return (host, port)
 
     def expose_later(loop):
-        from actions.server._settings import is_community_build, is_frozen
-
-        nonlocal expose_subprocess
-
         if not server.started:
             loop.call_later(1 / 15.0, partial(expose_later, loop))
             return
 
-        (host, port) = _get_currrent_host()
-        url = f"{protocol}://{host}:{port}"
-
-        # Check if we should use community expose (open source tunnels)
-        if is_community_build() or settings.expose_provider != "actions":
-            # Use community expose with open source tunnel providers
-            asyncio.create_task(_start_community_expose(port, settings))
-            return
-
-        # Enterprise expose using actions.link
-        parent_pid = os.getpid()
-
-        if is_frozen():
-            # The executable is 'action-server.exe'.
-            args = [sys.executable]
-        else:
-            # The executable is 'python'.
-            args = [
-                sys.executable,
-                "-m",
-                "actions.server",
-            ]
-
-        args += [
-            "server-expose",
-            str(parent_pid),
-            url,
-            "" if not settings.verbose else "v",
-            settings.expose_url,
-            settings.datadir,
-            str(expose_session),
-            api_key,
-        ]
-        settings.use_https
-        env = os.environ.copy()
-        env["ACTIONS-SERVER-HTTPS-INFO"] = json.dumps(
-            {"use_https": settings.use_https, "ssl_certfile": settings.ssl_certfile}
-        )
-        expose_subprocess = subprocess.Popen(args, env=env)
+        (_, port) = _get_currrent_host()
+        asyncio.create_task(_start_community_expose(port, settings))
 
     # Community expose task holder
     community_tunnel_manager = None
@@ -391,45 +441,9 @@ def start_server(
     async def _start_community_expose(port: int, settings):
         """Start community expose using open source tunnel providers."""
         nonlocal community_tunnel_manager
-
-        from ._community_expose import TunnelManager, TunnelProvider
-
-        # Map settings.expose_provider to TunnelProvider
-        provider_map = {
-            "auto": TunnelProvider.AUTO,
-            "localhost.run": TunnelProvider.LOCALHOST_RUN,
-            "bore": TunnelProvider.BORE,
-            "cloudflare": TunnelProvider.CLOUDFLARE,
-        }
-
-        provider = provider_map.get(settings.expose_provider, TunnelProvider.AUTO)
-
-        try:
-            community_tunnel_manager = TunnelManager(preferred_provider=provider)
-            tunnel = await community_tunnel_manager.start(port)
-
-            log.info(
-                colored("\n  🌍 Public URL: ", "green", attrs=["bold"])
-                + colored(tunnel.public_url, "light_blue")
-            )
-
-            if api_key:
-                log.info(
-                    colored("  🔑 API Authorization Bearer key: ", attrs=["bold"])
-                    + f"{api_key}\n"
-                )
-
-            log.info(colored(f"     (using {tunnel.provider.value})", attrs=["dark"]))
-
-        except Exception as e:
-            log.error(f"Failed to start tunnel: {e}")
-            log.info(
-                colored(
-                    "     Tip: Install 'bore' for simple tunneling: ",
-                    attrs=["dark"],
-                )
-                + colored("https://github.com/ekzhang/bore", "light_blue")
-            )
+        community_tunnel_manager = await _start_community_expose_impl(
+            port, settings, api_key
+        )
 
     protocol = "https" if settings.use_https else "http"
 
@@ -469,47 +483,14 @@ def start_server(
 
     @asynccontextmanager
     async def _expose_and_shutdown(app: FastAPI):
-        import psutil
-
-        loop = asyncio.get_event_loop()
-        _LoopHolder.loop = loop
-        if expose:
-            log.debug("Exposing action server...")
-            loop.call_later(1 / 15.0, partial(expose_later, loop))
-        else:
-            log.debug("Not exposing action server...")
-
-        yield
-
-        if file_watcher is not None:
-            file_watcher.stop()
-
-        log.info("Stopping action server...")
-        from actions.server._robo_utils.process import (
-            kill_process_and_subprocesses,
-        )
-
-        expose_pid = None
-        if expose_subprocess is not None:
-            log.info("Shutting down expose subprocess: %s", expose_subprocess.pid)
-            expose_pid = expose_subprocess.pid
-            kill_process_and_subprocesses(expose_pid)
-
-        p = psutil.Process(os.getpid())
-        try:
-            children_processes = list(p.children(recursive=True))
-        except Exception:
-            log.exception("Error listing subprocesses.")
-
-        for child in children_processes:
-            if child.pid != expose_pid:  # If it's still around, don't kill it again.
-                log.info(
-                    f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
-                )
-                try:
-                    kill_process_and_subprocesses(child.pid)
-                except Exception:
-                    log.exception("Error killing subprocess: %s", child.pid)
+        async with _community_expose_lifespan(
+            app,
+            expose=expose,
+            file_watcher=file_watcher,
+            expose_later=expose_later,
+            get_tunnel_manager=lambda: community_tunnel_manager,
+        ):
+            yield
 
     app.custom_lifespan.register(_expose_and_shutdown)
 

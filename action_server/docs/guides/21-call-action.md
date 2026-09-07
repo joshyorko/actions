@@ -24,30 +24,3 @@ the invocation context should be a dict containing the following keys:
 This is a header where secrets are expected to be passed.
 
 See: [07-secrets.md](07-secrets.md) for more details.
-
-3. `X-Data-Context` header:
-
-Header with information to access the data server.
-
-i.e.:
-
-```python
-data_context = {"data-server": {}}
-
-for endpoint in self.data_server_details.data_server_endpoints:
-    if endpoint.kind == DataServerEndpointKind.HTTP:
-        data_context["data-server"]["http"] = {
-            "url": f"http://{endpoint.full_address}",
-            "user": self.data_server_details.username,
-            "password": self.data_server_details.password_str,
-        }
-    elif endpoint.kind == DataServerEndpointKind.MYSQL:
-        data_context["data-server"]["mysql"] = {
-            "host": endpoint.host,
-            "port": endpoint.port,
-            "user": self.data_server_details.username,
-            "password": self.data_server_details.password_str,
-        }
-```
-
-Note that it may be passed as a data envelope too.

@@ -1,5 +1,6 @@
-from actions import Request, action
 from actions._secret import Secret
+
+from actions import Request, action
 
 
 @action

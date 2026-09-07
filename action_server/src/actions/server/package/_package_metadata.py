@@ -56,8 +56,8 @@ def collect_package_metadata(package_dir: Path, datadir: str) -> str | int:
 
     Returns: Either the package metadata to be printed or an error code.
     """
-    from fastapi.applications import FastAPI
     from actions._protocols import ActionsListActionTypedDict
+    from fastapi.applications import FastAPI
 
     from actions.server._actions_import import hook_on_actions_list
     from actions.server._cli_impl import _main_retcode
@@ -74,7 +74,6 @@ def collect_package_metadata(package_dir: Path, datadir: str) -> str | int:
     def on_actions_list(
         action_package: "ActionPackage",
         actions_list_result: list[ActionsListActionTypedDict],
-        data_package_metadata: dict | None,
     ):
         from actions.server._api_action_routes import build_url_api_run
         from actions.server.vendored_deps.ls_protocols import _DiagnosticSeverity
@@ -170,9 +169,6 @@ def collect_package_metadata(package_dir: Path, datadir: str) -> str | int:
             # Version 4 added 'external-endpoints' to the metadata.
             "metadata_version": 4,
         }
-
-        if data_package_metadata:
-            metadata["metadata"]["data"] = data_package_metadata
 
         if external_endpoints:
             metadata["metadata"]["external-endpoints"] = external_endpoints

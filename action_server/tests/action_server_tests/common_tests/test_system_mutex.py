@@ -1,4 +1,5 @@
 def test_system_mutex():
+    import os
     import subprocess
     import sys
     import threading
@@ -14,7 +15,7 @@ def test_system_mutex():
         timed_acquire_mutex,
     )
 
-    mutex_name = "mutex_name_test_system_mutex"
+    mutex_name = f"mutex_name_test_system_mutex_{os.getpid()}"
 
     system_mutex = SystemMutex(mutex_name)
     assert system_mutex.get_mutex_aquired()
@@ -104,10 +105,10 @@ def test_system_mutex():
         # Must also fail from another process.
         code = """
 from actions.server._common.system_mutex import timed_acquire_mutex
-mutex_name = "mutex_name_test_system_mutex"
+mutex_name = "{mutex_name}"
 with timed_acquire_mutex(mutex_name, timeout=1, raise_error_on_timeout=True):
     pass
-"""
+""".format(mutex_name=mutex_name)
         with pytest.raises(subprocess.CalledProcessError):
             subprocess.check_call([sys.executable, "-c", code], stderr=subprocess.PIPE)
 
@@ -146,15 +147,17 @@ def test_system_mutex_error_on_timeout():
 
 
 def test_system_mutex_timed_acquire_no_error_on_timeout():
+    import os
     import threading
 
     from actions.server._common.system_mutex import SystemMutex, timed_acquire_mutex
 
     event_mutex_acquired = threading.Event()
     event_terminate_thread = threading.Event()
+    mutex_name = f"test_system_mutex_timed_acquire_no_error_on_timeout_{os.getpid()}"
 
     def thread():
-        mutex2 = SystemMutex("test_system_mutex_timed_acquire_no_error_on_timeout")
+        mutex2 = SystemMutex(mutex_name)
         assert mutex2.get_mutex_aquired()
         event_mutex_acquired.set()
         event_terminate_thread.wait()
@@ -163,7 +166,7 @@ def test_system_mutex_timed_acquire_no_error_on_timeout():
     t.start()
     assert event_mutex_acquired.wait(timeout=5), "Mutex not acquired in time"
 
-    mutex = SystemMutex("test_system_mutex_timed_acquire_no_error_on_timeout")
+    mutex = SystemMutex(mutex_name)
     assert not mutex.get_mutex_aquired()
 
     # Here we check that a message is logged to stderr instead of raising
@@ -188,9 +191,7 @@ def test_system_mutex_timed_acquire_no_error_on_timeout():
     logger.addHandler(handler)
 
     try:
-        with timed_acquire_mutex(
-            "test_system_mutex_timed_acquire_no_error_on_timeout", timeout=1
-        ):
+        with timed_acquire_mutex(mutex_name, timeout=1):
             pass
 
     finally:
@@ -198,19 +199,24 @@ def test_system_mutex_timed_acquire_no_error_on_timeout():
 
 
 def test_system_mutex_locked_on_subprocess():
+    import os
     import subprocess
     import sys
 
     from actions.server._common.process import kill_process_and_subprocesses
     from actions.server._common.system_mutex import SystemMutex
-    from actions.server._common.wait_for import wait_for_condition, wait_for_non_error_condition
+    from actions.server._common.wait_for import (
+        wait_for_condition,
+        wait_for_non_error_condition,
+    )
 
-    code = """
+    mutex_name = f"test_system_mutex_locked_on_subprocess_common_{os.getpid()}"
+    code = f"""
 import sys
 import time
 print('initialized')
 from actions.server._common.system_mutex import SystemMutex
-mutex = SystemMutex('test_system_mutex_locked_on_subprocess')
+mutex = SystemMutex('{mutex_name}')
 assert mutex.get_mutex_aquired()
 print('acquired mutex')
 sys.stdout.flush()
@@ -232,14 +238,14 @@ time.sleep(30)
         return None
 
     wait_for_non_error_condition(check_mutex_acquired)
-    mutex = SystemMutex("test_system_mutex_locked_on_subprocess")
+    mutex = SystemMutex(mutex_name)
     assert not mutex.get_mutex_aquired()
 
     # i.e.: check that we can acquire the mutex if the related process dies.
     kill_process_and_subprocesses(p.pid)
 
     def acquire_mutex():
-        mutex = SystemMutex("test_system_mutex_locked_on_subprocess")
+        mutex = SystemMutex(mutex_name)
         return mutex.get_mutex_aquired()
 
     wait_for_condition(acquire_mutex, timeout=5)

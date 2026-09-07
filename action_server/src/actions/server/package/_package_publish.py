@@ -93,9 +93,7 @@ def upload_package(
 def get_package_status(
     organization_id: str, package_id: str, access_credentials: str, hostname: str
 ) -> ActionPackageEntity:
-    from actions.server.package._package_publish_api import (
-        request_package_status,
-    )
+    from actions.server.package._package_publish_api import request_package_status
 
     package = request_package_status(
         organization_id, package_id, access_credentials, hostname

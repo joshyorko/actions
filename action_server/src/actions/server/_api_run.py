@@ -39,7 +39,10 @@ def get_run_by_id(run_id: str) -> Run:
         with global_runs_state.semaphore:
             return global_runs_state.get_run_from_id(run_id)
     except KeyError as err:
-        from ._artifact_storage import ArtifactStorageNotFoundError, get_artifact_storage
+        from ._artifact_storage import (
+            ArtifactStorageNotFoundError,
+            get_artifact_storage,
+        )
 
         try:
             return Run(**get_artifact_storage().run_metadata(run_id))
@@ -432,7 +435,9 @@ def get_run_artifact_binary(
 
     run = get_run_by_id(run_id)
     try:
-        path = get_artifact_storage().read_path(run.relative_artifacts_dir, artifact_name)
+        path = get_artifact_storage().read_path(
+            run.relative_artifacts_dir, artifact_name
+        )
     except ArtifactStorageNotFoundError:
         log.critical("Unable to get missing artifact: %s", artifact_name)
         return None

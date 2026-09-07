@@ -22,9 +22,7 @@ def test_package_update(tmpdir, data_regression):
 
     import yaml
 
-    from actions.server.vendored_deps.action_package_handling import (
-        update_package,
-    )
+    from actions.server.vendored_deps.action_package_handling import update_package
 
     tmp = Path(tmpdir)
     conda_yaml = tmp / "conda.yaml"

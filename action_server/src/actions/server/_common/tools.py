@@ -357,16 +357,4 @@ class RccTool(BaseTool):
                 )
 
 
-class DataServerTool(BaseTool):
-    mutex_name = "sema4ai-get-data-server"
-    base_url = "https://cdn.sema4.ai/data-server-cli/beta"
-    executable_name = "data-server-cli"
-
-    # Different naming for arm64 on macos for the data-server-cli tool
-    macos_arm_64_download_path = "macos_arm64"
-
-    def __init__(self, target_location: str, tool_version: str):
-        super().__init__(target_location, tool_version)
-
-
-__all__ = ["BaseTool", "ActionServerTool", "AgentCliTool", "RccTool", "DataServerTool"]
+__all__ = ["BaseTool", "ActionServerTool", "AgentCliTool", "RccTool"]

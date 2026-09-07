@@ -204,7 +204,7 @@ def test_import_action_server_strategies(
     action_server_datadir: Path,
     strategy: str,
 ) -> None:
-    from action_server_tests.fixtures import get_in_resources, actions_server_run
+    from action_server_tests.fixtures import actions_server_run, get_in_resources
 
     from actions.server._models import Action, ActionPackage, load_db
 
@@ -354,7 +354,7 @@ def test_import_no_conda(
     action_server_datadir: Path,
     client: ActionServerClient,
 ) -> None:
-    from action_server_tests.fixtures import fix_openapi_json, actions_server_run
+    from action_server_tests.fixtures import actions_server_run, fix_openapi_json
 
     from actions.server._database import Database
     from actions.server._models import Action, load_db
@@ -641,6 +641,45 @@ def test_routes(action_server_process: ActionServerProcess, data_regression):
     assert run0["id"] == runs[0]["id"]
 
     client.get_error("/api/runs/bad-run-id", 404)
+
+
+@pytest.mark.integration_test
+@pytest.mark.parametrize(
+    "path",
+    [
+        "/overview",
+        "/schedules",
+        "/robots",
+        "/work-items",
+        "/analytics",
+        "/logs/run-1",
+        "/artifacts/run-1",
+    ],
+)
+def test_runtime_deep_links_serve_frontend_index(
+    action_server_process: ActionServerProcess,
+    client: ActionServerClient,
+    path: str,
+) -> None:
+    action_server_process.start()
+
+    response = client.get_str(path)
+
+    assert '<div id="root"></div>' in response
+
+
+@pytest.mark.integration_test
+def test_runtime_artifact_download_survives_frontend_fallback(
+    action_server_process: ActionServerProcess,
+    client: ActionServerClient,
+) -> None:
+    artifact = action_server_process.datadir / "artifacts" / "run-1" / "payload.bin"
+    artifact.parent.mkdir(parents=True)
+    artifact.write_bytes(b"raw artifact")
+    action_server_process.start()
+
+    assert '<div id="root"></div>' in client.get_str("/artifacts/run-1")
+    assert client.get_str("/artifacts/run-1/payload.bin") == "raw artifact"
 
 
 @pytest.mark.integration_test

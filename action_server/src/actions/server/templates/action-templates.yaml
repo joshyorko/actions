@@ -1,0 +1,10 @@
+{
+  "hash": "47797a7149d912ada15b2b91ce3cf5affdb16558bc10d986e0bec261fa223759",
+  "schema": 1,
+  "templates": {
+    "advanced": "Advanced - An example showcasing more advanced configuration features of Actions.",
+    "basic": "Basic - Simple example showcasing some basic configuration.",
+    "minimal": "Minimal - A bare bone starting template.",
+    "workflow-producer-consumer": "Workflow/Producer-Consumer - Producer-consumer workflow pattern using work items."
+  }
+}

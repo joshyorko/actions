@@ -7,13 +7,16 @@ Provides REST endpoints for managing scheduled action executions.
 import json
 import logging
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 from fastapi import HTTPException
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, Field, field_validator
 
 log = logging.getLogger(__name__)
+
+if TYPE_CHECKING:
+    from actions.server._models import Schedule
 
 schedules_api_router = APIRouter(prefix="/api/schedules")
 schedule_groups_api_router = APIRouter(prefix="/api/schedule-groups")
@@ -444,13 +447,13 @@ async def list_schedules(
     schedule_type: Optional[str] = None,
 ):
     """List all schedules with optional filters."""
-    from actions.server._models import Action, Schedule, ScheduleGroup, get_db
+    from actions.server._models import Schedule, get_db
 
     db = get_db()
     with db.connect():
         # Build query
         conditions = []
-        values = []
+        values: List[Any] = []
 
         if enabled is not None:
             conditions.append("enabled = ?")
@@ -481,7 +484,9 @@ async def list_schedules(
         for schedule in schedules:
             action_name, depends_on_name, group_name = _get_related_names(db, schedule)
             responses.append(
-                _schedule_to_response(schedule, action_name, depends_on_name, group_name)
+                _schedule_to_response(
+                    schedule, action_name, depends_on_name, group_name
+                )
             )
 
     return ScheduleListResponse(schedules=responses, total=len(responses))
@@ -493,12 +498,7 @@ async def get_schedule_stats():
     from datetime import timedelta
 
     from actions.server._database import datetime_to_str
-    from actions.server._models import (
-        Schedule,
-        ScheduleExecution,
-        ScheduleExecutionStatus,
-        get_db,
-    )
+    from actions.server._models import Schedule, ScheduleExecutionStatus, get_db
 
     db = get_db()
     now = datetime.now(timezone.utc)
@@ -739,7 +739,7 @@ async def update_schedule(schedule_id: str, request: ScheduleUpdateRequest):
             )
 
         # Build update dict
-        updates = {"updated_at": datetime_to_str(now)}
+        updates: Dict[str, Any] = {"updated_at": datetime_to_str(now)}
 
         # Handle each field
         if request.name is not None:
@@ -749,7 +749,9 @@ async def update_schedule(schedule_id: str, request: ScheduleUpdateRequest):
         if request.action_id is not None:
             # Verify action exists
             try:
-                db.first(Action, "SELECT * FROM action WHERE id = ?", [request.action_id])
+                db.first(
+                    Action, "SELECT * FROM action WHERE id = ?", [request.action_id]
+                )
             except KeyError:
                 raise HTTPException(
                     status_code=404, detail=f"Action not found: {request.action_id}"
@@ -869,7 +871,11 @@ async def update_schedule(schedule_id: str, request: ScheduleUpdateRequest):
                     db.update_by_id(
                         Schedule,
                         schedule_id,
-                        {"next_run_at": datetime_to_str(next_run) if next_run else None},
+                        {
+                            "next_run_at": datetime_to_str(next_run)
+                            if next_run
+                            else None
+                        },
                     )
                 schedule = db.first(
                     Schedule, "SELECT * FROM schedule WHERE id = ?", [schedule_id]
@@ -885,7 +891,7 @@ async def update_schedule(schedule_id: str, request: ScheduleUpdateRequest):
 @schedules_api_router.delete("/{schedule_id}")
 async def delete_schedule(schedule_id: str):
     """Delete a schedule."""
-    from actions.server._models import Schedule, ScheduleExecution, get_db
+    from actions.server._models import Schedule, get_db
 
     db = get_db()
     with db.connect():
@@ -911,14 +917,8 @@ async def delete_schedule(schedule_id: str):
 @schedules_api_router.post("/{schedule_id}/trigger", response_model=ExecutionResponse)
 async def trigger_schedule(schedule_id: str):
     """Manually trigger a schedule execution."""
-    from actions.server._database import datetime_to_str
     from actions.server._gen_ids import gen_uuid
-    from actions.server._models import (
-        Schedule,
-        ScheduleExecution,
-        ScheduleExecutionStatus,
-        get_db,
-    )
+    from actions.server._models import Schedule, ScheduleExecution, get_db
     from actions.server._scheduler import get_scheduler
 
     db = get_db()
@@ -1107,9 +1107,7 @@ async def duplicate_schedule(schedule_id: str, new_name: Optional[str] = None):
 
     log.info(f"Duplicated schedule {schedule_id} as {new_id}")
 
-    return _schedule_to_response(
-        new_schedule, action_name, depends_on_name, group_name
-    )
+    return _schedule_to_response(new_schedule, action_name, depends_on_name, group_name)
 
 
 @schedules_api_router.get(
@@ -1208,15 +1206,6 @@ async def validate_cron(request: CronValidateRequest):
     scheduler = SchedulerEngine()
     next_runs = []
 
-    try:
-        import pytz
-
-        tz = pytz.timezone(request.timezone)
-    except ImportError:
-        from zoneinfo import ZoneInfo
-
-        tz = ZoneInfo(request.timezone)
-
     base = datetime.now(timezone.utc)
     for _ in range(10):
         next_run = scheduler._compute_cron_next(
@@ -1298,7 +1287,7 @@ async def list_timezones():
 @schedule_groups_api_router.get("", response_model=GroupListResponse)
 async def list_groups():
     """List all schedule groups."""
-    from actions.server._models import Schedule, ScheduleGroup, get_db
+    from actions.server._models import ScheduleGroup, get_db
 
     db = get_db()
     with db.connect():
@@ -1351,7 +1340,8 @@ async def create_group(request: GroupCreateRequest):
                 )
             except KeyError:
                 raise HTTPException(
-                    status_code=404, detail=f"Parent group not found: {request.parent_id}"
+                    status_code=404,
+                    detail=f"Parent group not found: {request.parent_id}",
                 )
 
         group_id = gen_uuid("schedule_group")
@@ -1396,11 +1386,9 @@ async def update_group(group_id: str, request: GroupUpdateRequest):
                 [group_id],
             )
         except KeyError:
-            raise HTTPException(
-                status_code=404, detail=f"Group not found: {group_id}"
-            )
+            raise HTTPException(status_code=404, detail=f"Group not found: {group_id}")
 
-        updates = {}
+        updates: Dict[str, Any] = {}
         if request.name is not None:
             updates["name"] = request.name
         if request.description is not None:
@@ -1456,7 +1444,7 @@ async def update_group(group_id: str, request: GroupUpdateRequest):
 @schedule_groups_api_router.delete("/{group_id}")
 async def delete_group(group_id: str):
     """Delete a schedule group."""
-    from actions.server._models import Schedule, ScheduleGroup, get_db
+    from actions.server._models import ScheduleGroup, get_db
 
     db = get_db()
     with db.connect():
@@ -1467,9 +1455,7 @@ async def delete_group(group_id: str):
                 [group_id],
             )
         except KeyError:
-            raise HTTPException(
-                status_code=404, detail=f"Group not found: {group_id}"
-            )
+            raise HTTPException(status_code=404, detail=f"Group not found: {group_id}")
 
         # Check if group has schedules
         with db.cursor() as cursor:

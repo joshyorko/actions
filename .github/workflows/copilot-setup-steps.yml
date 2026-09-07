@@ -50,15 +50,10 @@ jobs:
           cache: "npm"
           cache-dependency-path: "action_server/frontend/package.json"
 
-      # Install frontend dependencies for action_server/frontend
-      # Note: On master branch, vendored @sema4ai/* packages require NPM_TOKEN (enterprise-only)
-      # On feature branches (003-open-core-build), this will work without authentication
+      # Install public frontend dependencies for action_server/frontend
       - name: Install frontend dependencies
         working-directory: action_server/frontend
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm ci || echo "Frontend dependencies install skipped (may require NPM_TOKEN for vendored packages)"
-        continue-on-error: true
+        run: npm ci
 
       # Optional: Install RCC for Robocorp tooling (if needed for actions/templates work)
       # RCC provides isolated Python environments and robot execution capabilities
@@ -101,12 +96,10 @@ jobs:
         continue-on-error: true
 
       # Pre-compile TypeScript config validation
-      # Note: TypeScript errors for vendored @sema4ai/* packages are expected (no .d.ts files)
-      # These will be resolved as part of the 003-open-core-build feature implementation
       - name: Validate TypeScript configuration
         working-directory: action_server/frontend
         run: |
-          npx tsc --noEmit --skipLibCheck || echo "TypeScript validation complete (vendored package warnings expected)"
+          npx tsc --noEmit --skipLibCheck
         continue-on-error: true
 
       # Create baseline performance measurement file for NFR validation (T001-PRE)

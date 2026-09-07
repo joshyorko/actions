@@ -1,53 +1,42 @@
 @echo off
+setlocal EnableExtensions EnableDelayedExpansion
 
-pushd .
-SET scriptPath=%~dp0
-SET scriptPath=%scriptPath:~0,-1%
-cd /D %scriptPath%
+set "scriptPath=%~dp0"
+for %%I in ("%scriptPath%\..\..") do set "repoRoot=%%~fI"
+set "rccPath=%scriptPath%rcc.exe"
+set "rccVersion=v18.18.1"
+set "rccUrl=https://github.com/joshyorko/rcc/releases/download/%rccVersion%/rcc-windows64.exe"
+set "task=%~1"
+if not defined task set "task=Bootstrap"
 
-SET projectName=action-server
-SET rccPath=%scriptPath%\rcc.exe
-SET condaYaml=%scriptPath%\develop.yaml
-SET activatePath=%scriptPath%\activate.bat
-
-echo 
-:: Get RCC binary using joshyorko/rcc GitHub releases
-SET rccUrl=https://github.com/joshyorko/rcc/releases/download/v18.18.1/rcc-windows64.exe
-IF NOT EXIST "%rccPath%" (
-    curl -o %rccPath% %rccUrl% --fail || goto env_error
+set "installedVersion="
+if exist "%rccPath%" (
+    for /f "usebackq delims=" %%V in (`"%rccPath%" version 2^>nul`) do set "installedVersion=%%V"
 )
 
-:: Create a new or replace an already existing virtual environment.
-IF EXIST "%activatePath%" (
-    echo Detected existing development environment.
-    echo Do you want to create a clean environment? [Y/N]
-    choice /C YN /N /M "Select [Y]es (clean environment) or [N]o (use existing):"
-    IF ERRORLEVEL 2 GOTO env_setup
+if not "%installedVersion%"=="%rccVersion%" (
+    echo Installing RCC %rccVersion% ^(rcc-windows64.exe^)...
+    where curl.exe >nul 2>&1
+    if errorlevel 1 (
+        powershell.exe -NoProfile -NonInteractive -Command "Invoke-WebRequest -UseBasicParsing -Uri '%rccUrl%' -OutFile '%rccPath%.download'"
+    ) else (
+        curl.exe --fail --location --retry 3 --silent --show-error "%rccUrl%" --output "%rccPath%.download"
+    )
+    if errorlevel 1 goto download_error
+    move /Y "%rccPath%.download" "%rccPath%" >nul
+    if errorlevel 1 goto download_error
+    set "downloadedVersion="
+    for /f "usebackq delims=" %%V in (`"%rccPath%" version 2^>nul`) do set "downloadedVersion=%%V"
+    if not "!downloadedVersion!"=="%rccVersion%" (
+        del /Q "%rccPath%"
+        goto download_error
+    )
 )
 
-:env_new
-echo Creating a clean environment...
-echo command: %rccPath% ht vars %condaYaml% --space %projectName% --sema4ai > %activatePath%
-%rccPath% ht vars %condaYaml% --space %projectName% --sema4ai > %activatePath%
+"%rccPath%" run -r "%repoRoot%\developer\toolkit.yaml" --dev -t "%task%"
+exit /b %errorlevel%
 
-:env_setup
-:: Activate the virtual environment and install dependencies everytime.
-echo calling: call %activatePath%
-call %activatePath%
-
-echo.
-echo Developer env. ready!
-goto end
-
-:env_error
-echo.
-echo Development environment setup failed!
-goto end
-
-:end
-SET rccPath=
-SET condaYamlPath=
-SET scriptPath=
-SET projectName=
-popd
-pause
+:download_error
+if exist "%rccPath%.download" del /Q "%rccPath%.download"
+echo RCC download failed. 1>&2
+exit /b 1

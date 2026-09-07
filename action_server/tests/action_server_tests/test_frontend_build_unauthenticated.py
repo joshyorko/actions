@@ -10,6 +10,8 @@ from pathlib import Path
 
 import pytest
 
+pytestmark = pytest.mark.integration_test
+
 
 class TestUnauthenticatedBuild:
     """Validate frontend builds without private registry credentials."""

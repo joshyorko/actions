@@ -20,7 +20,6 @@ def test_action_server_tool(tmpdir):
     assert not tool.verify()
     tool.download()
     assert tool.verify()
-
     target = tmpdir / "action_server-in_mac_arm"
     tool = ActionServerTool(target, "2.5.1")
     tool.force_sys_platform = "darwin"
@@ -95,32 +94,5 @@ def test_rcc_tool(tmpdir):
     assert tool.verify()
 
     executable = RccTool.get_default_executable(version="v18.18.1", download=True)
-    assert executable.exists()
-    assert executable.is_file()
-
-
-def test_data_server_tool(tmpdir):
-    import sys
-
-    from actions.server._common.tools import DataServerTool
-
-    suffix = ".exe" if sys.platform == "win32" else ""
-
-    target = tmpdir / f"data-server-cli{suffix}"
-
-    tool = DataServerTool(target, "v1.0.2")
-    assert not tool.verify()
-    tool.download()
-    assert tool.verify()
-
-    target = tmpdir / "data_server-in_mac_arm"
-    tool = DataServerTool(target, "v1.0.2")
-    tool.force_sys_platform = "darwin"
-    tool.force_machine = "arm64"
-    tool.make_run_check = False
-    tool.download()
-    assert tool.verify()
-
-    executable = DataServerTool.get_default_executable(version="v1.0.2", download=True)
     assert executable.exists()
     assert executable.is_file()

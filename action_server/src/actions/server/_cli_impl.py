@@ -101,12 +101,6 @@ def _add_start_server_command(command_parser, defaults):
         default=None,
     )
     start_parser.add_argument(
-        "--expose-allow-reuse",
-        dest="expose_allow_reuse",
-        action="store_true",
-        help="Always answer yes to expose reuse confirmation",
-    )
-    start_parser.add_argument(
         "--expose-provider",
         dest="expose_provider",
         choices=["auto", "localhost.run", "bore", "cloudflare"],
@@ -340,10 +334,7 @@ def _add_devenv_command(command_subparser, defaults):
 
 
 def _add_new_command(command_subparser, defaults):
-    from actions.server._cli_helpers import (
-        add_json_output_args,
-        add_verbose_args,
-    )
+    from actions.server._cli_helpers import add_json_output_args, add_verbose_args
 
     new_parser = command_subparser.add_parser(
         "new",
@@ -670,36 +661,6 @@ def _main_retcode(
     if args is None:
         args = sys.argv[1:]
 
-    if args and args[0] == "server-expose":
-        # The process is being called by to make the server expose.
-        # Internal usage only, so, don't even do argument parsing
-        # for it.
-        from . import _server_expose
-
-        try:
-            (
-                expose_server_parent_pid,
-                expose_server_url,
-                expose_server_verbose,
-                expose_server_expose_url,
-                expose_server_datadir,
-                expose_server_expose_session,
-                expose_server_api_key,
-            ) = args[1:]
-        except Exception:
-            raise RuntimeError(f"Unable to initialize server with sys.argv: {sys.argv}")
-
-        _server_expose.main(
-            expose_server_parent_pid,
-            expose_server_url,
-            expose_server_verbose,
-            expose_server_expose_url,
-            expose_server_datadir,
-            expose_server_expose_session,
-            expose_server_api_key,
-        )
-        return 0
-
     parser = _create_parser()
     base_args: ArgumentsNamespace = parser.parse_args(args)
 
@@ -764,9 +725,7 @@ def _main_retcode(
                     return handle_env_command(base_args, rcc)
 
                 if command == "cloud":
-                    from actions.server._actions_cloud import (
-                        handle_cloud_command,
-                    )
+                    from actions.server._actions_cloud import handle_cloud_command
 
                     return handle_cloud_command(base_args)
 
@@ -850,7 +809,6 @@ def _command_requiring_datadir(
 ) -> int:
     from actions.server._common.app_mutex import obtain_app_mutex
     from actions.server._common.process import kill_subprocesses
-
     from actions.server._preload_actions.preload_actions_autoexit import (
         exit_when_pid_exists,
     )
@@ -1006,28 +964,6 @@ information from this datadir.
 
                     settings.artifacts_dir.mkdir(parents=True, exist_ok=True)
 
-                    expose_session = None
-                    if start_args.expose:
-                        from ._server_expose import read_expose_session_json
-
-                        expose_session = read_expose_session_json(
-                            datadir=str(settings.datadir)
-                        )
-                        if expose_session and not start_args.expose_allow_reuse:
-                            confirm = input(
-                                colored(
-                                    "> Resume previous expose URL ",
-                                    attrs=["bold"],
-                                )
-                                + colored(expose_session.url, "light_blue")
-                                + colored(" Y/N?", attrs=["bold"])
-                                + colored(" [Y]", attrs=["dark"])
-                            )
-                            if confirm.lower() == "y" or confirm == "":
-                                log.debug("Resuming previous expose session")
-                            else:
-                                expose_session = None
-
                     api_key = None
                     if start_args.api_key:
                         api_key = start_args.api_key
@@ -1040,9 +976,6 @@ information from this datadir.
                         start_server(
                             start_args=start_args,
                             api_key=api_key,
-                            expose_session=expose_session.expose_session
-                            if expose_session
-                            else None,
                             before_start=before_start,
                         )
                     except KeyboardInterrupt:
