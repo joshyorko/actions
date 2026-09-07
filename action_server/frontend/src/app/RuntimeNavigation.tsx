@@ -4,6 +4,7 @@ import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
 import { useTheme } from "@/shared/hooks/useTheme";
 
 const items = [
+    ["Overview", "/overview"],
     ["Actions", "/actions"],
     ["Runs", "/runs"],
     ["Schedules", "/schedules"],
@@ -12,7 +13,11 @@ const items = [
     ["Analytics", "/analytics"],
 ] as const;
 
-export const RuntimeNavigation = () => {
+export const RuntimeNavigation = ({
+    isMobileOpen = false,
+}: {
+    isMobileOpen?: boolean;
+}) => {
     const location = useLocation();
     const [isCollapsed, setIsCollapsed] = useLocalStorage(
         "sidebar-collapsed",
@@ -24,6 +29,7 @@ export const RuntimeNavigation = () => {
             className={cn(
                 "sidebar flex flex-col border-r border-sidebar-border/50 transition-all duration-200",
                 isCollapsed ? "w-16" : "w-64",
+                isMobileOpen && "open",
             )}
         >
             <div
@@ -36,7 +42,7 @@ export const RuntimeNavigation = () => {
             >
                 {!isCollapsed && (
                     <span className="text-base font-semibold text-sidebar-foreground">
-                        Action Server
+                        Actions Runtime
                     </span>
                 )}
                 <button

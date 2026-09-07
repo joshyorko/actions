@@ -325,6 +325,17 @@ detail, mutation, HTTP error, cancellation, reconnect, and out-of-order event
 paths. Canvas remains a separate Vite entrypoint and is not a consumer of this
 cache.
 
+The Runtime shell overview reads the provider-owned config/actions/runs queries;
+it does not create a second cache or invent metrics. The current backend `/config`
+payload has no capability metadata, so the shell preserves the existing optional
+navigation and direct-link routes rather than treating absent metadata as proof
+that those APIs are unavailable. Navigation visibility may become capability-aware
+only through an explicit compatible contract; hiding an item is not route
+authorization. A config failure renders a degraded overview; Runtime queries
+disable retries so that failure state is observable promptly. The Runtime entry
+document is titled `Actions Runtime`; Canvas View remains an independent
+entrypoint.
+
 The current backend event contract has no sequence field: `runs_collected`
 contains a run list, `run_added` contains `{run}`, and `run_changed` contains
 `{run_id, changes}`. Treat every event as a freshness signal and invalidate

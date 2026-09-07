@@ -10,7 +10,7 @@ export default [
   js.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
-    languageOptions: { parser, globals: { document: 'readonly', window: 'readonly' }, parserOptions: { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true } } },
+    languageOptions: { parser, globals: { document: 'readonly', window: 'readonly', HTMLButtonElement: 'readonly', KeyboardEvent: 'readonly' }, parserOptions: { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true } } },
     plugins: { '@typescript-eslint': tseslint, import: importPlugin, react, 'react-hooks': reactHooks },
     settings: { react: { version: 'detect' } },
     rules: {
