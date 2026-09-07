@@ -44,6 +44,9 @@ AUTO_GEN_HEADER = """# Important!!
 # No need to check if it's a beta release
 NOT_BETA_IF_CLAUSE = "${{ !endsWith(github.ref_name, '-beta') }}"
 UBUNTU_VERSION = "ubuntu-22.04"
+RUNTIME_DISTRIBUTION_NAME = "actions-runtime"
+RUNTIME_TAG_PREFIX = f"{RUNTIME_DISTRIBUTION_NAME}-"
+RUNTIME_CHANGELOG_PATH = "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md"
 
 
 def collect_deps_pyprojects(root_pyproject: Path, found=None) -> Iterator[Path]:
@@ -458,6 +461,17 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
             "if": NOT_BETA_IF_CLAUSE,
         }
 
+    def check_runtime_release_head(self):
+        return {
+            "name": "Verify Runtime tag matches current community",
+            "shell": "bash",
+            "run": """set -Eeuo pipefail
+git fetch origin community:refs/remotes/origin/community
+test "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/community)"
+""",
+            "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
+        }
+
     def build_action_server_binary(self):
         return {
             "name": "Build binary",
@@ -668,7 +682,7 @@ class ActionServerTests(BaseTests):
 
 
 class ActionServerPyPiRelease(BaseWorkflow):
-    name = "Action Server PYPI Release"
+    name = "Actions Runtime PYPI Release"
     target = "actions_runtime_pypi_release.yml"
     project_name = "action_server"
     fail_fast = True
@@ -678,7 +692,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "tags": ["actions-runtime-*"],
+                    "tags": [f"{RUNTIME_TAG_PREFIX}*"],
                 },
                 "pull_request": {
                     "branches": ["community"],
@@ -687,6 +701,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
                         ".github/workflows/actions_runtime_pypi_release.yml",
                         ".github/workflows/actions_runtime_binary_release.yml",
                         ".github/workflows/actions_runtime_manylinux_release.yml",
+                        "devutils/tests/test_actions_runtime_release_line.py",
                         "devutils/tests/test_runtime_release_workflows.py",
                         "docs/skills/repository-operations.md",
                         "action_server/scripts/publish_verified_runtime.py",
@@ -804,7 +819,7 @@ rm src/actions/server/bin/rcc* -f
         return matrix
 
     def publish_steps(self):
-        provenance = 'set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor "$GITHUB_SHA" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(uv run --no-project --python 3.12 poetry version --short)\nif [[ "$tag_version" != "$package_version" ]]; then printf \'tag version %s does not match package version %s\\n\' "$tag_version" "$package_version" >&2; exit 1; fi'
+        provenance = 'set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor "$GITHUB_SHA" origin/community\ntest "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/community)"\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(uv run --no-project --python 3.12 poetry version --short)\nif [[ "$tag_version" != "$package_version" ]]; then printf \'tag version %s does not match package version %s\\n\' "$tag_version" "$package_version" >&2; exit 1; fi'
         inventory = """set -Eeuo pipefail
 cd action_server
 rm -rf dist/verified
@@ -882,7 +897,7 @@ sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runti
                 "id": "runtime-token",
                 "if": "github.event_name == 'push'",
                 "env": {"RUNTIME_TOKEN": "${{ secrets.PYPI_TOKEN_ACTIONS_RUNTIME }}"},
-                "run": 'if [[ -n "${RUNTIME_TOKEN:-}" ]]; then echo \'enabled=true\' >> "$GITHUB_OUTPUT"; else echo \'enabled=false\' >> "$GITHUB_OUTPUT"; fi',
+                "run": 'set -Eeuo pipefail\nif [[ -z "${RUNTIME_TOKEN:-}" ]]; then\n  echo "PYPI_TOKEN_ACTIONS_RUNTIME is required for a tagged Actions Runtime release" >&2\n  exit 1\nfi\necho \'enabled=true\' >> "$GITHUB_OUTPUT"',
             },
             {
                 "name": "Publish verified artifacts",
@@ -930,7 +945,7 @@ sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runti
 
 
 class ActionServerBinaryRelease(BaseWorkflow):
-    name = "Action Server BINARY Release"
+    name = "Actions Runtime BINARY Release"
     target = "actions_runtime_binary_release.yml"
     project_name = "action_server"
     fail_fast = True
@@ -940,7 +955,7 @@ class ActionServerBinaryRelease(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "tags": ["actions-runtime-*"],
+                    "tags": [f"{RUNTIME_TAG_PREFIX}*"],
                     "branches": ["*-beta"],
                 },
             }
@@ -962,6 +977,47 @@ class ActionServerBinaryRelease(BaseWorkflow):
             path="action_server/dist/final/",
             pinned=True,
         )
+
+    def verify_binary_release_inventory(self):
+        return {
+            "name": "Verify Runtime binary inventory",
+            "shell": "bash",
+            "run": """set -Eeuo pipefail
+for pair in \
+  "linux64/action-server linux64" \
+  "macos-arm64/action-server macos-arm64" \
+  "windows64/action-server.exe windows64"; do
+  set -- $pair
+  binary=$1
+  directory=$2
+  test -f "$binary"
+  test ! -L "$binary"
+  test "$(find "$directory" -mindepth 1 -maxdepth 1 | wc -l)" -eq 1
+done
+sha256sum linux64/action-server macos-arm64/action-server windows64/action-server.exe | sort > runtime-binary-manifest.sha256
+""",
+        }
+
+    def verify_binary_release_inventory_before_handoff(self):
+        return {
+            "name": "Verify Runtime binary inventory before handoff",
+            "shell": "bash",
+            "run": """set -Eeuo pipefail
+cd build
+for pair in \
+  "linux64/action-server linux64" \
+  "macos-arm64/action-server macos-arm64" \
+  "windows64/action-server.exe windows64"; do
+  set -- $pair
+  binary=$1
+  directory=$2
+  test -f "$binary"
+  test ! -L "$binary"
+  test "$(find "$directory" -mindepth 1 -maxdepth 1 | wc -l)" -eq 1
+done
+sha256sum linux64/action-server macos-arm64/action-server windows64/action-server.exe | sort > runtime-binary-manifest.sha256
+""",
+        }
 
     def set_version_on_ubuntu(self):
         return {
@@ -999,6 +1055,7 @@ echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         steps.append(self.setup_go(pinned=True))
 
         steps.append(self.check_tag_version())
+        steps.append(self.check_runtime_release_head())
         steps.append(self.build_frontend())
         steps.append(self.build_oauth2_config())
 
@@ -1034,11 +1091,11 @@ echo "version=$VERSION" >> "$GITHUB_OUTPUT"
                         "name": "Wait for Downloads S3 Bucket to have the right content",
                         "timeout-minutes": 5,
                         "run": """
-VERSION_URL="https://cdn.sema4.ai/action-server/releases/latest/version.txt"
 EXPECTED_VERSION=${{ needs.build.outputs.version }}
+VERSION_URL="https://cdn.sema4.ai/action-server/releases/${EXPECTED_VERSION}/version.txt"
 echo "Expected version: $EXPECTED_VERSION"
 while true; do
-  DOWNLOADED_VERSION=$(curl -sS $VERSION_URL)
+  DOWNLOADED_VERSION=$(curl -fsS --max-time 10 "$VERSION_URL")
   echo "Downloaded version: $DOWNLOADED_VERSION"
   echo "Expected version: $EXPECTED_VERSION"
     if [ "$DOWNLOADED_VERSION" = "$EXPECTED_VERSION" ]; then
@@ -1080,8 +1137,8 @@ while true; do
                         "uses": "Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803",
                         "with": {
                             "release_title": "${{ github.ref_name }}",
-                            "changelog_file": "action_server/docs/CHANGELOG.md",
-                            "release_text": "Binaries available as assets. Run `action-server -h` for usage instructions.",
+                            "changelog_file": RUNTIME_CHANGELOG_PATH,
+                            "release_text": "Actions Runtime binaries are available as assets. Run `action-server -h` for usage instructions.",
                         },
                         "env": {"GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"},
                     },
@@ -1124,6 +1181,7 @@ while true; do
           echo "GitHub ref: ${{ github.ref }}"
           """,
                     },
+                    self.verify_binary_release_inventory(),
                     {
                         "name": "Upload Linux binary",
                         "uses": "svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd",  # v2
@@ -1219,6 +1277,7 @@ while true; do
         steps.append(self.checkout_repo(pinned=True))
         steps.append(self.is_beta_in_steps())
         steps.extend(self.download_artifacts())
+        steps.append(self.verify_binary_release_inventory_before_handoff())
         steps.extend(self.upload_to_s3())
         return steps
 
@@ -1240,6 +1299,13 @@ mv build/windows64 s3-drop/
 ls -l s3-drop/
 ver=$(cat s3-drop/version.txt)
 echo "actionServerVersion=${ver}" >> "$GITHUB_ENV"
+if [[ "$GITHUB_REF_NAME" == actions-runtime-* ]]; then
+  test "$ver" = "${GITHUB_REF_NAME#actions-runtime-}"
+fi
+test "$(find s3-drop -type f | wc -l)" -eq 4
+test -f s3-drop/linux64/action-server
+test -f s3-drop/macos-arm64/action-server
+test -f s3-drop/windows64/action-server.exe
 """,
             }
         )
@@ -1286,7 +1352,7 @@ fi
 
 
 class ActionServerRuntimeRecovery(BaseWorkflow):
-    name = "Action Server Runtime Recovery"
+    name = "Actions Runtime Recovery"
     target = "actions_runtime_recovery.yml"
     project_name = "action_server"
     recovery_run_in_env = "uv run --no-project --python 3.12 "

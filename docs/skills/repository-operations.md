@@ -242,6 +242,16 @@ tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
 and the committed lock remain authoritative; cibuildwheel 2.23.1 must clean-test
 each wheel with `python -m pip check` and `python -m actions.server version`.
+The clean-break distribution identity is `actions-runtime`; its package version,
+`actions.server.__version__`, Runtime changelog, and `actions-runtime-X.Y.Z` tag
+must agree. Native release notes come from
+`action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md`; the historical
+`action_server/docs/CHANGELOG.md` and `action-server-v1.2.x` tags remain a
+separate legacy delivery line. Tagged PyPI runs fail closed when
+`PYPI_TOKEN_ACTIONS_RUNTIME` is absent rather than reporting successful release
+verification without publication. Runtime binaries intentionally retain the
+existing `action-server/releases` CDN/S3 object paths and Homebrew version input
+as compatibility handoffs; those paths do not redefine package or tag identity.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
@@ -249,9 +259,10 @@ One final `pypi` job downloads the exact artifacts, rejects duplicate or
 unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches
 `uv run --no-project --python 3.12 poetry version --short`, then retains that
-verified directory as `actions-runtime-dist`. The
-workflow publishes the same set once when the Runtime secret is configured;
-without it, verification and retention remain green. Approved local publication
+verified directory as `actions-runtime-dist`. The workflow publishes the same
+set once when the Runtime secret is configured; without it, the tagged job fails
+at the credential check before PyPI upload, so no release success may be claimed.
+Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
 repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
@@ -261,7 +272,7 @@ the script reads only `PYPI` from the process environment or ignored repo-root
 `.env`, never prints or puts the token in arguments, and injects it only into
 Twine's child environment. Example commands are:
 `python action_server/scripts/publish_verified_runtime.py --run-id RUN_ID
---repo joshyorko/actions --ref actions-runtime-1.0.0 --sha MERGED_SHA --dry-run`
+--repo joshyorko/actions --ref actions-runtime-1.0.1 --sha MERGED_SHA --dry-run`
 and the same command with `--publish`. Run downloads resolve the canonical workflow by the
 supported filename identifier `actions_runtime_pypi_release.yml` in the requested repository.
 The returned workflow metadata must contain a positive integer database ID and the exact

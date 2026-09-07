@@ -12,16 +12,21 @@ import subprocess
 from pathlib import Path
 
 MANIFEST_NAME = "actions-runtime-manifest.sha256"
+RUNTIME_DISTRIBUTION_NAME = "actions-runtime"
+RUNTIME_ARTIFACT_PREFIX = RUNTIME_DISTRIBUTION_NAME.replace("-", "_")
+RUNTIME_TAG_PREFIX = f"{RUNTIME_DISTRIBUTION_NAME}-"
 ARTIFACT_PATTERNS = (
-    re.compile(r"^actions_runtime-(?P<version>[0-9][^/]*)\.tar\.gz$"),
     re.compile(
-        r"^actions_runtime-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-manylinux_2_17_x86_64\.manylinux_2_5_x86_64\.manylinux1_x86_64\.manylinux2014_x86_64\.whl$"
+        rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^/]*)\.tar\.gz$"
     ),
     re.compile(
-        r"^actions_runtime-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-macosx_12_0_arm64\.whl$"
+        rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-manylinux_2_17_x86_64\.manylinux_2_5_x86_64\.manylinux1_x86_64\.manylinux2014_x86_64\.whl$"
     ),
     re.compile(
-        r"^actions_runtime-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-win_amd64\.whl$"
+        rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-macosx_12_0_arm64\.whl$"
+    ),
+    re.compile(
+        rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-win_amd64\.whl$"
     ),
 )
 EXPECTED_WHEEL_ROWS = {
@@ -42,7 +47,8 @@ CANONICAL_WORKFLOW_PATH = ".github/workflows/actions_runtime_pypi_release.yml"
 WORKFLOW_API_IDENTIFIER = "actions_runtime_pypi_release.yml"
 RECOVERY_WORKFLOW_PATH = ".github/workflows/actions_runtime_recovery.yml"
 RECOVERY_WORKFLOW_API_IDENTIFIER = "actions_runtime_recovery.yml"
-RECOVERY_WORKFLOW_NAME = "Action Server Runtime Recovery"
+RECOVERY_WORKFLOW_NAME = "Actions Runtime Recovery"
+PYPI_WORKFLOW_NAME = "Actions Runtime PYPI Release"
 
 
 def _artifact_names(directory: Path) -> list[str]:
@@ -229,9 +235,12 @@ def validate_release_run(
         raise RuntimeError("the selected run does not match --sha")
     if metadata.get("headBranch") != ref:
         raise RuntimeError("the selected run does not match --ref")
-    if not re.fullmatch(r"actions-runtime-[0-9]+(?:\.[0-9]+)+(?:[-A-Za-z0-9.]*)", ref):
+    if not re.fullmatch(
+        rf"{re.escape(RUNTIME_TAG_PREFIX)}[0-9]+(?:\.[0-9]+)+(?:[-A-Za-z0-9.]*)",
+        ref,
+    ):
         raise RuntimeError("--ref must be an actions-runtime version tag")
-    if metadata.get("workflowName") != "Action Server PYPI Release":
+    if metadata.get("workflowName") != PYPI_WORKFLOW_NAME:
         raise RuntimeError("the selected run is not the Runtime PyPI release workflow")
     selected_workflow_id = metadata.get("workflowDatabaseId")
     if (
@@ -255,7 +264,9 @@ def validate_release_run(
 def validate_recovery_run(
     metadata: dict, *, sha: str, ref: str, workflow_id: int
 ) -> None:
-    if not re.fullmatch(r"actions-runtime-[0-9]+\.[0-9]+\.[0-9]+", ref):
+    if not re.fullmatch(
+        rf"{re.escape(RUNTIME_TAG_PREFIX)}[0-9]+\.[0-9]+\.[0-9]+", ref
+    ):
         raise RuntimeError("--ref must be an actions-runtime version tag")
     if not re.fullmatch(r"[0-9a-f]{40}", sha):
         raise RuntimeError("--sha must be a full 40-hex release SHA")

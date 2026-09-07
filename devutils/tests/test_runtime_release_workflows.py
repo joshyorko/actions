@@ -56,8 +56,8 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert "class ActionServerManylinuxRelease" not in generator
     assert "upload_wheels_to_pypi" not in generator
     assert "actions-runtime-*" in pypi
-    assert generator.count("PYPI_TOKEN_ACTIONS_RUNTIME") == 1
-    assert pypi.count("PYPI_TOKEN_ACTIONS_RUNTIME") == 1
+    assert generator.count("PYPI_TOKEN_ACTIONS_RUNTIME") == 2
+    assert pypi.count("PYPI_TOKEN_ACTIONS_RUNTIME") == 2
     assert pypi.count("twine check --strict") == 1
     assert "git fetch origin community:refs/remotes/origin/community" in pypi
     assert 'git merge-base --is-ancestor "$GITHUB_SHA" origin/community' in pypi
@@ -332,7 +332,7 @@ def test_runtime_publisher_validates_immutable_release_run_metadata():
     metadata = {
         "headSha": "good-sha",
         "headBranch": "actions-runtime-1.0.0",
-        "workflowName": "Action Server PYPI Release",
+        "workflowName": "Actions Runtime PYPI Release",
         "workflowDatabaseId": 333870965,
         "event": "push",
         "conclusion": "success",
@@ -389,7 +389,7 @@ def test_runtime_publisher_rejects_non_exact_selected_workflow_id_directly(
     metadata = {
         "headSha": "good-sha",
         "headBranch": "actions-runtime-1.0.0",
-        "workflowName": "Action Server PYPI Release",
+        "workflowName": "Actions Runtime PYPI Release",
         "workflowDatabaseId": 333870965,
         "event": "push",
         "conclusion": "success",
@@ -447,7 +447,7 @@ def test_runtime_publisher_rejects_malformed_selected_workflow_id_before_downloa
             metadata = {
                 "headSha": "good-sha",
                 "headBranch": "actions-runtime-1.0.0",
-                "workflowName": "Action Server PYPI Release",
+                "workflowName": "Actions Runtime PYPI Release",
                 "workflowDatabaseId": 333870965,
                 "event": "push",
                 "conclusion": "success",
@@ -492,7 +492,7 @@ def test_runtime_publisher_rejects_fake_gh_metadata_before_download(monkeypatch)
     calls = []
 
     class Result:
-        stdout = '{"headSha":"wrong-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
+        stdout = '{"headSha":"wrong-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Actions Runtime PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
 
     def fake_run(command, **kwargs):
         calls.append(command)
@@ -548,7 +548,7 @@ def test_runtime_publisher_rejects_canonical_workflow_lookup_failure_before_down
         if command[1:3] == ["run", "view"]:
 
             class Result:
-                stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
+                stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Actions Runtime PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
 
             return Result()
         raise subprocess.CalledProcessError(1, command)
@@ -596,7 +596,7 @@ def test_runtime_publisher_rejects_same_name_from_wrong_workflow_before_download
         ]:
             result.stdout = '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}'
         elif command[1:3] == ["run", "view"]:
-            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":999,"event":"push","conclusion":"success"}'
+            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Actions Runtime PYPI Release","workflowDatabaseId":999,"event":"push","conclusion":"success"}'
         elif command[1:3] == [
             "api",
             "repos/joshyorko/actions/actions/runs/123/artifacts",
@@ -660,7 +660,7 @@ def test_runtime_publisher_rejects_malformed_canonical_workflow_before_download(
         ]:
             result.stdout = workflow_response
         elif command[1:3] == ["run", "view"]:
-            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
+            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Actions Runtime PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
         elif command[1:3] == [
             "api",
             "repos/joshyorko/actions/actions/runs/123/artifacts",
@@ -710,7 +710,7 @@ def test_runtime_publisher_proceeds_with_canonical_workflow_id(monkeypatch, tmp_
         ]:
             result.stdout = '{"id":333870965,"path":".github/workflows/actions_runtime_pypi_release.yml","state":"active"}'
         elif command[1:3] == ["run", "view"]:
-            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Action Server PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
+            result.stdout = '{"headSha":"good-sha","headBranch":"actions-runtime-1.0.0","workflowName":"Actions Runtime PYPI Release","workflowDatabaseId":333870965,"event":"push","conclusion":"success"}'
         elif command[1:3] == [
             "api",
             "repos/joshyorko/actions/actions/runs/123/artifacts",
@@ -902,7 +902,7 @@ def test_runtime_publisher_validates_recovery_identity_and_display_title():
     metadata = {
         "headSha": recovery_sha,
         "headBranch": "community",
-        "workflowName": "Action Server Runtime Recovery",
+        "workflowName": "Actions Runtime Recovery",
         "workflowDatabaseId": 444444444,
         "event": "workflow_dispatch",
         "conclusion": "success",
@@ -944,7 +944,7 @@ def test_recovery_run_requires_exact_supported_display_title(display_title):
     metadata = {
         "headSha": "f" * 40,
         "headBranch": "community",
-        "workflowName": "Action Server Runtime Recovery",
+        "workflowName": "Actions Runtime Recovery",
         "workflowDatabaseId": 444444444,
         "event": "workflow_dispatch",
         "conclusion": "success",
@@ -1203,7 +1203,7 @@ def test_runtime_publisher_accepts_successful_recovery_without_rebuilding(
                 {
                     "headSha": recovery_sha,
                     "headBranch": "community",
-                    "workflowName": "Action Server Runtime Recovery",
+                    "workflowName": "Actions Runtime Recovery",
                     "workflowDatabaseId": 444444444,
                     "event": "workflow_dispatch",
                     "conclusion": "success",
@@ -1277,7 +1277,7 @@ def test_runtime_publisher_rejects_recovery_title_mismatch_before_download(monke
                 {
                     "headSha": recovery_sha,
                     "headBranch": "community",
-                    "workflowName": "Action Server Runtime Recovery",
+                    "workflowName": "Actions Runtime Recovery",
                     "workflowDatabaseId": 444444444,
                     "event": "workflow_dispatch",
                     "conclusion": "success",

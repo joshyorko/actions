@@ -106,4 +106,7 @@ Explore our [docs](https://github.com/sema4ai/actions/tree/master/action_server/
 
 ## Changelog
 
-A list of releases and corresponding changes can be found in the [changelog](https://github.com/sema4ai/actions/blob/master/action_server/docs/CHANGELOG.md).
+Clean-break Actions Runtime releases and `actions-runtime-*` tags use the
+[Actions Runtime changelog](./docs/ACTIONS_RUNTIME_CHANGELOG.md). The historical
+[Action Server changelog](https://github.com/sema4ai/actions/blob/master/action_server/docs/CHANGELOG.md)
+is retained for the older `action-server-v1.2.x` delivery line.
