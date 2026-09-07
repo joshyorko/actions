@@ -110,6 +110,8 @@ the exact Runtime UI route `/artifacts/{run_id}`, and an HTTP integration test
 must exercise each family. When local artifacts are mounted at `/artifacts`,
 register that exact UI route before the mount so nested
 `/artifacts/<runId>/<filename>` requests remain raw file downloads. The mobile
+When API-key auth is enabled, pass the same key to this post-fallback mount;
+an earlier duplicate mount preempts the UI route.
 sidebar breakpoint is `max-width: 767px`, matching the Tailwind `md` boundary
 at 768px; a closed mobile sidebar must be hidden from visibility and focus until
 it is opened. Contract tests should cover both invariants, while real-browser
@@ -438,6 +440,110 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+### Action Server shared database
+
+Action Server keeps SQLite as the default datadir-local backend. A shared
+PostgreSQL backend is selected explicitly with `--database-url` or
+`ACTION_SERVER_DATABASE_URL`; a requested PostgreSQL URL never falls back to
+SQLite, and logs identify only the backend rather than credentials. Verbose
+server-start settings diagnostics redact only the serialized `database_url`
+field through `redact_database_url`, leaving the live `Settings` value
+unchanged. The
+database facade preserves the existing model and parameterized SQL contract,
+while PostgreSQL migration startup takes a transaction-scoped advisory lock.
+Local artifact storage creates the default `artifacts_dir` on first use when
+the caller supplies `Settings` directly; an explicitly configured artifact
+storage root remains required to exist and pass containment validation.
+The direct two-instance/concurrent-update and concurrent-startup acceptance is
+in `action_server/tests/action_server_tests/test_database_shared.py` and
+requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.
+Shared PostgreSQL acceptance requires immutable historical migrations and two
+independent Runtime processes proving one due schedule creates exactly one execution;
+threaded `Database` tests are insufficient. The process-level check also proves
+exactly one run, while PostgreSQL due schedules use a session-level database
+claim held through processing; the claim is health-checked before side effects
+and a lost claim cancels the scheduler processing task before it can continue.
+Closing that connection releases ownership, and SQLite keeps its existing
+single-node path.
+Run the service-free SQLite/database/artifact scope separately from
+`poetry run pytest tests/action_server_tests/test_database_shared.py -m postgresql`
+against a fresh PostgreSQL service. Preserve the complete pytest output and the
+database server log before removing only the named verification container and
+network; a passing SQLite run does not establish PostgreSQL process ownership.
+PostgreSQL-marked tests skipped because `ACTIONS_TEST_DATABASE_URL` is absent
+are unverified, not passing. Report source/SQLite, package,
+clean-environment, service, and remote-CI evidence as separate classes; no
+class substitutes for another.
+The pinned Dev Container does not install Go or `jq`: `test_binary_build` needs
+Go, and the Runtime recovery contract test directly executes `jq`. Treat those
+as environment prerequisites rather than changing product code or committed
+locks to make the tests pass.
+
+The shared PostgreSQL adapter tokenizes SQL once and translates only unquoted
+parameter markers and exact legacy SQLite boolean/check DDL token sequences from
+historical migrations at the database execution boundary; historical migration
+files remain byte-immutable. The DDL adaptation is restricted to executable
+`ALTER TABLE`/`CREATE TABLE` statements, is idempotent, and never rewrites SQL
+literals, quoted identifiers, comments, dollar-quoted bodies, escaped markers,
+JSON operators (`?`, `?|`, `?&`), or bound array expressions. Marker/value counts
+are validated before execution. The all-1-through-10 SHA-256 regression and the
+SQLite v0-to-current plus PostgreSQL fresh/existing/concurrent migration
+acceptance live in `action_server/tests/action_server_tests/test_database_shared.py`
+and `test_database.py`.
+Before immutable migration 11 runs, the migration executor checks for non-null
+legacy `run.stdout`/`run.stderr` values and archives them before the historical
+index-alignment migration can drop those accidental columns. Migration 12
+repeats the same recovery boundary for databases that still expose the columns.
+When data exists, it transactionally creates
+`run_legacy_output_archive` keyed by `run_id`, copies each non-null legacy row
+with fieldwise null-fill semantics, and leaves the archive available for
+read-back; null-only or no-column databases do not create an archive. Before
+dropping either source column, any same-`run_id` archive/source pair with
+unequal non-null `stdout` or `stderr` aborts the transaction, preserving both
+rows for operator resolution. Equal non-null values are idempotent, archive
+nulls are filled from non-null source values, and source nulls retain archive
+values. After resolution, the migration record insert and archive copy are
+rerun-safe, and the final `run` schema has neither accidental column.
+PostgreSQL startup serialization uses the existing advisory lock, so concurrent
+migration startup archives populated legacy data once without overwriting or
+silently losing output.
+Database settings reject malformed or unsupported URL schemes without logging the URL;
+plain paths remain SQLite and `postgres://` is normalized to PostgreSQL. URL
+validation rejects missing PostgreSQL hosts, malformed authorities, and ports
+outside `1..65535` before connection or SQLite fallback. CLI argument, datadir,
+and new migration diagnostics must use the database URL redactor, which removes
+userinfo, query, and fragment data without changing the connection value.
+Scheme detection and redaction are case-insensitive, while the validated
+connection string passed to psycopg retains its original bytes. New migration
+status and CLI diagnostics use the redactor; the byte-immutable legacy
+`migration_initial.py` error retains the community behavior. Marker
+translation is based on lexical SQL tokens and expression boundaries, so
+parenthesized or comment-separated JSON operator RHS expressions remain
+operators while true markers are converted and counted.
+Startup redaction tests must patch `actions.server._app.get_settings` when
+`actions.server._app` may already be imported: that module binds the settings
+lookup at import time, and its cached `get_app()` can otherwise expose
+import-order-dependent setup failures.
+The lexer treats `SELECT` and `AS` as SQL boundary words, so an aliased
+parameter such as `SELECT ? AS value` is counted and translated before its
+values are checked; this remains a lexical adapter, not a general SQL parser.
+Migration status checks use the same case-insensitive PostgreSQL scheme
+classification before treating a database target as a filesystem path.
+PostgreSQL model DDL uses native `BOOLEAN` while
+SQLite retains integer booleans. PostgreSQL schema inspection reads
+`information_schema` and `pg_index`, and analytics uses explicit PostgreSQL
+timestamp/date expressions. SQLite migration version 11 reconciles legacy
+schedule/trigger/run index names before parity is checked. The Action Server
+PyInstaller spec explicitly collects `uvicorn`, `fastapi`, `starlette`,
+`mcp`, `actions`, `actions_http`, `psycopg`, `psycopg_binary`,
+`sqlite3`, `psutil`, their native libraries, and repository-owned `rcc-*`
+package data. PostgreSQL scheduler predicates use `TRUE` so native boolean
+columns work in both backends. Exact schema snapshots and the v0-to-current migration test compare the
+fresh current table/column/index set; formatting-only fixture changes must not
+weaken that expected schema. Static collection tests do not establish packaged
+runtime behavior: if the exact PyInstaller gate is blocked by host storage,
+preserve its build log and report packaged `version`, `migrate`, and `start`
+checks as unverified.
 When integrating a preserved branch with a moving `community` base, fetch the
 named base and inspect a hypothetical merge with
 `git merge-tree --write-tree HEAD origin/community` before creating the merge
