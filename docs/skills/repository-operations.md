@@ -439,14 +439,13 @@ developer toolkit, Linux `Package task smoke (Linux)` must pass before
 `Build and verify community binary (Linux)` can run; a package-test failure
 therefore leaves the frozen/native gate skipped rather than failed.
 
-The clean-break prerequisites can merge before the Runtime migration. During
-that split, `actions-core` owns `actions/__init__.py` and includes `actions.mcp`,
-while `actions-work-items` contributes only `actions.work_items`. The existing
-`community` Action Server and standalone `mcp/` package remain on their
-published `sema4ai-actions`/`sema4ai-mcp` graph until the Runtime PR lands.
-Local dependency substitution must therefore map explicit distribution names
-to repository directories and must not redirect `sema4ai-actions` to the new
-`actions-core` source tree.
+The clean-break package graph is now published under the community identities:
+`actions-core` owns `actions/__init__.py` and includes `actions.mcp`,
+`actions-work-items` contributes only `actions.work_items`, and `actions-runtime`
+provides the `actions.server` module and `action-server` command. Local dependency
+substitution maps those explicit distribution names to their repository
+directories; it must not redirect legacy `sema4ai-actions` or `sema4ai-mcp`
+identities to community source trees.
 Core verification must unset inherited `VIRTUAL_ENV` and select the requested
 matrix interpreter explicitly before invoking Poetry.
 
@@ -486,6 +485,15 @@ and `actions-work-items` (`actions.work_items`). Core owns the sole
 distributions can be installed in either order. Runtime-only common and build
 helpers live privately under `actions.server._common` and
 `actions.server._build_common`; they are not standalone distributions.
+The public community quickstart uses `actions-runtime` as its canonical install
+target. It runs `action-server new --name my-project --template minimal`, then
+`action-server start`; the server UI is at `http://localhost:8080` and the
+stateless MCP endpoint is `http://localhost:8080/mcp`. The endpoint smoke uses a
+`tools/list` JSON-RPC request with `Mcp-Method: tools/list` and protocol version
+`2026-07-28`. The end-to-end regression is
+`action_server/tests/action_server_tests/test_quickstart_validation.py`; standalone
+release binaries remain an alternative compatibility path, not a second server
+distribution.
 
 The devinstall dependency walker uses an explicit distribution-to-directory
 map rather than stripping a vendor prefix. When a package identity or source

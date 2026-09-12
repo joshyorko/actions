@@ -1,30 +1,33 @@
-# actions-runtime
+# Actions Runtime (Action Server)
 
-[Actions Runtime](https://github.com/joshyorko/actions) is a Python framework designed to provide your Python functions to AI Agents. It works both as an MCP Server (hosting tools, resources and prompts) and also provides an OpenAPI compatible API.
+`actions-runtime` is the canonical community PyPI distribution for the **Action Server**. It provides the `action-server` command and the `actions.server` module for serving Python functions to AI agents through MCP and OpenAPI.
 
-A `tool` or `action` in this case is defined as a Python function (which has inputs/outputs defined), which is served by the `Actions Runtime`.
-
-The `Actions Runtime` automatically provides a `/mcp` endpoint for connecting `MCP` clients and also generates an OpenAPI spec for your Python code, enabling different AI/LLM Agents to understand and call your Action. It also manages the Action lifecycle and provides full traceability of what happened during any tool or action call (open the `/runs` endpoint in a browser to see not only inputs and output, but also a full `log.html` with internal details, such as variables and function calls that your Python function executed).
+A `tool` or `action` is a Python function with declared inputs and outputs served by the Action Server. The server also manages the action lifecycle and provides full run traceability.
 
 ## 1. Install Action Server
 
-Action Server is available as a stand-alone executable and via `pip install actions-runtime`.
-
-The 1.0.1 standalone binaries are unsigned and are not publisher-signed or notarized.
-
-> We recommend the executable to prevent confusion in case you have multiple/crowded Python environments, etc.
-
-#### For macOS
+Install the canonical community distribution:
 
 ```sh
-# Install Actions Runtime
 python -m pip install actions-runtime
+```
+
+This installs the `action-server` command in the active Python environment.
+
+### Standalone release binaries
+
+The standalone binaries are an alternative compatibility path when a Python environment is not wanted. The 1.0.1 binaries are unsigned and are not publisher-signed or notarized.
+
+#### For macOS (Apple Silicon)
+
+```sh
+curl -o action-server https://github.com/joshyorko/actions/releases/download/actions-runtime-1.0.1/actions-runtime-1.0.1-macos-arm64
+chmod a+x action-server
 ```
 
 #### For Windows
 
 ```sh
-# Download Actions Runtime
 curl -o action-server.exe https://github.com/joshyorko/actions/releases/download/actions-runtime-1.0.1/actions-runtime-1.0.1-windows64.exe
 
 # Add to PATH or move to a folder that is in PATH
@@ -34,7 +37,6 @@ setx PATH=%PATH%;%CD%
 #### For Linux
 
 ```sh
-# Download Actions Runtime
 curl -o action-server https://github.com/joshyorko/actions/releases/download/actions-runtime-1.0.1/actions-runtime-1.0.1-linux64
 chmod a+x action-server
 

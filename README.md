@@ -1,16 +1,16 @@
-# Actions Framework
+# Actions
 
 <samp>[Examples](https://github.com/joshyorko/actions-cookbook) | [Slack](https://join.slack.com/t/actions-community/shared_invite/)</samp>
 
-[![PyPI - Version](https://img.shields.io/pypi/v/actions-core?label=actions-core&color=%23733CFF)](https://pypi.org/project/actions-core) [![PyPI - Version](https://img.shields.io/pypi/v/actions-work-items?label=actions-work-items&color=%23733CFF)](https://pypi.org/project/actions-work-items)
+[![PyPI - Version](https://img.shields.io/pypi/v/actions-runtime?label=actions-runtime&color=%23733CFF)](https://pypi.org/project/actions-runtime) [![PyPI - Version](https://img.shields.io/pypi/v/actions-core?label=actions-core&color=%23733CFF)](https://pypi.org/project/actions-core) [![PyPI - Version](https://img.shields.io/pypi/v/actions-work-items?label=actions-work-items&color=%23733CFF)](https://pypi.org/project/actions-work-items)
 [![GitHub issues](https://img.shields.io/github/issues/joshyorko/actions?color=%232080C0)](https://github.com/joshyorko/actions/issues)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-# Build MCP Tools or AI Actions that connect AI Agents with the real-world - all in Python.
+# Build MCP tools and AI actions in Python
 
-This framework is the easiest way to extend the capabilities of AI agents, assistants and copilots with custom actions, written in Python. Create and deploy tools, skills, loaders and plugins that securely connect any AI Assistant platform to your data and applications.
+Actions is a community Python toolkit for building tools and actions that connect AI agents, assistants, and copilots to data and applications.
 
-The **Action Server** makes your Python scripts compatible with Agents using protocols such as [MCP](https://modelcontextprotocol.io/), OpenAI's [custom GPTs](https://chat.openai.com/gpts/editor), [LangChain](https://python.langchain.com/docs/integrations/tools/robocorp/) and [OpenGPTs](https://github.com/langchain-ai/opengpts) by automatically creating and exposing an API based on function declaration, type hints and docstrings. Just create your `@tool` (or `@action`) and start!
+The `actions-runtime` distribution provides the **Action Server** executable. It serves Python functions through MCP and OpenAPI; create a `@tool` or `@action` and start.
 
 ---
 
@@ -18,64 +18,71 @@ The **Action Server** makes your Python scripts compatible with Agents using pro
 
 # Quickstart
 
-There are two main ways using the Action Server: with the command line, or with a VS Code extension.
+The canonical community path installs the `actions-runtime` distribution, creates a minimal project, and serves its tools through the Action Server.
 
-<details open>
-<summary><b>Build from Source (Recommended)</b></summary>
-
-This community edition builds entirely from source without any proprietary dependencies:
+## Install from PyPI
 
 ```sh
-# Clone the repository
-git clone https://github.com/joshyorko/actions.git
-cd actions
-
-# Build and install the action-server binary
-rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
-
-# The built binary is installed at the current PATH-selected action-server target.
+python -m pip install actions-runtime
 ```
 
-</details>
+This installs the `action-server` command in the active Python environment.
 
-<details>
-<summary><b>Install from PyPI</b></summary>
-
-Using an existing Python installation, run:
+## Create and run a project
 
 ```sh
-pip install actions-runtime
-```
-
-After installed the `action-server` executable should be in the `Scripts` or `bin`
-(depending on the OS) for the given python installation/environment.
-
-</details>
-
-<br/>
-
-Bootstrap a new project from a template. You'll be prompted for the name of the project:
-
-```sh
-action-server new
-```
-
-Navigate to the freshly created project folder and start the server:
-
-```sh
+action-server new --name my-project --template minimal
 cd my-project
 action-server start
 ```
 
-You should now have an Action Server running locally at: http://localhost:8080, to open the web UI.
+The web UI is available at http://localhost:8080. The MCP endpoint is available at http://localhost:8080/mcp.
 
-The `MCP` endpoint is available at: `http://localhost:8080/mcp`.
+In another terminal, smoke-test the advertised MCP endpoint:
 
-Using the `--auto-reload` flag for developing the Action Server will automatically reload your tools/actions when you change them during development.
+```sh
+curl --fail --silent --show-error \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H 'Mcp-Protocol-Version: 2026-07-28' \
+  -H 'Mcp-Method: tools/list' \
+  --data '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientCapabilities":{}}}}' \
+  http://localhost:8080/mcp
+```
 
-Head over to [Action Server docs](./action_server/README.md) for more.
+For contributors who need a source build instead of the published distribution:
+
+```sh
+git clone https://github.com/joshyorko/actions.git
+cd actions
+rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
+```
+
+`InstallCommunity` installs the built `action-server` executable at the target selected by `PATH`.
+
+Using the `--auto-reload` flag while developing reloads tools and actions when they change.
+
+Head over to the [Action Server documentation](./action_server/README.md) for more.
 
 ---
+
+<div id="package-identities"></div>
+
+## Public package identities
+
+The community release surface has one server distribution and separate library distributions:
+
+| Distribution | Import or command | Role |
+| --- | --- | --- |
+| `actions-runtime` | `action-server`, `actions.server` | Canonical Action Server install target |
+| `actions-core` | `actions`, `actions.mcp` | Core action and MCP decorators used by projects |
+| `actions-work-items` | `actions.work_items` | Optional work-item producers and consumers |
+| `actions-http-helper` | `actions_http` | Transitive HTTP certificate-store helper |
+
+“Action Server” names the executable and server product. “Actions Runtime” names its PyPI distribution; they are not parallel server packages.
+
+---
+
 
 <div id="python-action"></div>
 
@@ -95,7 +102,7 @@ dependencies:
     - python=3.12.10
     - uv=0.6.11
   pypi:
-    - actions-core=1.0.0
+    - actions-core=1.0.1
     - pytz=2024.1
 
 pythonpath:
@@ -147,7 +154,7 @@ You will probably not want run the Actions just on your machine, so by using `pa
 </details>
 <br/>
 
-2. [@tool decorator](./mcp) or [@action decorator](./action) that determines the **tool or action entry point** and [Type hints and docstring](./actions#describe-your-action) to let AI agents know **what the Tool/Action does** in natural language
+2. [@tool decorator](./mcp) or [@action decorator](./actions) that determines the **tool or action entry point** and [Type hints and docstring](./actions#describe-your-action) to let AI agents know **what the Tool/Action does** in natural language
 
 Note: any function decorated as `@action` imported from `actions` is also available as a `@tool` imported from `actions.mcp` and vice-versa (besides, there are other custom decorators for other functionalities such as `@resource`, `@prompt` for mcp and `@query` for actions).
 
@@ -214,7 +221,7 @@ This stack is hands down the easiest way to give AI agents more capabilities. It
 
 ## Community Edition
 
-This build uses the **[joshyorko/rcc](https://github.com/joshyorko/rcc)** fork (v18.18.1) - a fully open-source version of RCC with several key benefits:
+This build uses the **[joshyorko/rcc](https://github.com/joshyorko/rcc)** fork (v18.19.3) - a fully open-source version of RCC with several key benefits:
 
 ### Why the Community RCC Fork?
 
@@ -258,7 +265,7 @@ The Action Server builds from the checked-in public npm manifest and lockfile wi
 - **Node.js**: LTS 20.x (20.9.0 or later)
 - **npm**: 10.x or later (bundled with Node.js)
 - **Python**: 3.11+ (for the Action Server backend)
-- **RCC**: [joshyorko/rcc](https://github.com/joshyorko/rcc) v18.18.1+
+- **RCC**: [joshyorko/rcc](https://github.com/joshyorko/rcc) v18.19.3+
 
 ### Build the Frontend
 
@@ -297,7 +304,7 @@ registry configuration or package credential is part of the build.
 > First, please star the repo - your support is highly appreciated!
 
 - **Issues** - [GitHub Issues](https://github.com/joshyorko/actions/issues) is kept up to date with bugs, improvements, and feature requests
-- **Contribution** - Start [here](https://github.com/joshyorko/actions/blob/master/CONTRIBUTING.md), [PR's](https://github.com/joshyorko/actions/pulls) are welcome!
+- **Contribution** - Start [here](https://github.com/joshyorko/actions/blob/community/CONTRIBUTING.md), [PR's](https://github.com/joshyorko/actions/pulls) are welcome!
 
 ---
 
