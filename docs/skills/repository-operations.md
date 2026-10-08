@@ -1,5 +1,21 @@
 # Repository Operations
 
+## Community program evidence
+
+The [community issue ledger](../program/community-program-ledger.md) retains
+every open issue's full acceptance body and comments in its machine-readable
+companion. A checkpoint PR or green workflow establishes only the exact tested
+slice, not whole issue acceptance. Keep source, installed-wheel, native,
+packaged-browser and published-artifact receipts separate, recording the exact
+candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
+publication success. Recheck dependency sequencing against each retained
+contract before implementation; a cross-reference alone is not a blocking edge.
+
+The closed observability issue #137 remains referenced by roadmap #82. Preserve
+its retained contract in final vertical verification rather than reopening it
+automatically. #149 remains a living advisory record, and closed quickstart #154
+and homebrew-tools#103 must not generate duplicate execution work.
+
 ## Package Boundaries
 
 Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as
