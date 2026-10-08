@@ -19,6 +19,13 @@ testing both uninstall orders. It does not download another Poetry through
 `uv --with poetry`. Template pins remain at the published Core 1.0.1 until a
 separately authorized release and template update.
 
+Poetry merges the matching Core source into the main/dev lock entry: a
+`poetry install --only main` using this checkout lock still selects local Core.
+That is a monorepo development/install contract, not a production registry
+install. Production and release compatibility must be checked by installing
+the built wheels outside the checkout. Lazy public exports appear in `dir`
+without eager import so introspection and generated docs include ActionContext.
+
 The import guard checks root-private aliases and literal/concatenated dynamic
 module names through importlib aliases and `__import__`, including relative
 imports and static from-lists. Computed names are not statically proved by that

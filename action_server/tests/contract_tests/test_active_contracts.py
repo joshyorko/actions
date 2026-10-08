@@ -119,6 +119,8 @@ def _private_core_imports(source: str) -> list[int]:
     tree = ast.parse(source)
     importlib_names = set()
     import_module_names = set()
+    builtin_module_names = set()
+    builtin_import_names = {"__import__"}
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             importlib_names.update(
@@ -126,11 +128,27 @@ def _private_core_imports(source: str) -> list[int]:
                 for alias in node.names
                 if alias.name == "importlib"
             )
+            importlib_names.update(
+                "importlib"
+                for alias in node.names
+                if alias.name.startswith("importlib.") and alias.asname is None
+            )
+            builtin_module_names.update(
+                alias.asname or alias.name
+                for alias in node.names
+                if alias.name == "builtins"
+            )
         elif isinstance(node, ast.ImportFrom) and node.module == "importlib":
             import_module_names.update(
                 alias.asname or alias.name
                 for alias in node.names
                 if alias.name == "import_module"
+            )
+        elif isinstance(node, ast.ImportFrom) and node.module == "builtins":
+            builtin_import_names.update(
+                alias.asname or alias.name
+                for alias in node.names
+                if alias.name == "__import__"
             )
 
     def static_string(node):
@@ -155,7 +173,12 @@ def _private_core_imports(source: str) -> list[int]:
         elif isinstance(node, ast.Call):
             function = node.func
             builtin_import = (
-                isinstance(function, ast.Name) and function.id == "__import__"
+                isinstance(function, ast.Name) and function.id in builtin_import_names
+            ) or (
+                isinstance(function, ast.Attribute)
+                and function.attr == "__import__"
+                and isinstance(function.value, ast.Name)
+                and function.value.id in builtin_module_names
             )
             module_import = (
                 isinstance(function, ast.Name) and function.id in import_module_names
@@ -209,6 +232,9 @@ def _private_core_imports(source: str) -> list[int]:
         "import importlib\nimportlib.import_module(name='actions._request')",
         "__import__(name='actions._request')",
         "import importlib\nimportlib.import_module('.child', package='actions._request')",
+        "import importlib.util\nimportlib.import_module('actions._request')",
+        "from builtins import __import__ as load\nload('actions._request')",
+        "import builtins as loader\nloader.__import__('actions._request')",
     ],
 )
 def test_private_import_detection_covers_aliases_and_static_dynamic_imports(source):

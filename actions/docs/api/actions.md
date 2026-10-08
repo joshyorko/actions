@@ -67,7 +67,7 @@ actions run actions.py -a enter_user
 - <b>`is_consequential`</b>: Whether the action is consequential or not. This will add `x-openai-isConsequential: true` to the action metadata and shown in OpenApi spec.
 - <b>`display_name`</b>: A name to be displayed for this action. If given will be used as the openapi.json summary for this action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L75)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L79)
 
 ```python
 action(*args, **kwargs)
@@ -87,7 +87,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L171)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L175)
 
 ```python
 action_cache(func)
@@ -99,7 +99,7 @@ ______________________________________________________________________
 
 Provides the action which is being currently run or None if not currently running an action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L206)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L210)
 
 ```python
 get_current_action() → Optional[IAction]
@@ -111,7 +111,7 @@ ______________________________________________________________________
 
 Provide the output directory being used for the run or None if there's no output dir configured.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L193)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L197)
 
 ```python
 get_output_dir() → Optional[Path]
@@ -131,7 +131,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L149)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L153)
 
 ```python
 session_cache(func)
@@ -243,6 +243,60 @@ teardown(
     *args,
     **kwargs
 ) → Union[Callable[[IAction], Any], Callable[[Callable[[IAction], Any]], Callable[[IAction], Any]], Callable[[Callable[[Sequence[IAction]], Any]], Callable[[Sequence[IAction]], Any]]]
+```
+
+______________________________________________________________________
+
+# Class `ActionContext`
+
+### `__init__`
+
+**Args:**
+
+- <b>`data`</b>: The data requested from that source. If encrypted, must be something as:
+
+base64(json.dumps({
+
+- <b>`cipher`</b>: blob_of_data
+- <b>`algorithm`</b>: "aes256-gcm"
+- <b>`iv`</b>: nonce}))
+
+Otherwise the payload should be passed directly,which should be something as: base64(json.dumps({ 'secrets': {'secret_name': 'secret_value'} }))
+
+- <b>`path`</b>: the payload is expected to be a json object, and the path defined here maps to how to get that value.
+
+i.e.: if the payload has:
+
+{ 'secrets': {'secret_name': 'secret_value'}, 'invocation_context': { 'agent_id': str | None, 'invoked_on_behalf_of_user_id': str | None, 'thread_id': str | None, 'tenant_id': str, 'action_invocation_id': str, }, }
+
+The path to access the secret_name would be: 'secrets/secret_name'.
+
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_action_context.py#L149)
+
+```python
+__init__(data: str, env: Optional[Dict[str, str]] = None)
+```
+
+## Properties
+
+- `initial_data`
+
+The initial data received from the request (x-action-context header).
+
+- `value`
+
+## Methods
+
+______________________________________________________________________
+
+### `from_request`
+
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_action_context.py#L264)
+
+```python
+from_request(
+    request: Optional[ForwardRef('Request')]
+) → Optional[ForwardRef('BaseContext')]
 ```
 
 ______________________________________________________________________

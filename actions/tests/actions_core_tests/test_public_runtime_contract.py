@@ -69,3 +69,16 @@ def test_action_context_public_export_does_not_eagerly_import_context_module():
         ],
         check=True,
     )
+
+
+def test_lazy_action_context_is_discoverable_without_eager_import():
+    subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import sys, actions; "
+            "assert 'ActionContext' in dir(actions); "
+            "assert 'actions._action_context' not in sys.modules",
+        ],
+        check=True,
+    )

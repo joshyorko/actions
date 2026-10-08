@@ -14,6 +14,7 @@
 
 ## Classes
 
+- [`_action_context.ActionContext`](./actions._action_context.md#class-actioncontext)
 - [`_response.ActionError`](./actions._response.md#class-actionerror): This is a custom error which actions returning a `Response` are expected
 - [`_protocols.ActionsListActionTypedDict`](./actions._protocols.md#class-actionslistactiontypeddict): When `actions list` is run, the output is a
 - [`_protocols.IAction`](./actions._protocols.md#class-iaction)
