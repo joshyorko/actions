@@ -236,7 +236,7 @@ class OwnedProcessTests(unittest.TestCase):
                     handle = kernel.OpenProcess(0x00100000 | 0x0001, False, pid)
                     self.assertTrue(handle)
                     self.assertEqual(kernel.WaitForSingleObject(handle, 0), 258)
-                self.assertEqual(kernel.WaitForSingleObject(handle, 5000), 0)
+                self.assertEqual(kernel.WaitForSingleObject(handle, 0), 0)
                 (root / "held.txt").unlink()
             finally:
                 if handle:
