@@ -2,6 +2,7 @@ import importlib.util
 import json
 import os
 import re
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -47,6 +48,121 @@ def load_workflow_generator():
     return module
 
 
+def create_runtime_release_git_repo(tmp_path):
+    repository = tmp_path / "repo"
+    repository.mkdir()
+    remote = tmp_path / "origin.git"
+    subprocess.run(
+        ["git", "init", "--quiet"], cwd=repository, check=True
+    )
+    subprocess.run(
+        ["git", "checkout", "--quiet", "-b", "community"],
+        cwd=repository,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.name", "Release pipeline test"],
+        cwd=repository,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.email", "release-pipeline@example.invalid"],
+        cwd=repository,
+        check=True,
+    )
+
+    (repository / "base.txt").write_text("release source\n")
+    subprocess.run(["git", "add", "base.txt"], cwd=repository, check=True)
+    subprocess.run(
+        ["git", "commit", "--quiet", "-m", "release source"],
+        cwd=repository,
+        check=True,
+    )
+    tag_sha = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    tag = "actions-runtime-1.0.1"
+    subprocess.run(
+        ["git", "tag", "-a", tag, "-m", "Runtime 1.0.1", tag_sha],
+        cwd=repository,
+        check=True,
+    )
+
+    (repository / "advanced.txt").write_text("later community commit\n")
+    subprocess.run(["git", "add", "advanced.txt"], cwd=repository, check=True)
+    subprocess.run(
+        ["git", "commit", "--quiet", "-m", "advance community"],
+        cwd=repository,
+        check=True,
+    )
+    community_tip = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    subprocess.run(
+        ["git", "clone", "--quiet", "--bare", str(repository), str(remote)],
+        cwd=tmp_path,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "remote", "add", "origin", str(remote)],
+        cwd=repository,
+        check=True,
+    )
+    return repository, remote, tag, tag_sha, community_tip
+
+
+def run_shell_step(script, cwd, env):
+    return subprocess.run(
+        ["bash", "-euo", "pipefail", "-c", script],
+        cwd=cwd,
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+
+
+def create_foreign_runtime_tag(repository, tag="actions-runtime-1.0.2"):
+    subprocess.run(
+        ["git", "checkout", "--quiet", "--orphan", "foreign"],
+        cwd=repository,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "rm", "-rf", "."],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+    )
+    (repository / "foreign.txt").write_text("not on community\n")
+    subprocess.run(["git", "add", "foreign.txt"], cwd=repository, check=True)
+    subprocess.run(
+        ["git", "commit", "--quiet", "-m", "foreign runtime"],
+        cwd=repository,
+        check=True,
+    )
+    sha = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    subprocess.run(
+        ["git", "tag", "-a", tag, "-m", "foreign runtime", sha],
+        cwd=repository,
+        check=True,
+    )
+    return tag, sha
+
+
 def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     generator = (WORKFLOWS / "_gen_workflows.py").read_text()
     pypi = (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
@@ -60,13 +176,26 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert pypi.count("PYPI_TOKEN_ACTIONS_RUNTIME") == 2
     assert pypi.count("twine check --strict") == 1
     assert "git fetch origin community:refs/remotes/origin/community" in pypi
-    assert 'git merge-base --is-ancestor "$GITHUB_SHA" origin/community' in pypi
-    assert "poetry version --short" in pypi
+    workflow = yaml.safe_load(pypi)
+    provenance = next(
+        step["run"]
+        for step in workflow["jobs"]["publish"]["steps"]
+        if step.get("name") == "Verify merged tag provenance and version"
+    )
+    assert 'tag_commit=$(git rev-parse "$GITHUB_REF^{commit}")' in provenance
+    assert 'event_commit=$(git rev-parse "$GITHUB_SHA^{commit}")' in provenance
+    assert 'test "$tag_commit" = "$event_commit"' in provenance
+    assert 'git merge-base --is-ancestor "$GITHUB_SHA" origin/community' in provenance
+    assert (
+        'test "$(git rev-parse "$GITHUB_SHA^{commit}")" = "$(git rev-parse origin/community)"'
+        not in provenance
+    )
+    assert "poetry version --short" in provenance
     assert (
         "package_version=$(uv run --no-project --python 3.12 poetry version --short)"
-        in pypi
+        in provenance
     )
-    assert "package_version=$(poetry version --short)" not in pypi
+    assert "package_version=$(poetry version --short)" not in provenance
     assert "python -m pip check" in pypi
     assert "python -m actions.server version" in pypi
     assert "actions/upload-artifact@" in pypi
@@ -83,7 +212,6 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert "cp312-*win*amd64" in pypi
     assert "cp313-*win*amd64" in pypi
 
-    workflow = yaml.safe_load(pypi)
     wheel_matrix = workflow["jobs"]["build-wheels"]["strategy"]["matrix"]
     assert [row["name"] for row in wheel_matrix["include"]] == [
         "ubuntu",
@@ -118,7 +246,7 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert "pattern: '*-wheels'" in publish_job.group()
     assert "merge-multiple: true" not in publish_job.group()
     assert "merge-multiple: false" in publish_job.group()
-    assert "actions-runtime-manifest.sha256" in publish_job.group()
+    assert "publish_verified_runtime.py" in publish_job.group()
     assert "Download wheel artifacts separately" in publish_job.group()
     assert "pull_request:" in pypi
     assert "branches:\n    - community" in pypi
@@ -150,7 +278,7 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     ]
     assert publish_job.group().index(
         "Verify Runtime artifacts"
-    ) < publish_job.group().index("actions-runtime-dist")
+    ) < publish_job.group().index("name: actions-runtime-dist")
     assert publish_job.group().count("name: actions-runtime-dist") == 1
     assert "name: Build sdist" in pypi
     sdist_step = pypi[
@@ -182,6 +310,109 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
         for step in workflow["jobs"][job_name]["steps"]:
             if "secrets." in str(step):
                 assert step.get("if") == "github.event_name == 'push'"
+
+
+def _native_release_provenance_step():
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "actions_runtime_binary_release.yml").read_text()
+    )
+    return next(
+        step
+        for step in workflow["jobs"]["build"]["steps"]
+        if "origin/community" in step.get("run", "")
+    )
+
+
+def _run_native_release_provenance(repo, ref, sha):
+    step = _native_release_provenance_step()
+    env = os.environ.copy()
+    env.update({"GITHUB_REF": ref, "GITHUB_SHA": sha})
+    return run_shell_step(step["run"], repo, env)
+
+
+def test_native_release_accepts_tag_ancestor_after_community_advances(tmp_path):
+    repo, _, tag, tag_sha, community_tip = create_runtime_release_git_repo(tmp_path)
+    subprocess.run(
+        ["git", "checkout", "--quiet", "--detach", tag_sha],
+        cwd=repo,
+        check=True,
+    )
+
+    result = _run_native_release_provenance(
+        repo, f"refs/tags/{tag}", tag_sha
+    )
+
+    assert tag_sha != community_tip
+    assert result.returncode == 0, result.stderr
+
+
+def test_native_release_rejects_tag_ref_sha_mismatch(tmp_path):
+    repo, _, tag, _, community_tip = create_runtime_release_git_repo(tmp_path)
+
+    result = _run_native_release_provenance(
+        repo, f"refs/tags/{tag}", community_tip
+    )
+
+    assert result.returncode != 0
+
+
+def test_native_release_rejects_foreign_tag_sha(tmp_path):
+    repo, _, _, _, _ = create_runtime_release_git_repo(tmp_path)
+    foreign_tag, foreign_sha = create_foreign_runtime_tag(repo)
+    result = _run_native_release_provenance(
+        repo, f"refs/tags/{foreign_tag}", foreign_sha
+    )
+
+    assert result.returncode != 0
+
+
+def test_pypi_release_accepts_ancestor_tag_and_rejects_package_version_mismatch(
+    tmp_path,
+):
+    repo, _, tag, tag_sha, community_tip = create_runtime_release_git_repo(tmp_path)
+    (repo / "action_server").mkdir()
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    uv = bin_dir / "uv"
+    uv.write_text("#!/bin/sh\nprintf '%s\\n' \"$PACKAGE_VERSION\"\n")
+    uv.chmod(0o755)
+    step = next(
+        step
+        for step in yaml.safe_load(
+            (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
+        )["jobs"]["publish"]["steps"]
+        if step.get("name") == "Verify merged tag provenance and version"
+    )
+    env = os.environ.copy()
+    env.update(
+        {
+            "PATH": f"{bin_dir}{os.pathsep}{env['PATH']}",
+            "GITHUB_REF": f"refs/tags/{tag}",
+            "GITHUB_REF_NAME": tag,
+            "GITHUB_SHA": tag_sha,
+            "PACKAGE_VERSION": "1.0.1",
+        }
+    )
+
+    accepted = run_shell_step(step["run"], repo, env)
+    assert tag_sha != community_tip
+    assert accepted.returncode == 0, accepted.stderr
+
+    env["PACKAGE_VERSION"] = "1.0.2"
+    rejected = run_shell_step(step["run"], repo, env)
+    assert rejected.returncode != 0
+    assert "does not match package version" in rejected.stderr
+
+    foreign_tag, foreign_sha = create_foreign_runtime_tag(repo)
+    env.update(
+        {
+            "GITHUB_REF": f"refs/tags/{foreign_tag}",
+            "GITHUB_REF_NAME": foreign_tag,
+            "GITHUB_SHA": foreign_sha,
+        }
+    )
+    foreign = run_shell_step(step["run"], repo, env)
+    assert foreign.returncode != 0
 
 
 def test_runtime_publisher_verifies_manifest_and_rejects_bad_inventory(tmp_path):
@@ -234,6 +465,121 @@ def test_runtime_publisher_accepts_real_cibuildwheel_names_and_rejects_bad_abi(
         publisher.VerificationError, match="unexpected artifact filename"
     ):
         publisher.verify_artifacts(tmp_path)
+
+
+def test_runtime_publisher_accepts_platform_tag_order_and_rejects_duplicate_slots(
+    tmp_path,
+):
+    publisher = load_publisher()
+    linux_tags = (
+        "manylinux_2_17_x86_64.manylinux_2_5_x86_64."
+        "manylinux1_x86_64.manylinux2014_x86_64"
+    )
+    reordered_linux_tags = (
+        "manylinux_2_5_x86_64.manylinux1_x86_64."
+        "manylinux2014_x86_64.manylinux_2_17_x86_64"
+    )
+    artifacts = [
+        "actions_runtime-1.0.0.tar.gz",
+        f"actions_runtime-1.0.0-cp312-cp312-{reordered_linux_tags}.whl",
+        f"actions_runtime-1.0.0-cp313-cp313-{reordered_linux_tags}.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+    ]
+    for name in artifacts:
+        (tmp_path / name).write_bytes(name.encode())
+
+    publisher.write_manifest(tmp_path)
+    assert publisher.verify_artifacts(tmp_path) == sorted(artifacts)
+
+    # Two different filenames that parse to the same wheel tag set are still
+    # one slot, not two distinct approved artifacts.
+    duplicate_slot = tmp_path / (
+        "actions_runtime-1.0.0-cp312-cp312-" + linux_tags + ".whl"
+    )
+    duplicate_slot.write_bytes(duplicate_slot.name.encode())
+    (tmp_path / artifacts[2]).unlink()
+    with pytest.raises(publisher.VerificationError, match="duplicate wheel slot"):
+        publisher.write_manifest(tmp_path)
+
+
+@pytest.mark.parametrize(
+    "filename",
+    [
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+        "actions_runtime-1.0.0-1-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313.cp313-cp313-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313.cp313-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+    ],
+)
+def test_runtime_publisher_rejects_foreign_platform_or_build_tag(tmp_path, filename):
+    publisher = load_publisher()
+    artifacts = [
+        "actions_runtime-1.0.0.tar.gz",
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+    ]
+    artifacts[-1] = filename
+    for name in artifacts:
+        (tmp_path / name).write_bytes(name.encode())
+    with pytest.raises(
+        publisher.VerificationError, match="unexpected artifact filename"
+    ):
+        publisher.write_manifest(tmp_path)
+
+
+def test_generated_runtime_inventory_uses_exact_tag_set_verifier(tmp_path):
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
+    )
+    steps = workflow["jobs"]["publish"]["steps"]
+    inventory_step = next(
+        step
+        for step in steps
+        if step.get("name") == "Verify exact Runtime artifact inventory"
+    )
+    assert (
+        "scripts/publish_verified_runtime.py --download-root dist/downloads --dry-run"
+        in inventory_step["run"]
+    )
+
+    root = tmp_path / "repo"
+    action_server = root / "action_server"
+    scripts = action_server / "scripts"
+    downloads = action_server / "dist" / "downloads"
+    scripts.mkdir(parents=True)
+    downloads.mkdir(parents=True)
+    (scripts / PUBLISHER.name).write_bytes(PUBLISHER.read_bytes())
+    artifacts = [
+        "actions_runtime-1.0.0.tar.gz",
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+    ]
+    for name in artifacts:
+        (downloads / name).write_bytes(name.encode())
+
+    run_command = "uv run --no-project --python ${{ matrix.python }} python"
+    script = inventory_step["run"].replace(run_command, shlex.quote(sys.executable), 1)
+    result = run_shell_step(script, root, os.environ.copy())
+    assert result.returncode == 0, result.stderr
+
+    output = action_server / "dist"
+    assert sorted(path.name for path in output.iterdir()) == sorted(
+        artifacts + ["actions-runtime-manifest.sha256"]
+    )
+    publisher = load_publisher()
+    assert publisher.verify_artifacts(output) == sorted(artifacts)
 
 
 def test_runtime_publisher_rejects_mixed_versions_and_duplicate_matrix_rows(tmp_path):
@@ -742,18 +1088,15 @@ def test_runtime_publisher_proceeds_with_canonical_workflow_id(monkeypatch, tmp_
     assert any(command[1:3] == ["run", "download"] for command in calls)
 
 
-def test_binary_release_matrix_and_aws_pin_are_actionlint_safe():
+def test_binary_release_matrix_has_no_retired_aws_delivery_permissions():
     generator = (WORKFLOWS / "_gen_workflows.py").read_text()
     binary = (WORKFLOWS / "actions_runtime_binary_release.yml").read_text()
     assert '"name": "linux"' in generator
-    assert (
-        "aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df"
-        in generator
-    )
-    assert (
-        "aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df"
-        in binary
-    )
+    assert "aws-actions/configure-aws-credentials" not in generator
+    assert "aws-actions/configure-aws-credentials" not in binary
+    assert "id-token: write" not in binary
+    assert "cdn.sema4.ai" not in binary
+    assert "s3://robocorp-action-server-build-drop-box" not in binary
     assert "::set-output" not in binary
     assert "matrix.name" not in binary or "name:" in binary
 
@@ -869,6 +1212,10 @@ def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
         str(step) for step in jobs["pypi-recovery"]["steps"]
     )
     assert "twine upload" not in recovery_text
+    assert (
+        'test "$(git -C recovery-code rev-parse refs/remotes/origin/community)" = "$WORKFLOW_SHA"'
+        in recovery_text
+    )
 
     binary_artifact_names = [
         step["with"]["name"]

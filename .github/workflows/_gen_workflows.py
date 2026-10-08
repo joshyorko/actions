@@ -326,31 +326,6 @@ class BaseWorkflow:
             "utf-8",
         )
 
-    def is_beta_in_outputs(self):
-        # A step defining if it's a beta release. Needs 2 things:
-        # 1. Add to the outputs
-        # 2. Add to the steps
-        # 3. Add to the needs
-        # Can then be checked with:
-        #    if: ${{ needs.<job-name>.outputs.is_beta == 'false' }}
-        #
-        output = {
-            "is_beta": "${{ steps.check_beta.outputs.is_beta }}",
-        }
-        return output
-
-    def is_beta_in_steps(self):
-        step = {
-            "name": "Check if this is a beta release",
-            "id": "check_beta",
-            "run": """
-is_beta=${{ endsWith(github.ref_name, '-beta') }}
-echo "is_beta: $is_beta"
-echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
-""",
-        }
-        return step
-
     def install_with_devmode(self, env: dict | None = None):
         ret = {
             "name": "Install project (not dev)",
@@ -463,11 +438,14 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
 
     def check_runtime_release_head(self):
         return {
-            "name": "Verify Runtime tag matches current community",
+            "name": "Verify Runtime tag SHA and community ancestry",
             "shell": "bash",
             "run": """set -Eeuo pipefail
 git fetch origin community:refs/remotes/origin/community
-test "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/community)"
+tag_commit=$(git rev-parse \"$GITHUB_REF^{commit}\")
+event_commit=$(git rev-parse \"$GITHUB_SHA^{commit}\")
+test \"$tag_commit\" = \"$event_commit\"
+git merge-base --is-ancestor \"$GITHUB_SHA\" origin/community
 """,
             "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
         }
@@ -828,36 +806,27 @@ rm src/actions/server/bin/rcc* -f
         return matrix
 
     def publish_steps(self):
-        provenance = 'set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor "$GITHUB_SHA" origin/community\ntest "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/community)"\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(uv run --no-project --python 3.12 poetry version --short)\nif [[ "$tag_version" != "$package_version" ]]; then printf \'tag version %s does not match package version %s\\n\' "$tag_version" "$package_version" >&2; exit 1; fi'
-        inventory = """set -Eeuo pipefail
+        provenance = """set -Eeuo pipefail
+git fetch origin community:refs/remotes/origin/community
+tag_commit=$(git rev-parse "$GITHUB_REF^{commit}")
+event_commit=$(git rev-parse "$GITHUB_SHA^{commit}")
+test "$tag_commit" = "$event_commit"
+git merge-base --is-ancestor "$GITHUB_SHA" origin/community
+tag_version=${GITHUB_REF_NAME#actions-runtime-}
 cd action_server
-rm -rf dist/verified
-mkdir -p dist/verified
-find dist/downloads -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts
-test \"$(wc -l < /tmp/runtime-artifacts)\" -eq 7
-test -z \"$(uniq -d /tmp/runtime-artifacts)\"
-sdist=$(grep -E '^actions_runtime-[0-9][^/]*\\.tar\\.gz$' /tmp/runtime-artifacts)
-test \"$(printf '%s\\n' \"$sdist\" | wc -l)\" -eq 1
-version=${sdist#actions_runtime-}
-version=${version%.tar.gz}
-printf '%s\\n' \\
-  \"actions_runtime-$version.tar.gz\" \\
-  \"actions_runtime-$version-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\" \\
-  \"actions_runtime-$version-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\" \\
-  \"actions_runtime-$version-cp312-cp312-macosx_12_0_arm64.whl\" \\
-  \"actions_runtime-$version-cp313-cp313-macosx_12_0_arm64.whl\" \\
-  \"actions_runtime-$version-cp312-cp312-win_amd64.whl\" \\
-  \"actions_runtime-$version-cp313-cp313-win_amd64.whl\" | sort > /tmp/runtime-expected
-diff -u /tmp/runtime-expected /tmp/runtime-artifacts
-while IFS= read -r basename; do
-  source=$(find dist/downloads -type f -name \"$basename\" -print -quit)
-  test -n \"$source\"
-  cp -- \"$source\" dist/verified/\"$basename\"
-done < /tmp/runtime-artifacts
-mv dist/verified/* dist/
-rmdir dist/verified
-rm -rf dist/downloads
-sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runtime-manifest.sha256
+package_version=$(uv run --no-project --python 3.12 poetry version --short)
+if [[ "$tag_version" != "$package_version" ]]; then
+  printf 'tag version %s does not match package version %s\\n' \
+    "$tag_version" "$package_version" >&2
+  exit 1
+fi
+"""
+        inventory = f"""set -Eeuo pipefail
+cd action_server
+rm -rf actions-runtime-dist
+{run_in_env}python scripts/publish_verified_runtime.py --download-root dist/downloads --dry-run
+rm -rf dist
+mv actions-runtime-dist dist
 """
         return [
             self.checkout_repo(pinned=True),
@@ -959,6 +928,10 @@ class ActionServerBinaryRelease(BaseWorkflow):
     project_name = "action_server"
     fail_fast = True
 
+    def __init__(self):
+        super().__init__()
+        self.full["permissions"] = {"contents": "read"}
+
     @override
     def on_part(self, dep_paths):
         return {
@@ -1007,50 +980,6 @@ sha256sum linux64/action-server macos-arm64/action-server windows64/action-serve
 """,
         }
 
-    def verify_binary_release_inventory_before_handoff(self):
-        return {
-            "name": "Verify Runtime binary inventory before handoff",
-            "shell": "bash",
-            "run": """set -Eeuo pipefail
-cd build
-for pair in \
-  "linux64/action-server linux64" \
-  "macos-arm64/action-server macos-arm64" \
-  "windows64/action-server.exe windows64"; do
-  set -- $pair
-  binary=$1
-  directory=$2
-  test -f "$binary"
-  test ! -L "$binary"
-  test "$(find "$directory" -mindepth 1 -maxdepth 1 | wc -l)" -eq 1
-done
-sha256sum linux64/action-server macos-arm64/action-server windows64/action-server.exe | sort > runtime-binary-manifest.sha256
-""",
-        }
-
-    def set_version_on_ubuntu(self):
-        return {
-            "name": "Set version",
-            "run": f"""
-{run_in_env}poetry version --short > version.txt
-VERSION=$(cat version.txt)
-
-echo "Version: $VERSION"
-echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-""",
-            "id": "set_version",
-            "if": "${{ matrix.os == '" + UBUNTU_VERSION + "' }}",
-        }
-
-    def upload_artifact_action_server_version_on_ubuntu(self):
-        # Having a separate artifact for version.txt helps downstream workflows
-        return self.upload_artifact(
-            name="action-server-version",
-            path="action_server/version.txt",
-            if_clause="${{ matrix.os == '" + UBUNTU_VERSION + "' }}",
-            pinned=True,
-        )
-
     def build_steps(self) -> list[dict]:
         steps = (
             [self.checkout_repo(pinned=True)]
@@ -1068,73 +997,23 @@ echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         steps.append(self.build_frontend())
         steps.append(self.build_oauth2_config())
 
-        steps.append(self.set_version_on_ubuntu())
         steps.extend(self.build_action_server_binary_cross_platform())
         steps.append(self.upload_artifact_with_asset_path())
-        steps.append(self.upload_artifact_action_server_version_on_ubuntu())
 
         return steps
-
-    def build_job_part(self):
-        build = super().build_job_part()
-        build["outputs"] = {"version": "${{ steps.set_version.outputs.version }}"}
-        return build
 
     @override
     def jobs_part(self):
         jobs = super().jobs_part()
-        jobs["jobs"]["deploy-s3"] = self.deploy_s3_job_part()
-        jobs["jobs"].update(self.trigger_brew_workflow_job_part())
         jobs["jobs"].update(self.release_job_part())
         return jobs
-
-    def trigger_brew_workflow_job_part(self):
-        return {
-            "trigger-brew-workflow": {
-                "needs": ["build", "deploy-s3"],
-                "defaults": {"run": {"working-directory": "."}},
-                "if": "${{ needs.deploy-s3.outputs.is_beta == 'false' }}",
-                "runs-on": UBUNTU_VERSION,
-                "steps": [
-                    {
-                        "name": "Wait for Downloads S3 Bucket to have the right content",
-                        "timeout-minutes": 5,
-                        "run": """
-EXPECTED_VERSION=${{ needs.build.outputs.version }}
-VERSION_URL="https://cdn.sema4.ai/action-server/releases/${EXPECTED_VERSION}/version.txt"
-echo "Expected version: $EXPECTED_VERSION"
-while true; do
-  DOWNLOADED_VERSION=$(curl -fsS --max-time 10 "$VERSION_URL")
-  echo "Downloaded version: $DOWNLOADED_VERSION"
-  echo "Expected version: $EXPECTED_VERSION"
-    if [ "$DOWNLOADED_VERSION" = "$EXPECTED_VERSION" ]; then
-      echo "Versions match."
-      break
-    else
-      echo "Versions do not match. Retrying in 30 seconds."
-    fi
-    sleep 30
-    done
-""",
-                    },
-                    {
-                        "name": "Trigger Brew Deploy Workflow",
-                        "run": """curl -X POST \
-           -H "Authorization: token ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}" \
-           -H "Accept: application/vnd.github.v3+json" \
-           https://api.github.com/repos/sema4ai/homebrew-tools/actions/workflows/publish.yml/dispatches \
-           -d '{"ref":"main","inputs":{"version":"${{ needs.build.outputs.version }}"}}'""",
-                    },
-                ],
-            },
-        }
 
     def release_job_part(self):
         return {
             "release": {
-                "if": "${{ needs.deploy-s3.outputs.is_beta == 'false' }}",
+                "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
                 "permissions": {"contents": "write"},
-                "needs": ["deploy-s3", "trigger-brew-workflow"],
+                "needs": ["build"],
                 "defaults": {"run": {"working-directory": "."}},
                 "runs-on": UBUNTU_VERSION,
                 "steps": [
@@ -1199,7 +1078,7 @@ while true; do
                             "file": "./linux64/action-server",
                             "asset_name": "${{ github.ref_name }}-linux64",
                             "tag": "${{ github.ref }}",
-                            "overwrite": True,
+                            "overwrite": False,
                         },
                     },
                     {
@@ -1210,7 +1089,7 @@ while true; do
                             "file": "./macos-arm64/action-server",
                             "asset_name": "${{ github.ref_name }}-macos-arm64",
                             "tag": "${{ github.ref }}",
-                            "overwrite": True,
+                            "overwrite": False,
                         },
                     },
                     {
@@ -1221,143 +1100,12 @@ while true; do
                             "file": "./windows64/action-server.exe",
                             "asset_name": "${{ github.ref_name }}-windows64.exe",
                             "tag": "${{ github.ref }}",
-                            "overwrite": True,
+                            "overwrite": False,
                         },
                     },
                 ],
             }
         }
-
-    def deploy_s3_job_part(self):
-        return {
-            "permissions": {
-                "id-token": "write",  # required by AWS aws-actions/configure-aws-credentials
-                "contents": "read",
-            },
-            "needs": ["build"],
-            "defaults": {
-                "run": {
-                    "working-directory": "./action_server",
-                },
-            },
-            "runs-on": UBUNTU_VERSION,
-            "outputs": {"is_beta": "${{ steps.check_beta.outputs.is_beta }}"},
-            "steps": self.deploy_s3_job_steps(),
-        }
-
-    def download_artifacts(self):
-        # It'll generate something as (for all the OSes we require):
-        #   - uses: actions/download-artifact@v4
-        #     with:
-        #       name: action-server-windows-2022
-        #       path: action_server/build/windows64/
-
-        ret = []
-        for os, path in [
-            ("windows-2022", "windows64"),
-            ("macos-15", "macos-arm64"),
-            (UBUNTU_VERSION, "linux64"),
-        ]:
-            ret.append(
-                {
-                    "name": f"Download artifact {os}",
-                    "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
-                    "with": {
-                        "name": f"action-server-{os}",
-                        "path": f"action_server/build/{path}/",
-                    },
-                }
-            )
-
-        ret.append(
-            {
-                "name": "Download artifact version",
-                "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
-                "with": {
-                    "name": "action-server-version",
-                    "path": "action_server/build/",
-                },
-            }
-        )
-        return ret
-
-    def deploy_s3_job_steps(self):
-        steps = []
-        steps.append(self.checkout_repo(pinned=True))
-        steps.append(self.is_beta_in_steps())
-        steps.extend(self.download_artifacts())
-        steps.append(self.verify_binary_release_inventory_before_handoff())
-        steps.extend(self.upload_to_s3())
-        return steps
-
-    def upload_to_s3(self):
-        ret = []
-
-        ret.append(
-            {
-                "name": "Put files in s3-drop",
-                "run": """
-ls -l
-pwd
-ls -l build
-mkdir s3-drop
-mv build/version.txt s3-drop/
-mv build/macos-arm64 s3-drop/
-mv build/linux64 s3-drop/
-mv build/windows64 s3-drop/
-ls -l s3-drop/
-ver=$(cat s3-drop/version.txt)
-echo "actionServerVersion=${ver}" >> "$GITHUB_ENV"
-if [[ "$GITHUB_REF_NAME" == actions-runtime-* ]]; then
-  test "$ver" = "${GITHUB_REF_NAME#actions-runtime-}"
-fi
-test "$(find s3-drop -type f | wc -l)" -eq 4
-test -f s3-drop/linux64/action-server
-test -f s3-drop/macos-arm64/action-server
-test -f s3-drop/windows64/action-server.exe
-""",
-            }
-        )
-
-        ret.append(
-            self.upload_artifact(
-                name="action-server-artifacts-for-s3-${{ env.actionServerVersion }}",
-                path="action_server/s3-drop",
-                pinned=True,
-            )
-        )
-
-        ret.append(
-            {
-                "name": "Configure AWS credentials Dropbox bucket",
-                "uses": "aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df",
-                "with": {
-                    "aws-region": "eu-west-1",
-                    "role-to-assume": "arn:aws:iam::710450854638:role/github-action-robocorp-action-server",
-                },
-            }
-        )
-
-        ret.append(
-            {
-                "name": "AWS S3 copies",
-                "run": """
-if [ "${{ steps.check_beta.outputs.is_beta }}" = "false" ]; then
-  echo "Normal release, aws sync to drop-box, full pipeline"
-  aws s3 sync s3-drop s3://robocorp-action-server-build-drop-box
-else
-  echo "BETA RELEASE, only copy the executable for testing"
-  S3_BASE_URL="s3://downloads.robocorp.com/action-server/beta"
-  aws s3 cp s3-drop/version.txt $S3_BASE_URL/version.txt --cache-control max-age=120 --content-type "text/plain"
-  aws s3 cp s3-drop/windows64/action-server.exe $S3_BASE_URL/windows64/action-server.exe --cache-control max-age=120 --content-type "application/octet-stream"
-  aws s3 cp s3-drop/macos-arm64/action-server $S3_BASE_URL/macos-arm64/action-server --cache-control max-age=120 --content-type "application/octet-stream"
-  aws s3 cp s3-drop/linux64/action-server $S3_BASE_URL/linux64/action-server --cache-control max-age=120 --content-type "application/octet-stream"
-fi
-""",
-            }
-        )
-
-        return ret
 
 
 class ActionServerRuntimeRecovery(BaseWorkflow):
@@ -1904,31 +1652,6 @@ gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes" --repo "$GITH
                 "with": {"name": f"native-signing-{platform}", "path": f"native-signing/{platform}"},
             })
         steps.extend([self.binary_release_normalize(), self.binary_release_publish()])
-        # Reuse the normal handoff implementation with the immutable version.
-        handoff = ActionServerBinaryRelease()
-        steps.append({
-            "name": "Stage recovered binaries for existing handoffs",
-            "env": {"RELEASE_REF": "${{ inputs.release_ref }}"},
-            "run": "mkdir -p build && cp -R binaries/linux build/linux64 && cp -R binaries/macos build/macos-arm64 && cp -R binaries/windows build/windows64 && printf '%s\\n' \"${RELEASE_REF#actions-runtime-}\" > build/version.txt",
-        })
-        for step in handoff.upload_to_s3():
-            step = dict(step)
-            if "run" in step:
-                step["run"] = step["run"].replace("${{ steps.check_beta.outputs.is_beta }}", "false")
-            if "with" in step and "path" in step["with"]:
-                step["with"] = dict(step["with"])
-                step["with"]["path"] = "s3-drop"
-            steps.append(step)
-        for step in handoff.trigger_brew_workflow_job_part()["trigger-brew-workflow"]["steps"]:
-            step = dict(step)
-            step["env"] = {"RELEASE_REF": "${{ inputs.release_ref }}"}
-            step["run"] = step["run"].replace("${{ needs.build.outputs.version }}", "${RELEASE_REF#actions-runtime-}")
-            if step["name"] == "Trigger Brew Deploy Workflow":
-                step["run"] = step["run"].replace("curl -X POST", "curl --fail-with-body --max-time 30 -X POST").replace(
-                    "-d '{\"ref\":\"main\",\"inputs\":{\"version\":\"${RELEASE_REF#actions-runtime-}\"}}'",
-                    "-d \"$(jq -cn --arg version \"${RELEASE_REF#actions-runtime-}\" '{ref:\"main\",inputs:{version:$version}}')\"",
-                )
-            steps.append(step)
         return steps
 
     @override
@@ -1969,7 +1692,7 @@ gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes" --repo "$GITH
                     "needs": ["validate", "binary-build"],
                     "if": "${{ needs.binary-build.result == 'success' }}",
                     "runs-on": UBUNTU_VERSION,
-                    "permissions": {"contents": "write", "id-token": "write"},
+                    "permissions": {"contents": "write"},
                     "defaults": {"run": {"working-directory": "."}},
                     "steps": self.binary_recovery_release_steps(),
                 },

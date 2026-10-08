@@ -81,11 +81,33 @@ def get_tag(tag_prefix: str) -> str:
     Args:
         tag_prefix: The tag prefix to match (i.e.: "actions-core")
     """
-    # Get the last tagged version.
-    cmd = f"git describe --tags --abbrev=0 --match {tag_prefix}-[0-9]*"
-    proc = subprocess.run(shlex.split(cmd), capture_output=True, text=True)
-    # Something like 'actions-core-0.0.1'
-    return proc.stdout.strip()
+    pattern = f"{tag_prefix}-[0-9]*"
+    proc = subprocess.run(
+        ["git", "describe", "--tags", "--abbrev=0", "--match", pattern],
+        capture_output=True,
+        text=True,
+    )
+    if proc.returncode == 0:
+        tag = proc.stdout.strip()
+        if not re.fullmatch(rf"{re.escape(tag_prefix)}-\d+\.\d+\.\d+", tag):
+            raise RuntimeError(f"Invalid release tag returned by git describe: {tag!r}")
+        return tag
+
+    tags = subprocess.run(
+        ["git", "tag", "--list", pattern], capture_output=True, text=True
+    )
+    if tags.returncode != 0:
+        raise RuntimeError(
+            f"Unable to list release tags for {tag_prefix}: {tags.stderr.strip()}"
+        )
+    if tags.stdout.strip():
+        raise RuntimeError(
+            f"A {tag_prefix} release tag exists but is not reachable from HEAD; "
+            "fetch or merge the release history before continuing."
+        )
+
+    # An empty result is valid only for a package's first release.
+    return ""
 
 
 def get_all_tags(tag_prefix: str) -> List[str]:
@@ -100,6 +122,19 @@ def to_identifier(value: str) -> str:
     value = re.sub(r"[^\w\s_]", "", value.lower())
     value = re.sub(r"[_\s]+", "_", value).strip("_")
     return value
+
+
+def is_canonical_actions_origin(origin_url: str) -> bool:
+    """Return whether origin is the canonical community Actions repository."""
+    patterns = (
+        r"https://github\.com/joshyorko/actions(?:\.git)?/?",
+        r"ssh://git@github\.com/joshyorko/actions(?:\.git)?/?",
+        r"git@github\.com:joshyorko/actions(?:\.git)?/?",
+    )
+    return any(
+        re.fullmatch(pattern, origin_url.strip(), flags=re.IGNORECASE)
+        for pattern in patterns
+    )
 
 
 @lru_cache
@@ -517,26 +552,74 @@ def build_common_tasks(
 
         result = run(ctx, "git rev-parse --abbrev-ref HEAD", hide=True)
         branch = result.stdout.strip()
-        if branch != "master":
-            sys.stderr.write(f"Not on master branch: {branch}\n")
+        if branch != "community":
+            sys.stderr.write(f"Not on community branch: {branch or '<detached>'}\n")
             sys.exit(1)
 
-        current_version = _get_module_version(ctx)
-        previous_tag = get_tag(tag_prefix)
-        previous_version = previous_tag.split("-")[-1]
-
-        if not previous_version:
-            print(f"No previous release for {package_name}")
-        elif previous_version == "beta":
-            print(f"Previous release was beta for {package_name}")
-        elif semver.compare(current_version, previous_version) <= 0:
+        origin = run(ctx, "git remote get-url origin", hide=True).stdout.strip()
+        if not is_canonical_actions_origin(origin):
             sys.stderr.write(
-                f"Current version older/same than previous:"
-                f" {current_version} <= {previous_version}\n"
+                "Release tags may only be created from the canonical "
+                "joshyorko/actions origin.\n"
             )
             sys.exit(1)
 
+        try:
+            run(
+                ctx,
+                "git fetch --no-tags origin community:refs/remotes/origin/community",
+                hide=True,
+            )
+            run(ctx, "git merge-base --is-ancestor HEAD origin/community", hide=True)
+        except Exception as exc:
+            sys.stderr.write(
+                "Current commit is not reachable from origin/community; "
+                "merge it before creating a release tag.\n"
+            )
+            raise SystemExit(1) from exc
+
+        current_version = _get_module_version(ctx)
+        if not re.fullmatch(r"\d+\.\d+\.\d+", current_version):
+            sys.stderr.write(
+                f"Invalid package version for {package_name}: {current_version!r}; "
+                "expected major.minor.patch.\n"
+            )
+            sys.exit(1)
+
+        try:
+            current_version_info = semver.VersionInfo.parse(current_version)
+            previous_tag = get_tag(tag_prefix)
+        except (ValueError, RuntimeError) as exc:
+            sys.stderr.write(f"Unable to determine release version state: {exc}\n")
+            sys.exit(1)
+
+        previous_version = previous_tag[len(tag_prefix) + 1 :] if previous_tag else ""
+
+        if not previous_version:
+            print(f"No previous release for {package_name}")
+        else:
+            try:
+                previous_version_info = semver.VersionInfo.parse(previous_version)
+            except ValueError:
+                sys.stderr.write(
+                    f"Invalid previous release version: {previous_version!r}\n"
+                )
+                sys.exit(1)
+            if current_version_info <= previous_version_info:
+                sys.stderr.write(
+                    f"Current version older/same than previous:"
+                    f" {current_version} <= {previous_version}\n"
+                )
+                sys.exit(1)
+
         current_tag = f"{tag_prefix}-{current_version}"
+        existing_tags = run(
+            ctx, "git tag --list", current_tag, hide=True
+        ).stdout.splitlines()
+        if current_tag in existing_tags:
+            sys.stderr.write(f"Release tag already exists: {current_tag}\n")
+            sys.exit(1)
+
         run(
             ctx,
             "git tag",

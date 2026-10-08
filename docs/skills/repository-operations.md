@@ -262,14 +262,22 @@ must agree. Native release notes come from
 `action_server/docs/CHANGELOG.md` and `action-server-v1.2.x` tags remain a
 separate legacy delivery line. Tagged PyPI runs fail closed when
 `PYPI_TOKEN_ACTIONS_RUNTIME` is absent rather than reporting successful release
-verification without publication. Runtime binaries intentionally retain the
-existing `action-server/releases` CDN/S3 object paths and Homebrew version input
-as compatibility handoffs; those paths do not redefine package or tag identity.
+verification without publication. Native Runtime releases publish the three
+tag-named binaries as GitHub release assets only; the Sema4AI Homebrew dispatch
+and Robocorp/Sema4AI CDN/S3 compatibility handoffs are retired. The normal
+uploader uses `overwrite: false`, so a same-name asset collision fails closed
+instead of replacing a published binary.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
-One final `pypi` job downloads the exact artifacts, rejects duplicate or
-unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
+One final `pypi` job downloads the sdist and wheel artifacts separately, then
+stages them through `publish_verified_runtime.py --download-root`. The validator
+parses wheel filenames into tag sets, so platform tags in a different order are
+accepted when the set is identical. It still requires the exact package/version,
+the cp312/cp313 interpreter and ABI, the approved manylinux/macOS/Windows tag
+sets, no build tag, exactly seven artifacts, and one wheel for each of the six
+interpreter/platform slots; duplicate tag components and duplicate slots fail.
+The job installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches
 `uv run --no-project --python 3.12 poetry version --short`, then retains that
 verified directory as `actions-runtime-dist`. The workflow publishes the same
@@ -316,8 +324,9 @@ IDs, sizes, and API digests; it downloads through artifact-ID endpoints, rejects
 unexpected or expired artifacts, and has no PyPI credential or upload step. Binary
 recovery builds unsigned binaries when all platform signing credentials are absent,
 signs when the complete set is present, and rejects partial configuration. Recovery
-of 1.0.1 verifies its pinned source SHA and skips PyPI recovery. Native recovery reuses
-the regular S3/CDN/Homebrew helpers after GitHub asset verification. Its draft release
+of 1.0.1 verifies its pinned source SHA and skips PyPI recovery. Native recovery
+uses only GitHub release assets after verifying the immutable source and asset
+digests; it does not invoke the retired S3/CDN/Homebrew handoffs. Its draft release
 path hashes all three assets first, resumes an
 existing draft by uploading only missing exact assets, rejects published releases,
 conflicting digests, and extraneous names, never clobbers, and publishes only after
