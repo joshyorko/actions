@@ -9,10 +9,10 @@
     "accepted": 0,
     "verified_review_ready": 0,
     "unfinished": 54,
-    "blocked": 1,
-    "in_progress": 4,
     "not_started": 37,
-    "implemented_unverified": 12
+    "in_progress": 4,
+    "implemented_unverified": 11,
+    "blocked": 2
   },
   "evidence_states": [
     "PASS",
@@ -211,7 +211,7 @@
         "Historical hosted failure and product symptom attribution remains distinct"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only."
+      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN."
     },
     {
       "issue": 211,
@@ -449,7 +449,7 @@
         "Historical hosted failure and product symptom attribution remains distinct"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only."
+      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN."
     },
     {
       "issue": 208,
@@ -540,7 +540,9 @@
       },
       "independent_review_status": "NOT_RUN",
       "blockers": [
-        "Required acceptance has not been independently established."
+        "Required acceptance has not been independently established.",
+        "SeparatePR216packageWorkItems503 is observed product triage; PR218packaged head not assembled/tested, so no candidate attribution.",
+        "SeparatePR216packageWorkItems503 is observed product triage; PR218packaged head not assembled/tested, so no candidate attribution."
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY"
     },
@@ -691,8 +693,8 @@
         "merged_foundation_pr": null
       },
       "proof": {
-        "source": "NOT_RUN",
-        "wheel": "NOT_RUN",
+        "source": "FAIL",
+        "wheel": "PASS",
         "native": "NOT_RUN",
         "packaged_browser": "NOT_RUN",
         "independent_review": "NOT_RUN"
@@ -701,7 +703,7 @@
       "dependency_status": "initial sequencing; validate against full contract before each slice",
       "related_references": [],
       "criticality": "P1",
-      "next_bounded_action": "Repair Core API dependency floor and exact installed-wheel pairing before Runtime imports new exports.",
+      "next_bounded_action": "Repair or attribute HTTP helper no-proxy routing with a real local/proxy regression; complete Core/RCC gates, then verify hosted wheel pairing without publication.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -725,11 +727,15 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "NOT_RUN",
+      "independent_review_status": "PASS for bounded repair deltas throughb4468e4f; full issue unaccepted.",
       "blockers": [
-        "Published Core1.0.1 lacks new public APIs/server_integration; Runtime^1.0.0 permits incompatible wheel. Must verify candidate Core-before-Runtime pair and floor; publication not authorized."
+        "Complete Core/RCC suite has19localdummy server failures includingHTTP403 despite persisted localno-proxy entries.",
+        "BroaderDevutils lint/format failures retained.",
+        "Latesthosted and crossplatform installed/native acceptance remains unproved.",
+        "Core1.0.2 must precede Runtime publication, which is not authorized."
       ],
-      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY"
+      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
+      "proof_detail": "Public/scope14PASS; final88dc installed-wheel30PASS; Core lint/types/docs pass. FullRCC Core19FAIL271PASS; local helper proxy routing requires root-cause repair. Platform/hosted acceptance separate."
     },
     {
       "issue": 194,
@@ -739,7 +745,7 @@
       "owner": "integration owner; no delegated implementation writer",
       "owning_pr": 217,
       "wave": "G",
-      "state": "IMPLEMENTED_UNVERIFIED",
+      "state": "BLOCKED",
       "acceptance_contract": "## Finding\n\nThe actions package has dedicated tests for collection, lifecycle, requests, and responses, but the source inventory shows no test references for actions/src/actions/_commands.py or actions/src/actions/_variables_scope.py. These are central control/state paths: command dispatch determines which user operation runs, while variable scope affects action parameter resolution and nested execution state. Invalid commands, malformed arguments, missing variables, cleanup, and handler failures can regress without detection.\n\n## Recommendation\n\nAdd focused unit tests for command routing and invalid-input/handler-error behavior. Add variable-scope tests covering creation, nested lookup, mutation, cleanup, and missing-variable behavior. Run these in the existing package test suite and publish coverage output in CI so regressions are visible.\n\n## Priority\n- Impact: high\n- Effort: medium\n\n---\n*Filed by quality agent (hold-gated mode)*\n---\n\ud83d\udc1d **Hive Agent**: `quality` | **Instance:** `hive-loud-hen` | **SHA:** `f6a3a921`\n\n\u2014 hive: agent=quality backend=codex model=gpt-5.6-luna codex=0.146.0",
       "acceptance_criteria": [],
       "acceptance_authority": "Full issue body and comments retained; extracted bullets are an index, not a waiver.",
@@ -764,8 +770,8 @@
         "merged_foundation_pr": null
       },
       "proof": {
-        "source": "NOT_RUN",
-        "wheel": "NOT_RUN",
+        "source": "FAIL",
+        "wheel": "PASS",
         "native": "NOT_RUN",
         "packaged_browser": "NOT_RUN",
         "independent_review": "NOT_RUN"
@@ -774,7 +780,7 @@
       "dependency_status": "initial sequencing; validate against full contract before each slice",
       "related_references": [],
       "criticality": "P1",
-      "next_bounded_action": "Add active lookup/mutation regressions and coverage receipts to PR217 scope tests.",
+      "next_bounded_action": "Repair or attribute HTTP helper no-proxy routing with a real local/proxy regression; complete Core/RCC gates, then verify hosted wheel pairing without publication.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -798,11 +804,15 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "NOT_RUN",
+      "independent_review_status": "PASS for bounded repair deltas throughb4468e4f; full issue unaccepted.",
       "blockers": [
-        "Required acceptance has not been independently established."
+        "Complete Core/RCC suite has19localdummy server failures includingHTTP403 despite persisted localno-proxy entries.",
+        "BroaderDevutils lint/format failures retained.",
+        "Latesthosted and crossplatform installed/native acceptance remains unproved.",
+        "Core1.0.2 must precede Runtime publication, which is not authorized."
       ],
-      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY"
+      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
+      "proof_detail": "Public/scope14PASS; final88dc installed-wheel30PASS; Core lint/types/docs pass. FullRCC Core19FAIL271PASS; local helper proxy routing requires root-cause repair. Platform/hosted acceptance separate."
     },
     {
       "issue": 162,
@@ -1064,7 +1074,7 @@
         "Historical hosted failure and product symptom attribution remains distinct"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only."
+      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN."
     },
     {
       "issue": 152,
@@ -10795,48 +10805,38 @@
   "checkpoint_prs": [
     {
       "number": 215,
-      "head": "convergence/actions-full-graph-20261008",
       "head_sha": "d07f79b355f976f97948720474fd050d0a32ea16",
-      "base": "community",
-      "base_sha": "7c98236069171f57031218f938963238986293bd",
       "draft": true,
-      "state": "open"
+      "state": "open",
+      "url": "https://github.com/joshyorko/actions/pull/215"
     },
     {
       "number": 216,
-      "head": "review/runtime-checkpoint-20261008",
-      "head_sha": "0a811f0bf981df72911c97fd59743465b19a3fff",
-      "base": "community",
-      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "head_sha": "d26fa423080cec22522402f2193b17a5f32b336a",
       "draft": true,
-      "state": "open"
+      "state": "open",
+      "url": "https://github.com/joshyorko/actions/pull/216"
     },
     {
       "number": 217,
-      "head": "review/core-checkpoint-20261008",
-      "head_sha": "ec9b3d29cd02212486409f5d77808f88a96c6186",
-      "base": "community",
-      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "head_sha": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
       "draft": true,
-      "state": "open"
+      "state": "open",
+      "url": "https://github.com/joshyorko/actions/pull/217"
     },
     {
       "number": 218,
-      "head": "review/workitems-checkpoint-20261008",
       "head_sha": "95ddbe88106be594ea9954bdb36909702c5e2869",
-      "base": "community",
-      "base_sha": "7c98236069171f57031218f938963238986293bd",
       "draft": true,
-      "state": "open"
+      "state": "open",
+      "url": "https://github.com/joshyorko/actions/pull/218"
     },
     {
       "number": 219,
-      "head": "review/design-checkpoints-20261008",
       "head_sha": "ee612f467aa3bf379ccccf238ac985fa2846afde",
-      "base": "community",
-      "base_sha": "7c98236069171f57031218f938963238986293bd",
       "draft": true,
-      "state": "open"
+      "state": "open",
+      "url": "https://github.com/joshyorko/actions/pull/219"
     }
   ],
   "limits": {
@@ -11073,6 +11073,456 @@
         "base_sha": "784bec577cbd42f8205deeca65393525fd2a6dc7",
         "working_tree_delta": "Uncommitted fixture, inventory and summary type-import repairs subsequently committed in0a811f0b; union annotation added after these runs."
       }
+    },
+    {
+      "file": "core-doctor.log",
+      "status": "PASS",
+      "detail": "PinnedRCC18.19.3 Doctor",
+      "sha256": "1328acaf95435970c9c49fd90e0b3f7e271a723bdece312f8f82faf9057d2d71",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29 initialCorecheckpoint",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-bootstrap.log",
+      "status": "PASS",
+      "detail": "Allpackage Poetry environments from initial locks",
+      "sha256": "555be71a2746624b03e6ffe92a351bfe44acad94bc326a2a60035d35b5d5e5b2",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29 initialCorecheckpoint",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-toolkit-test.log",
+      "status": "PASS",
+      "detail": "RCCdeclaredToolkitTest",
+      "sha256": "edd3c10b22402a903c0a2ca5ea525b0efc630757f7893a1790468505ccb404bb",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29+scope/export tests",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-import-detector-red.log",
+      "status": "FAIL",
+      "detail": "7privateimportcasesfail",
+      "sha256": "c836ee78d90de83976e3440066293946b3de9c5da0c09a4139c3353ec42616ae",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29+refactored detector and newtests",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-import-review-red.log",
+      "status": "FAIL",
+      "detail": "3additional reviewer importcasesfail",
+      "sha256": "71a887d69c6b8df69d21ad84a8bfe861ee270bbafc3c8d8f6aa93d8f860be6f3",
+      "platform": "Linux",
+      "tested_subject": "08a3addc+regressions",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-lazy-export-red.log",
+      "status": "FAIL",
+      "detail": "ActionContextmissingdir:1FAIL2PASS",
+      "sha256": "df92ce8503abcf8d353459e5d9eaa62e832ea539d69892f85415202c1399606d",
+      "platform": "Linux",
+      "tested_subject": "08a3addc+discoverabilitytest",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-contracts-final.log",
+      "status": "PASS",
+      "detail": "14public/integration/scope tests",
+      "sha256": "2a4ce03093b24de7819b1e7f16b3df48b21316e5edd23039cfcedcb1df408de5",
+      "platform": "Linux",
+      "tested_subject": "88dc0987 working delta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-installed-wheel-final.log",
+      "status": "PASS",
+      "detail": "30wholeinstalledwheelcontracts; publicimports,pipcheck,bothuninstallorders",
+      "sha256": "b49f96da8b39a999fb62d0c66b8ef4f988570c48a15dc4f7e8c7e10b5cead88a",
+      "platform": "Linux",
+      "tested_subject": "88dc09874d0841c1fbd4e5a39219bfa34aca7312",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-lint-final.log",
+      "status": "PASS",
+      "detail": "CoreRuff/format/isort",
+      "sha256": "13112aa526b9b4ac5ff44d17ac039a669e602c879d80affbc629c54525474ed8",
+      "platform": "Linux",
+      "tested_subject": "88dc0987",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-types-final.log",
+      "status": "PASS",
+      "detail": "119Corefiles",
+      "sha256": "ce2421fbd8a22cbebe05b94c620065eb6ccac915ddfa6cfc6b7a7b76361cb040",
+      "platform": "Linux",
+      "tested_subject": "88dc0987",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-suite.log",
+      "status": "FAIL",
+      "detail": "270PASS19FAIL localdummy connectivity",
+      "sha256": "d627c64309ce9da3bfdfbe7e65fa5c217013bdae5e6171d7c09f03cad23af4d0",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29+API/export/scope workingdelta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-suite-local-proxy.log",
+      "status": "FAIL",
+      "detail": "ControlledNO_PROXY also19FAIL270PASS",
+      "sha256": "2da615b65e69674e10ed0960f89a57183a34fe579917bd9970214c4f1a06dc7e",
+      "platform": "Linux",
+      "tested_subject": "08a3addc candidate",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-rcc-test.log",
+      "status": "FAIL",
+      "detail": "RCC Test stops atCore19FAIL271PASS; laterpackages NOT_RUN. Reported descendant alreadydefunct, no live worker remains.",
+      "sha256": "ad05210ef457701cd699bd90a5a34b229521e0e1df68ca072ebfcc69900874d0",
+      "platform": "Linux",
+      "tested_subject": "88dc0987",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doc-normalization-review-red.log",
+      "status": "FAIL",
+      "detail": "3APIsectionpreservation failures",
+      "sha256": "3238b8afc44390b9ef818aa9d31af50b9aedeeea7fbe13f3bb2d4b0d8a6022aa",
+      "platform": "Linux",
+      "tested_subject": "55f31614+regressions",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-devutils-final-head.log",
+      "status": "PASS",
+      "detail": "99completeDevutils tests",
+      "sha256": "ca88d7b5ac294bc526ca8bfe8d1c6f1ddeefa7e54b37d5814f34a1c0a98752b7",
+      "platform": "Linux",
+      "tested_subject": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-docs-rcc-parent-final.log",
+      "status": "PASS",
+      "detail": "AbsoluteRCC parentInvoke usesCorePoetry for docs+normalization",
+      "sha256": "254449274ddb02baf4718e48556ceb9c78cf1f157f14dca4203ceebe2c83866a",
+      "platform": "Linux",
+      "tested_subject": "92e43720+CLI boundary delta committedb4468e4f",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doc-cli-tests.log",
+      "status": "PASS",
+      "detail": "7normalization/candidate tests",
+      "sha256": "de201120bd22ea1f155e1bb8ecc4cf4ffb0ef66a0930ec7fa6ea0bc61b935ce3",
+      "platform": "Linux",
+      "tested_subject": "b4468e4f workingdelta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doc-cli-ruff.log",
+      "status": "PASS",
+      "detail": "Changednormalizationmodule",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "platform": "Linux",
+      "tested_subject": "b4468e4f",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doc-cli-types.log",
+      "status": "PASS",
+      "detail": "Changednormalizationmodule",
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "platform": "Linux",
+      "tested_subject": "b4468e4f",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-devutils-ruff.log",
+      "status": "FAIL",
+      "detail": "Pre-existingunusedSequence import",
+      "sha256": "381325a3495e71bd63d8e1cdc23c4b015fb97cc00f854041a4625a93649e3310",
+      "platform": "Linux",
+      "tested_subject": "92e43720",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-devutils-format-check.log",
+      "status": "FAIL",
+      "detail": "6filesformattingincludingpre-existing invoke_utils formatting",
+      "sha256": "4f1e176121246fcd8b12a93df0993083473c579216ccc240fae3cb47a9c8598a",
+      "platform": "Linux",
+      "tested_subject": "92e43720",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-devutils-final.log",
+      "status": "FAIL",
+      "detail": "StalegeneratedYAML duringlocalmutation:1FAIL98PASS; regenerated andrerun99PASS",
+      "sha256": "8650fe4119138d3bb57f3d7de06673b0dac3e59fda253166a49159046b93dae0",
+      "platform": "Linux",
+      "tested_subject": "55f31614+workingdir/regex delta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-pr-wheel-build.log",
+      "status": "FAIL",
+      "detail": "Poetry -C duplicatepath; fixedpackage workingdirectory",
+      "sha256": "34a5a70ddcd6b397d91db18f42b971733e4c29d019ac4c8c8bf714680ef06a4a",
+      "platform": "Linux",
+      "tested_subject": "55f31614",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-pr-wheel-build-green.log",
+      "status": "PASS",
+      "detail": "CandidateCorewheelbuilt frompackage directory",
+      "sha256": "517405aeec078eebe67c7a75b740711928e4e1227935e6a9ec267cb58d9da020",
+      "platform": "Linux",
+      "tested_subject": "92e43720 workingdelta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-pr-installer-green.log",
+      "status": "PASS",
+      "detail": "CandidateCorewheel identified+installed, SHAprinted",
+      "sha256": "fb9483a8e3d74c6fa2fed0c147d43d51697279f9109f46c2773ef39e08f43eb8",
+      "platform": "Linux",
+      "tested_subject": "92e43720 workingdelta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doctor.log",
+      "status": "PASS",
+      "detail": "PinnedRCC18.19.3 Doctor",
+      "sha256": "1328acaf95435970c9c49fd90e0b3f7e271a723bdece312f8f82faf9057d2d71",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29 initialCorecheckpoint",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-bootstrap.log",
+      "status": "PASS",
+      "detail": "Allpackage Poetry environments from initial locks",
+      "sha256": "555be71a2746624b03e6ffe92a351bfe44acad94bc326a2a60035d35b5d5e5b2",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29 initialCorecheckpoint",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-toolkit-test.log",
+      "status": "PASS",
+      "detail": "RCCdeclaredToolkitTest",
+      "sha256": "edd3c10b22402a903c0a2ca5ea525b0efc630757f7893a1790468505ccb404bb",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29+scope/export tests",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-import-detector-red.log",
+      "status": "FAIL",
+      "detail": "7privateimportcasesfail",
+      "sha256": "c836ee78d90de83976e3440066293946b3de9c5da0c09a4139c3353ec42616ae",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29+refactored detector and newtests",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-import-review-red.log",
+      "status": "FAIL",
+      "detail": "3additional reviewer importcasesfail",
+      "sha256": "71a887d69c6b8df69d21ad84a8bfe861ee270bbafc3c8d8f6aa93d8f860be6f3",
+      "platform": "Linux",
+      "tested_subject": "08a3addc+regressions",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-lazy-export-red.log",
+      "status": "FAIL",
+      "detail": "ActionContextmissingdir:1FAIL2PASS",
+      "sha256": "df92ce8503abcf8d353459e5d9eaa62e832ea539d69892f85415202c1399606d",
+      "platform": "Linux",
+      "tested_subject": "08a3addc+discoverabilitytest",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-contracts-final.log",
+      "status": "PASS",
+      "detail": "14public/integration/scope tests",
+      "sha256": "2a4ce03093b24de7819b1e7f16b3df48b21316e5edd23039cfcedcb1df408de5",
+      "platform": "Linux",
+      "tested_subject": "88dc0987 working delta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-installed-wheel-final.log",
+      "status": "PASS",
+      "detail": "30wholeinstalledwheelcontracts; publicimports,pipcheck,bothuninstallorders",
+      "sha256": "b49f96da8b39a999fb62d0c66b8ef4f988570c48a15dc4f7e8c7e10b5cead88a",
+      "platform": "Linux",
+      "tested_subject": "88dc09874d0841c1fbd4e5a39219bfa34aca7312",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-lint-final.log",
+      "status": "PASS",
+      "detail": "CoreRuff/format/isort",
+      "sha256": "13112aa526b9b4ac5ff44d17ac039a669e602c879d80affbc629c54525474ed8",
+      "platform": "Linux",
+      "tested_subject": "88dc0987",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-types-final.log",
+      "status": "PASS",
+      "detail": "119Corefiles",
+      "sha256": "ce2421fbd8a22cbebe05b94c620065eb6ccac915ddfa6cfc6b7a7b76361cb040",
+      "platform": "Linux",
+      "tested_subject": "88dc0987",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-suite.log",
+      "status": "FAIL",
+      "detail": "270PASS19FAIL localdummy connectivity",
+      "sha256": "d627c64309ce9da3bfdfbe7e65fa5c217013bdae5e6171d7c09f03cad23af4d0",
+      "platform": "Linux",
+      "tested_subject": "ec9b3d29+API/export/scope workingdelta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-suite-local-proxy.log",
+      "status": "FAIL",
+      "detail": "ControlledNO_PROXY also19FAIL270PASS",
+      "sha256": "2da615b65e69674e10ed0960f89a57183a34fe579917bd9970214c4f1a06dc7e",
+      "platform": "Linux",
+      "tested_subject": "08a3addc candidate",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-rcc-test.log",
+      "status": "FAIL",
+      "detail": "RCC Test stops atCore19FAIL271PASS; laterpackages NOT_RUN. Reported descendant alreadydefunct, no live worker remains.",
+      "sha256": "ad05210ef457701cd699bd90a5a34b229521e0e1df68ca072ebfcc69900874d0",
+      "platform": "Linux",
+      "tested_subject": "88dc0987",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doc-normalization-review-red.log",
+      "status": "FAIL",
+      "detail": "3APIsectionpreservation failures",
+      "sha256": "3238b8afc44390b9ef818aa9d31af50b9aedeeea7fbe13f3bb2d4b0d8a6022aa",
+      "platform": "Linux",
+      "tested_subject": "55f31614+regressions",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-devutils-final-head.log",
+      "status": "PASS",
+      "detail": "99completeDevutils tests",
+      "sha256": "ca88d7b5ac294bc526ca8bfe8d1c6f1ddeefa7e54b37d5814f34a1c0a98752b7",
+      "platform": "Linux",
+      "tested_subject": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-docs-rcc-parent-final.log",
+      "status": "PASS",
+      "detail": "AbsoluteRCC parentInvoke usesCorePoetry for docs+normalization",
+      "sha256": "254449274ddb02baf4718e48556ceb9c78cf1f157f14dca4203ceebe2c83866a",
+      "platform": "Linux",
+      "tested_subject": "92e43720+CLI boundary delta committedb4468e4f",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doc-cli-tests.log",
+      "status": "PASS",
+      "detail": "7normalization/candidate tests",
+      "sha256": "de201120bd22ea1f155e1bb8ecc4cf4ffb0ef66a0930ec7fa6ea0bc61b935ce3",
+      "platform": "Linux",
+      "tested_subject": "b4468e4f workingdelta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doc-cli-ruff.log",
+      "status": "PASS",
+      "detail": "Changednormalizationmodule",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "platform": "Linux",
+      "tested_subject": "b4468e4f",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-doc-cli-types.log",
+      "status": "PASS",
+      "detail": "Changednormalizationmodule",
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "platform": "Linux",
+      "tested_subject": "b4468e4f",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-devutils-ruff.log",
+      "status": "FAIL",
+      "detail": "Pre-existingunusedSequence import",
+      "sha256": "381325a3495e71bd63d8e1cdc23c4b015fb97cc00f854041a4625a93649e3310",
+      "platform": "Linux",
+      "tested_subject": "92e43720",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-devutils-format-check.log",
+      "status": "FAIL",
+      "detail": "6filesformattingincludingpre-existing invoke_utils formatting",
+      "sha256": "4f1e176121246fcd8b12a93df0993083473c579216ccc240fae3cb47a9c8598a",
+      "platform": "Linux",
+      "tested_subject": "92e43720",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-devutils-final.log",
+      "status": "FAIL",
+      "detail": "StalegeneratedYAML duringlocalmutation:1FAIL98PASS; regenerated andrerun99PASS",
+      "sha256": "8650fe4119138d3bb57f3d7de06673b0dac3e59fda253166a49159046b93dae0",
+      "platform": "Linux",
+      "tested_subject": "55f31614+workingdir/regex delta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-pr-wheel-build.log",
+      "status": "FAIL",
+      "detail": "Poetry -C duplicatepath; fixedpackage workingdirectory",
+      "sha256": "34a5a70ddcd6b397d91db18f42b971733e4c29d019ac4c8c8bf714680ef06a4a",
+      "platform": "Linux",
+      "tested_subject": "55f31614",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-pr-wheel-build-green.log",
+      "status": "PASS",
+      "detail": "CandidateCorewheelbuilt frompackage directory",
+      "sha256": "517405aeec078eebe67c7a75b740711928e4e1227935e6a9ec267cb58d9da020",
+      "platform": "Linux",
+      "tested_subject": "92e43720 workingdelta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "core-pr-installer-green.log",
+      "status": "PASS",
+      "detail": "CandidateCorewheel identified+installed, SHAprinted",
+      "sha256": "fb9483a8e3d74c6fa2fed0c147d43d51697279f9109f46c2773ef39e08f43eb8",
+      "platform": "Linux",
+      "tested_subject": "92e43720 workingdelta",
+      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
     }
   ],
   "independent_review": {
@@ -11153,5 +11603,187 @@
     "head": "b0b92f5b862ac2ebb684c2a883a096edc50ca8ea",
     "status": "PASS with two receipt attribution findings repaired in successor",
     "contracts": "All54bodies/comments match live readback exactly;54unique IDs and accounting checked;17receipt hashes match."
+  },
+  "closed_contract_records": [
+    {
+      "repository": "joshyorko/actions",
+      "url": "https://github.com/joshyorko/actions/issues/137",
+      "title": "Define end-to-end provenance, audit, and OpenTelemetry across capability runtimes",
+      "issue_number": 137,
+      "body": "Parent: #82\nRelated: #83, #85, #86, #87, #88, #90, #129, #130, #131, #132, #133, #135, #136, #138, #139, #143\n\n## Outcome\n\nDefine one coherent evidence/observability contract linking protocol requests, shared admission, Deployment resolution, Package/capability/Runtime Plan identity, adapter preparation, Runs, Attempts, workers/placements, Work Items, provider operations, outputs, and human review across collapsed and distributed topologies.\n\n#88 established trusted gateway MCP method/name metadata. Extend correlation beyond the request boundary so subsystems and Runtime Adapters do not invent incompatible IDs, spans, receipts, logs, audit events, or retention rules.\n\nThis is capability/execution observability, not general agent/LLM tracing.\n\n## Required operator questions\n\nEvidence must answer:\n\n- who invoked which capability and under what authorization;\n- which Workspace/Deployment/Package/capability revision was selected;\n- which Runtime Plan/`runtime_kind` and adapter features/version were pinned;\n- which shared admission mode/generation/outcome allowed or shadowed execution;\n- which binding/policy/Worker Profile/placement applied;\n- which worker/Attempt/process/container/session executed;\n- how package source and adapter runtime content were obtained/verified;\n- for RCC, whether Environment Artifact came from local warm state, provider, build, or `cache serve`;\n- for uv/Python/Robot Framework, the corresponding namespaced preparation identity/phases;\n- what effects/providers/Work Items/artifacts/interactions occurred;\n- why the Run queued, retried, cancelled, failed, became ambiguous, or required review;\n- what changed across update/rollback/adapter promotion.\n\n## Canonical correlation chain\n\n```text\nWorkspace\n  Deployment / Deployment Revision\n    Package / Package Revision\n      Capability\n        Runtime Plan / adapter contract\n          Admission snapshot / proof fingerprint\n            Request / idempotency key\n              Run\n                Attempt / owner / epoch\n                  Worker + placement\n                    adapter preparation / execution receipt\n                      provider operations / effects\n                        artifacts / results\n                          Work Item / workflow / interaction lineage\n```\n\nEach identity has owner, scope, sensitivity, cardinality, retention, and serialization/version rules.\n\nAdapter-specific runtime identities are namespaced under the Runtime Plan/Attempt evidence:\n\n- RCC Environment Specification/Artifact/provider/materialization/lease;\n- uv project/lock/Python/prepared-runtime identity;\n- Python interpreter/venv policy/validation;\n- Robot Framework suite/runner/environment evidence.\n\nDo not use local PID/path, MCP session, provider URL, mutable tag, container/cloud task ID, or cache-service session as durable correlation identity.\n\n## Admission and exact-subject proof evidence\n\nRecord the #143/#139 canonical AdmissionSnapshot used by each Run:\n\n- admission schema/version;\n- exact-subject fingerprint;\n- Package/capability/Runtime Plan/Deployment/policy/binding generations;\n- `off`, `shadow`, or `enforce` mode and boundary enrollment;\n- canonical outcome and reason codes;\n- unknown/partial evidence state;\n- static requirements versus dynamic observations;\n- revalidation result at Run creation;\n- selective invalidation/reuse provenance;\n- adapter promotion/conformance receipt where required.\n\nOne pass/Run captures one mode/generation. Do not infer admission from later mutable global state or duplicate client checks.\n\n## OpenTelemetry conventions\n\nDefine stable semantic conventions for:\n\n- gateway request/MCP method/name/client;\n- Deployment/capability/Runtime Plan resolution;\n- shared admission computation/revalidation;\n- package fetch/verify/compile/import;\n- adapter descriptor/feature negotiation;\n- adapter preparation phases;\n- Run queue/claim/Attempt lifecycle;\n- worker selection/decline/backpressure/drain;\n- process/container/session spawn/start/cancel/finish/reap;\n- provider access by typed reference/operation without credentials;\n- output artifact/result publication;\n- Work Item claim/transition/review;\n- workflow parent/node/child Run links;\n- interaction/approval waits/responses;\n- retry/reconciliation/lease loss/fencing rejection/ambiguous effect;\n- update/rollback/adapter promotion/revocation/GC decisions.\n\n### RCC adapter phases\n\nNamespaced spans/events may include:\n\n- Environment Specification resolve;\n- local/provider/build choice;\n- `env publish`/acquire;\n- verify/materialize;\n- process-owned lease;\n- execution handle/`env exec`;\n- release;\n- `cache serve` provider request class.\n\nDo not report `cache serve` as worker scheduling or Run execution authority.\n\n### Other adapters\n\nUse common phase categories plus namespaced uv/Python/Robot Framework fields. Do not manufacture RCC spans/identities.\n\nSpecify parent/link behavior across queues/processes, parent-child Runs, Work Item fan-out/fan-in, and retry Attempts.\n\nNever place unbounded inputs/outputs/logs/source/tables/prompts/secrets in span attributes.\n\n## Metrics and cardinality\n\nDefine low-cardinality metrics for:\n\n- request/admission/Run/Attempt outcomes/durations;\n- queue and runtime-preparation delay;\n- claim retries/lease loss/fencing rejection;\n- worker capacity/backpressure/drain;\n- adapter availability/auth/incompatibility/decline;\n- preparation cache-hit/acquire/build/warm classes and phase timing;\n- package/runtime/output provider latency/errors/bytes;\n- process/container cancellation/orphan cleanup;\n- output sizes/retention/GC;\n- Work Item states/retries/review age;\n- catalog/Deployment/runtime-policy update outcomes;\n- adapter shadow/enforce promotion results.\n\nRun IDs, digests, exact fingerprints, local paths, provider references, and high-cardinality capability names generally belong in trace/log/audit receipts, not metric labels. Define safe bucketing.\n\n## Durable audit log\n\nAudit records are append-oriented durable decisions, not exported spans.\n\nInclude consequential events such as:\n\n- Workspace/provider/binding/adapter/Worker Profile changes;\n- adapter install/enable/disable/promote/revoke and conformance receipt;\n- Package/Runtime Plan/runtime-artifact publication/trust/revocation;\n- Deployment create/promote/update/rollback/retire;\n- admission mode/enrollment/policy changes;\n- authorization/policy decisions where required;\n- Run create/cancel/restart-as-new/manual resolution;\n- explicit runtime override/selection;\n- worker claim/decline/owner loss/ambiguous effect;\n- consequential effect receipt;\n- Work Item manual edit/approve/reject/retry/complete;\n- artifact/result access/delete/hold;\n- provider credential/reference administration without values.\n\nRetain actor, auth source, exact object generations/fingerprints, before/after references where safe, time/source, correlation, and outcome.\n\nTelemetry exporter failure cannot corrupt execution authority. Mandatory audit persistence failure policy is explicit.\n\n## Execution evidence receipt\n\nProduce one compact durable receipt for terminal Run/Attempt including:\n\n- Run/Attempt IDs and epoch;\n- Workspace/Deployment Revision;\n- Package Revision/capability/schema;\n- selected Runtime Plan/`runtime_kind` and adapter contract/version/features;\n- admission fingerprint/mode/generation/outcome;\n- namespaced adapter runtime identity and trust decision;\n- binding/policy/Worker Profile references;\n- worker/placement/process execution receipt;\n- package/runtime preparation/cache/provider phases;\n- timing/outcome/cancellation/retry/decline/ambiguous reason;\n- effect/idempotency receipts;\n- result/artifact/Work Item/workflow/interaction references;\n- no-fallback assertion/result;\n- redaction/truncation indicators.\n\nFor RCC include Environment Artifact/provider/materialization evidence. For other adapters include their own typed runtime evidence.\n\nThe receipt is evidence, not automatic permission to replay effects or switch adapters.\n\n## Logs and events\n\nDefine:\n\n- structured Runtime/worker/adapter logs with trace/Run/Attempt correlation;\n- stdout/stderr/event stream identity/order/cursors;\n- best-effort live versus durable log artifacts;\n- secret redaction registration before adapter/user output;\n- per-Run/package/adapter size/rate limits and truncation markers;\n- binary/non-UTF-8 handling;\n- multiline/log-injection protection;\n- retention/access;\n- stale worker fencing for authoritative publication;\n- local developer readability;\n- adapter/provider diagnostic sanitization;\n- no secret argv/env/provider URL leakage.\n\n## Workspace/privacy boundaries\n\n- Workspace-scoped telemetry/export without mandatory multi-tenancy;\n- reject cross-Workspace trace/audit/artifact/provider access;\n- deny-by-default secret/provider values, auth headers/cookies, OAuth tokens, data rows, private source, and local paths;\n- define user/actor pseudonymization/export policy;\n- debug mode cannot silently weaken redaction;\n- exporter scope/filter changes audited;\n- caller baggage is not authorization or durable identity;\n- package code cannot forge trusted Runtime Plan/admission/worker fields;\n- adapter-specific telemetry cannot bypass common privacy policy.\n\n## Local and distributed modes\n\nCollapsed local mode emits the same semantic IDs/events even when one process owns gateway, coordinator, worker, adapter, and providers. It may use local JSON/log/SQLite exporters.\n\nDistributed mode propagates versioned context independently of MCP sessions and tolerates delayed/out-of-order telemetry while database/provider Run state remains authoritative.\n\nEquivalent logical execution should produce equivalent correlation/receipt shape across local process, container, and independent-worker placements, with placement-specific namespaced evidence.\n\n## Diagnostics/support bundles\n\nExpose machine-readable sanitized support export containing:\n\n- Runtime/worker/adapter versions/features/provenance;\n- Package/capability/Runtime Plan/admission identities;\n- configuration/binding/provider references without credentials;\n- schema/migration versions;\n- worker/placement readiness/drain;\n- package/runtime cache/provider health;\n- recent correlated failures/evidence/logs under authorization;\n- disk/GC state;\n- exact IDs/digests/fingerprints needed to reproduce;\n- redaction manifest.\n\nSupport bundles exclude secrets/private bulk content and resist archive/path attacks.\n\n## Acceptance\n\n1. Runtime A accepts, Worker C executes through RCC, Runtime B serves result/cancel, and one trace/evidence chain connects all roles.\n2. The same chain works for one non-RCC adapter without generic RCC fields.\n3. Attempt retry links to one Run while preserving selected Runtime Plan and separate Attempt evidence.\n4. RCC local/provider/cold/warm paths emit correct identities without local paths; `cache serve` remains provider evidence only.\n5. shared admission off/shadow/enforce and exact-subject fingerprints are visible and reproducible.\n6. adapter/worker decline, no fallback, cancellation, owner loss, stale rejection, and ambiguous outcome are distinguishable.\n7. Work Item/workflow fan-out/fan-in/review preserve lineage.\n8. cross-Workspace access/export and forged correlation rejected.\n9. redaction negative tests cover raw/encoded/multiline/child output/argv/provider diagnostics.\n10. exporter failure does not corrupt Run state; mandatory audit policy explicit.\n11. metrics remain bounded-cardinality.\n12. collapsed/split and multiple placements use the same semantic conventions.\n13. adapter promotion/revocation has durable auditable evidence.\n\n## Non-goals\n\n- Required agent prompt/token/LLM observability.\n- One mandatory telemetry backend.\n- Treating traces/health/cache service as authoritative Run state.\n- Recording complete private inputs/outputs.\n- Building a SIEM.\n- Replacing package/runtime SBOM/provenance/provider audit.\n- Making RCC fields mandatory for all adapters.",
+      "state": "closed",
+      "user": {
+        "login": "joshyorko",
+        "name": "joshyorko",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54248591?v=4",
+        "id": 54248591
+      },
+      "assignees": null,
+      "labels": [
+        {
+          "name": "hive-ready",
+          "color": "0E8A16",
+          "description": "Operator-approved for Hive agent execution"
+        },
+        {
+          "name": "hive-managed",
+          "color": "1D76DB",
+          "description": "Enrolled in the Hive-managed dependency-gated factory"
+        }
+      ],
+      "milestone": null,
+      "state_reason": "completed",
+      "comments": 0,
+      "created_at": "2026-08-18T23:16:16Z",
+      "updated_at": "2026-08-22T15:27:18Z",
+      "closed_at": "2026-08-22T15:27:18Z",
+      "display_url": "https://github.com/joshyorko/actions/issues/137",
+      "display_title": "Define end-to-end provenance, audit, and OpenTelemetry across capability runtimes"
+    },
+    {
+      "repository": "joshyorko/actions",
+      "url": "https://github.com/joshyorko/actions/issues/154",
+      "title": "[strategist] Align public quickstart and package identity with the community release surface",
+      "issue_number": 154,
+      "body": "## Strategic Finding\\n\\n**Type**: adoption-blocker\\n**Horizon**: near-term\\n\\nThe public README presents multiple package identities and paths: PyPI installation uses \\, badges use \\ and \\, and the project description mixes Action Server, Actions Runtime, and framework terminology. A new contributor or evaluator cannot confidently determine the supported install target, component boundaries, or canonical first-run path.\\n\\n## Rationale\\n\\nThe repository is currently investing in a large multi-runtime architecture, so a clear, verifiable entry point is essential for converting interest into first successful use. Ambiguous package naming and inconsistent terminology increase setup abandonment and make ecosystem references harder to form.\\n\\n## Proposed Next Step\\n\\nChoose and document the canonical community distribution/install path, reconcile README badges and examples with published package names, and add one smoke-tested quickstart that confirms the advertised command and MCP endpoint. Treat package naming aliases as explicit compatibility notes rather than parallel primary identities.\\n\\n---\\n*Filed by strategist agent (ACMM L5 \u2014 hold-gated mode)*\n---\n\ud83d\udc1d **Hive Agent**: `strategist` | **Instance:** `hive-loud-hen` | **SHA:** `unknown`\n\n\u2014 hive: agent=strategist backend=codex model=gpt-5.6-luna codex=0.146.0",
+      "state": "closed",
+      "user": {
+        "login": "josh-actions-rcc-hive[bot]",
+        "name": "josh-actions-rcc-hive[bot]",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54248591?v=4",
+        "id": 319619423
+      },
+      "assignees": null,
+      "labels": [
+        {
+          "name": "roadmap",
+          "color": "8250df",
+          "description": "Approved by a Hive merger/owner for auto-merge on green CI"
+        },
+        {
+          "name": "agent/strategist",
+          "color": "8250df",
+          "description": "Approved by a Hive merger/owner for auto-merge on green CI"
+        }
+      ],
+      "milestone": null,
+      "state_reason": "completed",
+      "comments": 1,
+      "created_at": "2026-08-22T14:43:07Z",
+      "updated_at": "2026-09-12T04:43:39Z",
+      "closed_at": "2026-09-12T04:43:39Z",
+      "display_url": "https://github.com/joshyorko/actions/issues/154",
+      "display_title": "[strategist] Align public quickstart and package identity with the community release surface"
+    },
+    {
+      "repository": "joshyorko/homebrew-tools",
+      "url": "https://github.com/joshyorko/homebrew-tools/issues/103",
+      "title": "Migrate Action Server tap pipeline to Actions Runtime 1.0.1 assets and release dispatch",
+      "issue_number": 103,
+      "body": "## Problem\n\nThe Actions Runtime 1.0.1 standalone binaries are published, but this tap still discovers and packages the legacy Action Server release line. Running the current Action Server dispatch unchanged will not select the new Runtime assets.\n\nUpstream release: https://github.com/joshyorko/actions/releases/tag/actions-runtime-1.0.1\nImmutable source: `0accc8f8cd1590957dec63d94e091aa945653614`.\nActions execution ledger: https://github.com/joshyorko/actions/issues/101\n\n## Verified change points\n\n- `dagger/tap-pipeline/src/library.ts`, `action-server` entry (around lines 402\u2013415): `autoUpdate.stripPrefix` and `upstream.tagPrefix` still use `action-server-v`; `assetPrefix` is `action-server-`.\n- `dagger/tap-pipeline/src/index.ts`, `buildActionServerArtifacts()` (around line 2397): selects only `action-server-v*`, then looks for `action-server-linux64` and `action-server-macosarm64`.\n- Same file, `actionServerReleaseMetadata()`, `expectedTapReleaseTag()`, `renderActionServerCaskWithUrls()`, and the `releaseBundle()` Action Server case: review release identity, metadata, mirrored asset names, and rendered cask URLs together.\n- `Casks/action-server.rb:2` remains version 1.2.6, downloading mirrored legacy assets. The installed executable can remain named `action-server`; the new upstream distribution/tag name does not require renaming the CLI.\n- `.github/workflows/tap-manual.yml`: existing dispatch is `action=release`, `package_id=action-server`. `.github/workflows/tap-auto-update.yml`: existing dispatch is `slot_id=action-server-daily`. These can remain if the package ID is preserved. There is no `publish.yml` here and no repository_dispatch receiver in those workflows.\n\n## Runtime 1.0.1 asset mapping\n\n| Platform | Immutable download | SHA-256 |\n| --- | --- | --- |\n| Linux x86_64 | https://github.com/joshyorko/actions/releases/download/actions-runtime-1.0.1/actions-runtime-1.0.1-linux64 | `191f40cfebcadbd53bf7b14988098b983b99b4efc1aa8d8ac9e8ada6ad37ab3b` |\n| macOS Apple Silicon | https://github.com/joshyorko/actions/releases/download/actions-runtime-1.0.1/actions-runtime-1.0.1-macos-arm64 | `7e9ea6960107d6f6da6dadd7fd12a2c63f9c065d2a9f296aba765b34d24c47d8` |\n\nWindows x64 is also published as `actions-runtime-1.0.1-windows64.exe`, SHA-256 `ce09cebc3f6f1f7ae3537e5b000092a8d54baedafbadd9d349b12aa53117a307`; this is contextual, not a Homebrew platform requirement. There is no macOS Intel asset for this release.\n\nThese binaries are unsigned; the release notes explicitly identify them as unsigned. The actual asset filenames do NOT contain an `-unsigned` suffix. Do not require paid Apple/Windows signing credentials or claim notarization.\n\n## Requested implementation\n\n1. Switch upstream discovery to stable, published `actions-runtime-*` releases and exact version-bearing asset names. Update both registry metadata and the actual resolver; changing only the cask will let automation revert it.\n2. Reuse the tap's existing mirror/bundle/render pipeline and verify downloaded bytes against the upstream hashes. Do not rebuild Runtime, move upstream tags, or republish PyPI.\n3. Explicitly handle migration from installed legacy cask version 1.2.6 to Runtime 1.0.1: ordinary numeric upgrade detection may treat it as a downgrade. Document/test the supported upgrade or reinstall path, and prevent the scheduler from reverting to the legacy line. Preserve the cask/CLI identity unless an intentional migration is chosen.\n4. Validate the existing manual and scheduled dispatches for the updated package. If an immediate upstream-triggered handoff is desired, coordinate the Actions-side caller to target `joshyorko/homebrew-tools` and one of these actual workflows/inputs, using appropriately authorized authentication. The Actions generator currently calls `Sema4AI/homebrew-tools/actions/workflows/publish.yml` with a `version` input; that is a different repository and incompatible contract. Track that caller adjustment as a cross-repository dependency, not a reason to add a generic dispatch framework here.\n5. Do not use Sema4AI's legacy CDN as the new Runtime source: its `/action-server/releases/1.0.1/` already contains an unrelated 2024 release. GitHub URLs above identify the correct assets.\n\n## Acceptance\n\n- Resolver selects Runtime 1.0.1 and both supported Homebrew assets, excluding legacy/draft releases.\n- Artifact hashes match before publishing the tap bundle/cask.\n- Linux and macOS arm64 Homebrew install paths work; installed `action-server version` reports 1.0.1, with startup/MCP smoke as appropriate.\n- Existing legacy installs have a tested/documented migration path despite the lower numeric version.\n- Manual/scheduled updates converge on the new line and are repeatable; unsigned caveats are accurate.\n- Update the tap README/operational guidance with the release naming and actual dispatch contract.\n\nScope of this handoff: issue creation only. No tap code changes, workflow dispatch, or release mutations were performed by the Actions owner; Josh will handle implementation in this repository.\n",
+      "state": "closed",
+      "user": {
+        "login": "joshyorko",
+        "name": "joshyorko",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54248591?v=4",
+        "id": 54248591
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": "completed",
+      "comments": 0,
+      "created_at": "2026-09-07T18:20:58Z",
+      "updated_at": "2026-09-07T19:09:23Z",
+      "closed_at": "2026-09-07T19:09:23Z",
+      "display_url": "https://github.com/joshyorko/homebrew-tools/issues/103",
+      "display_title": "Migrate Action Server tap pipeline to Actions Runtime 1.0.1 assets and release dispatch"
+    },
+    {
+      "repository": "joshyorko/rcc",
+      "url": "https://github.com/joshyorko/rcc/issues/120",
+      "title": "Ship Environment Artifacts v1 in RCC v18.19.0 and freeze the v18 compatibility contract",
+      "issue_number": 120,
+      "body": "Parent: #118\nConsumer: `joshyorko/actions#133`\nActive implementation branch: `feature/environment-artifacts-v1`\n\n## Outcome\n\nFinish, promote, and release the first supported Environment Artifacts v1 product slice as an **additive RCC v18 feature**.\n\nThis issue is the release/handoff lane for work already proven on #118. It is not authorization to add FUSE, OCI execution, a new catalog format, distributed scheduling, or a replacement for legacy `rccremote`.\n\n## Proven checkpoints\n\nPreserve these historical evidence points:\n\n- `5318bc82c60d4a6487ed653d6a9cbb5947c00b04` \u2014 first real current-RCC A\u2192B portable environment proof.\n- `77898c8baf395f786187346de6dcbb4c126511c8` \u2014 first supported `rcc env` / `rcc cache serve` CLI and black-box Robot proof.\n- `816a8f63b55dd87811449d73f2c86c9e5f9c933e` \u2014 two-generation self-host, release topology, binary inventory, and v18 compatibility proof.\n\nThe current branch also contains in-progress provider-profile implementation. Validate the exact pushed head before resuming rather than assuming every partial task is complete.\n\n## Release surface\n\nThe first release should include:\n\n- canonical Environment Manifest v1 and Object Index v1;\n- existing-v12 catalog/Hololib wrapping and portable reconstruction;\n- local content/materialization records and process-owned execution leases;\n- strict filesystem CAS and HTTP provider protocol;\n- `rcc env publish`, `rcc env acquire`, and `rcc env exec`;\n- `rcc cache serve`;\n- named provider profiles in the custom `settings.yaml` layer;\n- `rcc provider add/list/inspect/test/remove`;\n- provider authentication by environment-variable **name**, never persisted secret value;\n- lazy provider resolution so verified warm acquisition does not require configuration, credentials, or network access;\n- enterprise proxy, CA-bundle, TLS, and no-proxy behavior through RCC's existing configured HTTP transport;\n- explicit Linux-first runtime support statement where the A/B lifecycle has not yet been proven on another platform.\n\n## v18 compatibility contract\n\nFor v18.19.0:\n\n- existing `rcc run`, `rcc holotree variables`, v12 catalogs, export/import, bundles, and local Holotree behavior remain supported;\n- no mandatory `ROBOCORP_HOME` migration exists;\n- local operation remains zero-config and provider-free;\n- `rccremote` remains a separate legacy binary and protocol;\n- `/parts`, `/delta`, `RCC_REMOTE_ORIGIN`, `RCC_REMOTE_AUTHORIZATION`, and shared-Holotree legacy behavior remain intact;\n- all eight current release assets remain present:\n  - Linux amd64: `rcc`, `rccremote`;\n  - macOS amd64: `rcc`, `rccremote`;\n  - macOS arm64: `rcc`, `rccremote`;\n  - Windows amd64: `rcc`, `rccremote`.\n\nRemoving/reinterpreting any of those is a future major-version decision, not part of this issue.\n\n## Provider-profile security requirements\n\n- reject URL userinfo, query strings, and fragments at the HTTP provider boundary;\n- permit plain HTTP only for explicit loopback hosts;\n- do not follow redirects while carrying provider credentials;\n- persist only the authorization environment-variable name;\n- never expose the authorization value through JSON, diagnostics, errors, or logs;\n- mutate only the custom settings layer; never flatten effective defaults/environment overrides back into `settings.yaml`;\n- preserve unrelated custom settings;\n- use no-follow, owner-only, locked, fsynced, atomic settings updates;\n- `local` is a reserved zero-config filesystem provider rooted deterministically under the active RCC home;\n- provider reference/location never participates in Artifact identity.\n\n## Release readiness\n\nBefore tagging:\n\n- finish the provider-profile implementation and exact-SHA review;\n- run toolkit-first focused/race/A-B/Robot/self-host/release-candidate gates;\n- confirm the real A/B test cannot pass by skipping;\n- run full Robot and exact binary inventory;\n- prove released N-1 RCC builds/tests the candidate and the candidate builds/tests itself from a fresh home;\n- verify upgrade behavior from an existing v12 home and safe coexistence with old RCC behavior;\n- verify the tag workflow publishes `-rc` tags as actual prereleases before using `v18.19.0-rc.1`;\n- validate Homebrew handoff credentials before public release publication;\n- retain promotion receipts and exact checksums as workflow artifacts;\n- prepare release notes with precise support limits and no unsupported performance claims.\n\n## Actions handoff\n\nPublish a small stable consumer contract for `joshyorko/actions#133`:\n\nActions may persist/reference:\n\n- Environment Specification digest;\n- Environment Artifact digest;\n- platform/builder compatibility requirements;\n- provider reference/profile name under deployment policy.\n\nActions must not persist as durable environment identity:\n\n- `PYTHON_EXE`;\n- `CONDA_PREFIX`;\n- `ROBOCORP_HOME`;\n- a Holotree space/materialization path;\n- a provider URL;\n- an RCC process ID.\n\nProvide a typed or machine-readable Acquire \u2192 Materialize \u2192 Lease \u2192 Execution Handle \u2192 Release example without making RCC import or depend on Actions.\n\n## Acceptance\n\n- [ ] Exact final branch SHA is pushed, reviewed, and clean.\n- [ ] Named profiles work for publish/acquire/exec and do not weaken raw-URL/local behavior.\n- [ ] Warm acquire succeeds with profile missing credentials and provider unavailable, with zero provider calls.\n- [ ] Existing v12/local/rccremote compatibility suites remain green.\n- [ ] Two-generation self-host and real A/B lifecycle remain green.\n- [ ] Eight release binaries are built and inventoried.\n- [ ] Release-candidate workflow is a real gate before publication.\n- [ ] Release notes and compatibility matrix are complete.\n- [ ] `v18.19.0-rc.1` is exercised before stable `v18.19.0`.\n- [ ] #118 receives a final milestone receipt linking the release and deferred child issues.\n\n## Non-goals\n\n- FUSE, packfiles, zstd, reflinks, or other materializer/storage optimization.\n- Object-storage provider implementation.\n- Environment GC/retention completion beyond what is needed for safe v1 operation.\n- Distributed build election.\n- OCI as the canonical identity or execution substrate.\n- Removing or aliasing `rccremote`.\n- Implementing Action Server integration.",
+      "state": "closed",
+      "user": {
+        "login": "joshyorko",
+        "name": "joshyorko",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/54248591?v=4",
+        "id": 54248591
+      },
+      "assignees": null,
+      "labels": [
+        {
+          "name": "hive-managed",
+          "color": "1D76DB",
+          "description": "Enrolled in the Hive-managed dependency-gated factory"
+        }
+      ],
+      "milestone": null,
+      "state_reason": "completed",
+      "comments": 3,
+      "created_at": "2026-08-18T23:08:06Z",
+      "updated_at": "2026-08-24T20:25:52Z",
+      "closed_at": "2026-08-24T20:25:52Z",
+      "display_url": "https://github.com/joshyorko/rcc/issues/120",
+      "display_title": "Ship Environment Artifacts v1 in RCC v18.19.0 and freeze the v18 compatibility contract"
+    }
+  ],
+  "issue_accounting_scope": "54open issue bodies/comments inspected, plus4closed exception/external contract records. PRs are separate.",
+  "new_prs": [
+    {
+      "number": 220,
+      "branch": "review/community-ledger-20261008",
+      "scope": "Complete issue ledger, canonical evidence guide and receipt archive; draft, not product acceptance."
+    }
+  ],
+  "architecture_acceptance": {
+    "collapsed_local_sqlite_rcc": "NOT_RUN",
+    "second_adapter_real_execution": "NOT_RUN",
+    "replicated_postgresql_independent_worker": "NOT_RUN",
+    "cross_replica_control_and_plan_pinning": "NOT_RUN",
+    "packaged_local_empty_history": "PASS",
+    "configured_key_packaged_admin": "FAIL",
+    "packaged_work_items_PR216": "FAIL",
+    "CLI_MCP_Canvas_full_vertical": "NOT_RUN",
+    "Windows_macOS_native_product_matrix": "NOT_RUN"
+  },
+  "independent_reviews": [
+    {
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "scope": "Runtime repair delta and canonical embeddedHTML bytes",
+      "status": "PASS",
+      "issue_acceptance": "NOT_RUN"
+    },
+    {
+      "head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
+      "scope": "Core API/wheelfloor/docs/PR-onlycandidate pairing repairs, all reported delta findings resolved",
+      "status": "PASS",
+      "issue_acceptance": "NOT_RUN"
+    },
+    {
+      "head": "332eb863e97df456f6651ce07547d8ed2eefe9cc",
+      "scope": "54contract/comment exactmatch, provenance/authentication corrections",
+      "status": "PASS"
+    }
+  ],
+  "release_readiness": {
+    "Core_candidate": "actions_core-1.0.2-py3-none-any.whl sha256:9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80; actualPRbuild/installer",
+    "Runtime_frozen_linux": "sha256:21058db9d5b817a76af52869f8fdebda2a505ba710a280293ca86e74aca58f99",
+    "Runtime_Go_linux": "sha256:85ab55e3b525c6f191e2ea8b684c0e36697c7a9ee84052a26d85b3b6a8226add",
+    "native_subject": "0a811f0b+canonicalgeneratedstatic latercommittedd26fa423; Runtimeversion1.0.2/wrappercommunity-local",
+    "wheel_probe_identities": [
+      "actions_core-1.0.2-py3-none-any.whl",
+      "actions_runtime-1.0.2-cp312-cp312-linux_x86_64.whl",
+      "actions_http_helper-1.0.1-py3-none-any.whl",
+      "actions_work_items-0.4.4-py3-none-any.whl"
+    ],
+    "wheel_artifact_retention": "Temporary30-test wheelhouse was removed bypytestretention; no unsupported wheel digest claim. Native and candidateCore outputs remain inworktree.",
+    "publication": "NOT_RUN; no tag/merge/upload/replacement/deployment. Releaseevents do not usePRcandidate override."
   }
 }

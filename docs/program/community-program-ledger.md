@@ -1,8 +1,8 @@
 # Community engineering ledger
 
-Live readback:54open issues,0accepted,0whole issues verified review-ready. Community remains `7c98236069171f57031218f938963238986293bd`. PR216 repair delta pushed at `0a811f0bf981df72911c97fd59743465b19a3fff` and independently reviewed; whole acceptance remains unfinished.
+54 open contracts inspected; 0 accepted, 0 whole issues review-ready, 54 unfinished. Four closed exception/external contract records are retained separately. Original checkpoint PRs preserved; Runtime repaired at `d26fa423` and Core at `b4468e4f`.
 
-Full individual bodies and comments, owners, dependencies, platform gates and PASS/FAIL/BLOCKED/NOT_RUN receipts are retained in [the machine-readable ledger](community-program-ledger.json). Dependencies are engineering sequencing hypotheses checked before each slice; references alone do not establish blocking edges.
+Full bodies/comments, owners, tested subjects, dependencies, platform gates and dispositions: [machine-readable ledger](community-program-ledger.json). [CI readback](community-ci-receipts.json). [Raw local/hosted evidence archive](evidence/community-20261008.zip).
 
 | Issue | Wave | State | PR / foundation | Next bounded action |
 |---|---|---|---|---|
@@ -13,8 +13,8 @@ Full individual bodies and comments, owners, dependencies, platform gates and PA
 | [#209](https://github.com/joshyorko/actions/issues/209) | A | IN_PROGRESS | 216 | Verify hosted assembled test on pushed head; prove real packaged authenticated reconnect and distinguish fixture defect from shipped disconnect. |
 | [#208](https://github.com/joshyorko/actions/issues/208) | A | IMPLEMENTED_UNVERIFIED | 218 | Validate PR218 trusted loader against shadow packages and packaged persistent create/list/detail/transitions. |
 | [#196](https://github.com/joshyorko/actions/issues/196) | A | NOT_STARTED | unassigned | Host RCC provider only after administrative/auth/origin and tunnel lifecycle acceptance. |
-| [#195](https://github.com/joshyorko/actions/issues/195) | G | BLOCKED | 217 | Repair Core API dependency floor and exact installed-wheel pairing before Runtime imports new exports. |
-| [#194](https://github.com/joshyorko/actions/issues/194) | G | IMPLEMENTED_UNVERIFIED | 217 | Add active lookup/mutation regressions and coverage receipts to PR217 scope tests. |
+| [#195](https://github.com/joshyorko/actions/issues/195) | G | BLOCKED | 217 | Repair or attribute HTTP helper no-proxy routing with a real local/proxy regression; complete Core/RCC gates, then verify hosted wheel pairing without publication. |
+| [#194](https://github.com/joshyorko/actions/issues/194) | G | BLOCKED | 217 | Repair or attribute HTTP helper no-proxy routing with a real local/proxy regression; complete Core/RCC gates, then verify hosted wheel pairing without publication. |
 | [#162](https://github.com/joshyorko/actions/issues/162) | G | NOT_STARTED | unassigned | Introduce meaningful measured coverage thresholds on maintained contracts and preserve failed gates. |
 | [#155](https://github.com/joshyorko/actions/issues/155) | G | NOT_STARTED | unassigned | Reconcile public milestone/compatibility roadmap with actual merged, PyPI and native versions. |
 | [#153](https://github.com/joshyorko/actions/issues/153) | A | IN_PROGRESS | 216 / merged 201 | Complete authenticated packaged-browser and protected-route policy matrix without weakening exact origins or no-Origin client authorization. |
@@ -43,7 +43,7 @@ Full individual bodies and comments, owners, dependencies, platform gates and PA
 | [#127](https://github.com/joshyorko/actions/issues/127) | F | NOT_STARTED | unassigned | Build community Canvas template only after renderer/authoring contracts are proven. |
 | [#126](https://github.com/joshyorko/actions/issues/126) | F | NOT_STARTED | 219 | Adversarially accept PR219 stateless MCP v2 design, then implement deterministic embedded showcase. |
 | [#125](https://github.com/joshyorko/actions/issues/125) | G | IMPLEMENTED_UNVERIFIED | unassigned / merged 128 | Audit current generated templates and active product surface against retained cleanup contract. |
-| [#101](https://github.com/joshyorko/actions/issues/101) | governance | IN_PROGRESS | unassigned | Maintain all54 dispositions and exact receipts at every checkpoint; do not infer acceptance from green PRs. |
+| [#101](https://github.com/joshyorko/actions/issues/101) | governance | IN_PROGRESS | 220 | Maintain all54 dispositions and exact receipts at every checkpoint; do not infer acceptance from green PRs. |
 | [#100](https://github.com/joshyorko/actions/issues/100) | F | NOT_STARTED | unassigned | Define minimal Core Canvas authoring API paired with renderer and public export tests. |
 | [#99](https://github.com/joshyorko/actions/issues/99) | F | NOT_STARTED | unassigned | Implement versioned semantic CanvasSpec renderer against explicit trusted component contracts. |
 | [#98](https://github.com/joshyorko/actions/issues/98) | A | IMPLEMENTED_UNVERIFIED | unassigned / merged 115 | Verify separate Runtime/Canvas artifact inventories, deterministic builds and packaged browser. |
@@ -61,20 +61,16 @@ Full individual bodies and comments, owners, dependencies, platform gates and PA
 | [#82](https://github.com/joshyorko/actions/issues/82) | governance | NOT_STARTED | unassigned | Require collapsed, split and second-adapter vertical proof; reconcile closed137 reference without reopening. |
 | [#71](https://github.com/joshyorko/actions/issues/71) | F | NOT_STARTED | unassigned | Deliver native Canvas foundry using shared immutable package/deployment/run semantics. |
 
-## Exceptions and boundaries
+## Boundaries
 
-#149 remains a living advisory record. #137 is closed while #82 retains an unchecked observability reference; preserve that contract in vertical verification without reopening. #154 and homebrew-tools#103 are completed and not duplicated. RCC#120 is a read-only closed external contract; an RCC version/health check is not Actions execution proof.
+#149 remains a living advisory record, open. #137 is closed with a retained roadmap contract; #154 and Homebrew #103 are completed and not duplicated. RCC #120 is a closed, read-only external contract. No issue was closed from a PR/check. Source, wheel, native, browser, distributed and published proof remain distinct.
 
-The five checkpoint PRs are preserved. No community push, merge, tag, publication, release replacement, secret change or Dakota modification occurred. New native/browser validations are recorded separately from source and published distribution proof.
+## Next five dependency-ready actions
 
-## Immediate blockers
+1. #194/#195, PR #217: repair or attribute persisted helper no-proxy routing and complete Core/RCC/hosted gates.
+2. #152/#153/#212, PR #216: authorized browser transport/session and synthetic large-result history/reconnect proof.
+3. #208, PR #218: packaged Work Items persistence/transitions, shadow defenses and error recovery across native platforms.
+4. #210/#211, PR #215: release admission, provenance, no-overwrite adversarial proof and closed Homebrew handoff; no publication.
+5. #129/#126, PR #219: independent scoped foreign-key, ancestry, cyclic migration and stateless MCP v2 design acceptance before implementation.
 
-Configured-key browser admin HTTP/WebSocket authorization is not implemented. Full Python lint formatting and type checks fail; no skips or weakened assertions hide these results. Core1.0.1 does not contain PR217 public APIs; clean candidate wheel pairing and a truthful dependency floor are required before future Core-before-Runtime publication.
-
-## Next five actions
-
-1. PR216/#209: hosted exact-head assembled origin test, then packaged authenticated reconnect proof.
-2. PR216/#212/#152/#153: authorized browser transport/session and bounded synthetic Run history in the packaged browser.
-3. PR217/#194/#195: generated Core docs and installed Core/Runtime wheel dependency boundary.
-4. PR218/#208: packaged Work Items persistence, shadow defense, errors and native platform matrix.
-5. PR215/#210/#211: release admission/provenance adversarial proof and retained native/tap handoff contract; no publication.
+Complete Core/RCC gate FAIL; broader Devutils lint/format FAIL; all architecture verticals NOT_RUN. Runtime’s 23 passing hosted checks do not establish graph convergence. Core 1.0.2 must precede Runtime publication.
