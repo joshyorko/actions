@@ -1265,3 +1265,11 @@ streams, invalid Windows filename characters, and trailing dots/spaces before
 extracting anything, on every OS. Generic casefold/path confinement alone does not
 prove portable destination safety. Keep actual native filesystem, no-follow races,
 and TLS/redirect evidence separate from source and instrumented transport tests.
+
+### Complete frontend tests versus shipping quality checks
+
+`npm run test:quality` checks lint, types, formatting and two intentionally focused
+frontend invariant selections. It does not run the complete Vitest suite. The
+frontend workflow must also run `npm test`; report full-suite counts separately
+from the quality selections and actual packaged browser acceptance. A green
+quality job alone does not establish reconnect, Work Items or sign-in regressions.
