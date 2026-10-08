@@ -118,12 +118,21 @@ jobs:
           --source-sha "${{ github.sha }}"
           --receipt output/native-acceptance.json
 
+      - name: Verify large stored Run history in frozen and Go-wrapper browsers
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run python
+          scripts/verify_native_history.py
+          --source-sha "${{ github.sha }}"
+          --receipt output/native-history.json
+
       - name: Upload native acceptance receipt
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: native-acceptance-${{ matrix.os }}-${{ github.sha }}
-          path: action_server/output/native-acceptance.json
+          path: |
+            action_server/output/native-acceptance.json
+            action_server/output/native-history.json
           if-no-files-found: ignore
           retention-days: 7
       

@@ -1273,3 +1273,26 @@ frontend invariant selections. It does not run the complete Vitest suite. The
 frontend workflow must also run `npm test`; report full-suite counts separately
 from the quality selections and actual packaged browser acceptance. A green
 quality job alone does not establish reconnect, Work Items or sign-in regressions.
+
+### Packaged large-history and mobile-navigation regressions
+
+Run `poetry run python scripts/verify_native_history.py --source-sha <build-commit>
+--receipt output/native-history.json` from `action_server` after building the frozen
+and Go-wrapper artifacts and installing the declared Playwright Chromium browser.
+The harness creates and removes its own SQLite data directory containing 210 synthetic
+4 MiB results (880,803,840 stored bytes); never point this test at user run data.
+It checks the shipped UI's 200-row summary pages, reconnect-triggered pagination
+refresh, absence of legacy aggregate-list requests, and explicit full-detail retrieval.
+The receipt binds each executable hash to the supplied build commit; a frozen
+executable hash alone does not bind its adjacent distribution files. This check
+proves the summary client path, not bounded legacy `/api/runs` responses.
+
+Mobile navigation must close on selecting the current route as well as a different
+route. A pathname-change effect alone misses the current-route case; retain an
+explicit navigation-selection callback and both regression assertions. CI must run
+the complete frontend suite alongside the narrower topology and UI-system gates.
+
+Public compatibility tables must date their live registry observations. Query each
+package's PyPI JSON release metadata and the separate GitHub native release record;
+a roadmap ledger can lag either distribution channel. Unpublished candidate versions
+remain candidates even when source, wheel, or local native checks pass.
