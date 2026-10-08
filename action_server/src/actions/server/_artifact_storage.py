@@ -1,5 +1,6 @@
 import json
 import os
+import stat
 import tempfile
 from pathlib import Path, PurePosixPath
 from typing import Any, Protocol
@@ -36,6 +37,18 @@ class ArtifactStorage(Protocol):
         ...
 
 
+def _is_link_or_reparse_point(path: Path) -> bool:
+    # lstat observes the directory entry even when a junction target is missing.
+    try:
+        info = path.lstat()
+    except FileNotFoundError:
+        return False
+    return stat.S_ISLNK(info.st_mode) or bool(
+        getattr(info, "st_file_attributes", 0)
+        & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+    )
+
+
 class FilesystemArtifactStorage:
     _MANIFEST = ".action-server-run-bindings.json"
 
@@ -43,13 +56,18 @@ class FilesystemArtifactStorage:
         candidate = root.expanduser().absolute()
         if (
             not candidate.is_dir()
-            or candidate.resolve() != candidate
+            or any(
+                _is_link_or_reparse_point(part)
+                for part in (candidate, *candidate.parents)
+            )
             or not os.access(candidate, os.R_OK | os.W_OK | os.X_OK)
         ):
             raise ArtifactStorageConfigurationError(
                 f"Artifact storage root must be an existing non-symlink directory: {root}"
             )
-        self.root = candidate
+        # Windows expands 8.3 path components during resolve(). A spelling change
+        # is not evidence of a link; links/reparse ancestors were rejected above.
+        self.root = candidate.resolve(strict=True)
 
     @staticmethod
     def _canonical_key(value: str, label: str) -> PurePosixPath:
@@ -72,7 +90,7 @@ class FilesystemArtifactStorage:
         current = self.root
         for part in relative.parts:
             current /= part
-            if current.is_symlink():
+            if _is_link_or_reparse_point(current):
                 raise ArtifactStorageConfigurationError(
                     f"{label} contains a symlink: {path}"
                 )

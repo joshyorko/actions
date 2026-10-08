@@ -460,7 +460,9 @@ def verify_case(kind: str, binary: Path, args, receipt: dict) -> None:
     }
     receipt["cases"].append(case)
     with tempfile.TemporaryDirectory(prefix=f"actions-native-{kind}-") as directory:
-        temporary = Path(directory)
+        # Resolve only harness-owned POSIX temp aliases (macOS /var -> /private).
+        # Preserve Windows spelling so native startup exercises 8.3 TEMP aliases.
+        temporary = Path(directory) if os.name == "nt" else Path(directory).resolve()
         project, data = temporary / "project", temporary / "data"
         project.mkdir()
         data.mkdir()
