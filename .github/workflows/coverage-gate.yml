@@ -2,7 +2,7 @@ name: Measured Python coverage gate
 
 on:
   pull_request:
-    branches: [community, integration]
+    branches: [community, integration/community-release-20261008]
   push:
     branches: [community]
 
