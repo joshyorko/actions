@@ -235,7 +235,10 @@ def _orchestrate(record_baseline: bool) -> int:
         "minimum_statement_percent": floor,
         "measured": report,
         "baseline_written": baseline_written,
-        "subprocess_coverage": "Python launched by tests outside pytest-cov's worker management is not measured.",
+        "subprocess_coverage": (
+            "Subprocess coverage depends on pytest-cov activation and inherited environment; "
+            "complete subprocess and installed-wheel coverage is not claimed."
+        ),
     }
     summary_path = output_dir / "coverage-summary.json"
     summary_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")

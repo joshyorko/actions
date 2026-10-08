@@ -82,8 +82,9 @@ uploads per-package coverage JSON and a summary receipt even on failure. When
 running locally, preserve those JSON files to distinguish `BLOCKED` setup from
 test failures. Only an intentional baseline change should use
 `developer/coverage_gate.py --record-baseline`; normal CI never rewrites the
-threshold. Test-launched Python processes outside pytest-cov's managed workers
-are not measured by this gate.
+threshold. Subprocess coverage depends on pytest-cov activation and environment
+inheritance. This gate makes no complete subprocess or installed-wheel coverage
+claim.
 
 ### Frontend shipping gates
 
