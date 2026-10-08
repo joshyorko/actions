@@ -55,6 +55,15 @@ beforeEach(() => {
     if (path.includes("/api/actionPackages")) {
       return new Response(JSON.stringify([]), { status: 200 });
     }
+    if (path.includes("/api/runs/summary")) {
+      return new Response(JSON.stringify([]), { status: 200 });
+    }
+    if (path.startsWith("/api/runs/")) {
+      return new Response(
+        JSON.stringify({ detail: `Unknown run id: ${path.split("/").at(-1)}` }),
+        { status: 404 },
+      );
+    }
     if (path.includes("/api/runs")) {
       return new Response(JSON.stringify([]), { status: 200 });
     }
@@ -189,11 +198,199 @@ describe("Actions Runtime shell", () => {
   it.each([
     ["/actions", /No actions available yet/],
     ["/runs", /No runs recorded yet/],
-    ["/logs/run-1", /was not found in the local cache/],
+    ["/logs/run-1", /Unknown run id: run-1/],
     ["/artifacts/run-1", /could not be found/],
   ])("preserves supported deep link %s", async (path, content) => {
     renderRuntimeAt(path);
 
     await waitFor(() => expect(screen.getByText(content)).toBeInTheDocument());
+  });
+
+  it("loads run inputs and results from the detail endpoint", async () => {
+    const user = userEvent.setup();
+    const detail = {
+      id: "run-detail",
+      status: 2,
+      action_id: "action-1",
+      start_time: "2026-10-08T00:00:00Z",
+      run_time: 1.5,
+      numbered_id: 7,
+      run_type: "action",
+      inputs: '{"value":"input-detail-secret"}',
+      result: '{"value":"result-detail-secret"}',
+      error_message: null,
+      relative_artifacts_dir: "run-detail",
+    };
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const path = String(input);
+      if (path.endsWith("/api/runs/run-detail")) {
+        return new Response(JSON.stringify(detail), { status: 200 });
+      }
+      if (path.includes("/api/runs")) {
+        return new Response(JSON.stringify([]), { status: 200 });
+      }
+      if (path.endsWith("/config")) {
+        return new Response(JSON.stringify(runtimeConfig), { status: 200 });
+      }
+      if (path.includes("/api/actionPackages")) {
+        return new Response(JSON.stringify([]), { status: 200 });
+      }
+      return new Response("Not found", { status: 404 });
+    });
+
+    renderRuntimeAt("/logs/run-detail");
+
+    await waitFor(() => expect(screen.getByText("Run #7")).toBeInTheDocument());
+    await user.click(screen.getByText("Show run inputs and result"));
+    expect(screen.getByText(/input-detail-secret/)).toBeInTheDocument();
+    expect(screen.getByText(/result-detail-secret/)).toBeInTheDocument();
+  });
+
+  it("loads run history from the bounded summary endpoint", async () => {
+    const summary = {
+      id: "run-summary",
+      status: 2,
+      action_id: "action-1",
+      start_time: "2026-10-08T00:00:00Z",
+      run_time: 1.5,
+      numbered_id: 5,
+      run_type: "action",
+    };
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const path = String(input);
+      if (path.includes("/api/runs/summary")) {
+        return new Response(JSON.stringify([summary]), { status: 200 });
+      }
+      if (path.endsWith("/config")) {
+        return new Response(JSON.stringify(runtimeConfig), { status: 200 });
+      }
+      if (path.includes("/api/actionPackages")) {
+        return new Response(JSON.stringify([]), { status: 200 });
+      }
+      return new Response("Not found", { status: 404 });
+    });
+
+    renderRuntimeAt("/runs");
+
+    await waitFor(() => expect(screen.getByText("5")).toBeInTheDocument());
+    expect(
+      fetchMock.mock.calls.some(([input]) =>
+        String(input).includes("/api/runs/summary?limit=200"),
+      ),
+    ).toBe(true);
+  });
+
+  it("loads older history pages without replacing the first page cache", async () => {
+    const user = userEvent.setup();
+    const firstPage = Array.from({ length: 200 }, (_, index) => ({
+      id: `run-${index}`,
+      status: 2,
+      action_id: "action-1",
+      start_time: "2026-10-08T00:00:00Z",
+      run_time: 1.5,
+      numbered_id: 200 - index,
+      run_type: "action",
+    }));
+    const olderRun = {
+      id: "older-run-after-first-page",
+      status: 2,
+      action_id: "action-1",
+      start_time: "2026-10-07T00:00:00Z",
+      run_time: 1.5,
+      numbered_id: 0,
+      run_type: "action",
+    };
+    const requestedPages: Array<{ offset: number; runType: string }> = [];
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const path = String(input);
+      if (path.includes("/api/runs/summary")) {
+        const url = new URL(path, "http://runtime.test");
+        const offset = Number(url.searchParams.get("offset") || 0);
+        const runType = url.searchParams.get("run_type") || "all";
+        requestedPages.push({ offset, runType });
+        return new Response(
+          JSON.stringify(offset === 0 ? firstPage : [olderRun]),
+          { status: 200 },
+        );
+      }
+      if (path.endsWith("/config")) {
+        return new Response(JSON.stringify(runtimeConfig), { status: 200 });
+      }
+      if (path.includes("/api/actionPackages")) {
+        return new Response(JSON.stringify([]), { status: 200 });
+      }
+      return new Response("Not found", { status: 404 });
+    });
+
+    renderRuntimeAt("/runs");
+
+    await waitFor(() =>
+      expect(screen.getByText("run-199")).toBeInTheDocument(),
+    );
+    await user.click(screen.getByRole("button", { name: /load older runs/i }));
+    await waitFor(() =>
+      expect(
+        screen.getByText("older-run-after-first-page"),
+      ).toBeInTheDocument(),
+    );
+    expect(screen.getByText("run-199")).toBeInTheDocument();
+    expect(requestedPages).toEqual([
+      { offset: 0, runType: "all" },
+      { offset: 200, runType: "all" },
+    ]);
+  });
+
+  it("shows a bounded reconnect status when the summary socket is rejected", async () => {
+    class RejectedWebSocket {
+      onopen: (() => void) | null = null;
+      onclose: (() => void) | null = null;
+      onmessage: ((event: MessageEvent) => void) | null = null;
+      onerror: (() => void) | null = null;
+
+      constructor() {
+        queueMicrotask(() => {
+          this.onerror?.();
+          this.onclose?.();
+        });
+      }
+
+      close() {
+        this.onclose?.();
+      }
+
+      send() {}
+    }
+    vi.stubGlobal("WebSocket", RejectedWebSocket);
+    const summary = {
+      id: "run-with-live-status",
+      status: 2,
+      action_id: "action-1",
+      start_time: "2026-10-08T00:00:00Z",
+      run_time: 1,
+      numbered_id: 1,
+      run_type: "action",
+    };
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const path = String(input);
+      if (path.includes("/api/runs/summary")) {
+        return new Response(JSON.stringify([summary]), { status: 200 });
+      }
+      if (path.endsWith("/config")) {
+        return new Response(JSON.stringify(runtimeConfig), { status: 200 });
+      }
+      if (path.includes("/api/actionPackages")) {
+        return new Response(JSON.stringify([]), { status: 200 });
+      }
+      return new Response("Not found", { status: 404 });
+    });
+
+    renderRuntimeAt("/runs");
+
+    await waitFor(() =>
+      expect(
+        screen.getByText(/Live run updates are reconnecting \(attempt 1 of 5\)/),
+      ).toBeInTheDocument(),
+    );
+    expect(screen.queryByText(/undefined/i)).not.toBeInTheDocument();
   });
 });

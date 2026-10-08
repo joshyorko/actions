@@ -29,7 +29,7 @@ import { useActionServerContext } from '@/shared/context/actionServerContext';
 import { useWorkItems, useWorkItemStats, useWorkItemQueues, useCreateWorkItem } from '@/queries/workItems';
 import { Select, SelectItem } from '@/core/components/ui/Select';
 import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
-import { Action, ActionPackage, Run, RunStatus, ServerConfig } from '@/shared/types';
+import { Action, ActionPackage, RunSummary, RunStatus, ServerConfig } from '@/shared/types';
 import { formDataToPayload, propertiesToFormData } from '@/shared/utils/formData';
 import { prettyPrint, downloadAsJson, copyToClipboard } from '@/shared/utils/helpers';
 import { cn } from '@/shared/utils/cn';
@@ -111,7 +111,7 @@ const findPackageForAction = (
   return packages.find((pkg) => pkg.actions.some((action) => action.id === actionId));
 };
 
-const getRunsForAction = (runs: Run[] | undefined, actionId: string | null): Run[] => {
+const getRunsForAction = (runs: RunSummary[] | undefined, actionId: string | null): RunSummary[] => {
   if (!runs || !actionId) {
     return [];
   }

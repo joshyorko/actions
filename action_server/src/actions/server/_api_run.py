@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 run_api_router = APIRouter(prefix="/api/runs")
 
 
-@run_api_router.get("", response_model=List[RunListItemModel])
+@run_api_router.get("", response_model=List[RunDetailModel])
 def list_runs(
     run_type: Optional[str] = fastapi.Query(
         default=None, description="Filter by run type (e.g., 'action', 'robot')"
@@ -28,7 +28,34 @@ def list_runs(
         runs = global_runs_state.get_current_run_state()
         if run_type:
             runs = [r for r in runs if getattr(r, "run_type", "action") == run_type]
-        return [RunListItemModel(**r.__dict__) for r in runs]
+        return [RunDetailModel(**r.__dict__) for r in runs]
+
+
+@run_api_router.get("/summary", response_model=List[RunListItemModel])
+def list_run_summaries(
+    run_type: Optional[str] = fastapi.Query(
+        default=None, description="Filter by run type (e.g., 'action', 'robot')"
+    ),
+    limit: int = fastapi.Query(default=200, ge=1, le=200),
+    offset: int = fastapi.Query(default=0, ge=0),
+):
+    from ._models import RUN_LIST_MAX_ITEMS, RUN_SUMMARY_UNAVAILABLE_MESSAGE
+    from ._runs_state_cache import get_global_runs_state
+
+    global_runs_state = get_global_runs_state()
+    with global_runs_state.semaphore:
+        try:
+            runs = global_runs_state.get_current_run_summaries(
+                offset=offset, limit=min(limit, RUN_LIST_MAX_ITEMS), run_type=run_type
+            )
+            return [RunListItemModel.from_run(run) for run in runs]
+        except (TypeError, ValueError):
+            from fastapi.exceptions import HTTPException
+
+            log.error("Unable to project bounded run summary metadata.")
+            raise HTTPException(
+                status_code=503, detail=RUN_SUMMARY_UNAVAILABLE_MESSAGE
+            ) from None
 
 
 def get_run_by_id(run_id: str) -> Run:

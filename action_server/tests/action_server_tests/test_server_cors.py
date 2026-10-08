@@ -268,6 +268,10 @@ def test_assembled_websocket_rejects_disallowed_origins(websocket_cors_app, orig
 def test_assembled_websocket_allows_effective_port_and_no_origin(websocket_cors_app):
     from fastapi.testclient import TestClient
 
+    assert websocket_cors_app.state.cors_origin_policy.allows(
+        "HTTP://ALLOWED.EXAMPLE:80"
+    )
+
     with TestClient(websocket_cors_app) as client:
         with client.websocket_connect(
             "/api/ws",
@@ -284,6 +288,33 @@ def test_assembled_websocket_allows_effective_port_and_no_origin(websocket_cors_
             assert websocket.receive_json() == {
                 "event": "echo",
                 "data": "non-browser",
+            }
+
+
+def test_assembled_websocket_allows_same_origin_with_empty_cross_origin_allowlist(
+    default_cors_app,
+):
+    from fastapi import Depends
+    from fastapi.testclient import TestClient
+
+    from actions.server._server_websockets import (
+        verify_websocket_origin,
+        websocket_api_router,
+    )
+
+    default_cors_app.include_router(
+        websocket_api_router,
+        dependencies=[Depends(verify_websocket_origin)],
+    )
+
+    with TestClient(default_cors_app) as client:
+        with client.websocket_connect(
+            "/api/ws", headers={"Origin": "http://testserver"}
+        ) as websocket:
+            websocket.send_json({"event": "echo", "data": "same-origin"})
+            assert websocket.receive_json() == {
+                "event": "echo",
+                "data": "same-origin",
             }
 
 

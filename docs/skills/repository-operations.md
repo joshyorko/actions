@@ -235,9 +235,19 @@ advertising wildcard credentialed access. Repeatable `--cors-allow-origin` value
 must be explicit `http`/`https` origins with exact scheme, hostname, and effective
 port; credentials, paths, queries, fragments, `null`, and lookalike origins fail
 closed. CORS preflight admission is independent of API-key authentication, while
-the actual request remains authenticated. The same allowlist protects browser
-WebSocket handshakes; no-`Origin` WebSocket clients retain the existing
-non-browser path.
+the actual request remains authenticated. WebSocket Origin admission also uses
+the actual ASGI socket authority and request scheme or an operator-configured
+server URL; it must never trust the request's `Host` or `X-Forwarded-Host`
+header. When deployed behind a reverse proxy, configure the externally served
+`server_url` or an exact `--cors-allow-origin`; forwarding a host header alone
+does not establish the serving authority. Host matching remains
+case-insensitive with effective-port normalization, and no-`Origin` WebSocket
+clients retain the existing non-browser path. The current helper also treats
+loopback host aliases as equivalent at the same scheme and port; exact-host
+handling for those distinct spellings remains an open #153 boundary review, so
+do not characterize this path as hostname-exact until that decision is resolved.
+Configured API-key verification remains independent and precedes origin
+admission.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
@@ -389,6 +399,17 @@ detail, mutation, HTTP error, cancellation, reconnect, and out-of-order event
 paths. Canvas remains a separate Vite entrypoint and is not a consumer of this
 cache.
 
+The Runtime UI reads run history from `/api/runs/summary`, capped at 200 rows
+per page and ordered by descending `numbered_id`; its SQL projection selects only
+summary columns before materializing rows. Run History requests later pages by
+offset when the user asks to load older runs, and artifact metadata/details are
+loaded by run ID. Keep legacy `/api/runs`, `/api/runs/{run_id}`, and `/api/ws`
+full-detail payloads compatible; the Runtime UI uses `/api/ws/summary` instead.
+Invalid summary metadata must return a safe HTTP 503 or the summary WebSocket's
+`runs_unavailable` event, never a successful empty history page. The focused
+contracts are covered by `test_run_summary_state_selects_only_summary_columns`,
+the corrupt-metadata API test, and summary/legacy WebSocket routing tests.
+
 The Runtime shell overview reads the provider-owned config/actions/runs queries;
 it does not create a second cache or invent metrics. The current backend `/config`
 payload has no capability metadata, so the shell preserves the existing optional
@@ -407,10 +428,14 @@ canonical queries; never apply event payloads directly to cached data. The run
 cancellation endpoint returns the literal union `"cancelled" | "not-running"`.
 Legacy artifact query parameters use repeated keys for readonly string arrays
 (for example, `artifact_names=a&artifact_names=b`). Provider-owned QueryClients
-are created per mounted Runtime provider and cleared during teardown; WebSocket
-reconnect timers are cancelled, single-flight per active connection generation
-even if duplicate close callbacks arrive, and guarded against stale connection
-generations.
+are created per mounted Runtime provider and cleared during teardown. Runtime
+WebSocket retries are capped at five attempts per outage with exponential delays
+starting at one second and capped at sixteen seconds; a successful connection
+resets the counter. Disconnect/unmount cancels pending retry timers, duplicate
+close callbacks do not schedule concurrent retries, and generation guards ignore
+stale callbacks. Handle rejected connection promises at the subscription boundary
+and expose the bounded reconnect/offline status rather than leaking unhandled
+promise rejections.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement
