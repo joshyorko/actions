@@ -1758,3 +1758,128 @@ def test_runtime_publisher_rejects_recovery_title_mismatch_before_download(monke
     with pytest.raises(RuntimeError, match="title"):
         publisher.main()
     assert all(command[1:3] != ["run", "download"] for command in calls)
+
+
+def run_shell_step(script, cwd, env):
+    return subprocess.run(
+        ["bash", "-euo", "pipefail", "-c", script],
+        cwd=cwd,
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+
+
+def test_runtime_publisher_accepts_platform_tag_order_and_rejects_duplicate_slots(
+    tmp_path,
+):
+    publisher = load_publisher()
+    linux_tags = (
+        "manylinux_2_17_x86_64.manylinux_2_5_x86_64."
+        "manylinux1_x86_64.manylinux2014_x86_64"
+    )
+    reordered_linux_tags = (
+        "manylinux_2_5_x86_64.manylinux1_x86_64."
+        "manylinux2014_x86_64.manylinux_2_17_x86_64"
+    )
+    artifacts = [
+        "actions_runtime-1.0.0.tar.gz",
+        f"actions_runtime-1.0.0-cp312-cp312-{reordered_linux_tags}.whl",
+        f"actions_runtime-1.0.0-cp313-cp313-{reordered_linux_tags}.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+    ]
+    for name in artifacts:
+        (tmp_path / name).write_bytes(name.encode())
+
+    publisher.write_manifest(tmp_path)
+    assert publisher.verify_artifacts(tmp_path) == sorted(artifacts)
+
+    # Two different filenames that parse to the same wheel tag set are still
+    # one slot, not two distinct approved artifacts.
+    duplicate_slot = tmp_path / (
+        "actions_runtime-1.0.0-cp312-cp312-" + linux_tags + ".whl"
+    )
+    duplicate_slot.write_bytes(duplicate_slot.name.encode())
+    (tmp_path / artifacts[2]).unlink()
+    with pytest.raises(publisher.VerificationError, match="duplicate wheel slot"):
+        publisher.write_manifest(tmp_path)
+
+
+@pytest.mark.parametrize(
+    "filename",
+    [
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+        "actions_runtime-1.0.0-1-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313.cp313-cp313-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313.cp313-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+    ],
+)
+def test_runtime_publisher_rejects_foreign_platform_or_build_tag(tmp_path, filename):
+    publisher = load_publisher()
+    artifacts = [
+        "actions_runtime-1.0.0.tar.gz",
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+    ]
+    artifacts[-1] = filename
+    for name in artifacts:
+        (tmp_path / name).write_bytes(name.encode())
+    with pytest.raises(
+        publisher.VerificationError, match="unexpected artifact filename"
+    ):
+        publisher.write_manifest(tmp_path)
+
+
+def test_generated_runtime_inventory_uses_exact_tag_set_verifier(tmp_path):
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
+    )
+    steps = workflow["jobs"]["publish"]["steps"]
+    inventory_step = next(
+        step
+        for step in steps
+        if step.get("name") == "Verify exact Runtime artifact inventory"
+    )
+    assert (
+        "scripts/publish_verified_runtime.py --download-root dist/downloads --dry-run"
+        in inventory_step["run"]
+    )
+
+    root = tmp_path / "repo"
+    action_server = root / "action_server"
+    scripts = action_server / "scripts"
+    downloads = action_server / "dist" / "downloads"
+    scripts.mkdir(parents=True)
+    downloads.mkdir(parents=True)
+    (scripts / PUBLISHER.name).write_bytes(PUBLISHER.read_bytes())
+    artifacts = [
+        "actions_runtime-1.0.0.tar.gz",
+        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+    ]
+    for name in artifacts:
+        (downloads / name).write_bytes(name.encode())
+
+    run_command = "uv run --no-project --python ${{ matrix.python }} python"
+    script = inventory_step["run"].replace(run_command, shlex.quote(sys.executable), 1)
+    result = run_shell_step(script, root, os.environ.copy())
+    assert result.returncode == 0, result.stderr
+
+    output = action_server / "dist"
+    assert sorted(path.name for path in output.iterdir()) == sorted(
+        artifacts + ["actions-runtime-manifest.sha256"]
+    )
+    publisher = load_publisher()
+    assert publisher.verify_artifacts(output) == sorted(artifacts)

@@ -668,6 +668,11 @@ def start_server(
         url = f"{protocol}://{host}:{port}"
         settings = get_settings()
         settings.base_url = url
+        app.state.trusted_server_origins = tuple(
+            dict.fromkeys(
+                (*app.state.trusted_server_origins, settings.base_url)
+            )
+        )
 
         log.info(
             colored("\n  ⚡️ Local MCP endpoint: ", "green", attrs=["bold"])

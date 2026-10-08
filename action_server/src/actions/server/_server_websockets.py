@@ -10,19 +10,25 @@ from fastapi.routing import APIRouter
 from starlette.websockets import WebSocket, WebSocketDisconnect
 
 if typing.TYPE_CHECKING:
-    from ._models import Run
+    from ._models import Run, RunSummaryRecord
     from ._runs_state_cache import RunChangeEvent
 
 log = logging.getLogger(__name__)
+_NO_SUMMARY = object()
+_SKIP_SUMMARY = object()
 
 websocket_api_router = APIRouter(prefix="/api/ws")
 
 
 async def verify_websocket_origin(websocket: WebSocket) -> None:
     origin = websocket.headers.get("origin")
-    if origin is not None and not websocket.scope[
-        "app"
-    ].state.cors_origin_policy.allows(origin):
+    app_state = websocket.scope["app"].state
+    if origin is not None and not app_state.cors_origin_policy.allows_request_origin(
+        origin,
+        request_scheme=websocket.scope.get("scheme", ""),
+        socket_server=websocket.scope.get("server"),
+        trusted_server_urls=getattr(app_state, "trusted_server_origins", ()),
+    ):
         from fastapi import WebSocketException
 
         raise WebSocketException(code=1008)
@@ -67,6 +73,7 @@ class SocketServer:
         self.on_run_change_callback: Optional[Callable[..., Any]] = None
         self._next_id = partial(next, itertools.count(0))
         self._sid_to_websocket: Dict[str, WebSocket] = {}
+        self._sid_to_summary: Dict[str, bool] = {}
 
     def enter_room(self, sid: str, room: str) -> None:
         """
@@ -90,6 +97,12 @@ class SocketServer:
         """
         return self._rooms.get(room)
 
+    def is_summary_client(self, sid: str) -> bool:
+        return self._sid_to_summary.get(sid, False)
+
+    def has_legacy_clients(self) -> bool:
+        return any(not is_summary for is_summary in self._sid_to_summary.values())
+
     def on(self, event_name: str):
         """
         Registers a handler function for a specific event.
@@ -108,46 +121,55 @@ class SocketServer:
         return f"client-{self._next_id()}"
 
     async def emit(
-        self, event: str, data=None, *, to: Optional[str | Sequence[str]] = None
+        self,
+        event: str,
+        data=None,
+        *,
+        to: Optional[str | Sequence[str]] = None,
+        summary_data: Any = _NO_SUMMARY,
+        summary_event: Optional[tuple[str, Any]] = None,
     ):
-        """
-        Emits an event which is sent to the user.
-
-        Args:
-            to: The client(s) to which the event should be emitted. If not
-                specified the event is sent to all clients.
-        """
-        notify: Sequence[str]
+        """Emit legacy data or a per-connection bounded summary payload."""
         if to is None:
-            # Notify all
             notify = tuple(self._sid_to_websocket.keys())
-
         elif isinstance(to, str):
-            # Notify single
-            notify = [to]
-
+            notify = (to,)
         else:
-            # Notify list of ids.
-            pass
+            notify = tuple(to)
 
         for sid in notify:
             try:
                 ws = self._sid_to_websocket.get(sid)
-                if ws is not None:
-                    dct = {"event": event}
-                    if data is not None:
-                        dct["data"] = data
-                    await ws.send_json(dct)
+                if ws is None:
+                    continue
+                is_summary_client = self._sid_to_summary.get(sid, False)
+                if (
+                    is_summary_client
+                    and summary_data is _SKIP_SUMMARY
+                    and summary_event is None
+                ):
+                    continue
+                payload = data
+                message_event = event
+                if is_summary_client and summary_event is not None:
+                    message_event, payload = summary_event
+                elif is_summary_client and summary_data is not _NO_SUMMARY:
+                    payload = summary_data
+                message = {"event": message_event}
+                if payload is not None:
+                    message["data"] = payload
+                await ws.send_json(message)
             except Exception:
-                log.exception(f"Error notifying client: {sid}")
+                log.exception("Error notifying client.")
 
-    async def manage_websocket(self, websocket: WebSocket):
+    async def manage_websocket(self, websocket: WebSocket, *, summary: bool = False):
         """
         Registers a client websocket so that it's possible to talk to
         it from the server.
         """
         sid = self._gen_id()
         self._sid_to_websocket[sid] = websocket
+        self._sid_to_summary[sid] = summary
         await self._notify("connect", sid)
 
         try:
@@ -176,6 +198,7 @@ class SocketServer:
         finally:
             await self._notify("disconnect", sid)
             self._sid_to_websocket.pop(sid, None)
+            self._sid_to_summary.pop(sid, None)
 
     async def _notify(self, event: str, sid: str, *args):
         handlers = self.event_handlers.get(event)
@@ -256,8 +279,17 @@ async def handle_start_listen_run_events(sid: str):
     loop = asyncio.get_running_loop()
 
     with global_runs_state.semaphore:
-        runs = global_runs_state.get_current_run_state()
-        await _report_runs(sid, runs)
+        runs: list[Run] | list[RunSummaryRecord]
+        if _socket_server.is_summary_client(sid):
+            try:
+                runs = global_runs_state.get_current_run_summaries()
+            except (TypeError, ValueError):
+                await _report_runs_unavailable(sid)
+            else:
+                await _report_runs(sid, runs)
+        else:
+            runs = global_runs_state.get_current_run_state()
+            await _report_runs(sid, runs)
         if not _socket_server.get_room_sids("clients_listening_runs"):
             # Start listening if this is the first client added.
             if _socket_server.on_run_change_callback is None:
@@ -269,8 +301,39 @@ async def handle_start_listen_run_events(sid: str):
         _socket_server.enter_room(sid, "clients_listening_runs")
 
 
-async def _report_runs(sid: str, runs: list["Run"]):
-    await _socket_server.emit("runs_collected", [asdict(run) for run in runs], to=sid)
+async def _report_runs(
+    sid: str, runs: list["Run"] | list["RunSummaryRecord"]
+):
+    if _socket_server.is_summary_client(sid):
+        try:
+            summaries = [_run_list_item(run) for run in runs]
+        except (TypeError, ValueError):
+            await _report_runs_unavailable(sid)
+            return
+        await _socket_server.emit("runs_collected", summaries, to=sid)
+        return
+
+    await _socket_server.emit(
+        "runs_collected", [asdict(run) for run in runs], to=sid
+    )
+
+
+async def _report_runs_unavailable(sid: str) -> None:
+    from ._models import RUN_SUMMARY_UNAVAILABLE_MESSAGE
+
+    await _socket_server.emit(
+        "runs_unavailable",
+        {"message": RUN_SUMMARY_UNAVAILABLE_MESSAGE},
+        to=sid,
+    )
+
+
+def _run_list_item(
+    run: typing.Union["Run", "RunSummaryRecord"],
+) -> dict[str, Any]:
+    from ._models import RunListItemModel
+
+    return RunListItemModel.from_run(run).model_dump()
 
 
 def _on_run_change_found_in_thread(loop, run_change_event: "RunChangeEvent"):
@@ -282,24 +345,77 @@ def _on_run_change_found_in_thread(loop, run_change_event: "RunChangeEvent"):
 
 async def _report_change_event(run_change_event: "RunChangeEvent"):
     try:
-        # i.e.: send the notification to all connected websockets when found.
-        notify_all = None
+        from ._models import RUN_SUMMARY_UNAVAILABLE_MESSAGE
 
+        notify_all = None
+        summary_event = None
         if run_change_event.ev == "added":
+            try:
+                summary = _run_list_item(run_change_event.run)
+            except (TypeError, ValueError):
+                summary_event = (
+                    "runs_unavailable",
+                    {"message": RUN_SUMMARY_UNAVAILABLE_MESSAGE},
+                )
+                summary_data = _SKIP_SUMMARY
+            else:
+                summary_data = {"run": summary}
             await _socket_server.emit(
-                "run_added", {"run": asdict(run_change_event.run)}, to=notify_all
+                "run_added",
+                (
+                    {"run": asdict(run_change_event.run)}
+                    if _socket_server.has_legacy_clients()
+                    else None
+                ),
+                to=notify_all,
+                summary_data=summary_data,
+                summary_event=summary_event,
             )
         elif run_change_event.ev == "changed":
+            has_legacy_clients = _socket_server.has_legacy_clients()
+            try:
+                summary = _run_list_item(run_change_event.run)
+            except (TypeError, ValueError):
+                summary_event = (
+                    "runs_unavailable",
+                    {"message": RUN_SUMMARY_UNAVAILABLE_MESSAGE},
+                )
+                summary_data = _SKIP_SUMMARY
+            else:
+                from math import isfinite
+
+                raw_changes = run_change_event.changes or {}
+                summary_changes: dict[str, int | float | None] = {}
+                status = raw_changes.get("status")
+                if isinstance(status, int) and not isinstance(status, bool):
+                    if 0 <= status <= 4:
+                        summary_changes["status"] = status
+                run_time = raw_changes.get("run_time")
+                if run_time is None:
+                    summary_changes["run_time"] = None
+                elif isinstance(run_time, (int, float)) and isfinite(run_time):
+                    if 0 <= run_time <= 1_000_000_000:
+                        summary_changes["run_time"] = run_time
+                summary_data = {
+                    "run_id": summary["id"],
+                    "changes": summary_changes,
+                }
             await _socket_server.emit(
                 "run_changed",
-                {
-                    "run_id": run_change_event.run.id,
-                    "changes": run_change_event.changes,
-                },
+                (
+                    {
+                        "run_id": run_change_event.run.id,
+                        "changes": run_change_event.changes,
+                    }
+                    if has_legacy_clients
+                    else None
+                ),
                 to=notify_all,
+                summary_data=summary_data,
+                summary_event=summary_event,
             )
         else:
-            log.critical(f"Unexpected run change event: {run_change_event}.")
+            log.critical("Unexpected run change event.")
     except Exception:
         log.exception("Error reporting change event to json.")
 
@@ -320,6 +436,12 @@ def report_mtime_changed(loop):
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     await _socket_server.manage_websocket(websocket)
+
+
+@websocket_api_router.websocket("/summary")
+async def summary_websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    await _socket_server.manage_websocket(websocket, summary=True)
 
 
 def _list_actions_in_threadpool(on_response_run_coroutine, message_id):

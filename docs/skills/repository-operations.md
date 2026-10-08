@@ -15,6 +15,22 @@ The Core clean-wheel verifier compares the installed version with the input whee
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
 
+Runtime's installed-wheel contract tests select a Python supporting the Runtime
+distribution and `venv`. If the host's preferred Python lacks `ensurepip`, set
+`ACTIONS_RUNTIME_TEST_PYTHON` to the actual Python from the pinned RCC developer
+environment. Record that interpreter's version in the receipt; do not install
+host tooling or falsify version discovery to make this boundary pass.
+
+For packaged UI acceptance, rebuild the canonical embedded static entrypoint
+with `invoke build-frontend`, then build the frozen executable and Go wrapper.
+Record the source SHA, any generated working-tree delta and both executable
+hashes. Check the default local server separately from a configured-key server:
+a bearer-authenticated HTTP probe does not establish browser authorization.
+The October 8 checkpoint's packaged empty history loads locally, while its
+configured-key browser requests receive 403; Work Items receives 503. These
+are retained product blockers, not browser acceptance. All data in this probe
+is synthetic, and the server remains bound to loopback without exposure.
+
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
 - `action_server/`: CLI, FastAPI service, frontend, build and bundled RCC.
@@ -39,7 +55,14 @@ are separate Vite roots under `apps/runtime` and `apps/canvas-view`; run
 `npm run build:runtime` and `npm run build:canvas` from the frontend directory
 to verify both independent artifacts. The topology has no tier-specific
 manifest, product-tier build variable, vendored package directory, or external
-runtime asset dependency. Frontend quality is fail-fast through
+runtime asset dependency.
+The frontend TypeScript gate includes ordinary `__tests__` files. The generic
+`WebsocketConn.on` handler has no contextual callback type; status listeners in
+those tests must use the exported `WebsocketStatus` type explicitly. Keep
+`npm run test:types` separate from the Vite builds and Vitest run: Vite can
+emit both artifacts before `tsc --noEmit` rejects an implicitly typed callback.
+
+Frontend quality is fail-fast through
 `npm run test:quality`, which intentionally gates the shipping Runtime/Canvas
 entrypoints and `src/app` topology plus topology tests. Its Prettier check uses
 the package-owned `--end-of-line auto` contract so the same quality invocation
@@ -235,9 +258,38 @@ advertising wildcard credentialed access. Repeatable `--cors-allow-origin` value
 must be explicit `http`/`https` origins with exact scheme, hostname, and effective
 port; credentials, paths, queries, fragments, `null`, and lookalike origins fail
 closed. CORS preflight admission is independent of API-key authentication, while
-the actual request remains authenticated. The same allowlist protects browser
-WebSocket handshakes; no-`Origin` WebSocket clients retain the existing
-non-browser path.
+the actual request remains authenticated. WebSocket Origin admission also uses
+the actual ASGI socket authority and request scheme or an operator-configured
+server URL; it must never trust the request's `Host` or `X-Forwarded-Host`
+header. When deployed behind a reverse proxy, configure the externally served
+`server_url` or an exact `--cors-allow-origin`; forwarding a host header alone
+does not establish the serving authority. Host matching remains
+case-insensitive with effective-port normalization, and no-`Origin` WebSocket
+clients retain the existing non-browser path. Loopback names and addresses
+remain distinct browser origins: `localhost`, `127.0.0.1`, `::1`, and other
+127/8 addresses are not interchangeable. Admit an additional local browser
+origin only through an explicit configured origin or serving authority.
+Configured API-key verification remains independent and precedes origin
+admission.
+
+For an assembled WebSocket failure, record handshake status, echo/snapshot
+delivery, the first failing HTTP operation, and teardown order. A passing HTTP
+101 plus echo and snapshot followed by an Action POST sent through a host proxy
+and rejected with 403 is HTTP test infrastructure evidence; fixture teardown
+can subsequently close the socket with 1012. Diagnose that HTTP path before
+attributing the close to Runtime event delivery. Browser authentication is a
+separate acceptance boundary: `WebsocketConn` constructs `new WebSocket(url)`,
+and administrative `requestJson` calls do not attach a bearer. A configured-key
+non-browser WebSocket test does not prove authorized browser administration.
+
+Import modules that bind dependency aliases before patching the dependency's
+source module. Otherwise the first import captures the patched callable, and
+monkeypatch teardown restores that fake as the alias's original. Patch the
+already-imported `_app` and `_settings` modules together and clear `get_app`'s
+cache around fake server startup. Regress
+`test_verbose_server_startup_redacts_database_url_credentials` immediately
+before the CORS/WebSocket admission tests in one pytest process; an isolated
+admission test cannot detect the leaked empty allowlist.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
@@ -398,6 +450,17 @@ detail, mutation, HTTP error, cancellation, reconnect, and out-of-order event
 paths. Canvas remains a separate Vite entrypoint and is not a consumer of this
 cache.
 
+The Runtime UI reads run history from `/api/runs/summary`, capped at 200 rows
+per page and ordered by descending `numbered_id`; its SQL projection selects only
+summary columns before materializing rows. Run History requests later pages by
+offset when the user asks to load older runs, and artifact metadata/details are
+loaded by run ID. Keep legacy `/api/runs`, `/api/runs/{run_id}`, and `/api/ws`
+full-detail payloads compatible; the Runtime UI uses `/api/ws/summary` instead.
+Invalid summary metadata must return a safe HTTP 503 or the summary WebSocket's
+`runs_unavailable` event, never a successful empty history page. The focused
+contracts are covered by `test_run_summary_state_selects_only_summary_columns`,
+the corrupt-metadata API test, and summary/legacy WebSocket routing tests.
+
 The Runtime shell overview reads the provider-owned config/actions/runs queries;
 it does not create a second cache or invent metrics. The current backend `/config`
 payload has no capability metadata, so the shell preserves the existing optional
@@ -416,10 +479,14 @@ canonical queries; never apply event payloads directly to cached data. The run
 cancellation endpoint returns the literal union `"cancelled" | "not-running"`.
 Legacy artifact query parameters use repeated keys for readonly string arrays
 (for example, `artifact_names=a&artifact_names=b`). Provider-owned QueryClients
-are created per mounted Runtime provider and cleared during teardown; WebSocket
-reconnect timers are cancelled, single-flight per active connection generation
-even if duplicate close callbacks arrive, and guarded against stale connection
-generations.
+are created per mounted Runtime provider and cleared during teardown. Runtime
+WebSocket retries are capped at five attempts per outage with exponential delays
+starting at one second and capped at sixteen seconds; a successful connection
+resets the counter. Disconnect/unmount cancels pending retry timers, duplicate
+close callbacks do not schedule concurrent retries, and generation guards ignore
+stale callbacks. Handle rejected connection promises at the subscription boundary
+and expose the bounded reconnect/offline status rather than leaking unhandled
+promise rejections.
 
 For a clean source archive, `poetry run invoke devinstall` must discover the
 sibling `actions-http-helper/pyproject.toml`, replace the version requirement

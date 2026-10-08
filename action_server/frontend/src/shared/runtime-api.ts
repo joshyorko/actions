@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "./constants";
-import type { ActionPackage, Run, ServerConfig } from "./types";
+import type { ActionPackage, Run, RunSummary, ServerConfig } from "./types";
 
 export type RuntimeActionRunRequest = {
   actionPackageName: string;
@@ -34,31 +34,69 @@ const requestJson = async <T>(
   path: string,
   init: RequestInit = {},
 ): Promise<T> => {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...init,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      ...init.headers,
-    },
-  });
-  if (!response.ok) {
-    const body = await response.json().catch(() => ({}));
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      ...init,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        ...init.headers,
+      },
+    });
+  } catch (error) {
+    if (init.signal?.aborted) throw error;
     throw new RuntimeApiError(
-      response.status,
-      body.detail || body.message || response.statusText,
+      0,
+      "Could not reach the Runtime. Check the connection and try again.",
     );
   }
-  return response.json() as Promise<T>;
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    const detailMessage =
+      typeof body.detail === "string"
+        ? body.detail
+        : body.detail && typeof body.detail.message === "string"
+          ? body.detail.message
+          : undefined;
+    const message =
+      detailMessage ||
+      (typeof body.message === "string" ? body.message : response.statusText);
+    throw new RuntimeApiError(
+      response.status,
+      message.slice(0, 512),
+    );
+  }
+  try {
+    return (await response.json()) as T;
+  } catch (error) {
+    if (init.signal?.aborted) throw error;
+    throw new RuntimeApiError(
+      response.status,
+      "Runtime returned invalid or incomplete JSON. Refresh and try again.",
+    );
+  }
 };
 
 export const listRuntimeActions = (signal?: AbortSignal) =>
   requestJson<ActionPackage[]>("/api/actionPackages", { signal });
 
-export const listRuntimeRuns = (runType = "all", signal?: AbortSignal) => {
-  const query =
-    runType === "all" ? "" : `?run_type=${encodeURIComponent(runType)}`;
-  return requestJson<Run[]>(`/api/runs${query}`, { signal });
+export type RuntimeRunListOptions = {
+  limit?: number;
+  offset?: number;
+};
+
+export const listRuntimeRuns = (
+  runType = "all",
+  signal?: AbortSignal,
+  options: RuntimeRunListOptions = {},
+) => {
+  const query = new URLSearchParams({
+    limit: String(options.limit ?? 200),
+  });
+  if (options.offset) query.set("offset", String(options.offset));
+  if (runType !== "all") query.set("run_type", runType);
+  return requestJson<RunSummary[]>(`/api/runs/summary?${query}`, { signal });
 };
 
 export const getRuntimeRun = (runId: string, signal?: AbortSignal) =>

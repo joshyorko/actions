@@ -7,7 +7,7 @@ import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
 import {
     useRuntimeActions,
     useRuntimeConfig,
-    useRuntimeRuns,
+    useRuntimeRunPages,
 } from "@/queries/runtime";
 import { subscribeRuntimeEvents } from "@/shared/runtime-events";
 
@@ -23,7 +23,7 @@ const ActionServerProvider = ({
         { theme: "dark" },
     );
     const actions = useRuntimeActions();
-    const runs = useRuntimeRuns();
+    const runs = useRuntimeRunPages();
     const config = useRuntimeConfig();
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const ActionServerProvider = ({
                 viewSettings,
                 setViewSettings,
                 loadedRuns: {
-                    data: runs.data,
+                    data: runs.data?.pages.flat(),
                     isPending: runs.isPending,
                     errorMessage: runs.error?.message,
                 },

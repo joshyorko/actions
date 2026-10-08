@@ -1,59 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { logError } from "./helpers";
 
-/**
- * A socket.io-like interface for websockets.
- *
- * Not really using socket.io because of instability issues
- * using it (and it was hard to reason why it didn't work
- * properly when it didn't work properly).
- */
+export type WebsocketStatusPhase =
+  | "connecting"
+  | "connected"
+  | "reconnecting"
+  | "offline"
+  | "disconnected";
+
+export type WebsocketStatus = {
+  phase: WebsocketStatusPhase;
+  attempt: number;
+  maxAttempts: number;
+};
+
+export type WebsocketConnOptions = {
+  maxReconnectAttempts: number;
+  reconnectBaseDelayMs: number;
+  reconnectMaxDelayMs: number;
+};
+
+const DEFAULT_OPTIONS: WebsocketConnOptions = {
+  maxReconnectAttempts: 5,
+  reconnectBaseDelayMs: 1000,
+  reconnectMaxDelayMs: 16_000,
+};
+
+/** A small socket.io-like client with bounded retry and status reporting. */
 export class WebsocketConn {
-  /**
-   * The actual websocket connection (set after connect())
-   */
   private ws: WebSocket | null = null;
-
-  /**
-   * Flag indicating whether it's already connected.
-   */
   private connected = false;
-
-  /**
-   * Flag indicating whether it's currently connecting.
-   */
   private connecting = false;
-
   private closed = false;
-
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
-
   private generation = 0;
-
-  /**
-   * Handlers to manage received events.
-   */
+  private reconnectAttempts = 0;
+  private readonly options: WebsocketConnOptions;
   private eventToHandlers: Map<string, any[]> = new Map();
-
-  /**
-   * Buffer with the messages to be sent to the server
-   * (i.e.: if not currently connected, messages will be buffered
-   * so that they're sent when a connection is made).
-   */
   private messages: string[] = [];
 
-  /**
-   * Just creates the websocket connection, doesn't really connect at this point.
-   *
-   * @param url The websocket url to connect to.
-   */
-  constructor(private url: string) {
-    this.url = url;
+  constructor(
+    private url: string,
+    options: Partial<WebsocketConnOptions> = {},
+  ) {
+    this.options = { ...DEFAULT_OPTIONS, ...options };
   }
 
-  /**
-   * Registers a handler to some event.
-   */
   public on(event: string, handler: any) {
     let handlers = this.eventToHandlers.get(event);
     if (!handlers) {
@@ -63,139 +55,155 @@ export class WebsocketConn {
     handlers.push(handler);
   }
 
-  /**
-   * Notifies handlers of some event.
-   */
   private notify(event: string, ...args: any[]) {
     const handlers = this.eventToHandlers.get(event);
-    if (handlers) {
-      // eslint-disable-next-line no-restricted-syntax
-      for (const handler of handlers) {
-        // console.log('notify', event, handler, args);
-        try {
-          handler(...args);
-        } catch (err) {
-          logError(err);
-        }
+    if (!handlers) return;
+    for (const handler of handlers) {
+      try {
+        handler(...args);
+      } catch (error) {
+        logError(error);
       }
     }
   }
 
-  /**
-   * Emits an event to the server.
-   */
+  private notifyStatus(phase: WebsocketStatusPhase, attempt = this.reconnectAttempts) {
+    const status: WebsocketStatus = {
+      phase,
+      attempt,
+      maxAttempts: this.options.maxReconnectAttempts,
+    };
+    this.notify("status", status);
+  }
+
   public async emit(event: string, data: any = undefined) {
-    const msg: any = { event };
-    if (data !== undefined) {
-      msg.data = data;
-    }
-    this.messages.push(msg);
+    const message: any = { event };
+    if (data !== undefined) message.data = data;
+    this.messages.push(JSON.stringify(message));
     await this.processMessages();
   }
 
   private async processMessages() {
-    if (this.connected && this.ws) {
-      while (this.messages.length > 0) {
-        try {
-          // That's sync but it doesn't block (just enqueues data to send).
-          this.ws.send(JSON.stringify(this.messages[0]));
-
-          // If it was sent, remove it from the messages to send.
-          this.messages.shift();
-        } catch (err) {
-          // unable to send
-          logError(err);
-          break; // Retry later.
-        }
+    if (!this.connected || !this.ws) return;
+    while (this.messages.length > 0) {
+      try {
+        this.ws.send(this.messages[0]);
+        this.messages.shift();
+      } catch (error) {
+        logError(error);
+        break;
       }
     }
   }
 
   public connect(): Promise<void> {
+    return this.startConnection(false);
+  }
+
+  private startConnection(isRetry: boolean): Promise<void> {
     this.closed = false;
     if (this.reconnectTimer !== null) {
       clearTimeout(this.reconnectTimer);
       this.reconnectTimer = null;
     }
-    if (this.connecting) {
-      // console.log('Websocket: connect ignored (already connecting).');
-      return Promise.resolve(undefined);
+    if (this.connecting || this.connected) return Promise.resolve();
+    if (!isRetry && this.reconnectAttempts >= this.options.maxReconnectAttempts) {
+      this.reconnectAttempts = 0;
     }
-    if (this.connected) {
-      // console.log('Websocket: connect ignored (already connected).');
-      return Promise.resolve(undefined);
-    }
-    // console.log('Websocket: starting connection.');
+
     this.connecting = true;
-
     const generation = ++this.generation;
-    return new Promise((resolve, reject) => {
-      // console.log('Websocket: connecting to: ', this.url);
-      this.ws = new WebSocket(this.url);
+    this.notifyStatus(
+      this.reconnectAttempts > 0 ? "reconnecting" : "connecting",
+    );
 
-      this.ws.onopen = () => {
-        if (generation !== this.generation) return;
-        // console.log('Websocket: connection opened (marking as connected)');
-        this.connected = true;
-        this.connecting = false;
-        this.notify("connect");
+    return new Promise<void>((resolve, reject) => {
+      let settled = false;
+      const resolveOnce = () => {
+        if (settled) return;
+        settled = true;
         resolve();
       };
-
-      this.ws.onmessage = this.handleMessage;
-      this.ws.onclose = () => this.handleClose(generation);
-      const markNotConnectingAndReject = () => {
+      const rejectOnce = () => {
+        if (settled) return;
+        settled = true;
+        reject(new Error("WebSocket connection failed."));
+      };
+      const fail = () => {
         if (generation !== this.generation) return;
-        // console.log('Websocket: connection on error');
         this.connected = false;
         this.connecting = false;
         this.notify("disconnect");
-        reject();
+        rejectOnce();
+        this.handleClose(generation);
       };
-      this.ws.onerror = markNotConnectingAndReject;
+
+      try {
+        const ws = new WebSocket(this.url);
+        this.ws = ws;
+        ws.onopen = () => {
+          if (generation !== this.generation) return;
+          this.connected = true;
+          this.connecting = false;
+          this.reconnectAttempts = 0;
+          this.notifyStatus("connected", 0);
+          this.notify("connect");
+          void this.processMessages();
+          resolveOnce();
+        };
+        ws.onmessage = this.handleMessage;
+        ws.onclose = () => {
+          if (generation !== this.generation) return;
+          const wasConnecting = this.connecting;
+          this.handleClose(generation);
+          if (wasConnecting) rejectOnce();
+        };
+        ws.onerror = fail;
+      } catch {
+        fail();
+      }
     });
   }
 
-  /**
-   * Messages is received from the server.
-   */
   private handleMessage = (message: MessageEvent) => {
-    const dataStr = message.data;
-    if (dataStr) {
-      // console.log('Received data', dataStr);
-      const { event, data } = JSON.parse(dataStr);
-      if (event) {
-        if (data !== undefined) {
-          this.notify(event, data);
-        } else {
-          this.notify(event);
-        }
-      }
+    if (!message.data) return;
+    try {
+      const { event, data } = JSON.parse(message.data);
+      if (!event) return;
+      if (data !== undefined) this.notify(event, data);
+      else this.notify(event);
+    } catch {
+      logError(new Error("Runtime sent an invalid WebSocket message."));
     }
   };
 
-  /**
-   * Note: after starting the connection, handleClose
-   * is always called even if it doesn't connect
-   * (so, it's used as a way to re-connect later on).
-   */
   private handleClose = (generation: number) => {
     if (generation !== this.generation) return;
-    // console.log('closing');
     this.connected = false;
     this.connecting = false;
     this.ws = null;
 
-    // Auto-reconnect quickly as the connection was broken for some reason.
-    // Reduced from 5000ms to 1000ms for faster recovery.
-    if (!this.closed) {
-      if (this.reconnectTimer !== null) return;
-      this.reconnectTimer = setTimeout(() => {
-        this.reconnectTimer = null;
-        if (this.closed || generation !== this.generation) return;
-        this.connect();
-      }, 1000);
+    if (this.closed) {
+      this.notifyStatus("disconnected", this.reconnectAttempts);
+      return;
     }
+    if (this.reconnectTimer !== null) return;
+    if (this.reconnectAttempts >= this.options.maxReconnectAttempts) {
+      this.notifyStatus("offline", this.options.maxReconnectAttempts);
+      return;
+    }
+
+    this.reconnectAttempts += 1;
+    this.notifyStatus("reconnecting", this.reconnectAttempts);
+    const delay = Math.min(
+      this.options.reconnectBaseDelayMs * 2 ** (this.reconnectAttempts - 1),
+      this.options.reconnectMaxDelayMs,
+    );
+    this.reconnectTimer = setTimeout(() => {
+      this.reconnectTimer = null;
+      if (this.closed || generation !== this.generation) return;
+      void this.startConnection(true).catch(() => undefined);
+    }, delay);
   };
 
   public disconnect() {
@@ -210,5 +218,6 @@ export class WebsocketConn {
     this.ws = null;
     this.connected = false;
     this.connecting = false;
+    this.notifyStatus("disconnected", this.reconnectAttempts);
   }
 }

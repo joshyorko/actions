@@ -43,6 +43,18 @@ describe("Runtime API", () => {
     expect(fetchMock.mock.calls[1][1]).toMatchObject({ method: "POST" });
   });
 
+  it("requests bounded run-list pages with metadata summaries", async () => {
+    const fetchMock = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(new Response(JSON.stringify([]), { status: 200 }));
+
+    await listRuntimeRuns("robot", undefined, { limit: 5, offset: 10 });
+
+    expect(String(fetchMock.mock.calls[0][0])).toBe(
+      "/api/runs/summary?limit=5&offset=10&run_type=robot",
+    );
+  });
+
   it("turns HTTP errors into typed errors and forwards cancellation", async () => {
     const controller = new AbortController();
     const fetchMock = vi
@@ -60,6 +72,37 @@ describe("Runtime API", () => {
     expect(fetchMock.mock.calls[1][1]).toMatchObject({
       method: "POST",
       signal: controller.signal,
+    });
+  });
+
+  it("maps truncated successful JSON to a bounded actionable Runtime error", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+      new Response('{"runs":[', {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+
+    const request = listRuntimeRuns();
+    await expect(request).rejects.toMatchObject({
+      name: "RuntimeApiError",
+      status: 200,
+      message: expect.stringMatching(/invalid or incomplete JSON.*refresh/i),
+    });
+    await expect(request).rejects.not.toMatchObject({
+      message: expect.stringMatching(/Unexpected end of JSON input/i),
+    });
+  });
+
+  it("maps transport rejection to a bounded connection message", async () => {
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(
+      new TypeError("raw transport implementation detail"),
+    );
+
+    await expect(listRuntimeRuns()).rejects.toMatchObject({
+      name: "RuntimeApiError",
+      status: 0,
+      message: "Could not reach the Runtime. Check the connection and try again.",
     });
   });
 });
