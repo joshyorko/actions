@@ -9,6 +9,7 @@ import argparse
 import os
 import sys
 import traceback
+from importlib import metadata
 from typing import Any, Dict
 
 DEFAULT_TIMEOUT = 10
@@ -265,7 +266,20 @@ class MessagesHandler:
 
             from actions import Request
 
-        except ImportError:
+        except ImportError as error:
+            # A modern Actions distribution must supply the public worker contract.
+            # Missing it must not silently disable managed Request injection.
+            try:
+                core_version = metadata.version("actions-core")
+            except metadata.PackageNotFoundError:
+                pass
+            else:
+                raise RuntimeError(
+                    "This Runtime requires actions-core >=1.0.2 in the worker "
+                    f"environment; installed {core_version} lacks the public "
+                    "integration contract. Update the package's actions-core pin "
+                    "and rebuild its environment."
+                ) from error
             # old (deprecated: using robocorp-actions).
             try:
                 # fmt: off

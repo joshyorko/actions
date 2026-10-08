@@ -1222,3 +1222,19 @@ when validating redaction, and prove its handshake/echo before inspecting logs.
 Proxy redirects must replace only automatically generated Host headers for the
 new destination while retaining explicit caller Host intent and normal urllib3
 cross-host credential stripping, including 303 method changes.
+
+### Worker Core compatibility admission
+
+Runtime 1.0.3 candidate workers require Core 1.0.2's public integration API.
+The bundled candidate templates pin Core 1.0.2; publish and verify that Core
+release before publishing Runtime. Core 1.0.1 does not provide the new API.
+Existing package environments containing it require an explicit dependency
+update and environment rebuild; they receive an actionable error instead of
+silently omitting managed Request injection. The legacy Robocorp path applies
+only when Actions Core is absent. Clean installed-wheel tests probe the actual
+worker plugin construction as well as imports and package metadata.
+
+For cloud wheel validation, select the RCC-provided supported Python through
+`ACTIONS_RUNTIME_TEST_PYTHON` when a host Python lacks working venv support.
+Do not install a replacement host interpreter or treat that failure as a
+Runtime regression. Preserve the failed receipt alongside the RCC rerun.

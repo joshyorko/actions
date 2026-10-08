@@ -361,7 +361,7 @@ def test_runtime_metadata_uses_published_active_dependencies():
     assert dependencies["actions-work-items"] == "^0.4.4"
 
 
-def test_template_manifests_use_published_actions_dependencies():
+def test_template_manifests_pin_supported_worker_core():
     manifests = sorted((REPO / "templates").glob("*/package.yaml"))
     assert manifests
 
@@ -371,9 +371,9 @@ def test_template_manifests_use_published_actions_dependencies():
             for line in manifest.read_text().splitlines()
             if line.strip().startswith("- actions-")
         }
-        assert "actions-core=1.0.1" in dependencies, str(manifest)
+        assert "actions-core=1.0.2" in dependencies, str(manifest)
         assert not any(
-            dependency.startswith("actions-core") and dependency != "actions-core=1.0.1"
+            dependency.startswith("actions-core") and dependency != "actions-core=1.0.2"
             for dependency in dependencies
         ), str(manifest)
 
@@ -523,6 +523,13 @@ assert managed.inject_managed_params(
     inspect.signature(lambda request: None), None, {{}}, {{}}
 ) == {{"request": request}}
 assert managed.get_request_contexts({{}}, {{}}).request is request
+from actions.server._preload_actions.preload_actions_server_main import MessagesHandler
+handler = MessagesHandler.__new__(MessagesHandler)
+worker_plugins = handler._plugin_manager_kwargs(
+    {{"request": {{"headers": {{"X-Request-ID": "worker-request"}}, "cookies": {{}}}}}}
+)["plugin_manager"]
+worker_request = worker_plugins.get_instance(EPManagedParameters).get_request_contexts({{}}, {{}}).request
+assert worker_request.headers["X-Request-ID"] == "worker-request"
 
 formatted = format_lint_results({{
     "file": "actions.py",
@@ -597,6 +604,10 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
     metadata_name = next(name for name in runtime_files if name.endswith("/METADATA"))
     assert (
         "Requires-Dist: actions-core (>=1.0.2,<2.0.0)" in runtime_files[metadata_name]
+    )
+    assert (
+        "Requires-Dist: actions-http-helper (>=1.0.2,<2.0.0)"
+        in runtime_files[metadata_name]
     )
     record_name = next(name for name in runtime_files if name.endswith("/RECORD"))
     required_payload = {
