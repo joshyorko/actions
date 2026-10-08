@@ -145,6 +145,10 @@ class OwnedProcessTests(unittest.TestCase):
                     create_artifact_storage("local", junction)
                 with self.assertRaises(ArtifactStorageConfigurationError):
                     storage.create_run_artifacts_dir("junction/run-b")
+                target.rmdir()
+                self.assertFalse(junction.exists())
+                with self.assertRaises(ArtifactStorageConfigurationError):
+                    storage.create_run_artifacts_dir("junction/run-c")
             finally:
                 junction.rmdir()
 

@@ -354,3 +354,8 @@ rejects a real junction both as a root and within it; only that platform run
 establishes the Windows behavior. The harness canonicalizes its own POSIX
 temporary directory to avoid macOS system `/var` aliases; this does not relax
 the configured user-root policy.
+
+Inspect each artifact path component with `lstat`, including when `exists()` is
+false: a dangling Windows junction can remain a reparse point after its target
+is removed. The Windows gate removes a junction target and verifies rejection
+again, rather than treating missing-target behavior as ordinary absence.

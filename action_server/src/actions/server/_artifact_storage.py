@@ -38,9 +38,13 @@ class ArtifactStorage(Protocol):
 
 
 def _is_link_or_reparse_point(path: Path) -> bool:
-    # Junctions and other Windows reparse points need not report is_symlink().
-    return path.is_symlink() or bool(
-        getattr(path.lstat(), "st_file_attributes", 0)
+    # lstat observes the directory entry even when a junction target is missing.
+    try:
+        info = path.lstat()
+    except FileNotFoundError:
+        return False
+    return stat.S_ISLNK(info.st_mode) or bool(
+        getattr(info, "st_file_attributes", 0)
         & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
     )
 
@@ -86,11 +90,7 @@ class FilesystemArtifactStorage:
         current = self.root
         for part in relative.parts:
             current /= part
-            if (
-                current.exists()
-                and _is_link_or_reparse_point(current)
-                or current.is_symlink()
-            ):
+            if _is_link_or_reparse_point(current):
                 raise ArtifactStorageConfigurationError(
                     f"{label} contains a symlink: {path}"
                 )

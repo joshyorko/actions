@@ -391,3 +391,35 @@ def test_storage_rejects_symlink_in_root_ancestor(tmp_path):
     link.symlink_to(target, target_is_directory=True)
     with pytest.raises(ArtifactStorageConfigurationError):
         create_artifact_storage("local", link / "artifacts")
+
+
+def test_storage_rejects_dangling_link_inside_root(tmp_path):
+    storage = create_artifact_storage("local", tmp_path)
+    (tmp_path / "dangling").symlink_to(tmp_path / "missing", target_is_directory=True)
+    with pytest.raises(ArtifactStorageConfigurationError):
+        storage.create_run_artifacts_dir("dangling/run-a")
+
+
+def test_storage_checks_reparse_attributes_without_following_target(
+    tmp_path, monkeypatch
+):
+    import stat
+    from types import SimpleNamespace
+    from actions.server._artifact_storage import _is_link_or_reparse_point
+
+    dangling = tmp_path / "junction"
+    assert not dangling.exists()
+    original = Path.lstat
+    monkeypatch.setattr(
+        Path,
+        "lstat",
+        lambda path: SimpleNamespace(
+            st_mode=stat.S_IFDIR, st_file_attributes=stat.FILE_ATTRIBUTE_REPARSE_POINT
+        )
+        if path == dangling
+        else original(path),
+    )
+    assert _is_link_or_reparse_point(dangling)
+    storage = create_artifact_storage("local", tmp_path)
+    with pytest.raises(ArtifactStorageConfigurationError):
+        storage.create_run_artifacts_dir("junction/run-a")
