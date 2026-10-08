@@ -335,3 +335,12 @@ identifiers parsed from the final 64 KiB of the temporary log. Raw log lines,
 exception messages, paths and credentials are not copied into receipts. Treat
 these identifiers as diagnostics, not proof of a packaging cause. API keys are
 passed as `--api-key=<value>` so a generated leading hyphen remains a value.
+
+Windows startup can fail after a successful version probe even when Job ownership
+tests pass. To diagnose that boundary, inspect bounded tails from both redirected
+process output and `server_log.txt`; strip ANSI formatting before recognizing
+exception identifiers. Receipts retain only import module identifiers, traceback
+file basenames/line numbers/function identifiers and fixed diagnostic markers,
+never source lines or exception messages. An empty identifier list does not prove
+that imports succeeded. Keep startup failure blocking until the actual native
+platform rerun passes; a diagnostic-only repair does not accept that platform.

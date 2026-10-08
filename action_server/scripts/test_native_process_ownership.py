@@ -66,8 +66,40 @@ class OwnedProcessTests(unittest.TestCase):
                     "exit_code": 7,
                     "exception_classes": ["ModuleNotFoundError", "ImportError"],
                     "import_modules": ["actions.missing", "actions.core"],
+                    "traceback_frames": [],
+                    "markers": [],
+                    "log_sources_present": 1,
                 },
             )
+
+    def test_startup_diagnostics_normalize_colored_prefixed_secondary_log(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            log = root / "process.log"
+            log.write_text(
+                "\x1b[31mERROR:   OSError: private message [WinError 6]\x1b[0m\n"
+            )
+            (root / "server_log.txt").write_text(
+                "Traceback (most recent call last):\n"
+                '  File "C:\\private\\user\\_server.py", line 123, in start\n'
+                "    private_source_with_secret()\n"
+                "ERROR: ModuleNotFoundError: No module named 'actions.missing'\n"
+                "Cookie: ModuleNotFoundError: No module named 'private.cookie'\n"
+            )
+            result = native.startup_diagnostics(log, 1, "synthetic_secret")
+            self.assertEqual(
+                result["exception_classes"], ["OSError", "ModuleNotFoundError"]
+            )
+            self.assertEqual(result["import_modules"], ["actions.missing"])
+            self.assertEqual(
+                result["traceback_frames"],
+                [{"file": "_server.py", "line": 123, "function": "start"}],
+            )
+            self.assertEqual(
+                result["markers"], ["python_traceback", "invalid_windows_handle"]
+            )
+            self.assertEqual(result["log_sources_present"], 2)
+            self.assertNotIn("private", str(result))
 
     @unittest.skipUnless(os.name == "nt", "Requires real Windows Job Objects")
     def test_job_closes_descendant_after_its_leader_exits(self):
