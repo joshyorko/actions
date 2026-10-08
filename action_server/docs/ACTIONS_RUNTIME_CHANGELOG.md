@@ -8,6 +8,15 @@ an Actions Runtime release.
 
 ## Unreleased
 
+### 1.0.3 candidate (not yet published)
+
+- Prepare integrated exact-origin and bounded Run-history repairs, refreshed
+  administration assets, bundled Work Items loading, and Core 1.0.2 API pairing.
+- Preserve strict release provenance, normalized artifact inventory and
+  publication that cannot overwrite existing distributions.
+- The candidate remains subject to assembled package, browser, security and
+  native-platform validation; it is not a statement of release acceptance.
+
 ## 1.0.2 - 2026-09-07
 
 - Correct author and maintainer metadata to Joshua Yorko and replace legacy

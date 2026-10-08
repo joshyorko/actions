@@ -184,9 +184,7 @@ def test_community_expose_lifespan_preserves_body_error_and_runs_cleanup(
             events.append("running")
             raise RuntimeError("body failure")
 
-    with caplog.at_level("ERROR"), pytest.raises(
-        RuntimeError, match="body failure"
-    ):
+    with caplog.at_level("ERROR"), pytest.raises(RuntimeError, match="body failure"):
         asyncio.run(run_lifespan())
 
     assert events == [
@@ -199,9 +197,7 @@ def test_community_expose_lifespan_preserves_body_error_and_runs_cleanup(
     assert "Error stopping community tunnel manager" in caplog.text
 
 
-def test_community_expose_lifespan_isolates_tunnel_stop_failure(
-    monkeypatch, caplog
-):
+def test_community_expose_lifespan_isolates_tunnel_stop_failure(monkeypatch, caplog):
     events = []
 
     class _FailingManager:

@@ -359,6 +359,7 @@ def test_run_websocket_events_publish_summaries_only(monkeypatch):
         ),
         error_message="error-secret",
     )
+
     class Sink:
         def __init__(self):
             self.messages = []
@@ -468,7 +469,9 @@ def test_summary_only_websocket_events_never_serialize_legacy_run_payloads(
     def fail_if_legacy_payload_is_serialized(_run):
         raise AssertionError("summary-only websocket serialized a full Run")
 
-    monkeypatch.setattr(server_websockets, "asdict", fail_if_legacy_payload_is_serialized)
+    monkeypatch.setattr(
+        server_websockets, "asdict", fail_if_legacy_payload_is_serialized
+    )
 
     async def publish():
         await server_websockets._report_runs("summary", [run])
@@ -507,7 +510,9 @@ def test_run_change_cache_snapshots_do_not_copy_large_payload_strings():
 
     from actions.server._runs_state_cache import RunsState
 
-    run = replace(RUN, inputs="input-secret" * 100_000, result="result-secret" * 100_000)
+    run = replace(
+        RUN, inputs="input-secret" * 100_000, result="result-secret" * 100_000
+    )
     changes = {"result": run.result, "status": 2}
     state = RunsState(None)
     events = []

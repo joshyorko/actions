@@ -301,9 +301,7 @@ async def handle_start_listen_run_events(sid: str):
         _socket_server.enter_room(sid, "clients_listening_runs")
 
 
-async def _report_runs(
-    sid: str, runs: list["Run"] | list["RunSummaryRecord"]
-):
+async def _report_runs(sid: str, runs: list["Run"] | list["RunSummaryRecord"]):
     if _socket_server.is_summary_client(sid):
         try:
             summaries = [_run_list_item(run) for run in runs]
@@ -313,9 +311,7 @@ async def _report_runs(
         await _socket_server.emit("runs_collected", summaries, to=sid)
         return
 
-    await _socket_server.emit(
-        "runs_collected", [asdict(run) for run in runs], to=sid
-    )
+    await _socket_server.emit("runs_collected", [asdict(run) for run in runs], to=sid)
 
 
 async def _report_runs_unavailable(sid: str) -> None:

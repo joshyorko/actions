@@ -535,7 +535,9 @@ class Database:
                             (lock_key,),
                         )
                 except Exception:
-                    log.debug("Unable to release PostgreSQL schedule claim", exc_info=True)
+                    log.debug(
+                        "Unable to release PostgreSQL schedule claim", exc_info=True
+                    )
             claim_connection.close()
 
     def _next_savepoint_name(self):
@@ -1051,9 +1053,7 @@ ORDER BY table_name, index_name, sequence_in_index;
             )
         return "".join(adapted)
 
-    def execute_query(
-        self, cursor: Any, sql: str, values: Optional[list] = None
-    ):
+    def execute_query(self, cursor: Any, sql: str, values: Optional[list] = None):
         """
         Executes a query which will NOT change the database (and should return values).
 

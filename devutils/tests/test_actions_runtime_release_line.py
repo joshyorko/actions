@@ -47,8 +47,8 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.0.2"
-    assert '__version__ = "1.0.2"' in runtime_init
+    assert pyproject["version"] == "1.0.3"
+    assert '__version__ = "1.0.3"' in runtime_init
     assert 'RCC_VERSION = "18.19.3"' in rcc_download
     assert "joshyorko/rcc/releases/download/v{RCC_VERSION}" in rcc_download
 
@@ -110,7 +110,9 @@ def test_runtime_artifact_matrix_and_community_provenance_are_explicit():
         assert 'tag_commit=$(git rev-parse "$GITHUB_REF^{commit}")' in provenance
         assert 'event_commit=$(git rev-parse "$GITHUB_SHA^{commit}")' in provenance
         assert 'test "$tag_commit" = "$event_commit"' in provenance
-        assert 'git merge-base --is-ancestor "$GITHUB_SHA" origin/community' in provenance
+        assert (
+            'git merge-base --is-ancestor "$GITHUB_SHA" origin/community' in provenance
+        )
         assert (
             'test "$(git rev-parse "$GITHUB_SHA^{commit}")" = "$(git rev-parse origin/community)"'
             not in provenance
@@ -163,7 +165,9 @@ def test_native_runtime_release_uses_only_community_github_release_assets():
         "aws-actions/configure-aws-credentials",
     )
     for contents in (BINARY_WORKFLOW, recovery):
-        assert not any(destination in contents for destination in forbidden_destinations)
+        assert not any(
+            destination in contents for destination in forbidden_destinations
+        )
 
     recovery_release_steps = recovery_workflow["jobs"]["binary-release"]["steps"]
     assert not any(

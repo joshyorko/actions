@@ -7,13 +7,15 @@ import stat
 import sys
 import types
 import zipfile
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, ClassVar, Self
 
 import pytest
+from fastapi import UploadFile
 
 
-def _zip_bytes(members: dict[str, bytes | str]) -> bytes:
+def _zip_bytes(members: Mapping[str, bytes | str]) -> bytes:
     output = io.BytesIO()
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for name, content in members.items():
@@ -21,7 +23,7 @@ def _zip_bytes(members: dict[str, bytes | str]) -> bytes:
     return output.getvalue()
 
 
-def _write_zip(path: Path, members: dict[str, bytes | str]) -> None:
+def _write_zip(path: Path, members: Mapping[str, bytes | str]) -> None:
     path.write_bytes(_zip_bytes(members))
 
 
@@ -44,9 +46,9 @@ class _FixedTemporaryDirectory:
         shutil.rmtree(self.path)
 
 
-class _ChunkedUpload:
+class _ChunkedUpload(UploadFile):
     def __init__(self, payload: bytes, chunk_size: int = 3) -> None:
-        self.filename = "robot.zip"
+        super().__init__(io.BytesIO(payload), filename="robot.zip", size=len(payload))
         self._payload = payload
         self._chunk_size = chunk_size
         self._offset = 0

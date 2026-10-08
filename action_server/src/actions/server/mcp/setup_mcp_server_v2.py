@@ -63,6 +63,8 @@ class McpResponseHandler:
 
 
 class McpServerSetupHelper:
+    _catalog: _McpCatalog
+
     def __init__(self) -> None:
         from mcp.server import Server
 
@@ -130,7 +132,9 @@ class McpServerSetupHelper:
     async def _list_resources(self, _ctx: Any, _params: Any) -> ListResourcesResult:
         catalog = self._catalog
         return ListResourcesResult(
-            resources=sorted(catalog.resources.values(), key=lambda item: str(item.uri)),
+            resources=sorted(
+                catalog.resources.values(), key=lambda item: str(item.uri)
+            ),
             **self._catalog_result_metadata(catalog),
         )
 
@@ -205,7 +209,7 @@ class McpServerSetupHelper:
 
     @staticmethod
     def _catalog_revision(catalog: _McpCatalog) -> str:
-        catalog = {
+        catalog_contents = {
             "prompts": [
                 item.model_dump(by_alias=True, mode="json", exclude_none=True)
                 for item in sorted(catalog.prompts, key=lambda item: item.name)
@@ -227,10 +231,12 @@ class McpServerSetupHelper:
                 for item in sorted(catalog.tools, key=lambda item: item.name)
             ],
         }
-        canonical = json.dumps(catalog, sort_keys=True, separators=(",", ":"))
+        canonical = json.dumps(catalog_contents, sort_keys=True, separators=(",", ":"))
         return sha256(canonical.encode("utf-8")).hexdigest()
 
-    def _catalog_result_metadata(self, catalog: _McpCatalog | None = None) -> dict[str, Any]:
+    def _catalog_result_metadata(
+        self, catalog: _McpCatalog | None = None
+    ) -> dict[str, Any]:
         if catalog is None:
             catalog = self._catalog
         return {
@@ -388,7 +394,9 @@ class McpServerSetupHelper:
         self._resources = catalog.resources
         self._resource_to_action_info = catalog.resource_to_action_info
         self._resource_templates = catalog.resource_templates
-        self._resource_template_to_action_info = catalog.resource_template_to_action_info
+        self._resource_template_to_action_info = (
+            catalog.resource_template_to_action_info
+        )
         self._prompts = catalog.prompts
         self._prompt_name_to_action_info = catalog.prompt_name_to_action_info
 
@@ -402,6 +410,8 @@ class McpServerSetupHelper:
         self._resources = self._catalog.resources
         self._resource_to_action_info = self._catalog.resource_to_action_info
         self._resource_templates = self._catalog.resource_templates
-        self._resource_template_to_action_info = self._catalog.resource_template_to_action_info
+        self._resource_template_to_action_info = (
+            self._catalog.resource_template_to_action_info
+        )
         self._prompts = self._catalog.prompts
         self._prompt_name_to_action_info = self._catalog.prompt_name_to_action_info

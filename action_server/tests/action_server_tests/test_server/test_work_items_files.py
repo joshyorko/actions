@@ -4,7 +4,6 @@ import sqlite3
 import subprocess
 import sys
 from pathlib import Path
-from types import SimpleNamespace
 from typing import Iterator
 
 import pytest
@@ -34,11 +33,11 @@ def runtime_client(
     from actions.server._app import get_app
     from actions.server._settings import setup_settings
 
-    args = SimpleNamespace(
-        command="import",
-        datadir=str(tmp_path),
-        verbose=False,
-        cors_allow_origins=[],
+    from actions.server._cli_impl import _create_parser
+    from actions.server._protocols import ArgumentsNamespaceRequiringDatadir
+
+    args: ArgumentsNamespaceRequiringDatadir = _create_parser().parse_args(
+        ["import", "--datadir", str(tmp_path)]
     )
     with setup_settings(args):
         get_app.cache_clear()
@@ -151,9 +150,7 @@ def test_rest_projects_non_object_library_payload_to_null(client: TestClient) ->
             "work_items_runtime_unavailable",
         ),
         (
-            _work_items_import.WorkItemsPackageLoadError(
-                "private import failure"
-            ),
+            _work_items_import.WorkItemsPackageLoadError("private import failure"),
             "work_items_load_failed",
         ),
     ],
@@ -242,6 +239,7 @@ def test_runtime_http_error_handler_preserves_work_items_recovery_code(
     assert body["message"] == str(body["detail"])
     assert str(failure) not in response.text
 
+
 def test_runtime_http_error_handler_keeps_plain_detail_contract(
     runtime_client: TestClient,
 ) -> None:
@@ -251,6 +249,7 @@ def test_runtime_http_error_handler_keeps_plain_detail_contract(
     async def raise_plain_error() -> None:
         raise HTTPException(status_code=400, detail="ordinary error message")
 
+    assert isinstance(runtime_client.app, FastAPI)
     runtime_client.app.add_api_route("/plain-error", raise_plain_error, methods=["GET"])
     response = runtime_client.get("/plain-error")
 

@@ -67,7 +67,9 @@ def test_artifact_validator_checks_manifests_and_directory_budgets():
 
 
 def test_hosted_bundle_budget_uses_the_manifest_payload_for_both_artifacts():
-    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
+    workflow = (
+        FRONTEND.parents[1] / ".github/workflows/frontend-build.yml"
+    ).read_text()
 
     assert "npm run validate:artifacts" in workflow
     assert "du -sb dist" not in workflow
@@ -84,13 +86,17 @@ def test_frontend_release_metadata_and_canvas_identity_are_cross_platform():
 
 
 def test_hosted_determinism_check_covers_every_matrix_os():
-    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
+    workflow = (
+        FRONTEND.parents[1] / ".github/workflows/frontend-build.yml"
+    ).read_text()
 
     assert "if: runner.os != 'Windows'" not in workflow
 
 
 def test_hosted_workflow_runs_frontend_quality_and_compares_both_roots():
-    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
+    workflow = (
+        FRONTEND.parents[1] / ".github/workflows/frontend-build.yml"
+    ).read_text()
 
     assert "npm run test:quality" in workflow
     assert "dist-canvas" in workflow
@@ -104,7 +110,9 @@ def test_hosted_workflow_runs_frontend_quality_and_compares_both_roots():
 
 
 def test_hosted_determinism_block_closes_heredoc_before_restoring_artifacts():
-    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
+    workflow = (
+        FRONTEND.parents[1] / ".github/workflows/frontend-build.yml"
+    ).read_text()
     python_start = workflow.index("          python - <<'PY'")
     heredoc_end = workflow.index("          PY\n", python_start)
     restoration = workflow.index("          rm -rf frontend/dist", heredoc_end)
@@ -135,7 +143,9 @@ def test_frontend_quality_uses_cross_platform_prettier_eol_contract():
 
 def test_hosted_quality_gate_includes_offline_ui_system_contract():
     package = json.loads((FRONTEND / "package.json").read_text())
-    workflow = (FRONTEND.parents[1] / ".github/workflows/frontend-build.yml").read_text()
+    workflow = (
+        FRONTEND.parents[1] / ".github/workflows/frontend-build.yml"
+    ).read_text()
 
     assert package["scripts"]["test:ui-system"] == (
         "vitest --run __tests__/ui-system.test.ts"
@@ -171,17 +181,17 @@ def test_runtime_inliner_preserves_adversarial_bundle_text_and_raw_text_boundari
         encoding="utf-8",
     )
     (assets / js_name).write_text(
-        r'''const values = ["</script>", "<!--", "<!doctype html>", "$'", "$&", "$`"];
+        r"""const values = ["</script>", "<!--", "<!doctype html>", "$'", "$&", "$`"];
 // </script> in a comment must remain inside this script.
 //# sourceMappingURL=data:text/javascript,/* </script> */
 window.__inlineFixture = values;
-''',
+""",
         encoding="utf-8",
     )
     (assets / css_name).write_text(
-        r'''/* </style> in a comment must remain inside this style. */
+        r"""/* </style> in a comment must remain inside this style. */
 :root { --inline-fixture: "$'"; }
-''',
+""",
         encoding="utf-8",
     )
 
@@ -251,7 +261,9 @@ def test_validators_prove_manifest_inventory_and_metadata(tmp_path):
         ),
         encoding="utf-8",
     )
-    (root / "sbom.json").write_text('{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8")
+    (root / "sbom.json").write_text(
+        '{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8"
+    )
 
     checks = validate_build_metadata(root)
 
@@ -327,9 +339,7 @@ def test_python_validator_preflights_inventory_before_import_scan(
 
     root = tmp_path / "artifact"
     root.mkdir()
-    (root / "index.js").write_text(
-        "import '@sema4ai/components';", encoding="utf-8"
-    )
+    (root / "index.js").write_text("import '@sema4ai/components';", encoding="utf-8")
     _write_manifest(
         root,
         "runtime-admin",
@@ -371,7 +381,13 @@ def test_python_validator_rejects_empty_structural_extras(tmp_path):
         root,
         "runtime-admin",
         "text/html",
-        [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+        [
+            {
+                "path": "index.html",
+                "bytes": len(payload),
+                "sha256": hashlib.sha256(payload).hexdigest(),
+            }
+        ],
     )
 
     checks = validate_build_metadata(root, "runtime-admin", "text/html")
@@ -394,7 +410,13 @@ def test_javascript_validator_rejects_empty_structural_extras(tmp_path):
             root,
             artifact,
             content_type,
-            [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+            [
+                {
+                    "path": "index.html",
+                    "bytes": len(payload),
+                    "sha256": hashlib.sha256(payload).hexdigest(),
+                }
+            ],
         )
 
     result = subprocess.run(
@@ -417,7 +439,11 @@ def test_manifest_contract_rejects_inventory_mutations(tmp_path, mutation):
     for name, content in contents.items():
         (root / name).write_bytes(content)
     files = [
-        {"path": name, "bytes": len(content), "sha256": hashlib.sha256(content).hexdigest()}
+        {
+            "path": name,
+            "bytes": len(content),
+            "sha256": hashlib.sha256(content).hexdigest(),
+        }
         for name, content in contents.items()
     ]
     if mutation == "omission":
@@ -432,7 +458,9 @@ def test_manifest_contract_rejects_inventory_mutations(tmp_path, mutation):
         json.dumps({"schemaVersion": 1, "contentType": "text/html", "files": files}),
         encoding="utf-8",
     )
-    (root / "sbom.json").write_text('{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8")
+    (root / "sbom.json").write_text(
+        '{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8"
+    )
 
     checks = validate_build_metadata(root)
 
@@ -469,7 +497,6 @@ def test_python_validator_treats_nested_metadata_as_payload_inventory(tmp_path):
     assert any(check.name == "inventory" and check.passed for check in checks)
 
 
-
 @pytest.mark.skipif(not hasattr(os, "mkfifo"), reason="requires POSIX special files")
 def test_python_validator_rejects_unlisted_non_regular_entries(tmp_path):
     build_binary = FRONTEND.parent / "build-binary"
@@ -485,7 +512,13 @@ def test_python_validator_rejects_unlisted_non_regular_entries(tmp_path):
         root,
         "runtime-admin",
         "text/html",
-        [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+        [
+            {
+                "path": "index.html",
+                "bytes": len(payload),
+                "sha256": hashlib.sha256(payload).hexdigest(),
+            }
+        ],
     )
 
     checks = validate_build_metadata(root, "runtime-admin", "text/html")
@@ -507,7 +540,13 @@ def test_javascript_validator_rejects_malformed_sbom(tmp_path):
             root,
             artifact,
             content_type,
-            [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+            [
+                {
+                    "path": "index.html",
+                    "bytes": len(payload),
+                    "sha256": hashlib.sha256(payload).hexdigest(),
+                }
+            ],
         )
     (tmp_path / "dist" / "sbom.json").write_text("{}", encoding="utf-8")
 
@@ -536,13 +575,13 @@ def _write_manifest(root, artifact, content_type, files):
         ),
         encoding="utf-8",
     )
-    (root / "sbom.json").write_text('{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8")
+    (root / "sbom.json").write_text(
+        '{"bomFormat": "CycloneDX", "specVersion": "1.6"}', encoding="utf-8"
+    )
 
 
 @pytest.mark.parametrize("link_kind", ["file", "directory", "broken"])
-def test_python_validator_rejects_symlink_payload_and_root_aliases(
-    tmp_path, link_kind
-):
+def test_python_validator_rejects_symlink_payload_and_root_aliases(tmp_path, link_kind):
     build_binary = FRONTEND.parent / "build-binary"
     sys.path.insert(0, str(build_binary))
     from artifact_validator import validate_build_metadata
@@ -610,7 +649,13 @@ def test_python_validator_binds_artifact_identity_and_content_type(
         root,
         declared_artifact,
         declared_type,
-        [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+        [
+            {
+                "path": "index.html",
+                "bytes": len(payload),
+                "sha256": hashlib.sha256(payload).hexdigest(),
+            }
+        ],
     )
 
     checks = validate_build_metadata(root, expected_artifact, expected_type)
@@ -618,8 +663,12 @@ def test_python_validator_binds_artifact_identity_and_content_type(
     assert any(check.name == "artifact" and not check.passed for check in checks)
     assert any(check.name == "content-type" and not check.passed for check in checks)
     unbound_checks = validate_build_metadata(root)
-    assert any(check.name == "artifact" and not check.passed for check in unbound_checks)
-    assert any(check.name == "content-type" and not check.passed for check in unbound_checks)
+    assert any(
+        check.name == "artifact" and not check.passed for check in unbound_checks
+    )
+    assert any(
+        check.name == "content-type" and not check.passed for check in unbound_checks
+    )
 
 
 def test_python_validator_cli_accepts_bound_identity_options(tmp_path):
@@ -695,9 +744,7 @@ def test_python_validator_cli_rejects_bound_file_artifact(tmp_path):
     )
 
 
-@pytest.mark.parametrize(
-    "link_kind", ["file", "directory", "broken"]
-)
+@pytest.mark.parametrize("link_kind", ["file", "directory", "broken"])
 @pytest.mark.parametrize(
     "directory,artifact,content_type",
     [
@@ -731,9 +778,7 @@ def test_javascript_validator_rejects_symlink_payload(
                 target_dir = tmp_path / "target"
                 target_dir.mkdir()
                 (target_dir / "payload.js").write_bytes(payload)
-                (root / "payload-dir").symlink_to(
-                    target_dir, target_is_directory=True
-                )
+                (root / "payload-dir").symlink_to(target_dir, target_is_directory=True)
             else:
                 (root / "broken.js").symlink_to(tmp_path / "missing.js")
         _write_manifest(
@@ -766,7 +811,13 @@ def test_javascript_validator_rejects_symlink_root(tmp_path):
         runtime,
         "runtime-admin",
         "text/html",
-        [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+        [
+            {
+                "path": "index.html",
+                "bytes": len(payload),
+                "sha256": hashlib.sha256(payload).hexdigest(),
+            }
+        ],
     )
     (tmp_path / "dist").symlink_to(runtime, target_is_directory=True)
     canvas = tmp_path / "dist-canvas"
@@ -777,7 +828,13 @@ def test_javascript_validator_rejects_symlink_root(tmp_path):
         canvas,
         "canvas-mcp-app",
         "text/html;profile=mcp-app",
-        [{"path": "index.html", "bytes": len(canvas_payload), "sha256": hashlib.sha256(canvas_payload).hexdigest()}],
+        [
+            {
+                "path": "index.html",
+                "bytes": len(canvas_payload),
+                "sha256": hashlib.sha256(canvas_payload).hexdigest(),
+            }
+        ],
     )
 
     result = subprocess.run(
@@ -849,7 +906,13 @@ def test_javascript_validator_rejects_symlinked_metadata_before_parsing(
             root,
             artifact,
             content_type,
-            [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+            [
+                {
+                    "path": "index.html",
+                    "bytes": len(payload),
+                    "sha256": hashlib.sha256(payload).hexdigest(),
+                }
+            ],
         )
 
     invalid_metadata = tmp_path / "invalid-metadata.json"
@@ -888,7 +951,13 @@ def test_javascript_validator_rejects_fifo_metadata_before_read(
             root,
             artifact,
             content_type,
-            [{"path": "index.html", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}],
+            [
+                {
+                    "path": "index.html",
+                    "bytes": len(payload),
+                    "sha256": hashlib.sha256(payload).hexdigest(),
+                }
+            ],
         )
 
     (tmp_path / "dist" / metadata_name).unlink()

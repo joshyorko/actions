@@ -191,6 +191,7 @@ class ActionPackageHandler:
         )
         from actions.server.vendored_deps.termcolors import bold_yellow
 
+        use_env: dict[str, object]
         if not self.package_yaml_exists:
             log.info(
                 """Adding action without a managed environment (package.yaml unavailable).
@@ -227,9 +228,9 @@ class ActionPackageHandler:
                 if self._package_yaml_contents
                 else None
             )
-            artifact_mode = os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER") or os.environ.get(
-                "ACTIONS_REAL_RCC_ARTIFACT_TEST"
-            )
+            artifact_mode = os.environ.get(
+                "ACTIONS_RUNTIME_RCC_PROVIDER"
+            ) or os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST")
             if spec_version == "v2" and not devenv and artifact_mode:
                 from ._rcc_runtime_adapter import (
                     compute_source_generation,
@@ -248,7 +249,9 @@ class ActionPackageHandler:
                 use_env = descriptor.to_dict()
             else:
                 rcc = get_rcc()
-                condahash = rcc.get_package_yaml_hash(self._original_package_yaml, devenv)
+                condahash = rcc.get_package_yaml_hash(
+                    self._original_package_yaml, devenv
+                )
 
                 env_info = rcc.create_env_and_get_vars(
                     self._datadir, self._original_package_yaml, condahash, devenv
@@ -263,7 +266,7 @@ class ActionPackageHandler:
                         "It was not possible to get the environment when "
                         "bootstrapping RCC environment."
                     )
-                use_env = env_info.result.env
+                use_env = dict(env_info.result.env)
 
         pythonpath_entries = self.get_pythonpath_entries()
 
@@ -292,7 +295,10 @@ class ActionPackageHandler:
         pythonpath = os.pathsep.join(abspath_entries)
 
         if "PYTHONPATH" in use_env:
-            use_env["PYTHONPATH"] = use_env["PYTHONPATH"] + os.pathsep + pythonpath
+            existing_pythonpath = use_env["PYTHONPATH"]
+            if not isinstance(existing_pythonpath, str):
+                raise ActionPackageError("Environment PYTHONPATH must be a string.")
+            use_env["PYTHONPATH"] = existing_pythonpath + os.pathsep + pythonpath
         else:
             use_env["PYTHONPATH"] = pythonpath
 

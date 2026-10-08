@@ -6,6 +6,23 @@ from logging import Filter, Formatter
 from termcolor import colored
 
 
+class TransportCredentialFilter(Filter):
+    """Remove HTTP and WebSocket credential headers before any handler output."""
+
+    _headers = re.compile(
+        r"(\b(?:authorization|proxy-authorization|cookie|set-cookie)\s*:\s*)[^\r\n]*",
+        re.IGNORECASE,
+    )
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        message = record.getMessage()
+        redacted = self._headers.sub(r"\1<redacted>", message)
+        if redacted != message:
+            record.msg = redacted
+            record.args = ()
+        return True
+
+
 class FormatterNoColor(Formatter):
     strip_colors_regex = re.compile(r"(\x1b\[|\x9b)[0-?]*[ -/]*[@-~]")
 

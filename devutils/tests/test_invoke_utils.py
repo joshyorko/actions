@@ -9,9 +9,7 @@ from invoke import Context
 from devutils.invoke_utils import build_common_tasks, collect_deps_pyprojects, get_tag
 
 
-def test_common_quality_tasks_use_current_ruff_subcommands(
-    tmp_path: Path, monkeypatch
-):
+def test_common_quality_tasks_use_current_ruff_subcommands(tmp_path: Path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     context = Context()
     context.run = Mock()
@@ -132,7 +130,9 @@ def test_get_tag_fails_when_release_tags_exist_but_none_is_reachable(monkeypatch
             ),
         ]
     )
-    monkeypatch.setattr("devutils.invoke_utils.subprocess.run", lambda *a, **k: next(results))
+    monkeypatch.setattr(
+        "devutils.invoke_utils.subprocess.run", lambda *a, **k: next(results)
+    )
 
     with pytest.raises(RuntimeError, match="release tag.*not reachable"):
         get_tag("actions-core")
@@ -155,7 +155,9 @@ def test_make_release_rejects_invalid_module_version_before_creating_tag(
     )
     context = Context()
     context.run = Mock(side_effect=lambda *args, **kwargs: next(commands))
-    monkeypatch.setattr("devutils.invoke_utils.get_tag", lambda prefix: "actions-core-1.0.1")
+    monkeypatch.setattr(
+        "devutils.invoke_utils.get_tag", lambda prefix: "actions-core-1.0.1"
+    )
 
     with pytest.raises(SystemExit) as error:
         task(context)
@@ -183,7 +185,9 @@ def test_make_release_rejects_already_existing_current_tag(tmp_path, monkeypatch
     )
     context = Context()
     context.run = Mock(side_effect=lambda *args, **kwargs: next(responses))
-    monkeypatch.setattr("devutils.invoke_utils.get_tag", lambda prefix: "actions-core-1.0.1")
+    monkeypatch.setattr(
+        "devutils.invoke_utils.get_tag", lambda prefix: "actions-core-1.0.1"
+    )
 
     with pytest.raises(SystemExit) as error:
         task(context)
@@ -207,7 +211,10 @@ def test_make_release_tags_only_a_valid_community_commit(tmp_path, monkeypatch):
             stdout = "community\n"
         elif command == "git remote get-url origin":
             stdout = "https://github.com/joshyorko/actions.git\n"
-        elif command == 'poetry run python -c "import actions; print(actions.__version__)"':
+        elif (
+            command
+            == 'poetry run python -c "import actions; print(actions.__version__)"'
+        ):
             stdout = "1.0.2\n"
         else:
             stdout = ""
@@ -215,7 +222,9 @@ def test_make_release_tags_only_a_valid_community_commit(tmp_path, monkeypatch):
 
     context = Context()
     context.run = Mock(side_effect=run)
-    monkeypatch.setattr("devutils.invoke_utils.get_tag", lambda prefix: "actions-core-1.0.1")
+    monkeypatch.setattr(
+        "devutils.invoke_utils.get_tag", lambda prefix: "actions-core-1.0.1"
+    )
 
     task(context)
 
@@ -257,4 +266,6 @@ def test_make_release_does_not_tag_commit_outside_community_ancestry(
         task(context)
 
     assert error.value.code == 1
-    assert not any("git tag" in command or "git push" in command for command in commands)
+    assert not any(
+        "git tag" in command or "git push" in command for command in commands
+    )

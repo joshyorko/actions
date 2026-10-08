@@ -53,7 +53,7 @@ def test_candidate_core_installation_is_pr_only_and_release_keeps_registry_resol
     build = workflow.build_manylinux_wheels()
     assert (
         build["env"]["CIBW_BEFORE_TEST"]
-        == "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse' || '' }}"
+        == "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse' || '' }}"
     )
     steps = workflow.build_wheels_steps()
     candidate = next(
@@ -65,3 +65,37 @@ def test_candidate_core_installation_is_pr_only_and_release_keeps_registry_resol
     assert steps.index(candidate) < steps.index(build)
     assert "--no-deps" not in build["env"]["CIBW_TEST_COMMAND"]
     assert "pip check" in build["env"]["CIBW_TEST_COMMAND"]
+
+
+def test_installer_requires_helper_distribution_identity(tmp_path):
+    installer = load_installer()
+    wheel = tmp_path / "candidate.whl"
+    write_wheel(wheel, name="actions-http-helper")
+    assert installer.select_candidate(tmp_path, "actions-http-helper") == wheel
+    write_wheel(wheel, name="actions-core")
+    with pytest.raises(ValueError, match="identified"):
+        installer.select_candidate(tmp_path, "actions-http-helper")
+
+
+def test_helper_candidate_build_is_pr_only_and_precedes_runtime_wheels():
+    root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location(
+        "workflow_generator", root / ".github/workflows/_gen_workflows.py"
+    )
+    generator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(generator)
+    workflow = generator.ActionServerPyPiRelease()
+    steps = workflow.build_wheels_steps()
+    helper = next(
+        step
+        for step in steps
+        if step["name"]
+        == "Build candidate HTTP Helper wheel for PR compatibility tests"
+    )
+    assert helper["if"] == "github.event_name == 'pull_request'"
+    assert helper["working-directory"] == "actions-http-helper"
+    assert steps.index(helper) < steps.index(workflow.build_manylinux_wheels())
+    assert (
+        "candidate-helper-wheelhouse"
+        in workflow.build_manylinux_wheels()["env"]["CIBW_BEFORE_TEST"]
+    )

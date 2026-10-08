@@ -155,7 +155,10 @@ def import_action_package(
         # Still support robocorp.actions for now (but warn the user).
         try:
             actions_library_version = _get_actions_version(
-                env, import_path, "robocorp.actions", runtime_descriptor=runtime_descriptor
+                env,
+                import_path,
+                "robocorp.actions",
+                runtime_descriptor=runtime_descriptor,
             )
             log.critical(
                 "Important: 'robocorp.actions' is deprecated!\n"
@@ -362,7 +365,8 @@ cli.main(["{command}"])
             "import contextlib\n"
             f"with open({str(metadata_file)!r}, 'w', encoding='utf-8') as _out, "
             "contextlib.redirect_stdout(_out):\n"
-            + "    " + code.replace("\n", "\n    ")
+            + "    "
+            + code.replace("\n", "\n    ")
         )
     if runtime_descriptor is None:
         cmdline = [*command_prefix, "-c", code]

@@ -553,6 +553,7 @@ def _setup_stderr_logging(log_level):
     from logging import StreamHandler
 
     from actions.server._robo_utils.log_formatter import (
+        TransportCredentialFilter,
         UvicornAccessDisableOAuth2LogFilter,
     )
 
@@ -571,6 +572,7 @@ def _setup_stderr_logging(log_level):
         formatter = FormatterStdout("%(message)s", datefmt="[%X]")
         stream_handler.addFilter(UvicornLogFilter())
 
+    stream_handler.addFilter(TransportCredentialFilter())
     stream_handler.addFilter(UvicornAccessDisableOAuth2LogFilter())
     stream_handler.setFormatter(formatter)
     logger = logging.root
@@ -581,6 +583,7 @@ def _setup_logging(datadir: Path, log_level):
     from logging.handlers import RotatingFileHandler
 
     from actions.server._robo_utils.log_formatter import (
+        TransportCredentialFilter,
         UvicornAccessDisableOAuth2LogFilter,
     )
 
@@ -591,6 +594,7 @@ def _setup_logging(datadir: Path, log_level):
     rotating_handler = RotatingFileHandler(
         log_file, maxBytes=1_000_000, backupCount=3, encoding="utf-8"
     )
+    rotating_handler.addFilter(TransportCredentialFilter())
     rotating_handler.addFilter(UvicornAccessDisableOAuth2LogFilter())
     rotating_handler.setLevel(log_level)
     rotating_handler.setFormatter(
@@ -651,14 +655,23 @@ def _redact_cli_arguments(args: Sequence[str]) -> list[str]:
     from actions.server._database import redact_database_url
 
     redacted: list[str] = []
-    redact_next = False
+    redact_next: str | None = None
     for argument in args:
         if redact_next:
-            redacted.append(str(redact_database_url(argument)))
-            redact_next = False
+            redacted.append(
+                "<redacted>"
+                if redact_next == "api-key"
+                else str(redact_database_url(argument))
+            )
+            redact_next = None
         elif argument == "--database-url":
             redacted.append(argument)
-            redact_next = True
+            redact_next = "database-url"
+        elif argument == "--api-key":
+            redacted.append(argument)
+            redact_next = "api-key"
+        elif argument.startswith("--api-key="):
+            redacted.append("--api-key=<redacted>")
         elif argument.startswith("--database-url="):
             option, value = argument.split("=", 1)
             redacted.append(f"{option}={redact_database_url(value)}")

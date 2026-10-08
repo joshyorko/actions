@@ -772,7 +772,7 @@ rm src/actions/server/bin/rcc* -f
                 "CIBW_SKIP": "pp*",
                 "CIBW_BUILD": CIBW_BUILD,
                 "CIBW_BUILD_VERBOSITY": 1,
-                "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse' || '' }}",
+                "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse' || '' }}",
                 "CIBW_TEST_COMMAND": "python -m pip check && python -m actions.server version",
             },
         }
@@ -801,6 +801,12 @@ rm src/actions/server/bin/rcc* -f
             "if": "github.event_name == 'pull_request'",
             "working-directory": "actions",
             "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-core-wheelhouse",
+        })
+        steps.append({
+            "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
+            "if": "github.event_name == 'pull_request'",
+            "working-directory": "actions-http-helper",
+            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-helper-wheelhouse",
         })
         steps.append(self.build_manylinux_wheels())
         steps.append(self.upload_artifact_manylinux_wheels())

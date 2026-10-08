@@ -117,9 +117,9 @@ def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
 def _private_core_imports(source: str) -> list[int]:
     violations = []
     tree = ast.parse(source)
-    importlib_names = set()
-    import_module_names = set()
-    builtin_module_names = set()
+    importlib_names: set[str] = set()
+    import_module_names: set[str] = set()
+    builtin_module_names: set[str] = set()
     builtin_import_names = {"__import__"}
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):

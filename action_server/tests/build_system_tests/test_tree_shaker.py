@@ -151,9 +151,7 @@ import { Chart } from '@/enterprise/components/Chart';  // ALLOWED
         (dist_dir / "asset.svg").write_text("@sema4ai/components", encoding="utf-8")
         (dist_dir / "index.js.map").write_text("@sema4ai/components", encoding="utf-8")
 
-        assert (
-            TreeShaker(root_dir=tmp_path).scan_directory(dist_dir) == []
-        )
+        assert TreeShaker(root_dir=tmp_path).scan_directory(dist_dir) == []
 
 
 class TestDetectRemovedProductImports:

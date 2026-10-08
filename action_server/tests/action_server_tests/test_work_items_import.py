@@ -175,6 +175,8 @@ def test_failed_loader_clears_private_children_and_can_retry(
         assert sys.modules[unrelated_name] is unrelated_module
     finally:
         for name in tuple(sys.modules):
-            if name == _work_items_import._MODULE_NAME or name.startswith(private_prefix):
+            if name == _work_items_import._MODULE_NAME or name.startswith(
+                private_prefix
+            ):
                 sys.modules.pop(name, None)
         sys.modules.update(previous_private_modules)

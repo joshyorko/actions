@@ -131,9 +131,7 @@ class ProcessHandle:
 
         persisted_env = json.loads(action_package.env_json)
         runtime_descriptor = load_descriptor(action_package.env_json)
-        env = {
-            key: value for key, value in persisted_env.items() if key != "runtime"
-        }
+        env = {key: value for key, value in persisted_env.items() if key != "runtime"}
         _add_preload_actions_dir_to_env_pythonpath(env)
         env = build_python_launch_env(env)
         # Shouldn't be there, but just making sure... if it is it can
@@ -152,7 +150,7 @@ class ProcessHandle:
             env["RC_DUMP_THREADS_AFTER_RUN"] = "0"
 
         if runtime_descriptor is not None:
-            python_exe = None
+            python_exe = "python"
         elif "PYTHON_EXE" in env:
             python_exe = env["PYTHON_EXE"]
         else:
@@ -218,11 +216,16 @@ class ProcessHandle:
                     try:
                         connection_future.cancel()
                     except BaseException:
-                        log.debug("Unable to cancel the TCP accept future.", exc_info=True)
+                        log.debug(
+                            "Unable to cancel the TCP accept future.", exc_info=True
+                        )
                     try:
                         connection_future.result(timeout=1)
                     except BaseException:
-                        log.debug("TCP accept future finished during startup cleanup.", exc_info=True)
+                        log.debug(
+                            "TCP accept future finished during startup cleanup.",
+                            exc_info=True,
+                        )
 
             def cleanup_process():
                 try:
@@ -393,8 +396,9 @@ class ProcessHandle:
         self._kill_called = True
 
         log.info("Subprocess kill [pid=%s]", self._process.pid)
-        if getattr(self, "_rcc_wrapper", None) is not None:
-            self._rcc_wrapper.kill()
+        wrapper = getattr(self, "_rcc_wrapper", None)
+        if wrapper is not None:
+            wrapper.kill()
         else:
             kill_process_and_subprocesses(self._process.pid)
 
@@ -786,9 +790,7 @@ class ActionsProcessPool:
                         try:
                             process.kill()
                         except BaseException:
-                            log.exception(
-                                "Unable to clean up failed reload process."
-                            )
+                            log.exception("Unable to clean up failed reload process.")
                 raise
 
             # The routing switch is committed only after all new workers have
@@ -944,9 +946,7 @@ class ActionsProcessPool:
         from concurrent.futures import CancelledError
 
         current_generation = self.generation
-        request_generation = (
-            current_generation if generation is None else generation
-        )
+        request_generation = current_generation if generation is None else generation
         if action_package is None:
             action_package = self.action_package_id_to_action_package[
                 action.action_package_id
@@ -1016,7 +1016,9 @@ class ActionsProcessPool:
                         # No compatible process: we need to create one now.
                         n_running = self._get_running_processes_count_unlocked()
                         if n_running < self.max_processes:
-                            created_process = self._create_process(action, action_package)
+                            created_process = self._create_process(
+                                action, action_package
+                            )
                             if request_generation != current_generation:
                                 # A stale route may share a key with the new
                                 # generation.  Remove exactly the worker just

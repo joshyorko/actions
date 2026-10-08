@@ -219,6 +219,7 @@ def build_common_tasks(
     DIST = root / "dist"
     CONDA_ENV_NAME = package_name.replace(".", "-").replace("_", "-")
     TARGETS = " ".join(source_directories)
+
     def _quote_if_needed(value: str | Path) -> str:
         text = str(value)
         if any(ch.isspace() for ch in text):
@@ -332,8 +333,10 @@ def build_common_tasks(
                 roundtrips.append(roundtrip_py_project)
 
                 with roundtrip_py_project.update() as contents:
-                    dependencies = contents.get("tool", {}).get("poetry", {}).get(
-                        "dependencies", {}
+                    dependencies = (
+                        contents.get("tool", {})
+                        .get("poetry", {})
+                        .get("dependencies", {})
                     )
 
                     for key, value in tuple(dependencies.items()):
@@ -516,8 +519,10 @@ def build_common_tasks(
         poetry(
             ctx,
             "run python -m devutils.docs",
-            "--package", package_name,
-            "--output", _quote_if_needed(output_path),
+            "--package",
+            package_name,
+            "--output",
+            _quote_if_needed(output_path),
         )
         if check:
             if check_document_changes(ctx):

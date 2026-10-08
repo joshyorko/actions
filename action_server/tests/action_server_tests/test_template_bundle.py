@@ -154,7 +154,9 @@ def test_template_metadata_read_error_is_treated_as_missing(monkeypatch, tmp_pat
     assert helpers._get_local_templates_metadata() is None
 
 
-def test_malformed_local_metadata_is_reseeded_from_embedded_bundle(monkeypatch, tmp_path):
+def test_malformed_local_metadata_is_reseeded_from_embedded_bundle(
+    monkeypatch, tmp_path
+):
     from actions.server import _new_project_helpers as helpers
 
     cache = tmp_path / "action-templates"

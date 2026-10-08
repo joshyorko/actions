@@ -65,6 +65,7 @@ ON CONFLICT (run_id) DO UPDATE SET
 """
             )
 
+
 def migrate(db: Database) -> None:
     from actions.server.migrations import MIGRATION_ID_TO_NAME
 

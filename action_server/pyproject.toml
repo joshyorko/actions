@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actions-runtime"
-version = "1.0.2"
+version = "1.0.3"
 description = "Actions Runtime — serve Python actions through HTTP and MCP"
 authors = ["Joshua Yorko"]
 maintainers = ["Joshua Yorko"]
@@ -35,7 +35,7 @@ pyyaml = "^6.0.3"
 python = ">=3.12,<3.14"
 requests = "^2"
 actions-core = "^1.0.2"
-actions-http-helper = "^1.0.0"
+actions-http-helper = "^1.0.2"
 termcolor = "^3.2.0"
 uvicorn = "^0.38.0"
 websockets = "^15.0.1"
@@ -53,6 +53,7 @@ redis = "^5.0.0"
 psycopg = { version = "^3.2.0", extras = ["binary"] }
 
 [tool.poetry.group.dev.dependencies]
+actions-http-helper = { path = "../actions-http-helper/", develop = true }
 # Resolve the unpublished monorepo candidate for development; wheel metadata
 # retains the production version floor above and never embeds this source path.
 actions-core = { path = "../actions/", develop = true }
@@ -64,6 +65,7 @@ robocorp-log-pytest = "^0.0.5"
 types-psutil = "^7"
 types-jsonschema = "^4.22.0"
 pyinstaller = "6.16.0"
+types-pyinstaller = "6.16.0.20250918"
 pyinstaller-hooks-contrib = "2025.9"
 
 [tool.mypy]

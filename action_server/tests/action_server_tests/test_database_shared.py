@@ -154,6 +154,7 @@ def test_historical_migration_nine_retains_run_output_columns(tmp_path: Path):
             "stderr",
         ]
 
+
 def test_forward_schema_repair_removes_accidental_run_output_columns(tmp_path: Path):
     from actions.server.migrations import Migration
     from actions.server.migrations.migration_reconcile_run_columns import migrate
@@ -260,7 +261,9 @@ def test_forward_schema_repair_archives_populated_outputs_without_overwrite(
     with db.connect():
         db.initialize([Migration])
         with db.transaction():
-            db.execute("CREATE TABLE migration (id INTEGER PRIMARY KEY, name TEXT NOT NULL)")
+            db.execute(
+                "CREATE TABLE migration (id INTEGER PRIMARY KEY, name TEXT NOT NULL)"
+            )
             db.execute(
                 "CREATE TABLE run (id TEXT PRIMARY KEY, result TEXT, "
                 "stdout TEXT, stderr TEXT)"
@@ -331,8 +334,12 @@ def test_forward_schema_repair_aborts_on_archive_collision_and_retries(
                 "INSERT INTO run_legacy_output_archive VALUES (?, ?, ?)",
                 [
                     "run-1",
-                    "archived stdout" if collision_column == "stdout" else "source stdout",
-                    "archived stderr" if collision_column == "stderr" else "source stderr",
+                    "archived stdout"
+                    if collision_column == "stdout"
+                    else "source stdout",
+                    "archived stderr"
+                    if collision_column == "stderr"
+                    else "source stderr",
                 ],
             )
             db.execute(
@@ -424,7 +431,9 @@ def test_database_rejects_invalid_postgresql_urls_before_connection(value):
         "postgres://user:password@db.example:5432/actions?sslmode=require",
     ],
 )
-def test_database_accepts_valid_postgresql_urls_without_mutating_connection_value(value):
+def test_database_accepts_valid_postgresql_urls_without_mutating_connection_value(
+    value,
+):
     normalized = normalize_database_url(value)
     database = Database(value)
 
@@ -523,9 +532,7 @@ def test_cli_database_url_credentials_are_redacted_from_early_and_datadir_logs(
 
 
 def test_cli_argument_error_does_not_echo_database_url_credentials():
-    database_url = (
-        "postgres://SENTINEL_USER:SENTINEL_PASSWORD@127.0.0.1:1/actions"
-    )
+    database_url = "postgres://SENTINEL_USER:SENTINEL_PASSWORD@127.0.0.1:1/actions"
     result = subprocess.run(
         [
             sys.executable,
@@ -560,12 +567,12 @@ def test_cli_accepts_explicit_shared_database_url():
 def test_postgresql_placeholder_adapter_only_rewrites_parameters():
     db = Database("postgresql://localhost/actions_test")
 
-    sql = r'''SELECT ?, '?', "?", $$ ? $$, col ? 'key', col ?| array['?'], col ?& array['?'], -- ?
-/* ? */ ?\\?'''
+    sql = r"""SELECT ?, '?', "?", $$ ? $$, col ? 'key', col ?| array['?'], col ?& array['?'], -- ?
+/* ? */ ?\\?"""
 
     assert db._adapt_sql(sql) == (
-        r'''SELECT %s, '?', "?", $$ ? $$, col ? 'key', col ?| array['?'], col ?& array['?'], -- ?
-/* ? */ %s\\?'''
+        r"""SELECT %s, '?', "?", $$ ? $$, col ? 'key', col ?| array['?'], col ?& array['?'], -- ?
+/* ? */ %s\\?"""
     )
 
     with pytest.raises(DBError, match="expected 2 parameters, got 1"):
@@ -631,16 +638,23 @@ def test_postgresql_ddl_adapter_is_idempotent_and_marker_count_safe():
 def test_postgresql_sql_adapter_translates_legacy_boolean_ddl():
     db = Database("postgresql://localhost/actions_test")
 
-    assert db._adapt_sql(
-        "ALTER TABLE action ADD COLUMN enabled "
-        "INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1;"
-    ) == "ALTER TABLE action ADD COLUMN enabled BOOLEAN NOT NULL DEFAULT TRUE;"
-    assert db._adapt_sql(
-        "ALTER TABLE action ADD COLUMN is_consequential INTEGER;"
-    ) == "ALTER TABLE action ADD COLUMN is_consequential BOOLEAN;"
-    assert db._adapt_sql(
-        "CREATE TABLE user_session (external INTEGER CHECK(external IN (0, 1)) NOT NULL)"
-    ) == "CREATE TABLE user_session (external BOOLEAN NOT NULL)"
+    assert (
+        db._adapt_sql(
+            "ALTER TABLE action ADD COLUMN enabled "
+            "INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1;"
+        )
+        == "ALTER TABLE action ADD COLUMN enabled BOOLEAN NOT NULL DEFAULT TRUE;"
+    )
+    assert (
+        db._adapt_sql("ALTER TABLE action ADD COLUMN is_consequential INTEGER;")
+        == "ALTER TABLE action ADD COLUMN is_consequential BOOLEAN;"
+    )
+    assert (
+        db._adapt_sql(
+            "CREATE TABLE user_session (external INTEGER CHECK(external IN (0, 1)) NOT NULL)"
+        )
+        == "CREATE TABLE user_session (external BOOLEAN NOT NULL)"
+    )
     assert db._adapt_sql(
         "CREATE TABLE schedule (enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1, "
         "retry_enabled INTEGER CHECK(retry_enabled IN (0, 1)) NOT NULL DEFAULT 0)"
@@ -653,9 +667,9 @@ def test_postgresql_sql_adapter_translates_legacy_boolean_ddl():
 def test_postgresql_placeholder_adapter_preserves_json_operators_and_array_rhs():
     db = Database("postgresql://localhost/actions_test")
 
-    assert db._adapt_sql("payload ? ? AND payload ?| ? AND payload ?& ?", [1, 2, 3]) == (
-        "payload ? %s AND payload ?| %s AND payload ?& %s"
-    )
+    assert db._adapt_sql(
+        "payload ? ? AND payload ?| ? AND payload ?& ?", [1, 2, 3]
+    ) == ("payload ? %s AND payload ?| %s AND payload ?& %s")
     assert db._adapt_sql("? = ANY(?)", ["key", ["key", "other"]]) == "%s = ANY(%s)"
 
 
@@ -1158,9 +1172,7 @@ def test_two_runtime_processes_claim_one_due_schedule(tmp_path: Path):
                 database.execute("DELETE FROM run WHERE request_id=?", [request_id])
                 database.execute("DELETE FROM schedule WHERE id=?", [schedule_id])
                 database.execute("DELETE FROM action WHERE id=?", [action_id])
-                database.execute(
-                    "DELETE FROM action_package WHERE id=?", [package_id]
-                )
+                database.execute("DELETE FROM action_package WHERE id=?", [package_id])
             with database.cursor() as cursor:
                 database.execute_query(
                     cursor,
@@ -1221,7 +1233,11 @@ def test_two_database_instances_preserve_concurrent_atomic_updates():
                     cursor.fetchone()
 
     with ThreadPoolExecutor(max_workers=8) as executor:
-        list(executor.map(lambda index: increment(first if index % 2 else second), range(40)))
+        list(
+            executor.map(
+                lambda index: increment(first if index % 2 else second), range(40)
+            )
+        )
 
     with first.connect():
         assert first.first(SharedCounter).value == 40
@@ -1243,7 +1259,11 @@ def test_postgresql_transaction_rolls_back_failed_state_update():
                 raise RuntimeError("test failure")
 
         with pytest.raises(KeyError):
-            db.first(SharedCounter, "SELECT * FROM shared_counter WHERE id=?", ["rolled-back"])
+            db.first(
+                SharedCounter,
+                "SELECT * FROM shared_counter WHERE id=?",
+                ["rolled-back"],
+            )
 
 
 @pytest.mark.integration_test
@@ -1306,14 +1326,26 @@ def test_postgresql_production_models_are_visible_across_instances():
             first.insert(run)
 
         with second.connect():
-            assert second.first(ActionPackage, "SELECT * FROM action_package WHERE id=?", [package.id]) == package
-            loaded_action = second.first(Action, "SELECT * FROM action WHERE id=?", [action.id])
+            assert (
+                second.first(
+                    ActionPackage,
+                    "SELECT * FROM action_package WHERE id=?",
+                    [package.id],
+                )
+                == package
+            )
+            loaded_action = second.first(
+                Action, "SELECT * FROM action WHERE id=?", [action.id]
+            )
             assert loaded_action.enabled is True
             assert second.first(Run, "SELECT * FROM run WHERE id=?", [run.id]) == run
             with second.transaction():
                 second.update_by_id(Action, action.id, {"enabled": False})
 
-        assert first.first(Action, "SELECT * FROM action WHERE id=?", [action.id]).enabled is False
+        assert (
+            first.first(Action, "SELECT * FROM action WHERE id=?", [action.id]).enabled
+            is False
+        )
         assert "action" in first.list_table_names()
         assert "enabled" in first.list_table_and_columns()["action"]
         assert any(row[0] == "action" for row in first.list_indexes())

@@ -192,6 +192,11 @@ jobs:
       working-directory: actions
       run: uv run --no-project --python ${{ matrix.python }} poetry build -f wheel
         -o ../action_server/candidate-core-wheelhouse
+    - name: Build candidate HTTP Helper wheel for PR compatibility tests
+      if: github.event_name == 'pull_request'
+      working-directory: actions-http-helper
+      run: uv run --no-project --python ${{ matrix.python }} poetry build -f wheel
+        -o ../action_server/candidate-helper-wheelhouse
     - name: Build and clean-test wheels
       run: uv run --no-project --python ${{ matrix.python }} python -m cibuildwheel
         --output-dir wheelhouse
@@ -201,7 +206,8 @@ jobs:
           cp313-*manylinux*x86_64 cp312-*win*amd64 cp313-*win*amd64
         CIBW_BUILD_VERBOSITY: 1
         CIBW_BEFORE_TEST: ${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py
-          {project}/candidate-core-wheelhouse' || '' }}
+          {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse'
+          || '' }}
         CIBW_TEST_COMMAND: python -m pip check && python -m actions.server version
     - name: 'Upload artifact: action_server/wheelhouse/*'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

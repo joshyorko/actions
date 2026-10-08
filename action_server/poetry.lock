@@ -26,21 +26,23 @@ url = "../actions"
 
 [[package]]
 name = "actions-http-helper"
-version = "1.0.0"
+version = "1.0.2"
 description = "HTTP library that enables the use of OS certificate stores when working behind MITM firewalls"
 optional = false
-python-versions = "<4.0,>=3.10"
+python-versions = "^3.10"
 groups = ["main", "dev"]
-files = [
-    {file = "actions_http_helper-1.0.0-py3-none-any.whl", hash = "sha256:68af696fc0b86d900686e4350730fdf4b74a399e9d9d348468dc25f4cf350ad5"},
-    {file = "actions_http_helper-1.0.0.tar.gz", hash = "sha256:dc484e4f97916c7fd0d4a7c7a7a92445805a937c565b617a2d580fd9f2a81651"},
-]
+files = []
+develop = true
 
 [package.dependencies]
 pyyaml = ">=5.0"
 truststore = ">=0.10,<1.0"
 types-PyYAML = ">=6.0.0"
 urllib3 = ">=2.5.0"
+
+[package.source]
+type = "directory"
+url = "../actions-http-helper"
 
 [[package]]
 name = "actions-local-devutils"
@@ -3288,6 +3290,18 @@ files = [
 ]
 
 [[package]]
+name = "types-pyinstaller"
+version = "6.16.0.20250918"
+description = "Typing stubs for pyinstaller"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "types_pyinstaller-6.16.0.20250918-py3-none-any.whl", hash = "sha256:1bf7bc3d9bc1a10a11851ba70439feb771ecc050b5a587188a49305d24336322"},
+    {file = "types_pyinstaller-6.16.0.20250918.tar.gz", hash = "sha256:0becf0bb2f6a419ff6ad0c0cfa483962a5f845ebc1bab92bf040d90a5f685b39"},
+]
+
+[[package]]
 name = "types-pyyaml"
 version = "6.0.12.20260724"
 description = "Typing stubs for PyYAML"
@@ -3815,4 +3829,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.14"
-content-hash = "6ed0ace6165c79ddbd74e86446d5b0194bd819bee67d1367c9ce1a05482eb1bf"
+content-hash = "24448f692fa9712b4f764772bb2c0c6a40663ab1799bb0b5415b0e936e3db820"

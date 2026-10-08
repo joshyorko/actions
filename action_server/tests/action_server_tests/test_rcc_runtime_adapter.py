@@ -6,11 +6,23 @@ import pytest
 
 
 def test_artifact_digest_parser_accepts_only_exact_identity():
-    from actions.server._rcc_runtime_adapter import RccRuntimeError, parse_artifact_digest
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        parse_artifact_digest,
+    )
 
-    assert parse_artifact_digest({"artifact": "sha256:" + "a" * 64}) == "sha256:" + "a" * 64
-    assert parse_artifact_digest({"artifact": {"digest": "sha256:" + "b" * 64}}) == "sha256:" + "b" * 64
-    assert parse_artifact_digest({"artifactDigest": "sha256:" + "c" * 64}) == "sha256:" + "c" * 64
+    assert (
+        parse_artifact_digest({"artifact": "sha256:" + "a" * 64})
+        == "sha256:" + "a" * 64
+    )
+    assert (
+        parse_artifact_digest({"artifact": {"digest": "sha256:" + "b" * 64}})
+        == "sha256:" + "b" * 64
+    )
+    assert (
+        parse_artifact_digest({"artifactDigest": "sha256:" + "c" * 64})
+        == "sha256:" + "c" * 64
+    )
     for payload in ({}, {"artifact": "not-a-digest"}, {"digest": "sha256:" + "a" * 63}):
         with pytest.raises(RccRuntimeError, match="artifact"):
             parse_artifact_digest(payload)
@@ -27,39 +39,73 @@ def test_runtime_descriptor_has_no_activation_path_authority():
     serialized = json.loads(descriptor.to_json())
     assert serialized["runtime"]["kind"] == "rcc"
     assert serialized["runtime"]["artifact_digest"] == "sha256:" + "a" * 64
-    for forbidden in ("PYTHON_EXE", "CONDA_PREFIX", "ROBOCORP_HOME", "holotree", "materialization"):
+    for forbidden in (
+        "PYTHON_EXE",
+        "CONDA_PREFIX",
+        "ROBOCORP_HOME",
+        "holotree",
+        "materialization",
+    ):
         assert forbidden not in descriptor.to_json()
 
 
 def test_import_command_uses_artifact_exec_not_python_exe(tmp_path):
-    from actions.server._rcc_runtime_adapter import RccRuntimeDescriptor, build_exec_command
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        build_exec_command,
+    )
 
     descriptor = RccRuntimeDescriptor(artifact_digest="sha256:" + "c" * 64)
     command = build_exec_command(
-        Path("/opt/rcc"), descriptor, ["python", "-c", "import actions"], receipt_file=None
+        Path("/opt/rcc"),
+        descriptor,
+        ["python", "-c", "import actions"],
+        receipt_file=None,
     )
-    assert command[:5] == ["/opt/rcc", "env", "exec", "--artifact", "sha256:" + "c" * 64]
+    assert command[:5] == [
+        "/opt/rcc",
+        "env",
+        "exec",
+        "--artifact",
+        "sha256:" + "c" * 64,
+    ]
     assert "PYTHON_EXE" not in command
     assert command[-4:] == ["--", "python", "-c", "import actions"]
 
 
 def test_worker_command_has_inherit_streams_and_receipt(tmp_path):
-    from actions.server._rcc_runtime_adapter import RccRuntimeDescriptor, build_exec_command
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        build_exec_command,
+    )
 
     receipt = tmp_path / "receipt.json"
     descriptor = RccRuntimeDescriptor(artifact_digest="sha256:" + "d" * 64)
-    command = build_exec_command(Path("/opt/rcc"), descriptor, ["python", "-m", "preload_actions_server_main"], receipt_file=receipt)
+    command = build_exec_command(
+        Path("/opt/rcc"),
+        descriptor,
+        ["python", "-m", "preload_actions_server_main"],
+        receipt_file=receipt,
+    )
     assert "--inherit-streams" in command
     assert "--receipt-file" in command
     assert str(receipt) in command
-    assert command[command.index("--") + 1 :] == ["python", "-m", "preload_actions_server_main"]
+    assert command[command.index("--") + 1 :] == [
+        "python",
+        "-m",
+        "preload_actions_server_main",
+    ]
 
 
 def test_failed_publish_is_phase_error_without_fallback(tmp_path):
     from actions.server._rcc_runtime_adapter import RccRuntimeError, publish_artifact
 
     with pytest.raises(RccRuntimeError, match="publish"):
-        publish_artifact(Path("/does/not/exist"), Path("/tmp/rcc"), runner=lambda *args: (1, "", "no"))
+        publish_artifact(
+            Path("/does/not/exist"),
+            Path("/tmp/rcc"),
+            runner=lambda *args: (1, "", "no"),
+        )
 
 
 def test_acquire_rejects_missing_or_conflicting_identity():
@@ -79,9 +125,7 @@ def test_rcc_version_mismatch_fails_closed():
     from actions.server._rcc_runtime_adapter import RccRuntimeError, verify_rcc_version
 
     with pytest.raises(RccRuntimeError, match="unsupported RCC version"):
-        verify_rcc_version(
-            Path("/opt/rcc"), runner=lambda *args: (0, "v18.19.1\n", "")
-        )
+        verify_rcc_version(Path("/opt/rcc"), runner=lambda *args: (0, "v18.19.1\n", ""))
 
 
 def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_path):
@@ -89,10 +133,7 @@ def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_pa
 
     package_yaml = tmp_path / "package.yaml"
     package_yaml.write_text(
-        "spec-version: v2\n"
-        "dependencies:\n"
-        "  conda-forge:\n"
-        "    - python=3.11\n"
+        "spec-version: v2\n" "dependencies:\n" "  conda-forge:\n" "    - python=3.11\n"
     )
     digest = "sha256:" + "a" * 64
     calls = []
@@ -101,7 +142,11 @@ def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_pa
         calls.append(args)
         if args[2] == "publish":
             return 0, json.dumps({"artifact": digest}), ""
-        return 0, json.dumps({"artifactDigest": digest, "verification": {"valid": True}}), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
 
     first = prepare_runtime(
         package_yaml,
@@ -138,13 +183,21 @@ def test_cached_artifact_is_revalidated_and_rebuilt_when_materialization_disappe
         nonlocal missing
         calls.append(args)
         if args[2] == "publish":
-            return 0, json.dumps({"artifact": replacement_digest if missing else first_digest}), ""
+            return (
+                0,
+                json.dumps(
+                    {"artifact": replacement_digest if missing else first_digest}
+                ),
+                "",
+            )
         if missing and args[4] == first_digest:
             return 1, "", "artifact is not materialized"
         digest = replacement_digest if missing else first_digest
-        return 0, json.dumps(
-            {"artifactDigest": digest, "verification": {"valid": True}}
-        ), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
 
     prepare_runtime(package_yaml, Path("/opt/rcc"), runner=runner)
     missing = True
@@ -207,7 +260,11 @@ def test_environment_change_does_not_reuse_cached_artifact(tmp_path):
         if args[2] == "publish":
             return 0, json.dumps({"artifact": next(digests)}), ""
         digest = args[4]
-        return 0, json.dumps({"artifactDigest": digest, "verification": {"valid": True}}), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
 
     first = prepare_runtime(package_yaml, Path("/opt/rcc"), runner=runner)
     package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
@@ -246,7 +303,11 @@ def test_restart_reacquires_existing_artifact_without_republishing(tmp_path):
 
     def runner(*args):
         calls.append(args)
-        return 0, json.dumps({"artifactDigest": digest, "verification": {"valid": True}}), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
 
     previous = RccRuntimeDescriptor(
         artifact_digest=digest,
@@ -281,9 +342,11 @@ def test_missing_persisted_artifact_republishes_and_acquires_new_identity(tmp_pa
             return 1, "", "artifact is not materialized"
         if args[2] == "publish":
             return 0, json.dumps({"artifact": new_digest}), ""
-        return 0, json.dumps(
-            {"artifactDigest": new_digest, "verification": {"valid": True}}
-        ), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": new_digest, "verification": {"valid": True}}),
+            "",
+        )
 
     previous = RccRuntimeDescriptor(
         artifact_digest=old_digest,
@@ -449,7 +512,9 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
     assert old_call_started.wait(timeout=2)
 
     routes = FakeRoutes()
-    _server._reload_action_generation(routes, FakePool(), ["new-action"], {"new": "new"})
+    _server._reload_action_generation(
+        routes, FakePool(), ["new-action"], {"new": "new"}
+    )
     release_old_call.set()
     old_call_thread.join(timeout=2)
 
@@ -495,8 +560,15 @@ def test_scheduler_admission_pins_pool_and_package_across_reload(monkeypatch, tm
             return False
 
         def run_action(
-            self, _run, _package, _action, _input, _artifacts, _output,
-            result_json, *_args
+            self,
+            _run,
+            _package,
+            _action,
+            _input,
+            _artifacts,
+            _output,
+            result_json,
+            *_args,
         ):
             result_json.write_text('{"result": "old-generation"}')
             return 0
@@ -569,9 +641,7 @@ def test_scheduler_admission_pins_pool_and_package_across_reload(monkeypatch, tm
         "get_settings",
         lambda: SimpleNamespace(datadir=tmp_path, reuse_processes=False),
     )
-    monkeypatch.setattr(
-        _runs_state_cache, "get_global_runs_state", lambda: RunsState()
-    )
+    monkeypatch.setattr(_runs_state_cache, "get_global_runs_state", lambda: RunsState())
     monkeypatch.setattr(
         _artifact_storage, "get_artifact_storage", lambda: ArtifactStorage()
     )
@@ -579,7 +649,9 @@ def test_scheduler_admission_pins_pool_and_package_across_reload(monkeypatch, tm
     monkeypatch.setattr(_models, "get_db", lambda: DB())
     monkeypatch.setattr(_actions_run, "_set_run_as_running", lambda *_args: None)
     monkeypatch.setattr(_actions_run, "_set_run_as_finished_ok", lambda *_args: None)
-    monkeypatch.setattr(_actions_run, "_set_run_as_finished_failed", lambda *_args: None)
+    monkeypatch.setattr(
+        _actions_run, "_set_run_as_finished_failed", lambda *_args: None
+    )
     monkeypatch.setattr(run_in_thread, "run_in_thread", dispatch)
 
     async def run_scheduled():
@@ -637,7 +709,9 @@ async def _test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch
         process_pool, "_get_process_handle_key", lambda _settings, package: package.id
     )
     pool = process_pool.ActionsProcessPool.__new__(process_pool.ActionsProcessPool)
-    pool._settings = SimpleNamespace(max_processes=1, min_processes=0, reuse_processes=True)
+    pool._settings = SimpleNamespace(
+        max_processes=1, min_processes=0, reuse_processes=True
+    )
     pool._generation = 2
     pool._lock = Lock()
     pool._processes_running_semaphore = Semaphore(1)
@@ -649,9 +723,7 @@ async def _test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch
     }
     pool.actions = []
     pool._cycle_actions_iterator = iter(())
-    monkeypatch.setattr(
-        process_pool, "get_actions_process_pool", lambda: pool
-    )
+    monkeypatch.setattr(process_pool, "get_actions_process_pool", lambda: pool)
 
     class FakeRunner:
         def __init__(self, *args, **kwargs):
@@ -667,9 +739,7 @@ async def _test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch
                 generation=self.process_pool_generation,
                 action_package=self.action_package,
             ) as process:
-                lookups.append(
-                    (self.process_pool_generation, process.action_package)
-                )
+                lookups.append((self.process_pool_generation, process.action_package))
                 return "old-result"
 
     monkeypatch.setattr(_actions_run, "_ActionsRunner", FakeRunner)
@@ -816,14 +886,16 @@ def test_spec_v2_without_provider_preserves_legacy_bootstrap(monkeypatch, tmp_pa
         def create_env_and_get_vars(self, datadir, package_yaml, package_hash, devenv):
             return ActionResult(True, None, EnvInfo({"PYTHON_EXE": "/legacy/python"}))
 
-    monkeypatch.setattr(
-        "actions.server._rcc.get_rcc", lambda: LegacyRcc()
-    )
+    monkeypatch.setattr("actions.server._rcc.get_rcc", lambda: LegacyRcc())
     monkeypatch.setattr(
         "actions.server._rcc_runtime_adapter.prepare_runtime",
-        lambda *args, **kwargs: pytest.fail("RCC artifact mode was selected without an opt-in"),
+        lambda *args, **kwargs: pytest.fail(
+            "RCC artifact mode was selected without an opt-in"
+        ),
     )
-    assert ActionPackageHandler(str(package_dir), tmp_path / "data").bootstrap_environment() == (
+    assert ActionPackageHandler(
+        str(package_dir), tmp_path / "data"
+    ).bootstrap_environment() == (
         "legacy-hash",
         {
             "PYTHON_EXE": "/legacy/python",
@@ -841,7 +913,9 @@ def test_process_handle_kill_waits_for_wrapper(tmp_path):
     assert process.poll() is not None
 
 
-def test_process_startup_failure_closes_listener_and_accept_future(monkeypatch, tmp_path):
+def test_process_startup_failure_closes_listener_and_accept_future(
+    monkeypatch, tmp_path
+):
     from types import SimpleNamespace
 
     from actions.server import _actions_process_pool as process_pool
@@ -871,12 +945,18 @@ def test_process_startup_failure_closes_listener_and_accept_future(monkeypatch, 
 
     fake_socket = FakeSocket()
     fake_future = FakeFuture()
-    monkeypatch.setattr(process_pool, "_create_server_socket", lambda *args: fake_socket)
+    monkeypatch.setattr(
+        process_pool, "_create_server_socket", lambda *args: fake_socket
+    )
     monkeypatch.setattr(
         "actions.server._robo_utils.run_in_thread.run_in_thread",
         lambda *args, **kwargs: fake_future,
     )
-    monkeypatch.setattr(process_pool.subprocess, "Popen", lambda *args, **kwargs: (_ for _ in ()).throw(OSError("forced Popen failure")))
+    monkeypatch.setattr(
+        process_pool.subprocess,
+        "Popen",
+        lambda *args, **kwargs: (_ for _ in ()).throw(OSError("forced Popen failure")),
+    )
     monkeypatch.setattr(process_pool, "_get_process_handle_key", lambda *args: "key")
     monkeypatch.setattr(
         "actions.server._actions_run_helpers.get_action_package_cwd",
@@ -912,7 +992,9 @@ def test_process_startup_failure_closes_listener_and_accept_future(monkeypatch, 
     )
 
     settings = SimpleNamespace(datadir=tmp_path, reuse_processes=False)
-    package = SimpleNamespace(id="package", env_json=json.dumps({"runtime": {}}), directory=str(tmp_path))
+    package = SimpleNamespace(
+        id="package", env_json=json.dumps({"runtime": {}}), directory=str(tmp_path)
+    )
     with pytest.raises(OSError, match="forced Popen failure"):
         process_pool.ProcessHandle(settings, package, None)
 
@@ -965,13 +1047,19 @@ def test_process_pool_releases_capacity_when_warmup_fails(monkeypatch):
     pool._idle_processes = {"key": {fake_process}}
     semaphore = TrackingSemaphore()
     pool._processes_running_semaphore = semaphore
-    pool.action_package_id_to_action_package = {"package": SimpleNamespace(id="package")}
+    pool.action_package_id_to_action_package = {
+        "package": SimpleNamespace(id="package")
+    }
     pool._remove_from_running_processes = lambda process: None
-    pool._warmup_processes = lambda: (_ for _ in ()).throw(RuntimeError("forced warmup failure"))
+    pool._warmup_processes = lambda: (_ for _ in ()).throw(
+        RuntimeError("forced warmup failure")
+    )
     monkeypatch.setattr(process_pool, "_get_process_handle_key", lambda *args: "key")
     action = SimpleNamespace(action_package_id="package", name="action")
 
-    with pytest.raises(RuntimeError, match="forced warmup failure"), pool.obtain_process_for_action(action):
+    with pytest.raises(
+        RuntimeError, match="forced warmup failure"
+    ), pool.obtain_process_for_action(action):
         pass
 
     assert fake_process.killed is True
@@ -986,12 +1074,20 @@ def test_real_rcc_artifact_action_vertical(tmp_path):
         pytest.skip("set ACTIONS_REAL_RCC_ARTIFACT_TEST=1")
     provider = os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER")
     if not provider:
-        pytest.fail("ACTIONS_RUNTIME_RCC_PROVIDER must name the cache provider for real proof")
+        pytest.fail(
+            "ACTIONS_RUNTIME_RCC_PROVIDER must name the cache provider for real proof"
+        )
 
     from actions.server._actions_import import import_action_package
     from actions.server._actions_process_pool import ActionsProcessPool
     from actions.server._database import Database
-    from actions.server._models import Action, ActionPackage, Run, RunStatus, get_model_db_rules
+    from actions.server._models import (
+        Action,
+        ActionPackage,
+        Run,
+        RunStatus,
+        get_model_db_rules,
+    )
     from actions.server._rcc_runtime_adapter import read_receipt
     import actions.server._models as models
     from actions.server._settings import Settings
@@ -1042,7 +1138,9 @@ dependencies:
                 "materialization",
             ):
                 assert forbidden not in package.env_json
-            settings = Settings(datadir=tmp_path / "data", artifacts_dir=tmp_path / "artifacts")
+            settings = Settings(
+                datadir=tmp_path / "data", artifacts_dir=tmp_path / "artifacts"
+            )
             settings.reuse_processes = False
             settings.min_processes = 0
             settings.max_processes = 1
@@ -1055,16 +1153,36 @@ dependencies:
                 output_file = run_dir / "output.txt"
                 input_json.write_text("{}")
                 run = Run(
-                    id="rcc-real-run", status=RunStatus.NOT_RUN, action_id=action.id,
-                    start_time="", run_time=None, inputs="{}", result=None,
-                    error_message=None, relative_artifacts_dir="", numbered_id=1,
+                    id="rcc-real-run",
+                    status=RunStatus.NOT_RUN,
+                    action_id=action.id,
+                    start_time="",
+                    run_time=None,
+                    inputs="{}",
+                    result=None,
+                    error_message=None,
+                    relative_artifacts_dir="",
+                    numbered_id=1,
                 )
                 with pool.obtain_process_for_action(action) as handle:
-                    assert handle.run_action(
-                        run, package, action, input_json, run_dir, output_file, result_json,
-                        {}, {}, False
-                    ) == 0
-                    assert json.loads(result_json.read_text())["result"] == "rcc-v18.19.3"
+                    assert (
+                        handle.run_action(
+                            run,
+                            package,
+                            action,
+                            input_json,
+                            run_dir,
+                            output_file,
+                            result_json,
+                            {},
+                            {},
+                            False,
+                        )
+                        == 0
+                    )
+                    assert (
+                        json.loads(result_json.read_text())["result"] == "rcc-v18.19.3"
+                    )
                     receipt = handle._rcc_wrapper.receipt_file
                 assert receipt.exists()
                 parsed_receipt = read_receipt(receipt, expected_artifact_digest)
@@ -1075,3 +1193,36 @@ dependencies:
                 pool.dispose()
         finally:
             models._global_db = None
+
+
+@pytest.mark.parametrize("invalid_pythonpath", [42, ["/path"], {"path": "/path"}])
+def test_bootstrap_rejects_non_string_pythonpath(
+    monkeypatch, tmp_path, invalid_pythonpath
+):
+    from types import SimpleNamespace
+    from actions.server._action_package_handler import ActionPackageHandler
+    from actions.server._protocols import ActionResult
+    from actions.server.vendored_deps.action_package_handling.cli_errors import (
+        ActionPackageError,
+    )
+
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_PROVIDER", raising=False)
+    monkeypatch.delenv("ACTIONS_REAL_RCC_ARTIFACT_TEST", raising=False)
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "package.yaml").write_text(
+        "version: 0.1\nspec-version: v2\ndependencies: {}\n"
+    )
+
+    class InvalidEnvironmentRcc:
+        def get_package_yaml_hash(self, *args):
+            return "test-hash"
+
+        def create_env_and_get_vars(self, *args):
+            return ActionResult(
+                True, None, SimpleNamespace(env={"PYTHONPATH": invalid_pythonpath})
+            )
+
+    monkeypatch.setattr("actions.server._rcc.get_rcc", lambda: InvalidEnvironmentRcc())
+    with pytest.raises(ActionPackageError, match="PYTHONPATH must be a string"):
+        ActionPackageHandler(str(package), tmp_path / "data").bootstrap_environment()

@@ -115,7 +115,9 @@ def test_binary_spec_preserves_work_items_python_sources_for_private_loader():
         and isinstance(node.func, ast.Name)
         and node.func.id == "Analysis"
     )
-    datas = next(keyword.value for keyword in analysis.keywords if keyword.arg == "datas")
+    datas = next(
+        keyword.value for keyword in analysis.keywords if keyword.arg == "datas"
+    )
     assert any(
         isinstance(node, ast.Name) and node.id == "work_items_datas"
         for node in ast.walk(datas)

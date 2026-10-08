@@ -1141,3 +1141,41 @@ missing artifacts, unexpected tags, and version mismatches remain rejected.
 The October 8 Core checkpoint reproduced two failing inventory regressions
 before adopting the same validator already reviewed in the release and Runtime
 checkpoints. A failed PR inventory check does not constitute publication.
+
+### Integrating checkpoints before publication
+
+Assemble overlapping checkpoint histories on an isolated integration branch,
+retain the authoritative release safeguard generator, and regenerate workflows
+before testing the assembled commit. Original PR checks do not prove that merge.
+Runtime admission binds the peeled tag commit to the triggering event commit
+and requires community ancestry; unrelated later community commits do not
+invalidate an immutable release source. PR candidate dependency wheels are
+verification-only. Publish and clean-install required dependency versions before
+dependent release tags. Check registry and native release versions separately
+before allocating a version, and never reuse a published distribution version.
+The live registry on October 8 contains Runtime 1.0.2 and Core 1.0.1; the assembled
+Runtime 1.0.3 and Core 1.0.2 are candidates until release checks and workflows pass.
+
+The HTTP helper must apply persisted `proxy-settings.no-proxy` at each request
+destination, including redirects, not merely expose it through NetworkProfile.
+Only explicitly excluded hosts bypass the configured proxy; the direct and
+proxied pools share the configured TLS context. Loopback exclusions do not
+match deceptive hostname suffixes. Verify actual local HTTP operations without
+removing the user’s network profile or disabling TLS verification.
+
+Verbose transport diagnostics must redact Authorization, Proxy-Authorization,
+Cookie and Set-Cookie values before both stderr and rotating-file handlers
+format the record. Redact both API-key CLI argument spellings as well as
+database URLs. A browser-session test must prove a handshake actually succeeded
+before asserting synthetic credentials are absent from the resulting logs.
+
+The integrated Runtime candidate requires HTTP Helper 1.0.2 for correct persisted
+proxy exclusions. Build identified Core and HTTP Helper candidate wheels only
+for PR wheel tests, retaining `pip check`. Tagged release jobs must resolve the
+registry versions. Publish and clean-install HTTP Helper before Core and Runtime;
+a local directory lock entry proves candidate verification, not publication.
+
+When merging parallel checkpoint tests, check for duplicate top-level test
+names: Python silently replaces the earlier definition, masking ownership and
+coverage. Consolidate only proven identical contracts or preserve distinct
+tests under distinct names, then run the complete combined suite and lint.

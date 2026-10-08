@@ -798,7 +798,9 @@ def test_run_summary_state_selects_only_summary_columns(monkeypatch, tmp_path):
     from actions.server._models import create_db
     from actions.server._runs_state_cache import RunsState
 
-    run = replace(RUN, inputs="input-secret" * 100_000, result="result-secret" * 100_000)
+    run = replace(
+        RUN, inputs="input-secret" * 100_000, result="result-secret" * 100_000
+    )
     with create_db(tmp_path / "server.db") as db:
         with db.transaction():
             db.insert(run)

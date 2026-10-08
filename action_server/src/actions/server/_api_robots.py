@@ -778,6 +778,8 @@ async def _download_from_url(url: str) -> tuple[bool, str, Optional[Path]]:
                         download_succeeded = True
                         return True, "Downloaded successfully", temporary_path
 
+        return False, "Robot download exceeded the redirect limit", None
+
     except _RobotImportLimitError as e:
         return False, str(e), None
     except asyncio.TimeoutError:

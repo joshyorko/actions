@@ -76,7 +76,9 @@ class RccRuntimeDescriptor:
     @classmethod
     def from_dict(cls, value: object) -> "RccRuntimeDescriptor":
         if not isinstance(value, dict) or set(value) != {"runtime"}:
-            raise RccRuntimeError("descriptor", "expected a versioned runtime descriptor")
+            raise RccRuntimeError(
+                "descriptor", "expected a versioned runtime descriptor"
+            )
         runtime = value["runtime"]
         if not isinstance(runtime, dict):
             raise RccRuntimeError("descriptor", "runtime namespace is not an object")
@@ -89,7 +91,9 @@ class RccRuntimeDescriptor:
         try:
             return cls(**runtime)
         except TypeError as exc:
-            raise RccRuntimeError("descriptor", "incomplete runtime descriptor") from exc
+            raise RccRuntimeError(
+                "descriptor", "incomplete runtime descriptor"
+            ) from exc
 
     @classmethod
     def from_json(cls, value: str) -> "RccRuntimeDescriptor":
@@ -142,9 +146,7 @@ def environment_spec_fingerprint(environment: Path) -> str:
     if not isinstance(package, dict):
         raise RccRuntimeError("resolve", "package environment must be a mapping")
     normalized = {key: package[key] for key in _ENVIRONMENT_FIELDS if key in package}
-    encoded = json.dumps(
-        normalized, sort_keys=True, separators=(",", ":"), default=str
-    )
+    encoded = json.dumps(normalized, sort_keys=True, separators=(",", ":"), default=str)
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
@@ -193,7 +195,9 @@ def _subprocess_runner(*args: str) -> tuple[int, str, str]:
     return completed.returncode, completed.stdout, completed.stderr
 
 
-def _run_json(phase: str, args: Sequence[str], runner: Runner = _subprocess_runner) -> dict:
+def _run_json(
+    phase: str, args: Sequence[str], runner: Runner = _subprocess_runner
+) -> dict:
     code, stdout, stderr = runner(*args)
     if code:
         detail = (stderr or stdout).strip().splitlines()[-1:] or ["command failed"]
@@ -207,19 +211,43 @@ def _run_json(phase: str, args: Sequence[str], runner: Runner = _subprocess_runn
     return loaded
 
 
-def publish_artifact(environment: Path, rcc_location: Path, *, provider: str | None = None, runner: Runner = _subprocess_runner) -> str:
-    args = [str(rcc_location), "env", "publish", "--environment", str(environment), "--json"]
+def publish_artifact(
+    environment: Path,
+    rcc_location: Path,
+    *,
+    provider: str | None = None,
+    runner: Runner = _subprocess_runner,
+) -> str:
+    args = [
+        str(rcc_location),
+        "env",
+        "publish",
+        "--environment",
+        str(environment),
+        "--json",
+    ]
     if provider:
         args.extend(["--provider", provider])
     return parse_artifact_digest(_run_json("publish", args, runner))
 
 
-def acquire_artifact(artifact_digest: str, rcc_location: Path, *, provider: str | None = None, runner: Runner = _subprocess_runner) -> dict:
+def acquire_artifact(
+    artifact_digest: str,
+    rcc_location: Path,
+    *,
+    provider: str | None = None,
+    runner: Runner = _subprocess_runner,
+) -> dict:
     if not _DIGEST_RE.fullmatch(artifact_digest):
         raise RccRuntimeError("acquire", "invalid artifact digest")
     args = [
-        str(rcc_location), "env", "acquire", "--artifact", artifact_digest,
-        "--json", "--permissive-local",
+        str(rcc_location),
+        "env",
+        "acquire",
+        "--artifact",
+        artifact_digest,
+        "--json",
+        "--permissive-local",
     ]
     if provider:
         args.extend(["--provider", provider])
@@ -353,7 +381,9 @@ def prepare_runtime(
             contract_version=descriptor.contract_version,
         )
 
-    digest = publish_artifact(environment, rcc_location, provider=provider, runner=runner)
+    digest = publish_artifact(
+        environment, rcc_location, provider=provider, runner=runner
+    )
     acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
     descriptor = RccRuntimeDescriptor(
         artifact_digest=digest,
@@ -375,7 +405,11 @@ def build_exec_command(
     json_output: bool = True,
 ) -> list[str]:
     args = [
-        str(rcc_location), "env", "exec", "--artifact", descriptor.artifact_digest,
+        str(rcc_location),
+        "env",
+        "exec",
+        "--artifact",
+        descriptor.artifact_digest,
         "--permissive-local",
     ]
     if receipt_file is None and json_output:
@@ -458,7 +492,10 @@ def read_receipt(receipt_file: Path, artifact_digest: str) -> dict:
         receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         raise RccRuntimeError("receipt", "missing or malformed RCC receipt") from exc
-    if not isinstance(receipt, dict) or receipt.get("artifactDigest") != artifact_digest:
+    if (
+        not isinstance(receipt, dict)
+        or receipt.get("artifactDigest") != artifact_digest
+    ):
         raise RccRuntimeError("receipt", "receipt artifact identity mismatch")
     verification = receipt.get("verification")
     if not isinstance(verification, dict) or verification.get("valid") is not True:
