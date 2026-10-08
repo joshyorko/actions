@@ -1266,6 +1266,18 @@ extracting anything, on every OS. Generic casefold/path confinement alone does n
 prove portable destination safety. Keep actual native filesystem, no-follow races,
 and TLS/redirect evidence separate from source and instrumented transport tests.
 
+Allocate Robot publication staging exclusively before copying, and record ownership
+only after allocation succeeds. An initial name collision is not permission to
+delete the existing entry. The regression seeds a foreign sentinel at the allocation
+boundary and proves it survives; interrupted copies still clean their owned staging.
+This initial ownership flag does not establish identity after another actor replaces
+the entry. `resolve`, `lexists` and an atomic replacing rename also do not prove
+root identity or atomic no-overwrite publication. Retain those acceptance gaps until
+trusted-parent admission, protected source/staging, exclusive publication and cleanup
+have native filesystem proof. The reproduced replacement races require authority to
+mutate the publication namespace; no archive-only remote exploit was demonstrated,
+and this boundary does not promise a sandbox against arbitrary Runtime-UID compromise.
+
 ### Complete frontend tests versus shipping quality checks
 
 `npm run test:quality` checks lint, types, formatting and two intentionally focused
