@@ -14,10 +14,14 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v18.19.3
-      ROBOCORP_HOME: ${{ runner.temp }}/robocorp
-      COVERAGE_OUTPUT_DIR: ${{ runner.temp }}/coverage-gate
     steps:
       - uses: actions/checkout@v4
+
+      - name: Select task-local RCC and receipt directories
+        shell: bash
+        run: |
+          echo "ROBOCORP_HOME=$RUNNER_TEMP/robocorp" >> "$GITHUB_ENV"
+          echo "COVERAGE_OUTPUT_DIR=$RUNNER_TEMP/coverage-gate" >> "$GITHUB_ENV"
 
       - name: Cache RCC holotree
         uses: actions/cache@v4
@@ -39,7 +43,7 @@ jobs:
           chmod +x rcc
           echo "$PWD" >> "$GITHUB_PATH"
 
-      - name: Run toolkit contracts
+      - name: Check pinned toolchain
         run: rcc run -r developer/toolkit.yaml --dev -t Doctor
 
       - name: Bootstrap declared package environments
