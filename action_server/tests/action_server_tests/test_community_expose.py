@@ -10,6 +10,7 @@ from actions.server._community_expose import (
     TunnelManager,
     TunnelProvider,
     CloudflareProvider,
+    LocalhostRunProvider,
     _stop_process,
 )
 from actions.server._server import (
@@ -196,6 +197,150 @@ def test_provider_reaps_owned_process_when_url_wait_fails(monkeypatch, provider_
     with pytest.raises(TimeoutError, match="startup timeout"):
         asyncio.run(provider.start(8080))
     assert process.terminated
+
+
+def test_localhost_run_requires_existing_trusted_ssh_host_key(monkeypatch):
+    captured = {}
+
+    class Process:
+        pid = 1234
+
+    process = Process()
+
+    def fake_popen(command, **kwargs):
+        captured["command"] = command
+        captured["kwargs"] = kwargs
+        return process
+
+    provider = LocalhostRunProvider()
+    monkeypatch.setattr("actions.server._community_expose.subprocess.Popen", fake_popen)
+    monkeypatch.setattr(
+        provider,
+        "_wait_for_url",
+        lambda _process: asyncio.sleep(0, result="https://t.lhr.life"),
+    )
+
+    asyncio.run(provider.start(8080))
+
+    command = captured["command"]
+    assert "StrictHostKeyChecking=yes" in command
+    assert "StrictHostKeyChecking=no" not in command
+    assert "BatchMode=yes" in command
+    assert "UserKnownHostsFile" not in " ".join(command)
+
+
+def test_cloudflare_token_is_passed_through_child_environment(monkeypatch, caplog):
+    captured = {}
+
+    class Process:
+        pid = 1234
+
+        def poll(self):
+            return None
+
+    process = Process()
+
+    def fake_popen(command, **kwargs):
+        captured["command"] = command
+        captured["env"] = kwargs["env"]
+        return process
+
+    monkeypatch.setenv("CLOUDFLARE_TUNNEL_TOKEN", "synthetic-secret")
+    monkeypatch.setenv("CLOUDFLARE_TUNNEL_URL", "https://runtime.example.test")
+    monkeypatch.setenv("TUNNEL_TOKEN", "inherited-override")
+    monkeypatch.setattr("actions.server._community_expose.subprocess.Popen", fake_popen)
+    provider = CloudflareProvider()
+    provider._cloudflared_path = "cloudflared"
+
+    asyncio.run(provider.start(8080))
+
+    assert "synthetic-secret" not in captured["command"]
+    assert "inherited-override" not in captured["env"].values()
+    assert captured["env"]["TUNNEL_TOKEN"] == "synthetic-secret"
+    assert "CLOUDFLARE_TUNNEL_TOKEN" not in captured["env"]
+    assert "synthetic-secret" not in caplog.text
+
+
+def test_cloudflare_pipe_reader_does_not_depend_on_select(monkeypatch):
+    class Stream:
+        def __init__(self, lines):
+            self.lines = iter(lines)
+
+        def readline(self):
+            return next(self.lines, "")
+
+    class Process:
+        stdout = Stream([])
+        stderr = Stream(["Quick Tunnel is ready! https://sample.trycloudflare.com\n"])
+
+        def poll(self):
+            return None
+
+    import select
+
+    monkeypatch.setattr(
+        select,
+        "select",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(OSError("Windows pipe")),
+    )
+
+    result = asyncio.run(CloudflareProvider()._wait_for_url(Process(), timeout=0.2))
+
+    assert result == "https://sample.trycloudflare.com"
+
+
+def test_cloudflare_reader_timeout_reaps_process_and_unblocks_pipes(monkeypatch):
+    import threading
+
+    class BlockingStream:
+        def __init__(self):
+            self.closed = False
+            self.release = threading.Event()
+
+        def readline(self):
+            self.release.wait()
+            return ""
+
+        def close(self):
+            self.closed = True
+            self.release.set()
+
+    class Process:
+        pid = 1234
+
+        def __init__(self):
+            self.stdout = BlockingStream()
+            self.stderr = BlockingStream()
+            self.running = True
+
+        def poll(self):
+            return None if self.running else 0
+
+        def terminate(self):
+            self.running = False
+
+        def wait(self, timeout):
+            return 0
+
+    process = Process()
+    monkeypatch.setattr(
+        "actions.server._community_expose.subprocess.Popen",
+        lambda *_args, **_kwargs: process,
+    )
+    monkeypatch.delenv("CLOUDFLARE_TUNNEL_TOKEN", raising=False)
+    provider = CloudflareProvider()
+    provider._cloudflared_path = "cloudflared"
+    original_wait = provider._wait_for_url
+
+    async def short_wait(owned_process):
+        return await original_wait(owned_process, timeout=0.02)
+
+    monkeypatch.setattr(provider, "_wait_for_url", short_wait)
+    with pytest.raises(TimeoutError):
+        asyncio.run(provider.start(8080))
+
+    assert not process.running
+    assert process.stdout.closed and process.stderr.closed
 
 
 def test_server_expose_suppresses_all_provider_failure_without_active_tunnel(

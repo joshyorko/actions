@@ -20,10 +20,13 @@ import asyncio
 import logging
 import os
 import platform
+import queue
 import re
 import shutil
 import subprocess
 import sys
+import threading
+import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum
@@ -385,14 +388,15 @@ class BaseTunnelProvider(ABC):
 
 def _stop_process(process: Optional[subprocess.Popen]) -> None:
     """Reap an owned provider process once, including forced termination."""
-    if process is None or process.poll() is not None:
+    if process is None:
         return
-    process.terminate()
-    try:
-        process.wait(timeout=5)
-    except subprocess.TimeoutExpired:
-        process.kill()
-        process.wait(timeout=5)
+    if process.poll() is None:
+        process.terminate()
+        try:
+            process.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait(timeout=5)
     for stream in (getattr(process, "stdout", None), getattr(process, "stderr", None)):
         if stream is not None:
             stream.close()
@@ -424,7 +428,9 @@ class LocalhostRunProvider(BaseTunnelProvider):
             [
                 "ssh",
                 "-o",
-                "StrictHostKeyChecking=no",
+                "StrictHostKeyChecking=yes",
+                "-o",
+                "BatchMode=yes",
                 "-o",
                 "ServerAliveInterval=30",
                 "-o",
@@ -639,13 +645,19 @@ class CloudflareProvider(BaseTunnelProvider):
 
         if tunnel_token:
             # Use pre-configured tunnel
+            child_env = os.environ.copy()
+            child_env.pop("CLOUDFLARE_TUNNEL_TOKEN", None)
+            child_env["TUNNEL_TOKEN"] = tunnel_token
             process = subprocess.Popen(
-                [self._cloudflared_path, "tunnel", "run", "--token", tunnel_token],
+                [self._cloudflared_path, "tunnel", "run"],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,  # Capture stderr separately
                 text=True,
                 bufsize=1,
+                env=child_env,
             )
+            del child_env
+            del tunnel_token
             # For pre-configured tunnels, the URL is known from config
             # User should set CLOUDFLARE_TUNNEL_URL env var
             public_url = os.environ.get("CLOUDFLARE_TUNNEL_URL", "")
@@ -686,93 +698,82 @@ class CloudflareProvider(BaseTunnelProvider):
         self, process: subprocess.Popen, timeout: float = 60.0
     ) -> str:
         """Wait for cloudflared to output the public URL."""
-        import time
-
         # Match cloudflared quick tunnel URLs like https://random-words.trycloudflare.com
         # Exclude www.cloudflare.com which appears in privacy policy messages
         url_pattern = re.compile(r"https://(?!www\.)[a-zA-Z0-9-]+\.trycloudflare\.com")
 
-        start_time = time.time()
-        last_progress_log = start_time
-        collected_output: list[str] = []
-        collected_errors: list[str] = []
+        deadline = time.monotonic() + timeout
+        output: queue.Queue[tuple[str, str | None]] = queue.Queue(maxsize=128)
+        cancel_readers = threading.Event()
+        url_found = threading.Event()
+        streams = (
+            (process.stdout, "stdout"),
+            (process.stderr, "stderr"),
+        )
 
-        while True:
-            current_time = time.time()
-            elapsed = current_time - start_time
+        def read_stream(stream, stream_name: str) -> None:
+            try:
+                for line in iter(stream.readline, ""):
+                    if url_found.is_set():
+                        continue
+                    while True:
+                        if cancel_readers.is_set():
+                            return
+                        try:
+                            output.put((stream_name, line), timeout=0.1)
+                            break
+                        except queue.Full:
+                            continue
+            finally:
+                while not cancel_readers.is_set() and not url_found.is_set():
+                    try:
+                        output.put((stream_name, None), timeout=0.1)
+                        break
+                    except queue.Full:
+                        continue
 
-            # Check if process has exited
-            if process.poll() is not None:
-                # Capture any remaining output for debugging
+        active_streams = []
+        for stream, stream_name in streams:
+            if stream is not None:
+                active_streams.append(stream_name)
+                threading.Thread(
+                    target=read_stream,
+                    args=(stream, stream_name),
+                    name=f"cloudflared-{stream_name}",
+                    daemon=True,
+                ).start()
+
+        completed_streams: set[str] = set()
+
+        try:
+            while True:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise TimeoutError(
+                        f"Timed out waiting for Cloudflare URL after {timeout}s."
+                    )
                 try:
-                    stdout_rest, stderr_rest = process.communicate(timeout=1)
-                    if stdout_rest:
-                        collected_output.append(stdout_rest)
-                    if stderr_rest:
-                        collected_errors.append(stderr_rest)
-                except Exception:
-                    pass
+                    stream_name, line = output.get(timeout=min(0.1, remaining))
+                except queue.Empty:
+                    if process.poll() is not None and len(completed_streams) == len(
+                        active_streams
+                    ):
+                        raise RuntimeError(
+                            "cloudflared exited before a public URL was observed."
+                        )
+                    continue
 
-                error_output = (
-                    "\n".join(collected_errors) if collected_errors else "None"
-                )
-                stdout_output = (
-                    "\n".join(collected_output) if collected_output else "None"
-                )
-
-                raise RuntimeError(
-                    f"cloudflared exited with code {process.returncode}.\n"
-                    f"stdout: {stdout_output}\n"
-                    f"stderr: {error_output}"
-                )
-
-            # Timeout check
-            if elapsed > timeout:
-                process.terminate()
-                raise TimeoutError(
-                    f"Timed out waiting for Cloudflare URL after {timeout}s. "
-                    "Check your network connection or try a different tunnel provider."
-                )
-
-            # Log progress every 10 seconds
-            if current_time - last_progress_log > 10:
-                log.info(
-                    f"Still waiting for Cloudflare tunnel URL... ({int(elapsed)}s elapsed)"
-                )
-                last_progress_log = current_time
-
-            # cloudflared outputs the tunnel URL to stderr, not stdout!
-            # Check both streams for the URL pattern
-            import select
-
-            streams_to_check = []
-            if process.stdout:
-                streams_to_check.append((process.stdout, "stdout", collected_output))
-            if process.stderr:
-                streams_to_check.append((process.stderr, "stderr", collected_errors))
-
-            for stream, stream_name, collected in streams_to_check:
-                try:
-                    readable, _, _ = select.select([stream], [], [], 0.1)
-                    if readable:
-                        line = stream.readline()
-                        if line:
-                            line_str = line.strip()
-                            collected.append(line_str)
-                            log.debug(
-                                "cloudflared returned startup output on %s.",
-                                stream_name,
-                            )
-                            # Check for URL in this line - URL appears in stderr!
-                            match = url_pattern.search(line_str)
-                            if match:
-                                log.info(f"Found tunnel URL in {stream_name}")
-                                return match.group(0)
-                except (ValueError, OSError):
-                    # select may fail on Windows or closed file
-                    pass
-
-            await asyncio.sleep(0.1)
+                if line is None:
+                    completed_streams.add(stream_name)
+                    continue
+                match = url_pattern.search(line.strip())
+                if match:
+                    url_found.set()
+                    log.debug("cloudflared returned startup output on %s.", stream_name)
+                    return match.group(0)
+        except BaseException:
+            cancel_readers.set()
+            raise
 
     async def stop(self, tunnel: TunnelInfo) -> None:
         """Stop the Cloudflare tunnel."""
