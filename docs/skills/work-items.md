@@ -359,3 +359,11 @@ Inspect each artifact path component with `lstat`, including when `exists()` is
 false: a dangling Windows junction can remain a reparse point after its target
 is removed. The Windows gate removes a junction target and verifies rejection
 again, rather than treating missing-target behavior as ordinary absence.
+
+SQLite connection context managers commit or roll back transactions but do not close
+the connection. Native acceptance fixtures must explicitly close them before removing
+their owned temporary data directories, particularly on Windows. Canonicalize the
+harness's own temporary root on POSIX before supplying it to the Runtime; this does
+not relax rejection of links in user-configured storage roots. A browser scenario
+passing before cleanup fails is a failed harness run, and startup diagnostics must
+remain attached to the exact binary receipt.

@@ -1317,3 +1317,13 @@ all four manifest IDs, complete archive inventories, source README/package bytes
 and nested versus standalone ZIP equality. A documentation-only source change does
 not reach newly generated projects until these resources are rebuilt. Keep dependency
 pins and legal/history files unchanged when only product guidance is being repaired.
+
+For live PostgreSQL acceptance, use a fresh task-owned service pinned by immutable
+image digest and bind its randomly allocated port to loopback only. Keep generated
+fixture credentials in a mode-0600 task file, pass them only to the test environment,
+and preserve sanitized test/server logs plus image and cleanup receipts. Remove only
+the named verification container. Passing the shipped Runtime's SQLite/PostgreSQL
+suite establishes its tested database behavior; it does not prove the proposed
+Deployment schema or replace wheel, frozen, TLS or failure-recovery acceptance.
+Inspect the server log even when pytest passes: driver transaction warnings can
+expose a missing regression despite successful state assertions.

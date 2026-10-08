@@ -8,12 +8,20 @@ import os
 import re
 import secrets
 import sqlite3
+import subprocess
 import tempfile
 import urllib.request
+from contextlib import closing
 from pathlib import Path
 from typing import Any
 
-from verify_native_acceptance import NativeServer, digest, require, run_output
+from verify_native_acceptance import (
+    AcceptanceFailure,
+    NativeServer,
+    digest,
+    require,
+    run_output,
+)
 
 PACKAGE = Path(__file__).resolve().parents[1]
 
@@ -43,7 +51,7 @@ def main() -> int:
     ]
     try:
         with tempfile.TemporaryDirectory(prefix="actions-native-history-") as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             project, data = root / "project", root / "data"
             project.mkdir()
             data.mkdir()
@@ -58,7 +66,9 @@ def main() -> int:
             with server.running():
                 pass
             result = json.dumps("x" * (payload_bytes - 2))
-            with sqlite3.connect(data / "native-acceptance.db") as connection:
+            with closing(
+                sqlite3.connect(data / "native-acceptance.db")
+            ) as connection, connection:
                 for number in range(count):
                     connection.execute(
                         "INSERT INTO run (id,status,action_id,start_time,run_time,inputs,result,error_message,relative_artifacts_dir,numbered_id,request_id,run_type,robot_package_path,robot_task_name,robot_env_hash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
@@ -144,6 +154,18 @@ def main() -> int:
                 print(f"{kind}: large native history PASS", flush=True)
         receipt["status"] = "PASS"
         return 0
+    except (
+        AcceptanceFailure,
+        OSError,
+        sqlite3.Error,
+        subprocess.SubprocessError,
+    ) as error:
+        receipt["failed_phase"] = (
+            str(error) if isinstance(error, AcceptanceFailure) else type(error).__name__
+        )
+        if isinstance(error, AcceptanceFailure) and error.diagnostics is not None:
+            receipt["startup_diagnostics"] = error.diagnostics
+        return 1
     finally:
         if receipt["status"] != "PASS":
             receipt["status"] = "FAIL"
