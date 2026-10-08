@@ -1,0 +1,211 @@
+"""Run a synthetic Work Items consumer through an explicitly selected Runtime."""
+
+from __future__ import annotations
+
+import os
+import sqlite3
+import textwrap
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+import pytest
+
+PROCESSOR_ACTION = textwrap.dedent(
+    """
+    from actions import action
+
+
+    @action
+    def process_work_item(
+        db_path: str,
+        files_dir: str,
+        expected_id: str,
+        scenario: str,
+    ) -> dict[str, str]:
+        from actions.work_items import SQLiteAdapter, State
+
+        adapter = SQLiteAdapter(db_path=db_path, files_dir=files_dir)
+        if scenario == "recover":
+            recovered = adapter.recover_orphaned_work_items()
+            if expected_id not in recovered:
+                raise AssertionError("synthetic abandoned reservation was not recovered")
+
+        item_id = adapter.reserve_input()
+        if item_id != expected_id:
+            raise AssertionError("consumer reserved an unexpected synthetic input")
+        payload = adapter.load_payload(item_id)
+
+        if scenario == "fail":
+            adapter.release_input(
+                item_id,
+                State.FAILED,
+                exception={
+                    "type": "APPLICATION",
+                    "code": "SYNTHETIC_PROCESSOR_FAILURE",
+                    "message": "synthetic consumer failure",
+                },
+            )
+            raise RuntimeError("synthetic consumer failed after recording Work Item failure")
+
+        output_id = adapter.create_output(
+            item_id,
+            {"input": payload, "scenario": scenario, "result": "synthetic success"},
+        )
+        adapter.release_input(item_id, State.DONE)
+        return {"item_id": item_id, "output_id": output_id}
+    """
+)
+
+
+@pytest.mark.integration_test
+@pytest.mark.parametrize(
+    ("runtime_kind", "executable_variable"),
+    [
+        ("frozen", "DAKOTA_WORKITEMS_FROZEN_EXECUTABLE"),
+        ("go-wrapper", "DAKOTA_WORKITEMS_GO_WRAPPER_EXECUTABLE"),
+    ],
+)
+def test_packaged_runtime_executes_work_item_consumer_lifecycle(
+    runtime_kind: str,
+    executable_variable: str,
+    action_server_process,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Exercise consumer transitions and persistence through native Runtime HTTP."""
+    executable = os.environ.get(executable_variable)
+    assert executable and Path(executable).is_file(), (
+        f"Run the {runtime_kind} acceptance with its built executable selected explicitly"
+    )
+    rcc_home = os.environ.get("DAKOTA_WORKITEMS_RCC_HOME")
+    assert rcc_home and Path(rcc_home).is_dir(), "Use the task-owned RCC home"
+    monkeypatch.setenv("ACTIONS_HOME", rcc_home)
+    monkeypatch.setenv("ROBOCORP_HOME", rcc_home)
+    monkeypatch.setenv("SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE", executable)
+
+    from actions.server._selftest import ActionServerClient, ActionServerProcess
+    from actions.work_items import State
+
+    project = tmp_path / "synthetic-consumer-package"
+    project.mkdir()
+    (project / "package.yaml").write_text(
+        """version: 1
+dependencies:
+  conda-forge:
+    - python=3.12
+    - uv=0.9.26
+  pypi:
+    - actions-core=1.0.2
+    - actions-work-items=0.4.4
+""",
+        encoding="utf-8",
+    )
+    (project / "dakota_workitems_processor.py").write_text(
+        PROCESSOR_ACTION, encoding="utf-8"
+    )
+    action_server_process.start(
+        db_file="server.db",
+        cwd=project,
+        actions_sync=True,
+        timeout=600,
+        min_processes=1,
+        max_processes=1,
+    )
+    client = ActionServerClient(action_server_process)
+    package_action = "/api/actions/synthetic-consumer-package/process-work-item/run"
+
+    def create(payload: dict[str, str]) -> str:
+        response = client.post_get_response("/api/work-items", {"payload": payload})
+        return response.json()["id"]
+
+    def execute(item_id: str, scenario: str):
+        return client.post_get_response(
+            package_action,
+            {
+                "db_path": str(action_server_process.datadir / "workitems.db"),
+                "files_dir": str(action_server_process.datadir / "work_item_files"),
+                "expected_id": item_id,
+                "scenario": scenario,
+            },
+        )
+
+    success_id = create({"case": "success"})
+    database = action_server_process.datadir / "workitems.db"
+    assert database.is_file() and database.parent == action_server_process.datadir
+    success_run = execute(success_id, "success")
+    assert success_run.status_code == 200
+    success = client.get_json(f"/api/work-items/{success_id}")
+    assert success["state"] == State.DONE.value
+    success_output_id = success_run.json()["output_id"]
+    success_output = client.get_json(f"/api/work-items/{success_output_id}")
+    assert success_output["parent_id"] == success_id
+    assert success_output["queue_name"] == "default_output"
+    assert success_output["payload"] == {
+        "input": {"case": "success"},
+        "scenario": "success",
+        "result": "synthetic success",
+    }
+
+    failure_id = create({"case": "failure"})
+    client.post_error(
+        package_action,
+        500,
+        {
+            "db_path": str(database),
+            "files_dir": str(action_server_process.datadir / "work_item_files"),
+            "expected_id": failure_id,
+            "scenario": "fail",
+        },
+    )
+    failed = client.get_json(f"/api/work-items/{failure_id}")
+    assert failed["state"] == State.FAILED.value
+    assert failed["error_code"] == "SYNTHETIC_PROCESSOR_FAILURE"
+    assert failed["error_message"] == "synthetic consumer failure"
+
+    recovery_id = create({"case": "recovery"})
+    stale_reservation = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
+    # Seed only the persisted crash fixture; the consumer performs recovery and retry.
+    with sqlite3.connect(database) as connection:
+        connection.execute(
+            "UPDATE work_items SET state = ?, reserved_at = ? WHERE id = ?",
+            (State.IN_PROGRESS.value, stale_reservation, recovery_id),
+        )
+    recovery_run = execute(recovery_id, "recover")
+    assert recovery_run.status_code == 200
+    recovered = client.get_json(f"/api/work-items/{recovery_id}")
+    assert recovered["state"] == State.DONE.value
+    recovery_output_id = recovery_run.json()["output_id"]
+    recovery_output = client.get_json(f"/api/work-items/{recovery_output_id}")
+    assert recovery_output["parent_id"] == recovery_id
+    assert recovery_output["payload"]["input"] == {"case": "recovery"}
+
+    stats = client.get_json("/api/work-items/stats")
+    assert stats == {
+        "queue_name": "default",
+        "pending": 0,
+        "in_progress": 0,
+        "done": 2,
+        "failed": 1,
+        "total": 3,
+    }
+
+    # Restart the same packaged executable against the Runtime-owned data directory.
+    action_server_process.stop()
+    restarted = ActionServerProcess(action_server_process.datadir)
+    try:
+        restarted.start(
+            db_file="server.db",
+            cwd=project,
+            actions_sync=True,
+            timeout=600,
+            max_processes=1,
+        )
+        restarted_client = ActionServerClient(restarted)
+        assert restarted_client.get_json(f"/api/work-items/{success_id}")["state"] == State.DONE.value
+        assert restarted_client.get_json(f"/api/work-items/{failure_id}")["state"] == State.FAILED.value
+        assert restarted_client.get_json(f"/api/work-items/{recovery_id}")["state"] == State.DONE.value
+        assert restarted_client.get_json(f"/api/work-items/{success_output_id}")["parent_id"] == success_id
+        assert restarted_client.get_json(f"/api/work-items/{recovery_output_id}")["parent_id"] == recovery_id
+        assert restarted_client.get_json("/api/work-items/stats") == stats
+    finally:
+        restarted.stop()
