@@ -1309,3 +1309,11 @@ tuples and their order on each backend rather than inferring parity from success
 writes. The Deployment draft's scratch SQLite probe demonstrates representative
 foreign-key and replay constraints only: it does not prove authorization, committed
 pointer invariants, triggers, CAS, production migration recovery or PostgreSQL.
+
+Template README files ship verbatim in the embedded project archives because the
+bundle builder includes every source file. After changing active template guidance,
+regenerate the individual and combined ZIPs with the repository builder; compare
+all four manifest IDs, complete archive inventories, source README/package bytes,
+and nested versus standalone ZIP equality. A documentation-only source change does
+not reach newly generated projects until these resources are rebuilt. Keep dependency
+pins and legal/history files unchanged when only product guidance is being repaired.
