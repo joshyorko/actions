@@ -1296,3 +1296,16 @@ Public compatibility tables must date their live registry observations. Query ea
 package's PyPI JSON release metadata and the separate GitHub native release record;
 a roadmap ledger can lag either distribution channel. Unpublished candidate versions
 remain candidates even when source, wheel, or local native checks pass.
+
+### Scoped schema design and database parity
+
+The current generic `DBRules`/`Database.create_table_sql` path expresses single-column
+`*_id -> id` foreign keys. It does not establish composite Workspace/owner scoping.
+Proposed Deployment graphs therefore require an explicit DDL helper shared by
+upgrade migrations and fresh SQLite/PostgreSQL bootstrap paths. SQLite must declare
+forward cyclic pointer references when creating tables; PostgreSQL can add the
+pointer constraints after both tables exist. Inspect the final child/parent column
+tuples and their order on each backend rather than inferring parity from successful
+writes. The Deployment draft's scratch SQLite probe demonstrates representative
+foreign-key and replay constraints only: it does not prove authorization, committed
+pointer invariants, triggers, CAS, production migration recovery or PostgreSQL.
