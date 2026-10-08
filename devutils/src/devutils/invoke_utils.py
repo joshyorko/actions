@@ -478,6 +478,9 @@ def build_common_tasks(
             package_name,
         )
 
+        from devutils.docs import normalize_generic_alias_docs
+
+        normalize_generic_alias_docs(output_path, package_name)
         if check:
             if check_document_changes(ctx):
                 output = run(ctx, "git --no-pager diff -- docs/api")

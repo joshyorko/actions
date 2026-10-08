@@ -26,6 +26,19 @@ install. Production and release compatibility must be checked by installing
 the built wheels outside the checkout. Lazy public exports appear in `dir`
 without eager import so introspection and generated docs include ActionContext.
 
+For pull-request Runtime wheel checks, the workflow builds the matching Core
+wheel and installs it into cibuildwheel's fresh test environment before Runtime
+dependency resolution. This pairing is PR-only: tag/release builds resolve the
+declared Core version from the registry and fail if it has not been published.
+Do not broaden the candidate override to release events or remove dependency
+checks. The installer accepts one identified Core wheel and prints its digest.
+
+Python 3.10's `inspect.isclass` classifies a `list[...]` public alias differently
+from Python 3.12. The canonical docs task normalizes exported GenericAlias
+entries to variables and removes the spurious built-in origin-class entry;
+the public `Row` API itself is unchanged. Both observed renderings have an
+idempotence regression test, and the generated Core docs remain checked.
+
 The import guard checks root-private aliases and literal/concatenated dynamic
 module names through importlib aliases and `__import__`, including relative
 imports and static from-lists. Computed names are not statically proved by that
