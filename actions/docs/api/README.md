@@ -10,15 +10,16 @@
 - [`actions.chat`](./actions.chat.md#module-actionschat)
 - [`actions.cli`](./actions.cli.md#module-actionscli)
 - [`actions.mcp`](./actions.mcp.md#module-actionsmcp): Sema4.ai MCP (Model Context Protocol) bindings for Python.
+- [`actions.server_integration`](./actions.server_integration.md#module-actionsserver_integration): Versioned Actions Runtime integration contracts.
 
 ## Classes
 
 - [`_response.ActionError`](./actions._response.md#class-actionerror): This is a custom error which actions returning a `Response` are expected
+- [`_protocols.ActionsListActionTypedDict`](./actions._protocols.md#class-actionslistactiontypeddict): When `actions list` is run, the output is a
 - [`_protocols.IAction`](./actions._protocols.md#class-iaction)
 - [`_secret.OAuth2Secret`](./actions._secret.md#class-oauth2secret): This class should be used to specify that OAuth2 secrets should be received.
 - [`_request.Request`](./actions._request.md#class-request): Contains the information exposed in a request (such as headers and cookies).
 - [`_response.Response`](./actions._response.md#class-response): The response class provides a way for the user to signal that the action
-- [`builtins.list`](./builtins.md#class-list): Built-in mutable sequence.
 - [`_secret.Secret`](./actions._secret.md#class-secret): This class should be used to receive secrets.
 - [`_secret.SecretSpec`](./actions._secret.md#class-secretspec): Metadata for secrets that specifies a tag for identification by external clients.
 - [`_protocols.Status`](./actions._protocols.md#class-status): Action state
@@ -56,6 +57,9 @@
 - [`api.DiagnosticsTypedDict`](./actions.api.md#class-diagnosticstypeddict)
 - [`api.PositionTypedDict`](./actions.api.md#class-positiontypeddict)
 - [`api.RangeTypedDict`](./actions.api.md#class-rangetypeddict)
+- [`_extension_points.EPManagedParameters`](./actions._customization._extension_points.md#class-epmanagedparameters): The protocol for a class that describes the managed parameters when
+- [`_managed_parameters.ManagedParameters`](./actions._managed_parameters.md#class-managedparameters): Default implementation of EPManagedParameters.
+- [`_plugin_manager.PluginManager`](./actions._customization._plugin_manager.md#class-pluginmanager): This is a manager of plugins (which we refer to extension points and implementations).
 
 ## Functions
 
@@ -85,3 +89,4 @@
 - [`mcp.prompt`](./actions.mcp.md#function-prompt): Decorator for functions that generate prompts for the LLM.
 - [`mcp.resource`](./actions.mcp.md#function-resource): Decorator for resources which provide data to the LLM.
 - [`mcp.tool`](./actions.mcp.md#function-tool): Decorator for tools which can be used by AI agents to perform actions.
+- [`_lint_action.format_lint_results`](./actions._lint_action.md#function-format_lint_results)

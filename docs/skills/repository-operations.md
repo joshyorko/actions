@@ -1,5 +1,40 @@
 # Repository Operations
 
+## Core and Runtime candidate compatibility
+
+Core 1.0.1 does not contain `ActionContext`, `ActionsListActionTypedDict` or
+`actions.server_integration`. The candidate Core 1.0.2 introduces these public
+contracts, so a Runtime importing them declares `actions-core ^1.0.2` in its
+production dependency metadata. This is release preparation, not publication.
+Core must be published and independently verified before that Runtime release;
+neither an editable source install nor an old published wheel proves pairing.
+
+The Runtime development group resolves the matching monorepo Core through a
+relative path. Poetry 2.1.1 generates the lock from that declared group; no
+unpublished registry file hashes are invented. Runtime wheel metadata must
+contain only the version floor, never a machine/source path. The clean-wheel
+contract builds with the pinned Poetry available from RCC, installs outside
+the checkout, checks dependencies and imports the public contracts before
+testing both uninstall orders. It does not download another Poetry through
+`uv --with poetry`. Template pins remain at the published Core 1.0.1 until a
+separately authorized release and template update.
+
+The import guard checks root-private aliases and literal/concatenated dynamic
+module names through importlib aliases and `__import__`, including relative
+imports and static from-lists. Computed names are not statically proved by that
+guard. Exact `__all__` tests and installed-wheel probes complement the scan.
+Regenerate Core API docs when the public surface changes and commit generated
+files before rerunning `invoke docs --check`.
+
+The October 8 cloud Core suite recorded 19 local dummy-server failures,
+including HTTP 403 responses. A controlled loopback-only `NO_PROXY` adjustment
+did not resolve them: the locked HTTP helper uses persisted network settings
+and its urllib3 pool rather than assuming standard environment-proxy handling.
+Preserve both failed receipts, inspect the selected profile and routing before
+attributing them, and do not remove the proxy or weaken server authorization
+to make tests pass. Local mock-server connectivity is distinct from a real
+provider or authenticated product-browser contract.
+
 ## Package Boundaries
 
 Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as

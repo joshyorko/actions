@@ -2,6 +2,7 @@ import inspect
 
 
 def test_server_integration_symbols_preserve_existing_core_objects():
+    import actions.server_integration as integration
     from actions._collect_actions import DEFAULT_EXCLUSION_PATTERNS as private_patterns
     from actions._customization._extension_points import (
         EPManagedParameters as PrivateEPManagedParameters,
@@ -26,6 +27,15 @@ def test_server_integration_symbols_preserve_existing_core_objects():
     assert ManagedParameters is PrivateManagedParameters
     assert PluginManager is PrivatePluginManager
     assert format_lint_results is private_format_lint_results
+    expected_exports = {
+        "DEFAULT_EXCLUSION_PATTERNS",
+        "EPManagedParameters",
+        "ManagedParameters",
+        "PluginManager",
+        "format_lint_results",
+    }
+    assert set(integration.__all__) == expected_exports
+    assert len(integration.__all__) == len(expected_exports)
 
 
 def test_server_integration_managed_request_can_be_registered_and_injected():

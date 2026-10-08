@@ -34,6 +34,7 @@ Run only actions with a given name:
 
 # Variables
 
+- **Row**
 - **RowValue**
 
 # Functions
@@ -66,7 +67,7 @@ actions run actions.py -a enter_user
 - <b>`is_consequential`</b>: Whether the action is consequential or not. This will add `x-openai-isConsequential: true` to the action metadata and shown in OpenApi spec.
 - <b>`display_name`</b>: A name to be displayed for this action. If given will be used as the openapi.json summary for this action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L64)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L75)
 
 ```python
 action(*args, **kwargs)
@@ -86,7 +87,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L160)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L171)
 
 ```python
 action_cache(func)
@@ -98,7 +99,7 @@ ______________________________________________________________________
 
 Provides the action which is being currently run or None if not currently running an action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L195)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L206)
 
 ```python
 get_current_action() → Optional[IAction]
@@ -110,7 +111,7 @@ ______________________________________________________________________
 
 Provide the output directory being used for the run or None if there's no output dir configured.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L182)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L193)
 
 ```python
 get_output_dir() → Optional[Path]
@@ -130,7 +131,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L138)
+[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L149)
 
 ```python
 session_cache(func)
@@ -243,6 +244,12 @@ teardown(
     **kwargs
 ) → Union[Callable[[IAction], Any], Callable[[Callable[[IAction], Any]], Callable[[IAction], Any]], Callable[[Callable[[Sequence[IAction]], Any]], Callable[[Sequence[IAction]], Any]]]
 ```
+
+______________________________________________________________________
+
+# Class `ActionsListActionTypedDict`
+
+When `actions list` is run, the output is a list[ActionsListActionTypedDict].
 
 ______________________________________________________________________
 
@@ -460,14 +467,6 @@ Returns the set of fields that have been explicitly set on this model instance.
 
 **Returns:**
 A set of strings representing the fields that have been set, i.e. that were not filled from defaults.
-
-______________________________________________________________________
-
-# Class `list`
-
-Built-in mutable sequence.
-
-If no argument is given, the constructor creates a new empty list. The argument must be an iterable if specified.
 
 ______________________________________________________________________
 

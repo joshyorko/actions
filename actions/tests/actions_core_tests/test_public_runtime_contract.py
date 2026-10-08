@@ -14,7 +14,32 @@ def test_runtime_contract_types_are_public_root_exports_and_keep_private_aliases
 
     assert ActionContext is PrivateActionContext
     assert ActionsListActionTypedDict is PrivateActionsListActionTypedDict
-    assert {"ActionContext", "ActionsListActionTypedDict"} <= set(actions.__all__)
+    expected_exports = {
+        "ActionError",
+        "ActionContext",
+        "ActionsListActionTypedDict",
+        "IAction",
+        "OAuth2Secret",
+        "Request",
+        "Response",
+        "Secret",
+        "SecretSpec",
+        "Status",
+        "action",
+        "action_cache",
+        "get_current_action",
+        "get_output_dir",
+        "session_cache",
+        "setup",
+        "teardown",
+        "Table",
+        "Row",
+        "RowValue",
+    }
+    assert set(actions.__all__) == expected_exports
+    assert len(actions.__all__) == len(expected_exports)
+    for name in expected_exports:
+        assert getattr(actions, name) is not None
     assert ActionsListActionTypedDict.__required_keys__ == {
         "name",
         "line",

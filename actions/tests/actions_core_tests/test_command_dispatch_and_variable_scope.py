@@ -124,3 +124,26 @@ def test_variable_scope_is_isolated_per_thread():
         assert get_validate_and_convert_kwargs_scope() is main_scope
 
     assert get_validate_and_convert_kwargs_scope() is None
+
+
+def test_variable_scope_active_lookup_observes_mutations_and_next_scope_is_fresh():
+    from actions._variables_scope import (
+        create_validate_and_convert_kwargs_scope,
+        get_validate_and_convert_kwargs_scope,
+    )
+
+    with create_validate_and_convert_kwargs_scope("before", str) as scope:
+        scope.param_name = "after"
+        scope.param_type = int
+        active = get_validate_and_convert_kwargs_scope()
+        assert active is scope
+        assert active.param_name == "after"
+        assert active.param_type is int
+
+    assert get_validate_and_convert_kwargs_scope() is None
+    with create_validate_and_convert_kwargs_scope("fresh", bool) as fresh:
+        assert fresh is not scope
+        assert get_validate_and_convert_kwargs_scope() is fresh
+        assert fresh.param_name == "fresh"
+        assert fresh.param_type is bool
+    assert get_validate_and_convert_kwargs_scope() is None
