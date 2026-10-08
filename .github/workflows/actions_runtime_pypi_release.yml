@@ -187,6 +187,11 @@ jobs:
     - name: Set macOS deployment target
       if: ${{ matrix.name == 'macos' }}
       run: echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> "$GITHUB_ENV"
+    - name: Build candidate Core wheel for PR compatibility tests
+      if: github.event_name == 'pull_request'
+      working-directory: actions
+      run: uv run --no-project --python ${{ matrix.python }} poetry build -f wheel
+        -o ../action_server/candidate-core-wheelhouse
     - name: Build and clean-test wheels
       run: uv run --no-project --python ${{ matrix.python }} python -m cibuildwheel
         --output-dir wheelhouse
@@ -195,6 +200,8 @@ jobs:
         CIBW_BUILD: cp312-*macos*arm64 cp313-*macos*arm64 cp312-*manylinux*x86_64
           cp313-*manylinux*x86_64 cp312-*win*amd64 cp313-*win*amd64
         CIBW_BUILD_VERBOSITY: 1
+        CIBW_BEFORE_TEST: ${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py
+          {project}/candidate-core-wheelhouse' || '' }}
         CIBW_TEST_COMMAND: python -m pip check && python -m actions.server version
     - name: 'Upload artifact: action_server/wheelhouse/*'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

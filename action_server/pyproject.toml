@@ -34,7 +34,7 @@ pydantic = "^2.12.4"
 pyyaml = "^6.0.3"
 python = ">=3.12,<3.14"
 requests = "^2"
-actions-core = "^1.0.0"
+actions-core = "^1.0.2"
 actions-http-helper = "^1.0.0"
 termcolor = "^3.2.0"
 uvicorn = "^0.38.0"
@@ -53,6 +53,9 @@ redis = "^5.0.0"
 psycopg = { version = "^3.2.0", extras = ["binary"] }
 
 [tool.poetry.group.dev.dependencies]
+# Resolve the unpublished monorepo candidate for development; wheel metadata
+# retains the production version floor above and never embeds this source path.
+actions-core = { path = "../actions/", develop = true }
 actions-local-devutils = { path = "../devutils/", develop = true }
 httpx = "^0.28.1"
 types-requests = "^2"

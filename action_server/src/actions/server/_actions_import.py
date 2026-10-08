@@ -13,7 +13,7 @@ from actions.server._robo_utils.callback import Callback, OnExitContextManager
 from actions.server.vendored_deps.termcolors import bold_yellow
 
 if typing.TYPE_CHECKING:
-    from actions._protocols import ActionsListActionTypedDict
+    from actions import ActionsListActionTypedDict
 
     from actions.server._models import ActionPackage
 
@@ -307,7 +307,7 @@ def _add_actions_to_db(
 ):
     from dataclasses import asdict
 
-    from actions._lint_action import format_lint_results
+    from actions.server_integration import format_lint_results
 
     from actions.server._errors_action_server import ActionServerValidationError
     from actions.server._gen_ids import gen_uuid

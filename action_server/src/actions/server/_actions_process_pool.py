@@ -11,9 +11,9 @@ from pathlib import Path
 from queue import Queue
 from typing import TYPE_CHECKING, Dict, Iterator, List, Optional, Set
 
-from actions._action_context import ActionContext
 from termcolor import colored
 
+from actions import ActionContext
 from actions.server._models import Action, ActionPackage, Run
 from actions.server._protocols import JSONValue
 

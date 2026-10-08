@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Prepare Core 1.0.2 with public `ActionContext`,
+  `ActionsListActionTypedDict` and the versioned `actions.server_integration`
+  boundary. Core 1.0.1 does not provide these APIs. This candidate is not a
+  published release; publish Core before a Runtime requiring this boundary.
+- Cover active variable-scope mutation, exact exports and private-import
+  aliases, including statically identifiable dynamic imports.
+
 ## 1.0.1 - 2026-09-07
 
 - Correct author and maintainer metadata to Joshua Yorko and point the PyPI

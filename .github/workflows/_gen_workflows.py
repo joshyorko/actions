@@ -772,6 +772,7 @@ rm src/actions/server/bin/rcc* -f
                 "CIBW_SKIP": "pp*",
                 "CIBW_BUILD": CIBW_BUILD,
                 "CIBW_BUILD_VERBOSITY": 1,
+                "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse' || '' }}",
                 "CIBW_TEST_COMMAND": "python -m pip check && python -m actions.server version",
             },
         }
@@ -795,6 +796,12 @@ rm src/actions/server/bin/rcc* -f
                 "run": "echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> \"$GITHUB_ENV\"",
             }
         )
+        steps.append({
+            "name": "Build candidate Core wheel for PR compatibility tests",
+            "if": "github.event_name == 'pull_request'",
+            "working-directory": "actions",
+            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-core-wheelhouse",
+        })
         steps.append(self.build_manylinux_wheels())
         steps.append(self.upload_artifact_manylinux_wheels())
         return steps

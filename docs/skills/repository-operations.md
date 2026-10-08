@@ -1,5 +1,66 @@
 # Repository Operations
 
+## Core and Runtime candidate compatibility
+
+Core 1.0.1 does not contain `ActionContext`, `ActionsListActionTypedDict` or
+`actions.server_integration`. The candidate Core 1.0.2 introduces these public
+contracts, so a Runtime importing them declares `actions-core ^1.0.2` in its
+production dependency metadata. This is release preparation, not publication.
+Core must be published and independently verified before that Runtime release;
+neither an editable source install nor an old published wheel proves pairing.
+
+The Runtime development group resolves the matching monorepo Core through a
+relative path. Poetry 2.1.1 generates the lock from that declared group; no
+unpublished registry file hashes are invented. Runtime wheel metadata must
+contain only the version floor, never a machine/source path. The clean-wheel
+contract builds with the pinned Poetry available from RCC, installs outside
+the checkout, checks dependencies and imports the public contracts before
+testing both uninstall orders. It does not download another Poetry through
+`uv --with poetry`. Template pins remain at the published Core 1.0.1 until a
+separately authorized release and template update.
+
+Poetry merges the matching Core source into the main/dev lock entry: a
+`poetry install --only main` using this checkout lock still selects local Core.
+That is a monorepo development/install contract, not a production registry
+install. Production and release compatibility must be checked by installing
+the built wheels outside the checkout. Lazy public exports appear in `dir`
+without eager import so introspection and generated docs include ActionContext.
+
+For pull-request Runtime wheel checks, the workflow builds the matching Core
+wheel and installs it into cibuildwheel's fresh test environment before Runtime
+dependency resolution. This pairing is PR-only: tag/release builds resolve the
+declared Core version from the registry and fail if it has not been published.
+Do not broaden the candidate override to release events or remove dependency
+checks. The installer accepts one identified Core wheel and prints its digest.
+
+Python 3.10's `inspect.isclass` classifies a `list[...]` public alias differently
+from Python 3.12. The canonical docs task normalizes exported GenericAlias
+entries to variables and removes the spurious built-in origin-class entry;
+the public `Row` API itself is unchanged. Both observed renderings have an
+idempotence regression test, and the generated Core docs remain checked.
+Normalization stops at the next top-level heading of any kind and preserves
+following functions, exceptions and enums; those trailing sections have
+explicit regression coverage.
+Run the normalization module through the affected package's `poetry run`
+boundary, just like lazydocs. Invoke's parent tool environment need not contain
+Core; importing the target package there fails on clean hosted runners.
+
+The import guard checks root-private aliases and literal/concatenated dynamic
+module names through importlib aliases and `__import__`, including relative
+imports and static from-lists. Computed names are not statically proved by that
+guard. Exact `__all__` tests and installed-wheel probes complement the scan.
+Regenerate Core API docs when the public surface changes and commit generated
+files before rerunning `invoke docs --check`.
+
+The October 8 cloud Core suite recorded 19 local dummy-server failures,
+including HTTP 403 responses. A controlled loopback-only `NO_PROXY` adjustment
+did not resolve them: the locked HTTP helper uses persisted network settings
+and its urllib3 pool rather than assuming standard environment-proxy handling.
+Preserve both failed receipts, inspect the selected profile and routing before
+attributing them, and do not remove the proxy or weaken server authorization
+to make tests pass. Local mock-server connectivity is distinct from a real
+provider or authenticated product-browser contract.
+
 ## Package Boundaries
 
 Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as
@@ -1069,3 +1130,14 @@ Identifier-bearing requests store only the finite provenance classes `tool`,
 `prompt`, `resource`, `template`, or `<redacted>`; raw method/name values are
 used only transiently for payload/header agreement. MCP integration tests use
 the declared `httpx2` compatibility package, including direct HTTP clients.
+
+### Shared Runtime artifact inventory in Core checkpoints
+
+A Core API checkpoint can also run Runtime wheel CI. Preserve its PR-only
+candidate Core wheel setup when carrying release safeguards across branches.
+Use the shared strict Runtime validator for the assembled artifact inventory;
+equivalent manylinux tag ordering is accepted, but duplicate platform slots,
+missing artifacts, unexpected tags, and version mismatches remain rejected.
+The October 8 Core checkpoint reproduced two failing inventory regressions
+before adopting the same validator already reviewed in the release and Runtime
+checkpoints. A failed PR inventory check does not constitute publication.
