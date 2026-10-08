@@ -45,6 +45,7 @@ def main() -> int:
         parser.error("source SHA must be a full lowercase commit SHA")
 
     cases = []
+    core_wheel = args.rcc_home / "wheels" / "actions_core-1.0.2-py3-none-any.whl"
     receipt = {
         "schema_version": 1,
         "source_sha": args.source_sha,
@@ -53,6 +54,10 @@ def main() -> int:
         "status": "IN_PROGRESS",
         "consumer_execution": "Runtime action executed by the packaged Runtime worker",
         "test_harness_sqlite_writes": ["seed stale reservation fixture only"],
+        "worker_dependencies": {
+            "actions-core": "1.0.2 (task-local wheel)",
+            "actions-work-items": "0.4.4",
+        },
         "checks": [
             "consumer_action_reserves_input_and_releases_completed_with_parent_linked_output",
             "consumer_action_releases_failed_with_error_details_then_fails_run",
@@ -62,6 +67,9 @@ def main() -> int:
         "cases": cases,
     }
     try:
+        if not core_wheel.is_file():
+            raise FileNotFoundError("actions_core_1_0_2_task_local_wheel_missing")
+        receipt["actions_core_wheel_sha256"] = sha256(core_wheel)
         for kind, path in (("frozen", args.frozen), ("go-wrapper", args.go_wrapper)):
             if not path.is_file():
                 raise FileNotFoundError(f"{kind}_executable_missing")
