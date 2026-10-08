@@ -1,5 +1,6 @@
 """Keep public generic-alias documentation stable across supported Pythons."""
 
+import argparse
 import importlib
 import re
 from pathlib import Path
@@ -41,3 +42,11 @@ def normalize_generic_alias_docs(output: Path, package_name: str) -> None:
             text = text.replace(marker, marker + entry + "\n", 1)
     module_path.write_text(text)
     overview_path.write_text(overview)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--package", required=True)
+    parser.add_argument("--output", required=True, type=Path)
+    args = parser.parse_args()
+    normalize_generic_alias_docs(args.output, args.package)

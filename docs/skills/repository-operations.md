@@ -41,6 +41,9 @@ idempotence regression test, and the generated Core docs remain checked.
 Normalization stops at the next top-level heading of any kind and preserves
 following functions, exceptions and enums; those trailing sections have
 explicit regression coverage.
+Run the normalization module through the affected package's `poetry run`
+boundary, just like lazydocs. Invoke's parent tool environment need not contain
+Core; importing the target package there fails on clean hosted runners.
 
 The import guard checks root-private aliases and literal/concatenated dynamic
 module names through importlib aliases and `__import__`, including relative

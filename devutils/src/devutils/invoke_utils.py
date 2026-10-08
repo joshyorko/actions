@@ -478,9 +478,12 @@ def build_common_tasks(
             package_name,
         )
 
-        from devutils.docs import normalize_generic_alias_docs
-
-        normalize_generic_alias_docs(output_path, package_name)
+        poetry(
+            ctx,
+            "run python -m devutils.docs",
+            "--package", package_name,
+            "--output", _quote_if_needed(output_path),
+        )
         if check:
             if check_document_changes(ctx):
                 output = run(ctx, "git --no-pager diff -- docs/api")
