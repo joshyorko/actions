@@ -67,6 +67,8 @@ def main() -> int:
             "runtime_restart_state_and_output_persistence",
         ],
         "build_command": (
+            "TMPDIR=<task-local-build-tmp> GOTMPDIR=<task-local-build-tmp> "
+            "GOCACHE=<task-local-go-cache> GOMODCACHE=<task-local-go-mod-cache> "
             "PATH=<task-local-rcc-bin> .venv/bin/python -m invoke build-executable "
             f"--go-wrapper --version {args.build_version}"
         ),
