@@ -1288,6 +1288,15 @@ quality job alone does not establish reconnect, Work Items or sign-in regression
 
 ### Packaged large-history and mobile-navigation regressions
 
+Windows `KILL_ON_JOB_CLOSE` initiates descendant termination asynchronously.
+The native harness terminates its owned Job and observes its active-process count
+reach zero under a finite deadline before cleaning temporary files. Its native
+regression keeps a file open in a descendant after the leader exits, requires a
+zero-timeout process-exit assertion immediately when the ownership context returns,
+then unlinks the file. A grace-period wait before that assertion would mask the
+cleanup race. Linux helper tests do not substitute for this Windows runtime proof;
+preserve any final cleanup failure even when browser/product checks have passed.
+
 Run `poetry run python scripts/verify_native_history.py --source-sha <build-commit>
 --receipt output/native-history.json` from `action_server` after building the frozen
 and Go-wrapper artifacts and installing the declared Playwright Chromium browser.
