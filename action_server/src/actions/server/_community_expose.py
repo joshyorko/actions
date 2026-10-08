@@ -393,6 +393,9 @@ def _stop_process(process: Optional[subprocess.Popen]) -> None:
     except subprocess.TimeoutExpired:
         process.kill()
         process.wait(timeout=5)
+    for stream in (getattr(process, "stdout", None), getattr(process, "stderr", None)):
+        if stream is not None:
+            stream.close()
 
 
 class LocalhostRunProvider(BaseTunnelProvider):
@@ -437,7 +440,11 @@ class LocalhostRunProvider(BaseTunnelProvider):
         )
 
         # Parse output to get the URL
-        public_url = await self._wait_for_url(process)
+        try:
+            public_url = await self._wait_for_url(process)
+        except BaseException:
+            _stop_process(process)
+            raise
 
         return TunnelInfo(
             provider=self.name,
@@ -469,9 +476,15 @@ class LocalhostRunProvider(BaseTunnelProvider):
                 raise TimeoutError("Timed out waiting for localhost.run URL")
 
             # Read line with timeout
-            line = await asyncio.get_event_loop().run_in_executor(
-                None,
-                process.stdout.readline,  # type: ignore[union-attr]
+            remaining = max(
+                0.01, timeout - (asyncio.get_event_loop().time() - start_time)
+            )
+            line = await asyncio.wait_for(
+                asyncio.get_event_loop().run_in_executor(
+                    None,
+                    process.stdout.readline,  # type: ignore[union-attr]
+                ),
+                timeout=remaining,
             )
 
             if line:
@@ -534,7 +547,11 @@ class BoreProvider(BaseTunnelProvider):
         )
 
         # Parse output to get the URL
-        public_url = await self._wait_for_url(process)
+        try:
+            public_url = await self._wait_for_url(process)
+        except BaseException:
+            _stop_process(process)
+            raise
 
         return TunnelInfo(
             provider=self.name,
@@ -652,7 +669,11 @@ class CloudflareProvider(BaseTunnelProvider):
                 text=True,
                 bufsize=1,
             )
-            public_url = await self._wait_for_url(process)
+            try:
+                public_url = await self._wait_for_url(process)
+            except BaseException:
+                _stop_process(process)
+                raise
 
         return TunnelInfo(
             provider=self.name,

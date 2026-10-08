@@ -45,9 +45,38 @@ def _actions_home(*, create: bool) -> Path:
         home = Path(localappdata) / "actions"
     else:
         home = Path("~/.actions").expanduser()
+    home = Path(os.path.abspath(home))
+    _reject_reparse_ancestors(home)
     if create:
-        home.mkdir(parents=True, exist_ok=True)
+        home.mkdir(mode=0o700, parents=True, exist_ok=True)
+    if home.exists():
+        metadata = home.lstat()
+        if _is_reparse_point(metadata) or not stat.S_ISDIR(metadata.st_mode):
+            raise RuntimeError("ACTIONS_HOME must be a real directory.")
+        if os.name != "nt" and (
+            metadata.st_uid != os.getuid() or metadata.st_mode & 0o077
+        ):
+            raise RuntimeError("ACTIONS_HOME must be owned and private.")
     return home
+
+
+def _is_reparse_point(metadata: os.stat_result) -> bool:
+    reparse_flag = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+    file_attributes = getattr(metadata, "st_file_attributes", 0)
+    return stat.S_ISLNK(metadata.st_mode) or bool(file_attributes & reparse_flag)
+
+
+def _reject_reparse_ancestors(path: Path) -> None:
+    """Reject existing symlink/reparse components before touching state paths."""
+    current = Path(path.anchor)
+    for component in path.parts[1:]:
+        current = current / component
+        try:
+            metadata = current.lstat()
+        except FileNotFoundError:
+            continue
+        if _is_reparse_point(metadata):
+            raise RuntimeError("ACTIONS_HOME path must not contain links.")
 
 
 def _state_path(*, create: bool = False) -> Path:
@@ -55,20 +84,34 @@ def _state_path(*, create: bool = False) -> Path:
 
 
 def _read_state() -> dict[str, Any] | None:
-    path = _state_path()
-    if path.is_symlink():
-        return {"status": "failed", "reason": "state-path-unsafe"}
-    if not path.exists():
-        return None
     try:
-        metadata = path.lstat()
+        path = _state_path()
+    except RuntimeError:
+        return {"status": "failed", "reason": "state-path-unsafe"}
+    try:
+        _reject_reparse_ancestors(path.parent)
+    except RuntimeError:
+        return {"status": "failed", "reason": "state-path-unsafe"}
+    try:
+        try:
+            named_metadata = path.lstat()
+        except FileNotFoundError:
+            return None
+        if _is_reparse_point(named_metadata):
+            return {"status": "failed", "reason": "state-path-unsafe"}
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        descriptor = os.open(path, flags)
+        metadata = os.fstat(descriptor)
         if not stat.S_ISREG(metadata.st_mode):
+            os.close(descriptor)
             return {"status": "failed", "reason": "state-path-invalid"}
         if os.name != "nt" and (
             metadata.st_uid != os.getuid() or metadata.st_mode & 0o077
         ):
+            os.close(descriptor)
             return {"status": "failed", "reason": "state-permissions-invalid"}
-        data = json.loads(path.read_text(encoding="utf-8"))
+        with os.fdopen(descriptor, "r", encoding="utf-8") as stream:
+            data = json.load(stream)
     except FileNotFoundError:
         return None
     except (OSError, ValueError):
@@ -80,7 +123,9 @@ def _read_state() -> dict[str, Any] | None:
 
 def _write_state(data: dict[str, Any]) -> None:
     path = _state_path(create=True)
-    if path.is_symlink():
+    try:
+        _reject_reparse_ancestors(path.parent)
+    except RuntimeError:
         raise RuntimeError("Tunnel lifecycle state path must not be a symlink.")
     fd, temporary = tempfile.mkstemp(prefix=f"{_STATE_NAME}.", dir=path.parent)
     try:
@@ -227,28 +272,36 @@ def run_foreground(
     global _ACTIVE_MANAGER
     start(provider_name, port)
     manager = _ACTIVE_MANAGER
-    if manager is None or manager.active_tunnel is None:
-        raise RuntimeError("provider-ownership-unavailable")
-    tunnel = manager.active_tunnel
-    if tunnel.process is None:
-        raise RuntimeError("provider-process-unavailable")
-    state = _read_state()
-    on_started(_receipt(state))
-    previous_sigterm = signal.signal(signal.SIGTERM, signal.default_int_handler)
+    previous_sigterm = None
+    state = None
     try:
+        if manager is None or manager.active_tunnel is None:
+            raise RuntimeError("provider-ownership-unavailable")
+        tunnel = manager.active_tunnel
+        if tunnel.process is None:
+            raise RuntimeError("provider-process-unavailable")
+        state = _read_state()
+        previous_sigterm = signal.signal(signal.SIGTERM, signal.default_int_handler)
+        on_started(_receipt(state))
         while tunnel.process.poll() is None:
             time.sleep(0.25)
         return status()
     except KeyboardInterrupt:
         return {"status": "stopped", "provider": tunnel.provider.value}
     finally:
-        signal.signal(signal.SIGTERM, previous_sigterm)
         try:
-            asyncio.run(manager.stop())
+            if previous_sigterm is not None:
+                signal.signal(signal.SIGTERM, previous_sigterm)
         finally:
-            if state is not None:
-                _remove_state_if_owned(state)
-            _ACTIVE_MANAGER = None
+            try:
+                if manager is not None:
+                    asyncio.run(manager.stop())
+            finally:
+                try:
+                    if state is not None:
+                        _remove_state_if_owned(state)
+                finally:
+                    _ACTIVE_MANAGER = None
 
 
 def stop() -> dict[str, Any]:

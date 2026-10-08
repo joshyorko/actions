@@ -149,6 +149,55 @@ def test_cloudflare_configured_tunnel_requires_public_https_url(monkeypatch):
     assert "synthetic-secret" not in str(error.value)
 
 
+@pytest.mark.parametrize(
+    "provider_name",
+    ["localhost.run", "bore", "cloudflare"],
+)
+def test_provider_reaps_owned_process_when_url_wait_fails(monkeypatch, provider_name):
+    from actions.server._community_expose import (
+        BoreProvider,
+        CloudflareProvider,
+        LocalhostRunProvider,
+    )
+
+    provider = {
+        "localhost.run": LocalhostRunProvider,
+        "bore": BoreProvider,
+        "cloudflare": CloudflareProvider,
+    }[provider_name]()
+    if provider_name == "bore":
+        provider._bore_path = "bore"
+    elif provider_name == "cloudflare":
+        provider._cloudflared_path = "cloudflared"
+        monkeypatch.delenv("CLOUDFLARE_TUNNEL_TOKEN", raising=False)
+
+    class OwnedProcess:
+        terminated = False
+        returncode = None
+
+        def poll(self):
+            return None
+
+        def terminate(self):
+            self.terminated = True
+
+        def wait(self, timeout):
+            assert timeout == 5
+
+    process = OwnedProcess()
+    monkeypatch.setattr(
+        "actions.server._community_expose.subprocess.Popen", lambda *_a, **_k: process
+    )
+
+    async def fail_wait(*_args, **_kwargs):
+        raise TimeoutError("startup timeout")
+
+    monkeypatch.setattr(provider, "_wait_for_url", fail_wait)
+    with pytest.raises(TimeoutError, match="startup timeout"):
+        asyncio.run(provider.start(8080))
+    assert process.terminated
+
+
 def test_server_expose_suppresses_all_provider_failure_without_active_tunnel(
     monkeypatch, caplog
 ):

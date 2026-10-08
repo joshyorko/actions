@@ -184,3 +184,77 @@ def test_state_symlink_is_reported_failed_not_stopped(monkeypatch, tmp_path):
         "status": "failed",
         "reason": "state-path-unsafe",
     }
+
+
+def test_actions_home_symlink_is_rejected(monkeypatch, tmp_path):
+    home = tmp_path / "home"
+    home.mkdir()
+    linked_home = tmp_path / "linked-home"
+    linked_home.symlink_to(home, target_is_directory=True)
+    monkeypatch.setenv("ACTIONS_HOME", str(linked_home))
+
+    assert lifecycle.status() == {
+        "status": "failed",
+        "reason": "state-path-unsafe",
+    }
+
+
+@pytest.mark.parametrize("failure", ["callback", "signal-install"])
+def test_foreground_setup_failure_stops_provider_and_removes_state(
+    monkeypatch, tmp_path, failure
+):
+    monkeypatch.setenv("ACTIONS_HOME", str(tmp_path))
+    process = SimpleNamespace(pid=1234, poll=lambda: None)
+    tunnel = TunnelInfo(
+        provider=TunnelProvider.CLOUDFLARE,
+        public_url="https://example.trycloudflare.com",
+        local_port=8080,
+        process=process,
+    )
+
+    class Manager:
+        active_tunnel = tunnel
+
+        def __init__(self):
+            self.stopped = False
+
+        async def stop(self):
+            self.stopped = True
+
+    manager = Manager()
+    state = {
+        "schema_version": 1,
+        "status": "starting",
+        "provider": "cloudflare",
+        "pid": 1234,
+        "process_created": 10.0,
+    }
+    lifecycle._write_state(state)
+
+    def install_signal(*_args):
+        if failure == "signal-install":
+            raise ValueError("signal setup failed")
+        return signal.SIG_DFL
+
+    import signal
+
+    monkeypatch.setattr(lifecycle, "_ACTIVE_MANAGER", manager)
+    monkeypatch.setattr(lifecycle, "start", lambda *_args: lifecycle._receipt(state))
+    monkeypatch.setattr(lifecycle.signal, "signal", install_signal)
+    monkeypatch.setattr(lifecycle, "_read_state", lambda: state)
+    monkeypatch.setattr(
+        lifecycle,
+        "_remove_state_if_owned",
+        lambda _state: (tmp_path / lifecycle._STATE_NAME).unlink(missing_ok=True),
+    )
+
+    def on_started(_receipt):
+        if failure == "callback":
+            raise BrokenPipeError("closed stdout")
+
+    with pytest.raises((BrokenPipeError, ValueError)):
+        lifecycle.run_foreground("cloudflare", 8080, on_started=on_started)
+
+    assert manager.stopped
+    assert not (tmp_path / lifecycle._STATE_NAME).exists()
+    assert lifecycle._ACTIVE_MANAGER is None
