@@ -1248,3 +1248,20 @@ For cloud wheel validation, select the RCC-provided supported Python through
 `ACTIONS_RUNTIME_TEST_PYTHON` when a host Python lacks working venv support.
 Do not install a replacement host interpreter or treat that failure as a
 Runtime regression. Preserve the failed receipt alongside the RCC rerun.
+
+### Robot source connection and portable archive identity
+
+Robot HTTPS download admission resolves and checks every destination's entire
+DNS answer set, then connects to one admitted literal address. HTTP Host and TLS
+SNI/certificate verification retain the original hostname through HTTPX request
+extensions. Every redirect repeats admission and gets a fresh client: literal-address pools
+must not reuse another hostname's TLS session or cookies. This path deliberately disables
+implicit environment proxies: a proxy can resolve an independently chosen address
+and cannot establish the admitted destination identity. No proxy fallback or TLS
+verification downgrade is allowed. A direct-connect failure is a failed import.
+
+ZIP admission rejects Win32 reserved devices (including extension forms), alternate
+streams, invalid Windows filename characters, and trailing dots/spaces before
+extracting anything, on every OS. Generic casefold/path confinement alone does not
+prove portable destination safety. Keep actual native filesystem, no-follow races,
+and TLS/redirect evidence separate from source and instrumented transport tests.

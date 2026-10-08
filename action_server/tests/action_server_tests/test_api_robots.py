@@ -10,6 +10,7 @@ import zipfile
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, ClassVar, Self
+from urllib.parse import urlparse
 
 import pytest
 from fastapi import UploadFile
@@ -101,6 +102,7 @@ class _FakeHTTPXClient:
     def __init__(self, **kwargs: Any) -> None:
         self.kwargs = kwargs
         self.urls: list[str] = []
+        self.requests: list[tuple[str, dict[str, str], dict[str, str]]] = []
         self.__class__.instances.append(self)
 
     async def __aenter__(self) -> Self:
@@ -109,10 +111,23 @@ class _FakeHTTPXClient:
     async def __aexit__(self, exc_type, exc_value, traceback) -> None:
         return None
 
-    def stream(self, method: str, url: str) -> _FakeResponse:
+    def stream(
+        self,
+        method: str,
+        url: str,
+        *,
+        headers: dict[str, str] | None = None,
+        extensions: dict[str, str] | None = None,
+    ) -> _FakeResponse:
         assert method == "GET"
-        self.urls.append(url)
-        return self.__class__.responses[url]
+        self.requests.append((url, headers or {}, extensions or {}))
+        original_url = (
+            urlparse(url)
+            ._replace(netloc=(headers or {}).get("Host", urlparse(url).netloc))
+            .geturl()
+        )
+        self.urls.append(original_url)
+        return self.__class__.responses[original_url]
 
 
 def _fake_httpx2(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -425,7 +440,7 @@ def test_url_download_streams_and_validates_each_redirect(
     assert downloaded is not None
     assert downloaded.read_bytes() == b"PK\x03\x04payload"
     assert _FakeHTTPXClient.instances[0].kwargs["follow_redirects"] is False
-    assert _FakeHTTPXClient.instances[0].urls == [start, final]
+    assert [client.urls for client in _FakeHTTPXClient.instances] == [[start], [final]]
     downloaded.unlink()
 
 
@@ -625,3 +640,121 @@ def test_failed_robot_publication_leaves_no_partial_target(
     assert imported_path is None
     assert "publication" in message.lower() or "interrupted" in message.lower()
     assert not robots_dir.exists() or not any(robots_dir.iterdir())
+
+
+@pytest.mark.parametrize(
+    "name",
+    [
+        "robot/task.py:payload",
+        "robot/CON",
+        "robot/aux.txt",
+        "robot/NUL.log",
+        "robot/COM1",
+        "robot/LPT9.txt",
+        "robot/file.",
+        "robot/file ",
+        "robot/nested./task.py",
+    ],
+)
+def test_zip_rejects_windows_destination_aliases(name: str) -> None:
+    from actions.server import _api_robots
+
+    accepted, _, _ = _api_robots._validate_zip_members([zipfile.ZipInfo(name)])
+    assert not accepted
+
+
+def test_download_connection_uses_admitted_ip_and_preserves_tls_hostname(
+    monkeypatch, tmp_path
+):
+    from actions.server import _api_robots
+
+    _fake_httpx2(monkeypatch)
+    _allow_test_download_host(monkeypatch)
+    url = "https://rebind.example.test/robot.zip"
+    _FakeHTTPXClient.responses = {url: _FakeResponse(200, chunks=(b"PKtest",))}
+    success, message, path = asyncio.run(_api_robots._download_from_url(url))
+    assert success, message
+    assert path is not None
+    path.unlink()
+    client = _FakeHTTPXClient.instances[0]
+    assert client.kwargs.get("trust_env") is False
+    assert client.requests == [
+        (
+            "https://93.184.216.34/robot.zip",
+            {"Host": "rebind.example.test"},
+            {"sni_hostname": "rebind.example.test"},
+        )
+    ]
+
+
+def test_redirect_hosts_sharing_ip_do_not_reuse_tls_or_cookies(monkeypatch):
+    from actions.server import _api_robots
+
+    _fake_httpx2(monkeypatch)
+    _allow_test_download_host(monkeypatch)
+    first = "https://first.example.test/robot.zip"
+    second = "https://second.example.test/robot.zip"
+    _FakeHTTPXClient.responses = {
+        first: _FakeResponse(
+            302, headers={"location": second, "set-cookie": "private=secret"}
+        ),
+        second: _FakeResponse(200, chunks=(b"PKtest",)),
+    }
+    success, message, path = asyncio.run(_api_robots._download_from_url(first))
+    assert success, message
+    assert path is not None
+    path.unlink()
+    assert len(_FakeHTTPXClient.instances) == 2
+    assert [
+        client.requests[0][2]["sni_hostname"] for client in _FakeHTTPXClient.instances
+    ] == ["first.example.test", "second.example.test"]
+    assert all(len(client.requests) == 1 for client in _FakeHTTPXClient.instances)
+
+
+def test_real_http_transport_binds_ip_but_verifies_original_tls_identity(monkeypatch):
+    """Instrument the real TCP/TLS boundary without sending a network request."""
+    import ssl
+
+    import httpcore2
+    from httpcore2._backends.anyio import AnyIOBackend
+
+    from actions.server import _api_robots
+
+    admitted_hosts = []
+    connection = {}
+
+    def resolve(host, *args, **kwargs):
+        admitted_hosts.append(host)
+        address = "93.184.216.34" if len(admitted_hosts) <= 3 else "127.0.0.1"
+        return [(socket.AF_INET, socket.SOCK_STREAM, 6, "", (address, 443))]
+
+    class TLSProbe:
+        async def start_tls(self, ssl_context, server_hostname=None, timeout=None):
+            connection["tls_hostname"] = server_hostname
+            connection["check_hostname"] = ssl_context.check_hostname
+            connection["verify_mode"] = ssl_context.verify_mode
+            raise httpcore2.ConnectError("stop before real TLS or network traffic")
+
+        async def aclose(self):
+            pass
+
+    async def connect(self, host, port, *args, **kwargs):
+        connection["tcp_host"] = host
+        connection["port"] = port
+        return TLSProbe()
+
+    monkeypatch.setattr(_api_robots.socket, "getaddrinfo", resolve)
+    monkeypatch.setattr(AnyIOBackend, "connect_tcp", connect)
+    monkeypatch.setenv("HTTPS_PROXY", "http://127.0.0.1:9")
+    success, _, path = asyncio.run(
+        _api_robots._download_from_url("https://rebind.example.test/robot.zip")
+    )
+    assert not success and path is None
+    assert admitted_hosts == ["rebind.example.test"] * 3
+    assert connection == {
+        "tcp_host": "93.184.216.34",
+        "port": 443,
+        "tls_hostname": "rebind.example.test",
+        "check_hostname": True,
+        "verify_mode": ssl.CERT_REQUIRED,
+    }

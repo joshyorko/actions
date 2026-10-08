@@ -12,7 +12,7 @@ import uuid
 import zipfile
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Dict, List, Optional
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlunsplit
 
 import fastapi
 import yaml
@@ -279,6 +279,21 @@ def _validate_zip_members(
         if not raw_parts or any(part in {"", ".", ".."} for part in raw_parts):
             return False, "Zip contains an unsafe package root path", set()
 
+        reserved_names = {"CON", "PRN", "AUX", "NUL", "CLOCK$", "CONIN$", "CONOUT$"}
+        reserved_names.update(
+            f"{prefix}{digit}" for prefix in ("COM", "LPT") for digit in "123456789¹²³"
+        )
+        for part in raw_parts:
+            basename = part.split(".", 1)[0].rstrip(" ").upper()
+            if (
+                part.endswith((".", " "))
+                or basename in reserved_names
+                or any(
+                    character in '<>:"|?*' or ord(character) < 32 for character in part
+                )
+            ):
+                return False, "Zip contains an unsafe Windows destination path", set()
+
         normalized_parts = [
             unicodedata.normalize("NFC", part).casefold() for part in raw_parts
         ]
@@ -412,27 +427,27 @@ def _publish_robot_package(
     raise _RobotImportLimitError("Unable to allocate a safe robot publication path")
 
 
-def _validate_download_url(url: str) -> tuple[bool, str]:
+def _resolve_download_url(url: str) -> tuple[list[str], str]:
     try:
         parsed = urlparse(url)
         scheme = parsed.scheme.lower()
         hostname = parsed.hostname
         port = parsed.port
     except (TypeError, ValueError):
-        return False, "Robot download URL is invalid"
+        return [], "Robot download URL is invalid"
 
     if scheme != "https" or not hostname:
-        return False, "Robot download URL must use an allowed HTTPS host"
+        return [], "Robot download URL must use an allowed HTTPS host"
     if parsed.username or parsed.password or parsed.fragment:
-        return False, "Robot download URL contains disallowed credentials or fragment"
+        return [], "Robot download URL contains disallowed credentials or fragment"
     if any(ord(character) < 0x20 for character in url):
-        return False, "Robot download URL contains invalid characters"
+        return [], "Robot download URL contains invalid characters"
     if port is not None and not 1 <= port <= 65535:
-        return False, "Robot download URL has an invalid port"
+        return [], "Robot download URL has an invalid port"
 
     normalized_host = hostname.rstrip(".").lower()
     if normalized_host in {"localhost", "localhost.localdomain"}:
-        return False, "Robot download URL targets a private host"
+        return [], "Robot download URL targets a private host"
 
     try:
         addresses = {str(ipaddress.ip_address(normalized_host))}
@@ -443,14 +458,37 @@ def _validate_download_url(url: str) -> tuple[bool, str]:
             )
             addresses = {str(ipaddress.ip_address(item[4][0])) for item in address_info}
         except (OSError, UnicodeError, ValueError):
-            return False, "Robot download URL host cannot be verified"
+            return [], "Robot download URL host cannot be verified"
 
     if not addresses or any(
         not ipaddress.ip_address(address).is_global for address in addresses
     ):
-        return False, "Robot download URL targets a private host"
+        return [], "Robot download URL targets a private host"
 
-    return True, ""
+    return sorted(addresses), ""
+
+
+def _validate_download_url(url: str) -> tuple[bool, str]:
+    addresses, message = _resolve_download_url(url)
+    return bool(addresses), message
+
+
+def _pinned_download_request(
+    url: str, address: str
+) -> tuple[str, dict[str, str], dict[str, str]]:
+    parsed = urlparse(url)
+    assert parsed.hostname is not None  # Established by URL admission.
+    hostname = parsed.hostname.encode("idna").decode("ascii")
+    authority = f"[{hostname}]" if ":" in hostname else hostname
+    if parsed.port is not None:
+        authority += f":{parsed.port}"
+    destination = f"[{address}]" if ":" in address else address
+    if parsed.port is not None:
+        destination += f":{parsed.port}"
+    pinned_url = urlunsplit((parsed.scheme, destination, parsed.path, parsed.query, ""))
+    # HTTP Host and TLS verification retain the original identity. Only TCP's
+    # destination changes to the admitted literal address; no second host lookup.
+    return pinned_url, {"Host": authority}, {"sni_hostname": hostname}
 
 
 async def _save_uploaded_robot(file: UploadFile) -> Path:
@@ -695,16 +733,24 @@ async def _download_from_url(url: str) -> tuple[bool, str, Optional[Path]]:
     download_succeeded = False
     try:
         async with asyncio.timeout(_MAX_ARCHIVE_SECONDS):
-            async with httpx.AsyncClient(
-                follow_redirects=False, timeout=_MAX_ARCHIVE_SECONDS
-            ) as client:
-                current_url = url
-                for redirect_count in range(_MAX_REDIRECTS + 1):
-                    valid_url, message = _validate_download_url(current_url)
-                    if not valid_url:
-                        return False, message, None
-
-                    async with client.stream("GET", current_url) as response:
+            current_url = url
+            for redirect_count in range(_MAX_REDIRECTS + 1):
+                addresses, message = _resolve_download_url(current_url)
+                if not addresses:
+                    return False, message, None
+                pinned_url, headers, extensions = _pinned_download_request(
+                    current_url, addresses[0]
+                )
+                # Pools are keyed by the literal address, not SNI. A fresh client
+                # prevents reuse of a prior hostname's TLS session or cookies.
+                async with httpx.AsyncClient(
+                    follow_redirects=False,
+                    timeout=_MAX_ARCHIVE_SECONDS,
+                    trust_env=False,
+                ) as client:
+                    async with client.stream(
+                        "GET", pinned_url, headers=headers, extensions=extensions
+                    ) as response:
                         if response.status_code in {301, 302, 303, 307, 308}:
                             location = response.headers.get("location")
                             if not location:
