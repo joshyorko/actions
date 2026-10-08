@@ -17,6 +17,9 @@ not relabel red-before evidence with the repaired head. For authenticated
 HTTP/browser comparisons, record whether each request supplied a synthetic
 bearer; a successful bearer probe and an unauthorized browser request are
 different subjects.
+Before committing an evidence archive, verify each selected receipt's bytes
+against its ledger SHA-256 and reject absolute or parent-traversal archive
+paths. Preserve running and skipped CI states separately from passing results.
 
 The closed observability issue #137 remains referenced by roadmap #82. Preserve
 its retained contract in final vertical verification rather than reopening it
