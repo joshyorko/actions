@@ -64,8 +64,10 @@ class APIKeyAuthBackend(AuthenticationBackend):
     def __init__(
         self,
         api_key: str,
+        browser_sessions=None,
     ):
         self.api_key = api_key
+        self.browser_sessions = browser_sessions
 
     async def authenticate(
         self, conn: HTTPConnection
@@ -73,6 +75,13 @@ class APIKeyAuthBackend(AuthenticationBackend):
         from starlette.authentication import SimpleUser
         from starlette.exceptions import HTTPException
         from starlette.status import HTTP_403_FORBIDDEN
+
+        if self.browser_sessions is not None:
+            if not self.browser_sessions.authorized(conn.scope):
+                raise HTTPException(
+                    status_code=HTTP_403_FORBIDDEN, detail="Not authenticated"
+                )
+            return AuthCredentials([]), SimpleUser("authenticated")
 
         token = _get_bearer_token(conn.headers.raw)
         if token is None:

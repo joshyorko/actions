@@ -78,9 +78,10 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
 class _ConfiguredAPIKeyMiddleware:
     """Reject protected requests before FastAPI can parse their body."""
 
-    def __init__(self, app, api_key: str):
+    def __init__(self, app, api_key: str, browser_sessions=None):
         self.app = app
         self.api_key = api_key
+        self.browser_sessions = browser_sessions
 
     @staticmethod
     def _is_public(path: str) -> bool:
@@ -108,7 +109,12 @@ class _ConfiguredAPIKeyMiddleware:
         if protected and not self._is_public(path) and not is_cors_preflight:
             from ._api_action_routes import _get_bearer_token
 
-            if _get_bearer_token(scope.get("headers", [])) != self.api_key:
+            authorized = (
+                self.browser_sessions.authorized(scope)
+                if self.browser_sessions is not None
+                else _get_bearer_token(scope.get("headers", [])) == self.api_key
+            )
+            if not authorized:
                 response = PlainTextResponse(
                     "Invalid or missing API Key", status_code=403
                 )
@@ -123,6 +129,7 @@ def _mount_artifact_static_files(
     backend: str,
     root: os.PathLike,
     api_key: str | None = None,
+    browser_sessions=None,
 ) -> None:
     if backend == "local":
         from starlette.types import ASGIApp
@@ -161,7 +168,9 @@ def _mount_artifact_static_files(
 
             static_files = AuthenticationMiddleware(
                 run_scoped_static_files,
-                backend=APIKeyAuthBackend(api_key=api_key),
+                backend=APIKeyAuthBackend(
+                    api_key=api_key, browser_sessions=browser_sessions
+                ),
             )
 
         app.mount("/artifacts", static_files, name="artifacts")
@@ -190,8 +199,8 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
 
         if api_key:
             log.info(
-                colored("  🔑 API Authorization Bearer key: ", attrs=["bold"])
-                + f"{api_key}\n"
+                "API key authentication enabled. Use your configured key; "
+                "automatically generated keys are stored in .api_key in the data directory."
             )
 
         log.info(colored(f"     (using {tunnel.provider.value})", attrs=["dark"]))
@@ -290,7 +299,7 @@ def start_server(
 
     from . import _actions_process_pool
     from ._api_action_package import action_package_api_router
-    from ._api_action_routes import _ActionRoutes, _get_bearer_token
+    from ._api_action_routes import _ActionRoutes
     from ._api_analytics import analytics_api_router
     from ._api_oauth2 import oauth2_api_router
     from ._api_robots import robots_api_router
@@ -330,23 +339,28 @@ def start_server(
     log.debug(f"Starting server. Settings:\n{settings_str}")
 
     app = get_app()
+    from ._browser_session import install_browser_sessions
+
+    browser_sessions = install_browser_sessions(app, api_key)
     if api_key:
-        app.add_middleware(_ConfiguredAPIKeyMiddleware, api_key=api_key)
+        app.add_middleware(
+            _ConfiguredAPIKeyMiddleware,
+            api_key=api_key,
+            browser_sessions=browser_sessions,
+        )
 
     from actions.server._artifact_storage import get_artifact_storage
 
     artifacts_dir = get_artifact_storage().root
 
-    def verify_api_key(
-        token: HTTPAuthorizationCredentials = Security(HTTPBearer(auto_error=True)),
-    ) -> HTTPAuthorizationCredentials:
-        if token.credentials != api_key:
-            raise HTTPException(
-                status_code=403,
-                detail="Invalid or missing API Key",
-            )
-        else:
-            return token
+    async def verify_api_key(
+        request: Request,
+        token: HTTPAuthorizationCredentials | None = Security(
+            HTTPBearer(auto_error=False)
+        ),
+    ) -> None:
+        if not browser_sessions.authorized(request.scope):
+            raise HTTPException(status_code=403, detail="Invalid or missing API Key")
 
     endpoint_dependencies: list[params.Depends] = []
     websocket_dependencies: list[params.Depends] = []
@@ -355,7 +369,7 @@ def start_server(
         endpoint_dependencies.append(Depends(verify_api_key))
 
         async def verify_websocket_api_key(websocket: WebSocket) -> None:
-            if _get_bearer_token(websocket.headers.raw) != api_key:
+            if not browser_sessions.authorized(websocket.scope):
                 raise WebSocketException(code=1008)
 
         websocket_dependencies.append(Depends(verify_websocket_api_key))
@@ -615,6 +629,7 @@ def start_server(
         settings.artifact_storage_backend,
         artifacts_dir,
         api_key=api_key,
+        browser_sessions=browser_sessions,
     )
 
     # At this point the FastAPI app should be configured. What's missing now
@@ -669,9 +684,7 @@ def start_server(
         settings = get_settings()
         settings.base_url = url
         app.state.trusted_server_origins = tuple(
-            dict.fromkeys(
-                (*app.state.trusted_server_origins, settings.base_url)
-            )
+            dict.fromkeys((*app.state.trusted_server_origins, settings.base_url))
         )
 
         log.info(
@@ -698,8 +711,7 @@ def start_server(
 
                 if api_key:
                     log.info(
-                        colored("  🔑 API Authorization Bearer key: ", attrs=["bold"])
-                        + f"{api_key}\n"
+                        "API key authentication enabled. Sign in with your configured key."
                     )
 
     @asynccontextmanager

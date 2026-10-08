@@ -84,13 +84,47 @@ host tooling or falsify version discovery to make this boundary pass.
 
 For packaged UI acceptance, rebuild the canonical embedded static entrypoint
 with `invoke build-frontend`, then build the frozen executable and Go wrapper.
-Record the source SHA, any generated working-tree delta and both executable
-hashes. Check the default local server separately from a configured-key server:
+Record the source SHA, generated working-tree delta and both executable hashes.
+Check the default local server separately from a configured-key server:
 a bearer-authenticated HTTP probe does not establish browser authorization.
-The October 8 checkpoint's packaged empty history loads locally, while its
-configured-key browser requests receive 403; Work Items receives 503. These
-are retained product blockers, not browser acceptance. All data in this probe
-is synthetic, and the server remains bound to loopback without exposure.
+Exercise sign-in, authorized HTTP and native WebSocket reconnect, run-scoped
+artifact downloads, expiry and sign-out against the exact packaged executable.
+Source transport tests and fixture-backed UI tests do not replace this gate.
+
+The Runtime shell first checks `GET /browser-session` with `Cache-Control:
+no-store`; failed status checks keep protected providers unmounted and offer
+retry. Configured-key browser sign-in sends the key only as a bearer header to
+`POST /browser-session`, clears the input, and receives an opaque HttpOnly,
+SameSite=Strict, Path=/ cookie (Secure on HTTPS). The key is not persisted;
+the shell removes the legacy action-form localStorage key. The process keeps
+at most 128 sessions, with a fixed one-hour lifetime. Re-sign-in revokes the
+presented session; oldest-session eviction bounds memory. Restart invalidates
+all sessions. Startup logs do not print the API key. Operators supply their
+configured key; an automatically generated `--expose` key is available in
+`.api_key` under the configured data directory. Separate Runtime processes
+therefore require separate sign-in;
+this mechanism is not a shared authentication service.
+
+Session issuance and logout require the exact request origin validated against
+socket/configured server authority, not the CORS allowlist or arbitrary Host
+headers. Cookies are accepted only on HTTPS or actual loopback HTTP (loopback
+authority, local socket and peer). Proxy deployments must configure their public
+server URL and trusted HTTPS forwarding correctly; client-supplied forwarding
+headers do not independently establish transport trust. Cookie-authenticated
+unsafe HTTP operations and every WebSocket handshake require exact Origin;
+GET/HEAD artifact navigation may omit Origin but cannot supply a foreign one.
+Explicit invalid/duplicate Authorization headers cannot fall back to cookies.
+Bearer CLI clients without Origin retain their existing behavior. Cookie
+authority is limited to Runtime `/api/` and run-scoped `/artifacts/` surfaces.
+MCP and protected OAuth routes remain bearer-only. Legacy OAuth GET endpoints
+can mutate sessions/tokens, so they must not receive cookie authority without
+a deliberate CSRF-safe API migration; browser OAuth status remains a separate
+limitation. Existing public OAuth login/callback exceptions are unchanged. Unauthorized protected HTTP is rejected before
+body parsing. Idle cookie WebSockets close within the 250 ms lifetime check on
+expiry/logout, while each inbound/outbound message is also reauthorized.
+Sign-out and expired-session status unmount providers, clear their query cache
+and disconnect browser subscriptions. The browser rechecks on protected HTTP
+403, focus, expiry and a 15-second interval for revocation in another tab.
 
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
@@ -206,10 +240,9 @@ Runtime route family, including `/overview`, `/schedules`, `/robots`,
 the exact Runtime UI route `/artifacts/{run_id}`, and an HTTP integration test
 must exercise each family. When local artifacts are mounted at `/artifacts`,
 register that exact UI route before the mount so nested
-`/artifacts/<runId>/<filename>` requests remain raw file downloads. The mobile
-When API-key auth is enabled, pass the same key to this post-fallback mount;
-an earlier duplicate mount preempts the UI route.
-sidebar breakpoint is `max-width: 767px`, matching the Tailwind `md` boundary
+`/artifacts/<runId>/<filename>` requests remain raw file downloads. When API-key auth is enabled, pass the
+same key and browser-session authority to this post-fallback mount; an earlier
+duplicate mount preempts the UI route. The mobile sidebar breakpoint is `max-width: 767px`, matching the Tailwind `md` boundary
 at 768px; a closed mobile sidebar must be hidden from visibility and focus until
 it is opened. Contract tests should cover both invariants, while real-browser
 verification remains a separate acceptance gate.
@@ -340,8 +373,9 @@ and rejected with 403 is HTTP test infrastructure evidence; fixture teardown
 can subsequently close the socket with 1012. Diagnose that HTTP path before
 attributing the close to Runtime event delivery. Browser authentication is a
 separate acceptance boundary: `WebsocketConn` constructs `new WebSocket(url)`,
-and administrative `requestJson` calls do not attach a bearer. A configured-key
-non-browser WebSocket test does not prove authorized browser administration.
+and administrative `requestJson` calls do not attach a bearer. Browser sessions authorize those transports after explicit sign-in;
+a configured-key non-browser WebSocket test still does not prove authorized
+browser administration.
 
 Import modules that bind dependency aliases before patching the dependency's
 source module. Otherwise the first import captures the patched callable, and

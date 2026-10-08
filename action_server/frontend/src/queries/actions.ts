@@ -30,9 +30,8 @@ export const useActionRunMutation = () => {
       requestId,
       workItemQueue,
     }: ActionRunPayload) => {
-      const headers: Record<string, string> = {
-        Authorization: `Bearer ${apiKey}`,
-      };
+      const headers: Record<string, string> = {};
+      if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
       const secretDataAsObject: any = {};
 
