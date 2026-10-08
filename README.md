@@ -81,6 +81,42 @@ The community release surface has one server distribution and separate library d
 
 “Action Server” names the executable and server product. “Actions Runtime” names its PyPI distribution; they are not parallel server packages.
 
+## Release status and roadmap
+
+Status checked **October 8, 2026**. This roadmap separates what people can install today from release candidates and architecture work that is still proposed.
+
+### Available today
+
+The supported entry point is a single local Action Server: install `actions-runtime`, create a project with `action-server new`, then run it with `action-server start`. The quickstart above is the current adoption path. The published package versions are:
+
+| Distribution | Latest on PyPI |
+| --- | ---: |
+| `actions-runtime` | 1.0.2 |
+| `actions-core` | 1.0.1 |
+| `actions-http-helper` | 1.0.1 |
+| `actions-work-items` | 0.4.4 |
+
+Native Action Server release **1.0.1** is also available. Its published Linux, macOS arm64, and Windows x64 binaries are marked unsigned. Linux startup and a representative Action were verified; post-download execution on macOS and Windows was not verified for that release. PyPI and native release versions are tracked separately.
+
+### Release candidates
+
+The next package set under verification is HTTP Helper 1.0.2, Core 1.0.2, and Runtime 1.0.3. These versions are **not published**. The intended dependency order is to publish and verify HTTP Helper first, then Core, then Runtime; dependent releases must resolve published registry versions. A candidate wheel or a passing pull request does not mean a release is available.
+
+The local Runtime 1.0.3 candidate at [`119b4f1`](https://github.com/joshyorko/actions/commit/119b4f118bddb999ab1fc31b6edc5dd7fca36209) passed frozen and Go-wrapper checks plus browser, sign-in, WebSocket, Work Items, and persistence checks on the tested host. Windows startup remains unexplained and macOS execution is queued. This is candidate evidence and does not change the published native 1.0.1 status.
+
+### Proposed milestones
+
+1. **Close the local native support boundary.** Entry: build an identified candidate from an exact source commit for each supported OS. Exit: install or run each platform artifact and verify version, startup, MCP, and a representative Action; record browser and persistence checks separately. Resolve Windows startup and complete macOS execution evidence before claiming full native acceptance.
+2. **Prove durable execution.** Entry: agree on persisted Run and Attempt ownership and shared database contracts. Exit: demonstrate execution, cancellation, and artifact behavior across process restart and independent Runtime instances before describing distributed execution as supported.
+3. **Prove the adapter boundary.** Entry: complete the RCC lifecycle contract and define shared adapter conformance cases. Exit: pass those cases with RCC and a genuinely different adapter before calling the adapter boundary generic.
+4. **Expand placement and product workflows.** Entry: accept the durable execution and adapter proofs. Exit: validate independent workers, Canvas, and workflow capabilities against the same package and execution contracts before describing those placements or product paths as supported.
+
+These are evidence gates, not release dates or promises. Review the roadmap when a candidate is published, a milestone's exit evidence is accepted, or a material blocker changes; no target dates are assigned. The broader architecture is tracked in [issue #82](https://github.com/joshyorko/actions/issues/82); the public roadmap gap and compatibility policy are tracked in [issue #155](https://github.com/joshyorko/actions/issues/155). Distributed Runs, a second adapter, Canvas foundry, and cross-placement execution are not established by the roadmap or by draft designs.
+
+### Compatibility and releases
+
+Published distributions follow their own version and dependency contracts. Published templates resolve published dependencies; candidate templates may pin candidate dependencies for validation, but remain unreleased until those dependencies are published. The `2026-07-28` MCP protocol is the current advertised protocol version. Compatibility with future runtime adapters, distributed deployments, or draft architecture contracts is not implied. See the [Actions Runtime release notes](./action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md) for Runtime release history and candidate notes; published artifacts remain the source of truth for what users can install.
+
 ---
 
 
