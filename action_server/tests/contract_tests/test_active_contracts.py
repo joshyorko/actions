@@ -1,3 +1,4 @@
+import ast
 import json
 import os
 import shutil
@@ -107,6 +108,32 @@ def _assert_no_legacy_contracts(texts: dict[str, str]) -> None:
 def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
     _assert_no_legacy_contracts(
         {str(path.relative_to(REPO)): path.read_text(errors="replace") for path in _active_surface_files()}
+    )
+
+
+def test_runtime_imports_core_only_through_public_modules():
+    source_root = REPO / "action_server/src/actions/server"
+    violations = []
+    for path in sorted(source_root.rglob("*.py")):
+        tree = ast.parse(path.read_text(), filename=str(path))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom):
+                module = node.module or ""
+                if module.startswith("actions._"):
+                    names = ", ".join(alias.name for alias in node.names)
+                    violations.append(
+                        f"{path.relative_to(REPO)}:{node.lineno}: "
+                        f"from {module} import {names}"
+                    )
+            elif isinstance(node, ast.Import):
+                for alias in node.names:
+                    if alias.name.startswith("actions._"):
+                        violations.append(
+                            f"{path.relative_to(REPO)}:{node.lineno}: import {alias.name}"
+                        )
+
+    assert not violations, "Runtime imports Core-private modules:\n" + "\n".join(
+        violations
     )
 
 
@@ -321,13 +348,78 @@ def _install_and_probe(python: Path, wheels: list[Path]) -> None:
     subprocess.run([str(python), "-m", "pip", "check"], check=True, env=environment)
     checkout = str(REPO.resolve())
     probe = f"""
+import base64
 import importlib
+import inspect
+import json
 import pathlib
+import tempfile
 
 for name in ("actions", "actions.mcp", "actions.work_items", "actions.server", "actions_http"):
     module = importlib.import_module(name)
     origin = pathlib.Path(module.__file__).resolve()
     assert not str(origin).startswith({checkout!r}), origin
+
+from actions import ActionContext, ActionsListActionTypedDict, Request
+assert ActionsListActionTypedDict.__required_keys__ == {{
+    "name", "line", "file", "docs", "input_schema", "output_schema",
+    "managed_params_schema", "options",
+}}
+encoded_context = base64.b64encode(
+    json.dumps({{"secrets": {{"token": "kept"}}}}).encode("utf-8")
+).decode("ascii")
+assert ActionContext(encoded_context).value == {{"secrets": {{"token": "kept"}}}}
+
+from actions.server_integration import (
+    DEFAULT_EXCLUSION_PATTERNS,
+    EPManagedParameters,
+    ManagedParameters,
+    PluginManager,
+    format_lint_results,
+)
+request = Request.model_validate({{"headers": {{"X-Request-ID": "request-1"}}, "cookies": {{}}}})
+managed = ManagedParameters({{"request": request}})
+plugin_manager = PluginManager()
+plugin_manager.set_instance(EPManagedParameters, managed)
+request_parameter = inspect.signature(lambda request: None).parameters["request"]
+assert plugin_manager.get_instance(EPManagedParameters) is managed
+assert managed.is_managed_param("request", param=request_parameter)
+assert managed.inject_managed_params(
+    inspect.signature(lambda request: None), None, {{}}, {{}}
+) == {{"request": request}}
+assert managed.get_request_contexts({{}}, {{}}).request is request
+
+formatted = format_lint_results({{
+    "file": "actions.py",
+    "errors": [{{
+        "range": {{"start": {{"line": 7}}}},
+        "severity": 1,
+        "message": "missing description",
+    }}],
+}})
+assert formatted is not None and formatted.found_critical
+assert "Error (line 7): missing description" in formatted.message
+
+from actions.server.package.package_exclude import PackageExcludeHandler
+with tempfile.TemporaryDirectory() as directory:
+    root = pathlib.Path(directory)
+    (root / ".git").mkdir()
+    (root / ".git" / "config").write_text("ignored")
+    (root / "keep.txt").write_text("kept")
+    excludes = PackageExcludeHandler()
+    excludes.fill_exclude_patterns(DEFAULT_EXCLUSION_PATTERNS)
+    found = sorted(relative for _, relative in excludes.collect_files_excluding_patterns(root))
+    assert found == ["keep.txt"], found
+
+for name in (
+    "actions.server._actions_process_pool",
+    "actions.server._actions_import",
+    "actions.server._encryption",
+    "actions.server._new_project",
+    "actions.server._preload_actions.preload_actions_server_main",
+    "actions.server.package._package_metadata",
+):
+    importlib.import_module(name)
 """
     subprocess.run([str(python), "-c", probe], check=True, env=environment)
     subprocess.run(

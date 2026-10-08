@@ -3,7 +3,7 @@ import json
 import os
 from typing import Any, Dict, List, Optional
 
-from actions._protocols import JSONValue
+from actions.server._protocols import JSONValue
 
 
 def _get_str_list_from_env(env_name: str, env) -> List[str]:

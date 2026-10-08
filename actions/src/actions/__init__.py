@@ -34,12 +34,12 @@ Run only actions with a given name:
 
 from pathlib import Path
 from pkgutil import extend_path
-from typing import Callable, Optional, overload
+from typing import TYPE_CHECKING, Any, Callable, Optional, overload
 
 __path__ = extend_path(__path__, __name__)
 
 from ._fixtures import setup, teardown
-from ._protocols import IAction, Status
+from ._protocols import ActionsListActionTypedDict, IAction, Status
 from ._request import Request
 from ._response import ActionError, Response
 from ._secret import OAuth2Secret, Secret, SecretSpec
@@ -47,6 +47,17 @@ from ._table import Row, RowValue, Table
 
 __version__ = "1.0.1"
 version_info = [int(x) for x in __version__.split(".")]
+
+if TYPE_CHECKING:
+    from ._action_context import ActionContext
+
+
+def __getattr__(name: str) -> Any:
+    if name == "ActionContext":
+        from ._action_context import ActionContext
+
+        return ActionContext
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 @overload
@@ -204,6 +215,8 @@ def get_current_action() -> Optional[IAction]:
 
 __all__ = [
     "ActionError",
+    "ActionContext",
+    "ActionsListActionTypedDict",
     "IAction",
     "OAuth2Secret",
     "Request",
