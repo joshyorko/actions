@@ -8,9 +8,25 @@ description: Use when implementing, reviewing, debugging, testing, releasing, or
 ## Start Here
 
 1. Read root `AGENTS.md` and `docs/skills/README.md` completely.
-2. Inspect `git status --short --branch`, the affected package's `pyproject.toml`, tests, and package-local documentation before changing files.
-3. Read the relevant canonical guide. For Work Items, read `docs/skills/work-items.md`.
-4. Use `rcc:action-server` for Action Server package/API behavior. Use `rcc:rcc-workitems` for queues, adapters, producer/consumer flows, and attachments.
+2. Follow the RCC Doctor → Bootstrap → ToolkitTest onboarding sequence in `CONTRIBUTING.md`. RCC owns the outer toolchain; Poetry owns package dependencies and lockfiles. Do not bypass toolkit failures with host Poetry/pip installs.
+3. Inspect `git status --short --branch`, the affected package's `pyproject.toml`, tests, and package-local documentation before changing files.
+4. Read the relevant canonical guide. For Work Items, read `docs/skills/work-items.md`.
+5. Use `rcc:action-server` for Action Server package/API behavior. Use `rcc:rcc-workitems` for queues, adapters, producer/consumer flows, and attachments.
+
+## Specialized RCC skills
+
+The specialist skills come from [joshyorko/plugins](https://github.com/joshyorko/plugins),
+under `plugins/rcc/skills/`. Read the matching `SKILL.md` there when the plugin is
+not installed in a cloud agent environment:
+
+- [rcc-core](https://github.com/joshyorko/plugins/blob/main/plugins/rcc/skills/rcc-core/SKILL.md): RCC installation, version, and environment resolution.
+- [rcc-ci-maintenance](https://github.com/joshyorko/plugins/blob/main/plugins/rcc/skills/rcc-ci-maintenance/SKILL.md): pinned CI setup and caches.
+- [action-server](https://github.com/joshyorko/plugins/blob/main/plugins/rcc/skills/action-server/SKILL.md): ACTIONS packages, runtime, and build tasks.
+- [rcc-workitems](https://github.com/joshyorko/plugins/blob/main/plugins/rcc/skills/rcc-workitems/SKILL.md): Work Items adapters and service gates.
+
+If remote guidance is unavailable, report that limitation and continue with this
+skill and `docs/skills/`; do not invent a replacement bootstrap. Repository
+manifests, lockfiles, and task implementations remain authoritative.
 
 ## Repository Rules
 

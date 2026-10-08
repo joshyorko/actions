@@ -821,35 +821,12 @@ if [[ "$tag_version" != "$package_version" ]]; then
   exit 1
 fi
 """
-        inventory = """set -Eeuo pipefail
+        inventory = f"""set -Eeuo pipefail
 cd action_server
-rm -rf dist/verified
-mkdir -p dist/verified
-find dist/downloads -type f -printf '%f\\n' | sort > /tmp/runtime-artifacts
-test \"$(wc -l < /tmp/runtime-artifacts)\" -eq 7
-test -z \"$(uniq -d /tmp/runtime-artifacts)\"
-sdist=$(grep -E '^actions_runtime-[0-9][^/]*\\.tar\\.gz$' /tmp/runtime-artifacts)
-test \"$(printf '%s\\n' \"$sdist\" | wc -l)\" -eq 1
-version=${sdist#actions_runtime-}
-version=${version%.tar.gz}
-printf '%s\\n' \\
-  \"actions_runtime-$version.tar.gz\" \\
-  \"actions_runtime-$version-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\" \\
-  \"actions_runtime-$version-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl\" \\
-  \"actions_runtime-$version-cp312-cp312-macosx_12_0_arm64.whl\" \\
-  \"actions_runtime-$version-cp313-cp313-macosx_12_0_arm64.whl\" \\
-  \"actions_runtime-$version-cp312-cp312-win_amd64.whl\" \\
-  \"actions_runtime-$version-cp313-cp313-win_amd64.whl\" | sort > /tmp/runtime-expected
-diff -u /tmp/runtime-expected /tmp/runtime-artifacts
-while IFS= read -r basename; do
-  source=$(find dist/downloads -type f -name \"$basename\" -print -quit)
-  test -n \"$source\"
-  cp -- \"$source\" dist/verified/\"$basename\"
-done < /tmp/runtime-artifacts
-mv dist/verified/* dist/
-rmdir dist/verified
-rm -rf dist/downloads
-sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-runtime-manifest.sha256
+rm -rf actions-runtime-dist
+{run_in_env}python scripts/publish_verified_runtime.py --download-root dist/downloads --dry-run
+rm -rf dist
+mv actions-runtime-dist dist
 """
         return [
             self.checkout_repo(pinned=True),

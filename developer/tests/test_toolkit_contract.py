@@ -441,3 +441,52 @@ def test_test_uses_package_configured_gates() -> None:
         ),
         ("action_server", "run", "invoke", "test-not-integration"),
     ]
+
+
+def test_copilot_setup_uses_primary_rcc_and_isolated_toolkit_bootstrap() -> None:
+    workflows = REPOSITORY_ROOT / ".github" / "workflows"
+    reference = yaml.safe_load((workflows / "developer_toolkit.yml").read_text())
+    primary = next(
+        entry
+        for entry in reference["jobs"]["toolkit"]["strategy"]["matrix"]["include"]
+        if entry["lane"] == "primary" and entry["asset"] == "rcc-linux64"
+    )
+    workflow = yaml.safe_load((workflows / "copilot-setup-steps.yml").read_text())
+    job = workflow["jobs"]["copilot-setup-steps"]
+    assert job["permissions"] == {"contents": "read"}
+    steps = job["steps"]
+    installer = next(step for step in steps if "RCC_SHA256" in step.get("env", {}))
+    assert str(installer["env"]["RCC_VERSION"]) == primary["rcc_version"]
+    assert installer["env"]["RCC_SHA256"] == primary["sha256"]
+    install = installer["run"]
+    assert "https://github.com/joshyorko/rcc/releases/download/" in install
+    assert install.index("sha256sum --check") < install.index("chmod +x")
+    for marker in (
+        "GITHUB_PATH",
+        "GITHUB_ENV",
+        "ROBOCORP_HOME",
+        "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION",
+    ):
+        assert marker in install
+    commands = "\n".join(step.get("run", "") for step in steps)
+    ordered = [
+        "rcc robot diagnostics -r developer/toolkit.yaml --json",
+        "rcc run -r developer/toolkit.yaml --dev -t Doctor",
+        "rcc run -r developer/toolkit.yaml --dev -t Bootstrap",
+        'test -x "${package}/.venv/bin/python"',
+        "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest",
+    ]
+    positions = [commands.index(command) for command in ordered]
+    assert positions == sorted(positions)
+    assert " ".join(toolkit.PACKAGES) in commands
+    for step in steps:
+        assert not step.get("continue-on-error", False)
+    for bypass in (
+        "downloads.robocorp.com",
+        "/latest/",
+        "pip install",
+        "npm install",
+        "||",
+        "InstallCommunity",
+    ):
+        assert bypass not in commands

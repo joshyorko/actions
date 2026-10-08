@@ -167,14 +167,7 @@ The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
 the form `actions_http-<version>` and the repository secret
 `PYPI_TOKEN_ACTIONS_HTTP_HELPER`; neither publishing nor secret discovery is
-performed by local verification. The workflow pins Poetry 2.1.1 and Twine 6.2.0.
-It builds from the package directory and verifies exactly one version-matched
-universal wheel and one sdist with a retained SHA-256 manifest. The publish job
-downloads and verifies those artifacts without rebuilding them. Tag, package
-version, community ancestry, and non-empty-secret checks precede upload.
-The publish step receives `POETRY_PYPI_TOKEN_PYPI` through its environment;
-the token is never interpolated into command arguments or persisted with
-`poetry config`. The helper reads network settings from
+performed by local verification. The helper reads network settings from
 `~/.actions/network-settings.yaml` on Linux/macOS and
 `%LOCALAPPDATA%/actions/network-settings.yaml` on Windows.
 `devinstall`/develop mode substitutes the in-tree `actions-http-helper`
@@ -269,23 +262,22 @@ must agree. Native release notes come from
 `action_server/docs/CHANGELOG.md` and `action-server-v1.2.x` tags remain a
 separate legacy delivery line. Tagged PyPI runs fail closed when
 `PYPI_TOKEN_ACTIONS_RUNTIME` is absent rather than reporting successful release
-verification without publication. Regular Runtime release jobs bind the tag's
-dereferenced commit to the GitHub event SHA and require that commit to be an
-ancestor of fetched `origin/community`. Package and tag versions must agree.
-Later community advancement does not invalidate the immutable release commit.
-Native delivery uses three GitHub Release assets: `-linux64`, `-macos-arm64`,
-and `-windows64.exe`. Normal upload steps disable overwrite, so an existing
-asset name stops the upload rather than replacing published bytes.
-The community Homebrew tap consumes these GitHub releases through its own
-`action-server-daily` schedule. Its manual workflow accepts `action=release`
-and `package_id=action-server`. Actions does not dispatch that workflow, so
-publication does not guarantee an immediate tap update. Legacy Sema4AI CDN
-and S3 paths are not Runtime release destinations.
+verification without publication. Native Runtime releases publish the three
+tag-named binaries as GitHub release assets only; the Sema4AI Homebrew dispatch
+and Robocorp/Sema4AI CDN/S3 compatibility handoffs are retired. The normal
+uploader uses `overwrite: false`, so a same-name asset collision fails closed
+instead of replacing a published binary.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
-One final `pypi` job downloads the exact artifacts, rejects duplicate or
-unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
+One final `pypi` job downloads the sdist and wheel artifacts separately, then
+stages them through `publish_verified_runtime.py --download-root`. The validator
+parses wheel filenames into tag sets, so platform tags in a different order are
+accepted when the set is identical. It still requires the exact package/version,
+the cp312/cp313 interpreter and ABI, the approved manylinux/macOS/Windows tag
+sets, no build tag, exactly seven artifacts, and one wheel for each of the six
+interpreter/platform slots; duplicate tag components and duplicate slots fail.
+The job installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches
 `uv run --no-project --python 3.12 poetry version --short`, then retains that
 verified directory as `actions-runtime-dist`. The workflow publishes the same
@@ -333,8 +325,9 @@ unexpected or expired artifacts, and has no PyPI credential or upload step. Bina
 recovery builds unsigned binaries when all platform signing credentials are absent,
 signs when the complete set is present, and rejects partial configuration. Recovery
 of 1.0.1 verifies its pinned source SHA and skips PyPI recovery. Native recovery
-publishes only to a GitHub Release draft. It does not call S3, CDN, or Homebrew
-helpers. Its draft release path hashes all three assets first, resumes an
+uses only GitHub release assets after verifying the immutable source and asset
+digests; it does not invoke the retired S3/CDN/Homebrew handoffs. Its draft release
+path hashes all three assets first, resumes an
 existing draft by uploading only missing exact assets, rejects published releases,
 conflicting digests, and extraneous names, never clobbers, and publishes only after
 one final re-fetch proves draft state, the exact three-name inventory, every asset
@@ -705,6 +698,23 @@ teardown runs in `finally`, so body exceptions still trigger manager, watcher,
 and child cleanup; manager-stop failures are logged and isolated so they do
 not replace the body exception or skip later cleanup. Failed child enumeration
 logs and treats the child set as empty.
+
+Cloud agents start with `AGENTS.md` and
+`.agents/skills/actions-repository/SKILL.md`; the latter links the specialized
+RCC/Action Server skills in `joshyorko/plugins`. These instructions apply even
+when the agent has no plugin installer. RCC owns the outer toolchain, while
+Poetry owns package dependencies and lockfiles; a failed setup is not permission
+to replace that boundary with host pip/Poetry installations.
+
+Copilot's reserved `copilot-setup-steps` job installs the same checksum-pinned
+Josh RCC Linux asset as the primary developer-toolkit matrix, persists its PATH
+and writable `ROBOCORP_HOME` through GitHub environment files, and runs manifest
+diagnostics, Doctor, Bootstrap, package `.venv` checks, and ToolkitTest in order.
+It does not install frontend dependencies globally, alter npm manifests, build
+or install Action Server, or suppress setup failures. Frontend tasks perform
+their own locked `npm ci` when requested. Keep the Copilot pin and checksum in
+sync with the primary Linux matrix entry; the gateway contract tests check this
+relationship and task ordering.
 
 The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
 macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's
