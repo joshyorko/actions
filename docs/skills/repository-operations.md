@@ -15,6 +15,12 @@ The Core clean-wheel verifier compares the installed version with the input whee
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
 
+Runtime's installed-wheel contract tests select a Python supporting the Runtime
+distribution and `venv`. If the host's preferred Python lacks `ensurepip`, set
+`ACTIONS_RUNTIME_TEST_PYTHON` to the actual Python from the pinned RCC developer
+environment. Record that interpreter's version in the receipt; do not install
+host tooling or falsify version discovery to make this boundary pass.
+
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
 - `action_server/`: CLI, FastAPI service, frontend, build and bundled RCC.
@@ -265,6 +271,15 @@ attributing the close to Runtime event delivery. Browser authentication is a
 separate acceptance boundary: `WebsocketConn` constructs `new WebSocket(url)`,
 and administrative `requestJson` calls do not attach a bearer. A configured-key
 non-browser WebSocket test does not prove authorized browser administration.
+
+Import modules that bind dependency aliases before patching the dependency's
+source module. Otherwise the first import captures the patched callable, and
+monkeypatch teardown restores that fake as the alias's original. Patch the
+already-imported `_app` and `_settings` modules together and clear `get_app`'s
+cache around fake server startup. Regress
+`test_verbose_server_startup_redacts_database_url_credentials` immediately
+before the CORS/WebSocket admission tests in one pytest process; an isolated
+admission test cannot detect the leaked empty allowlist.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
@@ -295,6 +310,14 @@ as compatibility handoffs; those paths do not redefine package or tag identity.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
+The Runtime wheel inventory verifier parses exact wheel tag sets, allowing
+equivalent platform-tag ordering while rejecting missing/extra platforms,
+duplicate logical slots, build tags, repeated raw tags, mixed versions, and
+unexpected files. The generated inventory step delegates to
+`publish_verified_runtime.py --download-root dist/downloads --dry-run`; retain
+one sdist and all six distinct supported wheel slots. This shared repair is
+adopted from PR #215 at `d07f79b355f976f97948720474fd050d0a32ea16`, so Runtime
+checkpoints must not retain the older filename-order-specific shell comparison.
 One final `pypi` job downloads the exact artifacts, rejects duplicate or
 unexpected inventory, installs Twine 6.2.0, runs `twine check --strict`, proves
 the tag is an ancestor of `origin/community` and matches

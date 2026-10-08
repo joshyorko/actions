@@ -279,6 +279,7 @@ async def handle_start_listen_run_events(sid: str):
     loop = asyncio.get_running_loop()
 
     with global_runs_state.semaphore:
+        runs: list[Run] | list[RunSummaryRecord]
         if _socket_server.is_summary_client(sid):
             try:
                 runs = global_runs_state.get_current_run_summaries()

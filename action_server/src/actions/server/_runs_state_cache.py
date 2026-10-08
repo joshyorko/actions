@@ -14,7 +14,7 @@ from typing import Any, Dict, Literal, Optional
 
 if typing.TYPE_CHECKING:
     from ._database import Database
-    from ._models import Run
+    from ._models import Run, RunSummaryRecord
 
 
 log = logging.getLogger(__name__)
