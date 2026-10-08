@@ -34,6 +34,8 @@ BROWSER_SCRIPT = PACKAGE / "frontend" / "scripts" / "native-browser-acceptance.m
 class AcceptanceFailure(Exception):
     """A bounded phase label, never a raw response, subprocess log or credential."""
 
+    diagnostics: dict | None = None
+
 
 def require(condition: bool, phase: str) -> None:
     if not condition:
@@ -48,41 +50,181 @@ def digest(path: Path) -> str:
     return result.hexdigest()
 
 
+class _WindowsJob:
+    """An un-inherited Job handle kills every assigned descendant when closed."""
+
+    def __init__(self):
+        import ctypes
+        from ctypes import wintypes
+
+        class BasicLimits(ctypes.Structure):
+            _fields_ = [
+                ("PerProcessUserTimeLimit", ctypes.c_longlong),
+                ("PerJobUserTimeLimit", ctypes.c_longlong),
+                ("LimitFlags", wintypes.DWORD),
+                ("MinimumWorkingSetSize", ctypes.c_size_t),
+                ("MaximumWorkingSetSize", ctypes.c_size_t),
+                ("ActiveProcessLimit", wintypes.DWORD),
+                ("Affinity", ctypes.c_size_t),
+                ("PriorityClass", wintypes.DWORD),
+                ("SchedulingClass", wintypes.DWORD),
+            ]
+
+        class IoCounters(ctypes.Structure):
+            _fields_ = [
+                (name, ctypes.c_ulonglong)
+                for name in (
+                    "ReadOperationCount",
+                    "WriteOperationCount",
+                    "OtherOperationCount",
+                    "ReadTransferCount",
+                    "WriteTransferCount",
+                    "OtherTransferCount",
+                )
+            ]
+
+        class ExtendedLimits(ctypes.Structure):
+            _fields_ = [
+                ("BasicLimitInformation", BasicLimits),
+                ("IoInfo", IoCounters),
+                ("ProcessMemoryLimit", ctypes.c_size_t),
+                ("JobMemoryLimit", ctypes.c_size_t),
+                ("PeakProcessMemoryUsed", ctypes.c_size_t),
+                ("PeakJobMemoryUsed", ctypes.c_size_t),
+            ]
+
+        kernel = getattr(ctypes, "WinDLL")("kernel32", use_last_error=True)
+        kernel.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
+        kernel.CreateJobObjectW.restype = wintypes.HANDLE
+        kernel.SetInformationJobObject.argtypes = [
+            wintypes.HANDLE,
+            ctypes.c_int,
+            ctypes.c_void_p,
+            wintypes.DWORD,
+        ]
+        kernel.SetInformationJobObject.restype = wintypes.BOOL
+        kernel.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+        kernel.OpenProcess.restype = wintypes.HANDLE
+        kernel.AssignProcessToJobObject.argtypes = [wintypes.HANDLE, wintypes.HANDLE]
+        kernel.AssignProcessToJobObject.restype = wintypes.BOOL
+        kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+        kernel.CloseHandle.restype = wintypes.BOOL
+        self._kernel = kernel
+        self._handle = kernel.CreateJobObjectW(None, None)
+        require(bool(self._handle), "windows_job_create")
+        limits = ExtendedLimits()
+        limits.BasicLimitInformation.LimitFlags = 0x2000  # KILL_ON_JOB_CLOSE
+        if not kernel.SetInformationJobObject(
+            self._handle, 9, ctypes.byref(limits), ctypes.sizeof(limits)
+        ):
+            self.close()
+            raise AcceptanceFailure("windows_job_limits")
+
+    def assign(self, pid: int) -> None:
+        # PROCESS_SET_QUOTA | PROCESS_TERMINATE, as required by assignment.
+        handle = self._kernel.OpenProcess(0x0100 | 0x0001, False, pid)
+        require(bool(handle), "windows_job_open_process")
+        try:
+            require(
+                bool(self._kernel.AssignProcessToJobObject(self._handle, handle)),
+                "windows_job_assign",
+            )
+        finally:
+            self._kernel.CloseHandle(handle)
+
+    def close(self) -> None:
+        if self._handle:
+            handle, self._handle = self._handle, None
+            require(bool(self._kernel.CloseHandle(handle)), "windows_job_close")
+
+
+def _owned_child(command: list[str]) -> int:
+    """Wait without buffering beyond the three-byte gate, then inherit the Job."""
+    if os.name == "nt":
+        import msvcrt
+
+        getattr(msvcrt, "setmode")(sys.stdin.fileno(), getattr(os, "O_BINARY"))
+    gate = b""
+    while len(gate) < 3:
+        chunk = os.read(sys.stdin.fileno(), 3 - len(gate))
+        if not chunk:
+            return 125
+        gate += chunk
+    if gate != b"GO\n" or not command:
+        return 125
+    # No shell and no breakaway flag: the actual command inherits Job membership
+    # and the remaining stdin stream (including the browser JSON payload).
+    return subprocess.call(command)
+
+
 @contextlib.contextmanager
 def owned_process(command: list[str], *, cwd: Path, env: dict[str, str], **kwargs):
     """Own a process tree, not a process-name pattern or unrelated runner process."""
-    options = (
-        {"creationflags": getattr(subprocess, "CREATE_NEW_PROCESS_GROUP")}
-        if os.name == "nt"
-        else {"start_new_session": True}
+    if os.name == "nt":
+        requested_stdin = kwargs.pop("stdin", None)
+        require(requested_stdin in (None, subprocess.PIPE), "windows_owned_stdin")
+        job = _WindowsJob()
+        process = None
+        try:
+            process = subprocess.Popen(
+                [
+                    sys.executable,
+                    str(Path(__file__).resolve()),
+                    "--owned-child",
+                    *command,
+                ],
+                cwd=cwd,
+                env=env,
+                stdin=subprocess.PIPE,
+                creationflags=getattr(subprocess, "CREATE_NEW_PROCESS_GROUP"),
+                **kwargs,
+            )
+            # The Python wrapper cannot spawn the real command until assigned.
+            job.assign(process.pid)
+            assert process.stdin is not None  # Popen was explicitly given PIPE.
+            stream = (
+                getattr(process.stdin, "buffer")
+                if kwargs.get("text")
+                else process.stdin
+            )
+            stream.write(b"GO\n")
+            stream.flush()
+            if requested_stdin is None:
+                process.stdin.close()
+                process.stdin = None
+            yield process
+        finally:
+            try:
+                # Close even if the wrapper/command exited: descendants stay in Job.
+                job.close()
+            finally:
+                if process is not None:
+                    try:
+                        process.wait(timeout=10)
+                    except subprocess.TimeoutExpired:
+                        process.kill()
+                        process.wait(timeout=5)
+                    if process.stdin is not None:
+                        process.stdin.close()
+        return
+
+    process = subprocess.Popen(
+        command, cwd=cwd, env=env, start_new_session=True, **kwargs
     )
-    process = subprocess.Popen(command, cwd=cwd, env=env, **options, **kwargs)
     try:
         yield process
     finally:
-        if os.name == "nt":
-            if process.poll() is None:
-                with contextlib.suppress(subprocess.TimeoutExpired):
-                    subprocess.run(
-                        ["taskkill", "/PID", str(process.pid), "/T", "/F"],
-                        stdout=subprocess.DEVNULL,
-                        stderr=subprocess.DEVNULL,
-                        timeout=15,
-                        check=False,
-                    )
-        else:
-            with contextlib.suppress(ProcessLookupError):
-                os.killpg(process.pid, signal.SIGTERM)
+        with contextlib.suppress(ProcessLookupError):
+            os.killpg(process.pid, signal.SIGTERM)
         try:
             process.wait(timeout=10)
         except subprocess.TimeoutExpired:
             process.kill()
             process.wait(timeout=5)
         finally:
-            if os.name != "nt":
-                # The leader can exit while an owned Chromium/Runtime child remains.
-                with contextlib.suppress(ProcessLookupError):
-                    os.killpg(process.pid, signal.SIGKILL)
+            # The leader can exit while an owned Chromium/Runtime child remains.
+            with contextlib.suppress(ProcessLookupError):
+                os.killpg(process.pid, signal.SIGKILL)
 
 
 def run_output(
@@ -108,6 +250,32 @@ def run_output(
             raise AcceptanceFailure("subprocess_timeout") from error
         require(len(stdout) <= 65536, "subprocess_output_limit")
         return process.returncode, stdout
+
+
+def startup_diagnostics(log: Path, exit_code: int, key: str) -> dict:
+    """Extract bounded exception identifiers; never retain raw log/message text."""
+    with log.open("rb") as stream:
+        stream.seek(max(0, log.stat().st_size - 65536))
+        tail = (
+            stream.read(65536)
+            .decode("utf-8", errors="replace")
+            .replace(key, "[redacted]")
+        )
+    classes = re.findall(r"(?m)^([A-Za-z_][A-Za-z_0-9]*(?:Error|Exception)):", tail)
+    modules = re.findall(
+        r"(?m)^ModuleNotFoundError: No module named ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]",
+        tail,
+    )
+    modules += re.findall(
+        r"(?m)^ImportError: .* from ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]", tail
+    )
+    return {
+        "exit_code": exit_code,
+        "exception_classes": list(dict.fromkeys(classes))[-8:],
+        "import_modules": [name for name in dict.fromkeys(modules) if len(name) <= 200][
+            -8:
+        ],
+    }
 
 
 class NativeServer:
@@ -163,8 +331,7 @@ class NativeServer:
             "--actions-sync=false",
             "--min-processes=0",
             "--max-processes=1",
-            "--api-key",
-            self.key,
+            "--api-key=" + self.key,
         ]
         # No application logs are uploaded; synthetic temporary logs aid local debugging.
         with (self.data / "process.log").open("ab") as output:
@@ -177,7 +344,13 @@ class NativeServer:
             ) as process:
                 deadline = time.monotonic() + self.timeout
                 while time.monotonic() < deadline:
-                    require(process.poll() is None, "native_startup_exit")
+                    exit_code = process.poll()
+                    if exit_code is not None:
+                        error = AcceptanceFailure("native_startup_exit")
+                        error.diagnostics = startup_diagnostics(
+                            self.data / "process.log", exit_code, self.key
+                        )
+                        raise error
                     try:
                         status, _ = self.request("/config", authorized=False)
                         if status == 200:
@@ -330,6 +503,11 @@ def verify_case(kind: str, binary: Path, args, receipt: dict) -> None:
             case["checks"].append("corrupt_storage_503")
         require(not marker.exists(), "untrusted_cwd_module_executed")
         case["checks"].append("cwd_actions_shadow_not_executed")
+        require(
+            server.key.encode() not in (data / "process.log").read_bytes(),
+            "native_log_contains_api_key",
+        )
+        case["checks"].append("api_key_absent_from_native_log")
     require(digest(binary) == case["sha256"], "binary_changed_during_acceptance")
     case["status"] = "PASS"
     print(f"{kind}: native browser/storage acceptance PASS", flush=True)
@@ -393,6 +571,8 @@ def main() -> int:
         receipt["failed_phase"] = (
             str(error) if isinstance(error, AcceptanceFailure) else type(error).__name__
         )
+        if isinstance(error, AcceptanceFailure) and error.diagnostics is not None:
+            receipt["startup_diagnostics"] = error.diagnostics
         print(f"Native acceptance failed: {receipt['failed_phase']}", file=sys.stderr)
         return 1
     finally:
@@ -401,4 +581,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    if sys.argv[1:2] == ["--owned-child"]:
+        raise SystemExit(_owned_child(sys.argv[2:]))
     raise SystemExit(main())
