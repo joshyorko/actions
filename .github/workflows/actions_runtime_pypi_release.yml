@@ -231,23 +231,14 @@ jobs:
       working-directory: action_server
     - name: Verify merged tag provenance and version
       if: github.event_name == 'push'
-      run: 'set -Eeuo pipefail
-
-        git fetch origin community:refs/remotes/origin/community
-
-        git merge-base --is-ancestor "$GITHUB_SHA" origin/community
-
-        test "$(git rev-parse "$GITHUB_SHA^{commit}")" = "$(git rev-parse origin/community)"
-
-        tag_version=${GITHUB_REF_NAME#actions-runtime-}
-
-        cd action_server
-
-        package_version=$(uv run --no-project --python 3.12 poetry version --short)
-
-        if [[ "$tag_version" != "$package_version" ]]; then printf ''tag version %s
-        does not match package version %s\n'' "$tag_version" "$package_version" >&2;
-        exit 1; fi'
+      run: "set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\n\
+        tag_commit=$(git rev-parse \"$GITHUB_REF^{commit}\")\nevent_commit=$(git rev-parse\
+        \ \"$GITHUB_SHA^{commit}\")\ntest \"$tag_commit\" = \"$event_commit\"\ngit\
+        \ merge-base --is-ancestor \"$GITHUB_SHA\" origin/community\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\n\
+        cd action_server\npackage_version=$(uv run --no-project --python 3.12 poetry\
+        \ version --short)\nif [[ \"$tag_version\" != \"$package_version\" ]]; then\n\
+        \  printf 'tag version %s does not match package version %s\\n'     \"$tag_version\"\
+        \ \"$package_version\" >&2\n  exit 1\nfi\n"
     - name: Download sdist artifact
       uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
       with:

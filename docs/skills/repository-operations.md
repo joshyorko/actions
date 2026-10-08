@@ -167,7 +167,14 @@ The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
 the form `actions_http-<version>` and the repository secret
 `PYPI_TOKEN_ACTIONS_HTTP_HELPER`; neither publishing nor secret discovery is
-performed by local verification. The helper reads network settings from
+performed by local verification. The workflow pins Poetry 2.1.1 and Twine 6.2.0.
+It builds from the package directory and verifies exactly one version-matched
+universal wheel and one sdist with a retained SHA-256 manifest. The publish job
+downloads and verifies those artifacts without rebuilding them. Tag, package
+version, community ancestry, and non-empty-secret checks precede upload.
+The publish step receives `POETRY_PYPI_TOKEN_PYPI` through its environment;
+the token is never interpolated into command arguments or persisted with
+`poetry config`. The helper reads network settings from
 `~/.actions/network-settings.yaml` on Linux/macOS and
 `%LOCALAPPDATA%/actions/network-settings.yaml` on Windows.
 `devinstall`/develop mode substitutes the in-tree `actions-http-helper`
@@ -262,9 +269,18 @@ must agree. Native release notes come from
 `action_server/docs/CHANGELOG.md` and `action-server-v1.2.x` tags remain a
 separate legacy delivery line. Tagged PyPI runs fail closed when
 `PYPI_TOKEN_ACTIONS_RUNTIME` is absent rather than reporting successful release
-verification without publication. Runtime binaries intentionally retain the
-existing `action-server/releases` CDN/S3 object paths and Homebrew version input
-as compatibility handoffs; those paths do not redefine package or tag identity.
+verification without publication. Regular Runtime release jobs bind the tag's
+dereferenced commit to the GitHub event SHA and require that commit to be an
+ancestor of fetched `origin/community`. Package and tag versions must agree.
+Later community advancement does not invalidate the immutable release commit.
+Native delivery uses three GitHub Release assets: `-linux64`, `-macos-arm64`,
+and `-windows64.exe`. Normal upload steps disable overwrite, so an existing
+asset name stops the upload rather than replacing published bytes.
+The community Homebrew tap consumes these GitHub releases through its own
+`action-server-daily` schedule. Its manual workflow accepts `action=release`
+and `package_id=action-server`. Actions does not dispatch that workflow, so
+publication does not guarantee an immediate tap update. Legacy Sema4AI CDN
+and S3 paths are not Runtime release destinations.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
@@ -316,9 +332,9 @@ IDs, sizes, and API digests; it downloads through artifact-ID endpoints, rejects
 unexpected or expired artifacts, and has no PyPI credential or upload step. Binary
 recovery builds unsigned binaries when all platform signing credentials are absent,
 signs when the complete set is present, and rejects partial configuration. Recovery
-of 1.0.1 verifies its pinned source SHA and skips PyPI recovery. Native recovery reuses
-the regular S3/CDN/Homebrew helpers after GitHub asset verification. Its draft release
-path hashes all three assets first, resumes an
+of 1.0.1 verifies its pinned source SHA and skips PyPI recovery. Native recovery
+publishes only to a GitHub Release draft. It does not call S3, CDN, or Homebrew
+helpers. Its draft release path hashes all three assets first, resumes an
 existing draft by uploading only missing exact assets, rejects published releases,
 conflicting digests, and extraneous names, never clobbers, and publishes only after
 one final re-fetch proves draft state, the exact three-name inventory, every asset

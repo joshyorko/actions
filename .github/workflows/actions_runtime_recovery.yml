@@ -650,7 +650,6 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       contents: write
-      id-token: write
     defaults:
       run:
         working-directory: .
@@ -843,60 +842,6 @@ jobs:
         \ == ($expected | sort_by(.name))' <<<\"$release_json\"\ngh release edit \"\
         $RELEASE_REF\" --draft=false --notes-file \"$notes\" --repo \"$GITHUB_REPOSITORY\"\
         \n"
-    - name: Stage recovered binaries for existing handoffs
-      env:
-        RELEASE_REF: ${{ inputs.release_ref }}
-      run: mkdir -p build && cp -R binaries/linux build/linux64 && cp -R binaries/macos
-        build/macos-arm64 && cp -R binaries/windows build/windows64 && printf '%s\n'
-        "${RELEASE_REF#actions-runtime-}" > build/version.txt
-    - name: Put files in s3-drop
-      run: "\nls -l\npwd\nls -l build\nmkdir s3-drop\nmv build/version.txt s3-drop/\n\
-        mv build/macos-arm64 s3-drop/\nmv build/linux64 s3-drop/\nmv build/windows64\
-        \ s3-drop/\nls -l s3-drop/\nver=$(cat s3-drop/version.txt)\necho \"actionServerVersion=${ver}\"\
-        \ >> \"$GITHUB_ENV\"\nif [[ \"$GITHUB_REF_NAME\" == actions-runtime-* ]];\
-        \ then\n  test \"$ver\" = \"${GITHUB_REF_NAME#actions-runtime-}\"\nfi\ntest\
-        \ \"$(find s3-drop -type f | wc -l)\" -eq 4\ntest -f s3-drop/linux64/action-server\n\
-        test -f s3-drop/macos-arm64/action-server\ntest -f s3-drop/windows64/action-server.exe\n"
-    - name: 'Upload artifact: action_server/s3-drop'
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-      with:
-        name: action-server-artifacts-for-s3-${{ env.actionServerVersion }}
-        path: s3-drop
-    - name: Configure AWS credentials Dropbox bucket
-      uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df
-      with:
-        aws-region: eu-west-1
-        role-to-assume: arn:aws:iam::710450854638:role/github-action-robocorp-action-server
-    - name: AWS S3 copies
-      run: "\nif [ \"false\" = \"false\" ]; then\n  echo \"Normal release, aws sync\
-        \ to drop-box, full pipeline\"\n  aws s3 sync s3-drop s3://robocorp-action-server-build-drop-box\n\
-        else\n  echo \"BETA RELEASE, only copy the executable for testing\"\n  S3_BASE_URL=\"\
-        s3://downloads.robocorp.com/action-server/beta\"\n  aws s3 cp s3-drop/version.txt\
-        \ $S3_BASE_URL/version.txt --cache-control max-age=120 --content-type \"text/plain\"\
-        \n  aws s3 cp s3-drop/windows64/action-server.exe $S3_BASE_URL/windows64/action-server.exe\
-        \ --cache-control max-age=120 --content-type \"application/octet-stream\"\n\
-        \  aws s3 cp s3-drop/macos-arm64/action-server $S3_BASE_URL/macos-arm64/action-server\
-        \ --cache-control max-age=120 --content-type \"application/octet-stream\"\n\
-        \  aws s3 cp s3-drop/linux64/action-server $S3_BASE_URL/linux64/action-server\
-        \ --cache-control max-age=120 --content-type \"application/octet-stream\"\n\
-        fi\n"
-    - name: Wait for Downloads S3 Bucket to have the right content
-      timeout-minutes: 5
-      run: "\nEXPECTED_VERSION=${RELEASE_REF#actions-runtime-}\nVERSION_URL=\"https://cdn.sema4.ai/action-server/releases/${EXPECTED_VERSION}/version.txt\"\
-        \necho \"Expected version: $EXPECTED_VERSION\"\nwhile true; do\n  DOWNLOADED_VERSION=$(curl\
-        \ -fsS --max-time 10 \"$VERSION_URL\")\n  echo \"Downloaded version: $DOWNLOADED_VERSION\"\
-        \n  echo \"Expected version: $EXPECTED_VERSION\"\n    if [ \"$DOWNLOADED_VERSION\"\
-        \ = \"$EXPECTED_VERSION\" ]; then\n      echo \"Versions match.\"\n      break\n\
-        \    else\n      echo \"Versions do not match. Retrying in 30 seconds.\"\n\
-        \    fi\n    sleep 30\n    done\n"
-      env:
-        RELEASE_REF: ${{ inputs.release_ref }}
-    - name: Trigger Brew Deploy Workflow
-      run: 'curl --fail-with-body --max-time 30 -X POST            -H "Authorization:
-        token ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}"            -H "Accept: application/vnd.github.v3+json"            https://api.github.com/repos/sema4ai/homebrew-tools/actions/workflows/publish.yml/dispatches            -d
-        "$(jq -cn --arg version "${RELEASE_REF#actions-runtime-}" ''{ref:"main",inputs:{version:$version}}'')"'
-      env:
-        RELEASE_REF: ${{ inputs.release_ref }}
 run-name: 'Runtime recovery: ${{ inputs.release_ref }} @ ${{ inputs.release_sha }}'
 
 
