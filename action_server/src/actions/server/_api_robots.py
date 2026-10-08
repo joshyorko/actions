@@ -407,8 +407,15 @@ def _publish_robot_package(
                 continue
 
         temporary_target = robots_root / f".{final_name}.staging-{uuid.uuid4().hex}"
+        staging_created = False
         try:
-            shutil.copytree(package_dir, temporary_target, symlinks=True)
+            # A colliding entry is not ours to copy into or clean up. Establish
+            # ownership before copytree, including when copying later fails.
+            temporary_target.mkdir(mode=0o700)
+            staging_created = True
+            shutil.copytree(
+                package_dir, temporary_target, symlinks=True, dirs_exist_ok=True
+            )
             _validate_staged_tree(temporary_target)
             if os.path.lexists(target_dir):
                 raise FileExistsError(target_dir)
@@ -418,7 +425,7 @@ def _publish_robot_package(
             if not os.path.lexists(target_dir):
                 raise
         finally:
-            if os.path.lexists(temporary_target):
+            if staging_created and os.path.lexists(temporary_target):
                 if temporary_target.is_dir() and not temporary_target.is_symlink():
                     shutil.rmtree(temporary_target)
                 else:
