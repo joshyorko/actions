@@ -367,3 +367,14 @@ harness's own temporary root on POSIX before supplying it to the Runtime; this d
 not relax rejection of links in user-configured storage roots. A browser scenario
 passing before cleanup fails is a failed harness run, and startup diagnostics must
 remain attached to the exact binary receipt.
+
+The packaged browser harness also runs axe's WCAG 2 A/AA and 2.1 A/AA rules on
+sign-in, empty queue, create dialog and detail dialog. Wait for the asserted UI
+state, loaded fonts and finite animations before auditing; do not disable contrast
+rules or ignore violations. A deliberately unreadable temporary element must fail
+the contrast rule before the real states are checked, then is removed. Receipts
+contain only rule identifiers/counts, never DOM markup, keys or run payloads.
+These checks cover four settled Chromium states, not all routes, transition frames,
+manual keyboard/screen-reader behavior or other browsers. Preserve any earlier
+failure and its subject when a later audit passes; do not infer a product color fix
+from a timing-dependent result without identifying the failing element.

@@ -2,6 +2,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { chromium } from "@playwright/test";
+import axe from "axe-core";
 
 const input = JSON.parse(readFileSync(0, "utf8"));
 const target = new URL(input.origin);
@@ -11,6 +12,7 @@ let phase = "launch";
 let lastStatus = null;
 let browser;
 let result;
+const accessibility = [];
 try {
     browser = await chromium.launch({
         headless: true,
@@ -56,10 +58,69 @@ try {
         return response.body;
     };
 
+    const auditAccessibility = async (state) => {
+        phase = `accessibility_${state}`;
+        await page.evaluate(async () => {
+            await document.fonts.ready;
+            await Promise.all(
+                document
+                    .getAnimations()
+                    .filter((animation) =>
+                        Number.isFinite(
+                            animation.effect?.getTiming().iterations,
+                        ),
+                    )
+                    .map((animation) =>
+                        animation.finished.catch(() => undefined),
+                    ),
+            );
+        });
+        await page.evaluate(axe.source);
+        const violations = await page.evaluate(async () => {
+            const report = await window.axe.run(document, {
+                runOnly: {
+                    type: "tag",
+                    values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"],
+                },
+            });
+            return report.violations.map((violation) => ({
+                id: violation.id,
+                impact: violation.impact,
+                nodes: violation.nodes.length,
+            }));
+        });
+        accessibility.push({ state, violations });
+        assert.deepEqual(violations, []);
+    };
+
     phase = "sign_in";
     await page.goto(`${target.origin}/work-items`, {
         waitUntil: "networkidle",
     });
+    await page.getByLabel("API key", { exact: true }).waitFor();
+    await page.evaluate(axe.source);
+    // Prove the native-page audit rejects a deliberately unreadable fixture.
+    const rejectsBadContrast = await page.evaluate(async () => {
+        const fixture = document.createElement("div");
+        fixture.id = "native-contrast-negative-control";
+        fixture.textContent = "Synthetic contrast control";
+        fixture.style.cssText =
+            "position:fixed;top:0;left:0;z-index:99999;background:white;color:#eeeeee;font:16px Arial;opacity:1";
+        document.body.append(fixture);
+        try {
+            const result = await window.axe.run(fixture, {
+                runOnly: ["color-contrast"],
+            });
+            return result.violations.some(
+                (violation) => violation.id === "color-contrast",
+            );
+        } finally {
+            fixture.remove();
+        }
+    });
+    assert.equal(rejectsBadContrast, true);
+    await auditAccessibility("sign_in");
+    phase = "sign_in";
     await page.getByLabel("API key", { exact: true }).fill(input.api_key);
     await page.getByRole("button", { name: "Sign in", exact: true }).click();
     await page.getByRole("button", { name: "Sign out", exact: true }).waitFor();
@@ -67,6 +128,11 @@ try {
     const empty = await request("/api/work-items", 200);
     assert.equal(empty.total, 0);
     assert.deepEqual(empty.items, []);
+
+    await page
+        .getByRole("heading", { name: "No work items yet", exact: true })
+        .waitFor();
+    await auditAccessibility("empty_queue");
 
     phase = "session_cookie";
     const session = (await context.cookies()).find(
@@ -137,6 +203,9 @@ try {
             exact: true,
         })
         .click();
+    await page.getByLabel("Queue Name", { exact: true }).waitFor();
+    await auditAccessibility("create_dialog");
+    phase = "create_list_detail";
     await page.getByLabel("Queue Name", { exact: true }).fill("default");
     await page
         .getByLabel("Payload (JSON)", { exact: true })
@@ -160,6 +229,7 @@ try {
     await page
         .getByText(`Work Item: ${item.id.substring(0, 8)}`, { exact: true })
         .waitFor();
+    await auditAccessibility("detail_dialog");
     await page.keyboard.press("Escape");
 
     phase = "logout";
@@ -178,7 +248,10 @@ try {
         browser: "chromium",
         browser_version: browser.version(),
         item_id: item.id,
+        accessibility,
         checks: [
+            "accessibility_negative_control_rejected",
+            "wcag_21_aa_four_states",
             "sign_in",
             "empty_queue",
             "http_only_cookie",
@@ -196,6 +269,7 @@ try {
         status: "FAIL",
         phase,
         http_status: lastStatus,
+        accessibility,
         error_type: error.name,
     };
 } finally {

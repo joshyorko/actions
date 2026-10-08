@@ -426,6 +426,28 @@ def browser(server: NativeServer, args, *, negative: bool) -> dict:
         )
     else:
         phase = result.get("phase", "unknown")
+        if code != 0 or result.get("status") != "PASS":
+            audits = result.get("accessibility", [])
+            failures: set[str] = set()
+            if isinstance(audits, list):
+                for audit in audits[:8]:
+                    if not isinstance(audit, dict):
+                        continue
+                    violations = audit.get("violations", [])
+                    if not isinstance(violations, list):
+                        continue
+                    for violation in violations[:100]:
+                        if not isinstance(violation, dict):
+                            continue
+                        rule = violation.get("id")
+                        if isinstance(rule, str) and re.fullmatch(
+                            r"[a-z][a-z0-9-]{0,80}", rule
+                        ):
+                            failures.add(rule)
+            if failures:
+                failure = AcceptanceFailure("browser_accessibility")
+                failure.diagnostics = {"browser_accessibility": sorted(failures)[:50]}
+                raise failure
         require(
             code == 0 and result.get("status") == "PASS",
             f"browser_{phase}"
@@ -588,7 +610,7 @@ def main() -> int:
         "not_exercised": [
             "Work Item worker state transitions",
             "attachments",
-            "accessibility",
+            "manual and full-route accessibility",
             "non-Chromium browsers",
         ],
     }
@@ -605,10 +627,19 @@ def main() -> int:
             str(error) if isinstance(error, AcceptanceFailure) else type(error).__name__
         )
         if isinstance(error, AcceptanceFailure) and error.diagnostics is not None:
-            receipt["startup_diagnostics"] = error.diagnostics
+            if "browser_accessibility" in error.diagnostics:
+                receipt["browser_accessibility"] = error.diagnostics[
+                    "browser_accessibility"
+                ]
+            else:
+                receipt["startup_diagnostics"] = error.diagnostics
         print(f"Native acceptance failed: {receipt['failed_phase']}", file=sys.stderr)
         return 1
     finally:
+        if receipt["status"] == "FAIL":
+            for case in receipt["cases"]:
+                if case["status"] == "IN_PROGRESS":
+                    case["status"] = "FAIL"
         args.receipt.parent.mkdir(parents=True, exist_ok=True)
         args.receipt.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
 
