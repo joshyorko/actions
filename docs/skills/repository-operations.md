@@ -211,9 +211,19 @@ missing `artifact-manifest.json` as an error when artifact identity and content
 type are expected. It validates path safety, sorted exact inventory, and
 structural directories before reading any payload bytes; invalid inventory
 skips payload size/hash/budget reads rather than inspecting undeclared paths.
-CycloneDX generation uses its `--output-reproducible` mode for both retained
-SBOMs, and the hosted determinism check runs the second clean build on Linux,
-macOS, and Windows. The Canvas manifest command passes
+CycloneDX generation uses `--package-lock-only --output-reproducible` for both
+retained SBOMs. These are inventories of the committed npm dependency graph,
+including build and optional dependencies, rather than an exact inventory of
+modules bundled into Runtime or Canvas. An installed-tree SBOM can drift even
+when `npm ci` exits successfully: Windows optional-dependency cleanup can leave
+an `EPERM` residue such as `node_modules/node-gyp/node_modules/semver`, which
+CycloneDX otherwise includes as extraneous components. Lock-derived generation
+preserves declared graph changes while excluding that unowned installation
+residue. The real-generator regression creates this residual subtree and checks
+both SBOMs byte-for-byte before and after; it also verifies a declared dependency
+change remains visible. Keep the hosted full-file determinism comparison strict,
+including retained SBOM bytes, across Linux, macOS and Windows. The Canvas
+manifest command passes
 `text/html;profile=mcp-app` as one double-quoted shell argument, avoiding POSIX
 single-quote semantics so `cmd.exe` preserves the exact identity string;
 validators remain strict about that identity.
