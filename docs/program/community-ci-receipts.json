@@ -1,5 +1,5 @@
 {
-  "readback_at": "2026-10-08 19:06:55 UTC",
+  "readback_at": "2026-10-08 19:12:15 UTC",
   "receipts": [
     {
       "number": 215,
@@ -255,94 +255,94 @@
     },
     {
       "number": 217,
-      "sha": "92e43720e9b6581879c09f18580921db5eb8d345",
+      "sha": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
       "url": "https://github.com/joshyorko/actions/pull/217",
       "draft": true,
       "state": "open",
       "runs": [
         {
-          "name": "build (macos-py3.10-devmode)",
+          "name": "build-sdist (ubuntu-py3.12)",
           "status": "completed",
-          "conclusion": "failure",
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829328192/job/113490257068"
-        },
-        {
-          "name": "build-wheels (macos-15)",
-          "status": "in_progress",
-          "conclusion": null,
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829328176/job/113490257037"
-        },
-        {
-          "name": "build (ubuntu-py3.10-devmode)",
-          "status": "completed",
-          "conclusion": "failure",
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829328192/job/113490257030"
+          "conclusion": "success",
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837404/job/113492014701"
         },
         {
           "name": "build-wheels (ubuntu-22.04)",
-          "status": "in_progress",
-          "conclusion": null,
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829328176/job/113490257027"
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837404/job/113492014605"
         },
         {
           "name": "build-wheels (windows-2022)",
           "status": "in_progress",
           "conclusion": null,
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829328176/job/113490256809"
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837404/job/113492014583"
+        },
+        {
+          "name": "build (macos-py3.10-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837468/job/113492014409"
+        },
+        {
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837468/job/113492014396"
+        },
+        {
+          "name": "build-wheels (macos-15)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837404/job/113492014310"
         },
         {
           "name": "build (windows-py3.10-devmode)",
           "status": "in_progress",
           "conclusion": null,
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829328192/job/113490256762"
-        },
-        {
-          "name": "build-sdist (ubuntu-py3.12)",
-          "status": "completed",
-          "conclusion": "success",
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829328176/job/113490256750"
-        },
-        {
-          "name": "audit",
-          "status": "completed",
-          "conclusion": "success",
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829328077/job/113490256436"
-        },
-        {
-          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
-          "status": "completed",
-          "conclusion": "success",
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829327983/job/113490255270"
-        },
-        {
-          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
-          "status": "in_progress",
-          "conclusion": null,
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829327983/job/113490255166"
-        },
-        {
-          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
-          "status": "in_progress",
-          "conclusion": null,
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829327983/job/113490255161"
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837468/job/113492014071"
         },
         {
           "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
           "status": "completed",
           "conclusion": "success",
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829327983/job/113490255131"
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837395/job/113492013736"
         },
         {
-          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
-          "status": "in_progress",
-          "conclusion": null,
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829327983/job/113490255056"
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837395/job/113492013623"
         },
         {
           "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
           "status": "completed",
           "conclusion": "success",
-          "url": "https://github.com/joshyorko/actions/actions/runs/37829327983/job/113490254786"
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837395/job/113492013561"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837395/job/113492013522"
+        },
+        {
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837405/job/113492013499"
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837395/job/113492013498"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37829837395/job/113492013107"
         }
       ]
     },
@@ -507,7 +507,82 @@
           "url": "https://github.com/joshyorko/actions/actions/runs/37785784827/job/113340035838"
         }
       ]
+    },
+    {
+      "number": 220,
+      "sha": "0be0c7cbb58c27e3a49b289c44d6f93c76f7b50d",
+      "url": "https://github.com/joshyorko/actions/pull/220",
+      "draft": true,
+      "state": "open",
+      "runs": [
+        {
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102891/job/113492926369"
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102891/job/113492926304"
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102891/job/113492926301"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102891/job/113492926220"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102891/job/113492926212"
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102891/job/113492925912"
+        },
+        {
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102935/job/113492925822"
+        },
+        {
+          "name": "build-wheels (windows-2022)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102841/job/113492925568"
+        },
+        {
+          "name": "build-wheels (macos-15)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102841/job/113492925268"
+        },
+        {
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102841/job/113492925169"
+        },
+        {
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/37830102841/job/113492924944"
+        }
+      ]
     }
   ],
-  "note": "Exactsnapshotheads; later successorb4468e4f hostedresults requirefreshreadback."
+  "note": "Exact heads and snapshot statuses; in-progress checks are not PASS. PR220 ledger updates can supersede its snapshot head."
 }

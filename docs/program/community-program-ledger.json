@@ -211,7 +211,7 @@
         "Historical hosted failure and product symptom attribution remains distinct"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN."
+      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. Runtime d26fa423:23 hosted checks PASS. Packaged local empty history PASS; configured-key browser403 FAIL and WorkItems503 FAIL. Large-result and authorized browser acceptance NOT_RUN."
     },
     {
       "issue": 211,
@@ -449,7 +449,7 @@
         "Historical hosted failure and product symptom attribution remains distinct"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN."
+      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. Runtime d26fa423:23 hosted checks PASS. Packaged local empty history PASS; configured-key browser403 FAIL and WorkItems503 FAIL. Large-result and authorized browser acceptance NOT_RUN."
     },
     {
       "issue": 208,
@@ -1074,7 +1074,7 @@
         "Historical hosted failure and product symptom attribution remains distinct"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN. HostedRuntime d26fa42323checksPASS; actualpackaged no-keyemptyhistoryPASS, configured-keybrowser403FAIL andWorkItems503FAIL. Largepayload/authorized browser acceptance NOT_RUN."
+      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. Runtime d26fa423:23 hosted checks PASS. Packaged local empty history PASS; configured-key browser403 FAIL and WorkItems503 FAIL. Large-result and authorized browser acceptance NOT_RUN."
     },
     {
       "issue": 152,
@@ -10805,38 +10805,38 @@
   "checkpoint_prs": [
     {
       "number": 215,
-      "head_sha": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "sha": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "url": "https://github.com/joshyorko/actions/pull/215",
       "draft": true,
-      "state": "open",
-      "url": "https://github.com/joshyorko/actions/pull/215"
+      "state": "open"
     },
     {
       "number": 216,
-      "head_sha": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "sha": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "url": "https://github.com/joshyorko/actions/pull/216",
       "draft": true,
-      "state": "open",
-      "url": "https://github.com/joshyorko/actions/pull/216"
+      "state": "open"
     },
     {
       "number": 217,
-      "head_sha": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
+      "sha": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
+      "url": "https://github.com/joshyorko/actions/pull/217",
       "draft": true,
-      "state": "open",
-      "url": "https://github.com/joshyorko/actions/pull/217"
+      "state": "open"
     },
     {
       "number": 218,
-      "head_sha": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "sha": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "url": "https://github.com/joshyorko/actions/pull/218",
       "draft": true,
-      "state": "open",
-      "url": "https://github.com/joshyorko/actions/pull/218"
+      "state": "open"
     },
     {
       "number": 219,
-      "head_sha": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "sha": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "url": "https://github.com/joshyorko/actions/pull/219",
       "draft": true,
-      "state": "open",
-      "url": "https://github.com/joshyorko/actions/pull/219"
+      "state": "open"
     }
   ],
   "limits": {
@@ -11073,231 +11073,6 @@
         "base_sha": "784bec577cbd42f8205deeca65393525fd2a6dc7",
         "working_tree_delta": "Uncommitted fixture, inventory and summary type-import repairs subsequently committed in0a811f0b; union annotation added after these runs."
       }
-    },
-    {
-      "file": "core-doctor.log",
-      "status": "PASS",
-      "detail": "PinnedRCC18.19.3 Doctor",
-      "sha256": "1328acaf95435970c9c49fd90e0b3f7e271a723bdece312f8f82faf9057d2d71",
-      "platform": "Linux",
-      "tested_subject": "ec9b3d29 initialCorecheckpoint",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-bootstrap.log",
-      "status": "PASS",
-      "detail": "Allpackage Poetry environments from initial locks",
-      "sha256": "555be71a2746624b03e6ffe92a351bfe44acad94bc326a2a60035d35b5d5e5b2",
-      "platform": "Linux",
-      "tested_subject": "ec9b3d29 initialCorecheckpoint",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-toolkit-test.log",
-      "status": "PASS",
-      "detail": "RCCdeclaredToolkitTest",
-      "sha256": "edd3c10b22402a903c0a2ca5ea525b0efc630757f7893a1790468505ccb404bb",
-      "platform": "Linux",
-      "tested_subject": "ec9b3d29+scope/export tests",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-import-detector-red.log",
-      "status": "FAIL",
-      "detail": "7privateimportcasesfail",
-      "sha256": "c836ee78d90de83976e3440066293946b3de9c5da0c09a4139c3353ec42616ae",
-      "platform": "Linux",
-      "tested_subject": "ec9b3d29+refactored detector and newtests",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-import-review-red.log",
-      "status": "FAIL",
-      "detail": "3additional reviewer importcasesfail",
-      "sha256": "71a887d69c6b8df69d21ad84a8bfe861ee270bbafc3c8d8f6aa93d8f860be6f3",
-      "platform": "Linux",
-      "tested_subject": "08a3addc+regressions",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-lazy-export-red.log",
-      "status": "FAIL",
-      "detail": "ActionContextmissingdir:1FAIL2PASS",
-      "sha256": "df92ce8503abcf8d353459e5d9eaa62e832ea539d69892f85415202c1399606d",
-      "platform": "Linux",
-      "tested_subject": "08a3addc+discoverabilitytest",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-contracts-final.log",
-      "status": "PASS",
-      "detail": "14public/integration/scope tests",
-      "sha256": "2a4ce03093b24de7819b1e7f16b3df48b21316e5edd23039cfcedcb1df408de5",
-      "platform": "Linux",
-      "tested_subject": "88dc0987 working delta",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-installed-wheel-final.log",
-      "status": "PASS",
-      "detail": "30wholeinstalledwheelcontracts; publicimports,pipcheck,bothuninstallorders",
-      "sha256": "b49f96da8b39a999fb62d0c66b8ef4f988570c48a15dc4f7e8c7e10b5cead88a",
-      "platform": "Linux",
-      "tested_subject": "88dc09874d0841c1fbd4e5a39219bfa34aca7312",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-lint-final.log",
-      "status": "PASS",
-      "detail": "CoreRuff/format/isort",
-      "sha256": "13112aa526b9b4ac5ff44d17ac039a669e602c879d80affbc629c54525474ed8",
-      "platform": "Linux",
-      "tested_subject": "88dc0987",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-types-final.log",
-      "status": "PASS",
-      "detail": "119Corefiles",
-      "sha256": "ce2421fbd8a22cbebe05b94c620065eb6ccac915ddfa6cfc6b7a7b76361cb040",
-      "platform": "Linux",
-      "tested_subject": "88dc0987",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-suite.log",
-      "status": "FAIL",
-      "detail": "270PASS19FAIL localdummy connectivity",
-      "sha256": "d627c64309ce9da3bfdfbe7e65fa5c217013bdae5e6171d7c09f03cad23af4d0",
-      "platform": "Linux",
-      "tested_subject": "ec9b3d29+API/export/scope workingdelta",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-suite-local-proxy.log",
-      "status": "FAIL",
-      "detail": "ControlledNO_PROXY also19FAIL270PASS",
-      "sha256": "2da615b65e69674e10ed0960f89a57183a34fe579917bd9970214c4f1a06dc7e",
-      "platform": "Linux",
-      "tested_subject": "08a3addc candidate",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-rcc-test.log",
-      "status": "FAIL",
-      "detail": "RCC Test stops atCore19FAIL271PASS; laterpackages NOT_RUN. Reported descendant alreadydefunct, no live worker remains.",
-      "sha256": "ad05210ef457701cd699bd90a5a34b229521e0e1df68ca072ebfcc69900874d0",
-      "platform": "Linux",
-      "tested_subject": "88dc0987",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-doc-normalization-review-red.log",
-      "status": "FAIL",
-      "detail": "3APIsectionpreservation failures",
-      "sha256": "3238b8afc44390b9ef818aa9d31af50b9aedeeea7fbe13f3bb2d4b0d8a6022aa",
-      "platform": "Linux",
-      "tested_subject": "55f31614+regressions",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-devutils-final-head.log",
-      "status": "PASS",
-      "detail": "99completeDevutils tests",
-      "sha256": "ca88d7b5ac294bc526ca8bfe8d1c6f1ddeefa7e54b37d5814f34a1c0a98752b7",
-      "platform": "Linux",
-      "tested_subject": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-docs-rcc-parent-final.log",
-      "status": "PASS",
-      "detail": "AbsoluteRCC parentInvoke usesCorePoetry for docs+normalization",
-      "sha256": "254449274ddb02baf4718e48556ceb9c78cf1f157f14dca4203ceebe2c83866a",
-      "platform": "Linux",
-      "tested_subject": "92e43720+CLI boundary delta committedb4468e4f",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-doc-cli-tests.log",
-      "status": "PASS",
-      "detail": "7normalization/candidate tests",
-      "sha256": "de201120bd22ea1f155e1bb8ecc4cf4ffb0ef66a0930ec7fa6ea0bc61b935ce3",
-      "platform": "Linux",
-      "tested_subject": "b4468e4f workingdelta",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-doc-cli-ruff.log",
-      "status": "PASS",
-      "detail": "Changednormalizationmodule",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "platform": "Linux",
-      "tested_subject": "b4468e4f",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-doc-cli-types.log",
-      "status": "PASS",
-      "detail": "Changednormalizationmodule",
-      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
-      "platform": "Linux",
-      "tested_subject": "b4468e4f",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-devutils-ruff.log",
-      "status": "FAIL",
-      "detail": "Pre-existingunusedSequence import",
-      "sha256": "381325a3495e71bd63d8e1cdc23c4b015fb97cc00f854041a4625a93649e3310",
-      "platform": "Linux",
-      "tested_subject": "92e43720",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-devutils-format-check.log",
-      "status": "FAIL",
-      "detail": "6filesformattingincludingpre-existing invoke_utils formatting",
-      "sha256": "4f1e176121246fcd8b12a93df0993083473c579216ccc240fae3cb47a9c8598a",
-      "platform": "Linux",
-      "tested_subject": "92e43720",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-devutils-final.log",
-      "status": "FAIL",
-      "detail": "StalegeneratedYAML duringlocalmutation:1FAIL98PASS; regenerated andrerun99PASS",
-      "sha256": "8650fe4119138d3bb57f3d7de06673b0dac3e59fda253166a49159046b93dae0",
-      "platform": "Linux",
-      "tested_subject": "55f31614+workingdir/regex delta",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-pr-wheel-build.log",
-      "status": "FAIL",
-      "detail": "Poetry -C duplicatepath; fixedpackage workingdirectory",
-      "sha256": "34a5a70ddcd6b397d91db18f42b971733e4c29d019ac4c8c8bf714680ef06a4a",
-      "platform": "Linux",
-      "tested_subject": "55f31614",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-pr-wheel-build-green.log",
-      "status": "PASS",
-      "detail": "CandidateCorewheelbuilt frompackage directory",
-      "sha256": "517405aeec078eebe67c7a75b740711928e4e1227935e6a9ec267cb58d9da020",
-      "platform": "Linux",
-      "tested_subject": "92e43720 workingdelta",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
-    },
-    {
-      "file": "core-pr-installer-green.log",
-      "status": "PASS",
-      "detail": "CandidateCorewheel identified+installed, SHAprinted",
-      "sha256": "fb9483a8e3d74c6fa2fed0c147d43d51697279f9109f46c2773ef39e08f43eb8",
-      "platform": "Linux",
-      "tested_subject": "92e43720 workingdelta",
-      "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
     },
     {
       "file": "core-doctor.log",
@@ -11785,5 +11560,7 @@
     ],
     "wheel_artifact_retention": "Temporary30-test wheelhouse was removed bypytestretention; no unsupported wheel digest claim. Native and candidateCore outputs remain inworktree.",
     "publication": "NOT_RUN; no tag/merge/upload/replacement/deployment. Releaseevents do not usePRcandidate override."
-  }
+  },
+  "hosted_readback_at": "2026-10-08 19:12:15 UTC",
+  "evidence_archive": "evidence/community-20261008.zip"
 }
