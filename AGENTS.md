@@ -4,12 +4,26 @@
 
 This repository is a Poetry-managed Python monorepo. `action_server/` contains the CLI, FastAPI service, frontend, build pipeline, and bundled RCC integration. `actions/`, `mcp/`, and `work-items/` provide agent-facing libraries. `common/`, `build_common/`, and `devutils/` contain shared runtime and build utilities. Package tests live under each package's `tests/`; generated starting points live under `templates/`.
 
-Read [the canonical guide index](docs/skills/README.md) before changing code. Use the repository-local `actions-repository` skill for implementation, review, debugging, testing, release, or reconnaissance work in this checkout.
+Read [the canonical guide index](docs/skills/README.md) before changing code. Read [.agents/skills/actions-repository/SKILL.md](.agents/skills/actions-repository/SKILL.md) and use that repository-local `actions-repository` skill for implementation, review, debugging, testing, release, or reconnaissance work in this checkout.
 
 ## Build, Test, and Development Commands
 
-- `poetry install` from a package directory installs that package environment.
-- `invoke install` from the repository root installs all packages.
+RCC owns the outer developer toolchain; Poetry owns package dependencies and
+committed lockfiles. Start from the repository root with Josh's RCC v18.19.3:
+
+```bash
+rcc run -r developer/toolkit.yaml --dev -t Doctor
+rcc run -r developer/toolkit.yaml --dev -t Bootstrap
+rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
+```
+
+Without RCC, use `devutils/bin/develop.sh Doctor` (Windows: `develop.bat Doctor`),
+then the same launcher with `Bootstrap` and `ToolkitTest`. Read
+[CONTRIBUTING.md](CONTRIBUTING.md) for pins and setup failure handling.
+Cloud agents must use this gateway, not ad hoc Poetry/pip installations or
+upstream RCC `latest`. Package commands below assume the prepared toolchain.
+
+- Toolkit `Bootstrap` delegates to root `invoke install` and isolated package-local Poetry environments.
 - `poetry run pytest` from a package directory runs its complete suite; use `-k <scope>` only while iterating.
 - `poetry run action-server start --auto-reload` starts the local server; add `--log-level debug` for diagnostics.
 - `.devcontainer/bin/smoke` runs the non-root, pinned-tool, Poetry Work Items release gate from any repository subdirectory in the Dev Container.

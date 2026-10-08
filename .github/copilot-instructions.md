@@ -2,6 +2,23 @@
 
 Auto-generated from all feature plans. Last updated: 2025-12-11
 
+## Developer onboarding
+
+Read [AGENTS.md](../AGENTS.md), the
+[repository skill](../.agents/skills/actions-repository/SKILL.md), and
+[repository operations](../docs/skills/repository-operations.md) before working.
+The repository skill links the specialized RCC/Action Server skills in
+`joshyorko/plugins`; read the relevant skill even when it is not preinstalled.
+
+RCC owns the outer toolchain; Poetry owns package dependencies and lockfiles.
+The setup workflow installs checksum-pinned Josh RCC v18.19.3 and runs
+Doctor → Bootstrap → ToolkitTest. For subsequent work, use
+`rcc run -r developer/toolkit.yaml --dev -t <Task>` from the repository root.
+Do not use upstream RCC `latest`, host pip/Poetry bootstraps, or suppressed
+installation failures. Frontend dependencies are installed by the existing
+frontend tasks when needed; setup does not build or install Action Server.
+See [build instructions](../docs/BUILD_INSTRUCTIONS.md) for verification scopes.
+
 ## Active Technologies
 - Node.js 20.x LTS / TypeScript 5.3.3 for the public Runtime and Canvas frontends; Python 3.12 for backend and build automation
 - TypeScript 5.3.3, React 18.2.0 + Vite 6.1.0 (build), Radix UI 1.0.x (headless components), Tailwind CSS 3.4.1 (styling), class-variance-authority 0.7.0 (variants), clsx 2.1.0 + tailwind-merge 2.2.0 (className utility), React Router DOM 6.21.3 (navigation), TanStack Query 5.28.0 (data fetching) (004-community-ui-enhancement)
@@ -354,23 +371,17 @@ action_server/frontend/
 
 ### Python (Backend)
 ```bash
-# Run tests
-cd action_server && pytest
-cd actions && pytest
-cd common && pytest
-
-# Lint code
-ruff check .
-
-# Build tasks (invoke)
-inv --list  # Show all available tasks
+# From the repository root, using the prepared RCC toolkit
+rcc run -r developer/toolkit.yaml --dev -t Test
+rcc run -r developer/toolkit.yaml --dev -t Lint
+rcc run -r developer/toolkit.yaml --dev -t Typecheck
 ```
 
-### Frontend Build (Node.js + TypeScript)
-```bash
-# Build Runtime and Canvas from the checked-in public manifest and lockfile
-cd action_server && inv build-frontend
-```
+### Source build and frontend gates
+
+Use [BUILD_INSTRUCTIONS.md](../docs/BUILD_INSTRUCTIONS.md) for the canonical
+`InstallCommunity` task and separate frontend quality/build commands. The
+artifact validator below runs in the prepared toolchain.
 
 ### Artifact Validation
 ```bash
@@ -384,7 +395,7 @@ python build-binary/artifact_validator.py \
 ```
 
 ## Code Style
-Node.js (LTS 20.x) / TypeScript 5.3.3 for frontend; Python 3.11.x for build automation: Follow standard conventions
+Use the tool versions declared in `developer/setup.yaml` and package manifests. Follow package-configured style gates.
 
 ## Recent Changes
 - 2025-12-11: Added comprehensive UI component documentation from 004-community-ui-enhancement feature (Input, Textarea, Dialog, Table, DropdownMenu, Badge, Loading, ErrorBanner with shadcn/ui patterns, Test-First requirements, WCAG 2.1 AA accessibility standards, motion-reduce support, and Tailwind CSS guidelines)

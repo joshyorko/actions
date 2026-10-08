@@ -7,9 +7,13 @@ on:
   push:
     paths:
       - .github/workflows/copilot-setup-steps.yml
+      - .github/workflows/developer_toolkit.yml
+      - developer/**
   pull_request:
     paths:
       - .github/workflows/copilot-setup-steps.yml
+      - .github/workflows/developer_toolkit.yml
+      - developer/**
 
 jobs:
   # The job MUST be called `copilot-setup-steps` or it will not be picked up by Copilot.
@@ -28,104 +32,38 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Python setup for backend build automation (action_server, actions, build_common, etc.)
-      # Note: action_server requires Python >=3.12, so using 3.12 for full compatibility
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
-
-      # Install invoke for build tasks (used throughout the project)
-      - name: Install invoke and core dependencies
+      # Match the primary Linux asset in developer_toolkit.yml.
+      - name: Install pinned Josh RCC
+        shell: bash
+        env:
+          RCC_VERSION: 18.19.3
+          RCC_SHA256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
         run: |
-          python -m pip install --upgrade pip
-          pip install invoke ruff pytest pytest-cov
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/actions-rcc"
+          curl --fail --location --silent --show-error \
+            "https://github.com/joshyorko/rcc/releases/download/v${RCC_VERSION}/rcc-linux64" \
+            --output "$RUNNER_TEMP/actions-rcc/rcc"
+          printf '%s  %s\n' "$RCC_SHA256" "$RUNNER_TEMP/actions-rcc/rcc" | sha256sum --check --status -
+          chmod +x "$RUNNER_TEMP/actions-rcc/rcc"
+          echo "$RUNNER_TEMP/actions-rcc" >> "$GITHUB_PATH"
+          echo "ROBOCORP_HOME=$RUNNER_TEMP/actions-robocorp" >> "$GITHUB_ENV"
+          echo "ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION=v${RCC_VERSION}" >> "$GITHUB_ENV"
 
-      # Node.js setup for frontend development (action_server/frontend)
-      - name: Set up Node.js 20.x LTS
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: "action_server/frontend/package.json"
+      - name: Validate RCC manifest
+        run: rcc robot diagnostics -r developer/toolkit.yaml --json
 
-      # Install public frontend dependencies for action_server/frontend
-      - name: Install frontend dependencies
-        working-directory: action_server/frontend
-        run: npm ci
+      - name: Run toolkit doctor
+        run: rcc run -r developer/toolkit.yaml --dev -t Doctor
 
-      # Optional: Install RCC for Robocorp tooling (if needed for actions/templates work)
-      # RCC provides isolated Python environments and robot execution capabilities
-      - name: Install RCC (Robocorp toolchain)
+      - name: Bootstrap package environments
+        run: rcc run -r developer/toolkit.yaml --dev -t Bootstrap
+
+      - name: Verify isolated package environments
+        shell: bash
         run: |
-          curl -o rcc https://downloads.robocorp.com/rcc/releases/latest/linux64/rcc
-          chmod +x rcc
-          sudo mv rcc /usr/local/bin/
-          rcc --version
-
-      # Install project-specific Python packages for development
-      # Note: action_server requires Python >=3.12, will install successfully now
-      - name: Install action_server development dependencies
-        working-directory: action_server
-        run: |
-          if [ -f pyproject.toml ]; then
-            pip install -e ".[dev]" 2>/dev/null || pip install -e . 2>/dev/null || echo "action_server install skipped (dependencies will be available)"
-          fi
-
-      # Install actions package dependencies
-      - name: Install actions development dependencies
-        working-directory: actions
-        run: |
-          if [ -f pyproject.toml ]; then
-            pip install -e ".[dev]" || pip install -e . || echo "Skipping editable install"
-          fi
-
-      # Set up development environment for multiple packages
-      - name: Install common and build_common packages
-        run: |
-          cd common && pip install -e . || echo "Skipping common install"
-          cd ../build_common && pip install -e . || echo "Skipping build_common install"
-
-      # Install Vite and build tools globally for easier CLI access
-      - name: Install Vite and CycloneDX for SBOM generation
-        working-directory: action_server/frontend
-        run: |
-          npm install -g vite || echo "Vite install skipped"
-          npm install --save-dev @cyclonedx/cyclonedx-npm || echo "CycloneDX install skipped"
-        continue-on-error: true
-
-      # Pre-compile TypeScript config validation
-      - name: Validate TypeScript configuration
-        working-directory: action_server/frontend
-        run: |
-          npx tsc --noEmit --skipLibCheck
-        continue-on-error: true
-
-      # Create baseline performance measurement file for NFR validation (T001-PRE)
-      - name: Create performance baseline directory
-        run: |
-          mkdir -p action_server/tests/performance_tests
-          echo '{"build_time_seconds": 0, "bundle_size_mb": 0, "gzipped_size_mb": 0}' > action_server/tests/performance_tests/baseline.json
-
-      # Verify invoke tasks are accessible
-      - name: List available invoke tasks
-        run: |
-          cd action_server && invoke --list || echo "Invoke tasks check complete"
-
-      # Set up git configuration for potential commit operations
-      - name: Configure git for Copilot
-        run: |
-          git config --global user.email "copilot@github.com"
-          git config --global user.name "GitHub Copilot"
-
-      # Display environment summary for debugging
-      - name: Display environment summary
-        run: |
-          echo "=== Environment Summary ==="
-          echo "Python version: $(python --version)"
-          echo "Node version: $(node --version)"
-          echo "NPM version: $(npm --version)"
-          echo "RCC version: $(rcc --version 2>/dev/null || echo 'RCC not available')"
-          echo "Invoke version: $(invoke --version)"
-          echo "==========================="
+          set -euo pipefail
+          for package in actions actions-http-helper devutils work-items action_server; do
+            test -x "${package}/.venv/bin/python"
+          done
+          rcc run -r developer/toolkit.yaml --dev -t ToolkitTest

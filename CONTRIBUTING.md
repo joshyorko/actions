@@ -1,6 +1,7 @@
 # Contributing
 
-This is a contribution guide for the Sema4ai actions and action server projects and its associated libraries.
+This guide covers `joshyorko/actions` on the `community` branch. Start with the
+[RCC developer workflow](#rcc-developer-setup) before package or frontend work.
 
 ## Frontend Development
 
@@ -11,8 +12,9 @@ manifest and lockfile.
 
 #### Prerequisites
 
-- **Node.js**: 22.x
-- **npm**: 10.x or later
+Use the RCC toolchain in `developer/setup.yaml` (Node.js 20.19.3), or the
+repository Dev Container (Node.js 22). The frontend requires Node.js >=20.19.0.
+The commands below run in that prepared environment, not an ad hoc host install.
 
 #### Build Steps
 
@@ -35,29 +37,43 @@ and its lockfile, then verified with the runtime and Canvas builds.
 
 ## Libraries
 
-### Prerequisites
+### RCC developer setup
 
 RCC is the cross-platform developer gateway. It supplies the isolated toolchain and
 dispatches package commands to Poetry and Invoke; Poetry remains authoritative for each
 package's dependencies and lockfile.
 
-Install RCC v18.18.1, then run from the repository root:
+Use [Josh's RCC fork](https://github.com/joshyorko/rcc) **v18.19.3**, the primary
+pin in `developer/toolkit.py` and `.github/workflows/developer_toolkit.yml`.
+**v18.18.1 is N−1 compatibility only**; its CI lane explicitly sets
+`ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION=v18.18.1`. Do not use upstream `latest`
+or override the expected version to bypass a mismatch.
+
+Run Doctor → Bootstrap → verification from the repository root:
 
 ```bash
 rcc run -r developer/toolkit.yaml --dev -t Doctor
 rcc run -r developer/toolkit.yaml --dev -t Bootstrap
+rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
 ```
 
-If RCC is not installed, the repository launchers run `Bootstrap` directly. On Linux and
+If RCC is not installed, use the repository launchers with explicit task names. On Linux and
 macOS the shell launcher prefers the `joshyorko/tools/rcc` Homebrew cask when Brew is
 available, then falls back to the pinned Josh RCC release asset:
 
 ```bash
-./devutils/bin/develop.sh
+./devutils/bin/develop.sh Doctor
+./devutils/bin/develop.sh Bootstrap
+./devutils/bin/develop.sh ToolkitTest
 ```
 
-On Windows, run `devutils\bin\develop.bat`. Pass another toolkit task name, such as
-`Doctor`, as the first argument when bootstrap is not required.
+On Windows, run `devutils\bin\develop.bat Doctor`, then `Bootstrap`, then
+`ToolkitTest`. Both launchers default to Bootstrap when no task is supplied.
+
+Cloud agents must read [AGENTS.md](AGENTS.md) and
+[the repository skill](.agents/skills/actions-repository/SKILL.md). RCC owns the
+outer toolchain; Poetry owns package dependencies and committed lockfiles. Do
+not install host Poetry/pip tooling to work around a failed toolkit task.
 
 ### Development
 
@@ -87,7 +103,7 @@ Run the focused gateway contracts with:
 rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
 ```
 
-Run the complete static and test gate with:
+Run the combined static and portable Python test gate with:
 
 ```
 rcc run -r developer/toolkit.yaml --dev -t CheckAll
@@ -105,18 +121,14 @@ Docs should be generated after each change with:
 rcc run -r developer/toolkit.yaml --dev -t Docs
 ```
 
-And everything combined with:
-
-```
-rcc run -r developer/toolkit.yaml --dev -t CheckAll
-```
-
 ### Testing
 
-Testing is done with `pytest` for the Python libraries. For javascript `jest` is the used one.
-
-Run the complete Python suite with the toolkit's `Test` task. Frontend tests are
-available through `rcc run -r developer/toolkit.yaml --dev -t FrontendTest`.
+The toolkit's `Test` task runs the portable Python gates. It excludes Work Items
+`persistent_backend_service` tests and Action Server integration tests.
+`FrontendTest` runs `npm ci` and the full `npm run test` suite; it is separate
+from the frontend shipping quality/build gates. See
+[build and verification boundaries](docs/BUILD_INSTRUCTIONS.md) before choosing
+a gate. `ToolkitTest` alone does not prove package, frontend, or service acceptance.
 
 > It's recommended that you configure your favorite editor/IDE to use the test framework inside your IDE.
 

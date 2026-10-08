@@ -690,6 +690,23 @@ and child cleanup; manager-stop failures are logged and isolated so they do
 not replace the body exception or skip later cleanup. Failed child enumeration
 logs and treats the child set as empty.
 
+Cloud agents start with `AGENTS.md` and
+`.agents/skills/actions-repository/SKILL.md`; the latter links the specialized
+RCC/Action Server skills in `joshyorko/plugins`. These instructions apply even
+when the agent has no plugin installer. RCC owns the outer toolchain, while
+Poetry owns package dependencies and lockfiles; a failed setup is not permission
+to replace that boundary with host pip/Poetry installations.
+
+Copilot's reserved `copilot-setup-steps` job installs the same checksum-pinned
+Josh RCC Linux asset as the primary developer-toolkit matrix, persists its PATH
+and writable `ROBOCORP_HOME` through GitHub environment files, and runs manifest
+diagnostics, Doctor, Bootstrap, package `.venv` checks, and ToolkitTest in order.
+It does not install frontend dependencies globally, alter npm manifests, build
+or install Action Server, or suppress setup failures. Frontend tasks perform
+their own locked `npm ci` when requested. Keep the Copilot pin and checksum in
+sync with the primary Linux matrix entry; the gateway contract tests check this
+relationship and task ordering.
+
 The repository-wide `developer/toolkit.yaml` is the primary developer gateway on Linux,
 macOS, and Windows. Run `Doctor` before `Bootstrap`; use `ToolkitTest` for the gateway's
 focused contracts, then use `Test`, `Lint`, `Typecheck`, `Docs`, `CheckAll`,

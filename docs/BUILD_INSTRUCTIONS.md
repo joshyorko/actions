@@ -1,125 +1,97 @@
-# Action Server Build Instructions
+# Action Server build instructions
 
-## Quick Build
+## Canonical source build and installation
 
-This builds the open-source Runtime and Canvas frontends from public dependencies.
-
-### Prerequisites
-
-- Python 3.12+
-- Node.js 20.x
-- Go 1.23+
-- uv (install with: `curl -LsSf https://astral.sh/uv/install.sh | sh`)
-
-### Build Steps (exactly as CI does)
+Use Josh's RCC fork v18.19.3 and the checked-in developer toolkit from the
+repository root on `community`. See [CONTRIBUTING.md](../CONTRIBUTING.md) for
+installation and the v18.18.1 N−1 compatibility lane. RCC supplies the outer
+Python, Node, Go, Poetry, and Invoke toolchain; Poetry owns package dependencies
+and committed lockfiles. Do not bootstrap with ad hoc pip/uv installs.
 
 ```bash
-# 1. Install uv if not already installed
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# 2. Install devutils requirements
-cd action_server
-uv run --no-project --python 3.12 python -m pip install --break-system-packages -r ../devutils/requirements.txt
-
-# 3. Install project dependencies (this installs all monorepo packages)
-uv run --no-project --python 3.12 inv install
-
-# 4. Build the public frontend
-uv run --no-project --python 3.12 inv build-frontend
-# Output: frontend/dist/index.html (single-file, ~291 KB)
-
-# 5. Build OAuth2 config
-uv run --no-project --python 3.12 inv build-oauth2-config
-
-# 6. Build final executable
-uv run --no-project --python 3.12 poetry run inv build-executable --go-wrapper
-# Output: dist/final/action-server (Linux)
-#         dist/final/action-server.exe (Windows)
+rcc run -r developer/toolkit.yaml --dev -t Doctor
+rcc run -r developer/toolkit.yaml --dev -t Bootstrap
+rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
 ```
 
-### Test the Binary
+After these checks, build and install the community executable:
 
 ```bash
-# Check version
-./dist/final/action-server version
-
-# Start server (needs a package.yaml with actions)
-./dist/final/action-server start --port=8080
+rcc run -r developer/toolkit.yaml --dev -t InstallCommunity
 ```
 
-## What Gets Built
+`InstallCommunity` replaces the `action-server` executable resolved on PATH.
+Inspect that target before running it. If none exists, the fallback directory
+must already be on PATH: `~/.local/bin` on Linux/macOS or
+`%LOCALAPPDATA%/Programs/Actions/bin` on Windows. The task does not elevate
+privileges. It atomically replaces the target and reports permission failures.
 
-### Frontend
-- **Runtime and Canvas**: built from the single public manifest and lockfile
-  - UI: Radix UI primitives + Tailwind CSS
-  - Features: Action execution, logs, artifacts, run history
-  - Dependencies: Public npm packages only
-  - Size: ~291 KB (single HTML file)
+The task invokes the existing package-local `build-frontend` and
+`build-executable --go-wrapper --version community-local` tasks. It checks the
+built binary with `new --help`, installs it, then checks the installed target
+with `version` and `new --help`. Keep `local` in developer build versions so
+the Go wrapper refreshes changed same-version payloads.
 
-### Backend
-- Python action execution engine
-- FastAPI server
-- Embedded frontend HTML
-- RCC integration (downloaded on first run)
-- Go wrapper executable
+Outputs are relative to `action_server/`:
 
-## Directory Structure
+- `dist/final/action-server` (Linux/macOS) or `dist/final/action-server.exe` (Windows).
+- `frontend/dist/index.html` for Runtime and `frontend/dist-canvas/` for Canvas,
+  with per-root artifact manifests and SBOMs.
+- `src/actions/server/_static_contents.py` for embedded frontend content.
 
-```
-dist/
-├── action-server/          # PyInstaller output
-│   ├── action-server       # Python executable
-│   └── _internal/          # Dependencies
-└── final/                  # Go wrapper (FINAL OUTPUT)
-    └── action-server       # ← THIS IS WHAT YOU DISTRIBUTE
-```
+These checks prove build/install startup, not live server or release acceptance.
+Do not treat a failed `start` without a package as a passing runtime test.
 
-## Build Artifacts
+## Verification boundaries
 
-After successful build:
-- `dist/final/action-server` - Final distributable binary (Linux/macOS)
-- `dist/final/action-server.exe` - Final distributable binary (Windows)
-- `frontend/dist/index.html` - Standalone frontend (for debugging)
-- `src/actions/server/_static_contents.py` - Embedded frontend Python module
+Choose the gate for the change; a source build does not replace these gates.
 
-## Verification
+| Gate | Command and scope |
+|---|---|
+| Toolkit contracts | `rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`: gateway Ruff and pytest contracts only |
+| Portable Python | `rcc run -r developer/toolkit.yaml --dev -t Test`: package gates, excluding Work Items service tests and Action Server integration tests |
+| Static Python checks | Toolkit `Lint` and `Typecheck`; `CheckAll` combines Doctor, lint, typecheck, and portable tests |
+| Frontend full tests | Toolkit `FrontendTest`: `npm ci` followed by `npm run test`; separate from shipping quality gates |
+| Work Items services and packaging | `.devcontainer/bin/verify-work-items`: full pytest, lock/lint, wheel/sdist and clean-wheel checks; requires healthy `TEST_REDIS_URL` and `TEST_MONGODB_URI` |
+| Dev Container | `.devcontainer/bin/smoke` inside the repository Dev Container as non-root: pinned-tool checks, bootstrap, and Work Items release gate |
+
+### Frontend shipping gates
+
+In the prepared RCC toolchain or repository Dev Container, from
+`action_server/frontend`:
 
 ```bash
-# 1. Binary exists and is executable
-ls -lh dist/final/action-server
-# Expected: ~150-200 MB executable
-
-# 2. Version check works
-./dist/final/action-server version
-# Expected: 2.16.1 (or current version)
-
-# 3. Help command works
-./dist/final/action-server --help
-# Expected: CLI help output
-
-# 4. Server can start (will fail without actions - that's OK)
-./dist/final/action-server start
-# Expected: Initializes DB, downloads RCC, fails on missing package.yaml
+npm ci
+npm run test:quality
+npm run build:runtime
+npm run build:canvas
+npm run validate:artifacts
 ```
 
-## Common Issues
+Use the checked-in public manifest and lockfile. Do not globally install Vite
+or add SBOM dependencies during onboarding. The historical all-tree frontend
+test suite is separate from the shipping `test:quality` gate. Static artifact
+validation does not replace real-browser verification.
 
-### Issue: "No module named pytest"
-**Solution**: Run `inv install` first - it installs all dependencies
+### Dev Container verification
 
-### Issue: "Go executable not found"
-**Solution**: Install Go 1.23+ and add to PATH
+The Dev Container is a separate, repository-owned environment with Node 22;
+the RCC toolkit pins Node 20.19.3. Both satisfy the frontend engine requirement.
+The container smoke is a Work Items release gate, not a full Action Server
+binary build gate; its image does not include Go or jq. Follow
+[repository operations](skills/repository-operations.md) for host-side container
+setup, service orchestration, and headless verification. Service tests skipped
+or not run remain unverified.
 
-### Issue: "dist/final/ doesn't exist"
-**Solution**: You must use `--go-wrapper` flag for final build
+## Setup failures
 
-### Issue: "Removed product imports detected"
-**Solution**: Build from the checked-in public manifest and remove the reported private import.
+If Doctor or Bootstrap fails, retain the diagnostic and fix that boundary.
+Use `rcc robot diagnostics -r developer/toolkit.yaml --json` and
+`rcc ht vars -r developer/toolkit.yaml` to inspect RCC resolution. Do not hide
+failures with pip fallbacks or install missing tools into the host environment.
 
-## CI/CD
-
-The CI workflow (`.github/workflows/action_server_binary_release.yml`) builds:
-- **4 platforms**: ubuntu-22.04, windows-2022, macos-13, macos-15
-- **One public Runtime/Canvas build** with no registry credentials
-
-Artifacts are uploaded to S3 and GitHub Releases.
+The authoritative task wiring is in `developer/toolkit.yaml` and
+`developer/toolkit.py`. `.github/workflows/developer_toolkit.yml` checks primary
+and N−1 RCC pins across Linux, macOS, and Windows; its Linux lanes also bootstrap,
+run portable tests, and execute `InstallCommunity`. Release publishing is a
+separate workflow, `.github/workflows/actions_runtime_binary_release.yml`.
