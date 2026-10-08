@@ -11,6 +11,13 @@ candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
 publication success. Recheck dependency sequencing against each retained
 contract before implementation; a cross-reference alone is not a blocking edge.
 
+A receipt's tested subject is the source state actually executed: record its
+base SHA and any uncommitted delta separately from the later repair head. Do
+not relabel red-before evidence with the repaired head. For authenticated
+HTTP/browser comparisons, record whether each request supplied a synthetic
+bearer; a successful bearer probe and an unauthorized browser request are
+different subjects.
+
 The closed observability issue #137 remains referenced by roadmap #82. Preserve
 its retained contract in final vertical verification rather than reopening it
 automatically. #149 remains a living advisory record, and closed quickstart #154
