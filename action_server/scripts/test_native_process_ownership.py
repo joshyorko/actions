@@ -101,6 +101,53 @@ class OwnedProcessTests(unittest.TestCase):
             self.assertEqual(result["log_sources_present"], 2)
             self.assertNotIn("private", str(result))
 
+    @unittest.skipUnless(os.name == "nt", "Requires real Windows path aliases")
+    def test_artifact_root_accepts_short_names_and_rejects_junctions(self):
+        import ctypes
+        from ctypes import wintypes
+        from actions.server._artifact_storage import (
+            create_artifact_storage,
+            ArtifactStorageConfigurationError,
+        )
+
+        kernel = getattr(ctypes, "WinDLL")("kernel32", use_last_error=True)
+        kernel.GetShortPathNameW.argtypes = [
+            wintypes.LPCWSTR,
+            wintypes.LPWSTR,
+            wintypes.DWORD,
+        ]
+        kernel.GetShortPathNameW.restype = wintypes.DWORD
+        with tempfile.TemporaryDirectory(
+            prefix="actions-native-long-directory-"
+        ) as directory:
+            root = Path(directory).resolve()
+            buffer = ctypes.create_unicode_buffer(32768)
+            length = kernel.GetShortPathNameW(str(root), buffer, len(buffer))
+            self.assertTrue(0 < length < len(buffer))
+            alias = Path(buffer.value)
+            self.assertNotEqual(
+                alias, root, "Windows CI must provide an actual 8.3 alias"
+            )
+            storage = create_artifact_storage("local", alias)
+            self.assertEqual(storage.root, root)
+            storage.create_run_artifacts_dir("run-a")
+            junction = root / "junction"
+            target = root / "target"
+            target.mkdir()
+            result = subprocess.run(
+                ["cmd", "/c", "mklink", "/J", str(junction), str(target)],
+                capture_output=True,
+                timeout=10,
+            )
+            self.assertEqual(result.returncode, 0)
+            try:
+                with self.assertRaises(ArtifactStorageConfigurationError):
+                    create_artifact_storage("local", junction)
+                with self.assertRaises(ArtifactStorageConfigurationError):
+                    storage.create_run_artifacts_dir("junction/run-b")
+            finally:
+                junction.rmdir()
+
     @unittest.skipUnless(os.name == "nt", "Requires real Windows Job Objects")
     def test_job_closes_descendant_after_its_leader_exits(self):
         import ctypes

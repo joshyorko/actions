@@ -344,3 +344,13 @@ file basenames/line numbers/function identifiers and fixed diagnostic markers,
 never source lines or exception messages. An empty identifier list does not prove
 that imports succeeded. Keep startup failure blocking until the actual native
 platform rerun passes; a diagnostic-only repair does not accept that platform.
+
+Artifact storage roots must reject symbolic links and Windows reparse points
+(including junctions) in every path component. A changed spelling after
+`Path.resolve()` is not itself a link: Windows expands ordinary 8.3 directory
+names. Validate components first, then retain the canonical root for containment
+checks. Native Windows CI also exercises a real `GetShortPathNameW` alias and
+rejects a real junction both as a root and within it; only that platform run
+establishes the Windows behavior. The harness canonicalizes its own POSIX
+temporary directory to avoid macOS system `/var` aliases; this does not relax
+the configured user-root policy.

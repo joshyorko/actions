@@ -371,3 +371,23 @@ def test_independent_storage_api_reads_durable_run_binding_and_range_file(
     assert events[0]["status"] == 206
     assert b"".join(event["body"] for event in events[1:]) == b"2345"
     assert dict(events[0]["headers"])[b"content-range"] == b"bytes 2-5/10"
+
+
+def test_storage_normalizes_equivalent_root_spelling_without_following_links(tmp_path):
+    (tmp_path / "intermediate").mkdir()
+    root = tmp_path / "artifacts"
+    root.mkdir()
+    storage = create_artifact_storage(
+        "local", tmp_path / "intermediate" / ".." / "artifacts"
+    )
+    assert storage.root == root.resolve()
+    assert storage.create_run_artifacts_dir("run-a") == root.resolve() / "run-a"
+
+
+def test_storage_rejects_symlink_in_root_ancestor(tmp_path):
+    target = tmp_path / "target"
+    (target / "artifacts").mkdir(parents=True)
+    link = tmp_path / "link"
+    link.symlink_to(target, target_is_directory=True)
+    with pytest.raises(ArtifactStorageConfigurationError):
+        create_artifact_storage("local", link / "artifacts")
