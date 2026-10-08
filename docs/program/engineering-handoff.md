@@ -1,166 +1,94 @@
 # Actions Community engineering handoff — October 8, 2026
 
-The program is not complete, merged or released. Root owns integration. The user
-has authorized merge and GitHub Actions publication after required review,
-package, browser, security and platform checks pass; those conditions remain unmet.
+The program is unfinished. Root owns integration. The user authorizes merging and GitHub Actions publication after required package, browser, security, platform and adversarial checks pass; those conditions remain unmet. No community merge, tag, publication, artifact replacement or deployment has occurred. Feature PRs have merged only into the integration branch.
 
 ## Program accounting
 
-All 54 open issue bodies and comments were inspected and preserved. Accepted: 0;
-whole issues verified review-ready: 0; unfinished: 54. Current dispositions are
-33 NOT_STARTED, 8 IN_PROGRESS and 13 IMPLEMENTED_UNVERIFIED. Individual acceptance
-blockers are retained even when an implementation can continue. Every issue has
-an owner, PR/foundation, full contract, dependency graph, criticality, platform
-requirements, proof scope and next action in the [human ledger](community-program-ledger.md)
-and [machine ledger](community-program-ledger.json).
+All 54 open contracts and comments are preserved in the [machine ledger](community-program-ledger.json), with individual dispositions in the [human ledger](community-program-ledger.md). None is accepted or whole-issue review-ready. Current accounting: {"open_issues": 54, "accepted": 0, "verified_review_ready": 0, "unfinished": 54, "not_started": 33, "in_progress": 6, "implemented_unverified": 15, "blocked": 0}. Bounded implementation and test results do not waive retained contracts.
 
-The user expanded writer concurrency: four isolated Luna lanes cover #214 tunnel
-lifecycle, #162 measured coverage, #155 public roadmap and #129 Deployment design.
-They use gpt-6-luna at medium reasoning. The existing Astra convergence child
-`/root/astra_convergence` uses gpt-6-astra at low reasoning. Root coordinates all
-integration; the existing runtime reviewer is read-only. Checkpoints do not imply
-that workers continue after a session ends.
-
-#149 remains an open living advisory record. #137 remains closed; its observability
-contract survives in #82 without automatic reopening. #154 and Homebrew #103 are
-completed and not duplicated. RCC #120 is a closed read-only external contract;
-no RCC repository changes were made. Community remains the fetched historical
-anchor `7c98236069171f57031218f938963238986293bd`; onboarding is preserved.
+#149 remains an open advisory record. #137 stays closed while its observability contract remains part of #82. #154 and Homebrew #103 are completed and not duplicated. RCC #120 is a read-only external contract. Community remains `7c98236069171f57031218f938963238986293bd`; onboarding changes survive integration.
 
 ## PR convergence
 
-All five original histories are retained in integration PR #221. No PR has been
-merged into community. Exact readback timestamps, check names and URLs are in
-[CI receipts](community-ci-receipts.json); historical failures and cancellations
-remain separate from current proof.
+All five original histories remain in [integration PR221](https://github.com/joshyorko/actions/pull/221), branch `integration/community-release-20261008`, at `b649c37c627fe9932fd2bed80fb16fa74c58d0f5`. Exact hosted check URLs and timestamps are in [CI receipts](community-ci-receipts.json). PR workflow names such as “publish” do not mean a PR run published a release.
 
-| PR | Source head | Hosted receipt |
+| PR | Head | State / hosted checks |
 |---|---|---|
-| [215](https://github.com/joshyorko/actions/pull/215) | d07f79b355f976f97948720474fd050d0a32ea16 | 16 PASS |
-| [216](https://github.com/joshyorko/actions/pull/216) | d26fa423080cec22522402f2193b17a5f32b336a | 23 PASS |
-| [217](https://github.com/joshyorko/actions/pull/217) | 9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2 | 15 PASS |
-| [218](https://github.com/joshyorko/actions/pull/218) | 95ddbe88106be594ea9954bdb36909702c5e2869 | 16 PASS, 1 SKIP |
-| [219](https://github.com/joshyorko/actions/pull/219) | ee612f467aa3bf379ccccf238ac985fa2846afde | 6 PASS, 1 inherited assembled WebSocket FAIL |
+| [215](https://github.com/joshyorko/actions/pull/215) | `d07f79b355f976f97948720474fd050d0a32ea16` | OPEN; 16 SUCCESS |
+| [216](https://github.com/joshyorko/actions/pull/216) | `d26fa423080cec22522402f2193b17a5f32b336a` | OPEN; 23 SUCCESS |
+| [217](https://github.com/joshyorko/actions/pull/217) | `9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2` | OPEN; 15 SUCCESS |
+| [218](https://github.com/joshyorko/actions/pull/218) | `95ddbe88106be594ea9954bdb36909702c5e2869` | OPEN; 16 SUCCESS, 1 SKIPPED |
+| [219](https://github.com/joshyorko/actions/pull/219) | `ee612f467aa3bf379ccccf238ac985fa2846afde` | OPEN; 6 SUCCESS, 1 FAILURE |
+| [220](https://github.com/joshyorko/actions/pull/220) | `bf20d015e739f4bbad956653692a1436b5f4c223` | OPEN; 10 SUCCESS, 2 FAILURE |
+| [221](https://github.com/joshyorko/actions/pull/221) | `b649c37c627fe9932fd2bed80fb16fa74c58d0f5` | OPEN; 18 IN_PROGRESS, 4 SUCCESS, 1 QUEUED, 1 SKIPPED |
+| [222](https://github.com/joshyorko/actions/pull/222) | `2bbf3afceda39a0d8dfa4b9e1a3ed96f3ad9b61f` | MERGED; 7 SUCCESS |
+| [223](https://github.com/joshyorko/actions/pull/223) | `e4e54d31647b7d44cdd7c07d6006596186db8317` | MERGED; 7 SUCCESS |
+| [224](https://github.com/joshyorko/actions/pull/224) | `28b021c6307c5c993f0ba2859d0da2ae3d9e8c94` | MERGED; 8 SUCCESS, 2 FAILURE |
+| [225](https://github.com/joshyorko/actions/pull/225) | `f076425d750e468f980365eeefe467542affb337` | OPEN; 8 SUCCESS, 2 FAILURE |
+| [226](https://github.com/joshyorko/actions/pull/226) | `8524e9c3e9bc35bfc17f70f887d9d0b680856af3` | MERGED; 8 SUCCESS, 2 FAILURE |
 
-[PR220](https://github.com/joshyorko/actions/pull/220) preserves the graph and
-receipts. [PR221](https://github.com/joshyorko/actions/pull/221), branch
-`integration/community-release-20261008`, is pushed at
-`899a483e3ac07ddaec246db4beeb8d0bf1aa4e72`. It includes the five histories,
-credential-safe browser sessions, dependency floors, Helper proxy routing,
-lock-derived reproducible SBOMs, Robot download/ZIP security repairs, actual
-native acceptance and large-history gates, and the mobile navigation repair.
-New public-roadmap branch `feature/roadmap-20261008` is at `2bbf3afc`; its focused
-PR targets integration and remains a checkpoint. Other Luna slices are in progress.
-
-At integration 7c45029b, hosted Windows process-ownership tests pass all four,
-but frozen startup exits 1 before product acceptance. Full frontend CI had one
-failure among 277 tests. The mobile current-route regression now reproduces the
-defect deterministically before the callback repair; 278 full frontend tests and
-lint/type/format/topology/UI-system checks pass locally at 949d4a5e. Successor
-899a483e adds bounded Windows diagnostic extraction; it does not claim to fix
-startup. Current hosted successor checks and macOS native acceptance are pending.
-
-Independent exact-head reviews have repaired worker Core compatibility, SBOM
-nondeterminism, Robot DNS rebinding/proxy behavior, Windows ZIP aliases, semicolon
-URL preservation and Windows descendant ownership. Review of the new large-history,
-mobile and diagnostic successor is in progress. Roadmap review identified and
-repaired published/candidate evidence conflation and missing entry/checkpoint rules.
+Original #219's N-1 Linux assembled WebSocket failure is retained as inherited evidence, not attributed to its documentation. Original PRs remain open. PRs222,223,224,226 converged into integration only: public roadmap, scoped Deployment design, active template cleanup and PostgreSQL transaction repair. PR225's tunnel lifecycle remains separate and incomplete. PR220 is the evidence/graph checkpoint.
 
 ## Verification and architecture acceptance
 
-RCC 18.19.3 Doctor, Bootstrap and ToolkitTest passed. CheckAll at 119b4f passed:
-Runtime 568 PASS/10 SKIP (integration-marked execution excluded), Core 290 PASS,
-HTTP Helper 11 PASS, devutils 124 PASS, Work Items 238 PASS/28 SKIP/3 DESELECTED/
-10 XFAIL, Toolkit 25 PASS, plus package formatting/types/generated docs.
-The recorded host-Python venv failure remains a FAIL receipt; its rerun uses the
-repository RCC Python selection. Markdownlint availability is not claimed.
-Primary and N-1 RCC hosted checks on Linux and Windows pass at 7c; macOS is pending.
+Pinned RCC18.19.3 Doctor, Bootstrap and ToolkitTest passed in cloud. Complete CheckAll at119b4f passed Runtime568/10SKIP (integration-marked execution excluded), Core290, Helper11, devutils124, Work Items238/28SKIP/3DESELECTED/10XFAIL, Toolkit25, plus relevant formatting/types/generated documentation. Current06c hosted primary18.19.3 and N-1 18.18.1 gates passed on all three OS. Full frontend278 tests pass. Candidate installed-wheel contracts31 PASS; independently installed old published Core1.0.1 correctly rejects the new worker contract. Registry availability is not inferred from candidate wheels.
 
-Clean candidate wheel contracts: 31 PASS, including Core/Runtime/Helper floors,
-worker injection and both uninstall orders. Independently isolated published
-Core 1.0.1 correctly fails the new worker contract with an actionable upgrade;
-source namespace leakage is excluded from that probe. Candidate compatibility
-does not establish registry availability. Import collection is not yet a complete
-early Core-version admission gate.
+At PR merge source `b592952d99c7e2ecd0ff70e4a7bdae420fbf46a6` (head3190cb53), frozen and Go-wrapper Runtime1.0.3 pass actual authenticated Chromium/HTTP/WebSocket, Work Items create/list/detail/restart persistence, bundled-loader shadow defense, empty200/missing404/corrupt503 and large-history checks on Linux x86_64, Windows AMD64 and macOS arm64. Only synthetic data was used:210 results contain880,803,840 bytes; summary pages are47,931 and2,351 bytes, explicit detail4,194,692 bytes. Pagination and reconnect invalidation pass. Legacy full-list compatibility remains; its payload is not bounded by this summary-client proof.
 
-Linux native Runtime 1.0.3 at source
-`119b4f118bddb999ab1fc31b6edc5dd7fca36209` passes both frozen and Go-wrapper
-browser login, native WebSocket, Work Items create/list/detail, logout, restart
-persistence, trusted bundled loading, shadow defense, and distinct empty/missing/
-corrupt responses. The large-history harness uses only temporary synthetic data:
-210 results total 880,803,840 bytes; the shipped browser receives summary pages
-of 47,931 and 2,351 bytes, reconnects and refreshes pagination, and explicit detail
-returns 4,194,692 bytes. Legacy aggregate `/api/runs` remains a compatibility path;
-this receipt proves the shipped summary client, not a bounded legacy endpoint.
-The later mobile source change requires rebuilt native proof.
+At successor PR merge source `e4bae7a809dfadb4dd6f8c1a1110add0b601fd39` (head06c), four settled browser states pass strict axe WCAG2/2.1A/AA on both binaries on all three OS, including a real contrast negative control. Linux/macOS overall native and history receipts PASS. Windows browser/storage/axe checks PASS but final cleanup raises PermissionError, so its overall native receipt remains FAIL and successor history is NOT_RUN. A dedicated Windows Job drain lane is investigating. The initial unsynchronized contrast failure remains historical FAIL; its exact element/cause was not isolated and no CSS repair is claimed. Full-route/manual accessibility and other browsers remain untested.
 
-| Acceptance vertical | Current proof and remaining cells |
+Live PostgreSQL16 and SQLite source database suite65 PASS at8524e9c3; prior redundant BEGIN warnings were reproduced and repaired using explicit psycopg transaction ownership. Final server log has zero redundant-BEGIN warnings/errors. Independent review reran53 tests with12 PostgreSQL skips and reviewed the live receipt. Concurrent migrations used connections/threads; scheduler tests used independent processes but permit failed Runs. Neither proves successful distributed execution, multi-process server migration startup or full #84 acceptance. Task-owned PostgreSQL fixtures were removed.
+
+| Architecture vertical | Disposition |
 |---|---|
-| Collapsed local SQLite/RCC | Source and native administration checks pass; full candidate Action execution, RCC provider/lease/recovery contract remain unproved |
-| Second adapter | NOT_RUN; a registry/interface is not execution proof |
-| Split replicas/PostgreSQL/independent worker | NOT_RUN; fencing, continuation, cancellation/recovery and exact-plan pinning remain unfinished |
-| CLI/API/MCP | Source contracts exist; authoritative shared admission and durable MCP Tasks vertical remain unfinished |
-| UI/Canvas | Linux packaged administration passes bounded flows; fixture Runtime/Canvas product evidence repeats deterministically; native Canvas foundry, semantic renderer, full offline/CSP/accessibility and headless matrix remain unfinished |
-| Work Items | Linux native persistence/errors pass; actual native consumer state transitions and all-OS product matrix remain unproved |
-| Security | Exact-origin/auth/log and Robot source regressions pass; native no-follow publication/races, live TLS redirect/proxy and exhaustive native route matrix remain unproved |
+| Local Runtime + SQLite + RCC | Administration proved; successful full candidate Action execution/provider identity/lease/recovery remains unproved. Dakota RCC lane assigned. |
+| Second adapter | NOT_RUN. Registry/interface is not proof. |
+| Split replicas + PostgreSQL + worker | NOT_RUN. Fencing, continuation, cancellation, crash recovery and exact-plan pinning remain unfinished. |
+| CLI/API/MCP | Bounded source/client contracts exist; shared authoritative admission and durable MCP Tasks vertical unfinished. |
+| UI/Canvas | Packaged administration proved within stated cells; native Canvas foundry, semantic renderer, complete offline/CSP/accessibility/headless matrix unfinished. |
+| Work Items | Three-platform packaged basic storage flows proved; actual consumer state transitions, attachments and recovery remain. Dakota lane assigned. |
+| Security | Exact-origin/session/source tests pass. Robot publication06c probes independently reproduce3 failures with1 valid control: competing directory overwrite, replaceable root, unowned staging cleanup. These require local filesystem mutation authority; no archive-only remote exploit is shown. Initial staging cleanup is repaired at096292b3 and independently verified with40 Robot tests; complete safe publication remains blocked. Live TLS/proxy/native route matrix remains unproved. |
+| Tunnel #214 | Separate PR225; public-edge identity/authentication, SSH host-key policy, Cloudflare token argv/Windows pipe reader and compatibility-controller equivalence remain blockers. No default exposure. |
+| Deployment #129 | Reviewed design and SQLite scratch constraints, not shipped immutable Deployment architecture; PostgreSQL parity/production migration and concurrency remain. |
 
-## Release readiness
+## Release readiness and identities
 
-Latest observed PyPI releases: Runtime 1.0.2, Core 1.0.1, HTTP Helper 1.0.1,
-Work Items 0.4.4. Latest native GitHub release: actions-runtime-1.0.1.
-Candidates are Helper 1.0.2, Core 1.0.2, Runtime/native 1.0.3; Work Items remains
-0.4.4 because the candidate fixes Runtime bundling. Publish Helper then Core,
-verify clean registry-resolved wheel/worker compatibility, then Runtime, only
-through admitted GitHub Actions workflows. Immutable tags, community ancestry,
-no-overwrite publication and normalized wheel inventory gates are retained.
-PR workflow success is not publication. No tag, merge, publication, replacement,
-deployment, secrets change, security bypass or Dakota modification occurred.
+Latest observed releases: PyPI Runtime1.0.2, Core1.0.1, Helper1.0.1, Work Items0.4.4; native GitHub actions-runtime-1.0.1. Candidates: Helper1.0.2, Core1.0.2, Runtime/native1.0.3; Work Items0.4.4 unchanged. Publish Helper, then Core, prove clean registry-resolved worker compatibility, then Runtime through admitted GitHub Actions workflows only. Immutable version/tag/community-ancestry, no-overwrite and normalized wheel inventory gates remain required. No release is admitted yet.
 
-Exact Linux native identities for the 119b4f source above:
+Exact b592952d executable identities (all-platform bounded native/history PASS):
 
-- Frozen executable SHA256: `250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3`.
-- Go wrapper SHA256: `d50cfb188f002e80658f9ae09e92a0016cc259b0591c740ff179dd16eb1ff15f`.
+| Platform | Frozen executable SHA256 | Go-wrapper SHA256 |
+|---|---|---|
+| linux | `237b9b93a474dd4bf8db1911a9820588f3a85835de8c254c552156867676c8f3` | `89f54cf5e9211f348d098d754c19eeaa9087e6f30f39470016cbba13751f1482` |
+| windows | `4e30c76678dba0fefa995d19b1a9322068a06c3c95d15f4bf632c7c2fcc51cd0` | `2ef26bb8e8f28f0f06c14601ffbea830f49bd4a6a97b7c333391ae230abd4449` |
+| macos | `7876e023a0b8c434317073b3c6281292288590061dcdf5f4fbd333f2e0c536cd` | `74604aae29b1b3457f1c99ad5e9611586e9d0ffc1d8790f01d683270bf241acc` |
 
-The frozen executable hash excludes adjacent files; it is not a complete onedir
-inventory identity. Earlier retained receipts apply only to their named subjects.
-The [archive](evidence/community-20261008.zip) retains historical and successor
-receipts; SHA256 and individual receipt digests are recorded in the machine ledger.
+Frozen executable hashes exclude adjacent files and do not identify the complete onedir distribution. These are CI candidate artifacts, not published releases. Later source changes need their own validation. Historical failures remain alongside successor receipts in the [evidence archive](evidence/community-20261008.zip); the ledger records individual and archive hashes.
+
+## Compute and continuation ownership
+
+Cloud connection and Dakota native Executor connection are confirmed. Existing Astra child `/root/astra_convergence` is gpt-6-astra low. Cloud Luna coverage and Windows process-cleanup lanes use gpt-6-luna medium; independent runtime review is read-only. Completed design/database/template/tunnel lanes are reused when assigned, not duplicated.
+
+Dakota uses the supplied checkout `/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions`. Two bounded gpt-6-luna medium threads were accepted: Work Items `01a11d7a-e547-7423-8fc5-fc0148df2123` and RCC `01a11d7b-4029-7953-aba7-f3b487098b32`. They have isolated worktree ownership and may push feature checkpoints only. Default RCC18.19.5 was correctly rejected; they are instructed to acquire the repository checksum-pinned18.19.3 into task-local paths, preserving the host install and user's untracked files. Worker dispatch is not implementation proof. Reconcile snapshots before resuming; no unsupported autonomous scheduler is implied.
+
+Devsy remains parked. Pending request `apr_29be804c-94cd-4b62-9233-e91b5ec30774`, approval URL and original MCP session are preserved privately. The connector rejects the exact schema-valid resume ID with INVALID_ARGUMENT/INVALID_PARAMETERS, pattern `^apr_`. Do not retry resume, recreate the workspace or restart Executor until repaired. The approval URL/token is deliberately excluded from repository evidence.
 
 ## Documentation improvements
 
-- Root: `docs/skills/repository-operations.md` records installed-wheel isolation,
-  dependency/publication ordering, lock-only SBOM identity, Robot IP/SNI/ZIP proof
-  limits, synthetic native history, current-route navigation and dated registry
-  readback. Evidence is the source/wheel/native regressions and retained receipts.
-  Stale source-only/publication inference is removed; native and architecture gaps remain.
-- Astra: `docs/skills/work-items.md` records actual native browser/storage gates,
-  Windows Job ownership, safe diagnostics and the distinction between version,
-  process-ownership and startup proof. Evidence includes Windows ownership 4 PASS
-  and startup FAIL. Windows startup root cause remains unknown.
-- Independent review: bounded exact-head receipts propose/verify canonical guide
-  corrections for template floors, security transport, native identities and
-  candidate-vs-published roadmap evidence. Full issue acceptance is not inferred.
-- Luna roadmap: README adds dated published/candidate/proposed compatibility,
-  milestone entry/exit conditions, update triggers and canonical changelog links;
-  live registry metadata and 29 resolving relative links are the evidence.
-- Luna tunnel, coverage and Deployment: canonical guide deltas are being proposed
-  to root to avoid concurrent edits; receipt and implementation acceptance remain pending.
+- Root — canonical `docs/skills/repository-operations.md`: installed-wheel isolation, ordered dependencies/releases, lock-derived SBOM identity, source-security proof limits, synthetic native history, mobile navigation, real PostgreSQL fixture scope and server-log inspection. Evidence is retained regression/source/wheel/native receipts. Source-only and candidate/released conflation removed; full architecture/native security gaps remain.
+- Astra — `docs/skills/work-items.md`: actual native browser/storage gates, Windows owned-process handling and bounded diagnostics. Proposed root guide update records exclusive staging ownership and local-actor race preconditions. Native publication primitives/ACL proof remain uncertain.
+- Roadmap/template lane — README milestone/compatibility table and four active template READMEs/resources; legal/history retained. Link/archive/pin consistency proves bounded cleanup, not full #125/#155.
+- Deployment/database lane — `docs/design/deployment-revisions-draft.md` and `docs/adr/0129-workspace-capability-deployments.md` refines scoped tuples/ancestry/replay and cyclic migration parity; root guide records live database proof scope. Production Deployment implementation and native/wheel database cells remain uncertain.
+- Coverage lane — canonical `docs/BUILD_INSTRUCTIONS.md` update pending review with standard measured pytest-cov gate, maintained-source inventory and interpreter rules. Measurement is not yet integrated release proof.
+- Tunnel lane — canonical lifecycle guide delta proposed; not presented as shipped because PR225 remains outside integration.
+- Review lanes — exact-head evidence captures repaired findings and explicit remaining cells; no whole issue has been accepted.
 
-## Continuation
+## Next five actions
 
-1. #208/#209/#212/#153, PR221: read successor Windows diagnostics, repair the actual
-   startup boundary, then prove frozen/Go browser and large-history flows on all OS.
-2. #151/#152/#153, PR221: finish native safe publication and authorization/security
-   matrices; rebuild latest frontend and complete exact-head adversarial review.
-3. #214/#162/#155/#129, focused Luna branches: review bounded implementations/design,
-   resolve findings, integrate only proved slices, retain unmet individual criteria.
-4. #194/#195/#210/#211, PR217/215/221: finish candidate execution/installed-wheel
-   admission, then conditionally merge and publish Helper/Core before Runtime via
-   GitHub Actions with clean registry/native identity readback.
-5. #84/#134 then #129/#130/#135/#136/#148: complete database/RCC retained acceptance,
-   then immutable package/Deployment foundations before durable and second-adapter
-   execution. All other nodes remain individually scheduled in the ledger.
+1. #208/#209/#153, PR221: review Windows Job drain repair, rebuild and verify complete native/browser/history matrix without suppressing cleanup failures.
+2. #151/#148, PR221: retain reviewed unowned-staging fix; complete trusted-root admission and portable exclusive publication with native filesystem proof.
+3. #162: independently review measured pytest-cov gate, fail-under and source-inventory regressions; create focused PR and integrate after verification.
+4. #134/#208: reconcile Dakota worker receipts, prove successful local RCC Action execution and packaged Work Item consumer transitions; push focused tested changes.
+5. #84/#129/#130: complete remaining database platform contracts, then implement immutable package/deployment foundations in contract dependency order. Keep second-adapter/distributed/Canvas verticals explicit.
 
-Resume from live community and PR heads, not this snapshot alone. Preserve the
-five checkpoint histories and all existing review/failure receipts. Green existing
-PRs, drafted designs and a release checkpoint do not complete #82/#101's graph.
+Resume from the live integration head, fetch all open issue/PR/check changes, reconcile worker status and retain the complete graph. Do not infer graph completion or publication readiness from green checkpoint PRs.

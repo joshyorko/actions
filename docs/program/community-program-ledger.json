@@ -10,8 +10,8 @@
     "verified_review_ready": 0,
     "unfinished": 54,
     "not_started": 33,
-    "in_progress": 8,
-    "implemented_unverified": 13,
+    "in_progress": 6,
+    "implemented_unverified": 15,
     "blocked": 0
   },
   "evidence_states": [
@@ -27,7 +27,7 @@
       "url": "https://github.com/joshyorko/actions/issues/214",
       "issue_updated_at": "2026-10-05T12:46:07Z",
       "owner": "/root/luna_tunnel; integration /root",
-      "owning_pr": null,
+      "owning_pr": 225,
       "wave": "A",
       "state": "IN_PROGRESS",
       "acceptance_contract": "Parent: #82\nRelated: #145, #196, #152, #153, #91\nHistorical regression: #3\n\n## Outcome\n\nMake Actions Runtime public exposure a first-class, inspectable lifecycle instead of a side effect hidden behind `action-server start --expose --expose-provider ...`.\n\nThe runtime should keep the current one-shot convenience path, but both the CLI shortcut and any future UI must delegate to one explicit provider/lifecycle contract.\n\nTarget product shape, exact spelling subject to implementation review:\n\n```text\naction-server start                         # local runtime only\naction-server expose providers              # read-only capability/probe\naction-server expose start --provider ...\naction-server expose status\naction-server expose stop\n```\n\n`action-server start --expose` remains compatibility/convenience sugar over the same implementation; it must not own a second tunnel path.\n\nThis issue is about **Actions Runtime ingress/tunnel lifecycle**, not RCC Environment Artifact providers, runtime adapters, Package providers, or a generic networking framework.\n\n## Current implementation\n\nCurrent `community` has:\n\n- `start --expose`\n- `--expose-provider auto|localhost.run|bore|cloudflare`\n- `_community_expose.py` with `LocalhostRunProvider`, `BoreProvider`, `CloudflareProvider`, and `TunnelManager`\n- server lifespan code that starts/stops the selected tunnel\n- configured API-key middleware and explicit CORS/WebSocket policy work elsewhere in the graph\n\nObserved design problems to resolve deliberately:\n\n1. **Discovery has side effects.** Bore/Cloudflare `is_available()` may download binaries. Listing/probing providers must not install software or mutate runtime state.\n2. **Provider selection and lifecycle are hidden inside server startup.** A caller cannot independently inspect, start, reconcile, or stop exposure without treating the whole Runtime start as the control primitive.\n3. **`auto` silently falls through providers.** The chosen provider and why it was selected must be explicit; failed providers remain visible evidence rather than disappearing behind a later success.\n4. **Security capabilities differ materially.** localhost.run and Cloudflare yield HTTPS; Bore exposes plain HTTP. The Runtime must classify this truthfully and must not present an insecure transport as equivalent for authenticated/public MCP use.\n5. **Cloudflare has two distinct modes** (quick tunnel vs token-backed configured tunnel) behind one provider. Configuration/readiness/public-URL semantics need an explicit contract.\n6. **Readiness is weak.** Parsing a URL from provider output is not the same as proving the public endpoint is reachable, authenticated as configured, and serving the expected Runtime/MCP instance.\n7. **Status/reconciliation is process-handle oriented.** There is no durable, bounded provider status/diagnostic contract suitable for CLI/UI/automation after the launch moment.\n8. **Startup suppresses provider failures.** Local Runtime survival is desirable, but the exposure operation needs an explicit failed/degraded receipt rather than only logs.\n\n## Provider contract\n\nDefine the narrowest provider interface needed by the current built-ins. It should cover semantics equivalent to:\n\n- provider identity and implementation version\n- passive capability/probe result\n- installation requirement and explicit install/bootstrap action, if supported\n- validated configuration class\n- start request\n- bounded readiness probe\n- public endpoint\n- transport security class\n- process/session identity as operational evidence only\n- status/reconcile\n- stop/cleanup\n- sanitized diagnostics\n\nProvider discovery/list/status MUST be read-only and MUST NOT download executables, open tunnels, allocate public URLs, or mutate credentials.\n\nDo not build a general plugin framework in this issue. The existing built-ins are sufficient to prove the contract.\n\n## Provider-specific requirements\n\n### localhost.run\n\n- Keep SSH-based operation explicit.\n- Revisit current `StrictHostKeyChecking=no`; either use a justified host-key strategy or label the residual trust boundary clearly.\n- Distinguish \"ssh binary exists\" from \"provider is usable/reachable\".\n- Preserve bounded startup timeout and cleanup.\n\n### Cloudflare\n\nTreat quick-tunnel and configured-token modes as distinct operating modes under one provider.\n\n- Quick mode: ephemeral URL, no prior credential/config requirement.\n- Configured mode: explicit token/config reference and an authoritative public URL/discovery contract; do not report ready with an empty/unknown endpoint.\n- Secret values never enter argv diagnostics, status JSON, logs, package metadata, or receipts.\n- Binary download, when desired, is an explicit bootstrap step rather than a side effect of discovery.\n\n### Bore\n\n- Classify the current `bore.pub` path as plain HTTP.\n- Do not allow `auto` to imply it is equivalent to HTTPS providers for public authenticated MCP/administrative exposure.\n- Either constrain its supported use to explicitly accepted non-sensitive development scenarios or require an HTTPS/authenticated outer edge. Make the decision explicit and tested.\n\n## CLI and UX\n\nProvide stable human + machine-readable status for at least:\n\n- stopped\n- starting\n- ready\n- degraded\n- failed\n- stale/orphaned provider process\n- provider unavailable/not installed\n- configuration/auth required\n\nStatus should identify the active provider/mode, local endpoint, public endpoint when known, security class, observed time, and sanitized reason code.\n\nA failed exposure MUST NOT falsely mark the local Runtime unhealthy.\n\n`start --expose` should use the same lifecycle implementation and print the same final receipt.\n\n## Readiness / identity\n\nAfter the provider reports an endpoint, prove the edge reaches the intended Runtime instance before reporting READY.\n\nThe probe should be bounded and use a deliberately public/bootstrap endpoint or an authenticated endpoint according to the deployment contract. Do not leak the API key in URLs or logs.\n\nFor MCP-capable exposure, verify the canonical `/mcp` endpoint is reachable under the configured auth/security policy without creating an Action Run or model work.\n\n## Relationship to package/runtime policy\n\nKeep these separate:\n\n- `--whitelist` controls which Actions are imported/served.\n- `package.yaml external-endpoints` declares package outbound host/port requirements in package metadata.\n- inbound public exposure / MCP DNS-rebinding / CORS / authentication are Runtime deployment concerns.\n\nDo not reinterpret `external-endpoints` as an inbound tunnel allowlist, and do not move deployment credentials/provider choice into an Action Package.\n\n## Compatibility\n\n- Preserve local `action-server start` behavior.\n- Preserve `start --expose` as compatibility sugar unless a later breaking release explicitly removes it.\n- Do not regress the completed stateless MCP v2 contract from #80.\n- Continue to honor the authorization/origin boundaries from #152/#153.\n- #91 may later provide richer MCP-native authorization; this issue must not block on it if the existing API-key contract can be used safely.\n- #196 may consume the same external edge for RCC provider proxying later, but RCC provider lifecycle is not implemented here.\n\n## Acceptance\n\n- [ ] Provider listing/probing is demonstrably side-effect free: no downloads, subprocesses, public URLs, credential changes, or Runtime mutations.\n- [ ] Explicit start/status/stop works for each retained built-in provider mode.\n- [ ] `start --expose` delegates to the same lifecycle and produces equivalent provider identity/status.\n- [ ] `auto` selection is deterministic, reports all considered failures, and cannot silently downgrade from a required HTTPS/security class to plain HTTP.\n- [ ] Cloudflare quick and token/configured modes have distinct, truthful readiness/public-URL behavior.\n- [ ] Bore security limitations are enforced/documented rather than merely logged.\n- [ ] Provider failure leaves the local Runtime usable while exposure reports FAILED/DEGRADED explicitly.\n- [ ] Public-edge readiness proves the expected Runtime instance and configured authentication without executing an Action.\n- [ ] Restart/reconcile detects stale/orphaned provider state and does not fabricate ownership of an unrelated process/tunnel.\n- [ ] Stop is idempotent and cleans up only the owned provider process/session.\n- [ ] Source, wheel, and frozen/standalone Runtime paths exercise the same contract on supported platforms.\n- [ ] Human/JSON diagnostics are bounded and contain no API key, tunnel token, provider credential, private environment dump, or unrelated subprocess output.\n- [ ] Existing local Runtime, MCP v2, action execution, and server-shutdown tests remain green.\n\n## Non-goals\n\n- No new hosted control plane.\n- No generic VPN/tunnel SDK.\n- No arbitrary user-supplied shell provider.\n- No RCC Environment Artifact provider implementation.\n- No worker/Run scheduler.\n- No credential manager replacement.\n- No package-level inbound network policy.\n- No public exposure by default.\n",
@@ -121,7 +121,7 @@
       },
       "independent_review_status": "NOT_RUN",
       "blockers": [
-        "Required acceptance has not been independently established."
+        "Public-edge identity/authentication not proved; SSH host-key checking disabled; Cloudflare token argv; Windows quick-provider pipe reader; compatibility controller equivalence missing."
       ],
       "disposition": "RETAIN_CONTRACT_EXECUTE_IN_DEPENDENCY_ORDER"
     },
@@ -203,17 +203,16 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
+      "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
-        "macOS native/browser and final exact-head hosted checks pending",
-        "Real native worker Work Items state transitions and full action execution NOT_RUN",
-        "Remaining issue-specific criteria not waived by bounded receipts"
+        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
       "integration_pr": 221,
-      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
+      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
     },
     {
       "issue": 211,
@@ -421,7 +420,7 @@
         204
       ],
       "criticality": "P1",
-      "next_bounded_action": "Verify latest native WebSocket/reconnect on all OS; Linux actual packaged reconnect PASS, Windows startup blocks its product checks.",
+      "next_bounded_action": "Verify latest native WebSocket/reconnect on all OS; All-platform b592 packaged reconnect PASS; e4 Windows cleanup failure remains distinct.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -445,17 +444,16 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
+      "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
-        "macOS native/browser and final exact-head hosted checks pending",
-        "Real native worker Work Items state transitions and full action execution NOT_RUN",
-        "Remaining issue-specific criteria not waived by bounded receipts"
+        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
       "integration_pr": 221,
-      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
+      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
     },
     {
       "issue": 208,
@@ -544,17 +542,16 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
+      "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
-        "macOS native/browser and final exact-head hosted checks pending",
-        "Real native worker Work Items state transitions and full action execution NOT_RUN",
-        "Remaining issue-specific criteria not waived by bounded receipts"
+        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
       "integration_pr": 221,
-      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
-      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
+      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
+      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
     },
     {
       "issue": 196,
@@ -922,9 +919,9 @@
       "url": "https://github.com/joshyorko/actions/issues/155",
       "issue_updated_at": "2026-09-07T14:51:32Z",
       "owner": "/root/luna_roadmap; integration /root",
-      "owning_pr": null,
+      "owning_pr": 222,
       "wave": "G",
-      "state": "IN_PROGRESS",
+      "state": "IMPLEMENTED_UNVERIFIED",
       "acceptance_contract": "## Strategic Finding\\n\\n**Type**: roadmap-gap\\n**Horizon**: near-term\\n\\nThe repository has accumulated a substantial architecture roadmap spanning immutable packages, runtime adapters, worker protocols, Tasks, Work Items, provenance, UI, CLI, and multiple placement models, but the public repository surface exposes no visible release cadence, milestone sequence, compatibility policy, or adoption-oriented definition of a usable vertical slice.\\n\\n## Rationale\\n\\nA large dependency graph without a published delivery sequence makes it difficult for contributors, downstream integrators, and adopters to identify what is stable now, what is experimental, and which milestones unlock a deployable path. This increases coordination cost and risks optimizing for architecture breadth before demonstrating a coherent community release.\\n\\n## Proposed Next Step\\n\\nPublish a milestone roadmap that names one supported vertical slice, its entry criteria, dependency order, compatibility guarantees, and target release checkpoints. Include an explicit policy for experimental versus supported runtime adapters and a lightweight changelog/release practice visible from the README.\\n\\n---\\n*Filed by strategist agent (ACMM L5 \u2014 hold-gated mode)*\n---\n\ud83d\udc1d **Hive Agent**: `strategist` | **Instance:** `hive-loud-hen` | **SHA:** `unknown`\n\n\u2014 hive: agent=strategist backend=codex model=gpt-5.6-luna codex=0.146.0",
       "acceptance_criteria": [],
       "acceptance_authority": "Full issue body and comments retained; extracted bullets are an index, not a waiver.",
@@ -1072,17 +1069,16 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
+      "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
-        "macOS native/browser and final exact-head hosted checks pending",
-        "Real native worker Work Items state transitions and full action execution NOT_RUN",
-        "Remaining issue-specific criteria not waived by bounded receipts"
+        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
-      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
       "integration_pr": 221,
-      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
+      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
     },
     {
       "issue": 152,
@@ -1219,11 +1215,11 @@
         "merged_foundation_pr": 200
       },
       "proof": {
-        "source": "PASS",
+        "source": "FAIL",
         "wheel": "NOT_RUN",
         "native": "NOT_RUN",
         "packaged_browser": "NOT_RUN",
-        "independent_review": "PASS"
+        "independent_review": "FAIL"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -1261,10 +1257,11 @@
       },
       "independent_review_status": "NOT_RUN",
       "blockers": [
-        "Native no-follow publication/race proof and live TLS/redirect/proxy security matrix remain NOT_RUN."
+        "At06c three races reproduced.096 fixes initial unowned staging cleanup with40tests and independent review; root/later staging replacement and final no-replace publication remain unresolved with native matrix pending",
+        "Live TLS/redirect/proxy security matrix remains NOT_RUN"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
-      "proof_scope": "39 Robot security source tests plus IP-pinned transport/SNI and Windows ZIP lexical regressions; actual TLS/network and no-follow native publication proof absent."
+      "proof_scope": "39 source security regressions PASS; subsequent exact06c filesystem mechanism probe3FAIL1valid-controlPASS, independently reproduced. Local authority to mutate publication parent required; no archive-only remote exploit shown."
     },
     {
       "issue": 149,
@@ -3698,9 +3695,9 @@
       "url": "https://github.com/joshyorko/actions/issues/129",
       "issue_updated_at": "2026-09-07T14:45:59Z",
       "owner": "/root/luna_deployment; integration /root",
-      "owning_pr": 219,
+      "owning_pr": 223,
       "wave": "C",
-      "state": "IN_PROGRESS",
+      "state": "IMPLEMENTED_UNVERIFIED",
       "acceptance_contract": "Parent: #82\nInforms: #83, #85, #87, #89, #90, #91, #95, #130, #133, #138, #143, #144\n\n## Outcome\n\nDefine the **capability deployment object model** between immutable Package Revisions/runtime-plan declarations and a running Actions Runtime installation.\n\nThe Runtime must answer durably and deterministically:\n\n- which immutable Package Revision is deployed;\n- which capabilities are exposed;\n- which Runtime Plans/adapters are allowed or selected for each capability;\n- which adapter-specific runtime artifact/specification policy applies;\n- which secret, OAuth, data, artifact, Work Item, source/runtime provider, network, and worker bindings apply;\n- which Worker Profile/placement requirements apply;\n- which exact snapshot an existing Run/retry remains pinned to during update/rollback;\n- whether execution may be local, container-backed, or independent-worker.\n\nDo not encode these answers implicitly in startup flags, mutable directories, inherited host environment, local Holotree/venv paths, package-selected executable plugins, Kubernetes objects, or the Runtime replica that received the request.\n\n## Scope boundary\n\nA Deployment here is an **Actions capability deployment**, not an agent deployment and not a historical Control Room application object.\n\nAn external agent runtime may attach through MCP/HTTP. Actions Runtime does not own its conversation, planning, model settings, memory, or runbook lifecycle.\n\nA Workspace is a semantic trust/policy/provider/audit namespace. It does not require a Kubernetes namespace or highly multi-tenant SaaS topology. Single-Workspace-per-installation remains a safe first-class profile.\n\n## Design archaeology and correction\n\nHistorical Sema4/Control Room designs correctly separated authored package content from production secrets/connections and provided Workspace-scoped worker/runtime selection. They also often coupled process/task execution to proprietary compute products, one specific RCC/Holotree environment model, local paths, or Kubernetes runtime objects.\n\nThe useful lessons are:\n\n- keep production bindings separate from Package source;\n- version Deployment state atomically;\n- support draft/test\u2192production binding/policy changes;\n- make runtime/worker capability requirements explicit;\n- keep in-flight Runs pinned;\n- keep physical topology simpler than the semantic graph.\n\nThe first Actions architecture revision still assumed every Deployment selected an RCC-shaped Environment Artifact. This issue now selects a generic Runtime Plan from #130/#143 while preserving RCC-specific identities inside the RCC plan.\n\n## Required object model\n\nExact table/API names require approved design.\n\n### Workspace\n\nTrust, policy, identity, quota, provider registration, connection reference, adapter authorization, worker trust, and audit namespace.\n\nDo not derive it from filesystem path, port, process, Kubernetes namespace, agent ID, or provider account name.\n\n### Package\n\nLogical reusable package identity.\n\n### Package Revision\n\nImmutable source/capability/runtime-plan manifest from #130/#135.\n\nIt declares capabilities and one or more explicitly compatible Runtime Plans. It does not contain production bindings or worker-local runtime state.\n\n### Capability\n\nPackage-scoped Action, Robot Task, Workflow, Dev Task, resource, prompt, or App capability identity.\n\nDeployment decides visibility, bindings, runtime selection, Worker Profile, and policy independently from the capability's source identity.\n\n### Runtime Plan\n\nImmutable normalized package declaration from #130/#143 describing how a capability can be prepared/executed by one Runtime Adapter.\n\nCommon identity includes:\n\n- `runtime_kind`;\n- plan digest/schema;\n- adapter contract/version/required features;\n- platform/architecture/ABI requirements;\n- adapter-specific runtime specification/reference;\n- supported capability IDs;\n- provenance and limitations.\n\nExamples:\n\n- RCC plan with Environment Specification/Artifact policy and provider-profile requirements;\n- uv plan with normalized project/lock/Python requirements;\n- raw Python plan with explicit interpreter/trust restrictions;\n- direct Robot Framework plan with suite/task and environment contract.\n\nRuntime-specific fields remain namespaced. A Deployment never fabricates an adapter plan that the Package Revision did not declare.\n\n### Runtime Policy / selection\n\nA Deployment Revision may:\n\n- select one default Runtime Plan for a capability;\n- allow a bounded set of declared plans;\n- lock runtime selection entirely;\n- allow authorized caller selection among declared plans;\n- constrain adapter versions/features/provider profiles;\n- prohibit weaker adapters/placements in production;\n- require conformance/trust/signature evidence.\n\nThere is no implicit fallback order.\n\nIf a Deployment selects RCC and RCC is unavailable, the Run is blocked/failed according to policy. It does not silently become uv/Python/Robot Framework. A deliberate new Run may select another allowed plan explicitly.\n\n### Deployment\n\nStable Workspace-scoped logical identity.\n\n### Deployment Revision\n\nImmutable snapshot selecting:\n\n- Package Revision(s);\n- capability projection;\n- allowed/default Runtime Plan(s);\n- adapter-specific runtime artifact/provider policy;\n- provider bindings;\n- authorization/policy revision;\n- Worker Profile(s)/placement constraints;\n- concurrency/quotas/runtime limits;\n- compatibility/migration metadata;\n- audit/provenance references.\n\nUpdating a Deployment publishes a new immutable revision and atomically advances the pointer for **new** Runs. Old revisions remain addressable while pinned Runs drain or are retained.\n\n### Binding\n\nMap logical requirements to Workspace-scoped provider references, for example:\n\n- `secret: salesforce_client_secret`;\n- `oauth: google_user`;\n- `data: customers`;\n- `knowledge: policies`;\n- `queue: remittances`;\n- `artifacts: reports`;\n- `package-source: package-registry`;\n- `runtime-artifact: rcc-office-cache`;\n- `network: vendor_api`.\n\nPackage/Runtime Plans contain declarations and provider capability requirements, never production secret values or arbitrary provider URLs.\n\n### Capability Projection\n\nDeterministic MCP, HTTP, event, workflow, CLI, and App surface selected from the full Package graph.\n\nProjection is independent of Runtime Plan. The same Robot Task may be internal-only, scheduled, CLI/API, workflow-node, or a bounded MCP facade while executing through RCC or another declared adapter.\n\n#130 owns projection semantics; #89 owns deterministic catalog revisions.\n\n### Worker Profile\n\nExecution/placement requirements used by #90/#138, including:\n\n- allowed runtime kinds/adapter contracts/features;\n- platform/architecture/ABI;\n- resource class/capacity;\n- network/provider grants;\n- browser/desktop/GPU/device capabilities;\n- container/local/VM placement support;\n- trust domain/Workspace scope;\n- isolation/dedication policy;\n- cache/locality hints as optimization.\n\nA Worker Profile is not a PodSpec and cannot substitute an undeclared Runtime Plan.\n\n## Draft/test versus production mapping\n\nSupport:\n\n```text\nsame Package Revision\n       |\n test Deployment Revision\n   runtime: python-local or rcc-test\n   data:test-db\n   oauth:test-user\n       |\n promote / publish\n       |\n production Deployment Revision\n   runtime: rcc-prod or uv-prod (only if declared)\n   data:prod-db\n   oauth:prod-service\n   worker: private-vpc\n```\n\nPromotion may change bindings, Runtime Plan selection, Worker Profile, limits, policy, and projection while reusing exact source. Each state is immutable/provenanced.\n\nDo not mutate one revision from test to production or assume a test-compatible runtime is production-approved.\n\n## Resolution and Run pinning\n\nBefore a Run becomes executable, resolve a durable snapshot containing at least:\n\n- Workspace;\n- Deployment + Deployment Revision;\n- Package Revision;\n- capability identity/schema;\n- selected Runtime Plan + `runtime_kind` + plan digest;\n- required adapter contract/version/features;\n- adapter-specific runtime specification/artifact/provider policy;\n- binding references/policy versions;\n- Worker Profile/placement constraints;\n- catalog revision where visible;\n- actor/authorization decision reference;\n- idempotency/effect scope.\n\n#83 owns Run/Attempt state and records this snapshot.\n\nA replacement Attempt for one Run uses the same snapshot. It does not:\n\n- resolve the current Deployment;\n- select a different adapter;\n- adopt a newer environment/lock/interpreter;\n- change bindings/worker policy;\n- reinterpret a mutable tag.\n\nA deliberate **restart/new Run** may resolve current Deployment and choose another allowed plan.\n\n## Runtime/provider availability\n\nPreflight distinguishes:\n\n- Runtime Adapter installed/available;\n- authentication/provider binding required;\n- runtime preparation/build/acquisition needed;\n- compatible runtime content already warm;\n- incompatible adapter feature/platform;\n- no eligible worker/placement;\n- forbidden selection.\n\nRCC provider profiles/`cache serve` are environment-content providers, not Deployment or Run authority. Deployment stores authorized references/policy, not RCC object indexes or provider credentials.\n\nEquivalent concepts for uv/other adapters remain namespaced.\n\n## Physical topology doctrine\n\n### Zero-config local\n\n```text\none actions-runtime process\n  synthesized/default Workspace\n  SQLite\n  local Package generations\n  bundled RCC adapter by default\n  optional installed local adapters\n  local filesystem providers\n  local worker/process pool\n```\n\nNo remote provider, container engine, Worker registration, or Kubernetes requirement for ordinary local execution.\n\n### Simple production\n\n```text\n1..N Runtime replicas\n     |\n shared PostgreSQL\n     |\n1..N independent workers\n  each advertising Runtime Adapter + placement capabilities\n     |\nshared immutable/provider backends as configured\n```\n\n### Strong isolation\n\nSeparate installations, Worker Profiles, pools, or trust domains may isolate Workspaces, browsers, desktop sessions, consequential work, or untrusted packages.\n\nSemantic richness must not force physical microservice sprawl.\n\n## Update, rollback, drain, and retention\n\nDefine:\n\n- atomic current-revision updates;\n- optimistic update conflicts;\n- rollout validation of Package, Runtime Plan, adapter, provider, and Worker Profile compatibility;\n- N+1 for new Runs while N Runs/retries remain pinned;\n- old adapter/runtime artifact/worker support while N drains;\n- explicit blocked/manual-recovery outcome if old plan can no longer be satisfied;\n- rollback changing new resolution only;\n- retention/GC references for Package Revisions, Runtime Plans/artifacts, Runs, Tasks, Work Items, artifacts, catalogs, and audit;\n- no historical provenance rewrite.\n\nRevoking an adapter/runtime artifact/provider may block new Runs and has explicit behavior for active Runs; it does not mutate old records.\n\n## Authorization and isolation\n\n- Workspace authorization covers Deployments, Packages, Runtime Plans, adapters, bindings, catalogs, Runs, artifacts, Tasks, Work Items, and provider resolution.\n- Knowing a plan/digest/provider reference does not grant access.\n- Package code cannot choose an unauthorized adapter, provider, Worker Profile, image, socket, or mount.\n- Secret plaintext never enters Package/Deployment/Run/catalog/log metadata.\n- Worker eligibility includes Workspace/trust authorization and Runtime Plan compatibility.\n- multi-Workspace mode requires negative tests; single-Workspace isolation remains supported.\n- host/Kubernetes isolation strengthens but does not replace application authorization.\n\n## Required invariants\n\n- resolving a request yields one immutable Deployment Revision, capability, Runtime Plan, and catalog revision.\n- every Run pins Deployment, Package, capability, Runtime Plan, bindings, and Worker Profile before execution.\n- retry never switches adapter/plan.\n- RCC-specific Environment identities are retained when RCC is selected but absent as mandatory generic fields.\n- update/rollback never redirects an in-flight Run.\n- old/new revisions coexist while Runs drain.\n- production bindings/secrets are separate and authorized.\n- worker/cache locality is optimization, not identity or authorization.\n- local and distributed modes preserve object semantics.\n- mixed Runtime/worker/adapter versions fail closed when required correctness cannot be enforced.\n\n## Deliverables\n\n- ADR for Workspace/Package/Capability/Runtime Plan/Deployment/Worker relationships;\n- database schemas/migrations and typed APIs;\n- endpoint\u2192Deployment\u2192capability\u2192Runtime Plan\u2192pinned Run resolution flow;\n- runtime selection/no-fallback rules;\n- promotion/update/rollback/drain/retention/GC rules;\n- authorization/audit boundaries;\n- local-default Workspace behavior;\n- compatibility path for mutable current packages/Robot imports;\n- negative scenarios for package-provided adapter authority.\n\n## Acceptance\n\n1. Two Runtime replicas resolve the same Deployment Revision to identical Package, capability, Runtime Plan, bindings, policy, Worker Profile, and catalog identities.\n2. A rolling update starts new Runs on N+1 while N Runs/retries preserve exact N runtime plan.\n3. Rollback affects new Run resolution only.\n4. Test/production Deployments reuse one Package Revision with different authorized bindings/runtime policies.\n5. A package declaring RCC and uv can be deployed with one explicit default; missing default adapter never triggers fallback.\n6. A worker lacking selected adapter/features/platform/provider access declines safely.\n7. RCC Deployment can reference an authorized provider profile/Environment Artifact policy without copying provider URL/credentials or object protocol into Deployment state.\n8. A non-RCC Deployment pins its own plan without fake RCC fields.\n9. Local single-binary mode proves the same lifecycle without external infrastructure.\n10. single-Workspace and multi-Workspace profiles reject cross-boundary references correctly.\n11. restart-as-new may select current plan while ordinary retry remains pinned.\n12. mixed-version rollout fails safely.\n\n## Non-goals\n\n- Building an agent harness.\n- Building a Kubernetes operator.\n- Requiring one pod/server/namespace per package.\n- Requiring multi-tenancy.\n- Recreating Control Room compatibility or proprietary compute products.\n- Choosing one secret, queue, artifact, data, source, runtime-artifact, or environment provider.\n- Implementing Runtime Adapter internals or automatic fallback here.",
       "acceptance_criteria": [
         "1. Two Runtime replicas resolve the same Deployment Revision to identical Package, capability, Runtime Plan, bindings, policy, Worker Profile, and catalog identities.",
@@ -4072,8 +4069,8 @@
       "title": "cleanup: remove Data Server and private-tier product surfaces",
       "url": "https://github.com/joshyorko/actions/issues/125",
       "issue_updated_at": "2026-08-18T07:17:41Z",
-      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
-      "owning_pr": null,
+      "owner": "/root/luna_roadmap; integration /root",
+      "owning_pr": 224,
       "wave": "G",
       "state": "IMPLEMENTED_UNVERIFIED",
       "acceptance_contract": "## Goal\n\nRemove Sema4AI Data Server, Data Package compatibility, enterprise/private-tier build paths, and other paid/product-gated surfaces from the community repository while preserving the public community Runtime, Canvas frontend, and MCP v2 protocol implementation.\n\n## Scope\n\n- Delete the unshipped `data-access-query`, `data-access-native`, and `data-access-kb` template trees.\n- Remove `DataServerTool`, its downloader/test, and active Data Package documentation.\n- Make a clean breaking removal of `DataContext`, `RequestContexts.data_context`, managed `x-data-context` handling, legacy fixtures, and active guide coverage.\n- Remove enterprise/private npm tier selection, vendoring, registry, tree-shaking, checksum, CI, test, and documentation surfaces.\n- Remove or replace the legacy hosted Robocorp/Sema4AI template-update transport; embedded deterministic community bundles remain authoritative and offline-capable.\n- Regenerate embedded template/frontend artifacts. Do not hand-edit generated output.\n- Preserve historical changelogs and legally required notices unless separately approved.\n\n## Retained community surface\n\n- Shipped templates: `minimal`, `basic`, `advanced`, and `workflow-producer-consumer`.\n- Deterministic template packager and embedded offline bundle.\n- Community Runtime and Canvas frontend roots.\n- MCP v2 stateless `/mcp` implementation and tests.\n- Validators that reject private registries, product-only packages, and non-public dependencies.\n\n## Acceptance criteria\n\n- [ ] No repository-owned template imports or depends on `sema4ai-data`.\n- [ ] The three Data Server template directories and direct downloader no longer exist.\n- [ ] `DataContext` and `x-data-context` compatibility are removed from runtime source, fixtures, tests, and active guides.\n- [ ] `action-server new list-templates --json` exposes exactly the manifest-owned community template IDs.\n- [ ] Generated bundle metadata and archives agree and offline template creation passes.\n- [ ] Active source, guides, tests, and CI contain no enterprise/private-registry/vendored-product build lane, token, fallback, or upsell route.\n- [ ] Runtime and Canvas build without private credentials or product packages.\n- [ ] Existing MCP v2 stateless endpoint tests remain green.\n- [ ] Canonical repository guidance records the supported template inventory and public-dependency-only policy.\n- [ ] Repository-wide static scans distinguish retained legal/history references from prohibited active product surface.\n\n## Delivery plan\n\nUse dedicated branch `chore/community-product-surface-cleanup`.\n\n1. Add absence/boundary regressions, then remove Data Server templates and Data Package compatibility.\n2. Remove private-tier/vendoring implementation, tests, workflows, and docs.\n3. Regenerate template/frontend artifacts and run source, binary, frontend, and offline-template verification.\n4. Keep Canvas-template and MCP-v2-showcase work in separate follow-up issues and branches.\n\n## Out of scope\n\nCreating the future Canvas template or MCP v2 showcase template.",
@@ -4258,7 +4255,7 @@
       "dependency_status": "initial sequencing; validate against full contract before each slice",
       "related_references": [],
       "criticality": "roadmap",
-      "next_bounded_action": "Audit current generated templates and active product surface against retained cleanup contract.",
+      "next_bounded_action": "Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -8397,17 +8394,16 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
+      "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
-        "macOS native/browser and final exact-head hosted checks pending",
-        "Real native worker Work Items state transitions and full action execution NOT_RUN",
-        "Remaining issue-specific criteria not waived by bounded receipts"
+        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
       "integration_pr": 221,
-      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
-      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
+      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
+      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
     },
     {
       "issue": 97,
@@ -8640,17 +8636,16 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
+      "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
-        "macOS native/browser and final exact-head hosted checks pending",
-        "Real native worker Work Items state transitions and full action execution NOT_RUN",
-        "Remaining issue-specific criteria not waived by bounded receipts"
+        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
       "integration_pr": 221,
-      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
-      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
+      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
+      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
     },
     {
       "issue": 96,
@@ -9057,17 +9052,16 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
+      "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
-        "macOS native/browser and final exact-head hosted checks pending",
-        "Real native worker Work Items state transitions and full action execution NOT_RUN",
-        "Remaining issue-specific criteria not waived by bounded receipts"
+        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
       "integration_pr": 221,
-      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
-      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
+      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
+      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
     },
     {
       "issue": 93,
@@ -10027,8 +10021,8 @@
       "title": "Support one shared SQLite/PostgreSQL Database abstraction in actions-runtime",
       "url": "https://github.com/joshyorko/actions/issues/84",
       "issue_updated_at": "2026-08-25T22:32:30Z",
-      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
-      "owning_pr": null,
+      "owner": "/root/luna_deployment; integration /root",
+      "owning_pr": 226,
       "wave": "B",
       "state": "IMPLEMENTED_UNVERIFIED",
       "acceptance_contract": "Parent: #82\nBlocks: #83, #85, #90, #129, #132\nImplementation lane: #109\n\n## Outcome\n\nProvide one repository-owned `Database` abstraction that supports:\n\n- SQLite as the default local, single-binary backend;\n- PostgreSQL as the shared production backend for independent Runtime and worker processes;\n- one migration history and one externally visible persistence contract across both backends.\n\nThis issue owns database connectivity, SQL execution/translation boundaries, transactions, migration coordination, data preservation, packaging, diagnostics, and backend parity. It does not own Run leases, worker scheduling, Work Item lifecycle, or Deployment semantics; those must build on this abstraction in #83, #90, #129, and #132 rather than creating another database layer.\n\n## Current implementation direction\n\nPR #109 is the active implementation lane. It introduces the shared database seam and PostgreSQL support while preserving SQLite. The final merged contract must be reviewed against this issue, not treated as complete merely because a PostgreSQL URL can connect.\n\nRequired public capabilities include, at minimum:\n\n- explicit `backend_name` or equivalent backend capability inspection;\n- connection lifecycle with SQLite and PostgreSQL URL validation;\n- transaction context with commit/rollback semantics;\n- query/execute and update row-count behavior;\n- update-and-returning support needed for atomic claims and fencing;\n- safe parameter adaptation without rewriting quoted/comment/dollar-quoted SQL incorrectly;\n- backend-time access for lease and scheduling correctness;\n- coordinated schema migration startup;\n- consistent row/result mapping and typed error boundaries.\n\nUse this one abstraction for all Runtime control-plane persistence. Do not add a separate ownership, queue, Deployment, or Canvas database wrapper.\n\n## Backend semantics\n\n### SQLite\n\n- remains the default for local use;\n- preserves current data-directory and backup/migration behavior;\n- uses transactions and locking appropriate to one or a small number of local processes;\n- documents topology limits honestly rather than pretending a filesystem SQLite file is a general multi-node database.\n\n### PostgreSQL\n\n- supports multiple independent Runtime/worker processes against one database;\n- uses PostgreSQL-native transactions, booleans, locking, and `RETURNING` semantics where required;\n- handles connection loss, retries at safe boundaries, statement errors, and rollback without partial state;\n- supports SSL/query options without leaking credentials or sensitive URL components;\n- works in source, wheel, and frozen-binary installations.\n\nBackend-specific SQL is allowed behind the abstraction where correctness requires it. Do not force both engines through a lowest-common-denominator string-rewrite layer that weakens transactional semantics.\n\n## Migration contract\n\n- One monotonically ordered migration history covers both backends.\n- Startup coordination prevents two replicas from applying the same migration concurrently.\n- PostgreSQL may use transaction-scoped advisory locking or an equivalent database-native mechanism.\n- SQLite retains an appropriate local lock/transaction mechanism.\n- A migration either commits its complete intended result or rolls back without dropping distinct source data.\n- Existing rows, null/partial legacy data, archive records, indexes, constraints, and foreign-key relationships have explicit preservation tests.\n- Re-running an applied migration is idempotent or rejected safely.\n- A newer schema is not silently opened by an incompatible older Runtime.\n- Backup/archive/recovery behavior is documented and exercised before destructive migration steps.\n\nMigration acceptance must include collision cases, not only fresh empty databases.\n\n## Security and diagnostics\n\n- Database URLs are redacted everywhere they may appear: startup settings, CLI errors, migration diagnostics, logs, exceptions, analytics, and test failure output.\n- Redaction removes username, password, query, fragment, percent-encoded forms, and other credential-bearing material while retaining enough endpoint context to diagnose safely.\n- The live connection value is not mutated by logging redaction.\n- SQL parameter values containing secrets are not logged by default.\n- TLS/SSL configuration and certificate behavior are explicit for PostgreSQL.\n- Database credentials never enter package manifests, MCP catalogs, Run results, or frontend state.\n\n## Transaction and concurrency requirements\n\nThe abstraction must be sufficient for later strict contracts:\n\n- atomic idempotent Run creation;\n- owner/lease/epoch claims using database time;\n- conditional heartbeat and terminal updates;\n- finish-versus-cancel arbitration;\n- Deployment revision swaps and pinning;\n- Work Item claims, review transitions, and output publication;\n- artifact/result metadata commits.\n\nThis does not implement those features here, but the shared database API must not make them impossible or require bypassing the abstraction.\n\nDefine behavior for:\n\n- nested transaction attempts;\n- write conflicts and serialization/deadlock retry boundaries;\n- affected-row checks for conditional transitions;\n- read-after-write consistency;\n- connection pooling versus per-operation connections;\n- long-running transactions and shutdown;\n- database unavailable at startup and during requests;\n- migration lock timeout and operator recovery.\n\n## Required invariants\n\n- SQLite and PostgreSQL expose equivalent externally visible Runtime state for the same operation sequence.\n- A failed transaction cannot leave a partially authoritative Run, Deployment, Work Item, result, or migration state.\n- Conditional updates report whether the expected state/owner/epoch actually matched.\n- Database/provider time is available for correctness-sensitive leases and schedules.\n- Migration coordination is database-backed and does not depend on one elected Runtime process.\n- No code path silently falls back from a configured PostgreSQL database to local SQLite.\n- Source, wheel, and frozen binary choose the same backend for the same validated configuration.\n- Backend selection, URL redaction, and driver loading work on supported platforms.\n\n## Acceptance matrix\n\n- [ ] Two independent Runtime processes connect to and mutate the same PostgreSQL database safely.\n- [ ] SQLite remains the zero-configuration local default and passes the shared behavioral suite.\n- [ ] Concurrent migration startup applies each migration once on SQLite and PostgreSQL.\n- [ ] Fresh, legacy, partial/null, equal-collision, unequal-collision, rollback, retry-after-operator-resolution, and rerun migration cases preserve data.\n- [ ] Transactions, rollback, affected-row checks, and update-returning behavior are covered on both backends.\n- [ ] SQL parameter/operator adaptation is tested across strings, identifiers, comments, dollar-quoted blocks, JSON operators, arrays, casts, and placeholder-count mismatches.\n- [ ] Connection loss and database-unavailable behavior fail clearly without partial authoritative state or hidden fallback.\n- [ ] URL/credential redaction has negative tests for raw and encoded credentials, query tokens, and fragments across every diagnostic path.\n- [ ] Wheel, sdist, clean install, PyInstaller/frozen binary, migration CLI, and server startup work with SQLite and PostgreSQL.\n- [ ] Mixed Runtime/schema versions fail safely and document the supported rolling-upgrade window.\n- [ ] #83 can implement DB-time lease/epoch fencing entirely through this abstraction without raw backend access or a second database layer.\n\n## Non-goals\n\n- Implementing the Run/Attempt ownership state machine; #83 owns it.\n- Implementing workers or scheduling; #90 owns them.\n- Implementing Work Item business lifecycle; #132 owns it.\n- Becoming an ORM or general application database toolkit.\n- Removing SQLite or requiring PostgreSQL for local development.\n- Supporting every SQL database before the SQLite/PostgreSQL contract is proven.",
@@ -10200,7 +10194,7 @@
         "merged_foundation_pr": 109
       },
       "proof": {
-        "source": "NOT_RUN",
+        "source": "PASS",
         "wheel": "NOT_RUN",
         "native": "NOT_RUN",
         "packaged_browser": "NOT_RUN",
@@ -10218,7 +10212,7 @@
         132
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Run retained SQLite/PostgreSQL driver, concurrent migration and data-preservation acceptance.",
+      "next_bounded_action": "Complete exact-head review of the live PostgreSQL transaction repair, then wheel/native/TLS and multi-process migration acceptance.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -10246,7 +10240,8 @@
       "blockers": [
         "Required acceptance has not been independently established."
       ],
-      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION"
+      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
+      "proof_scope": "65 SQLite/live PostgreSQL source tests PASS at8524e9c3; independent53PASS12PGSKIP. Native/wheel/TLS/multi-process migration acceptance unproved."
     },
     {
       "issue": 83,
@@ -11478,6 +11473,314 @@
       "detail": "ANSI/prefixed diagnostics regression4PASS1WindowsSKIP",
       "sha256": "c91c028f7cc88238ec5dbb4a877c7e8dab958891d08bb0f82c45dd45a85b44fe",
       "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "platform-ee14f86c/windows/native-acceptance.json",
+      "status": "PASS",
+      "detail": "Windows actual frozen+Go browser/storage at exact ee14f86c; ownership6PASS",
+      "sha256": "50244692a3913fbc08925fc6b97a8103e3e41669bddec7f2348bd591d50b7b6f",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "platform-ee14f86c/windows/native-history.json",
+      "status": "FAIL",
+      "detail": "Both history cases passed, temporary SQLite cleanup failed; retained historical receipt",
+      "sha256": "117cc28ca311d2947e31832120f617d50673999a1b1eed269b7c454839b01686",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "platform-ee14f86c/macos/native-acceptance.json",
+      "status": "PASS",
+      "detail": "macOS actual frozen+Go browser/storage at exact ee14f86c",
+      "sha256": "752c35bb16871c8dd6847ca8559136b0c867b39538e92427d49b28cb3940a536",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "platform-ee14f86c/macos/native-history.json",
+      "status": "FAIL",
+      "detail": "History startup on uncanonicalized owned temporary path; retained historical receipt",
+      "sha256": "590312de86d912aaa005156d8899a391e234f83bbf3f00963a75afd9c12342ba",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "native-history-cleanup-green.json",
+      "status": "PASS",
+      "detail": "Linux119 binary subject with explicit fixture connection closure and canonical temporary root",
+      "sha256": "b2d256955d3c599c7718ce768b73d4a2f021a2c890781abea7d87feadfff1741",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "linux-native-2ef42312-native-acceptance.json",
+      "status": "PASS",
+      "detail": "Hosted Linux exact2ef native browser/storage",
+      "sha256": "ce8f6027e1a0f1c77276ed7127afd4e87761a261ff621e2d7b97f39afa6145ef",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "linux-native-2ef42312-native-history.json",
+      "status": "PASS",
+      "detail": "Hosted Linux exact2ef large history/reconnect/detail",
+      "sha256": "e4c3d0ac9c7c9c2e9dbf599cce9feefc93493b0031769b411594278b57d06c2d",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "database-acceptance-independent-review.md",
+      "status": "PASS",
+      "detail": "Bounded64source database receipt review; not successful distributed execution",
+      "sha256": "e667923df43ed726f00307e7a801b32cb7b6e16e0a36627c5c345bad978c850f",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "database-transaction-successor-review.md",
+      "status": "PASS",
+      "detail": "8524 explicit transaction review with independent53PASS12PGSKIP",
+      "sha256": "7188fa5cf179741d9ab61490c3abc2413e6749ee955781e631ef1cca21e2b302",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "artifact-product-successor-review.md",
+      "status": "PASS",
+      "detail": "Artifact dangling-junction repair and template archive review",
+      "sha256": "3f2f7d6a632b38e908bf3ee3bf55a4bacc7dc3ac7776585db7fff8ddee1d3e8c",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "deployment-design-successor-independent-review.md",
+      "status": "PASS",
+      "detail": "Workspace-global replay design reviewed; SQLite scratch only",
+      "sha256": "2f07b4a05e6add1841989236d421f44a7d501cc4a3ce2872daa7df0d926e9064",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "tunnel-lifecycle-successor-review.md",
+      "status": "PASS",
+      "detail": "Bounded25test ownership review; full214 still blocked",
+      "sha256": "6957269aa296a5ff74909cfab357cef2274d03775b2247afd0a1237a98605a7e",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "history-mobile-independent-review.md",
+      "status": "PASS",
+      "detail": "Bounded949 large history/mobile review",
+      "sha256": "7b34462ee09b9f09d1a87152e8df5891e8bd9a9a7a6a1a711f8523d4a1630909",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "roadmap-diagnostics-successor-review.md",
+      "status": "PASS",
+      "detail": "Bounded public roadmap and native diagnostic review",
+      "sha256": "629cae65e734de9dd854aa6c1e8430de44e945914af96adbab70aa2a247a091c",
+      "scope": "Exact named subject and bounded criteria only."
+    },
+    {
+      "file": "platform-b592952d/macos/native-history.json",
+      "status": "PASS",
+      "detail": "Hosted exact source b592952d99c7e2ecd0ff70e4a7bdae420fbf46a6; bounded native-history.json",
+      "sha256": "7a6ac003c309a404678f1590f0d6ce4801ba875a9968946a7e744e6aa7129473",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-b592952d/macos/native-acceptance.json",
+      "status": "PASS",
+      "detail": "Hosted exact source b592952d99c7e2ecd0ff70e4a7bdae420fbf46a6; bounded native-acceptance.json",
+      "sha256": "6cc0e9f48ba31513ff2dc75b7a766b300601514da00198516d5be1081265061b",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-b592952d/linux/native-history.json",
+      "status": "PASS",
+      "detail": "Hosted exact source b592952d99c7e2ecd0ff70e4a7bdae420fbf46a6; bounded native-history.json",
+      "sha256": "d757c9c15641f67ea66b5cde99c90c5bbca3e1a4ccd21e6b8d5971dc40d6b7cb",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-b592952d/linux/native-acceptance.json",
+      "status": "PASS",
+      "detail": "Hosted exact source b592952d99c7e2ecd0ff70e4a7bdae420fbf46a6; bounded native-acceptance.json",
+      "sha256": "92f17dceb41a8057de58ac90a7e56a0ea2a65e5f3bd00a5cc5e89d83e7b39d5f",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-b592952d/windows/native-history.json",
+      "status": "PASS",
+      "detail": "Hosted exact source b592952d99c7e2ecd0ff70e4a7bdae420fbf46a6; bounded native-history.json",
+      "sha256": "220d41ed5b21ebae077dd75493cd209c2397097e1860e323bf6bcaa7d803cf12",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-b592952d/windows/native-acceptance.json",
+      "status": "PASS",
+      "detail": "Hosted exact source b592952d99c7e2ecd0ff70e4a7bdae420fbf46a6; bounded native-acceptance.json",
+      "sha256": "d3c7534d570063446e06dec62ea9cba676ac62a258e3f763f41ee72857f78f5d",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-e4bae7a8/macos/native-history.json",
+      "status": "PASS",
+      "detail": "Hosted exact source e4bae7a809dfadb4dd6f8c1a1110add0b601fd39; bounded native-history.json",
+      "sha256": "e948331c83fe9b5974c9c758d34c4148d0962ce7ef0488a4fe197dbebf777f42",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-e4bae7a8/macos/native-acceptance.json",
+      "status": "PASS",
+      "detail": "Hosted exact source e4bae7a809dfadb4dd6f8c1a1110add0b601fd39; bounded native-acceptance.json",
+      "sha256": "844e7eee08f71b0c9554db31799f542fd84b77ad540a5010950125c19388e990",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-e4bae7a8/linux/native-history.json",
+      "status": "PASS",
+      "detail": "Hosted exact source e4bae7a809dfadb4dd6f8c1a1110add0b601fd39; bounded native-history.json",
+      "sha256": "c6855148aae787ddb3d285d313a0f55ef673357fbefb53eef2ebd58777ef71c2",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-e4bae7a8/linux/native-acceptance.json",
+      "status": "PASS",
+      "detail": "Hosted exact source e4bae7a809dfadb4dd6f8c1a1110add0b601fd39; bounded native-acceptance.json",
+      "sha256": "362a8a9f69ddf53c0544eabd324db24c9adc02af5109b18b1a30bb80a0683419",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "platform-e4bae7a8/windows/native-acceptance.json",
+      "status": "FAIL",
+      "detail": "Hosted exact source e4bae7a809dfadb4dd6f8c1a1110add0b601fd39; bounded native-acceptance.json",
+      "sha256": "c2b3c196b38ec21b5967fbd80faf9f58bccbb5f4a5ea2a081f917d1e9a1fa6b5",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "robot-publication-races/review.md",
+      "status": "FAIL",
+      "detail": "Three locally mutable filesystem publication races; no archive-only remote exploit",
+      "sha256": "11885698d038df1aaf48a317ce2b8d98ceba6f802e6edbcf6260b8d7d930230f",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "robot-publication-races/test_robot_publication_races.py",
+      "status": "FAIL",
+      "detail": "Executable mechanism proof3FAIL1validcontrolPASS at06c",
+      "sha256": "e8c2e807804d1177aa42eddc932641bab5a665df69d6adc8c2e5420bded37f75",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "robot-publication-races/red.log",
+      "status": "FAIL",
+      "detail": "Actual Linux race failures",
+      "sha256": "80af6ead8be4f7bd25bfec55a127ef432d48f8df786e8511dc6e7b29bb7dc398",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "robot-publication-threat-independent-review.md",
+      "status": "FAIL",
+      "detail": "Independent3FAIL1PASS with threat preconditions",
+      "sha256": "217c65ee75b39976428d10f2db5713e458be140cc60ab83a337db2818801494a",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "native-accessibility-settled.json",
+      "status": "PASS",
+      "detail": "Local Linux119 binaries four settled axe states with contrast negative control",
+      "sha256": "3de1fa1d34ae27b0df8a6d68b664979e9b655620f9a1a59cf581cb6e3924b560",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "native-accessibility-rules-red.json",
+      "status": "FAIL",
+      "detail": "Unsynchronized initial contrast failure retained; element/cause not isolated",
+      "sha256": "9356f57b26bfc76b4320cfd17fed5c57f144bff2e496e86a70ad0bacc20f1b4c",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "native-accessibility-history-review.md",
+      "status": "PASS",
+      "detail": "Bounded06c/319 independent review",
+      "sha256": "b8319cbaf39fd0e0060c5200873adce423bee28490c7fd94f0fa3e7c58519e61",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/pytest-red-sanitized.log",
+      "status": "FAIL",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "9700a02527ca859246fc4022535d3618753fd831418322e8b024da93ab7f349b",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/postgres-final.log",
+      "status": "PASS",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "9f02c2c366db5be5408e1db159a8f4d9dd5632c3d0f76f9dd61d260a1f7834e4",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/container-cleanup.txt",
+      "status": "PASS",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "663be0c93ffd776543dc4e03b81ca9bfc4f03431c5c53cccd61455989e7cc70d",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/pytest-final.log",
+      "status": "PASS",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "b456c1378891a62c02ebe4f9bbaf219d45649d49637ee06c8f63a04465fafb2f",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/postgres-sanitized.log",
+      "status": "PASS",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "b10205859ff26064758518d0ce325ee9a72175aae1e1f45aa4713373ed5e775a",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/pytest-db-sanitized.log",
+      "status": "PASS",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "fe747fef87f49ed366ba2c10d1c49e23f16cef63f984e6316c4927cc73ac5dd4",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/postgres-image.txt",
+      "status": "PASS",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "ca0775b15e5b5ebc129ff215bdce8883a5e6603ef9570f15be89c88f09ceeaef",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/postgres-warning-baseline.log",
+      "status": "FAIL",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "b10205859ff26064758518d0ce325ee9a72175aae1e1f45aa4713373ed5e775a",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "database-84/postgres-red-reproduction.log",
+      "status": "FAIL",
+      "detail": "Live PostgreSQL65 transaction proof; inspect exact receipt scope",
+      "sha256": "40489bc77f257afac86c34d9bedb3d2a26f484d21e7b1e147580c63e02e96a7a",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "robot-staging-allocation-successor-review.md",
+      "status": "PASS",
+      "detail": "Independent exact096 bounded initial collision repair40tests; later replacement/publication gaps retained",
+      "sha256": "e46d8fcb026ff9cdc740de126aac6211888be4d4f056817a4fc9c79bee3765d6",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "robot-publication-races/cleanup-red.log",
+      "status": "FAIL",
+      "detail": "Initial foreign staging allocation collision red regression",
+      "sha256": "aa289faa23de3e4053f7944c90f196387478fc2bc7baa1a861206b9507373862",
+      "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "robot-publication-races/cleanup-green.log",
+      "status": "PASS",
+      "detail": "Bounded exclusive allocation ownership green regression",
+      "sha256": "35182f3fb24fa531f681339199d2a5fa47d0b8377b9e6bdb0f925911af0e9328",
+      "scope": "Exact subject and bounded criteria only."
     }
   ],
   "independent_review": {
@@ -11633,14 +11936,66 @@
     {
       "number": 220,
       "url": "https://github.com/joshyorko/actions/pull/220",
-      "scope": "Complete graph/accounting/evidence checkpoints"
+      "sha": "bf20d015e739f4bbad956653692a1436b5f4c223",
+      "state": "OPEN",
+      "base": "community",
+      "merge_commit": null
     },
     {
       "number": 221,
       "url": "https://github.com/joshyorko/actions/pull/221",
-      "sha": "899a483e3ac07ddaec246db4beeb8d0bf1aa4e72",
-      "branch": "integration/community-release-20261008",
-      "scope": "All five checkpoint histories assembled; candidate product/security/proxy/version repairs; not yet admitted for merge or release."
+      "sha": "b649c37c627fe9932fd2bed80fb16fa74c58d0f5",
+      "state": "OPEN",
+      "base": "community",
+      "merge_commit": null
+    },
+    {
+      "number": 222,
+      "url": "https://github.com/joshyorko/actions/pull/222",
+      "sha": "2bbf3afceda39a0d8dfa4b9e1a3ed96f3ad9b61f",
+      "state": "MERGED",
+      "base": "integration/community-release-20261008",
+      "merge_commit": {
+        "oid": "6ee7440a8cf2cb107f5943e1d09f45e2fb4a4655"
+      }
+    },
+    {
+      "number": 223,
+      "url": "https://github.com/joshyorko/actions/pull/223",
+      "sha": "e4e54d31647b7d44cdd7c07d6006596186db8317",
+      "state": "MERGED",
+      "base": "integration/community-release-20261008",
+      "merge_commit": {
+        "oid": "954405940951eaefe61f5919e2a1572b732e8064"
+      }
+    },
+    {
+      "number": 224,
+      "url": "https://github.com/joshyorko/actions/pull/224",
+      "sha": "28b021c6307c5c993f0ba2859d0da2ae3d9e8c94",
+      "state": "MERGED",
+      "base": "integration/community-release-20261008",
+      "merge_commit": {
+        "oid": "7b1b9b1d4a7fb3aae60eb22e5c3faf6ca91396ab"
+      }
+    },
+    {
+      "number": 225,
+      "url": "https://github.com/joshyorko/actions/pull/225",
+      "sha": "f076425d750e468f980365eeefe467542affb337",
+      "state": "OPEN",
+      "base": "integration/community-release-20261008",
+      "merge_commit": null
+    },
+    {
+      "number": 226,
+      "url": "https://github.com/joshyorko/actions/pull/226",
+      "sha": "8524e9c3e9bc35bfc17f70f887d9d0b680856af3",
+      "state": "MERGED",
+      "base": "integration/community-release-20261008",
+      "merge_commit": {
+        "oid": "18ce74179aba9d10f701e447f65dfe9e2d5d225e"
+      }
     }
   ],
   "architecture_acceptance": {
@@ -11649,12 +12004,12 @@
     "replicated_postgresql_independent_worker": "NOT_RUN",
     "cross_replica_control_and_plan_pinning": "NOT_RUN",
     "packaged_local_empty_history": "PASS",
-    "configured_key_packaged_admin": "PASS Linux119 frozen+Go; Windows startupFAIL/macOS pending",
+    "configured_key_packaged_admin": "PASS all three OS frozen+Go at b592952d; successor e4 Windows post-check cleanup FAIL",
     "packaged_work_items_PR216": "Historical isolated failure retained; integrated119 Linux persistence/errors PASS",
     "CLI_MCP_Canvas_full_vertical": "NOT_RUN",
-    "Windows_macOS_native_product_matrix": "Windows7c startupFAIL (ownership4PASS); macOS pending",
+    "Windows_macOS_native_product_matrix": "b592952d all browser/storage/history PASS; e4bae7a8 four-state axe PASS on both Windows/macOS binaries, Windows overall cleanup FAIL",
     "native_Work_Items_state_transitions": "NOT_RUN",
-    "final_integration_branch": "899a483e3ac07ddaec246db4beeb8d0bf1aa4e72",
+    "final_integration_branch": "b649c37c627fe9932fd2bed80fb16fa74c58d0f5",
     "large_stored_Run_history": "PASS Linux119 bothbinaries;880803840syntheticbytes;summary pages47931/2351bytes;reconnect and explicitdetailPASS",
     "complete_Rcc_CheckAll": "PASS119: Runtime568pass10skip/Core290/Helper11/Devutils124/WorkItems238pass28skip3deselected10xfail/Toolkit25; integration-marked runtime execution excluded"
   },
@@ -11681,7 +12036,7 @@
     "Core_candidate": "actions_core-1.0.2-py3-none-any.whl sha256:9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80; actualPRbuild/installer",
     "Runtime_frozen_linux": "sha256:21058db9d5b817a76af52869f8fdebda2a505ba710a280293ca86e74aca58f99",
     "Runtime_Go_linux": "sha256:85ab55e3b525c6f191e2ea8b684c0e36697c7a9ee84052a26d85b3b6a8226add",
-    "native_subject": "Runtime1.0.3source119b4f118bddb999ab1fc31b6edc5dd7fca36209; newer mobileproductionsource needs rebuild",
+    "native_subject": "Runtime1.0.3 source b592952d all OS native/history PASS; e4bae7a8 successor Linux/macOS PASS, Windows post-check cleanup FAIL",
     "wheel_probe_identities": [
       "actions_core-1.0.2-py3-none-any.whl",
       "actions_http_helper-1.0.2-py3-none-any.whl",
@@ -11707,9 +12062,44 @@
     "Runtime_Go_linux_023597ab": "sha256:db6509e73cb352f4fad313ad71ac05f2321a0ddcd2b727e7e7c6a0efb97cd99f",
     "Runtime_frozen_linux_119b4f": "sha256:250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3",
     "Runtime_Go_linux_119b4f": "sha256:d50cfb188f002e80658f9ae09e92a0016cc259b0591c740ff179dd16eb1ff15f",
-    "remaining_security": "Native safe publication and full route/native authorization/security matrix unproved; no publication admission yet"
+    "remaining_security": "Three concrete06c filesystem publication races under local filesystem mutation preconditions; no archive-only exploit shown. Fix/native proof and full route matrix pending; no publication admission."
   },
-  "hosted_readback_at": "2026-10-08T21:02:03.690404+00:00",
+  "hosted_readback_at": "2026-10-08T21:53:10.279613+00:00",
   "evidence_archive": "evidence/community-20261008.zip",
-  "evidence_archive_sha256": "1b2e2e525bb691299e3b58a6fa544d4ece24af6ff80dca9fa1cfc9aa38e21632"
+  "evidence_archive_sha256": "dc07ad70218eddf8b7e1ec38d8a0d2b8e1c89270bf07f8a64a24709f065b5b7d",
+  "integration_head": "b649c37c627fe9932fd2bed80fb16fa74c58d0f5",
+  "additional_compute": {
+    "devsy": {
+      "provider": "Executor Devsy Kubernetes",
+      "workspace": "cas-worker-01",
+      "state": "BLOCKED",
+      "request_id": "apr_29be804c-94cd-4b62-9233-e91b5ec30774",
+      "cause": "User approved creation; executor_resume connector rejects exact returned request ID against pattern ^apr_; inventory remains empty; no duplicate create submitted."
+    },
+    "cloud": {
+      "state": "CONNECTED",
+      "integration_owner": "/root"
+    },
+    "dakota": {
+      "state": "CONNECTED",
+      "target": "local",
+      "server": "dakota-nvidia",
+      "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+      "workers": [
+        {
+          "thread_id": "01a11d7a-e547-7423-8fc5-fc0148df2123",
+          "model": "gpt-6-luna",
+          "effort": "medium",
+          "scope": "Work Items packaged transitions"
+        },
+        {
+          "thread_id": "01a11d7b-4029-7953-aba7-f3b487098b32",
+          "model": "gpt-6-luna",
+          "effort": "medium",
+          "scope": "RCC local execution"
+        }
+      ],
+      "toolchain": "Default RCC18.19.5 rejected correctly; task-local checksum-pinned18.19.3 bootstrap in progress"
+    }
+  }
 }
