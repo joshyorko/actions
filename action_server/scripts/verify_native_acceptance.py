@@ -254,27 +254,58 @@ def run_output(
 
 def startup_diagnostics(log: Path, exit_code: int, key: str) -> dict:
     """Extract bounded exception identifiers; never retain raw log/message text."""
-    with log.open("rb") as stream:
-        stream.seek(max(0, log.stat().st_size - 65536))
-        tail = (
-            stream.read(65536)
-            .decode("utf-8", errors="replace")
-            .replace(key, "[redacted]")
+    tails = []
+    for source in (log, log.parent / "server_log.txt"):
+        if not source.is_file():
+            continue
+        with source.open("rb") as stream:
+            stream.seek(max(0, source.stat().st_size - 65536))
+            text = stream.read(65536).decode("utf-8", errors="replace")
+        # Strip ANSI before recognition, then remove credentials before extracting
+        # identifiers. Never retain arbitrary message text or traceback source lines.
+        text = re.sub(r"(?:\x1b\[|\x9b)[0-?]*[ -/]*[@-~]", "", text)
+        text = text.replace(key, "[redacted]")
+        text = re.sub(
+            r"(?im)^.*(?:authorization|cookie|api[_-]?key)\s*[:=].*$", "", text
         )
-    classes = re.findall(r"(?m)^([A-Za-z_][A-Za-z_0-9]*(?:Error|Exception)):", tail)
+        tails.append(text)
+    tail = "\n".join(tails)
+    classes = re.findall(r"\b([A-Za-z_][A-Za-z_0-9]{0,190}(?:Error|Exception)):", tail)
     modules = re.findall(
-        r"(?m)^ModuleNotFoundError: No module named ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]",
+        r"\bModuleNotFoundError: No module named ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]",
         tail,
     )
     modules += re.findall(
-        r"(?m)^ImportError: .* from ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]", tail
+        r"\bImportError: .* from ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]", tail
     )
+    frames = re.findall(
+        r'File "[^"\r\n]*?([A-Za-z_][A-Za-z_0-9]*\.py)", line ([0-9]{1,7}), in ([A-Za-z_][A-Za-z_0-9]*|<module>)',
+        tail,
+    )
+    markers = {
+        "pyinstaller_unhandled_exception": "Failed to execute script",
+        "python_traceback": "Traceback (most recent call last)",
+        "database_creation": "Database file does not exist. Creating it",
+        "application_startup_failed": "Application startup failed",
+        "address_in_use": "address already in use",
+        "windows_socket_access_denied": "WinError 10013",
+        "invalid_windows_handle": "WinError 6",
+        "permission_denied": "Permission denied",
+        "argument_error": "error: unrecognized arguments",
+        "rcc_download": "Downloading rcc",
+    }
     return {
         "exit_code": exit_code,
         "exception_classes": list(dict.fromkeys(classes))[-8:],
         "import_modules": [name for name in dict.fromkeys(modules) if len(name) <= 200][
             -8:
         ],
+        "traceback_frames": [
+            {"file": file, "line": int(line), "function": function}
+            for file, line, function in list(dict.fromkeys(frames))[-12:]
+        ],
+        "markers": [name for name, phrase in markers.items() if phrase in tail],
+        "log_sources_present": len(tails),
     }
 
 
