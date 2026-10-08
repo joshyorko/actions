@@ -313,3 +313,25 @@ This harness proves creation and restart persistence, not worker-driven Work
 Item state transitions, attachment behavior, accessibility or other browsers.
 Those cells remain separate acceptance requirements. A workflow build/version
 check alone is not native Work Items acceptance.
+
+On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
+Job Object before releasing its three-byte stdin gate. Runtime, Node and their
+descendants inherit that ownership; closing the Job terminates descendants even
+after their original leader exits. Job creation or assignment failure fails the
+gate. The workflow runs `python -m unittest discover -s scripts
+-p test_native_process_ownership.py -v`; the descendant lifetime test requires
+actual Windows and is skipped elsewhere. Linux gate tests do not establish
+Windows Job behavior. POSIX cleanup retains process-group ownership.
+
+Before deleting temporary native logs, acceptance rejects any occurrence of the
+synthetic API key using a phase-only failure message. This checks the native INFO
+startup path; verbose WebSocket credential redaction has separate transport
+tests. The frozen executable hash does not identify adjacent onedir files; retain
+that provenance limitation when using its receipt. The Go wrapper hash identifies
+its embedded archive as part of the executable.
+
+Startup exits retain only the exit code and bounded exception-class/import-module
+identifiers parsed from the final 64 KiB of the temporary log. Raw log lines,
+exception messages, paths and credentials are not copied into receipts. Treat
+these identifiers as diagnostics, not proof of a packaging cause. API keys are
+passed as `--api-key=<value>` so a generated leading hyphen remains a value.
