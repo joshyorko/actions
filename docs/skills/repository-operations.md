@@ -21,6 +21,16 @@ distribution and `venv`. If the host's preferred Python lacks `ensurepip`, set
 environment. Record that interpreter's version in the receipt; do not install
 host tooling or falsify version discovery to make this boundary pass.
 
+For packaged UI acceptance, rebuild the canonical embedded static entrypoint
+with `invoke build-frontend`, then build the frozen executable and Go wrapper.
+Record the source SHA, any generated working-tree delta and both executable
+hashes. Check the default local server separately from a configured-key server:
+a bearer-authenticated HTTP probe does not establish browser authorization.
+The October 8 checkpoint's packaged empty history loads locally, while its
+configured-key browser requests receive 403; Work Items receives 503. These
+are retained product blockers, not browser acceptance. All data in this probe
+is synthetic, and the server remains bound to loopback without exposure.
+
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
 - `action_server/`: CLI, FastAPI service, frontend, build and bundled RCC.
