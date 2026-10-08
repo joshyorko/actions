@@ -758,3 +758,18 @@ def test_real_http_transport_binds_ip_but_verifies_original_tls_identity(monkeyp
         "check_hostname": True,
         "verify_mode": ssl.CERT_REQUIRED,
     }
+
+
+def test_pinning_preserves_signed_path_parameters_and_query():
+    from actions.server import _api_robots
+
+    url = "https://downloads.example.test:8443/robot.zip;signature=synthetic?version=1&opaque=a%2Fb"
+    pinned, headers, extensions = _api_robots._pinned_download_request(
+        url, "93.184.216.34"
+    )
+    assert (
+        pinned
+        == "https://93.184.216.34:8443/robot.zip;signature=synthetic?version=1&opaque=a%2Fb"
+    )
+    assert headers == {"Host": "downloads.example.test:8443"}
+    assert extensions == {"sni_hostname": "downloads.example.test"}

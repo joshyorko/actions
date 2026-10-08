@@ -12,7 +12,7 @@ import uuid
 import zipfile
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Dict, List, Optional
-from urllib.parse import urljoin, urlparse, urlunsplit
+from urllib.parse import urljoin, urlparse, urlsplit, urlunsplit
 
 import fastapi
 import yaml
@@ -476,7 +476,7 @@ def _validate_download_url(url: str) -> tuple[bool, str]:
 def _pinned_download_request(
     url: str, address: str
 ) -> tuple[str, dict[str, str], dict[str, str]]:
-    parsed = urlparse(url)
+    parsed = urlsplit(url)
     assert parsed.hostname is not None  # Established by URL admission.
     hostname = parsed.hostname.encode("idna").decode("ascii")
     authority = f"[{hostname}]" if ":" in hostname else hostname
