@@ -1,0 +1,60 @@
+name: Measured Python coverage gate
+
+on:
+  pull_request:
+    branches: [community, integration]
+  push:
+    branches: [community]
+
+permissions:
+  contents: read
+
+jobs:
+  coverage:
+    runs-on: ubuntu-22.04
+    env:
+      ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v18.19.3
+      ROBOCORP_HOME: ${{ runner.temp }}/robocorp
+      COVERAGE_OUTPUT_DIR: ${{ runner.temp }}/coverage-gate
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache RCC holotree
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/robocorp
+          key: rcc-${{ runner.os }}-${{ runner.arch }}-coverage-v18.19.3-${{ hashFiles('developer/toolkit.yaml', 'developer/setup.yaml') }}
+
+      - name: Install pinned RCC
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          curl --fail --location --silent --show-error \
+            https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64 \
+            --output rcc.download
+          printf '%s  %s\n' \
+            7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428 \
+            rcc.download | sha256sum --check --status -
+          mv rcc.download rcc
+          chmod +x rcc
+          echo "$PWD" >> "$GITHUB_PATH"
+
+      - name: Run toolkit contracts
+        run: rcc run -r developer/toolkit.yaml --dev -t Doctor
+
+      - name: Bootstrap declared package environments
+        run: rcc run -r developer/toolkit.yaml --dev -t Bootstrap
+
+      - name: Run toolkit contracts
+        run: rcc run -r developer/toolkit.yaml --dev -t ToolkitTest
+
+      - name: Measure portable package suite coverage
+        run: rcc run -r developer/toolkit.yaml --dev -t Coverage
+
+      - name: Upload coverage receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-coverage-receipts
+          path: ${{ runner.temp }}/coverage-gate/**/*.json
+          if-no-files-found: error

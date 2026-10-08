@@ -24,6 +24,8 @@ devTasks:
     shell: python toolkit.py docs
   CheckAll:
     shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
   FrontendTest:
     shell: python toolkit.py frontend-test
   InstallCommunity:
