@@ -68,7 +68,8 @@ started by a test.
 
 Coverage JSON reports must include every maintained `src/**/*.py` file,
 including namespace-package modules that a test may not import. Missing suites,
-reports, source files, or a result below the floor fail the task. The Work Items
+reports, unexpected non-source files, or a result below the floor fail the task;
+only validated per-source file counts contribute to the aggregate. The Work Items
 portable suite excludes `persistent_backend_service`, and the Action Server
 suite excludes `integration_test`; those remain separate service/integration
 verification. The Action Server command keeps its regression snapshots strict

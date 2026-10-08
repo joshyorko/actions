@@ -3,6 +3,8 @@ from __future__ import annotations
 from pathlib import Path
 import sys
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).parents[1]))
 import coverage_gate  # noqa: E402
 
@@ -20,7 +22,11 @@ def test_aggregate_uses_every_package_report_and_exact_source_inventory(
     )
     reports = {
         package: {
-            "files": {str(source_files[package]): {"summary": {}}},
+            "files": {
+                str(source_files[package]): {
+                    "summary": {"num_statements": 10, "covered_lines": 8}
+                }
+            },
             "totals": {"num_statements": 10, "covered_lines": 8},
         }
         for package in coverage_gate.PACKAGES
@@ -49,7 +55,11 @@ def test_missing_package_report_is_visible_as_incomplete_source_coverage(
     )
     reports = {
         package: {
-            "files": {str(source_files[package]): {}},
+            "files": {
+                str(source_files[package]): {
+                    "summary": {"num_statements": 1, "covered_lines": 1}
+                }
+            },
             "totals": {"num_statements": 1, "covered_lines": 1},
         }
         for package in coverage_gate.PACKAGES[:-1]
@@ -60,6 +70,41 @@ def test_missing_package_report_is_visible_as_incomplete_source_coverage(
     assert summary["missing_source_files"]["action_server"] == [
         "package coverage report is missing"
     ]
+
+
+def test_unexpected_file_cannot_inflate_measured_coverage(
+    tmp_path: Path, monkeypatch
+) -> None:
+    source_files = {package: tmp_path / f"{package}.py" for package in coverage_gate.PACKAGES}
+    for source in source_files.values():
+        source.write_text("value = 1\n")
+    monkeypatch.setattr(
+        coverage_gate,
+        "source_files",
+        lambda package: [source_files[package]],
+    )
+    reports = {
+        package: {
+            "files": {
+                str(source_files[package]): {
+                    "summary": {"num_statements": 1, "covered_lines": 1}
+                }
+            },
+            "totals": {"num_statements": 1, "covered_lines": 1},
+        }
+        for package in coverage_gate.PACKAGES
+    }
+    inflated_file = tmp_path / "artificially-covered.py"
+    reports["actions"]["files"][str(inflated_file)] = {
+        "summary": {"num_statements": 1000, "covered_lines": 1000}
+    }
+    reports["actions"]["totals"] = {
+        "num_statements": 1001,
+        "covered_lines": 1001,
+    }
+
+    with pytest.raises(ValueError, match="non-source file"):
+        coverage_gate.summarize_reports(reports)
 
 
 def test_coverage_floor_rejects_a_measured_drop() -> None:

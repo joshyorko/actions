@@ -60,20 +60,38 @@ def summarize_reports(reports: dict[str, dict[str, Any]]) -> dict[str, Any]:
         if not isinstance(files, dict) or not isinstance(totals, dict):
             raise ValueError(f"{package} coverage JSON has no files/totals objects")
         expected = set(source_files(package))
-        observed: set[Path] = set()
+        observed: dict[Path, dict[str, Any]] = {}
         for name, details in files.items():
             path = Path(name)
             if not path.is_absolute():
                 path = (ROOT / package / path).resolve()
             else:
                 path = path.resolve()
-            if path in expected:
-                observed.add(path)
-        absent = expected - observed
+            if path not in expected:
+                raise ValueError(
+                    f"{package} coverage report includes non-source file: {name}"
+                )
+            if path in observed:
+                raise ValueError(f"{package} coverage report repeats source file: {name}")
+            if not isinstance(details, dict) or not isinstance(details.get("summary"), dict):
+                raise ValueError(f"{package} coverage summary is invalid for {name}")
+            observed[path] = details["summary"]
+        absent = expected - set(observed)
         if absent:
             missing_source[package] = [path.relative_to(ROOT).as_posix() for path in sorted(absent)]
-        package_statements = int(totals.get("num_statements", 0))
-        package_covered = int(totals.get("covered_lines", 0))
+        package_statements = 0
+        package_covered = 0
+        for details in observed.values():
+            file_statements = int(details.get("num_statements", -1))
+            file_covered = int(details.get("covered_lines", -1))
+            if file_statements < 0 or file_covered < 0 or file_covered > file_statements:
+                raise ValueError(f"{package} coverage file counts are invalid")
+            package_statements += file_statements
+            package_covered += file_covered
+        if package_statements != int(totals.get("num_statements", -1)):
+            raise ValueError(f"{package} coverage statement total does not match source files")
+        if package_covered != int(totals.get("covered_lines", -1)):
+            raise ValueError(f"{package} covered line total does not match source files")
         if package_statements <= 0:
             raise ValueError(f"{package} coverage report has no executable statements")
         if package_covered > package_statements:
