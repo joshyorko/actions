@@ -1,196 +1,166 @@
 # Actions Community engineering handoff — October 8, 2026
 
-This is a pushed, independently reviewed repair checkpoint. **The program is
-not complete, merged or released.**
+The program is not complete, merged or released. Root owns integration. The user
+has authorized merge and GitHub Actions publication after required review,
+package, browser, security and platform checks pass; those conditions remain unmet.
 
 ## Program accounting
 
-All **54 open issue bodies and comment records** were inspected, plus four
-closed exception/external contract records. Accepted: **0**. Whole issues
-verified review-ready: **0**. Unfinished: **54**.
+All 54 open issue bodies and comments were inspected and preserved. Accepted: 0;
+whole issues verified review-ready: 0; unfinished: 54. Current dispositions are
+33 NOT_STARTED, 8 IN_PROGRESS and 13 IMPLEMENTED_UNVERIFIED. Individual acceptance
+blockers are retained even when an implementation can continue. Every issue has
+an owner, PR/foundation, full contract, dependency graph, criticality, platform
+requirements, proof scope and next action in the [human ledger](community-program-ledger.md)
+and [machine ledger](community-program-ledger.json).
 
-| State | Issues |
-|---|---:|
-| NOT_STARTED | 37 |
-| IN_PROGRESS | 4 |
-| IMPLEMENTED_UNVERIFIED | 11 |
-| BLOCKED | 2 |
+The user expanded writer concurrency: four isolated Luna lanes cover #214 tunnel
+lifecycle, #162 measured coverage, #155 public roadmap and #129 Deployment design.
+They use gpt-6-luna at medium reasoning. The existing Astra convergence child
+`/root/astra_convergence` uses gpt-6-astra at low reasoning. Root coordinates all
+integration; the existing runtime reviewer is read-only. Checkpoints do not imply
+that workers continue after a session ends.
 
-#194/#195 are blocked by complete Core/RCC gates and final compatibility
-acceptance. Reviewed repair slices are separate from whole-issue acceptance.
-Every issue has an explicit disposition, owner, checkpoint/foundation,
-full acceptance body/comments, dependencies, criticality, proof states,
-platform gates and next action in the [human ledger](community-program-ledger.md)
-and [machine ledger](community-program-ledger.json). Dependency sequencing
-remains explicit and is checked against contracts before implementation.
-
-#149 remains a living advisory record, open. #137 stays closed; #82's retained
-observability reference needs vertical evidence, not automatic reopening. #154
-and Homebrew #103 are completed and not duplicated. RCC #120 is a read-only
-closed external contract. External repository changes were not made.
-
-Live `community` remains `7c98236069171f57031218f938963238986293bd`.
-The RCC developer-onboarding changes survive both repaired PR ancestries.
+#149 remains an open living advisory record. #137 remains closed; its observability
+contract survives in #82 without automatic reopening. #154 and Homebrew #103 are
+completed and not duplicated. RCC #120 is a closed read-only external contract;
+no RCC repository changes were made. Community remains the fetched historical
+anchor `7c98236069171f57031218f938963238986293bd`; onboarding is preserved.
 
 ## PR convergence
 
-All five original PRs remain open drafts with their histories preserved and
-updated descriptions. Exact check URLs and snapshot states are in [CI receipts](community-ci-receipts.json).
+All five original histories are retained in integration PR #221. No PR has been
+merged into community. Exact readback timestamps, check names and URLs are in
+[CI receipts](community-ci-receipts.json); historical failures and cancellations
+remain separate from current proof.
 
-| PR | Current SHA | Recorded hosted state |
+| PR | Source head | Hosted receipt |
 |---|---|---|
-| [#215](https://github.com/joshyorko/actions/pull/215) | `d07f79b355f976f97948720474fd050d0a32ea16` | 16 successful checks |
-| [#216](https://github.com/joshyorko/actions/pull/216) | `d26fa423080cec22522402f2193b17a5f32b336a` | 23 successful checks |
-| [#217](https://github.com/joshyorko/actions/pull/217) | `b4468e4fe86ca4431dfc74a17a19078c2b53e3d1` | 9 successful, 5 in progress |
-| [#218](https://github.com/joshyorko/actions/pull/218) | `95ddbe88106be594ea9954bdb36909702c5e2869` | 16 successful, 1 skipped |
-| [#219](https://github.com/joshyorko/actions/pull/219) | `ee612f467aa3bf379ccccf238ac985fa2846afde` | 6 successful, 1 failed N-1 Linux toolkit check |
+| [215](https://github.com/joshyorko/actions/pull/215) | d07f79b355f976f97948720474fd050d0a32ea16 | 16 PASS |
+| [216](https://github.com/joshyorko/actions/pull/216) | d26fa423080cec22522402f2193b17a5f32b336a | 23 PASS |
+| [217](https://github.com/joshyorko/actions/pull/217) | 9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2 | 15 PASS |
+| [218](https://github.com/joshyorko/actions/pull/218) | 95ddbe88106be594ea9954bdb36909702c5e2869 | 16 PASS, 1 SKIP |
+| [219](https://github.com/joshyorko/actions/pull/219) | ee612f467aa3bf379ccccf238ac985fa2846afde | 6 PASS, 1 inherited assembled WebSocket FAIL |
 
-New draft [PR #220](https://github.com/joshyorko/actions/pull/220), branch
-`review/community-ledger-20261008`, preserves the complete graph and receipts.
-Its documentation changes do not establish product acceptance. Its earlier
-baseline inventory failure was the old manylinux filename-order validator.
+[PR220](https://github.com/joshyorko/actions/pull/220) preserves the graph and
+receipts. [PR221](https://github.com/joshyorko/actions/pull/221), branch
+`integration/community-release-20261008`, is pushed at
+`899a483e3ac07ddaec246db4beeb8d0bf1aa4e72`. It includes the five histories,
+credential-safe browser sessions, dependency floors, Helper proxy routing,
+lock-derived reproducible SBOMs, Robot download/ZIP security repairs, actual
+native acceptance and large-history gates, and the mobile navigation repair.
+New public-roadmap branch `feature/roadmap-20261008` is at `2bbf3afc`; its focused
+PR targets integration and remains a checkpoint. Other Luna slices are in progress.
 
-PR #216 repairs exact browser origins, TS7006 status typing and a reproduced
-settings-alias/cache leak in assembled test setup. It adopts PR #215's normalized
-wheel validator byte-for-byte, regenerates inventory and refreshes embedded
-frontend assets. Red-before tests and exact-head independent reviews establish
-these deltas, not that every historical disconnect had the same cause.
+At integration 7c45029b, hosted Windows process-ownership tests pass all four,
+but frozen startup exits 1 before product acceptance. Full frontend CI had one
+failure among 277 tests. The mobile current-route regression now reproduces the
+defect deterministically before the callback repair; 278 full frontend tests and
+lint/type/format/topology/UI-system checks pass locally at 949d4a5e. Successor
+899a483e adds bounded Windows diagnostic extraction; it does not claim to fix
+startup. Current hosted successor checks and macOS native acceptance are pending.
 
-PR #217 prepares unpublished Core 1.0.2, enforces Runtime's Core
-`>=1.0.2,<2.0.0` dependency, covers exact exports and active scope mutation,
-expands static import detection and preserves lazy export introspection.
-Generated docs now include ActionContext and normalize cross-Python aliases.
-Postprocessing runs inside the target Poetry environment. Candidate Core wheel
-pairing is **PR-only**; release events retain registry dependency resolution.
+Independent exact-head reviews have repaired worker Core compatibility, SBOM
+nondeterminism, Robot DNS rebinding/proxy behavior, Windows ZIP aliases, semicolon
+URL preservation and Windows descendant ownership. Review of the new large-history,
+mobile and diagnostic successor is in progress. Roadmap review identified and
+repaired published/candidate evidence conflation and missing entry/checkpoint rules.
 
-Independent review found no remaining actionable findings in the final bounded
-Runtime/Core repair deltas. Findings about aliases, lock sources, evidence
-attribution, API section preservation and environment ownership were repaired.
-Whole-issue approval remains withheld. PR #215's full release acceptance,
-PR #218's packaged acceptance and PR #219's design acceptance remain unfinished.
+## Verification and architecture acceptance
 
-## Verification and blockers
+RCC 18.19.3 Doctor, Bootstrap and ToolkitTest passed. CheckAll at 119b4f passed:
+Runtime 568 PASS/10 SKIP (integration-marked execution excluded), Core 290 PASS,
+HTTP Helper 11 PASS, devutils 124 PASS, Work Items 238 PASS/28 SKIP/3 DESELECTED/
+10 XFAIL, Toolkit 25 PASS, plus package formatting/types/generated docs.
+The recorded host-Python venv failure remains a FAIL receipt; its rerun uses the
+repository RCC Python selection. Markdownlint availability is not claimed.
+Primary and N-1 RCC hosted checks on Linux and Windows pass at 7c; macOS is pending.
 
-| Receipt | Result and scope |
+Clean candidate wheel contracts: 31 PASS, including Core/Runtime/Helper floors,
+worker injection and both uninstall orders. Independently isolated published
+Core 1.0.1 correctly fails the new worker contract with an actionable upgrade;
+source namespace leakage is excluded from that probe. Candidate compatibility
+does not establish registry availability. Import collection is not yet a complete
+early Core-version admission gate.
+
+Linux native Runtime 1.0.3 at source
+`119b4f118bddb999ab1fc31b6edc5dd7fca36209` passes both frozen and Go-wrapper
+browser login, native WebSocket, Work Items create/list/detail, logout, restart
+persistence, trusted bundled loading, shadow defense, and distinct empty/missing/
+corrupt responses. The large-history harness uses only temporary synthetic data:
+210 results total 880,803,840 bytes; the shipped browser receives summary pages
+of 47,931 and 2,351 bytes, reconnects and refreshes pagination, and explicit detail
+returns 4,194,692 bytes. Legacy aggregate `/api/runs` remains a compatibility path;
+this receipt proves the shipped summary client, not a bounded legacy endpoint.
+The later mobile source change requires rebuilt native proof.
+
+| Acceptance vertical | Current proof and remaining cells |
 |---|---|
-| Pinned RCC 18.19.3 Doctor / Bootstrap / ToolkitTest | PASS in both worktrees; isolated Poetry environments |
-| Runtime complete non-integration suite | 486 PASS, 10 SKIP; actual RCC Python selected for installed-wheel tests |
-| Independent logging then CORS / release inventory | 58 PASS / 80 PASS |
-| Frontend quality / complete tests | PASS / 257 PASS; earlier two timing failures under competing load retained |
-| Separate Runtime/Canvas builds and inventory | PASS; full Canvas product acceptance unproved |
-| Linux frozen Runtime / Go wrapper | Build PASS; actual synthetic packaged browser exercised |
-| Core public/integration/scope | 14 PASS independently; arbitrary computed import names remain unproved |
-| Installed-wheel contracts at `88dc0987` | 30 PASS outside checkout, with dependency/public API checks and both uninstall orders |
-| Final Devutils at `b4468e4f` | 99 PASS; independent docs/candidate subset 7 PASS |
-| Core lint/types/docs | PASS; 119 Core files checked; absolute RCC-parent Invoke docs check PASS |
-| Complete Core/RCC Test | FAIL: 19 failures, 271 passes; dispatcher stops before later packages |
-| Complete static gates | FAIL: Runtime 17 format files and 29 unresolved types; Devutils unused import and 6 format files retained |
-
-Core failures include local dummy-server HTTP 403/connectivity failures despite
-a controlled loopback-only `NO_PROXY` adjustment. The persisted HTTP-helper
-profile includes loopback exclusions, but its urllib3 pool routing needs
-root-cause verification/repair. Proxy controls and authorization were preserved.
-
-The actual packaged local browser loads empty Run history without JavaScript
-errors. On a configured-key server, bearer HTTP succeeds, while browser admin
-requests provide no authorization and receive 403. Packaged Work Items returns
-503 in this PR #216 package; this does not attribute failure to unassembled
-PR #218. Large-result pagination, authorized reconnects and full accessibility
-acceptance remain unproved. No private Run payloads were inspected.
-
-[Raw evidence archive](evidence/community-20261008.zip): local/hosted logs,
-hashes and synthetic browser scripts. All 42 selected receipt hashes match the
-committed archive. Tested subjects remain separate from later repair heads;
-earlier red/failing attempts are retained.
-
-## Architecture acceptance
-
-Collapsed Runtime + SQLite + real RCC execution: **NOT_RUN** as a complete
-vertical. Local packaged startup/empty history is partial proof only.
-Genuine second adapter, replicated PostgreSQL/independent worker, cross-replica
-control/fencing/exact-plan recovery: **NOT_RUN**. Full authorized UI/CLI/MCP,
-Robot/workflow/Canvas verticals: **NOT_RUN**.
-
-Windows/macOS native product, PostgreSQL persistence, real provider/lease/
-cancellation and large-result browser cells remain **NOT_RUN**. Platform build
-and toolkit passes do not waive these contracts. Immutable capability,
-Deployment, worker, Control Room and Canvas roadmap nodes remain in the ledger;
-no draft architecture is presented as shipped.
+| Collapsed local SQLite/RCC | Source and native administration checks pass; full candidate Action execution, RCC provider/lease/recovery contract remain unproved |
+| Second adapter | NOT_RUN; a registry/interface is not execution proof |
+| Split replicas/PostgreSQL/independent worker | NOT_RUN; fencing, continuation, cancellation/recovery and exact-plan pinning remain unfinished |
+| CLI/API/MCP | Source contracts exist; authoritative shared admission and durable MCP Tasks vertical remain unfinished |
+| UI/Canvas | Linux packaged administration passes bounded flows; fixture Runtime/Canvas product evidence repeats deterministically; native Canvas foundry, semantic renderer, full offline/CSP/accessibility and headless matrix remain unfinished |
+| Work Items | Linux native persistence/errors pass; actual native consumer state transitions and all-OS product matrix remain unproved |
+| Security | Exact-origin/auth/log and Robot source regressions pass; native no-follow publication/races, live TLS redirect/proxy and exhaustive native route matrix remain unproved |
 
 ## Release readiness
 
-This checkpoint is not release-ready. Published Core 1.0.1 lacks the new APIs;
-Core 1.0.2 must be published and verified before the dependent Runtime release.
-Monorepo locks select local Core in main/dev; production wheel metadata contains
-a version floor, not a source path. PR candidate pairing does not waive release
-registry resolution. Shared safeguards still require cross-PR convergence.
+Latest observed PyPI releases: Runtime 1.0.2, Core 1.0.1, HTTP Helper 1.0.1,
+Work Items 0.4.4. Latest native GitHub release: actions-runtime-1.0.1.
+Candidates are Helper 1.0.2, Core 1.0.2, Runtime/native 1.0.3; Work Items remains
+0.4.4 because the candidate fixes Runtime bundling. Publish Helper then Core,
+verify clean registry-resolved wheel/worker compatibility, then Runtime, only
+through admitted GitHub Actions workflows. Immutable tags, community ancestry,
+no-overwrite publication and normalized wheel inventory gates are retained.
+PR workflow success is not publication. No tag, merge, publication, replacement,
+deployment, secrets change, security bypass or Dakota modification occurred.
 
-Validated identities:
+Exact Linux native identities for the 119b4f source above:
 
-- Core candidate `actions_core-1.0.2-py3-none-any.whl`:
-  `9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80`.
-- Linux frozen Runtime:
-  `21058db9d5b817a76af52869f8fdebda2a505ba710a280293ca86e74aca58f99`.
-- Linux Go wrapper:
-  `85ab55e3b525c6f191e2ea8b684c0e36697c7a9ee84052a26d85b3b6a8226add`.
+- Frozen executable SHA256: `250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3`.
+- Go wrapper SHA256: `d50cfb188f002e80658f9ae09e92a0016cc259b0591c740ff179dd16eb1ff15f`.
 
-Native subject: `0a811f0b` plus canonical generated static content subsequently
-committed at `d26fa423`; Runtime 1.0.2, wrapper `community-local`.
-Installed-wheel proof paired Core 1.0.2, Runtime 1.0.2 cp312 Linux, HTTP helper
-1.0.1 and Work Items 0.4.4. Its temporary wheelhouse was removed by pytest
-retention; no unrecorded wheel digests are claimed.
-
-**No unauthorized community push, merge, tag, publication, artifact replacement
-or deployment occurred.** No Dakota/unrelated repository or secrets were
-modified. Future publication requires approval and repository GitHub Actions.
+The frozen executable hash excludes adjacent files; it is not a complete onedir
+inventory identity. Earlier retained receipts apply only to their named subjects.
+The [archive](evidence/community-20261008.zip) retains historical and successor
+receipts; SHA256 and individual receipt digests are recorded in the machine ledger.
 
 ## Documentation improvements
 
-Documentation improvement — Runtime lane:
-- Canonical file changed: `docs/skills/repository-operations.md`, PR #216.
-- Durable learning captured: exact origins; settings alias/cache isolation;
-  handshake versus HTTP failure; normalized inventories; packaged proof limits.
-- Evidence: red/green tests, independent 58/80 passes and packaged browser receipt.
-- Stale or ambiguous guidance removed: loopback equivalence and filename order.
-- Remaining uncertainty: authenticated browser and complete native product matrix.
-
-Documentation improvement — Core lane:
-- Canonical file changed: same guide, PR #217, plus generated Core API docs.
-- Durable learning captured: dependency floor, main/dev directory lock,
-  lazy discovery, portable aliases, PR-only pairing and package-owned docs.
-- Evidence: installed wheels, hosted failures and exact-head independent tests.
-- Stale or ambiguous guidance removed: old-wheel compatibility, dev-only source
-  assumption, class-only normalization and parent-environment assumption.
-- Remaining uncertainty: complete source/static and hosted/platform gates.
-
-Documentation improvement — Governance and review lanes:
-- Canonical file changed or proposed: same guide, PR #220.
-- Durable learning captured: retain all contracts; identify actual test subjects
-  and request authentication; verify archived hashes and contained paths.
-- Evidence: independent 54-body/comment comparison and all 42 receipt hashes.
-- Stale or ambiguous guidance removed: green-check acceptance and repaired-head
-  attribution of red-before evidence.
-- Remaining uncertainty: pending hosted checks and architecture acceptance.
+- Root: `docs/skills/repository-operations.md` records installed-wheel isolation,
+  dependency/publication ordering, lock-only SBOM identity, Robot IP/SNI/ZIP proof
+  limits, synthetic native history, current-route navigation and dated registry
+  readback. Evidence is the source/wheel/native regressions and retained receipts.
+  Stale source-only/publication inference is removed; native and architecture gaps remain.
+- Astra: `docs/skills/work-items.md` records actual native browser/storage gates,
+  Windows Job ownership, safe diagnostics and the distinction between version,
+  process-ownership and startup proof. Evidence includes Windows ownership 4 PASS
+  and startup FAIL. Windows startup root cause remains unknown.
+- Independent review: bounded exact-head receipts propose/verify canonical guide
+  corrections for template floors, security transport, native identities and
+  candidate-vs-published roadmap evidence. Full issue acceptance is not inferred.
+- Luna roadmap: README adds dated published/candidate/proposed compatibility,
+  milestone entry/exit conditions, update triggers and canonical changelog links;
+  live registry metadata and 29 resolving relative links are the evidence.
+- Luna tunnel, coverage and Deployment: canonical guide deltas are being proposed
+  to root to avoid concurrent edits; receipt and implementation acceptance remain pending.
 
 ## Continuation
 
-No local implementation/review workers or test servers remain running. Pending
-hosted checks are external CI, not continuing autonomous implementation.
-Fetch live heads, resume the pushed branches, and use PR #220's retained ledger.
-Do not infer issue acceptance from checkpoint passes. Next five ready actions:
+1. #208/#209/#212/#153, PR221: read successor Windows diagnostics, repair the actual
+   startup boundary, then prove frozen/Go browser and large-history flows on all OS.
+2. #151/#152/#153, PR221: finish native safe publication and authorization/security
+   matrices; rebuild latest frontend and complete exact-head adversarial review.
+3. #214/#162/#155/#129, focused Luna branches: review bounded implementations/design,
+   resolve findings, integrate only proved slices, retain unmet individual criteria.
+4. #194/#195/#210/#211, PR217/215/221: finish candidate execution/installed-wheel
+   admission, then conditionally merge and publish Helper/Core before Runtime via
+   GitHub Actions with clean registry/native identity readback.
+5. #84/#134 then #129/#130/#135/#136/#148: complete database/RCC retained acceptance,
+   then immutable package/Deployment foundations before durable and second-adapter
+   execution. All other nodes remain individually scheduled in the ledger.
 
-1. **#194/#195, PR #217:** repair or attribute helper no-proxy routing with real
-   local/proxy tests; complete Core/RCC and exact-head hosted gates.
-2. **#152/#153/#212/#209, PR #216:** authorized browser transport/session without
-   URL keys or weaker origins; packaged synthetic large-result history,
-   explicit detail, pagination, reconnect and recovery proof.
-3. **#208, PR #218:** packaged persistence/transitions, trusted loader/shadow
-   defenses, distinct storage failures and native/browser recovery.
-4. **#210/#211, PR #215:** release admission/provenance/no-overwrite adversarial
-   proof and retained Homebrew handoff, without publication.
-5. **#129/#126, PR #219:** scoped foreign keys, revision ancestry, cyclic migration
-   parity and stateless MCP v2 design acceptance before implementation.
-
-Then execute the retained database/RCC foundations and immutable/durable waves.
-#82/#101 remain unfinished until local, split and second-adapter verticals are
-independently demonstrated. This handoff is not graph completion.
+Resume from live community and PR heads, not this snapshot alone. Preserve the
+five checkpoint histories and all existing review/failure receipts. Green existing
+PRs, drafted designs and a release checkpoint do not complete #82/#101's graph.

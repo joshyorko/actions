@@ -9,10 +9,10 @@
     "accepted": 0,
     "verified_review_ready": 0,
     "unfinished": 54,
-    "not_started": 37,
-    "in_progress": 4,
-    "implemented_unverified": 11,
-    "blocked": 2
+    "not_started": 33,
+    "in_progress": 8,
+    "implemented_unverified": 13,
+    "blocked": 0
   },
   "evidence_states": [
     "PASS",
@@ -26,10 +26,10 @@
       "title": "feat(expose): make tunnel providers a first-class Runtime lifecycle",
       "url": "https://github.com/joshyorko/actions/issues/214",
       "issue_updated_at": "2026-10-05T12:46:07Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "/root/luna_tunnel; integration /root",
       "owning_pr": null,
       "wave": "A",
-      "state": "NOT_STARTED",
+      "state": "IN_PROGRESS",
       "acceptance_contract": "Parent: #82\nRelated: #145, #196, #152, #153, #91\nHistorical regression: #3\n\n## Outcome\n\nMake Actions Runtime public exposure a first-class, inspectable lifecycle instead of a side effect hidden behind `action-server start --expose --expose-provider ...`.\n\nThe runtime should keep the current one-shot convenience path, but both the CLI shortcut and any future UI must delegate to one explicit provider/lifecycle contract.\n\nTarget product shape, exact spelling subject to implementation review:\n\n```text\naction-server start                         # local runtime only\naction-server expose providers              # read-only capability/probe\naction-server expose start --provider ...\naction-server expose status\naction-server expose stop\n```\n\n`action-server start --expose` remains compatibility/convenience sugar over the same implementation; it must not own a second tunnel path.\n\nThis issue is about **Actions Runtime ingress/tunnel lifecycle**, not RCC Environment Artifact providers, runtime adapters, Package providers, or a generic networking framework.\n\n## Current implementation\n\nCurrent `community` has:\n\n- `start --expose`\n- `--expose-provider auto|localhost.run|bore|cloudflare`\n- `_community_expose.py` with `LocalhostRunProvider`, `BoreProvider`, `CloudflareProvider`, and `TunnelManager`\n- server lifespan code that starts/stops the selected tunnel\n- configured API-key middleware and explicit CORS/WebSocket policy work elsewhere in the graph\n\nObserved design problems to resolve deliberately:\n\n1. **Discovery has side effects.** Bore/Cloudflare `is_available()` may download binaries. Listing/probing providers must not install software or mutate runtime state.\n2. **Provider selection and lifecycle are hidden inside server startup.** A caller cannot independently inspect, start, reconcile, or stop exposure without treating the whole Runtime start as the control primitive.\n3. **`auto` silently falls through providers.** The chosen provider and why it was selected must be explicit; failed providers remain visible evidence rather than disappearing behind a later success.\n4. **Security capabilities differ materially.** localhost.run and Cloudflare yield HTTPS; Bore exposes plain HTTP. The Runtime must classify this truthfully and must not present an insecure transport as equivalent for authenticated/public MCP use.\n5. **Cloudflare has two distinct modes** (quick tunnel vs token-backed configured tunnel) behind one provider. Configuration/readiness/public-URL semantics need an explicit contract.\n6. **Readiness is weak.** Parsing a URL from provider output is not the same as proving the public endpoint is reachable, authenticated as configured, and serving the expected Runtime/MCP instance.\n7. **Status/reconciliation is process-handle oriented.** There is no durable, bounded provider status/diagnostic contract suitable for CLI/UI/automation after the launch moment.\n8. **Startup suppresses provider failures.** Local Runtime survival is desirable, but the exposure operation needs an explicit failed/degraded receipt rather than only logs.\n\n## Provider contract\n\nDefine the narrowest provider interface needed by the current built-ins. It should cover semantics equivalent to:\n\n- provider identity and implementation version\n- passive capability/probe result\n- installation requirement and explicit install/bootstrap action, if supported\n- validated configuration class\n- start request\n- bounded readiness probe\n- public endpoint\n- transport security class\n- process/session identity as operational evidence only\n- status/reconcile\n- stop/cleanup\n- sanitized diagnostics\n\nProvider discovery/list/status MUST be read-only and MUST NOT download executables, open tunnels, allocate public URLs, or mutate credentials.\n\nDo not build a general plugin framework in this issue. The existing built-ins are sufficient to prove the contract.\n\n## Provider-specific requirements\n\n### localhost.run\n\n- Keep SSH-based operation explicit.\n- Revisit current `StrictHostKeyChecking=no`; either use a justified host-key strategy or label the residual trust boundary clearly.\n- Distinguish \"ssh binary exists\" from \"provider is usable/reachable\".\n- Preserve bounded startup timeout and cleanup.\n\n### Cloudflare\n\nTreat quick-tunnel and configured-token modes as distinct operating modes under one provider.\n\n- Quick mode: ephemeral URL, no prior credential/config requirement.\n- Configured mode: explicit token/config reference and an authoritative public URL/discovery contract; do not report ready with an empty/unknown endpoint.\n- Secret values never enter argv diagnostics, status JSON, logs, package metadata, or receipts.\n- Binary download, when desired, is an explicit bootstrap step rather than a side effect of discovery.\n\n### Bore\n\n- Classify the current `bore.pub` path as plain HTTP.\n- Do not allow `auto` to imply it is equivalent to HTTPS providers for public authenticated MCP/administrative exposure.\n- Either constrain its supported use to explicitly accepted non-sensitive development scenarios or require an HTTPS/authenticated outer edge. Make the decision explicit and tested.\n\n## CLI and UX\n\nProvide stable human + machine-readable status for at least:\n\n- stopped\n- starting\n- ready\n- degraded\n- failed\n- stale/orphaned provider process\n- provider unavailable/not installed\n- configuration/auth required\n\nStatus should identify the active provider/mode, local endpoint, public endpoint when known, security class, observed time, and sanitized reason code.\n\nA failed exposure MUST NOT falsely mark the local Runtime unhealthy.\n\n`start --expose` should use the same lifecycle implementation and print the same final receipt.\n\n## Readiness / identity\n\nAfter the provider reports an endpoint, prove the edge reaches the intended Runtime instance before reporting READY.\n\nThe probe should be bounded and use a deliberately public/bootstrap endpoint or an authenticated endpoint according to the deployment contract. Do not leak the API key in URLs or logs.\n\nFor MCP-capable exposure, verify the canonical `/mcp` endpoint is reachable under the configured auth/security policy without creating an Action Run or model work.\n\n## Relationship to package/runtime policy\n\nKeep these separate:\n\n- `--whitelist` controls which Actions are imported/served.\n- `package.yaml external-endpoints` declares package outbound host/port requirements in package metadata.\n- inbound public exposure / MCP DNS-rebinding / CORS / authentication are Runtime deployment concerns.\n\nDo not reinterpret `external-endpoints` as an inbound tunnel allowlist, and do not move deployment credentials/provider choice into an Action Package.\n\n## Compatibility\n\n- Preserve local `action-server start` behavior.\n- Preserve `start --expose` as compatibility sugar unless a later breaking release explicitly removes it.\n- Do not regress the completed stateless MCP v2 contract from #80.\n- Continue to honor the authorization/origin boundaries from #152/#153.\n- #91 may later provide richer MCP-native authorization; this issue must not block on it if the existing API-key contract can be used safely.\n- #196 may consume the same external edge for RCC provider proxying later, but RCC provider lifecycle is not implemented here.\n\n## Acceptance\n\n- [ ] Provider listing/probing is demonstrably side-effect free: no downloads, subprocesses, public URLs, credential changes, or Runtime mutations.\n- [ ] Explicit start/status/stop works for each retained built-in provider mode.\n- [ ] `start --expose` delegates to the same lifecycle and produces equivalent provider identity/status.\n- [ ] `auto` selection is deterministic, reports all considered failures, and cannot silently downgrade from a required HTTPS/security class to plain HTTP.\n- [ ] Cloudflare quick and token/configured modes have distinct, truthful readiness/public-URL behavior.\n- [ ] Bore security limitations are enforced/documented rather than merely logged.\n- [ ] Provider failure leaves the local Runtime usable while exposure reports FAILED/DEGRADED explicitly.\n- [ ] Public-edge readiness proves the expected Runtime instance and configured authentication without executing an Action.\n- [ ] Restart/reconcile detects stale/orphaned provider state and does not fabricate ownership of an unrelated process/tunnel.\n- [ ] Stop is idempotent and cleans up only the owned provider process/session.\n- [ ] Source, wheel, and frozen/standalone Runtime paths exercise the same contract on supported platforms.\n- [ ] Human/JSON diagnostics are bounded and contain no API key, tunnel token, provider credential, private environment dump, or unrelated subprocess output.\n- [ ] Existing local Runtime, MCP v2, action execution, and server-shutdown tests remain green.\n\n## Non-goals\n\n- No new hosted control plane.\n- No generic VPN/tunnel SDK.\n- No arbitrary user-supplied shell provider.\n- No RCC Environment Artifact provider implementation.\n- No worker/Run scheduler.\n- No credential manager replacement.\n- No package-level inbound network policy.\n- No public exposure by default.\n",
       "acceptance_criteria": [
         "1. **Discovery has side effects.** Bore/Cloudflare `is_available()` may download binaries. Listing/probing providers must not install software or mutate runtime state.",
@@ -95,7 +95,7 @@
         196
       ],
       "criticality": "P1",
-      "next_bounded_action": "Design narrow passive discovery and explicit owned start/status/stop lifecycle with HTTPS admission.",
+      "next_bounded_action": "Implement passive discovery and explicit owned lifecycle with deterministic secure selection; prove edge identity and packaging before acceptance.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -130,7 +130,7 @@
       "title": "bug(ui): Runtime 1.0.1 Runs fails JSON parsing; oversized run list and same-origin WebSocket 403",
       "url": "https://github.com/joshyorko/actions/issues/212",
       "issue_updated_at": "2026-09-08T12:04:02Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 216,
       "wave": "A",
       "state": "IN_PROGRESS",
@@ -163,11 +163,11 @@
         "merged_foundation_pr": null
       },
       "proof": {
-        "source": "FAIL",
+        "source": "PASS",
         "wheel": "NOT_RUN",
-        "native": "NOT_RUN",
-        "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "native": "FAIL",
+        "packaged_browser": "PASS",
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -179,7 +179,7 @@
         209
       ],
       "criticality": "P1",
-      "next_bounded_action": "Implement authorized browser transport, validate synthetic huge-result paginated history against packaged Runtime, then cross-platform checks.",
+      "next_bounded_action": "Verify new native history gate on all supported OS and rebuilt candidate; retain full detail and legacy supported clients.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -203,22 +203,24 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "PASS for repair delta at 0a811f0bf981df72911c97fd59743465b19a3fff; full issue NOT_RUN",
+      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
       "blockers": [
-        "Complete Python formatting/type gates",
-        "Authenticated packaged-browser transport and acceptance",
-        "Windows/macOS native acceptance",
-        "Historical hosted failure and product symptom attribution remains distinct"
+        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
+        "macOS native/browser and final exact-head hosted checks pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN",
+        "Remaining issue-specific criteria not waived by bounded receipts"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. Runtime d26fa423:23 hosted checks PASS. Packaged local empty history PASS; configured-key browser403 FAIL and WorkItems503 FAIL. Large-result and authorized browser acceptance NOT_RUN."
+      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "integration_pr": 221,
+      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
     },
     {
       "issue": 211,
       "title": "fix(release): align Actions-side native handoffs with community distribution",
       "url": "https://github.com/joshyorko/actions/issues/211",
       "issue_updated_at": "2026-09-07T19:16:38Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 215,
       "wave": "A",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -259,7 +261,7 @@
         101
       ],
       "criticality": "P1",
-      "next_bounded_action": "Verify PR215 GitHub-only handoff against closed tap contract and immutable native asset hashes.",
+      "next_bounded_action": "Finish final candidate security/platform/package acceptance, verify immutable unused versions and release admission, merge only admitted integration, then publish Helper1.0.2 -> Core1.0.2 -> Runtime1.0.3/native through GitHub Actions with registry readback and workflow receipts.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -287,14 +289,15 @@
       "blockers": [
         "Required acceptance has not been independently established."
       ],
-      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY"
+      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
+      "integration_pr": 221
     },
     {
       "issue": 210,
       "title": "fix(release): repair HTTP helper workflow credential delivery",
       "url": "https://github.com/joshyorko/actions/issues/210",
       "issue_updated_at": "2026-09-07T19:16:37Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 215,
       "wave": "A",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -336,7 +339,7 @@
         155
       ],
       "criticality": "P1",
-      "next_bounded_action": "Adversarially validate PR215 empty-token admission and eligible workflow credential path without publication.",
+      "next_bounded_action": "Finish final candidate security/platform/package acceptance, verify immutable unused versions and release admission, merge only admitted integration, then publish Helper1.0.2 -> Core1.0.2 -> Runtime1.0.3/native through GitHub Actions with registry readback and workflow receipts.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -364,14 +367,15 @@
       "blockers": [
         "Required acceptance has not been independently established."
       ],
-      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY"
+      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
+      "integration_pr": 221
     },
     {
       "issue": 209,
       "title": "fix(ci): diagnose unexpected disconnect in assembled WebSocket Origin test",
       "url": "https://github.com/joshyorko/actions/issues/209",
       "issue_updated_at": "2026-09-07T19:16:36Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 216,
       "wave": "A",
       "state": "IN_PROGRESS",
@@ -399,11 +403,11 @@
         "merged_foundation_pr": null
       },
       "proof": {
-        "source": "FAIL",
+        "source": "PASS",
         "wheel": "NOT_RUN",
-        "native": "NOT_RUN",
-        "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "native": "FAIL",
+        "packaged_browser": "PASS",
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -417,7 +421,7 @@
         204
       ],
       "criticality": "P1",
-      "next_bounded_action": "Verify hosted assembled test on pushed head; prove real packaged authenticated reconnect and distinguish fixture defect from shipped disconnect.",
+      "next_bounded_action": "Verify latest native WebSocket/reconnect on all OS; Linux actual packaged reconnect PASS, Windows startup blocks its product checks.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -441,22 +445,24 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "PASS for repair delta at 0a811f0bf981df72911c97fd59743465b19a3fff; full issue NOT_RUN",
+      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
       "blockers": [
-        "Complete Python formatting/type gates",
-        "Authenticated packaged-browser transport and acceptance",
-        "Windows/macOS native acceptance",
-        "Historical hosted failure and product symptom attribution remains distinct"
+        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
+        "macOS native/browser and final exact-head hosted checks pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN",
+        "Remaining issue-specific criteria not waived by bounded receipts"
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. Runtime d26fa423:23 hosted checks PASS. Packaged local empty history PASS; configured-key browser403 FAIL and WorkItems503 FAIL. Large-result and authorized browser acceptance NOT_RUN."
+      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "integration_pr": 221,
+      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
     },
     {
       "issue": 208,
       "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
       "url": "https://github.com/joshyorko/actions/issues/208",
       "issue_updated_at": "2026-09-07T19:09:10Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 218,
       "wave": "A",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -498,11 +504,11 @@
         "merged_foundation_pr": null
       },
       "proof": {
-        "source": "NOT_RUN",
+        "source": "PASS",
         "wheel": "NOT_RUN",
-        "native": "NOT_RUN",
-        "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "native": "FAIL",
+        "packaged_browser": "PASS",
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -514,7 +520,7 @@
         145
       ],
       "criticality": "P1",
-      "next_bounded_action": "Validate PR218 trusted loader against shadow packages and packaged persistent create/list/detail/transitions.",
+      "next_bounded_action": "Finish portable frozen/Go packaged acceptance harness in PR221, run on Linux/Windows/macOS, prove real native consumer state transitions and restart recovery.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -538,20 +544,24 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "NOT_RUN",
+      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
       "blockers": [
-        "Required acceptance has not been independently established.",
-        "SeparatePR216packageWorkItems503 is observed product triage; PR218packaged head not assembled/tested, so no candidate attribution.",
-        "SeparatePR216packageWorkItems503 is observed product triage; PR218packaged head not assembled/tested, so no candidate attribution."
+        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
+        "macOS native/browser and final exact-head hosted checks pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN",
+        "Remaining issue-specific criteria not waived by bounded receipts"
       ],
-      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY"
+      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
+      "integration_pr": 221,
+      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
     },
     {
       "issue": 196,
       "title": "Make Actions Runtime a one-click host for the RCC Environment Artifact provider",
       "url": "https://github.com/joshyorko/actions/issues/196",
       "issue_updated_at": "2026-08-25T19:13:58Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "A",
       "state": "NOT_STARTED",
@@ -665,10 +675,10 @@
       "title": "[architect] Action Server depends on private actions-core modules across a versioned package boundary",
       "url": "https://github.com/joshyorko/actions/issues/195",
       "issue_updated_at": "2026-09-07T14:51:20Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 217,
       "wave": "G",
-      "state": "BLOCKED",
+      "state": "IMPLEMENTED_UNVERIFIED",
       "acceptance_contract": "## Architecture Finding\n\n**Type**: interface-violation\n**Affected area**: `action_server/src/actions/server/_actions_process_pool.py`, `action_server/src/actions/server/_encryption.py`, `actions/`\n\nAction Server declares `actions-core = ^1.0.0` but imports `ActionContext` from `actions._action_context` and `JSONValue` from `actions._protocols`. Both modules are private implementation paths and are absent from `actions.__all__`. This makes the independently versioned server distribution depend on Core internals without an explicit compatibility contract.\n\n## Impact\n\nA Core-internal reorganization or compatible public API release can break Action Server at runtime despite satisfying its declared dependency range. The split package boundary also obscures ownership and prevents independent release validation.\n\n## Recommendation\n\nDefine a narrow public Core contract for the required context/type surface (or move the server-owned JSON type locally), migrate Action Server to it, and add a clean-wheel compatibility test that rejects imports from private `actions._*` modules.\n\n---\n*Filed by architect agent (ACMM L5 \u2014 hold-gated mode)*\n---\n\ud83d\udc1d **Hive Agent**: `architect` | **Instance:** `hive-loud-hen` | **SHA:** `unknown`\n\n\u2014 hive: agent=architect backend=codex model=gpt-5.6-terra codex=0.146.0",
       "acceptance_criteria": [],
       "acceptance_authority": "Full issue body and comments retained; extracted bullets are an index, not a waiver.",
@@ -693,17 +703,17 @@
         "merged_foundation_pr": null
       },
       "proof": {
-        "source": "FAIL",
+        "source": "PASS",
         "wheel": "PASS",
         "native": "NOT_RUN",
         "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
       "related_references": [],
       "criticality": "P1",
-      "next_bounded_action": "Repair or attribute HTTP helper no-proxy routing with a real local/proxy regression; complete Core/RCC gates, then verify hosted wheel pairing without publication.",
+      "next_bounded_action": "Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -729,23 +739,21 @@
       },
       "independent_review_status": "PASS for bounded repair deltas throughb4468e4f; full issue unaccepted.",
       "blockers": [
-        "Complete Core/RCC suite has19localdummy server failures includingHTTP403 despite persisted localno-proxy entries.",
-        "BroaderDevutils lint/format failures retained.",
-        "Latesthosted and crossplatform installed/native acceptance remains unproved.",
-        "Core1.0.2 must precede Runtime publication, which is not authorized."
+        "Final assembled native/action execution and registry compatibility after ordered admitted publication; candidate APIs absent from published Core1.0.1."
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Public/scope14PASS; final88dc installed-wheel30PASS; Core lint/types/docs pass. FullRCC Core19FAIL271PASS; local helper proxy routing requires root-cause repair. Platform/hosted acceptance separate."
+      "proof_detail": "PR2179b3c1a4b all15 hosted checks PASS. Integration candidate Core1.0.2/Helper1.0.2/Runtime1.0.3 installed-wheel contracts31PASS; actual publishedCore1.0.1 rejected explicitly by independent isolated worker probe. Full architectural criteria remain unaccepted.",
+      "proof_scope": "Bounded Core290 source tests, candidate pair31 installed-wheel contracts, independently isolated oldCore rejection. Full issue remains unaccepted."
     },
     {
       "issue": 194,
       "title": "[quality] Add coverage for command dispatch and variable-scope error paths",
       "url": "https://github.com/joshyorko/actions/issues/194",
       "issue_updated_at": "2026-09-07T14:51:26Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 217,
       "wave": "G",
-      "state": "BLOCKED",
+      "state": "IMPLEMENTED_UNVERIFIED",
       "acceptance_contract": "## Finding\n\nThe actions package has dedicated tests for collection, lifecycle, requests, and responses, but the source inventory shows no test references for actions/src/actions/_commands.py or actions/src/actions/_variables_scope.py. These are central control/state paths: command dispatch determines which user operation runs, while variable scope affects action parameter resolution and nested execution state. Invalid commands, malformed arguments, missing variables, cleanup, and handler failures can regress without detection.\n\n## Recommendation\n\nAdd focused unit tests for command routing and invalid-input/handler-error behavior. Add variable-scope tests covering creation, nested lookup, mutation, cleanup, and missing-variable behavior. Run these in the existing package test suite and publish coverage output in CI so regressions are visible.\n\n## Priority\n- Impact: high\n- Effort: medium\n\n---\n*Filed by quality agent (hold-gated mode)*\n---\n\ud83d\udc1d **Hive Agent**: `quality` | **Instance:** `hive-loud-hen` | **SHA:** `f6a3a921`\n\n\u2014 hive: agent=quality backend=codex model=gpt-5.6-luna codex=0.146.0",
       "acceptance_criteria": [],
       "acceptance_authority": "Full issue body and comments retained; extracted bullets are an index, not a waiver.",
@@ -770,17 +778,17 @@
         "merged_foundation_pr": null
       },
       "proof": {
-        "source": "FAIL",
+        "source": "PASS",
         "wheel": "PASS",
         "native": "NOT_RUN",
         "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
       "related_references": [],
       "criticality": "P1",
-      "next_bounded_action": "Repair or attribute HTTP helper no-proxy routing with a real local/proxy regression; complete Core/RCC gates, then verify hosted wheel pairing without publication.",
+      "next_bounded_action": "Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -806,23 +814,21 @@
       },
       "independent_review_status": "PASS for bounded repair deltas throughb4468e4f; full issue unaccepted.",
       "blockers": [
-        "Complete Core/RCC suite has19localdummy server failures includingHTTP403 despite persisted localno-proxy entries.",
-        "BroaderDevutils lint/format failures retained.",
-        "Latesthosted and crossplatform installed/native acceptance remains unproved.",
-        "Core1.0.2 must precede Runtime publication, which is not authorized."
+        "Final assembled native/action execution and registry compatibility after ordered admitted publication; candidate APIs absent from published Core1.0.1."
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "proof_detail": "Public/scope14PASS; final88dc installed-wheel30PASS; Core lint/types/docs pass. FullRCC Core19FAIL271PASS; local helper proxy routing requires root-cause repair. Platform/hosted acceptance separate."
+      "proof_detail": "PR2179b3c1a4b all15 hosted checks PASS. Integration candidate Core1.0.2/Helper1.0.2/Runtime1.0.3 installed-wheel contracts31PASS; actual publishedCore1.0.1 rejected explicitly by independent isolated worker probe. Full architectural criteria remain unaccepted.",
+      "proof_scope": "Bounded Core290 source tests, candidate pair31 installed-wheel contracts, independently isolated oldCore rejection. Full issue remains unaccepted."
     },
     {
       "issue": 162,
       "title": "[ACMM L0] Add Coverage gate",
       "url": "https://github.com/joshyorko/actions/issues/162",
       "issue_updated_at": "2026-08-22T22:15:14Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "/root/luna_coverage; integration /root",
       "owning_pr": null,
       "wave": "G",
-      "state": "NOT_STARTED",
+      "state": "IN_PROGRESS",
       "acceptance_contract": "## ACMM Gap: Coverage gate\n\n**Level:** L0 Prerequisites not met\n**Category:** prerequisite\n**Criterion ID:** `acmm:prereq-coverage-gate`\n\n### What's needed\n\nThis repository is missing one of the following files or directories:\n\n- `codecov.yml`\n- `.codecov.yml`\n- `.github/workflows/coverage-gate.yml`\n- `coverage.yml`\n- `.coverage-thresholds.json`\n\nAdding any one of these will satisfy this criterion and help the repository advance to ACMM Level 0 (Prerequisites not met).\n\n### Why it matters\n\nPrerequisites are foundational \u2014 without test suites, CI/CD, and templates, AI agents lack the guardrails needed for safe autonomous work.\n\n### How to fix\n\nCreate one of the files listed above. The ACMM evaluation checks for file existence \u2014 the content can follow your project's conventions.\n\n---\n*Opened by Hive ACMM Evaluation*\n\n\u2014 hive: agent=dashboard",
       "acceptance_criteria": [],
       "acceptance_authority": "Full issue body and comments retained; extracted bullets are an index, not a waiver.",
@@ -880,7 +886,7 @@
       "dependency_status": "initial sequencing; validate against full contract before each slice",
       "related_references": [],
       "criticality": "roadmap",
-      "next_bounded_action": "Introduce meaningful measured coverage thresholds on maintained contracts and preserve failed gates.",
+      "next_bounded_action": "Measure actual coverage and enforce a meaningful RCC-dispatched CI floor with failing-gate regression.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -915,10 +921,10 @@
       "title": "[strategist] Establish a release and compatibility roadmap for the expanding runtime architecture",
       "url": "https://github.com/joshyorko/actions/issues/155",
       "issue_updated_at": "2026-09-07T14:51:32Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "/root/luna_roadmap; integration /root",
       "owning_pr": null,
       "wave": "G",
-      "state": "NOT_STARTED",
+      "state": "IN_PROGRESS",
       "acceptance_contract": "## Strategic Finding\\n\\n**Type**: roadmap-gap\\n**Horizon**: near-term\\n\\nThe repository has accumulated a substantial architecture roadmap spanning immutable packages, runtime adapters, worker protocols, Tasks, Work Items, provenance, UI, CLI, and multiple placement models, but the public repository surface exposes no visible release cadence, milestone sequence, compatibility policy, or adoption-oriented definition of a usable vertical slice.\\n\\n## Rationale\\n\\nA large dependency graph without a published delivery sequence makes it difficult for contributors, downstream integrators, and adopters to identify what is stable now, what is experimental, and which milestones unlock a deployable path. This increases coordination cost and risks optimizing for architecture breadth before demonstrating a coherent community release.\\n\\n## Proposed Next Step\\n\\nPublish a milestone roadmap that names one supported vertical slice, its entry criteria, dependency order, compatibility guarantees, and target release checkpoints. Include an explicit policy for experimental versus supported runtime adapters and a lightweight changelog/release practice visible from the README.\\n\\n---\\n*Filed by strategist agent (ACMM L5 \u2014 hold-gated mode)*\n---\n\ud83d\udc1d **Hive Agent**: `strategist` | **Instance:** `hive-loud-hen` | **SHA:** `unknown`\n\n\u2014 hive: agent=strategist backend=codex model=gpt-5.6-luna codex=0.146.0",
       "acceptance_criteria": [],
       "acceptance_authority": "Full issue body and comments retained; extracted bullets are an index, not a waiver.",
@@ -953,7 +959,7 @@
       "dependency_status": "initial sequencing; validate against full contract before each slice",
       "related_references": [],
       "criticality": "roadmap",
-      "next_bounded_action": "Reconcile public milestone/compatibility roadmap with actual merged, PyPI and native versions.",
+      "next_bounded_action": "Resolve independent public roadmap review findings and verify dated registry/native compatibility claims.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -988,7 +994,7 @@
       "title": "[security] Constrain browser origins and credentialed CORS with explicit deployment policy",
       "url": "https://github.com/joshyorko/actions/issues/153",
       "issue_updated_at": "2026-09-07T19:18:39Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 216,
       "wave": "A",
       "state": "IN_PROGRESS",
@@ -1025,11 +1031,11 @@
         "merged_foundation_pr": 201
       },
       "proof": {
-        "source": "FAIL",
+        "source": "PASS",
         "wheel": "NOT_RUN",
-        "native": "NOT_RUN",
-        "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "native": "FAIL",
+        "packaged_browser": "PASS",
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -1042,7 +1048,7 @@
         209
       ],
       "criticality": "P1",
-      "next_bounded_action": "Complete authenticated packaged-browser and protected-route policy matrix without weakening exact origins or no-Origin client authorization.",
+      "next_bounded_action": "Prove final native cookie/bearer exact-origin HTTP/WebSocket/reconnect/revocation matrix on supported platforms; protected OAuth GET cookie access intentionally denied pending CSRF-safe endpoint design.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -1066,22 +1072,24 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "PASS for repair delta at 0a811f0bf981df72911c97fd59743465b19a3fff; full issue NOT_RUN",
+      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
       "blockers": [
-        "Complete Python formatting/type gates",
-        "Authenticated packaged-browser transport and acceptance",
-        "Windows/macOS native acceptance",
-        "Historical hosted failure and product symptom attribution remains distinct"
+        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
+        "macOS native/browser and final exact-head hosted checks pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN",
+        "Remaining issue-specific criteria not waived by bounded receipts"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
-      "proof_detail": "Focused repairs pass, complete lint/types remain failing; review applies to repair delta only. Runtime d26fa423:23 hosted checks PASS. Packaged local empty history PASS; configured-key browser403 FAIL and WorkItems503 FAIL. Large-result and authorized browser acceptance NOT_RUN."
+      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "integration_pr": 221,
+      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
     },
     {
       "issue": 152,
       "title": "[security] Enforce configured API-key authorization across admin routers and artifact delivery",
       "url": "https://github.com/joshyorko/actions/issues/152",
       "issue_updated_at": "2026-09-07T14:52:00Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "A",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -1174,7 +1182,7 @@
       "title": "[security] Reject unsafe Robot ZIP package-root selection and bound archive staging",
       "url": "https://github.com/joshyorko/actions/issues/151",
       "issue_updated_at": "2026-09-07T14:52:06Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "A",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -1211,11 +1219,11 @@
         "merged_foundation_pr": 200
       },
       "proof": {
-        "source": "NOT_RUN",
+        "source": "PASS",
         "wheel": "NOT_RUN",
         "native": "NOT_RUN",
         "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -1227,7 +1235,7 @@
         153
       ],
       "criticality": "P0",
-      "next_bounded_action": "Prove real URL/DNS-rebinding rejection and native staging path/atomicity cases without private payloads.",
+      "next_bounded_action": "Implement/prove safe no-follow package publication and actual native security matrix without weakening auth or TLS.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -1253,16 +1261,17 @@
       },
       "independent_review_status": "NOT_RUN",
       "blockers": [
-        "Required acceptance has not been independently established."
+        "Native no-follow publication/race proof and live TLS/redirect/proxy security matrix remain NOT_RUN."
       ],
-      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION"
+      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
+      "proof_scope": "39 Robot security source tests plus IP-pinned transport/SNI and Windows ZIP lexical regressions; actual TLS/network and no-follow native publication proof absent."
     },
     {
       "issue": 149,
       "title": "\ud83d\udc1d Hive Advisory Report",
       "url": "https://github.com/joshyorko/actions/issues/149",
       "issue_updated_at": "2026-08-26T15:37:59Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "governance",
       "state": "NOT_STARTED",
@@ -1358,7 +1367,7 @@
       "title": "Harden package import and compile Robot/runtime metadata into immutable Package Revisions",
       "url": "https://github.com/joshyorko/actions/issues/148",
       "issue_updated_at": "2026-09-07T14:40:37Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "C",
       "state": "NOT_STARTED",
@@ -1483,7 +1492,7 @@
       "title": "Add typed internal capability invocation with pinned runtime plans and parent-child Runs",
       "url": "https://github.com/joshyorko/actions/issues/147",
       "issue_updated_at": "2026-09-07T14:42:58Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -1605,7 +1614,7 @@
       "title": "Add one adapter-aware Actions Runtime CLI for capabilities, Robots, and development tasks",
       "url": "https://github.com/joshyorko/actions/issues/146",
       "issue_updated_at": "2026-09-07T14:43:03Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -1715,7 +1724,7 @@
       "title": "Evolve Actions Runtime into a lightweight control room with a unified Run Composer",
       "url": "https://github.com/joshyorko/actions/issues/145",
       "issue_updated_at": "2026-09-07T14:43:11Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -1857,7 +1866,7 @@
       "title": "Make Robot Tasks a first-class capability kind independent of runtime adapter",
       "url": "https://github.com/joshyorko/actions/issues/144",
       "issue_updated_at": "2026-09-07T14:43:18Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -1975,7 +1984,7 @@
       "title": "Define pluggable capability runtime adapters, shared admission, execution requirements, and preflight",
       "url": "https://github.com/joshyorko/actions/issues/143",
       "issue_updated_at": "2026-09-07T14:43:25Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -2104,7 +2113,7 @@
       "title": "Prove Robot Task execution across runtime adapters and local, container, and worker placements",
       "url": "https://github.com/joshyorko/actions/issues/142",
       "issue_updated_at": "2026-09-07T14:43:29Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -2221,7 +2230,7 @@
       "title": "Define deterministic capability workflows over pinned runtime plans and Work Items",
       "url": "https://github.com/joshyorko/actions/issues/141",
       "issue_updated_at": "2026-09-07T14:43:34Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -2340,7 +2349,7 @@
       "title": "Package and operate collapsed and split capability Runtime deployments safely",
       "url": "https://github.com/joshyorko/actions/issues/140",
       "issue_updated_at": "2026-09-07T14:43:38Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -2455,7 +2464,7 @@
       "title": "Build exact-subject capability, runtime-adapter, admission, Deployment, and worker conformance",
       "url": "https://github.com/joshyorko/actions/issues/139",
       "issue_updated_at": "2026-09-07T14:43:49Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -2570,7 +2579,7 @@
       "title": "Define a versioned Runtime-to-worker protocol for pinned runtime plans, adapters, and placements",
       "url": "https://github.com/joshyorko/actions/issues/138",
       "issue_updated_at": "2026-09-07T14:43:55Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -2679,7 +2688,7 @@
       "title": "Define an immutable Package Revision registry/provider and worker-local source cache",
       "url": "https://github.com/joshyorko/actions/issues/136",
       "issue_updated_at": "2026-09-07T14:44:00Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "C",
       "state": "NOT_STARTED",
@@ -2781,7 +2790,7 @@
       "title": "Compile current package directories into deterministic Package Revisions and runtime plans",
       "url": "https://github.com/joshyorko/actions/issues/135",
       "issue_updated_at": "2026-09-07T14:44:15Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "C",
       "state": "NOT_STARTED",
@@ -2926,7 +2935,7 @@
       "title": "Integrate RCC Environment Artifacts and execution as the first local Runtime Adapter",
       "url": "https://github.com/joshyorko/actions/issues/134",
       "issue_updated_at": "2026-09-07T14:44:19Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "B",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -3135,7 +3144,7 @@
       "title": "Use RCC/Holotree as the first full environment and execution adapter for Actions workers",
       "url": "https://github.com/joshyorko/actions/issues/133",
       "issue_updated_at": "2026-09-07T14:44:24Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -3314,7 +3323,7 @@
       "title": "Define durable Work Item queue, lease, review, and workflow semantics over capability Runs",
       "url": "https://github.com/joshyorko/actions/issues/132",
       "issue_updated_at": "2026-09-07T14:44:29Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -3446,7 +3455,7 @@
       "title": "Define an open provider-based data and knowledge plane for Actions",
       "url": "https://github.com/joshyorko/actions/issues/131",
       "issue_updated_at": "2026-09-07T14:44:34Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -3533,7 +3542,7 @@
       "title": "Design Package v3 as an immutable capability bundle with pluggable runtime plans and exposure projections",
       "url": "https://github.com/joshyorko/actions/issues/130",
       "issue_updated_at": "2026-09-07T14:44:38Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "C",
       "state": "NOT_STARTED",
@@ -3688,10 +3697,10 @@
       "title": "Define workspace-scoped capability deployments, runtime-plan selection, immutable revisions, and bindings",
       "url": "https://github.com/joshyorko/actions/issues/129",
       "issue_updated_at": "2026-09-07T14:45:59Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "/root/luna_deployment; integration /root",
       "owning_pr": 219,
       "wave": "C",
-      "state": "NOT_STARTED",
+      "state": "IN_PROGRESS",
       "acceptance_contract": "Parent: #82\nInforms: #83, #85, #87, #89, #90, #91, #95, #130, #133, #138, #143, #144\n\n## Outcome\n\nDefine the **capability deployment object model** between immutable Package Revisions/runtime-plan declarations and a running Actions Runtime installation.\n\nThe Runtime must answer durably and deterministically:\n\n- which immutable Package Revision is deployed;\n- which capabilities are exposed;\n- which Runtime Plans/adapters are allowed or selected for each capability;\n- which adapter-specific runtime artifact/specification policy applies;\n- which secret, OAuth, data, artifact, Work Item, source/runtime provider, network, and worker bindings apply;\n- which Worker Profile/placement requirements apply;\n- which exact snapshot an existing Run/retry remains pinned to during update/rollback;\n- whether execution may be local, container-backed, or independent-worker.\n\nDo not encode these answers implicitly in startup flags, mutable directories, inherited host environment, local Holotree/venv paths, package-selected executable plugins, Kubernetes objects, or the Runtime replica that received the request.\n\n## Scope boundary\n\nA Deployment here is an **Actions capability deployment**, not an agent deployment and not a historical Control Room application object.\n\nAn external agent runtime may attach through MCP/HTTP. Actions Runtime does not own its conversation, planning, model settings, memory, or runbook lifecycle.\n\nA Workspace is a semantic trust/policy/provider/audit namespace. It does not require a Kubernetes namespace or highly multi-tenant SaaS topology. Single-Workspace-per-installation remains a safe first-class profile.\n\n## Design archaeology and correction\n\nHistorical Sema4/Control Room designs correctly separated authored package content from production secrets/connections and provided Workspace-scoped worker/runtime selection. They also often coupled process/task execution to proprietary compute products, one specific RCC/Holotree environment model, local paths, or Kubernetes runtime objects.\n\nThe useful lessons are:\n\n- keep production bindings separate from Package source;\n- version Deployment state atomically;\n- support draft/test\u2192production binding/policy changes;\n- make runtime/worker capability requirements explicit;\n- keep in-flight Runs pinned;\n- keep physical topology simpler than the semantic graph.\n\nThe first Actions architecture revision still assumed every Deployment selected an RCC-shaped Environment Artifact. This issue now selects a generic Runtime Plan from #130/#143 while preserving RCC-specific identities inside the RCC plan.\n\n## Required object model\n\nExact table/API names require approved design.\n\n### Workspace\n\nTrust, policy, identity, quota, provider registration, connection reference, adapter authorization, worker trust, and audit namespace.\n\nDo not derive it from filesystem path, port, process, Kubernetes namespace, agent ID, or provider account name.\n\n### Package\n\nLogical reusable package identity.\n\n### Package Revision\n\nImmutable source/capability/runtime-plan manifest from #130/#135.\n\nIt declares capabilities and one or more explicitly compatible Runtime Plans. It does not contain production bindings or worker-local runtime state.\n\n### Capability\n\nPackage-scoped Action, Robot Task, Workflow, Dev Task, resource, prompt, or App capability identity.\n\nDeployment decides visibility, bindings, runtime selection, Worker Profile, and policy independently from the capability's source identity.\n\n### Runtime Plan\n\nImmutable normalized package declaration from #130/#143 describing how a capability can be prepared/executed by one Runtime Adapter.\n\nCommon identity includes:\n\n- `runtime_kind`;\n- plan digest/schema;\n- adapter contract/version/required features;\n- platform/architecture/ABI requirements;\n- adapter-specific runtime specification/reference;\n- supported capability IDs;\n- provenance and limitations.\n\nExamples:\n\n- RCC plan with Environment Specification/Artifact policy and provider-profile requirements;\n- uv plan with normalized project/lock/Python requirements;\n- raw Python plan with explicit interpreter/trust restrictions;\n- direct Robot Framework plan with suite/task and environment contract.\n\nRuntime-specific fields remain namespaced. A Deployment never fabricates an adapter plan that the Package Revision did not declare.\n\n### Runtime Policy / selection\n\nA Deployment Revision may:\n\n- select one default Runtime Plan for a capability;\n- allow a bounded set of declared plans;\n- lock runtime selection entirely;\n- allow authorized caller selection among declared plans;\n- constrain adapter versions/features/provider profiles;\n- prohibit weaker adapters/placements in production;\n- require conformance/trust/signature evidence.\n\nThere is no implicit fallback order.\n\nIf a Deployment selects RCC and RCC is unavailable, the Run is blocked/failed according to policy. It does not silently become uv/Python/Robot Framework. A deliberate new Run may select another allowed plan explicitly.\n\n### Deployment\n\nStable Workspace-scoped logical identity.\n\n### Deployment Revision\n\nImmutable snapshot selecting:\n\n- Package Revision(s);\n- capability projection;\n- allowed/default Runtime Plan(s);\n- adapter-specific runtime artifact/provider policy;\n- provider bindings;\n- authorization/policy revision;\n- Worker Profile(s)/placement constraints;\n- concurrency/quotas/runtime limits;\n- compatibility/migration metadata;\n- audit/provenance references.\n\nUpdating a Deployment publishes a new immutable revision and atomically advances the pointer for **new** Runs. Old revisions remain addressable while pinned Runs drain or are retained.\n\n### Binding\n\nMap logical requirements to Workspace-scoped provider references, for example:\n\n- `secret: salesforce_client_secret`;\n- `oauth: google_user`;\n- `data: customers`;\n- `knowledge: policies`;\n- `queue: remittances`;\n- `artifacts: reports`;\n- `package-source: package-registry`;\n- `runtime-artifact: rcc-office-cache`;\n- `network: vendor_api`.\n\nPackage/Runtime Plans contain declarations and provider capability requirements, never production secret values or arbitrary provider URLs.\n\n### Capability Projection\n\nDeterministic MCP, HTTP, event, workflow, CLI, and App surface selected from the full Package graph.\n\nProjection is independent of Runtime Plan. The same Robot Task may be internal-only, scheduled, CLI/API, workflow-node, or a bounded MCP facade while executing through RCC or another declared adapter.\n\n#130 owns projection semantics; #89 owns deterministic catalog revisions.\n\n### Worker Profile\n\nExecution/placement requirements used by #90/#138, including:\n\n- allowed runtime kinds/adapter contracts/features;\n- platform/architecture/ABI;\n- resource class/capacity;\n- network/provider grants;\n- browser/desktop/GPU/device capabilities;\n- container/local/VM placement support;\n- trust domain/Workspace scope;\n- isolation/dedication policy;\n- cache/locality hints as optimization.\n\nA Worker Profile is not a PodSpec and cannot substitute an undeclared Runtime Plan.\n\n## Draft/test versus production mapping\n\nSupport:\n\n```text\nsame Package Revision\n       |\n test Deployment Revision\n   runtime: python-local or rcc-test\n   data:test-db\n   oauth:test-user\n       |\n promote / publish\n       |\n production Deployment Revision\n   runtime: rcc-prod or uv-prod (only if declared)\n   data:prod-db\n   oauth:prod-service\n   worker: private-vpc\n```\n\nPromotion may change bindings, Runtime Plan selection, Worker Profile, limits, policy, and projection while reusing exact source. Each state is immutable/provenanced.\n\nDo not mutate one revision from test to production or assume a test-compatible runtime is production-approved.\n\n## Resolution and Run pinning\n\nBefore a Run becomes executable, resolve a durable snapshot containing at least:\n\n- Workspace;\n- Deployment + Deployment Revision;\n- Package Revision;\n- capability identity/schema;\n- selected Runtime Plan + `runtime_kind` + plan digest;\n- required adapter contract/version/features;\n- adapter-specific runtime specification/artifact/provider policy;\n- binding references/policy versions;\n- Worker Profile/placement constraints;\n- catalog revision where visible;\n- actor/authorization decision reference;\n- idempotency/effect scope.\n\n#83 owns Run/Attempt state and records this snapshot.\n\nA replacement Attempt for one Run uses the same snapshot. It does not:\n\n- resolve the current Deployment;\n- select a different adapter;\n- adopt a newer environment/lock/interpreter;\n- change bindings/worker policy;\n- reinterpret a mutable tag.\n\nA deliberate **restart/new Run** may resolve current Deployment and choose another allowed plan.\n\n## Runtime/provider availability\n\nPreflight distinguishes:\n\n- Runtime Adapter installed/available;\n- authentication/provider binding required;\n- runtime preparation/build/acquisition needed;\n- compatible runtime content already warm;\n- incompatible adapter feature/platform;\n- no eligible worker/placement;\n- forbidden selection.\n\nRCC provider profiles/`cache serve` are environment-content providers, not Deployment or Run authority. Deployment stores authorized references/policy, not RCC object indexes or provider credentials.\n\nEquivalent concepts for uv/other adapters remain namespaced.\n\n## Physical topology doctrine\n\n### Zero-config local\n\n```text\none actions-runtime process\n  synthesized/default Workspace\n  SQLite\n  local Package generations\n  bundled RCC adapter by default\n  optional installed local adapters\n  local filesystem providers\n  local worker/process pool\n```\n\nNo remote provider, container engine, Worker registration, or Kubernetes requirement for ordinary local execution.\n\n### Simple production\n\n```text\n1..N Runtime replicas\n     |\n shared PostgreSQL\n     |\n1..N independent workers\n  each advertising Runtime Adapter + placement capabilities\n     |\nshared immutable/provider backends as configured\n```\n\n### Strong isolation\n\nSeparate installations, Worker Profiles, pools, or trust domains may isolate Workspaces, browsers, desktop sessions, consequential work, or untrusted packages.\n\nSemantic richness must not force physical microservice sprawl.\n\n## Update, rollback, drain, and retention\n\nDefine:\n\n- atomic current-revision updates;\n- optimistic update conflicts;\n- rollout validation of Package, Runtime Plan, adapter, provider, and Worker Profile compatibility;\n- N+1 for new Runs while N Runs/retries remain pinned;\n- old adapter/runtime artifact/worker support while N drains;\n- explicit blocked/manual-recovery outcome if old plan can no longer be satisfied;\n- rollback changing new resolution only;\n- retention/GC references for Package Revisions, Runtime Plans/artifacts, Runs, Tasks, Work Items, artifacts, catalogs, and audit;\n- no historical provenance rewrite.\n\nRevoking an adapter/runtime artifact/provider may block new Runs and has explicit behavior for active Runs; it does not mutate old records.\n\n## Authorization and isolation\n\n- Workspace authorization covers Deployments, Packages, Runtime Plans, adapters, bindings, catalogs, Runs, artifacts, Tasks, Work Items, and provider resolution.\n- Knowing a plan/digest/provider reference does not grant access.\n- Package code cannot choose an unauthorized adapter, provider, Worker Profile, image, socket, or mount.\n- Secret plaintext never enters Package/Deployment/Run/catalog/log metadata.\n- Worker eligibility includes Workspace/trust authorization and Runtime Plan compatibility.\n- multi-Workspace mode requires negative tests; single-Workspace isolation remains supported.\n- host/Kubernetes isolation strengthens but does not replace application authorization.\n\n## Required invariants\n\n- resolving a request yields one immutable Deployment Revision, capability, Runtime Plan, and catalog revision.\n- every Run pins Deployment, Package, capability, Runtime Plan, bindings, and Worker Profile before execution.\n- retry never switches adapter/plan.\n- RCC-specific Environment identities are retained when RCC is selected but absent as mandatory generic fields.\n- update/rollback never redirects an in-flight Run.\n- old/new revisions coexist while Runs drain.\n- production bindings/secrets are separate and authorized.\n- worker/cache locality is optimization, not identity or authorization.\n- local and distributed modes preserve object semantics.\n- mixed Runtime/worker/adapter versions fail closed when required correctness cannot be enforced.\n\n## Deliverables\n\n- ADR for Workspace/Package/Capability/Runtime Plan/Deployment/Worker relationships;\n- database schemas/migrations and typed APIs;\n- endpoint\u2192Deployment\u2192capability\u2192Runtime Plan\u2192pinned Run resolution flow;\n- runtime selection/no-fallback rules;\n- promotion/update/rollback/drain/retention/GC rules;\n- authorization/audit boundaries;\n- local-default Workspace behavior;\n- compatibility path for mutable current packages/Robot imports;\n- negative scenarios for package-provided adapter authority.\n\n## Acceptance\n\n1. Two Runtime replicas resolve the same Deployment Revision to identical Package, capability, Runtime Plan, bindings, policy, Worker Profile, and catalog identities.\n2. A rolling update starts new Runs on N+1 while N Runs/retries preserve exact N runtime plan.\n3. Rollback affects new Run resolution only.\n4. Test/production Deployments reuse one Package Revision with different authorized bindings/runtime policies.\n5. A package declaring RCC and uv can be deployed with one explicit default; missing default adapter never triggers fallback.\n6. A worker lacking selected adapter/features/platform/provider access declines safely.\n7. RCC Deployment can reference an authorized provider profile/Environment Artifact policy without copying provider URL/credentials or object protocol into Deployment state.\n8. A non-RCC Deployment pins its own plan without fake RCC fields.\n9. Local single-binary mode proves the same lifecycle without external infrastructure.\n10. single-Workspace and multi-Workspace profiles reject cross-boundary references correctly.\n11. restart-as-new may select current plan while ordinary retry remains pinned.\n12. mixed-version rollout fails safely.\n\n## Non-goals\n\n- Building an agent harness.\n- Building a Kubernetes operator.\n- Requiring one pod/server/namespace per package.\n- Requiring multi-tenancy.\n- Recreating Control Room compatibility or proprietary compute products.\n- Choosing one secret, queue, artifact, data, source, runtime-artifact, or environment provider.\n- Implementing Runtime Adapter internals or automatic fallback here.",
       "acceptance_criteria": [
         "1. Two Runtime replicas resolve the same Deployment Revision to identical Package, capability, Runtime Plan, bindings, policy, Worker Profile, and catalog identities.",
@@ -3754,7 +3763,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Review PR219 exact scoped FK tuples, revision ancestry and SQLite/PostgreSQL cyclic migrations.",
+      "next_bounded_action": "Finish scoped FK tuples, ancestry and cyclic migration parity design; execute database probes and independently review before implementation.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -3789,7 +3798,7 @@
       "title": "feat: add a community Canvas template",
       "url": "https://github.com/joshyorko/actions/issues/127",
       "issue_updated_at": "2026-09-07T19:18:38Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "F",
       "state": "NOT_STARTED",
@@ -3940,7 +3949,7 @@
       "title": "feat: add an MCP v2 capabilities showcase template",
       "url": "https://github.com/joshyorko/actions/issues/126",
       "issue_updated_at": "2026-09-07T19:18:36Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 219,
       "wave": "F",
       "state": "NOT_STARTED",
@@ -4063,7 +4072,7 @@
       "title": "cleanup: remove Data Server and private-tier product surfaces",
       "url": "https://github.com/joshyorko/actions/issues/125",
       "issue_updated_at": "2026-08-18T07:17:41Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "G",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -4284,7 +4293,7 @@
       "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory",
       "url": "https://github.com/joshyorko/actions/issues/101",
       "issue_updated_at": "2026-09-07T19:17:54Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 220,
       "wave": "governance",
       "state": "IN_PROGRESS",
@@ -7922,7 +7931,7 @@
       "title": "Define Canvas authoring contracts in actions-core without package proliferation",
       "url": "https://github.com/joshyorko/actions/issues/100",
       "issue_updated_at": "2026-08-17T21:45:07Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "F",
       "state": "NOT_STARTED",
@@ -8066,7 +8075,7 @@
       "title": "Build the shared CanvasSpec renderer and MCP App View foundation",
       "url": "https://github.com/joshyorko/actions/issues/99",
       "issue_updated_at": "2026-09-07T14:44:49Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "F",
       "state": "NOT_STARTED",
@@ -8170,7 +8179,7 @@
       "title": "Modernize the frontend toolchain and multi-artifact build pipeline",
       "url": "https://github.com/joshyorko/actions/issues/98",
       "issue_updated_at": "2026-09-05T11:23:50Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "A",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -8344,11 +8353,11 @@
         "merged_foundation_pr": 115
       },
       "proof": {
-        "source": "NOT_RUN",
+        "source": "PASS",
         "wheel": "NOT_RUN",
-        "native": "NOT_RUN",
-        "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "native": "FAIL",
+        "packaged_browser": "PASS",
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -8388,18 +8397,24 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "NOT_RUN",
+      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
       "blockers": [
-        "Required acceptance has not been independently established."
+        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
+        "macOS native/browser and final exact-head hosted checks pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN",
+        "Remaining issue-specific criteria not waived by bounded receipts"
       ],
-      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION"
+      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
+      "integration_pr": 221,
+      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
     },
     {
       "issue": 97,
       "title": "Establish the Actions UI system and offline visual quality gates",
       "url": "https://github.com/joshyorko/actions/issues/97",
       "issue_updated_at": "2026-09-07T19:18:35Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 216,
       "wave": "A",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -8582,11 +8597,11 @@
         "merged_foundation_pr": 119
       },
       "proof": {
-        "source": "NOT_RUN",
+        "source": "PASS",
         "wheel": "NOT_RUN",
-        "native": "NOT_RUN",
-        "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "native": "FAIL",
+        "packaged_browser": "PASS",
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -8625,18 +8640,24 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "NOT_RUN",
+      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
       "blockers": [
-        "Required acceptance has not been independently established."
+        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
+        "macOS native/browser and final exact-head hosted checks pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN",
+        "Remaining issue-specific criteria not waived by bounded receipts"
       ],
-      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION"
+      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
+      "integration_pr": 221,
+      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
     },
     {
       "issue": 96,
       "title": "Refresh the Actions Runtime product shell and overview",
       "url": "https://github.com/joshyorko/actions/issues/96",
       "issue_updated_at": "2026-09-07T19:18:34Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": 216,
       "wave": "A",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -8982,11 +9003,11 @@
         "merged_foundation_pr": 112
       },
       "proof": {
-        "source": "NOT_RUN",
+        "source": "PASS",
         "wheel": "NOT_RUN",
-        "native": "NOT_RUN",
-        "packaged_browser": "NOT_RUN",
-        "independent_review": "NOT_RUN"
+        "native": "FAIL",
+        "packaged_browser": "PASS",
+        "independent_review": "PASS"
       },
       "dependencies": [],
       "dependency_status": "initial sequencing; validate against full contract before each slice",
@@ -9036,18 +9057,24 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "NOT_RUN",
+      "independent_review_status": "Prior7c bounded review PASS; new949 mobile/history review in progress; whole issue unaccepted",
       "blockers": [
-        "Required acceptance has not been independently established."
+        "Windows native startup exit1 unresolved; ownership test4PASS is separate",
+        "macOS native/browser and final exact-head hosted checks pending",
+        "Real native worker Work Items state transitions and full action execution NOT_RUN",
+        "Remaining issue-specific criteria not waived by bounded receipts"
       ],
-      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION"
+      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
+      "integration_pr": 221,
+      "proof_detail": "Linux119b4f native browser login/HTTP/WebSocket/Work Items persistence/shadow-defense/errors PASS; large synthetic history880803840bytes yields47931/2351byte pages with reconnect and explicit4194692byte detail PASS. Final mobile repair adds current-route selection regression RED->GREEN278 fullfrontend tests. Newer frontend source needs newly built native proof.",
+      "proof_scope": "Source/nonintegration PASS at119b4f; Linux119 frozen+Go packaged browser PASS. Native field FAIL reflects Windows7c candidate startup; macOS pending. No whole-platform acceptance."
     },
     {
       "issue": 93,
       "title": "Run the Actions Runtime frontend and product factory",
       "url": "https://github.com/joshyorko/actions/issues/93",
       "issue_updated_at": "2026-09-07T19:18:32Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "governance",
       "state": "NOT_STARTED",
@@ -9266,7 +9293,7 @@
       "title": "Implement durable capability interaction and human-review flows",
       "url": "https://github.com/joshyorko/actions/issues/92",
       "issue_updated_at": "2026-09-07T14:45:03Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -9390,7 +9417,7 @@
       "title": "Add MCP-native authorization and CIMD support",
       "url": "https://github.com/joshyorko/actions/issues/91",
       "issue_updated_at": "2026-09-07T14:45:15Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "E",
       "state": "NOT_STARTED",
@@ -9511,7 +9538,7 @@
       "title": "Separate capability execution ownership from Runtime request handling across adapters and placements",
       "url": "https://github.com/joshyorko/actions/issues/90",
       "issue_updated_at": "2026-09-07T14:45:24Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -9664,7 +9691,7 @@
       "title": "Separate request context from Workspace-scoped bindings and runtime grants",
       "url": "https://github.com/joshyorko/actions/issues/87",
       "issue_updated_at": "2026-09-07T14:45:30Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -9766,7 +9793,7 @@
       "title": "Make capability artifacts and large-result handles replica-safe",
       "url": "https://github.com/joshyorko/actions/issues/86",
       "issue_updated_at": "2026-09-07T14:45:35Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -9900,7 +9927,7 @@
       "title": "Back MCP Tasks with pinned capability Runs and runtime plans",
       "url": "https://github.com/joshyorko/actions/issues/85",
       "issue_updated_at": "2026-09-07T14:45:43Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -10000,7 +10027,7 @@
       "title": "Support one shared SQLite/PostgreSQL Database abstraction in actions-runtime",
       "url": "https://github.com/joshyorko/actions/issues/84",
       "issue_updated_at": "2026-08-25T22:32:30Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "B",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -10226,7 +10253,7 @@
       "title": "Make capability Run and Attempt ownership replica-safe across runtime adapters",
       "url": "https://github.com/joshyorko/actions/issues/83",
       "issue_updated_at": "2026-09-07T14:45:47Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "D",
       "state": "NOT_STARTED",
@@ -10358,7 +10385,7 @@
       "title": "Evolve Actions Runtime into a pluggable MCP-native capability runtime and lightweight control room",
       "url": "https://github.com/joshyorko/actions/issues/82",
       "issue_updated_at": "2026-09-07T19:17:55Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "governance",
       "state": "NOT_STARTED",
@@ -10645,7 +10672,7 @@
       "title": "Add Action Canvas: a native MCP App foundry inside Action Server",
       "url": "https://github.com/joshyorko/actions/issues/71",
       "issue_updated_at": "2026-08-18T07:17:55Z",
-      "owner": "integration owner; no delegated implementation writer",
+      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
       "owning_pr": null,
       "wave": "F",
       "state": "NOT_STARTED",
@@ -10819,7 +10846,7 @@
     },
     {
       "number": 217,
-      "sha": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1",
+      "sha": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
       "url": "https://github.com/joshyorko/actions/pull/217",
       "draft": true,
       "state": "open"
@@ -10840,9 +10867,12 @@
     }
   ],
   "limits": {
-    "writers": 1,
-    "no_merge_tag_publication": true,
-    "new_vertical_proof": "NOT_RUN"
+    "max_simultaneous_implementation_writers": 6,
+    "integration_owner": "/root",
+    "merge_publication_authority": "User explicitly authorized merge and GitHub Actions publication only after required review/package/browser/security/platform checks pass. No merge or publication performed.",
+    "external_repository_modifications": "NOT_AUTHORIZED",
+    "new_distributed_vertical_proof": "NOT_RUN",
+    "writer_authority": "User explicitly expanded isolated Luna lanes; four bounded Luna lanes plus root and reused Astra. Root coordinates integration; no nested swarms."
   },
   "external_contracts": [
     {
@@ -11298,6 +11328,156 @@
       "platform": "Linux",
       "tested_subject": "92e43720 workingdelta",
       "repair_head": "b4468e4fe86ca4431dfc74a17a19078c2b53e3d1"
+    },
+    {
+      "file": "integration-native-browser-receipt.json",
+      "status": "PASS",
+      "detail": "Linux frozen+Go native synthetic browser/admin WorkItems persistence and distinct errors; source023597ab",
+      "sha256": "9220492d05b28d07c108dd3a0f0a75f199781d95d1470c1dfb7da29ed5b73dd1",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "integration-wheel-contract-green.log",
+      "status": "PASS",
+      "detail": "31 current wheel/source contracts; Helper1.0.2/Core1.0.2/Runtime1.0.3, worker Request injection and dependency metadata",
+      "sha256": "e9cab2fdc86603b5ebd01f1f8778e2aa93df9dfb41a3c0f15e9daa7edb5f973b",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "integration-rcc-checkall.log",
+      "status": "FAIL",
+      "detail": "HostPython3.13 venv infrastructure:553RuntimePASS1FAIL10SKIP; Core290PASS Helper11PASS WorkItems238PASS Devutils124PASS; override rerun pending",
+      "sha256": "25acf1fdad9cecf4aaa170260f18f33177af202fefed538de39edda2e69089a5",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "worker-core-floor-red.log",
+      "status": "FAIL",
+      "detail": "Old worker silently omitted managed integration before repair",
+      "sha256": "81348252bc00f3245f25e8c254fe0e6eb4f2c98d27c60831ec5905f6855289ea",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "worker-core-floor-green.log",
+      "status": "PASS",
+      "detail": "Worker rejects missing modern Actions integration with actionable upgrade",
+      "sha256": "8702e7fb77eb070f7697bd13c16b26e3ab66466fb883ea2b5448a3b395e7881b",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "template-core-floor-red.log",
+      "status": "FAIL",
+      "detail": "Source templates pinned incompatible Core1.0.1 before repair",
+      "sha256": "c539f47f737c1bc38c497a28ff21a5b96807fd35f22fdc4e9b4c3dbd159e30df",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "worker-sbom-successor-independent-review.md",
+      "status": "PASS",
+      "detail": "Independent exactd1 worker published1.0.1 isolation/template/SBOM review",
+      "sha256": "77de3f73ed762a58754c9ca5926566e5abef551769e9e5cfaf5ef7bb0d0a53c6",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "root-review-successor.md",
+      "status": "PASS",
+      "detail": "Independent exact023 auth/log/helper/assets review",
+      "sha256": "459efdc039e7e4f570fa16b11827912d5c28f6b8b35ebb3206846616ad2962e4",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "template-native-independent-review.md",
+      "status": "PASS",
+      "detail": "Independent historical023 native hashes and template blocker review",
+      "sha256": "0448db1647beb98bddb3383c16ead4e8c18c73baa81d10052e0628950b21f0b3",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "live-pypi-identities.json",
+      "status": "PASS",
+      "detail": "Live released package identities checked before candidate version selection",
+      "sha256": "bffb671a0a94a861688229c705d86014a86e73179faa85ff20b1d0c07ae1ba86",
+      "platform": "Linux unless receipt explicitly identifies hosted platform",
+      "scope": "Bounded receipt; full issue acceptance not established."
+    },
+    {
+      "file": "native-large-history-final.json",
+      "status": "PASS",
+      "detail": "Linux119 actual frozen+Go >867MB synthetic history bounded browser/reconnect/detail",
+      "sha256": "b2d256955d3c599c7718ce768b73d4a2f021a2c890781abea7d87feadfff1741",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "integration-final-native-acceptance.json",
+      "status": "PASS",
+      "detail": "Linux119 packaged browser storage/auth errors",
+      "sha256": "c5c374cf44ac523df329607b41a1ba808df8ed0dbd2c7e7621eab15868212de0",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "native-job-successor-independent-review.md",
+      "status": "PASS",
+      "detail": "Exact7c bounded ownership review; Windows not run locally",
+      "sha256": "cf613ed5d66740260d400744c90796279fc8c9a206755aaa522d97ff9435afc0",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "native-gate-security-independent-review.md",
+      "status": "PASS",
+      "detail": "Bounded119 review; retained Windows cleanup finding repaired separately",
+      "sha256": "cbbda4f2511f759d7fbe3df0638b0317f4ea8aaf8f3b69ea0d42ba270ce9635f",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "robot-security-successor-independent-review.md",
+      "status": "PASS",
+      "detail": "Robot security bounded successor; native publication remains unproved",
+      "sha256": "f9f1fb7fa65485b77ffdb1f3feb1d4739ee938901fc36b88fc98bbfcfba5ff54",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "mobile-navigation-red.log",
+      "status": "FAIL",
+      "detail": "New deterministic current-route regression before callback fix",
+      "sha256": "7c64b3e0d1466c5b3726e30a71ebfa810aadd903b06538decb85fc1e92a8eaab",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "mobile-navigation-full-green.log",
+      "status": "PASS",
+      "detail": "949 source fullfrontend278PASS",
+      "sha256": "737dc4c1bb50be827097ca6b540f7196b6327bdad81df2bc858dac019d266e30",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "mobile-navigation-quality.log",
+      "status": "PASS",
+      "detail": "949 frontend lint/type/format/topology/UI-system gates",
+      "sha256": "f1fc977135ea3d8b0898bac63987177be95c02052a3778802f692c9b6e1a5314",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "windows-native-a08da12d-receipt.json",
+      "status": "FAIL",
+      "detail": "7c PR merge Windows native startup exit1; no recognized identifiers",
+      "sha256": "8578a95a34b089af9c03b5f5cb048a2f58b79646273174eb9aa3c1ecbe2c4715",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
+    },
+    {
+      "file": "windows-diagnostics-green.log",
+      "status": "PASS",
+      "detail": "ANSI/prefixed diagnostics regression4PASS1WindowsSKIP",
+      "sha256": "c91c028f7cc88238ec5dbb4a877c7e8dab958891d08bb0f82c45dd45a85b44fe",
+      "scope": "Bounded exact subject only; full issue acceptance not established."
     }
   ],
   "independent_review": {
@@ -11312,68 +11492,7 @@
     }
   },
   "hosted_ci_receipts_file": "community-ci-receipts.json",
-  "native_browser_receipt": {
-    "source_head": "0a811f0bf981df72911c97fd59743465b19a3fff",
-    "generated_static": "working tree from repository build-frontend; not yet committed",
-    "platform": "Linux",
-    "frozen_sha256": "21058db9d5b817a76af52869f8fdebda2a505ba710a280293ca86e74aca58f99",
-    "go_wrapper_sha256": "85ab55e3b525c6f191e2ea8b684c0e36697c7a9ee84052a26d85b3b6a8226add",
-    "cases": [
-      {
-        "mode": "local-no-key",
-        "/api/runs/summary": {
-          "status": 200,
-          "bytes": 2
-        },
-        "/api/work-items": {
-          "status": 503
-        },
-        "browser_exit": 0,
-        "browser": {
-          "mode": "local-no-key",
-          "browser": "cached Chromium1234",
-          "page_errors": [],
-          "api_failures": [],
-          "has_runs_text": true,
-          "body_excerpt": "Actions Runtime\n\u263e\n\u2190\nOverview\nActions\nRuns\nSchedules\nRobots\nWork Items\nAnalytics\nOpenAPI spec\nNo runs recorded yet\n\nTrigger an Action or Robot run to populate the history. Use the Actions page to test your automation flows.\n\nGo to actions"
-        },
-        "http_request_auth": "none: default local Runtime, no exposure",
-        "browser_request_auth": "none: UI does not provide configured-key HTTP/WebSocket authorization"
-      },
-      {
-        "mode": "configured-key",
-        "/api/runs/summary": {
-          "status": 200,
-          "bytes": 2
-        },
-        "/api/work-items": {
-          "status": 503
-        },
-        "browser_exit": 0,
-        "browser": {
-          "mode": "configured-key",
-          "browser": "cached Chromium1234",
-          "page_errors": [],
-          "api_failures": [
-            {
-              "path": "/api/runs/summary",
-              "status": 403
-            },
-            {
-              "path": "/api/actionPackages",
-              "status": 403
-            }
-          ],
-          "has_runs_text": true,
-          "body_excerpt": "Actions Runtime\n\u263e\n\u2190\nOverview\nActions\nRuns\nSchedules\nRobots\nWork Items\nAnalytics\nOpenAPI spec\n\nUnable to load run history: Forbidden"
-        },
-        "http_request_auth": "Bearer synthetic configured key",
-        "browser_request_auth": "none: UI does not provide configured-key HTTP/WebSocket authorization"
-      }
-    ],
-    "acceptance": "FAIL",
-    "acceptance_detail": "Configured-key browser admin403; WorkItems503; synthetic empty storage only."
-  },
+  "native_browser_receipt": "evidence/integration-final-native-acceptance.json; evidence/native-large-history-final.json",
   "ledger_independent_review": {
     "head": "b0b92f5b862ac2ebb684c2a883a096edc50ca8ea",
     "status": "PASS with two receipt attribution findings repaired in successor",
@@ -11513,8 +11632,15 @@
   "new_prs": [
     {
       "number": 220,
-      "branch": "review/community-ledger-20261008",
-      "scope": "Complete issue ledger, canonical evidence guide and receipt archive; draft, not product acceptance."
+      "url": "https://github.com/joshyorko/actions/pull/220",
+      "scope": "Complete graph/accounting/evidence checkpoints"
+    },
+    {
+      "number": 221,
+      "url": "https://github.com/joshyorko/actions/pull/221",
+      "sha": "899a483e3ac07ddaec246db4beeb8d0bf1aa4e72",
+      "branch": "integration/community-release-20261008",
+      "scope": "All five checkpoint histories assembled; candidate product/security/proxy/version repairs; not yet admitted for merge or release."
     }
   ],
   "architecture_acceptance": {
@@ -11523,10 +11649,14 @@
     "replicated_postgresql_independent_worker": "NOT_RUN",
     "cross_replica_control_and_plan_pinning": "NOT_RUN",
     "packaged_local_empty_history": "PASS",
-    "configured_key_packaged_admin": "FAIL",
-    "packaged_work_items_PR216": "FAIL",
+    "configured_key_packaged_admin": "PASS Linux119 frozen+Go; Windows startupFAIL/macOS pending",
+    "packaged_work_items_PR216": "Historical isolated failure retained; integrated119 Linux persistence/errors PASS",
     "CLI_MCP_Canvas_full_vertical": "NOT_RUN",
-    "Windows_macOS_native_product_matrix": "NOT_RUN"
+    "Windows_macOS_native_product_matrix": "Windows7c startupFAIL (ownership4PASS); macOS pending",
+    "native_Work_Items_state_transitions": "NOT_RUN",
+    "final_integration_branch": "899a483e3ac07ddaec246db4beeb8d0bf1aa4e72",
+    "large_stored_Run_history": "PASS Linux119 bothbinaries;880803840syntheticbytes;summary pages47931/2351bytes;reconnect and explicitdetailPASS",
+    "complete_Rcc_CheckAll": "PASS119: Runtime568pass10skip/Core290/Helper11/Devutils124/WorkItems238pass28skip3deselected10xfail/Toolkit25; integration-marked runtime execution excluded"
   },
   "independent_reviews": [
     {
@@ -11551,16 +11681,35 @@
     "Core_candidate": "actions_core-1.0.2-py3-none-any.whl sha256:9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80; actualPRbuild/installer",
     "Runtime_frozen_linux": "sha256:21058db9d5b817a76af52869f8fdebda2a505ba710a280293ca86e74aca58f99",
     "Runtime_Go_linux": "sha256:85ab55e3b525c6f191e2ea8b684c0e36697c7a9ee84052a26d85b3b6a8226add",
-    "native_subject": "0a811f0b+canonicalgeneratedstatic latercommittedd26fa423; Runtimeversion1.0.2/wrappercommunity-local",
+    "native_subject": "Runtime1.0.3source119b4f118bddb999ab1fc31b6edc5dd7fca36209; newer mobileproductionsource needs rebuild",
     "wheel_probe_identities": [
       "actions_core-1.0.2-py3-none-any.whl",
-      "actions_runtime-1.0.2-cp312-cp312-linux_x86_64.whl",
-      "actions_http_helper-1.0.1-py3-none-any.whl",
+      "actions_http_helper-1.0.2-py3-none-any.whl",
+      "actions_runtime-1.0.3-cp312-cp312-linux_x86_64.whl",
       "actions_work_items-0.4.4-py3-none-any.whl"
     ],
     "wheel_artifact_retention": "Temporary30-test wheelhouse was removed bypytestretention; no unsupported wheel digest claim. Native and candidateCore outputs remain inworktree.",
-    "publication": "NOT_RUN; no tag/merge/upload/replacement/deployment. Releaseevents do not usePRcandidate override."
+    "publication": "NOT_RUN; conditionally authorized after gates; no tags/merges/releases/artifact replacement performed.",
+    "candidate_versions": {
+      "actions-http-helper": "1.0.2",
+      "actions-core": "1.0.2",
+      "actions-runtime": "1.0.3",
+      "actions-work-items": "0.4.4 unchanged"
+    },
+    "publication_order": [
+      "actions-http-helper1.0.2",
+      "actions-core1.0.2",
+      "fresh clean registry wheel/worker compatibility verification",
+      "actions-runtime1.0.3+nativeGitHubActionsrelease"
+    ],
+    "latest_registry_readback": "Runtime1.0.2/Core1.0.1/Helper1.0.1 already published; no overwrite permitted",
+    "Runtime_frozen_linux_023597ab": "sha256:8748caca0e6f6b192e3d03de246f4ada8a452dd2ea56d4e45b2853eebad97ca1",
+    "Runtime_Go_linux_023597ab": "sha256:db6509e73cb352f4fad313ad71ac05f2321a0ddcd2b727e7e7c6a0efb97cd99f",
+    "Runtime_frozen_linux_119b4f": "sha256:250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3",
+    "Runtime_Go_linux_119b4f": "sha256:d50cfb188f002e80658f9ae09e92a0016cc259b0591c740ff179dd16eb1ff15f",
+    "remaining_security": "Native safe publication and full route/native authorization/security matrix unproved; no publication admission yet"
   },
-  "hosted_readback_at": "2026-10-08 19:12:15 UTC",
-  "evidence_archive": "evidence/community-20261008.zip"
+  "hosted_readback_at": "2026-10-08T21:02:03.690404+00:00",
+  "evidence_archive": "evidence/community-20261008.zip",
+  "evidence_archive_sha256": "1b2e2e525bb691299e3b58a6fa544d4ece24af6ff80dca9fa1cfc9aa38e21632"
 }
