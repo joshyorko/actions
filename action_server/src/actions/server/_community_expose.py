@@ -2,11 +2,12 @@
 Community tunnel providers for --expose functionality.
 
 This module provides open-source alternatives for exposing the action server
-to the internet. It supports multiple tunnel providers with automatic fallback:
+to the internet. Automatic selection tries installed HTTPS providers in order;
+the plain-HTTP Bore provider requires explicit provider selection.
 
 1. localhost.run - SSH-based, zero dependencies, HTTPS included
-2. bore - Rust binary, simple TCP tunneling
-3. Cloudflare Tunnel - Production-grade, requires setup
+2. Cloudflare Tunnel - quick or configured mode, requires cloudflared
+3. bore - Rust binary, plain HTTP, explicit selection only
 
 Usage:
     tunnel = TunnelManager()
@@ -28,6 +29,7 @@ from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 from typing import Optional
+from urllib.parse import urlsplit
 
 log = logging.getLogger(__name__)
 
@@ -381,6 +383,18 @@ class BaseTunnelProvider(ABC):
         pass
 
 
+def _stop_process(process: Optional[subprocess.Popen]) -> None:
+    """Reap an owned provider process once, including forced termination."""
+    if process is None or process.poll() is not None:
+        return
+    process.terminate()
+    try:
+        process.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait(timeout=5)
+
+
 class LocalhostRunProvider(BaseTunnelProvider):
     """
     localhost.run tunnel provider.
@@ -461,7 +475,7 @@ class LocalhostRunProvider(BaseTunnelProvider):
             )
 
             if line:
-                log.debug(f"localhost.run: {line.strip()}")
+                log.debug("localhost.run returned startup output.")
                 match = url_pattern.search(line)
                 if match:
                     return match.group(0).rstrip(",").rstrip()
@@ -470,12 +484,7 @@ class LocalhostRunProvider(BaseTunnelProvider):
 
     async def stop(self, tunnel: TunnelInfo) -> None:
         """Stop the SSH tunnel."""
-        if tunnel.process:
-            tunnel.process.terminate()
-            try:
-                tunnel.process.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                tunnel.process.kill()
+        _stop_process(tunnel.process)
 
 
 class BoreProvider(BaseTunnelProvider):
@@ -500,26 +509,12 @@ class BoreProvider(BaseTunnelProvider):
         return TunnelProvider.BORE
 
     def _get_bore_path(self) -> Optional[str]:
-        """Get bore binary path, downloading if necessary."""
-        # First check if bore is in PATH
-        system_bore = shutil.which("bore")
-        if system_bore:
-            return system_bore
-
-        # Try to download bore
-        try:
-            bore_path = download_bore()
-            if bore_path.exists():
-                return str(bore_path)
-        except Exception as e:
-            log.warning(f"Failed to download bore: {e}")
-
-        return None
+        """Resolve an installed bore binary; discovery never installs tools."""
+        return shutil.which("bore")
 
     def is_available(self) -> bool:
-        """Check if bore binary is available (will download if needed)."""
-        self._bore_path = self._get_bore_path()
-        return self._bore_path is not None
+        """Check for an installed binary without downloading or changing state."""
+        return shutil.which("bore") is not None
 
     async def start(self, port: int) -> TunnelInfo:
         """Start bore tunnel."""
@@ -573,7 +568,7 @@ class BoreProvider(BaseTunnelProvider):
             )
 
             if line:
-                log.debug(f"bore: {line.strip()}")
+                log.debug("bore returned startup output.")
                 match = url_pattern.search(line)
                 if match:
                     return f"http://{self.server}:{match.group(1)}"
@@ -582,12 +577,7 @@ class BoreProvider(BaseTunnelProvider):
 
     async def stop(self, tunnel: TunnelInfo) -> None:
         """Stop the bore tunnel."""
-        if tunnel.process:
-            tunnel.process.terminate()
-            try:
-                tunnel.process.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                tunnel.process.kill()
+        _stop_process(tunnel.process)
 
 
 class CloudflareProvider(BaseTunnelProvider):
@@ -611,26 +601,12 @@ class CloudflareProvider(BaseTunnelProvider):
         return TunnelProvider.CLOUDFLARE
 
     def _get_cloudflared_path(self) -> Optional[str]:
-        """Get cloudflared binary path, downloading if necessary."""
-        # First check if cloudflared is in PATH
-        system_cf = shutil.which("cloudflared")
-        if system_cf:
-            return system_cf
-
-        # Try to download cloudflared
-        try:
-            cf_path = download_cloudflared()
-            if cf_path.exists():
-                return str(cf_path)
-        except Exception as e:
-            log.warning(f"Failed to download cloudflared: {e}")
-
-        return None
+        """Resolve an installed cloudflared binary; discovery never installs tools."""
+        return shutil.which("cloudflared")
 
     def is_available(self) -> bool:
-        """Check if cloudflared is available (will download if needed)."""
-        self._cloudflared_path = self._get_cloudflared_path()
-        return self._cloudflared_path is not None
+        """Check for an installed binary without downloading or changing state."""
+        return shutil.which("cloudflared") is not None
 
     async def start(self, port: int) -> TunnelInfo:
         """Start Cloudflare tunnel."""
@@ -656,8 +632,17 @@ class CloudflareProvider(BaseTunnelProvider):
             # For pre-configured tunnels, the URL is known from config
             # User should set CLOUDFLARE_TUNNEL_URL env var
             public_url = os.environ.get("CLOUDFLARE_TUNNEL_URL", "")
-            if not public_url:
-                log.warning("CLOUDFLARE_TUNNEL_URL not set, tunnel URL unknown")
+            parsed_url = urlsplit(public_url)
+            if (
+                parsed_url.scheme != "https"
+                or not parsed_url.hostname
+                or parsed_url.username is not None
+                or parsed_url.password is not None
+                or parsed_url.query
+                or parsed_url.fragment
+            ):
+                _stop_process(process)
+                raise RuntimeError("Configured Cloudflare tunnel URL is invalid.")
         else:
             # Use quick tunnel (temporary URL)
             process = subprocess.Popen(
@@ -753,7 +738,10 @@ class CloudflareProvider(BaseTunnelProvider):
                         if line:
                             line_str = line.strip()
                             collected.append(line_str)
-                            log.debug(f"cloudflared {stream_name}: {line_str}")
+                            log.debug(
+                                "cloudflared returned startup output on %s.",
+                                stream_name,
+                            )
                             # Check for URL in this line - URL appears in stderr!
                             match = url_pattern.search(line_str)
                             if match:
@@ -767,12 +755,7 @@ class CloudflareProvider(BaseTunnelProvider):
 
     async def stop(self, tunnel: TunnelInfo) -> None:
         """Stop the Cloudflare tunnel."""
-        if tunnel.process:
-            tunnel.process.terminate()
-            try:
-                tunnel.process.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                tunnel.process.kill()
+        _stop_process(tunnel.process)
 
 
 class TunnelManager:
@@ -797,8 +780,24 @@ class TunnelManager:
         ]
 
     def get_available_providers(self) -> list[BaseTunnelProvider]:
-        """Return list of available providers on this system."""
+        """Return installed providers using passive local checks only."""
         return [p for p in self._providers if p.is_available()]
+
+    def list_providers(self) -> list[dict[str, str | bool]]:
+        """Return bounded capability data without starting providers."""
+        security = {
+            TunnelProvider.LOCALHOST_RUN: "https",
+            TunnelProvider.BORE: "http",
+            TunnelProvider.CLOUDFLARE: "https",
+        }
+        return [
+            {
+                "provider": provider.name.value,
+                "available": provider.is_available(),
+                "transport": security[provider.name],
+            }
+            for provider in self._providers
+        ]
 
     def _get_provider(
         self, provider_type: TunnelProvider
@@ -836,14 +835,19 @@ class TunnelManager:
             self.active_tunnel = await p.start(port)
             return self.active_tunnel
 
-        # Auto-detect: try providers in order
-        available = self.get_available_providers()
+        # Auto selects only HTTPS providers. Bore remains available by explicit
+        # selection because bore.pub serves plain HTTP.
+        available = [
+            candidate
+            for candidate in self.get_available_providers()
+            if candidate.name is not TunnelProvider.BORE
+        ]
         if not available:
             raise RuntimeError(
-                "No tunnel providers available. Install one of:\n"
+                "No HTTPS tunnel providers available for automatic selection. Install one of:\n"
                 "  - SSH (for localhost.run) - usually pre-installed\n"
-                "  - bore: https://github.com/ekzhang/bore\n"
-                "  - cloudflared: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/"
+                "  - cloudflared for automatic HTTPS selection: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/installation/\n"
+                "  - bore: https://github.com/ekzhang/bore (plain HTTP; explicit only)\n"
             )
 
         errors: list[tuple[str, str]] = []
@@ -854,8 +858,9 @@ class TunnelManager:
                 log.info(f"Successfully started tunnel with {provider.name.value}")  # type: ignore[union-attr]
                 return self.active_tunnel
             except Exception as e:
-                log.warning(f"Failed to start {provider.name.value}: {e}")  # type: ignore[union-attr]
-                errors.append((provider.name.value, str(e)))  # type: ignore[union-attr]
+                reason = type(e).__name__
+                log.warning("Failed to start %s (%s).", provider.name.value, reason)  # type: ignore[union-attr]
+                errors.append((provider.name.value, reason))  # type: ignore[union-attr]
 
         error_msg = "\n".join([f"  - {name}: {err}" for name, err in errors])
         raise RuntimeError(f"All tunnel providers failed:\n{error_msg}")

@@ -1,4 +1,5 @@
 import asyncio
+import subprocess
 from types import SimpleNamespace
 
 import pytest
@@ -8,6 +9,8 @@ from actions.server._community_expose import (
     TunnelInfo,
     TunnelManager,
     TunnelProvider,
+    CloudflareProvider,
+    _stop_process,
 )
 from actions.server._server import (
     _community_expose_lifespan,
@@ -57,15 +60,93 @@ def test_tunnel_manager_falls_back_after_provider_start_failure():
     failed = _FakeProvider(
         TunnelProvider.LOCALHOST_RUN, failure=RuntimeError("offline")
     )
-    working = _FakeProvider(TunnelProvider.BORE)
+    working = _FakeProvider(TunnelProvider.CLOUDFLARE)
     manager = TunnelManager()
     manager._providers = [failed, working]
 
     tunnel = asyncio.run(manager.start(8080))
 
-    assert tunnel.provider is TunnelProvider.BORE
+    assert tunnel.provider is TunnelProvider.CLOUDFLARE
     assert failed.started_ports == [8080]
     assert working.started_ports == [8080]
+
+
+def test_automatic_provider_selection_never_falls_back_to_plain_http():
+    failed_https = _FakeProvider(
+        TunnelProvider.LOCALHOST_RUN, failure=RuntimeError("offline")
+    )
+    bore = _FakeProvider(TunnelProvider.BORE)
+    manager = TunnelManager()
+    manager._providers = [failed_https, bore]
+
+    with pytest.raises(RuntimeError, match="All tunnel providers failed"):
+        asyncio.run(manager.start(8080))
+
+    assert failed_https.started_ports == [8080]
+    assert bore.started_ports == []
+
+
+def test_owned_process_stop_escalates_and_does_not_signal_twice():
+    class Process:
+        running = True
+        terminated = 0
+        killed = 0
+        waited = 0
+
+        def poll(self):
+            return None if self.running else 0
+
+        def terminate(self):
+            self.terminated += 1
+
+        def wait(self, timeout):
+            self.waited += 1
+            if self.waited == 1:
+                raise subprocess.TimeoutExpired("provider", timeout)
+            return_code = 0
+            self.running = False
+            return return_code
+
+        def kill(self):
+            self.killed += 1
+
+    process = Process()
+
+    _stop_process(process)
+    _stop_process(process)
+
+    assert process.terminated == 1
+    assert process.killed == 1
+    assert process.waited == 2
+
+
+def test_cloudflare_configured_tunnel_requires_public_https_url(monkeypatch):
+    class Process:
+        pid = 1234
+        returncode = None
+        terminated = False
+
+        def poll(self):
+            return self.returncode
+
+        def terminate(self):
+            self.terminated = True
+            self.returncode = 0
+
+        def wait(self, timeout):
+            return self.returncode
+
+    process = Process()
+    monkeypatch.setattr("shutil.which", lambda _name: "/usr/bin/cloudflared")
+    monkeypatch.setattr("subprocess.Popen", lambda *_args, **_kwargs: process)
+    monkeypatch.setenv("CLOUDFLARE_TUNNEL_TOKEN", "synthetic-secret")
+    monkeypatch.delenv("CLOUDFLARE_TUNNEL_URL", raising=False)
+
+    with pytest.raises(RuntimeError, match="URL is invalid") as error:
+        asyncio.run(CloudflareProvider().start(8080))
+
+    assert process.terminated
+    assert "synthetic-secret" not in str(error.value)
 
 
 def test_server_expose_suppresses_all_provider_failure_without_active_tunnel(
@@ -91,7 +172,27 @@ def test_server_expose_suppresses_all_provider_failure_without_active_tunnel(
 
     assert result is manager
     assert not manager.is_active
-    assert "Failed to start tunnel: All tunnel providers failed" in caplog.text
+    assert "Failed to start tunnel (RuntimeError)." in caplog.text
+    assert "offline" not in caplog.text
+
+
+def test_legacy_expose_refuses_bore_even_when_selected(monkeypatch, caplog):
+    manager = TunnelManager(preferred_provider=TunnelProvider.BORE)
+    provider = _FakeProvider(TunnelProvider.BORE)
+    manager._providers = [provider]
+    monkeypatch.setattr(
+        "actions.server._community_expose.TunnelManager", lambda **_: manager
+    )
+
+    result = asyncio.run(
+        _start_community_expose_impl(
+            8080, SimpleNamespace(expose_provider="bore"), "configured-key"
+        )
+    )
+
+    assert result is manager
+    assert provider.started_ports == []
+    assert not manager.is_active
 
 
 def test_community_expose_lifespan_awaits_manager_before_child_cleanup(monkeypatch):
