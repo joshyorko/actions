@@ -64,14 +64,19 @@ async def http_error_handler(
     request: Request,
     exc: HTTPException,
 ) -> JSONResponse:
-    return JSONResponse(
-        status_code=exc.status_code,
-        content=_to_response(
-            error_code=ErrorCode.INTERNAL_ERROR,
-            message=str(exc.detail),
-            path=str(request.url.path),
-        ),
+    content = _to_response(
+        error_code=ErrorCode.INTERNAL_ERROR,
+        message=str(exc.detail),
+        path=str(request.url.path),
     )
+    if isinstance(exc.detail, dict):
+        code = exc.detail.get("code")
+        message = exc.detail.get("message")
+        if isinstance(code, str) and isinstance(message, str):
+            # Preserve a structured machine-readable detail while retaining the
+            # existing error_code/message fields for current Runtime clients.
+            content["detail"] = {"code": code, "message": message}
+    return JSONResponse(status_code=exc.status_code, content=content)
 
 
 async def http422_error_handler(

@@ -1,5 +1,8 @@
+import importlib
 import json
+import sys
 from pathlib import Path
+from types import ModuleType
 
 import pytest
 
@@ -115,3 +118,63 @@ def test_locate_work_items_package_rejects_editable_root_without_initializer(
         ImportError, match="Unable to locate actions-work-items package"
     ):
         _work_items_import.locate_work_items_package()
+
+
+def test_failed_loader_clears_private_children_and_can_retry(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A failed relative import cannot poison a retry with stale child modules."""
+    package_root = tmp_path / "actions" / "work_items"
+    package_root.mkdir(parents=True)
+    initializer = package_root / "__init__.py"
+    worker = package_root / "worker.py"
+    initializer.write_text(
+        "from . import worker\nfrom . import missing_after_worker\n",
+        encoding="utf-8",
+    )
+    worker.write_text("VALUE = 'old'\n", encoding="utf-8")
+
+    monkeypatch.setattr(
+        _work_items_import,
+        "distribution",
+        lambda _: _Distribution(initializer),
+    )
+    monkeypatch.setattr(_work_items_import, "_cached", None)
+
+    private_prefix = f"{_work_items_import._MODULE_NAME}."
+    previous_private_modules = {
+        name: module
+        for name, module in sys.modules.items()
+        if name == _work_items_import._MODULE_NAME or name.startswith(private_prefix)
+    }
+    for name in previous_private_modules:
+        sys.modules.pop(name, None)
+
+    unrelated_name = f"{_work_items_import._MODULE_NAME}_unrelated"
+    unrelated_module = ModuleType(unrelated_name)
+    monkeypatch.setitem(sys.modules, unrelated_name, unrelated_module)
+
+    try:
+        with pytest.raises(_work_items_import.WorkItemsPackageLoadError):
+            _work_items_import.load_work_items_module()
+
+        assert _work_items_import._MODULE_NAME not in sys.modules
+        assert f"{_work_items_import._MODULE_NAME}.worker" not in sys.modules
+        assert sys.modules[unrelated_name] is unrelated_module
+
+        initializer.write_text("from .worker import VALUE\n", encoding="utf-8")
+        worker.write_text("VALUE = 'fresh value after retry'\n", encoding="utf-8")
+        importlib.invalidate_caches()
+
+        module = _work_items_import.load_work_items_module()
+
+        assert module.VALUE == "fresh value after retry"
+        assert sys.modules[f"{_work_items_import._MODULE_NAME}.worker"].VALUE == (
+            "fresh value after retry"
+        )
+        assert sys.modules[unrelated_name] is unrelated_module
+    finally:
+        for name in tuple(sys.modules):
+            if name == _work_items_import._MODULE_NAME or name.startswith(private_prefix):
+                sys.modules.pop(name, None)
+        sys.modules.update(previous_private_modules)

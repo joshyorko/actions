@@ -16,6 +16,7 @@ from PyInstaller.building.build_main import Analysis
 from PyInstaller.log import logger
 from PyInstaller.utils.hooks import (
     collect_all,
+    collect_data_files,
     collect_dynamic_libs,
     collect_submodules,
     copy_metadata,
@@ -34,6 +35,11 @@ logger.info("Collecting actions_http dependencies...")
 actions_http_datas, _actions_http_binaries, actions_http_hiddenimports = collect_all(
     "actions_http"
 )
+
+# The Work Items REST loader executes this package from an extracted filesystem
+# path under a private name. Hidden imports alone only populate the PYZ archive.
+logger.info("Collecting Work Items Python sources for the private Runtime loader...")
+work_items_datas = collect_data_files("actions.work_items", include_py_files=True)
 
 # Collect redis submodules for control-room-lite mode
 logger.info("Collecting redis submodules...")
@@ -98,6 +104,7 @@ a = Analysis(
     datas=[
         *action_server_datas,
         *actions_http_datas,
+        *work_items_datas,
     ],
     binaries=[
         *_action_server_binaries,

@@ -6,6 +6,8 @@ by producer-consumer automation workflows.
 """
 
 import logging
+import sqlite3
+from contextlib import contextmanager
 from typing import Annotated, Any
 
 import fastapi
@@ -15,7 +17,11 @@ from pydantic import BaseModel
 
 from actions.server._settings import get_settings
 
-from ._work_items_import import load_work_items_types
+from ._work_items_import import (
+    WorkItemsPackageLoadError,
+    WorkItemsPackageUnavailableError,
+    load_work_items_types,
+)
 from ._work_items_paths import validate_attachment_name
 
 log = logging.getLogger(__name__)
@@ -75,6 +81,33 @@ class QueueStatsResponse(BaseModel):
 _adapter = None
 
 
+def _support_error(code: str, message: str) -> fastapi.HTTPException:
+    return fastapi.HTTPException(
+        status_code=503,
+        detail={"code": code, "message": message},
+    )
+
+
+def _storage_unavailable() -> fastapi.HTTPException:
+    return _support_error(
+        "work_items_storage_unavailable",
+        "Work Items could not access local Runtime storage. Check the Runtime's local storage, then retry.",
+    )
+
+
+@contextmanager
+def _map_storage_errors():
+    """Translate expected SQLite/filesystem failures without exposing internals."""
+    try:
+        yield
+    except (FileExistsError, FileNotFoundError):
+        # Attachment conflicts and missing files are normal API 409/404 responses.
+        raise
+    except (sqlite3.Error, OSError) as error:
+        log.exception("Work Items local Runtime storage operation failed")
+        raise _storage_unavailable() from error
+
+
 def _get_adapter():
     """
     Get or create the SQLite adapter for work items.
@@ -87,31 +120,38 @@ def _get_adapter():
 
     try:
         SQLiteAdapter, _ = load_work_items_types()
-    except ImportError:
-        log.warning("actions-work-items package not installed, work items API disabled")
-        return None
+    except WorkItemsPackageUnavailableError as error:
+        log.warning("Work Items source is unavailable in this Runtime")
+        raise _support_error(
+            "work_items_runtime_unavailable",
+            "Work Items support is missing from this Runtime. Update or reinstall the Runtime, then restart it.",
+        ) from error
+    except (WorkItemsPackageLoadError, ImportError) as error:
+        log.exception("Work Items source could not be loaded by this Runtime")
+        raise _support_error(
+            "work_items_load_failed",
+            "The Runtime found Work Items support but could not load it. Update or reinstall the Runtime, then restart it.",
+        ) from error
 
     settings = get_settings()
     db_path = settings.datadir / "workitems.db"
     files_dir = settings.datadir / "work_item_files"
 
-    _adapter = SQLiteAdapter(
-        db_path=str(db_path),
-        queue_name="default",
-        files_dir=str(files_dir),
-    )
+    try:
+        _adapter = SQLiteAdapter(
+            db_path=str(db_path),
+            queue_name="default",
+            files_dir=str(files_dir),
+        )
+    except (sqlite3.Error, OSError, ValueError) as error:
+        log.exception("Work Items local Runtime storage could not be initialized")
+        raise _storage_unavailable() from error
     return _adapter
 
 
 def _check_adapter():
     """Get adapter or raise 503 if not available."""
-    adapter = _get_adapter()
-    if adapter is None:
-        raise fastapi.HTTPException(
-            status_code=503,
-            detail="Work items not available - actions-work-items package not installed",
-        )
-    return adapter
+    return _get_adapter()
 
 
 @work_items_api_router.post("", response_model=WorkItemResponse)
@@ -123,12 +163,13 @@ async def create_work_item(request: WorkItemCreate):
     """
     adapter = _check_adapter()
 
-    item_id = adapter.seed_input(
-        payload=request.payload,
-        queue_name=request.queue_name,
-    )
+    with _map_storage_errors():
+        item_id = adapter.seed_input(
+            payload=request.payload,
+            queue_name=request.queue_name,
+        )
 
-    item = adapter.get_item(item_id)
+        item = adapter.get_item(item_id)
     return WorkItemResponse(
         id=item["id"],
         queue_name=item["queue_name"],
@@ -171,11 +212,16 @@ async def list_work_items(
                 status_code=400, detail=f"Invalid state: {state}"
             )
 
-    items = adapter.list_items(
-        queue_name=queue_name,
-        state=state_enum,
-        limit=limit,
-    )
+    try:
+        with _map_storage_errors():
+            items = adapter.list_items(
+                queue_name=queue_name,
+                state=state_enum,
+                limit=limit,
+            )
+    except ValueError as error:
+        log.exception("Work Items list contains invalid persisted data")
+        raise _storage_unavailable() from error
 
     response_items = [
         WorkItemResponse(
@@ -205,7 +251,8 @@ async def get_queue_stats(queue_name: str | None = None):
     adapter = _check_adapter()
 
     queue = queue_name or "default"
-    stats = adapter.get_queue_stats(queue_name=queue)
+    with _map_storage_errors():
+        stats = adapter.get_queue_stats(queue_name=queue)
 
     return QueueStatsResponse(
         queue_name=queue,
@@ -219,11 +266,15 @@ async def get_work_item(item_id: str):
     adapter = _check_adapter()
 
     try:
-        item = adapter.get_item(item_id)
-    except ValueError:
-        raise fastapi.HTTPException(
-            status_code=404, detail=f"Work item not found: {item_id}"
-        )
+        with _map_storage_errors():
+            item = adapter.get_item(item_id)
+    except ValueError as error:
+        if str(error) == f"Work item not found: {item_id}":
+            raise fastapi.HTTPException(
+                status_code=404, detail=f"Work item not found: {item_id}"
+            ) from error
+        log.exception("Work Items detail contains invalid persisted data")
+        raise _storage_unavailable() from error
 
     return WorkItemResponse(
         id=item["id"],
@@ -245,7 +296,8 @@ async def delete_work_item(item_id: str):
     adapter = _check_adapter()
 
     try:
-        adapter.delete_item(item_id)
+        with _map_storage_errors():
+            adapter.delete_item(item_id)
     except ValueError:
         raise fastapi.HTTPException(
             status_code=404, detail=f"Work item not found: {item_id}"
@@ -265,7 +317,8 @@ async def upload_file(
     adapter = _check_adapter()
 
     try:
-        adapter.get_item(item_id)
+        with _map_storage_errors():
+            adapter.get_item(item_id)
     except ValueError:
         raise fastapi.HTTPException(
             status_code=404, detail=f"Work item not found: {item_id}"
@@ -275,12 +328,13 @@ async def upload_file(
     try:
         validate_attachment_name(name)
         content = await file.read()
-        adapter.add_file(
-            item_id=item_id,
-            name=name,
-            original_name=name,
-            content=content,
-        )
+        with _map_storage_errors():
+            adapter.add_file(
+                item_id=item_id,
+                name=name,
+                original_name=name,
+                content=content,
+            )
     except ValueError:
         raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
     except FileExistsError:
@@ -302,13 +356,15 @@ async def list_files(item_id: str):
     adapter = _check_adapter()
 
     try:
-        adapter.get_item(item_id)
+        with _map_storage_errors():
+            adapter.get_item(item_id)
     except ValueError:
         raise fastapi.HTTPException(
             status_code=404, detail=f"Work item not found: {item_id}"
         )
 
-    files = adapter.list_files(item_id)
+    with _map_storage_errors():
+        files = adapter.list_files(item_id)
     return {"item_id": item_id, "files": files}
 
 
@@ -323,7 +379,8 @@ async def download_file(item_id: str, filename: str):
         raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
 
     try:
-        content = adapter.get_file(item_id, filename)
+        with _map_storage_errors():
+            content = adapter.get_file(item_id, filename)
     except (ValueError, FileNotFoundError):
         raise fastapi.HTTPException(
             status_code=404, detail=f"File not found: {filename} in work item {item_id}"
@@ -349,14 +406,16 @@ async def delete_file(item_id: str, filename: str):
         raise fastapi.HTTPException(status_code=400, detail="Invalid attachment name")
 
     try:
-        adapter.get_item(item_id)
+        with _map_storage_errors():
+            adapter.get_item(item_id)
     except ValueError:
         raise fastapi.HTTPException(
             status_code=404, detail=f"Work item not found: {item_id}"
         )
 
     try:
-        adapter.remove_file(item_id, filename)
+        with _map_storage_errors():
+            adapter.remove_file(item_id, filename)
     except FileNotFoundError:
         raise fastapi.HTTPException(
             status_code=404, detail=f"File not found: {filename} in work item {item_id}"

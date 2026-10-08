@@ -120,6 +120,18 @@ The `pypi` environment is a workflow reference only. Its approval and protection
 
 Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader accepts only its PEP 610 editable local-file `direct_url.json` root and resolves a contained `src/actions/work_items/__init__.py` or `actions/work_items/__init__.py`; it never consults project import paths, keeping shadow packages from controlling the REST adapter path.
 
+Native packaging must retain that filesystem source tree. The Action Server
+PyInstaller spec uses `collect_data_files('actions.work_items', include_py_files=True)`
+because hidden imports supply module names in the PYZ archive, not the initializer
+path required by the private loader. Collection stays within the child package;
+`actions/__init__.py` remains Core-owned. The management API stores its local
+SQLite database at the Runtime's `datadir/workitems.db`. Missing Runtime sources
+are not repaired by adding a dependency to an RCC action's `package.yaml`.
+The packaged Work Items smoke test uses a disposable datadir and exercises
+create, list, detail, persisted completion, and corrupt-payload responses through
+the actual executable. An unwrapped PyInstaller pass does not establish wrapper
+extraction, another operating system, or the embedded browser UI.
+
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
 From the repository root when Poetry is unavailable for diagnostic-only host checks:
@@ -142,6 +154,20 @@ Ruff's configured `UP` fixes in `work-items/src/actions/work_items` are compatib
 - Exact JSON payload round trips and lifecycle exception mapping.
 - FileAdapter queue/state filtering, restart behavior, stable attachment ownership, and legacy migration.
 - Action Server datadir/queue isolation, triggers, scheduler, process environment clearing, and absent-package behavior.
+
+Work Items HTTP error tests exercise the Runtime's registered exception handler,
+not only a bare router. Coded exceptions retain structured `detail.code` and
+`detail.message` alongside legacy `error_code` and `message`; the UI prefers the
+structured fields. Missing Runtime support, package-load failure, and corrupt or
+unavailable local storage remain distinct. Malformed stored payloads return a
+bounded `work_items_storage_unavailable` error for detail and list, rather than
+404 or a successful empty queue. A genuinely missing item still returns 404.
+
+A failed private import removes the root and its `_actions_server_work_items.*`
+children, while preserving adjacent names such as `_actions_server_work_items_extra`.
+Retry tests replace the failed package source and prove that stale child modules
+are not reused. `State.DONE.value` is `COMPLETED`; the UI accepts that wire value
+and renders the completed state without changing the backend contract.
 
 ## Compatibility Contract Inventory
 
