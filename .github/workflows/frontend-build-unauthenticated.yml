@@ -3,14 +3,16 @@ name: Action Server Build (Unauthenticated)
 on:
   pull_request:
     paths:
-      - 'action_server/frontend/**'
+      - 'action_server/**'
+      - 'work-items/**'
       - '.github/workflows/frontend-build-unauthenticated.yml'
   workflow_dispatch:
   push:
     branches:
       - community
     paths:
-      - 'action_server/frontend/**'
+      - 'action_server/**'
+      - 'work-items/**'
 
 defaults:
   run:
@@ -20,6 +22,7 @@ jobs:
   build-external:
     name: Build Action Server binary without credentials
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -43,7 +46,6 @@ jobs:
         run: |
           if [ -f ~/.npmrc ]; then
             echo "Error: .npmrc file found in home directory"
-            cat ~/.npmrc
             exit 1
           fi
           echo "[OK] No .npmrc file found"
@@ -100,10 +102,25 @@ jobs:
           echo "[OK] Binary built successfully"
         shell: bash
       
-      - name: Test binary
-        run: |
-          ./dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }} version
-        shell: bash
+      - name: Install Chromium for native acceptance
+        working-directory: action_server/frontend
+        run: npx playwright install chromium
+
+      - name: Verify frozen and Go-wrapper browser and storage behavior
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run python
+          scripts/verify_native_acceptance.py
+          --source-sha "${{ github.sha }}"
+          --receipt output/native-acceptance.json
+
+      - name: Upload native acceptance receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-acceptance-${{ matrix.os }}-${{ github.sha }}
+          path: action_server/output/native-acceptance.json
+          if-no-files-found: ignore
+          retention-days: 7
       
       - name: Upload binary artifact
         uses: actions/upload-artifact@v4

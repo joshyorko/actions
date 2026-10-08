@@ -275,3 +275,41 @@ labels programmatically. Use unique control IDs per dialog, announce invalid
 JSON as an alert, associate the error with the payload field, and clear the
 invalid state when the user edits it. Verify those semantics through accessible
 roles and real packaged-browser creation rather than placeholder-only selectors.
+
+
+## Native browser and persistence acceptance
+
+The credential-free native build workflow runs
+`python scripts/verify_native_acceptance.py --source-sha <built-commit-sha>
+--receipt output/native-acceptance.json` through its prepared Poetry environment
+after building both `dist/action-server/action-server` and
+`dist/final/action-server` (with `.exe` on Windows). Install the declared
+Playwright browser from `action_server/frontend` with
+`npx playwright install chromium`. The workflow runs on Linux, macOS and Windows;
+only a completed PASS receipt from each platform establishes that platform cell.
+
+The harness opens the actual embedded UI in Chromium, signs in using a synthetic
+key, verifies a private HttpOnly cookie and authenticated WebSocket echo, and
+creates, lists and opens a synthetic Work Item through the UI before signing
+out. An intercepted browser HTTP 403 must fail the positive response contract
+before the real flow runs, so an auth error cannot silently count as acceptance.
+The native process then restarts against the same isolated data directory and
+must recover the created PENDING item. Empty queues return 200, missing IDs
+return 404, and deliberate corruption of the stopped synthetic SQLite store
+must return structured `work_items_storage_unavailable` HTTP 503. A cwd
+`actions.py` writes an execution marker if loaded; its absence verifies that
+project shadowing did not replace bundled support.
+
+Every run uses temporary synthetic project/storage directories and owns its
+Runtime/browser process trees, with startup, browser and cleanup deadlines.
+Temporary payloads and process logs are removed; the retained JSON receipt has
+build SHA, platform, architecture, executable SHA-256 hashes, actual package and
+browser versions, and the checks completed. Supply the SHA that built the
+binaries when probing existing artifacts; the harness checkout SHA is not
+artifact provenance. Optional `--frozen`, `--go-wrapper`, `--node` and
+`--browser-executable` flags support existing build artifacts/toolchains.
+
+This harness proves creation and restart persistence, not worker-driven Work
+Item state transitions, attachment behavior, accessibility or other browsers.
+Those cells remain separate acceptance requirements. A workflow build/version
+check alone is not native Work Items acceptance.
