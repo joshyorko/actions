@@ -96,24 +96,26 @@ The supported entry point is a single local Action Server: install `actions-runt
 | `actions-http-helper` | 1.0.1 |
 | `actions-work-items` | 0.4.4 |
 
-Native Action Server release **1.0.1** is also available. Its published Linux, macOS arm64, and Windows x64 binaries are marked unsigned; Linux startup and a representative Action were verified. The current local native acceptance run covers frozen startup, browser sign-in, WebSocket behavior, Work Items, and persistence on the tested host. Windows startup still has an unexplained failure and macOS execution is queued, so native acceptance across all three operating systems is incomplete. PyPI and native release versions are tracked separately.
+Native Action Server release **1.0.1** is also available. Its published Linux, macOS arm64, and Windows x64 binaries are marked unsigned. Linux startup and a representative Action were verified; post-download execution on macOS and Windows was not verified for that release. PyPI and native release versions are tracked separately.
 
 ### Release candidates
 
 The next package set under verification is HTTP Helper 1.0.2, Core 1.0.2, and Runtime 1.0.3. These versions are **not published**. The intended dependency order is to publish and verify HTTP Helper first, then Core, then Runtime; dependent releases must resolve published registry versions. A candidate wheel or a passing pull request does not mean a release is available.
 
+The local Runtime 1.0.3 candidate at [`119b4f1`](https://github.com/joshyorko/actions/commit/119b4f118bddb999ab1fc31b6edc5dd7fca36209) passed frozen and Go-wrapper checks plus browser, sign-in, WebSocket, Work Items, and persistence checks on the tested host. Windows startup remains unexplained and macOS execution is queued. This is candidate evidence and does not change the published native 1.0.1 status.
+
 ### Proposed milestones
 
-1. **Close the local native support boundary.** Resolve Windows startup and complete macOS execution evidence for the packaged server. Keep source tests, frozen checks, and per-platform runtime evidence distinct.
-2. **Prove durable execution.** Establish persisted Run and Attempt ownership, cancellation, and artifact behavior across process restarts and independent Runtime instances before describing distributed execution as supported.
-3. **Prove the adapter boundary.** Complete the RCC lifecycle and conformance evidence, then run the same contract through a genuinely different runtime adapter. Until then, RCC is the only demonstrated adapter and the generic adapter design remains proposed.
-4. **Expand placement and product workflows.** Only after those foundations, validate independent workers, Canvas and workflow capabilities against the same package and execution contracts.
+1. **Close the local native support boundary.** Entry: build an identified candidate from an exact source commit for each supported OS. Exit: install or run each platform artifact and verify version, startup, MCP, and a representative Action; record browser and persistence checks separately. Resolve Windows startup and complete macOS execution evidence before claiming full native acceptance.
+2. **Prove durable execution.** Entry: agree on persisted Run and Attempt ownership and shared database contracts. Exit: demonstrate execution, cancellation, and artifact behavior across process restart and independent Runtime instances before describing distributed execution as supported.
+3. **Prove the adapter boundary.** Entry: complete the RCC lifecycle contract and define shared adapter conformance cases. Exit: pass those cases with RCC and a genuinely different adapter before calling the adapter boundary generic.
+4. **Expand placement and product workflows.** Entry: accept the durable execution and adapter proofs. Exit: validate independent workers, Canvas, and workflow capabilities against the same package and execution contracts before describing those placements or product paths as supported.
 
-These are evidence gates, not release dates or promises. The broader architecture is tracked in [issue #82](https://github.com/joshyorko/actions/issues/82); the public roadmap gap and compatibility policy are tracked in [issue #155](https://github.com/joshyorko/actions/issues/155). Distributed Runs, a second adapter, Canvas foundry, and cross-placement execution are not established by the roadmap or by draft designs.
+These are evidence gates, not release dates or promises. Review the roadmap when a candidate is published, a milestone's exit evidence is accepted, or a material blocker changes; no target dates are assigned. The broader architecture is tracked in [issue #82](https://github.com/joshyorko/actions/issues/82); the public roadmap gap and compatibility policy are tracked in [issue #155](https://github.com/joshyorko/actions/issues/155). Distributed Runs, a second adapter, Canvas foundry, and cross-placement execution are not established by the roadmap or by draft designs.
 
 ### Compatibility and releases
 
-Published distributions follow their own version and dependency contracts. Use released package versions and the repository's published templates; templates change only after required dependencies are available. The `2026-07-28` MCP protocol is the current advertised protocol version. Compatibility with future runtime adapters, distributed deployments, or draft architecture contracts is not implied. Release notes and published artifacts are the source of truth for each released change; candidates remain candidates until their package and artifact publication is verified.
+Published distributions follow their own version and dependency contracts. Published templates resolve published dependencies; candidate templates may pin candidate dependencies for validation, but remain unreleased until those dependencies are published. The `2026-07-28` MCP protocol is the current advertised protocol version. Compatibility with future runtime adapters, distributed deployments, or draft architecture contracts is not implied. See the [Actions Runtime release notes](./action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md) for Runtime release history and candidate notes; published artifacts remain the source of truth for what users can install.
 
 ---
 
