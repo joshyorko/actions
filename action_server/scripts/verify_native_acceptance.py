@@ -25,7 +25,7 @@ import tomllib
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 PACKAGE = Path(__file__).resolve().parents[1]
 BROWSER_SCRIPT = PACKAGE / "frontend" / "scripts" / "native-browser-acceptance.mjs"
@@ -48,6 +48,23 @@ def digest(path: Path) -> str:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             result.update(chunk)
     return result.hexdigest()
+
+
+def _wait_for_job_drain(
+    active_process_count: Callable[[], int], *, timeout: float
+) -> None:
+    """Wait a bounded time for every process assigned to a Windows Job to exit."""
+    require(0 < timeout <= 300, "windows_job_drain_timeout_range")
+    deadline = time.monotonic() + timeout
+    while True:
+        active = active_process_count()
+        require(isinstance(active, int) and active >= 0, "windows_job_process_count")
+        if active == 0:
+            return
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise AcceptanceFailure("windows_job_drain_timeout")
+        time.sleep(min(0.05, remaining))
 
 
 class _WindowsJob:
@@ -93,6 +110,18 @@ class _WindowsJob:
                 ("PeakJobMemoryUsed", ctypes.c_size_t),
             ]
 
+        class BasicAccounting(ctypes.Structure):
+            _fields_ = [
+                ("TotalUserTime", ctypes.c_longlong),
+                ("TotalKernelTime", ctypes.c_longlong),
+                ("ThisPeriodTotalUserTime", ctypes.c_longlong),
+                ("ThisPeriodTotalKernelTime", ctypes.c_longlong),
+                ("TotalPageFaultCount", wintypes.DWORD),
+                ("TotalProcesses", wintypes.DWORD),
+                ("ActiveProcesses", wintypes.DWORD),
+                ("TotalTerminatedProcesses", wintypes.DWORD),
+            ]
+
         kernel = getattr(ctypes, "WinDLL")("kernel32", use_last_error=True)
         kernel.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
         kernel.CreateJobObjectW.restype = wintypes.HANDLE
@@ -109,7 +138,19 @@ class _WindowsJob:
         kernel.AssignProcessToJobObject.restype = wintypes.BOOL
         kernel.CloseHandle.argtypes = [wintypes.HANDLE]
         kernel.CloseHandle.restype = wintypes.BOOL
+        kernel.TerminateJobObject.argtypes = [wintypes.HANDLE, wintypes.UINT]
+        kernel.TerminateJobObject.restype = wintypes.BOOL
+        kernel.QueryInformationJobObject.argtypes = [
+            wintypes.HANDLE,
+            ctypes.c_int,
+            ctypes.c_void_p,
+            wintypes.DWORD,
+            ctypes.POINTER(wintypes.DWORD),
+        ]
+        kernel.QueryInformationJobObject.restype = wintypes.BOOL
         self._kernel = kernel
+        self._ctypes = ctypes
+        self._basic_accounting = BasicAccounting
         self._handle = kernel.CreateJobObjectW(None, None)
         require(bool(self._handle), "windows_job_create")
         limits = ExtendedLimits()
@@ -136,6 +177,27 @@ class _WindowsJob:
         if self._handle:
             handle, self._handle = self._handle, None
             require(bool(self._kernel.CloseHandle(handle)), "windows_job_close")
+
+    def active_process_count(self) -> int:
+        require(bool(self._handle), "windows_job_closed")
+        result = self._basic_accounting()
+        if not self._kernel.QueryInformationJobObject(
+            self._handle,
+            1,  # JobObjectBasicAccountingInformation
+            self._ctypes.byref(result),
+            self._ctypes.sizeof(result),
+            None,
+        ):
+            raise AcceptanceFailure("windows_job_query")
+        return result.ActiveProcesses
+
+    def terminate_and_wait(self, *, timeout: float = 10) -> None:
+        """Terminate owned processes and observe the Job reaching zero before cleanup."""
+        if self.active_process_count() == 0:
+            return
+        if not self._kernel.TerminateJobObject(self._handle, 1):
+            raise AcceptanceFailure("windows_job_terminate")
+        _wait_for_job_drain(self.active_process_count, timeout=timeout)
 
 
 def _owned_child(command: list[str]) -> int:
@@ -195,8 +257,12 @@ def owned_process(command: list[str], *, cwd: Path, env: dict[str, str], **kwarg
             yield process
         finally:
             try:
-                # Close even if the wrapper/command exited: descendants stay in Job.
-                job.close()
+                # Kill-on-job-close is asynchronous: wait for the full tree before
+                # TemporaryDirectory and log cleanup can remove their resources.
+                try:
+                    job.terminate_and_wait(timeout=10)
+                finally:
+                    job.close()
             finally:
                 if process is not None:
                     try:

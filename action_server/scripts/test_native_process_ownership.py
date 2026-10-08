@@ -5,12 +5,52 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 import verify_native_acceptance as native
 
 
 class OwnedProcessTests(unittest.TestCase):
+    def test_job_drain_waits_until_query_reports_no_active_processes(self):
+        active_counts = iter([2, 1, 0])
+
+        class Clock:
+            now = 0.0
+
+            @classmethod
+            def monotonic(cls):
+                return cls.now
+
+            @classmethod
+            def sleep(cls, duration):
+                cls.now += duration
+
+        with mock.patch.object(native, "time", Clock):
+            native._wait_for_job_drain(lambda: next(active_counts), timeout=1)
+
+        self.assertEqual(Clock.now, 0.1)
+
+    def test_job_drain_fails_closed_at_the_bounded_timeout(self):
+        class Clock:
+            now = 0.0
+
+            @classmethod
+            def monotonic(cls):
+                return cls.now
+
+            @classmethod
+            def sleep(cls, duration):
+                cls.now += duration
+
+        with mock.patch.object(native, "time", Clock):
+            with self.assertRaisesRegex(
+                native.AcceptanceFailure, "windows_job_drain_timeout"
+            ):
+                native._wait_for_job_drain(lambda: 1, timeout=0.1)
+
+        self.assertEqual(Clock.now, 0.1)
+
     def test_child_gate_preserves_following_stdin_bytes(self):
         payload = b'{"synthetic":"browser-input"}'
         result = subprocess.run(
@@ -153,7 +193,7 @@ class OwnedProcessTests(unittest.TestCase):
                 junction.rmdir()
 
     @unittest.skipUnless(os.name == "nt", "Requires real Windows Job Objects")
-    def test_job_closes_descendant_after_its_leader_exits(self):
+    def test_job_drains_descendant_handle_before_owned_process_returns(self):
         import ctypes
         from ctypes import wintypes
 
@@ -171,7 +211,10 @@ class OwnedProcessTests(unittest.TestCase):
             root = Path(directory)
             leader = (
                 "import subprocess,sys; from pathlib import Path; "
-                "child=subprocess.Popen([sys.executable,'-c','import time; time.sleep(60)'],"
+                "child=subprocess.Popen([sys.executable,'-c',"
+                '\'import time; from pathlib import Path; f=Path("held.txt").open("w"); '
+                'f.write("held"); f.flush(); Path("descendant.ready").write_text("ready"); '
+                "time.sleep(60)'],"
                 "stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL); "
                 "Path('descendant.pid').write_text(str(child.pid))"
             )
@@ -185,11 +228,16 @@ class OwnedProcessTests(unittest.TestCase):
                 ) as process:
                     self.assertEqual(process.wait(timeout=10), 0)
                     pid = int((root / "descendant.pid").read_text())
+                    deadline = native.time.monotonic() + 5
+                    while not (root / "descendant.ready").exists():
+                        self.assertLess(native.time.monotonic(), deadline)
+                        native.time.sleep(0.01)
                     # Hold the exact process handle so PID reuse cannot affect proof.
                     handle = kernel.OpenProcess(0x00100000 | 0x0001, False, pid)
                     self.assertTrue(handle)
                     self.assertEqual(kernel.WaitForSingleObject(handle, 0), 258)
-                self.assertEqual(kernel.WaitForSingleObject(handle, 5000), 0)
+                self.assertEqual(kernel.WaitForSingleObject(handle, 0), 0)
+                (root / "held.txt").unlink()
             finally:
                 if handle:
                     # Clean up even when the old, faulty implementation fails this test.
