@@ -1,5 +1,6 @@
 import asyncio
 import subprocess
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -264,10 +265,10 @@ def test_cloudflare_token_is_passed_through_child_environment(monkeypatch, caplo
 def test_cloudflare_pipe_reader_does_not_depend_on_select(monkeypatch):
     class Stream:
         def __init__(self, lines):
-            self.lines = iter(lines)
+            self.chunks = iter(line.encode() for line in lines)
 
-        def readline(self):
-            return next(self.lines, "")
+        def read1(self, _size):
+            return next(self.chunks, b"")
 
     class Process:
         stdout = Stream([])
@@ -297,9 +298,9 @@ def test_cloudflare_reader_timeout_reaps_process_and_unblocks_pipes(monkeypatch)
             self.closed = False
             self.release = threading.Event()
 
-        def readline(self):
+        def read1(self, _size):
             self.release.wait()
-            return ""
+            return b""
 
         def close(self):
             self.closed = True
@@ -341,6 +342,29 @@ def test_cloudflare_reader_timeout_reaps_process_and_unblocks_pipes(monkeypatch)
 
     assert not process.running
     assert process.stdout.closed and process.stderr.closed
+
+
+def test_cloudflare_reader_is_async_and_cancellable_with_newline_free_output():
+    code = "import os; data = b'x' * 65536; exec('while True: os.write(1, data)')"
+    process = subprocess.Popen(
+        [sys.executable, "-c", code],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        bufsize=-1,
+    )
+    provider = CloudflareProvider()
+
+    async def exercise_reader():
+        reader = asyncio.create_task(provider._wait_for_url(process, timeout=10))
+        await asyncio.sleep(0.05)
+        assert process.poll() is None
+        reader.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await reader
+        assert process.poll() is not None
+        assert all(not thread.is_alive() for thread in process._cloudflared_readers)
+
+    asyncio.run(exercise_reader())
 
 
 def test_server_expose_suppresses_all_provider_failure_without_active_tunnel(

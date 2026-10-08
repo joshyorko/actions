@@ -390,6 +390,9 @@ def _stop_process(process: Optional[subprocess.Popen]) -> None:
     """Reap an owned provider process once, including forced termination."""
     if process is None:
         return
+    reader_cancel = getattr(process, "_cloudflared_reader_cancel", None)
+    if reader_cancel is not None:
+        reader_cancel.set()
     if process.poll() is None:
         process.terminate()
         try:
@@ -399,7 +402,12 @@ def _stop_process(process: Optional[subprocess.Popen]) -> None:
             process.wait(timeout=5)
     for stream in (getattr(process, "stdout", None), getattr(process, "stderr", None)):
         if stream is not None:
-            stream.close()
+            try:
+                stream.close()
+            except (OSError, ValueError):
+                pass
+    for reader in getattr(process, "_cloudflared_readers", ()):
+        reader.join(timeout=1)
 
 
 class LocalhostRunProvider(BaseTunnelProvider):
@@ -652,7 +660,6 @@ class CloudflareProvider(BaseTunnelProvider):
                 [self._cloudflared_path, "tunnel", "run"],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,  # Capture stderr separately
-                text=True,
                 bufsize=1,
                 env=child_env,
             )
@@ -678,8 +685,7 @@ class CloudflareProvider(BaseTunnelProvider):
                 [self._cloudflared_path, "tunnel", "--url", f"http://localhost:{port}"],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,  # Capture stderr separately for error reporting
-                text=True,
-                bufsize=1,
+                bufsize=-1,
             )
             try:
                 public_url = await self._wait_for_url(process)
@@ -700,10 +706,11 @@ class CloudflareProvider(BaseTunnelProvider):
         """Wait for cloudflared to output the public URL."""
         # Match cloudflared quick tunnel URLs like https://random-words.trycloudflare.com
         # Exclude www.cloudflare.com which appears in privacy policy messages
-        url_pattern = re.compile(r"https://(?!www\.)[a-zA-Z0-9-]+\.trycloudflare\.com")
+        url_pattern = re.compile(rb"https://(?!www\.)[a-zA-Z0-9-]+\.trycloudflare\.com")
 
+        chunk_size = 4096
         deadline = time.monotonic() + timeout
-        output: queue.Queue[tuple[str, str | None]] = queue.Queue(maxsize=128)
+        output: queue.Queue[tuple[str, bytes | None]] = queue.Queue(maxsize=64)
         cancel_readers = threading.Event()
         url_found = threading.Event()
         streams = (
@@ -713,14 +720,20 @@ class CloudflareProvider(BaseTunnelProvider):
 
         def read_stream(stream, stream_name: str) -> None:
             try:
-                for line in iter(stream.readline, ""):
+                while not cancel_readers.is_set():
+                    try:
+                        chunk = stream.read1(chunk_size)
+                    except (OSError, ValueError):
+                        break
+                    if not chunk:
+                        break
                     if url_found.is_set():
                         continue
                     while True:
                         if cancel_readers.is_set():
                             return
                         try:
-                            output.put((stream_name, line), timeout=0.1)
+                            output.put((stream_name, chunk), timeout=0.1)
                             break
                         except queue.Full:
                             continue
@@ -732,18 +745,22 @@ class CloudflareProvider(BaseTunnelProvider):
                     except queue.Full:
                         continue
 
-        active_streams = []
+        readers = []
         for stream, stream_name in streams:
             if stream is not None:
-                active_streams.append(stream_name)
-                threading.Thread(
+                reader = threading.Thread(
                     target=read_stream,
                     args=(stream, stream_name),
                     name=f"cloudflared-{stream_name}",
                     daemon=True,
-                ).start()
+                )
+                readers.append(reader)
+                reader.start()
 
-        completed_streams: set[str] = set()
+        setattr(process, "_cloudflared_reader_cancel", cancel_readers)
+        setattr(process, "_cloudflared_readers", readers)
+
+        pending = b""
 
         try:
             while True:
@@ -753,26 +770,26 @@ class CloudflareProvider(BaseTunnelProvider):
                         f"Timed out waiting for Cloudflare URL after {timeout}s."
                     )
                 try:
-                    stream_name, line = output.get(timeout=min(0.1, remaining))
+                    stream_name, chunk = output.get_nowait()
                 except queue.Empty:
-                    if process.poll() is not None and len(completed_streams) == len(
-                        active_streams
-                    ):
+                    if all(not reader.is_alive() for reader in readers):
                         raise RuntimeError(
                             "cloudflared exited before a public URL was observed."
                         )
+                    await asyncio.sleep(min(0.025, remaining))
                     continue
 
-                if line is None:
-                    completed_streams.add(stream_name)
+                if chunk is None:
                     continue
-                match = url_pattern.search(line.strip())
+                match = url_pattern.search(pending + chunk)
                 if match:
                     url_found.set()
                     log.debug("cloudflared returned startup output on %s.", stream_name)
-                    return match.group(0)
+                    return match.group(0).decode("ascii")
+                pending = (pending + chunk)[-512:]
         except BaseException:
             cancel_readers.set()
+            await asyncio.to_thread(_stop_process, process)
             raise
 
     async def stop(self, tunnel: TunnelInfo) -> None:
