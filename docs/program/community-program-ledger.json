@@ -10,8 +10,8 @@
     "verified_review_ready": 0,
     "unfinished": 54,
     "not_started": 33,
-    "in_progress": 6,
-    "implemented_unverified": 15,
+    "in_progress": 5,
+    "implemented_unverified": 16,
     "blocked": 0
   },
   "evidence_states": [
@@ -95,7 +95,7 @@
         196
       ],
       "criticality": "P1",
-      "next_bounded_action": "Implement passive discovery and explicit owned lifecycle with deterministic secure selection; prove edge identity and packaging before acceptance.",
+      "next_bounded_action": "Restore and verify preserved two-file tunnel patch on c789, independently review, retain edge identity/auth readiness gate.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -121,7 +121,8 @@
       },
       "independent_review_status": "NOT_RUN",
       "blockers": [
-        "Public-edge identity/authentication not proved; SSH host-key checking disabled; Cloudflare token argv; Windows quick-provider pipe reader; compatibility controller equivalence missing."
+        "Public-edge identity/authentication and legacycontroller equivalence unproved",
+        "c789 reviewer finds cross-streamURL synthesis, fullqueue cancellation starvation and readerjoin outcome gaps; two-file UNVERIFIED successor patch preserved, not committed"
       ],
       "disposition": "RETAIN_CONTRACT_EXECUTE_IN_DEPENDENCY_ORDER"
     },
@@ -205,9 +206,9 @@
       },
       "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
         "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
-        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived",
+        "Actual91d55 Windows immediate descendant exit regression fails258!=0; Job activecountzero insufficient. Native browser/history not run after failing ownership gate."
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
       "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
@@ -446,9 +447,9 @@
       },
       "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
         "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
-        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived",
+        "Actual91d55 Windows immediate descendant exit regression fails258!=0; Job activecountzero insufficient. Native browser/history not run after failing ownership gate."
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
       "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
@@ -544,13 +545,13 @@
       },
       "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
         "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
-        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived",
+        "Actual91d55 Windows immediate descendant exit regression fails258!=0; Job activecountzero insufficient. Native browser/history not run after failing ownership gate."
       ],
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
       "integration_pr": 221,
-      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
+      "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS. Dakota Linux frozen+Go consumer success/failure/orphan-retry/restart receipt at43cf9a26 reportedPASS in branchd78534f1; independentreviewNOT_RUN, Windows/macOSconsumerNOT_RUN.",
       "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
     },
     {
@@ -823,9 +824,9 @@
       "url": "https://github.com/joshyorko/actions/issues/162",
       "issue_updated_at": "2026-08-22T22:15:14Z",
       "owner": "/root/luna_coverage; integration /root",
-      "owning_pr": null,
+      "owning_pr": 227,
       "wave": "G",
-      "state": "IN_PROGRESS",
+      "state": "IMPLEMENTED_UNVERIFIED",
       "acceptance_contract": "## ACMM Gap: Coverage gate\n\n**Level:** L0 Prerequisites not met\n**Category:** prerequisite\n**Criterion ID:** `acmm:prereq-coverage-gate`\n\n### What's needed\n\nThis repository is missing one of the following files or directories:\n\n- `codecov.yml`\n- `.codecov.yml`\n- `.github/workflows/coverage-gate.yml`\n- `coverage.yml`\n- `.coverage-thresholds.json`\n\nAdding any one of these will satisfy this criterion and help the repository advance to ACMM Level 0 (Prerequisites not met).\n\n### Why it matters\n\nPrerequisites are foundational \u2014 without test suites, CI/CD, and templates, AI agents lack the guardrails needed for safe autonomous work.\n\n### How to fix\n\nCreate one of the files listed above. The ACMM evaluation checks for file existence \u2014 the content can follow your project's conventions.\n\n---\n*Opened by Hive ACMM Evaluation*\n\n\u2014 hive: agent=dashboard",
       "acceptance_criteria": [],
       "acceptance_authority": "Full issue body and comments retained; extracted bullets are an index, not a waiver.",
@@ -883,7 +884,7 @@
       "dependency_status": "initial sequencing; validate against full contract before each slice",
       "related_references": [],
       "criticality": "roadmap",
-      "next_bounded_action": "Measure actual coverage and enforce a meaningful RCC-dispatched CI floor with failing-gate regression.",
+      "next_bounded_action": "Verify final hosted coverage gate; integrated ordinary source run PASS53.391% against53.38%; retain service/subprocess/platform limits.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -909,9 +910,10 @@
       },
       "independent_review_status": "NOT_RUN",
       "blockers": [
-        "Required acceptance has not been independently established."
+        "No whole-issue closure; retain explicit source metric, service/platform/subprocess exclusions and remaining issue-specific quality contracts."
       ],
-      "disposition": "RETAIN_CONTRACT_EXECUTE_IN_DEPENDENCY_ORDER"
+      "disposition": "RETAIN_CONTRACT_EXECUTE_IN_DEPENDENCY_ORDER",
+      "proof_scope": "Standard pytest-cov integrated source run all5 suitesPASS,15918/29814 statements; sourceinventorycomplete. Independent inventory/inflation/floor reviewPASS. InitialworkflowvalidationFAIL repaired91d55; hosted coveragePASS91d55."
     },
     {
       "issue": 155,
@@ -1071,9 +1073,9 @@
       },
       "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
         "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
-        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived",
+        "Actual91d55 Windows immediate descendant exit regression fails258!=0; Job activecountzero insufficient. Native browser/history not run after failing ownership gate."
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
       "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS.",
@@ -2932,7 +2934,7 @@
       "title": "Integrate RCC Environment Artifacts and execution as the first local Runtime Adapter",
       "url": "https://github.com/joshyorko/actions/issues/134",
       "issue_updated_at": "2026-09-07T14:44:19Z",
-      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner": "Dakota thread01a11d7b-4029-7953-aba7-f3b487098b32; root integration",
       "owning_pr": null,
       "wave": "B",
       "state": "IMPLEMENTED_UNVERIFIED",
@@ -3106,7 +3108,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Prove exact RCC artifact reacquisition, leases/cancel/restart and A-to-B provider acquisition.",
+      "next_bounded_action": "Reconcile existing Dakota thread/branch8ce8bb07, recover live RCC receipt, repair harness timeout/process/environment/Poetry review findings; then independently prove local candidate vertical.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -8396,9 +8398,9 @@
       },
       "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
         "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
-        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived",
+        "Actual91d55 Windows immediate descendant exit regression fails258!=0; Job activecountzero insufficient. Native browser/history not run after failing ownership gate."
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
       "integration_pr": 221,
@@ -8638,9 +8640,9 @@
       },
       "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
         "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
-        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived",
+        "Actual91d55 Windows immediate descendant exit regression fails258!=0; Job activecountzero insufficient. Native browser/history not run after failing ownership gate."
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
       "integration_pr": 221,
@@ -9054,9 +9056,9 @@
       },
       "independent_review_status": "Bounded06c accessibility/history review PASS; whole issue unaccepted and Windows successor failure retained",
       "blockers": [
-        "Successor e4bae7a8 Windows native cleanup PermissionError after product/axe checks; new owned-process drain investigation pending",
         "Real native worker Work Items state transitions and full action execution NOT_RUN; Dakota lanes assigned",
-        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived"
+        "Full-route/manual accessibility, non-Chromium and remaining issue-specific criteria are not waived",
+        "Actual91d55 Windows immediate descendant exit regression fails258!=0; Job activecountzero insufficient. Native browser/history not run after failing ownership gate."
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
       "integration_pr": 221,
@@ -10867,7 +10869,7 @@
     "merge_publication_authority": "User explicitly authorized merge and GitHub Actions publication only after required review/package/browser/security/platform checks pass. No merge or publication performed.",
     "external_repository_modifications": "NOT_AUTHORIZED",
     "new_distributed_vertical_proof": "NOT_RUN",
-    "writer_authority": "User explicitly expanded isolated Luna lanes; four bounded Luna lanes plus root and reused Astra. Root coordinates integration; no nested swarms."
+    "writer_authority": "User authorized bounded expanded cloud and Dakota lanes; all cloud agents stopped for handoff. Dakota control blocked, status must be reconciled before dispatch."
   },
   "external_contracts": [
     {
@@ -11653,7 +11655,7 @@
       "file": "robot-publication-races/review.md",
       "status": "FAIL",
       "detail": "Three locally mutable filesystem publication races; no archive-only remote exploit",
-      "sha256": "11885698d038df1aaf48a317ce2b8d98ceba6f802e6edbcf6260b8d7d930230f",
+      "sha256": "7ed35023fe3347ddf6a93fd3ac899c63e7f085b81311e50a445e86ad635a4938",
       "scope": "Exact subject and bounded criteria only."
     },
     {
@@ -11781,6 +11783,97 @@
       "detail": "Bounded exclusive allocation ownership green regression",
       "sha256": "35182f3fb24fa531f681339199d2a5fa47d0b8377b9e6bdb0f925911af0e9328",
       "scope": "Exact subject and bounded criteria only."
+    },
+    {
+      "file": "windows-native-91-failed.log",
+      "status": "FAIL",
+      "detail": "Actual Windows immediate descendant exit regression fails258!=0 at91; Job activecountzero insufficient",
+      "sha256": "b5bcea586a3d5c1eaf7b3c2a6eac515f68ab9ac2d36c82b03b0c65cf3ccfb04a",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "coverage-integrated/coverage-summary.json",
+      "status": "PASS",
+      "detail": "Final integrated maintainedsource15918/29814=53.391%; five suitesPASS includingRuntime573/10SKIP",
+      "sha256": "f00305d7e502574eed6d4f76d630cf47d1adbdee2d7a2e3e0be4c6dc07775a7b",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "integrated-coverage-run.log",
+      "status": "PASS",
+      "detail": "Complete actual RCC Coverage run; source03ab code, workflow-only91 successor",
+      "sha256": "bfbb6d17a23b5f182204048a7a61883cd6468b26556a60f10e44d10941d4e84d",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "coverage-independent/review.md",
+      "status": "PASS",
+      "detail": "Exactfc09 independent coverage scope/inflation/floor review",
+      "sha256": "29e3136462748466e177f767fc65db22293f197b7b9b5225dbf4b7a105ea933e",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "coverage-workflow-validation-failure.json",
+      "status": "FAIL",
+      "detail": "GitHub rejectedrunnercontext atjobenv;91 repair hostedaccepted",
+      "sha256": "67bb8d8c6e019cb365d4f28ba7fa43f07fdc7f8767b74d69688b04b63c627c03",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "native-job-drain-independent-review.md",
+      "status": "PASS",
+      "detail": "Productionreview816; testfindingfixedf8cc; actualnativeWindows pending",
+      "sha256": "ec320c8d5a7eb604aed2fa4b29c81fcde9c790dc88ba91e9caa0fdd1d40a18f0",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "tunnel-bounded-reader-successor-review.md",
+      "status": "FAIL",
+      "detail": "Exactc789 crossstreamURL and cancellationfindings",
+      "sha256": "c427894df485ab4b9a0a9c417848e289c7d63014343739684389fa0ef5d3b726",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "tunnel-unverified-successor.patch",
+      "status": "NOT_RUN",
+      "detail": "Uncommitted two-file successor frozen after interrupted tests; do not treat asverified",
+      "sha256": "3b3ebf05a5a276eaca755d9e48bee23618b5828f1d0ab9603a31dd7f9ae3eb06",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "cloud-worktree-handoff.json",
+      "status": "PASS",
+      "detail": "Exact local branch/dirty inventory",
+      "sha256": "2c018acb8801152df9fc2ad1399b2899502480290b8afaed2475337cbe137c55",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "dakota/control-call-failure.json",
+      "status": "BLOCKED",
+      "detail": "Native control unavailable; workers preserved",
+      "sha256": "660554f25ea42ce8946217f681c682b9530a4177d0a173c5be77edac3ac3146e",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "dakota/rcc-harness-review.md",
+      "status": "FAIL",
+      "detail": "Four actionable harness review findings; live receipt absent",
+      "sha256": "737dbf88ab0b875fb58932255d18feec2faac20d5f38259e894409c0bd6eb416",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "dakota/workitems-native-receipt.json",
+      "status": "PASS",
+      "detail": "Worker-reported exact43cf Linux consumer nativeproof; independent reviewNOT_RUN",
+      "sha256": "10b217037eb929f629af71c5a6b44caa35ee63aff3a49846d6830e8a0a4319c2",
+      "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "file": "robot-publication-races/no-replace-independent.log",
+      "status": "PASS",
+      "detail": "Root independent Linux50tests at15696; NOTintegrated, macOS/WindowsNOT_RUN",
+      "sha256": "cc62b603e28b13fb7bc866705749cf7a75121a563509153f19a1e7988be5d218",
+      "scope": "Exact subject only; publication not admitted."
     }
   ],
   "independent_review": {
@@ -11936,7 +12029,7 @@
     {
       "number": 220,
       "url": "https://github.com/joshyorko/actions/pull/220",
-      "sha": "bf20d015e739f4bbad956653692a1436b5f4c223",
+      "sha": "afc3344b25fd8d22c1bb978e7e9077a66dcd6f2b",
       "state": "OPEN",
       "base": "community",
       "merge_commit": null
@@ -11944,7 +12037,7 @@
     {
       "number": 221,
       "url": "https://github.com/joshyorko/actions/pull/221",
-      "sha": "b649c37c627fe9932fd2bed80fb16fa74c58d0f5",
+      "sha": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
       "state": "OPEN",
       "base": "community",
       "merge_commit": null
@@ -11982,7 +12075,7 @@
     {
       "number": 225,
       "url": "https://github.com/joshyorko/actions/pull/225",
-      "sha": "f076425d750e468f980365eeefe467542affb337",
+      "sha": "c789123802bf83770d283cb6ca04bae7c4fbfae2",
       "state": "OPEN",
       "base": "integration/community-release-20261008",
       "merge_commit": null
@@ -11995,6 +12088,26 @@
       "base": "integration/community-release-20261008",
       "merge_commit": {
         "oid": "18ce74179aba9d10f701e447f65dfe9e2d5d225e"
+      }
+    },
+    {
+      "number": 227,
+      "url": "https://github.com/joshyorko/actions/pull/227",
+      "sha": "fc09d0b26a80201587de310e24042787252ae3af",
+      "state": "MERGED",
+      "base": "integration/community-release-20261008",
+      "merge_commit": {
+        "oid": "0595b4faa9ac6194f539f1a94bd62d24e1ad8ce9"
+      }
+    },
+    {
+      "number": 228,
+      "url": "https://github.com/joshyorko/actions/pull/228",
+      "sha": "f8ccace43feaa52fd3bf376715efa9fa8cbcc5bb",
+      "state": "MERGED",
+      "base": "integration/community-release-20261008",
+      "merge_commit": {
+        "oid": "8c3cd76cdd937debdaaf72d5c0a0e0b118b6bc46"
       }
     }
   ],
@@ -12009,9 +12122,10 @@
     "CLI_MCP_Canvas_full_vertical": "NOT_RUN",
     "Windows_macOS_native_product_matrix": "b592952d all browser/storage/history PASS; e4bae7a8 four-state axe PASS on both Windows/macOS binaries, Windows overall cleanup FAIL",
     "native_Work_Items_state_transitions": "NOT_RUN",
-    "final_integration_branch": "b649c37c627fe9932fd2bed80fb16fa74c58d0f5",
+    "final_integration_branch": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
     "large_stored_Run_history": "PASS Linux119 bothbinaries;880803840syntheticbytes;summary pages47931/2351bytes;reconnect and explicitdetailPASS",
-    "complete_Rcc_CheckAll": "PASS119: Runtime568pass10skip/Core290/Helper11/Devutils124/WorkItems238pass28skip3deselected10xfail/Toolkit25; integration-marked runtime execution excluded"
+    "complete_Rcc_CheckAll": "PASS119: Runtime568pass10skip/Core290/Helper11/Devutils124/WorkItems238pass28skip3deselected10xfail/Toolkit25; integration-marked runtime execution excluded",
+    "latest_native_status": "91d55 Linux/macOS hostednativePASS; Windows ownershipFAIL258!=0 before product gate. Historical b592 allplatform native/historyPASS retained."
   },
   "independent_reviews": [
     {
@@ -12062,12 +12176,13 @@
     "Runtime_Go_linux_023597ab": "sha256:db6509e73cb352f4fad313ad71ac05f2321a0ddcd2b727e7e7c6a0efb97cd99f",
     "Runtime_frozen_linux_119b4f": "sha256:250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3",
     "Runtime_Go_linux_119b4f": "sha256:d50cfb188f002e80658f9ae09e92a0016cc259b0591c740ff179dd16eb1ff15f",
-    "remaining_security": "Three concrete06c filesystem publication races under local filesystem mutation preconditions; no archive-only exploit shown. Fix/native proof and full route matrix pending; no publication admission."
+    "remaining_security": "Three concrete06c filesystem publication races under local filesystem mutation preconditions; no archive-only exploit shown. Fix/native proof and full route matrix pending; no publication admission.",
+    "remaining_native": "Repair actualWindows immediateexit258!=0 at91d55, then rerun native/browser/history. Atomic no-replace15696 notintegrated/nativeverified; root/sourceidentity remainsopen."
   },
-  "hosted_readback_at": "2026-10-08T21:53:10.279613+00:00",
+  "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261008.zip",
-  "evidence_archive_sha256": "dc07ad70218eddf8b7e1ec38d8a0d2b8e1c89270bf07f8a64a24709f065b5b7d",
-  "integration_head": "b649c37c627fe9932fd2bed80fb16fa74c58d0f5",
+  "evidence_archive_sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
+  "integration_head": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
   "additional_compute": {
     "devsy": {
       "provider": "Executor Devsy Kubernetes",
@@ -12081,7 +12196,7 @@
       "integration_owner": "/root"
     },
     "dakota": {
-      "state": "CONNECTED",
+      "state": "CONTROL_BLOCKED",
       "target": "local",
       "server": "dakota-nvidia",
       "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
@@ -12099,7 +12214,12 @@
           "scope": "RCC local execution"
         }
       ],
-      "toolchain": "Default RCC18.19.5 rejected correctly; task-local checksum-pinned18.19.3 bootstrap in progress"
+      "toolchain": "Both native workers reported checksum-pinned RCC18.19.3 Doctor/Bootstrap/ToolkitTest PASS before control failure",
+      "cause": "Executor execute/skills now reject with MCP -32001 Unknown tool, including after reinstall/new plugin link. Do not duplicate workers; current native thread/process state unconfirmed.",
+      "branches": {
+        "rcc": "feature/dakota-rcc-acceptance-20261008@8ce8bb07498d0c15ae27fe55f1e30bc21bf0cbb5",
+        "work_items": "feature/dakota-workitems-acceptance-20261008@d78534f1b1edfe799de7d61aaa693937be5e2fea"
+      }
     }
   }
 }
