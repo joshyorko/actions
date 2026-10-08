@@ -1,6 +1,8 @@
 import sys
 from types import ModuleType
 
+import pytest
+
 from devutils.docs import normalize_generic_alias_docs
 
 
@@ -28,3 +30,21 @@ def test_generic_alias_docs_match_python_310_and_312_renderings(tmp_path, monkey
         assert overview_file.read_text() == overview
         normalize_generic_alias_docs(tmp_path, "alias_fixture")
         assert module_file.read_text() == canonical
+
+
+@pytest.mark.parametrize("heading", ["Exceptions", "Enums", "Functions"])
+def test_alias_normalization_preserves_following_top_level_sections(
+    tmp_path, monkeypatch, heading
+):
+    module = ModuleType("alias_fixture")
+    module.__all__ = ["Row"]
+    module.Row = list[str]
+    monkeypatch.setitem(sys.modules, "alias_fixture", module)
+    before = "# Variables\n\n- **Row**\n\n"
+    after = f"# {heading}\n\nPublic API content.\n"
+    (tmp_path / "alias_fixture.md").write_text(
+        before + "# Class `list`\n\nBuilt-in mutable sequence.\n\n" + after
+    )
+    (tmp_path / "README.md").write_text("# API\n")
+    normalize_generic_alias_docs(tmp_path, "alias_fixture")
+    assert (tmp_path / "alias_fixture.md").read_text() == before + after

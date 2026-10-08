@@ -23,7 +23,7 @@ def normalize_generic_alias_docs(output: Path, package_name: str) -> None:
         # Python 3.10 inspect.isclass treats GenericAlias as its origin class;
         # later versions render the same public alias as a variable.
         text = re.sub(
-            rf"\n# Class `{re.escape(origin)}`\n.*?(?=\n# Class |\Z)",
+            rf"\n# Class `{re.escape(origin)}`\n.*?(?=\n# |\Z)",
             "",
             text,
             flags=re.S,

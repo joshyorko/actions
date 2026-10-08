@@ -38,6 +38,9 @@ from Python 3.12. The canonical docs task normalizes exported GenericAlias
 entries to variables and removes the spurious built-in origin-class entry;
 the public `Row` API itself is unchanged. Both observed renderings have an
 idempotence regression test, and the generated Core docs remain checked.
+Normalization stops at the next top-level heading of any kind and preserves
+following functions, exceptions and enums; those trailing sections have
+explicit regression coverage.
 
 The import guard checks root-private aliases and literal/concatenated dynamic
 module names through importlib aliases and `__import__`, including relative

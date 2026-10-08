@@ -821,7 +821,8 @@ rm src/actions/server/bin/rcc* -f
         steps.append({
             "name": "Build candidate Core wheel for PR compatibility tests",
             "if": "github.event_name == 'pull_request'",
-            "run": f"{run_in_env}poetry -C ../actions build -f wheel -o ../action_server/candidate-core-wheelhouse",
+            "working-directory": "actions",
+            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-core-wheelhouse",
         })
         steps.append(self.build_manylinux_wheels())
         steps.append(self.upload_artifact_manylinux_wheels())
