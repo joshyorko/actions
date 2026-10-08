@@ -536,8 +536,14 @@ def test_scheduler_admission_pins_pool_and_package_across_reload(monkeypatch, tm
     from contextlib import nullcontext
     from types import SimpleNamespace
 
-    from actions.server import _actions_process_pool, _actions_run, _artifact_storage
-    from actions.server import _models, _runs_state_cache, _settings
+    from actions.server import (
+        _actions_process_pool,
+        _actions_run,
+        _artifact_storage,
+        _models,
+        _runs_state_cache,
+        _settings,
+    )
     from actions.server._robo_utils import run_in_thread
 
     class RuntimeInfo:
@@ -683,8 +689,8 @@ async def _test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch
     from fastapi import Response
     from starlette.requests import Request
 
-    from actions.server import _actions_run
     from actions.server import _actions_process_pool as process_pool
+    from actions.server import _actions_run
 
     started = Event()
     release = Event()
@@ -1078,6 +1084,7 @@ def test_real_rcc_artifact_action_vertical(tmp_path):
             "ACTIONS_RUNTIME_RCC_PROVIDER must name the cache provider for real proof"
         )
 
+    import actions.server._models as models
     from actions.server._actions_import import import_action_package
     from actions.server._actions_process_pool import ActionsProcessPool
     from actions.server._database import Database
@@ -1089,7 +1096,6 @@ def test_real_rcc_artifact_action_vertical(tmp_path):
         get_model_db_rules,
     )
     from actions.server._rcc_runtime_adapter import read_receipt
-    import actions.server._models as models
     from actions.server._settings import Settings
 
     package_dir = tmp_path / "package"
@@ -1200,6 +1206,7 @@ def test_bootstrap_rejects_non_string_pythonpath(
     monkeypatch, tmp_path, invalid_pythonpath
 ):
     from types import SimpleNamespace
+
     from actions.server._action_package_handler import ActionPackageHandler
     from actions.server._protocols import ActionResult
     from actions.server.vendored_deps.action_package_handling.cli_errors import (

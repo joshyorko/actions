@@ -269,3 +269,9 @@ wheel/sdist rendering checks so the published long description matches the
 tested artifact.
 
 The current hardening plan is `docs/superpowers/plans/2026-08-05-work-items-hardening.md`. It records approved target behavior, not delivered behavior. Update this guide only when the corresponding implementation and verification evidence exists.
+
+Work Item creation fields must expose their visible Queue Name and Payload
+labels programmatically. Use unique control IDs per dialog, announce invalid
+JSON as an alert, associate the error with the payload field, and clear the
+invalid state when the user edits it. Verify those semantics through accessible
+roles and real packaged-browser creation rather than placeholder-only selectors.

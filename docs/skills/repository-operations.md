@@ -1213,3 +1213,12 @@ When merging parallel checkpoint tests, check for duplicate top-level test
 names: Python silently replaces the earlier definition, masking ownership and
 coverage. Consolidate only proven identical contracts or preserve distinct
 tests under distinct names, then run the complete combined suite and lint.
+
+Credential redaction must cover argparse-accepted long-option abbreviations
+for `--api-key`, in both separate and equals forms. HTTP header names are
+case-insensitive; the actual Uvicorn DEBUG handshake lowercases incoming
+Cookie headers. Exercise the real assembled server with DEBUG transport enabled
+when validating redaction, and prove its handshake/echo before inspecting logs.
+Proxy redirects must replace only automatically generated Host headers for the
+new destination while retaining explicit caller Host intent and normal urllib3
+cross-host credential stripping, including 303 method changes.

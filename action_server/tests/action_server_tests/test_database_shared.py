@@ -16,8 +16,8 @@ import pytest
 from pydantic.dataclasses import dataclass
 
 from actions.server._database import (
-    DBError,
     Database,
+    DBError,
     normalize_database_url,
     redact_database_url,
 )
@@ -28,7 +28,6 @@ from actions.server.migrations import (
     db_migration_status,
     migrate_db,
 )
-
 
 HISTORICAL_MIGRATION_SHA256 = {
     1: "d5efbc8d68b73fa73cecaa669d5c68741f90ec57c20aabbca4b1c406696011a0",

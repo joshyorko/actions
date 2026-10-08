@@ -108,7 +108,6 @@ class ProcessHandle:
             get_action_package_cwd,
         )
         from ._preload_actions.preload_actions_streams import JsonRpcStreamReaderThread
-        from ._robo_utils.process import build_python_launch_env
         from ._rcc_runtime_adapter import (
             RccProcessHandle,
             build_exec_command,
@@ -116,6 +115,7 @@ class ProcessHandle:
             load_descriptor,
             new_receipt_path,
         )
+        from ._robo_utils.process import build_python_launch_env
 
         self._post_run_args = post_run_args
 

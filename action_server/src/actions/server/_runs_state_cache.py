@@ -7,8 +7,8 @@ way to synchronize state across multiple processes.
 import logging
 import threading
 import typing
-from copy import copy
 from contextlib import contextmanager
+from copy import copy
 from dataclasses import dataclass
 from typing import Any, Dict, Literal, Optional
 

@@ -1031,8 +1031,9 @@ def test_invoke_validator_rejects_explicit_root_alias_before_resolution(
 ):
     action_server = FRONTEND.parent
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     runtime = tmp_path / "runtime"
     canvas = tmp_path / "canvas"
@@ -1060,8 +1061,9 @@ def test_hosted_import_validator_rejects_poisoned_canvas_root(
 ):
     action_server = FRONTEND.parent
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     runtime = tmp_path / "frontend" / "dist"
     canvas = tmp_path / "frontend" / "dist-canvas"
@@ -1088,8 +1090,9 @@ def test_hosted_import_validator_rejects_canvas_symlink_before_scanning(
 ):
     action_server = FRONTEND.parent
     sys.path.insert(0, str(action_server))
-    import tasks
     from invoke import Context
+
+    import tasks
 
     runtime = tmp_path / "frontend" / "dist"
     canvas = tmp_path / "frontend" / "dist-canvas"

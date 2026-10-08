@@ -277,6 +277,8 @@ const rejectBody = (req, res, status, message) => {
 const dispatchRequest = (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const state = mode(req);
+  if (req.method === "GET" && url.pathname === "/browser-session" && !url.search)
+    return send(res, 200, { required: false, authenticated: true, transport_allowed: true, expires_in: null });
   if (req.method === "GET" && url.pathname === "/config" && !url.search)
     return send(res, 200, {
       expose_url: "",

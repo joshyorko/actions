@@ -667,11 +667,17 @@ def _redact_cli_arguments(args: Sequence[str]) -> list[str]:
         elif argument == "--database-url":
             redacted.append(argument)
             redact_next = "database-url"
-        elif argument == "--api-key":
-            redacted.append(argument)
-            redact_next = "api-key"
-        elif argument.startswith("--api-key="):
-            redacted.append("--api-key=<redacted>")
+        elif (
+            argument.startswith("--")
+            and len(argument.partition("=")[0]) > 2
+            and "--api-key".startswith(argument.partition("=")[0])
+        ):
+            option, separator, _ = argument.partition("=")
+            if separator:
+                redacted.append(f"{option}=<redacted>")
+            else:
+                redacted.append(option)
+                redact_next = "api-key"
         elif argument.startswith("--database-url="):
             option, value = argument.split("=", 1)
             redacted.append(f"{option}={redact_database_url(value)}")

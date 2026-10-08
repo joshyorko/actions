@@ -838,6 +838,7 @@ def test_run_summary_invalid_database_text_returns_service_unavailable(
     monkeypatch, tmp_path
 ):
     from action_server_tests.sample_data import RUN
+
     from actions.server import _runs_state_cache
     from actions.server._api_run import list_run_summaries
     from actions.server._models import RUN_SUMMARY_UNAVAILABLE_MESSAGE, create_db

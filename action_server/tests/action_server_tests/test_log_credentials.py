@@ -62,3 +62,130 @@ def test_debug_cli_arguments_never_include_api_key_values():
         "--port",
         "8080",
     ]
+
+
+@pytest.mark.integration_test
+def test_assembled_websocket_session_credentials_never_reach_logs(tmp_path: Path):
+    import json
+    import os
+    import socket
+    import subprocess
+    import sys
+    import time
+
+    import httpx
+    from websockets.sync.client import connect
+    from websockets.typing import Origin
+
+    # The regular CLI leaves uvicorn at INFO. Exercise its supported DEBUG
+    # transport through the same assembled CLI, changing only logging config.
+    launcher = tmp_path / "debug_transport.py"
+    launcher.write_text(
+        "from actions.server._settings import Settings\n"
+        "original = Settings.to_uvicorn\n"
+        "def debug(self):\n"
+        "    settings = original(self)\n"
+        "    settings['log_level'] = 'debug'\n"
+        "    return settings\n"
+        "Settings.to_uvicorn = debug\n"
+        "from actions.server.cli import main\n"
+        "main()\n"
+    )
+    with socket.socket() as listener:
+        listener.bind(("127.0.0.1", 0))
+        port = listener.getsockname()[1]
+    origin = f"http://127.0.0.1:{port}"
+    api_key = "SYNTHETIC-ASSEMBLED-API-KEY"
+    datadir = tmp_path / "data"
+    stderr_path = tmp_path / "stderr.txt"
+    stdout_path = tmp_path / "stdout.txt"
+    with stderr_path.open("w") as stderr, stdout_path.open("w") as stdout:
+        process = subprocess.Popen(
+            [
+                sys.executable,
+                str(launcher),
+                "start",
+                "--address",
+                "127.0.0.1",
+                "--port",
+                str(port),
+                "--datadir",
+                str(datadir),
+                "--actions-sync=false",
+                f"--api-k={api_key}",
+                "-v",
+            ],
+            cwd=tmp_path,
+            stdout=stdout,
+            stderr=stderr,
+            env={**os.environ, "ACTIONS_SKIP_UPDATE_CHECK": "1"},
+        )
+        try:
+            with httpx.Client(base_url=origin, trust_env=False, timeout=10) as client:
+                deadline = time.monotonic() + 15
+                while True:
+                    try:
+                        if client.get("/config").status_code == 200:
+                            break
+                    except httpx.TransportError:
+                        pass
+                    assert process.poll() is None, "Runtime exited before readiness"
+                    assert time.monotonic() < deadline, "Runtime readiness deadline"
+                    time.sleep(0.05)
+                login = client.post(
+                    "/browser-session",
+                    headers={"Origin": origin, "Authorization": f"Bearer {api_key}"},
+                )
+                assert login.status_code == 200
+                token = client.cookies["actions_browser_session"]
+                with connect(
+                    origin.replace("http", "ws", 1) + "/api/ws",
+                    origin=Origin(origin),
+                    additional_headers={"Cookie": f"actions_browser_session={token}"},
+                    proxy=None,
+                    open_timeout=10,
+                ) as ws:
+                    ws.send(json.dumps({"event": "echo", "data": "verified-handshake"}))
+                    assert json.loads(ws.recv(timeout=10)) == {
+                        "event": "echo",
+                        "data": "verified-handshake",
+                    }
+                assert (
+                    client.delete(
+                        "/browser-session", headers={"Origin": origin}
+                    ).status_code
+                    == 204
+                )
+        finally:
+            process.terminate()
+            try:
+                process.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait(timeout=10)
+    output = stdout_path.read_text() + stderr_path.read_text()
+    disk = (datadir / "server_log.txt").read_text()
+    for text in (output, disk):
+        assert "cookie: <redacted>" in text.casefold()
+        assert "verified-handshake" in text
+        assert token not in text
+        assert api_key not in text
+
+
+@pytest.mark.parametrize("option", ["--ap", "--api", "--api-", "--api-k", "--api-ke"])
+@pytest.mark.parametrize("joined", [False, True])
+def test_accepted_api_key_option_abbreviations_are_redacted(option, joined):
+    from actions.server._cli_impl import _create_parser, _redact_cli_arguments
+
+    flags = (
+        [f"{option}=SYNTHETIC-ABBREVIATED-KEY"]
+        if joined
+        else [option, "SYNTHETIC-ABBREVIATED-KEY"]
+    )
+    assert (
+        _create_parser().parse_args(["start", *flags]).api_key
+        == "SYNTHETIC-ABBREVIATED-KEY"
+    )
+    result = _redact_cli_arguments(["action-server", "start", *flags])
+    assert "SYNTHETIC-ABBREVIATED-KEY" not in " ".join(result)
+    assert "<redacted>" in " ".join(result)

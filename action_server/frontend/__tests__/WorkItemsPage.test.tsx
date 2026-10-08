@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 import { render } from "./utils/test-utils";
 
@@ -195,4 +195,21 @@ describe("Work Items page states", () => {
             screen.getByRole("button", { name: "Retry" }),
         ).toBeInTheDocument();
     });
+    it("labels creation fields and announces invalid JSON with a recovery path", () => {
+        queryState.workItems.data = { items: [], total: 0 };
+        queryState.stats.data = emptyStats;
+        render(<WorkItemsPage />);
+        fireEvent.click(screen.getByRole("button", { name: "Create First Item" }));
+        const queue = screen.getByRole("textbox", { name: "Queue Name" });
+        const payload = screen.getByRole("textbox", { name: "Payload (JSON)" });
+        fireEvent.change(queue, { target: { value: "accessibility-probe" } });
+        fireEvent.change(payload, { target: { value: "{" } });
+        fireEvent.click(screen.getByRole("button", { name: "Create" }));
+        expect(screen.getByRole("alert")).toHaveTextContent("Invalid JSON");
+        expect(payload).toHaveAttribute("aria-invalid", "true");
+        fireEvent.change(payload, { target: { value: '{"probe":true}' } });
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+        expect(payload).toHaveAttribute("aria-invalid", "false");
+    });
+
 });

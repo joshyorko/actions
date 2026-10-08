@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useId } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { Loading } from '@/core/components/ui/Loading';
 import { Button } from '@/core/components/ui/Button';
@@ -271,6 +271,8 @@ interface CreateItemDialogProps {
 }
 
 function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDialogProps): JSX.Element {
+  const formId = useId();
+  const errorId = `${formId}-error`;
   const [queueName, setQueueName] = useState(defaultQueueName || '');
   const [payloadText, setPayloadText] = useState('{\n  \n}');
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -328,8 +330,10 @@ function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDi
 
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-card-foreground">Queue Name</label>
+            <label htmlFor={`${formId}-queue`} className="text-sm font-medium text-card-foreground">Queue Name</label>
             <Input
+              id={`${formId}-queue`}
+              aria-describedby={validationError ? errorId : undefined}
               value={queueName}
               onChange={(e) => setQueueName(e.target.value)}
               placeholder="e.g., email-processing"
@@ -338,8 +342,11 @@ function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDi
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-card-foreground">Payload (JSON)</label>
+            <label htmlFor={`${formId}-payload`} className="text-sm font-medium text-card-foreground">Payload (JSON)</label>
             <textarea
+              id={`${formId}-payload`}
+              aria-invalid={!!validationError}
+              aria-describedby={validationError ? errorId : undefined}
               value={payloadText}
               onChange={(e) => {
                 setPayloadText(e.target.value);
@@ -356,7 +363,7 @@ function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDi
           </div>
 
           {validationError && (
-            <div className="rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3">
+            <div id={errorId} role="alert" className="rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3">
               <p className="text-sm text-destructive">{validationError}</p>
             </div>
           )}

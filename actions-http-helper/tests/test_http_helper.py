@@ -155,6 +155,7 @@ def test_download_with_resume_resumes_existing_partial_file(tmp_path):
 
 def test_persisted_no_proxy_routes_each_destination_without_changing_tls(monkeypatch):
     import ssl
+
     import actions_http
 
     context = ssl.create_default_context()
@@ -202,8 +203,10 @@ def test_persisted_no_proxy_routes_each_destination_without_changing_tls(monkeyp
 
 def test_no_proxy_redirect_rechecks_the_new_destination(monkeypatch):
     import ssl
-    import actions_http
+
     from urllib3.response import HTTPResponse
+
+    import actions_http
 
     config = actions_http._NetworkConfig.__new__(actions_http._NetworkConfig)
     monkeypatch.setattr(config, "get_ssl_context", ssl.create_default_context)
@@ -238,3 +241,64 @@ def test_no_proxy_redirect_rechecks_the_new_destination(monkeypatch):
     )
     assert response.status == 200
     assert routes == [False, True]
+
+
+def test_proxy_to_direct_redirect_updates_generated_host_but_keeps_explicit_host(
+    monkeypatch,
+):
+    import ssl
+
+    from urllib3.response import HTTPResponse
+
+    import actions_http
+
+    config = actions_http._NetworkConfig.__new__(actions_http._NetworkConfig)
+    monkeypatch.setattr(config, "get_ssl_context", ssl.create_default_context)
+    monkeypatch.setattr(
+        type(config),
+        "profile_config",
+        property(
+            lambda self: {
+                "proxy-settings": {
+                    "http-proxy": "http://proxy.example:8080",
+                    "no-proxy": "localhost",
+                }
+            }
+        ),
+    )
+    for explicit_host in (None, "deliberate.example"):
+        requests = []
+
+        def respond(connection, method, url, **kwargs):
+            requests.append(
+                (connection.proxy is not None, dict(kwargs.get("headers", {})))
+            )
+            if len(requests) == 1:
+                return HTTPResponse(
+                    status=303,
+                    headers={"Location": "http://localhost:54321/next"},
+                    body=b"",
+                    preload_content=False,
+                )
+            return HTTPResponse(status=200, body=b"ok")
+
+        monkeypatch.setattr(actions_http.urllib3.HTTPConnectionPool, "urlopen", respond)
+        headers = {
+            "Authorization": "synthetic",
+            "Cookie": "synthetic",
+            "Proxy-Authorization": "synthetic",
+        }
+        if explicit_host:
+            headers["Host"] = explicit_host
+        assert (
+            config._build_connection_pool()
+            .request("GET", "http://public.example/start", headers=headers)
+            .status
+            == 200
+        )
+        assert [entry[0] for entry in requests] == [True, False]
+        final_headers = requests[-1][1]
+        assert final_headers.get("Host") == explicit_host
+        assert not {"authorization", "cookie", "proxy-authorization"}.intersection(
+            name.lower() for name in final_headers
+        )

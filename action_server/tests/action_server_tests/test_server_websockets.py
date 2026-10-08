@@ -340,13 +340,13 @@ def test_run_websocket_events_publish_summaries_only(monkeypatch):
 
     from action_server_tests.sample_data import RUN
 
+    from actions.server._models import RunSummaryRecord
     from actions.server._runs_state_cache import RunChangeEvent
     from actions.server._server_websockets import (
         _report_change_event,
         _report_runs,
         _socket_server,
     )
-    from actions.server._models import RunSummaryRecord
 
     run = replace(
         RUN,
@@ -439,8 +439,8 @@ def test_summary_only_websocket_events_never_serialize_legacy_run_payloads(
 
     from action_server_tests.sample_data import RUN
 
-    from actions.server._runs_state_cache import RunChangeEvent
     import actions.server._server_websockets as server_websockets
+    from actions.server._runs_state_cache import RunChangeEvent
 
     class Sink:
         def __init__(self):

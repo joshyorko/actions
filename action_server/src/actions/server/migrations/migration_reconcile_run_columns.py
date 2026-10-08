@@ -1,6 +1,5 @@
 from actions.server._database import Database
 
-
 _ARCHIVE_TABLE = "run_legacy_output_archive"
 
 

@@ -31,10 +31,9 @@ def runtime_client(
 ) -> Iterator[TestClient]:
     """Exercise Work Items through the Runtime's registered error handler."""
     from actions.server._app import get_app
-    from actions.server._settings import setup_settings
-
     from actions.server._cli_impl import _create_parser
     from actions.server._protocols import ArgumentsNamespaceRequiringDatadir
+    from actions.server._settings import setup_settings
 
     args: ArgumentsNamespaceRequiringDatadir = _create_parser().parse_args(
         ["import", "--datadir", str(tmp_path)]

@@ -7,12 +7,12 @@ from starlette.websockets import WebSocketDisconnect
 
 @pytest.fixture
 def browser_app(tmp_path):
+    from actions.server._artifact_storage import create_artifact_storage
     from actions.server._browser_session import install_browser_sessions
     from actions.server._server import (
         _ConfiguredAPIKeyMiddleware,
         _mount_artifact_static_files,
     )
-    from actions.server._artifact_storage import create_artifact_storage
 
     app = FastAPI()
     app.state.trusted_server_origins = ("http://127.0.0.1", "https://runtime.example")
@@ -155,9 +155,10 @@ def test_remote_plain_http_denied_https_secure_cookie(browser_app):
 
 
 def test_cookie_cannot_authenticate_mcp_backend(browser_app):
-    from actions.server._api_action_routes import APIKeyAuthBackend
     from starlette.middleware.authentication import AuthenticationMiddleware
     from starlette.responses import JSONResponse
+
+    from actions.server._api_action_routes import APIKeyAuthBackend
 
     async def mcp(scope, receive, send):
         await JSONResponse({"ok": True})(scope, receive, send)
@@ -367,6 +368,7 @@ def test_whitespace_duplicate_session_cookies_rejected(browser_app, cookie):
 @pytest.mark.anyio
 async def test_tunnel_startup_does_not_log_api_key(monkeypatch, caplog):
     from types import SimpleNamespace
+
     from actions.server import _community_expose
     from actions.server._server import _start_community_expose_impl
 
