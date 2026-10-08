@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import sqlite3
 import textwrap
@@ -86,6 +87,13 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     from actions.server._selftest import ActionServerClient, ActionServerProcess
     from actions.work_items import State
 
+    proof: dict[str, object] = {"consumer_actions": [], "api_state_readbacks": {}}
+
+    def save_proof() -> None:
+        proof_path = os.environ.get("DAKOTA_WORKITEMS_PROOF_FILE")
+        if proof_path:
+            Path(proof_path).write_text(json.dumps(proof, indent=2) + "\n", encoding="utf-8")
+
     project = tmp_path / "synthetic-consumer-package"
     project.mkdir()
     (project / "package.yaml").write_text(
@@ -145,6 +153,14 @@ dependencies:
         "scenario": "success",
         "result": "synthetic success",
     }
+    proof["consumer_actions"].append({"scenario": "success", "http_status": 200})
+    proof["api_state_readbacks"]["after_success"] = {
+        "input_state": success["state"],
+        "output_state": success_output["state"],
+        "output_queue": success_output["queue_name"],
+        "parent_link_verified": success_output["parent_id"] == success_id,
+    }
+    save_proof()
 
     failure_id = create({"case": "failure"})
     client.post_error(
@@ -161,6 +177,13 @@ dependencies:
     assert failed["state"] == State.FAILED.value
     assert failed["error_code"] == "SYNTHETIC_PROCESSOR_FAILURE"
     assert failed["error_message"] == "synthetic consumer failure"
+    proof["consumer_actions"].append({"scenario": "failure", "http_status": 500})
+    proof["api_state_readbacks"]["after_failure"] = {
+        "input_state": failed["state"],
+        "error_code": failed["error_code"],
+        "error_message": failed["error_message"],
+    }
+    save_proof()
 
     recovery_id = create({"case": "recovery"})
     stale_reservation = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
@@ -178,6 +201,13 @@ dependencies:
     recovery_output = client.get_json(f"/api/work-items/{recovery_output_id}")
     assert recovery_output["parent_id"] == recovery_id
     assert recovery_output["payload"]["input"] == {"case": "recovery"}
+    proof["consumer_actions"].append({"scenario": "recovery", "http_status": 200})
+    proof["api_state_readbacks"]["after_recovery"] = {
+        "input_state": recovered["state"],
+        "output_state": recovery_output["state"],
+        "parent_link_verified": recovery_output["parent_id"] == recovery_id,
+    }
+    save_proof()
 
     stats = client.get_json("/api/work-items/stats")
     assert stats == {
@@ -207,5 +237,13 @@ dependencies:
         assert restarted_client.get_json(f"/api/work-items/{success_output_id}")["parent_id"] == success_id
         assert restarted_client.get_json(f"/api/work-items/{recovery_output_id}")["parent_id"] == recovery_id
         assert restarted_client.get_json("/api/work-items/stats") == stats
+        proof["api_state_readbacks"]["after_restart"] = {
+            "success_state": State.DONE.value,
+            "failure_state": State.FAILED.value,
+            "recovery_state": State.DONE.value,
+            "stats": stats,
+            "output_parent_links_verified": True,
+        }
+        save_proof()
     finally:
         restarted.stop()

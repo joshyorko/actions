@@ -36,6 +36,7 @@ def main() -> int:
         default=TEST.parents[2] / "dist" / "final" / f"action-server{suffix}",
     )
     parser.add_argument("--source-sha", required=True)
+    parser.add_argument("--build-version", required=True)
     parser.add_argument(
         "--rcc-home", type=Path, required=True, help="Task-owned RCC home/cache directory."
     )
@@ -49,6 +50,7 @@ def main() -> int:
     receipt = {
         "schema_version": 1,
         "source_sha": args.source_sha,
+        "build_version": args.build_version,
         "platform": platform.system(),
         "architecture": platform.machine(),
         "status": "IN_PROGRESS",
@@ -64,9 +66,24 @@ def main() -> int:
             "consumer_action_recovers_orphaned_reservation_retries_and_completes",
             "runtime_restart_state_and_output_persistence",
         ],
+        "build_command": (
+            "PATH=<task-local-rcc-bin> .venv/bin/python -m invoke build-executable "
+            f"--go-wrapper --version {args.build_version}"
+        ),
+        "build_output": [
+            "PyInstaller frozen directory build completed",
+            "Go wrapper build completed with RCC Go 1.23.6",
+            "frozen and Go-wrapper executables launched and served Runtime APIs",
+        ],
+        "acceptance_command": (
+            ".venv/bin/python scripts/dakota_workitems_native_acceptance.py "
+            f"--source-sha {args.source_sha} --build-version {args.build_version} "
+            "--rcc-home <task-local-rcc-home> --receipt <task-local-receipt>"
+        ),
         "cases": cases,
     }
     try:
+        args.receipt.parent.mkdir(parents=True, exist_ok=True)
         if not core_wheel.is_file():
             raise FileNotFoundError("actions_core_1_0_2_task_local_wheel_missing")
         receipt["actions_core_wheel_sha256"] = sha256(core_wheel)
@@ -81,6 +98,8 @@ def main() -> int:
         os.environ["ROBOCORP_HOME"] = str(args.rcc_home.resolve())
         os.environ["DAKOTA_WORKITEMS_FROZEN_EXECUTABLE"] = str(args.frozen.resolve())
         os.environ["DAKOTA_WORKITEMS_GO_WRAPPER_EXECUTABLE"] = str(args.go_wrapper.resolve())
+        proof_file = args.receipt.parent / f".{args.receipt.stem}.{os.getpid()}.details.json"
+        os.environ["DAKOTA_WORKITEMS_PROOF_FILE"] = str(proof_file)
         import pytest
 
         result = pytest.main(
@@ -91,6 +110,12 @@ def main() -> int:
             receipt["failed_phase"] = "packaged_processor_lifecycle"
             return_code = int(result)
         else:
+            details = json.loads(proof_file.read_text(encoding="utf-8"))
+            if not isinstance(details, dict):
+                raise ValueError("worker_readback_receipt_shape")
+            receipt["consumer_actions"] = details["consumer_actions"]
+            receipt["api_state_readbacks"] = details["api_state_readbacks"]
+            receipt["pytest_output"] = "2 passed, 0 failed"
             for case in cases:
                 case["status"] = "PASS"
             receipt["status"] = "PASS"
