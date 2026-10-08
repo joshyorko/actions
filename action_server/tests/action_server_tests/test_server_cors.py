@@ -335,3 +335,67 @@ def test_invalid_configured_origin_fails_closed_without_echoing_value(tmp_path, 
             pass
 
     assert invalid_origin not in caplog.text
+
+
+@pytest.mark.parametrize(
+    "authority", ["localhost", "127.0.0.1", "[::1]", "127.77.88.99"]
+)
+@pytest.mark.parametrize(
+    "origin_host", ["localhost", "127.0.0.1", "[::1]", "127.77.88.99"]
+)
+@pytest.mark.parametrize("trust_source", ["socket", "configured"])
+def test_request_origin_keeps_loopback_authorities_distinct(
+    authority, origin_host, trust_source
+):
+    from actions.server._settings import OriginPolicy
+
+    policy = OriginPolicy()
+    socket_server = (authority.strip("[]"), 8087) if trust_source == "socket" else None
+    configured = (f"http://{authority}:8087",) if trust_source == "configured" else ()
+
+    assert policy.allows_request_origin(
+        f"http://{origin_host}:8087",
+        request_scheme="ws",
+        socket_server=socket_server,
+        trusted_server_urls=configured,
+    ) is (authority == origin_host)
+
+
+def test_request_origin_can_explicitly_allow_an_additional_loopback_authority():
+    from actions.server._settings import OriginPolicy
+
+    policy = OriginPolicy(["http://localhost:8087"])
+    assert policy.allows_request_origin(
+        "http://localhost:8087",
+        request_scheme="ws",
+        socket_server=("127.0.0.1", 8087),
+    )
+
+
+@pytest.mark.parametrize("origin", ["http://localhost:8087", "http://[::1]:8087"])
+def test_assembled_websocket_rejects_loopback_alias_without_explicit_authority(
+    default_cors_app, origin
+):
+    from fastapi import Depends
+    from fastapi.testclient import TestClient
+    from starlette.websockets import WebSocketDisconnect
+
+    from actions.server._server_websockets import (
+        verify_websocket_origin,
+        websocket_api_router,
+    )
+
+    default_cors_app.state.trusted_server_origins = ("http://127.0.0.1:8087",)
+    default_cors_app.include_router(
+        websocket_api_router, dependencies=[Depends(verify_websocket_origin)]
+    )
+    with TestClient(default_cors_app, base_url="http://127.0.0.1:8087") as client:
+        with pytest.raises(WebSocketDisconnect) as error:
+            with client.websocket_connect("/api/ws", headers={"Origin": origin}):
+                pass
+        assert error.value.code == 1008
+        with client.websocket_connect(
+            "/api/ws", headers={"Origin": "http://127.0.0.1:8087"}
+        ) as websocket:
+            websocket.send_json({"event": "echo", "data": "exact"})
+            assert websocket.receive_json() == {"event": "echo", "data": "exact"}

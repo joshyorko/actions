@@ -1,7 +1,6 @@
 import logging
 import os
 import sys
-import ipaddress
 from contextlib import contextmanager
 from dataclasses import dataclass
 from functools import lru_cache
@@ -126,7 +125,9 @@ class OriginPolicy:
 
         for server_url in trusted_server_urls:
             trusted_origin = _parse_configured_origin(server_url)
-            if trusted_origin is not None and _same_origin(parsed_origin, trusted_origin):
+            if trusted_origin is not None and _same_origin(
+                parsed_origin, trusted_origin
+            ):
                 return True
 
         scheme = {
@@ -146,7 +147,9 @@ class OriginPolicy:
         try:
             port = int(socket_port)
             bracketed_host = (
-                f"[{socket_host}]" if ":" in socket_host and not socket_host.startswith("[") else socket_host
+                f"[{socket_host}]"
+                if ":" in socket_host and not socket_host.startswith("[")
+                else socket_host
             )
             socket_origin = _parse_origin(f"{scheme}://{bracketed_host}:{port}")
         except (TypeError, ValueError):
@@ -165,23 +168,8 @@ def _parse_configured_origin(url: str) -> Optional[_ParsedOrigin]:
         return None
 
 
-def _is_loopback_hostname(hostname: str) -> bool:
-    if hostname.lower() == "localhost":
-        return True
-    try:
-        return ipaddress.ip_address(hostname).is_loopback
-    except ValueError:
-        return False
-
-
 def _same_origin(left: _ParsedOrigin, right: _ParsedOrigin) -> bool:
-    if left.scheme != right.scheme or left.port != right.port:
-        return False
-    if left.hostname == right.hostname:
-        return True
-    return _is_loopback_hostname(left.hostname) and _is_loopback_hostname(
-        right.hostname
-    )
+    return left == right
 
 
 def validate_cors_origins(origins: Sequence[str]) -> tuple[str, ...]:

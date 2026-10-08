@@ -1,5 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { WebsocketConn } from "../src/shared/utils/websocketConn";
+import {
+  WebsocketConn,
+  type WebsocketStatus,
+} from "../src/shared/utils/websocketConn";
 
 class FakeWebSocket {
   static instances: FakeWebSocket[] = [];
@@ -73,8 +76,8 @@ describe("WebsocketConn", () => {
       reconnectBaseDelayMs: 100,
       reconnectMaxDelayMs: 200,
     });
-    const statuses: Array<{ phase: string; attempt: number }> = [];
-    socket.on("status", (status) => statuses.push(status));
+    const statuses: WebsocketStatus[] = [];
+    socket.on("status", (status: WebsocketStatus) => statuses.push(status));
 
     const initial = socket.connect();
     FakeWebSocket.instances[0].onerror?.();

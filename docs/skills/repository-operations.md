@@ -39,7 +39,14 @@ are separate Vite roots under `apps/runtime` and `apps/canvas-view`; run
 `npm run build:runtime` and `npm run build:canvas` from the frontend directory
 to verify both independent artifacts. The topology has no tier-specific
 manifest, product-tier build variable, vendored package directory, or external
-runtime asset dependency. Frontend quality is fail-fast through
+runtime asset dependency.
+The frontend TypeScript gate includes ordinary `__tests__` files. The generic
+`WebsocketConn.on` handler has no contextual callback type; status listeners in
+those tests must use the exported `WebsocketStatus` type explicitly. Keep
+`npm run test:types` separate from the Vite builds and Vitest run: Vite can
+emit both artifacts before `tsc --noEmit` rejects an implicitly typed callback.
+
+Frontend quality is fail-fast through
 `npm run test:quality`, which intentionally gates the shipping Runtime/Canvas
 entrypoints and `src/app` topology plus topology tests. Its Prettier check uses
 the package-owned `--end-of-line auto` contract so the same quality invocation
@@ -242,12 +249,22 @@ header. When deployed behind a reverse proxy, configure the externally served
 `server_url` or an exact `--cors-allow-origin`; forwarding a host header alone
 does not establish the serving authority. Host matching remains
 case-insensitive with effective-port normalization, and no-`Origin` WebSocket
-clients retain the existing non-browser path. The current helper also treats
-loopback host aliases as equivalent at the same scheme and port; exact-host
-handling for those distinct spellings remains an open #153 boundary review, so
-do not characterize this path as hostname-exact until that decision is resolved.
+clients retain the existing non-browser path. Loopback names and addresses
+remain distinct browser origins: `localhost`, `127.0.0.1`, `::1`, and other
+127/8 addresses are not interchangeable. Admit an additional local browser
+origin only through an explicit configured origin or serving authority.
 Configured API-key verification remains independent and precedes origin
 admission.
+
+For an assembled WebSocket failure, record handshake status, echo/snapshot
+delivery, the first failing HTTP operation, and teardown order. A passing HTTP
+101 plus echo and snapshot followed by an Action POST sent through a host proxy
+and rejected with 403 is HTTP test infrastructure evidence; fixture teardown
+can subsequently close the socket with 1012. Diagnose that HTTP path before
+attributing the close to Runtime event delivery. Browser authentication is a
+separate acceptance boundary: `WebsocketConn` constructs `new WebSocket(url)`,
+and administrative `requestJson` calls do not attach a bearer. A configured-key
+non-browser WebSocket test does not prove authorized browser administration.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
