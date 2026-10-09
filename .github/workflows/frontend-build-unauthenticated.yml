@@ -65,6 +65,12 @@ jobs:
       - name: Install project
         run: uv run --no-project --python ${{ matrix.python }} inv devinstall
 
+      - name: Verify tunnel pipe lifecycle on the native platform
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest -q
+          tests/action_server_tests/test_community_expose.py
+          tests/action_server_tests/test_community_expose_lifecycle.py
+
       - name: Verify Robot publication on the native filesystem
         run: >-
           uv run --no-project --python ${{ matrix.python }} poetry run pytest -q
