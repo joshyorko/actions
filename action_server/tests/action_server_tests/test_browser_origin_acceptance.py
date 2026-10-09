@@ -1,23 +1,119 @@
 """Live Runtime browser coverage for Origin and ambient-session boundaries."""
 
+import concurrent.futures
+import importlib.util
 import json
 import logging
+import os
 import shutil
 import socket
 import subprocess
+import tempfile
 import textwrap
+import time
 from pathlib import Path
 
 import pytest
+
+
+def _run_browser_harness(command, input_data, *, process_owner, timeout_seconds, cwd):
+    with tempfile.NamedTemporaryFile(
+        mode="w", encoding="utf-8", dir=cwd, prefix="browser-input-", delete=False
+    ) as input_file:
+        json.dump(input_data, input_file)
+        input_path = Path(input_file.name)
+    env = os.environ.copy()
+    env["ACTIONS_BROWSER_ACCEPTANCE_INPUT"] = str(input_path)
+    try:
+        return process_owner.run_owned_process(
+            command, timeout_seconds=timeout_seconds, env=env, cwd=cwd
+        )
+    finally:
+        input_path.unlink(missing_ok=True)
+
+
+@pytest.mark.integration_test
+def test_browser_harness_deadline_reaps_owned_descendant(tmp_path):
+    script = (
+        Path(__file__).resolve().parents[2]
+        / "scripts"
+        / "verify_dakota_rcc_acceptance.py"
+    )
+    spec = importlib.util.spec_from_file_location("browser_process_owner", script)
+    assert spec is not None and spec.loader is not None
+    process_owner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(process_owner)
+    child_pid_file = tmp_path / "child.pid"
+    node = shutil.which("node")
+    assert node is not None, "RCC Node.js is required for owned-tree timeout coverage"
+    input_data = {
+        "runtime_origin": "http://127.0.0.1:1",
+        "force_hang_after_browser_launch": True,
+        "process_pid_file": str(child_pid_file),
+    }
+    frontend = Path(__file__).resolve().parents[2] / "frontend"
+    started = time.monotonic()
+
+    import psutil
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        future = executor.submit(
+            _run_browser_harness,
+            [node, "--input-type=module", "-e", _BROWSER_SCRIPT],
+            input_data,
+            process_owner=process_owner,
+            timeout_seconds=15,
+            cwd=frontend,
+        )
+        browser_pid = None
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline and browser_pid is None:
+            if child_pid_file.exists():
+                node_pid = int(child_pid_file.read_text())
+                try:
+                    descendants = psutil.Process(node_pid).children(recursive=True)
+                    browser_pid = next(
+                        (
+                            child.pid
+                            for child in descendants
+                            if any("chrome" in part.lower() for part in child.cmdline())
+                        ),
+                        None,
+                    )
+                except psutil.Error:
+                    pass
+            if browser_pid is None:
+                time.sleep(0.05)
+        assert (
+            browser_pid is not None
+        ), "forced hang never exposed an owned Chromium descendant"
+        assert psutil.pid_exists(browser_pid)
+        with pytest.raises(subprocess.TimeoutExpired):
+            future.result(timeout=25)
+
+    assert time.monotonic() - started < 30
+    deadline = time.monotonic() + 3
+    while psutil.pid_exists(browser_pid) and time.monotonic() < deadline:
+        try:
+            if psutil.Process(browser_pid).status() == psutil.STATUS_ZOMBIE:
+                break
+        except psutil.NoSuchProcess:
+            break
+        time.sleep(0.05)
+    assert (
+        not psutil.pid_exists(browser_pid)
+        or psutil.Process(browser_pid).status() == psutil.STATUS_ZOMBIE
+    )
+
 
 _BROWSER_SCRIPT = textwrap.dedent(
     r"""
     import assert from "node:assert/strict";
     import { request as httpRequest } from "node:http";
-    import { readFileSync } from "node:fs";
+    import { readFileSync, writeFileSync } from "node:fs";
     import { chromium } from "@playwright/test";
 
-    const input = JSON.parse(readFileSync(0, "utf8"));
+    const input = JSON.parse(readFileSync(process.env.ACTIONS_BROWSER_ACCEPTANCE_INPUT, "utf8"));
     const target = new URL(input.runtime_origin);
     const requests = [];
     let phase = "launch";
@@ -30,6 +126,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
             headers["Access-Control-Request-Method"] = preflightMethod;
             headers["Access-Control-Request-Headers"] = "content-type,x-origin-acceptance";
         }
+        let deadline;
         const request = httpRequest({
             hostname: target.hostname,
             family: target.hostname === "localhost" ? 4 : undefined,
@@ -38,16 +135,32 @@ _BROWSER_SCRIPT = textwrap.dedent(
             method,
             headers,
         }, (response) => {
+            response.setTimeout(10000, () => response.destroy(new Error("Runtime response deadline exceeded")));
             response.resume();
-            response.on("end", () => resolve(response.statusCode));
+            response.on("end", () => {
+                clearTimeout(deadline);
+                resolve(response.statusCode);
+            });
+            response.on("error", (error) => {
+                clearTimeout(deadline);
+                reject(error);
+            });
         });
-        request.on("error", reject);
+        deadline = setTimeout(() => request.destroy(new Error("Runtime request deadline exceeded")), 10000);
+        request.on("error", (error) => {
+            clearTimeout(deadline);
+            reject(error);
+        });
         request.end(method === "POST" ? "{}" : undefined);
     });
     try {
         browser = await chromium.launch({
             headless: true,
         });
+        if (input.force_hang_after_browser_launch) {
+            writeFileSync(input.process_pid_file, String(process.pid));
+            await new Promise(() => {});
+        }
         const context = await browser.newContext();
         const page = await context.newPage();
         page.on("requestfailed", (request) => {
@@ -83,7 +196,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
         });
         phase = "same_origin_auth_rejections";
         await page.goto(`${target.origin}/`);
-        const missingAuth = await page.evaluate(async () => (await fetch("/api/runs")).status);
+        const missingAuth = await page.evaluate(async () => (await fetch("/api/runs", { signal: AbortSignal.timeout(10000) })).status);
         assert.equal(missingAuth, 403);
 
         phase = "browser_session_sign_in";
@@ -91,7 +204,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
         await page.getByLabel("API key", { exact: true }).fill(input.api_key);
         await page.getByRole("button", { name: "Sign in", exact: true }).click();
         await page.getByRole("button", { name: "Sign out", exact: true }).waitFor();
-        const sameOrigin = await page.evaluate(async () => (await fetch("/api/runs")).status);
+        const sameOrigin = await page.evaluate(async () => (await fetch("/api/runs", { signal: AbortSignal.timeout(10000) })).status);
         assert.equal(sameOrigin, 200);
         const cookie = (await context.cookies()).find((item) => item.name === "actions_browser_session");
         assert.ok(cookie && cookie.httpOnly && cookie.sameSite === "Strict");
@@ -105,7 +218,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
         const cookieHeader = `${cookie.name}=${cookie.value}`;
 
         phase = "wrong_bearer_with_session";
-        const wrongBearer = await page.evaluate(async () => (await fetch("/api/runs", { headers: { Authorization: "Bearer wrong" } })).status);
+        const wrongBearer = await page.evaluate(async () => (await fetch("/api/runs", { headers: { Authorization: "Bearer wrong" }, signal: AbortSignal.timeout(10000) })).status);
         assert.equal(wrongBearer, 403);
 
         const fetchFromOrigin = async (origin, method, path) => {
@@ -117,11 +230,12 @@ _BROWSER_SCRIPT = textwrap.dedent(
                     const response = await fetch(probe, {
                         method,
                         credentials: "include",
+                        signal: AbortSignal.timeout(10000),
                         ...(method === "POST" ? { headers: { "Content-Type": "application/json", "X-Origin-Acceptance": "probe" }, body: "{}" } : {}),
                     });
                     return { outcome: "response", status: response.status, allowOrigin: response.headers.get("access-control-allow-origin") };
                 } catch (error) {
-                    return { outcome: "blocked", error: error.name };
+                    return { outcome: error.name === "TypeError" ? "blocked" : "error", error: error.name };
                 }
             }, { probe, method });
         };
@@ -209,11 +323,12 @@ _BROWSER_SCRIPT = textwrap.dedent(
                         const response = await fetch(probe, {
                             method,
                             credentials: "include",
+                            signal: AbortSignal.timeout(10000),
                             ...(method === "POST" ? { headers: { "Content-Type": "application/json", "X-Origin-Acceptance": "probe" }, body: "{}" } : {}),
                         });
                         parent.postMessage({ method, outcome: "response", status: response.status }, "*");
                     } catch (error) {
-                        parent.postMessage({ method, outcome: "blocked", error: error.name }, "*");
+                        parent.postMessage({ method, outcome: error.name === "TypeError" ? "blocked" : "error", error: error.name }, "*");
                     }
                 };
                 addEventListener("message", (event) => void send(event.data));
@@ -224,7 +339,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
                 const timer = setTimeout(() => {
                     removeEventListener("message", listener);
                     resolve({ method, outcome: "timeout" });
-                }, 5000);
+                }, 12000);
                 const listener = (event) => {
                     if (event.source !== frame.contentWindow || event.data?.method !== method) return;
                     removeEventListener("message", listener);
@@ -294,7 +409,13 @@ _BROWSER_SCRIPT = textwrap.dedent(
                 path: item.path,
             })),
         };
-        process.stdout.write(JSON.stringify({ status: "FAIL", phase, error_type: error.name, diagnostics }) + "\n");
+        process.stdout.write(JSON.stringify({
+            status: "FAIL",
+            phase,
+            error_type: error.name,
+            error_message: String(error.message ?? error).replaceAll(input.api_key ?? "\u0000", "[redacted]").slice(0, 500),
+            diagnostics,
+        }) + "\n");
         process.exitCode = 1;
     } finally {
         if (browser) await browser.close();
@@ -351,14 +472,28 @@ def test_live_runtime_browser_origin_and_ambient_session_matrix(
         },
         "api_key": "test-key",
     }
-    completed = subprocess.run(
-        [node, "--input-type=module", "-e", _BROWSER_SCRIPT],
-        cwd=Path(__file__).resolve().parents[2] / "frontend",
-        input=json.dumps(input_data),
-        capture_output=True,
-        text=True,
-        check=False,
+    process_owner_path = (
+        Path(__file__).resolve().parents[2]
+        / "scripts"
+        / "verify_dakota_rcc_acceptance.py"
     )
+    spec = importlib.util.spec_from_file_location(
+        "browser_process_owner", process_owner_path
+    )
+    assert spec is not None and spec.loader is not None
+    process_owner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(process_owner)
+    frontend = Path(__file__).resolve().parents[2] / "frontend"
+    try:
+        completed = _run_browser_harness(
+            [node, "--input-type=module", "-e", _BROWSER_SCRIPT],
+            input_data,
+            process_owner=process_owner,
+            timeout_seconds=180,
+            cwd=frontend,
+        )
+    except subprocess.TimeoutExpired as exc:
+        pytest.fail(f"Browser harness exceeded its owned-process deadline: {exc}")
     try:
         receipt = json.loads(completed.stdout.strip().splitlines()[-1])
     except (IndexError, json.JSONDecodeError):

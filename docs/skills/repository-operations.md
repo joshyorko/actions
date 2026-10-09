@@ -1027,13 +1027,26 @@ or validate prebuilt frontend/binary artifacts carry the `integration_test` mark
 portable FastAPI/Starlette `TestClient` contracts require `httpx` in Action Server's
 locked development dependencies. Managed `package.yaml` fixtures use published,
 compatible Actions package versions rather than nonexistent future pins.
-The portable invocation also discovers
-`tests/action_server_tests/test_devenv/pack1/tests/test_my_action.py`; both
-tests fail with `ModuleNotFoundError: my_action` because this nested project
-fixture's `src/` is not on the package-suite import path. Keep this separate
-from product regressions and hand it to the Action Server test-layout owner;
-do not mask it with a workspace-wide `PYTHONPATH` or silently exclude it from
-the full-suite receipt.
+The declared portable `test-not-integration` task does not recurse into
+`tests/action_server_tests/test_devenv/pack1/tests/`; Action Server's
+`norecursedirs` setting excludes that nested project fixture from discovery.
+Invoking `test_my_action.py` directly reproduces two
+`ModuleNotFoundError: my_action` failures because the fixture's `src/` is not
+on the test import path. Keep this fixture-layout issue separate from the
+declared portable-suite result and hand it to the Action Server test-layout
+owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
+the package's discovery rules.
+
+The real-browser Origin and ambient-session acceptance in
+`test_browser_origin_acceptance.py` runs Chromium against the actual Runtime
+HTTP server. Its Node HTTP requests and browser `fetch` calls have independent
+10-second deadlines, and the whole Node/Chromium process tree is bounded by a
+180-second outer deadline using the existing owned-process supervisor. A
+forced-hang regression observes Chromium alive before timeout and verifies the
+supervisor stops it. Playwright's default action timeout does not bound a
+pending `page.evaluate()` promise. A CORS `TypeError` proves only that browser
+script could not read a response: assert cookie transmission and the separate
+backend authorization status to establish those outcomes.
 
 Database migrations are complete only when an upgraded legacy database has the same
 tables, columns, and index definitions as a database freshly generated from current
