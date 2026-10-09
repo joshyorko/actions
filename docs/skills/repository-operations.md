@@ -11,6 +11,22 @@ candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
 publication success. Recheck dependency sequencing against each retained
 contract before implementation; a cross-reference alone is not a blocking edge.
 
+When projecting a multi-issue program into an execution graph, keep typed
+execution prerequisites, criterion/slice gates, parent coordination, related
+product direction, and full-acceptance aggregation separate. A parent or
+aggregation edge cannot block its child, and a consumer of one upstream
+criterion must not wait for that issue's entire contract to close. Preserve the
+superseded untyped projection as audit provenance, but run cycle and
+topological validation only over active execution prerequisites (including
+slice-to-slice gates). Record the authoritative source for each reclassification
+and verify that issue contracts, raw states, and accounting did not change.
+The community graph validator is part of `ToolkitTest`: run
+`rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`. The existing
+`.github/workflows/developer_toolkit.yml` pull-request matrix discovers its
+`developer/tests` wrapper, which runs the graph regressions and exact `--check`
+projection; keep this gate in that established path rather than creating a
+separate workflow.
+
 A receipt's tested subject is the source state actually executed: record its
 base SHA and any uncommitted delta separately from the later repair head. Do
 not relabel red-before evidence with the repaired head. For authenticated

@@ -5,6 +5,12 @@
 54 contracts retained; 53 currently open, 1 accepted/closed (#210), 0 verified review-ready. Integration is `26b0194590e14656bff92dce3665dccab09837a3` (tree `227e950994c52e629fe1fcd65effb7421f92aeb5`); PR253 merged as a partial trust foundation, not whole #134 acceptance. Original per-issue state fields and acceptance text remain preserved; current acceptance/accounting overlays record the verified #210 closure. See the [execution graph](community-execution-graph.md) for current ownership/dependencies and the [handoff](engineering-handoff.md) for exact current gates. Five bounded native Devsy lanes are ACTIVE under explicitly verified native policy; local worktree inventory is refreshed at 19:39:33Z, while remote checkout state is stated only from timestamped worker receipts.
 
 | Issue | Wave | Retained state | Owner / PR | Next bounded action |
+
+<!-- canvas-graph-amendment:start -->
+
+Canvas graph amendment (2026-10-09): execution prerequisites are separated from scoped criteria, parent coordination, related product direction and full-acceptance aggregation. #127 waits on its accepted template slices and relevant #125/#98 criteria, not whole #71/#93/#101 closure. The prior untyped edges remain in the graph as audit provenance; issue contracts, raw states and accounting are unchanged. At the latest snapshot, #100-A and the bounded #126 source-protocol proof are active; neither is whole-issue acceptance.
+
+<!-- canvas-graph-amendment:end -->
 |---|---|---|---|---|
 | [#214](https://github.com/joshyorko/actions/issues/214) | A | IN_PROGRESS | 225; /root/luna_tunnel; integration /root | PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open. |
 | [#212](https://github.com/joshyorko/actions/issues/212) | A | IN_PROGRESS | 216; Root integration owner; implementation lane assigned only for bounded disjoint work | Verify new native history gate on all supported OS and rebuilt candidate; retain full detail and legacy supported clients. |

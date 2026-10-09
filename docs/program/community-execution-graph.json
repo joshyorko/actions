@@ -1,7 +1,7 @@
 {
   "snapshot_date": "2026-10-09",
-  "worker_stage_snapshot": "2026-10-09T19:39:33Z",
-  "scope": "issue-level overlay only; no acceptance ledger/body changes",
+  "worker_stage_snapshot": "2026-10-09T20:03:01Z",
+  "scope": "Typed operational relationships; retained issue contracts and raw states remain unchanged. Only execution prerequisites participate in cycle/topological validation.",
   "contract_source": "governance/docs/program/community-program-ledger.json acceptance_contract compared with evidence/acceleration-open-issues.json body",
   "exact_contract_matches": 54,
   "issue_body_manifest_sha256": "1135e3aaf481341d5921bac7ab4ec5d726ffd2e8db0d17eaab90480e020902e8",
@@ -48,7 +48,9 @@
     "134": "D independent local consumer lane after PR253 merge; Sol architecture boundary review",
     "211": "Core package published; Devsy native-distribution thread01a12211-01b3-7850-b508-bd7959b8210c; PR257 test-integrity/checksum follow-up active",
     "153": "Devsy native-auth thread01a1220f-944d-7f22-94a4-112dc13be035, active browser/auth lane",
-    "208": "Devsy Work Items consumer thread01a12210-29e9-7fb3-91fc-644065721cb3; PR256 active NameError follow-up"
+    "208": "Devsy Work Items consumer thread01a12210-29e9-7fb3-91fc-644065721cb3; PR256 active NameError follow-up",
+    "100": "Issue #100 slice 100-A active in /workspace/work/community-resume/canvas-authoring, branch feature/issue-100a-public-mcp-app-authoring-20261009, base 3fee; current HEAD/dirty state not reported.",
+    "126": "Issue #126 bounded source-protocol proof active in /workspace/work/community-resume/mcp-showcase-proof, branch test/mcp-v2-showcase-protocol-20261009, base 3fee; not template completion; current HEAD/dirty state not reported."
   },
   "current_review_checkpoints": {
     "91": {
@@ -98,10 +100,11 @@
     }
   },
   "counts": {
-    "BLOCKED": 30,
+    "READY": 0,
+    "ACTIVE": 7,
+    "REVIEW": 8,
+    "BLOCKED": 29,
     "INTEGRATED": 9,
-    "REVIEW": 9,
-    "ACTIVE": 5,
     "COMPLETE": 1
   },
   "complete_verified_count": 1,
@@ -121,7 +124,11 @@
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": null,
-      "unresolved_open_issue_dependencies": [
+      "unresolved_open_issue_dependencies": [],
+      "reason": "The local Canvas vertical gates on named #83/#129/#130/#135 criteria plus accepted #99-A/#100-A/#100-B slices; it does not wait for whole Canvas issue closure. #127 contributes to full acceptance only.",
+      "next_bounded_action": "Deliver native Canvas foundry using shared immutable package/deployment/run semantics.",
+      "acceptance_contract_sha256": "813ccb6edbe5c9fb7e71e5a12c215fbf5a7cb5f3066b7f35a071e2d1c4ceea2b",
+      "prior_untyped_dependency_projection": [
         83,
         99,
         100,
@@ -129,9 +136,13 @@
         129,
         135
       ],
-      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #99 (BLOCKED, raw not_started), #100 (READY, raw not_started), #127 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #135 (BLOCKED, raw not_started)",
-      "next_bounded_action": "Deliver native Canvas foundry using shared immutable package/deployment/run semantics.",
-      "acceptance_contract_sha256": "813ccb6edbe5c9fb7e71e5a12c215fbf5a7cb5f3066b7f35a071e2d1c4ceea2b"
+      "coordination_parents": [],
+      "related_product_direction": [
+        93
+      ],
+      "full_acceptance_aggregation": [
+        127
+      ]
     },
     {
       "issue": 82,
@@ -150,7 +161,17 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
       "next_bounded_action": "Require collapsed, split and second-adapter vertical proof; reconcile closed137 reference without reopening.",
-      "acceptance_contract_sha256": "34581397b7cfa3c1bfae34e00ba2cf69808193381bc2d06c7d5d35543cc19dcd"
+      "acceptance_contract_sha256": "34581397b7cfa3c1bfae34e00ba2cf69808193381bc2d06c7d5d35543cc19dcd",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        129,
+        134,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 83,
@@ -168,7 +189,16 @@
       ],
       "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #135 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
       "next_bounded_action": "Implement pinned Runs/Attempts with epoch fencing and replica-safe claims on shared database.",
-      "acceptance_contract_sha256": "1298aa79f3f97b620b657c08bd5eea2a8dcec0c82e84fbe4cc2125e846f80066"
+      "acceptance_contract_sha256": "1298aa79f3f97b620b657c08bd5eea2a8dcec0c82e84fbe4cc2125e846f80066",
+      "prior_untyped_dependency_projection": [
+        84,
+        129,
+        135,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 84,
@@ -181,7 +211,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Foundation PR #109 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
       "next_bounded_action": "Complete exact-head review of the live PostgreSQL transaction repair, then wheel/native/TLS and multi-process migration acceptance.",
-      "acceptance_contract_sha256": "17ae88bde7fa1006dd181d3ade0c8aefd87ffbf777ca31174674e4ddb46a62e6"
+      "acceptance_contract_sha256": "17ae88bde7fa1006dd181d3ade0c8aefd87ffbf777ca31174674e4ddb46a62e6",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 85,
@@ -198,7 +232,15 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
       "next_bounded_action": "Map MCP Tasks to canonical durable Runs without independent queue or ownership.",
-      "acceptance_contract_sha256": "7be3c40e2573938c1cf45e8c15e98bacb4ab56740c552b07ee90696551abb72b"
+      "acceptance_contract_sha256": "7be3c40e2573938c1cf45e8c15e98bacb4ab56740c552b07ee90696551abb72b",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 86,
@@ -215,7 +257,15 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
       "next_bounded_action": "Implement authorized replica-readable artifact/result handles and fenced publication.",
-      "acceptance_contract_sha256": "b6e41d5fd4a6477cc176545a7f75dee33ba5b4b74f6b9478272a3324553eadc9"
+      "acceptance_contract_sha256": "b6e41d5fd4a6477cc176545a7f75dee33ba5b4b74f6b9478272a3324553eadc9",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 87,
@@ -231,7 +281,14 @@
       ],
       "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
       "next_bounded_action": "Separate request context from workspace bindings/grants and pin immutable binding policy.",
-      "acceptance_contract_sha256": "e22809c4dd9d6b4504f7a1a91b01da2cf14e709ec595e67e3f22a7345100424e"
+      "acceptance_contract_sha256": "e22809c4dd9d6b4504f7a1a91b01da2cf14e709ec595e67e3f22a7345100424e",
+      "prior_untyped_dependency_projection": [
+        84,
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 90,
@@ -250,7 +307,17 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
       "next_bounded_action": "Separate worker execution ownership from Runtime requests and demonstrate cross-replica control.",
-      "acceptance_contract_sha256": "a5ba8d028a061a1412bd70aaf2d68565fd288a3b31bbd2d2b990d55eeaa66a58"
+      "acceptance_contract_sha256": "a5ba8d028a061a1412bd70aaf2d68565fd288a3b31bbd2d2b990d55eeaa66a58",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        129,
+        130,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 91,
@@ -263,7 +330,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR250 merged this bounded SDK/auth contract foundation into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; public authorization implementation and the complete #91 contract remain open.",
       "next_bounded_action": "Use merged PR250 only as a partial contract checkpoint. Preserve API-key/provider OAuth boundaries and the remaining #91 acceptance; no whole-issue completion is implied.",
-      "acceptance_contract_sha256": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6"
+      "acceptance_contract_sha256": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 92,
@@ -282,7 +353,17 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #85 (BLOCKED, raw not_started), #87 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
       "next_bounded_action": "Implement durable authorized human-interaction and review transitions.",
-      "acceptance_contract_sha256": "bfceb5112808c598ea83bd4456491fcebe37b21fdf9a06c69c919582bee6c6b9"
+      "acceptance_contract_sha256": "bfceb5112808c598ea83bd4456491fcebe37b21fdf9a06c69c919582bee6c6b9",
+      "prior_untyped_dependency_projection": [
+        83,
+        85,
+        87,
+        129,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 93,
@@ -292,7 +373,11 @@
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": null,
-      "unresolved_open_issue_dependencies": [
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Unresolved child-acceptance edges: #96 (INTEGRATED, raw implemented_unverified), #97 (INTEGRATED, raw implemented_unverified), #98 (INTEGRATED, raw implemented_unverified), #99 (BLOCKED, raw not_started), #100 (READY, raw not_started), #126 (BLOCKED, raw not_started), #127 (BLOCKED, raw not_started), #208 (ACTIVE, raw implemented_unverified). #101 is the execution parent, not a prerequisite; #209 is a related CI/reconnect issue. Foundation PRs #112/#114/#115/#119 are merged.",
+      "next_bounded_action": "Track all UI child acceptance and require real packaged-backend evidence before umbrella acceptance.",
+      "acceptance_contract_sha256": "170c3a3a09b949fe5ad344b5ffe9355459ae3b982f61750e453b7851f1ac99f6",
+      "prior_untyped_dependency_projection": [
         96,
         97,
         98,
@@ -304,9 +389,23 @@
         208,
         209
       ],
-      "reason": "Unresolved child-acceptance edges: #96 (INTEGRATED, raw implemented_unverified), #97 (INTEGRATED, raw implemented_unverified), #98 (INTEGRATED, raw implemented_unverified), #99 (BLOCKED, raw not_started), #100 (READY, raw not_started), #126 (BLOCKED, raw not_started), #127 (BLOCKED, raw not_started), #208 (ACTIVE, raw implemented_unverified). #101 is the execution parent, not a prerequisite; #209 is a related CI/reconnect issue. Foundation PRs #112/#114/#115/#119 are merged.",
-      "next_bounded_action": "Track all UI child acceptance and require real packaged-backend evidence before umbrella acceptance.",
-      "acceptance_contract_sha256": "170c3a3a09b949fe5ad344b5ffe9355459ae3b982f61750e453b7851f1ac99f6"
+      "coordination_parents": [
+        101
+      ],
+      "related_product_direction": [
+        71,
+        209
+      ],
+      "full_acceptance_aggregation": [
+        96,
+        97,
+        98,
+        99,
+        100,
+        126,
+        127,
+        208
+      ]
     },
     {
       "issue": 96,
@@ -319,7 +418,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Foundation PR #112 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
       "next_bounded_action": "Validate standalone shell route families, mobile navigation and truthful degraded overview.",
-      "acceptance_contract_sha256": "95f3a6926f1c808ce2bfacf77dd6e8562138df82c53f7cc99956a58afbf0a095"
+      "acceptance_contract_sha256": "95f3a6926f1c808ce2bfacf77dd6e8562138df82c53f7cc99956a58afbf0a095",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 97,
@@ -332,7 +435,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Foundation PR #119 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
       "next_bounded_action": "Prove actual packaged responsive/accessibility/offline/CSP/error recovery workflows.",
-      "acceptance_contract_sha256": "9a404411dcc26dcb377e0b127d4579f1db3eb6f1fa3bcf16b09df6eb595224e1"
+      "acceptance_contract_sha256": "9a404411dcc26dcb377e0b127d4579f1db3eb6f1fa3bcf16b09df6eb595224e1",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 98,
@@ -345,7 +452,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Foundation PR #115 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
       "next_bounded_action": "Verify separate Runtime/Canvas artifact inventories, deterministic builds and packaged browser.",
-      "acceptance_contract_sha256": "e5d6366ca768bcd85aa66a2be438c50e202c9927c06e8305c845b7d417a46924"
+      "acceptance_contract_sha256": "e5d6366ca768bcd85aa66a2be438c50e202c9927c06e8305c845b7d417a46924",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 99,
@@ -355,25 +466,33 @@
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": null,
-      "unresolved_open_issue_dependencies": [
+      "unresolved_open_issue_dependencies": [],
+      "reason": "#99-A consumes the relevant #97 UI foundation and #98 Canvas artifact criteria; optional host-specific work remains separate in #99-B.",
+      "next_bounded_action": "Implement the portable Canvas renderer/resource bridge against the agreed fixture after its consumed #97/#98 criteria are accepted; do not wait for unrelated whole-issue closure.",
+      "acceptance_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e",
+      "prior_untyped_dependency_projection": [
         97,
         98
       ],
-      "reason": "Explicit dependencies #80, #94, and #95 are closed. #97 and #98 remain open with acceptance incomplete.",
-      "next_bounded_action": "Implement the versioned semantic CanvasSpec renderer after the #97/#98 acceptance gates are complete.",
-      "acceptance_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e"
+      "coordination_parents": [
+        93
+      ],
+      "related_product_direction": [
+        71
+      ],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 100,
       "title": "Define Canvas authoring contracts in actions-core without package proliferation",
       "retained_state": "NOT_STARTED",
-      "classification": "REVIEW",
+      "classification": "ACTIVE",
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": null,
       "unresolved_open_issue_dependencies": [],
-      "reason": "PR254 bounded #100 authoring ADR remains an open review proposal; user is preparing Canvas/MCP issue revisions, so do not integrate this proposal into a changed contract. #125 remains the scoped public MCP Apps dependency.",
-      "next_bounded_action": "Wait for revised Canvas/MCP issue scope, then reconcile or supersede the proposal without starting implementation.",
+      "reason": "The public authoring 100-A implementation slice is active. PR254 remains an open review-only ADR proposal and is not integrated into the revised scope; the separate 100-B schema slice remains proposal-only.",
+      "next_bounded_action": "Continue the isolated 100-A public authoring slice while preserving PR254 as review-only; do not infer 100-B or whole #100 acceptance.",
       "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
       "scoped_dependencies": [
         {
@@ -381,7 +500,16 @@
           "issue": 125,
           "status": "deferred until #125 acceptance; not a blanket issue-level prerequisite"
         }
-      ]
+      ],
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [
+        93
+      ],
+      "related_product_direction": [
+        71,
+        99
+      ],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 101,
@@ -394,7 +522,13 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Root maintains the canonical execution ledger and immutable receipts during active engineering.",
       "next_bounded_action": "Preserve all 54 contracts, exact worker ownership, failed publication and warm-restart evidence; no completion from checkpoint counts.",
-      "acceptance_contract_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240"
+      "acceptance_contract_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": [
+        93
+      ]
     },
     {
       "issue": 125,
@@ -407,22 +541,38 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Foundation PR #128 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
       "next_bounded_action": "Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract.",
-      "acceptance_contract_sha256": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238"
+      "acceptance_contract_sha256": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 126,
       "title": "feat: add an MCP v2 capabilities showcase template",
       "retained_state": "NOT_STARTED",
-      "classification": "BLOCKED",
+      "classification": "ACTIVE",
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": 219,
-      "unresolved_open_issue_dependencies": [
+      "unresolved_open_issue_dependencies": [],
+      "reason": "A bounded #126 source-protocol proof is active; this is not template/SDK acceptance. The full contract still consumes only relevant #125 criteria, with parent coordination and optional Canvas references nonblocking.",
+      "next_bounded_action": "Complete the bounded source-protocol proof on its exact branch and report its limits; keep full SDK/template acceptance and #125's remaining contract open.",
+      "acceptance_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f",
+      "prior_untyped_dependency_projection": [
         125
       ],
-      "reason": "Explicit dependency: #125 public-package/template-boundary acceptance remains open; exact-head PR #219 design review is also pending.",
-      "next_bounded_action": "Complete the verified public-package/template boundary prerequisite, then adversarially accept PR #219 before implementation.",
-      "acceptance_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f"
+      "coordination_parents": [
+        93,
+        101
+      ],
+      "related_product_direction": [
+        71,
+        99,
+        100,
+        127
+      ],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 127,
@@ -432,16 +582,25 @@
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": null,
-      "unresolved_open_issue_dependencies": [
+      "unresolved_open_issue_dependencies": [],
+      "reason": "#127-template consumes accepted #100-A/#100-B/#99-A slices and only relevant #125/#98 criteria. #71 is product direction and full-acceptance aggregation; #93/#101 are coordination, not execution prerequisites.",
+      "next_bounded_action": "Build the packaged Canvas template when its scoped authoring, renderer, public-package and artifact gates pass; it does not wait for #71, #93 or #101 to close.",
+      "acceptance_contract_sha256": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0",
+      "prior_untyped_dependency_projection": [
         71,
         93,
         99,
         100,
         101
       ],
-      "reason": "Unresolved contract edge(s): #71 (BLOCKED, raw not_started), #93 (BLOCKED, raw not_started), #99 (BLOCKED, raw not_started), #100 (READY, raw not_started), #101 (REVIEW, raw in_progress)",
-      "next_bounded_action": "Build community Canvas template only after renderer/authoring contracts are proven.",
-      "acceptance_contract_sha256": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0"
+      "coordination_parents": [
+        93,
+        101
+      ],
+      "related_product_direction": [
+        71
+      ],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 129,
@@ -454,7 +613,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR250 merged the design-only #129 probe into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; no production Deployment implementation or full-issue acceptance is claimed.",
       "next_bounded_action": "Continue only after verifying the merged contract and its prerequisites; keep production migration, revision admission, and full Deployment acceptance open.",
-      "acceptance_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5"
+      "acceptance_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 130,
@@ -469,7 +632,13 @@
       ],
       "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified)",
       "next_bounded_action": "Freeze portable immutable capability/runtime-plan bundle schema after Deployment identity review.",
-      "acceptance_contract_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277"
+      "acceptance_contract_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
+      "prior_untyped_dependency_projection": [
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 131,
@@ -486,7 +655,15 @@
       ],
       "reason": "Unresolved contract edge(s): #125 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started)",
       "next_bounded_action": "Define provider data/knowledge references and authorized operations without product-tier coupling.",
-      "acceptance_contract_sha256": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae"
+      "acceptance_contract_sha256": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae",
+      "prior_untyped_dependency_projection": [
+        125,
+        129,
+        130
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 132,
@@ -503,7 +680,15 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #90 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified)",
       "next_bounded_action": "Implement durable business queue/review/lease semantics separately from Run ownership.",
-      "acceptance_contract_sha256": "1db3e8aee4c298fc35aee568eb5f142005fd9393919aea947e8818caa69056ee"
+      "acceptance_contract_sha256": "1db3e8aee4c298fc35aee568eb5f142005fd9393919aea947e8818caa69056ee",
+      "prior_untyped_dependency_projection": [
+        83,
+        90,
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 133,
@@ -521,7 +706,16 @@
       ],
       "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
       "next_bounded_action": "Extend proven RCC adapter to worker execution using released provider/lease/exec contract.",
-      "acceptance_contract_sha256": "7cfcdb618fc35203a0cacf64e37fc2696ad003f133c4391abbf3ec8b034d4c4c"
+      "acceptance_contract_sha256": "7cfcdb618fc35203a0cacf64e37fc2696ad003f133c4391abbf3ec8b034d4c4c",
+      "prior_untyped_dependency_projection": [
+        129,
+        130,
+        134,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 134,
@@ -534,7 +728,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR253 trust fix at290e469c is merged to integration26b019 (tree227e950) with four hosted checks PASS. Runtime suite742/10skip and same-provider503 negative PASS; overall warm harness FAIL. Independent local/provider-free actual consumer acceptance is now active.",
       "next_bounded_action": "Complete bounded actual local consumer proof while preserving warm FAIL, provider-503 negative, source/wheel/frozen cells, native limits, and full issue contract.",
-      "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d"
+      "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 135,
@@ -550,7 +748,14 @@
       ],
       "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started)",
       "next_bounded_action": "Compile deterministic Package Revisions and plans from current sources without machine-local identities.",
-      "acceptance_contract_sha256": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7"
+      "acceptance_contract_sha256": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7",
+      "prior_untyped_dependency_projection": [
+        129,
+        130
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 136,
@@ -565,7 +770,13 @@
       ],
       "reason": "Unresolved contract edge(s): #135 (BLOCKED, raw not_started)",
       "next_bounded_action": "Implement verified immutable source provider and worker-local cache with corruption rejection.",
-      "acceptance_contract_sha256": "8812f36639e9ead075dc7fe826ada97d0026ae1690f6c8e06de758d03d1f8a7f"
+      "acceptance_contract_sha256": "8812f36639e9ead075dc7fe826ada97d0026ae1690f6c8e06de758d03d1f8a7f",
+      "prior_untyped_dependency_projection": [
+        135
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 138,
@@ -585,7 +796,18 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #90 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
       "next_bounded_action": "Version worker protocol carrying exact pinned plans and explicit decline/cancel/recovery.",
-      "acceptance_contract_sha256": "9afdd59ce5c4203be48761ea82304282b75596bf792a92d2ea7b730f00d45edf"
+      "acceptance_contract_sha256": "9afdd59ce5c4203be48761ea82304282b75596bf792a92d2ea7b730f00d45edf",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        90,
+        129,
+        130,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 139,
@@ -600,7 +822,13 @@
       ],
       "reason": "Unresolved contract edge(s): #143 (BLOCKED, raw not_started)",
       "next_bounded_action": "Build exact-subject conformance receipts over real operations, invalidation and no-fallback rejection.",
-      "acceptance_contract_sha256": "f522d635575963ab26eaf73c66bbdd438cb199a9a2d92820e374dd8e9da73d21"
+      "acceptance_contract_sha256": "f522d635575963ab26eaf73c66bbdd438cb199a9a2d92820e374dd8e9da73d21",
+      "prior_untyped_dependency_projection": [
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 140,
@@ -619,7 +847,17 @@
       ],
       "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #86 (BLOCKED, raw not_started), #87 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #138 (BLOCKED, raw not_started)",
       "next_bounded_action": "Package collapsed and split topologies with backup/upgrades/health and real worker acceptance.",
-      "acceptance_contract_sha256": "a83da2aee36817f0851bdee6bfc3673351c2be82e192b8c21fca8f385d39c2cc"
+      "acceptance_contract_sha256": "a83da2aee36817f0851bdee6bfc3673351c2be82e192b8c21fca8f385d39c2cc",
+      "prior_untyped_dependency_projection": [
+        84,
+        86,
+        87,
+        129,
+        138
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 141,
@@ -640,7 +878,19 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #85 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #132 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #147 (BLOCKED, raw not_started)",
       "next_bounded_action": "Implement deterministic pinned capability workflow nodes and durable lineage.",
-      "acceptance_contract_sha256": "b5c29cba880f014805832ef598f28264d7e9902126d13dcef109b42b6f73a993"
+      "acceptance_contract_sha256": "b5c29cba880f014805832ef598f28264d7e9902126d13dcef109b42b6f73a993",
+      "prior_untyped_dependency_projection": [
+        83,
+        85,
+        129,
+        130,
+        132,
+        143,
+        147
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 142,
@@ -658,7 +908,16 @@
       ],
       "reason": "Unresolved contract edge(s): #138 (BLOCKED, raw not_started), #139 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
       "next_bounded_action": "Execute Robot adapter-by-placement matrix with explicit unsupported cells and process-tree proof.",
-      "acceptance_contract_sha256": "33cbac7943a286bf33d76ede684e83d46c39e33d87befdeac0e9f1e0bb6ca7e1"
+      "acceptance_contract_sha256": "33cbac7943a286bf33d76ede684e83d46c39e33d87befdeac0e9f1e0bb6ca7e1",
+      "prior_untyped_dependency_projection": [
+        138,
+        139,
+        143,
+        144
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 143,
@@ -673,7 +932,13 @@
       ],
       "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified)",
       "next_bounded_action": "Extract shared admission/preflight adapter contract from real RCC and exercise genuine second adapter.",
-      "acceptance_contract_sha256": "a7a0bbc131ae212e7cd1c0cc7a8a37249ad26e65d2ea553857fb565bc1431959"
+      "acceptance_contract_sha256": "a7a0bbc131ae212e7cd1c0cc7a8a37249ad26e65d2ea553857fb565bc1431959",
+      "prior_untyped_dependency_projection": [
+        134
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 144,
@@ -691,7 +956,16 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #134 (ACTIVE, raw implemented_unverified), #135 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
       "next_bounded_action": "Move Robot Tasks onto common capability and Run model independent of adapter.",
-      "acceptance_contract_sha256": "f590b8962d8668fdcfebd556fbdfdc5a967d9e2495be3520264f607fde5a6032"
+      "acceptance_contract_sha256": "f590b8962d8668fdcfebd556fbdfdc5a967d9e2495be3520264f607fde5a6032",
+      "prior_untyped_dependency_projection": [
+        83,
+        134,
+        135,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 145,
@@ -709,7 +983,16 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
       "next_bounded_action": "Build unified Run Composer and lightweight Control Room consuming authoritative admission.",
-      "acceptance_contract_sha256": "7ab0e82f0774b0a96cb2050ef6ef326f3920cf07e554e7acf1a892f77f9dc610"
+      "acceptance_contract_sha256": "7ab0e82f0774b0a96cb2050ef6ef326f3920cf07e554e7acf1a892f77f9dc610",
+      "prior_untyped_dependency_projection": [
+        83,
+        129,
+        143,
+        144
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 146,
@@ -726,7 +1009,15 @@
       ],
       "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
       "next_bounded_action": "Unify CLI capability/Robot/dev-task operations through authoritative admission/runtime plans.",
-      "acceptance_contract_sha256": "eefac147b16763e4802dbbd16df770d4b651aa38f0a400b9d49551db6b2b400a"
+      "acceptance_contract_sha256": "eefac147b16763e4802dbbd16df770d4b651aa38f0a400b9d49551db6b2b400a",
+      "prior_untyped_dependency_projection": [
+        134,
+        143,
+        144
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 147,
@@ -745,7 +1036,17 @@
       ],
       "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
       "next_bounded_action": "Implement typed internal invocation with pinned child Runs and authorization lineage.",
-      "acceptance_contract_sha256": "93ca82e88727777675017c6711b7dbbc237f7704e8101863ede6b4f6fe6d3fb9"
+      "acceptance_contract_sha256": "93ca82e88727777675017c6711b7dbbc237f7704e8101863ede6b4f6fe6d3fb9",
+      "prior_untyped_dependency_projection": [
+        83,
+        129,
+        130,
+        143,
+        144
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 148,
@@ -760,7 +1061,13 @@
       ],
       "reason": "Unresolved contract edge(s): #135 (BLOCKED, raw not_started)",
       "next_bounded_action": "Complete secure acquisition and compile Robot metadata through shared immutable package compiler.",
-      "acceptance_contract_sha256": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6"
+      "acceptance_contract_sha256": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6",
+      "prior_untyped_dependency_projection": [
+        135
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 149,
@@ -773,7 +1080,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Advisory record remains open, with no current implementation worker; retain it as a review/advisory item and do not restore execution labels.",
       "next_bounded_action": "Retain living advisory record open; consume evidence without restoring execution labels.",
-      "acceptance_contract_sha256": "7f339f2e3378bf0572f6535738aba3029f51554dbd65d749ce4a433038ce4513"
+      "acceptance_contract_sha256": "7f339f2e3378bf0572f6535738aba3029f51554dbd65d749ce4a433038ce4513",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 151,
@@ -786,7 +1097,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR250 merged the bounded Robot importer/final-copy foundation into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; root/source identity, Windows ACL, and full publication acceptance remain open.",
       "next_bounded_action": "Continue with the remaining root/source identity and platform permission gates; do not infer full ZIP publication safety from the merged partial tests.",
-      "acceptance_contract_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03"
+      "acceptance_contract_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 152,
@@ -799,7 +1114,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Foundation PR #199 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
       "next_bounded_action": "Run assembled protected-route/mount inventory with missing, wrong and valid keys and zero-side-effect assertions.",
-      "acceptance_contract_sha256": "c58dd4c2ac0b665f6cd67ad51f0629f30670bf0c0df603823b68d462fd222970"
+      "acceptance_contract_sha256": "c58dd4c2ac0b665f6cd67ad51f0629f30670bf0c0df603823b68d462fd222970",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 153,
@@ -812,7 +1131,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Native auth lane is actively implementing #153 real-browser origin/session acceptance; root reports pre-19:27Z head5800c4bf plus an untracked test. Later remote tree state has not been independently refreshed.",
       "next_bounded_action": "Finish the focused real-browser matrix and report current exact branch/HEAD/dirty receipt; do not infer whole #153 completion.",
-      "acceptance_contract_sha256": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a"
+      "acceptance_contract_sha256": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 155,
@@ -825,7 +1148,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Exact-head/adversarial review remains before the next implementation step (PR #222). Full acceptance remains open.",
       "next_bounded_action": "Resolve independent public roadmap review findings and verify dated registry/native compatibility claims.",
-      "acceptance_contract_sha256": "3ba8fdca26f2761fcaa820a22a10d9c23367393f36735c95c376adcda318e395"
+      "acceptance_contract_sha256": "3ba8fdca26f2761fcaa820a22a10d9c23367393f36735c95c376adcda318e395",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 162,
@@ -838,7 +1165,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Exact-head/adversarial review remains before the next implementation step (PR #227). Full acceptance remains open.",
       "next_bounded_action": "Verify final hosted coverage gate; integrated ordinary source run PASS53.391% against53.38%; retain service/subprocess/platform limits.",
-      "acceptance_contract_sha256": "09725e2a6edb5b7b9c0773df8eaa1bf49508b546898b6a7fcee8a8f5022c77ad"
+      "acceptance_contract_sha256": "09725e2a6edb5b7b9c0773df8eaa1bf49508b546898b6a7fcee8a8f5022c77ad",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 194,
@@ -851,7 +1182,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR #217 remains a checkpoint; no current implementation worker is assigned to this command-dispatch coverage issue.",
       "next_bounded_action": "Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release.",
-      "acceptance_contract_sha256": "43496e2b9e8e7c8b9e1d9fceff7fc3be1ed3f9a79677552811ab6e27c391f4f5"
+      "acceptance_contract_sha256": "43496e2b9e8e7c8b9e1d9fceff7fc3be1ed3f9a79677552811ab6e27c391f4f5",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 195,
@@ -864,7 +1199,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR #217 remains a checkpoint; no current implementation worker is assigned to this Core private-API issue.",
       "next_bounded_action": "Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release.",
-      "acceptance_contract_sha256": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274"
+      "acceptance_contract_sha256": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 196,
@@ -883,7 +1222,17 @@
       ],
       "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified), #152 (INTEGRATED, raw implemented_unverified), #153 (REVIEW, raw in_progress), #208 (ACTIVE, raw implemented_unverified), #214 (REVIEW, raw in_progress)",
       "next_bounded_action": "Host RCC provider only after administrative/auth/origin and tunnel lifecycle acceptance.",
-      "acceptance_contract_sha256": "13ec0d086e569fc55992151a649debcf3ad6eac3492991b9acb5be3489f2a6d7"
+      "acceptance_contract_sha256": "13ec0d086e569fc55992151a649debcf3ad6eac3492991b9acb5be3489f2a6d7",
+      "prior_untyped_dependency_projection": [
+        134,
+        152,
+        153,
+        208,
+        214
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 208,
@@ -896,7 +1245,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR256 at5bce8cd is pushed with native CI active. Independent review found a generated-module NameError blocking the expanded test gate; the same Work Items thread is actively fixing it.",
       "next_bounded_action": "Resolve generated-module NameError, then advance the packaged Work Items browser/platform matrix; retain Linux consumer proof and failures separately.",
-      "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c"
+      "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 209,
@@ -909,7 +1262,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR #216 remains assigned but has no current implementation worker in this snapshot; native acceptance and review remain.",
       "next_bounded_action": "Verify latest native WebSocket/reconnect on all OS; All-platform b592 packaged reconnect PASS; e4 Windows cleanup failure remains distinct.",
-      "acceptance_contract_sha256": "c9cbf271124d20fac773f4203ba474cc167341e5d33aae0cbfa2966c9676ce92"
+      "acceptance_contract_sha256": "c9cbf271124d20fac773f4203ba474cc167341e5d33aae0cbfa2966c9676ce92",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 210,
@@ -927,7 +1284,11 @@
         "status": "ACCEPTED_AND_CLOSED",
         "comment_id": 6087641984,
         "audit": "evidence/release-contract-audit-20261009.md"
-      }
+      },
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 211,
@@ -940,7 +1301,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "Core1.0.2 is published: immutable tag actions-core-1.0.2 from community011c548, run37979108120 verify/publish PASS, PyPI wheel/sdist and 51-file source projection verified. Cloud workflow ZIP download403; independent native manifest inspection remains in progress with no result claimed.",
       "next_bounded_action": "Complete #211 native distribution/checksum and Homebrew handoff gates through PR257, resolve the active four-F811 test-integrity follow-up, then continue Runtime/native1.0.3 acceptance separately.",
-      "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4"
+      "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 212,
@@ -953,7 +1318,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR #216 remains assigned but has no current implementation worker in this snapshot; native acceptance and review remain.",
       "next_bounded_action": "Verify new native history gate on all supported OS and rebuilt candidate; retain full detail and legacy supported clients.",
-      "acceptance_contract_sha256": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31"
+      "acceptance_contract_sha256": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     },
     {
       "issue": 214,
@@ -966,7 +1335,11 @@
       "unresolved_open_issue_dependencies": [],
       "reason": "PR #225 remains open, but no current implementation worker is assigned in this snapshot; live provider/TLS and standalone lifecycle gates remain.",
       "next_bounded_action": "PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open.",
-      "acceptance_contract_sha256": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347"
+      "acceptance_contract_sha256": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
     }
   ],
   "completed_issue_overlays": [
@@ -976,5 +1349,1300 @@
       "owner_comment_id": 6087641984,
       "original_retained_state_preserved": "IMPLEMENTED_UNVERIFIED"
     }
-  ]
+  ],
+  "relationship_schema_version": 2,
+  "relationship_amendment": "canvas-execution-graph-20261009-v4",
+  "relationship_model": {
+    "execution_prerequisites": [
+      {
+        "prerequisite": 83,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 83,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 83,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 83,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 83,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 85,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 85,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 85,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 86,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 86,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 86,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 87,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 87,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 85,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 87,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 130,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 125,
+        "consumer": 131,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 131,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 131,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 132,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 90,
+        "consumer": 132,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 132,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 133,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 133,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 133,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 133,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 135,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 135,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 136,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 90,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 139,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 86,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 87,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 138,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 85,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 132,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 147,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 138,
+        "consumer": 142,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 139,
+        "consumer": 142,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 142,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 142,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 143,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 144,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 144,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 144,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 144,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 145,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 145,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 145,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 145,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 146,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 146,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 146,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 148,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 152,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 153,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 208,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 214,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      }
+    ],
+    "scoped_execution_gates": [
+      {
+        "prerequisite": "125:public-package-boundary",
+        "consumer_slice": "100-A",
+        "scope": "Only the relevant public package/MCP resource criteria; not all of #125"
+      },
+      {
+        "prerequisite": "97:ui-foundation",
+        "consumer_slice": "99-A",
+        "scope": "Consumed UI system and offline/CSP foundation criteria"
+      },
+      {
+        "prerequisite": "98:canvas-artifact",
+        "consumer_slice": "99-A",
+        "scope": "Separate Canvas artifact and build/manifest criteria"
+      },
+      {
+        "prerequisite": "100-A",
+        "consumer_slice": "127-template",
+        "scope": "Accepted public authoring fixture"
+      },
+      {
+        "prerequisite": "100-B",
+        "consumer_slice": "127-template",
+        "scope": "Accepted serialization fixture only if template consumes CanvasSpec"
+      },
+      {
+        "prerequisite": "99-A",
+        "consumer_slice": "127-template",
+        "scope": "Accepted renderer/resource/bridge slice"
+      },
+      {
+        "prerequisite": "125:public-package-boundary",
+        "consumer_slice": "127-template",
+        "scope": "Relevant public-package/template checks only"
+      },
+      {
+        "prerequisite": "125:public-package-boundary",
+        "consumer_slice": "126-template",
+        "scope": "Only the relevant public package/template boundary criteria; not all of #125"
+      },
+      {
+        "prerequisite": "98:canvas-artifact",
+        "consumer_slice": "127-template",
+        "scope": "Relevant Canvas artifact pipeline checks only"
+      },
+      {
+        "prerequisite": "100-A",
+        "consumer_slice": "71-local",
+        "scope": "Accepted public authoring boundary"
+      },
+      {
+        "prerequisite": "100-B",
+        "consumer_slice": "71-local",
+        "scope": "Accepted shared schema only if generated spec uses it"
+      },
+      {
+        "prerequisite": "99-A",
+        "consumer_slice": "71-local",
+        "scope": "Accepted portable View/renderer boundary"
+      },
+      {
+        "prerequisite": "83:run-attempt-authority",
+        "consumer_slice": "71-local",
+        "scope": "Minimum local Run/Attempt semantics"
+      },
+      {
+        "prerequisite": "129:deployment-binding",
+        "consumer_slice": "71-local",
+        "scope": "Minimum local Deployment identity/bindings"
+      },
+      {
+        "prerequisite": "130:package-revision",
+        "consumer_slice": "71-local",
+        "scope": "Immutable generated Package Revision contract"
+      },
+      {
+        "prerequisite": "135:compiler",
+        "consumer_slice": "71-local",
+        "scope": "Minimum package-to-revision/compiler contract"
+      },
+      {
+        "prerequisite": "71-local",
+        "consumer_slice": "71-host",
+        "scope": "Host integration consumes a working portable local vertical"
+      },
+      {
+        "prerequisite": "91:authorization-boundary",
+        "consumer_slice": "71-host",
+        "scope": "Only if host mode exposes protected/share functionality"
+      },
+      {
+        "prerequisite": "214:public-edge-boundary",
+        "consumer_slice": "71-host",
+        "scope": "Only for remote/share acceptance, not local fixture proof"
+      }
+    ],
+    "criteria": [
+      {
+        "id": "125:public-package-boundary",
+        "owner_issue": 125,
+        "description": "Relevant public package and MCP resource boundary",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR128 foundation merged but full #125 acceptance remains open."
+      },
+      {
+        "id": "97:ui-foundation",
+        "owner_issue": 97,
+        "description": "Consumed UI, offline and CSP foundation criteria",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR119 foundation merged and acceptance gates remain open."
+      },
+      {
+        "id": "98:canvas-artifact",
+        "owner_issue": 98,
+        "description": "Consumed Canvas artifact, manifest and build criteria",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR115 foundation merged and acceptance gates remain open."
+      },
+      {
+        "id": "83:run-attempt-authority",
+        "owner_issue": 83,
+        "description": "Minimum local Run/Attempt ownership and lifecycle semantics",
+        "status": "NOT_IMPLEMENTED",
+        "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted Run/Attempt implementation recorded."
+      },
+      {
+        "id": "129:deployment-binding",
+        "owner_issue": 129,
+        "description": "Minimum local Deployment identity and bindings",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR250 contains a design-only probe, not production Deployment acceptance."
+      },
+      {
+        "id": "130:package-revision",
+        "owner_issue": 130,
+        "description": "Immutable generated Package Revision contract",
+        "status": "NOT_IMPLEMENTED",
+        "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted Package Revision implementation recorded."
+      },
+      {
+        "id": "135:compiler",
+        "owner_issue": 135,
+        "description": "Minimum package-to-revision/compiler contract",
+        "status": "NOT_IMPLEMENTED",
+        "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted compiler implementation recorded."
+      },
+      {
+        "id": "91:authorization-boundary",
+        "owner_issue": 91,
+        "description": "Host-mode authorization boundary when protected/share functionality is exposed",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state NOT_STARTED; PR250 is a bounded SDK/auth foundation, while public authorization remains open."
+      },
+      {
+        "id": "214:public-edge-boundary",
+        "owner_issue": 214,
+        "description": "Remote/share acceptance boundary, not local fixture proof",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage REVIEW; retained state IN_PROGRESS; live provider/TLS and standalone lifecycle gates remain open."
+      }
+    ],
+    "coordination_parent_edges": [
+      {
+        "parent_or_coordinator": 101,
+        "child_or_scope": 93
+      },
+      {
+        "parent_or_coordinator": 93,
+        "child_or_scope": 127
+      },
+      {
+        "parent_or_coordinator": 101,
+        "child_or_scope": 127
+      },
+      {
+        "parent_or_coordinator": 93,
+        "child_or_scope": 99
+      },
+      {
+        "parent_or_coordinator": 93,
+        "child_or_scope": 100
+      },
+      {
+        "parent_or_coordinator": 93,
+        "child_or_scope": 126
+      },
+      {
+        "parent_or_coordinator": 101,
+        "child_or_scope": 126
+      }
+    ],
+    "related_product_direction_edges": [
+      {
+        "issue": 127,
+        "related_issue": 71,
+        "basis": "product direction; nonblocking"
+      },
+      {
+        "issue": 71,
+        "related_issue": 93,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 99,
+        "related_issue": 71,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 100,
+        "related_issue": 71,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 100,
+        "related_issue": 99,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 126,
+        "related_issue": 71,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 126,
+        "related_issue": 99,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 126,
+        "related_issue": 100,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 126,
+        "related_issue": 127,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 93,
+        "related_issue": 71,
+        "basis": "product ownership; not a child execution prerequisite"
+      },
+      {
+        "issue": 126,
+        "related_issue": 127,
+        "basis": "separate optional template/example; nonblocking"
+      },
+      {
+        "issue": 93,
+        "related_issue": 209,
+        "basis": "CI/reconnect relationship; not a #93 child acceptance prerequisite"
+      }
+    ],
+    "full_acceptance_aggregation_edges": [
+      {
+        "child": 127,
+        "parent": 71,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 96,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 97,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 98,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 99,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 100,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 126,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 127,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 208,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 127,
+        "parent": 71,
+        "basis": "full #71 product acceptance; does not block the earlier local #71 slice"
+      },
+      {
+        "child": 96,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 97,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 98,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 99,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 100,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 126,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 127,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 208,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 93,
+        "parent": 101,
+        "basis": "program/factory aggregation; parent is coordination, not prerequisite"
+      }
+    ],
+    "superseded_untyped_edges": [
+      {
+        "prerequisite": 83,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 99,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 100,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 127,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 83
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 83
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 83
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 83
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 85
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 85
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 85
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 86
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 86
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 86
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 87
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 87
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 85,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 87,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 96,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 97,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 98,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 99,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 100,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 101,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 126,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 127,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 208,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 209,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 97,
+        "consumer": 99
+      },
+      {
+        "prerequisite": 98,
+        "consumer": 99
+      },
+      {
+        "prerequisite": 125,
+        "consumer": 126
+      },
+      {
+        "prerequisite": 71,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 93,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 99,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 100,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 101,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 130
+      },
+      {
+        "prerequisite": 125,
+        "consumer": 131
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 131
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 131
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 132
+      },
+      {
+        "prerequisite": 90,
+        "consumer": 132
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 132
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 133
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 133
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 133
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 133
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 135
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 135
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 136
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 90,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 139
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 86,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 87,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 138,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 85,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 132,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 147,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 138,
+        "consumer": 142
+      },
+      {
+        "prerequisite": 139,
+        "consumer": 142
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 142
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 142
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 143
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 144
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 144
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 144
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 144
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 145
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 145
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 145
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 145
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 146
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 146
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 146
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 148
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 196
+      },
+      {
+        "prerequisite": 152,
+        "consumer": 196
+      },
+      {
+        "prerequisite": 153,
+        "consumer": 196
+      },
+      {
+        "prerequisite": 208,
+        "consumer": 196
+      },
+      {
+        "prerequisite": 214,
+        "consumer": 196
+      }
+    ],
+    "execution_slices": [
+      {
+        "id": "100-A",
+        "issue": 100,
+        "description": "Public tool UI metadata and ui:// resource authoring/serving",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "100-B",
+        "issue": 100,
+        "description": "Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture",
+        "status": "PROPOSED_REVIEW_ONLY"
+      },
+      {
+        "id": "99-A",
+        "issue": 99,
+        "description": "Portable MCP App View renderer/resource bridge using the agreed fixture",
+        "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "99-B",
+        "issue": 99,
+        "description": "Optional host-specific ChatGPT projection and actual-host proof",
+        "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "127-template",
+        "issue": 127,
+        "description": "Packaged template round trip over accepted authoring and renderer slices",
+        "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "126-template",
+        "issue": 126,
+        "description": "Relevant public-package/template boundary slice consumed by the SDK and template contract",
+        "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "126-source-protocol",
+        "issue": 126,
+        "description": "Bounded source-protocol proof; not SDK/template acceptance",
+        "status": "ACTIVE"
+      },
+      {
+        "id": "71-local",
+        "issue": 71,
+        "description": "Local generated application vertical on common Package/Deployment/Run/compiler services",
+        "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "71-host",
+        "issue": 71,
+        "description": "Optional host/distribution acceptance after portable product behavior",
+        "status": "NOT_IMPLEMENTED"
+      }
+    ],
+    "amendment_source": "GitHub #71 comment 6087930051, #93 comment 6087948973, #101 comment 6087955791, #220 comment 6087968408, #254 comment 6087962754"
+  }
 }

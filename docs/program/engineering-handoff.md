@@ -1,5 +1,10 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
+<!-- canvas-graph-amendment:start -->
+
+Canvas graph amendment (2026-10-09): execution prerequisites are separated from scoped criteria, parent coordination, related product direction and full-acceptance aggregation. #127 waits on its accepted template slices and relevant #125/#98 criteria, not whole #71/#93/#101 closure. The prior untyped edges remain in the graph as audit provenance; issue contracts, raw states and accounting are unchanged. At the latest snapshot, #100-A and the bounded #126 source-protocol proof are active; neither is whole-issue acceptance.
+
+<!-- canvas-graph-amendment:end -->
 Observed at 2026-10-09T19:39:33Z. Integration is `26b0194590e14656bff92dce3665dccab09837a3` (tree `227e950994c52e629fe1fcd65effb7421f92aeb5`); community is `011c5482285ea516f39292100c429a905e6e3e36`. PR220 carries this governance checkpoint. Fifty-four original issue contracts remain retained; 53 are open, #210 is the single accepted/closed issue (comment6087641984), and none is whole-issue review-ready beyond that closure. The raw issue states, bodies and comments remain preserved. Runtime/native1.0.3 is not published or release-ready.
 
 - **Published packages:** Helper1.0.3 and Core1.0.2 are published. Core tag `actions-core-1.0.2` from community `011c548` succeeded in run `37979108120`; PyPI wheel SHA-256 `9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80` and sdist SHA-256 `99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73` match PyPI JSON. Fifty-one non-generated sdist files match the tag source. Cloud File Service blocked workflow ZIP download with HTTP403; independent native manifest inspection is in progress; no result is claimed. The detailed PyPI/source projection receipt is [here](evidence/core-1.0.2-pypi-verification-20261009.json). The earlier Core credential attempt1 failure remains historical; attempt2 only proved secret presence. No token value or scope was inspected.

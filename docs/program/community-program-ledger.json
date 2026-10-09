@@ -12588,14 +12588,17 @@
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
-      "BLOCKED": 30,
-      "INTEGRATED": 10,
-      "ACTIVE": 5,
-      "REVIEW": 9,
-      "COMPLETE": 0
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
     },
-    "whole_contract_complete": 0,
-    "worker_stage_snapshot": "2026-10-09T19:36:24Z"
+    "whole_contract_complete": 1,
+    "worker_stage_snapshot": "2026-10-09T19:36:24Z",
+    "relationship_schema_version": 2,
+    "relationship_policy": "Typed execution prerequisites and scoped criterion gates only; parent coordination, related product direction and full-acceptance aggregation are separately inspectable and nonblocking."
   },
   "accepted_issue_closures": [
     {
@@ -12606,5 +12609,11 @@
       "audit": "evidence/release-contract-audit-20261009.md",
       "note": "Issue record body/comments/raw intake state remain preserved; current acceptance is a separate overlay."
     }
-  ]
+  ],
+  "graph_amendment_archive": {
+    "path": "evidence/canvas-execution-graph-amendment-20261009-v4.zip",
+    "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3",
+    "size_bytes": 7262,
+    "manifest": "evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json"
+  }
 }
