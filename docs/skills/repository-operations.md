@@ -406,6 +406,20 @@ changed surface. Unit coverage also proves schema and `_meta` changes affect
 the revision. These tests do not establish the other distributed-runtime
 guarantees tracked by issue #82. Do not add Canvas behavior merely to maintain
 this adapter seam.
+
+For a runnable protocol showcase proof, start the actual `ActionServerProcess`
+with a temporary action catalog pinned to the candidate's published
+`actions-core=1.0.2` floor and send raw, independent stateless JSON-RPC POSTs
+carrying matching `Mcp-Method` header/body values and the required protocol
+metadata.
+For named reads and calls, also send the matching `Mcp-Name` value (`uri` for
+`resources/read`). Exercise `server/discover`, the four catalogs, tool call,
+direct and templated resource reads, prompt retrieval, and a bounded safe
+application error; assert catalog metadata, request correlation, and absence
+of session headers. This proves the mounted Runtime protocol path only. It does
+not prove a community template exists, is included in the embedded bundle, or
+can be created offline; those remain separate manifest, generated-artifact,
+and CLI acceptance gates.
 The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
