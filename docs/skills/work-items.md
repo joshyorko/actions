@@ -423,6 +423,13 @@ embedded archive hash plus the extracted file-set hash. For wrapper tests, set
 before both the version probe and server start; `ACTIONS_HOME` and
 `ROBOCORP_HOME` alone do not isolate the wrapper's extraction directory.
 
+The Python browser harness must require both a zero Node exit and a `PASS`
+receipt while serializing the receipt to a string for assertion details. Passing
+the nested receipt dictionary directly as `assert`'s message can make pytest's
+assertion rewriting raise `TypeError: sequence item 0: expected str instance,
+dict found`, hiding the browser stage's original phase and state. Keep a
+regression that verifies a nonzero child exit preserves its nested JSON receipt.
+
 A Linux PASS_BOUNDED Go-wrapper receipt at the same source SHA records wrapper
 SHA-256 `79544d8e093c41ef7f2328efd2d0d4fd22acd8989fdc1f34b2a647f37fee6f24`,
 embedded archive SHA-256 `840eb3567e161df9738196c959a8f2acec98c95619b1d1a670036739c5849773`,

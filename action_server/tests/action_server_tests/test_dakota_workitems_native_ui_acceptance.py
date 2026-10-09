@@ -125,6 +125,14 @@ def write_receipt(receipt: dict) -> None:
             temporary.unlink(missing_ok=True)
 
 
+def validate_browser_stage_result(returncode: int, receipt: dict) -> dict:
+    if returncode != 0 or receipt.get("status") != "PASS":
+        raise AssertionError(
+            json.dumps({"returncode": returncode, "receipt": receipt}, sort_keys=True)
+        )
+    return receipt
+
+
 def run_browser_stage(
     node: str,
     stage: str,
@@ -154,7 +162,21 @@ def run_browser_stage(
         receipt = json.loads(result.stdout)
     except json.JSONDecodeError:
         raise AssertionError("browser acceptance returned an invalid receipt") from None
-    return receipt
+    return validate_browser_stage_result(result.returncode, receipt)
+
+
+def test_browser_nonzero_exit_preserves_nested_failure_receipt() -> None:
+    receipt = {
+        "status": "FAIL",
+        "stage": "normal",
+        "phase": "keyboard_create_dialog",
+        "states": {"trigger": {"aria_haspopup": None}},
+    }
+
+    with pytest.raises(AssertionError) as error:
+        validate_browser_stage_result(1, receipt)
+
+    assert json.loads(str(error.value)) == {"returncode": 1, "receipt": receipt}
 
 
 def wrapper_home_environment(runtime_home: Path) -> dict[str, str]:
