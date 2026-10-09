@@ -1277,6 +1277,39 @@ Runtime warm execution as separate evidence cells. The probe is request
 instrumentation, not an Actions-owned provider and not evidence about requests
 to other origins.
 
+The RCC adapter binds the selected provider reference to the prepared Runtime
+descriptor. Publish and acquire use that reference, and each new `env exec`
+lease receives the same `--provider` value; a ready local Artifact does not
+silently switch a configured generation to provider-free trust. The pinned RCC
+contract accepts `local`, a lowercase HTTP(S) URL, or a named provider profile
+matching `[a-z0-9][a-z0-9._-]{0,62}`. The adapter rejects URLs containing
+userinfo, query, fragment, control characters, or malformed HTTP(S) syntax
+before an RCC call or descriptor write. Use a named RCC profile when
+credentials are required; do not store a credential-bearing URL in the
+descriptor. A serialized `provider_reference: null` is an explicit
+provider-free selection. A legacy descriptor with no provider binding is
+unknown: preparation must acquire it under the current configured policy or
+replace it with a cache descriptor bound to that policy, and direct execution
+fails clearly until that context is established. The unit boundary is covered
+by `test_rcc_runtime_adapter.py`.
+
+The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
+focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
+The authorized pinned-RCC candidate-wheel proof did not reach its first Action
+or the selected-provider negative-exec cell: cold `env publish` failed while
+uploading object
+`sha256:e0ba46903bea70ee8260fa66083f12758d132a72df8e1861e93bbc357a16994a`
+with artifact-provider HTTP 422. Preserve the failure log
+(`83b406b775c782492ea0566e1ee7b52fc1794902e18ea698e109067d075e4b4a`) and
+NOT_REACHED receipt
+(`9dcb44df322b8e8e85e7c2366f07c9154d515d4daace714590c348a0ef092684`) at
+`worker-exit-evidence/acceptance-2c7ec2de.log` and
+`worker-exit-evidence/provider-trust-negative-preflight-2c7ec2de-correction.json`;
+the requested same-carrier 503-before-exec behavior remains unverified. This
+provider rejection alone establishes neither an Actions trust-context failure
+nor an RCC defect. Do not claim complete #134 acceptance from the source tests
+or the earlier `ef9195da` receipt.
+
 Its separate CLI watchdog does not by itself prove cleanup of every descendant.
 Cleanup coverage must include an owner that exits before timeout while a
 detached child retains its output pipes: discovery only during teardown loses
