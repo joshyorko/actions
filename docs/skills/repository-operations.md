@@ -188,6 +188,18 @@ artifacts before promoting the next dependent package. Preserve any issue
 acceptance contract separately; an already-published package version does not
 by itself close a broader issue.
 
+Before preparing a package-only promotion from an older checkpoint, compare the
+package's complete tree on the promotion base with the current integration head.
+Carry every retained source, regression-test, and package-metadata change required
+by that comparison, including package-local development dependencies and lockfile
+updates when needed by the configured test gate. A source anchor proves where the
+candidate originated; it does not prove that later package fixes were included.
+Review the complete package diff and state any intentional exclusions before
+tagging. For HTTP helper redirects, a proxy-to-direct redirect must update a
+generated `Host` header to the destination while preserving an explicitly supplied
+`Host`, and must continue stripping credentials; the regression test covers both
+generated and explicit header cases.
+
 The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
 callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
 The Python API exposes snake-case fields such as `resource_templates`,
