@@ -1295,20 +1295,40 @@ by `test_rcc_runtime_adapter.py`.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
-The authorized pinned-RCC candidate-wheel proof did not reach its first Action
-or the selected-provider negative-exec cell: cold `env publish` failed while
-uploading object
+Its authorized pinned-RCC proof did not reach the first Action: cold
+`env publish` failed while uploading object
 `sha256:e0ba46903bea70ee8260fa66083f12758d132a72df8e1861e93bbc357a16994a`
 with artifact-provider HTTP 422. Preserve the failure log
 (`83b406b775c782492ea0566e1ee7b52fc1794902e18ea698e109067d075e4b4a`) and
 NOT_REACHED receipt
 (`9dcb44df322b8e8e85e7c2366f07c9154d515d4daace714590c348a0ef092684`) at
 `worker-exit-evidence/acceptance-2c7ec2de.log` and
-`worker-exit-evidence/provider-trust-negative-preflight-2c7ec2de-correction.json`;
-the requested same-carrier 503-before-exec behavior remains unverified. This
-provider rejection alone establishes neither an Actions trust-context failure
-nor an RCC defect. Do not claim complete #134 acceptance from the source tests
-or the earlier `ef9195da` receipt.
+`worker-exit-evidence/provider-trust-negative-preflight-2c7ec2de-correction.json`.
+At pinned RCC source `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`, the filesystem
+provider maps any object-store `PutObject` error to 422 and returns only the
+generic body `artifact provider request failed`; that status does not identify
+the underlying storage cause. A later bounded direct publish attempt with
+1,089,675,264 overlay bytes free failed earlier during environment creation
+with an explicit `No space left on device`, before contacting the provider.
+After overlay capacity was restored, the fresh proof on source
+`f4e031080749fd6a120a781f72c3f44d4b5832b8` successfully published and acquired
+the artifact. These observations do not prove the cause of the earlier 422.
+
+The immutable receipt `worker-exit-evidence/acceptance-f4e03108.json`
+(`38e01df3994631c25ea8714720cd2aab8c93578830965da0f9488ce7c639f58c`) records
+the selected-provider negative-exec cell as PASS: after a verified initial
+Action with a completed wrapper receipt (exit 0), a second `env exec` to the
+same selected provider received provenance HTTP 503, exited nonzero before the
+child side effect, and preserved the initial receipt byte-for-byte. The full
+harness remains FAIL: the separate provider-backed offline-warm attempt also
+received 503 and failed closed; its Action, artifact verification, wrapper-exit
+and zero-request cells remain failed. The run log hash is
+`472d8f4ecb8ff8bc1f568f1bcd33520a6b4e92bbca6ffc89ad858aa1da97b704`. This
+proves selected-provider continuity and fail-closed exec behavior only; it
+does not prove provider-free warm restart, zero requests, or complete #134
+acceptance. Neither the historic 422 nor the warm 503 establishes an RCC
+defect. Do not claim complete #134 acceptance from these cells or the earlier
+`ef9195da` receipt.
 
 Its separate CLI watchdog does not by itself prove cleanup of every descendant.
 Cleanup coverage must include an owner that exits before timeout while a
