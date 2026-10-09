@@ -804,3 +804,90 @@ def test_robot_publication_does_not_clean_unowned_initial_staging_collision(
     assert (
         collisions[0] / "foreign.txt"
     ).read_text() == "synthetic foreign staging entry"
+
+
+def test_robot_publication_preserves_destination_created_after_last_precheck(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "robot.yaml").write_text("tasks: {}")
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    competing = robots / "synthetic"
+    lexists = os.path.lexists
+    checks = 0
+    identity = []
+
+    def interleaved_lexists(path):
+        nonlocal checks
+        result = lexists(path)
+        if Path(path) == competing:
+            checks += 1
+            if checks == 2:
+                assert not result
+                competing.mkdir()
+                identity.append(competing.stat().st_ino)
+        return result
+
+    monkeypatch.setattr(os.path, "lexists", interleaved_lexists)
+    name, destination = _api_robots._publish_robot_package(package, "synthetic", None)
+    assert identity
+    assert competing.stat().st_ino == identity[0]
+    assert list(competing.iterdir()) == []
+    assert destination != competing
+    assert name.startswith("synthetic_")
+    assert (destination / "robot.yaml").read_text() == "tasks: {}"
+    assert sorted(path.name for path in robots.iterdir()) == sorted([name, "synthetic"])
+
+
+@pytest.mark.parametrize("entry_kind", ["directory", "file"])
+def test_robot_publication_relinquishes_cleanup_of_published_staging_name(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, entry_kind: str
+) -> None:
+    from actions.server import _api_robots, _directory_publication
+
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "robot.yaml").write_text("tasks:\n  run:\n    shell: echo ok\n")
+    (package / "payload.txt").write_text("complete package content")
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    rename = _directory_publication.rename_directory_no_replace
+    foreign_entries: list[tuple[Path, int, Path]] = []
+
+    def publish_then_recreate_source(source: Path, destination: Path) -> None:
+        # Another writer can reuse the old name once the real native rename
+        # transfers our complete staging directory to the final destination.
+        rename(source, destination)
+        if entry_kind == "directory":
+            source.mkdir()
+            sentinel = source / "foreign.txt"
+        else:
+            sentinel = source
+        sentinel.write_text("foreign entry created after publication")
+        foreign_entries.append((source, source.stat().st_ino, sentinel))
+
+    monkeypatch.setattr(
+        _directory_publication,
+        "rename_directory_no_replace",
+        publish_then_recreate_source,
+    )
+    name, destination = _api_robots._publish_robot_package(package, "synthetic", None)
+
+    assert name == "synthetic"
+    assert destination == robots / name
+    assert (destination / "payload.txt").read_text() == "complete package content"
+    assert (destination / "robot.yaml").read_text() == (
+        package / "robot.yaml"
+    ).read_text()
+    assert len(foreign_entries) == 1
+    foreign, identity, sentinel = foreign_entries[0]
+    assert foreign.exists(), "Publication cleanup deleted a new owner's entry"
+    assert foreign.stat().st_ino == identity
+    assert sentinel.read_text() == "foreign entry created after publication"
+    assert set(robots.iterdir()) == {destination, foreign}
