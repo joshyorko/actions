@@ -804,3 +804,41 @@ def test_robot_publication_does_not_clean_unowned_initial_staging_collision(
     assert (
         collisions[0] / "foreign.txt"
     ).read_text() == "synthetic foreign staging entry"
+
+
+def test_robot_publication_preserves_destination_created_after_last_precheck(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "robot.yaml").write_text("tasks: {}")
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    competing = robots / "synthetic"
+    lexists = os.path.lexists
+    checks = 0
+    identity = []
+
+    def interleaved_lexists(path):
+        nonlocal checks
+        result = lexists(path)
+        if Path(path) == competing:
+            checks += 1
+            if checks == 2:
+                assert not result
+                competing.mkdir()
+                identity.append(competing.stat().st_ino)
+        return result
+
+    monkeypatch.setattr(os.path, "lexists", interleaved_lexists)
+    name, destination = _api_robots._publish_robot_package(package, "synthetic", None)
+    assert identity
+    assert competing.stat().st_ino == identity[0]
+    assert list(competing.iterdir()) == []
+    assert destination != competing
+    assert name.startswith("synthetic_")
+    assert (destination / "robot.yaml").read_text() == "tasks: {}"
+    assert sorted(path.name for path in robots.iterdir()) == sorted([name, "synthetic"])

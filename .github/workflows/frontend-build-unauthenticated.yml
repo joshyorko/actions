@@ -64,6 +64,12 @@ jobs:
       
       - name: Install project
         run: uv run --no-project --python ${{ matrix.python }} inv devinstall
+
+      - name: Verify Robot publication on the native filesystem
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest -q
+          tests/action_server_tests/test_api_robots.py
+          tests/action_server_tests/test_directory_publication.py
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
