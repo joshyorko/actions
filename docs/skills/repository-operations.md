@@ -133,11 +133,15 @@ unsafe HTTP operations and every WebSocket handshake require exact Origin;
 GET/HEAD artifact navigation may omit Origin but cannot supply a foreign one.
 Real-browser probes must distinguish same-site from same-origin: Chromium sent
 the `SameSite=Strict` HttpOnly session cookie on a credentialed fetch between
-two `localhost` ports, while JavaScript received a CORS `TypeError` for the
-response. An explicit CORS origin therefore does not itself grant browser
-session authority; capture the Runtime access status and browser request headers
-when diagnosing this case instead of inferring cookie absence from the fetch
-error.
+two ports on the same loopback host, while JavaScript received a CORS
+`TypeError` for the response. An explicit CORS origin therefore does not itself
+grant browser session authority. Assert cookie emission from the browser's
+outgoing request headers, then assert backend authorization separately by
+sending that same browser-minted cookie and Origin to the live Runtime from the
+test driver. Probe CORS preflight directly against that Runtime and assert its
+status; neither a browser `TypeError` nor a Playwright failed-request event
+establishes the backend response. Keep the cookie in process memory and out of
+URLs, logs, and test receipts.
 Explicit invalid/duplicate Authorization headers cannot fall back to cookies.
 Bearer CLI clients without Origin retain their existing behavior. Cookie
 authority is limited to Runtime `/api/` and run-scoped `/artifacts/` surfaces.
