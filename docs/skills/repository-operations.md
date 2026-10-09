@@ -144,6 +144,23 @@ Sign-out and expired-session status unmount providers, clear their query cache
 and disconnect browser subscriptions. The browser rechecks on protected HTTP
 403, focus, expiry and a 15-second interval for revocation in another tab.
 
+The Actions Core tag release workflow admits exactly the version-matched
+`actions_core` universal wheel and source archive. Its Linux verify job rejects
+extra entries and symlinked artifacts, records SHA-256 digests, and uploads the
+two packages with that manifest. The publish job checks the downloaded
+inventory and verifies both digests before invoking Poetry with the configured
+Core token; Twine checks only the wheel and source archive, not the manifest.
+Core's package tests execute these inventory and copy-verification shell steps
+against valid, extra, wrong-tag, symlinked, and modified artifacts. This
+prepublication gate binds the uploaded bytes; it does not prove registry
+availability, a successful PyPI publication, or downstream consumers of the
+published distribution.
+The Core release workflow pins both jobs to `ubuntu-latest`; package tests
+execute its Bash/GNU-utility shell steps only on Linux and keep workflow
+structure and publish-safety assertions active on every platform. Do not run
+these Linux release scripts through macOS BSD utilities or a Windows `bash`
+launcher: those environments do not implement the workflow's shell contract.
+
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
 - `action_server/`: CLI, FastAPI service, frontend, build and bundled RCC.
@@ -158,6 +175,19 @@ The producer-consumer template additionally pins
 dependency, and `actions-runtime` is the server distribution rather than a
 template library. Keep the static template-manifest contract synchronized
 with these package boundaries when a published version changes.
+
+Core keeps its released `actions-http-helper` version range in main
+dependencies and points the dev group at the sibling helper source. Install the
+locked dev group before running Core tests: an older registry copy can route
+test-only localhost service calls through a sandbox proxy, while the current
+sibling source lets those tests exercise the helper implementation in this
+checkout. This override is for development and does not change Core's runtime
+dependency floor.
+
+RCC `task script` executes from the developer toolkit task root. For package
+lock checks, pass an absolute package path to pinned Poetry's `--directory`,
+and require `check --lock` after resolving a lock merge; removing conflict
+markers alone does not establish freshness against the merged manifest.
 
 The Action Server frontend uses `action_server/frontend/package.json` and its
 lock as the sole package metadata. `npm ci` is the reproducible,
@@ -475,6 +505,17 @@ tag-named binaries as GitHub release assets only; the Sema4AI Homebrew dispatch
 and Robocorp/Sema4AI CDN/S3 compatibility handoffs are retired. The normal
 uploader uses `overwrite: false`, so a same-name asset collision fails closed
 instead of replacing a published binary.
+
+Check package credential availability in the actual `pypi` environment through
+an isolated non-publishing workflow with no repository permissions, checkout,
+package installation, registry authentication, or upload command. Report only
+empty/nonempty state. Nonempty does not establish authentication, token scope,
+artifact correctness, or publication. Place the package-specific secret in the
+release job's environment. If a CLI wrapper drops stdin while setting a secret,
+use native `gh` and repeat the safe check; never print or transfer the value to
+an agent. Follow the [upstream reporting procedure](upstream-reporting.md)
+before attributing a tooling failure to a dependency.
+
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.

@@ -106,6 +106,30 @@ def verify(wheel):
             raise AssertionError(
                 f"actions command is not owned by the clean environment: {executable!r}"
             )
+
+        _run(
+            [
+                str(python),
+                "-c",
+                "import actions; "
+                "from actions import ActionContext, ActionsListActionTypedDict; "
+                "from actions import _action_context, _protocols; "
+                "import actions.server_integration as integration; "
+                "from actions import _collect_actions, _lint_action, _managed_parameters; "
+                "from actions._customization import _extension_points, _plugin_manager; "
+                "assert 'ActionContext' in dir(actions); "
+                "assert ActionContext is _action_context.ActionContext; "
+                "assert ActionsListActionTypedDict is _protocols.ActionsListActionTypedDict; "
+                "assert integration.DEFAULT_EXCLUSION_PATTERNS is _collect_actions.DEFAULT_EXCLUSION_PATTERNS; "
+                "assert integration.EPManagedParameters is _extension_points.EPManagedParameters; "
+                "assert integration.ManagedParameters is _managed_parameters.ManagedParameters; "
+                "assert integration.PluginManager is _plugin_manager.PluginManager; "
+                "assert integration.format_lint_results is _lint_action.format_lint_results",
+            ],
+            fixture_dir,
+            environment,
+        )
+
         action_file = fixture_dir / "actions.py"
         action_file.write_text(
             "from actions import action\n"
