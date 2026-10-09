@@ -56,11 +56,16 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
 ):
     """Reproduce failed-import recovery against this checkout's actual source."""
     if os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST") != "1":
-        pytest.skip("set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for current-candidate RCC proof")
+        pytest.skip(
+            "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for current-candidate RCC proof"
+        )
 
     real_rcc = Path(os.environ["ACTIONS_RUNTIME_RCC_BINARY"]).resolve()
     real_rcc_sha = hashlib.sha256(real_rcc.read_bytes()).hexdigest()
-    assert real_rcc_sha == "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    assert (
+        real_rcc_sha
+        == "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    )
     rcc_version = subprocess.run(
         [str(real_rcc), "--version"], capture_output=True, text=True, check=True
     ).stdout.strip()
@@ -69,7 +74,9 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
     trace_path = tmp_path / "rcc-argv.jsonl"
     rcc_wrapper = tmp_path / "rcc-trace"
     rcc_wrapper.write_text(
-        "#!" + sys.executable + "\n"
+        "#!"
+        + sys.executable
+        + "\n"
         + "import json, os, sys\n"
         + f"with open({str(trace_path)!r}, 'a', encoding='utf-8') as stream:\n"
         + "    stream.write(json.dumps({'pid': os.getpid(), 'args': sys.argv[1:]}) + '\\n')\n"
@@ -125,7 +132,13 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
     run_ids: list[str] = []
     evidence: dict[str, object] = {
         "source_sha": subprocess.run(
-            ["git", "-C", str(Path(__file__).resolve().parents[3]), "rev-parse", "HEAD"],
+            [
+                "git",
+                "-C",
+                str(Path(__file__).resolve().parents[3]),
+                "rev-parse",
+                "HEAD",
+            ],
             check=True,
             capture_output=True,
             text=True,
@@ -161,7 +174,9 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
         initial_source = Path(_read_package_source(database, package_dir.name))
         source_store = action_server_process.datadir / ".rcc-runtime-sources"
         package_store = source_store / hashlib.sha256(b"package").hexdigest()
-        assert initial_source.is_absolute() and initial_source.is_relative_to(source_store)
+        assert initial_source.is_absolute() and initial_source.is_relative_to(
+            source_store
+        )
         assert "return 'last-good'" in (initial_source / "action.py").read_text(
             encoding="utf-8"
         )
@@ -202,7 +217,9 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
         server_log = action_server_process.datadir / "server_log.txt"
 
         def import_failure_seen():
-            output = action_server_process.get_stdout() + action_server_process.get_stderr()
+            output = (
+                action_server_process.get_stdout() + action_server_process.get_stderr()
+            )
             if server_log.is_file():
                 output += server_log.read_text(encoding="utf-8", errors="replace")
             return "It was not possible to list the actions." in output
@@ -221,7 +238,8 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
             "first last-good Run passed",
             lambda: (
                 row
-                if (row := _read_run(database, first_run_id)) and row["status"] in (2, 3)
+                if (row := _read_run(database, first_run_id))
+                and row["status"] in (2, 3)
                 else None
             ),
         )
@@ -232,7 +250,8 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
             "second persisted Run terminal",
             lambda: (
                 row
-                if (row := _read_run(database, second_run_id)) and row["status"] in (2, 3)
+                if (row := _read_run(database, second_run_id))
+                and row["status"] in (2, 3)
                 else None
             ),
         )
@@ -274,15 +293,21 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
         )
         evidence["recovered_runtime"] = recovered_runtime
         evidence["recovered_run"] = recovered_run
-        evidence["provider_ops_after_recovery"] = _rcc_environment_operations(trace_path)
-        evidence["status"] = "PASS" if (
-            recovered_run["status"] == 2
-            and recovered_run["result"] == "recovered"
-            and evidence["provider_ops_after_recovery"] == before_ops
-        ) else "FAIL"
-        assert evidence["status"] == "PASS", (
-            f"watcher did not recover after the failed reload: {recovered_run}"
+        evidence["provider_ops_after_recovery"] = _rcc_environment_operations(
+            trace_path
         )
+        evidence["status"] = (
+            "PASS"
+            if (
+                recovered_run["status"] == 2
+                and recovered_run["result"] == "recovered"
+                and evidence["provider_ops_after_recovery"] == before_ops
+            )
+            else "FAIL"
+        )
+        assert (
+            evidence["status"] == "PASS"
+        ), f"watcher did not recover after the failed reload: {recovered_run}"
     except Exception as exc:
         evidence["status"] = "FAIL"
         evidence["failure_type"] = type(exc).__name__

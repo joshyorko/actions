@@ -112,9 +112,10 @@ def import_action_package(
     source_snapshot_created = False
     if action_package_handler.uses_runtime_source_snapshots:
         try:
-            source_snapshot_path, source_snapshot_created = (
-                action_package_handler.create_runtime_source_snapshot()
-            )
+            (
+                source_snapshot_path,
+                source_snapshot_created,
+            ) = action_package_handler.create_runtime_source_snapshot()
             action_package_handler.use_runtime_source_snapshot(source_snapshot_path)
             original_package_yaml = action_package_handler.original_package_yaml
             package_yaml_exists = action_package_handler.package_yaml_exists

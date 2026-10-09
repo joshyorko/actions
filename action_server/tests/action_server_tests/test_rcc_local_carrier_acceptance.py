@@ -50,18 +50,18 @@ def _verify_runtime_wheel(
     assert distribution.version == "1.0.3"
     direct_url = json.loads(distribution.read_text("direct_url.json") or "{}")
     assert direct_url.get("dir_info", {}).get("editable") is not True
-    assert (
-        Path(unquote(urlparse(direct_url["url"]).path)).resolve() == wheel
-    )
+    assert Path(unquote(urlparse(direct_url["url"]).path)).resolve() == wheel
     assert direct_url["archive_info"]["hashes"]["sha256"] == wheel_digest
 
     for installed_path, entry in installed_files.items():
         if entry.hash is None:
             continue
         payload = installed_path.read_bytes()
-        actual = base64.urlsafe_b64encode(
-            hashlib.new(entry.hash.mode, payload).digest()
-        ).decode("ascii").rstrip("=")
+        actual = (
+            base64.urlsafe_b64encode(hashlib.new(entry.hash.mode, payload).digest())
+            .decode("ascii")
+            .rstrip("=")
+        )
         assert actual == entry.hash.value, installed_path.name
 
     install_report = json.loads(report.read_text(encoding="utf-8"))
@@ -151,7 +151,9 @@ def _run_published_dependency_provider_dead_gate(
         }
     assert set(published) == set(expected)
 
-    script_path = repo_root / "action_server" / "scripts" / "verify_dakota_rcc_acceptance.py"
+    script_path = (
+        repo_root / "action_server" / "scripts" / "verify_dakota_rcc_acceptance.py"
+    )
     spec = importlib.util.spec_from_file_location("dakota_rcc_acceptance", script_path)
     assert spec is not None and spec.loader is not None
     harness = importlib.util.module_from_spec(spec)
@@ -206,7 +208,9 @@ def _run_published_dependency_provider_dead_gate(
 
     wheel_receipt_path = Path(os.environ["ACTIONS_ACCEPTANCE_PROVIDER_DEAD_RECEIPT"])
     if wheel_receipt_path.exists():
-        raise FileExistsError("refusing to overwrite the installed-wheel provider receipt")
+        raise FileExistsError(
+            "refusing to overwrite the installed-wheel provider receipt"
+        )
     wheel_evidence = {
         "schema_version": 1,
         "acceptance_status": "PASS",
@@ -259,7 +263,9 @@ def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
     source_package = repo_root / "action_server" / "src" / "actions" / "server"
     runtime_origin = Path(runtime_package.__file__).resolve()
     wheel_proof: dict[str, str | int | bool] | None = None
-    cpu_affinity = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else []
+    cpu_affinity = (
+        sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else []
+    )
     if runtime_mode == "source":
         assert runtime_origin.is_relative_to(source_package)
     elif runtime_mode == "wheel":
@@ -271,9 +277,7 @@ def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
         runtime_origin.write_bytes(corrupted_module)
         try:
             with pytest.raises(AssertionError):
-                _verify_runtime_wheel(
-                    repo_root, runtime_origin, tmp_path, monkeypatch
-                )
+                _verify_runtime_wheel(repo_root, runtime_origin, tmp_path, monkeypatch)
         finally:
             runtime_origin.write_bytes(original_module)
         wheel_proof = _verify_runtime_wheel(

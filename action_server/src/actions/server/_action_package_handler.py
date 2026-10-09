@@ -157,7 +157,9 @@ class ActionPackageHandler:
 
         source_root = self._import_path.resolve(strict=True)
         source_store = self._datadir / ".rcc-runtime-sources"
-        package_key = hashlib.sha256(self._action_package_name.encode("utf-8")).hexdigest()
+        package_key = hashlib.sha256(
+            self._action_package_name.encode("utf-8")
+        ).hexdigest()
         package_store = source_store / package_key
         exclusions = PackageExcludeHandler()
         exclusions.fill_exclude_patterns(DEFAULT_EXCLUSION_PATTERNS)
@@ -175,7 +177,9 @@ class ActionPackageHandler:
             files = sorted(
                 (
                     (path, Path(relative).as_posix())
-                    for path, relative in exclusions.collect_files_excluding_patterns(root)
+                    for path, relative in exclusions.collect_files_excluding_patterns(
+                        root
+                    )
                 ),
                 key=lambda item: item[1],
             )
