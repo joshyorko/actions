@@ -1304,6 +1304,104 @@ The Dakota candidate-wheel harness records separate unauthenticated rejection,
 authenticated Action, SQLite, artifact verification, wrapper exit and process
 cleanup cells. Every cell must pass for overall acceptance. Preserve the exact
 failed wrapper status, exit code and reason even when Action execution succeeds.
+
+An RCC lifecycle `inspect` result of `ready: true` with
+`providerRequired: false` does not by itself prove a provider-free Runtime
+restart. In the bounded comparison at source
+`ef9195daa9ca8c1d3fbc7c8fc998e39602595a21`, the initial authenticated Action,
+artifact verification, RCC wrapper exit 0 and provider cleanup passed. A
+second Runtime used the same datadir, RCC home, artifact digest and provider
+origin; after the RCC cache process was reaped, a count-and-reject loopback
+probe reoccupied that origin without serving artifacts. Inspection reported
+the artifact ready. A direct pinned RCC `env acquire` without `--provider`
+then returned the exact digest with `verification.valid: true` and made no
+probe requests. The same direct command with the configured provider requested
+`/<digest>/provenance.json`, received 503 and exited with
+`artifact trust attachment verification failed`. The restarted Runtime made
+the same provenance request and failed before creating its worker. The Runtime
+adapter currently supplies its configured provider to acquire, so this is a
+provider-backed trust-carrier failure even when local materialization is ready.
+Do not treat lifecycle inspection as acquire verification or remove the
+provider/trust input to make this scenario pass without an explicit trust
+contract decision. Keep provider-free acquire, provider-backed acquire, and
+Runtime warm execution as separate evidence cells. The probe is request
+instrumentation, not an Actions-owned provider and not evidence about requests
+to other origins.
+
+The RCC adapter binds the selected provider reference to the prepared Runtime
+descriptor. Publish and acquire use that reference, and each new `env exec`
+lease receives the same `--provider` value; a ready local Artifact does not
+silently switch a configured generation to provider-free trust. The pinned RCC
+contract accepts `local`, a lowercase HTTP(S) URL, or a named provider profile
+matching `[a-z0-9][a-z0-9._-]{0,62}`. The adapter rejects URLs containing
+userinfo, query, fragment, control characters, or malformed HTTP(S) syntax
+before an RCC call or descriptor write. Use a named RCC profile when
+credentials are required; do not store a credential-bearing URL in the
+descriptor. A serialized `provider_reference: null` is an explicit
+provider-free selection. A legacy descriptor with no provider binding is
+unknown: preparation must acquire it under the current configured policy or
+replace it with a cache descriptor bound to that policy, and direct execution
+fails clearly until that context is established. The unit boundary is covered
+by `test_rcc_runtime_adapter.py`.
+
+The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
+focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
+Its authorized pinned-RCC proof did not reach the first Action: cold
+`env publish` failed while uploading object
+`sha256:e0ba46903bea70ee8260fa66083f12758d132a72df8e1861e93bbc357a16994a`
+with artifact-provider HTTP 422. Preserve the failure log
+(`83b406b775c782492ea0566e1ee7b52fc1794902e18ea698e109067d075e4b4a`) and
+NOT_REACHED receipt
+(`9dcb44df322b8e8e85e7c2366f07c9154d515d4daace714590c348a0ef092684`) at
+`worker-exit-evidence/acceptance-2c7ec2de.log` and
+`worker-exit-evidence/provider-trust-negative-preflight-2c7ec2de-correction.json`.
+At pinned RCC source `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`, the filesystem
+provider maps any object-store `PutObject` error to 422 and returns only the
+generic body `artifact provider request failed`; that status does not identify
+the underlying storage cause. A later bounded direct publish attempt with
+1,089,675,264 overlay bytes free failed earlier during environment creation
+with an explicit `No space left on device`, before contacting the provider.
+After overlay capacity was restored, the fresh proof on source
+`f4e031080749fd6a120a781f72c3f44d4b5832b8` successfully published and acquired
+the artifact. These observations do not prove the cause of the earlier 422.
+
+The immutable receipt `worker-exit-evidence/acceptance-f4e03108.json`
+(`38e01df3994631c25ea8714720cd2aab8c93578830965da0f9488ce7c639f58c`) records
+the selected-provider negative-exec cell as PASS: after a verified initial
+Action with a completed wrapper receipt (exit 0), a second `env exec` to the
+same selected provider received provenance HTTP 503, exited nonzero before the
+child side effect, and preserved the initial receipt byte-for-byte. The full
+harness remains FAIL: the separate provider-backed offline-warm attempt also
+received 503 and failed closed; its Action, artifact verification, wrapper-exit
+and zero-request cells remain failed. The run log hash is
+`472d8f4ecb8ff8bc1f568f1bcd33520a6b4e92bbca6ffc89ad858aa1da97b704`. This
+proves selected-provider continuity and fail-closed exec behavior only; it
+does not prove provider-free warm restart, zero requests, or complete #134
+acceptance. Neither the historic 422 nor the warm 503 establishes an RCC
+defect. Do not claim complete #134 acceptance from these cells or the earlier
+`ef9195da` receipt.
+
+After integrating `ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47`, the bounded
+candidate harness builds Actions Core 1.0.2 and HTTP Helper 1.0.3. On combined
+source `d9a2d11806f5d263938a82ca5e4c429f43e1d865`, the initial publish/acquire,
+authenticated Action, SQLite, artifact verification, and wrapper exit
+0 passed. The same-provider 503-before-exec negative also passed with no child
+side effect and an unchanged initial receipt. Receipt
+`worker-exit-evidence/acceptance-d9a2d118.json` has SHA-256
+`ebf4794db9ac03cc1299a0fd45c0d7e29023d5c972fb62398ab8c4bf92a26ad4`; the
+run log SHA-256 is
+`3bfa1ce1034c2361a93a9064d8de410bef5339c333a1ea522f26f129d9f8003c`. The
+overall harness remains FAIL because the separate provider-backed offline-warm
+attempt receives 503 and fails closed. Its action, artifact-verification,
+wrapper-exit, and zero-request cells remain failed; provider-free warm restart
+and full #134 acceptance are not established.
+
+The combined-source configured Runtime suite passed 742 tests with 10 skips;
+the earlier invocation interrupted at 1% is incomplete evidence only. Package
+lint and typecheck passed, and the acceptance script passed Ruff check and
+format check. The completed suite log SHA-256 is
+`97579afcf92415b920c73f6821bfc100ac50fcf34b332db74ff0c0e1ea307c3c`.
+
 Its separate CLI watchdog does not by itself prove cleanup of every descendant.
 Cleanup coverage must include an owner that exits before timeout while a
 detached child retains its output pipes: discovery only during teardown loses

@@ -5,6 +5,8 @@ import signal
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 import pytest
@@ -141,17 +143,28 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
     assert live_receipt["cells"]["authenticated_action"] == "PASS"
     assert live_receipt["cells"]["sqlite_run"] == "PASS"
     assert live_receipt["cells"]["artifact_verification"] == "PASS"
+    assert live_receipt["cells"]["provider_backed_exec_fail_closed"] == "PASS"
     assert live_receipt["cells"]["process_cleanup"] == "PASS"
+    assert live_receipt["offline_warm"]["provider_probe_role"] == (
+        "count-and-reject-only; serves no artifacts"
+    )
+    assert live_receipt["offline_warm"]["provider_probe_requests"] > 0
+    assert live_receipt["offline_warm"]["provider_probe_stopped"] is True
+    assert live_receipt["cells"]["offline_warm_artifact_ready"] == "PASS"
+    assert live_receipt["cells"]["offline_warm_action"] == "FAIL"
+    assert live_receipt["cells"]["offline_warm_artifact_verification"] == "FAIL"
+    assert live_receipt["cells"]["offline_warm_wrapper_exit"] == "FAIL"
+    assert live_receipt["cells"]["provider_unavailable"] == "PASS"
+    assert live_receipt["cells"]["zero_requests_during_warm_runtime"] == "FAIL"
+    assert live_receipt["offline_warm"]["lifecycle_inspect_request_events"] == []
+    assert live_receipt["cells"]["warm_process_cleanup"] == "PASS"
     expected_returncode = 0 if live_receipt["acceptance_status"] == "PASS" else 1
     assert result.returncode == expected_returncode, (
         f"acceptance status {live_receipt['acceptance_status']} did not match "
         f"harness return code {result.returncode}"
     )
-    assert live_receipt["acceptance_status"] == "PASS", (
-        f"acceptance cells: {live_receipt['cells']}\n"
-        f"wrapper receipt: {live_receipt['rcc_receipt']}\n"
-        f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
-    )
+    assert live_receipt["acceptance_status"] == "FAIL"
+    assert live_receipt["cells"]["provider_backed_exec_fail_closed"] == "PASS"
 
 
 def test_child_environment_keeps_ca_and_proxy_settings_without_credentials(tmp_path):
@@ -333,6 +346,74 @@ def test_wrapper_exit_accepts_only_completed_numeric_zero():
         _harness().classify_wrapper_exit({"status": "completed", "exitCode": 0})
         == "PASS"
     )
+
+
+def test_unavailable_provider_probe_counts_and_rejects_attempted_requests():
+    harness = _harness()
+    probe = harness.UnavailableProviderProbe("127.0.0.1", 0)
+    try:
+        methods = (
+            "GET",
+            "HEAD",
+            "OPTIONS",
+            "PUT",
+            "DELETE",
+            "CONNECT",
+            "TRACE",
+            "PATCH",
+            "POST",
+        )
+        for method in methods:
+            request = urllib.request.Request(
+                probe.url,
+                data=b"" if method in ("PUT", "POST", "PATCH") else None,
+                method=method,
+            )
+            with pytest.raises(urllib.error.HTTPError) as error:
+                urllib.request.urlopen(request, timeout=2)
+            assert error.value.code == 503
+        assert probe.request_count == len(methods)
+        assert probe.requests == [
+            {"method": method, "path": "/", "status": 503} for method in methods
+        ]
+        assert harness.classify_zero_provider_requests(probe.request_count) == "FAIL"
+        assert harness.classify_zero_provider_requests(0) == "PASS"
+        assert harness.classify_zero_provider_requests(True) == "FAIL"
+    finally:
+        probe.close()
+
+
+def test_acquire_diagnostic_uses_machine_result_and_optional_provider(
+    monkeypatch,
+):
+    harness = _harness()
+    digest = "sha256:" + "a" * 64
+    commands = []
+
+    def run(command, **_kwargs):
+        commands.append(command)
+        return subprocess.CompletedProcess(
+            command,
+            0,
+            json.dumps({"artifact": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    monkeypatch.setattr(harness, "run_owned_process", run)
+    result = harness.run_acquire_diagnostic(
+        "/opt/rcc",
+        digest,
+        provider=None,
+        env={},
+        deadline=harness.Deadline.after(5),
+        replacements={},
+    )
+
+    assert result["exit_code"] == 0
+    assert result["exact_digest"] is True
+    assert result["verification_valid"] is True
+    assert "--provider" not in commands[0]
+    assert "--permissive-local" in commands[0]
 
 
 def test_runtime_tree_refresh_precedes_stop_even_when_stop_fails(monkeypatch):
