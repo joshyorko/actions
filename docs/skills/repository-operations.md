@@ -36,6 +36,14 @@ distinct evidence. Record both with the same run/job identifiers, keep skipped
 dependent browser checks as NOT_RUN, and do not infer whole-job or release
 success from the focused result.
 
+Inventory entries are timestamped observations while workers remain active,
+not a freeze. Compare the ledger's issue IDs, titles and update timestamps with
+GitHub, but keep its engineering work state distinct from GitHub's open/closed
+state. Refresh next-action pointers against the actual PR head and checks.
+With a narrow `remote.origin.fetch` refspec, `git fetch origin BRANCH` can update
+only `FETCH_HEAD`; use an explicit source/destination refspec and compare the
+remote branch SHA before treating `origin/BRANCH` as current.
+
 The closed observability issue #137 remains referenced by roadmap #82. Preserve
 its retained contract in final vertical verification rather than reopening it
 automatically. #149 remains a living advisory record, and closed quickstart #154
@@ -316,6 +324,11 @@ the tag is an ancestor of `origin/community` and matches
 verified directory as `actions-runtime-dist`. The workflow publishes the same
 set once when the Runtime secret is configured; without it, the tagged job fails
 at the credential check before PyPI upload, so no release success may be claimed.
+The validator's `--download-root` mode rejects duplicate basenames across
+separate downloaded artifact directories before copying or merging their files.
+Determine whether a failed job attempted publication from its workflow event
+and upload-step conclusions, not its display name. A pull-request job named
+`publish` can fail artifact validation before credential or upload steps run.
 Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
@@ -948,12 +961,13 @@ starts workers with RCC `env exec --artifact DIGEST --permissive-local
 --inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
 release.
 
-TCP worker startup owns its listener, accept future, and spawned wrapper. Any
-failure after listener creation closes the listener, cancels and observes the
-accept future, and reaps the owned wrapper without replacing the primary
-exception. Process-pool capacity is released after wrapper cleanup and is
-guaranteed even if warmup recovery raises; the exception-path regressions live
-in the RCC adapter focused test module.
+TCP worker startup owns its listener, accept future, and spawned wrapper.
+Startup failure attempts listener closure, accept cancellation, and wrapper
+cleanup while preserving the primary exception. Cleanup is not yet bounded end
+to end: protocol writes and the RCC wrapper wait can block. Already-exited
+workers must still complete lifecycle accounting; a liveness check alone does
+not establish descendant drain or receipt completion. The existing capacity
+regression covers warmup failure after successful cleanup, not cleanup failure.
 
 The provisional adapter classifies reload inputs from normalized environment
 fields (`spec-version`, dependency sets, and post-install commands), not from
@@ -1009,12 +1023,27 @@ mocked parser or RCC health/version check is not acceptance evidence.
 RCC v18.19.2 materializes `env exec` children with the artifact as their
 current directory, so import/discovery must pass the package source directory
 explicitly to `actions metadata`; `PYTHONPATH` alone does not make discovery
-scan the source tree. A successful Action can still leave its receipt with
-`status: failed`, `exitCode: -1`, and `reason: child exited non-zero` when the
-pool intentionally terminates the persistent wrapper after the Action returns
-`PASS`. Treat that as wrapper teardown evidence only when the receipt's exact
-artifact digest, `verification.valid == true`, and non-empty lease identity
-also validate.
+scan the source tree. Record Action execution and RCC wrapper lifecycle as
+separate outcomes. An Action may return `PASS` while intentional pool
+termination produces `status: failed`, `exitCode: -1`, and
+`reason: child exited non-zero`. That receipt remains a wrapper lifecycle
+failure even when artifact identity, verification, and lease identity validate.
+Graceful retirement requires bounded worker shutdown and wrapper completion;
+forced cancellation and descendant drain require separate evidence. Neither
+result establishes full #134 acceptance.
+
+The Dakota candidate-wheel harness records separate unauthenticated rejection,
+authenticated Action, SQLite, artifact verification, wrapper exit and process
+cleanup cells. Every cell must pass for overall acceptance. Preserve the exact
+failed wrapper status, exit code and reason even when Action execution succeeds.
+Its separate CLI watchdog does not by itself prove cleanup of every descendant.
+Cleanup coverage must include an owner that exits before timeout while a
+detached child retains its output pipes: discovery only during teardown loses
+already reparented children. Refresh and retain Runtime ownership before
+cleanup on failure paths as well as success. On Windows, closing a buffered
+pipe while a `communicate()` reader remains blocked can defeat a finite timeout.
+Keep native execution and descendant-reaping claims separate from Linux
+termination evidence; excluding zombies proves stopped execution, not reaping.
 
 With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
 recorded digest through the same provider and each returned the exact digest

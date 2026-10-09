@@ -95,7 +95,7 @@
         196
       ],
       "criticality": "P1",
-      "next_bounded_action": "Retain verified tunnel lifecycle slice in PR225 at cff80183; implement public-edge identity/authentication and SSH ownership gates before whole-contract admission.",
+      "next_bounded_action": "PR225 at2d4933a7 passes41 focused/607 portable tests; current native pending. Separate cloud branch implements authenticated start --expose identity and authorization probe with local transport tests only; real public-edge/SSH evidence remains open.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -520,7 +520,7 @@
         145
       ],
       "criticality": "P1",
-      "next_bounded_action": "Review PR231 hash-bound Linux packaged consumer proof; preserve all-marker suite failures and complete current-source/native-platform/recovery admission.",
+      "next_bounded_action": "PR231 at5d295a92 passes14 focused/587 portable; retain24 broad diagnostic failures. Cloud reviewer repairs stale PASS surviving abrupt harness termination before another acceptance run.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -1235,7 +1235,7 @@
         153
       ],
       "criticality": "P0",
-      "next_bounded_action": "Native exclusive publication passed all three platforms in PR230; repair post-publication cleanup ownership on its isolated successor, then address remaining root/source/staging identity gaps.",
+      "next_bounded_action": "PR230 native exclusive publication merged as ea08faf; PR232 cleanup successor at72a60344 awaits current native checks. Cloud Luna implements private staging container; root/source identity remains open.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -3111,7 +3111,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Same Dakota RCC thread repairs reviewed detached cleanup, hard deadline and Runtime reap gaps; retain source/candidate-wheel Action proof separately from failed wrapper teardown.",
+      "next_bounded_action": "Existing Dakota thread repairs supervisor reap/failure classification at7cf11c8; independent cloud review remains FAIL. Separate cloud slice implements explicit worker exit only, not end-to-end lease acceptance.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -12186,7 +12186,7 @@
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261008.zip",
   "evidence_archive_sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
-  "integration_head": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
+  "integration_head": "ea08faf39e107113ae50a529770ce1ca1a422d05",
   "additional_compute": {
     "devsy": {
       "provider": "Executor Devsy Kubernetes",
@@ -12200,7 +12200,9 @@
     },
     "cloud": {
       "state": "CONNECTED",
-      "integration_owner": "/root"
+      "integration_owner": "/root",
+      "worker_inventory": "community-resume-20261009.json",
+      "fanout": "New cloud lanes gpt-6-luna/medium; no new Dakota workers"
     },
     "dakota": {
       "state": "CONNECTED_EXISTING_THREADS_RECONCILED",
@@ -12224,14 +12226,14 @@
       "toolchain": "Both native workers reported checksum-pinned RCC18.19.3 Doctor/Bootstrap/ToolkitTest PASS before control failure",
       "cause": "Fresh Executor calls work; both prior turns were completed before same-thread continuation. Devsy validation remains separately blocked.",
       "branches": {
-        "rcc": "feature/dakota-rcc-acceptance-20261008@67e82ef7c2bfd529f36d756c2c97c466bd3952e4; active uncommitted cleanup successor",
-        "work_items": "feature/dakota-workitems-acceptance-20261008@f31d9b56afdc79b761dc190457e7cb397f116c7f; completed and clean"
+        "rcc": "feature/dakota-rcc-acceptance-20261008@7cf11c8bbad67a5dbfa9387ce82d8ca35f5c8c4e; same active thread repairing reviewed successor",
+        "work_items": "Dakota completed atf31d9b56; canonical branch advanced in cloud to5d295a92, cloud stale-PASS repair active"
       }
     }
   },
   "resume_checkpoint": {
     "file": "community-resume-20261009.json",
-    "observed_at": "2026-10-09T15:10:12.463914+00:00",
-    "status": "ACTIVE_ENGINEERING; migration preparation is not a freeze"
+    "observed_at": "2026-10-09T15:34:46.603301+00:00",
+    "status": "ACTIVE_ENGINEERING; maximum cloud Luna fanout, no migration freeze"
   }
 }

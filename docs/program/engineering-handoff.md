@@ -8,11 +8,12 @@ mutations, let in-flight work reach safe checkpoints, preserve and push recovera
 work, then inventory every worker/worktree/branch/head and unfinished change.
 
 The [resume record](community-resume-20261009.json) contains the current worker and
-worktree inventory, exact heads, proof limits and hashed [evidence archive](evidence/community-20261009-resume.zip).
+worktree inventory, exact heads, proof limits and hashed [fanout evidence archive](evidence/community-20261009-fanout.zip).
+The earlier [resume archive](evidence/community-20261009-resume.zip) is also retained unchanged.
 The October 8 archive and original patch remain unchanged. All 54 contracts,
 comments and dependency relationships remain retained; none is accepted or whole-issue review-ready.
 Community remains `7c98236069171f57031218f938963238986293bd`; integration is now
-`12b387ec42ec6c5ef24d37ec04bbf338d2265e14` after the reviewed PR229 repair merged. No community merge or release occurred.
+`ea08faf39e107113ae50a529770ce1ca1a422d05` after reviewed PR229 and PR230 merged. No community merge or release occurred.
 
 - **Windows shutdown:** [PR229](https://github.com/joshyorko/actions/pull/229),
   `a8eb7b46f536202f71484d3933d7ed70be103e5c`, now passes strict owned-handle,
@@ -22,34 +23,59 @@ Community remains `7c98236069171f57031218f938963238986293bd`; integration is now
   lint and typecheck282 files PASS. Independent review found no additional defect.
   All12 required successful checks and1 skipped publication resolved before integration;
   the merge tree equals the tested head tree. Handles of processes that left accounting before capture remain outside this proof.
-- **Tunnel:** [PR225](https://github.com/joshyorko/actions/pull/225), `cff80183`,
+- **Tunnel:** [PR225](https://github.com/joshyorko/actions/pull/225), `2d4933a7`,
   restores the unverified patch and repairs inherited-writer cleanup, full-queue
-  drainage and cancellation. Focused41 PASS; portable602 PASS/10 SKIP; lint/types PASS.
-  Focused native steps pass all three platforms; their later Windows ownership
+  drainage and cancellation. Focused41 PASS; integrated portable607 PASS/10 SKIP; lint/types PASS.
+  Historical focused native steps pass all three platforms; current native checks
+  are pending. The historical later Windows ownership
   failure remains historical evidence, not relabeled by the separate repair.
   Public-edge identity/authentication and SSH ownership still block whole acceptance.
 - **Robot publication:** [PR230](https://github.com/joshyorko/actions/pull/230),
-  `651a1b97`, preserves15696d85 and passes focused50 tests plus native no-replace
-  publication on all three platforms. Portable583 PASS/10 SKIP; lint/types PASS.
-  Existing cloud thread `/root/windows_shutdown_review` is now implementing the
-  next bounded #151 post-publication cleanup-ownership fix in a separate worktree.
-  Root/source/staging identity protections remain open.
+  `b690b262`, merged into integration as `ea08faf3` after all11 checks succeeded.
+  Current native Linux/Windows/macOS all passed in run37949958738, including
+  ownership and browser/storage/history. Portable583 PASS/10 SKIP; lint/types PASS.
+  [PR232](https://github.com/joshyorko/actions/pull/232) repairs post-publication
+  cleanup ownership. Original `af4f706e` passed52 focused,585 portable/10 SKIP,
+  all three native jobs and independent review. It is now retargeted to integration
+  at `72a60344`; local package gates passed again, current hosted checks pending.
+  A separate cloud Luna lane repairs the demonstrated staging-mode widening by
+  `copytree` in a private container. Root/source identity remains unproved.
 - **Work Items:** same Dakota thread `01a11d7a-e547-7423-8fc5-fc0148df2123`
-  completed [PR231](https://github.com/joshyorko/actions/pull/231), `f31d9b56`.
+  completed its remote checkpoint at `f31d9b56`. Cloud integration advanced
+  [PR231](https://github.com/joshyorko/actions/pull/231) to `5d295a92`.
   Harness703837e5 requires both passing cases and fresh hash-bound proofs; interrupted
   or changed-artifact final checks invalidate all cases. Regressions14 PASS;
-  retained Linux frozen/Go binaries2 PASS; portable586 PASS/10 SKIP; lint/types PASS.
+  retained Linux frozen/Go binaries2 PASS; integrated portable587 PASS/10 SKIP; lint/types PASS.
+  Independent cloud review found a prior PASS can survive abrupt harness death
+  before its final receipt write. A Luna lane is adding atomic attempt invalidation;
+  the earlier14 passing regressions do not waive this finding.
   Artifact source/build labels remain caller claims; stale-reservation seeding is
   not a process-crash test. The broad all-marker working-tree diagnostic remains
   FAIL:24 failed/677 passed/22 skipped. Exact failure names are in the archive;
   configured portable and native retained-artifact results do not replace that failure.
 - **RCC:** same Dakota thread `01a11d7b-4029-7953-aba7-f3b487098b32` remains active,
-  pushed67e82ef7, with uncommitted cleanup/deadline repairs retained remotely.
-  Current source/candidate-wheel Action evidence reports HTTP403/200, persisted
-  SQLite success and verified artifact/lease, but wrapper teardown remains
-  `failed/-1/child exited non-zero`. Independent review rejects detached-session
-  cleanup, unbounded pipe/wait paths, incomplete total deadline and unverified
-  Runtime reap. Focused11 PASS/1 deselected does not waive those findings.
+  now turn `01a1213e-6a35-7e53-80d7-803c46dfe2d9`, pushed `7cf11c8b`.
+  Its preceding turn completed before this continuation. Historical source Runtime
+  with candidate wheels at `e33987b6` reports HTTP403/200, SQLite and artifact cells
+  PASS but wrapper `failed/-1/child exited non-zero`, so overall acceptance is FAIL.
+  The Linux supervisor successor still has independent review blockers around
+  adopted-zombie reap, failed ownership lookup, exception cleanup and unreported
+  escalation. Keep the live probe and follow-up repairs in the same remote thread.
+  A separate cloud worker implements only explicit worker `exit` handling; bounded
+  pool retirement, wrapper receipt success and RCC lease ordering remain open.
+
+The user requested maximum cheap **cloud** Luna fanout. Six disjoint Luna lanes
+cover worker exit, private Robot staging, tunnel edge verification, RCC review, release
+workflow inventory and Work Items receipt invalidation. Their current worktree
+heads and uncommitted file observations are in the resume record. No additional
+Dakota workers were created. The user is provisioning another Executor app server;
+no discovery or dispatch to that server has occurred.
+
+PR220's older `bdf39a16` Runtime workflow failed artifact validation on manylinux
+tag ordering before credential or upload steps. No PyPI upload was attempted.
+The current integration already contains a strict parser accepting equivalent
+platform-tag order; the cloud lane is verifying that existing fix rather than
+adding duplicate logic. Keep the older governance-head failure explicit.
 
 Both prior Dakota turns were confirmed completed before reusing these exact
 threads; no duplicate workers were dispatched. The user intentionally removed
