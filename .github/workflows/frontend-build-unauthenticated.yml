@@ -120,34 +120,32 @@ jobs:
           --build-command "uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper"
           --output output/native-artifact-manifest.json
 
-      - name: Build candidate Core wheel for Linux Work Items acceptance
-        if: matrix.os == 'ubuntu-22.04'
+      - name: Build candidate Core wheel for native Work Items acceptance
         working-directory: ./actions
         env:
-          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ github.run_id }}-${{ github.run_attempt }}
+          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
-          mkdir -p "$DAKOTA_WORKITEMS_RCC_HOME/wheels"
-          uv run --no-project --python 3.12 poetry build --format wheel --output "$DAKOTA_WORKITEMS_RCC_HOME/wheels"
-          test -s "$DAKOTA_WORKITEMS_RCC_HOME/wheels/actions_core-1.0.2-py3-none-any.whl"
+          python -c "import os; from pathlib import Path; (Path(os.environ['DAKOTA_WORKITEMS_RCC_HOME']) / 'wheels').mkdir(parents=True, exist_ok=True)"
+          uv run --no-project --python 3.12 poetry build --format wheel --output "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}/wheels"
+          python -c "import os; from pathlib import Path; assert (Path(os.environ['DAKOTA_WORKITEMS_RCC_HOME']) / 'wheels' / 'actions_core-1.0.2-py3-none-any.whl').is_file()"
 
       - name: Verify Work Items consumer through frozen and Go runtimes
-        if: matrix.os == 'ubuntu-22.04'
         timeout-minutes: 20
         env:
-          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ github.run_id }}-${{ github.run_attempt }}
+          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
         run: >-
           uv run --no-project --python ${{ matrix.python }} poetry run python
           scripts/dakota_workitems_native_acceptance.py
-          --frozen dist/action-server/action-server
-          --go-wrapper dist/final/action-server
+          --frozen dist/action-server/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
+          --go-wrapper dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
           --source-sha "${{ github.sha }}"
           --build-version "workflow-${{ github.run_id }}-${{ github.run_attempt }}"
-          --rcc-home "$DAKOTA_WORKITEMS_RCC_HOME"
+          --rcc-home "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
           --build-manifest output/native-artifact-manifest.json
           --receipt output/dakota-workitems-native-${{ github.run_id }}-${{ github.run_attempt }}.json
 
       - name: Upload Work Items native acceptance receipt
-        if: always() && matrix.os == 'ubuntu-22.04'
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: dakota-workitems-native-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
@@ -156,10 +154,10 @@ jobs:
           retention-days: 7
 
       - name: Clean task-owned Work Items RCC home
-        if: always() && matrix.os == 'ubuntu-22.04'
+        if: always()
         env:
-          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ github.run_id }}-${{ github.run_attempt }}
-        run: rm -rf -- "$DAKOTA_WORKITEMS_RCC_HOME"
+          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+        run: python -c "import os; import shutil; shutil.rmtree(os.environ['DAKOTA_WORKITEMS_RCC_HOME'], ignore_errors=True)"
 
       - name: Verify binary was built
         run: |

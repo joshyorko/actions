@@ -145,13 +145,12 @@ any prior receipt, then atomically writes a fresh `IN_PROGRESS` receipt and
 attempt ID before artifact checks or pytest. Ordinary failures write `FAIL` and
 mark cases `NOT_VERIFIED`; abrupt termination can leave `IN_PROGRESS`, which is
 not a passing result. Source SHA and build version arguments are caller claims,
-not verified build provenance. Retained Linux artifacts do not establish
-current-source builds or Windows/macOS, distributed, service-backend or full
-browser acceptance.
-The credential-free native workflow runs process ownership, management/browser
-and history acceptance; it does not invoke this packaged-worker consumer gate.
-Its success therefore does not establish consumer lifecycle acceptance on that
-platform. Retain a separate receipt from this runner for each tested artifact.
+not verified build provenance. A Linux receipt does not establish Windows or
+macOS consumer acceptance, distributed or service-backend behavior, or full
+browser acceptance. The credential-free native workflow also runs process
+ownership, management/browser and history acceptance; those checks do not
+replace this packaged-worker consumer gate. Retain a separate passing receipt
+from this runner for each tested platform artifact.
 
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
@@ -350,24 +349,32 @@ acceptance requires a separately measured task-local wheel. The manifest covers
 the checkout and named build outputs, not every dependency or the frozen
 executable's adjacent onedir files.
 
-On Linux, the same workflow has a separate bounded Work Items consumer gate.
-It builds `actions-core` as a wheel into a fresh run-owned RCC home, then runs
-the real frozen and Go-wrapper executables against the synthetic API consumer
-test. The generated `spec-version: v2` package obtains
+On Linux, macOS, and Windows, the same workflow has a separate bounded Work
+Items consumer gate. Each matrix job builds `actions-core` as a wheel into a
+fresh runner-owned RCC home, then runs the real frozen and Go-wrapper
+executables against the synthetic API consumer test. The generated
+`spec-version: v2` package obtains
 `actions-work-items==0.4.4` from the public package registry and installs the
 exact candidate Core wheel with a supported `post-install` command after RCC
 creates the base environment. The consumer action checks the installed Core
 version and module ownership, then validates pip's install report against the
-candidate wheel path and SHA-256. No business-service credentials are used.
+candidate wheel path and SHA-256. File URLs in that report must be converted
+with the native platform's URL-to-path rules; Windows drive paths are not
+equivalent to a POSIX path formed directly from the URL's leading slash. The
+generated command quotes paths with native Windows command-line rules on
+Windows and POSIX shell rules elsewhere. No business-service credentials are
+used.
 The runner hashes both executables and the wheel, requires fresh per-runtime
 API proofs, and accepts
 the optional native manifest only when its source SHA, platform, architecture,
 expected executable paths and measured executable hashes agree. Its receipt
-records the manifest hash and binding result. This is Linux-only acceptance;
-it does not establish Windows/macOS Work Items behavior, a clean-source
-attestation, wheel provenance inside the native build manifest, or live
-external-service behavior. The workflow retains a receipt even when the gate
-fails or is interrupted, then removes only its run-owned RCC home.
+records the manifest hash and binding result. This hosted matrix is configured
+to collect a separate receipt on each of the three platforms; only a passing
+receipt establishes consumer acceptance for that platform. The gate does not
+establish a clean-source attestation, wheel provenance inside the native build
+manifest, or live external-service behavior. The workflow retains a receipt
+even when the gate fails or is interrupted, then removes only its run-owned RCC
+home.
 
 This harness proves creation and restart persistence, not worker-driven Work
 Item state transitions, attachment behavior, accessibility or other browsers.
