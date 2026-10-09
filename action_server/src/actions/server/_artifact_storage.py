@@ -1,7 +1,12 @@
+import errno
 import json
 import os
 import stat
+import sys
 import tempfile
+import time
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path, PurePosixPath
 from typing import Any, Protocol
 
@@ -47,6 +52,40 @@ def _is_link_or_reparse_point(path: Path) -> bool:
         getattr(info, "st_file_attributes", 0)
         & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
     )
+
+
+@contextmanager
+def _manifest_lock(path: Path) -> Iterator[None]:
+    # Keep this file in place: unlinking it can give concurrent writers different
+    # lock objects. The OS releases the lock even if its owning process exits.
+    with path.open("a+b") as stream:
+        if sys.platform == "win32":
+            import msvcrt
+
+            # Windows supports locking beyond EOF, so the persistent lock file
+            # need not be initialized or written while another writer holds it.
+            while True:
+                stream.seek(0)
+                try:
+                    msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+                    break
+                except OSError as error:
+                    if error.errno not in {errno.EACCES, errno.EAGAIN, errno.EDEADLK}:
+                        raise
+                    time.sleep(0.05)
+            try:
+                yield
+            finally:
+                stream.seek(0)
+                msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(stream, fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(stream, fcntl.LOCK_UN)
 
 
 class FilesystemArtifactStorage:
@@ -206,42 +245,38 @@ class FilesystemArtifactStorage:
     ) -> None:
         self._canonical_key(run_id, "run ID")
         key = self._canonical_key(relative_artifacts_dir, "artifact run key")
-        manifest = self._manifest_path(require_exists=False)
-        import fcntl
-
-        lock = self.root / f"{self._MANIFEST}.lock"
-        with lock.open("a+") as stream:
-            fcntl.flock(stream, fcntl.LOCK_EX)
+        lock = self._contained(
+            self.root / f"{self._MANIFEST}.lock",
+            "Artifact binding lock",
+            require_exists=False,
+        )
+        with _manifest_lock(lock):
+            manifest = self._manifest_path(require_exists=False)
             try:
-                try:
-                    bindings = json.loads(manifest.read_text())
-                except FileNotFoundError:
-                    bindings = {}
-                except (OSError, json.JSONDecodeError) as error:
-                    raise ArtifactStorageConfigurationError(
-                        "Corrupt artifact run binding manifest"
-                    ) from error
-                record = {"key": key.as_posix(), "metadata": metadata or {}}
-                if run_id in bindings and bindings[run_id] != record:
-                    raise ArtifactStorageConfigurationError(
-                        f"Conflicting artifact binding for run: {run_id}"
-                    )
-                self.run_artifacts_dir(relative_artifacts_dir)
-                bindings[run_id] = record
-                fd, temporary = tempfile.mkstemp(dir=self.root, prefix=".bindings-")
-                try:
-                    with os.fdopen(fd, "w", encoding="utf-8") as output:
-                        json.dump(
-                            bindings, output, sort_keys=True, separators=(",", ":")
-                        )
-                        output.flush()
-                        os.fsync(output.fileno())
-                    os.replace(temporary, manifest)
-                finally:
-                    if os.path.exists(temporary):
-                        os.unlink(temporary)
+                bindings = json.loads(manifest.read_text())
+            except FileNotFoundError:
+                bindings = {}
+            except (OSError, json.JSONDecodeError) as error:
+                raise ArtifactStorageConfigurationError(
+                    "Corrupt artifact run binding manifest"
+                ) from error
+            record = {"key": key.as_posix(), "metadata": metadata or {}}
+            if run_id in bindings and bindings[run_id] != record:
+                raise ArtifactStorageConfigurationError(
+                    f"Conflicting artifact binding for run: {run_id}"
+                )
+            self.run_artifacts_dir(relative_artifacts_dir)
+            bindings[run_id] = record
+            fd, temporary = tempfile.mkstemp(dir=self.root, prefix=".bindings-")
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8") as output:
+                    json.dump(bindings, output, sort_keys=True, separators=(",", ":"))
+                    output.flush()
+                    os.fsync(output.fileno())
+                os.replace(temporary, manifest)
             finally:
-                fcntl.flock(stream, fcntl.LOCK_UN)
+                if os.path.exists(temporary):
+                    os.unlink(temporary)
 
     def run_storage_key(self, run_id: str) -> str:
         try:

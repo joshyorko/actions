@@ -847,6 +847,31 @@ while PostgreSQL migration startup takes a transaction-scoped advisory lock.
 Local artifact storage creates the default `artifacts_dir` on first use when
 the caller supplies `Settings` directly; an explicitly configured artifact
 storage root remains required to exist and pass containment validation.
+
+Artifact run binding publication serializes the complete manifest read, conflict
+check and atomic replacement with a persistent, contained
+`.action-server-run-bindings.json.lock` file. Unix uses `fcntl.flock`; Windows
+uses `msvcrt.locking` on byte zero, including when the lock file is empty.
+Never import `fcntl` on Windows or skip locking when it is unavailable. Do not
+unlink the lock file during normal operation: writers must share the same
+lock object. The [Windows CRT](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/locking?view=msvc-170)
+permits locks past EOF; only contention errors
+are retried, and other lock errors abort publication. This does not establish
+locking support or correctness on an arbitrary network filesystem.
+
+Run `poetry run pytest tests/action_server_tests/test_artifact_binding_lock.py
+tests/action_server_tests/test_artifact_storage.py` on each native OS. The
+spawned-process regressions pause one publisher inside the transaction, prove
+another cannot read until release, preserve independent updates, reject
+conflicting bindings, and check lock release after process termination.
+Serialization/replacement failure tests preserve the prior manifest, remove
+owned temporary files and permit a subsequent process to bind. Abrupt process
+termination can leave an unpublished `.bindings-*` temporary file; OS lock
+release does not perform application cleanup. A Linux pass or mocked platform
+selection does not establish native Windows or cross-host shared-filesystem
+behavior. These containment checks do not close pathname replacement races
+against a writer with authority to mutate the storage namespace.
+
 The direct two-instance/concurrent-update and concurrent-startup acceptance is
 in `action_server/tests/action_server_tests/test_database_shared.py` and
 requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.
