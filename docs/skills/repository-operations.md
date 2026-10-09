@@ -267,6 +267,14 @@ closed. CORS preflight admission is independent of API-key authentication, while
 the actual request remains authenticated. The same allowlist protects browser
 WebSocket handshakes; no-`Origin` WebSocket clients retain the existing
 non-browser path.
+
+Import modules that bind dependency aliases before patching the dependency's
+source module. Otherwise a module's first import can capture the fake callable,
+and monkeypatch teardown can restore that fake as the bound alias's original.
+Patch the already-imported modules together and clear any cached app factory
+around fake server startup. Keep the startup/logging test immediately before the
+assembled CORS/WebSocket admission test in one pytest process: an isolated
+admission test cannot expose this import-order leak.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
@@ -294,6 +302,17 @@ separate legacy delivery line. Tagged PyPI runs fail closed when
 verification without publication. Runtime binaries intentionally retain the
 existing `action-server/releases` CDN/S3 object paths and Homebrew version input
 as compatibility handoffs; those paths do not redefine package or tag identity.
+For `actions-http-helper`, credential availability is checked in a separate
+`pypi`-environment workflow with no repository permissions, checkout, package
+installation, registry authentication, or upload command. Run
+`37970443665` attempt 3 reported only that `PYPI_TOKEN_ACTIONS_HTTP_HELPER` was
+nonempty; this is evidence of secret availability, not authentication, token
+scope, artifact correctness, or release readiness. A maintainer reported that
+the host `ghx` wrapper dropped stdin and that native `gh` resolved that reported
+wrapper issue; this does not establish that Cloud `gh` authentication is fixed.
+See the [upstream reporting procedure](https://github.com/joshyorko/actions/blob/57399b60496b98fea020f26e576d47bcb0d440bf/docs/skills/upstream-reporting.md)
+before filing a new issue for a failure; the existing Helper CORS finding is
+tracked in issue 209.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
