@@ -472,7 +472,7 @@ def render_markdown(graph: dict) -> str:
 
 
 def sync_markdown_note(path: Path, anchor: str) -> None:
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
     start = f"<!-- canvas-graph-amendment:start -->"
     end = f"<!-- canvas-graph-amendment:end -->"
     block = f"{start}\n\n{AMENDMENT_NOTE}\n\n{end}\n"
@@ -484,11 +484,11 @@ def sync_markdown_note(path: Path, anchor: str) -> None:
         if anchor not in text:
             raise ValueError(f"Cannot find documentation insertion anchor in {path}")
         text = text.replace(anchor, anchor + "\n\n" + block.rstrip() + "\n", 1)
-    path.write_text(text)
+    path.write_text(text, encoding="utf-8")
 
 
 def update_graph_metadata(path: Path, graph: dict) -> None:
-    data = json.loads(path.read_text())
+    data = json.loads(path.read_text(encoding="utf-8"))
     data["execution_graph"]["relationship_schema_version"] = 2
     data["execution_graph"]["relationship_policy"] = (
         "Typed execution prerequisites and scoped criterion gates only; parent coordination, related "
@@ -505,7 +505,7 @@ def update_graph_metadata(path: Path, graph: dict) -> None:
             "size_bytes": archive.stat().st_size,
             "manifest": "evidence/" + manifest.name,
         }
-    path.write_text(json.dumps(data, indent=2) + "\n")
+    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> None:
@@ -513,22 +513,22 @@ def main() -> None:
     parser.add_argument("--apply", action="store_true", help="Apply typed edge policy and regenerate the Markdown projection")
     parser.add_argument("--check", action="store_true", help="Validate JSON/contract invariants and exact Markdown reproducibility")
     args = parser.parse_args()
-    graph = json.loads(GRAPH_PATH.read_text())
-    ledger = json.loads(LEDGER_PATH.read_text())
+    graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
+    ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
     if args.apply:
         graph = upgrade_relationships(graph, ledger)
-        GRAPH_PATH.write_text(json.dumps(graph, indent=2) + "\n")
-        MARKDOWN_PATH.write_text(render_markdown(graph))
+        GRAPH_PATH.write_text(json.dumps(graph, indent=2) + "\n", encoding="utf-8")
+        MARKDOWN_PATH.write_text(render_markdown(graph), encoding="utf-8")
         update_graph_metadata(LEDGER_PATH, graph)
         update_graph_metadata(RESUME_PATH, graph)
         sync_markdown_note(LEDGER_MARKDOWN_PATH, "| Issue | Wave | Retained state | Owner / PR | Next bounded action |")
         sync_markdown_note(HANDOFF_PATH, "# Actions Community engineering handoff — active Cloud checkpoint")
     elif args.check:
         validate_graph(graph, ledger)
-        if MARKDOWN_PATH.read_text() != render_markdown(graph):
+        if MARKDOWN_PATH.read_text(encoding="utf-8") != render_markdown(graph):
             raise SystemExit("community-execution-graph.md is stale; run with --apply")
         for path in (LEDGER_PATH, RESUME_PATH):
-            document = json.loads(path.read_text())
+            document = json.loads(path.read_text(encoding="utf-8"))
             if document["execution_graph"].get("relationship_schema_version") != 2:
                 raise SystemExit(f"{path.name} lacks typed graph schema metadata")
             if document["execution_graph"].get("counts") != graph["counts"]:
@@ -536,18 +536,18 @@ def main() -> None:
             if document["execution_graph"].get("whole_contract_complete") != graph["counts"]["COMPLETE"]:
                 raise SystemExit(f"{path.name} has a stale whole-contract completion count")
         for path in (LEDGER_MARKDOWN_PATH, HANDOFF_PATH):
-            text = path.read_text()
+            text = path.read_text(encoding="utf-8")
             if "<!-- canvas-graph-amendment:start -->" not in text or AMENDMENT_NOTE not in text:
                 raise SystemExit(f"{path.name} lacks the dated graph amendment note")
         for path in (LEDGER_PATH, RESUME_PATH):
-            document = json.loads(path.read_text())
+            document = json.loads(path.read_text(encoding="utf-8"))
             archive = document.get("graph_amendment_archive")
             if archive:
                 archive_path = PROGRAM / archive["path"]
                 if hashlib.sha256(archive_path.read_bytes()).hexdigest() != archive["sha256"]:
                     raise SystemExit(f"{path.name} has an invalid amendment archive hash")
                 manifest_path = PROGRAM / archive["manifest"]
-                manifest = json.loads(manifest_path.read_text())
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
                 expected_members = {"manifest.json"}
                 for entry in manifest["entries"]:
                     member = Path(entry["path"])

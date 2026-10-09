@@ -25,7 +25,11 @@ The community graph validator is part of `ToolkitTest`: run
 `.github/workflows/developer_toolkit.yml` pull-request matrix discovers its
 `developer/tests` wrapper, which runs the graph regressions and exact `--check`
 projection; keep this gate in that established path rather than creating a
-separate workflow.
+separate workflow. The projection reads and writes its Markdown, JSON, and
+manifest files as UTF-8 explicitly; do not rely on the host's default text
+encoding. Its CLI fixture exposes child stdout/stderr on failure and forces a
+non-UTF-8 POSIX locale, while the existing Windows ToolkitTest cell exercises
+the native Windows path.
 
 For Canvas fixture work, distinguish schema/round-trip evidence from product
 authorization: the current MCP dispatcher selects a registered tool by name,

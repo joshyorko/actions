@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -24,10 +25,25 @@ from project_community_execution_graph import (
 )
 
 
+def run_cli(command: list[str], repo: Path) -> subprocess.CompletedProcess[str]:
+    env = os.environ.copy()
+    if os.name != "nt":
+        # Reproduce a non-UTF-8 process locale on Unix. Windows CI exercises
+        # the native Windows default encoding in the same CLI fixture.
+        env.update({"LC_ALL": "C", "PYTHONUTF8": "0"})
+    result = subprocess.run(command, cwd=repo, capture_output=True, text=True, encoding="utf-8", env=env)
+    if result.returncode:
+        raise AssertionError(
+            f"CLI command failed ({result.returncode}): {command!r}\n"
+            f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        )
+    return result
+
+
 class ExecutionGraphProjectionTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.graph = json.loads(GRAPH_PATH.read_text())
-        self.ledger = json.loads(LEDGER_PATH.read_text())
+        self.graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
+        self.ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
 
     def test_canvas_parent_cycle_is_removed_from_execution_dag(self) -> None:
         upgraded = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
@@ -146,7 +162,7 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, target)
         graph_path = repo / "docs/program/community-execution-graph.json"
-        graph = json.loads(graph_path.read_text())
+        graph = json.loads(graph_path.read_text(encoding="utf-8"))
         graph.pop("relationship_amendment", None)
         for row in graph["issues"]:
             row["unresolved_open_issue_dependencies"] = row["prior_untyped_dependency_projection"]
@@ -155,10 +171,10 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
                 row.pop(field, None)
         graph.pop("relationship_schema_version", None)
         graph.pop("relationship_model", None)
-        graph_path.write_text(json.dumps(graph, indent=2) + "\n")
+        graph_path.write_text(json.dumps(graph, indent=2) + "\n", encoding="utf-8")
 
         command = [sys.executable, str(repo / "scripts/project_community_execution_graph.py"), "--apply"]
-        subprocess.run(command, cwd=repo, check=True, capture_output=True, text=True)
+        run_cli(command, repo)
         outputs = [
             (repo / relative).read_bytes()
             for relative in (
@@ -170,7 +186,7 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
                 "docs/program/engineering-handoff.md",
             )
         ]
-        subprocess.run(command, cwd=repo, check=True, capture_output=True, text=True)
+        run_cli(command, repo)
         self.assertEqual(outputs, [
             (repo / relative).read_bytes()
             for relative in (
@@ -182,13 +198,13 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
                 "docs/program/engineering-handoff.md",
             )
         ])
-        graph = json.loads(graph_path.read_text())
+        graph = json.loads(graph_path.read_text(encoding="utf-8"))
         graph["issues"][0]["next_bounded_action"] = "Preserve future typed graph edits"
-        graph_path.write_text(json.dumps(graph, indent=2) + "\n")
-        subprocess.run(command, cwd=repo, check=True, capture_output=True, text=True)
-        self.assertEqual("Preserve future typed graph edits", next(row["next_bounded_action"] for row in json.loads(graph_path.read_text())["issues"] if row["issue"] == graph["issues"][0]["issue"]))
+        graph_path.write_text(json.dumps(graph, indent=2) + "\n", encoding="utf-8")
+        run_cli(command, repo)
+        self.assertEqual("Preserve future typed graph edits", next(row["next_bounded_action"] for row in json.loads(graph_path.read_text(encoding="utf-8"))["issues"] if row["issue"] == graph["issues"][0]["issue"]))
         check = [sys.executable, str(repo / "scripts/project_community_execution_graph.py"), "--check"]
-        checked = subprocess.run(check, cwd=repo, capture_output=True, text=True)
+        checked = subprocess.run(check, cwd=repo, capture_output=True, text=True, encoding="utf-8")
         self.assertEqual(0, checked.returncode, checked.stdout + checked.stderr)
 
     def test_markdown_is_deterministic_and_relationship_types_are_visible(self) -> None:
