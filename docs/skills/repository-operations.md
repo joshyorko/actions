@@ -9,6 +9,21 @@ production dependency metadata. This is release preparation, not publication.
 Core must be published and independently verified before that Runtime release;
 neither an editable source install nor an old published wheel proves pairing.
 
+For a split package API promotion, verify the producer's public contract from
+the exact built wheel in an isolated installation. Assess consumer adoption
+separately against the current integration revision, checking both its imports
+and declared producer-version floor. An older community checkout does not
+establish the current consumer's adoption state.
+
+Before a package-only promotion, compare the complete package source, tests,
+dependency metadata and release safeguards with the current integration tree.
+Record every intentional difference; selecting an earlier passing checkpoint
+can omit a later repair even when the extracted patch passes its own tests.
+Bind the tested wheel to its embedded source bytes and installed import path,
+not an older ignored dist directory. If an immutable tag selected incomplete
+source, preserve it and its failed evidence; do not move or retry that tag.
+Correct the source and allocate a separately admitted unused version.
+
 The Runtime development group resolves the matching monorepo Core through a
 relative path. Poetry 2.1.1 generates the lock from that declared group; no
 unpublished registry file hashes are invented. Runtime wheel metadata must

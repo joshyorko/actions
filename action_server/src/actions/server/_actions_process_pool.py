@@ -451,7 +451,8 @@ class ProcessHandle:
         if not self._retirement_lock.acquire(timeout=remaining):
             log.warning("Timed out waiting for another worker retirement attempt.")
             return WorkerRetirementResult(
-                "pending", descendant_snapshot_complete=False,
+                "pending",
+                descendant_snapshot_complete=False,
                 reason="retirement lock deadline expired",
             )
         try:
@@ -520,7 +521,10 @@ class ProcessHandle:
                     {"method": "exit"}, self._socket, exit_deadline
                 )
             except Exception:
-                log.warning("Worker exit frame failed; switching to bounded force cleanup.", exc_info=True)
+                log.warning(
+                    "Worker exit frame failed; switching to bounded force cleanup.",
+                    exc_info=True,
+                )
         elif snapshot_failed or self._kill_called:
             self._exit_attempted = True
 
@@ -530,9 +534,7 @@ class ProcessHandle:
             and self._process.poll() is None
         ):
             try:
-                self._process.wait(
-                    timeout=max(0.0, exit_deadline - time.monotonic())
-                )
+                self._process.wait(timeout=max(0.0, exit_deadline - time.monotonic()))
             except subprocess.TimeoutExpired:
                 pass
 
@@ -1076,8 +1078,16 @@ class ActionsProcessPool:
 
     def dispose(self):
         with self._lock:
-            idle = [process for processes in self._idle_processes.values() for process in processes]
-            running = [process for processes in self._running_processes.values() for process in processes]
+            idle = [
+                process
+                for processes in self._idle_processes.values()
+                for process in processes
+            ]
+            running = [
+                process
+                for processes in self._running_processes.values()
+                for process in processes
+            ]
             for process_handle in running:
                 process_handle.can_reuse = False
             self._idle_processes.clear()
@@ -1243,8 +1253,8 @@ class ActionsProcessPool:
                 # Each 2 seconds check again if we can acquire a process.
                 # Important: do it without acquiring `self._lock` (as it could lead
                 # to a deadlock if one depends on the other)
-                acquired_process_semaphore = (
-                    self._processes_running_semaphore.acquire(blocking=False)
+                acquired_process_semaphore = self._processes_running_semaphore.acquire(
+                    blocking=False
                 )
                 if not acquired_process_semaphore:
                     self._retry_pending_retirements()
