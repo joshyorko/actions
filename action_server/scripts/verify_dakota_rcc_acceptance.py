@@ -705,7 +705,8 @@ def classify_wrapper_exit(receipt: dict[str, object]) -> str:
     return (
         "PASS"
         if receipt.get("status") == "completed"
-        and type(receipt.get("exitCode")) is int
+        # JSON booleans must not satisfy the RCC integer exit-code contract.
+        and type(receipt.get("exitCode")) is int  # noqa: E721
         and receipt.get("exitCode") == 0
         else "FAIL"
     )

@@ -1,14 +1,13 @@
-import os
 import importlib.util
 import json
+import os
+import signal
 import subprocess
 import sys
 import time
-import signal
 from pathlib import Path
 
 import pytest
-
 
 SCRIPT = Path(__file__).parents[2] / "scripts" / "verify_dakota_rcc_acceptance.py"
 HISTORICAL_RECEIPT = (
