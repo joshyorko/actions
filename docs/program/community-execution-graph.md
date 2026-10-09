@@ -1,6 +1,6 @@
 # Actions operational execution graph
 
-Worker-stage observation: 2026-10-09T20:21:15Z. All 54 retained contracts remain unfinished except accepted whole issue #210; this overlay does not change their raw states.
+Worker-stage observation: 2026-10-09T21:02:52Z. All 54 retained contracts remain unfinished except accepted whole issue #210; this overlay does not change their raw states.
 
 Relationship semantics: execution prerequisites gate only the identified implementation slice; parent/coordination and product/related edges never block execution; aggregation edges contribute to full parent acceptance. Only execution edges enter cycle/topological validation.
 
@@ -22,11 +22,11 @@ Counts: READY=0, ACTIVE=7, REVIEW=8, BLOCKED=29, INTEGRATED=9, COMPLETE=1.
 | [#96](https://github.com/joshyorko/actions/issues/96) | INTEGRATED | None | None | None | None | #216 | Validate standalone shell route families, mobile navigation and truthful degraded overview. |
 | [#97](https://github.com/joshyorko/actions/issues/97) | INTEGRATED | None | None | None | None | #216 | Prove actual packaged responsive/accessibility/offline/CSP/error recovery workflows. |
 | [#98](https://github.com/joshyorko/actions/issues/98) | INTEGRATED | None | None | None | None | #115 | Verify separate Runtime/Canvas artifact inventories, deterministic builds and packaged browser. |
-| [#99](https://github.com/joshyorko/actions/issues/99) | BLOCKED | None | #93 | #71 | None | See ledger | Implement the portable Canvas renderer/resource bridge against the agreed fixture after its consumed #97/#98 criteria are accepted; do not wait for unrelated whole-issue closure. |
-| [#100](https://github.com/joshyorko/actions/issues/100) | ACTIVE | None | #93 | #71, #99 | None | See ledger | Continue the isolated 100-A public authoring slice while preserving PR254 as review-only; do not infer 100-B or whole #100 acceptance. |
+| [#99](https://github.com/joshyorko/actions/issues/99) | BLOCKED | None | #93 | #71 | None | See ledger | Review and validate the current c971ccec renderer changes against the shared fixture, then connect the production main/bridge and retain actual-browser proof as separate gates; do not infer whole #99 acceptance. |
+| [#100](https://github.com/joshyorko/actions/issues/100) | ACTIVE | None | #93 | #71, #99 | None | See ledger | Complete #100-B Python/JSON roundtrip using F’s shared fixture; preserve fixture/schema-only limits and keep Runtime dispatch, Workspace authorization and whole #100 acceptance open. |
 | [#101](https://github.com/joshyorko/actions/issues/101) | ACTIVE | None | None | None | #93 | #220 | Preserve all 54 contracts, exact worker ownership, failed publication and warm-restart evidence; no completion from checkpoint counts. |
 | [#125](https://github.com/joshyorko/actions/issues/125) | INTEGRATED | None | None | None | None | #128 | Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract. |
-| [#126](https://github.com/joshyorko/actions/issues/126) | ACTIVE | None | #93, #101 | #71, #99, #100, #127 | None | #219 | Complete the bounded source-protocol proof on its exact branch and report its limits; keep full SDK/template acceptance and #125's remaining contract open. |
+| [#126](https://github.com/joshyorko/actions/issues/126) | ACTIVE | None | #93, #101 | #71, #99, #100, #127 | None | #219 | Finish the PR265 generator repair and run clean-wheel plus exact hosted gates; preserve PR262 as source-protocol-only evidence and keep whole #126 acceptance open. |
 | [#127](https://github.com/joshyorko/actions/issues/127) | BLOCKED | None | #93, #101 | #71 | None | See ledger | Build the packaged Canvas template when its scoped authoring, renderer, public-package and artifact gates pass; it does not wait for #71, #93 or #101 to close. |
 | [#129](https://github.com/joshyorko/actions/issues/129) | INTEGRATED | None | None | None | None | #250 | Continue only after verifying the merged contract and its prerequisites; keep production migration, revision admission, and full Deployment acceptance open. |
 | [#130](https://github.com/joshyorko/actions/issues/130) | BLOCKED | #129 | None | None | None | See ledger | Freeze portable immutable capability/runtime-plan bundle schema after Deployment identity review. |
@@ -56,10 +56,10 @@ Counts: READY=0, ACTIVE=7, REVIEW=8, BLOCKED=29, INTEGRATED=9, COMPLETE=1.
 | [#194](https://github.com/joshyorko/actions/issues/194) | REVIEW | None | None | None | None | #217 | Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release. |
 | [#195](https://github.com/joshyorko/actions/issues/195) | REVIEW | None | None | None | None | #217 | Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release. |
 | [#196](https://github.com/joshyorko/actions/issues/196) | BLOCKED | #134, #152, #153, #208, #214 | None | None | None | See ledger | Host RCC provider only after administrative/auth/origin and tunnel lifecycle acceptance. |
-| [#208](https://github.com/joshyorko/actions/issues/208) | ACTIVE | None | None | None | None | #242 | Resolve generated-module NameError, then advance the packaged Work Items browser/platform matrix; retain Linux consumer proof and failures separately. |
+| [#208](https://github.com/joshyorko/actions/issues/208) | ACTIVE | None | None | None | None | #242 | Run the assigned exact-head packaged consumer/platform gates on recovered PR256 source and preserve prior failures; do not infer acceptance from recovery or push. |
 | [#209](https://github.com/joshyorko/actions/issues/209) | REVIEW | None | None | None | None | #216 | Verify latest native WebSocket/reconnect on all OS; All-platform b592 packaged reconnect PASS; e4 Windows cleanup failure remains distinct. |
 | [#210](https://github.com/joshyorko/actions/issues/210) | COMPLETE | None | None | None | None | #249 | No remaining #210 work; preserve failed immutable1.0.2 evidence. |
-| [#211](https://github.com/joshyorko/actions/issues/211) | ACTIVE | None | None | None | None | #248 | Complete #211 native distribution/checksum and Homebrew handoff gates through PR257, resolve the active four-F811 test-integrity follow-up, then continue Runtime/native1.0.3 acceptance separately. |
+| [#211](https://github.com/joshyorko/actions/issues/211) | ACTIVE | None | None | None | None | #248 | Complete exact PR257 hosted checks and report per-job outcomes; keep native release/readback scope separate from Runtime1.0.3 publication. |
 | [#212](https://github.com/joshyorko/actions/issues/212) | REVIEW | None | None | None | None | #216 | Verify new native history gate on all supported OS and rebuilt candidate; retain full detail and legacy supported clients. |
 | [#214](https://github.com/joshyorko/actions/issues/214) | REVIEW | None | None | None | None | See ledger | PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open. |
 
@@ -81,12 +81,12 @@ Counts: READY=0, ACTIVE=7, REVIEW=8, BLOCKED=29, INTEGRATED=9, COMPLETE=1.
 
 | Slice | Owning issue | Current evidence state | Required gates |
 |---|---:|---|---|
-| 100-A: Public tool UI metadata and ui:// resource authoring/serving | #100 | ACTIVE | 125:public-package-boundary |
-| 100-B: Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture | #100 | PROPOSED_REVIEW_ONLY | None recorded |
-| 99-A: Portable MCP App View renderer/resource bridge using the agreed fixture | #99 | NOT_IMPLEMENTED | 97:ui-foundation, 98:canvas-artifact |
+| 100-A: Public tool UI metadata and ui:// resource authoring/serving | #100 | PR263 source seam independently accepted; focused38+real-process1+wheel2 PASS; broader Cloud configured gates blocked; full remote review gates assigned. | 125:public-package-boundary |
+| 100-B: Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture | #100 | ACTIVE; E Python roundtrip on F shared fixture; schema/interchange only, no Runtime or authorization acceptance. | None recorded |
+| 99-A: Portable MCP App View renderer/resource bridge using the agreed fixture | #99 | Current head c971ccec; validation reported at prior842c32d5 only; pure React/fixture scope, production main/bridge/browser NOT_RUN. | 97:ui-foundation, 98:canvas-artifact |
 | 99-B: Optional host-specific ChatGPT projection and actual-host proof | #99 | NOT_IMPLEMENTED | None recorded |
 | 127-template: Packaged template round trip over accepted authoring and renderer slices | #127 | NOT_IMPLEMENTED | 100-A, 100-B, 99-A, 125:public-package-boundary, 98:canvas-artifact |
-| 126-template: Relevant public-package/template boundary slice consumed by the SDK and template contract | #126 | NOT_IMPLEMENTED | 125:public-package-boundary |
-| 126-source-protocol: Bounded source-protocol proof; not SDK/template acceptance | #126 | ACTIVE | None recorded |
+| 126-template: Relevant public-package/template boundary slice consumed by the SDK and template contract | #126 | PR265 current head91939899; local49+4 tests PASS; clean-wheel NOT_RUN and hosted checks pending. | 125:public-package-boundary |
+| 126-source-protocol: Bounded source-protocol proof; not SDK/template acceptance | #126 | PR262 bounded source-protocol proof accepted; separate from template/full #126 acceptance. | None recorded |
 | 71-local: Local generated application vertical on common Package/Deployment/Run/compiler services | #71 | NOT_IMPLEMENTED | 100-A, 100-B, 99-A, 83:run-attempt-authority, 129:deployment-binding, 130:package-revision, 135:compiler |
 | 71-host: Optional host/distribution acceptance after portable product behavior | #71 | NOT_IMPLEMENTED | 71-local, 91:authorization-boundary, 214:public-edge-boundary |

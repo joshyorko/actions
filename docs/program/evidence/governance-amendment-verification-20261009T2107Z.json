@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-09T21:06:48Z",
+  "branch": "resume/community-evidence-20261009",
+  "base_head": "8b620d5a3c301351fb59c7784869ae6eee04fbed",
+  "scope": "Dated governance/current-status amendment only; root integrations and issue worktrees were not mutated.",
+  "current_refs": {
+    "community": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "integration": "446ff1b3328028154684c035f4e395ae35284067",
+    "integration_tree": "f2f909fb66b46e2ed1bb6fbf0f4f07c446aebc32",
+    "runtime_candidate": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e"
+  },
+  "verification": {
+    "generator_apply": "PASS; `python scripts/project_community_execution_graph.py --apply` completed and regenerated Markdown/metadata.",
+    "generator_check": "PASS; `python scripts/project_community_execution_graph.py --check` reported `validated 54 issue projections; COMPLETE=1`.",
+    "graph_tests": "PASS; `python scripts/test_project_community_execution_graph.py`: 11 tests.",
+    "diff_check": "PASS; `git diff --check` returned0.",
+    "configured_toolkit": "PASS on prior same-code test-hook checkpoint at21:04Z: RCC18.19.3, developer Ruff PASS, pytest26/26; stdout log is developer/tmp/stdout.log (SHA-256 0f353b1263b50e2dfb1771d5c10c1c0bcc5c40c25bca6418cdf159d5fdad50ae). The final 21:06 metadata-only refresh was then revalidated with exact generator --check and 11 graph tests above."
+  },
+  "invariants": {
+    "retained_issue_contracts": 54,
+    "protected_ledger_fields_unchanged": [
+      "acceptance_contract",
+      "comments",
+      "dependencies",
+      "state"
+    ],
+    "protected_fields_equal_to_base": true,
+    "issue_accounting_equal_to_base": true,
+    "derived_whole_issue_stage_counts": {
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
+    },
+    "whole_issue_complete_count": 1,
+    "only_completed_issue_ids": [
+      210
+    ]
+  },
+  "immutable_archive_preservation": {
+    "previous_archive_count": 16,
+    "all_byte_identical_to_base": true,
+    "archives": [
+      {
+        "path": "docs/program/evidence/canvas-execution-graph-amendment-20261009-v2.zip",
+        "bytes": 6855,
+        "sha256": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf"
+      },
+      {
+        "path": "docs/program/evidence/canvas-execution-graph-amendment-20261009-v3.zip",
+        "bytes": 7286,
+        "sha256": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281"
+      },
+      {
+        "path": "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.zip",
+        "bytes": 7262,
+        "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3"
+      },
+      {
+        "path": "docs/program/evidence/canvas-execution-graph-amendment-20261009.zip",
+        "bytes": 6683,
+        "sha256": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7"
+      },
+      {
+        "path": "docs/program/evidence/community-20261008.zip",
+        "bytes": 456808,
+        "sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-acceleration.zip",
+        "bytes": 112671,
+        "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-checkpoint.zip",
+        "bytes": 87365,
+        "sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-cloud-admission.zip",
+        "bytes": 69121,
+        "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-convergence.zip",
+        "bytes": 165902,
+        "sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-fanout.zip",
+        "bytes": 117686,
+        "sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-final-checkpoint.zip",
+        "bytes": 129162,
+        "sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-resume.zip",
+        "bytes": 123440,
+        "sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-update.zip",
+        "bytes": 36121,
+        "sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-update2.zip",
+        "bytes": 35524,
+        "sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31"
+      },
+      {
+        "path": "docs/program/evidence/community-20261009-update3.zip",
+        "bytes": 71453,
+        "sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842"
+      },
+      {
+        "path": "docs/program/evidence/http-helper-1.0.3-verified-dist.zip",
+        "bytes": 30034,
+        "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+      }
+    ]
+  },
+  "evidence": {
+    "current_inventory": {
+      "path": "docs/program/evidence/current-worker-inventory-20261009T2102Z.json",
+      "sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
+      "bytes": 36321
+    },
+    "common_backend_seam_inventory": {
+      "path": "docs/program/evidence/canvas-common-api-authorization-seams-20261009.md",
+      "sha256": "072b0bf84e341c1a155856028367a78d6c560e6af66cdabb0db1a4d222dd7847"
+    },
+    "native_recovery_push": {
+      "path": "docs/program/evidence/native-recovery-push-20261009.json",
+      "sha256": "8e500c842a6a09e6363fc222b3f334d0d8942015f280fcc871da120d8000e243"
+    },
+    "workitems_recovery_push": {
+      "path": "docs/program/evidence/workitems-recovery-push-e171.json",
+      "sha256": "a467691bbf66aeb888f25575956915e064004442ebdb51bc66fcf2bf88684710"
+    }
+  },
+  "source_delta_before_receipt": {
+    "sha256": "88b5107771075cc1681767f3be46f1cbedb8df84fc1ee25998589cf43444eed6",
+    "paths": [
+      " M docs/program/community-execution-graph.json",
+      " M docs/program/community-execution-graph.md",
+      " M docs/program/community-program-ledger.md",
+      " M docs/program/community-resume-20261009.json",
+      " M docs/program/engineering-handoff.md",
+      " M docs/skills/repository-operations.md",
+      " M scripts/project_community_execution_graph.py",
+      "?? docs/program/evidence/canvas-common-api-authorization-seams-20261009.md",
+      "?? docs/program/evidence/current-worker-inventory-20261009T2042Z.json",
+      "?? docs/program/evidence/current-worker-inventory-20261009T2102Z.json",
+      "?? docs/program/evidence/native-recovery-push-20261009.json",
+      "?? docs/program/evidence/workitems-recovery-push-e171.json"
+    ]
+  },
+  "documentation_delta": "Repository-operations now defines the exact unaccepted #83/#129/#130/#135 Canvas backend contracts and links the source inventory. Current handoff and graph/resume overlays distinguish bounded evidence from whole-issue acceptance."
+}

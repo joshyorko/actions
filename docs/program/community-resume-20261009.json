@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T20:21:15Z",
-  "status": "ACTIVE engineering checkpoint; Core1.0.2 manifest admitted; integration PR258 merged at ec86ea87; #210 accepted; Runtime/native1.0.3 remains unpublished.",
-  "integration_head": "ec86ea87340ceb4850c4563b97b93c90713d934f",
-  "community_head": "011c5482285ea516f39292100c429a905e6e3e36",
+  "observed_at": "2026-10-09T21:02:52Z",
+  "status": "ACTIVE engineering checkpoint; PR254 docs-only admission merged into integration446ff1b3; PR255 merged into community c30f953b; PR260 merged into Runtime candidate3bb8b913; Core1.0.2 manifest admitted; #210 remains the only accepted/closed issue; Runtime/native1.0.3 remains unpublished and not release-ready.",
+  "integration_head": "446ff1b3328028154684c035f4e395ae35284067",
+  "community_head": "c30f953bae1a322e1d09549607ab42f1badce440",
   "release_ready": false,
   "community_merge": true,
   "publication": false,
@@ -28,10 +28,10 @@
   "devsy": {
     "request_id": "apr_29be804c-94cd-4b62-9233-e91b5ec30774",
     "session": "stateless",
-    "state": "ACTIVE_FIVE_BOUNDED_NATIVE_WORKERS",
+    "state": "COORDINATOR_CONTINUATION_ACTIVE_AT_2026-10-09T20:36Z; PER_LANE_STATUS_NOT_REFRESHED",
     "recreated": false,
     "retried": false,
-    "validation": "Native policy approvalPolicy=never and sandbox.type=dangerFullAccess was verified from native response/settings-updated event. Five bounded native threads are active. User fixed native GitHub authentication; normal pushes are verified by exact remote SHA. Never inspect/export credentials or change secret/approval settings.",
+    "validation": "Same native coordinator thread continuation was reported active at20:36Z with five lane histories. This does not assert that all five lanes are currently active. Per-lane full SHAs/status remain limited to the timestamped native receipts; current Cloud git worktree state is recorded separately.",
     "target": "cas-worker-01",
     "native_policy": "approvalPolicy=never; sandbox.type=dangerFullAccess, verified by coordinator from native response/event; aggregate effective_configuration=null was not treated as evidence.",
     "bootstrap_thread": "01a121ed-85b6-7000-b54a-649bc53e7224",
@@ -45,11 +45,12 @@
         "thread": "01a1220f-944d-7f22-94a4-112dc13be035",
         "cwd": "/workspaces/actions-worktrees/devsy-native-auth",
         "branch": "devsy/native-auth-acceptance-20261009",
-        "state": "ACTIVE; root observed head5800c4bf plus untracked test before19:27Z; exact later state not refreshed",
+        "state": "Current per-lane status not refreshed at2026-10-09T20:42:48Z; preserve prior reported state in last_reported_state.",
         "scope": "#153 real-browser origin/auth acceptance",
         "dispatch_receipts": [
           "evidence/devsy-native-auth-dispatch.json"
-        ]
+        ],
+        "last_reported_state": "ACTIVE; root observed head5800c4bf plus untracked test before19:27Z; exact later state not refreshed"
       },
       {
         "name": "devsy-workitems-consumer",
@@ -58,13 +59,14 @@
         "cwd": "/workspaces/actions-worktrees/devsy-workitems-consumer",
         "branch": "devsy/workitems-consumer-acceptance-20261009",
         "head": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
-        "state": "ACTIVE; PR256 pushed; independent native review found generated-module NameError; same-thread follow-up active",
+        "state": "Current per-lane status not refreshed at2026-10-09T20:42:48Z; preserve prior reported state in last_reported_state.",
         "scope": "#208 packaged Work Items consumer/platform and UI acceptance",
         "dispatch_receipts": [
           "evidence/devsy-workitems-consumer-dispatch.json",
           "evidence/devsy-workitems-bundle-dispatch.json",
           "evidence/devsy-workitems-browser-dispatch.json"
-        ]
+        ],
+        "last_reported_state": "ACTIVE; PR256 pushed; independent native review found generated-module NameError; same-thread follow-up active"
       },
       {
         "name": "devsy-native-distribution",
@@ -73,14 +75,15 @@
         "cwd": "/workspaces/actions-worktrees/devsy-native-distribution",
         "branch": "devsy/native-distribution-20261009",
         "head": "90c37991942aad12b1008bdb95ab8ee95e32d05c",
-        "state": "ACTIVE; PR257 pushed; initial126 passed; Ruff reports four F811 duplicate definitions, same-thread repair active",
+        "state": "Current per-lane status not refreshed at2026-10-09T20:42:48Z; preserve prior reported state in last_reported_state.",
         "scope": "Native1.0.3 distribution/checksum/Homebrew preparation; no publication",
         "dispatch_receipts": [
           "evidence/devsy-native-distribution-dispatch.json",
           "evidence/devsy-distribution-bundle-dispatch.json",
           "evidence/devsy-distribution-push-dispatch.json",
           "evidence/devsy-distribution-test-integrity-dispatch.json"
-        ]
+        ],
+        "last_reported_state": "ACTIVE; PR257 pushed; initial126 passed; Ruff reports four F811 duplicate definitions, same-thread repair active"
       },
       {
         "name": "devsy-rcc-local-acceptance",
@@ -89,11 +92,12 @@
         "cwd": "/workspaces/actions-worktrees/devsy-rcc-local-acceptance",
         "branch": "devsy/rcc-local-acceptance-20261009",
         "base": "26b0194590e14656bff92dce3665dccab09837a3",
-        "state": "ACTIVE; later HEAD/dirty state not refreshed",
+        "state": "Current per-lane status not refreshed at2026-10-09T20:42:48Z; preserve prior reported state in last_reported_state.",
         "scope": "Independent actual Linux/local/provider-free #134 consumer acceptance; no provider-policy edits",
         "dispatch_receipts": [
           "evidence/devsy-rcc-local-acceptance-dispatch.json"
-        ]
+        ],
+        "last_reported_state": "ACTIVE; later HEAD/dirty state not refreshed"
       },
       {
         "name": "devsy-native-review",
@@ -102,11 +106,12 @@
         "cwd": "/workspaces/actions-worktrees/devsy-native-review",
         "branch": "devsy/native-review-20261009",
         "base": "26b0194590e14656bff92dce3665dccab09837a3",
-        "state": "ACTIVE; reviewing actual Core/Runtime artifacts; later HEAD/dirty state not refreshed",
+        "state": "Current per-lane status not refreshed at2026-10-09T20:42:48Z; preserve prior reported state in last_reported_state.",
         "scope": "Independent artifact/native acceptance; no overlapping Work Items/auth implementations",
         "dispatch_receipts": [
           "evidence/devsy-native-review-dispatch.json"
-        ]
+        ],
+        "last_reported_state": "ACTIVE; reviewing actual Core/Runtime artifacts; later HEAD/dirty state not refreshed"
       }
     ],
     "canvas_reservation": {
@@ -121,7 +126,14 @@
       "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
       "state": "authorized for future PyPI credential coordination only; not contacted in this checkpoint"
     },
-    "remote_state_limit": "For native auth, only root-reported pre-19:27Z head/untracked snapshot is recorded. Other native worktree current cleanliness/HEAD is not inferred; worker thread state and pushed branch receipts are recorded separately."
+    "remote_state_limit": "For native auth, only root-reported pre-19:27Z head/untracked snapshot is recorded. Other native worktree current cleanliness/HEAD is not inferred; worker thread state and pushed branch receipts are recorded separately.",
+    "current_observation": {
+      "observed_at_utc": "2026-10-09T20:42:48Z",
+      "thread": "01a1222f-e720-7183-9634-2edb76d30326",
+      "turn": "01a12251-b60d-7c20-b806-fc9c9565f128",
+      "reported_state": "active at20:36Z",
+      "scope_limit": "five lane histories exist; do not infer all five active or use Cloud checkout inventory as native state."
+    }
   },
   "dakota": {
     "reconciled_before_dispatch": true,
@@ -1406,6 +1418,11 @@
     {
       "observed_at": "2026-10-09T20:23:29Z",
       "event": "Final current-content configured ToolkitTest rerun passed: RCC18.19.3, Ruff developer PASS, pytest26/26. Evidence/community-graph-toolkit-test-20261009.json SHA-256 a939a65ed830877dede2cf5313626367b1490b5b7fc1bb8ebd0e35e1b4279fac; no hosted CI or release acceptance inferred."
+    },
+    {
+      "observed_at": "2026-10-09T21:02:52Z",
+      "scope": "Current dated amendment; prior archive ZIP bytes and earlier owner snapshots remain unchanged.",
+      "event": "Community is c30f953bae1a322e1d09549607ab42f1badce440, integration is446ff1b3328028154684c035f4e395ae35284067 after docs-only PR254 admission, and Runtime candidate is3bb8b9139ead08bdc332131b121d40f8fd3eb22e after docs-only PR260. PR255 is merged into community; PR254 and PR260 are documentation-only checkpoints and do not close #100 or establish release readiness. PR259 Runtime checks pass, with macOS RCC/native jobs queued at21:00Z. Current Canvas ownership/slices and precise #83/#129/#130/#135 missing criteria are recorded in current_canvas_amendment and the timestamped worker inventory."
     }
   ],
   "admission_checkpoint": {
@@ -2794,14 +2811,118 @@
   },
   "cloud_workers_observation_note": "This array is the earlier 18:48:02Z local Cloud worktree snapshot, not the current inventory. Use live_inventory for current bounded observations; remote/native states are qualified in inventory_scope.",
   "current_integration_checkpoint": {
-    "pr": 258,
-    "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
-    "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
-    "tested_merge": "526f84813bb808d5a5dc2f7a26bed6467be79c3f",
-    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
-    "tree_matches_tested_merge": true,
-    "merged_at": "2026-10-09T20:20:30Z",
-    "receipt": "evidence/integration-pr258-admission-20261009.json",
-    "scope_limit": "No issue closure or Runtime/native1.0.3 publication/readiness inferred."
-  }
+    "pr": 254,
+    "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+    "merge_sha": "446ff1b3328028154684c035f4e395ae35284067",
+    "tree": "f2f909fb66b46e2ed1bb6fbf0f4f07c446aebc32",
+    "checks": {
+      "audit_run": 37983888097,
+      "coverage_run": 37983888029,
+      "rcc_run": 37983888152,
+      "result": "all PASS"
+    },
+    "independent_review": "ACCEPT",
+    "merged_at": "2026-10-09T21:01:00Z",
+    "scope_limit": "Documentation-only authoring-boundary change; no #100 completion or Runtime release readiness inferred."
+  },
+  "observed_at_utc": "2026-10-09T21:02:52Z",
+  "runtime_candidate_head": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+  "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
+  "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
+  "current_canvas_amendment": {
+    "observed_at_utc": "2026-10-09T21:02:52Z",
+    "issue_99a": {
+      "current_head": "c971ccec8903535783a61a05cd058abf5de3623a",
+      "validation_subject": "six component tests, TypeScript and schema PASS were reported at previous head842c32d5; current-head checks are unconfirmed",
+      "limits": "pure React/fixture only; production main/bridge/actual-browser NOT_RUN"
+    },
+    "issue_100a": {
+      "pr": 263,
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "review": "bounded source seam independently accepted",
+      "checks": "38 focused + 1 real-process + 2 wheel PASS",
+      "limits": "broader configured Cloud gates blocked; remote reviewer owns full gates; no whole #100 acceptance"
+    },
+    "issue_100b": {
+      "owner": "E",
+      "head": "b16824a91f68e8aafeae6ca4175866805d250081",
+      "next": "Python/JSON roundtrip on F single fixture",
+      "limits": "schema/interchange only; no Runtime dispatch or app authorization"
+    },
+    "issue_126": {
+      "pr": 265,
+      "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "status": "generator repair for authored development data omission",
+      "checks": "49 focused + 4 template local PASS; clean-wheel NOT_RUN; hosted pending",
+      "separate_source_protocol_pr": 262,
+      "whole_issue": "open"
+    },
+    "common_backend_gaps": [
+      "#83 durable Run/Attempt identity, fencing, input/result/artifact references, and pinned ownership snapshot",
+      "#129 Workspace-scoped Deployment identity, bindings, policy, actor authorization, and immutable resolution",
+      "#130 immutable generated Package Revision identity and deterministic capability projection",
+      "#135 deterministic package compilation into Package Revision and capability/binding manifest"
+    ],
+    "existing_api_limits": [
+      "legacy Action/Run records lack Workspace/Deployment/Revision/package/capability/runtime-plan identity",
+      "MCP dispatch selects a registered tool by name rather than an authorized stable app binding",
+      "MCP response does not expose created Run ID as a Canvas handle",
+      "legacy artifacts resolve by (run_id, artifact_name) under server-level auth rather than per-Workspace binding authorization"
+    ],
+    "fixture_boundary": "#100-B is schema and Python/JSON/TypeScript round-trip evidence only; it does not establish Runtime dispatch, artifact authorization, app binding authorization or #83 acceptance.",
+    "source_evidence": "evidence/canvas-common-api-authorization-seams-20261009.md",
+    "contracts_and_raw_states": "54 retained contracts and raw states unchanged; #210 remains the only accepted whole issue."
+  },
+  "current_pull_request_observations": {
+    "observed_at_utc": "2026-10-09T21:01Z",
+    "255": {
+      "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "state": "MERGED into community c30f953bae1a322e1d09549607ab42f1badce440",
+      "checks": "required Core/Runtime/RCC/Helper/audit checks green"
+    },
+    "254": {
+      "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "state": "MERGED docs-only into integration446ff1b3328028154684c035f4e395ae35284067",
+      "checks": "audit37983888097, coverage37983888029, RCC37983888152 all PASS; independent review ACCEPT"
+    },
+    "257": {
+      "head": "43177fc3ad077bf65f92cb867d3e3c62aad7e79f",
+      "state": "OPEN draft; independent source-contract review ACCEPT",
+      "checks": "95 tests collected but not a full suite pass; hosted checks pending"
+    },
+    "259": {
+      "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "state": "OPEN draft",
+      "checks": "Runtime matrix PASS; RCC/native macOS jobs queued at21:00Z; Linux/Windows and audit PASS"
+    },
+    "260": {
+      "head": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "state": "MERGED docs-only into Runtime candidate3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+      "checks": "required RCC/native/audit green; no publication"
+    },
+    "263": {
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "state": "OPEN draft; bounded #100-A source seam independently accepted",
+      "checks": "38 focused + 1 real-process + 2 wheel tests PASS; broader configured Cloud suites blocked, full remote review gates assigned"
+    },
+    "265": {
+      "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "state": "OPEN draft #126 template generator repair",
+      "checks": "49 focused + 4 template local PASS; clean-wheel NOT_RUN, hosted checks pending"
+    }
+  },
+  "prior_integration_checkpoints": [
+    {
+      "pr": 258,
+      "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+      "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "tested_merge": "526f84813bb808d5a5dc2f7a26bed6467be79c3f",
+      "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+      "tree_matches_tested_merge": true,
+      "merged_at": "2026-10-09T20:20:30Z",
+      "receipt": "evidence/integration-pr258-admission-20261009.json",
+      "scope_limit": "No issue closure or Runtime/native1.0.3 publication/readiness inferred."
+    }
+  ],
+  "historical_new_pull_requests_note": "The new_pull_requests array is a prior dated ledger snapshot retained as history; use current_pull_request_observations (observed 2026-10-09T21:01Z) for current status."
 }

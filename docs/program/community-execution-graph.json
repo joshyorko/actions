@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-10-09",
-  "worker_stage_snapshot": "2026-10-09T20:21:15Z",
+  "worker_stage_snapshot": "2026-10-09T21:02:52Z",
   "scope": "Typed operational relationships; retained issue contracts and raw states remain unchanged. Only execution prerequisites participate in cycle/topological validation.",
   "contract_source": "governance/docs/program/community-program-ledger.json acceptance_contract compared with evidence/acceleration-open-issues.json body",
   "exact_contract_matches": 54,
@@ -44,14 +44,15 @@
     }
   ],
   "current_active_workers": {
-    "101": "root integration/governance",
-    "134": "PR253 remains a partial trust foundation. The existing remote Sol coordinator and RCC lane own implementation/consumer work; root owns integration and architecture acceptance, with F independent review. Governance D is not the implementation owner; whole #134 acceptance remains open.",
-    "211": "Core1.0.2 workflow-manifest readback admitted at2026-10-09T20:13:41Z; native-distribution path observed at HEAD prefix bd218436 with browser-auth test/config paths dirty; worker state and PR257 relation not refreshed.",
-    "153": "Native auth lane was previously ACTIVE; latest 20:10 native checkout inventory did not supply a current worker-state update; current state unconfirmed.",
-    "208": "Work Items lane was previously ACTIVE on PR256 follow-up; latest 20:10 native checkout inventory reports workitems-consumer HEAD prefix e171e676 and bundle ready/unpushed, but not a fresh worker-state confirmation.",
-    "100": "E owns the active dirty #100-A implementation worktree based on3fee; PR254 is the amended ADR-only checkpoint at a7eec7b1644183dc81e37e1ed9b7be20fa20c87e.",
-    "126": "PR262 head04b23ea34e1e4525b4dbbc329841b1d13445af30 completes the bounded source-protocol proof with accepted review; whole #126 stays open.",
-    "259": "PR259 reported at head prefix85f7 is independently accepted; hosted CI is running."
+    "101": "Root owns integration/governance. Current community c30f953bae1a322e1d09549607ab42f1badce440; integration 446ff1b3328028154684c035f4e395ae35284067; Runtime candidate 3bb8b9139ead08bdc332131b121d40f8fd3eb22e.",
+    "99": "F owns #99-A pure React renderer/shared fixture; local and remote branch head c971ccec8903535783a61a05cd058abf5de3623a. Six component tests, TypeScript and schema PASS were reported at prior head 842c32d5; current-head validation is not confirmed. Production main/bridge and actual browser remain NOT_RUN.",
+    "100": "E owns #100-A PR263 head948df916ebe8750caebc71cc821bb5b76f16c273; bounded source review ACCEPT, 38 focused + 1 real-process + 2 wheel tests PASS. Broader configured Cloud suites are blocked; full remote gates are assigned. E is implementing #100-B Python roundtrip using F\u2019s shared fixture. PR254 a7eec7 is docs-only and merged to integration; no whole-issue acceptance.",
+    "126": "A owns PR265 template generator repair on feature/mcp-v2-showcase-template-20261009 at9193989985de15dc6d5fecfd655042957cf9926c. The authored-devdata generator regression is being repaired; PR body reports49 focused+4 template local PASS, clean-wheel NOT_RUN and hosted checks pending. PR262 source-protocol proof is separate and accepted; whole #126 remains open.",
+    "134": "Existing remote Sol coordinator and RCC lane own #134 implementation/consumer work; root owns integration/architecture acceptance; F is independent reviewer. Latest coordinator activity report was20:36Z and covered five lane histories, not current activity for every lane. Whole #134 acceptance remains open.",
+    "153": "Native auth source recovery/push only: PR264 branch devsy/native-auth-acceptance-20261009 at173ca8e59245581ab1b048fbad42a29c41418cab. Do not infer browser acceptance.",
+    "208": "Native Work Items source recovery/push only: PR256 branch devsy/workitems-consumer-acceptance-20261009 ataa12ef5f5047813d1543d9b6f6cff7f366650e9c. Packaged consumer/platform acceptance remains open.",
+    "211": "PR257 native-distribution source-contract review ACCEPT at43177fc3ad077bf65f92cb867d3e3c62aad7e79f;95 tests were collected, not reported as a full passing suite. Hosted checks pending.",
+    "259": "PR259 exact head85f7c91252a49d454a47983d88c942163ff030ba: Runtime matrix all PASS; Linux/Windows and audit pass; RCC primary+n-1 macOS and native macOS remain queued at21:00Z."
   },
   "current_review_checkpoints": {
     "91": {
@@ -60,9 +61,9 @@
       "status": "INTEGRATED_PARTIAL"
     },
     "100": {
-      "pr": 254,
-      "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
-      "status": "Amended ADR-only checkpoint; E owns separate dirty #100-A implementation; no whole-issue acceptance."
+      "pr": 263,
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "status": "Bounded #100-A source seam independently accepted;38 focused+1 real-process+2 wheel PASS. Broader configured Cloud gates blocked; full remote gates assigned. E is implementing #100-B roundtrip on F shared fixture. PR254 docs-only merge is not #100 completion."
     },
     "129": {
       "pr": 250,
@@ -80,30 +81,77 @@
       "comment_id": 6087641984,
       "evidence": "evidence/release-contract-audit-20261009.md"
     },
-    "208": {
-      "pr": 256,
-      "head": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
-      "status": "OPEN; PR256 native review found generated-module NameError; same worker follow-up active"
+    "99": {
+      "head": "c971ccec8903535783a61a05cd058abf5de3623a",
+      "branch": "feature/issue-99a-query-renderer-20261009",
+      "prior_validated_head": "842c32d59a7dd388c82437cc46e66a66b88b499e",
+      "status": "Current source head c971ccec; six component tests, TypeScript and schema PASS were reported at prior 842c32d5. Current-head checks not confirmed; production main/bridge/browser NOT_RUN."
     },
-    "153": {
-      "pr": null,
-      "status": "ACTIVE native real-browser origin/session acceptance lane"
+    "126": {
+      "template_pr": 265,
+      "template_head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "source_protocol_pr": 262,
+      "source_protocol_head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "status": "PR265 generator repair active;49 focused+4 template local PASS; clean-wheel NOT_RUN, hosted pending. PR262 bounded source-protocol proof accepted. Whole #126 remains open."
     },
     "134": {
       "pr": 253,
-      "status": "INTEGRATED_PARTIAL; PR253 four checks pass; scoped503 negative PASS; warm harness FAIL; separate native local consumer and upstream-contract lanes active"
+      "status": "Partial trust/provenance foundation only; selected-provider negative accepted and overall offline warm remains FAIL. Existing remote Sol/RCC lanes own implementation/consumer; root integration/architecture; F independent review. No whole-issue acceptance."
+    },
+    "153": {
+      "pr": 264,
+      "head": "173ca8e59245581ab1b048fbad42a29c41418cab",
+      "status": "Native auth source recovery/push only; acceptance remains open."
+    },
+    "208": {
+      "pr": 256,
+      "head": "aa12ef5f5047813d1543d9b6f6cff7f366650e9c",
+      "status": "Native source recovery/push verified; not packaged consumer or platform acceptance."
     },
     "211": {
       "pr": 257,
-      "status": "ACTIVE; Core1.0.2 is published; PR257 checksum/distribution gate has active four-F811 repair",
-      "core_pypi_verified": true,
-      "workflow_manifest": "ACCEPTED native readback 2026-10-09T20:13:41.842056Z; ZIP and manifest hashes recorded in evidence/core-1.0.2-workflow-manifest-admission-20261009.json; raw manifest lines not transferred; HTTP403 retained as historical.",
-      "workflow_manifest_receipt": "evidence/core-1.0.2-workflow-manifest-admission-20261009.json"
+      "head": "43177fc3ad077bf65f92cb867d3e3c62aad7e79f",
+      "status": "Independent source-contract review ACCEPT;95 tests collected, not a full suite pass; hosted checks pending."
     },
-    "126": {
-      "pr": 262,
-      "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
-      "status": "Bounded source-protocol proof complete and source-review accepted; whole #126 remains open."
+    "254": {
+      "pr": 254,
+      "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "merge": "446ff1b3328028154684c035f4e395ae35284067",
+      "status": "Docs-only admission to community integration; audit37983888097, coverage37983888029 and RCC37983888152 PASS; independent review accepted. Does not complete #100."
+    },
+    "255": {
+      "pr": 255,
+      "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "merge_target": "community c30f953bae1a322e1d09549607ab42f1badce440",
+      "status": "Merged docs PR; required checks green."
+    },
+    "258": {
+      "pr": 258,
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "merge": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+      "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+      "status": "Merged convergence checkpoint; superseded as current integration pointer by PR254 merge; no issue closure or release readiness."
+    },
+    "259": {
+      "pr": 259,
+      "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "status": "Runtime checks all PASS. RCC and native macOS remain queued; Linux/Windows and audit PASS at21:00Z."
+    },
+    "260": {
+      "pr": 260,
+      "head": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "merge_target": "integration/runtime-release-final-20261009 at3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+      "status": "Merged documentation-only candidate checkpoint; required RCC/native/audit checks green; no publication."
+    },
+    "263": {
+      "pr": 263,
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "status": "Open draft #100-A bounded source seam independently accepted; broader configured gates blocked, full remote gates assigned."
+    },
+    "265": {
+      "pr": 265,
+      "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "status": "Open draft #126 template generator repair; local49 focused+4 template PASS; clean-wheel NOT_RUN, hosted checks pending."
     }
   },
   "counts": {
@@ -474,8 +522,8 @@
       "foundation_pr": null,
       "checkpoint_pr": null,
       "unresolved_open_issue_dependencies": [],
-      "reason": "#99-A consumes the relevant #97 UI foundation and #98 Canvas artifact criteria; optional host-specific work remains separate in #99-B.",
-      "next_bounded_action": "Implement the portable Canvas renderer/resource bridge against the agreed fixture after its consumed #97/#98 criteria are accepted; do not wait for unrelated whole-issue closure.",
+      "reason": "#99-A renderer source is now at c971ccec with a pure React component and shared fixture. The reported six component tests, TypeScript and schema checks passed at its prior 842c32d5 head; current-head checks are unconfirmed. Production main/bridge and actual-browser proof remain NOT_RUN; #97/#98 criteria are not accepted.",
+      "next_bounded_action": "Review and validate the current c971ccec renderer changes against the shared fixture, then connect the production main/bridge and retain actual-browser proof as separate gates; do not infer whole #99 acceptance.",
       "acceptance_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e",
       "prior_untyped_dependency_projection": [
         97,
@@ -498,8 +546,8 @@
       "foundation_pr": null,
       "checkpoint_pr": null,
       "unresolved_open_issue_dependencies": [],
-      "reason": "The public authoring 100-A implementation slice is active. PR254 remains an open review-only ADR proposal and is not integrated into the revised scope; the separate 100-B schema slice remains proposal-only.",
-      "next_bounded_action": "Continue the isolated 100-A public authoring slice while preserving PR254 as review-only; do not infer 100-B or whole #100 acceptance.",
+      "reason": "#100-A PR263 source seam is independently accepted with 38 focused, one real-process and two wheel tests passing; broader configured Cloud suites are blocked and full remote review gates are assigned. E is implementing #100-B Python/JSON roundtrip on F\u2019s shared fixture. PR254 is docs-only and does not complete #100.",
+      "next_bounded_action": "Complete #100-B Python/JSON roundtrip using F\u2019s shared fixture; preserve fixture/schema-only limits and keep Runtime dispatch, Workspace authorization and whole #100 acceptance open.",
       "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
       "scoped_dependencies": [
         {
@@ -563,8 +611,8 @@
       "foundation_pr": null,
       "checkpoint_pr": 219,
       "unresolved_open_issue_dependencies": [],
-      "reason": "A bounded #126 source-protocol proof is active; this is not template/SDK acceptance. The full contract still consumes only relevant #125 criteria, with parent coordination and optional Canvas references nonblocking.",
-      "next_bounded_action": "Complete the bounded source-protocol proof on its exact branch and report its limits; keep full SDK/template acceptance and #125's remaining contract open.",
+      "reason": "PR262 source-protocol proof is accepted but separate from template acceptance. PR265 repairs the deterministic template generator after authored development data was omitted; its current draft reports49 focused plus four template local tests passing, with clean-wheel NOT_RUN and hosted checks pending.",
+      "next_bounded_action": "Finish the PR265 generator repair and run clean-wheel plus exact hosted gates; preserve PR262 as source-protocol-only evidence and keep whole #126 acceptance open.",
       "acceptance_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f",
       "prior_untyped_dependency_projection": [
         125
@@ -1250,8 +1298,8 @@
       "foundation_pr": 242,
       "checkpoint_pr": 242,
       "unresolved_open_issue_dependencies": [],
-      "reason": "PR256 at5bce8cd is pushed with native CI active. Independent review found a generated-module NameError blocking the expanded test gate; the same Work Items thread is actively fixing it.",
-      "next_bounded_action": "Resolve generated-module NameError, then advance the packaged Work Items browser/platform matrix; retain Linux consumer proof and failures separately.",
+      "reason": "Native Work Items source checkpoint recovery/push is verified at aa12ef5f; this is source transport evidence only. Packaged consumer/platform acceptance remains open.",
+      "next_bounded_action": "Run the assigned exact-head packaged consumer/platform gates on recovered PR256 source and preserve prior failures; do not infer acceptance from recovery or push.",
       "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c",
       "prior_untyped_dependency_projection": [],
       "coordination_parents": [],
@@ -1306,8 +1354,8 @@
       "foundation_pr": null,
       "checkpoint_pr": 248,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Core1.0.2 is published: immutable tag actions-core-1.0.2 from community011c548, run37979108120 verify/publish PASS, PyPI wheel/sdist and 51-file source projection verified. Native retained workflow-manifest readback was admitted at2026-10-09T20:13:41.842056Z; exact ZIP/manifest hashes and artifact entries are in evidence/core-1.0.2-workflow-manifest-admission-20261009.json. The earlier Cloud File Service403 remains historical; raw manifest lines were not transferred. Runtime/native1.0.3 readiness is separate and open.",
-      "next_bounded_action": "Complete #211 native distribution/checksum and Homebrew handoff gates through PR257, resolve the active four-F811 test-integrity follow-up, then continue Runtime/native1.0.3 acceptance separately.",
+      "reason": "Core1.0.2 publication and manifest readback remain admitted. PR257 source-contract review is ACCEPT at43177fc3, but 95 tests were collected rather than reported as a full suite pass; hosted checks remain pending.",
+      "next_bounded_action": "Complete exact PR257 hosted checks and report per-job outcomes; keep native release/readback scope separate from Runtime1.0.3 publication.",
       "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4",
       "prior_untyped_dependency_projection": [],
       "coordination_parents": [],
@@ -2599,19 +2647,19 @@
         "id": "100-A",
         "issue": 100,
         "description": "Public tool UI metadata and ui:// resource authoring/serving",
-        "status": "ACTIVE"
+        "status": "PR263 source seam independently accepted; focused38+real-process1+wheel2 PASS; broader Cloud configured gates blocked; full remote review gates assigned."
       },
       {
         "id": "100-B",
         "issue": 100,
         "description": "Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture",
-        "status": "PROPOSED_REVIEW_ONLY"
+        "status": "ACTIVE; E Python roundtrip on F shared fixture; schema/interchange only, no Runtime or authorization acceptance."
       },
       {
         "id": "99-A",
         "issue": 99,
         "description": "Portable MCP App View renderer/resource bridge using the agreed fixture",
-        "status": "NOT_IMPLEMENTED"
+        "status": "Current head c971ccec; validation reported at prior842c32d5 only; pure React/fixture scope, production main/bridge/browser NOT_RUN."
       },
       {
         "id": "99-B",
@@ -2629,13 +2677,13 @@
         "id": "126-template",
         "issue": 126,
         "description": "Relevant public-package/template boundary slice consumed by the SDK and template contract",
-        "status": "NOT_IMPLEMENTED"
+        "status": "PR265 current head91939899; local49+4 tests PASS; clean-wheel NOT_RUN and hosted checks pending."
       },
       {
         "id": "126-source-protocol",
         "issue": 126,
         "description": "Bounded source-protocol proof; not SDK/template acceptance",
-        "status": "ACTIVE"
+        "status": "PR262 bounded source-protocol proof accepted; separate from template/full #126 acceptance."
       },
       {
         "id": "71-local",
@@ -2652,6 +2700,13 @@
     ],
     "amendment_source": "GitHub #71 comment 6087930051, #93 comment 6087948973, #101 comment 6087955791, #220 comment 6087968408, #254 comment 6087962754"
   },
-  "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T202115Z.json",
-  "worker_inventory_sha256": "2bc2c6be97dbff74addb4220353501094c055ee70fcee2695a0d863c56fd9dcd"
+  "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
+  "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
+  "current_program_refs": {
+    "community": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "integration": "446ff1b3328028154684c035f4e395ae35284067",
+    "integration_tree": "f2f909fb66b46e2ed1bb6fbf0f4f07c446aebc32",
+    "runtime_candidate": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+    "release_ready": false
+  }
 }

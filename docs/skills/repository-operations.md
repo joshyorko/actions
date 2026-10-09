@@ -27,6 +27,19 @@ The community graph validator is part of `ToolkitTest`: run
 projection; keep this gate in that established path rather than creating a
 separate workflow.
 
+For Canvas fixture work, distinguish schema/round-trip evidence from product
+authorization: the current MCP dispatcher selects a registered tool by name,
+and legacy Run/artifact routes use server-level credentials rather than a
+Workspace-scoped binding. A fixture cannot prove Runtime dispatch or app
+authorization. Keep the missing criteria explicit: #83 owns durable
+Run/Attempt identity, fencing, input/result/artifact references and a pinned
+ownership snapshot; #129 owns Workspace-scoped Deployment identity, bindings,
+policy, actor authorization and immutable resolution; #130 owns immutable
+Package Revision identity and deterministic capability projection; #135 owns
+deterministic package compilation into a Package Revision and its
+capability/binding manifest. The source-backed interface inventory is in
+`docs/program/evidence/canvas-common-api-authorization-seams-20261009.md`.
+
 A receipt's tested subject is the source state actually executed: record its
 base SHA and any uncommitted delta separately from the later repair head. Do
 not relabel red-before evidence with the repaired head. For authenticated

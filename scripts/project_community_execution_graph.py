@@ -26,12 +26,18 @@ LEDGER_MARKDOWN_PATH = PROGRAM / "community-program-ledger.md"
 HANDOFF_PATH = PROGRAM / "engineering-handoff.md"
 
 AMENDMENT_NOTE = (
-    "Canvas graph amendment (2026-10-09): execution prerequisites are separated from scoped criteria, "
-    "parent coordination, related product direction and full-acceptance aggregation. #127 waits on its "
-    "accepted template slices and relevant #125/#98 criteria, not whole #71/#93/#101 closure. The prior "
-    "untyped edges remain in the graph as audit provenance; issue contracts, raw states and accounting are unchanged. "
-    "At the 2026-10-09T20:21:15Z snapshot, #100 remains a bounded active implementation slice and the #126 source-protocol proof is complete; "
-    "neither is whole-issue acceptance. Current worker evidence is in evidence/current-worker-inventory-20261009T202115Z.json."
+    "Canvas graph amendment (2026-10-09): execution prerequisites remain separate from scoped slice/criterion gates, "
+    "parent coordination, related product direction and full-acceptance aggregation. #127 consumes accepted template slices "
+    "and relevant #125/#98 criteria, not whole #71/#93/#101 closure. At the 2026-10-09T21:02Z snapshot, #99-A's current "
+    "renderer head is c971ccec; the six component tests, TypeScript and schema PASS were reported at its prior 842c32d5 head, "
+    "while production main/bridge/browser remain NOT_RUN. #100-A PR263 has accepted source review, with broader configured "
+    "Cloud gates blocked; E is beginning #100-B's Python roundtrip on F's shared fixture. #126 PR265 generator repair has "
+    "49 focused and four template tests reported PASS locally; clean-wheel is NOT_RUN and hosted checks are pending. "
+    "Common #83 Run/Attempt, #129 Workspace Deployment/authorization, #130 Package Revision/capability and #135 compiler "
+    "criteria remain unaccepted. Integration is 446ff1b3; PR254 is a docs-only merge and does not complete #100. See "
+    "evidence/current-worker-inventory-20261009T2102Z.json and "
+    "evidence/canvas-common-api-authorization-seams-20261009.md. Historical untyped edges remain audit provenance; "
+    "all 54 retained issue contracts and raw states are unchanged."
 )
 
 
