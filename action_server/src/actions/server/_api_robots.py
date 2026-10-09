@@ -444,18 +444,11 @@ def _publish_robot_package(
     base_name = _sanitized_robot_name(robot_name or extracted_name)
 
     for _ in range(100):
-        final_name = base_name
-        target_dir = robots_root / final_name
-        if os.path.lexists(target_dir):
-            final_name = f"{base_name}_{uuid.uuid4().hex[:8]}"
-            target_dir = robots_root / final_name
-            if os.path.lexists(target_dir):
-                continue
-
-        staging_root = robots_root / f".{final_name}.staging-{uuid.uuid4().hex}"
+        staging_root = robots_root / f".{base_name}.staging-{uuid.uuid4().hex}"
         staging_package = staging_root / "package"
         staging_root_identity: Optional[tuple[int, int]] = None
         staging_package_identity: Optional[tuple[int, int]] = None
+        target_dir = robots_root / base_name
         try:
             # Keep the copy in a private parent: copytree applies the source
             # directory's mode to its destination with copystat.
@@ -470,6 +463,24 @@ def _publish_robot_package(
                 package_dir, staging_package, symlinks=True, dirs_exist_ok=True
             )
             _validate_staged_tree(staging_package)
+            is_valid, message, admitted_name = _validate_robot_package(
+                staging_package, default_name=extracted_name
+            )
+            if not is_valid:
+                raise _RobotImportLimitError(message)
+
+            admitted_base_name = _sanitized_robot_name(
+                robot_name or admitted_name or extracted_name
+            )
+            base_name = admitted_base_name
+            final_name = base_name
+            target_dir = robots_root / final_name
+            if os.path.lexists(target_dir):
+                final_name = f"{base_name}_{uuid.uuid4().hex[:8]}"
+                target_dir = robots_root / final_name
+                if os.path.lexists(target_dir):
+                    continue
+
             if os.path.lexists(target_dir):
                 raise FileExistsError(target_dir)
             rename_directory_no_replace(staging_package, target_dir)
@@ -580,7 +591,9 @@ async def _save_uploaded_robot(file: UploadFile) -> Path:
         raise
 
 
-def _validate_robot_package(package_dir: Path) -> tuple[bool, str, Optional[str]]:
+def _validate_robot_package(
+    package_dir: Path, default_name: Optional[str] = None
+) -> tuple[bool, str, Optional[str]]:
     """
     Validate that a directory contains a valid robot package.
 
@@ -607,7 +620,7 @@ def _validate_robot_package(package_dir: Path) -> tuple[bool, str, Optional[str]
             if not tasks:
                 return False, "No tasks defined in robot.yaml", None
 
-            robot_name = robot_data.get("name", package_dir.name)
+            robot_name = robot_data.get("name", default_name or package_dir.name)
             return (
                 True,
                 f"Valid robot package (robot.yaml) with {len(tasks)} task(s)",
@@ -637,7 +650,7 @@ def _validate_robot_package(package_dir: Path) -> tuple[bool, str, Optional[str]
                     None,
                 )
 
-            robot_name = pkg_data.get("name", package_dir.name)
+            robot_name = pkg_data.get("name", default_name or package_dir.name)
             return (
                 True,
                 f"Valid robot package (package.yaml) with {len(tasks)} task(s)",

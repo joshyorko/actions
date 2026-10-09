@@ -782,7 +782,7 @@ def test_robot_publication_does_not_clean_unowned_initial_staging_collision(
 
     package = tmp_path / "package"
     package.mkdir()
-    (package / "robot.yaml").write_text("tasks: {}")
+    (package / "robot.yaml").write_text("tasks:\n  run: {}\n")
     robots = tmp_path / "robots"
     robots.mkdir()
     monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
@@ -806,6 +806,83 @@ def test_robot_publication_does_not_clean_unowned_initial_staging_collision(
     ).read_text() == "synthetic foreign staging entry"
 
 
+def test_robot_publication_revalidates_metadata_after_copy(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    archive_path = tmp_path / "robot.zip"
+    _write_zip(archive_path, _valid_robot_files())
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    copytree = shutil.copytree
+    copy2 = shutil.copy2
+    changed_during_copy: list[Path] = []
+
+    def change_source_before_file_copy(source, destination, *, follow_symlinks=True):
+        source = Path(source)
+        if source.name == "robot.yaml":
+            source.write_text("name: changed_during_copy\ntasks: {}\n")
+            changed_during_copy.append(source)
+        return copy2(source, destination, follow_symlinks=follow_symlinks)
+
+    def copy_with_source_change(source, destination, *args, **kwargs):
+        kwargs["copy_function"] = change_source_before_file_copy
+        return copytree(source, destination, *args, **kwargs)
+
+    monkeypatch.setattr(_api_robots.shutil, "copytree", copy_with_source_change)
+
+    success, message, imported_path = _api_robots._extract_zip_to_robots(archive_path)
+
+    assert changed_during_copy
+    assert not success
+    assert "No tasks defined" in message
+    assert imported_path is None
+    assert list(robots.iterdir()) == []
+
+
+def test_robot_publication_uses_metadata_from_completed_copy(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    archive_path = tmp_path / "robot.zip"
+    _write_zip(archive_path, _valid_robot_files())
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    copytree = shutil.copytree
+    copy2 = shutil.copy2
+    rewritten_copy_metadata: list[Path] = []
+
+    def copy_file_with_distinct_admitted_name(
+        source, destination, *, follow_symlinks=True
+    ):
+        copied = copy2(source, destination, follow_symlinks=follow_symlinks)
+        if Path(source).name == "robot.yaml":
+            Path(destination).write_text(
+                "name: admitted_copy\ntasks:\n  run:\n    shell: echo copied\n"
+            )
+            rewritten_copy_metadata.append(Path(destination))
+        return copied
+
+    def copy_with_distinct_metadata(source, destination, *args, **kwargs):
+        kwargs["copy_function"] = copy_file_with_distinct_admitted_name
+        return copytree(source, destination, *args, **kwargs)
+
+    monkeypatch.setattr(_api_robots.shutil, "copytree", copy_with_distinct_metadata)
+
+    success, message, imported_path = _api_robots._extract_zip_to_robots(archive_path)
+
+    assert success
+    assert rewritten_copy_metadata
+    assert imported_path == robots / "admitted_copy"
+    assert message == "Successfully imported robot 'admitted_copy'"
+    assert "name: admitted_copy" in (imported_path / "robot.yaml").read_text()
+    assert sorted(path.name for path in robots.iterdir()) == ["admitted_copy"]
+
+
 def test_robot_publication_keeps_copytree_metadata_inside_private_container(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -813,7 +890,7 @@ def test_robot_publication_keeps_copytree_metadata_inside_private_container(
 
     package = tmp_path / "package"
     package.mkdir()
-    (package / "robot.yaml").write_text("tasks: {}")
+    (package / "robot.yaml").write_text("tasks:\n  run: {}\n")
     (package / "task.py").write_text("print('ok')\n")
     package.chmod(0o755)
     source_mode = stat.S_IMODE(package.stat().st_mode)
@@ -871,7 +948,7 @@ def test_robot_publication_removes_private_container_after_copy_failure(
 
     package = tmp_path / "package"
     package.mkdir()
-    (package / "robot.yaml").write_text("tasks: {}")
+    (package / "robot.yaml").write_text("tasks:\n  run: {}\n")
     robots = tmp_path / "robots"
     robots.mkdir()
     monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
@@ -900,7 +977,7 @@ def test_robot_publication_preserves_replaced_package_after_copy_failure(
 
     package = tmp_path / "package"
     package.mkdir()
-    (package / "robot.yaml").write_text("tasks: {}")
+    (package / "robot.yaml").write_text("tasks:\n  run: {}\n")
     robots = tmp_path / "robots"
     robots.mkdir()
     monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
@@ -943,7 +1020,7 @@ def test_robot_publication_preserves_destination_created_after_last_precheck(
 
     package = tmp_path / "package"
     package.mkdir()
-    (package / "robot.yaml").write_text("tasks: {}")
+    (package / "robot.yaml").write_text("tasks:\n  run: {}\n")
     robots = tmp_path / "robots"
     robots.mkdir()
     monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
@@ -970,7 +1047,7 @@ def test_robot_publication_preserves_destination_created_after_last_precheck(
     assert list(competing.iterdir()) == []
     assert destination != competing
     assert name.startswith("synthetic_")
-    assert (destination / "robot.yaml").read_text() == "tasks: {}"
+    assert (destination / "robot.yaml").read_text() == "tasks:\n  run: {}\n"
     assert sorted(path.name for path in robots.iterdir()) == sorted([name, "synthetic"])
 
 
