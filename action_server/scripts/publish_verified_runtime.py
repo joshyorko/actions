@@ -11,24 +11,32 @@ import re
 import subprocess
 from pathlib import Path
 
+from packaging.tags import Tag
+from packaging.utils import parse_sdist_filename, parse_wheel_filename
+
 MANIFEST_NAME = "actions-runtime-manifest.sha256"
 RUNTIME_DISTRIBUTION_NAME = "actions-runtime"
 RUNTIME_ARTIFACT_PREFIX = RUNTIME_DISTRIBUTION_NAME.replace("-", "_")
 RUNTIME_TAG_PREFIX = f"{RUNTIME_DISTRIBUTION_NAME}-"
-ARTIFACT_PATTERNS = (
-    re.compile(
-        rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^/]*)\.tar\.gz$"
-    ),
-    re.compile(
-        rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-manylinux_2_17_x86_64\.manylinux_2_5_x86_64\.manylinux1_x86_64\.manylinux2014_x86_64\.whl$"
-    ),
-    re.compile(
-        rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-macosx_12_0_arm64\.whl$"
-    ),
-    re.compile(
-        rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^-]*)-cp(?P<python>312|313)-cp(?P=python)-win_amd64\.whl$"
-    ),
+SDIST_PATTERN = re.compile(
+    rf"^{re.escape(RUNTIME_ARTIFACT_PREFIX)}-(?P<version>[0-9][^/]*)\.tar\.gz$"
 )
+EXPECTED_WHEEL_TAGS = {
+    (python, platform): frozenset(
+        Tag(f"cp{python}", f"cp{python}", tag_platform) for tag_platform in platforms
+    )
+    for python in ("312", "313")
+    for platform, platforms in {
+        "manylinux": (
+            "manylinux_2_17_x86_64",
+            "manylinux_2_5_x86_64",
+            "manylinux1_x86_64",
+            "manylinux2014_x86_64",
+        ),
+        "macos": ("macosx_12_0_arm64",),
+        "windows": ("win_amd64",),
+    }.items()
+}
 EXPECTED_WHEEL_ROWS = {
     ("312", "manylinux"),
     ("313", "manylinux"),
@@ -57,46 +65,61 @@ def _artifact_names(directory: Path) -> list[str]:
         files.remove(MANIFEST_NAME)
     if len(files) != 7:
         raise VerificationError(f"expected seven artifacts, found {len(files)}")
-    matches = [
-        next(
-            (
-                pattern.fullmatch(name)
-                for pattern in ARTIFACT_PATTERNS
-                if pattern.fullmatch(name)
-            ),
-            None,
-        )
-        for name in files
-    ]
-    if not all(matches):
-        raise VerificationError("unexpected artifact filename")
-    if sum(name.endswith(".tar.gz") for name in files) != 1:
+    sdists = [name for name in files if name.endswith(".tar.gz")]
+    if len(sdists) != 1:
         raise VerificationError("expected one sdist")
     if sum(name.endswith(".whl") for name in files) != 6:
         raise VerificationError("expected six wheels")
-    sdist_match = ARTIFACT_PATTERNS[0].fullmatch(
-        next(name for name in files if name.endswith(".tar.gz"))
-    )
+    sdist_name = sdists[0]
+    sdist_match = SDIST_PATTERN.fullmatch(sdist_name)
+    if not sdist_match:
+        raise VerificationError("unexpected artifact filename")
     version = sdist_match.group("version")
+    try:
+        sdist_distribution, sdist_version = parse_sdist_filename(sdist_name)
+    except ValueError as error:
+        raise VerificationError("unexpected artifact filename") from error
+    if sdist_distribution != RUNTIME_DISTRIBUTION_NAME or str(sdist_version) != version:
+        raise VerificationError("unexpected artifact filename")
     rows = set()
     for name in files:
         if not name.endswith(".whl"):
             continue
-        match = next(
-            pattern.fullmatch(name)
-            for pattern in ARTIFACT_PATTERNS[1:]
-            if pattern.fullmatch(name)
+        try:
+            distribution, wheel_version, build, tags = parse_wheel_filename(name)
+        except ValueError as error:
+            raise VerificationError("unexpected artifact filename") from error
+        if (
+            distribution != RUNTIME_DISTRIBUTION_NAME
+            or str(wheel_version) != version
+            or not name.startswith(f"{RUNTIME_ARTIFACT_PREFIX}-{version}-")
+            or build
+        ):
+            if str(wheel_version) != version:
+                raise VerificationError("artifact versions do not match sdist version")
+            raise VerificationError("unexpected artifact filename")
+        row = next(
+            (
+                expected_row
+                for expected_row, expected_tags in EXPECTED_WHEEL_TAGS.items()
+                if tags == expected_tags
+            ),
+            None,
         )
-        if match.group("version") != version:
-            raise VerificationError("artifact versions do not match sdist version")
-        platform = (
-            "manylinux"
-            if "manylinux" in name
-            else "macos"
-            if "macosx" in name
-            else "windows"
-        )
-        rows.add((match.group("python"), platform))
+        tag_text = name.removeprefix(
+            f"{RUNTIME_ARTIFACT_PREFIX}-{version}-"
+        ).removesuffix(".whl")
+        tag_components = tag_text.split("-", maxsplit=2)
+        if len(tag_components) != 3 or any(
+            len(component.split(".")) != len(set(component.split(".")))
+            for component in tag_components
+        ):
+            raise VerificationError("unexpected artifact filename")
+        if row is None:
+            raise VerificationError("unexpected artifact filename")
+        if row in rows:
+            raise VerificationError("duplicate wheel slot")
+        rows.add(row)
     if rows != EXPECTED_WHEEL_ROWS:
         raise VerificationError("wheel matrix does not match the approved Runtime rows")
     return files
@@ -264,9 +287,7 @@ def validate_release_run(
 def validate_recovery_run(
     metadata: dict, *, sha: str, ref: str, workflow_id: int
 ) -> None:
-    if not re.fullmatch(
-        rf"{re.escape(RUNTIME_TAG_PREFIX)}[0-9]+\.[0-9]+\.[0-9]+", ref
-    ):
+    if not re.fullmatch(rf"{re.escape(RUNTIME_TAG_PREFIX)}[0-9]+\.[0-9]+\.[0-9]+", ref):
         raise RuntimeError("--ref must be an actions-runtime version tag")
     if not re.fullmatch(r"[0-9a-f]{40}", sha):
         raise RuntimeError("--sha must be a full 40-hex release SHA")
