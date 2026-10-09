@@ -386,8 +386,9 @@ directly prove the internal server can preserve metadata, not that package
 authors can declare it through a supported API. Keep the public authoring
 extension deferred behind #125. Proposed ADR 0100 leaves the source-of-truth
 choice with #100 and recommends one versioned JSON Schema as the Python/JSON/
-TypeScript contract; if accepted, #99 owns CanvasSpec semantic UI fields, UI
-binding declarations, and its renderer in coordination with that choice.
+TypeScript contract. #99 owns CanvasSpec semantic UI fields, UI binding
+declarations, and its renderer, and would coordinate with that source choice
+if accepted.
 Provider bindings for secrets, OAuth, data, artifacts, and queues use shared
 contracts identified by #71 (#129/#87/#131/#132), rather than Canvas-only
 provider semantics. This recommendation is not accepted behavior; validators,
