@@ -2,16 +2,19 @@
 
 - Status: Proposed; contract evidence only, no public-API implementation
 - Issue: [joshyorko/actions#100](https://github.com/joshyorko/actions/issues/100)
-- Dependencies: [#99](https://github.com/joshyorko/actions/issues/99) owns the
-  CanvasSpec renderer/schema; MCP Apps authoring remains deferred behind
+- Coordination: [#99](https://github.com/joshyorko/actions/issues/99) owns the
+  CanvasSpec semantic schema and renderer; #100 owns the canonical
+  cross-language source-of-truth decision in coordination with #99. Public
+  authoring implementation remains deferred behind
   [#125](https://github.com/joshyorko/actions/issues/125), per the latest
   #100 architecture comments.
 - Evidence revision: `ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47`
 
-This document records the present source boundaries and the smallest contract
-that a later, authorized implementation would need to satisfy. It does not
-settle the CanvasSpec schema source, define a Python/TypeScript generator, or
-authorize implementation. The public MCP Apps authoring gap remains open.
+This document records the present source boundaries, proposes the
+cross-language schema source-of-truth decision owned by #100, and defines the
+smallest contract that a later, authorized implementation would need to
+satisfy. It does not define CanvasSpec fields or authorize implementation. The
+public MCP Apps authoring gap remains open.
 
 ## Decision boundary
 
@@ -23,17 +26,24 @@ tools associate a UI resource through `_meta.ui.resourceUri`; the resource uses
 - `actions-core` / `actions.mcp` is the intended public Python authoring seam
   for declarative tool and resource declarations.
 - `actions-runtime` owns the MCP server and resource serving behavior.
-- #99 owns the versioned CanvasSpec and binding schema, its renderer, and its
-  TypeScript-side consumption.
+- #100 selects one versioned JSON Schema artifact as the canonical
+  cross-language CanvasSpec contract. Python and TypeScript consume that same
+  schema; generated language types, if justified later, are derived outputs
+  and never a second authority.
+- #99 owns CanvasSpec semantic fields, UI binding declarations, and the
+  TypeScript renderer, coordinating its schema work with #100's source choice.
+- Provider bindings for secrets, OAuth, data, artifacts, and queues continue to
+  consume the shared contracts named by #71 (#129/#87/#131/#132); they do not
+  become Canvas-only schema semantics owned by #99.
 - The protocol specification remains the source for MCP Apps wire semantics;
   this ADR does not create a competing schema for Canvas UI content.
 
 Do not add `actions.canvas`, a new distribution, a Canvas runtime in Core, or
-Runtime/frontend dependencies to ordinary `@action` authoring. Do not choose a
-JSON-Schema/Python-model/code-generation direction until #99 publishes a
-versioned schema and demonstrates the cross-language contract. The eventual
-Python authoring extension should remain optional and declarative; Runtime
-execution and the Canvas renderer stay outside Core.
+Runtime/frontend dependencies to ordinary `@action` authoring. The proposed
+JSON Schema decision resolves #100's source-of-truth choice without moving
+CanvasSpec semantics out of #99 or requiring duplicate Python model authority.
+The eventual Python authoring extension should remain optional and
+declarative; Runtime execution and the Canvas renderer stay outside Core.
 
 ## #71 use case this contract serves
 
@@ -41,10 +51,11 @@ execution and the Canvas renderer stay outside Core.
 the `ui://action-canvas/v1/canvas.html` view, with UI interactions using the
 standard MCP App bridge. The authoring gap is therefore the association between
 the stable tool and its UI resource, plus registration/serving of that resource.
-Generated app data and binding schemas belong behind the stable facade and are
-owned by #99's CanvasSpec contract. This does not require app-generated tools
-to enter `tools/list`, a second server, or Canvas-specific authoring APIs for
-ordinary Actions.
+CanvasSpec's semantic UI fields and UI binding declarations are #99's scope;
+provider bindings consume shared contracts (#129/#87/#131/#132) as #71's latest
+comment requires. This does not require app-generated tools to enter
+`tools/list`, a second server, or Canvas-specific authoring APIs for ordinary
+Actions.
 
 The existing public API is not yet that contract. In this snapshot,
 `actions.mcp.@tool` accepts title and tool hints, and `@resource` accepts URI,
@@ -57,8 +68,9 @@ binding schema exists in the public Python or TypeScript source.
 
 ## Minimum future authoring contract
 
-Once the #125 deferral clears and the schema contract in #99 is concrete, an
-implementation proposal should cover only the supported public path:
+Once the #125 deferral clears, an implementation proposal should coordinate
+with #99 on the versioned semantic schema while retaining the #100
+source-of-truth decision. It should cover only the supported public path:
 
 1. A Python author can declare the UI resource URI associated with a tool using
    the MCP Apps metadata contract, without depending on Runtime or Canvas.
@@ -71,10 +83,11 @@ implementation proposal should cover only the supported public path:
    does not own HTTP routes, persistence, rendering, or transport lifecycle.
 4. Ordinary `@action` users and Core installations without Canvas remain usable
    and acquire no Canvas-specific required dependency.
-5. The chosen versioned CanvasSpec/binding schema is consumed consistently by
-   Python and TypeScript. Fixtures for Python -> JSON -> TypeScript round trips
-   are gated on #99 selecting and publishing that schema; this ADR does not
-   invent its fields.
+5. The single versioned JSON Schema artifact selected by #100 defines the
+   cross-language CanvasSpec serialization contract; #99 supplies its semantic
+   fields and renderer. Python and TypeScript consume the same schema. Golden
+   fixtures prove Python -> JSON -> TypeScript round trips. This ADR does not
+   invent CanvasSpec fields or claim those fixtures exist.
 
 When implementation is authorized, acceptance must exercise an actual public
 decorated Python package through the built/installed Core + Runtime path and
@@ -104,7 +117,9 @@ receipt required by #100.
   comment [5324901913](https://github.com/joshyorko/actions/issues/71#issuecomment-5324901913)
   keeps Canvas as a consumer of shared package/deployment contracts. #99's
   comment [5283411258](https://github.com/joshyorko/actions/issues/99#issuecomment-5283411258)
-  assigns the versioned CanvasSpec schema and renderer. The #125 body and
+  assigns versioned CanvasSpec semantic schema and renderer work to #99; #100's
+  first comment [5283421605](https://github.com/joshyorko/actions/issues/100#issuecomment-5283421605)
+  owns the source-of-truth choice and round-trip acceptance. The #125 body and
   comments are preserved in the evidence capture for this checkpoint.
 - The stable protocol source cited by #100 is
   [MCP Apps specification 2026-01-26 at immutable commit `10195ad`](https://github.com/modelcontextprotocol/ext-apps/blob/10195ad91851502134930e9b80ec2c04e277a720/specification/2026-01-26/apps.mdx).
@@ -116,8 +131,8 @@ This ADR records architecture evidence, not issue completion. The live #100,
 `architecture-evidence/issue-100/`. No Python API, Canvas schema, renderer,
 runtime feature, generated fixture, or new distribution was added here.
 
-Remaining before any authoring implementation: resolve #125's explicit
-deferral; have #99 establish the versioned CanvasSpec/binding schema and
-cross-language source of truth; then review a concrete public decorator/resource
-API and its end-to-end installed-package conformance gates against the full
-current #100 acceptance contract.
+Remaining before any authoring implementation: coordinate #100's proposed JSON
+Schema source choice with #99's semantic CanvasSpec fields and renderer; resolve
+#125's explicit deferral; then review a concrete public decorator/resource API
+and its end-to-end installed-package conformance and Python/JSON/TypeScript
+round-trip gates against the full current #100 acceptance contract.

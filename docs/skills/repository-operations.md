@@ -384,10 +384,15 @@ URI, MIME type, and size; neither decorator publicly attaches MCP Apps
 `_meta.ui.resourceUri`. Runtime tests that construct `Action.options["_meta"]`
 directly prove the internal server can preserve metadata, not that package
 authors can declare it through a supported API. Keep the public authoring
-extension deferred behind #125, and let #99 establish the versioned
-CanvasSpec/binding schema before choosing a Python/TypeScript source or adding
-cross-language fixtures. Do not add a new distribution or Canvas dependency to
-ordinary Core actions on this evidence alone.
+extension deferred behind #125. Proposed ADR 0100 keeps the source-of-truth
+choice with #100 and recommends one versioned JSON Schema as the Python/JSON/
+TypeScript contract; #99 owns CanvasSpec semantic UI fields, UI binding
+declarations, and its renderer in coordination with that choice. Provider
+bindings for secrets, OAuth, data, artifacts, and queues use shared contracts
+identified by #71 (#129/#87/#131/#132), rather than Canvas-only provider
+semantics. This is proposed architecture, not implemented or accepted behavior.
+Do not add a new distribution or Canvas dependency to ordinary Core actions on
+this evidence alone.
 
 The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
