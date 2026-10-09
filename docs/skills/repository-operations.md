@@ -131,6 +131,13 @@ server URL and trusted HTTPS forwarding correctly; client-supplied forwarding
 headers do not independently establish transport trust. Cookie-authenticated
 unsafe HTTP operations and every WebSocket handshake require exact Origin;
 GET/HEAD artifact navigation may omit Origin but cannot supply a foreign one.
+Real-browser probes must distinguish same-site from same-origin: Chromium sent
+the `SameSite=Strict` HttpOnly session cookie on a credentialed fetch between
+two `localhost` ports, while JavaScript received a CORS `TypeError` for the
+response. An explicit CORS origin therefore does not itself grant browser
+session authority; capture the Runtime access status and browser request headers
+when diagnosing this case instead of inferring cookie absence from the fetch
+error.
 Explicit invalid/duplicate Authorization headers cannot fall back to cookies.
 Bearer CLI clients without Origin retain their existing behavior. Cookie
 authority is limited to Runtime `/api/` and run-scoped `/artifacts/` surfaces.
