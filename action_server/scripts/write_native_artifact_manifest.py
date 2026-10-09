@@ -87,7 +87,7 @@ def write_manifest(
                 "archive_path": "output/native-artifact-manifest.json",
             },
         },
-        "provenance_scope": "measured checkout, tool versions, and executable hashes; no candidate Core wheel is included",
+        "provenance_scope": "checks Git HEAD only (not a clean-source attestation); hashes bytes read from executable paths (path reads follow symlinks); no candidate Core wheel is included",
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

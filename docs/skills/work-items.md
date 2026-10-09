@@ -309,18 +309,25 @@ binaries when probing existing artifacts; the harness checkout SHA is not
 artifact provenance. Optional `--frozen`, `--go-wrapper`, `--node` and
 `--browser-executable` flags support existing build artifacts/toolchains.
 
+The credential-free workflow is hand-maintained: it is absent from the
+`TARGETS` list in `.github/workflows/_gen_workflows.py`, so workflow regeneration
+does not overwrite it.
+
 The credential-free workflow retains the Go wrapper under the existing
 `action-server-unauthenticated-<runner-os>` artifact name and separately uploads
 the frozen executable and manifest in
 `action-server-native-provenance-<runner-os>-<run-id>-<attempt>`. The manifest
-checks the checked-out Git SHA against `github.sha`, records actual Python and
-Go versions plus platform/architecture, and measures both executable hashes and
-package-relative paths. Its artifact download entries identify the Go-wrapper
-artifact's root executable and the frozen artifact's `dist/action-server/...`
-path. This build does not supply a candidate Core wheel, so the manifest makes no
-Core-wheel provenance claim; the worker-consumer acceptance requires a separately
-measured task-local wheel. The manifest covers the checkout and named build
-outputs, not every dependency or the frozen executable's adjacent onedir files.
+checks Git `HEAD` against `github.sha`, records actual Python and Go versions
+plus platform/architecture, and measures executable hashes and package-relative
+paths. It does not attest a clean source tree or every build input. Ordinary
+path reads follow symlinks, so SHA-256 identifies bytes read through each named
+path without proving filesystem object identity. Artifact download entries
+identify the Go-wrapper artifact's root executable and the frozen artifact's
+`dist/action-server/...` path. This build does not supply a candidate Core wheel,
+so the manifest makes no Core-wheel provenance claim; the worker-consumer
+acceptance requires a separately measured task-local wheel. The manifest covers
+the checkout and named build outputs, not every dependency or the frozen
+executable's adjacent onedir files.
 
 This harness proves creation and restart persistence, not worker-driven Work
 Item state transitions, attachment behavior, accessibility or other browsers.
