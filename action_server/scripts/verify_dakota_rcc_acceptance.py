@@ -838,8 +838,12 @@ class UnavailableProviderProbe:
             do_DELETE = _reject
             do_GET = _reject
             do_HEAD = _reject
+            do_OPTIONS = _reject
+            do_PATCH = _reject
             do_POST = _reject
             do_PUT = _reject
+            do_CONNECT = _reject
+            do_TRACE = _reject
 
             def log_message(self, _format: str, *_args: object) -> None:
                 return

@@ -354,11 +354,30 @@ def test_unavailable_provider_probe_counts_and_rejects_attempted_requests():
     harness = _harness()
     probe = harness.UnavailableProviderProbe("127.0.0.1", 0)
     try:
-        with pytest.raises(urllib.error.HTTPError) as error:
-            urllib.request.urlopen(probe.url, timeout=2)
-        assert error.value.code == 503
-        assert probe.request_count == 1
-        assert probe.requests == [{"method": "GET", "path": "/", "status": 503}]
+        methods = (
+            "GET",
+            "HEAD",
+            "OPTIONS",
+            "PUT",
+            "DELETE",
+            "CONNECT",
+            "TRACE",
+            "PATCH",
+            "POST",
+        )
+        for method in methods:
+            request = urllib.request.Request(
+                probe.url,
+                data=b"" if method in ("PUT", "POST", "PATCH") else None,
+                method=method,
+            )
+            with pytest.raises(urllib.error.HTTPError) as error:
+                urllib.request.urlopen(request, timeout=2)
+            assert error.value.code == 503
+        assert probe.request_count == len(methods)
+        assert probe.requests == [
+            {"method": method, "path": "/", "status": 503} for method in methods
+        ]
         assert harness.classify_zero_provider_requests(probe.request_count) == "FAIL"
         assert harness.classify_zero_provider_requests(0) == "PASS"
         assert harness.classify_zero_provider_requests(True) == "FAIL"
