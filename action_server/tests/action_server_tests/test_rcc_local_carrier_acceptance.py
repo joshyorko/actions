@@ -5,6 +5,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import importlib.metadata
+import importlib.util
 import json
 import os
 import subprocess
@@ -44,6 +45,7 @@ def _verify_runtime_wheel(
         Path(distribution.locate_file(entry)).resolve(): entry
         for entry in distribution.files or ()
     }
+
     assert runtime_origin in installed_files
     assert distribution.version == "1.0.3"
     direct_url = json.loads(distribution.read_text("direct_url.json") or "{}")
@@ -112,6 +114,129 @@ def _verify_runtime_wheel(
     }
 
 
+def _run_published_dependency_provider_dead_gate(
+    repo_root: Path,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    trust_carrier: Path,
+) -> dict[str, object]:
+    """Reuse the Dakota provider-dead lifecycle with this installed Runtime."""
+    wheelhouse = Path(os.environ["ACTIONS_ACCEPTANCE_CORE_HELPER_WHEELHOUSE"])
+    install_report_path = Path(
+        os.environ["ACTIONS_ACCEPTANCE_CORE_HELPER_INSTALL_REPORT"]
+    )
+    core_wheel = wheelhouse / "actions_core-1.0.2-py3-none-any.whl"
+    helper_wheel = wheelhouse / "actions_http_helper-1.0.3-py3-none-any.whl"
+    install_report = json.loads(install_report_path.read_text(encoding="utf-8"))
+    expected = {
+        "actions-core": ("1.0.2", core_wheel),
+        "actions-http-helper": ("1.0.3", helper_wheel),
+    }
+    published: dict[str, dict[str, str]] = {}
+    for item in install_report.get("install", []):
+        name = item.get("metadata", {}).get("name", "").lower().replace("_", "-")
+        if name not in expected:
+            continue
+        version, wheel = expected[name]
+        assert item.get("metadata", {}).get("version") == version
+        download = item["download_info"]
+        assert urlparse(download["url"]).hostname == "files.pythonhosted.org"
+        digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
+        assert download["archive_info"]["hashes"]["sha256"] == digest
+        published[name] = {
+            "version": version,
+            "filename": wheel.name,
+            "sha256": digest,
+            "url": download["url"],
+        }
+    assert set(published) == set(expected)
+
+    script_path = repo_root / "action_server" / "scripts" / "verify_dakota_rcc_acceptance.py"
+    spec = importlib.util.spec_from_file_location("dakota_rcc_acceptance", script_path)
+    assert spec is not None and spec.loader is not None
+    harness = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(harness)
+    passthrough = {
+        "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE",
+        "ACTIONS_ACCEPTANCE_RUNTIME_WHEEL",
+        "ACTIONS_ACCEPTANCE_RUNTIME_WHEEL_SHA256",
+        "ACTIONS_ACCEPTANCE_RUNTIME_INSTALL_REPORT",
+        "ACTIONS_ACCEPTANCE_RUNTIME_CHILD_PROOF",
+    }
+    monkeypatch.setattr(harness, "_ENV_ALLOWLIST", harness._ENV_ALLOWLIST | passthrough)
+    monkeypatch.setattr(
+        harness,
+        "build_candidate_wheels",
+        lambda *_args, **_kwargs: (core_wheel, helper_wheel),
+    )
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", str(trust_carrier))
+    receipt_path = tmp_path / "provider-dead-dakota-harness.json"
+    prior_environment = os.environ.copy()
+    try:
+        evidence = harness._run(receipt_path)
+    finally:
+        os.environ.clear()
+        os.environ.update(prior_environment)
+
+    cells = evidence["cells"]
+    required_cells = (
+        "authenticated_action",
+        "artifact_verification",
+        "provider_backed_exec_fail_closed",
+        "wrapper_exit",
+        "process_cleanup",
+        "offline_warm_action",
+        "offline_warm_artifact_verification",
+        "offline_warm_wrapper_exit",
+        "provider_unavailable",
+        "zero_requests_during_warm_runtime",
+        "warm_process_cleanup",
+    )
+    assert all(cells[name] == "PASS" for name in required_cells), cells
+    offline = evidence["offline_warm"]
+    assert offline["warm_runtime_provider_requests"] == 0
+    assert offline["warm_runtime_request_events"] == []
+    negative = offline["provider_backed_exec"]
+    assert negative["provenance_503_observed"] is True
+    assert negative["child_side_effect_observed"] is False
+    assert negative["successful_child_receipt"] is False
+    assert evidence["run_id"] != offline["run_id"]
+    assert evidence["rcc_receipt"]["leaseId"] != offline["rcc_receipt"]["leaseId"]
+    assert evidence["trust_carrier_mode"] == "separate-filesystem"
+
+    wheel_receipt_path = Path(os.environ["ACTIONS_ACCEPTANCE_PROVIDER_DEAD_RECEIPT"])
+    if wheel_receipt_path.exists():
+        raise FileExistsError("refusing to overwrite the installed-wheel provider receipt")
+    wheel_evidence = {
+        "schema_version": 1,
+        "acceptance_status": "PASS",
+        "action_server_mode": "installed-runtime-wheel",
+        "runtime_wheel_sha256": os.environ["ACTIONS_ACCEPTANCE_RUNTIME_WHEEL_SHA256"],
+        "runtime_wheel_source_sha": "ed9e97f111bc15e0d26e3b2ee19e187e4fe31de3",
+        "runtime_harness_source_sha": evidence["source_sha"],
+        "published_core_helper_wheels": published,
+        "published_dependency_install_report_sha256": hashlib.sha256(
+            install_report_path.read_bytes()
+        ).hexdigest(),
+        "trust_carrier_mode": evidence["trust_carrier_mode"],
+        "trust_carrier_identity": evidence["trust_carrier_identity"],
+        "artifact_digest": evidence["artifact_digest"],
+        "initial_run_id": evidence["run_id"],
+        "warm_run_id": offline["run_id"],
+        "initial_rcc_receipt": evidence["rcc_receipt"],
+        "warm_rcc_receipt": offline["rcc_receipt"],
+        "warm_runtime_provider_requests": offline["warm_runtime_provider_requests"],
+        "warm_runtime_request_events": offline["warm_runtime_request_events"],
+        "provider_backed_exec_negative": negative,
+        "cells": cells,
+    }
+    wheel_receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    wheel_receipt_path.write_text(
+        json.dumps(wheel_evidence, indent=2) + "\n", encoding="utf-8"
+    )
+    return wheel_evidence
+
+
 @pytest.mark.real_rcc
 def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -132,9 +257,12 @@ def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
     source_package = repo_root / "action_server" / "src" / "actions" / "server"
     runtime_origin = Path(runtime_package.__file__).resolve()
     wheel_proof: dict[str, str | int | bool] | None = None
+    cpu_affinity = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else []
     if runtime_mode == "source":
         assert runtime_origin.is_relative_to(source_package)
     elif runtime_mode == "wheel":
+        assert sys.platform == "linux"
+        assert len(cpu_affinity) == 2, "run RCC wheel acceptance with two-CPU affinity"
         assert not runtime_origin.is_relative_to(repo_root)
         original_module = runtime_origin.read_bytes()
         corrupted_module = bytes([original_module[0] ^ 1]) + original_module[1:]
@@ -312,7 +440,14 @@ dependencies:
         assert child_proof["origin_in_RECORD"] is True
 
     receipt_path = os.environ.get("ACTIONS_ACCEPTANCE_RECEIPT")
+    if runtime_mode == "wheel" and not receipt_path:
+        pytest.fail("wheel acceptance requires a durable acceptance receipt path")
     if receipt_path:
+        provider_dead_receipt = None
+        if runtime_mode == "wheel":
+            provider_dead_receipt = _run_published_dependency_provider_dead_gate(
+                repo_root, tmp_path, monkeypatch, trust_carrier
+            )
         path = Path(receipt_path)
         path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
@@ -342,6 +477,8 @@ dependencies:
             )
             if runtime_mode == "wheel"
             else None,
+            "provider_dead_installed_runtime_wheel": provider_dead_receipt,
+            "test_cpu_affinity": cpu_affinity or None,
             "provider_reference": "local",
             "trust_policy": "permissive-local",
             "trust_carrier_identities": trust_carrier_identities,
