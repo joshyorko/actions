@@ -1,4 +1,4 @@
-> Paused draft, October 8, 2026. Not approved, implemented, or ready to merge. Published only to preserve existing work for adversarial review.
+> Historical proposal, October 8, 2026. This packet was initially a design-only checkpoint. A later bounded #126 implementation was admitted and is being reviewed separately; the unchecked items and status paragraphs below describe the original proposal, not current completion status. The current implementation does not mark #126 accepted.
 
 # MCP v2 Showcase Design Candidate and Implementation Plan
 
@@ -40,14 +40,14 @@ The current source provides the needed core authoring and server contract:
 - Existing integration helpers implement raw `server/discover` and per-request headers/body metadata for `2026-07-28`; tests already assert `/sse` returns 404, a stateless call has no `Mcp-Session-Id`, structured output maps to `structuredContent`, and catalog revisions/staleness metadata stay consistent. [MCP integration tests](https://github.com/joshyorko/actions/blob/8bdce09944c9e370917a8222243cd1a239ea7060/action_server/tests/action_server_tests/mcp/test_mcp_integration.py)
 - Existing `test_server_parent_pid.py::test_mcp_sse_does_not_starve_server_or_sigterm` opens `GET /mcp` with `Accept: text/event-stream`, verifies the server remains responsive, then verifies SIGTERM and child cleanup. It is sufficient transport lifecycle evidence to reuse; the showcase may include a stdlib example that opens the stream and closes it cleanly. [Lifecycle regression](https://github.com/joshyorko/actions/blob/8bdce09944c9e370917a8222243cd1a239ea7060/action_server/tests/action_server_tests/test_server_parent_pid.py#L28-L100)
 - The Action-side `McpResponseHandler` currently implements `set_run_id` and `set_async_completion` as no-ops. There is no source/test evidence of an Action-to-MCP progress notification path. Therefore limit streaming claims to Streamable HTTP GET/SSE transport lifecycle; do not claim progress, resumable events, or cancellation.
-- Existing community templates pin `actions-core=1.0.1`; the new template can use the same single PyPI dependency. A standard-library client example avoids introducing an MCP SDK or HTTP client dependency into the Action package. [Current template manifest](https://github.com/joshyorko/actions/blob/8bdce09944c9e370917a8222243cd1a239ea7060/templates/minimal/package.yaml)
+- On the current integration candidate, all four existing production templates pin the published `actions-core=1.0.2`; the new template should use that same public PyPI dependency. The community branch still uses `1.0.1`, so implementation must target the explicitly selected branch's contract. A standard-library client example avoids introducing an MCP SDK or HTTP client dependency into the Action package. [Candidate manifest](https://github.com/joshyorko/actions/blob/3fee279256e674c9cbe0eaeaf2f98e01f51cd08d/templates/minimal/package.yaml)
 - Templates are generated from independent beta/prod JSON inventories. `build_embedded_bundle.py` creates a deterministic aggregate ZIP, YAML SHA-256 metadata, and per-template ZIPs. The Action Server package includes the aggregate ZIP and YAML metadata, and `test_template_bundle.py` currently pins the production list to four IDs. [Template generator](https://github.com/joshyorko/actions/blob/8bdce09944c9e370917a8222243cd1a239ea7060/templates/packaging/build_embedded_bundle.py), [bundle tests](https://github.com/joshyorko/actions/blob/8bdce09944c9e370917a8222243cd1a239ea7060/action_server/tests/action_server_tests/test_template_bundle.py), [packaging contract](https://github.com/joshyorko/actions/blob/8bdce09944c9e370917a8222243cd1a239ea7060/action_server/pyproject.toml#L9-L18)
 
 ### Proposed template shape
 
 Create `templates/mcp-v2-showcase/` as a single small, runnable package:
 
-- `package.yaml`: follow the existing public template contract (`spec-version: v2`, Python 3.12.12, `actions-core=1.0.1`, standard pytest/Ruff dev tools only). Do not add `mcp`, `httpx2`, Canvas, MCP Apps, product packages, Git dependencies, private registries, or runtime network clients to the Action environment.
+- `package.yaml`: follow the current integration candidate's public template contract (`spec-version: v2`, Python 3.12.12, `actions-core=1.0.2`, standard pytest/Ruff dev tools only). Do not add `mcp`, `httpx2`, Canvas, MCP Apps, product packages, Git dependencies, private registries, or runtime network clients to the Action environment.
 - `showcase_actions.py`: define deterministic, local-only examples using `from actions import Response, Table, mcp`:
   - `search_demo_catalog(query: str, limit: int = 2) -> Response[Table]`, with bounded input and static sample rows. Decorate as read-only, non-destructive, idempotent, and closed-world.
   - `lookup_demo_item(item_id: str) -> Response[LookupResult]`, where `LookupResult` is a small Pydantic model; unknown IDs return `found=false`, code `unknown_item`, and fixed message `No demo item matches this ID.` without echoing arbitrary input or secrets.
@@ -102,14 +102,14 @@ No change is planned to `actions/src/actions/mcp/__init__.py`, `setup_mcp_server
 
 **Architecture:** Keep all examples in one Action Server template using the existing Core decorators and runtime adapter. Use a standard-library JSON-RPC client so the package introduces no MCP/client dependency; demonstrate GET/SSE only as an open/close transport lifecycle. Promote the ID to production only when the implementation and acceptance gates pass, and keep the beta inventory in sync if beta packaging is used.
 
-**Tech Stack:** Python 3.12.12; `actions-core=1.0.1`; Action Server's locked MCP SDK 2.0.0 at protocol `2026-07-28`; existing deterministic Python template packager; pytest/Ruff.
+**Tech Stack:** Python 3.12.12; `actions-core=1.0.2`; Action Server's locked MCP SDK 2.0.0 at protocol `2026-07-28`; existing deterministic Python template packager; pytest/Ruff.
 
 **Spec:** `docs/design/mcp-v2-showcase-draft.md` (design candidate above).
 
 ## Global Constraints
 
 - Use only the public `actions.mcp.tool`, `resource`, and `prompt` APIs and current `2026-07-28` `/mcp` wire contract.
-- Use only public dependencies; the Action package pins `actions-core=1.0.1` and adds no client SDK, HTTP client, Canvas, MCP Apps, product, or private package.
+- Use only public dependencies; the Action package pins `actions-core=1.0.2` on the current integration candidate and adds no client SDK, HTTP client, Canvas, MCP Apps, product, or private package.
 - Project creation is embedded/offline; it performs no template network request.
 - No `/sse`, `initialize`/`initialized`, `Mcp-Session-Id`, private endpoints, new distributions, MCP Apps, Canvas, progress notification, or new generic framework.
 - Do not weaken the existing four-template cleanup test; update its expected manifest-owned inventory when the new production ID is admitted.
@@ -138,7 +138,7 @@ No change is planned to `actions/src/actions/mcp/__init__.py`, `setup_mcp_server
 
 - [ ] Write failing inventory tests that require `mcp-v2-showcase` in the accepted production manifest, bundle metadata, and aggregate archive, and require any beta-listed copy to have matching archive evidence.
 - [ ] Write failing offline project-create test using the existing CLI helper and exact `--name ... --template mcp-v2-showcase` contract; assert README, package, action module, examples, and tests are materialized.
-- [ ] Write failing package manifest/source assertion requiring `actions-core=1.0.1` and rejecting private/package-only/UI dependencies or remote endpoints.
+- [ ] Write failing package manifest/source assertion requiring `actions-core=1.0.2` on the current integration candidate and rejecting private/package-only/UI dependencies or remote endpoints.
 - [ ] Run from `action_server/`: `poetry run pytest -q tests/action_server_tests/test_mcp_v2_showcase_template.py tests/action_server_tests/test_template_bundle.py tests/contract_tests/test_active_contracts.py`; record the expected initial failures.
 
 ### Task 2: Add the self-contained public template
@@ -220,9 +220,9 @@ No change is planned to `actions/src/actions/mcp/__init__.py`, `setup_mcp_server
 - [ ] Verify the guide change against actual test names and generator output; remove any four-only statement that becomes contradictory, but leave the unrelated exact-four artifact/release claims intact.
 - [ ] Run `git diff --check`; review the generated artifact and package source diff for scope creep.
 
-## Verification status and remaining uncertainty
+## Historical verification status and current checkpoint
 
-- This packet is repository reconnaissance only. No builds/tests were run and no repository code was edited.
+- The statements in this section record the packet's original October 8 state. The separately admitted `feature/mcp-v2-showcase-template-20261009` checkpoint adds the source template, production inventory entry, generated assets, and an actual mounted-process protocol test. The bundle builder omits local generated state but preserves authored inputs such as `devdata`; deployment `packaging.exclude` rules do not define template archive contents. Its current acceptance evidence and unresolved limits are recorded in the associated review receipt; this draft alone does not establish that all #126 gates are complete.
 - **Progress-streaming gap:** the server's SSE transport is present, but `McpResponseHandler` progress hooks are no-ops. If the intended acceptance means tool progress notifications rather than stream connection lifecycle, current public implementation does not prove that requirement; a separate runtime prerequisite would be needed.
 - **Exception error gap:** the adapter logs and re-raises tool exceptions. Current checked tests prove trusted metadata boundaries and safe correlation telemetry, but not the exact v2 wire representation or log sanitization for arbitrary action exceptions. The design confines the sample to an explicit static safe-result error and proposes one negative metadata rejection test; do not claim all unexpected exceptions are safely masked unless added proof establishes it.
 - **Manifest release timing:** current #126 does not specify beta-to-production promotion timing. The plan recommends beta trial if useful, then production inclusion only after gates; beta and production should share the ID after promotion.

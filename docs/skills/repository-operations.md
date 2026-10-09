@@ -688,6 +688,8 @@ Prefer evidence in this order:
 
 Do not convert a commit message, design proposal, or skipped test into a current-behavior claim.
 
+When refreshing a preserved ADR from a newer branch, identify the exact source revision for its updated design claims and keep its design-only boundary explicit. A refined packet does not establish implementation or issue acceptance; verify those separately against current source and acceptance evidence.
+
 ## Clean-break package boundaries
 
 The source package identities are `actions-core` (`actions` and `actions.mcp`),
