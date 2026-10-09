@@ -192,6 +192,19 @@ jobs:
           --source-sha "${{ github.sha }}"
           --receipt output/native-history.json
 
+      - name: Verify packaged Work Items browser acceptance
+        if: matrix.os == 'ubuntu-22.04'
+        timeout-minutes: 10
+        env:
+          DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/final/action-server
+          DAKOTA_WORKITEMS_UI_SOURCE_SHA: ${{ github.sha }}
+          DAKOTA_WORKITEMS_UI_BUILD_MANIFEST: ${{ github.workspace }}/action_server/output/native-artifact-manifest.json
+          DAKOTA_WORKITEMS_UI_RECEIPT: ${{ github.workspace }}/action_server/output/dakota-workitems-ui-acceptance.json
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest
+          tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py
+          -q -n 0
+
       - name: Upload native acceptance receipt
         if: always()
         uses: actions/upload-artifact@v4
@@ -200,6 +213,7 @@ jobs:
           path: |
             action_server/output/native-acceptance.json
             action_server/output/native-history.json
+            action_server/output/dakota-workitems-ui-acceptance.json
           if-no-files-found: ignore
           retention-days: 7
       

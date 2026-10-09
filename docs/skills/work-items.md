@@ -405,6 +405,10 @@ while the trigger button remained present. Treat that packaged UI result as a
 keyboard-accessibility failure until a corrected artifact demonstrates focus
 restoration. Do not simulate missing Runtime support or a generic HTTP 500 with
 browser response interception and count it as backend evidence.
+Work Items' controlled create dialog must render its opener through
+`DialogTrigger` in the same Radix root. Cover both the empty-queue and populated
+page create buttons in the source regression, then run the packaged Linux
+browser gate before treating the fix as native acceptance.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their

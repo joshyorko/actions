@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/vitest";
 import { render } from "./utils/test-utils";
 
@@ -210,6 +211,44 @@ describe("Work Items page states", () => {
         fireEvent.change(payload, { target: { value: '{"probe":true}' } });
         expect(screen.queryByRole("alert")).not.toBeInTheDocument();
         expect(payload).toHaveAttribute("aria-invalid", "false");
+    });
+
+    it("returns focus to the empty-queue create trigger after Escape", async () => {
+        queryState.workItems.data = { items: [], total: 0 };
+        queryState.stats.data = emptyStats;
+        const user = userEvent.setup();
+        render(<WorkItemsPage />);
+
+        const trigger = screen.getByRole("button", {
+            name: "Create First Item",
+        });
+        trigger.focus();
+        await user.keyboard("{Enter}");
+        expect(await screen.findByRole("dialog")).toBeInTheDocument();
+
+        await user.keyboard("{Escape}");
+        await waitFor(() => {
+            expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+        });
+        expect(trigger).toHaveFocus();
+    });
+
+    it("returns focus to the populated-page create trigger after Escape", async () => {
+        queryState.workItems.data = { items: [sampleItem], total: 1 };
+        queryState.stats.data = { ...emptyStats, pending: 1, total: 1 };
+        const user = userEvent.setup();
+        render(<WorkItemsPage />);
+
+        const trigger = screen.getByRole("button", { name: "Create Item" });
+        trigger.focus();
+        await user.keyboard("{Enter}");
+        expect(await screen.findByRole("dialog")).toBeInTheDocument();
+
+        await user.keyboard("{Escape}");
+        await waitFor(() => {
+            expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+        });
+        expect(trigger).toHaveFocus();
     });
 
 });
