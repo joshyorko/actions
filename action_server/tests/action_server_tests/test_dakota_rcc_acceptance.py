@@ -13,6 +13,9 @@ SCRIPT = Path(__file__).parents[2] / "scripts" / "verify_dakota_rcc_acceptance.p
 HISTORICAL_RECEIPT = (
     Path(__file__).parents[1] / "acceptance_evidence" / "candidate-wheel-67e82ef7.json"
 )
+CURRENT_RECEIPT = (
+    Path(__file__).parents[1] / "acceptance_evidence" / "candidate-wheel-e33987b6.json"
+)
 
 
 def _harness():
@@ -48,6 +51,20 @@ def test_historical_candidate_receipt_keeps_failed_wrapper_cell():
     assert receipt["authenticated_http_status"] == 200
     assert receipt["sqlite_status"] == "passed"
     assert receipt["rcc_receipt"]["verification"]["valid"] is True
+
+
+def test_current_live_receipt_keeps_action_pass_and_wrapper_failure_separate():
+    receipt = json.loads(CURRENT_RECEIPT.read_text(encoding="utf-8"))
+
+    assert receipt["source_sha"] == "e33987b6224fbc0b444c9b8f26908b3040447223"
+    assert receipt["cells"]["authenticated_action"] == "PASS"
+    assert receipt["cells"]["sqlite_run"] == "PASS"
+    assert receipt["cells"]["artifact_verification"] == "PASS"
+    assert receipt["cells"]["process_cleanup"] == "PASS"
+    assert receipt["cells"]["wrapper_exit"] == "FAIL"
+    assert receipt["acceptance_status"] == "FAIL"
+    assert receipt["rcc_receipt"]["status"] == "failed"
+    assert receipt["rcc_receipt"]["exitCode"] == -1
 
 
 @pytest.mark.integration_test
