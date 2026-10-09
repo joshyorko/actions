@@ -1931,6 +1931,7 @@ def main(argv: list[str] | None = None) -> int:
                     "ACTIONS_RUNTIME_RCC_BINARY",
                     "ACTIONS_ACCEPTANCE_POETRY",
                     "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
+                    "ACTIONS_RUNTIME_RCC_TRUST_CARRIER",
                 )
             }
             worker_env = child_environment(
