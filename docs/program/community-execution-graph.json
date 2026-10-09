@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-10-09",
-  "worker_stage_snapshot": "2026-10-09T16:57:54.251935+00:00",
+  "worker_stage_snapshot": "2026-10-09T18:48:02.279707+00:00",
   "scope": "issue-level overlay only; no acceptance ledger/body changes",
   "contract_source": "governance/docs/program/community-program-ledger.json acceptance_contract compared with evidence/acceleration-open-issues.json body",
   "exact_contract_matches": 54,
@@ -44,29 +44,39 @@
     }
   ],
   "current_active_workers": {
-    "134": "D RCC adapter",
-    "208": "B Work Items native gate",
-    "210": "A Helper 1.0.2 credential/publication",
-    "91": "E bounded MCP auth/CIMD capability reconciliation"
+    "101": "root integration/governance",
+    "134": "D trust successor; Sol independent review",
+    "210": "root/A Helper successor CI/release",
+    "211": "root Core release order; C source/CI complete",
+    "100": "E bounded ADR only; public MCP Apps implementation still depends125"
   },
   "current_review_checkpoints": {
+    "91": {
+      "pr": 250,
+      "combined_pr": 250,
+      "status": "INTEGRATED_PARTIAL"
+    },
+    "100": {
+      "pr": null,
+      "status": "READY_FOR_BOUNDED_ADR_ONLY",
+      "scoped_dependency": 125
+    },
     "129": {
-      "worker": "E",
-      "pr": 245,
-      "head": "6e94860c0b8fc2692727982a57ce635063c86ce4"
+      "pr": 250,
+      "combined_pr": 250,
+      "status": "INTEGRATED_PARTIAL"
     },
     "151": {
-      "worker": "C",
-      "pr": 244,
-      "head": "a06e7ebcec37c697b4fb6bbf5d52e364b29f49d7"
+      "pr": 250,
+      "combined_pr": 250,
+      "status": "INTEGRATED_PARTIAL"
     }
   },
   "counts": {
-    "READY": 1,
-    "ACTIVE": 4,
-    "REVIEW": 13,
     "BLOCKED": 30,
-    "INTEGRATED": 6,
+    "INTEGRATED": 10,
+    "ACTIVE": 5,
+    "REVIEW": 9,
     "COMPLETE": 0
   },
   "complete_verified_count": 0,
@@ -221,13 +231,13 @@
       "issue": 91,
       "title": "Add MCP-native authorization and CIMD support",
       "retained_state": "NOT_STARTED",
-      "classification": "ACTIVE",
-      "partial_foundation": false,
-      "foundation_pr": null,
-      "checkpoint_pr": null,
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 250,
+      "checkpoint_pr": 250,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Closed prerequisite #80 resolved. Root assigned E to bounded SDK/CIMD capability reconciliation; architecture boundaries remain under root review.",
-      "next_bounded_action": "Inspect exact locked SDK authorization/CIMD interfaces and current API-key/provider-OAuth boundaries; implement only source-backed unambiguous validation slice after boundary review.",
+      "reason": "PR250 merged this bounded SDK/auth contract foundation into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; public authorization implementation and the complete #91 contract remain open.",
+      "next_bounded_action": "Use merged PR250 only as a partial contract checkpoint. Preserve API-key/provider OAuth boundaries and the remaining #91 acceptance; no whole-issue completion is implied.",
       "acceptance_contract_sha256": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6"
     },
     {
@@ -332,26 +342,33 @@
       "issue": 100,
       "title": "Define Canvas authoring contracts in actions-core without package proliferation",
       "retained_state": "NOT_STARTED",
-      "classification": "READY",
+      "classification": "ACTIVE",
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": null,
       "unresolved_open_issue_dependencies": [],
-      "reason": "No explicit unresolved predecessor in the retained body; readiness is only for bounded admission, not completion.",
-      "next_bounded_action": "Define minimal Core Canvas authoring API paired with renderer and public export tests.",
-      "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198"
+      "reason": "Bounded ADR/contract evidence assigned to E; no authoring implementation or new distribution authorized by this slice.",
+      "next_bounded_action": "Review the bounded schema/source-of-truth ADR and contract only; record the #125 dependency for public MCP Apps authoring separately. Do not start Canvas implementation or claim Python/JSON/TypeScript round-trip/package acceptance.",
+      "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
+      "scoped_dependencies": [
+        {
+          "scope": "public MCP Apps authoring contract and registration/serving",
+          "issue": 125,
+          "status": "deferred until #125 acceptance; not a blanket issue-level prerequisite"
+        }
+      ]
     },
     {
       "issue": 101,
       "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory",
       "retained_state": "IN_PROGRESS",
-      "classification": "REVIEW",
+      "classification": "ACTIVE",
       "partial_foundation": false,
       "foundation_pr": null,
-      "checkpoint_pr": null,
+      "checkpoint_pr": 220,
       "unresolved_open_issue_dependencies": [],
-      "reason": "PR #220 is assigned to the umbrella ledger, but no current worker is assigned to #101; child acceptance remains open.",
-      "next_bounded_action": "Maintain all54 dispositions and exact receipts at every checkpoint; do not infer acceptance from green PRs.",
+      "reason": "Root maintains the canonical execution ledger and immutable receipts during active engineering.",
+      "next_bounded_action": "Preserve all 54 contracts, exact worker ownership, failed publication and warm-restart evidence; no completion from checkpoint counts.",
       "acceptance_contract_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240"
     },
     {
@@ -405,13 +422,13 @@
       "issue": 129,
       "title": "Define workspace-scoped capability deployments, runtime-plan selection, immutable revisions, and bindings",
       "retained_state": "IMPLEMENTED_UNVERIFIED",
-      "classification": "REVIEW",
-      "partial_foundation": false,
-      "foundation_pr": null,
-      "checkpoint_pr": 245,
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 250,
+      "checkpoint_pr": 250,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Design-only SQLite/PostgreSQL probe passed; independent bounded review passed. Reconciled exact checkpoint hosted gates pending; no product implementation acceptance.",
-      "next_bounded_action": "PR245 design-only database probe passes SQLite/PostgreSQL; independently review exact checkpoint and preserve no-product-migration boundary before later implementation.",
+      "reason": "PR250 merged the design-only #129 probe into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; no production Deployment implementation or full-issue acceptance is claimed.",
+      "next_bounded_action": "Continue only after verifying the merged contract and its prerequisites; keep production migration, revision admission, and full Deployment acceptance open.",
       "acceptance_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5"
     },
     {
@@ -488,10 +505,10 @@
       "classification": "ACTIVE",
       "partial_foundation": true,
       "foundation_pr": 197,
-      "checkpoint_pr": null,
+      "checkpoint_pr": 247,
       "unresolved_open_issue_dependencies": [],
-      "reason": "D implements bounded completed-worker retirement under independent Sol review; protocol/harness foundations integrated, actual successful RCC lease/retirement proof remains missing.",
-      "next_bounded_action": "Graceful completed-worker retirement repair is active with independent Sol review. Preserve failed RCC receipts and explicit NOT_PROVEN unexpected-crash recovery; require exact source/native consumer evidence.",
+      "reason": "Actions trust-context source f4e03108 and actual same-selected-provider503-before-exec negative are independently accepted narrowly. Whole offline-warm harness remains FAIL, because configured provenance carrier must be reachable. Full134 remains unfinished; earlier422/ENOSPC evidence retained without retrospective cause claims.",
+      "next_bounded_action": "Keep the 503 negative distinct from the NOT_REACHED cold-publish 422. Prove trust continuity across acquisition and execution without inferring an upstream defect; preserve the full RCC/native/consumer and crash-recovery contract.",
       "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d"
     },
     {
@@ -737,13 +754,13 @@
       "issue": 151,
       "title": "[security] Reject unsafe Robot ZIP package-root selection and bound archive staging",
       "retained_state": "IMPLEMENTED_UNVERIFIED",
-      "classification": "REVIEW",
+      "classification": "INTEGRATED",
       "partial_foundation": true,
-      "foundation_pr": 200,
-      "checkpoint_pr": 244,
+      "foundation_pr": 250,
+      "checkpoint_pr": 250,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Final-copy repair integrated through241; test-only importer follow-up244 is independently reviewed and awaits exact reconciled hosted gates.",
-      "next_bounded_action": "PR230/232/234/240 bounded publication repairs integrated. PR244 adds importer-only package.yaml tests; verify reconciled exact candidate. Root/source identity and Windows ACL remain open.",
+      "reason": "PR250 merged the bounded Robot importer/final-copy foundation into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; root/source identity, Windows ACL, and full publication acceptance remain open.",
+      "next_bounded_action": "Continue with the remaining root/source identity and platform permission gates; do not infer full ZIP publication safety from the merged partial tests.",
       "acceptance_contract_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03"
     },
     {
@@ -847,13 +864,13 @@
       "issue": 208,
       "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
       "retained_state": "IMPLEMENTED_UNVERIFIED",
-      "classification": "ACTIVE",
-      "partial_foundation": false,
-      "foundation_pr": null,
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 242,
       "checkpoint_pr": 242,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Current B worker repairs actual native candidate-Core installation after failed Linux consumer gate. Earlier receipt/provenance slices are integrated; whole acceptance remains open.",
-      "next_bounded_action": "PR231/237 receipts and native provenance integrated. PR242 Linux consumer gate failed because actual RCC path omitted measured Core wheel; repair installation and prove in-worker distribution before acceptance.",
+      "reason": "Linux frozen and Go actual consumer tests pass at syntheticbf04e85d with downloaded receipt digests verified; integrated303592ff. Full issue remains open.",
+      "next_bounded_action": "Extend actual consumer and product error-state proof only where required; Linux consumer receipt is not all-platform execution or whole-issue acceptance.",
       "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c"
     },
     {
@@ -876,23 +893,23 @@
       "classification": "ACTIVE",
       "partial_foundation": false,
       "foundation_pr": null,
-      "checkpoint_pr": 243,
+      "checkpoint_pr": 249,
       "unresolved_open_issue_dependencies": [],
-      "reason": "A owns Helper promotion and inherited exact artifact validator repair; Helper checks pass but aggregate release/RCC checks remain blocked.",
-      "next_bounded_action": "Promote Helper1.0.2 via PR243 after inherited Runtime semantic wheel-inventory and Linux RCC/CORS failures are repaired, independently reviewed and exact-head CI passes; then immutable tag and actual registry verification.",
+      "reason": "Corrected Helper1.0.3 PR249 f2dd54cc has independently accepted source/artifact projection and Runtime441/10skip plus Helper12. Ordered import-isolation reproduction fails before and passes after the existing11-line fix. Exact successor hosted gates remain required.",
+      "next_bounded_action": "Accept exact successor hosted gates and unchanged Helper artifact projection, then promote1.0.3 using normal immutable GitHub release workflow; verify registry bytes.",
       "acceptance_contract_sha256": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d"
     },
     {
       "issue": 211,
       "title": "fix(release): align Actions-side native handoffs with community distribution",
       "retained_state": "IMPLEMENTED_UNVERIFIED",
-      "classification": "REVIEW",
+      "classification": "ACTIVE",
       "partial_foundation": false,
       "foundation_pr": null,
-      "checkpoint_pr": 215,
+      "checkpoint_pr": 248,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Exact-head/adversarial review remains before the next implementation step (PR #215, checkpoint PR #215). Full acceptance remains open.",
-      "next_bounded_action": "Finish final candidate security/platform/package acceptance, verify immutable unused versions and release admission, merge only admitted integration, then publish Helper1.0.2 -> Core1.0.2 -> Runtime1.0.3/native through GitHub Actions with registry readback and workflow receipts.",
+      "reason": "Core1.0.2 PR248 df7b0d66 passed configured294, installed-wheel and all5hosted workflows; actual Helper registry verification precedes Core promotion. Preserve exact-source proof after base changes.",
+      "next_bounded_action": "Wait for corrected Helper CORS and actual registry verification before Core tagging; then run the admitted Core publication/registry readback and Runtime/native acceptance. Green PR workflow jobs are not publication evidence.",
       "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4"
     },
     {

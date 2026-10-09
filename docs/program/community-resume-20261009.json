@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T16:57:14.430182+00:00",
+  "observed_at": "2026-10-09T18:48:02.279707+00:00",
   "status": "ACTIVE_ENGINEERING_CHECKPOINT; concurrent work continues",
-  "integration_head": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
-  "community_head": "7c98236069171f57031218f938963238986293bd",
+  "integration_head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+  "community_head": "00c207fe1ebae20804056e2b17982476ee75386a",
   "release_ready": false,
-  "community_merge": false,
+  "community_merge": true,
   "publication": false,
   "issue_accounting": {
     "open": 54,
@@ -17,10 +17,11 @@
   "devsy": {
     "request_id": "apr_29be804c-94cd-4b62-9233-e91b5ec30774",
     "session": "stateless",
-    "state": "WAITING FOR HIT THE GAS",
+    "state": "PAUSED_BY_USER_FOR_CAS_PERMISSION_REPAIR",
     "recreated": false,
     "retried": false,
-    "validation": "No HIT THE GAS command has been received. No Devsy discovery, provisioning, repair, recreation, retry, or dispatch. That command would authorize readiness verification through real advertised Executor/CAS schemas; a configured name alone is not READY."
+    "validation": "HIT THE GAS received; native connectivity, Owner Devsy diagnostics and pinned Doctor passed. User subsequently paused device work. Existing bootstrap completed and worktrees preserved; no engineering threads dispatched.",
+    "target": "cas-worker-01"
   },
   "dakota": {
     "reconciled_before_dispatch": true,
@@ -250,7 +251,7 @@
         "passed": 588,
         "skipped": 10
       },
-      "current_native": "PR242 f21fe200 failed actual Linux consumer environment installation; manifest/receipt gate review scoped PASS, consumer gate not accepted. Worker is repairing real RCC installation path.",
+      "current_native": "Linux frozen+Go actualconsumer PASS on PR242 syntheticbf04e85d, integrated303592ff. Verifieddownloadedreceipt binds measured candidateCorewheel/install. AllthreeOSnativeworkflowPASS; WorkItemsconsumerLinuxonly; largeZIPdownloadlimit32MiB remains.",
       "review_successor": "Cloud review found prior PASS can survive abrupt harness death before finally; same cloud lane implementing atomic attempt invalidation. Prior14 focused PASS does not waive this finding.",
       "receipt_repair": "Fresh attempt invalidates old PASS before validation; subprocess regression PASS",
       "host_python": "Separate unactivated Python3.13 ensurepip attempt FAILED; not conflated with RCC-pinned package gates",
@@ -324,7 +325,7 @@
         "scope": "prior PR235 body; not a rerun on3dbfb1be"
       },
       "native_or_live": "No new live-RCC execution; exact7cf receipt remains FAIL",
-      "current_scope": "PR235 harness integrated via239. Graceful completed-worker retirement under implementation and independent Sol review; previous actual failed RCC receipt remains FAIL."
+      "current_scope": "Fresh exactsource29f213e0 loopbackRCC candidatewheel6cellsPASS; wrappercompleted exit0, Runtimeexit0/providerreaped; sourceboundaryindependentlyreviewed. PR247hostedpending. Prioractualfailures preserved; nofull134/nativeclaim."
     },
     "robot_cleanup": {
       "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
@@ -391,224 +392,114 @@
     "migration_specific_changes": "NONE; no detachment, renaming or issue migration",
     "cloud_fanout": "Six reused Cloud logical lanes with bounded Luna workers; one Sol High independent retirement reviewer used for demonstrated ownership/accounting defects. Root remains sole integration owner.",
     "new_executor_server": "User provisioning separately; no discovery or dispatch to it yet.",
-    "remote_dispatch": "No extra Dakota workers; RCC thread remains unconfirmed after timeout. Work proceeds in Codex Cloud. Artifact retrieval was blocked with HTTP403 and no bytes received; current-source replay is not established.",
+    "remote_dispatch": "Native CAS read-only diagnostics completed with no file changes. Root reports the user-approved Actions clone completed; the same bootstrap now awaits native approval to create worktrees. The saved readiness receipt predates that update, so exact refreshed checkout head/path is not claimed. Preserve /workspaces/cas-worker-01 as the CAS repository; Actions checkout is /workspaces/actions and worker worktrees belong under /workspaces/actions-worktrees/*. Do not duplicate setup or resume the pending worktree-creation approval. Prior Dakota RCC thread remains separately UNCONFIRMED.",
     "shared_process_control": "Only root may signal shared host processes. A cross-lane INT/TERM incident interrupted B validation; preserve that run as INTERRUPTED, followed by an independently recorded successful rerun. Process timing/PGID guesses are not ownership proof."
   },
   "cloud_workers": [
     {
       "thread": "/root",
       "model": "Sol High",
-      "state": "ACTIVE_INTEGRATION_OWNER",
-      "worktree": "/workspace/work/community-resume/admission",
-      "pr": null,
-      "observed_at": "2026-10-09T16:55:02Z",
+      "state": "ACTIVE integration/release/governance",
+      "pr": 221,
+      "observed_at": "2026-10-09T18:48:02.279707+00:00",
+      "worktree": "/workspace/work/community-resume/convergence",
       "checkout_observation": {
-        "path": "/workspace/work/community-resume/admission",
-        "head": "bd1661393b71d92779bb405cfb92372442b340ac",
-        "branch_ref": "refs/heads/integration/cloud-native-checkpoints-20261009",
+        "path": "/workspace/work/community-resume/convergence",
+        "head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+        "branch": "refs/heads/integration/community-release-20261008",
         "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "integration/cloud-native-checkpoints-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
+        "untracked_paths": []
       }
     },
     {
       "thread": "/root/luna_graph_inventory",
       "model": "gpt-6-luna",
-      "state": "ACTIVE_HELPER_AND_RELEASE_VALIDATOR_REPAIR",
+      "state": "REVIEW; Helperf2 pushed, successor CI pending",
+      "pr": 249,
+      "observed_at": "2026-10-09T18:48:02.279707+00:00",
       "worktree": "/workspace/work/community-resume/workitems",
-      "pr": 243,
-      "observed_at": "2026-10-09T16:55:02Z",
       "checkout_observation": {
         "path": "/workspace/work/community-resume/workitems",
-        "head": "348224f169fab5f19b0b7504d2b701237a056ef6",
-        "branch_ref": "refs/heads/release/http-helper-1.0.2-20261009",
-        "status_porcelain": [
-          "M .github/workflows/_gen_workflows.py",
-          " M .github/workflows/actions_runtime_pypi_release.yml",
-          " M action_server/scripts/publish_verified_runtime.py",
-          "M  devutils/tests/test_runtime_release_workflows.py",
-          "M  docs/skills/repository-operations.md"
-        ],
-        "dirty": true,
-        "changed_paths": [
-          "github/workflows/_gen_workflows.py",
-          ".github/workflows/actions_runtime_pypi_release.yml",
-          "action_server/scripts/publish_verified_runtime.py",
-          "devutils/tests/test_runtime_release_workflows.py",
-          "docs/skills/repository-operations.md"
-        ],
-        "branch": "release/http-helper-1.0.2-20261009",
-        "upstream": null,
-        "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/workitems-UNVERIFIED.patch",
-        "known_worker_assignment": "A"
-      },
-      "scope_note": "Runtime release validator repair selectively extracted from previously reviewed9b3c1a4, authorized by root as release blocker; dirty Runtime files are expected."
-    },
-    {
-      "thread": "/root/luna_workitems_failures",
-      "model": "gpt-6-luna",
-      "state": "ACTIVE_NATIVE_CONSUMER_INSTALL_REPAIR",
-      "worktree": "/workspace/work/community-resume/workitems-ci",
-      "pr": 242,
-      "observed_at": "2026-10-09T16:55:02Z",
-      "checkout_observation": {
-        "path": "/workspace/work/community-resume/workitems-ci",
-        "head": "f21fe2002c6ec29262d044313029faedc334a7cf",
-        "branch_ref": "refs/heads/test/native-workitems-ci-20261009",
-        "status_porcelain": [
-          "M action_server/scripts/dakota_workitems_native_acceptance.py",
-          " M action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py",
-          " M action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
-          " M docs/skills/work-items.md"
-        ],
-        "dirty": true,
-        "changed_paths": [
-          "ction_server/scripts/dakota_workitems_native_acceptance.py",
-          "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py",
-          "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
-          "docs/skills/work-items.md"
-        ],
-        "branch": "test/native-workitems-ci-20261009",
-        "upstream": null,
-        "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/workitems-ci-UNVERIFIED.patch",
-        "known_worker_assignment": "B"
+        "head": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e",
+        "branch": "refs/heads/release/http-helper-redirect-fix-20261009",
+        "status_porcelain": [],
+        "untracked_paths": []
       }
     },
     {
       "thread": "/root/luna_robot_identity",
       "model": "gpt-6-luna",
-      "state": "COMPLETED_READ_ONLY_CORS_DIAGNOSIS; AVAILABLE",
-      "worktree": "/workspace/work/community-resume/robot-final-copy",
-      "pr": 244,
-      "observed_at": "2026-10-09T16:55:02Z",
+      "state": "READY; Core/gov draft complete",
+      "pr": 248,
+      "observed_at": "2026-10-09T18:48:02.279707+00:00",
+      "worktree": "/workspace/work/community-resume/wheel-inventory",
       "checkout_observation": {
-        "path": "/workspace/work/community-resume/robot-final-copy",
-        "head": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
-        "branch_ref": "refs/heads/test/robot-package-yaml-admission-20261009",
+        "path": "/workspace/work/community-resume/wheel-inventory",
+        "head": "df7b0d664a661fcab5d014092f4259c32e74590f",
+        "branch": "refs/heads/release/actions-core-1.0.2-20261009",
         "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "test/robot-package-yaml-admission-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
+        "untracked_paths": []
       }
     },
     {
       "thread": "/root/luna_worker_exit",
       "model": "gpt-6-luna",
-      "state": "ACTIVE_RCC_RETIREMENT_REPAIR",
+      "state": "REVIEW; trust PR253 pushed, exact combined gate remains",
+      "pr": 253,
+      "observed_at": "2026-10-09T18:51:42.169962+00:00",
       "worktree": "/workspace/work/community-resume/worker-exit",
-      "pr": null,
-      "observed_at": "2026-10-09T16:55:02Z",
       "checkout_observation": {
         "path": "/workspace/work/community-resume/worker-exit",
-        "head": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
-        "branch_ref": "refs/heads/repair/rcc-graceful-retirement-20261009",
-        "status_porcelain": [
-          "M action_server/src/actions/server/_actions_process_pool.py",
-          " M action_server/src/actions/server/_common/process.py",
-          " M action_server/src/actions/server/_preload_actions/preload_actions_streams.py",
-          " M action_server/src/actions/server/_rcc_runtime_adapter.py",
-          " M action_server/tests/action_server_tests/test_preload_actions_exit.py",
-          " M action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
-          " M docs/skills/repository-operations.md"
-        ],
-        "dirty": true,
-        "changed_paths": [
-          "ction_server/src/actions/server/_actions_process_pool.py",
-          "action_server/src/actions/server/_common/process.py",
-          "action_server/src/actions/server/_preload_actions/preload_actions_streams.py",
-          "action_server/src/actions/server/_rcc_runtime_adapter.py",
-          "action_server/tests/action_server_tests/test_preload_actions_exit.py",
-          "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
-          "docs/skills/repository-operations.md"
-        ],
-        "branch": "repair/rcc-graceful-retirement-20261009",
-        "upstream": null,
-        "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/worker-exit-UNVERIFIED.patch",
-        "known_worker_assignment": "D"
+        "head": "170c89e23139fd7d020e93d8afb3e3ac945e06db",
+        "branch": "refs/heads/repair/rcc-trust-context-20261009",
+        "status_porcelain": [],
+        "untracked_paths": []
       }
     },
     {
       "thread": "/root/luna_tunnel_integration",
       "model": "gpt-6-luna",
-      "state": "ACTIVE_MCP_AUTH_CAPABILITY_RECONCILIATION",
-      "worktree": "/workspace/work/community-resume/deployment-admission",
-      "pr": 245,
-      "observed_at": "2026-10-09T16:55:02Z",
+      "state": "REVIEW; bounded100 ADR PR254 pushed",
+      "pr": 254,
+      "observed_at": "2026-10-09T18:51:42.169962+00:00",
+      "worktree": "/workspace/work/community-resume/canvas-decision",
       "checkout_observation": {
-        "path": "/workspace/work/community-resume/deployment-admission",
-        "head": "6e94860c0b8fc2692727982a57ce635063c86ce4",
-        "branch_ref": "refs/heads/feature/deployment-admission-20261009",
+        "path": "/workspace/work/community-resume/canvas-decision",
+        "head": "615ed99b47e5273353916928ec1c06c5c70928e5",
+        "branch": "refs/heads/docs/issue-100-authoring-decision-20261009",
         "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "feature/deployment-admission-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": "E"
-      },
-      "scope_note": "PR245 preserved. Reusing clean worktree/new distinct branch for bounded #91 SDK/auth prerequisite reconciliation; schema/config boundary requires root review."
+        "untracked_paths": []
+      }
     },
     {
       "thread": "/root/luna_rcc_review",
       "model": "gpt-6-luna",
-      "state": "ACTIVE_INDEPENDENT_REVIEW",
-      "worktree": "/workspace/work/community-resume/governance",
-      "pr": null,
-      "observed_at": "2026-10-09T16:55:02Z",
-      "checkout_observation": {
-        "path": "/workspace/work/community-resume/governance",
-        "head": "51806553b0bd2e1104e9e048283e0e9931078cac",
-        "branch_ref": "refs/heads/resume/community-evidence-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "resume/community-evidence-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      }
+      "state": "READY independent governance review",
+      "pr": 220,
+      "observed_at": "2026-10-09T18:48:02.279707+00:00",
+      "worktree": null
     },
     {
       "thread": "/root/sol_retirement_review",
       "model": "gpt-6.1-sol/high",
-      "state": "COMPLETED_CHANGES_REQUIRED; REUSE_AFTER_WRITER_CHECKPOINT",
-      "worktree": "/workspace/work/community-resume/worker-exit",
+      "state": "READY; independent Helper/trust review complete",
       "pr": null,
-      "observed_at": "2026-10-09T16:55:02Z",
+      "observed_at": "2026-10-09T18:48:02.279707+00:00",
+      "worktree": null
+    },
+    {
+      "thread": "/root/luna_workitems_failures",
+      "model": "gpt-6-luna",
+      "state": "COMPLETED historical native checkpoint",
+      "pr": 242,
+      "observed_at": "2026-10-09T18:48:02.279707+00:00",
+      "worktree": "/workspace/work/community-resume/workitems-ci",
       "checkout_observation": {
-        "path": "/workspace/work/community-resume/worker-exit",
-        "head": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
-        "branch_ref": "refs/heads/repair/rcc-graceful-retirement-20261009",
-        "status_porcelain": [
-          "M action_server/src/actions/server/_actions_process_pool.py",
-          " M action_server/src/actions/server/_common/process.py",
-          " M action_server/src/actions/server/_preload_actions/preload_actions_streams.py",
-          " M action_server/src/actions/server/_rcc_runtime_adapter.py",
-          " M action_server/tests/action_server_tests/test_preload_actions_exit.py",
-          " M action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
-          " M docs/skills/repository-operations.md"
-        ],
-        "dirty": true,
-        "changed_paths": [
-          "ction_server/src/actions/server/_actions_process_pool.py",
-          "action_server/src/actions/server/_common/process.py",
-          "action_server/src/actions/server/_preload_actions/preload_actions_streams.py",
-          "action_server/src/actions/server/_rcc_runtime_adapter.py",
-          "action_server/tests/action_server_tests/test_preload_actions_exit.py",
-          "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
-          "docs/skills/repository-operations.md"
-        ],
-        "branch": "repair/rcc-graceful-retirement-20261009",
-        "upstream": null,
-        "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/worker-exit-UNVERIFIED.patch",
-        "known_worker_assignment": "D"
+        "path": "/workspace/work/community-resume/workitems-ci",
+        "head": "1b0217c810b7522416003ef8e6d5ded3016d3735",
+        "branch": "refs/heads/test/native-workitems-ci-20261009",
+        "status_porcelain": [],
+        "untracked_paths": []
       }
     }
   ],
@@ -616,516 +507,385 @@
     {
       "path": "/workspace/actions",
       "head": "7c98236069171f57031218f938963238986293bd",
-      "branch_ref": "refs/heads/work",
+      "branch": "refs/heads/work",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "work",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/admission",
-      "head": "bd1661393b71d92779bb405cfb92372442b340ac",
-      "branch_ref": "refs/heads/integration/cloud-native-checkpoints-20261009",
+      "head": "e032e95d38c91aead08d30b42ec7620b8ea726a4",
+      "branch": "refs/heads/integration/cloud-convergence-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "integration/cloud-native-checkpoints-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/canvas-decision",
+      "head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+      "branch": "refs/heads/docs/issue-100-authoring-decision-20261009",
+      "status_porcelain": [],
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/convergence",
-      "head": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
-      "branch_ref": "refs/heads/integration/community-release-20261008",
+      "head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+      "branch": "refs/heads/integration/community-release-20261008",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "integration/community-release-20261008",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/credential-check",
+      "head": "1abafea4e08766a71a4f4fe8173101af1e368428",
+      "branch": "refs/heads/release/http-helper-credential-check-20261009",
+      "status_porcelain": [],
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/deployment-admission",
-      "head": "6e94860c0b8fc2692727982a57ce635063c86ce4",
-      "branch_ref": "refs/heads/feature/deployment-admission-20261009",
+      "head": "57399b60496b98fea020f26e576d47bcb0d440bf",
+      "branch": "refs/heads/docs/upstream-reporting-policy-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "feature/deployment-admission-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": "E"
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/governance",
-      "head": "51806553b0bd2e1104e9e048283e0e9931078cac",
-      "branch_ref": "refs/heads/resume/community-evidence-20261009",
-      "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "resume/community-evidence-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "head": "7aadd31d36e943f86c1656f5007b5ed431c4a00e",
+      "branch": "refs/heads/resume/community-evidence-20261009",
+      "status_porcelain": [
+        "M docs/program/community-execution-graph.json",
+        " M docs/program/community-execution-graph.md",
+        " M docs/program/community-program-ledger.json",
+        " M docs/program/community-program-ledger.md",
+        " M docs/program/community-resume-20261009.json",
+        " M docs/program/engineering-handoff.md"
+      ],
+      "untracked_paths": [],
+      "unverified_patch": {
+        "path": "evidence/convergence-worker-inventory-patches/governance-UNVERIFIED.patch",
+        "bytes": 134381,
+        "sha256": "4c7a442223ca19588b6174c03bbb90f71c5800b3f55fa76c8d6ee4aaec9773eb"
+      }
     },
     {
       "path": "/workspace/work/community-resume/integration",
       "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
-      "branch_ref": "refs/heads/resume/community-blockers-20261009",
+      "branch": "refs/heads/resume/community-blockers-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "resume/community-blockers-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/rcc",
       "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
-      "branch_ref": "refs/heads/resume/rcc-review-20261009",
+      "branch": "refs/heads/resume/rcc-review-20261009",
       "status_porcelain": [
-        "?? work/pr235-body.md"
+        "?? work/"
       ],
-      "dirty": true,
-      "changed_paths": [
+      "untracked_paths": [
         "work/pr235-body.md"
-      ],
-      "branch": "resume/rcc-review-20261009",
-      "upstream": null,
-      "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/rcc-UNVERIFIED.patch",
-      "known_worker_assignment": null
+      ]
     },
     {
       "path": "/workspace/work/community-resume/robot",
       "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
-      "branch_ref": "refs/heads/resume/robot-native-gates-20261009",
+      "branch": "refs/heads/resume/robot-native-gates-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "resume/robot-native-gates-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/robot-cleanup",
       "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
-      "branch_ref": "refs/heads/repair/robot-cleanup-ownership-20261009",
+      "branch": "refs/heads/repair/robot-cleanup-ownership-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "repair/robot-cleanup-ownership-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/robot-final-copy",
       "head": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
-      "branch_ref": "refs/heads/test/robot-package-yaml-admission-20261009",
+      "branch": "refs/heads/test/robot-package-yaml-admission-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "test/robot-package-yaml-admission-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/robot-staging",
       "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
-      "branch_ref": "refs/heads/repair/robot-private-staging-20261009",
+      "branch": "refs/heads/repair/robot-private-staging-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "repair/robot-private-staging-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/tunnel",
       "head": "554630899c6eab23b922ba6558347e7f2c439c00",
-      "branch_ref": "refs/heads/resume/tunnel-20261009",
+      "branch": "refs/heads/resume/tunnel-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "resume/tunnel-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/tunnel-edge",
       "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
-      "branch_ref": "refs/heads/feature/tunnel-edge-verification-20261009",
+      "branch": "refs/heads/feature/tunnel-edge-verification-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "feature/tunnel-edge-verification-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/wheel-inventory",
-      "head": "ea08faf39e107113ae50a529770ce1ca1a422d05",
-      "branch_ref": "refs/heads/repair/runtime-wheel-inventory-20261009",
+      "head": "df7b0d664a661fcab5d014092f4259c32e74590f",
+      "branch": "refs/heads/release/actions-core-1.0.2-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "repair/runtime-wheel-inventory-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/worker-exit",
-      "head": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
-      "branch_ref": "refs/heads/repair/rcc-graceful-retirement-20261009",
-      "status_porcelain": [
-        "M action_server/src/actions/server/_actions_process_pool.py",
-        " M action_server/src/actions/server/_common/process.py",
-        " M action_server/src/actions/server/_preload_actions/preload_actions_streams.py",
-        " M action_server/src/actions/server/_rcc_runtime_adapter.py",
-        " M action_server/tests/action_server_tests/test_preload_actions_exit.py",
-        " M action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
-        " M docs/skills/repository-operations.md"
-      ],
-      "dirty": true,
-      "changed_paths": [
-        "ction_server/src/actions/server/_actions_process_pool.py",
-        "action_server/src/actions/server/_common/process.py",
-        "action_server/src/actions/server/_preload_actions/preload_actions_streams.py",
-        "action_server/src/actions/server/_rcc_runtime_adapter.py",
-        "action_server/tests/action_server_tests/test_preload_actions_exit.py",
-        "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
-        "docs/skills/repository-operations.md"
-      ],
-      "branch": "repair/rcc-graceful-retirement-20261009",
-      "upstream": null,
-      "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/worker-exit-UNVERIFIED.patch",
-      "known_worker_assignment": "D"
+      "head": "170c89e23139fd7d020e93d8afb3e3ac945e06db",
+      "branch": "refs/heads/repair/rcc-trust-context-20261009",
+      "status_porcelain": [],
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/workitems",
-      "head": "348224f169fab5f19b0b7504d2b701237a056ef6",
-      "branch_ref": "refs/heads/release/http-helper-1.0.2-20261009",
-      "status_porcelain": [
-        "M .github/workflows/_gen_workflows.py",
-        " M .github/workflows/actions_runtime_pypi_release.yml",
-        " M action_server/scripts/publish_verified_runtime.py",
-        "M  devutils/tests/test_runtime_release_workflows.py",
-        "M  docs/skills/repository-operations.md"
-      ],
-      "dirty": true,
-      "changed_paths": [
-        "github/workflows/_gen_workflows.py",
-        ".github/workflows/actions_runtime_pypi_release.yml",
-        "action_server/scripts/publish_verified_runtime.py",
-        "devutils/tests/test_runtime_release_workflows.py",
-        "docs/skills/repository-operations.md"
-      ],
-      "branch": "release/http-helper-1.0.2-20261009",
-      "upstream": null,
-      "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/workitems-UNVERIFIED.patch",
-      "known_worker_assignment": "A"
+      "head": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e",
+      "branch": "refs/heads/release/http-helper-redirect-fix-20261009",
+      "status_porcelain": [],
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/workitems-artifacts",
       "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
-      "branch_ref": "refs/heads/feature/workitems-native-artifact-manifest-20261009",
+      "branch": "refs/heads/feature/workitems-native-artifact-manifest-20261009",
       "status_porcelain": [],
-      "dirty": false,
-      "changed_paths": [],
-      "branch": "feature/workitems-native-artifact-manifest-20261009",
-      "upstream": null,
-      "unverified_patch": null,
-      "known_worker_assignment": null
+      "untracked_paths": []
     },
     {
       "path": "/workspace/work/community-resume/workitems-ci",
-      "head": "f21fe2002c6ec29262d044313029faedc334a7cf",
-      "branch_ref": "refs/heads/test/native-workitems-ci-20261009",
-      "status_porcelain": [
-        "M action_server/scripts/dakota_workitems_native_acceptance.py",
-        " M action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py",
-        " M action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
-        " M docs/skills/work-items.md"
-      ],
-      "dirty": true,
-      "changed_paths": [
-        "ction_server/scripts/dakota_workitems_native_acceptance.py",
-        "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py",
-        "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
-        "docs/skills/work-items.md"
-      ],
-      "branch": "test/native-workitems-ci-20261009",
-      "upstream": null,
-      "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/workitems-ci-UNVERIFIED.patch",
-      "known_worker_assignment": "B"
+      "head": "1b0217c810b7522416003ef8e6d5ded3016d3735",
+      "branch": "refs/heads/test/native-workitems-ci-20261009",
+      "status_porcelain": [],
+      "untracked_paths": []
     }
   ],
   "initial_integration_head": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
   "integration_merges": [
-    {
-      "pr": 229,
-      "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
-      "merge_sha": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
-      "checks": "12 SUCCESS; publication SKIP",
-      "tree_identity": "merge tree equals tested head tree bab37cd13c1c28f6effa82c6219bc5f6ec917b1d",
-      "community_merge": false,
-      "release": false
-    },
-    {
-      "pr": 230,
-      "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
-      "merge_sha": "ea08faf39e107113ae50a529770ce1ca1a422d05",
-      "checks": "11 SUCCESS",
-      "tree_identity": "merge and tested head tree651bfd172574b21396288684dbc16c4b59f7e1a6",
-      "community_merge": false,
-      "release": false
-    },
-    {
-      "pr": 232,
-      "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
-      "merge_sha": "376ed4c15c76ccf1b5e3b70985e681946bffd249",
-      "checks": "11 SUCCESS",
-      "tree_identity": "integration merge tree65c21c119dbb932605326fd457d0dd8579f4393e equals tested head tree65c21c119dbb932605326fd457d0dd8579f4393e",
-      "community_merge": false,
-      "release": false
-    },
-    {
-      "pr": 233,
-      "head": "80764aca73d50ff7325f581bb87d732af84df914",
-      "tested_synthetic": "2790c19be586c40212b7d6ad614d32f4964bdbd6",
-      "merge_sha": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
-      "checks": "11 PASS",
-      "tree_identity": "tested tree323c011622615b22a21beadb0782e2f869158d11 equals final merge tree323c011622615b22a21beadb0782e2f869158d11",
-      "community_merge": false,
-      "release": false
-    },
-    {
-      "pr": 238,
-      "head": "134dfbee08ef5a06664bcd1ed37bca0ea1a573b9",
-      "merge_sha": "76a73d276cc7e3d671e6e07f8f33aafb6ee1f96c",
-      "tested_synthetic": "c9a703a1176b2d0d4d52174eed8aeb6e2a8ddb93",
-      "tree": "d4b9e59d06dc5bf394045caeb90aeaaca55b1b2e",
-      "checks": "12 SUCCESS; Work Items publication SKIP",
-      "included_prs": [
-        225,
-        231,
-        234
-      ],
-      "community_merge": false,
-      "release": false
-    },
-    {
-      "pr": 239,
-      "head": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
-      "merge_sha": "7758ec168524e96900bdc0f47b1e379a55a91536",
-      "tested_synthetic": "7569eb48d5a1dba2f9bab77a59fbe60019483c15",
-      "tree": "96312a775d23114de2ae6ba35ac0987650356117",
-      "checks": "10 SUCCESS; retargeted merge tree identical",
-      "included_prs": [
-        235,
-        236
-      ],
-      "community_merge": false,
-      "release": false
-    },
-    {
-      "pr": 241,
-      "head": "bd1661393b71d92779bb405cfb92372442b340ac",
-      "merge_sha": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
-      "tested_synthetic": "dfc4442bf2b0310d8965035910d1ac3512b2f21d",
-      "tree": "d3e7e0178ea28322b924eee99e08e693065dda97",
-      "checks": "All five workflows SUCCESS; Linux/macOS/Windows native process/browser/storage/history gates PASS",
-      "included_prs": [
-        237,
-        240
-      ],
-      "community_merge": false,
-      "release": false
-    }
+    "PR250 merged as 3ed98ddbac3354c59414b8411b295db2e15d3545; partial foundations for #91/#129/#151 are INTEGRATED, with all original issue contracts and accounting preserved."
   ],
-  "evidence_archive": "evidence/community-20261009-acceleration.zip",
-  "evidence_archive_sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48",
+  "evidence_archive": "evidence/community-20261009-convergence.zip",
+  "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
   "archive_manifest": {
-    "created_at": "2026-10-09T17:00:00.936955+00:00",
-    "integration_head": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
-    "scope": "Active engineering snapshot; no freeze, whole issue acceptance or publication. Dirty patches explicitly UNVERIFIED. Worker changes after timestamp remain separate.",
+    "created_at": "2026-10-09T18:49:37.298982+00:00",
+    "integration_head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+    "scope": "Active engineering checkpoint, not a freeze. Historical failures and corrected receipts retained. Dirty patches UNVERIFIED. No whole-issue acceptance or registry publication inferred.",
     "files": [
       {
-        "path": "native-checkpoint-evidence/admission-bd166139.json",
-        "bytes": 17773,
-        "sha256": "5e22c22419cf44cce596fa72fab07f756d93b606a28e66a6ab19ebb2cd6c5ddf"
+        "path": "admission-evidence/admission-e032e95d.json",
+        "bytes": 1343,
+        "sha256": "bd41f70fc41c226fb13c962b320cba7b53d861cb4c202546b760544d356d875b"
       },
       {
-        "path": "native-checkpoint-evidence/combined-gates.log",
-        "bytes": 175131,
-        "sha256": "ff4a391900337f4087ad475606d996fb5a1a4f847270f08c29ea7fde5ecf34c4"
+        "path": "admission-evidence/pr250-review-e032e95d.md",
+        "bytes": 3209,
+        "sha256": "bad94fa9f827afebcd9a5d5cb2cde3fc8f428b0d456aaebafcf725ffbd3bf7e0"
       },
       {
-        "path": "followup-admission-evidence/retarget-tree-proof.json",
-        "bytes": 623,
-        "sha256": "418d28a24ba1c56b9f4c9d95d2e5eac5d0c813e127a831dc0bd7a0f2e011c189"
+        "path": "admission-evidence/convergence-helper103-interrupted.json",
+        "bytes": 467,
+        "sha256": "d0789dcb3a760ee29fae83a280a06fce364035c0a0dd0e09105825138ce0ff51"
       },
       {
-        "path": "robot-final-copy-evidence/independent-review-7d256392.md",
-        "bytes": 1925,
-        "sha256": "f46b4d20c3bb118dcd2732204db97998e4f0c5c712a5f62843faefc45ba075aa"
+        "path": "admission-evidence/convergence-helper103-package-gates.log",
+        "bytes": 22905,
+        "sha256": "a0f6caa54a9866d5b454a907f1a93aead68f6abe45c5deb54f9e67f0898244df"
       },
       {
-        "path": "robot-final-copy-evidence/independent-package-yaml-review-711165f3.md",
-        "bytes": 1328,
-        "sha256": "0df1acf5fafd3be470d4eb618c74184f1154b619e576569cbab62eab10e7ee1d"
+        "path": "admission-evidence/convergence-helper103-package-gates-rerun.log",
+        "bytes": 247949,
+        "sha256": "81ad27fbc107bbf890aa8efff2425c958add3f3721d5253333a95aff387744ca"
       },
       {
-        "path": "robot-final-copy-evidence/package-yaml-integration-gates.log",
-        "bytes": 5422,
-        "sha256": "9fb83c7b68cdf80de5541e2a3443fc963d9a3da3a0c11bc54be9dc478315b053"
+        "path": "admission-evidence/convergence-static-final.log",
+        "bytes": 5191,
+        "sha256": "c50e4e39e82959ba5e822200080b1f1f0b34647d8565816b805b0c5ab75b3199"
       },
       {
-        "path": "robot-final-copy-evidence/root-capability-followup.md",
-        "bytes": 8258,
-        "sha256": "5e02c2ce45b8318546995e7277db65ca769564cdf24036e217e8c2f71b498888"
+        "path": "admission-evidence/independent-upstream-reporting-review-85e7f1ef.md",
+        "bytes": 5779,
+        "sha256": "db97d36b3719f178c0a5ba6ff631249be7ca3e2333dbf59ae5a02e1d0ae81a11"
       },
       {
-        "path": "workitems-triage-evidence/independent-native-consumer-review-f21fe200.md",
-        "bytes": 4102,
-        "sha256": "684c430f744d78be3ff8f5a00d2235acc9e2796c74cfa7203f25821c2aedbd38"
+        "path": "admission-evidence/independent-upstream-reporting-review-57399b60.md",
+        "bytes": 5401,
+        "sha256": "3e25189a6035699fddef987d164ad88c7a73506052b91a7b382cace634452415"
       },
       {
-        "path": "workitems-triage-evidence/native-consumer-gate-f21fe200.json",
-        "bytes": 3791,
-        "sha256": "0796816130d16ce6556b2ed55aa9b0931cbb0a4b6947c5c71e60ff8879f13ca9"
+        "path": "release-lane/independent-helper-review-00beb890.md",
+        "bytes": 1896,
+        "sha256": "300fa7a30b850c842bc2a9a3e986ceb1e52aed2a2f319c4acfc8fa153ab309e8"
       },
       {
-        "path": "workitems-triage-evidence/pr243-cors-investigation-348.md",
-        "bytes": 4168,
-        "sha256": "543409b2e66c7960d5313164f3b4b9322774eae3adc1fdbde6cb48d2214e0bd2"
+        "path": "release-lane/http-helper-1.0.3-00beb890-build-install-receipt.json",
+        "bytes": 1505,
+        "sha256": "c57d27f508dcddd9d5577ee731db04012479d859aecff5d4b86c331486512884"
       },
       {
-        "path": "release-lane/pr243-runtime-validator-failure-20261009.json",
-        "bytes": 2469,
-        "sha256": "077f05e3405db3d40c59078e805c339f8b76a6cb676cd5b9835b64ee51096fe1"
+        "path": "release-lane/pr249-rcc-cors-diagnosis-20261009.json",
+        "bytes": 6314,
+        "sha256": "3f142785156576695913ff2d95880bec01a1ceaefb03bd2b56123bb3170e3061"
       },
       {
-        "path": "release-lane/independent-helper-review-348224f1.md",
-        "bytes": 4617,
-        "sha256": "026726e56afdacc98b07ed40be070805ddd885b4d26fc1662b635a5f9736492d"
+        "path": "release-lane/helper-admission-and-tag.json",
+        "bytes": 1422,
+        "sha256": "f1433839f60cdebe7044967d94cbd06032631859028b28189658d8c6ef58e364"
       },
       {
-        "path": "release-lane/dependency-promotion-plan-20261009.md",
-        "bytes": 7421,
-        "sha256": "b68992af7c1bdd6933cf8f8f6fcfdb0946368fce7c844c7c47dd96a389892867"
+        "path": "release-lane/helper-credential-availability.json",
+        "bytes": 597,
+        "sha256": "74183a70c7955d2ce2a4ec4b2c4b2842e386d59bafc6a4ae4ab590403729c998"
       },
       {
-        "path": "release-lane/candidate-gate-matrix-20261009.json",
-        "bytes": 4500,
-        "sha256": "4d77929f79968dea2f41a771846c31d659dba2ec689a3b089cc14528d3ebb4fd"
+        "path": "release-lane/helper-credential-availability-attempt3.json",
+        "bytes": 622,
+        "sha256": "4d71801d4ea8705fa454db29b0bd8ad089b05e56b9075f5ea3bc3f7605ac6c80"
       },
       {
-        "path": "architecture-evidence/deployment-schema-probe-final.junit.xml",
-        "bytes": 766,
-        "sha256": "0db53d925814dafc6dd4880afb2f4aab637b3deaed190317d056b72436040682"
+        "path": "release-lane/credential-check-shell-validation.log",
+        "bytes": 3702,
+        "sha256": "6bfda9d2b2fe6edb719dbc60b6445c2f7f5b6487dd11808d0753d3aa653a9522"
       },
       {
-        "path": "architecture-evidence/deployment-schema-sqlite-post-merge.junit.xml",
-        "bytes": 420,
-        "sha256": "a45222d4bf801e43e2a2b388929b7662e897eee133bea82821d89b5dbefce89b"
+        "path": "worker-exit-evidence/acceptance-29f213e0.json",
+        "bytes": 1650,
+        "sha256": "f0fbde5b5e5e3fbb395bcdd8cf40859c1830231796697cb8527983bfddaf8335"
       },
       {
-        "path": "architecture-evidence/independent-review-8a052fb.md",
-        "bytes": 7789,
-        "sha256": "ac9737f783eba68c0bae624986c2fa95cdb754751c6311fb0a2dce5339f78e45"
+        "path": "worker-exit-evidence/acceptance-ae6db6b8.json",
+        "bytes": 3056,
+        "sha256": "187029f17214a2027f4fcf2c08d4161e41ad549d249d0686af9ee551618d3ab2"
       },
       {
-        "path": "evidence/acceleration-worker-inventory.json",
-        "bytes": 14543,
-        "sha256": "883a51cb1d6af11e8449e47eb9b59cf72bfd18b5c23f4235f2d51ac4e4dd2074"
+        "path": "worker-exit-evidence/acceptance-ef9195da.json",
+        "bytes": 9016,
+        "sha256": "905d928cd708c7435d35d138acdf774c1536227763a0a0422e9cd9753e75eea6"
       },
       {
-        "path": "evidence/independent-acceleration-governance-review.md",
-        "bytes": 1369,
-        "sha256": "aef63b24a370125a8f4807b7aeb23f9f0ccd23b2f96520678031503ce3b3aab0"
+        "path": "worker-exit-evidence/sol-rcc-trust-policy-review.md",
+        "bytes": 25154,
+        "sha256": "d40f9772c4a19c8ce9544ecb3d0bb87a0a096b14427ae5f46cb385187845248b"
       },
       {
-        "path": "evidence/acceleration-hosted-snapshot.json",
-        "bytes": 11488,
-        "sha256": "951be75b1fcd8b3cd6eb02a01d451b21d2644168bcbc46a855874dd40f279c35"
+        "path": "worker-exit-evidence/acceptance-fb220383.log",
+        "bytes": 9043,
+        "sha256": "828543e70f3918ad413fc52a0c052ede2aeb7e26c15f1a94cf2cabdb1f82a640"
       },
       {
-        "path": "evidence/completed-input-download-deduplication.json",
-        "bytes": 51613,
-        "sha256": "29f82a9ca45017dbf922f58695c898b9a0ec02ddc49a615204135d266cdb6c06"
+        "path": "worker-exit-evidence/acceptance-2c7ec2de.log",
+        "bytes": 9291,
+        "sha256": "83b406b775c782492ea0566e1ee7b52fc1794902e18ea698e109067d075e4b4a"
       },
       {
-        "path": "evidence/acceleration-fourth-test-venv-reclamation.json",
-        "bytes": 314,
-        "sha256": "057d6fadd53294d571091a4c7be7393ddce216394a1d08bfe5fb3bf61edc529f"
+        "path": "worker-exit-evidence/provider-trust-negative-preflight-2c7ec2de.json",
+        "bytes": 1384,
+        "sha256": "b452912cf9c874372568ae27c1f4dbe113e02e315be4e843e2d5e1a2a7952a48"
       },
       {
-        "path": "evidence/postgres17-version.txt",
-        "bytes": 89,
-        "sha256": "56d52d05ba1922de7da5676f4d6310ad53da196d0e07460f2a140f01cc84e12b"
+        "path": "worker-exit-evidence/provider-trust-negative-preflight-2c7ec2de-correction.json",
+        "bytes": 2038,
+        "sha256": "9dcb44df322b8e8e85e7c2366f07c9154d515d4daace714590c348a0ef092684"
       },
       {
-        "path": "evidence/postgres17-container.json",
-        "bytes": 8531,
-        "sha256": "116873c51edb26908da47cea9758808e0bfeed91c102235ee13d67e955f76540"
+        "path": "architecture-evidence/proposed-rcc-upstream-reporting.md",
+        "bytes": 2318,
+        "sha256": "29ea86e4176a6ed0810ce2dd8dee68298fd82550c22ce3d3f81a8ba488b858dc"
       },
       {
-        "path": "evidence/postgres17-service.log",
-        "bytes": 19204,
-        "sha256": "c23128fbfc7fd0fe0b2c6c29a7dc0c3cfb162a7550e3bf8d838a32946fd8e1d9"
+        "path": "evidence/actions-core-release-20261009/core-ci-portability-repair.md",
+        "bytes": 3362,
+        "sha256": "2d08c1025564e8de930ad881dad48d9be90d3080d6658ab294db6f4995d2688f"
       },
       {
-        "path": "evidence/postgres17-linux-amd64-manifest.json",
-        "bytes": 2707,
-        "sha256": "3eb9b78b96cba65d0ff8a35cddeaaa921f5abc9178e67b2c01fe4443f042aa0c"
+        "path": "evidence/convergence-worker-inventory.json",
+        "bytes": 5980,
+        "sha256": "653d7a80fb8c31f45ec3528ff3b9109a719d7a71950611f478adee3985656824"
       },
       {
-        "path": "worker-exit-evidence/sol-retirement-review.md",
-        "bytes": 12941,
-        "sha256": "4fba1d79ec9e89a15c4cc4fdccc2d4c2e70e32b69a86fd25f0a046b6e4ac0559"
+        "path": "evidence/convergence-hosted-snapshot.json",
+        "bytes": 8920,
+        "sha256": "7521648ad2f978f284816048fc1edca9fa66438fbc9ed25877d373ac45f97921"
       },
       {
-        "path": "evidence/acceleration-worker-inventory-patches/rcc-UNVERIFIED.patch",
-        "bytes": 2473,
-        "sha256": "2cc528313e65aca9b44cc148e639642dea2a08ca650f6f1be72b8d40a9d87064"
+        "path": "evidence/cas-worker-01-readiness-20261009.json",
+        "bytes": 2914,
+        "sha256": "64e1b9afc48a5652ab9d00bc91afa6c15cea0685a9ab45b0cea78dc3c894ee9c"
       },
       {
-        "path": "evidence/acceleration-worker-inventory-patches/worker-exit-UNVERIFIED.patch",
-        "bytes": 56352,
-        "sha256": "cd6d62e70e3c038113bc35371a2e7eeae3e50ab601646d313d7b188a42771231"
+        "path": "evidence/cas-readiness-dispatch-request.json",
+        "bytes": 1373,
+        "sha256": "9f5142443fa6c7aba8d00765f1dc34258dfa51b7b8a1e35f4a82b85fef38a2d6"
       },
       {
-        "path": "evidence/acceleration-worker-inventory-patches/workitems-UNVERIFIED.patch",
-        "bytes": 20194,
-        "sha256": "92e0e5dfef7757f124f290218e370005d5843109d256cfa40fae9d56c1413844"
+        "path": "evidence/cas-bootstrap-dispatch-request.json",
+        "bytes": 3618,
+        "sha256": "7fc72a9b340188465d8610a115f4720a9a37fa3f1dff3466edd326c930e66505"
       },
       {
-        "path": "evidence/acceleration-worker-inventory-patches/workitems-ci-UNVERIFIED.patch",
-        "bytes": 18313,
-        "sha256": "98d895c2caf7e4cf697215956a19365a0d2cb217932fdd1abf09290f7e3e41b5"
+        "path": "evidence/cas-worker-01-paused-checkpoint-20261009.json",
+        "bytes": 3102,
+        "sha256": "1713af44291d8662e3e6f06048a5b82d86e486d1893e8ec7bc21044c9bec785c"
+      },
+      {
+        "path": "evidence/completed-test-download-hardlink-recovery.json",
+        "bytes": 16316,
+        "sha256": "37f7fa3258570ca8c87589910d03a59c7083a8eafa261ada2b8d3eda3a98956c"
+      },
+      {
+        "path": "evidence/inactive-generated-venv-reclamation-20261009.json",
+        "bytes": 78640,
+        "sha256": "6eef27d63c5bf9e94f4d0c5ddadb822c09262155914fb663750582fe38aecd0a"
+      },
+      {
+        "path": "release-lane/pr249-cors-root-cause-addendum-20261009.md",
+        "bytes": 2640,
+        "sha256": "23f5de7c2abb370b9cccf2357db23a76af39045143797fc7a6693e2fde5267fa"
+      },
+      {
+        "path": "release-lane/independent-helper-cors-review-f2dd54cc.md",
+        "bytes": 5651,
+        "sha256": "9d81e2280aa520f69db69cf5cf922cb02a0231fb2edb7dd162e852e1ce673206"
+      },
+      {
+        "path": "release-lane/sol-cors-review.md",
+        "bytes": 8989,
+        "sha256": "d64a62e65456a1d73a50689d9a5948a1683c1d9ce73bac372b6ffcc91e07279f"
+      },
+      {
+        "path": "release-lane/runtime-f2dd54cc-configured.log",
+        "bytes": 105519,
+        "sha256": "6e1aad211fe26680b6dbb32cb0422023806d913db01ee5f1ede510bed1d50a22"
+      },
+      {
+        "path": "worker-exit-evidence/acceptance-f4e03108.json",
+        "bytes": 9631,
+        "sha256": "38e01df3994631c25ea8714720cd2aab8c93578830965da0f9488ce7c639f58c"
+      },
+      {
+        "path": "worker-exit-evidence/acceptance-f4e03108.log",
+        "bytes": 22872,
+        "sha256": "472d8f4ecb8ff8bc1f568f1bcd33520a6b4e92bbca6ffc89ad858aa1da97b704"
+      },
+      {
+        "path": "worker-exit-evidence/local-publish-diagnostic/receipt.json",
+        "bytes": 5772,
+        "sha256": "d9f9f41eadfc23f61bef6a087a0d45973b512d9c27ec53e9a680ad3641a98862"
+      },
+      {
+        "path": "evidence/convergence-worker-inventory-patches/governance-UNVERIFIED.patch",
+        "bytes": 134381,
+        "sha256": "4c7a442223ca19588b6174c03bbb90f71c5800b3f55fa76c8d6ee4aaec9773eb"
       },
       {
         "path": "governance/community-execution-graph.json",
-        "bytes": 45812,
-        "sha256": "1c5607c5bba0a3dc71baab5b8ade345706808017ef6c79200ef0413e1ff2b314"
+        "bytes": 46740,
+        "sha256": "6a3cb6d690f8f59efbbb63def813450719a78c5a2689f26e32786487b79fe3fe"
       },
       {
         "path": "governance/community-execution-graph.md",
-        "bytes": 13225,
-        "sha256": "b136a707e913cc5a13830d114050bb3ccc612a8a96677ea2d4eab851266e886e"
+        "bytes": 12459,
+        "sha256": "1fda2474680510c0d72a47dd8f9a42f0accd8d0ba66de9d224cfa8c3641939ae"
       }
     ]
   },
@@ -1165,6 +925,10 @@
     {
       "path": "evidence/community-20261009-cloud-admission.zip",
       "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0"
+    },
+    {
+      "path": "evidence/community-20261009-acceleration.zip",
+      "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
     }
   ],
   "inventory_scope": "Timestamped actual18 worktrees; concurrent work continues; dirty patches labeled UNVERIFIED. Read-only review lanes have no separate mutable checkout. No clean/stopped inference for Dakota.",
@@ -1248,6 +1012,38 @@
     {
       "lane": "Root/source filesystem capabilities",
       "disposition": "DEFERRED broader root/symlink policy and descriptor-relative publication until compatibility contract is reviewed; no speculative rejection of symlinked user homes."
+    },
+    {
+      "lane": "Core producer/consumer review",
+      "disposition": "ACCEPTED producer wheel proof versus current integration consumer imports/version-floor distinction; root will add exact proposed paragraph to convergence guide."
+    },
+    {
+      "lane": "Corrected Helper review",
+      "disposition": "ACCEPTED full package projection and exact artifact/source/import-path binding; repeated-header fix active. Never retry immutable omitted-fix tag."
+    },
+    {
+      "lane": "Warm RCC independent review",
+      "disposition": "ACCEPTED phase-specific counter and receipt attribution corrections; assigned to D. Lifecycle inspect readiness cannot replace verified acquisition."
+    },
+    {
+      "lane": "Core hosted regression diagnosis",
+      "disposition": "Actions-owned test-placement defect; Core PR248 df7b0d66 passes local294, clean installed-wheel, and all five hosted workflows. Runtime publish steps were skipped; no upstream defect or publication claim."
+    },
+    {
+      "lane": "Upstream reporting policy",
+      "disposition": "Draft dispatch/completion contract linked to docs/skills/upstream-reporting.md at PR252 head57399b60. Require evidence, source owner/version, issue/PR deduplication, issue-only authorization, private security routing, downstream follow-up, and explicit no-upstream finding when appropriate."
+    },
+    {
+      "lane": "Upstream reporting final admission",
+      "disposition": "ACCEPTED canonical policy PR252, F independent57399b60 review and all3hostedPASS; applies all dispatch/completion receipts. RCC compatible proposal only, noRCCmutation."
+    },
+    {
+      "lane": "CORS import-isolation review",
+      "disposition": "ACCEPTED PR249 f2 canonical importalias lesson, exact441/10 log and reported focusedredgreen; extra Sol paragraph REJECTED AS DUPLICATE. Existing209 updated6087143055."
+    },
+    {
+      "lane": "CAS bootstrap",
+      "disposition": "ACCEPTED handoff distinction: CAS machine target versus project cwd, exact per-worker identity, native policy capability limitation, pinned Doctor fallback. No invented fullaccess parameter or foreigncwd."
     }
   ],
   "post_archive_observations": [
@@ -1318,6 +1114,23 @@
     {
       "observed_at": "2026-10-09T16:20:41.748647+00:00",
       "event": "Sealed completed combined-gate logs and independent reviews for PR238/239; local gates PASS, hosted admission remains pending. Current worktree inventory is timestamped separately. Archive errata retract earlier incorrect Devsy READY transcription."
+    },
+    {
+      "observed_at": "2026-10-09T17:20:11.207377+00:00",
+      "event": "After immutableaccelerationarchive: PR242 admittedexacttree40e9d3d7. HelperPR243 admittedcommunityexacttree492a80bf andunusedtagactions_http-1.0.2 created; HTTPHelperRelease37965200135 inprogress, no registrypublicationclaim. FreshRCCloopback29f213e0 sixcellsPASS; PR247pendinghosted."
+    },
+    {
+      "observed_at": "2026-10-09T17:23:07.875978+00:00",
+      "event": "Helper37965200135 publicationfailed closed on emptysecret beforeupload. Subsequentfullpackagecomparison found omitted023597ab redirectfix. Oldtagmustnotretry; rootpreparingcorrectedcandidatewithimmutableversionconstraint. Earlierall-greenPRchecks were real butdidnotcoveromittedintegrationregression."
+    },
+    {
+      "observed_at": "2026-10-09T18:51:42.169962+00:00",
+      "scope": "After immutable convergence archive, preserve snapshot and record later checkpoints separately",
+      "architecture_pr": 254,
+      "architecture_head": "615ed99b47e5273353916928ec1c06c5c70928e5",
+      "trust_pr": 253,
+      "trust_head": "170c89e23139fd7d020e93d8afb3e3ac945e06db",
+      "state": "Both draft checkpoints pending independent final admission; no full issue completion"
     }
   ],
   "admission_checkpoint": {
@@ -1419,6 +1232,10 @@
       "field": "devsy.latest_user_state",
       "recorded_value": "READY",
       "correction": "Same incorrect transcription; superseded by update3 and current Devsy state. No provisioning, retry, recreation, dispatch or use authorized or performed."
+    },
+    {
+      "archive": "evidence/community-20261009-convergence.zip",
+      "erratum": "Archived graph Markdown carried older18:36 observation header while graphJSON/inventory correctly state18:48. Stages/counts agree; current Markdown header corrected without rewriting archive."
     }
   ],
   "historical_snapshots": {
@@ -2330,378 +2147,38 @@
     "actual_merge_sha": "a99b45d6a846be15d5130fc0ff25119474dcee6f"
   },
   "release_blockers": [
-    "Helper PR243 exact candidate Runtime wheel inventory tag-order rejection; reuse already-reviewed semantic inventory repair without weakening exact artifact safeguards.",
-    "Helper PR243 RCC Linux primary and N-1 full-suite CORS WebSocket failure; focused module passes, independent suite-context diagnosis active.",
-    "Core1.0.2 and Runtime/native1.0.3 publication require their own admitted exact candidates, installed registry compatibility, native/security/browser/RCC gates and external artifact readback.",
-    "Actual current-source frozen/Go Work Items consumer installation failed in PR242; older retained binary success is not current-source proof.",
-    "Completed-worker RCC retirement ownership/accounting under repair; no successful replacement for failed exact RCC acceptance receipt."
+    "DO NOT RETRY or move actions_http-1.0.2: immutable tag omitted the redirect fix and its release failed before upload.",
+    "Corrected Helper1.0.3 PR249 f2dd54cc has independently accepted source/artifact projection and Runtime441/10skip plus Helper12. Ordered import-isolation reproduction fails before and passes after the existing11-line fix. Exact successor hosted gates remain required.",
+    "Credential availability PASS at run37970443665 attempt3 in pypi; PyPI authentication/upload permission remains unverified. No Helper1.0.3 tag/publication yet.",
+    "Core1.0.2 PR248 df7b0d66 passed configured294, installed-wheel and all5hosted workflows; actual Helper registry verification precedes Core promotion. Preserve exact-source proof after base changes.",
+    "Runtime/native1.0.3 still requires applicable native/browser/security/RCC/consumer/registry gates and external artifact readback. Workflow names and partial foundations do not establish publication.",
+    "Actions trust-context source f4e03108 and actual same-selected-provider503-before-exec negative are independently accepted narrowly. Whole offline-warm harness remains FAIL, because configured provenance carrier must be reachable. Full134 remains unfinished; earlier422/ENOSPC evidence retained without retrospective cause claims.",
+    "Robot root/source identity, Windows ACL, live tunnel/provider TLS and remaining contracts are open. Public MCP Apps authoring under100 retains its125 prerequisite; bounded ADR work does not waive it."
   ],
   "resource_management": {
     "disk_after_input_deduplication": "7.8 GiB free of32GiB",
     "receipt": "completed-input-download-deduplication.json",
-    "scope": "95 byte-identical completed downloaded CLI inputs hardlinked, all paths/content retained; source, unique artifacts, wheelhouses and receipts preserved. No worker canceled."
+    "scope": "95 byte-identical completed downloaded CLI inputs hardlinked, all paths/content retained; source, unique artifacts, wheelhouses and receipts preserved. No worker canceled.",
+    "latest_recovery": {
+      "receipt": "evidence/inactive-generated-venv-reclamation-20261009.json",
+      "download_dedup": "evidence/completed-test-download-hardlink-recovery.json",
+      "scope": "Inactive reproducible venvs only; exact identical test downloads hard-linked with all paths preserved. No source, receipts or unique artifacts removed; no workers signaled."
+    }
   },
   "execution_graph": {
-    "path": "community-execution-graph.json",
+    "file": "community-execution-graph.json",
     "counts": {
-      "READY": 1,
-      "ACTIVE": 4,
-      "REVIEW": 13,
       "BLOCKED": 30,
-      "INTEGRATED": 6,
+      "INTEGRATED": 10,
+      "ACTIVE": 5,
+      "REVIEW": 9,
       "COMPLETE": 0
     },
-    "scope": "Operational overlay; REVIEW/INTEGRATED are partial slices, not full owning-issue acceptance. Historical issue states/accounting remain unchanged."
+    "whole_contract_complete": 0
   },
   "live_inventory": {
-    "schema_version": 1,
-    "captured_at_utc": "2026-10-09T16:55:02Z",
-    "source": "git worktree list --porcelain from /workspace/actions; per-path git status --porcelain=v1 --untracked-files=all and rev-parse HEAD/branch",
-    "scope": "read-only worker/worktree inventory; no source, governance, process, or credential changes",
-    "known_assignments": [
-      {
-        "worker": "A",
-        "assignment": "Helper 1.0.2 release/publication",
-        "issue": 210,
-        "worktree_path": "/workspace/work/community-resume/workitems",
-        "mapping_basis": "root assignment plus release/http-helper branch; worktree currently contains unrelated dirty Runtime-release files, flagged for confirmation"
-      },
-      {
-        "worker": "B",
-        "assignment": "Work Items native gate / PR 242",
-        "issue": 208,
-        "worktree_path": "/workspace/work/community-resume/workitems-ci",
-        "mapping_basis": "root assignment plus test/native-workitems-ci branch"
-      },
-      {
-        "worker": "C",
-        "assignment": "CORS investigation (read-only)",
-        "issue": 153,
-        "worktree_path": null,
-        "mapping_basis": "root assignment; no dedicated source worktree identified confidently; do not infer from clean tunnel/integration checkouts"
-      },
-      {
-        "worker": "D",
-        "assignment": "RCC retirement",
-        "issue": 134,
-        "worktree_path": "/workspace/work/community-resume/worker-exit",
-        "mapping_basis": "root assignment plus repair/rcc-graceful-retirement branch"
-      },
-      {
-        "worker": "E",
-        "assignment": "#129 PR 245 independent review",
-        "issue": 129,
-        "worktree_path": "/workspace/work/community-resume/deployment-admission",
-        "mapping_basis": "root assignment plus feature/deployment-admission branch at exact PR 245 head"
-      },
-      {
-        "worker": "F",
-        "assignment": "Independent review",
-        "issue": null,
-        "worktree_path": null,
-        "mapping_basis": "root assignment; read-only review lane, no separate implementation worktree"
-      }
-    ],
-    "actual_git_worktrees": [
-      {
-        "path": "/workspace/actions",
-        "head": "7c98236069171f57031218f938963238986293bd",
-        "branch_ref": "refs/heads/work",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "work",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/admission",
-        "head": "bd1661393b71d92779bb405cfb92372442b340ac",
-        "branch_ref": "refs/heads/integration/cloud-native-checkpoints-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "integration/cloud-native-checkpoints-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/convergence",
-        "head": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
-        "branch_ref": "refs/heads/integration/community-release-20261008",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "integration/community-release-20261008",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/deployment-admission",
-        "head": "6e94860c0b8fc2692727982a57ce635063c86ce4",
-        "branch_ref": "refs/heads/feature/deployment-admission-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "feature/deployment-admission-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": "E"
-      },
-      {
-        "path": "/workspace/work/community-resume/governance",
-        "head": "51806553b0bd2e1104e9e048283e0e9931078cac",
-        "branch_ref": "refs/heads/resume/community-evidence-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "resume/community-evidence-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/integration",
-        "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
-        "branch_ref": "refs/heads/resume/community-blockers-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "resume/community-blockers-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/rcc",
-        "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
-        "branch_ref": "refs/heads/resume/rcc-review-20261009",
-        "status_porcelain": [
-          "?? work/pr235-body.md"
-        ],
-        "dirty": true,
-        "changed_paths": [
-          "work/pr235-body.md"
-        ],
-        "branch": "resume/rcc-review-20261009",
-        "upstream": null,
-        "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/rcc-UNVERIFIED.patch",
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/robot",
-        "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
-        "branch_ref": "refs/heads/resume/robot-native-gates-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "resume/robot-native-gates-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/robot-cleanup",
-        "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
-        "branch_ref": "refs/heads/repair/robot-cleanup-ownership-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "repair/robot-cleanup-ownership-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/robot-final-copy",
-        "head": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
-        "branch_ref": "refs/heads/test/robot-package-yaml-admission-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "test/robot-package-yaml-admission-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/robot-staging",
-        "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
-        "branch_ref": "refs/heads/repair/robot-private-staging-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "repair/robot-private-staging-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/tunnel",
-        "head": "554630899c6eab23b922ba6558347e7f2c439c00",
-        "branch_ref": "refs/heads/resume/tunnel-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "resume/tunnel-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/tunnel-edge",
-        "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
-        "branch_ref": "refs/heads/feature/tunnel-edge-verification-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "feature/tunnel-edge-verification-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/wheel-inventory",
-        "head": "ea08faf39e107113ae50a529770ce1ca1a422d05",
-        "branch_ref": "refs/heads/repair/runtime-wheel-inventory-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "repair/runtime-wheel-inventory-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/worker-exit",
-        "head": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
-        "branch_ref": "refs/heads/repair/rcc-graceful-retirement-20261009",
-        "status_porcelain": [
-          "M action_server/src/actions/server/_actions_process_pool.py",
-          " M action_server/src/actions/server/_common/process.py",
-          " M action_server/src/actions/server/_preload_actions/preload_actions_streams.py",
-          " M action_server/src/actions/server/_rcc_runtime_adapter.py",
-          " M action_server/tests/action_server_tests/test_preload_actions_exit.py",
-          " M action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
-          " M docs/skills/repository-operations.md"
-        ],
-        "dirty": true,
-        "changed_paths": [
-          "ction_server/src/actions/server/_actions_process_pool.py",
-          "action_server/src/actions/server/_common/process.py",
-          "action_server/src/actions/server/_preload_actions/preload_actions_streams.py",
-          "action_server/src/actions/server/_rcc_runtime_adapter.py",
-          "action_server/tests/action_server_tests/test_preload_actions_exit.py",
-          "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
-          "docs/skills/repository-operations.md"
-        ],
-        "branch": "repair/rcc-graceful-retirement-20261009",
-        "upstream": null,
-        "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/worker-exit-UNVERIFIED.patch",
-        "known_worker_assignment": "D"
-      },
-      {
-        "path": "/workspace/work/community-resume/workitems",
-        "head": "348224f169fab5f19b0b7504d2b701237a056ef6",
-        "branch_ref": "refs/heads/release/http-helper-1.0.2-20261009",
-        "status_porcelain": [
-          "M .github/workflows/_gen_workflows.py",
-          " M .github/workflows/actions_runtime_pypi_release.yml",
-          " M action_server/scripts/publish_verified_runtime.py",
-          "M  devutils/tests/test_runtime_release_workflows.py",
-          "M  docs/skills/repository-operations.md"
-        ],
-        "dirty": true,
-        "changed_paths": [
-          "github/workflows/_gen_workflows.py",
-          ".github/workflows/actions_runtime_pypi_release.yml",
-          "action_server/scripts/publish_verified_runtime.py",
-          "devutils/tests/test_runtime_release_workflows.py",
-          "docs/skills/repository-operations.md"
-        ],
-        "branch": "release/http-helper-1.0.2-20261009",
-        "upstream": null,
-        "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/workitems-UNVERIFIED.patch",
-        "known_worker_assignment": "A"
-      },
-      {
-        "path": "/workspace/work/community-resume/workitems-artifacts",
-        "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
-        "branch_ref": "refs/heads/feature/workitems-native-artifact-manifest-20261009",
-        "status_porcelain": [],
-        "dirty": false,
-        "changed_paths": [],
-        "branch": "feature/workitems-native-artifact-manifest-20261009",
-        "upstream": null,
-        "unverified_patch": null,
-        "known_worker_assignment": null
-      },
-      {
-        "path": "/workspace/work/community-resume/workitems-ci",
-        "head": "f21fe2002c6ec29262d044313029faedc334a7cf",
-        "branch_ref": "refs/heads/test/native-workitems-ci-20261009",
-        "status_porcelain": [
-          "M action_server/scripts/dakota_workitems_native_acceptance.py",
-          " M action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py",
-          " M action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
-          " M docs/skills/work-items.md"
-        ],
-        "dirty": true,
-        "changed_paths": [
-          "ction_server/scripts/dakota_workitems_native_acceptance.py",
-          "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py",
-          "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
-          "docs/skills/work-items.md"
-        ],
-        "branch": "test/native-workitems-ci-20261009",
-        "upstream": null,
-        "unverified_patch": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/workitems-ci-UNVERIFIED.patch",
-        "known_worker_assignment": "B"
-      }
-    ],
-    "preserved_unverified_patches": [
-      {
-        "worktree_path": "/workspace/work/community-resume/rcc",
-        "patch_path": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/rcc-UNVERIFIED.patch",
-        "sha256": "2cc528313e65aca9b44cc148e639642dea2a08ca650f6f1be72b8d40a9d87064",
-        "bytes": 2473,
-        "credential_pattern_redaction": false,
-        "status_entries": 1
-      },
-      {
-        "worktree_path": "/workspace/work/community-resume/worker-exit",
-        "patch_path": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/worker-exit-UNVERIFIED.patch",
-        "sha256": "cd6d62e70e3c038113bc35371a2e7eeae3e50ab601646d313d7b188a42771231",
-        "bytes": 56352,
-        "credential_pattern_redaction": false,
-        "status_entries": 7
-      },
-      {
-        "worktree_path": "/workspace/work/community-resume/workitems",
-        "patch_path": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/workitems-UNVERIFIED.patch",
-        "sha256": "92e0e5dfef7757f124f290218e370005d5843109d256cfa40fae9d56c1413844",
-        "bytes": 20194,
-        "credential_pattern_redaction": false,
-        "status_entries": 5
-      },
-      {
-        "worktree_path": "/workspace/work/community-resume/workitems-ci",
-        "patch_path": "/workspace/work/community-resume/evidence/acceleration-worker-inventory-patches/workitems-ci-UNVERIFIED.patch",
-        "sha256": "98d895c2caf7e4cf697215956a19365a0d2cb217932fdd1abf09290f7e3e41b5",
-        "bytes": 18313,
-        "credential_pattern_redaction": false,
-        "status_entries": 4
-      }
-    ],
-    "limits": [
-      "Worker-to-worktree mapping is explicitly marked where not certain.",
-      "The inventory is a point-in-time snapshot; active worktrees may change afterward.",
-      "No status is inferred for Dakota beyond the previously recorded UNCONFIRMED thread; this inventory records only local Git state.",
-      "No private grants or credential values are included; suspicious common credential patterns are redacted before patch preservation."
-    ]
+    "path": "evidence/convergence-worker-inventory.json",
+    "observed_at": "2026-10-09T18:48:02.279707+00:00"
   },
   "historical_cloud_workers_before_acceleration": [
     {
@@ -2791,5 +2268,115 @@
       "canonical_remote_head": "79b95e85c6fc2e0dc335e1b6ca93f2c59a5091bd",
       "remote_changes": "unknown; same thread/turn retained"
     }
-  ]
+  ],
+  "community_merge_scope": "Helper-only PR243 merged to community at00c; PR250 merged only to integration at3ed98dd as bounded partial foundations.",
+  "runtime_integration_community_merge": false,
+  "helper_release": {
+    "observed_at": "2026-10-09T17:23:07.875978+00:00",
+    "pr": 243,
+    "head": "7fffa3a53c321a1990819bbe3fc08dca4115e74d",
+    "tested_synthetic": "fd9c25ed0f5f373460127ba9eba1e99810615932",
+    "community_merge": "00c207fe1ebae20804056e2b17982476ee75386a",
+    "tree": "492a80bf57910e76aed3b9cefc093542686579a3",
+    "independent_reviews": [
+      "independent-helper-review-348224f1.md",
+      "independent-helper-review-7fffa3a5.md"
+    ],
+    "hosted_workflows": "All five PASS; exact Runtime inventory/Twine/canary, all three Helper/Core platforms and RCC primary/N-1 six jobs passed",
+    "tag": "actions_http-1.0.2",
+    "tag_object": "ce0aa64588d88ddd801c3f8391d873e678d20ff1",
+    "tag_target": "00c207fe1ebae20804056e2b17982476ee75386a",
+    "preflight": "Remote tag absent and PyPI1.0.2 returned404 immediately before immutable push; no force/overwrite",
+    "release_run": 37965200135,
+    "publication_status": "BLOCKED; NO UPLOAD; DO NOT RETRY THIS TAG",
+    "scope": "Helper prerequisite only; Runtime integration PR221 remains unmerged",
+    "failure": "Publish step refused empty PYPI_TOKEN_ACTIONS_HTTP_HELPER; no poetry publish ran; PyPI1.0.2 remains404.",
+    "candidate_omission": "Post-tag reconciliation found later integration023597ab generatedHost proxy-to-direct redirect fix omitted by selective6182 promotion. Preserve immutabletag and failedrun; require correctedcandidate and newimmutableversion decision beforepublication."
+  },
+  "convergence_candidate": {
+    "branch": "integration/community-release-20261008",
+    "head": "3ed98ddbac3354c59414b8411b295db2e15d3545",
+    "pr": 250,
+    "includes_prs": [
+      244,
+      245,
+      246,
+      247,
+      249
+    ],
+    "state": "INTEGRATED via PR250 at3ed98ddb; successor policy PR252 merged atab9b1aaa. Code acceptance remains scoped; no Runtime publication.",
+    "merged_sha": "3ed98ddbac3354c59414b8411b295db2e15d3545"
+  },
+  "remote_workspace_readiness": {
+    "observed_at": "2026-10-09T18:44:29.529Z",
+    "target": "cas-worker-01",
+    "workspace_uid": "default-ca-0b24d",
+    "state": "PAUSED_BY_USER_FOR_PERMISSION_REPAIR",
+    "readiness": {
+      "pod_phase": "Running",
+      "native_daemon": {
+        "status": "running",
+        "socketPath": "/home/vscode/.codex/app-server-control/app-server-control.sock",
+        "appServerVersion": "0.162.0"
+      },
+      "auth_status": "authenticated",
+      "capacity": {
+        "cpu_effective_cores": 16,
+        "cpu_quota_cores": null,
+        "memory_available_bytes": 31362711552,
+        "memory_limit_bytes": null,
+        "memory_current_bytes": null,
+        "workspace_total_bytes": 267211747328,
+        "workspace_used_bytes": 21000880128,
+        "workspace_free_bytes": 246210867200
+      },
+      "active_setup_stages": []
+    },
+    "account": {
+      "ordinaryUsageAllowed": true,
+      "planType": "pro",
+      "usedPercent": 70
+    },
+    "thread": "01a121ed-85b6-7000-b54a-649bc53e7224",
+    "latest_turn": "01a121f4-51aa-7f42-b7ca-d4b23845efd0",
+    "native_status": "completed",
+    "bootstrap_request": "actions-bootstrap-20261009-1832",
+    "native_permission_limitation": "Advertised dispatch/settings expose no sandbox, approval-policy, or full-access option. Initial native thread readOnly/networkAccess=false/on-request; user approved native setup. No bypass.",
+    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout\u2019s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe\u2026`, integration base at `3ed98dd\u2026`, upstream reporting docs at `57399b60\u2026`, and Actions Core release at `df7b0d66\u2026`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor\u2019s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
+    "engineering_threads_dispatched": 0,
+    "old_approvals_resumed": false,
+    "workspace_recreated": false
+  },
+  "upstream_reporting_policy": {
+    "pr": 252,
+    "head": "57399b60496b98fea020f26e576d47bcb0d440bf",
+    "merged_sha": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+    "state": "INTEGRATED; mandatory in Cloud dispatch now",
+    "files": [
+      "AGENTS.md",
+      ".agents/skills/actions-repository/SKILL.md",
+      "docs/skills/README.md",
+      "docs/skills/upstream-reporting.md"
+    ],
+    "updated_repositories": [
+      "joshyorko/actions"
+    ],
+    "proposed_only": [
+      "joshyorko/rcc"
+    ],
+    "reason": "RCC issue-only authority does not authorize its documentation/source mutations",
+    "steered": [
+      "/root/luna_graph_inventory",
+      "/root/luna_robot_identity",
+      "/root/luna_worker_exit",
+      "/root/luna_tunnel_integration",
+      "/root/luna_rcc_review",
+      "/root/sol_retirement_review"
+    ],
+    "next_dispatch": [
+      "/root/luna_workitems_failures",
+      "any other historical or future worker"
+    ],
+    "remote_bootstrap_received_rule": true
+  }
 }
