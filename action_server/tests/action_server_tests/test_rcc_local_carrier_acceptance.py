@@ -212,7 +212,9 @@ def _run_published_dependency_provider_dead_gate(
         "acceptance_status": "PASS",
         "action_server_mode": "installed-runtime-wheel",
         "runtime_wheel_sha256": os.environ["ACTIONS_ACCEPTANCE_RUNTIME_WHEEL_SHA256"],
-        "runtime_wheel_source_sha": "ed9e97f111bc15e0d26e3b2ee19e187e4fe31de3",
+        "runtime_wheel_source_sha": os.environ[
+            "ACTIONS_ACCEPTANCE_RUNTIME_WHEEL_SOURCE_SHA"
+        ],
         "runtime_harness_source_sha": evidence["source_sha"],
         "published_core_helper_wheels": published,
         "published_dependency_install_report_sha256": hashlib.sha256(

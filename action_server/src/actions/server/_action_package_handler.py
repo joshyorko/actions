@@ -1,4 +1,7 @@
+import hashlib
 import logging
+import shutil
+import uuid
 from pathlib import Path
 
 log = logging.getLogger(__name__)
@@ -130,7 +133,172 @@ class ActionPackageHandler:
 
     @property
     def package_root(self) -> str:
-        return str(self._original_package_yaml.parent.absolute())
+        return str(self._import_path.absolute())
+
+    @property
+    def uses_runtime_source_snapshots(self) -> bool:
+        import os
+
+        spec = (self._package_yaml_contents or {}).get("spec-version")
+        return spec == "v2" and any(
+            os.environ.get(name)
+            for name in (
+                "ACTIONS_RUNTIME_RCC_PROVIDER",
+                "ACTIONS_REAL_RCC_ARTIFACT_TEST",
+                "ACTIONS_RUNTIME_RCC_TRUST_CARRIER",
+            )
+        )
+
+    def create_runtime_source_snapshot(self) -> tuple[Path, bool]:
+        """Create an immutable service-owned copy for one RCC source generation."""
+        from actions.server._errors_action_server import ActionServerValidationError
+        from actions.server_integration import DEFAULT_EXCLUSION_PATTERNS
+        from actions.server.package.package_exclude import PackageExcludeHandler
+
+        source_root = self._import_path.resolve(strict=True)
+        source_store = self._datadir / ".rcc-runtime-sources"
+        package_key = hashlib.sha256(self._action_package_name.encode("utf-8")).hexdigest()
+        package_store = source_store / package_key
+        exclusions = PackageExcludeHandler()
+        exclusions.fill_exclude_patterns(DEFAULT_EXCLUSION_PATTERNS)
+        exclusions.exclude_patterns.extend(
+            ("**/.rcc-action-version-*", "**/.rcc-action-metadata-*.json")
+        )
+        try:
+            relative_store = source_store.resolve().relative_to(source_root)
+        except ValueError:
+            pass
+        else:
+            exclusions.exclude_patterns.append(f"{relative_store.as_posix()}/**")
+
+        def source_files(root: Path) -> list[tuple[Path, str]]:
+            files = sorted(
+                (
+                    (path, Path(relative).as_posix())
+                    for path, relative in exclusions.collect_files_excluding_patterns(root)
+                ),
+                key=lambda item: item[1],
+            )
+            for path, _ in files:
+                if path.is_symlink():
+                    resolved = path.resolve(strict=True)
+                    if not resolved.is_relative_to(root) or not resolved.is_file():
+                        raise ActionServerValidationError(
+                            "RCC source snapshots require package file links to remain inside the package"
+                        )
+            for path in root.rglob("*"):
+                if path.is_symlink() and path.is_dir():
+                    raise ActionServerValidationError(
+                        "RCC source snapshots do not support directory symlinks"
+                    )
+            return files
+
+        def signature(root: Path) -> str:
+            digest = hashlib.sha256()
+            for path, relative in source_files(root):
+                relative_bytes = relative.encode("utf-8")
+                payload = path.read_bytes()
+                digest.update(len(relative_bytes).to_bytes(8, "big"))
+                digest.update(relative_bytes)
+                digest.update(len(payload).to_bytes(8, "big"))
+                digest.update(payload)
+            return digest.hexdigest()
+
+        files_before = source_files(source_root)
+        if not any(relative == "package.yaml" for _, relative in files_before):
+            raise ActionServerValidationError(
+                "RCC source snapshot is missing package.yaml"
+            )
+        source_signature = signature(source_root)
+        destination = package_store / source_signature
+        if destination.is_dir():
+            if signature(destination) != source_signature:
+                raise ActionServerValidationError(
+                    "existing RCC source snapshot does not match its identity"
+                )
+            return destination, False
+
+        source_store.mkdir(parents=True, exist_ok=True, mode=0o700)
+        package_store.mkdir(exist_ok=True, mode=0o700)
+        staging = package_store / f".staging-{uuid.uuid4().hex}"
+        staging.mkdir(mode=0o700)
+        try:
+            for source, relative in files_before:
+                target = staging / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+            if signature(source_root) != source_signature:
+                raise ActionServerValidationError(
+                    "RCC package source changed while its generation was being snapshotted"
+                )
+            if signature(staging) != source_signature:
+                raise ActionServerValidationError(
+                    "RCC source snapshot differs from the selected package generation"
+                )
+            try:
+                staging.rename(destination)
+            except FileExistsError:
+                if signature(destination) != source_signature:
+                    raise ActionServerValidationError(
+                        "concurrent RCC source snapshot has a different identity"
+                    )
+                shutil.rmtree(staging)
+                return destination, False
+            return destination, True
+        except BaseException:
+            shutil.rmtree(staging, ignore_errors=True)
+            raise
+
+    def use_runtime_source_snapshot(self, snapshot: Path) -> None:
+        """Point metadata collection and the persisted ActionPackage at a snapshot."""
+        import yaml
+
+        try:
+            snapshot_yaml = yaml.safe_load(
+                (snapshot / "package.yaml").read_text(encoding="utf-8")
+            )
+        except (OSError, yaml.YAMLError) as exc:
+            from actions.server._errors_action_server import ActionServerValidationError
+
+            raise ActionServerValidationError(
+                "RCC source snapshot has an unreadable package.yaml"
+            ) from exc
+        if snapshot_yaml != self._package_yaml_contents:
+            from actions.server._errors_action_server import ActionServerValidationError
+
+            raise ActionServerValidationError(
+                "package.yaml changed while creating the RCC source snapshot"
+            )
+        self._action_package_dir = str(snapshot)
+        self._import_path = snapshot
+        self._pythonpath_entries = None
+
+    def discard_runtime_source_snapshot(self, snapshot: Path) -> None:
+        """Remove a newly created candidate after its import transaction fails."""
+        import shutil
+
+        source_store = (self._datadir / ".rcc-runtime-sources").resolve()
+        candidate = snapshot.resolve()
+        try:
+            candidate.relative_to(source_store)
+        except ValueError:
+            return
+        shutil.rmtree(candidate, ignore_errors=True)
+
+    def prune_runtime_source_snapshots(self, keep: Path) -> None:
+        """Prune stale snapshots only during startup, before workers are leased."""
+        import shutil
+
+        current = keep.resolve()
+        source_store = (self._datadir / ".rcc-runtime-sources").resolve()
+        try:
+            package_store = current.parent
+            package_store.relative_to(source_store)
+        except ValueError:
+            return
+        for candidate in package_store.iterdir():
+            if candidate != current and candidate.is_dir():
+                shutil.rmtree(candidate, ignore_errors=True)
 
     def get_pythonpath_entries(self) -> tuple[str, ...]:
         """

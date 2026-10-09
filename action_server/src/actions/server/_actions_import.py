@@ -107,19 +107,49 @@ def import_action_package(
             )
             return
 
-    condahash, use_env = action_package_handler.bootstrap_environment(
-        previous_descriptor=previous_descriptor
-    )
+    source_snapshot_owner = action_package_handler
+    source_snapshot_path = None
+    source_snapshot_created = False
+    if action_package_handler.uses_runtime_source_snapshots:
+        try:
+            source_snapshot_path, source_snapshot_created = (
+                action_package_handler.create_runtime_source_snapshot()
+            )
+            action_package_handler.use_runtime_source_snapshot(source_snapshot_path)
+            original_package_yaml = action_package_handler.original_package_yaml
+            package_yaml_exists = action_package_handler.package_yaml_exists
+            import_path = action_package_handler.import_path
+        except Exception as exc:
+            raise ActionServerValidationError(
+                f"Unable to preserve the last-good Action package source: {exc}"
+            ) from exc
+
+    try:
+        condahash, use_env = action_package_handler.bootstrap_environment(
+            previous_descriptor=previous_descriptor
+        )
+    except Exception as exc:
+        if source_snapshot_path is not None:
+            if source_snapshot_created:
+                source_snapshot_owner.discard_runtime_source_snapshot(
+                    source_snapshot_path
+                )
+            raise ActionServerValidationError(str(exc)) from exc
+        raise
 
     # Ok, we bootstrapped, now, let's collect the actions.
-    try:
-        # If the directory can be made relative to the datadir, save the
-        # directory as relative.
-        directory_path = import_path.relative_to(datadir)
-        assert import_path.samefile(directory_path)
-    except (AssertionError, ValueError):
-        # Otherwise use the absolute path.
+    if source_snapshot_path is not None:
+        # The worker resolves source snapshots as service-owned absolute paths.
         directory_path = import_path
+    else:
+        try:
+            # If the directory can be made relative to the datadir, save the
+            # directory as relative.
+            directory_path = import_path.relative_to(datadir)
+            assert import_path.samefile(directory_path)
+        except (AssertionError, ValueError):
+            # Otherwise use the absolute path.
+            directory_path = import_path
 
     action_package_id = gen_uuid("action_package")
 
@@ -146,8 +176,14 @@ def import_action_package(
         actions_library_version = _get_actions_version(
             env, import_path, "actions", runtime_descriptor=runtime_descriptor
         )
-    except Exception:
+    except Exception as actions_error:
         if runtime_descriptor is not None:
+            if source_snapshot_path is not None:
+                if source_snapshot_created:
+                    source_snapshot_owner.discard_runtime_source_snapshot(
+                        source_snapshot_path
+                    )
+                raise ActionServerValidationError(str(actions_error)) from actions_error
             raise
         ### TODO: Remove in the future!
 
@@ -210,17 +246,30 @@ def import_action_package(
                 "this version of robocorp-actions will be removed)."
             )
 
-    _add_actions_to_db(
-        datadir,
-        env,
-        import_path,
-        action_package,
-        disable_not_imported=disable_not_imported,
-        skip_lint=skip_lint,
-        whitelist=whitelist,
-        actions_library_version=actions_library_version,
-        runtime_descriptor=runtime_descriptor,
-    )
+    try:
+        _add_actions_to_db(
+            datadir,
+            env,
+            import_path,
+            action_package,
+            disable_not_imported=disable_not_imported,
+            skip_lint=skip_lint,
+            whitelist=whitelist,
+            actions_library_version=actions_library_version,
+            runtime_descriptor=runtime_descriptor,
+        )
+    except Exception as exc:
+        if source_snapshot_path is not None:
+            if source_snapshot_created:
+                source_snapshot_owner.discard_runtime_source_snapshot(
+                    source_snapshot_path
+                )
+            if not isinstance(exc, ActionServerValidationError):
+                raise ActionServerValidationError(str(exc)) from exc
+        raise
+    else:
+        if source_snapshot_path is not None and not disable_not_imported:
+            source_snapshot_owner.prune_runtime_source_snapshots(source_snapshot_path)
 
 
 def _get_actions_version(

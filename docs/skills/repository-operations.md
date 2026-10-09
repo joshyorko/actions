@@ -1405,6 +1405,27 @@ process before `exec`; child commands inherit that affinity. Record the
 effective CPU set. RCC `--workers=2` is not proof that its worker pool contains
 only two workers, so do not report it as a process-count cap.
 
+For explicit RCC v2 provider mode, Runtime imports snapshot the filtered action
+package under the service datadir and store the snapshot path in the committed
+`ActionPackage`; RCC environment resolution continues to use the original
+`package.yaml`. A failed metadata import removes only its uncommitted candidate
+snapshot, preserves the previous ActionPackage/source generation, and reports a
+reload failure to the watcher so it can observe a later repair. Existing
+process-pool generations keep their source directories during hot reload; old
+snapshots are pruned on successful startup, not while calls may still be using
+them. Long-lived servers with repeated successful source reloads can therefore
+retain multiple snapshots until restart. File symlinks must resolve inside the
+package; directory symlinks are rejected by the snapshot boundary.
+
+The Linux RCC lifecycle regression
+`test_current_candidate_failed_reload_keeps_last_good_action_usable` proves
+that an in-flight last-good Action completes, a later persisted Run uses the
+same last-good source after malformed source is rejected, and a subsequent
+valid edit reloads successfully. Its trace confirms the failed reload does not
+add RCC publish, acquire, or build operations. This Linux source-only result
+does not establish installed-wheel, frozen, Windows ACL, strict-remote, or
+independent descendant-reaping behavior.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold
