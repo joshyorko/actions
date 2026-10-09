@@ -202,6 +202,22 @@ def test_failed_publish_is_phase_error_without_fallback(tmp_path):
         )
 
 
+def test_rcc_failure_keeps_meaningful_error_instead_of_generic_exit_line():
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, publish_artifact
+
+    with pytest.raises(RccRuntimeError, match="provider refused trust metadata"):
+        publish_artifact(
+            Path("/package.yaml"),
+            Path("/opt/rcc"),
+            runner=lambda *args: (
+                1,
+                "",
+                "Error: provider refused trust metadata\n"
+                "[rcc] exit status will be: 1!\n",
+            ),
+        )
+
+
 def test_acquire_rejects_missing_or_conflicting_identity():
     from actions.server._rcc_runtime_adapter import RccRuntimeError, acquire_artifact
 

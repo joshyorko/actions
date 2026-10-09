@@ -252,8 +252,18 @@ def _run_json(
 ) -> dict:
     code, stdout, stderr = runner(*args)
     if code:
-        detail = (stderr or stdout).strip().splitlines()[-1:] or ["command failed"]
-        raise RccRuntimeError(phase, detail[0][:400])
+        output_lines = (stderr or stdout).strip().splitlines()
+        detail = next(
+            (
+                line.strip()
+                for line in reversed(output_lines)
+                if line.strip()
+                and not line.strip().startswith("[rcc] exit status will be:")
+                and not line.strip().startswith("Note: Now running rcc")
+            ),
+            "command failed",
+        )
+        raise RccRuntimeError(phase, detail[:400])
     try:
         loaded = json.loads(stdout)
     except (TypeError, ValueError, json.JSONDecodeError) as exc:
