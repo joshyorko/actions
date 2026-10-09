@@ -1311,6 +1311,10 @@ leader exit. Portable fake-kernel tests cover accounting/handle disagreement, sh
 deadlines, acquisition and wait failures, PID reuse/churn, and handle cleanup; they
 do not establish Windows kernel behavior.
 
+Run the package's configured lint/type checks as well as explicit checks for
+the acceptance scripts: the package lint target covers `src` and `tests`, so
+passing it alone does not check `scripts`.
+
 `WINDOWS_JOB_DIAGNOSTICS` retains only bounded scalar fields and at most 64 PIDs.
 It captures membership, accounting and a possibly incomplete PID list before drain,
 records the existing drain queries' count results without extra native calls, and

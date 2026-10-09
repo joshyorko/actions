@@ -787,7 +787,7 @@ def test_robot_publication_does_not_clean_unowned_initial_staging_collision(
     robots.mkdir()
     monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
     mkdir = os.mkdir
-    collisions = []
+    collisions: list[Path] = []
 
     def competing_mkdir(path, *args, **kwargs):
         path = Path(path)

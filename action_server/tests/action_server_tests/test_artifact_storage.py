@@ -405,6 +405,7 @@ def test_storage_checks_reparse_attributes_without_following_target(
 ):
     import stat
     from types import SimpleNamespace
+
     from actions.server._artifact_storage import _is_link_or_reparse_point
 
     dangling = tmp_path / "junction"
