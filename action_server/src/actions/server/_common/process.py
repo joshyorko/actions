@@ -438,10 +438,7 @@ class ProcessTreeCleanupResult:
     @property
     def descendant_reap_complete(self) -> bool:
         """Whether the captured descendants were observed absent, not zombies."""
-        return (
-            self.execution_stopped
-            and not self.zombie_descendant_pids
-        )
+        return self.execution_stopped and not self.zombie_descendant_pids
 
 
 def snapshot_process_descendants(pid: int):

@@ -87,9 +87,7 @@ def test_bounded_writer_times_out_on_saturated_socket():
     read_queue = queue.Queue()
     reader_stream = writer_socket.makefile("rb")
     writer_stream = writer_socket.makefile("wb")
-    reader = JsonRpcStreamReaderThread(
-        reader_stream, read_queue, lambda *_args: None
-    )
+    reader = JsonRpcStreamReaderThread(reader_stream, read_queue, lambda *_args: None)
     writer = JsonRpcStreamWriter(writer_stream, sort_keys=True)
     try:
         reader.start()

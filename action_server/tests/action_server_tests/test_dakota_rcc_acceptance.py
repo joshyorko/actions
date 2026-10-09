@@ -5,6 +5,8 @@ import signal
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 import pytest
@@ -142,6 +144,18 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
     assert live_receipt["cells"]["sqlite_run"] == "PASS"
     assert live_receipt["cells"]["artifact_verification"] == "PASS"
     assert live_receipt["cells"]["process_cleanup"] == "PASS"
+    assert live_receipt["offline_warm"]["provider_probe_role"] == (
+        "count-and-reject-only; serves no artifacts"
+    )
+    assert live_receipt["offline_warm"]["provider_probe_requests"] == 0
+    assert live_receipt["offline_warm"]["provider_probe_stopped"] is True
+    assert live_receipt["cells"]["offline_warm_artifact_ready"] == "PASS"
+    assert live_receipt["cells"]["offline_warm_action"] == "PASS"
+    assert live_receipt["cells"]["offline_warm_artifact_verification"] == "PASS"
+    assert live_receipt["cells"]["offline_warm_wrapper_exit"] == "PASS"
+    assert live_receipt["cells"]["provider_unavailable"] == "PASS"
+    assert live_receipt["cells"]["zero_requests_to_retired_provider_origin"] == "PASS"
+    assert live_receipt["cells"]["warm_process_cleanup"] == "PASS"
     expected_returncode = 0 if live_receipt["acceptance_status"] == "PASS" else 1
     assert result.returncode == expected_returncode, (
         f"acceptance status {live_receipt['acceptance_status']} did not match "
@@ -333,6 +347,21 @@ def test_wrapper_exit_accepts_only_completed_numeric_zero():
         _harness().classify_wrapper_exit({"status": "completed", "exitCode": 0})
         == "PASS"
     )
+
+
+def test_unavailable_provider_probe_counts_and_rejects_attempted_requests():
+    harness = _harness()
+    probe = harness.UnavailableProviderProbe("127.0.0.1", 0)
+    try:
+        with pytest.raises(urllib.error.HTTPError) as error:
+            urllib.request.urlopen(probe.url, timeout=2)
+        assert error.value.code == 503
+        assert probe.request_count == 1
+        assert harness.classify_zero_provider_requests(probe.request_count) == "FAIL"
+        assert harness.classify_zero_provider_requests(0) == "PASS"
+        assert harness.classify_zero_provider_requests(True) == "FAIL"
+    finally:
+        probe.close()
 
 
 def test_runtime_tree_refresh_precedes_stop_even_when_stop_fails(monkeypatch):

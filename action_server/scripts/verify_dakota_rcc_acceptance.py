@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import ctypes
 import hashlib
+import http.server
 import json
 import math
 import os
@@ -806,6 +807,60 @@ def start_provider(
         raise
 
 
+class UnavailableProviderProbe:
+    """Count requests to the retired provider origin without serving artifacts."""
+
+    def __init__(self, host: str, port: int) -> None:
+        self._count = 0
+        self._count_lock = threading.Lock()
+        owner = self
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def _reject(self) -> None:
+                with owner._count_lock:
+                    owner._count += 1
+                body = b'{"error":"provider unavailable"}'
+                self.send_response(503)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+            do_DELETE = _reject
+            do_GET = _reject
+            do_HEAD = _reject
+            do_POST = _reject
+            do_PUT = _reject
+
+            def log_message(self, _format: str, *_args: object) -> None:
+                return
+
+        class Server(http.server.ThreadingHTTPServer):
+            daemon_threads = True
+            allow_reuse_address = True
+
+        self._server = Server((host, port), Handler)
+        self.url = f"http://{host}:{self._server.server_port}"
+        self._thread = threading.Thread(
+            target=self._server.serve_forever,
+            name="rcc-unavailable-provider-probe",
+            daemon=True,
+        )
+        self._thread.start()
+
+    @property
+    def request_count(self) -> int:
+        with self._count_lock:
+            return self._count
+
+    def close(self, timeout_seconds: float = CLEANUP_GRACE_SECONDS) -> None:
+        self._server.shutdown()
+        self._server.server_close()
+        self._thread.join(timeout_seconds)
+        if self._thread.is_alive():
+            raise RuntimeError("provider request probe did not stop")
+
+
 def build_candidate_wheels(
     root: Path,
     *,
@@ -933,6 +988,15 @@ def record_supervisor_cleanup_failure(
 def acceptance_status(cells: dict[str, str]) -> str:
     return (
         "PASS" if cells and all(value == "PASS" for value in cells.values()) else "FAIL"
+    )
+
+
+def classify_zero_provider_requests(request_count: object) -> str:
+    return (
+        "PASS"
+        if type(request_count) is int  # noqa: E721 - reject bool as a count
+        and request_count == 0
+        else "FAIL"
     )
 
 
@@ -1197,6 +1261,166 @@ dependencies:
         db_path = datadir / "server.db"
         with load_db(db_path) as db:
             with db.connect():
+                package = db.all(ActionPackage)[0]
+                runtime = json.loads(package.env_json)["runtime"]
+        digest = runtime["artifact_digest"]
+        if not digest.startswith("sha256:"):
+            raise AssertionError("Runtime did not persist the RCC Artifact digest")
+
+        # Reuse the exact provider origin after its owner has exited. The probe
+        # only counts and rejects traffic; it cannot satisfy an artifact fetch.
+        provider_port = urlsplit(provider_url).port
+        if provider_port is None:
+            raise AssertionError("RCC provider did not expose a TCP port")
+        provider_probe = UnavailableProviderProbe("127.0.0.1", provider_port)
+        if provider_probe.url != provider_url:
+            provider_probe.close()
+            raise AssertionError("unavailable probe did not bind the retired origin")
+        warm_server = None
+        warm_server_handle = None
+        warm_server_popen = None
+        warm_server_tree = []
+        warm_server_exit_code = None
+        warm_server_reaped = False
+        warm_run_id = ""
+        warm_response = None
+        warm_candidate_result = None
+        warm_receipt = None
+        warm_receipt_path = None
+        provider_probe_stopped = False
+        try:
+            offline_env = dict(runtime_env)
+            offline_env["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_probe.url
+            os.environ["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_probe.url
+            rcc_env = child_environment(
+                source_env,
+                task_root=root / "offline-lifecycle",
+                extra={
+                    "ACTIONS_RUNTIME_RCC_BINARY": rcc_binary,
+                    "ROBOCORP_HOME": runtime_env["ROBOCORP_HOME"],
+                },
+            )
+            inspect = run_owned_process(
+                [
+                    rcc_binary,
+                    "env",
+                    "lifecycle",
+                    "inspect",
+                    "--artifact",
+                    digest,
+                    "--json",
+                ],
+                timeout_seconds=deadline.remaining(cap=15),
+                env=rcc_env,
+            )
+            if inspect.returncode:
+                raise RuntimeError("RCC could not inspect the materialized artifact")
+            lifecycle = json.loads(inspect.stdout)
+            if lifecycle.get("ready") is not True:
+                raise AssertionError("local RCC artifact is not ready before warm run")
+
+            previous_receipts = {
+                path.resolve()
+                for path in (datadir / "rcc-receipts").glob("*.json")
+            }
+            warm_server = ActionServerProcess(datadir)
+            warm_server.start(
+                timeout=deadline.remaining_int(),
+                db_file="server.db",
+                actions_sync=True,
+                cwd=package_dir,
+                min_processes=0,
+                max_processes=1,
+                additional_args=["--address=127.0.0.1", "--api-key", api_key],
+                env=offline_env,
+                port=0,
+            )
+            warm_server_handle = warm_server.process
+            warm_server_popen = getattr(warm_server_handle, "_proc", None)
+            if warm_server_popen is None:
+                raise RuntimeError("warm Runtime CLI process handle was not created")
+            warm_server_tree = capture_process_tree(warm_server_popen.pid)
+            warm_url = (
+                f"http://{warm_server.host}:{warm_server.port}"
+                "/api/actions/dakota-rcc-acceptance/answer/run"
+            )
+            warm_response = requests.post(
+                warm_url,
+                json={},
+                headers={"Authorization": f"Bearer {api_key}"},
+                timeout=deadline.remaining(),
+            )
+            if warm_response.status_code >= 400:
+                raise RuntimeError(
+                    f"offline warm Action HTTP {warm_response.status_code}: "
+                    f"{warm_response.text[:1000]}\nRuntime diagnostics:\n"
+                    f"{warm_server.get_stderr()[-12000:]}"
+                )
+            warm_response.raise_for_status()
+            warm_candidate_result = json.loads(warm_response.json())
+            if warm_candidate_result != expected_result:
+                raise AssertionError("offline warm Action returned unexpected result")
+            warm_run_id = warm_response.headers.get("x-action-server-run-id", "")
+            if not warm_run_id:
+                raise AssertionError("offline warm run has no identity")
+            known = {(item.pid, item.create_time()) for item in warm_server_tree}
+            for item in capture_process_tree(warm_server_popen.pid):
+                identity = (item.pid, item.create_time())
+                if identity not in known:
+                    known.add(identity)
+                    warm_server_tree.append(item)
+        finally:
+            try:
+                try:
+                    if warm_server is not None:
+                        if warm_server_handle is None:
+                            warm_server_handle = getattr(warm_server, "_process", None)
+                            warm_server_popen = getattr(warm_server_handle, "_proc", None)
+                        stop_runtime_server(
+                            warm_server, warm_server_popen, warm_server_tree
+                        )
+                finally:
+                    if warm_server_handle is not None and warm_server_popen is not None:
+                        wait_for_process_tree_reap(
+                            warm_server_tree, timeout_seconds=CLEANUP_GRACE_SECONDS
+                        )
+                        warm_server_exit_code = warm_server_handle.returncode
+                        warm_server_reaped = (
+                            warm_server_exit_code is not None
+                            and not warm_server_handle.is_alive()
+                        )
+                        if not warm_server_reaped:
+                            raise ProcessTreeCleanupError(
+                                "warm Runtime CLI process was signalled but not reaped"
+                            )
+            finally:
+                provider_probe.close()
+                provider_probe_stopped = True
+
+        with load_db(db_path) as db:
+            with db.connect():
+                warm_run = next(
+                    (item for item in db.all(Run) if item.id == warm_run_id), None
+                )
+                if warm_run is None or warm_run.status != RunStatus.PASSED:
+                    raise AssertionError("SQLite did not persist a passed warm run")
+                package = db.all(ActionPackage)[0]
+                warm_runtime = json.loads(package.env_json)["runtime"]
+        if warm_runtime.get("artifact_digest") != digest:
+            raise AssertionError("warm Runtime changed the persisted artifact digest")
+        new_receipts = sorted(
+            path
+            for path in (datadir / "rcc-receipts").glob("*.json")
+            if path.resolve() not in previous_receipts
+        )
+        if len(new_receipts) != 1:
+            raise AssertionError("warm run did not produce exactly one new RCC receipt")
+        warm_receipt_path = new_receipts[0]
+        warm_receipt = read_receipt(warm_receipt_path, digest)
+
+        db_path = datadir / "server.db"
+        with load_db(db_path) as db:
+            with db.connect():
                 run = next((item for item in db.all(Run) if item.id == run_id), None)
                 if run is None or run.status != RunStatus.PASSED:
                     raise AssertionError("SQLite did not persist a passed Action run")
@@ -1233,6 +1457,27 @@ dependencies:
             "process_cleanup": "PASS"
             if server_reaped and provider_reaped and receipts
             else "FAIL",
+            "offline_warm_artifact_ready": "PASS"
+            if lifecycle.get("ready") is True
+            else "FAIL",
+            "offline_warm_action": "PASS"
+            if warm_response is not None
+            and warm_response.status_code == 200
+            and warm_candidate_result == expected_result
+            and warm_run is not None
+            and warm_run.status == RunStatus.PASSED
+            else "FAIL",
+            "offline_warm_artifact_verification": "PASS"
+            if warm_receipt["verification"].get("valid") is True
+            else "FAIL",
+            "offline_warm_wrapper_exit": classify_wrapper_exit(warm_receipt),
+            "provider_unavailable": "PASS" if provider_reaped else "FAIL",
+            "zero_requests_to_retired_provider_origin": classify_zero_provider_requests(
+                provider_probe.request_count
+            ),
+            "warm_process_cleanup": "PASS"
+            if warm_server_reaped and provider_probe_stopped
+            else "FAIL",
         }
 
         evidence = {
@@ -1256,6 +1501,17 @@ dependencies:
             "runtime_process_exit_code": server_exit_code,
             "provider_process_reaped": provider_reaped,
             "rcc_receipt": _sanitize_runtime_receipt(rcc_receipt),
+            "offline_warm": {
+                "provider_reference": provider_probe.url,
+                "provider_probe_role": "count-and-reject-only; serves no artifacts",
+                "provider_probe_requests": provider_probe.request_count,
+                "artifact_lifecycle_inspect": lifecycle,
+                "run_id": warm_run_id,
+                "runtime_process_exit_code": warm_server_exit_code,
+                "process_reaped": warm_server_reaped,
+                "rcc_receipt": _sanitize_runtime_receipt(warm_receipt),
+                "provider_probe_stopped": provider_probe_stopped,
+            },
         }
         write_evidence(receipt_path, evidence, temp_root=root)
         evidence["receipt_path"] = str(receipt_path.expanduser().resolve())
