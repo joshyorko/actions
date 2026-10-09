@@ -122,6 +122,229 @@ def test_provider_trust_reference_is_bound_to_exec_and_never_redacted(tmp_path):
     assert command[command.index("--provider") + 1] == provider
 
 
+def test_local_trust_carrier_is_bound_to_publish_acquire_and_exec(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        build_exec_command,
+        resolve_trust_carrier,
+    )
+
+    carrier_path = tmp_path / "service-trust"
+    carrier_path.mkdir(mode=0o700)
+    carrier = resolve_trust_carrier(str(carrier_path))
+    assert carrier is not None
+
+    digest = "sha256:" + "e" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        if "publish" in args:
+            return 0, json.dumps({"artifactDigest": digest}), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    from actions.server._rcc_runtime_adapter import prepare_runtime
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {}\n")
+    descriptor = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        provider="local",
+        trust_carrier=carrier,
+        runner=runner,
+    )
+
+    for call in calls:
+        assert "--workers=2" in call
+        index = call.index("--trust-carrier")
+        assert call[index + 1] == str(carrier_path.resolve())
+        assert call[index + 2 : index + 4] == ("--trust-carrier-type", "filesystem")
+
+    serialized = descriptor.to_json()
+    assert str(carrier_path) not in serialized
+    assert descriptor.trust_carrier_identity == carrier.identity
+    assert descriptor.trust_policy == "permissive-local"
+
+    command = build_exec_command(
+        Path("/opt/rcc"),
+        descriptor,
+        ["python", "-m", "preload_actions_server_main"],
+        receipt_file=tmp_path / "receipt.json",
+        trust_carrier=carrier,
+    )
+    index = command.index("--trust-carrier")
+    assert "--workers=2" in command
+    assert command[index + 1] == str(carrier_path.resolve())
+    assert command[index + 2 : index + 4] == ["--trust-carrier-type", "filesystem"]
+    assert command[command.index("--provider") + 1] == "local"
+
+
+def test_trust_carrier_cache_key_includes_canonical_carrier_identity(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        _prepared_runtime_cache,
+        prepare_runtime,
+        resolve_trust_carrier,
+    )
+
+    _prepared_runtime_cache.clear()
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {}\n")
+    first_path = tmp_path / "carrier-a"
+    second_path = tmp_path / "carrier-b"
+    first_path.mkdir(mode=0o700)
+    second_path.mkdir(mode=0o700)
+    first = resolve_trust_carrier(str(first_path))
+    second = resolve_trust_carrier(str(second_path))
+    assert first is not None and second is not None
+    calls = []
+    digest = "sha256:" + "f" * 64
+
+    def runner(*args):
+        calls.append(args)
+        if "publish" in args:
+            return 0, json.dumps({"artifactDigest": digest}), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    descriptor_a = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        provider="local",
+        trust_carrier=first,
+        runner=runner,
+    )
+    before = len(calls)
+    descriptor_b = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        provider="local",
+        trust_carrier=second,
+        runner=runner,
+    )
+
+    assert descriptor_a.trust_carrier_identity != descriptor_b.trust_carrier_identity
+    assert len(calls) > before
+
+
+def test_exec_rejects_changed_trust_carrier_before_starting_rcc(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        RccRuntimeError,
+        build_exec_command,
+        resolve_trust_carrier,
+    )
+
+    first_path = tmp_path / "carrier-a"
+    second_path = tmp_path / "carrier-b"
+    first_path.mkdir(mode=0o700)
+    second_path.mkdir(mode=0o700)
+    first = resolve_trust_carrier(str(first_path))
+    second = resolve_trust_carrier(str(second_path))
+    assert first is not None and second is not None
+    descriptor = RccRuntimeDescriptor(
+        artifact_digest="sha256:" + "a" * 64,
+        trust_carrier_identity=first.identity,
+    )
+
+    with pytest.raises(RccRuntimeError, match="trust carrier changed"):
+        build_exec_command(
+            Path("/opt/rcc"),
+            descriptor,
+            ["python"],
+            receipt_file=None,
+            trust_carrier=second,
+        )
+
+
+def test_trust_carrier_rejects_non_absolute_path(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        resolve_trust_carrier,
+    )
+
+    with pytest.raises(RccRuntimeError, match="trust carrier"):
+        resolve_trust_carrier("relative/carrier")
+
+
+def test_trust_carrier_rejects_non_directory_path(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        resolve_trust_carrier,
+    )
+
+    carrier_file = tmp_path / "not-a-directory"
+    carrier_file.write_text("not a directory")
+    with pytest.raises(RccRuntimeError, match="trust carrier"):
+        resolve_trust_carrier(str(carrier_file))
+
+
+def test_unknown_legacy_carrier_binding_cannot_exec():
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        RccRuntimeError,
+        build_exec_command,
+    )
+
+    legacy = {
+        "runtime": {
+            "artifact_digest": "sha256:" + "a" * 64,
+            "kind": "rcc",
+            "contract_version": "rcc-runtime/v1",
+            "provider_reference": "local",
+            "provider_context_bound": True,
+        }
+    }
+    descriptor = RccRuntimeDescriptor.from_dict(legacy)
+    with pytest.raises(RccRuntimeError, match="trust context"):
+        build_exec_command(Path("/opt/rcc"), descriptor, ["python"], receipt_file=None)
+
+
+def test_trust_carrier_path_is_redacted_from_rcc_errors(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        publish_artifact,
+        resolve_trust_carrier,
+    )
+
+    carrier_path = tmp_path / "private-trust-carrier"
+    carrier_path.mkdir(mode=0o700)
+    carrier = resolve_trust_carrier(str(carrier_path))
+    assert carrier is not None
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {}\n")
+
+    with pytest.raises(RccRuntimeError) as error:
+        publish_artifact(
+            package_yaml,
+            Path("/opt/rcc"),
+            provider="local",
+            trust_carrier=carrier,
+            runner=lambda *_args: (1, "", f"cannot open {carrier_path}"),
+        )
+    assert str(carrier_path) not in str(error.value)
+
+
+def test_runtime_only_carrier_setting_is_removed_from_action_child_environment():
+    from actions.server._rcc_runtime_adapter import strip_runtime_only_settings
+
+    environment = {
+        "ACTIONS_RUNTIME_RCC_TRUST_CARRIER": "/srv/actions/private-trust",
+        "ACTIONS_RUNTIME_DATADIR": "/srv/actions/data",
+    }
+
+    sanitized = strip_runtime_only_settings(environment)
+
+    assert "ACTIONS_RUNTIME_RCC_TRUST_CARRIER" not in sanitized
+    assert sanitized["ACTIONS_RUNTIME_DATADIR"] == "/srv/actions/data"
+
+
 @pytest.mark.parametrize("provider", ["local", "dakota-cache", "http://cache:8134"])
 def test_supported_provider_reference_forms_are_preserved(tmp_path, provider):
     from actions.server._rcc_runtime_adapter import (

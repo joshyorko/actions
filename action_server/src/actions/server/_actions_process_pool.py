@@ -143,9 +143,12 @@ class ProcessHandle:
         from ._rcc_runtime_adapter import (
             RccProcessHandle,
             build_exec_command,
+            configured_trust_carrier,
             get_rcc_location,
             load_descriptor,
             new_receipt_path,
+            redact_trust_carrier_text,
+            strip_runtime_only_settings,
         )
         from ._robo_utils.process import build_python_launch_env
 
@@ -174,6 +177,10 @@ class ProcessHandle:
         env = {key: value for key, value in persisted_env.items() if key != "runtime"}
         _add_preload_actions_dir_to_env_pythonpath(env)
         env = build_python_launch_env(env)
+        trust_carrier = (
+            configured_trust_carrier() if runtime_descriptor is not None else None
+        )
+        strip_runtime_only_settings(env)
         # Shouldn't be there, but just making sure... if it is it can
         # affect how the logs are generated and if wrong the logs would
         # also be wrong.
@@ -223,13 +230,16 @@ class ProcessHandle:
                 line_bytes = stderr_or_stdout.readline()
                 if not line_bytes:
                     break
-                line_as_str = line_bytes.decode("utf-8", "replace")
+                line_as_str = redact_trust_carrier_text(
+                    line_bytes.decode("utf-8", "replace"), trust_carrier
+                )
+                safe_line_bytes = line_as_str.encode("utf-8")
                 print(
                     colored(f"output (pid: {pid}): ", attrs=["dark"])
                     + f"{line_as_str.strip()}\n",
                     end="",
                 )
-                self._on_output(line_bytes)
+                self._on_output(safe_line_bytes)
 
         self._read_queue: "Queue[dict]" = Queue()
 
@@ -294,6 +304,7 @@ class ProcessHandle:
                         runtime_descriptor,
                         worker_command,
                         receipt_file=receipt_file,
+                        trust_carrier=trust_carrier,
                     )
                 else:
                     cmdline = worker_command
@@ -377,6 +388,7 @@ class ProcessHandle:
                     runtime_descriptor,
                     worker_command,
                     receipt_file=receipt_file,
+                    trust_carrier=trust_carrier,
                 )
             else:
                 cmdline = worker_command

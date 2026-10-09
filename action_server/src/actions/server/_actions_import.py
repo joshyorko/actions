@@ -77,7 +77,7 @@ def import_action_package(
     from ._errors_action_server import ActionServerValidationError
     from ._gen_ids import gen_uuid
     from ._models import ActionPackage, get_db
-    from ._rcc_runtime_adapter import load_descriptor
+    from ._rcc_runtime_adapter import load_descriptor, strip_runtime_only_settings
     from ._robo_utils.process import build_python_launch_env
 
     log.debug("Importing action package from: %s", action_package_dir)
@@ -139,6 +139,7 @@ def import_action_package(
 
     launch_env = {key: value for key, value in use_env.items() if key != "runtime"}
     env = build_python_launch_env(launch_env)
+    strip_runtime_only_settings(env)
 
     try:
         # any actions version will do at this point.
@@ -238,7 +239,11 @@ def _get_actions_version(
             f"import {libname};print({libname}.__version__)",
         ]
     else:
-        from ._rcc_runtime_adapter import build_exec_command, get_rcc_location
+        from ._rcc_runtime_adapter import (
+            build_exec_command,
+            configured_trust_carrier,
+            get_rcc_location,
+        )
 
         python = "RCC Environment Artifact"
         version_file = Path(cwd) / f".rcc-action-version-{uuid.uuid4().hex}"
@@ -251,6 +256,7 @@ def _get_actions_version(
             runtime_descriptor,
             ["python", "-c", version_code],
             receipt_file=None,
+            trust_carrier=configured_trust_carrier(),
         )
     msg = f"""Unable to get {libname} version.
 
@@ -315,6 +321,10 @@ def _add_actions_to_db(
     from actions.server._gen_ids import gen_uuid
     from actions.server._models import Action, ActionPackage, get_db
     from actions.server._whitelist import accept_action
+    from ._rcc_runtime_adapter import (
+        configured_trust_carrier,
+        redact_trust_carrier_text,
+    )
 
     if runtime_descriptor is None:
         from actions.server._settings import get_python_exe_from_env
@@ -329,6 +339,7 @@ def _add_actions_to_db(
             runtime_descriptor,
             ["python"],
             receipt_file=None,
+            trust_carrier=configured_trust_carrier(),
         )[:-1]
 
     if actions_library_version > (1, 0, 1):
@@ -405,31 +416,39 @@ cli.main(["{command}"])
                                 formatted_lint_result.message
                             )
 
+        carrier = configured_trust_carrier() if runtime_descriptor is not None else None
         raise RuntimeError(
             f"It was not possible to list the actions.\n"
-            f"cmdline: {subprocess.list2cmdline(cmdline)}\n"
+            f"cmdline: {redact_trust_carrier_text(subprocess.list2cmdline(cmdline), carrier)}\n"
             f"cwd: {import_path}\n"
-            f"stdout:{stdout.decode('utf-8', 'replace')}\n"
-            f"stderr:{stderr.decode('utf-8', 'replace')}"
+            f"stdout:{redact_trust_carrier_text(stdout.decode('utf-8', 'replace'), carrier)}\n"
+            f"stderr:{redact_trust_carrier_text(stderr.decode('utf-8', 'replace'), carrier)}"
         )
 
     # If it didn't fail the import, consider as warning (and thus print in yellow).
-    decoded_stderr = stderr.decode("utf-8", "replace").strip()
+    carrier = configured_trust_carrier() if runtime_descriptor is not None else None
+    decoded_stderr = redact_trust_carrier_text(
+        stderr.decode("utf-8", "replace").strip(), carrier
+    )
     if decoded_stderr:
         log.critical(bold_yellow(f"{decoded_stderr}\n"))
 
     try:
         actions_list_result = json.loads(stdout)
     except json.JSONDecodeError:
-        raise RuntimeError(
-            f"It was not possible to load as json the contents >>{stdout!r}<<"
+        safe_stdout = redact_trust_carrier_text(
+            stdout.decode("utf-8", "replace"), carrier
         )
+        raise RuntimeError(f"It was not possible to load as json: {safe_stdout}")
     else:
         if command == "metadata":
             metadata_result = actions_list_result
             if not isinstance(metadata_result, dict):
+                safe_stdout = redact_trust_carrier_text(
+                    stdout.decode("utf-8", "replace"), carrier
+                )
                 raise RuntimeError(
-                    f"Expected actions metadata to provide dictionary. Found: >>{stdout!r}<<"
+                    f"Expected actions metadata to provide dictionary. Found: >>{safe_stdout}<<"
                 )
             actions_list_result = metadata_result.get("actions")
             if not isinstance(actions_list_result, list):

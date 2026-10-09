@@ -1353,6 +1353,22 @@ Runtime startup or restart. Keep explicit `local` provider selection separate
 from a null provider descriptor, and keep both separate from a provider-backed
 Runtime whose trust-carrier request fails.
 
+`ACTIONS_RUNTIME_RCC_PROVIDER=local` selects RCC's built-in filesystem content
+provider; it is an explicit provider reference, not a null provider. The
+deployment-only `ACTIONS_RUNTIME_RCC_TRUST_CARRIER` setting selects an
+independent filesystem directory for detached trust attachments. With the
+setting present, publish, acquire, and each `env exec` lease must receive the
+same `--trust-carrier PATH --trust-carrier-type filesystem` pair. The adapter
+binds a digest of the canonical directory path and the `permissive-local`
+policy into its descriptor and in-memory cache; it never stores the raw path
+there or passes the setting through to Action code. RCC argv necessarily
+contains the path and is visible to processes with the same OS user. Unsetting
+the setting preserves the selected provider's default trust-carrier behavior;
+an error from that carrier must fail closed without falling back. This Actions
+integration supports only `permissive-local`: an RCC verification receipt with
+`verification.valid` does not establish strict-remote signatures or fresh
+revocation authority. Strict-remote acceptance remains unverified.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold

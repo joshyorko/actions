@@ -228,21 +228,33 @@ class ActionPackageHandler:
                 if self._package_yaml_contents
                 else None
             )
-            artifact_mode = os.environ.get(
-                "ACTIONS_RUNTIME_RCC_PROVIDER"
-            ) or os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST")
+            artifact_mode = (
+                os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER")
+                or os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST")
+                or os.environ.get("ACTIONS_RUNTIME_RCC_TRUST_CARRIER")
+            )
             if spec_version == "v2" and not devenv and artifact_mode:
                 from ._rcc_runtime_adapter import (
+                    RccRuntimeError,
+                    configured_trust_carrier,
                     compute_source_generation,
                     get_rcc_location,
                     prepare_runtime,
                 )
 
+                provider = os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER")
+                trust_carrier = configured_trust_carrier()
+                if trust_carrier is not None and provider is None:
+                    raise RccRuntimeError(
+                        "configuration",
+                        "ACTIONS_RUNTIME_RCC_PROVIDER must explicitly select a provider",
+                    )
                 descriptor = prepare_runtime(
                     self._original_package_yaml,
                     get_rcc_location(),
                     source_generation=compute_source_generation(self._import_path),
-                    provider=os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER"),
+                    provider=provider,
+                    trust_carrier=trust_carrier,
                     previous_descriptor=previous_descriptor,
                 )
                 condahash = descriptor.artifact_digest

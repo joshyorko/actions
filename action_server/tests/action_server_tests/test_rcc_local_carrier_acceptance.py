@@ -1,4 +1,4 @@
-"""Provider-free source Runtime acceptance for the RCC local Artifact path."""
+"""Source Runtime acceptance for RCC's explicit local provider and trust carrier."""
 
 from __future__ import annotations
 
@@ -12,13 +12,14 @@ import requests
 
 
 @pytest.mark.real_rcc
-def test_provider_free_runtime_restart_reuses_verified_artifact(tmp_path: Path) -> None:
-    """Exercise a spec-v2 Action before and after a provider-free Runtime restart."""
+def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
+    tmp_path: Path,
+) -> None:
+    """Run a spec-v2 Action before and after a local-provider Runtime restart."""
     if os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST") != "1":
         pytest.skip("set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for real RCC acceptance")
     rcc = Path(os.environ["ACTIONS_RUNTIME_RCC_BINARY"]).resolve()
     assert rcc.is_file() and os.access(rcc, os.X_OK)
-    assert "ACTIONS_RUNTIME_RCC_PROVIDER" not in os.environ
 
     from actions.server._models import ActionPackage, Run, RunStatus, load_db
     from actions.server._rcc_runtime_adapter import read_receipt
@@ -48,23 +49,27 @@ dependencies:
         "@action\n"
         "def answer() -> str:\n"
         "    return json.dumps({\n"
-        "        'result': 'provider-free-local',\n"
+        "        'result': 'separate-local-trust-carrier',\n"
         "        'actions_core': version('actions-core'),\n"
         "        'actions_http_helper': version('actions-http-helper'),\n"
         "        'server_integration': ManagedParameters.__name__,\n"
+        "        'trust_carrier_exposed_to_action': 'ACTIONS_RUNTIME_RCC_TRUST_CARRIER' in __import__('os').environ,\n"
         "    }, sort_keys=True)\n",
         encoding="utf-8",
     )
 
     datadir = tmp_path / "datadir"
     rcc_home = tmp_path / "rcc-home"
+    trust_carrier = tmp_path / "service-owned-trust-carrier"
+    trust_carrier.mkdir(mode=0o700)
     api_key = "acceptance-key"
     runtime_env = os.environ.copy()
-    runtime_env.pop("ACTIONS_RUNTIME_RCC_PROVIDER", None)
     runtime_env.update(
         {
             "ACTIONS_RUNTIME_RCC_BINARY": str(rcc),
             "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
+            "ACTIONS_RUNTIME_RCC_PROVIDER": "local",
+            "ACTIONS_RUNTIME_RCC_TRUST_CARRIER": str(trust_carrier),
             "ROBOCORP_HOME": str(rcc_home),
             "NO_PROXY": "127.0.0.1,localhost",
             "no_proxy": "127.0.0.1,localhost",
@@ -72,13 +77,15 @@ dependencies:
     )
 
     expected_result = {
-        "result": "provider-free-local",
+        "result": "separate-local-trust-carrier",
         "actions_core": "1.0.2",
         "actions_http_helper": "1.0.3",
         "server_integration": "ManagedParameters",
+        "trust_carrier_exposed_to_action": False,
     }
     receipts: list[dict[str, object]] = []
     artifact_digests: list[str] = []
+    trust_carrier_identities: list[str] = []
     run_ids: list[str] = []
     process_reaped: list[bool] = []
     for generation in range(2):
@@ -117,6 +124,7 @@ dependencies:
                 timeout=900,
             )
             response.raise_for_status()
+            assert str(trust_carrier) not in response.text
             assert json.loads(response.json()) == expected_result
             run_id = response.headers["x-action-server-run-id"]
             run_ids.append(run_id)
@@ -126,8 +134,12 @@ dependencies:
                     package = db.all(ActionPackage)[0]
                     runtime = json.loads(package.env_json)["runtime"]
             assert run.status == RunStatus.PASSED
-            assert runtime["provider_reference"] is None
+            assert runtime["provider_reference"] == "local"
+            assert runtime["trust_policy"] == "permissive-local"
+            assert runtime["trust_carrier_identity"].startswith("sha256:")
+            assert str(trust_carrier) not in package.env_json
             artifact_digests.append(runtime["artifact_digest"])
+            trust_carrier_identities.append(runtime["trust_carrier_identity"])
         finally:
             if server_process is None:
                 server_process = getattr(server, "_process", None)
@@ -137,6 +149,7 @@ dependencies:
                     server_process.returncode is not None
                     and not server_process.is_alive()
                 )
+            assert str(trust_carrier) not in server.get_stdout() + server.get_stderr()
 
         receipt_files = sorted(
             set((datadir / "rcc-receipts").glob("*.json")) - prior_receipt_files
@@ -146,9 +159,13 @@ dependencies:
         receipts.append(receipt)
         assert receipt.get("leaseId")
         assert receipt.get("verification", {}).get("valid") is True
+        assert receipt.get("status") == "completed"
+        assert receipt.get("exitCode") == 0
+        assert str(trust_carrier) not in json.dumps(receipt)
 
     assert artifact_digests[0].startswith("sha256:")
     assert artifact_digests[1] == artifact_digests[0]
+    assert trust_carrier_identities[0] == trust_carrier_identities[1]
     assert run_ids[0] != run_ids[1]
     assert process_reaped == [True, True]
     assert receipts[0]["leaseId"] != receipts[1]["leaseId"]
@@ -172,14 +189,17 @@ dependencies:
                 text=True,
             ).stdout.strip(),
             "runtime_mode": "source",
-            "provider_reference": None,
+            "provider_reference": "local",
+            "trust_policy": "permissive-local",
+            "trust_carrier_identities": trust_carrier_identities,
             "artifact_digests": artifact_digests,
             "run_ids": run_ids,
             "runtime_process_reaped": process_reaped,
             "rcc_receipts": receipts,
             "cells": {
                 "spec_v2_action": "PASS",
-                "provider_free_restart_same_artifact": "PASS",
+                "local_provider_restart_same_artifact": "PASS",
+                "separate_trust_carrier": "PASS",
                 "runtime_process_reaping": "PASS",
                 "core_helper_installed_wheel": "NOTRUN",
                 "frozen_runtime_exact_source": "NOTRUN",

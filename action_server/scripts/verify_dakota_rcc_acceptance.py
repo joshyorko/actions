@@ -56,6 +56,7 @@ _SAFE_EXTRA_ENV = {
     "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
     "ACTIONS_RUNTIME_RCC_BINARY",
     "ACTIONS_RUNTIME_RCC_TIMEOUT",
+    "ACTIONS_RUNTIME_RCC_TRUST_CARRIER",
     "ACTIONS_REAL_RCC_ARTIFACT_TEST",
     "ACTIONS_RUNTIME_RCC_PROVIDER",
     "ROBOCORP_HOME",
@@ -1040,6 +1041,7 @@ def run_acquire_diagnostic(
     env: dict[str, str],
     deadline: Deadline,
     replacements: dict[str, str],
+    trust_carrier: str | None = None,
 ) -> dict[str, object]:
     command = [
         rcc_binary,
@@ -1052,6 +1054,11 @@ def run_acquire_diagnostic(
     ]
     if provider:
         command.extend(["--provider", provider])
+    if trust_carrier:
+        command.extend(
+            ["--trust-carrier", trust_carrier, "--trust-carrier-type", "filesystem"]
+        )
+    command.append("--workers=2")
     result = run_owned_process(
         command,
         timeout_seconds=deadline.remaining(cap=30),
@@ -1200,6 +1207,13 @@ dependencies:
         )
 
         runtime_root = root / "runtime-state"
+        trust_carrier = source_env.get("ACTIONS_RUNTIME_RCC_TRUST_CARRIER")
+        if trust_carrier:
+            trust_carrier_path = Path(trust_carrier).expanduser()
+            if not trust_carrier_path.is_absolute() or not trust_carrier_path.is_dir():
+                raise RuntimeError(
+                    "ACTIONS_RUNTIME_RCC_TRUST_CARRIER must name an existing absolute directory"
+                )
         runtime_env = child_environment(
             source_env,
             task_root=runtime_root / "environment",
@@ -1210,6 +1224,11 @@ dependencies:
                     max(1, math.floor(deadline.remaining()))
                 ),
                 "ROBOCORP_HOME": str(runtime_root / "rcc-home"),
+                **(
+                    {"ACTIONS_RUNTIME_RCC_TRUST_CARRIER": trust_carrier}
+                    if trust_carrier
+                    else {}
+                ),
             },
         )
         os.environ.clear()
@@ -1254,6 +1273,7 @@ dependencies:
                 cwd=package_dir,
                 min_processes=0,
                 max_processes=1,
+                reuse_processes=True,
                 additional_args=[
                     "--address=127.0.0.1",
                     "--api-key",
@@ -1398,13 +1418,16 @@ dependencies:
             offline_env = dict(runtime_env)
             offline_env["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_probe.url
             os.environ["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_probe.url
+            rcc_env_extra = {
+                "ACTIONS_RUNTIME_RCC_BINARY": rcc_binary,
+                "ROBOCORP_HOME": runtime_env["ROBOCORP_HOME"],
+            }
+            if trust_carrier:
+                rcc_env_extra["ACTIONS_RUNTIME_RCC_TRUST_CARRIER"] = trust_carrier
             rcc_env = child_environment(
                 source_env,
                 task_root=root / "offline-lifecycle",
-                extra={
-                    "ACTIONS_RUNTIME_RCC_BINARY": rcc_binary,
-                    "ROBOCORP_HOME": runtime_env["ROBOCORP_HOME"],
-                },
+                extra=rcc_env_extra,
             )
             descriptor = RccRuntimeDescriptor.from_dict({"runtime": runtime})
             if descriptor.provider_reference != provider_probe.url:
@@ -1414,9 +1437,16 @@ dependencies:
             initial_receipt_bytes = initial_receipt_path.read_bytes()
             child_marker = root / "provider-unavailable-child-ran"
             child_receipt_path = new_receipt_path(datadir)
+            # This negative intentionally selects RCC's default HTTP carrier.
+            # The positive Runtime below keeps the separate filesystem carrier.
+            negative_descriptor = descriptor
+            if trust_carrier:
+                from dataclasses import replace
+
+                negative_descriptor = replace(descriptor, trust_carrier_identity=None)
             child_command = build_exec_command(
                 Path(rcc_binary),
-                descriptor,
+                negative_descriptor,
                 [
                     "python",
                     "-c",
@@ -1425,7 +1455,10 @@ dependencies:
                     + ").write_text('executed')",
                 ],
                 receipt_file=child_receipt_path,
+                trust_carrier=None,
             )
+            negative_rcc_env = dict(rcc_env)
+            negative_rcc_env.pop("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", None)
             # The initial Action already proved successful acquire and saved its
             # terminal receipt. The same configured provider now rejects trust
             # attachment requests before RCC is allowed to start this child.
@@ -1433,7 +1466,7 @@ dependencies:
             child_result = run_owned_process(
                 child_command,
                 timeout_seconds=deadline.remaining(cap=30),
-                env=rcc_env,
+                env=negative_rcc_env,
             )
             provider_backed_exec_requests = provider_probe.reset_requests()
             child_receipt = None
@@ -1457,9 +1490,10 @@ dependencies:
                 == descriptor.provider_reference
             )
             provider_backed_exec = {
+                "trust_carrier_selection": "provider-http-default",
                 "exit_code": child_result.returncode,
                 "provider_reference_matches_persisted": (
-                    descriptor.provider_reference == provider_probe.url
+                    negative_descriptor.provider_reference == provider_probe.url
                 ),
                 "provider_argument_matches_descriptor": provider_arg_matches,
                 "provider_requests": provider_backed_exec_requests,
@@ -1491,6 +1525,7 @@ dependencies:
                     "--artifact",
                     digest,
                     "--json",
+                    "--workers=2",
                 ],
                 timeout_seconds=deadline.remaining(cap=15),
                 env=rcc_env,
@@ -1509,10 +1544,13 @@ dependencies:
                 provider_probe.url: "<provider-origin>",
                 tool_home: "<tool-home>",
             }
+            if trust_carrier:
+                diagnostic_replacements[trust_carrier] = "<trust-carrier>"
             provider_acquire_diagnostic = run_acquire_diagnostic(
                 rcc_binary,
                 digest,
                 provider=provider_probe.url,
+                trust_carrier=trust_carrier,
                 env=rcc_env,
                 deadline=deadline,
                 replacements=diagnostic_replacements,
@@ -1522,6 +1560,7 @@ dependencies:
                 rcc_binary,
                 digest,
                 provider=None,
+                trust_carrier=trust_carrier,
                 env=rcc_env,
                 deadline=deadline,
                 replacements=diagnostic_replacements,
@@ -1533,7 +1572,7 @@ dependencies:
                 or local_acquire_diagnostic["verification_valid"] is not True
             ):
                 raise AssertionError(
-                    "provider-free RCC acquire did not verify the exact artifact"
+                    "local-ready acquire without a content provider did not verify the exact artifact"
                 )
 
             previous_receipts = {
@@ -1547,6 +1586,7 @@ dependencies:
                 cwd=package_dir,
                 min_processes=0,
                 max_processes=1,
+                reuse_processes=True,
                 additional_args=["--address=127.0.0.1", "--api-key", api_key],
                 env=offline_env,
                 port=0,
@@ -1698,8 +1738,8 @@ dependencies:
                     "provider_acquire": provider_acquire_diagnostic,
                     "provider_acquire_request_events": provider_acquire_requests,
                     "provider_backed_exec": provider_backed_exec,
-                    "provider_free_acquire": local_acquire_diagnostic,
-                    "provider_free_acquire_request_events": local_acquire_requests,
+                    "local_ready_acquire_without_provider": local_acquire_diagnostic,
+                    "local_ready_acquire_request_events": local_acquire_requests,
                     "warm_runtime_request_events": warm_provider_requests,
                     "warm_runtime_provider_requests": len(warm_provider_requests),
                     "artifact_lifecycle_inspect": lifecycle,
@@ -1726,6 +1766,12 @@ dependencies:
                 warm_runtime = json.loads(package.env_json)["runtime"]
         if warm_runtime.get("artifact_digest") != digest:
             raise AssertionError("warm Runtime changed the persisted artifact digest")
+        if warm_runtime.get("trust_carrier_identity") != runtime.get(
+            "trust_carrier_identity"
+        ):
+            raise AssertionError("warm Runtime changed the trust carrier identity")
+        if warm_runtime.get("trust_policy") != "permissive-local":
+            raise AssertionError("warm Runtime changed the selected trust policy")
         new_receipts = sorted(
             path
             for path in (datadir / "rcc-receipts").glob("*.json")
@@ -1808,6 +1854,13 @@ dependencies:
             "actions_http_helper": "1.0.3",
             "server_integration": candidate_result["server_integration"],
             "artifact_digest": digest,
+            "trust_policy": runtime.get("trust_policy"),
+            "trust_carrier_identity": runtime.get("trust_carrier_identity"),
+            "trust_carrier_mode": (
+                "separate-filesystem" if trust_carrier else "selected-provider-default"
+            ),
+            "trust_claims": "permissive-local only; no strict-remote or offline revocation claim",
+            "unverified_cells": {"strict_remote_trust": "NOTRUN"},
             "run_id": run_id,
             "sqlite_status": "passed",
             "unauthenticated_http_status": unauthenticated.status_code,
@@ -1827,8 +1880,8 @@ dependencies:
                 "provider_acquire": provider_acquire_diagnostic,
                 "provider_acquire_request_events": provider_acquire_requests,
                 "provider_backed_exec": provider_backed_exec,
-                "provider_free_acquire": local_acquire_diagnostic,
-                "provider_free_acquire_request_events": local_acquire_requests,
+                "local_ready_acquire_without_provider": local_acquire_diagnostic,
+                "local_ready_acquire_request_events": local_acquire_requests,
                 "warm_runtime_request_events": warm_provider_requests,
                 "warm_runtime_provider_requests": len(warm_provider_requests),
                 "artifact_lifecycle_inspect": lifecycle,

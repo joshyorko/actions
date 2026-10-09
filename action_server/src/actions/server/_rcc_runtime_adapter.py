@@ -10,11 +10,12 @@ import hashlib
 import json
 import os
 import re
+import stat
 import subprocess
 import threading
 import uuid
 from collections.abc import Callable, Sequence
-from dataclasses import asdict, dataclass, replace
+from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 from typing import Literal
 from urllib.parse import urlsplit
@@ -25,6 +26,8 @@ RCC_VERSION = "v18.19.3"
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 _PROVIDER_PROFILE_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,62}$")
+TRUST_CARRIER_ENV = "ACTIONS_RUNTIME_RCC_TRUST_CARRIER"
+TRUST_POLICY = "permissive-local"
 _ENVIRONMENT_FIELDS = (
     "spec-version",
     "dependencies",
@@ -32,7 +35,7 @@ _ENVIRONMENT_FIELDS = (
     "post-install",
 )
 _prepared_runtime_cache: dict[
-    tuple[Path, str, str | None], tuple[str, RccRuntimeDescriptor]
+    tuple[Path, str, str | None, str | None, str], tuple[str, RccRuntimeDescriptor]
 ] = {}
 _prepared_runtime_cache_lock = threading.Lock()
 
@@ -77,6 +80,82 @@ def _validate_provider_reference(provider: str | None) -> str | None:
     return provider
 
 
+@dataclass(frozen=True)
+class RccTrustCarrier:
+    """Transient deployment carrier configuration; only its identity is durable."""
+
+    path: Path = field(repr=False)
+    identity: str
+    policy: str = TRUST_POLICY
+
+
+def resolve_trust_carrier(value: str | None) -> RccTrustCarrier | None:
+    """Validate an optional owner-controlled filesystem trust carrier."""
+
+    if value is None or value == "":
+        return None
+    if not isinstance(value, str) or any(
+        ord(character) < 32 or ord(character) == 127 for character in value
+    ):
+        raise RccRuntimeError("trust carrier", "configured path is invalid")
+    candidate = Path(value)
+    if not candidate.is_absolute():
+        raise RccRuntimeError("trust carrier", "configured path must be absolute")
+    try:
+        info = candidate.lstat()
+        canonical = candidate.resolve(strict=True)
+        canonical_info = canonical.stat()
+    except OSError:
+        raise RccRuntimeError(
+            "trust carrier", "configured directory is unavailable"
+        ) from None
+    if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(canonical_info.st_mode):
+        raise RccRuntimeError("trust carrier", "configured path must be a directory")
+    if hasattr(os, "geteuid") and canonical_info.st_uid != os.geteuid():
+        raise RccRuntimeError(
+            "trust carrier", "directory must be owned by the service user"
+        )
+    if os.name == "posix" and stat.S_IMODE(canonical_info.st_mode) & 0o022:
+        raise RccRuntimeError(
+            "trust carrier", "directory must not be group- or world-writable"
+        )
+    if not os.access(canonical, os.R_OK | os.W_OK | os.X_OK):
+        raise RccRuntimeError(
+            "trust carrier", "directory must be readable and writable"
+        )
+    identity_input = b"actions-rcc-trust-carrier-v1\0" + os.fsencode(str(canonical))
+    identity = "sha256:" + hashlib.sha256(identity_input).hexdigest()
+    return RccTrustCarrier(path=canonical, identity=identity)
+
+
+def configured_trust_carrier() -> RccTrustCarrier | None:
+    return resolve_trust_carrier(os.environ.get(TRUST_CARRIER_ENV))
+
+
+def strip_runtime_only_settings(environment: dict[str, str]) -> dict[str, str]:
+    """Remove service-only RCC settings before handing an env to Action code."""
+
+    environment.pop(TRUST_CARRIER_ENV, None)
+    return environment
+
+
+def redact_trust_carrier_text(text: str, trust_carrier: RccTrustCarrier | None) -> str:
+    if trust_carrier is None:
+        return text
+    return text.replace(str(trust_carrier.path), "<trust-carrier>")
+
+
+def _trust_carrier_args(trust_carrier: RccTrustCarrier | None) -> list[str]:
+    if trust_carrier is None:
+        return []
+    return [
+        "--trust-carrier",
+        str(trust_carrier.path),
+        "--trust-carrier-type",
+        "filesystem",
+    ]
+
+
 class RccRuntimeError(RuntimeError):
     """A bounded failure at one RCC runtime preparation/execution phase."""
 
@@ -98,6 +177,9 @@ class RccRuntimeDescriptor:
     contract_version: str = RCC_CONTRACT_VERSION
     provider_reference: str | None = None
     provider_context_bound: bool = True
+    trust_carrier_identity: str | None = None
+    trust_policy: str = TRUST_POLICY
+    trust_carrier_context_bound: bool = True
 
     def __post_init__(self) -> None:
         if not _DIGEST_RE.fullmatch(self.artifact_digest):
@@ -113,6 +195,14 @@ class RccRuntimeDescriptor:
         _validate_provider_reference(self.provider_reference)
         if not isinstance(self.provider_context_bound, bool):
             raise RccRuntimeError("descriptor", "invalid provider context binding")
+        if self.trust_carrier_identity is not None and not _DIGEST_RE.fullmatch(
+            self.trust_carrier_identity
+        ):
+            raise RccRuntimeError("descriptor", "invalid trust carrier identity")
+        if self.trust_policy != TRUST_POLICY:
+            raise RccRuntimeError("descriptor", "unsupported trust policy")
+        if not isinstance(self.trust_carrier_context_bound, bool):
+            raise RccRuntimeError("descriptor", "invalid trust carrier context binding")
 
     def to_dict(self) -> dict[str, object]:
         runtime = asdict(self)
@@ -135,9 +225,17 @@ class RccRuntimeDescriptor:
         if set(runtime) - allowed:
             raise RccRuntimeError("descriptor", "unknown runtime fields")
         runtime = dict(runtime)
+        legacy_provider_context_bound = runtime.pop("provider_context_bound", True)
         if "provider_reference" not in runtime:
             # Persisted legacy descriptors lack trust-carrier identity.
             runtime["provider_context_bound"] = False
+        else:
+            runtime["provider_context_bound"] = legacy_provider_context_bound
+        if "trust_carrier_identity" not in runtime or "trust_policy" not in runtime:
+            # Older descriptors did not bind the selected carrier or policy.
+            runtime["trust_carrier_context_bound"] = False
+        else:
+            runtime.setdefault("trust_carrier_context_bound", True)
         if "kind" in runtime:
             runtime["runtime_kind"] = runtime.pop("kind")
         try:
@@ -248,7 +346,11 @@ def _subprocess_runner(*args: str) -> tuple[int, str, str]:
 
 
 def _run_json(
-    phase: str, args: Sequence[str], runner: Runner = _subprocess_runner
+    phase: str,
+    args: Sequence[str],
+    runner: Runner = _subprocess_runner,
+    *,
+    trust_carrier: RccTrustCarrier | None = None,
 ) -> dict:
     code, stdout, stderr = runner(*args)
     if code:
@@ -263,7 +365,9 @@ def _run_json(
             ),
             "command failed",
         )
-        raise RccRuntimeError(phase, detail[:400])
+        raise RccRuntimeError(
+            phase, redact_trust_carrier_text(detail[:400], trust_carrier)
+        )
     try:
         loaded = json.loads(stdout)
     except (TypeError, ValueError, json.JSONDecodeError) as exc:
@@ -278,6 +382,7 @@ def publish_artifact(
     rcc_location: Path,
     *,
     provider: str | None = None,
+    trust_carrier: RccTrustCarrier | None = None,
     runner: Runner = _subprocess_runner,
 ) -> str:
     provider = _validate_provider_reference(provider)
@@ -291,7 +396,11 @@ def publish_artifact(
     ]
     if provider:
         args.extend(["--provider", provider])
-    return parse_artifact_digest(_run_json("publish", args, runner))
+    args.extend(_trust_carrier_args(trust_carrier))
+    args.append("--workers=2")
+    return parse_artifact_digest(
+        _run_json("publish", args, runner, trust_carrier=trust_carrier)
+    )
 
 
 def acquire_artifact(
@@ -299,6 +408,7 @@ def acquire_artifact(
     rcc_location: Path,
     *,
     provider: str | None = None,
+    trust_carrier: RccTrustCarrier | None = None,
     runner: Runner = _subprocess_runner,
 ) -> dict:
     provider = _validate_provider_reference(provider)
@@ -315,8 +425,10 @@ def acquire_artifact(
     ]
     if provider:
         args.extend(["--provider", provider])
+    args.extend(_trust_carrier_args(trust_carrier))
+    args.append("--workers=2")
     try:
-        result = _run_json("acquire", args, runner)
+        result = _run_json("acquire", args, runner, trust_carrier=trust_carrier)
     except RccRuntimeError as exc:
         if "not materialized" in str(exc).casefold():
             raise RccRuntimeError("acquire", str(exc), retryable=True) from exc
@@ -336,13 +448,21 @@ def prepare_runtime(
     *,
     source_generation: str = "unknown",
     provider: str | None = None,
+    trust_carrier: RccTrustCarrier | None = None,
     previous_descriptor: RccRuntimeDescriptor | None = None,
     runner: Runner = _subprocess_runner,
 ) -> RccRuntimeDescriptor:
     environment = environment.resolve()
     provider = _validate_provider_reference(provider)
     environment_fingerprint = environment_spec_fingerprint(environment)
-    cache_key = (environment, environment_fingerprint, provider)
+    carrier_identity = trust_carrier.identity if trust_carrier is not None else None
+    cache_key = (
+        environment,
+        environment_fingerprint,
+        provider,
+        carrier_identity,
+        TRUST_POLICY,
+    )
     source_hash = source_generation
     if source_hash == "unknown":
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
@@ -364,6 +484,8 @@ def prepare_runtime(
             runtime_kind=cached_descriptor.runtime_kind,
             contract_version=cached_descriptor.contract_version,
             provider_reference=provider,
+            trust_carrier_identity=carrier_identity,
+            trust_policy=TRUST_POLICY,
         )
         with _prepared_runtime_cache_lock:
             _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -377,6 +499,7 @@ def prepare_runtime(
                 previous_descriptor.artifact_digest,
                 rcc_location,
                 provider=provider,
+                trust_carrier=trust_carrier,
                 runner=runner,
             )
         except RccRuntimeError as exc:
@@ -386,9 +509,19 @@ def prepare_runtime(
             # path.  If RCC cannot materialize that identity, publish a new
             # artifact and validate its exact identity before using it.
             digest = publish_artifact(
-                environment, rcc_location, provider=provider, runner=runner
+                environment,
+                rcc_location,
+                provider=provider,
+                trust_carrier=trust_carrier,
+                runner=runner,
             )
-            acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+            acquire_artifact(
+                digest,
+                rcc_location,
+                provider=provider,
+                trust_carrier=trust_carrier,
+                runner=runner,
+            )
             descriptor = RccRuntimeDescriptor(
                 artifact_digest=digest,
                 source_generation=source_generation,
@@ -396,6 +529,8 @@ def prepare_runtime(
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="rebuild",
                 provider_reference=provider,
+                trust_carrier_identity=carrier_identity,
+                trust_policy=TRUST_POLICY,
             )
         else:
             descriptor = RccRuntimeDescriptor(
@@ -405,6 +540,8 @@ def prepare_runtime(
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="warm-reuse",
                 provider_reference=provider,
+                trust_carrier_identity=carrier_identity,
+                trust_policy=TRUST_POLICY,
             )
         with _prepared_runtime_cache_lock:
             _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -416,15 +553,26 @@ def prepare_runtime(
                 descriptor.artifact_digest,
                 rcc_location,
                 provider=provider,
+                trust_carrier=trust_carrier,
                 runner=runner,
             )
         except RccRuntimeError as exc:
             if not exc.retryable:
                 raise
             digest = publish_artifact(
-                environment, rcc_location, provider=provider, runner=runner
+                environment,
+                rcc_location,
+                provider=provider,
+                trust_carrier=trust_carrier,
+                runner=runner,
             )
-            acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+            acquire_artifact(
+                digest,
+                rcc_location,
+                provider=provider,
+                trust_carrier=trust_carrier,
+                runner=runner,
+            )
             descriptor = RccRuntimeDescriptor(
                 artifact_digest=digest,
                 source_generation=source_generation,
@@ -432,6 +580,8 @@ def prepare_runtime(
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="rebuild",
                 provider_reference=provider,
+                trust_carrier_identity=carrier_identity,
+                trust_policy=TRUST_POLICY,
             )
             with _prepared_runtime_cache_lock:
                 _prepared_runtime_cache[cache_key] = (
@@ -449,18 +599,32 @@ def prepare_runtime(
             runtime_kind=descriptor.runtime_kind,
             contract_version=descriptor.contract_version,
             provider_reference=provider,
+            trust_carrier_identity=carrier_identity,
+            trust_policy=TRUST_POLICY,
         )
 
     digest = publish_artifact(
-        environment, rcc_location, provider=provider, runner=runner
+        environment,
+        rcc_location,
+        provider=provider,
+        trust_carrier=trust_carrier,
+        runner=runner,
     )
-    acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+    acquire_artifact(
+        digest,
+        rcc_location,
+        provider=provider,
+        trust_carrier=trust_carrier,
+        runner=runner,
+    )
     descriptor = RccRuntimeDescriptor(
         artifact_digest=digest,
         source_generation=source_generation,
         source_hash=source_hash,
         environment_fingerprint=environment_fingerprint,
         provider_reference=provider,
+        trust_carrier_identity=carrier_identity,
+        trust_policy=TRUST_POLICY,
     )
     with _prepared_runtime_cache_lock:
         _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -473,11 +637,24 @@ def build_exec_command(
     command: Sequence[str],
     *,
     receipt_file: Path | None,
+    trust_carrier: RccTrustCarrier | None = None,
     json_output: bool = True,
 ) -> list[str]:
-    if not descriptor.provider_context_bound:
+    if (
+        not descriptor.provider_context_bound
+        or not descriptor.trust_carrier_context_bound
+    ):
         raise RccRuntimeError(
             "exec", "descriptor lacks provider trust context; reprepare required"
+        )
+    carrier_identity = trust_carrier.identity if trust_carrier is not None else None
+    carrier_policy = trust_carrier.policy if trust_carrier is not None else TRUST_POLICY
+    if (
+        descriptor.trust_carrier_identity != carrier_identity
+        or descriptor.trust_policy != carrier_policy
+    ):
+        raise RccRuntimeError(
+            "exec", "configured trust carrier changed; reprepare required"
         )
     args = [
         str(rcc_location),
@@ -489,10 +666,12 @@ def build_exec_command(
     ]
     if descriptor.provider_reference:
         args.extend(["--provider", descriptor.provider_reference])
+    args.extend(_trust_carrier_args(trust_carrier))
     if receipt_file is None and json_output:
         args.append("--json")
     elif receipt_file is not None:
         args.extend(["--inherit-streams", "--receipt-file", str(receipt_file)])
+    args.append("--workers=2")
     args.extend(["--", *map(str, command)])
     return args
 
