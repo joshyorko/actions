@@ -110,10 +110,29 @@ METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
 
 Runtime's installed-wheel contract tests select a Python supporting the Runtime
-distribution and `venv`. If the host's preferred Python lacks `ensurepip`, set
-`ACTIONS_RUNTIME_TEST_PYTHON` to the actual Python from the pinned RCC developer
-environment. Record that interpreter's version in the receipt; do not install
-host tooling or falsify version discovery to make this boundary pass.
+distribution and `venv`. For RCC-based verification, set
+`ACTIONS_RUNTIME_TEST_PYTHON` to the active RCC interpreter (`sys.executable`)
+so a higher-priority host `python3.13` cannot replace the pinned toolchain's
+Python 3.12. The contract failed with the unpinned host interpreter and passed
+with RCC Python 3.12. Record that interpreter's version in the receipt; do not
+install host tooling or falsify version discovery to make this boundary pass.
+
+When running Action Server source tests from a detached checkout with a prepared
+Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
+`actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
+the imported modules' `__file__` paths point into the checkout. The Runtime
+virtualenv can contain an older installed `actions` package that otherwise
+shadows the checkout's Core source. The Action Server test fixture also
+requires the package-pinned RCC binary at
+`action_server/src/actions/server/bin/rcc-18.19.3`; its feedback setup fails if
+`get_default_rcc_location()` is missing. Use the repository's
+configured RCC bootstrap for that binary rather than treating a host-only
+pytest invocation as equivalent verification. In Chromium descendant cleanup
+tests, keep the `psutil.Process` objects obtained from the child snapshot and
+inspect each object's status directly. A separate `pid_exists(pid)` followed
+by constructing `Process(pid)` races with normal process exit; `NoSuchProcess`
+during status inspection means that captured process has exited. Preserve the
+existing test deadline and its explicit zombie handling.
 
 For packaged UI acceptance, rebuild the canonical embedded static entrypoint
 with `invoke build-frontend`, then build the frozen executable and Go wrapper.
@@ -146,6 +165,17 @@ server URL and trusted HTTPS forwarding correctly; client-supplied forwarding
 headers do not independently establish transport trust. Cookie-authenticated
 unsafe HTTP operations and every WebSocket handshake require exact Origin;
 GET/HEAD artifact navigation may omit Origin but cannot supply a foreign one.
+Real-browser probes must distinguish same-site from same-origin: Chromium sent
+the `SameSite=Strict` HttpOnly session cookie on a credentialed fetch between
+two ports on the same loopback host, while JavaScript received a CORS
+`TypeError` for the response. An explicit CORS origin therefore does not itself
+grant browser session authority. Assert cookie emission from the browser's
+outgoing request headers, then assert backend authorization separately by
+sending that same browser-minted cookie and Origin to the live Runtime from the
+test driver. Probe CORS preflight directly against that Runtime and assert its
+status; neither a browser `TypeError` nor a Playwright failed-request event
+establishes the backend response. Keep the cookie in process memory and out of
+URLs, logs, and test receipts.
 Explicit invalid/duplicate Authorization headers cannot fall back to cookies.
 Bearer CLI clients without Origin retain their existing behavior. Cookie
 authority is limited to Runtime `/api/` and run-scoped `/artifacts/` surfaces.
@@ -1198,6 +1228,26 @@ or validate prebuilt frontend/binary artifacts carry the `integration_test` mark
 portable FastAPI/Starlette `TestClient` contracts require `httpx` in Action Server's
 locked development dependencies. Managed `package.yaml` fixtures use published,
 compatible Actions package versions rather than nonexistent future pins.
+The declared portable `test-not-integration` task does not recurse into
+`tests/action_server_tests/test_devenv/pack1/tests/`; Action Server's
+`norecursedirs` setting excludes that nested project fixture from discovery.
+Invoking `test_my_action.py` directly reproduces two
+`ModuleNotFoundError: my_action` failures because the fixture's `src/` is not
+on the test import path. Keep this fixture-layout issue separate from the
+declared portable-suite result and hand it to the Action Server test-layout
+owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
+the package's discovery rules.
+
+The real-browser Origin and ambient-session acceptance in
+`test_browser_origin_acceptance.py` runs Chromium against the actual Runtime
+HTTP server. Its Node HTTP requests and browser `fetch` calls have independent
+10-second deadlines, and the whole Node/Chromium process tree is bounded by a
+180-second outer deadline using the existing owned-process supervisor. A
+forced-hang regression observes Chromium alive before timeout and verifies the
+supervisor stops it. Playwright's default action timeout does not bound a
+pending `page.evaluate()` promise. A CORS `TypeError` proves only that browser
+script could not read a response: assert cookie transmission and the separate
+backend authorization status to establish those outcomes.
 
 Database migrations are complete only when an upgraded legacy database has the same
 tables, columns, and index definitions as a database freshly generated from current
