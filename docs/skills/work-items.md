@@ -385,6 +385,27 @@ Item state transitions, attachment behavior, accessibility or other browsers.
 Those cells remain separate acceptance requirements. A workflow build/version
 check alone is not native Work Items acceptance.
 
+For packaged Work Items storage-failure UI checks, keep Action Server's own
+database (`--db-file=server.db`) separate from the management API database at
+`datadir/workitems.db`. Stop only the test-owned Runtime, remove that Work
+Items database's SQLite sidecars, corrupt `workitems.db`, then restart and
+verify the real API's `work_items_storage_unavailable` response and visible
+Retry guidance. Pointing `--db-file` at `workitems.db` instead corrupts the
+Action Server migration database and prevents the Runtime from reaching the
+Work Items error path.
+
+Keyboard acceptance for a Work Items dialog must verify both Escape dismissal
+and focus returning to the control that opened it; dialog closure alone is not
+a keyboard pass. A real Chromium probe of the Linux Go-wrapper artifact from
+run `37978256399`, manifest source `006232d13bf322755419d99b96e506edf16a4353`,
+wrapper SHA-256 `8f77988e3d305a232667037cabc55222e18f0af2b6d81d6b45832f45a338f0b5`,
+found that
+Escape closed Create Work Item but left `document.activeElement` on `BODY`
+while the trigger button remained present. Treat that packaged UI result as a
+keyboard-accessibility failure until a corrected artifact demonstrates focus
+restoration. Do not simulate missing Runtime support or a generic HTTP 500 with
+browser response interception and count it as backend evidence.
+
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
 descendants inherit that ownership; closing the Job requests descendant termination
