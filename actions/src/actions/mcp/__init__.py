@@ -18,7 +18,7 @@ This approach enables:
    and inspect the details on the execution.
 """
 
-from typing import Callable, overload
+from typing import Any, Callable, overload
 
 from actions._hooks import after_collect_actions as _after_collect_actions
 from actions._protocols import IAction
@@ -52,8 +52,7 @@ _after_collect_actions.register(_validate_collected_actions)
 
 
 @overload
-def tool(func: Callable) -> Callable:
-    ...
+def tool(func: Callable) -> Callable: ...
 
 
 @overload
@@ -64,6 +63,7 @@ def tool(
     destructive_hint: bool = True,
     idempotent_hint: bool = False,
     open_world_hint: bool = True,
+    meta: dict[str, Any] | None = None,
 ) -> Callable:
     """
     Decorator for tools which can be used by AI agents to perform actions.
@@ -84,6 +84,8 @@ def tool(
             If False, the tool's domain of interaction is closed.
             For example, the world of a web search tool is open, whereas that
             of a memory tool is not.
+
+        meta: Optional JSON metadata to include in the MCP tool's `_meta` field.
     """
 
 
@@ -158,26 +160,32 @@ def tool(*args, **kwargs):
         if not isinstance(open_world_hint, bool):
             raise ValueError("Expected 'open_world_hint' argument to be a bool.")
 
+        meta = kwargs.pop("meta", None)
+        if meta is not None:
+            from actions.mcp._metadata import normalize_mcp_meta
+
+            meta = normalize_mcp_meta(meta, subject="tool")
+
         if kwargs:
             raise ValueError(
-                f"Arguments accepted by @tool: ['name', 'title', 'read_only_hint', 'destructive_hint', 'idempotent_hint', 'open_world_hint']. Received arguments: {list(kwargs.keys())}"
+                f"Arguments accepted by @tool: ['name', 'title', 'read_only_hint', 'destructive_hint', 'idempotent_hint', 'open_world_hint', 'meta']. Received arguments: {list(kwargs.keys())}"
             )
 
         # When an action is found, register it in the framework as a target for execution.
         # The tool schema in MCP requires:
         # - name (from the func name or passed as argument),
         # - description (always from the function docstring),
-        _hooks.on_action_func_found(
-            func,
-            options={
-                "title": title,
-                "read_only_hint": read_only_hint,
-                "destructive_hint": destructive_hint,
-                "idempotent_hint": idempotent_hint,
-                "open_world_hint": open_world_hint,
-                "kind": "tool",
-            },
-        )
+        options = {
+            "title": title,
+            "read_only_hint": read_only_hint,
+            "destructive_hint": destructive_hint,
+            "idempotent_hint": idempotent_hint,
+            "open_world_hint": open_world_hint,
+            "kind": "tool",
+        }
+        if meta is not None:
+            options["_meta"] = meta
+        _hooks.on_action_func_found(func, options=options)
 
         return func
 
@@ -188,8 +196,7 @@ def tool(*args, **kwargs):
 
 
 @overload
-def resource(func: Callable) -> Callable:
-    ...
+def resource(func: Callable) -> Callable: ...
 
 
 @overload
@@ -198,8 +205,8 @@ def resource(
     *,
     mime_type: str | None = None,
     size: int | None = None,
-) -> Callable:
-    ...
+    meta: dict[str, Any] | None = None,
+) -> Callable: ...
 
 
 def resource(*args, **kwargs) -> Callable:
@@ -219,6 +226,8 @@ def resource(*args, **kwargs) -> Callable:
         size: The size of the raw resource content, in bytes (i.e., before base64 encoding
             or any tokenization), if known.
             This can be used by Hosts to display file sizes and estimate context window usage.
+
+        meta: Optional JSON metadata to include in the MCP resource's `_meta` field.
 
     Note: the name is the name of the function and the description is gotten from the docstring.
 
@@ -279,22 +288,31 @@ def resource(*args, **kwargs) -> Callable:
         # If not specified, it's based on the type of the result
         mime_type = kwargs.pop("mime_type", None)
         size = kwargs.pop("size", None)
+        meta = kwargs.pop("meta", None)
+        if meta is not None:
+            from actions.mcp._metadata import normalize_mcp_meta
+
+            meta = normalize_mcp_meta(meta, subject="resource")
 
         if kwargs:
             raise ValueError(
-                f"Arguments accepted by @resource: ['uri', 'mime_type', 'size']. Received arguments: {list(kwargs.keys())}"
+                f"Arguments accepted by @resource: ['uri', 'mime_type', 'size', 'meta']. Received arguments: {list(kwargs.keys())}"
             )
 
+        from actions.mcp._metadata import validate_ui_resource_declaration
+
+        validate_ui_resource_declaration(uri, mime_type, meta)
+
         # When an action is found, register it in the framework as a target for execution.
-        _hooks.on_action_func_found(
-            func,
-            options={
-                "uri": uri,
-                "kind": "resource",
-                "mime_type": mime_type,
-                "size": size,
-            },
-        )
+        options = {
+            "uri": uri,
+            "kind": "resource",
+            "mime_type": mime_type,
+            "size": size,
+        }
+        if meta is not None:
+            options["_meta"] = meta
+        _hooks.on_action_func_found(func, options=options)
 
         return func
 
@@ -305,13 +323,11 @@ def resource(*args, **kwargs) -> Callable:
 
 
 @overload
-def prompt(func: Callable) -> Callable:
-    ...
+def prompt(func: Callable) -> Callable: ...
 
 
 @overload
-def prompt() -> Callable:
-    ...
+def prompt() -> Callable: ...
 
 
 def prompt(*args, **kwargs):
