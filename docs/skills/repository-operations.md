@@ -22,8 +22,11 @@ contain only the version floor, never a machine/source path. The clean-wheel
 contract builds with the pinned Poetry available from RCC, installs outside
 the checkout, checks dependencies and imports the public contracts before
 testing both uninstall orders. It does not download another Poetry through
-`uv --with poetry`. Template pins remain at the published Core 1.0.1 until a
-separately authorized release and template update.
+`uv --with poetry`. The Community base (`7c982360`) still pins templates to
+published Core 1.0.1. On the selected integration candidate (`3fee2792`), all
+four existing template manifests pin published Core 1.0.2. A template pin is
+therefore revision-specific; verify the target manifests before describing a
+release's template state.
 
 Poetry merges the matching Core source into the main/dev lock entry: a
 `poetry install --only main` using this checkout lock still selects local Core.
@@ -181,7 +184,9 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
-Every template `package.yaml` pins the published `actions-core=1.0.1`.
+At Community base `7c982360`, every template `package.yaml` pins the published
+`actions-core=1.0.1`; on integration candidate `3fee2792`, all four existing
+template manifests pin published `actions-core=1.0.2`.
 The producer-consumer template additionally pins
 `actions-work-items=0.4.4`. `actions-http-helper` remains a transitive Core
 dependency, and `actions-runtime` is the server distribution rather than a
@@ -418,6 +423,20 @@ changed surface. Unit coverage also proves schema and `_meta` changes affect
 the revision. These tests do not establish the other distributed-runtime
 guarantees tracked by issue #82. Do not add Canvas behavior merely to maintain
 this adapter seam.
+
+For a runnable protocol showcase proof, start the actual `ActionServerProcess`
+with a temporary action catalog pinned to the candidate's published
+`actions-core=1.0.2` floor and send raw, independent stateless JSON-RPC POSTs
+carrying matching `Mcp-Method` header/body values and the required protocol
+metadata.
+For named reads and calls, also send the matching `Mcp-Name` value (`uri` for
+`resources/read`). Exercise `server/discover`, the four catalogs, tool call,
+direct and templated resource reads, prompt retrieval, and a bounded safe
+application error; assert catalog metadata, request correlation, and absence
+of session headers. This proves the mounted Runtime protocol path only. It does
+not prove a community template exists, is included in the embedded bundle, or
+can be created offline; those remain separate manifest, generated-artifact,
+and CLI acceptance gates.
 The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
