@@ -1270,6 +1270,13 @@ Allocate Robot publication staging exclusively before copying, and record owners
 only after allocation succeeds. An initial name collision is not permission to
 delete the existing entry. The regression seeds a foreign sentinel at the allocation
 boundary and proves it survives; interrupted copies still clean their owned staging.
+After successful native no-replace publication, relinquish cleanup authority for the
+old staging pathname before entering final cleanup. Another writer can immediately
+reuse that name; success-path cleanup must preserve the new entry's identity and
+content. The regression performs the real rename, recreates the old name as a
+directory or file with a foreign sentinel, and verifies both complete publication
+and preservation of the replacement. This covers the ownership transfer after
+publication, not replacement of the root, source or staging entry before publication.
 This initial ownership flag does not establish identity after another actor replaces
 the entry. Robot directory publication uses native no-replace rename: Linux
 `renameat2(RENAME_NOREPLACE)`, macOS `renameatx_np(RENAME_EXCL)`, and Windows

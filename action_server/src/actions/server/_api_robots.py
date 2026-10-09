@@ -422,6 +422,9 @@ def _publish_robot_package(
             if os.path.lexists(target_dir):
                 raise FileExistsError(target_dir)
             rename_directory_no_replace(temporary_target, target_dir)
+            # The rename transferred our directory to its final name. Any entry
+            # recreated at the old staging path belongs to another writer.
+            staging_created = False
             return final_name, target_dir
         except FileExistsError:
             if not os.path.lexists(target_dir):
