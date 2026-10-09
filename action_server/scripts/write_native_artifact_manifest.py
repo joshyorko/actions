@@ -19,6 +19,44 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def packaged_files_sha256(root: Path) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(
+        (item for item in root.rglob("*") if item.is_file()),
+        key=lambda item: item.relative_to(root).as_posix(),
+    ):
+        relative = path.relative_to(root).as_posix().encode("utf-8")
+        digest.update(relative + b"\0" + bytes.fromhex(sha256(path)))
+    return digest.hexdigest()
+
+
+def packaged_tree_sha256(root: Path) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+        relative = path.relative_to(root).as_posix().encode("utf-8")
+        metadata = path.lstat()
+        digest.update(relative + b"\0" + str(metadata.st_mode & 0o777).encode() + b"\0")
+        if path.is_symlink():
+            digest.update(b"link\0" + path.readlink().as_posix().encode("utf-8") + b"\0")
+        elif path.is_dir():
+            digest.update(b"directory\0")
+        elif path.is_file():
+            digest.update(b"file\0" + bytes.fromhex(sha256(path)))
+        else:
+            raise ValueError(f"unsupported packaged artifact entry: {relative!r}")
+    return digest.hexdigest()
+
+
+def source_files_sha256(root: Path, relative_paths: tuple[str, ...]) -> str:
+    digest = hashlib.sha256()
+    for relative in relative_paths:
+        path = root / relative
+        if not path.is_file():
+            raise FileNotFoundError(f"wrapper source input missing: {relative}")
+        digest.update(relative.encode("utf-8") + b"\0" + bytes.fromhex(sha256(path)))
+    return digest.hexdigest()
+
+
 def write_manifest(
     package: Path,
     *,
@@ -60,6 +98,28 @@ def write_manifest(
             "sha256": sha256(binary),
         }
 
+    frozen_tree = package / "dist" / "action-server"
+    assets_zip = package / "go-wrapper" / "assets" / "assets.zip"
+    wrapper_source_files = (
+        "go-wrapper/main.go",
+        "go-wrapper/go.mod",
+        "go-wrapper/go.sum",
+    )
+    if not frozen_tree.is_dir():
+        raise FileNotFoundError("frozen package tree missing")
+    if not assets_zip.is_file():
+        raise FileNotFoundError("Go-wrapper assets archive missing")
+    measured_components = {
+        "embedded_files_sha256": packaged_files_sha256(frozen_tree),
+        "assets_zip_sha256": sha256(assets_zip),
+        "assets_zip_path": "go-wrapper/assets/assets.zip",
+        "wrapper_source_sha256": source_files_sha256(package, wrapper_source_files),
+        "wrapper_source_files": list(wrapper_source_files),
+        "frozen_package_tree_sha256": packaged_tree_sha256(frozen_tree),
+    }
+    for artifact in artifacts.values():
+        artifact.update(measured_components)
+
     manifest = {
         "schema_version": 1,
         "source_sha": actual_sha,
@@ -87,7 +147,7 @@ def write_manifest(
                 "archive_path": "output/native-artifact-manifest.json",
             },
         },
-        "provenance_scope": "checks Git HEAD only (not a clean-source attestation); hashes bytes read from executable paths (path reads follow symlinks); no candidate Core wheel is included",
+        "provenance_scope": "checks Git HEAD only (not a clean-source attestation); hashes named file contents and frozen-tree metadata (file reads follow symlinks); no candidate Core wheel is included",
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

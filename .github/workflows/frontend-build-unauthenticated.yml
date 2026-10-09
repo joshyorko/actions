@@ -115,7 +115,7 @@ jobs:
           RC_ACTION_SERVER_DO_SELFTEST: 'true'
         run: uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper
       
-      - name: Record native binary provenance
+      - name: Record native binary and embedded component provenance
         run: >-
           uv run --no-project --python ${{ matrix.python }} python
           scripts/write_native_artifact_manifest.py

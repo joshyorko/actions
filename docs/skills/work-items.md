@@ -341,15 +341,22 @@ the frozen executable and manifest in
 `action-server-native-provenance-<runner-os>-<run-id>-<attempt>`. The manifest
 checks Git `HEAD` against `github.sha`, records actual Python and Go versions
 plus platform/architecture, and measures executable hashes and package-relative
-paths. It does not attest a clean source tree or every build input. Ordinary
+paths. Each runtime entry also records the frozen onedir tree hash and its
+relative-file/content digest, the generated `go-wrapper/assets/assets.zip`
+hash, and a deterministic hash over `go-wrapper/main.go`, `go.mod`, and
+`go.sum`. These component values are read from the real build outputs after
+`build-executable --go-wrapper`; missing inputs fail manifest generation. The
+browser harness remeasures the checked-out archive and wrapper sources, the
+frozen tree, and extracted wrapper files before accepting UI behavior. The
+manifest does not attest a clean source tree or every build input. Ordinary
 path reads follow symlinks, so SHA-256 identifies bytes read through each named
 path without proving filesystem object identity. Artifact download entries
 identify the Go-wrapper artifact's root executable and the frozen artifact's
 `dist/action-server/...` path. This build does not supply a candidate Core wheel,
 so the manifest makes no Core-wheel provenance claim; the worker-consumer
-acceptance requires a separately measured task-local wheel. The manifest covers
-the checkout and named build outputs, not every dependency or the frozen
-executable's adjacent onedir files.
+acceptance requires a separately measured task-local wheel. The manifest binds
+the source revision and named build inputs, but does not hash every build
+dependency or attest a clean source tree.
 
 On Linux, macOS, and Windows, the same workflow has a separate bounded Work
 Items consumer gate. Each matrix job builds `actions-core` as a wheel into a
@@ -451,6 +458,12 @@ Those Windows gates still require passing hosted receipts; macOS browser
 acceptance is not configured. Authorization denial, missing bundled support,
 and generic HTTP 500 remain `NOT_RUN` until their separately owned or supported
 packaged fixtures run. Do not use response interception as backend evidence.
+The browser receipt may say `PASS_BOUNDED` only after the owned Runtime process
+stops successfully; startup failure stops the just-created process even when
+the startup helper has not returned it to the caller. If both startup and that
+cleanup fail, retain both exception class names in the sanitized receipt while
+preserving the startup exception as the primary failure. A cleanup exception
+after otherwise successful browser checks leaves the receipt at `FAIL`.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their

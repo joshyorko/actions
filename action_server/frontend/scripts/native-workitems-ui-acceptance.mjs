@@ -16,6 +16,17 @@ let lastStatus = null;
 const evidence = {};
 const responses = [];
 
+function safeErrorSummary(error) {
+    let message = String(error?.message || error?.name || "unknown browser error");
+    for (const sensitiveValue of [input.api_key, input.profile, target.origin]) {
+        if (sensitiveValue) message = message.replaceAll(sensitiveValue, "[REDACTED]");
+    }
+    message = message
+        .replace(/(?:[A-Za-z]:\\|\/)\S+/g, "[PATH]")
+        .replace(/\b[A-Za-z0-9+/_=-]{32,}\b/g, "[REDACTED]");
+    return message.slice(0, 320);
+}
+
 async function narrowViewport(page) {
     await page.setViewportSize({ width: 320, height: 640 });
     return page.evaluate(() => ({
@@ -53,10 +64,12 @@ async function signIn(page) {
 }
 
 async function normal() {
+    phase = "browser_launch";
     browserContext = await chromium.launchPersistentContext(input.profile, {
         headless: true,
         viewport: { width: 320, height: 640 },
     });
+    phase = "browser_page_setup";
     const page = browserContext.pages()[0] || (await browserContext.newPage());
     page.setDefaultTimeout(15_000);
     await signIn(page);
@@ -202,10 +215,12 @@ async function normal() {
 }
 
 async function storageUnavailable() {
+    phase = "browser_launch";
     browserContext = await chromium.launchPersistentContext(input.profile, {
         headless: true,
         viewport: { width: 320, height: 640 },
     });
+    phase = "browser_page_setup";
     const page = browserContext.pages()[0] || (await browserContext.newPage());
     page.setDefaultTimeout(15_000);
     await signIn(page);
@@ -255,6 +270,7 @@ try {
             phase,
             httpStatus: lastStatus,
             errorType: error.name,
+            errorSummary: safeErrorSummary(error),
             browserErrorCode:
                 /net::ERR_[A-Z_]+/.exec(String(error.message))?.[0] || null,
             responses: responses.slice(-16),

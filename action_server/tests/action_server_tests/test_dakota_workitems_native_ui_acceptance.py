@@ -11,6 +11,7 @@ import secrets
 import shutil
 import stat
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -74,6 +75,34 @@ def packaged_files_sha256(
     return digest.hexdigest()
 
 
+def wrapper_source_sha256(root: Path, relative_paths: tuple[str, ...]) -> str:
+    digest = hashlib.sha256()
+    for relative in relative_paths:
+        path = root / relative
+        assert path.is_file(), f"wrapper source input is missing: {relative}"
+        digest.update(relative.encode("utf-8") + b"\0" + bytes.fromhex(sha256(path)))
+    return digest.hexdigest()
+
+
+def require_measured_digest(artifact: dict, field: str, measured: str) -> None:
+    recorded = artifact.get(field)
+    assert isinstance(recorded, str), f"manifest field {field} is missing or invalid"
+    assert re.fullmatch(r"[0-9a-f]{64}", recorded), (
+        f"manifest field {field} is missing or invalid"
+    )
+    assert recorded == measured, f"manifest field {field} does not match build input"
+
+
+class NativeRuntimeStartupError(AssertionError):
+    def __init__(self, primary_error: Exception, cleanup_error: Exception | None = None):
+        self.primary_error = primary_error
+        self.cleanup_error = cleanup_error
+        message = f"packaged Runtime startup failed ({type(primary_error).__name__})"
+        if cleanup_error is not None:
+            message += f"; cleanup failed ({type(cleanup_error).__name__})"
+        super().__init__(message)
+
+
 def packaged_artifact_relative_path(runtime_kind: str, platform_name: str) -> str:
     executable = {
         "frozen": "dist/action-server/action-server",
@@ -115,6 +144,36 @@ def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
     assert artifact.get("path") == expected_path
     executable_sha = sha256(executable)
     assert artifact.get("sha256") == executable_sha
+    frozen_package = (
+        executable.parent
+        if runtime_kind == "frozen"
+        else executable.parents[1] / "action-server"
+    )
+    require_measured_digest(
+        artifact,
+        "frozen_package_tree_sha256",
+        packaged_tree_sha256(frozen_package),
+    )
+    require_measured_digest(
+        artifact, "embedded_files_sha256", packaged_files_sha256(frozen_package)
+    )
+    source_paths = (
+        "go-wrapper/main.go",
+        "go-wrapper/go.mod",
+        "go-wrapper/go.sum",
+    )
+    assert artifact.get("wrapper_source_files") == list(source_paths)
+    require_measured_digest(
+        artifact,
+        "wrapper_source_sha256",
+        wrapper_source_sha256(PACKAGE, source_paths),
+    )
+    assert artifact.get("assets_zip_path") == "go-wrapper/assets/assets.zip"
+    require_measured_digest(
+        artifact,
+        "assets_zip_sha256",
+        sha256(PACKAGE / "go-wrapper/assets/assets.zip"),
+    )
     return (
         executable,
         source_sha,
@@ -153,6 +212,11 @@ def validate_browser_stage_result(returncode: int, receipt: dict) -> dict:
     return receipt
 
 
+def record_browser_stage(acceptance_receipt: dict, browser_stage: dict) -> None:
+    acceptance_receipt["browser_stages"].append(browser_stage)
+    validate_browser_stage_result(browser_stage["script_exit_code"], browser_stage)
+
+
 def run_browser_stage(
     node: str,
     stage: str,
@@ -182,7 +246,8 @@ def run_browser_stage(
         receipt = json.loads(result.stdout)
     except json.JSONDecodeError:
         raise AssertionError("browser acceptance returned an invalid receipt") from None
-    return validate_browser_stage_result(result.returncode, receipt)
+    receipt["script_exit_code"] = result.returncode
+    return receipt
 
 
 def test_browser_nonzero_exit_preserves_nested_failure_receipt() -> None:
@@ -197,6 +262,22 @@ def test_browser_nonzero_exit_preserves_nested_failure_receipt() -> None:
         validate_browser_stage_result(1, receipt)
 
     assert json.loads(str(error.value)) == {"returncode": 1, "receipt": receipt}
+
+
+def test_browser_stage_is_recorded_before_failure_is_raised() -> None:
+    acceptance_receipt = {"browser_stages": []}
+    browser_stage = {
+        "status": "FAIL",
+        "stage": "normal",
+        "phase": "keyboard_create_dialog",
+        "script_exit_code": 1,
+        "states": {"trigger": {"aria_haspopup": None}},
+    }
+
+    with pytest.raises(AssertionError):
+        record_browser_stage(acceptance_receipt, browser_stage)
+
+    assert acceptance_receipt["browser_stages"] == [browser_stage]
 
 
 def wrapper_home_environment(runtime_home: Path) -> dict[str, str]:
@@ -226,10 +307,95 @@ def start_native_runtime(
             },
         )
     except Exception as error:
-        raise AssertionError(
-            f"packaged Runtime startup failed ({type(error).__name__})"
-        ) from None
+        try:
+            process.stop()
+        except Exception as cleanup_error:
+            raise NativeRuntimeStartupError(error, cleanup_error) from None
+        raise NativeRuntimeStartupError(error) from None
     return process
+
+
+def stop_runtime_for_acceptance(process: ActionServerProcess, receipt: dict) -> None:
+    try:
+        process.stop()
+    except BaseException as error:
+        receipt["status"] = "FAIL"
+        receipt["cleanup_failure_type"] = type(error).__name__
+        raise
+
+
+def test_native_runtime_startup_failure_stops_created_process(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    class StartupProcess:
+        def __init__(self, _datadir):
+            self.stop_calls = 0
+
+        def start(self, **_kwargs):
+            raise TimeoutError("startup timeout")
+
+        def stop(self):
+            self.stop_calls += 1
+
+    created: list[StartupProcess] = []
+
+    def create_process(datadir):
+        process = StartupProcess(datadir)
+        created.append(process)
+        return process
+
+    monkeypatch.setattr(sys.modules[__name__], "ActionServerProcess", create_process)
+    with pytest.raises(AssertionError, match="TimeoutError"):
+        start_native_runtime(tmp_path, tmp_path, tmp_path, "test-key")
+    assert len(created) == 1
+    assert created[0].stop_calls == 1
+
+
+def test_native_runtime_startup_preserves_cleanup_failure_type(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    class StartupProcess:
+        def __init__(self, _datadir):
+            pass
+
+        def start(self, **_kwargs):
+            raise TimeoutError("startup timeout")
+
+        def stop(self):
+            raise RuntimeError("cleanup detail is not emitted")
+
+    monkeypatch.setattr(sys.modules[__name__], "ActionServerProcess", StartupProcess)
+    with pytest.raises(AssertionError) as error:
+        start_native_runtime(tmp_path, tmp_path, tmp_path, "test-key")
+    assert "TimeoutError" in str(error.value)
+    assert "RuntimeError" in str(error.value)
+    assert isinstance(error.value.primary_error, TimeoutError)
+    assert isinstance(error.value.cleanup_error, RuntimeError)
+
+
+def test_missing_and_mismatched_manifest_digests_fail_closed() -> None:
+    fields = (
+        "embedded_files_sha256",
+        "assets_zip_sha256",
+        "wrapper_source_sha256",
+        "frozen_package_tree_sha256",
+    )
+    for field in fields:
+        with pytest.raises(AssertionError, match=field):
+            require_measured_digest({}, field, "a" * 64)
+        with pytest.raises(AssertionError, match=field):
+            require_measured_digest({field: "b" * 64}, field, "a" * 64)
+
+
+def test_cleanup_failure_prevents_bounded_pass_receipt() -> None:
+    class FailingCleanup:
+        def stop(self):
+            raise OSError("cleanup details stay private")
+
+    receipt = {"status": "IN_PROGRESS"}
+    with pytest.raises(OSError):
+        stop_runtime_for_acceptance(FailingCleanup(), receipt)
+    assert receipt == {"status": "FAIL", "cleanup_failure_type": "OSError"}
 
 
 @pytest.mark.integration_test
@@ -352,8 +518,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             api_key,
             origin,
         )
-        receipt["browser_stages"].append(normal)
-        assert normal.get("status") == "PASS", json.dumps(normal)
+        record_browser_stage(receipt, normal)
 
         work_items_db = datadir / "workitems.db"
         assert work_items_db.is_file()
@@ -367,8 +532,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             api_key,
             origin,
         )
-        receipt["browser_stages"].append(storage_error)
-        assert storage_error.get("status") == "PASS", json.dumps(storage_error)
+        record_browser_stage(receipt, storage_error)
         if package_root is not None:
             assert packaged_tree_sha256(package_root) == package_tree_sha
         if runtime_kind == "go-wrapper":
@@ -379,13 +543,27 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 )
                 == embedded_files_sha
             )
-        receipt["status"] = "PASS_BOUNDED"
-        write_receipt(receipt)
-    except Exception as error:
+    except BaseException as error:
         receipt["status"] = "FAIL"
-        receipt["failure_type"] = type(error).__name__
+        if isinstance(error, NativeRuntimeStartupError):
+            receipt["failure_type"] = type(error.primary_error).__name__
+            if error.cleanup_error is not None:
+                receipt["cleanup_failure_type"] = type(error.cleanup_error).__name__
+        else:
+            receipt["failure_type"] = type(error).__name__
+        if process is not None:
+            try:
+                stop_runtime_for_acceptance(process, receipt)
+            except BaseException:
+                pass
         write_receipt(receipt)
         raise
-    finally:
+    else:
         if process is not None:
-            process.stop()
+            try:
+                stop_runtime_for_acceptance(process, receipt)
+            except BaseException:
+                write_receipt(receipt)
+                raise
+        receipt["status"] = "PASS_BOUNDED"
+        write_receipt(receipt)
