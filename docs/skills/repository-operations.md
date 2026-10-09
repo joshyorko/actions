@@ -923,11 +923,11 @@ the release-byte receipt does not replace native, provider, or package gates.
 The supported Action Server templates are generated from `templates/packaging/templates-prod.json`
 with `templates/packaging/build_embedded_bundle.py`. The generator sorts archive members,
 uses fixed ZIP timestamps and permissions, and writes `action-templates.zip` plus YAML
-metadata containing its SHA-256. Each template archive honors the `packaging.exclude`
-patterns in that template's `package.yaml`, using the same anchored, unanchored, and
-`**` path matching rules as Action Server package distribution. This keeps local test
-outputs and generated caches out of offline templates while retaining non-excluded
-source files. Regenerate the checked-in assets with:
+metadata containing its SHA-256. Template archives omit known local build/test state
+(`output`, virtual environments, bytecode, and test/tool caches), but preserve authored
+template inputs such as `devdata`. `package.yaml` `packaging.exclude` rules govern
+deployment packaging and do not select which authored files are included in the
+offline project-creation archive. Regenerate the checked-in assets with:
 
 ```bash
 python templates/packaging/build_embedded_bundle.py \

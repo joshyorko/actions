@@ -53,11 +53,15 @@ def test_template_bundle_generation_is_byte_for_byte_deterministic(tmp_path):
     )
 
 
-def test_generated_template_archive_honors_package_excludes(tmp_path):
+def test_generated_template_archive_omits_local_state_and_keeps_authored_devdata(
+    tmp_path,
+):
     template_root = tmp_path / "templates"
     template = template_root / "fixture"
     (template / "src").mkdir(parents=True)
     (template / "src" / "keep.py").write_text("value = 1\n")
+    (template / "devdata").mkdir()
+    (template / "devdata" / "example.json").write_text('{"sample": true}\n')
     (template / "output").mkdir()
     (template / "output" / "result.txt").write_text("generated\n")
     (template / "__pycache__").mkdir()
@@ -68,6 +72,7 @@ def test_generated_template_archive_honors_package_excludes(tmp_path):
     (template / "package.yaml").write_text(
         "packaging:\n"
         "  exclude:\n"
+        "    - ./devdata/**\n"
         "    - ./output/**\n"
         "    - ./**/*.pyc\n"
         "    - ./**/__pycache__/**\n"
@@ -96,20 +101,21 @@ def test_generated_template_archive_honors_package_excludes(tmp_path):
 
     with zipfile.ZipFile(output / "zips" / "fixture.zip") as archive:
         actual = set(archive.namelist())
-    assert actual == {"package.yaml", "src/keep.py"}
+    assert actual == {"package.yaml", "src/keep.py", "devdata/example.json"}
 
-    from actions.server._common.package_exclude import PackageExcludeHandler
 
-    handler = PackageExcludeHandler()
-    handler.fill_exclude_patterns(
-        yaml.safe_load((template / "package.yaml").read_text())["packaging"]["exclude"]
-    )
-    source_paths = [
-        path.relative_to(template).as_posix()
-        for path in template.rglob("*")
-        if path.is_file()
-    ]
-    assert actual == set(handler.filter_relative_paths_excluding_patterns(source_paths))
+def test_existing_template_archives_retain_authored_devdata():
+    expected = {
+        "advanced": {
+            "devdata/input_create_repository_issue.json",
+            "devdata/input_get_repository_commits.json",
+        },
+        "basic": {"devdata/input_get_wikipedia_article_summary.json"},
+        "minimal": {"devdata/input_greet.json"},
+    }
+    for template_id, expected_members in expected.items():
+        with zipfile.ZipFile(EMBEDDED / "zips" / f"{template_id}.zip") as archive:
+            assert expected_members <= set(archive.namelist())
 
 
 def test_embedded_metadata_covers_all_production_templates():

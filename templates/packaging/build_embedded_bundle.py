@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import fnmatch
-import glob
 import hashlib
 import json
 import os
@@ -13,67 +11,34 @@ import tempfile
 import zipfile
 from pathlib import Path
 
-import yaml
-
 ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 ZIP_FILE_MODE = 0o100644 << 16
+GENERATED_TEMPLATE_DIRS = {
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".tox",
+    ".venv",
+    "__pycache__",
+    "output",
+    "venv",
+}
 
 
-def _matches_exclude_pattern(relative_path: str, pattern: str) -> bool:
-    """Match a package.yaml exclude using PackageExcludeHandler path semantics."""
-    pattern = pattern.rstrip("/\\")
-    patterns = pattern.replace("\\", "/").split("/")
-    paths = relative_path.replace("\\", "/").split("/")
-
-    def matches(pattern_parts: list[str], path_parts: list[str]) -> bool:
-        if not pattern_parts and not path_parts:
-            return True
-        if not pattern_parts or not path_parts:
-            return False
-        part = pattern_parts[0]
-        if not glob.has_magic(part):
-            if part != path_parts[0]:
-                return False
-        elif part == "**":
-            if len(pattern_parts) == 1:
-                return True
-            return any(
-                matches(pattern_parts[1:], path_parts[index:])
-                for index in range(len(path_parts))
-            )
-        elif not fnmatch.fnmatch(path_parts[0], part):
-            return False
-        return matches(pattern_parts[1:], path_parts[1:])
-
-    return matches(patterns, paths)
-
-
-def _package_exclude_patterns(directory: Path) -> list[str]:
-    package_file = directory / "package.yaml"
-    if not package_file.is_file():
-        return []
-    package = yaml.safe_load(package_file.read_text(encoding="utf-8")) or {}
-    excludes = (package.get("packaging") or {}).get("exclude") or []
-    if not isinstance(excludes, list) or not all(
-        isinstance(pattern, str) for pattern in excludes
-    ):
-        raise ValueError(f"Invalid packaging.exclude list in {package_file}")
-
-    normalized = []
-    for pattern in excludes:
-        if pattern.startswith("./"):
-            pattern = pattern[2:]
-        elif pattern.startswith("/"):
-            pattern = pattern[1:]
-        elif not pattern.startswith("**"):
-            pattern = f"**/{pattern}"
-        normalized.append(pattern)
-    return normalized
+def _is_generated_local_file(relative_path: Path) -> bool:
+    """Omit local build/test state without applying deployment package excludes."""
+    return any(
+        part in GENERATED_TEMPLATE_DIRS
+        or part.endswith("_cache")
+        or part == ".env"
+        or part == ".DS_Store"
+        for part in relative_path.parts
+    ) or relative_path.suffix.lower() in {".pyc", ".pyo"}
 
 
 def _zip_directory(directory: Path) -> bytes:
     result = bytearray()
-    exclude_patterns = _package_exclude_patterns(directory)
     with tempfile.NamedTemporaryFile() as temporary:
         with zipfile.ZipFile(
             temporary, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
@@ -82,12 +47,7 @@ def _zip_directory(directory: Path) -> bytes:
                 path
                 for path in directory.rglob("*")
                 if path.is_file()
-                and not any(
-                    _matches_exclude_pattern(
-                        path.relative_to(directory).as_posix(), pattern
-                    )
-                    for pattern in exclude_patterns
-                )
+                and not _is_generated_local_file(path.relative_to(directory))
             )
             for source in sorted(sources):
                 relative = source.relative_to(directory).as_posix()
