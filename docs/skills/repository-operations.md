@@ -1253,6 +1253,22 @@ The Dakota candidate-wheel harness records separate unauthenticated rejection,
 authenticated Action, SQLite, artifact verification, wrapper exit and process
 cleanup cells. Every cell must pass for overall acceptance. Preserve the exact
 failed wrapper status, exit code and reason even when Action execution succeeds.
+
+An RCC lifecycle `inspect` result of `ready: true` with
+`providerRequired: false` does not by itself prove a provider-free Runtime
+restart. In the bounded provider-dead warm probe at source
+`ae6db6b8a62a918d6c2de032b873bdff8117034e`, the initial authenticated Action,
+artifact verification, RCC wrapper exit 0 and provider cleanup passed. A second
+Runtime used the same datadir, RCC home, artifact digest and provider origin;
+after the RCC cache process was reaped, a count-and-reject loopback probe
+reoccupied that origin without serving artifacts. RCC inspection still
+reported the artifact ready, but the warm attempt made one request to the
+configured origin, received the probe's 503 response and failed during RCC
+acquire before producing a warm Action or wrapper receipt. Keep offline warm
+execution and zero requests to that configured origin as separate cells; this
+result does not establish either. The probe is request instrumentation, not an
+Actions-owned provider and not evidence about requests to other origins.
+
 Its separate CLI watchdog does not by itself prove cleanup of every descendant.
 Cleanup coverage must include an owner that exits before timeout while a
 detached child retains its output pipes: discovery only during teardown loses
