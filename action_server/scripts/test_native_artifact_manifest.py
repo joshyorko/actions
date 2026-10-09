@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import tempfile
 import unittest
@@ -54,11 +55,11 @@ class NativeArtifactManifestTests(unittest.TestCase):
                 self.assertEqual(saved, result)
                 self.assertEqual(
                     result["artifacts"]["frozen"]["sha256"],
-                    manifest_writer.sha256(frozen),
+                    hashlib.sha256(b"frozen executable bytes").hexdigest(),
                 )
                 self.assertEqual(
                     result["artifacts"]["go-wrapper"]["sha256"],
-                    manifest_writer.sha256(wrapper),
+                    hashlib.sha256(b"Go wrapper executable bytes").hexdigest(),
                 )
                 self.assertEqual(result["source_sha"], "a" * 40)
                 self.assertEqual(result["platform"], system)
