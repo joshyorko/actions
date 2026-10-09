@@ -21,3 +21,10 @@ The React component tests exercise view states through a fake adapter. They do
 not prove real Action Server dispatch, Runtime authorization, host binding,
 resource delivery, CSP behavior, or ChatGPT rendering. Production Canvas entry
 point and official host bridge wiring remain separately owned.
+
+The renderer drops a pending artifact-status result when a query is edited or
+submitted for a new result and when the view unmounts. Async status success,
+failure, and completion handlers update state only while both the captured
+generation and result object are still current. Component tests exercise this
+client-side race guard with held promises; it does not bind a result to a real
+MCP host context.
