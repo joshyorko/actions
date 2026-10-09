@@ -285,6 +285,24 @@ def test_trust_carrier_rejects_non_directory_path(tmp_path):
         resolve_trust_carrier(str(carrier_file))
 
 
+def test_trust_carrier_fails_closed_when_service_ownership_is_unavailable(
+    monkeypatch, tmp_path
+):
+    import os
+
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        resolve_trust_carrier,
+    )
+
+    carrier_path = tmp_path / "service-owned"
+    carrier_path.mkdir(mode=0o700)
+    monkeypatch.setattr(os, "geteuid", None)
+
+    with pytest.raises(RccRuntimeError, match="service ownership cannot be verified"):
+        resolve_trust_carrier(str(carrier_path))
+
+
 def test_unknown_legacy_carrier_binding_cannot_exec():
     from actions.server._rcc_runtime_adapter import (
         RccRuntimeDescriptor,

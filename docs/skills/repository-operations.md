@@ -1368,6 +1368,9 @@ an error from that carrier must fail closed without falling back. This Actions
 integration supports only `permissive-local`: an RCC verification receipt with
 `verification.valid` does not establish strict-remote signatures or fresh
 revocation authority. Strict-remote acceptance remains unverified.
+The configured directory must be owned by the service UID and not be
+group/world-writable. If the platform cannot verify service ownership, carrier
+configuration fails closed; Windows ACL behavior remains unverified.
 When bounding RCC error diagnostics, redact the complete selected diagnostic
 before truncating it; truncating first can leave the prefix of a long carrier
 path in the error. The synthetic 80/433-character path regression covers both

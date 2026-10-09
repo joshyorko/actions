@@ -111,7 +111,12 @@ def resolve_trust_carrier(value: str | None) -> RccTrustCarrier | None:
         ) from None
     if stat.S_ISLNK(info.st_mode) or not stat.S_ISDIR(canonical_info.st_mode):
         raise RccRuntimeError("trust carrier", "configured path must be a directory")
-    if hasattr(os, "geteuid") and canonical_info.st_uid != os.geteuid():
+    get_effective_uid = getattr(os, "geteuid", None)
+    if not callable(get_effective_uid):
+        raise RccRuntimeError(
+            "trust carrier", "service ownership cannot be verified on this platform"
+        )
+    if canonical_info.st_uid != get_effective_uid():
         raise RccRuntimeError(
             "trust carrier", "directory must be owned by the service user"
         )
