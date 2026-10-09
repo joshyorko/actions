@@ -132,6 +132,27 @@ create, list, detail, persisted completion, and corrupt-payload responses throug
 the actual executable. An unwrapped PyInstaller pass does not establish wrapper
 extraction, another operating system, or the embedded browser UI.
 
+`scripts/dakota_workitems_native_acceptance.py` adds a separate packaged-worker
+gate for both the frozen executable and Go wrapper. Its consumer action reserves
+and completes an input with parent-linked output, records a failed input with
+error details, recovers a harness-seeded stale reservation, and verifies state
+after Runtime restart. The seeded reservation does not simulate a process crash.
+The runner requires exactly both pytest cases to pass setup, call and teardown,
+plus one fresh atomic proof per executable in an invocation-specific directory.
+Proofs bind the runtime kind, executable SHA256 and task-local Core wheel SHA256;
+the runner rechecks artifacts before admitting success. Each attempt removes
+any prior receipt, then atomically writes a fresh `IN_PROGRESS` receipt and
+attempt ID before artifact checks or pytest. Ordinary failures write `FAIL` and
+mark cases `NOT_VERIFIED`; abrupt termination can leave `IN_PROGRESS`, which is
+not a passing result. Source SHA and build version arguments are caller claims,
+not verified build provenance. Retained Linux artifacts do not establish
+current-source builds or Windows/macOS, distributed, service-backend or full
+browser acceptance.
+The credential-free native workflow runs process ownership, management/browser
+and history acceptance; it does not invoke this packaged-worker consumer gate.
+Its success therefore does not establish consumer lifecycle acceptance on that
+platform. Retain a separate receipt from this runner for each tested artifact.
+
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
 From the repository root when Poetry is unavailable for diagnostic-only host checks:

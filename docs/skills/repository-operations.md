@@ -1048,6 +1048,14 @@ repository- or CI-scoped cache when diagnosing environment resolution, then run
 `rcc robot diagnostics -r developer/toolkit.yaml --json` and
 `rcc ht vars -r developer/toolkit.yaml` before debugging Python tasks.
 
+Packaged Runtime acceptance must also set a task-owned `ACTIONS_HOME`: Runtime
+derives its RCC home from that setting, so `ROBOCORP_HOME` alone does not isolate
+the worker cache. The Dakota Work Items runner sets both to its explicit
+`--rcc-home`, requires the task-local Core wheel, and writes proof files into a
+fresh invocation-specific directory. Keep retained build claims separate from
+measured executable/wheel hashes and require final artifact checks before a
+PASS receipt; an interrupted check cannot admit earlier successful cases.
+
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification. `.devcontainer/bin/smoke` is strict-shell, rejects root, checks the pinned Python 3.12, Node 22, uv 0.12.1, and Poetry 2.1.1 versions, then runs bootstrap and the Work Items release gate by repository-relative absolute path. uv 0.12.1 adds a platform suffix to its version output, so smoke compares its `uv 0.12.1` prefix fields exactly.
