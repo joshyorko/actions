@@ -4,10 +4,11 @@
 - Issue: [joshyorko/actions#100](https://github.com/joshyorko/actions/issues/100)
 - Coordination: [#99](https://github.com/joshyorko/actions/issues/99) owns the
   CanvasSpec semantic schema and renderer; #100 owns the canonical
-  cross-language source-of-truth decision in coordination with #99. Public
-  authoring implementation remains deferred behind
-  [#125](https://github.com/joshyorko/actions/issues/125), per the latest
-  #100 architecture comments.
+  cross-language source-of-truth decision in coordination with #99. #100-A
+  owns the small public MCP Apps authoring contract; #100-B owns CanvasSpec
+  serialization. Verify each implementation's consumed package, SDK,
+  template, and security criteria on the actual candidate instead of treating
+  unrelated #125 work as a blanket prerequisite.
 - Evidence revision: `ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47`
 
 This document records the present source boundaries, proposes the
@@ -62,6 +63,21 @@ This is a recommendation, not an accepted architecture. Even if accepted,
 schema conformance, validator choice, compatibility/version rules, and real
 Python -> JSON -> TypeScript round trips still need implementation evidence.
 
+For the first #99 fixture, the current bounded reuse direction is a thin
+Actions-owned React renderer using existing owned UI primitives and the
+official ext-apps bridge. This is a recommendation pending a working fixture,
+not proof or a generic grammar freeze. Inspection found json-render React peers
+compatible but its Zod catalog would need a JSON Schema adapter; A2UI would add
+message/user-action profile mapping and has a distinct specification/package
+version boundary. Those alternatives were inspected, not integrated or tested.
+The selected small fixture must still prove interoperability, offline/CSP
+behavior, accessibility, typed dispatch, and license/dependency compatibility
+before the renderer choice is accepted. The inspected json-render candidate is
+Apache-2.0 [`v0.21.0`](https://github.com/vercel-labs/json-render/tree/3ad381881194e7011ad3ccd6d668033495a06c29);
+the inspected A2UI sources are Apache-2.0 protocol [`v0.9`](https://github.com/google/A2UI/tree/19919ef4c8ad3185867f70386fa4669284d7714c)
+and React/core packages `@a2ui/react@0.9.1` / `@a2ui/web_core@0.9.2`. No
+candidate package was installed and no fixture was rendered.
+
 ## #71 use case this contract serves
 
 #71's product contract describes a stable Canvas facade whose tool calls render
@@ -85,33 +101,53 @@ binding schema exists in the public Python or TypeScript source.
 
 ## Minimum future authoring contract
 
-Once the #125 deferral clears, an implementation proposal should coordinate
-with #99 on the versioned semantic schema while retaining the #100
-source-of-truth decision. It should cover only the supported public path:
+The #100-A public authoring slice can be implemented independently of the
+complete CanvasSpec renderer, while retaining #100 ownership of the
+cross-language source-of-truth proposal and coordinating semantic fields with
+#99. It should cover only the supported public path:
 
 1. A Python author can declare the UI resource URI associated with a tool using
    the MCP Apps metadata contract, without depending on Runtime or Canvas.
+   The public `meta` input is a detached, bounded JSON snapshot: reject cycles,
+   non-finite numbers, non-string object keys, excess depth/size, and malformed
+   supported `ui.resourceUri`, `ui.visibility`, or `ui.csp` values. Preserve
+   unrelated namespaced JSON metadata for compatible extensions. Visibility
+   must never grant backend authorization.
 2. A Python author can declare the associated UI resource through the existing
-   MCP resource authoring seam; Runtime advertises and serves it through
-   standard `resources/list` and `resources/read`, including the specified
-   MIME type.
-3. The Runtime validates the declared association/resource relationship and
-   returns conforming MCP metadata and resource content. The authoring package
-   does not own HTTP routes, persistence, rendering, or transport lifecycle.
-4. Ordinary `@action` users and Core installations without Canvas remain usable
+   MCP resource authoring seam with `ui://` identity and
+   `text/html;profile=mcp-app`; Runtime serves it through `resources/read` at
+   its advertised URI. Do not require UI-only resources to appear in
+   `resources/list`; the stable Apps contract permits that omission.
+3. Before atomic catalog publication, Runtime verifies that each tool
+   association resolves to the declared UI resource with the required MIME
+   type. Missing or wrong-type resources fail the new catalog and leave the
+   previous catalog active.
+4. The Runtime returns conforming MCP metadata and resource content. The
+   authoring package does not own HTTP routes, persistence, rendering, or
+   transport lifecycle. App-only visibility is a host/catalog routing
+   declaration, not backend authorization. A particular host's renderer or
+   optional host-projection behavior is a separate conformance gate.
+5. Ordinary `@action` users and Core installations without Canvas remain usable
    and acquire no Canvas-specific required dependency.
-5. If #100 accepts this proposal, its versioned JSON Schema artifact defines
+6. If #100 accepts this proposal, its versioned JSON Schema artifact defines
    the cross-language CanvasSpec serialization contract; #99 supplies semantic
    fields and the renderer. Python and TypeScript consume the same artifact.
    Golden fixtures prove Python -> JSON -> TypeScript round trips. This ADR
    does not invent CanvasSpec fields or claim those fixtures exist.
+7. Keep these identities separate in implementation and release receipts: core
+   MCP protocol version, Python MCP SDK version, MCP Apps wire version,
+   `@modelcontextprotocol/ext-apps` package version, and CanvasSpec version.
+   One does not imply or substitute for another.
 
-When implementation is authorized, acceptance must exercise an actual public
-decorated Python package through the built/installed Core + Runtime path and
-assert `tools/list`, `resources/list`, and `resources/read` results. Internal
-`Action` construction alone is insufficient. Preserve Core's no-Canvas
-dependency/install contract, and include the package-size and dependency
-receipt required by #100.
+The #100-A checkpoint must exercise an actual public-decorated Python package
+through the real Core-source/Runtime-candidate path and assert `tools/list` and
+`resources/read`; internal `Action` construction alone is insufficient. Its
+source-pairing result is not published-wheel compatibility. Keep text and
+structured Action outputs explicit in tests. This first slice does not prove
+that one rich result can carry complete `content`, `structuredContent`, and
+`_meta` together; that full result-preservation acceptance remains open.
+Preserve Core's no-Canvas dependency/install contract and include package-size
+and dependency evidence before any publication claim.
 
 ## Evidence at the cited revision
 
@@ -140,6 +176,13 @@ receipt required by #100.
   comments are preserved in the evidence capture for this checkpoint.
 - The stable protocol source cited by #100 is
   [MCP Apps specification 2026-01-26 at immutable commit `10195ad`](https://github.com/modelcontextprotocol/ext-apps/blob/10195ad91851502134930e9b80ec2c04e277a720/specification/2026-01-26/apps.mdx).
+- The current candidate `3fee279256e674c9cbe0eaeaf2f98e01f51cd08d` retains
+  the public decorator gap at
+  [`actions.mcp`](https://github.com/joshyorko/actions/blob/3fee279256e674c9cbe0eaeaf2f98e01f51cd08d/actions/src/actions/mcp/__init__.py)
+  while Runtime v2 accepts internal `_meta` during collected-action
+  registration and publishes a complete catalog through a pointer swap in
+  [`setup_mcp_server_v2.py`](https://github.com/joshyorko/actions/blob/3fee279256e674c9cbe0eaeaf2f98e01f51cd08d/action_server/src/actions/server/mcp/setup_mcp_server_v2.py).
+  That source pairing is not published-wheel compatibility evidence.
 
 ## Acceptance and remaining work
 
@@ -148,8 +191,9 @@ This ADR records architecture evidence, not issue completion. The live #100,
 `architecture-evidence/issue-100/`. No Python API, Canvas schema, renderer,
 runtime feature, generated fixture, or new distribution was added here.
 
-Remaining before any authoring implementation: coordinate #100's proposed JSON
-Schema source choice with #99's semantic CanvasSpec fields and renderer; resolve
-#125's explicit deferral; then review a concrete public decorator/resource API
-and its end-to-end installed-package conformance and Python/JSON/TypeScript
-round-trip gates against the full current #100 acceptance contract.
+Remaining after a #100-A implementation checkpoint: hosted/source-to-wheel
+consumer verification, a Core package-size/dependency receipt, rich MCP result
+preservation, the #100-B schema/version/round-trip contract, the selected #99
+fixture proof, and separate host acceptance. The #125 record is still relevant
+where an implementation consumes its package/template/security boundaries,
+but is not a blanket prerequisite to this authoring slice.

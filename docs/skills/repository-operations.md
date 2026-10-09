@@ -384,11 +384,28 @@ URI, MIME type, and size; neither decorator publicly attaches MCP Apps
 `_meta.ui.resourceUri`. Runtime tests that construct `Action.options["_meta"]`
 directly prove the internal server can preserve metadata, not that package
 authors can declare it through a supported API. Keep the public authoring
-extension deferred behind #125. Proposed ADR 0100 leaves the source-of-truth
-choice with #100 and recommends one versioned JSON Schema as the Python/JSON/
-TypeScript contract. #99 owns CanvasSpec semantic UI fields, UI binding
-declarations, and its renderer, and would coordinate with that source choice
-if accepted.
+gap distinct from the broader CanvasSpec schema and renderer work. The latest
+#100 contract permits a bounded 100-A authoring slice without waiting for
+unrelated #125 rows; verify the consumed dependency, package, template, and
+security criteria on the exact candidate. A public `meta` decorator input is
+bounded JSON: reject cycles, non-finite values, non-string keys, and excessive
+depth/size; validate supported MCP Apps URI/visibility/CSP fields while
+preserving unrelated namespaced metadata. Runtime must resolve the UI URI to an
+exact `ui://` resource with `text/html;profile=mcp-app` before atomically
+publishing the new catalog. Serve it through `resources/read`; do not require
+UI-only entries in `resources/list`. App-only visibility is host/catalog
+routing, never backend authorization.
+
+Proposed ADR 0100 leaves the JSON Schema source-of-truth recommendation with
+#100 and records a provisional thin Actions-owned React renderer plus official
+ext-apps bridge for the first fixture. Renderer reuse research is inspection,
+not a working fixture or accepted CanvasSpec grammar. Keep core MCP protocol,
+Python MCP SDK, MCP Apps wire, ext-apps package, and CanvasSpec versions as
+separate identities. A Core-source/Runtime-candidate fixture does not prove
+published-wheel compatibility. The initial metadata slice covers text and
+structured tool outputs separately; one rich result carrying complete
+`content`, `structuredContent`, and `_meta`, packaged verification, and actual
+host acceptance remain distinct open gates.
 Provider bindings for secrets, OAuth, data, artifacts, and queues use shared
 contracts identified by #71 (#129/#87/#131/#132), rather than Canvas-only
 provider semantics. This recommendation is not accepted behavior; validators,
