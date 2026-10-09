@@ -2,18 +2,119 @@
 
 from __future__ import annotations
 
+import base64
+import hashlib
+import importlib.metadata
 import json
 import os
 import subprocess
+import sys
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 import pytest
 import requests
 
 
+def _verify_runtime_wheel(
+    repo_root: Path,
+    runtime_origin: Path,
+    package_dir: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> dict[str, str | int | bool]:
+    """Bind the installed Runtime and its child server process to the wheel bytes."""
+    wheel = Path(os.environ["ACTIONS_ACCEPTANCE_RUNTIME_WHEEL"]).resolve()
+    report = Path(os.environ["ACTIONS_ACCEPTANCE_RUNTIME_INSTALL_REPORT"]).resolve()
+    expected_digest = os.environ["ACTIONS_ACCEPTANCE_RUNTIME_WHEEL_SHA256"]
+    wheel_digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
+    assert wheel_digest == expected_digest
+    assert not os.environ.get("PYTHONPATH")
+    assert Path(sys.prefix).resolve() != Path(sys.base_prefix).resolve()
+    assert not Path.cwd().resolve().is_relative_to(repo_root)
+    assert not runtime_origin.is_relative_to(repo_root)
+    source_root = repo_root / "action_server" / "src"
+    assert all(
+        not Path(entry or Path.cwd()).resolve().is_relative_to(source_root)
+        and Path(entry or Path.cwd()).resolve() != repo_root
+        for entry in sys.path
+    )
+
+    distribution = importlib.metadata.distribution("actions-runtime")
+    installed_files = {
+        Path(distribution.locate_file(entry)).resolve(): entry
+        for entry in distribution.files or ()
+    }
+    assert runtime_origin in installed_files
+    assert distribution.version == "1.0.3"
+    direct_url = json.loads(distribution.read_text("direct_url.json") or "{}")
+    assert direct_url.get("dir_info", {}).get("editable") is not True
+    assert (
+        Path(unquote(urlparse(direct_url["url"]).path)).resolve() == wheel
+    )
+    assert direct_url["archive_info"]["hashes"]["sha256"] == wheel_digest
+
+    for installed_path, entry in installed_files.items():
+        if entry.hash is None:
+            continue
+        payload = installed_path.read_bytes()
+        actual = base64.urlsafe_b64encode(
+            hashlib.new(entry.hash.mode, payload).digest()
+        ).decode("ascii").rstrip("=")
+        assert actual == entry.hash.value, installed_path.name
+
+    install_report = json.loads(report.read_text(encoding="utf-8"))
+    runtime_installs = [
+        item
+        for item in install_report.get("install", [])
+        if item.get("metadata", {}).get("name", "").lower().replace("_", "-")
+        == "actions-runtime"
+    ]
+    assert len(runtime_installs) == 1
+    install_source = runtime_installs[0]["download_info"]
+    assert Path(unquote(urlparse(install_source["url"]).path)).resolve() == wheel
+    assert install_source["archive_info"]["hashes"]["sha256"] == wheel_digest
+
+    proof_path = package_dir / "runtime-child-import-proof.json"
+    wrapper = package_dir / "action-server-runtime-proof"
+    wrapper.write_text(
+        "#!/usr/bin/env python3\n"  # replaced below with the selected interpreter
+        + "import hashlib, importlib.metadata, json, os, sys\n"
+        + "from pathlib import Path\n"
+        + "import actions.server\n"
+        + "dist = importlib.metadata.distribution('actions-runtime')\n"
+        + "origin = Path(actions.server.__file__).resolve()\n"
+        + "files = {Path(dist.locate_file(p)).resolve() for p in dist.files or ()}\n"
+        + "assert origin in files\n"
+        + "wheel = Path(os.environ['ACTIONS_ACCEPTANCE_RUNTIME_WHEEL']).resolve()\n"
+        + "digest = hashlib.sha256(wheel.read_bytes()).hexdigest()\n"
+        + "assert digest == os.environ['ACTIONS_ACCEPTANCE_RUNTIME_WHEEL_SHA256']\n"
+        + "report = Path(os.environ['ACTIONS_ACCEPTANCE_RUNTIME_INSTALL_REPORT'])\n"
+        + "Path(os.environ['ACTIONS_ACCEPTANCE_RUNTIME_CHILD_PROOF']).write_text(json.dumps({"
+        + "'python': sys.executable, 'runtime_import_origin': str(origin), "
+        + "'runtime_version': dist.version, 'wheel_sha256': digest, "
+        + "'pip_report_sha256': hashlib.sha256(report.read_bytes()).hexdigest(), "
+        + "'origin_in_RECORD': True}, sort_keys=True))\n"
+        + "from actions.server.cli import main\n"
+        + "raise SystemExit(main())\n",
+        encoding="utf-8",
+    )
+    wrapper_text = wrapper.read_text(encoding="utf-8").replace(
+        "#!/usr/bin/env python3", f"#!{sys.executable}"
+    )
+    wrapper.write_text(wrapper_text, encoding="utf-8")
+    wrapper.chmod(0o700)
+    monkeypatch.setenv("ACTIONS_ACCEPTANCE_RUNTIME_CHILD_PROOF", str(proof_path))
+    return {
+        "wheel_sha256": wheel_digest,
+        "pip_report_sha256": hashlib.sha256(report.read_bytes()).hexdigest(),
+        "recorded_runtime_files": len(installed_files),
+        "child_proof_ready": True,
+    }
+
+
 @pytest.mark.real_rcc
 def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
-    tmp_path: Path,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Run a spec-v2 Action before and after a local-provider Runtime restart."""
     if os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST") != "1":
@@ -30,10 +131,28 @@ def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
     runtime_mode = os.environ.get("ACTIONS_ACCEPTANCE_RUNTIME_MODE", "source")
     source_package = repo_root / "action_server" / "src" / "actions" / "server"
     runtime_origin = Path(runtime_package.__file__).resolve()
+    wheel_proof: dict[str, str | int | bool] | None = None
     if runtime_mode == "source":
         assert runtime_origin.is_relative_to(source_package)
     elif runtime_mode == "wheel":
-        assert not runtime_origin.is_relative_to(source_package)
+        assert not runtime_origin.is_relative_to(repo_root)
+        original_module = runtime_origin.read_bytes()
+        corrupted_module = bytes([original_module[0] ^ 1]) + original_module[1:]
+        runtime_origin.write_bytes(corrupted_module)
+        try:
+            with pytest.raises(AssertionError):
+                _verify_runtime_wheel(
+                    repo_root, runtime_origin, tmp_path, monkeypatch
+                )
+        finally:
+            runtime_origin.write_bytes(original_module)
+        wheel_proof = _verify_runtime_wheel(
+            repo_root, runtime_origin, tmp_path, monkeypatch
+        )
+        monkeypatch.setenv(
+            "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE",
+            str(tmp_path / "action-server-runtime-proof"),
+        )
     else:
         pytest.fail("ACTIONS_ACCEPTANCE_RUNTIME_MODE must be source or wheel")
 
@@ -181,6 +300,16 @@ dependencies:
     assert run_ids[0] != run_ids[1]
     assert process_reaped == [True, True]
     assert receipts[0]["leaseId"] != receipts[1]["leaseId"]
+    if runtime_mode == "wheel":
+        child_proof = json.loads(
+            Path(os.environ["ACTIONS_ACCEPTANCE_RUNTIME_CHILD_PROOF"]).read_text(
+                encoding="utf-8"
+            )
+        )
+        assert child_proof["runtime_import_origin"] == str(runtime_origin)
+        assert Path(child_proof["python"]).resolve() == Path(sys.executable).resolve()
+        assert child_proof["runtime_version"] == "1.0.3"
+        assert child_proof["origin_in_RECORD"] is True
 
     receipt_path = os.environ.get("ACTIONS_ACCEPTANCE_RECEIPT")
     if receipt_path:
@@ -205,6 +334,14 @@ dependencies:
             "runtime_wheel_sha256": os.environ.get(
                 "ACTIONS_ACCEPTANCE_RUNTIME_WHEEL_SHA256"
             ),
+            "runtime_wheel_proof": wheel_proof,
+            "runtime_child_import_proof": json.loads(
+                Path(os.environ["ACTIONS_ACCEPTANCE_RUNTIME_CHILD_PROOF"]).read_text(
+                    encoding="utf-8"
+                )
+            )
+            if runtime_mode == "wheel"
+            else None,
             "provider_reference": "local",
             "trust_policy": "permissive-local",
             "trust_carrier_identities": trust_carrier_identities,

@@ -1377,6 +1377,18 @@ path in the error. The synthetic 80/433-character path regression covers both
 short and cutoff-crossing cases. The source local-carrier acceptance observes
 the Action Server owner process reaped and an RCC `completed`, exit-0 receipt;
 it does not independently enumerate or prove reaping of every descendant PID.
+Treat installed-Runtime-wheel acceptance as a separate cell from source
+acceptance. Run it in a fresh virtual environment from a working directory
+outside every Actions checkout, with `PYTHONPATH` unset. Measure the built
+wheel's bytes and source revision; require pip's install report and installed
+`direct_url.json` to identify that same wheel, then verify installed module
+origins against the distribution `RECORD` hashes. The Action Server process
+must actually launch with that environment's Python; record the child's
+`sys.executable` and imported `actions.server` origin from inside that process
+and bind them to the same wheel and install-report digests. An environment
+variable containing a wheel hash, or a Runtime import outside only the current
+checkout, is not wheel provenance. Preserve the RECORD-tamper negative check
+and report source, installed-wheel, and frozen cells independently.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
