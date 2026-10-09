@@ -1095,6 +1095,17 @@ exception. Process-pool capacity is released after wrapper cleanup and is
 guaranteed even if warmup recovery raises; the exception-path regressions live
 in the RCC adapter focused test module.
 
+The preloaded worker treats JSON-RPC `method: "exit"` as an orderly consumer
+stop. Because command execution is synchronous in that consumer, an active
+Action completes before exit is observed; commands queued after the exit frame
+are discarded. Stream EOF remains abnormal and emits an explicit diagnostic.
+The worker entrypoint still catches that exception and returns process status
+zero, so this protocol repair does not classify EOF as a nonzero worker failure.
+It also does not connect exit to process-pool retirement or prove RCC wrapper,
+lease, or capacity cleanup. Tests for this boundary are in
+`test_preload_actions_exit.py`; stronger EOF status handling and end-to-end
+retirement remain separate work.
+
 The provisional adapter classifies reload inputs from normalized environment
 fields (`spec-version`, dependency sets, and post-install commands), not from
 the entire package descriptor. A source-only change therefore reuses the
