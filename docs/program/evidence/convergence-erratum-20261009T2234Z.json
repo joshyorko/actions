@@ -1,0 +1,19 @@
+{
+  "observed_at_utc": "2026-10-09T22:34:00Z",
+  "scope": "Correction to the PR269 artifact metadata recorded in convergence-followup-20261009T2230Z.json; that immutable snapshot is preserved.",
+  "pr": 269,
+  "head": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+  "workflow_run": 37999378425,
+  "correction": {
+    "artifact_id": 11648617677,
+    "workflow_reported_archive_bytes": 114288,
+    "workflow_reported_archive_sha256": "db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f",
+    "prior_misstatement": "The artifact ID 11648617677 was mistakenly presented as the byte size.",
+    "actual_retrieval": "BLOCKED: redirected artifact storage request Forbidden; no bytes received; no retry.",
+    "sha256_verified_locally": false,
+    "publication": false
+  },
+  "source_receipt": "/workspace/work/community-resume/evidence/pr269-workitems-artifact-retrieval.json",
+  "source_receipt_sha256": "5ffdd1aa79260c51c1ab6333549e3a3a6a05be364a8ea2ca77c6127dde7a4b0a",
+  "limit": "This erratum corrects the reported metadata only; it does not verify retrieval or artifact contents."
+}

@@ -3190,5 +3190,11 @@
     },
     "branch_readback_at": "2026-10-09T22:30:00Z",
     "issue_acceptance_changed": false
+  },
+  "latest_artifact_metadata_erratum": {
+    "observed_at_utc": "2026-10-09T22:34:00Z",
+    "path": "evidence/convergence-erratum-20261009T2234Z.json",
+    "sha256": "b2076904af96aec046efc8a1940bb724769c22d7ac9a59439bd75e9ccdc460f7",
+    "correction": "PR269 artifact ID 11648617677 is not the byte size; workflow reports 114288 bytes and SHA-256 db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f. Retrieval returned 403 before bytes; digest unverified."
   }
 }

@@ -2726,6 +2726,10 @@
       "community": "c30f953bae1a322e1d09549607ab42f1badce440",
       "integration": "4a717c77053947f4ad2892783211af5edbe5783d",
       "runtime_candidate": "e2fb0f461f70129af0673aa5886f95ee581992d9"
+    },
+    "artifact_metadata_erratum": {
+      "path": "evidence/convergence-erratum-20261009T2234Z.json",
+      "sha256": "b2076904af96aec046efc8a1940bb724769c22d7ac9a59439bd75e9ccdc460f7"
     }
   }
 }
