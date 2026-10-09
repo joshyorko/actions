@@ -162,7 +162,7 @@ def normalize_mcp_meta(meta: object, *, subject: str) -> dict | None:
                 active_containers.remove(identity)
         elif isinstance(value, str):
             add_size(encoded_string_size(value))
-        elif type(value) is float and not math.isfinite(value):
+        elif isinstance(value, float) and not math.isfinite(value):
             raise ValueError(f"MCP {subject} metadata numbers must be finite")
         elif value is None or type(value) in (bool, int, float):
             add_size(len(json.dumps(value, allow_nan=False)))
