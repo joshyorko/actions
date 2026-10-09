@@ -2,21 +2,23 @@
 
 [[package]]
 name = "actions-http-helper"
-version = "1.0.0"
+version = "1.0.3"
 description = "HTTP library that enables the use of OS certificate stores when working behind MITM firewalls"
 optional = false
-python-versions = "<4.0,>=3.10"
-groups = ["main"]
-files = [
-    {file = "actions_http_helper-1.0.0-py3-none-any.whl", hash = "sha256:68af696fc0b86d900686e4350730fdf4b74a399e9d9d348468dc25f4cf350ad5"},
-    {file = "actions_http_helper-1.0.0.tar.gz", hash = "sha256:dc484e4f97916c7fd0d4a7c7a7a92445805a937c565b617a2d580fd9f2a81651"},
-]
+python-versions = "^3.10"
+groups = ["main", "dev"]
+files = []
+develop = true
 
 [package.dependencies]
 pyyaml = ">=5.0"
 truststore = ">=0.10,<1.0"
 types-PyYAML = ">=6.0.0"
 urllib3 = ">=2.5.0"
+
+[package.source]
+type = "directory"
+url = "../actions-http-helper"
 
 [[package]]
 name = "actions-local-devutils"
@@ -1581,7 +1583,7 @@ version = "0.10.4"
 description = "Verify certificates using native system trust stores"
 optional = false
 python-versions = ">=3.10"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "truststore-0.10.4-py3-none-any.whl", hash = "sha256:adaeaecf1cbb5f4de3b1959b42d41f6fab57b2b1666adb59e89cb0b53361d981"},
     {file = "truststore-0.10.4.tar.gz", hash = "sha256:9d91bd436463ad5e4ee4aba766628dd6cd7010cf3e2461756b3303710eebc301"},
@@ -1674,7 +1676,7 @@ version = "2.7.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
 python-versions = ">=3.10"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "urllib3-2.7.0-py3-none-any.whl", hash = "sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897"},
     {file = "urllib3-2.7.0.tar.gz", hash = "sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c"},
@@ -1792,4 +1794,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "83e007a31d362b038bd94bf0d84c1be53f1eb9eed661da9ac88694768f01d076"
+content-hash = "27c80cf93cb66169609099bb61bbeb02002815b2977d08212a399d23ec2bbe05"

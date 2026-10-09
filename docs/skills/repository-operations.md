@@ -15,6 +15,23 @@ The Core clean-wheel verifier compares the installed version with the input whee
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
 
+The Actions Core tag release workflow admits exactly the version-matched
+`actions_core` universal wheel and source archive. Its Linux verify job rejects
+extra entries and symlinked artifacts, records SHA-256 digests, and uploads the
+two packages with that manifest. The publish job checks the downloaded
+inventory and verifies both digests before invoking Poetry with the configured
+Core token; Twine checks only the wheel and source archive, not the manifest.
+Core's package tests execute these inventory and copy-verification shell steps
+against valid, extra, wrong-tag, symlinked, and modified artifacts. This
+prepublication gate binds the uploaded bytes; it does not prove registry
+availability, a successful PyPI publication, or downstream consumers of the
+published distribution.
+The Core release workflow pins both jobs to `ubuntu-latest`; package tests
+execute its Bash/GNU-utility shell steps only on Linux and keep workflow
+structure and publish-safety assertions active on every platform. Do not run
+these Linux release scripts through macOS BSD utilities or a Windows `bash`
+launcher: those environments do not implement the workflow's shell contract.
+
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
 - `action_server/`: CLI, FastAPI service, frontend, build and bundled RCC.
@@ -29,6 +46,14 @@ The producer-consumer template additionally pins
 dependency, and `actions-runtime` is the server distribution rather than a
 template library. Keep the static template-manifest contract synchronized
 with these package boundaries when a published version changes.
+
+Core keeps its released `actions-http-helper` version range in main
+dependencies and points the dev group at the sibling helper source. Install the
+locked dev group before running Core tests: an older registry copy can route
+test-only localhost service calls through a sandbox proxy, while the current
+sibling source lets those tests exercise the helper implementation in this
+checkout. This override is for development and does not change Core's runtime
+dependency floor.
 
 The Action Server frontend uses `action_server/frontend/package.json` and its
 lock as the sole package metadata. `npm ci` is the reproducible,
