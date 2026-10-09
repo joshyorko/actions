@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
 import hashlib
 import json
 import math
@@ -290,6 +291,55 @@ def run_owned_process(
     cwd: Path | None = None,
     cleanup_grace_seconds: float = CLEANUP_GRACE_SECONDS,
 ) -> subprocess.CompletedProcess:
+    if sys.platform == "linux":
+        payload = json.dumps(
+            {
+                "command": command,
+                "cwd": str(cwd) if cwd else None,
+                "env": env,
+                "timeout_seconds": timeout_seconds,
+                "cleanup_grace_seconds": cleanup_grace_seconds,
+            }
+        )
+        supervisor = subprocess.Popen(
+            [sys.executable, str(Path(__file__).resolve()), "--_supervisor"],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            env=env,
+            start_new_session=True,
+        )
+        parent_timeout = timeout_seconds + (4 * cleanup_grace_seconds) + 5
+        try:
+            stdout, stderr = supervisor.communicate(payload, timeout=parent_timeout)
+        except subprocess.TimeoutExpired as exc:
+            terminate_process_tree(supervisor, grace_seconds=cleanup_grace_seconds)
+            raise ProcessTreeCleanupError(
+                "Linux process supervisor exceeded its independent hard deadline"
+            ) from exc
+        if supervisor.returncode != 0:
+            raise ProcessTreeCleanupError(
+                "Linux process supervisor failed: " + stderr[-2000:]
+            )
+        try:
+            result = json.loads(stdout)
+        except json.JSONDecodeError as exc:
+            raise ProcessTreeCleanupError(
+                "Linux process supervisor returned malformed output"
+            ) from exc
+        completed = subprocess.CompletedProcess(
+            command, result["returncode"], result["stdout"], result["stderr"]
+        )
+        if result["timed_out"]:
+            raise subprocess.TimeoutExpired(
+                command,
+                timeout_seconds,
+                output=completed.stdout,
+                stderr=completed.stderr,
+            )
+        return completed
+
     process = subprocess.Popen(
         command,
         cwd=cwd,
@@ -322,6 +372,103 @@ def run_owned_process(
     return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
 
 
+def _supervisor_main() -> int:
+    """Contain one Linux command and all descendants in a dedicated subreaper."""
+
+    if sys.platform != "linux":
+        return 2
+    libc = ctypes.CDLL(None, use_errno=True)
+    if libc.prctl(36, 1, 0, 0, 0) != 0:  # PR_SET_CHILD_SUBREAPER
+        return 2
+    import psutil
+
+    payload = json.load(sys.stdin)
+    command = payload["command"]
+    grace = float(payload["cleanup_grace_seconds"])
+    deadline = time.monotonic() + float(payload["timeout_seconds"])
+    timed_out = False
+    with tempfile.TemporaryDirectory(prefix="dakota-owned-process-") as scratch:
+        stdout_path = Path(scratch) / "stdout"
+        stderr_path = Path(scratch) / "stderr"
+        with (
+            stdout_path.open("w+b") as stdout_file,
+            stderr_path.open("w+b") as stderr_file,
+        ):
+            child = subprocess.Popen(
+                command,
+                cwd=payload["cwd"],
+                env=payload["env"],
+                stdin=subprocess.DEVNULL,
+                stdout=stdout_file,
+                stderr=stderr_file,
+                start_new_session=True,
+            )
+
+            def live_children():
+                try:
+                    return [
+                        proc
+                        for proc in psutil.Process(os.getpid()).children(recursive=True)
+                        if proc.is_running() and proc.status() != psutil.STATUS_ZOMBIE
+                    ]
+                except psutil.Error:
+                    return []
+
+            while child.poll() is None and time.monotonic() < deadline:
+                time.sleep(0.02)
+            timed_out = child.poll() is None
+            # A command is complete only after every adopted descendant is gone.
+            descendants = live_children()
+            if timed_out or descendants:
+                for proc in descendants:
+                    try:
+                        proc.terminate()
+                    except psutil.Error:
+                        pass
+                if timed_out and child.poll() is None:
+                    child.terminate()
+                stop_deadline = time.monotonic() + grace
+                while time.monotonic() < stop_deadline and live_children():
+                    time.sleep(0.02)
+                survivors = live_children()
+                for proc in survivors:
+                    try:
+                        proc.kill()
+                    except psutil.Error:
+                        pass
+                if timed_out and child.poll() is None:
+                    child.kill()
+                if child.poll() is None:
+                    child.wait(timeout=max(0.05, grace))
+                reap_deadline = time.monotonic() + grace
+                while time.monotonic() < reap_deadline:
+                    try:
+                        waited, _ = os.waitpid(-1, os.WNOHANG)
+                    except ChildProcessError:
+                        break
+                    if waited == 0:
+                        if not live_children():
+                            break
+                        time.sleep(0.02)
+                survivors = live_children()
+                if survivors:
+                    return 3
+            if child.poll() is None:
+                child.wait(timeout=max(0.05, grace))
+            stdout_file.flush()
+            stderr_file.flush()
+            stdout_file.seek(0)
+            stderr_file.seek(0)
+            result = {
+                "returncode": child.returncode,
+                "timed_out": timed_out,
+                "stdout": stdout_file.read().decode(errors="replace"),
+                "stderr": stderr_file.read().decode(errors="replace"),
+            }
+    print(json.dumps(result), flush=True)
+    return 0
+
+
 def capture_process_tree(root_pid: int):
     import psutil
 
@@ -333,6 +480,21 @@ def capture_process_tree(root_pid: int):
         return [root, *root.children(recursive=True)]
     except psutil.NoSuchProcess:
         return [root]
+
+
+def refresh_process_tree(processes, root_pid: int) -> None:
+    known = {(proc.pid, proc.create_time()) for proc in processes}
+    for process in capture_process_tree(root_pid):
+        identity = (process.pid, process.create_time())
+        if identity not in known:
+            processes.append(process)
+            known.add(identity)
+
+
+def stop_runtime_server(server, server_popen, server_tree) -> None:
+    if server_popen is not None:
+        refresh_process_tree(server_tree, server_popen.pid)
+    server.stop()
 
 
 def wait_for_process_tree_reap(
@@ -377,7 +539,9 @@ def wait_for_process_tree_reap(
 def classify_wrapper_exit(receipt: dict[str, object]) -> str:
     return (
         "PASS"
-        if receipt.get("status") != "failed" and receipt.get("exitCode") == 0
+        if receipt.get("status") == "completed"
+        and type(receipt.get("exitCode")) is int
+        and receipt.get("exitCode") == 0
         else "FAIL"
     )
 
@@ -807,9 +971,7 @@ dependencies:
                         if server_handle is None:
                             server_handle = getattr(server, "_process", None)
                             server_popen = getattr(server_handle, "_proc", None)
-                            if server_popen is not None:
-                                server_tree = capture_process_tree(server_popen.pid)
-                        server.stop()
+                        stop_runtime_server(server, server_popen, server_tree)
                 finally:
                     if server_handle is not None and server_popen is not None:
                         wait_for_process_tree_reap(
@@ -901,8 +1063,22 @@ dependencies:
         return evidence
 
 
-def main() -> int:
-    args = _parser().parse_args()
+def require_supported_platform() -> None:
+    if sys.platform != "linux":
+        raise RuntimeError("Dakota RCC acceptance cleanup is verified on Linux only")
+
+
+def main(argv: list[str] | None = None) -> int:
+    if argv is None:
+        argv = sys.argv[1:]
+    if argv == ["--_supervisor"]:
+        return _supervisor_main()
+    try:
+        require_supported_platform()
+    except RuntimeError as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
+    args = _parser().parse_args(argv)
     if args.mode != "candidate-wheel":
         raise AssertionError("unreachable unsupported mode")
     if not args._worker:

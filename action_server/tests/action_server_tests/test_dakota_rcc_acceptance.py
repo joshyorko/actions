@@ -4,6 +4,7 @@ import json
 import subprocess
 import sys
 import time
+import signal
 from pathlib import Path
 
 import pytest
@@ -286,6 +287,64 @@ def test_failed_rcc_wrapper_exit_keeps_overall_acceptance_failed():
     assert harness.acceptance_status(cells) == "FAIL"
 
 
+@pytest.mark.parametrize(
+    "receipt",
+    [
+        {},
+        {"status": "running", "exitCode": 0},
+        {"status": "failed", "exitCode": 0},
+        {"status": "completed"},
+        {"status": "completed", "exitCode": True},
+        {"status": "completed", "exitCode": "0"},
+        {"status": "completed", "exitCode": 1},
+    ],
+)
+def test_wrapper_exit_requires_completed_status_and_numeric_zero(receipt):
+    assert _harness().classify_wrapper_exit(receipt) == "FAIL"
+
+
+def test_wrapper_exit_accepts_only_completed_numeric_zero():
+    assert (
+        _harness().classify_wrapper_exit({"status": "completed", "exitCode": 0})
+        == "PASS"
+    )
+
+
+def test_runtime_tree_refresh_precedes_stop_even_when_stop_fails(monkeypatch):
+    harness = _harness()
+    events = []
+    process = type("Process", (), {"pid": 12345})()
+
+    def refresh(tree, pid):
+        events.append(("refresh", tree, pid))
+        tree.append("new-owned-child")
+
+    class Server:
+        def stop(self):
+            events.append(("stop",))
+            raise RuntimeError("simulated Runtime stop failure")
+
+    monkeypatch.setattr(harness, "refresh_process_tree", refresh)
+    tree = []
+    with pytest.raises(RuntimeError, match="simulated Runtime stop failure"):
+        harness.stop_runtime_server(Server(), process, tree)
+
+    assert events == [("refresh", tree, 12345), ("stop",)]
+    assert tree == ["new-owned-child"]
+
+
+def test_acceptance_fails_closed_before_side_effects_on_non_linux(monkeypatch):
+    harness = _harness()
+    monkeypatch.setattr(harness.sys, "platform", "darwin")
+    monkeypatch.setattr(
+        harness,
+        "_run",
+        lambda _receipt: pytest.fail("unsupported platform reached acceptance"),
+    )
+
+    assert harness.main(["--receipt", "/tmp/unused-dakota-receipt.json"]) == 2
+
+
 def test_total_timeout_terminates_owned_descendant_processes(tmp_path):
     harness = _harness()
     pid_file = tmp_path / "child.pid"
@@ -328,6 +387,63 @@ def test_total_timeout_terminates_owned_descendant_processes(tmp_path):
     except psutil.NoSuchProcess:
         child_stopped = True
     assert child_stopped
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux subreaper regression")
+def test_early_owner_exit_cleans_detached_inherited_pipe_writer(tmp_path):
+    harness = _harness()
+    pid_file = tmp_path / "detached-writer.pid"
+    child_code = (
+        "import os,signal,time; from pathlib import Path; "
+        "signal.signal(signal.SIGTERM, signal.SIG_IGN); "
+        f"Path({str(pid_file)!r}).write_text(str(os.getpid())); "
+        "time.sleep(60)"
+    )
+    owner_code = (
+        "import subprocess,sys,time\nfrom pathlib import Path\n"
+        f"subprocess.Popen([sys.executable,'-c',{child_code!r}], "
+        "start_new_session=True, stdout=sys.stdout, stderr=sys.stderr)\n"
+        f"deadline=time.monotonic()+3\n"
+        f"while not Path({str(pid_file)!r}).exists() and time.monotonic()<deadline:\n"
+        "    time.sleep(0.01)\n"
+    )
+    env = harness.child_environment(os.environ, task_root=tmp_path / "isolated")
+    invoke = (
+        "import importlib.util,subprocess,sys\n"
+        f"spec=importlib.util.spec_from_file_location('dakota_harness',{str(SCRIPT)!r})\n"
+        "module=importlib.util.module_from_spec(spec)\n"
+        "spec.loader.exec_module(module)\n"
+        "try:\n    module.run_owned_process([sys.executable,'-c',"
+        f"{owner_code!r}], timeout_seconds=5, env={env!r}, cleanup_grace_seconds=0.2)\n"
+        "except subprocess.TimeoutExpired:\n    pass\n"
+    )
+    started = time.monotonic()
+    outer = subprocess.Popen(
+        [sys.executable, "-c", invoke],
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        env=env,
+    )
+    try:
+        stdout, stderr = outer.communicate(timeout=8)
+        assert outer.returncode == 0, f"{stdout}\n{stderr}"
+        assert time.monotonic() - started < 5
+        import psutil
+
+        child_pid = int(pid_file.read_text())
+        with pytest.raises(psutil.NoSuchProcess):
+            psutil.Process(child_pid).status()
+    finally:
+        if outer.poll() is None:
+            outer.kill()
+            outer.communicate(timeout=2)
+        if pid_file.exists():
+            try:
+                os.kill(int(pid_file.read_text()), signal.SIGKILL)
+            except (ProcessLookupError, ValueError):
+                pass
 
 
 def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypatch):
