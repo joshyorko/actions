@@ -2004,6 +2004,21 @@ class HttpHelperTests(BaseTests):
     target = "http_helper_tests.yml"
     project_name = "actions-http-helper"
 
+    @override
+    def on_part(self, dep_paths):
+        return {
+            "on": {
+                "push": {
+                    "branches": ["community", "wip"],
+                    "paths": dep_paths[:],
+                },
+                "pull_request": {
+                    "branches": ["community"],
+                    "paths": dep_paths[:],
+                },
+            }
+        }
+
 
 TARGETS = [
     ActionServerTests(),

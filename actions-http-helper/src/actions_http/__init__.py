@@ -8,6 +8,7 @@ from enum import Enum, auto
 from functools import cached_property, lru_cache
 from pathlib import Path
 from typing import NamedTuple
+from urllib.parse import urlsplit
 
 import urllib3
 
@@ -18,7 +19,7 @@ _DEFAULT_LOGGER = logging.getLogger(__name__)
 
 _TYPE_BODY = typing.Union[bytes, typing.IO[typing.Any], typing.Iterable[bytes], str]
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 class _SSLContextFactory:
@@ -52,6 +53,60 @@ class _SSLContextFactory:
         else:
             _SSL_LEGACY_SERVER_CONNECT = ssl.OP_LEGACY_SERVER_CONNECT
         ssl_context.options |= _SSL_LEGACY_SERVER_CONNECT
+
+
+class _RedirectRoutingPool(urllib3.PoolManager):
+    def __init__(self, router: "_NoProxyManager", ssl_context: ssl.SSLContext):
+        super().__init__(ssl_context=ssl_context)
+        self._router = router
+
+    def urlopen(
+        self, method: str, url: str, *args: typing.Any, **kw: typing.Any
+    ) -> urllib3.response.BaseHTTPResponse:
+        # PoolManager redirects recurse through self.urlopen. Re-evaluate the
+        # destination through the owner instead of keeping the direct route.
+        return self._router.urlopen(method, url, *args, **kw)
+
+
+class _NoProxyManager(urllib3.ProxyManager):
+    """Route only explicitly excluded destinations through the same TLS policy."""
+
+    def __init__(self, *, proxy_url: str, ssl_context: ssl.SSLContext, no_proxy: str):
+        super().__init__(proxy_url=proxy_url, ssl_context=ssl_context)
+        self._direct_pool = _RedirectRoutingPool(self, ssl_context)
+        # urllib's authority matching expects brackets around IPv6 literals.
+        self._no_proxy = ",".join(
+            f"[{entry}]"
+            if ":" in entry and not entry.startswith("[") and entry.count(":") > 1
+            else entry
+            for entry in (part.strip() for part in no_proxy.split(","))
+            if entry
+        )
+
+    def urlopen(
+        self, method: str, url: str, *args: typing.Any, **kw: typing.Any
+    ) -> urllib3.response.BaseHTTPResponse:
+        parsed = urlsplit(url)
+        hostname = parsed.hostname or ""
+        authority = f"[{hostname}]" if ":" in hostname else hostname
+        if parsed.port is not None:
+            authority += f":{parsed.port}"
+        hostonly = f"[{hostname}]" if ":" in hostname else hostname
+        names = [entry.lstrip(".").lower() for entry in self._no_proxy.split(",")]
+        bypass = bool(hostname) and any(
+            name == "*"
+            or hostonly.lower() == name
+            or authority.lower() == name
+            or hostonly.lower().endswith("." + name)
+            or authority.lower().endswith("." + name)
+            for name in names
+            if name
+        )
+        if bypass:
+            return urllib3.PoolManager.urlopen(
+                self._direct_pool, method, url, *args, **kw
+            )
+        return super().urlopen(method, url, *args, **kw)
 
 
 class _NetworkConfig:
@@ -133,10 +188,16 @@ class _NetworkConfig:
             )
 
             if proxy_url:
-                connection_pool = urllib3.ProxyManager(
-                    proxy_url=proxy_url,
-                    ssl_context=ssl_context,
-                )
+                no_proxy = proxy_settings.get("no-proxy")
+                if no_proxy:
+                    connection_pool = _NoProxyManager(
+                        proxy_url=proxy_url, ssl_context=ssl_context, no_proxy=no_proxy
+                    )
+                else:
+                    connection_pool = urllib3.ProxyManager(
+                        proxy_url=proxy_url,
+                        ssl_context=ssl_context,
+                    )
 
         if connection_pool is None:
             connection_pool = urllib3.PoolManager(ssl_context=ssl_context)
