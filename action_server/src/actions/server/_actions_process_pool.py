@@ -137,6 +137,7 @@ class ProcessHandle:
         self._post_run_args = post_run_args
         self._retirement_lock = threading.Lock()
         self._retirement_started = False
+        self._crash_unverified = False
         self._exit_attempted = False
         self._retirement_complete = False
         self._retirement_result: WorkerRetirementResult | None = None
@@ -471,6 +472,9 @@ class ProcessHandle:
             assert self._retirement_result is not None
             return self._retirement_result
 
+        if getattr(self, "_crash_unverified", False):
+            return self._record_unverified_crash(deadline)
+
         if not getattr(self, "_retirement_started", False):
             self._retirement_started = True
             had_snapshot = self._retirement_descendants is not None
@@ -479,6 +483,7 @@ class ProcessHandle:
                 and self._process.poll() is not None
                 and not self._kill_called
             ):
+                self._crash_unverified = True
                 return self._record_unverified_crash(deadline)
 
         wrapper = getattr(self, "_rcc_wrapper", None)

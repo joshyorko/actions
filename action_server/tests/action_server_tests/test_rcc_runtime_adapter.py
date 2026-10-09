@@ -1196,6 +1196,41 @@ def test_unexpected_dead_worker_has_explicit_unverified_recovery(monkeypatch):
     assert not result.descendant_snapshot_complete
 
 
+def test_unexpected_crash_classification_survives_reader_retry():
+    from actions.server._actions_process_pool import ProcessHandle
+
+    reader_alive = [True]
+    handle = ProcessHandle.__new__(ProcessHandle)
+    handle._retirement_lock = threading.Lock()
+    handle._retirement_started = False
+    handle._crash_unverified = False
+    handle._retirement_complete = False
+    handle._retirement_result = None
+    handle._retirement_descendants = None
+    handle._retirement_snapshot_failed = False
+    handle._kill_called = False
+    handle._process = subprocess.Popen([sys.executable, "-c", "pass"])
+    handle._process.wait(timeout=2)
+    handle._reader = type(
+        "Reader",
+        (),
+        {
+            "join": lambda self, timeout=None: None,
+            "is_alive": lambda self: reader_alive[0],
+        },
+    )()
+    handle._socket = None
+
+    first = handle.retire(time.monotonic() + 1)
+    reader_alive[0] = False
+    second = handle.retire(time.monotonic() + 1)
+
+    assert first.state == "pending"
+    assert second.state == "crash_unverified"
+    assert second.capacity_releasable
+    assert not second.descendant_snapshot_complete
+
+
 def test_controlled_snapshot_failure_stays_pending_after_its_force_kill(monkeypatch):
     from actions.server._actions_process_pool import ProcessHandle
     from actions.server._common.process import ProcessTreeCleanupResult
