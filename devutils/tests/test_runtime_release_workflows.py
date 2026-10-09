@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import os
@@ -1158,6 +1159,58 @@ def test_binary_release_uses_explicit_tag_asset_names():
     assert "asset_name: ${{ github.ref_name }}-windows64.exe" in binary
 
 
+def test_binary_release_publishes_downloadable_checksum_manifest(tmp_path):
+    binary = yaml.safe_load(
+        (WORKFLOWS / "actions_runtime_binary_release.yml").read_text()
+    )
+    release_steps = binary["jobs"]["release"]["steps"]
+    inventory = next(
+        step["run"]
+        for step in release_steps
+        if step.get("name") == "Verify Runtime binary inventory"
+    )
+    checksum_upload = next(
+        step
+        for step in release_steps
+        if step.get("name") == "Upload Runtime SHA-256 manifest"
+    )
+
+    assert '"${tag}-sha256.txt"' in inventory
+    assert "${tag}-linux64" in inventory
+    assert "${tag}-macos-arm64" in inventory
+    assert "${tag}-windows64.exe" in inventory
+    assert checksum_upload["with"]["asset_name"] == "${{ github.ref_name }}-sha256.txt"
+    assert checksum_upload["with"]["overwrite"] is False
+
+    for relative_path in (
+        "linux64/action-server",
+        "macos-arm64/action-server",
+        "windows64/action-server.exe",
+    ):
+        path = tmp_path / relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(relative_path.encode())
+    env = os.environ.copy()
+    env["GITHUB_REF_NAME"] = "actions-runtime-1.0.3"
+    result = run_shell_step(inventory, tmp_path, env)
+    assert result.returncode == 0, result.stderr
+
+    expected = sorted(
+        (
+            hashlib.sha256(relative_path.encode()).hexdigest(),
+            f"actions-runtime-1.0.3-{asset_suffix}",
+        )
+        for relative_path, asset_suffix in (
+            ("linux64/action-server", "linux64"),
+            ("macos-arm64/action-server", "macos-arm64"),
+            ("windows64/action-server.exe", "windows64.exe"),
+        )
+    )
+    assert (tmp_path / "actions-runtime-1.0.3-sha256.txt").read_text().splitlines() == [
+        f"{digest}  {filename}" for digest, filename in expected
+    ]
+
+
 def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
     generator = repository_text(".github/workflows/_gen_workflows.py")
     recovery_text = repository_text(".github/workflows/actions_runtime_recovery.yml")
@@ -1614,8 +1667,35 @@ def test_recovery_fresh_draft_uses_the_same_final_manifest_gate_before_publish()
     assert publish.count('gh release edit "$RELEASE_REF" --draft=false') == 1
 
 
+def test_recovery_normalizes_only_the_three_native_binaries(tmp_path):
+    recovery = load_workflow_generator().ActionServerRuntimeRecovery()
+    binaries = {
+        "linux/action-server": b"linux",
+        "macos/action-server": b"macos",
+        "windows/action-server.exe": b"windows",
+    }
+    for relative_path, contents in binaries.items():
+        path = tmp_path / "binaries" / relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(contents)
+
+    env = os.environ.copy()
+    env["RELEASE_REF"] = "actions-runtime-1.0.3"
+    result = run_shell_step(
+        recovery.binary_release_normalize()["run"], tmp_path, env
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert sorted(path.name for path in (tmp_path / "release-assets").iterdir()) == [
+        "actions-runtime-1.0.3-linux64",
+        "actions-runtime-1.0.3-macos-arm64",
+        "actions-runtime-1.0.3-windows64.exe",
+    ]
+
+
 @pytest.mark.parametrize(
-    "state", ["fresh", "draft", "published", "list-error", "bad-hash"]
+    "state",
+    ["fresh", "draft", "published", "list-error", "bad-hash", "extra-checksum"],
 )
 def test_recovery_publication_outside_checkout(tmp_path, state):
     """Exercise the actual shell with draft tag lookup unavailable."""
@@ -1645,6 +1725,13 @@ def test_recovery_publication_outside_checkout(tmp_path, state):
     }
     if state == "bad-hash":
         release["assets"][0]["digest"] = "sha256:" + "0" * 64
+    if state == "extra-checksum":
+        release["assets"].append(
+            {
+                "name": "actions-runtime-1.0.1-sha256.txt",
+                "digest": "sha256:" + hashlib.sha256(b"checksum").hexdigest(),
+            }
+        )
     (tmp_path / "state.json").write_text(
         json.dumps(None if state == "fresh" else release)
     )
@@ -1706,6 +1793,9 @@ else: sys.exit(1)
     else:
         assert result.returncode != 0
         assert not edits
+    if state == "extra-checksum":
+        assert not any(call[0] == "release" for call in calls)
+        assert not any("--clobber" in call for call in calls)
     assert not any("/releases/tags/" in arg for call in calls for arg in call)
 
 
@@ -1882,128 +1972,3 @@ def test_runtime_publisher_rejects_recovery_title_mismatch_before_download(monke
     with pytest.raises(RuntimeError, match="title"):
         publisher.main()
     assert all(command[1:3] != ["run", "download"] for command in calls)
-
-
-def run_shell_step(script, cwd, env):
-    return subprocess.run(
-        ["bash", "-euo", "pipefail", "-c", script],
-        cwd=cwd,
-        env=env,
-        capture_output=True,
-        text=True,
-    )
-
-
-def test_runtime_publisher_accepts_platform_tag_order_and_rejects_duplicate_slots(
-    tmp_path,
-):
-    publisher = load_publisher()
-    linux_tags = (
-        "manylinux_2_17_x86_64.manylinux_2_5_x86_64."
-        "manylinux1_x86_64.manylinux2014_x86_64"
-    )
-    reordered_linux_tags = (
-        "manylinux_2_5_x86_64.manylinux1_x86_64."
-        "manylinux2014_x86_64.manylinux_2_17_x86_64"
-    )
-    artifacts = [
-        "actions_runtime-1.0.0.tar.gz",
-        f"actions_runtime-1.0.0-cp312-cp312-{reordered_linux_tags}.whl",
-        f"actions_runtime-1.0.0-cp313-cp313-{reordered_linux_tags}.whl",
-        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
-        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
-    ]
-    for name in artifacts:
-        (tmp_path / name).write_bytes(name.encode())
-
-    publisher.write_manifest(tmp_path)
-    assert publisher.verify_artifacts(tmp_path) == sorted(artifacts)
-
-    # Two different filenames that parse to the same wheel tag set are still
-    # one slot, not two distinct approved artifacts.
-    duplicate_slot = tmp_path / (
-        "actions_runtime-1.0.0-cp312-cp312-" + linux_tags + ".whl"
-    )
-    duplicate_slot.write_bytes(duplicate_slot.name.encode())
-    (tmp_path / artifacts[2]).unlink()
-    with pytest.raises(publisher.VerificationError, match="duplicate wheel slot"):
-        publisher.write_manifest(tmp_path)
-
-
-@pytest.mark.parametrize(
-    "filename",
-    [
-        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
-        "actions_runtime-1.0.0-1-cp312-cp312-win_amd64.whl",
-        "actions_runtime-1.0.0-cp313.cp313-cp313-win_amd64.whl",
-        "actions_runtime-1.0.0-cp313-cp313.cp313-win_amd64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
-    ],
-)
-def test_runtime_publisher_rejects_foreign_platform_or_build_tag(tmp_path, filename):
-    publisher = load_publisher()
-    artifacts = [
-        "actions_runtime-1.0.0.tar.gz",
-        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
-        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
-        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
-    ]
-    artifacts[-1] = filename
-    for name in artifacts:
-        (tmp_path / name).write_bytes(name.encode())
-    with pytest.raises(
-        publisher.VerificationError, match="unexpected artifact filename"
-    ):
-        publisher.write_manifest(tmp_path)
-
-
-def test_generated_runtime_inventory_uses_exact_tag_set_verifier(tmp_path):
-    workflow = yaml.safe_load(
-        (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
-    )
-    steps = workflow["jobs"]["publish"]["steps"]
-    inventory_step = next(
-        step
-        for step in steps
-        if step.get("name") == "Verify exact Runtime artifact inventory"
-    )
-    assert (
-        "scripts/publish_verified_runtime.py --download-root dist/downloads --dry-run"
-        in inventory_step["run"]
-    )
-
-    root = tmp_path / "repo"
-    action_server = root / "action_server"
-    scripts = action_server / "scripts"
-    downloads = action_server / "dist" / "downloads"
-    scripts.mkdir(parents=True)
-    downloads.mkdir(parents=True)
-    (scripts / PUBLISHER.name).write_bytes(PUBLISHER.read_bytes())
-    artifacts = [
-        "actions_runtime-1.0.0.tar.gz",
-        "actions_runtime-1.0.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
-        "actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
-        "actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
-        "actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
-    ]
-    for name in artifacts:
-        (downloads / name).write_bytes(name.encode())
-
-    run_command = "uv run --no-project --python ${{ matrix.python }} python"
-    script = inventory_step["run"].replace(run_command, shlex.quote(sys.executable), 1)
-    result = run_shell_step(script, root, os.environ.copy())
-    assert result.returncode == 0, result.stderr
-
-    output = action_server / "dist"
-    assert sorted(path.name for path in output.iterdir()) == sorted(
-        artifacts + ["actions-runtime-manifest.sha256"]
-    )
-    publisher = load_publisher()
-    assert publisher.verify_artifacts(output) == sorted(artifacts)

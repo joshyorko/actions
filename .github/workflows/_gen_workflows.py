@@ -989,7 +989,12 @@ for pair in \
   test ! -L "$binary"
   test "$(find "$directory" -mindepth 1 -maxdepth 1 | wc -l)" -eq 1
 done
-sha256sum linux64/action-server macos-arm64/action-server windows64/action-server.exe | sort > runtime-binary-manifest.sha256
+tag="$GITHUB_REF_NAME"
+{
+  sha256sum linux64/action-server | sed "s#  linux64/action-server#  ${tag}-linux64#"
+  sha256sum macos-arm64/action-server | sed "s#  macos-arm64/action-server#  ${tag}-macos-arm64#"
+  sha256sum windows64/action-server.exe | sed "s#  windows64/action-server.exe#  ${tag}-windows64.exe#"
+} | sort > "${tag}-sha256.txt"
 """,
         }
 
@@ -1112,6 +1117,17 @@ sha256sum linux64/action-server macos-arm64/action-server windows64/action-serve
                             "repo_token": "${{ secrets.GITHUB_TOKEN }}",
                             "file": "./windows64/action-server.exe",
                             "asset_name": "${{ github.ref_name }}-windows64.exe",
+                            "tag": "${{ github.ref }}",
+                            "overwrite": False,
+                        },
+                    },
+                    {
+                        "name": "Upload Runtime SHA-256 manifest",
+                        "uses": "svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd",  # v2
+                        "with": {
+                            "repo_token": "${{ secrets.GITHUB_TOKEN }}",
+                            "file": "./${{ github.ref_name }}-sha256.txt",
+                            "asset_name": "${{ github.ref_name }}-sha256.txt",
                             "tag": "${{ github.ref }}",
                             "overwrite": False,
                         },

@@ -542,6 +542,31 @@ tag-named binaries as GitHub release assets only; the Sema4AI Homebrew dispatch
 and Robocorp/Sema4AI CDN/S3 compatibility handoffs are retired. The normal
 uploader uses `overwrite: false`, so a same-name asset collision fails closed
 instead of replacing a published binary.
+The binary workflow publishes `<tag>-sha256.txt` as a fourth immutable GitHub
+release asset. Its sorted entries use the exact three binary asset names, so
+each downloaded executable can be checked with `sha256sum -c` without renaming.
+Maintain this behavior in `.github/workflows/_gen_workflows.py` and regenerate
+the workflow; generated YAML is not authoritative. The maintained Homebrew tap
+is `joshyorko/homebrew-tools`; its `action-server` cask mirrors only verified
+Linux x86_64 and macOS arm64 Runtime assets. Prepare a tap update after the
+upstream assets exist and their GitHub SHA-256 digests are verified. The tap
+README documents the `action-server-daily` auto-update slot and its manual
+`action=ci` then `action=release` workflow inputs. Do not dispatch the retired
+Sema4AI `publish.yml` workflow.
+The normal binary job creates a published release before downloading/uploading
+the assets: `Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803`
+defaults to `create_draft=false` and `update_existing=false`. It then uploads
+Linux, macOS, Windows, and the checksum manifest in order using
+`svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd`
+with `overwrite: false`.
+A failure can therefore leave a published release with only a prefix of the
+four assets. Rerunning is not a resume protocol: the release action leaves an
+existing release unchanged, and the asset uploader fails on the first
+same-name asset without deleting it. Before root decides how to continue,
+reconcile the exact tag target/source SHA and the complete four-name inventory
+against locally calculated asset digests and the manifest. Do not blindly retry,
+replace, delete, or republish assets. A SHA-256 match proves byte integrity; it
+does not prove source provenance, a publisher signature, or notarization.
 
 Check package credential availability in the actual `pypi` environment through
 an isolated non-publishing workflow with no repository permissions, checkout,
@@ -619,6 +644,12 @@ conflicting digests, and extraneous names, never clobbers, and publishes only af
 one final re-fetch proves draft state, the exact three-name inventory, every asset
 digest, and the release target/SHA against the immutable inputs; fresh and resumed
 drafts use that same finalization gate.
+This recovery contract is intentionally a three-binary path and does not generate
+or accept the normal workflow's fourth `<tag>-sha256.txt` asset. An adversarial
+draft containing that checksum asset is rejected before any recovery upload or
+publication. Do not use this legacy recovery lane to resume a partial four-asset
+normal release; first reconcile its full inventory and hashes, then have root
+choose the continuation.
 Recovery publication runs outside the nested checkouts, so every `gh release`
 command supplies the repository explicitly. Authenticated paginated release listing
 discovers drafts; final verification fetches the numeric release ID because the
@@ -1581,7 +1612,10 @@ a local directory lock entry proves candidate verification, not publication.
 When merging parallel checkpoint tests, check for duplicate top-level test
 names: Python silently replaces the earlier definition, masking ownership and
 coverage. Consolidate only proven identical contracts or preserve distinct
-tests under distinct names, then run the complete combined suite and lint.
+tests under distinct names. Compare complete function bodies and parameterization
+before consolidation, and capture `pytest --collect-only -q` counts before and
+after so collection changes are explicit. Then run the complete combined suite
+and lint.
 
 Credential redaction must cover argparse-accepted long-option abbreviations
 for `--api-key`, in both separate and equals forms. HTTP header names are
