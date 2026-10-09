@@ -13,6 +13,28 @@ from pathlib import Path
 
 ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
 ZIP_FILE_MODE = 0o100644 << 16
+GENERATED_TEMPLATE_DIRS = {
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".tox",
+    ".venv",
+    "__pycache__",
+    "output",
+    "venv",
+}
+
+
+def _is_generated_local_file(relative_path: Path) -> bool:
+    """Omit local build/test state without applying deployment package excludes."""
+    return any(
+        part in GENERATED_TEMPLATE_DIRS
+        or part.endswith("_cache")
+        or part == ".env"
+        or part == ".DS_Store"
+        for part in relative_path.parts
+    ) or relative_path.suffix.lower() in {".pyc", ".pyo"}
 
 
 def _zip_directory(directory: Path) -> bytes:
@@ -21,7 +43,13 @@ def _zip_directory(directory: Path) -> bytes:
         with zipfile.ZipFile(
             temporary, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
         ) as archive:
-            for source in sorted(path for path in directory.rglob("*") if path.is_file()):
+            sources = (
+                path
+                for path in directory.rglob("*")
+                if path.is_file()
+                and not _is_generated_local_file(path.relative_to(directory))
+            )
+            for source in sorted(sources):
                 relative = source.relative_to(directory).as_posix()
                 info = zipfile.ZipInfo(relative, ZIP_TIMESTAMP)
                 info.create_system = 3

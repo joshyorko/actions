@@ -1,4 +1,4 @@
-> Paused draft, October 8, 2026. Not approved, implemented, or ready to merge. Published only to preserve existing work for adversarial review.
+> Historical proposal, October 8, 2026. This packet was initially a design-only checkpoint. A later bounded #126 implementation was admitted and is being reviewed separately; the unchecked items and status paragraphs below describe the original proposal, not current completion status. The current implementation does not mark #126 accepted.
 
 # MCP v2 Showcase Design Candidate and Implementation Plan
 
@@ -220,9 +220,9 @@ No change is planned to `actions/src/actions/mcp/__init__.py`, `setup_mcp_server
 - [ ] Verify the guide change against actual test names and generator output; remove any four-only statement that becomes contradictory, but leave the unrelated exact-four artifact/release claims intact.
 - [ ] Run `git diff --check`; review the generated artifact and package source diff for scope creep.
 
-## Verification status and remaining uncertainty
+## Historical verification status and current checkpoint
 
-- This packet is repository reconnaissance only. No builds/tests were run and no repository code was edited.
+- The statements in this section record the packet's original October 8 state. The separately admitted `feature/mcp-v2-showcase-template-20261009` checkpoint adds the source template, production inventory entry, generated assets, and an actual mounted-process protocol test. The bundle builder omits local generated state but preserves authored inputs such as `devdata`; deployment `packaging.exclude` rules do not define template archive contents. Its current acceptance evidence and unresolved limits are recorded in the associated review receipt; this draft alone does not establish that all #126 gates are complete.
 - **Progress-streaming gap:** the server's SSE transport is present, but `McpResponseHandler` progress hooks are no-ops. If the intended acceptance means tool progress notifications rather than stream connection lifecycle, current public implementation does not prove that requirement; a separate runtime prerequisite would be needed.
 - **Exception error gap:** the adapter logs and re-raises tool exceptions. Current checked tests prove trusted metadata boundaries and safe correlation telemetry, but not the exact v2 wire representation or log sanitization for arbitrary action exceptions. The design confines the sample to an explicit static safe-result error and proposes one negative metadata rejection test; do not claim all unexpected exceptions are safely masked unless added proof establishes it.
 - **Manifest release timing:** current #126 does not specify beta-to-production promotion timing. The plan recommends beta trial if useful, then production inclusion only after gates; beta and production should share the ID after promotion.

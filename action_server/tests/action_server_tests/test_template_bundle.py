@@ -13,6 +13,7 @@ import yaml
 REPO = Path(__file__).resolve().parents[3]
 PACKAGER = REPO / "templates/packaging/build_embedded_bundle.py"
 CONFIG = REPO / "templates/packaging/templates-prod.json"
+BETA_CONFIG = REPO / "templates/packaging/templates-beta.json"
 TEMPLATES = REPO / "templates"
 EMBEDDED = REPO / "action_server/src/actions/server/templates"
 
@@ -52,14 +53,115 @@ def test_template_bundle_generation_is_byte_for_byte_deterministic(tmp_path):
     )
 
 
+def test_generated_template_archive_omits_local_state_and_keeps_authored_devdata(
+    tmp_path,
+):
+    template_root = tmp_path / "templates"
+    template = template_root / "fixture"
+    (template / "src").mkdir(parents=True)
+    (template / "src" / "keep.py").write_text("value = 1\n")
+    (template / "devdata").mkdir()
+    (template / "devdata" / "example.json").write_text('{"sample": true}\n')
+    (template / "output").mkdir()
+    (template / "output" / "result.txt").write_text("generated\n")
+    (template / "__pycache__").mkdir()
+    (template / "__pycache__" / "module.pyc").write_bytes(b"bytecode")
+    (template / "__pycache__" / "cache-metadata").write_text("generated\n")
+    (template / ".ruff_cache").mkdir()
+    (template / ".ruff_cache" / "cache").write_text("generated\n")
+    (template / "package.yaml").write_text(
+        "packaging:\n"
+        "  exclude:\n"
+        "    - ./devdata/**\n"
+        "    - ./output/**\n"
+        "    - ./**/*.pyc\n"
+        "    - ./**/__pycache__/**\n"
+        "    - ./**/*_cache/**\n"
+    )
+    config = tmp_path / "config.json"
+    config.write_text(
+        json.dumps(
+            {"templates": [{"id": "fixture", "name": "Fixture", "desc": "test"}]}
+        )
+    )
+    output = tmp_path / "bundle"
+    subprocess.run(
+        [
+            sys.executable,
+            str(PACKAGER),
+            "--config",
+            str(config),
+            "--template-root",
+            str(template_root),
+            "--output-dir",
+            str(output),
+        ],
+        check=True,
+    )
+
+    with zipfile.ZipFile(output / "zips" / "fixture.zip") as archive:
+        actual = set(archive.namelist())
+    assert actual == {"package.yaml", "src/keep.py", "devdata/example.json"}
+
+
+def test_existing_template_archives_retain_authored_devdata():
+    expected = {
+        "advanced": {
+            "devdata/input_create_repository_issue.json",
+            "devdata/input_get_repository_commits.json",
+        },
+        "basic": {"devdata/input_get_wikipedia_article_summary.json"},
+        "minimal": {"devdata/input_greet.json"},
+    }
+    for template_id, expected_members in expected.items():
+        with zipfile.ZipFile(EMBEDDED / "zips" / f"{template_id}.zip") as archive:
+            assert expected_members <= set(archive.namelist())
+
+
 def test_embedded_metadata_covers_all_production_templates():
     assert (EMBEDDED / "action-templates.zip").is_file()
     metadata = yaml.safe_load((EMBEDDED / "action-templates.yaml").read_text())
-    expected = {"advanced", "basic", "minimal", "workflow-producer-consumer"}
+    expected = {
+        "advanced",
+        "basic",
+        "minimal",
+        "mcp-v2-showcase",
+        "workflow-producer-consumer",
+    }
     assert {
         template["id"] for template in json.loads(CONFIG.read_text())["templates"]
     } == expected
     assert set(metadata["templates"]) == expected
+
+
+def test_beta_inventory_remains_a_separate_selected_subset():
+    production_ids = {
+        template["id"] for template in json.loads(CONFIG.read_text())["templates"]
+    }
+    beta_ids = {
+        template["id"] for template in json.loads(BETA_CONFIG.read_text())["templates"]
+    }
+
+    assert beta_ids == {"advanced", "basic", "minimal"}
+    assert beta_ids < production_ids
+    assert "mcp-v2-showcase" not in beta_ids
+
+
+def test_mcp_v2_showcase_is_in_the_generated_offline_bundle():
+    metadata = yaml.safe_load((EMBEDDED / "action-templates.yaml").read_text())
+    assert "mcp-v2-showcase" in metadata["templates"]
+    with zipfile.ZipFile(EMBEDDED / "action-templates.zip") as bundle:
+        showcase_bytes = bundle.read("mcp-v2-showcase.zip")
+    with zipfile.ZipFile(io.BytesIO(showcase_bytes)) as showcase:
+        names = set(showcase.namelist())
+    assert {
+        "package.yaml",
+        "README.md",
+        "showcase_actions.py",
+        "examples/mcp_client.py",
+        "examples/open_close_sse.py",
+        "tests/test_showcase_actions.py",
+    } <= names
 
 
 def test_embedded_templates_are_available_without_network_transport(
@@ -78,6 +180,7 @@ def test_embedded_templates_are_available_without_network_transport(
         "advanced",
         "basic",
         "minimal",
+        "mcp-v2-showcase",
         "workflow-producer-consumer",
     }
     assert (cache / "minimal.zip").is_file()
@@ -175,6 +278,7 @@ def test_malformed_local_metadata_is_reseeded_from_embedded_bundle(
         "advanced",
         "basic",
         "minimal",
+        "mcp-v2-showcase",
         "workflow-producer-consumer",
     }
     assert (cache / "minimal.zip").is_file()
@@ -204,9 +308,10 @@ def test_duplicate_bundle_member_is_rejected(tmp_path):
 
     metadata, embedded_bundle = helpers._embedded_assets()
     duplicate_bundle = io.BytesIO()
-    with zipfile.ZipFile(io.BytesIO(embedded_bundle)) as source, zipfile.ZipFile(
-        duplicate_bundle, "w"
-    ) as destination:
+    with (
+        zipfile.ZipFile(io.BytesIO(embedded_bundle)) as source,
+        zipfile.ZipFile(duplicate_bundle, "w") as destination,
+    ):
         for member in source.infolist():
             destination.writestr(member, source.read(member))
         with pytest.warns(UserWarning, match="Duplicate name"):
