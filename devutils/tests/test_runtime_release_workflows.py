@@ -288,6 +288,32 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert "NODE_AUTH_TOKEN" not in sdist_step
     assert "GH_TOKEN" not in sdist_step
     assert "ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD" in sdist_step
+    wheel_steps = workflow["jobs"]["build-wheels"]["steps"]
+    canary_index = next(
+        index
+        for index, step in enumerate(wheel_steps)
+        if step.get("name") == "Verify Runtime wheel with published Core and Helper"
+    )
+    canary = wheel_steps[canary_index]
+    assert canary["if"] == "github.event_name == 'pull_request'"
+    assert "verify_published_runtime_floor.py wheelhouse" in canary["run"]
+    assert canary_index > next(
+        index
+        for index, step in enumerate(wheel_steps)
+        if step.get("name") == "Build and clean-test wheels"
+    )
+    assert canary_index < next(
+        index
+        for index, step in enumerate(wheel_steps)
+        if "Upload artifact" in step.get("name", "")
+    )
+    canary_script = (
+        ROOT / "action_server/scripts/verify_published_runtime_floor.py"
+    ).read_text()
+    assert 'EXPECTED_CORE = "1.0.2"' in canary_script
+    assert 'EXPECTED_HELPER = "1.0.3"' in canary_script
+    assert "https://pypi.org/simple" in canary_script
+    assert '"-m", "pip", "check"' in canary_script
     wheel_build_step = next(
         step
         for step in workflow["jobs"]["build-wheels"]["steps"]

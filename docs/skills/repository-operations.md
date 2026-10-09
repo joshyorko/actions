@@ -22,8 +22,11 @@ contain only the version floor, never a machine/source path. The clean-wheel
 contract builds with the pinned Poetry available from RCC, installs outside
 the checkout, checks dependencies and imports the public contracts before
 testing both uninstall orders. It does not download another Poetry through
-`uv --with poetry`. Template pins remain at the published Core 1.0.1 until a
-separately authorized release and template update.
+`uv --with poetry`. The Community base (`7c982360`) still pins templates to
+published Core 1.0.1. On the selected integration candidate (`3fee2792`), all
+four existing template manifests pin published Core 1.0.2. A template pin is
+therefore revision-specific; verify the target manifests before describing a
+release's template state.
 
 Poetry merges the matching Core source into the main/dev lock entry: a
 `poetry install --only main` using this checkout lock still selects local Core.
@@ -32,12 +35,24 @@ install. Production and release compatibility must be checked by installing
 the built wheels outside the checkout. Lazy public exports appear in `dir`
 without eager import so introspection and generated docs include ActionContext.
 
-For pull-request Runtime wheel checks, the workflow builds the matching Core
-wheel and installs it into cibuildwheel's fresh test environment before Runtime
-dependency resolution. This pairing is PR-only: tag/release builds resolve the
-declared Core version from the registry and fail if it has not been published.
-Do not broaden the candidate override to release events or remove dependency
-checks. The installer accepts one identified Core wheel and prints its digest.
+For pull-request Runtime wheel checks, the workflow builds matching Core and
+HTTP Helper wheels and installs them into cibuildwheel's fresh test environment
+for candidate-pair compatibility. A separate PR-only clean venv installs the
+built Runtime cp312 wheel from the public PyPI index with pip cache disabled.
+Its pip install report must match the exact public Core 1.0.2 and Helper 1.0.3
+wheel URLs and SHA-256 hashes. Read pip's UTF-8 JSON report with an explicit
+encoding; Windows' default cp1252 decoder can reject valid UTF-8 metadata. The
+probe removes Python path overrides, then
+runs a child-interpreter preflight that rejects resolved search paths under the
+entire monorepo before `pip check` or application imports. After imports, it
+checks the loaded module origins against the same boundary before running
+`actions.server version`. Keep
+both checks: the local wheel pair exercises unreleased producer APIs, while the
+registry-floor canary proves compatibility with published dependencies and
+prints the verified public artifact URLs and hashes. This PR test workflow runs
+for `community` and `integration/**` target branches; its PyPI credential and
+upload steps remain tag-push-only. The candidate override must not apply to
+release events or bypass dependency checks.
 
 Python 3.10's `inspect.isclass` classifies a `list[...]` public alias differently
 from Python 3.12. The canonical docs task normalizes exported GenericAlias
@@ -169,7 +184,9 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
-Every template `package.yaml` pins the published `actions-core=1.0.1`.
+At Community base `7c982360`, every template `package.yaml` pins the published
+`actions-core=1.0.1`; on integration candidate `3fee2792`, all four existing
+template manifests pin published `actions-core=1.0.2`.
 The producer-consumer template additionally pins
 `actions-work-items=0.4.4`. `actions-http-helper` remains a transitive Core
 dependency, and `actions-runtime` is the server distribution rather than a
@@ -442,6 +459,20 @@ provider semantics. This recommendation is not accepted behavior; validators,
 version rules, and cross-language round trips remain unproved. Do not add a new
 distribution or Canvas dependency to ordinary Core actions on this evidence
 alone.
+
+For a runnable protocol showcase proof, start the actual `ActionServerProcess`
+with a temporary action catalog pinned to the candidate's published
+`actions-core=1.0.2` floor and send raw, independent stateless JSON-RPC POSTs
+carrying matching `Mcp-Method` header/body values and the required protocol
+metadata.
+For named reads and calls, also send the matching `Mcp-Name` value (`uri` for
+`resources/read`). Exercise `server/discover`, the four catalogs, tool call,
+direct and templated resource reads, prompt retrieval, and a bounded safe
+application error; assert catalog metadata, request correlation, and absence
+of session headers. This proves the mounted Runtime protocol path only. It does
+not prove a community template exists, is included in the embedded bundle, or
+can be created offline; those remain separate manifest, generated-artifact,
+and CLI acceptance gates.
 
 The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
@@ -1054,8 +1085,13 @@ temporary, exact HTTPS tunnel host and origin. The scoped entries are reference
 counted and removed after verification failure or the owned manager stops;
 existing loopback or pre-existing entries remain. This does not mark the
 separate persisted `action-server expose start/status` lifecycle ready. Local
-ASGI tests prove SDK behavior and cleanup only; real provider/TLS exposure and
-native CI remain separate gates.
+ASGI tests prove SDK behavior and cleanup only. A separate loopback test runs
+the verifier over an actual TLS socket, explicitly trusts its synthetic
+self-signed localhost certificate, and confirms an untrusted certificate is
+rejected before HTTP reaches the app. This proves verified-TLS and
+authenticated-MCP probe plumbing; it does not prove provider routing, deployed
+certificate policy, public exposure, or native packaging. Those remain
+separate gates.
 
 Cloudflare quick-tunnel readers use nonblocking pipe descriptors with bounded
 4096-byte reads, a 64-entry startup queue, and a separate 512-byte overlap tail
@@ -1583,10 +1619,22 @@ Runtime admission binds the peeled tag commit to the triggering event commit
 and requires community ancestry; unrelated later community commits do not
 invalidate an immutable release source. PR candidate dependency wheels are
 verification-only. Publish and clean-install required dependency versions before
-dependent release tags. Check registry and native release versions separately
-before allocating a version, and never reuse a published distribution version.
-The live registry on October 8 contains Runtime 1.0.2 and Core 1.0.1; the assembled
-Runtime 1.0.3 and Core 1.0.2 are candidates until release checks and workflows pass.
+dependent release tags. Before each release decision, read current PyPI project
+metadata and the native GitHub release/assets independently; an older readiness
+report, passing workflow, or dependency publication does not establish the
+Runtime package or native release state. Never reuse a published distribution
+version. The current Runtime 1.0.3 source declares Core `^1.0.2`, HTTP Helper
+`^1.0.3`, and Work Items `^0.4.4`; the dependency floors being published does
+not mean Runtime itself has been published.
+
+The Runtime source changelog and public README must label an unpublished version
+as a candidate and keep the PyPI and native versions separate. Candidate notes
+must distinguish source changes from acceptance evidence: in particular, a
+selected-provider RCC 503 negative that fails before Action execution does not
+prove provider-backed offline-warm reuse or full issue #134 acceptance. Keep
+open browser and external native-handoff criteria visible until their specified
+evidence exists. Do not describe independent Canvas entrypoints as Canvas
+authoring or execution functionality.
 
 The HTTP helper must apply persisted `proxy-settings.no-proxy` at each request
 destination, including redirects, not merely expose it through NetworkProfile.
