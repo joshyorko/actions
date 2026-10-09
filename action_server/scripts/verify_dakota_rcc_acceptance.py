@@ -1288,6 +1288,8 @@ dependencies:
         warm_receipt = None
         warm_receipt_path = None
         provider_probe_stopped = False
+        lifecycle = None
+        warm_failure_class = None
         try:
             offline_env = dict(runtime_env)
             offline_env["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_probe.url
@@ -1369,6 +1371,8 @@ dependencies:
                 if identity not in known:
                     known.add(identity)
                     warm_server_tree.append(item)
+        except Exception as exc:
+            warm_failure_class = type(exc).__name__
         finally:
             try:
                 try:
@@ -1396,6 +1400,90 @@ dependencies:
             finally:
                 provider_probe.close()
                 provider_probe_stopped = True
+
+        if warm_failure_class is not None:
+            with load_db(db_path) as db:
+                with db.connect():
+                    run = next(
+                        (item for item in db.all(Run) if item.id == run_id), None
+                    )
+                    package = db.all(ActionPackage)[0]
+                    runtime = json.loads(package.env_json)["runtime"]
+            receipts = sorted((datadir / "rcc-receipts").glob("*.json"))
+            rcc_receipt = read_receipt(receipts[-1], digest) if receipts else {}
+            cells = {
+                "unauthenticated_rejection": "PASS"
+                if unauthenticated.status_code in (401, 403)
+                else "FAIL",
+                "authenticated_action": "PASS"
+                if response.status_code == 200 and candidate_result == expected_result
+                else "FAIL",
+                "sqlite_run": "PASS"
+                if run is not None and run.status == RunStatus.PASSED
+                else "FAIL",
+                "artifact_verification": "PASS"
+                if rcc_receipt.get("verification", {}).get("valid") is True
+                else "FAIL",
+                "wrapper_exit": classify_wrapper_exit(rcc_receipt),
+                "process_cleanup": "PASS"
+                if server_reaped and provider_reaped and receipts
+                else "FAIL",
+                "offline_warm_artifact_ready": "PASS"
+                if isinstance(lifecycle, dict) and lifecycle.get("ready") is True
+                else "FAIL",
+                "offline_warm_action": "FAIL",
+                "offline_warm_artifact_verification": "FAIL",
+                "offline_warm_wrapper_exit": "FAIL",
+                "provider_unavailable": "PASS" if provider_reaped else "FAIL",
+                "zero_requests_to_retired_provider_origin": (
+                    classify_zero_provider_requests(provider_probe.request_count)
+                ),
+                "warm_process_cleanup": "PASS"
+                if warm_server_reaped and provider_probe_stopped
+                else "FAIL",
+            }
+            evidence = {
+                "schema_version": 1,
+                "runtime_mode": "candidate-wheel",
+                "action_server_mode": "source",
+                "source_sha": source_sha,
+                "rcc": {
+                    "version": runtime["rcc_version"],
+                    "sha256": rcc_sha256,
+                },
+                "candidate_wheels": wheel_records,
+                "actions_core": "1.0.2",
+                "actions_http_helper": "1.0.2",
+                "server_integration": candidate_result["server_integration"],
+                "artifact_digest": digest,
+                "run_id": run_id,
+                "sqlite_status": "passed" if cells["sqlite_run"] == "PASS" else "failed",
+                "unauthenticated_http_status": unauthenticated.status_code,
+                "authenticated_http_status": response.status_code,
+                "provider": "rcc-cache-serve-loopback",
+                "cells": cells,
+                "acceptance_status": acceptance_status(cells),
+                "runtime_process_exit_code": server_exit_code,
+                "provider_process_reaped": provider_reaped,
+                "rcc_receipt": _sanitize_runtime_receipt(rcc_receipt)
+                if rcc_receipt
+                else None,
+                "offline_warm": {
+                    "provider_reference": provider_probe.url,
+                    "provider_probe_role": "count-and-reject-only; serves no artifacts",
+                    "provider_probe_requests": provider_probe.request_count,
+                    "artifact_lifecycle_inspect": lifecycle,
+                    "failure_class": warm_failure_class,
+                    "run_id": warm_run_id or None,
+                    "runtime_process_exit_code": warm_server_exit_code,
+                    "process_reaped": warm_server_reaped,
+                    "provider_probe_stopped": provider_probe_stopped,
+                    "rcc_receipt": None,
+                },
+            }
+            write_evidence(receipt_path, evidence, temp_root=root)
+            evidence["receipt_path"] = str(receipt_path.expanduser().resolve())
+            return evidence
 
         with load_db(db_path) as db:
             with db.connect():
