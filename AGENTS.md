@@ -66,6 +66,18 @@ Documentation improvement:
 
 The integration agent may complete the parent task only after every receipt is integrated or explicitly rejected with a reason and canonical guides contain no contradictory claims. The final report lists documentation improvements from the full run.
 
+## Upstream defect reporting
+
+When implementation, review, debugging, release, or coordination finds a
+possible defect owned by a maintained upstream dependency, follow
+[`docs/skills/upstream-reporting.md`](docs/skills/upstream-reporting.md). The
+guide governs evidence, ownership, deduplication, maintainer follow-up, and the
+completion receipt. It does not grant credentials or authority to mutate any
+repository: external issue creation requires explicit, target-specific,
+issue-only authorization for a confirmed defect. Third-party or out-of-scope
+reports remain drafts pending authority. Route security-sensitive findings
+through the affected repository's private reporting procedure.
+
 ## Commit & Pull Request Guidelines
 
 Use concise Conventional Commit prefixes such as `feat:`, `fix:`, `test:`, `docs:`, `refactor:`, and `chore:`. Keep commits independently reviewable. Pull requests summarize behavior and safety impact, link issues, disclose breaking changes, list exact verification output and skipped gates, and include screenshots only for visual changes. Request package-owner review for shared `common/` changes.
