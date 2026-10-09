@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type * as React from "react";
 
@@ -41,8 +41,14 @@ export interface QueryResultsAdapter {
     getArtifactStatus(handle: ArtifactHandle): Promise<ArtifactStatus>;
 }
 
+export interface HostToolInput {
+    revision: number;
+    query: string | null;
+}
+
 interface QueryResultsViewProps {
     adapter: QueryResultsAdapter;
+    hostInput?: HostToolInput | null;
 }
 
 const MAX_QUERY_CODE_POINTS = 64;
@@ -60,7 +66,10 @@ function queryValidationMessage(query: string): string | null {
     return null;
 }
 
-export function QueryResultsView({ adapter }: QueryResultsViewProps) {
+export function QueryResultsView({
+    adapter,
+    hostInput = null,
+}: QueryResultsViewProps) {
     const [query, setQuery] = useState("");
     const [validationError, setValidationError] = useState<string | null>(null);
     const [actionError, setActionError] = useState<string | null>(null);
@@ -72,6 +81,15 @@ export function QueryResultsView({ adapter }: QueryResultsViewProps) {
     const generationRef = useRef(0);
     const mountedRef = useRef(false);
     const currentResultRef = useRef<QueryActionResult | null>(null);
+    const hostInputRevisionRef = useRef<number | null>(null);
+
+    const replaceResult = useCallback(
+        (nextResult: QueryActionResult | null) => {
+            currentResultRef.current = nextResult;
+            setResult(nextResult);
+        },
+        [],
+    );
 
     useEffect(() => {
         mountedRef.current = true;
@@ -81,10 +99,19 @@ export function QueryResultsView({ adapter }: QueryResultsViewProps) {
         };
     }, []);
 
-    const replaceResult = (nextResult: QueryActionResult | null) => {
-        currentResultRef.current = nextResult;
-        setResult(nextResult);
-    };
+    useEffect(() => {
+        if (!hostInput || hostInputRevisionRef.current === hostInput.revision) {
+            return;
+        }
+        hostInputRevisionRef.current = hostInput.revision;
+        generationRef.current += 1;
+        setQuery(hostInput.query ?? "");
+        setValidationError(null);
+        setActionError(null);
+        replaceResult(null);
+        setArtifactStatus(null);
+        setIsCheckingArtifact(false);
+    }, [hostInput, replaceResult]);
 
     const submit = async (event: FormEvent) => {
         event.preventDefault();

@@ -17,10 +17,13 @@ per-workspace/app/revision artifact resolver; its legacy artifact API uses
 Runtime round-trip tests for this value prove serialization only, not artifact
 resolution or authorization.
 
-The React component tests exercise view states through a fake adapter. They do
-not prove real Action Server dispatch, Runtime authorization, host binding,
-resource delivery, CSP behavior, or ChatGPT rendering. Production Canvas entry
-point and official host bridge wiring remain separately owned.
+The React component tests exercise view states through a fake adapter. A
+separate local browser harness uses the published `@modelcontextprotocol/ext-apps`
+bridge and simulates the MCP Apps host protocol for this fixture. Its fixed
+`canvas_fixture_search` and `canvas_fixture_artifact_status` calls return the
+checked-in fixture values; they are not Action Server tools and do not prove
+real Action Server dispatch, Runtime authorization, host binding, artifact
+resolution, CSP policy in a host, or ChatGPT rendering.
 
 The renderer drops a pending artifact-status result when a query is edited or
 submitted for a new result and when the view unmounts. Async status success,
@@ -28,3 +31,10 @@ failure, and completion handlers update state only while both the captured
 generation and result object are still current. Component tests exercise this
 client-side race guard with held promises; it does not bind a result to a real
 MCP host context.
+
+The production Canvas entry point uses the same official bridge package, and
+the Canvas build embeds its JavaScript and CSS into one HTML resource. A
+static build check rejects asset URL references, and the local browser harness
+blocks and records external network requests while serving the built resource
+under a test-only hash-based script CSP with connections disabled. Neither
+check establishes the security policy or behavior of a production MCP host.

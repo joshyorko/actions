@@ -8,7 +8,6 @@ const frontendRoot = path.resolve(canvasViewRoot, "../..");
 
 export default defineConfig({
     root: canvasViewRoot,
-    css: true,
     test: {
         environment: "jsdom",
         globals: true,
