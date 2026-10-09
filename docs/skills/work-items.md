@@ -81,7 +81,10 @@ as UTC before orphan-recovery comparisons; DocumentDB stores UTC-aware datetime 
 queries. The pytest suite keeps `asyncio_mode = "auto"`; its locked
 pytest-asyncio 0.21 runtime does not support a default fixture-loop-scope option.
 SQLite race tests use the `spawn` multiprocessing context, avoiding a multithreaded
-test runner's unsafe `fork` warning. The v1 `download_file` and `download_files`
+test runner's unsafe `fork` warning. When a regression test synchronizes a legacy
+select-then-update race, place its barrier after `fetchone()` captures the candidate
+and before the update; SQLite trace callbacks run before statement execution and
+cannot prove both workers observed the same row. The v1 `download_file` and `download_files`
 aliases remain public compatibility APIs; their ported tests must capture their
 intentional deprecation warnings rather than leaking them into verification.
 
