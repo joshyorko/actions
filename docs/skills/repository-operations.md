@@ -1266,6 +1266,35 @@ extracting anything, on every OS. Generic casefold/path confinement alone does n
 prove portable destination safety. Keep actual native filesystem, no-follow races,
 and TLS/redirect evidence separate from source and instrumented transport tests.
 
+Allocate Robot publication staging exclusively before copying, and record ownership
+only after allocation succeeds. An initial name collision is not permission to
+delete the existing entry. The regression seeds a foreign sentinel at the allocation
+boundary and proves it survives; interrupted copies still clean their owned staging.
+After successful native no-replace publication, relinquish cleanup authority for the
+old staging pathname before entering final cleanup. Another writer can immediately
+reuse that name; success-path cleanup must preserve the new entry's identity and
+content. The regression performs the real rename, recreates the old name as a
+directory or file with a foreign sentinel, and verifies both complete publication
+and preservation of the replacement. This covers the ownership transfer after
+publication, not replacement of the root, source or staging entry before publication.
+This initial ownership flag does not establish identity after another actor replaces
+the entry. Robot directory publication uses native no-replace rename: Linux
+`renameat2(RENAME_NOREPLACE)`, macOS `renameatx_np(RENAME_EXCL)`, and Windows
+`os.rename` without replacement. Unsupported platforms, missing native symbols,
+unsupported filesystems and cross-device moves fail without a copying or replacing
+fallback. The unauthenticated build matrix runs the Robot API and directory
+publication tests on Linux, Windows and macOS before building the binaries.
+Record each platform's result; workflow wiring alone does not establish a pass.
+Run the package's complete lint and typecheck commands alongside these focused
+tests. A green Robot selection does not cover formatter/import checks in other
+test modules or annotations inside a callback that mutates a captured collection.
+These checks cover complete-directory publication and preservation of existing
+destinations. They do not prove root/source identity or permission admission.
+Retain trusted-parent, protected staging and cleanup identity gaps until their
+own native filesystem proofs pass. The reproduced replacement races require authority to
+mutate the publication namespace; no archive-only remote exploit was demonstrated,
+and this boundary does not promise a sandbox against arbitrary Runtime-UID compromise.
+
 ### Complete frontend tests versus shipping quality checks
 
 `npm run test:quality` checks lint, types, formatting and two intentionally focused
@@ -1275,6 +1304,50 @@ from the quality selections and actual packaged browser acceptance. A green
 quality job alone does not establish reconnect, Work Items or sign-in regressions.
 
 ### Packaged large-history and mobile-navigation regressions
+
+Windows `KILL_ON_JOB_CLOSE` and `TerminateJobObject` initiate descendant termination.
+Native diagnostics confirmed that an exact member of the owned Job can still have
+an unsignaled process handle after its active-process accounting reaches zero.
+Count-zero alone is therefore not sufficient shutdown evidence. The harness captures
+a complete Job PID list, retains handles with `SYNCHRONIZE` and
+`PROCESS_QUERY_LIMITED_INFORMATION`, and verifies exact Job membership before calling
+`TerminateJobObject`. It waits those handles and zero accounting under one shared
+deadline, including capture time. The initial count bounds the PID buffer, with a
+4096-process ceiling; query failure, a partial/changed list, failed handle acquisition,
+membership check or wait, and a changed cumulative `TotalProcesses` counter all fail
+acceptance. Cleanup attempts every captured handle close on success and failure;
+a failed close rejects acceptance without skipping the remaining handles. An
+initially empty Job still undergoes list and counter checks.
+
+The regression asserts exact Job membership while the descendant holds a file after
+its leader exits, checks its handle with zero timeout immediately after the ownership
+context returns, then unlinks the file. Preserve that immediate observation; a
+grace-period wait or additional native diagnostic queries before it can mask the race.
+A second native regression holds both descendant and grandchild handles across
+leader exit. Portable fake-kernel tests cover accounting/handle disagreement, shared
+deadlines, acquisition and wait failures, PID reuse/churn, and handle cleanup; they
+do not establish Windows kernel behavior.
+
+Run the package's configured lint/type checks as well as explicit checks for
+the acceptance scripts: the package lint target covers `src` and `tests`, so
+passing it alone does not check `scripts`.
+
+`WINDOWS_JOB_DIAGNOSTICS` retains only bounded scalar fields and at most 64 PIDs.
+It captures membership, accounting and a possibly incomplete PID list before drain,
+records the existing drain queries' count results without extra native calls, and
+records the immediate post-context handle result. Post-close Job accounting/PIDs
+are not available; an incomplete PID list is not an empty tree. Diagnostics print
+after assertions, including on failure. These distinguish ownership from completion;
+a diagnostic-only green run does not repair or accept Windows shutdown.
+
+A PID snapshot alone cannot cover descendants spawned after enumeration or processes
+exiting before capture. Cumulative process-count comparisons before termination,
+after termination and after waits reject newly added members; they do not prove
+completion of processes that had already left accounting before capture. This
+remaining limit applies even to an initially empty Job and must not be described
+as arbitrary-tree shutdown proof. A repair requires a new actual Windows run of the
+strict regressions and packaged shutdown paths. Preserve any cleanup failure even
+when browser/product checks have passed.
 
 Run `poetry run python scripts/verify_native_history.py --source-sha <build-commit>
 --receipt output/native-history.json` from `action_server` after building the frozen

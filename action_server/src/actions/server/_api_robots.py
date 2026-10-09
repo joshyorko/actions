@@ -394,6 +394,8 @@ def _sanitized_robot_name(value: Optional[str]) -> str:
 def _publish_robot_package(
     package_dir: Path, robot_name: Optional[str], extracted_name: Optional[str]
 ) -> tuple[str, Path]:
+    from actions.server._directory_publication import rename_directory_no_replace
+
     robots_root = ROBOTS_DIR.resolve()
     base_name = _sanitized_robot_name(robot_name or extracted_name)
 
@@ -407,18 +409,28 @@ def _publish_robot_package(
                 continue
 
         temporary_target = robots_root / f".{final_name}.staging-{uuid.uuid4().hex}"
+        staging_created = False
         try:
-            shutil.copytree(package_dir, temporary_target, symlinks=True)
+            # A colliding entry is not ours to copy into or clean up. Establish
+            # ownership before copytree, including when copying later fails.
+            temporary_target.mkdir(mode=0o700)
+            staging_created = True
+            shutil.copytree(
+                package_dir, temporary_target, symlinks=True, dirs_exist_ok=True
+            )
             _validate_staged_tree(temporary_target)
             if os.path.lexists(target_dir):
                 raise FileExistsError(target_dir)
-            os.replace(temporary_target, target_dir)
+            rename_directory_no_replace(temporary_target, target_dir)
+            # The rename transferred our directory to its final name. Any entry
+            # recreated at the old staging path belongs to another writer.
+            staging_created = False
             return final_name, target_dir
         except FileExistsError:
             if not os.path.lexists(target_dir):
                 raise
         finally:
-            if os.path.lexists(temporary_target):
+            if staging_created and os.path.lexists(temporary_target):
                 if temporary_target.is_dir() and not temporary_target.is_symlink():
                     shutil.rmtree(temporary_target)
                 else:
