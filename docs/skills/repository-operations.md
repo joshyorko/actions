@@ -1145,6 +1145,15 @@ non-reusable; an action finalizer retains its one semaphore token until the
 wrapper is reaped and no observed live descendant remains. Retry is in-band,
 and a genuinely free additional capacity slot remains usable.
 
+The owner `Popen` alone waits and reaps the wrapper; `psutil.wait_procs` is
+used only for descendants so it cannot consume the wrapper's wait status or
+replace its recorded return code. Descendant identities found by successful
+refreshes are retained across force-cleanup attempts. Snapshot completeness
+remains false after a failed refresh if the wrapper has exited; only a
+successful refresh while that owner is observable can restore it. An
+unexpected exit before controlled retirement starts keeps its distinct
+`crash_unverified` classification across retries until the reader is joined.
+
 The bounded process-tree result distinguishes wrapper reaping, observed live
 descendants, and zombie descendants. A zombie is reported and makes
 `descendant_reap_complete` false, but does not hold execution capacity forever;
