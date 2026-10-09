@@ -1,0 +1,25 @@
+{
+  "observed_at_utc": "2026-10-09T20:13:41.842056+00:00",
+  "source": "independent native command receipt from exact coordinator thread, not a Cloud ZIP materialization",
+  "readback_sha256": "703539fba91d6797323b8d4c8ea25923fb7f62a59b4cff53ee741612776316d7",
+  "run_id": 37979108120,
+  "artifact_id": 11640800236,
+  "zip_sha256": "bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89",
+  "embedded_manifest_sha256": "13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe",
+  "registry_artifact_hashes_match_verified_manifest_entries": true,
+  "verified_entries": [
+    {
+      "archive_path": "actions_core-1.0.2.tar.gz",
+      "sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73"
+    },
+    {
+      "archive_path": "actions_core-1.0.2-py3-none-any.whl",
+      "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80"
+    }
+  ],
+  "decision": "ACCEPT Core 1.0.2 retained workflow manifest verification",
+  "limits": [
+    "Raw manifest lines were not emitted to Cloud; the native command read and verified the manifest in the retained ZIP.",
+    "This closes only Core workflow-manifest readback; no Runtime or native 1.0.3 publication/readiness inferred."
+  ]
+}

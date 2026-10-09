@@ -30,7 +30,8 @@ AMENDMENT_NOTE = (
     "parent coordination, related product direction and full-acceptance aggregation. #127 waits on its "
     "accepted template slices and relevant #125/#98 criteria, not whole #71/#93/#101 closure. The prior "
     "untyped edges remain in the graph as audit provenance; issue contracts, raw states and accounting are unchanged. "
-    "At the latest snapshot, #100-A and the bounded #126 source-protocol proof are active; neither is whole-issue acceptance."
+    "At the 2026-10-09T20:21:15Z snapshot, #100 remains a bounded active implementation slice and the #126 source-protocol proof is complete; "
+    "neither is whole-issue acceptance. Current worker evidence is in evidence/current-worker-inventory-20261009T202115Z.json."
 )
 
 

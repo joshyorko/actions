@@ -12008,6 +12008,87 @@
       "kind": "devsy workitems consumer dispatch task receipt",
       "path": "evidence/devsy-workitems-consumer-dispatch.json",
       "sha256": "6d0715eca40b87a5ff6a56571eb5e5799ee3a29a81ffd62f24752aac6070b160"
+    },
+    {
+      "file": "core-native-manifest-readback-20261009.json",
+      "status": "PASS",
+      "detail": "Native readback of retained Core1.0.2 workflow ZIP; raw manifest lines not transferred; root admission receipt supplied separately.",
+      "sha256": "703539fba91d6797323b8d4c8ea25923fb7f62a59b4cff53ee741612776316d7",
+      "platform": "native CAS",
+      "tested_subject": "run37979108120/artifact11640800236",
+      "repair_head": null
+    },
+    {
+      "file": "core-1.0.2-workflow-manifest-admission-20261009.json",
+      "status": "ACCEPTED",
+      "detail": "Root admission of exact retained Core1.0.2 workflow manifest; no Runtime/native1.0.3 readiness implied.",
+      "sha256": "88372eb29da815c4312c2f177952f5f0e3ba330ae92e0330d5540c694ae30584",
+      "platform": "governance review",
+      "tested_subject": "run37979108120/artifact11640800236",
+      "repair_head": null
+    },
+    {
+      "file": "current-worker-inventory-20261009T201539Z.json",
+      "status": "OBSERVED_WITH_LIMITS",
+      "detail": "Superseded observation retained for history; latest same-thread turn observation is recorded in 201703Z successor.",
+      "sha256": "a9773da10f37c14f8d5ab478375a3bb4cfccba0c2bd6616358af6d19cc834141",
+      "platform": "Cloud plus native CAS",
+      "tested_subject": "2026-10-09T20:15:39Z",
+      "repair_head": null
+    },
+    {
+      "file": "current-worker-inventory-20261009T201703Z.json",
+      "status": "OBSERVED_WITH_LIMITS",
+      "detail": "Superseded inventory retained for history; same native thread resumed in new turn per 201902Z successor.",
+      "sha256": "57aee84a5cd66042c21847194cfb1af70a1085f6f546e7ac59031ea316b9069e",
+      "platform": "Cloud plus native CAS",
+      "tested_subject": "2026-10-09T20:17:03.102Z",
+      "repair_head": null
+    },
+    {
+      "file": "community-graph-toolkit-test-20261009.json",
+      "status": "PASS",
+      "detail": "Canonical RCC ToolkitTest: Ruff developer PASS and pytest26/26, including graph CLI wrapper; local gate only.",
+      "sha256": "a939a65ed830877dede2cf5313626367b1490b5b7fc1bb8ebd0e35e1b4279fac",
+      "platform": "Linux / RCC18.19.3",
+      "tested_subject": "current PR258 and worker ownership update in governance worktree",
+      "repair_head": null
+    },
+    {
+      "file": "current-worker-inventory-20261009T201902Z.json",
+      "status": "OBSERVED_WITH_LIMITS",
+      "detail": "Superseded observation retained; current PR/integration/status refresh is in 202115Z inventory.",
+      "sha256": "870d4e2b7c8e93f9672ed21a7ea5c4a5dc21a95c4463ab7a96c57972e98a8f1e",
+      "platform": "Cloud plus native CAS",
+      "tested_subject": "2026-10-09T20:19:02.806Z",
+      "repair_head": null
+    },
+    {
+      "file": "devsy-sol-continuation-summary-20261009-2018.json",
+      "status": "ACCEPTED_DISPATCH_RECEIPT",
+      "detail": "Same-thread new-turn dispatch and settings summary; not a task-completion result.",
+      "sha256": "116288288652576afb1cdffcb9893aa23e32ad875a3ec5a1990c69445ce56768",
+      "platform": "native CAS dispatch",
+      "tested_subject": "2026-10-09T20:19:02.806Z",
+      "repair_head": null
+    },
+    {
+      "file": "current-worker-inventory-20261009T202115Z.json",
+      "status": "OBSERVED_WITH_LIMITS",
+      "detail": "Current worker/PR and integration snapshot from explicit root updates; native worktree SHAs remain abbreviated and same-thread in-progress receipt is last known, not completion.",
+      "sha256": "2bc2c6be97dbff74addb4220353501094c055ee70fcee2695a0d863c56fd9dcd",
+      "platform": "Cloud plus native CAS",
+      "tested_subject": "2026-10-09T20:21:15Z",
+      "repair_head": null
+    },
+    {
+      "file": "integration-pr258-admission-20261009.json",
+      "status": "MERGED_ACCEPTED_CHECKPOINT",
+      "detail": "PR258 merged as ec86ea87; tested candidate/merge trees identical; all recorded hosted RCC/coverage/audit gates pass; no issue closure or Runtime publication.",
+      "sha256": "4a27894daf82170cb13c450350c80c41ad22348a4a257478eea89c677e6b6794",
+      "platform": "hosted Linux/macOS/Windows",
+      "tested_subject": "PR258 candidate 3fee279 / tested merge 526f848 / tree 5c0b501",
+      "repair_head": "ec86ea87340ceb4850c4563b97b93c90713d934f"
     }
   ],
   "independent_review": {
@@ -12457,7 +12538,7 @@
     "current_integration_native": "PR242 exactsyntheticbf04e85d/final303592ff identicaltree40e9d3d7; all3OSnativePASS, LinuxactualWorkItemsconsumer2PASS anddownloadedreceiptverified.",
     "current_blockers": [
       "Whole #210 is accepted/closed (owner comment6087641984); Helper1.0.3 and Core1.0.2 are published. Keep each immutable tag/version and recorded byte verification.",
-      "Core1.0.2 run37979108120 verify/publish jobs PASS. PyPI wheel SHA9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80 and sdist SHA99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73 match; 51 non-generated source files match the tag. Cloud artifact ZIP download was blocked by File Service403; independent native manifest inspection is in progress; no result claimed.",
+      "Admitted 2026-10-09T20:13:41.842056Z from native readback: retained ZIP run37979108120/artifact11640800236, ZIP SHA-256 bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89; embedded manifest SHA-256 13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe; verified sdist/wheel entries match published Core1.0.2 artifacts. The earlier Cloud File Service403 is retained as historical. Raw manifest lines were not transferred; Runtime/native1.0.3 readiness is not inferred. Receipts: evidence/core-native-manifest-readback-20261009.json and evidence/core-1.0.2-workflow-manifest-admission-20261009.json.",
       "Runtime/native1.0.3 remains unpublished; root candidate3fee279 is an integration branch, no PR/admission yet. Runtime package/native security/browser/RCC/consumer/asset registry gates remain.",
       "PR253 trust change is integrated at26b019, but #134 warm success/continuity is still FAIL/unproved. The narrow503 negative is PASS and must remain separate.",
       "PR256 Work Items validation has an active generated-module NameError blocker; PR257 native distribution has four duplicate F811 test definitions under repair. Neither lane establishes complete owning issue or Runtime release acceptance.",
@@ -12553,8 +12634,10 @@
       "pypi_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
       "pypi_sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
       "sdist_source_projection": "51 source files match tag; no mismatches",
-      "cloud_artifact_transport": "403 blocked ZIP; independent native manifest inspection is in progress; no result claimed",
-      "receipt": "evidence/core-1.0.2-pypi-verification-20261009.json"
+      "cloud_artifact_transport": "Historical Cloud File Service403 remains recorded; native readback admitted 2026-10-09T20:13:41.842056Z. See workflow_manifest_receipt.",
+      "receipt": "evidence/core-1.0.2-pypi-verification-20261009.json",
+      "workflow_manifest": "Admitted 2026-10-09T20:13:41.842056Z from native readback: retained ZIP run37979108120/artifact11640800236, ZIP SHA-256 bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89; embedded manifest SHA-256 13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe; verified sdist/wheel entries match published Core1.0.2 artifacts. The earlier Cloud File Service403 is retained as historical. Raw manifest lines were not transferred; Runtime/native1.0.3 readiness is not inferred. Receipts: evidence/core-native-manifest-readback-20261009.json and evidence/core-1.0.2-workflow-manifest-admission-20261009.json.",
+      "workflow_manifest_receipt": "evidence/core-1.0.2-workflow-manifest-admission-20261009.json"
     },
     "runtime_candidate_current": {
       "branch": "integration/runtime-release-final-20261009",
@@ -12565,7 +12648,7 @@
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261009-convergence.zip",
   "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
-  "integration_head": "26b0194590e14656bff92dce3665dccab09837a3",
+  "integration_head": "ec86ea87340ceb4850c4563b97b93c90713d934f",
   "additional_compute": {
     "cloud": "Reused bounded Luna lanes plus one evidence-backed Sol review; no uncontrolled recursion or API fallback",
     "devsy": "WAITING FOR HIT THE GAS; pending request preserved without calls",
@@ -12573,14 +12656,17 @@
   },
   "resume_checkpoint": {
     "file": "community-resume-20261009.json",
-    "observed_at": "2026-10-09T19:39:33Z",
-    "status": "ACTIVE; community011c548; integration26b019; Helper1.0.3/Core1.0.2 published; #210 accepted; PR253 partial #134 integrated; five bounded native workers active; Runtime/native1.0.3 not published.",
+    "observed_at": "2026-10-09T20:21:15Z",
+    "status": "ACTIVE governance update; Core1.0.2 manifest admitted; integration PR258 merged at ec86ea87 with exact tested tree; #210 accepted; Runtime/native1.0.3 unpublished.",
     "current_active_workers": {
       "101": "Root integration/governance; current Docs checkpoint in progress.",
-      "134": "D upstream-contract investigation and independent native local/provider-free consumer lane active after PR253 partial merge.",
-      "153": "Native auth real-browser origin/session acceptance lane active.",
-      "208": "Work Items PR256 active generated-module NameError follow-up.",
-      "211": "Core1.0.2 published; native distribution PR257 checksum/Homebrew preparation and test-integrity repair active."
+      "134": "PR253 remains a partial trust foundation. The existing remote Sol coordinator and RCC lane own implementation/consumer work; root owns integration and architecture acceptance, with F independent review. Governance D is not the implementation owner; whole #134 acceptance remains open.",
+      "153": "Native auth lane was previously ACTIVE; latest 20:10 native checkout inventory did not supply a current worker-state update; current state unconfirmed.",
+      "208": "Work Items lane was previously ACTIVE on PR256 follow-up; latest 20:10 native checkout inventory reports workitems-consumer HEAD prefix e171e676 and bundle ready/unpushed, but not a fresh worker-state confirmation.",
+      "211": "Core1.0.2 workflow-manifest readback admitted at2026-10-09T20:13:41Z; native-distribution path observed at HEAD prefix bd218436 with browser-auth test/config paths dirty; worker state and PR257 relation not refreshed.",
+      "100": "E owns the active, dirty #100-A implementation worktree based on3fee; PR254 is the amended ADR-only checkpoint at a7eec7b1644183dc81e37e1ed9b7be20fa20c87e.",
+      "126": "PR262 head04b23ea34e1e4525b4dbbc329841b1d13445af30 bounded source proof complete and source-review accepted; whole issue remains open.",
+      "259": "PR259 at reported head prefix85f7 is independently accepted; hosted CI is running."
     }
   },
   "checkpoint_status": "ACTIVE integration; PR250 partial foundations merged; no release publication admitted",
@@ -12596,9 +12682,11 @@
       "COMPLETE": 1
     },
     "whole_contract_complete": 1,
-    "worker_stage_snapshot": "2026-10-09T19:36:24Z",
+    "worker_stage_snapshot": "2026-10-09T20:21:15Z",
     "relationship_schema_version": 2,
-    "relationship_policy": "Typed execution prerequisites and scoped criterion gates only; parent coordination, related product direction and full-acceptance aggregation are separately inspectable and nonblocking."
+    "relationship_policy": "Typed execution prerequisites and scoped criterion gates only; parent coordination, related product direction and full-acceptance aggregation are separately inspectable and nonblocking.",
+    "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T202115Z.json",
+    "worker_inventory_sha256": "4a44826d6d6fd12ba00070b8fc06d8301c91608bc14df13374d80970dee68c61"
   },
   "accepted_issue_closures": [
     {
@@ -12615,5 +12703,16 @@
     "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3",
     "size_bytes": 7262,
     "manifest": "evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json"
+  },
+  "current_integration_checkpoint": {
+    "pr": 258,
+    "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+    "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+    "tested_merge": "526f84813bb808d5a5dc2f7a26bed6467be79c3f",
+    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+    "tree_matches_tested_merge": true,
+    "merged_at": "2026-10-09T20:20:30Z",
+    "scope": "No issue closure or Runtime publication/readiness implied.",
+    "receipt": "evidence/integration-pr258-admission-20261009.json"
   }
 }

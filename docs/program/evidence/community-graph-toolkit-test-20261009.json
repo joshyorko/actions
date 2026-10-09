@@ -1,12 +1,17 @@
 {
+  "observed_at_utc": "2026-10-09T20:23:29Z",
   "command": "source /workspace/actions-cloud/activate.sh && rcc run -r developer/toolkit.yaml --dev -t ToolkitTest",
-  "repository": "/workspace/work/community-resume/governance",
-  "rcc_version": "v18.19.3",
+  "rcc_version": "18.19.3",
+  "task": "ToolkitTest",
   "result": "PASS",
-  "exit_code": 0,
-  "ruff": "Ruff 0.8.6 check developer passed",
-  "pytest": "pytest 8.3.4 collected 26 tests; 26 passed in 1.45s",
-  "graph_coverage": "developer/tests/test_community_execution_graph.py runs scripts/test_project_community_execution_graph.py and scripts/project_community_execution_graph.py --check",
-  "workflow": "Existing .github/workflows/developer_toolkit.yml pull_request matrix runs ToolkitTest; this receipt is local execution evidence, not a hosted GitHub run.",
-  "scope_limit": "Validates current governance graph projection and developer tests; does not accept any issue contract."
+  "ruff": "PASS (developer)",
+  "pytest": {
+    "passed": 26,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 1.56
+  },
+  "output_log": "evidence/community-graph-toolkit-test-20261009.txt",
+  "output_log_sha256": "0763ce45ca1fe35e44f7645ee20ab1102a56d1c74c8bc7b4572cbd4dded34c71",
+  "limitations": "This is a local configured RCC task result, not hosted CI or a release/native acceptance."
 }

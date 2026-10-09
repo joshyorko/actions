@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T19:39:33Z",
-  "status": "ACTIVE_ENGINEERING_CHECKPOINT; Helper1.0.3 and Core1.0.2 published; PR253 merged partial trust fix; five bounded native work lanes active; issue #210 accepted",
-  "integration_head": "26b0194590e14656bff92dce3665dccab09837a3",
+  "observed_at": "2026-10-09T20:21:15Z",
+  "status": "ACTIVE engineering checkpoint; Core1.0.2 manifest admitted; integration PR258 merged at ec86ea87; #210 accepted; Runtime/native1.0.3 remains unpublished.",
+  "integration_head": "ec86ea87340ceb4850c4563b97b93c90713d934f",
   "community_head": "011c5482285ea516f39292100c429a905e6e3e36",
   "release_ready": false,
   "community_merge": true,
@@ -505,7 +505,8 @@
         "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
         "sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
         "source_projection": "51 exact source files; no mismatches",
-        "manifest_limit": "Cloud ZIP download blocked403; independent native manifest inspection is in progress; no result claimed."
+        "manifest_limit": "Admitted 2026-10-09T20:13:41.842056Z from native readback: retained ZIP run37979108120/artifact11640800236, ZIP SHA-256 bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89; embedded manifest SHA-256 13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe; verified sdist/wheel entries match published Core1.0.2 artifacts. The earlier Cloud File Service403 is retained as historical. Raw manifest lines were not transferred; Runtime/native1.0.3 readiness is not inferred. Receipts: evidence/core-native-manifest-readback-20261009.json and evidence/core-1.0.2-workflow-manifest-admission-20261009.json.",
+        "workflow_manifest_receipt": "evidence/core-1.0.2-workflow-manifest-admission-20261009.json"
       }
     }
   },
@@ -854,7 +855,8 @@
   "initial_integration_head": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
   "integration_merges": [
     "PR250 merged as 3ed98ddbac3354c59414b8411b295db2e15d3545; partial foundations for #91/#129/#151 are INTEGRATED, with all original issue contracts and accounting preserved.",
-    "PR253 merged as 26b0194590e14656bff92dce3665dccab09837a3 (tree227e950994c52e629fe1fcd65effb7421f92aeb5); partial #134 trust foundation only. Four hosted checks PASS; 742 passed/10 skipped in configured suite, same-provider503 negative PASS, overall warm harness FAIL."
+    "PR253 merged as 26b0194590e14656bff92dce3665dccab09837a3 (tree227e950994c52e629fe1fcd65effb7421f92aeb5); partial #134 trust foundation only. Four hosted checks PASS; 742 passed/10 skipped in configured suite, same-provider503 negative PASS, overall warm harness FAIL.",
+    "PR258 merged at ec86ea87340ceb4850c4563b97b93c90713d934f (tree5c0b501cbc918426d49e053faaa22c85520081e6); reviewed candidate3fee279 and tested merge526f848 have identical trees. All six RCC primary/N-1 OS jobs, coverage and audit PASS. This is an integration checkpoint only; no issue closure or Runtime publication."
   ],
   "evidence_archive": "evidence/community-20261009-convergence.zip",
   "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
@@ -1122,7 +1124,7 @@
       "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
     }
   ],
-  "inventory_scope": "Local host worktree inventory observed 2026-10-09T19:20:08Z; status is per-worktree git porcelain at observation time. Native CAS worker paths are separate and their HEAD/clean statuses are verified only at the pre-dispatch checkpoint in evidence/cas-bootstrap-reconciliation-20261009.md. Concurrent work may change after observation. Local worktree heads/status were refreshed at 2026-10-09T19:39:33Z; remote native worktrees are not included, and their last-known state is separately qualified in dispatch/worker receipts.",
+  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread\u2019s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
   "documentation_receipts": [
     {
       "lane": "Windows/RCC lifecycle review",
@@ -1364,6 +1366,46 @@
     },
     {
       "event": "Independent review accepted the frozen typed Canvas graph candidate; review receipt is preserved at evidence/independent-canvas-execution-graph-review-20261009.md (SHA-256 c971297fe4f4ec15d0c3a3bb9098d01925ce338375fe55d7d54aee5a0fdc1196). This accepts only the governance projection/test hook, not any issue contract or merge."
+    },
+    {
+      "observed_at": "2026-10-09T20:15:39Z",
+      "event": "Admitted 2026-10-09T20:13:41.842056Z from native readback: retained ZIP run37979108120/artifact11640800236, ZIP SHA-256 bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89; embedded manifest SHA-256 13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe; verified sdist/wheel entries match published Core1.0.2 artifacts. The earlier Cloud File Service403 is retained as historical. Raw manifest lines were not transferred; Runtime/native1.0.3 readiness is not inferred. Receipts: evidence/core-native-manifest-readback-20261009.json and evidence/core-1.0.2-workflow-manifest-admission-20261009.json."
+    },
+    {
+      "observed_at": "2026-10-09T20:15:39Z",
+      "event": "Refreshed timestamped worker inventory from root messages, local Luna heartbeat, and native readback. #100 and #126 remain bounded active slices with whole issues open. Native coordinator thread last authoritatively ACTIVE at20:09Z; a later command item completed, but the worker thread is not confirmed complete. Five native checkout SHAs are abbreviated as reported; full SHA/dirty state is unavailable for several paths. Inventory: evidence/current-worker-inventory-20261009T201539Z.json, SHA-256 a9773da10f37c14f8d5ab478375a3bb4cfccba0c2bd6616358af6d19cc834141."
+    },
+    {
+      "observed_at": "2026-10-09T20:17:03.102Z",
+      "event": "Supervisor status correction for existing native coordinator thread: threadStatus notLoaded; same turn01a1222f-e7b8-78f1-9075-dc8007b2d9b7 interrupted, revision prefix f2195d43; last command at20:15:16Z was source read only. Root is reconciling/resuming that turn. This does not establish worker completion, cleanup, or a replacement turn. Successor inventory evidence/current-worker-inventory-20261009T201703Z.json SHA-256 57aee84a5cd66042c21847194cfb1af70a1085f6f546e7ac59031ea316b9069e. Prior 20:10 checkout inventory is retained as an earlier observation."
+    },
+    {
+      "observed_at": "2026-10-09T20:19:11Z",
+      "event": "Canonical configured governance gate passed with RCC18.19.3: developer Ruff PASS and pytest26/26. Evidence is evidence/community-graph-toolkit-test-20261009.json plus the hashed output log. No hosted CI/release acceptance inferred."
+    },
+    {
+      "observed_at": "2026-10-09T20:19:02.806Z",
+      "event": "Root accepted continuation on the same native coordinator thread under new turn01a12251-b60d-7c20-b806-fc9c9565f128/request actions-sol-devsy-continue-20261009-2018-v1. Native dispatch receipt reports accepted/not replayed and inProgress with items notLoaded; settings event explicitly confirms never/dangerFullAccess, gpt-6.1-sol high, cwd devsy-coordinator. No completion or worktree state inferred. Summary receipt evidence/devsy-sol-continuation-summary-20261009-2018.json; current inventory evidence/current-worker-inventory-20261009T201902Z.json SHA-256 870d4e2b7c8e93f9672ed21a7ea5c4a5dc21a95c4463ab7a96c57972e98a8f1e."
+    },
+    {
+      "observed_at": "2026-10-09T20:20:22Z",
+      "event": "Final configured governance ToolkitTest rerun passed after the20:19 worker inventory/renderer update: RCC18.19.3, Ruff developer PASS, pytest26/26. Receipt evidence/community-graph-toolkit-test-20261009.json SHA-256 71b29a96eb9cf4c8ce2e30454f69da41f645c3bd4db95288da935c28a5269bbf; no hosted CI or broader release acceptance inferred."
+    },
+    {
+      "observed_at": "2026-10-09T20:21:15Z",
+      "event": "PR258 merged at ec86ea87340ceb4850c4563b97b93c90713d934f. Reviewed candidate3fee279256e674c9cbe0eaeaf2f98e01f51cd08d, hosted tested merge526f84813bb808d5a5dc2f7a26bed6467be79c3f, and integration tree5c0b501cbc918426d49e053faaa22c85520081e6 are tree-identical; all six RCC primary/N-1 OS jobs, coverage and audit PASS. No issue closure or Runtime publication implied. Receipt evidence/integration-pr258-admission-20261009.json SHA-2564a27894daf82170cb13c450350c80c41ad22348a4a257478eea89c677e6b6794."
+    },
+    {
+      "observed_at": "2026-10-09T20:21:15Z",
+      "event": "Refreshed current worker/PR snapshot: E owns dirty #100-A; PR254 is amended ADR-only at a7eec7b; PR259 prefix85f7 independently accepted with hosted CI running; PR262 bounded #126 source proof accepted and complete while whole #126 stays open. D owns governance coordination for #134; no whole acceptance. See evidence/current-worker-inventory-20261009T202115Z.json SHA-256 2bc2c6be97dbff74addb4220353501094c055ee70fcee2695a0d863c56fd9dcd."
+    },
+    {
+      "observed_at": "2026-10-09T20:22:36Z",
+      "event": "Final configured governance ToolkitTest passed after current PR258 and worker inventory updates: RCC18.19.3, Ruff developer PASS and pytest26/26. Receipt evidence/community-graph-toolkit-test-20261009.json SHA-256 0e7d279c363596b453b08ec1af0dd01b7ee63b8e17fa6d2c5a2d024eeb4acd55; no hosted CI or release acceptance inferred."
+    },
+    {
+      "observed_at": "2026-10-09T20:23:29Z",
+      "event": "Final current-content configured ToolkitTest rerun passed: RCC18.19.3, Ruff developer PASS, pytest26/26. Evidence/community-graph-toolkit-test-20261009.json SHA-256 a939a65ed830877dede2cf5313626367b1490b5b7fc1bb8ebd0e35e1b4279fac; no hosted CI or release acceptance inferred."
     }
   ],
   "admission_checkpoint": {
@@ -2394,11 +2436,12 @@
     "whole_issue_acceptance": false,
     "publication": false,
     "actual_merge_sha": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
-    "manifest_limit": "Cloud ZIP download blocked403; independent native manifest inspection is in progress, no result claimed"
+    "manifest_limit": "Cloud ZIP download blocked403; independent native manifest inspection is in progress, no result claimed",
+    "manifest_limit_superseded_by": "The old pending string above is retained as this earlier checkpoint observation; the current Core1.0.2 manifest readback was admitted at2026-10-09T20:13:41.842056Z. See core-1.0.2-workflow-manifest-admission-20261009.json."
   },
   "release_blockers": [
     "Whole issue #210 is accepted/closed by owner comment6087641984. Helper1.0.3 remains published and byte-verified; preserve the failed immutable1.0.2 tag and never retry it.",
-    "Core1.0.2 is published from immutable tag actions-core-1.0.2; successful verify/publish run37979108120. PyPI wheel/sdist match exact hashes and 51 non-generated sdist files match tag source. Cloud could not download workflow ZIP due File Service HTTP403; independent native manifest inspection remains in progress; no result is claimed. Do not overstate the Cloud ZIP inspection.",
+    "Admitted 2026-10-09T20:13:41.842056Z from native readback: retained ZIP run37979108120/artifact11640800236, ZIP SHA-256 bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89; embedded manifest SHA-256 13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe; verified sdist/wheel entries match published Core1.0.2 artifacts. The earlier Cloud File Service403 is retained as historical. Raw manifest lines were not transferred; Runtime/native1.0.3 readiness is not inferred. Receipts: evidence/core-native-manifest-readback-20261009.json and evidence/core-1.0.2-workflow-manifest-admission-20261009.json.",
     "Runtime/native1.0.3 remains unpublished. Root-owned candidate is branch integration/runtime-release-final-20261009 at3fee279; it has no PR/admission in this checkpoint. Final exact candidate still needs required native/browser/security/RCC/consumer and external asset/registry readback gates.",
     "PR253 trust source290e469c / runtime-code d9a08395 is merged into integration26b019 (tree227e950). Four hosted checks passed; configured suite742 passed/10 skipped and selected-provider503 fail-closed negative passed. Overall warm harness still FAIL; #134 remains open/active.",
     "Work Items PR256 Linux source consumer work is pushed at5bce8cd; native review found a generated-module NameError blocking its acceptance expansion. The same remote worker is active on that concrete follow-up; no cross-platform packaged/UI acceptance is claimed.",
@@ -2428,11 +2471,15 @@
     },
     "whole_contract_complete": 1,
     "relationship_schema_version": 2,
-    "relationship_policy": "Typed execution prerequisites and scoped criterion gates only; parent coordination, related product direction and full-acceptance aggregation are separately inspectable and nonblocking."
+    "relationship_policy": "Typed execution prerequisites and scoped criterion gates only; parent coordination, related product direction and full-acceptance aggregation are separately inspectable and nonblocking.",
+    "worker_stage_snapshot": "2026-10-09T20:21:15Z",
+    "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T201539Z.json",
+    "worker_inventory_sha256": "a9773da10f37c14f8d5ab478375a3bb4cfccba0c2bd6616358af6d19cc834141"
   },
   "live_inventory": {
-    "path": "evidence/convergence-worker-inventory.json",
-    "observed_at": "2026-10-09T18:48:02.279707+00:00"
+    "path": "evidence/current-worker-inventory-20261009T202115Z.json",
+    "observed_at": "2026-10-09T20:21:15Z",
+    "sha256": "2bc2c6be97dbff74addb4220353501094c055ee70fcee2695a0d863c56fd9dcd"
   },
   "historical_cloud_workers_before_acceleration": [
     {
@@ -2706,8 +2753,9 @@
     "pypi_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
     "pypi_sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
     "sdist_projection": "51 source files exact to tag, no mismatches",
-    "workflow_artifact_manifest": "Cloud File Service HTTP403 blocked byte download; independent native manifest inspection is in progress and no result is claimed.",
-    "receipt": "evidence/core-1.0.2-pypi-verification-20261009.json"
+    "workflow_artifact_manifest": "Admitted 2026-10-09T20:13:41.842056Z from native readback: retained ZIP run37979108120/artifact11640800236, ZIP SHA-256 bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89; embedded manifest SHA-256 13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe; verified sdist/wheel entries match published Core1.0.2 artifacts. The earlier Cloud File Service403 is retained as historical. Raw manifest lines were not transferred; Runtime/native1.0.3 readiness is not inferred. Receipts: evidence/core-native-manifest-readback-20261009.json and evidence/core-1.0.2-workflow-manifest-admission-20261009.json.",
+    "receipt": "evidence/core-1.0.2-pypi-verification-20261009.json",
+    "workflow_manifest_receipt": "evidence/core-1.0.2-workflow-manifest-admission-20261009.json"
   },
   "publication_scope": "Legacy boolean remains the full Runtime/native1.0.3 program-release signal: false until that release is admitted. Helper1.0.3 and Core1.0.2 are published and independently byte-verified; Runtime/native1.0.3 is not published.",
   "package_publications": {
@@ -2727,8 +2775,9 @@
       "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
       "sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
       "source_projection": "51 non-generated sdist files byte-match actions/ at peeled tag; generated PKG-INFO identifies actions-core1.0.2",
-      "workflow_manifest": "Cloud File Service download returned403; independent native manifest inspection is in progress, with no result claimed.",
-      "workflow_run": 37979108120
+      "workflow_manifest": "Admitted 2026-10-09T20:13:41.842056Z from native readback: retained ZIP run37979108120/artifact11640800236, ZIP SHA-256 bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89; embedded manifest SHA-256 13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe; verified sdist/wheel entries match published Core1.0.2 artifacts. The earlier Cloud File Service403 is retained as historical. Raw manifest lines were not transferred; Runtime/native1.0.3 readiness is not inferred. Receipts: evidence/core-native-manifest-readback-20261009.json and evidence/core-1.0.2-workflow-manifest-admission-20261009.json.",
+      "workflow_run": 37979108120,
+      "workflow_manifest_receipt": "evidence/core-1.0.2-workflow-manifest-admission-20261009.json"
     },
     "actions-runtime-1.0.3": {
       "state": "NOT_PUBLISHED",
@@ -2742,5 +2791,17 @@
     "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3",
     "size_bytes": 7262,
     "manifest": "evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json"
+  },
+  "cloud_workers_observation_note": "This array is the earlier 18:48:02Z local Cloud worktree snapshot, not the current inventory. Use live_inventory for current bounded observations; remote/native states are qualified in inventory_scope.",
+  "current_integration_checkpoint": {
+    "pr": 258,
+    "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+    "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+    "tested_merge": "526f84813bb808d5a5dc2f7a26bed6467be79c3f",
+    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+    "tree_matches_tested_merge": true,
+    "merged_at": "2026-10-09T20:20:30Z",
+    "receipt": "evidence/integration-pr258-admission-20261009.json",
+    "scope_limit": "No issue closure or Runtime/native1.0.3 publication/readiness inferred."
   }
 }

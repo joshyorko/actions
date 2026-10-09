@@ -60,6 +60,11 @@ reconcile an already-active mutation instead of replaying it. Record worktree
 cleanliness as a timestamped observation. Native user authorization does not
 resume parked Executor approvals.
 
+A completed native commandExecution item proves only that command's exit status;
+it does not prove the enclosing worker turn or thread has ended. Record the
+last explicit thread-state observation separately and leave current status
+unconfirmed until a terminal state is read.
+
 If authorized direct push is unavailable and source transfer is needed, a Git
 bundle can preserve the original commit graph. Include the explicit approved
 base-to-branch range and branch ref; verify the bundle plus SHA-256/size before

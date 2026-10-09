@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-10-09T20:17:03.102Z",
+  "scope": "Timestamped status reconciliation from root task messages, local Luna heartbeat, and native command/readback receipts. Status labels are limited to explicit observations; short native HEADs are not promoted to full SHAs.",
+  "local_cloud_lanes": [
+    {
+      "issue": 100,
+      "slice": "API authoring",
+      "state": "ACTIVE",
+      "pr": 254,
+      "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "branch": "feature/issue-100a-public-mcp-app-authoring-20261009",
+      "worktree": "/workspace/work/community-resume/canvas-authoring",
+      "checkout_status": "ACTIVE implementation; separate authoring worktree is dirty on base3fee; exact worktree HEAD not supplied."
+    },
+    {
+      "issue": 126,
+      "slice": "bounded source-protocol proof",
+      "state": "BOUNDED_PROOF_COMPLETE; whole issue remains open",
+      "pr": 262,
+      "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "branch": "test/mcp-v2-showcase-protocol-20261009",
+      "worktree": "/workspace/work/community-resume/mcp-showcase-proof",
+      "review": "source proof accepted; whole issue remains open",
+      "checkout_status": "PR262 head is the completed bounded source proof; current local worktree dirty state not supplied."
+    },
+    {
+      "pr": 259,
+      "state": "HOSTED_CHECKS_PENDING",
+      "head_prefix": "f2544868",
+      "summary": "Canary UTF-8 repair; 106 tests reported; hosted checks pending."
+    }
+  ],
+  "root_owned_refs": {
+    "integration": "26b01945 (short reference only in current message; exact full SHA not refreshed here)",
+    "runtime_candidate": "3fee279 (short reference only in current message; exact full SHA not refreshed here)"
+  },
+  "native_cas": {
+    "coordinator_thread": "01a1222f-e720-7183-9634-2edb76d30326",
+    "coordinator_turn": "01a1222f-e7b8-78f1-9075-dc8007b2d9b7",
+    "last_authoritative_thread_state": "ACTIVE first turn; last observed worker output at 2026-10-09T20:09Z, as reported by root",
+    "current_thread_state": "UNCONFIRMED: latest supervisor report says threadStatus notLoaded and same turn interrupted at20:17:03Z; root is reconciling that turn. No completion/cleanup inferred.",
+    "latest_checkout_inventory_observed_at": "2026-10-09T20:10:03Z",
+    "checkout_inventory_source": "local Luna heartbeat message; full SHA and dirty-path refresh not provided",
+    "worktrees": [
+      {
+        "name": "coordinator",
+        "path": "/workspaces/actions-worktrees/devsy-coordinator",
+        "branch": "devsy/coordinator-20261009",
+        "head_prefix": "26b01945",
+        "dirty_paths": "not reported"
+      },
+      {
+        "name": "workitems-consumer",
+        "path": "/workspaces/actions-worktrees/devsy-workitems-consumer",
+        "head_prefix": "e171e676",
+        "status": "bundle ready, unpushed; dirty paths not reported"
+      },
+      {
+        "name": "native-distribution",
+        "path": "/workspaces/actions-worktrees/devsy-native-distribution",
+        "head_prefix": "bd218436",
+        "dirty_paths": [
+          "browser-auth test/config paths"
+        ]
+      },
+      {
+        "name": "rcc-local-acceptance",
+        "path": "/workspaces/actions-worktrees/devsy-rcc-local-acceptance",
+        "head_prefix": "a4ef0b07",
+        "dirty_paths": "not reported"
+      },
+      {
+        "name": "native-review",
+        "path": "/workspaces/actions-worktrees/devsy-native-review",
+        "head_prefix": "43177fc3",
+        "dirty_paths": "not reported"
+      }
+    ],
+    "latest_completed_command": {
+      "native_item_id": "exec-38402261-9242-4ba6-a9db-8e17f3ea8897",
+      "completed_at": "2026-10-09T20:11:20Z",
+      "exit_code": 0,
+      "purpose": "Read and verify Core1.0.2 retained workflow ZIP manifest and files; does not establish thread completion."
+    },
+    "latest_thread_observation": {
+      "observed_at": "2026-10-09T20:17:03.102Z",
+      "supervisor_thread_id": "01a1222f-e720-7183-9634-2edb76d30326",
+      "thread_status": "notLoaded",
+      "turn_id": "01a1222f-e7b8-78f1-9075-dc8007b2d9b7",
+      "turn_status": "interrupted",
+      "revision_prefix": "f2195d43",
+      "last_command_observed_at": "2026-10-09T20:15:16Z",
+      "last_command_scope": "source read only",
+      "source": "root supervisor report; no new Executor call dispatched from this lane",
+      "disposition": "Root is reconciling/resuming the same turn. Interruption is not reported as worker completion or process cleanup."
+    }
+  },
+  "core_workflow_manifest": {
+    "admission": "ACCEPT",
+    "admitted_at": "2026-10-09T20:13:41.842056+00:00",
+    "run_id": 37979108120,
+    "artifact_id": 11640800236,
+    "zip_sha256": "bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89",
+    "embedded_manifest_sha256": "13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe",
+    "verified_entries": [
+      {
+        "path": "actions_core-1.0.2.tar.gz",
+        "sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73"
+      },
+      {
+        "path": "actions_core-1.0.2-py3-none-any.whl",
+        "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80"
+      }
+    ],
+    "raw_manifest_lines": "not transferred to Cloud; no reconstruction claimed",
+    "historical_transport": "Cloud File Service HTTP403 remains a historical failed download attempt and is superseded for manifest verification by this native readback.",
+    "scope_limit": "Closes only Core1.0.2 workflow-manifest readback; no Runtime/native1.0.3 publication or readiness inferred.",
+    "readback_receipt": "evidence/core-native-manifest-readback-20261009.json",
+    "admission_receipt": "evidence/core-1.0.2-workflow-manifest-admission-20261009.json"
+  },
+  "supersedes": "evidence/current-worker-inventory-20261009T201539Z.json"
+}

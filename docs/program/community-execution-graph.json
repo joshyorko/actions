@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-10-09",
-  "worker_stage_snapshot": "2026-10-09T20:03:01Z",
+  "worker_stage_snapshot": "2026-10-09T20:21:15Z",
   "scope": "Typed operational relationships; retained issue contracts and raw states remain unchanged. Only execution prerequisites participate in cycle/topological validation.",
   "contract_source": "governance/docs/program/community-program-ledger.json acceptance_contract compared with evidence/acceleration-open-issues.json body",
   "exact_contract_matches": 54,
@@ -45,12 +45,13 @@
   ],
   "current_active_workers": {
     "101": "root integration/governance",
-    "134": "D independent local consumer lane after PR253 merge; Sol architecture boundary review",
-    "211": "Core package published; Devsy native-distribution thread01a12211-01b3-7850-b508-bd7959b8210c; PR257 test-integrity/checksum follow-up active",
-    "153": "Devsy native-auth thread01a1220f-944d-7f22-94a4-112dc13be035, active browser/auth lane",
-    "208": "Devsy Work Items consumer thread01a12210-29e9-7fb3-91fc-644065721cb3; PR256 active NameError follow-up",
-    "100": "Issue #100 slice 100-A active in /workspace/work/community-resume/canvas-authoring, branch feature/issue-100a-public-mcp-app-authoring-20261009, base 3fee; current HEAD/dirty state not reported.",
-    "126": "Issue #126 bounded source-protocol proof active in /workspace/work/community-resume/mcp-showcase-proof, branch test/mcp-v2-showcase-protocol-20261009, base 3fee; not template completion; current HEAD/dirty state not reported."
+    "134": "PR253 remains a partial trust foundation. The existing remote Sol coordinator and RCC lane own implementation/consumer work; root owns integration and architecture acceptance, with F independent review. Governance D is not the implementation owner; whole #134 acceptance remains open.",
+    "211": "Core1.0.2 workflow-manifest readback admitted at2026-10-09T20:13:41Z; native-distribution path observed at HEAD prefix bd218436 with browser-auth test/config paths dirty; worker state and PR257 relation not refreshed.",
+    "153": "Native auth lane was previously ACTIVE; latest 20:10 native checkout inventory did not supply a current worker-state update; current state unconfirmed.",
+    "208": "Work Items lane was previously ACTIVE on PR256 follow-up; latest 20:10 native checkout inventory reports workitems-consumer HEAD prefix e171e676 and bundle ready/unpushed, but not a fresh worker-state confirmation.",
+    "100": "E owns the active dirty #100-A implementation worktree based on3fee; PR254 is the amended ADR-only checkpoint at a7eec7b1644183dc81e37e1ed9b7be20fa20c87e.",
+    "126": "PR262 head04b23ea34e1e4525b4dbbc329841b1d13445af30 completes the bounded source-protocol proof with accepted review; whole #126 stays open.",
+    "259": "PR259 reported at head prefix85f7 is independently accepted; hosted CI is running."
   },
   "current_review_checkpoints": {
     "91": {
@@ -60,8 +61,8 @@
     },
     "100": {
       "pr": 254,
-      "status": "OPEN_REVIEW_ONLY; user is revising Canvas/MCP scope; current PR254 proposal must not be integrated into revised scope",
-      "scoped_dependency": 125
+      "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "status": "Amended ADR-only checkpoint; E owns separate dirty #100-A implementation; no whole-issue acceptance."
     },
     "129": {
       "pr": 250,
@@ -96,7 +97,13 @@
       "pr": 257,
       "status": "ACTIVE; Core1.0.2 is published; PR257 checksum/distribution gate has active four-F811 repair",
       "core_pypi_verified": true,
-      "workflow_manifest": "Cloud ZIP download403; independent native manifest check pending"
+      "workflow_manifest": "ACCEPTED native readback 2026-10-09T20:13:41.842056Z; ZIP and manifest hashes recorded in evidence/core-1.0.2-workflow-manifest-admission-20261009.json; raw manifest lines not transferred; HTTP403 retained as historical.",
+      "workflow_manifest_receipt": "evidence/core-1.0.2-workflow-manifest-admission-20261009.json"
+    },
+    "126": {
+      "pr": 262,
+      "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "status": "Bounded source-protocol proof complete and source-review accepted; whole #126 remains open."
     }
   },
   "counts": {
@@ -1299,7 +1306,7 @@
       "foundation_pr": null,
       "checkpoint_pr": 248,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Core1.0.2 is published: immutable tag actions-core-1.0.2 from community011c548, run37979108120 verify/publish PASS, PyPI wheel/sdist and 51-file source projection verified. Cloud workflow ZIP download403; independent native manifest inspection remains in progress with no result claimed.",
+      "reason": "Core1.0.2 is published: immutable tag actions-core-1.0.2 from community011c548, run37979108120 verify/publish PASS, PyPI wheel/sdist and 51-file source projection verified. Native retained workflow-manifest readback was admitted at2026-10-09T20:13:41.842056Z; exact ZIP/manifest hashes and artifact entries are in evidence/core-1.0.2-workflow-manifest-admission-20261009.json. The earlier Cloud File Service403 remains historical; raw manifest lines were not transferred. Runtime/native1.0.3 readiness is separate and open.",
       "next_bounded_action": "Complete #211 native distribution/checksum and Homebrew handoff gates through PR257, resolve the active four-F811 test-integrity follow-up, then continue Runtime/native1.0.3 acceptance separately.",
       "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4",
       "prior_untyped_dependency_projection": [],
@@ -2644,5 +2651,7 @@
       }
     ],
     "amendment_source": "GitHub #71 comment 6087930051, #93 comment 6087948973, #101 comment 6087955791, #220 comment 6087968408, #254 comment 6087962754"
-  }
+  },
+  "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T202115Z.json",
+  "worker_inventory_sha256": "2bc2c6be97dbff74addb4220353501094c055ee70fcee2695a0d863c56fd9dcd"
 }
