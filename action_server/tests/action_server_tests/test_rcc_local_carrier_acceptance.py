@@ -24,6 +24,18 @@ def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
     from actions.server._models import ActionPackage, Run, RunStatus, load_db
     from actions.server._rcc_runtime_adapter import read_receipt
     from actions.server._selftest import ActionServerProcess
+    import actions.server as runtime_package
+
+    repo_root = Path(__file__).resolve().parents[3]
+    runtime_mode = os.environ.get("ACTIONS_ACCEPTANCE_RUNTIME_MODE", "source")
+    source_package = repo_root / "action_server" / "src" / "actions" / "server"
+    runtime_origin = Path(runtime_package.__file__).resolve()
+    if runtime_mode == "source":
+        assert runtime_origin.is_relative_to(source_package)
+    elif runtime_mode == "wheel":
+        assert not runtime_origin.is_relative_to(source_package)
+    else:
+        pytest.fail("ACTIONS_ACCEPTANCE_RUNTIME_MODE must be source or wheel")
 
     package_dir = tmp_path / "package"
     package_dir.mkdir()
@@ -177,7 +189,7 @@ dependencies:
         payload = {
             "schema_version": 1,
             "source_sha": subprocess.run(
-                ["git", "rev-parse", "HEAD"],
+                ["git", "-C", str(repo_root), "rev-parse", "HEAD"],
                 check=True,
                 capture_output=True,
                 text=True,
@@ -188,7 +200,11 @@ dependencies:
                 capture_output=True,
                 text=True,
             ).stdout.strip(),
-            "runtime_mode": "source",
+            "runtime_mode": runtime_mode,
+            "runtime_import_origin": str(runtime_origin),
+            "runtime_wheel_sha256": os.environ.get(
+                "ACTIONS_ACCEPTANCE_RUNTIME_WHEEL_SHA256"
+            ),
             "provider_reference": "local",
             "trust_policy": "permissive-local",
             "trust_carrier_identities": trust_carrier_identities,
@@ -201,7 +217,11 @@ dependencies:
                 "local_provider_restart_same_artifact": "PASS",
                 "separate_trust_carrier": "PASS",
                 "runtime_process_reaping": "PASS",
-                "core_helper_installed_wheel": "NOTRUN",
+                "published_core_helper_action": "PASS",
+                "source_runtime": "PASS" if runtime_mode == "source" else "NOTRUN",
+                "installed_runtime_wheel": "PASS"
+                if runtime_mode == "wheel"
+                else "NOTRUN",
                 "frozen_runtime_exact_source": "NOTRUN",
             },
         }
