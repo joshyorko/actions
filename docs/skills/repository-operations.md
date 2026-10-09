@@ -34,15 +34,27 @@ until that specific validation failure is resolved.
 For native CAS work, pass supported `approval_policy` and `sandbox` settings on
 the authorized start/resume/turn request, then verify the effective policy from
 the native response or settings event. An aggregate `effective_configuration`
-that is null is not evidence of either access level. Keep the CAS machine target
-separate from the repository checkout and worker CWD. Give each mutation a unique
-request ID; after a timeout or HTTP 502, discover its exact thread/request and
-CWD before retrying, and reconcile an already-active mutation instead of replaying
-it. Record worktree cleanliness as a timestamped observation. Native user
-authorization does not resume parked Executor approvals. Evidence: CAS bootstrap
-response/settings event and pre-dispatch inventory in
-`docs/program/evidence/cas-bootstrap-reconciliation-20261009.md`, with worker
-request receipts in `docs/program/evidence/cas-expansion-20261009-1909.json`.
+that is null is not evidence of either access level. Before creating worktrees,
+verify machine, Git root/origin, exact approved base, intended branch, and any
+existing target path's branch/HEAD/dirty state; preserve rather than reset an
+existing checkout. Keep the CAS machine target separate from the repository
+checkout and worker CWD. Give each mutation a unique request ID; after a timeout
+or HTTP 502, discover its exact thread/request and CWD before retrying, and
+reconcile an already-active mutation instead of replaying it. Record worktree
+cleanliness as a timestamped observation. Native user authorization does not
+resume parked Executor approvals.
+
+If authorized direct push is unavailable and source transfer is needed, a Git
+bundle can preserve the original commit graph. Include the explicit approved
+base-to-branch range and branch ref; verify the bundle plus SHA-256/size before
+transfer, then verify the imported ref's commit/tree/parent at the receiving
+checkout. Keep bundles source-only; exclude credentials, logs, build outputs and
+artifacts unless separately authorized. A requested or encoded bundle is not
+proof of transfer; retain a receipt at both ends. These are transfer checks,
+not evidence that a particular remote lane completed a bundle handoff. Evidence
+for native path/policy identity: CAS bootstrap response/settings event and
+pre-dispatch inventory in `docs/program/evidence/cas-bootstrap-reconciliation-20261009.md`;
+request receipts are under `docs/program/evidence/devsy-*-dispatch.json`.
 
 A passing focused native step and a failing later process-ownership step are
 distinct evidence. Record both with the same run/job identifiers, keep skipped

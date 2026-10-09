@@ -1,0 +1,12 @@
+{
+  "target": "cas-worker-01",
+  "cwd": "/workspaces/actions-worktrees/devsy-workitems-consumer",
+  "thread_id": "01a12210-29e9-7fb3-91fc-644065721cb3",
+  "approval_policy": "never",
+  "sandbox": "danger-full-access",
+  "model": "gpt-6-luna",
+  "effort": "medium",
+  "request_id": "actions-workitems-preserve-bundle-20261009-1923-v1",
+  "text": "Continue SAMEcompletedworker; preserveexistingcommit5bce8cd58dbd0c548cfc1172852831c9007e2042 andwork. Rootreadcompletednativestate. UserisconfiguringGitHubauthenticationhimself; doNOTalterorreadcredentials, nofurtherpushretryyetuntilrootsteersready. Firstpriorityrecoverexactcommit: verifyHEAD/branch/origin/status/parent, createGitbundle baseab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47..devsy/workitems-consumer-acceptance-20261009 in ownscratch; gitbundleverify +sha256size, emitBASE64inonecommandbetweenACTIONS_BUNDLE_BEGIN/ACTIONS_BUNDLE_END onlyif<40000encodedbyteselse reportsizeforchunktransport. Source-onlycommit, no environments/artifacts/tokens. ThisallowsCloudfetchORIGINALSHAwithoutrecreatinghistory. Returncommitstatsandfull25-testreceipt/logdigest; runremainingaffecteddeclaredharnesssuite/lint/typecheckifnotdone throughalreadybootstrappedpinnedRCCgateway, noallpackageBootstrap orsharedresources. NoCI/publish/selfcertificationwhole208. Stopatboundedrecoverablecheckpoint, repository canonicaldoc/upstreamreceipt rulesremain. Rootwillpushoriginalbranch/PRorsteerexistingthreadwhenuserauthready. Noexistingworkersreplacements/noCASbootstraprepoedits.",
+  "wait_for_completion": false
+}

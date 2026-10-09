@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T19:20:08Z",
-  "status": "ACTIVE_ENGINEERING_CHECKPOINT; community Core integration advanced; Helper published; Core and Runtime publication not claimed; three native Devsy workers dispatched",
-  "integration_head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+  "observed_at": "2026-10-09T19:39:33Z",
+  "status": "ACTIVE_ENGINEERING_CHECKPOINT; Helper1.0.3 and Core1.0.2 published; PR253 merged partial trust fix; five bounded native work lanes active; issue #210 accepted",
+  "integration_head": "26b0194590e14656bff92dce3665dccab09837a3",
   "community_head": "011c5482285ea516f39292100c429a905e6e3e36",
   "release_ready": false,
   "community_merge": true,
@@ -28,10 +28,10 @@
   "devsy": {
     "request_id": "apr_29be804c-94cd-4b62-9233-e91b5ec30774",
     "session": "stateless",
-    "state": "ACTIVE_WORKERS_DISPATCHED",
+    "state": "ACTIVE_FIVE_BOUNDED_NATIVE_WORKERS",
     "recreated": false,
     "retried": false,
-    "validation": "User authorized HIT THE GAS. Native full-access policy was verified from thread/resume response and settings-updated event; bootstrap completed; three unique Actions work requests are READY/ACTIVE. Worktree identities below are pre-dispatch only; current worker checkout state is not asserted.",
+    "validation": "Native policy approvalPolicy=never and sandbox.type=dangerFullAccess was verified from native response/settings-updated event. Five bounded native threads are active. User fixed native GitHub authentication; normal pushes are verified by exact remote SHA. Never inspect/export credentials or change secret/approval settings.",
     "target": "cas-worker-01",
     "native_policy": "approvalPolicy=never; sandbox.type=dangerFullAccess, verified by coordinator from native response/event; aggregate effective_configuration=null was not treated as evidence.",
     "bootstrap_thread": "01a121ed-85b6-7000-b54a-649bc53e7224",
@@ -43,41 +43,85 @@
         "name": "devsy-native-auth",
         "request_id": "actions-devsy-native-auth-20261009-1907-v1",
         "thread": "01a1220f-944d-7f22-94a4-112dc13be035",
-        "turn": "01a1220f-9533-7820-8c72-143d5d4bb444",
-        "state": "READY (accepted)",
         "cwd": "/workspaces/actions-worktrees/devsy-native-auth",
         "branch": "devsy/native-auth-acceptance-20261009",
-        "policy": "approval_policy=never; sandbox.type=dangerFullAccess"
+        "state": "ACTIVE; root observed head5800c4bf plus untracked test before19:27Z; exact later state not refreshed",
+        "scope": "#153 real-browser origin/auth acceptance",
+        "dispatch_receipts": [
+          "evidence/devsy-native-auth-dispatch.json"
+        ]
       },
       {
         "name": "devsy-workitems-consumer",
         "request_id": "actions-devsy-workitems-consumer-20261009-1907-v1",
         "thread": "01a12210-29e9-7fb3-91fc-644065721cb3",
-        "turn": null,
-        "state": "ACTIVE; exact-CWD discovery reconciled initial HTTP502 without replay",
         "cwd": "/workspaces/actions-worktrees/devsy-workitems-consumer",
         "branch": "devsy/workitems-consumer-acceptance-20261009",
-        "policy": "approval_policy=never; sandbox.type=dangerFullAccess"
+        "head": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
+        "state": "ACTIVE; PR256 pushed; independent native review found generated-module NameError; same-thread follow-up active",
+        "scope": "#208 packaged Work Items consumer/platform and UI acceptance",
+        "dispatch_receipts": [
+          "evidence/devsy-workitems-consumer-dispatch.json",
+          "evidence/devsy-workitems-bundle-dispatch.json",
+          "evidence/devsy-workitems-browser-dispatch.json"
+        ]
       },
       {
         "name": "devsy-native-distribution",
         "request_id": "actions-devsy-native-distribution-20261009-1907-v1",
         "thread": "01a12211-01b3-7850-b508-bd7959b8210c",
-        "turn": "01a12211-024b-7b50-847b-0ab16aed1327",
-        "state": "READY (accepted)",
         "cwd": "/workspaces/actions-worktrees/devsy-native-distribution",
         "branch": "devsy/native-distribution-20261009",
-        "policy": "approval_policy=never; sandbox.type=dangerFullAccess"
+        "head": "90c37991942aad12b1008bdb95ab8ee95e32d05c",
+        "state": "ACTIVE; PR257 pushed; initial126 passed; Ruff reports four F811 duplicate definitions, same-thread repair active",
+        "scope": "Native1.0.3 distribution/checksum/Homebrew preparation; no publication",
+        "dispatch_receipts": [
+          "evidence/devsy-native-distribution-dispatch.json",
+          "evidence/devsy-distribution-bundle-dispatch.json",
+          "evidence/devsy-distribution-push-dispatch.json",
+          "evidence/devsy-distribution-test-integrity-dispatch.json"
+        ]
+      },
+      {
+        "name": "devsy-rcc-local-acceptance",
+        "request_id": "actions-rcc-local-acceptance-lane4-20261009-1929-v1",
+        "thread": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+        "cwd": "/workspaces/actions-worktrees/devsy-rcc-local-acceptance",
+        "branch": "devsy/rcc-local-acceptance-20261009",
+        "base": "26b0194590e14656bff92dce3665dccab09837a3",
+        "state": "ACTIVE; later HEAD/dirty state not refreshed",
+        "scope": "Independent actual Linux/local/provider-free #134 consumer acceptance; no provider-policy edits",
+        "dispatch_receipts": [
+          "evidence/devsy-rcc-local-acceptance-dispatch.json"
+        ]
+      },
+      {
+        "name": "devsy-native-review",
+        "request_id": "actions-native-independent-review-lane5-20261009-1929-v1",
+        "thread": "01a12224-e0a2-7b73-8825-8ddd5b1fdb6e",
+        "cwd": "/workspaces/actions-worktrees/devsy-native-review",
+        "branch": "devsy/native-review-20261009",
+        "base": "26b0194590e14656bff92dce3665dccab09837a3",
+        "state": "ACTIVE; reviewing actual Core/Runtime artifacts; later HEAD/dirty state not refreshed",
+        "scope": "Independent artifact/native acceptance; no overlapping Work Items/auth implementations",
+        "dispatch_receipts": [
+          "evidence/devsy-native-review-dispatch.json"
+        ]
       }
     ],
     "canvas_reservation": {
       "cwd": "/workspaces/actions-worktrees/devsy-canvas-contract",
-      "head_at_pre_dispatch": "3ed98ddbac3354c59414b8411b295db2e15d3545",
-      "state": "reserved; no thread; Cloud E owns #100"
+      "state": "reserved; no thread; defer #100 implementation/integration while user prepares Canvas/MCP issue revisions"
     },
     "pre_dispatch_receipt": "evidence/cas-bootstrap-reconciliation-20261009.md",
     "prior_approval_request_untouched": true,
-    "executor_approval_boundary": "Native permission authorization does not resume or alter parked Executor approvals."
+    "executor_approval_boundary": "Native permission authorization does not resume or alter parked Executor approvals.",
+    "credential_coordination_authorization": {
+      "authorized_future_thread": "01a121d6-ac41-7650-bbcf-58fff2819974",
+      "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+      "state": "authorized for future PyPI credential coordination only; not contacted in this checkpoint"
+    },
+    "remote_state_limit": "For native auth, only root-reported pre-19:27Z head/untracked snapshot is recorded. Other native worktree current cleanliness/HEAD is not inferred; worker thread state and pushed branch receipts are recorded separately."
   },
   "dakota": {
     "reconciled_before_dispatch": true,
@@ -324,7 +368,13 @@
         "hosted_ci": "GREEN on base376ed4c1; not yet merged into integration4626"
       },
       "pr_state": "MERGED_INTO_INTEGRATION",
-      "integration_admission": "Included in verified PR238 at76a73d27; later reviewed changes in PR239/241. No whole owning-issue acceptance."
+      "integration_admission": "Included in verified PR238 at76a73d27; later reviewed changes in PR239/241. No whole owning-issue acceptance.",
+      "devsy_successor": {
+        "pr": 256,
+        "head": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
+        "state": "OPEN_DRAFT; native CI in progress; active NameError follow-up",
+        "review_finding": "generated-module NameError blocks acceptance expansion; no cross-platform/full issue claim"
+      }
     },
     "rcc": {
       "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
@@ -381,7 +431,16 @@
         "scope": "prior PR235 body; not a rerun on3dbfb1be"
       },
       "native_or_live": "No new live-RCC execution; exact7cf receipt remains FAIL",
-      "current_scope": "Fresh exactsource29f213e0 loopbackRCC candidatewheel6cellsPASS; wrappercompleted exit0, Runtimeexit0/providerreaped; sourceboundaryindependentlyreviewed. PR247hostedpending. Prioractualfailures preserved; nofull134/nativeclaim."
+      "current_scope": {
+        "pr": 253,
+        "head": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+        "integration_merge": "26b0194590e14656bff92dce3665dccab09837a3",
+        "tree": "227e950994c52e629fe1fcd65effb7421f92aeb5",
+        "hosted": "four required checks PASS",
+        "configured_tests": "742 passed, 10 skipped",
+        "negative": "same-selected-provider503 fail-closed PASS",
+        "overall": "warm harness FAIL; issue134 remains open/active; actual local-consumer lane runs independently"
+      }
     },
     "robot_cleanup": {
       "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
@@ -438,7 +497,16 @@
       "devutils": {
         "passed": 124
       },
-      "generator": "no-change verified"
+      "generator": "no-change verified",
+      "core_publication": {
+        "tag": "actions-core-1.0.2",
+        "run": 37979108120,
+        "state": "PUBLISHED; verify and publish jobs PASS",
+        "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+        "sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
+        "source_projection": "51 exact source files; no mismatches",
+        "manifest_limit": "Cloud ZIP download blocked403; independent native manifest inspection is in progress; no result claimed."
+      }
     }
   },
   "coordination": {
@@ -576,73 +644,9 @@
     },
     {
       "path": "/workspace/work/community-resume/api-doc-source-links",
-      "head": "011c5482285ea516f39292100c429a905e6e3e36",
+      "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
       "branch": "refs/heads/docs/api-source-links-20261009",
-      "status_porcelain": [
-        "MM actions/docs/api/README.md",
-        "M  actions/docs/api/actions.agent.md",
-        "M  actions/docs/api/actions.api.md",
-        "M  actions/docs/api/actions.chat.md",
-        "M  actions/docs/api/actions.cli.md",
-        "M  actions/docs/api/actions.mcp.md",
-        "M  actions/docs/api/actions.md",
-        "AD actions/docs/api/actions.server.api.md",
-        "AD actions/docs/api/actions.server.cli.md",
-        "AD actions/docs/api/actions.server.env.md",
-        "AD actions/docs/api/actions.server.mcp.gateway_metadata.md",
-        "AD actions/docs/api/actions.server.mcp.md",
-        "AD actions/docs/api/actions.server.mcp.setup_mcp_server_from_actions.md",
-        "AD actions/docs/api/actions.server.mcp.setup_mcp_server_v2.md",
-        "AD actions/docs/api/actions.server.md",
-        "AD actions/docs/api/actions.server.migrations.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_action_enabled.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_action_managed_params.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_action_options.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_code_verifier.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_is_consequential.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_request_id_to_run.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_robot_run_columns.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_schedules.md",
-        "AD actions/docs/api/actions.server.migrations.migration_add_session_and_indexes.md",
-        "AD actions/docs/api/actions.server.migrations.migration_align_schema_indexes.md",
-        "AD actions/docs/api/actions.server.migrations.migration_initial.md",
-        "AD actions/docs/api/actions.server.migrations.migration_reconcile_run_columns.md",
-        "AD actions/docs/api/actions.server.migrations.migration_reconcile_schema.md",
-        "AD actions/docs/api/actions.server.package.md",
-        "AD actions/docs/api/actions.server.package.package_exclude.md",
-        "AD actions/docs/api/actions.server.vendored_deps.action_package_handling.cli_errors.md",
-        "AD actions/docs/api/actions.server.vendored_deps.action_package_handling.md",
-        "AD actions/docs/api/actions.server.vendored_deps.gen_certificate.md",
-        "AD actions/docs/api/actions.server.vendored_deps.ls_protocols.md",
-        "AD actions/docs/api/actions.server.vendored_deps.md",
-        "AD actions/docs/api/actions.server.vendored_deps.oauth2_settings.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.analyzer.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.conda_cloud.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.conda_impl.conda_channel.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.conda_impl.conda_match_spec.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.conda_impl.conda_path.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.conda_impl.conda_url.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.conda_impl.conda_version.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.conda_impl.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.pip_impl.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.pip_impl.pip_distlib_util.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.pip_impl.pip_packaging_structure.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.pip_impl.pip_packaging_version.md",
-        "AD actions/docs/api/actions.server.vendored_deps.package_deps.pypi_cloud.md",
-        "AD actions/docs/api/actions.server.vendored_deps.termcolors.md",
-        "AD actions/docs/api/actions.server.vendored_deps.url_callback_server.md",
-        "AD actions/docs/api/actions.server.vendored_deps.yaml_with_location.md",
-        "M  actions/docs/api/actions.server_integration.md",
-        "AD actions/docs/api/actions.work_items.md",
-        "AD actions/docs/api/actions.work_items.scripts.config.md",
-        "AD actions/docs/api/actions.work_items.scripts.md",
-        "AD actions/docs/api/actions.work_items.workitems_integration.md",
-        "AD actions/docs/api/actions.workitems.md",
-        " M devutils/src/devutils/invoke_utils.py",
-        " M devutils/tests/test_invoke_utils.py",
-        " M docs/skills/repository-operations.md"
-      ],
+      "status_porcelain": [],
       "untracked_paths": []
     },
     {
@@ -654,7 +658,7 @@
     },
     {
       "path": "/workspace/work/community-resume/convergence",
-      "head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+      "head": "26b0194590e14656bff92dce3665dccab09837a3",
       "branch": "refs/heads/integration/community-release-20261008",
       "status_porcelain": [],
       "untracked_paths": []
@@ -675,7 +679,7 @@
     },
     {
       "path": "/workspace/work/community-resume/governance",
-      "head": "d56c583c218189d3858ebe2052fd083cae0d0b49",
+      "head": "cf883d45c9ebc125cfaeabe247496222720ba408",
       "branch": "refs/heads/resume/community-evidence-20261009",
       "status_porcelain": [
         " M docs/program/community-execution-graph.json",
@@ -685,26 +689,34 @@
         " M docs/program/community-resume-20261009.json",
         " M docs/program/engineering-handoff.md",
         " M docs/skills/repository-operations.md",
-        "?? docs/program/evidence/cas-bootstrap-reconciliation-20261009.md",
-        "?? docs/program/evidence/cas-expansion-20261009-1909.json",
-        "?? docs/program/evidence/core-1.0.2-release-dispatch.json",
-        "?? docs/program/evidence/core-credential-attempt2.json",
-        "?? docs/program/evidence/helper-1.0.3-publication-verified.json",
-        "?? docs/program/evidence/http-helper-1.0.3-verified-dist.zip",
-        "?? docs/program/evidence/independent-core-pr248-admission-and-credential-probe-20261009.md",
-        "?? docs/program/evidence/release-contract-audit-20261009.md",
-        "?? docs/program/evidence/runtime-1.0.3-retained-contract-audit-20261009.md"
+        "?? docs/program/evidence/core-1.0.2-pypi-verification-20261009.json",
+        "?? docs/program/evidence/core-api-source-link-repair-20261009.md",
+        "?? docs/program/evidence/devsy-distribution-bundle-dispatch.json",
+        "?? docs/program/evidence/devsy-distribution-push-dispatch.json",
+        "?? docs/program/evidence/devsy-distribution-test-integrity-dispatch.json",
+        "?? docs/program/evidence/devsy-expand-bootstrap-dispatch.json",
+        "?? docs/program/evidence/devsy-native-auth-dispatch.json",
+        "?? docs/program/evidence/devsy-native-distribution-dispatch.json",
+        "?? docs/program/evidence/devsy-native-review-dispatch.json",
+        "?? docs/program/evidence/devsy-rcc-local-acceptance-dispatch.json",
+        "?? docs/program/evidence/devsy-workitems-browser-dispatch.json",
+        "?? docs/program/evidence/devsy-workitems-bundle-dispatch.json",
+        "?? docs/program/evidence/devsy-workitems-consumer-dispatch.json"
       ],
       "untracked_paths": [
-        "docs/program/evidence/cas-bootstrap-reconciliation-20261009.md",
-        "docs/program/evidence/cas-expansion-20261009-1909.json",
-        "docs/program/evidence/core-1.0.2-release-dispatch.json",
-        "docs/program/evidence/core-credential-attempt2.json",
-        "docs/program/evidence/helper-1.0.3-publication-verified.json",
-        "docs/program/evidence/http-helper-1.0.3-verified-dist.zip",
-        "docs/program/evidence/independent-core-pr248-admission-and-credential-probe-20261009.md",
-        "docs/program/evidence/release-contract-audit-20261009.md",
-        "docs/program/evidence/runtime-1.0.3-retained-contract-audit-20261009.md"
+        "docs/program/evidence/core-1.0.2-pypi-verification-20261009.json",
+        "docs/program/evidence/core-api-source-link-repair-20261009.md",
+        "docs/program/evidence/devsy-distribution-bundle-dispatch.json",
+        "docs/program/evidence/devsy-distribution-push-dispatch.json",
+        "docs/program/evidence/devsy-distribution-test-integrity-dispatch.json",
+        "docs/program/evidence/devsy-expand-bootstrap-dispatch.json",
+        "docs/program/evidence/devsy-native-auth-dispatch.json",
+        "docs/program/evidence/devsy-native-distribution-dispatch.json",
+        "docs/program/evidence/devsy-native-review-dispatch.json",
+        "docs/program/evidence/devsy-rcc-local-acceptance-dispatch.json",
+        "docs/program/evidence/devsy-workitems-browser-dispatch.json",
+        "docs/program/evidence/devsy-workitems-bundle-dispatch.json",
+        "docs/program/evidence/devsy-workitems-consumer-dispatch.json"
       ]
     },
     {
@@ -734,17 +746,9 @@
     },
     {
       "path": "/workspace/work/community-resume/release-final",
-      "head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
       "branch": "refs/heads/integration/runtime-release-final-20261009",
-      "status_porcelain": [
-        "M  .github/workflows/actions_release.yml",
-        "UU actions/poetry.lock",
-        "M  actions/scripts/verify_clean_wheel.py",
-        "A  actions/tests/actions_core_tests/test_core_release_workflow.py",
-        "UU devutils/src/devutils/invoke_utils.py",
-        "AA devutils/tests/test_docs.py",
-        "UU docs/skills/repository-operations.md"
-      ],
+      "status_porcelain": [],
       "untracked_paths": []
     },
     {
@@ -774,6 +778,28 @@
       "branch": "refs/heads/repair/robot-private-staging-20261009",
       "status_porcelain": [],
       "untracked_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/runtime-registry-canary",
+      "head": "77ea4ebff3416baa303b737be7fb07a77fbed794",
+      "branch": "refs/heads/release/runtime-registry-compatibility-20261009",
+      "status_porcelain": [],
+      "untracked_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/runtime-release-notes",
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "branch": "refs/heads/docs/runtime-1.0.3-release-notes-20261009",
+      "status_porcelain": [],
+      "untracked_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/sol-native-review",
+      "head": "90c37991942aad12b1008bdb95ab8ee95e32d05c",
+      "branch": "detached",
+      "status_porcelain": [],
+      "untracked_paths": [],
+      "status_summary": "Dirty: 208 untracked paths under work/sol-pr257/**; detailed scratch paths omitted from shared inventory to avoid publishing test outputs/binaries. Files preserved."
     },
     {
       "path": "/workspace/work/community-resume/tunnel",
@@ -827,7 +853,8 @@
   ],
   "initial_integration_head": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
   "integration_merges": [
-    "PR250 merged as 3ed98ddbac3354c59414b8411b295db2e15d3545; partial foundations for #91/#129/#151 are INTEGRATED, with all original issue contracts and accounting preserved."
+    "PR250 merged as 3ed98ddbac3354c59414b8411b295db2e15d3545; partial foundations for #91/#129/#151 are INTEGRATED, with all original issue contracts and accounting preserved.",
+    "PR253 merged as 26b0194590e14656bff92dce3665dccab09837a3 (tree227e950994c52e629fe1fcd65effb7421f92aeb5); partial #134 trust foundation only. Four hosted checks PASS; 742 passed/10 skipped in configured suite, same-provider503 negative PASS, overall warm harness FAIL."
   ],
   "evidence_archive": "evidence/community-20261009-convergence.zip",
   "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
@@ -1095,7 +1122,7 @@
       "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
     }
   ],
-  "inventory_scope": "Local host worktree inventory observed 2026-10-09T19:20:08Z; status is per-worktree git porcelain at observation time. Native CAS worker paths are separate and their HEAD/clean statuses are verified only at the pre-dispatch checkpoint in evidence/cas-bootstrap-reconciliation-20261009.md. Concurrent work may change after observation.",
+  "inventory_scope": "Local host worktree inventory observed 2026-10-09T19:20:08Z; status is per-worktree git porcelain at observation time. Native CAS worker paths are separate and their HEAD/clean statuses are verified only at the pre-dispatch checkpoint in evidence/cas-bootstrap-reconciliation-20261009.md. Concurrent work may change after observation. Local worktree heads/status were refreshed at 2026-10-09T19:39:33Z; remote native worktrees are not included, and their last-known state is separately qualified in dispatch/worker receipts.",
   "documentation_receipts": [
     {
       "lane": "Windows/RCC lifecycle review",
@@ -1224,6 +1251,10 @@
     {
       "lane": "Issue #210 closure",
       "disposition": "Added current acceptance overlay without changing original contract, comments, or captured raw state. Exact owner comment6087641984 and read-only audit are linked; accounting is now53 open/1 accepted."
+    },
+    {
+      "lane": "Current release/native worker reconciliation",
+      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254\u2013257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
     }
   ],
   "post_archive_observations": [
@@ -1323,6 +1354,10 @@
     {
       "observed_at": "2026-10-09T19:20:08Z",
       "event": "Refreshed local worktree inventory. Root reports #210 whole-contract acceptance/closure by issue comment6087641984; current accounting is53 open/1 accepted while preserving all54 retained source contracts and original raw states. Core tag actions-core-1.0.2 is pushed from community011c548; release workflow37979108120 remains in progress, so no Core publication/readback is claimed."
+    },
+    {
+      "observed_at": "2026-10-09T19:36:24Z",
+      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255\u2013257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
     }
   ],
   "admission_checkpoint": {
@@ -1358,14 +1393,42 @@
     {
       "number": 253,
       "head": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
-      "state": "OPEN_DRAFT; overall warm harness FAIL; hosted checks in progress",
-      "scope": "RCC trust-context continuity; source 742 passed/10 skipped and actual same-provider503 fail-closed negative PASS; no full #134 acceptance."
+      "state": "MERGED_TO_INTEGRATION",
+      "merge_sha": "26b0194590e14656bff92dce3665dccab09837a3",
+      "tree": "227e950994c52e629fe1fcd65effb7421f92aeb5",
+      "hosted": "four required PR checks passed",
+      "scope": "Trust context and bounded provider handling; partial #134 only, overall warm harness FAIL."
     },
     {
       "number": 254,
-      "head": "159b17a55a3c18f5edd80a1e099f79abd5a4cff8",
-      "state": "OPEN_DRAFT; bounded proposal only; predecessor proposal a4946a independently accepted; current head checks/review are distinct",
-      "scope": "#100 authoring contract/ADR only; no Canvas implementation; public MCP Apps authoring still depends on #125."
+      "head": "a4946a297d8fce4b95a7a2147db6d7569c6463ae",
+      "state": "OPEN; REVIEW; do not integrate pending user Canvas/MCP issue revisions",
+      "hosted": "audit, coverage, and six RCC primary/N-1 jobs PASS",
+      "scope": "Bounded #100 ADR/authoring proposal only; no implementation or new issue contract."
+    },
+    {
+      "number": 255,
+      "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "state": "OPEN_DRAFT; hosted checks pending",
+      "base": "community",
+      "scope": "Core API generated source links use maintained Actions repo; local receipt checkpoint4affeb7, PR current head25026.",
+      "hosted": "pending at observed checkpoint; PR current head25026da"
+    },
+    {
+      "number": 256,
+      "head": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
+      "state": "OPEN_DRAFT; active follow-up after native review found generated-module NameError",
+      "base": "integration/community-release-20261008",
+      "scope": "#208 packaged Work Items consumers; no cross-platform/whole-issue acceptance.",
+      "hosted": "audit PASS; build/coverage/toolkit checks pending; generated-module NameError follow-up active"
+    },
+    {
+      "number": 257,
+      "head": "90c37991942aad12b1008bdb95ab8ee95e32d05c",
+      "state": "OPEN_DRAFT; active Ruff/test-collection integrity follow-up",
+      "base": "integration/community-release-20261008",
+      "scope": "Native Runtime immutable checksum publication; initial 126 passed, full Ruff reports four duplicate F811 definitions.",
+      "hosted": "audit PASS; coverage/toolkit checks pending; four F811 duplicate definitions under active repair"
     }
   ],
   "followup_admission_checkpoint": {
@@ -2324,16 +2387,18 @@
     ],
     "whole_issue_acceptance": false,
     "publication": false,
-    "actual_merge_sha": "a99b45d6a846be15d5130fc0ff25119474dcee6f"
+    "actual_merge_sha": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
+    "manifest_limit": "Cloud ZIP download blocked403; independent native manifest inspection is in progress, no result claimed"
   },
   "release_blockers": [
-    "Issue #210 is accepted/closed by owner comment6087641984 after retained-contract audit. Helper1.0.3 is published and PyPI/GitHub manifest artifact readback is byte-verified; preserve immutable Helper 1.0.2 failed-before-upload tag and never retry it.",
-    "Core 1.0.2 PR248 was merged into community at 011c5482285ea516f39292100c429a905e6e3e36 (tree db3ecee9e9c2937a9912780a54bd5a1557562f50). Immutable tag actions-core-1.0.2 is pushed (object53970c06); release workflow37979108120 is in progress, with no successful publication/readback claim.",
-    "Core 1.0.2 candidate wheel resolved published Helper 1.0.3 from files.pythonhosted.org in a fresh isolated environment; resolver wheel SHA matched the verified PyPI SHA. This is compatibility evidence, not Core publication/readback.",
-    "Core credential availability attempt2 PASS after attempt1 empty; preflight found Core1.0.2 absent on PyPI. Immutable tag actions-core-1.0.2 is pushed from community011c548 (object53970c06); release workflow37979108120 is IN_PROGRESS. No successful publication/readback is claimed.",
-    "Runtime/native 1.0.3 requires remaining applicable native/browser/security/RCC/consumer/registry gates and external artifact readback; no Runtime publication is claimed.",
-    "Actions trust-context source d9a08395d14478534490b6f90c2405a32fa869fd has 742 passed/10 skipped and same-selected-provider503 fail-closed negative PASS, but overall warm harness FAIL; do not attribute cold-publish422 without evidence or mark #134 complete.",
-    "Robot root/source identity, Windows ACL, live tunnel/provider TLS and remaining owning contracts remain open. #100 is a bounded ADR/contract proposal only; public MCP Apps authoring retains its #125 prerequisite."
+    "Whole issue #210 is accepted/closed by owner comment6087641984. Helper1.0.3 remains published and byte-verified; preserve the failed immutable1.0.2 tag and never retry it.",
+    "Core1.0.2 is published from immutable tag actions-core-1.0.2; successful verify/publish run37979108120. PyPI wheel/sdist match exact hashes and 51 non-generated sdist files match tag source. Cloud could not download workflow ZIP due File Service HTTP403; independent native manifest inspection remains in progress; no result is claimed. Do not overstate the Cloud ZIP inspection.",
+    "Runtime/native1.0.3 remains unpublished. Root-owned candidate is branch integration/runtime-release-final-20261009 at3fee279; it has no PR/admission in this checkpoint. Final exact candidate still needs required native/browser/security/RCC/consumer and external asset/registry readback gates.",
+    "PR253 trust source290e469c / runtime-code d9a08395 is merged into integration26b019 (tree227e950). Four hosted checks passed; configured suite742 passed/10 skipped and selected-provider503 fail-closed negative passed. Overall warm harness still FAIL; #134 remains open/active.",
+    "Work Items PR256 Linux source consumer work is pushed at5bce8cd; native review found a generated-module NameError blocking its acceptance expansion. The same remote worker is active on that concrete follow-up; no cross-platform packaged/UI acceptance is claimed.",
+    "Native distribution PR257 head90c379 initial package suite126 passed; four Ruff F811 duplicate test definitions remain and a same-thread test-integrity fix is active. No Runtime/native publication claim follows from that checkpoint.",
+    "PR254 #100 proposal remains REVIEW only while user prepares Canvas/MCP issue revisions; do not integrate it or infer implementation/contract closure. PR255 generated Core API source-link repair is open at current head25026da with hosted checks pending.",
+    "Robot root/source identity, Windows ACL, live tunnel/provider TLS and remaining owning contracts remain open. Public MCP Apps authoring retains the scoped #125 prerequisite."
   ],
   "resource_management": {
     "disk_after_input_deduplication": "7.8 GiB free of32GiB",
@@ -2349,12 +2414,12 @@
     "file": "community-execution-graph.json",
     "counts": {
       "BLOCKED": 30,
-      "INTEGRATED": 10,
-      "ACTIVE": 5,
+      "INTEGRATED": 9,
       "REVIEW": 9,
-      "COMPLETE": 0
+      "ACTIVE": 5,
+      "COMPLETE": 1
     },
-    "whole_contract_complete": 0
+    "whole_contract_complete": 1
   },
   "live_inventory": {
     "path": "evidence/convergence-worker-inventory.json",
@@ -2449,7 +2514,7 @@
       "remote_changes": "unknown; same thread/turn retained"
     }
   ],
-  "community_merge_scope": "Helper-only PR243 merged to community at00c; PR250 merged only to integration at3ed98dd as bounded partial foundations.",
+  "community_merge_scope": "Helper PR243 and Core PR248 are published package changes on community at011c5482285ea516f39292100c429a905e6e3e36; PR250 merged only to integration at3ed98dd as bounded partial foundations; PR253 merged only to integration at26b019 as a partial #134 trust foundation.",
   "runtime_integration_community_merge": false,
   "helper_release": {
     "version": "1.0.3",
@@ -2481,10 +2546,10 @@
     "merged_sha": "3ed98ddbac3354c59414b8411b295db2e15d3545"
   },
   "remote_workspace_readiness": {
-    "observed_at": "2026-10-09T18:44:29.529Z",
+    "observed_at": "2026-10-09T19:36:24Z",
     "target": "cas-worker-01",
     "workspace_uid": "default-ca-0b24d",
-    "state": "PAUSED_BY_USER_FOR_PERMISSION_REPAIR",
+    "state": "ACTIVE_FIVE_BOUNDED_NATIVE_WORKERS",
     "readiness": {
       "pod_phase": "Running",
       "native_daemon": {
@@ -2495,13 +2560,9 @@
       "auth_status": "authenticated",
       "capacity": {
         "cpu_effective_cores": 16,
-        "cpu_quota_cores": null,
-        "memory_available_bytes": 31362711552,
-        "memory_limit_bytes": null,
-        "memory_current_bytes": null,
-        "workspace_total_bytes": 267211747328,
-        "workspace_used_bytes": 21000880128,
-        "workspace_free_bytes": 246210867200
+        "memory_available_bytes": 30060244992,
+        "workspace_free_bytes": 237406064640,
+        "source": "latest Owner Devsy workspace diagnostics relayed by root; exact probe timestamp not supplied"
       },
       "active_setup_stages": []
     },
@@ -2514,11 +2575,84 @@
     "latest_turn": "01a121f4-51aa-7f42-b7ca-d4b23845efd0",
     "native_status": "completed",
     "bootstrap_request": "actions-bootstrap-20261009-1832",
-    "native_permission_limitation": "Advertised dispatch/settings expose no sandbox, approval-policy, or full-access option. Initial native thread readOnly/networkAccess=false/on-request; user approved native setup. No bypass.",
+    "native_permission_limitation": "Superseded: authorized native request/settings supplied approvalPolicy=never and sandbox.type=dangerFullAccess, confirmed from native response/settings-updated event. Do not infer from null aggregate effective configuration.",
     "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout\u2019s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe\u2026`, integration base at `3ed98dd\u2026`, upstream reporting docs at `57399b60\u2026`, and Actions Core release at `df7b0d66\u2026`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor\u2019s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
-    "engineering_threads_dispatched": 0,
+    "engineering_threads_dispatched": 5,
     "old_approvals_resumed": false,
-    "workspace_recreated": false
+    "workspace_recreated": false,
+    "current_workers": [
+      {
+        "name": "devsy-native-auth",
+        "request_id": "actions-devsy-native-auth-20261009-1907-v1",
+        "thread": "01a1220f-944d-7f22-94a4-112dc13be035",
+        "cwd": "/workspaces/actions-worktrees/devsy-native-auth",
+        "branch": "devsy/native-auth-acceptance-20261009",
+        "state": "ACTIVE; root observed head5800c4bf plus untracked test before19:27Z; exact later state not refreshed",
+        "scope": "#153 real-browser origin/auth acceptance",
+        "dispatch_receipts": [
+          "evidence/devsy-native-auth-dispatch.json"
+        ]
+      },
+      {
+        "name": "devsy-workitems-consumer",
+        "request_id": "actions-devsy-workitems-consumer-20261009-1907-v1",
+        "thread": "01a12210-29e9-7fb3-91fc-644065721cb3",
+        "cwd": "/workspaces/actions-worktrees/devsy-workitems-consumer",
+        "branch": "devsy/workitems-consumer-acceptance-20261009",
+        "head": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
+        "state": "ACTIVE; PR256 pushed; independent native review found generated-module NameError; same-thread follow-up active",
+        "scope": "#208 packaged Work Items consumer/platform and UI acceptance",
+        "dispatch_receipts": [
+          "evidence/devsy-workitems-consumer-dispatch.json",
+          "evidence/devsy-workitems-bundle-dispatch.json",
+          "evidence/devsy-workitems-browser-dispatch.json"
+        ]
+      },
+      {
+        "name": "devsy-native-distribution",
+        "request_id": "actions-devsy-native-distribution-20261009-1907-v1",
+        "thread": "01a12211-01b3-7850-b508-bd7959b8210c",
+        "cwd": "/workspaces/actions-worktrees/devsy-native-distribution",
+        "branch": "devsy/native-distribution-20261009",
+        "head": "90c37991942aad12b1008bdb95ab8ee95e32d05c",
+        "state": "ACTIVE; PR257 pushed; initial126 passed; Ruff reports four F811 duplicate definitions, same-thread repair active",
+        "scope": "Native1.0.3 distribution/checksum/Homebrew preparation; no publication",
+        "dispatch_receipts": [
+          "evidence/devsy-native-distribution-dispatch.json",
+          "evidence/devsy-distribution-bundle-dispatch.json",
+          "evidence/devsy-distribution-push-dispatch.json",
+          "evidence/devsy-distribution-test-integrity-dispatch.json"
+        ]
+      },
+      {
+        "name": "devsy-rcc-local-acceptance",
+        "request_id": "actions-rcc-local-acceptance-lane4-20261009-1929-v1",
+        "thread": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+        "cwd": "/workspaces/actions-worktrees/devsy-rcc-local-acceptance",
+        "branch": "devsy/rcc-local-acceptance-20261009",
+        "base": "26b0194590e14656bff92dce3665dccab09837a3",
+        "state": "ACTIVE; later HEAD/dirty state not refreshed",
+        "scope": "Independent actual Linux/local/provider-free #134 consumer acceptance; no provider-policy edits",
+        "dispatch_receipts": [
+          "evidence/devsy-rcc-local-acceptance-dispatch.json"
+        ]
+      },
+      {
+        "name": "devsy-native-review",
+        "request_id": "actions-native-independent-review-lane5-20261009-1929-v1",
+        "thread": "01a12224-e0a2-7b73-8825-8ddd5b1fdb6e",
+        "cwd": "/workspaces/actions-worktrees/devsy-native-review",
+        "branch": "devsy/native-review-20261009",
+        "base": "26b0194590e14656bff92dce3665dccab09837a3",
+        "state": "ACTIVE; reviewing actual Core/Runtime artifacts; later HEAD/dirty state not refreshed",
+        "scope": "Independent artifact/native acceptance; no overlapping Work Items/auth implementations",
+        "dispatch_receipts": [
+          "evidence/devsy-native-review-dispatch.json"
+        ]
+      }
+    ],
+    "historical_receipt_scope": "The embedded final_receipt predates five-lane expansion and is retained as historical bootstrap/setup evidence only; current worker identities/statuses are listed in current_workers.",
+    "upstream_disposition": "No confirmed upstream defect from this status checkpoint."
   },
   "upstream_reporting_policy": {
     "pr": 252,
@@ -2557,11 +2691,41 @@
     "tag": "actions-core-1.0.2",
     "tag_object": "53970c0699ec2fcee169484daa2d41f6fec4e6ab",
     "source": "011c5482285ea516f39292100c429a905e6e3e36",
-    "credential_attempt1": "FAIL empty; preserved",
-    "credential_attempt2": "PASS presence only",
-    "preflight": "PyPI Core1.0.2 HTTP404 before tag",
     "workflow_run": 37979108120,
-    "workflow_state": "IN_PROGRESS",
-    "publication": "not yet verified"
+    "verify_job": "PASS",
+    "publish_job": "PASS",
+    "pypi_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+    "pypi_sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
+    "sdist_projection": "51 source files exact to tag, no mismatches",
+    "workflow_artifact_manifest": "Cloud File Service HTTP403 blocked byte download; independent native manifest inspection is in progress and no result is claimed.",
+    "receipt": "evidence/core-1.0.2-pypi-verification-20261009.json"
+  },
+  "publication_scope": "Legacy boolean remains the full Runtime/native1.0.3 program-release signal: false until that release is admitted. Helper1.0.3 and Core1.0.2 are published and independently byte-verified; Runtime/native1.0.3 is not published.",
+  "package_publications": {
+    "actions-http-helper-1.0.3": {
+      "state": "PUBLISHED_AND_VERIFIED",
+      "tag": "actions_http-1.0.3",
+      "source": "00beb8907243a8bf232e89c2e9822d3d881f0427",
+      "run": 37976326081,
+      "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "sdist_sha256": "b8e4e8efb181d5748264f25f1803f47731cd4947fc015f009934d51cd7a78945"
+    },
+    "actions-core-1.0.2": {
+      "state": "PUBLISHED_AND_VERIFIED",
+      "tag_object": "53970c0699ec2fcee169484daa2d41f6fec4e6ab",
+      "source": "011c5482285ea516f39292100c429a905e6e3e36",
+      "run": 37979108120,
+      "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
+      "source_projection": "51 non-generated sdist files byte-match actions/ at peeled tag; generated PKG-INFO identifies actions-core1.0.2",
+      "workflow_manifest": "Cloud File Service download returned403; independent native manifest inspection is in progress, with no result claimed.",
+      "workflow_run": 37979108120
+    },
+    "actions-runtime-1.0.3": {
+      "state": "NOT_PUBLISHED",
+      "release_candidate_branch": "integration/runtime-release-final-20261009",
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "local_worktree_observation": "clean at snapshot; root-owned candidate, no PR yet"
+    }
   }
 }

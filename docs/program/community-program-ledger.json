@@ -540,7 +540,7 @@
         145
       ],
       "criticality": "P1",
-      "next_bounded_action": "Extend actual consumer and product error-state proof only where required; Linux consumer receipt is not all-platform execution or whole-issue acceptance.",
+      "next_bounded_action": "Continue PR256 packaged Work Items cross-platform/browser acceptance after resolving the generated-module NameError; Linux consumer evidence is not whole issue acceptance.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -1069,7 +1069,7 @@
         209
       ],
       "criticality": "P1",
-      "next_bounded_action": "Prove final native cookie/bearer exact-origin HTTP/WebSocket/reconnect/revocation matrix on supported platforms; protected OAuth GET cookie access intentionally denied pending CSRF-safe endpoint design.",
+      "next_bounded_action": "Native auth worker owns the active real-browser origin/session counterexample; preserve auth-mode and browser evidence separately from in-process tests.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -3131,7 +3131,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Keep the 503 negative distinct from the NOT_REACHED cold-publish 422. Prove trust continuity across acquisition and execution without inferring an upstream defect; preserve the full RCC/native/consumer and crash-recovery contract.",
+      "next_bounded_action": "Continue the independent local/provider-free actual consumer acceptance lane after PR253 merge. Preserve the warm-harness FAIL and same-provider503 negative PASS separately; full RCC trust/native/consumer/restart contract remains open.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -8063,7 +8063,7 @@
         99
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Review the bounded schema/source-of-truth ADR and contract only; record the #125 dependency for public MCP Apps authoring separately. Do not start Canvas implementation or claim Python/JSON/TypeScript round-trip/package acceptance.",
+      "next_bounded_action": "Keep PR254 in REVIEW only; user is preparing Canvas/MCP issue revisions. Reconcile its proposal against the revised contract before any integration; public MCP Apps authoring remains scoped to #125.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -11943,6 +11943,71 @@
       "path": "evidence/runtime-1.0.3-retained-contract-audit-20261009.md",
       "sha256": "3e9441a7e3dd37e3ac9280f354d009dc92738fcac5437107a27aa808eb690cfe",
       "disposition": "Read-only scoped audit; retained #211 and #134 acceptance gates remain distinct. It predates current Core tag dispatch."
+    },
+    {
+      "kind": "Core1.0.2 PyPI publication verification",
+      "path": "evidence/core-1.0.2-pypi-verification-20261009.json",
+      "sha256": "b6ff119c82bcfdd35fabf85c00c621cda6c85eb66faba479d694c964a0e5bacf"
+    },
+    {
+      "kind": "Core API source-link repair review receipt",
+      "path": "evidence/core-api-source-link-repair-20261009.md",
+      "sha256": "518c4ad6f4c85d24de59abbb4e9694247cdc71f94ce721b001c0a93806c50334"
+    },
+    {
+      "kind": "devsy distribution bundle dispatch task receipt",
+      "path": "evidence/devsy-distribution-bundle-dispatch.json",
+      "sha256": "bb54140aac88b4c6f50c1ae07bf55c120dc919834d5bfa967ef70a95290b2bd8"
+    },
+    {
+      "kind": "devsy distribution push dispatch task receipt",
+      "path": "evidence/devsy-distribution-push-dispatch.json",
+      "sha256": "adad9030292c06a8a91025a98dadf3428a5d1dd7bf501f71f7ca6883b38fdb31"
+    },
+    {
+      "kind": "devsy distribution test integrity dispatch task receipt",
+      "path": "evidence/devsy-distribution-test-integrity-dispatch.json",
+      "sha256": "660c6d3338e7d9de60ed8f031b7a4aa973893ee376d85709dc5394745693e0e6"
+    },
+    {
+      "kind": "devsy expand bootstrap dispatch task receipt",
+      "path": "evidence/devsy-expand-bootstrap-dispatch.json",
+      "sha256": "eaefb60d883b2bf6990459129026f7e64b47dd91dab9d0c6351b8f7573a0cbbb"
+    },
+    {
+      "kind": "devsy native auth dispatch task receipt",
+      "path": "evidence/devsy-native-auth-dispatch.json",
+      "sha256": "d9557ac42ee8cc40ec8f5760e350ffa1ead0e99590dc5f00bd2211bf2033f10e"
+    },
+    {
+      "kind": "devsy native distribution dispatch task receipt",
+      "path": "evidence/devsy-native-distribution-dispatch.json",
+      "sha256": "dba70acaefce4813c0fa52098cdb9222f99c29b607742442f44b40416bf65314"
+    },
+    {
+      "kind": "devsy native review dispatch task receipt",
+      "path": "evidence/devsy-native-review-dispatch.json",
+      "sha256": "da80f855d66b6b1686db63e7300004551cc941040026c7f53edd3d7f5a73cb20"
+    },
+    {
+      "kind": "devsy rcc local acceptance dispatch task receipt",
+      "path": "evidence/devsy-rcc-local-acceptance-dispatch.json",
+      "sha256": "4ba6046122d47ac1335b02f2713d10811208f926d718ee6becf981574b640b7e"
+    },
+    {
+      "kind": "devsy workitems browser dispatch task receipt",
+      "path": "evidence/devsy-workitems-browser-dispatch.json",
+      "sha256": "2cc3f2a3ed23d5ceb2053a2bca10097be6d729ff87b469c0b1d3f5790cd14fec"
+    },
+    {
+      "kind": "devsy workitems bundle dispatch task receipt",
+      "path": "evidence/devsy-workitems-bundle-dispatch.json",
+      "sha256": "004f751f42ca41a9f4b4c152ebc47764d89670a8a5b18583b2a81448980ca458"
+    },
+    {
+      "kind": "devsy workitems consumer dispatch task receipt",
+      "path": "evidence/devsy-workitems-consumer-dispatch.json",
+      "sha256": "6d0715eca40b87a5ff6a56571eb5e5799ee3a29a81ffd62f24752aac6070b160"
     }
   ],
   "independent_review": {
@@ -12274,6 +12339,53 @@
       "state": "OPEN_DRAFT",
       "base": "integration/cloud-admission-20261009",
       "merge_commit": null
+    },
+    {
+      "number": 253,
+      "url": "https://github.com/joshyorko/actions/pull/253",
+      "sha": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+      "state": "MERGED",
+      "base": "integration/community-release-20261008",
+      "merge_commit": {
+        "oid": "26b0194590e14656bff92dce3665dccab09837a3"
+      },
+      "scope": "Partial #134 trust foundation; 4 required checks pass; 742 passed/10 skipped, scoped503 negative PASS, warm harness FAIL."
+    },
+    {
+      "number": 254,
+      "url": "https://github.com/joshyorko/actions/pull/254",
+      "sha": "a4946a297d8fce4b95a7a2147db6d7569c6463ae",
+      "state": "OPEN_REVIEW_ONLY",
+      "base": "integration/community-release-20261008",
+      "checks": "All required checks PASS",
+      "scope": "#100 proposal only; user is revising Canvas/MCP scope; do not integrate into changed contract."
+    },
+    {
+      "number": 255,
+      "url": "https://github.com/joshyorko/actions/pull/255",
+      "sha": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "state": "OPEN_DRAFT",
+      "base": "community",
+      "checks": "Hosted checks pending",
+      "scope": "Core API generated source-link repair; local receipt checkpoint4affeb7."
+    },
+    {
+      "number": 256,
+      "url": "https://github.com/joshyorko/actions/pull/256",
+      "sha": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
+      "state": "OPEN_DRAFT",
+      "base": "integration/community-release-20261008",
+      "checks": "Audit PASS; remaining hosted checks pending; native review found generated-module NameError, same-thread follow-up active.",
+      "scope": "#208 packaged Work Items consumer/platform acceptance; no whole-issue or cross-platform pass claimed."
+    },
+    {
+      "number": 257,
+      "url": "https://github.com/joshyorko/actions/pull/257",
+      "sha": "90c37991942aad12b1008bdb95ab8ee95e32d05c",
+      "state": "OPEN_DRAFT",
+      "base": "integration/community-release-20261008",
+      "checks": "Audit PASS; remaining hosted checks pending; four Ruff F811 duplicate definitions under same-thread repair. Initial126 tests passed.",
+      "scope": "Native Runtime distribution/checksum/Homebrew preparation; no publication claim."
     }
   ],
   "architecture_acceptance": {
@@ -12323,20 +12435,19 @@
       "actions_work_items-0.4.4-py3-none-any.whl"
     ],
     "wheel_artifact_retention": "Temporary30-test wheelhouse was removed bypytestretention; no unsupported wheel digest claim. Native and candidateCore outputs remain inworktree.",
-    "publication": "Helper1.0.3 published and byte-verified. Core1.0.2 immutable tag actions-core-1.0.2 pushed from approved community source; normal release workflow in progress, no publication/readback yet. Runtime/native1.0.3 not published.",
+    "publication": "Helper1.0.3 and Core1.0.2 are published and artifact hashes verified. Runtime/native1.0.3 remains unpublished and release_ready=false.",
     "candidate_versions": {
       "actions-http-helper": "1.0.3 published; wheel/sdist registry artifacts verified",
-      "actions-core": "1.0.2 merged to community; no tag/publication",
+      "actions-core": "1.0.2 published and PyPI wheel/sdist verified",
       "actions-runtime": "1.0.3",
       "actions-work-items": "0.4.4 unchanged"
     },
     "publication_order": [
       "Helper1.0.3 published and verified",
-      "Actions Core1.0.2 after credential configuration and explicit admission",
-      "clean registry-resolved compatibility/readback",
-      "Actions Runtime/native1.0.3 after its independent gates"
+      "Core1.0.2 published and verified",
+      "Runtime/native1.0.3 after final exact-candidate and native/browser/security/RCC/consumer gates"
     ],
-    "latest_registry_readback": "Actions HTTP Helper1.0.3 PyPI wheel and sdist match GitHub release-manifest bytes; Core candidate fresh resolver installed published Helper1.0.3 matching wheel SHA. Core itself remains unpublished; Runtime1.0.2/Core1.0.1 registry records remain historical.",
+    "latest_registry_readback": "Helper1.0.3 PyPI wheel/sdist and Core1.0.2 PyPI wheel/sdist verified by exact hashes and source projection. Runtime remains 1.0.2 on PyPI and native release1.0.1; 1.0.3 not published.",
     "Runtime_frozen_linux_023597ab": "sha256:8748caca0e6f6b192e3d03de246f4ada8a452dd2ea56d4e45b2853eebad97ca1",
     "Runtime_Go_linux_023597ab": "sha256:db6509e73cb352f4fad313ad71ac05f2321a0ddcd2b727e7e7c6a0efb97cd99f",
     "Runtime_frozen_linux_119b4f": "sha256:250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3",
@@ -12345,13 +12456,13 @@
     "remaining_native": "Windows strict ownership/browser/history pass all three platforms in PR229 at a8eb7b46, integrated as12b387ec after12 successful checks and1 publication skip. Robot exclusive publication native matrix passes in PR230; root/source/staging identity remains open. No program release admission.",
     "current_integration_native": "PR242 exactsyntheticbf04e85d/final303592ff identicaltree40e9d3d7; all3OSnativePASS, LinuxactualWorkItemsconsumer2PASS anddownloadedreceiptverified.",
     "current_blockers": [
-      "Do not retry or move immutable actions_http-1.0.2; its release failed before upload. Corrected actions_http-1.0.3 is published and byte-verified.",
-      "Core1.0.2 PR248 exact-head candidate passed configured294, installed-wheel checks and all five hosted workflows; merge to community is 011c5482285ea516f39292100c429a905e6e3e36 with tested tree db3ecee9e9c2937a9912780a54bd5a1557562f50. Immutable tag actions-core-1.0.2 was pushed from this source and release workflow37979108120 is in progress; publication/readback is not established.",
-      "Fresh Core candidate installation resolved PyPI Helper1.0.3 from files.pythonhosted.org and matched published wheel SHA 46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9; this is not Core post-publication readback.",
-      "Core availability probe attempt1 reported Core empty; attempt2 PASS reported both Core and Runtime nonempty. Both checks proved presence only, not authentication, scope or upload. PyPI preflight was404; immutable tag actions-core-1.0.2 is now pushed, with release workflow in progress.",
-      "Runtime/native1.0.3 retains applicable native/browser/security/RCC/consumer/registry gates and external artifact readback; workflows and Core proof do not establish Runtime publication.",
-      "RCC trust source d9a08395d14478534490b6f90c2405a32fa869fd: 742 passed/10 skipped and same-provider503 negative PASS, overall warm harness FAIL; full #134 remains incomplete, earlier 422/ENOSPC causes are not retroactively attributed.",
-      "Robot root/source identity, Windows ACL, live tunnel/provider TLS and remaining contracts are open. #100 ADR does not waive #125 for public MCP Apps authoring."
+      "Whole #210 is accepted/closed (owner comment6087641984); Helper1.0.3 and Core1.0.2 are published. Keep each immutable tag/version and recorded byte verification.",
+      "Core1.0.2 run37979108120 verify/publish jobs PASS. PyPI wheel SHA9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80 and sdist SHA99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73 match; 51 non-generated source files match the tag. Cloud artifact ZIP download was blocked by File Service403; independent native manifest inspection is in progress; no result claimed.",
+      "Runtime/native1.0.3 remains unpublished; root candidate3fee279 is an integration branch, no PR/admission yet. Runtime package/native security/browser/RCC/consumer/asset registry gates remain.",
+      "PR253 trust change is integrated at26b019, but #134 warm success/continuity is still FAIL/unproved. The narrow503 negative is PASS and must remain separate.",
+      "PR256 Work Items validation has an active generated-module NameError blocker; PR257 native distribution has four duplicate F811 test definitions under repair. Neither lane establishes complete owning issue or Runtime release acceptance.",
+      "PR254 #100 remains proposal-only/review while user prepares Canvas/MCP revisions; public MCP Apps retains the scoped #125 dependency. Do not integrate the current proposal into a changed issue contract.",
+      "Robot root/source identity, Windows ACL, live tunnel/provider TLS and other owning issue contracts remain open."
     ],
     "helper_admission": {
       "observed_at": "2026-10-09T17:23:07.875978+00:00",
@@ -12425,24 +12536,36 @@
     "rcc_trust_current": {
       "pr": 253,
       "head": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
-      "source": "d9a08395d14478534490b6f90c2405a32fa869fd",
+      "merged_integration": "26b0194590e14656bff92dce3665dccab09837a3",
+      "tree": "227e950994c52e629fe1fcd65effb7421f92aeb5",
+      "hosted": "four required checks PASS",
       "tests": "742 passed, 10 skipped",
-      "negative": "same selected provider 503 fails closed before execution: PASS",
-      "overall": "warm harness FAIL; hosted checks in progress; full #134 incomplete"
+      "negative": "same-provider503 fail-closed PASS",
+      "overall": "warm harness FAIL; issue134 remains incomplete"
     },
     "core_release_current": {
       "tag": "actions-core-1.0.2",
       "tag_object": "53970c0699ec2fcee169484daa2d41f6fec4e6ab",
       "source": "011c5482285ea516f39292100c429a905e6e3e36",
-      "preflight": "PyPI1.0.2 HTTP404; credential attempt2 presence PASS",
       "workflow_run": 37979108120,
-      "state": "IN_PROGRESS; no published artifact/readback claimed"
+      "verify_job": "PASS",
+      "publish_job": "PASS",
+      "pypi_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "pypi_sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
+      "sdist_source_projection": "51 source files match tag; no mismatches",
+      "cloud_artifact_transport": "403 blocked ZIP; independent native manifest inspection is in progress; no result claimed",
+      "receipt": "evidence/core-1.0.2-pypi-verification-20261009.json"
+    },
+    "runtime_candidate_current": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "state": "root-owned integration candidate, local tree clean at snapshot, no PR/admission yet"
     }
   },
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261009-convergence.zip",
   "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
-  "integration_head": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+  "integration_head": "26b0194590e14656bff92dce3665dccab09837a3",
   "additional_compute": {
     "cloud": "Reused bounded Luna lanes plus one evidence-backed Sol review; no uncontrolled recursion or API fallback",
     "devsy": "WAITING FOR HIT THE GAS; pending request preserved without calls",
@@ -12450,11 +12573,18 @@
   },
   "resume_checkpoint": {
     "file": "community-resume-20261009.json",
-    "observed_at": "2026-10-09T16:20:41.748647+00:00",
-    "status": "ACTIVE_ENGINEERING; integration4626; PR238134df and stacked PR2395c3 local combined gates PASS, hosted admission pending; no community merge/release"
+    "observed_at": "2026-10-09T19:39:33Z",
+    "status": "ACTIVE; community011c548; integration26b019; Helper1.0.3/Core1.0.2 published; #210 accepted; PR253 partial #134 integrated; five bounded native workers active; Runtime/native1.0.3 not published.",
+    "current_active_workers": {
+      "101": "Root integration/governance; current Docs checkpoint in progress.",
+      "134": "D upstream-contract investigation and independent native local/provider-free consumer lane active after PR253 partial merge.",
+      "153": "Native auth real-browser origin/session acceptance lane active.",
+      "208": "Work Items PR256 active generated-module NameError follow-up.",
+      "211": "Core1.0.2 published; native distribution PR257 checksum/Homebrew preparation and test-integrity repair active."
+    }
   },
   "checkpoint_status": "ACTIVE integration; PR250 partial foundations merged; no release publication admitted",
-  "checkpoint_observed_at": "2026-10-09T19:20:08Z",
+  "checkpoint_observed_at": "2026-10-09T19:39:33Z",
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
@@ -12465,7 +12595,7 @@
       "COMPLETE": 0
     },
     "whole_contract_complete": 0,
-    "worker_stage_snapshot": "2026-10-09T19:16:47Z"
+    "worker_stage_snapshot": "2026-10-09T19:36:24Z"
   },
   "accepted_issue_closures": [
     {

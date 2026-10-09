@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-10-09",
-  "worker_stage_snapshot": "2026-10-09T19:20:08Z",
+  "worker_stage_snapshot": "2026-10-09T19:39:33Z",
   "scope": "issue-level overlay only; no acceptance ledger/body changes",
   "contract_source": "governance/docs/program/community-program-ledger.json acceptance_contract compared with evidence/acceleration-open-issues.json body",
   "exact_contract_matches": 54,
@@ -45,9 +45,10 @@
   ],
   "current_active_workers": {
     "101": "root integration/governance",
-    "134": "D trust successor PR253 head290e469c; narrow503 PASS, overall warm harness FAIL",
-    "211": "Root Core lane; candidate merged and index compatibility proved; Core unpublished, credential empty",
-    "100": "E; PR254 bounded ADR/contract proposal only; public MCP Apps authoring remains scoped to #125"
+    "134": "D independent local consumer lane after PR253 merge; Sol architecture boundary review",
+    "211": "Core package published; Devsy native-distribution thread01a12211-01b3-7850-b508-bd7959b8210c; PR257 test-integrity/checksum follow-up active",
+    "153": "Devsy native-auth thread01a1220f-944d-7f22-94a4-112dc13be035, active browser/auth lane",
+    "208": "Devsy Work Items consumer thread01a12210-29e9-7fb3-91fc-644065721cb3; PR256 active NameError follow-up"
   },
   "current_review_checkpoints": {
     "91": {
@@ -57,7 +58,7 @@
     },
     "100": {
       "pr": 254,
-      "status": "BOUNDED_PROPOSAL_ONLY; predecessor a4946a independently accepted as proposal; current head review/checks distinct",
+      "status": "OPEN_REVIEW_ONLY; user is revising Canvas/MCP scope; current PR254 proposal must not be integrated into revised scope",
       "scoped_dependency": 125
     },
     "129": {
@@ -73,14 +74,34 @@
     "210": {
       "pr": 249,
       "status": "ACCEPTED_AND_CLOSED",
-      "comment_id": 6087641984
+      "comment_id": 6087641984,
+      "evidence": "evidence/release-contract-audit-20261009.md"
+    },
+    "208": {
+      "pr": 256,
+      "head": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
+      "status": "OPEN; PR256 native review found generated-module NameError; same worker follow-up active"
+    },
+    "153": {
+      "pr": null,
+      "status": "ACTIVE native real-browser origin/session acceptance lane"
+    },
+    "134": {
+      "pr": 253,
+      "status": "INTEGRATED_PARTIAL; PR253 four checks pass; scoped503 negative PASS; warm harness FAIL; separate native local consumer and upstream-contract lanes active"
+    },
+    "211": {
+      "pr": 257,
+      "status": "ACTIVE; Core1.0.2 is published; PR257 checksum/distribution gate has active four-F811 repair",
+      "core_pypi_verified": true,
+      "workflow_manifest": "Cloud ZIP download403; independent native manifest check pending"
     }
   },
   "counts": {
     "BLOCKED": 30,
-    "INTEGRATED": 10,
-    "ACTIVE": 4,
+    "INTEGRATED": 9,
     "REVIEW": 9,
+    "ACTIVE": 5,
     "COMPLETE": 1
   },
   "complete_verified_count": 1,
@@ -346,13 +367,13 @@
       "issue": 100,
       "title": "Define Canvas authoring contracts in actions-core without package proliferation",
       "retained_state": "NOT_STARTED",
-      "classification": "ACTIVE",
+      "classification": "REVIEW",
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": null,
       "unresolved_open_issue_dependencies": [],
-      "reason": "PR254 has a bounded authoring-contract/ADR proposal only; predecessor a4946a received independent proposal-only acceptance. Current PR head159b17a remains a separate review/checkpoint. No Canvas implementation or whole issue acceptance.",
-      "next_bounded_action": "Review the current bounded proposal against the preserved #100 contract. Keep public MCP Apps authoring scoped to its #125 dependency; no implementation until that dependency and separate authorization are satisfied.",
+      "reason": "PR254 bounded #100 authoring ADR remains an open review proposal; user is preparing Canvas/MCP issue revisions, so do not integrate this proposal into a changed contract. #125 remains the scoped public MCP Apps dependency.",
+      "next_bounded_action": "Wait for revised Canvas/MCP issue scope, then reconcile or supersede the proposal without starting implementation.",
       "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
       "scoped_dependencies": [
         {
@@ -511,8 +532,8 @@
       "foundation_pr": 197,
       "checkpoint_pr": 247,
       "unresolved_open_issue_dependencies": [],
-      "reason": "PR253 current head290e469c / source d9a08395 has 742 passed/10 skipped and same-provider503 fail-closed negative PASS; overall warm harness remains FAIL and hosted checks are in progress. The selected-provider provenance continuity gap remains.",
-      "next_bounded_action": "Preserve the warm-harness FAIL and narrow503 PASS separately; solve the provenance-carrier condition with exact evidence. Do not attribute prior cold-publish422 retrospectively or mark full #134 complete.",
+      "reason": "PR253 trust fix at290e469c is merged to integration26b019 (tree227e950) with four hosted checks PASS. Runtime suite742/10skip and same-provider503 negative PASS; overall warm harness FAIL. Independent local/provider-free actual consumer acceptance is now active.",
+      "next_bounded_action": "Complete bounded actual local consumer proof while preserving warm FAIL, provider-503 negative, source/wheel/frozen cells, native limits, and full issue contract.",
       "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d"
     },
     {
@@ -784,13 +805,13 @@
       "issue": 153,
       "title": "[security] Constrain browser origins and credentialed CORS with explicit deployment policy",
       "retained_state": "IN_PROGRESS",
-      "classification": "REVIEW",
+      "classification": "ACTIVE",
       "partial_foundation": true,
       "foundation_pr": 201,
       "checkpoint_pr": 216,
       "unresolved_open_issue_dependencies": [],
-      "reason": "PR #216 remains assigned but has no current implementation worker in this snapshot; native acceptance and review remain.",
-      "next_bounded_action": "Prove final native cookie/bearer exact-origin HTTP/WebSocket/reconnect/revocation matrix on supported platforms; protected OAuth GET cookie access intentionally denied pending CSRF-safe endpoint design.",
+      "reason": "Native auth lane is actively implementing #153 real-browser origin/session acceptance; root reports pre-19:27Z head5800c4bf plus an untracked test. Later remote tree state has not been independently refreshed.",
+      "next_bounded_action": "Finish the focused real-browser matrix and report current exact branch/HEAD/dirty receipt; do not infer whole #153 completion.",
       "acceptance_contract_sha256": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a"
     },
     {
@@ -868,13 +889,13 @@
       "issue": 208,
       "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
       "retained_state": "IMPLEMENTED_UNVERIFIED",
-      "classification": "INTEGRATED",
+      "classification": "ACTIVE",
       "partial_foundation": true,
       "foundation_pr": 242,
       "checkpoint_pr": 242,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Linux frozen and Go actual consumer tests pass at syntheticbf04e85d with downloaded receipt digests verified; integrated303592ff. Full issue remains open.",
-      "next_bounded_action": "Extend actual consumer and product error-state proof only where required; Linux consumer receipt is not all-platform execution or whole-issue acceptance.",
+      "reason": "PR256 at5bce8cd is pushed with native CI active. Independent review found a generated-module NameError blocking the expanded test gate; the same Work Items thread is actively fixing it.",
+      "next_bounded_action": "Resolve generated-module NameError, then advance the packaged Work Items browser/platform matrix; retain Linux consumer proof and failures separately.",
       "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c"
     },
     {
@@ -899,8 +920,8 @@
       "foundation_pr": null,
       "checkpoint_pr": 249,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Root accepted and closed whole #210 after retained-contract audit; owner comment6087641984. Helper1.0.3 credential delivery and eligible published workflow are proven. Original captured state and acceptance body remain unchanged in the ledger.",
-      "next_bounded_action": "No remaining #210 work. Preserve failed immutable1.0.2 evidence; dependent Core/Runtime release work remains governed by its own contracts.",
+      "reason": "Root accepted and closed whole #210 after retained-contract audit; owner comment6087641984. Helper1.0.3 published successfully and artifacts were verified. Original issue body/comments and captured raw state remain preserved.",
+      "next_bounded_action": "No remaining #210 work; preserve failed immutable1.0.2 evidence.",
       "acceptance_contract_sha256": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d",
       "current_acceptance": {
         "status": "ACCEPTED_AND_CLOSED",
@@ -917,8 +938,8 @@
       "foundation_pr": null,
       "checkpoint_pr": 248,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Core1.0.2 PR248 exact head71f55ddd passed configured294 and all five hosted workflows, was independently reviewed, and merged to community011c548 (tree db3ecee9). Fresh candidate install resolved published Helper1.0.3 from PyPI matching its verified wheel SHA. Core availability attempt2 passed presence after attempt1 was empty; PyPI preflight returned404; immutable tag actions-core-1.0.2 is pushed from community011c548 and release workflow37979108120 is in progress.",
-      "next_bounded_action": "Preserve both credential-presence attempts; wait for exact immutable Actions Release workflow result and verify published Core registry artifacts before dependent Runtime/native gates.",
+      "reason": "Core1.0.2 is published: immutable tag actions-core-1.0.2 from community011c548, run37979108120 verify/publish PASS, PyPI wheel/sdist and 51-file source projection verified. Cloud workflow ZIP download403; independent native manifest inspection remains in progress with no result claimed.",
+      "next_bounded_action": "Complete #211 native distribution/checksum and Homebrew handoff gates through PR257, resolve the active four-F811 test-integrity follow-up, then continue Runtime/native1.0.3 acceptance separately.",
       "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4"
     },
     {
