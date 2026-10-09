@@ -15,6 +15,18 @@ The Core clean-wheel verifier compares the installed version with the input whee
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
 
+The Actions Core tag release workflow admits exactly the version-matched
+`actions_core` universal wheel and source archive. Its Linux verify job rejects
+extra entries and symlinked artifacts, records SHA-256 digests, and uploads the
+two packages with that manifest. The publish job checks the downloaded
+inventory and verifies both digests before invoking Poetry with the configured
+Core token; Twine checks only the wheel and source archive, not the manifest.
+Core's package tests execute these inventory and copy-verification shell steps
+against valid, extra, wrong-tag, symlinked, and modified artifacts. This
+prepublication gate binds the uploaded bytes; it does not prove registry
+availability, a successful PyPI publication, or downstream consumers of the
+published distribution.
+
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
 - `action_server/`: CLI, FastAPI service, frontend, build and bundled RCC.
