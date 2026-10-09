@@ -3,6 +3,7 @@ import os
 import ssl
 import sys
 import typing
+from contextvars import ContextVar
 from dataclasses import dataclass
 from enum import Enum, auto
 from functools import cached_property, lru_cache
@@ -19,7 +20,7 @@ _DEFAULT_LOGGER = logging.getLogger(__name__)
 
 _TYPE_BODY = typing.Union[bytes, typing.IO[typing.Any], typing.Iterable[bytes], str]
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 
 class _SSLContextFactory:
@@ -74,6 +75,9 @@ class _NoProxyManager(urllib3.ProxyManager):
     def __init__(self, *, proxy_url: str, ssl_context: ssl.SSLContext, no_proxy: str):
         super().__init__(proxy_url=proxy_url, ssl_context=ssl_context)
         self._direct_pool = _RedirectRoutingPool(self, ssl_context)
+        self._caller_host: ContextVar[bool | None] = ContextVar(
+            "actions_http_caller_host", default=None
+        )
         # urllib's authority matching expects brackets around IPv6 literals.
         self._no_proxy = ",".join(
             f"[{entry}]"
@@ -84,6 +88,27 @@ class _NoProxyManager(urllib3.ProxyManager):
         )
 
     def urlopen(
+        self, method: str, url: str, *args: typing.Any, **kw: typing.Any
+    ) -> urllib3.response.BaseHTTPResponse:
+        # Track caller intent for the whole recursive redirect operation. The
+        # context is isolated between threads/tasks and reset even on failure.
+        headers = kw.get("headers") or self.headers
+        context_token = None
+        if self._caller_host.get() is None:
+            context_token = self._caller_host.set(
+                any(name.lower() == "host" for name in headers)
+            )
+        try:
+            if not self._caller_host.get():
+                filtered_headers = urllib3.HTTPHeaderDict(headers)
+                filtered_headers.discard("Host")
+                kw["headers"] = filtered_headers
+            return self._route_urlopen(method, url, *args, **kw)
+        finally:
+            if context_token is not None:
+                self._caller_host.reset(context_token)
+
+    def _route_urlopen(
         self, method: str, url: str, *args: typing.Any, **kw: typing.Any
     ) -> urllib3.response.BaseHTTPResponse:
         parsed = urlsplit(url)
