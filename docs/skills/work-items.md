@@ -316,9 +316,15 @@ check alone is not native Work Items acceptance.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
-descendants inherit that ownership; closing the Job terminates descendants even
-after their original leader exits. Job creation or assignment failure fails the
-gate. The workflow runs `python -m unittest discover -s scripts
+descendants inherit that ownership; closing the Job requests descendant termination
+even after their original leader exits. Successful cleanup additionally requires
+native proof that held descendant handles are already signaled at ownership-context
+return; the active-process accounting barrier alone has failed that assertion even
+with exact Job membership confirmed. The harness now captures and validates member
+handles before termination, waits them under one shared deadline, and rejects
+incomplete capture or cumulative process-count changes. This does not establish
+completion of processes that exited before capture. Job creation or assignment
+failure fails the gate. The workflow runs `python -m unittest discover -s scripts
 -p test_native_process_ownership.py -v`; the descendant lifetime test requires
 actual Windows and is skipped elsewhere. Linux gate tests do not establish
 Windows Job behavior. POSIX cleanup retains process-group ownership.
