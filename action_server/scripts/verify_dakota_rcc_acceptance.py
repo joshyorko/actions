@@ -1218,7 +1218,12 @@ dependencies:
         import requests
 
         from actions.server._models import ActionPackage, Run, RunStatus, load_db
-        from actions.server._rcc_runtime_adapter import read_receipt
+        from actions.server._rcc_runtime_adapter import (
+            RccRuntimeDescriptor,
+            build_exec_command,
+            new_receipt_path,
+            read_receipt,
+        )
         from actions.server._selftest import ActionServerProcess
 
         provider = None
@@ -1387,6 +1392,8 @@ dependencies:
         local_acquire_requests = []
         lifecycle_requests = []
         warm_provider_requests = []
+        provider_backed_exec = None
+        provider_backed_exec_requests = []
         try:
             offline_env = dict(runtime_env)
             offline_env["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_probe.url
@@ -1398,6 +1405,82 @@ dependencies:
                     "ACTIONS_RUNTIME_RCC_BINARY": rcc_binary,
                     "ROBOCORP_HOME": runtime_env["ROBOCORP_HOME"],
                 },
+            )
+            descriptor = RccRuntimeDescriptor.from_dict({"runtime": runtime})
+            if descriptor.provider_reference != provider_probe.url:
+                raise AssertionError(
+                    "persisted runtime lost its selected provider trust context"
+                )
+            initial_receipt_bytes = initial_receipt_path.read_bytes()
+            child_marker = root / "provider-unavailable-child-ran"
+            child_receipt_path = new_receipt_path(datadir)
+            child_command = build_exec_command(
+                Path(rcc_binary),
+                descriptor,
+                [
+                    "python",
+                    "-c",
+                    "from pathlib import Path; Path("
+                    + repr(str(child_marker))
+                    + ").write_text('executed')",
+                ],
+                receipt_file=child_receipt_path,
+            )
+            # The initial Action already proved successful acquire and saved its
+            # terminal receipt. The same configured provider now rejects trust
+            # attachment requests before RCC is allowed to start this child.
+            provider_probe.reset_requests()
+            child_result = run_owned_process(
+                child_command,
+                timeout_seconds=deadline.remaining(cap=30),
+                env=rcc_env,
+            )
+            provider_backed_exec_requests = provider_probe.reset_requests()
+            child_receipt = None
+            if child_receipt_path.is_file():
+                try:
+                    child_receipt = json.loads(
+                        child_receipt_path.read_text(encoding="utf-8")
+                    )
+                except (OSError, json.JSONDecodeError):
+                    child_receipt = None
+            successful_child_receipt = (
+                isinstance(child_receipt, dict)
+                and child_receipt.get("status") == "completed"
+                and type(child_receipt.get("exitCode")) is int  # noqa: E721 - reject bool
+                and child_receipt.get("exitCode") == 0
+            )
+            expected_provenance_request = f"/{digest}/provenance.json"
+            provider_arg_matches = (
+                "--provider" in child_command
+                and child_command[child_command.index("--provider") + 1]
+                == descriptor.provider_reference
+            )
+            provider_backed_exec = {
+                "exit_code": child_result.returncode,
+                "provider_reference_matches_persisted": (
+                    descriptor.provider_reference == provider_probe.url
+                ),
+                "provider_argument_matches_descriptor": provider_arg_matches,
+                "provider_requests": provider_backed_exec_requests,
+                "provenance_503_observed": any(
+                    event.get("path") == expected_provenance_request
+                    and event.get("status") == 503
+                    for event in provider_backed_exec_requests
+                ),
+                "child_side_effect_observed": child_marker.exists(),
+                "successful_child_receipt": successful_child_receipt,
+                "initial_receipt_unchanged": (
+                    initial_receipt_path.read_bytes() == initial_receipt_bytes
+                ),
+            }
+            provider_backed_exec["passed"] = (
+                child_result.returncode != 0
+                and provider_arg_matches
+                and provider_backed_exec["provenance_503_observed"] is True
+                and provider_backed_exec["child_side_effect_observed"] is False
+                and successful_child_receipt is False
+                and provider_backed_exec["initial_receipt_unchanged"] is True
             )
             inspect = run_owned_process(
                 [
@@ -1556,6 +1639,10 @@ dependencies:
                 "artifact_verification": "PASS"
                 if rcc_receipt.get("verification", {}).get("valid") is True
                 else "FAIL",
+                "provider_backed_exec_fail_closed": "PASS"
+                if isinstance(provider_backed_exec, dict)
+                and provider_backed_exec.get("passed") is True
+                else "FAIL",
                 "wrapper_exit": classify_wrapper_exit(rcc_receipt),
                 "process_cleanup": "PASS"
                 if server_reaped and provider_reaped and initial_receipts
@@ -1610,6 +1697,7 @@ dependencies:
                     "lifecycle_inspect_request_events": lifecycle_requests,
                     "provider_acquire": provider_acquire_diagnostic,
                     "provider_acquire_request_events": provider_acquire_requests,
+                    "provider_backed_exec": provider_backed_exec,
                     "provider_free_acquire": local_acquire_diagnostic,
                     "provider_free_acquire_request_events": local_acquire_requests,
                     "warm_runtime_request_events": warm_provider_requests,
@@ -1678,6 +1766,10 @@ dependencies:
             "artifact_verification": "PASS"
             if rcc_receipt["verification"].get("valid") is True
             else "FAIL",
+            "provider_backed_exec_fail_closed": "PASS"
+            if isinstance(provider_backed_exec, dict)
+            and provider_backed_exec.get("passed") is True
+            else "FAIL",
             "wrapper_exit": classify_wrapper_exit(rcc_receipt),
             "process_cleanup": "PASS"
             if server_reaped and provider_reaped and receipts
@@ -1734,6 +1826,7 @@ dependencies:
                 "lifecycle_inspect_request_events": lifecycle_requests,
                 "provider_acquire": provider_acquire_diagnostic,
                 "provider_acquire_request_events": provider_acquire_requests,
+                "provider_backed_exec": provider_backed_exec,
                 "provider_free_acquire": local_acquire_diagnostic,
                 "provider_free_acquire_request_events": local_acquire_requests,
                 "warm_runtime_request_events": warm_provider_requests,

@@ -100,6 +100,97 @@ def test_worker_command_has_inherit_streams_and_receipt(tmp_path):
     ]
 
 
+def test_provider_trust_reference_is_bound_to_exec_and_never_redacted(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        build_exec_command,
+    )
+
+    provider = "http://127.0.0.1:8134"
+    descriptor = RccRuntimeDescriptor(
+        artifact_digest="sha256:" + "d" * 64,
+        provider_reference=provider,
+    )
+    serialized = descriptor.to_json()
+    assert provider in serialized
+    command = build_exec_command(
+        Path("/opt/rcc"),
+        descriptor,
+        ["python", "-m", "preload_actions_server_main"],
+        receipt_file=None,
+    )
+    assert command[command.index("--provider") + 1] == provider
+
+
+@pytest.mark.parametrize("provider", ["local", "dakota-cache", "http://cache:8134"])
+def test_supported_provider_reference_forms_are_preserved(tmp_path, provider):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        build_exec_command,
+    )
+
+    descriptor = RccRuntimeDescriptor(
+        artifact_digest="sha256:" + "d" * 64,
+        provider_reference=provider,
+    )
+    assert descriptor.provider_reference == provider
+    command = build_exec_command(
+        Path("/opt/rcc"), descriptor, ["python"], receipt_file=None
+    )
+    assert command[command.index("--provider") + 1] == provider
+
+
+def test_legacy_descriptor_without_trust_binding_cannot_exec():
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        RccRuntimeError,
+        build_exec_command,
+    )
+
+    legacy = {
+        "runtime": {
+            "artifact_digest": "sha256:" + "d" * 64,
+            "kind": "rcc",
+            "contract_version": "rcc-runtime/v1",
+        }
+    }
+    descriptor = RccRuntimeDescriptor.from_dict(legacy)
+    with pytest.raises(RccRuntimeError, match="trust context"):
+        build_exec_command(Path("/opt/rcc"), descriptor, ["python"], receipt_file=None)
+
+
+@pytest.mark.parametrize(
+    "provider",
+    [
+        "http://user:password@127.0.0.1:8134",
+        "http://127.0.0.1:8134?token=secret",
+        "http://127.0.0.1:8134#secret",
+        "http://127.0.0.1:8134\n--other-arg",
+        "//user:secret@provider",
+        "provider?token=secret",
+        "http:provider?token=secret",
+        "invalid profile name",
+    ],
+)
+def test_provider_reference_with_secret_or_control_data_is_rejected_before_rcc(
+    tmp_path, provider
+):
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, prepare_runtime
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    calls = []
+    with pytest.raises(RccRuntimeError, match="provider") as error:
+        prepare_runtime(
+            package_yaml,
+            Path("/opt/rcc"),
+            provider=provider,
+            runner=lambda *args: calls.append(args) or (1, "", "should not run"),
+        )
+    assert "secret" not in str(error.value)
+    assert calls == []
+
+
 def test_failed_publish_is_phase_error_without_fallback(tmp_path):
     from actions.server._rcc_runtime_adapter import RccRuntimeError, publish_artifact
 
@@ -155,12 +246,14 @@ def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_pa
         package_yaml,
         Path("/opt/rcc"),
         source_generation="source-1",
+        provider="http://127.0.0.1:8134",
         runner=runner,
     )
     second = prepare_runtime(
         package_yaml,
         Path("/opt/rcc"),
         source_generation="source-2",
+        provider="http://127.0.0.1:8134",
         previous_descriptor=first,
         runner=runner,
     )
@@ -168,6 +261,7 @@ def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_pa
     assert [call[2] for call in calls] == ["publish", "acquire"]
     assert first.artifact_digest == second.artifact_digest == digest
     assert second.source_generation == "source-2"
+    assert second.provider_reference == "http://127.0.0.1:8134"
 
 
 def test_cached_artifact_is_revalidated_and_rebuilt_when_materialization_disappears(
@@ -324,6 +418,52 @@ def test_restart_reacquires_existing_artifact_without_republishing(tmp_path):
     )
 
     assert [call[2] for call in calls] == ["acquire"]
+
+
+def test_legacy_descriptor_is_reprepared_with_current_provider(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        environment_spec_fingerprint,
+        prepare_runtime,
+    )
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    digest = "sha256:" + "c" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    legacy = RccRuntimeDescriptor.from_dict(
+        {
+            "runtime": {
+                "artifact_digest": digest,
+                "environment_fingerprint": environment_spec_fingerprint(package_yaml),
+                "kind": "rcc",
+                "contract_version": "rcc-runtime/v1",
+            }
+        }
+    )
+    assert legacy.provider_context_bound is False
+    prepared = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        provider="http://127.0.0.1:8134",
+        previous_descriptor=legacy,
+        runner=runner,
+    )
+
+    assert [call[2] for call in calls] == ["acquire"]
+    assert "--provider" in calls[0]
+    assert calls[0][calls[0].index("--provider") + 1] == "http://127.0.0.1:8134"
+    assert prepared.provider_reference == "http://127.0.0.1:8134"
+    assert prepared.provider_context_bound is True
 
 
 def test_missing_persisted_artifact_republishes_and_acquires_new_identity(tmp_path):

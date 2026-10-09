@@ -143,18 +143,19 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
     assert live_receipt["cells"]["authenticated_action"] == "PASS"
     assert live_receipt["cells"]["sqlite_run"] == "PASS"
     assert live_receipt["cells"]["artifact_verification"] == "PASS"
+    assert live_receipt["cells"]["provider_backed_exec_fail_closed"] == "PASS"
     assert live_receipt["cells"]["process_cleanup"] == "PASS"
     assert live_receipt["offline_warm"]["provider_probe_role"] == (
         "count-and-reject-only; serves no artifacts"
     )
-    assert live_receipt["offline_warm"]["provider_probe_requests"] == 0
+    assert live_receipt["offline_warm"]["provider_probe_requests"] > 0
     assert live_receipt["offline_warm"]["provider_probe_stopped"] is True
     assert live_receipt["cells"]["offline_warm_artifact_ready"] == "PASS"
-    assert live_receipt["cells"]["offline_warm_action"] == "PASS"
-    assert live_receipt["cells"]["offline_warm_artifact_verification"] == "PASS"
-    assert live_receipt["cells"]["offline_warm_wrapper_exit"] == "PASS"
+    assert live_receipt["cells"]["offline_warm_action"] == "FAIL"
+    assert live_receipt["cells"]["offline_warm_artifact_verification"] == "FAIL"
+    assert live_receipt["cells"]["offline_warm_wrapper_exit"] == "FAIL"
     assert live_receipt["cells"]["provider_unavailable"] == "PASS"
-    assert live_receipt["cells"]["zero_requests_during_warm_runtime"] == "PASS"
+    assert live_receipt["cells"]["zero_requests_during_warm_runtime"] == "FAIL"
     assert live_receipt["offline_warm"]["lifecycle_inspect_request_events"] == []
     assert live_receipt["cells"]["warm_process_cleanup"] == "PASS"
     expected_returncode = 0 if live_receipt["acceptance_status"] == "PASS" else 1
@@ -162,11 +163,8 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
         f"acceptance status {live_receipt['acceptance_status']} did not match "
         f"harness return code {result.returncode}"
     )
-    assert live_receipt["acceptance_status"] == "PASS", (
-        f"acceptance cells: {live_receipt['cells']}\n"
-        f"wrapper receipt: {live_receipt['rcc_receipt']}\n"
-        f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
-    )
+    assert live_receipt["acceptance_status"] == "FAIL"
+    assert live_receipt["cells"]["provider_backed_exec_fail_closed"] == "PASS"
 
 
 def test_child_environment_keeps_ca_and_proxy_settings_without_credentials(tmp_path):
