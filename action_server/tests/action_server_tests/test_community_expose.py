@@ -782,6 +782,62 @@ def test_legacy_expose_refuses_bore_even_when_selected(monkeypatch, caplog):
     assert not manager.is_active
 
 
+def test_failed_authenticated_tunnel_probe_stops_owned_manager_without_logging_key(
+    monkeypatch, caplog
+):
+    from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
+
+    class Manager:
+        def __init__(self, **_kwargs):
+            self.stopped = False
+            self.stop_callbacks = []
+
+        async def start(self, _port):
+            return SimpleNamespace(
+                public_url="https://edge.example.test",
+                provider=SimpleNamespace(value="synthetic"),
+            )
+
+        async def stop(self):
+            self.stopped = True
+            for callback in self.stop_callbacks:
+                callback()
+
+        def add_stop_callback(self, callback):
+            self.stop_callbacks.append(callback)
+
+    manager = Manager()
+    monkeypatch.setattr(
+        "actions.server._community_expose.TunnelManager", lambda **_: manager
+    )
+
+    async def fail_probe(*_args):
+        raise RuntimeError("synthetic-api-key")
+
+    monkeypatch.setattr("actions.server._server._verify_public_tunnel", fail_probe)
+    app = SimpleNamespace(mtime_uuid="synthetic-runtime-id")
+    routes = SimpleNamespace(mcp_server_setup_helper=McpServerSetupHelper())
+    with caplog.at_level("INFO"):
+        result = asyncio.run(
+            _start_community_expose_impl(
+                8080,
+                SimpleNamespace(expose_provider="auto"),
+                "synthetic-api-key",
+                app=app,
+                action_routes=routes,
+            )
+        )
+    assert result is manager
+    assert manager.stopped
+    assert (
+        "edge.example.test"
+        not in routes.mcp_server_setup_helper.transport_security.allowed_hosts
+    )
+    assert "synthetic-api-key" not in caplog.text
+    assert "Public URL" not in caplog.text
+    assert "Failed to start tunnel (RuntimeError)." in caplog.text
+
+
 def test_community_expose_lifespan_awaits_manager_before_child_cleanup(monkeypatch):
     events = []
 

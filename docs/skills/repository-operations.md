@@ -871,6 +871,20 @@ and child cleanup; manager-stop failures are logged and isolated so they do
 not replace the body exception or skip later cleanup. Failed child enumeration
 logs and treats the child set as empty.
 
+For authenticated legacy `action-server start --expose`, the public URL is logged
+only after a public `/config` response reports authentication enabled and the
+same `mtime_uuid` as the in-memory Runtime, an unauthenticated MCP initialize is
+rejected with 401/403, and the MCP SDK client validates an authenticated
+`initialize` response. No action call is made. The MCP SDK enables DNS-rebinding
+protection with loopback-only host/origin allowlists by default; its live
+`StreamableHTTP` app must receive the same settings object that owns the
+temporary, exact HTTPS tunnel host and origin. The scoped entries are reference
+counted and removed after verification failure or the owned manager stops;
+existing loopback or pre-existing entries remain. This does not mark the
+separate persisted `action-server expose start/status` lifecycle ready. Local
+ASGI tests prove SDK behavior and cleanup only; real provider/TLS exposure and
+native CI remain separate gates.
+
 Cloudflare quick-tunnel readers use nonblocking pipe descriptors with bounded
 4096-byte reads, a 64-entry startup queue, and a separate 512-byte overlap tail
 per stream. Python 3.12 adds Windows pipe support to `os.set_blocking`; keep the

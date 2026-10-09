@@ -28,6 +28,7 @@ import sys
 import threading
 import time
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -859,11 +860,16 @@ class TunnelManager:
     def __init__(self, preferred_provider: TunnelProvider = TunnelProvider.AUTO):
         self.preferred_provider = preferred_provider
         self.active_tunnel: Optional[TunnelInfo] = None
+        self._stop_callbacks: list[Callable[[], None]] = []
         self._providers = [
             LocalhostRunProvider(),
             BoreProvider(),
             CloudflareProvider(),
         ]
+
+    def add_stop_callback(self, callback: Callable[[], None]) -> None:
+        """Register idempotent cleanup for resources scoped to this manager."""
+        self._stop_callbacks.append(callback)
 
     def get_available_providers(self) -> list[BaseTunnelProvider]:
         """Return installed providers using passive local checks only."""
@@ -953,11 +959,16 @@ class TunnelManager:
 
     async def stop(self) -> None:
         """Stop the active tunnel."""
-        if self.active_tunnel:
-            provider = self._get_provider(self.active_tunnel.provider)
-            if provider:
-                await provider.stop(self.active_tunnel)
-            self.active_tunnel = None
+        try:
+            if self.active_tunnel:
+                provider = self._get_provider(self.active_tunnel.provider)
+                if provider:
+                    await provider.stop(self.active_tunnel)
+                self.active_tunnel = None
+        finally:
+            callbacks, self._stop_callbacks = self._stop_callbacks, []
+            for callback in callbacks:
+                callback()
 
     @property
     def public_url(self) -> Optional[str]:
