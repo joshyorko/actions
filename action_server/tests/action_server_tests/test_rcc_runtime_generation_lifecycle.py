@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import sqlite3
+import stat
 import subprocess
 import sys
 import time
@@ -135,6 +136,100 @@ def generation_probe() -> str:
 '''
 
 
+def _runtime_test_environment(
+    tmp_path: Path, source_root: Path
+) -> tuple[dict[str, str], str, str, Path, str, Path]:
+    real_rcc = Path(os.environ["ACTIONS_RUNTIME_REAL_RCC_BINARY"]).resolve()
+    real_rcc_sha = hashlib.sha256(real_rcc.read_bytes()).hexdigest()
+    assert real_rcc_sha == RCC_SHA256
+    version = subprocess.run(
+        [str(real_rcc), "--version"], capture_output=True, text=True, check=True
+    ).stdout.strip()
+    assert version == RCC_VERSION
+
+    trace_path = tmp_path / "rcc-calls.jsonl"
+    wrapper = tmp_path / "rcc-instrumented"
+    assert not trace_path.exists()
+    assert not wrapper.exists()
+    wrapper.write_text(
+        f"#!{sys.executable}\n"
+        "import json, os, sys\n"
+        "with open(os.environ['ACTIONS_RUNTIME_RCC_TRACE'], 'a', encoding='utf-8') as stream:\n"
+        "    stream.write(json.dumps({'pid': os.getpid(), 'args': sys.argv[1:]}) + '\\n')\n"
+        "real = os.environ['ACTIONS_RUNTIME_RCC_REAL_BINARY']\n"
+        "os.execv(real, [real, *sys.argv[1:]])\n"
+    )
+    wrapper.chmod(0o700)
+
+    rcc_home = Path(
+        os.environ.get("ACTIONS_RUNTIME_LOCAL_RCC_HOME", str(tmp_path / "rcc-home"))
+    ).resolve()
+    rcc_home.mkdir(parents=True, exist_ok=True)
+    trust_carrier_dir = Path(
+        os.environ.get(
+            "ACTIONS_RUNTIME_LOCAL_TRUST_CARRIER",
+            str(tmp_path / "rcc-trust-carrier"),
+        )
+    ).resolve()
+    if not trust_carrier_dir.exists():
+        trust_carrier_dir.mkdir(mode=0o700, parents=True)
+    info = trust_carrier_dir.lstat()
+    assert not stat.S_ISLNK(info.st_mode)
+    assert stat.S_ISDIR(info.st_mode)
+    assert info.st_uid == os.geteuid()
+    assert stat.S_IMODE(info.st_mode) & 0o022 == 0
+    trust_carrier_identity = "sha256:" + hashlib.sha256(
+        b"actions-rcc-trust-carrier-v1\0"
+        + os.fsencode(str(trust_carrier_dir.resolve(strict=True)))
+    ).hexdigest()
+
+    runtime_env = os.environ.copy()
+    source_pythonpath = str(source_root / "src")
+    other_pythonpath = runtime_env.get("PYTHONPATH", "")
+    runtime_env.update(
+        {
+            "ACTIONS_RUNTIME_SOURCE_ROOT": str(source_root),
+            "ACTIONS_RUNTIME_RCC_BINARY": str(wrapper),
+            "ACTIONS_RUNTIME_RCC_REAL_BINARY": str(real_rcc),
+            "ACTIONS_RUNTIME_RCC_TRACE": str(trace_path),
+            "ACTIONS_RUNTIME_RCC_PROVIDER": "local",
+            "ACTIONS_RUNTIME_RCC_TRUST_CARRIER": str(trust_carrier_dir),
+            "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
+            "ACTIONS_RUNTIME_RCC_TIMEOUT": "120",
+            "PYTHONPATH": os.pathsep.join(
+                [source_pythonpath, other_pythonpath]
+                if other_pythonpath
+                else [source_pythonpath]
+            ),
+            "ROBOCORP_HOME": str(rcc_home),
+            "S4_ACTION_SERVER_RCC_CONFIG_LOCATION": str(
+                tmp_path / "rcc-config" / "rcc.yaml"
+            ),
+        }
+    )
+    source_probe = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import actions.server._rcc_runtime_adapter as m; print(m.__file__)",
+        ],
+        env=runtime_env,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    source_module = Path(source_probe).resolve()
+    assert source_root in source_module.parents, source_probe
+    return (
+        runtime_env,
+        real_rcc_sha,
+        version,
+        trace_path,
+        trust_carrier_identity,
+        source_module,
+    )
+
+
 @pytest.mark.integration_test
 @pytest.mark.real_rcc
 def test_real_rcc_source_only_reload_drains_pinned_generation(
@@ -168,69 +263,14 @@ def test_real_rcc_source_only_reload_drains_pinned_generation(
     assert len(source_sha) == 40 and all(char in "0123456789abcdef" for char in source_sha)
     assert (source_root / "src/actions/server/_rcc_runtime_adapter.py").is_file()
 
-    real_rcc = Path(os.environ["ACTIONS_RUNTIME_REAL_RCC_BINARY"]).resolve()
-    real_rcc_sha = hashlib.sha256(real_rcc.read_bytes()).hexdigest()
-    assert real_rcc_sha == RCC_SHA256
-    version = subprocess.run(
-        [str(real_rcc), "--version"], capture_output=True, text=True, check=True
-    ).stdout.strip()
-    assert version == RCC_VERSION
-
-    trace_path = tmp_path / "rcc-calls.jsonl"
-    wrapper = tmp_path / "rcc-instrumented"
-    wrapper.write_text(
-        f"#!{sys.executable}\n"
-        "import json, os, sys\n"
-        "with open(os.environ['ACTIONS_RUNTIME_RCC_TRACE'], 'a', encoding='utf-8') as stream:\n"
-        "    stream.write(json.dumps({'pid': os.getpid(), 'args': sys.argv[1:]}) + '\\n')\n"
-        "real = os.environ['ACTIONS_RUNTIME_RCC_REAL_BINARY']\n"
-        "os.execv(real, [real, *sys.argv[1:]])\n"
-    )
-    wrapper.chmod(0o700)
-
-    runtime_env = os.environ.copy()
-    source_pythonpath = str(source_root / "src")
-    other_pythonpath = runtime_env.get("PYTHONPATH", "")
-    trust_carrier_dir = tmp_path / "rcc-trust-carrier"
-    trust_carrier_dir.mkdir(mode=0o700)
-    os.chmod(trust_carrier_dir, 0o700)
-    trust_carrier_path = trust_carrier_dir.resolve(strict=True)
-    trust_carrier_identity = "sha256:" + hashlib.sha256(
-        b"actions-rcc-trust-carrier-v1\0" + os.fsencode(str(trust_carrier_path))
-    ).hexdigest()
-    runtime_env.update(
-        {
-            "ACTIONS_RUNTIME_SOURCE_ROOT": str(source_root),
-            "ACTIONS_RUNTIME_RCC_BINARY": str(wrapper),
-            "ACTIONS_RUNTIME_RCC_REAL_BINARY": str(real_rcc),
-            "ACTIONS_RUNTIME_RCC_TRACE": str(trace_path),
-            "ACTIONS_RUNTIME_RCC_PROVIDER": "local",
-            "ACTIONS_RUNTIME_RCC_TRUST_CARRIER": str(trust_carrier_path),
-            "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
-            "ACTIONS_RUNTIME_RCC_TIMEOUT": "120",
-            "PYTHONPATH": os.pathsep.join(
-                [source_pythonpath, other_pythonpath] if other_pythonpath else [source_pythonpath]
-            ),
-            "ROBOCORP_HOME": str(tmp_path / "rcc-home"),
-            "S4_ACTION_SERVER_RCC_CONFIG_LOCATION": str(
-                tmp_path / "rcc-config" / "rcc.yaml"
-            ),
-        }
-    )
-
-    source_probe = subprocess.run(
-        [
-            sys.executable,
-            "-c",
-            "import actions.server._rcc_runtime_adapter as m; print(m.__file__)",
-        ],
-        env=runtime_env,
-        capture_output=True,
-        text=True,
-        check=True,
-    ).stdout.strip()
-    source_module = Path(source_probe).resolve()
-    assert source_root in source_module.parents, source_probe
+    (
+        runtime_env,
+        real_rcc_sha,
+        version,
+        trace_path,
+        trust_carrier_identity,
+        source_module,
+    ) = _runtime_test_environment(tmp_path, source_root)
 
     package_dir = tmp_path / "package" / "rcc-lifecycle"
     package_dir.mkdir(parents=True)
@@ -450,6 +490,326 @@ def test_real_rcc_source_only_reload_drains_pinned_generation(
             except AssertionError as cleanup_error:
                 evidence["old_run_cleanup"] = "NOT_OBSERVED"
                 evidence["old_run_cleanup_error"] = str(cleanup_error)
+        evidence["rcc_trace"] = _rcc_trace(trace_path)
+        receipt_path.parent.mkdir(parents=True, exist_ok=True)
+        receipt_path.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n")
+
+
+@pytest.mark.integration_test
+@pytest.mark.real_rcc
+def test_real_rcc_import_failure_keeps_last_good_generation(
+    action_server_process, client, tmp_path
+):
+    """A malformed source update must not replace the live Action generation."""
+    import platform
+
+    import requests
+
+    required = (
+        "ACTIONS_RUNTIME_SOURCE_ROOT",
+        "ACTIONS_RUNTIME_SOURCE_SHA",
+        "ACTIONS_RUNTIME_SOURCE_ARCHIVE",
+        "ACTIONS_RUNTIME_SOURCE_ARCHIVE_SHA256",
+        "ACTIONS_RUNTIME_SOURCE_IDENTITY_FILE",
+        "ACTIONS_RUNTIME_REAL_RCC_BINARY",
+        "ACTIONS_RUNTIME_LIFECYCLE_RECEIPT",
+    )
+    missing = [name for name in required if not os.environ.get(name)]
+    assert not missing, f"source-bound lifecycle proof missing inputs: {missing}"
+
+    source_root = Path(os.environ["ACTIONS_RUNTIME_SOURCE_ROOT"]).resolve()
+    source_sha = os.environ["ACTIONS_RUNTIME_SOURCE_SHA"]
+    archive = Path(os.environ["ACTIONS_RUNTIME_SOURCE_ARCHIVE"]).resolve()
+    archive_sha = hashlib.sha256(archive.read_bytes()).hexdigest()
+    identity = json.loads(
+        Path(os.environ["ACTIONS_RUNTIME_SOURCE_IDENTITY_FILE"]).read_text()
+    )
+    assert identity["commit"] == source_sha
+    assert identity["archive_sha256"] == archive_sha
+    assert archive_sha == os.environ["ACTIONS_RUNTIME_SOURCE_ARCHIVE_SHA256"]
+    assert (source_root / "src/actions/server/_rcc_runtime_adapter.py").is_file()
+
+    (
+        runtime_env,
+        real_rcc_sha,
+        version,
+        trace_path,
+        trust_carrier_identity,
+        source_module,
+    ) = _runtime_test_environment(tmp_path, source_root)
+    receipt_path = Path(os.environ["ACTIONS_RUNTIME_LIFECYCLE_RECEIPT"])
+    assert not receipt_path.exists(), f"receipt already exists: {receipt_path}"
+
+    package_root = tmp_path / "packages"
+    package_dir = package_root / "last-good"
+    package_dir.mkdir(parents=True)
+    (package_dir / "package.yaml").write_text(
+        "version: 0.1\nspec-version: v2\ndependencies:\n"
+        "  conda-forge:\n    - python=3.11.11\n"
+        "  pypi:\n    - actions-core=1.0.2\n",
+        encoding="utf-8",
+    )
+    action_file = package_dir / "action.py"
+    started_path = tmp_path / "last-good-action-entered"
+    release_path = tmp_path / "release-last-good-action"
+    action_file.write_text(
+        _action_source(started_path, release_path, "last-good"), encoding="utf-8"
+    )
+
+    db_path = action_server_process.datadir / "server.db"
+    evidence: dict[str, Any] = {
+        "schema": "rcc-runtime-import-rollback-v1",
+        "status": "NOT_RUN",
+        "source_commit": source_sha,
+        "source_archive_sha256": archive_sha,
+        "source_module": str(source_module),
+        "rcc_version": version,
+        "rcc_sha256": real_rcc_sha,
+        "provider": "local",
+        "trust_carrier_identity": trust_carrier_identity,
+        "host_platform": platform.platform(),
+    }
+    run_ids: list[str] = []
+    worker_tree: list[dict[str, Any]] = []
+    server_started = False
+    shutdown_status: int | None = None
+
+    def submit_generation_probe(label: str) -> tuple[str, dict[str, Any]]:
+        response = client.post_get_response(
+            "api/actions/last-good/generation-probe/run",
+            {},
+            {
+                ASYNC_TIMEOUT_HEADER: "0",
+                REQUEST_ID_HEADER: f"rollback-{label}-{uuid.uuid4().hex}",
+            },
+        )
+        run_id = response.headers.get(RUN_ID_HEADER)
+        assert run_id, response.headers
+        run_ids.append(run_id)
+        record = _wait_for(
+            f"{label} Run reached a terminal state",
+            lambda: (
+                row
+                if (row := _read_run(db_path, run_id)) and row["status"] in (2, 3)
+                else None
+            ),
+        )
+        return run_id, record
+
+    try:
+        action_server_process.start(
+            timeout=120,
+            actions_sync=True,
+            cwd=package_dir,
+            db_file="server.db",
+            add_shutdown_api=True,
+            min_processes=0,
+            max_processes=1,
+            reuse_processes=True,
+            additional_args=["--auto-reload"],
+            env=runtime_env,
+        )
+        server_started = True
+        package_name = package_dir.name
+        initial_runtime = _wait_for(
+            "initial ActionPackage runtime descriptor",
+            lambda: _read_package_runtime(db_path, package_name),
+        )
+        assert initial_runtime["kind"] == "rcc"
+        assert initial_runtime["rcc_version"] == RCC_VERSION
+        assert initial_runtime["trust_carrier_identity"] == trust_carrier_identity
+        artifact_digest = initial_runtime["artifact_digest"]
+        environment_fingerprint = initial_runtime["environment_fingerprint"]
+        source_generation = initial_runtime["source_generation"]
+        evidence["package_id"] = initial_runtime["package_id"]
+        evidence["artifact_digest"] = artifact_digest
+        evidence["environment_fingerprint"] = environment_fingerprint
+        evidence["source_generation"] = source_generation
+
+        trace_before_first = len(_rcc_trace(trace_path))
+        first_response = client.post_get_response(
+            "api/actions/last-good/generation-probe/run",
+            {},
+            {
+                ASYNC_TIMEOUT_HEADER: "0",
+                REQUEST_ID_HEADER: f"rollback-before-{uuid.uuid4().hex}",
+            },
+        )
+        first_run_id = first_response.headers.get(RUN_ID_HEADER)
+        assert first_run_id, first_response.headers
+        run_ids.append(first_run_id)
+        _wait_for("last-good Action entered", started_path.is_file)
+        first_run_running = _wait_for(
+            "last-good Run running",
+            lambda: (
+                row
+                if (row := _read_run(db_path, first_run_id))
+                and row["status"] == 1
+                else None
+            ),
+        )
+        evidence["first_run_running"] = first_run_running
+        first_exec = _exec_record_since(_rcc_trace(trace_path), trace_before_first)
+        assert first_exec, "no RCC env exec wrapper was observed for the first Run"
+        wrapper_args = first_exec["args"]
+        assert "--permissive-local" in wrapper_args
+        provider_index = wrapper_args.index("--provider")
+        assert wrapper_args[provider_index + 1] == "local"
+        receipt_index = wrapper_args.index("--receipt-file")
+        worker_receipt_path = Path(wrapper_args[receipt_index + 1])
+        worker_pid = first_exec["pid"]
+        worker_tree = _process_tree(worker_pid)
+        assert len(worker_tree) > 1, "no live RCC worker descendants were observed"
+        evidence["worker_pid"] = worker_pid
+        evidence["worker_tree_before_failure"] = worker_tree
+        evidence["worker_receipt_path"] = str(worker_receipt_path)
+
+        initial_descriptor = _read_package_runtime(db_path, package_name)
+        assert initial_descriptor == initial_runtime
+        provider_ops_before = _environment_operations(_rcc_trace(trace_path))
+
+        invalid_source = tmp_path / "action.py.invalid"
+        invalid_source.write_text(
+            "from actions import action\n\n"
+            "@action\n"
+            "def generation_probe(:\n"
+            "    return 'broken'\n",
+            encoding="utf-8",
+        )
+        invalid_source.replace(action_file)
+        evidence["invalid_source_sha256"] = hashlib.sha256(
+            action_file.read_bytes()
+        ).hexdigest()
+
+        server_log_path = action_server_process.datadir / "server_log.txt"
+
+        def import_failure_observed():
+            combined = action_server_process.get_stdout() + action_server_process.get_stderr()
+            if server_log_path.is_file():
+                combined += server_log_path.read_text(encoding="utf-8", errors="replace")
+            return "RuntimeError: It was not possible to list the actions." in combined
+
+        _wait_for("auto-reload import failure diagnostic", import_failure_observed)
+        after_failure_descriptor = _read_package_runtime(db_path, package_name)
+        assert after_failure_descriptor == initial_runtime
+        evidence["descriptor_preserved"] = True
+        assert _process_identity_exists(worker_tree[0]), (
+            "in-flight last-good worker was replaced after import failure"
+        )
+        evidence["same_last_good_worker_during_failure"] = _process_identity_exists(
+            worker_tree[0]
+        )
+
+        release_path.write_text("release", encoding="utf-8")
+        first_run = _wait_for(
+            "last-good Run passed after import failure",
+            lambda: (
+                row
+                if (row := _read_run(db_path, first_run_id)) and row["status"] == 2
+                else None
+            ),
+        )
+        assert first_run["result"] == "last-good"
+        assert first_run["status"] == 2
+        evidence["first_run"] = first_run
+        second_run_id, second_run = submit_generation_probe("after-import-failure")
+        assert second_run_id != first_run_id
+        evidence["second_run"] = second_run
+        descriptor_after_second_run = _read_package_runtime(db_path, package_name)
+        evidence["descriptor_preserved_after_second_run"] = (
+            descriptor_after_second_run == initial_runtime
+        )
+        same_worker_after_failure = _process_identity_exists(worker_tree[0])
+        evidence["same_last_good_worker_after_failure"] = same_worker_after_failure
+        provider_ops_after = _environment_operations(_rcc_trace(trace_path))
+        evidence["provider_ops_before_failure"] = provider_ops_before
+        evidence["provider_ops_after_failure"] = provider_ops_after
+
+        exec_records = [
+            item
+            for item in _rcc_trace(trace_path)
+            if item["args"][:2] == ["env", "exec"]
+            and "--receipt-file" in item["args"]
+        ]
+        evidence["env_exec_wrapper_pids_before_shutdown"] = [
+            item["pid"] for item in exec_records
+        ]
+
+        shutdown_response = requests.post(
+            client.build_full_url("api/shutdown/"),
+            params={"timeout": 5},
+            timeout=10,
+        )
+        shutdown_status = shutdown_response.status_code
+        evidence["shutdown_http_status"] = shutdown_status
+        _wait_for(
+            "Runtime process shutdown",
+            lambda: action_server_process.process.returncode is not None,
+            timeout=15,
+        )
+        evidence["runtime_process_exit_code"] = action_server_process.process.returncode
+        _wait_for(
+            "reused RCC worker tree reaped",
+            lambda: True if not any(_process_identity_exists(item) for item in worker_tree) else None,
+            timeout=20,
+        )
+        evidence["worker_tree_observed_absent"] = worker_tree
+
+        exec_records = [
+            item
+            for item in _rcc_trace(trace_path)
+            if item["args"][:2] == ["env", "exec"]
+            and "--receipt-file" in item["args"]
+        ]
+        receipt_paths = [
+            Path(item["args"][item["args"].index("--receipt-file") + 1])
+            for item in exec_records
+        ]
+        _wait_for(
+            "all RCC worker receipts",
+            lambda: True if receipt_paths and all(path.is_file() for path in receipt_paths) else None,
+        )
+        terminal_receipts = [
+            json.loads(path.read_text(encoding="utf-8")) for path in receipt_paths
+        ]
+        evidence["worker_receipt_paths"] = [str(path) for path in receipt_paths]
+        evidence["rcc_receipts"] = terminal_receipts
+        evidence["status"] = "PASS" if (
+            second_run["status"] == 2
+            and second_run["result"] == "last-good"
+            and descriptor_after_second_run == initial_runtime
+            and provider_ops_after == provider_ops_before
+            and worker_pid in [item["pid"] for item in exec_records]
+            and action_server_process.process.returncode == 0
+            and all(
+                receipt.get("artifactDigest") == artifact_digest
+                and receipt.get("verification", {}).get("valid") is True
+                and receipt.get("leaseId")
+                and receipt.get("status") == "completed"
+                and receipt.get("exitCode") == 0
+                for receipt in terminal_receipts
+            )
+        ) else "FAIL"
+        assert evidence["status"] == "PASS", (
+            "last-good Action did not remain usable after import failure; "
+            f"persisted Run={second_run}, Runtime exit="
+            f"{action_server_process.process.returncode}"
+        )
+    except Exception as exc:
+        evidence["status"] = "FAIL"
+        evidence["failure_type"] = type(exc).__name__
+        evidence["failure"] = str(exc)[:1000]
+        raise
+    finally:
+        if server_started and action_server_process.process.returncode is None:
+            try:
+                requests.post(
+                    client.build_full_url("api/shutdown/"),
+                    params={"timeout": 5},
+                    timeout=10,
+                )
+            except requests.RequestException:
+                evidence["cleanup_shutdown_request"] = "NOT_CONFIRMED"
         evidence["rcc_trace"] = _rcc_trace(trace_path)
         receipt_path.parent.mkdir(parents=True, exist_ok=True)
         receipt_path.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n")

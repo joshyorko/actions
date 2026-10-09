@@ -1348,6 +1348,19 @@ same owner-only filesystem trust carrier for publish/acquire/exec; provider
 selection alone does not satisfy the separate carrier attachment. This proves
 the local overlapping-generation path only, not remote-provider outage/A-to-B,
 installed-wheel, frozen-binary, or full #134 acceptance.
+The companion `test_real_rcc_import_failure_keeps_last_good_generation` probe
+uses an HTTP-admitted persisted Run while replacing its Action source with a
+syntax error. Against the d150 source export, the failed import left the
+persisted runtime descriptor and in-flight worker identity unchanged and added
+no RCC publish/acquire/build calls, but a later Run through the retained route
+failed with status 3 (`It was not possible to collect the contents of the
+result (json not created).`). Both exact-Artifact RCC receipts still verified
+and exited 0, and the captured old worker tree was observed absent at shutdown;
+the Action Server process exited 1. This is a RED rollback boundary, not
+acceptance that the last-good Action remains usable. Preserve the Run error,
+receipts and process observations, and hand the source-retention repair to the
+Action Server owner; do not infer rollback success from an unchanged database
+descriptor or a valid RCC receipt.
 
 The outer Dakota CLI refuses an existing receipt path before resolving toolchain
 environment keys or creating CLI supervisor state. The worker retains its
