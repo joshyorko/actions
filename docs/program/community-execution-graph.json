@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-10-09",
-  "worker_stage_snapshot": "2026-10-09T18:48:02.279707+00:00",
+  "worker_stage_snapshot": "2026-10-09T19:20:08Z",
   "scope": "issue-level overlay only; no acceptance ledger/body changes",
   "contract_source": "governance/docs/program/community-program-ledger.json acceptance_contract compared with evidence/acceleration-open-issues.json body",
   "exact_contract_matches": 54,
@@ -45,10 +45,9 @@
   ],
   "current_active_workers": {
     "101": "root integration/governance",
-    "134": "D trust successor; Sol independent review",
-    "210": "root/A Helper successor CI/release",
-    "211": "root Core release order; C source/CI complete",
-    "100": "E bounded ADR only; public MCP Apps implementation still depends125"
+    "134": "D trust successor PR253 head290e469c; narrow503 PASS, overall warm harness FAIL",
+    "211": "Root Core lane; candidate merged and index compatibility proved; Core unpublished, credential empty",
+    "100": "E; PR254 bounded ADR/contract proposal only; public MCP Apps authoring remains scoped to #125"
   },
   "current_review_checkpoints": {
     "91": {
@@ -57,8 +56,8 @@
       "status": "INTEGRATED_PARTIAL"
     },
     "100": {
-      "pr": null,
-      "status": "READY_FOR_BOUNDED_ADR_ONLY",
+      "pr": 254,
+      "status": "BOUNDED_PROPOSAL_ONLY; predecessor a4946a independently accepted as proposal; current head review/checks distinct",
       "scoped_dependency": 125
     },
     "129": {
@@ -70,16 +69,21 @@
       "pr": 250,
       "combined_pr": 250,
       "status": "INTEGRATED_PARTIAL"
+    },
+    "210": {
+      "pr": 249,
+      "status": "ACCEPTED_AND_CLOSED",
+      "comment_id": 6087641984
     }
   },
   "counts": {
     "BLOCKED": 30,
     "INTEGRATED": 10,
-    "ACTIVE": 5,
+    "ACTIVE": 4,
     "REVIEW": 9,
-    "COMPLETE": 0
+    "COMPLETE": 1
   },
-  "complete_verified_count": 0,
+  "complete_verified_count": 1,
   "schema_probe_receipts": {
     "focused_rcc": "RCC v18.19.3; ruff check + ruff format check pass; SQLite pytest 1 passed post-merge",
     "sqlite": "PASS; in-memory SQLite 3.53.1; foreign_keys=ON",
@@ -347,8 +351,8 @@
       "foundation_pr": null,
       "checkpoint_pr": null,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Bounded ADR/contract evidence assigned to E; no authoring implementation or new distribution authorized by this slice.",
-      "next_bounded_action": "Review the bounded schema/source-of-truth ADR and contract only; record the #125 dependency for public MCP Apps authoring separately. Do not start Canvas implementation or claim Python/JSON/TypeScript round-trip/package acceptance.",
+      "reason": "PR254 has a bounded authoring-contract/ADR proposal only; predecessor a4946a received independent proposal-only acceptance. Current PR head159b17a remains a separate review/checkpoint. No Canvas implementation or whole issue acceptance.",
+      "next_bounded_action": "Review the current bounded proposal against the preserved #100 contract. Keep public MCP Apps authoring scoped to its #125 dependency; no implementation until that dependency and separate authorization are satisfied.",
       "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
       "scoped_dependencies": [
         {
@@ -507,8 +511,8 @@
       "foundation_pr": 197,
       "checkpoint_pr": 247,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Actions trust-context source f4e03108 and actual same-selected-provider503-before-exec negative are independently accepted narrowly. Whole offline-warm harness remains FAIL, because configured provenance carrier must be reachable. Full134 remains unfinished; earlier422/ENOSPC evidence retained without retrospective cause claims.",
-      "next_bounded_action": "Keep the 503 negative distinct from the NOT_REACHED cold-publish 422. Prove trust continuity across acquisition and execution without inferring an upstream defect; preserve the full RCC/native/consumer and crash-recovery contract.",
+      "reason": "PR253 current head290e469c / source d9a08395 has 742 passed/10 skipped and same-provider503 fail-closed negative PASS; overall warm harness remains FAIL and hosted checks are in progress. The selected-provider provenance continuity gap remains.",
+      "next_bounded_action": "Preserve the warm-harness FAIL and narrow503 PASS separately; solve the provenance-carrier condition with exact evidence. Do not attribute prior cold-publish422 retrospectively or mark full #134 complete.",
       "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d"
     },
     {
@@ -890,14 +894,19 @@
       "issue": 210,
       "title": "fix(release): repair HTTP helper workflow credential delivery",
       "retained_state": "IMPLEMENTED_UNVERIFIED",
-      "classification": "ACTIVE",
+      "classification": "COMPLETE",
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": 249,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Corrected Helper1.0.3 PR249 f2dd54cc has independently accepted source/artifact projection and Runtime441/10skip plus Helper12. Ordered import-isolation reproduction fails before and passes after the existing11-line fix. Exact successor hosted gates remain required.",
-      "next_bounded_action": "Accept exact successor hosted gates and unchanged Helper artifact projection, then promote1.0.3 using normal immutable GitHub release workflow; verify registry bytes.",
-      "acceptance_contract_sha256": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d"
+      "reason": "Root accepted and closed whole #210 after retained-contract audit; owner comment6087641984. Helper1.0.3 credential delivery and eligible published workflow are proven. Original captured state and acceptance body remain unchanged in the ledger.",
+      "next_bounded_action": "No remaining #210 work. Preserve failed immutable1.0.2 evidence; dependent Core/Runtime release work remains governed by its own contracts.",
+      "acceptance_contract_sha256": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d",
+      "current_acceptance": {
+        "status": "ACCEPTED_AND_CLOSED",
+        "comment_id": 6087641984,
+        "audit": "evidence/release-contract-audit-20261009.md"
+      }
     },
     {
       "issue": 211,
@@ -908,8 +917,8 @@
       "foundation_pr": null,
       "checkpoint_pr": 248,
       "unresolved_open_issue_dependencies": [],
-      "reason": "Core1.0.2 PR248 df7b0d66 passed configured294, installed-wheel and all5hosted workflows; actual Helper registry verification precedes Core promotion. Preserve exact-source proof after base changes.",
-      "next_bounded_action": "Wait for corrected Helper CORS and actual registry verification before Core tagging; then run the admitted Core publication/registry readback and Runtime/native acceptance. Green PR workflow jobs are not publication evidence.",
+      "reason": "Core1.0.2 PR248 exact head71f55ddd passed configured294 and all five hosted workflows, was independently reviewed, and merged to community011c548 (tree db3ecee9). Fresh candidate install resolved published Helper1.0.3 from PyPI matching its verified wheel SHA. Core availability attempt2 passed presence after attempt1 was empty; PyPI preflight returned404; immutable tag actions-core-1.0.2 is pushed from community011c548 and release workflow37979108120 is in progress.",
+      "next_bounded_action": "Preserve both credential-presence attempts; wait for exact immutable Actions Release workflow result and verify published Core registry artifacts before dependent Runtime/native gates.",
       "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4"
     },
     {
@@ -937,6 +946,14 @@
       "reason": "PR #225 remains open, but no current implementation worker is assigned in this snapshot; live provider/TLS and standalone lifecycle gates remain.",
       "next_bounded_action": "PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open.",
       "acceptance_contract_sha256": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347"
+    }
+  ],
+  "completed_issue_overlays": [
+    {
+      "issue": 210,
+      "status": "ACCEPTED_AND_CLOSED",
+      "owner_comment_id": 6087641984,
+      "original_retained_state_preserved": "IMPLEMENTED_UNVERIFIED"
     }
   ]
 }

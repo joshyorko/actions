@@ -5,14 +5,22 @@
   "baseline_sha": "7c98236069171f57031218f938963238986293bd",
   "snapshot_date": "2026-10-08",
   "accounting": {
-    "open_issues": 54,
-    "accepted": 0,
+    "open_issues": 53,
+    "accepted": 1,
     "verified_review_ready": 0,
-    "unfinished": 54,
+    "unfinished": 53,
     "not_started": 33,
     "in_progress": 5,
     "implemented_unverified": 16,
-    "blocked": 0
+    "blocked": 0,
+    "retained_issue_contracts": 54,
+    "retained_state_counts_snapshot": {
+      "not_started": 33,
+      "in_progress": 5,
+      "implemented_unverified": 16,
+      "blocked": 0
+    },
+    "state_note": "Per-issue state fields and original contracts/comments remain as captured in the 54-issue intake snapshot. Current closure/acceptance is recorded in current_acceptance; the original raw state fields are not rewritten."
   },
   "evidence_states": [
     "PASS",
@@ -262,7 +270,7 @@
         101
       ],
       "criticality": "P1",
-      "next_bounded_action": "Wait for corrected Helper CORS and actual registry verification before Core tagging; then run the admitted Core publication/registry readback and Runtime/native acceptance. Green PR workflow jobs are not publication evidence.",
+      "next_bounded_action": "Core candidate merged after configured294, five exact-head hosted PASS workflows and PyPI Helper1.0.3 resolver proof. Core presence probe is empty; root owns any credential configuration, release admission, immutable publication and post-publication readback.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -340,7 +348,7 @@
         155
       ],
       "criticality": "P1",
-      "next_bounded_action": "Accept exact successor hosted gates and unchanged Helper artifact projection, then promote1.0.3 using normal immutable GitHub release workflow; verify registry bytes.",
+      "next_bounded_action": "No remaining #210 work; keep immutable 1.0.2 failure as historical evidence and do not reuse its tag.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -364,12 +372,24 @@
           "real RCC and second adapter for architecture"
         ]
       },
-      "independent_review_status": "NOT_RUN",
-      "blockers": [
+      "independent_review_status": "ACCEPTED for the full retained #210 criteria by root after the read-only release-contract audit; issue closed by owner comment6087641984.",
+      "blockers": [],
+      "disposition": "WHOLE_ISSUE_ACCEPTED_AND_CLOSED; original retained issue state/body/comments preserved in snapshot",
+      "integration_pr": 221,
+      "current_acceptance": {
+        "status": "ACCEPTED; CLOSED",
+        "accepted_at": "2026-10-09",
+        "owner_comment_id": 6087641984,
+        "owner_comment_url": "https://github.com/joshyorko/actions/issues/210#issuecomment-6087641984",
+        "evidence": [
+          "evidence/release-contract-audit-20261009.md",
+          "evidence/helper-1.0.3-publication-verified.json"
+        ],
+        "basis": "Root accepted the complete retained #210 criteria after independent source/artifact and publication review. Helper1.0.3 successful credential-delivery release run37976326081 and verified PyPI/GitHub artifact bytes establish the eligible publish path; immutable 1.0.2 failed-before-upload remains unchanged. Original issue body/comments and captured state IMPLEMENTED_UNVERIFIED are retained unchanged."
+      },
+      "retained_blockers_snapshot": [
         "Required acceptance has not been independently established."
-      ],
-      "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
-      "integration_pr": 221
+      ]
     },
     {
       "issue": 209,
@@ -11878,6 +11898,51 @@
       "detail": "Root independent Linux50tests at15696; NOTintegrated, macOS/WindowsNOT_RUN",
       "sha256": "cc62b603e28b13fb7bc866705749cf7a75121a563509153f19a1e7988be5d218",
       "scope": "Exact subject only; publication not admitted."
+    },
+    {
+      "kind": "Helper1.0.3 publication/readback",
+      "path": "evidence/helper-1.0.3-publication-verified.json",
+      "sha256": "abb39e8056b77085bebf727023056baf579e8ec5324f4325e7315c7881ac4f18"
+    },
+    {
+      "kind": "Helper1.0.3 verified distribution",
+      "path": "evidence/http-helper-1.0.3-verified-dist.zip",
+      "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+    },
+    {
+      "kind": "CAS bootstrap reconciliation; pre-dispatch native worktree checkpoint",
+      "path": "evidence/cas-bootstrap-reconciliation-20261009.md"
+    },
+    {
+      "kind": "CAS fanout requests and native policy receipt",
+      "path": "evidence/cas-expansion-20261009-1909.json",
+      "sha256": "5e2af2f5e1ae0f0e0be5506c9347cbfdc7691de9814365a8cd2b037bf2972d7c"
+    },
+    {
+      "kind": "Core admission and credential availability evidence",
+      "path": "evidence/independent-core-pr248-admission-and-credential-probe-20261009.md"
+    },
+    {
+      "kind": "Core credential availability attempt2",
+      "path": "evidence/core-credential-attempt2.json",
+      "sha256": "d0184ff9ba15aeef24c11d87f62640eed8a0d3837e2be6db66e4af3c8f0edb62"
+    },
+    {
+      "kind": "Core immutable release dispatch",
+      "path": "evidence/core-1.0.2-release-dispatch.json",
+      "sha256": "6054f58765edb183f8c10bac964f82b12a3355494c27d93b8583eb17275d6602"
+    },
+    {
+      "kind": "#210 retained-contract acceptance audit",
+      "path": "evidence/release-contract-audit-20261009.md",
+      "sha256": "3e9441a7e3dd37e3ac9280f354d009dc92738fcac5437107a27aa808eb690cfe",
+      "disposition": "Read-only audit before root completion; accepted issue comment 6087641984 was subsequently posted and issue closed."
+    },
+    {
+      "kind": "Runtime/native retained-contract audit",
+      "path": "evidence/runtime-1.0.3-retained-contract-audit-20261009.md",
+      "sha256": "3e9441a7e3dd37e3ac9280f354d009dc92738fcac5437107a27aa808eb690cfe",
+      "disposition": "Read-only scoped audit; retained #211 and #134 acceptance gates remain distinct. It predates current Core tag dispatch."
     }
   ],
   "independent_review": {
@@ -12028,7 +12093,7 @@
       "display_title": "Ship Environment Artifacts v1 in RCC v18.19.0 and freeze the v18 compatibility contract"
     }
   ],
-  "issue_accounting_scope": "54open issue bodies/comments inspected, plus4closed exception/external contract records. PRs are separate.",
+  "issue_accounting_scope": "Initial snapshot retained 54 open issue bodies/comments. Current overlay: 53 open, 1 whole issue accepted/closed (#210); all 54 original contracts, bodies, comments, and captured raw state fields remain retained. Plus4 closed exception/external contract records; PRs are separate.",
   "new_prs": [
     {
       "number": 220,
@@ -12258,20 +12323,20 @@
       "actions_work_items-0.4.4-py3-none-any.whl"
     ],
     "wheel_artifact_retention": "Temporary30-test wheelhouse was removed bypytestretention; no unsupported wheel digest claim. Native and candidateCore outputs remain inworktree.",
-    "publication": "BLOCKED; Helper1.0.2 tag failed before upload and must not be retried; no Core/Runtime publication is inferred from PR workflows.",
+    "publication": "Helper1.0.3 published and byte-verified. Core1.0.2 immutable tag actions-core-1.0.2 pushed from approved community source; normal release workflow in progress, no publication/readback yet. Runtime/native1.0.3 not published.",
     "candidate_versions": {
-      "actions-http-helper": "1.0.3 candidate; no verified PyPI release/readback",
-      "actions-core": "1.0.2",
+      "actions-http-helper": "1.0.3 published; wheel/sdist registry artifacts verified",
+      "actions-core": "1.0.2 merged to community; no tag/publication",
       "actions-runtime": "1.0.3",
       "actions-work-items": "0.4.4 unchanged"
     },
     "publication_order": [
-      "corrected Helper new immutable version after decision",
-      "Actions Core1.0.2",
-      "clean registry-resolved compatibility",
-      "Actions Runtime/native1.0.3"
+      "Helper1.0.3 published and verified",
+      "Actions Core1.0.2 after credential configuration and explicit admission",
+      "clean registry-resolved compatibility/readback",
+      "Actions Runtime/native1.0.3 after its independent gates"
     ],
-    "latest_registry_readback": "Runtime1.0.2/Core1.0.1/Helper1.0.1 already published; no overwrite permitted",
+    "latest_registry_readback": "Actions HTTP Helper1.0.3 PyPI wheel and sdist match GitHub release-manifest bytes; Core candidate fresh resolver installed published Helper1.0.3 matching wheel SHA. Core itself remains unpublished; Runtime1.0.2/Core1.0.1 registry records remain historical.",
     "Runtime_frozen_linux_023597ab": "sha256:8748caca0e6f6b192e3d03de246f4ada8a452dd2ea56d4e45b2853eebad97ca1",
     "Runtime_Go_linux_023597ab": "sha256:db6509e73cb352f4fad313ad71ac05f2321a0ddcd2b727e7e7c6a0efb97cd99f",
     "Runtime_frozen_linux_119b4f": "sha256:250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3",
@@ -12280,13 +12345,13 @@
     "remaining_native": "Windows strict ownership/browser/history pass all three platforms in PR229 at a8eb7b46, integrated as12b387ec after12 successful checks and1 publication skip. Robot exclusive publication native matrix passes in PR230; root/source/staging identity remains open. No program release admission.",
     "current_integration_native": "PR242 exactsyntheticbf04e85d/final303592ff identicaltree40e9d3d7; all3OSnativePASS, LinuxactualWorkItemsconsumer2PASS anddownloadedreceiptverified.",
     "current_blockers": [
-      "DO NOT RETRY or move actions_http-1.0.2: immutable tag omitted the redirect fix and its release failed before upload.",
-      "Corrected Helper1.0.3 PR249 f2dd54cc has independently accepted source/artifact projection and Runtime441/10skip plus Helper12. Ordered import-isolation reproduction fails before and passes after the existing11-line fix. Exact successor hosted gates remain required.",
-      "Credential availability PASS at run37970443665 attempt3 in pypi; PyPI authentication/upload permission remains unverified. No Helper1.0.3 tag/publication yet.",
-      "Core1.0.2 PR248 df7b0d66 passed configured294, installed-wheel and all5hosted workflows; actual Helper registry verification precedes Core promotion. Preserve exact-source proof after base changes.",
-      "Runtime/native1.0.3 still requires applicable native/browser/security/RCC/consumer/registry gates and external artifact readback. Workflow names and partial foundations do not establish publication.",
-      "Actions trust-context source f4e03108 and actual same-selected-provider503-before-exec negative are independently accepted narrowly. Whole offline-warm harness remains FAIL, because configured provenance carrier must be reachable. Full134 remains unfinished; earlier422/ENOSPC evidence retained without retrospective cause claims.",
-      "Robot root/source identity, Windows ACL, live tunnel/provider TLS and remaining contracts are open. Public MCP Apps authoring under100 retains its125 prerequisite; bounded ADR work does not waive it."
+      "Do not retry or move immutable actions_http-1.0.2; its release failed before upload. Corrected actions_http-1.0.3 is published and byte-verified.",
+      "Core1.0.2 PR248 exact-head candidate passed configured294, installed-wheel checks and all five hosted workflows; merge to community is 011c5482285ea516f39292100c429a905e6e3e36 with tested tree db3ecee9e9c2937a9912780a54bd5a1557562f50. Immutable tag actions-core-1.0.2 was pushed from this source and release workflow37979108120 is in progress; publication/readback is not established.",
+      "Fresh Core candidate installation resolved PyPI Helper1.0.3 from files.pythonhosted.org and matched published wheel SHA 46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9; this is not Core post-publication readback.",
+      "Core availability probe attempt1 reported Core empty; attempt2 PASS reported both Core and Runtime nonempty. Both checks proved presence only, not authentication, scope or upload. PyPI preflight was404; immutable tag actions-core-1.0.2 is now pushed, with release workflow in progress.",
+      "Runtime/native1.0.3 retains applicable native/browser/security/RCC/consumer/registry gates and external artifact readback; workflows and Core proof do not establish Runtime publication.",
+      "RCC trust source d9a08395d14478534490b6f90c2405a32fa869fd: 742 passed/10 skipped and same-provider503 negative PASS, overall warm harness FAIL; full #134 remains incomplete, earlier 422/ENOSPC causes are not retroactively attributed.",
+      "Robot root/source identity, Windows ACL, live tunnel/provider TLS and remaining contracts are open. #100 ADR does not waive #125 for public MCP Apps authoring."
     ],
     "helper_admission": {
       "observed_at": "2026-10-09T17:23:07.875978+00:00",
@@ -12300,33 +12365,79 @@
         "independent-helper-review-7fffa3a5.md"
       ],
       "hosted_workflows": "All five PASS; exact Runtime inventory/Twine/canary, all three Helper/Core platforms and RCC primary/N-1 six jobs passed",
-      "tag": "actions_http-1.0.2",
+      "tag": "actions_http-1.0.3",
       "tag_object": "ce0aa64588d88ddd801c3f8391d873e678d20ff1",
-      "tag_target": "00c207fe1ebae20804056e2b17982476ee75386a",
+      "tag_target": "167378509ca33450d4478021214e2e74a0b46dda",
       "preflight": "Remote tag absent and PyPI1.0.2 returned404 immediately before immutable push; no force/overwrite",
-      "release_run": 37965200135,
-      "publication_status": "BLOCKED; NO UPLOAD; DO NOT RETRY THIS TAG",
+      "release_run": 37976326081,
+      "publication_status": "PUBLISHED; PyPI wheel and sdist and GitHub release manifest verified byte-identical; immutable 1.0.2 tag remains failed before upload and must not be retried.",
       "scope": "Helper prerequisite only; Runtime integration PR221 remains unmerged",
       "failure": "Publish step refused empty PYPI_TOKEN_ACTIONS_HTTP_HELPER; no poetry publish ran; PyPI1.0.2 remains404.",
-      "candidate_omission": "Post-tag reconciliation found later integration023597ab generatedHost proxy-to-direct redirect fix omitted by selective6182 promotion. Preserve immutabletag and failedrun; require correctedcandidate and newimmutableversion decision beforepublication."
+      "candidate_omission": "Post-tag reconciliation found later integration023597ab generatedHost proxy-to-direct redirect fix omitted by selective6182 promotion. Preserve immutabletag and failedrun; require correctedcandidate and newimmutableversion decision beforepublication.",
+      "receipt": "evidence/helper-1.0.3-publication-verified.json",
+      "historical_1_0_2_failure": {
+        "tag": "actions_http-1.0.2",
+        "publication_status": "FAILED BEFORE UPLOAD; immutable; do not retry or move",
+        "run": 37965200135
+      }
     },
     "core_pr248_hosted": {
-      "head": "df7b0d664a661fcab5d014092f4259c32e74590f",
+      "head": "71f55ddd1ce34720db0e13433a2f1f5c9eed70a0",
       "runs": {
-        "audit": 37970773975,
-        "http_helper": 37970774145,
-        "rcc_toolkit": 37970774070,
-        "actions_core": 37970773751,
-        "runtime_release_workflow": 37970773566
+        "audit": 37976580100,
+        "http_helper": 37976580071,
+        "rcc_toolkit": 37976580074,
+        "actions_core": 37976580109,
+        "runtime_release_workflow": 37976580171
       },
-      "result": "all five workflow runs successful; Runtime workflow publish credential/publish steps skipped; no upload/publication claim",
-      "local": "configured Core294/294, clean installed-wheel verifier, lint, typecheck, and docs PASS"
+      "result": "All five exact-head hosted workflows PASS; tag/publish steps skipped. Source merged to community; no Core tag or publication.",
+      "local": "configured Core294/294, installed-wheel verifier, lint, typecheck and docs PASS; independent review confirms exact candidate.",
+      "community_merge": "011c5482285ea516f39292100c429a905e6e3e36",
+      "tree": "db3ecee9e9c2937a9912780a54bd5a1557562f50",
+      "registry_compatibility": "Fresh environment installed the exact Core1.0.2 candidate with constraint actions-http-helper==1.0.3. Pip resolved Helper wheel from files.pythonhosted.org; wheel SHA matched published PyPI/GitHub artifact. Core and Helper imported from the isolated environment; actions list/run PASS. Receipt: evidence/independent-core-pr248-admission-and-credential-probe-20261009.md and release-lane/actions-core-helper-registry-compatibility-20261009/registry-index-resolution.json."
     },
     "helper_credential_check": {
       "run": 37970443665,
       "result": "availability check PASS only; no PyPI authorization, upload, or registry readback proven"
     },
-    "helper_cors_s209": "FAILED; preserve exact failing receipt and do not relabel as upstream without source/version/reproduction review"
+    "helper_cors_s209": "FAILED; preserve exact failing receipt and do not relabel as upstream without source/version/reproduction review",
+    "helper_1_0_3_publication": {
+      "pr": 249,
+      "source": "00beb8907243a8bf232e89c2e9822d3d881f0427",
+      "community_merge": "167378509ca33450d4478021214e2e74a0b46dda",
+      "tag": "actions_http-1.0.3",
+      "run": 37976326081,
+      "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "sdist_sha256": "b8e4e8efb181d5748264f25f1803f47731cd4947fc015f009934d51cd7a78945",
+      "source_sha256": "7648587a165a31364362a5b6a8dce9e2eb84baaf81a581dc61916bca9c83cb22",
+      "readback": "PyPI and GitHub release manifest bytes verified identical",
+      "receipt": "evidence/helper-1.0.3-publication-verified.json"
+    },
+    "core_credential_availability": {
+      "run": 37978559166,
+      "head": "7501198b3cbd834a79c132d398abb5e05c852582",
+      "attempt1": "FAIL; Core secret empty",
+      "attempt2": "PASS; Core and Runtime variables nonempty; presence only, no auth/scope/upload",
+      "preflight": "PyPI Core1.0.2 returned404",
+      "receipt": "evidence/core-credential-attempt2.json",
+      "job": "113984244155"
+    },
+    "rcc_trust_current": {
+      "pr": 253,
+      "head": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+      "source": "d9a08395d14478534490b6f90c2405a32fa869fd",
+      "tests": "742 passed, 10 skipped",
+      "negative": "same selected provider 503 fails closed before execution: PASS",
+      "overall": "warm harness FAIL; hosted checks in progress; full #134 incomplete"
+    },
+    "core_release_current": {
+      "tag": "actions-core-1.0.2",
+      "tag_object": "53970c0699ec2fcee169484daa2d41f6fec4e6ab",
+      "source": "011c5482285ea516f39292100c429a905e6e3e36",
+      "preflight": "PyPI1.0.2 HTTP404; credential attempt2 presence PASS",
+      "workflow_run": 37979108120,
+      "state": "IN_PROGRESS; no published artifact/readback claimed"
+    }
   },
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261009-convergence.zip",
@@ -12343,7 +12454,7 @@
     "status": "ACTIVE_ENGINEERING; integration4626; PR238134df and stacked PR2395c3 local combined gates PASS, hosted admission pending; no community merge/release"
   },
   "checkpoint_status": "ACTIVE integration; PR250 partial foundations merged; no release publication admitted",
-  "checkpoint_observed_at": "2026-10-09T18:48:02.279707+00:00",
+  "checkpoint_observed_at": "2026-10-09T19:20:08Z",
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
@@ -12353,6 +12464,17 @@
       "REVIEW": 9,
       "COMPLETE": 0
     },
-    "whole_contract_complete": 0
-  }
+    "whole_contract_complete": 0,
+    "worker_stage_snapshot": "2026-10-09T19:16:47Z"
+  },
+  "accepted_issue_closures": [
+    {
+      "issue": 210,
+      "accepted": true,
+      "closed": true,
+      "owner_comment_id": 6087641984,
+      "audit": "evidence/release-contract-audit-20261009.md",
+      "note": "Issue record body/comments/raw intake state remain preserved; current acceptance is a separate overlay."
+    }
+  ]
 }

@@ -1,8 +1,8 @@
 # Actions operational execution graph
 
-Worker-stage observation: 2026-10-09T18:48:02.279707+00:00. All 54 retained contracts remain unfinished; this overlay does not change their acceptance states.
+Worker-stage observation refreshed 2026-10-09T19:20:08Z. 53 of 54 retained contracts remain unfinished; #210 is accepted/closed via owner comment6087641984. Original contract/body/comment and captured raw state remain preserved.
 
-Counts: READY=0, ACTIVE=5, REVIEW=9, BLOCKED=30, INTEGRATED=10, COMPLETE=0.
+Counts: READY=0, ACTIVE=4, REVIEW=9, BLOCKED=30, INTEGRATED=10, COMPLETE=1.
 
 ACTIVE identifies assigned work; REVIEW identifies a bounded submitted checkpoint. INTEGRATED means a partial foundation, while COMPLETE requires the full owning contract.
 
@@ -33,7 +33,7 @@ ACTIVE identifies assigned work; REVIEW identifies a bounded submitted checkpoin
 | [#131](https://github.com/joshyorko/actions/issues/131) | BLOCKED | #125, #129, #130 | See ledger | Define provider data/knowledge references and authorized operations without product-tier coupling. |
 | [#132](https://github.com/joshyorko/actions/issues/132) | BLOCKED | #83, #90, #129 | See ledger | Implement durable business queue/review/lease semantics separately from Run ownership. |
 | [#133](https://github.com/joshyorko/actions/issues/133) | BLOCKED | #129, #130, #134, #143 | See ledger | Extend proven RCC adapter to worker execution using released provider/lease/exec contract. |
-| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None recorded | #247 | Keep the 503 negative distinct from the NOT_REACHED cold-publish 422. Prove trust continuity across acquisition and execution without inferring an upstream defect; preserve the full RCC/native/consumer and crash-recovery contract. |
+| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None recorded | #247 | PR253 source d9a08395 has 742 passed/10 skipped and same-provider503 negative PASS; overall warm harness FAIL remains. Preserve the earlier cold-publish422 without retrospective cause attribution; full #134 is unfinished. |
 | [#135](https://github.com/joshyorko/actions/issues/135) | BLOCKED | #129, #130 | See ledger | Compile deterministic Package Revisions and plans from current sources without machine-local identities. |
 | [#136](https://github.com/joshyorko/actions/issues/136) | BLOCKED | #135 | See ledger | Implement verified immutable source provider and worker-local cache with corruption rejection. |
 | [#138](https://github.com/joshyorko/actions/issues/138) | BLOCKED | #83, #84, #90, #129, #130, #143 | See ledger | Version worker protocol carrying exact pinned plans and explicit decline/cancel/recovery. |
@@ -58,7 +58,7 @@ ACTIVE identifies assigned work; REVIEW identifies a bounded submitted checkpoin
 | [#196](https://github.com/joshyorko/actions/issues/196) | BLOCKED | #134, #152, #153, #208, #214 | See ledger | Host RCC provider only after administrative/auth/origin and tunnel lifecycle acceptance. |
 | [#208](https://github.com/joshyorko/actions/issues/208) | INTEGRATED | None recorded | #242 | Extend actual consumer and product error-state proof only where required; Linux consumer receipt is not all-platform execution or whole-issue acceptance. |
 | [#209](https://github.com/joshyorko/actions/issues/209) | REVIEW | None recorded | #216 | Verify latest native WebSocket/reconnect on all OS; All-platform b592 packaged reconnect PASS; e4 Windows cleanup failure remains distinct. |
-| [#210](https://github.com/joshyorko/actions/issues/210) | ACTIVE | None recorded | #249 | Accept exact successor hosted gates and unchanged Helper artifact projection, then promote1.0.3 using normal immutable GitHub release workflow; verify registry bytes. |
-| [#211](https://github.com/joshyorko/actions/issues/211) | ACTIVE | None recorded | #248 | Wait for corrected Helper CORS and actual registry verification before Core tagging; then run the admitted Core publication/registry readback and Runtime/native acceptance. Green PR workflow jobs are not publication evidence. |
+| [#210](https://github.com/joshyorko/actions/issues/210) | COMPLETE | None recorded | #249 | Accepted/closed by owner comment6087641984 after retained-contract audit; no remaining #210 work. Preserve failed immutable1.0.2 tag as historical evidence. |
+| [#211](https://github.com/joshyorko/actions/issues/211) | ACTIVE | None recorded | #248 | Core1.0.2 candidate merged after configured294, five hosted PASS checks and published Helper1.0.3 resolver proof. Core secret-presence attempt2 PASS after attempt1 empty; PyPI preflight was404; immutable tag `actions-core-1.0.2` is pushed and workflow37979108120 is in progress. Publication/readback and dependent Runtime/native acceptance remain. |
 | [#212](https://github.com/joshyorko/actions/issues/212) | REVIEW | None recorded | #216 | Verify new native history gate on all supported OS and rebuilt candidate; retain full detail and legacy supported clients. |
 | [#214](https://github.com/joshyorko/actions/issues/214) | REVIEW | None recorded | See ledger | PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open. |

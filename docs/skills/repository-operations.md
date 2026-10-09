@@ -31,6 +31,19 @@ Successful remote-thread calls do not validate another connector's pending
 approval flow. Preserve its original request/session and private grant record
 until that specific validation failure is resolved.
 
+For native CAS work, pass supported `approval_policy` and `sandbox` settings on
+the authorized start/resume/turn request, then verify the effective policy from
+the native response or settings event. An aggregate `effective_configuration`
+that is null is not evidence of either access level. Keep the CAS machine target
+separate from the repository checkout and worker CWD. Give each mutation a unique
+request ID; after a timeout or HTTP 502, discover its exact thread/request and
+CWD before retrying, and reconcile an already-active mutation instead of replaying
+it. Record worktree cleanliness as a timestamped observation. Native user
+authorization does not resume parked Executor approvals. Evidence: CAS bootstrap
+response/settings event and pre-dispatch inventory in
+`docs/program/evidence/cas-bootstrap-reconciliation-20261009.md`, with worker
+request receipts in `docs/program/evidence/cas-expansion-20261009-1909.json`.
+
 A passing focused native step and a failing later process-ownership step are
 distinct evidence. Record both with the same run/job identifiers, keep skipped
 dependent browser checks as NOT_RUN, and do not infer whole-job or release
@@ -63,6 +76,14 @@ SHA-256 metadata together; source YAML changes alone do not update shipped templ
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
+A nonempty package-secret check proves presence only; it does not test PyPI
+authentication, token scope, upload, or publication. Keep those facts separate
+from a candidate wheel's index-resolution proof. For example, a fresh Core
+candidate install resolved published Helper 1.0.3 from `files.pythonhosted.org`
+and matched the independently verified release-wheel SHA, while the Core secret
+availability probe first reported empty, then reported nonempty on attempt 2; neither attempt authenticated or uploaded.
+Use the admitted release workflow for publication and verify registry artifacts
+afterward. Evidence: `docs/program/evidence/independent-core-pr248-admission-and-credential-probe-20261009.md`.
 
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
