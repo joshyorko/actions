@@ -683,9 +683,34 @@ explicit self-FKs; sequence succession and whether the parent equals the
 current pointer remain transactional repository checks and receive adversarial
 tests. FK existence alone does not prove correct ancestry or CAS behavior.
 
-These are design requirements only. No migration helper, trigger, SQLite DDL,
-PostgreSQL DDL, or database parity receipt is included or claimed by this
-packet.
+These are design requirements only. No migration helper, trigger, or product
+schema DDL is included or claimed by this packet.
+
+#### Proposal-only DDL probe receipt (2026-10-09)
+
+`action_server/tests/action_server_tests/test_deployment_schema_probe.py` builds a
+synthetic schema fixture from this proposed FK matrix; it does not call the
+application migration path. The focused RCC/Poetry test passed on SQLite 3.53.1
+with foreign-key enforcement enabled. It verified the fixture's exact child/parent
+column tuples using `PRAGMA foreign_key_list`, accepted forward declarations for
+the four cyclic current-pointer FKs, published first revisions after nullable owner
+rows in one transaction, and rejected cross-Deployment ancestry/current pointers,
+foreign request parents, and mismatched package/provider/worker/policy references.
+The fixture also confirmed that SQLite permits committing an owner row with a NULL
+current pointer; the repository must therefore guarantee owner, first revision,
+and pointer creation in one transaction. This probe does not establish that product
+code enforces this invariant.
+
+PostgreSQL parity for this synthetic fixture passed on 2026-10-09 using a
+root-owned loopback-only `postgres:17-alpine` service pinned to
+`sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3`.
+The test created owner tables without pointer FKs, created revision targets, added
+the four named pointer constraints, compared the complete FK tuple graph, and
+rejected the same invalid scoped references as SQLite. It removed its unique
+`deployment_probe_*` schema in `finally` and queried `pg_namespace` to verify that
+the schema was absent; the exact schema name and removal assertion are in the
+JUnit receipt. This is still fixture parity only: it proves no production
+migration behavior, migration recovery, or application transaction invariant.
 
 `canonical_snapshot_json` in each immutable revision is the authority. The repository derives normalized join/index rows from that JSON in the same transaction; on read/resolve it verifies they match or fails closed. Binding requirement IDs live inside the exact immutable Package Revision JSON, so `publish` and every `resolve` validate that the requirement exists in that Package Revision and that the binding row points through the matching `deployment_revision_package` tuple. Do not invent a database FK to a JSON member or treat the join rows as a second authority. Use separate typed join tables so every SQL FK has one known target instead of a nullable `profile_kind` bag. RuntimePlan and Capability are inside the immutable canonical Package Revision manifest; resolver verifies the full referenced IDs against it. Catalog cache entries remain #89's concern, not a new service/table by default.
 
