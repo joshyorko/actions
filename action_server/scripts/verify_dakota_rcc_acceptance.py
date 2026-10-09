@@ -4,14 +4,271 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import math
 import os
-import selectors
-import shutil
+import queue
+import signal
 import subprocess
 import sys
 import tempfile
+import threading
+import time
+from urllib.parse import urlsplit
 from pathlib import Path
+
+RCC_VERSION = "v18.19.3"
+RCC_SHA256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+POETRY_VERSION = "Poetry (version 2.1.1)"
+PROOF_TIMEOUT_SECONDS = 2400
+CLEANUP_GRACE_SECONDS = 10
+_ENV_ALLOWLIST = {
+    "PATH",
+    "LANG",
+    "LC_ALL",
+    "TZ",
+    "SSL_CERT_FILE",
+    "SSL_CERT_DIR",
+    "REQUESTS_CA_BUNDLE",
+    "CURL_CA_BUNDLE",
+    "PIP_CERT",
+    "CONDA_SSL_VERIFY",
+    "NODE_EXTRA_CA_CERTS",
+    "HTTP_PROXY",
+    "HTTPS_PROXY",
+    "ALL_PROXY",
+    "NO_PROXY",
+    "http_proxy",
+    "https_proxy",
+    "all_proxy",
+    "no_proxy",
+    "SYSTEMROOT",
+    "WINDIR",
+    "COMSPEC",
+    "PATHEXT",
+}
+_SAFE_EXTRA_ENV = {
+    "ACTIONS_ACCEPTANCE_POETRY",
+    "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
+    "ACTIONS_RUNTIME_RCC_BINARY",
+    "ACTIONS_RUNTIME_RCC_TIMEOUT",
+    "ACTIONS_REAL_RCC_ARTIFACT_TEST",
+    "ACTIONS_RUNTIME_RCC_PROVIDER",
+    "ROBOCORP_HOME",
+    "POETRY_CACHE_DIR",
+}
+
+
+class Deadline:
+    def __init__(self, timeout_seconds: float):
+        self._expires_at = time.monotonic() + timeout_seconds
+
+    @classmethod
+    def after(cls, timeout_seconds: float) -> "Deadline":
+        return cls(timeout_seconds)
+
+    def remaining(self, cap: float | None = None) -> float:
+        remaining = self._expires_at - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError("RCC acceptance exceeded its total deadline")
+        return min(remaining, cap) if cap is not None else remaining
+
+    def remaining_int(self) -> int:
+        return max(1, math.ceil(self.remaining()))
+
+
+def child_environment(
+    source: dict[str, str], *, task_root: Path, extra: dict[str, str] | None = None
+) -> dict[str, str]:
+    """Copy only execution, network, and trust settings needed by the proof."""
+
+    task_root.mkdir(parents=True, exist_ok=True)
+    home = task_root / "home"
+    temp = task_root / "tmp"
+    home.mkdir(parents=True, exist_ok=True)
+    temp.mkdir(parents=True, exist_ok=True)
+    env = {key: value for key, value in source.items() if key in _ENV_ALLOWLIST}
+    env["PATH"] = source.get("PATH", os.defpath)
+    env["HOME"] = str(home)
+    env["TMPDIR"] = str(temp)
+    env["TMP"] = str(temp)
+    env["TEMP"] = str(temp)
+    for key in (
+        "HTTP_PROXY",
+        "HTTPS_PROXY",
+        "ALL_PROXY",
+        "http_proxy",
+        "https_proxy",
+        "all_proxy",
+    ):
+        value = env.get(key)
+        if value:
+            parsed = urlsplit(value)
+            if (
+                not parsed.scheme
+                or not parsed.hostname
+                or parsed.username
+                or parsed.password
+                or parsed.query
+                or parsed.fragment
+                or parsed.path not in ("", "/")
+            ):
+                raise ValueError(
+                    "proxy settings must not contain credentials or URL data"
+                )
+    no_proxy_keys = ("NO_PROXY", "no_proxy")
+    for key in no_proxy_keys:
+        existing = env.get(key)
+        additions = ["127.0.0.1", "localhost"]
+        env[key] = ",".join(filter(None, [existing, *additions]))
+    if extra:
+        forbidden = set(extra) - _SAFE_EXTRA_ENV
+        if forbidden:
+            raise ValueError("unsupported child environment override")
+        env.update(extra)
+    return env
+
+
+def resolve_poetry(
+    source_env: dict[str, str], *, task_root: Path, deadline: Deadline
+) -> Path:
+    poetry_value = source_env.get("ACTIONS_ACCEPTANCE_POETRY")
+    tool_home_value = source_env.get("ACTIONS_ACCEPTANCE_ROBOCORP_HOME")
+    if not poetry_value or not tool_home_value:
+        raise RuntimeError(
+            "Set ACTIONS_ACCEPTANCE_POETRY and ACTIONS_ACCEPTANCE_ROBOCORP_HOME "
+            "from the pinned RCC toolchain"
+        )
+    poetry = Path(poetry_value).expanduser().resolve()
+    tool_home = Path(tool_home_value).expanduser().resolve()
+    try:
+        poetry.relative_to(tool_home / "holotree")
+    except ValueError as exc:
+        raise RuntimeError("Poetry must come from this pinned RCC holotree") from exc
+    if not poetry.is_file() or not os.access(poetry, os.X_OK):
+        raise RuntimeError("the pinned RCC Poetry executable is unavailable")
+    env = child_environment(
+        source_env,
+        task_root=task_root,
+        extra={"ROBOCORP_HOME": str(tool_home)},
+    )
+    completed = run_owned_process(
+        [str(poetry), "--version"],
+        timeout_seconds=deadline.remaining(cap=10),
+        env=env,
+    )
+    if completed.returncode or completed.stdout.strip() != POETRY_VERSION:
+        raise RuntimeError("candidate wheels require pinned RCC Poetry 2.1.1")
+    return poetry
+
+
+def terminate_process_tree(
+    process: subprocess.Popen,
+    *,
+    grace_seconds: float = CLEANUP_GRACE_SECONDS,
+) -> None:
+    if os.name == "posix":
+        import psutil
+
+        try:
+            os.killpg(process.pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+        expires = time.monotonic() + grace_seconds
+        while time.monotonic() < expires:
+            live_group_member = False
+            for candidate in psutil.process_iter(attrs=["pid", "status"]):
+                try:
+                    if (
+                        os.getpgid(candidate.info["pid"]) == process.pid
+                        and candidate.info["status"] != psutil.STATUS_ZOMBIE
+                    ):
+                        live_group_member = True
+                        break
+                except (OSError, psutil.Error):
+                    continue
+            if not live_group_member:
+                break
+            time.sleep(0.05)
+        else:
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        try:
+            process.wait(timeout=grace_seconds)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait()
+        return
+
+    import psutil
+
+    try:
+        root = psutil.Process(process.pid)
+    except psutil.NoSuchProcess:
+        try:
+            process.wait(timeout=grace_seconds)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait()
+        return
+    try:
+        descendants = root.children(recursive=True)
+    except psutil.NoSuchProcess:
+        descendants = []
+    owned = [*reversed(descendants), root]
+    for child in owned:
+        try:
+            child.terminate()
+        except psutil.NoSuchProcess:
+            pass
+    _, alive = psutil.wait_procs(owned, timeout=grace_seconds)
+    for child in alive:
+        try:
+            child.kill()
+        except psutil.NoSuchProcess:
+            pass
+    if alive:
+        psutil.wait_procs(alive, timeout=grace_seconds)
+    try:
+        process.wait(timeout=grace_seconds)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait()
+
+
+def run_owned_process(
+    command: list[str],
+    *,
+    timeout_seconds: float,
+    env: dict[str, str],
+    cwd: Path | None = None,
+    cleanup_grace_seconds: float = CLEANUP_GRACE_SECONDS,
+) -> subprocess.CompletedProcess:
+    process = subprocess.Popen(
+        command,
+        cwd=cwd,
+        env=env,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        start_new_session=(os.name == "posix"),
+    )
+    try:
+        stdout, stderr = process.communicate(timeout=timeout_seconds)
+    except subprocess.TimeoutExpired as exc:
+        terminate_process_tree(process, grace_seconds=cleanup_grace_seconds)
+        stdout, stderr = process.communicate()
+        raise subprocess.TimeoutExpired(
+            command,
+            timeout_seconds,
+            output=stdout or exc.output,
+            stderr=stderr or exc.stderr,
+        ) from exc
+    return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
 
 
 def _source_root() -> Path:
@@ -31,70 +288,117 @@ def _parser() -> argparse.ArgumentParser:
         default="candidate-wheel",
         help="Use local candidate Core/Helper wheels with the source Runtime.",
     )
+    parser.add_argument(
+        "--receipt",
+        type=Path,
+        required=True,
+        help="Write the sanitized proof receipt outside the disposable run directory.",
+    )
     return parser
 
 
-def _start_provider(rcc_binary: str, root: Path, env: dict[str, str]):
+def _readline_with_timeout(stream, timeout_seconds: float) -> str:
+    result: queue.Queue[str] = queue.Queue(maxsize=1)
+    reader = threading.Thread(target=lambda: result.put(stream.readline()), daemon=True)
+    reader.start()
+    try:
+        return result.get(timeout=timeout_seconds)
+    except queue.Empty as exc:
+        raise TimeoutError("RCC cache serve startup timed out") from exc
+
+
+def _provider_command(rcc_binary: str, provider_root: Path) -> list[str]:
+    return [
+        rcc_binary,
+        "cache",
+        "serve",
+        "--root",
+        str(provider_root),
+        "--listen",
+        "127.0.0.1:0",
+        "--json",
+    ]
+
+
+def start_provider(
+    rcc_binary: str,
+    root: Path,
+    env: dict[str, str],
+    *,
+    deadline: Deadline,
+    cleanup_grace_seconds: float = CLEANUP_GRACE_SECONDS,
+) -> tuple[subprocess.Popen, str]:
+    provider_root = root / "provider"
     process = subprocess.Popen(
-        [
-            rcc_binary,
-            "cache",
-            "serve",
-            "--root",
-            str(root / "provider"),
-            "--listen",
-            "127.0.0.1:0",
-            "--json",
-        ],
+        _provider_command(rcc_binary, provider_root),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
         env=env,
+        stdin=subprocess.DEVNULL,
+        start_new_session=(os.name == "posix"),
     )
-    assert process.stdout is not None
-    with selectors.DefaultSelector() as selector:
-        selector.register(process.stdout, selectors.EVENT_READ)
-        if not selector.select(timeout=10):
-            process.terminate()
-            process.wait(timeout=10)
-            raise RuntimeError("RCC cache serve did not return startup JSON in 10s")
-        startup = process.stdout.readline()
-    if process.poll() is not None or not startup:
-        stderr = process.stderr.read() if process.stderr else ""
-        process.wait()
-        raise RuntimeError(f"RCC cache serve failed to start: {stderr[-1000:]}")
     try:
-        url = json.loads(startup)["url"]
-    except (KeyError, TypeError, json.JSONDecodeError) as exc:
-        process.terminate()
-        process.wait(timeout=10)
-        raise RuntimeError("RCC cache serve returned invalid startup JSON") from exc
-    if not url.startswith("http://127.0.0.1:"):
-        process.terminate()
-        process.wait(timeout=10)
-        raise RuntimeError("RCC cache serve did not bind to loopback")
-    return process, url
+        if process.stdout is None:
+            raise RuntimeError("RCC cache serve stdout is unavailable")
+        startup = _readline_with_timeout(process.stdout, deadline.remaining(cap=10))
+        try:
+            payload = json.loads(startup)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError("RCC cache serve returned invalid startup JSON") from exc
+        url = payload["url"]
+        parsed = urlsplit(url)
+        if (
+            parsed.scheme != "http"
+            or parsed.hostname != "127.0.0.1"
+            or parsed.username
+            or parsed.password
+            or parsed.query
+            or parsed.fragment
+        ):
+            raise RuntimeError(
+                "RCC cache serve did not bind to credential-free loopback"
+            )
+        return process, url
+    except BaseException:
+        terminate_process_tree(process, grace_seconds=cleanup_grace_seconds)
+        raise
 
 
-def _build_candidate_wheels(root: Path) -> tuple[Path, Path]:
+def build_candidate_wheels(
+    root: Path,
+    *,
+    source_env: dict[str, str],
+    poetry: Path,
+    deadline: Deadline,
+) -> tuple[Path, Path]:
     repo_root = Path(__file__).resolve().parents[2]
-    poetry = os.environ.get("ACTIONS_ACCEPTANCE_POETRY") or shutil.which("poetry")
-    if not poetry:
-        raise RuntimeError(
-            "ACTIONS_ACCEPTANCE_POETRY must point to Poetry from the pinned RCC toolchain"
-        )
     wheelhouse = root / "candidate-wheelhouse"
     wheelhouse.mkdir()
-    env = os.environ.copy()
-    env["POETRY_CACHE_DIR"] = str(root / "poetry-cache")
+    env = child_environment(
+        source_env,
+        task_root=root / "poetry-build",
+        extra={
+            "ACTIONS_ACCEPTANCE_POETRY": str(poetry),
+            "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": source_env[
+                "ACTIONS_ACCEPTANCE_ROBOCORP_HOME"
+            ],
+            "ROBOCORP_HOME": source_env["ACTIONS_ACCEPTANCE_ROBOCORP_HOME"],
+            "POETRY_CACHE_DIR": str(root / "poetry-cache"),
+        },
+    )
     for package_dir in (repo_root / "actions-http-helper", repo_root / "actions"):
-        subprocess.run(
+        result = run_owned_process(
             [poetry, "build", "--format", "wheel", "--output", str(wheelhouse)],
             cwd=package_dir,
             env=env,
-            check=True,
-            timeout=300,
+            timeout_seconds=deadline.remaining(),
         )
+        if result.returncode:
+            raise RuntimeError(
+                "pinned Poetry candidate wheel build failed: "
+                f"{(result.stderr or result.stdout)[-1000:]}"
+            )
     core = wheelhouse / "actions_core-1.0.2-py3-none-any.whl"
     helper = wheelhouse / "actions_http_helper-1.0.2-py3-none-any.whl"
     if not core.is_file() or not helper.is_file():
@@ -102,21 +406,140 @@ def _build_candidate_wheels(root: Path) -> tuple[Path, Path]:
     return core, helper
 
 
-def _run() -> dict[str, object]:
-    sys.path.insert(0, str(_source_root() / "src"))
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
-    import requests
 
-    from actions.server._models import ActionPackage, Run, RunStatus, load_db
-    from actions.server._rcc_runtime_adapter import read_receipt
-    from actions.server._selftest import ActionServerProcess
+def source_revision(repo_root: Path, *, env: dict[str, str], deadline: Deadline) -> str:
+    status = run_owned_process(
+        ["git", "status", "--porcelain", "--untracked-files=all"],
+        cwd=repo_root,
+        env=env,
+        timeout_seconds=deadline.remaining(cap=10),
+    )
+    if status.returncode or status.stdout.strip():
+        raise RuntimeError("source checkout must be clean before recording its SHA")
+    result = run_owned_process(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repo_root,
+        env=env,
+        timeout_seconds=deadline.remaining(cap=10),
+    )
+    source_sha = result.stdout.strip()
+    if (
+        result.returncode
+        or len(source_sha) != 40
+        or any(c not in "0123456789abcdef" for c in source_sha)
+    ):
+        raise RuntimeError("unable to determine the exact source commit")
+    return source_sha
 
-    rcc_binary = os.environ.get("ACTIONS_RUNTIME_RCC_BINARY")
-    if not rcc_binary:
+
+def write_evidence(path: Path, evidence: dict[str, object], *, temp_root: Path) -> None:
+    target = path.expanduser().resolve()
+    try:
+        target.relative_to(temp_root.resolve())
+    except ValueError:
+        pass
+    else:
+        raise ValueError("evidence receipt must be outside the disposable temp root")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    payload = (json.dumps(evidence, sort_keys=True, indent=2) + "\n").encode()
+    fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, "wb") as stream:
+        stream.write(payload)
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def _verify_rcc(
+    source_env: dict[str, str], *, task_root: Path, deadline: Deadline
+) -> tuple[str, str]:
+    rcc_value = source_env.get("ACTIONS_RUNTIME_RCC_BINARY")
+    if not rcc_value:
         raise RuntimeError("ACTIONS_RUNTIME_RCC_BINARY must name pinned RCC v18.19.3")
+    rcc = Path(rcc_value).expanduser().resolve()
+    if not rcc.is_file() or not os.access(rcc, os.X_OK):
+        raise RuntimeError("the pinned RCC executable is unavailable")
+    env = child_environment(
+        source_env,
+        task_root=task_root,
+        extra={"ACTIONS_RUNTIME_RCC_BINARY": str(rcc)},
+    )
+    result = run_owned_process(
+        [str(rcc), "version"],
+        timeout_seconds=deadline.remaining(cap=10),
+        env=env,
+    )
+    if result.returncode or result.stdout.strip() != RCC_VERSION:
+        raise RuntimeError("candidate acceptance requires RCC v18.19.3")
+    digest = sha256_file(rcc)
+    if digest != RCC_SHA256:
+        raise RuntimeError("RCC binary does not match the pinned Linux release digest")
+    return str(rcc), digest
+
+
+def _sanitize_runtime_receipt(receipt: dict[str, object]) -> dict[str, object]:
+    verification = receipt.get("verification")
+    if not isinstance(verification, dict):
+        raise AssertionError("RCC receipt verification is not an object")
+    return {
+        "artifactDigest": receipt["artifactDigest"],
+        "verification": {"valid": verification.get("valid")},
+        "leaseId": receipt["leaseId"],
+        **{
+            key: receipt[key]
+            for key in ("status", "exitCode", "reason")
+            if key in receipt
+        },
+    }
+
+
+def _run(receipt_path: Path) -> dict[str, object]:
+    deadline = Deadline.after(PROOF_TIMEOUT_SECONDS)
+    source_env = dict(os.environ)
+    repo_root = Path(__file__).resolve().parents[2]
+    if receipt_path.expanduser().resolve().exists():
+        raise FileExistsError("refusing to overwrite an existing acceptance receipt")
+
     with tempfile.TemporaryDirectory(prefix="dakota-rcc-acceptance-") as temp:
         root = Path(temp)
-        core_wheel, helper_wheel = _build_candidate_wheels(root)
+        rcc_binary, rcc_sha256 = _verify_rcc(
+            source_env, task_root=root / "rcc-version", deadline=deadline
+        )
+        poetry = resolve_poetry(
+            source_env,
+            task_root=root / "poetry-version",
+            deadline=deadline,
+        )
+        tool_home = source_env["ACTIONS_ACCEPTANCE_ROBOCORP_HOME"]
+        tool_extra = {
+            "ACTIONS_ACCEPTANCE_POETRY": str(poetry),
+            "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": tool_home,
+            "ACTIONS_RUNTIME_RCC_BINARY": rcc_binary,
+            "ROBOCORP_HOME": tool_home,
+        }
+        tool_env = child_environment(
+            source_env, task_root=root / "source-inspection", extra=tool_extra
+        )
+        source_sha = source_revision(repo_root, env=tool_env, deadline=deadline)
+        core_wheel, helper_wheel = build_candidate_wheels(
+            root, source_env=source_env, poetry=poetry, deadline=deadline
+        )
+        wheel_records = {
+            "actions-core": {
+                "filename": core_wheel.name,
+                "sha256": sha256_file(core_wheel),
+            },
+            "actions-http-helper": {
+                "filename": helper_wheel.name,
+                "sha256": sha256_file(helper_wheel),
+            },
+        }
         package_dir = root / "package"
         package_dir.mkdir()
         (package_dir / "package.yaml").write_text(
@@ -148,24 +571,45 @@ dependencies:
             encoding="utf-8",
         )
 
-        environment = os.environ.copy()
-        environment.update(
-            {
+        runtime_root = root / "runtime-state"
+        runtime_env = child_environment(
+            source_env,
+            task_root=runtime_root / "environment",
+            extra={
                 "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
                 "ACTIONS_RUNTIME_RCC_BINARY": rcc_binary,
-                "ROBOCORP_HOME": str(root / "rcc-home"),
-            }
+                "ACTIONS_RUNTIME_RCC_TIMEOUT": str(
+                    max(1, math.floor(deadline.remaining()))
+                ),
+                "ROBOCORP_HOME": str(runtime_root / "rcc-home"),
+            },
         )
-        provider, provider_url = _start_provider(rcc_binary, root, environment)
-        environment["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_url
-        api_key = "synthetic-dakota-rcc-acceptance-key"
-        datadir = root / "runtime-data"
+        os.environ.clear()
+        os.environ.update(runtime_env)
+        sys.path.insert(0, str(_source_root() / "src"))
+        import requests
+
+        from actions.server._models import ActionPackage, Run, RunStatus, load_db
+        from actions.server._rcc_runtime_adapter import read_receipt
+        from actions.server._selftest import ActionServerProcess
+
+        provider = None
         server = None
         run_id = ""
         try:
+            provider, provider_url = start_provider(
+                rcc_binary,
+                runtime_root,
+                runtime_env,
+                deadline=deadline,
+            )
+            runtime_env["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_url
+            os.environ["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_url
+            api_key = "synthetic-dakota-rcc-acceptance-key"
+            datadir = runtime_root / "runtime-data"
             server = ActionServerProcess(datadir)
             server.start(
-                timeout=900,
+                timeout=deadline.remaining_int(),
                 db_file="server.db",
                 actions_sync=True,
                 cwd=package_dir,
@@ -176,13 +620,14 @@ dependencies:
                     "--api-key",
                     api_key,
                 ],
-                env=environment,
+                env=runtime_env,
                 port=0,
             )
             base_url = f"http://{server.host}:{server.port}"
             action_url = f"{base_url}/api/actions/dakota-rcc-acceptance/answer/run"
-
-            unauthenticated = requests.post(action_url, json={}, timeout=20)
+            unauthenticated = requests.post(
+                action_url, json={}, timeout=deadline.remaining(cap=20)
+            )
             if unauthenticated.status_code not in (401, 403):
                 raise AssertionError(
                     "Runtime did not reject the unauthenticated synthetic Action"
@@ -192,7 +637,7 @@ dependencies:
                 action_url,
                 json={},
                 headers={"Authorization": f"Bearer {api_key}"},
-                timeout=900,
+                timeout=deadline.remaining(),
             )
             if response.status_code >= 400:
                 raise RuntimeError(
@@ -216,7 +661,7 @@ dependencies:
             detail = requests.get(
                 f"{base_url}/api/runs/{run_id}",
                 headers={"Authorization": f"Bearer {api_key}"},
-                timeout=20,
+                timeout=deadline.remaining(cap=20),
             )
             detail.raise_for_status()
             if detail.json().get("id") != run_id:
@@ -226,12 +671,8 @@ dependencies:
                 if server is not None:
                     server.stop()
             finally:
-                provider.terminate()
-                try:
-                    provider.wait(timeout=10)
-                except subprocess.TimeoutExpired:
-                    provider.kill()
-                    provider.wait()
+                if provider is not None:
+                    terminate_process_tree(provider)
 
         db_path = datadir / "server.db"
         with load_db(db_path) as db:
@@ -252,26 +693,31 @@ dependencies:
         receipts = sorted((datadir / "rcc-receipts").glob("*.json"))
         if not receipts:
             raise AssertionError("Runtime produced no RCC process receipt")
-        receipt = read_receipt(receipts[-1], digest)
-        if not receipt.get("leaseId"):
+        rcc_receipt = read_receipt(receipts[-1], digest)
+        if not rcc_receipt.get("leaseId"):
             raise AssertionError("RCC receipt has no process lease identity")
 
-        return {
+        evidence = {
+            "schema_version": 1,
             "runtime_mode": "candidate-wheel",
             "action_server_mode": "source",
+            "source_sha": source_sha,
+            "rcc": {"version": runtime["rcc_version"], "sha256": rcc_sha256},
+            "candidate_wheels": wheel_records,
             "actions_core": "1.0.2",
             "actions_http_helper": "1.0.2",
             "server_integration": candidate_result["server_integration"],
-            "rcc_version": runtime["rcc_version"],
             "artifact_digest": digest,
             "run_id": run_id,
-            "status": "passed",
+            "sqlite_status": "passed",
             "unauthenticated_http_status": unauthenticated.status_code,
             "authenticated_http_status": response.status_code,
-            "verification_valid": receipt["verification"]["valid"],
-            "lease_id_present": True,
             "provider": "rcc-cache-serve-loopback",
+            "rcc_receipt": _sanitize_runtime_receipt(rcc_receipt),
         }
+        write_evidence(receipt_path, evidence, temp_root=root)
+        evidence["receipt_path"] = str(receipt_path.expanduser().resolve())
+        return evidence
 
 
 def main() -> int:
@@ -279,7 +725,7 @@ def main() -> int:
     if args.mode != "candidate-wheel":
         raise AssertionError("unreachable unsupported mode")
     try:
-        result = _run()
+        result = _run(args.receipt)
     except Exception as exc:
         print(
             f"Dakota RCC acceptance failed: {type(exc).__name__}: {exc}",
