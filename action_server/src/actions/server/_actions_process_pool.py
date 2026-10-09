@@ -10,8 +10,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from queue import Queue
-from typing import TYPE_CHECKING, Dict, Iterator, List, Optional, Set
-from typing import Literal
+from typing import TYPE_CHECKING, Dict, Iterator, List, Literal, Optional, Set
 
 from termcolor import colored
 
@@ -72,6 +71,22 @@ def _create_server_socket(host: str, port: int):
         raise
 
     return server
+
+
+def _worker_python_executable(
+    runtime_descriptor: object | None,
+    env: Dict[str, str],
+    *,
+    frozen: bool,
+    source_python: str,
+) -> Optional[str]:
+    """Select RCC's artifact Python without trusting persisted path hints."""
+
+    if runtime_descriptor is not None:
+        return "python"
+    if "PYTHON_EXE" in env:
+        return env["PYTHON_EXE"]
+    return None if frozen else source_python
 
 
 def _connect_to_socket(host, port):
@@ -174,19 +189,18 @@ class ProcessHandle:
             # the process doesn't exit!
             env["RC_DUMP_THREADS_AFTER_RUN"] = "0"
 
-        if runtime_descriptor is not None:
-            python_exe = "python"
-        elif "PYTHON_EXE" in env:
-            python_exe = env["PYTHON_EXE"]
-        else:
-            if is_frozen():
-                log.critical(
-                    f"Unable to create process for action package: {action_package} "
-                    "(environment does not contain PYTHON_EXE)."
-                )
-                return
-
-            python_exe = sys.executable
+        python_exe = _worker_python_executable(
+            runtime_descriptor,
+            env,
+            frozen=is_frozen(),
+            source_python=sys.executable,
+        )
+        if python_exe is None:
+            log.critical(
+                f"Unable to create process for action package: {action_package} "
+                "(environment does not contain PYTHON_EXE)."
+            )
+            return
 
         # stdin/stdout is no longer an option because numpy gets halted
         # if stdin is being read while importing numpy.
@@ -451,7 +465,8 @@ class ProcessHandle:
         if not self._retirement_lock.acquire(timeout=remaining):
             log.warning("Timed out waiting for another worker retirement attempt.")
             return WorkerRetirementResult(
-                "pending", descendant_snapshot_complete=False,
+                "pending",
+                descendant_snapshot_complete=False,
                 reason="retirement lock deadline expired",
             )
         try:
@@ -520,7 +535,10 @@ class ProcessHandle:
                     {"method": "exit"}, self._socket, exit_deadline
                 )
             except Exception:
-                log.warning("Worker exit frame failed; switching to bounded force cleanup.", exc_info=True)
+                log.warning(
+                    "Worker exit frame failed; switching to bounded force cleanup.",
+                    exc_info=True,
+                )
         elif snapshot_failed or self._kill_called:
             self._exit_attempted = True
 
@@ -530,9 +548,7 @@ class ProcessHandle:
             and self._process.poll() is None
         ):
             try:
-                self._process.wait(
-                    timeout=max(0.0, exit_deadline - time.monotonic())
-                )
+                self._process.wait(timeout=max(0.0, exit_deadline - time.monotonic()))
             except subprocess.TimeoutExpired:
                 pass
 
@@ -1076,8 +1092,16 @@ class ActionsProcessPool:
 
     def dispose(self):
         with self._lock:
-            idle = [process for processes in self._idle_processes.values() for process in processes]
-            running = [process for processes in self._running_processes.values() for process in processes]
+            idle = [
+                process
+                for processes in self._idle_processes.values()
+                for process in processes
+            ]
+            running = [
+                process
+                for processes in self._running_processes.values()
+                for process in processes
+            ]
             for process_handle in running:
                 process_handle.can_reuse = False
             self._idle_processes.clear()
@@ -1243,8 +1267,8 @@ class ActionsProcessPool:
                 # Each 2 seconds check again if we can acquire a process.
                 # Important: do it without acquiring `self._lock` (as it could lead
                 # to a deadlock if one depends on the other)
-                acquired_process_semaphore = (
-                    self._processes_running_semaphore.acquire(blocking=False)
+                acquired_process_semaphore = self._processes_running_semaphore.acquire(
+                    blocking=False
                 )
                 if not acquired_process_semaphore:
                     self._retry_pending_retirements()

@@ -1185,7 +1185,9 @@ def test_unexpected_dead_worker_has_explicit_unverified_recovery(monkeypatch):
     handle._process = subprocess.Popen([sys.executable, "-c", "pass"])
     handle._process.wait(timeout=2)
     handle._reader = type(
-        "Reader", (), {"join": lambda self, timeout=None: None, "is_alive": lambda self: False}
+        "Reader",
+        (),
+        {"join": lambda self, timeout=None: None, "is_alive": lambda self: False},
     )()
     handle._socket = None
 
@@ -1319,9 +1321,7 @@ def test_rcc_wrapper_retains_failed_snapshot_after_wrapper_exit(monkeypatch):
     handle._owned_snapshot_complete = False
     handle.last_cleanup_result = None
 
-    def force_kill(
-        process, descendants, deadline, *, snapshot_complete_before_call
-    ):
+    def force_kill(process, descendants, deadline, *, snapshot_complete_before_call):
         assert process is handle.process
         assert descendants == []
         assert not snapshot_complete_before_call
@@ -1496,7 +1496,10 @@ def test_process_pool_releases_capacity_when_warmup_fails(monkeypatch):
     pool.action_package_id_to_action_package = {
         "package": SimpleNamespace(id="package")
     }
-    pool._remove_from_running_processes = lambda process: pool._running_processes.clear()
+    pool._remove_from_running_processes = (
+        lambda process: pool._running_processes.clear()
+    )
+
     def fail_warmup_after_retirement():
         assert fake_process not in pool._pending_retirements
         with pool._lock:
