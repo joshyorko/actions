@@ -357,6 +357,7 @@ def test_unavailable_provider_probe_counts_and_rejects_attempted_requests():
             urllib.request.urlopen(probe.url, timeout=2)
         assert error.value.code == 503
         assert probe.request_count == 1
+        assert probe.requests == [{"method": "GET", "path": "/", "status": 503}]
         assert harness.classify_zero_provider_requests(probe.request_count) == "FAIL"
         assert harness.classify_zero_provider_requests(0) == "PASS"
         assert harness.classify_zero_provider_requests(True) == "FAIL"

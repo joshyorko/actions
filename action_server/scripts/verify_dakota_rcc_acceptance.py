@@ -812,6 +812,7 @@ class UnavailableProviderProbe:
 
     def __init__(self, host: str, port: int) -> None:
         self._count = 0
+        self._requests: list[dict[str, object]] = []
         self._count_lock = threading.Lock()
         owner = self
 
@@ -819,12 +820,20 @@ class UnavailableProviderProbe:
             def _reject(self) -> None:
                 with owner._count_lock:
                     owner._count += 1
+                    owner._requests.append(
+                        {
+                            "method": self.command,
+                            "path": urlsplit(self.path).path[:512],
+                            "status": 503,
+                        }
+                    )
                 body = b'{"error":"provider unavailable"}'
                 self.send_response(503)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Content-Length", str(len(body)))
                 self.end_headers()
-                self.wfile.write(body)
+                if self.command != "HEAD":
+                    self.wfile.write(body)
 
             do_DELETE = _reject
             do_GET = _reject
@@ -852,6 +861,11 @@ class UnavailableProviderProbe:
     def request_count(self) -> int:
         with self._count_lock:
             return self._count
+
+    @property
+    def requests(self) -> list[dict[str, object]]:
+        with self._count_lock:
+            return list(self._requests)
 
     def close(self, timeout_seconds: float = CLEANUP_GRACE_SECONDS) -> None:
         self._server.shutdown()
@@ -1472,6 +1486,7 @@ dependencies:
                     "provider_reference": provider_probe.url,
                     "provider_probe_role": "count-and-reject-only; serves no artifacts",
                     "provider_probe_requests": provider_probe.request_count,
+                    "provider_probe_request_events": provider_probe.requests,
                     "artifact_lifecycle_inspect": lifecycle,
                     "failure_class": warm_failure_class,
                     "run_id": warm_run_id or None,
@@ -1593,6 +1608,7 @@ dependencies:
                 "provider_reference": provider_probe.url,
                 "provider_probe_role": "count-and-reject-only; serves no artifacts",
                 "provider_probe_requests": provider_probe.request_count,
+                "provider_probe_request_events": provider_probe.requests,
                 "artifact_lifecycle_inspect": lifecycle,
                 "run_id": warm_run_id,
                 "runtime_process_exit_code": warm_server_exit_code,
