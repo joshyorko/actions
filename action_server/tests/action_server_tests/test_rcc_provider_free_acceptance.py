@@ -84,25 +84,26 @@ dependencies:
     for generation in range(2):
         prior_receipt_files = set((datadir / "rcc-receipts").glob("*.json"))
         server = ActionServerProcess(datadir)
-        server.start(
-            timeout=900,
-            db_file="server.db",
-            actions_sync=True,
-            cwd=package_dir,
-            min_processes=0,
-            max_processes=1,
-            reuse_processes=True,
-            additional_args=[
-                "--address=127.0.0.1",
-                "--api-key",
-                api_key,
-            ],
-            env=runtime_env,
-            port=0,
-            verbose="",
-        )
-        server_process = server.process
+        server_process = None
         try:
+            server.start(
+                timeout=900,
+                db_file="server.db",
+                actions_sync=True,
+                cwd=package_dir,
+                min_processes=0,
+                max_processes=1,
+                reuse_processes=True,
+                additional_args=[
+                    "--address=127.0.0.1",
+                    "--api-key",
+                    api_key,
+                ],
+                env=runtime_env,
+                port=0,
+                verbose="",
+            )
+            server_process = server.process
             action_url = (
                 f"http://{server.host}:{server.port}"
                 "/api/actions/rcc-local-acceptance/answer/run"
@@ -128,10 +129,14 @@ dependencies:
             assert runtime["provider_reference"] is None
             artifact_digests.append(runtime["artifact_digest"])
         finally:
+            if server_process is None:
+                server_process = getattr(server, "_process", None)
             server.stop()
-            process_reaped.append(
-                server_process.returncode is not None and not server_process.is_alive()
-            )
+            if server_process is not None:
+                process_reaped.append(
+                    server_process.returncode is not None
+                    and not server_process.is_alive()
+                )
 
         receipt_files = sorted(
             set((datadir / "rcc-receipts").glob("*.json")) - prior_receipt_files
