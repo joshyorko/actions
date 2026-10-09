@@ -333,6 +333,46 @@ def test_runtime_tree_refresh_precedes_stop_even_when_stop_fails(monkeypatch):
     assert tree == ["new-owned-child"]
 
 
+def test_supervisor_process_enumeration_errors_fail_closed(monkeypatch):
+    import psutil
+
+    harness = _harness()
+
+    def denied(self, recursive=False):
+        raise psutil.AccessDenied(self.pid)
+
+    monkeypatch.setattr(psutil.Process, "children", denied)
+    with pytest.raises(harness.ProcessTreeCleanupError, match="unable to enumerate"):
+        harness._supervisor_children(psutil)
+
+
+def test_supervisor_cleanup_failure_demotes_existing_receipt(tmp_path):
+    harness = _harness()
+    receipt = tmp_path / "receipt.json"
+    evidence = {
+        "acceptance_status": "PASS",
+        "cells": {"authenticated_action": "PASS", "process_cleanup": "PASS"},
+    }
+    harness.write_evidence(receipt, evidence, temp_root=tmp_path / "temporary")
+
+    harness.record_supervisor_cleanup_failure(
+        receipt,
+        harness.ProcessTreeCleanupError(
+            "unexpected process",
+            command_returncode=0,
+            cleanup_disposition="killed_unexpected_descendants",
+        ),
+    )
+
+    updated = json.loads(receipt.read_text(encoding="utf-8"))
+    assert updated["acceptance_status"] == "FAIL"
+    assert updated["cells"]["process_cleanup"] == "FAIL"
+    assert updated["supervisor_cleanup"] == {
+        "disposition": "killed_unexpected_descendants",
+        "command_returncode": 0,
+    }
+
+
 def test_owned_linux_process_accepts_path_arguments(tmp_path):
     harness = _harness()
     result = harness.run_owned_process(
@@ -343,6 +383,8 @@ def test_owned_linux_process_accepts_path_arguments(tmp_path):
 
     assert result.returncode == 0
     assert result.stdout.strip() == "path-argument-ok"
+    assert result.cleanup_disposition == "clean_no_descendants"
+    assert result.reaped_descendants == 0
 
 
 def test_acceptance_fails_closed_before_side_effects_on_non_linux(monkeypatch):
@@ -421,13 +463,18 @@ def test_early_owner_exit_cleans_detached_inherited_pipe_writer(tmp_path):
     )
     env = harness.child_environment(os.environ, task_root=tmp_path / "isolated")
     invoke = (
-        "import importlib.util,subprocess,sys\n"
+        "import importlib.util,json,subprocess,sys\n"
         f"spec=importlib.util.spec_from_file_location('dakota_harness',{str(SCRIPT)!r})\n"
         "module=importlib.util.module_from_spec(spec)\n"
         "spec.loader.exec_module(module)\n"
-        "try:\n    module.run_owned_process([sys.executable,'-c',"
+        "try:\n"
+        "    module.run_owned_process([sys.executable,'-c',"
         f"{owner_code!r}], timeout_seconds=5, env={env!r}, cleanup_grace_seconds=0.2)\n"
-        "except subprocess.TimeoutExpired:\n    pass\n"
+        "except module.ProcessTreeCleanupError as error:\n"
+        "    print(json.dumps({'raised': True, 'returncode': error.command_returncode, "
+        "'disposition': error.cleanup_disposition}))\n"
+        "else:\n"
+        "    print(json.dumps({'raised': False}))\n"
     )
     started = time.monotonic()
     outer = subprocess.Popen(
@@ -444,6 +491,12 @@ def test_early_owner_exit_cleans_detached_inherited_pipe_writer(tmp_path):
         assert time.monotonic() - started < 5
         import psutil
 
+        result = json.loads(stdout)
+        assert result == {
+            "raised": True,
+            "returncode": 0,
+            "disposition": "killed_unexpected_descendants",
+        }
         child_pid = int(pid_file.read_text())
         with pytest.raises(psutil.NoSuchProcess):
             psutil.Process(child_pid).status()
@@ -451,6 +504,54 @@ def test_early_owner_exit_cleans_detached_inherited_pipe_writer(tmp_path):
         if outer.poll() is None:
             outer.kill()
             outer.communicate(timeout=2)
+        if pid_file.exists():
+            try:
+                os.kill(int(pid_file.read_text()), signal.SIGKILL)
+            except (ProcessLookupError, ValueError):
+                pass
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux subreaper regression")
+def test_success_reaps_fast_exit_detached_child_before_echild(tmp_path):
+    harness = _harness()
+    pid_file = tmp_path / "fast-exit.pid"
+    child_code = (
+        "import os; from pathlib import Path; "
+        f"Path({str(pid_file)!r}).write_text(str(os.getpid()))"
+    )
+    owner_code = (
+        "import subprocess,sys,time; from pathlib import Path; "
+        f"subprocess.Popen([sys.executable,'-c',{child_code!r}], "
+        "start_new_session=True, stdout=sys.stdout, stderr=sys.stderr); "
+        f"pid_file=Path({str(pid_file)!r}); deadline=time.monotonic()+3; "
+        "pid=None\n"
+        "while pid is None and time.monotonic()<deadline:\n"
+        "    try: pid=int(pid_file.read_text())\n"
+        "    except (FileNotFoundError, ValueError): time.sleep(0.01)\n"
+        "while pid is not None and Path(f'/proc/{pid}/stat').exists():\n"
+        "    state=Path(f'/proc/{pid}/stat').read_text().split()[2]\n"
+        "    if state == 'Z': break\n"
+        "    time.sleep(0.01)\n"
+    )
+    env = harness.child_environment(os.environ, task_root=tmp_path / "isolated")
+    started = time.monotonic()
+    try:
+        result = harness.run_owned_process(
+            [sys.executable, "-c", owner_code],
+            timeout_seconds=3,
+            env=env,
+            cleanup_grace_seconds=0.5,
+        )
+        assert time.monotonic() - started < 3
+        assert result.returncode == 0
+        assert result.cleanup_disposition == "reaped_exited_descendants"
+        assert result.reaped_descendants >= 1
+        import psutil
+
+        child_pid = int(pid_file.read_text())
+        with pytest.raises(psutil.NoSuchProcess):
+            psutil.Process(child_pid).status()
+    finally:
         if pid_file.exists():
             try:
                 os.kill(int(pid_file.read_text()), signal.SIGKILL)

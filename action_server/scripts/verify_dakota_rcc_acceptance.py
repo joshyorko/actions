@@ -81,7 +81,22 @@ class Deadline:
 
 
 class ProcessTreeCleanupError(RuntimeError):
-    """An owned process or inherited pipe writer survived bounded cleanup."""
+    """An owned command or descendant violated bounded cleanup."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        command_returncode: int | None = None,
+        cleanup_disposition: str = "incomplete",
+        command_stdout: str = "",
+        command_stderr: str = "",
+    ) -> None:
+        super().__init__(message)
+        self.command_returncode = command_returncode
+        self.cleanup_disposition = cleanup_disposition
+        self.command_stdout = command_stdout
+        self.command_stderr = command_stderr
 
 
 def child_environment(
@@ -332,6 +347,17 @@ def run_owned_process(
         completed = subprocess.CompletedProcess(
             command, result["returncode"], result["stdout"], result["stderr"]
         )
+        completed.cleanup_disposition = result["cleanup_disposition"]
+        completed.reaped_descendants = result["reaped_descendants"]
+        if result.get("unexpected_live_descendants") and not result["timed_out"]:
+            raise ProcessTreeCleanupError(
+                "command exited while owned descendants were still live; "
+                f"cleanup disposition={result['cleanup_disposition']}",
+                command_returncode=completed.returncode,
+                cleanup_disposition=result["cleanup_disposition"],
+                command_stdout=completed.stdout,
+                command_stderr=completed.stderr,
+            )
         if result["timed_out"]:
             raise subprocess.TimeoutExpired(
                 command,
@@ -373,6 +399,172 @@ def run_owned_process(
     return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
 
 
+def _supervisor_children(psutil_module):
+    try:
+        return psutil_module.Process(os.getpid()).children(recursive=True)
+    except psutil_module.Error as exc:
+        raise ProcessTreeCleanupError(
+            "unable to enumerate subreaper-owned descendants"
+        ) from exc
+
+
+def _process_is_live(process, psutil_module) -> bool:
+    try:
+        return process.status() != psutil_module.STATUS_ZOMBIE
+    except psutil_module.NoSuchProcess:
+        return False
+    except psutil_module.Error as exc:
+        raise ProcessTreeCleanupError(
+            f"unable to inspect owned process {process.pid}"
+        ) from exc
+
+
+def _reap_adopted_children(*, deadline: float) -> int:
+    reaped = 0
+    while True:
+        try:
+            pid, _status = os.waitpid(-1, os.WNOHANG)
+        except ChildProcessError:  # waitpid(-1) confirmed ECHILD
+            return reaped
+        if pid > 0:
+            reaped += 1
+            continue
+        if time.monotonic() >= deadline:
+            raise ProcessTreeCleanupError(
+                "subreaper could not reach ECHILD before the reap deadline"
+            )
+        time.sleep(0.01)
+
+
+def _proc_descendants(root_pid: int) -> list[int]:
+    descendants: list[int] = []
+    pending = [root_pid]
+    while pending:
+        parent_pid = pending.pop()
+        children_path = Path(f"/proc/{parent_pid}/task/{parent_pid}/children")
+        try:
+            child_pids = [int(value) for value in children_path.read_text().split()]
+        except FileNotFoundError:
+            continue
+        except OSError as exc:
+            raise ProcessTreeCleanupError(
+                f"unable to enumerate Linux child list for pid {parent_pid}"
+            ) from exc
+        descendants.extend(child_pids)
+        pending.extend(child_pids)
+    return descendants
+
+
+def _fallback_reap_after_error(child, *, grace: float) -> None:
+    """Use Linux /proc ownership when normal supervisor inspection fails."""
+
+    deadline = time.monotonic() + (2 * grace)
+    while time.monotonic() < deadline:
+        try:
+            owned = _proc_descendants(os.getpid())
+        except ProcessTreeCleanupError:
+            owned = []
+        for pid in reversed(owned):
+            try:
+                os.kill(pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        if child.poll() is None:
+            try:
+                os.killpg(child.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            try:
+                child.kill()
+            except ProcessLookupError:
+                pass
+        if child.poll() is None:
+            try:
+                child.wait(timeout=min(0.05, max(0.01, deadline - time.monotonic())))
+            except subprocess.TimeoutExpired:
+                pass
+    child.wait(timeout=max(0.05, grace))
+    _reap_adopted_children(deadline=time.monotonic() + grace)
+
+
+def _stop_supervised_processes(child, psutil_module, *, grace: float) -> str:
+    descendants = _supervisor_children(psutil_module)
+    if child.poll() is not None and not any(
+        _process_is_live(process, psutil_module) for process in descendants
+    ):
+        child.wait()
+        return "reaped_exited_descendants" if descendants else "clean_no_descendants"
+
+    for process in reversed(descendants):
+        if not _process_is_live(process, psutil_module):
+            continue
+        try:
+            process.terminate()
+        except psutil_module.NoSuchProcess:
+            pass
+        except psutil_module.Error as exc:
+            raise ProcessTreeCleanupError(
+                f"unable to terminate owned process {process.pid}"
+            ) from exc
+    if child.poll() is None:
+        try:
+            child.terminate()
+        except ProcessLookupError:
+            pass
+
+    grace_deadline = time.monotonic() + grace
+    while time.monotonic() < grace_deadline:
+        active = [
+            process
+            for process in _supervisor_children(psutil_module)
+            if _process_is_live(process, psutil_module)
+        ]
+        if child.poll() is not None and not active:
+            break
+        time.sleep(0.01)
+
+    active = [
+        process
+        for process in _supervisor_children(psutil_module)
+        if _process_is_live(process, psutil_module)
+    ]
+    escalated = bool(active or child.poll() is None)
+    for process in reversed(active):
+        try:
+            process.kill()
+        except psutil_module.NoSuchProcess:
+            pass
+        except psutil_module.Error as exc:
+            raise ProcessTreeCleanupError(
+                f"unable to kill owned process {process.pid}"
+            ) from exc
+    if child.poll() is None:
+        try:
+            child.kill()
+        except ProcessLookupError:
+            pass
+    try:
+        child.wait(timeout=max(0.05, grace))
+    except subprocess.TimeoutExpired as exc:
+        raise ProcessTreeCleanupError(
+            "owned command process could not be reaped"
+        ) from exc
+
+    reap_deadline = time.monotonic() + grace
+    _reap_adopted_children(deadline=reap_deadline)
+    if not descendants:
+        return (
+            "timed_out_owner_terminated"
+            if child.returncode is not None
+            else "clean_no_descendants"
+        )
+    return (
+        "killed_unexpected_descendants"
+        if escalated
+        else "terminated_unexpected_descendants"
+    )
+
+
 def _supervisor_main() -> int:
     """Contain one Linux command and all descendants in a dedicated subreaper."""
 
@@ -386,8 +578,9 @@ def _supervisor_main() -> int:
     payload = json.load(sys.stdin)
     command = payload["command"]
     grace = float(payload["cleanup_grace_seconds"])
-    deadline = time.monotonic() + float(payload["timeout_seconds"])
+    command_deadline = time.monotonic() + float(payload["timeout_seconds"])
     timed_out = False
+    child = None
     with tempfile.TemporaryDirectory(prefix="dakota-owned-process-") as scratch:
         stdout_path = Path(scratch) / "stdout"
         stderr_path = Path(scratch) / "stderr"
@@ -395,77 +588,48 @@ def _supervisor_main() -> int:
             stdout_path.open("w+b") as stdout_file,
             stderr_path.open("w+b") as stderr_file,
         ):
-            child = subprocess.Popen(
-                command,
-                cwd=payload["cwd"],
-                env=payload["env"],
-                stdin=subprocess.DEVNULL,
-                stdout=stdout_file,
-                stderr=stderr_file,
-                start_new_session=True,
-            )
-
-            def live_children():
-                try:
-                    return [
-                        proc
-                        for proc in psutil.Process(os.getpid()).children(recursive=True)
-                        if proc.is_running() and proc.status() != psutil.STATUS_ZOMBIE
-                    ]
-                except psutil.Error:
-                    return []
-
-            while child.poll() is None and time.monotonic() < deadline:
-                time.sleep(0.02)
-            timed_out = child.poll() is None
-            # A command is complete only after every adopted descendant is gone.
-            descendants = live_children()
-            if timed_out or descendants:
-                for proc in descendants:
-                    try:
-                        proc.terminate()
-                    except psutil.Error:
-                        pass
-                if timed_out and child.poll() is None:
-                    child.terminate()
-                stop_deadline = time.monotonic() + grace
-                while time.monotonic() < stop_deadline and live_children():
+            try:
+                child = subprocess.Popen(
+                    command,
+                    cwd=payload["cwd"],
+                    env=payload["env"],
+                    stdin=subprocess.DEVNULL,
+                    stdout=stdout_file,
+                    stderr=stderr_file,
+                    start_new_session=True,
+                )
+                while child.poll() is None and time.monotonic() < command_deadline:
                     time.sleep(0.02)
-                survivors = live_children()
-                for proc in survivors:
-                    try:
-                        proc.kill()
-                    except psutil.Error:
-                        pass
-                if timed_out and child.poll() is None:
-                    child.kill()
+                timed_out = child.poll() is None
+                descendants = _supervisor_children(psutil)
+                unexpected_live = any(
+                    _process_is_live(process, psutil) for process in descendants
+                )
+                disposition = _stop_supervised_processes(child, psutil, grace=grace)
+                reaped_descendants = _reap_adopted_children(
+                    deadline=time.monotonic() + grace
+                )
+                # The second drain is deliberate: success, timeout, and cleanup
+                # all require waitpid(-1) to observe ECHILD before evidence returns.
                 if child.poll() is None:
-                    child.wait(timeout=max(0.05, grace))
-                reap_deadline = time.monotonic() + grace
-                while time.monotonic() < reap_deadline:
-                    try:
-                        waited, _ = os.waitpid(-1, os.WNOHANG)
-                    except ChildProcessError:
-                        break
-                    if waited == 0:
-                        if not live_children():
-                            break
-                        time.sleep(0.02)
-                survivors = live_children()
-                if survivors:
-                    return 3
-            if child.poll() is None:
-                child.wait(timeout=max(0.05, grace))
-            stdout_file.flush()
-            stderr_file.flush()
-            stdout_file.seek(0)
-            stderr_file.seek(0)
-            result = {
-                "returncode": child.returncode,
-                "timed_out": timed_out,
-                "stdout": stdout_file.read().decode(errors="replace"),
-                "stderr": stderr_file.read().decode(errors="replace"),
-            }
+                    raise ProcessTreeCleanupError("supervised owner remains unreaped")
+                stdout_file.flush()
+                stderr_file.flush()
+                stdout_file.seek(0)
+                stderr_file.seek(0)
+                result = {
+                    "returncode": child.returncode,
+                    "timed_out": timed_out,
+                    "stdout": stdout_file.read().decode(errors="replace"),
+                    "stderr": stderr_file.read().decode(errors="replace"),
+                    "cleanup_disposition": disposition,
+                    "reaped_descendants": reaped_descendants,
+                    "unexpected_live_descendants": unexpected_live,
+                }
+            except BaseException:
+                if child is not None:
+                    _fallback_reap_after_error(child, grace=grace)
+                raise
     print(json.dumps(result), flush=True)
     return 0
 
@@ -730,6 +894,39 @@ def write_evidence(path: Path, evidence: dict[str, object], *, temp_root: Path) 
         stream.write(payload)
         stream.flush()
         os.fsync(stream.fileno())
+
+
+def record_supervisor_cleanup_failure(
+    receipt_path: Path, error: ProcessTreeCleanupError
+) -> None:
+    target = receipt_path.expanduser().resolve()
+    if not target.is_file():
+        return
+    evidence = json.loads(target.read_text(encoding="utf-8"))
+    cells = evidence.get("cells")
+    if not isinstance(cells, dict):
+        raise ValueError("cannot record supervisor cleanup without acceptance cells")
+    cells["process_cleanup"] = "FAIL"
+    evidence["acceptance_status"] = "FAIL"
+    evidence["supervisor_cleanup"] = {
+        "disposition": error.cleanup_disposition,
+        "command_returncode": error.command_returncode,
+    }
+    payload = (json.dumps(evidence, sort_keys=True, indent=2) + "\n").encode()
+    fd, temporary_path = tempfile.mkstemp(prefix=f".{target.name}.", dir=target.parent)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            os.fchmod(stream.fileno(), 0o600)
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary_path, target)
+    except BaseException:
+        try:
+            os.unlink(temporary_path)
+        except FileNotFoundError:
+            pass
+        raise
 
 
 def acceptance_status(cells: dict[str, str]) -> str:
@@ -1111,6 +1308,20 @@ def main(argv: list[str] | None = None) -> int:
                 timeout_seconds=CLI_WATCHDOG_SECONDS,
                 env=worker_env,
             )
+        except ProcessTreeCleanupError as exc:
+            try:
+                record_supervisor_cleanup_failure(args.receipt, exc)
+            except Exception as receipt_error:
+                print(
+                    "Unable to mark acceptance receipt as cleanup failure: "
+                    f"{type(receipt_error).__name__}: {receipt_error}",
+                    file=sys.stderr,
+                )
+            print(
+                f"Dakota RCC watchdog failed: {type(exc).__name__}: {exc}",
+                file=sys.stderr,
+            )
+            return 1
         except Exception as exc:
             print(
                 f"Dakota RCC watchdog failed: {type(exc).__name__}: {exc}",
