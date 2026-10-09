@@ -55,6 +55,14 @@ def _read_package_runtime(db_path: Path, package_name: str) -> dict[str, Any] | 
     return {"package_id": row[0], **runtime}
 
 
+def _read_package_directory(db_path: Path, package_name: str) -> Path | None:
+    with sqlite3.connect(db_path, timeout=3) as connection:
+        row = connection.execute(
+            "SELECT directory FROM action_package WHERE name = ?", (package_name,)
+        ).fetchone()
+    return Path(row[0]) if row else None
+
+
 def _read_run(db_path: Path, run_id: str) -> dict[str, Any] | None:
     with sqlite3.connect(db_path, timeout=3) as connection:
         row = connection.execute(
@@ -138,7 +146,7 @@ def generation_probe() -> str:
 
 def _runtime_test_environment(
     tmp_path: Path, source_root: Path
-) -> tuple[dict[str, str], str, str, Path, str, Path]:
+) -> tuple[dict[str, str], str, str, Path, str, Path, dict[str, Path]]:
     real_rcc = Path(os.environ["ACTIONS_RUNTIME_REAL_RCC_BINARY"]).resolve()
     real_rcc_sha = hashlib.sha256(real_rcc.read_bytes()).hexdigest()
     assert real_rcc_sha == RCC_SHA256
@@ -211,15 +219,25 @@ def _runtime_test_environment(
         [
             sys.executable,
             "-c",
-            "import actions.server._rcc_runtime_adapter as m; print(m.__file__)",
+            "import importlib, json; modules = ("
+            "'actions.server._actions_import', "
+            "'actions.server._action_package_handler', "
+            "'actions.server._rcc_runtime_adapter', "
+            "'actions.server._server'); "
+            "print(json.dumps({name: importlib.import_module(name).__file__ "
+            "for name in modules}))",
         ],
         env=runtime_env,
         capture_output=True,
         text=True,
         check=True,
     ).stdout.strip()
-    source_module = Path(source_probe).resolve()
-    assert source_root in source_module.parents, source_probe
+    module_origins = {
+        name: Path(path).resolve() for name, path in json.loads(source_probe).items()
+    }
+    for name, origin in module_origins.items():
+        assert source_root in origin.parents, f"{name} imported from {origin}"
+    source_module = module_origins["actions.server._rcc_runtime_adapter"]
     return (
         runtime_env,
         real_rcc_sha,
@@ -227,6 +245,7 @@ def _runtime_test_environment(
         trace_path,
         trust_carrier_identity,
         source_module,
+        module_origins,
     )
 
 
@@ -270,6 +289,7 @@ def test_real_rcc_source_only_reload_drains_pinned_generation(
         trace_path,
         trust_carrier_identity,
         source_module,
+        source_module_origins,
     ) = _runtime_test_environment(tmp_path, source_root)
 
     package_dir = tmp_path / "package" / "rcc-lifecycle"
@@ -297,6 +317,9 @@ def test_real_rcc_source_only_reload_drains_pinned_generation(
         "source_commit": source_sha,
         "source_archive_sha256": archive_sha,
         "source_module": str(source_module),
+        "source_module_origins": {
+            name: str(path) for name, path in source_module_origins.items()
+        },
         "rcc_version": version,
         "rcc_sha256": real_rcc_sha,
         "provider": "local",
@@ -330,7 +353,16 @@ def test_real_rcc_source_only_reload_drains_pinned_generation(
         artifact_digest = initial_runtime["artifact_digest"]
         environment_fingerprint = initial_runtime["environment_fingerprint"]
         initial_generation = initial_runtime["source_generation"]
+        source_store = action_server_process.datadir / ".rcc-runtime-sources"
+        package_store = source_store / hashlib.sha256(package_name.encode("utf-8")).hexdigest()
+        initial_source = _read_package_directory(db_path, package_name)
+        assert initial_source is not None and initial_source.is_absolute()
+        assert initial_source.is_relative_to(package_store)
+        assert "old-generation" in (initial_source / "action.py").read_text(
+            encoding="utf-8"
+        )
         evidence["package_id"] = initial_runtime["package_id"]
+        evidence["source_snapshot_before"] = str(initial_source)
         evidence["artifact_digest"] = artifact_digest
         evidence["environment_fingerprint"] = environment_fingerprint
         evidence["source_generation_before"] = initial_generation
@@ -390,11 +422,18 @@ def test_real_rcc_source_only_reload_drains_pinned_generation(
             return None
 
         next_runtime = _wait_for("source-only Runtime generation", read_new_generation)
+        next_source = _read_package_directory(db_path, package_name)
+        assert next_source is not None and next_source.is_relative_to(package_store)
+        assert next_source != initial_source
+        assert "new-generation" in (next_source / "action.py").read_text(
+            encoding="utf-8"
+        )
         assert next_runtime["artifact_digest"] == artifact_digest
         assert next_runtime["environment_fingerprint"] == environment_fingerprint
         assert next_runtime["trust_carrier_identity"] == trust_carrier_identity
         assert next_runtime["source_generation"] != initial_generation
         evidence["source_generation_after"] = next_runtime["source_generation"]
+        evidence["source_snapshot_after"] = str(next_source)
         evidence["artifact_digest_after"] = next_runtime["artifact_digest"]
 
         new_start = len(_rcc_trace(trace_path))
@@ -536,6 +575,7 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
         trace_path,
         trust_carrier_identity,
         source_module,
+        source_module_origins,
     ) = _runtime_test_environment(tmp_path, source_root)
     receipt_path = Path(os.environ["ACTIONS_RUNTIME_LIFECYCLE_RECEIPT"])
     assert not receipt_path.exists(), f"receipt already exists: {receipt_path}"
@@ -563,6 +603,9 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
         "source_commit": source_sha,
         "source_archive_sha256": archive_sha,
         "source_module": str(source_module),
+        "source_module_origins": {
+            name: str(path) for name, path in source_module_origins.items()
+        },
         "rcc_version": version,
         "rcc_sha256": real_rcc_sha,
         "provider": "local",
@@ -570,6 +613,7 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
         "host_platform": platform.platform(),
     }
     run_ids: list[str] = []
+    evidence["run_ids"] = run_ids
     worker_tree: list[dict[str, Any]] = []
     server_started = False
     shutdown_status: int | None = None
@@ -621,10 +665,19 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
         artifact_digest = initial_runtime["artifact_digest"]
         environment_fingerprint = initial_runtime["environment_fingerprint"]
         source_generation = initial_runtime["source_generation"]
+        source_store = action_server_process.datadir / ".rcc-runtime-sources"
+        package_store = source_store / hashlib.sha256(package_name.encode("utf-8")).hexdigest()
+        initial_source = _read_package_directory(db_path, package_name)
+        assert initial_source is not None and initial_source.is_absolute()
+        assert initial_source.is_relative_to(package_store)
+        assert "last-good" in (initial_source / "action.py").read_text(
+            encoding="utf-8"
+        )
         evidence["package_id"] = initial_runtime["package_id"]
         evidence["artifact_digest"] = artifact_digest
         evidence["environment_fingerprint"] = environment_fingerprint
         evidence["source_generation"] = source_generation
+        evidence["source_snapshot_before"] = str(initial_source)
 
         trace_before_first = len(_rcc_trace(trace_path))
         first_response = client.post_get_response(
@@ -687,12 +740,23 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
             combined = action_server_process.get_stdout() + action_server_process.get_stderr()
             if server_log_path.is_file():
                 combined += server_log_path.read_text(encoding="utf-8", errors="replace")
-            return "RuntimeError: It was not possible to list the actions." in combined
+            return (
+                "It was not possible to list the actions." in combined
+                and "Unable to do auto-reload (actions could not be imported)." in combined
+            )
 
         _wait_for("auto-reload import failure diagnostic", import_failure_observed)
         after_failure_descriptor = _read_package_runtime(db_path, package_name)
         assert after_failure_descriptor == initial_runtime
+        assert _read_package_directory(db_path, package_name) == initial_source
+        assert [path for path in package_store.iterdir() if path.is_dir()] == [
+            initial_source
+        ]
         evidence["descriptor_preserved"] = True
+        evidence["source_snapshot_preserved"] = str(initial_source)
+        evidence["snapshot_directories_after_failure"] = [
+            str(path) for path in package_store.iterdir() if path.is_dir()
+        ]
         assert _process_identity_exists(worker_tree[0]), (
             "in-flight last-good worker was replaced after import failure"
         )
@@ -724,6 +788,59 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
         provider_ops_after = _environment_operations(_rcc_trace(trace_path))
         evidence["provider_ops_before_failure"] = provider_ops_before
         evidence["provider_ops_after_failure"] = provider_ops_after
+        assert second_run["status"] == 2 and second_run["result"] == "last-good"
+        assert descriptor_after_second_run == initial_runtime
+        assert provider_ops_after == provider_ops_before
+
+        recovered_source = tmp_path / "action.py.recovered"
+        recovered_source.write_text(
+            "from actions import action\n\n"
+            "@action\n"
+            "def generation_probe() -> str:\n"
+            "    return 'recovered-generation'\n",
+            encoding="utf-8",
+        )
+        recovered_source.replace(action_file)
+
+        def read_recovered_generation():
+            runtime = _read_package_runtime(db_path, package_name)
+            source = _read_package_directory(db_path, package_name)
+            if (
+                runtime
+                and runtime["source_generation"] != source_generation
+                and source
+                and source != initial_source
+                and source.is_relative_to(package_store)
+                and (source / "action.py").is_file()
+                and "recovered-generation"
+                in (source / "action.py").read_text(encoding="utf-8")
+            ):
+                return runtime, source
+            return None
+
+        recovered_runtime, recovered_snapshot = _wait_for(
+            "valid source recovery snapshot", read_recovered_generation
+        )
+        assert recovered_runtime["artifact_digest"] == artifact_digest
+        assert recovered_runtime["environment_fingerprint"] == environment_fingerprint
+        evidence["recovered_source_generation"] = recovered_runtime["source_generation"]
+        evidence["recovered_source_snapshot"] = str(recovered_snapshot)
+
+        trace_before_recovery_run = len(_rcc_trace(trace_path))
+        recovered_run_id, recovered_run = submit_generation_probe("after-recovery")
+        evidence["recovered_run"] = recovered_run
+        recovery_exec = _wait_for(
+            "recovered-generation RCC worker",
+            lambda: _exec_record_since(_rcc_trace(trace_path), trace_before_recovery_run),
+        )
+        recovery_tree = _process_tree(recovery_exec["pid"])
+        assert recovered_run["status"] == 2
+        assert recovered_run["result"] == "recovered-generation"
+        evidence["recovered_wrapper_pid"] = recovery_exec["pid"]
+        evidence["recovered_wrapper_tree_before_shutdown"] = recovery_tree
+        provider_ops_after_recovery = _environment_operations(_rcc_trace(trace_path))
+        evidence["provider_ops_after_recovery"] = provider_ops_after_recovery
+        assert provider_ops_after_recovery == provider_ops_before
 
         exec_records = [
             item
@@ -749,11 +866,19 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
         )
         evidence["runtime_process_exit_code"] = action_server_process.process.returncode
         _wait_for(
-            "reused RCC worker tree reaped",
-            lambda: True if not any(_process_identity_exists(item) for item in worker_tree) else None,
+            "last-good RCC worker tree reaped",
+            lambda: True if _old_process_tree_reaped(worker_tree) else None,
             timeout=20,
         )
-        evidence["worker_tree_observed_absent"] = worker_tree
+        _wait_for(
+            "recovered RCC worker tree reaped",
+            lambda: True if _old_process_tree_reaped(recovery_tree) else None,
+            timeout=20,
+        )
+        evidence["worker_trees_observed_absent"] = {
+            "last_good": worker_tree,
+            "recovered": recovery_tree,
+        }
 
         exec_records = [
             item
@@ -778,9 +903,13 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
             second_run["status"] == 2
             and second_run["result"] == "last-good"
             and descriptor_after_second_run == initial_runtime
+            and recovered_run["status"] == 2
+            and recovered_run["result"] == "recovered-generation"
+            and recovered_runtime["source_generation"] != source_generation
+            and recovered_runtime["artifact_digest"] == artifact_digest
             and provider_ops_after == provider_ops_before
+            and provider_ops_after_recovery == provider_ops_before
             and worker_pid in [item["pid"] for item in exec_records]
-            and action_server_process.process.returncode == 0
             and all(
                 receipt.get("artifactDigest") == artifact_digest
                 and receipt.get("verification", {}).get("valid") is True

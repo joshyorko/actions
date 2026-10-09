@@ -1350,17 +1350,23 @@ the local overlapping-generation path only, not remote-provider outage/A-to-B,
 installed-wheel, frozen-binary, or full #134 acceptance.
 The companion `test_real_rcc_import_failure_keeps_last_good_generation` probe
 uses an HTTP-admitted persisted Run while replacing its Action source with a
-syntax error. Against the d150 source export, the failed import left the
-persisted runtime descriptor and in-flight worker identity unchanged and added
-no RCC publish/acquire/build calls, but a later Run through the retained route
-failed with status 3 (`It was not possible to collect the contents of the
-result (json not created).`). Both exact-Artifact RCC receipts still verified
-and exited 0, and the captured old worker tree was observed absent at shutdown;
-the Action Server process exited 1. This is a RED rollback boundary, not
-acceptance that the last-good Action remains usable. Preserve the Run error,
-receipts and process observations, and hand the source-retention repair to the
-Action Server owner; do not infer rollback success from an unchanged database
-descriptor or a valid RCC receipt.
+syntax error. The d150 source export left the persisted runtime descriptor and
+in-flight worker identity unchanged but could not execute a later Run from the
+invalid workspace source; an unchanged database descriptor alone did not prove
+rollback. At commit `5e5c28852a181a2d4a46045fa9a532df1a5a01c1`, the RCC source
+integration stores each source generation in a content-addressed snapshot under
+the Action Server datadir and persists that snapshot directory on the package.
+The same probe verified that a failed import preserves the prior snapshot and
+allows both the in-flight and subsequent HTTP Runs to return `last-good`; a
+later valid edit selected a distinct snapshot/source generation and returned
+`recovered-generation`. All three RCC receipts used the same verified Artifact,
+completed with exit 0 and distinct leases, while publish/acquire/build operations
+did not increase. The captured old and recovered worker trees were observed
+absent after shutdown. This Linux source-only run's Action Server process exited
+`-11` after the shutdown endpoint returned HTTP 200; that process exit remains a
+separate unresolved observation, not an RCC receipt or Run result. These probes
+do not establish installed-wheel, frozen, strict-remote, Windows ACL, or
+universal descendant-reaping acceptance.
 
 The outer Dakota CLI refuses an existing receipt path before resolving toolchain
 environment keys or creating CLI supervisor state. The worker retains its
