@@ -1,0 +1,68 @@
+# Actions operational execution graph
+
+Worker-stage observation: 2026-10-09T16:57:54.251935+00:00. All 54 authoritative issue bodies retain exact recorded hashes; this operational overlay does not change owning-issue acceptance.
+
+Counts: READY=1, ACTIVE=4, REVIEW=13, BLOCKED=30, INTEGRATED=6, COMPLETE=0. No whole contract is accepted.
+
+ACTIVE identifies a known assigned worker; REVIEW identifies a submitted bounded checkpoint. INTEGRATED records partial foundation evidence only. COMPLETE requires the entire owning contract. Closed prerequisites are resolved; cross-references alone are not blocking dependencies.
+
+| Issue | Stage | Unresolved issue prerequisites | Partial checkpoint | Next bounded action |
+|---|---|---|---|---|
+| [#71](https://github.com/joshyorko/actions/issues/71) | BLOCKED | #83, #99, #100, #127, #129, #135 | See ledger | Deliver native Canvas foundry using shared immutable package/deployment/run semantics. |
+| [#82](https://github.com/joshyorko/actions/issues/82) | BLOCKED | #83, #84, #129, #134, #143 | See ledger | Require collapsed, split and second-adapter vertical proof; reconcile closed137 reference without reopening. |
+| [#83](https://github.com/joshyorko/actions/issues/83) | BLOCKED | #84, #129, #135, #143 | See ledger | Implement pinned Runs/Attempts with epoch fencing and replica-safe claims on shared database. |
+| [#84](https://github.com/joshyorko/actions/issues/84) | INTEGRATED | None recorded | #109 | Complete exact-head review of the live PostgreSQL transaction repair, then wheel/native/TLS and multi-process migration acceptance. |
+| [#85](https://github.com/joshyorko/actions/issues/85) | BLOCKED | #83, #84, #129 | See ledger | Map MCP Tasks to canonical durable Runs without independent queue or ownership. |
+| [#86](https://github.com/joshyorko/actions/issues/86) | BLOCKED | #83, #84, #129 | See ledger | Implement authorized replica-readable artifact/result handles and fenced publication. |
+| [#87](https://github.com/joshyorko/actions/issues/87) | BLOCKED | #84, #129 | See ledger | Separate request context from workspace bindings/grants and pin immutable binding policy. |
+| [#90](https://github.com/joshyorko/actions/issues/90) | BLOCKED | #83, #84, #129, #130, #143 | See ledger | Separate worker execution ownership from Runtime requests and demonstrate cross-replica control. |
+| [#91](https://github.com/joshyorko/actions/issues/91) | ACTIVE | None recorded | See ledger | Inspect exact locked SDK authorization/CIMD interfaces and current API-key/provider-OAuth boundaries; implement only source-backed unambiguous validation slice after boundary review. |
+| [#92](https://github.com/joshyorko/actions/issues/92) | BLOCKED | #83, #85, #87, #129, #143 | See ledger | Implement durable authorized human-interaction and review transitions. |
+| [#93](https://github.com/joshyorko/actions/issues/93) | BLOCKED | #96, #97, #98, #99, #100, #101, #126, #127, #208, #209 | See ledger | Track all UI child acceptance and require real packaged-backend evidence before umbrella acceptance. |
+| [#96](https://github.com/joshyorko/actions/issues/96) | INTEGRATED | None recorded | #216 | Validate standalone shell route families, mobile navigation and truthful degraded overview. |
+| [#97](https://github.com/joshyorko/actions/issues/97) | INTEGRATED | None recorded | #216 | Prove actual packaged responsive/accessibility/offline/CSP/error recovery workflows. |
+| [#98](https://github.com/joshyorko/actions/issues/98) | INTEGRATED | None recorded | #115 | Verify separate Runtime/Canvas artifact inventories, deterministic builds and packaged browser. |
+| [#99](https://github.com/joshyorko/actions/issues/99) | BLOCKED | #97, #98 | See ledger | Implement the versioned semantic CanvasSpec renderer after the #97/#98 acceptance gates are complete. |
+| [#100](https://github.com/joshyorko/actions/issues/100) | READY | None recorded | See ledger | Define minimal Core Canvas authoring API paired with renderer and public export tests. |
+| [#101](https://github.com/joshyorko/actions/issues/101) | REVIEW | None recorded | See ledger | Maintain all54 dispositions and exact receipts at every checkpoint; do not infer acceptance from green PRs. |
+| [#125](https://github.com/joshyorko/actions/issues/125) | INTEGRATED | None recorded | #128 | Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract. |
+| [#126](https://github.com/joshyorko/actions/issues/126) | BLOCKED | #125 | #219 | Complete the verified public-package/template boundary prerequisite, then adversarially accept PR #219 before implementation. |
+| [#127](https://github.com/joshyorko/actions/issues/127) | BLOCKED | #71, #93, #99, #100, #101 | See ledger | Build community Canvas template only after renderer/authoring contracts are proven. |
+| [#129](https://github.com/joshyorko/actions/issues/129) | REVIEW | None recorded | #245 | PR245 design-only database probe passes SQLite/PostgreSQL; independently review exact checkpoint and preserve no-product-migration boundary before later implementation. |
+| [#130](https://github.com/joshyorko/actions/issues/130) | BLOCKED | #129 | See ledger | Freeze portable immutable capability/runtime-plan bundle schema after Deployment identity review. |
+| [#131](https://github.com/joshyorko/actions/issues/131) | BLOCKED | #125, #129, #130 | See ledger | Define provider data/knowledge references and authorized operations without product-tier coupling. |
+| [#132](https://github.com/joshyorko/actions/issues/132) | BLOCKED | #83, #90, #129 | See ledger | Implement durable business queue/review/lease semantics separately from Run ownership. |
+| [#133](https://github.com/joshyorko/actions/issues/133) | BLOCKED | #129, #130, #134, #143 | See ledger | Extend proven RCC adapter to worker execution using released provider/lease/exec contract. |
+| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None recorded | #197 | Graceful completed-worker retirement repair is active with independent Sol review. Preserve failed RCC receipts and explicit NOT_PROVEN unexpected-crash recovery; require exact source/native consumer evidence. |
+| [#135](https://github.com/joshyorko/actions/issues/135) | BLOCKED | #129, #130 | See ledger | Compile deterministic Package Revisions and plans from current sources without machine-local identities. |
+| [#136](https://github.com/joshyorko/actions/issues/136) | BLOCKED | #135 | See ledger | Implement verified immutable source provider and worker-local cache with corruption rejection. |
+| [#138](https://github.com/joshyorko/actions/issues/138) | BLOCKED | #83, #84, #90, #129, #130, #143 | See ledger | Version worker protocol carrying exact pinned plans and explicit decline/cancel/recovery. |
+| [#139](https://github.com/joshyorko/actions/issues/139) | BLOCKED | #143 | See ledger | Build exact-subject conformance receipts over real operations, invalidation and no-fallback rejection. |
+| [#140](https://github.com/joshyorko/actions/issues/140) | BLOCKED | #84, #86, #87, #129, #138 | See ledger | Package collapsed and split topologies with backup/upgrades/health and real worker acceptance. |
+| [#141](https://github.com/joshyorko/actions/issues/141) | BLOCKED | #83, #85, #129, #130, #132, #143, #147 | See ledger | Implement deterministic pinned capability workflow nodes and durable lineage. |
+| [#142](https://github.com/joshyorko/actions/issues/142) | BLOCKED | #138, #139, #143, #144 | See ledger | Execute Robot adapter-by-placement matrix with explicit unsupported cells and process-tree proof. |
+| [#143](https://github.com/joshyorko/actions/issues/143) | BLOCKED | #134 | See ledger | Extract shared admission/preflight adapter contract from real RCC and exercise genuine second adapter. |
+| [#144](https://github.com/joshyorko/actions/issues/144) | BLOCKED | #83, #134, #135, #143 | See ledger | Move Robot Tasks onto common capability and Run model independent of adapter. |
+| [#145](https://github.com/joshyorko/actions/issues/145) | BLOCKED | #83, #129, #143, #144 | See ledger | Build unified Run Composer and lightweight Control Room consuming authoritative admission. |
+| [#146](https://github.com/joshyorko/actions/issues/146) | BLOCKED | #134, #143, #144 | See ledger | Unify CLI capability/Robot/dev-task operations through authoritative admission/runtime plans. |
+| [#147](https://github.com/joshyorko/actions/issues/147) | BLOCKED | #83, #129, #130, #143, #144 | See ledger | Implement typed internal invocation with pinned child Runs and authorization lineage. |
+| [#148](https://github.com/joshyorko/actions/issues/148) | BLOCKED | #135 | See ledger | Complete secure acquisition and compile Robot metadata through shared immutable package compiler. |
+| [#149](https://github.com/joshyorko/actions/issues/149) | REVIEW | None recorded | See ledger | Retain living advisory record open; consume evidence without restoring execution labels. |
+| [#151](https://github.com/joshyorko/actions/issues/151) | REVIEW | None recorded | #244 | PR230/232/234/240 bounded publication repairs integrated. PR244 adds importer-only package.yaml tests; verify reconciled exact candidate. Root/source identity and Windows ACL remain open. |
+| [#152](https://github.com/joshyorko/actions/issues/152) | INTEGRATED | None recorded | #199 | Run assembled protected-route/mount inventory with missing, wrong and valid keys and zero-side-effect assertions. |
+| [#153](https://github.com/joshyorko/actions/issues/153) | REVIEW | None recorded | #216 | Prove final native cookie/bearer exact-origin HTTP/WebSocket/reconnect/revocation matrix on supported platforms; protected OAuth GET cookie access intentionally denied pending CSRF-safe endpoint design. |
+| [#155](https://github.com/joshyorko/actions/issues/155) | REVIEW | None recorded | See ledger | Resolve independent public roadmap review findings and verify dated registry/native compatibility claims. |
+| [#162](https://github.com/joshyorko/actions/issues/162) | REVIEW | None recorded | See ledger | Verify final hosted coverage gate; integrated ordinary source run PASS53.391% against53.38%; retain service/subprocess/platform limits. |
+| [#194](https://github.com/joshyorko/actions/issues/194) | REVIEW | None recorded | #217 | Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release. |
+| [#195](https://github.com/joshyorko/actions/issues/195) | REVIEW | None recorded | #217 | Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release. |
+| [#196](https://github.com/joshyorko/actions/issues/196) | BLOCKED | #134, #152, #153, #208, #214 | See ledger | Host RCC provider only after administrative/auth/origin and tunnel lifecycle acceptance. |
+| [#208](https://github.com/joshyorko/actions/issues/208) | ACTIVE | None recorded | #242 | PR231/237 receipts and native provenance integrated. PR242 Linux consumer gate failed because actual RCC path omitted measured Core wheel; repair installation and prove in-worker distribution before acceptance. |
+| [#209](https://github.com/joshyorko/actions/issues/209) | REVIEW | None recorded | #216 | Verify latest native WebSocket/reconnect on all OS; All-platform b592 packaged reconnect PASS; e4 Windows cleanup failure remains distinct. |
+| [#210](https://github.com/joshyorko/actions/issues/210) | ACTIVE | None recorded | #243 | Promote Helper1.0.2 via PR243 after inherited Runtime semantic wheel-inventory and Linux RCC/CORS failures are repaired, independently reviewed and exact-head CI passes; then immutable tag and actual registry verification. |
+| [#211](https://github.com/joshyorko/actions/issues/211) | REVIEW | None recorded | #215 | Finish final candidate security/platform/package acceptance, verify immutable unused versions and release admission, merge only admitted integration, then publish Helper1.0.2 -> Core1.0.2 -> Runtime1.0.3/native through GitHub Actions with registry readback and workflow receipts. |
+| [#212](https://github.com/joshyorko/actions/issues/212) | REVIEW | None recorded | #216 | Verify new native history gate on all supported OS and rebuilt candidate; retain full detail and legacy supported clients. |
+| [#214](https://github.com/joshyorko/actions/issues/214) | REVIEW | None recorded | See ledger | PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open. |
+
+Architecture boundaries: #129 synthetic FK/ancestry probes are design evidence only. #134 RCC-first consumer and truthful retirement proof remains required before extracting #143 shared adapter boundaries or advancing dependent #144 Robot Tasks. #91 SDK/CIMD capability reconciliation is independent and does not bypass that sequence.
+
+The preserved historical ledger states and foundation PRs remain separately auditable. A submitted/merged checkpoint, successful workflow, or closed outside prerequisite is not full acceptance of any of these 54 contracts.

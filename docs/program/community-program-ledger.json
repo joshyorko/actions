@@ -95,7 +95,7 @@
         196
       ],
       "criticality": "P1",
-      "next_bounded_action": "PR225 head55463089 is green on prior base376 and included in separate PR238 candidate134dfbee; candidate local gates pass, hosted CI pending. PR236 head82f526ef passes111 focused/628 portable/10 skipped, lint/types287, scoped source reviews and all11 hosted checks; live provider/TLS and standalone expose lifecycle remain unverified.",
+      "next_bounded_action": "PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -340,7 +340,7 @@
         155
       ],
       "criticality": "P1",
-      "next_bounded_action": "Finish final candidate security/platform/package acceptance, verify immutable unused versions and release admission, merge only admitted integration, then publish Helper1.0.2 -> Core1.0.2 -> Runtime1.0.3/native through GitHub Actions with registry readback and workflow receipts.",
+      "next_bounded_action": "Promote Helper1.0.2 via PR243 after inherited Runtime semantic wheel-inventory and Linux RCC/CORS failures are repaired, independently reviewed and exact-head CI passes; then immutable tag and actual registry verification.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -520,7 +520,7 @@
         145
       ],
       "criticality": "P1",
-      "next_bounded_action": "PR231 head49becb96 fixes stale PASS (15 focused, activated package588/10 skipped, lint/types/script Ruff PASS) on base376 and is included in separate PR238 candidate134dfbee. PR237 artifact-retention correction at9d98be6 is under review; signed artifact download previously returned HTTP403 with no bytes retrieved. Keep24 broad diagnostic failures and host Python3.13 ensurepip failure distinct.",
+      "next_bounded_action": "PR231/237 receipts and native provenance integrated. PR242 Linux consumer gate failed because actual RCC path omitted measured Core wheel; repair installation and prove in-worker distribution before acceptance.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -1235,7 +1235,7 @@
         153
       ],
       "criticality": "P0",
-      "next_bounded_action": "PR230 and PR232 are merged (PR232 at376ed4c1 after11 SUCCESS checks and tree identity). PR234 staging head5f3fbbb5 is included in PR238 candidate134dfbee; combined local gates pass112 focused/642 portable/10 skipped/lint/types289 and Doctor/Bootstrap/Toolkit33, hosted CI pending. Final-copy validation is active in a separate worktree. Root/source identity and Windows ACL/race acceptance remain open.",
+      "next_bounded_action": "PR230/232/234/240 bounded publication repairs integrated. PR244 adds importer-only package.yaml tests; verify reconciled exact candidate. Root/source identity and Windows ACL remain open.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -3111,7 +3111,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Dakota canonical remote head79b95e85 and same Executor thread remain UNCONFIRMED after timeout. Local PR235 head3dbfb1be has29 focused PASS/1 live-RCC skip and11 hosted checks green; preserve earlier613/10 portable suite at d9a08395 and exact live7cf wrapper failed/-1 receipt. PR233 explicit-exit groundwork is merged at4626cc56; pool retirement and graceful lease ordering remain unimplemented.",
+      "next_bounded_action": "Graceful completed-worker retirement repair is active with independent Sol review. Preserve failed RCC receipts and explicit NOT_PROVEN unexpected-crash recovery; require exact source/native consumer evidence.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -3766,7 +3766,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Finish scoped FK tuples, ancestry and cyclic migration parity design; execute database probes and independently review before implementation.",
+      "next_bounded_action": "PR245 design-only database probe passes SQLite/PostgreSQL; independently review exact checkpoint and preserve no-product-migration boundary before later implementation.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -12258,7 +12258,7 @@
       "actions_work_items-0.4.4-py3-none-any.whl"
     ],
     "wheel_artifact_retention": "Temporary30-test wheelhouse was removed bypytestretention; no unsupported wheel digest claim. Native and candidateCore outputs remain inworktree.",
-    "publication": "NOT_RUN; conditionally authorized after gates; no tags/merges/releases/artifact replacement performed.",
+    "publication": "NOT_RUN; conditional authorization preserved; no community merge, tags or registry uploads yet.",
     "candidate_versions": {
       "actions-http-helper": "1.0.2",
       "actions-core": "1.0.2",
@@ -12277,61 +12277,42 @@
     "Runtime_frozen_linux_119b4f": "sha256:250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3",
     "Runtime_Go_linux_119b4f": "sha256:d50cfb188f002e80658f9ae09e92a0016cc259b0591c740ff179dd16eb1ff15f",
     "remaining_security": "Three concrete06c filesystem publication races under local filesystem mutation preconditions; no archive-only exploit shown. Fix/native proof and full route matrix pending; no publication admission.",
-    "remaining_native": "Windows strict ownership/browser/history pass all three platforms in PR229 at a8eb7b46, integrated as12b387ec after12 successful checks and1 publication skip. Robot exclusive publication native matrix passes in PR230; root/source/staging identity remains open. No program release admission."
+    "remaining_native": "Windows strict ownership/browser/history pass all three platforms in PR229 at a8eb7b46, integrated as12b387ec after12 successful checks and1 publication skip. Robot exclusive publication native matrix passes in PR230; root/source/staging identity remains open. No program release admission.",
+    "current_integration_native": "PR241 tested syntheticdfc4442b/finalmergea99b45d6 identical treed3e7e017, all three OS native gates PASS. Current Work Items consumer PR242 remains FAIL.",
+    "current_blockers": [
+      "Helper PR243 exact candidate Runtime wheel inventory tag-order rejection; reuse already-reviewed semantic inventory repair without weakening exact artifact safeguards.",
+      "Helper PR243 RCC Linux primary and N-1 full-suite CORS WebSocket failure; focused module passes, independent suite-context diagnosis active.",
+      "Core1.0.2 and Runtime/native1.0.3 publication require their own admitted exact candidates, installed registry compatibility, native/security/browser/RCC gates and external artifact readback.",
+      "Actual current-source frozen/Go Work Items consumer installation failed in PR242; older retained binary success is not current-source proof.",
+      "Completed-worker RCC retirement ownership/accounting under repair; no successful replacement for failed exact RCC acceptance receipt."
+    ]
   },
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
-  "evidence_archive": "evidence/community-20261009-update3.zip",
-  "evidence_archive_sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842",
-  "integration_head": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+  "evidence_archive": "evidence/community-20261009-acceleration.zip",
+  "evidence_archive_sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48",
+  "integration_head": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
   "additional_compute": {
-    "devsy": {
-      "provider": "Executor Devsy Kubernetes",
-      "workspace": "cas-worker-01",
-      "state": "PARKED_NO_VERIFIED_READY_OR_AUTHORIZATION",
-      "request_id": "apr_29be804c-94cd-4b62-9233-e91b5ec30774",
-      "cause": "No verified READY notification or authorization received. Remain parked until both are explicit; continue cloud work without waiting. No Devsy call, retry, recreation or duplicate create.",
-      "session": "stateless",
-      "retried_on_resume": false,
-      "private_grant_available_in_new_workspace": false
-    },
-    "cloud": {
-      "state": "CONNECTED",
-      "integration_owner": "/root",
-      "worker_inventory": "community-resume-20261009.json",
-      "fanout": "New cloud lanes gpt-6-luna/medium; no new Dakota workers"
-    },
-    "dakota": {
-      "state": "CONNECTED_EXISTING_THREADS_RECONCILED",
-      "target": "local",
-      "server": "dakota-nvidia",
-      "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
-      "workers": [
-        {
-          "thread_id": "01a11d7a-e547-7423-8fc5-fc0148df2123",
-          "model": "gpt-6-luna",
-          "effort": "medium",
-          "scope": "Work Items packaged transitions"
-        },
-        {
-          "thread_id": "01a11d7b-4029-7953-aba7-f3b487098b32",
-          "model": "gpt-6-luna",
-          "effort": "medium",
-          "scope": "RCC local execution"
-        }
-      ],
-      "toolchain": "Both native workers reported checksum-pinned RCC18.19.3 Doctor/Bootstrap/ToolkitTest PASS before control failure",
-      "cause": "Fresh Executor calls work; both prior turns were completed before same-thread continuation. Devsy validation remains separately blocked.",
-      "branches": {
-        "rcc": "Dakota canonical remote remains79b95e85; Executor state unconfirmed after timeout. Local cloud PR235 checkpoint3dbfb1be has 29 focused PASS/1 live-RCC skip; preceding613/10 suite remains tied to d9a08395.",
-        "work_items": "Dakota prior thread completed. PR231 head49becb96 hosted CI is green only on base376, not current integration4626. PR237 artifact download blocked by proxy HTTP403; no bytes retrieved; current Go acceptance incomplete. Workflow checkout873237df retains Go wrapper, not frozen executable."
-      }
-    }
+    "cloud": "Reused bounded Luna lanes plus one evidence-backed Sol review; no uncontrolled recursion or API fallback",
+    "devsy": "WAITING FOR HIT THE GAS; pending request preserved without calls",
+    "dakota": "Existing RCC thread UNCONFIRMED; no duplicate dispatch"
   },
   "resume_checkpoint": {
     "file": "community-resume-20261009.json",
     "observed_at": "2026-10-09T16:20:41.748647+00:00",
     "status": "ACTIVE_ENGINEERING; integration4626; PR238134df and stacked PR2395c3 local combined gates PASS, hosted admission pending; no community merge/release"
   },
-  "checkpoint_status": "ACTIVE_ENGINEERING; admission 134dfbee local combined gates PASS but hosted CI pending; Devsy parked pending explicit READY plus authorization; Work Items artifact download blocked HTTP 403",
-  "checkpoint_observed_at": "2026-10-09T16:17:35+00:00"
+  "checkpoint_status": "ACTIVE_ENGINEERING: PR238/239/241 integrated with exact tree proof. Helper promotion, native Work Items install, and RCC retirement actively repaired. Devsy WAITING FOR HIT THE GAS. Zero whole contracts accepted.",
+  "checkpoint_observed_at": "2026-10-09T16:55:46.087629+00:00",
+  "execution_graph": {
+    "path": "community-execution-graph.json",
+    "counts": {
+      "READY": 1,
+      "ACTIVE": 4,
+      "REVIEW": 13,
+      "BLOCKED": 30,
+      "INTEGRATED": 6,
+      "COMPLETE": 0
+    },
+    "scope": "Operational overlay; REVIEW/INTEGRATED are partial slices, not full owning-issue acceptance. Historical issue states/accounting remain unchanged."
+  }
 }

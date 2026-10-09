@@ -1,0 +1,925 @@
+{
+  "snapshot_date": "2026-10-09",
+  "worker_stage_snapshot": "2026-10-09T16:57:54.251935+00:00",
+  "scope": "issue-level overlay only; no acceptance ledger/body changes",
+  "contract_source": "governance/docs/program/community-program-ledger.json acceptance_contract compared with evidence/acceleration-open-issues.json body",
+  "exact_contract_matches": 54,
+  "issue_body_manifest_sha256": "1135e3aaf481341d5921bac7ab4ec5d726ffd2e8db0d17eaab90480e020902e8",
+  "external_closed_prerequisites": [
+    {
+      "issue": 80,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 88,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 89,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 94,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 95,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 137,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    }
+  ],
+  "current_active_workers": {
+    "134": "D RCC adapter",
+    "208": "B Work Items native gate",
+    "210": "A Helper 1.0.2 credential/publication",
+    "91": "E bounded MCP auth/CIMD capability reconciliation"
+  },
+  "current_review_checkpoints": {
+    "129": {
+      "worker": "E",
+      "pr": 245,
+      "head": "6e94860c0b8fc2692727982a57ce635063c86ce4"
+    },
+    "151": {
+      "worker": "C",
+      "pr": 244,
+      "head": "a06e7ebcec37c697b4fb6bbf5d52e364b29f49d7"
+    }
+  },
+  "counts": {
+    "READY": 1,
+    "ACTIVE": 4,
+    "REVIEW": 13,
+    "BLOCKED": 30,
+    "INTEGRATED": 6,
+    "COMPLETE": 0
+  },
+  "complete_verified_count": 0,
+  "schema_probe_receipts": {
+    "focused_rcc": "RCC v18.19.3; ruff check + ruff format check pass; SQLite pytest 1 passed post-merge",
+    "sqlite": "PASS; in-memory SQLite 3.53.1; foreign_keys=ON",
+    "postgresql": "PASS; isolated schema test on root-owned postgres:17-alpine digest sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+    "temporary_schema": "deployment_probe_16025518f76d44c48b43a373d4a2577c; removed=True verified by pg_namespace query and root service log",
+    "junit": "architecture-evidence/deployment-schema-probe-final.junit.xml; post-merge SQLite: architecture-evidence/deployment-schema-sqlite-post-merge.junit.xml"
+  },
+  "issues": [
+    {
+      "issue": 71,
+      "title": "Add Action Canvas: a native MCP App foundry inside Action Server",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        99,
+        100,
+        127,
+        129,
+        135
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #99 (BLOCKED, raw not_started), #100 (READY, raw not_started), #127 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #135 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Deliver native Canvas foundry using shared immutable package/deployment/run semantics.",
+      "acceptance_contract_sha256": "813ccb6edbe5c9fb7e71e5a12c215fbf5a7cb5f3066b7f35a071e2d1c4ceea2b"
+    },
+    {
+      "issue": 82,
+      "title": "Evolve Actions Runtime into a pluggable MCP-native capability runtime and lightweight control room",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        129,
+        134,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Require collapsed, split and second-adapter vertical proof; reconcile closed137 reference without reopening.",
+      "acceptance_contract_sha256": "34581397b7cfa3c1bfae34e00ba2cf69808193381bc2d06c7d5d35543cc19dcd"
+    },
+    {
+      "issue": 83,
+      "title": "Make capability Run and Attempt ownership replica-safe across runtime adapters",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        84,
+        129,
+        135,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #135 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement pinned Runs/Attempts with epoch fencing and replica-safe claims on shared database.",
+      "acceptance_contract_sha256": "1298aa79f3f97b620b657c08bd5eea2a8dcec0c82e84fbe4cc2125e846f80066"
+    },
+    {
+      "issue": 84,
+      "title": "Support one shared SQLite/PostgreSQL Database abstraction in actions-runtime",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 109,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #109 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Complete exact-head review of the live PostgreSQL transaction repair, then wheel/native/TLS and multi-process migration acceptance.",
+      "acceptance_contract_sha256": "17ae88bde7fa1006dd181d3ade0c8aefd87ffbf777ca31174674e4ddb46a62e6"
+    },
+    {
+      "issue": 85,
+      "title": "Back MCP Tasks with pinned capability Runs and runtime plans",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Map MCP Tasks to canonical durable Runs without independent queue or ownership.",
+      "acceptance_contract_sha256": "7be3c40e2573938c1cf45e8c15e98bacb4ab56740c552b07ee90696551abb72b"
+    },
+    {
+      "issue": 86,
+      "title": "Make capability artifacts and large-result handles replica-safe",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Implement authorized replica-readable artifact/result handles and fenced publication.",
+      "acceptance_contract_sha256": "b6e41d5fd4a6477cc176545a7f75dee33ba5b4b74f6b9478272a3324553eadc9"
+    },
+    {
+      "issue": 87,
+      "title": "Separate request context from Workspace-scoped bindings and runtime grants",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        84,
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Separate request context from workspace bindings/grants and pin immutable binding policy.",
+      "acceptance_contract_sha256": "e22809c4dd9d6b4504f7a1a91b01da2cf14e709ec595e67e3f22a7345100424e"
+    },
+    {
+      "issue": 90,
+      "title": "Separate capability execution ownership from Runtime request handling across adapters and placements",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        129,
+        130,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Separate worker execution ownership from Runtime requests and demonstrate cross-replica control.",
+      "acceptance_contract_sha256": "a5ba8d028a061a1412bd70aaf2d68565fd288a3b31bbd2d2b990d55eeaa66a58"
+    },
+    {
+      "issue": 91,
+      "title": "Add MCP-native authorization and CIMD support",
+      "retained_state": "NOT_STARTED",
+      "classification": "ACTIVE",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Closed prerequisite #80 resolved. Root assigned E to bounded SDK/CIMD capability reconciliation; architecture boundaries remain under root review.",
+      "next_bounded_action": "Inspect exact locked SDK authorization/CIMD interfaces and current API-key/provider-OAuth boundaries; implement only source-backed unambiguous validation slice after boundary review.",
+      "acceptance_contract_sha256": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6"
+    },
+    {
+      "issue": 92,
+      "title": "Implement durable capability interaction and human-review flows",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        85,
+        87,
+        129,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #85 (BLOCKED, raw not_started), #87 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement durable authorized human-interaction and review transitions.",
+      "acceptance_contract_sha256": "bfceb5112808c598ea83bd4456491fcebe37b21fdf9a06c69c919582bee6c6b9"
+    },
+    {
+      "issue": 93,
+      "title": "Run the Actions Runtime frontend and product factory",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        126,
+        127,
+        208,
+        209
+      ],
+      "reason": "Unresolved child-acceptance edges: #96 (INTEGRATED, raw implemented_unverified), #97 (INTEGRATED, raw implemented_unverified), #98 (INTEGRATED, raw implemented_unverified), #99 (BLOCKED, raw not_started), #100 (READY, raw not_started), #126 (BLOCKED, raw not_started), #127 (BLOCKED, raw not_started), #208 (ACTIVE, raw implemented_unverified). #101 is the execution parent, not a prerequisite; #209 is a related CI/reconnect issue. Foundation PRs #112/#114/#115/#119 are merged.",
+      "next_bounded_action": "Track all UI child acceptance and require real packaged-backend evidence before umbrella acceptance.",
+      "acceptance_contract_sha256": "170c3a3a09b949fe5ad344b5ffe9355459ae3b982f61750e453b7851f1ac99f6"
+    },
+    {
+      "issue": 96,
+      "title": "Refresh the Actions Runtime product shell and overview",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 112,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #112 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Validate standalone shell route families, mobile navigation and truthful degraded overview.",
+      "acceptance_contract_sha256": "95f3a6926f1c808ce2bfacf77dd6e8562138df82c53f7cc99956a58afbf0a095"
+    },
+    {
+      "issue": 97,
+      "title": "Establish the Actions UI system and offline visual quality gates",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 119,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #119 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Prove actual packaged responsive/accessibility/offline/CSP/error recovery workflows.",
+      "acceptance_contract_sha256": "9a404411dcc26dcb377e0b127d4579f1db3eb6f1fa3bcf16b09df6eb595224e1"
+    },
+    {
+      "issue": 98,
+      "title": "Modernize the frontend toolchain and multi-artifact build pipeline",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 115,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #115 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Verify separate Runtime/Canvas artifact inventories, deterministic builds and packaged browser.",
+      "acceptance_contract_sha256": "e5d6366ca768bcd85aa66a2be438c50e202c9927c06e8305c845b7d417a46924"
+    },
+    {
+      "issue": 99,
+      "title": "Build the shared CanvasSpec renderer and MCP App View foundation",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        97,
+        98
+      ],
+      "reason": "Explicit dependencies #80, #94, and #95 are closed. #97 and #98 remain open with acceptance incomplete.",
+      "next_bounded_action": "Implement the versioned semantic CanvasSpec renderer after the #97/#98 acceptance gates are complete.",
+      "acceptance_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e"
+    },
+    {
+      "issue": 100,
+      "title": "Define Canvas authoring contracts in actions-core without package proliferation",
+      "retained_state": "NOT_STARTED",
+      "classification": "READY",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "No explicit unresolved predecessor in the retained body; readiness is only for bounded admission, not completion.",
+      "next_bounded_action": "Define minimal Core Canvas authoring API paired with renderer and public export tests.",
+      "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198"
+    },
+    {
+      "issue": 101,
+      "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory",
+      "retained_state": "IN_PROGRESS",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #220 is assigned to the umbrella ledger, but no current worker is assigned to #101; child acceptance remains open.",
+      "next_bounded_action": "Maintain all54 dispositions and exact receipts at every checkpoint; do not infer acceptance from green PRs.",
+      "acceptance_contract_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240"
+    },
+    {
+      "issue": 125,
+      "title": "cleanup: remove Data Server and private-tier product surfaces",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 128,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #128 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract.",
+      "acceptance_contract_sha256": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238"
+    },
+    {
+      "issue": 126,
+      "title": "feat: add an MCP v2 capabilities showcase template",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 219,
+      "unresolved_open_issue_dependencies": [
+        125
+      ],
+      "reason": "Explicit dependency: #125 public-package/template-boundary acceptance remains open; exact-head PR #219 design review is also pending.",
+      "next_bounded_action": "Complete the verified public-package/template boundary prerequisite, then adversarially accept PR #219 before implementation.",
+      "acceptance_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f"
+    },
+    {
+      "issue": 127,
+      "title": "feat: add a community Canvas template",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        71,
+        93,
+        99,
+        100,
+        101
+      ],
+      "reason": "Unresolved contract edge(s): #71 (BLOCKED, raw not_started), #93 (BLOCKED, raw not_started), #99 (BLOCKED, raw not_started), #100 (READY, raw not_started), #101 (REVIEW, raw in_progress)",
+      "next_bounded_action": "Build community Canvas template only after renderer/authoring contracts are proven.",
+      "acceptance_contract_sha256": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0"
+    },
+    {
+      "issue": 129,
+      "title": "Define workspace-scoped capability deployments, runtime-plan selection, immutable revisions, and bindings",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 245,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Design-only SQLite/PostgreSQL probe passed; independent bounded review passed. Reconciled exact checkpoint hosted gates pending; no product implementation acceptance.",
+      "next_bounded_action": "PR245 design-only database probe passes SQLite/PostgreSQL; independently review exact checkpoint and preserve no-product-migration boundary before later implementation.",
+      "acceptance_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5"
+    },
+    {
+      "issue": 130,
+      "title": "Design Package v3 as an immutable capability bundle with pluggable runtime plans and exposure projections",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Freeze portable immutable capability/runtime-plan bundle schema after Deployment identity review.",
+      "acceptance_contract_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277"
+    },
+    {
+      "issue": 131,
+      "title": "Define an open provider-based data and knowledge plane for Actions",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        125,
+        129,
+        130
+      ],
+      "reason": "Unresolved contract edge(s): #125 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Define provider data/knowledge references and authorized operations without product-tier coupling.",
+      "acceptance_contract_sha256": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae"
+    },
+    {
+      "issue": 132,
+      "title": "Define durable Work Item queue, lease, review, and workflow semantics over capability Runs",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        90,
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #90 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Implement durable business queue/review/lease semantics separately from Run ownership.",
+      "acceptance_contract_sha256": "1db3e8aee4c298fc35aee568eb5f142005fd9393919aea947e8818caa69056ee"
+    },
+    {
+      "issue": 133,
+      "title": "Use RCC/Holotree as the first full environment and execution adapter for Actions workers",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        129,
+        130,
+        134,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Extend proven RCC adapter to worker execution using released provider/lease/exec contract.",
+      "acceptance_contract_sha256": "7cfcdb618fc35203a0cacf64e37fc2696ad003f133c4391abbf3ec8b034d4c4c"
+    },
+    {
+      "issue": 134,
+      "title": "Integrate RCC Environment Artifacts and execution as the first local Runtime Adapter",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "ACTIVE",
+      "partial_foundation": true,
+      "foundation_pr": 197,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "D implements bounded completed-worker retirement under independent Sol review; protocol/harness foundations integrated, actual successful RCC lease/retirement proof remains missing.",
+      "next_bounded_action": "Graceful completed-worker retirement repair is active with independent Sol review. Preserve failed RCC receipts and explicit NOT_PROVEN unexpected-crash recovery; require exact source/native consumer evidence.",
+      "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d"
+    },
+    {
+      "issue": 135,
+      "title": "Compile current package directories into deterministic Package Revisions and runtime plans",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        129,
+        130
+      ],
+      "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Compile deterministic Package Revisions and plans from current sources without machine-local identities.",
+      "acceptance_contract_sha256": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7"
+    },
+    {
+      "issue": 136,
+      "title": "Define an immutable Package Revision registry/provider and worker-local source cache",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        135
+      ],
+      "reason": "Unresolved contract edge(s): #135 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement verified immutable source provider and worker-local cache with corruption rejection.",
+      "acceptance_contract_sha256": "8812f36639e9ead075dc7fe826ada97d0026ae1690f6c8e06de758d03d1f8a7f"
+    },
+    {
+      "issue": 138,
+      "title": "Define a versioned Runtime-to-worker protocol for pinned runtime plans, adapters, and placements",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        90,
+        129,
+        130,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #90 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Version worker protocol carrying exact pinned plans and explicit decline/cancel/recovery.",
+      "acceptance_contract_sha256": "9afdd59ce5c4203be48761ea82304282b75596bf792a92d2ea7b730f00d45edf"
+    },
+    {
+      "issue": 139,
+      "title": "Build exact-subject capability, runtime-adapter, admission, Deployment, and worker conformance",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Build exact-subject conformance receipts over real operations, invalidation and no-fallback rejection.",
+      "acceptance_contract_sha256": "f522d635575963ab26eaf73c66bbdd438cb199a9a2d92820e374dd8e9da73d21"
+    },
+    {
+      "issue": 140,
+      "title": "Package and operate collapsed and split capability Runtime deployments safely",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        84,
+        86,
+        87,
+        129,
+        138
+      ],
+      "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #86 (BLOCKED, raw not_started), #87 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #138 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Package collapsed and split topologies with backup/upgrades/health and real worker acceptance.",
+      "acceptance_contract_sha256": "a83da2aee36817f0851bdee6bfc3673351c2be82e192b8c21fca8f385d39c2cc"
+    },
+    {
+      "issue": 141,
+      "title": "Define deterministic capability workflows over pinned runtime plans and Work Items",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        85,
+        129,
+        130,
+        132,
+        143,
+        147
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #85 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #132 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #147 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement deterministic pinned capability workflow nodes and durable lineage.",
+      "acceptance_contract_sha256": "b5c29cba880f014805832ef598f28264d7e9902126d13dcef109b42b6f73a993"
+    },
+    {
+      "issue": 142,
+      "title": "Prove Robot Task execution across runtime adapters and local, container, and worker placements",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        138,
+        139,
+        143,
+        144
+      ],
+      "reason": "Unresolved contract edge(s): #138 (BLOCKED, raw not_started), #139 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Execute Robot adapter-by-placement matrix with explicit unsupported cells and process-tree proof.",
+      "acceptance_contract_sha256": "33cbac7943a286bf33d76ede684e83d46c39e33d87befdeac0e9f1e0bb6ca7e1"
+    },
+    {
+      "issue": 143,
+      "title": "Define pluggable capability runtime adapters, shared admission, execution requirements, and preflight",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        134
+      ],
+      "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified)",
+      "next_bounded_action": "Extract shared admission/preflight adapter contract from real RCC and exercise genuine second adapter.",
+      "acceptance_contract_sha256": "a7a0bbc131ae212e7cd1c0cc7a8a37249ad26e65d2ea553857fb565bc1431959"
+    },
+    {
+      "issue": 144,
+      "title": "Make Robot Tasks a first-class capability kind independent of runtime adapter",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        134,
+        135,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #134 (ACTIVE, raw implemented_unverified), #135 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Move Robot Tasks onto common capability and Run model independent of adapter.",
+      "acceptance_contract_sha256": "f590b8962d8668fdcfebd556fbdfdc5a967d9e2495be3520264f607fde5a6032"
+    },
+    {
+      "issue": 145,
+      "title": "Evolve Actions Runtime into a lightweight control room with a unified Run Composer",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        129,
+        143,
+        144
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Build unified Run Composer and lightweight Control Room consuming authoritative admission.",
+      "acceptance_contract_sha256": "7ab0e82f0774b0a96cb2050ef6ef326f3920cf07e554e7acf1a892f77f9dc610"
+    },
+    {
+      "issue": 146,
+      "title": "Add one adapter-aware Actions Runtime CLI for capabilities, Robots, and development tasks",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        134,
+        143,
+        144
+      ],
+      "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Unify CLI capability/Robot/dev-task operations through authoritative admission/runtime plans.",
+      "acceptance_contract_sha256": "eefac147b16763e4802dbbd16df770d4b651aa38f0a400b9d49551db6b2b400a"
+    },
+    {
+      "issue": 147,
+      "title": "Add typed internal capability invocation with pinned runtime plans and parent-child Runs",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        129,
+        130,
+        143,
+        144
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement typed internal invocation with pinned child Runs and authorization lineage.",
+      "acceptance_contract_sha256": "93ca82e88727777675017c6711b7dbbc237f7704e8101863ede6b4f6fe6d3fb9"
+    },
+    {
+      "issue": 148,
+      "title": "Harden package import and compile Robot/runtime metadata into immutable Package Revisions",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        135
+      ],
+      "reason": "Unresolved contract edge(s): #135 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Complete secure acquisition and compile Robot metadata through shared immutable package compiler.",
+      "acceptance_contract_sha256": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6"
+    },
+    {
+      "issue": 149,
+      "title": "\ud83d\udc1d Hive Advisory Report",
+      "retained_state": "NOT_STARTED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Advisory record remains open, with no current implementation worker; retain it as a review/advisory item and do not restore execution labels.",
+      "next_bounded_action": "Retain living advisory record open; consume evidence without restoring execution labels.",
+      "acceptance_contract_sha256": "7f339f2e3378bf0572f6535738aba3029f51554dbd65d749ce4a433038ce4513"
+    },
+    {
+      "issue": 151,
+      "title": "[security] Reject unsafe Robot ZIP package-root selection and bound archive staging",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": true,
+      "foundation_pr": 200,
+      "checkpoint_pr": 244,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Final-copy repair integrated through241; test-only importer follow-up244 is independently reviewed and awaits exact reconciled hosted gates.",
+      "next_bounded_action": "PR230/232/234/240 bounded publication repairs integrated. PR244 adds importer-only package.yaml tests; verify reconciled exact candidate. Root/source identity and Windows ACL remain open.",
+      "acceptance_contract_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03"
+    },
+    {
+      "issue": 152,
+      "title": "[security] Enforce configured API-key authorization across admin routers and artifact delivery",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 199,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #199 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Run assembled protected-route/mount inventory with missing, wrong and valid keys and zero-side-effect assertions.",
+      "acceptance_contract_sha256": "c58dd4c2ac0b665f6cd67ad51f0629f30670bf0c0df603823b68d462fd222970"
+    },
+    {
+      "issue": 153,
+      "title": "[security] Constrain browser origins and credentialed CORS with explicit deployment policy",
+      "retained_state": "IN_PROGRESS",
+      "classification": "REVIEW",
+      "partial_foundation": true,
+      "foundation_pr": 201,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #216 remains assigned but has no current implementation worker in this snapshot; native acceptance and review remain.",
+      "next_bounded_action": "Prove final native cookie/bearer exact-origin HTTP/WebSocket/reconnect/revocation matrix on supported platforms; protected OAuth GET cookie access intentionally denied pending CSRF-safe endpoint design.",
+      "acceptance_contract_sha256": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a"
+    },
+    {
+      "issue": 155,
+      "title": "[strategist] Establish a release and compatibility roadmap for the expanding runtime architecture",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Exact-head/adversarial review remains before the next implementation step (PR #222). Full acceptance remains open.",
+      "next_bounded_action": "Resolve independent public roadmap review findings and verify dated registry/native compatibility claims.",
+      "acceptance_contract_sha256": "3ba8fdca26f2761fcaa820a22a10d9c23367393f36735c95c376adcda318e395"
+    },
+    {
+      "issue": 162,
+      "title": "[ACMM L0] Add Coverage gate",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Exact-head/adversarial review remains before the next implementation step (PR #227). Full acceptance remains open.",
+      "next_bounded_action": "Verify final hosted coverage gate; integrated ordinary source run PASS53.391% against53.38%; retain service/subprocess/platform limits.",
+      "acceptance_contract_sha256": "09725e2a6edb5b7b9c0773df8eaa1bf49508b546898b6a7fcee8a8f5022c77ad"
+    },
+    {
+      "issue": 194,
+      "title": "[quality] Add coverage for command dispatch and variable-scope error paths",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 217,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #217 remains a checkpoint; no current implementation worker is assigned to this command-dispatch coverage issue.",
+      "next_bounded_action": "Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release.",
+      "acceptance_contract_sha256": "43496e2b9e8e7c8b9e1d9fceff7fc3be1ed3f9a79677552811ab6e27c391f4f5"
+    },
+    {
+      "issue": 195,
+      "title": "[architect] Action Server depends on private actions-core modules across a versioned package boundary",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 217,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #217 remains a checkpoint; no current implementation worker is assigned to this Core private-API issue.",
+      "next_bounded_action": "Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release.",
+      "acceptance_contract_sha256": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274"
+    },
+    {
+      "issue": 196,
+      "title": "Make Actions Runtime a one-click host for the RCC Environment Artifact provider",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        134,
+        152,
+        153,
+        208,
+        214
+      ],
+      "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified), #152 (INTEGRATED, raw implemented_unverified), #153 (REVIEW, raw in_progress), #208 (ACTIVE, raw implemented_unverified), #214 (REVIEW, raw in_progress)",
+      "next_bounded_action": "Host RCC provider only after administrative/auth/origin and tunnel lifecycle acceptance.",
+      "acceptance_contract_sha256": "13ec0d086e569fc55992151a649debcf3ad6eac3492991b9acb5be3489f2a6d7"
+    },
+    {
+      "issue": 208,
+      "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "ACTIVE",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 242,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Current B worker repairs actual native candidate-Core installation after failed Linux consumer gate. Earlier receipt/provenance slices are integrated; whole acceptance remains open.",
+      "next_bounded_action": "PR231/237 receipts and native provenance integrated. PR242 Linux consumer gate failed because actual RCC path omitted measured Core wheel; repair installation and prove in-worker distribution before acceptance.",
+      "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c"
+    },
+    {
+      "issue": 209,
+      "title": "fix(ci): diagnose unexpected disconnect in assembled WebSocket Origin test",
+      "retained_state": "IN_PROGRESS",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #216 remains assigned but has no current implementation worker in this snapshot; native acceptance and review remain.",
+      "next_bounded_action": "Verify latest native WebSocket/reconnect on all OS; All-platform b592 packaged reconnect PASS; e4 Windows cleanup failure remains distinct.",
+      "acceptance_contract_sha256": "c9cbf271124d20fac773f4203ba474cc167341e5d33aae0cbfa2966c9676ce92"
+    },
+    {
+      "issue": 210,
+      "title": "fix(release): repair HTTP helper workflow credential delivery",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "ACTIVE",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 243,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "A owns Helper promotion and inherited exact artifact validator repair; Helper checks pass but aggregate release/RCC checks remain blocked.",
+      "next_bounded_action": "Promote Helper1.0.2 via PR243 after inherited Runtime semantic wheel-inventory and Linux RCC/CORS failures are repaired, independently reviewed and exact-head CI passes; then immutable tag and actual registry verification.",
+      "acceptance_contract_sha256": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d"
+    },
+    {
+      "issue": 211,
+      "title": "fix(release): align Actions-side native handoffs with community distribution",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 215,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Exact-head/adversarial review remains before the next implementation step (PR #215, checkpoint PR #215). Full acceptance remains open.",
+      "next_bounded_action": "Finish final candidate security/platform/package acceptance, verify immutable unused versions and release admission, merge only admitted integration, then publish Helper1.0.2 -> Core1.0.2 -> Runtime1.0.3/native through GitHub Actions with registry readback and workflow receipts.",
+      "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4"
+    },
+    {
+      "issue": 212,
+      "title": "bug(ui): Runtime 1.0.1 Runs fails JSON parsing; oversized run list and same-origin WebSocket 403",
+      "retained_state": "IN_PROGRESS",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #216 remains assigned but has no current implementation worker in this snapshot; native acceptance and review remain.",
+      "next_bounded_action": "Verify new native history gate on all supported OS and rebuilt candidate; retain full detail and legacy supported clients.",
+      "acceptance_contract_sha256": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31"
+    },
+    {
+      "issue": 214,
+      "title": "feat(expose): make tunnel providers a first-class Runtime lifecycle",
+      "retained_state": "IN_PROGRESS",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #225 remains open, but no current implementation worker is assigned in this snapshot; live provider/TLS and standalone lifecycle gates remain.",
+      "next_bounded_action": "PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open.",
+      "acceptance_contract_sha256": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347"
+    }
+  ]
+}
