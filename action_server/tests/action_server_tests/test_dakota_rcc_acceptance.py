@@ -68,7 +68,6 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
                 "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": os.environ[
                     "ACTIONS_ACCEPTANCE_ROBOCORP_HOME"
                 ],
-                "ACTIONS_REAL_RCC_ACCEPTANCE": "1",
             },
         ),
         cleanup_grace_seconds=harness.CLEANUP_GRACE_SECONDS,
