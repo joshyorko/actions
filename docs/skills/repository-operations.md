@@ -475,6 +475,17 @@ tag-named binaries as GitHub release assets only; the Sema4AI Homebrew dispatch
 and Robocorp/Sema4AI CDN/S3 compatibility handoffs are retired. The normal
 uploader uses `overwrite: false`, so a same-name asset collision fails closed
 instead of replacing a published binary.
+The binary workflow publishes `<tag>-sha256.txt` as a fourth immutable GitHub
+release asset. Its sorted entries use the exact three binary asset names, so
+each downloaded executable can be checked with `sha256sum -c` without renaming.
+Maintain this behavior in `.github/workflows/_gen_workflows.py` and regenerate
+the workflow; generated YAML is not authoritative. The maintained Homebrew tap
+is `joshyorko/homebrew-tools`; its `action-server` cask mirrors only verified
+Linux x86_64 and macOS arm64 Runtime assets. Prepare a tap update after the
+upstream assets exist and their GitHub SHA-256 digests are verified. The tap
+README documents the `action-server-daily` auto-update slot and its manual
+`action=ci` then `action=release` workflow inputs. Do not dispatch the retired
+Sema4AI `publish.yml` workflow.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.

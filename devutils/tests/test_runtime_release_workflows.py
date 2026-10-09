@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import os
@@ -1156,6 +1157,58 @@ def test_binary_release_uses_explicit_tag_asset_names():
     assert "asset_name: ${{ github.ref_name }}-linux64" in binary
     assert "asset_name: ${{ github.ref_name }}-macos-arm64" in binary
     assert "asset_name: ${{ github.ref_name }}-windows64.exe" in binary
+
+
+def test_binary_release_publishes_downloadable_checksum_manifest(tmp_path):
+    binary = yaml.safe_load(
+        (WORKFLOWS / "actions_runtime_binary_release.yml").read_text()
+    )
+    release_steps = binary["jobs"]["release"]["steps"]
+    inventory = next(
+        step["run"]
+        for step in release_steps
+        if step.get("name") == "Verify Runtime binary inventory"
+    )
+    checksum_upload = next(
+        step
+        for step in release_steps
+        if step.get("name") == "Upload Runtime SHA-256 manifest"
+    )
+
+    assert '"${tag}-sha256.txt"' in inventory
+    assert "${tag}-linux64" in inventory
+    assert "${tag}-macos-arm64" in inventory
+    assert "${tag}-windows64.exe" in inventory
+    assert checksum_upload["with"]["asset_name"] == "${{ github.ref_name }}-sha256.txt"
+    assert checksum_upload["with"]["overwrite"] is False
+
+    for relative_path in (
+        "linux64/action-server",
+        "macos-arm64/action-server",
+        "windows64/action-server.exe",
+    ):
+        path = tmp_path / relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(relative_path.encode())
+    env = os.environ.copy()
+    env["GITHUB_REF_NAME"] = "actions-runtime-1.0.3"
+    result = run_shell_step(inventory, tmp_path, env)
+    assert result.returncode == 0, result.stderr
+
+    expected = sorted(
+        (
+            hashlib.sha256(relative_path.encode()).hexdigest(),
+            f"actions-runtime-1.0.3-{asset_suffix}",
+        )
+        for relative_path, asset_suffix in (
+            ("linux64/action-server", "linux64"),
+            ("macos-arm64/action-server", "macos-arm64"),
+            ("windows64/action-server.exe", "windows64.exe"),
+        )
+    )
+    assert (tmp_path / "actions-runtime-1.0.3-sha256.txt").read_text().splitlines() == [
+        f"{digest}  {filename}" for digest, filename in expected
+    ]
 
 
 def test_runtime_recovery_workflow_is_immutable_and_dispatch_only():
