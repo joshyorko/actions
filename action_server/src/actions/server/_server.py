@@ -176,7 +176,9 @@ def _mount_artifact_static_files(
         app.mount("/artifacts", static_files, name="artifacts")
 
 
-async def _start_community_expose_impl(port: int, settings, api_key: str | None = None):
+async def _start_community_expose_impl(
+    port: int, settings, api_key: str | None = None, *, app=None, action_routes=None
+):
     """Start community expose and suppress provider startup failures."""
     from ._community_expose import TunnelManager, TunnelProvider
 
@@ -189,8 +191,33 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
     provider = provider_map.get(settings.expose_provider, TunnelProvider.AUTO)
     community_tunnel_manager = TunnelManager(preferred_provider=provider)
 
+    if provider is TunnelProvider.BORE:
+        log.error("Refusing the plain-HTTP Bore provider for Runtime exposure.")
+        return community_tunnel_manager
+
     try:
         tunnel = await community_tunnel_manager.start(port)
+
+        if api_key:
+            if action_routes is None or app is None:
+                raise RuntimeError("Authenticated MCP readiness probe unavailable")
+            release_origin = None
+            try:
+                release_origin = (
+                    action_routes.mcp_server_setup_helper.allow_tunnel_origin(
+                        tunnel.public_url
+                    )
+                )
+                community_tunnel_manager.add_stop_callback(release_origin)
+                await _verify_public_tunnel(tunnel.public_url, api_key, app)
+            except BaseException:
+                if release_origin is not None:
+                    release_origin()
+                try:
+                    await community_tunnel_manager.stop()
+                except BaseException:
+                    log.exception("Failed to stop unverified community tunnel.")
+                raise
 
         log.info(
             colored("\n  🌍 Public URL: ", "green", attrs=["bold"])
@@ -206,7 +233,7 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
         log.info(colored(f"     (using {tunnel.provider.value})", attrs=["dark"]))
 
     except Exception as e:
-        log.error(f"Failed to start tunnel: {e}")
+        log.error("Failed to start tunnel (%s).", type(e).__name__)
         log.info(
             colored(
                 "     Tip: Install 'bore' for simple tunneling: ",
@@ -216,6 +243,112 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
         )
 
     return community_tunnel_manager
+
+
+async def _verify_public_tunnel(
+    public_url: str, api_key: str, app, *, transport=None
+) -> None:
+    """Verify the public Runtime identity and authenticated MCP initialize."""
+    import json
+    from urllib.parse import urlsplit
+
+    import httpx2
+    from mcp import ClientSession
+    from mcp.client.streamable_http import streamable_http_client
+
+    parsed = urlsplit(public_url)
+    if (
+        parsed.scheme != "https"
+        or not parsed.hostname
+        or parsed.username is not None
+        or parsed.password is not None
+        or parsed.query
+        or parsed.fragment
+        or parsed.path not in ("", "/")
+    ):
+        raise RuntimeError("Tunnel returned an invalid HTTPS URL")
+    try:
+        _ = parsed.port
+    except ValueError as exc:
+        raise RuntimeError("Tunnel returned an invalid HTTPS URL") from exc
+    origin = f"https://{parsed.netloc}"
+    loop = asyncio.get_running_loop()
+    deadline = loop.time() + 8.0
+
+    async def remaining_timeout() -> float:
+        remaining = deadline - loop.time()
+        if remaining <= 0:
+            raise TimeoutError("Tunnel verification deadline exceeded")
+        return remaining
+
+    async with asyncio.timeout_at(deadline):
+        expected_uuid = app.mtime_uuid
+        identity_client_options: dict[str, typing.Any] = {
+            "verify": True,
+            "follow_redirects": False,
+            "timeout": await remaining_timeout(),
+        }
+        if transport is not None:
+            identity_client_options["transport"] = transport
+        async with httpx2.AsyncClient(**identity_client_options) as client:
+            response = await client.get(f"{origin}/config", headers={"Origin": origin})
+            if response.is_redirect or str(response.url) != f"{origin}/config":
+                raise RuntimeError("Tunnel identity request redirected")
+            if response.status_code != 200:
+                raise RuntimeError("Tunnel identity request failed")
+            config = response.json()
+            if (
+                not config.get("auth_enabled")
+                or config.get("mtime_uuid") != expected_uuid
+                or app.mtime_uuid != expected_uuid
+            ):
+                raise RuntimeError("Tunnel Runtime identity mismatch")
+
+            init_body = {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "initialize",
+                "params": {
+                    "protocolVersion": "2025-06-18",
+                    "capabilities": {},
+                    "clientInfo": {
+                        "name": "action-server-expose-probe",
+                        "version": "1",
+                    },
+                },
+            }
+            unauth = await client.post(
+                f"{origin}/mcp",
+                headers={
+                    "Origin": origin,
+                    "Accept": "application/json, text/event-stream",
+                    "Content-Type": "application/json",
+                    "Mcp-Protocol-Version": "2025-06-18",
+                },
+                content=json.dumps(init_body),
+                timeout=await remaining_timeout(),
+            )
+            if unauth.status_code not in (401, 403):
+                raise RuntimeError("Tunnel did not enforce MCP authentication")
+
+        auth_client_options: dict[str, typing.Any] = {
+            "headers": {"Authorization": f"Bearer {api_key}", "Origin": origin},
+            "verify": True,
+            "follow_redirects": False,
+            "timeout": await remaining_timeout(),
+        }
+        if transport is not None:
+            auth_client_options["transport"] = transport
+        async with httpx2.AsyncClient(**auth_client_options) as client:
+            async with streamable_http_client(
+                f"{origin}/mcp", http_client=client
+            ) as streams:
+                async with ClientSession(streams[0], streams[1]) as session:
+                    await session.initialize()
+            if app.mtime_uuid != expected_uuid:
+                raise RuntimeError(
+                    "Tunnel Runtime identity changed during verification"
+                )
 
 
 @asynccontextmanager
@@ -673,7 +806,7 @@ def start_server(
         """Start community expose using open source tunnel providers."""
         nonlocal community_tunnel_manager
         community_tunnel_manager = await _start_community_expose_impl(
-            port, settings, api_key
+            port, settings, api_key, app=app, action_routes=action_routes
         )
 
     protocol = "https" if settings.use_https else "http"

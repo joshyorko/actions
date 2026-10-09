@@ -152,6 +152,17 @@ class MessagesHandler:
 
         while True:
             msg = self._readqueue.get()
+            if msg is None:
+                # Keep EOF visibly abnormal while distinguishing it from the
+                # explicit JSON-RPC exit notification handled below.
+                raise RuntimeError(
+                    "Unexpected EOF from the action-server worker stream."
+                )
+            if isinstance(msg, dict) and msg.get("method") == "exit":
+                # The reader stops after queueing exit. Any work already queued
+                # after it is discarded; the current synchronous command has
+                # completed before this consumer can observe the notification.
+                break
             self._on_message(msg)
 
     def _on_message(self, message):

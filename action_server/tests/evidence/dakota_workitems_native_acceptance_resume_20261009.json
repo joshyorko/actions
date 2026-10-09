@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "source_sha_claim": "43cf9a266c9a1a15046e963d51bf2affd39e0756",
+  "build_version_claim": "dakota-workitems-43cf9a26-local",
+  "build_claim_verification": "caller supplied; not verified against a retained build manifest",
+  "platform": "Linux",
+  "architecture": "x86_64",
+  "status": "PASS",
+  "consumer_execution": "Runtime action executed by the packaged Runtime worker",
+  "test_harness_sqlite_writes": [
+    "seed stale reservation fixture only"
+  ],
+  "recovery_fixture_limit": "stale persisted reservation seeded by harness; process crash not simulated",
+  "worker_dependencies": {
+    "actions-core": "1.0.2 (task-local wheel)",
+    "actions-work-items": "0.4.4"
+  },
+  "checks": [
+    "consumer_action_reserves_input_and_releases_completed_with_parent_linked_output",
+    "consumer_action_releases_failed_with_error_details_then_fails_run",
+    "consumer_action_recovers_seeded_stale_reservation_retries_and_completes",
+    "runtime_restart_state_and_output_persistence"
+  ],
+  "cases": [
+    {
+      "kind": "frozen",
+      "executable_sha256": "e012781ab014a3c217539c8560e18ad22961aea224fafdff01f27411ce3f2227",
+      "status": "PASS",
+      "consumer_actions": [
+        {
+          "scenario": "success",
+          "http_status": 200
+        },
+        {
+          "scenario": "failure",
+          "http_status": 500
+        },
+        {
+          "scenario": "recovery",
+          "http_status": 200
+        }
+      ],
+      "api_state_readbacks": {
+        "after_success": {
+          "input_state": "COMPLETED",
+          "output_state": "PENDING",
+          "output_queue": "default_output",
+          "parent_link_verified": true
+        },
+        "after_failure": {
+          "input_state": "FAILED",
+          "error_code": "SYNTHETIC_PROCESSOR_FAILURE",
+          "error_message": "synthetic consumer failure"
+        },
+        "after_recovery": {
+          "input_state": "COMPLETED",
+          "output_state": "PENDING",
+          "parent_link_verified": true
+        },
+        "after_restart": {
+          "success_state": "COMPLETED",
+          "failure_state": "FAILED",
+          "recovery_state": "COMPLETED",
+          "stats": {
+            "queue_name": "default",
+            "pending": 0,
+            "in_progress": 0,
+            "done": 2,
+            "failed": 1,
+            "total": 3
+          },
+          "output_parent_links_verified": true
+        }
+      }
+    },
+    {
+      "kind": "go-wrapper",
+      "executable_sha256": "3630dcb21f89327bf3623b606c250f1bb3e268237d1b7f59c75d97fa392e03d7",
+      "status": "PASS",
+      "consumer_actions": [
+        {
+          "scenario": "success",
+          "http_status": 200
+        },
+        {
+          "scenario": "failure",
+          "http_status": 500
+        },
+        {
+          "scenario": "recovery",
+          "http_status": 200
+        }
+      ],
+      "api_state_readbacks": {
+        "after_success": {
+          "input_state": "COMPLETED",
+          "output_state": "PENDING",
+          "output_queue": "default_output",
+          "parent_link_verified": true
+        },
+        "after_failure": {
+          "input_state": "FAILED",
+          "error_code": "SYNTHETIC_PROCESSOR_FAILURE",
+          "error_message": "synthetic consumer failure"
+        },
+        "after_recovery": {
+          "input_state": "COMPLETED",
+          "output_state": "PENDING",
+          "parent_link_verified": true
+        },
+        "after_restart": {
+          "success_state": "COMPLETED",
+          "failure_state": "FAILED",
+          "recovery_state": "COMPLETED",
+          "stats": {
+            "queue_name": "default",
+            "pending": 0,
+            "in_progress": 0,
+            "done": 2,
+            "failed": 1,
+            "total": 3
+          },
+          "output_parent_links_verified": true
+        }
+      }
+    }
+  ],
+  "actions_core_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+  "pytest_output": "2 passed, 0 failed",
+  "harness_sha": "703837e5ef898ef7f69ea4bdd2f2f3ef7629687e",
+  "harness_sha_basis": "exact HEAD observed in the clean worktree at retest; caller-supplied artifact source SHA remains separately labeled",
+  "harness_integrity_regressions": {
+    "command": "action_server/.venv/bin/python -m ruff check action_server/scripts/dakota_workitems_native_acceptance.py action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py && action_server/.venv/bin/python -m pytest -q action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
+    "output": "Ruff PASS; 14 passed in 0.18s"
+  },
+  "native_retest": {
+    "command": ".venv/bin/python scripts/dakota_workitems_native_acceptance.py --source-sha 43cf9a266c9a1a15046e963d51bf2affd39e0756 --build-version dakota-workitems-43cf9a26-local --rcc-home <task-local-rcc-home> --receipt <task-local-receipt>",
+    "output": "2 passed in 10.91s",
+    "artifacts_rebuilt": false
+  }
+}

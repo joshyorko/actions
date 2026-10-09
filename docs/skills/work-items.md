@@ -132,6 +132,27 @@ create, list, detail, persisted completion, and corrupt-payload responses throug
 the actual executable. An unwrapped PyInstaller pass does not establish wrapper
 extraction, another operating system, or the embedded browser UI.
 
+`scripts/dakota_workitems_native_acceptance.py` adds a separate packaged-worker
+gate for both the frozen executable and Go wrapper. Its consumer action reserves
+and completes an input with parent-linked output, records a failed input with
+error details, recovers a harness-seeded stale reservation, and verifies state
+after Runtime restart. The seeded reservation does not simulate a process crash.
+The runner requires exactly both pytest cases to pass setup, call and teardown,
+plus one fresh atomic proof per executable in an invocation-specific directory.
+Proofs bind the runtime kind, executable SHA256 and task-local Core wheel SHA256;
+the runner rechecks artifacts before admitting success. Each attempt removes
+any prior receipt, then atomically writes a fresh `IN_PROGRESS` receipt and
+attempt ID before artifact checks or pytest. Ordinary failures write `FAIL` and
+mark cases `NOT_VERIFIED`; abrupt termination can leave `IN_PROGRESS`, which is
+not a passing result. Source SHA and build version arguments are caller claims,
+not verified build provenance. Retained Linux artifacts do not establish
+current-source builds or Windows/macOS, distributed, service-backend or full
+browser acceptance.
+The credential-free native workflow runs process ownership, management/browser
+and history acceptance; it does not invoke this packaged-worker consumer gate.
+Its success therefore does not establish consumer lifecycle acceptance on that
+platform. Retain a separate receipt from this runner for each tested artifact.
+
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
 From the repository root when Poetry is unavailable for diagnostic-only host checks:
@@ -308,6 +329,26 @@ browser versions, and the checks completed. Supply the SHA that built the
 binaries when probing existing artifacts; the harness checkout SHA is not
 artifact provenance. Optional `--frozen`, `--go-wrapper`, `--node` and
 `--browser-executable` flags support existing build artifacts/toolchains.
+
+The credential-free workflow is hand-maintained: it is absent from the
+`TARGETS` list in `.github/workflows/_gen_workflows.py`, so workflow regeneration
+does not overwrite it.
+
+The credential-free workflow retains the Go wrapper under the existing
+`action-server-unauthenticated-<runner-os>` artifact name and separately uploads
+the frozen executable and manifest in
+`action-server-native-provenance-<runner-os>-<run-id>-<attempt>`. The manifest
+checks Git `HEAD` against `github.sha`, records actual Python and Go versions
+plus platform/architecture, and measures executable hashes and package-relative
+paths. It does not attest a clean source tree or every build input. Ordinary
+path reads follow symlinks, so SHA-256 identifies bytes read through each named
+path without proving filesystem object identity. Artifact download entries
+identify the Go-wrapper artifact's root executable and the frozen artifact's
+`dist/action-server/...` path. This build does not supply a candidate Core wheel,
+so the manifest makes no Core-wheel provenance claim; the worker-consumer
+acceptance requires a separately measured task-local wheel. The manifest covers
+the checkout and named build outputs, not every dependency or the frozen
+executable's adjacent onedir files.
 
 This harness proves creation and restart persistence, not worker-driven Work
 Item state transitions, attachment behavior, accessibility or other browsers.

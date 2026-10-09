@@ -67,8 +67,19 @@ class McpServerSetupHelper:
 
     def __init__(self) -> None:
         from mcp.server import Server
+        from mcp.server.transport_security import TransportSecuritySettings
 
         self._init_state()
+        self.transport_security = TransportSecuritySettings(
+            enable_dns_rebinding_protection=True,
+            allowed_hosts=["127.0.0.1:*", "localhost:*", "[::1]:*"],
+            allowed_origins=[
+                "http://127.0.0.1:*",
+                "http://localhost:*",
+                "http://[::1]:*",
+            ],
+        )
+        self._tunnel_security_refs: dict[tuple[str, str], tuple[int, bool, bool]] = {}
         self.server = Server(
             "Action Server",
             on_list_tools=self._list_tools,
@@ -79,6 +90,93 @@ class McpServerSetupHelper:
             on_list_prompts=self._list_prompts,
             on_get_prompt=self._get_prompt,
         )
+
+    def allow_tunnel_origin(self, public_url: str) -> Callable[[], None]:
+        """Temporarily admit one validated HTTPS tunnel host and origin."""
+        from urllib.parse import urlsplit
+
+        parsed = urlsplit(public_url)
+        if (
+            parsed.scheme != "https"
+            or not parsed.hostname
+            or parsed.username is not None
+            or parsed.password is not None
+            or parsed.query
+            or parsed.fragment
+            or parsed.path not in ("", "/")
+        ):
+            raise ValueError("Invalid HTTPS tunnel URL")
+        try:
+            port = parsed.port
+        except ValueError as exc:
+            raise ValueError("Invalid HTTPS tunnel URL") from exc
+        if not parsed.netloc.isascii() or any(char.isspace() for char in parsed.netloc):
+            raise ValueError("Invalid HTTPS tunnel URL")
+        host = parsed.hostname.lower()
+        if port == 0:
+            raise ValueError("Invalid HTTPS tunnel URL")
+        if ":" in host:
+            import ipaddress
+
+            try:
+                ipaddress.IPv6Address(host)
+            except ValueError as exc:
+                raise ValueError("Invalid HTTPS tunnel URL") from exc
+        else:
+            labels = host.rstrip(".").split(".")
+            if any(
+                not label
+                or len(label) > 63
+                or label[0] == "-"
+                or label[-1] == "-"
+                or not label.replace("-", "").isalnum()
+                for label in labels
+            ):
+                raise ValueError("Invalid HTTPS tunnel URL")
+        authority = f"[{host}]" if ":" in host else host
+        if port is not None:
+            authority = f"{authority}:{port}"
+        if parsed.netloc.lower() != authority:
+            raise ValueError("Invalid HTTPS tunnel URL")
+        host_entry = authority
+        origin_entry = f"https://{authority}"
+        key = (host_entry, origin_entry)
+        settings = self.transport_security
+        current = self._tunnel_security_refs.get(key)
+        if current is None:
+            owns_host = host_entry not in settings.allowed_hosts
+            owns_origin = origin_entry not in settings.allowed_origins
+            if owns_host:
+                settings.allowed_hosts.append(host_entry)
+            if owns_origin:
+                settings.allowed_origins.append(origin_entry)
+            current = (0, owns_host, owns_origin)
+        self._tunnel_security_refs[key] = (current[0] + 1, current[1], current[2])
+        released = False
+
+        def release() -> None:
+            nonlocal released
+            if released:
+                return
+            released = True
+            state = self._tunnel_security_refs.get(key)
+            if state is None:
+                return
+            references, owns_host, owns_origin = state
+            if references > 1:
+                self._tunnel_security_refs[key] = (
+                    references - 1,
+                    owns_host,
+                    owns_origin,
+                )
+                return
+            del self._tunnel_security_refs[key]
+            if owns_host and host_entry in settings.allowed_hosts:
+                settings.allowed_hosts.remove(host_entry)
+            if owns_origin and origin_entry in settings.allowed_origins:
+                settings.allowed_origins.remove(origin_entry)
+
+        return release
 
     @staticmethod
     def _request_values(ctx: Any) -> tuple[dict[str, str], dict[str, str]]:
