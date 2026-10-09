@@ -1256,18 +1256,26 @@ failed wrapper status, exit code and reason even when Action execution succeeds.
 
 An RCC lifecycle `inspect` result of `ready: true` with
 `providerRequired: false` does not by itself prove a provider-free Runtime
-restart. In the bounded provider-dead warm probe at source
-`ae6db6b8a62a918d6c2de032b873bdff8117034e`, the initial authenticated Action,
-artifact verification, RCC wrapper exit 0 and provider cleanup passed. A second
-Runtime used the same datadir, RCC home, artifact digest and provider origin;
-after the RCC cache process was reaped, a count-and-reject loopback probe
-reoccupied that origin without serving artifacts. RCC inspection still
-reported the artifact ready, but the warm attempt made one request to the
-configured origin, received the probe's 503 response and failed during RCC
-acquire before producing a warm Action or wrapper receipt. Keep offline warm
-execution and zero requests to that configured origin as separate cells; this
-result does not establish either. The probe is request instrumentation, not an
-Actions-owned provider and not evidence about requests to other origins.
+restart. In the bounded comparison at source
+`ef9195daa9ca8c1d3fbc7c8fc998e39602595a21`, the initial authenticated Action,
+artifact verification, RCC wrapper exit 0 and provider cleanup passed. A
+second Runtime used the same datadir, RCC home, artifact digest and provider
+origin; after the RCC cache process was reaped, a count-and-reject loopback
+probe reoccupied that origin without serving artifacts. Inspection reported
+the artifact ready. A direct pinned RCC `env acquire` without `--provider`
+then returned the exact digest with `verification.valid: true` and made no
+probe requests. The same direct command with the configured provider requested
+`/<digest>/provenance.json`, received 503 and exited with
+`artifact trust attachment verification failed`. The restarted Runtime made
+the same provenance request and failed before creating its worker. The Runtime
+adapter currently supplies its configured provider to acquire, so this is a
+provider-backed trust-carrier failure even when local materialization is ready.
+Do not treat lifecycle inspection as acquire verification or remove the
+provider/trust input to make this scenario pass without an explicit trust
+contract decision. Keep provider-free acquire, provider-backed acquire, and
+Runtime warm execution as separate evidence cells. The probe is request
+instrumentation, not an Actions-owned provider and not evidence about requests
+to other origins.
 
 Its separate CLI watchdog does not by itself prove cleanup of every descendant.
 Cleanup coverage must include an owner that exits before timeout while a
