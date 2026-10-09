@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T22:58:00Z",
-  "status": "ACTIVE engineering checkpoint at 2026-10-09T22:58Z: 11 of 20 scoped PRs are integrated only to named targets; 9 open/blocked and 0 merge-ready. PR270 full Actions suite passes (315 tests); 4 hosted checks pass and 8 remain in progress, with independent review pending. PR256 native jobs completed with Linux/Windows frozen UI passing, macOS UI steps skipped, and Go UI failing before startup for four missing manifest hash fields. Issue acceptance and publication are unchanged.",
-  "integration_head": "abe8640a137942bcf398668fe2093529ba53c38b",
-  "community_head": "c30f953bae1a322e1d09549607ab42f1badce440",
+  "observed_at": "2026-10-09T23:28:00Z",
+  "status": "ACTIVE engineering checkpoint at 2026-10-09T23:28Z: 13 of 20 scoped PRs are merged only to named targets; 7 remain open/blocked, 0 merge-ready. PR220 merged to community and PR270 to integration; neither changes issue acceptance. PR221 head 4e8f8f1e has three Python 3.10 Core devmode failures, nine checks in progress, 16 successes and one skip. PR256 head a1904783 fails frozen package-tree digest preflight on Linux/Windows; independent review also blocks unsafe stop() cleanup semantics. No publication or whole-issue acceptance changed.",
+  "integration_head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+  "community_head": "d2741a18976f75467355282ad3caa5b99b4c505e",
   "release_ready": false,
   "community_merge": true,
   "publication": false,
@@ -1136,7 +1136,7 @@
       "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
     }
   ],
-  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread’s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
+  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread\u2019s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
   "documentation_receipts": [
     {
       "lane": "Windows/RCC lifecycle review",
@@ -1268,7 +1268,7 @@
     },
     {
       "lane": "Current release/native worker reconciliation",
-      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254–257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
+      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254\u2013257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
     }
   ],
   "post_archive_observations": [
@@ -1371,7 +1371,7 @@
     },
     {
       "observed_at": "2026-10-09T19:36:24Z",
-      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255–257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
+      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255\u2013257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
     },
     {
       "event": "Existing RCC ToolkitTest command now discovers the graph regression wrapper: v18.19.3 local run exited 0, Ruff developer passed, pytest 26/26 passed; receipt evidence/community-graph-toolkit-test-20261009.json. No hosted workflow result is inferred; the immutable graph amendment ZIP is unchanged."
@@ -1446,7 +1446,7 @@
     },
     {
       "observed_at": "2026-10-09T22:23:22Z",
-      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07–22:11 read errors remain historical. No worker-lane progress is inferred."
+      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07\u201322:11 read errors remain historical. No worker-lane progress is inferred."
     }
   ],
   "admission_checkpoint": {
@@ -2673,7 +2673,7 @@
     "native_status": "completed",
     "bootstrap_request": "actions-bootstrap-20261009-1832",
     "native_permission_limitation": "Superseded: authorized native request/settings supplied approvalPolicy=never and sandbox.type=dangerFullAccess, confirmed from native response/settings-updated event. Do not infer from null aggregate effective configuration.",
-    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout’s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe…`, integration base at `3ed98dd…`, upstream reporting docs at `57399b60…`, and Actions Core release at `df7b0d66…`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor’s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
+    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout\u2019s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe\u2026`, integration base at `3ed98dd\u2026`, upstream reporting docs at `57399b60\u2026`, and Actions Core release at `df7b0d66\u2026`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor\u2019s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
     "engineering_threads_dispatched": 5,
     "old_approvals_resumed": false,
     "workspace_recreated": false,
@@ -2835,19 +2835,14 @@
   },
   "cloud_workers_observation_note": "This array is the earlier 18:48:02Z local Cloud worktree snapshot, not the current inventory. Use live_inventory for current bounded observations; remote/native states are qualified in inventory_scope.",
   "current_integration_checkpoint": {
-    "pr": 254,
-    "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
-    "merge_sha": "446ff1b3328028154684c035f4e395ae35284067",
-    "tree": "f2f909fb66b46e2ed1bb6fbf0f4f07c446aebc32",
-    "checks": {
-      "audit_run": 37983888097,
-      "coverage_run": 37983888029,
-      "rcc_run": 37983888152,
-      "result": "all PASS"
-    },
-    "independent_review": "ACCEPT",
-    "merged_at": "2026-10-09T21:01:00Z",
-    "scope_limit": "Last previously admitted documentation-only validation checkpoint remains PR254 at446ff1b. The branch has since advanced through seven target-specific merges, including PR264/268; current branch ref is recorded separately. This does not admit the entire PR221 combined candidate or release."
+    "pr": 270,
+    "source_head": "5efcfebf1c572808a441e2360d1c1e68a77020a9",
+    "merge_sha": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+    "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012",
+    "merged_at": "2026-10-09T23:24:16Z",
+    "checks": "13 exact-head hosted checks succeeded; publication steps skipped",
+    "scope_limit": "Scoped metadata lint/docs repair integrated to the named integration branch; no issue acceptance, Runtime publication, or release readiness implied.",
+    "receipt": "evidence/pr270-admission-readback-20261009.json"
   },
   "observed_at_utc": "2026-10-09T22:53:00Z",
   "runtime_candidate_head": "6a53578fac029a0696834c30438c858f5f0003be",
@@ -3172,15 +3167,15 @@
   },
   "release_candidate_head": "6a53578fac029a0696834c30438c858f5f0003be",
   "current_convergence_update": {
-    "observed_at_utc": "2026-10-09T22:58:55Z",
-    "path": "evidence/convergence-followup-20261009T2258Z.json",
-    "sha256": "13e8b98c56f41200077a24e792fa9834a21903016cc152a4aaa9306cd441bbe6",
+    "observed_at_utc": "2026-10-09T23:28:16Z",
+    "path": "evidence/convergence-followup-20261009T2328Z.json",
+    "sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360",
     "cohort": {
       "items": 20,
-      "target_integrated": 11,
-      "blocked_open": 9,
+      "target_integrated": 13,
+      "blocked_open": 7,
       "merge_ready": 0,
-      "integrated_prs": [
+      "target_integrated_prs": [
         251,
         266,
         257,
@@ -3191,24 +3186,60 @@
         263,
         267,
         269,
-        265
+        265,
+        220,
+        270
       ]
     },
     "open_pr_audit": {
-      "path": "evidence/convergence-followup-20261009T2258Z.json",
-      "sha256": "13e8b98c56f41200077a24e792fa9834a21903016cc152a4aaa9306cd441bbe6",
-      "open_count": 9,
-      "all_drafts": true,
-      "note": "All nine blocked rows are included; eight preserve the 22:48 exact head/base audit and detailed owner/gate/action, with current PR221/256 updates and PR270 exact head."
+      "path": "evidence/convergence-followup-20261009T2328Z.json",
+      "sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360",
+      "open_count": 7,
+      "all_drafts": true
     },
-    "branch_readback_at": "2026-10-09T22:47:00Z",
+    "branch_readback": {
+      "community": {
+        "branch": "community",
+        "head": "d2741a18976f75467355282ad3caa5b99b4c505e",
+        "tree": "5779fc5d634ac6e804fea4bce76e25d45cf56c67"
+      },
+      "integration": {
+        "branch": "integration/community-release-20261008",
+        "head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+        "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012"
+      },
+      "runtime_candidate": {
+        "branch": "integration/runtime-release-final-20261009",
+        "head": "6a53578fac029a0696834c30438c858f5f0003be",
+        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+      },
+      "source": "git ls-remote, exact merge readbacks and fetched commit trees"
+    },
     "issue_acceptance_changed": false,
-    "previous_baselines": [
-      "evidence/convergence-followup-20261009T2248Z.json",
-      "evidence/convergence-followup-20261009T2253Z.json"
-    ],
+    "stage_counts_unchanged": true,
     "python_version_erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json",
-    "artifact_readback_successor": "evidence/devsy-convergence-checkpoint-2258.json"
+    "pr270_admission_receipt": "evidence/pr270-admission-readback-20261009.json",
+    "pr256_review_receipt": "evidence/pr256-a1904783-browser-digest-mismatch-20261009.md",
+    "exact_pr221_status": {
+      "head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+      "observed_at_utc": "2026-10-09T23:28:16Z",
+      "checks": {
+        "FAILURE": 3,
+        "IN_PROGRESS": 9,
+        "SUCCESS": 16,
+        "SKIPPED": 1
+      },
+      "failed_checks": [
+        "build (ubuntu-py3.10-devmode)",
+        "build (windows-py3.10-devmode)",
+        "build (macos-py3.10-devmode)"
+      ],
+      "diagnosis": "All three failed jobs fail only at Ruff format after ruff check passes; Ruff 0.1.15 requests five overload ellipsis-body expansions in actions/src/actions/mcp/__init__.py. Separate three-OS tests/docs/type checks passed; prior metadata E721 issue is absent.",
+      "diagnosis_receipt": "evidence/pr221-core-python310-lint-blocker-38004253328.json",
+      "diagnosis_receipt_sha256": "e30adc70a3bfc10b06dbed7eddec2763921dd1f85a3a77df79b779fbeae992c6",
+      "diagnosis_observed_at_utc": "2026-10-09T23:29:14Z"
+    },
+    "receipt_sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360"
   },
   "latest_artifact_metadata_erratum": {
     "observed_at_utc": "2026-10-09T22:34:00Z",
@@ -3342,36 +3373,36 @@
     "receipt_note": "Source receipt is summarized by literal verification data here; no ephemeral workspace path is a canonical link."
   },
   "current_source_ci_failures": {
-    "observed_at_utc": "2026-10-09T22:53:00Z",
-    "head": "abe8640a137942bcf398668fe2093529ba53c38b",
+    "observed_at_utc": "2026-10-09T23:28:16Z",
+    "head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
     "failure_count": 3,
+    "counts": {
+      "FAILURE": 3,
+      "IN_PROGRESS": 9,
+      "SUCCESS": 16,
+      "SKIPPED": 1
+    },
     "failures": [
       {
-        "run": 38000894375,
-        "job": 114058407237,
-        "name": "Actions Core Ubuntu py3.10 devmode",
-        "owner": "A",
+        "workflow": "Actions Core Tests",
+        "job": "build (ubuntu-py3.10-devmode)",
         "status": "FAILURE",
-        "source_diagnosis": "313 test cases passed under Python 3.10 across all three OS jobs and mypy PASS; E721 float-type check and stale generated MCP docs remain failures. Python 3.13 is not established."
+        "diagnosis": "A diagnosing; no cause inferred yet."
       },
       {
-        "run": 38000894375,
-        "job": 114058407148,
-        "name": "Actions Core Windows py3.10 devmode",
-        "owner": "A for cause verification",
+        "workflow": "Actions Core Tests",
+        "job": "build (windows-py3.10-devmode)",
         "status": "FAILURE",
-        "diagnosis": "Cause not confirmed."
+        "diagnosis": "A diagnosing; no cause inferred yet."
       },
       {
-        "run": 38000894375,
-        "job": 114058407305,
-        "name": "Actions Core macOS py3.10 devmode",
-        "owner": "A for cause verification",
+        "workflow": "Actions Core Tests",
+        "job": "build (macos-py3.10-devmode)",
         "status": "FAILURE",
-        "diagnosis": "Cause not confirmed."
+        "diagnosis": "A diagnosing; no cause inferred yet."
       }
     ],
-    "erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json"
+    "required_next": "Complete current diagnostics and full exact-head three-OS Python3.10 Core matrix."
   },
   "devsy_current_snapshot": {
     "observed_at_utc": "2026-10-09T22:46:00Z",
@@ -3426,5 +3457,162 @@
     "issue_acceptance_changed": false,
     "targeted_ci_refresh": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
     "targeted_ci_refresh_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0"
+  },
+  "prior_current_convergence_update_20261009T2258Z": {
+    "observed_at_utc": "2026-10-09T22:58:55Z",
+    "path": "evidence/convergence-followup-20261009T2258Z.json",
+    "sha256": "13e8b98c56f41200077a24e792fa9834a21903016cc152a4aaa9306cd441bbe6",
+    "cohort": {
+      "items": 20,
+      "target_integrated": 11,
+      "blocked_open": 9,
+      "merge_ready": 0,
+      "integrated_prs": [
+        251,
+        266,
+        257,
+        259,
+        262,
+        268,
+        264,
+        263,
+        267,
+        269,
+        265
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-followup-20261009T2258Z.json",
+      "sha256": "13e8b98c56f41200077a24e792fa9834a21903016cc152a4aaa9306cd441bbe6",
+      "open_count": 9,
+      "all_drafts": true,
+      "note": "All nine blocked rows are included; eight preserve the 22:48 exact head/base audit and detailed owner/gate/action, with current PR221/256 updates and PR270 exact head."
+    },
+    "branch_readback_at": "2026-10-09T22:47:00Z",
+    "issue_acceptance_changed": false,
+    "previous_baselines": [
+      "evidence/convergence-followup-20261009T2248Z.json",
+      "evidence/convergence-followup-20261009T2253Z.json"
+    ],
+    "python_version_erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json",
+    "artifact_readback_successor": "evidence/devsy-convergence-checkpoint-2258.json"
+  },
+  "prior_current_integration_checkpoint_pr254": {
+    "pr": 254,
+    "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+    "merge_sha": "446ff1b3328028154684c035f4e395ae35284067",
+    "tree": "f2f909fb66b46e2ed1bb6fbf0f4f07c446aebc32",
+    "checks": {
+      "audit_run": 37983888097,
+      "coverage_run": 37983888029,
+      "rcc_run": 37983888152,
+      "result": "all PASS"
+    },
+    "independent_review": "ACCEPT",
+    "merged_at": "2026-10-09T21:01:00Z",
+    "scope_limit": "Last previously admitted documentation-only validation checkpoint remains PR254 at446ff1b. The branch has since advanced through seven target-specific merges, including PR264/268; current branch ref is recorded separately. This does not admit the entire PR221 combined candidate or release."
+  },
+  "prior_current_source_ci_failures_20261009T2253Z": {
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "head": "abe8640a137942bcf398668fe2093529ba53c38b",
+    "failure_count": 3,
+    "failures": [
+      {
+        "run": 38000894375,
+        "job": 114058407237,
+        "name": "Actions Core Ubuntu py3.10 devmode",
+        "owner": "A",
+        "status": "FAILURE",
+        "source_diagnosis": "313 test cases passed under Python 3.10 across all three OS jobs and mypy PASS; E721 float-type check and stale generated MCP docs remain failures. Python 3.13 is not established."
+      },
+      {
+        "run": 38000894375,
+        "job": 114058407148,
+        "name": "Actions Core Windows py3.10 devmode",
+        "owner": "A for cause verification",
+        "status": "FAILURE",
+        "diagnosis": "Cause not confirmed."
+      },
+      {
+        "run": 38000894375,
+        "job": 114058407305,
+        "name": "Actions Core macOS py3.10 devmode",
+        "owner": "A for cause verification",
+        "status": "FAILURE",
+        "diagnosis": "Cause not confirmed."
+      }
+    ],
+    "erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json"
+  },
+  "prior_current_convergence_update_20261009T2326Z": {
+    "observed_at_utc": "2026-10-09T23:28:16Z",
+    "path": "evidence/convergence-followup-20261009T2328Z.json",
+    "sha256": "3c8cb4712f9abd3d5a3285e7d1a4715d83c6d9d0ccddaf1c3fd1f874ee9b0d49",
+    "cohort": {
+      "items": 20,
+      "target_integrated": 13,
+      "blocked_open": 7,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        251,
+        266,
+        257,
+        259,
+        262,
+        268,
+        264,
+        263,
+        267,
+        269,
+        265,
+        220,
+        270
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-followup-20261009T2328Z.json",
+      "sha256": "3c8cb4712f9abd3d5a3285e7d1a4715d83c6d9d0ccddaf1c3fd1f874ee9b0d49",
+      "open_count": 7,
+      "all_drafts": true
+    },
+    "branch_readback": {
+      "community": {
+        "branch": "community",
+        "head": "d2741a18976f75467355282ad3caa5b99b4c505e",
+        "tree": "5779fc5d634ac6e804fea4bce76e25d45cf56c67"
+      },
+      "integration": {
+        "branch": "integration/community-release-20261008",
+        "head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+        "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012"
+      },
+      "runtime_candidate": {
+        "branch": "integration/runtime-release-final-20261009",
+        "head": "6a53578fac029a0696834c30438c858f5f0003be",
+        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+      },
+      "source": "git ls-remote, exact merge readbacks and fetched commit trees"
+    },
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "python_version_erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json",
+    "pr270_admission_receipt": "evidence/pr270-admission-readback-20261009.json",
+    "pr256_review_receipt": "evidence/pr256-a1904783-browser-digest-mismatch-20261009.md",
+    "exact_pr221_status": {
+      "head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+      "observed_at_utc": "2026-10-09T23:28:16Z",
+      "checks": {
+        "FAILURE": 3,
+        "IN_PROGRESS": 9,
+        "SUCCESS": 16,
+        "SKIPPED": 1
+      },
+      "failed_checks": [
+        "build (ubuntu-py3.10-devmode)",
+        "build (windows-py3.10-devmode)",
+        "build (macos-py3.10-devmode)"
+      ],
+      "diagnosis": "A is diagnosing; final test/docs logs pending. No cause inferred from check labels."
+    }
   }
 }

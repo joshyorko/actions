@@ -44,9 +44,9 @@
     }
   ],
   "current_active_workers": {
-    "101": "Root owns integration/governance. Current community c30f953bae1a322e1d09549607ab42f1badce440; integration 446ff1b3328028154684c035f4e395ae35284067; Runtime candidate 3bb8b9139ead08bdc332131b121d40f8fd3eb22e.",
+    "101": "Root owns integration/governance. Ref readback at 2026-10-09T23:26Z: community d2741a18976f75467355282ad3caa5b99b4c505e; integration 4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f; Runtime candidate 6a53578fac029a0696834c30438c858f5f0003be. Ref observation only; no worker-progress or release-readiness inference.",
     "99": "F owns #99-A pure React renderer/shared fixture; local and remote branch head c971ccec8903535783a61a05cd058abf5de3623a. Six component tests, TypeScript and schema PASS were reported at prior head 842c32d5; current-head validation is not confirmed. Production main/bridge and actual browser remain NOT_RUN.",
-    "100": "E owns #100-A PR263 head948df916ebe8750caebc71cc821bb5b76f16c273; bounded source review ACCEPT, 38 focused + 1 real-process + 2 wheel tests PASS. Broader configured Cloud suites are blocked; full remote gates are assigned. E is implementing #100-B Python roundtrip using F’s shared fixture. PR254 a7eec7 is docs-only and merged to integration; no whole-issue acceptance.",
+    "100": "E owns #100-A PR263 head948df916ebe8750caebc71cc821bb5b76f16c273; bounded source review ACCEPT, 38 focused + 1 real-process + 2 wheel tests PASS. Broader configured Cloud suites are blocked; full remote gates are assigned. E is implementing #100-B Python roundtrip using F\u2019s shared fixture. PR254 a7eec7 is docs-only and merged to integration; no whole-issue acceptance.",
     "126": "A owns PR265 template generator repair on feature/mcp-v2-showcase-template-20261009 at9193989985de15dc6d5fecfd655042957cf9926c. The authored-devdata generator regression is being repaired; PR body reports49 focused+4 template local PASS, clean-wheel NOT_RUN and hosted checks pending. PR262 source-protocol proof is separate and accepted; whole #126 remains open.",
     "134": "Existing remote Sol coordinator and RCC lane own #134 implementation/consumer work; root owns integration/architecture acceptance; F is independent reviewer. Latest coordinator activity report was20:36Z and covered five lane histories, not current activity for every lane. Whole #134 acceptance remains open.",
     "153": "Native auth source recovery/push only: PR264 branch devsy/native-auth-acceptance-20261009 at173ca8e59245581ab1b048fbad42a29c41418cab. Do not infer browser acceptance.",
@@ -546,8 +546,8 @@
       "foundation_pr": null,
       "checkpoint_pr": null,
       "unresolved_open_issue_dependencies": [],
-      "reason": "#100-A PR263 source seam is independently accepted with 38 focused, one real-process and two wheel tests passing; broader configured Cloud suites are blocked and full remote review gates are assigned. E is implementing #100-B Python/JSON roundtrip on F’s shared fixture. PR254 is docs-only and does not complete #100.",
-      "next_bounded_action": "Complete #100-B Python/JSON roundtrip using F’s shared fixture; preserve fixture/schema-only limits and keep Runtime dispatch, Workspace authorization and whole #100 acceptance open.",
+      "reason": "#100-A PR263 source seam is independently accepted with 38 focused, one real-process and two wheel tests passing; broader configured Cloud suites are blocked and full remote review gates are assigned. E is implementing #100-B Python/JSON roundtrip on F\u2019s shared fixture. PR254 is docs-only and does not complete #100.",
+      "next_bounded_action": "Complete #100-B Python/JSON roundtrip using F\u2019s shared fixture; preserve fixture/schema-only limits and keep Runtime dispatch, Workspace authorization and whole #100 acceptance open.",
       "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
       "scoped_dependencies": [
         {
@@ -1126,7 +1126,7 @@
     },
     {
       "issue": 149,
-      "title": "🐝 Hive Advisory Report",
+      "title": "\ud83d\udc1d Hive Advisory Report",
       "retained_state": "NOT_STARTED",
       "classification": "REVIEW",
       "partial_foundation": false,
@@ -2703,6 +2703,49 @@
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
   "current_program_refs": {
+    "community": "d2741a18976f75467355282ad3caa5b99b4c505e",
+    "community_tree": "5779fc5d634ac6e804fea4bce76e25d45cf56c67",
+    "integration": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+    "integration_tree": "e706a9b93258df863d50ce67cb00ee09a62d6012",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false
+  },
+  "current_pr_convergence": {
+    "observed_at_utc": "2026-10-09T23:28:16Z",
+    "receipt": "evidence/convergence-followup-20261009T2328Z.json",
+    "sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360",
+    "pr_cohort": {
+      "items": 20,
+      "target_integrated": 13,
+      "open_blocked": 7,
+      "merge_ready": 0
+    },
+    "issue_stage_counts_unchanged": true,
+    "whole_issue_acceptance_changed": false,
+    "open_pr_audit": "evidence/convergence-followup-20261009T2328Z.json",
+    "exact_head_ci_path": "evidence/convergence-followup-20261009T2326Z.json",
+    "new_target_merges": [
+      {
+        "pr": 220,
+        "merge": "d2741a18976f75467355282ad3caa5b99b4c505e",
+        "target": "community"
+      },
+      {
+        "pr": 270,
+        "merge": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+        "target": "integration/community-release-20261008"
+      }
+    ],
+    "current_failures": {
+      "PR221": 3,
+      "PR256": 2
+    },
+    "diagnosis_observed_at_utc": "2026-10-09T23:29:14Z",
+    "diagnosis_receipt": "evidence/pr221-core-python310-lint-blocker-38004253328.json",
+    "diagnosis_receipt_sha256": "e30adc70a3bfc10b06dbed7eddec2763921dd1f85a3a77df79b779fbeae992c6"
+  },
+  "prior_current_program_refs_20261009T2253Z": {
     "community": "c30f953bae1a322e1d09549607ab42f1badce440",
     "integration": "abe8640a137942bcf398668fe2093529ba53c38b",
     "integration_tree": "c68d3499f556ea7be0cadbc32fda4050ab388feb",
@@ -2710,7 +2753,7 @@
     "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
     "release_ready": false
   },
-  "current_pr_convergence": {
+  "prior_current_pr_convergence_20261009T2253Z": {
     "observed_at_utc": "2026-10-09T22:53:00Z",
     "receipt": "evidence/convergence-followup-20261009T2253Z.json",
     "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",

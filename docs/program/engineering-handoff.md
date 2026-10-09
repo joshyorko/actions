@@ -1,6 +1,18 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-09T22:58Z
+## Current convergence — 2026-10-09T23:28Z
+
+Remote refs are community `d2741a18976f75467355282ad3caa5b99b4c505e` (tree `5779fc5d`), integration `4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f` (tree `e706a9b9`), and Runtime candidate `6a53578fac029a0696834c30438c858f5f0003be`. The 20-PR cohort has 13 target-only merges, 7 open/blocked, 0 merge-ready. PR220 merged to community; PR270 merged to integration after exact tree/source review and 13 hosted checks passed. Publication steps were skipped; issue acceptance did not change. See the [23:28 convergence update](evidence/convergence-followup-20261009T2328Z.json).
+
+PR221 is open at `4e8f8f1e`; the 23:28 readback showed 3 failures, 9 in progress, 16 successes and 1 skipped. Run 38004253328 identifies all three failures as Ruff format checks: `ruff check` passes, then Ruff 0.1.15 requests five overload ellipsis-body expansions in `actions/src/actions/mcp/__init__.py`. Separate three-OS tests/docs/type checks passed; the earlier E721 issue is absent. Apply the five formatter changes and rerun the exact-head matrix. See the [exact-run receipt](evidence/pr221-core-python310-lint-blocker-38004253328.json), SHA-256 `e30adc70a3bfc10b06dbed7eddec2763921dd1f85a3a77df79b779fbeae992c6`.
+
+PR256 is open at `a1904783c0ec1950beab59d5fb7c9d76fb90a1e8`. Linux and Windows fail the frozen package-tree digest preflight before the scoped browser scenario; macOS passes while skipping both scoped UI checks. The changed path is not yet identified. Independent source review also blocks harness `stop()` at line 562 because it may suppress errors and return without waiting for survivors; a source counterexample exists, but no live-survivor failure was reproduced. Preserve the manifest and compare sanitized path inventories before changing the hash boundary. The current owner is assigned both corrections; see [the detailed review](evidence/pr256-a1904783-browser-digest-mismatch-20261009.md).
+
+PR219’s old draft should not merge separately: the revised ADRs travel through PR221. Whole #129 or #126 closure is not a prerequisite for that documentation slice; see [scope review](evidence/pr219-design-checkpoint-scope-review-20261009.md).
+
+Independent review blocks RCC candidate `d81668e40734677f67933fb0dcfb26a129041992`, remotely read back on `devsy/rcc-local-acceptance-20261009`: mocked YAML A→B→A publication returned fingerprint A with artifact B. The existing RCC producer owns the correction; live RCC ABA has not been run. Lifecycle candidate `ab74fedc658421d368dd1b1158b39973962ddd3c` was also remotely read back on `devsy/rcc-generation-lifecycle-20261009`. The historical `5e5c` process exited -11 after shutdown HTTP 200 instead of expected test-only exit 1; current-candidate relevance and fault owner are unconfirmed. No upstream finding is asserted. Exact limitations are in the [current convergence update](evidence/convergence-followup-20261009T2328Z.json).
+
+## Historical convergence snapshot — 2026-10-09T22:58Z
 
 The 20-PR cohort has 11 target-only merges, 9 open/blocked PRs and 0 merge-ready. The exact current addendum lists all nine open PRs, retaining the unchanged eight-row head/base inventory from the 22:48 audit and adding PR270 at `735e56fac9f1a3856d59768f9084351d1244034f`: [22:58 convergence delta](evidence/convergence-followup-20261009T2258Z.json). Community, integration and Runtime candidate refs remain `c30f953b`, `abe8640a` and `6a53578f`. The 22:48 audit and 22:53 check receipt are historical; no issue acceptance changed.
 
@@ -52,7 +64,6 @@ Current critical actions: #220's latest verifier is a real test failure (1 faile
 At 22:07–22:11, native coordinator snapshot/list reads returned HTTP 502/KubernetesError and then backed off after a bounded retry; diagnostics reported a running pod/daemon, 16 effective cores, about 28.2 GB available RAM and about 179 GB free disk. A later 22:23:09 snapshot reports the same thread `notLoaded` and its latest turn `completed`, but the final-answer body is not present in the heartbeat receipt. Neither resource/control-plane status nor a final-answer item ID establishes per-lane progress. See the [timestamped CAS heartbeat](evidence/cas-heartbeat-20261009T2223Z.json).
 
 The graph's issue-stage counts and 54 contract projections remain unchanged. Existing repository-operations guidance already distinguishes target-specific merges from downstream integration/issue acceptance and control-plane worker status from implementation progress; no redundant rule was added. Upstream disposition: none. #268 is an Actions defect; #220/#221 are Actions test/CI findings, with no upstream RCC defect established.
-
 
 <!-- canvas-graph-amendment:start -->
 
