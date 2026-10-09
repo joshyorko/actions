@@ -100,11 +100,9 @@ class _NoProxyManager(urllib3.ProxyManager):
             )
         try:
             if not self._caller_host.get():
-                kw["headers"] = {
-                    name: value
-                    for name, value in headers.items()
-                    if name.lower() != "host"
-                }
+                filtered_headers = urllib3.HTTPHeaderDict(headers)
+                filtered_headers.discard("Host")
+                kw["headers"] = filtered_headers
             return self._route_urlopen(method, url, *args, **kw)
         finally:
             if context_token is not None:

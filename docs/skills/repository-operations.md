@@ -199,6 +199,11 @@ tagging. For HTTP helper redirects, a proxy-to-direct redirect must update a
 generated `Host` header to the destination while preserving an explicitly supplied
 `Host`, and must continue stripping credentials; the regression test covers both
 generated and explicit header cases.
+When filtering generated `Host` values from urllib3 `HTTPHeaderDict` inputs, copy
+the header container and remove matching keys case-insensitively. Converting its
+items to a plain `dict` discards repeated field values. Keep a regression through
+the helper's direct no-proxy redirect path, where the helper owns this filtering;
+do not infer that the separate `ProxyManager` path preserves duplicate header fields.
 
 The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
 callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
