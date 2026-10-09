@@ -1,11 +1,14 @@
 import importlib.util
+import json
 import zipfile
 from pathlib import Path
 
 import pytest
+import yaml
 
 ROOT = Path(__file__).parents[2]
 SCRIPT = ROOT / "action_server/scripts/verify_published_runtime_floor.py"
+WORKFLOWS = ROOT / ".github/workflows"
 spec = importlib.util.spec_from_file_location("runtime_registry_floor", SCRIPT)
 assert spec and spec.loader
 module = importlib.util.module_from_spec(spec)
@@ -22,6 +25,23 @@ def _wheel(directory, name, version, filename=None):
             f"Metadata-Version: 2.1\nName: {name}\nVersion: {version}\n",
         )
     return path
+
+
+def _pip_report(overrides=None):
+    packages = module.EXPECTED_PUBLIC_PACKAGES
+    overrides = overrides or {}
+    install = []
+    for name, expected in packages.items():
+        item = {
+            "metadata": {"name": name, "version": expected["version"]},
+            "download_info": {
+                "url": expected["url"],
+                "archive_info": {"hashes": {"sha256": expected["sha256"]}},
+            },
+        }
+        item.update(overrides.get(name, {}))
+        install.append(item)
+    return {"install": install}
 
 
 def test_selects_one_cp312_runtime_wheel(tmp_path):
@@ -57,3 +77,146 @@ def test_rejects_ambiguous_cp312_wheel_inventory(tmp_path):
     )
     with pytest.raises(ValueError, match="exactly one cp312"):
         module.select_runtime_wheel(tmp_path)
+
+
+@pytest.mark.parametrize(
+    "checkout_path",
+    ["action_server/src", "actions/src", "actions-http-helper/src"],
+)
+def test_rejects_sys_path_leak_from_each_monorepo_package(tmp_path, checkout_path):
+    source_path = tmp_path / "repo" / checkout_path
+    source_path.mkdir(parents=True)
+    with pytest.raises(RuntimeError, match="source checkout"):
+        module.assert_no_checkout_imports(tmp_path / "repo", [str(source_path)], {})
+
+
+@pytest.mark.parametrize(
+    "checkout_path",
+    [
+        "action_server/src/actions",
+        "actions/src/actions",
+        "actions-http-helper/src/actions_http",
+    ],
+)
+def test_rejects_module_origin_from_each_monorepo_package(tmp_path, checkout_path):
+    source_path = tmp_path / "repo" / checkout_path / "__init__.py"
+    source_path.parent.mkdir(parents=True)
+    source_path.touch()
+    with pytest.raises(RuntimeError, match="source checkout"):
+        module.assert_no_checkout_imports(
+            tmp_path / "repo", [], {"leaked": str(source_path)}
+        )
+
+
+def test_isolated_environment_removes_python_path_overrides():
+    source = {
+        "PATH": "/usr/bin",
+        "PYTHONPATH": "/repo/actions/src:/repo/actions-http-helper/src",
+        "PYTHONHOME": "/repo/python",
+        "PYTHONUSERBASE": "/repo/user-site",
+        "PYTHONSTARTUP": "/repo/startup.py",
+    }
+    actual = module.isolated_environment(source)
+    assert actual == {"PATH": "/usr/bin", "PYTHONNOUSERSITE": "1"}
+
+
+def test_accepts_only_exact_public_core_and_helper_wheels(tmp_path):
+    report = tmp_path / "pip-report.json"
+    report.write_text(json.dumps(_pip_report()))
+    actual = module.verify_public_package_report(report)
+    assert actual == {
+        name: {
+            "version": expected["version"],
+            "url": expected["url"],
+            "sha256": expected["sha256"],
+        }
+        for name, expected in module.EXPECTED_PUBLIC_PACKAGES.items()
+    }
+
+
+@pytest.mark.parametrize(
+    "name,change,error",
+    [
+        (
+            "actions-core",
+            {"url": "https://example.invalid/core.whl"},
+            "public PyPI wheel URL",
+        ),
+        ("actions-http-helper", {"sha256": "0" * 64}, "SHA-256"),
+    ],
+)
+def test_rejects_wrong_public_origin_or_artifact_digest(tmp_path, name, change, error):
+    report_data = _pip_report()
+    item = next(
+        item for item in report_data["install"] if item["metadata"]["name"] == name
+    )
+    if "url" in change:
+        item["download_info"]["url"] = change["url"]
+    if "sha256" in change:
+        item["download_info"]["archive_info"]["hashes"]["sha256"] = change["sha256"]
+    report = tmp_path / "pip-report.json"
+    report.write_text(json.dumps(report_data))
+    with pytest.raises(RuntimeError, match=error):
+        module.verify_public_package_report(report)
+
+
+def test_rejects_report_missing_one_required_public_artifact(tmp_path):
+    report_data = _pip_report()
+    report_data["install"].pop()
+    report = tmp_path / "pip-report.json"
+    report.write_text(json.dumps(report_data))
+    with pytest.raises(RuntimeError, match="omits required public packages"):
+        module.verify_public_package_report(report)
+
+
+def test_install_command_forces_uncached_public_pypi_resolution(tmp_path):
+    command = module.install_command(
+        Path("/tmp/venv/bin/python"),
+        tmp_path / "runtime.whl",
+        tmp_path / "report.json",
+    )
+    assert "--no-cache-dir" in command
+    assert "--isolated" in command
+    assert command[command.index("--index-url") + 1] == "https://pypi.org/simple"
+    assert command[command.index("--report") + 1] == str(tmp_path / "report.json")
+
+
+def test_runtime_release_workflow_runs_canary_on_community_and_integration_prs():
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
+    )
+    on = workflow.get("on", workflow.get(True))
+    assert on["pull_request"]["branches"] == ["community", "integration/**"]
+    steps = workflow["jobs"]["build-wheels"]["steps"]
+    canary_index = next(
+        i
+        for i, step in enumerate(steps)
+        if step.get("name") == "Verify Runtime wheel with published Core and Helper"
+    )
+    canary = steps[canary_index]
+    assert canary["if"] == "github.event_name == 'pull_request'"
+    assert "verify_published_runtime_floor.py wheelhouse" in canary["run"]
+    assert canary_index > next(
+        i
+        for i, step in enumerate(steps)
+        if step.get("name") == "Build and clean-test wheels"
+    )
+    assert canary_index < next(
+        i for i, step in enumerate(steps) if "Upload artifact" in step.get("name", "")
+    )
+    publish_steps = workflow["jobs"]["publish"]["steps"]
+    token_check = next(
+        step
+        for step in publish_steps
+        if step.get("name") == "Check Runtime publish credential"
+    )
+    upload = next(
+        step
+        for step in publish_steps
+        if step.get("name") == "Publish verified artifacts"
+    )
+    assert token_check["if"] == "github.event_name == 'push'"
+    assert (
+        upload["if"]
+        == "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'"
+    )

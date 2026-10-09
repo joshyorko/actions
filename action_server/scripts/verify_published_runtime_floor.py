@@ -1,7 +1,8 @@
-"""Clean-install one built Runtime wheel with its released Core and Helper floors."""
+"""Clean-install one Runtime wheel and prove its released Core/Helper origins."""
 
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 import sys
@@ -9,10 +10,25 @@ import tempfile
 import zipfile
 from email.parser import BytesParser
 from pathlib import Path
+from urllib.parse import urlsplit
 
 EXPECTED_CORE = "1.0.2"
 EXPECTED_HELPER = "1.0.3"
 EXPECTED_RUNTIME = "1.0.3"
+EXPECTED_PUBLIC_PACKAGES = {
+    "actions-core": {
+        "version": EXPECTED_CORE,
+        "url": "https://files.pythonhosted.org/packages/b6/ed/33c5999ac5e932434fcc5b392420efdf9b25922ca02a76622b856759ea16/actions_core-1.0.2-py3-none-any.whl",
+        "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+    },
+    "actions-http-helper": {
+        "version": EXPECTED_HELPER,
+        "url": "https://files.pythonhosted.org/packages/53/3b/cefc0608e6ec71697c60c68ede2efa306fd7d50b1736c4b6b094b3424dc6/actions_http_helper-1.0.3-py3-none-any.whl",
+        "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+    },
+}
+REPO_ROOT = Path(__file__).resolve().parents[2]
+IMPORT_PATH_MARKER = "REGISTRY_FLOOR_IMPORT_PATHS="
 
 
 def select_runtime_wheel(directory: Path) -> Path:
@@ -42,11 +58,88 @@ def select_runtime_wheel(directory: Path) -> Path:
     return candidates[0]
 
 
-def verify_installed(python: Path, isolated_workdir: Path) -> None:
-    checkout_root = Path(__file__).resolve().parents[1]
+def isolated_environment(source: dict[str, str] | None = None) -> dict[str, str]:
+    environment = dict(os.environ if source is None else source)
+    for name in ("PYTHONPATH", "PYTHONHOME", "PYTHONUSERBASE", "PYTHONSTARTUP"):
+        environment.pop(name, None)
+    environment["PYTHONNOUSERSITE"] = "1"
+    return environment
+
+
+def assert_no_checkout_imports(
+    repository: Path,
+    search_paths: list[str],
+    module_files: dict[str, str],
+) -> None:
+    root = repository.resolve()
+    offenders: list[str] = []
+    entries = [
+        (f"sys.path[{index}]", value) for index, value in enumerate(search_paths)
+    ]
+    entries.extend((f"module {name}", value) for name, value in module_files.items())
+    for source, value in entries:
+        if not value:
+            value = "."
+        path = Path(value).resolve()
+        try:
+            path.relative_to(root)
+        except ValueError:
+            continue
+        offenders.append(f"{source}: {path}")
+    if offenders:
+        raise RuntimeError(
+            "Imports or module search paths point into the source checkout:\n"
+            + "\n".join(offenders)
+        )
+
+
+def verify_public_package_report(report_path: Path) -> dict[str, dict[str, str]]:
+    report = json.loads(report_path.read_text())
+    observed: dict[str, dict[str, str]] = {}
+    for item in report.get("install", []):
+        metadata = item.get("metadata", {})
+        name = metadata.get("name", "").lower().replace("_", "-")
+        if name not in EXPECTED_PUBLIC_PACKAGES:
+            continue
+        expected = EXPECTED_PUBLIC_PACKAGES[name]
+        if metadata.get("version") != expected["version"]:
+            raise RuntimeError(f"Unexpected {name} version in pip report")
+        download = item.get("download_info", {})
+        url = download.get("url", "")
+        if url != expected["url"] or urlsplit(url).hostname != "files.pythonhosted.org":
+            raise RuntimeError(f"Unexpected {name} public PyPI wheel URL")
+        sha256 = download.get("archive_info", {}).get("hashes", {}).get("sha256")
+        if sha256 != expected["sha256"]:
+            raise RuntimeError(f"Unexpected {name} PyPI artifact SHA-256")
+        observed[name] = {"version": expected["version"], "url": url, "sha256": sha256}
+    if set(observed) != set(EXPECTED_PUBLIC_PACKAGES):
+        missing = sorted(set(EXPECTED_PUBLIC_PACKAGES) - set(observed))
+        raise RuntimeError(f"Pip report omits required public packages: {missing}")
+    return observed
+
+
+def install_command(python: Path, wheel: Path, report: Path) -> list[str]:
+    return [
+        str(python),
+        "-m",
+        "pip",
+        "install",
+        "--isolated",
+        "--no-cache-dir",
+        "--index-url",
+        "https://pypi.org/simple",
+        "--only-binary=:all:",
+        "--report",
+        str(report),
+        str(wheel.resolve()),
+    ]
+
+
+def verify_installed(python: Path, isolated_workdir: Path, report_path: Path) -> None:
+    environment = isolated_environment()
     probe = f"""
+import json, sys
 from importlib.metadata import version
-import pathlib
 assert version('actions-runtime') == {EXPECTED_RUNTIME!r}
 assert version('actions-core') == {EXPECTED_CORE!r}
 assert version('actions-http-helper') == {EXPECTED_HELPER!r}
@@ -54,48 +147,74 @@ import actions
 import actions.server
 import actions.mcp
 import actions_http
-checkout = pathlib.Path({str(checkout_root)!r})
-for module in (actions, actions.server, actions.mcp, actions_http):
-    try:
-        pathlib.Path(module.__file__).resolve().relative_to(checkout)
-    except ValueError:
-        pass
-    else:
-        raise AssertionError(f'Imported from checkout: {{module.__file__}}')
-print('registry-floor versions and imports passed')
+print({IMPORT_PATH_MARKER!r} + json.dumps({{
+    'sys_path': [str(pathlib.Path.cwd()) if not entry else entry for entry in sys.path],
+    'modules': {{
+        'actions': actions.__file__,
+        'actions.server': actions.server.__file__,
+        'actions.mcp': actions.mcp.__file__,
+        'actions_http': actions_http.__file__,
+    }},
+}}))
 """
     subprocess.run(
-        [str(python), "-m", "pip", "check"], check=True, cwd=isolated_workdir
+        [str(python), "-m", "pip", "check"],
+        check=True,
+        cwd=isolated_workdir,
+        env=environment,
     )
-    subprocess.run([str(python), "-c", probe], check=True, cwd=isolated_workdir)
+    result = subprocess.run(
+        [str(python), "-c", probe],
+        check=True,
+        cwd=isolated_workdir,
+        env=environment,
+        capture_output=True,
+        text=True,
+    )
+    line = next(
+        (
+            line
+            for line in result.stdout.splitlines()
+            if line.startswith(IMPORT_PATH_MARKER)
+        ),
+        None,
+    )
+    if line is None:
+        raise RuntimeError("Installed-package probe did not report import paths")
+    imports = json.loads(line[len(IMPORT_PATH_MARKER) :])
+    assert_no_checkout_imports(REPO_ROOT, imports["sys_path"], imports["modules"])
+    public_packages = verify_public_package_report(report_path)
+    print(
+        "Verified uncached PyPI Runtime dependency artifacts: "
+        + json.dumps(public_packages, sort_keys=True)
+    )
     subprocess.run(
         [str(python), "-m", "actions.server", "version"],
         check=True,
         cwd=isolated_workdir,
+        env=environment,
     )
 
 
 def main() -> None:
     wheel = select_runtime_wheel(Path(sys.argv[1]))
     with tempfile.TemporaryDirectory(prefix="runtime-registry-floor-") as temp:
-        env_dir = Path(temp) / "venv"
-        subprocess.run([sys.executable, "-m", "venv", str(env_dir)], check=True)
-        python = env_dir / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+        workdir = Path(temp)
+        env_dir = workdir / "venv"
         subprocess.run(
-            [
-                str(python),
-                "-m",
-                "pip",
-                "install",
-                "--isolated",
-                "--index-url",
-                "https://pypi.org/simple",
-                "--only-binary=:all:",
-                str(wheel.resolve()),
-            ],
+            [sys.executable, "-m", "venv", str(env_dir)],
             check=True,
+            env=isolated_environment(),
         )
-        verify_installed(python, Path(temp))
+        python = env_dir / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+        report = workdir / "pip-install-report.json"
+        subprocess.run(
+            install_command(python, wheel, report),
+            check=True,
+            cwd=workdir,
+            env=isolated_environment(),
+        )
+        verify_installed(python, workdir, report)
 
 
 if __name__ == "__main__":

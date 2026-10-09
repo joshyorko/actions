@@ -35,13 +35,17 @@ without eager import so introspection and generated docs include ActionContext.
 For pull-request Runtime wheel checks, the workflow builds matching Core and
 HTTP Helper wheels and installs them into cibuildwheel's fresh test environment
 for candidate-pair compatibility. A separate PR-only clean venv installs the
-built Runtime cp312 wheel through PyPI and asserts the released `actions-core`
-1.0.2 and `actions-http-helper` 1.0.3 are selected, then runs `pip check`,
-imports Runtime/MCP outside the checkout, and invokes `actions.server version`.
-Keep both checks: the local wheel pair exercises unreleased producer APIs, while
-the registry-floor canary proves compatibility with published dependencies.
-Tag/release builds resolve declared dependencies from the registry. The
-candidate override must not apply to releases or bypass dependency checks.
+built Runtime cp312 wheel from the public PyPI index with pip cache disabled.
+Its pip install report must match the exact public Core 1.0.2 and Helper 1.0.3
+wheel URLs and SHA-256 hashes. The probe removes Python path overrides and
+rejects both module origins and search paths under the entire monorepo before
+running `pip check`, Runtime/MCP imports, and `actions.server version`. Keep
+both checks: the local wheel pair exercises unreleased producer APIs, while the
+registry-floor canary proves compatibility with published dependencies and
+prints the verified public artifact URLs and hashes. This PR test workflow runs
+for `community` and `integration/**` target branches; its PyPI credential and
+upload steps remain tag-push-only. The candidate override must not apply to
+release events or bypass dependency checks.
 
 Python 3.10's `inspect.isclass` classifies a `list[...]` public alias differently
 from Python 3.12. The canonical docs task normalizes exported GenericAlias

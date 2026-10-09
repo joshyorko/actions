@@ -682,7 +682,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
                     "tags": [f"{RUNTIME_TAG_PREFIX}*"],
                 },
                 "pull_request": {
-                    "branches": ["community"],
+                    "branches": ["community", "integration/**"],
                     "paths": [
                         ".github/workflows/_gen_workflows.py",
                         ".github/workflows/actions_runtime_pypi_release.yml",
