@@ -113,7 +113,7 @@ if offenders:
 
 
 def verify_public_package_report(report_path: Path) -> dict[str, dict[str, str]]:
-    report = json.loads(report_path.read_text())
+    report = json.loads(report_path.read_text(encoding="utf-8"))
     observed: dict[str, dict[str, str]] = {}
     for item in report.get("install", []):
         metadata = item.get("metadata", {})

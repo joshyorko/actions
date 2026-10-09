@@ -185,6 +185,21 @@ def test_accepts_only_exact_public_core_and_helper_wheels(tmp_path):
     }
 
 
+def test_reads_utf8_pip_report_independent_of_windows_locale(tmp_path):
+    report_data = _pip_report()
+    report_data["install"].append(
+        {
+            "metadata": {"name": "unrelated-\u038f", "version": "1.0"},
+            "download_info": {},
+        }
+    )
+    report = tmp_path / "pip-report.json"
+    report.write_text(json.dumps(report_data, ensure_ascii=False), encoding="utf-8")
+    assert set(module.verify_public_package_report(report)) == set(
+        module.EXPECTED_PUBLIC_PACKAGES
+    )
+
+
 @pytest.mark.parametrize(
     "name,change,error",
     [

@@ -37,7 +37,9 @@ HTTP Helper wheels and installs them into cibuildwheel's fresh test environment
 for candidate-pair compatibility. A separate PR-only clean venv installs the
 built Runtime cp312 wheel from the public PyPI index with pip cache disabled.
 Its pip install report must match the exact public Core 1.0.2 and Helper 1.0.3
-wheel URLs and SHA-256 hashes. The probe removes Python path overrides, then
+wheel URLs and SHA-256 hashes. Read pip's UTF-8 JSON report with an explicit
+encoding; Windows' default cp1252 decoder can reject valid UTF-8 metadata. The
+probe removes Python path overrides, then
 runs a child-interpreter preflight that rejects resolved search paths under the
 entire monorepo before `pip check` or application imports. After imports, it
 checks the loaded module origins against the same boundary before running
