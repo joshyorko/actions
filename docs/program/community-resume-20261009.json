@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T21:54:03Z",
-  "status": "ACTIVE engineering checkpoint; 21:54 live audit has15 open drafts; root reports17 cohort items with0 merge-ready,15 blocked,2 integrated only to intended branches (#251/#266). PR267 head8e265553 has six checks in progress and three queued. PR256 has a separate Windows frozen+Go fcntl blocker plus Docker Hub verify timeout, with disjoint owners. Integration and Runtime candidate refs remain last read at21:46Z; no new base-ref readback or release readiness is claimed. #134/#208 remain open; #210 remains sole accepted/closed issue.",
-  "integration_head": "55bfe02a43bf922a7fcf6d77f2422187a419bcd9",
+  "observed_at": "2026-10-09T22:25:00Z",
+  "status": "ACTIVE engineering checkpoint at 2026-10-09T22:25Z: 7 PRs integrated only into named targets, 11 open/blocked and 0 merge-ready. Current community/integration/Runtime refs are recorded separately. #220 has a confirmed Actions test race with test-only repair active; #221 has a single strict Table timing failure with bounded same-head rerun pending. No whole-issue status, release readiness or publication changed.",
+  "integration_head": "4a717c77053947f4ad2892783211af5edbe5783d",
   "community_head": "c30f953bae1a322e1d09549607ab42f1badce440",
   "release_ready": false,
   "community_merge": true,
@@ -1439,6 +1439,14 @@
     {
       "observed_at": "2026-10-09T21:54:03Z",
       "event": "A byte-preserved refreshed live PR audit supersedes only the 21:46 open-PR list:15 drafts remain open; the root-reported17-item cohort is0 merge-ready,15 blocked and2 integrated to their intended target branches (#251/#266). PR266 is merged to the renderer branch; PR267 now has current head8e265553 with audit PASS,6 checks in progress and3 queued. PR256 has two separate failures: Docker Hub verification timeout and root-verified Windows frozen+Go fcntl HTTP500, with Sol artifact-lock and Devsy Linux-receipt/browser work separately owned. The 21:46 base ref reads remain the latest included; no later integration/candidate ref readback or current native worker activity is inferred. Raw audit evidence/convergence-live-prs-20261009T2154Z.json; summary evidence/convergence-followup-20261009T2154Z.json SHA-256 38be035fee7708e4453fdc03b3f44bc4c5e1f4c685a1071f77f200740db354ca."
+    },
+    {
+      "observed_at": "2026-10-09T22:25:00Z",
+      "event": "Seven target-only PR merges are now recorded (#251/#266/#257/#259/#262/#268/#264); current refs, open PR gate state and critical #220/#221 diagnostics are captured in convergence-followup-20261009T2225Z.json. The original 54 issue records, accounting and sealed ZIPs are unchanged."
+    },
+    {
+      "observed_at": "2026-10-09T22:23:22Z",
+      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07\u201322:11 read errors remain historical. No worker-lane progress is inferred."
     }
   ],
   "admission_checkpoint": {
@@ -2839,10 +2847,10 @@
     },
     "independent_review": "ACCEPT",
     "merged_at": "2026-10-09T21:01:00Z",
-    "scope_limit": "Prior admitted PR254 documentation-only checkpoint at446ff1b. The last independently read integration ref is55bfe02a at21:46Z; PR221 remains open with incomplete validation. The21:52 follow-up does not refresh integration/candidate refs or establish a later admission."
+    "scope_limit": "Last previously admitted documentation-only validation checkpoint remains PR254 at446ff1b. The branch has since advanced through seven target-specific merges, including PR264/268; current branch ref is recorded separately. This does not admit the entire PR221 combined candidate or release."
   },
-  "observed_at_utc": "2026-10-09T21:54:03Z",
-  "runtime_candidate_head": "204593afdbbb6a5be51c2c5fab3758805ad4412c",
+  "observed_at_utc": "2026-10-09T22:25:00Z",
+  "runtime_candidate_head": "923e4e9db6236c8a48977c0b71236f1dc0f14563",
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
   "current_canvas_amendment": {
@@ -2890,36 +2898,38 @@
     "contracts_and_raw_states": "54 retained contracts and raw states unchanged; #210 remains the only accepted whole issue."
   },
   "current_pull_request_observations": {
-    "observed_at_utc": "2026-10-09T21:46:56Z",
-    "audit_path": "evidence/convergence-live-prs-20261009T2146Z.json",
-    "audit_sha256": "1505c632a1a4ccaf6b8797d7a14c215fa8fdc5d039ca225e02de3c2e292ec5c3",
-    "summary_path": "evidence/current-convergence-amendment-20261009T2146Z.json",
-    "summary_sha256": "f268b20cbeb31911d2530026adf527153ffed7646de84ba216d3a27c6fa8a0a6",
-    "open_pr_count": 16,
+    "observed_at_utc": "2026-10-09T22:25:00Z",
+    "audit_path": "evidence/convergence-live-prs-20261009T2225Z.json",
+    "audit_sha256": "0e6575b8f553bd23fb53002faaa3022190b383f89a40b592ac34d71264326623",
+    "summary_path": "evidence/convergence-followup-20261009T2225Z.json",
+    "summary_sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7",
+    "open_pr_count": 11,
     "all_open_are_drafts": true,
     "merge_ready_count": 0,
-    "blocked_open_count": 16,
-    "integrated_since_prior_observation": {
-      "count": 1,
-      "pr": 251,
-      "target": "repair/rcc-graceful-retirement-20261009",
-      "merge": "ddbbfb68e3431878f01ebfd61de461ff749dc498"
+    "blocked_open_count": 11,
+    "target_integrated_this_pass": {
+      "count": 7,
+      "prs": [
+        251,
+        266,
+        257,
+        259,
+        262,
+        268,
+        264
+      ]
     },
-    "selected_ci_limits": {
-      "pr220": "Verify failed before Work Items verifier: Docker Hub token endpoint request timeout; macOS/toolkit jobs queued in the snapshot.",
-      "pr221": "Verify failed before Work Items verifier: unauthenticated Docker Hub pull rate limit; other checks remained queued/in progress.",
-      "pr256": "Verify failed before Work Items verifier: Docker Hub token endpoint request timeout; other exact-head checks were queued/in progress.",
-      "pr251": "All three hosted workflows passed at exact reviewed head; merge applied only to its named repair branch."
+    "worker_inventory": {
+      "path": "evidence/convergence-worktrees-20261009T2223Z.json",
+      "sha256": "34ce89b7234507930501cde5a0f89541e1cdedf407b40424bfc8e4ab2fdc8d6e",
+      "worktrees": 36,
+      "limit": "Timestamped Git HEAD/status only; not proof of remote worker progress."
     },
-    "pr251": {
-      "head": "2eaac1c1fe5c53320d647a35dd137f8fd9411f3b",
-      "target_base": "29f213e021e5c828aee43de16604ad41cfe88965",
-      "merge_sha": "ddbbfb68e3431878f01ebfd61de461ff749dc498",
-      "tree": "5c2b624f7560f43cfff3694792b40c77d25ac38c",
-      "tree_identity": true,
-      "scope_limit": "Target-specific diagnostic checkpoint; not community/integration admission, provider-dead warm success, or whole #134 acceptance."
-    },
-    "native_status_limit": "Recovered native refs are source/readback only; prior ACTIVE/accepted-turn observations do not establish current implementation progress. No current per-lane worker activity is inferred."
+    "limits": {
+      "whole_issue_acceptance": "No change; 54 retained contracts, 53 open, only #210 accepted/closed, 0 whole-issue review-ready.",
+      "release": "No publication or release-readiness promotion.",
+      "diagnostics": "#220 test-only regression repair active; #221 bounded same-head timing rerun requested with no result."
+    }
   },
   "prior_integration_checkpoints": [
     {
@@ -2974,7 +2984,7 @@
     }
   },
   "current_remote_ref_observation": {
-    "observed_at_utc": "2026-10-09T21:46:56Z",
+    "observed_at_utc": "2026-10-09T22:20:42Z",
     "community": {
       "branch": "community",
       "head": "c30f953bae1a322e1d09549607ab42f1badce440",
@@ -2982,18 +2992,17 @@
     },
     "integration": {
       "branch": "integration/community-release-20261008",
-      "head": "55bfe02a43bf922a7fcf6d77f2422187a419bcd9",
-      "tree": "975e4199c7895f669598567410846ab6b4f3bab6",
-      "readback": "git ls-remote"
+      "head": "4a717c77053947f4ad2892783211af5edbe5783d",
+      "tree": "52950afe5590f1710c7499bedc1179a960f8f8b3",
+      "readback": "GitHub branch API"
     },
     "runtime_candidate": {
       "branch": "integration/runtime-release-final-20261009",
-      "head": "204593afdbbb6a5be51c2c5fab3758805ad4412c",
-      "tree": "779022749fcb6ec8a229fc9de8f421ee0d442fde",
-      "readback": "git ls-remote"
+      "head": "923e4e9db6236c8a48977c0b71236f1dc0f14563",
+      "tree": "a72e4a7f0476b510def86b8d3943bf65143f7f39",
+      "readback": "GitHub branch API"
     },
-    "prior_admitted_integration_checkpoint": "446ff1b3328028154684c035f4e395ae35284067",
-    "limit": "PR221 is the current open integration branch review; its current exact audit has a registry pull failure and pending checks. No new integration admission is claimed."
+    "scope": "The community branch remains separate and unchanged. Integration and Runtime candidate refs are branch readbacks, not new release or whole-issue admission."
   },
   "prior_convergence_followup_20261009T2150Z": {
     "observed_at_utc": "2026-10-09T21:50Z",
@@ -3024,12 +3033,108 @@
     "base_ref_readback_at": "2026-10-09T21:46:56Z"
   },
   "current_convergence_followup": {
+    "observed_at_utc": "2026-10-09T22:25:00Z",
+    "path": "evidence/convergence-followup-20261009T2225Z.json",
+    "sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7",
+    "scope": "Seven PRs merged only to their named targets; 11 open/blocked; whole-issue counts and release status unchanged.",
+    "native_status_observation": "22:23 snapshot reports latest coordinator turn completed; body unavailable. No lane progress inferred."
+  },
+  "latest_convergence_update": {
+    "observed_at_utc": "2026-10-09T22:25:00Z",
+    "path": "evidence/convergence-followup-20261009T2225Z.json",
+    "sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7",
+    "cohort": {
+      "items": 18,
+      "merge_ready": 0,
+      "blocked_open": 11,
+      "target_integrated": 7,
+      "prs": [
+        251,
+        266,
+        257,
+        259,
+        262,
+        268,
+        264
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261009T2225Z.json",
+      "sha256": "0e6575b8f553bd23fb53002faaa3022190b383f89a40b592ac34d71264326623",
+      "open_count": 11,
+      "all_drafts": true
+    },
+    "base_ref_readback_at": "2026-10-09T22:20:42Z",
+    "issue_acceptance_changed": false
+  },
+  "latest_open_pr_audit": {
+    "observed_at_utc": "2026-10-09T22:25:00Z",
+    "path": "evidence/convergence-live-prs-20261009T2225Z.json",
+    "sha256": "0e6575b8f553bd23fb53002faaa3022190b383f89a40b592ac34d71264326623",
+    "summary_path": "evidence/convergence-followup-20261009T2225Z.json",
+    "summary_sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7"
+  },
+  "prior_remote_ref_observation_20261009T2146Z": {
+    "observed_at_utc": "2026-10-09T21:46:56Z",
+    "community": {
+      "branch": "community",
+      "head": "c30f953bae1a322e1d09549607ab42f1badce440",
+      "tree": "c6a2a657bde5af05f8bff659dc33ffee2db8d1e3"
+    },
+    "integration": {
+      "branch": "integration/community-release-20261008",
+      "head": "55bfe02a43bf922a7fcf6d77f2422187a419bcd9",
+      "tree": "975e4199c7895f669598567410846ab6b4f3bab6",
+      "readback": "git ls-remote"
+    },
+    "runtime_candidate": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "204593afdbbb6a5be51c2c5fab3758805ad4412c",
+      "tree": "779022749fcb6ec8a229fc9de8f421ee0d442fde",
+      "readback": "git ls-remote"
+    },
+    "prior_admitted_integration_checkpoint": "446ff1b3328028154684c035f4e395ae35284067",
+    "limit": "PR221 is the current open integration branch review; its current exact audit has a registry pull failure and pending checks. No new integration admission is claimed."
+  },
+  "prior_pull_request_observations_20261009T2146Z": {
+    "observed_at_utc": "2026-10-09T21:46:56Z",
+    "audit_path": "evidence/convergence-live-prs-20261009T2146Z.json",
+    "audit_sha256": "1505c632a1a4ccaf6b8797d7a14c215fa8fdc5d039ca225e02de3c2e292ec5c3",
+    "summary_path": "evidence/current-convergence-amendment-20261009T2146Z.json",
+    "summary_sha256": "f268b20cbeb31911d2530026adf527153ffed7646de84ba216d3a27c6fa8a0a6",
+    "open_pr_count": 16,
+    "all_open_are_drafts": true,
+    "merge_ready_count": 0,
+    "blocked_open_count": 16,
+    "integrated_since_prior_observation": {
+      "count": 1,
+      "pr": 251,
+      "target": "repair/rcc-graceful-retirement-20261009",
+      "merge": "ddbbfb68e3431878f01ebfd61de461ff749dc498"
+    },
+    "selected_ci_limits": {
+      "pr220": "Verify failed before Work Items verifier: Docker Hub token endpoint request timeout; macOS/toolkit jobs queued in the snapshot.",
+      "pr221": "Verify failed before Work Items verifier: unauthenticated Docker Hub pull rate limit; other checks remained queued/in progress.",
+      "pr256": "Verify failed before Work Items verifier: Docker Hub token endpoint request timeout; other exact-head checks were queued/in progress.",
+      "pr251": "All three hosted workflows passed at exact reviewed head; merge applied only to its named repair branch."
+    },
+    "pr251": {
+      "head": "2eaac1c1fe5c53320d647a35dd137f8fd9411f3b",
+      "target_base": "29f213e021e5c828aee43de16604ad41cfe88965",
+      "merge_sha": "ddbbfb68e3431878f01ebfd61de461ff749dc498",
+      "tree": "5c2b624f7560f43cfff3694792b40c77d25ac38c",
+      "tree_identity": true,
+      "scope_limit": "Target-specific diagnostic checkpoint; not community/integration admission, provider-dead warm success, or whole #134 acceptance."
+    },
+    "native_status_limit": "Recovered native refs are source/readback only; prior ACTIVE/accepted-turn observations do not establish current implementation progress. No current per-lane worker activity is inferred."
+  },
+  "prior_convergence_followup_20261009T2154Z": {
     "observed_at_utc": "2026-10-09T21:54:03Z",
     "path": "evidence/convergence-followup-20261009T2154Z.json",
     "sha256": "38be035fee7708e4453fdc03b3f44bc4c5e1f4c685a1071f77f200740db354ca",
     "scope": "Current open-PR checks after PR266 merged into its named renderer branch; base refs remain last read at21:46Z."
   },
-  "latest_convergence_update": {
+  "prior_latest_convergence_update_20261009T2154Z": {
     "observed_at_utc": "2026-10-09T21:54:03Z",
     "path": "evidence/convergence-followup-20261009T2154Z.json",
     "sha256": "38be035fee7708e4453fdc03b3f44bc4c5e1f4c685a1071f77f200740db354ca",
@@ -3051,11 +3156,18 @@
     },
     "base_ref_readback_at": "2026-10-09T21:46:56Z"
   },
-  "latest_open_pr_audit": {
+  "prior_latest_open_pr_audit_20261009T2154Z": {
     "observed_at_utc": "2026-10-09T21:54:03Z",
     "path": "evidence/convergence-live-prs-20261009T2154Z.json",
     "sha256": "5c2b56123be11a61339e3420d47273881008d6eff0029e6bf484020281e3d2ff",
     "summary_path": "evidence/convergence-followup-20261009T2154Z.json",
     "summary_sha256": "38be035fee7708e4453fdc03b3f44bc4c5e1f4c685a1071f77f200740db354ca"
+  },
+  "current_worktree_inventory": {
+    "observed_at_utc": "2026-10-09T22:21:00.970740Z",
+    "path": "evidence/convergence-worktrees-20261009T2223Z.json",
+    "sha256": "34ce89b7234507930501cde5a0f89541e1cdedf407b40424bfc8e4ab2fdc8d6e",
+    "count": 36,
+    "limit": "Local Git snapshot; remote Devsy status is not inferred."
   }
 }

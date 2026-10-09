@@ -2708,5 +2708,17 @@
     "integration_tree": "f2f909fb66b46e2ed1bb6fbf0f4f07c446aebc32",
     "runtime_candidate": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
     "release_ready": false
+  },
+  "current_pr_convergence": {
+    "observed_at_utc": "2026-10-09T22:25:00Z",
+    "receipt": "evidence/convergence-followup-20261009T2225Z.json",
+    "sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7",
+    "pr_cohort": {
+      "target_integrated": 7,
+      "open_blocked": 11,
+      "merge_ready": 0
+    },
+    "issue_stage_counts_unchanged": true,
+    "whole_issue_acceptance_changed": false
   }
 }
