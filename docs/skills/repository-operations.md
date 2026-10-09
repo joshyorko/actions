@@ -923,7 +923,11 @@ the release-byte receipt does not replace native, provider, or package gates.
 The supported Action Server templates are generated from `templates/packaging/templates-prod.json`
 with `templates/packaging/build_embedded_bundle.py`. The generator sorts archive members,
 uses fixed ZIP timestamps and permissions, and writes `action-templates.zip` plus YAML
-metadata containing its SHA-256. Regenerate the checked-in assets with:
+metadata containing its SHA-256. Each template archive honors the `packaging.exclude`
+patterns in that template's `package.yaml`, using the same anchored, unanchored, and
+`**` path matching rules as Action Server package distribution. This keeps local test
+outputs and generated caches out of offline templates while retaining non-excluded
+source files. Regenerate the checked-in assets with:
 
 ```bash
 python templates/packaging/build_embedded_bundle.py \
@@ -935,9 +939,12 @@ python templates/packaging/build_embedded_bundle.py \
 Action Server seeds its settings cache from these package-owned assets, validates the
 bundle hash and every archive member, and atomically installs only verified archives.
 The embedded bundle is the sole runtime authority: project creation performs no
-metadata or archive network request. Production owns exactly `minimal`, `basic`,
-`advanced`, and `workflow-producer-consumer`; `templates-beta.json` is not a production
-generator input. A cache hash mismatch, byte mismatch, traversal path, duplicate member,
+metadata or archive network request. The production inventory is `minimal`,
+`basic`, `advanced`, `workflow-producer-consumer`, and `mcp-v2-showcase`; the
+separate beta inventory remains a selected subset and is not a production
+generator input. The MCP v2 Showcase uses static public data and demonstrates
+core stateless MCP only; its GET/SSE example proves channel open/close, not tool
+progress, MCP Apps, Canvas, or durable Tasks. A cache hash mismatch, byte mismatch, traversal path, duplicate member,
 or symlink causes reseeding from the embedded bundle. A symlinked cache directory is
 unlinked before reseeding, so embedded files are never written through its target.
 Metadata whose `templates` value is not a mapping is invalid and also triggers offline

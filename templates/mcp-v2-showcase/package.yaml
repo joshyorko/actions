@@ -1,0 +1,40 @@
+spec-version: v2
+
+name: MCP v2 Showcase
+description: A local example of Action Server's stateless core MCP protocol.
+version: 0.0.1
+
+dependencies:
+  conda-forge:
+    - python=3.12.12
+    - uv=0.8.17
+  pypi:
+    - actions-core=1.0.2
+
+dev-dependencies:
+  conda-forge:
+    - pytest=8.4.2
+    - ruff=0.14.3
+
+dev-tasks:
+  test: pytest tests
+  lint: |
+    ruff check .
+    ruff format --check .
+  prettify: ruff format .
+
+packaging:
+  exclude:
+    - ./.git/**
+    - ./.vscode/**
+    - ./devdata/**
+    - ./output/**
+    - ./venv/**
+    - ./.venv/**
+    - ./**/*.pyc
+    - ./**/*.zip
+    - ./**/.env
+    - ./**/__MACOSX
+    - ./**/__pycache__/**
+    - ./**/*_cache/**
+    - ./**/.git

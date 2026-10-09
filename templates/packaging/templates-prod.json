@@ -19,6 +19,11 @@
             "id": "workflow-producer-consumer",
             "name": "Workflow/Producer-Consumer",
             "desc": "Producer-consumer workflow pattern using work items."
+        },
+        {
+            "id": "mcp-v2-showcase",
+            "name": "MCP v2 Showcase",
+            "desc": "A local example of the stateless core MCP protocol."
         }
     ]
 }
