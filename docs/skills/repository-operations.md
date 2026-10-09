@@ -1503,10 +1503,22 @@ Runtime admission binds the peeled tag commit to the triggering event commit
 and requires community ancestry; unrelated later community commits do not
 invalidate an immutable release source. PR candidate dependency wheels are
 verification-only. Publish and clean-install required dependency versions before
-dependent release tags. Check registry and native release versions separately
-before allocating a version, and never reuse a published distribution version.
-The live registry on October 8 contains Runtime 1.0.2 and Core 1.0.1; the assembled
-Runtime 1.0.3 and Core 1.0.2 are candidates until release checks and workflows pass.
+dependent release tags. Before each release decision, read current PyPI project
+metadata and the native GitHub release/assets independently; an older readiness
+report, passing workflow, or dependency publication does not establish the
+Runtime package or native release state. Never reuse a published distribution
+version. The current Runtime 1.0.3 source declares Core `^1.0.2`, HTTP Helper
+`^1.0.3`, and Work Items `^0.4.4`; the dependency floors being published does
+not mean Runtime itself has been published.
+
+The Runtime source changelog and public README must label an unpublished version
+as a candidate and keep the PyPI and native versions separate. Candidate notes
+must distinguish source changes from acceptance evidence: in particular, a
+selected-provider RCC 503 negative that fails before Action execution does not
+prove provider-backed offline-warm reuse or full issue #134 acceptance. Keep
+open browser and external native-handoff criteria visible until their specified
+evidence exists. Do not describe independent Canvas entrypoints as Canvas
+authoring or execution functionality.
 
 The HTTP helper must apply persisted `proxy-settings.no-proxy` at each request
 destination, including redirects, not merely expose it through NetworkProfile.

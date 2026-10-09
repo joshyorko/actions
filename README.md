@@ -83,7 +83,7 @@ The community release surface has one server distribution and separate library d
 
 ## Release status and roadmap
 
-Status checked **October 8, 2026**. This roadmap separates what people can install today from release candidates and architecture work that is still proposed.
+Status checked **October 9, 2026**. This roadmap separates what people can install today from release candidates and architecture work that is still proposed.
 
 ### Available today
 
@@ -92,17 +92,17 @@ The supported entry point is a single local Action Server: install `actions-runt
 | Distribution | Latest on PyPI |
 | --- | ---: |
 | `actions-runtime` | 1.0.2 |
-| `actions-core` | 1.0.1 |
-| `actions-http-helper` | 1.0.1 |
+| `actions-core` | 1.0.2 |
+| `actions-http-helper` | 1.0.3 |
 | `actions-work-items` | 0.4.4 |
 
 Native Action Server release **1.0.1** is also available. Its published Linux, macOS arm64, and Windows x64 binaries are marked unsigned. Linux startup and a representative Action were verified; post-download execution on macOS and Windows was not verified for that release. PyPI and native release versions are tracked separately.
 
 ### Release candidates
 
-The next package set under verification is HTTP Helper 1.0.2, Core 1.0.2, and Runtime 1.0.3. These versions are **not published**. The intended dependency order is to publish and verify HTTP Helper first, then Core, then Runtime; dependent releases must resolve published registry versions. A candidate wheel or a passing pull request does not mean a release is available.
+HTTP Helper 1.0.3 and Core 1.0.2 are published and verified on PyPI; Work Items 0.4.4 is also published. Runtime 1.0.3 is a source candidate and is **not published**. Its declared floors are Core `^1.0.2`, HTTP Helper `^1.0.3`, and Work Items `^0.4.4`.
 
-The local Runtime 1.0.3 candidate at [`119b4f1`](https://github.com/joshyorko/actions/commit/119b4f118bddb999ab1fc31b6edc5dd7fca36209) passed frozen and Go-wrapper checks plus browser, sign-in, WebSocket, Work Items, and persistence checks on the tested host. Windows startup remains unexplained and macOS execution is queued. This is candidate evidence and does not change the published native 1.0.1 status.
+The candidate contains bounded Run-history handling, browser-origin/authentication changes, Robot download/archive protections, refreshed Runtime administration assets, and current Work Items loading. These source changes do not establish release acceptance. RCC issue [#134](https://github.com/joshyorko/actions/issues/134) remains open: the selected-provider HTTP 503 negative fails closed before execution, while provider-backed offline-warm acceptance still fails and complete RCC lifecycle acceptance is unproven. Browser issue [#153](https://github.com/joshyorko/actions/issues/153) still requires real-browser evidence. Native handoff issue [#211](https://github.com/joshyorko/actions/issues/211) remains open pending external verification. PyPI Runtime is 1.0.2; native Action Server remains 1.0.1. No native 1.0.3 assets are available. Canvas remains an independent entrypoint; no Canvas authoring or execution feature is claimed here.
 
 ### Proposed milestones
 
