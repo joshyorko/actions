@@ -49,6 +49,7 @@ Cosmetic prose and session diaries do not count. Never document planned behavior
 Every lane returns:
 
 ```text
+Upstream disposition: none | <factual issue, existing-report, local-fix, or no-finding disposition>
 Documentation improvement:
 - Canonical file changed or proposed:
 - Durable learning captured:

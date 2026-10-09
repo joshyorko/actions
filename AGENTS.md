@@ -53,6 +53,10 @@ Every agent dispatch must include:
 
 > Before completing, improve the relevant canonical guide or repository skill with durable, verified knowledge learned during this task. Do not add cosmetic prose or a session diary. Report the exact documentation delta and its evidence.
 
+Every assignment must also pass this upstream-reporting instruction:
+
+> If work uncovers a possible upstream defect, follow `docs/skills/upstream-reporting.md`. The task must state any authorized upstream target and issue-only scope; without that explicit authority, prepare a draft only. Include `Upstream disposition: none` or the factual report disposition in the normal completion receipt.
+
 Every parent, child, remote, read-only, and review lane must return:
 
 ```text
@@ -72,11 +76,14 @@ When implementation, review, debugging, release, or coordination finds a
 possible defect owned by a maintained upstream dependency, follow
 [`docs/skills/upstream-reporting.md`](docs/skills/upstream-reporting.md). The
 guide governs evidence, ownership, deduplication, maintainer follow-up, and the
-completion receipt. It does not grant credentials or authority to mutate any
-repository: external issue creation requires explicit, target-specific,
-issue-only authorization for a confirmed defect. Third-party or out-of-scope
-reports remain drafts pending authority. Route security-sensitive findings
-through the affected repository's private reporting procedure.
+completion receipt. Every normal task completion receipt states
+`Upstream disposition: none` if no upstream investigation was needed, or gives
+the factual disposition. The guide does not grant credentials or authority to
+mutate any repository: external issue creation requires explicit,
+target-specific, issue-only authorization for a confirmed defect. Third-party
+or out-of-scope reports remain drafts pending authority. Route
+security-sensitive findings through the affected repository's private
+reporting procedure.
 
 ## Commit & Pull Request Guidelines
 

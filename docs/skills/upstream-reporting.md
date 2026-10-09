@@ -18,6 +18,13 @@ the specific authority before those actions. If the target is third-party or
 otherwise outside the explicitly authorized scope, prepare a factual draft and
 request issue-publication authority.
 
+For the 2026-10-09 campaign, the user's task authorization covers issue-only
+reporting of confirmed new defects in explicitly in-scope maintained
+`joshyorko` repositories, including `joshyorko/rcc`, subject to actual account
+permissions and each repository's rules. This campaign scope grants no other
+mutation authority and is not a standing grant for later tasks; verify the
+active task's authority each time.
+
 Before classifying the defect, verify the source owner and repository, the
 actual remote/fork, and the version or immutable revision Actions consumes.
 Trace the observed behavior to current upstream source, tests, release notes,
@@ -31,8 +38,22 @@ Classify the finding before reporting:
 - If the behavior is caused by Actions, fix or track it here.
 - If evidence does not establish an upstream defect, record the uncertainty and
   continue local diagnosis; do not file a speculative issue.
-- If the defect belongs to a confirmed upstream revision and is reproducible,
-  continue with deduplication and the target repository's contribution rules.
+- If an integration boundary or external service is involved, isolate the
+  caller, provider, network, and published contract. A failed integration alone
+  does not identify an upstream owner; report a defect only when evidence shows
+  the upstream implementation violates a documented supported contract.
+- If the failure is on an unsupported dependency version, classify it as
+  unsupported-version compatibility or a support request, not a confirmed
+  defect. If the version is supported and violates the compatibility promise,
+  treat it as a defect candidate.
+- If a capability is missing without a broken documented contract, classify it
+  as a feature request or product decision, not a defect. Keep the request
+  separate from bug reports and defer product priority to maintainers.
+- For a confirmed, new defect in an authorized target, after deduplication
+  promptly file one focused issue following that repository's contribution
+  rules, then link it from the downstream blocker, test, or task. If an
+  equivalent report already exists, update or link that report instead of
+  opening a duplicate.
 - If the finding concerns a vulnerability, credential exposure, private data,
   or exploitable behavior, stop public drafting and follow that repository's
   private security reporting process. Keep sensitive details out of public
@@ -61,12 +82,13 @@ Classify the finding before reporting:
    let maintainers choose an implementation. Do not prescribe a patch as a
    condition of accepting the report.
 
-Do not turn an upstream gap into a permanent local workaround. If a separate,
-explicitly authorized downstream mitigation is needed for immediate safety or
-continuity, keep it narrow and tested, link it to the upstream report, name its
-owner, and state a concrete removal condition. Do not weaken security or silently
-retain a fallback after the upstream defect is fixed or its behavior is
-resolved by maintainers.
+Do not turn an upstream gap into a permanent local workaround. If an immediate
+downstream mitigation is needed and the active task already authorizes that
+local fix, keep it narrow and tested, link it to the upstream report, name its
+owner, and state a concrete removal condition; the task's existing scope is
+sufficient. If the mitigation is outside that scope, request authority before
+changing source. Do not weaken security or silently retain a fallback after
+the upstream defect is fixed or its behavior is resolved by maintainers.
 
 ## Follow-up and downstream handoff
 
@@ -78,8 +100,10 @@ settled direction. When the issue is fixed or otherwise resolved, verify the
 consumed version/revision and update the downstream issue, test, or release
 gate. Keep the original report and any correction traceable.
 
-Every task that investigates a possible upstream defect ends with a factual
-receipt, including when no issue is filed:
+Every task completion report states `Upstream disposition: none` when no
+upstream investigation was needed, or summarizes the disposition. A task that
+investigates a possible upstream defect also ends with this factual receipt,
+including when no issue is filed:
 
 ```text
 Upstream disposition
