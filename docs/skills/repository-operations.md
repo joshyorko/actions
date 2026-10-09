@@ -8,6 +8,16 @@ product links must target the community repository and its released assets. Pres
 upstream attribution in LICENSE and NOTICE.md. Changing source metadata does not
 modify previously uploaded PyPI releases; verify built METADATA/PKG-INFO before a
 new upload and never replace an existing tag or distribution file.
+
+When credential presence must be checked before creating an immutable package
+tag, use a separate short-lived workflow job bound to the `pypi` environment.
+Grant no repository permissions, do not check out code or install tools, disable
+shell tracing, and test only whether the named secret is empty. Emit only
+nonempty/empty status; never print the value, pass it to a client, or attempt
+registry authentication or upload. A successful presence check proves neither
+PyPI authentication, token scope, or upload permission; preserve those as
+separate release gates because this probe tests nonemptiness only.
+
 Publish dependency releases before changing template pins. After publication,
 update the source templates and regenerate the embedded template ZIP and its
 SHA-256 metadata together; source YAML changes alone do not update shipped templates.
