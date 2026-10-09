@@ -1672,7 +1672,7 @@ dependencies:
                 },
                 "candidate_wheels": wheel_records,
                 "actions_core": "1.0.2",
-                "actions_http_helper": "1.0.2",
+                "actions_http_helper": "1.0.3",
                 "server_integration": candidate_result["server_integration"],
                 "artifact_digest": digest,
                 "run_id": run_id,
