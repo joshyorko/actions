@@ -45,6 +45,26 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
         self.ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
 
+    def test_manifest_payload_checkout_preserves_exact_git_bytes(self) -> None:
+        relative_path = "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.json"
+        attributes = subprocess.run(
+            ["git", "check-attr", "text", "--", relative_path],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        self.assertTrue(attributes.stdout.rstrip().endswith(": text: unset"), attributes.stdout)
+
+        manifest_path = ROOT / "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        entry = next(item for item in manifest["entries"] if item["path"] == Path(relative_path).name)
+        payload = ROOT / relative_path
+        content = payload.read_bytes()
+        self.assertEqual(entry["size_bytes"], len(content))
+        self.assertEqual(entry["sha256"], hashlib.sha256(content).hexdigest())
+
     def test_canvas_parent_cycle_is_removed_from_execution_dag(self) -> None:
         upgraded = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
         old_rows = {row["issue"]: row for row in upgraded["issues"]}

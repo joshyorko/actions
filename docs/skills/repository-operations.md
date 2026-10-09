@@ -29,7 +29,9 @@ separate workflow. The projection reads and writes its Markdown, JSON, and
 manifest files as UTF-8 explicitly; do not rely on the host's default text
 encoding. Its CLI fixture exposes child stdout/stderr on failure and forces a
 non-UTF-8 POSIX locale, while the existing Windows ToolkitTest cell exercises
-the native Windows path.
+the native Windows path. Hash-manifested Canvas amendment artifacts also use
+`-text` in `.gitattributes`: Git checkout conversion must not rewrite evidence
+bytes before the validator checks the recorded size and digest.
 
 For Canvas fixture work, distinguish schema/round-trip evidence from product
 authorization: the current MCP dispatcher selects a registered tool by name,
