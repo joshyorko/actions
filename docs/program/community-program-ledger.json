@@ -95,7 +95,7 @@
         196
       ],
       "criticality": "P1",
-      "next_bounded_action": "Restore and verify preserved two-file tunnel patch on c789, independently review, retain edge identity/auth readiness gate.",
+      "next_bounded_action": "Retain verified tunnel lifecycle slice in PR225 at cff80183; implement public-edge identity/authentication and SSH ownership gates before whole-contract admission.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -121,10 +121,11 @@
       },
       "independent_review_status": "NOT_RUN",
       "blockers": [
-        "Public-edge identity/authentication and legacycontroller equivalence unproved",
-        "c789 reviewer finds cross-streamURL synthesis, fullqueue cancellation starvation and readerjoin outcome gaps; two-file UNVERIFIED successor patch preserved, not committed"
+        "Public-edge identity/authentication and legacy-controller equivalence unproved",
+        "Preserved patch and scoped pipe lifecycle regressions repaired and native-tested; whole contract remains incomplete"
       ],
-      "disposition": "RETAIN_CONTRACT_EXECUTE_IN_DEPENDENCY_ORDER"
+      "disposition": "RETAIN_CONTRACT_EXECUTE_IN_DEPENDENCY_ORDER",
+      "resume_evidence": "community-resume-20261009.json"
     },
     {
       "issue": 212,
@@ -519,7 +520,7 @@
         145
       ],
       "criticality": "P1",
-      "next_bounded_action": "Finish portable frozen/Go packaged acceptance harness in PR221, run on Linux/Windows/macOS, prove real native consumer state transitions and restart recovery.",
+      "next_bounded_action": "Review PR231 hash-bound Linux packaged consumer proof; preserve all-marker suite failures and complete current-source/native-platform/recovery admission.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -552,7 +553,8 @@
       "disposition": "ADOPT_EXISTING_CHECKPOINT_REPAIR_AND_VERIFY",
       "integration_pr": 221,
       "proof_detail": "At b592952d all three OS and both binaries pass authenticated browser/HTTP/WebSocket/storage/shadow-defense/errors and 880803840-byte synthetic history with 47931/2351-byte pages and 4194692-byte detail. At e4bae7a8 both binaries pass strict four-state axe with contrast negative control; Windows cleanup PermissionError keeps overall native receipt FAIL. Source full frontend278 PASS. Dakota Linux frozen+Go consumer success/failure/orphan-retry/restart receipt at43cf9a26 reportedPASS in branchd78534f1; independentreviewNOT_RUN, Windows/macOSconsumerNOT_RUN.",
-      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure."
+      "proof_scope": "Native frozen/Go browser/storage and large history PASS on Linux/Windows/macOS at b592952d PR merge subject. Successor e4bae7a8 adds four-state axe PASS on all OS; Windows overall FAIL in post-check cleanup. Native field retains current overall failure.",
+      "resume_evidence": "community-resume-20261009.json"
     },
     {
       "issue": 196,
@@ -1233,7 +1235,7 @@
         153
       ],
       "criticality": "P0",
-      "next_bounded_action": "Implement/prove safe no-follow package publication and actual native security matrix without weakening auth or TLS.",
+      "next_bounded_action": "Native exclusive publication passed all three platforms in PR230; repair post-publication cleanup ownership on its isolated successor, then address remaining root/source/staging identity gaps.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -1263,7 +1265,8 @@
         "Live TLS/redirect/proxy security matrix remains NOT_RUN"
       ],
       "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
-      "proof_scope": "39 source security regressions PASS; subsequent exact06c filesystem mechanism probe3FAIL1valid-controlPASS, independently reproduced. Local authority to mutate publication parent required; no archive-only remote exploit shown."
+      "proof_scope": "39 source security regressions PASS; subsequent exact06c filesystem mechanism probe3FAIL1valid-controlPASS, independently reproduced. Local authority to mutate publication parent required; no archive-only remote exploit shown.",
+      "resume_evidence": "community-resume-20261009.json"
     },
     {
       "issue": 149,
@@ -3108,7 +3111,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Reconcile existing Dakota thread/branch8ce8bb07, recover live RCC receipt, repair harness timeout/process/environment/Poetry review findings; then independently prove local candidate vertical.",
+      "next_bounded_action": "Same Dakota RCC thread repairs reviewed detached cleanup, hard deadline and Runtime reap gaps; retain source/candidate-wheel Action proof separately from failed wrapper teardown.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -3136,7 +3139,8 @@
       "blockers": [
         "Required acceptance has not been independently established."
       ],
-      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION"
+      "disposition": "RETAIN_ACCEPTANCE_AFTER_MERGED_FOUNDATION",
+      "resume_evidence": "community-resume-20261009.json"
     },
     {
       "issue": 133,
@@ -12177,26 +12181,29 @@
     "Runtime_frozen_linux_119b4f": "sha256:250678f26f41d188e9706059f9d2a3c057ab80bfb822dbe56f1651187c3ffdc3",
     "Runtime_Go_linux_119b4f": "sha256:d50cfb188f002e80658f9ae09e92a0016cc259b0591c740ff179dd16eb1ff15f",
     "remaining_security": "Three concrete06c filesystem publication races under local filesystem mutation preconditions; no archive-only exploit shown. Fix/native proof and full route matrix pending; no publication admission.",
-    "remaining_native": "Repair actualWindows immediateexit258!=0 at91d55, then rerun native/browser/history. Atomic no-replace15696 notintegrated/nativeverified; root/sourceidentity remainsopen."
+    "remaining_native": "Windows strict ownership/browser/history pass all three platforms in PR229 at a8eb7b46, integrated as12b387ec after12 successful checks and1 publication skip. Robot exclusive publication native matrix passes in PR230; root/source/staging identity remains open. No program release admission."
   },
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261008.zip",
   "evidence_archive_sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
-  "integration_head": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
+  "integration_head": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
   "additional_compute": {
     "devsy": {
       "provider": "Executor Devsy Kubernetes",
       "workspace": "cas-worker-01",
       "state": "BLOCKED",
       "request_id": "apr_29be804c-94cd-4b62-9233-e91b5ec30774",
-      "cause": "User approved creation; executor_resume connector rejects exact returned request ID against pattern ^apr_; inventory remains empty; no duplicate create submitted."
+      "cause": "User approved creation; executor_resume connector rejects exact returned request ID against pattern ^apr_; inventory remains empty; no duplicate create submitted.",
+      "session": "stateless",
+      "retried_on_resume": false,
+      "private_grant_available_in_new_workspace": false
     },
     "cloud": {
       "state": "CONNECTED",
       "integration_owner": "/root"
     },
     "dakota": {
-      "state": "CONTROL_BLOCKED",
+      "state": "CONNECTED_EXISTING_THREADS_RECONCILED",
       "target": "local",
       "server": "dakota-nvidia",
       "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
@@ -12215,11 +12222,16 @@
         }
       ],
       "toolchain": "Both native workers reported checksum-pinned RCC18.19.3 Doctor/Bootstrap/ToolkitTest PASS before control failure",
-      "cause": "Executor execute/skills now reject with MCP -32001 Unknown tool, including after reinstall/new plugin link. Do not duplicate workers; current native thread/process state unconfirmed.",
+      "cause": "Fresh Executor calls work; both prior turns were completed before same-thread continuation. Devsy validation remains separately blocked.",
       "branches": {
-        "rcc": "feature/dakota-rcc-acceptance-20261008@8ce8bb07498d0c15ae27fe55f1e30bc21bf0cbb5",
-        "work_items": "feature/dakota-workitems-acceptance-20261008@d78534f1b1edfe799de7d61aaa693937be5e2fea"
+        "rcc": "feature/dakota-rcc-acceptance-20261008@67e82ef7c2bfd529f36d756c2c97c466bd3952e4; active uncommitted cleanup successor",
+        "work_items": "feature/dakota-workitems-acceptance-20261008@f31d9b56afdc79b761dc190457e7cb397f116c7f; completed and clean"
       }
     }
+  },
+  "resume_checkpoint": {
+    "file": "community-resume-20261009.json",
+    "observed_at": "2026-10-09T15:10:12.463914+00:00",
+    "status": "ACTIVE_ENGINEERING; migration preparation is not a freeze"
   }
 }

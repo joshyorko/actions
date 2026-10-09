@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "repository": "joshyorko/actions",
+  "observed_at": "2026-10-09T15:10:12.463914+00:00",
+  "status": "ACTIVE_ENGINEERING_CHECKPOINT",
+  "integration_head": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
+  "community_head": "7c98236069171f57031218f938963238986293bd",
+  "release_ready": false,
+  "community_merge": false,
+  "publication": false,
+  "issue_accounting": {
+    "open": 54,
+    "accepted": 0,
+    "whole_issue_review_ready": 0
+  },
+  "user_clarification": "Dakota device image cleanup was intentional. Images are unavailable; independently measured retained executable/wheel bytes are separate evidence.",
+  "devsy": {
+    "request_id": "apr_29be804c-94cd-4b62-9233-e91b5ec30774",
+    "session": "stateless",
+    "state": "BLOCKED_PRESERVED",
+    "recreated": false,
+    "retried": false,
+    "private_record": "old task private/pending-devsy-creation.json; unavailable in resumed workspace",
+    "validation": "Fresh Executor codex calls work; Devsy approval validation not established. No Devsy calls made."
+  },
+  "dakota": {
+    "reconciled_before_dispatch": true,
+    "duplicate_workers": false,
+    "work_items": {
+      "thread_id": "01a11d7a-e547-7423-8fc5-fc0148df2123",
+      "initial_turn": "01a11d7d-a833-7db1-8d7b-d8f64b0e7bf7",
+      "initial_status": "completed/notLoaded/no active turn",
+      "resume_turns": [
+        "01a12113-680a-7901-a299-837d8f2c4c39",
+        "01a12124-a8c4-7492-8798-7ce1fe2dc9d0"
+      ],
+      "head": "f31d9b56afdc79b761dc190457e7cb397f116c7f",
+      "state": "completed; clean and no task-owned processes/services reported",
+      "pr": 231,
+      "worktree": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions/.worktrees/dakota-workitems-acceptance-20261008",
+      "branch": "feature/dakota-workitems-acceptance-20261008",
+      "unfinished_changes": []
+    },
+    "rcc": {
+      "thread_id": "01a11d7b-4029-7953-aba7-f3b487098b32",
+      "initial_turn": "01a11d7b-40d3-7a32-b49b-38f69992fcba",
+      "initial_status": "completed/notLoaded/no active turn",
+      "resume_turn": "01a12111-5ef1-7d10-9c74-2cfcde560ce7",
+      "head": "67e82ef7c2bfd529f36d756c2c97c466bd3952e4",
+      "state": "ACTIVE_REPAIR after independent review; latest pushed head67e82ef7",
+      "worktree": "/tmp/actions-134-dakota-resume-20261009",
+      "branch": "feature/dakota-rcc-acceptance-20261008",
+      "unfinished_changes": {
+        "source": "worker file-change/control receipts; not a fresh remote git-status snapshot",
+        "files": [
+          "action_server/scripts/verify_dakota_rcc_acceptance.py",
+          "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py"
+        ],
+        "verified": false,
+        "preservation": "Retained in worker worktree; do not reset or discard. Exact recovery inventory required at explicit freeze."
+      }
+    }
+  },
+  "slices": {
+    "tunnel": {
+      "head": "cff801836e8adae160aef7db7bdc5189c8d2b403",
+      "pr": 225,
+      "original_patch": "October 8 archive preserved unchanged",
+      "focused": {
+        "passed": 41
+      },
+      "portable": {
+        "passed": 602,
+        "skipped": 10
+      },
+      "lint": "PASS; Markdown lint unavailable",
+      "types": "PASS 284 files",
+      "native_focused": {
+        "linux": "PASS",
+        "windows": "PASS",
+        "macos": "PASS",
+        "run": 37946053759
+      },
+      "whole_native": "Windows ownership FAIL; Linux/macOS PASS",
+      "limits": [
+        "Public edge identity/authentication and SSH identity unresolved",
+        "No whole #214 acceptance"
+      ]
+    },
+    "robot": {
+      "head": "651a1b9777e92254ad859f32f555f5790d79a238",
+      "pr": 230,
+      "preserved_source": "15696d85bfbfa88938430c9e6a167ea6d02f9ae2",
+      "focused": {
+        "passed": 50
+      },
+      "portable": {
+        "passed": 583,
+        "skipped": 10
+      },
+      "lint": "PASS; Markdown lint unavailable",
+      "types": "PASS 284 files",
+      "review": "PASS scoped read-only review",
+      "native_focused": {
+        "linux": "PASS",
+        "windows": "PASS",
+        "macos": "PASS",
+        "run": 37946048254
+      },
+      "whole_native": "Windows ownership FAIL; Linux/macOS PASS",
+      "limits": [
+        "Root/source admission and staging/cleanup identity races remain"
+      ]
+    },
+    "windows": {
+      "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "repair_sha": "0510e998bae0671c0b431775cddf0c00cab26e8a",
+      "diagnostic_sha": "011c8296a62c4dec55e6aa5493b8cd10b67a3119",
+      "pr": 229,
+      "diagnostic_run": 37945427109,
+      "diagnostic": "Exact member; active count 2 -> 0; handle WAIT_TIMEOUT immediately after owned context",
+      "script_tests": {
+        "passed": 22,
+        "windows_skipped": 3
+      },
+      "portable": {
+        "passed": 573,
+        "skipped": 10
+      },
+      "lint": "PASS after inherited style fixes",
+      "types": "PASS 282 files after inherited test annotation",
+      "review": "PASS scoped independent review",
+      "native_repair_run": 37947403789,
+      "native_final_run": 37947917527,
+      "state": "PASS_SCOPED_NATIVE_AND_PORTABLE",
+      "limits": [
+        "Processes that left Job accounting before capture are outside retained-handle proof",
+        "No arbitrary-tree shutdown claim"
+      ],
+      "native_final": {
+        "linux": "PASS",
+        "windows": "PASS",
+        "macos": "PASS",
+        "run": 37947917527
+      },
+      "disposition": "MERGED_INTO_INTEGRATION_ONLY"
+    },
+    "work_items": {
+      "head": "f31d9b56afdc79b761dc190457e7cb397f116c7f",
+      "harness_sha": "703837e5ef898ef7f69ea4bdd2f2f3ef7629687e",
+      "pr": 231,
+      "focused": {
+        "passed": 14
+      },
+      "native_retained_linux": {
+        "passed": 2,
+        "artifacts_rebuilt": false
+      },
+      "lint": "PASS; Markdown lint unavailable",
+      "types": "PASS 284 files",
+      "broad_suite": {
+        "status": "FAIL",
+        "passed": 677,
+        "failed": 24,
+        "skipped": 22,
+        "warnings": 4,
+        "seconds": 708.72,
+        "failure_index": "workitems-evidence/broad-suite-failures.json",
+        "replaced_by_focused_pass": false,
+        "subject": "487826dc plus root uncommitted finalization repair/regressions, later committed as703837e5; formatting/type annotations changed during this run. Diagnostic working-tree evidence, not exact-commit admission."
+      },
+      "receipt": "action_server/tests/evidence/dakota_workitems_native_acceptance_resume_20261009.json",
+      "limits": [
+        "Source/build labels caller supplied, no retained build manifest",
+        "Recovery fixture seeds stale reservation, not process crash",
+        "Linux only"
+      ],
+      "portable": {
+        "passed": 586,
+        "skipped": 10,
+        "warnings": 4
+      }
+    },
+    "rcc": {
+      "head": "67e82ef7c2bfd529f36d756c2c97c466bd3952e4",
+      "focused": {
+        "passed": 11,
+        "deselected": 1
+      },
+      "review": "FAIL: detached cleanup, unbounded pipe/wait, incomplete total deadline, unverified Runtime reap",
+      "cleanup_observation": "Focused timeout test left zombie PID11754 underPID1, no live child; no unrelated reaping attempted",
+      "action_execution": "Reported HTTP403/200 and SQLite passed, artifact verified",
+      "wrapper": "failed/-1/child exited non-zero; retained as distinct failed cell",
+      "receipt": "awaiting durable remote receipt",
+      "state": "ACTIVE_REPAIR"
+    }
+  },
+  "coordination": {
+    "migration_preparation": "Separate agent performs read-only reconnaissance; normal engineering continues.",
+    "freeze_issued": false,
+    "on_explicit_migration_freeze": "Begin no new mutations; allow in-flight operations to reach safe checkpoints; preserve and push recoverable work; inventory all worker/repository state.",
+    "migration_specific_changes": "NONE; no detachment, renaming or issue migration"
+  },
+  "cloud_workers": [
+    {
+      "thread": "/root/windows_shutdown_review",
+      "state": "ACTIVE_IMPLEMENTATION",
+      "scope": "#151 post-publication staging cleanup ownership",
+      "worktree": "/workspace/work/community-resume/robot-cleanup",
+      "head": "651a1b9777e92254ad859f32f555f5790d79a238",
+      "writes": [
+        "action_server/src/actions/server/_api_robots.py",
+        "action_server/tests/action_server_tests/test_api_robots.py",
+        "docs/skills/repository-operations.md"
+      ],
+      "branch": "repair/robot-cleanup-ownership-20261009",
+      "base": "651a1b9777e92254ad859f32f555f5790d79a238",
+      "verified": false
+    },
+    {
+      "thread": "/root/tunnel_patch_review",
+      "state": "COMPLETED",
+      "scope": "Tunnel repair; independent RCC cleanup review at67e82ef7",
+      "findings": "RCC cleanup/deadline review FAIL; same Dakota worker repairing"
+    },
+    {
+      "thread": "/root/robot_gate_review",
+      "state": "COMPLETED",
+      "scope": "Independent Robot and Windows shutdown reviews",
+      "findings": "No additional scoped findings"
+    }
+  ],
+  "worktrees": [
+    {
+      "path": "/workspace/actions",
+      "branch": "refs/heads/work",
+      "head": "7c98236069171f57031218f938963238986293bd",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "community",
+      "last_fetched_remote_head": "7c98236069171f57031218f938963238986293bd",
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/convergence",
+      "branch": "refs/heads/integration/community-release-20261008",
+      "head": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "integration/community-release-20261008",
+      "last_fetched_remote_head": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/governance",
+      "branch": "refs/heads/resume/community-evidence-20261009",
+      "head": "0e931f9707fd672ae1943bbe1869df1ac4d1b486",
+      "working_tree_changes": [
+        "M docs/program/community-program-ledger.json",
+        " M docs/program/community-program-ledger.md",
+        " M docs/program/engineering-handoff.md",
+        " M docs/skills/repository-operations.md",
+        "?? docs/program/community-resume-20261009.json",
+        "?? docs/program/evidence/community-20261009-resume.zip"
+      ],
+      "remote_checkpoint_branch": "review/community-ledger-20261008",
+      "last_fetched_remote_head": "0e931f9707fd672ae1943bbe1869df1ac4d1b486",
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/integration",
+      "branch": "refs/heads/resume/community-blockers-20261009",
+      "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "resume/community-blockers-20261009",
+      "last_fetched_remote_head": null,
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/rcc",
+      "branch": "refs/heads/resume/rcc-review-20261009",
+      "head": "67e82ef7c2bfd529f36d756c2c97c466bd3952e4",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "feature/dakota-rcc-acceptance-20261008",
+      "last_fetched_remote_head": "67e82ef7c2bfd529f36d756c2c97c466bd3952e4",
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/robot",
+      "branch": "refs/heads/resume/robot-native-gates-20261009",
+      "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "resume/robot-native-gates-20261009",
+      "last_fetched_remote_head": null,
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/robot-cleanup",
+      "branch": "refs/heads/repair/robot-cleanup-ownership-20261009",
+      "head": "651a1b9777e92254ad859f32f555f5790d79a238",
+      "working_tree_changes": [
+        "M action_server/src/actions/server/_api_robots.py",
+        " M action_server/tests/action_server_tests/test_api_robots.py",
+        " M docs/skills/repository-operations.md"
+      ],
+      "remote_checkpoint_branch": "repair/robot-cleanup-ownership-20261009",
+      "last_fetched_remote_head": null,
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/tunnel",
+      "branch": "refs/heads/resume/tunnel-20261009",
+      "head": "cff801836e8adae160aef7db7bdc5189c8d2b403",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "feature/tunnel-20261008",
+      "last_fetched_remote_head": "c789123802bf83770d283cb6ca04bae7c4fbfae2",
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/workitems",
+      "branch": "refs/heads/resume/workitems-review-20261009",
+      "head": "f31d9b56afdc79b761dc190457e7cb397f116c7f",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "feature/dakota-workitems-acceptance-20261008",
+      "last_fetched_remote_head": "f31d9b56afdc79b761dc190457e7cb397f116c7f",
+      "observation": "2026-10-09T15:10:12.463914+00:00"
+    }
+  ],
+  "initial_integration_head": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
+  "integration_merges": [
+    {
+      "pr": 229,
+      "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "merge_sha": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
+      "checks": "12 SUCCESS, 1 publication SKIP",
+      "tree_identity": "merge tree equals tested PR head tree bab37cd13c1c28f6effa82c6219bc5f6ec917b1d",
+      "community_merge": false,
+      "release": false
+    }
+  ],
+  "evidence_archive": "evidence/community-20261009-resume.zip",
+  "evidence_archive_sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541",
+  "archive_manifest": [
+    {
+      "path": "evidence/resume-state.json",
+      "sha256": "858d4042b5594eee7b6a0eb09379a93b5e96f834dfdea5bd1a393b69a6b81ef2",
+      "bytes": 13763
+    },
+    {
+      "path": "evidence/resume-reconciliation.json",
+      "sha256": "2d0dba647a20362a565d2099d4f120205b93866036ac16ae390a0d7bf29595a7",
+      "bytes": 13614
+    },
+    {
+      "path": "evidence/live-issue-inventory.json",
+      "sha256": "cb9066c5100a9dcb88f5963f7fbc943a40da22b37551630edb0f6534cc01cdbf",
+      "bytes": 8755
+    },
+    {
+      "path": "evidence/tunnel-unverified-successor.patch",
+      "sha256": "3b3ebf05a5a276eaca755d9e48bee23618b5828f1d0ab9603a31dd7f9ae3eb06",
+      "bytes": 6760
+    },
+    {
+      "path": "evidence/windows-011c-diagnostics.log",
+      "sha256": "396bff40bad99a9462e5f0bff5d2061d8311a39d2a67e2d123b97c772f91d4a6",
+      "bytes": 5717
+    },
+    {
+      "path": "evidence/windows-0510-native.log",
+      "sha256": "7a73b76527fd9f88780f109df53fee1650a0f29e1a37ad4c2bdfce1aa4972eb9",
+      "bytes": 1419
+    },
+    {
+      "path": "evidence/windows-final-native-jobs.json",
+      "sha256": "c1617d7a9a34ad31ff981b90b14354eecf3f08b3d143f711165742ed7d6c4057",
+      "bytes": 19763
+    },
+    {
+      "path": "robot-evidence/focused-tests.log",
+      "sha256": "ee6033c2b87ce18ddaf0f4360c8558c741214422756be28685491b2a2a56f6ff",
+      "bytes": 3930
+    },
+    {
+      "path": "robot-evidence/portable-validation.log",
+      "sha256": "e9259c55007b89af15dbd4f184cd8c7800013a089c7239b89cda5784222fe83a",
+      "bytes": 147622
+    },
+    {
+      "path": "robot-evidence/static-final.log",
+      "sha256": "bb11ea5427dca1939e28864a938da0fe171dbc58ea5774e1ac9912df72065a3f",
+      "bytes": 5366
+    },
+    {
+      "path": "tunnel-evidence/regressions-red.log",
+      "sha256": "152b5bf3d0ed7393f667e9c5da76a2064f2f68c87da70fc0b08d9632bbd806e2",
+      "bytes": 22989
+    },
+    {
+      "path": "tunnel-evidence/regressions-green.log",
+      "sha256": "974c59d27134016a3a18c44a0ce39c4033474ec39bc43e354acdbeda065546b3",
+      "bytes": 3837
+    },
+    {
+      "path": "tunnel-evidence/final-typecheck-focused.log",
+      "sha256": "36d2b8a78f5afcc859035dfb8f90f627c3728012bff001c7fbe4a95a09a0d8c9",
+      "bytes": 4841
+    },
+    {
+      "path": "tunnel-evidence/portable-suite.log",
+      "sha256": "ed11be332d77d10331e61a4e200dbd2558ba392ad27ad8b0a8d4e0c087a75287",
+      "bytes": 151830
+    },
+    {
+      "path": "tunnel-evidence/package-lint.log",
+      "sha256": "88ec16a4fea895f07fbb26bd4cba4ced1eda648b41d6b69e733647144fa76e81",
+      "bytes": 4016
+    },
+    {
+      "path": "windows-review/handle-drain-red.log",
+      "sha256": "6f4851c9260986facb03b7cc26ce17c957da86e1b9250eeaf3ecca8f128d6fee",
+      "bytes": 7291
+    },
+    {
+      "path": "windows-review/handle-drain-adversarial-red.log",
+      "sha256": "0861b33551a173e962f9ae2af822dd4890e88e344fc30dff68e3d43dee2244fe",
+      "bytes": 22605
+    },
+    {
+      "path": "windows-review/handle-drain-final-unittest.log",
+      "sha256": "27ed31406bfd48cf3d754ae589d75e45daa9e902e34c3ab5b7fb455807d12005",
+      "bytes": 8128
+    },
+    {
+      "path": "windows-review/handle-drain-final-ruff.log",
+      "sha256": "d9d86de917efb3d67a08cc85e55aecb2d3c9a5e693ba43282ab7c1a356c67aa4",
+      "bytes": 3618
+    },
+    {
+      "path": "windows-review/native-job-successor-independent-review.md",
+      "sha256": "cf613ed5d66740260d400744c90796279fc8c9a206755aaa522d97ff9435afc0",
+      "bytes": 3547
+    },
+    {
+      "path": "windows-review/package-gates.log",
+      "sha256": "af7627ffdaae00711d2649c4b8c7c268438c2eac241e1938ed408040d413fc49",
+      "bytes": 146626
+    },
+    {
+      "path": "windows-review/static-verified.log",
+      "sha256": "5ad1cd7f4013e7b74411cc482752504a004f50607a1f537d05840b81e7ad5253",
+      "bytes": 5052
+    },
+    {
+      "path": "workitems-evidence/finalization-red.log",
+      "sha256": "3a2dffacd5af4023a40ccda5ef6bc5ffb6c4d717bc565686fb557a1ce5a5bf1b",
+      "bytes": 11395
+    },
+    {
+      "path": "workitems-evidence/finalization-green.log",
+      "sha256": "dd9a469cae581f1ce69002ecda7104a0587ccfa9ef03ab8b556f5edf7e5e78c5",
+      "bytes": 3884
+    },
+    {
+      "path": "workitems-evidence/configured-portable.log",
+      "sha256": "0724829736c2b4fb0effd5af0acc03e1c2fe343f50ab2a9ac3b70829304a52c7",
+      "bytes": 149027
+    },
+    {
+      "path": "workitems-evidence/static-final-pass.log",
+      "sha256": "62a5d901131320aebbf1d0e6e6916ee5c8e710a600f7812495c7f7853ce43c86",
+      "bytes": 4986
+    },
+    {
+      "path": "workitems-evidence/broad-suite-failures.json",
+      "sha256": "8e494d9d38109b65f7806278a07b8d0dd4e5912ec3e94073ae6198d4716cedc0",
+      "bytes": 23177
+    },
+    {
+      "path": "rcc-evidence/focused-67e82ef7.log",
+      "sha256": "1b209755022aae2510cbc8bbf8d4631bc7c9ba6bffee42539f050d6e58bc58b7",
+      "bytes": 4735
+    },
+    {
+      "path": "action_server/tests/evidence/dakota_workitems_native_acceptance_resume_20261009.json",
+      "sha256": "433fdc108aaf8e50118713e933d7ee237b5e6957f537ba4828c5f7f145ec1f3d",
+      "bytes": 5067
+    }
+  ]
+}

@@ -1,4 +1,72 @@
-# Actions Community engineering handoff — October 8, 2026
+# Actions Community engineering handoff — active October 9 checkpoint
+
+Normal engineering continues. The user's migration preparation is separate read-only
+reconnaissance, not a freeze. Do not detach/rename the repository, migrate issues,
+cancel workers, discard uncommitted work or force-merge unfinished branches.
+Only an explicit **MIGRATION FREEZE** starts controlled checkpointing: begin no new
+mutations, let in-flight work reach safe checkpoints, preserve and push recoverable
+work, then inventory every worker/worktree/branch/head and unfinished change.
+
+The [resume record](community-resume-20261009.json) contains the current worker and
+worktree inventory, exact heads, proof limits and hashed [evidence archive](evidence/community-20261009-resume.zip).
+The October 8 archive and original patch remain unchanged. All 54 contracts,
+comments and dependency relationships remain retained; none is accepted or whole-issue review-ready.
+Community remains `7c98236069171f57031218f938963238986293bd`; integration is now
+`12b387ec42ec6c5ef24d37ec04bbf338d2265e14` after the reviewed PR229 repair merged. No community merge or release occurred.
+
+- **Windows shutdown:** [PR229](https://github.com/joshyorko/actions/pull/229),
+  `a8eb7b46f536202f71484d3933d7ed70be103e5c`, now passes strict owned-handle,
+  frozen/Go-wrapper browser/storage and history gates on Linux, Windows and macOS
+  in [run37947917527](https://github.com/joshyorko/actions/actions/runs/37947917527).
+  Portable suite573 PASS/10 SKIP; script suite22 PASS/3 Windows SKIP locally;
+  lint and typecheck282 files PASS. Independent review found no additional defect.
+  All12 required successful checks and1 skipped publication resolved before integration;
+  the merge tree equals the tested head tree. Handles of processes that left accounting before capture remain outside this proof.
+- **Tunnel:** [PR225](https://github.com/joshyorko/actions/pull/225), `cff80183`,
+  restores the unverified patch and repairs inherited-writer cleanup, full-queue
+  drainage and cancellation. Focused41 PASS; portable602 PASS/10 SKIP; lint/types PASS.
+  Focused native steps pass all three platforms; their later Windows ownership
+  failure remains historical evidence, not relabeled by the separate repair.
+  Public-edge identity/authentication and SSH ownership still block whole acceptance.
+- **Robot publication:** [PR230](https://github.com/joshyorko/actions/pull/230),
+  `651a1b97`, preserves15696d85 and passes focused50 tests plus native no-replace
+  publication on all three platforms. Portable583 PASS/10 SKIP; lint/types PASS.
+  Existing cloud thread `/root/windows_shutdown_review` is now implementing the
+  next bounded #151 post-publication cleanup-ownership fix in a separate worktree.
+  Root/source/staging identity protections remain open.
+- **Work Items:** same Dakota thread `01a11d7a-e547-7423-8fc5-fc0148df2123`
+  completed [PR231](https://github.com/joshyorko/actions/pull/231), `f31d9b56`.
+  Harness703837e5 requires both passing cases and fresh hash-bound proofs; interrupted
+  or changed-artifact final checks invalidate all cases. Regressions14 PASS;
+  retained Linux frozen/Go binaries2 PASS; portable586 PASS/10 SKIP; lint/types PASS.
+  Artifact source/build labels remain caller claims; stale-reservation seeding is
+  not a process-crash test. The broad all-marker working-tree diagnostic remains
+  FAIL:24 failed/677 passed/22 skipped. Exact failure names are in the archive;
+  configured portable and native retained-artifact results do not replace that failure.
+- **RCC:** same Dakota thread `01a11d7b-4029-7953-aba7-f3b487098b32` remains active,
+  pushed67e82ef7, with uncommitted cleanup/deadline repairs retained remotely.
+  Current source/candidate-wheel Action evidence reports HTTP403/200, persisted
+  SQLite success and verified artifact/lease, but wrapper teardown remains
+  `failed/-1/child exited non-zero`. Independent review rejects detached-session
+  cleanup, unbounded pipe/wait paths, incomplete total deadline and unverified
+  Runtime reap. Focused11 PASS/1 deselected does not waive those findings.
+
+Both prior Dakota turns were confirmed completed before reusing these exact
+threads; no duplicate workers were dispatched. The user intentionally removed
+Dakota images. Retained executable/wheel bytes were inventoried separately.
+
+**Devsy stays parked:** request `apr_29be804c-94cd-4b62-9233-e91b5ec30774`, session
+`stateless`, was neither retried nor recreated. Fresh Executor thread calls do not
+prove Devsy approval validation repaired. The sensitive approval grant remains
+only in the old task's private record, unavailable here and excluded from GitHub.
+
+Continue the retained #82/#101 graph and maintain exact verification subjects.
+Wait for full candidate checks before integration admission; no checkpoint result
+establishes community or release readiness. Keep all original PR histories.
+
+---
+
+## Historical October 8 handoff (superseded state; retained evidence)
 
 ## New cloud task: resume this checkpoint
 

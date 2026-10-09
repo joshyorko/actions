@@ -21,6 +21,21 @@ Before committing an evidence archive, verify each selected receipt's bytes
 against its ledger SHA-256 and reject absolute or parent-traversal archive
 paths. Preserve running and skipped CI states separately from passing results.
 
+When resuming remote work, read the recorded thread's authoritative status and
+last completion/cleanup report before dispatching another turn. A pushed branch
+does not prove its worker stopped. Reuse the recorded thread after reconciliation;
+do not create a replacement because an older connector call failed. Device image
+cleanup and retained executables are separate inventory facts: verify artifact
+bytes directly and retain caller-supplied build claims as unverified provenance.
+Successful remote-thread calls do not validate another connector's pending
+approval flow. Preserve its original request/session and private grant record
+until that specific validation failure is resolved.
+
+A passing focused native step and a failing later process-ownership step are
+distinct evidence. Record both with the same run/job identifiers, keep skipped
+dependent browser checks as NOT_RUN, and do not infer whole-job or release
+success from the focused result.
+
 The closed observability issue #137 remains referenced by roadmap #82. Preserve
 its retained contract in final vertical verification rather than reopening it
 automatically. #149 remains a living advisory record, and closed quickstart #154
