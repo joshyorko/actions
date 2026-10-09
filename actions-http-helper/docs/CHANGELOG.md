@@ -1,9 +1,12 @@
 # Changelog
-## Unreleased — 1.0.2 candidate
+## Unreleased — 1.0.3 candidate
 
 - Honor the selected network profile’s explicit no-proxy destinations for
   urllib3 requests, while retaining proxy routing for other destinations and
   the identical configured TLS verification context.
+- Route proxy-to-direct redirects with the destination Host value unless the
+  caller supplied Host explicitly; preserve repeated HTTP header fields while
+  filtering generated Host values.
 
 
 

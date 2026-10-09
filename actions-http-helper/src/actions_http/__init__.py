@@ -20,7 +20,7 @@ _DEFAULT_LOGGER = logging.getLogger(__name__)
 
 _TYPE_BODY = typing.Union[bytes, typing.IO[typing.Any], typing.Iterable[bytes], str]
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 
 class _SSLContextFactory:
