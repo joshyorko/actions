@@ -2,16 +2,27 @@
 
 from __future__ import annotations
 
-import json
 import hashlib
+import json
 import os
 import sqlite3
-import textwrap
 import tempfile
+import textwrap
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import TypedDict
 
 import pytest
+
+
+class CaseProof(TypedDict):
+    schema_version: int
+    runtime_kind: str
+    executable_sha256: str
+    actions_core_wheel_sha256: str
+    consumer_actions: list[dict[str, str | int]]
+    api_state_readbacks: dict[str, dict[str, object]]
+
 
 PROCESSOR_ACTION = textwrap.dedent(
     """
@@ -68,7 +79,7 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _write_atomic_proof(proof_dir: Path, runtime_kind: str, proof: dict) -> Path:
+def _write_atomic_proof(proof_dir: Path, runtime_kind: str, proof: object) -> Path:
     if runtime_kind not in {"frozen", "go-wrapper"}:
         raise ValueError("unknown native Runtime kind")
     proof_path = proof_dir / f"{runtime_kind}.json"
@@ -104,16 +115,18 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
 ) -> None:
     """Exercise consumer transitions and persistence through native Runtime HTTP."""
     executable = os.environ.get(executable_variable)
-    assert executable and Path(executable).is_file(), (
-        f"Run the {runtime_kind} acceptance with its built executable selected explicitly"
-    )
+    assert (
+        executable and Path(executable).is_file()
+    ), f"Run the {runtime_kind} acceptance with its built executable selected explicitly"
     rcc_home = os.environ.get("DAKOTA_WORKITEMS_RCC_HOME")
     assert rcc_home and Path(rcc_home).is_dir(), "Use the task-owned RCC home"
     monkeypatch.setenv("ACTIONS_HOME", rcc_home)
     monkeypatch.setenv("ROBOCORP_HOME", rcc_home)
     monkeypatch.setenv("SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE", executable)
     proof_dir_value = os.environ.get("DAKOTA_WORKITEMS_PROOF_DIR")
-    assert proof_dir_value and Path(proof_dir_value).is_dir(), "Use a fresh proof directory"
+    assert (
+        proof_dir_value and Path(proof_dir_value).is_dir()
+    ), "Use a fresh proof directory"
     proof_dir = Path(proof_dir_value)
     expected_executable_hash = os.environ.get(
         f"DAKOTA_WORKITEMS_{runtime_kind.upper().replace('-', '_')}_SHA256"
@@ -127,10 +140,11 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     core_wheel_hash = _sha256(Path(core_wheel_value))
     assert core_wheel_hash == expected_core_wheel_hash
 
-    from actions.server._selftest import ActionServerClient, ActionServerProcess
     from actions.work_items import State
 
-    proof: dict[str, object] = {
+    from actions.server._selftest import ActionServerClient, ActionServerProcess
+
+    proof: CaseProof = {
         "schema_version": 1,
         "runtime_kind": runtime_kind,
         "executable_sha256": executable_hash,
@@ -279,11 +293,30 @@ dependencies:
             max_processes=1,
         )
         restarted_client = ActionServerClient(restarted)
-        assert restarted_client.get_json(f"/api/work-items/{success_id}")["state"] == State.DONE.value
-        assert restarted_client.get_json(f"/api/work-items/{failure_id}")["state"] == State.FAILED.value
-        assert restarted_client.get_json(f"/api/work-items/{recovery_id}")["state"] == State.DONE.value
-        assert restarted_client.get_json(f"/api/work-items/{success_output_id}")["parent_id"] == success_id
-        assert restarted_client.get_json(f"/api/work-items/{recovery_output_id}")["parent_id"] == recovery_id
+        assert (
+            restarted_client.get_json(f"/api/work-items/{success_id}")["state"]
+            == State.DONE.value
+        )
+        assert (
+            restarted_client.get_json(f"/api/work-items/{failure_id}")["state"]
+            == State.FAILED.value
+        )
+        assert (
+            restarted_client.get_json(f"/api/work-items/{recovery_id}")["state"]
+            == State.DONE.value
+        )
+        assert (
+            restarted_client.get_json(f"/api/work-items/{success_output_id}")[
+                "parent_id"
+            ]
+            == success_id
+        )
+        assert (
+            restarted_client.get_json(f"/api/work-items/{recovery_output_id}")[
+                "parent_id"
+            ]
+            == recovery_id
+        )
         assert restarted_client.get_json("/api/work-items/stats") == stats
         proof["api_state_readbacks"]["after_restart"] = {
             "success_state": State.DONE.value,

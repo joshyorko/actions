@@ -24,9 +24,7 @@ CASE_ENV = {
     "frozen": "DAKOTA_WORKITEMS_FROZEN_EXECUTABLE",
     "go-wrapper": "DAKOTA_WORKITEMS_GO_WRAPPER_EXECUTABLE",
 }
-CASE_SUFFIX = {
-    kind: f"[{kind}-{variable}]" for kind, variable in CASE_ENV.items()
-}
+CASE_SUFFIX = {kind: f"[{kind}-{variable}]" for kind, variable in CASE_ENV.items()}
 CONSUMER_ACTIONS = [
     {"scenario": "success", "http_status": 200},
     {"scenario": "failure", "http_status": 500},
@@ -124,7 +122,9 @@ def validate_pytest_reports(
 @contextmanager
 def fresh_proof_workspace(parent: Path) -> Iterator[Path]:
     """Create an empty, invocation-unique directory that cannot reuse stale proofs."""
-    with tempfile.TemporaryDirectory(prefix="dakota-workitems-proof-", dir=parent) as path:
+    with tempfile.TemporaryDirectory(
+        prefix="dakota-workitems-proof-", dir=parent
+    ) as path:
         yield Path(path)
 
 
@@ -160,7 +160,9 @@ def validate_case_proofs(
     entries = list(proof_dir.iterdir())
     if any(not entry.is_file() for entry in entries):
         raise AcceptanceFailure("proof_directory_entry_invalid")
-    if {entry.name for entry in entries} != expected_names or len(entries) != len(expected_names):
+    if {entry.name for entry in entries} != expected_names or len(entries) != len(
+        expected_names
+    ):
         raise AcceptanceFailure("proof_file_set_incomplete_or_duplicate")
     if set(executable_hashes) != set(CASE_ENV):
         raise AcceptanceFailure("executable_hash_set_incomplete")
@@ -169,7 +171,9 @@ def validate_case_proofs(
     for kind in CASE_ENV:
         proof_path = proof_dir / f"{kind}.json"
         try:
-            proof = _validate_proof_shape(json.loads(proof_path.read_text(encoding="utf-8")), kind)
+            proof = _validate_proof_shape(
+                json.loads(proof_path.read_text(encoding="utf-8")), kind
+            )
         except (OSError, json.JSONDecodeError) as error:
             raise AcceptanceFailure(f"proof_unreadable_{kind}") from error
         if proof["executable_sha256"] != executable_hashes[kind]:
@@ -253,7 +257,10 @@ def main() -> int:
     parser.add_argument("--source-sha", required=True)
     parser.add_argument("--build-version", required=True)
     parser.add_argument(
-        "--rcc-home", type=Path, required=True, help="Task-owned RCC home/cache directory."
+        "--rcc-home",
+        type=Path,
+        required=True,
+        help="Task-owned RCC home/cache directory.",
     )
     parser.add_argument("--receipt", type=Path, required=True)
     args = parser.parse_args()
@@ -270,14 +277,20 @@ def main() -> int:
         wheel_hash = sha256(core_wheel)
         receipt["actions_core_wheel_sha256"] = wheel_hash
 
-        executables = {kind: Path(getattr(args, kind.replace("-", "_"))) for kind in CASE_ENV}
+        executables = {
+            kind: Path(getattr(args, kind.replace("-", "_"))) for kind in CASE_ENV
+        }
         executable_hashes: dict[str, str] = {}
         for kind, executable in executables.items():
             if not executable.is_file():
                 raise AcceptanceFailure(f"{kind}_executable_missing")
             executable_hashes[kind] = sha256(executable)
             receipt["cases"].append(
-                {"kind": kind, "executable_sha256": executable_hashes[kind], "status": "READY"}
+                {
+                    "kind": kind,
+                    "executable_sha256": executable_hashes[kind],
+                    "status": "READY",
+                }
             )
 
         args.receipt.parent.mkdir(parents=True, exist_ok=True)
@@ -291,7 +304,9 @@ def main() -> int:
         for kind, executable in executables.items():
             env_suffix = kind.upper().replace("-", "_")
             os.environ[CASE_ENV[kind]] = str(executable.resolve())
-            os.environ[f"DAKOTA_WORKITEMS_{env_suffix}_SHA256"] = executable_hashes[kind]
+            os.environ[f"DAKOTA_WORKITEMS_{env_suffix}_SHA256"] = executable_hashes[
+                kind
+            ]
 
         import pytest
 
@@ -302,6 +317,13 @@ def main() -> int:
                 ["-q", "-m", "integration_test", str(TEST)],
                 plugins=[collector],
             )
+            for kind, executable in executables.items():
+                if sha256(executable) != executable_hashes[kind]:
+                    raise AcceptanceFailure(
+                        f"executable_changed_during_acceptance_{kind}"
+                    )
+            if sha256(core_wheel) != wheel_hash:
+                raise AcceptanceFailure("core_wheel_changed_during_acceptance")
             finalize_success(
                 receipt,
                 int(result),
@@ -311,11 +333,6 @@ def main() -> int:
                 wheel_hash,
             )
 
-        for kind, executable in executables.items():
-            if sha256(executable) != executable_hashes[kind]:
-                raise AcceptanceFailure(f"executable_changed_during_acceptance_{kind}")
-        if sha256(core_wheel) != wheel_hash:
-            raise AcceptanceFailure("core_wheel_changed_during_acceptance")
         return_code = 0
     except AcceptanceFailure as error:
         receipt["status"] = "FAIL"
@@ -324,14 +341,13 @@ def main() -> int:
         receipt["status"] = "FAIL"
         receipt["failed_phase"] = f"runner_exception_{type(error).__name__}"
     finally:
-        if receipt["status"] != "PASS":
+        if return_code != 0:
             receipt["status"] = "FAIL"
             receipt.pop("pytest_output", None)
             for case in receipt["cases"]:
                 case.pop("consumer_actions", None)
                 case.pop("api_state_readbacks", None)
-                if case["status"] == "READY":
-                    case["status"] = "NOT_VERIFIED"
+                case["status"] = "NOT_VERIFIED"
         _write_receipt(args.receipt, receipt)
 
     return return_code
