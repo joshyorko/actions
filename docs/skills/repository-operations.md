@@ -1408,14 +1408,29 @@ only two workers, so do not report it as a process-count cap.
 For explicit RCC v2 provider mode, Runtime imports snapshot the filtered action
 package under the service datadir and store the snapshot path in the committed
 `ActionPackage`; RCC environment resolution continues to use the original
-`package.yaml`. A failed metadata import removes only its uncommitted candidate
-snapshot, preserves the previous ActionPackage/source generation, and reports a
-reload failure to the watcher so it can observe a later repair. Existing
-process-pool generations keep their source directories during hot reload; old
-snapshots are pruned on successful startup, not while calls may still be using
-them. Long-lived servers with repeated successful source reloads can therefore
-retain multiple snapshots until restart. File symlinks must resolve inside the
-package; directory symlinks are rejected by the snapshot boundary.
+absolute `package.yaml` path so relative package inputs keep their original
+base. The selected snapshot's YAML bytes are checked against that original
+input before and after RCC preparation and again before importing actions. A
+changed candidate fails before replacing the last-good ActionPackage. These
+checks do not lock the package file against edits while RCC is reading it.
+Snapshot identity binds each included file's relative path, supported
+permission mode bits, and bytes; copied and already-existing destinations are
+verified against that identity. This preserves executable-bit changes on the
+Linux snapshot path; it does not establish Windows ACL behavior. A failed
+metadata import removes only its uncommitted candidate snapshot, preserves the
+previous ActionPackage/source generation, and reports a reload failure to the
+watcher so it can observe a later repair. Existing process-pool generations
+keep their source directories during hot reload; old snapshots are pruned on
+successful startup, not while calls may still be using them. Long-lived servers
+with repeated successful source reloads can therefore retain multiple
+snapshots until restart. File symlinks must resolve inside the package;
+directory symlinks are rejected by the snapshot boundary.
+
+`test_rcc_runtime_source_snapshots.py` covers changed-original-YAML rejection
+with a relative package path and chmod-only snapshot identity changes. These
+focused tests establish the handler boundary; they do not replace the separate
+current-source RCC reload, installed-wheel, frozen, Windows ACL, or descendant
+cleanup gates.
 
 The Linux RCC lifecycle regression
 `test_current_candidate_failed_reload_keeps_last_good_action_usable` proves

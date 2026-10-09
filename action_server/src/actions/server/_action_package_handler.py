@@ -1,6 +1,7 @@
 import hashlib
 import logging
 import shutil
+import stat
 import uuid
 from pathlib import Path
 
@@ -110,6 +111,7 @@ class ActionPackageHandler:
         self._import_path = import_path
         self._package_yaml_contents = package_yaml_contents
         self._pythonpath_entries: tuple[str, ...] | None = None
+        self._runtime_source_snapshot_yaml: bytes | None = None
 
     @property
     def package_yaml_contents(self) -> dict | None:
@@ -203,8 +205,10 @@ class ActionPackageHandler:
             for path, relative in source_files(root):
                 relative_bytes = relative.encode("utf-8")
                 payload = path.read_bytes()
+                mode = stat.S_IMODE(path.stat().st_mode)
                 digest.update(len(relative_bytes).to_bytes(8, "big"))
                 digest.update(relative_bytes)
+                digest.update(mode.to_bytes(4, "big"))
                 digest.update(len(payload).to_bytes(8, "big"))
                 digest.update(payload)
             return digest.hexdigest()
@@ -258,10 +262,10 @@ class ActionPackageHandler:
         """Point metadata collection and the persisted ActionPackage at a snapshot."""
         import yaml
 
+        snapshot_package_yaml = snapshot / "package.yaml"
         try:
-            snapshot_yaml = yaml.safe_load(
-                (snapshot / "package.yaml").read_text(encoding="utf-8")
-            )
+            snapshot_yaml_bytes = snapshot_package_yaml.read_bytes()
+            snapshot_yaml = yaml.safe_load(snapshot_yaml_bytes.decode("utf-8"))
         except (OSError, yaml.YAMLError) as exc:
             from actions.server._errors_action_server import ActionServerValidationError
 
@@ -274,9 +278,27 @@ class ActionPackageHandler:
             raise ActionServerValidationError(
                 "package.yaml changed while creating the RCC source snapshot"
             )
+        self._runtime_source_snapshot_yaml = snapshot_yaml_bytes
         self._action_package_dir = str(snapshot)
         self._import_path = snapshot
         self._pythonpath_entries = None
+
+    def validate_runtime_source_environment(self) -> None:
+        """Reject a candidate if RCC's original environment input has changed."""
+        if self._runtime_source_snapshot_yaml is None:
+            return
+        from actions.server._errors_action_server import ActionServerValidationError
+
+        try:
+            current_yaml = self._original_package_yaml.read_bytes()
+        except OSError as exc:
+            raise ActionServerValidationError(
+                "RCC source package.yaml is no longer available"
+            ) from exc
+        if current_yaml != self._runtime_source_snapshot_yaml:
+            raise ActionServerValidationError(
+                "package.yaml changed after the RCC source snapshot was selected"
+            )
 
     def discard_runtime_source_snapshot(self, snapshot: Path) -> None:
         """Remove a newly created candidate after its import transaction fails."""
@@ -422,6 +444,7 @@ class ActionPackageHandler:
                         "configuration",
                         "ACTIONS_RUNTIME_RCC_PROVIDER must explicitly select a provider",
                     )
+                self.validate_runtime_source_environment()
                 descriptor = prepare_runtime(
                     self._original_package_yaml,
                     get_rcc_location(),
@@ -430,6 +453,7 @@ class ActionPackageHandler:
                     trust_carrier=trust_carrier,
                     previous_descriptor=previous_descriptor,
                 )
+                self.validate_runtime_source_environment()
                 condahash = descriptor.artifact_digest
                 use_env = descriptor.to_dict()
             else:

@@ -248,6 +248,10 @@ def import_action_package(
             )
 
     try:
+        if source_snapshot_path is not None:
+            # Environment preparation and Action discovery can take long enough
+            # for a package edit to arrive; do not commit mixed generations.
+            source_snapshot_owner.validate_runtime_source_environment()
         _add_actions_to_db(
             datadir,
             env,
