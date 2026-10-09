@@ -1,4 +1,5 @@
 import asyncio
+import errno
 import ipaddress
 import logging
 import os
@@ -391,6 +392,49 @@ def _sanitized_robot_name(value: Optional[str]) -> str:
     return name[:128]
 
 
+def _remove_owned_robot_staging(
+    staging_root: Path,
+    staging_root_identity: Optional[tuple[int, int]],
+    staging_package: Path,
+    staging_package_identity: Optional[tuple[int, int]],
+) -> None:
+    """Remove only staging paths whose directory identities are still ours."""
+    if staging_root_identity is None:
+        return
+
+    try:
+        root_stat = staging_root.lstat()
+    except FileNotFoundError:
+        return
+    if (
+        stat.S_ISLNK(root_stat.st_mode)
+        or not stat.S_ISDIR(root_stat.st_mode)
+        or (root_stat.st_dev, root_stat.st_ino) != staging_root_identity
+    ):
+        return
+
+    if staging_package_identity is not None:
+        try:
+            package_stat = staging_package.lstat()
+        except FileNotFoundError:
+            package_stat = None
+        if (
+            package_stat is not None
+            and not stat.S_ISLNK(package_stat.st_mode)
+            and stat.S_ISDIR(package_stat.st_mode)
+            and (package_stat.st_dev, package_stat.st_ino) == staging_package_identity
+        ):
+            shutil.rmtree(staging_package)
+
+    # rmdir deliberately refuses to remove a container if another entry has
+    # appeared after its package child was published or cleaned up.
+    try:
+        staging_root.rmdir()
+    except OSError as exc:
+        if exc.errno not in {errno.EEXIST, errno.ENOTEMPTY, errno.ENOENT}:
+            raise
+
+
 def _publish_robot_package(
     package_dir: Path, robot_name: Optional[str], extracted_name: Optional[str]
 ) -> tuple[str, Path]:
@@ -408,33 +452,41 @@ def _publish_robot_package(
             if os.path.lexists(target_dir):
                 continue
 
-        temporary_target = robots_root / f".{final_name}.staging-{uuid.uuid4().hex}"
-        staging_created = False
+        staging_root = robots_root / f".{final_name}.staging-{uuid.uuid4().hex}"
+        staging_package = staging_root / "package"
+        staging_root_identity: Optional[tuple[int, int]] = None
+        staging_package_identity: Optional[tuple[int, int]] = None
         try:
-            # A colliding entry is not ours to copy into or clean up. Establish
-            # ownership before copytree, including when copying later fails.
-            temporary_target.mkdir(mode=0o700)
-            staging_created = True
+            # Keep the copy in a private parent: copytree applies the source
+            # directory's mode to its destination with copystat.
+            staging_root.mkdir(mode=0o700)
+            staging_stat = staging_root.lstat()
+            staging_root_identity = (staging_stat.st_dev, staging_stat.st_ino)
+
+            staging_package.mkdir(mode=0o700)
+            package_stat = staging_package.lstat()
+            staging_package_identity = (package_stat.st_dev, package_stat.st_ino)
             shutil.copytree(
-                package_dir, temporary_target, symlinks=True, dirs_exist_ok=True
+                package_dir, staging_package, symlinks=True, dirs_exist_ok=True
             )
-            _validate_staged_tree(temporary_target)
+            _validate_staged_tree(staging_package)
             if os.path.lexists(target_dir):
                 raise FileExistsError(target_dir)
-            rename_directory_no_replace(temporary_target, target_dir)
-            # The rename transferred our directory to its final name. Any entry
-            # recreated at the old staging path belongs to another writer.
-            staging_created = False
+            rename_directory_no_replace(staging_package, target_dir)
+            # The package directory moved. Cleanup may remove only the now-empty
+            # container with its original identity; rmdir preserves later entries.
+            staging_package_identity = None
             return final_name, target_dir
         except FileExistsError:
             if not os.path.lexists(target_dir):
                 raise
         finally:
-            if staging_created and os.path.lexists(temporary_target):
-                if temporary_target.is_dir() and not temporary_target.is_symlink():
-                    shutil.rmtree(temporary_target)
-                else:
-                    temporary_target.unlink()
+            _remove_owned_robot_staging(
+                staging_root,
+                staging_root_identity,
+                staging_package,
+                staging_package_identity,
+            )
 
     raise _RobotImportLimitError("Unable to allocate a safe robot publication path")
 
