@@ -806,6 +806,136 @@ def test_robot_publication_does_not_clean_unowned_initial_staging_collision(
     ).read_text() == "synthetic foreign staging entry"
 
 
+def test_robot_publication_keeps_copytree_metadata_inside_private_container(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "robot.yaml").write_text("tasks: {}")
+    (package / "task.py").write_text("print('ok')\n")
+    package.chmod(0o755)
+    source_mode = stat.S_IMODE(package.stat().st_mode)
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    copytree = shutil.copytree
+    copy2 = shutil.copy2
+    observed_modes: list[tuple[int, int]] = []
+    during_copy_modes: list[int] = []
+
+    def inspect_copytree(source, destination, *args, **kwargs):
+        destination = Path(destination)
+        container = destination.parent
+        assert container.parent == robots
+        assert ".staging-" in container.name
+        observed_modes.append((stat.S_IMODE(container.stat().st_mode), -1))
+
+        def inspect_copy(source_file, destination_file, *, follow_symlinks=True):
+            copied = copy2(
+                source_file,
+                destination_file,
+                follow_symlinks=follow_symlinks,
+            )
+            during_copy_modes.append(stat.S_IMODE(container.stat().st_mode))
+            return copied
+
+        kwargs["copy_function"] = inspect_copy
+        result = copytree(source, destination, *args, **kwargs)
+        observed_modes[-1] = (
+            observed_modes[-1][0],
+            stat.S_IMODE(container.stat().st_mode),
+        )
+        if os.name != "nt":
+            assert stat.S_IMODE(destination.stat().st_mode) == source_mode
+        return result
+
+    monkeypatch.setattr(_api_robots.shutil, "copytree", inspect_copytree)
+    name, destination = _api_robots._publish_robot_package(package, "synthetic", None)
+
+    assert name == "synthetic"
+    assert destination == robots / name
+    assert observed_modes[0][0] == observed_modes[0][1]
+    assert during_copy_modes == [observed_modes[0][0], observed_modes[0][0]]
+    if os.name != "nt":
+        assert observed_modes == [(0o700, 0o700)]
+        assert stat.S_IMODE(destination.stat().st_mode) == source_mode
+    assert sorted(path.name for path in robots.iterdir()) == [name]
+
+
+def test_robot_publication_removes_private_container_after_copy_failure(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "robot.yaml").write_text("tasks: {}")
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    containers: list[Path] = []
+
+    def partial_copy_then_fail(source, destination, *args, **kwargs):
+        destination = Path(destination)
+        containers.append(destination.parent)
+        (destination / "partial.txt").write_text("incomplete package")
+        raise OSError("synthetic interrupted copy")
+
+    monkeypatch.setattr(_api_robots.shutil, "copytree", partial_copy_then_fail)
+    with pytest.raises(OSError, match="synthetic interrupted copy"):
+        _api_robots._publish_robot_package(package, "synthetic", None)
+
+    assert len(containers) == 1
+    assert containers[0].parent == robots
+    assert not containers[0].exists()
+    assert list(robots.iterdir()) == []
+
+
+def test_robot_publication_preserves_replaced_package_after_copy_failure(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "robot.yaml").write_text("tasks: {}")
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    replacements: list[tuple[Path, tuple[int, int], tuple[int, int], Path]] = []
+
+    def replace_package_then_fail(source, destination, *args, **kwargs):
+        destination = Path(destination)
+        previous_stat = destination.lstat()
+        previous_identity = (previous_stat.st_dev, previous_stat.st_ino)
+        displaced = destination.with_name("displaced-package")
+        destination.rename(displaced)
+        destination.mkdir()
+        replacement_stat = destination.lstat()
+        replacement_identity = (replacement_stat.st_dev, replacement_stat.st_ino)
+        sentinel = destination / "foreign.txt"
+        sentinel.write_text("replacement payload must survive cleanup")
+        replacements.append(
+            (destination, previous_identity, replacement_identity, sentinel)
+        )
+        raise OSError("synthetic interrupted copy")
+
+    monkeypatch.setattr(_api_robots.shutil, "copytree", replace_package_then_fail)
+    with pytest.raises(OSError, match="synthetic interrupted copy"):
+        _api_robots._publish_robot_package(package, "synthetic", None)
+
+    assert len(replacements) == 1
+    destination, previous_identity, replacement_identity, sentinel = replacements[0]
+    assert previous_identity != replacement_identity
+    assert destination.exists()
+    assert sentinel.read_text() == "replacement payload must survive cleanup"
+    assert (destination.parent / "displaced-package").exists()
+    assert destination.parent.exists()
+    assert list(robots.iterdir()) == [destination.parent]
+
+
 def test_robot_publication_preserves_destination_created_after_last_precheck(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -844,7 +974,7 @@ def test_robot_publication_preserves_destination_created_after_last_precheck(
     assert sorted(path.name for path in robots.iterdir()) == sorted([name, "synthetic"])
 
 
-@pytest.mark.parametrize("entry_kind", ["directory", "file"])
+@pytest.mark.parametrize("entry_kind", ["directory", "file", "container"])
 def test_robot_publication_relinquishes_cleanup_of_published_staging_name(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path, entry_kind: str
 ) -> None:
@@ -859,12 +989,25 @@ def test_robot_publication_relinquishes_cleanup_of_published_staging_name(
     monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
     rename = _directory_publication.rename_directory_no_replace
     foreign_entries: list[tuple[Path, int, Path]] = []
+    container_replacements: list[tuple[tuple[int, int], tuple[int, int]]] = []
 
     def publish_then_recreate_source(source: Path, destination: Path) -> None:
         # Another writer can reuse the old name once the real native rename
         # transfers our complete staging directory to the final destination.
         rename(source, destination)
-        if entry_kind == "directory":
+        if entry_kind == "container":
+            staging_root = source.parent
+            original_stat = staging_root.lstat()
+            original_identity = (original_stat.st_dev, original_stat.st_ino)
+            staging_root.rename(tmp_path / "displaced-staging-container")
+            staging_root.mkdir()
+            replacement_stat = staging_root.lstat()
+            container_replacements.append(
+                (original_identity, (replacement_stat.st_dev, replacement_stat.st_ino))
+            )
+            source = source.parent
+            sentinel = source / "foreign.txt"
+        elif entry_kind == "directory":
             source.mkdir()
             sentinel = source / "foreign.txt"
         else:
@@ -890,4 +1033,8 @@ def test_robot_publication_relinquishes_cleanup_of_published_staging_name(
     assert foreign.exists(), "Publication cleanup deleted a new owner's entry"
     assert foreign.stat().st_ino == identity
     assert sentinel.read_text() == "foreign entry created after publication"
-    assert set(robots.iterdir()) == {destination, foreign}
+    container = foreign if entry_kind == "container" else foreign.parent
+    assert set(robots.iterdir()) == {destination, container}
+    if entry_kind == "container":
+        assert len(container_replacements) == 1
+        assert container_replacements[0][0] != container_replacements[0][1]

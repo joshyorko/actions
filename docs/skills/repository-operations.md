@@ -1266,34 +1266,43 @@ extracting anything, on every OS. Generic casefold/path confinement alone does n
 prove portable destination safety. Keep actual native filesystem, no-follow races,
 and TLS/redirect evidence separate from source and instrumented transport tests.
 
-Allocate Robot publication staging exclusively before copying, and record ownership
-only after allocation succeeds. An initial name collision is not permission to
-delete the existing entry. The regression seeds a foreign sentinel at the allocation
-boundary and proves it survives; interrupted copies still clean their owned staging.
-After successful native no-replace publication, relinquish cleanup authority for the
-old staging pathname before entering final cleanup. Another writer can immediately
-reuse that name; success-path cleanup must preserve the new entry's identity and
-content. The regression performs the real rename, recreates the old name as a
-directory or file with a foreign sentinel, and verifies both complete publication
-and preservation of the replacement. This covers the ownership transfer after
-publication, not replacement of the root, source or staging entry before publication.
-This initial ownership flag does not establish identity after another actor replaces
-the entry. Robot directory publication uses native no-replace rename: Linux
-`renameat2(RENAME_NOREPLACE)`, macOS `renameatx_np(RENAME_EXCL)`, and Windows
-`os.rename` without replacement. Unsupported platforms, missing native symbols,
-unsupported filesystems and cross-device moves fail without a copying or replacing
-fallback. The unauthenticated build matrix runs the Robot API and directory
+Create a Robot publication container with requested mode `0700` exclusively before
+copying, then record its device/inode identity. Precreate the package child and
+record its identity too. `shutil.copytree(..., dirs_exist_ok=True)` applies
+source-directory metadata to that child, so its mode may widen; on POSIX the parent
+container remains owner-only during and after the copy and through validation. An
+initial container name collision is not permission to delete the existing entry.
+Regressions inspect the container mode during each copied file and after
+`copytree`, and prove partial copy failures remove only owned staging. Python mode
+bits do not establish Windows ACL isolation; native Windows access-control behavior
+remains unverified.
+
+After successful native no-replace publication of the package child, relinquish
+cleanup authority for that old child pathname. Remove the now-empty container only
+when its recorded identity still matches, using `rmdir` so a later child occupant
+prevents deletion. Regressions perform the real rename, recreate the child as a file
+or directory, or replace the container, then verify complete publication and
+preservation of the later entry. Identity checks and cleanup still use pathnames;
+they do not close races against a concurrent replacement of the publication parent.
+This slice does not prove root or source capability identity. Robot directory
+publication uses native no-replace rename: Linux `renameat2(RENAME_NOREPLACE)`,
+macOS `renameatx_np(RENAME_EXCL)`, and Windows `os.rename` without replacement.
+Unsupported platforms, missing native symbols, unsupported filesystems and
+cross-device moves fail without a copying or replacing fallback. The unauthenticated
+build matrix runs the Robot API and directory
 publication tests on Linux, Windows and macOS before building the binaries.
 Record each platform's result; workflow wiring alone does not establish a pass.
 Run the package's complete lint and typecheck commands alongside these focused
 tests. A green Robot selection does not cover formatter/import checks in other
 test modules or annotations inside a callback that mutates a captured collection.
-These checks cover complete-directory publication and preservation of existing
-destinations. They do not prove root/source identity or permission admission.
-Retain trusted-parent, protected staging and cleanup identity gaps until their
-own native filesystem proofs pass. The reproduced replacement races require authority to
-mutate the publication namespace; no archive-only remote exploit was demonstrated,
-and this boundary does not promise a sandbox against arbitrary Runtime-UID compromise.
+These checks cover complete-directory publication, existing-destination
+preservation, and the POSIX private-parent staging mode. They do not prove
+root/source identity, Windows ACL isolation, or race-free path-based staging cleanup
+against concurrent namespace replacement. Retain trusted-parent/root-source
+capability, Windows ACL and staging-cleanup gaps until their native filesystem
+proofs pass. The reproduced replacement races require authority to mutate the
+publication namespace; no archive-only remote exploit was demonstrated, and this
+boundary does not promise a sandbox against arbitrary Runtime-UID compromise.
 
 ### Complete frontend tests versus shipping quality checks
 
