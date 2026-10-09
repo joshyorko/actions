@@ -1280,6 +1280,13 @@ def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     if args.mode != "candidate-wheel":
         raise AssertionError("unreachable unsupported mode")
+    if not args._worker and args.receipt.expanduser().resolve().exists():
+        print(
+            "Dakota RCC acceptance failed: refusing to overwrite an existing "
+            "acceptance receipt",
+            file=sys.stderr,
+        )
+        return 1
     if not args._worker:
         try:
             source_env = dict(os.environ)

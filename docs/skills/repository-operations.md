@@ -1159,6 +1159,11 @@ Graceful retirement requires bounded worker shutdown and wrapper completion;
 forced cancellation and descendant drain require separate evidence. Neither
 result establishes full #134 acceptance.
 
+The outer Dakota CLI refuses an existing receipt path before resolving toolchain
+environment keys or creating CLI supervisor state. The worker retains its
+`O_EXCL` receipt creation check to close the later race; rejected reruns preserve
+the existing receipt byte-for-byte and must use a fresh path for a new attempt.
+
 The Dakota candidate-wheel harness records separate unauthenticated rejection,
 authenticated Action, SQLite, artifact verification, wrapper exit and process
 cleanup cells. Every cell must pass for overall acceptance. Preserve the exact

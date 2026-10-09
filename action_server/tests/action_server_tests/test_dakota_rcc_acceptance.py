@@ -40,6 +40,32 @@ def test_dakota_acceptance_harness_describes_candidate_wheel_proof():
     assert "RCC Environment Artifact" in result.stdout
 
 
+def test_cli_rejects_existing_receipt_before_creating_supervisor_state(tmp_path):
+    receipt_path = tmp_path / "previous-pass.json"
+    original = b'{"acceptance_status":"PASS","source_sha":"historical"}\n'
+    receipt_path.write_bytes(original)
+    env = {
+        "PATH": os.environ.get("PATH", os.defpath),
+        "ACTIONS_RUNTIME_RCC_BINARY": str(tmp_path / "unused-rcc"),
+        "ACTIONS_ACCEPTANCE_POETRY": str(tmp_path / "unused-poetry"),
+        "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": str(tmp_path / "unused-rcc-home"),
+    }
+
+    result = subprocess.run(
+        [sys.executable, str(SCRIPT), "--receipt", str(receipt_path)],
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=5,
+        env=env,
+    )
+
+    assert result.returncode != 0
+    assert "existing acceptance receipt" in result.stderr
+    assert receipt_path.read_bytes() == original
+    assert not (tmp_path / "cli-supervisor").exists()
+
+
 def test_historical_candidate_receipt_keeps_failed_wrapper_cell():
     receipt = json.loads(HISTORICAL_RECEIPT.read_text(encoding="utf-8"))
 
