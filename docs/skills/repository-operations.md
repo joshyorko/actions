@@ -655,7 +655,7 @@ Prefer evidence in this order:
 4. Historical commits/design notes, labeled as intent rather than delivered behavior.
 5. External upstream documentation pinned to the inspected version.
 
-Do not convert a commit message, design proposal, or skipped test into a current-behavior claim.
+Do not convert a commit message, design proposal, or skipped test into a current-behavior claim. Before interrupting a long RCC or pytest command, verify the PID, full command, working directory, ancestry, and owning task receipt. Timing or a shared process group alone does not establish ownership; leave ambiguous shared processes to the integration owner.
 
 ## Clean-break package boundaries
 
@@ -1477,9 +1477,19 @@ upgrade migrations and fresh SQLite/PostgreSQL bootstrap paths. SQLite must decl
 forward cyclic pointer references when creating tables; PostgreSQL can add the
 pointer constraints after both tables exist. Inspect the final child/parent column
 tuples and their order on each backend rather than inferring parity from successful
-writes. The Deployment draft's scratch SQLite probe demonstrates representative
-foreign-key and replay constraints only: it does not prove authorization, committed
-pointer invariants, triggers, CAS, production migration recovery or PostgreSQL.
+writes. `test_deployment_schema_probe.py` builds a synthetic fixture from the
+proposed #129 FK tuple matrix, compares SQLite `PRAGMA foreign_key_list` tuples,
+and exercises owner-to-revision pointer publication plus cross-Deployment ancestry,
+request-parent, and join-row rejection. It is a design probe, not application DDL:
+it does not prove authorization, committed pointer invariants, triggers, CAS,
+production migration recovery or PostgreSQL application behavior. Its PostgreSQL
+counterpart passed against an isolated schema on the root-owned loopback
+`postgres:17-alpine` service pinned to digest
+`sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3`.
+It added the four current-pointer constraints after creating revision tables and
+verified its exact temporary schema was dropped. A skip without
+`ACTIONS_TEST_DATABASE_URL` remains NOT_RUN. The older draft scratch probe remains
+narrower and must not be cited as proof of the full tuple matrix.
 
 Template README files ship verbatim in the embedded project archives because the
 bundle builder includes every source file. After changing active template guidance,
