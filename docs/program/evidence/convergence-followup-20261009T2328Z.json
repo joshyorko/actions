@@ -1,0 +1,247 @@
+{
+  "observed_at_utc": "2026-10-09T23:28:16Z",
+  "scope": "Current convergence successor after PR220 and PR270 target merges; includes exact 23:28 PR221/256 check status and newly reviewed source blockers. Prior receipts remain unchanged.",
+  "branch_readback": {
+    "community": {
+      "branch": "community",
+      "head": "d2741a18976f75467355282ad3caa5b99b4c505e",
+      "tree": "5779fc5d634ac6e804fea4bce76e25d45cf56c67"
+    },
+    "integration": {
+      "branch": "integration/community-release-20261008",
+      "head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+      "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012"
+    },
+    "runtime_candidate": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    },
+    "source": "git ls-remote, exact merge readbacks and fetched commit trees"
+  },
+  "cohort": {
+    "items": 20,
+    "target_integrated": 13,
+    "blocked_open": 7,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      251,
+      266,
+      257,
+      259,
+      262,
+      268,
+      264,
+      263,
+      267,
+      269,
+      265,
+      220,
+      270
+    ]
+  },
+  "target_merges": [
+    {
+      "pr": 220,
+      "merge": "d2741a18976f75467355282ad3caa5b99b4c505e",
+      "target": "community",
+      "scope": "governance/ledger checkpoint only; no issue acceptance"
+    },
+    {
+      "pr": 270,
+      "source_head": "5efcfebf1c572808a441e2360d1c1e68a77020a9",
+      "merge": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+      "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012",
+      "target": "integration/community-release-20261008",
+      "scope": "scoped metadata lint/docs repair; no publication or issue acceptance"
+    }
+  ],
+  "pr270_admission": {
+    "preflight_receipt": "evidence/pr270-admission-preflight-20261009.json",
+    "preflight_sha256": "da59abbaf64334bd89906df18c038b592fb17cddaa12a88ed39b7cd6544270f5",
+    "readback_receipt": "evidence/pr270-admission-readback-20261009.json",
+    "readback_sha256": "73d4668740b3c004d22937c8f3f55b3130c191279c37bd9fcf7dd65d88cc708a",
+    "review": "Root accepts exact doc-only delta from reviewed 735e56fa; exact CI source association confirms tested merge tree.",
+    "limits": "13 hosted checks successful at source head; publish steps skipped/no publication. PR221 still requires full three-OS Python 3.10 Core matrix."
+  },
+  "current_open_blocked_prs": [
+    {
+      "number": 256,
+      "title": "test(runtime): exercise packaged Work Items consumers on every native platform",
+      "url": "https://github.com/joshyorko/actions/pull/256",
+      "isDraft": true,
+      "headRefName": "devsy/workitems-consumer-acceptance-20261009",
+      "headRefOid": "a1904783c0ec1950beab59d5fb7c9d76fb90a1e8",
+      "baseRefName": "integration/community-release-20261008",
+      "owner": "Devsy Work Items author/native supervisor",
+      "status": "Open/blocked; exact-head native run 38003443132 fails on Linux and Windows before the scoped browser scenario; macOS passes but skips both scoped UI steps.",
+      "next_action": "Preserve the build manifest. Capture sanitized pre/post path inventories around the operations before acceptance and identify the path/mode/content discrepancy before changing the digest boundary. Correct stop() to propagate cleanup failure and wait for survivors; keep source, native and actual-survivor evidence distinct. Independent review remains blocked.",
+      "current_gate": "Linux job 114066685828 and Windows job 114066685514 fail at frozen package-tree digest preflight (`frozen_package_tree_sha256` mismatch) before the scoped browser scenario; macOS job 114066685889 passes but skips frozen and Go Work Items UI checks. Read-only reviewer additionally blocks harness `stop()` at line562 because it can suppress errors/return without waiting for survivors; source counterexample found, no live-survivor failure reproduced. Both findings are assigned to the existing Work Items owner.",
+      "check_snapshot_note": "Exact head/base and unchanged owner/gate/dependency detail are retained from the 22:58 receipt; check results are historical except where this row explicitly gives a 23:26 readback."
+    },
+    {
+      "number": 221,
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "url": "https://github.com/joshyorko/actions/pull/221",
+      "isDraft": true,
+      "headRefName": "integration/community-release-20261008",
+      "headRefOid": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+      "baseRefName": "community",
+      "owner": "Root integration; A owns the Core formatter repair",
+      "status": "Open/blocked at exact head 4e8f8f1e. The 23:28 readback had 3 failures, 9 in progress, 16 successes and 1 skipped. Run 38004253328 identifies those three failures as Ruff format checks; separate three-OS test/docs/type checks passed. Other integration gates remain open, including PR256 native packaged-consumer proof and RCC trust/runtime acceptance.",
+      "next_action": "A applies the five formatter changes and reruns the exact-head Core matrix; root continues integration admission only after remaining native and RCC acceptance gates are resolved on exact current candidates.",
+      "current_gate": "Core Python 3.10 devmode jobs fail only at Ruff format: ruff check passes, then Ruff 0.1.15 requests five overload ellipsis-body expansions in actions/src/actions/mcp/__init__.py. Separate three-OS tests/docs/types passed; prior E721 failure is absent. This is not the whole PR221 acceptance: PR256 native packaged-consumer evidence is still blocked by frozen-tree digest mismatch/stop() cleanup review, and the RCC local candidate d81668e40734677f67933fb0dcfb26a129041992 has an independently reviewed mocked A\u2192B\u2192A artifact/fingerprint mismatch; live RCC ABA has not run.",
+      "check_snapshot_note": "23:28 exact-head status with 23:29:14Z run diagnosis; see evidence/pr221-core-python310-lint-blocker-38004253328.json. PR256 and RCC limitations are separately attributed in this receipt."
+    },
+    {
+      "number": 219,
+      "title": "WIP: preserve unfinished deployment and MCP showcase designs",
+      "url": "https://github.com/joshyorko/actions/pull/219",
+      "isDraft": true,
+      "headRefName": "review/design-checkpoints-20261008",
+      "headRefOid": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "baseRefName": "community",
+      "owner": "Design checkpoint owner",
+      "status": "Open historical design checkpoint; independent scope review says do not integrate its old head separately.",
+      "next_action": "Keep PR219 open as the historical checkpoint; adjudicate the revised docs only with PR221.",
+      "gate": "The revised ADRs are already carried by PR221\u2019s current candidate. Neither whole #129 nor whole #126 closure is a prerequisite for this documentation slice.",
+      "dependency": "Deliver updated design text through exact PR221 candidate gates; no standalone merge of superseded PR219 text.",
+      "check_snapshot_note": "Exact head/base and unchanged owner/gate/dependency detail are retained from the 22:58 receipt; check results are historical except where this row explicitly gives a 23:26 readback."
+    },
+    {
+      "number": 218,
+      "title": "WIP: checkpoint native Work Items packaging and recovery",
+      "url": "https://github.com/joshyorko/actions/pull/218",
+      "isDraft": true,
+      "headRefName": "review/workitems-checkpoint-20261008",
+      "headRefOid": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "baseRefName": "community",
+      "owner": "Work Items checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update.",
+      "check_snapshot_note": "Exact head/base and unchanged owner/gate/dependency detail are retained from the 22:58 receipt; check results are historical except where this row explicitly gives a 23:26 readback."
+    },
+    {
+      "number": 217,
+      "title": "WIP: checkpoint Core public contracts and regression tests",
+      "url": "https://github.com/joshyorko/actions/pull/217",
+      "isDraft": true,
+      "headRefName": "review/core-checkpoint-20261008",
+      "headRefOid": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "baseRefName": "community",
+      "owner": "Core checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update.",
+      "check_snapshot_note": "Exact head/base and unchanged owner/gate/dependency detail are retained from the 22:58 receipt; check results are historical except where this row explicitly gives a 23:26 readback."
+    },
+    {
+      "number": 216,
+      "title": "WIP: checkpoint bounded Runtime history and WebSocket repairs",
+      "url": "https://github.com/joshyorko/actions/pull/216",
+      "isDraft": true,
+      "headRefName": "review/runtime-checkpoint-20261008",
+      "headRefOid": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "baseRefName": "community",
+      "owner": "Runtime checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update.",
+      "check_snapshot_note": "Exact head/base and unchanged owner/gate/dependency detail are retained from the 22:58 receipt; check results are historical except where this row explicitly gives a 23:26 readback."
+    },
+    {
+      "number": 215,
+      "title": "WIP: checkpoint community release safeguards for adversarial review",
+      "url": "https://github.com/joshyorko/actions/pull/215",
+      "isDraft": true,
+      "headRefName": "convergence/actions-full-graph-20261008",
+      "headRefOid": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "baseRefName": "community",
+      "owner": "Convergence checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update.",
+      "check_snapshot_note": "Exact head/base and unchanged owner/gate/dependency detail are retained from the 22:58 receipt; check results are historical except where this row explicitly gives a 23:26 readback."
+    }
+  ],
+  "pr221_current_readback": {
+    "head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+    "observed_at_utc": "2026-10-09T23:28:16Z",
+    "checks": {
+      "FAILURE": 3,
+      "IN_PROGRESS": 9,
+      "SUCCESS": 16,
+      "SKIPPED": 1
+    },
+    "failed_checks": [
+      "build (ubuntu-py3.10-devmode)",
+      "build (windows-py3.10-devmode)",
+      "build (macos-py3.10-devmode)"
+    ],
+    "diagnosis": "Exact run 38004253328 confirms all three failed jobs fail only at Ruff format: ruff check passes, then Ruff 0.1.15 requests five overload ellipsis-body expansions in actions/src/actions/mcp/__init__.py. Separate full three-OS test/docs/type checks passed; no E721 failure remains. The five-formatting changes are the remaining Core lint blocker. See the immutable exact-run receipt.",
+    "diagnosis_receipt": "evidence/pr221-core-python310-lint-blocker-38004253328.json",
+    "diagnosis_receipt_sha256": "e30adc70a3bfc10b06dbed7eddec2763921dd1f85a3a77df79b779fbeae992c6",
+    "diagnosis_observed_at_utc": "2026-10-09T23:29:14Z"
+  },
+  "pr256_diagnostic": {
+    "head": "a1904783c0ec1950beab59d5fb7c9d76fb90a1e8",
+    "run": 38003443132,
+    "review_receipt": "evidence/pr256-a1904783-browser-digest-mismatch-20261009.md",
+    "review_sha256": "ca8a48a83da3ccdd60fd80de8ba35f4ec985b4b0c245686b055fdfaba3452c84",
+    "summary": "Linux and Windows fail the frozen package-tree digest preflight before the Work Items browser scenario; macOS passes but skips both scoped UI checks. Exact mismatch is known; cause/path-level change is not."
+  },
+  "pr219_scope": {
+    "review_receipt": "evidence/pr219-design-checkpoint-scope-review-20261009.md",
+    "review_sha256": "f1bb6c047e11f59f917ff7a9c9d7485c44c29d4850d2268ec35b1e6885ce7a6c",
+    "disposition": "Do not merge superseded PR219 head independently. Updated ADRs travel through PR221. Closing whole #129 or #126 is not a prerequisite for the documented slice."
+  },
+  "evidence_interpretation_errata": {
+    "python_count": "313 means test cases, not Python 3.13; the correction is preserved at evidence/convergence-python-version-erratum-20261009T2300Z.json. Identify workflow, exact checkout, job, OS, interpreter and package before interpreting reused display labels.",
+    "artifact_id": "Artifact IDs are identifiers, not byte counts or digests. The PR269 verified native readback is retained at evidence/devsy-convergence-checkpoint-2258.json; the earlier Cloud 403 remains historical.",
+    "ci_identity": "Workflow display names/check labels can be reused. Bind conclusions to workflow path/run/job and actual checkout SHA/tree; never transfer pass status across commits or assume a label identifies a package/version."
+  },
+  "issue_accounting_unchanged": {
+    "retained_contracts": 54,
+    "open": 53,
+    "accepted_closed": [
+      210
+    ],
+    "whole_issue_review_ready": 0,
+    "graph_counts": {
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
+    }
+  },
+  "whole_issue_acceptance_changed": false,
+  "rcc_findings_attribution": "Existing RCC producer owns the mocked ABA source correction; the local d816 candidate has not been remotely verified. Lifecycle failure owner/current-candidate relevance remain unconfirmed. No upstream defect established.",
+  "history_and_archive": "The 22:58 and prior receipts remain immutable history. No ZIP was rewritten; the 16 existing ZIPs are preserved. No issue contract, raw status, dependency or acceptance body changed.",
+  "upstream_disposition": "None; no verified new upstream finding.",
+  "rcc_lifecycle_findings": {
+    "observed_at_utc": "2026-10-09T23:28:16Z",
+    "rcc_adapter": {
+      "local_candidate": "d81668e40734677f67933fb0dcfb26a129041992",
+      "remote_ref_last_read": "d81668e40734677f67933fb0dcfb26a129041992",
+      "review": "Independent reviewer blocks the local RCC candidate at adapter lines 610/624: deterministic mocked YAML A\u2192B\u2192A publish returned fingerprint A with artifact B.",
+      "live_limit": "Live RCC ABA was not run.",
+      "remote_branch": "devsy/rcc-local-acceptance-20261009",
+      "remote_read_observed_at_utc": "2026-10-09T23:28Z"
+    },
+    "lifecycle": {
+      "local_candidate": "ab74fedc658421d368dd1b1158b39973962ddd3c",
+      "remote_ref_last_read": "ab74fedc658421d368dd1b1158b39973962ddd3c",
+      "historical_failure": "Process exited -11 after shutdown HTTP 200; expected test-only exit 1. Successful controls remain separate and do not erase this failure. Relevance to current candidate and fault ownership remain unconfirmed.",
+      "remote_branch": "devsy/rcc-generation-lifecycle-20261009",
+      "remote_read_observed_at_utc": "2026-10-09T23:28Z"
+    },
+    "disposition": "No upstream defect report is made from these observations; preserve exact test/source attribution and wait for owner/reviewer evidence."
+  },
+  "scope_receipt_notice": "PR219 scope review: superseded draft should not be merged independently; updated ADRs flow through PR221 and whole #129/#126 closure is not a prerequisite.",
+  "pr221_diagnostic_receipt": {
+    "path": "evidence/pr221-core-python310-lint-blocker-38004253328.json",
+    "sha256": "e30adc70a3bfc10b06dbed7eddec2763921dd1f85a3a77df79b779fbeae992c6",
+    "run_id": 38004253328,
+    "observed_at_utc": "2026-10-09T23:29:14Z",
+    "scope": "Ruff format-only blocker; three-OS tests/docs/types separately pass; no upstream report."
+  }
+}

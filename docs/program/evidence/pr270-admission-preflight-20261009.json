@@ -1,0 +1,151 @@
+{
+  "observed_at": "2026-10-09T23:24:13.678363+00:00",
+  "pr": {
+    "baseRefName": "integration/community-release-20261008",
+    "headRefOid": "5efcfebf1c572808a441e2360d1c1e68a77020a9",
+    "id": "PR_kwDOOI-QjM8AAAABHoDkDw",
+    "isDraft": true,
+    "mergeable": "MERGEABLE",
+    "number": 270,
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:13:50Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350258/job/114066390193",
+        "name": "audit",
+        "startedAt": "2026-10-09T23:13:43Z",
+        "status": "COMPLETED",
+        "workflowName": "AI audit evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:14:39Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350242/job/114066390272",
+        "name": "build-sdist (ubuntu-py3.12)",
+        "startedAt": "2026-10-09T23:13:43Z",
+        "status": "COMPLETED",
+        "workflowName": "Actions Runtime PYPI Release"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:19:53Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350290/job/114066392252",
+        "name": "coverage",
+        "startedAt": "2026-10-09T23:13:51Z",
+        "status": "COMPLETED",
+        "workflowName": ".github/workflows/coverage-gate.yml"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:21:56Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350778/job/114066391861",
+        "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+        "startedAt": "2026-10-09T23:14:10Z",
+        "status": "COMPLETED",
+        "workflowName": "RCC developer toolkit"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:16:55Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350778/job/114066392033",
+        "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+        "startedAt": "2026-10-09T23:14:28Z",
+        "status": "COMPLETED",
+        "workflowName": "RCC developer toolkit"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:16:53Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350778/job/114066392083",
+        "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+        "startedAt": "2026-10-09T23:14:22Z",
+        "status": "COMPLETED",
+        "workflowName": "RCC developer toolkit"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:23:12Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350778/job/114066392126",
+        "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+        "startedAt": "2026-10-09T23:14:40Z",
+        "status": "COMPLETED",
+        "workflowName": "RCC developer toolkit"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:18:51Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350778/job/114066392031",
+        "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+        "startedAt": "2026-10-09T23:15:30Z",
+        "status": "COMPLETED",
+        "workflowName": "RCC developer toolkit"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:19:14Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350778/job/114066392111",
+        "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+        "startedAt": "2026-10-09T23:16:51Z",
+        "status": "COMPLETED",
+        "workflowName": "RCC developer toolkit"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:16:03Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350242/job/114066390377",
+        "name": "build-wheels (ubuntu-22.04)",
+        "startedAt": "2026-10-09T23:13:43Z",
+        "status": "COMPLETED",
+        "workflowName": "Actions Runtime PYPI Release"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:18:14Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350242/job/114066390402",
+        "name": "build-wheels (windows-2022)",
+        "startedAt": "2026-10-09T23:13:43Z",
+        "status": "COMPLETED",
+        "workflowName": "Actions Runtime PYPI Release"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:16:08Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350242/job/114066390473",
+        "name": "build-wheels (macos-15)",
+        "startedAt": "2026-10-09T23:13:49Z",
+        "status": "COMPLETED",
+        "workflowName": "Actions Runtime PYPI Release"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-09T23:18:40Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38003350242/job/114067619505",
+        "name": "publish (3.12)",
+        "startedAt": "2026-10-09T23:18:16Z",
+        "status": "COMPLETED",
+        "workflowName": "Actions Runtime PYPI Release"
+      }
+    ]
+  },
+  "base_sha": "7b33e5ca80dff6064d361f3f68c464ef61e97bac",
+  "candidate_tree": "e706a9b93258df863d50ce67cb00ee09a62d6012",
+  "verified_workflow_checkout": "17e4703485445ab11c843aff688ec717ca8fb67d",
+  "review": "Root independently accepts final doc-only delta from reviewed 735e56fa; A exact CI source association confirms tested merge tree.",
+  "limitations": [
+    "Runtime publish steps skipped; no publication.",
+    "Core three-OS Python3.10 matrix required on successor PR221 before community/release."
+  ]
+}

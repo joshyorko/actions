@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-10-09T23:29:14Z",
+  "pull_request": 221,
+  "workflow": {"name": "Actions Core Tests", "path": ".github/workflows/actions_core_tests.yml", "run_id": 38004253328, "event": "pull_request"},
+  "head": {"branch": "integration/community-release-20261008", "sha": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f"},
+  "synthetic_checkout": {
+    "ref": "refs/pull/221/merge",
+    "sha": "b5851e33744e688a8472002e82e5c329fd8e719a",
+    "parents": ["d2741a18976f75467355282ad3caa5b99b4c505e", "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f"],
+    "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012",
+    "job_logs": "Ubuntu job 114069275592, macOS 114069275511, Windows 114069275312 each logged checkout of refs/remotes/pull/221/merge and HEAD b5851e3. Git fetch of the merge ref independently confirmed SHA, parents, and tree."
+  },
+  "jobs": {
+    "ubuntu-py3.10-devmode": {"job_id": 114069275592, "result": "failure", "failed_step": "inv lint"},
+    "macos-py3.10-devmode": {"job_id": 114069275511, "result": "failure", "failed_step": "inv lint"},
+    "windows-py3.10-devmode": {"job_id": 114069275312, "result": "failure", "failed_step": "inv lint"}
+  },
+  "failure": {
+    "cause": "All three platform logs show ruff check succeeds, then configured `ruff format --check --config .../devutils/ruff.toml src tests` fails with `Would reformat: src/actions/mcp/__init__.py`; remaining 145 files are formatted.",
+    "affected_file": "actions/src/actions/mcp/__init__.py",
+    "format_diff": "Ruff 0.1.15 would expand five one-line overload ellipsis bodies: tool, resource (two overloads), and prompt (two overloads).",
+    "isort": "Not reached by inv lint because Ruff format check fails first.",
+    "tests_docs_types": "This invocation failed at lint; run logs do not report a failure in those later steps."
+  },
+  "local_reproduction": {
+    "environment": "Existing prepared /workspace/work/community-resume/admission/actions/.venv; Ruff 0.1.15; no install.",
+    "ruff_check": "ruff check src tests passed.",
+    "ruff_format": "ruff format --check --config <repo>/devutils/ruff.toml src tests reports only actions/src/actions/mcp/__init__.py.",
+    "format_diff": "ruff format --diff shows only the five overload body expansions described above."
+  },
+  "upstream_disposition": "Local repository formatting gate issue; no upstream report applies.",
+  "documentation_disposition": "Existing repository-operations guidance already describes the configured lint steps; no new durable operational rule identified."
+}

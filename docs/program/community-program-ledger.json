@@ -12648,7 +12648,7 @@
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261009-convergence.zip",
   "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
-  "integration_head": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+  "integration_head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
   "additional_compute": {
     "cloud": "Reused bounded Luna lanes plus one evidence-backed Sol review; no uncontrolled recursion or API fallback",
     "devsy": "WAITING FOR HIT THE GAS; pending request preserved without calls",
@@ -12669,8 +12669,8 @@
       "259": "PR259 at reported head prefix85f7 is independently accepted; hosted CI is running."
     }
   },
-  "checkpoint_status": "ACTIVE integration; PR250 partial foundations merged; no release publication admitted",
-  "checkpoint_observed_at": "2026-10-09T19:39:33Z",
+  "checkpoint_status": "ACTIVE integration; 13/20 scoped PRs merged to named targets, 7 open/blocked, 0 merge-ready; PR221 has a confirmed Ruff format-only blocker with separate three-OS tests/docs/types passing; no issue closure or release publication admitted",
+  "checkpoint_observed_at": "2026-10-09T23:29:14Z",
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
@@ -12705,6 +12705,46 @@
     "manifest": "evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json"
   },
   "current_integration_checkpoint": {
+    "pr": 270,
+    "source_head": "5efcfebf1c572808a441e2360d1c1e68a77020a9",
+    "merge_sha": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+    "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012",
+    "merged_at": "2026-10-09T23:24:16Z",
+    "checks": "13 exact-head hosted checks succeeded; publication steps skipped",
+    "scope_limit": "Scoped metadata lint/docs repair integrated to the named integration branch; no issue acceptance, Runtime publication, or release readiness implied.",
+    "receipt": "evidence/pr270-admission-readback-20261009.json"
+  },
+  "current_convergence_update": {
+    "path": "evidence/convergence-followup-20261009T2328Z.json",
+    "sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360",
+    "cohort": {
+      "items": 20,
+      "target_integrated": 13,
+      "blocked_open": 7,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        251,
+        266,
+        257,
+        259,
+        262,
+        268,
+        264,
+        263,
+        267,
+        269,
+        265,
+        220,
+        270
+      ]
+    },
+    "community": "d2741a18976f75467355282ad3caa5b99b4c505e",
+    "integration": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "issue_acceptance_changed": false,
+    "receipt_sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360"
+  },
+  "prior_current_integration_checkpoint_pr258": {
     "pr": 258,
     "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
     "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
