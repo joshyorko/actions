@@ -6,7 +6,12 @@ import tomlkit
 import pytest
 from invoke import Context
 
-from devutils.invoke_utils import build_common_tasks, collect_deps_pyprojects, get_tag
+from devutils.invoke_utils import (
+    REPOSITORY_URL,
+    build_common_tasks,
+    collect_deps_pyprojects,
+    get_tag,
+)
 
 
 def test_common_quality_tasks_use_current_ruff_subcommands(tmp_path: Path, monkeypatch):
@@ -269,3 +274,7 @@ def test_make_release_does_not_tag_commit_outside_community_ancestry(
     assert not any(
         "git tag" in command or "git push" in command for command in commands
     )
+
+
+def test_api_doc_source_links_target_maintained_community_source():
+    assert REPOSITORY_URL == "https://github.com/joshyorko/actions/blob/community/"
