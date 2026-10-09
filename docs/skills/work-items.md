@@ -350,6 +350,25 @@ acceptance requires a separately measured task-local wheel. The manifest covers
 the checkout and named build outputs, not every dependency or the frozen
 executable's adjacent onedir files.
 
+On Linux, the same workflow has a separate bounded Work Items consumer gate.
+It builds `actions-core` as a wheel into a fresh run-owned RCC home, then runs
+the real frozen and Go-wrapper executables against the synthetic API consumer
+test. The generated `spec-version: v2` package obtains
+`actions-work-items==0.4.4` from the public package registry and installs the
+exact candidate Core wheel with a supported `post-install` command after RCC
+creates the base environment. The consumer action checks the installed Core
+version and module ownership, then validates pip's install report against the
+candidate wheel path and SHA-256. No business-service credentials are used.
+The runner hashes both executables and the wheel, requires fresh per-runtime
+API proofs, and accepts
+the optional native manifest only when its source SHA, platform, architecture,
+expected executable paths and measured executable hashes agree. Its receipt
+records the manifest hash and binding result. This is Linux-only acceptance;
+it does not establish Windows/macOS Work Items behavior, a clean-source
+attestation, wheel provenance inside the native build manifest, or live
+external-service behavior. The workflow retains a receipt even when the gate
+fails or is interrupted, then removes only its run-owned RCC home.
+
 This harness proves creation and restart persistence, not worker-driven Work
 Item state transitions, attachment behavior, accessibility or other browsers.
 Those cells remain separate acceptance requirements. A workflow build/version
