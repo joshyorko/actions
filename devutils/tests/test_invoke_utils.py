@@ -4,7 +4,11 @@ from unittest.mock import Mock
 import tomlkit
 from invoke import Context
 
-from devutils.invoke_utils import build_common_tasks, collect_deps_pyprojects
+from devutils.invoke_utils import (
+    REPOSITORY_URL,
+    build_common_tasks,
+    collect_deps_pyprojects,
+)
 
 
 def test_common_quality_tasks_use_current_ruff_subcommands(
@@ -73,3 +77,7 @@ def test_develop_mode_substitutes_neutral_internal_helper(tmp_path: Path):
         }
 
     assert 'actions-http-helper = "^1.0.0"' in (consumer / "pyproject.toml").read_text()
+
+
+def test_api_doc_source_links_target_maintained_community_source():
+    assert REPOSITORY_URL == "https://github.com/joshyorko/actions/blob/community/"
