@@ -145,6 +145,10 @@ final checks invalidate every case and remove success readbacks from the receipt
 Source SHA and build version arguments are caller claims, not verified build
 provenance. Retained Linux artifacts do not establish current-source builds or
 Windows/macOS, distributed, service-backend or full browser acceptance.
+The credential-free native workflow runs process ownership, management/browser
+and history acceptance; it does not invoke this packaged-worker consumer gate.
+Its success therefore does not establish consumer lifecycle acceptance on that
+platform. Retain a separate receipt from this runner for each tested artifact.
 
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
