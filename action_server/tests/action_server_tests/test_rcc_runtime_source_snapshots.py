@@ -18,13 +18,12 @@ def _write_package_yaml(path: Path, *, python: str = "3.12.15") -> None:
     )
 
 
-def test_snapshot_rejects_package_yaml_changed_before_environment_preparation(
+def test_snapshot_pins_environment_yaml_across_aba_edit(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     import yaml
 
     from actions.server._action_package_handler import ActionPackageHandler
-    from actions.server._errors_action_server import ActionServerValidationError
     from actions.server._rcc_runtime_adapter import RccRuntimeDescriptor
 
     monkeypatch.chdir(tmp_path)
@@ -32,19 +31,31 @@ def test_snapshot_rejects_package_yaml_changed_before_environment_preparation(
     package.mkdir()
     package_yaml = package / "package.yaml"
     _write_package_yaml(package_yaml)
+    package_yaml.write_text(
+        package_yaml.read_text(encoding="utf-8") + "pythonpath:\n  - relative_lib\n",
+        encoding="utf-8",
+    )
+    (package / "relative_lib").mkdir()
+    (package / "relative_lib" / "module.py").write_text(
+        "VALUE = 'relative source'\n", encoding="utf-8"
+    )
     (package / "action.py").write_text("VALUE = 'selected source'\n", encoding="utf-8")
     handler = ActionPackageHandler(str(package), tmp_path / "service-data")
     snapshot, _ = handler.create_runtime_source_snapshot()
     handler.use_runtime_source_snapshot(snapshot)
 
-    # Model a source edit after snapshot validation but before RCC resolves the
-    # environment file. Keep the original path so relative package inputs retain
-    # their package-root identity.
-    _write_package_yaml(package_yaml, python="3.11.9")
-    prepared: list[tuple[Path, dict]] = []
+    expected_snapshot_yaml = (snapshot / "package.yaml").read_bytes()
+    original_yaml = package_yaml.read_bytes()
+    consumed: dict[str, object] = {}
 
     def prepare_runtime(environment: Path, *_args, **_kwargs):
-        prepared.append((environment, yaml.safe_load(environment.read_text())))
+        consumed["environment"] = environment
+        consumed["identity"] = _kwargs.get("environment_identity")
+        # Simulate an editor replacing the live file while RCC reads its input,
+        # then restoring it before a post-call comparison.
+        _write_package_yaml(package_yaml, python="3.11.9")
+        consumed["publish_yaml"] = yaml.safe_load(environment.read_text())
+        package_yaml.write_bytes(original_yaml)
         return RccRuntimeDescriptor(artifact_digest="sha256:" + "a" * 64)
 
     monkeypatch.setenv("ACTIONS_RUNTIME_RCC_PROVIDER", "local")
@@ -57,10 +68,13 @@ def test_snapshot_rejects_package_yaml_changed_before_environment_preparation(
         lambda: Path("/pinned/rcc"),
     )
 
-    with pytest.raises(ActionServerValidationError, match="package.yaml changed"):
-        handler.bootstrap_environment()
+    _, runtime_environment = handler.bootstrap_environment()
 
-    assert not prepared
+    assert consumed["environment"] == snapshot / "package.yaml"
+    assert consumed["identity"] == handler.original_package_yaml
+    assert (snapshot / "package.yaml").read_bytes() == expected_snapshot_yaml
+    assert consumed["publish_yaml"] == yaml.safe_load(expected_snapshot_yaml)
+    assert runtime_environment["PYTHONPATH"] == str(snapshot / "relative_lib")
     assert handler.original_package_yaml == (tmp_path / package_yaml).absolute()
 
 

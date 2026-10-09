@@ -550,6 +550,60 @@ def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_pa
     assert second.provider_reference == "http://127.0.0.1:8134"
 
 
+def test_snapshot_environment_input_preserves_original_cache_identity(tmp_path):
+    from actions.server._rcc_runtime_adapter import prepare_runtime
+
+    original = tmp_path / "package" / "package.yaml"
+    original.parent.mkdir()
+    original.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    snapshot_one = tmp_path / "data" / "snapshot-one" / "package.yaml"
+    snapshot_two = tmp_path / "data" / "snapshot-two" / "package.yaml"
+    snapshot_one.parent.mkdir(parents=True)
+    snapshot_two.parent.mkdir(parents=True)
+    snapshot_one.write_text(
+        "spec-version: v2\ndependencies: {python: '3.12'}\nname: first\n"
+    )
+    snapshot_two.write_text(
+        "spec-version: v2\ndependencies: {python: '3.12'}\nname: second\n"
+    )
+    digest = "sha256:" + "a" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        if args[2] == "publish":
+            return 0, json.dumps({"artifact": digest}), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    first = prepare_runtime(
+        snapshot_one,
+        Path("/opt/rcc"),
+        environment_identity=original,
+        source_generation="source-one",
+        provider="http://127.0.0.1:8134",
+        runner=runner,
+    )
+    second = prepare_runtime(
+        snapshot_two,
+        Path("/opt/rcc"),
+        environment_identity=original,
+        source_generation="source-two",
+        provider="http://127.0.0.1:8134",
+        previous_descriptor=first,
+        runner=runner,
+    )
+
+    assert [call[2] for call in calls] == ["publish", "acquire"]
+    assert calls[0][calls[0].index("--environment") + 1] == str(snapshot_one)
+    assert first.artifact_digest == second.artifact_digest == digest
+    assert second.source_generation == "source-two"
+    assert second.preparation_class == "source-reuse"
+
+
 def test_cached_artifact_is_revalidated_and_rebuilt_when_materialization_disappears(
     tmp_path,
 ):

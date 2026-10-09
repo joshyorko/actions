@@ -450,6 +450,7 @@ def prepare_runtime(
     environment: Path,
     rcc_location: Path,
     *,
+    environment_identity: Path | None = None,
     source_generation: str = "unknown",
     provider: str | None = None,
     trust_carrier: RccTrustCarrier | None = None,
@@ -457,11 +458,12 @@ def prepare_runtime(
     runner: Runner = _subprocess_runner,
 ) -> RccRuntimeDescriptor:
     environment = environment.resolve()
+    cache_identity = (environment_identity or environment).resolve()
     provider = _validate_provider_reference(provider)
     environment_fingerprint = environment_spec_fingerprint(environment)
     carrier_identity = trust_carrier.identity if trust_carrier is not None else None
     cache_key = (
-        environment,
+        cache_identity,
         environment_fingerprint,
         provider,
         carrier_identity,

@@ -111,7 +111,7 @@ class ActionPackageHandler:
         self._import_path = import_path
         self._package_yaml_contents = package_yaml_contents
         self._pythonpath_entries: tuple[str, ...] | None = None
-        self._runtime_source_snapshot_yaml: bytes | None = None
+        self._runtime_source_snapshot_package_yaml: Path | None = None
 
     @property
     def package_yaml_contents(self) -> dict | None:
@@ -278,27 +278,10 @@ class ActionPackageHandler:
             raise ActionServerValidationError(
                 "package.yaml changed while creating the RCC source snapshot"
             )
-        self._runtime_source_snapshot_yaml = snapshot_yaml_bytes
+        self._runtime_source_snapshot_package_yaml = snapshot_package_yaml
         self._action_package_dir = str(snapshot)
         self._import_path = snapshot
         self._pythonpath_entries = None
-
-    def validate_runtime_source_environment(self) -> None:
-        """Reject a candidate if RCC's original environment input has changed."""
-        if self._runtime_source_snapshot_yaml is None:
-            return
-        from actions.server._errors_action_server import ActionServerValidationError
-
-        try:
-            current_yaml = self._original_package_yaml.read_bytes()
-        except OSError as exc:
-            raise ActionServerValidationError(
-                "RCC source package.yaml is no longer available"
-            ) from exc
-        if current_yaml != self._runtime_source_snapshot_yaml:
-            raise ActionServerValidationError(
-                "package.yaml changed after the RCC source snapshot was selected"
-            )
 
     def discard_runtime_source_snapshot(self, snapshot: Path) -> None:
         """Remove a newly created candidate after its import transaction fails."""
@@ -444,16 +427,23 @@ class ActionPackageHandler:
                         "configuration",
                         "ACTIONS_RUNTIME_RCC_PROVIDER must explicitly select a provider",
                     )
-                self.validate_runtime_source_environment()
+                environment_yaml = (
+                    self._runtime_source_snapshot_package_yaml
+                    or self._original_package_yaml
+                )
                 descriptor = prepare_runtime(
-                    self._original_package_yaml,
+                    environment_yaml,
                     get_rcc_location(),
                     source_generation=compute_source_generation(self._import_path),
                     provider=provider,
                     trust_carrier=trust_carrier,
                     previous_descriptor=previous_descriptor,
+                    environment_identity=(
+                        self._original_package_yaml
+                        if self._runtime_source_snapshot_package_yaml is not None
+                        else None
+                    ),
                 )
-                self.validate_runtime_source_environment()
                 condahash = descriptor.artifact_digest
                 use_env = descriptor.to_dict()
             else:
