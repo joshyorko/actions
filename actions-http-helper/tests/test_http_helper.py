@@ -42,6 +42,7 @@ def test_network_settings_path_uses_actions_root(monkeypatch, tmp_path):
 
     monkeypatch.setattr(actions_http.sys, "platform", "linux")
     monkeypatch.setenv("HOME", str(tmp_path))
+    monkeypatch.setenv("USERPROFILE", str(tmp_path))
     assert actions_http._NetworkConfig._get_network_settings_path() == (
         tmp_path / ".actions" / "network-settings.yaml"
     )

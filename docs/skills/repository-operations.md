@@ -303,6 +303,18 @@ resolving a local development install. Published package metadata must use
 versioned distributions; a clean wheel install is required before calling the
 Runtime/Core interoperability contract complete.
 
+When a prerequisite distribution must ship before a broader Runtime checkpoint,
+create a Community-targeted promotion PR containing only that distribution's
+versioned package source, changelog, package tests, and release workflow, plus
+developer documentation support required by that package. Do not merge a mixed
+Runtime integration head merely to make its dependency version available. Run
+package build, exact artifact and metadata checks, strict Twine validation, and
+clean installed-wheel tests against the exact promotion PR head. After merge,
+release only from the exact community-ancestral version tag and verify registry
+artifacts before promoting the next dependent package. Preserve any issue
+acceptance contract separately; an already-published package version does not
+by itself close a broader issue.
+
 The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
 callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
 The Python API exposes snake-case fields such as `resource_templates`,
