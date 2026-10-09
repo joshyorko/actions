@@ -32,12 +32,24 @@ install. Production and release compatibility must be checked by installing
 the built wheels outside the checkout. Lazy public exports appear in `dir`
 without eager import so introspection and generated docs include ActionContext.
 
-For pull-request Runtime wheel checks, the workflow builds the matching Core
-wheel and installs it into cibuildwheel's fresh test environment before Runtime
-dependency resolution. This pairing is PR-only: tag/release builds resolve the
-declared Core version from the registry and fail if it has not been published.
-Do not broaden the candidate override to release events or remove dependency
-checks. The installer accepts one identified Core wheel and prints its digest.
+For pull-request Runtime wheel checks, the workflow builds matching Core and
+HTTP Helper wheels and installs them into cibuildwheel's fresh test environment
+for candidate-pair compatibility. A separate PR-only clean venv installs the
+built Runtime cp312 wheel from the public PyPI index with pip cache disabled.
+Its pip install report must match the exact public Core 1.0.2 and Helper 1.0.3
+wheel URLs and SHA-256 hashes. Read pip's UTF-8 JSON report with an explicit
+encoding; Windows' default cp1252 decoder can reject valid UTF-8 metadata. The
+probe removes Python path overrides, then
+runs a child-interpreter preflight that rejects resolved search paths under the
+entire monorepo before `pip check` or application imports. After imports, it
+checks the loaded module origins against the same boundary before running
+`actions.server version`. Keep
+both checks: the local wheel pair exercises unreleased producer APIs, while the
+registry-floor canary proves compatibility with published dependencies and
+prints the verified public artifact URLs and hashes. This PR test workflow runs
+for `community` and `integration/**` target branches; its PyPI credential and
+upload steps remain tag-push-only. The candidate override must not apply to
+release events or bypass dependency checks.
 
 Python 3.10's `inspect.isclass` classifies a `list[...]` public alias differently
 from Python 3.12. The canonical docs task normalizes exported GenericAlias
