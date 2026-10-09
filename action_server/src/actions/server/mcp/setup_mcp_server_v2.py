@@ -291,7 +291,10 @@ class McpServerSetupHelper:
             _meta=action_info.mcp_meta,
             contents=[
                 TextResourceContents(
-                    uri=uri, text=text, mime_type=mime_type or default_mime
+                    uri=uri,
+                    text=text,
+                    mime_type=mime_type or default_mime,
+                    _meta=action_info.mcp_meta,
                 )
             ],
         )

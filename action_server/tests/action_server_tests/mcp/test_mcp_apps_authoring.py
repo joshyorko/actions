@@ -122,6 +122,9 @@ def object_result() -> dict[str, str]:
                     assert isinstance(content, TextResourceContents)
                     assert content.mime_type == "text/html;profile=mcp-app"
                     assert content.text == "<html>fixture</html>"
+                    assert content.meta["ui"] == {
+                        "csp": {"connectDomains": ["https://api.example.test"]}
+                    }
                     assert resource.meta["ui"] == {
                         "csp": {"connectDomains": ["https://api.example.test"]}
                     }
@@ -191,6 +194,9 @@ def object_result() -> dict[str, str]:
             resource = await session.read_resource("ui://fixture/view?revision=1")
             assert resource.contents[0].mime_type == "text/html;profile=mcp-app"
             assert resource.contents[0].text == "<html>fixture</html>"
+            assert resource.contents[0].meta["ui"] == {
+                "csp": {"connectDomains": ["https://api.example.test"]}
+            }
             assert resource.meta["ui"] == {
                 "csp": {"connectDomains": ["https://api.example.test"]}
             }

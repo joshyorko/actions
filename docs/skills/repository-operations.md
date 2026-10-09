@@ -7,11 +7,13 @@ as a detached JSON object, bounded to 64 KiB and 16 nesting levels. They reject
 non-JSON values and validate the stable MCP Apps `ui.resourceUri`, `ui.visibility`
 and four CSP domain-list fields while preserving unrelated JSON extension keys.
 UI resources use the `ui://` scheme and `text/html;profile=mcp-app` MIME type;
-queries and fragments remain part of the exact resource identity. Runtime checks
-that every tool association resolves to a resource with that MIME type before
-replacing the active catalog, so a failed catalog admission leaves the previous
-catalog in place. `visibility: ["app"]` is a host projection hint, never backend
-authorization.
+queries and fragments remain part of the exact resource identity. Runtime
+places resource `_meta` on each `resources/read` content item, where MCP Apps
+hosts read the CSP and other view metadata; it also retains the result-level
+metadata for existing clients. Runtime checks that every tool association
+resolves to a resource with that MIME type before replacing the active catalog,
+so a failed catalog admission leaves the previous catalog in place.
+`visibility: ["app"]` is a host projection hint, never backend authorization.
 
 The focused source tests exercise public decorators through the Runtime
 Streamable HTTP route. The process-level fixture additionally installs the
