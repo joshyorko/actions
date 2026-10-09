@@ -51,15 +51,6 @@ def _concurrent_reservations(db_path, files_dir, workers):
 def _legacy_reserve_input_in_process(db_path, barrier, results):
     """Reproduce the former select-then-update reservation sequence."""
     conn = sqlite3.connect(db_path, timeout=30.0)
-    blocked = False
-
-    def block_after_select(statement):
-        nonlocal blocked
-        if not blocked and "SELECT id FROM work_items" in statement:
-            blocked = True
-            barrier.wait(timeout=10)
-
-    conn.set_trace_callback(block_after_select)
     row = conn.execute(
         """
         SELECT id FROM work_items
@@ -69,6 +60,11 @@ def _legacy_reserve_input_in_process(db_path, barrier, results):
         """,
         ("test_queue", State.PENDING.value),
     ).fetchone()
+    assert row is not None
+    # A sqlite trace callback runs before its statement executes. Waiting in
+    # that callback does not guarantee both workers captured the same row.
+    # Synchronize only after materializing the candidate, before either update.
+    barrier.wait(timeout=10)
     item_id = row[0]
     conn.execute(
         """
@@ -89,7 +85,9 @@ def _legacy_concurrent_reservations(db_path):
     barrier = context.Barrier(2)
     results = context.Queue()
     processes = [
-        context.Process(target=_legacy_reserve_input_in_process, args=(str(db_path), barrier, results))
+        context.Process(
+            target=_legacy_reserve_input_in_process, args=(str(db_path), barrier, results)
+        )
         for _ in range(2)
     ]
     for process in processes:
@@ -142,7 +140,7 @@ def test_concurrent_reservation_claims_item_once(adapter):
 
 
 def test_legacy_reservation_claims_item_twice(adapter):
-    """The trace seam deterministically demonstrates the former duplicate claim."""
+    """The post-select barrier demonstrates the former duplicate claim."""
     item_id = adapter.seed_input()
 
     outcomes = _legacy_concurrent_reservations(adapter._db_path)
