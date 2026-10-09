@@ -57,7 +57,24 @@ def packaged_tree_sha256(root: Path) -> str:
     return digest.hexdigest()
 
 
-def packaged_runtime_identity() -> tuple[Path, str, str, str, str]:
+def packaged_files_sha256(
+    root: Path, *, exclude_root_files: set[str] | None = None
+) -> str:
+    excluded = exclude_root_files or set()
+    digest = hashlib.sha256()
+    entries = sorted(
+        (path for path in root.rglob("*") if path.is_file()),
+        key=lambda item: item.relative_to(root).as_posix(),
+    )
+    for path in entries:
+        relative = path.relative_to(root).as_posix()
+        if "/" not in relative and relative in excluded:
+            continue
+        digest.update(relative.encode("utf-8") + b"\0" + bytes.fromhex(sha256(path)))
+    return digest.hexdigest()
+
+
+def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
     executable_value = os.environ.get("DAKOTA_WORKITEMS_UI_EXECUTABLE")
     source_sha = os.environ.get("DAKOTA_WORKITEMS_UI_SOURCE_SHA", "")
     runtime_kind = os.environ.get("DAKOTA_WORKITEMS_UI_RUNTIME_KIND", "frozen")
@@ -84,6 +101,7 @@ def packaged_runtime_identity() -> tuple[Path, str, str, str, str]:
         executable_sha,
         manifest["architecture"],
         runtime_kind,
+        artifact,
     )
 
 
@@ -139,6 +157,12 @@ def run_browser_stage(
     return receipt
 
 
+def wrapper_home_environment(runtime_home: Path) -> dict[str, str]:
+    if platform.system() == "Windows":
+        return {"LOCALAPPDATA": str(runtime_home / "localappdata")}
+    return {"HOME": str(runtime_home)}
+
+
 def start_native_runtime(
     datadir: Path, project: Path, runtime_home: Path, api_key: str
 ) -> ActionServerProcess:
@@ -156,6 +180,7 @@ def start_native_runtime(
                 "ACTIONS_HOME": str(runtime_home),
                 "ROBOCORP_HOME": str(runtime_home),
                 "ACTIONS_SKIP_UPDATE_CHECK": "1",
+                **wrapper_home_environment(runtime_home),
             },
         )
     except Exception as error:
@@ -175,9 +200,22 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         executable_sha,
         architecture,
         runtime_kind,
+        artifact,
     ) = packaged_runtime_identity()
     package_root = executable.parent if runtime_kind == "frozen" else None
     package_tree_sha = packaged_tree_sha256(package_root) if package_root else None
+    embedded_files_sha = artifact.get("embedded_files_sha256")
+    assets_zip_sha = artifact.get("assets_zip_sha256")
+    wrapper_source_sha = artifact.get("wrapper_source_sha256")
+    embedded_frozen_tree_sha = artifact.get("frozen_package_tree_sha256")
+    if runtime_kind == "go-wrapper":
+        for digest in (
+            embedded_files_sha,
+            assets_zip_sha,
+            wrapper_source_sha,
+            embedded_frozen_tree_sha,
+        ):
+            assert isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest)
     node = os.environ.get("DAKOTA_WORKITEMS_UI_NODE") or shutil.which("node")
     assert node is not None
     monkeypatch.setenv(
@@ -197,6 +235,10 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         "source_sha": source_sha,
         "executable_sha256": executable_sha,
         "package_tree_sha256": package_tree_sha,
+        "embedded_files_sha256": embedded_files_sha,
+        "assets_zip_sha256": assets_zip_sha,
+        "wrapper_source_sha256": wrapper_source_sha,
+        "embedded_frozen_tree_sha256": embedded_frozen_tree_sha,
         "runtime_kind": runtime_kind,
         "runtime_version": None,
         "platform": platform.system(),
@@ -209,9 +251,13 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
     }
     process: ActionServerProcess | None = None
     try:
+        version_env = os.environ.copy()
+        version_env.update(wrapper_home_environment(runtime_home))
+        version_env["ACTIONS_SKIP_UPDATE_CHECK"] = "1"
         version = subprocess.run(
             [str(executable), "version"],
             cwd=project,
+            env=version_env,
             capture_output=True,
             text=True,
             timeout=15,
@@ -221,6 +267,41 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         receipt["runtime_version"] = version.stdout.strip()
 
         process = start_native_runtime(datadir, project, runtime_home, api_key)
+        if runtime_kind == "go-wrapper":
+            if platform.system() == "Windows":
+                extracted_root = (
+                    runtime_home
+                    / "localappdata"
+                    / "actions"
+                    / "bin"
+                    / "action-server"
+                    / "internal"
+                    / receipt["runtime_version"]
+                )
+            else:
+                extracted_root = (
+                    runtime_home
+                    / ".actions"
+                    / "bin"
+                    / "action-server"
+                    / "internal"
+                    / receipt["runtime_version"]
+                )
+            assert extracted_root.is_dir()
+            assert extracted_root.resolve().is_relative_to(runtime_home.resolve())
+            assert (extracted_root / "app_hash").read_text().strip() == assets_zip_sha
+            extracted_files_sha = packaged_files_sha256(
+                extracted_root,
+                exclude_root_files={"app_hash", "extract.lock", "lastLaunchTouch"},
+            )
+            assert extracted_files_sha == embedded_files_sha
+            receipt["wrapper_extraction"] = {
+                "path_relative_to_runtime_home": extracted_root.relative_to(
+                    runtime_home
+                ).as_posix(),
+                "app_hash_matches_embedded_archive": True,
+                "extracted_files_sha256": extracted_files_sha,
+            }
         origin = f"http://{process.host}:{process.port}"
         normal = run_browser_stage(
             node,
@@ -248,6 +329,14 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         assert storage_error.get("status") == "PASS", json.dumps(storage_error)
         if package_root is not None:
             assert packaged_tree_sha256(package_root) == package_tree_sha
+        if runtime_kind == "go-wrapper":
+            assert (
+                packaged_files_sha256(
+                    extracted_root,
+                    exclude_root_files={"app_hash", "extract.lock", "lastLaunchTouch"},
+                )
+                == embedded_files_sha
+            )
         receipt["status"] = "PASS_BOUNDED"
         write_receipt(receipt)
     except Exception as error:

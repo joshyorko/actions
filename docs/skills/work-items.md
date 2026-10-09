@@ -416,11 +416,24 @@ horizontal overflow at 320px, and the real storage-unavailable 503 with Retry
 and no raw path. The frozen executable hash does not bind its adjacent onedir
 files: a later run found stale UI bytes beside the same executable hash. Frozen
 UI receipts therefore also hash the full package tree before and after browser
-execution; the Go wrapper's embedded archive remains identified by its
-executable hash. This bounded gate does not accept the Go wrapper's updated UI,
-authorization denial, missing bundled support, or a generic HTTP 500. Those
-states remain `NOT_RUN` until their separately owned or supported packaged
-fixtures run. Do not use response interception as backend evidence.
+execution. The Go-wrapper Linux gate packages that same measured frozen tree
+with the repository's `zip_go_wrapper_assets` helper and verifies the wrapper's
+embedded archive hash plus the extracted file-set hash. For wrapper tests, set
+`HOME` (Linux/macOS) or `LOCALAPPDATA` (Windows) to the test-owned Runtime home
+before both the version probe and server start; `ACTIONS_HOME` and
+`ROBOCORP_HOME` alone do not isolate the wrapper's extraction directory.
+
+A Linux PASS_BOUNDED Go-wrapper receipt at the same source SHA records wrapper
+SHA-256 `79544d8e093c41ef7f2328efd2d0d4fd22acd8989fdc1f34b2a647f37fee6f24`,
+embedded archive SHA-256 `840eb3567e161df9738196c959a8f2acec98c95619b1d1a670036739c5849773`,
+wrapper-source SHA-256 `dd1fca74676c2c10531397e7ffe8bf5499b5ba75a6692334b16fd0e12f50b68d`,
+and extracted-file-set SHA-256 `0eccdeebceb4c8a7f6bf94b8f12e37f4f3302e8726daffc68d0198ee5fb9ad50`.
+It verified the same empty/populated queue, Escape focus restoration, detail,
+320px layout, and real storage-unavailable states as the frozen gate. These are
+Linux results only; Windows/macOS browser acceptance, authorization denial,
+missing bundled support, and generic HTTP 500 remain `NOT_RUN` until their
+separately owned or supported packaged fixtures run. Do not use response
+interception as backend evidence.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
@@ -441,8 +454,9 @@ Before deleting temporary native logs, acceptance rejects any occurrence of the
 synthetic API key using a phase-only failure message. This checks the native INFO
 startup path; verbose WebSocket credential redaction has separate transport
 tests. The frozen executable hash does not identify adjacent onedir files; retain
-that provenance limitation when using its receipt. The Go wrapper hash identifies
-its embedded archive as part of the executable.
+that provenance limitation when using its receipt. The Go wrapper executable
+contains its archive; measure the archive hash and verify the test-owned
+extraction's file set when binding it to browser behavior.
 
 Startup exits retain only the exit code and bounded exception-class/import-module
 identifiers parsed from the final 64 KiB of the temporary log. Raw log lines,
