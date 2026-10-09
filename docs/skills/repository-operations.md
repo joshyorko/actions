@@ -1214,6 +1214,15 @@ Holotree/materialization paths) are not authority. The existing process pool
 starts workers with RCC `env exec --artifact DIGEST --permissive-local
 --inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
 release.
+Provider selection and filesystem trust-carrier binding are separate inputs.
+For an explicit local no-remote baseline that uses a filesystem carrier, set
+`ACTIONS_RUNTIME_RCC_PROVIDER=local` and a task-owned absolute directory through
+`ACTIONS_RUNTIME_RCC_TRUST_CARRIER`; keep the same carrier identity bound through
+publish, acquire, and exec. The adapter rejects symlinked, non-directory,
+foreign-owned, or group/world-writable carrier paths and persists the carrier
+identity rather than its path. A local provider without the expected trust
+attachment can fail acquire with `artifact trust attachment verification failed`;
+do not retry by clearing the carrier or selected provider.
 
 TCP worker startup owns its listener, accept future, and spawned wrapper.
 Startup failure attempts listener closure, accept cancellation, and wrapper
@@ -1325,6 +1334,20 @@ Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes
 complete descendant PID reaping, graceful lease cleanup, or full #134
 acceptance.
+`test_real_rcc_artifact_action_vertical` inserts package/action tables but only
+constructs its `Run` in memory and calls `ActionsProcessPool` directly. It proves
+one real Action result and its RCC receipt, not an HTTP-admitted persisted Run,
+source-only reload, or overlapping-generation drain.
+`test_rcc_runtime_generation_lifecycle.py` supplies that separate local boundary:
+it launches an immutable source export, binds the imported module to its commit,
+holds one HTTP-admitted Action while a source-only reload completes a second
+persisted Run, compares the before/after Package runtime descriptors and RCC
+publish/acquire/build trace, and verifies the old Run's terminal receipt and
+captured wrapper/descendant identities. Use an explicit local provider with the
+same owner-only filesystem trust carrier for publish/acquire/exec; provider
+selection alone does not satisfy the separate carrier attachment. This proves
+the local overlapping-generation path only, not remote-provider outage/A-to-B,
+installed-wheel, frozen-binary, or full #134 acceptance.
 
 The outer Dakota CLI refuses an existing receipt path before resolving toolchain
 environment keys or creating CLI supervisor state. The worker retains its
