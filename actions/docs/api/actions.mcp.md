@@ -32,6 +32,8 @@ Decorator for tools which can be used by AI agents to perform actions.
 
 If False, the tool's domain of interaction is closed. For example, the world of a web search tool is open, whereas that of a memory tool is not.
 
+- <b>`meta`</b>: Optional JSON metadata to include in the MCP tool's `_meta` field.
+
 **Example:**
 
 ```python
@@ -110,7 +112,7 @@ actions run actions.py -a get_ticket
 
 See: https://modelcontextprotocol.io/docs/concepts/resources
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L212)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L214)
 
 ```python
 resource(*args, **kwargs) → Callable
@@ -148,7 +150,7 @@ Note that a prompt needs sema4ai actions to be executed. The command line to exe
 
 actions run actions.py -a make_a_summary
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L333)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L335)
 
 ```python
 prompt(*args, **kwargs)

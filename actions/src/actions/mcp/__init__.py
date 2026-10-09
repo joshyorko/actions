@@ -110,6 +110,8 @@ def tool(*args, **kwargs):
             For example, the world of a web search tool is open, whereas that
             of a memory tool is not.
 
+        meta: Optional JSON metadata to include in the MCP tool's `_meta` field.
+
     Example:
         ```python
         from actions.mcp import tool

@@ -496,10 +496,10 @@ publishing the new catalog. Serve it through `resources/read`; do not require
 UI-only entries in `resources/list`. App-only visibility is host/catalog
 routing, never backend authorization.
 
-The JSON scalar boundary accepts only exact built-in `bool`, `int`, and `float`
-values (plus strings and null); numeric subclasses are not JSON scalars. A
-finite-number check may use `isinstance(value, float)`, but the final scalar
-allowlist must still reject float subclasses.
+This metadata API accepts only exact built-in `bool`, `int`, and `float` values
+(plus strings and null); it rejects numeric subclasses. A finite-number check
+may use `isinstance(value, float)`, but the final scalar allowlist must still
+reject float subclasses.
 
 Proposed ADR 0100 leaves the JSON Schema source-of-truth recommendation with
 #100 and records a provisional thin Actions-owned React renderer plus official
