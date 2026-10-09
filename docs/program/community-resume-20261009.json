@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T22:53:00Z",
-  "status": "ACTIVE engineering checkpoint at 2026-10-09T22:53Z: 11 of 19 scoped PRs merged only to named targets; 8 open/blocked, 0 merge-ready. Integration abe8640a has three Actions Core failures on Ubuntu, Windows and macOS; Ubuntu 3.13/mypy and separate source diagnostics are being handled, with the narrow fix and Mac/Windows diagnosis still pending. PR256 Linux native build failed while other checks run; review/native diagnosis is pending. PR220 now has 14 hosted successes and one skip. No issue acceptance or publication changed.",
+  "observed_at": "2026-10-09T22:58:00Z",
+  "status": "ACTIVE engineering checkpoint at 2026-10-09T22:58Z: 11 of 20 scoped PRs are integrated only to named targets; 9 open/blocked and 0 merge-ready. PR270 full Actions suite passes (315 tests); 4 hosted checks pass and 8 remain in progress, with independent review pending. PR256 native jobs completed with Linux/Windows frozen UI passing, macOS UI steps skipped, and Go UI failing before startup for four missing manifest hash fields. Issue acceptance and publication are unchanged.",
   "integration_head": "abe8640a137942bcf398668fe2093529ba53c38b",
   "community_head": "c30f953bae1a322e1d09549607ab42f1badce440",
   "release_ready": false,
@@ -3172,15 +3172,15 @@
   },
   "release_candidate_head": "6a53578fac029a0696834c30438c858f5f0003be",
   "current_convergence_update": {
-    "observed_at_utc": "2026-10-09T22:53:00Z",
-    "path": "evidence/convergence-followup-20261009T2253Z.json",
-    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
+    "observed_at_utc": "2026-10-09T22:58:55Z",
+    "path": "evidence/convergence-followup-20261009T2258Z.json",
+    "sha256": "fa6b9e40b6bd70b9956a1d1ef4e507233c87f5dd2a5eac4d2bbc0ea51c8cef2a",
     "cohort": {
-      "items": 19,
-      "merge_ready": 0,
-      "blocked_open": 8,
+      "items": 20,
       "target_integrated": 11,
-      "prs": [
+      "blocked_open": 9,
+      "merge_ready": 0,
+      "integrated_prs": [
         251,
         266,
         257,
@@ -3195,15 +3195,18 @@
       ]
     },
     "open_pr_audit": {
-      "path": "evidence/convergence-live-prs-20261009T2248Z.json",
-      "sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
-      "open_count": 8,
-      "all_drafts": true
+      "path": "evidence/convergence-followup-20261009T2258Z.json",
+      "sha256": "fa6b9e40b6bd70b9956a1d1ef4e507233c87f5dd2a5eac4d2bbc0ea51c8cef2a",
+      "open_count": 9,
+      "all_drafts": true,
+      "note": "All nine blocked rows are included; eight preserve the 22:48 exact head/base audit and detailed owner/gate/action, with current PR221/256 updates and PR270 exact head."
     },
     "branch_readback_at": "2026-10-09T22:47:00Z",
     "issue_acceptance_changed": false,
-    "targeted_ci_refresh": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
-    "targeted_ci_refresh_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0"
+    "previous_baselines": [
+      "evidence/convergence-followup-20261009T2248Z.json",
+      "evidence/convergence-followup-20261009T2253Z.json"
+    ]
   },
   "latest_artifact_metadata_erratum": {
     "observed_at_utc": "2026-10-09T22:34:00Z",
@@ -3386,5 +3389,39 @@
     "status": "FAILURE",
     "diagnosis_owner": "L/reviewer and native supervisor",
     "diagnosis": "pending; root reports recovery gate cleared, native/review proof remains."
+  },
+  "prior_current_convergence_update_20261009T2253Z": {
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "path": "evidence/convergence-followup-20261009T2253Z.json",
+    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
+    "cohort": {
+      "items": 19,
+      "merge_ready": 0,
+      "blocked_open": 8,
+      "target_integrated": 11,
+      "prs": [
+        251,
+        266,
+        257,
+        259,
+        262,
+        268,
+        264,
+        263,
+        267,
+        269,
+        265
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261009T2248Z.json",
+      "sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
+      "open_count": 8,
+      "all_drafts": true
+    },
+    "branch_readback_at": "2026-10-09T22:47:00Z",
+    "issue_acceptance_changed": false,
+    "targeted_ci_refresh": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
+    "targeted_ci_refresh_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0"
   }
 }

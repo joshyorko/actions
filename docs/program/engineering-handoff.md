@@ -1,6 +1,14 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-09T22:53Z
+## Current convergence — 2026-10-09T22:58Z
+
+The 20-PR cohort has 11 target-only merges, 9 open/blocked PRs and 0 merge-ready. The exact current addendum lists all nine open PRs, retaining the unchanged eight-row head/base inventory from the 22:48 audit and adding PR270 at `735e56fac9f1a3856d59768f9084351d1244034f`: [22:58 convergence delta](evidence/convergence-followup-20261009T2258Z.json). Community, integration and Runtime candidate refs remain `c30f953b`, `abe8640a` and `6a53578f`. The 22:48 audit and 22:53 check receipt are historical; no issue acceptance changed.
+
+PR270 is owned by A on `fix/mcp-metadata-lint-docs-20261009`. The full configured Actions suite passes (315 tests, four warnings, 53.18s, no installs); hosted checks are 4 PASS and 8 IN_PROGRESS. Root scoped source review accepts the change; independent L review is underway. This is not yet admitted. The required three-OS Core matrix must run on the resulting PR221 head before community/release admission.
+
+PR256 native jobs have completed. Linux and Windows frozen UI pass; macOS passes while skipping both UI steps. Go UI fails before startup because four required manifest hash fields are missing. Core 3.13 passes on Linux, Windows and macOS, and mypy passes; E721 and stale generated MCP docs remain separate integration blockers. The native author owns manifest/startup-child-cleanup/PASS-before-teardown findings; independent L review is BLOCKED. No PR256 whole-issue acceptance is inferred.
+
+## Historical convergence snapshot — 2026-10-09T22:53Z
 
 The 11 target-only merges, eight blocked open drafts, current branch refs and per-PR owners/dependencies remain as recorded in the [22:48 baseline](evidence/convergence-followup-20261009T2248Z.json) and [full eight-PR audit](evidence/convergence-live-prs-20261009T2248Z.json). This small update records new checks for PR220, PR221 and PR256 in the [22:53 delta](evidence/convergence-followup-20261009T2253Z.json) and [targeted check receipt](evidence/convergence-targeted-check-refresh-20261009T2253Z.json).
 
