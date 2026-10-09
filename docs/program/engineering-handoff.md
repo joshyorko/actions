@@ -1,96 +1,20 @@
 # Actions Community engineering handoff — active October 9 checkpoint
 
-Normal engineering continues. The user's migration preparation is separate read-only
-reconnaissance, not a freeze. Do not detach/rename the repository, migrate issues,
-cancel workers, discard uncommitted work or force-merge unfinished branches.
-Only an explicit **MIGRATION FREEZE** starts controlled checkpointing: begin no new
-mutations, let in-flight work reach safe checkpoints, preserve and push recoverable
-work, then inventory every worker/worktree/branch/head and unfinished change.
+Normal engineering continues; no migration freeze, community merge, or release occurred. The [resume record](community-resume-20261009.json) contains timestamped worktrees/remote refs and the [latest immutable update archive](evidence/community-20261009-cloud-admission.zip). Previous archives remain unchanged. All54 issue contracts, comments, dependencies, states, and accounting are preserved; four stale next-action fields (#134, #151, #208, #214) were refreshed. None is accepted or whole-issue review-ready.
 
-The [resume record](community-resume-20261009.json) contains the current worker and
-worktree inventory, exact heads, proof limits and hashed [fanout evidence archive](evidence/community-20261009-fanout.zip).
-The earlier [resume archive](evidence/community-20261009-resume.zip) is also retained unchanged.
-The October 8 archive and original patch remain unchanged. All 54 contracts,
-comments and dependency relationships remain retained; none is accepted or whole-issue review-ready.
-Community remains `7c98236069171f57031218f938963238986293bd`; integration is now
-`ea08faf39e107113ae50a529770ce1ca1a422d05` after reviewed PR229 and PR230 merged. No community merge or release occurred.
+Integration is `4626cc56bdde0cee92010ae1b985e5d385e4c0d2` on community base `7c98236069171f57031218f938963238986293bd`. PR229, PR230, PR232 and PR233 are integrated. PR225, PR231 and PR234 have green CI on prior base `376ed4c1`, but remain open and are not admitted at4626. Root has staged their clean merges in separate branch `integration/cloud-admission-20261009` at `134dfbee`; local combined gates pass112 focused/642 portable/10 skipped, lint, types289, and Doctor/Bootstrap/Toolkit33; hosted CI is pending, and integration itself has not advanced to that branch.
 
-- **Windows shutdown:** [PR229](https://github.com/joshyorko/actions/pull/229),
-  `a8eb7b46f536202f71484d3933d7ed70be103e5c`, now passes strict owned-handle,
-  frozen/Go-wrapper browser/storage and history gates on Linux, Windows and macOS
-  in [run37947917527](https://github.com/joshyorko/actions/actions/runs/37947917527).
-  Portable suite573 PASS/10 SKIP; script suite22 PASS/3 Windows SKIP locally;
-  lint and typecheck282 files PASS. Independent review found no additional defect.
-  All12 required successful checks and1 skipped publication resolved before integration;
-  the merge tree equals the tested head tree. Handles of processes that left accounting before capture remain outside this proof.
-- **Tunnel:** [PR225](https://github.com/joshyorko/actions/pull/225), `2d4933a7`,
-  restores the unverified patch and repairs inherited-writer cleanup, full-queue
-  drainage and cancellation. Focused41 PASS; integrated portable607 PASS/10 SKIP; lint/types PASS.
-  Historical focused native steps pass all three platforms; current native checks
-  are pending. The historical later Windows ownership
-  failure remains historical evidence, not relabeled by the separate repair.
-  Public-edge identity/authentication and SSH ownership still block whole acceptance.
-- **Robot publication:** [PR230](https://github.com/joshyorko/actions/pull/230),
-  `b690b262`, merged into integration as `ea08faf3` after all11 checks succeeded.
-  Current native Linux/Windows/macOS all passed in run37949958738, including
-  ownership and browser/storage/history. Portable583 PASS/10 SKIP; lint/types PASS.
-  [PR232](https://github.com/joshyorko/actions/pull/232) repairs post-publication
-  cleanup ownership. Original `af4f706e` passed52 focused,585 portable/10 SKIP,
-  all three native jobs and independent review. It is now retargeted to integration
-  at `72a60344`; local package gates passed again, current hosted checks pending.
-  A separate cloud Luna lane repairs the demonstrated staging-mode widening by
-  `copytree` in a private container. Root/source identity remains unproved.
-- **Work Items:** same Dakota thread `01a11d7a-e547-7423-8fc5-fc0148df2123`
-  completed its remote checkpoint at `f31d9b56`. Cloud integration advanced
-  [PR231](https://github.com/joshyorko/actions/pull/231) to `5d295a92`.
-  Harness703837e5 requires both passing cases and fresh hash-bound proofs; interrupted
-  or changed-artifact final checks invalidate all cases. Regressions14 PASS;
-  retained Linux frozen/Go binaries2 PASS; integrated portable587 PASS/10 SKIP; lint/types PASS.
-  Independent cloud review found a prior PASS can survive abrupt harness death
-  before its final receipt write. A Luna lane is adding atomic attempt invalidation;
-  the earlier14 passing regressions do not waive this finding.
-  Artifact source/build labels remain caller claims; stale-reservation seeding is
-  not a process-crash test. The broad all-marker working-tree diagnostic remains
-  FAIL:24 failed/677 passed/22 skipped. Exact failure names are in the archive;
-  configured portable and native retained-artifact results do not replace that failure.
-- **RCC:** same Dakota thread `01a11d7b-4029-7953-aba7-f3b487098b32` remains active,
-  now turn `01a1213e-6a35-7e53-80d7-803c46dfe2d9`, pushed `7cf11c8b`.
-  Its preceding turn completed before this continuation. Historical source Runtime
-  with candidate wheels at `e33987b6` reports HTTP403/200, SQLite and artifact cells
-  PASS but wrapper `failed/-1/child exited non-zero`, so overall acceptance is FAIL.
-  The Linux supervisor successor still has independent review blockers around
-  adopted-zombie reap, failed ownership lookup, exception cleanup and unreported
-  escalation. Keep the live probe and follow-up repairs in the same remote thread.
-  A separate cloud worker implements only explicit worker `exit` handling; bounded
-  pool retirement, wrapper receipt success and RCC lease ordering remain open.
+- **PR233 worker exit:** `80764aca` was tested on synthetic tree `323c0116` and merged as `4626cc56`; merge tree is identical and all11 checks passed. Scope remains explicit exit handling; no pool retirement, RCC receipt normalization, or graceful lease-ordering claim.
+- **PR225 Tunnel:** `55463089` CI is green on base376 but not merged. Its feature reconciliation retains both native workflow steps. Earlier `2d4933a7` did not produce a complete native receipt. PR236 at`82f526ef` separately passes111 focused,628 portable/10 skipped, lint/typecheck287; scoped reviews `b88f8508` and `82f526ef` passed. All11 hosted checks passed; live provider/TLS and standalone lifecycle remain unverified.
+- **PR234 Robot staging:** `5f3fbbb5` CI is green on base376, but is not merged; it is included in the separate pending admission branch. The scoped POSIX staging review remains limited: Windows ACL and root/source identity are not established.
+- **PR231 Work Items:** `49becb96` CI is green on base376, not validated at4626. PR231 run-artifact download was blocked by proxy HTTP403; no artifact bytes were retrieved and current Go acceptance remains incomplete. The workflow checkout is merge commit `873237df` (base376 + PR231); it retains the Go wrapper, not the frozen executable. No current-source dual-runtime result exists yet. The separate24-failure diagnostic and host Python3.13 ensurepip failure remain retained.
+- **PR235 RCC:** `3dbfb1be` preflight harness has29 PASS/1 live-RCC SKIP and rejects receipt overwrite before side effects while preserving old receipt bytes. The preceding613/10 portable suite belongs to the earlier `d9a08395` checkpoint. The exact `7cf11c8` live receipt still fails (`failed/-1`); the Dakota Executor thread remains **UNCONFIRMED** after timeout, with same thread/turn preserved.
+- **Scratch cleanup:** inventory/reclamation records cover only generated test venvs and package venvs in completed lanes; source, worktrees, wheelhouses, receipts, logs, and other scratch were preserved.
+- **Devsy:** no verified READY notification or authorization has been received; remain parked until both are explicitly received. Continue cloud work without waiting on Devsy. No Devsy call/retry/recreation was made, and no private grant is included. Archive errata in the resume record retract incorrect `latest_user_state: READY` transcription in update/update2 ZIPs; those historical bytes are not readiness or authorization evidence.
 
-The user requested maximum cheap **cloud** Luna fanout. Six disjoint Luna lanes
-cover worker exit, private Robot staging, tunnel edge verification, RCC review, release
-workflow inventory and Work Items receipt invalidation. Their current worktree
-heads and uncommitted file observations are in the resume record. No additional
-Dakota workers were created. The user is provisioning another Executor app server;
-no discovery or dispatch to that server has occurred.
+PR237 is clean/pushed at `8013d172` after fixing the Windows manifest fixture; its current hosted matrix is pending. PR239 stages PR235/236 on top of PR238 at `5c3c4a6`; combined local gates pass135 focused/1 skipped and680 portable/10 skipped with lint/types291; hosted checks are pending. Robot final-copy validation remains active in its isolated branch; a copied-venv run is diagnostic only and correct toolkit gates are pending.
 
-PR220's older `bdf39a16` Runtime workflow failed artifact validation on manylinux
-tag ordering before credential or upload steps. No PyPI upload was attempted.
-The current integration already contains a strict parser accepting equivalent
-platform-tag order; the cloud lane is verifying that existing fix rather than
-adding duplicate logic. Keep the older governance-head failure explicit.
-
-Both prior Dakota turns were confirmed completed before reusing these exact
-threads; no duplicate workers were dispatched. The user intentionally removed
-Dakota images. Retained executable/wheel bytes were inventoried separately.
-
-**Devsy stays parked:** request `apr_29be804c-94cd-4b62-9233-e91b5ec30774`, session
-`stateless`, was neither retried nor recreated. Fresh Executor thread calls do not
-prove Devsy approval validation repaired. The sensitive approval grant remains
-only in the old task's private record, unavailable here and excluded from GitHub.
-
-Continue the retained #82/#101 graph and maintain exact verification subjects.
-Wait for full candidate checks before integration admission; no checkpoint result
-establishes community or release readiness. Keep all original PR histories.
-
----
+PR221 remains open against community and untouched. Current remote RCC branch/thread state remains separate from the local PR235 checkpoint. No release readiness is inferred from green CI; preserve all failure evidence and exact subjects in the checkpoint archive.
 
 ## Historical October 8 handoff (superseded state; retained evidence)
 

@@ -1055,6 +1055,8 @@ the adapter rejected the acquisition; the manifest was restored afterward.
 
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
 
+For hosted pull-request validation, record the actual checkout SHA from the workflow log and, for `refs/pull/<number>/merge`, its two parents and tree. The PR head SHA alone does not identify the tested candidate. When the target base advances, generate the synthetic merge for that base and compare its tree with the tested tree before carrying results forward. A raw diff between divergent PR and base tips can misstate which workflow steps survive; inspect the actual three-way merge result and the executed workflow. A combined rollup must pass its focused, full, static, and hosted gates on its exact candidate tree before it replaces separate green PRs.
+
 ## MCP gateway metadata
 
 The `/mcp` metadata middleware forwards any valid JSON-RPC method, but stores

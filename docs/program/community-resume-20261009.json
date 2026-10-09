@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T15:34:46.603301+00:00",
-  "status": "ACTIVE_ENGINEERING_CHECKPOINT",
-  "integration_head": "ea08faf39e107113ae50a529770ce1ca1a422d05",
+  "observed_at": "2026-10-09T16:20:41.748647+00:00",
+  "status": "ACTIVE_ENGINEERING_CHECKPOINT; concurrent work continues",
+  "integration_head": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
   "community_head": "7c98236069171f57031218f938963238986293bd",
   "release_ready": false,
   "community_merge": false,
@@ -17,11 +17,10 @@
   "devsy": {
     "request_id": "apr_29be804c-94cd-4b62-9233-e91b5ec30774",
     "session": "stateless",
-    "state": "BLOCKED_PRESERVED",
+    "state": "PARKED; NO VERIFIED READY OR AUTHORIZATION",
     "recreated": false,
     "retried": false,
-    "private_record": "old task private/pending-devsy-creation.json; unavailable in resumed workspace",
-    "validation": "Fresh Executor codex calls work; Devsy approval validation not established. No Devsy calls made."
+    "validation": "No verified READY notification or authorization has been received. Remain parked until both are explicit; continue cloud work without waiting. No Devsy calls, recreation, retry, or duplicate create."
   },
   "dakota": {
     "reconciled_before_dispatch": true,
@@ -46,52 +45,75 @@
       "initial_turn": "01a11d7b-40d3-7a32-b49b-38f69992fcba",
       "initial_status": "completed/notLoaded/no active turn",
       "resume_turn": "01a1213e-6a35-7e53-80d7-803c46dfe2d9",
-      "head": "7cf11c8bbad67a5dbfa9387ce82d8ca35f5c8c4e",
-      "state": "ACTIVE_REPAIR; previous turn completed before this same-thread continuation; live supervised probe and follow-up review pending",
+      "head": "79b95e85c6fc2e0dc335e1b6ca93f2c59a5091bd",
+      "state": "UNCONFIRMED after read-only Executor list_thread_items timed out; preserve same thread/turn and assume remote changes unknown",
       "worktree": "/tmp/actions-134-dakota-resume-20261009",
       "branch": "feature/dakota-rcc-acceptance-20261008",
       "unfinished_changes": {
-        "source": "worker file-change/control receipts; not a fresh remote git-status snapshot",
-        "files": [
-          "action_server/scripts/verify_dakota_rcc_acceptance.py",
-          "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py"
-        ],
+        "source": "remote worktree state unconfirmed after Executor timeout",
+        "files": "unknown; do not infer clean/stopped",
         "verified": false,
-        "preservation": "Retained in worker worktree; do not reset or discard. Exact recovery inventory required at explicit freeze."
+        "preservation": "Reuse same thread/turn; no duplicate dispatch"
       },
       "resume_turns": [
         "01a12111-5ef1-7d10-9c74-2cfcde560ce7",
         "01a1213e-6a35-7e53-80d7-803c46dfe2d9"
       ],
-      "snapshot_evidence": "evidence/rcc-active-snapshot-20261009.json"
+      "snapshot_evidence": "evidence/rcc-active-snapshot-20261009.json; authoritative active snapshot at15:32 UTC, later list_thread_items timeout",
+      "pr": null
     }
   },
   "slices": {
     "tunnel": {
-      "head": "2d4933a77d300614b7de2e6dc328d77f7947283d",
+      "head": "554630899c6eab23b922ba6558347e7f2c439c00",
       "pr": 225,
       "original_patch": "October 8 archive preserved unchanged",
       "focused": {
-        "passed": 41
+        "passed": 93,
+        "composition": "41 tunnel + 52 Robot"
       },
       "portable": {
-        "passed": 607,
+        "passed": 619,
         "skipped": 10
       },
-      "lint": "PASS; Markdown lint unavailable",
-      "types": "PASS 284 files",
-      "native_focused": {
-        "linux": "PASS",
-        "windows": "PASS",
-        "macos": "PASS",
-        "run": 37946053759
-      },
-      "whole_native": "Historical cff Windows failure preserved; latest integrated head native result pending",
+      "lint": "PASS",
+      "types": "PASS 286 files",
+      "whole_native": "No whole native PASS claimed; earlier2d4933a7 had a workflow conflict and did not produce a complete native receipt",
       "limits": [
-        "Public edge identity/authentication and SSH identity unresolved",
-        "No whole #214 acceptance"
+        "Public edge identity/authentication, SSH identity and public-route evidence remain open",
+        "No live/public traffic; no whole #214 acceptance"
       ],
-      "current_native": "PENDING"
+      "current_native": "GREEN in hosted CI on base376ed4c1; PR225 remains open and is not tested as part of current4626 combined admission",
+      "pr_state": "OPEN_DRAFT",
+      "branch_reconciliation": "PR225 head merged integration376ed4c1 into feature branch; this is not integration admission",
+      "workflow": "Both Tunnel and Robot native workflow steps retained after resolving conflict",
+      "legacy_native_observation": {
+        "head": "2d4933a77d300614b7de2e6dc328d77f7947283d",
+        "run": 37946053759,
+        "status": "INCOMPLETE_WORKFLOW; NOT A PASS OR COMPLETE PENDING RECEIPT",
+        "explanation": "The workflow had a conflict and omitted the complete native workflow; do not attribute a complete native result to this head."
+      },
+      "hosted_ci": "GREEN on base376ed4c1; NOT_YET_MERGED",
+      "ci_base": "376ed4c15c76ccf1b5e3b70985e681946bffd249",
+      "integration_admission": "Pending combined gate on admission branch134dfbee; current integration4626 unchanged",
+      "edge_successor": {
+        "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+        "pr": 236,
+        "state": "OPEN_DRAFT",
+        "focused": {
+          "passed": 111
+        },
+        "portable": {
+          "passed": 628,
+          "skipped": 10
+        },
+        "lint": "PASS",
+        "types": "PASS287",
+        "review": "Scoped independent review PASS at b88f8508",
+        "native": "PENDING",
+        "live_provider_tls": "NOT_RUN",
+        "independent_review": "82f526ef source-only PASS; no tests run; existing guide accepted as accurate"
+      }
     },
     "robot": {
       "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
@@ -123,7 +145,34 @@
         "windows": "PASS",
         "macos": "PASS"
       },
-      "disposition": "MERGED_INTO_INTEGRATION_ONLY"
+      "disposition": "MERGED_INTO_INTEGRATION_ONLY",
+      "private_staging_successor": {
+        "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+        "pr": 234,
+        "state": "OPEN_DRAFT",
+        "review": "Independent review PASS at0721ebc0",
+        "focused": {
+          "passed": 56
+        },
+        "portable": {
+          "passed": 589,
+          "skipped": 10
+        },
+        "process_ownership": {
+          "passed": 22,
+          "windows_skipped": 3,
+          "total": 25
+        },
+        "lint": "PASS",
+        "types": "PASS284",
+        "native": "PENDING",
+        "limits": [
+          "Windows ACL isolation unverified",
+          "Root/source identity and pathname cleanup race remain unproved"
+        ],
+        "hosted_ci": "GREEN on base376ed4c1; separate admission branch combined CI pending",
+        "integration_admission": "Included in separate admission branch; combined CI pending"
+      }
     },
     "windows": {
       "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
@@ -159,57 +208,106 @@
       "disposition": "MERGED_INTO_INTEGRATION_ONLY"
     },
     "work_items": {
-      "head": "5d295a9272097af8728b40beb774a947a5df9ce7",
+      "head": "49becb96767d4fc225fb9cb79162db9a9d1dafd8",
       "harness_sha": "703837e5ef898ef7f69ea4bdd2f2f3ef7629687e",
       "pr": 231,
       "focused": {
-        "passed": 14
+        "passed": 15
       },
       "native_retained_linux": {
         "passed": 2,
         "artifacts_rebuilt": false
       },
-      "lint": "PASS; Markdown lint unavailable",
-      "types": "PASS 284 files",
+      "lint": "PASS; explicit script Ruff PASS",
+      "types": "PASS",
       "broad_suite": {
         "status": "FAIL",
         "passed": 677,
         "failed": 24,
         "skipped": 22,
         "warnings": 4,
-        "seconds": 708.72,
         "failure_index": "workitems-evidence/broad-suite-failures.json",
         "replaced_by_focused_pass": false,
-        "subject": "487826dc plus root uncommitted finalization repair/regressions, later committed as703837e5; formatting/type annotations changed during this run. Diagnostic working-tree evidence, not exact-commit admission."
+        "subject": "all-marker diagnostic retained as separate failure evidence"
       },
       "receipt": "action_server/tests/evidence/dakota_workitems_native_acceptance_resume_20261009.json",
       "limits": [
-        "Source/build labels caller supplied, no retained build manifest",
+        "Source/build labels caller supplied; no retained build manifest",
         "Recovery fixture seeds stale reservation, not process crash",
         "Linux only"
       ],
       "portable": {
-        "passed": 587,
+        "passed": 588,
         "skipped": 10
       },
-      "current_native": "PENDING",
-      "review_successor": "Cloud review found prior PASS can survive abrupt harness death before finally; same cloud lane implementing atomic attempt invalidation. Prior14 focused PASS does not waive this finding."
+      "current_native": "Hosted CI GREEN on prior base; dual-artifact current Go acceptance pending",
+      "review_successor": "Cloud review found prior PASS can survive abrupt harness death before finally; same cloud lane implementing atomic attempt invalidation. Prior14 focused PASS does not waive this finding.",
+      "receipt_repair": "Fresh attempt invalidates old PASS before validation; subprocess regression PASS",
+      "host_python": "Separate unactivated Python3.13 ensurepip attempt FAILED; not conflated with RCC-pinned package gates",
+      "hosted_ci": "GREEN on base376ed4c1; not yet merged into integration4626",
+      "ci_checkout": "873237dfd9c3d59d10b2765c8c77cfa85f59b095",
+      "ci_checkout_parents": [
+        "376ed4c15c76ccf1b5e3b70985e681946bffd249",
+        "49becb96767d4fc225fb9cb79162db9a9d1dafd8"
+      ],
+      "ci_artifacts": "Go wrapper only; frozen executable is not retained by workflow",
+      "artifact_inventory": "ACTIVE: Linux artifact inventory/download and current Go acceptance are ongoing; no current-source acceptance result yet"
     },
     "rcc": {
-      "head": "7cf11c8bbad67a5dbfa9387ce82d8ca35f5c8c4e",
+      "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
       "focused": {
-        "passed": 11,
-        "deselected": 1
+        "passed": 28
       },
-      "review": "FAIL at7cf11c8: success-path adopted zombies bypass reap; ownership lookup can fail open; internal exceptions lack cleanup finally; unexpected descendant cleanup must be separately classified.",
+      "review": "FAIL at7cf11c8: retain observed review findings; local successor documented separately",
       "cleanup_observation": "Older cloud focused runs left stopped zombie descendants underPID1; this is not a universal reap proof.",
       "action_execution": "Reported HTTP403/200 and SQLite passed, artifact verified",
       "wrapper": "failed/-1/child exited non-zero; retained as distinct failed cell",
-      "receipt": "action_server/tests/acceptance_evidence/candidate-wheel-e33987b6.json",
-      "state": "ACTIVE_REPAIR",
+      "receipt": "Exact live receipt at7cf11c8 remains overall FAIL; wrapper failed/-1 despite reported action cells PASS",
+      "state": "LOCAL_PR235_PREFLIGHT_CHECKPOINT; DAKOTA_EXECUTOR_THREAD_UNCONFIRMED",
       "receipt_subject": "e33987b6224fbc0b444c9b8f26908b3040447223",
       "receipt_overall": "FAIL; wrapper_exit FAIL despite other reported cells PASS",
-      "focused_successor": "Worker reports24 PASS1liveSKIP before follow-up7cf argument normalization; independent review still rejects containment completeness."
+      "focused_successor": "Worker reports24 PASS1liveSKIP before follow-up7cf argument normalization; independent review still rejects containment completeness.",
+      "remote_canonical_head": "79b95e85c6fc2e0dc335e1b6ca93f2c59a5091bd",
+      "remote_state": "UNCONFIRMED after Executor timeout; no remote changes inferred",
+      "local_successor": {
+        "head": "d9a08395d14478534490b6f90c2405a32fa869fd",
+        "branch": "resume/rcc-review-20261009",
+        "pr": 235,
+        "state": "OPEN_DRAFT",
+        "integrated_subject": "859d42f7 integrated candidate",
+        "portable": {
+          "passed": 613,
+          "skipped": 10
+        },
+        "package_lint_types": "PASS 285",
+        "script_ruff": "PASS",
+        "focused": {
+          "passed": 28,
+          "deselected": 1,
+          "deselected_reason": "real RCC acceptance test not run"
+        },
+        "native_or_live": "NOT_RUN"
+      },
+      "limits": [
+        "No successful live RCC lifecycle/lease result",
+        "No native PR CI acceptance reported",
+        "Failed wrapper receipt remains failed"
+      ],
+      "current_preflight": {
+        "passed": 29,
+        "skipped": 1,
+        "skipped_test": "live-RCC test",
+        "receipt_overwrite": "Existing receipt bytes preserved; refusal occurs before side effects"
+      },
+      "prior_integrated_candidate": {
+        "head": "d9a08395d14478534490b6f90c2405a32fa869fd",
+        "portable": {
+          "passed": 613,
+          "skipped": 10
+        },
+        "scope": "prior PR235 body; not a rerun on3dbfb1be"
+      },
+      "native_or_live": "No new live-RCC execution; exact7cf receipt remains FAIL"
     },
     "robot_cleanup": {
       "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
@@ -219,145 +317,152 @@
         "passed": 52
       },
       "portable": {
-        "passed": 585,
+        "passed": 587,
         "skipped": 10
       },
-      "lint": "PASS; optional Markdown lint unavailable",
-      "types": "PASS284",
-      "review": "Independent scoped review PASS at af4f706e; final diff remains same3 production lines plus tests/docs",
+      "lint": "PASS",
+      "types": "PASS285",
+      "review": "Independent review PASS; 11 hosted checks SUCCESS",
       "prior_native": {
         "head": "af4f706edd3d34e50bd50c8f42ca28530ff6b669",
         "run": 37950047081,
         "all_three_platforms": "PASS"
       },
-      "current_native": "PENDING",
+      "current_native": "PASS via 11 successful required checks",
       "limits": [
         "Root/source/staging admission remains open",
-        "Private staging container successor active separately"
-      ]
+        "Private staging successor is separate and unmerged"
+      ],
+      "merge": {
+        "sha": "376ed4c15c76ccf1b5e3b70985e681946bffd249",
+        "tree": "65c21c119dbb932605326fd457d0dd8579f4393e",
+        "tested_head_tree": "65c21c119dbb932605326fd457d0dd8579f4393e",
+        "identity": "equal"
+      }
+    },
+    "work_exit": {
+      "issue": 134,
+      "head": "80764aca73d50ff7325f581bb87d732af84df914",
+      "pr": 233,
+      "state": "MERGED_INTO_INTEGRATION",
+      "checks": {
+        "portable_passed": 587,
+        "skipped": 10,
+        "lint": "PASS",
+        "types": "PASS285",
+        "native": "PENDING"
+      },
+      "scope": "Explicit JSON-RPC exit stops the synchronous consumer after current action; protocol groundwork only. No pool retirement, RCC adapter or receipt classification change; no end-to-end graceful RCC lease claim.",
+      "retirement_design": "worker-exit-evidence/retirement-design.md; TCP/shared socket/shared-reader/unbounded writer facts documented, send deadline and capacity semantics unresolved",
+      "merge_sha": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+      "integration_checks": "11 PASS",
+      "native": "Only the hosted merge-check result is asserted; no whole #134 acceptance"
+    },
+    "wheel_inventory": {
+      "fix_commit": "9b3c1a4b",
+      "state": "VERIFIED_EXISTING_CHANGE; no additional code or PR",
+      "devutils": {
+        "passed": 124
+      },
+      "generator": "no-change verified"
     }
   },
   "coordination": {
-    "migration_preparation": "Separate agent performs read-only reconnaissance; normal engineering continues.",
+    "migration_preparation": "No engineering work is waiting on migration. Normal engineering continues; no migration freeze has been issued.",
     "freeze_issued": false,
     "on_explicit_migration_freeze": "Begin no new mutations; allow in-flight operations to reach safe checkpoints; preserve and push recoverable work; inventory all worker/repository state.",
     "migration_specific_changes": "NONE; no detachment, renaming or issue migration",
     "cloud_fanout": "User explicitly requested maximum cheap Luna workers in this cloud environment; all new cloud agents use gpt-6-luna/medium.",
     "new_executor_server": "User provisioning separately; no discovery or dispatch to it yet.",
-    "remote_dispatch": "No additional Dakota workers; existing RCC thread continues its assigned repair."
+    "remote_dispatch": "No extra Dakota workers; RCC thread remains unconfirmed after timeout. Work proceeds in Codex Cloud. Artifact retrieval was blocked with HTTP403 and no bytes received; current-source replay is not established."
   },
   "cloud_workers": [
     {
       "thread": "/root",
-      "state": "ACTIVE_INTEGRATION_OWNER",
-      "scope": "integration admission, governance and receipts",
+      "state": "ACTIVE_INTEGRATION_AND_GOVERNANCE_OWNER",
       "worktree": "/workspace/work/community-resume/governance",
-      "head": "bdf39a16e055283538f1df4740bfd4b21df17e27",
-      "unfinished_changes": [
-        "M docs/skills/repository-operations.md",
-        " M docs/skills/work-items.md"
+      "head": "cd98e357c8bdd1108577cdd54e8844cb77f93267",
+      "worktrees": [
+        "/workspace/work/community-resume/admission",
+        "/workspace/work/community-resume/governance"
+      ],
+      "admission_prs": [
+        238,
+        239
       ]
-    },
-    {
-      "thread": "/root/windows_shutdown_review",
-      "state": "COMPLETED",
-      "scope": "Windows repair, Robot cleanup, RCC lifecycle review, Work Items integration checkpoint",
-      "head": "5d295a9272097af8728b40beb774a947a5df9ce7"
-    },
-    {
-      "thread": "/root/robot_gate_review",
-      "state": "COMPLETED",
-      "scope": "Independent Robot, Windows, governance and cleanup review"
-    },
-    {
-      "thread": "/root/tunnel_patch_review",
-      "state": "COMPLETED",
-      "scope": "Tunnel repair and independent RCC e339 review"
-    },
-    {
-      "thread": "/root/luna_worker_exit",
-      "state": "ACTIVE_IMPLEMENTATION",
-      "model": "gpt-6-luna",
-      "effort": "medium",
-      "issue": 134,
-      "scope": "explicit worker exit protocol only",
-      "worktree": "/workspace/work/community-resume/worker-exit",
-      "branch": "repair/worker-exit-protocol-20261009",
-      "head": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
-      "unfinished_changes": [
-        "M action_server/src/actions/server/_preload_actions/preload_actions_server_main.py",
-        " M docs/skills/repository-operations.md",
-        "?? action_server/tests/action_server_tests/test_preload_actions_exit.py"
-      ]
-    },
-    {
-      "thread": "/root/luna_robot_identity",
-      "state": "ACTIVE_IMPLEMENTATION",
-      "model": "gpt-6-luna",
-      "effort": "medium",
-      "issue": 151,
-      "scope": "private staging container only; root/source capability redesign deferred",
-      "worktree": "/workspace/work/community-resume/robot-staging",
-      "branch": "repair/robot-private-staging-20261009",
-      "head": "af4f706edd3d34e50bd50c8f42ca28530ff6b669",
-      "unfinished_changes": [
-        "M action_server/src/actions/server/_api_robots.py",
-        " M action_server/tests/action_server_tests/test_api_robots.py",
-        " M docs/skills/repository-operations.md"
-      ]
-    },
-    {
-      "thread": "/root/luna_tunnel_integration",
-      "state": "ACTIVE_IMPLEMENTATION",
-      "model": "gpt-6-luna",
-      "effort": "medium",
-      "issue": 214,
-      "scope": "Authenticated start --expose edge identity plus missing-auth rejection and authenticated initialize; standalone lifecycle remains separate",
-      "worktree": "/workspace/work/community-resume/tunnel-edge",
-      "branch": "feature/tunnel-edge-verification-20261009",
-      "pr": 225,
-      "head": "2d4933a77d300614b7de2e6dc328d77f7947283d",
-      "unfinished_changes": "Worker admitted plan; consult timestamped worktree observations for files"
-    },
-    {
-      "thread": "/root/luna_rcc_review",
-      "state": "ACTIVE_READ_ONLY",
-      "model": "gpt-6-luna",
-      "effort": "medium",
-      "issue": 134,
-      "scope": "independent supervisor/receipt review",
-      "worktree": "/workspace/work/community-resume/rcc",
-      "head": "7cf11c8bbad67a5dbfa9387ce82d8ca35f5c8c4e",
-      "unfinished_changes": []
     },
     {
       "thread": "/root/luna_graph_inventory",
-      "state": "ACTIVE_VERIFICATION",
+      "state": "COMPLETED_READ_ONLY_REVIEW",
       "model": "gpt-6-luna",
-      "effort": "medium",
-      "scope": "Strict wheel inventory parser and generated workflow already fixed on integration; verify without duplicate implementation",
+      "scope": "Read-only admission ancestry/workflow review and PR237 manifest review; Windows fixture finding fixed in successor8013",
       "worktree": "/workspace/work/community-resume/wheel-inventory",
-      "branch": "repair/runtime-wheel-inventory-20261009",
       "head": "ea08faf39e107113ae50a529770ce1ca1a422d05",
-      "unfinished_changes": []
+      "receipt": "Admission graph review accepted; durable guide delta recorded from admission-rollup-134dfbee.json."
+    },
+    {
+      "thread": "/root/luna_rcc_review",
+      "state": "COMPLETED_READ_ONLY_GOVERNANCE_AUDIT",
+      "model": "gpt-6-luna",
+      "worktree": "/workspace/work/community-resume/rcc",
+      "branch": "resume/rcc-review-20261009",
+      "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "pr": 235,
+      "receipt": "29 harness tests PASS, 1 live-RCC test SKIP; preceding613/10-skip package run remains tied to earlier d9a08395 body",
+      "scope": "Protected issue fields, archive integrity, Devsy status and native proof limits; review fixes reconciled"
+    },
+    {
+      "thread": "/root/luna_robot_identity",
+      "state": "ACTIVE_FINAL_COPY_VALIDATION",
+      "model": "gpt-6-luna",
+      "worktree": "/workspace/work/community-resume/robot-final-copy",
+      "branch": "repair/robot-final-copy-validation-20261009",
+      "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "pr": null,
+      "hosted_ci": "GREEN on base376ed4c1; not yet integrated on current4626; included only in separate admission branch",
+      "scope": "Validate completed copied Robot metadata before publication; copied-venv run is diagnostic, correct toolkit verification pending"
+    },
+    {
+      "thread": "/root/luna_tunnel_integration",
+      "state": "COMPLETED",
+      "model": "gpt-6-luna",
+      "worktree": "/workspace/work/community-resume/tunnel-edge",
+      "branch": "feature/tunnel-edge-verification-20261009",
+      "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "pr": 236,
+      "checks": "111 focused;628 portable/10 skipped; lint/typecheck287 PASS",
+      "review": "Independent scoped source reviews b88 and82f PASS",
+      "native": "All11 PR236 hosted checks SUCCESS; live provider/TLS NOT_RUN"
+    },
+    {
+      "thread": "/root/luna_worker_exit",
+      "state": "COMPLETED_GOVERNANCE_PREPARATION",
+      "model": "gpt-6-luna",
+      "worktree": "/workspace/work/community-resume/worker-exit",
+      "head": "80764aca73d50ff7325f581bb87d732af84df914",
+      "pr": 233,
+      "integration_merge": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2;11 PASS; tested tree equals merge tree",
+      "scope": "Protocol checkpoint merged; governance handed back to root; no active writer"
     },
     {
       "thread": "/root/luna_workitems_failures",
-      "state": "ACTIVE_IMPLEMENTATION",
+      "state": "LOCAL_CHECKPOINT_COMPLETE_HOSTED_CHECKS_PENDING",
       "model": "gpt-6-luna",
-      "effort": "medium",
-      "issue": 208,
-      "scope": "atomic attempt invalidation after independent stale-PASS review",
-      "worktree": "/workspace/work/community-resume/workitems",
-      "branch": "feature/dakota-workitems-acceptance-20261008",
-      "pr": 231,
-      "head": "5d295a9272097af8728b40beb774a947a5df9ce7",
-      "unfinished_changes": [
-        "M action_server/scripts/dakota_workitems_native_acceptance.py",
-        " M action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
-        " M docs/skills/work-items.md",
-        "?? work/"
-      ]
+      "worktree": "/workspace/work/community-resume/workitems-artifacts",
+      "branch": "feature/workitems-native-artifact-manifest-20261009",
+      "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "dirty": [],
+      "pr": 237,
+      "hosted_ci": "Current native run37957938458 pending; historical c04 Windows fixture failure preserved",
+      "scope": "Retain frozen executable and measured native artifact manifest without changing Go download contract",
+      "current_status": "Clean/pushed; pinned Doctor/Bootstrap/Toolkit33 and27 script tests run with3 Windows skips plus targeted Ruff pass. No current-source consumer replay: artifact download blocked403."
+    },
+    {
+      "thread": "Dakota Executor RCC thread01a11d7b-4029-7953-aba7-f3b487098b32",
+      "state": "UNCONFIRMED_AFTER_TIMEOUT",
+      "turn": "01a1213e-6a35-7e53-80d7-803c46dfe2d9",
+      "canonical_remote_head": "79b95e85c6fc2e0dc335e1b6ca93f2c59a5091bd",
+      "remote_changes": "unknown; same thread/turn retained"
     }
   ],
   "worktrees": [
@@ -368,28 +473,45 @@
       "working_tree_changes": [],
       "remote_checkpoint_branch": "community",
       "remote_head_observed": "7c98236069171f57031218f938963238986293bd",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "observation": "2026-10-09T16:18:53.574838+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/admission",
+      "branch": "integration/cloud-followup-admission-20261009",
+      "head": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "integration/cloud-followup-admission-20261009",
+      "remote_head_observed": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/convergence",
       "branch": "integration/community-release-20261008",
-      "head": "ea08faf39e107113ae50a529770ce1ca1a422d05",
+      "head": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
       "working_tree_changes": [],
       "remote_checkpoint_branch": "integration/community-release-20261008",
-      "remote_head_observed": "ea08faf39e107113ae50a529770ce1ca1a422d05",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "remote_head_observed": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/governance",
       "branch": "resume/community-evidence-20261009",
-      "head": "bdf39a16e055283538f1df4740bfd4b21df17e27",
+      "head": "cd98e357c8bdd1108577cdd54e8844cb77f93267",
       "working_tree_changes": [
-        "M docs/skills/repository-operations.md",
-        " M docs/skills/work-items.md"
+        " M docs/program/community-program-ledger.json",
+        " M docs/program/community-program-ledger.md",
+        " M docs/program/community-resume-20261009.json",
+        " M docs/program/engineering-handoff.md",
+        " M docs/skills/repository-operations.md",
+        "?? docs/program/evidence/community-20261009-checkpoint.zip",
+        "?? docs/program/evidence/community-20261009-final-checkpoint.zip",
+        "?? docs/program/evidence/community-20261009-update.zip",
+        "?? docs/program/evidence/community-20261009-update2.zip",
+        "?? docs/program/evidence/community-20261009-update3.zip"
       ],
       "remote_checkpoint_branch": "review/community-ledger-20261008",
-      "remote_head_observed": "bdf39a16e055283538f1df4740bfd4b21df17e27",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "remote_head_observed": "cd98e357c8bdd1108577cdd54e8844cb77f93267",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/integration",
@@ -398,16 +520,18 @@
       "working_tree_changes": [],
       "remote_checkpoint_branch": "resume/community-blockers-20261009",
       "remote_head_observed": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/rcc",
       "branch": "resume/rcc-review-20261009",
-      "head": "7cf11c8bbad67a5dbfa9387ce82d8ca35f5c8c4e",
-      "working_tree_changes": [],
-      "remote_checkpoint_branch": "feature/dakota-rcc-acceptance-20261008",
-      "remote_head_observed": "a06b4de2da20d2ed65cff406a37136b4351e1874",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "working_tree_changes": [
+        "?? work/"
+      ],
+      "remote_checkpoint_branch": "resume/rcc-review-20261009",
+      "remote_head_observed": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/robot",
@@ -416,7 +540,7 @@
       "working_tree_changes": [],
       "remote_checkpoint_branch": "resume/robot-native-gates-20261009",
       "remote_head_observed": "b690b262c564ed9f085e2df3863af500ff29fddf",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/robot-cleanup",
@@ -425,29 +549,48 @@
       "working_tree_changes": [],
       "remote_checkpoint_branch": "repair/robot-cleanup-ownership-20261009",
       "remote_head_observed": "72a60344c40e6f153dab0f71b30b073e9b259226",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "observation": "2026-10-09T16:18:53.574838+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/robot-final-copy",
+      "branch": "repair/robot-final-copy-validation-20261009",
+      "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "working_tree_changes": [
+        " M action_server/src/actions/server/_api_robots.py",
+        " M action_server/tests/action_server_tests/test_api_robots.py",
+        " M docs/skills/repository-operations.md",
+        "?? action_server/setup.py"
+      ],
+      "remote_checkpoint_branch": "repair/robot-final-copy-validation-20261009",
+      "remote_head_observed": null,
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/robot-staging",
       "branch": "repair/robot-private-staging-20261009",
-      "head": "af4f706edd3d34e50bd50c8f42ca28530ff6b669",
-      "working_tree_changes": [
-        "M action_server/src/actions/server/_api_robots.py",
-        " M action_server/tests/action_server_tests/test_api_robots.py",
-        " M docs/skills/repository-operations.md"
-      ],
+      "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "working_tree_changes": [],
       "remote_checkpoint_branch": "repair/robot-private-staging-20261009",
-      "remote_head_observed": null,
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "remote_head_observed": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/tunnel",
       "branch": "resume/tunnel-20261009",
-      "head": "2d4933a77d300614b7de2e6dc328d77f7947283d",
+      "head": "554630899c6eab23b922ba6558347e7f2c439c00",
       "working_tree_changes": [],
-      "remote_checkpoint_branch": "feature/tunnel-20261008",
-      "remote_head_observed": "2d4933a77d300614b7de2e6dc328d77f7947283d",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "remote_checkpoint_branch": "resume/tunnel-20261009",
+      "remote_head_observed": "554630899c6eab23b922ba6558347e7f2c439c00",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
+    },
+    {
+      "path": "/workspace/work/community-resume/tunnel-edge",
+      "branch": "feature/tunnel-edge-verification-20261009",
+      "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "feature/tunnel-edge-verification-20261009",
+      "remote_head_observed": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/wheel-inventory",
@@ -456,43 +599,34 @@
       "working_tree_changes": [],
       "remote_checkpoint_branch": "repair/runtime-wheel-inventory-20261009",
       "remote_head_observed": null,
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/worker-exit",
       "branch": "repair/worker-exit-protocol-20261009",
-      "head": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
-      "working_tree_changes": [
-        "M action_server/src/actions/server/_preload_actions/preload_actions_server_main.py",
-        " M docs/skills/repository-operations.md",
-        "?? action_server/tests/action_server_tests/test_preload_actions_exit.py"
-      ],
+      "head": "80764aca73d50ff7325f581bb87d732af84df914",
+      "working_tree_changes": [],
       "remote_checkpoint_branch": "repair/worker-exit-protocol-20261009",
-      "remote_head_observed": null,
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "remote_head_observed": "80764aca73d50ff7325f581bb87d732af84df914",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
       "path": "/workspace/work/community-resume/workitems",
       "branch": "resume/workitems-review-20261009",
-      "head": "5d295a9272097af8728b40beb774a947a5df9ce7",
-      "working_tree_changes": [
-        "M action_server/scripts/dakota_workitems_native_acceptance.py",
-        " M action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py",
-        " M docs/skills/work-items.md",
-        "?? work/"
-      ],
-      "remote_checkpoint_branch": "feature/dakota-workitems-acceptance-20261008",
-      "remote_head_observed": "5d295a9272097af8728b40beb774a947a5df9ce7",
-      "observation": "2026-10-09T15:34:46.603301+00:00"
+      "head": "49becb96767d4fc225fb9cb79162db9a9d1dafd8",
+      "working_tree_changes": [],
+      "remote_checkpoint_branch": "resume/workitems-review-20261009",
+      "remote_head_observed": "49becb96767d4fc225fb9cb79162db9a9d1dafd8",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     },
     {
-      "path": "/workspace/work/community-resume/tunnel-edge",
-      "branch": "feature/tunnel-edge-verification-20261009",
-      "head": "2d4933a77d300614b7de2e6dc328d77f7947283d",
+      "path": "/workspace/work/community-resume/workitems-artifacts",
+      "branch": "feature/workitems-native-artifact-manifest-20261009",
+      "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
       "working_tree_changes": [],
-      "remote_checkpoint_branch": "feature/tunnel-edge-verification-20261009",
-      "remote_head_observed": null,
-      "observation": "2026-10-09T15:36:51.611472+00:00"
+      "remote_checkpoint_branch": "feature/workitems-native-artifact-manifest-20261009",
+      "remote_head_observed": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "observation": "2026-10-09T16:18:53.574838+00:00"
     }
   ],
   "initial_integration_head": "91d55e46bb91e0f9f1b404a41aad6fdcfdb0e72c",
@@ -501,8 +635,8 @@
       "pr": 229,
       "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
       "merge_sha": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
-      "checks": "12 SUCCESS, 1 publication SKIP",
-      "tree_identity": "merge tree equals tested PR head tree bab37cd13c1c28f6effa82c6219bc5f6ec917b1d",
+      "checks": "12 SUCCESS; publication SKIP",
+      "tree_identity": "merge tree equals tested head tree bab37cd13c1c28f6effa82c6219bc5f6ec917b1d",
       "community_merge": false,
       "release": false
     },
@@ -514,103 +648,140 @@
       "tree_identity": "merge and tested head tree651bfd172574b21396288684dbc16c4b59f7e1a6",
       "community_merge": false,
       "release": false
+    },
+    {
+      "pr": 232,
+      "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
+      "merge_sha": "376ed4c15c76ccf1b5e3b70985e681946bffd249",
+      "checks": "11 SUCCESS",
+      "tree_identity": "integration merge tree65c21c119dbb932605326fd457d0dd8579f4393e equals tested head tree65c21c119dbb932605326fd457d0dd8579f4393e",
+      "community_merge": false,
+      "release": false
+    },
+    {
+      "pr": 233,
+      "head": "80764aca73d50ff7325f581bb87d732af84df914",
+      "tested_synthetic": "2790c19be586c40212b7d6ad614d32f4964bdbd6",
+      "merge_sha": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+      "checks": "11 PASS",
+      "tree_identity": "tested tree323c011622615b22a21beadb0782e2f869158d11 equals final merge tree323c011622615b22a21beadb0782e2f869158d11",
+      "community_merge": false,
+      "release": false
     }
   ],
-  "evidence_archive": "evidence/community-20261009-fanout.zip",
-  "evidence_archive_sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e",
+  "evidence_archive": "evidence/community-20261009-cloud-admission.zip",
+  "evidence_archive_sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0",
   "archive_manifest": [
     {
-      "path": "evidence/fanout-state.json",
-      "sha256": "682cbda63c148733babeace010b36214c72c921a11a2263002349db51a68096d",
-      "bytes": 27932
+      "path": "admission-evidence/doctor.log",
+      "sha256": "8622a70c60415b9e1847d4975fc1d8655191d03a479b84695cc990d265ce5052",
+      "bytes": 12870
     },
     {
-      "path": "evidence/rcc-active-snapshot-20261009.json",
-      "sha256": "4f5a286b0b7c8abe220eabb4554a8799fbe09dbaf07bb87ef486975a29d75405",
-      "bytes": 1192
+      "path": "admission-evidence/bootstrap.log",
+      "sha256": "18047e2274f111856f2f23ee47ca9aed462eb958507f6e1fb52b5a05a59a15ee",
+      "bytes": 27978
     },
     {
-      "path": "robot-evidence/pr230-admission.json",
-      "sha256": "6d8a0d806c69324a1cb82e1d2b9e2de01eba4124431bf257aa5f414854d15ee5",
-      "bytes": 4147
+      "path": "admission-evidence/toolkit.log",
+      "sha256": "cc4b12734428a7e3501af3c5cd1c966949ce13626620ab6ee264cdc73e679c79",
+      "bytes": 14055
     },
     {
-      "path": "robot-cleanup-evidence/cleanup-ownership-red.log",
-      "sha256": "02815423e977923c2e08fc6e642aa3bf9ae06627b3286ed1aca601fe25ef1ffc",
-      "bytes": 11134
+      "path": "admission-evidence/combined-gates.log",
+      "sha256": "c1a50b1713a23197c92053ac22af55241cad655b24d7f493bc107825bb2d3a6b",
+      "bytes": 164690
     },
     {
-      "path": "robot-cleanup-evidence/cleanup-ownership-green.log",
-      "sha256": "21daaabcb6b6fbc2f1aa3877b7007c4dc392b379ad75b12fc772f90f3da67a1b",
-      "bytes": 4201
+      "path": "followup-admission-evidence/combined-gates.log",
+      "sha256": "d8d54af156931bc3e075d9c2805b8efb8090427a9ee34e61646109b2c9591550",
+      "bytes": 174753
     },
     {
-      "path": "robot-cleanup-evidence/integrated-gates-executed.log",
-      "sha256": "20b180433b775b446e297c8f6848a07fb5203316af1bb5305e214e3372b1d28b",
-      "bytes": 149730
+      "path": "graph-inventory-evidence/admission-pr225.json",
+      "sha256": "00e31c74aaa668b47b71a0f58c74765695d927812a4b50e9e09680f25f8c1ee2",
+      "bytes": 1280
     },
     {
-      "path": "workitems-evidence/integration-successor-receipt.json",
-      "sha256": "f247c9662d2d53075cba847b7e77055dea93bd822a4e63d681e1ff10df9dbdd3",
-      "bytes": 2156
+      "path": "graph-inventory-evidence/admission-pr231.json",
+      "sha256": "58e42d5a23ee78f6508e6948fa6269d8db890f4500707f364278b2a4f37787ef",
+      "bytes": 1792
     },
     {
-      "path": "workitems-evidence/historical-windows-113879020702.log",
-      "sha256": "0fa0ea3334466d0dfb6c12e57756fbbb2f42d7748a90c905f889f92aa1bb1712",
-      "bytes": 409090
+      "path": "graph-inventory-evidence/admission-pr234.json",
+      "sha256": "b782a36a335cba212d390421b8c3a631e53863430426638fc1ab7740287b7733",
+      "bytes": 1280
     },
     {
-      "path": "tunnel-integration-evidence/focused.log",
-      "sha256": "cc136b2e5c6e67e22bc6c12d833de930e3c83ddfe80f7696b0bbfda74e97977b",
-      "bytes": 3950
+      "path": "graph-inventory-evidence/admission-rollup-134dfbee.json",
+      "sha256": "880676ca5dbf2b428027a39d99e7e60acbdb547c36e6aa44a85842c5d3ef8089",
+      "bytes": 3533
     },
     {
-      "path": "tunnel-integration-evidence/portable.log",
-      "sha256": "ec07cd0631b36e6ac7d7a510ada4746d74d9ce9ffab863723943e4a41025bc13",
-      "bytes": 153056
+      "path": "tunnel-edge-evidence/review-82f526ef.md",
+      "sha256": "07efd813bd7e5e2c4861225c3ab124c10702ebde00a03f613cf051d6e7ad1ef8",
+      "bytes": 2968
     },
     {
-      "path": "tunnel-integration-evidence/lint.log",
-      "sha256": "dcc7f46178256ae3d499f8b39e441b9f6a29c6dfed82c59f60db64706df982e0",
-      "bytes": 4069
+      "path": "workitems-triage-evidence/artifactreviewreceipt-c04a1643.json",
+      "sha256": "6cdb8a22516764a002f390c50badbc7866e9f1f0f79de9857aefe5d4f9469bf5",
+      "bytes": 5008
     },
     {
-      "path": "tunnel-integration-evidence/typecheck.log",
-      "sha256": "149fddb197b5df2d2cab373068c1fec9d2be2fa92b2b68506d40ab2829e477ed",
-      "bytes": 4519
+      "path": "workitems-triage-evidence/pr231-run-artifact-inventory.md",
+      "sha256": "27cb4881e382158be6edb1d52a47533e04cf73494e3ea18565390a17b6c3365a",
+      "bytes": 13740
     },
     {
-      "path": "graph-inventory-evidence/issue-graph-inventory-20261009T152635Z.json",
-      "sha256": "a1cc766719070c2fdf9ad894860e122d68185e16f81d0a18c3de130b41e54cd4",
-      "bytes": 94900
+      "path": "governance-review-evidence/audit-pending-checkpoint.md",
+      "sha256": "7ba560a70a336ba318ef97a5565602e852f48656079e7876161b794b7b27bc1b",
+      "bytes": 2993
     },
     {
-      "path": "graph-inventory-evidence/pr220-publish-job-diagnosis.json",
-      "sha256": "e4d884af1aa854667d60977b3c474187973c1de8326659ff3a5f1a703286477f",
-      "bytes": 3471
+      "path": "evidence/completed-package-venv-inventory.json",
+      "sha256": "1428d7336571de2142870a313901e8f1e0ed868f82263378b2bb75983084a3a6",
+      "bytes": 14429
     },
     {
-      "path": "graph-inventory-evidence/findings.md",
-      "sha256": "d8f9c2b959239add20ea7c49a357adcd7a10187ea53b4c72019393af1021cdc2",
-      "bytes": 4348
+      "path": "evidence/completed-package-venv-reclamation.json",
+      "sha256": "83a474151e13d7bebd11a1d7211305cf93938319a4be28f6ede18f864719a4ae",
+      "bytes": 14449
     },
     {
-      "path": "rcc-review-evidence/luna-review-7cf11c8.md",
-      "sha256": "f4a5d035cdcab696e0ecbb7806bf84ea933e248966cf176a8283eaa5f7f60dd4",
-      "bytes": 4579
-    },
-    {
-      "path": "workitems-triage-evidence/actions-208-failure-triage.md",
-      "sha256": "70a9d3f5adb4903813e708cbf992767977c523d80a26aa33756964a577be11d2",
-      "bytes": 8702
-    },
-    {
-      "path": "rcc/action_server/tests/acceptance_evidence/candidate-wheel-e33987b6.json",
-      "sha256": "78bd13f05aab66a354d25b0e7a95afbc786f28afa9ccf9e626a6cedbbbcca964",
-      "bytes": 1687
+      "path": "evidence/cloud-admission-status.json",
+      "sha256": "3e73df5eb43aa6d39a32b4b92763f555af607979555a62ccd86bdd0bbdc234f0",
+      "bytes": 2745
     }
   ],
   "prior_evidence_archives": [
+    {
+      "evidence_archive": "evidence/community-20261009-update3.zip",
+      "evidence_archive_sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842"
+    },
+    {
+      "evidence_archive": "evidence/community-20261009-update2.zip",
+      "evidence_archive_sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31"
+    },
+    {
+      "evidence_archive": "evidence/community-20261009-update2.zip",
+      "evidence_archive_sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31"
+    },
+    {
+      "evidence_archive": "evidence/community-20261009-update.zip",
+      "evidence_archive_sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4"
+    },
+    {
+      "evidence_archive": "evidence/community-20261009-final-checkpoint.zip",
+      "evidence_archive_sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4"
+    },
+    {
+      "evidence_archive": "evidence/community-20261009-checkpoint.zip",
+      "evidence_archive_sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c"
+    },
+    {
+      "evidence_archive": "evidence/community-20261009-fanout.zip",
+      "evidence_archive_sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e"
+    },
     {
       "evidence_archive": "evidence/community-20261009-resume.zip",
       "evidence_archive_sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541"
@@ -644,13 +815,473 @@
     },
     {
       "lane": "New implementation lanes",
-      "disposition": "PENDING owned guide deltas at verified code checkpoints"
+      "disposition": "ACCEPTED verified guide deltas in PR233/234/235/236/237; active Robot final-copy delta remains pending final branch gates."
+    },
+    {
+      "lane": "Worker exit protocol PR233",
+      "disposition": "Documented bounded explicit exit consumer stop after current Action; EOF behavior remains unchanged, and pool retirement/RCC lease semantics remain separate. Merged at4626cc56;11 checks PASS; no end-to-end RCC lease claim."
+    },
+    {
+      "lane": "RCC PR235 receipt preflight",
+      "disposition": "Documented refusal before side effects while preserving an existing receipt byte-for-byte;29 harness tests PASS/1 live-RCC test SKIP. Prior 613/10-skip package suite remains attached to d9a08395; remote Dakota thread still unconfirmed."
+    },
+    {
+      "lane": "Tunnel PR236",
+      "disposition": "Repository operations and exposing guide document exact temporary MCP host/origin allowance on the live settings object and cleanup on failed probe/stop; independent review b88f8508 scoped PASS. Local gates111/628/10skip/lint/types287 PASS; native and live provider/TLS not run."
+    },
+    {
+      "lane": "Work Items PR231 artifact inventory",
+      "disposition": "Inventory records actual checkout873237df and Go-only retained output. Download failed403, no bytes retrieved or current-source consumer replay. PR237 retains both outputs and measured manifest; guide explicitly excludes clean-tree attestation and path-identity guarantees."
+    },
+    {
+      "lane": "Governance checkpoint update",
+      "disposition": "Canonical ledger/handoff refreshed; all54 contracts/comments/dependencies/states/accounting preserved; only four next-action metadata fields updated. Synthetic merge provenance guidance added from observed checkout logs and three-way results."
+    },
+    {
+      "lane": "Issue graph / synthetic merge admission",
+      "disposition": "ACCEPTED precise addition in docs/skills/repository-operations.md: record workflow checkout SHA and synthetic merge parents/tree, regenerate merge tree after base changes, inspect actual three-way result and run logs rather than divergent-tip raw diff, and gate exact combined rollup tree. Evidence graph-inventory-evidence/admission-rollup-134dfbee.json and PR231 run inventory; PR231 synthetic Robot native step passed despite misleading raw diff. Candidate local gates pass; hosted CI pending."
+    },
+    {
+      "lane": "Tunnel PR236 final independent review",
+      "disposition": "82f526ef source-only PASS; existing canonical public tunnel/auth/origin guide accepted as accurate, so no additional guide delta. Native hosted checks reported11 SUCCESS; live provider/TLS and standalone expose lifecycle remain unverified."
+    },
+    {
+      "lane": "Robot/Tunnel future admission designs",
+      "disposition": "Read-only proposals retained as design evidence only; future behavior is not documented as implemented before code exists."
     }
   ],
   "post_archive_observations": [
     {
-      "observed_at": "2026-10-09T15:36:51.611472+00:00",
-      "event": "Tunnel edge implementation admitted in new isolated worktree; wheel parser already fixed on integration, lane verifies existing code. Archive remains immutable earlier snapshot."
+      "observed_at": "2026-10-09T15:57:32.557270+00:00",
+      "event": "Root reported final local RCC checkpoint after archive creation: d9a08395d14478534490b6f90c2405a32fa869fd clean/pushed on resume/rcc-review-20261009; draft PR235. The archived timestamped worktree/remote snapshot predates this event."
+    },
+    {
+      "observed_at": "2026-10-09T15:57:32.557270+00:00",
+      "event": "Dakota RCC Executor state remains UNCONFIRMED: same thread/turn retained after read-only list_thread_items timeout; no retry and no assumption of stopped/clean state."
+    },
+    {
+      "observed_at": "2026-10-09T15:57:32.557270+00:00",
+      "event": "Archive is immutable at its recorded digest; later lane/checkpoint updates are represented here and were not added to the ZIP."
+    },
+    {
+      "observed_at": "2026-10-09T15:58:06.021721+00:00",
+      "event": "Read-only post-archive local worktree and remote-head snapshot is embedded in post_archive_worktree_snapshot; it supersedes the archive-time observation only for later status, without changing the immutable ZIP."
+    },
+    {
+      "observed_at": "2026-10-09T15:59:44.749961+00:00",
+      "event": "Sealed final checkpoint ZIP with the complete PR225 combined-gate, PR231 review, and RCC integrated/final focused receipts. The earlier community-20261009-checkpoint.zip remains unchanged and is recorded as a prior archive."
+    },
+    {
+      "observed_at": "2026-10-09T15:59:53.661267+00:00",
+      "event": "Read-only post-final-archive worktree and remote branch snapshot; subsequent changes are recorded here, outside the sealed ZIP."
+    },
+    {
+      "observed_at": "2026-10-09T16:10:21.428023+00:00",
+      "event": "Integration advanced to4626cc56 after PR233 merge with 11 PASS and tree identity. Root prepared separate clean admission branch134dfbee merging PR225/231/234, but combined gates remain pending and integration is not further mutated."
+    },
+    {
+      "observed_at": "2026-10-09T16:10:21.428023+00:00",
+      "event": "PR236 pushed82f526ef with local111 focused/628 portable/10 skip/lint/typecheck287 and scoped review PASS; native/live provider pending. Work Items Linux artifact download/current Go acceptance remains active; no final result."
+    },
+    {
+      "observed_at": "2026-10-09T16:16:07+00:00",
+      "event": "Admission candidate134dfbee local gates completed:112 focused/642 portable/10 skipped/lint/types289 and Doctor/Bootstrap/Toolkit33 PASS; four warnings; hosted CI pending. Candidate remains separate from integration4626."
+    },
+    {
+      "observed_at": "2026-10-09T16:16:07+00:00",
+      "event": "PR237 artifact download blocked by proxy HTTP403; no artifact bytes retrieved and current Go acceptance incomplete. Devsy has no verified READY notification or authorization; remain parked until both explicit, while cloud work continues."
+    },
+    {
+      "observed_at": "2026-10-09T16:16:07+00:00",
+      "event": "Reclaimed 2,592,800,768 bytes from15 generated completed-test venvs across completed integration/robot-cleanup/wheel-inventory worktrees after /proc references were empty. Source/logs/other files preserved; these worktrees require Bootstrap before future tests; no worker stopped."
+    },
+    {
+      "observed_at": "2026-10-09T16:16:43+00:00",
+      "event": "Root updated the candidate PR238 local complete gates to112 focused/642 portable/10 skipped/lint/types289 and Doctor/Bootstrap/Toolkit33 PASS; hosted checks remain pending. PR236 hosted checks are now11 SUCCESS; no live provider/TLS or standalone lifecycle proof."
+    },
+    {
+      "observed_at": "2026-10-09T16:16:43+00:00",
+      "event": "Refreshed only the next_bounded_action metadata for #134, #151, #208 and #214 to reflect merged successors/current gates. Acceptance contracts, comments, dependencies, states and accounting remain preserved."
+    },
+    {
+      "observed_at": "2026-10-09T16:17:35+00:00",
+      "event": "PR237 Work Items artifact-manifest successor is clean/pushed at full head8013d17256f4b4c20cc4d36141c08bca2c964354. Targeted tests report27 run including3 skipped; RCC Doctor/Bootstrap/Toolkit33 PASS and targeted static checks PASS. This does not change the prior HTTP403 artifact-download observation."
+    },
+    {
+      "observed_at": "2026-10-09T16:17:35+00:00",
+      "event": "Root prepared separate follow-up candidate integration/cloud-followup-admission-20261009 at5c3c4a6abb63a40bf00af49d16ade04c59e7cf63, merging reviewed green PR235 head3dbfb1be and PR236 head82f526ef onto PR238 candidate134dfbee. New combined local gates are running in followup-admission-evidence/combined-gates.log; PR is forthcoming. Original candidate134dfbee remains preserved; integration4626 unchanged."
+    },
+    {
+      "observed_at": "2026-10-09T16:18:53.574838+00:00",
+      "event": "Root refreshed live worktree/remote/worker inventory; PR2378013 and stacked PR2395c3 are explicit. No integration advancement beyond4626, no community merge/release/Devsy action. Copied-venv Robot run is diagnostic only; correct toolkit verification pending."
+    },
+    {
+      "observed_at": "2026-10-09T16:20:41.748647+00:00",
+      "event": "Sealed completed combined-gate logs and independent reviews for PR238/239; local gates PASS, hosted admission remains pending. Current worktree inventory is timestamped separately. Archive errata retract earlier incorrect Devsy READY transcription."
+    }
+  ],
+  "post_archive_worktree_snapshot": {
+    "observed_at": "2026-10-09T16:18:53.574838+00:00",
+    "local_worktrees": [
+      {
+        "path": "/workspace/actions",
+        "branch": "work",
+        "head": "7c98236069171f57031218f938963238986293bd",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "community",
+        "remote_head_observed": "7c98236069171f57031218f938963238986293bd",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/admission",
+        "branch": "integration/cloud-followup-admission-20261009",
+        "head": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "integration/cloud-followup-admission-20261009",
+        "remote_head_observed": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/convergence",
+        "branch": "integration/community-release-20261008",
+        "head": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "integration/community-release-20261008",
+        "remote_head_observed": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/governance",
+        "branch": "resume/community-evidence-20261009",
+        "head": "cd98e357c8bdd1108577cdd54e8844cb77f93267",
+        "working_tree_changes": [
+          " M docs/program/community-program-ledger.json",
+          " M docs/program/community-program-ledger.md",
+          " M docs/program/community-resume-20261009.json",
+          " M docs/program/engineering-handoff.md",
+          " M docs/skills/repository-operations.md",
+          "?? docs/program/evidence/community-20261009-checkpoint.zip",
+          "?? docs/program/evidence/community-20261009-final-checkpoint.zip",
+          "?? docs/program/evidence/community-20261009-update.zip",
+          "?? docs/program/evidence/community-20261009-update2.zip",
+          "?? docs/program/evidence/community-20261009-update3.zip"
+        ],
+        "remote_checkpoint_branch": "review/community-ledger-20261008",
+        "remote_head_observed": "cd98e357c8bdd1108577cdd54e8844cb77f93267",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/integration",
+        "branch": "resume/community-blockers-20261009",
+        "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "resume/community-blockers-20261009",
+        "remote_head_observed": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/rcc",
+        "branch": "resume/rcc-review-20261009",
+        "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+        "working_tree_changes": [
+          "?? work/"
+        ],
+        "remote_checkpoint_branch": "resume/rcc-review-20261009",
+        "remote_head_observed": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/robot",
+        "branch": "resume/robot-native-gates-20261009",
+        "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "resume/robot-native-gates-20261009",
+        "remote_head_observed": "b690b262c564ed9f085e2df3863af500ff29fddf",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/robot-cleanup",
+        "branch": "repair/robot-cleanup-ownership-20261009",
+        "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "repair/robot-cleanup-ownership-20261009",
+        "remote_head_observed": "72a60344c40e6f153dab0f71b30b073e9b259226",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/robot-final-copy",
+        "branch": "repair/robot-final-copy-validation-20261009",
+        "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+        "working_tree_changes": [
+          " M action_server/src/actions/server/_api_robots.py",
+          " M action_server/tests/action_server_tests/test_api_robots.py",
+          " M docs/skills/repository-operations.md",
+          "?? action_server/setup.py"
+        ],
+        "remote_checkpoint_branch": "repair/robot-final-copy-validation-20261009",
+        "remote_head_observed": null,
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/robot-staging",
+        "branch": "repair/robot-private-staging-20261009",
+        "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "repair/robot-private-staging-20261009",
+        "remote_head_observed": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/tunnel",
+        "branch": "resume/tunnel-20261009",
+        "head": "554630899c6eab23b922ba6558347e7f2c439c00",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "resume/tunnel-20261009",
+        "remote_head_observed": "554630899c6eab23b922ba6558347e7f2c439c00",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/tunnel-edge",
+        "branch": "feature/tunnel-edge-verification-20261009",
+        "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "feature/tunnel-edge-verification-20261009",
+        "remote_head_observed": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/wheel-inventory",
+        "branch": "repair/runtime-wheel-inventory-20261009",
+        "head": "ea08faf39e107113ae50a529770ce1ca1a422d05",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "repair/runtime-wheel-inventory-20261009",
+        "remote_head_observed": null,
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/worker-exit",
+        "branch": "repair/worker-exit-protocol-20261009",
+        "head": "80764aca73d50ff7325f581bb87d732af84df914",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "repair/worker-exit-protocol-20261009",
+        "remote_head_observed": "80764aca73d50ff7325f581bb87d732af84df914",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/workitems",
+        "branch": "resume/workitems-review-20261009",
+        "head": "49becb96767d4fc225fb9cb79162db9a9d1dafd8",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "resume/workitems-review-20261009",
+        "remote_head_observed": "49becb96767d4fc225fb9cb79162db9a9d1dafd8",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      },
+      {
+        "path": "/workspace/work/community-resume/workitems-artifacts",
+        "branch": "feature/workitems-native-artifact-manifest-20261009",
+        "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+        "working_tree_changes": [],
+        "remote_checkpoint_branch": "feature/workitems-native-artifact-manifest-20261009",
+        "remote_head_observed": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+        "observation": "2026-10-09T16:18:53.574838+00:00"
+      }
+    ],
+    "remote_heads": {
+      "acmm/actions-governance": "ee7e8186d9748e720d83a15fc17f672527b34fd7",
+      "acmm/actions-quality-observability": "2e2e31c803770a28faca4a6129c3e0fdcf793890",
+      "automatic-brew": "85b37e33473ecd7ee89666115774c9858561a937",
+      "bugfix/set-secret-api-oauth": "62efd17482fc746f6293a8ed18f7ed0c5c3241c6",
+      "chore/0.19.0": "cb8eae681a1fcad2ce3f5a2b3a9e3e9ce3091a82",
+      "chore/community-product-surface-cleanup": "2c746ab6a7a689a6ad8d45e25ba72014212d8dfe",
+      "chore/update-versions": "a83c3dcdbbabf12038667d1c274e9e812c31dc86",
+      "codex/actions-work-items-0.3.0-release": "6324f17c3e6a400c608600b3c6ae04e1b739a837",
+      "codex/actions-work-items-0.4.0": "b72a6dab273576d9311b88f03212c4c3c84861c3",
+      "codex/actions-work-items-0.4.1-direct-file": "f691e6e4c110218513059383120500da2a69a795",
+      "codex/work-items-readme-model": "b03ea27d13fe4dec2f47eb92510704a7800dc2b3",
+      "community": "7c98236069171f57031218f938963238986293bd",
+      "convergence/actions-full-graph-20261008": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "dependabot/npm_and_yarn/action_server/frontend/npm_and_yarn-af93afb32e": "8d3b9f23d39003997a9a945ea008482bcd149e7b",
+      "dependabot/pip/actions/pip-1099dc578e": "f5c881f09e3ea5ad07be69f4c59599abdc41bd56",
+      "evidence/issue-80-accepted-source-1a6e4829": "1a6e482988fdc87a37ff30f6ef85e2b1815b559e",
+      "evidence/issue-96-direction-a-d8f0244f": "430eec3645b898c95bd469a825b81e45857d26ee",
+      "evidence/issue-96-direction-b-112eb5e3-r2": "1eabc6de33f42d48d847d538505639d8c0ce304b",
+      "evidence/issue-96-direction-b-7171d899": "c0ee6c63d0ca09cae07bc2e9f5e2814b173ccca0",
+      "evidence/pr-114-visual-receipts": "a7a01392c28c41ae40d6be561652894be18e99c3",
+      "factory/actions-runtime-release-convergence": "f24effb18bdc9328ec929102e04af9e827bbe747",
+      "factory/actions-runtime-release-hardening": "5c8738c292baca534ec9653375c40086714b4832",
+      "factory/issue-101-unsigned-recovery": "a086c56a91c82ef7fee0c16383a8e103e2014d02",
+      "factory/issue-102-prerequisites": "c2b58675cbcaff4461fd5f2bfd6c421f6531c37a",
+      "factory/issue-134-rcc-runtime-adapter": "1a556431f2be605d2b4b928e0596eb43718752d7",
+      "factory/issue-148-safe-staging": "8c30779fd284c22c3fc978ca0850d8faacc43f94",
+      "factory/issue-153-origin-policy": "3c5d9c82999e4d672c8d0ee8ba51733062bbf142",
+      "factory/issue-83-action-run-ownership": "345aa907b3d62e8ca98bfb981e38e8e178754e7c",
+      "factory/issue-84-shared-database": "ba8fabf4a176776a115710b9a9932b91919084c0",
+      "factory/issue-86-artifact-storage": "5bf35d2be87ff9e02f736a13dc28dd21898b9d35",
+      "factory/issue-88-mcp-gateway-metadata": "f33f427df2410151c6a1388176677d01fea060ab",
+      "factory/issue-89-catalog-revisions": "acaf09833cb7b5e8f37b6f532efac088ebf2ac63",
+      "factory/issue-94-frontend-topology": "014f0591c315c5b0f3bd80f8c4d63030663537f5",
+      "factory/issue-95-runtime-data-access": "eb817cdc5481529cbe0e6e976c13725088d966db",
+      "factory/issue-96-direction-a-instrument-console": "d8f0244f437d8b26001c829e515117f838884e11",
+      "factory/issue-96-direction-b-calm-workbench": "112eb5e38fe2dd88863501878f5fb75af6fa6cff",
+      "factory/issue-96-product-evidence-harness": "3c215a89bc14bfe00b4cd0e3936bdb451d0a1e30",
+      "factory/issue-96-runtime-shell": "b8f1ba19434e38d98cec997fdc95377d01b767da",
+      "factory/issue-97-ui-system": "318c0996baa0e969309506005592c1679a9fc86b",
+      "factory/issue-98-frontend-build": "d666f57dd21ae4964af54fb9083cf7bfce46ce48",
+      "factory/runtime-1.0.0-recovery-run-fix": "1e85622775695b0d0f0050372a066c734c68ed9c",
+      "factory/runtime-1.0.0-recovery-run2-fix": "3abce8d6d17b987d33d8d9b64f644c142402e61d",
+      "factory/runtime-1.0.0-tag-recovery": "1b3ba27ca3bb1f820a0400f6f9843080134d08fa",
+      "feat/actions-clean-break-core-runtime": "dc87e632102de03152777fc7db2c6be2b5f3ad9a",
+      "feat/add-sema4-http-library": "5a4326b8d1a88982464c0eecfbac74705e52e3b0",
+      "feat/community-robots-workitems": "2e0b1479892b77d159da7866f917b2b768e965c5",
+      "feat/dev-680": "fdc1b5480152cf94ec7ac23078abe277910510f6",
+      "feat/display-name": "bf6218d5a3978321f8157ed166ad8ea680928ed9",
+      "feat/oauth2-v2": "9eb3d3f268ae47aecebf02ec6965564cc2393ea2",
+      "feat/revoke": "7d0753eb03a480329bcef754f0c778d25a95bc74",
+      "feat/roboto": "eaf2d505340eacfd3883a7b541fa7dec701fb91f",
+      "feat/set-secrets-post": "a116d597ed03bab5acd4986026b7430179d39b25",
+      "feat/temporal-integration": "b7ee6682e4d137eb5bd6ec408320751d7710ecc8",
+      "feat/ui-oauth2": "46b21dede67530f90a6d247949357320dfb154f3",
+      "feat/ui-oauth2-no-backend": "7acdad052cbb3d6cb7bad78267a119efac9a1457",
+      "feature/coverage-20261008": "fc09d0b26a80201587de310e24042787252ae3af",
+      "feature/dakota-rcc-acceptance-20261008": "79b95e85c6fc2e0dc335e1b6ca93f2c59a5091bd",
+      "feature/dakota-workitems-acceptance-20261008": "49becb96767d4fc225fb9cb79162db9a9d1dafd8",
+      "feature/database-acceptance-20261008": "8524e9c3e9bc35bfc17f70f887d9d0b680856af3",
+      "feature/deployment-20261008": "e4e54d31647b7d44cdd7c07d6006596186db8317",
+      "feature/metadata": "7b13bb77601c917102e913f00f3faa27e78e22ea",
+      "feature/native-job-drain-20261008": "f8ccace43feaa52fd3bf376715efa9fa8cbcc5bb",
+      "feature/oauth2": "03357c0b6edb84f3a6fd0f515e858c6dbfaf8100",
+      "feature/product-cleanup-20261008": "28b021c6307c5c993f0ba2859d0da2ae3d9e8c94",
+      "feature/roadmap-20261008": "2bbf3afceda39a0d8dfa4b9e1a3ed96f3ad9b61f",
+      "feature/tunnel-20261008": "554630899c6eab23b922ba6558347e7f2c439c00",
+      "feature/tunnel-edge-verification-20261009": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "feature/workitems-native-artifact-manifest-20261009": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "files-headers": "d21aa370922ae9b63139c45eebfac63377c727a6",
+      "fix/clear-stale-workitem-queue-env": "639d61deebf00175e72da5b1cef2e5ab75df1326",
+      "fix/pypi-project-identity": "6f9b84867a4021e791a46c2c22f15f1b31fc7c2d",
+      "fix/runtime-recovery-publication": "5b9c07176d41673832c23f0c7ea609931fa4223d",
+      "fix/templates-published-core": "cce2ae20deb000d44999ec79cc16d824b0b839fa",
+      "hive/issue-129-capability-deployments": "f3c120fce1afa40da702eb771e62346214f81450",
+      "hive/issue-137-provenance-observability": "8af0e5627245d795a8ec6e2ddb3560d17fd42ca7",
+      "hive/issue-139-exact-subject-conformance": "cad7a9b4cdf1e918faac8e932d277f78d6a7329d",
+      "integration/cloud-admission-20261009": "134dfbee08ef5a06664bcd1ed37bca0ea1a573b9",
+      "integration/cloud-followup-admission-20261009": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
+      "integration/community-release-20261008": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+      "issue/96": "93818e315c6215d2641c6c01f635ad2e9e761ca2",
+      "master": "9d9479e842effbcb56d2ec0017c23593d192a56d",
+      "matti/fix_keyring_issue_for_win": "45e5c60635fa5da5dcc571d7880854d4d8130d4a",
+      "noop": "77a50508a52d55de4570bf973dd43428048b8802",
+      "patchraptor/fix-issue-78": "63135817c0f57d01aa15838581d3fee9cfde8629",
+      "patchraptor/fix-template-package-script-mode": "7b4c9253ff35be15f899adb31f2a50d9b397b8d9",
+      "patchraptor/issue-152-authorization": "fce1da2fcd048a678cdb2e8f16935fd69082bd02",
+      "poc/async-actions": "189ae87a137754e84781ae8856ac61ccbee47302",
+      "readme-update": "02639fd20b8b5ee09a635c04e8cf2fed5ccccc9c",
+      "release/pypi-identity-patches": "17f550ba1fc0c2816b2bcda4a00c69f5691d814c",
+      "repair/browser-session-20261008": "15696d85bfbfa88938430c9e6a167ea6d02f9ae2",
+      "repair/robot-cleanup-ownership-20261009": "72a60344c40e6f153dab0f71b30b073e9b259226",
+      "repair/robot-private-staging-20261009": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "repair/worker-exit-protocol-20261009": "80764aca73d50ff7325f581bb87d732af84df914",
+      "resume/community-blockers-20261009": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "resume/rcc-review-20261009": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "resume/robot-native-gates-20261009": "b690b262c564ed9f085e2df3863af500ff29fddf",
+      "resume/tunnel-20261009": "554630899c6eab23b922ba6558347e7f2c439c00",
+      "resume/workitems-review-20261009": "49becb96767d4fc225fb9cb79162db9a9d1dafd8",
+      "review/community-ledger-20261008": "cd98e357c8bdd1108577cdd54e8844cb77f93267",
+      "review/core-checkpoint-20261008": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "review/design-checkpoints-20261008": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "review/runtime-checkpoint-20261008": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "review/workitems-checkpoint-20261008": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "strategy/release-compatibility-roadmap": "f6a3a92192620dec7dafa057975b39856f4f7909",
+      "wip2": "30bd85ab60b83c46bb9b722ea98036b1e188616e"
+    },
+    "scope": "Timestamped snapshot; active mutations can advance later. Governance dirty files are this checkpoint."
+  },
+  "admission_checkpoint": {
+    "path": "/workspace/work/community-resume/admission",
+    "branch": "integration/cloud-admission-20261009",
+    "head": "134dfbee08ef5a06664bcd1ed37bca0ea1a573b9",
+    "base": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+    "included_prs": [
+      225,
+      231,
+      234
+    ],
+    "status": "Local combined gates pass112 focused/642 portable/10 skipped/lint/types289 and Doctor/Bootstrap/Toolkit33; hosted CI pending; not merged into integration.",
+    "pr": 238,
+    "path_note": "This candidate branch remains preserved; shared root-owned admission worktree now checks out followup candidate5c3."
+  },
+  "completed_test_venv_reclamation": {
+    "inventory": "evidence/completed-test-venv-inventory.json",
+    "receipt": "evidence/completed-test-venv-reclamation.json",
+    "observed_at": "2026-10-09T16:00:24.451916+00:00",
+    "removed_bytes": 3710513152,
+    "scope": "Generated venv-actions-* directories from completed clean-wheel contract tests only; source, worktrees, wheelhouses, receipts, logs and other scratch preserved."
+  },
+  "admission_current_gates": "Candidate134dfbee:112 focused,642 portable/10 skipped, lint PASS, types289 PASS, Doctor/Bootstrap/ToolkitTest33 PASS;4 warnings; hosted CI pending.",
+  "completed_package_venv_reclamation": {
+    "inventory": "evidence/completed-package-venv-inventory.json",
+    "receipt": "evidence/completed-package-venv-reclamation.json",
+    "observed_at": "2026-10-09T16:16:07+00:00",
+    "removed_bytes": 2592800768,
+    "scope": "15 generated completed-test venvs in completed integration/robot-cleanup/wheel-inventory worktrees only, after /proc references were empty; source/logs/other files preserved. These worktrees require Bootstrap before future tests; no worker was stopped."
+  },
+  "new_pull_requests": [
+    {
+      "number": 237,
+      "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "branch": "feature/workitems-native-artifact-manifest-20261009",
+      "state": "OPEN; clean and pushed, targeted tests27 run including3 skipped, RCC Doctor/Bootstrap/Toolkit33 PASS and targeted static checks PASS",
+      "scope": "Native artifact manifest/retention correction; artifact download HTTP403 previously blocked retrieval; current Go acceptance status remains as previously recorded unless separately verified."
+    },
+    {
+      "number": 238,
+      "head": "134dfbee08ef5a06664bcd1ed37bca0ea1a573b9",
+      "branch": "integration/cloud-admission-20261009",
+      "state": "OPEN; hosted CI pending",
+      "scope": "Combined PR225/231/234 admission candidate; local gates pass; not integrated."
+    }
+  ],
+  "followup_admission_checkpoint": {
+    "path": "/workspace/work/community-resume/admission",
+    "branch": "integration/cloud-followup-admission-20261009",
+    "head": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
+    "pr": 239,
+    "base_branch": "integration/cloud-admission-20261009",
+    "base_head": "134dfbee08ef5a06664bcd1ed37bca0ea1a573b9",
+    "included_prs": [
+      235,
+      236
+    ],
+    "status": "Local combined gates PASS:135 focused/1 live-RCC skipped;680 portable/10 skipped/4 warnings; lint/typecheck291 and explicit acceptance-script Ruff PASS. Hosted checks pending; not admitted.",
+    "verification": {
+      "focused": {
+        "passed": 135,
+        "skipped": 1
+      },
+      "portable": {
+        "passed": 680,
+        "skipped": 10,
+        "warnings": 4
+      },
+      "lint": "PASS",
+      "types": "PASS291",
+      "script_ruff": "PASS",
+      "log": "followup-admission-evidence/combined-gates.log"
+    }
+  },
+  "archive_errata": [
+    {
+      "archive": "evidence/community-20261009-update.zip",
+      "member": "evidence/coordinator-status-20261009T1610Z.json",
+      "field": "devsy.latest_user_state",
+      "recorded_value": "READY",
+      "correction": "Incorrect coordinator transcription of a future condition. The user has NOT reported a verified READY worker and has NOT authorized Devsy use. This archived value is retracted and must never be used as readiness or authorization evidence. Original archive preserved unchanged."
+    },
+    {
+      "archive": "evidence/community-20261009-update2.zip",
+      "member": "evidence/coordinator-update-20261009T1613Z.json",
+      "field": "devsy.latest_user_state",
+      "recorded_value": "READY",
+      "correction": "Same incorrect transcription; superseded by update3 and current Devsy state. No provisioning, retry, recreation, dispatch or use authorized or performed."
     }
   ]
 }
