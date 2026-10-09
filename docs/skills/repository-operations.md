@@ -1389,6 +1389,21 @@ and bind them to the same wheel and install-report digests. An environment
 variable containing a wheel hash, or a Runtime import outside only the current
 checkout, is not wheel provenance. Preserve the RECORD-tamper negative check
 and report source, installed-wheel, and frozen cells independently.
+The Dakota provider-dead verifier's `candidate-wheel` mode builds local Core
+and Helper wheels and labels its Action Server mode `source`; that receipt is
+not installed-Runtime-wheel evidence. For a wheel provider-dead cell, run its
+provider lifecycle from the measured Runtime venv, route each actual Action
+Server child through the Runtime import-provenance launcher, and supply the
+published Core and Helper wheel files only after matching their bytes to pip's
+registry install report. Keep the warm zero-request assertion separate from
+the selected HTTP-carrier 503 negative, which must fail closed without running
+the child. Compare the initial and warm artifact digest, distinct run and lease
+IDs, and both terminal verified RCC receipts.
+
+When bounding native acceptance work, set Linux CPU affinity on the invoking
+process before `exec`; child commands inherit that affinity. Record the
+effective CPU set. RCC `--workers=2` is not proof that its worker pool contains
+only two workers, so do not report it as a process-count cap.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
