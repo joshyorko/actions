@@ -21,3 +21,9 @@ The React component tests exercise view states through a fake adapter. They do
 not prove real Action Server dispatch, Runtime authorization, host binding,
 resource delivery, CSP behavior, or ChatGPT rendering. Production Canvas entry
 point and official host bridge wiring remain separately owned.
+
+`action_server/tests/action_server_tests/test_canvas_query_results_fixture.py`
+checks this exact JSON sample against the draft schema and verifies Python JSON
+round-trip compatibility, including malformed fixture rejection. It treats the
+artifact handle as inert serialized data; it does not prove a Runtime resolver,
+action binding, or caller authorization.
