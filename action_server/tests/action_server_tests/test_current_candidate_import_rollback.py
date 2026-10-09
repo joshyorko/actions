@@ -192,7 +192,7 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
             )
             run_id = response.headers.get("x-action-server-run-id")
             assert run_id, response.headers
-            evidence["run_ids"].append(run_id)
+            run_ids.append(run_id)
             return run_id
 
         first_run_id = submit("before")

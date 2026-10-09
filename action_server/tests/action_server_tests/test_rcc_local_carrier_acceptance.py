@@ -42,7 +42,7 @@ def _verify_runtime_wheel(
 
     distribution = importlib.metadata.distribution("actions-runtime")
     installed_files = {
-        Path(distribution.locate_file(entry)).resolve(): entry
+        Path(str(distribution.locate_file(entry))).resolve(): entry
         for entry in distribution.files or ()
     }
 
