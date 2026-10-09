@@ -10,8 +10,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
 from queue import Queue
-from typing import TYPE_CHECKING, Dict, Iterator, List, Optional, Set
-from typing import Literal
+from typing import TYPE_CHECKING, Dict, Iterator, List, Literal, Optional, Set
 
 from termcolor import colored
 
