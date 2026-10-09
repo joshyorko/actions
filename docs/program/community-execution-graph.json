@@ -2704,29 +2704,26 @@
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
   "current_program_refs": {
     "community": "c30f953bae1a322e1d09549607ab42f1badce440",
-    "integration": "4a717c77053947f4ad2892783211af5edbe5783d",
-    "runtime_candidate": "e2fb0f461f70129af0673aa5886f95ee581992d9",
-    "runtime_candidate_tree": "280278cf45fc8f0b5ae5702a471f8c81b15aeae6",
+    "integration": "abe8640a137942bcf398668fe2093529ba53c38b",
+    "integration_tree": "c68d3499f556ea7be0cadbc32fda4050ab388feb",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
     "release_ready": false
   },
   "current_pr_convergence": {
-    "observed_at_utc": "2026-10-09T22:32:00Z",
-    "receipt": "evidence/convergence-followup-20261009T2230Z.json",
-    "sha256": "e7b97d7f5a1a2cc345009d03b334a1bc664e686e211e822f7329b79805f470cf",
+    "observed_at_utc": "2026-10-09T22:48:00Z",
+    "receipt": "evidence/convergence-followup-20261009T2248Z.json",
+    "sha256": "b08f495d9bd49787eb04434fad9353f7a2828f5f7d60757a936f2763c4bbdef7",
     "pr_cohort": {
-      "target_integrated": 9,
-      "open_blocked": 10,
+      "target_integrated": 11,
+      "open_blocked": 8,
       "merge_ready": 0
     },
     "issue_stage_counts_unchanged": true,
     "whole_issue_acceptance_changed": false,
-    "open_pr_audit": "evidence/convergence-live-prs-20261009T2230Z.json",
-    "open_pr_audit_sha256": "bd7c314e66f77358b18a20a8edc2d2215af2fd1d1d00d0fd1f63eda67f4ceb97",
-    "current_refs": {
-      "community": "c30f953bae1a322e1d09549607ab42f1badce440",
-      "integration": "4a717c77053947f4ad2892783211af5edbe5783d",
-      "runtime_candidate": "e2fb0f461f70129af0673aa5886f95ee581992d9"
-    },
+    "open_pr_audit": "evidence/convergence-live-prs-20261009T2248Z.json",
+    "open_pr_audit_sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
+    "exact_head_ci_path": "evidence/convergence-live-prs-20261009T2248Z.json",
     "artifact_metadata_erratum": {
       "path": "evidence/convergence-erratum-20261009T2234Z.json",
       "sha256": "b2076904af96aec046efc8a1940bb724769c22d7ac9a59439bd75e9ccdc460f7"

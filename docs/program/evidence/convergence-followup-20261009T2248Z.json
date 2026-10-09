@@ -1,0 +1,370 @@
+{
+  "observed_at_utc": "2026-10-09T22:48:00Z",
+  "scope": "Current convergence and exact open-PR CI snapshot; no issue status transitions or release/publication claim.",
+  "cohort": {
+    "items": 19,
+    "target_integrated": 11,
+    "blocked_open": 8,
+    "merge_ready": 0,
+    "whole_issue_acceptance_changed": false
+  },
+  "target_integrated_prs": [
+    {
+      "pr": 251,
+      "target": "repair/rcc-graceful-retirement-20261009",
+      "merge": "ddbbfb68e3431878f01ebfd61de461ff749dc498"
+    },
+    {
+      "pr": 266,
+      "target": "renderer branch"
+    },
+    {
+      "pr": 257,
+      "target": "community integration"
+    },
+    {
+      "pr": 259,
+      "target": "Runtime release candidate"
+    },
+    {
+      "pr": 262,
+      "target": "Runtime release candidate"
+    },
+    {
+      "pr": 268,
+      "target": "community integration",
+      "merge": "4e82a8c3b72565f1f1891602f32c9d92e62fce6c"
+    },
+    {
+      "pr": 264,
+      "target": "community integration",
+      "merge": "4a717c77053947f4ad2892783211af5edbe5783d"
+    },
+    {
+      "pr": 263,
+      "target": "Runtime release candidate",
+      "merge": "975975fea45ef99322645e46d8e66809277cdfa6"
+    },
+    {
+      "pr": 267,
+      "target": "Runtime release candidate",
+      "merge": "e2fb0f461f70129af0673aa5886f95ee581992d9"
+    },
+    {
+      "pr": 269,
+      "target": "community integration",
+      "merge": "cb2668a82c6d414dd094b02e075f3ac298ac8228"
+    },
+    {
+      "pr": 265,
+      "target": "Runtime release candidate",
+      "merge": "6a53578fac029a0696834c30438c858f5f0003be"
+    }
+  ],
+  "open_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261009T2248Z.json",
+    "sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
+    "count": 8,
+    "all_drafts": true,
+    "numbers": [
+      256,
+      221,
+      220,
+      219,
+      218,
+      217,
+      216,
+      215
+    ],
+    "check_conclusions_by_pr": {
+      "256": {
+        "QUEUED": 3,
+        "IN_PROGRESS": 8,
+        "SUCCESS": 1
+      },
+      "221": {
+        "FAILURE": 2,
+        "QUEUED": 7,
+        "IN_PROGRESS": 8,
+        "SUCCESS": 11,
+        "SKIPPED": 1
+      },
+      "220": {
+        "IN_PROGRESS": 2,
+        "SUCCESS": 11,
+        "SKIPPED": 1,
+        "QUEUED": 1
+      },
+      "219": {
+        "SUCCESS": 6,
+        "FAILURE": 1
+      },
+      "218": {
+        "SUCCESS": 16,
+        "SKIPPED": 1
+      },
+      "217": {
+        "SUCCESS": 15
+      },
+      "216": {
+        "SUCCESS": 23
+      },
+      "215": {
+        "SUCCESS": 16
+      }
+    },
+    "observed_at_utc": "2026-10-09T22:48:00Z"
+  },
+  "branch_readback": {
+    "community": {
+      "branch": "community",
+      "head": "c30f953bae1a322e1d09549607ab42f1badce440",
+      "tree": "c6a2a657bde5af05f8bff659dc33ffee2db8d1e3"
+    },
+    "integration": {
+      "branch": "integration/community-release-20261008",
+      "head": "abe8640a137942bcf398668fe2093529ba53c38b",
+      "tree": "c68d3499f556ea7be0cadbc32fda4050ab388feb",
+      "clean_pushed": true
+    },
+    "runtime_candidate": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    },
+    "source": "git ls-remote + GitHub commit tree readback"
+  },
+  "main_candidate_ci_limit": "At 22:48, exact integration abe8640a has two Actions Core failures (Ubuntu and macOS), 8 in progress, 7 queued, 11 success and 1 skipped. Prior 4a717c77 results are not inherited.",
+  "pr269": {
+    "source_head": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+    "merge": "cb2668a82c6d414dd094b02e075f3ac298ac8228",
+    "hosted": "12 verification checks PASS; publish SKIPPED; merged to integration.",
+    "ledger_branch_cherry_pick": "748922f57993e07b778fa758fb71fb9684dbc50a",
+    "local_regression": "2 tests PASS on that branch.",
+    "artifact_metadata_erratum": "evidence/convergence-erratum-20261009T2234Z.json: artifact ID 11648617677; workflow-reported archive size 114288 bytes and SHA-256 db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f. 403 before bytes; digest/content unverified.",
+    "artifact": "workflow reports artifact id 11648617677, archive size 114288 bytes and SHA-256 db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f; retrieval returned 403 before bytes, so digest/contents remain unverified."
+  },
+  "pr265": {
+    "source_head": "9193989985de15dc6d5fecfd655042957cf9926c",
+    "source_tree": "774cde3bb6d4f282e933c820b45ad06f9d6bc726",
+    "merge": "6a53578fac029a0696834c30438c858f5f0003be",
+    "hosted": "10 exact-head checks PASS; merged to Runtime candidate.",
+    "installed_wheel": {
+      "wheel_sha256": "737cd1684ab892e7c20bf80a9c04d62077c8cb907abff9325cb7bb24eb1f20ac",
+      "bytes": 14130474,
+      "tag": "cp312-cp312-linux_x86_64",
+      "python": "3.12.15",
+      "pip_check": "PASS",
+      "RECORD_entries": 389,
+      "RECORD_hashes_and_sizes_verified": true,
+      "versions": {
+        "actions-core": "1.0.2",
+        "actions-http-helper": "1.0.3",
+        "actions-work-items": "0.4.4"
+      }
+    },
+    "offline_creation": "Five templates created in fresh venv with network denied; extracted bytes matched packaged/source members. Source-focused template tests 19 passed in 4.48s; combined Runtime-candidate template tests 19 passed in 1.64s.",
+    "limits": "Linux CPython 3.12 proof only; dependency installation occurred online; no mounted MCP/ChatGPT, no all-platform creation claim, no whole #126 acceptance."
+  },
+  "combined_canvas": {
+    "tested_tree": "cb5f8d503da6c64576535ebd306b18e38f182e2f",
+    "committed_tree": "24ad1296e2a750667665c12e876aafac113c7032",
+    "commit": "e398bac3443db20c375b7cfc23629bed90b313b1",
+    "checks": "devutils 151 passed; focused 44 passed, 1 deselected",
+    "post_test_delta": "one cosmetic EOF blank-line removal; no semantic change",
+    "release_ready": false
+  },
+  "devsy": {
+    "thread": "01a1222f-e720-7183-9634-2edb76d30326",
+    "turn": "01a122c9-66d0-72a0-8088-df3a1e1687ea",
+    "request_id": "actions-sol-devsy-convergence-20261009-2230-v2",
+    "snapshot_at": "2026-10-09T22:46:00Z",
+    "status": "active_inProgress; supervisor observes four reported worker lanes in activity, not all five. Auth artifact reuse is authorized but dispatch not confirmed.",
+    "reported_lanes": "22:39 coordinator inventory: four reported active, auth completed; this is not a claim all five active or progressing",
+    "auth_dispatch": "reuse of PR269 artifact readback identified; dispatch not yet confirmed",
+    "workitems_remote_workspace": {
+      "branch": "devsy/workitems-consumer-acceptance-20261009",
+      "head": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
+      "remote_readback": "root reported ls-remote verified at 22:48",
+      "recovery_gate": "cleared; review/native proof remain"
+    },
+    "rcc_lane": {
+      "head": "e8025cc4685b65d1183fabb43316fe5a188296f4",
+      "remote_readback": "root reported pushed and verified at 22:48",
+      "limits": "Native/source acceptance remains separately gated; wheel binding status was not refreshed in this snapshot."
+    }
+  },
+  "issue_accounting": {
+    "retained_contracts": 54,
+    "open": 53,
+    "accepted_closed": [
+      210
+    ],
+    "whole_issue_review_ready": 0,
+    "changed": false
+  },
+  "artifact_erratum_preserved": true,
+  "upstream_disposition": "None; no new upstream defect is established by this convergence snapshot.",
+  "open_pr_details": {
+    "215": {
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "base": "community",
+      "owner": "root integration / release owner",
+      "current_ci": "16 SUCCESS at exact head",
+      "gate": "Historical checkpoint; do not merge standalone. Require current Runtime package/native/security/platform gates on the exact release candidate.",
+      "dependency": "Consolidated Runtime release admission; Helper/Core publication is superseded by verified releases.",
+      "next_action": "Retain in PR221 lineage; gate only any needed safeguard at the current candidate.",
+      "head_branch": "convergence/actions-full-graph-20261008",
+      "title": "WIP: checkpoint community release safeguards for adversarial review",
+      "current_check_counts": {
+        "SUCCESS": 16
+      },
+      "current_head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "current_base": "community"
+    },
+    "216": {
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "base": "community",
+      "owner": "root integration / Runtime and native acceptance owner",
+      "current_ci": "23 SUCCESS at exact head",
+      "gate": "No standalone replay. Current candidate still needs remaining browser/session/reconnect proof and Windows/macOS product acceptance.",
+      "dependency": "Current PR221 candidate and native browser/session/reconnect requirements.",
+      "next_action": "Carry only current exact-candidate evidence into Runtime admission.",
+      "head_branch": "review/runtime-checkpoint-20261008",
+      "title": "WIP: checkpoint bounded Runtime history and WebSocket repairs",
+      "current_check_counts": {
+        "SUCCESS": 23
+      },
+      "current_head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "current_base": "community"
+    },
+    "217": {
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "base": "community",
+      "owner": "root integration / Core release owner",
+      "current_ci": "15 SUCCESS at exact head",
+      "gate": "Core 1.0.2 delivery already superseded/integrated; do not replay old mixed Core/Runtime checkpoint. Runtime residual gates remain separate.",
+      "dependency": "Current Runtime candidate and native/package requirements only.",
+      "next_action": "Retain history; gate current Runtime candidate.",
+      "head_branch": "review/core-checkpoint-20261008",
+      "title": "WIP: checkpoint Core public contracts and regression tests",
+      "current_check_counts": {
+        "SUCCESS": 15
+      },
+      "current_head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "current_base": "community"
+    },
+    "218": {
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "base": "community",
+      "owner": "root integration; Devsy native Work Items consumer lane",
+      "current_ci": "16 SUCCESS, 1 SKIPPED at exact head",
+      "gate": "Historical package/source checkpoint is not packaged consumer acceptance; current native Work Items and cross-platform behavior remain outstanding.",
+      "dependency": "Current #208 packaged consumer/platform acceptance; registry presence alone is insufficient.",
+      "next_action": "Keep in rollup; finish exact current PR256 consumer/platform gates.",
+      "head_branch": "review/workitems-checkpoint-20261008",
+      "title": "WIP: checkpoint native Work Items packaging and recovery",
+      "current_check_counts": {
+        "SUCCESS": 16,
+        "SKIPPED": 1
+      },
+      "current_head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "current_base": "community"
+    },
+    "219": {
+      "head": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "base": "community",
+      "owner": "root integration / architecture owner",
+      "current_ci": "6 SUCCESS, 1 FAILURE at exact head",
+      "gate": "No product merge from this old design snapshot; retain inherited N-1 WebSocket failure separately under #209.",
+      "dependency": "Current #129 Deployment and #126 packaged MCP showcase contracts.",
+      "next_action": "Use later scoped evidence; do not merge stale two-file checkpoint.",
+      "head_branch": "review/design-checkpoints-20261008",
+      "title": "WIP: preserve unfinished deployment and MCP showcase designs",
+      "current_check_counts": {
+        "SUCCESS": 6,
+        "FAILURE": 1
+      },
+      "current_head": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "current_base": "community"
+    },
+    "220": {
+      "head": "748922f57993e07b778fa758fb71fb9684dbc50a",
+      "base": "community",
+      "owner": "root owns governance PR220 admission; this lane prepared the ledger checkpoint",
+      "current_ci": "11 SUCCESS, 2 IN_PROGRESS, 1 QUEUED, 1 SKIPPED at 22:47 exact head",
+      "gate": "No complete hosted PR gate yet. Two focused regression tests pass on the ledger branch cherry-pick; that does not complete all hosted checks.",
+      "dependency": "Canonical community ledger/checkpoint integrity and required exact-head hosted checks.",
+      "next_action": "Preserve the corrected test synchronization, finish hosted checks and independent review before admission.",
+      "head_branch": "review/community-ledger-20261008",
+      "title": "Preserve Actions campaign ledger, Cloud ownership, and exact acceptance evidence",
+      "current_check_counts": {
+        "IN_PROGRESS": 2,
+        "SUCCESS": 11,
+        "SKIPPED": 1,
+        "QUEUED": 1
+      },
+      "current_head": "748922f57993e07b778fa758fb71fb9684dbc50a",
+      "current_base": "community"
+    },
+    "221": {
+      "head": "abe8640a137942bcf398668fe2093529ba53c38b",
+      "base": "community",
+      "owner": "root integration / release owner",
+      "current_ci": "11 SUCCESS, 8 IN_PROGRESS, 7 QUEUED, 2 FAILURE, 1 SKIPPED at 22:48 exact head; 29 total check rows.",
+      "gate": "The current combined candidate has failures and pending checks. Earlier green checks on 4a717c77 do not transfer.",
+      "dependency": "Current combined source, package/native/security/platform acceptance and required PRs in its candidate lineage.",
+      "next_action": "A is assigned the Ubuntu Actions Core failure diagnosis; retain both Ubuntu and macOS failure observations until exact logs explain each. Then finish current-head required checks and root review.",
+      "head_branch": "integration/community-release-20261008",
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "current_check_counts": {
+        "FAILURE": 2,
+        "QUEUED": 7,
+        "IN_PROGRESS": 8,
+        "SUCCESS": 11,
+        "SKIPPED": 1
+      },
+      "current_head": "abe8640a137942bcf398668fe2093529ba53c38b",
+      "current_base": "community",
+      "current_failures": [
+        {
+          "name": "build (ubuntu-py3.10-devmode)",
+          "run": 38000894375,
+          "job": 114058407237,
+          "workflow": "Actions Core Tests",
+          "status": "FAILURE",
+          "diagnosis": "A assigned; cause not yet confirmed."
+        },
+        {
+          "name": "build (macos-py3.10-devmode)",
+          "run": 38000894375,
+          "job": 114058407305,
+          "workflow": "Actions Core Tests",
+          "status": "FAILURE",
+          "diagnosis": "Cause/owner not yet confirmed in this snapshot."
+        }
+      ]
+    },
+    "256": {
+      "head": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
+      "base": "integration/community-release-20261008",
+      "owner": "Devsy Work Items consumer lane; root owns integration admission",
+      "current_ci": "1 SUCCESS, 8 IN_PROGRESS, 3 QUEUED at 22:48 exact head.",
+      "gate": "Recovery gate cleared by root; native/reviewer proof still outstanding. Current matrix is actively running.",
+      "dependency": "Current integration Work Items lock plus native packaged consumer behavior; registry Work Items 0.4.4 presence alone is insufficient.",
+      "next_action": "Complete exact 5d9d764 matrix and reviewer/native evidence; reconcile against 22:39 Devsy workspace inventory, without conflating remote6cf with the pushed PR head5d9.",
+      "head_branch": "devsy/workitems-consumer-acceptance-20261009",
+      "title": "test(runtime): exercise packaged Work Items consumers on every native platform",
+      "current_check_counts": {
+        "QUEUED": 3,
+        "IN_PROGRESS": 8,
+        "SUCCESS": 1
+      },
+      "current_head": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
+      "current_base": "integration/community-release-20261008",
+      "native_workspace_readback": "At 22:39 the Devsy Work Items workspace reported remote checkout6cf62b00 vs local5d9d764e; the pushed PR head is5d9d764e. Preserve lifecycle dirty worktree9efcc985; exact dirty state not inferred beyond timestamp."
+    }
+  },
+  "open_pr_details_source": "Per-PR current head/base/checks from the 22:48 GitHub open-PR audit; owner, dependency and bounded action are from the last timestamped campaign ownership/gate records and current root direction. Historical owner/gate references for #215\u2013#219 are not evidence of new progress.",
+  "source_ci_current_head": "The exact integration abe8640a has two Actions Core failures (Ubuntu and macOS) plus queued/in-progress checks. A is assigned the Ubuntu diagnosis. Do not inherit older 4a717c77 results or infer failure cause."
+}
