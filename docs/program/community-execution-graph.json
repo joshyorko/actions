@@ -2711,9 +2711,9 @@
     "release_ready": false
   },
   "current_pr_convergence": {
-    "observed_at_utc": "2026-10-09T22:48:00Z",
-    "receipt": "evidence/convergence-followup-20261009T2248Z.json",
-    "sha256": "b08f495d9bd49787eb04434fad9353f7a2828f5f7d60757a936f2763c4bbdef7",
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "receipt": "evidence/convergence-followup-20261009T2253Z.json",
+    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
     "pr_cohort": {
       "target_integrated": 11,
       "open_blocked": 8,
@@ -2723,10 +2723,15 @@
     "whole_issue_acceptance_changed": false,
     "open_pr_audit": "evidence/convergence-live-prs-20261009T2248Z.json",
     "open_pr_audit_sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
-    "exact_head_ci_path": "evidence/convergence-live-prs-20261009T2248Z.json",
+    "exact_head_ci_path": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
     "artifact_metadata_erratum": {
       "path": "evidence/convergence-erratum-20261009T2234Z.json",
       "sha256": "b2076904af96aec046efc8a1940bb724769c22d7ac9a59439bd75e9ccdc460f7"
+    },
+    "exact_head_ci_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0",
+    "current_failures": {
+      "PR221": 3,
+      "PR256": 1
     }
   }
 }

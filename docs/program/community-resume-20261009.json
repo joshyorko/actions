@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T22:48:00Z",
-  "status": "ACTIVE engineering checkpoint at 2026-10-09T22:48Z: 11 of 19 scoped PRs merged only to named targets; 8 open/blocked, 0 merge-ready. Community remains c30f953; integration abe8640 and Runtime candidate 6a53578 are current. Exact integration head abe8640 has two Actions Core failures (Ubuntu and macOS), eight in progress, seven queued, eleven success and one skipped; A is assigned the Ubuntu diagnosis. PR256 recovery gate is cleared and its exact 5d9d764 matrix is running, with native/review proof outstanding. PR265 bounded Linux installed-wheel/offline template proof and PR269 merge/targeted-test status are recorded; no issue acceptance or publication changed.",
+  "observed_at": "2026-10-09T22:53:00Z",
+  "status": "ACTIVE engineering checkpoint at 2026-10-09T22:53Z: 11 of 19 scoped PRs merged only to named targets; 8 open/blocked, 0 merge-ready. Integration abe8640a has three Actions Core failures on Ubuntu, Windows and macOS; Ubuntu 3.13/mypy and separate source diagnostics are being handled, with the narrow fix and Mac/Windows diagnosis still pending. PR256 Linux native build failed while other checks run; review/native diagnosis is pending. PR220 now has 14 hosted successes and one skip. No issue acceptance or publication changed.",
   "integration_head": "abe8640a137942bcf398668fe2093529ba53c38b",
   "community_head": "c30f953bae1a322e1d09549607ab42f1badce440",
   "release_ready": false,
@@ -2849,7 +2849,7 @@
     "merged_at": "2026-10-09T21:01:00Z",
     "scope_limit": "Last previously admitted documentation-only validation checkpoint remains PR254 at446ff1b. The branch has since advanced through seven target-specific merges, including PR264/268; current branch ref is recorded separately. This does not admit the entire PR221 combined candidate or release."
   },
-  "observed_at_utc": "2026-10-09T22:48:00Z",
+  "observed_at_utc": "2026-10-09T22:53:00Z",
   "runtime_candidate_head": "6a53578fac029a0696834c30438c858f5f0003be",
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
@@ -2898,11 +2898,13 @@
     "contracts_and_raw_states": "54 retained contracts and raw states unchanged; #210 remains the only accepted whole issue."
   },
   "current_pull_request_observations": {
-    "observed_at_utc": "2026-10-09T22:48:00Z",
+    "observed_at_utc": "2026-10-09T22:53:00Z",
     "audit_path": "evidence/convergence-live-prs-20261009T2248Z.json",
     "audit_sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
-    "summary_path": "evidence/convergence-followup-20261009T2248Z.json",
-    "summary_sha256": "b08f495d9bd49787eb04434fad9353f7a2828f5f7d60757a936f2763c4bbdef7",
+    "targeted_checks_path": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
+    "targeted_checks_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0",
+    "summary_path": "evidence/convergence-followup-20261009T2253Z.json",
+    "summary_sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
     "open_pr_count": 8,
     "all_open_are_drafts": true,
     "merge_ready_count": 0,
@@ -2922,8 +2924,7 @@
         269,
         265
       ]
-    },
-    "exact_head_ci_limit": "integration abe8640a has two Actions Core failures plus eight in progress/seven queued; prior 4a717c77 results do not transfer."
+    }
   },
   "prior_integration_checkpoints": [
     {
@@ -3027,15 +3028,15 @@
     "base_ref_readback_at": "2026-10-09T21:46:56Z"
   },
   "current_convergence_followup": {
-    "observed_at_utc": "2026-10-09T22:48:00Z",
-    "path": "evidence/convergence-followup-20261009T2248Z.json",
-    "sha256": "b08f495d9bd49787eb04434fad9353f7a2828f5f7d60757a936f2763c4bbdef7",
-    "scope": "Eleven target-only merges; eight blocked-open PRs; exact source CI includes two untriaged Core failures on current integration; per-PR owners/actions/dependencies and package proof limits recorded; issue counts unchanged."
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "path": "evidence/convergence-followup-20261009T2253Z.json",
+    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
+    "scope": "Current-only targeted update for PR220/221/256; preserves full 22:48 8-open-PR inventory and 11 target merges. No issue counts changed."
   },
   "latest_convergence_update": {
-    "observed_at_utc": "2026-10-09T22:48:00Z",
-    "path": "evidence/convergence-followup-20261009T2248Z.json",
-    "sha256": "b08f495d9bd49787eb04434fad9353f7a2828f5f7d60757a936f2763c4bbdef7",
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "path": "evidence/convergence-followup-20261009T2253Z.json",
+    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
     "cohort": {
       "items": 19,
       "merge_ready": 0,
@@ -3063,7 +3064,8 @@
     },
     "branch_readback_at": "2026-10-09T22:47:00Z",
     "issue_acceptance_changed": false,
-    "exact_head_ci_path": "evidence/convergence-live-prs-20261009T2248Z.json"
+    "targeted_ci_refresh": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
+    "targeted_ci_refresh_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0"
   },
   "latest_open_pr_audit": {
     "observed_at_utc": "2026-10-09T22:48:00Z",
@@ -3170,9 +3172,9 @@
   },
   "release_candidate_head": "6a53578fac029a0696834c30438c858f5f0003be",
   "current_convergence_update": {
-    "observed_at_utc": "2026-10-09T22:48:00Z",
-    "path": "evidence/convergence-followup-20261009T2248Z.json",
-    "sha256": "b08f495d9bd49787eb04434fad9353f7a2828f5f7d60757a936f2763c4bbdef7",
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "path": "evidence/convergence-followup-20261009T2253Z.json",
+    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
     "cohort": {
       "items": 19,
       "merge_ready": 0,
@@ -3200,7 +3202,8 @@
     },
     "branch_readback_at": "2026-10-09T22:47:00Z",
     "issue_acceptance_changed": false,
-    "exact_head_ci_path": "evidence/convergence-live-prs-20261009T2248Z.json"
+    "targeted_ci_refresh": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
+    "targeted_ci_refresh_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0"
   },
   "latest_artifact_metadata_erratum": {
     "observed_at_utc": "2026-10-09T22:34:00Z",
@@ -3327,30 +3330,40 @@
   },
   "pr265_installed_wheel_acceptance": {
     "observed_at_utc": "2026-10-09T22:39:07Z",
-    "source_checkpoint": "/workspace/work/community-resume/evidence/devsy-cloud-admission-checkpoint-2239.json",
-    "source_sha256": "557b724794c8818f5d627e562c27f32877c2e7125878cd52c796d5cbcd58068c",
     "wheel_sha256": "737cd1684ab892e7c20bf80a9c04d62077c8cb907abff9325cb7bb24eb1f20ac",
     "wheel_bytes": 14130474,
-    "scope": "Fresh Linux CPython 3.12 venv; 389 RECORD entries/hashes verified; pip check pass; five templates created under network denial. Not Windows/macOS, mounted MCP/ChatGPT, or whole #126 acceptance."
+    "scope": "Fresh Linux CPython 3.12 venv; 389 RECORD entries/hashes verified; pip check pass; five templates created under network denial. Not Windows/macOS, mounted MCP/ChatGPT, or whole #126 acceptance.",
+    "source_receipt_sha256": "557b724794c8818f5d627e562c27f32877c2e7125878cd52c796d5cbcd58068c",
+    "receipt_note": "Source receipt is summarized by literal verification data here; no ephemeral workspace path is a canonical link."
   },
   "current_source_ci_failures": {
-    "observed_at_utc": "2026-10-09T22:48:00Z",
+    "observed_at_utc": "2026-10-09T22:53:00Z",
     "head": "abe8640a137942bcf398668fe2093529ba53c38b",
-    "failure_count": 2,
+    "failure_count": 3,
     "failures": [
       {
         "run": 38000894375,
         "job": 114058407237,
-        "name": "Actions Core build (ubuntu-py3.10-devmode)",
+        "name": "Actions Core Ubuntu py3.10 devmode",
         "owner": "A",
-        "diagnosis": "pending exact logs; no cause inferred."
+        "status": "FAILURE",
+        "source_diagnosis": "Ubuntu3.13 and mypy PASS; E721 float-type check and stale generated MCP docs reported; narrow fix assigned, not yet verified."
+      },
+      {
+        "run": 38000894375,
+        "job": 114058407148,
+        "name": "Actions Core Windows py3.10 devmode",
+        "owner": "A for cause verification",
+        "status": "FAILURE",
+        "diagnosis": "Cause not confirmed."
       },
       {
         "run": 38000894375,
         "job": 114058407305,
-        "name": "Actions Core build (macos-py3.10-devmode)",
-        "owner": "unconfirmed",
-        "diagnosis": "pending exact logs; no cause inferred."
+        "name": "Actions Core macOS py3.10 devmode",
+        "owner": "A for cause verification",
+        "status": "FAILURE",
+        "diagnosis": "Cause not confirmed."
       }
     ]
   },
@@ -3363,5 +3376,15 @@
     "auth": "artifact reuse authorized, dispatch not confirmed",
     "workitems_pr_head": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
     "rcc_head": "e8025cc4685b65d1183fabb43316fe5a188296f4"
+  },
+  "pr256_current_failure": {
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "head": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
+    "run": 38000998215,
+    "job": 114058744887,
+    "check": "Build Action Server binary without credentials (ubuntu-22.04)",
+    "status": "FAILURE",
+    "diagnosis_owner": "L/reviewer and native supervisor",
+    "diagnosis": "pending; root reports recovery gate cleared, native/review proof remains."
   }
 }

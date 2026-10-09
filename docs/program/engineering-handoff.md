@@ -1,6 +1,15 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-09T22:48Z
+## Current convergence — 2026-10-09T22:53Z
+
+The 11 target-only merges, eight blocked open drafts, current branch refs and per-PR owners/dependencies remain as recorded in the [22:48 baseline](evidence/convergence-followup-20261009T2248Z.json) and [full eight-PR audit](evidence/convergence-live-prs-20261009T2248Z.json). This small update records new checks for PR220, PR221 and PR256 in the [22:53 delta](evidence/convergence-followup-20261009T2253Z.json) and [targeted check receipt](evidence/convergence-targeted-check-refresh-20261009T2253Z.json).
+
+PR220 head `748922f5` now has 14 hosted successes and one skip. PR221 at integration head `abe8640a` has three Actions Core failures (Ubuntu job 114058407237, Windows 114058407148, macOS 114058407305), four checks in progress, 22 success and one skipped. Root reports Ubuntu 3.13 and mypy pass; E721 on `type(value) is float` and stale generated MCP documentation were identified, and a narrow repair was assigned. A is also assigned Mac/Windows cause verification; no fix or matrix cause is claimed. PR256 head `5d9d764e` has a Linux native-build failure at run 38000998215/job 114058744887; L/reviewer and native supervisor need to diagnose it. Its recovery gate is cleared; native/review proof remains.
+
+PR265 and PR269 remain target-integrated with their separate bounded receipts and limits from the 22:48 baseline. The PR269 artifact-size erratum remains authoritative; artifact ID `11648617677` is distinct from the workflow-reported `114288` bytes, and 403 prevented retrieval before any bytes. The installed-wheel evidence for PR265 is stated directly in the baseline; no ephemeral workspace receipt path is a canonical link.
+
+
+## Historical convergence snapshot — 2026-10-09T22:48Z
 
 The current branch readback is community `c30f953bae1a322e1d09549607ab42f1badce440`, integration `abe8640a137942bcf398668fe2093529ba53c38b` (tree `c68d3499f556ea7be0cadbc32fda4050ab388feb`), and Runtime candidate `6a53578fac029a0696834c30438c858f5f0003be` (tree `52fa64b1eecc8373362b8dba612f71ecd9d8c84d`). Eleven PRs in the 19-item cohort are merged only to named targets; eight drafts remain open and blocked, with zero merge-ready. Current refs, merge scope and exact open-PR source CI are in the [22:48 receipt](evidence/convergence-followup-20261009T2248Z.json) and [22:48 audit](evidence/convergence-live-prs-20261009T2248Z.json).
 
@@ -9,17 +18,6 @@ The exact integration head `abe8640a` has two Actions Core failures: Ubuntu Pyth
 PR269 is merged at `cb2668a8` after 12 verification checks passed; publish was skipped. Two targeted regressions passed on ledger branch `748922f5`. PR265 is merged to the Runtime candidate at `6a53578f` after 10 hosted checks and a separate fresh-Linux CPython 3.12 installed-wheel/offline-template proof: 389 wheel RECORD entries verified, `pip check` passed, and five templates were created with network denied. This does not establish Windows/macOS creation, mounted MCP/ChatGPT acceptance, or full #126 closure. The PR269 artifact correction remains the [22:34 erratum](evidence/convergence-erratum-20261009T2234Z.json); artifact ID `11648617677`, reported archive size `114288` bytes, reported SHA-256 `db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f`, but retrieval returned 403 before bytes.
 
 The existing Devsy coordinator thread/turn was observed `active_inProgress` at 22:44:33Z; the later 22:46 control-plane snapshot reports four active worker lanes, not proof all five are progressing. Auth may reuse the existing PR269 artifact readback, but dispatch remains unconfirmed.
-
-
-## Historical convergence snapshot — 2026-10-09T22:47Z
-
-The 22:47 readback is community `c30f953bae1a322e1d09549607ab42f1badce440`, integration `abe8640a137942bcf398668fe2093529ba53c38b` (tree `c68d3499f556ea7be0cadbc32fda4050ab388feb`), and Runtime candidate `6a53578fac029a0696834c30438c858f5f0003be` (tree `52fa64b1eecc8373362b8dba612f71ecd9d8c84d`). Eleven PRs in the 19-item convergence cohort are merged only to their named targets; the fresh audit has eight open drafts and zero merge-ready. See the [22:47 receipt](evidence/convergence-followup-20261009T2248Z.json) and [exact open-PR/check audit](evidence/convergence-live-prs-20261009T2247Z.json). The original 54 contracts and issue counts remain unchanged.
-
-The exact new integration head `abe8640a` has queued/in-progress hosted checks in the 22:47 audit; prior green checks at `4a717c77` do not transfer. PR269 was merged at `cb2668a8` after 12 verification checks passed; publish was skipped. Its regression repair was cherry-picked to the ledger branch `748922f5`, where two targeted tests passed. PR265 was merged at `6a53578f` after 10 checks and has a separate Linux CPython 3.12 installed-wheel/offline-template receipt: the 1.0.3 CLI passed `pip check`, 389 RECORD entries were verified, and five templates were created with network denied. This does not establish Windows/macOS creation, mounted MCP/ChatGPT acceptance, or full #126 closure.
-
-PR269 artifact metadata remains governed by the [22:34 erratum](evidence/convergence-erratum-20261009T2234Z.json): artifact ID `11648617677`, workflow-reported archive size `114288` bytes and digest `db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f`; retrieval returned 403 before bytes, so digest and contents are unverified.
-
-The existing Devsy coordinator thread `01a1222f-e720-7183-9634-2edb76d30326` / turn `01a122c9-66d0-72a0-8088-df3a1e1687ea` was observed `active_inProgress` at 22:44:33Z. The 22:39 lane inventory reported four active and auth completed; this is timestamped status only, not evidence all five lanes are active or progressing. Auth dispatch from the existing artifact readback was not yet confirmed.
 
 
 ## Historical convergence snapshot — 2026-10-09T22:31Z
