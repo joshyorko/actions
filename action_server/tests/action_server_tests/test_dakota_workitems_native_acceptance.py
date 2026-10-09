@@ -40,7 +40,8 @@ def _local_wheel_path_from_file_url(source_url: str) -> Path:
 
 
 PROCESSOR_ACTION = (
-    inspect.getsource(_local_wheel_path_from_file_url)
+    "from pathlib import Path\n\n"
+    + inspect.getsource(_local_wheel_path_from_file_url)
     + "\n"
     + textwrap.dedent(
         """

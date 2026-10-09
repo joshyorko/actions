@@ -225,7 +225,20 @@ def test_acceptance_claims_are_not_presented_as_build_provenance():
 def test_native_package_yaml_replaces_core_with_measured_wheel_after_rcc_install(
     tmp_path: Path,
 ):
-    compile(NATIVE_TEST.PROCESSOR_ACTION, "dakota_workitems_processor.py", "exec")
+    processor_path = tmp_path / "dakota_workitems_processor.py"
+    processor_path.write_text(NATIVE_TEST.PROCESSOR_ACTION, encoding="utf-8")
+    spec = importlib.util.spec_from_file_location(
+        "dakota_workitems_generated_processor", processor_path
+    )
+    assert spec is not None and spec.loader is not None
+    processor_module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = processor_module
+    try:
+        spec.loader.exec_module(processor_module)
+    finally:
+        sys.modules.pop(spec.name, None)
+    assert callable(processor_module.process_work_item)
+
     wheel = tmp_path / "candidate wheels" / "actions_core-1.0.2-py3-none-any.whl"
     wheel.parent.mkdir()
     wheel.write_bytes(b"candidate core wheel")

@@ -364,6 +364,10 @@ equivalent to a POSIX path formed directly from the URL's leading slash. The
 generated command quotes paths with native Windows command-line rules on
 Windows and POSIX shell rules elsewhere. No business-service credentials are
 used.
+The consumer test generates its action module from source fragments, so its
+regression test must execute a real module import: `compile()` alone does not
+evaluate module-level annotations or decorators. Keep every global referenced
+by an embedded helper in the generated module's own imports.
 The runner hashes both executables and the wheel, requires fresh per-runtime
 API proofs, and accepts
 the optional native manifest only when its source SHA, platform, architecture,
