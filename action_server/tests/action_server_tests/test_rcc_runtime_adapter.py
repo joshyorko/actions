@@ -331,6 +331,35 @@ def test_trust_carrier_path_is_redacted_from_rcc_errors(tmp_path):
     assert str(carrier_path) not in str(error.value)
 
 
+@pytest.mark.parametrize("path_length", [80, 433])
+def test_trust_carrier_error_redacts_full_diagnostic_before_truncation(path_length):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        RccTrustCarrier,
+        publish_artifact,
+    )
+
+    carrier_path = Path("/" + "x" * (path_length - 1))
+    carrier = RccTrustCarrier(
+        path=carrier_path,
+        identity="sha256:" + "b" * 64,
+    )
+    diagnostic = f"provider rejected detached attachment for {carrier_path}"
+
+    with pytest.raises(RccRuntimeError) as error:
+        publish_artifact(
+            Path("/synthetic/package.yaml"),
+            Path("/synthetic/rcc"),
+            provider="local",
+            trust_carrier=carrier,
+            runner=lambda *_args: (1, "", diagnostic),
+        )
+
+    residual_path_fragment = str(carrier_path)[: min(path_length, 32)]
+    assert residual_path_fragment not in str(error.value)
+    assert "<trust-carrier>" in str(error.value)
+
+
 def test_runtime_only_carrier_setting_is_removed_from_action_child_environment():
     from actions.server._rcc_runtime_adapter import strip_runtime_only_settings
 

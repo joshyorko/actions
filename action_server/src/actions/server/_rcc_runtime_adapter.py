@@ -365,9 +365,8 @@ def _run_json(
             ),
             "command failed",
         )
-        raise RccRuntimeError(
-            phase, redact_trust_carrier_text(detail[:400], trust_carrier)
-        )
+        detail = redact_trust_carrier_text(detail, trust_carrier)
+        raise RccRuntimeError(phase, detail[:400])
     try:
         loaded = json.loads(stdout)
     except (TypeError, ValueError, json.JSONDecodeError) as exc:

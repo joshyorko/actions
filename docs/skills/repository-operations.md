@@ -1368,6 +1368,12 @@ an error from that carrier must fail closed without falling back. This Actions
 integration supports only `permissive-local`: an RCC verification receipt with
 `verification.valid` does not establish strict-remote signatures or fresh
 revocation authority. Strict-remote acceptance remains unverified.
+When bounding RCC error diagnostics, redact the complete selected diagnostic
+before truncating it; truncating first can leave the prefix of a long carrier
+path in the error. The synthetic 80/433-character path regression covers both
+short and cutoff-crossing cases. The source local-carrier acceptance observes
+the Action Server owner process reaped and an RCC `completed`, exit-0 receipt;
+it does not independently enumerate or prove reaping of every descendant PID.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
