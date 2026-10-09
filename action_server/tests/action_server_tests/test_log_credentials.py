@@ -1,4 +1,7 @@
+import importlib
 import logging
+import secrets
+from types import SimpleNamespace
 from pathlib import Path
 
 import pytest
@@ -62,6 +65,43 @@ def test_debug_cli_arguments_never_include_api_key_values():
         "--port",
         "8080",
     ]
+
+
+@pytest.mark.parametrize(
+    "module_name",
+    [
+        "actions.server._common.process",
+        "actions.server._robo_utils.process",
+    ],
+)
+@pytest.mark.parametrize("argument_form", ["joined", "separate-abbreviated"])
+def test_subprocess_debug_diagnostics_redact_api_key_arguments(
+    module_name, argument_form, monkeypatch, caplog, tmp_path
+):
+    process_module = importlib.import_module(module_name)
+    api_key = secrets.token_urlsafe(32)
+    if argument_form == "joined":
+        key_arguments = [f"--api-key={api_key}"]
+    else:
+        key_arguments = ["--api-k", api_key]
+    fake_process = SimpleNamespace(pid=123, stdin=None, stdout=None, stderr=None)
+    monkeypatch.setattr(
+        process_module,
+        "_popen_raise",
+        lambda *_args, **_kwargs: fake_process,
+    )
+    monkeypatch.setattr(process_module, "_start_reader_threads", lambda *_args: None)
+    caplog.set_level(logging.DEBUG, logger=process_module.log.name)
+
+    child = process_module.Process(["action-server", "start", *key_arguments], cwd=tmp_path)
+    child.start()
+    diagnostics = caplog.text
+    if module_name.endswith("_common.process"):
+        diagnostics += str(child)
+    if api_key in diagnostics:
+        raise AssertionError("subprocess diagnostics exposed an API key")
+    if "<redacted>" not in diagnostics.casefold():
+        raise AssertionError("subprocess diagnostics omitted the redaction marker")
 
 
 @pytest.mark.integration_test

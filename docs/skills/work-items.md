@@ -484,6 +484,18 @@ gate before other packaged Runtime gates and set `PYTHONDONTWRITEBYTECODE=1` for
 its Runtime and version probes. Its hosted tree check must still pass before
 that ordering change counts as verified behavior.
 
+After cleanup, the frozen browser gate also retains a post-runtime per-path
+inventory and an added/removed/changed entry report, including when the tree
+digest fails. Compare that report to the immutable build inventory; do not
+admit the browser result or alter the trusted hash when runtime writes occur.
+
+Subprocess debug/error messages and string representations must redact
+sensitive command-line switches before formatting the argument list.
+Use the shared process-argument redactor so Action Server's common and
+RoboUtils process wrappers agree on `--api-key` and its accepted abbreviations.
+Tests must prove the key value is absent from captured logs without placing the
+value in the assertion failure message.
+
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
 descendants inherit that ownership; closing the Job requests descendant termination

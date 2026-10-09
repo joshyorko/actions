@@ -86,9 +86,10 @@ def packaged_tree_inventory(root: Path) -> list[dict[str, str | int | None]]:
     return inventory
 
 
-def write_pretest_tree_inventory(
+def write_tree_inventory_snapshot(
     receipt_value: str | None,
     *,
+    stage: str,
     source_sha: str,
     runtime_kind: str,
     executable_sha: str,
@@ -99,7 +100,7 @@ def write_pretest_tree_inventory(
         return
     receipt_path = Path(receipt_value)
     inventory_path = receipt_path.with_name(
-        f"{receipt_path.stem}-pretest-tree-inventory.json"
+        f"{receipt_path.stem}-{stage}-tree-inventory.json"
     )
     inventory_path.parent.mkdir(parents=True, exist_ok=True)
     inventory_path.write_text(
@@ -108,6 +109,7 @@ def write_pretest_tree_inventory(
                 "schema_version": 1,
                 "source_sha": source_sha,
                 "runtime_kind": runtime_kind,
+                "stage": stage,
                 "platform": platform.system(),
                 "executable_sha256": executable_sha,
                 "manifest_sha256": sha256(manifest_path),
@@ -119,6 +121,90 @@ def write_pretest_tree_inventory(
         + "\n",
         encoding="utf-8",
     )
+
+
+def compare_package_tree_inventories(
+    baseline: list[dict], observed: list[dict]
+) -> dict[str, list[dict]]:
+    before = {entry["path"]: entry for entry in baseline}
+    after = {entry["path"]: entry for entry in observed}
+    added = [after[path] for path in sorted(after.keys() - before.keys())]
+    removed = [before[path] for path in sorted(before.keys() - after.keys())]
+    changed = []
+    for path in sorted(before.keys() & after.keys()):
+        fields = [
+            field
+            for field in ("kind", "mode", "link_target", "content_sha256")
+            if before[path].get(field) != after[path].get(field)
+        ]
+        if fields:
+            changed.append(
+                {
+                    "path": path,
+                    "fields": fields,
+                    "baseline": before[path],
+                    "observed": after[path],
+                }
+            )
+    return {"added": added, "removed": removed, "changed": changed}
+
+
+def record_postruntime_tree_observation(
+    receipt: dict,
+    *,
+    package_root: Path,
+    receipt_value: str | None,
+    source_sha: str,
+    runtime_kind: str,
+    executable_sha: str,
+    manifest_path: Path,
+) -> None:
+    observed_sha = packaged_tree_sha256(package_root)
+    observed_entries = packaged_tree_inventory(package_root)
+    write_tree_inventory_snapshot(
+        receipt_value,
+        stage="post-runtime",
+        source_sha=source_sha,
+        runtime_kind=runtime_kind,
+        executable_sha=executable_sha,
+        manifest_path=manifest_path,
+        package_root=package_root,
+    )
+    baseline_path = manifest_path.parent / "native-artifact-tree-inventory.json"
+    baseline_entries = json.loads(baseline_path.read_text(encoding="utf-8"))
+    difference = compare_package_tree_inventories(baseline_entries, observed_entries)
+    report_path = None
+    if receipt_value:
+        receipt_path = Path(receipt_value)
+        report = receipt_path.with_name(
+            f"{receipt_path.stem}-post-runtime-tree-diff.json"
+        )
+        report.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "source_sha": source_sha,
+                    "runtime_kind": runtime_kind,
+                    "platform": platform.system(),
+                    "executable_sha256": executable_sha,
+                    "manifest_sha256": sha256(manifest_path),
+                    "expected_package_tree_sha256": receipt["package_tree_sha256"],
+                    "observed_package_tree_sha256": observed_sha,
+                    **difference,
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        report_path = report.name
+    receipt["post_runtime_package_tree_sha256"] = observed_sha
+    receipt["post_runtime_tree_diff"] = {
+        "added_count": len(difference["added"]),
+        "removed_count": len(difference["removed"]),
+        "changed_count": len(difference["changed"]),
+        "report_path": report_path,
+    }
 
 
 def packaged_files_sha256(
@@ -233,8 +319,9 @@ def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
         if runtime_kind == "frozen"
         else executable.parents[1] / "action-server"
     )
-    write_pretest_tree_inventory(
+    write_tree_inventory_snapshot(
         os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
+        stage="pretest",
         source_sha=source_sha,
         runtime_kind=runtime_kind,
         executable_sha=executable_sha,
@@ -589,8 +676,9 @@ def test_pretest_inventory_records_relative_entry_identity(tmp_path: Path) -> No
     manifest_path.write_text("{}\n", encoding="utf-8")
     receipt_path = tmp_path / "dakota-workitems-ui-frozen-test.json"
 
-    write_pretest_tree_inventory(
+    write_tree_inventory_snapshot(
         str(receipt_path),
+        stage="pretest",
         source_sha="a" * 40,
         runtime_kind="frozen",
         executable_sha="b" * 64,
@@ -601,11 +689,98 @@ def test_pretest_inventory_records_relative_entry_identity(tmp_path: Path) -> No
     inventory_path = tmp_path / "dakota-workitems-ui-frozen-test-pretest-tree-inventory.json"
     inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
     assert inventory["source_sha"] == "a" * 40
+    assert inventory["stage"] == "pretest"
     assert inventory["manifest_sha256"] == sha256(manifest_path)
     assert inventory["entries"] == packaged_tree_inventory(package)
     assert inventory["entries"][-1]["content_sha256"] == hashlib.sha256(
         b"measured content"
     ).hexdigest()
+
+
+def test_tree_inventory_diff_preserves_added_removed_and_changed_entries() -> None:
+    baseline = [
+        {
+            "path": "changed.py",
+            "kind": "file",
+            "mode": 420,
+            "link_target": None,
+            "content_sha256": "a" * 64,
+        },
+        {
+            "path": "removed.py",
+            "kind": "file",
+            "mode": 420,
+            "link_target": None,
+            "content_sha256": "b" * 64,
+        },
+    ]
+    observed = [
+        {
+            "path": "changed.py",
+            "kind": "file",
+            "mode": 420,
+            "link_target": None,
+            "content_sha256": "c" * 64,
+        },
+        {
+            "path": "added.py",
+            "kind": "file",
+            "mode": 420,
+            "link_target": None,
+            "content_sha256": "d" * 64,
+        },
+    ]
+
+    difference = compare_package_tree_inventories(baseline, observed)
+    assert [entry["path"] for entry in difference["added"]] == ["added.py"]
+    assert [entry["path"] for entry in difference["removed"]] == ["removed.py"]
+    assert difference["changed"] == [
+        {
+            "path": "changed.py",
+            "fields": ["content_sha256"],
+            "baseline": baseline[0],
+            "observed": observed[0],
+        }
+    ]
+
+
+def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) -> None:
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "module.py").write_bytes(b"packaged source")
+    baseline = packaged_tree_inventory(package)
+    inventory_path = tmp_path / "native-artifact-tree-inventory.json"
+    inventory_path.write_text(json.dumps(baseline), encoding="utf-8")
+    manifest_path = tmp_path / "native-artifact-manifest.json"
+    manifest_path.write_text("{}\n", encoding="utf-8")
+    receipt_path = tmp_path / "dakota-workitems-ui-frozen-test.json"
+    receipt = {"package_tree_sha256": packaged_tree_sha256(package)}
+
+    generated = package / "__pycache__"
+    generated.mkdir()
+    (generated / "module.pyc").write_bytes(b"runtime-generated bytecode")
+    record_postruntime_tree_observation(
+        receipt,
+        package_root=package,
+        receipt_value=str(receipt_path),
+        source_sha="a" * 40,
+        runtime_kind="frozen",
+        executable_sha="b" * 64,
+        manifest_path=manifest_path,
+    )
+
+    report_path = tmp_path / "dakota-workitems-ui-frozen-test-post-runtime-tree-diff.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["expected_package_tree_sha256"] == receipt["package_tree_sha256"]
+    assert report["observed_package_tree_sha256"] == receipt["post_runtime_package_tree_sha256"]
+    assert [entry["path"] for entry in report["added"]] == [
+        "__pycache__",
+        "__pycache__/module.pyc",
+    ]
+    assert report["removed"] == []
+    assert report["changed"] == []
+    assert receipt["post_runtime_tree_diff"]["added_count"] == 2
+    assert (tmp_path / "dakota-workitems-ui-frozen-test-post-runtime-tree-inventory.json").is_file()
 
 
 def test_cleanup_failure_prevents_bounded_pass_receipt() -> None:
@@ -831,8 +1006,6 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             origin,
         )
         record_browser_stage(receipt, storage_error)
-        if package_root is not None:
-            assert packaged_tree_sha256(package_root) == package_tree_sha
         if runtime_kind == "go-wrapper":
             assert (
                 packaged_files_sha256(
@@ -856,6 +1029,21 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 stop_runtime_for_acceptance(process, receipt)
             except BaseException:
                 pass
+        if package_root is not None:
+            try:
+                record_postruntime_tree_observation(
+                    receipt,
+                    package_root=package_root,
+                    receipt_value=os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
+                    source_sha=source_sha,
+                    runtime_kind=runtime_kind,
+                    executable_sha=executable_sha,
+                    manifest_path=Path(os.environ["DAKOTA_WORKITEMS_UI_BUILD_MANIFEST"]),
+                )
+            except BaseException as inventory_error:
+                receipt["post_runtime_inventory_failure_type"] = type(
+                    inventory_error
+                ).__name__
         write_receipt(receipt)
         raise
     else:
@@ -865,5 +1053,30 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             except BaseException:
                 write_receipt(receipt)
                 raise
+        if package_root is not None:
+            try:
+                record_postruntime_tree_observation(
+                    receipt,
+                    package_root=package_root,
+                    receipt_value=os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
+                    source_sha=source_sha,
+                    runtime_kind=runtime_kind,
+                    executable_sha=executable_sha,
+                    manifest_path=Path(os.environ["DAKOTA_WORKITEMS_UI_BUILD_MANIFEST"]),
+                )
+            except BaseException as error:
+                receipt["status"] = "FAIL"
+                receipt["failure_type"] = type(error).__name__
+                receipt["failure_phase"] = "post_runtime_tree_inventory"
+                write_receipt(receipt)
+                raise
+            if receipt["post_runtime_package_tree_sha256"] != package_tree_sha:
+                receipt["status"] = "FAIL"
+                receipt["failure_type"] = "AssertionError"
+                receipt["failure_phase"] = "post_runtime_package_tree"
+                write_receipt(receipt)
+                raise AssertionError(
+                    "frozen package tree changed during Work Items UI acceptance"
+                )
         receipt["status"] = "PASS_BOUNDED"
         write_receipt(receipt)
