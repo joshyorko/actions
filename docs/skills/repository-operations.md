@@ -176,6 +176,18 @@ resolving a local development install. Published package metadata must use
 versioned distributions; a clean wheel install is required before calling the
 Runtime/Core interoperability contract complete.
 
+When a prerequisite distribution must ship before a broader Runtime checkpoint,
+create a Community-targeted promotion PR containing only that distribution's
+versioned package source, changelog, package tests, and release workflow, plus
+developer documentation support required by that package. Do not merge a mixed
+Runtime integration head merely to make its dependency version available. Run
+package build, exact artifact and metadata checks, strict Twine validation, and
+clean installed-wheel tests against the exact promotion PR head. After merge,
+release only from the exact community-ancestral version tag and verify registry
+artifacts before promoting the next dependent package. Preserve any issue
+acceptance contract separately; an already-published package version does not
+by itself close a broader issue.
+
 The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
 callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
 The Python API exposes snake-case fields such as `resource_templates`,
@@ -993,3 +1005,14 @@ Identifier-bearing requests store only the finite provenance classes `tool`,
 `prompt`, `resource`, `template`, or `<redacted>`; raw method/name values are
 used only transiently for payload/header agreement. MCP integration tests use
 the declared `httpx2` compatibility package, including direct HTTP clients.
+
+### Shared Runtime artifact inventory in Core checkpoints
+
+A Core API checkpoint can also run Runtime wheel CI. Preserve its PR-only
+candidate Core wheel setup when carrying release safeguards across branches.
+Use the shared strict Runtime validator for the assembled artifact inventory;
+equivalent manylinux tag ordering is accepted, but duplicate platform slots,
+missing artifacts, unexpected tags, and version mismatches remain rejected.
+The October 8 Core checkpoint reproduced two failing inventory regressions
+before adopting the same validator already reviewed in the release and Runtime
+checkpoints. A failed PR inventory check does not constitute publication.
