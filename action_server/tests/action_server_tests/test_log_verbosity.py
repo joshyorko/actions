@@ -12,16 +12,21 @@ from actions.server._settings import HEADER_ACTION_SERVER_RUN_ID
 
 
 def test_verbose_server_startup_redacts_database_url_credentials(
-    tmp_path: Path, caplog, monkeypatch
+    tmp_path: Path, caplog, monkeypatch, request
 ):
     database_url = (
         "postgresql://SENTINEL_USER%40encoded:SENTINEL_PASSWORD%21@"
         "127.0.0.1:1/actions?application_name=SENTINEL_TOKEN%20SENTINEL_QUERY"
         "#SENTINEL_FRAGMENT"
     )
+    # Import the alias owner before patching its source accessor. Otherwise
+    # _app's first import captures the fake and teardown restores that fake.
+    from actions.server import _app, _settings
     from actions.server._server import start_server
     from actions.server._settings import Settings
 
+    _app.get_app.cache_clear()
+    request.addfinalizer(_app.get_app.cache_clear)
     settings = Settings(
         artifacts_dir=tmp_path / "artifacts",
         datadir=tmp_path,
@@ -33,8 +38,8 @@ def test_verbose_server_startup_redacts_database_url_credentials(
         verbose=True,
     )
     settings.artifacts_dir.mkdir()
-    monkeypatch.setattr("actions.server._settings.get_settings", lambda: settings)
-    monkeypatch.setattr("actions.server._app.get_settings", lambda: settings)
+    monkeypatch.setattr(_settings, "get_settings", lambda: settings)
+    monkeypatch.setattr(_app, "get_settings", lambda: settings)
     monkeypatch.setattr(
         "actions.server._server.asyncio.run", lambda coroutine: coroutine.close()
     )
