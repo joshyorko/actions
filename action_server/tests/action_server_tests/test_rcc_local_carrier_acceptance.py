@@ -253,10 +253,10 @@ def test_local_provider_and_separate_trust_carrier_survive_runtime_restart(
     rcc = Path(os.environ["ACTIONS_RUNTIME_RCC_BINARY"]).resolve()
     assert rcc.is_file() and os.access(rcc, os.X_OK)
 
+    import actions.server as runtime_package
     from actions.server._models import ActionPackage, Run, RunStatus, load_db
     from actions.server._rcc_runtime_adapter import read_receipt
     from actions.server._selftest import ActionServerProcess
-    import actions.server as runtime_package
 
     repo_root = Path(__file__).resolve().parents[3]
     runtime_mode = os.environ.get("ACTIONS_ACCEPTANCE_RUNTIME_MODE", "source")

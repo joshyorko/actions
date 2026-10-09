@@ -151,8 +151,9 @@ class ActionPackageHandler:
 
     def create_runtime_source_snapshot(self) -> tuple[Path, bool]:
         """Create an immutable service-owned copy for one RCC source generation."""
-        from actions.server._errors_action_server import ActionServerValidationError
         from actions.server_integration import DEFAULT_EXCLUSION_PATTERNS
+
+        from actions.server._errors_action_server import ActionServerValidationError
         from actions.server.package.package_exclude import PackageExcludeHandler
 
         source_root = self._import_path.resolve(strict=True)
@@ -408,8 +409,8 @@ class ActionPackageHandler:
             if spec_version == "v2" and not devenv and artifact_mode:
                 from ._rcc_runtime_adapter import (
                     RccRuntimeError,
-                    configured_trust_carrier,
                     compute_source_generation,
+                    configured_trust_carrier,
                     get_rcc_location,
                     prepare_runtime,
                 )
