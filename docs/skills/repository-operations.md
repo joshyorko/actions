@@ -454,7 +454,8 @@ lazydocs to emit those APIs into Core's docs. Before accepting output, verify
 `actions` resolves from the Core source tree and `actions.server` and
 `actions.work_items` are unavailable. Do not patch generated `docs/api` links
 by hand. `test_invoke_utils.py` asserts the source base so a repository-owner or
-branch regression is caught.
+branch regression is caught. The configured `devutils` gates in
+`developer/toolkit.py` run `pytest tests` and `ruff check src tests`.
 
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
