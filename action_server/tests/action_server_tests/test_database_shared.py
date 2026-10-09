@@ -1269,21 +1269,27 @@ def test_postgresql_transaction_boundaries_emit_no_redundant_begin_notice():
                         [2, value_id],
                     )
                     raise RuntimeError("savepoint rollback")
-            assert database.first(
-                SharedCounter,
-                "SELECT * FROM shared_counter WHERE id=?",
-                [value_id],
-            ).value == 1
+            assert (
+                database.first(
+                    SharedCounter,
+                    "SELECT * FROM shared_counter WHERE id=?",
+                    [value_id],
+                ).value
+                == 1
+            )
             database.execute(
                 "UPDATE shared_counter SET value=? WHERE id=?",
                 [3, value_id],
             )
 
-        assert database.first(
-            SharedCounter,
-            "SELECT * FROM shared_counter WHERE id=?",
-            [value_id],
-        ).value == 3
+        assert (
+            database.first(
+                SharedCounter,
+                "SELECT * FROM shared_counter WHERE id=?",
+                [value_id],
+            ).value
+            == 3
+        )
         assert database._tlocal.conn.info.transaction_status.name == "IDLE"
 
         rolled_back_id = f"transaction-rollback-{uuid.uuid4().hex}"

@@ -1278,6 +1278,9 @@ unsupported filesystems and cross-device moves fail without a copying or replaci
 fallback. The unauthenticated build matrix runs the Robot API and directory
 publication tests on Linux, Windows and macOS before building the binaries.
 Record each platform's result; workflow wiring alone does not establish a pass.
+Run the package's complete lint and typecheck commands alongside these focused
+tests. A green Robot selection does not cover formatter/import checks in other
+test modules or annotations inside a callback that mutates a captured collection.
 These checks cover complete-directory publication and preservation of existing
 destinations. They do not prove root/source identity or permission admission.
 Retain trusted-parent, protected staging and cleanup identity gaps until their
