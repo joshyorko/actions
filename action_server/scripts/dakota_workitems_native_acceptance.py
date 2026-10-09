@@ -88,6 +88,58 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def validate_build_manifest(
+    manifest_path: Path,
+    package: Path,
+    source_sha: str,
+    executables: dict[str, Path],
+    executable_hashes: dict[str, str],
+) -> dict[str, str]:
+    """Bind caller-selected native files to the measured workflow manifest."""
+    try:
+        manifest_bytes = manifest_path.read_bytes()
+        manifest = json.loads(manifest_bytes)
+    except (OSError, json.JSONDecodeError) as error:
+        raise AcceptanceFailure("build_manifest_unreadable") from error
+    if not isinstance(manifest, dict) or manifest.get("schema_version") != 1:
+        raise AcceptanceFailure("build_manifest_schema_invalid")
+    if manifest.get("source_sha") != source_sha:
+        raise AcceptanceFailure("build_manifest_source_sha_mismatch")
+    if manifest.get("platform") != platform.system():
+        raise AcceptanceFailure("build_manifest_platform_mismatch")
+    if manifest.get("architecture") != platform.machine():
+        raise AcceptanceFailure("build_manifest_architecture_mismatch")
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, dict):
+        raise AcceptanceFailure("build_manifest_artifacts_invalid")
+
+    package = package.resolve()
+    suffix = ".exe" if platform.system() == "Windows" else ""
+    expected_paths = {
+        "frozen": Path("dist/action-server") / f"action-server{suffix}",
+        "go-wrapper": Path("dist/final") / f"action-server{suffix}",
+    }
+    if set(executables) != set(CASE_ENV) or set(executable_hashes) != set(
+        CASE_ENV
+    ):
+        raise AcceptanceFailure("build_manifest_executable_set_invalid")
+    for kind in CASE_ENV:
+        artifact = artifacts.get(kind)
+        if not isinstance(artifact, dict):
+            raise AcceptanceFailure(f"build_manifest_artifact_invalid_{kind}")
+        expected = expected_paths[kind].as_posix()
+        if artifact.get("path") != expected:
+            raise AcceptanceFailure(f"build_manifest_artifact_path_mismatch_{kind}")
+        if executables[kind].resolve() != (package / expected_paths[kind]).resolve():
+            raise AcceptanceFailure(f"build_manifest_selected_path_mismatch_{kind}")
+        if artifact.get("sha256") != executable_hashes[kind]:
+            raise AcceptanceFailure(f"build_manifest_artifact_hash_mismatch_{kind}")
+    return {
+        "manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
+        "source_sha": source_sha,
+    }
+
+
 def validate_pytest_reports(
     result_code: int, reports: list[tuple[str, str, str]]
 ) -> dict[str, str]:
@@ -265,6 +317,11 @@ def main() -> int:
         help="Task-owned RCC home/cache directory.",
     )
     parser.add_argument("--receipt", type=Path, required=True)
+    parser.add_argument(
+        "--build-manifest",
+        type=Path,
+        help="Optional measured native build manifest to bind source and executable bytes.",
+    )
     args = parser.parse_args()
     if not re.fullmatch(r"[0-9a-f]{40}", args.source_sha):
         parser.error("source SHA must be a full lowercase commit SHA")
@@ -301,6 +358,20 @@ def main() -> int:
                     "status": "READY",
                 }
             )
+
+        if args.build_manifest is not None:
+            receipt["build_claim_verification"] = (
+                "verified against supplied measured native artifact manifest; "
+                "manifest checks Git HEAD, not a clean-source attestation"
+            )
+            manifest_binding = validate_build_manifest(
+                args.build_manifest,
+                TEST.parents[2],
+                args.source_sha,
+                executables,
+                executable_hashes,
+            )
+            receipt["build_manifest"] = manifest_binding
 
         args.rcc_home.mkdir(parents=True, exist_ok=True)
         os.environ["PYTEST_ADDOPTS"] = ""

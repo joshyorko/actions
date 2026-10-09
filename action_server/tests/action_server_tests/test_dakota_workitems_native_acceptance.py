@@ -159,13 +159,14 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     project = tmp_path / "synthetic-consumer-package"
     project.mkdir()
     (project / "package.yaml").write_text(
-        """version: 1
+        f"""version: 1
 dependencies:
   conda-forge:
     - python=3.12
     - uv=0.9.26
+  local-wheels:
+    - {Path(os.environ['DAKOTA_WORKITEMS_CORE_WHEEL']).resolve()}
   pypi:
-    - actions-core=1.0.2
     - actions-work-items=0.4.4
 """,
         encoding="utf-8",

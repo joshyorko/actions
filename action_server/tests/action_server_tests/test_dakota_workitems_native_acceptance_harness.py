@@ -14,6 +14,10 @@ from pathlib import Path
 
 import pytest
 
+from actions.server._common.action_package_handling import (
+    create_conda_contents_from_package_yaml_contents,
+)
+
 RUNNER_PATH = (
     Path(__file__).resolve().parents[2]
     / "scripts"
@@ -195,6 +199,115 @@ def test_acceptance_claims_are_not_presented_as_build_provenance():
     )
     assert "source_sha" not in receipt
     assert "build_output" not in receipt
+
+
+def test_package_yaml_parser_adds_the_measured_core_wheel_as_local_dependency(
+    tmp_path: Path,
+):
+    wheel = tmp_path / "actions_core-1.0.2-py3-none-any.whl"
+    wheel.write_bytes(b"candidate core wheel")
+    package_yaml = tmp_path / "package.yaml"
+    contents = {
+        "dependencies": {
+            "conda-forge": ["python=3.12", "uv=0.9.26"],
+            "local-wheels": [str(wheel.resolve())],
+            "pypi": ["actions-work-items=0.4.4"],
+        }
+    }
+
+    converted = create_conda_contents_from_package_yaml_contents(package_yaml, contents)
+
+    pip_dependencies = converted["dependencies"][-1]["pip"]
+    assert wheel.resolve().as_posix() in pip_dependencies
+    assert "actions-work-items==0.4.4" in pip_dependencies
+
+
+def test_build_manifest_binds_source_platform_paths_and_measured_bytes(
+    tmp_path: Path, monkeypatch
+):
+    package = tmp_path / "action_server"
+    frozen = package / "dist" / "action-server" / "action-server"
+    wrapper = package / "dist" / "final" / "action-server"
+    frozen.parent.mkdir(parents=True)
+    wrapper.parent.mkdir(parents=True)
+    frozen.write_bytes(b"frozen bytes")
+    wrapper.write_bytes(b"go bytes")
+    executables = {"frozen": frozen, "go-wrapper": wrapper}
+    hashes = {kind: RUNNER.sha256(path) for kind, path in executables.items()}
+    manifest = {
+        "schema_version": 1,
+        "source_sha": "a" * 40,
+        "platform": RUNNER.platform.system(),
+        "architecture": RUNNER.platform.machine(),
+        "artifacts": {
+            kind: {
+                "path": path.relative_to(package).as_posix(),
+                "sha256": hashes[kind],
+            }
+            for kind, path in executables.items()
+        },
+    }
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    result = RUNNER.validate_build_manifest(
+        manifest_path, package, "a" * 40, executables, hashes
+    )
+
+    assert result["manifest_sha256"] == RUNNER.sha256(manifest_path)
+    assert result["source_sha"] == "a" * 40
+
+
+@pytest.mark.parametrize(
+    ("mutation", "failure"),
+    [
+        ("source_sha", "build_manifest_source_sha_mismatch"),
+        ("platform", "build_manifest_platform_mismatch"),
+        ("architecture", "build_manifest_architecture_mismatch"),
+        ("path", "build_manifest_artifact_path_mismatch_frozen"),
+        ("sha256", "build_manifest_artifact_hash_mismatch_frozen"),
+    ],
+)
+def test_build_manifest_rejects_unbound_claims(tmp_path, mutation, failure):
+    package = tmp_path / "action_server"
+    frozen = package / "dist" / "action-server" / "action-server"
+    wrapper = package / "dist" / "final" / "action-server"
+    frozen.parent.mkdir(parents=True)
+    wrapper.parent.mkdir(parents=True)
+    frozen.write_bytes(b"frozen bytes")
+    wrapper.write_bytes(b"go bytes")
+    executables = {"frozen": frozen, "go-wrapper": wrapper}
+    hashes = {kind: RUNNER.sha256(path) for kind, path in executables.items()}
+    manifest = {
+        "schema_version": 1,
+        "source_sha": "a" * 40,
+        "platform": RUNNER.platform.system(),
+        "architecture": RUNNER.platform.machine(),
+        "artifacts": {
+            kind: {
+                "path": path.relative_to(package).as_posix(),
+                "sha256": hashes[kind],
+            }
+            for kind, path in executables.items()
+        },
+    }
+    if mutation == "source_sha":
+        manifest["source_sha"] = "b" * 40
+    elif mutation == "platform":
+        manifest["platform"] = "other-platform"
+    elif mutation == "architecture":
+        manifest["architecture"] = "other-architecture"
+    elif mutation == "path":
+        manifest["artifacts"]["frozen"]["path"] = "elsewhere/action-server"
+    else:
+        manifest["artifacts"]["frozen"]["sha256"] = "f" * 64
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    with pytest.raises(RUNNER.AcceptanceFailure, match=failure):
+        RUNNER.validate_build_manifest(
+            manifest_path, package, "a" * 40, executables, hashes
+        )
 
 
 def test_abrupt_process_termination_invalidates_previous_pass(tmp_path: Path):
