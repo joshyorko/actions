@@ -113,14 +113,14 @@ def test_child_environment_rejects_proxy_credentials(tmp_path):
         )
 
 
-def test_candidate_poetry_requires_explicit_pinned_rcc_toolchain(monkeypatch):
+def test_candidate_poetry_requires_explicit_pinned_rcc_toolchain(monkeypatch, tmp_path):
     monkeypatch.delenv("ACTIONS_ACCEPTANCE_POETRY", raising=False)
     monkeypatch.delenv("ACTIONS_ACCEPTANCE_ROBOCORP_HOME", raising=False)
 
     with pytest.raises(RuntimeError, match="ACTIONS_ACCEPTANCE_POETRY"):
         _harness().resolve_poetry(
             os.environ,
-            task_root=Path("/tmp/dakota-poetry-missing"),
+            task_root=tmp_path / "tool-root",
             deadline=_harness().Deadline.after(2),
         )
 
@@ -128,24 +128,6 @@ def test_candidate_poetry_requires_explicit_pinned_rcc_toolchain(monkeypatch):
 def test_candidate_poetry_rejects_path_outside_rcc_home(tmp_path):
     tool_home = tmp_path / "rcc-home"
     poetry = tmp_path / "host-bin" / "poetry"
-    poetry.parent.mkdir()
-    poetry.touch()
-    poetry.chmod(0o700)
-
-    with pytest.raises(RuntimeError, match="pinned RCC holotree"):
-        _harness().resolve_poetry(
-            {
-                "ACTIONS_ACCEPTANCE_POETRY": str(poetry),
-                "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": str(tool_home),
-            },
-            task_root=tmp_path / "version-check",
-            deadline=_harness().Deadline.after(2),
-        )
-
-
-def test_candidate_poetry_rejects_executable_outside_rcc_home(tmp_path):
-    tool_home = tmp_path / "rcc-home"
-    poetry = tmp_path / "host-tools" / "poetry"
     poetry.parent.mkdir()
     poetry.touch()
     poetry.chmod(0o700)
