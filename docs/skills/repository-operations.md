@@ -861,6 +861,8 @@ locking support or correctness on an arbitrary network filesystem.
 
 Run `poetry run pytest tests/action_server_tests/test_artifact_binding_lock.py
 tests/action_server_tests/test_artifact_storage.py` on each native OS. The
+unauthenticated native build matrix runs both files before constructing the
+binary; frozen and Go-wrapper consumer acceptance remains a separate gate. The
 spawned-process regressions pause one publisher inside the transaction, prove
 another cannot read until release, preserve independent updates, reject
 conflicting bindings, and check lock release after process termination.
