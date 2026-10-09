@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type * as React from "react";
 
@@ -69,14 +69,32 @@ export function QueryResultsView({ adapter }: QueryResultsViewProps) {
     const [isSearching, setIsSearching] = useState(false);
     const [isCheckingArtifact, setIsCheckingArtifact] = useState(false);
     const inputRef = useRef<React.ComponentRef<"input">>(null);
+    const generationRef = useRef(0);
+    const mountedRef = useRef(false);
+    const currentResultRef = useRef<QueryActionResult | null>(null);
+
+    useEffect(() => {
+        mountedRef.current = true;
+        return () => {
+            mountedRef.current = false;
+            generationRef.current += 1;
+        };
+    }, []);
+
+    const replaceResult = (nextResult: QueryActionResult | null) => {
+        currentResultRef.current = nextResult;
+        setResult(nextResult);
+    };
 
     const submit = async (event: FormEvent) => {
         event.preventDefault();
+        const generation = ++generationRef.current;
         const error = queryValidationMessage(query);
         setValidationError(error);
         setActionError(null);
         setArtifactStatus(null);
-        setResult(null);
+        replaceResult(null);
+        setIsCheckingArtifact(false);
         if (error) {
             inputRef.current?.focus();
             return;
@@ -85,25 +103,44 @@ export function QueryResultsView({ adapter }: QueryResultsViewProps) {
         setIsSearching(true);
         try {
             const nextResult = await adapter.submitQuery({ query });
-            setResult(nextResult);
+            if (!mountedRef.current || generationRef.current !== generation) {
+                return;
+            }
+            replaceResult(nextResult);
         } catch {
+            if (!mountedRef.current || generationRef.current !== generation) {
+                return;
+            }
             // Adapter errors may include provider or transport details; keep those out
             // of the rendered view and provide a bounded recovery message.
             setActionError(SEARCH_FAILURE_MESSAGE);
         } finally {
-            setIsSearching(false);
+            if (mountedRef.current && generationRef.current === generation) {
+                setIsSearching(false);
+            }
         }
     };
 
     const checkArtifact = async () => {
-        const handle = result?.artifact?.handle;
+        const resultAtStart = currentResultRef.current;
+        const generation = generationRef.current;
+        const handle = resultAtStart?.artifact?.handle;
         if (!handle) {
             return;
         }
+
+        const isCurrent = () =>
+            mountedRef.current &&
+            generationRef.current === generation &&
+            currentResultRef.current === resultAtStart;
+
         setActionError(null);
         setIsCheckingArtifact(true);
         try {
             const status = await adapter.getArtifactStatus(handle);
+            if (!isCurrent()) {
+                return;
+            }
             setArtifactStatus(
                 status === "ready"
                     ? "Result artifact is ready."
@@ -112,9 +149,14 @@ export function QueryResultsView({ adapter }: QueryResultsViewProps) {
                       : "Result artifact is unavailable.",
             );
         } catch {
+            if (!isCurrent()) {
+                return;
+            }
             setActionError(ARTIFACT_FAILURE_MESSAGE);
         } finally {
-            setIsCheckingArtifact(false);
+            if (isCurrent()) {
+                setIsCheckingArtifact(false);
+            }
         }
     };
 
@@ -157,11 +199,13 @@ export function QueryResultsView({ adapter }: QueryResultsViewProps) {
                         value={query}
                         disabled={isSearching}
                         onChange={(event) => {
+                            generationRef.current += 1;
                             setQuery(event.currentTarget.value);
                             setValidationError(null);
                             setActionError(null);
-                            setResult(null);
+                            replaceResult(null);
                             setArtifactStatus(null);
+                            setIsCheckingArtifact(false);
                         }}
                     />
                     <p id="query-help" className="query-view__hint">

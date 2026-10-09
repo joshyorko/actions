@@ -27,3 +27,10 @@ checks this exact JSON sample against the draft schema and verifies Python JSON
 round-trip compatibility, including malformed fixture rejection. It treats the
 artifact handle as inert serialized data; it does not prove a Runtime resolver,
 action binding, or caller authorization.
+
+The renderer drops a pending artifact-status result when a query is edited or
+submitted for a new result and when the view unmounts. Async status success,
+failure, and completion handlers update state only while both the captured
+generation and result object are still current. Component tests exercise this
+client-side race guard with held promises; it does not bind a result to a real
+MCP host context.

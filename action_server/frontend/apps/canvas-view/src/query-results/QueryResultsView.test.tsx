@@ -1,5 +1,6 @@
 import * as axeCore from "axe-core";
 import {
+    act,
     cleanup,
     fireEvent,
     render,
@@ -29,6 +30,16 @@ function adapter(
         getArtifactStatus: vi.fn().mockResolvedValue("ready"),
         ...overrides,
     };
+}
+
+function deferred<T>() {
+    let resolve!: (value: T | PromiseLike<T>) => void;
+    let reject!: (reason?: unknown) => void;
+    const promise = new Promise<T>((resolvePromise, rejectPromise) => {
+        resolve = resolvePromise;
+        reject = rejectPromise;
+    });
+    return { promise, resolve, reject };
 }
 
 describe("QueryResultsView fixture renderer", () => {
@@ -112,6 +123,160 @@ describe("QueryResultsView fixture renderer", () => {
         ).toBeVisible();
         expect(
             screen.getByText(/handle alone does not grant access/),
+        ).toBeVisible();
+    });
+
+    it("ignores a stale status success and finalizer after the query changes", async () => {
+        const user = userEvent.setup();
+        const oldStatus = deferred<"ready" | "processing" | "unavailable">();
+        const currentStatus = deferred<
+            "ready" | "processing" | "unavailable"
+        >();
+        const nextResult: QueryActionResult = {
+            ...success,
+            artifact: { handle: "art_Bbbbbbbbbbbbbbbbbbbbbb" as never },
+        };
+        const app = adapter({
+            submitQuery: vi
+                .fn<QueryResultsAdapter["submitQuery"]>()
+                .mockResolvedValueOnce(success)
+                .mockResolvedValueOnce(nextResult),
+            getArtifactStatus: vi
+                .fn<QueryResultsAdapter["getArtifactStatus"]>()
+                .mockReturnValueOnce(oldStatus.promise)
+                .mockReturnValueOnce(currentStatus.promise),
+        });
+        render(<QueryResultsView adapter={app} />);
+
+        await user.type(
+            screen.getByRole("textbox", { name: "Search records" }),
+            "alpha",
+        );
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        await user.click(
+            await screen.findByRole("button", {
+                name: "Check artifact status",
+            }),
+        );
+
+        const input = screen.getByRole("textbox", { name: "Search records" });
+        await user.clear(input);
+        await user.type(input, "beta");
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        await user.click(
+            await screen.findByRole("button", {
+                name: "Check artifact status",
+            }),
+        );
+        expect(
+            screen.getByRole("button", { name: "Checking…" }),
+        ).toBeDisabled();
+
+        await act(async () => {
+            oldStatus.resolve("unavailable");
+            await oldStatus.promise;
+        });
+
+        expect(
+            screen.queryByText("Result artifact is unavailable."),
+        ).toBeNull();
+        expect(
+            screen.getByRole("button", { name: "Checking…" }),
+        ).toBeDisabled();
+
+        await act(async () => {
+            currentStatus.resolve("ready");
+            await currentStatus.promise;
+        });
+        expect(
+            await screen.findByText("Result artifact is ready."),
+        ).toBeVisible();
+    });
+
+    it("ignores a stale status rejection while the new result is checking", async () => {
+        const user = userEvent.setup();
+        const oldStatus = deferred<"ready" | "processing" | "unavailable">();
+        const currentStatus = deferred<
+            "ready" | "processing" | "unavailable"
+        >();
+        const app = adapter({
+            getArtifactStatus: vi
+                .fn<QueryResultsAdapter["getArtifactStatus"]>()
+                .mockReturnValueOnce(oldStatus.promise)
+                .mockReturnValueOnce(currentStatus.promise),
+        });
+        render(<QueryResultsView adapter={app} />);
+
+        await user.type(
+            screen.getByRole("textbox", { name: "Search records" }),
+            "alpha",
+        );
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        await user.click(
+            await screen.findByRole("button", {
+                name: "Check artifact status",
+            }),
+        );
+
+        const input = screen.getByRole("textbox", { name: "Search records" });
+        await user.clear(input);
+        await user.type(input, "beta");
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        await user.click(
+            await screen.findByRole("button", {
+                name: "Check artifact status",
+            }),
+        );
+
+        await act(async () => {
+            oldStatus.reject(new Error("stale provider details"));
+            await oldStatus.promise.catch(() => undefined);
+        });
+
+        expect(screen.queryByRole("alert")).toBeNull();
+        expect(
+            screen.getByRole("button", { name: "Checking…" }),
+        ).toBeDisabled();
+        await act(async () => {
+            currentStatus.resolve("ready");
+            await currentStatus.promise;
+        });
+        expect(
+            await screen.findByText("Result artifact is ready."),
+        ).toBeVisible();
+    });
+
+    it("ignores a stale status rejection after the view is reopened", async () => {
+        const user = userEvent.setup();
+        const oldStatus = deferred<"ready" | "processing" | "unavailable">();
+        const app = adapter({
+            getArtifactStatus: vi
+                .fn<QueryResultsAdapter["getArtifactStatus"]>()
+                .mockReturnValue(oldStatus.promise),
+        });
+        const view = render(<QueryResultsView adapter={app} />);
+
+        await user.type(
+            screen.getByRole("textbox", { name: "Search records" }),
+            "alpha",
+        );
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        await user.click(
+            await screen.findByRole("button", {
+                name: "Check artifact status",
+            }),
+        );
+        view.unmount();
+
+        render(<QueryResultsView adapter={adapter()} />);
+        await act(async () => {
+            oldStatus.reject(new Error("stale provider details"));
+            await oldStatus.promise.catch(() => undefined);
+        });
+
+        expect(screen.queryByRole("alert")).toBeNull();
+        expect(
+            screen.getByText("Search records to see matching results."),
         ).toBeVisible();
     });
 
