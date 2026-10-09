@@ -974,8 +974,13 @@ temporary, exact HTTPS tunnel host and origin. The scoped entries are reference
 counted and removed after verification failure or the owned manager stops;
 existing loopback or pre-existing entries remain. This does not mark the
 separate persisted `action-server expose start/status` lifecycle ready. Local
-ASGI tests prove SDK behavior and cleanup only; real provider/TLS exposure and
-native CI remain separate gates.
+ASGI tests prove SDK behavior and cleanup only. A separate loopback test runs
+the verifier over an actual TLS socket, explicitly trusts its synthetic
+self-signed localhost certificate, and confirms an untrusted certificate is
+rejected before HTTP reaches the app. This proves verified-TLS and
+authenticated-MCP probe plumbing; it does not prove provider routing, deployed
+certificate policy, public exposure, or native packaging. Those remain
+separate gates.
 
 Cloudflare quick-tunnel readers use nonblocking pipe descriptors with bounded
 4096-byte reads, a 64-entry startup queue, and a separate 512-byte overlap tail
