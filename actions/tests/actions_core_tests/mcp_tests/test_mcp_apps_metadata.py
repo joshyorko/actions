@@ -141,6 +141,17 @@ def test_mcp_metadata_accepts_bounded_unicode_strings():
     mcp.tool(meta={"value": "💩" * 1000})(action)
 
 
+@pytest.mark.parametrize("value", [1.25, float("inf")])
+def test_tool_rejects_float_subclasses_as_non_json_scalars(value):
+    from actions.mcp._metadata import normalize_mcp_meta
+
+    class FloatSubclass(float):
+        pass
+
+    with pytest.raises(ValueError):
+        normalize_mcp_meta({"value": FloatSubclass(value)}, subject="tool")
+
+
 @pytest.mark.parametrize(
     ("uri", "mime_type", "meta"),
     [
