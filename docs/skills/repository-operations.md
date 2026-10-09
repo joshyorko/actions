@@ -102,6 +102,23 @@ Python 3.12. The contract failed with the unpinned host interpreter and passed
 with RCC Python 3.12. Record that interpreter's version in the receipt; do not
 install host tooling or falsify version discovery to make this boundary pass.
 
+When running Action Server source tests from a detached checkout with a prepared
+Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
+`actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
+the imported modules' `__file__` paths point into the checkout. The Runtime
+virtualenv can contain an older installed `actions` package that otherwise
+shadows the checkout's Core source. The Action Server test fixture also
+requires the package-pinned RCC binary at
+`action_server/src/actions/server/bin/rcc-18.19.3`; its feedback setup fails if
+`get_default_rcc_location()` is missing. Use the repository's
+configured RCC bootstrap for that binary rather than treating a host-only
+pytest invocation as equivalent verification. In Chromium descendant cleanup
+tests, keep the `psutil.Process` objects obtained from the child snapshot and
+inspect each object's status directly. A separate `pid_exists(pid)` followed
+by constructing `Process(pid)` races with normal process exit; `NoSuchProcess`
+during status inspection means that captured process has exited. Preserve the
+existing test deadline and its explicit zombie handling.
+
 For packaged UI acceptance, rebuild the canonical embedded static entrypoint
 with `invoke build-frontend`, then build the frozen executable and Go wrapper.
 Record the source SHA, generated working-tree delta and both executable hashes.

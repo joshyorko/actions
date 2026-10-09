@@ -65,44 +65,50 @@ def test_browser_harness_deadline_reaps_owned_descendant(tmp_path):
             timeout_seconds=15,
             cwd=frontend,
         )
-        browser_pid = None
+        browser_processes = []
         deadline = time.monotonic() + 10
-        while time.monotonic() < deadline and browser_pid is None:
+        while time.monotonic() < deadline and not browser_processes:
             if child_pid_file.exists():
                 node_pid = int(child_pid_file.read_text())
                 try:
                     descendants = psutil.Process(node_pid).children(recursive=True)
-                    browser_pid = next(
-                        (
-                            child.pid
-                            for child in descendants
-                            if any("chrome" in part.lower() for part in child.cmdline())
-                        ),
-                        None,
-                    )
+                    for child in descendants:
+                        try:
+                            if any(
+                                "chrome" in part.lower() for part in child.cmdline()
+                            ):
+                                if child.status() != psutil.STATUS_ZOMBIE:
+                                    browser_processes.append(child)
+                        except psutil.NoSuchProcess:
+                            continue
                 except psutil.Error:
                     pass
-            if browser_pid is None:
+            if not browser_processes:
                 time.sleep(0.05)
         assert (
-            browser_pid is not None
+            browser_processes
         ), "forced hang never exposed an owned Chromium descendant"
-        assert psutil.pid_exists(browser_pid)
         with pytest.raises(subprocess.TimeoutExpired):
             future.result(timeout=25)
 
     assert time.monotonic() - started < 30
     deadline = time.monotonic() + 3
-    while psutil.pid_exists(browser_pid) and time.monotonic() < deadline:
-        try:
-            if psutil.Process(browser_pid).status() == psutil.STATUS_ZOMBIE:
-                break
-        except psutil.NoSuchProcess:
-            break
-        time.sleep(0.05)
-    assert (
-        not psutil.pid_exists(browser_pid)
-        or psutil.Process(browser_pid).status() == psutil.STATUS_ZOMBIE
+    remaining_processes = list(browser_processes)
+    while remaining_processes and time.monotonic() < deadline:
+        still_running = []
+        for process in remaining_processes:
+            try:
+                status = process.status()
+            except psutil.NoSuchProcess:
+                continue
+            if status != psutil.STATUS_ZOMBIE:
+                still_running.append(process)
+        remaining_processes = still_running
+        if remaining_processes:
+            time.sleep(0.05)
+    assert not remaining_processes, (
+        "owned Chromium descendants remained live after the harness deadline: "
+        f"{[process.pid for process in remaining_processes]}"
     )
 
 
