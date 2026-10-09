@@ -1,0 +1,183 @@
+"""Provider-free source Runtime acceptance for the RCC local Artifact path."""
+
+from __future__ import annotations
+
+import json
+import os
+import subprocess
+from pathlib import Path
+
+import pytest
+import requests
+
+
+@pytest.mark.real_rcc
+def test_provider_free_runtime_restart_reuses_verified_artifact(tmp_path: Path) -> None:
+    """Exercise a spec-v2 Action before and after a provider-free Runtime restart."""
+    if os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST") != "1":
+        pytest.skip("set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for real RCC acceptance")
+    rcc = Path(os.environ["ACTIONS_RUNTIME_RCC_BINARY"]).resolve()
+    assert rcc.is_file() and os.access(rcc, os.X_OK)
+    assert "ACTIONS_RUNTIME_RCC_PROVIDER" not in os.environ
+
+    from actions.server._models import ActionPackage, Run, RunStatus, load_db
+    from actions.server._rcc_runtime_adapter import read_receipt
+    from actions.server._selftest import ActionServerProcess
+
+    package_dir = tmp_path / "package"
+    package_dir.mkdir()
+    (package_dir / "package.yaml").write_text(
+        """version: 0.1
+spec-version: v2
+name: rcc-local-acceptance
+dependencies:
+  conda-forge:
+    - python=3.12.15
+  pypi:
+    - actions-core=1.0.2
+    - actions-http-helper=1.0.3
+""",
+        encoding="utf-8",
+    )
+    (package_dir / "action.py").write_text(
+        "import json\n"
+        "from importlib.metadata import version\n"
+        "from actions import action\n"
+        "from actions.server_integration import ManagedParameters\n"
+        "\n"
+        "@action\n"
+        "def answer() -> str:\n"
+        "    return json.dumps({\n"
+        "        'result': 'provider-free-local',\n"
+        "        'actions_core': version('actions-core'),\n"
+        "        'actions_http_helper': version('actions-http-helper'),\n"
+        "        'server_integration': ManagedParameters.__name__,\n"
+        "    }, sort_keys=True)\n",
+        encoding="utf-8",
+    )
+
+    datadir = tmp_path / "datadir"
+    rcc_home = tmp_path / "rcc-home"
+    api_key = "acceptance-key"
+    runtime_env = os.environ.copy()
+    runtime_env.pop("ACTIONS_RUNTIME_RCC_PROVIDER", None)
+    runtime_env.update(
+        {
+            "ACTIONS_RUNTIME_RCC_BINARY": str(rcc),
+            "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
+            "ROBOCORP_HOME": str(rcc_home),
+            "NO_PROXY": "127.0.0.1,localhost",
+            "no_proxy": "127.0.0.1,localhost",
+        }
+    )
+
+    expected_result = {
+        "result": "provider-free-local",
+        "actions_core": "1.0.2",
+        "actions_http_helper": "1.0.3",
+        "server_integration": "ManagedParameters",
+    }
+    receipts: list[dict[str, object]] = []
+    artifact_digests: list[str] = []
+    run_ids: list[str] = []
+    process_reaped: list[bool] = []
+    for generation in range(2):
+        prior_receipt_files = set((datadir / "rcc-receipts").glob("*.json"))
+        server = ActionServerProcess(datadir)
+        server.start(
+            timeout=900,
+            db_file="server.db",
+            actions_sync=True,
+            cwd=package_dir,
+            min_processes=0,
+            max_processes=1,
+            reuse_processes=True,
+            additional_args=[
+                "--address=127.0.0.1",
+                "--api-key",
+                api_key,
+            ],
+            env=runtime_env,
+            port=0,
+            verbose="",
+        )
+        server_process = server.process
+        try:
+            action_url = (
+                f"http://{server.host}:{server.port}"
+                "/api/actions/rcc-local-acceptance/answer/run"
+            )
+            unauthenticated = requests.post(action_url, json={}, timeout=20)
+            assert unauthenticated.status_code in (401, 403)
+            response = requests.post(
+                action_url,
+                json={},
+                headers={"Authorization": f"Bearer {api_key}"},
+                timeout=900,
+            )
+            response.raise_for_status()
+            assert json.loads(response.json()) == expected_result
+            run_id = response.headers["x-action-server-run-id"]
+            run_ids.append(run_id)
+            with load_db(datadir / "server.db") as db:
+                with db.connect():
+                    run = next(item for item in db.all(Run) if item.id == run_id)
+                    package = db.all(ActionPackage)[0]
+                    runtime = json.loads(package.env_json)["runtime"]
+            assert run.status == RunStatus.PASSED
+            assert runtime["provider_reference"] is None
+            artifact_digests.append(runtime["artifact_digest"])
+        finally:
+            server.stop()
+            process_reaped.append(
+                server_process.returncode is not None and not server_process.is_alive()
+            )
+
+        receipt_files = sorted(
+            set((datadir / "rcc-receipts").glob("*.json")) - prior_receipt_files
+        )
+        assert receipt_files, f"generation {generation} produced no RCC receipt"
+        receipt = read_receipt(receipt_files[-1], artifact_digests[-1])
+        receipts.append(receipt)
+        assert receipt.get("leaseId")
+        assert receipt.get("verification", {}).get("valid") is True
+
+    assert artifact_digests[0].startswith("sha256:")
+    assert artifact_digests[1] == artifact_digests[0]
+    assert run_ids[0] != run_ids[1]
+    assert process_reaped == [True, True]
+    assert receipts[0]["leaseId"] != receipts[1]["leaseId"]
+
+    receipt_path = os.environ.get("ACTIONS_ACCEPTANCE_RECEIPT")
+    if receipt_path:
+        path = Path(receipt_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "schema_version": 1,
+            "source_sha": subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip(),
+            "rcc_version": subprocess.run(
+                [str(rcc), "--version"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip(),
+            "runtime_mode": "source",
+            "provider_reference": None,
+            "artifact_digests": artifact_digests,
+            "run_ids": run_ids,
+            "runtime_process_reaped": process_reaped,
+            "rcc_receipts": receipts,
+            "cells": {
+                "spec_v2_action": "PASS",
+                "provider_free_restart_same_artifact": "PASS",
+                "runtime_process_reaping": "PASS",
+                "core_helper_installed_wheel": "NOTRUN",
+                "frozen_runtime_exact_source": "NOTRUN",
+            },
+        }
+        path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")

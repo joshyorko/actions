@@ -1344,6 +1344,15 @@ replace it with a cache descriptor bound to that policy, and direct execution
 fails clearly until that context is established. The unit boundary is covered
 by `test_rcc_runtime_adapter.py`.
 
+With pinned RCC v18.19.3, `env publish` requires `--provider`; a source Runtime
+started without `ACTIONS_RUNTIME_RCC_PROVIDER` fails during initial Artifact
+publication before Action execution or lease creation. `env acquire` documents
+`--provider` as optional only for an Artifact already ready locally. Therefore
+a successful provider-free acquire diagnostic does not prove provider-free
+Runtime startup or restart. Keep explicit `local` provider selection separate
+from a null provider descriptor, and keep both separate from a provider-backed
+Runtime whose trust-carrier request fails.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold
