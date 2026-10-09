@@ -1288,14 +1288,32 @@ quality job alone does not establish reconnect, Work Items or sign-in regression
 
 ### Packaged large-history and mobile-navigation regressions
 
-Windows `KILL_ON_JOB_CLOSE` initiates descendant termination asynchronously.
-The native harness terminates its owned Job and observes its active-process count
-reach zero under a finite deadline before cleaning temporary files. Its native
-regression keeps a file open in a descendant after the leader exits, requires a
-zero-timeout process-exit assertion immediately when the ownership context returns,
-then unlinks the file. A grace-period wait before that assertion would mask the
-cleanup race. Linux helper tests do not substitute for this Windows runtime proof;
-preserve any final cleanup failure even when browser/product checks have passed.
+Windows `KILL_ON_JOB_CLOSE` and `TerminateJobObject` initiate descendant termination.
+The native harness currently polls its owned Job's active-process count to zero
+under a finite deadline. That accounting barrier has failed the stricter native
+regression: the held descendant process handle still returned `WAIT_TIMEOUT` at
+context return. Count-zero alone is therefore not sufficient shutdown evidence.
+The regression asserts exact Job membership while the descendant holds a file after
+its leader exits, checks its handle with zero timeout immediately after the ownership
+context returns, then unlinks the file. Preserve that immediate observation; a
+grace-period wait or additional native diagnostic queries before it can mask the race.
+
+`WINDOWS_JOB_DIAGNOSTICS` retains only bounded scalar fields and at most 64 PIDs.
+It captures membership, accounting and a possibly incomplete PID list before drain,
+records the existing drain queries' count results without extra native calls, and
+records the immediate post-context handle result. Post-close Job accounting/PIDs
+are not available; an incomplete PID list is not an empty tree. Diagnostics print
+after assertions, including on failure. These distinguish ownership from completion;
+a diagnostic-only green run does not repair or accept Windows shutdown.
+
+A proposed handle-based repair must retain and validate exact Job member handles
+before termination, wait them under one shared deadline, and fail closed on query,
+membership or wait failure. A PID snapshot alone cannot cover descendants spawned
+after enumeration or processes exiting before capture. Comparing cumulative process
+counts can detect new members during capture/termination, but does not resolve the
+earlier-exit gap. This is a design constraint, not implemented behavior or native
+proof. Linux helper tests do not substitute for Windows verification; preserve any
+cleanup failure even when browser/product checks have passed.
 
 Run `poetry run python scripts/verify_native_history.py --source-sha <build-commit>
 --receipt output/native-history.json` from `action_server` after building the frozen

@@ -1,5 +1,6 @@
 """Gate semantics everywhere; real Job lifetime assertions on Windows only."""
 
+import json
 import os
 import subprocess
 import sys
@@ -206,7 +207,92 @@ class OwnedProcessTests(unittest.TestCase):
         kernel.TerminateProcess.restype = wintypes.BOOL
         kernel.CloseHandle.argtypes = [wintypes.HANDLE]
         kernel.CloseHandle.restype = wintypes.BOOL
+        kernel.IsProcessInJob.argtypes = [
+            wintypes.HANDLE,
+            wintypes.HANDLE,
+            ctypes.POINTER(wintypes.BOOL),
+        ]
+        kernel.IsProcessInJob.restype = wintypes.BOOL
+
+        class ProcessIds(ctypes.Structure):
+            _fields_ = [
+                ("assigned", wintypes.DWORD),
+                ("listed", wintypes.DWORD),
+                ("pids", ctypes.c_size_t * 64),
+            ]
+
+        diagnostics = []
+        drain_observations = {"phase": "drain_queries", "count": 0}
+        jobs = []
         handle = None
+
+        def snapshot(job, phase):
+            # Fixed fields and a capped PID list only: no paths, logs or messages.
+            result = {"phase": phase}
+            diagnostics.append(result)
+            try:
+                # Observe the held handle before diagnostic queries add latency.
+                if handle:
+                    result["descendant_wait"] = kernel.WaitForSingleObject(handle, 0)
+                    result["descendant_pid"] = pid
+                    member = wintypes.BOOL()
+                    ok = kernel.IsProcessInJob(handle, job._handle, ctypes.byref(member))
+                    result["membership_query_ok"] = bool(ok)
+                    if ok:
+                        result["descendant_in_job"] = bool(member.value)
+                    else:
+                        result["membership_error"] = ctypes.get_last_error()
+                accounting = job._basic_accounting()
+                ok = job._kernel.QueryInformationJobObject(
+                    job._handle,
+                    1,
+                    ctypes.byref(accounting),
+                    ctypes.sizeof(accounting),
+                    None,
+                )
+                result["accounting_query_ok"] = bool(ok)
+                if ok:
+                    result["active"] = accounting.ActiveProcesses
+                    result["total"] = accounting.TotalProcesses
+                else:
+                    result["accounting_error"] = ctypes.get_last_error()
+                ids = ProcessIds()
+                ok = job._kernel.QueryInformationJobObject(
+                    job._handle, 3, ctypes.byref(ids), ctypes.sizeof(ids), None
+                )
+                result["pid_query_ok"] = bool(ok)
+                if not ok:
+                    result["pid_query_error"] = ctypes.get_last_error()
+                result["assigned"] = ids.assigned
+                result["listed"] = ids.listed
+                result["pids"] = list(ids.pids[: min(ids.listed, 64)])
+                result["pid_list_complete"] = (
+                    bool(ok) and ids.listed == ids.assigned and ids.listed <= 64
+                )
+            except Exception:
+                # Diagnostics must never replace the original assertion/failure.
+                result["diagnostic_error"] = True
+
+        class DiagnosticJob(native._WindowsJob):
+            def __init__(self):
+                super().__init__()
+                jobs.append(self)
+
+            def terminate_and_wait(self, *, timeout=10):
+                snapshot(self, "before_drain")
+                return super().terminate_and_wait(timeout=timeout)
+
+            def active_process_count(self):
+                # Retain the existing query result; add no native query or wait
+                # between production termination and the strict assertion.
+                count = super().active_process_count()
+                if not drain_observations["count"]:
+                    drain_observations["first_active"] = count
+                drain_observations["count"] += 1
+                drain_observations["last_active"] = count
+                drain_observations["last_observed_at"] = native.time.monotonic()
+                return count
+
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             leader = (
@@ -218,6 +304,8 @@ class OwnedProcessTests(unittest.TestCase):
                 "stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL); "
                 "Path('descendant.pid').write_text(str(child.pid))"
             )
+            patcher = mock.patch.object(native, "_WindowsJob", DiagnosticJob)
+            patcher.start()
             try:
                 with native.owned_process(
                     [sys.executable, "-c", leader],
@@ -233,17 +321,40 @@ class OwnedProcessTests(unittest.TestCase):
                         self.assertLess(native.time.monotonic(), deadline)
                         native.time.sleep(0.01)
                     # Hold the exact process handle so PID reuse cannot affect proof.
-                    handle = kernel.OpenProcess(0x00100000 | 0x0001, False, pid)
+                    handle = kernel.OpenProcess(0x00100000 | 0x1000 | 0x0001, False, pid)
                     self.assertTrue(handle)
                     self.assertEqual(kernel.WaitForSingleObject(handle, 0), 258)
-                self.assertEqual(kernel.WaitForSingleObject(handle, 0), 0)
+                    member = wintypes.BOOL()
+                    self.assertTrue(
+                        kernel.IsProcessInJob(
+                            handle, jobs[-1]._handle, ctypes.byref(member)
+                        )
+                    )
+                    self.assertTrue(
+                        member.value, "descendant must belong to the exact owned Job"
+                    )
+                # This must remain the first native observation after return.
+                returned_wait = kernel.WaitForSingleObject(handle, 0)
+                diagnostics.append(
+                    {"phase": "after_context", "descendant_wait": returned_wait}
+                )
+                self.assertEqual(returned_wait, 0)
                 (root / "held.txt").unlink()
             finally:
+                patcher.stop()
                 if handle:
+                    diagnostics.append(
+                        {
+                            "phase": "before_cleanup",
+                            "descendant_wait": kernel.WaitForSingleObject(handle, 0),
+                        }
+                    )
                     # Clean up even when the old, faulty implementation fails this test.
                     kernel.TerminateProcess(handle, 1)
                     kernel.WaitForSingleObject(handle, 5000)
                     kernel.CloseHandle(handle)
+                diagnostics.append(drain_observations)
+                print("WINDOWS_JOB_DIAGNOSTICS " + json.dumps(diagnostics, sort_keys=True))
 
 
 if __name__ == "__main__":
