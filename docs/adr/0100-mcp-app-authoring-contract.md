@@ -26,10 +26,11 @@ tools associate a UI resource through `_meta.ui.resourceUri`; the resource uses
 - `actions-core` / `actions.mcp` is the intended public Python authoring seam
   for declarative tool and resource declarations.
 - `actions-runtime` owns the MCP server and resource serving behavior.
-- #100 selects one versioned JSON Schema artifact as the canonical
-  cross-language CanvasSpec contract. Python and TypeScript consume that same
-  schema; generated language types, if justified later, are derived outputs
-  and never a second authority.
+- This ADR proposes that #100 select one versioned JSON Schema artifact as the
+  canonical cross-language CanvasSpec contract. Python and TypeScript would
+  consume that same schema. If language-specific models are introduced, they
+  must conform to it; this ADR does not choose handwritten versus generated
+  models or a code-generation direction.
 - #99 owns CanvasSpec semantic fields, UI binding declarations, and the
   TypeScript renderer, coordinating its schema work with #100's source choice.
 - Provider bindings for secrets, OAuth, data, artifacts, and queues continue to
@@ -39,11 +40,27 @@ tools associate a UI resource through `_meta.ui.resourceUri`; the resource uses
   this ADR does not create a competing schema for Canvas UI content.
 
 Do not add `actions.canvas`, a new distribution, a Canvas runtime in Core, or
-Runtime/frontend dependencies to ordinary `@action` authoring. The proposed
-JSON Schema decision resolves #100's source-of-truth choice without moving
-CanvasSpec semantics out of #99 or requiring duplicate Python model authority.
-The eventual Python authoring extension should remain optional and
-declarative; Runtime execution and the Canvas renderer stay outside Core.
+Runtime/frontend dependencies to ordinary `@action` authoring. If accepted,
+the proposed JSON Schema decision would resolve #100's source-of-truth choice
+without moving CanvasSpec semantics out of #99 or requiring duplicate Python
+model authority. The eventual Python authoring extension should remain optional
+and declarative; Runtime execution and the Canvas renderer stay outside Core.
+
+## Source-of-truth options
+
+The proposal prefers one canonical JSON Schema artifact shared by Python and
+TypeScript. It matches #99's semantic schema boundary and avoids placing
+CanvasSpec models or dependencies in Core. Python models exported as JSON
+Schema would favor typed Python authoring, but would make generated schemas a
+second language/toolchain contract for TypeScript and require compatibility
+tests for that conversion. One-way code generation could provide typed models
+to one consumer, but adds a generator, pinned toolchain, stale-output checks,
+and generated-file review without evidence that either consumer needs it. No
+such generator or public CanvasSpec model exists in the cited source snapshot.
+
+This is a recommendation, not an accepted architecture. Even if accepted,
+schema conformance, validator choice, compatibility/version rules, and real
+Python -> JSON -> TypeScript round trips still need implementation evidence.
 
 ## #71 use case this contract serves
 
@@ -83,11 +100,11 @@ source-of-truth decision. It should cover only the supported public path:
    does not own HTTP routes, persistence, rendering, or transport lifecycle.
 4. Ordinary `@action` users and Core installations without Canvas remain usable
    and acquire no Canvas-specific required dependency.
-5. The single versioned JSON Schema artifact selected by #100 defines the
-   cross-language CanvasSpec serialization contract; #99 supplies its semantic
-   fields and renderer. Python and TypeScript consume the same schema. Golden
-   fixtures prove Python -> JSON -> TypeScript round trips. This ADR does not
-   invent CanvasSpec fields or claim those fixtures exist.
+5. If #100 accepts this proposal, its versioned JSON Schema artifact defines
+   the cross-language CanvasSpec serialization contract; #99 supplies semantic
+   fields and the renderer. Python and TypeScript consume the same artifact.
+   Golden fixtures prove Python -> JSON -> TypeScript round trips. This ADR
+   does not invent CanvasSpec fields or claim those fixtures exist.
 
 When implementation is authorized, acceptance must exercise an actual public
 decorated Python package through the built/installed Core + Runtime path and
