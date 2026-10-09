@@ -376,6 +376,19 @@ changed surface. Unit coverage also proves schema and `_meta` changes affect
 the revision. These tests do not establish the other distributed-runtime
 guarantees tracked by issue #82. Do not add Canvas behavior merely to maintain
 this adapter seam.
+
+The proposed [ADR 0100 MCP App authoring contract](../adr/0100-mcp-app-authoring-contract.md)
+records evidence, not an implemented public API. On its cited source revision,
+`actions.mcp.@tool` accepts title and safety hints, while `@resource` accepts
+URI, MIME type, and size; neither decorator publicly attaches MCP Apps
+`_meta.ui.resourceUri`. Runtime tests that construct `Action.options["_meta"]`
+directly prove the internal server can preserve metadata, not that package
+authors can declare it through a supported API. Keep the public authoring
+extension deferred behind #125, and let #99 establish the versioned
+CanvasSpec/binding schema before choosing a Python/TypeScript source or adding
+cross-language fixtures. Do not add a new distribution or Canvas dependency to
+ordinary Core actions on this evidence alone.
+
 The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
