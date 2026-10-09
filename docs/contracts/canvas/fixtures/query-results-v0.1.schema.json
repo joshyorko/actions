@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:actions:canvas:fixtures:query-results:0.1",
+  "title": "Query results Canvas fixture draft",
+  "description": "Fixture-only interchange proposal. This is not a released or generally accepted CanvasSpec grammar.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["fixtureVersion", "view", "input", "success", "domainError"],
+  "properties": {
+    "fixtureVersion": { "const": "query-results-fixture/0.1" },
+    "view": { "$ref": "#/$defs/View" },
+    "input": { "$ref": "#/$defs/QueryInput" },
+    "success": { "$ref": "#/$defs/Success" },
+    "domainError": { "$ref": "#/$defs/DomainError" }
+  },
+  "$defs": {
+    "View": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "title", "form", "result"],
+      "properties": {
+        "kind": { "const": "query-results" },
+        "title": { "const": "Search records" },
+        "form": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["field", "label", "inputType", "required", "maxLength", "submitBindingId"],
+          "properties": {
+            "field": { "const": "query" },
+            "label": { "const": "Search records" },
+            "inputType": { "const": "text" },
+            "required": { "const": true },
+            "maxLength": { "const": 64 },
+            "submitBindingId": { "const": "binding.search-records" }
+          }
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["table", "error", "artifactHandle", "artifactStatusBindingId"],
+          "properties": {
+            "table": { "const": "result.rows" },
+            "error": { "const": "result.error" },
+            "artifactHandle": { "const": "result.artifact.handle" },
+            "artifactStatusBindingId": { "const": "binding.result-artifact-status" }
+          }
+        }
+      }
+    },
+    "QueryInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["query"],
+      "properties": {
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "\\S",
+          "description": "Do not normalize; reject empty and whitespace-only input on client and server."
+        }
+      }
+    },
+    "Row": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "title", "category"],
+          "properties": {
+            "id": { "const": "record-001" },
+            "title": { "const": "Alpha guide" },
+            "category": { "const": "Guide" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "title", "category"],
+          "properties": {
+            "id": { "const": "record-002" },
+            "title": { "const": "Alpha checklist" },
+            "category": { "const": "Checklist" }
+          }
+        }
+      ]
+    },
+    "Artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["handle"],
+      "properties": {
+        "handle": {
+          "type": "string",
+          "pattern": "^art_[A-Za-z0-9_-]{22}$",
+          "description": "Opaque server-issued handle; not a path, URL, or authorization by itself."
+        }
+      }
+    },
+    "Success": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rows", "artifact", "error"],
+      "properties": {
+        "rows": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            { "$ref": "#/$defs/Row" },
+            { "$ref": "#/$defs/Row" }
+          ],
+          "items": false
+        },
+        "artifact": { "$ref": "#/$defs/Artifact" },
+        "error": { "type": "null" }
+      }
+    },
+    "DomainError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rows", "artifact", "error"],
+      "properties": {
+        "rows": { "type": "array", "maxItems": 0 },
+        "artifact": { "type": "null" },
+        "error": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "message"],
+          "properties": {
+            "code": { "const": "no_matches" },
+            "message": { "const": "No records matched that query." }
+          }
+        }
+      }
+    }
+  }
+}
