@@ -1384,7 +1384,7 @@ defect. Do not claim complete #134 acceptance from these cells or the earlier
 After integrating `ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47`, the bounded
 candidate harness builds Actions Core 1.0.2 and HTTP Helper 1.0.3. On combined
 source `d9a2d11806f5d263938a82ca5e4c429f43e1d865`, the initial publish/acquire,
-authenticated Action, SQLite, strict artifact verification, and wrapper exit
+authenticated Action, SQLite, artifact verification, and wrapper exit
 0 passed. The same-provider 503-before-exec negative also passed with no child
 side effect and an unchanged initial receipt. Receipt
 `worker-exit-evidence/acceptance-d9a2d118.json` has SHA-256
@@ -1400,7 +1400,7 @@ The combined-source configured Runtime suite passed 742 tests with 10 skips;
 the earlier invocation interrupted at 1% is incomplete evidence only. Package
 lint and typecheck passed, and the acceptance script passed Ruff check and
 format check. The completed suite log SHA-256 is
-`97579afcf92415b920c73f6821bfc100ac50fcf34b332db74ff0c0e1ea307c3c3`.
+`97579afcf92415b920c73f6821bfc100ac50fcf34b332db74ff0c0e1ea307c3c`.
 
 Its separate CLI watchdog does not by itself prove cleanup of every descendant.
 Cleanup coverage must include an owner that exits before timeout while a
