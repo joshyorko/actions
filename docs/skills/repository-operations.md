@@ -37,9 +37,11 @@ HTTP Helper wheels and installs them into cibuildwheel's fresh test environment
 for candidate-pair compatibility. A separate PR-only clean venv installs the
 built Runtime cp312 wheel from the public PyPI index with pip cache disabled.
 Its pip install report must match the exact public Core 1.0.2 and Helper 1.0.3
-wheel URLs and SHA-256 hashes. The probe removes Python path overrides and
-rejects both module origins and search paths under the entire monorepo before
-running `pip check`, Runtime/MCP imports, and `actions.server version`. Keep
+wheel URLs and SHA-256 hashes. The probe removes Python path overrides, then
+runs a child-interpreter preflight that rejects resolved search paths under the
+entire monorepo before `pip check` or application imports. After imports, it
+checks the loaded module origins against the same boundary before running
+`actions.server version`. Keep
 both checks: the local wheel pair exercises unreleased producer APIs, while the
 registry-floor canary proves compatibility with published dependencies and
 prints the verified public artifact URLs and hashes. This PR test workflow runs

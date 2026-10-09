@@ -93,6 +93,25 @@ def assert_no_checkout_imports(
         )
 
 
+def build_import_path_guard(repository: Path) -> str:
+    """Return a child-interpreter preflight that rejects checkout search paths."""
+    return f"""
+import pathlib, sys
+root = pathlib.Path({str(repository.resolve())!r})
+offenders = []
+for index, value in enumerate(sys.path):
+    path = pathlib.Path(value or pathlib.Path.cwd()).resolve()
+    try:
+        path.relative_to(root)
+    except ValueError:
+        continue
+    offenders.append(f"sys.path[{{index}}]: {{path}}")
+if offenders:
+    message = "Python search paths point into the source checkout:\\n"
+    raise SystemExit(message + "\\n".join(offenders))
+"""
+
+
 def verify_public_package_report(report_path: Path) -> dict[str, dict[str, str]]:
     report = json.loads(report_path.read_text())
     observed: dict[str, dict[str, str]] = {}
@@ -137,8 +156,17 @@ def install_command(python: Path, wheel: Path, report: Path) -> list[str]:
 
 def verify_installed(python: Path, isolated_workdir: Path, report_path: Path) -> None:
     environment = isolated_environment()
-    probe = f"""
-import json, sys
+    guard = build_import_path_guard(REPO_ROOT)
+    subprocess.run(
+        [str(python), "-c", guard],
+        check=True,
+        cwd=isolated_workdir,
+        env=environment,
+    )
+    probe = (
+        guard
+        + f"""
+import json, pathlib, sys
 from importlib.metadata import version
 assert version('actions-runtime') == {EXPECTED_RUNTIME!r}
 assert version('actions-core') == {EXPECTED_CORE!r}
@@ -157,6 +185,7 @@ print({IMPORT_PATH_MARKER!r} + json.dumps({{
     }},
 }}))
 """
+    )
     subprocess.run(
         [str(python), "-m", "pip", "check"],
         check=True,

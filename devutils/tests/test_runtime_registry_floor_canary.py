@@ -1,5 +1,8 @@
 import importlib.util
 import json
+import os
+import subprocess
+import sys
 import zipfile
 from pathlib import Path
 
@@ -118,6 +121,54 @@ def test_isolated_environment_removes_python_path_overrides():
     }
     actual = module.isolated_environment(source)
     assert actual == {"PATH": "/usr/bin", "PYTHONNOUSERSITE": "1"}
+
+
+def _run_child_path_guard(repository, cwd, pythonpath=None):
+    environment = dict(os.environ)
+    environment.pop("PYTHONHOME", None)
+    environment.pop("PYTHONUSERBASE", None)
+    environment.pop("PYTHONSTARTUP", None)
+    if pythonpath is None:
+        environment.pop("PYTHONPATH", None)
+    else:
+        environment["PYTHONPATH"] = pythonpath
+    return subprocess.run(
+        [sys.executable, "-c", module.build_import_path_guard(repository)],
+        cwd=cwd,
+        env=environment,
+        capture_output=True,
+        text=True,
+    )
+
+
+def test_child_guard_accepts_external_workdir_without_checkout_paths(tmp_path):
+    result = _run_child_path_guard(ROOT, tmp_path)
+    assert result.returncode == 0, result.stderr
+
+
+def test_child_guard_rejects_checkout_as_current_directory():
+    result = _run_child_path_guard(ROOT, ROOT)
+    assert result.returncode != 0
+    assert "source checkout" in result.stderr
+
+
+def test_child_guard_rejects_relative_pythonpath_into_checkout(tmp_path):
+    source = ROOT / "actions/src"
+    relative_source = os.path.relpath(source, tmp_path)
+    result = _run_child_path_guard(ROOT, tmp_path, relative_source)
+    assert result.returncode != 0
+    assert "source checkout" in result.stderr
+
+
+def test_child_guard_rejects_symlink_pythonpath_into_checkout(tmp_path):
+    link = tmp_path / "linked-helper-source"
+    try:
+        link.symlink_to(ROOT / "actions-http-helper/src", target_is_directory=True)
+    except OSError as error:
+        pytest.skip(f"directory symlinks are unavailable: {error}")
+    result = _run_child_path_guard(ROOT, tmp_path, str(link))
+    assert result.returncode != 0
+    assert "source checkout" in result.stderr
 
 
 def test_accepts_only_exact_public_core_and_helper_wheels(tmp_path):
