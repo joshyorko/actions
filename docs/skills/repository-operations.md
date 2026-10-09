@@ -1284,7 +1284,14 @@ prevents deletion. Regressions perform the real rename, recreate the child as a 
 or directory, or replace the container, then verify complete publication and
 preservation of the later entry. Identity checks and cleanup still use pathnames;
 they do not close races against a concurrent replacement of the publication parent.
-This slice does not prove root or source capability identity. Robot directory
+After copying the extracted source into the private publication child, validate the
+copied tree's Robot metadata before no-replace publication. When no explicit import
+name overrides it, derive the destination name from metadata read from that completed
+copy. A failed copied-metadata validation removes owned staging and publishes no
+package. This catches invalid metadata produced by a source change during copying;
+it does not prove that the copied files form a coherent snapshot under a concurrent
+writer. The extracted source is still passed and copied by pathname. This does not
+prove root or source capability identity. Robot directory
 publication uses native no-replace rename: Linux `renameat2(RENAME_NOREPLACE)`,
 macOS `renameatx_np(RENAME_EXCL)`, and Windows `os.rename` without replacement.
 Unsupported platforms, missing native symbols, unsupported filesystems and
