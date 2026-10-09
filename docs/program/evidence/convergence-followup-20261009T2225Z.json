@@ -1,0 +1,429 @@
+{
+  "observed_at_utc": "2026-10-09T22:25:00Z",
+  "repository": "joshyorko/actions",
+  "scope": "Dated convergence snapshot; PR integration targets and hosted checks only. No issue acceptance, publication or release promotion.",
+  "remote_refs_observed_at_utc": "2026-10-09T22:20:42Z",
+  "remote_refs": {
+    "community": {
+      "branch": "community",
+      "head": "c30f953bae1a322e1d09549607ab42f1badce440",
+      "tree": "c6a2a657bde5af05f8bff659dc33ffee2db8d1e3"
+    },
+    "community_integration": {
+      "branch": "integration/community-release-20261008",
+      "head": "4a717c77053947f4ad2892783211af5edbe5783d",
+      "tree": "52950afe5590f1710c7499bedc1179a960f8f8b3"
+    },
+    "runtime_candidate": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "923e4e9db6236c8a48977c0b71236f1dc0f14563",
+      "tree": "a72e4a7f0476b510def86b8d3943bf65143f7f39"
+    }
+  },
+  "cohort": {
+    "items": 18,
+    "target_integrated": 7,
+    "open_blocked": 11,
+    "merge_ready": 0,
+    "merged_prs": [
+      251,
+      266,
+      257,
+      259,
+      262,
+      268,
+      264
+    ],
+    "open_prs": [
+      267,
+      265,
+      263,
+      256,
+      221,
+      220,
+      219,
+      218,
+      217,
+      216,
+      215
+    ]
+  },
+  "issue_accounting_unchanged": {
+    "retained_contracts": 54,
+    "open": 53,
+    "accepted_closed": [
+      210
+    ],
+    "whole_issue_review_ready": 0,
+    "meaning": "PR cohort counts are separate from issue-level acceptance."
+  },
+  "merge_receipt_boundary": "A PR merged to its named repair/feature/integration branch does not imply community branch integration, whole-issue acceptance or release readiness.",
+  "target_merges": [
+    {
+      "pr": 251,
+      "head": "2eaac1c1fe5c53320d647a35dd137f8fd9411f3b",
+      "target": "repair/rcc-graceful-retirement-20261009",
+      "merge": "ddbbfb68e3431878f01ebfd61de461ff749dc498",
+      "tree": "5c2b624f7560f43cfff3694792b40c77d25ac38c",
+      "scope": "Target-only retirement diagnostic; not whole #134."
+    },
+    {
+      "pr": 266,
+      "head": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+      "target": "feature/issue-99a-query-renderer-20261009",
+      "merge": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+      "tree": "d2d9777a28dc32031e99660530925de464054f51",
+      "scope": "Renderer branch only; no downstream integration."
+    },
+    {
+      "pr": 257,
+      "head": "29decdcb4ac6712f278b61e3722e0ad9217c60ba",
+      "target": "integration/community-release-20261008",
+      "merge": "0ce9fcefab66b28c9fce4d71cd5d8bdeb38e02d5",
+      "scope": "Native distribution checkpoint only."
+    },
+    {
+      "pr": 259,
+      "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "target": "integration/runtime-release-final-20261009",
+      "merge": "c853118376a2eefbaee06d53c584a2ffc6dd6d14",
+      "scope": "Runtime candidate checkpoint only."
+    },
+    {
+      "pr": 262,
+      "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "target": "integration/runtime-release-final-20261009",
+      "merge": "923e4e9db6236c8a48977c0b71236f1dc0f14563",
+      "tree": "a72e4a7f0476b510def86b8d3943bf65143f7f39",
+      "scope": "Bounded protocol proof; not whole #126."
+    },
+    {
+      "pr": 268,
+      "head": "653e1dc9597a120a4b3a7a21645f8a1e731c6695",
+      "target": "integration/community-release-20261008",
+      "merge": "4e82a8c3b72565f1f1891602f32c9d92e62fce6c",
+      "tree": "5a6cbf2b79161a0ed326bce8e00e02f0b77be54f",
+      "scope": "Windows artifact binding lock; not whole #208. 11 hosted checks pass; artifact tests: Windows35, Linux34+1 skip, macOS34+1 skip."
+    },
+    {
+      "pr": 264,
+      "head": "a63f714baf6bedb22dbadb65017c0a0a658e892e",
+      "target": "integration/community-release-20261008",
+      "merge": "4a717c77053947f4ad2892783211af5edbe5783d",
+      "tree": "52950afe5590f1710c7499bedc1179a960f8f8b3",
+      "scope": "Browser Origin/session slice only; 11 hosted checks and two real Chromium tests pass; not whole #153."
+    }
+  ],
+  "open_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261009T2225Z.json",
+    "sha256": "0e6575b8f553bd23fb53002faaa3022190b383f89a40b592ac34d71264326623",
+    "open_count": 11,
+    "all_drafts": true,
+    "rows": [
+      {
+        "number": 267,
+        "title": "feat(canvas): connect query fixture through the official MCP Apps bridge",
+        "url": "https://github.com/joshyorko/actions/pull/267",
+        "base": "feature/issue-100a-public-mcp-app-authoring-20261009",
+        "branch": "feature/issue-99a-query-renderer-20261009",
+        "head": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+        "draft": true,
+        "checks": {
+          "SUCCESS": 10
+        },
+        "owner": "F renderer / E authoring; root integration",
+        "next": "10/10 hosted checks pass. Await the separate #263 configured Core/Runtime and installed-wheel proof before advancing the bridge; no #99/#100 umbrella acceptance."
+      },
+      {
+        "number": 265,
+        "title": "feat: package a deterministic MCP protocol showcase template",
+        "url": "https://github.com/joshyorko/actions/pull/265",
+        "base": "integration/runtime-release-final-20261009",
+        "branch": "feature/mcp-v2-showcase-template-20261009",
+        "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+        "draft": true,
+        "checks": {
+          "SUCCESS": 10
+        },
+        "owner": "A template lane; Devsy owns installed-wheel proof",
+        "next": "10/10 hosted checks pass. Complete clean/installed-wheel template creation proof before admitting the #126 template slice."
+      },
+      {
+        "number": 263,
+        "title": "feat: expose public MCP Apps authoring metadata through Runtime",
+        "url": "https://github.com/joshyorko/actions/pull/263",
+        "base": "integration/runtime-release-final-20261009",
+        "branch": "feature/issue-100a-public-mcp-app-authoring-20261009",
+        "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+        "draft": true,
+        "checks": {
+          "SUCCESS": 10
+        },
+        "owner": "E public-authoring lane; Devsy owns full package gates",
+        "next": "10/10 hosted checks pass. Full configured Core/Runtime suites and installed-wheel proof remain pending; do not treat source/process checks as whole #100."
+      },
+      {
+        "number": 256,
+        "title": "test(runtime): exercise packaged Work Items consumers on every native platform",
+        "url": "https://github.com/joshyorko/actions/pull/256",
+        "base": "integration/community-release-20261008",
+        "branch": "devsy/workitems-consumer-acceptance-20261009",
+        "head": "6cf62b00fa603540fdfbeb20c9c8aabfa1373f77",
+        "draft": true,
+        "checks": {
+          "FAILURE": 2,
+          "SUCCESS": 10,
+          "SKIPPED": 1
+        },
+        "owner": "Existing Devsy Work Items lane; Sol owns merged #268 lock repair; root integration",
+        "next": "At old head 6cf62b00, verify and Windows binary jobs still fail. Reconcile the PR against current integration, prove the packaged Work Items consumer on Windows and resolve the verifier failure; #268 lock tests are not consumer acceptance."
+      },
+      {
+        "number": 221,
+        "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+        "url": "https://github.com/joshyorko/actions/pull/221",
+        "base": "community",
+        "branch": "integration/community-release-20261008",
+        "head": "4a717c77053947f4ad2892783211af5edbe5783d",
+        "draft": true,
+        "checks": {
+          "FAILURE": 1,
+          "QUEUED": 10,
+          "IN_PROGRESS": 14,
+          "SUCCESS": 3,
+          "SKIPPED": 1
+        },
+        "owner": "Root integration; L diagnosing frontend check",
+        "next": "Exact check failure is action-server-frontend-tests run 37998628314/job 114050942531. The single Table performance sample measured 32.470033 ms against strict <32 ms; Table code/test are unchanged against base. A same-head bounded failed-job rerun was requested and remains pending; do not waive or widen the threshold."
+      },
+      {
+        "number": 220,
+        "title": "Preserve Actions campaign ledger, Cloud ownership, and exact acceptance evidence",
+        "url": "https://github.com/joshyorko/actions/pull/220",
+        "base": "community",
+        "branch": "review/community-ledger-20261008",
+        "head": "7b6c7e3001f4b34f62619fd1b23b5ed740d1c609",
+        "draft": true,
+        "checks": {
+          "FAILURE": 1,
+          "SUCCESS": 13,
+          "SKIPPED": 1
+        },
+        "owner": "Root ledger owner; A owns authorized test-only regression fix",
+        "next": "Verify job 37996591441 failed a test, not image acquisition: 1 failed, 240 passed, 28 skipped, 10 xfailed. The SQLite trace-callback barrier signals before SELECT execution, allowing an update to race; the duplicate-claim child then observes None and times out. A is preparing a test-only barrier fix; no product fix or gate pass yet."
+      },
+      {
+        "number": 219,
+        "title": "WIP: preserve unfinished deployment and MCP showcase designs",
+        "url": "https://github.com/joshyorko/actions/pull/219",
+        "base": "community",
+        "branch": "review/design-checkpoints-20261008",
+        "head": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+        "draft": true,
+        "checks": {
+          "SUCCESS": 6,
+          "FAILURE": 1
+        },
+        "owner": "Root / retained design checkpoint",
+        "next": "N-1 RCC toolkit check fails on this historical WIP head. Reconcile current dependencies and scope before any admission."
+      },
+      {
+        "number": 218,
+        "title": "WIP: checkpoint native Work Items packaging and recovery",
+        "url": "https://github.com/joshyorko/actions/pull/218",
+        "base": "community",
+        "branch": "review/workitems-checkpoint-20261008",
+        "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+        "draft": true,
+        "checks": {
+          "SUCCESS": 16,
+          "SKIPPED": 1
+        },
+        "owner": "Root / Work Items checkpoint; current consumer lane is Devsy",
+        "next": "Historical WIP checkpoint with 16 checks green and publication skipped. Preserve; it does not substitute for #256 packaged-consumer acceptance."
+      },
+      {
+        "number": 217,
+        "title": "WIP: checkpoint Core public contracts and regression tests",
+        "url": "https://github.com/joshyorko/actions/pull/217",
+        "base": "community",
+        "branch": "review/core-checkpoint-20261008",
+        "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+        "draft": true,
+        "checks": {
+          "SUCCESS": 15
+        },
+        "owner": "Root / Core checkpoint",
+        "next": "15 hosted checks green on this WIP checkpoint. Preserve; no current package/release acceptance follows."
+      },
+      {
+        "number": 216,
+        "title": "WIP: checkpoint bounded Runtime history and WebSocket repairs",
+        "url": "https://github.com/joshyorko/actions/pull/216",
+        "base": "community",
+        "branch": "review/runtime-checkpoint-20261008",
+        "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+        "draft": true,
+        "checks": {
+          "SUCCESS": 23
+        },
+        "owner": "Root / Runtime checkpoint",
+        "next": "23 hosted checks green on this WIP checkpoint. Preserve; no current full Runtime release acceptance follows."
+      },
+      {
+        "number": 215,
+        "title": "WIP: checkpoint community release safeguards for adversarial review",
+        "url": "https://github.com/joshyorko/actions/pull/215",
+        "base": "community",
+        "branch": "convergence/actions-full-graph-20261008",
+        "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+        "draft": true,
+        "checks": {
+          "SUCCESS": 16
+        },
+        "owner": "Root / release-safeguard checkpoint",
+        "next": "16 hosted checks green on this WIP checkpoint. Preserve; no release admission follows."
+      }
+    ]
+  },
+  "worktree_inventory": {
+    "path": "evidence/convergence-worktrees-20261009T2223Z.json",
+    "sha256": "34ce89b7234507930501cde5a0f89541e1cdedf407b40424bfc8e4ab2fdc8d6e",
+    "worktree_count": 36,
+    "observed_at_utc": "2026-10-09T22:21:00.970740Z",
+    "limit": "Local Git HEAD/status snapshot; does not establish remote native-thread activity or current progress."
+  },
+  "critical_gate_diagnoses": {
+    "pr221_frontend": {
+      "workflow_run": 37998628314,
+      "job": 114050942531,
+      "result": "one failed performance test; 277 passed, 1 failed across 31 test files; 32.470033 ms against strict <32 ms",
+      "source_boundary": "Table component, test and test utilities unchanged between base and PR; single sample cannot establish infrastructure-only cause. Same-head bounded rerun requested, result pending; threshold unchanged."
+    },
+    "pr220_ledger_verify": {
+      "workflow_run": 37996591441,
+      "job": 114044129164,
+      "result": "1 failed, 240 passed, 28 skipped, 10 xfailed",
+      "cause": "SQLite trace-callback barrier signals before SELECT execution; another process may update before read, so the duplicate-claim child sees None and its queue wait times out.",
+      "owner": "A authorized to make a bounded test-only fix; no current gate pass."
+    },
+    "pr256_old_head": {
+      "head": "6cf62b00fa603540fdfbeb20c9c8aabfa1373f77",
+      "failing_checks": [
+        "verify",
+        "Build Action Server binary without credentials (windows-2022)"
+      ],
+      "limit": "Windows fcntl defect addressed in #268 integration merge; #256 remains old-head consumer evidence and verify failure is distinct from earlier Docker Hub attempts."
+    }
+  },
+  "native_coordinator_observation": {
+    "history": [
+      {
+        "observed_at_utc": "2026-10-09T22:11:05Z",
+        "status": "Snapshot/list operations returned HTTP 502/KubernetesError, with one bounded retry then backoff; diagnostics near22:08 reported the pod and daemon running, 16 effective cores, ~28.2GB available RAM, ~179GB free disk."
+      },
+      {
+        "observed_at_utc": "2026-10-09T22:23:09.027Z",
+        "status": "The later read-only snapshot reports thread_status=notLoaded and latest_turn.status=completed; a final_answer item ID is present but its body is not in this receipt."
+      }
+    ],
+    "progress_claim": "No lane-progress claim is inferred from ACTIVE state, process/resource counts, or a final-answer item ID without its body.",
+    "source_path": "evidence/cas-heartbeat-20261009T2223Z.json",
+    "sha256": "fb9341e7ce32ed4909eccbab43a462306ea2d0a0c5561d43503c03f45db485f2"
+  },
+  "documentation_delta": {
+    "canonical": "docs/skills/repository-operations.md",
+    "existing_rule": "Target-specific merge/tree equality is not downstream integration or issue acceptance; native ACTIVE/accepted-turn is control-plane status, not implementation progress.",
+    "disposition": "Already covers this snapshot; no redundant prose added."
+  },
+  "upstream_disposition": "None. #268 is an Actions defect. #220 and #221 are Actions test/CI issues; no upstream RCC defect was established.",
+  "archive_policy": "All 16 previous ZIPs remain untouched; this dated amendment is outside the archives.",
+  "supporting_receipts": {
+    "target-merge-pr251-readback-20261009.json": {
+      "path": "evidence/target-merge-pr251-readback-20261009.json",
+      "sha256": "31f978772129d795b0e4b644c4e49847d410a7cc174fae2637fddca4218eb11c",
+      "size_bytes": 242
+    },
+    "target-merge-pr257-readback-20261009.json": {
+      "path": "evidence/target-merge-pr257-readback-20261009.json",
+      "sha256": "062e5907cd1f766e975636350fcd36b1d06420dd9a33b1b1511f75b3ccb8aba5",
+      "size_bytes": 241
+    },
+    "target-merge-pr259-readback-20261009.json": {
+      "path": "evidence/target-merge-pr259-readback-20261009.json",
+      "sha256": "396c59ae0117c8cfe72972103e3644ce964ef323bb713f7b7157325f8dc981f1",
+      "size_bytes": 245
+    },
+    "target-merge-pr262-readback-20261009.json": {
+      "path": "evidence/target-merge-pr262-readback-20261009.json",
+      "sha256": "d86b15f05f5e236d368bb0122ee92a17efbdabe7152fa2b2b5edf6c1643a50cf",
+      "size_bytes": 245
+    },
+    "target-merge-pr266-readback-20261009.json": {
+      "path": "evidence/target-merge-pr266-readback-20261009.json",
+      "sha256": "ae7ee7139445882aafbcddd359b44858d92bcc0a653fdfbf40424d9de7c1759e",
+      "size_bytes": 244
+    },
+    "target-merge-pr268-readback-20261009.json": {
+      "path": "evidence/target-merge-pr268-readback-20261009.json",
+      "sha256": "125e3f47a995a22ffd6acfbbad515d12f5070ccf17e7ed9210784108df2fcf59",
+      "size_bytes": 229
+    },
+    "target-merge-pr268-response-20261009.json": {
+      "path": "evidence/target-merge-pr268-response-20261009.json",
+      "sha256": "4f01e256483239e89ee96565466a64dcc3e143a915fc84910b7c94e9b83d4858",
+      "size_bytes": 109
+    },
+    "target-merge-pr268-preflight-20261009.json": {
+      "path": "evidence/target-merge-pr268-preflight-20261009.json",
+      "sha256": "e57da5d7904f6e0615125eb97443831e1e4328dcc42dc85f3c8ff93f8d9864bc",
+      "size_bytes": 4192
+    },
+    "target-merge-pr264-readback-20261009.json": {
+      "path": "evidence/target-merge-pr264-readback-20261009.json",
+      "sha256": "b308958bc64ea65854136841e01c56029430298b84d5b7ca6fef33917f713fc5",
+      "size_bytes": 229
+    },
+    "target-merge-pr264-response-20261009.json": {
+      "path": "evidence/target-merge-pr264-response-20261009.json",
+      "sha256": "2210bb8252cfcdf9a18f1600571b20f47fbcbff8dfae2db862d0267791e64227",
+      "size_bytes": 109
+    },
+    "target-merge-pr264-preflight-20261009.json": {
+      "path": "evidence/target-merge-pr264-preflight-20261009.json",
+      "sha256": "717f432b195d29bc4f91320bf46c2bb788b037c7fda641a4387e9bbaa2bcd5c7",
+      "size_bytes": 4192
+    },
+    "pr221-frontend-failure-37998628314.md": {
+      "path": "evidence/pr221-frontend-failure-37998628314.md",
+      "sha256": "b504ed58906e7980ed4662680ce4d6676f8236d4eb01b4a39725fe1fd0f72893",
+      "size_bytes": 1871
+    },
+    "pr221-frontend-bounded-rerun.json": {
+      "path": "evidence/pr221-frontend-bounded-rerun.json",
+      "sha256": "afdab76f17000f6548c15b96827bb2db4d95e03b60e988bd7e3acdfe4aacea4f",
+      "size_bytes": 200
+    },
+    "cas-heartbeat-20261009T2223Z.json": {
+      "path": "evidence/cas-heartbeat-20261009T2223Z.json",
+      "sha256": "fb9341e7ce32ed4909eccbab43a462306ea2d0a0c5561d43503c03f45db485f2",
+      "size_bytes": 19621
+    },
+    "pr220-7b6-verify-diagnosis.json": {
+      "path": "evidence/pr220-7b6-verify-diagnosis.json",
+      "sha256": "777b86ddf3a41f247888088cd4eb158642047702767c9675144cdc7a421d11e9",
+      "size_bytes": 1191
+    }
+  },
+  "archive_integrity": {
+    "historical_count": 16,
+    "inventory_source": "evidence/current-convergence-amendment-20261009T2146Z.json",
+    "inventory_sha256": "f6682e633646e2192835fb9182b8baa06c372ce8f081e84927e1f6e0aa26e9b7",
+    "verification": "PASS; all 16 exact prior archive paths, sizes and SHA256 values match; no ZIP rewritten."
+  },
+  "issue_contract_integrity": {
+    "retained_issue_ids": 54,
+    "protected_projection_sha256": "4ccfb068fc6799cacf125edb5850506f94f8250448952a8b900737a5ce2fd4f4",
+    "verification": "PASS; contract/comment/dependency/state fields and accounting values preserved byte-equivalently."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "observed_at_utc": "2026-10-09T23:00:00Z",
+  "scope": "Factual correction to Python version versus test-count wording; does not change the immutable 22:53 source receipt or any CI result.",
+  "source_receipt": "convergence-followup-20261009T2253Z.json",
+  "source_receipt_sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
+  "incorrect_rendering": "The 22:53 prose described \u201cUbuntu3.13\u201d / \u201cCore 3.13\u201d as a passing Python-version check.",
+  "corrected_fact": "The evidence is 313 test cases passed under Python 3.10 across all three OS jobs, plus mypy PASS. Python 3.13 is not established by that shorthand. Separate E721 lint and stale generated MCP documentation failures remained.",
+  "scope_boundary": "These PR221/Core test results are separate from PR256 native UI outcomes and PR270\u2019s later 315-test full Actions run. No issue acceptance or gate result changes.",
+  "canonical_corrections": [
+    "engineering-handoff.md current PR256 paragraph",
+    "engineering-handoff.md historical 22:53 paragraph",
+    "community-resume-20261009.json current_source_ci_failures",
+    "convergence-followup-20261009T2258Z.json PR256/PR221 details"
+  ],
+  "upstream_disposition": "No upstream finding; correction concerns local evidence wording."
+}

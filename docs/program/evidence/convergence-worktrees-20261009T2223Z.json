@@ -1,0 +1,264 @@
+{
+  "observed_at": "2026-10-09T22:21:00.970740+00:00",
+  "worktrees": [
+    {
+      "worktree": "/workspace/actions",
+      "HEAD": "7c98236069171f57031218f938963238986293bd",
+      "branch": "refs/heads/work",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/admission",
+      "HEAD": "e032e95d38c91aead08d30b42ec7620b8ea726a4",
+      "branch": "refs/heads/integration/cloud-convergence-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/api-doc-source-links",
+      "HEAD": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "branch": "refs/heads/docs/api-source-links-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/artifact-lock-portability",
+      "HEAD": "653e1dc9597a120a4b3a7a21645f8a1e731c6695",
+      "branch": "refs/heads/fix/windows-artifact-binding-lock-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/canvas-authoring",
+      "HEAD": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "branch": "refs/heads/feature/issue-100a-public-mcp-app-authoring-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/canvas-decision",
+      "HEAD": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "branch": "refs/heads/docs/issue-100-authoring-decision-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/canvas-fixture-python",
+      "HEAD": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+      "branch": "refs/heads/test/issue-100b-fixture-roundtrip-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/canvas-renderer",
+      "HEAD": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+      "branch": "refs/heads/feature/issue-99a-query-renderer-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/convergence",
+      "HEAD": "4a717c77053947f4ad2892783211af5edbe5783d",
+      "branch": "refs/heads/integration/community-release-20261008",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/credential-check",
+      "HEAD": "1abafea4e08766a71a4f4fe8173101af1e368428",
+      "branch": "refs/heads/release/http-helper-credential-check-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/deployment-admission",
+      "HEAD": "57399b60496b98fea020f26e576d47bcb0d440bf",
+      "branch": "refs/heads/docs/upstream-reporting-policy-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/governance",
+      "HEAD": "7b6c7e3001f4b34f62619fd1b23b5ed740d1c609",
+      "branch": "refs/heads/resume/community-evidence-20261009",
+      "status": [
+        "?? docs/program/evidence/stack-pr-convergence-audit-20261009.json"
+      ],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/integration",
+      "HEAD": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "branch": "refs/heads/resume/community-blockers-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/mcp-showcase-proof",
+      "HEAD": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "branch": "refs/heads/test/mcp-v2-showcase-protocol-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/mcp-showcase-template",
+      "HEAD": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "branch": "refs/heads/feature/mcp-v2-showcase-template-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/native-auth-proof",
+      "HEAD": "a63f714baf6bedb22dbadb65017c0a0a658e892e",
+      "branch": "refs/heads/devsy/native-auth-acceptance-20261009",
+      "status": [
+        "?? work/"
+      ],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/package-credential-check",
+      "HEAD": "7501198b3cbd834a79c132d398abb5e05c852582",
+      "branch": "refs/heads/release/package-credential-availability-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/rcc",
+      "HEAD": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "branch": "refs/heads/resume/rcc-review-20261009",
+      "status": [
+        "?? work/"
+      ],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/release-final",
+      "HEAD": "923e4e9db6236c8a48977c0b71236f1dc0f14563",
+      "branch": "refs/heads/integration/runtime-release-final-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/robot",
+      "HEAD": "b690b262c564ed9f085e2df3863af500ff29fddf",
+      "branch": "refs/heads/resume/robot-native-gates-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/robot-cleanup",
+      "HEAD": "72a60344c40e6f153dab0f71b30b073e9b259226",
+      "branch": "refs/heads/repair/robot-cleanup-ownership-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/robot-filesystem-identity",
+      "HEAD": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "branch": "refs/heads/test/robot-filesystem-identity-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/robot-final-copy",
+      "HEAD": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
+      "branch": "refs/heads/test/robot-package-yaml-admission-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/robot-staging",
+      "HEAD": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "branch": "refs/heads/repair/robot-private-staging-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/runtime-combined-validation",
+      "HEAD": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/runtime-registry-canary",
+      "HEAD": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "branch": "refs/heads/release/runtime-registry-compatibility-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/runtime-release-notes",
+      "HEAD": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "branch": "refs/heads/docs/runtime-1.0.3-release-notes-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/sol-native-review",
+      "HEAD": "29decdcb4ac6712f278b61e3722e0ad9217c60ba",
+      "branch": "refs/heads/integration/native-checksum-admission-20261009",
+      "status": [
+        "?? work/"
+      ],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/tunnel",
+      "HEAD": "554630899c6eab23b922ba6558347e7f2c439c00",
+      "branch": "refs/heads/resume/tunnel-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/tunnel-edge",
+      "HEAD": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "branch": "refs/heads/feature/tunnel-edge-verification-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/tunnel-tls-acceptance",
+      "HEAD": "274042cd555d0340dc07e86f651986ab49ba85a7",
+      "branch": "refs/heads/test/tunnel-tls-acceptance-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/wheel-inventory",
+      "HEAD": "71f55ddd1ce34720db0e13433a2f1f5c9eed70a0",
+      "branch": "refs/heads/release/actions-core-1.0.2-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/worker-exit",
+      "HEAD": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+      "branch": "refs/heads/repair/rcc-trust-context-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/workitems",
+      "HEAD": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e",
+      "branch": "refs/heads/release/http-helper-redirect-fix-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/workitems-artifacts",
+      "HEAD": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "branch": "refs/heads/feature/workitems-native-artifact-manifest-20261009",
+      "status": [],
+      "read_error": null
+    },
+    {
+      "worktree": "/workspace/work/community-resume/workitems-ci",
+      "HEAD": "1b0217c810b7522416003ef8e6d5ded3016d3735",
+      "branch": "refs/heads/test/native-workitems-ci-20261009",
+      "status": [],
+      "read_error": null
+    }
+  ]
+}

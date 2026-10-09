@@ -1,0 +1,23 @@
+{
+  "observed_at_utc": "2026-10-09T22:25:00Z",
+  "repository": "joshyorko/actions",
+  "pull_request": 220,
+  "head": "7b6c7e3001f4b34f62619fd1b23b5ed740d1c609",
+  "workflow_run": 37996591441,
+  "job": 114044129164,
+  "result": {
+    "failed": 1,
+    "passed": 240,
+    "skipped": 28,
+    "xfailed": 10
+  },
+  "confirmed_cause": "The test barrier uses a SQLite trace callback that signals before SELECT execution. A competing process can update the row before the SELECT fetches it; the duplicate-claim child then observes None and times out waiting on its queue.",
+  "disposition": "Root assigned A a bounded test-only fix in tests/test_sqlite_adapter.py and its guide. No product-code defect, completed repair, or passing current gate is claimed.",
+  "separate_history": "Earlier Docker Hub pull failures remain separate attempts and are not the cause of this run.",
+  "raw_log": {
+    "source_path": "/workspace/work/community-resume/evidence/pr220-7b6-verify-failed.log",
+    "sha256": "df6fe0fee97ef1f93f5b00373c7ed0c78b44865c94bc63b75fdff3fd90a43238",
+    "size_bytes": 33542,
+    "note": "Raw log retained in the shared evidence location; repository ignore rule excludes *.log."
+  }
+}

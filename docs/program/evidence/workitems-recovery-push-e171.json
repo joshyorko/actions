@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-09T20:30:00Z",
+  "source": "native existing bundle through CAS read-only item",
+  "tip": "e171e6769032ef5bb9a58b187c7f2ce3f54f593c",
+  "base": "5bce8cd58dbd0c548cfc1172852831c9007e2042",
+  "bundle_bytes": 1467,
+  "bundle_sha256": "f1faff17c8038b7808c03e7b288406d66fd4e629d34689d514ce8864be063750",
+  "remote_branch": "devsy/workitems-consumer-acceptance-20261009",
+  "verification": [
+    "base64 and size/hash match",
+    "git bundle verify",
+    "exact one-commit ancestry and three-file delta reviewed",
+    "git diff --check",
+    "normal fast-forward push",
+    "ls-remote equals tip"
+  ],
+  "acceptance": "Recovery/push only. Focused generated import fix inspected; new exact-head hosted CI pending. Later local aa12 docs preserved remotely, not yet transferred."
+}

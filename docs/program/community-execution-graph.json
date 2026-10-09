@@ -1,0 +1,2737 @@
+{
+  "snapshot_date": "2026-10-09",
+  "worker_stage_snapshot": "2026-10-09T21:02:52Z",
+  "scope": "Typed operational relationships; retained issue contracts and raw states remain unchanged. Only execution prerequisites participate in cycle/topological validation.",
+  "contract_source": "governance/docs/program/community-program-ledger.json acceptance_contract compared with evidence/acceleration-open-issues.json body",
+  "exact_contract_matches": 54,
+  "issue_body_manifest_sha256": "1135e3aaf481341d5921bac7ab4ec5d726ffd2e8db0d17eaab90480e020902e8",
+  "external_closed_prerequisites": [
+    {
+      "issue": 80,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 88,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 89,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 94,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 95,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    },
+    {
+      "issue": 137,
+      "state": "CLOSED",
+      "checked_at": "2026-10-09",
+      "source": "read-only GitHub CLI gh issue view"
+    }
+  ],
+  "current_active_workers": {
+    "101": "Root owns integration/governance. Current community c30f953bae1a322e1d09549607ab42f1badce440; integration 446ff1b3328028154684c035f4e395ae35284067; Runtime candidate 3bb8b9139ead08bdc332131b121d40f8fd3eb22e.",
+    "99": "F owns #99-A pure React renderer/shared fixture; local and remote branch head c971ccec8903535783a61a05cd058abf5de3623a. Six component tests, TypeScript and schema PASS were reported at prior head 842c32d5; current-head validation is not confirmed. Production main/bridge and actual browser remain NOT_RUN.",
+    "100": "E owns #100-A PR263 head948df916ebe8750caebc71cc821bb5b76f16c273; bounded source review ACCEPT, 38 focused + 1 real-process + 2 wheel tests PASS. Broader configured Cloud suites are blocked; full remote gates are assigned. E is implementing #100-B Python roundtrip using F’s shared fixture. PR254 a7eec7 is docs-only and merged to integration; no whole-issue acceptance.",
+    "126": "A owns PR265 template generator repair on feature/mcp-v2-showcase-template-20261009 at9193989985de15dc6d5fecfd655042957cf9926c. The authored-devdata generator regression is being repaired; PR body reports49 focused+4 template local PASS, clean-wheel NOT_RUN and hosted checks pending. PR262 source-protocol proof is separate and accepted; whole #126 remains open.",
+    "134": "Existing remote Sol coordinator and RCC lane own #134 implementation/consumer work; root owns integration/architecture acceptance; F is independent reviewer. Latest coordinator activity report was20:36Z and covered five lane histories, not current activity for every lane. Whole #134 acceptance remains open.",
+    "153": "Native auth source recovery/push only: PR264 branch devsy/native-auth-acceptance-20261009 at173ca8e59245581ab1b048fbad42a29c41418cab. Do not infer browser acceptance.",
+    "208": "Native Work Items source recovery/push only: PR256 branch devsy/workitems-consumer-acceptance-20261009 ataa12ef5f5047813d1543d9b6f6cff7f366650e9c. Packaged consumer/platform acceptance remains open.",
+    "211": "PR257 native-distribution source-contract review ACCEPT at43177fc3ad077bf65f92cb867d3e3c62aad7e79f;95 tests were collected, not reported as a full passing suite. Hosted checks pending.",
+    "259": "PR259 exact head85f7c91252a49d454a47983d88c942163ff030ba: Runtime matrix all PASS; Linux/Windows and audit pass; RCC primary+n-1 macOS and native macOS remain queued at21:00Z."
+  },
+  "current_review_checkpoints": {
+    "91": {
+      "pr": 250,
+      "combined_pr": 250,
+      "status": "INTEGRATED_PARTIAL"
+    },
+    "100": {
+      "pr": 263,
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "status": "Bounded #100-A source seam independently accepted;38 focused+1 real-process+2 wheel PASS. Broader configured Cloud gates blocked; full remote gates assigned. E is implementing #100-B roundtrip on F shared fixture. PR254 docs-only merge is not #100 completion."
+    },
+    "129": {
+      "pr": 250,
+      "combined_pr": 250,
+      "status": "INTEGRATED_PARTIAL"
+    },
+    "151": {
+      "pr": 250,
+      "combined_pr": 250,
+      "status": "INTEGRATED_PARTIAL"
+    },
+    "210": {
+      "pr": 249,
+      "status": "ACCEPTED_AND_CLOSED",
+      "comment_id": 6087641984,
+      "evidence": "evidence/release-contract-audit-20261009.md"
+    },
+    "99": {
+      "head": "c971ccec8903535783a61a05cd058abf5de3623a",
+      "branch": "feature/issue-99a-query-renderer-20261009",
+      "prior_validated_head": "842c32d59a7dd388c82437cc46e66a66b88b499e",
+      "status": "Current source head c971ccec; six component tests, TypeScript and schema PASS were reported at prior 842c32d5. Current-head checks not confirmed; production main/bridge/browser NOT_RUN."
+    },
+    "126": {
+      "template_pr": 265,
+      "template_head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "source_protocol_pr": 262,
+      "source_protocol_head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "status": "PR265 generator repair active;49 focused+4 template local PASS; clean-wheel NOT_RUN, hosted pending. PR262 bounded source-protocol proof accepted. Whole #126 remains open."
+    },
+    "134": {
+      "pr": 253,
+      "status": "Partial trust/provenance foundation only; selected-provider negative accepted and overall offline warm remains FAIL. Existing remote Sol/RCC lanes own implementation/consumer; root integration/architecture; F independent review. No whole-issue acceptance."
+    },
+    "153": {
+      "pr": 264,
+      "head": "173ca8e59245581ab1b048fbad42a29c41418cab",
+      "status": "Native auth source recovery/push only; acceptance remains open."
+    },
+    "208": {
+      "pr": 256,
+      "head": "aa12ef5f5047813d1543d9b6f6cff7f366650e9c",
+      "status": "Native source recovery/push verified; not packaged consumer or platform acceptance."
+    },
+    "211": {
+      "pr": 257,
+      "head": "43177fc3ad077bf65f92cb867d3e3c62aad7e79f",
+      "status": "Independent source-contract review ACCEPT;95 tests collected, not a full suite pass; hosted checks pending."
+    },
+    "254": {
+      "pr": 254,
+      "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "merge": "446ff1b3328028154684c035f4e395ae35284067",
+      "status": "Docs-only admission to community integration; audit37983888097, coverage37983888029 and RCC37983888152 PASS; independent review accepted. Does not complete #100."
+    },
+    "255": {
+      "pr": 255,
+      "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "merge_target": "community c30f953bae1a322e1d09549607ab42f1badce440",
+      "status": "Merged docs PR; required checks green."
+    },
+    "258": {
+      "pr": 258,
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "merge": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+      "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+      "status": "Merged convergence checkpoint; superseded as current integration pointer by PR254 merge; no issue closure or release readiness."
+    },
+    "259": {
+      "pr": 259,
+      "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "status": "Runtime checks all PASS. RCC and native macOS remain queued; Linux/Windows and audit PASS at21:00Z."
+    },
+    "260": {
+      "pr": 260,
+      "head": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "merge_target": "integration/runtime-release-final-20261009 at3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+      "status": "Merged documentation-only candidate checkpoint; required RCC/native/audit checks green; no publication."
+    },
+    "263": {
+      "pr": 263,
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "status": "Open draft #100-A bounded source seam independently accepted; broader configured gates blocked, full remote gates assigned."
+    },
+    "265": {
+      "pr": 265,
+      "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "status": "Open draft #126 template generator repair; local49 focused+4 template PASS; clean-wheel NOT_RUN, hosted checks pending."
+    }
+  },
+  "counts": {
+    "READY": 0,
+    "ACTIVE": 7,
+    "REVIEW": 8,
+    "BLOCKED": 29,
+    "INTEGRATED": 9,
+    "COMPLETE": 1
+  },
+  "complete_verified_count": 1,
+  "schema_probe_receipts": {
+    "focused_rcc": "RCC v18.19.3; ruff check + ruff format check pass; SQLite pytest 1 passed post-merge",
+    "sqlite": "PASS; in-memory SQLite 3.53.1; foreign_keys=ON",
+    "postgresql": "PASS; isolated schema test on root-owned postgres:17-alpine digest sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+    "temporary_schema": "deployment_probe_16025518f76d44c48b43a373d4a2577c; removed=True verified by pg_namespace query and root service log",
+    "junit": "architecture-evidence/deployment-schema-probe-final.junit.xml; post-merge SQLite: architecture-evidence/deployment-schema-sqlite-post-merge.junit.xml"
+  },
+  "issues": [
+    {
+      "issue": 71,
+      "title": "Add Action Canvas: a native MCP App foundry inside Action Server",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "The local Canvas vertical gates on named #83/#129/#130/#135 criteria plus accepted #99-A/#100-A/#100-B slices; it does not wait for whole Canvas issue closure. #127 contributes to full acceptance only.",
+      "next_bounded_action": "Deliver native Canvas foundry using shared immutable package/deployment/run semantics.",
+      "acceptance_contract_sha256": "813ccb6edbe5c9fb7e71e5a12c215fbf5a7cb5f3066b7f35a071e2d1c4ceea2b",
+      "prior_untyped_dependency_projection": [
+        83,
+        99,
+        100,
+        127,
+        129,
+        135
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [
+        93
+      ],
+      "full_acceptance_aggregation": [
+        127
+      ]
+    },
+    {
+      "issue": 82,
+      "title": "Evolve Actions Runtime into a pluggable MCP-native capability runtime and lightweight control room",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        129,
+        134,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Require collapsed, split and second-adapter vertical proof; reconcile closed137 reference without reopening.",
+      "acceptance_contract_sha256": "34581397b7cfa3c1bfae34e00ba2cf69808193381bc2d06c7d5d35543cc19dcd",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        129,
+        134,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 83,
+      "title": "Make capability Run and Attempt ownership replica-safe across runtime adapters",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        84,
+        129,
+        135,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #135 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement pinned Runs/Attempts with epoch fencing and replica-safe claims on shared database.",
+      "acceptance_contract_sha256": "1298aa79f3f97b620b657c08bd5eea2a8dcec0c82e84fbe4cc2125e846f80066",
+      "prior_untyped_dependency_projection": [
+        84,
+        129,
+        135,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 84,
+      "title": "Support one shared SQLite/PostgreSQL Database abstraction in actions-runtime",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 109,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #109 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Complete exact-head review of the live PostgreSQL transaction repair, then wheel/native/TLS and multi-process migration acceptance.",
+      "acceptance_contract_sha256": "17ae88bde7fa1006dd181d3ade0c8aefd87ffbf777ca31174674e4ddb46a62e6",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 85,
+      "title": "Back MCP Tasks with pinned capability Runs and runtime plans",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Map MCP Tasks to canonical durable Runs without independent queue or ownership.",
+      "acceptance_contract_sha256": "7be3c40e2573938c1cf45e8c15e98bacb4ab56740c552b07ee90696551abb72b",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 86,
+      "title": "Make capability artifacts and large-result handles replica-safe",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Implement authorized replica-readable artifact/result handles and fenced publication.",
+      "acceptance_contract_sha256": "b6e41d5fd4a6477cc176545a7f75dee33ba5b4b74f6b9478272a3324553eadc9",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 87,
+      "title": "Separate request context from Workspace-scoped bindings and runtime grants",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        84,
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Separate request context from workspace bindings/grants and pin immutable binding policy.",
+      "acceptance_contract_sha256": "e22809c4dd9d6b4504f7a1a91b01da2cf14e709ec595e67e3f22a7345100424e",
+      "prior_untyped_dependency_projection": [
+        84,
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 90,
+      "title": "Separate capability execution ownership from Runtime request handling across adapters and placements",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        129,
+        130,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Separate worker execution ownership from Runtime requests and demonstrate cross-replica control.",
+      "acceptance_contract_sha256": "a5ba8d028a061a1412bd70aaf2d68565fd288a3b31bbd2d2b990d55eeaa66a58",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        129,
+        130,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 91,
+      "title": "Add MCP-native authorization and CIMD support",
+      "retained_state": "NOT_STARTED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 250,
+      "checkpoint_pr": 250,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR250 merged this bounded SDK/auth contract foundation into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; public authorization implementation and the complete #91 contract remain open.",
+      "next_bounded_action": "Use merged PR250 only as a partial contract checkpoint. Preserve API-key/provider OAuth boundaries and the remaining #91 acceptance; no whole-issue completion is implied.",
+      "acceptance_contract_sha256": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 92,
+      "title": "Implement durable capability interaction and human-review flows",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        85,
+        87,
+        129,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #85 (BLOCKED, raw not_started), #87 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement durable authorized human-interaction and review transitions.",
+      "acceptance_contract_sha256": "bfceb5112808c598ea83bd4456491fcebe37b21fdf9a06c69c919582bee6c6b9",
+      "prior_untyped_dependency_projection": [
+        83,
+        85,
+        87,
+        129,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 93,
+      "title": "Run the Actions Runtime frontend and product factory",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Unresolved child-acceptance edges: #96 (INTEGRATED, raw implemented_unverified), #97 (INTEGRATED, raw implemented_unverified), #98 (INTEGRATED, raw implemented_unverified), #99 (BLOCKED, raw not_started), #100 (READY, raw not_started), #126 (BLOCKED, raw not_started), #127 (BLOCKED, raw not_started), #208 (ACTIVE, raw implemented_unverified). #101 is the execution parent, not a prerequisite; #209 is a related CI/reconnect issue. Foundation PRs #112/#114/#115/#119 are merged.",
+      "next_bounded_action": "Track all UI child acceptance and require real packaged-backend evidence before umbrella acceptance.",
+      "acceptance_contract_sha256": "170c3a3a09b949fe5ad344b5ffe9355459ae3b982f61750e453b7851f1ac99f6",
+      "prior_untyped_dependency_projection": [
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        126,
+        127,
+        208,
+        209
+      ],
+      "coordination_parents": [
+        101
+      ],
+      "related_product_direction": [
+        71,
+        209
+      ],
+      "full_acceptance_aggregation": [
+        96,
+        97,
+        98,
+        99,
+        100,
+        126,
+        127,
+        208
+      ]
+    },
+    {
+      "issue": 96,
+      "title": "Refresh the Actions Runtime product shell and overview",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 112,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #112 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Validate standalone shell route families, mobile navigation and truthful degraded overview.",
+      "acceptance_contract_sha256": "95f3a6926f1c808ce2bfacf77dd6e8562138df82c53f7cc99956a58afbf0a095",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 97,
+      "title": "Establish the Actions UI system and offline visual quality gates",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 119,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #119 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Prove actual packaged responsive/accessibility/offline/CSP/error recovery workflows.",
+      "acceptance_contract_sha256": "9a404411dcc26dcb377e0b127d4579f1db3eb6f1fa3bcf16b09df6eb595224e1",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 98,
+      "title": "Modernize the frontend toolchain and multi-artifact build pipeline",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 115,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #115 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Verify separate Runtime/Canvas artifact inventories, deterministic builds and packaged browser.",
+      "acceptance_contract_sha256": "e5d6366ca768bcd85aa66a2be438c50e202c9927c06e8305c845b7d417a46924",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 99,
+      "title": "Build the shared CanvasSpec renderer and MCP App View foundation",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "#99-A renderer source is now at c971ccec with a pure React component and shared fixture. The reported six component tests, TypeScript and schema checks passed at its prior 842c32d5 head; current-head checks are unconfirmed. Production main/bridge and actual-browser proof remain NOT_RUN; #97/#98 criteria are not accepted.",
+      "next_bounded_action": "Review and validate the current c971ccec renderer changes against the shared fixture, then connect the production main/bridge and retain actual-browser proof as separate gates; do not infer whole #99 acceptance.",
+      "acceptance_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e",
+      "prior_untyped_dependency_projection": [
+        97,
+        98
+      ],
+      "coordination_parents": [
+        93
+      ],
+      "related_product_direction": [
+        71
+      ],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 100,
+      "title": "Define Canvas authoring contracts in actions-core without package proliferation",
+      "retained_state": "NOT_STARTED",
+      "classification": "ACTIVE",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "#100-A PR263 source seam is independently accepted with 38 focused, one real-process and two wheel tests passing; broader configured Cloud suites are blocked and full remote review gates are assigned. E is implementing #100-B Python/JSON roundtrip on F’s shared fixture. PR254 is docs-only and does not complete #100.",
+      "next_bounded_action": "Complete #100-B Python/JSON roundtrip using F’s shared fixture; preserve fixture/schema-only limits and keep Runtime dispatch, Workspace authorization and whole #100 acceptance open.",
+      "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
+      "scoped_dependencies": [
+        {
+          "scope": "public MCP Apps authoring contract and registration/serving",
+          "issue": 125,
+          "status": "deferred until #125 acceptance; not a blanket issue-level prerequisite"
+        }
+      ],
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [
+        93
+      ],
+      "related_product_direction": [
+        71,
+        99
+      ],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 101,
+      "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory",
+      "retained_state": "IN_PROGRESS",
+      "classification": "ACTIVE",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 220,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Root maintains the canonical execution ledger and immutable receipts during active engineering.",
+      "next_bounded_action": "Preserve all 54 contracts, exact worker ownership, failed publication and warm-restart evidence; no completion from checkpoint counts.",
+      "acceptance_contract_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": [
+        93
+      ]
+    },
+    {
+      "issue": 125,
+      "title": "cleanup: remove Data Server and private-tier product surfaces",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 128,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #128 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract.",
+      "acceptance_contract_sha256": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 126,
+      "title": "feat: add an MCP v2 capabilities showcase template",
+      "retained_state": "NOT_STARTED",
+      "classification": "ACTIVE",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 219,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR262 source-protocol proof is accepted but separate from template acceptance. PR265 repairs the deterministic template generator after authored development data was omitted; its current draft reports49 focused plus four template local tests passing, with clean-wheel NOT_RUN and hosted checks pending.",
+      "next_bounded_action": "Finish the PR265 generator repair and run clean-wheel plus exact hosted gates; preserve PR262 as source-protocol-only evidence and keep whole #126 acceptance open.",
+      "acceptance_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f",
+      "prior_untyped_dependency_projection": [
+        125
+      ],
+      "coordination_parents": [
+        93,
+        101
+      ],
+      "related_product_direction": [
+        71,
+        99,
+        100,
+        127
+      ],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 127,
+      "title": "feat: add a community Canvas template",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "#127-template consumes accepted #100-A/#100-B/#99-A slices and only relevant #125/#98 criteria. #71 is product direction and full-acceptance aggregation; #93/#101 are coordination, not execution prerequisites.",
+      "next_bounded_action": "Build the packaged Canvas template when its scoped authoring, renderer, public-package and artifact gates pass; it does not wait for #71, #93 or #101 to close.",
+      "acceptance_contract_sha256": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0",
+      "prior_untyped_dependency_projection": [
+        71,
+        93,
+        99,
+        100,
+        101
+      ],
+      "coordination_parents": [
+        93,
+        101
+      ],
+      "related_product_direction": [
+        71
+      ],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 129,
+      "title": "Define workspace-scoped capability deployments, runtime-plan selection, immutable revisions, and bindings",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 250,
+      "checkpoint_pr": 250,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR250 merged the design-only #129 probe into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; no production Deployment implementation or full-issue acceptance is claimed.",
+      "next_bounded_action": "Continue only after verifying the merged contract and its prerequisites; keep production migration, revision admission, and full Deployment acceptance open.",
+      "acceptance_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 130,
+      "title": "Design Package v3 as an immutable capability bundle with pluggable runtime plans and exposure projections",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Freeze portable immutable capability/runtime-plan bundle schema after Deployment identity review.",
+      "acceptance_contract_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
+      "prior_untyped_dependency_projection": [
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 131,
+      "title": "Define an open provider-based data and knowledge plane for Actions",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        125,
+        129,
+        130
+      ],
+      "reason": "Unresolved contract edge(s): #125 (INTEGRATED, raw implemented_unverified), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Define provider data/knowledge references and authorized operations without product-tier coupling.",
+      "acceptance_contract_sha256": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae",
+      "prior_untyped_dependency_projection": [
+        125,
+        129,
+        130
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 132,
+      "title": "Define durable Work Item queue, lease, review, and workflow semantics over capability Runs",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        90,
+        129
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #90 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified)",
+      "next_bounded_action": "Implement durable business queue/review/lease semantics separately from Run ownership.",
+      "acceptance_contract_sha256": "1db3e8aee4c298fc35aee568eb5f142005fd9393919aea947e8818caa69056ee",
+      "prior_untyped_dependency_projection": [
+        83,
+        90,
+        129
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 133,
+      "title": "Use RCC/Holotree as the first full environment and execution adapter for Actions workers",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        129,
+        130,
+        134,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Extend proven RCC adapter to worker execution using released provider/lease/exec contract.",
+      "acceptance_contract_sha256": "7cfcdb618fc35203a0cacf64e37fc2696ad003f133c4391abbf3ec8b034d4c4c",
+      "prior_untyped_dependency_projection": [
+        129,
+        130,
+        134,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 134,
+      "title": "Integrate RCC Environment Artifacts and execution as the first local Runtime Adapter",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "ACTIVE",
+      "partial_foundation": true,
+      "foundation_pr": 197,
+      "checkpoint_pr": 247,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR253 trust fix at290e469c is merged to integration26b019 (tree227e950) with four hosted checks PASS. Runtime suite742/10skip and same-provider503 negative PASS; overall warm harness FAIL. Independent local/provider-free actual consumer acceptance is now active.",
+      "next_bounded_action": "Complete bounded actual local consumer proof while preserving warm FAIL, provider-503 negative, source/wheel/frozen cells, native limits, and full issue contract.",
+      "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 135,
+      "title": "Compile current package directories into deterministic Package Revisions and runtime plans",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        129,
+        130
+      ],
+      "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Compile deterministic Package Revisions and plans from current sources without machine-local identities.",
+      "acceptance_contract_sha256": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7",
+      "prior_untyped_dependency_projection": [
+        129,
+        130
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 136,
+      "title": "Define an immutable Package Revision registry/provider and worker-local source cache",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        135
+      ],
+      "reason": "Unresolved contract edge(s): #135 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement verified immutable source provider and worker-local cache with corruption rejection.",
+      "acceptance_contract_sha256": "8812f36639e9ead075dc7fe826ada97d0026ae1690f6c8e06de758d03d1f8a7f",
+      "prior_untyped_dependency_projection": [
+        135
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 138,
+      "title": "Define a versioned Runtime-to-worker protocol for pinned runtime plans, adapters, and placements",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        84,
+        90,
+        129,
+        130,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #84 (INTEGRATED, raw implemented_unverified), #90 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Version worker protocol carrying exact pinned plans and explicit decline/cancel/recovery.",
+      "acceptance_contract_sha256": "9afdd59ce5c4203be48761ea82304282b75596bf792a92d2ea7b730f00d45edf",
+      "prior_untyped_dependency_projection": [
+        83,
+        84,
+        90,
+        129,
+        130,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 139,
+      "title": "Build exact-subject capability, runtime-adapter, admission, Deployment, and worker conformance",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Build exact-subject conformance receipts over real operations, invalidation and no-fallback rejection.",
+      "acceptance_contract_sha256": "f522d635575963ab26eaf73c66bbdd438cb199a9a2d92820e374dd8e9da73d21",
+      "prior_untyped_dependency_projection": [
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 140,
+      "title": "Package and operate collapsed and split capability Runtime deployments safely",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        84,
+        86,
+        87,
+        129,
+        138
+      ],
+      "reason": "Unresolved contract edge(s): #84 (INTEGRATED, raw implemented_unverified), #86 (BLOCKED, raw not_started), #87 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #138 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Package collapsed and split topologies with backup/upgrades/health and real worker acceptance.",
+      "acceptance_contract_sha256": "a83da2aee36817f0851bdee6bfc3673351c2be82e192b8c21fca8f385d39c2cc",
+      "prior_untyped_dependency_projection": [
+        84,
+        86,
+        87,
+        129,
+        138
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 141,
+      "title": "Define deterministic capability workflows over pinned runtime plans and Work Items",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        85,
+        129,
+        130,
+        132,
+        143,
+        147
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #85 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #132 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #147 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement deterministic pinned capability workflow nodes and durable lineage.",
+      "acceptance_contract_sha256": "b5c29cba880f014805832ef598f28264d7e9902126d13dcef109b42b6f73a993",
+      "prior_untyped_dependency_projection": [
+        83,
+        85,
+        129,
+        130,
+        132,
+        143,
+        147
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 142,
+      "title": "Prove Robot Task execution across runtime adapters and local, container, and worker placements",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        138,
+        139,
+        143,
+        144
+      ],
+      "reason": "Unresolved contract edge(s): #138 (BLOCKED, raw not_started), #139 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Execute Robot adapter-by-placement matrix with explicit unsupported cells and process-tree proof.",
+      "acceptance_contract_sha256": "33cbac7943a286bf33d76ede684e83d46c39e33d87befdeac0e9f1e0bb6ca7e1",
+      "prior_untyped_dependency_projection": [
+        138,
+        139,
+        143,
+        144
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 143,
+      "title": "Define pluggable capability runtime adapters, shared admission, execution requirements, and preflight",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        134
+      ],
+      "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified)",
+      "next_bounded_action": "Extract shared admission/preflight adapter contract from real RCC and exercise genuine second adapter.",
+      "acceptance_contract_sha256": "a7a0bbc131ae212e7cd1c0cc7a8a37249ad26e65d2ea553857fb565bc1431959",
+      "prior_untyped_dependency_projection": [
+        134
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 144,
+      "title": "Make Robot Tasks a first-class capability kind independent of runtime adapter",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        134,
+        135,
+        143
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #134 (ACTIVE, raw implemented_unverified), #135 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Move Robot Tasks onto common capability and Run model independent of adapter.",
+      "acceptance_contract_sha256": "f590b8962d8668fdcfebd556fbdfdc5a967d9e2495be3520264f607fde5a6032",
+      "prior_untyped_dependency_projection": [
+        83,
+        134,
+        135,
+        143
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 145,
+      "title": "Evolve Actions Runtime into a lightweight control room with a unified Run Composer",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        129,
+        143,
+        144
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Build unified Run Composer and lightweight Control Room consuming authoritative admission.",
+      "acceptance_contract_sha256": "7ab0e82f0774b0a96cb2050ef6ef326f3920cf07e554e7acf1a892f77f9dc610",
+      "prior_untyped_dependency_projection": [
+        83,
+        129,
+        143,
+        144
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 146,
+      "title": "Add one adapter-aware Actions Runtime CLI for capabilities, Robots, and development tasks",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        134,
+        143,
+        144
+      ],
+      "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Unify CLI capability/Robot/dev-task operations through authoritative admission/runtime plans.",
+      "acceptance_contract_sha256": "eefac147b16763e4802dbbd16df770d4b651aa38f0a400b9d49551db6b2b400a",
+      "prior_untyped_dependency_projection": [
+        134,
+        143,
+        144
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 147,
+      "title": "Add typed internal capability invocation with pinned runtime plans and parent-child Runs",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        83,
+        129,
+        130,
+        143,
+        144
+      ],
+      "reason": "Unresolved contract edge(s): #83 (BLOCKED, raw not_started), #129 (REVIEW, raw implemented_unverified), #130 (BLOCKED, raw not_started), #143 (BLOCKED, raw not_started), #144 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Implement typed internal invocation with pinned child Runs and authorization lineage.",
+      "acceptance_contract_sha256": "93ca82e88727777675017c6711b7dbbc237f7704e8101863ede6b4f6fe6d3fb9",
+      "prior_untyped_dependency_projection": [
+        83,
+        129,
+        130,
+        143,
+        144
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 148,
+      "title": "Harden package import and compile Robot/runtime metadata into immutable Package Revisions",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        135
+      ],
+      "reason": "Unresolved contract edge(s): #135 (BLOCKED, raw not_started)",
+      "next_bounded_action": "Complete secure acquisition and compile Robot metadata through shared immutable package compiler.",
+      "acceptance_contract_sha256": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6",
+      "prior_untyped_dependency_projection": [
+        135
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 149,
+      "title": "🐝 Hive Advisory Report",
+      "retained_state": "NOT_STARTED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Advisory record remains open, with no current implementation worker; retain it as a review/advisory item and do not restore execution labels.",
+      "next_bounded_action": "Retain living advisory record open; consume evidence without restoring execution labels.",
+      "acceptance_contract_sha256": "7f339f2e3378bf0572f6535738aba3029f51554dbd65d749ce4a433038ce4513",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 151,
+      "title": "[security] Reject unsafe Robot ZIP package-root selection and bound archive staging",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 250,
+      "checkpoint_pr": 250,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR250 merged the bounded Robot importer/final-copy foundation into integration at 3ed98ddbac3354c59414b8411b295db2e15d3545; root/source identity, Windows ACL, and full publication acceptance remain open.",
+      "next_bounded_action": "Continue with the remaining root/source identity and platform permission gates; do not infer full ZIP publication safety from the merged partial tests.",
+      "acceptance_contract_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 152,
+      "title": "[security] Enforce configured API-key authorization across admin routers and artifact delivery",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "INTEGRATED",
+      "partial_foundation": true,
+      "foundation_pr": 199,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Foundation PR #199 is merged; issue remains IMPLEMENTED_UNVERIFIED and acceptance gates remain open.",
+      "next_bounded_action": "Run assembled protected-route/mount inventory with missing, wrong and valid keys and zero-side-effect assertions.",
+      "acceptance_contract_sha256": "c58dd4c2ac0b665f6cd67ad51f0629f30670bf0c0df603823b68d462fd222970",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 153,
+      "title": "[security] Constrain browser origins and credentialed CORS with explicit deployment policy",
+      "retained_state": "IN_PROGRESS",
+      "classification": "ACTIVE",
+      "partial_foundation": true,
+      "foundation_pr": 201,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Native auth lane is actively implementing #153 real-browser origin/session acceptance; root reports pre-19:27Z head5800c4bf plus an untracked test. Later remote tree state has not been independently refreshed.",
+      "next_bounded_action": "Finish the focused real-browser matrix and report current exact branch/HEAD/dirty receipt; do not infer whole #153 completion.",
+      "acceptance_contract_sha256": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 155,
+      "title": "[strategist] Establish a release and compatibility roadmap for the expanding runtime architecture",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Exact-head/adversarial review remains before the next implementation step (PR #222). Full acceptance remains open.",
+      "next_bounded_action": "Resolve independent public roadmap review findings and verify dated registry/native compatibility claims.",
+      "acceptance_contract_sha256": "3ba8fdca26f2761fcaa820a22a10d9c23367393f36735c95c376adcda318e395",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 162,
+      "title": "[ACMM L0] Add Coverage gate",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Exact-head/adversarial review remains before the next implementation step (PR #227). Full acceptance remains open.",
+      "next_bounded_action": "Verify final hosted coverage gate; integrated ordinary source run PASS53.391% against53.38%; retain service/subprocess/platform limits.",
+      "acceptance_contract_sha256": "09725e2a6edb5b7b9c0773df8eaa1bf49508b546898b6a7fcee8a8f5022c77ad",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 194,
+      "title": "[quality] Add coverage for command dispatch and variable-scope error paths",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 217,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #217 remains a checkpoint; no current implementation worker is assigned to this command-dispatch coverage issue.",
+      "next_bounded_action": "Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release.",
+      "acceptance_contract_sha256": "43496e2b9e8e7c8b9e1d9fceff7fc3be1ed3f9a79677552811ab6e27c391f4f5",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 195,
+      "title": "[architect] Action Server depends on private actions-core modules across a versioned package boundary",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 217,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #217 remains a checkpoint; no current implementation worker is assigned to this Core private-API issue.",
+      "next_bounded_action": "Verify final assembled RCC package gates and worker execution; then publish Helper/Core through admitted GitHub Actions workflows before dependent Runtime release.",
+      "acceptance_contract_sha256": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 196,
+      "title": "Make Actions Runtime a one-click host for the RCC Environment Artifact provider",
+      "retained_state": "NOT_STARTED",
+      "classification": "BLOCKED",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [
+        134,
+        152,
+        153,
+        208,
+        214
+      ],
+      "reason": "Unresolved contract edge(s): #134 (ACTIVE, raw implemented_unverified), #152 (INTEGRATED, raw implemented_unverified), #153 (REVIEW, raw in_progress), #208 (ACTIVE, raw implemented_unverified), #214 (REVIEW, raw in_progress)",
+      "next_bounded_action": "Host RCC provider only after administrative/auth/origin and tunnel lifecycle acceptance.",
+      "acceptance_contract_sha256": "13ec0d086e569fc55992151a649debcf3ad6eac3492991b9acb5be3489f2a6d7",
+      "prior_untyped_dependency_projection": [
+        134,
+        152,
+        153,
+        208,
+        214
+      ],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 208,
+      "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "ACTIVE",
+      "partial_foundation": true,
+      "foundation_pr": 242,
+      "checkpoint_pr": 242,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Native Work Items source checkpoint recovery/push is verified at aa12ef5f; this is source transport evidence only. Packaged consumer/platform acceptance remains open.",
+      "next_bounded_action": "Run the assigned exact-head packaged consumer/platform gates on recovered PR256 source and preserve prior failures; do not infer acceptance from recovery or push.",
+      "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 209,
+      "title": "fix(ci): diagnose unexpected disconnect in assembled WebSocket Origin test",
+      "retained_state": "IN_PROGRESS",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #216 remains assigned but has no current implementation worker in this snapshot; native acceptance and review remain.",
+      "next_bounded_action": "Verify latest native WebSocket/reconnect on all OS; All-platform b592 packaged reconnect PASS; e4 Windows cleanup failure remains distinct.",
+      "acceptance_contract_sha256": "c9cbf271124d20fac773f4203ba474cc167341e5d33aae0cbfa2966c9676ce92",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 210,
+      "title": "fix(release): repair HTTP helper workflow credential delivery",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "COMPLETE",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 249,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Root accepted and closed whole #210 after retained-contract audit; owner comment6087641984. Helper1.0.3 published successfully and artifacts were verified. Original issue body/comments and captured raw state remain preserved.",
+      "next_bounded_action": "No remaining #210 work; preserve failed immutable1.0.2 evidence.",
+      "acceptance_contract_sha256": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d",
+      "current_acceptance": {
+        "status": "ACCEPTED_AND_CLOSED",
+        "comment_id": 6087641984,
+        "audit": "evidence/release-contract-audit-20261009.md"
+      },
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 211,
+      "title": "fix(release): align Actions-side native handoffs with community distribution",
+      "retained_state": "IMPLEMENTED_UNVERIFIED",
+      "classification": "ACTIVE",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 248,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "Core1.0.2 publication and manifest readback remain admitted. PR257 source-contract review is ACCEPT at43177fc3, but 95 tests were collected rather than reported as a full suite pass; hosted checks remain pending.",
+      "next_bounded_action": "Complete exact PR257 hosted checks and report per-job outcomes; keep native release/readback scope separate from Runtime1.0.3 publication.",
+      "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 212,
+      "title": "bug(ui): Runtime 1.0.1 Runs fails JSON parsing; oversized run list and same-origin WebSocket 403",
+      "retained_state": "IN_PROGRESS",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": 216,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #216 remains assigned but has no current implementation worker in this snapshot; native acceptance and review remain.",
+      "next_bounded_action": "Verify new native history gate on all supported OS and rebuilt candidate; retain full detail and legacy supported clients.",
+      "acceptance_contract_sha256": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    },
+    {
+      "issue": 214,
+      "title": "feat(expose): make tunnel providers a first-class Runtime lifecycle",
+      "retained_state": "IN_PROGRESS",
+      "classification": "REVIEW",
+      "partial_foundation": false,
+      "foundation_pr": null,
+      "checkpoint_pr": null,
+      "unresolved_open_issue_dependencies": [],
+      "reason": "PR #225 remains open, but no current implementation worker is assigned in this snapshot; live provider/TLS and standalone lifecycle gates remain.",
+      "next_bounded_action": "PR225/236 tunnel pipe lifecycle and authenticated legacy edge checks integrated with combined native proof. Live provider/TLS, standalone inspectable lifecycle and full #214 acceptance remain open.",
+      "acceptance_contract_sha256": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347",
+      "prior_untyped_dependency_projection": [],
+      "coordination_parents": [],
+      "related_product_direction": [],
+      "full_acceptance_aggregation": []
+    }
+  ],
+  "completed_issue_overlays": [
+    {
+      "issue": 210,
+      "status": "ACCEPTED_AND_CLOSED",
+      "owner_comment_id": 6087641984,
+      "original_retained_state_preserved": "IMPLEMENTED_UNVERIFIED"
+    }
+  ],
+  "relationship_schema_version": 2,
+  "relationship_amendment": "canvas-execution-graph-20261009-v4",
+  "relationship_model": {
+    "execution_prerequisites": [
+      {
+        "prerequisite": 83,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 82,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 83,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 83,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 83,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 83,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 85,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 85,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 85,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 86,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 86,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 86,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 87,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 87,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 90,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 85,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 87,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 92,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 130,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 125,
+        "consumer": 131,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 131,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 131,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 132,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 90,
+        "consumer": 132,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 132,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 133,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 133,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 133,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 133,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 135,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 135,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 136,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 90,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 138,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 139,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 86,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 87,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 138,
+        "consumer": 140,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 85,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 132,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 147,
+        "consumer": 141,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 138,
+        "consumer": 142,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 139,
+        "consumer": 142,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 142,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 142,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 143,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 144,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 144,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 144,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 144,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 145,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 145,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 145,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 145,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 146,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 146,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 146,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 147,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 148,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 152,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 153,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 208,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      },
+      {
+        "prerequisite": 214,
+        "consumer": 196,
+        "scope": "current projected contract gate"
+      }
+    ],
+    "scoped_execution_gates": [
+      {
+        "prerequisite": "125:public-package-boundary",
+        "consumer_slice": "100-A",
+        "scope": "Only the relevant public package/MCP resource criteria; not all of #125"
+      },
+      {
+        "prerequisite": "97:ui-foundation",
+        "consumer_slice": "99-A",
+        "scope": "Consumed UI system and offline/CSP foundation criteria"
+      },
+      {
+        "prerequisite": "98:canvas-artifact",
+        "consumer_slice": "99-A",
+        "scope": "Separate Canvas artifact and build/manifest criteria"
+      },
+      {
+        "prerequisite": "100-A",
+        "consumer_slice": "127-template",
+        "scope": "Accepted public authoring fixture"
+      },
+      {
+        "prerequisite": "100-B",
+        "consumer_slice": "127-template",
+        "scope": "Accepted serialization fixture only if template consumes CanvasSpec"
+      },
+      {
+        "prerequisite": "99-A",
+        "consumer_slice": "127-template",
+        "scope": "Accepted renderer/resource/bridge slice"
+      },
+      {
+        "prerequisite": "125:public-package-boundary",
+        "consumer_slice": "127-template",
+        "scope": "Relevant public-package/template checks only"
+      },
+      {
+        "prerequisite": "125:public-package-boundary",
+        "consumer_slice": "126-template",
+        "scope": "Only the relevant public package/template boundary criteria; not all of #125"
+      },
+      {
+        "prerequisite": "98:canvas-artifact",
+        "consumer_slice": "127-template",
+        "scope": "Relevant Canvas artifact pipeline checks only"
+      },
+      {
+        "prerequisite": "100-A",
+        "consumer_slice": "71-local",
+        "scope": "Accepted public authoring boundary"
+      },
+      {
+        "prerequisite": "100-B",
+        "consumer_slice": "71-local",
+        "scope": "Accepted shared schema only if generated spec uses it"
+      },
+      {
+        "prerequisite": "99-A",
+        "consumer_slice": "71-local",
+        "scope": "Accepted portable View/renderer boundary"
+      },
+      {
+        "prerequisite": "83:run-attempt-authority",
+        "consumer_slice": "71-local",
+        "scope": "Minimum local Run/Attempt semantics"
+      },
+      {
+        "prerequisite": "129:deployment-binding",
+        "consumer_slice": "71-local",
+        "scope": "Minimum local Deployment identity/bindings"
+      },
+      {
+        "prerequisite": "130:package-revision",
+        "consumer_slice": "71-local",
+        "scope": "Immutable generated Package Revision contract"
+      },
+      {
+        "prerequisite": "135:compiler",
+        "consumer_slice": "71-local",
+        "scope": "Minimum package-to-revision/compiler contract"
+      },
+      {
+        "prerequisite": "71-local",
+        "consumer_slice": "71-host",
+        "scope": "Host integration consumes a working portable local vertical"
+      },
+      {
+        "prerequisite": "91:authorization-boundary",
+        "consumer_slice": "71-host",
+        "scope": "Only if host mode exposes protected/share functionality"
+      },
+      {
+        "prerequisite": "214:public-edge-boundary",
+        "consumer_slice": "71-host",
+        "scope": "Only for remote/share acceptance, not local fixture proof"
+      }
+    ],
+    "criteria": [
+      {
+        "id": "125:public-package-boundary",
+        "owner_issue": 125,
+        "description": "Relevant public package and MCP resource boundary",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR128 foundation merged but full #125 acceptance remains open."
+      },
+      {
+        "id": "97:ui-foundation",
+        "owner_issue": 97,
+        "description": "Consumed UI, offline and CSP foundation criteria",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR119 foundation merged and acceptance gates remain open."
+      },
+      {
+        "id": "98:canvas-artifact",
+        "owner_issue": 98,
+        "description": "Consumed Canvas artifact, manifest and build criteria",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR115 foundation merged and acceptance gates remain open."
+      },
+      {
+        "id": "83:run-attempt-authority",
+        "owner_issue": 83,
+        "description": "Minimum local Run/Attempt ownership and lifecycle semantics",
+        "status": "NOT_IMPLEMENTED",
+        "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted Run/Attempt implementation recorded."
+      },
+      {
+        "id": "129:deployment-binding",
+        "owner_issue": 129,
+        "description": "Minimum local Deployment identity and bindings",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR250 contains a design-only probe, not production Deployment acceptance."
+      },
+      {
+        "id": "130:package-revision",
+        "owner_issue": 130,
+        "description": "Immutable generated Package Revision contract",
+        "status": "NOT_IMPLEMENTED",
+        "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted Package Revision implementation recorded."
+      },
+      {
+        "id": "135:compiler",
+        "owner_issue": 135,
+        "description": "Minimum package-to-revision/compiler contract",
+        "status": "NOT_IMPLEMENTED",
+        "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted compiler implementation recorded."
+      },
+      {
+        "id": "91:authorization-boundary",
+        "owner_issue": 91,
+        "description": "Host-mode authorization boundary when protected/share functionality is exposed",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage INTEGRATED; retained state NOT_STARTED; PR250 is a bounded SDK/auth foundation, while public authorization remains open."
+      },
+      {
+        "id": "214:public-edge-boundary",
+        "owner_issue": 214,
+        "description": "Remote/share acceptance boundary, not local fixture proof",
+        "status": "PARTIAL_NOT_ACCEPTED",
+        "evidence_basis": "Graph stage REVIEW; retained state IN_PROGRESS; live provider/TLS and standalone lifecycle gates remain open."
+      }
+    ],
+    "coordination_parent_edges": [
+      {
+        "parent_or_coordinator": 101,
+        "child_or_scope": 93
+      },
+      {
+        "parent_or_coordinator": 93,
+        "child_or_scope": 127
+      },
+      {
+        "parent_or_coordinator": 101,
+        "child_or_scope": 127
+      },
+      {
+        "parent_or_coordinator": 93,
+        "child_or_scope": 99
+      },
+      {
+        "parent_or_coordinator": 93,
+        "child_or_scope": 100
+      },
+      {
+        "parent_or_coordinator": 93,
+        "child_or_scope": 126
+      },
+      {
+        "parent_or_coordinator": 101,
+        "child_or_scope": 126
+      }
+    ],
+    "related_product_direction_edges": [
+      {
+        "issue": 127,
+        "related_issue": 71,
+        "basis": "product direction; nonblocking"
+      },
+      {
+        "issue": 71,
+        "related_issue": 93,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 99,
+        "related_issue": 71,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 100,
+        "related_issue": 71,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 100,
+        "related_issue": 99,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 126,
+        "related_issue": 71,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 126,
+        "related_issue": 99,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 126,
+        "related_issue": 100,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 126,
+        "related_issue": 127,
+        "basis": "current owner-authored Canvas amendment; nonblocking"
+      },
+      {
+        "issue": 93,
+        "related_issue": 71,
+        "basis": "product ownership; not a child execution prerequisite"
+      },
+      {
+        "issue": 126,
+        "related_issue": 127,
+        "basis": "separate optional template/example; nonblocking"
+      },
+      {
+        "issue": 93,
+        "related_issue": 209,
+        "basis": "CI/reconnect relationship; not a #93 child acceptance prerequisite"
+      }
+    ],
+    "full_acceptance_aggregation_edges": [
+      {
+        "child": 127,
+        "parent": 71,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 96,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 97,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 98,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 99,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 100,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 126,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 127,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 208,
+        "parent": 93,
+        "basis": "full acceptance aggregation; not an execution prerequisite"
+      },
+      {
+        "child": 127,
+        "parent": 71,
+        "basis": "full #71 product acceptance; does not block the earlier local #71 slice"
+      },
+      {
+        "child": 96,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 97,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 98,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 99,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 100,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 126,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 127,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 208,
+        "parent": 93,
+        "basis": "#93 child acceptance aggregation; does not block child execution"
+      },
+      {
+        "child": 93,
+        "parent": 101,
+        "basis": "program/factory aggregation; parent is coordination, not prerequisite"
+      }
+    ],
+    "superseded_untyped_edges": [
+      {
+        "prerequisite": 83,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 99,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 100,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 127,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 71
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 82
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 83
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 83
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 83
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 83
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 85
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 85
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 85
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 86
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 86
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 86
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 87
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 87
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 90
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 85,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 87,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 92
+      },
+      {
+        "prerequisite": 96,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 97,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 98,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 99,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 100,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 101,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 126,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 127,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 208,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 209,
+        "consumer": 93
+      },
+      {
+        "prerequisite": 97,
+        "consumer": 99
+      },
+      {
+        "prerequisite": 98,
+        "consumer": 99
+      },
+      {
+        "prerequisite": 125,
+        "consumer": 126
+      },
+      {
+        "prerequisite": 71,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 93,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 99,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 100,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 101,
+        "consumer": 127
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 130
+      },
+      {
+        "prerequisite": 125,
+        "consumer": 131
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 131
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 131
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 132
+      },
+      {
+        "prerequisite": 90,
+        "consumer": 132
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 132
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 133
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 133
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 133
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 133
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 135
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 135
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 136
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 90,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 138
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 139
+      },
+      {
+        "prerequisite": 84,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 86,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 87,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 138,
+        "consumer": 140
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 85,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 132,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 147,
+        "consumer": 141
+      },
+      {
+        "prerequisite": 138,
+        "consumer": 142
+      },
+      {
+        "prerequisite": 139,
+        "consumer": 142
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 142
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 142
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 143
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 144
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 144
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 144
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 144
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 145
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 145
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 145
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 145
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 146
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 146
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 146
+      },
+      {
+        "prerequisite": 83,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 129,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 130,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 143,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 144,
+        "consumer": 147
+      },
+      {
+        "prerequisite": 135,
+        "consumer": 148
+      },
+      {
+        "prerequisite": 134,
+        "consumer": 196
+      },
+      {
+        "prerequisite": 152,
+        "consumer": 196
+      },
+      {
+        "prerequisite": 153,
+        "consumer": 196
+      },
+      {
+        "prerequisite": 208,
+        "consumer": 196
+      },
+      {
+        "prerequisite": 214,
+        "consumer": 196
+      }
+    ],
+    "execution_slices": [
+      {
+        "id": "100-A",
+        "issue": 100,
+        "description": "Public tool UI metadata and ui:// resource authoring/serving",
+        "status": "PR263 source seam independently accepted; focused38+real-process1+wheel2 PASS; broader Cloud configured gates blocked; full remote review gates assigned."
+      },
+      {
+        "id": "100-B",
+        "issue": 100,
+        "description": "Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture",
+        "status": "ACTIVE; E Python roundtrip on F shared fixture; schema/interchange only, no Runtime or authorization acceptance."
+      },
+      {
+        "id": "99-A",
+        "issue": 99,
+        "description": "Portable MCP App View renderer/resource bridge using the agreed fixture",
+        "status": "Current head c971ccec; validation reported at prior842c32d5 only; pure React/fixture scope, production main/bridge/browser NOT_RUN."
+      },
+      {
+        "id": "99-B",
+        "issue": 99,
+        "description": "Optional host-specific ChatGPT projection and actual-host proof",
+        "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "127-template",
+        "issue": 127,
+        "description": "Packaged template round trip over accepted authoring and renderer slices",
+        "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "126-template",
+        "issue": 126,
+        "description": "Relevant public-package/template boundary slice consumed by the SDK and template contract",
+        "status": "PR265 current head91939899; local49+4 tests PASS; clean-wheel NOT_RUN and hosted checks pending."
+      },
+      {
+        "id": "126-source-protocol",
+        "issue": 126,
+        "description": "Bounded source-protocol proof; not SDK/template acceptance",
+        "status": "PR262 bounded source-protocol proof accepted; separate from template/full #126 acceptance."
+      },
+      {
+        "id": "71-local",
+        "issue": 71,
+        "description": "Local generated application vertical on common Package/Deployment/Run/compiler services",
+        "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "71-host",
+        "issue": 71,
+        "description": "Optional host/distribution acceptance after portable product behavior",
+        "status": "NOT_IMPLEMENTED"
+      }
+    ],
+    "amendment_source": "GitHub #71 comment 6087930051, #93 comment 6087948973, #101 comment 6087955791, #220 comment 6087968408, #254 comment 6087962754"
+  },
+  "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
+  "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
+  "current_program_refs": {
+    "community": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "integration": "abe8640a137942bcf398668fe2093529ba53c38b",
+    "integration_tree": "c68d3499f556ea7be0cadbc32fda4050ab388feb",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false
+  },
+  "current_pr_convergence": {
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "receipt": "evidence/convergence-followup-20261009T2253Z.json",
+    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
+    "pr_cohort": {
+      "target_integrated": 11,
+      "open_blocked": 8,
+      "merge_ready": 0
+    },
+    "issue_stage_counts_unchanged": true,
+    "whole_issue_acceptance_changed": false,
+    "open_pr_audit": "evidence/convergence-live-prs-20261009T2248Z.json",
+    "open_pr_audit_sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
+    "exact_head_ci_path": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
+    "artifact_metadata_erratum": {
+      "path": "evidence/convergence-erratum-20261009T2234Z.json",
+      "sha256": "b2076904af96aec046efc8a1940bb724769c22d7ac9a59439bd75e9ccdc460f7"
+    },
+    "exact_head_ci_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0",
+    "current_failures": {
+      "PR221": 3,
+      "PR256": 1
+    }
+  }
+}

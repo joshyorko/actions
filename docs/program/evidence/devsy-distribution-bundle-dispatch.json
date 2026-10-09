@@ -1,0 +1,12 @@
+{
+  "target": "cas-worker-01",
+  "cwd": "/workspaces/actions-worktrees/devsy-native-distribution",
+  "thread_id": "01a12211-01b3-7850-b508-bd7959b8210c",
+  "approval_policy": "never",
+  "sandbox": "danger-full-access",
+  "model": "gpt-6-luna",
+  "effort": "medium",
+  "request_id": "actions-distribution-full-gates-bundle-20261009-1920-v1",
+  "text": "Continue SAME existing completed thread/commit0169a17e; do notreplaytask. CloudcoordinatorcanpublishbranchwithoutchangingDevsycredentials. First verifyexactcommittedhead/cleanstate and preserveallwork. Run affected devutils full configured package tests pluslint/typecheck using alreadybootstrappedpinnedRCCgateway (focused2 tests insufficientfullgate); nootherpackagefullBootstrap. Recordactualcommands/logSHA failureswithoutfudging. Noadditionalcodeunlessdiagnosisnecessaryboundedmanifestfix, ifnewchangecommitandreport. Then create a small Git bundle in your scratch: base ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47..devsy/native-distribution-20261009, including branchref, so CloudcanfetchORIGINALcommit(s)withoutcherrypickidentityloss. Verifybundle, sha256sum+size. Emit BASE64 encodedbundle in one command output with clear start/end markers ONLY if encodedsize<40000bytes; iflargerreportactualsizeforchunktransport. This is yoursanitizedsourceonly4files; no logs/secrets/generatedbinariesincluded. Returnfull SHA/logdigests/fullgateresults plusbundlepath/digest/size. No furtherGitpushattemptsorcredentialread, noCASrepoedits, notagpublication. Rootpreservesowningbranchandwillreview/pushfromCloud. Core1.0.2normalrelease37979108120nowpublishedPyPIwheelbyteverified; Runtime1.0.3stillgated. Documentation/upstreamcompletionrulesunchanged; proposeexactdocdelta fornativechecksum gate andtransportlimitationifnewlearning, nodiary.",
+  "wait_for_completion": false
+}

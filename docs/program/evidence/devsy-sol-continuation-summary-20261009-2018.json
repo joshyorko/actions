@@ -1,0 +1,24 @@
+{
+  "observed_at_utc": "2026-10-09T20:19:02.806Z",
+  "thread_id": "01a1222f-e720-7183-9634-2edb76d30326",
+  "previous_turn": {
+    "id": "01a1222f-e7b8-78f1-9075-dc8007b2d9b7",
+    "state": "interrupted; retained in prior inventory"
+  },
+  "continued_turn": {
+    "id": "01a12251-b60d-7c20-b806-fc9c9565f128",
+    "request_id": "actions-sol-devsy-continue-20261009-2018-v1",
+    "dispatch": "accepted, not replayed",
+    "state_at_receipt": "inProgress; items notLoaded"
+  },
+  "settings_event": {
+    "approvalPolicy": "never",
+    "sandboxPolicy": "dangerFullAccess",
+    "model": "gpt-6.1-sol",
+    "effort": "high",
+    "cwd": "/workspaces/actions-worktrees/devsy-coordinator"
+  },
+  "limitation": "Dispatch receipt confirms same-thread continuation/settings, not task completion or latest worktree state.",
+  "source_receipt": "/workspace/work/community-resume/evidence/devsy-sol-continuation-20261009-2018-result.json",
+  "source_receipt_sha256": "c2c9c6eba5a946d02351d38ccdeafb4a92ba6bf43f5c54c08f5a46ff7474596d"
+}

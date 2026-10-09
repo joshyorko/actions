@@ -117,6 +117,120 @@ configuration, token issuer/audience checks, or CIMD handling by an external
 authorization server. Action-provider OAuth remains a separate credential
 flow.
 
+## Community program evidence
+
+The [community issue ledger](../program/community-program-ledger.md) retains
+every open issue's full acceptance body and comments in its machine-readable
+companion. A checkpoint PR or green workflow establishes only the exact tested
+slice, not whole issue acceptance. Keep source, installed-wheel, native,
+packaged-browser and published-artifact receipts separate, recording the exact
+candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
+publication success. Recheck dependency sequencing against each retained
+contract before implementation; a cross-reference alone is not a blocking edge.
+
+When projecting a multi-issue program into an execution graph, keep typed
+execution prerequisites, criterion/slice gates, parent coordination, related
+product direction, and full-acceptance aggregation separate. A parent or
+aggregation edge cannot block its child, and a consumer of one upstream
+criterion must not wait for that issue's entire contract to close. Preserve the
+superseded untyped projection as audit provenance, but run cycle and
+topological validation only over active execution prerequisites (including
+slice-to-slice gates). Record the authoritative source for each reclassification
+and verify that issue contracts, raw states, and accounting did not change.
+The community graph validator is part of `ToolkitTest`: run
+`rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`. The existing
+`.github/workflows/developer_toolkit.yml` pull-request matrix discovers its
+`developer/tests` wrapper, which runs the graph regressions and exact `--check`
+projection; keep this gate in that established path rather than creating a
+separate workflow. The projection reads and writes its Markdown, JSON, and
+manifest files as UTF-8 explicitly; do not rely on the host's default text
+encoding. Its CLI fixture exposes child stdout/stderr on failure and forces a
+non-UTF-8 POSIX locale, while the existing Windows ToolkitTest cell exercises
+the native Windows path. Hash-manifested Canvas amendment artifacts also use
+`-text` in `.gitattributes`: Git checkout conversion must not rewrite evidence
+bytes before the validator checks the recorded size and digest.
+
+For Canvas fixture work, distinguish schema/round-trip evidence from product
+authorization: the current MCP dispatcher selects a registered tool by name,
+and legacy Run/artifact routes use server-level credentials rather than a
+Workspace-scoped binding. A fixture cannot prove Runtime dispatch or app
+authorization. Keep the missing criteria explicit: #83 owns durable
+Run/Attempt identity, fencing, input/result/artifact references and a pinned
+ownership snapshot; #129 owns Workspace-scoped Deployment identity, bindings,
+policy, actor authorization and immutable resolution; #130 owns immutable
+Package Revision identity and deterministic capability projection; #135 owns
+deterministic package compilation into a Package Revision and its
+capability/binding manifest. The source-backed interface inventory is in
+`docs/program/evidence/canvas-common-api-authorization-seams-20261009.md`.
+
+A receipt's tested subject is the source state actually executed: record its
+base SHA and any uncommitted delta separately from the later repair head. Do
+not relabel red-before evidence with the repaired head. For authenticated
+HTTP/browser comparisons, record whether each request supplied a synthetic
+bearer; a successful bearer probe and an unauthorized browser request are
+different subjects.
+Before committing an evidence archive, verify each selected receipt's bytes
+against its ledger SHA-256 and reject absolute or parent-traversal archive
+paths. Preserve running and skipped CI states separately from passing results.
+
+When resuming remote work, read the recorded thread's authoritative status and
+last completion/cleanup report before dispatching another turn. A pushed branch
+does not prove its worker stopped. Reuse the recorded thread after reconciliation;
+do not create a replacement because an older connector call failed. Device image
+cleanup and retained executables are separate inventory facts: verify artifact
+bytes directly and retain caller-supplied build claims as unverified provenance.
+Successful remote-thread calls do not validate another connector's pending
+approval flow. Preserve its original request/session and private grant record
+until that specific validation failure is resolved.
+
+For native CAS work, pass supported `approval_policy` and `sandbox` settings on
+the authorized start/resume/turn request, then verify the effective policy from
+the native response or settings event. An aggregate `effective_configuration`
+that is null is not evidence of either access level. Before creating worktrees,
+verify machine, Git root/origin, exact approved base, intended branch, and any
+existing target path's branch/HEAD/dirty state; preserve rather than reset an
+existing checkout. Keep the CAS machine target separate from the repository
+checkout and worker CWD. Give each mutation a unique request ID; after a timeout
+or HTTP 502, discover its exact thread/request and CWD before retrying, and
+reconcile an already-active mutation instead of replaying it. Record worktree
+cleanliness as a timestamped observation. Native user authorization does not
+resume parked Executor approvals.
+
+A completed native commandExecution item proves only that command's exit status;
+it does not prove the enclosing worker turn or thread has ended. Record the
+last explicit thread-state observation separately and leave current status
+unconfirmed until a terminal state is read.
+
+If authorized direct push is unavailable and source transfer is needed, a Git
+bundle can preserve the original commit graph. Include the explicit approved
+base-to-branch range and branch ref; verify the bundle plus SHA-256/size before
+transfer, then verify the imported ref's commit/tree/parent at the receiving
+checkout. Keep bundles source-only; exclude credentials, logs, build outputs and
+artifacts unless separately authorized. A requested or encoded bundle is not
+proof of transfer; retain a receipt at both ends. These are transfer checks,
+not evidence that a particular remote lane completed a bundle handoff. Evidence
+for native path/policy identity: CAS bootstrap response/settings event and
+pre-dispatch inventory in `docs/program/evidence/cas-bootstrap-reconciliation-20261009.md`;
+request receipts are under `docs/program/evidence/devsy-*-dispatch.json`.
+
+A passing focused native step and a failing later process-ownership step are
+distinct evidence. Record both with the same run/job identifiers, keep skipped
+dependent browser checks as NOT_RUN, and do not infer whole-job or release
+success from the focused result.
+
+Inventory entries are timestamped observations while workers remain active,
+not a freeze. Compare the ledger's issue IDs, titles and update timestamps with
+GitHub, but keep its engineering work state distinct from GitHub's open/closed
+state. Refresh next-action pointers against the actual PR head and checks.
+With a narrow `remote.origin.fetch` refspec, `git fetch origin BRANCH` can update
+only `FETCH_HEAD`; use an explicit source/destination refspec and compare the
+remote branch SHA before treating `origin/BRANCH` as current.
+
+The closed observability issue #137 remains referenced by roadmap #82. Preserve
+its retained contract in final vertical verification rather than reopening it
+automatically. #149 remains a living advisory record, and closed quickstart #154
+and homebrew-tools#103 must not generate duplicate execution work.
+
 ## Package Boundaries
 
 Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as
@@ -131,6 +245,14 @@ SHA-256 metadata together; source YAML changes alone do not update shipped templ
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
+A nonempty package-secret check proves presence only; it does not test PyPI
+authentication, token scope, upload, or publication. Keep those facts separate
+from a candidate wheel's index-resolution proof. For example, a fresh Core
+candidate install resolved published Helper 1.0.3 from `files.pythonhosted.org`
+and matched the independently verified release-wheel SHA, while the Core secret
+availability probe first reported empty, then reported nonempty on attempt 2; neither attempt authenticated or uploaded.
+Use the admitted release workflow for publication and verify registry artifacts
+afterward. Evidence: `docs/program/evidence/independent-core-pr248-admission-and-credential-probe-20261009.md`.
 
 Runtime's installed-wheel contract tests select a Python supporting the Runtime
 distribution and `venv`. For RCC-based verification, set
@@ -678,6 +800,11 @@ the tag is an ancestor of `origin/community` and matches
 verified directory as `actions-runtime-dist`. The workflow publishes the same
 set once when the Runtime secret is configured; without it, the tagged job fails
 at the credential check before PyPI upload, so no release success may be claimed.
+The validator's `--download-root` mode rejects duplicate basenames across
+separate downloaded artifact directories before copying or merging their files.
+Determine whether a failed job attempted publication from its workflow event
+and upload-step conclusions, not its display name. A pull-request job named
+`publish` can fail artifact validation before credential or upload steps run.
 Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
@@ -1696,6 +1823,10 @@ the adapter rejected the acquisition; the manifest was restored afterward.
 ## Pull Request Triage
 
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
+
+For hosted pull-request validation, record the actual checkout SHA from the workflow log and, for `refs/pull/<number>/merge`, its two parents and tree. The PR head SHA alone does not identify the tested candidate. When the target base advances, generate the synthetic merge for that base and compare its tree with the tested tree before carrying results forward. A raw diff between divergent PR and base tips can misstate which workflow steps survive; inspect the actual three-way merge result and the executed workflow. A combined rollup must pass its focused, full, static, and hosted gates on its exact candidate tree before it replaces separate green PRs.
+
+Classify a merge against the PR's named target. A stacked PR merged into its feature or repair base is integrated only into that branch; source containment or exact merge-tree identity does not mean the change reached `integration` or `community`, and neither proves whole-issue acceptance or release admission. Record the target branch, merge commit and tree separately from downstream refs and issue status. Likewise, a native worker reported `ACTIVE` or an accepted turn proves control-plane state, not current implementation progress. Record progress from timestamped worktree HEAD/diff and exact test evidence; treat source transfer/readback as source availability only.
 
 ## MCP gateway metadata
 

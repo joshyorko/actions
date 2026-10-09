@@ -1,0 +1,424 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-09T21:46:56Z",
+  "repository": "joshyorko/actions",
+  "scope": "Dated convergence observation only; no issue acceptance states, original contracts, comments, dependencies, or archived snapshots changed.",
+  "source_audit": {
+    "path": "convergence-live-prs-20261009T2146Z.json",
+    "sha256": "1505c632a1a4ccaf6b8797d7a14c215fa8fdc5d039ca225e02de3c2e292ec5c3",
+    "size_bytes": 81912,
+    "row_count": 16,
+    "source": "read-only live pull-request audit supplied by root; copied byte-for-byte"
+  },
+  "convergence_classification": {
+    "open_pull_requests": 16,
+    "all_open_prs_draft": true,
+    "merge_ready": 0,
+    "blocked_open": 16,
+    "integrated_since_previous_observation": 1,
+    "integrated_pr": "#251",
+    "classification_note": "Root classified the current 17-item cohort as 16 blocked open drafts plus PR251 integrated to its intended repair branch. These are PR convergence counts, not issue acceptance counts."
+  },
+  "current_refs": {
+    "community": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "integration_branch": "55bfe02a43bf922a7fcf6d77f2422187a419bcd9",
+    "runtime_release_candidate": "204593afdbbb6a5be51c2c5fab3758805ad4412c",
+    "root_reported_unchanged_at_observation": true,
+    "remote_readback": "git ls-remote confirmed these exact integration and candidate refs at observation time",
+    "last_admitted_docs_only_integration_checkpoint": "446ff1b3328028154684c035f4e395ae35284067",
+    "current_ref_limit": "The latest integration branch head remains PR221/open validation context; no new integration admission or release readiness is inferred by this observation."
+  },
+  "pr251": {
+    "state": "MERGED_TO_INTENDED_STACK_TARGET",
+    "reviewed_head": "2eaac1c1fe5c53320d647a35dd137f8fd9411f3b",
+    "target_branch": "repair/rcc-graceful-retirement-20261009",
+    "target_base_before_merge": "29f213e021e5c828aee43de16604ad41cfe88965",
+    "merge_commit": "ddbbfb68e3431878f01ebfd61de461ff749dc498",
+    "source_tree_and_merge_tree": "5c2b624f7560f43cfff3694792b40c77d25ac38c",
+    "tree_identity_verified": true,
+    "hosted_checks": "All three hosted workflows passed on the exact reviewed head before merge.",
+    "scope": "Bounded diagnostic harness plus a test seam documenting existing artifact-local Python selection. Provider-dead warm remains a negative diagnostic, not #134 acceptance. This merge did not update community, integration, or the release candidate."
+  },
+  "recovered_source_refs": [
+    {
+      "branch": "recovery/rcc-38f3efad",
+      "head": "38f3efad320c5f6b4b9a6da34b368acf8279eb0e",
+      "scope": "Runtime acceptance source checkpoint / wheel provenance binding",
+      "limit": "Source push/readback only; no lane acceptance claimed."
+    },
+    {
+      "branch": "recovery/workitems-6cf62b00",
+      "head": "6cf62b00fa603540fdfbeb20c9c8aabfa1373f77",
+      "scope": "Packaged Work Items UI receipt binding",
+      "limit": "Source push/readback only. Current PR256 verify job fails before its package verifier, while other exact-head jobs are running/queued."
+    },
+    {
+      "branch": "recovery/lifecycle-839798e4",
+      "head": "839798e4cdd786f799956f94d22970da92fad68e",
+      "scope": "RCC source-only generation drain test checkpoint",
+      "limit": "Distinct source push/readback only; no runtime/native acceptance inferred."
+    }
+  ],
+  "current_pr_checks": [
+    {
+      "number": 215,
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "base": "community",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 16
+      },
+      "merge_state": "DIRTY",
+      "url": "https://github.com/joshyorko/actions/pull/215"
+    },
+    {
+      "number": 216,
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "base": "community",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 23
+      },
+      "merge_state": "DIRTY",
+      "url": "https://github.com/joshyorko/actions/pull/216"
+    },
+    {
+      "number": 217,
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "base": "community",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 15
+      },
+      "merge_state": "DIRTY",
+      "url": "https://github.com/joshyorko/actions/pull/217"
+    },
+    {
+      "number": 218,
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "base": "community",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SKIPPED": 1,
+        "COMPLETED:SUCCESS": 16
+      },
+      "merge_state": "CLEAN",
+      "url": "https://github.com/joshyorko/actions/pull/218"
+    },
+    {
+      "number": 219,
+      "head": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "base": "community",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:FAILURE": 1,
+        "COMPLETED:SUCCESS": 6
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/219"
+    },
+    {
+      "number": 220,
+      "head": "11affce4de904f29b7731a49d9221863b8983ed8",
+      "base": "community",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:FAILURE": 1,
+        "COMPLETED:SKIPPED": 1,
+        "COMPLETED:SUCCESS": 9,
+        "QUEUED:PENDING": 3
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/220"
+    },
+    {
+      "number": 221,
+      "head": "55bfe02a43bf922a7fcf6d77f2422187a419bcd9",
+      "base": "community",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:FAILURE": 1,
+        "COMPLETED:SKIPPED": 1,
+        "COMPLETED:SUCCESS": 22,
+        "IN_PROGRESS:PENDING": 2,
+        "QUEUED:PENDING": 3
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/221"
+    },
+    {
+      "number": 256,
+      "head": "6cf62b00fa603540fdfbeb20c9c8aabfa1373f77",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:FAILURE": 1,
+        "COMPLETED:SKIPPED": 1,
+        "COMPLETED:SUCCESS": 1,
+        "IN_PROGRESS:PENDING": 7,
+        "QUEUED:PENDING": 3
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/256"
+    },
+    {
+      "number": 257,
+      "head": "29decdcb4ac6712f278b61e3722e0ad9217c60ba",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 6,
+        "QUEUED:PENDING": 2
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/257"
+    },
+    {
+      "number": 259,
+      "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "base": "integration/runtime-release-final-20261009",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 12,
+        "QUEUED:PENDING": 3
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/259"
+    },
+    {
+      "number": 262,
+      "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "base": "integration/runtime-release-final-20261009",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 9,
+        "QUEUED:PENDING": 1
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/262"
+    },
+    {
+      "number": 263,
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "base": "integration/runtime-release-final-20261009",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 8,
+        "QUEUED:PENDING": 2
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/263"
+    },
+    {
+      "number": 264,
+      "head": "cd71922c0e8af374e777e32d37c556c157cb8484",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 9,
+        "QUEUED:PENDING": 2
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/264"
+    },
+    {
+      "number": 265,
+      "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "base": "integration/runtime-release-final-20261009",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 9,
+        "QUEUED:PENDING": 1
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/265"
+    },
+    {
+      "number": 266,
+      "head": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+      "base": "feature/issue-99a-query-renderer-20261009",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 9,
+        "QUEUED:PENDING": 1
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/266"
+    },
+    {
+      "number": 267,
+      "head": "d01848a7e39317b98fd020b937a548255485c3fc",
+      "base": "feature/issue-100a-public-mcp-app-authoring-20261009",
+      "draft": true,
+      "check_counts": {
+        "COMPLETED:SUCCESS": 7,
+        "QUEUED:PENDING": 3
+      },
+      "merge_state": "UNSTABLE",
+      "url": "https://github.com/joshyorko/actions/pull/267"
+    }
+  ],
+  "registry_failures": [
+    {
+      "pr": 220,
+      "run_id": 37993299738,
+      "job_id": 114032769150,
+      "observed_at_utc": "2026-10-09T21:29:13Z",
+      "result": "docker compose pull failed while contacting Docker Hub auth token endpoint; request timed out before verify-work-items ran.",
+      "classification": "External image-pull prerequisite failure; not a package-verifier result. No credentials, mirror, or rerun workaround used."
+    },
+    {
+      "pr": 221,
+      "run_id": 37992622849,
+      "job_id": 114030434248,
+      "observed_at_utc": "2026-10-09T21:21:28Z",
+      "result": "Docker Hub returned unauthenticated pull rate limit while pulling MongoDB; verify-work-items did not start.",
+      "classification": "External image-pull prerequisite failure; not a package-verifier result. No credentials, mirror, or rerun workaround used."
+    },
+    {
+      "pr": 256,
+      "run_id": 37995257113,
+      "job_id": 114039537149,
+      "observed_at_utc": "2026-10-09T21:45:13Z",
+      "result": "docker compose pull failed while contacting Docker Hub auth token endpoint; request timed out before verify-work-items ran.",
+      "classification": "External image-pull prerequisite failure; not a package-verifier result. Other exact-head checks remained in progress or queued in the source audit."
+    }
+  ],
+  "native_activity_limit": "Recovered refs prove source availability and readback only. No current per-lane native activity or progress is inferred from earlier ACTIVE/accepted turn observations; worktree progress requires a timestamped exact HEAD/diff and test evidence.",
+  "issue_contracts": "54 retained issue records and acceptance overlays remain unchanged; #210 remains the only whole-issue accepted/closed item. PR251 does not complete #134.",
+  "upstream_disposition": "No confirmed upstream defect from this governance checkpoint; no upstream issue/report/comment was made.",
+  "protected_invariants": {
+    "retained_issue_records": 54,
+    "protected_fields": [
+      "acceptance_contract",
+      "comments",
+      "dependencies",
+      "state"
+    ],
+    "protected_projection_sha256": "4ccfb068fc6799cacf125edb5850506f94f8250448952a8b900737a5ce2fd4f4",
+    "issue_accounting": {
+      "open_issues": 53,
+      "accepted": 1,
+      "verified_review_ready": 0,
+      "unfinished": 53,
+      "not_started": 33,
+      "in_progress": 5,
+      "implemented_unverified": 16,
+      "blocked": 0,
+      "retained_issue_contracts": 54,
+      "retained_state_counts_snapshot": {
+        "not_started": 33,
+        "in_progress": 5,
+        "implemented_unverified": 16,
+        "blocked": 0
+      },
+      "state_note": "Per-issue state fields and original contracts/comments remain as captured in the 54-issue intake snapshot. Current closure/acceptance is recorded in current_acceptance; the original raw state fields are not rewritten."
+    },
+    "issue_statuses_modified": false,
+    "historical_zip_count": 16,
+    "historical_zip_inventory_sha256": "f6682e633646e2192835fb9182b8baa06c372ce8f081e84927e1f6e0aa26e9b7",
+    "historical_zip_inventory": [
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v2.zip",
+        "size_bytes": 6855,
+        "sha256": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf"
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v3.zip",
+        "size_bytes": 7286,
+        "sha256": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281"
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v4.zip",
+        "size_bytes": 7262,
+        "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3"
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009.zip",
+        "size_bytes": 6683,
+        "sha256": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7"
+      },
+      {
+        "path": "evidence/community-20261008.zip",
+        "size_bytes": 456808,
+        "sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705"
+      },
+      {
+        "path": "evidence/community-20261009-acceleration.zip",
+        "size_bytes": 112671,
+        "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
+      },
+      {
+        "path": "evidence/community-20261009-checkpoint.zip",
+        "size_bytes": 87365,
+        "sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c"
+      },
+      {
+        "path": "evidence/community-20261009-cloud-admission.zip",
+        "size_bytes": 69121,
+        "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0"
+      },
+      {
+        "path": "evidence/community-20261009-convergence.zip",
+        "size_bytes": 165902,
+        "sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237"
+      },
+      {
+        "path": "evidence/community-20261009-fanout.zip",
+        "size_bytes": 117686,
+        "sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e"
+      },
+      {
+        "path": "evidence/community-20261009-final-checkpoint.zip",
+        "size_bytes": 129162,
+        "sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4"
+      },
+      {
+        "path": "evidence/community-20261009-resume.zip",
+        "size_bytes": 123440,
+        "sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541"
+      },
+      {
+        "path": "evidence/community-20261009-update.zip",
+        "size_bytes": 36121,
+        "sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4"
+      },
+      {
+        "path": "evidence/community-20261009-update2.zip",
+        "size_bytes": 35524,
+        "sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31"
+      },
+      {
+        "path": "evidence/community-20261009-update3.zip",
+        "size_bytes": 71453,
+        "sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842"
+      },
+      {
+        "path": "evidence/http-helper-1.0.3-verified-dist.zip",
+        "size_bytes": 30034,
+        "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+      }
+    ],
+    "preexisting_untracked_stack_audit": {
+      "path": "evidence/stack-pr-convergence-audit-20261009.json",
+      "sha256": "e594631b9606dee637ee54a768d100481e92fbd4541a73206ccd7e5d55b65162",
+      "size_bytes": 14068,
+      "preserved_unmodified": true
+    },
+    "no_archive_rewritten": true
+  },
+  "documentation_delta": {
+    "canonical_file": "../../skills/repository-operations.md",
+    "durable_learning": "A merge is counted only against its named target; source containment/tree identity does not imply downstream integration, whole-issue acceptance, or release admission. Native ACTIVE/accepted-turn observations are not implementation progress without timestamped worktree HEAD/diff and test evidence.",
+    "evidence": "PR251 exact-head 2eaac1c was merged to repair/rcc-graceful-retirement-20261009 at ddbbfb68, with identical tree5c2b624; refs community c30f953, integration55bfe02a and runtime candidate204593af remained unchanged. The latest PR audit has16 open drafts; recovered native refs are source/readback checkpoints only.",
+    "stale_guidance_removed": "None. The rule extends existing pull-request triage guidance without rewriting historical status records.",
+    "remaining_uncertainty": "Current native worker activity/progress is not established by this audit; hosted jobs remain queued or failed on external Docker Hub pulls as linked."
+  },
+  "verification": {
+    "generator_apply": "PASS; `python scripts/project_community_execution_graph.py --apply` completed using the canonical current projection path.",
+    "generator_check": "PASS; `python scripts/project_community_execution_graph.py --check` reports `validated 54 issue projections; COMPLETE=1`.",
+    "graph_regressions": "PASS; `python scripts/test_project_community_execution_graph.py`: 12 tests.",
+    "diff_check": "PASS; `git diff --check` returned zero.",
+    "protected_data": "PASS; all54 issue IDs and acceptance_contract/comments/dependencies/state fields match the committed base; accounting is byte-value equivalent; all16 prior ZIP hashes and sizes match; raw PR audit copy matches its source bytes; pre-existing untracked stack audit hash is unchanged."
+  }
+}
