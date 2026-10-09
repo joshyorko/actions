@@ -32,12 +32,16 @@ install. Production and release compatibility must be checked by installing
 the built wheels outside the checkout. Lazy public exports appear in `dir`
 without eager import so introspection and generated docs include ActionContext.
 
-For pull-request Runtime wheel checks, the workflow builds the matching Core
-wheel and installs it into cibuildwheel's fresh test environment before Runtime
-dependency resolution. This pairing is PR-only: tag/release builds resolve the
-declared Core version from the registry and fail if it has not been published.
-Do not broaden the candidate override to release events or remove dependency
-checks. The installer accepts one identified Core wheel and prints its digest.
+For pull-request Runtime wheel checks, the workflow builds matching Core and
+HTTP Helper wheels and installs them into cibuildwheel's fresh test environment
+for candidate-pair compatibility. A separate PR-only clean venv installs the
+built Runtime cp312 wheel through PyPI and asserts the released `actions-core`
+1.0.2 and `actions-http-helper` 1.0.3 are selected, then runs `pip check`,
+imports Runtime/MCP outside the checkout, and invokes `actions.server version`.
+Keep both checks: the local wheel pair exercises unreleased producer APIs, while
+the registry-floor canary proves compatibility with published dependencies.
+Tag/release builds resolve declared dependencies from the registry. The
+candidate override must not apply to releases or bypass dependency checks.
 
 Python 3.10's `inspect.isclass` classifies a `list[...]` public alias differently
 from Python 3.12. The canonical docs task normalizes exported GenericAlias

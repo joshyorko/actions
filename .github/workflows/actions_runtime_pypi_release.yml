@@ -31,6 +31,7 @@ permissions:
     - devutils/tests/test_runtime_release_workflows.py
     - docs/skills/repository-operations.md
     - action_server/scripts/publish_verified_runtime.py
+    - action_server/scripts/verify_published_runtime_floor.py
 defaults:
   run:
     working-directory: ./action_server
@@ -209,6 +210,10 @@ jobs:
           {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse'
           || '' }}
         CIBW_TEST_COMMAND: python -m pip check && python -m actions.server version
+    - name: Verify Runtime wheel with published Core and Helper
+      if: github.event_name == 'pull_request'
+      run: uv run --no-project --python ${{ matrix.python }} python scripts/verify_published_runtime_floor.py
+        wheelhouse
     - name: 'Upload artifact: action_server/wheelhouse/*'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
