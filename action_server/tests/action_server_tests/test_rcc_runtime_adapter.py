@@ -1,5 +1,8 @@
 import json
 import subprocess
+import sys
+import threading
+import time
 from pathlib import Path
 
 import pytest
@@ -710,6 +713,10 @@ async def _test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch
         def kill(self):
             self.killed = True
 
+        def retire(self):
+            self.killed = True
+            return True
+
     monkeypatch.setattr(process_pool, "ProcessHandle", FakeProcess)
     monkeypatch.setattr(
         process_pool, "_get_process_handle_key", lambda _settings, package: package.id
@@ -723,6 +730,7 @@ async def _test_admitted_route_pins_process_lookup_to_old_generation(monkeypatch
     pool._processes_running_semaphore = Semaphore(1)
     pool._running_processes = {}
     pool._idle_processes = {}
+    pool._pending_retirements = {}
     pool._post_run_cmd_args = None
     pool.action_package_id_to_action_package = {
         "new-package": SimpleNamespace(id="new-package")
@@ -919,6 +927,398 @@ def test_process_handle_kill_waits_for_wrapper(tmp_path):
     assert process.poll() is not None
 
 
+def test_force_killing_wrapper_preserves_failed_receipt(monkeypatch, tmp_path):
+    from actions.server._rcc_runtime_adapter import RccProcessHandle
+
+    receipt = tmp_path / "receipt.json"
+    failed_receipt = {
+        "status": "failed",
+        "exitCode": -1,
+        "reason": "child exited non-zero",
+    }
+    receipt.write_text(json.dumps(failed_receipt))
+    original_receipt = receipt.read_bytes()
+
+    class Process:
+        pid = 123
+        returncode = None
+
+        def poll(self):
+            return self.returncode
+
+        def wait(self):
+            self.returncode = -9
+            return self.returncode
+
+    monkeypatch.setattr(
+        "actions.server._common.process.kill_process_and_subprocesses",
+        lambda _pid: None,
+    )
+    handle = RccProcessHandle(Process(), receipt)
+
+    handle.kill()
+
+    assert receipt.read_bytes() == original_receipt
+    assert json.loads(receipt.read_text()) == failed_receipt
+
+
+def test_bounded_force_kill_stops_owned_wrapper_and_child(tmp_path):
+    import psutil
+
+    from actions.server._rcc_runtime_adapter import RccProcessHandle
+
+    wrapper = subprocess.Popen(
+        [
+            sys.executable,
+            "-c",
+            "import signal, subprocess, sys, time\n"
+            "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(30)'])\n"
+            "def stop(*_):\n"
+            "    if child.poll() is None:\n"
+            "        child.terminate()\n"
+            "    child.wait()\n"
+            "    raise SystemExit(0)\n"
+            "signal.signal(signal.SIGTERM, stop)\n"
+            "print(child.pid, flush=True)\n"
+            "time.sleep(30)\n",
+        ],
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    assert wrapper.stdout is not None
+    child_pid = int(wrapper.stdout.readline())
+    handle = RccProcessHandle(wrapper, tmp_path / "receipt.json")
+    try:
+        result = handle.force_kill_until(time.monotonic() + 2)
+        assert result.execution_stopped
+        assert wrapper.poll() is not None
+        assert result.wrapper_reaped
+        assert result.descendant_reap_complete
+        assert child_pid not in result.live_descendant_pids
+        assert child_pid not in result.zombie_descendant_pids
+    finally:
+        if wrapper.poll() is None:
+            wrapper.terminate()
+            wrapper.wait(timeout=2)
+        if psutil.pid_exists(child_pid):
+            child = psutil.Process(child_pid)
+            if child.status() != psutil.STATUS_ZOMBIE:
+                child.terminate()
+            _wait_until(lambda: not psutil.pid_exists(child_pid), timeout=2)
+        wrapper.stdout.close()
+
+
+@pytest.mark.skipif(sys.platform == "win32", reason="requires POSIX SIGTERM semantics")
+def test_bounded_force_kill_terminates_worker_ignoring_term(tmp_path):
+    from actions.server._rcc_runtime_adapter import RccProcessHandle
+
+    wrapper = subprocess.Popen(
+        [
+            sys.executable,
+            "-c",
+            "import signal, time\n"
+            "signal.signal(signal.SIGTERM, signal.SIG_IGN)\n"
+            "print('ready', flush=True)\n"
+            "time.sleep(30)\n",
+        ],
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    assert wrapper.stdout is not None
+    assert wrapper.stdout.readline().strip() == "ready"
+    handle = RccProcessHandle(wrapper, tmp_path / "receipt.json")
+    try:
+        handle.capture_owned_processes()
+        result = handle.force_kill_until(time.monotonic() + 2)
+        assert result.execution_stopped
+        assert result.wrapper_reaped
+        assert wrapper.returncode == -9
+    finally:
+        if wrapper.poll() is None:
+            wrapper.kill()
+            wrapper.wait(timeout=2)
+        wrapper.stdout.close()
+
+
+def test_zombie_descendants_are_reported_without_claiming_reap():
+    from actions.server._common.process import ProcessTreeCleanupResult
+
+    result = ProcessTreeCleanupResult(
+        wrapper_reaped=True,
+        live_descendant_pids=(),
+        zombie_descendant_pids=(12345,),
+        errors=(),
+    )
+
+    assert result.execution_stopped
+    assert result.zombie_descendant_pids == (12345,)
+    assert not result.descendant_reap_complete
+
+
+def test_descendant_snapshot_does_not_treat_missing_owner_as_empty_tree(monkeypatch):
+    import psutil
+
+    from actions.server._common.process import snapshot_process_descendants
+
+    class MissingOwner:
+        def __init__(self, _pid):
+            pass
+
+        def children(self, recursive):
+            raise psutil.NoSuchProcess(123)
+
+    monkeypatch.setattr(psutil, "Process", MissingOwner)
+    with pytest.raises(psutil.NoSuchProcess):
+        snapshot_process_descendants(123)
+
+
+def test_pending_retirement_keeps_capacity_until_retry_completes(monkeypatch):
+    from actions.server._actions_process_pool import ActionsProcessPool
+
+    pool = ActionsProcessPool.__new__(ActionsProcessPool)
+    pool._lock = threading.Lock()
+    pool._pending_retirements = {}
+    pool._running_processes = {}
+    pool._idle_processes = {}
+    pool._processes_running_semaphore = threading.BoundedSemaphore(1)
+    warmups = []
+
+    def warmup_after_removal():
+        assert handle not in pool._pending_retirements
+        with pool._lock:
+            assert pool._count_total_processes() == 0
+        warmups.append(True)
+
+    monkeypatch.setattr(pool, "_warmup_processes", warmup_after_removal)
+    assert pool._processes_running_semaphore.acquire(blocking=False)
+
+    class Handle:
+        def __init__(self):
+            self.results = iter((False, True))
+
+        def retire(self):
+            assert not pool._lock.locked(), "retirement ran while pool lock was held"
+            return next(self.results)
+
+    handle = Handle()
+    pool._pending_retirements[handle] = True
+
+    pool._retry_pending_retirements()
+    assert handle in pool._pending_retirements
+    assert not pool._processes_running_semaphore.acquire(blocking=False)
+
+    pool._retry_pending_retirements()
+    assert handle not in pool._pending_retirements
+    assert pool._processes_running_semaphore.acquire(blocking=False)
+    assert warmups == [True]
+    assert not pool._processes_running_semaphore.acquire(blocking=False)
+
+
+def test_retirement_lock_wait_uses_caller_deadline():
+    from actions.server._actions_process_pool import ProcessHandle
+
+    handle = ProcessHandle.__new__(ProcessHandle)
+    handle._retirement_lock = threading.Lock()
+    handle._retirement_lock.acquire()
+    try:
+        started = time.monotonic()
+        assert not handle.retire(started + 0.03)
+        assert time.monotonic() - started < 0.25
+    finally:
+        handle._retirement_lock.release()
+
+
+def test_active_cancellation_retirement_skips_exit_send(monkeypatch):
+    from types import SimpleNamespace
+
+    from actions.server._actions_process_pool import ProcessHandle
+    from actions.server._common.process import ProcessTreeCleanupResult
+
+    handle = ProcessHandle.__new__(ProcessHandle)
+    handle._retirement_lock = threading.Lock()
+    handle._retirement_complete = False
+    handle._retirement_descendants = []
+    handle._retirement_snapshot_failed = False
+    handle._kill_called = True
+    handle._exit_attempted = False
+    handle._process = SimpleNamespace(pid=123, poll=lambda: -9)
+    handle._rcc_wrapper = None
+
+    class Writer:
+        def write_with_deadline(self, *args):
+            pytest.fail("active cancellation must not send a graceful exit frame")
+
+    class Reader:
+        def join(self, timeout=None):
+            self.timeout = timeout
+
+        def is_alive(self):
+            return False
+
+    class Socket:
+        def shutdown(self, _how):
+            pass
+
+    handle._writer = Writer()
+    handle._reader = Reader()
+    handle._socket = Socket()
+    monkeypatch.setattr(
+        "actions.server._common.process.force_kill_process_tree_until",
+        lambda *args, **kwargs: ProcessTreeCleanupResult(True, (), (), ()),
+    )
+
+    assert handle.retire(time.monotonic() + 1)
+    assert handle._retirement_complete
+    assert handle._exit_attempted
+
+
+def test_unexpected_dead_worker_has_explicit_unverified_recovery(monkeypatch):
+    from actions.server._actions_process_pool import ProcessHandle
+
+    handle = ProcessHandle.__new__(ProcessHandle)
+    handle._retirement_lock = threading.Lock()
+    handle._retirement_complete = False
+    handle._retirement_result = None
+    handle._retirement_descendants = None
+    handle._retirement_snapshot_failed = False
+    handle._kill_called = False
+    handle._process = subprocess.Popen([sys.executable, "-c", "pass"])
+    handle._process.wait(timeout=2)
+    handle._reader = type(
+        "Reader", (), {"join": lambda self, timeout=None: None, "is_alive": lambda self: False}
+    )()
+    handle._socket = None
+
+    result = handle.retire(time.monotonic() + 1)
+
+    assert result.state == "crash_unverified"
+    assert result.capacity_releasable
+    assert not result.descendant_snapshot_complete
+
+
+def test_controlled_snapshot_failure_stays_pending_after_its_force_kill(monkeypatch):
+    from actions.server._actions_process_pool import ProcessHandle
+    from actions.server._common.process import ProcessTreeCleanupResult
+
+    class Process:
+        pid = 123
+
+        def __init__(self):
+            self.dead = False
+
+        def poll(self):
+            return -9 if self.dead else None
+
+        def wait(self, timeout=None):
+            raise subprocess.TimeoutExpired("worker", timeout)
+
+    class Reader:
+        def join(self, timeout=None):
+            pass
+
+        def is_alive(self):
+            return False
+
+    class Writer:
+        def write_with_deadline(self, *args):
+            pytest.fail("a failed descendant snapshot must suppress graceful exit")
+
+    process = Process()
+    handle = ProcessHandle.__new__(ProcessHandle)
+    handle._retirement_lock = threading.Lock()
+    handle._retirement_started = False
+    handle._retirement_complete = False
+    handle._retirement_result = None
+    handle._retirement_descendants = None
+    handle._retirement_snapshot_failed = False
+    handle._kill_called = False
+    handle._exit_attempted = False
+    handle._process = process
+    handle._rcc_wrapper = None
+    handle._reader = Reader()
+    handle._writer = Writer()
+    handle._socket = None
+
+    monkeypatch.setattr(
+        "actions.server._common.process.snapshot_process_descendants",
+        lambda _pid: (_ for _ in ()).throw(PermissionError("snapshot denied")),
+    )
+
+    def force_kill(_process, _descendants, _deadline, *, snapshot_complete_before_call):
+        assert not snapshot_complete_before_call
+        process.dead = True
+        return ProcessTreeCleanupResult(
+            wrapper_reaped=True,
+            live_descendant_pids=(),
+            zombie_descendant_pids=(),
+            errors=(),
+            descendant_snapshot_complete=False,
+        )
+
+    monkeypatch.setattr(
+        "actions.server._common.process.force_kill_process_tree_until", force_kill
+    )
+
+    first = handle.retire(time.monotonic() + 1)
+    second = handle.retire(time.monotonic() + 1)
+
+    assert first.state == "pending"
+    assert second.state == "pending"
+    assert not first.descendant_snapshot_complete
+    assert not second.descendant_snapshot_complete
+
+
+def test_rcc_wrapper_retains_failed_snapshot_after_wrapper_exit(monkeypatch):
+    from actions.server._common.process import ProcessTreeCleanupResult
+    from actions.server._rcc_runtime_adapter import RccProcessHandle
+
+    class Process:
+        pid = 123
+
+        def poll(self):
+            return -9
+
+    handle = RccProcessHandle.__new__(RccProcessHandle)
+    handle.process = Process()
+    handle._owned_processes = []
+    handle._owned_snapshot_complete = False
+    handle.last_cleanup_result = None
+
+    def force_kill(
+        process, descendants, deadline, *, snapshot_complete_before_call
+    ):
+        assert process is handle.process
+        assert descendants == []
+        assert not snapshot_complete_before_call
+        return ProcessTreeCleanupResult(
+            wrapper_reaped=True,
+            live_descendant_pids=(),
+            zombie_descendant_pids=(),
+            errors=(),
+            descendant_snapshot_complete=snapshot_complete_before_call,
+        )
+
+    monkeypatch.setattr(
+        "actions.server._common.process.force_kill_process_tree_until", force_kill
+    )
+
+    first = handle.force_kill_until(time.monotonic() + 1)
+    second = handle.force_kill_until(time.monotonic() + 1)
+
+    assert not first.execution_stopped
+    assert not second.execution_stopped
+    assert not handle._owned_snapshot_complete
+
+
+def _wait_until(predicate, timeout):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if predicate():
+            return True
+        time.sleep(0.01)
+    return predicate()
+
+
 def test_process_startup_failure_closes_listener_and_accept_future(
     monkeypatch, tmp_path
 ):
@@ -1030,12 +1430,16 @@ def test_process_pool_releases_capacity_when_warmup_fails(monkeypatch):
             self.killed = True
             self.reaped = True
 
+        def retire(self):
+            self.reaped = True
+            return True
+
     class TrackingSemaphore:
         def __init__(self):
             self.acquired = False
             self.release_count = 0
 
-        def acquire(self, timeout=None):
+        def acquire(self, blocking=True, timeout=None):
             assert not self.acquired
             self.acquired = True
             return True
@@ -1051,15 +1455,20 @@ def test_process_pool_releases_capacity_when_warmup_fails(monkeypatch):
     pool._lock = process_pool.threading.Lock()
     pool._running_processes = {}
     pool._idle_processes = {"key": {fake_process}}
+    pool._pending_retirements = {}
     semaphore = TrackingSemaphore()
     pool._processes_running_semaphore = semaphore
     pool.action_package_id_to_action_package = {
         "package": SimpleNamespace(id="package")
     }
-    pool._remove_from_running_processes = lambda process: None
-    pool._warmup_processes = lambda: (_ for _ in ()).throw(
-        RuntimeError("forced warmup failure")
-    )
+    pool._remove_from_running_processes = lambda process: pool._running_processes.clear()
+    def fail_warmup_after_retirement():
+        assert fake_process not in pool._pending_retirements
+        with pool._lock:
+            assert pool._count_total_processes() == 0
+        raise RuntimeError("forced warmup failure")
+
+    pool._warmup_processes = fail_warmup_after_retirement
     monkeypatch.setattr(process_pool, "_get_process_handle_key", lambda *args: "key")
     action = SimpleNamespace(action_package_id="package", name="action")
 
@@ -1068,7 +1477,7 @@ def test_process_pool_releases_capacity_when_warmup_fails(monkeypatch):
     ), pool.obtain_process_for_action(action):
         pass
 
-    assert fake_process.killed is True
+    assert fake_process.reaped is True
     assert semaphore.release_count == 1
 
 

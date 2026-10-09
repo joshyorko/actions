@@ -14,9 +14,11 @@ import subprocess
 import threading
 import uuid
 from collections.abc import Callable, Sequence
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Literal
+
+from actions.server._common.process import ProcessTreeCleanupResult
 
 RCC_VERSION = "v18.19.3"
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
@@ -436,6 +438,9 @@ class RccProcessHandle:
     def __init__(self, process: subprocess.Popen, receipt_file: Path):
         self.process = process
         self.receipt_file = receipt_file
+        self._owned_processes: list[object] | None = None
+        self._owned_snapshot_complete = False
+        self.last_cleanup_result: ProcessTreeCleanupResult | None = None
 
     @property
     def pid(self) -> int:
@@ -450,6 +455,41 @@ class RccProcessHandle:
 
     def wait(self, timeout: float | None = None) -> int:
         return self.process.wait(timeout=timeout)
+
+    def capture_owned_processes(self):
+        """Snapshot wrapper descendants before terminal shutdown can reparent them."""
+        from actions.server._common.process import snapshot_process_descendants
+
+        self._owned_processes = snapshot_process_descendants(self.process.pid)
+        self._owned_snapshot_complete = True
+        return self._owned_processes
+
+    def force_kill_until(self, deadline: float) -> ProcessTreeCleanupResult:
+        """Force-stop the captured wrapper tree and wait within one deadline."""
+        snapshot_error = None
+        from actions.server._common.process import force_kill_process_tree_until
+
+        if self._owned_processes is None:
+            try:
+                self.capture_owned_processes()
+            except Exception as exc:
+                self._owned_processes = []
+                snapshot_error = f"descendant snapshot unavailable: {exc}"
+        cleanup_result = force_kill_process_tree_until(
+            self.process,
+            self._owned_processes,
+            deadline,
+            snapshot_complete_before_call=self._owned_snapshot_complete,
+        )
+        if snapshot_error:
+            cleanup_result = replace(
+                cleanup_result,
+                descendant_snapshot_complete=False,
+                errors=(*cleanup_result.errors, snapshot_error),
+            )
+        self.last_cleanup_result = cleanup_result
+        self._owned_snapshot_complete = cleanup_result.descendant_snapshot_complete
+        return cleanup_result
 
 
 def new_receipt_path(datadir: Path) -> Path:

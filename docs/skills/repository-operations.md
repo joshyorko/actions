@@ -1135,22 +1135,40 @@ release.
 
 TCP worker startup owns its listener, accept future, and spawned wrapper.
 Startup failure attempts listener closure, accept cancellation, and wrapper
-cleanup while preserving the primary exception. Cleanup is not yet bounded end
-to end: protocol writes and the RCC wrapper wait can block. Already-exited
-workers must still complete lifecycle accounting; a liveness check alone does
-not establish descendant drain or receipt completion. The existing capacity
-regression covers warmup failure after successful cleanup, not cleanup failure.
+cleanup while preserving the primary exception. Completed-worker retirement has
+a single 10-second deadline, with the last 2 seconds reserved for force cleanup
+and reaping. It snapshots descendants before sending the terminal exit frame;
+that frame uses the retained TCP socket and a deadline-bounded writer lock and
+raw `sendall`, without buffered flush or close. Blocking retirement and retry
+run outside the pool lock. An incomplete retirement remains pending and
+non-reusable; an action finalizer retains its one semaphore token until the
+wrapper is reaped and no observed live descendant remains. Retry is in-band,
+and a genuinely free additional capacity slot remains usable.
+
+The bounded process-tree result distinguishes wrapper reaping, observed live
+descendants, and zombie descendants. A zombie is reported and makes
+`descendant_reap_complete` false, but does not hold execution capacity forever;
+this is not evidence that every descendant PID was reaped. If the wrapper
+crashes before the first ownership snapshot, legacy capacity recovery is
+preserved with an explicit `crash_unverified` result and a diagnostic. That
+recovery does not prove descendant coverage. A controlled retirement whose
+snapshot fails remains pending. Process ownership created after the last
+successful snapshot can still escape observation.
 
 The preloaded worker treats JSON-RPC `method: "exit"` as an orderly consumer
 stop. Because command execution is synchronous in that consumer, an active
 Action completes before exit is observed; commands queued after the exit frame
 are discarded. Stream EOF remains abnormal and emits an explicit diagnostic.
 The worker entrypoint still catches that exception and returns process status
-zero, so this protocol repair does not classify EOF as a nonzero worker failure.
-It also does not connect exit to process-pool retirement or prove RCC wrapper,
-lease, or capacity cleanup. Tests for this boundary are in
-`test_preload_actions_exit.py`; stronger EOF status handling and end-to-end
-retirement remain separate work.
+zero, so EOF is not classified as a nonzero worker failure. Completed and idle
+pool workers use the bounded retirement protocol above; active cancellation
+continues to use force termination without sending `exit` or waiting through a
+grace period. These changes do not prove complete descendant reaping, cover
+children created after ownership capture or every abrupt-crash case, normalize
+failed RCC receipts, or establish full #134 acceptance. No live RCC/provider or
+native-platform lifecycle proof is implied. Tests for the protocol boundary
+are in `test_preload_actions_exit.py` and
+`test_rcc_runtime_adapter.py`.
 
 The provisional adapter classifies reload inputs from normalized environment
 fields (`spec-version`, dependency sets, and post-install commands), not from
@@ -1211,9 +1229,11 @@ separate outcomes. An Action may return `PASS` while intentional pool
 termination produces `status: failed`, `exitCode: -1`, and
 `reason: child exited non-zero`. That receipt remains a wrapper lifecycle
 failure even when artifact identity, verification, and lease identity validate.
-Graceful retirement requires bounded worker shutdown and wrapper completion;
-forced cancellation and descendant drain require separate evidence. Neither
-result establishes full #134 acceptance.
+The bounded retirement result is one pool-lifecycle signal, separate from the
+Action execution result and RCC terminal receipt. Preserve failed wrapper
+receipts. Neither wrapper reaping nor stopped observed descendants establishes
+complete descendant PID reaping, graceful lease cleanup, or full #134
+acceptance.
 
 The outer Dakota CLI refuses an existing receipt path before resolving toolchain
 environment keys or creating CLI supervisor state. The worker retains its
