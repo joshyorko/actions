@@ -1381,6 +1381,27 @@ acceptance. Neither the historic 422 nor the warm 503 establishes an RCC
 defect. Do not claim complete #134 acceptance from these cells or the earlier
 `ef9195da` receipt.
 
+After integrating `ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47`, the bounded
+candidate harness builds Actions Core 1.0.2 and HTTP Helper 1.0.3. On combined
+source `d9a2d11806f5d263938a82ca5e4c429f43e1d865`, the initial publish/acquire,
+authenticated Action, SQLite, strict artifact verification, and wrapper exit
+0 passed. The same-provider 503-before-exec negative also passed with no child
+side effect and an unchanged initial receipt. Receipt
+`worker-exit-evidence/acceptance-d9a2d118.json` has SHA-256
+`ebf4794db9ac03cc1299a0fd45c0d7e29023d5c972fb62398ab8c4bf92a26ad4`; the
+run log SHA-256 is
+`3bfa1ce1034c2361a93a9064d8de410bef5339c333a1ea522f26f129d9f8003c`. The
+overall harness remains FAIL because the separate provider-backed offline-warm
+attempt receives 503 and fails closed. Its action, artifact-verification,
+wrapper-exit, and zero-request cells remain failed; provider-free warm restart
+and full #134 acceptance are not established.
+
+The combined-source configured Runtime suite passed 742 tests with 10 skips;
+the earlier invocation interrupted at 1% is incomplete evidence only. Package
+lint and typecheck passed, and the acceptance script passed Ruff check and
+format check. The completed suite log SHA-256 is
+`97579afcf92415b920c73f6821bfc100ac50fcf34b332db74ff0c0e1ea307c3c3`.
+
 Its separate CLI watchdog does not by itself prove cleanup of every descendant.
 Cleanup coverage must include an owner that exits before timeout while a
 detached child retains its output pipes: discovery only during teardown loses
