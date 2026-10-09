@@ -1,0 +1,103 @@
+{
+  "observed_at": "2026-10-09T19:09:18.660Z",
+  "target": "cas-worker-01",
+  "machine_capacity": {
+    "cpu": 16,
+    "available_ram_bytes": 30957625344,
+    "disk_free_bytes": 242365464576,
+    "source": "Owner Devsy workspace_diagnostics",
+    "workspace_uid": "default-ca-0b24d"
+  },
+  "checkout": {
+    "path": "/workspaces/actions",
+    "remote": "https://github.com/joshyorko/actions.git",
+    "branch": "community",
+    "head": "00c207fe1ebae20804056e2b17982476ee75386a",
+    "clean": true
+  },
+  "base": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+  "bootstrap": {
+    "thread": "01a121ed-85b6-7000-b54a-649bc53e7224",
+    "turn": "01a12208-3c19-7563-8cd7-7597afab97e8",
+    "replayed": false,
+    "native_policy": {
+      "approvalPolicy": "never",
+      "sandbox": {
+        "type": "dangerFullAccess"
+      }
+    },
+    "native_receipt": "thread/resume response and thread/settings/updated event; summary effective_configuration null was not used as proof",
+    "completed": true
+  },
+  "workers": [
+    {
+      "name": "devsy-native-auth",
+      "cwd": "/workspaces/actions-worktrees/devsy-native-auth",
+      "branch": "devsy/native-auth-acceptance-20261009",
+      "request_id": "actions-devsy-native-auth-20261009-1907-v1",
+      "state": "accepted",
+      "wait_mode": "dispatch",
+      "thread_id": "01a1220f-944d-7f22-94a4-112dc13be035",
+      "turn_id": "01a1220f-9533-7820-8c72-143d5d4bb444",
+      "replayed": false,
+      "retry_same_request_id": "returns_receipt_without_dispatch",
+      "native_state_authoritative": true,
+      "effective": {
+        "approval_policy": "never",
+        "sandbox_policy": {
+          "type": "dangerFullAccess"
+        },
+        "model": "gpt-6-luna",
+        "model_provider": "headroom",
+        "effort": "max"
+      }
+    },
+    {
+      "name": "devsy-workitems-consumer",
+      "cwd": "/workspaces/actions-worktrees/devsy-workitems-consumer",
+      "branch": "devsy/workitems-consumer-acceptance-20261009",
+      "request_id": "actions-devsy-workitems-consumer-20261009-1907-v1",
+      "thread_id": "01a12210-29e9-7fb3-91fc-644065721cb3",
+      "state": "active confirmed by exact-cwd discovery after HTTP502; no replay",
+      "effective": {
+        "approval_policy": "never",
+        "sandbox_policy": {
+          "type": "dangerFullAccess"
+        },
+        "model": "gpt-6-luna",
+        "model_provider": "headroom",
+        "effort": "medium"
+      },
+      "initial_error": "ToolCallFailed (HTTP 502): The app threw McpError: McpError was thrown without a message. Recovery: Fix the input or the app code that threw this error, then retry."
+    },
+    {
+      "name": "devsy-native-distribution",
+      "cwd": "/workspaces/actions-worktrees/devsy-native-distribution",
+      "branch": "devsy/native-distribution-20261009",
+      "request_id": "actions-devsy-native-distribution-20261009-1907-v1",
+      "state": "accepted",
+      "wait_mode": "dispatch",
+      "thread_id": "01a12211-01b3-7850-b508-bd7959b8210c",
+      "turn_id": "01a12211-024b-7b50-847b-0ab16aed1327",
+      "replayed": false,
+      "retry_same_request_id": "returns_receipt_without_dispatch",
+      "native_state_authoritative": true,
+      "effective": {
+        "approval_policy": "never",
+        "sandbox_policy": {
+          "type": "dangerFullAccess"
+        },
+        "model": "gpt-6-luna",
+        "model_provider": "headroom",
+        "effort": "max"
+      }
+    }
+  ],
+  "reserved_canvas": {
+    "cwd": "/workspaces/actions-worktrees/devsy-canvas-contract",
+    "head": "3ed98ddbac3354c59414b8411b295db2e15d3545",
+    "disposition": "reserved; no thread; Cloud E owns100"
+  },
+  "parked_approvals": "untouched",
+  "upstream_disposition": "No confirmed upstream defect. Read-only discovery HTTP502 recovered on one bounded retry; mutation timeout reconciled to active native thread without replay."
+}

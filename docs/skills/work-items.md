@@ -49,6 +49,13 @@ Run.
 - SQLite reservation must acquire `BEGIN IMMEDIATE` before FIFO selection, order by `created_at ASC, rowid ASC` so equal timestamps retain SQLite insertion order without a schema migration, conditionally update the selected `PENDING` row in that same transaction, and roll back on errors; this claims each pending item once across competing processes while retaining the adapter's 30-second SQLite lock timeout.
 - Queue and output queue names remain explicit across producer, consumer, scheduler, trigger, and preloaded-action boundaries.
 - Action Server REST, scheduler, and trigger paths load the installed Work Items distribution under a private module name so a project-root `actions.py` cannot shadow it; producers seed their datadir-owned SQLite adapter directly instead of mutating library-global context.
+
+`ActionServerProcess` selects a packaged Runtime only when
+`SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE` is supplied; otherwise it
+starts source mode with `python -m actions.server`. A cwd containing `actions.py`
+shadows the `actions` package in source mode. A test using that fixture is
+packaged-runtime evidence only when it explicitly selects, validates and
+identifies the executable; its name or integration marker is not artifact proof.
 - SQLite payload reads preserve every JSON shape exactly and raise `ValueError` for malformed stored JSON; the current Action Server REST model imposes a narrower object-or-null boundary.
 - `State.COMPLETED` compatibility and public aliases are migration-sensitive.
 - FileAdapter's legacy numbered attachment layout requires pre-mutation migration before index-changing deletion; never derive legacy ownership from a post-deletion index.
@@ -81,7 +88,10 @@ as UTC before orphan-recovery comparisons; DocumentDB stores UTC-aware datetime 
 queries. The pytest suite keeps `asyncio_mode = "auto"`; its locked
 pytest-asyncio 0.21 runtime does not support a default fixture-loop-scope option.
 SQLite race tests use the `spawn` multiprocessing context, avoiding a multithreaded
-test runner's unsafe `fork` warning. The v1 `download_file` and `download_files`
+test runner's unsafe `fork` warning. When a regression test synchronizes a legacy
+select-then-update race, place its barrier after `fetchone()` captures the candidate
+and before the update; SQLite trace callbacks run before statement execution and
+cannot prove both workers observed the same row. The v1 `download_file` and `download_files`
 aliases remain public compatibility APIs; their ported tests must capture their
 intentional deprecation warnings rather than leaking them into verification.
 

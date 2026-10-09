@@ -1,0 +1,538 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-09T20:44:35Z",
+  "repository": "joshyorko/actions",
+  "capture_method": "Local Cloud `git worktree list --porcelain`, per-worktree `git rev-parse HEAD`, `git symbolic-ref --short -q HEAD`, and `git status --porcelain=v1 --untracked-files=all`; remote pointers via read-only `git ls-remote origin`.",
+  "local_worktrees": [
+    {
+      "path": "/workspace/actions",
+      "head": "7c98236069171f57031218f938963238986293bd",
+      "branch": "work",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/admission",
+      "head": "e032e95d38c91aead08d30b42ec7620b8ea726a4",
+      "branch": "integration/cloud-convergence-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/api-doc-source-links",
+      "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "branch": "docs/api-source-links-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/canvas-authoring",
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "branch": "feature/issue-100a-public-mcp-app-authoring-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/canvas-decision",
+      "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "branch": "docs/issue-100-authoring-decision-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/canvas-fixture-python",
+      "head": "b16824a91f68e8aafeae6ca4175866805d250081",
+      "branch": "test/issue-100b-fixture-roundtrip-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/canvas-renderer",
+      "head": "842c32d59a7dd388c82437cc46e66a66b88b499e",
+      "branch": "feature/issue-99a-query-renderer-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/convergence",
+      "head": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+      "branch": "integration/community-release-20261008",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/credential-check",
+      "head": "1abafea4e08766a71a4f4fe8173101af1e368428",
+      "branch": "release/http-helper-credential-check-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/deployment-admission",
+      "head": "57399b60496b98fea020f26e576d47bcb0d440bf",
+      "branch": "docs/upstream-reporting-policy-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/governance",
+      "head": "8b620d5a3c301351fb59c7784869ae6eee04fbed",
+      "branch": "resume/community-evidence-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/integration",
+      "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "branch": "resume/community-blockers-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/mcp-showcase-proof",
+      "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "branch": "test/mcp-v2-showcase-protocol-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/mcp-showcase-template",
+      "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "branch": "feature/mcp-v2-showcase-template-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/package-credential-check",
+      "head": "7501198b3cbd834a79c132d398abb5e05c852582",
+      "branch": "release/package-credential-availability-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/rcc",
+      "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "branch": "resume/rcc-review-20261009",
+      "dirty_paths": [
+        "work/pr235-body.md"
+      ]
+    },
+    {
+      "path": "/workspace/work/community-resume/release-final",
+      "head": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+      "branch": "integration/runtime-release-final-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/robot",
+      "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
+      "branch": "resume/robot-native-gates-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/robot-cleanup",
+      "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
+      "branch": "repair/robot-cleanup-ownership-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/robot-filesystem-identity",
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "branch": "test/robot-filesystem-identity-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/robot-final-copy",
+      "head": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
+      "branch": "test/robot-package-yaml-admission-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/robot-staging",
+      "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "branch": "repair/robot-private-staging-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/runtime-combined-validation",
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "branch": null,
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/runtime-registry-canary",
+      "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "branch": "release/runtime-registry-compatibility-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/runtime-release-notes",
+      "head": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "branch": "docs/runtime-1.0.3-release-notes-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/sol-native-review",
+      "head": "90c37991942aad12b1008bdb95ab8ee95e32d05c",
+      "branch": null,
+      "dirty_paths": [
+        "work/sol-pr257/baseline-static-results.json",
+        "work/sol-pr257/baseline/.github/workflows/_gen_workflows.py",
+        "work/sol-pr257/baseline/devutils/tests/test_actions_runtime_release_line.py",
+        "work/sol-pr257/baseline/devutils/tests/test_runtime_release_workflows.py",
+        "work/sol-pr257/baseline_static.py",
+        "work/sol-pr257/homebrew-README-ff879e20.md",
+        "work/sol-pr257/homebrew-head.txt",
+        "work/sol-pr257/independent-pr257-review.md",
+        "work/sol-pr257/probe-results.json",
+        "work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/actions-runtime-1.0.3-sha256.txt",
+        "work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/linux64/action-server",
+        "work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/macos-arm64/action-server",
+        "work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/windows64/action-server.exe",
+        "work/sol-pr257/pytest-tmp/test_binary_release_publishes_current",
+        "work/sol-pr257/pytest-tmp/test_generated_recovery_is_ren0/actions_runtime_recovery.yml",
+        "work/sol-pr257/pytest-tmp/test_generated_recovery_is_rencurrent",
+        "work/sol-pr257/pytest-tmp/test_generated_runtime_invento0/repo/action_server/scripts/publish_verified_runtime.py",
+        "work/sol-pr257/pytest-tmp/test_generated_runtime_inventocurrent",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/HEAD",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/config",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/description",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/applypatch-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/commit-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/fsmonitor-watchman.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/post-update.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-applypatch.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-commit.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-merge-commit.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-push.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-rebase.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-receive.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/prepare-commit-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/push-to-checkout.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/sendemail-validate.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/update.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/info/exclude",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/packed-refs",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/repo/",
+        "work/sol-pr257/pytest-tmp/test_native_release_accepts_tacurrent",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/HEAD",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/config",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/description",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/applypatch-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/commit-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/fsmonitor-watchman.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/post-update.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-applypatch.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-commit.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-merge-commit.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-push.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-rebase.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-receive.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/prepare-commit-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/push-to-checkout.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/sendemail-validate.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/update.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/info/exclude",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/packed-refs",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/repo/",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_focurrent",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/HEAD",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/config",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/description",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/applypatch-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/commit-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/fsmonitor-watchman.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/post-update.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-applypatch.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-commit.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-merge-commit.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-push.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-rebase.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-receive.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/prepare-commit-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/push-to-checkout.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/sendemail-validate.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/update.sample",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/info/exclude",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/packed-refs",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/repo/",
+        "work/sol-pr257/pytest-tmp/test_native_release_rejects_tacurrent",
+        "work/sol-pr257/pytest-tmp/test_optional_native_signing_e0/output",
+        "work/sol-pr257/pytest-tmp/test_optional_native_signing_e1/output",
+        "work/sol-pr257/pytest-tmp/test_optional_native_signing_e2/output",
+        "work/sol-pr257/pytest-tmp/test_optional_native_signing_e3/output",
+        "work/sol-pr257/pytest-tmp/test_optional_native_signing_ecurrent",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/bin/uv",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/HEAD",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/config",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/description",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/applypatch-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/commit-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/fsmonitor-watchman.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/post-update.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-applypatch.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-commit.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-merge-commit.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-push.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-rebase.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-receive.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/prepare-commit-msg.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/push-to-checkout.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/sendemail-validate.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/update.sample",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/info/exclude",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/packed-refs",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/repo/",
+        "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ancecurrent",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/calls",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/gh",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/linux/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/macos/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/windows/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-linux",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-macos",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-windows",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/state.json",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/calls",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/gh",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/linux/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/macos/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/windows/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-linux",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-macos",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-windows",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/state.json",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/calls",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/gh",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/linux/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/macos/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/windows/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-linux",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-macos",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-windows",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/state.json",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/calls",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/gh",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/list-error",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/linux/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/macos/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/windows/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-linux",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-macos",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-windows",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/state.json",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/calls",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/gh",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/linux/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/macos/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/windows/signing-status.txt",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-linux",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-macos",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-windows",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/state.json",
+        "work/sol-pr257/pytest-tmp/test_recovery_publication_outscurrent",
+        "work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_binary_release.yml",
+        "work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_pypi_release.yml",
+        "work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_recovery.yml",
+        "work/sol-pr257/pytest-tmp/test_release_workflow_files_arcurrent",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts0/actions-runtime-manifest.sha256",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts0/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts1/actions-runtime-manifest.sha256",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts1/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_acceptscurrent",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_injectscurrent",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_parses_current",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_proceedcurrent",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects0/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects1/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects2/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects3/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects4/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects5/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejectscurrent",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_requirecurrent",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/actions-runtime-manifest.sha256",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/actions_runtime-1.0.0.tar.gz",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/unexpected.txt",
+        "work/sol-pr257/pytest-tmp/test_runtime_publisher_verifiecurrent",
+        "work/sol-pr257/review_probe.py"
+      ]
+    },
+    {
+      "path": "/workspace/work/community-resume/tunnel",
+      "head": "554630899c6eab23b922ba6558347e7f2c439c00",
+      "branch": "resume/tunnel-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/tunnel-edge",
+      "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "branch": "feature/tunnel-edge-verification-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/tunnel-tls-acceptance",
+      "head": "274042cd555d0340dc07e86f651986ab49ba85a7",
+      "branch": "test/tunnel-tls-acceptance-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/wheel-inventory",
+      "head": "71f55ddd1ce34720db0e13433a2f1f5c9eed70a0",
+      "branch": "release/actions-core-1.0.2-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/worker-exit",
+      "head": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+      "branch": "repair/rcc-trust-context-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/workitems",
+      "head": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e",
+      "branch": "release/http-helper-redirect-fix-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/workitems-artifacts",
+      "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "branch": "feature/workitems-native-artifact-manifest-20261009",
+      "dirty_paths": []
+    },
+    {
+      "path": "/workspace/work/community-resume/workitems-ci",
+      "head": "1b0217c810b7522416003ef8e6d5ded3016d3735",
+      "branch": "test/native-workitems-ci-20261009",
+      "dirty_paths": []
+    }
+  ],
+  "remote_refs": {
+    "refs/heads/community": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "refs/heads/feature/mcp-v2-showcase-template-20261009": "9193989985de15dc6d5fecfd655042957cf9926c",
+    "refs/heads/integration/community-release-20261008": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+    "refs/heads/integration/runtime-release-final-20261009": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e"
+  },
+  "current_program_facts": {
+    "community": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "integration": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+    "runtime_candidate": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+    "issue_99": {
+      "slice": "99-A portable pure React renderer + shared fixture",
+      "branch": "feature/issue-99a-query-renderer-20261009",
+      "head": "842c32d59a7dd388c82437cc46e66a66b88b499e",
+      "reported_checks": "6 component tests, TypeScript check, schema validation PASS",
+      "limits": [
+        "pure React renderer and fixture only",
+        "production main/bridge not implemented",
+        "actual browser proof NOT_RUN"
+      ]
+    },
+    "issue_100": {
+      "slice": "100-A public MCP App authoring",
+      "pr": 263,
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "branch": "feature/issue-100a-public-mcp-app-authoring-20261009",
+      "source_review": "independently accepted bounded source seam",
+      "reported_checks": "38 focused + 1 real-process + 2 wheel tests PASS",
+      "limits": [
+        "broader configured suites blocked by Cloud environment",
+        "remote assigned reviewer owns full gates",
+        "no whole #100 acceptance"
+      ]
+    },
+    "issue_100b": {
+      "owner": "E",
+      "next": "Python round-trip using F single fixture",
+      "scope_limit": "schema/fixture interchange only; no Runtime dispatch, host authorization, or app-binding claim"
+    },
+    "issue_126": {
+      "template_pr": 265,
+      "template_head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "template_branch": "feature/mcp-v2-showcase-template-20261009",
+      "state": "repairing generator boundary after root found authored development data omitted",
+      "reported_checks": "49 tests + 4 template tests PASS locally",
+      "pending": [
+        "clean-wheel NOT_RUN",
+        "hosted checks pending",
+        "whole #126 open"
+      ],
+      "historical_d6e1": "d6e1a586a609730c4047da75659de200b15b99bf is an ancestor, not current head/ref",
+      "source_protocol_pr": 262,
+      "source_protocol_head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "source_protocol_state": "bounded source proof accepted; not template acceptance"
+    },
+    "issue_208": {
+      "pr": 256,
+      "branch": "devsy/workitems-consumer-acceptance-20261009",
+      "head": "aa12ef5f5047813d1543d9b6f6cff7f366650e9c",
+      "state": "source recovery/push verified; not a whole consumer/platform acceptance"
+    },
+    "issue_211": {
+      "pr": 257,
+      "branch": "devsy/native-distribution-20261009",
+      "head": "43177fc3ad077bf65f92cb867d3e3c62aad7e79f",
+      "review": "independent source-contract review ACCEPT",
+      "test_observation": "95 tests collected; do not claim full suite passed",
+      "hosted_checks": "pending"
+    },
+    "issue_153": {
+      "pr": 264,
+      "branch": "devsy/native-auth-acceptance-20261009",
+      "head": "173ca8e59245581ab1b048fbad42a29c41418cab",
+      "state": "recovered source push; acceptance remains separately pending"
+    },
+    "pr_259": {
+      "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "observed_at": "2026-10-09T20:38:56Z",
+      "status": "Linux and Windows jobs pass; four macOS jobs queued; audit pass"
+    },
+    "pr_255": {
+      "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "status": "required Core, Runtime, RCC, Helper, audit checks green"
+    },
+    "pr_260": {
+      "head": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "status": "required RCC, native, audit checks green"
+    },
+    "devsy_coordinator": {
+      "thread": "01a1222f-e720-7183-9634-2edb76d30326",
+      "turn": "01a12251-b60d-7c20-b806-fc9c9565f128",
+      "latest_status_source": "root coordination message reports same continuation active at 20:36Z; five lane histories present",
+      "limits": [
+        "do not infer all five lanes currently active",
+        "no newer native per-lane status or full remote checkout SHAs included here"
+      ]
+    },
+    "canvas_backend_constraints": {
+      "source": "evidence/canvas-common-api-authorization-seams-20261009.md",
+      "missing_criteria": {
+        "#83": "durable Run/Attempt identity, fencing, input/result/artifact references and pinned ownership snapshot",
+        " #130": "immutable Package Revision identity and deterministic capability projection",
+        " #135": "deterministic package compilation into Package Revision and capability/binding manifest",
+        "#129": "Workspace-scoped Deployment identity, bindings, policy, actor authorization and immutable resolution"
+      },
+      "existing_api_limits": [
+        "legacy Action/Run records lack Workspace/Deployment/Revision/package/capability/runtime-plan identity",
+        "MCP tool dispatch resolves by registered tool name, not stable authorized app binding ID",
+        "MCP result path does not expose its created Run ID as a handle",
+        "artifact API resolves legacy `(run_id, artifact_name)` and uses server-level auth, not per-Workspace binding authorization"
+      ],
+      "fixture_boundary": "100-B may test a shared schema and Python/JSON/TypeScript round-trip only; it does not establish Runtime dispatch, artifact authorization, Canvas app binding or #83 acceptance.",
+      "source_sha256": "072b0bf84e341c1a155856028367a78d6c560e6af66cdabb0db1a4d222dd7847"
+    }
+  }
+}

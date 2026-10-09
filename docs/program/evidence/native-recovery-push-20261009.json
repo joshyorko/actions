@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-10-09T20:33:00Z",
+  "workitems": {
+    "tip": "aa12ef5f5047813d1543d9b6f6cff7f366650e9c",
+    "branch": "devsy/workitems-consumer-acceptance-20261009",
+    "bytes": 1473,
+    "bundle_sha256": "3c87f713a0dd621f6bfc19fe6e42bfc4c6c01092f7d747c0aed7e14d8e84ca29"
+  },
+  "distribution": {
+    "tip": "43177fc3ad077bf65f92cb867d3e3c62aad7e79f",
+    "branch": "devsy/native-distribution-20261009",
+    "bytes": 3374,
+    "bundle_sha256": "df0f1b4259f271b3194435b23b085dc3f4775915b769c76b4f9ffec4b881bac1"
+  },
+  "auth": {
+    "tip": "173ca8e59245581ab1b048fbad42a29c41418cab",
+    "branch": "devsy/native-auth-acceptance-20261009",
+    "bytes": 6626,
+    "bundle_sha256": "1b7a317bb8745621f9337c13dbc45f173bf747ebe62aef4a1f2731080f244aa8"
+  },
+  "verification": [
+    "each base64 payload size/SHA verified",
+    "git bundle verify with present prerequisite",
+    "exact base/tip ancestry and changed file scope reviewed",
+    "git diff --check",
+    "normal push existing histories (auth new branch)",
+    "ls-remote confirmed every tip"
+  ],
+  "scope": "Recovery and publication of source checkpoints only; not implementation/release acceptance."
+}

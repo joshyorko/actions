@@ -1,5 +1,119 @@
 # Repository Operations
 
+## Community program evidence
+
+The [community issue ledger](../program/community-program-ledger.md) retains
+every open issue's full acceptance body and comments in its machine-readable
+companion. A checkpoint PR or green workflow establishes only the exact tested
+slice, not whole issue acceptance. Keep source, installed-wheel, native,
+packaged-browser and published-artifact receipts separate, recording the exact
+candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
+publication success. Recheck dependency sequencing against each retained
+contract before implementation; a cross-reference alone is not a blocking edge.
+
+When projecting a multi-issue program into an execution graph, keep typed
+execution prerequisites, criterion/slice gates, parent coordination, related
+product direction, and full-acceptance aggregation separate. A parent or
+aggregation edge cannot block its child, and a consumer of one upstream
+criterion must not wait for that issue's entire contract to close. Preserve the
+superseded untyped projection as audit provenance, but run cycle and
+topological validation only over active execution prerequisites (including
+slice-to-slice gates). Record the authoritative source for each reclassification
+and verify that issue contracts, raw states, and accounting did not change.
+The community graph validator is part of `ToolkitTest`: run
+`rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`. The existing
+`.github/workflows/developer_toolkit.yml` pull-request matrix discovers its
+`developer/tests` wrapper, which runs the graph regressions and exact `--check`
+projection; keep this gate in that established path rather than creating a
+separate workflow. The projection reads and writes its Markdown, JSON, and
+manifest files as UTF-8 explicitly; do not rely on the host's default text
+encoding. Its CLI fixture exposes child stdout/stderr on failure and forces a
+non-UTF-8 POSIX locale, while the existing Windows ToolkitTest cell exercises
+the native Windows path. Hash-manifested Canvas amendment artifacts also use
+`-text` in `.gitattributes`: Git checkout conversion must not rewrite evidence
+bytes before the validator checks the recorded size and digest.
+
+For Canvas fixture work, distinguish schema/round-trip evidence from product
+authorization: the current MCP dispatcher selects a registered tool by name,
+and legacy Run/artifact routes use server-level credentials rather than a
+Workspace-scoped binding. A fixture cannot prove Runtime dispatch or app
+authorization. Keep the missing criteria explicit: #83 owns durable
+Run/Attempt identity, fencing, input/result/artifact references and a pinned
+ownership snapshot; #129 owns Workspace-scoped Deployment identity, bindings,
+policy, actor authorization and immutable resolution; #130 owns immutable
+Package Revision identity and deterministic capability projection; #135 owns
+deterministic package compilation into a Package Revision and its
+capability/binding manifest. The source-backed interface inventory is in
+`docs/program/evidence/canvas-common-api-authorization-seams-20261009.md`.
+
+A receipt's tested subject is the source state actually executed: record its
+base SHA and any uncommitted delta separately from the later repair head. Do
+not relabel red-before evidence with the repaired head. For authenticated
+HTTP/browser comparisons, record whether each request supplied a synthetic
+bearer; a successful bearer probe and an unauthorized browser request are
+different subjects.
+Before committing an evidence archive, verify each selected receipt's bytes
+against its ledger SHA-256 and reject absolute or parent-traversal archive
+paths. Preserve running and skipped CI states separately from passing results.
+
+When resuming remote work, read the recorded thread's authoritative status and
+last completion/cleanup report before dispatching another turn. A pushed branch
+does not prove its worker stopped. Reuse the recorded thread after reconciliation;
+do not create a replacement because an older connector call failed. Device image
+cleanup and retained executables are separate inventory facts: verify artifact
+bytes directly and retain caller-supplied build claims as unverified provenance.
+Successful remote-thread calls do not validate another connector's pending
+approval flow. Preserve its original request/session and private grant record
+until that specific validation failure is resolved.
+
+For native CAS work, pass supported `approval_policy` and `sandbox` settings on
+the authorized start/resume/turn request, then verify the effective policy from
+the native response or settings event. An aggregate `effective_configuration`
+that is null is not evidence of either access level. Before creating worktrees,
+verify machine, Git root/origin, exact approved base, intended branch, and any
+existing target path's branch/HEAD/dirty state; preserve rather than reset an
+existing checkout. Keep the CAS machine target separate from the repository
+checkout and worker CWD. Give each mutation a unique request ID; after a timeout
+or HTTP 502, discover its exact thread/request and CWD before retrying, and
+reconcile an already-active mutation instead of replaying it. Record worktree
+cleanliness as a timestamped observation. Native user authorization does not
+resume parked Executor approvals.
+
+A completed native commandExecution item proves only that command's exit status;
+it does not prove the enclosing worker turn or thread has ended. Record the
+last explicit thread-state observation separately and leave current status
+unconfirmed until a terminal state is read.
+
+If authorized direct push is unavailable and source transfer is needed, a Git
+bundle can preserve the original commit graph. Include the explicit approved
+base-to-branch range and branch ref; verify the bundle plus SHA-256/size before
+transfer, then verify the imported ref's commit/tree/parent at the receiving
+checkout. Keep bundles source-only; exclude credentials, logs, build outputs and
+artifacts unless separately authorized. A requested or encoded bundle is not
+proof of transfer; retain a receipt at both ends. These are transfer checks,
+not evidence that a particular remote lane completed a bundle handoff. Evidence
+for native path/policy identity: CAS bootstrap response/settings event and
+pre-dispatch inventory in `docs/program/evidence/cas-bootstrap-reconciliation-20261009.md`;
+request receipts are under `docs/program/evidence/devsy-*-dispatch.json`.
+
+A passing focused native step and a failing later process-ownership step are
+distinct evidence. Record both with the same run/job identifiers, keep skipped
+dependent browser checks as NOT_RUN, and do not infer whole-job or release
+success from the focused result.
+
+Inventory entries are timestamped observations while workers remain active,
+not a freeze. Compare the ledger's issue IDs, titles and update timestamps with
+GitHub, but keep its engineering work state distinct from GitHub's open/closed
+state. Refresh next-action pointers against the actual PR head and checks.
+With a narrow `remote.origin.fetch` refspec, `git fetch origin BRANCH` can update
+only `FETCH_HEAD`; use an explicit source/destination refspec and compare the
+remote branch SHA before treating `origin/BRANCH` as current.
+
+The closed observability issue #137 remains referenced by roadmap #82. Preserve
+its retained contract in final vertical verification rather than reopening it
+automatically. #149 remains a living advisory record, and closed quickstart #154
+and homebrew-tools#103 must not generate duplicate execution work.
+
 ## Package Boundaries
 
 Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as
@@ -14,6 +128,31 @@ SHA-256 metadata together; source YAML changes alone do not update shipped templ
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
+A nonempty package-secret check proves presence only; it does not test PyPI
+authentication, token scope, upload, or publication. Keep those facts separate
+from a candidate wheel's index-resolution proof. For example, a fresh Core
+candidate install resolved published Helper 1.0.3 from `files.pythonhosted.org`
+and matched the independently verified release-wheel SHA, while the Core secret
+availability probe first reported empty, then reported nonempty on attempt 2; neither attempt authenticated or uploaded.
+Use the admitted release workflow for publication and verify registry artifacts
+afterward. Evidence: `docs/program/evidence/independent-core-pr248-admission-and-credential-probe-20261009.md`.
+
+The Actions Core tag release workflow admits exactly the version-matched
+`actions_core` universal wheel and source archive. Its Linux verify job rejects
+extra entries and symlinked artifacts, records SHA-256 digests, and uploads the
+two packages with that manifest. The publish job checks the downloaded
+inventory and verifies both digests before invoking Poetry with the configured
+Core token; Twine checks only the wheel and source archive, not the manifest.
+Core's package tests execute these inventory and copy-verification shell steps
+against valid, extra, wrong-tag, symlinked, and modified artifacts. This
+prepublication gate binds the uploaded bytes; it does not prove registry
+availability, a successful PyPI publication, or downstream consumers of the
+published distribution.
+The Core release workflow pins both jobs to `ubuntu-latest`; package tests
+execute its Bash/GNU-utility shell steps only on Linux and keep workflow
+structure and publish-safety assertions active on every platform. Do not run
+these Linux release scripts through macOS BSD utilities or a Windows `bash`
+launcher: those environments do not implement the workflow's shell contract.
 
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
@@ -29,6 +168,14 @@ The producer-consumer template additionally pins
 dependency, and `actions-runtime` is the server distribution rather than a
 template library. Keep the static template-manifest contract synchronized
 with these package boundaries when a published version changes.
+
+Core keeps its released `actions-http-helper` version range in main
+dependencies and points the dev group at the sibling helper source. Install the
+locked dev group before running Core tests: an older registry copy can route
+test-only localhost service calls through a sandbox proxy, while the current
+sibling source lets those tests exercise the helper implementation in this
+checkout. This override is for development and does not change Core's runtime
+dependency floor.
 
 The Action Server frontend uses `action_server/frontend/package.json` and its
 lock as the sole package metadata. `npm ci` is the reproducible,
@@ -176,6 +323,35 @@ resolving a local development install. Published package metadata must use
 versioned distributions; a clean wheel install is required before calling the
 Runtime/Core interoperability contract complete.
 
+When a prerequisite distribution must ship before a broader Runtime checkpoint,
+create a Community-targeted promotion PR containing only that distribution's
+versioned package source, changelog, package tests, and release workflow, plus
+developer documentation support required by that package. Do not merge a mixed
+Runtime integration head merely to make its dependency version available. Run
+package build, exact artifact and metadata checks, strict Twine validation, and
+clean installed-wheel tests against the exact promotion PR head. After merge,
+release only from the exact community-ancestral version tag and verify registry
+artifacts before promoting the next dependent package. Preserve any issue
+acceptance contract separately; an already-published package version does not
+by itself close a broader issue.
+
+Before preparing a package-only promotion from an older checkpoint, compare the
+package's complete tree on the promotion base with the current integration head.
+Carry every retained source, regression-test, and package-metadata change required
+by that comparison, including package-local development dependencies and lockfile
+updates when needed by the configured test gate. A source anchor proves where the
+candidate originated; it does not prove that later package fixes were included.
+Review the complete package diff and state any intentional exclusions before
+tagging. For HTTP helper redirects, a proxy-to-direct redirect must update a
+generated `Host` header to the destination while preserving an explicitly supplied
+`Host`, and must continue stripping credentials; the regression test covers both
+generated and explicit header cases.
+When filtering generated `Host` values from urllib3 `HTTPHeaderDict` inputs, copy
+the header container and remove matching keys case-insensitively. Converting its
+items to a plain `dict` discards repeated field values. Keep a regression through
+the helper's direct no-proxy redirect path, where the helper owns this filtering;
+do not infer that the separate `ProxyManager` path preserves duplicate header fields.
+
 The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
 callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
 The Python API exposes snake-case fields such as `resource_templates`,
@@ -238,6 +414,14 @@ closed. CORS preflight admission is independent of API-key authentication, while
 the actual request remains authenticated. The same allowlist protects browser
 WebSocket handshakes; no-`Origin` WebSocket clients retain the existing
 non-browser path.
+
+Import modules that bind dependency aliases before patching the dependency's
+source module. Otherwise a module's first import can capture the fake callable,
+and monkeypatch teardown can restore that fake as the bound alias's original.
+Patch the already-imported modules together and clear any cached app factory
+around fake server startup. Keep the startup/logging test immediately before the
+assembled CORS/WebSocket admission test in one pytest process: an isolated
+admission test cannot expose this import-order leak.
 Observer callback failures are isolated, logged with only a bounded exception
 diagnostic, and cannot fail the MCP request. The
 route's API-key authentication wraps this middleware and therefore retains its
@@ -265,6 +449,17 @@ separate legacy delivery line. Tagged PyPI runs fail closed when
 verification without publication. Runtime binaries intentionally retain the
 existing `action-server/releases` CDN/S3 object paths and Homebrew version input
 as compatibility handoffs; those paths do not redefine package or tag identity.
+For `actions-http-helper`, credential availability is checked in a separate
+`pypi`-environment workflow with no repository permissions, checkout, package
+installation, registry authentication, or upload command. Run
+`37970443665` attempt 3 reported only that `PYPI_TOKEN_ACTIONS_HTTP_HELPER` was
+nonempty; this is evidence of secret availability, not authentication, token
+scope, artifact correctness, or release readiness. A maintainer reported that
+the host `ghx` wrapper dropped stdin and that native `gh` resolved that reported
+wrapper issue; this does not establish that Cloud `gh` authentication is fixed.
+See the [upstream reporting procedure](https://github.com/joshyorko/actions/blob/57399b60496b98fea020f26e576d47bcb0d440bf/docs/skills/upstream-reporting.md)
+before filing a new issue for a failure; the existing Helper CORS finding is
+tracked in issue 209.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
@@ -275,6 +470,11 @@ the tag is an ancestor of `origin/community` and matches
 verified directory as `actions-runtime-dist`. The workflow publishes the same
 set once when the Runtime secret is configured; without it, the tagged job fails
 at the credential check before PyPI upload, so no release success may be claimed.
+The validator's `--download-root` mode rejects duplicate basenames across
+separate downloaded artifact directories before copying or merging their files.
+Determine whether a failed job attempted publication from its workflow event
+and upload-step conclusions, not its display name. A pull-request job named
+`publish` can fail artifact validation before credential or upload steps run.
 Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
@@ -371,6 +571,18 @@ be regenerated normally with repository-authoritative Poetry 2.1.1 from
 published prerequisites. Never hand-edit lock hashes or add path/direct-URL
 production dependencies. Runtime freeze inputs remain a separate post-candidate
 gate.
+
+Generated Core API source links are built from `devutils.invoke_utils.REPOSITORY_URL`;
+keep that base on the maintained `joshyorko/actions` community branch and
+regenerate package API docs through the package's configured `invoke docs`
+task. Use the package-local Actions Core environment: a shared environment can
+extend the `actions` namespace with Runtime or Work Items modules, causing
+lazydocs to emit those APIs into Core's docs. Before accepting output, verify
+`actions` resolves from the Core source tree and `actions.server` and
+`actions.work_items` are unavailable. Do not patch generated `docs/api` links
+by hand. `test_invoke_utils.py` asserts the source base so a repository-owner or
+branch regression is caught. The configured `devutils` gates in
+`developer/toolkit.py` run `pytest tests` and `ruff check src tests`.
 
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
@@ -907,12 +1119,13 @@ starts workers with RCC `env exec --artifact DIGEST --permissive-local
 --inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
 release.
 
-TCP worker startup owns its listener, accept future, and spawned wrapper. Any
-failure after listener creation closes the listener, cancels and observes the
-accept future, and reaps the owned wrapper without replacing the primary
-exception. Process-pool capacity is released after wrapper cleanup and is
-guaranteed even if warmup recovery raises; the exception-path regressions live
-in the RCC adapter focused test module.
+TCP worker startup owns its listener, accept future, and spawned wrapper.
+Startup failure attempts listener closure, accept cancellation, and wrapper
+cleanup while preserving the primary exception. Cleanup is not yet bounded end
+to end: protocol writes and the RCC wrapper wait can block. Already-exited
+workers must still complete lifecycle accounting; a liveness check alone does
+not establish descendant drain or receipt completion. The existing capacity
+regression covers warmup failure after successful cleanup, not cleanup failure.
 
 The provisional adapter classifies reload inputs from normalized environment
 fields (`spec-version`, dependency sets, and post-install commands), not from
@@ -968,12 +1181,27 @@ mocked parser or RCC health/version check is not acceptance evidence.
 RCC v18.19.2 materializes `env exec` children with the artifact as their
 current directory, so import/discovery must pass the package source directory
 explicitly to `actions metadata`; `PYTHONPATH` alone does not make discovery
-scan the source tree. A successful Action can still leave its receipt with
-`status: failed`, `exitCode: -1`, and `reason: child exited non-zero` when the
-pool intentionally terminates the persistent wrapper after the Action returns
-`PASS`. Treat that as wrapper teardown evidence only when the receipt's exact
-artifact digest, `verification.valid == true`, and non-empty lease identity
-also validate.
+scan the source tree. Record Action execution and RCC wrapper lifecycle as
+separate outcomes. An Action may return `PASS` while intentional pool
+termination produces `status: failed`, `exitCode: -1`, and
+`reason: child exited non-zero`. That receipt remains a wrapper lifecycle
+failure even when artifact identity, verification, and lease identity validate.
+Graceful retirement requires bounded worker shutdown and wrapper completion;
+forced cancellation and descendant drain require separate evidence. Neither
+result establishes full #134 acceptance.
+
+The Dakota candidate-wheel harness records separate unauthenticated rejection,
+authenticated Action, SQLite, artifact verification, wrapper exit and process
+cleanup cells. Every cell must pass for overall acceptance. Preserve the exact
+failed wrapper status, exit code and reason even when Action execution succeeds.
+Its separate CLI watchdog does not by itself prove cleanup of every descendant.
+Cleanup coverage must include an owner that exits before timeout while a
+detached child retains its output pipes: discovery only during teardown loses
+already reparented children. Refresh and retain Runtime ownership before
+cleanup on failure paths as well as success. On Windows, closing a buffered
+pipe while a `communicate()` reader remains blocked can defeat a finite timeout.
+Keep native execution and descendant-reaping claims separate from Linux
+termination evidence; excluding zombies proves stopped execution, not reaping.
 
 With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
 recorded digest through the same provider and each returned the exact digest
@@ -985,6 +1213,10 @@ the adapter rejected the acquisition; the manifest was restored afterward.
 
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
 
+For hosted pull-request validation, record the actual checkout SHA from the workflow log and, for `refs/pull/<number>/merge`, its two parents and tree. The PR head SHA alone does not identify the tested candidate. When the target base advances, generate the synthetic merge for that base and compare its tree with the tested tree before carrying results forward. A raw diff between divergent PR and base tips can misstate which workflow steps survive; inspect the actual three-way merge result and the executed workflow. A combined rollup must pass its focused, full, static, and hosted gates on its exact candidate tree before it replaces separate green PRs.
+
+Classify a merge against the PR's named target. A stacked PR merged into its feature or repair base is integrated only into that branch; source containment or exact merge-tree identity does not mean the change reached `integration` or `community`, and neither proves whole-issue acceptance or release admission. Record the target branch, merge commit and tree separately from downstream refs and issue status. Likewise, a native worker reported `ACTIVE` or an accepted turn proves control-plane state, not current implementation progress. Record progress from timestamped worktree HEAD/diff and exact test evidence; treat source transfer/readback as source availability only.
+
 ## MCP gateway metadata
 
 The `/mcp` metadata middleware forwards any valid JSON-RPC method, but stores
@@ -993,3 +1225,14 @@ Identifier-bearing requests store only the finite provenance classes `tool`,
 `prompt`, `resource`, `template`, or `<redacted>`; raw method/name values are
 used only transiently for payload/header agreement. MCP integration tests use
 the declared `httpx2` compatibility package, including direct HTTP clients.
+
+### Shared Runtime artifact inventory in Core checkpoints
+
+A Core API checkpoint can also run Runtime wheel CI. Preserve its PR-only
+candidate Core wheel setup when carrying release safeguards across branches.
+Use the shared strict Runtime validator for the assembled artifact inventory;
+equivalent manylinux tag ordering is accepted, but duplicate platform slots,
+missing artifacts, unexpected tags, and version mismatches remain rejected.
+The October 8 Core checkpoint reproduced two failing inventory regressions
+before adopting the same validator already reviewed in the release and Runtime
+checkpoints. A failed PR inventory check does not constitute publication.

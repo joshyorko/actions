@@ -1,0 +1,12 @@
+{
+  "target": "cas-worker-01",
+  "approval_policy": "never",
+  "sandbox": "danger-full-access",
+  "model": "gpt-6-luna",
+  "effort": "medium",
+  "wait_for_completion": false,
+  "cwd": "/workspaces/actions-worktrees/devsy-workitems-consumer",
+  "thread_id": "01a12210-29e9-7fb3-91fc-644065721cb3",
+  "request_id": "actions-workitems-browser-followup-20261009-1933-v1",
+  "text": "NEWboundedengineeringcontinuation SAMEthread. Original5bce8cd5pushedverified; rootcreatedPR256 integrationtarget, allOSnativeCIrunning. Keepyourlaneworking, donotstopafterpush. FirstreadPR256checksandanyindependentreviewfindings; thenadvanceNEXT#208acceptancecell onexisting5bcesource: actualpackagedLinuxWorkItemsbackend UI empty/populated/denied/unavailable/backend-error pluskeyboard/narrowviewport. ExistingLinuxnativeconsumerproofnotrepeatunlessneeded; fetchcurrentPR256builtartifactwhenready orreuseexactboundPR253artifact290e(actualserverproductionprojectioncompatiblebutreportexactsource). Normalghartifactdownloadallowed authenticated, no tokenread/export. OwnonlynewWorkItemsspecificacceptance test/script +docs/skills/work-items.md, no sharedsecurity/authproductionfiles, noRCCadapter/providertrust, no releasegenerator. Native-authworkerowns#153origin/sessioncounterexample; reportboundaryandavoiditsfiles. Useisolatedscratch/tmp/browserprofile/datadir/dynamicports/2testworkers. InspectexistingWorkItemsbrowserharnessbeforewriting, notduplicatemockonlytest. Captureactualbackenderrorstatesthroughsupportedfixturefaults/auth notfakeUIpass. Ifnewtestnecessaryimplementfocusedboundedtest; ifUIproductiondefectstopatdeterministicreproandrootcoordinatescodefix. Preserveinitial25pass+fullCIresultexactSHA, no force/rebase. Commit/pushnewverifiedcheckpointwhenneeded, noPRmerge/pub. Keep5bcehistoryunchanged. Returnremaining208matrix, exactartifactreceipt, docsdelta/upstreamdispositionmandatory. Stoponlyatcompletedboundedacceptanceorconcreteblockerthenrootreusescapacity."
+}

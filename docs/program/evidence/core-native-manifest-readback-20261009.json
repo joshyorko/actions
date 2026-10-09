@@ -1,0 +1,41 @@
+{
+  "captured_at_utc": "2026-10-09T20:11:20Z",
+  "source": {
+    "remote_target": "cas-worker-01",
+    "cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+    "thread_id": "01a1222f-e720-7183-9634-2edb76d30326",
+    "turn_id": "01a1222f-e7b8-78f1-9075-dc8007b2d9b7",
+    "native_item_id": "exec-38402261-9242-4ba6-a9db-8e17f3ea8897",
+    "native_item_kind": "commandExecution",
+    "command_status": "completed",
+    "command_exit_code": 0,
+    "captured_via": "tools.codex.list_thread_items, invoked through mcp__codex_apps__executor_execute",
+    "readback_attempts": "The first list_thread_items read returned HTTP 502; one bounded retry succeeded."
+  },
+  "verification_command": "python3 script read /workspaces/actions-worker-state/devsy-native-review/core-artifact/actions-core-dist-11640800236.zip, assert ZIP SHA, read embedded actions-core-manifest.sha256, verify each named file hash, write core-zip-manifest-verification.json, and print JSON receipt",
+  "receipt": {
+    "observed_at": "2026-10-09T20:09:13.862092+00:00",
+    "run_id": 37979108120,
+    "artifact_id": 11640800236,
+    "zip_path": "/workspaces/actions-worker-state/devsy-native-review/core-artifact/actions-core-dist-11640800236.zip",
+    "zip_bytes": 180924,
+    "zip_sha256": "bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89",
+    "embedded_manifest_path": "actions-core-manifest.sha256",
+    "embedded_manifest_sha256": "13d569f77dab422b3361e9c930354c9bbee465c0f02da8816519fed123a078fe",
+    "verified_entries": [
+      {
+        "archive_path": "actions_core-1.0.2.tar.gz",
+        "sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73"
+      },
+      {
+        "archive_path": "actions_core-1.0.2-py3-none-any.whl",
+        "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80"
+      }
+    ],
+    "result": "PASS actual retained ZIP manifest/file hash verification; root admission pending",
+    "limit": "does not prove new final Runtime artifacts or release readiness"
+  },
+  "manifest_contents": null,
+  "manifest_contents_limit": "The existing verification command read the embedded manifest bytes and printed their SHA256 plus verified path/hash pairs, but its stdout did not include the raw manifest lines or bytes. This evidence file preserves exactly the bounded receipt available from that command; it does not reconstruct the manifest contents.",
+  "coordinator_receipt_path": "/workspaces/actions-worker-state/devsy-coordinator/coordination/core-zip-manifest-verification.json"
+}

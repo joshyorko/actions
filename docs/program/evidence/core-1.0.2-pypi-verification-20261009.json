@@ -1,0 +1,75 @@
+{
+  "observed_at": "2026-10-09T19:20:00Z",
+  "repository": "joshyorko/actions",
+  "release": "actions-core 1.0.2",
+  "tag": {
+    "name": "actions-core-1.0.2",
+    "object": "53970c0699ec2fcee169484daa2d41f6fec4e6ab",
+    "peeled_source_commit": "011c5482285ea516f39292100c429a905e6e3e36",
+    "source_tree": "db3ecee9e9c2937a9912780a54bd5a1557562f50"
+  },
+  "workflow": {
+    "run_id": 37979108120,
+    "verify_job_id": 113984788904,
+    "publish_job_id": 113985109149,
+    "verify_job": "success",
+    "publish_job": "success",
+    "artifact_id": 11640800236,
+    "artifact_name": "actions-core-dist",
+    "artifact_size": 180924,
+    "artifact_digest": "sha256:bea159b634209bbcc90c6e6e37ba6d6a818cdfcb8b9b920ca267e15dc3915b89",
+    "artifact_manifest_directly_read": false,
+    "artifact_download_status": "blocked: GitHub connector returned File Service file_id; direct temporary download URL returned HTTP 403 Cloudflare error 1010; no unsupported file materialization tool used; no second connector artifact call made"
+  },
+  "pypi": {
+    "endpoint": "https://pypi.org/pypi/actions-core/1.0.2/json",
+    "release_files": [
+      {
+        "filename": "actions_core-1.0.2-py3-none-any.whl",
+        "url": "https://files.pythonhosted.org/packages/b6/ed/33c5999ac5e932434fcc5b392420efdf9b25922ca02a76622b856759ea16/actions_core-1.0.2-py3-none-any.whl",
+        "size": 101410,
+        "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+        "pypi_json_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+        "local_equals_pypi_json": true,
+        "uploaded_at": "2026-10-09T19:17:49.064802Z"
+      },
+      {
+        "filename": "actions_core-1.0.2.tar.gz",
+        "url": "https://files.pythonhosted.org/packages/f3/9b/9122506a1daef59b876c703e9db0c4b60b38c4ae138f9a3bfedb7d6bdc2f/actions_core-1.0.2.tar.gz",
+        "size": 82556,
+        "sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
+        "pypi_json_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
+        "local_equals_pypi_json": true,
+        "uploaded_at": "2026-10-09T19:17:50.379502Z"
+      }
+    ],
+    "package_metadata": {
+      "name": "actions-core",
+      "version": "1.0.2"
+    },
+    "both_files_match_pypi_json_and_hashes": true
+  },
+  "sdist_projection": {
+    "archive_member_files": 52,
+    "source_members_exactly_match_tag": 51,
+    "generated_metadata_members": [
+      "PKG-INFO"
+    ],
+    "mismatches": [],
+    "pkg_info_name": "actions-core",
+    "pkg_info_version": "1.0.2",
+    "result": "all 51 non-generated sdist files byte-match paths under actions/ at peeled tag commit; generated PKG-INFO identifies actions-core 1.0.2"
+  },
+  "wheel_and_test_evidence": {
+    "published_wheel_matches_tested_candidate": true,
+    "published_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+    "tested_candidate_path": "/workspace/work/community-resume/wheel-inventory/actions/dist/actions_core-1.0.2-py3-none-any.whl",
+    "clean_installed_consumer_receipt": "/workspace/work/community-resume/release-lane/independent-core-pr248-admission-and-credential-probe-20261009.md",
+    "build_proof": "/workspace/work/community-resume/evidence/actions-core-release-20261009/core-wheel-proof.log",
+    "full_test_proof": "/workspace/work/community-resume/evidence/actions-core-release-20261009/core-test-after-helper.log"
+  },
+  "limitations": [
+    "Workflow artifact manifest bytes were not independently materialized/read; workflow source and successful verify/download/hash-check/publish job steps indicate manifest checks passed inside GitHub Actions.",
+    "Published sdist was checked against tag source projection; generated PKG-INFO was validated for name/version."
+  ]
+}

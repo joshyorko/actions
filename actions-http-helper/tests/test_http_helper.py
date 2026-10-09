@@ -42,6 +42,7 @@ def test_network_settings_path_uses_actions_root(monkeypatch, tmp_path):
 
     monkeypatch.setattr(actions_http.sys, "platform", "linux")
     monkeypatch.setenv("HOME", str(tmp_path))
+    monkeypatch.setenv("USERPROFILE", str(tmp_path))
     assert actions_http._NetworkConfig._get_network_settings_path() == (
         tmp_path / ".actions" / "network-settings.yaml"
     )
@@ -151,3 +152,212 @@ def test_download_with_resume_resumes_existing_partial_file(tmp_path):
     assert result.status == actions_http.DownloadStatus.DONE
     assert target.read_bytes() == b"abcdef"
     assert pool.requests[0][2]["headers"] == {"Range": "bytes=3-"}
+
+
+def test_persisted_no_proxy_routes_each_destination_without_changing_tls(monkeypatch):
+    import ssl
+
+    import actions_http
+
+    context = ssl.create_default_context()
+    config = actions_http._NetworkConfig.__new__(actions_http._NetworkConfig)
+    monkeypatch.setattr(config, "get_ssl_context", lambda: context)
+    monkeypatch.setattr(
+        type(config),
+        "profile_config",
+        property(
+            lambda self: {
+                "proxy-settings": {
+                    "https-proxy": "http://proxy.example:8080",
+                    "no-proxy": "localhost,127.0.0.1,::1,.internal.test,port.test:9443",
+                }
+            }
+        ),
+    )
+    routes = []
+
+    def fake_urlopen(pool, method, url, **kwargs):
+        routes.append(
+            (
+                isinstance(pool, actions_http.urllib3.ProxyManager),
+                pool.connection_pool_kw["ssl_context"],
+            )
+        )
+        return FakeResponse(b"ok", {})
+
+    monkeypatch.setattr(actions_http.urllib3.PoolManager, "urlopen", fake_urlopen)
+    pool = config._build_connection_pool()
+    for url, proxied in [
+        ("http://localhost:54321/path", False),
+        ("http://127.0.0.1:54321/path", False),
+        ("http://[::1]:54321/path", False),
+        ("https://service.internal.test/path", False),
+        ("https://port.test:9443/path", False),
+        ("https://port.test:443/path", True),
+        ("https://notinternal.test/path", True),
+        ("https://localhost.evil.test/path", True),
+        ("https://public.example/path", True),
+    ]:
+        pool.urlopen("GET", url)
+        assert routes[-1] == (proxied, context), url
+
+
+def test_no_proxy_redirect_rechecks_the_new_destination(monkeypatch):
+    import ssl
+
+    from urllib3.response import HTTPResponse
+
+    import actions_http
+
+    config = actions_http._NetworkConfig.__new__(actions_http._NetworkConfig)
+    monkeypatch.setattr(config, "get_ssl_context", ssl.create_default_context)
+    monkeypatch.setattr(
+        type(config),
+        "profile_config",
+        property(
+            lambda self: {
+                "proxy-settings": {
+                    "http-proxy": "http://proxy.example:8080",
+                    "no-proxy": "localhost",
+                }
+            }
+        ),
+    )
+    routes = []
+
+    def respond(connection, method, url, **kwargs):
+        routes.append(connection.proxy is not None)
+        if len(routes) == 1:
+            return HTTPResponse(
+                status=302,
+                headers={"Location": "http://public.example/next"},
+                body=b"",
+                preload_content=False,
+            )
+        return HTTPResponse(status=200, body=b"ok")
+
+    monkeypatch.setattr(actions_http.urllib3.HTTPConnectionPool, "urlopen", respond)
+    response = config._build_connection_pool().request(
+        "GET", "http://localhost:54321/start"
+    )
+    assert response.status == 200
+    assert routes == [False, True]
+
+
+def test_proxy_to_direct_redirect_updates_generated_host_but_keeps_explicit_host(
+    monkeypatch,
+):
+    import ssl
+
+    from urllib3._collections import HTTPHeaderDict
+    from urllib3.response import HTTPResponse
+
+    import actions_http
+
+    config = actions_http._NetworkConfig.__new__(actions_http._NetworkConfig)
+    monkeypatch.setattr(config, "get_ssl_context", ssl.create_default_context)
+    monkeypatch.setattr(
+        type(config),
+        "profile_config",
+        property(
+            lambda self: {
+                "proxy-settings": {
+                    "http-proxy": "http://proxy.example:8080",
+                    "no-proxy": "localhost",
+                }
+            }
+        ),
+    )
+    for explicit_host in (None, "deliberate.example"):
+        requests = []
+
+        def respond(connection, method, url, **kwargs):
+            requests.append(
+                (connection.proxy is not None, list(kwargs.get("headers", {}).items()))
+            )
+            if len(requests) == 1:
+                return HTTPResponse(
+                    status=303,
+                    headers={"Location": "http://localhost:54321/next"},
+                    body=b"",
+                    preload_content=False,
+                )
+            return HTTPResponse(status=200, body=b"ok")
+
+        monkeypatch.setattr(actions_http.urllib3.HTTPConnectionPool, "urlopen", respond)
+        headers = HTTPHeaderDict(
+            {
+                "Authorization": "synthetic",
+                "Cookie": "synthetic",
+                "Proxy-Authorization": "synthetic",
+            }
+        )
+        headers.add("X-Repeat", "first")
+        headers.add("X-Repeat", "second")
+        if explicit_host:
+            headers.add("Host", explicit_host)
+        assert (
+            config._build_connection_pool()
+            .urlopen("GET", "http://public.example/start", headers=headers)
+            .status
+            == 200
+        )
+        assert [entry[0] for entry in requests] == [True, False]
+        final_headers = requests[-1][1]
+        assert [value for name, value in final_headers if name.lower() == "host"] == (
+            [explicit_host] if explicit_host else []
+        )
+        assert not {"authorization", "cookie", "proxy-authorization"}.intersection(
+            name.lower() for name, _ in final_headers
+        )
+
+
+def test_no_proxy_redirect_preserves_repeated_headers_without_caller_host(monkeypatch):
+    import ssl
+
+    from urllib3._collections import HTTPHeaderDict
+    from urllib3.response import HTTPResponse
+
+    import actions_http
+
+    config = actions_http._NetworkConfig.__new__(actions_http._NetworkConfig)
+    monkeypatch.setattr(config, "get_ssl_context", ssl.create_default_context)
+    monkeypatch.setattr(
+        type(config),
+        "profile_config",
+        property(
+            lambda self: {
+                "proxy-settings": {
+                    "http-proxy": "http://proxy.example:8080",
+                    "no-proxy": "localhost",
+                }
+            }
+        ),
+    )
+    requests = []
+
+    def respond(connection, method, url, **kwargs):
+        requests.append((connection.host, list(kwargs["headers"].items())))
+        if len(requests) == 1:
+            return HTTPResponse(
+                status=302,
+                headers={"Location": "http://localhost:54322/next"},
+                body=b"",
+                preload_content=False,
+            )
+        return HTTPResponse(status=200, body=b"ok")
+
+    monkeypatch.setattr(actions_http.urllib3.HTTPConnectionPool, "urlopen", respond)
+    headers = HTTPHeaderDict()
+    headers.add("X-Repeat", "first")
+    headers.add("X-Repeat", "second")
+    response = config._build_connection_pool().urlopen(
+        "GET", "http://localhost:54321/start", headers=headers
+    )
+
+    assert response.status == 200
+    assert [host for host, _ in requests] == ["localhost", "localhost"]
+    assert [
+        [value for name, value in request_headers if name.lower() == "x-repeat"]
+        for _, request_headers in requests
+    ] == [["first", "second"], ["first", "second"]]

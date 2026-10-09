@@ -39,11 +39,36 @@ jobs:
       - name: Build verified Core artifacts
         run: poetry build
 
-      - name: Install Twine for artifact verification
+      - name: Verify exact Core artifact inventory
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          package_version=$(poetry version --short)
+          tag_version=${GITHUB_REF_NAME#actions-core-}
+          if [[ "$tag_version" != "$package_version" ]]; then
+            printf 'tag version %s does not match package version %s\n' \
+              "$tag_version" "$package_version" >&2
+            exit 1
+          fi
+          printf '%s\n' \
+            "actions_core-$package_version-py3-none-any.whl" \
+            "actions_core-$package_version.tar.gz" | sort > /tmp/core-expected
+          find dist -mindepth 1 -maxdepth 1 -printf '%f\n' | sort \
+            > /tmp/core-actual
+          diff -u /tmp/core-expected /tmp/core-actual
+          test "$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 2
+          test -f "dist/actions_core-$package_version-py3-none-any.whl"
+          test ! -L "dist/actions_core-$package_version-py3-none-any.whl"
+          test -f "dist/actions_core-$package_version.tar.gz"
+          test ! -L "dist/actions_core-$package_version.tar.gz"
+          sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort \
+            > dist/actions-core-manifest.sha256
+
+      - name: Install Twine 6.2.0
         run: poetry run python -m pip install twine==6.2.0
 
       - name: Verify Core artifacts
-        run: poetry run twine check --strict dist/*
+        run: poetry run twine check --strict dist/*.whl dist/*.tar.gz
 
       - name: Verify clean installed Core wheel
         run: python scripts/verify_clean_wheel.py "$(find dist -maxdepth 1 -name 'actions_core-*.whl' -print -quit)"
@@ -98,7 +123,31 @@ jobs:
           name: actions-core-dist
           path: actions/dist
 
-      - name: Publish verified artifacts
+      - name: Verify downloaded Core artifacts
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          package_version=$(poetry version --short)
+          printf '%s\n' \
+            "actions_core-$package_version-py3-none-any.whl" \
+            "actions_core-$package_version.tar.gz" \
+            "actions-core-manifest.sha256" | sort > /tmp/core-expected
+          find dist -mindepth 1 -maxdepth 1 -printf '%f\n' | sort \
+            > /tmp/core-actual
+          diff -u /tmp/core-expected /tmp/core-actual
+          test "$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 3
+          test ! -L dist/actions-core-manifest.sha256
+          test ! -L "dist/actions_core-$package_version-py3-none-any.whl"
+          test ! -L "dist/actions_core-$package_version.tar.gz"
+          (cd dist && sha256sum -c actions-core-manifest.sha256)
+
+      - name: Publish verified Core artifacts
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN_ACTIONS_CORE }}
-        run: poetry publish --no-interaction
+        run: |
+          set -Eeuo pipefail
+          if [[ -z "${POETRY_PYPI_TOKEN_PYPI:-}" ]]; then
+            echo "PYPI_TOKEN_ACTIONS_CORE is required for a tagged Core release" >&2
+            exit 1
+          fi
+          poetry publish --no-interaction
