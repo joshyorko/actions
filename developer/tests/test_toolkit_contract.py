@@ -23,6 +23,7 @@ def test_manifest_defines_cross_platform_developer_tasks() -> None:
         "Typecheck",
         "Docs",
         "CheckAll",
+        "Coverage",
         "FrontendTest",
         "InstallCommunity",
     }
@@ -188,8 +189,19 @@ def test_dispatcher_resolves_repository_root() -> None:
         "typecheck",
         "docs",
         "check-all",
+        "coverage",
         "frontend-test",
         "install-community",
+    }
+
+
+def test_coverage_task_passes_its_rcc_python_to_action_server_wheel_tests() -> None:
+    with patch("toolkit.run") as run:
+        toolkit.coverage()
+
+    assert run.call_args.args == ([sys.executable, "developer/coverage_gate.py"],)
+    assert run.call_args.kwargs == {
+        "env_overrides": {"ACTIONS_RUNTIME_TEST_PYTHON": sys.executable}
     }
 
 

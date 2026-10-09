@@ -626,7 +626,7 @@ def test_failed_robot_publication_leaves_no_partial_target(
         **kwargs,
     ):
         destination_path = Path(destination)
-        destination_path.mkdir(parents=True)
+        destination_path.mkdir(parents=True, exist_ok=True)
         (destination_path / "partial.txt").write_text("partial")
         raise OSError("publication interrupted")
 
@@ -773,3 +773,34 @@ def test_pinning_preserves_signed_path_parameters_and_query():
     )
     assert headers == {"Host": "downloads.example.test:8443"}
     assert extensions == {"sni_hostname": "downloads.example.test"}
+
+
+def test_robot_publication_does_not_clean_unowned_initial_staging_collision(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server import _api_robots
+
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "robot.yaml").write_text("tasks: {}")
+    robots = tmp_path / "robots"
+    robots.mkdir()
+    monkeypatch.setattr(_api_robots, "ROBOTS_DIR", robots)
+    mkdir = os.mkdir
+    collisions: list[Path] = []
+
+    def competing_mkdir(path, *args, **kwargs):
+        path = Path(path)
+        if path.parent == robots and ".staging-" in path.name and not collisions:
+            mkdir(path)
+            (path / "foreign.txt").write_text("synthetic foreign staging entry")
+            collisions.append(path)
+        return mkdir(path, *args, **kwargs)
+
+    monkeypatch.setattr(os, "mkdir", competing_mkdir)
+    with pytest.raises(FileExistsError):
+        _api_robots._publish_robot_package(package, "synthetic", None)
+    assert len(collisions) == 1
+    assert (
+        collisions[0] / "foreign.txt"
+    ).read_text() == "synthetic foreign staging entry"
