@@ -606,7 +606,7 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
         "Requires-Dist: actions-core (>=1.0.2,<2.0.0)" in runtime_files[metadata_name]
     )
     assert (
-        "Requires-Dist: actions-http-helper (>=1.0.2,<2.0.0)"
+        "Requires-Dist: actions-http-helper (>=1.0.3,<2.0.0)"
         in runtime_files[metadata_name]
     )
     record_name = next(name for name in runtime_files if name.endswith("/RECORD"))

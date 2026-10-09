@@ -9,6 +9,12 @@ production dependency metadata. This is release preparation, not publication.
 Core must be published and independently verified before that Runtime release;
 neither an editable source install nor an old published wheel proves pairing.
 
+For a split package API promotion, verify the producer's public contract from
+the exact built wheel in an isolated installation. Assess consumer adoption
+separately against the current integration revision, checking both its imports
+and declared producer-version floor. An older community checkout does not
+establish the current consumer's adoption state.
+
 The Runtime development group resolves the matching monorepo Core through a
 relative path. Poetry 2.1.1 generates the lock from that declared group; no
 unpublished registry file hashes are invented. Runtime wheel metadata must
@@ -60,6 +66,18 @@ Preserve both failed receipts, inspect the selected profile and routing before
 attributing them, and do not remove the proxy or weaken server authorization
 to make tests pass. Local mock-server connectivity is distinct from a real
 provider or authenticated product-browser contract.
+
+The locked MCP Python SDK 2.0.0 validates authorization-server issuer URLs as
+HTTPS, allowing HTTP only for localhost and loopback IPs, and rejects issuer
+queries and fragments. Its CIMD URL helper accepts HTTPS URLs with a non-root
+path. These SDK helpers do not prove Runtime authentication: the SDK's server
+authorization metadata builder leaves
+`client_id_metadata_document_supported` unset, and its CIMD URL helper is a
+client-side capability. Probe these contracts against the package lock and
+keep them distinct from a Runtime verifier, trusted authorization-server
+configuration, token issuer/audience checks, or CIMD handling by an external
+authorization server. Action-provider OAuth remains a separate credential
+flow.
 
 ## Package Boundaries
 
@@ -302,6 +320,39 @@ distribution and the other clean-break distributions by path only while
 resolving a local development install. Published package metadata must use
 versioned distributions; a clean wheel install is required before calling the
 Runtime/Core interoperability contract complete.
+
+When a prerequisite distribution must ship before a broader Runtime checkpoint,
+create a Community-targeted promotion PR containing only that distribution's
+versioned package source, changelog, package tests, and release workflow, plus
+developer documentation support required by that package. Do not merge a mixed
+Runtime integration head merely to make its dependency version available. Run
+package build, exact artifact and metadata checks, strict Twine validation, and
+clean installed-wheel tests against the exact promotion PR head. After merge,
+release only from the exact community-ancestral version tag and verify registry
+artifacts before promoting the next dependent package. Preserve any issue
+acceptance contract separately; an already-published package version does not
+by itself close a broader issue.
+
+Before preparing a package-only promotion from an older checkpoint, compare the
+package's complete tree on the promotion base with the current integration head.
+Carry every retained source, regression-test, and package-metadata change required
+by that comparison, including package-local development dependencies and lockfile
+updates when needed by the configured test gate. A source anchor proves where the
+candidate originated; it does not prove that later package fixes were included.
+Review the complete package diff and state any intentional exclusions before
+tagging. Bind the tested wheel to its embedded source bytes and installed import
+path, not an older ignored dist directory. If an immutable tag selected incomplete
+source, preserve it and its failed evidence; do not move or retry that tag.
+Correct the source and allocate a separately admitted unused version.
+For HTTP helper redirects, a proxy-to-direct redirect must update a
+generated `Host` header to the destination while preserving an explicitly supplied
+`Host`, and must continue stripping credentials; the regression test covers both
+generated and explicit header cases.
+When filtering generated `Host` values from urllib3 `HTTPHeaderDict` inputs, copy
+the header container and remove matching keys case-insensitively. Converting its
+items to a plain `dict` discards repeated field values. Keep a regression through
+the helper's direct no-proxy redirect path, where the helper owns this filtering;
+do not infer that the separate `ProxyManager` path preserves duplicate header fields.
 
 The MCP v2 source adapter uses the public MCP 2.0.0 `Server` constructor
 callbacks and `Server.streamable_http_app(stateless_http=True)` at `/mcp`.
@@ -655,7 +706,7 @@ Prefer evidence in this order:
 4. Historical commits/design notes, labeled as intent rather than delivered behavior.
 5. External upstream documentation pinned to the inspected version.
 
-Do not convert a commit message, design proposal, or skipped test into a current-behavior claim.
+Do not convert a commit message, design proposal, or skipped test into a current-behavior claim. Before interrupting a long RCC or pytest command, verify the PID, full command, working directory, ancestry, and owning task receipt. Timing or a shared process group alone does not establish ownership; leave ambiguous shared processes to the integration owner.
 
 ## Clean-break package boundaries
 
@@ -1408,8 +1459,10 @@ format the record. Redact both API-key CLI argument spellings as well as
 database URLs. A browser-session test must prove a handshake actually succeeded
 before asserting synthetic credentials are absent from the resulting logs.
 
-The integrated Runtime candidate requires HTTP Helper 1.0.2 for correct persisted
-proxy exclusions. Build identified Core and HTTP Helper candidate wheels only
+The integrated Runtime candidate requires HTTP Helper 1.0.3 for corrected persisted
+proxy exclusions and redirect header behavior. The earlier immutable Helper 1.0.2
+tag selected incomplete source and is not a release source to retry.
+Build identified Core and HTTP Helper candidate wheels only
 for PR wheel tests, retaining `pip check`. Tagged release jobs must resolve the
 registry versions. Publish and clean-install HTTP Helper before Core and Runtime;
 a local directory lock entry proves candidate verification, not publication.
@@ -1486,7 +1539,12 @@ copy. A failed copied-metadata validation removes owned staging and publishes no
 package. This catches invalid metadata produced by a source change during copying;
 it does not prove that the copied files form a coherent snapshot under a concurrent
 writer. The extracted source is still passed and copied by pathname. This does not
-prove root or source capability identity. Robot directory
+prove root or source capability identity. The importer accepts either `robot.yaml`
+or `package.yaml`; the package form is admitted only with a nonempty top-level
+`tasks` mapping. The repository's Robot API tests derive their importer-only
+`package.yaml` case from the existing legacy package fixture and add that task
+mapping. This verifies Robot metadata admission; it does not establish that RCC
+can execute such a package. Robot directory
 publication uses native no-replace rename: Linux `renameat2(RENAME_NOREPLACE)`,
 macOS `renameatx_np(RENAME_EXCL)`, and Windows `os.rename` without replacement.
 Unsupported platforms, missing native symbols, unsupported filesystems and
@@ -1590,9 +1648,19 @@ upgrade migrations and fresh SQLite/PostgreSQL bootstrap paths. SQLite must decl
 forward cyclic pointer references when creating tables; PostgreSQL can add the
 pointer constraints after both tables exist. Inspect the final child/parent column
 tuples and their order on each backend rather than inferring parity from successful
-writes. The Deployment draft's scratch SQLite probe demonstrates representative
-foreign-key and replay constraints only: it does not prove authorization, committed
-pointer invariants, triggers, CAS, production migration recovery or PostgreSQL.
+writes. `test_deployment_schema_probe.py` builds a synthetic fixture from the
+proposed #129 FK tuple matrix, compares SQLite `PRAGMA foreign_key_list` tuples,
+and exercises owner-to-revision pointer publication plus cross-Deployment ancestry,
+request-parent, and join-row rejection. It is a design probe, not application DDL:
+it does not prove authorization, committed pointer invariants, triggers, CAS,
+production migration recovery or PostgreSQL application behavior. Its PostgreSQL
+counterpart passed against an isolated schema on the root-owned loopback
+`postgres:17-alpine` service pinned to digest
+`sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3`.
+It added the four current-pointer constraints after creating revision tables and
+verified its exact temporary schema was dropped. A skip without
+`ACTIONS_TEST_DATABASE_URL` remains NOT_RUN. The older draft scratch probe remains
+narrower and must not be cited as proof of the full tuple matrix.
 
 Template README files ship verbatim in the embedded project archives because the
 bundle builder includes every source file. After changing active template guidance,

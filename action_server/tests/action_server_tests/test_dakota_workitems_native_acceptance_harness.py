@@ -6,6 +6,7 @@ import copy
 import importlib.util
 import json
 import os
+import shlex
 import subprocess
 import sys
 import textwrap
@@ -13,6 +14,8 @@ import time
 from pathlib import Path
 
 import pytest
+
+from actions.server._action_package_handler import ActionPackageHandler
 
 RUNNER_PATH = (
     Path(__file__).resolve().parents[2]
@@ -56,10 +59,17 @@ def reports_for(
 
 def proof_record(kind: str, executable_hash: str, wheel_hash: str) -> dict:
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "runtime_kind": kind,
         "executable_sha256": executable_hash,
         "actions_core_wheel_sha256": wheel_hash,
+        "actions_core_installation": {
+            "actions_core_version": "1.0.2",
+            "actions_module_owned_by_distribution": True,
+            "install_source_matches_candidate": True,
+            "wheel_sha256": wheel_hash,
+            "pip_report_sha256": "d" * 64,
+        },
         "consumer_actions": copy.deepcopy(RUNNER.CONSUMER_ACTIONS),
         "api_state_readbacks": copy.deepcopy(RUNNER.API_STATE_READBACKS),
     }
@@ -143,7 +153,7 @@ def test_rejects_missing_or_duplicate_proof_files(tmp_path: Path):
         (
             "actions_core_wheel_sha256",
             "f" * 64,
-            "proof_core_wheel_hash_mismatch_frozen",
+            "proof_core_installation_invalid_frozen",
         ),
     ],
 )
@@ -159,6 +169,21 @@ def test_rejects_mismatched_proof_binding(
     proof_path.write_text(json.dumps(proof), encoding="utf-8")
 
     with pytest.raises(RUNNER.AcceptanceFailure, match=failure):
+        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash)
+
+
+def test_rejects_core_install_proof_bound_to_different_candidate(tmp_path: Path):
+    hashes = {"frozen": "a" * 64, "go-wrapper": "b" * 64}
+    wheel_hash = "c" * 64
+    write_proofs(tmp_path, hashes, wheel_hash)
+    proof_path = tmp_path / "frozen.json"
+    proof = json.loads(proof_path.read_text(encoding="utf-8"))
+    proof["actions_core_installation"]["wheel_sha256"] = "e" * 64
+    proof_path.write_text(json.dumps(proof), encoding="utf-8")
+
+    with pytest.raises(
+        RUNNER.AcceptanceFailure, match="proof_core_installation_invalid_frozen"
+    ):
         RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash)
 
 
@@ -195,6 +220,129 @@ def test_acceptance_claims_are_not_presented_as_build_provenance():
     )
     assert "source_sha" not in receipt
     assert "build_output" not in receipt
+
+
+def test_native_package_yaml_replaces_core_with_measured_wheel_after_rcc_install(
+    tmp_path: Path,
+):
+    compile(NATIVE_TEST.PROCESSOR_ACTION, "dakota_workitems_processor.py", "exec")
+    wheel = tmp_path / "actions_core-1.0.2-py3-none-any.whl"
+    wheel.write_bytes(b"candidate core wheel")
+    package = tmp_path / "package"
+    package.mkdir()
+    report = package / "core-install-report.json"
+    package_yaml = package / "package.yaml"
+    package_yaml.write_text(
+        NATIVE_TEST.consumer_package_yaml(wheel, report), encoding="utf-8"
+    )
+
+    handler = ActionPackageHandler(str(package), tmp_path / "data")
+    contents = handler.package_yaml_contents
+    assert contents is not None
+    assert contents["spec-version"] == "v2"
+    assert contents["dependencies"]["conda-forge"] == ["python=3.12", "uv=0.9.26"]
+    assert contents["dependencies"]["pypi"] == ["actions-work-items=0.4.4"]
+    assert handler.get_pythonpath_entries() == (".",)
+    post_install = contents["post-install"]
+    assert len(post_install) == 1
+    assert shlex.split(post_install[0]) == [
+        "python",
+        "-m",
+        "pip",
+        "install",
+        "--force-reinstall",
+        "--report",
+        str(report.resolve()),
+        str(wheel.resolve()),
+    ]
+
+
+def test_build_manifest_binds_source_platform_paths_and_measured_bytes(
+    tmp_path: Path, monkeypatch
+):
+    package = tmp_path / "action_server"
+    frozen = package / "dist" / "action-server" / "action-server"
+    wrapper = package / "dist" / "final" / "action-server"
+    frozen.parent.mkdir(parents=True)
+    wrapper.parent.mkdir(parents=True)
+    frozen.write_bytes(b"frozen bytes")
+    wrapper.write_bytes(b"go bytes")
+    executables = {"frozen": frozen, "go-wrapper": wrapper}
+    hashes = {kind: RUNNER.sha256(path) for kind, path in executables.items()}
+    manifest = {
+        "schema_version": 1,
+        "source_sha": "a" * 40,
+        "platform": RUNNER.platform.system(),
+        "architecture": RUNNER.platform.machine(),
+        "artifacts": {
+            kind: {
+                "path": path.relative_to(package).as_posix(),
+                "sha256": hashes[kind],
+            }
+            for kind, path in executables.items()
+        },
+    }
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    result = RUNNER.validate_build_manifest(
+        manifest_path, package, "a" * 40, executables, hashes
+    )
+
+    assert result["manifest_sha256"] == RUNNER.sha256(manifest_path)
+    assert result["source_sha"] == "a" * 40
+
+
+@pytest.mark.parametrize(
+    ("mutation", "failure"),
+    [
+        ("source_sha", "build_manifest_source_sha_mismatch"),
+        ("platform", "build_manifest_platform_mismatch"),
+        ("architecture", "build_manifest_architecture_mismatch"),
+        ("path", "build_manifest_artifact_path_mismatch_frozen"),
+        ("sha256", "build_manifest_artifact_hash_mismatch_frozen"),
+    ],
+)
+def test_build_manifest_rejects_unbound_claims(tmp_path, mutation, failure):
+    package = tmp_path / "action_server"
+    frozen = package / "dist" / "action-server" / "action-server"
+    wrapper = package / "dist" / "final" / "action-server"
+    frozen.parent.mkdir(parents=True)
+    wrapper.parent.mkdir(parents=True)
+    frozen.write_bytes(b"frozen bytes")
+    wrapper.write_bytes(b"go bytes")
+    executables = {"frozen": frozen, "go-wrapper": wrapper}
+    hashes = {kind: RUNNER.sha256(path) for kind, path in executables.items()}
+    manifest = {
+        "schema_version": 1,
+        "source_sha": "a" * 40,
+        "platform": RUNNER.platform.system(),
+        "architecture": RUNNER.platform.machine(),
+        "artifacts": {
+            kind: {
+                "path": path.relative_to(package).as_posix(),
+                "sha256": hashes[kind],
+            }
+            for kind, path in executables.items()
+        },
+    }
+    if mutation == "source_sha":
+        manifest["source_sha"] = "b" * 40
+    elif mutation == "platform":
+        manifest["platform"] = "other-platform"
+    elif mutation == "architecture":
+        manifest["architecture"] = "other-architecture"
+    elif mutation == "path":
+        manifest["artifacts"]["frozen"]["path"] = "elsewhere/action-server"
+    else:
+        manifest["artifacts"]["frozen"]["sha256"] = "f" * 64
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    with pytest.raises(RUNNER.AcceptanceFailure, match=failure):
+        RUNNER.validate_build_manifest(
+            manifest_path, package, "a" * 40, executables, hashes
+        )
 
 
 def test_abrupt_process_termination_invalidates_previous_pass(tmp_path: Path):

@@ -921,7 +921,7 @@ def build_candidate_wheels(
                 f"{(result.stderr or result.stdout)[-1000:]}"
             )
     core = wheelhouse / "actions_core-1.0.2-py3-none-any.whl"
-    helper = wheelhouse / "actions_http_helper-1.0.2-py3-none-any.whl"
+    helper = wheelhouse / "actions_http_helper-1.0.3-py3-none-any.whl"
     if not core.is_file() or not helper.is_file():
         raise RuntimeError("Poetry did not produce the expected candidate wheels")
     return core, helper
@@ -1292,7 +1292,7 @@ dependencies:
             expected_result = {
                 "result": "dakota-rcc-local-acceptance",
                 "actions_core": "1.0.2",
-                "actions_http_helper": "1.0.2",
+                "actions_http_helper": "1.0.3",
                 "server_integration": "ManagedParameters",
             }
             candidate_result = json.loads(response.json())
@@ -1805,7 +1805,7 @@ dependencies:
             "rcc": {"version": runtime["rcc_version"], "sha256": rcc_sha256},
             "candidate_wheels": wheel_records,
             "actions_core": "1.0.2",
-            "actions_http_helper": "1.0.2",
+            "actions_http_helper": "1.0.3",
             "server_integration": candidate_result["server_integration"],
             "artifact_digest": digest,
             "run_id": run_id,
