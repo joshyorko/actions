@@ -223,7 +223,9 @@ def _runtime_test_environment(
             "'actions.server._actions_import', "
             "'actions.server._action_package_handler', "
             "'actions.server._rcc_runtime_adapter', "
-            "'actions.server._server'); "
+            "'actions.server._server', "
+            "'actions.server._cli_impl', "
+            "'actions.server._common.process'); "
             "print(json.dumps({name: importlib.import_module(name).__file__ "
             "for name in modules}))",
         ],
@@ -910,6 +912,8 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
             and provider_ops_after == provider_ops_before
             and provider_ops_after_recovery == provider_ops_before
             and worker_pid in [item["pid"] for item in exec_records]
+            and shutdown_status == 200
+            and action_server_process.process.returncode == 1
             and all(
                 receipt.get("artifactDigest") == artifact_digest
                 and receipt.get("verification", {}).get("valid") is True
@@ -920,7 +924,7 @@ def test_real_rcc_import_failure_keeps_last_good_generation(
             )
         ) else "FAIL"
         assert evidence["status"] == "PASS", (
-            "last-good Action did not remain usable after import failure; "
+            "import rollback or test shutdown contract failed; "
             f"persisted Run={second_run}, Runtime exit="
             f"{action_server_process.process.returncode}"
         )

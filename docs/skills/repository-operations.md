@@ -1363,10 +1363,21 @@ later valid edit selected a distinct snapshot/source generation and returned
 completed with exit 0 and distinct leases, while publish/acquire/build operations
 did not increase. The captured old and recovered worker trees were observed
 absent after shutdown. This Linux source-only run's Action Server process exited
-`-11` after the shutdown endpoint returned HTTP 200; that process exit remains a
-separate unresolved observation, not an RCC receipt or Run result. These probes
-do not establish installed-wheel, frozen, strict-remote, Windows ACL, or
-universal descendant-reaping acceptance.
+`-11` after the shutdown endpoint returned HTTP 200. The integration fixture
+enables that test-only endpoint with `RC_ADD_SHUTDOWN_API=1`; it calls
+`_thread.interrupt_main()`. The CLI catches the resulting `KeyboardInterrupt`,
+runs `kill_subprocesses()`, and returns 1 if cleanup completes. The shutdown
+regression therefore asserts exit 1 and rejects `-11`. A single
+`PYTHONFAULTHANDLER=1` replay logged `Exiting action server...`, then
+`Killing processes:` with no child names, then `Fatal Python error:
+Segmentation fault`; faulthandler had no Python frame. The locked psutil 5.9.8
+native extensions were loaded, but this trace does not establish that psutil,
+or any other extension, caused the fault. The test's forced `Process.stop()`
+cleanup runs only after the return code assertion, so it did not cause this
+observed exit. Treat the target gate as RED until the test endpoint shutdown
+returns its expected status; successful Runs and RCC receipts do not establish
+clean Runtime shutdown. These probes do not establish installed-wheel, frozen,
+strict-remote, Windows ACL, or universal descendant-reaping acceptance.
 
 The outer Dakota CLI refuses an existing receipt path before resolving toolchain
 environment keys or creating CLI supervisor state. The worker retains its
