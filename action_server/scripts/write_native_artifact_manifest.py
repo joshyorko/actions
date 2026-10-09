@@ -7,6 +7,7 @@ import hashlib
 import json
 import platform
 import re
+import stat
 import subprocess
 from pathlib import Path
 
@@ -30,20 +31,48 @@ def packaged_files_sha256(root: Path) -> str:
     return digest.hexdigest()
 
 
-def packaged_tree_sha256(root: Path) -> str:
-    digest = hashlib.sha256()
+def packaged_tree_inventory(root: Path) -> list[dict[str, str | int | None]]:
+    inventory = []
     for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
         relative = path.relative_to(root).as_posix().encode("utf-8")
         metadata = path.lstat()
-        digest.update(relative + b"\0" + str(metadata.st_mode & 0o777).encode() + b"\0")
+        mode = stat.S_IMODE(metadata.st_mode)
         if path.is_symlink():
-            digest.update(b"link\0" + path.readlink().as_posix().encode("utf-8") + b"\0")
+            kind = "symlink"
+            target = path.readlink().as_posix()
         elif path.is_dir():
-            digest.update(b"directory\0")
+            kind = "directory"
+            target = None
         elif path.is_file():
-            digest.update(b"file\0" + bytes.fromhex(sha256(path)))
+            kind = "file"
+            target = None
         else:
             raise ValueError(f"unsupported packaged artifact entry: {relative!r}")
+        inventory.append(
+            {
+                "path": relative.decode("utf-8"),
+                "kind": kind,
+                "mode": mode,
+                "link_target": target,
+                "content_sha256": sha256(path) if path.is_file() else None,
+            }
+        )
+    return inventory
+
+
+def packaged_tree_sha256(root: Path) -> str:
+    digest = hashlib.sha256()
+    for entry in packaged_tree_inventory(root):
+        relative = str(entry["path"]).encode("utf-8")
+        digest.update(
+            relative + b"\0" + str(int(entry["mode"]) & 0o777).encode() + b"\0"
+        )
+        if entry["kind"] == "symlink":
+            digest.update(b"link\0" + str(entry["link_target"]).encode("utf-8") + b"\0")
+        elif entry["kind"] == "directory":
+            digest.update(b"directory\0")
+        else:
+            digest.update(b"file\0" + bytes.fromhex(str(entry["content_sha256"])))
     return digest.hexdigest()
 
 
@@ -119,6 +148,17 @@ def write_manifest(
     }
     for artifact in artifacts.values():
         artifact.update(measured_components)
+
+    inventory_path = output.parent / "native-artifact-tree-inventory.json"
+    inventory_path.parent.mkdir(parents=True, exist_ok=True)
+    inventory_path.write_text(
+        json.dumps(packaged_tree_inventory(frozen_tree), indent=2) + "\n",
+        encoding="utf-8",
+    )
+    for artifact in artifacts.values():
+        artifact["frozen_package_tree_inventory_path"] = (
+            "output/native-artifact-tree-inventory.json"
+        )
 
     manifest = {
         "schema_version": 1,

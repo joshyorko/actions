@@ -61,6 +61,10 @@ class NativeArtifactManifestTests(unittest.TestCase):
                         output=output,
                     )
                 saved = json.loads(output.read_text(encoding="utf-8"))
+                tree_inventory_path = package / "output/native-artifact-tree-inventory.json"
+                tree_inventory = json.loads(
+                    tree_inventory_path.read_text(encoding="utf-8")
+                )
                 self.assertEqual(saved, result)
                 self.assertEqual(
                     result["artifacts"]["frozen"]["sha256"],
@@ -72,6 +76,12 @@ class NativeArtifactManifestTests(unittest.TestCase):
                 )
                 self.assertEqual(result["source_sha"], "a" * 40)
                 self.assertEqual(result["platform"], system)
+                self.assertEqual(
+                    tree_inventory,
+                    manifest_writer.packaged_tree_inventory(
+                        package / "dist/action-server"
+                    ),
+                )
                 for runtime in ("frozen", "go-wrapper"):
                     artifact = result["artifacts"][runtime]
                     self.assertEqual(

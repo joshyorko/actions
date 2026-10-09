@@ -13,6 +13,7 @@ import stat
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 import pytest
@@ -58,6 +59,67 @@ def packaged_tree_sha256(root: Path) -> str:
     return digest.hexdigest()
 
 
+def packaged_tree_inventory(root: Path) -> list[dict[str, str | int | None]]:
+    inventory = []
+    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+        metadata = path.lstat()
+        if path.is_symlink():
+            kind = "symlink"
+            link_target = os.readlink(path)
+        elif path.is_dir():
+            kind = "directory"
+            link_target = None
+        elif path.is_file():
+            kind = "file"
+            link_target = None
+        else:
+            raise AssertionError("unsupported packaged artifact entry")
+        inventory.append(
+            {
+                "path": path.relative_to(root).as_posix(),
+                "kind": kind,
+                "mode": stat.S_IMODE(metadata.st_mode),
+                "link_target": link_target,
+                "content_sha256": sha256(path) if path.is_file() else None,
+            }
+        )
+    return inventory
+
+
+def write_pretest_tree_inventory(
+    receipt_value: str | None,
+    *,
+    source_sha: str,
+    runtime_kind: str,
+    executable_sha: str,
+    manifest_path: Path,
+    package_root: Path,
+) -> None:
+    if not receipt_value:
+        return
+    receipt_path = Path(receipt_value)
+    inventory_path = receipt_path.with_name(
+        f"{receipt_path.stem}-pretest-tree-inventory.json"
+    )
+    inventory_path.parent.mkdir(parents=True, exist_ok=True)
+    inventory_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_sha": source_sha,
+                "runtime_kind": runtime_kind,
+                "platform": platform.system(),
+                "executable_sha256": executable_sha,
+                "manifest_sha256": sha256(manifest_path),
+                "entries": packaged_tree_inventory(package_root),
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
 def packaged_files_sha256(
     root: Path, *, exclude_root_files: set[str] | None = None
 ) -> str:
@@ -94,13 +156,34 @@ def require_measured_digest(artifact: dict, field: str, measured: str) -> None:
 
 
 class NativeRuntimeStartupError(AssertionError):
-    def __init__(self, primary_error: Exception, cleanup_error: Exception | None = None):
+    def __init__(
+        self,
+        primary_error: Exception,
+        cleanup_error: Exception | None = None,
+        cleanup_observation: dict | None = None,
+    ):
         self.primary_error = primary_error
         self.cleanup_error = cleanup_error
+        self.cleanup_observation = cleanup_observation
         message = f"packaged Runtime startup failed ({type(primary_error).__name__})"
         if cleanup_error is not None:
             message += f"; cleanup failed ({type(cleanup_error).__name__})"
         super().__init__(message)
+
+
+class NativeRuntimeCleanupError(AssertionError):
+    def __init__(self, observation: dict, stop_error: BaseException | None = None):
+        self.observation = observation
+        self.stop_error = stop_error
+        detail = (
+            f"wrapper_reaped={observation['wrapper_reaped']}, "
+            f"live_descendants={observation['live_descendant_count']}, "
+            f"snapshot_complete={observation['descendant_snapshot_complete']}, "
+            f"control_errors={observation['control_error_count']}"
+        )
+        if stop_error is not None:
+            detail += f", stop_error={type(stop_error).__name__}"
+        super().__init__(f"native Runtime cleanup was not observed complete ({detail})")
 
 
 def packaged_artifact_relative_path(runtime_kind: str, platform_name: str) -> str:
@@ -148,6 +231,14 @@ def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
         executable.parent
         if runtime_kind == "frozen"
         else executable.parents[1] / "action-server"
+    )
+    write_pretest_tree_inventory(
+        os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
+        source_sha=source_sha,
+        runtime_kind=runtime_kind,
+        executable_sha=executable_sha,
+        manifest_path=Path(manifest_value),
+        package_root=frozen_package,
     )
     require_measured_digest(
         artifact,
@@ -307,21 +398,91 @@ def start_native_runtime(
             },
         )
     except Exception as error:
+        cleanup_receipt: dict = {}
         try:
-            process.stop()
+            stop_runtime_for_acceptance(process, cleanup_receipt)
         except Exception as cleanup_error:
-            raise NativeRuntimeStartupError(error, cleanup_error) from None
-        raise NativeRuntimeStartupError(error) from None
+            raise NativeRuntimeStartupError(
+                error, cleanup_error, cleanup_receipt.get("cleanup_observation")
+            ) from None
+        raise NativeRuntimeStartupError(
+            error, cleanup_observation=cleanup_receipt.get("cleanup_observation")
+        ) from None
     return process
 
 
 def stop_runtime_for_acceptance(process: ActionServerProcess, receipt: dict) -> None:
+    from actions.server._common.process import (
+        ProcessTreeCleanupResult,
+        force_kill_process_tree_until,
+        snapshot_process_descendants,
+    )
+
+    runtime_process = process.process
+    child = runtime_process._proc
+    descendants = None
+    snapshot_complete = child is None
+    snapshot_failure_type = None
+    if child is not None:
+        try:
+            descendants = snapshot_process_descendants(child.pid)
+            snapshot_complete = True
+        except BaseException as error:
+            snapshot_failure_type = type(error).__name__
+
+    stop_error = None
     try:
         process.stop()
     except BaseException as error:
+        stop_error = error
+
+    if child is None:
+        result = ProcessTreeCleanupResult(True, (), (), ())
+    else:
+        try:
+            result = force_kill_process_tree_until(
+                child,
+                descendants,
+                time.monotonic() + 15,
+                snapshot_complete_before_call=snapshot_complete,
+            )
+        except BaseException as error:
+            observation = {
+                "wrapper_started": True,
+                "wrapper_reaped": False,
+                "live_descendant_count": 0,
+                "zombie_descendant_count": 0,
+                "descendant_snapshot_complete": snapshot_complete,
+                "control_error_count": 1,
+                "control_failure_type": type(error).__name__,
+                "snapshot_failure_type": snapshot_failure_type,
+                "stop_failure_type": type(stop_error).__name__ if stop_error else None,
+            }
+            receipt["cleanup_observation"] = observation
+            receipt["cleanup_failure_type"] = type(error).__name__
+            receipt["status"] = "FAIL"
+            raise NativeRuntimeCleanupError(observation, stop_error) from None
+
+    observation = {
+        "wrapper_started": child is not None,
+        "wrapper_reaped": result.wrapper_reaped,
+        "live_descendant_count": len(result.live_descendant_pids),
+        "zombie_descendant_count": len(result.zombie_descendant_pids),
+        "descendant_snapshot_complete": result.descendant_snapshot_complete,
+        "control_error_count": len(result.errors),
+        "snapshot_failure_type": snapshot_failure_type,
+        "stop_failure_type": type(stop_error).__name__ if stop_error else None,
+    }
+    receipt["cleanup_observation"] = observation
+    if not result.execution_stopped or stop_error is not None:
+        cleanup_type = (
+            type(stop_error).__name__
+            if stop_error is not None
+            else "ProcessTreeCleanupIncomplete"
+        )
+        receipt["cleanup_failure_type"] = cleanup_type
         receipt["status"] = "FAIL"
-        receipt["cleanup_failure_type"] = type(error).__name__
-        raise
+        raise NativeRuntimeCleanupError(observation, stop_error) from None
 
 
 def test_native_runtime_startup_failure_stops_created_process(
@@ -330,6 +491,7 @@ def test_native_runtime_startup_failure_stops_created_process(
     class StartupProcess:
         def __init__(self, _datadir):
             self.stop_calls = 0
+            self.process = type("Wrapped", (), {"_proc": None})()
 
         def start(self, **_kwargs):
             raise TimeoutError("startup timeout")
@@ -356,7 +518,7 @@ def test_native_runtime_startup_preserves_cleanup_failure_type(
 ) -> None:
     class StartupProcess:
         def __init__(self, _datadir):
-            pass
+            self.process = type("Wrapped", (), {"_proc": None})()
 
         def start(self, **_kwargs):
             raise TimeoutError("startup timeout")
@@ -368,9 +530,9 @@ def test_native_runtime_startup_preserves_cleanup_failure_type(
     with pytest.raises(AssertionError) as error:
         start_native_runtime(tmp_path, tmp_path, tmp_path, "test-key")
     assert "TimeoutError" in str(error.value)
-    assert "RuntimeError" in str(error.value)
     assert isinstance(error.value.primary_error, TimeoutError)
-    assert isinstance(error.value.cleanup_error, RuntimeError)
+    assert isinstance(error.value.cleanup_error, NativeRuntimeCleanupError)
+    assert isinstance(error.value.cleanup_error.stop_error, RuntimeError)
 
 
 def test_missing_and_mismatched_manifest_digests_fail_closed() -> None:
@@ -387,15 +549,121 @@ def test_missing_and_mismatched_manifest_digests_fail_closed() -> None:
             require_measured_digest({field: "b" * 64}, field, "a" * 64)
 
 
+def test_pretest_inventory_records_relative_entry_identity(tmp_path: Path) -> None:
+    package = tmp_path / "package"
+    package.mkdir()
+    (package / "nested").mkdir()
+    (package / "nested/module.py").write_bytes(b"measured content")
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text("{}\n", encoding="utf-8")
+    receipt_path = tmp_path / "dakota-workitems-ui-frozen-test.json"
+
+    write_pretest_tree_inventory(
+        str(receipt_path),
+        source_sha="a" * 40,
+        runtime_kind="frozen",
+        executable_sha="b" * 64,
+        manifest_path=manifest_path,
+        package_root=package,
+    )
+
+    inventory_path = tmp_path / "dakota-workitems-ui-frozen-test-pretest-tree-inventory.json"
+    inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
+    assert inventory["source_sha"] == "a" * 40
+    assert inventory["manifest_sha256"] == sha256(manifest_path)
+    assert inventory["entries"] == packaged_tree_inventory(package)
+    assert inventory["entries"][-1]["content_sha256"] == hashlib.sha256(
+        b"measured content"
+    ).hexdigest()
+
+
 def test_cleanup_failure_prevents_bounded_pass_receipt() -> None:
     class FailingCleanup:
+        process = type("Wrapped", (), {"_proc": None})()
+
         def stop(self):
             raise OSError("cleanup details stay private")
 
     receipt = {"status": "IN_PROGRESS"}
-    with pytest.raises(OSError):
+    with pytest.raises(NativeRuntimeCleanupError):
         stop_runtime_for_acceptance(FailingCleanup(), receipt)
-    assert receipt == {"status": "FAIL", "cleanup_failure_type": "OSError"}
+    assert receipt["status"] == "FAIL"
+    assert receipt["cleanup_failure_type"] == "OSError"
+    assert receipt["cleanup_observation"]["stop_failure_type"] == "OSError"
+
+
+def test_normal_stop_return_with_observed_live_descendant_fails_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from actions.server._common.process import ProcessTreeCleanupResult
+
+    class Child:
+        pid = 321
+
+        def create_time(self):
+            return 123.5
+
+    class Wrapper:
+        pid = 123
+
+        def poll(self):
+            return None
+
+    class RuntimeProcess:
+        _proc = Wrapper()
+
+    class Runtime:
+        process = RuntimeProcess()
+
+        def stop(self):
+            return None
+
+    monkeypatch.setattr(
+        "actions.server._common.process.snapshot_process_descendants",
+        lambda pid: [Child()] if pid == 123 else [],
+    )
+    monkeypatch.setattr(
+        "actions.server._common.process.force_kill_process_tree_until",
+        lambda *_args, **_kwargs: ProcessTreeCleanupResult(
+            True, (321,), (), (), descendant_snapshot_complete=True
+        ),
+    )
+    receipt = {"status": "IN_PROGRESS"}
+    with pytest.raises(NativeRuntimeCleanupError):
+        stop_runtime_for_acceptance(Runtime(), receipt)
+    assert receipt["status"] == "FAIL"
+    assert receipt["cleanup_observation"]["wrapper_reaped"] is True
+    assert receipt["cleanup_observation"]["live_descendant_count"] == 1
+
+
+def test_bounded_observation_reaps_only_the_owned_runtime_process() -> None:
+    child = subprocess.Popen(
+        [sys.executable, "-c", "import time; time.sleep(30)"],
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+    class RuntimeProcess:
+        _proc = child
+
+    class Runtime:
+        process = RuntimeProcess()
+
+        def stop(self):
+            return None
+
+    receipt = {"status": "IN_PROGRESS"}
+    try:
+        stop_runtime_for_acceptance(Runtime(), receipt)
+        assert child.poll() is not None
+        assert receipt["cleanup_observation"]["wrapper_reaped"] is True
+        assert receipt["cleanup_observation"]["live_descendant_count"] == 0
+        assert "zombie_descendant_count" in receipt["cleanup_observation"]
+    finally:
+        if child.poll() is None:
+            child.kill()
+            child.wait(timeout=2)
 
 
 @pytest.mark.integration_test
@@ -549,6 +817,8 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             receipt["failure_type"] = type(error.primary_error).__name__
             if error.cleanup_error is not None:
                 receipt["cleanup_failure_type"] = type(error.cleanup_error).__name__
+            if error.cleanup_observation is not None:
+                receipt["cleanup_observation"] = error.cleanup_observation
         else:
             receipt["failure_type"] = type(error).__name__
         if process is not None:

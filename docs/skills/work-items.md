@@ -458,12 +458,25 @@ Those Windows gates still require passing hosted receipts; macOS browser
 acceptance is not configured. Authorization denial, missing bundled support,
 and generic HTTP 500 remain `NOT_RUN` until their separately owned or supported
 packaged fixtures run. Do not use response interception as backend evidence.
-The browser receipt may say `PASS_BOUNDED` only after the owned Runtime process
-stops successfully; startup failure stops the just-created process even when
-the startup helper has not returned it to the caller. If both startup and that
-cleanup fail, retain both exception class names in the sanitized receipt while
-preserving the startup exception as the primary failure. A cleanup exception
-after otherwise successful browser checks leaves the receipt at `FAIL`.
+The browser receipt may say `PASS_BOUNDED` only after the bounded process-tree
+cleanup result confirms that the Runtime wrapper was reaped, its descendant
+snapshot was complete, and no observed descendant remains live. A normal return
+from `ActionServerProcess.stop()` is insufficient: its underlying tree killer
+can suppress process-control errors and return without observing the final
+state. Keep the observed zombie-descendant count separate; this gate does not
+claim universal child reaping. Startup failure applies the same observation to
+the locally created Runtime even when the startup helper has not returned it to
+the caller. If both startup and cleanup fail, retain both exception class names
+and the bounded cleanup result in the sanitized receipt while preserving the
+startup exception as the primary failure. An incomplete cleanup result leaves
+the receipt at `FAIL`.
+
+If the manifest's frozen-tree digest differs at UI-gate startup, retain both the
+build-time inventory beside the manifest and the harness's pretest inventory.
+Compare their relative paths, entry kinds, permission modes, symlink targets,
+and file-content hashes before changing inventory normalization or gate order.
+The inventory is diagnostic evidence; never recompute the trusted manifest
+value from the later tree to make a mismatch pass.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
