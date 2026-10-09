@@ -52,7 +52,8 @@ _after_collect_actions.register(_validate_collected_actions)
 
 
 @overload
-def tool(func: Callable) -> Callable: ...
+def tool(func: Callable) -> Callable:
+    ...
 
 
 @overload
@@ -198,7 +199,8 @@ def tool(*args, **kwargs):
 
 
 @overload
-def resource(func: Callable) -> Callable: ...
+def resource(func: Callable) -> Callable:
+    ...
 
 
 @overload
@@ -208,7 +210,8 @@ def resource(
     mime_type: str | None = None,
     size: int | None = None,
     meta: dict[str, Any] | None = None,
-) -> Callable: ...
+) -> Callable:
+    ...
 
 
 def resource(*args, **kwargs) -> Callable:
@@ -325,11 +328,13 @@ def resource(*args, **kwargs) -> Callable:
 
 
 @overload
-def prompt(func: Callable) -> Callable: ...
+def prompt(func: Callable) -> Callable:
+    ...
 
 
 @overload
-def prompt() -> Callable: ...
+def prompt() -> Callable:
+    ...
 
 
 def prompt(*args, **kwargs):

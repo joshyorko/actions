@@ -59,7 +59,7 @@ Note that a tool needs sema4ai actions to be executed. The command line to execu
 
 actions run actions.py -a assign_ticket
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L92)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L93)
 
 ```python
 tool(*args, **kwargs)
@@ -112,7 +112,7 @@ actions run actions.py -a get_ticket
 
 See: https://modelcontextprotocol.io/docs/concepts/resources
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L214)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L217)
 
 ```python
 resource(*args, **kwargs) → Callable
@@ -150,7 +150,7 @@ Note that a prompt needs sema4ai actions to be executed. The command line to exe
 
 actions run actions.py -a make_a_summary
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L335)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L340)
 
 ```python
 prompt(*args, **kwargs)
