@@ -98,12 +98,28 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
+      - name: Verify native artifact manifest contract
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} python
+          -m unittest discover -s scripts -p test_native_artifact_manifest.py -v
+
       - name: Build binary (unsigned, with Go wrapper)
         env:
           RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
           RC_ACTION_SERVER_DO_SELFTEST: 'true'
         run: uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper
       
+      - name: Record native binary provenance
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} python
+          scripts/write_native_artifact_manifest.py
+          --source-sha "${{ github.sha }}"
+          --workflow-run-id "${{ github.run_id }}"
+          --workflow-run-attempt "${{ github.run_attempt }}"
+          --runner-os "${{ matrix.os }}"
+          --build-command "uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper"
+          --output output/native-artifact-manifest.json
+
       - name: Verify binary was built
         run: |
           if [ ! -f "dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}" ]; then
@@ -148,6 +164,15 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
       
+      - name: Upload frozen executable and provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: action-server-native-provenance-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            action_server/dist/action-server/
+            action_server/output/native-artifact-manifest.json
+          retention-days: 7
+
       - name: Upload binary artifact
         uses: actions/upload-artifact@v4
         with:
