@@ -291,6 +291,7 @@ def run_owned_process(
     cwd: Path | None = None,
     cleanup_grace_seconds: float = CLEANUP_GRACE_SECONDS,
 ) -> subprocess.CompletedProcess:
+    command = [os.fspath(argument) for argument in command]
     if sys.platform == "linux":
         payload = json.dumps(
             {

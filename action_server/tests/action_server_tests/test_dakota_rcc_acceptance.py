@@ -333,6 +333,18 @@ def test_runtime_tree_refresh_precedes_stop_even_when_stop_fails(monkeypatch):
     assert tree == ["new-owned-child"]
 
 
+def test_owned_linux_process_accepts_path_arguments(tmp_path):
+    harness = _harness()
+    result = harness.run_owned_process(
+        [Path(sys.executable), "-c", "print('path-argument-ok')"],
+        timeout_seconds=3,
+        env=harness.child_environment(os.environ, task_root=tmp_path / "runtime"),
+    )
+
+    assert result.returncode == 0
+    assert result.stdout.strip() == "path-argument-ok"
+
+
 def test_acceptance_fails_closed_before_side_effects_on_non_linux(monkeypatch):
     harness = _harness()
     monkeypatch.setattr(harness.sys, "platform", "darwin")
