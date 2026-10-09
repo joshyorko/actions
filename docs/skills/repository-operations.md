@@ -42,6 +42,14 @@ dependency, and `actions-runtime` is the server distribution rather than a
 template library. Keep the static template-manifest contract synchronized
 with these package boundaries when a published version changes.
 
+Core keeps its released `actions-http-helper` version range in main
+dependencies and points the dev group at the sibling helper source. Install the
+locked dev group before running Core tests: an older registry copy can route
+test-only localhost service calls through a sandbox proxy, while the current
+sibling source lets those tests exercise the helper implementation in this
+checkout. This override is for development and does not change Core's runtime
+dependency floor.
+
 The Action Server frontend uses `action_server/frontend/package.json` and its
 lock as the sole package metadata. `npm ci` is the reproducible,
 credential-free install contract; after the public dependency cache is warm,
