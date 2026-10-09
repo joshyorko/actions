@@ -1,14 +1,16 @@
 import asyncio
 import importlib.util
 import json
+from collections.abc import Callable
 from functools import partial
 from types import SimpleNamespace
+from typing import Any
 
 import pytest
 from action_server_tests.fixtures import run_async_in_new_thread
 from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
-from mcp.types import ReadResourceResult, TextResourceContents
+from mcp.types import ReadResourceResult, TextContent, TextResourceContents
 
 from actions.server._selftest import ActionServerProcess
 
@@ -26,7 +28,7 @@ async def _check_public_metadata(monkeypatch, tmp_path) -> None:
     from actions import _hooks
     from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
 
-    captured = {}
+    captured: dict[str, tuple[Callable[..., Any], dict[str, Any]]] = {}
     monkeypatch.setattr(
         _hooks,
         "on_action_func_found",
@@ -122,21 +124,28 @@ def object_result() -> dict[str, str]:
                     assert isinstance(content, TextResourceContents)
                     assert content.mime_type == "text/html;profile=mcp-app"
                     assert content.text == "<html>fixture</html>"
+                    assert content.meta is not None
                     assert content.meta["ui"] == {
                         "csp": {"connectDomains": ["https://api.example.test"]}
                     }
+                    assert resource.meta is not None
                     assert resource.meta["ui"] == {
                         "csp": {"connectDomains": ["https://api.example.test"]}
                     }
 
                     text = await session.call_tool("text_result", {})
-                    assert [item.text for item in text.content] == ["ready"]
+                    assert len(text.content) == 1
+                    assert isinstance(text.content[0], TextContent)
+                    assert text.content[0].text == "ready"
+                    assert text.meta is not None
+                    assert tools["text_result"].meta is not None
                     assert text.meta["ui"] == tools["text_result"].meta["ui"]
                     assert text.meta["com.example.extra"] == {"v": 1}
 
                     structured = await session.call_tool("object_result", {})
                     assert structured.content == []
                     assert structured.structured_content == {"status": "ready"}
+                    assert structured.meta is not None
                     assert structured.meta["ui"] == {
                         "resourceUri": "ui://fixture/view",
                         "visibility": ["app"],
@@ -192,22 +201,30 @@ def object_result() -> dict[str, str]:
             assert tools["text_result"].meta == expected_meta
 
             resource = await session.read_resource("ui://fixture/view?revision=1")
-            assert resource.contents[0].mime_type == "text/html;profile=mcp-app"
-            assert resource.contents[0].text == "<html>fixture</html>"
-            assert resource.contents[0].meta["ui"] == {
+            content = resource.contents[0]
+            assert isinstance(content, TextResourceContents)
+            assert content.mime_type == "text/html;profile=mcp-app"
+            assert content.text == "<html>fixture</html>"
+            assert content.meta is not None
+            assert content.meta["ui"] == {
                 "csp": {"connectDomains": ["https://api.example.test"]}
             }
+            assert resource.meta is not None
             assert resource.meta["ui"] == {
                 "csp": {"connectDomains": ["https://api.example.test"]}
             }
 
             text = await session.call_tool("text_result", {})
-            assert [item.text for item in text.content] == ["ready"]
+            assert len(text.content) == 1
+            assert isinstance(text.content[0], TextContent)
+            assert text.content[0].text == "ready"
+            assert text.meta is not None
             assert text.meta["com.example.extra"] == {"v": 1}
 
             structured = await session.call_tool("object_result", {})
             assert structured.content == []
             assert structured.structured_content == {"status": "ready"}
+            assert structured.meta is not None
             assert structured.meta["ui"]["visibility"] == ["app"]
 
     assert run_async_in_new_thread(partial(check_routes)) is None
