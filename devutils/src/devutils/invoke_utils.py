@@ -524,6 +524,7 @@ def build_common_tasks(
             "--output",
             _quote_if_needed(output_path),
         )
+
         if check:
             if check_document_changes(ctx):
                 output = run(ctx, "git --no-pager diff -- docs/api")
