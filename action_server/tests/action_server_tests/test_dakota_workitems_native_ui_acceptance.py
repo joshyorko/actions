@@ -74,6 +74,29 @@ def packaged_files_sha256(
     return digest.hexdigest()
 
 
+def packaged_artifact_relative_path(runtime_kind: str, platform_name: str) -> str:
+    executable = {
+        "frozen": "dist/action-server/action-server",
+        "go-wrapper": "dist/final/action-server",
+    }[runtime_kind]
+    return executable + (".exe" if platform_name == "Windows" else "")
+
+
+@pytest.mark.parametrize(
+    ("runtime_kind", "platform_name", "expected_path"),
+    [
+        ("frozen", "Linux", "dist/action-server/action-server"),
+        ("go-wrapper", "Linux", "dist/final/action-server"),
+        ("frozen", "Windows", "dist/action-server/action-server.exe"),
+        ("go-wrapper", "Windows", "dist/final/action-server.exe"),
+    ],
+)
+def test_native_manifest_executable_paths_match_platform(
+    runtime_kind: str, platform_name: str, expected_path: str
+) -> None:
+    assert packaged_artifact_relative_path(runtime_kind, platform_name) == expected_path
+
+
 def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
     executable_value = os.environ.get("DAKOTA_WORKITEMS_UI_EXECUTABLE")
     source_sha = os.environ.get("DAKOTA_WORKITEMS_UI_SOURCE_SHA", "")
@@ -88,10 +111,7 @@ def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
     assert manifest.get("source_sha") == source_sha
     assert manifest.get("platform") == platform.system()
     artifact = manifest.get("artifacts", {}).get(runtime_kind, {})
-    expected_path = {
-        "frozen": "dist/action-server/action-server",
-        "go-wrapper": "dist/final/action-server",
-    }[runtime_kind]
+    expected_path = packaged_artifact_relative_path(runtime_kind, platform.system())
     assert artifact.get("path") == expected_path
     executable_sha = sha256(executable)
     assert artifact.get("sha256") == executable_sha

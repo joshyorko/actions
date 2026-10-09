@@ -198,19 +198,35 @@ jobs:
           --source-sha "${{ github.sha }}"
           --receipt output/native-history.json
 
-      - name: Verify packaged Work Items browser acceptance
-        if: matrix.os == 'ubuntu-22.04'
+      - name: Verify packaged Work Items browser acceptance (frozen)
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022'
         timeout-minutes: 10
         env:
-          DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/action-server/action-server
+          DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/action-server/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
           DAKOTA_WORKITEMS_UI_RUNTIME_KIND: frozen
           DAKOTA_WORKITEMS_UI_SOURCE_SHA: ${{ github.sha }}
           DAKOTA_WORKITEMS_UI_BUILD_MANIFEST: ${{ github.workspace }}/action_server/output/native-artifact-manifest.json
-          DAKOTA_WORKITEMS_UI_RECEIPT: ${{ github.workspace }}/action_server/output/dakota-workitems-ui-acceptance.json
+          DAKOTA_WORKITEMS_UI_RECEIPT: ${{ github.workspace }}/action_server/output/dakota-workitems-ui-frozen-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}.json
         run: >-
           uv run --no-project --python ${{ matrix.python }} poetry run pytest
           tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py
-          -q -n 0
+          -q -n 1
+          --basetemp "${{ runner.temp }}/dakota-workitems-ui-frozen-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
+
+      - name: Verify packaged Work Items browser acceptance (Go wrapper)
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022'
+        timeout-minutes: 10
+        env:
+          DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
+          DAKOTA_WORKITEMS_UI_RUNTIME_KIND: go-wrapper
+          DAKOTA_WORKITEMS_UI_SOURCE_SHA: ${{ github.sha }}
+          DAKOTA_WORKITEMS_UI_BUILD_MANIFEST: ${{ github.workspace }}/action_server/output/native-artifact-manifest.json
+          DAKOTA_WORKITEMS_UI_RECEIPT: ${{ github.workspace }}/action_server/output/dakota-workitems-ui-go-wrapper-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}.json
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest
+          tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py
+          -q -n 1
+          --basetemp "${{ runner.temp }}/dakota-workitems-ui-go-wrapper-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
 
       - name: Upload native acceptance receipt
         if: always()
@@ -220,7 +236,7 @@ jobs:
           path: |
             action_server/output/native-acceptance.json
             action_server/output/native-history.json
-            action_server/output/dakota-workitems-ui-acceptance.json
+            action_server/output/dakota-workitems-ui-*-*.json
           if-no-files-found: ignore
           retention-days: 7
       

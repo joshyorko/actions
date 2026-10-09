@@ -145,12 +145,14 @@ any prior receipt, then atomically writes a fresh `IN_PROGRESS` receipt and
 attempt ID before artifact checks or pytest. Ordinary failures write `FAIL` and
 mark cases `NOT_VERIFIED`; abrupt termination can leave `IN_PROGRESS`, which is
 not a passing result. Source SHA and build version arguments are caller claims,
-not verified build provenance. A Linux receipt does not establish Windows or
-macOS consumer acceptance, distributed or service-backend behavior, or full
-browser acceptance. The credential-free native workflow also runs process
-ownership, management/browser and history acceptance; those checks do not
-replace this packaged-worker consumer gate. Retain a separate passing receipt
-from this runner for each tested platform artifact.
+not verified build provenance. The credential-free native workflow runs this
+consumer gate on its Linux, macOS, and Windows matrix after the native artifact
+binding-lock tests. Keep a separate passing receipt for each platform and each
+frozen/Go executable; a Linux receipt does not establish Windows or macOS
+consumer acceptance, distributed or service-backend behavior, or full browser
+acceptance. The workflow also runs process ownership, management/browser and
+history acceptance; those checks do not replace this packaged-worker consumer
+gate.
 
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
@@ -372,9 +374,13 @@ The runner hashes both executables and the wheel, requires fresh per-runtime
 API proofs, and accepts
 the optional native manifest only when its source SHA, platform, architecture,
 expected executable paths and measured executable hashes agree. Its receipt
-records the manifest hash and binding result. This hosted matrix is configured
-to collect a separate receipt on each of the three platforms; only a passing
-receipt establishes consumer acceptance for that platform. The gate does not
+records the manifest hash and binding result. This hosted matrix collects a
+separate receipt on each of the three platforms; only a passing receipt
+establishes consumer acceptance for that platform. The Action Server must
+create the action Run and bind its artifact metadata before the generated Work
+Items consumer action executes. The native workflow runs platform lock tests
+before consumer acceptance; a failure during Run creation is a platform
+artifact-storage failure, not Work Items consumer evidence. The gate does not
 establish a clean-source attestation, wheel provenance inside the native build
 manifest, or live external-service behavior. The workflow retains a receipt
 even when the gate fails or is interrupted, then removes only its run-owned RCC
@@ -437,10 +443,14 @@ wrapper-source SHA-256 `dd1fca74676c2c10531397e7ffe8bf5499b5ba75a6692334b16fd0e1
 and extracted-file-set SHA-256 `0eccdeebceb4c8a7f6bf94b8f12e37f4f3302e8726daffc68d0198ee5fb9ad50`.
 It verified the same empty/populated queue, Escape focus restoration, detail,
 320px layout, and real storage-unavailable states as the frozen gate. These are
-Linux results only; Windows/macOS browser acceptance, authorization denial,
-missing bundled support, and generic HTTP 500 remain `NOT_RUN` until their
-separately owned or supported packaged fixtures run. Do not use response
-interception as backend evidence.
+Linux results only. The native workflow runs separate frozen and Go-wrapper
+browser gates on Ubuntu and Windows; their receipts bind the manifest path,
+executable hash, and (for frozen builds) the onedir package-tree hash. Windows
+manifest paths include `.exe` for both runtimes, which the harness validates.
+Those Windows gates still require passing hosted receipts; macOS browser
+acceptance is not configured. Authorization denial, missing bundled support,
+and generic HTTP 500 remain `NOT_RUN` until their separately owned or supported
+packaged fixtures run. Do not use response interception as backend evidence.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
