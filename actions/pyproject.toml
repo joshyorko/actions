@@ -32,6 +32,7 @@ actions-http-helper = { path = "../actions-http-helper/", develop = true }
 actions-local-devutils = { path = "../devutils/", develop = true }
 types-psutil = ">=5.9,<8.0"
 types-PyYAML = "6.0"
+pytest-cov = "5.0.0"
 
 [tool.mypy]
 mypy_path = "src:tests"

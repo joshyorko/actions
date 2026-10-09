@@ -1289,6 +1289,18 @@ extracting anything, on every OS. Generic casefold/path confinement alone does n
 prove portable destination safety. Keep actual native filesystem, no-follow races,
 and TLS/redirect evidence separate from source and instrumented transport tests.
 
+Allocate Robot publication staging exclusively before copying, and record ownership
+only after allocation succeeds. An initial name collision is not permission to
+delete the existing entry. The regression seeds a foreign sentinel at the allocation
+boundary and proves it survives; interrupted copies still clean their owned staging.
+This initial ownership flag does not establish identity after another actor replaces
+the entry. `resolve`, `lexists` and an atomic replacing rename also do not prove
+root identity or atomic no-overwrite publication. Retain those acceptance gaps until
+trusted-parent admission, protected source/staging, exclusive publication and cleanup
+have native filesystem proof. The reproduced replacement races require authority to
+mutate the publication namespace; no archive-only remote exploit was demonstrated,
+and this boundary does not promise a sandbox against arbitrary Runtime-UID compromise.
+
 ### Complete frontend tests versus shipping quality checks
 
 `npm run test:quality` checks lint, types, formatting and two intentionally focused
@@ -1296,3 +1308,101 @@ frontend invariant selections. It does not run the complete Vitest suite. The
 frontend workflow must also run `npm test`; report full-suite counts separately
 from the quality selections and actual packaged browser acceptance. A green
 quality job alone does not establish reconnect, Work Items or sign-in regressions.
+
+### Packaged large-history and mobile-navigation regressions
+
+Windows `KILL_ON_JOB_CLOSE` and `TerminateJobObject` initiate descendant termination.
+Native diagnostics confirmed that an exact member of the owned Job can still have
+an unsignaled process handle after its active-process accounting reaches zero.
+Count-zero alone is therefore not sufficient shutdown evidence. The harness captures
+a complete Job PID list, retains handles with `SYNCHRONIZE` and
+`PROCESS_QUERY_LIMITED_INFORMATION`, and verifies exact Job membership before calling
+`TerminateJobObject`. It waits those handles and zero accounting under one shared
+deadline, including capture time. The initial count bounds the PID buffer, with a
+4096-process ceiling; query failure, a partial/changed list, failed handle acquisition,
+membership check or wait, and a changed cumulative `TotalProcesses` counter all fail
+acceptance. Cleanup attempts every captured handle close on success and failure;
+a failed close rejects acceptance without skipping the remaining handles. An
+initially empty Job still undergoes list and counter checks.
+
+The regression asserts exact Job membership while the descendant holds a file after
+its leader exits, checks its handle with zero timeout immediately after the ownership
+context returns, then unlinks the file. Preserve that immediate observation; a
+grace-period wait or additional native diagnostic queries before it can mask the race.
+A second native regression holds both descendant and grandchild handles across
+leader exit. Portable fake-kernel tests cover accounting/handle disagreement, shared
+deadlines, acquisition and wait failures, PID reuse/churn, and handle cleanup; they
+do not establish Windows kernel behavior.
+
+Run the package's configured lint/type checks as well as explicit checks for
+the acceptance scripts: the package lint target covers `src` and `tests`, so
+passing it alone does not check `scripts`.
+
+`WINDOWS_JOB_DIAGNOSTICS` retains only bounded scalar fields and at most 64 PIDs.
+It captures membership, accounting and a possibly incomplete PID list before drain,
+records the existing drain queries' count results without extra native calls, and
+records the immediate post-context handle result. Post-close Job accounting/PIDs
+are not available; an incomplete PID list is not an empty tree. Diagnostics print
+after assertions, including on failure. These distinguish ownership from completion;
+a diagnostic-only green run does not repair or accept Windows shutdown.
+
+A PID snapshot alone cannot cover descendants spawned after enumeration or processes
+exiting before capture. Cumulative process-count comparisons before termination,
+after termination and after waits reject newly added members; they do not prove
+completion of processes that had already left accounting before capture. This
+remaining limit applies even to an initially empty Job and must not be described
+as arbitrary-tree shutdown proof. A repair requires a new actual Windows run of the
+strict regressions and packaged shutdown paths. Preserve any cleanup failure even
+when browser/product checks have passed.
+
+Run `poetry run python scripts/verify_native_history.py --source-sha <build-commit>
+--receipt output/native-history.json` from `action_server` after building the frozen
+and Go-wrapper artifacts and installing the declared Playwright Chromium browser.
+The harness creates and removes its own SQLite data directory containing 210 synthetic
+4 MiB results (880,803,840 stored bytes); never point this test at user run data.
+It checks the shipped UI's 200-row summary pages, reconnect-triggered pagination
+refresh, absence of legacy aggregate-list requests, and explicit full-detail retrieval.
+The receipt binds each executable hash to the supplied build commit; a frozen
+executable hash alone does not bind its adjacent distribution files. This check
+proves the summary client path, not bounded legacy `/api/runs` responses.
+
+Mobile navigation must close on selecting the current route as well as a different
+route. A pathname-change effect alone misses the current-route case; retain an
+explicit navigation-selection callback and both regression assertions. CI must run
+the complete frontend suite alongside the narrower topology and UI-system gates.
+
+Public compatibility tables must date their live registry observations. Query each
+package's PyPI JSON release metadata and the separate GitHub native release record;
+a roadmap ledger can lag either distribution channel. Unpublished candidate versions
+remain candidates even when source, wheel, or local native checks pass.
+
+### Scoped schema design and database parity
+
+The current generic `DBRules`/`Database.create_table_sql` path expresses single-column
+`*_id -> id` foreign keys. It does not establish composite Workspace/owner scoping.
+Proposed Deployment graphs therefore require an explicit DDL helper shared by
+upgrade migrations and fresh SQLite/PostgreSQL bootstrap paths. SQLite must declare
+forward cyclic pointer references when creating tables; PostgreSQL can add the
+pointer constraints after both tables exist. Inspect the final child/parent column
+tuples and their order on each backend rather than inferring parity from successful
+writes. The Deployment draft's scratch SQLite probe demonstrates representative
+foreign-key and replay constraints only: it does not prove authorization, committed
+pointer invariants, triggers, CAS, production migration recovery or PostgreSQL.
+
+Template README files ship verbatim in the embedded project archives because the
+bundle builder includes every source file. After changing active template guidance,
+regenerate the individual and combined ZIPs with the repository builder; compare
+all four manifest IDs, complete archive inventories, source README/package bytes,
+and nested versus standalone ZIP equality. A documentation-only source change does
+not reach newly generated projects until these resources are rebuilt. Keep dependency
+pins and legal/history files unchanged when only product guidance is being repaired.
+
+For live PostgreSQL acceptance, use a fresh task-owned service pinned by immutable
+image digest and bind its randomly allocated port to loopback only. Keep generated
+fixture credentials in a mode-0600 task file, pass them only to the test environment,
+and preserve sanitized test/server logs plus image and cleanup receipts. Remove only
+the named verification container. Passing the shipped Runtime's SQLite/PostgreSQL
+suite establishes its tested database behavior; it does not prove the proposed
+Deployment schema or replace wheel, frozen, TLS or failure-recovery acceptance.
+Inspect the server log even when pytest passes: driver transaction warnings can
+expose a missing regression despite successful state assertions.

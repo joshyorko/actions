@@ -1244,6 +1244,73 @@ def test_two_database_instances_preserve_concurrent_atomic_updates():
 
 @pytest.mark.integration_test
 @pytest.mark.postgresql
+def test_postgresql_transaction_boundaries_emit_no_redundant_begin_notice():
+    url = os.environ.get("ACTIONS_TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("ACTIONS_TEST_DATABASE_URL is not configured")
+
+    database = Database(url)
+    value_id = f"transaction-boundary-{uuid.uuid4().hex}"
+    notices = []
+
+    with database.connect():
+        database._tlocal.conn.add_notice_handler(
+            lambda diagnostic: notices.append(diagnostic.message_primary)
+        )
+        database.initialize([SharedCounter])
+        with database.transaction():
+            database.create_tables()
+        with database.transaction():
+            database.insert(SharedCounter(value_id, 1))
+            with pytest.raises(RuntimeError, match="savepoint rollback"):
+                with database.transaction():
+                    database.execute(
+                        "UPDATE shared_counter SET value=? WHERE id=?",
+                        [2, value_id],
+                    )
+                    raise RuntimeError("savepoint rollback")
+            assert (
+                database.first(
+                    SharedCounter,
+                    "SELECT * FROM shared_counter WHERE id=?",
+                    [value_id],
+                ).value
+                == 1
+            )
+            database.execute(
+                "UPDATE shared_counter SET value=? WHERE id=?",
+                [3, value_id],
+            )
+
+        assert (
+            database.first(
+                SharedCounter,
+                "SELECT * FROM shared_counter WHERE id=?",
+                [value_id],
+            ).value
+            == 3
+        )
+        assert database._tlocal.conn.info.transaction_status.name == "IDLE"
+
+        rolled_back_id = f"transaction-rollback-{uuid.uuid4().hex}"
+        with pytest.raises(RuntimeError, match="outer rollback"):
+            with database.transaction():
+                database.insert(SharedCounter(rolled_back_id, 4))
+                raise RuntimeError("outer rollback")
+        with pytest.raises(KeyError):
+            database.first(
+                SharedCounter,
+                "SELECT * FROM shared_counter WHERE id=?",
+                [rolled_back_id],
+            )
+        with database.transaction():
+            database.execute("DELETE FROM shared_counter WHERE id=?", [value_id])
+
+    assert "there is already a transaction in progress" not in notices
+
+
+@pytest.mark.integration_test
+@pytest.mark.postgresql
 def test_postgresql_transaction_rolls_back_failed_state_update():
     url = os.environ.get("ACTIONS_TEST_DATABASE_URL")
     if not url:

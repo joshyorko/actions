@@ -316,9 +316,15 @@ check alone is not native Work Items acceptance.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
-descendants inherit that ownership; closing the Job terminates descendants even
-after their original leader exits. Job creation or assignment failure fails the
-gate. The workflow runs `python -m unittest discover -s scripts
+descendants inherit that ownership; closing the Job requests descendant termination
+even after their original leader exits. Successful cleanup additionally requires
+native proof that held descendant handles are already signaled at ownership-context
+return; the active-process accounting barrier alone has failed that assertion even
+with exact Job membership confirmed. The harness now captures and validates member
+handles before termination, waits them under one shared deadline, and rejects
+incomplete capture or cumulative process-count changes. This does not establish
+completion of processes that exited before capture. Job creation or assignment
+failure fails the gate. The workflow runs `python -m unittest discover -s scripts
 -p test_native_process_ownership.py -v`; the descendant lifetime test requires
 actual Windows and is skipped elsewhere. Linux gate tests do not establish
 Windows Job behavior. POSIX cleanup retains process-group ownership.
@@ -335,3 +341,46 @@ identifiers parsed from the final 64 KiB of the temporary log. Raw log lines,
 exception messages, paths and credentials are not copied into receipts. Treat
 these identifiers as diagnostics, not proof of a packaging cause. API keys are
 passed as `--api-key=<value>` so a generated leading hyphen remains a value.
+
+Windows startup can fail after a successful version probe even when Job ownership
+tests pass. To diagnose that boundary, inspect bounded tails from both redirected
+process output and `server_log.txt`; strip ANSI formatting before recognizing
+exception identifiers. Receipts retain only import module identifiers, traceback
+file basenames/line numbers/function identifiers and fixed diagnostic markers,
+never source lines or exception messages. An empty identifier list does not prove
+that imports succeeded. Keep startup failure blocking until the actual native
+platform rerun passes; a diagnostic-only repair does not accept that platform.
+
+Artifact storage roots must reject symbolic links and Windows reparse points
+(including junctions) in every path component. A changed spelling after
+`Path.resolve()` is not itself a link: Windows expands ordinary 8.3 directory
+names. Validate components first, then retain the canonical root for containment
+checks. Native Windows CI also exercises a real `GetShortPathNameW` alias and
+rejects a real junction both as a root and within it; only that platform run
+establishes the Windows behavior. The harness canonicalizes its own POSIX
+temporary directory to avoid macOS system `/var` aliases; this does not relax
+the configured user-root policy.
+
+Inspect each artifact path component with `lstat`, including when `exists()` is
+false: a dangling Windows junction can remain a reparse point after its target
+is removed. The Windows gate removes a junction target and verifies rejection
+again, rather than treating missing-target behavior as ordinary absence.
+
+SQLite connection context managers commit or roll back transactions but do not close
+the connection. Native acceptance fixtures must explicitly close them before removing
+their owned temporary data directories, particularly on Windows. Canonicalize the
+harness's own temporary root on POSIX before supplying it to the Runtime; this does
+not relax rejection of links in user-configured storage roots. A browser scenario
+passing before cleanup fails is a failed harness run, and startup diagnostics must
+remain attached to the exact binary receipt.
+
+The packaged browser harness also runs axe's WCAG 2 A/AA and 2.1 A/AA rules on
+sign-in, empty queue, create dialog and detail dialog. Wait for the asserted UI
+state, loaded fonts and finite animations before auditing; do not disable contrast
+rules or ignore violations. A deliberately unreadable temporary element must fail
+the contrast rule before the real states are checked, then is removed. Receipts
+contain only rule identifiers/counts, never DOM markup, keys or run payloads.
+These checks cover four settled Chromium states, not all routes, transition frames,
+manual keyboard/screen-reader behavior or other browsers. Preserve any earlier
+failure and its subject when a later audit passes; do not infer a product color fix
+from a timing-dependent result without identifying the failing element.

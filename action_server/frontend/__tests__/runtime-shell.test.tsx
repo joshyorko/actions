@@ -140,6 +140,17 @@ describe("Actions Runtime shell", () => {
     expect(menuButton).toHaveAttribute("aria-expanded", "false");
   });
 
+  it("closes mobile navigation when the current route is selected", async () => {
+    const user = userEvent.setup();
+    renderRuntimeAt("/actions");
+    await screen.findByText(/No actions available yet/);
+    const menuButton = screen.getByRole("button", { name: "Open menu" });
+    await user.click(menuButton);
+    await user.click(screen.getByRole("link", { name: "Actions" }));
+    expect(menuButton).toHaveAttribute("aria-expanded", "false");
+    expect(menuButton).toHaveFocus();
+  });
+
   it("identifies the product and lands on a useful overview", async () => {
     renderRuntime();
 

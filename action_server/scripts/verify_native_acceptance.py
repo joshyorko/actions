@@ -25,7 +25,7 @@ import tomllib
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 PACKAGE = Path(__file__).resolve().parents[1]
 BROWSER_SCRIPT = PACKAGE / "frontend" / "scripts" / "native-browser-acceptance.mjs"
@@ -48,6 +48,22 @@ def digest(path: Path) -> str:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             result.update(chunk)
     return result.hexdigest()
+
+
+def _wait_for_job_drain(
+    active_process_count: Callable[[], int], *, deadline: float
+) -> None:
+    """Observe zero Job accounting within the caller's shared cleanup deadline."""
+    while True:
+        active = active_process_count()
+        require(isinstance(active, int) and active >= 0, "windows_job_process_count")
+        remaining = deadline - time.monotonic()
+        require(remaining >= 0, "windows_job_drain_timeout")
+        if active == 0:
+            return
+        if remaining <= 0:
+            raise AcceptanceFailure("windows_job_drain_timeout")
+        time.sleep(min(0.05, remaining))
 
 
 class _WindowsJob:
@@ -93,6 +109,18 @@ class _WindowsJob:
                 ("PeakJobMemoryUsed", ctypes.c_size_t),
             ]
 
+        class BasicAccounting(ctypes.Structure):
+            _fields_ = [
+                ("TotalUserTime", ctypes.c_longlong),
+                ("TotalKernelTime", ctypes.c_longlong),
+                ("ThisPeriodTotalUserTime", ctypes.c_longlong),
+                ("ThisPeriodTotalKernelTime", ctypes.c_longlong),
+                ("TotalPageFaultCount", wintypes.DWORD),
+                ("TotalProcesses", wintypes.DWORD),
+                ("ActiveProcesses", wintypes.DWORD),
+                ("TotalTerminatedProcesses", wintypes.DWORD),
+            ]
+
         kernel = getattr(ctypes, "WinDLL")("kernel32", use_last_error=True)
         kernel.CreateJobObjectW.argtypes = [ctypes.c_void_p, wintypes.LPCWSTR]
         kernel.CreateJobObjectW.restype = wintypes.HANDLE
@@ -107,9 +135,30 @@ class _WindowsJob:
         kernel.OpenProcess.restype = wintypes.HANDLE
         kernel.AssignProcessToJobObject.argtypes = [wintypes.HANDLE, wintypes.HANDLE]
         kernel.AssignProcessToJobObject.restype = wintypes.BOOL
+        kernel.IsProcessInJob.argtypes = [
+            wintypes.HANDLE,
+            wintypes.HANDLE,
+            ctypes.POINTER(wintypes.BOOL),
+        ]
+        kernel.IsProcessInJob.restype = wintypes.BOOL
+        kernel.WaitForSingleObject.argtypes = [wintypes.HANDLE, wintypes.DWORD]
+        kernel.WaitForSingleObject.restype = wintypes.DWORD
         kernel.CloseHandle.argtypes = [wintypes.HANDLE]
         kernel.CloseHandle.restype = wintypes.BOOL
+        kernel.TerminateJobObject.argtypes = [wintypes.HANDLE, wintypes.UINT]
+        kernel.TerminateJobObject.restype = wintypes.BOOL
+        kernel.QueryInformationJobObject.argtypes = [
+            wintypes.HANDLE,
+            ctypes.c_int,
+            ctypes.c_void_p,
+            wintypes.DWORD,
+            ctypes.POINTER(wintypes.DWORD),
+        ]
+        kernel.QueryInformationJobObject.restype = wintypes.BOOL
         self._kernel = kernel
+        self._ctypes = ctypes
+        self._wintypes = wintypes
+        self._basic_accounting = BasicAccounting
         self._handle = kernel.CreateJobObjectW(None, None)
         require(bool(self._handle), "windows_job_create")
         limits = ExtendedLimits()
@@ -136,6 +185,111 @@ class _WindowsJob:
         if self._handle:
             handle, self._handle = self._handle, None
             require(bool(self._kernel.CloseHandle(handle)), "windows_job_close")
+
+    def process_accounting(self) -> tuple[int, int]:
+        require(bool(self._handle), "windows_job_closed")
+        result = self._basic_accounting()
+        if not self._kernel.QueryInformationJobObject(
+            self._handle,
+            1,  # JobObjectBasicAccountingInformation
+            self._ctypes.byref(result),
+            self._ctypes.sizeof(result),
+            None,
+        ):
+            raise AcceptanceFailure("windows_job_query")
+        return result.TotalProcesses, result.ActiveProcesses
+
+    def active_process_count(self) -> int:
+        return self.process_accounting()[1]
+
+    def process_ids(self, expected_count: int) -> list[int]:
+        # Acceptance owns a small tree. Refuse an unstable or unexpectedly large
+        # snapshot instead of resizing indefinitely while descendants are born.
+        require(0 <= expected_count <= 4096, "windows_job_process_limit")
+        ctypes = self._ctypes
+
+        class ProcessIds(ctypes.Structure):
+            _fields_ = [
+                ("NumberOfAssignedProcesses", self._wintypes.DWORD),
+                ("NumberOfProcessIdsInList", self._wintypes.DWORD),
+                ("ProcessIdList", ctypes.c_size_t * max(1, expected_count)),
+            ]
+
+        result = ProcessIds()
+        require(
+            bool(
+                self._kernel.QueryInformationJobObject(
+                    self._handle,
+                    3,  # JobObjectBasicProcessIdList
+                    ctypes.byref(result),
+                    ctypes.sizeof(result),
+                    None,
+                )
+            ),
+            "windows_job_process_list_query",
+        )
+        require(
+            result.NumberOfAssignedProcesses
+            == result.NumberOfProcessIdsInList
+            == expected_count,
+            "windows_job_process_list_incomplete",
+        )
+        pids = list(result.ProcessIdList[:expected_count])
+        require(
+            all(pid > 0 for pid in pids) and len(set(pids)) == expected_count,
+            "windows_job_process_list_invalid",
+        )
+        return pids
+
+    def _close_process_handle(self, handle) -> None:
+        require(bool(self._kernel.CloseHandle(handle)), "windows_job_process_close")
+
+    def terminate_and_wait(self, *, timeout: float = 10) -> None:
+        """Wait captured member handles, refusing an unstable capture/termination.
+
+        Accounting can reach zero before a process handle signals. Capturing here
+        does not establish completion of processes which exited before capture.
+        """
+        require(0 < timeout <= 300, "windows_job_drain_timeout_range")
+        deadline = time.monotonic() + timeout
+        total, active = self.process_accounting()
+        pids = self.process_ids(active)
+        with contextlib.ExitStack() as cleanup:
+            handles = []
+            for pid in pids:
+                require(time.monotonic() < deadline, "windows_job_drain_timeout")
+                # SYNCHRONIZE | PROCESS_QUERY_LIMITED_INFORMATION; never kill by PID.
+                handle = self._kernel.OpenProcess(0x00100000 | 0x1000, False, pid)
+                require(bool(handle), "windows_job_open_process")
+                cleanup.callback(self._close_process_handle, handle)
+                member = self._wintypes.BOOL()
+                require(
+                    bool(
+                        self._kernel.IsProcessInJob(
+                            handle, self._handle, self._ctypes.byref(member)
+                        )
+                    ),
+                    "windows_job_process_membership_query",
+                )
+                require(bool(member.value), "windows_job_process_membership")
+                handles.append(handle)
+
+            require(self.process_accounting()[0] == total, "windows_job_process_churn")
+            require(time.monotonic() < deadline, "windows_job_drain_timeout")
+            require(
+                bool(self._kernel.TerminateJobObject(self._handle, 1)),
+                "windows_job_terminate",
+            )
+            require(self.process_accounting()[0] == total, "windows_job_process_churn")
+            for handle in handles:
+                remaining = deadline - time.monotonic()
+                require(remaining > 0, "windows_job_process_wait_timeout")
+                result = self._kernel.WaitForSingleObject(handle, int(remaining * 1000))
+                require(result != 258, "windows_job_process_wait_timeout")
+                require(result == 0, "windows_job_process_wait")
+            _wait_for_job_drain(self.active_process_count, deadline=deadline)
+            require(self.process_accounting()[0] == total, "windows_job_process_churn")
+            require(time.monotonic() <= deadline, "windows_job_drain_timeout")
 
 
 def _owned_child(command: list[str]) -> int:
@@ -195,8 +349,12 @@ def owned_process(command: list[str], *, cwd: Path, env: dict[str, str], **kwarg
             yield process
         finally:
             try:
-                # Close even if the wrapper/command exited: descendants stay in Job.
-                job.close()
+                # Kill-on-job-close is asynchronous: wait captured member handles
+                # and reject a changing tree before temporary-resource cleanup.
+                try:
+                    job.terminate_and_wait(timeout=10)
+                finally:
+                    job.close()
             finally:
                 if process is not None:
                     try:
@@ -254,27 +412,58 @@ def run_output(
 
 def startup_diagnostics(log: Path, exit_code: int, key: str) -> dict:
     """Extract bounded exception identifiers; never retain raw log/message text."""
-    with log.open("rb") as stream:
-        stream.seek(max(0, log.stat().st_size - 65536))
-        tail = (
-            stream.read(65536)
-            .decode("utf-8", errors="replace")
-            .replace(key, "[redacted]")
+    tails = []
+    for source in (log, log.parent / "server_log.txt"):
+        if not source.is_file():
+            continue
+        with source.open("rb") as stream:
+            stream.seek(max(0, source.stat().st_size - 65536))
+            text = stream.read(65536).decode("utf-8", errors="replace")
+        # Strip ANSI before recognition, then remove credentials before extracting
+        # identifiers. Never retain arbitrary message text or traceback source lines.
+        text = re.sub(r"(?:\x1b\[|\x9b)[0-?]*[ -/]*[@-~]", "", text)
+        text = text.replace(key, "[redacted]")
+        text = re.sub(
+            r"(?im)^.*(?:authorization|cookie|api[_-]?key)\s*[:=].*$", "", text
         )
-    classes = re.findall(r"(?m)^([A-Za-z_][A-Za-z_0-9]*(?:Error|Exception)):", tail)
+        tails.append(text)
+    tail = "\n".join(tails)
+    classes = re.findall(r"\b([A-Za-z_][A-Za-z_0-9]{0,190}(?:Error|Exception)):", tail)
     modules = re.findall(
-        r"(?m)^ModuleNotFoundError: No module named ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]",
+        r"\bModuleNotFoundError: No module named ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]",
         tail,
     )
     modules += re.findall(
-        r"(?m)^ImportError: .* from ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]", tail
+        r"\bImportError: .* from ['\"]([A-Za-z_][A-Za-z_0-9.]*)['\"]", tail
     )
+    frames = re.findall(
+        r'File "[^"\r\n]*?([A-Za-z_][A-Za-z_0-9]*\.py)", line ([0-9]{1,7}), in ([A-Za-z_][A-Za-z_0-9]*|<module>)',
+        tail,
+    )
+    markers = {
+        "pyinstaller_unhandled_exception": "Failed to execute script",
+        "python_traceback": "Traceback (most recent call last)",
+        "database_creation": "Database file does not exist. Creating it",
+        "application_startup_failed": "Application startup failed",
+        "address_in_use": "address already in use",
+        "windows_socket_access_denied": "WinError 10013",
+        "invalid_windows_handle": "WinError 6",
+        "permission_denied": "Permission denied",
+        "argument_error": "error: unrecognized arguments",
+        "rcc_download": "Downloading rcc",
+    }
     return {
         "exit_code": exit_code,
         "exception_classes": list(dict.fromkeys(classes))[-8:],
         "import_modules": [name for name in dict.fromkeys(modules) if len(name) <= 200][
             -8:
         ],
+        "traceback_frames": [
+            {"file": file, "line": int(line), "function": function}
+            for file, line, function in list(dict.fromkeys(frames))[-12:]
+        ],
+        "markers": [name for name, phrase in markers.items() if phrase in tail],
+        "log_sources_present": len(tails),
     }
 
 
@@ -395,6 +584,28 @@ def browser(server: NativeServer, args, *, negative: bool) -> dict:
         )
     else:
         phase = result.get("phase", "unknown")
+        if code != 0 or result.get("status") != "PASS":
+            audits = result.get("accessibility", [])
+            failures: set[str] = set()
+            if isinstance(audits, list):
+                for audit in audits[:8]:
+                    if not isinstance(audit, dict):
+                        continue
+                    violations = audit.get("violations", [])
+                    if not isinstance(violations, list):
+                        continue
+                    for violation in violations[:100]:
+                        if not isinstance(violation, dict):
+                            continue
+                        rule = violation.get("id")
+                        if isinstance(rule, str) and re.fullmatch(
+                            r"[a-z][a-z0-9-]{0,80}", rule
+                        ):
+                            failures.add(rule)
+            if failures:
+                failure = AcceptanceFailure("browser_accessibility")
+                failure.diagnostics = {"browser_accessibility": sorted(failures)[:50]}
+                raise failure
         require(
             code == 0 and result.get("status") == "PASS",
             f"browser_{phase}"
@@ -429,7 +640,9 @@ def verify_case(kind: str, binary: Path, args, receipt: dict) -> None:
     }
     receipt["cases"].append(case)
     with tempfile.TemporaryDirectory(prefix=f"actions-native-{kind}-") as directory:
-        temporary = Path(directory)
+        # Resolve only harness-owned POSIX temp aliases (macOS /var -> /private).
+        # Preserve Windows spelling so native startup exercises 8.3 TEMP aliases.
+        temporary = Path(directory) if os.name == "nt" else Path(directory).resolve()
         project, data = temporary / "project", temporary / "data"
         project.mkdir()
         data.mkdir()
@@ -555,7 +768,7 @@ def main() -> int:
         "not_exercised": [
             "Work Item worker state transitions",
             "attachments",
-            "accessibility",
+            "manual and full-route accessibility",
             "non-Chromium browsers",
         ],
     }
@@ -572,10 +785,19 @@ def main() -> int:
             str(error) if isinstance(error, AcceptanceFailure) else type(error).__name__
         )
         if isinstance(error, AcceptanceFailure) and error.diagnostics is not None:
-            receipt["startup_diagnostics"] = error.diagnostics
+            if "browser_accessibility" in error.diagnostics:
+                receipt["browser_accessibility"] = error.diagnostics[
+                    "browser_accessibility"
+                ]
+            else:
+                receipt["startup_diagnostics"] = error.diagnostics
         print(f"Native acceptance failed: {receipt['failed_phase']}", file=sys.stderr)
         return 1
     finally:
+        if receipt["status"] == "FAIL":
+            for case in receipt["cases"]:
+                if case["status"] == "IN_PROGRESS":
+                    case["status"] = "FAIL"
         args.receipt.parent.mkdir(parents=True, exist_ok=True)
         args.receipt.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
 

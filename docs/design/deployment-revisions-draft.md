@@ -1,14 +1,14 @@
 > Paused draft, October 8, 2026. Not approved, implemented, or ready to merge. Published only to preserve existing work for adversarial review.
 
-Open review points: incomplete explicit column tuples for several scoped foreign keys; missing same-Deployment composite foreign key for deployment_revision_request.parent_revision_id; SQLite/PostgreSQL cyclic-pointer constraint creation parity. The prior acceptance assessment predates the last partial edits and must not be treated as approval.
+Open review points: this packet is an unapproved design proposal. Its earlier schema sketch omitted concrete composite-FK column tuples, the same-Deployment FK for `deployment_revision_request.parent_revision_id`, and backend-specific cyclic-pointer creation details; the schema contract below now specifies them. None of these requirements has been implemented or proven by the repository.
 
 # Actions Deployment and Revision Contract
 
 **Design-only #129 contract. This document is not implementation, source verification, issue closure, or #82 acceptance.**
 
 - Repository: `joshyorko/actions`
-- Original inspected source: `8bdce09944c9e370917a8222243cd1a239ea7060`; the review packet verified its relevant code remains unchanged at `848e0bbc`.
-- Live issue state: #129 is open; body updated 2026-09-07; no issue comments. #130 and #143 are open. #143 has no comments. #82's relevant Robot/capability correction is comment `5373995960`.
+- Original inspected source: `8bdce09944c9e370917a8222243cd1a239ea7060`; the review packet verified its relevant code remained unchanged at `848e0bbc`. This branch updates design text only; verify implementation evidence again at any later target-branch head.
+- Live issue state checked 2026-10-08: #129 is open (body last updated 2026-09-07) with no comments. #82, #130, #135, #136, and #148 are also open. Relevant live comments: #82 comment `5373995960` separates optional Work Items, Robot Task kind, adapter kind, and placement; #130 comments `5335430196` and `5374010203` sequence #134 → #135 → #136 → #129 and keep package authoring separate from compiled contract; #135 comment `5374000307` extends compilation for Robot Tasks. #129 has no comments. The full bodies/comments are upstream acceptance authority; the ledger is an accounting snapshot, not a substitute.
 - Scope: settle the minimum local-first object identities, immutable revision model, resolution boundary, and downstream handoff. This is not #130's compiler, #135's package compiler, #136's registry/cache, #143's adapter/preflight implementation, or #83's Run/Attempt store.
 - Non-goals: no source edits in the source checkout, no multi-tenant control plane, no generic scheduler, no new service/process decomposition, no adapter implementation, no claim #129/#130/#135/#83 is complete.
 
@@ -16,6 +16,7 @@ Open review points: incomplete explicit column tuples for several scoped foreign
 
 - #129 fixes Workspace-scoped identity/references, immutable Deployment Revisions, publication/replay/CAS behavior, the Current-versus-Retained selector, static resolution snapshot, and lifecycle semantics.
 - #130 owns Package manifest, Capability and logical binding requirement syntax, Runtime Plan payload and projection schemas. #129 carries full references and a minimal generic Runtime Plan header; it does not invent those payload schemas.
+- This design can name opaque Package Revision/Runtime Plan references before those producers are complete, but package-backed binding/index/repository implementation follows the live #130 ordering: #134 contract, #135 compiler, #136 package provider, then #129 Deployment binding/resolution. Do not treat #129 design readiness as permission to invent the missing compiler/provider schemas.
 - #143 owns complete adapter descriptors and dynamic admission modes, outcomes, evidence and freshness after the remaining #134 lifecycle proof. A minimal versioned `AdmissionSnapshot` envelope is pinned to the exact `ResolutionDigest` here; its dynamic contents are not.
 - #83 owns Run/Attempt persistence and the transaction that commits an admitted Run pin. The transaction boundary and its required pointer/state rechecks are part of the handoff contract below.
 - #84 remains a source-schema gate: its current PostgreSQL/SQLite implementation receipt exists, while current package/frozen gates remain open. #134 blocks #143 adapter-contract freeze, not generic #129 IDs or CAS. #140 owns mixed-version rollout enforcement.
@@ -300,12 +301,12 @@ RunService.restart_as_new(old_run_id, plan_choice) -> resolve Current then creat
 1. Parse the candidate against strict versioned schemas; reject unknown fields and malformed/dangling IDs.
 2. Resolve every Package/plan/profile/provider/policy reference in the same Workspace and validate compatibility and authorization. The candidate has no published state and makes no pointer change on failure. `preview(candidate)` is read-only and may return `needs_binding` so a user can finish configuration; `publish(candidate)` requires every required binding to resolve within policy, otherwise it returns a stable validation reason and persists no revision/pointer change. A later revocation or missing local secret/profile is reported by admission for an already-published revision.
 3. Compute its canonical revision digest and catalog identity. Check static policy constraints; do not silently use a different plan to make the candidate pass. Required bindings must be mapped for publish; a transient preview may report `needs_binding` without persisting an incomplete revision. Adapter/provider/worker availability remains a dynamic admission observation and does not make an otherwise valid immutable plan choose another adapter.
-4. Every create/publish/rollback command supplies an idempotency key. Before comparing an ETag or attempting CAS, the transaction looks up `(workspace_id, deployment_id, idempotency_key)`: if the stored operation and canonical request digest match, return its original result even if its former `If-Match` is now stale; if the same key was used for another operation/content, return `idempotency_conflict`. Otherwise, in one transaction, insert the immutable revision and normalized reference indexes, record the request digest/result, then compare-and-swap `Deployment.current_revision_id` against the caller's `If-Match`. If another writer advanced it, return `revision_conflict` / HTTP 409 and leave no request result, pointer change, or partial candidate behind. An existing revision digest may be treated as idempotent only after canonical payload bytes are compared; different bytes under the same identity are corruption.
+4. Every mutating Deployment command (create, publish/update, rollback, pause/resume, retire) supplies an idempotency key unique within the Workspace. Before comparing an ETag or attempting CAS, the transaction looks up `(workspace_id, idempotency_key)`: if the stored operation and canonical request digest match, reauthorize the caller for that operation/result and return its original result even if its former precondition is now stale; if the key was used for another operation, Deployment, precondition, or content, return `idempotency_conflict` without disclosing the stored target/result. Otherwise, in one transaction, insert any immutable revision and normalized reference indexes, record the request digest/result, then conditionally update the current pointer or operational state against the caller's precondition. If another writer advanced the revision/state, return `revision_conflict` / HTTP 409 and leave no request result, pointer/state change, or partial candidate behind. An existing revision digest may be treated as idempotent only after canonical payload bytes are compared; different bytes under the same identity are corruption.
 5. New Runs admitted after that transaction commits resolve the new pointer. Existing Runs and their replacement Attempts retain their stored snapshot.
 
 First publication creates the Deployment identity, first immutable revision, revision indexes, pointer, and idempotency result in one transaction using `If-None-Match: *`; retries use the same idempotency-key replay rule. Updates require `If-Match` on the current revision. Rollback uses `POST .../deployments/{id}/rollback` with a full target `DeploymentRevisionRef` and `If-Match` current revision. It copies the target's immutable configuration into a new revision with `previous_revision_id=current` and `rollback_of=target`; only the Deployment pointer advances. It does not decrement sequence, rewrite provenance, mutate N/N+1 Runs, or reopen a failed Run. Old revisions remain readable; the first implementation retains all revisions rather than ship premature GC.
 
-`DeploymentRevisionRequestDigest = sha256(JCS_v1({domain: "actions.deployment-command/v1", canonicalizer_version, request_schema_version, workspace_id, deployment_id, operation_kind, parent_etag_or_create_precondition, candidate_revision_digest_or_rollback_target_ref}))`. It binds the key to command kind, target, parent precondition, and candidate/rollback target. Actor display name, request time, and transport metadata are excluded. The repository compares the stored digest before CAS and never returns a prior result for a key reused with different content.
+`DeploymentRevisionRequestDigest = sha256(JCS_v1({domain: "actions.deployment-command/v1", canonicalizer_version, request_schema_version, workspace_id, operation_kind, target_deployment_id_or_null, parent_etag_or_create_precondition, operation_payload_digest}))`. The Workspace-unique idempotency key is indexed separately from this digest. For an initial `create`, `target_deployment_id_or_null` is NULL and the request payload digest covers the complete canonical command body; the server generates the Deployment ID only after a receipt miss and stores it in the receipt. This lets a retry locate and return the same generated ID using only its Workspace and key. For every other operation, the digest includes its Deployment ID. `operation_payload_digest` binds the candidate revision, rollback target, or requested lifecycle state as appropriate. Actor display name, request time, and transport metadata are excluded. The repository compares the stored digest before CAS, reauthorizes before replaying the stored result, and never returns a prior result for a key reused with different content.
 
 The linearization point for “new Runs only” is the #83 Run-admission transaction, not HTTP request start. It serializes with pointer and state changes, checks `state == active`, and checks the pointer against the resolved revision for `Current`. If N+1 or pause/retirement commits first, no stale/new Run is committed: `Current` is re-resolved and readmitted, while a retained request is reauthorized against its exact reference and still requires an active Deployment. If Run admission commits first, it pins N.
 
@@ -337,81 +338,354 @@ If the selected plan's adapter, provider profile, platform, or Worker Profile is
 Use the existing DB/migration substrate after #84's current-head backend contract is accepted. The inspected registry currently ends at ID 12; if this slice lands first, name it migration 13. If a prerequisite migration is integrated first, allocate the next sequential unused ID on the integrated branch. Do not edit historical migrations or reserve colliding numbers across branches. Keep immutable canonical JSON payloads as source of truth and enough normalized owner/reference columns for scoped queries and composite referential checks. Define one DDL/bootstrap helper used by `migration_add_deployment_revision_graph.migrate(db)`, `create_db()`'s fresh SQLite/test path, and `migrate_db()`'s fresh PostgreSQL path. Do not rely on the current generic `create_tables(get_model_db_rules())` path alone for new join tables: it iterates registered dataclasses and cannot by itself express this packet's typed composite reference constraints. Keep domain models frozen/Pydantic and put persistence reads/writes behind `DeploymentRepository`, which parses typed JSON values and uses the shared `Database` transaction/SQL surface.
 
 ```text
-workspace(workspace_id PK, name, created_at)
-installation_metadata(key PK, value)
-installation_default_workspace(singleton_key PK CHECK(singleton_key = 1), workspace_id NOT NULL,
-        FK workspace_id -> workspace.workspace_id)
-package(workspace_id, package_id, name, legacy_source_kind, legacy_source_id,
-        PK(workspace_id, package_id), FK workspace)
-package_revision(workspace_id, package_id, revision_id, schema_version,
-        source_artifact_digest, capability_manifest_digest,
-        manifest_json, created_at, PK(workspace_id, package_id, revision_id),
-        FK (workspace_id, package_id) -> package)
-provider_profile(workspace_id, provider_profile_id, provider_kind, current_revision_id NULL during creation,
-        PK(workspace_id, provider_profile_id), FK workspace,
-        FK (workspace_id, provider_profile_id, current_revision_id) -> provider_profile_revision)
-provider_profile_revision(workspace_id, provider_profile_id, revision_id,
-        config_generation_id, locator_refs_json, target_identity_digest,
-        capability_set_digest, created_at,
-        PK(workspace_id, provider_profile_id, revision_id), scoped FK to profile)
-worker_profile(workspace_id, worker_profile_id, current_revision_id NULL during creation,
-        PK(workspace_id, worker_profile_id), FK workspace,
-        FK (workspace_id, worker_profile_id, current_revision_id) -> worker_profile_revision)
-worker_profile_revision(workspace_id, worker_profile_id, revision_id,
-        profile_json, created_at, PK(workspace_id, worker_profile_id, revision_id), scoped FK)
-workspace_policy(workspace_id, policy_id, current_revision_id NULL during creation,
-        PK(workspace_id, policy_id), FK workspace,
-        FK (workspace_id, policy_id, current_revision_id) -> workspace_policy_revision)
-workspace_policy_revision(workspace_id, policy_id, policy_revision_id, policy_digest,
-        policy_json, created_at, PK(workspace_id, policy_id, policy_revision_id),
-        FK (workspace_id, policy_id) -> workspace_policy)
-deployment(workspace_id, deployment_id, name, current_revision_id NULL during creation,
-        state CHECK(state IN ('active','paused','retired')),
-        PK(workspace_id, deployment_id), FK workspace,
-        FK (workspace_id, deployment_id, current_revision_id) -> deployment_revision)
-deployment_revision(workspace_id, deployment_id, revision_id, sequence,
-        previous_revision_id, rollback_of_revision_id, canonical_snapshot_json,
-        catalog_revision_id, created_at, change_kind,
-        PK(workspace_id, deployment_id, revision_id), unique(workspace_id, deployment_id, sequence),
-        FK (workspace_id, deployment_id) -> deployment,
-        FK (workspace_id, deployment_id, previous_revision_id) -> deployment_revision,
-        FK (workspace_id, deployment_id, rollback_of_revision_id) -> deployment_revision)
-deployment_revision_package(workspace_id, deployment_id, revision_id,
-        package_id, package_revision_id,
-        scoped FK to deployment_revision and package_revision)
-deployment_revision_binding(workspace_id, deployment_id, revision_id,
-        package_id, package_revision_id,
-        binding_requirement_id, provider_profile_id, provider_profile_revision_id,
-        granted_scope_json,
-        PK(workspace_id, deployment_id, revision_id, package_id,
-           package_revision_id, binding_requirement_id),
-        scoped FK to deployment_revision and provider_profile_revision)
-deployment_revision_package_source_provider_ref(workspace_id, deployment_id, revision_id,
-        provider_profile_id, provider_profile_revision_id, granted_capabilities_json,
-        PK(workspace_id, deployment_id, revision_id, provider_profile_id,
-           provider_profile_revision_id),
-        scoped FK to deployment_revision and provider_profile_revision)
-deployment_revision_adapter_artifact_provider_ref(workspace_id, deployment_id, revision_id,
-        purpose, runtime_kind, provider_profile_id, provider_profile_revision_id,
-        granted_capabilities_json,
-        PK(workspace_id, deployment_id, revision_id, purpose, runtime_kind,
-           provider_profile_id, provider_profile_revision_id),
-        scoped FK to deployment_revision and provider_profile_revision)
-deployment_revision_worker_profile_ref(workspace_id, deployment_id, revision_id,
-        worker_profile_id, worker_profile_revision_id,
-        scoped FK to deployment_revision and worker_profile_revision)
-deployment_revision_policy_ref(workspace_id, deployment_id, revision_id,
-        policy_id, policy_revision_id,
-        scoped FK to deployment_revision and workspace_policy_revision)
-deployment_revision_request(workspace_id, idempotency_key, deployment_id, operation_kind,
-        request_digest, parent_revision_id NULL for initial create,
-        result_revision_id, created_at,
-        PK(workspace_id, idempotency_key), FK workspace_id -> workspace,
-        FK (workspace_id, deployment_id) -> deployment,
-        FK (workspace_id, deployment_id, result_revision_id) -> deployment_revision)
+workspace(
+    workspace_id PK,
+    name NOT NULL,
+    created_at NOT NULL
+)
+installation_metadata(
+    key PK,
+    value NOT NULL
+)
+installation_default_workspace(
+    singleton_key PK CHECK(singleton_key = 1),
+    workspace_id NOT NULL UNIQUE,
+    FK (workspace_id) -> workspace(workspace_id)
+)
+package(
+    workspace_id NOT NULL,
+    package_id NOT NULL,
+    name NOT NULL,
+    legacy_source_kind NULL,
+    legacy_source_id NULL,
+    PK (workspace_id, package_id),
+    FK (workspace_id) -> workspace(workspace_id)
+)
+package_revision(
+    workspace_id NOT NULL,
+    package_id NOT NULL,
+    revision_id NOT NULL,
+    schema_version NOT NULL,
+    source_artifact_digest NOT NULL,
+    capability_manifest_digest NOT NULL,
+    manifest_json NOT NULL,
+    created_at NOT NULL,
+    PK (workspace_id, package_id, revision_id),
+    FK (workspace_id, package_id) -> package(workspace_id, package_id)
+)
+provider_profile(
+    workspace_id NOT NULL,
+    provider_profile_id NOT NULL,
+    current_revision_id NULL during creation, NOT NULL after commit,
+    PK (workspace_id, provider_profile_id),
+    FK (workspace_id) -> workspace(workspace_id)
+)
+provider_profile_revision(
+    workspace_id NOT NULL,
+    provider_profile_id NOT NULL,
+    revision_id NOT NULL,
+    config_generation_id NOT NULL,
+    locator_refs_json NOT NULL,
+    target_identity_digest NULL,
+    capability_set_digest NOT NULL,
+    created_at NOT NULL,
+    PK (workspace_id, provider_profile_id, revision_id),
+    FK (workspace_id, provider_profile_id)
+       -> provider_profile(workspace_id, provider_profile_id)
+)
+worker_profile(
+    workspace_id NOT NULL,
+    worker_profile_id NOT NULL,
+    current_revision_id NULL during creation, NOT NULL after commit,
+    PK (workspace_id, worker_profile_id),
+    FK (workspace_id) -> workspace(workspace_id)
+)
+worker_profile_revision(
+    workspace_id NOT NULL,
+    worker_profile_id NOT NULL,
+    revision_id NOT NULL,
+    profile_json NOT NULL,
+    created_at NOT NULL,
+    PK (workspace_id, worker_profile_id, revision_id),
+    FK (workspace_id, worker_profile_id)
+       -> worker_profile(workspace_id, worker_profile_id)
+)
+workspace_policy(
+    workspace_id NOT NULL,
+    policy_id NOT NULL,
+    current_revision_id NULL during creation, NOT NULL after commit,
+    PK (workspace_id, policy_id),
+    FK (workspace_id) -> workspace(workspace_id)
+)
+workspace_policy_revision(
+    workspace_id NOT NULL,
+    policy_id NOT NULL,
+    revision_id NOT NULL,
+    policy_digest NOT NULL,
+    policy_json NOT NULL,
+    created_at NOT NULL,
+    PK (workspace_id, policy_id, revision_id),
+    FK (workspace_id, policy_id) -> workspace_policy(workspace_id, policy_id)
+)
+deployment(
+    workspace_id NOT NULL,
+    deployment_id NOT NULL,
+    name NOT NULL,
+    current_revision_id NULL during creation, NOT NULL after commit,
+    state NOT NULL CHECK(state IN ('active', 'paused', 'retired')),
+    PK (workspace_id, deployment_id),
+    FK (workspace_id) -> workspace(workspace_id)
+)
+deployment_revision(
+    workspace_id NOT NULL,
+    deployment_id NOT NULL,
+    revision_id NOT NULL,
+    sequence NOT NULL CHECK(sequence > 0),
+    previous_revision_id NULL,
+    rollback_of_revision_id NULL,
+    canonical_snapshot_json NOT NULL,
+    catalog_revision_id NOT NULL,
+    created_at NOT NULL,
+    change_kind NOT NULL CHECK(change_kind IN ('publish', 'rollback')),
+    PK (workspace_id, deployment_id, revision_id),
+    UNIQUE (workspace_id, deployment_id, sequence),
+    FK (workspace_id, deployment_id)
+       -> deployment(workspace_id, deployment_id),
+    FK (workspace_id, deployment_id, previous_revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    FK (workspace_id, deployment_id, rollback_of_revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    CHECK((change_kind = 'publish'
+           AND rollback_of_revision_id IS NULL
+           AND ((sequence = 1 AND previous_revision_id IS NULL)
+             OR (sequence > 1 AND previous_revision_id IS NOT NULL)))
+       OR (change_kind = 'rollback'
+           AND sequence > 1
+           AND previous_revision_id IS NOT NULL
+           AND rollback_of_revision_id IS NOT NULL))
+)
+deployment_revision_package(
+    workspace_id NOT NULL,
+    deployment_id NOT NULL,
+    revision_id NOT NULL,
+    package_id NOT NULL,
+    package_revision_id NOT NULL,
+    PK (workspace_id, deployment_id, revision_id, package_id),
+    UNIQUE (workspace_id, deployment_id, revision_id, package_id,
+            package_revision_id),
+    FK (workspace_id, deployment_id, revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    FK (workspace_id, package_id, package_revision_id)
+       -> package_revision(workspace_id, package_id, revision_id)
+)
+deployment_revision_binding(
+    workspace_id NOT NULL,
+    deployment_id NOT NULL,
+    revision_id NOT NULL,
+    package_id NOT NULL,
+    package_revision_id NOT NULL,
+    binding_requirement_id NOT NULL,
+    provider_profile_id NOT NULL,
+    provider_profile_revision_id NOT NULL,
+    granted_scope_json NOT NULL,
+    PK (workspace_id, deployment_id, revision_id, package_id,
+        package_revision_id, binding_requirement_id),
+    FK (workspace_id, deployment_id, revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    FK (workspace_id, deployment_id, revision_id, package_id,
+        package_revision_id)
+       -> deployment_revision_package(workspace_id, deployment_id, revision_id,
+                                      package_id, package_revision_id),
+    FK (workspace_id, provider_profile_id, provider_profile_revision_id)
+       -> provider_profile_revision(workspace_id, provider_profile_id, revision_id)
+)
+deployment_revision_package_source_provider_ref(
+    workspace_id NOT NULL,
+    deployment_id NOT NULL,
+    revision_id NOT NULL,
+    provider_profile_id NOT NULL,
+    provider_profile_revision_id NOT NULL,
+    granted_capabilities_json NOT NULL,
+    PK (workspace_id, deployment_id, revision_id, provider_profile_id,
+        provider_profile_revision_id),
+    FK (workspace_id, deployment_id, revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    FK (workspace_id, provider_profile_id, provider_profile_revision_id)
+       -> provider_profile_revision(workspace_id, provider_profile_id, revision_id)
+)
+deployment_revision_adapter_artifact_provider_ref(
+    workspace_id NOT NULL,
+    deployment_id NOT NULL,
+    revision_id NOT NULL,
+    purpose NOT NULL CHECK(purpose IN ('runtime-artifact', 'environment-content')),
+    runtime_kind NOT NULL,
+    provider_profile_id NOT NULL,
+    provider_profile_revision_id NOT NULL,
+    granted_capabilities_json NOT NULL,
+    PK (workspace_id, deployment_id, revision_id, purpose, runtime_kind,
+        provider_profile_id, provider_profile_revision_id),
+    FK (workspace_id, deployment_id, revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    FK (workspace_id, provider_profile_id, provider_profile_revision_id)
+       -> provider_profile_revision(workspace_id, provider_profile_id, revision_id)
+)
+deployment_revision_worker_profile_ref(
+    workspace_id NOT NULL,
+    deployment_id NOT NULL,
+    revision_id NOT NULL,
+    worker_profile_id NOT NULL,
+    worker_profile_revision_id NOT NULL,
+    PK (workspace_id, deployment_id, revision_id, worker_profile_id,
+        worker_profile_revision_id),
+    FK (workspace_id, deployment_id, revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    FK (workspace_id, worker_profile_id, worker_profile_revision_id)
+       -> worker_profile_revision(workspace_id, worker_profile_id, revision_id)
+)
+deployment_revision_policy_ref(
+    workspace_id NOT NULL,
+    deployment_id NOT NULL,
+    revision_id NOT NULL,
+    policy_id NOT NULL,
+    policy_revision_id NOT NULL,
+    PK (workspace_id, deployment_id, revision_id, policy_id, policy_revision_id),
+    FK (workspace_id, deployment_id, revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    FK (workspace_id, policy_id, policy_revision_id)
+       -> workspace_policy_revision(workspace_id, policy_id, revision_id)
+)
+deployment_revision_request(
+    workspace_id NOT NULL,
+    idempotency_key NOT NULL,
+    deployment_id NOT NULL,
+    operation_kind NOT NULL,
+    request_digest NOT NULL,
+    parent_revision_id NULL only for initial create,
+    result_revision_id NOT NULL,
+    created_at NOT NULL,
+    PK (workspace_id, idempotency_key),
+    FK (workspace_id) -> workspace(workspace_id),
+    FK (workspace_id, deployment_id)
+       -> deployment(workspace_id, deployment_id),
+    FK (workspace_id, deployment_id, parent_revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    FK (workspace_id, deployment_id, result_revision_id)
+       -> deployment_revision(workspace_id, deployment_id, revision_id),
+    CHECK((operation_kind = 'create' AND parent_revision_id IS NULL)
+       OR (operation_kind <> 'create' AND parent_revision_id IS NOT NULL))
+)
 ```
 
-Every `workspace_id` column above has an FK to `workspace`. In addition, the mandatory composite constraints are: `(workspace_id, provider_profile_id, current_revision_id) -> provider_profile_revision`; `(workspace_id, worker_profile_id, current_revision_id) -> worker_profile_revision`; `(workspace_id, policy_id, current_revision_id) -> workspace_policy_revision`; `(workspace_id, deployment_id, current_revision_id) -> deployment_revision`; and, on each deployment revision, same-deployment `(workspace_id, deployment_id, previous_revision_id)` and `(workspace_id, deployment_id, rollback_of_revision_id)` self-FKs. Each revision/profile/policy row has a composite FK back to its owning identity. The `deployment_revision_package` row has composite FKs both to its parent `deployment_revision` and the exact `package_revision`; a binding row has a composite FK to its exact `deployment_revision_package` tuple and its exact `provider_profile_revision`. Provider grant, Worker Profile, and policy join rows similarly have separate composite FKs to the parent Deployment Revision and their exact provider/worker/policy revision. Nullable current pointers exist only while a new identity/revision is being created inside one transaction; commit must publish a valid pointer. The default Workspace uses the singleton row with a real FK, not a string value in an untyped metadata bag. Because pointer rows and revisions refer to each other, the DDL helper installs the same final constraints on both backends: SQLite can declare forward FK references, while PostgreSQL adds the cyclic pointer FKs after both owner and revision tables exist. Parity tests inspect the final constraint graph, not only successful repository writes.
+All abbreviated `PK`, `UNIQUE`, and `FK` declarations above mean named SQL
+constraints over exactly the listed columns, in that order. No foreign key
+references a bare object ID when the target is Workspace-scoped. The cyclic
+current-pointer constraints, omitted from the table blocks only to make the
+creation phases explicit, are exactly:
+
+```text
+provider_profile(workspace_id, provider_profile_id, current_revision_id)
+  -> provider_profile_revision(workspace_id, provider_profile_id, revision_id)
+worker_profile(workspace_id, worker_profile_id, current_revision_id)
+  -> worker_profile_revision(workspace_id, worker_profile_id, revision_id)
+workspace_policy(workspace_id, policy_id, current_revision_id)
+  -> workspace_policy_revision(workspace_id, policy_id, revision_id)
+deployment(workspace_id, deployment_id, current_revision_id)
+  -> deployment_revision(workspace_id, deployment_id, revision_id)
+```
+
+A NULL `current_revision_id` is allowed only between owner insertion and
+pointer publication inside the same write transaction; a database CHECK
+cannot enforce “non-null at commit”, so the helper/repository must guarantee
+that invariant and test rollback on failure. Similarly, ancestry is checked by
+the exact same-Deployment composite keys above: initial revision has both
+ancestry refs NULL; ordinary publish has `previous_revision_id` equal to the
+parent/current revision and `rollback_of_revision_id` NULL; rollback has both
+`previous_revision_id` equal to the old current revision and
+`rollback_of_revision_id` equal to the retained target revision. A trigger or
+repository invariant must enforce these relationships and sequence=`parent + 1`
+inside the serialized publish transaction; the FK alone proves existence/scope,
+not correct ancestry.
+
+These are contract-level table and tuple definitions, not generated SQL or a
+claim about current schema. See the migration section for executable DDL
+ordering, backend parity, and failure recovery.
+
+The tuple declarations above are the required scoped-FK matrix, including all names and column order. The effective ownership/reference tuples are:
+
+| Child row | Exact referenced tuple(s) |
+|---|---|
+| `installation_default_workspace` | `(workspace_id) -> workspace(workspace_id)` |
+| `package` | `(workspace_id) -> workspace(workspace_id)` |
+| `package_revision` | `(workspace_id, package_id) -> package(workspace_id, package_id)` |
+| each profile/policy identity | `(workspace_id) -> workspace(workspace_id)` |
+| each provider/worker/policy revision | `(workspace_id, owner_id) -> owner(workspace_id, owner_id)` |
+| `deployment` | `(workspace_id) -> workspace(workspace_id)` and cyclic current pointer tuple above |
+| `deployment_revision` | `(workspace_id, deployment_id) -> deployment(workspace_id, deployment_id)`; `(workspace_id, deployment_id, previous_revision_id)` and `(workspace_id, deployment_id, rollback_of_revision_id)` each reference `(workspace_id, deployment_id, revision_id)` in `deployment_revision` |
+| `deployment_revision_package` | `(workspace_id, deployment_id, revision_id) -> deployment_revision`; `(workspace_id, package_id, package_revision_id) -> package_revision(workspace_id, package_id, revision_id)`; its unique five-column key is the exact parent tuple for bindings |
+| `deployment_revision_binding` | `(workspace_id, deployment_id, revision_id) -> deployment_revision`; `(workspace_id, deployment_id, revision_id, package_id, package_revision_id) -> deployment_revision_package`; `(workspace_id, provider_profile_id, provider_profile_revision_id) -> provider_profile_revision(workspace_id, provider_profile_id, revision_id)` |
+| package-source and adapter-artifact provider grant rows | `(workspace_id, deployment_id, revision_id) -> deployment_revision`; `(workspace_id, provider_profile_id, provider_profile_revision_id) -> provider_profile_revision` |
+| worker-profile grant row | `(workspace_id, deployment_id, revision_id) -> deployment_revision`; `(workspace_id, worker_profile_id, worker_profile_revision_id) -> worker_profile_revision` |
+| policy grant row | `(workspace_id, deployment_id, revision_id) -> deployment_revision`; `(workspace_id, policy_id, policy_revision_id) -> workspace_policy_revision(workspace_id, policy_id, revision_id)` |
+| `deployment_revision_request` | `(workspace_id) -> workspace`; `(workspace_id, deployment_id) -> deployment`; `(workspace_id, deployment_id, parent_revision_id) -> deployment_revision`; `(workspace_id, deployment_id, result_revision_id) -> deployment_revision` |
+
+All listed unique/primary tuples must exist on the referenced tables before creating their FKs. The child’s `workspace_id` is always part of a scoped reference; it is never checked separately from an object ID when that would allow cross-Workspace aliasing. For normalized join tables, the deployment-revision FK composes the Workspace scope through the deployment owner. The singleton default Workspace FK is direct and explicit.
+
+### DDL execution and backend parity
+
+The current generic `Database.create_table_sql()` only builds single-column
+`*_id -> id` constraints from `DBRules`; it cannot express these tuples or
+cyclic current pointers. The implementation therefore needs one explicit
+deployment-schema helper using `db.execute()` inside the existing
+`Database.transaction()` boundary, not model registration as a substitute.
+That helper is called by upgrade migration 13, fresh SQLite `create_db()`, and
+the fresh-PostgreSQL initialization branch. Use the same table, key, check,
+index, and immutability-trigger inventory on every entry path.
+
+SQLite can parse a `CREATE TABLE` FK that names a table created later, so its
+helper creates all tables with all four current-pointer FKs declared inline.
+PostgreSQL cannot add those pointer constraints until the targets exist; its
+helper first creates owner/revision tables and all non-cyclic constraints,
+then issues named `ALTER TABLE ... ADD CONSTRAINT ... FOREIGN KEY` statements
+for the four exact tuples above. Both backends run this work in the caller's
+schema transaction with SQLite foreign-key enforcement enabled. Bootstrap
+inserts owner rows with a NULL pointer, inserts their first immutable revision,
+then sets the pointer before commit. Migration failure must roll back both DDL
+and the default-Workspace/bootstrap rows; do not toggle SQLite foreign keys
+off to make ordering succeed.
+
+Immutable revision and normalized reference rows are insert-only in both
+engines. Implement backend-specific update/delete rejection triggers for
+`package_revision`, `deployment_revision`, the three profile/policy revision
+tables, their derived deployment join tables, and idempotency request receipts.
+The helper must create and inspect the same trigger inventory on fresh and
+upgrade paths. Mutable pointer/state rows are updated only by repository
+commands inside a transaction. If trigger shape differs across engines,
+record that as a parity failure rather than relying on application convention.
+
+Required migration order is: acquire the existing PostgreSQL schema advisory
+lock through `migrate_db`; begin the database transaction; create tables and
+unique owner/revision keys; create non-cyclic scoped FKs; create the four
+current-pointer FKs using the backend procedure above; create checks, indexes,
+and immutable-row guards; seed/retrieve the single stable default Workspace;
+validate the final FK/index/trigger graph and default pointer; stamp migration
+13 last; commit. Fresh database paths call the same helper and only then stamp
+`CURRENT_VERSION`. Never rewrite migrations 1–12. SQLite `PRAGMA foreign_key_check`
+and backend-native constraint catalog queries must be clean before commit.
+
+The `deployment_revision_request.parent_revision_id` FK is mandatory, nullable
+only for an initial `create` request. The composite FK is
+`(workspace_id, deployment_id, parent_revision_id) ->
+deployment_revision(workspace_id, deployment_id, revision_id)`; its CHECK
+requires NULL exactly for `operation_kind='create'`, and non-NULL for every
+other operation. Its result revision has a separate FK with the same scoped
+target shape. Deployment revision ancestry is similarly enforced with the two
+explicit self-FKs; sequence succession and whether the parent equals the
+current pointer remain transactional repository checks and receive adversarial
+tests. FK existence alone does not prove correct ancestry or CAS behavior.
+
+These are design requirements only. No migration helper, trigger, SQLite DDL,
+PostgreSQL DDL, or database parity receipt is included or claimed by this
+packet.
 
 `canonical_snapshot_json` in each immutable revision is the authority. The repository derives normalized join/index rows from that JSON in the same transaction; on read/resolve it verifies they match or fails closed. Binding requirement IDs live inside the exact immutable Package Revision JSON, so `publish` and every `resolve` validate that the requirement exists in that Package Revision and that the binding row points through the matching `deployment_revision_package` tuple. Do not invent a database FK to a JSON member or treat the join rows as a second authority. Use separate typed join tables so every SQL FK has one known target instead of a nullable `profile_kind` bag. RuntimePlan and Capability are inside the immutable canonical Package Revision manifest; resolver verifies the full referenced IDs against it. Catalog cache entries remain #89's concern, not a new service/table by default.
 
@@ -442,7 +716,7 @@ The local CLI/old routes resolve a `DefaultWorkspaceContext`; they do not duplic
 3. Once #130 and #135 are accepted, a compiler/importer snapshots each eligible current v2 Action package into a Package Revision and creates a default local Deployment/Deployment Revision selecting its one declared plan and preserving current direct Action projection behavior. The Package record may retain a `legacy_source_id` solely as migration provenance. New Runs must use the new pinned snapshot path after cutover.
 4. If a package fails safe snapshotting/compilation, record a precise blocked import status; do not make it active, follow a mutable directory as if immutable, or guess RCC/uv. Preserve its source and historical Runs for inspection and give the local UI/CLI a repairable message. The Runtime can still start; one invalid package does not poison unrelated packages.
 5. Existing Robot Task import uses the same PackageRevision/Capability/Deployment model once #148's import boundary and #144/#135 compiler are ready. Work Items remain optional execution context. No second Robot registry or RCC environment identity is introduced.
-6. Advance Deployments one at a time. A failed migration transaction rolls back; a backup-before-schema-change policy remains consistent with the existing migrator. Retain legacy paths until active new revisions are readable by the shipped Runtime. Before a revision is activated or a writer rolls forward, #140's compatibility gate must verify that every Runtime version which can receive that Deployment can read its stored schema/canonicalizer versions; if any reader is unknown or incompatible, leave the pointer unchanged and fail closed. A Runtime encountering an unknown revision/schema never guesses, down-migrates, or executes it. #140 owns the rollout gate and must test the supported old-reader/new-writer matrix; this contract adds no service or adapter migration.
+6. Advance Deployments one at a time. The current migrator makes a SQLite file copy before an upgrade, but does not provide an automatic PostgreSQL backup; operators must take the configured PostgreSQL backup before production migration. In both backends the migration DDL/bootstrap transaction must roll back on any error, and a retry after rollback must be safe. Do not claim migration rollback for failures outside that database transaction. Retain legacy paths until active new revisions are readable by the shipped Runtime. Before a revision is activated or a writer rolls forward, #140's compatibility gate must verify that every Runtime version which can receive that Deployment can read its stored schema/canonicalizer versions; if any reader is unknown or incompatible, leave the pointer unchanged and fail closed. A Runtime encountering an unknown revision/schema never guesses, down-migrates, or executes it. #140 owns the rollout gate and must test the supported old-reader/new-writer matrix; this contract adds no service or adapter migration.
 
 This bridge is intentionally not implementation detail for #129 to own. #135 owns safe source snapshot/compile, #148 owns unsafe archive/URL import hardening, #136 owns immutable source distribution, and #140 owns packaging/upgrade operations.
 
@@ -482,9 +756,13 @@ Keep each slice separately testable and reviewable. Slice 1a (pure canonical val
 - Fresh SQLite creates migration 13+ objects, one persisted default Workspace and no duplicated Workspace on repeated startup.
 - Fresh PostgreSQL initialization, which stamps the current registry after direct table creation, invokes the same DDL/bootstrap helper and creates the same default Workspace/scoped keys as migrated SQLite/PostgreSQL.
 - Existing current database with ActionPackage/Action/Run/schedule/artifact records migrates without changing or deleting any row; old Run remains explicitly legacy with no synthetic pin.
-- Inject a failure mid-backfill/migration and prove rollback leaves original records/read paths intact; rerun is clean.
+- Inject failure after each DDL/bootstrap phase and immediately before migration-stamp insertion; prove transaction rollback removes newly created schema/default rows and leaves original tables/records/read paths intact; rerun succeeds. Verify the documented SQLite backup exists, and verify PostgreSQL recovery via an explicitly captured pre-migration backup plus transaction rollback.
 - Same Workspace ID is returned after database close/reopen and by two Runtime instances sharing the database; it is independent of datadir name, port, environment, or PID.
-- Inspect/assert exact same-Workspace composite FKs for every row-backed ref: owner identities, current pointers, previous/rollback ancestry, Package refs, bindings, provider/worker/policy refs, request results, and default Workspace. Include a negative insertion per family on both SQLite and PostgreSQL.
+- Inspect/assert every exact tuple in the scoped-FK matrix above from SQLite `PRAGMA foreign_key_list` and PostgreSQL `information_schema`/`pg_constraint`/`pg_attribute`, including child/parent column order. Require current-pointer FKs on all four owner kinds, same-deployment `previous_revision_id`, `rollback_of_revision_id`, and request `parent_revision_id` plus `result_revision_id`, exact binding→deployment-package and binding→provider-revision tuples, and package/provider/worker/policy owner tuples.
+- For each scoped tuple family, attempt a cross-Workspace and same-Workspace-wrong-owner insertion and require FK rejection. Specifically prove request parent/revision cannot name another Deployment's revision; ancestry cannot name another Deployment's revision; binding cannot pair package A's requirement with package B's Package Revision; and grant rows cannot pair a revision with another provider/worker/policy owner. Run each negative in a savepoint/rollback so later cases remain independent.
+- On SQLite, prove forward/cyclic DDL creation with foreign keys enabled, owner→first revision→pointer publication in one transaction, pointer failure rollback, `PRAGMA foreign_key_check`, and all four `PRAGMA foreign_key_list` entries. On PostgreSQL, prove pointer constraints are absent during the owner-table phase, installed after revision-table creation, validated, and then match the same normalized constraint graph.
+- Attempt UPDATE and DELETE against every immutable revision, derived join, and idempotency receipt; each must fail. Verify only pointer/state rows mutate through publish/pause/resume/retire operations.
+- Verify initial revision NULL ancestry, publish parent=current plus exact next sequence, rollback parent=current plus rollback target, stale-CAS leaves no revision/request/pointer partial writes, and cross-owner ancestry is rejected independently of those repository checks.
 - Assert canonical revision JSON remains authority and normalized indexes are derived/checked. Validate manifest-embedded binding requirements on publish and resolve. Assert no `current_sequence` column or pointer/sequence drift.
 - PostgreSQL run is a separately recorded gate under #84 current-head evidence; do not infer it from SQLite parity.
 
@@ -498,6 +776,7 @@ Keep each slice separately testable and reviewable. Slice 1a (pure canonical val
 - Two independent processes race to publish from N; exactly one N+1 wins; the losing writer can reread and resubmit against the new head.
 - Same idempotency key + same operation/request digest replay after pointer advance returns the original result before stale-ETag CAS. Reuse with different command kind, target, parent ETag, candidate digest, or rollback target returns `idempotency_conflict`.
 - Initial Deployment + revision + pointer + idempotency receipt is one atomic `If-None-Match: *` create; a failed initial transaction leaves no identity, and a replay returns the same generated IDs.
+- The idempotency key is Workspace-global: reuse the same key for a different Deployment in that Workspace and require `idempotency_conflict`, with neither Deployment mutated and no stored target/result disclosed. A fresh key succeeds. A retry of a server-ID-generating initial create can find its receipt using only `(workspace_id, idempotency_key)` and returns its original IDs; a caller who loses authorization before replay receives no receipt/result.
 - Rollback from N+1 to N creates a new N+2 identity with `rollback_of=N`, `previous=N+1`, and config equal to N; N/N+1 provenance remains unchanged.
 - No source/binding/profile/projection/config mutation is accepted after insert.
 
