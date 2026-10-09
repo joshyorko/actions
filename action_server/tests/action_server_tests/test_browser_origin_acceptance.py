@@ -10,7 +10,6 @@ from pathlib import Path
 
 import pytest
 
-
 _BROWSER_SCRIPT = textwrap.dedent(
     r"""
     import assert from "node:assert/strict";

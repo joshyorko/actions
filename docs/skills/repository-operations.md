@@ -95,10 +95,12 @@ METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
 
 Runtime's installed-wheel contract tests select a Python supporting the Runtime
-distribution and `venv`. If the host's preferred Python lacks `ensurepip`, set
-`ACTIONS_RUNTIME_TEST_PYTHON` to the actual Python from the pinned RCC developer
-environment. Record that interpreter's version in the receipt; do not install
-host tooling or falsify version discovery to make this boundary pass.
+distribution and `venv`. For RCC-based verification, set
+`ACTIONS_RUNTIME_TEST_PYTHON` to the active RCC interpreter (`sys.executable`)
+so a higher-priority host `python3.13` cannot replace the pinned toolchain's
+Python 3.12. The contract failed with the unpinned host interpreter and passed
+with RCC Python 3.12. Record that interpreter's version in the receipt; do not
+install host tooling or falsify version discovery to make this boundary pass.
 
 For packaged UI acceptance, rebuild the canonical embedded static entrypoint
 with `invoke build-frontend`, then build the frozen executable and Go wrapper.
@@ -1025,6 +1027,13 @@ or validate prebuilt frontend/binary artifacts carry the `integration_test` mark
 portable FastAPI/Starlette `TestClient` contracts require `httpx` in Action Server's
 locked development dependencies. Managed `package.yaml` fixtures use published,
 compatible Actions package versions rather than nonexistent future pins.
+The portable invocation also discovers
+`tests/action_server_tests/test_devenv/pack1/tests/test_my_action.py`; both
+tests fail with `ModuleNotFoundError: my_action` because this nested project
+fixture's `src/` is not on the package-suite import path. Keep this separate
+from product regressions and hand it to the Action Server test-layout owner;
+do not mask it with a workspace-wide `PYTHONPATH` or silently exclude it from
+the full-suite receipt.
 
 Database migrations are complete only when an upgraded legacy database has the same
 tables, columns, and index definitions as a database freshly generated from current
