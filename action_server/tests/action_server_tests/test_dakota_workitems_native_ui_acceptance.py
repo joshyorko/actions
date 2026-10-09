@@ -111,6 +111,7 @@ def write_pretest_tree_inventory(
                 "platform": platform.system(),
                 "executable_sha256": executable_sha,
                 "manifest_sha256": sha256(manifest_path),
+                "package_tree_sha256": packaged_tree_sha256(package_root),
                 "entries": packaged_tree_inventory(package_root),
             },
             indent=2,
@@ -377,6 +378,16 @@ def wrapper_home_environment(runtime_home: Path) -> dict[str, str]:
     return {"HOME": str(runtime_home)}
 
 
+def native_runtime_environment(runtime_home: Path) -> dict[str, str]:
+    return {
+        "ACTIONS_HOME": str(runtime_home),
+        "ROBOCORP_HOME": str(runtime_home),
+        "ACTIONS_SKIP_UPDATE_CHECK": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        **wrapper_home_environment(runtime_home),
+    }
+
+
 def start_native_runtime(
     datadir: Path, project: Path, runtime_home: Path, api_key: str
 ) -> ActionServerProcess:
@@ -390,12 +401,7 @@ def start_native_runtime(
             max_processes=1,
             port=0,
             additional_args=["--address=127.0.0.1", f"--api-key={api_key}"],
-            env={
-                "ACTIONS_HOME": str(runtime_home),
-                "ROBOCORP_HOME": str(runtime_home),
-                "ACTIONS_SKIP_UPDATE_CHECK": "1",
-                **wrapper_home_environment(runtime_home),
-            },
+            env=native_runtime_environment(runtime_home),
         )
     except Exception as error:
         cleanup_receipt: dict = {}
@@ -511,6 +517,31 @@ def test_native_runtime_startup_failure_stops_created_process(
         start_native_runtime(tmp_path, tmp_path, tmp_path, "test-key")
     assert len(created) == 1
     assert created[0].stop_calls == 1
+
+
+def test_native_runtime_disables_bytecode_writes_for_tree_provenance(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    class StartupProcess:
+        def __init__(self, _datadir):
+            self.start_options = None
+
+        def start(self, **kwargs):
+            self.start_options = kwargs
+
+        def stop(self):
+            pass
+
+    created: list[StartupProcess] = []
+
+    def create_process(datadir):
+        process = StartupProcess(datadir)
+        created.append(process)
+        return process
+
+    monkeypatch.setattr(sys.modules[__name__], "ActionServerProcess", create_process)
+    start_native_runtime(tmp_path, tmp_path, tmp_path / "runtime-home", "test-key")
+    assert created[0].start_options["env"]["PYTHONDONTWRITEBYTECODE"] == "1"
 
 
 def test_native_runtime_startup_preserves_cleanup_failure_type(
@@ -728,8 +759,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
     process: ActionServerProcess | None = None
     try:
         version_env = os.environ.copy()
-        version_env.update(wrapper_home_environment(runtime_home))
-        version_env["ACTIONS_SKIP_UPDATE_CHECK"] = "1"
+        version_env.update(native_runtime_environment(runtime_home))
         version = subprocess.run(
             [str(executable), "version"],
             cwd=project,

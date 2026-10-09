@@ -476,7 +476,13 @@ build-time inventory beside the manifest and the harness's pretest inventory.
 Compare their relative paths, entry kinds, permission modes, symlink targets,
 and file-content hashes before changing inventory normalization or gate order.
 The inventory is diagnostic evidence; never recompute the trusted manifest
-value from the later tree to make a mismatch pass.
+value from the later tree to make a mismatch pass. Hosted Linux and Windows
+inventories showed new preload-action bytecode files under the frozen
+`_internal` tree after manifest creation; Windows also gained a downloaded RCC
+executable under `_internal/actions/server/bin`. Place the Work Items browser
+gate before other packaged Runtime gates and set `PYTHONDONTWRITEBYTECODE=1` for
+its Runtime and version probes. Its hosted tree check must still pass before
+that ordering change counts as verified behavior.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
