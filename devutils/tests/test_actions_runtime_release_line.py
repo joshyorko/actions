@@ -93,9 +93,14 @@ def test_runtime_artifact_matrix_and_community_provenance_are_explicit():
     assert "cdn.sema4.ai" not in BINARY_WORKFLOW
     assert "s3://robocorp-action-server-build-drop-box" not in BINARY_WORKFLOW
     assert "Verify Runtime binary inventory" in BINARY_WORKFLOW
-    assert "runtime-binary-manifest.sha256" in BINARY_WORKFLOW
     binary_workflow = yaml.safe_load(BINARY_WORKFLOW)
     pypi_workflow = yaml.safe_load(PYPI_WORKFLOW)
+    inventory = next(
+        step["run"]
+        for step in binary_workflow["jobs"]["release"]["steps"]
+        if step.get("name") == "Verify Runtime binary inventory"
+    )
+    assert '"${tag}-sha256.txt"' in inventory
     binary_provenance = next(
         step["run"]
         for step in binary_workflow["jobs"]["build"]["steps"]
@@ -149,12 +154,13 @@ def test_native_runtime_release_uses_only_community_github_release_assets():
         "${{ github.ref_name }}-linux64",
         "${{ github.ref_name }}-macos-arm64",
         "${{ github.ref_name }}-windows64.exe",
+        "${{ github.ref_name }}-sha256.txt",
     ]
     assert [
         step["with"]["overwrite"]
         for step in release_steps
         if step.get("uses", "").startswith("svenstaro/upload-release-action@")
-    ] == [False, False, False]
+    ] == [False, False, False, False]
 
     forbidden_destinations = (
         "sema4ai/homebrew-tools",
