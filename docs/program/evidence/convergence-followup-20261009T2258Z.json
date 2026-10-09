@@ -18,7 +18,7 @@
       "owner": "Devsy Work Items author/native supervisor",
       "status": "Open/blocked; native matrix complete with a pre-start Go UI failure.",
       "next_action": "Native author owns the manifest and startup child cleanup/PASS-before-teardown findings; independent L review is BLOCKED. Resolve/review these gates; do not infer full issue acceptance.",
-      "current_gate": "macOS passed with both UI steps skipped; Linux and Windows frozen UI passed; Go UI failed before startup because four required manifest hash fields are missing. Core 3.13 passed on all three OSes and mypy passed. E721 and stale generated MCP docs remain separate integration blockers."
+      "current_gate": "macOS passed with both UI steps skipped; Linux and Windows frozen UI passed; Go UI failed before startup because four required manifest hash fields are missing. PR221/Core evidence is separate: 313 tests passed on Python 3.10 across all three OS jobs and mypy passed; E721 and stale generated MCP docs remain."
     },
     {
       "number": 221,
@@ -30,7 +30,8 @@
       "baseRefName": "community",
       "owner": "A + assigned Mac/Windows diagnosis",
       "status": "Open/blocked at integration head abe8640a; current checks complete with three known Core lint/docs failures. PR270 is the narrow successor repair; it is not yet admitted.",
-      "next_action": "Complete PR270 exact-head hosted checks and independent review; then run the required full three-OS Core matrix on the resulting PR221 head before community/release admission."
+      "next_action": "Complete PR270 exact-head hosted checks and independent review; then run the required full three-OS Core matrix on the resulting PR221 head before community/release admission.",
+      "current_gate": "Three known Core lint/docs failures remain at integration head abe8640a; separately, 313 test cases passed under Python 3.10 across all three OS jobs and mypy passed. No Python 3.13 claim."
     },
     {
       "number": 220,
@@ -122,7 +123,7 @@
   "pr256": {
     "head": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
     "native_status": "All native jobs have completed. macOS passes while skipping both UI steps. Linux and Windows frozen UI pass. Go UI fails before startup because four required manifest hash fields are missing.",
-    "other_checks": "Core 3.13 passes on all three operating systems and mypy passes. E721 and stale generated MCP docs remain distinct integration blockers.",
+    "other_checks": "PR221/Core evidence: 313 test cases passed under Python 3.10 across all three OS jobs and mypy passed. Separate E721 and stale generated MCP documentation failures remain. No Python 3.13 result is inferred.",
     "ownership": "Native author owns manifest and startup child cleanup/PASS-before-teardown findings; independent L review is BLOCKED.",
     "next_action": "Complete manifest/startup corrections and independent review; no whole issue acceptance inferred."
   },
@@ -200,5 +201,42 @@
     "http-helper-1.0.3-verified-dist.zip": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
   },
   "archive_integrity_note": "All 16 evidence ZIPs present in the current program evidence directory were hashed; the 15 prior archive hashes in Canvas amendment v4 match exactly. This update created no ZIP.",
-  "open_pr_rows_note": "The unchanged seven legacy rows cite exact owners, gate, dependency and next action from the 22:48 detailed receipt; their check counts are explicitly timestamped historical baselines. PR256 and PR221 are updated separately in this delta; PR270 is new."
+  "open_pr_rows_note": "The unchanged seven legacy rows cite exact owners, gate, dependency and next action from the 22:48 detailed receipt; their check counts are explicitly timestamped historical baselines. PR256 and PR221 are updated separately in this delta; PR270 is new.",
+  "python_version_erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json; the immutable 22:53 source receipt remains byte-for-byte unchanged.",
+  "pr269_artifact_readback_successor": {
+    "receipt": "devsy-convergence-checkpoint-2258.json",
+    "receipt_sha256": "fb5d7cc26092a8b772cacd9cedef1bbfd631c87cf6f7caa8cd66f55f0a0d8c4f",
+    "observed_at_utc": "2026-10-09T22:58:42.222628Z",
+    "run": 37999378425,
+    "artifact_id": 11648617677,
+    "head": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+    "workflow_checkout": "e5cc8c13f0306ee302e1a451dbd66d35d7979c6d",
+    "archive_bytes": 114288,
+    "archive_sha256": "db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f",
+    "verified_members": [
+      {
+        "name": "actions_work_items-0.4.4-py3-none-any.whl",
+        "bytes": 62717,
+        "sha256": "488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0"
+      },
+      {
+        "name": "actions_work_items-0.4.4.tar.gz",
+        "bytes": 53704,
+        "sha256": "48e3261e110751f78ce49041cf78217bb3601c8dc94679097dae7e51603b1da0"
+      }
+    ],
+    "scope": "Native worker retrieved archive and verified members/RECORD and workflow source association. No embedded Git manifest; publication skipped. The earlier Cloud 403-before-bytes remains a valid historical attempt, superseded for artifact-byte verification by this independent native readback."
+  },
+  "native_inventory_observation": {
+    "observed_at_utc": "2026-10-09T22:58:42.222628Z",
+    "reported_in_progress": 4,
+    "reported_completed": 1,
+    "rcc_local_head": "d81668e40734677f67933fb0dcfb26a129041992",
+    "rcc_lifecycle_head": "ab74fedc658421d368dd1b1158b39973962ddd3c",
+    "remote_refs_read_back_by_root": {
+      "rcc": "e8025cc4685b65d1183fabb43316fe5a188296f4",
+      "lifecycle": "839798e4cdd786f799956f94d22970da92fad68e"
+    },
+    "limit": "The two newer native source heads are local-only observations; remote verification is pending. No acceptance is inferred."
+  }
 }

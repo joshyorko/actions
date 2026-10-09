@@ -3174,7 +3174,7 @@
   "current_convergence_update": {
     "observed_at_utc": "2026-10-09T22:58:55Z",
     "path": "evidence/convergence-followup-20261009T2258Z.json",
-    "sha256": "fa6b9e40b6bd70b9956a1d1ef4e507233c87f5dd2a5eac4d2bbc0ea51c8cef2a",
+    "sha256": "13e8b98c56f41200077a24e792fa9834a21903016cc152a4aaa9306cd441bbe6",
     "cohort": {
       "items": 20,
       "target_integrated": 11,
@@ -3196,7 +3196,7 @@
     },
     "open_pr_audit": {
       "path": "evidence/convergence-followup-20261009T2258Z.json",
-      "sha256": "fa6b9e40b6bd70b9956a1d1ef4e507233c87f5dd2a5eac4d2bbc0ea51c8cef2a",
+      "sha256": "13e8b98c56f41200077a24e792fa9834a21903016cc152a4aaa9306cd441bbe6",
       "open_count": 9,
       "all_drafts": true,
       "note": "All nine blocked rows are included; eight preserve the 22:48 exact head/base audit and detailed owner/gate/action, with current PR221/256 updates and PR270 exact head."
@@ -3206,7 +3206,9 @@
     "previous_baselines": [
       "evidence/convergence-followup-20261009T2248Z.json",
       "evidence/convergence-followup-20261009T2253Z.json"
-    ]
+    ],
+    "python_version_erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json",
+    "artifact_readback_successor": "evidence/devsy-convergence-checkpoint-2258.json"
   },
   "latest_artifact_metadata_erratum": {
     "observed_at_utc": "2026-10-09T22:34:00Z",
@@ -3350,7 +3352,7 @@
         "name": "Actions Core Ubuntu py3.10 devmode",
         "owner": "A",
         "status": "FAILURE",
-        "source_diagnosis": "Ubuntu3.13 and mypy PASS; E721 float-type check and stale generated MCP docs reported; narrow fix assigned, not yet verified."
+        "source_diagnosis": "313 test cases passed under Python 3.10 across all three OS jobs and mypy PASS; E721 float-type check and stale generated MCP docs remain failures. Python 3.13 is not established."
       },
       {
         "run": 38000894375,
@@ -3368,7 +3370,8 @@
         "status": "FAILURE",
         "diagnosis": "Cause not confirmed."
       }
-    ]
+    ],
+    "erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json"
   },
   "devsy_current_snapshot": {
     "observed_at_utc": "2026-10-09T22:46:00Z",
