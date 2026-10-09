@@ -1,4 +1,11 @@
 # Changelog
+## Unreleased — 1.0.2 candidate
+
+- Honor the selected network profile’s explicit no-proxy destinations for
+  urllib3 requests, while retaining proxy routing for other destinations and
+  the identical configured TLS verification context.
+
+
 
 ## 1.0.1 - 2026-09-07
 
