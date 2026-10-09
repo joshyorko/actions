@@ -61,6 +61,18 @@ attributing them, and do not remove the proxy or weaken server authorization
 to make tests pass. Local mock-server connectivity is distinct from a real
 provider or authenticated product-browser contract.
 
+The locked MCP Python SDK 2.0.0 validates authorization-server issuer URLs as
+HTTPS, allowing HTTP only for localhost and loopback IPs, and rejects issuer
+queries and fragments. Its CIMD URL helper accepts HTTPS URLs with a non-root
+path. These SDK helpers do not prove Runtime authentication: the SDK's server
+authorization metadata builder leaves
+`client_id_metadata_document_supported` unset, and its CIMD URL helper is a
+client-side capability. Probe these contracts against the package lock and
+keep them distinct from a Runtime verifier, trusted authorization-server
+configuration, token issuer/audience checks, or CIMD handling by an external
+authorization server. Action-provider OAuth remains a separate credential
+flow.
+
 ## Package Boundaries
 
 Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as
