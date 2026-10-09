@@ -1404,7 +1404,10 @@ a local directory lock entry proves candidate verification, not publication.
 When merging parallel checkpoint tests, check for duplicate top-level test
 names: Python silently replaces the earlier definition, masking ownership and
 coverage. Consolidate only proven identical contracts or preserve distinct
-tests under distinct names, then run the complete combined suite and lint.
+tests under distinct names. Compare complete function bodies and parameterization
+before consolidation, and capture `pytest --collect-only -q` counts before and
+after so collection changes are explicit. Then run the complete combined suite
+and lint.
 
 Credential redaction must cover argparse-accepted long-option abbreviations
 for `--api-key`, in both separate and equals forms. HTTP header names are
