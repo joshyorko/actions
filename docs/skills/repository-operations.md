@@ -15,15 +15,6 @@ separately against the current integration revision, checking both its imports
 and declared producer-version floor. An older community checkout does not
 establish the current consumer's adoption state.
 
-Before a package-only promotion, compare the complete package source, tests,
-dependency metadata and release safeguards with the current integration tree.
-Record every intentional difference; selecting an earlier passing checkpoint
-can omit a later repair even when the extracted patch passes its own tests.
-Bind the tested wheel to its embedded source bytes and installed import path,
-not an older ignored dist directory. If an immutable tag selected incomplete
-source, preserve it and its failed evidence; do not move or retry that tag.
-Correct the source and allocate a separately admitted unused version.
-
 The Runtime development group resolves the matching monorepo Core through a
 relative path. Poetry 2.1.1 generates the lock from that declared group; no
 unpublished registry file hashes are invented. Runtime wheel metadata must
@@ -349,7 +340,11 @@ by that comparison, including package-local development dependencies and lockfil
 updates when needed by the configured test gate. A source anchor proves where the
 candidate originated; it does not prove that later package fixes were included.
 Review the complete package diff and state any intentional exclusions before
-tagging. For HTTP helper redirects, a proxy-to-direct redirect must update a
+tagging. Bind the tested wheel to its embedded source bytes and installed import
+path, not an older ignored dist directory. If an immutable tag selected incomplete
+source, preserve it and its failed evidence; do not move or retry that tag.
+Correct the source and allocate a separately admitted unused version.
+For HTTP helper redirects, a proxy-to-direct redirect must update a
 generated `Host` header to the destination while preserving an explicitly supplied
 `Host`, and must continue stripping credentials; the regression test covers both
 generated and explicit header cases.
@@ -1387,8 +1382,10 @@ format the record. Redact both API-key CLI argument spellings as well as
 database URLs. A browser-session test must prove a handshake actually succeeded
 before asserting synthetic credentials are absent from the resulting logs.
 
-The integrated Runtime candidate requires HTTP Helper 1.0.2 for correct persisted
-proxy exclusions. Build identified Core and HTTP Helper candidate wheels only
+The integrated Runtime candidate requires HTTP Helper 1.0.3 for corrected persisted
+proxy exclusions and redirect header behavior. The earlier immutable Helper 1.0.2
+tag selected incomplete source and is not a release source to retry.
+Build identified Core and HTTP Helper candidate wheels only
 for PR wheel tests, retaining `pip check`. Tagged release jobs must resolve the
 registry versions. Publish and clean-install HTTP Helper before Core and Runtime;
 a local directory lock entry proves candidate verification, not publication.
