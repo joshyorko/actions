@@ -1,0 +1,16 @@
+{
+  "format": "community evidence archive manifest v1",
+  "archive": "canvas-execution-graph-amendment-20261009-v3.zip",
+  "entries": [
+    {
+      "path": "canvas-execution-graph-amendment-20261009-v3.json",
+      "size_bytes": 14054,
+      "sha256": "79dcd07e00e5c58fd6e90a8bbbe4cda1997f3a5fe4424b2d4b9c7aeeb1733dec"
+    },
+    {
+      "path": "canvas-execution-graph-amendment-20261009-v3.md",
+      "size_bytes": 8172,
+      "sha256": "41d11a4db71389462e16dce6e8a53f2d27da4a52f286e80463bcb6afde0c9447"
+    }
+  ]
+}

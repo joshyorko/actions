@@ -1,0 +1,17 @@
+{
+  "observed_at_utc": "2026-10-09T20:23:29Z",
+  "command": "source /workspace/actions-cloud/activate.sh && rcc run -r developer/toolkit.yaml --dev -t ToolkitTest",
+  "rcc_version": "18.19.3",
+  "task": "ToolkitTest",
+  "result": "PASS",
+  "ruff": "PASS (developer)",
+  "pytest": {
+    "passed": 26,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 1.56
+  },
+  "output_log": "evidence/community-graph-toolkit-test-20261009.txt",
+  "output_log_sha256": "0763ce45ca1fe35e44f7645ee20ab1102a56d1c74c8bc7b4572cbd4dded34c71",
+  "limitations": "This is a local configured RCC task result, not hosted CI or a release/native acceptance."
+}

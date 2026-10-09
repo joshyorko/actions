@@ -1,0 +1,146 @@
+{
+  "observed_at_utc": "2026-10-09T22:32:00Z",
+  "scope": "Dated convergence successor only; no issue status or historical archive changes.",
+  "cohort": {
+    "items": 19,
+    "target_integrated": 9,
+    "open_blocked": 10,
+    "merge_ready": 0,
+    "whole_issue_acceptance_changed": false
+  },
+  "target_only_merges": [
+    {
+      "pr": 251,
+      "merge": "ddbbfb68e3431878f01ebfd61de461ff749dc498",
+      "target": "repair/rcc-graceful-retirement-20261009"
+    },
+    {
+      "pr": 266,
+      "merge": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+      "target": "renderer branch"
+    },
+    {
+      "pr": 257,
+      "target": "community integration"
+    },
+    {
+      "pr": 259,
+      "target": "Runtime release candidate"
+    },
+    {
+      "pr": 262,
+      "target": "Runtime release candidate"
+    },
+    {
+      "pr": 268,
+      "merge": "4e82a8c3b72565f1f1891602f32c9d92e62fce6c",
+      "target": "community integration"
+    },
+    {
+      "pr": 264,
+      "merge": "4a717c77053947f4ad2892783211af5edbe5783d",
+      "target": "community integration"
+    },
+    {
+      "pr": 263,
+      "merge": "975975fea45ef99322645e46d8e66809277cdfa6",
+      "target": "Runtime release candidate"
+    },
+    {
+      "pr": 267,
+      "merge": "e2fb0f461f70129af0673aa5886f95ee581992d9",
+      "target": "Runtime release candidate",
+      "checks": "10 hosted checks green; built HTML acceptance recorded; no ChatGPT acceptance."
+    }
+  ],
+  "open_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261009T2230Z.json",
+    "sha256": "bd7c314e66f77358b18a20a8edc2d2215af2fd1d1d00d0fd1f63eda67f4ceb97",
+    "count": 10,
+    "all_drafts": true,
+    "numbers": [
+      269,
+      265,
+      256,
+      221,
+      220,
+      219,
+      218,
+      217,
+      216,
+      215
+    ]
+  },
+  "branch_readback": {
+    "community": {
+      "ref": "refs/heads/community",
+      "head": "c30f953bae1a322e1d09549607ab42f1badce440"
+    },
+    "integration": {
+      "ref": "refs/heads/integration/community-release-20261008",
+      "head": "4a717c77053947f4ad2892783211af5edbe5783d"
+    },
+    "runtime_candidate": {
+      "ref": "refs/heads/integration/runtime-release-final-20261009",
+      "head": "e2fb0f461f70129af0673aa5886f95ee581992d9"
+    }
+  },
+  "runtime_release_candidate_tree": "280278cf45fc8f0b5ae5702a471f8c81b15aeae6",
+  "pr263": {
+    "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+    "merge": "975975fea45ef99322645e46d8e66809277cdfa6",
+    "checks": "Core hosted313, Runtime747+10skip, clean-wheel and separate actual-process1 passed; whole issue/API publication not implied."
+  },
+  "pr267": {
+    "head": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+    "merge": "e2fb0f461f70129af0673aa5886f95ee581992d9",
+    "checks": "10 hosted checks green; built HTML acceptance recorded; no ChatGPT acceptance."
+  },
+  "pr269": {
+    "head": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+    "target": "main",
+    "state": "open; hosted checks pending",
+    "local_gate": "238 passed, 28 skipped, 3 deselected, 10 xfailed; independent review accepted; no whole issue acceptance.",
+    "hosted_checks": {
+      "verify": "pass",
+      "verify_run": "37999378425",
+      "verify_job": "114053445842",
+      "artifact_limit": "CI artifact receipt only; not registry publication",
+      "audit": "pass",
+      "remaining": "coverage plus primary toolkit and native binary matrix checks pending",
+      "artifact_bytes_and_digest": "Workflow-reported zip size 11,648,617,677 and digest db39ec5e\u2026114288B; independent GitHub-to-blob retrieval returned 403 before bytes, so neither size nor digest is independently verified.",
+      "artifact_retrieval": "blocked (403 redirect); no retry; empty-zip artifact preserved as UNVERIFIED-empty in evidence/pr269-workitems-artifact-retrieval.json"
+    }
+  },
+  "devsy": {
+    "thread": "01a1222f-e720-7183-9634-2edb76d30326",
+    "turn": "01a122c9-66d0-72a0-8088-df3a1e1687ea",
+    "request_id": "actions-sol-devsy-convergence-20261009-2230-v2",
+    "dispatch_state": "accepted",
+    "effective_model": "gpt-6.1-sol",
+    "effort": "high",
+    "approval_policy": "never",
+    "sandbox": "danger-full-access",
+    "limit": "Continuation dispatch/settings accepted; no lane completion or progress is inferred."
+  },
+  "historical_dispatch_failures": "Prior unsupported-model HTTP 400 had one user message and no assistant/tool effects; previous 502/KubernetesError observations remain preserved in their original receipts.",
+  "issue_accounting": {
+    "retained_contracts": 54,
+    "open": 53,
+    "accepted_closed": [
+      210
+    ],
+    "whole_issue_review_ready": 0,
+    "changed": false
+  },
+  "upstream_disposition": "None; this is campaign convergence/status evidence.",
+  "pr221_frontend_rerun": {
+    "run": "37998628314",
+    "job": "114051873512",
+    "result": "pass; 278 tests passed; publish skipped; all 28 reported checks successful",
+    "same_head": "4a717c77053947f4ad2892783211af5edbe5783d",
+    "original_failure": "277 passed, one strict timing failure at 32.470033 ms for <32 ms; preserved separately",
+    "threshold_changed": false
+  },
+  "overall_limits": "The community integration branch remains unchanged at 4a717c77. Root reports the main candidate still blocked by functional PR256 Windows/RCC proof and PR269 matrix validation; no admission/merge inferred."
+}

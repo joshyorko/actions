@@ -1,0 +1,12 @@
+{
+  "target": "cas-worker-01",
+  "cwd": "/workspaces",
+  "thread_id": "01a121ed-85b6-7000-b54a-649bc53e7224",
+  "approval_policy": "never",
+  "sandbox": "danger-full-access",
+  "model": "gpt-6-luna",
+  "effort": "medium",
+  "request_id": "actions-bootstrap-expand-two-lanes-20261009-1927-v1",
+  "text": "NEW bounded setup task SAMEexistingbootstrapthread, preserveallworkers. FreshOwnerDevsycapacity16cores30,060,244,992availableRAM237,406,064,640freedisk authenticated0.162.0. RootacceptedPR253afterindependentreview/all4hostedchecks andmergedintegration toEXACT26b0194590e14656bff92dce3665dccab09837a3(tree227e950994c52e629fe1fcd65effb7421f92aeb5). Verify/workspaces/actionsrootoriginhttps://github.com/joshyorko/actions.git/status, preserveexistingcommunitycheckoutandall4currentworktrees. FetchONLYintegration/community-release-20261008publishedref. CreateifabsenttwoisolatedworktreesfromEXACT26b0194: /workspaces/actions-worktrees/devsy-rcc-local-acceptance branchdevsy/rcc-local-acceptance-20261009; /workspaces/actions-worktrees/devsy-native-review branchdevsy/native-review-20261009. Ifanypathexistsinspectidentity/status/preserve,dontoverwriteorreset. Per-worker scratch/TMP/cache under/workspaces/actions-worker-state/<name>. ReadapplicableAGENTS, reportverifiedremote/root/branch/head/cleanstate. No packageBootstrap/tests/engineeringworkers/sourcechanges, noCASbootstraprepo, no workspaceprovisioning orcredentials. ExistingCASnative-auth/workitems/distributionthreadsunchanged; Canvasreservedbecauseuserincomingrevampedissues, noCanvaswork. Returnmaponlyplusdocumentation/upstreamdispositionrequiredcanonicalproposalswithoutdiary. Userauthorizedfiveboundedengineeringlanesbutrootdispatchesaftermapping. No genericworkspace_execcapacity.",
+  "wait_for_completion": false
+}

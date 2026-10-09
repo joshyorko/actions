@@ -1,0 +1,12 @@
+{
+  "target": "cas-worker-01",
+  "approval_policy": "never",
+  "sandbox": "danger-full-access",
+  "model": "gpt-6-luna",
+  "effort": "medium",
+  "wait_for_completion": false,
+  "cwd": "/workspaces/actions-worktrees/devsy-native-distribution",
+  "thread_id": "01a12211-01b3-7850-b508-bd7959b8210c",
+  "request_id": "actions-native-release-test-integrity-20261009-1933-v1",
+  "text": "NEWboundedcontinuation SAMEthread. Rootfetched90c37991 andcreatedPR257; Solindependentmanifestreviewongoing. Keepfivelanesproductive. Ownnextnecessarygate: fullRuffF811reports4duplicate definitions in test_runtime_release_workflows.py atbase aswellasbranch. These may shadowearliertests, so fix testcollectionintegrity in OWNfile bypreservingeachdistincttestcaseunderuniqueaccuratenames (inspectfunctions, no deletingassertionsmerelytogreen). Recordbeforecollectionvsafter, runfullconfigureddevutilssuiteandfullRuff throughalreadybootstrappedpinnedRCC. Ifnewlyunshadowedtestsfailed, diagnoserealcontract; donotweakenreleasegates, coordinateproductionworkflowchangeswithroot/Sol. Minimalcanonicaldocdeltaifdurablefinding, no cosmeticdiary. Preserve90c37991/0169originalhistory andinitial124/2fail→126passreceipts. Pushfollowupnormaluniqueheadandnotifyrootexactchanges. Whilehostedchecksrun,inspectactualowninghomebrew-toolsworkflowinputs/AGENTS andprepareverifiable1.0.3install/upgradeprocedure usingactual1.0.1cask asbaseline; do notaltertapversion/hashuntilactual1.0.3assetsverified androotauthorizesexactmutation. No globalHomebrew/CAS/credentialchanges, no releasepub. Scratch/resourcesisolated, upstreamreportingpolicycompletionmandatory. Rootaloneintegrationowner. Stopatboundedgatecheckpointthenrootgivesnext."
+}

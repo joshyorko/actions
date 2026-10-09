@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-09T21:52:33Z",
+  "scope": "Supplemental current convergence observation; preserves the immutable 21:46 raw audit and does not revise issue acceptance or archive history.",
+  "convergence_cohort": {
+    "total_items": 17,
+    "merge_ready": 0,
+    "blocked_open": 15,
+    "integrated_to_intended_target": 2,
+    "integrated_prs": [
+      251,
+      266
+    ],
+    "source": "root current-status message at 21:52Z",
+    "meaning": "Target-specific PR integration counts; neither merged PR changes whole-issue acceptance. This is not a refreshed full 17-item audit."
+  },
+  "pr266": {
+    "state": "MERGED_TO_INTENDED_RENDERER_BRANCH",
+    "base_branch": "feature/issue-99a-query-renderer-20261009",
+    "head": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+    "head_tree": "924939e3637373cfc08832aa5099742b286dda81",
+    "merge_commit": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+    "merge_tree": "d2d9777a28dc32031e99660530925de464054f51",
+    "tree_basis": "Root reports independent review accepted the synthetic integration tree; merge commit tree equals that reviewed tree.",
+    "hosted_checks": "10/10 checks SUCCESS on exact head feeffc29.",
+    "scope_limit": "Renderer branch only; not community/integration or whole Canvas issue completion.",
+    "merge_validation": {
+      "reviewed_synthetic_tree": "d2d9777a28dc32031e99660530925de464054f51",
+      "merge_tree": "d2d9777a28dc32031e99660530925de464054f51",
+      "api_readback": "PR266 merged to the renderer base; merge commit parents were current base d01848a7 and exact head feeffc29."
+    }
+  },
+  "pr267": {
+    "state": "OPEN_DRAFT",
+    "base_branch": "feature/issue-100a-public-mcp-app-authoring-20261009",
+    "head_branch": "feature/issue-99a-query-renderer-20261009",
+    "head": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+    "observed_check_rollup": "Audit SUCCESS; the other nine hosted checks had no conclusion at this read. Current-head validation is pending.",
+    "evidence_source": "read-only `gh pr view 267` at 2026-10-09T21:52Z",
+    "check_runs": [
+      {
+        "workflow": "AI audit evidence",
+        "run": 37996001828,
+        "job": 114042130768,
+        "conclusion": "SUCCESS"
+      },
+      {
+        "workflow": "Build Action Server (Unauthenticated)",
+        "run": 37996001863,
+        "job": 114042131267,
+        "platform": "ubuntu-22.04",
+        "conclusion": null
+      },
+      {
+        "workflow": "RCC developer toolkit primary 18.19.3",
+        "run": 37996001702,
+        "job": 114042130746,
+        "platform": "ubuntu-22.04",
+        "conclusion": null
+      },
+      {
+        "workflow": "RCC developer toolkit primary 18.19.3",
+        "run": 37996001702,
+        "job": 114042130604,
+        "platform": "macos-15",
+        "conclusion": null
+      },
+      {
+        "workflow": "Build Action Server (Unauthenticated)",
+        "run": 37996001863,
+        "job": 114042131175,
+        "platform": "windows-2022",
+        "conclusion": null
+      },
+      {
+        "workflow": "Build Action Server (Unauthenticated)",
+        "run": 37996001863,
+        "job": 114042131460,
+        "platform": "macos-15",
+        "conclusion": null
+      },
+      {
+        "workflow": "RCC developer toolkit primary 18.19.3",
+        "run": 37996001702,
+        "job": 114042130444,
+        "platform": "windows-2022",
+        "conclusion": null
+      },
+      {
+        "workflow": "RCC developer toolkit N-1 18.18.1",
+        "run": 37996001702,
+        "job": 114042130671,
+        "platform": "ubuntu-22.04",
+        "conclusion": null
+      },
+      {
+        "workflow": "RCC developer toolkit N-1 18.18.1",
+        "run": 37996001702,
+        "job": 114042130738,
+        "platform": "macos-15",
+        "conclusion": null
+      },
+      {
+        "workflow": "RCC developer toolkit N-1 18.18.1",
+        "run": 37996001702,
+        "job": 114042130613,
+        "platform": "windows-2022",
+        "conclusion": null
+      }
+    ]
+  },
+  "pr256": {
+    "state": "OPEN_DRAFT",
+    "head": "6cf62b00fa603540fdfbeb20c9c8aabfa1373f77",
+    "verify_job": {
+      "run": 37995257113,
+      "job": 114039537149,
+      "result": "Docker Hub auth token endpoint timeout before verify-work-items; see the 21:46 failure record.",
+      "url": "https://github.com/joshyorko/actions/actions/runs/37995257113/job/114039537149"
+    },
+    "windows_build_job": {
+      "run": 37995256912,
+      "job": 114039536761,
+      "state": "FAILURE",
+      "root_verified_finding": "Windows frozen+Go path returned HTTP500 because action_server/src/actions/server/_artifact_storage.py:210 imports POSIX-only fcntl.",
+      "url": "https://github.com/joshyorko/actions/actions/runs/37995256912/job/114039536761"
+    },
+    "ownership": {
+      "windows_artifact_lock": "Root assigned an isolated Sol fix branch `fix/windows-artifact-binding-lock-20261009`, based on integration head55bfe02a.",
+      "linux_receipt_and_browser": "Existing Devsy Work Items lane owns the Linux masked-receipt dictionary assertion TypeError and underlying browser gate.",
+      "progress_limit": "Assignments describe ownership only; no lane activity/completion inferred here."
+    },
+    "evidence_source": "read-only `gh pr view 256` at 2026-10-09T21:52Z plus the root-verified Windows job diagnosis."
+  },
+  "base_ref_limit": "Integration and Runtime candidate refs were last independently read at21:46Z in current-convergence-amendment-20261009T2146Z.json. No newer ref readback is included in this supplement.",
+  "whole_issue_status": "54 retained contracts and raw states unchanged; #210 remains sole accepted/closed issue. #134 and #208 remain incomplete.",
+  "upstream_disposition": "No confirmed upstream defect from this governance update; no upstream issue/report/comment was made."
+}

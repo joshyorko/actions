@@ -1,0 +1,242 @@
+{
+  "observed_at_utc": "2026-10-09T22:58:55Z",
+  "scope": "Dated current-only convergence update: PR270 exact-head test/hosted status and PR256 native-matrix completion; preserve prior receipts and the 22:48 detailed open-PR baseline.",
+  "prior_full_audit": {
+    "path": "convergence-live-prs-20261009T2248Z.json",
+    "sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
+    "open_pr_count": 8
+  },
+  "current_open_blocked_prs": [
+    {
+      "number": 256,
+      "title": "test(runtime): exercise packaged Work Items consumers on every native platform",
+      "url": "https://github.com/joshyorko/actions/pull/256",
+      "isDraft": true,
+      "headRefName": "devsy/workitems-consumer-acceptance-20261009",
+      "headRefOid": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
+      "baseRefName": "integration/community-release-20261008",
+      "owner": "Devsy Work Items author/native supervisor",
+      "status": "Open/blocked; native matrix complete with a pre-start Go UI failure.",
+      "next_action": "Native author owns the manifest and startup child cleanup/PASS-before-teardown findings; independent L review is BLOCKED. Resolve/review these gates; do not infer full issue acceptance.",
+      "current_gate": "macOS passed with both UI steps skipped; Linux and Windows frozen UI passed; Go UI failed before startup because four required manifest hash fields are missing. PR221/Core evidence is separate: 313 tests passed on Python 3.10 across all three OS jobs and mypy passed; E721 and stale generated MCP docs remain."
+    },
+    {
+      "number": 221,
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "url": "https://github.com/joshyorko/actions/pull/221",
+      "isDraft": true,
+      "headRefName": "integration/community-release-20261008",
+      "headRefOid": "abe8640a137942bcf398668fe2093529ba53c38b",
+      "baseRefName": "community",
+      "owner": "A + assigned Mac/Windows diagnosis",
+      "status": "Open/blocked at integration head abe8640a; current checks complete with three known Core lint/docs failures. PR270 is the narrow successor repair; it is not yet admitted.",
+      "next_action": "Complete PR270 exact-head hosted checks and independent review; then run the required full three-OS Core matrix on the resulting PR221 head before community/release admission.",
+      "current_gate": "Three known Core lint/docs failures remain at integration head abe8640a; separately, 313 test cases passed under Python 3.10 across all three OS jobs and mypy passed. No Python 3.13 claim."
+    },
+    {
+      "number": 220,
+      "title": "Preserve Actions campaign ledger, Cloud ownership, and exact acceptance evidence",
+      "url": "https://github.com/joshyorko/actions/pull/220",
+      "isDraft": true,
+      "headRefName": "review/community-ledger-20261008",
+      "headRefOid": "748922f57993e07b778fa758fb71fb9684dbc50a",
+      "baseRefName": "community",
+      "owner": "Ledger owner / root review",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update."
+    },
+    {
+      "number": 219,
+      "title": "WIP: preserve unfinished deployment and MCP showcase designs",
+      "url": "https://github.com/joshyorko/actions/pull/219",
+      "isDraft": true,
+      "headRefName": "review/design-checkpoints-20261008",
+      "headRefOid": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "baseRefName": "community",
+      "owner": "Design checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update."
+    },
+    {
+      "number": 218,
+      "title": "WIP: checkpoint native Work Items packaging and recovery",
+      "url": "https://github.com/joshyorko/actions/pull/218",
+      "isDraft": true,
+      "headRefName": "review/workitems-checkpoint-20261008",
+      "headRefOid": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "baseRefName": "community",
+      "owner": "Work Items checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update."
+    },
+    {
+      "number": 217,
+      "title": "WIP: checkpoint Core public contracts and regression tests",
+      "url": "https://github.com/joshyorko/actions/pull/217",
+      "isDraft": true,
+      "headRefName": "review/core-checkpoint-20261008",
+      "headRefOid": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "baseRefName": "community",
+      "owner": "Core checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update."
+    },
+    {
+      "number": 216,
+      "title": "WIP: checkpoint bounded Runtime history and WebSocket repairs",
+      "url": "https://github.com/joshyorko/actions/pull/216",
+      "isDraft": true,
+      "headRefName": "review/runtime-checkpoint-20261008",
+      "headRefOid": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "baseRefName": "community",
+      "owner": "Runtime checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update."
+    },
+    {
+      "number": 215,
+      "title": "WIP: checkpoint community release safeguards for adversarial review",
+      "url": "https://github.com/joshyorko/actions/pull/215",
+      "isDraft": true,
+      "headRefName": "convergence/actions-full-graph-20261008",
+      "headRefOid": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "baseRefName": "community",
+      "owner": "Convergence checkpoint owner",
+      "status": "Unchanged from 22:48 full audit; blocked",
+      "next_action": "See the 22:48 full audit for exact checks, owner, blocker and next action; no status change asserted in this small update."
+    },
+    {
+      "number": 270,
+      "title": "fix(mcp): correct metadata lint/docs behavior",
+      "url": "https://github.com/joshyorko/actions/pull/270",
+      "isDraft": true,
+      "headRefName": "fix/mcp-metadata-lint-docs-20261009",
+      "headRefOid": "735e56fac9f1a3856d59768f9084351d1244034f",
+      "baseRefName": "integration/community-release-20261008",
+      "owner": "A",
+      "status": "Open/blocked pending hosted checks and independent review; full configured Actions suite 315 PASS, 4 warnings, 53.18s; hosted 4 PASS/8 IN_PROGRESS/0 FAILURE. Root scoped source review ACCEPT; L review underway.",
+      "next_action": "Wait for exact-head hosted checks and independent review; then root decides bounded admission. Even after admission, run full three-OS Core matrix on resulting PR221 head before community/release admission.",
+      "dependency": "PR221 integration admission; no issue-level acceptance inferred.",
+      "current_gate": "Focused21 PASS and Core-only140 PASS at exact head; full configured Actions suite (313 plus two next) incomplete and hosted checks queued."
+    }
+  ],
+  "pr256": {
+    "head": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
+    "native_status": "All native jobs have completed. macOS passes while skipping both UI steps. Linux and Windows frozen UI pass. Go UI fails before startup because four required manifest hash fields are missing.",
+    "other_checks": "PR221/Core evidence: 313 test cases passed under Python 3.10 across all three OS jobs and mypy passed. Separate E721 and stale generated MCP documentation failures remain. No Python 3.13 result is inferred.",
+    "ownership": "Native author owns manifest and startup child cleanup/PASS-before-teardown findings; independent L review is BLOCKED.",
+    "next_action": "Complete manifest/startup corrections and independent review; no whole issue acceptance inferred."
+  },
+  "pr270": {
+    "head": "735e56fac9f1a3856d59768f9084351d1244034f",
+    "branch": "fix/mcp-metadata-lint-docs-20261009",
+    "base": "integration/community-release-20261008",
+    "owner": "A",
+    "checks": "Full configured Actions suite 315 PASS, 4 warnings, 53.18s, no installs. Hosted checks: 4 PASS, 8 IN_PROGRESS, 0 FAILURE. Root scoped source review ACCEPT; independent L review underway.",
+    "next_action": "Wait for exact-head hosted checks and independent review; then root decides bounded admission. Even after admission, run full three-OS Core matrix on resulting PR221 head before community/release admission."
+  },
+  "cohort": {
+    "items": 20,
+    "target_integrated": 11,
+    "blocked_open": 9,
+    "merge_ready": 0,
+    "integrated_prs": [
+      251,
+      266,
+      257,
+      259,
+      262,
+      268,
+      264,
+      263,
+      267,
+      269,
+      265
+    ]
+  },
+  "open_pr_numbers": [
+    256,
+    221,
+    220,
+    219,
+    218,
+    217,
+    216,
+    215,
+    270
+  ],
+  "current_refs_unchanged": {
+    "community": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "integration": "abe8640a137942bcf398668fe2093529ba53c38b",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be"
+  },
+  "whole_issue_acceptance_changed": false,
+  "issue_accounting_unchanged": {
+    "retained_contracts": 54,
+    "open": 53,
+    "accepted_closed": [
+      210
+    ],
+    "whole_issue_review_ready": 0
+  },
+  "archive_invariants": "All 54 retained issue contracts, original acceptance fields and raw states remain unchanged. The 16 historical ZIPs are preserved; verify against the existing archive inventory. No archive was rewritten.",
+  "history": "The 22:48 full audit and 22:53 targeted gate receipt are historical, byte-preserved evidence; this is an additive current delta.",
+  "upstream_disposition": "No upstream finding; this is repository-local status and gate tracking.",
+  "archive_integrity": {
+    "canvas-execution-graph-amendment-20261009-v2.zip": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf",
+    "canvas-execution-graph-amendment-20261009-v3.zip": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281",
+    "canvas-execution-graph-amendment-20261009-v4.zip": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3",
+    "canvas-execution-graph-amendment-20261009.zip": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7",
+    "community-20261008.zip": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
+    "community-20261009-acceleration.zip": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48",
+    "community-20261009-checkpoint.zip": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c",
+    "community-20261009-cloud-admission.zip": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0",
+    "community-20261009-convergence.zip": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
+    "community-20261009-fanout.zip": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e",
+    "community-20261009-final-checkpoint.zip": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4",
+    "community-20261009-resume.zip": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541",
+    "community-20261009-update.zip": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4",
+    "community-20261009-update2.zip": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31",
+    "community-20261009-update3.zip": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842",
+    "http-helper-1.0.3-verified-dist.zip": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+  },
+  "archive_integrity_note": "All 16 evidence ZIPs present in the current program evidence directory were hashed; the 15 prior archive hashes in Canvas amendment v4 match exactly. This update created no ZIP.",
+  "open_pr_rows_note": "The unchanged seven legacy rows cite exact owners, gate, dependency and next action from the 22:48 detailed receipt; their check counts are explicitly timestamped historical baselines. PR256 and PR221 are updated separately in this delta; PR270 is new.",
+  "python_version_erratum": "evidence/convergence-python-version-erratum-20261009T2300Z.json; the immutable 22:53 source receipt remains byte-for-byte unchanged.",
+  "pr269_artifact_readback_successor": {
+    "receipt": "devsy-convergence-checkpoint-2258.json",
+    "receipt_sha256": "fb5d7cc26092a8b772cacd9cedef1bbfd631c87cf6f7caa8cd66f55f0a0d8c4f",
+    "observed_at_utc": "2026-10-09T22:58:42.222628Z",
+    "run": 37999378425,
+    "artifact_id": 11648617677,
+    "head": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+    "workflow_checkout": "e5cc8c13f0306ee302e1a451dbd66d35d7979c6d",
+    "archive_bytes": 114288,
+    "archive_sha256": "db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f",
+    "verified_members": [
+      {
+        "name": "actions_work_items-0.4.4-py3-none-any.whl",
+        "bytes": 62717,
+        "sha256": "488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0"
+      },
+      {
+        "name": "actions_work_items-0.4.4.tar.gz",
+        "bytes": 53704,
+        "sha256": "48e3261e110751f78ce49041cf78217bb3601c8dc94679097dae7e51603b1da0"
+      }
+    ],
+    "scope": "Native worker retrieved archive and verified members/RECORD and workflow source association. No embedded Git manifest; publication skipped. The earlier Cloud 403-before-bytes remains a valid historical attempt, superseded for artifact-byte verification by this independent native readback."
+  },
+  "native_inventory_observation": {
+    "observed_at_utc": "2026-10-09T22:58:42.222628Z",
+    "reported_in_progress": 4,
+    "reported_completed": 1,
+    "rcc_local_head": "d81668e40734677f67933fb0dcfb26a129041992",
+    "rcc_lifecycle_head": "ab74fedc658421d368dd1b1158b39973962ddd3c",
+    "remote_refs_read_back_by_root": {
+      "rcc": "e8025cc4685b65d1183fabb43316fe5a188296f4",
+      "lifecycle": "839798e4cdd786f799956f94d22970da92fad68e"
+    },
+    "limit": "The two newer native source heads are local-only observations; remote verification is pending. No acceptance is inferred."
+  }
+}

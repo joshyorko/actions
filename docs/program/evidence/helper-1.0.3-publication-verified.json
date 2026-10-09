@@ -1,0 +1,37 @@
+{
+  "observed_at": "2026-10-09T18:56:06.894657+00:00",
+  "version": "1.0.3",
+  "project": "https://pypi.org/project/actions-http-helper/1.0.3/",
+  "source_sha": "167378509ca33450d4478021214e2e74a0b46dda",
+  "release_run": 37976326081,
+  "files": [
+    {
+      "filename": "actions_http_helper-1.0.3-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/53/3b/cefc0608e6ec71697c60c68ede2efa306fd7d50b1736c4b6b094b3424dc6/actions_http_helper-1.0.3-py3-none-any.whl",
+      "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "bytes": 14690,
+      "source_matches_tag": true,
+      "uploaded_at": "2026-10-09T18:53:46.216989Z"
+    },
+    {
+      "filename": "actions_http_helper-1.0.3.tar.gz",
+      "url": "https://files.pythonhosted.org/packages/c8/81/6891b118b1381db98d8a6b656ee9461b7ed2f2dafbae4f5407ecc4e3cd62/actions_http_helper-1.0.3.tar.gz",
+      "sha256": "b8e4e8efb181d5748264f25f1803f47731cd4947fc015f009934d51cd7a78945",
+      "bytes": 15302,
+      "source_matches_tag": true,
+      "uploaded_at": "2026-10-09T18:53:47.383909Z"
+    }
+  ],
+  "clean_installed_registry_test": "Not rerun: downloaded registry wheel is byte-identical to independently verified candidate with12 installed-wheel tests; exact artifact evidence reused",
+  "workflow_manifest_comparison": "PASS: exact retrieved wheel/sdist bytes match GitHub verified distribution manifest and PyPI SHA256",
+  "publication_verified": true,
+  "workflow_artifact": {
+    "id": 11639730835,
+    "archive_sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb",
+    "bytes": 30034
+  },
+  "tag": "actions_http-1.0.3",
+  "tag_object": "b4547f14c23308861f77682db41d1c18134e22c3",
+  "immutable_prior_tag": "actions_http-1.0.2 remains untouched",
+  "release_order_next": "Core1.0.2 exact-head gates and registry compatibility"
+}

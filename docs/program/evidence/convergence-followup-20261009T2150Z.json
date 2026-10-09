@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-09T21:50Z",
+  "scope": "Follow-up after the 21:46 open-PR snapshot; stale superseded pull_request workflow cancellation requests only.",
+  "source_receipt": {
+    "path": "superseded-pr-ci-cancellation-20261009T2150Z.json",
+    "sha256": "6e2c8215299889806a9479c36f61b3b068fbd41f1232ccec7cef549a7fe469fc",
+    "size_bytes": 2126
+  },
+  "result": "Ten cancellation requests were submitted for proven-ancestor pull_request runs after ancestry/current-head review. One additional run (37988083523) was already complete and was left unchanged. The receipt does not claim every request reached a cancelled terminal state.",
+  "exclusions": "No current-head, publication/tag, or merged-source proof run was targeted.",
+  "current_head_failure_logs": [
+    {
+      "pr": 221,
+      "run": 37992622849,
+      "job": 114030434248,
+      "path": "/workspace/work/community-resume/evidence/pr221-workitems-55bfe02a-failed.log",
+      "sha256": "f7fedeb24bd83a09a176b2c824e0b31eeba49b7c324da0e0f401224b128a0a2b",
+      "failure": "Docker Hub unauthenticated pull rate limit occurred before verify-work-items."
+    },
+    {
+      "pr": 256,
+      "run": 37995257113,
+      "job": 114039537149,
+      "path": "/workspace/work/community-resume/evidence/pr256-workitems-6cf62b-failed.log",
+      "sha256": "b8c3a93f1faab4adbdeafe0028525d84ebf00b898bde6c3786d47661c77e692f",
+      "failure": "Docker Hub auth token endpoint timed out before verify-work-items."
+    }
+  ],
+  "limitations": "These registry failures are separate observed causes. They do not establish a code or verifier result; no authenticated pull, mirror substitution, or retry is claimed.",
+  "parent_readback_note": "Root separately reported that eight earlier PR220 cancellation requests were later confirmed cancelled. The attached submission receipt does not map those confirmations to run IDs; no terminal-state claim is made for the other requests."
+}

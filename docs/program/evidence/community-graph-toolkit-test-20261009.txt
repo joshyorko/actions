@@ -1,0 +1,13 @@
++ /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 -m ruff check developer (in /workspace/work/community-resume/governance)
+All checks passed!
++ /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 -m pytest developer/tests (in /workspace/work/community-resume/governance)
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.3.4, pluggy-1.6.0
+rootdir: /workspace/work/community-resume/governance
+plugins: anyio-4.15.1, platformdirs-4.12.4
+collected 26 items
+
+developer/tests/test_community_execution_graph.py .                      [  3%]
+developer/tests/test_toolkit_contract.py .........................       [100%]
+
+============================== 26 passed in 1.56s ==============================

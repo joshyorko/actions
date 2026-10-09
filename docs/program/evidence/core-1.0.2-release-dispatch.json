@@ -1,0 +1,63 @@
+{
+  "tag": "actions-core-1.0.2",
+  "tag_object": "53970c0699ec2fcee169484daa2d41f6fec4e6ab",
+  "source": "011c5482285ea516f39292100c429a905e6e3e36",
+  "preflight": "remote+localtagabsent;PyPI1.0.2HTTP404;credentialattempt2PASS",
+  "runs": [
+    {
+      "id": 37979108120,
+      "name": "Actions Release",
+      "path": ".github/workflows/actions_release.yml",
+      "head_branch": "actions-core-1.0.2",
+      "head_sha": "011c5482285ea516f39292100c429a905e6e3e36",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/37979108120"
+    },
+    {
+      "id": 37979108156,
+      "name": "Copilot Setup Steps",
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "head_branch": "actions-core-1.0.2",
+      "head_sha": "011c5482285ea516f39292100c429a905e6e3e36",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/37979108156"
+    },
+    {
+      "id": 37978821620,
+      "name": "Actions Core Tests",
+      "path": ".github/workflows/actions_core_tests.yml",
+      "head_branch": "community",
+      "head_sha": "011c5482285ea516f39292100c429a905e6e3e36",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/37978821620"
+    },
+    {
+      "id": 37978821600,
+      "name": "RCC developer toolkit",
+      "path": ".github/workflows/developer_toolkit.yml",
+      "head_branch": "community",
+      "head_sha": "011c5482285ea516f39292100c429a905e6e3e36",
+      "event": "push",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/37978821600"
+    },
+    {
+      "id": 37978821596,
+      "name": "HTTP Helper Tests",
+      "path": ".github/workflows/http_helper_tests.yml",
+      "head_branch": "community",
+      "head_sha": "011c5482285ea516f39292100c429a905e6e3e36",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/37978821596"
+    }
+  ]
+}

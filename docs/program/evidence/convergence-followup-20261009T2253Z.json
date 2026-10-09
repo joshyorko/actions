@@ -1,0 +1,92 @@
+{
+  "observed_at_utc": "2026-10-09T22:53:00Z",
+  "scope": "Small current-only gate update to the 22:48 convergence checkpoint. The 22:48 complete open-PR/head/base/owner/dependency inventory remains unchanged; only PR220/221/256 checks and current diagnoses are refreshed.",
+  "baseline_receipt": "convergence-followup-20261009T2248Z.json",
+  "baseline_receipt_sha256": "b08f495d9bd49787eb04434fad9353f7a2828f5f7d60757a936f2763c4bbdef7",
+  "current_open_pr_audit": "convergence-live-prs-20261009T2248Z.json",
+  "targeted_checks": {
+    "path": "convergence-targeted-check-refresh-20261009T2253Z.json",
+    "sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0",
+    "counts": {
+      "220": {
+        "SUCCESS": 14,
+        "SKIPPED": 1
+      },
+      "221": {
+        "FAILURE": 3,
+        "IN_PROGRESS": 4,
+        "SUCCESS": 22,
+        "SKIPPED": 1
+      },
+      "256": {
+        "FAILURE": 1,
+        "IN_PROGRESS": 5,
+        "SUCCESS": 6,
+        "SKIPPED": 1
+      }
+    }
+  },
+  "pr220": {
+    "head": "748922f57993e07b778fa758fb71fb9684dbc50a",
+    "base": "community",
+    "status": "14 SUCCESS, 1 SKIPPED",
+    "limit": "This confirms the current PR220 hosted rows only; no product/release acceptance."
+  },
+  "pr221": {
+    "head": "abe8640a137942bcf398668fe2093529ba53c38b",
+    "base": "community",
+    "status": "22 SUCCESS, 3 FAILURE, 4 IN_PROGRESS, 1 SKIPPED",
+    "failures": [
+      {
+        "run": 38000894375,
+        "job": 114058407237,
+        "check": "Actions Core Ubuntu py3.10 devmode",
+        "status": "FAILURE",
+        "diagnosis_owner": "A",
+        "diagnosis": "Root reports Ubuntu3.13 and mypy PASS; confirmed E721 on `type(value) is float` and stale generated MCP docs. Narrow repair assigned, not yet verified."
+      },
+      {
+        "run": 38000894375,
+        "job": 114058407148,
+        "check": "Actions Core Windows py3.10 devmode",
+        "status": "FAILURE",
+        "diagnosis_owner": "A assigned to verify Mac/Windows causes",
+        "diagnosis": "Cause not confirmed."
+      },
+      {
+        "run": 38000894375,
+        "job": 114058407305,
+        "check": "Actions Core macOS py3.10 devmode",
+        "status": "FAILURE",
+        "diagnosis_owner": "A assigned to verify Mac/Windows causes",
+        "diagnosis": "Cause not confirmed."
+      }
+    ],
+    "limit": "No PR221 admission; exact head remains blocked and unresolved checks do not inherit 4a717c77 results."
+  },
+  "pr256": {
+    "head": "5d9d764e24362ae9beb2035b75e62ec97a235e09",
+    "base": "integration/community-release-20261008",
+    "status": "6 SUCCESS, 1 FAILURE, 5 IN_PROGRESS, 1 SKIPPED",
+    "failure": {
+      "run": 38000998215,
+      "job": 114058744887,
+      "check": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "FAILURE",
+      "summary": "Root classifies as Linux native build failure; L/reviewer and native supervisor need diagnosis. Cause not confirmed."
+    },
+    "limit": "Recovery gate is cleared; reviewer/native proof remains outstanding."
+  },
+  "target_integrated_count": 11,
+  "open_blocked_count": 8,
+  "merge_ready_count": 0,
+  "cohort_size": 19,
+  "whole_issue_acceptance_changed": false,
+  "current_refs_unchanged": {
+    "integration": "abe8640a137942bcf398668fe2093529ba53c38b",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "community": "c30f953bae1a322e1d09549607ab42f1badce440"
+  },
+  "artifact_metadata_erratum": "The 22:34 correction remains authoritative: artifact ID 11648617677; workflow-reported size 114288 bytes; reported SHA-256 db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f; retrieval 403 before bytes; content/digest unverified.",
+  "upstream_disposition": "None; no new upstream defect is established."
+}

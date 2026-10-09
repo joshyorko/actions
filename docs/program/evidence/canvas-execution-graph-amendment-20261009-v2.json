@@ -1,0 +1,377 @@
+{
+  "amendment": "Typed Canvas execution graph and criterion/slice gates",
+  "observed_at": "2026-10-09T20:02:17+00:00",
+  "base_commit": "83513adfd75bf00cbb3951d3c20248f30f1450c7",
+  "base_graph_sha256": "b156bbb9e02a6b99c7deae106009817a44f16740a747b25e4f405714709702e9",
+  "amended_graph_sha256": "8586ca8b9cda5e409aa4356ec42c09c69162aca3742a999d3364fd9078c5e0b2",
+  "issue_count": 54,
+  "whole_issue_complete": [
+    210
+  ],
+  "old_untyped_issue_edge_count": 111,
+  "new_issue_execution_edge_count": 87,
+  "removed_whole_issue_edges": [
+    {
+      "prerequisite": 71,
+      "consumer": 127,
+      "reclassified_as": "related/product direction"
+    },
+    {
+      "prerequisite": 83,
+      "consumer": 71,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 93,
+      "consumer": 127,
+      "reclassified_as": "parent/coordination"
+    },
+    {
+      "prerequisite": 96,
+      "consumer": 93,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 97,
+      "consumer": 93,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 97,
+      "consumer": 99,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 98,
+      "consumer": 93,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 98,
+      "consumer": 99,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 99,
+      "consumer": 71,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 99,
+      "consumer": 93,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 99,
+      "consumer": 127,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 100,
+      "consumer": 71,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 100,
+      "consumer": 93,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 100,
+      "consumer": 127,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 101,
+      "consumer": 93,
+      "reclassified_as": "parent/coordination"
+    },
+    {
+      "prerequisite": 101,
+      "consumer": 127,
+      "reclassified_as": "parent/coordination"
+    },
+    {
+      "prerequisite": 125,
+      "consumer": 126,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 126,
+      "consumer": 93,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 127,
+      "consumer": 71,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 127,
+      "consumer": 93,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 129,
+      "consumer": 71,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 135,
+      "consumer": 71,
+      "reclassified_as": "scoped criterion/slice gate"
+    },
+    {
+      "prerequisite": 208,
+      "consumer": 93,
+      "reclassified_as": "full-acceptance aggregation"
+    },
+    {
+      "prerequisite": 209,
+      "consumer": 93,
+      "reclassified_as": "related/product direction"
+    }
+  ],
+  "added_whole_issue_edges": [],
+  "criterion_registry": [
+    {
+      "id": "125:public-package-boundary",
+      "owner_issue": 125,
+      "description": "Relevant public package and MCP resource boundary",
+      "status": "PARTIAL_NOT_ACCEPTED",
+      "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR128 foundation merged but full #125 acceptance remains open."
+    },
+    {
+      "id": "97:ui-foundation",
+      "owner_issue": 97,
+      "description": "Consumed UI, offline and CSP foundation criteria",
+      "status": "PARTIAL_NOT_ACCEPTED",
+      "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR119 foundation merged and acceptance gates remain open."
+    },
+    {
+      "id": "98:canvas-artifact",
+      "owner_issue": 98,
+      "description": "Consumed Canvas artifact, manifest and build criteria",
+      "status": "PARTIAL_NOT_ACCEPTED",
+      "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR115 foundation merged and acceptance gates remain open."
+    },
+    {
+      "id": "83:run-attempt-authority",
+      "owner_issue": 83,
+      "description": "Minimum local Run/Attempt ownership and lifecycle semantics",
+      "status": "NOT_IMPLEMENTED",
+      "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted Run/Attempt implementation recorded."
+    },
+    {
+      "id": "129:deployment-binding",
+      "owner_issue": 129,
+      "description": "Minimum local Deployment identity and bindings",
+      "status": "PARTIAL_NOT_ACCEPTED",
+      "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR250 contains a design-only probe, not production Deployment acceptance."
+    },
+    {
+      "id": "130:package-revision",
+      "owner_issue": 130,
+      "description": "Immutable generated Package Revision contract",
+      "status": "NOT_IMPLEMENTED",
+      "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted Package Revision implementation recorded."
+    },
+    {
+      "id": "135:compiler",
+      "owner_issue": 135,
+      "description": "Minimum package-to-revision/compiler contract",
+      "status": "NOT_IMPLEMENTED",
+      "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted compiler implementation recorded."
+    },
+    {
+      "id": "91:authorization-boundary",
+      "owner_issue": 91,
+      "description": "Host-mode authorization boundary when protected/share functionality is exposed",
+      "status": "PARTIAL_NOT_ACCEPTED",
+      "evidence_basis": "Graph stage INTEGRATED; retained state NOT_STARTED; PR250 is a bounded SDK/auth foundation, while public authorization remains open."
+    },
+    {
+      "id": "214:public-edge-boundary",
+      "owner_issue": 214,
+      "description": "Remote/share acceptance boundary, not local fixture proof",
+      "status": "PARTIAL_NOT_ACCEPTED",
+      "evidence_basis": "Graph stage REVIEW; retained state IN_PROGRESS; live provider/TLS and standalone lifecycle gates remain open."
+    }
+  ],
+  "execution_slices": [
+    {
+      "id": "100-A",
+      "issue": 100,
+      "description": "Public tool UI metadata and ui:// resource authoring/serving",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "100-B",
+      "issue": 100,
+      "description": "Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture",
+      "status": "PROPOSED_REVIEW_ONLY"
+    },
+    {
+      "id": "99-A",
+      "issue": 99,
+      "description": "Portable MCP App View renderer/resource bridge using the agreed fixture",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "99-B",
+      "issue": 99,
+      "description": "Optional host-specific ChatGPT projection and actual-host proof",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "127-template",
+      "issue": 127,
+      "description": "Packaged template round trip over accepted authoring and renderer slices",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "126-template",
+      "issue": 126,
+      "description": "Relevant public-package/template boundary slice consumed by the SDK and template contract",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "71-local",
+      "issue": 71,
+      "description": "Local generated application vertical on common Package/Deployment/Run/compiler services",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "71-host",
+      "issue": 71,
+      "description": "Optional host/distribution acceptance after portable product behavior",
+      "status": "NOT_IMPLEMENTED"
+    }
+  ],
+  "scoped_execution_gates": [
+    {
+      "prerequisite": "125:public-package-boundary",
+      "consumer_slice": "100-A",
+      "scope": "Only the relevant public package/MCP resource criteria; not all of #125"
+    },
+    {
+      "prerequisite": "97:ui-foundation",
+      "consumer_slice": "99-A",
+      "scope": "Consumed UI system and offline/CSP foundation criteria"
+    },
+    {
+      "prerequisite": "98:canvas-artifact",
+      "consumer_slice": "99-A",
+      "scope": "Separate Canvas artifact and build/manifest criteria"
+    },
+    {
+      "prerequisite": "100-A",
+      "consumer_slice": "127-template",
+      "scope": "Accepted public authoring fixture"
+    },
+    {
+      "prerequisite": "100-B",
+      "consumer_slice": "127-template",
+      "scope": "Accepted serialization fixture only if template consumes CanvasSpec"
+    },
+    {
+      "prerequisite": "99-A",
+      "consumer_slice": "127-template",
+      "scope": "Accepted renderer/resource/bridge slice"
+    },
+    {
+      "prerequisite": "125:public-package-boundary",
+      "consumer_slice": "127-template",
+      "scope": "Relevant public-package/template checks only"
+    },
+    {
+      "prerequisite": "125:public-package-boundary",
+      "consumer_slice": "126-template",
+      "scope": "Only the relevant public package/template boundary criteria; not all of #125"
+    },
+    {
+      "prerequisite": "98:canvas-artifact",
+      "consumer_slice": "127-template",
+      "scope": "Relevant Canvas artifact pipeline checks only"
+    },
+    {
+      "prerequisite": "100-A",
+      "consumer_slice": "71-local",
+      "scope": "Accepted public authoring boundary"
+    },
+    {
+      "prerequisite": "100-B",
+      "consumer_slice": "71-local",
+      "scope": "Accepted shared schema only if generated spec uses it"
+    },
+    {
+      "prerequisite": "99-A",
+      "consumer_slice": "71-local",
+      "scope": "Accepted portable View/renderer boundary"
+    },
+    {
+      "prerequisite": "83:run-attempt-authority",
+      "consumer_slice": "71-local",
+      "scope": "Minimum local Run/Attempt semantics"
+    },
+    {
+      "prerequisite": "129:deployment-binding",
+      "consumer_slice": "71-local",
+      "scope": "Minimum local Deployment identity/bindings"
+    },
+    {
+      "prerequisite": "130:package-revision",
+      "consumer_slice": "71-local",
+      "scope": "Immutable generated Package Revision contract"
+    },
+    {
+      "prerequisite": "135:compiler",
+      "consumer_slice": "71-local",
+      "scope": "Minimum package-to-revision/compiler contract"
+    },
+    {
+      "prerequisite": "71-local",
+      "consumer_slice": "71-host",
+      "scope": "Host integration consumes a working portable local vertical"
+    },
+    {
+      "prerequisite": "91:authorization-boundary",
+      "consumer_slice": "71-host",
+      "scope": "Only if host mode exposes protected/share functionality"
+    },
+    {
+      "prerequisite": "214:public-edge-boundary",
+      "consumer_slice": "71-host",
+      "scope": "Only for remote/share acceptance, not local fixture proof"
+    }
+  ],
+  "source_comments": [
+    "GitHub #71 comment 6087930051",
+    "#93 comment 6087948973",
+    "#101 comment 6087955791",
+    "#220 comment 6087968408",
+    "#254 comment 6087962754"
+  ],
+  "preserved_fields": "All 54 issue ledger objects, contracts, comments, dependencies, related references, raw states, and accounting fields are unchanged. Graph complete stages match explicit closure audit receipts; at this snapshot that is #210 only.",
+  "validation": [
+    "python scripts/test_project_community_execution_graph.py (11 tests PASS)",
+    "python scripts/project_community_execution_graph.py --check",
+    "git diff --check"
+  ],
+  "canonical_documentation_delta": "repository-operations.md now defines typed edge semantics. The generated graph/ledger/resume/handoff show separate issue prerequisites, criteria, slices, coordination, related links and aggregation. CLI apply is reproducible and v2 edits are authoritative.",
+  "prior_zip_sha256": {
+    "canvas-execution-graph-amendment-20261009.zip": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7",
+    "community-20261008.zip": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
+    "community-20261009-acceleration.zip": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48",
+    "community-20261009-checkpoint.zip": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c",
+    "community-20261009-cloud-admission.zip": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0",
+    "community-20261009-convergence.zip": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
+    "community-20261009-fanout.zip": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e",
+    "community-20261009-final-checkpoint.zip": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4",
+    "community-20261009-resume.zip": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541",
+    "community-20261009-update.zip": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4",
+    "community-20261009-update2.zip": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31",
+    "community-20261009-update3.zip": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842",
+    "http-helper-1.0.3-verified-dist.zip": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+  }
+}

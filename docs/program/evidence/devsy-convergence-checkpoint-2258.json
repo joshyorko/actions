@@ -1,0 +1,40 @@
+{
+  "captured_at_utc": "2026-10-09T23:00:55.387277+00:00",
+  "source": "native CAS commandExecution exec-aefcde0d-bc8c-4e1b-b45f-95d6514c9a54, coordinator turn01a122c9-66d0-72a0-8088-df3a1e1687ea, returned JSON stdout",
+  "observed_at_utc": "2026-10-09T22:58:42.222628+00:00",
+  "pr269_artifact": {
+    "artifact_id": 11648617677,
+    "run": 37999378425,
+    "pr_head": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+    "workflow_checkout": "e5cc8c13f0306ee302e1a451dbd66d35d7979c6d",
+    "zip_bytes": 114288,
+    "zip_sha256": "db39ec5e2dcf2d53ea405509ce16295f0b398634b6d4a2c6c1b1fe3e3423a34f",
+    "members": [
+      {
+        "name": "actions_work_items-0.4.4-py3-none-any.whl",
+        "bytes": 62717,
+        "sha256": "488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0"
+      },
+      {
+        "name": "actions_work_items-0.4.4.tar.gz",
+        "bytes": 53704,
+        "sha256": "48e3261e110751f78ce49041cf78217bb3601c8dc94679097dae7e51603b1da0"
+      }
+    ],
+    "native_verification_receipt_bytes": 10764,
+    "native_verification_receipt_sha256": "078c2515d26c5cd85ae79efebf4129fdb0a4485c2f4847c468f4cbff19a7a1f8",
+    "run_log_bytes": 126977,
+    "run_log_sha256": "57688199c5174626f385a124cdee4798a3b334b16590bb60b2e96b050a8e4778",
+    "scope": "Native independent worker retrieved archive and verified members/RECORD and workflow source association; no embedded Git manifest; publication skipped. Cloud root earlier403 remains preserved."
+  },
+  "native_inventory_summary": {
+    "reported_in_progress": 4,
+    "reported_completed": 1,
+    "auth": "completed PR269 archive verification; source cd71922c0e8af374e777e32d37c556c157cb8484 clean",
+    "workitems": "existing worker owns three independent findings; head5d9d764e24362ae9beb2035b75e62ec97a235e09 with two dirty test/frontend-script files",
+    "rcc_local_head": "d81668e40734677f67933fb0dcfb26a129041992",
+    "rcc_lifecycle_head": "ab74fedc658421d368dd1b1158b39973962ddd3c",
+    "rcc_limit": "New snapshot consistency fixes and shutdown exit-11 diagnosis remain unaccepted; remote readback and exact successor tests still separate."
+  },
+  "upstream_disposition": "No new upstream finding in this receipt; previously reported RCC226 remains separate."
+}
