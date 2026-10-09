@@ -26,6 +26,11 @@ against valid, extra, wrong-tag, symlinked, and modified artifacts. This
 prepublication gate binds the uploaded bytes; it does not prove registry
 availability, a successful PyPI publication, or downstream consumers of the
 published distribution.
+The Core release workflow pins both jobs to `ubuntu-latest`; package tests
+execute its Bash/GNU-utility shell steps only on Linux and keep workflow
+structure and publish-safety assertions active on every platform. Do not run
+these Linux release scripts through macOS BSD utilities or a Windows `bash`
+launcher: those environments do not implement the workflow's shell contract.
 
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 

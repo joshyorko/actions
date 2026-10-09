@@ -1,13 +1,19 @@
 import hashlib
 import os
 import subprocess
+import sys
 from pathlib import Path
 
+import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[3]
 WORKFLOW_PATH = ROOT / ".github" / "workflows" / "actions_release.yml"
 TOKEN_ENV = "POETRY_PYPI_TOKEN_PYPI"
+LINUX_RELEASE_SHELL_ONLY = pytest.mark.skipif(
+    sys.platform != "linux",
+    reason="Core release workflow shell runs on ubuntu-latest with GNU utilities",
+)
 
 
 def _workflow():
@@ -53,6 +59,7 @@ def test_core_release_verifies_pinned_exact_artifacts_before_publish():
     assert on["push"]["tags"] == ["actions-core-*"]
     assert workflow["defaults"]["run"]["working-directory"] == "./actions"
     verify = workflow["jobs"]["verify"]
+    assert verify["runs-on"] == "ubuntu-latest"
     build = _step(workflow, "verify", "Build verified Core artifacts")
     inventory = _step(workflow, "verify", "Verify exact Core artifact inventory")
     twine = _step(workflow, "verify", "Verify Core artifacts")
@@ -78,6 +85,7 @@ def test_core_release_verifies_pinned_exact_artifacts_before_publish():
     assert upload["with"]["path"] == "actions/dist"
 
     publish = workflow["jobs"]["publish"]
+    assert publish["runs-on"] == "ubuntu-latest"
     assert publish["needs"] == "verify"
     assert publish["environment"] == "pypi"
     assert (
@@ -90,6 +98,7 @@ def test_core_release_verifies_pinned_exact_artifacts_before_publish():
     assert "diff -u" in downloaded["run"]
 
 
+@LINUX_RELEASE_SHELL_ONLY
 def test_core_artifact_inventory_and_manifest_bind_exact_bytes(tmp_path):
     workflow = _workflow()
     build_step = _step(workflow, "verify", "Verify exact Core artifact inventory")
@@ -121,6 +130,7 @@ def test_core_artifact_inventory_and_manifest_bind_exact_bytes(tmp_path):
     assert "FAILED" in tampered.stdout
 
 
+@LINUX_RELEASE_SHELL_ONLY
 def test_core_inventory_rejects_wrong_tag_extra_and_symlink_artifacts(tmp_path):
     workflow = _workflow()
     step = _step(workflow, "verify", "Verify exact Core artifact inventory")
@@ -150,6 +160,7 @@ def test_core_inventory_rejects_wrong_tag_extra_and_symlink_artifacts(tmp_path):
     assert symlink.returncode != 0
 
 
+@LINUX_RELEASE_SHELL_ONLY
 def test_core_publish_fails_closed_without_token(tmp_path):
     workflow = _workflow()
     step = _step(workflow, "publish", "Publish verified Core artifacts")
