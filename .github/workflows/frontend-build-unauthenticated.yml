@@ -196,7 +196,8 @@ jobs:
         if: matrix.os == 'ubuntu-22.04'
         timeout-minutes: 10
         env:
-          DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/final/action-server
+          DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/action-server/action-server
+          DAKOTA_WORKITEMS_UI_RUNTIME_KIND: frozen
           DAKOTA_WORKITEMS_UI_SOURCE_SHA: ${{ github.sha }}
           DAKOTA_WORKITEMS_UI_BUILD_MANIFEST: ${{ github.workspace }}/action_server/output/native-artifact-manifest.json
           DAKOTA_WORKITEMS_UI_RECEIPT: ${{ github.workspace }}/action_server/output/dakota-workitems-ui-acceptance.json

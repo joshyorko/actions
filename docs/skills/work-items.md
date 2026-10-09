@@ -387,28 +387,40 @@ check alone is not native Work Items acceptance.
 
 For packaged Work Items storage-failure UI checks, keep Action Server's own
 database (`--db-file=server.db`) separate from the management API database at
-`datadir/workitems.db`. Stop only the test-owned Runtime, remove that Work
-Items database's SQLite sidecars, corrupt `workitems.db`, then restart and
-verify the real API's `work_items_storage_unavailable` response and visible
-Retry guidance. Pointing `--db-file` at `workitems.db` instead corrupts the
+`datadir/workitems.db`. After the test-owned browser closes and its requests
+finish, remove the Work Items database's SQLite sidecars and corrupt only
+`workitems.db`; reload the actual UI and verify its real
+`work_items_storage_unavailable` response and visible Retry guidance. The
+Action Server process may stay up because each adapter operation opens its own
+SQLite connection. Pointing `--db-file` at `workitems.db` instead corrupts the
 Action Server migration database and prevents the Runtime from reaching the
 Work Items error path.
 
 Keyboard acceptance for a Work Items dialog must verify both Escape dismissal
 and focus returning to the control that opened it; dialog closure alone is not
-a keyboard pass. A real Chromium probe of the Linux Go-wrapper artifact from
-run `37978256399`, manifest source `006232d13bf322755419d99b96e506edf16a4353`,
-wrapper SHA-256 `8f77988e3d305a232667037cabc55222e18f0af2b6d81d6b45832f45a338f0b5`,
-found that
-Escape closed Create Work Item but left `document.activeElement` on `BODY`
-while the trigger button remained present. Treat that packaged UI result as a
-keyboard-accessibility failure until a corrected artifact demonstrates focus
-restoration. Do not simulate missing Runtime support or a generic HTTP 500 with
-browser response interception and count it as backend evidence.
-Work Items' controlled create dialog must render its opener through
-`DialogTrigger` in the same Radix root. Cover both the empty-queue and populated
-page create buttons in the source regression, then run the packaged Linux
-browser gate before treating the fix as native acceptance.
+a keyboard pass. A Chromium probe of the earlier Linux Go-wrapper artifact from
+run `37978256399` (manifest source `006232d13bf322755419d99b96e506edf16a4353`,
+wrapper SHA-256 `8f77988e3d305a232667037cabc55222e18f0af2b6d81d6b45832f45a338f0b5`)
+found that Escape closed Create Work Item but left `document.activeElement` on
+`BODY` while its trigger remained present. The source fix renders both create
+buttons as `DialogTrigger` children of their controlled Radix dialog root; source
+regressions cover the empty and populated page triggers.
+
+The packaged Linux Work Items browser gate runs
+`native-workitems-ui-acceptance.mjs` against the measured frozen executable. A
+PASS_BOUNDED receipt at source `fafd43ed7bbd06ba4f6d25aed85eb40e46653185`,
+frozen SHA-256 `b7031dcc0870a0e78cbf95f604675a5f23eea684c3829c404be8522687e22084`,
+Runtime 1.0.3, and Chromium 151.0.7922.34 verified empty and populated actual
+SQLite queue reads, keyboard open/Escape focus restoration, detail readback, no
+horizontal overflow at 320px, and the real storage-unavailable 503 with Retry
+and no raw path. The frozen executable hash does not bind its adjacent onedir
+files: a later run found stale UI bytes beside the same executable hash. Frozen
+UI receipts therefore also hash the full package tree before and after browser
+execution; the Go wrapper's embedded archive remains identified by its
+executable hash. This bounded gate does not accept the Go wrapper's updated UI,
+authorization denial, missing bundled support, or a generic HTTP 500. Those
+states remain `NOT_RUN` until their separately owned or supported packaged
+fixtures run. Do not use response interception as backend evidence.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their

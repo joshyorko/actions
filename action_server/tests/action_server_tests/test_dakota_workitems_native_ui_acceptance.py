@@ -9,6 +9,7 @@ import platform
 import re
 import secrets
 import shutil
+import stat
 import subprocess
 import tempfile
 from pathlib import Path
@@ -35,22 +36,55 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def packaged_runtime_identity() -> tuple[Path, str, str, str]:
+def packaged_tree_sha256(root: Path) -> str:
+    digest = hashlib.sha256()
+    for path in sorted(
+        root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()
+    ):
+        relative = path.relative_to(root).as_posix().encode("utf-8")
+        metadata = path.lstat()
+        digest.update(
+            relative + b"\0" + str(stat.S_IMODE(metadata.st_mode)).encode() + b"\0"
+        )
+        if path.is_symlink():
+            digest.update(b"link\0" + os.readlink(path).encode("utf-8") + b"\0")
+        elif path.is_dir():
+            digest.update(b"directory\0")
+        elif path.is_file():
+            digest.update(b"file\0" + bytes.fromhex(sha256(path)))
+        else:
+            raise AssertionError(f"unsupported packaged artifact entry: {relative!r}")
+    return digest.hexdigest()
+
+
+def packaged_runtime_identity() -> tuple[Path, str, str, str, str]:
     executable_value = os.environ.get("DAKOTA_WORKITEMS_UI_EXECUTABLE")
     source_sha = os.environ.get("DAKOTA_WORKITEMS_UI_SOURCE_SHA", "")
+    runtime_kind = os.environ.get("DAKOTA_WORKITEMS_UI_RUNTIME_KIND", "frozen")
     manifest_value = os.environ.get("DAKOTA_WORKITEMS_UI_BUILD_MANIFEST")
     assert executable_value and manifest_value
     assert re.fullmatch(r"[0-9a-f]{40}", source_sha)
+    assert runtime_kind in {"frozen", "go-wrapper"}
 
     executable = Path(executable_value).resolve()
     manifest = json.loads(Path(manifest_value).read_text(encoding="utf-8"))
     assert manifest.get("source_sha") == source_sha
     assert manifest.get("platform") == platform.system()
-    wrapper = manifest.get("artifacts", {}).get("go-wrapper", {})
-    assert wrapper.get("path") == "dist/final/action-server"
+    artifact = manifest.get("artifacts", {}).get(runtime_kind, {})
+    expected_path = {
+        "frozen": "dist/action-server/action-server",
+        "go-wrapper": "dist/final/action-server",
+    }[runtime_kind]
+    assert artifact.get("path") == expected_path
     executable_sha = sha256(executable)
-    assert wrapper.get("sha256") == executable_sha
-    return executable, source_sha, executable_sha, manifest["architecture"]
+    assert artifact.get("sha256") == executable_sha
+    return (
+        executable,
+        source_sha,
+        executable_sha,
+        manifest["architecture"],
+        runtime_kind,
+    )
 
 
 def write_receipt(receipt: dict) -> None:
@@ -102,8 +136,6 @@ def run_browser_stage(
         receipt = json.loads(result.stdout)
     except json.JSONDecodeError:
         raise AssertionError("browser acceptance returned an invalid receipt") from None
-    assert result.returncode == 0, receipt
-    assert receipt.get("status") == "PASS", receipt
     return receipt
 
 
@@ -119,7 +151,7 @@ def start_native_runtime(
             min_processes=0,
             max_processes=1,
             port=0,
-            additional_args=[f"--api-key={api_key}"],
+            additional_args=["--address=127.0.0.1", f"--api-key={api_key}"],
             env={
                 "ACTIONS_HOME": str(runtime_home),
                 "ROBOCORP_HOME": str(runtime_home),
@@ -137,7 +169,15 @@ def start_native_runtime(
 def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    executable, source_sha, executable_sha, architecture = packaged_runtime_identity()
+    (
+        executable,
+        source_sha,
+        executable_sha,
+        architecture,
+        runtime_kind,
+    ) = packaged_runtime_identity()
+    package_root = executable.parent if runtime_kind == "frozen" else None
+    package_tree_sha = packaged_tree_sha256(package_root) if package_root else None
     node = os.environ.get("DAKOTA_WORKITEMS_UI_NODE") or shutil.which("node")
     assert node is not None
     monkeypatch.setenv(
@@ -156,11 +196,14 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         "status": "IN_PROGRESS",
         "source_sha": source_sha,
         "executable_sha256": executable_sha,
+        "package_tree_sha256": package_tree_sha,
+        "runtime_kind": runtime_kind,
         "runtime_version": None,
         "platform": platform.system(),
         "architecture": architecture,
         "action_server_database": "server.db",
         "work_items_database": "datadir/workitems.db",
+        "storage_fault_fixture": "test-owned datadir/workitems.db; Action Server DB remains server.db",
         "browser_stages": [],
         "states_not_run": STATES_NOT_RUN,
     }
@@ -178,32 +221,33 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         receipt["runtime_version"] = version.stdout.strip()
 
         process = start_native_runtime(datadir, project, runtime_home, api_key)
+        origin = f"http://{process.host}:{process.port}"
         normal = run_browser_stage(
             node,
             "normal",
             tmp_path / "browser-profile-normal",
             api_key,
-            f"http://{process.host}:{process.port}",
+            origin,
         )
         receipt["browser_stages"].append(normal)
-        process.stop()
-        process = None
+        assert normal.get("status") == "PASS", json.dumps(normal)
 
         work_items_db = datadir / "workitems.db"
         assert work_items_db.is_file()
         for suffix in ("-wal", "-shm", "-journal"):
             (datadir / f"workitems.db{suffix}").unlink(missing_ok=True)
         work_items_db.write_bytes(b"synthetic corrupt SQLite database")
-
-        process = start_native_runtime(datadir, project, runtime_home, api_key)
         storage_error = run_browser_stage(
             node,
             "storage-error",
             tmp_path / "browser-profile-storage-error",
             api_key,
-            f"http://{process.host}:{process.port}",
+            origin,
         )
         receipt["browser_stages"].append(storage_error)
+        assert storage_error.get("status") == "PASS", json.dumps(storage_error)
+        if package_root is not None:
+            assert packaged_tree_sha256(package_root) == package_tree_sha
         receipt["status"] = "PASS_BOUNDED"
         write_receipt(receipt)
     except Exception as error:

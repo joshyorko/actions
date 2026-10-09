@@ -14,6 +14,7 @@ let phase = input.stage;
 let browserContext;
 let lastStatus = null;
 const evidence = {};
+const responses = [];
 
 async function narrowViewport(page) {
     await page.setViewportSize({ width: 320, height: 640 });
@@ -25,12 +26,29 @@ async function narrowViewport(page) {
 }
 
 async function signIn(page) {
-    phase = "sign_in";
+    page.on("response", (response) => {
+        const path = new URL(response.url()).pathname;
+        if (
+            ["/browser-session", "/api/work-items", "/api/work-items/stats"].includes(
+                path,
+            )
+        ) {
+            responses.push({ path, status: response.status() });
+        }
+    });
+    phase = "runtime_http_preflight";
+    const configResponse = await fetch(`${target.origin}/config`);
+    evidence.runtimeConfigStatus = configResponse.status;
+    assert.equal(configResponse.status, 200);
+    phase = "sign_in_navigation";
     await page.goto(`${target.origin}/work-items`, {
         waitUntil: "networkidle",
     });
+    phase = "sign_in_form";
     await page.getByLabel("API key", { exact: true }).fill(input.api_key);
+    phase = "sign_in_submit";
     await page.getByRole("button", { name: "Sign in", exact: true }).click();
+    phase = "sign_in_authenticated_surface";
     await page.getByRole("button", { name: "Sign out", exact: true }).waitFor();
 }
 
@@ -63,6 +81,13 @@ async function normal() {
         name: "Create First Item",
         exact: true,
     });
+    evidence.createTriggerSemantics = await createTrigger.evaluate((element) => ({
+        ariaHaspopup: element.getAttribute("aria-haspopup"),
+        ariaExpanded: element.getAttribute("aria-expanded"),
+        outerHtml: element.outerHTML,
+    }));
+    assert.equal(evidence.createTriggerSemantics.ariaHaspopup, "dialog");
+    phase = "keyboard_reopen_create_dialog";
     await createTrigger.focus();
     await page.keyboard.press("Enter");
     const dialog = page.getByRole("dialog");
@@ -107,17 +132,16 @@ async function normal() {
     await createTrigger.focus();
     await page.keyboard.press("Enter");
     await dialog.waitFor();
+    phase = "fill_create_item";
     await page.getByLabel("Queue Name", { exact: true }).fill("default");
     await page
         .getByLabel("Payload (JSON)", { exact: true })
         .fill('{"synthetic":"native-workitems-ui"}');
     await page.getByRole("button", { name: "Create", exact: true }).focus();
     await page.keyboard.press("Enter");
+    phase = "submit_create_item";
     await dialog.waitFor({ state: "hidden" });
-    await page
-        .getByText("native-workitems-ui", { exact: false })
-        .first()
-        .waitFor();
+    await page.getByRole("heading", { name: "Work Items", exact: true }).waitFor();
 
     phase = "populated_queue";
     const populated = await page.evaluate(async () => {
@@ -231,6 +255,9 @@ try {
             phase,
             httpStatus: lastStatus,
             errorType: error.name,
+            browserErrorCode:
+                /net::ERR_[A-Z_]+/.exec(String(error.message))?.[0] || null,
+            responses: responses.slice(-16),
             states: evidence,
         })}\n`,
     );
