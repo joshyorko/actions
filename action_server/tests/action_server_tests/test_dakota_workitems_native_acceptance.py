@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 import sqlite3
 import textwrap
+import tempfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -58,6 +60,33 @@ PROCESSOR_ACTION = textwrap.dedent(
 )
 
 
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _write_atomic_proof(proof_dir: Path, runtime_kind: str, proof: dict) -> Path:
+    if runtime_kind not in {"frozen", "go-wrapper"}:
+        raise ValueError("unknown native Runtime kind")
+    proof_path = proof_dir / f"{runtime_kind}.json"
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=proof_dir, delete=False
+        ) as stream:
+            json.dump(proof, stream, indent=2)
+            stream.write("\n")
+            temporary = Path(stream.name)
+        temporary.replace(proof_path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+    return proof_path
+
+
 @pytest.mark.integration_test
 @pytest.mark.parametrize(
     ("runtime_kind", "executable_variable"),
@@ -83,16 +112,35 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     monkeypatch.setenv("ACTIONS_HOME", rcc_home)
     monkeypatch.setenv("ROBOCORP_HOME", rcc_home)
     monkeypatch.setenv("SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE", executable)
+    proof_dir_value = os.environ.get("DAKOTA_WORKITEMS_PROOF_DIR")
+    assert proof_dir_value and Path(proof_dir_value).is_dir(), "Use a fresh proof directory"
+    proof_dir = Path(proof_dir_value)
+    expected_executable_hash = os.environ.get(
+        f"DAKOTA_WORKITEMS_{runtime_kind.upper().replace('-', '_')}_SHA256"
+    )
+    assert expected_executable_hash
+    executable_hash = _sha256(Path(executable))
+    assert executable_hash == expected_executable_hash
+    core_wheel_value = os.environ.get("DAKOTA_WORKITEMS_CORE_WHEEL")
+    expected_core_wheel_hash = os.environ.get("DAKOTA_WORKITEMS_CORE_WHEEL_SHA256")
+    assert core_wheel_value and expected_core_wheel_hash
+    core_wheel_hash = _sha256(Path(core_wheel_value))
+    assert core_wheel_hash == expected_core_wheel_hash
 
     from actions.server._selftest import ActionServerClient, ActionServerProcess
     from actions.work_items import State
 
-    proof: dict[str, object] = {"consumer_actions": [], "api_state_readbacks": {}}
+    proof: dict[str, object] = {
+        "schema_version": 1,
+        "runtime_kind": runtime_kind,
+        "executable_sha256": executable_hash,
+        "actions_core_wheel_sha256": core_wheel_hash,
+        "consumer_actions": [],
+        "api_state_readbacks": {},
+    }
 
     def save_proof() -> None:
-        proof_path = os.environ.get("DAKOTA_WORKITEMS_PROOF_FILE")
-        if proof_path:
-            Path(proof_path).write_text(json.dumps(proof, indent=2) + "\n", encoding="utf-8")
+        _write_atomic_proof(proof_dir, runtime_kind, proof)
 
     project = tmp_path / "synthetic-consumer-package"
     project.mkdir()
@@ -187,7 +235,7 @@ dependencies:
 
     recovery_id = create({"case": "recovery"})
     stale_reservation = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
-    # Seed only the persisted crash fixture; the consumer performs recovery and retry.
+    # Seed a stale row; this does not simulate a process crash. The consumer performs recovery and retry.
     with sqlite3.connect(database) as connection:
         connection.execute(
             "UPDATE work_items SET state = ?, reserved_at = ? WHERE id = ?",
