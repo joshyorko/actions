@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shlex
 import sqlite3
 import tempfile
 import textwrap
@@ -20,6 +21,7 @@ class CaseProof(TypedDict):
     runtime_kind: str
     executable_sha256: str
     actions_core_wheel_sha256: str
+    actions_core_installation: dict[str, str | bool]
     consumer_actions: list[dict[str, str | int]]
     api_state_readbacks: dict[str, dict[str, object]]
 
@@ -35,7 +37,64 @@ PROCESSOR_ACTION = textwrap.dedent(
         files_dir: str,
         expected_id: str,
         scenario: str,
+        expected_core_wheel: str,
+        expected_core_wheel_sha256: str,
+        core_install_report: str,
+        core_install_proof: str,
     ) -> dict[str, str]:
+        import hashlib
+        import json
+        from importlib.metadata import distribution
+        from pathlib import Path
+        from urllib.parse import unquote, urlparse
+
+        import actions
+
+        core_distribution = distribution("actions-core")
+        if core_distribution.version != "1.0.2":
+            raise AssertionError("candidate actions-core version is not installed")
+        module_path = Path(actions.__file__).resolve()
+        distribution_files = {
+            Path(core_distribution.locate_file(file)).resolve()
+            for file in (core_distribution.files or [])
+        }
+        if module_path not in distribution_files:
+            raise AssertionError("actions module is not owned by actions-core distribution")
+
+        wheel_path = Path(expected_core_wheel).resolve()
+        wheel_digest = hashlib.sha256(wheel_path.read_bytes()).hexdigest()
+        if wheel_digest != expected_core_wheel_sha256:
+            raise AssertionError("candidate actions-core wheel bytes changed")
+        install_report = json.loads(Path(core_install_report).read_text(encoding="utf-8"))
+        core_installs = [
+            entry
+            for entry in install_report.get("install", [])
+            if entry.get("metadata", {}).get("name", "").lower().replace("_", "-")
+            == "actions-core"
+        ]
+        if len(core_installs) != 1:
+            raise AssertionError("candidate actions-core install is absent from pip report")
+        source = core_installs[0].get("download_info", {})
+        source_url = source.get("url", "")
+        if Path(unquote(urlparse(source_url).path)).resolve() != wheel_path:
+            raise AssertionError("actions-core was not installed from the candidate wheel")
+        if source.get("archive_info", {}).get("hashes", {}).get("sha256") != wheel_digest:
+            raise AssertionError("pip install report is not bound to candidate wheel bytes")
+        Path(core_install_proof).write_text(
+            json.dumps(
+                {
+                    "actions_core_version": core_distribution.version,
+                    "actions_module_owned_by_distribution": True,
+                    "install_source_matches_candidate": True,
+                    "wheel_sha256": wheel_digest,
+                    "pip_report_sha256": hashlib.sha256(
+                        Path(core_install_report).read_bytes()
+                    ).hexdigest(),
+                }
+            ),
+            encoding="utf-8",
+        )
+
         from actions.work_items import SQLiteAdapter, State
 
         adapter = SQLiteAdapter(db_path=db_path, files_dir=files_dir)
@@ -69,6 +128,23 @@ PROCESSOR_ACTION = textwrap.dedent(
         return {"item_id": item_id, "output_id": output_id}
     """
 )
+
+
+def consumer_package_yaml(core_wheel: Path, install_report: Path) -> str:
+    """Render the RCC package contract used by the native Runtime test."""
+    wheel_path = core_wheel.resolve()
+    report_path = install_report.resolve()
+    return f"""version: 1
+spec-version: v2
+dependencies:
+  conda-forge:
+    - python=3.12
+    - uv=0.9.26
+  pypi:
+    - actions-work-items=0.4.4
+post-install:
+  - python -m pip install --force-reinstall --report {shlex.quote(str(report_path))} {shlex.quote(str(wheel_path))}
+"""
 
 
 def _sha256(path: Path) -> str:
@@ -145,10 +221,11 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     from actions.server._selftest import ActionServerClient, ActionServerProcess
 
     proof: CaseProof = {
-        "schema_version": 1,
+        "schema_version": 2,
         "runtime_kind": runtime_kind,
         "executable_sha256": executable_hash,
         "actions_core_wheel_sha256": core_wheel_hash,
+        "actions_core_installation": {},
         "consumer_actions": [],
         "api_state_readbacks": {},
     }
@@ -158,17 +235,11 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
 
     project = tmp_path / "synthetic-consumer-package"
     project.mkdir()
+    core_wheel = Path(core_wheel_value).resolve()
+    core_install_report = project / "candidate-core-install-report.json"
+    core_install_proof = project / "core-installation-proof.json"
     (project / "package.yaml").write_text(
-        f"""version: 1
-dependencies:
-  conda-forge:
-    - python=3.12
-    - uv=0.9.26
-  local-wheels:
-    - {Path(os.environ['DAKOTA_WORKITEMS_CORE_WHEEL']).resolve()}
-  pypi:
-    - actions-work-items=0.4.4
-""",
+        consumer_package_yaml(core_wheel, core_install_report),
         encoding="utf-8",
     )
     (project / "dakota_workitems_processor.py").write_text(
@@ -197,6 +268,10 @@ dependencies:
                 "files_dir": str(action_server_process.datadir / "work_item_files"),
                 "expected_id": item_id,
                 "scenario": scenario,
+                "expected_core_wheel": str(core_wheel),
+                "expected_core_wheel_sha256": expected_core_wheel_hash,
+                "core_install_report": str(core_install_report),
+                "core_install_proof": str(core_install_proof),
             },
         )
 
@@ -205,6 +280,15 @@ dependencies:
     assert database.is_file() and database.parent == action_server_process.datadir
     success_run = execute(success_id, "success")
     assert success_run.status_code == 200
+    installed_core_proof = json.loads(core_install_proof.read_text(encoding="utf-8"))
+    assert installed_core_proof == {
+        "actions_core_version": "1.0.2",
+        "actions_module_owned_by_distribution": True,
+        "install_source_matches_candidate": True,
+        "wheel_sha256": core_wheel_hash,
+        "pip_report_sha256": _sha256(core_install_report),
+    }
+    proof["actions_core_installation"] = installed_core_proof
     success = client.get_json(f"/api/work-items/{success_id}")
     assert success["state"] == State.DONE.value
     success_output_id = success_run.json()["output_id"]
@@ -234,6 +318,10 @@ dependencies:
             "files_dir": str(action_server_process.datadir / "work_item_files"),
             "expected_id": failure_id,
             "scenario": "fail",
+            "expected_core_wheel": str(core_wheel),
+            "expected_core_wheel_sha256": expected_core_wheel_hash,
+            "core_install_report": str(core_install_report),
+            "core_install_proof": str(core_install_proof),
         },
     )
     failed = client.get_json(f"/api/work-items/{failure_id}")

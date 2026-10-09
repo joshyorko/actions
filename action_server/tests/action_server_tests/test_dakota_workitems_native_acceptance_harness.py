@@ -6,6 +6,7 @@ import copy
 import importlib.util
 import json
 import os
+import shlex
 import subprocess
 import sys
 import textwrap
@@ -14,9 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from actions.server._common.action_package_handling import (
-    create_conda_contents_from_package_yaml_contents,
-)
+from actions.server._action_package_handler import ActionPackageHandler
 
 RUNNER_PATH = (
     Path(__file__).resolve().parents[2]
@@ -60,10 +59,17 @@ def reports_for(
 
 def proof_record(kind: str, executable_hash: str, wheel_hash: str) -> dict:
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "runtime_kind": kind,
         "executable_sha256": executable_hash,
         "actions_core_wheel_sha256": wheel_hash,
+        "actions_core_installation": {
+            "actions_core_version": "1.0.2",
+            "actions_module_owned_by_distribution": True,
+            "install_source_matches_candidate": True,
+            "wheel_sha256": wheel_hash,
+            "pip_report_sha256": "d" * 64,
+        },
         "consumer_actions": copy.deepcopy(RUNNER.CONSUMER_ACTIONS),
         "api_state_readbacks": copy.deepcopy(RUNNER.API_STATE_READBACKS),
     }
@@ -147,7 +153,7 @@ def test_rejects_missing_or_duplicate_proof_files(tmp_path: Path):
         (
             "actions_core_wheel_sha256",
             "f" * 64,
-            "proof_core_wheel_hash_mismatch_frozen",
+            "proof_core_installation_invalid_frozen",
         ),
     ],
 )
@@ -163,6 +169,21 @@ def test_rejects_mismatched_proof_binding(
     proof_path.write_text(json.dumps(proof), encoding="utf-8")
 
     with pytest.raises(RUNNER.AcceptanceFailure, match=failure):
+        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash)
+
+
+def test_rejects_core_install_proof_bound_to_different_candidate(tmp_path: Path):
+    hashes = {"frozen": "a" * 64, "go-wrapper": "b" * 64}
+    wheel_hash = "c" * 64
+    write_proofs(tmp_path, hashes, wheel_hash)
+    proof_path = tmp_path / "frozen.json"
+    proof = json.loads(proof_path.read_text(encoding="utf-8"))
+    proof["actions_core_installation"]["wheel_sha256"] = "e" * 64
+    proof_path.write_text(json.dumps(proof), encoding="utf-8")
+
+    with pytest.raises(
+        RUNNER.AcceptanceFailure, match="proof_core_installation_invalid_frozen"
+    ):
         RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash)
 
 
@@ -201,25 +222,39 @@ def test_acceptance_claims_are_not_presented_as_build_provenance():
     assert "build_output" not in receipt
 
 
-def test_package_yaml_parser_adds_the_measured_core_wheel_as_local_dependency(
+def test_native_package_yaml_replaces_core_with_measured_wheel_after_rcc_install(
     tmp_path: Path,
 ):
+    compile(NATIVE_TEST.PROCESSOR_ACTION, "dakota_workitems_processor.py", "exec")
     wheel = tmp_path / "actions_core-1.0.2-py3-none-any.whl"
     wheel.write_bytes(b"candidate core wheel")
-    package_yaml = tmp_path / "package.yaml"
-    contents = {
-        "dependencies": {
-            "conda-forge": ["python=3.12", "uv=0.9.26"],
-            "local-wheels": [str(wheel.resolve())],
-            "pypi": ["actions-work-items=0.4.4"],
-        }
-    }
+    package = tmp_path / "package"
+    package.mkdir()
+    report = package / "core-install-report.json"
+    package_yaml = package / "package.yaml"
+    package_yaml.write_text(
+        NATIVE_TEST.consumer_package_yaml(wheel, report), encoding="utf-8"
+    )
 
-    converted = create_conda_contents_from_package_yaml_contents(package_yaml, contents)
-
-    pip_dependencies = converted["dependencies"][-1]["pip"]
-    assert wheel.resolve().as_posix() in pip_dependencies
-    assert "actions-work-items==0.4.4" in pip_dependencies
+    handler = ActionPackageHandler(str(package), tmp_path / "data")
+    contents = handler.package_yaml_contents
+    assert contents is not None
+    assert contents["spec-version"] == "v2"
+    assert contents["dependencies"]["conda-forge"] == ["python=3.12", "uv=0.9.26"]
+    assert contents["dependencies"]["pypi"] == ["actions-work-items=0.4.4"]
+    assert handler.get_pythonpath_entries() == (".",)
+    post_install = contents["post-install"]
+    assert len(post_install) == 1
+    assert shlex.split(post_install[0]) == [
+        "python",
+        "-m",
+        "pip",
+        "install",
+        "--force-reinstall",
+        "--report",
+        str(report.resolve()),
+        str(wheel.resolve()),
+    ]
 
 
 def test_build_manifest_binds_source_platform_paths_and_measured_bytes(

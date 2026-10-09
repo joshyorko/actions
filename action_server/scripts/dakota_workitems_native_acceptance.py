@@ -63,6 +63,13 @@ API_STATE_READBACKS = {
         "output_parent_links_verified": True,
     },
 }
+CORE_INSTALLATION_FIELDS = {
+    "actions_core_version",
+    "actions_module_owned_by_distribution",
+    "install_source_matches_candidate",
+    "wheel_sha256",
+    "pip_report_sha256",
+}
 
 
 class AcceptanceFailure(ValueError):
@@ -189,13 +196,25 @@ def _validate_proof_shape(proof: object, kind: str) -> dict:
         "runtime_kind",
         "executable_sha256",
         "actions_core_wheel_sha256",
+        "actions_core_installation",
         "consumer_actions",
         "api_state_readbacks",
     }
     if set(proof) != expected_keys:
         raise AcceptanceFailure(f"proof_fields_{kind}")
-    if proof["schema_version"] != 1 or proof["runtime_kind"] != kind:
+    if proof["schema_version"] != 2 or proof["runtime_kind"] != kind:
         raise AcceptanceFailure(f"proof_identity_{kind}")
+    installation = proof["actions_core_installation"]
+    if (
+        not isinstance(installation, dict)
+        or set(installation) != CORE_INSTALLATION_FIELDS
+        or installation["actions_core_version"] != "1.0.2"
+        or installation["actions_module_owned_by_distribution"] is not True
+        or installation["install_source_matches_candidate"] is not True
+        or installation["wheel_sha256"] != proof["actions_core_wheel_sha256"]
+        or not re.fullmatch(r"[0-9a-f]{64}", installation["pip_report_sha256"])
+    ):
+        raise AcceptanceFailure(f"proof_core_installation_invalid_{kind}")
     if proof["consumer_actions"] != CONSUMER_ACTIONS:
         raise AcceptanceFailure(f"proof_actions_{kind}")
     if proof["api_state_readbacks"] != API_STATE_READBACKS:
@@ -252,6 +271,7 @@ def finalize_success(
         kind = case["kind"]
         case["status"] = outcomes[kind]
         case["consumer_actions"] = proofs[kind]["consumer_actions"]
+        case["actions_core_installation"] = proofs[kind]["actions_core_installation"]
         case["api_state_readbacks"] = proofs[kind]["api_state_readbacks"]
     receipt["pytest_output"] = f"{len(outcomes)} passed, 0 failed"
     receipt["status"] = "PASS"
@@ -271,7 +291,7 @@ def initial_receipt(source_sha_claim: str, build_version_claim: str) -> dict:
         "test_harness_sqlite_writes": ["seed stale reservation fixture only"],
         "recovery_fixture_limit": "stale persisted reservation seeded by harness; process crash not simulated",
         "worker_dependencies": {
-            "actions-core": "1.0.2 (task-local wheel)",
+            "actions-core": "1.0.2 candidate wheel installed by post-install",
             "actions-work-items": "0.4.4",
         },
         "checks": [
@@ -279,6 +299,7 @@ def initial_receipt(source_sha_claim: str, build_version_claim: str) -> dict:
             "consumer_action_releases_failed_with_error_details_then_fails_run",
             "consumer_action_recovers_seeded_stale_reservation_retries_and_completes",
             "runtime_restart_state_and_output_persistence",
+            "consumer_action_verified_installed_actions_core_candidate_wheel",
         ],
         "cases": [],
     }
@@ -426,6 +447,7 @@ def main() -> int:
             for case in receipt["cases"]:
                 case.pop("consumer_actions", None)
                 case.pop("api_state_readbacks", None)
+                case.pop("actions_core_installation", None)
                 case["status"] = "NOT_VERIFIED"
         _write_receipt(args.receipt, receipt)
 

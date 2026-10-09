@@ -353,10 +353,14 @@ executable's adjacent onedir files.
 On Linux, the same workflow has a separate bounded Work Items consumer gate.
 It builds `actions-core` as a wheel into a fresh run-owned RCC home, then runs
 the real frozen and Go-wrapper executables against the synthetic API consumer
-test. The generated package uses `dependencies.local-wheels` for that exact
-candidate wheel and obtains `actions-work-items==0.4.4` from the public package
-registry; no business-service credentials are used. The runner hashes both
-executables and the wheel, requires fresh per-runtime API proofs, and accepts
+test. The generated `spec-version: v2` package obtains
+`actions-work-items==0.4.4` from the public package registry and installs the
+exact candidate Core wheel with a supported `post-install` command after RCC
+creates the base environment. The consumer action checks the installed Core
+version and module ownership, then validates pip's install report against the
+candidate wheel path and SHA-256. No business-service credentials are used.
+The runner hashes both executables and the wheel, requires fresh per-runtime
+API proofs, and accepts
 the optional native manifest only when its source SHA, platform, architecture,
 expected executable paths and measured executable hashes agree. Its receipt
 records the manifest hash and binding result. This is Linux-only acceptance;
