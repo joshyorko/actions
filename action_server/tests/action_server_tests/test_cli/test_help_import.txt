@@ -1,6 +1,6 @@
 usage: action-server import [-h] [--dir PATH] [--skip-lint] [-d PATH]
-                            [--db-file DB_FILE] [--kill-lock-holder] [-v]
-                            [--whitelist WHITELIST]
+                            [--db-file DB_FILE] [--database-url DATABASE_URL]
+                            [--kill-lock-holder] [-v] [--whitelist WHITELIST]
 
 options:
   -h, --help            show this help message and exit
@@ -15,6 +15,10 @@ options:
                         on the current directory).
   --db-file DB_FILE     The name of the database file, relative to the datadir
                         (default: server.db)
+  --database-url DATABASE_URL
+                        Shared PostgreSQL database URL. When set, this takes
+                        precedence over --db-file and never falls back to
+                        SQLite.
   --kill-lock-holder    Kill the process holding the data directory lock file
                         if it exists.
   -v, --verbose         Be more talkative (default: False)

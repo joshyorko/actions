@@ -189,6 +189,10 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
     provider = provider_map.get(settings.expose_provider, TunnelProvider.AUTO)
     community_tunnel_manager = TunnelManager(preferred_provider=provider)
 
+    if provider is TunnelProvider.BORE:
+        log.error("Refusing the plain-HTTP Bore provider for Runtime exposure.")
+        return community_tunnel_manager
+
     try:
         tunnel = await community_tunnel_manager.start(port)
 
@@ -206,7 +210,7 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
         log.info(colored(f"     (using {tunnel.provider.value})", attrs=["dark"]))
 
     except Exception as e:
-        log.error(f"Failed to start tunnel: {e}")
+        log.error("Failed to start tunnel (%s).", type(e).__name__)
         log.info(
             colored(
                 "     Tip: Install 'bore' for simple tunneling: ",

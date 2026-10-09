@@ -871,6 +871,29 @@ and child cleanup; manager-stop failures are logged and isolated so they do
 not replace the body exception or skip later cleanup. Failed child enumeration
 logs and treats the child set as empty.
 
+Cloudflare quick-tunnel readers use nonblocking pipe descriptors with bounded
+4096-byte reads, a 64-entry startup queue, and a separate 512-byte overlap tail
+per stream. Python 3.12 adds Windows pipe support to `os.set_blocking`; keep the
+Runtime's declared Python floor. A full queue must not prevent the async
+consumer from yielding, or prevent a producer from switching to output draining
+after URL discovery. Tests cover same-stream fragments, reject cross-stream
+URL synthesis, and force queue saturation during cancellation and URL success.
+
+Cloudflare cleanup runs off the event loop and preserves cancellation even when
+cleanup fails or cancellation repeats. It stops and reaps only the owned
+process, cancels and joins readers, then closes streams. Closing a buffered
+stream before its reader exits can itself block on an inherited pipe writer;
+a bounded join after that close does not bound shutdown. The inherited-writer
+test uses explicit readiness/release barriers and an independent watchdog to
+prove reader exit without waiting for or killing that writer. Partial reader
+setup failure is also a cleanup boundary. Local synthetic process tests do not
+establish native Windows shutdown or live provider/public-edge acceptance.
+The credential-free binary workflow
+`.github/workflows/frontend-build-unauthenticated.yml` runs both
+`test_community_expose.py` and `test_community_expose_lifecycle.py` on its Python
+3.12 Linux, Windows, and macOS matrix before builds. Record the native job
+results separately; adding this gate is not evidence that those jobs passed.
+
 Cloud agents start with `AGENTS.md` and
 `.agents/skills/actions-repository/SKILL.md`; the latter links the specialized
 RCC/Action Server skills in `joshyorko/plugins`. These instructions apply even
