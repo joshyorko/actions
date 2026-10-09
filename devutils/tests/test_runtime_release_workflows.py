@@ -1667,8 +1667,35 @@ def test_recovery_fresh_draft_uses_the_same_final_manifest_gate_before_publish()
     assert publish.count('gh release edit "$RELEASE_REF" --draft=false') == 1
 
 
+def test_recovery_normalizes_only_the_three_native_binaries(tmp_path):
+    recovery = load_workflow_generator().ActionServerRuntimeRecovery()
+    binaries = {
+        "linux/action-server": b"linux",
+        "macos/action-server": b"macos",
+        "windows/action-server.exe": b"windows",
+    }
+    for relative_path, contents in binaries.items():
+        path = tmp_path / "binaries" / relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(contents)
+
+    env = os.environ.copy()
+    env["RELEASE_REF"] = "actions-runtime-1.0.3"
+    result = run_shell_step(
+        recovery.binary_release_normalize()["run"], tmp_path, env
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert sorted(path.name for path in (tmp_path / "release-assets").iterdir()) == [
+        "actions-runtime-1.0.3-linux64",
+        "actions-runtime-1.0.3-macos-arm64",
+        "actions-runtime-1.0.3-windows64.exe",
+    ]
+
+
 @pytest.mark.parametrize(
-    "state", ["fresh", "draft", "published", "list-error", "bad-hash"]
+    "state",
+    ["fresh", "draft", "published", "list-error", "bad-hash", "extra-checksum"],
 )
 def test_recovery_publication_outside_checkout(tmp_path, state):
     """Exercise the actual shell with draft tag lookup unavailable."""
@@ -1698,6 +1725,13 @@ def test_recovery_publication_outside_checkout(tmp_path, state):
     }
     if state == "bad-hash":
         release["assets"][0]["digest"] = "sha256:" + "0" * 64
+    if state == "extra-checksum":
+        release["assets"].append(
+            {
+                "name": "actions-runtime-1.0.1-sha256.txt",
+                "digest": "sha256:" + hashlib.sha256(b"checksum").hexdigest(),
+            }
+        )
     (tmp_path / "state.json").write_text(
         json.dumps(None if state == "fresh" else release)
     )
@@ -1759,6 +1793,9 @@ else: sys.exit(1)
     else:
         assert result.returncode != 0
         assert not edits
+    if state == "extra-checksum":
+        assert not any(call[0] == "release" for call in calls)
+        assert not any("--clobber" in call for call in calls)
     assert not any("/releases/tags/" in arg for call in calls for arg in call)
 
 

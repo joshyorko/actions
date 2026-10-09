@@ -486,6 +486,20 @@ upstream assets exist and their GitHub SHA-256 digests are verified. The tap
 README documents the `action-server-daily` auto-update slot and its manual
 `action=ci` then `action=release` workflow inputs. Do not dispatch the retired
 Sema4AI `publish.yml` workflow.
+The normal binary job creates a published release before downloading/uploading
+the assets: `Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803`
+defaults to `create_draft=false` and `update_existing=false`. It then uploads
+Linux, macOS, Windows, and the checksum manifest in order using
+`svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd`
+with `overwrite: false`.
+A failure can therefore leave a published release with only a prefix of the
+four assets. Rerunning is not a resume protocol: the release action leaves an
+existing release unchanged, and the asset uploader fails on the first
+same-name asset without deleting it. Before root decides how to continue,
+reconcile the exact tag target/source SHA and the complete four-name inventory
+against locally calculated asset digests and the manifest. Do not blindly retry,
+replace, delete, or republish assets. A SHA-256 match proves byte integrity; it
+does not prove source provenance, a publisher signature, or notarization.
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
@@ -552,6 +566,12 @@ conflicting digests, and extraneous names, never clobbers, and publishes only af
 one final re-fetch proves draft state, the exact three-name inventory, every asset
 digest, and the release target/SHA against the immutable inputs; fresh and resumed
 drafts use that same finalization gate.
+This recovery contract is intentionally a three-binary path and does not generate
+or accept the normal workflow's fourth `<tag>-sha256.txt` asset. An adversarial
+draft containing that checksum asset is rejected before any recovery upload or
+publication. Do not use this legacy recovery lane to resume a partial four-asset
+normal release; first reconcile its full inventory and hashes, then have root
+choose the continuation.
 Recovery publication runs outside the nested checkouts, so every `gh release`
 command supplies the repository explicitly. Authenticated paginated release listing
 discovers drafts; final verification fetches the numeric release ID because the

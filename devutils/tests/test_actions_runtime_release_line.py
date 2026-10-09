@@ -145,11 +145,18 @@ def test_native_runtime_release_uses_only_community_github_release_assets():
     )
     assert binary["permissions"] == {"contents": "read"}
     release_steps = jobs["release"]["steps"]
-    upload_names = [
-        step["with"]["asset_name"]
+    create_release = next(
+        step for step in release_steps if step.get("name") == "Create GitHub release"
+    )
+    assert "create_draft" not in create_release["with"]
+    assert "update_existing" not in create_release["with"]
+    upload_steps = [
+        step
         for step in release_steps
         if step.get("uses", "").startswith("svenstaro/upload-release-action@")
     ]
+    assert release_steps.index(create_release) < release_steps.index(upload_steps[0])
+    upload_names = [step["with"]["asset_name"] for step in upload_steps]
     assert upload_names == [
         "${{ github.ref_name }}-linux64",
         "${{ github.ref_name }}-macos-arm64",
@@ -158,8 +165,7 @@ def test_native_runtime_release_uses_only_community_github_release_assets():
     ]
     assert [
         step["with"]["overwrite"]
-        for step in release_steps
-        if step.get("uses", "").startswith("svenstaro/upload-release-action@")
+        for step in upload_steps
     ] == [False, False, False, False]
 
     forbidden_destinations = (
