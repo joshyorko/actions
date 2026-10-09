@@ -1291,7 +1291,12 @@ copy. A failed copied-metadata validation removes owned staging and publishes no
 package. This catches invalid metadata produced by a source change during copying;
 it does not prove that the copied files form a coherent snapshot under a concurrent
 writer. The extracted source is still passed and copied by pathname. This does not
-prove root or source capability identity. Robot directory
+prove root or source capability identity. The importer accepts either `robot.yaml`
+or `package.yaml`; the package form is admitted only with a nonempty top-level
+`tasks` mapping. The repository's Robot API tests derive their importer-only
+`package.yaml` case from the existing legacy package fixture and add that task
+mapping. This verifies Robot metadata admission; it does not establish that RCC
+can execute such a package. Robot directory
 publication uses native no-replace rename: Linux `renameat2(RENAME_NOREPLACE)`,
 macOS `renameatx_np(RENAME_EXCL)`, and Windows `os.rename` without replacement.
 Unsupported platforms, missing native symbols, unsupported filesystems and
