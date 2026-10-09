@@ -371,10 +371,11 @@ async def test_tunnel_startup_does_not_log_api_key(monkeypatch, caplog):
 
     from actions.server import _community_expose
     from actions.server._server import _start_community_expose_impl
+    from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
 
     class TunnelManager:
         def __init__(self, **kwargs):
-            pass
+            self.stop_callbacks = []
 
         async def start(self, port):
             return SimpleNamespace(
@@ -382,11 +383,38 @@ async def test_tunnel_startup_does_not_log_api_key(monkeypatch, caplog):
                 provider=SimpleNamespace(value="test"),
             )
 
+        async def stop(self):
+            for callback in self.stop_callbacks:
+                callback()
+
+        def add_stop_callback(self, callback):
+            self.stop_callbacks.append(callback)
+
     monkeypatch.setattr(_community_expose, "TunnelManager", TunnelManager)
+    app = SimpleNamespace(mtime_uuid="synthetic-runtime-id")
+    routes = SimpleNamespace(mcp_server_setup_helper=McpServerSetupHelper())
+
+    async def verified(*_args):
+        return None
+
+    monkeypatch.setattr("actions.server._server._verify_public_tunnel", verified)
     with caplog.at_level("INFO"):
-        await _start_community_expose_impl(
-            8080, SimpleNamespace(expose_provider="auto"), "synthetic-startup-key"
+        manager = await _start_community_expose_impl(
+            8080,
+            SimpleNamespace(expose_provider="auto"),
+            "synthetic-startup-key",
+            app=app,
+            action_routes=routes,
         )
     assert "synthetic-startup-key" not in caplog.text
     assert "authentication enabled" in caplog.text
     assert ".api_key" in caplog.text
+    assert (
+        "example.invalid"
+        in routes.mcp_server_setup_helper.transport_security.allowed_hosts
+    )
+    await manager.stop()
+    assert (
+        "example.invalid"
+        not in routes.mcp_server_setup_helper.transport_security.allowed_hosts
+    )

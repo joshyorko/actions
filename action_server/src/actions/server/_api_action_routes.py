@@ -161,6 +161,7 @@ class _ActionRoutes:
                 streamable_http_path="/mcp",
                 json_response=True,
                 stateless_http=True,
+                transport_security=self.mcp_server_setup_helper.transport_security,
             )
         )
 

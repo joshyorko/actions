@@ -871,6 +871,20 @@ and child cleanup; manager-stop failures are logged and isolated so they do
 not replace the body exception or skip later cleanup. Failed child enumeration
 logs and treats the child set as empty.
 
+For authenticated legacy `action-server start --expose`, the public URL is logged
+only after a public `/config` response reports authentication enabled and the
+same `mtime_uuid` as the in-memory Runtime, an unauthenticated MCP initialize is
+rejected with 401/403, and the MCP SDK client validates an authenticated
+`initialize` response. No action call is made. The MCP SDK enables DNS-rebinding
+protection with loopback-only host/origin allowlists by default; its live
+`StreamableHTTP` app must receive the same settings object that owns the
+temporary, exact HTTPS tunnel host and origin. The scoped entries are reference
+counted and removed after verification failure or the owned manager stops;
+existing loopback or pre-existing entries remain. This does not mark the
+separate persisted `action-server expose start/status` lifecycle ready. Local
+ASGI tests prove SDK behavior and cleanup only; real provider/TLS exposure and
+native CI remain separate gates.
+
 Cloudflare quick-tunnel readers use nonblocking pipe descriptors with bounded
 4096-byte reads, a 64-entry startup queue, and a separate 512-byte overlap tail
 per stream. Python 3.12 adds Windows pipe support to `os.set_blocking`; keep the
@@ -1119,12 +1133,13 @@ starts workers with RCC `env exec --artifact DIGEST --permissive-local
 --inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
 release.
 
-TCP worker startup owns its listener, accept future, and spawned wrapper. Any
-failure after listener creation closes the listener, cancels and observes the
-accept future, and reaps the owned wrapper without replacing the primary
-exception. Process-pool capacity is released after wrapper cleanup and is
-guaranteed even if warmup recovery raises; the exception-path regressions live
-in the RCC adapter focused test module.
+TCP worker startup owns its listener, accept future, and spawned wrapper.
+Startup failure attempts listener closure, accept cancellation, and wrapper
+cleanup while preserving the primary exception. Cleanup is not yet bounded end
+to end: protocol writes and the RCC wrapper wait can block. Already-exited
+workers must still complete lifecycle accounting; a liveness check alone does
+not establish descendant drain or receipt completion. The existing capacity
+regression covers warmup failure after successful cleanup, not cleanup failure.
 
 The preloaded worker treats JSON-RPC `method: "exit"` as an orderly consumer
 stop. Because command execution is synchronous in that consumer, an active
@@ -1191,12 +1206,44 @@ mocked parser or RCC health/version check is not acceptance evidence.
 RCC v18.19.2 materializes `env exec` children with the artifact as their
 current directory, so import/discovery must pass the package source directory
 explicitly to `actions metadata`; `PYTHONPATH` alone does not make discovery
-scan the source tree. A successful Action can still leave its receipt with
-`status: failed`, `exitCode: -1`, and `reason: child exited non-zero` when the
-pool intentionally terminates the persistent wrapper after the Action returns
-`PASS`. Treat that as wrapper teardown evidence only when the receipt's exact
-artifact digest, `verification.valid == true`, and non-empty lease identity
-also validate.
+scan the source tree. Record Action execution and RCC wrapper lifecycle as
+separate outcomes. An Action may return `PASS` while intentional pool
+termination produces `status: failed`, `exitCode: -1`, and
+`reason: child exited non-zero`. That receipt remains a wrapper lifecycle
+failure even when artifact identity, verification, and lease identity validate.
+Graceful retirement requires bounded worker shutdown and wrapper completion;
+forced cancellation and descendant drain require separate evidence. Neither
+result establishes full #134 acceptance.
+
+The outer Dakota CLI refuses an existing receipt path before resolving toolchain
+environment keys or creating CLI supervisor state. The worker retains its
+`O_EXCL` receipt creation check to close the later race; rejected reruns preserve
+the existing receipt byte-for-byte and must use a fresh path for a new attempt.
+
+The Dakota candidate-wheel harness records separate unauthenticated rejection,
+authenticated Action, SQLite, artifact verification, wrapper exit and process
+cleanup cells. Every cell must pass for overall acceptance. Preserve the exact
+failed wrapper status, exit code and reason even when Action execution succeeds.
+Its separate CLI watchdog does not by itself prove cleanup of every descendant.
+Cleanup coverage must include an owner that exits before timeout while a
+detached child retains its output pipes: discovery only during teardown loses
+already reparented children. Refresh and retain Runtime ownership before
+cleanup on failure paths as well as success. On Windows, closing a buffered
+pipe while a `communicate()` reader remains blocked can defeat a finite timeout.
+Keep native execution and descendant-reaping claims separate from Linux
+termination evidence; excluding zombies proves stopped execution, not reaping.
+
+The Dakota CLI currently supports Linux only and rejects other platforms before
+starting its acceptance work. Its dedicated supervisor adopts descendants as a
+subreaper and drains exited children through `ECHILD` on successful completion.
+Unexpected live descendants, failed ownership inspection, or incomplete cleanup
+remain failures; cleanup escalation cannot silently preserve an earlier PASS.
+The wrapper cell accepts only terminal `completed` with an integer zero exit
+code, excluding booleans, missing status and nonterminal states. Focused tests
+exercise detached live writers and fast-exiting adopted children, but source
+Runtime/candidate-wheel receipts still show a failed RCC wrapper. These harness
+checks do not establish production pool retirement, lease-release ordering,
+frozen Runtime acceptance or remote-provider acceptance.
 
 With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
 recorded digest through the same provider and each returned the exact digest
