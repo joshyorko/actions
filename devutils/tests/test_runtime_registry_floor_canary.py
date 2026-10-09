@@ -123,7 +123,7 @@ def test_isolated_environment_removes_python_path_overrides():
     assert actual == {"PATH": "/usr/bin", "PYTHONNOUSERSITE": "1"}
 
 
-def _run_child_path_guard(repository, cwd, pythonpath=None):
+def _run_child_path_guard(repository, cwd, pythonpath=None, python=sys.executable):
     environment = dict(os.environ)
     environment.pop("PYTHONHOME", None)
     environment.pop("PYTHONUSERBASE", None)
@@ -133,7 +133,7 @@ def _run_child_path_guard(repository, cwd, pythonpath=None):
     else:
         environment["PYTHONPATH"] = pythonpath
     return subprocess.run(
-        [sys.executable, "-c", module.build_import_path_guard(repository)],
+        [str(python), "-c", module.build_import_path_guard(repository)],
         cwd=cwd,
         env=environment,
         capture_output=True,
@@ -142,7 +142,15 @@ def _run_child_path_guard(repository, cwd, pythonpath=None):
 
 
 def test_child_guard_accepts_external_workdir_without_checkout_paths(tmp_path):
-    result = _run_child_path_guard(ROOT, tmp_path)
+    environment = module.isolated_environment()
+    venv = tmp_path / "venv"
+    subprocess.run(
+        [sys.executable, "-m", "venv", "--without-pip", str(venv)],
+        check=True,
+        env=environment,
+    )
+    python = venv / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+    result = _run_child_path_guard(ROOT, tmp_path, python=python)
     assert result.returncode == 0, result.stderr
 
 
