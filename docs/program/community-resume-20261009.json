@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T22:25:00Z",
-  "status": "ACTIVE engineering checkpoint at 2026-10-09T22:25Z: 7 PRs integrated only into named targets, 11 open/blocked and 0 merge-ready. Current community/integration/Runtime refs are recorded separately. #220 has a confirmed Actions test race with test-only repair active; #221 has a single strict Table timing failure with bounded same-head rerun pending. No whole-issue status, release readiness or publication changed.",
+  "observed_at": "2026-10-09T22:32:00Z",
+  "status": "ACTIVE engineering checkpoint at 2026-10-09T22:32Z: 9 PRs merged only to named targets, 10 open/blocked and 0 merge-ready in a 19-PR cohort. Community integration remains at 4a717c77; Runtime candidate is e2fb0f46. PR221 reports all 28 checks successful after same-head frontend rerun; original timing failure remains retained. PR269 verify/audit passed, but coverage and primary/native matrix checks remain pending. No whole-issue status or publication changed.",
   "integration_head": "4a717c77053947f4ad2892783211af5edbe5783d",
   "community_head": "c30f953bae1a322e1d09549607ab42f1badce440",
   "release_ready": false,
@@ -1136,7 +1136,7 @@
       "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
     }
   ],
-  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread\u2019s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
+  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread’s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
   "documentation_receipts": [
     {
       "lane": "Windows/RCC lifecycle review",
@@ -1268,7 +1268,7 @@
     },
     {
       "lane": "Current release/native worker reconciliation",
-      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254\u2013257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
+      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254–257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
     }
   ],
   "post_archive_observations": [
@@ -1371,7 +1371,7 @@
     },
     {
       "observed_at": "2026-10-09T19:36:24Z",
-      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255\u2013257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
+      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255–257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
     },
     {
       "event": "Existing RCC ToolkitTest command now discovers the graph regression wrapper: v18.19.3 local run exited 0, Ruff developer passed, pytest 26/26 passed; receipt evidence/community-graph-toolkit-test-20261009.json. No hosted workflow result is inferred; the immutable graph amendment ZIP is unchanged."
@@ -1446,7 +1446,7 @@
     },
     {
       "observed_at": "2026-10-09T22:23:22Z",
-      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07\u201322:11 read errors remain historical. No worker-lane progress is inferred."
+      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07–22:11 read errors remain historical. No worker-lane progress is inferred."
     }
   ],
   "admission_checkpoint": {
@@ -2673,7 +2673,7 @@
     "native_status": "completed",
     "bootstrap_request": "actions-bootstrap-20261009-1832",
     "native_permission_limitation": "Superseded: authorized native request/settings supplied approvalPolicy=never and sandbox.type=dangerFullAccess, confirmed from native response/settings-updated event. Do not infer from null aggregate effective configuration.",
-    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout\u2019s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe\u2026`, integration base at `3ed98dd\u2026`, upstream reporting docs at `57399b60\u2026`, and Actions Core release at `df7b0d66\u2026`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor\u2019s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
+    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout’s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe…`, integration base at `3ed98dd…`, upstream reporting docs at `57399b60…`, and Actions Core release at `df7b0d66…`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor’s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
     "engineering_threads_dispatched": 5,
     "old_approvals_resumed": false,
     "workspace_recreated": false,
@@ -2849,8 +2849,8 @@
     "merged_at": "2026-10-09T21:01:00Z",
     "scope_limit": "Last previously admitted documentation-only validation checkpoint remains PR254 at446ff1b. The branch has since advanced through seven target-specific merges, including PR264/268; current branch ref is recorded separately. This does not admit the entire PR221 combined candidate or release."
   },
-  "observed_at_utc": "2026-10-09T22:25:00Z",
-  "runtime_candidate_head": "923e4e9db6236c8a48977c0b71236f1dc0f14563",
+  "observed_at_utc": "2026-10-09T22:32:00Z",
+  "runtime_candidate_head": "e2fb0f461f70129af0673aa5886f95ee581992d9",
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
   "current_canvas_amendment": {
@@ -2898,17 +2898,17 @@
     "contracts_and_raw_states": "54 retained contracts and raw states unchanged; #210 remains the only accepted whole issue."
   },
   "current_pull_request_observations": {
-    "observed_at_utc": "2026-10-09T22:25:00Z",
-    "audit_path": "evidence/convergence-live-prs-20261009T2225Z.json",
-    "audit_sha256": "0e6575b8f553bd23fb53002faaa3022190b383f89a40b592ac34d71264326623",
-    "summary_path": "evidence/convergence-followup-20261009T2225Z.json",
-    "summary_sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7",
-    "open_pr_count": 11,
+    "observed_at_utc": "2026-10-09T22:30:00Z",
+    "audit_path": "evidence/convergence-live-prs-20261009T2230Z.json",
+    "audit_sha256": "bd7c314e66f77358b18a20a8edc2d2215af2fd1d1d00d0fd1f63eda67f4ceb97",
+    "summary_path": "evidence/convergence-followup-20261009T2230Z.json",
+    "summary_sha256": "e7b97d7f5a1a2cc345009d03b334a1bc664e686e211e822f7329b79805f470cf",
+    "open_pr_count": 10,
     "all_open_are_drafts": true,
     "merge_ready_count": 0,
-    "blocked_open_count": 11,
+    "blocked_open_count": 10,
     "target_integrated_this_pass": {
-      "count": 7,
+      "count": 9,
       "prs": [
         251,
         266,
@@ -2916,20 +2916,12 @@
         259,
         262,
         268,
-        264
+        264,
+        263,
+        267
       ]
     },
-    "worker_inventory": {
-      "path": "evidence/convergence-worktrees-20261009T2223Z.json",
-      "sha256": "34ce89b7234507930501cde5a0f89541e1cdedf407b40424bfc8e4ab2fdc8d6e",
-      "worktrees": 36,
-      "limit": "Timestamped Git HEAD/status only; not proof of remote worker progress."
-    },
-    "limits": {
-      "whole_issue_acceptance": "No change; 54 retained contracts, 53 open, only #210 accepted/closed, 0 whole-issue review-ready.",
-      "release": "No publication or release-readiness promotion.",
-      "diagnostics": "#220 test-only regression repair active; #221 bounded same-head timing rerun requested with no result."
-    }
+    "pr269": "verify/audit PASS; coverage and matrix pending"
   },
   "prior_integration_checkpoints": [
     {
@@ -2984,25 +2976,22 @@
     }
   },
   "current_remote_ref_observation": {
-    "observed_at_utc": "2026-10-09T22:20:42Z",
+    "observed_at_utc": "2026-10-09T22:30:00Z",
     "community": {
       "branch": "community",
-      "head": "c30f953bae1a322e1d09549607ab42f1badce440",
-      "tree": "c6a2a657bde5af05f8bff659dc33ffee2db8d1e3"
+      "head": "c30f953bae1a322e1d09549607ab42f1badce440"
     },
     "integration": {
       "branch": "integration/community-release-20261008",
-      "head": "4a717c77053947f4ad2892783211af5edbe5783d",
-      "tree": "52950afe5590f1710c7499bedc1179a960f8f8b3",
-      "readback": "GitHub branch API"
+      "head": "4a717c77053947f4ad2892783211af5edbe5783d"
     },
     "runtime_candidate": {
       "branch": "integration/runtime-release-final-20261009",
-      "head": "923e4e9db6236c8a48977c0b71236f1dc0f14563",
-      "tree": "a72e4a7f0476b510def86b8d3943bf65143f7f39",
-      "readback": "GitHub branch API"
+      "head": "e2fb0f461f70129af0673aa5886f95ee581992d9",
+      "tree": "280278cf45fc8f0b5ae5702a471f8c81b15aeae6"
     },
-    "scope": "The community branch remains separate and unchanged. Integration and Runtime candidate refs are branch readbacks, not new release or whole-issue admission."
+    "readback": "git ls-remote origin",
+    "scope": "Branch readback only; no publication or whole-issue acceptance."
   },
   "prior_convergence_followup_20261009T2150Z": {
     "observed_at_utc": "2026-10-09T21:50Z",
@@ -3033,21 +3022,20 @@
     "base_ref_readback_at": "2026-10-09T21:46:56Z"
   },
   "current_convergence_followup": {
-    "observed_at_utc": "2026-10-09T22:25:00Z",
-    "path": "evidence/convergence-followup-20261009T2225Z.json",
-    "sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7",
-    "scope": "Seven PRs merged only to their named targets; 11 open/blocked; whole-issue counts and release status unchanged.",
-    "native_status_observation": "22:23 snapshot reports latest coordinator turn completed; body unavailable. No lane progress inferred."
+    "observed_at_utc": "2026-10-09T22:32:00Z",
+    "path": "evidence/convergence-followup-20261009T2230Z.json",
+    "sha256": "e7b97d7f5a1a2cc345009d03b334a1bc664e686e211e822f7329b79805f470cf",
+    "scope": "Nine PRs merged only to named targets; 10 open/blocked, 0 merge-ready; latest #221/#269 gate outcomes recorded; issue counts unchanged."
   },
   "latest_convergence_update": {
-    "observed_at_utc": "2026-10-09T22:25:00Z",
-    "path": "evidence/convergence-followup-20261009T2225Z.json",
-    "sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7",
+    "observed_at_utc": "2026-10-09T22:32:00Z",
+    "path": "evidence/convergence-followup-20261009T2230Z.json",
+    "sha256": "e7b97d7f5a1a2cc345009d03b334a1bc664e686e211e822f7329b79805f470cf",
     "cohort": {
-      "items": 18,
+      "items": 19,
       "merge_ready": 0,
-      "blocked_open": 11,
-      "target_integrated": 7,
+      "blocked_open": 10,
+      "target_integrated": 9,
       "prs": [
         251,
         266,
@@ -3055,24 +3043,26 @@
         259,
         262,
         268,
-        264
+        264,
+        263,
+        267
       ]
     },
     "open_pr_audit": {
-      "path": "evidence/convergence-live-prs-20261009T2225Z.json",
-      "sha256": "0e6575b8f553bd23fb53002faaa3022190b383f89a40b592ac34d71264326623",
-      "open_count": 11,
+      "path": "evidence/convergence-live-prs-20261009T2230Z.json",
+      "sha256": "bd7c314e66f77358b18a20a8edc2d2215af2fd1d1d00d0fd1f63eda67f4ceb97",
+      "open_count": 10,
       "all_drafts": true
     },
-    "base_ref_readback_at": "2026-10-09T22:20:42Z",
+    "branch_readback_at": "2026-10-09T22:30:00Z",
     "issue_acceptance_changed": false
   },
   "latest_open_pr_audit": {
-    "observed_at_utc": "2026-10-09T22:25:00Z",
-    "path": "evidence/convergence-live-prs-20261009T2225Z.json",
-    "sha256": "0e6575b8f553bd23fb53002faaa3022190b383f89a40b592ac34d71264326623",
-    "summary_path": "evidence/convergence-followup-20261009T2225Z.json",
-    "summary_sha256": "510bfc357a831a03a348e40937aaac74584311f56e37c11abe36a168e7b8feb7"
+    "observed_at_utc": "2026-10-09T22:30:00Z",
+    "path": "evidence/convergence-live-prs-20261009T2230Z.json",
+    "sha256": "bd7c314e66f77358b18a20a8edc2d2215af2fd1d1d00d0fd1f63eda67f4ceb97",
+    "summary_path": "evidence/convergence-followup-20261009T2230Z.json",
+    "summary_sha256": "e7b97d7f5a1a2cc345009d03b334a1bc664e686e211e822f7329b79805f470cf"
   },
   "prior_remote_ref_observation_20261009T2146Z": {
     "observed_at_utc": "2026-10-09T21:46:56Z",
@@ -3169,5 +3159,36 @@
     "sha256": "34ce89b7234507930501cde5a0f89541e1cdedf407b40424bfc8e4ab2fdc8d6e",
     "count": 36,
     "limit": "Local Git snapshot; remote Devsy status is not inferred."
+  },
+  "release_candidate_head": "e2fb0f461f70129af0673aa5886f95ee581992d9",
+  "current_convergence_update": {
+    "observed_at_utc": "2026-10-09T22:32:00Z",
+    "path": "evidence/convergence-followup-20261009T2230Z.json",
+    "sha256": "e7b97d7f5a1a2cc345009d03b334a1bc664e686e211e822f7329b79805f470cf",
+    "cohort": {
+      "items": 19,
+      "merge_ready": 0,
+      "blocked_open": 10,
+      "target_integrated": 9,
+      "prs": [
+        251,
+        266,
+        257,
+        259,
+        262,
+        268,
+        264,
+        263,
+        267
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261009T2230Z.json",
+      "sha256": "bd7c314e66f77358b18a20a8edc2d2215af2fd1d1d00d0fd1f63eda67f4ceb97",
+      "open_count": 10,
+      "all_drafts": true
+    },
+    "branch_readback_at": "2026-10-09T22:30:00Z",
+    "issue_acceptance_changed": false
   }
 }

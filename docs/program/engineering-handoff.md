@@ -1,6 +1,15 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-09T22:25Z
+## Current convergence — 2026-10-09T22:31Z
+
+The 22:30 live readback records community `c30f953bae1a322e1d09549607ab42f1badce440`, integration `4a717c77053947f4ad2892783211af5edbe5783d`, and Runtime candidate `e2fb0f461f70129af0673aa5886f95ee581992d9` (tree `280278cf45fc8f0b5ae5702a471f8c81b15aeae6`). Nine PRs in the 19-item convergence cohort are merged only to their named targets (#251/#266/#257/#259/#262/#268/#264/#263/#267); the fresh open-PR audit lists 10 drafts, 0 merge-ready. The receipt and exact audit are [here](evidence/convergence-followup-20261009T2230Z.json) and [here](evidence/convergence-live-prs-20261009T2230Z.json). Issue accounting remains 54 retained contracts, 53 open, #210 sole accepted/closed, zero whole-issue review-ready. No publication or whole-issue acceptance follows.
+
+PR263 and PR267 are now in the Runtime candidate; their scoped checks and limits are retained in the receipt. PR269 (`5000fac1`) has local regression tests and independent review complete; hosted verify/audit pass while coverage and primary/native matrix checks remain pending. The workflow reports an artifact size/digest, but independent GitHub-to-blob retrieval returned 403 before any bytes; the reported digest and size remain unverified, and the empty-zip artifact is retained as UNVERIFIED-empty. PR221 now reports all 28 checks successful, including same-head frontend rerun 37998628314/job 114051873512 (278 passed); the original strict timing failure remains recorded and no threshold changed. The community integration remains `4a717c77`; root reports the current main candidate blocked by PR256 functional Windows/RCC proof and PR269 matrix validation. No admission is inferred.
+
+The corrected Devsy continuation is accepted on existing thread `01a1222f-e720-7183-9634-2edb76d30326`, turn `01a122c9-66d0-72a0-8088-df3a1e1687ea`, with gpt-6.1-sol/high and approval never/danger-full-access. This records dispatch/settings only, not lane progress. The earlier unsupported-model HTTP 400 (one user message, no assistant/tool effects) and prior 502/KubernetesError observations remain historical evidence.
+
+
+## Historical convergence snapshot — 2026-10-09T22:25Z
 
 The 22:20:42Z readback is community `c30f953bae1a322e1d09549607ab42f1badce440`, integration `4a717c77053947f4ad2892783211af5edbe5783d` (tree `52950afe5590f1710c7499bedc1179a960f8f8b3`), and Runtime candidate `923e4e9db6236c8a48977c0b71236f1dc0f14563` (tree `a72e4a7f0476b510def86b8d3943bf65143f7f39`). The 22:25Z audit lists 11 open draft PRs. Root classifies the 18-item set as 7 integrated to named targets, 11 blocked open and 0 merge-ready. Issue accounting is unchanged: 54 retained contracts, 53 open, #210 sole accepted/closed, zero whole-issue review-ready.
 
