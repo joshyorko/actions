@@ -1,5 +1,12 @@
 # Repository Operations
 
+For a publication credential availability check, run a separate job in the
+same GitHub environment used by publication. Give it no repository permissions,
+checkout, package installation or publication command. Bind the secret only to
+the check step, disable shell tracing, and report only empty versus nonempty.
+A passing availability check does not prove registry authentication, token scope,
+artifact correctness or release readiness; the normal release gates still apply.
+
 ## Package Boundaries
 
 Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as
