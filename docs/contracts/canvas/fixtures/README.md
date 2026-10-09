@@ -32,6 +32,11 @@ generation and result object are still current. Component tests exercise this
 client-side race guard with held promises; it does not bind a result to a real
 MCP host context.
 
+Host tool-input revisions also invalidate a pending query and clear its busy
+state. Held-promise tests cover replacement and clearing while search is in
+flight, followed by stale success or failure; the superseded response cannot
+replace the current view or leave its search disabled.
+
 The production Canvas entry point uses the same official bridge package, and
 the Canvas build embeds its JavaScript and CSS into one HTML resource. A
 static build check rejects asset URL references, and the local browser harness

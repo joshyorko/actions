@@ -105,3 +105,7 @@ document.querySelector("#remount")?.addEventListener("click", () => {
     initialized = false;
     frame.src = "/index.html?remount=" + Date.now();
 });
+
+// Install the message listener before loading the iframe so the initialize
+// request cannot race the harness's module-script startup.
+frame.src = "/index.html";

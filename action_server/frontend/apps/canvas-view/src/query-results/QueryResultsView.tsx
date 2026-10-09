@@ -111,6 +111,7 @@ export function QueryResultsView({
         replaceResult(null);
         setArtifactStatus(null);
         setIsCheckingArtifact(false);
+        setIsSearching(false);
     }, [hostInput, replaceResult]);
 
     const submit = async (event: FormEvent) => {

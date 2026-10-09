@@ -280,6 +280,123 @@ describe("QueryResultsView fixture renderer", () => {
         ).toBeVisible();
     });
 
+    it("re-enables search when host input is replaced while a search is pending", async () => {
+        const user = userEvent.setup();
+        const staleSearch = deferred<QueryActionResult>();
+        const app = adapter({
+            submitQuery: vi
+                .fn<QueryResultsAdapter["submitQuery"]>()
+                .mockReturnValueOnce(staleSearch.promise)
+                .mockResolvedValueOnce(
+                    fixture.domainError as QueryActionResult,
+                ),
+        });
+        const view = render(
+            <QueryResultsView
+                adapter={app}
+                hostInput={{ revision: 1, query: "alpha" }}
+            />,
+        );
+
+        await waitFor(() =>
+            expect(
+                screen.getByRole("textbox", { name: "Search records" }),
+            ).toHaveValue("alpha"),
+        );
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        expect(
+            screen.getByRole("button", { name: "Searching…" }),
+        ).toBeDisabled();
+
+        view.rerender(
+            <QueryResultsView
+                adapter={app}
+                hostInput={{ revision: 2, query: "beta" }}
+            />,
+        );
+        await waitFor(() =>
+            expect(
+                screen.getByRole("textbox", { name: "Search records" }),
+            ).toHaveValue("beta"),
+        );
+        expect(screen.getByRole("button", { name: "Search" })).toBeEnabled();
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        expect(
+            await screen.findByText("No records matched that query."),
+        ).toBeVisible();
+
+        await act(async () => {
+            staleSearch.resolve(success);
+            await staleSearch.promise;
+        });
+        expect(
+            screen.queryByRole("table", { name: "Search results" }),
+        ).not.toBeInTheDocument();
+        expect(
+            screen.getByText("No records matched that query."),
+        ).toBeVisible();
+        expect(screen.getByRole("button", { name: "Search" })).toBeEnabled();
+    });
+
+    it("re-enables search when host input is cleared while a search is pending", async () => {
+        const user = userEvent.setup();
+        const staleSearch = deferred<QueryActionResult>();
+        const gammaResult: QueryActionResult = {
+            rows: [
+                { id: "record-gamma", title: "Gamma guide", category: "Guide" },
+            ],
+            artifact: null,
+            error: null,
+        };
+        const app = adapter({
+            submitQuery: vi
+                .fn<QueryResultsAdapter["submitQuery"]>()
+                .mockReturnValueOnce(staleSearch.promise)
+                .mockResolvedValueOnce(gammaResult),
+        });
+        const view = render(
+            <QueryResultsView
+                adapter={app}
+                hostInput={{ revision: 1, query: "alpha" }}
+            />,
+        );
+
+        await waitFor(() =>
+            expect(
+                screen.getByRole("textbox", { name: "Search records" }),
+            ).toHaveValue("alpha"),
+        );
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        expect(
+            screen.getByRole("button", { name: "Searching…" }),
+        ).toBeDisabled();
+
+        view.rerender(
+            <QueryResultsView
+                adapter={app}
+                hostInput={{ revision: 2, query: null }}
+            />,
+        );
+        const input = screen.getByRole("textbox", { name: "Search records" });
+        await waitFor(() => expect(input).toHaveValue(""));
+        expect(screen.getByRole("button", { name: "Search" })).toBeEnabled();
+        await user.type(input, "gamma");
+        await user.click(screen.getByRole("button", { name: "Search" }));
+        expect(
+            await screen.findByRole("row", { name: "Gamma guide Guide" }),
+        ).toBeVisible();
+
+        await act(async () => {
+            staleSearch.reject(new Error("stale provider details"));
+            await staleSearch.promise.catch(() => undefined);
+        });
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+        expect(
+            screen.getByRole("row", { name: "Gamma guide Guide" }),
+        ).toBeVisible();
+        expect(screen.getByRole("button", { name: "Search" })).toBeEnabled();
+    });
+
     it("announces loading and then the empty state", async () => {
         const user = userEvent.setup();
         let finishSearch: ((result: QueryActionResult) => void) | undefined;
