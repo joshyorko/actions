@@ -1,5 +1,26 @@
 # Repository Operations
 
+## MCP Apps public metadata
+
+The Actions Core public `mcp.tool` and `mcp.resource` decorators accept `meta=`
+as a detached JSON object, bounded to 64 KiB and 16 nesting levels. They reject
+non-JSON values and validate the stable MCP Apps `ui.resourceUri`, `ui.visibility`
+and four CSP domain-list fields while preserving unrelated JSON extension keys.
+UI resources use the `ui://` scheme and `text/html;profile=mcp-app` MIME type;
+queries and fragments remain part of the exact resource identity. Runtime checks
+that every tool association resolves to a resource with that MIME type before
+replacing the active catalog, so a failed catalog admission leaves the previous
+catalog in place. `visibility: ["app"]` is a host projection hint, never backend
+authorization.
+
+The focused source tests exercise public decorators through the Runtime
+Streamable HTTP route. The process-level fixture additionally installs the
+exact candidate Core wheel into an isolated test environment before importing an
+ordinary action package; record its wheel digest because its version metadata
+can match an already-published wheel. Neither test proves that published Core
+bytes contain the candidate API, a host renders the resource, a full MCP Apps
+view/result lifecycle works, or a packaged Runtime release accepts it.
+
 ## Core and Runtime candidate compatibility
 
 Core 1.0.1 does not contain `ActionContext`, `ActionsListActionTypedDict` or

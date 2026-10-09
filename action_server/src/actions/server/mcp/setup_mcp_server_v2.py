@@ -5,6 +5,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from hashlib import sha256
 from typing import Any, Literal
+from urllib.parse import urlsplit
 
 from mcp.types import (
     CallToolResult,
@@ -486,6 +487,7 @@ class McpServerSetupHelper:
     def replace_catalog(self, replacement: "McpServerSetupHelper") -> None:
         """Atomically publish a fully built catalog for the persistent server."""
         catalog = replacement._catalog
+        self._validate_ui_resource_references(catalog)
         self._catalog = catalog
         self._tools = catalog.tools
         self._tool_name_to_action_info = catalog.tool_name_to_action_info
@@ -497,6 +499,67 @@ class McpServerSetupHelper:
         )
         self._prompts = catalog.prompts
         self._prompt_name_to_action_info = catalog.prompt_name_to_action_info
+
+    @staticmethod
+    def _validate_ui_resource_references(catalog: _McpCatalog) -> None:
+        """Validate MCP Apps associations before making a catalog visible."""
+        expected_mime_type = "text/html;profile=mcp-app"
+
+        def is_ui_uri(value: object) -> bool:
+            if not isinstance(value, str) or any(char.isspace() for char in value):
+                return False
+            try:
+                parsed = urlsplit(value)
+                _ = parsed.port
+            except ValueError:
+                return False
+            return parsed.scheme == "ui" and parsed.hostname is not None
+
+        def uses_ui_scheme(value: object) -> bool:
+            if not isinstance(value, str):
+                return False
+            try:
+                return urlsplit(value).scheme == "ui"
+            except ValueError:
+                return value[:3].lower() == "ui:"
+
+        for uri, action_info in catalog.resource_to_action_info.items():
+            meta = action_info.mcp_meta
+            has_ui_meta = isinstance(meta, dict) and "ui" in meta
+            if uses_ui_scheme(uri) or has_ui_meta:
+                resource = catalog.resources.get(uri)
+                if not is_ui_uri(uri) or resource is None:
+                    raise ValueError(
+                        f"MCP Apps resource {uri!r} has an invalid UI resource URI"
+                    )
+                if resource.mime_type != expected_mime_type:
+                    raise ValueError(
+                        f"MCP Apps resource {uri!r} must use MIME type {expected_mime_type!r}"
+                    )
+
+        for action_info in catalog.tool_name_to_action_info.values():
+            meta = action_info.mcp_meta
+            ui = meta.get("ui") if isinstance(meta, dict) else None
+            if not isinstance(ui, dict) or "resourceUri" not in ui:
+                continue
+            resource_uri = ui["resourceUri"]
+            if not isinstance(resource_uri, str):
+                raise ValueError(
+                    f"MCP tool {action_info.action.name} has an invalid UI resource URI"
+                )
+            if not is_ui_uri(resource_uri):
+                raise ValueError(
+                    f"MCP tool {action_info.action.name} has an invalid UI resource URI"
+                )
+            resource = catalog.resources.get(resource_uri)
+            if resource is None:
+                raise ValueError(
+                    f"MCP tool {action_info.action.name} references missing UI resource {resource_uri!r}"
+                )
+            if resource.mime_type != expected_mime_type:
+                raise ValueError(
+                    f"MCP UI resource {resource_uri!r} must use MIME type {expected_mime_type!r}"
+                )
 
     def unregister_actions(self) -> None:
         self._init_state()

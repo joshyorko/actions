@@ -65,6 +65,107 @@ def test_call_tool_uses_admitted_catalog_during_concurrent_reload(monkeypatch):
     assert observed == ["old"]
 
 
+@pytest.mark.parametrize("resource_mime", [None, "text/html"])
+def test_invalid_ui_resource_reference_does_not_replace_catalog(resource_mime):
+    import json
+    from types import SimpleNamespace
+
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
+
+    def action(name, options="{}"):
+        return SimpleNamespace(
+            name=name,
+            options=options,
+            input_schema="{}",
+            output_schema='{"type":"string"}',
+        )
+
+    async def old_func(**_kwargs):
+        return "old"
+
+    async def new_func(**_kwargs):
+        return "new"
+
+    helper = McpServerSetupHelper()
+    old_catalog = McpServerSetupHelper()
+    old_catalog.register_action(old_func, None, action("old_tool"), "Old", "")
+    helper.replace_catalog(old_catalog)
+    published = helper._catalog
+
+    replacement = McpServerSetupHelper()
+    metadata = {
+        "kind": "action",
+        "_meta": {"ui": {"resourceUri": "ui://fixture/view"}},
+    }
+    replacement.register_action(
+        new_func,
+        None,
+        action("new_tool", json.dumps(metadata)),
+        "New",
+        "",
+    )
+    if resource_mime is not None:
+        resource_options = {
+            "kind": "resource",
+            "uri": "ui://fixture/view",
+            "mime_type": resource_mime,
+        }
+        replacement.register_action(
+            new_func,
+            None,
+            action("view", json.dumps(resource_options)),
+            "View",
+            "",
+        )
+
+    with pytest.raises(ValueError, match="MCP"):
+        helper.replace_catalog(replacement)
+
+    assert helper._catalog is published
+    assert [tool.name for tool in helper._tools] == ["old_tool"]
+
+
+@pytest.mark.parametrize(
+    ("uri", "mime_type"),
+    [
+        ("ui://fixture/view", "text/html"),
+        ("ui:///view", "text/html;profile=mcp-app"),
+    ],
+)
+def test_unreferenced_ui_resource_requires_valid_uri_and_apps_mime_before_publish(
+    uri, mime_type
+):
+    import json
+    from types import SimpleNamespace
+
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
+
+    action = SimpleNamespace(
+        name="view",
+        options=json.dumps(
+            {
+                "kind": "resource",
+                "uri": uri,
+                "mime_type": mime_type,
+            }
+        ),
+        input_schema="{}",
+        output_schema='{"type":"string"}',
+    )
+
+    async def resource_func(**_kwargs):
+        return "<html />"
+
+    helper = McpServerSetupHelper()
+    replacement = McpServerSetupHelper()
+    replacement.register_action(resource_func, None, action, "View", "")
+
+    with pytest.raises(ValueError, match="MCP Apps resource"):
+        helper.replace_catalog(replacement)
+
+    assert helper._tools == []
+
+
 def test_resource_template_matches():
     from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
