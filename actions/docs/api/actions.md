@@ -67,7 +67,7 @@ actions run actions.py -a enter_user
 - <b>`is_consequential`</b>: Whether the action is consequential or not. This will add `x-openai-isConsequential: true` to the action metadata and shown in OpenApi spec.
 - <b>`display_name`</b>: A name to be displayed for this action. If given will be used as the openapi.json summary for this action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L79)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L79)
 
 ```python
 action(*args, **kwargs)
@@ -87,7 +87,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L175)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L175)
 
 ```python
 action_cache(func)
@@ -99,7 +99,7 @@ ______________________________________________________________________
 
 Provides the action which is being currently run or None if not currently running an action.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L210)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L210)
 
 ```python
 get_current_action() → Optional[IAction]
@@ -111,7 +111,7 @@ ______________________________________________________________________
 
 Provide the output directory being used for the run or None if there's no output dir configured.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L197)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L197)
 
 ```python
 get_output_dir() → Optional[Path]
@@ -131,7 +131,7 @@ The function may be either a generator with a single yield (so, the first yielde
 
 - <b>`func`</b>: wrapped function.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/__init__.py#L153)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/__init__.py#L153)
 
 ```python
 session_cache(func)
@@ -191,7 +191,7 @@ def my_long_action():
 
 **Note:** If fixtures are defined in another file, they need to be imported in the main actions file to be taken into use
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_fixtures.py#L26)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_fixtures.py#L26)
 
 ```python
 setup(
@@ -236,7 +236,7 @@ By default, runs teardowns in `action` scope.
 
 **Note:** If fixtures are defined in another file, they need to be imported in the main actions file to be taken into use
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_fixtures.py#L150)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_fixtures.py#L150)
 
 ```python
 teardown(
@@ -271,7 +271,7 @@ i.e.: if the payload has:
 
 The path to access the secret_name would be: 'secrets/secret_name'.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_action_context.py#L149)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_action_context.py#L149)
 
 ```python
 __init__(data: str, env: Optional[Dict[str, str]] = None)
@@ -291,7 +291,7 @@ ______________________________________________________________________
 
 ### `from_request`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_action_context.py#L264)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_action_context.py#L264)
 
 ```python
 from_request(
@@ -381,7 +381,7 @@ ______________________________________________________________________
 
 Runs the action and returns its result.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_protocols.py#L138)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_protocols.py#L138)
 
 ```python
 run() → Any
@@ -444,7 +444,7 @@ Creates an OAuth2 Secret given the action context (which may be encrypted in mem
 
 Return: An OAuth2Secret instance collected from the passed action context.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L206)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_secret/__init__.py#L206)
 
 ```python
 from_action_context(action_context: 'ActionContext', path: str) → OAuth2Secret
@@ -464,7 +464,7 @@ Return: An OAuth2Secret instance with the given value.
 
 Note: the model_validate method is used for compatibility with the pydantic API.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L181)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_secret/__init__.py#L181)
 
 ```python
 model_validate(value: dict) → OAuth2Secret
@@ -494,7 +494,7 @@ ______________________________________________________________________
 
 ### `model_validate`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_request.py#L100)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_request.py#L100)
 
 ```python
 model_validate(dct: dict) → Request
@@ -562,7 +562,7 @@ Creates a secret given the action context (which may be encrypted in memory unti
 
 Return: A Secret instance collected from the passed action context.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L87)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_secret/__init__.py#L87)
 
 ```python
 from_action_context(
@@ -585,7 +585,7 @@ Return: A Secret instance with the given value.
 
 Note: the model_validate method is used for compatibility with the pydantic API.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L69)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_secret/__init__.py#L69)
 
 ```python
 model_validate(value: str) → Secret
@@ -603,7 +603,7 @@ The secret will still have the same API as Secret (i.e., .value property which c
 
 ### `__init__`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_secret/__init__.py#L123)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_secret/__init__.py#L123)
 
 ```python
 __init__(tag: str)
@@ -626,7 +626,7 @@ It's meant to be used to represent the result of a table-like operation.
 - <b>`name`</b>: Optional name for the table (e.g., "sales_data").
 - <b>`description`</b>: Optional description (e.g., "Sales records for Q1 2024").
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L21)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_table.py#L21)
 
 ```python
 __init__(
@@ -668,7 +668,7 @@ Get a row from the table as a dictionary.
 **Returns:**
 The row at the given index as a dictionary.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L90)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_table.py#L90)
 
 ```python
 get_row_as_dict(
@@ -685,7 +685,7 @@ Iterate over the rows of the table as dictionaries.
 **Returns:**
 An iterator over the rows of the table as dictionaries.
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L59)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_table.py#L59)
 
 ```python
 iter_as_dicts() → Iterator[dict[str, str | int | float | bool | list | dict | None]]
@@ -695,7 +695,7 @@ ______________________________________________________________________
 
 ### `model_dump`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L135)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_table.py#L135)
 
 ```python
 model_dump(**kwargs)
@@ -705,7 +705,7 @@ ______________________________________________________________________
 
 ### `model_dump_json`
 
-[**Link to source**](https://github.com/sema4ai/actions/tree/master/actions/src/actions/_table.py#L142)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/_table.py#L142)
 
 ```python
 model_dump_json(**kwargs)

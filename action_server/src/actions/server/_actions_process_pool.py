@@ -73,6 +73,22 @@ def _create_server_socket(host: str, port: int):
     return server
 
 
+def _worker_python_executable(
+    runtime_descriptor: object | None,
+    env: Dict[str, str],
+    *,
+    frozen: bool,
+    source_python: str,
+) -> Optional[str]:
+    """Select RCC's artifact Python without trusting persisted path hints."""
+
+    if runtime_descriptor is not None:
+        return "python"
+    if "PYTHON_EXE" in env:
+        return env["PYTHON_EXE"]
+    return None if frozen else source_python
+
+
 def _connect_to_socket(host, port):
     """connects to a host/port"""
 
@@ -173,19 +189,18 @@ class ProcessHandle:
             # the process doesn't exit!
             env["RC_DUMP_THREADS_AFTER_RUN"] = "0"
 
-        if runtime_descriptor is not None:
-            python_exe = "python"
-        elif "PYTHON_EXE" in env:
-            python_exe = env["PYTHON_EXE"]
-        else:
-            if is_frozen():
-                log.critical(
-                    f"Unable to create process for action package: {action_package} "
-                    "(environment does not contain PYTHON_EXE)."
-                )
-                return
-
-            python_exe = sys.executable
+        python_exe = _worker_python_executable(
+            runtime_descriptor,
+            env,
+            frozen=is_frozen(),
+            source_python=sys.executable,
+        )
+        if python_exe is None:
+            log.critical(
+                f"Unable to create process for action package: {action_package} "
+                "(environment does not contain PYTHON_EXE)."
+            )
+            return
 
         # stdin/stdout is no longer an option because numpy gets halted
         # if stdin is being read while importing numpy.

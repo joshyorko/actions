@@ -22,8 +22,11 @@ contain only the version floor, never a machine/source path. The clean-wheel
 contract builds with the pinned Poetry available from RCC, installs outside
 the checkout, checks dependencies and imports the public contracts before
 testing both uninstall orders. It does not download another Poetry through
-`uv --with poetry`. Template pins remain at the published Core 1.0.1 until a
-separately authorized release and template update.
+`uv --with poetry`. The Community base (`7c982360`) still pins templates to
+published Core 1.0.1. On the selected integration candidate (`3fee2792`), all
+four existing template manifests pin published Core 1.0.2. A template pin is
+therefore revision-specific; verify the target manifests before describing a
+release's template state.
 
 Poetry merges the matching Core source into the main/dev lock entry: a
 `poetry install --only main` using this checkout lock still selects local Core.
@@ -32,12 +35,24 @@ install. Production and release compatibility must be checked by installing
 the built wheels outside the checkout. Lazy public exports appear in `dir`
 without eager import so introspection and generated docs include ActionContext.
 
-For pull-request Runtime wheel checks, the workflow builds the matching Core
-wheel and installs it into cibuildwheel's fresh test environment before Runtime
-dependency resolution. This pairing is PR-only: tag/release builds resolve the
-declared Core version from the registry and fail if it has not been published.
-Do not broaden the candidate override to release events or remove dependency
-checks. The installer accepts one identified Core wheel and prints its digest.
+For pull-request Runtime wheel checks, the workflow builds matching Core and
+HTTP Helper wheels and installs them into cibuildwheel's fresh test environment
+for candidate-pair compatibility. A separate PR-only clean venv installs the
+built Runtime cp312 wheel from the public PyPI index with pip cache disabled.
+Its pip install report must match the exact public Core 1.0.2 and Helper 1.0.3
+wheel URLs and SHA-256 hashes. Read pip's UTF-8 JSON report with an explicit
+encoding; Windows' default cp1252 decoder can reject valid UTF-8 metadata. The
+probe removes Python path overrides, then
+runs a child-interpreter preflight that rejects resolved search paths under the
+entire monorepo before `pip check` or application imports. After imports, it
+checks the loaded module origins against the same boundary before running
+`actions.server version`. Keep
+both checks: the local wheel pair exercises unreleased producer APIs, while the
+registry-floor canary proves compatibility with published dependencies and
+prints the verified public artifact URLs and hashes. This PR test workflow runs
+for `community` and `integration/**` target branches; its PyPI credential and
+upload steps remain tag-push-only. The candidate override must not apply to
+release events or bypass dependency checks.
 
 Python 3.10's `inspect.isclass` classifies a `list[...]` public alias differently
 from Python 3.12. The canonical docs task normalizes exported GenericAlias
@@ -95,10 +110,29 @@ METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
 
 Runtime's installed-wheel contract tests select a Python supporting the Runtime
-distribution and `venv`. If the host's preferred Python lacks `ensurepip`, set
-`ACTIONS_RUNTIME_TEST_PYTHON` to the actual Python from the pinned RCC developer
-environment. Record that interpreter's version in the receipt; do not install
-host tooling or falsify version discovery to make this boundary pass.
+distribution and `venv`. For RCC-based verification, set
+`ACTIONS_RUNTIME_TEST_PYTHON` to the active RCC interpreter (`sys.executable`)
+so a higher-priority host `python3.13` cannot replace the pinned toolchain's
+Python 3.12. The contract failed with the unpinned host interpreter and passed
+with RCC Python 3.12. Record that interpreter's version in the receipt; do not
+install host tooling or falsify version discovery to make this boundary pass.
+
+When running Action Server source tests from a detached checkout with a prepared
+Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
+`actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
+the imported modules' `__file__` paths point into the checkout. The Runtime
+virtualenv can contain an older installed `actions` package that otherwise
+shadows the checkout's Core source. The Action Server test fixture also
+requires the package-pinned RCC binary at
+`action_server/src/actions/server/bin/rcc-18.19.3`; its feedback setup fails if
+`get_default_rcc_location()` is missing. Use the repository's
+configured RCC bootstrap for that binary rather than treating a host-only
+pytest invocation as equivalent verification. In Chromium descendant cleanup
+tests, keep the `psutil.Process` objects obtained from the child snapshot and
+inspect each object's status directly. A separate `pid_exists(pid)` followed
+by constructing `Process(pid)` races with normal process exit; `NoSuchProcess`
+during status inspection means that captured process has exited. Preserve the
+existing test deadline and its explicit zombie handling.
 
 For packaged UI acceptance, rebuild the canonical embedded static entrypoint
 with `invoke build-frontend`, then build the frozen executable and Go wrapper.
@@ -131,6 +165,17 @@ server URL and trusted HTTPS forwarding correctly; client-supplied forwarding
 headers do not independently establish transport trust. Cookie-authenticated
 unsafe HTTP operations and every WebSocket handshake require exact Origin;
 GET/HEAD artifact navigation may omit Origin but cannot supply a foreign one.
+Real-browser probes must distinguish same-site from same-origin: Chromium sent
+the `SameSite=Strict` HttpOnly session cookie on a credentialed fetch between
+two ports on the same loopback host, while JavaScript received a CORS
+`TypeError` for the response. An explicit CORS origin therefore does not itself
+grant browser session authority. Assert cookie emission from the browser's
+outgoing request headers, then assert backend authorization separately by
+sending that same browser-minted cookie and Origin to the live Runtime from the
+test driver. Probe CORS preflight directly against that Runtime and assert its
+status; neither a browser `TypeError` nor a Playwright failed-request event
+establishes the backend response. Keep the cookie in process memory and out of
+URLs, logs, and test receipts.
 Explicit invalid/duplicate Authorization headers cannot fall back to cookies.
 Bearer CLI clients without Origin retain their existing behavior. Cookie
 authority is limited to Runtime `/api/` and run-scoped `/artifacts/` surfaces.
@@ -144,6 +189,23 @@ Sign-out and expired-session status unmount providers, clear their query cache
 and disconnect browser subscriptions. The browser rechecks on protected HTTP
 403, focus, expiry and a 15-second interval for revocation in another tab.
 
+The Actions Core tag release workflow admits exactly the version-matched
+`actions_core` universal wheel and source archive. Its Linux verify job rejects
+extra entries and symlinked artifacts, records SHA-256 digests, and uploads the
+two packages with that manifest. The publish job checks the downloaded
+inventory and verifies both digests before invoking Poetry with the configured
+Core token; Twine checks only the wheel and source archive, not the manifest.
+Core's package tests execute these inventory and copy-verification shell steps
+against valid, extra, wrong-tag, symlinked, and modified artifacts. This
+prepublication gate binds the uploaded bytes; it does not prove registry
+availability, a successful PyPI publication, or downstream consumers of the
+published distribution.
+The Core release workflow pins both jobs to `ubuntu-latest`; package tests
+execute its Bash/GNU-utility shell steps only on Linux and keep workflow
+structure and publish-safety assertions active on every platform. Do not run
+these Linux release scripts through macOS BSD utilities or a Windows `bash`
+launcher: those environments do not implement the workflow's shell contract.
+
 This is a Poetry-managed Python monorepo. Work from the affected package directory for package-local dependency resolution and tests. Use root Invoke tasks only for documented cross-package operations.
 
 - `action_server/`: CLI, FastAPI service, frontend, build and bundled RCC.
@@ -152,12 +214,27 @@ This is a Poetry-managed Python monorepo. Work from the affected package directo
 - `common/`, `build_common/`, `devutils/`: shared runtime, build, and development utilities.
 - `templates/`: generated package/workflow sources; changes require template-level regression coverage.
 
-Every template `package.yaml` pins the published `actions-core=1.0.1`.
+At Community base `7c982360`, every template `package.yaml` pins the published
+`actions-core=1.0.1`; on integration candidate `3fee2792`, all four existing
+template manifests pin published `actions-core=1.0.2`.
 The producer-consumer template additionally pins
 `actions-work-items=0.4.4`. `actions-http-helper` remains a transitive Core
 dependency, and `actions-runtime` is the server distribution rather than a
 template library. Keep the static template-manifest contract synchronized
 with these package boundaries when a published version changes.
+
+Core keeps its released `actions-http-helper` version range in main
+dependencies and points the dev group at the sibling helper source. Install the
+locked dev group before running Core tests: an older registry copy can route
+test-only localhost service calls through a sandbox proxy, while the current
+sibling source lets those tests exercise the helper implementation in this
+checkout. This override is for development and does not change Core's runtime
+dependency floor.
+
+RCC `task script` executes from the developer toolkit task root. For package
+lock checks, pass an absolute package path to pinned Poetry's `--directory`,
+and require `check --lock` after resolving a lock merge; removing conflict
+markers alone does not establish freshness against the merged manifest.
 
 The Action Server frontend uses `action_server/frontend/package.json` and its
 lock as the sole package metadata. `npm ci` is the reproducible,
@@ -376,6 +453,57 @@ changed surface. Unit coverage also proves schema and `_meta` changes affect
 the revision. These tests do not establish the other distributed-runtime
 guarantees tracked by issue #82. Do not add Canvas behavior merely to maintain
 this adapter seam.
+
+The proposed [ADR 0100 MCP App authoring contract](../adr/0100-mcp-app-authoring-contract.md)
+records evidence, not an implemented public API. On its cited source revision,
+`actions.mcp.@tool` accepts title and safety hints, while `@resource` accepts
+URI, MIME type, and size; neither decorator publicly attaches MCP Apps
+`_meta.ui.resourceUri`. Runtime tests that construct `Action.options["_meta"]`
+directly prove the internal server can preserve metadata, not that package
+authors can declare it through a supported API. Keep the public authoring
+gap distinct from the broader CanvasSpec schema and renderer work. The latest
+#100 contract permits a bounded 100-A authoring slice without waiting for
+unrelated #125 rows; verify the consumed dependency, package, template, and
+security criteria on the exact candidate. A public `meta` decorator input is
+bounded JSON: reject cycles, non-finite values, non-string keys, and excessive
+depth/size; validate supported MCP Apps URI/visibility/CSP fields while
+preserving unrelated namespaced metadata. Runtime must resolve the UI URI to an
+exact `ui://` resource with `text/html;profile=mcp-app` before atomically
+publishing the new catalog. Serve it through `resources/read`; do not require
+UI-only entries in `resources/list`. App-only visibility is host/catalog
+routing, never backend authorization.
+
+Proposed ADR 0100 leaves the JSON Schema source-of-truth recommendation with
+#100 and records a provisional thin Actions-owned React renderer plus official
+ext-apps bridge for the first fixture. Renderer reuse research is inspection,
+not a working fixture or accepted CanvasSpec grammar. Keep core MCP protocol,
+Python MCP SDK, MCP Apps wire, ext-apps package, and CanvasSpec versions as
+separate identities. A Core-source/Runtime-candidate fixture does not prove
+published-wheel compatibility. The initial metadata slice covers text and
+structured tool outputs separately; one rich result carrying complete
+`content`, `structuredContent`, and `_meta`, packaged verification, and actual
+host acceptance remain distinct open gates.
+Provider bindings for secrets, OAuth, data, artifacts, and queues use shared
+contracts identified by #71 (#129/#87/#131/#132), rather than Canvas-only
+provider semantics. This recommendation is not accepted behavior; validators,
+version rules, and cross-language round trips remain unproved. Do not add a new
+distribution or Canvas dependency to ordinary Core actions on this evidence
+alone.
+
+For a runnable protocol showcase proof, start the actual `ActionServerProcess`
+with a temporary action catalog pinned to the candidate's published
+`actions-core=1.0.2` floor and send raw, independent stateless JSON-RPC POSTs
+carrying matching `Mcp-Method` header/body values and the required protocol
+metadata.
+For named reads and calls, also send the matching `Mcp-Name` value (`uri` for
+`resources/read`). Exercise `server/discover`, the four catalogs, tool call,
+direct and templated resource reads, prompt retrieval, and a bounded safe
+application error; assert catalog metadata, request correlation, and absence
+of session headers. This proves the mounted Runtime protocol path only. It does
+not prove a community template exists, is included in the embedded bundle, or
+can be created offline; those remain separate manifest, generated-artifact,
+and CLI acceptance gates.
+
 The accepted source and integration candidate use published clean-break
 distributions; lock regeneration is authoritative through Poetry 2.1.1 against
 PyPI, with clean-install verification kept as a separate release gate.
@@ -475,6 +603,42 @@ tag-named binaries as GitHub release assets only; the Sema4AI Homebrew dispatch
 and Robocorp/Sema4AI CDN/S3 compatibility handoffs are retired. The normal
 uploader uses `overwrite: false`, so a same-name asset collision fails closed
 instead of replacing a published binary.
+The binary workflow publishes `<tag>-sha256.txt` as a fourth immutable GitHub
+release asset. Its sorted entries use the exact three binary asset names, so
+each downloaded executable can be checked with `sha256sum -c` without renaming.
+Maintain this behavior in `.github/workflows/_gen_workflows.py` and regenerate
+the workflow; generated YAML is not authoritative. The maintained Homebrew tap
+is `joshyorko/homebrew-tools`; its `action-server` cask mirrors only verified
+Linux x86_64 and macOS arm64 Runtime assets. Prepare a tap update after the
+upstream assets exist and their GitHub SHA-256 digests are verified. The tap
+README documents the `action-server-daily` auto-update slot and its manual
+`action=ci` then `action=release` workflow inputs. Do not dispatch the retired
+Sema4AI `publish.yml` workflow.
+The normal binary job creates a published release before downloading/uploading
+the assets: `Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803`
+defaults to `create_draft=false` and `update_existing=false`. It then uploads
+Linux, macOS, Windows, and the checksum manifest in order using
+`svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd`
+with `overwrite: false`.
+A failure can therefore leave a published release with only a prefix of the
+four assets. Rerunning is not a resume protocol: the release action leaves an
+existing release unchanged, and the asset uploader fails on the first
+same-name asset without deleting it. Before root decides how to continue,
+reconcile the exact tag target/source SHA and the complete four-name inventory
+against locally calculated asset digests and the manifest. Do not blindly retry,
+replace, delete, or republish assets. A SHA-256 match proves byte integrity; it
+does not prove source provenance, a publisher signature, or notarization.
+
+Check package credential availability in the actual `pypi` environment through
+an isolated non-publishing workflow with no repository permissions, checkout,
+package installation, registry authentication, or upload command. Report only
+empty/nonempty state. Nonempty does not establish authentication, token scope,
+artifact correctness, or publication. Place the package-specific secret in the
+release job's environment. If a CLI wrapper drops stdin while setting a secret,
+use native `gh` and repeat the safe check; never print or transfer the value to
+an agent. Follow the [upstream reporting procedure](upstream-reporting.md)
+before attributing a tooling failure to a dependency.
+
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
@@ -541,6 +705,12 @@ conflicting digests, and extraneous names, never clobbers, and publishes only af
 one final re-fetch proves draft state, the exact three-name inventory, every asset
 digest, and the release target/SHA against the immutable inputs; fresh and resumed
 drafts use that same finalization gate.
+This recovery contract is intentionally a three-binary path and does not generate
+or accept the normal workflow's fourth `<tag>-sha256.txt` asset. An adversarial
+draft containing that checksum asset is rejected before any recovery upload or
+publication. Do not use this legacy recovery lane to resume a partial four-asset
+normal release; first reconcile its full inventory and hashes, then have root
+choose the continuation.
 Recovery publication runs outside the nested checkouts, so every `gh release`
 command supplies the repository explicitly. Authenticated paginated release listing
 discovers drafts; final verification fetches the numeric release ID because the
@@ -588,6 +758,18 @@ be regenerated normally with repository-authoritative Poetry 2.1.1 from
 published prerequisites. Never hand-edit lock hashes or add path/direct-URL
 production dependencies. Runtime freeze inputs remain a separate post-candidate
 gate.
+
+Generated Core API source links are built from `devutils.invoke_utils.REPOSITORY_URL`;
+keep that base on the maintained `joshyorko/actions` community branch and
+regenerate package API docs through the package's configured `invoke docs`
+task. Use the package-local Actions Core environment: a shared environment can
+extend the `actions` namespace with Runtime or Work Items modules, causing
+lazydocs to emit those APIs into Core's docs. Before accepting output, verify
+`actions` resolves from the Core source tree and `actions.server` and
+`actions.work_items` are unavailable. Do not patch generated `docs/api` links
+by hand. `test_invoke_utils.py` asserts the source base so a repository-owner or
+branch regression is caught. The configured `devutils` gates in
+`developer/toolkit.py` run `pytest tests` and `ruff check src tests`.
 
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
@@ -757,6 +939,33 @@ while PostgreSQL migration startup takes a transaction-scoped advisory lock.
 Local artifact storage creates the default `artifacts_dir` on first use when
 the caller supplies `Settings` directly; an explicitly configured artifact
 storage root remains required to exist and pass containment validation.
+
+Artifact run binding publication serializes the complete manifest read, conflict
+check and atomic replacement with a persistent, contained
+`.action-server-run-bindings.json.lock` file. Unix uses `fcntl.flock`; Windows
+uses `msvcrt.locking` on byte zero, including when the lock file is empty.
+Never import `fcntl` on Windows or skip locking when it is unavailable. Do not
+unlink the lock file during normal operation: writers must share the same
+lock object. The [Windows CRT](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/locking?view=msvc-170)
+permits locks past EOF; only contention errors
+are retried, and other lock errors abort publication. This does not establish
+locking support or correctness on an arbitrary network filesystem.
+
+Run `poetry run pytest tests/action_server_tests/test_artifact_binding_lock.py
+tests/action_server_tests/test_artifact_storage.py` on each native OS. The
+unauthenticated native build matrix runs both files before constructing the
+binary; frozen and Go-wrapper consumer acceptance remains a separate gate. The
+spawned-process regressions pause one publisher inside the transaction, prove
+another cannot read until release, preserve independent updates, reject
+conflicting bindings, and check lock release after process termination.
+Serialization/replacement failure tests preserve the prior manifest, remove
+owned temporary files and permit a subsequent process to bind. Abrupt process
+termination can leave an unpublished `.bindings-*` temporary file; OS lock
+release does not perform application cleanup. A Linux pass or mocked platform
+selection does not establish native Windows or cross-host shared-filesystem
+behavior. These containment checks do not close pathname replacement races
+against a writer with authority to mutate the storage namespace.
+
 The direct two-instance/concurrent-update and concurrent-startup acceptance is
 in `action_server/tests/action_server_tests/test_database_shared.py` and
 requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.
@@ -933,8 +1142,13 @@ temporary, exact HTTPS tunnel host and origin. The scoped entries are reference
 counted and removed after verification failure or the owned manager stops;
 existing loopback or pre-existing entries remain. This does not mark the
 separate persisted `action-server expose start/status` lifecycle ready. Local
-ASGI tests prove SDK behavior and cleanup only; real provider/TLS exposure and
-native CI remain separate gates.
+ASGI tests prove SDK behavior and cleanup only. A separate loopback test runs
+the verifier over an actual TLS socket, explicitly trusts its synthetic
+self-signed localhost certificate, and confirms an untrusted certificate is
+rejected before HTTP reaches the app. This proves verified-TLS and
+authenticated-MCP probe plumbing; it does not prove provider routing, deployed
+certificate policy, public exposure, or native packaging. Those remain
+separate gates.
 
 Cloudflare quick-tunnel readers use nonblocking pipe descriptors with bounded
 4096-byte reads, a 64-entry startup queue, and a separate 512-byte overlap tail
@@ -1014,6 +1228,26 @@ or validate prebuilt frontend/binary artifacts carry the `integration_test` mark
 portable FastAPI/Starlette `TestClient` contracts require `httpx` in Action Server's
 locked development dependencies. Managed `package.yaml` fixtures use published,
 compatible Actions package versions rather than nonexistent future pins.
+The declared portable `test-not-integration` task does not recurse into
+`tests/action_server_tests/test_devenv/pack1/tests/`; Action Server's
+`norecursedirs` setting excludes that nested project fixture from discovery.
+Invoking `test_my_action.py` directly reproduces two
+`ModuleNotFoundError: my_action` failures because the fixture's `src/` is not
+on the test import path. Keep this fixture-layout issue separate from the
+declared portable-suite result and hand it to the Action Server test-layout
+owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
+the package's discovery rules.
+
+The real-browser Origin and ambient-session acceptance in
+`test_browser_origin_acceptance.py` runs Chromium against the actual Runtime
+HTTP server. Its Node HTTP requests and browser `fetch` calls have independent
+10-second deadlines, and the whole Node/Chromium process tree is bounded by a
+180-second outer deadline using the existing owned-process supervisor. A
+forced-hang regression observes Chromium alive before timeout and verifies the
+supervisor stops it. Playwright's default action timeout does not bound a
+pending `page.evaluate()` promise. A CORS `TypeError` proves only that browser
+script could not read a response: assert cookie transmission and the separate
+backend authorization status to establish those outcomes.
 
 Database migrations are complete only when an upgraded legacy database has the same
 tables, columns, and index definitions as a database freshly generated from current
@@ -1304,6 +1538,104 @@ The Dakota candidate-wheel harness records separate unauthenticated rejection,
 authenticated Action, SQLite, artifact verification, wrapper exit and process
 cleanup cells. Every cell must pass for overall acceptance. Preserve the exact
 failed wrapper status, exit code and reason even when Action execution succeeds.
+
+An RCC lifecycle `inspect` result of `ready: true` with
+`providerRequired: false` does not by itself prove a provider-free Runtime
+restart. In the bounded comparison at source
+`ef9195daa9ca8c1d3fbc7c8fc998e39602595a21`, the initial authenticated Action,
+artifact verification, RCC wrapper exit 0 and provider cleanup passed. A
+second Runtime used the same datadir, RCC home, artifact digest and provider
+origin; after the RCC cache process was reaped, a count-and-reject loopback
+probe reoccupied that origin without serving artifacts. Inspection reported
+the artifact ready. A direct pinned RCC `env acquire` without `--provider`
+then returned the exact digest with `verification.valid: true` and made no
+probe requests. The same direct command with the configured provider requested
+`/<digest>/provenance.json`, received 503 and exited with
+`artifact trust attachment verification failed`. The restarted Runtime made
+the same provenance request and failed before creating its worker. The Runtime
+adapter currently supplies its configured provider to acquire, so this is a
+provider-backed trust-carrier failure even when local materialization is ready.
+Do not treat lifecycle inspection as acquire verification or remove the
+provider/trust input to make this scenario pass without an explicit trust
+contract decision. Keep provider-free acquire, provider-backed acquire, and
+Runtime warm execution as separate evidence cells. The probe is request
+instrumentation, not an Actions-owned provider and not evidence about requests
+to other origins.
+
+The RCC adapter binds the selected provider reference to the prepared Runtime
+descriptor. Publish and acquire use that reference, and each new `env exec`
+lease receives the same `--provider` value; a ready local Artifact does not
+silently switch a configured generation to provider-free trust. The pinned RCC
+contract accepts `local`, a lowercase HTTP(S) URL, or a named provider profile
+matching `[a-z0-9][a-z0-9._-]{0,62}`. The adapter rejects URLs containing
+userinfo, query, fragment, control characters, or malformed HTTP(S) syntax
+before an RCC call or descriptor write. Use a named RCC profile when
+credentials are required; do not store a credential-bearing URL in the
+descriptor. A serialized `provider_reference: null` is an explicit
+provider-free selection. A legacy descriptor with no provider binding is
+unknown: preparation must acquire it under the current configured policy or
+replace it with a cache descriptor bound to that policy, and direct execution
+fails clearly until that context is established. The unit boundary is covered
+by `test_rcc_runtime_adapter.py`.
+
+The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
+focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
+Its authorized pinned-RCC proof did not reach the first Action: cold
+`env publish` failed while uploading object
+`sha256:e0ba46903bea70ee8260fa66083f12758d132a72df8e1861e93bbc357a16994a`
+with artifact-provider HTTP 422. Preserve the failure log
+(`83b406b775c782492ea0566e1ee7b52fc1794902e18ea698e109067d075e4b4a`) and
+NOT_REACHED receipt
+(`9dcb44df322b8e8e85e7c2366f07c9154d515d4daace714590c348a0ef092684`) at
+`worker-exit-evidence/acceptance-2c7ec2de.log` and
+`worker-exit-evidence/provider-trust-negative-preflight-2c7ec2de-correction.json`.
+At pinned RCC source `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`, the filesystem
+provider maps any object-store `PutObject` error to 422 and returns only the
+generic body `artifact provider request failed`; that status does not identify
+the underlying storage cause. A later bounded direct publish attempt with
+1,089,675,264 overlay bytes free failed earlier during environment creation
+with an explicit `No space left on device`, before contacting the provider.
+After overlay capacity was restored, the fresh proof on source
+`f4e031080749fd6a120a781f72c3f44d4b5832b8` successfully published and acquired
+the artifact. These observations do not prove the cause of the earlier 422.
+
+The immutable receipt `worker-exit-evidence/acceptance-f4e03108.json`
+(`38e01df3994631c25ea8714720cd2aab8c93578830965da0f9488ce7c639f58c`) records
+the selected-provider negative-exec cell as PASS: after a verified initial
+Action with a completed wrapper receipt (exit 0), a second `env exec` to the
+same selected provider received provenance HTTP 503, exited nonzero before the
+child side effect, and preserved the initial receipt byte-for-byte. The full
+harness remains FAIL: the separate provider-backed offline-warm attempt also
+received 503 and failed closed; its Action, artifact verification, wrapper-exit
+and zero-request cells remain failed. The run log hash is
+`472d8f4ecb8ff8bc1f568f1bcd33520a6b4e92bbca6ffc89ad858aa1da97b704`. This
+proves selected-provider continuity and fail-closed exec behavior only; it
+does not prove provider-free warm restart, zero requests, or complete #134
+acceptance. Neither the historic 422 nor the warm 503 establishes an RCC
+defect. Do not claim complete #134 acceptance from these cells or the earlier
+`ef9195da` receipt.
+
+After integrating `ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47`, the bounded
+candidate harness builds Actions Core 1.0.2 and HTTP Helper 1.0.3. On combined
+source `d9a2d11806f5d263938a82ca5e4c429f43e1d865`, the initial publish/acquire,
+authenticated Action, SQLite, artifact verification, and wrapper exit
+0 passed. The same-provider 503-before-exec negative also passed with no child
+side effect and an unchanged initial receipt. Receipt
+`worker-exit-evidence/acceptance-d9a2d118.json` has SHA-256
+`ebf4794db9ac03cc1299a0fd45c0d7e29023d5c972fb62398ab8c4bf92a26ad4`; the
+run log SHA-256 is
+`3bfa1ce1034c2361a93a9064d8de410bef5339c333a1ea522f26f129d9f8003c`. The
+overall harness remains FAIL because the separate provider-backed offline-warm
+attempt receives 503 and fails closed. Its action, artifact-verification,
+wrapper-exit, and zero-request cells remain failed; provider-free warm restart
+and full #134 acceptance are not established.
+
+The combined-source configured Runtime suite passed 742 tests with 10 skips;
+the earlier invocation interrupted at 1% is incomplete evidence only. Package
+lint and typecheck passed, and the acceptance script passed Ruff check and
+format check. The completed suite log SHA-256 is
+`97579afcf92415b920c73f6821bfc100ac50fcf34b332db74ff0c0e1ea307c3c`.
+
 Its separate CLI watchdog does not by itself prove cleanup of every descendant.
 Cleanup coverage must include an owner that exits before timeout while a
 detached child retains its output pipes: discovery only during teardown loses
@@ -1364,10 +1696,22 @@ Runtime admission binds the peeled tag commit to the triggering event commit
 and requires community ancestry; unrelated later community commits do not
 invalidate an immutable release source. PR candidate dependency wheels are
 verification-only. Publish and clean-install required dependency versions before
-dependent release tags. Check registry and native release versions separately
-before allocating a version, and never reuse a published distribution version.
-The live registry on October 8 contains Runtime 1.0.2 and Core 1.0.1; the assembled
-Runtime 1.0.3 and Core 1.0.2 are candidates until release checks and workflows pass.
+dependent release tags. Before each release decision, read current PyPI project
+metadata and the native GitHub release/assets independently; an older readiness
+report, passing workflow, or dependency publication does not establish the
+Runtime package or native release state. Never reuse a published distribution
+version. The current Runtime 1.0.3 source declares Core `^1.0.2`, HTTP Helper
+`^1.0.3`, and Work Items `^0.4.4`; the dependency floors being published does
+not mean Runtime itself has been published.
+
+The Runtime source changelog and public README must label an unpublished version
+as a candidate and keep the PyPI and native versions separate. Candidate notes
+must distinguish source changes from acceptance evidence: in particular, a
+selected-provider RCC 503 negative that fails before Action execution does not
+prove provider-backed offline-warm reuse or full issue #134 acceptance. Keep
+open browser and external native-handoff criteria visible until their specified
+evidence exists. Do not describe independent Canvas entrypoints as Canvas
+authoring or execution functionality.
 
 The HTTP helper must apply persisted `proxy-settings.no-proxy` at each request
 destination, including redirects, not merely expose it through NetworkProfile.
@@ -1393,7 +1737,10 @@ a local directory lock entry proves candidate verification, not publication.
 When merging parallel checkpoint tests, check for duplicate top-level test
 names: Python silently replaces the earlier definition, masking ownership and
 coverage. Consolidate only proven identical contracts or preserve distinct
-tests under distinct names, then run the complete combined suite and lint.
+tests under distinct names. Compare complete function bodies and parameterization
+before consolidation, and capture `pytest --collect-only -q` counts before and
+after so collection changes are explicit. Then run the complete combined suite
+and lint.
 
 Credential redaction must cover argparse-accepted long-option abbreviations
 for `--api-key`, in both separate and equals forms. HTTP header names are

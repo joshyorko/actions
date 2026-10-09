@@ -682,7 +682,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
                     "tags": [f"{RUNTIME_TAG_PREFIX}*"],
                 },
                 "pull_request": {
-                    "branches": ["community"],
+                    "branches": ["community", "integration/**"],
                     "paths": [
                         ".github/workflows/_gen_workflows.py",
                         ".github/workflows/actions_runtime_pypi_release.yml",
@@ -692,6 +692,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
                         "devutils/tests/test_runtime_release_workflows.py",
                         "docs/skills/repository-operations.md",
                         "action_server/scripts/publish_verified_runtime.py",
+                        "action_server/scripts/verify_published_runtime_floor.py",
                     ],
                 },
             }
@@ -809,6 +810,11 @@ rm src/actions/server/bin/rcc* -f
             "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-helper-wheelhouse",
         })
         steps.append(self.build_manylinux_wheels())
+        steps.append({
+            "name": "Verify Runtime wheel with published Core and Helper",
+            "if": "github.event_name == 'pull_request'",
+            "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse",
+        })
         steps.append(self.upload_artifact_manylinux_wheels())
         return steps
 
@@ -989,7 +995,12 @@ for pair in \
   test ! -L "$binary"
   test "$(find "$directory" -mindepth 1 -maxdepth 1 | wc -l)" -eq 1
 done
-sha256sum linux64/action-server macos-arm64/action-server windows64/action-server.exe | sort > runtime-binary-manifest.sha256
+tag="$GITHUB_REF_NAME"
+{
+  sha256sum linux64/action-server | sed "s#  linux64/action-server#  ${tag}-linux64#"
+  sha256sum macos-arm64/action-server | sed "s#  macos-arm64/action-server#  ${tag}-macos-arm64#"
+  sha256sum windows64/action-server.exe | sed "s#  windows64/action-server.exe#  ${tag}-windows64.exe#"
+} | sort > "${tag}-sha256.txt"
 """,
         }
 
@@ -1112,6 +1123,17 @@ sha256sum linux64/action-server macos-arm64/action-server windows64/action-serve
                             "repo_token": "${{ secrets.GITHUB_TOKEN }}",
                             "file": "./windows64/action-server.exe",
                             "asset_name": "${{ github.ref_name }}-windows64.exe",
+                            "tag": "${{ github.ref }}",
+                            "overwrite": False,
+                        },
+                    },
+                    {
+                        "name": "Upload Runtime SHA-256 manifest",
+                        "uses": "svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd",  # v2
+                        "with": {
+                            "repo_token": "${{ secrets.GITHUB_TOKEN }}",
+                            "file": "./${{ github.ref_name }}-sha256.txt",
+                            "asset_name": "${{ github.ref_name }}-sha256.txt",
                             "tag": "${{ github.ref }}",
                             "overwrite": False,
                         },

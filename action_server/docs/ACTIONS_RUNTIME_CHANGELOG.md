@@ -8,14 +8,30 @@ an Actions Runtime release.
 
 ## Unreleased
 
-### 1.0.3 candidate (not yet published)
+### 1.0.3 candidate — unpublished
 
-- Prepare integrated exact-origin and bounded Run-history repairs, refreshed
-  administration assets, bundled Work Items loading, and Core 1.0.2 API pairing.
-- Preserve strict release provenance, normalized artifact inventory and
-  publication that cannot overwrite existing distributions.
-- The candidate remains subject to assembled package, browser, security and
-  native-platform validation; it is not a statement of release acceptance.
+The source candidate includes bounded Runtime history handling, stricter
+browser-origin and authentication boundaries, safer Robot download/archive
+handling, refreshed Runtime administration assets, and current Work Items
+loading. Its worker integration requires the Core 1.0.2 API. Canvas remains an
+independent frontend entrypoint; this candidate does not claim a Canvas authoring
+or execution feature.
+
+The package dependency releases are available: Core 1.0.2, HTTP Helper 1.0.3,
+and Work Items 0.4.4. Runtime 1.0.3 itself is not published. PyPI Runtime 1.0.2
+and native Runtime 1.0.1 are separate release lines; no native 1.0.3 assets are
+available.
+
+Known acceptance gaps: issue [#134](https://github.com/joshyorko/actions/issues/134)
+remains open because the provider-backed offline-warm RCC acceptance fails
+closed on provider HTTP 503; the selected-provider 503-before-execution negative
+passes, but this does not prove warm reuse or full RCC acceptance. Issue
+[#153](https://github.com/joshyorko/actions/issues/153) still requires its
+real-browser acceptance. Actions issue
+[#211](https://github.com/joshyorko/actions/issues/211) remains open pending
+external verification of the native release handoff. The candidate has no
+Runtime release tag or published Runtime artifacts; package, browser, security,
+and native-platform release gates remain outstanding.
 
 ## 1.0.2 - 2026-09-07
 

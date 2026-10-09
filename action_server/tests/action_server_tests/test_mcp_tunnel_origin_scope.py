@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import asyncio
+import socket
+
 import pytest
 
 
@@ -152,3 +155,132 @@ async def test_live_mcp_app_uses_temporary_host_scope_and_keeps_authentication()
             )
         finally:
             release()
+
+
+@pytest.fixture
+def anyio_backend():
+    return "asyncio"
+
+
+@pytest.mark.anyio
+async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
+    tmp_path, monkeypatch
+):
+    """Exercise the verifier over TCP/TLS without contacting a tunnel provider."""
+    import httpx2
+    import uvicorn
+    from starlette.applications import Starlette
+    from starlette.authentication import (
+        AuthCredentials,
+        AuthenticationBackend,
+        SimpleUser,
+    )
+    from starlette.middleware.authentication import AuthenticationMiddleware
+    from starlette.middleware.exceptions import ExceptionMiddleware
+    from starlette.requests import Request
+    from starlette.responses import JSONResponse
+    from starlette.routing import Mount, Route
+
+    from actions.server._common.gen_certificate import gen_self_signed_certificate
+    from actions.server._server import _verify_public_tunnel
+    from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
+
+    class BearerBackend(AuthenticationBackend):
+        async def authenticate(self, connection):
+            if connection.headers.get("authorization") != "Bearer synthetic-key":
+                from starlette.exceptions import HTTPException
+
+                raise HTTPException(status_code=403)
+            return AuthCredentials([]), SimpleUser("synthetic")
+
+    tool_calls = []
+    original_call_tool = McpServerSetupHelper._call_tool
+
+    async def record_call_tool(self, ctx, params):
+        tool_calls.append(params)
+        return await original_call_tool(self, ctx, params)
+
+    monkeypatch.setattr(McpServerSetupHelper, "_call_tool", record_call_tool)
+
+    class RequestRecorder:
+        def __init__(self, app):
+            self.app = app
+            self.paths = []
+
+        async def __call__(self, scope, receive, send):
+            if scope["type"] == "http":
+                self.paths.append(scope["path"])
+            await self.app(scope, receive, send)
+
+    certificate, private_key = gen_self_signed_certificate()
+    trusted_certificate, _ = gen_self_signed_certificate()
+    certfile = tmp_path / "localhost.pem"
+    keyfile = tmp_path / "localhost-key.pem"
+    untrusted_certfile = tmp_path / "untrusted.pem"
+    certfile.write_bytes(certificate)
+    keyfile.write_bytes(private_key)
+    untrusted_certfile.write_bytes(trusted_certificate)
+
+    helper = McpServerSetupHelper()
+    mcp_app = helper.server.streamable_http_app(
+        streamable_http_path="/mcp",
+        json_response=True,
+        stateless_http=True,
+        transport_security=helper.transport_security,
+    )
+    guarded_app = ExceptionMiddleware(
+        AuthenticationMiddleware(mcp_app, backend=BearerBackend())
+    )
+    app = Starlette()
+    app.mtime_uuid = "synthetic-runtime-id"
+
+    async def config(_request: Request):
+        return JSONResponse({"auth_enabled": True, "mtime_uuid": app.mtime_uuid})
+
+    app.router.routes.extend([Route("/config", config), Mount("/", guarded_app)])
+    recorder = RequestRecorder(app)
+
+    monkeypatch.setenv("NO_PROXY", "*")
+    monkeypatch.setenv("no_proxy", "*")
+    async with mcp_app.router.lifespan_context(mcp_app):
+        listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        listener.bind(("127.0.0.1", 0))
+        listener.listen(128)
+        port = listener.getsockname()[1]
+        url = f"https://localhost:{port}"
+        release_origin = helper.allow_tunnel_origin(url)
+        config = uvicorn.Config(
+            recorder,
+            log_level="critical",
+            ssl_certfile=str(certfile),
+            ssl_keyfile=str(keyfile),
+        )
+        server = uvicorn.Server(config)
+        server_task = asyncio.create_task(server.serve(sockets=[listener]))
+        try:
+            for _ in range(500):
+                if server.started:
+                    break
+                if server_task.done():
+                    await server_task
+                await asyncio.sleep(0.01)
+            assert server.started, "loopback TLS server did not start"
+
+            monkeypatch.setenv("SSL_CERT_FILE", str(untrusted_certfile))
+            with pytest.raises(httpx2.ConnectError):
+                await _verify_public_tunnel(url, "synthetic-key", app)
+            assert recorder.paths == []
+
+            monkeypatch.setenv("SSL_CERT_FILE", str(certfile))
+            await _verify_public_tunnel(url, "synthetic-key", app)
+            assert "/config" in recorder.paths
+            assert "/mcp" in recorder.paths
+            assert tool_calls == []
+        finally:
+            release_origin()
+            server.should_exit = True
+            try:
+                await asyncio.wait_for(server_task, timeout=5)
+            finally:
+                listener.close()

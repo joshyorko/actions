@@ -11,10 +11,14 @@ def test_generic_alias_docs_match_python_310_and_312_renderings(tmp_path, monkey
     module.__all__ = ["Row"]
     module.Row = list[str]
     monkeypatch.setitem(sys.modules, "alias_fixture", module)
-    canonical = "# Module alias_fixture\n\n# Variables\n\n- **Row**\n- **RowValue**\n\n# Class `Table`\n\nA real class.\n"
+    canonical = (
+        "# Module alias_fixture\n\n# Variables\n\n- **Row**\n- **RowValue**\n\n"
+        "# Class `Table`\n\nA real class.\n"
+    )
     old = (
         canonical.replace("- **Row**\n", "")
-        + "\n# Class `list`\n\nBuilt-in mutable sequence.\n\nIf no argument is given, the constructor creates a new empty list.\n"
+        + "\n# Class `list`\n\nBuilt-in mutable sequence.\n\n"
+        "If no argument is given, the constructor creates a new empty list.\n"
     )
     module_file = tmp_path / "alias_fixture.md"
     overview_file = tmp_path / "README.md"

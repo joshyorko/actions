@@ -226,8 +226,12 @@ jobs:
         \ \"macos-arm64/action-server macos-arm64\"   \"windows64/action-server.exe\
         \ windows64\"; do\n  set -- $pair\n  binary=$1\n  directory=$2\n  test -f\
         \ \"$binary\"\n  test ! -L \"$binary\"\n  test \"$(find \"$directory\" -mindepth\
-        \ 1 -maxdepth 1 | wc -l)\" -eq 1\ndone\nsha256sum linux64/action-server macos-arm64/action-server\
-        \ windows64/action-server.exe | sort > runtime-binary-manifest.sha256\n"
+        \ 1 -maxdepth 1 | wc -l)\" -eq 1\ndone\ntag=\"$GITHUB_REF_NAME\"\n{\n  sha256sum\
+        \ linux64/action-server | sed \"s#  linux64/action-server#  ${tag}-linux64#\"\
+        \n  sha256sum macos-arm64/action-server | sed \"s#  macos-arm64/action-server#\
+        \  ${tag}-macos-arm64#\"\n  sha256sum windows64/action-server.exe | sed \"\
+        s#  windows64/action-server.exe#  ${tag}-windows64.exe#\"\n} | sort > \"${tag}-sha256.txt\"\
+        \n"
     - name: Upload Linux binary
       uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd
       with:
@@ -250,6 +254,14 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ./windows64/action-server.exe
         asset_name: ${{ github.ref_name }}-windows64.exe
+        tag: ${{ github.ref }}
+        overwrite: false
+    - name: Upload Runtime SHA-256 manifest
+      uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./${{ github.ref_name }}-sha256.txt
+        asset_name: ${{ github.ref_name }}-sha256.txt
         tag: ${{ github.ref }}
         overwrite: false
 
