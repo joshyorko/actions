@@ -173,6 +173,12 @@ _BROWSER_SCRIPT = textwrap.dedent(
             assert.ok(requests.slice(before).some((item) => item.method === "GET" && item.path === path && item.headers.origin === origin));
             const getStatus = await runtimeRequest({ method: "GET", origin, cookie: cookieHeader });
             assert.equal(getStatus, 403);
+            const postStatus = await runtimeRequest({
+                method: "POST",
+                origin,
+                cookie: cookieHeader,
+            });
+            assert.equal(postStatus, 403);
 
             const postStart = requests.length;
             const post = await fetchFromOrigin(origin, "POST", path);
@@ -240,6 +246,12 @@ _BROWSER_SCRIPT = textwrap.dedent(
             cookie: cookieHeader,
             path: input.probe_paths.backend,
         });
+        const nullPostStatus = await runtimeRequest({
+            method: "POST",
+            origin: "null",
+            cookie: cookieHeader,
+            path: input.probe_paths.backend,
+        });
         const nullPreflightStatus = await runtimeRequest({
             method: "OPTIONS",
             origin: "null",
@@ -247,6 +259,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
             path: input.probe_paths.backend,
         });
         assert.equal(nullGetStatus, 403);
+        assert.equal(nullPostStatus, 403);
         assert.equal(nullPreflightStatus, 400);
 
         phase = "no_secret_in_browser_urls_or_diagnostics";
@@ -268,7 +281,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
             matrix: {
                 allowed_origin: { browser_cookie: true, get: allowedGetStatus, preflight: allowedPreflightStatus, post: allowedPostStatus, script_read: "CORS-blocked" },
                 denied_origins: input.denied_origins.length,
-                null_origin: { get: nullGetStatus, preflight: nullPreflightStatus, post_sent: false },
+                null_origin: { get: nullGetStatus, preflight: nullPreflightStatus, post: nullPostStatus },
                 auth_without_session: missingAuth,
                 wrong_bearer_with_session_cookie: wrongBearer,
             },
