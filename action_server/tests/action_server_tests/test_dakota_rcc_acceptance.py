@@ -154,7 +154,8 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
     assert live_receipt["cells"]["offline_warm_artifact_verification"] == "PASS"
     assert live_receipt["cells"]["offline_warm_wrapper_exit"] == "PASS"
     assert live_receipt["cells"]["provider_unavailable"] == "PASS"
-    assert live_receipt["cells"]["zero_requests_to_retired_provider_origin"] == "PASS"
+    assert live_receipt["cells"]["zero_requests_during_warm_runtime"] == "PASS"
+    assert live_receipt["offline_warm"]["lifecycle_inspect_request_events"] == []
     assert live_receipt["cells"]["warm_process_cleanup"] == "PASS"
     expected_returncode = 0 if live_receipt["acceptance_status"] == "PASS" else 1
     assert result.returncode == expected_returncode, (
@@ -363,6 +364,39 @@ def test_unavailable_provider_probe_counts_and_rejects_attempted_requests():
         assert harness.classify_zero_provider_requests(True) == "FAIL"
     finally:
         probe.close()
+
+
+def test_acquire_diagnostic_uses_machine_result_and_optional_provider(
+    monkeypatch,
+):
+    harness = _harness()
+    digest = "sha256:" + "a" * 64
+    commands = []
+
+    def run(command, **_kwargs):
+        commands.append(command)
+        return subprocess.CompletedProcess(
+            command,
+            0,
+            json.dumps({"artifact": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    monkeypatch.setattr(harness, "run_owned_process", run)
+    result = harness.run_acquire_diagnostic(
+        "/opt/rcc",
+        digest,
+        provider=None,
+        env={},
+        deadline=harness.Deadline.after(5),
+        replacements={},
+    )
+
+    assert result["exit_code"] == 0
+    assert result["exact_digest"] is True
+    assert result["verification_valid"] is True
+    assert "--provider" not in commands[0]
+    assert "--permissive-local" in commands[0]
 
 
 def test_runtime_tree_refresh_precedes_stop_even_when_stop_fails(monkeypatch):

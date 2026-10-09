@@ -867,6 +867,13 @@ class UnavailableProviderProbe:
         with self._count_lock:
             return list(self._requests)
 
+    def reset_requests(self) -> list[dict[str, object]]:
+        with self._count_lock:
+            previous = list(self._requests)
+            self._requests.clear()
+            self._count = 0
+            return previous
+
     def close(self, timeout_seconds: float = CLEANUP_GRACE_SECONDS) -> None:
         self._server.shutdown()
         self._server.server_close()
@@ -1012,6 +1019,65 @@ def classify_zero_provider_requests(request_count: object) -> str:
         and request_count == 0
         else "FAIL"
     )
+
+
+def sanitize_diagnostic_output(output: str, *, replacements: dict[str, str]) -> str:
+    for original, replacement in replacements.items():
+        if original:
+            output = output.replace(original, replacement)
+    return output[-4000:]
+
+
+def run_acquire_diagnostic(
+    rcc_binary: str,
+    digest: str,
+    *,
+    provider: str | None,
+    env: dict[str, str],
+    deadline: Deadline,
+    replacements: dict[str, str],
+) -> dict[str, object]:
+    command = [
+        rcc_binary,
+        "env",
+        "acquire",
+        "--artifact",
+        digest,
+        "--json",
+        "--permissive-local",
+    ]
+    if provider:
+        command.extend(["--provider", provider])
+    result = run_owned_process(
+        command,
+        timeout_seconds=deadline.remaining(cap=30),
+        env=env,
+    )
+    payload = None
+    exact_digest = None
+    verification_valid = None
+    if result.stdout.strip():
+        try:
+            payload = json.loads(result.stdout)
+        except json.JSONDecodeError:
+            payload = None
+    if isinstance(payload, dict):
+        try:
+            from actions.server._rcc_runtime_adapter import parse_artifact_digest
+
+            exact_digest = parse_artifact_digest(payload) == digest
+        except Exception:
+            exact_digest = False
+        verification = payload.get("verification")
+        if isinstance(verification, dict):
+            verification_valid = verification.get("valid") is True
+    return {
+        "exit_code": result.returncode,
+        "exact_digest": exact_digest,
+        "verification_valid": verification_valid,
+        "stdout": sanitize_diagnostic_output(result.stdout, replacements=replacements),
+        "stderr": sanitize_diagnostic_output(result.stderr, replacements=replacements),
+    }
 
 
 def _verify_rcc(
@@ -1280,6 +1346,13 @@ dependencies:
         digest = runtime["artifact_digest"]
         if not digest.startswith("sha256:"):
             raise AssertionError("Runtime did not persist the RCC Artifact digest")
+        initial_receipts = sorted((datadir / "rcc-receipts").glob("*.json"))
+        if not initial_receipts:
+            raise AssertionError("Runtime produced no initial RCC process receipt")
+        initial_receipt_path = initial_receipts[-1]
+        rcc_receipt = read_receipt(initial_receipt_path, digest)
+        if not rcc_receipt.get("leaseId"):
+            raise AssertionError("initial RCC receipt has no process lease identity")
 
         # Reuse the exact provider origin after its owner has exited. The probe
         # only counts and rejects traffic; it cannot satisfy an artifact fetch.
@@ -1304,6 +1377,12 @@ dependencies:
         provider_probe_stopped = False
         lifecycle = None
         warm_failure_class = None
+        provider_acquire_diagnostic = None
+        provider_acquire_requests = []
+        local_acquire_diagnostic = None
+        local_acquire_requests = []
+        lifecycle_requests = []
+        warm_provider_requests = []
         try:
             offline_env = dict(runtime_env)
             offline_env["ACTIONS_RUNTIME_RCC_PROVIDER"] = provider_probe.url
@@ -1334,10 +1413,44 @@ dependencies:
             lifecycle = json.loads(inspect.stdout)
             if lifecycle.get("ready") is not True:
                 raise AssertionError("local RCC artifact is not ready before warm run")
+            lifecycle_requests = provider_probe.reset_requests()
+
+            diagnostic_replacements = {
+                str(root): "<acceptance-root>",
+                str(runtime_root): "<runtime-root>",
+                str(runtime_root / "rcc-home"): "<rcc-home>",
+                provider_probe.url: "<provider-origin>",
+                tool_home: "<tool-home>",
+            }
+            provider_acquire_diagnostic = run_acquire_diagnostic(
+                rcc_binary,
+                digest,
+                provider=provider_probe.url,
+                env=rcc_env,
+                deadline=deadline,
+                replacements=diagnostic_replacements,
+            )
+            provider_acquire_requests = provider_probe.reset_requests()
+            local_acquire_diagnostic = run_acquire_diagnostic(
+                rcc_binary,
+                digest,
+                provider=None,
+                env=rcc_env,
+                deadline=deadline,
+                replacements=diagnostic_replacements,
+            )
+            local_acquire_requests = provider_probe.reset_requests()
+            if (
+                local_acquire_diagnostic["exit_code"] != 0
+                or local_acquire_diagnostic["exact_digest"] is not True
+                or local_acquire_diagnostic["verification_valid"] is not True
+            ):
+                raise AssertionError(
+                    "provider-free RCC acquire did not verify the exact artifact"
+                )
 
             previous_receipts = {
-                path.resolve()
-                for path in (datadir / "rcc-receipts").glob("*.json")
+                path.resolve() for path in (datadir / "rcc-receipts").glob("*.json")
             }
             warm_server = ActionServerProcess(datadir)
             warm_server.start(
@@ -1393,7 +1506,9 @@ dependencies:
                     if warm_server is not None:
                         if warm_server_handle is None:
                             warm_server_handle = getattr(warm_server, "_process", None)
-                            warm_server_popen = getattr(warm_server_handle, "_proc", None)
+                            warm_server_popen = getattr(
+                                warm_server_handle, "_proc", None
+                            )
                         stop_runtime_server(
                             warm_server, warm_server_popen, warm_server_tree
                         )
@@ -1414,6 +1529,7 @@ dependencies:
             finally:
                 provider_probe.close()
                 provider_probe_stopped = True
+        warm_provider_requests = provider_probe.requests
 
         if warm_failure_class is not None:
             with load_db(db_path) as db:
@@ -1423,8 +1539,6 @@ dependencies:
                     )
                     package = db.all(ActionPackage)[0]
                     runtime = json.loads(package.env_json)["runtime"]
-            receipts = sorted((datadir / "rcc-receipts").glob("*.json"))
-            rcc_receipt = read_receipt(receipts[-1], digest) if receipts else {}
             cells = {
                 "unauthenticated_rejection": "PASS"
                 if unauthenticated.status_code in (401, 403)
@@ -1440,7 +1554,7 @@ dependencies:
                 else "FAIL",
                 "wrapper_exit": classify_wrapper_exit(rcc_receipt),
                 "process_cleanup": "PASS"
-                if server_reaped and provider_reaped and receipts
+                if server_reaped and provider_reaped and initial_receipts
                 else "FAIL",
                 "offline_warm_artifact_ready": "PASS"
                 if isinstance(lifecycle, dict) and lifecycle.get("ready") is True
@@ -1449,8 +1563,8 @@ dependencies:
                 "offline_warm_artifact_verification": "FAIL",
                 "offline_warm_wrapper_exit": "FAIL",
                 "provider_unavailable": "PASS" if provider_reaped else "FAIL",
-                "zero_requests_to_retired_provider_origin": (
-                    classify_zero_provider_requests(provider_probe.request_count)
+                "zero_requests_during_warm_runtime": (
+                    classify_zero_provider_requests(len(warm_provider_requests))
                 ),
                 "warm_process_cleanup": "PASS"
                 if warm_server_reaped and provider_probe_stopped
@@ -1471,7 +1585,9 @@ dependencies:
                 "server_integration": candidate_result["server_integration"],
                 "artifact_digest": digest,
                 "run_id": run_id,
-                "sqlite_status": "passed" if cells["sqlite_run"] == "PASS" else "failed",
+                "sqlite_status": "passed"
+                if cells["sqlite_run"] == "PASS"
+                else "failed",
                 "unauthenticated_http_status": unauthenticated.status_code,
                 "authenticated_http_status": response.status_code,
                 "provider": "rcc-cache-serve-loopback",
@@ -1487,6 +1603,13 @@ dependencies:
                     "provider_probe_role": "count-and-reject-only; serves no artifacts",
                     "provider_probe_requests": provider_probe.request_count,
                     "provider_probe_request_events": provider_probe.requests,
+                    "lifecycle_inspect_request_events": lifecycle_requests,
+                    "provider_acquire": provider_acquire_diagnostic,
+                    "provider_acquire_request_events": provider_acquire_requests,
+                    "provider_free_acquire": local_acquire_diagnostic,
+                    "provider_free_acquire_request_events": local_acquire_requests,
+                    "warm_runtime_request_events": warm_provider_requests,
+                    "warm_runtime_provider_requests": len(warm_provider_requests),
                     "artifact_lifecycle_inspect": lifecycle,
                     "failure_class": warm_failure_class,
                     "run_id": warm_run_id or None,
@@ -1538,11 +1661,6 @@ dependencies:
         if not digest.startswith("sha256:"):
             raise AssertionError("Runtime did not persist the RCC Artifact digest")
         receipts = sorted((datadir / "rcc-receipts").glob("*.json"))
-        if not receipts:
-            raise AssertionError("Runtime produced no RCC process receipt")
-        rcc_receipt = read_receipt(receipts[-1], digest)
-        if not rcc_receipt.get("leaseId"):
-            raise AssertionError("RCC receipt has no process lease identity")
         cells = {
             "unauthenticated_rejection": "PASS"
             if unauthenticated.status_code in (401, 403)
@@ -1575,8 +1693,8 @@ dependencies:
             else "FAIL",
             "offline_warm_wrapper_exit": classify_wrapper_exit(warm_receipt),
             "provider_unavailable": "PASS" if provider_reaped else "FAIL",
-            "zero_requests_to_retired_provider_origin": classify_zero_provider_requests(
-                provider_probe.request_count
+            "zero_requests_during_warm_runtime": classify_zero_provider_requests(
+                len(warm_provider_requests)
             ),
             "warm_process_cleanup": "PASS"
             if warm_server_reaped and provider_probe_stopped
@@ -1609,6 +1727,13 @@ dependencies:
                 "provider_probe_role": "count-and-reject-only; serves no artifacts",
                 "provider_probe_requests": provider_probe.request_count,
                 "provider_probe_request_events": provider_probe.requests,
+                "lifecycle_inspect_request_events": lifecycle_requests,
+                "provider_acquire": provider_acquire_diagnostic,
+                "provider_acquire_request_events": provider_acquire_requests,
+                "provider_free_acquire": local_acquire_diagnostic,
+                "provider_free_acquire_request_events": local_acquire_requests,
+                "warm_runtime_request_events": warm_provider_requests,
+                "warm_runtime_provider_requests": len(warm_provider_requests),
                 "artifact_lifecycle_inspect": lifecycle,
                 "run_id": warm_run_id,
                 "runtime_process_exit_code": warm_server_exit_code,
