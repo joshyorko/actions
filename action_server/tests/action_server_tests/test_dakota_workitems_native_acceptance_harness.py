@@ -6,7 +6,10 @@ import copy
 import importlib.util
 import json
 import os
+import subprocess
 import sys
+import textwrap
+import time
 from pathlib import Path
 
 import pytest
@@ -192,6 +195,111 @@ def test_acceptance_claims_are_not_presented_as_build_provenance():
     )
     assert "source_sha" not in receipt
     assert "build_output" not in receipt
+
+
+def test_abrupt_process_termination_invalidates_previous_pass(tmp_path: Path):
+    """A killed in-flight runner cannot leave yesterday's PASS at the receipt path."""
+    frozen = tmp_path / "frozen"
+    wrapper = tmp_path / "wrapper"
+    frozen.write_bytes(b"frozen artifact")
+    wrapper.write_bytes(b"wrapper artifact")
+    rcc_home = tmp_path / "rcc"
+    wheel = rcc_home / "wheels" / "actions_core-1.0.2-py3-none-any.whl"
+    wheel.parent.mkdir(parents=True)
+    wheel.write_bytes(b"wheel artifact")
+
+    receipt_path = tmp_path / "receipt.json"
+    receipt_path.write_text(
+        json.dumps(
+            {"schema_version": 2, "attempt_id": "old-attempt", "status": "PASS"}
+        ),
+        encoding="utf-8",
+    )
+    pytest_entered = tmp_path / "pytest-entered"
+    child = tmp_path / "runner_child.py"
+    child.write_text(
+        textwrap.dedent(
+            """
+            import importlib.util
+            import os
+            import sys
+            import threading
+            from pathlib import Path
+
+            runner_path = Path(os.environ["RUNNER_PATH"])
+            spec = importlib.util.spec_from_file_location("acceptance_runner", runner_path)
+            runner = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(runner)
+            sys.argv = [
+                "acceptance",
+                "--frozen", os.environ["FROZEN"],
+                "--go-wrapper", os.environ["WRAPPER"],
+                "--rcc-home", os.environ["RCC_HOME"],
+                "--receipt", os.environ["RECEIPT"],
+                "--source-sha", "a" * 40,
+                "--build-version", "test",
+            ]
+
+            class BlockingPytest:
+                def main(self, args, plugins):
+                    Path(os.environ["PYTEST_ENTERED"]).write_text("entered", encoding="utf-8")
+                    threading.Event().wait()
+
+            sys.modules["pytest"] = BlockingPytest()
+            runner.main()
+            """
+        ),
+        encoding="utf-8",
+    )
+    child_env = os.environ.copy()
+    child_env.update(
+        {
+            "RUNNER_PATH": str(RUNNER_PATH),
+            "FROZEN": str(frozen),
+            "WRAPPER": str(wrapper),
+            "RCC_HOME": str(rcc_home),
+            "RECEIPT": str(receipt_path),
+            "PYTEST_ENTERED": str(pytest_entered),
+        }
+    )
+    process = subprocess.Popen(
+        [sys.executable, str(child)],
+        cwd=tmp_path,
+        env=child_env,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    try:
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline and not pytest_entered.exists():
+            if process.poll() is not None:
+                pytest.fail(
+                    "acceptance runner exited before entering the blocking pytest shim"
+                )
+            time.sleep(0.02)
+        assert (
+            pytest_entered.is_file()
+        ), "runner did not reach the controlled pytest block"
+
+        in_progress = json.loads(receipt_path.read_text(encoding="utf-8"))
+        assert in_progress["status"] == "IN_PROGRESS"
+        assert in_progress["attempt_id"] != "old-attempt"
+
+        process.terminate()
+        process.wait(timeout=5)
+    finally:
+        if process.poll() is None:
+            process.terminate()
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait(timeout=5)
+
+    interrupted_receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    assert interrupted_receipt["status"] == "IN_PROGRESS"
+    assert interrupted_receipt["attempt_id"] != "old-attempt"
+    assert "pytest_output" not in interrupted_receipt
 
 
 @pytest.mark.parametrize("final_check", ["unchanged", "changed", "interrupted"])

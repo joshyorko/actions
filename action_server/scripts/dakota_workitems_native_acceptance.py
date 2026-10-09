@@ -9,6 +9,7 @@ import os
 import platform
 import re
 import tempfile
+import uuid
 from collections import defaultdict
 from contextlib import contextmanager
 from pathlib import Path
@@ -207,6 +208,7 @@ def finalize_success(
 def initial_receipt(source_sha_claim: str, build_version_claim: str) -> dict:
     return {
         "schema_version": 2,
+        "attempt_id": str(uuid.uuid4()),
         "source_sha_claim": source_sha_claim,
         "build_version_claim": build_version_claim,
         "build_claim_verification": "caller supplied; not verified against a retained build manifest",
@@ -272,6 +274,13 @@ def main() -> int:
 
     return_code = 1
     try:
+        # Remove earlier success before publishing this attempt. If this process
+        # is terminated during the atomic write or later work, it cannot leave a
+        # stale PASS at the receipt path.
+        args.receipt.parent.mkdir(parents=True, exist_ok=True)
+        args.receipt.unlink(missing_ok=True)
+        _write_receipt(args.receipt, receipt)
+
         if not core_wheel.is_file():
             raise AcceptanceFailure("actions_core_1_0_2_task_local_wheel_missing")
         wheel_hash = sha256(core_wheel)
@@ -293,7 +302,6 @@ def main() -> int:
                 }
             )
 
-        args.receipt.parent.mkdir(parents=True, exist_ok=True)
         args.rcc_home.mkdir(parents=True, exist_ok=True)
         os.environ["PYTEST_ADDOPTS"] = ""
         os.environ["DAKOTA_WORKITEMS_RCC_HOME"] = str(args.rcc_home.resolve())

@@ -140,11 +140,14 @@ after Runtime restart. The seeded reservation does not simulate a process crash.
 The runner requires exactly both pytest cases to pass setup, call and teardown,
 plus one fresh atomic proof per executable in an invocation-specific directory.
 Proofs bind the runtime kind, executable SHA256 and task-local Core wheel SHA256;
-the runner rechecks artifacts before admitting success. Failed or interrupted
-final checks invalidate every case and remove success readbacks from the receipt.
-Source SHA and build version arguments are caller claims, not verified build
-provenance. Retained Linux artifacts do not establish current-source builds or
-Windows/macOS, distributed, service-backend or full browser acceptance.
+the runner rechecks artifacts before admitting success. Each attempt removes
+any prior receipt, then atomically writes a fresh `IN_PROGRESS` receipt and
+attempt ID before artifact checks or pytest. Ordinary failures write `FAIL` and
+mark cases `NOT_VERIFIED`; abrupt termination can leave `IN_PROGRESS`, which is
+not a passing result. Source SHA and build version arguments are caller claims,
+not verified build provenance. Retained Linux artifacts do not establish
+current-source builds or Windows/macOS, distributed, service-backend or full
+browser acceptance.
 The credential-free native workflow runs process ownership, management/browser
 and history acceptance; it does not invoke this packaged-worker consumer gate.
 Its success therefore does not establish consumer lifecycle acceptance on that
