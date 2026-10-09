@@ -394,6 +394,8 @@ def _sanitized_robot_name(value: Optional[str]) -> str:
 def _publish_robot_package(
     package_dir: Path, robot_name: Optional[str], extracted_name: Optional[str]
 ) -> tuple[str, Path]:
+    from actions.server._directory_publication import rename_directory_no_replace
+
     robots_root = ROBOTS_DIR.resolve()
     base_name = _sanitized_robot_name(robot_name or extracted_name)
 
@@ -419,7 +421,7 @@ def _publish_robot_package(
             _validate_staged_tree(temporary_target)
             if os.path.lexists(target_dir):
                 raise FileExistsError(target_dir)
-            os.replace(temporary_target, target_dir)
+            rename_directory_no_replace(temporary_target, target_dir)
             return final_name, target_dir
         except FileExistsError:
             if not os.path.lexists(target_dir):

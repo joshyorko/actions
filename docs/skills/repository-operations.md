@@ -1282,10 +1282,20 @@ only after allocation succeeds. An initial name collision is not permission to
 delete the existing entry. The regression seeds a foreign sentinel at the allocation
 boundary and proves it survives; interrupted copies still clean their owned staging.
 This initial ownership flag does not establish identity after another actor replaces
-the entry. `resolve`, `lexists` and an atomic replacing rename also do not prove
-root identity or atomic no-overwrite publication. Retain those acceptance gaps until
-trusted-parent admission, protected source/staging, exclusive publication and cleanup
-have native filesystem proof. The reproduced replacement races require authority to
+the entry. Robot directory publication uses native no-replace rename: Linux
+`renameat2(RENAME_NOREPLACE)`, macOS `renameatx_np(RENAME_EXCL)`, and Windows
+`os.rename` without replacement. Unsupported platforms, missing native symbols,
+unsupported filesystems and cross-device moves fail without a copying or replacing
+fallback. The unauthenticated build matrix runs the Robot API and directory
+publication tests on Linux, Windows and macOS before building the binaries.
+Record each platform's result; workflow wiring alone does not establish a pass.
+Run the package's complete lint and typecheck commands alongside these focused
+tests. A green Robot selection does not cover formatter/import checks in other
+test modules or annotations inside a callback that mutates a captured collection.
+These checks cover complete-directory publication and preservation of existing
+destinations. They do not prove root/source identity or permission admission.
+Retain trusted-parent, protected staging and cleanup identity gaps until their
+own native filesystem proofs pass. The reproduced replacement races require authority to
 mutate the publication namespace; no archive-only remote exploit was demonstrated,
 and this boundary does not promise a sandbox against arbitrary Runtime-UID compromise.
 
