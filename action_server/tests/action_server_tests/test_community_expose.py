@@ -1,23 +1,43 @@
 import asyncio
 import subprocess
 import sys
+import threading
+import time
 from types import SimpleNamespace
 
 import pytest
 
 from actions.server._community_expose import (
     BaseTunnelProvider,
+    CloudflareProvider,
+    LocalhostRunProvider,
     TunnelInfo,
     TunnelManager,
     TunnelProvider,
-    CloudflareProvider,
-    LocalhostRunProvider,
     _stop_process,
 )
 from actions.server._server import (
     _community_expose_lifespan,
     _start_community_expose_impl,
 )
+
+
+def _scripted_pipe_reads(monkeypatch, process):
+    """Control chunk boundaries; real subprocess tests cover native pipe IO."""
+    import os
+
+    streams = {}
+    for stream in (process.stdout, process.stderr):
+        if stream is not None:
+            descriptor = id(stream)
+            streams[descriptor] = stream
+            monkeypatch.setattr(
+                stream, "fileno", lambda value=descriptor: value, raising=False
+            )
+    operations = SimpleNamespace(**vars(os))
+    operations.set_blocking = lambda descriptor, blocking: None
+    operations.read = lambda descriptor, size: streams[descriptor].read1(size)
+    monkeypatch.setattr("actions.server._community_expose.os", operations)
 
 
 class _FakeProvider(BaseTunnelProvider):
@@ -285,9 +305,66 @@ def test_cloudflare_pipe_reader_does_not_depend_on_select(monkeypatch):
         lambda *_args, **_kwargs: (_ for _ in ()).throw(OSError("Windows pipe")),
     )
 
-    result = asyncio.run(CloudflareProvider()._wait_for_url(Process(), timeout=0.2))
+    process = Process()
+    _scripted_pipe_reads(monkeypatch, process)
+    result = asyncio.run(CloudflareProvider()._wait_for_url(process, timeout=0.2))
 
     assert result == "https://sample.trycloudflare.com"
+
+
+def test_cloudflare_does_not_join_url_fragments_from_different_streams(monkeypatch):
+    import queue
+    import threading
+
+    stdout_queued = threading.Event()
+
+    class OrderedQueue(queue.Queue):
+        def put(self, item, *args, **kwargs):
+            result = super().put(item, *args, **kwargs)
+            if item[0] == "stdout" and item[1] is not None:
+                stdout_queued.set()
+            return result
+
+    class Stream:
+        def __init__(self, chunks, *, wait_for_stdout=False):
+            self.chunks = iter(chunks)
+            self.wait_for_stdout = wait_for_stdout
+
+        def read1(self, _size):
+            if self.wait_for_stdout:
+                stdout_queued.wait()
+            return next(self.chunks, b"")
+
+        def close(self):
+            pass
+
+    class Process:
+        stdout = Stream([b"https://synthetic.trycloudflare."])
+        stderr = Stream([b"com"], wait_for_stdout=True)
+
+        def poll(self):
+            return 0
+
+    monkeypatch.setattr("actions.server._community_expose.queue.Queue", OrderedQueue)
+    process = Process()
+    _scripted_pipe_reads(monkeypatch, process)
+    with pytest.raises(RuntimeError, match="before a public URL"):
+        asyncio.run(CloudflareProvider()._wait_for_url(process, timeout=0.5))
+
+
+@pytest.mark.parametrize("stream_name", ["stdout", "stderr"])
+def test_cloudflare_joins_url_fragments_within_one_stream(monkeypatch, stream_name):
+    chunks = iter([b"https://split.trycloudflare.", b"com"])
+    stream = SimpleNamespace(read1=lambda _size: next(chunks, b""), close=lambda: None)
+    process = SimpleNamespace(stdout=None, stderr=None, poll=lambda: 0)
+    setattr(process, stream_name, stream)
+    _scripted_pipe_reads(monkeypatch, process)
+    try:
+        assert asyncio.run(CloudflareProvider()._wait_for_url(process, timeout=1)) == (
+            "https://split.trycloudflare.com"
+        )
+    finally:
+        _stop_process(process)
 
 
 def test_cloudflare_reader_timeout_reaps_process_and_unblocks_pipes(monkeypatch):
@@ -299,8 +376,7 @@ def test_cloudflare_reader_timeout_reaps_process_and_unblocks_pipes(monkeypatch)
             self.release = threading.Event()
 
         def read1(self, _size):
-            self.release.wait()
-            return b""
+            raise BlockingIOError
 
         def close(self):
             self.closed = True
@@ -324,6 +400,7 @@ def test_cloudflare_reader_timeout_reaps_process_and_unblocks_pipes(monkeypatch)
             return 0
 
     process = Process()
+    _scripted_pipe_reads(monkeypatch, process)
     monkeypatch.setattr(
         "actions.server._community_expose.subprocess.Popen",
         lambda *_args, **_kwargs: process,
@@ -365,6 +442,298 @@ def test_cloudflare_reader_is_async_and_cancellable_with_newline_free_output():
         assert all(not thread.is_alive() for thread in process._cloudflared_readers)
 
     asyncio.run(exercise_reader())
+
+
+def test_cloudflare_cancellation_runs_while_output_queue_is_always_full(monkeypatch):
+    import queue
+    import threading
+
+    queue_full = threading.Event()
+
+    class AlwaysFullQueue:
+        def __init__(self, maxsize):
+            assert maxsize == 64
+
+        def get_nowait(self):
+            return "stdout", b"x" * 4096
+
+        def put(self, *_args, **_kwargs):
+            queue_full.set()
+            raise queue.Full
+
+    class Stream:
+        closed = False
+
+        def read1(self, _size):
+            return b"x" * 4096
+
+        def close(self):
+            self.closed = True
+
+    class Process:
+        def __init__(self):
+            self.stdout = Stream()
+            self.stderr = None
+            self.running = True
+
+        def poll(self):
+            return None if self.running else 0
+
+        def terminate(self):
+            self.running = False
+
+        def wait(self, timeout):
+            return 0
+
+    process = Process()
+    _scripted_pipe_reads(monkeypatch, process)
+    monkeypatch.setattr("actions.server._community_expose.queue.Queue", AlwaysFullQueue)
+
+    async def exercise_cancellation():
+        waiter = asyncio.create_task(
+            CloudflareProvider()._wait_for_url(process, timeout=10)
+        )
+        assert await asyncio.to_thread(queue_full.wait, 1)
+        waiter.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await waiter
+        assert not process.running
+        assert all(not reader.is_alive() for reader in process._cloudflared_readers)
+
+    asyncio.run(exercise_cancellation())
+
+
+def test_cloudflare_waiter_does_not_kill_inherited_pipe_writer(tmp_path):
+    ready = tmp_path / "ready"
+    release = tmp_path / "release"
+    marker = tmp_path / "finished"
+    helper = (
+        "import pathlib,sys,time; "
+        "root=pathlib.Path(sys.argv[1]); (root/'ready').touch(); "
+        "deadline=time.monotonic()+5; "
+        "exec('while not (root/\"release\").exists() and time.monotonic()<deadline: time.sleep(.01)'); "
+        "(root/'finished').touch()"
+    )
+    owner = (
+        "import subprocess,sys; "
+        "subprocess.Popen([sys.executable, '-c', sys.argv[2], sys.argv[1]])"
+    )
+    process = subprocess.Popen(
+        [sys.executable, "-c", owner, str(tmp_path), helper],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        bufsize=-1,
+    )
+
+    async def wait_for_owner_then_timeout():
+        await asyncio.to_thread(process.wait, timeout=2)
+        deadline = time.monotonic() + 2
+        while not ready.exists():
+            assert time.monotonic() < deadline
+            await asyncio.sleep(0.01)
+        started = time.monotonic()
+        with pytest.raises(TimeoutError):
+            await CloudflareProvider()._wait_for_url(process, timeout=0.05)
+        assert time.monotonic() - started < 1
+        assert not marker.exists(), "cleanup must not wait for the inherited writer"
+        assert all(not reader.is_alive() for reader in process._cloudflared_readers)
+
+    try:
+        asyncio.run(wait_for_owner_then_timeout())
+    finally:
+        release.touch()
+        _stop_process(process)
+        deadline = time.monotonic() + 6
+        while not marker.exists() and time.monotonic() < deadline:
+            time.sleep(0.01)
+    assert marker.exists(), "the inherited writer must survive owned-process cleanup"
+
+
+def test_cloudflare_full_queue_reader_keeps_draining_after_url(monkeypatch):
+    import queue
+
+    blocked = threading.Event()
+    drained = threading.Event()
+
+    class FullQueue(queue.Queue):
+        def put(self, item, *args, **kwargs):
+            if item == ("stderr", b"blocked"):
+                blocked.set()
+                raise queue.Full
+            return super().put(item, *args, **kwargs)
+
+        def get_nowait(self):
+            if not blocked.is_set():
+                raise queue.Empty
+            return super().get_nowait()
+
+    class Stream:
+        def __init__(self, chunks):
+            self.chunks = iter(chunks)
+
+        def read1(self, _size):
+            chunk = next(self.chunks, b"")
+            if chunk == b"drained":
+                drained.set()
+            return chunk
+
+        def close(self):
+            pass
+
+    process = SimpleNamespace(
+        stdout=Stream([b"https://sample.trycloudflare.com"]),
+        stderr=Stream([b"blocked", b"drained"]),
+        poll=lambda: 0,
+    )
+    monkeypatch.setattr("actions.server._community_expose.queue.Queue", FullQueue)
+    _scripted_pipe_reads(monkeypatch, process)
+
+    async def exercise_reader():
+        try:
+            url = await CloudflareProvider()._wait_for_url(process, timeout=1)
+            assert url == "https://sample.trycloudflare.com"
+            assert await asyncio.to_thread(drained.wait, 0.5)
+        finally:
+            await asyncio.to_thread(_stop_process, process)
+
+    asyncio.run(exercise_reader())
+
+
+def test_cloudflare_stop_does_not_block_event_loop(monkeypatch):
+    entered = threading.Event()
+    release = threading.Event()
+    watchdog_fired = threading.Event()
+
+    def slow_stop(_process):
+        entered.set()
+        if not release.wait(1):
+            watchdog_fired.set()
+
+    monkeypatch.setattr("actions.server._community_expose._stop_process", slow_stop)
+
+    async def exercise_stop():
+        stop = asyncio.create_task(
+            CloudflareProvider().stop(TunnelInfo(TunnelProvider.CLOUDFLARE, "", 8080))
+        )
+        try:
+            assert await asyncio.to_thread(entered.wait, 2)
+            assert not watchdog_fired.is_set()
+        finally:
+            release.set()
+            await stop
+
+    asyncio.run(exercise_stop())
+
+
+def test_cloudflare_cancellation_survives_cleanup_failure(monkeypatch):
+    entered = threading.Event()
+    release = threading.Event()
+
+    class Stream:
+        def read1(self, _size):
+            entered.set()
+            assert release.wait(2)
+            return b""
+
+        def close(self):
+            pass
+
+    def failed_stop(_process):
+        raise RuntimeError("synthetic-cleanup-failure")
+
+    process = SimpleNamespace(stdout=Stream(), stderr=None, poll=lambda: 0)
+    _scripted_pipe_reads(monkeypatch, process)
+    monkeypatch.setattr("actions.server._community_expose._stop_process", failed_stop)
+
+    async def exercise_cancel():
+        waiter = asyncio.create_task(CloudflareProvider()._wait_for_url(process))
+        try:
+            assert await asyncio.to_thread(entered.wait, 1)
+            waiter.cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await waiter
+        finally:
+            release.set()
+            for reader in process._cloudflared_readers:
+                reader.join(2)
+
+    asyncio.run(exercise_cancel())
+
+
+def test_cloudflare_repeated_cancellation_waits_for_cleanup(monkeypatch):
+    entered = threading.Event()
+    release = threading.Event()
+
+    def slow_stop(_process):
+        entered.set()
+        assert release.wait(2)
+
+    monkeypatch.setattr("actions.server._community_expose._stop_process", slow_stop)
+
+    async def exercise_cancel():
+        stop = asyncio.create_task(
+            CloudflareProvider().stop(TunnelInfo(TunnelProvider.CLOUDFLARE, "", 8080))
+        )
+        try:
+            assert await asyncio.to_thread(entered.wait, 1)
+            stop.cancel()
+            await asyncio.sleep(0)
+            stop.cancel()
+            await asyncio.sleep(0)
+            assert not stop.done()
+        finally:
+            release.set()
+            with pytest.raises(asyncio.CancelledError):
+                await stop
+
+    asyncio.run(exercise_cancel())
+
+
+def test_cloudflare_partial_pipe_setup_failure_reaps_process(monkeypatch):
+    import os
+
+    process = subprocess.Popen(
+        [sys.executable, "-c", "import time; time.sleep(30)"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    set_blocking = os.set_blocking
+
+    def fail_second_pipe(descriptor, blocking):
+        if descriptor == process.stderr.fileno():
+            raise OSError("synthetic-nonblocking-setup-failure")
+        set_blocking(descriptor, blocking)
+
+    monkeypatch.setattr("os.set_blocking", fail_second_pipe)
+    try:
+        with pytest.raises(OSError, match="synthetic-nonblocking-setup-failure"):
+            asyncio.run(CloudflareProvider()._wait_for_url(process))
+        assert process.poll() is not None
+        assert process.stdout.closed and process.stderr.closed
+        assert all(not reader.is_alive() for reader in process._cloudflared_readers)
+    finally:
+        _stop_process(process)
+
+
+def test_stop_process_does_not_close_pipe_under_lingering_reader():
+    closed = []
+    process = SimpleNamespace(
+        poll=lambda: 0,
+        stdout=SimpleNamespace(close=lambda: closed.append("stdout")),
+        stderr=None,
+        _cloudflared_reader_cancel=threading.Event(),
+        _cloudflared_readers=[
+            SimpleNamespace(
+                name="lingering", join=lambda timeout: None, is_alive=lambda: True
+            )
+        ],
+    )
+    with pytest.raises(
+        RuntimeError, match="cloudflared-output-reader-shutdown-timeout"
+    ):
+        _stop_process(process)
+    assert process._cloudflared_reader_cancel.is_set()
+    assert closed == []
 
 
 def test_server_expose_suppresses_all_provider_failure_without_active_tunnel(

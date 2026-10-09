@@ -400,14 +400,42 @@ def _stop_process(process: Optional[subprocess.Popen]) -> None:
         except subprocess.TimeoutExpired:
             process.kill()
             process.wait(timeout=5)
+    lingering_readers = []
+    for reader in getattr(process, "_cloudflared_readers", ()):
+        reader.join(timeout=1)
+        if reader.is_alive():
+            lingering_readers.append(reader.name)
+    if lingering_readers:
+        raise RuntimeError("cloudflared-output-reader-shutdown-timeout")
+    # Nonblocking readers have relinquished the descriptors before closure.
+    # Closing a BufferedReader during a blocked read can itself wait forever.
     for stream in (getattr(process, "stdout", None), getattr(process, "stderr", None)):
         if stream is not None:
             try:
                 stream.close()
             except (OSError, ValueError):
                 pass
-    for reader in getattr(process, "_cloudflared_readers", ()):
-        reader.join(timeout=1)
+
+
+async def _stop_process_async(process, *, cancelling: bool = False) -> None:
+    """Finish owned-process cleanup off-loop, even if cancellation repeats."""
+    cleanup = asyncio.create_task(asyncio.to_thread(_stop_process, process))
+    cancellation = None
+    while True:
+        try:
+            await asyncio.shield(cleanup)
+            break
+        except asyncio.CancelledError as error:
+            if cleanup.cancelled():
+                raise
+            cancellation = error
+        except Exception:
+            if not cancelling and cancellation is None:
+                raise
+            log.warning("Cloudflare cleanup failed during cancellation.")
+            break
+    if cancellation is not None:
+        raise cancellation
 
 
 class LocalhostRunProvider(BaseTunnelProvider):
@@ -677,7 +705,7 @@ class CloudflareProvider(BaseTunnelProvider):
                 or parsed_url.query
                 or parsed_url.fragment
             ):
-                _stop_process(process)
+                await _stop_process_async(process)
                 raise RuntimeError("Configured Cloudflare tunnel URL is invalid.")
         else:
             # Use quick tunnel (temporary URL)
@@ -689,8 +717,10 @@ class CloudflareProvider(BaseTunnelProvider):
             )
             try:
                 public_url = await self._wait_for_url(process)
-            except BaseException:
-                _stop_process(process)
+            except BaseException as error:
+                await _stop_process_async(
+                    process, cancelling=isinstance(error, asyncio.CancelledError)
+                )
                 raise
 
         return TunnelInfo(
@@ -718,11 +748,14 @@ class CloudflareProvider(BaseTunnelProvider):
             (process.stderr, "stderr"),
         )
 
-        def read_stream(stream, stream_name: str) -> None:
+        def read_stream(descriptor: int, stream_name: str) -> None:
             try:
                 while not cancel_readers.is_set():
                     try:
-                        chunk = stream.read1(chunk_size)
+                        chunk = os.read(descriptor, chunk_size)
+                    except BlockingIOError:
+                        cancel_readers.wait(0.025)
+                        continue
                     except (OSError, ValueError):
                         break
                     if not chunk:
@@ -732,6 +765,8 @@ class CloudflareProvider(BaseTunnelProvider):
                     while True:
                         if cancel_readers.is_set():
                             return
+                        if url_found.is_set():
+                            break
                         try:
                             output.put((stream_name, chunk), timeout=0.1)
                             break
@@ -745,24 +780,28 @@ class CloudflareProvider(BaseTunnelProvider):
                     except queue.Full:
                         continue
 
-        readers = []
-        for stream, stream_name in streams:
-            if stream is not None:
-                reader = threading.Thread(
-                    target=read_stream,
-                    args=(stream, stream_name),
-                    name=f"cloudflared-{stream_name}",
-                    daemon=True,
-                )
-                readers.append(reader)
-                reader.start()
-
+        readers: list[threading.Thread] = []
         setattr(process, "_cloudflared_reader_cancel", cancel_readers)
         setattr(process, "_cloudflared_readers", readers)
 
-        pending = b""
+        pending_by_stream: dict[str, bytes] = {}
+        chunks_since_yield = 0
 
         try:
+            for stream, stream_name in streams:
+                if stream is not None:
+                    descriptor = stream.fileno()
+                    # Python >=3.12 supports nonblocking anonymous pipes on
+                    # Windows as well as POSIX; no select() or buffered read.
+                    os.set_blocking(descriptor, False)
+                    reader = threading.Thread(
+                        target=read_stream,
+                        args=(descriptor, stream_name),
+                        name=f"cloudflared-{stream_name}",
+                        daemon=True,
+                    )
+                    reader.start()
+                    readers.append(reader)
             while True:
                 remaining = deadline - time.monotonic()
                 if remaining <= 0:
@@ -781,20 +820,28 @@ class CloudflareProvider(BaseTunnelProvider):
 
                 if chunk is None:
                     continue
-                match = url_pattern.search(pending + chunk)
+                pending = pending_by_stream.get(stream_name, b"")
+                candidate = pending + chunk
+                match = url_pattern.search(candidate)
                 if match:
                     url_found.set()
                     log.debug("cloudflared returned startup output on %s.", stream_name)
                     return match.group(0).decode("ascii")
-                pending = (pending + chunk)[-512:]
-        except BaseException:
+                pending_by_stream[stream_name] = candidate[-512:]
+                chunks_since_yield += 1
+                if chunks_since_yield >= 8:
+                    chunks_since_yield = 0
+                    await asyncio.sleep(0)
+        except BaseException as error:
             cancel_readers.set()
-            await asyncio.to_thread(_stop_process, process)
+            await _stop_process_async(
+                process, cancelling=isinstance(error, asyncio.CancelledError)
+            )
             raise
 
     async def stop(self, tunnel: TunnelInfo) -> None:
         """Stop the Cloudflare tunnel."""
-        _stop_process(tunnel.process)
+        await _stop_process_async(tunnel.process)
 
 
 class TunnelManager:
