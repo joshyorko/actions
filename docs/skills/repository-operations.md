@@ -445,6 +445,17 @@ published prerequisites. Never hand-edit lock hashes or add path/direct-URL
 production dependencies. Runtime freeze inputs remain a separate post-candidate
 gate.
 
+Generated Core API source links are built from `devutils.invoke_utils.REPOSITORY_URL`;
+keep that base on the maintained `joshyorko/actions` community branch and
+regenerate package API docs through the package's configured `invoke docs`
+task. Use the package-local Actions Core environment: a shared environment can
+extend the `actions` namespace with Runtime or Work Items modules, causing
+lazydocs to emit those APIs into Core's docs. Before accepting output, verify
+`actions` resolves from the Core source tree and `actions.server` and
+`actions.work_items` are unavailable. Do not patch generated `docs/api` links
+by hand. `test_invoke_utils.py` asserts the source base so a repository-owner or
+branch regression is caught.
+
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
 `uvx --from poetry==2.1.1 poetry check --lock`. Run the lock command a second

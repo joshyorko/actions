@@ -16,7 +16,7 @@ from typing import Dict, Iterator, List, Optional, Tuple, Union
 from invoke import task
 
 ROOT = Path(__file__).absolute().parent.parent.parent
-REPOSITORY_URL = "https://github.com/sema4ai/actions/tree/master/"
+REPOSITORY_URL = "https://github.com/joshyorko/actions/blob/community/"
 
 
 class RoundtripPyProject:
