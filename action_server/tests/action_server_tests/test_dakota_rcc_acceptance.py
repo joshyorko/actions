@@ -10,6 +10,9 @@ import pytest
 
 
 SCRIPT = Path(__file__).parents[2] / "scripts" / "verify_dakota_rcc_acceptance.py"
+HISTORICAL_RECEIPT = (
+    Path(__file__).parents[1] / "acceptance_evidence" / "candidate-wheel-67e82ef7.json"
+)
 
 
 def _harness():
@@ -32,6 +35,19 @@ def test_dakota_acceptance_harness_describes_candidate_wheel_proof():
     assert result.returncode == 0, result.stderr
     assert "candidate-wheel" in result.stdout
     assert "RCC Environment Artifact" in result.stdout
+
+
+def test_historical_candidate_receipt_keeps_failed_wrapper_cell():
+    receipt = json.loads(HISTORICAL_RECEIPT.read_text(encoding="utf-8"))
+
+    assert receipt["source_sha"] == "67e82ef7c2bfd529f36d756c2c97c466bd3952e4"
+    assert receipt["runtime_mode"] == "candidate-wheel"
+    assert receipt["rcc_receipt"]["status"] == "failed"
+    assert receipt["rcc_receipt"]["exitCode"] == -1
+    assert receipt["rcc_receipt"]["reason"] == "child exited non-zero"
+    assert receipt["authenticated_http_status"] == 200
+    assert receipt["sqlite_status"] == "passed"
+    assert receipt["rcc_receipt"]["verification"]["valid"] is True
 
 
 @pytest.mark.integration_test
@@ -57,7 +73,7 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
             str(receipt_path),
         ],
         timeout_seconds=(
-            harness.PROOF_TIMEOUT_SECONDS + 2 * harness.CLEANUP_GRACE_SECONDS + 5
+            harness.CLI_WATCHDOG_SECONDS + 4 * harness.CLEANUP_GRACE_SECONDS + 5
         ),
         env=harness.child_environment(
             os.environ,
@@ -73,13 +89,26 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
         cleanup_grace_seconds=harness.CLEANUP_GRACE_SECONDS,
     )
 
-    assert result.returncode == 0, f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
     live_receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
     assert live_receipt["runtime_mode"] == "candidate-wheel"
     assert len(live_receipt["source_sha"]) == 40
     assert len(live_receipt["candidate_wheels"]["actions-core"]["sha256"]) == 64
     assert len(live_receipt["candidate_wheels"]["actions-http-helper"]["sha256"]) == 64
     assert live_receipt["rcc_receipt"]["verification"]["valid"] is True
+    assert live_receipt["cells"]["authenticated_action"] == "PASS"
+    assert live_receipt["cells"]["sqlite_run"] == "PASS"
+    assert live_receipt["cells"]["artifact_verification"] == "PASS"
+    assert live_receipt["cells"]["process_cleanup"] == "PASS"
+    expected_returncode = 0 if live_receipt["acceptance_status"] == "PASS" else 1
+    assert result.returncode == expected_returncode, (
+        f"acceptance status {live_receipt['acceptance_status']} did not match "
+        f"harness return code {result.returncode}"
+    )
+    assert live_receipt["acceptance_status"] == "PASS", (
+        f"acceptance cells: {live_receipt['cells']}\n"
+        f"wrapper receipt: {live_receipt['rcc_receipt']}\n"
+        f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+    )
 
 
 def test_child_environment_keeps_ca_and_proxy_settings_without_credentials(tmp_path):
@@ -220,6 +249,26 @@ def test_evidence_is_retained_outside_run_temp_with_private_mode(tmp_path):
         harness.write_evidence(temp_root / "inside.json", evidence, temp_root=temp_root)
 
 
+def test_failed_rcc_wrapper_exit_keeps_overall_acceptance_failed():
+    harness = _harness()
+    cells = {
+        "authenticated_action": "PASS",
+        "sqlite_run": "PASS",
+        "artifact_verification": "PASS",
+        "wrapper_exit": harness.classify_wrapper_exit(
+            {
+                "status": "failed",
+                "exitCode": -1,
+                "reason": "child exited non-zero",
+            }
+        ),
+        "process_cleanup": "PASS",
+    }
+
+    assert cells["wrapper_exit"] == "FAIL"
+    assert harness.acceptance_status(cells) == "FAIL"
+
+
 def test_total_timeout_terminates_owned_descendant_processes(tmp_path):
     harness = _harness()
     pid_file = tmp_path / "child.pid"
@@ -229,7 +278,7 @@ def test_total_timeout_terminates_owned_descendant_processes(tmp_path):
     )
     parent_code = (
         "import subprocess,sys,time; from pathlib import Path; "
-        f"child=subprocess.Popen([sys.executable,'-c',{child_code!r}]); "
+        f"child=subprocess.Popen([sys.executable,'-c',{child_code!r}],start_new_session=True); "
         f"Path({str(pid_file)!r}).write_text(str(child.pid)); "
         "time.sleep(60)"
     )

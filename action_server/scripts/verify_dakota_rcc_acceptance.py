@@ -23,6 +23,7 @@ RCC_SHA256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
 POETRY_VERSION = "Poetry (version 2.1.1)"
 PROOF_TIMEOUT_SECONDS = 2400
 CLEANUP_GRACE_SECONDS = 10
+CLI_WATCHDOG_SECONDS = PROOF_TIMEOUT_SECONDS + 6 * CLEANUP_GRACE_SECONDS + 5
 _ENV_ALLOWLIST = {
     "PATH",
     "LANG",
@@ -76,6 +77,10 @@ class Deadline:
 
     def remaining_int(self) -> int:
         return max(1, math.ceil(self.remaining()))
+
+
+class ProcessTreeCleanupError(RuntimeError):
+    """An owned process or inherited pipe writer survived bounded cleanup."""
 
 
 def child_environment(
@@ -168,75 +173,113 @@ def terminate_process_tree(
     *,
     grace_seconds: float = CLEANUP_GRACE_SECONDS,
 ) -> None:
-    if os.name == "posix":
-        import psutil
-
-        try:
-            os.killpg(process.pid, signal.SIGTERM)
-        except ProcessLookupError:
-            pass
-        expires = time.monotonic() + grace_seconds
-        while time.monotonic() < expires:
-            live_group_member = False
-            for candidate in psutil.process_iter(attrs=["pid", "status"]):
-                try:
-                    if (
-                        os.getpgid(candidate.info["pid"]) == process.pid
-                        and candidate.info["status"] != psutil.STATUS_ZOMBIE
-                    ):
-                        live_group_member = True
-                        break
-                except (OSError, psutil.Error):
-                    continue
-            if not live_group_member:
-                break
-            time.sleep(0.05)
-        else:
-            try:
-                os.killpg(process.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
-        try:
-            process.wait(timeout=grace_seconds)
-        except subprocess.TimeoutExpired:
-            process.kill()
-            process.wait()
-        return
-
     import psutil
 
+    process_group = None
+    if os.name == "posix":
+        try:
+            group_id = os.getpgid(process.pid)
+            if group_id == process.pid:
+                process_group = group_id
+        except (ProcessLookupError, PermissionError):
+            pass
     try:
         root = psutil.Process(process.pid)
     except psutil.NoSuchProcess:
-        try:
-            process.wait(timeout=grace_seconds)
-        except subprocess.TimeoutExpired:
-            process.kill()
-            process.wait()
-        return
-    try:
-        descendants = root.children(recursive=True)
-    except psutil.NoSuchProcess:
-        descendants = []
-    owned = [*reversed(descendants), root]
-    for child in owned:
+        root = None
+    owned: dict[tuple[int, float], psutil.Process] = {}
+
+    def refresh_owned() -> None:
+        if root is not None:
+            try:
+                descendants = root.children(recursive=True)
+            except psutil.NoSuchProcess:
+                descendants = []
+            for child in descendants:
+                try:
+                    owned[(child.pid, child.create_time())] = child
+                except psutil.Error:
+                    continue
+        if process_group is not None:
+            for candidate in psutil.process_iter(attrs=["pid", "status"]):
+                try:
+                    if os.getpgid(candidate.pid) == process_group:
+                        owned[(candidate.pid, candidate.create_time())] = candidate
+                except (OSError, psutil.Error):
+                    continue
+
+    def active_owned() -> list[psutil.Process]:
+        active = []
+        for child in owned.values():
+            try:
+                if child.is_running() and child.status() != psutil.STATUS_ZOMBIE:
+                    active.append(child)
+            except psutil.Error:
+                continue
+        return active
+
+    refresh_owned()
+    for child in reversed(list(owned.values())):
         try:
             child.terminate()
-        except psutil.NoSuchProcess:
-            pass
-    _, alive = psutil.wait_procs(owned, timeout=grace_seconds)
-    for child in alive:
+        except psutil.Error:
+            continue
+    if root is not None:
         try:
-            child.kill()
-        except psutil.NoSuchProcess:
+            root.terminate()
+        except psutil.Error:
             pass
-    if alive:
-        psutil.wait_procs(alive, timeout=grace_seconds)
+    if process_group is not None:
+        try:
+            os.killpg(process_group, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+
+    grace_deadline = time.monotonic() + grace_seconds
+    while time.monotonic() < grace_deadline:
+        refresh_owned()
+        if not active_owned():
+            break
+        time.sleep(min(0.05, max(0.0, grace_deadline - time.monotonic())))
+
+    survivors = active_owned()
+    if survivors:
+        for child in survivors:
+            try:
+                child.kill()
+            except psutil.Error:
+                continue
+        if process_group is not None:
+            try:
+                os.killpg(process_group, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+
+    reap_deadline = time.monotonic() + grace_seconds
+    while time.monotonic() < reap_deadline:
+        refresh_owned()
+        survivors = active_owned()
+        if not survivors:
+            break
+        time.sleep(min(0.05, max(0.0, reap_deadline - time.monotonic())))
+    survivors = active_owned()
+    remaining = max(0.01, reap_deadline - time.monotonic())
     try:
-        process.wait(timeout=grace_seconds)
+        process.wait(timeout=remaining)
     except subprocess.TimeoutExpired:
-        process.kill()
-        process.wait()
+        try:
+            process.kill()
+        except ProcessLookupError:
+            pass
+        try:
+            process.wait(timeout=remaining)
+        except subprocess.TimeoutExpired:
+            survivors.append(root)
+    if survivors:
+        raise ProcessTreeCleanupError(
+            "owned process tree did not stop within cleanup grace: "
+            f"{sorted({child.pid for child in survivors})}"
+        )
 
 
 def run_owned_process(
@@ -261,7 +304,15 @@ def run_owned_process(
         stdout, stderr = process.communicate(timeout=timeout_seconds)
     except subprocess.TimeoutExpired as exc:
         terminate_process_tree(process, grace_seconds=cleanup_grace_seconds)
-        stdout, stderr = process.communicate()
+        try:
+            stdout, stderr = process.communicate(timeout=cleanup_grace_seconds)
+        except subprocess.TimeoutExpired as pipe_error:
+            for stream in (process.stdout, process.stderr):
+                if stream is not None:
+                    stream.close()
+            raise ProcessTreeCleanupError(
+                "captured output pipes still had descendant writers after cleanup"
+            ) from pipe_error
         raise subprocess.TimeoutExpired(
             command,
             timeout_seconds,
@@ -269,6 +320,66 @@ def run_owned_process(
             stderr=stderr or exc.stderr,
         ) from exc
     return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
+
+
+def capture_process_tree(root_pid: int):
+    import psutil
+
+    try:
+        root = psutil.Process(root_pid)
+    except psutil.NoSuchProcess:
+        return []
+    try:
+        return [root, *root.children(recursive=True)]
+    except psutil.NoSuchProcess:
+        return [root]
+
+
+def wait_for_process_tree_reap(
+    processes, *, timeout_seconds: float = CLEANUP_GRACE_SECONDS
+) -> None:
+    import psutil
+
+    def active():
+        running = []
+        for child in processes:
+            try:
+                if child.is_running() and child.status() != psutil.STATUS_ZOMBIE:
+                    running.append(child)
+            except psutil.Error:
+                continue
+        return running
+
+    deadline = time.monotonic() + timeout_seconds
+    while time.monotonic() < deadline:
+        if not active():
+            return
+        time.sleep(min(0.05, max(0.0, deadline - time.monotonic())))
+    survivors = active()
+    for child in survivors:
+        try:
+            child.kill()
+        except psutil.Error:
+            continue
+    kill_deadline = time.monotonic() + timeout_seconds
+    while time.monotonic() < kill_deadline:
+        survivors = active()
+        if not survivors:
+            return
+        time.sleep(min(0.05, max(0.0, kill_deadline - time.monotonic())))
+    survivors = active()
+    if survivors:
+        raise ProcessTreeCleanupError(
+            f"Runtime process tree was not reaped: {sorted(child.pid for child in survivors)}"
+        )
+
+
+def classify_wrapper_exit(receipt: dict[str, object]) -> str:
+    return (
+        "PASS"
+        if receipt.get("status") != "failed" and receipt.get("exitCode") == 0
+        else "FAIL"
+    )
 
 
 def _source_root() -> Path:
@@ -294,6 +405,7 @@ def _parser() -> argparse.ArgumentParser:
         required=True,
         help="Write the sanitized proof receipt outside the disposable run directory.",
     )
+    parser.add_argument("--_worker", action="store_true", help=argparse.SUPPRESS)
     return parser
 
 
@@ -336,7 +448,6 @@ def start_provider(
         text=True,
         env=env,
         stdin=subprocess.DEVNULL,
-        start_new_session=(os.name == "posix"),
     )
     try:
         if process.stdout is None:
@@ -454,6 +565,12 @@ def write_evidence(path: Path, evidence: dict[str, object], *, temp_root: Path) 
         stream.write(payload)
         stream.flush()
         os.fsync(stream.fileno())
+
+
+def acceptance_status(cells: dict[str, str]) -> str:
+    return (
+        "PASS" if cells and all(value == "PASS" for value in cells.values()) else "FAIL"
+    )
 
 
 def _verify_rcc(
@@ -595,6 +712,12 @@ dependencies:
 
         provider = None
         server = None
+        server_handle = None
+        server_popen = None
+        server_tree = []
+        server_exit_code = None
+        server_reaped = False
+        provider_reaped = False
         run_id = ""
         try:
             provider, provider_url = start_provider(
@@ -623,6 +746,11 @@ dependencies:
                 env=runtime_env,
                 port=0,
             )
+            server_handle = server.process
+            server_popen = getattr(server_handle, "_proc", None)
+            if server_popen is None:
+                raise RuntimeError("Runtime CLI process handle was not created")
+            server_tree = capture_process_tree(server_popen.pid)
             base_url = f"http://{server.host}:{server.port}"
             action_url = f"{base_url}/api/actions/dakota-rcc-acceptance/answer/run"
             unauthenticated = requests.post(
@@ -666,13 +794,44 @@ dependencies:
             detail.raise_for_status()
             if detail.json().get("id") != run_id:
                 raise AssertionError("SQLite-backed run lookup returned another run")
+            known = {(item.pid, item.create_time()) for item in server_tree}
+            for item in capture_process_tree(server_popen.pid):
+                identity = (item.pid, item.create_time())
+                if identity not in known:
+                    known.add(identity)
+                    server_tree.append(item)
         finally:
             try:
-                if server is not None:
-                    server.stop()
+                try:
+                    if server is not None:
+                        if server_handle is None:
+                            server_handle = getattr(server, "_process", None)
+                            server_popen = getattr(server_handle, "_proc", None)
+                            if server_popen is not None:
+                                server_tree = capture_process_tree(server_popen.pid)
+                        server.stop()
+                finally:
+                    if server_handle is not None and server_popen is not None:
+                        wait_for_process_tree_reap(
+                            server_tree, timeout_seconds=CLEANUP_GRACE_SECONDS
+                        )
+                        server_exit_code = server_handle.returncode
+                        server_reaped = (
+                            server_exit_code is not None
+                            and not server_handle.is_alive()
+                        )
+                        if not server_reaped:
+                            raise ProcessTreeCleanupError(
+                                "Runtime CLI process was signalled but not reaped"
+                            )
             finally:
                 if provider is not None:
                     terminate_process_tree(provider)
+                    provider_reaped = provider.poll() is not None
+                    if not provider_reaped:
+                        raise ProcessTreeCleanupError(
+                            "RCC provider process was signalled but not reaped"
+                        )
 
         db_path = datadir / "server.db"
         with load_db(db_path) as db:
@@ -696,6 +855,24 @@ dependencies:
         rcc_receipt = read_receipt(receipts[-1], digest)
         if not rcc_receipt.get("leaseId"):
             raise AssertionError("RCC receipt has no process lease identity")
+        cells = {
+            "unauthenticated_rejection": "PASS"
+            if unauthenticated.status_code in (401, 403)
+            else "FAIL",
+            "authenticated_action": "PASS"
+            if response.status_code == 200 and candidate_result == expected_result
+            else "FAIL",
+            "sqlite_run": "PASS"
+            if run is not None and run.status == RunStatus.PASSED
+            else "FAIL",
+            "artifact_verification": "PASS"
+            if rcc_receipt["verification"].get("valid") is True
+            else "FAIL",
+            "wrapper_exit": classify_wrapper_exit(rcc_receipt),
+            "process_cleanup": "PASS"
+            if server_reaped and provider_reaped and receipts
+            else "FAIL",
+        }
 
         evidence = {
             "schema_version": 1,
@@ -713,6 +890,10 @@ dependencies:
             "unauthenticated_http_status": unauthenticated.status_code,
             "authenticated_http_status": response.status_code,
             "provider": "rcc-cache-serve-loopback",
+            "cells": cells,
+            "acceptance_status": acceptance_status(cells),
+            "runtime_process_exit_code": server_exit_code,
+            "provider_process_reaped": provider_reaped,
             "rcc_receipt": _sanitize_runtime_receipt(rcc_receipt),
         }
         write_evidence(receipt_path, evidence, temp_root=root)
@@ -724,6 +905,46 @@ def main() -> int:
     args = _parser().parse_args()
     if args.mode != "candidate-wheel":
         raise AssertionError("unreachable unsupported mode")
+    if not args._worker:
+        try:
+            source_env = dict(os.environ)
+            extra = {
+                key: source_env[key]
+                for key in (
+                    "ACTIONS_RUNTIME_RCC_BINARY",
+                    "ACTIONS_ACCEPTANCE_POETRY",
+                    "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
+                )
+            }
+            worker_env = child_environment(
+                source_env,
+                task_root=args.receipt.expanduser().parent / "cli-supervisor",
+                extra=extra,
+            )
+            completed = run_owned_process(
+                [
+                    sys.executable,
+                    str(Path(__file__).resolve()),
+                    "--mode",
+                    args.mode,
+                    "--receipt",
+                    str(args.receipt.expanduser().resolve()),
+                    "--_worker",
+                ],
+                timeout_seconds=CLI_WATCHDOG_SECONDS,
+                env=worker_env,
+            )
+        except Exception as exc:
+            print(
+                f"Dakota RCC watchdog failed: {type(exc).__name__}: {exc}",
+                file=sys.stderr,
+            )
+            return 1
+        if completed.stdout:
+            sys.stdout.write(completed.stdout)
+        if completed.stderr:
+            sys.stderr.write(completed.stderr)
+        return completed.returncode
     try:
         result = _run(args.receipt)
     except Exception as exc:
@@ -733,7 +954,7 @@ def main() -> int:
         )
         return 1
     print(json.dumps(result, sort_keys=True))
-    return 0
+    return 0 if result["acceptance_status"] == "PASS" else 1
 
 
 if __name__ == "__main__":
