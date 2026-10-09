@@ -39,9 +39,9 @@ def test_exit_notification_stops_consumer_and_discards_later_queued_commands():
 
 
 def test_exit_waits_for_current_action_to_finish():
-    stream = io.BytesIO(_frame({"command": "run_action"}) + _frame({"method": "exit"}))
-    handler = MessagesHandler(stream, io.BytesIO())
+    handler = MessagesHandler(io.BytesIO(), io.BytesIO())
     action_started = threading.Event()
+    release_action = threading.Event()
     action_completed = threading.Event()
     received = []
 
@@ -49,21 +49,33 @@ def test_exit_waits_for_current_action_to_finish():
         received.append(message)
         if message.get("command") == "run_action":
             action_started.set()
-            action_completed.wait(timeout=2)
-            action_completed.set()
+            try:
+                release_action.wait(timeout=2)
+            finally:
+                action_completed.set()
 
     handler._on_message = handle
-    timer = threading.Timer(0.05, action_completed.set)
-    timer.start()
+    # Queue exit and a following command before the synchronous action starts,
+    # so the test can prove the consumer waits at the in-flight command.
+    handler._jsonrpc_stream_reader = SimpleNamespace(start=lambda: None)
+    handler._readqueue.put({"command": "run_action"})
+    handler._readqueue.put({"method": "exit"})
+    handler._readqueue.put({"command": "after"})
+    thread = threading.Thread(target=handler.start, daemon=True)
+    thread.start()
     try:
-        thread = _start_with_deadline(handler)
+        assert action_started.wait(timeout=2), "current Action did not start"
+        assert thread.is_alive(), "consumer returned while the Action was active"
+        assert not action_completed.is_set(), "Action completed before test release"
+        assert handler._readqueue.qsize() == 2, "exit was not queued during the Action"
     finally:
-        timer.cancel()
+        release_action.set()
+        thread.join(timeout=2)
 
     assert not thread.is_alive(), "explicit exit did not stop the worker consumer"
-    assert action_started.is_set()
     assert action_completed.is_set()
     assert received == [{"command": "run_action"}]
+    assert handler._readqueue.qsize() == 1, "queued work after exit was consumed"
 
 
 def test_worker_process_exits_cleanly_on_explicit_exit():
