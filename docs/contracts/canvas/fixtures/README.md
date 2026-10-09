@@ -25,6 +25,12 @@ checked-in fixture values; they are not Action Server tools and do not prove
 real Action Server dispatch, Runtime authorization, host binding, artifact
 resolution, CSP policy in a host, or ChatGPT rendering.
 
+`action_server/tests/action_server_tests/test_canvas_query_results_fixture.py`
+checks this exact JSON sample against the draft schema and verifies Python JSON
+round-trip compatibility, including malformed fixture rejection. It treats the
+artifact handle as inert serialized data; it does not prove a Runtime resolver,
+action binding, or caller authorization.
+
 The renderer drops a pending artifact-status result when a query is edited or
 submitted for a new result and when the view unmounts. Async status success,
 failure, and completion handlers update state only while both the captured
