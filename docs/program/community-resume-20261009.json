@@ -1361,6 +1361,9 @@
     },
     {
       "event": "Existing RCC ToolkitTest command now discovers the graph regression wrapper: v18.19.3 local run exited 0, Ruff developer passed, pytest 26/26 passed; receipt evidence/community-graph-toolkit-test-20261009.json. No hosted workflow result is inferred; the immutable graph amendment ZIP is unchanged."
+    },
+    {
+      "event": "Independent review accepted the frozen typed Canvas graph candidate; review receipt is preserved at evidence/independent-canvas-execution-graph-review-20261009.md (SHA-256 c971297fe4f4ec15d0c3a3bb9098d01925ce338375fe55d7d54aee5a0fdc1196). This accepts only the governance projection/test hook, not any issue contract or merge."
     }
   ],
   "admission_checkpoint": {
