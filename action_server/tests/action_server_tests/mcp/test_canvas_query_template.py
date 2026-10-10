@@ -29,9 +29,15 @@ EMBEDDED_TEMPLATES = REPOSITORY_ROOT / "action_server/src/actions/server/templat
 
 
 def _run_owned_process_tree(
-    command: list[str], *, cwd: Path, env: dict[str, str], timeout: float
+    command: list[str],
+    *,
+    cwd: Path,
+    env: dict[str, str],
+    timeout: float,
+    ready_file: Path | None = None,
+    readiness_timeout: float = 10,
 ) -> subprocess.CompletedProcess[str]:
-    """Run a command and terminate only its captured descendants on timeout."""
+    """Run a command, optionally starting its timeout after a readiness file."""
     from actions.server._common.process import (
         force_kill_process_tree_until,
         snapshot_process_descendants,
@@ -69,6 +75,26 @@ def _run_owned_process_tree(
 
     try:
         capture_descendants()
+        if ready_file is not None:
+            readiness_deadline = time.monotonic() + readiness_timeout
+            while not ready_file.is_file():
+                capture_descendants()
+                if process.poll() is not None:
+                    if ready_file.is_file():
+                        break
+                    try:
+                        process.communicate(timeout=0.05)
+                    except subprocess.TimeoutExpired:
+                        pass
+                    raise RuntimeError(
+                        "Owned command exited before creating its readiness file."
+                    )
+                remaining = readiness_deadline - time.monotonic()
+                if remaining <= 0:
+                    raise subprocess.TimeoutExpired(command, readiness_timeout)
+                time.sleep(min(0.01, remaining))
+        if ready_file is not None:
+            capture_descendants()
         deadline = time.monotonic() + timeout
         while True:
             remaining = deadline - time.monotonic()
@@ -146,15 +172,22 @@ def test_owned_process_timeout_stops_its_descendant(tmp_path: Path) -> None:
     script = (
         "import os, subprocess, sys, time; time.sleep(0.1); "
         "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)']); "
-        "open(os.environ['CHILD_PID_FILE'], 'w').write(str(child.pid))"
+        "temporary = os.environ['CHILD_PID_FILE'] + '.tmp'; "
+        "stream = open(temporary, 'w'); stream.write(str(child.pid)); stream.close(); "
+        "os.replace(temporary, os.environ['CHILD_PID_FILE']); time.sleep(0.1)"
     )
     env = os.environ.copy()
     env["CHILD_PID_FILE"] = str(child_pid_file)
     with pytest.raises(subprocess.TimeoutExpired):
         _run_owned_process_tree(
-            [sys.executable, "-c", script], cwd=tmp_path, env=env, timeout=0.5
+            [sys.executable, "-c", script],
+            cwd=tmp_path,
+            env=env,
+            timeout=0.5,
+            ready_file=child_pid_file,
         )
 
+    assert child_pid_file.is_file(), "The descendant did not reach the readiness gate."
     child_pid = int(child_pid_file.read_text(encoding="utf-8"))
     deadline = time.monotonic() + 1
     while True:
@@ -169,6 +202,62 @@ def test_owned_process_timeout_stops_its_descendant(tmp_path: Path) -> None:
                 "The owned child remained live after its parent was cleaned up."
             )
         time.sleep(0.01)
+
+
+def test_owned_process_readiness_fails_if_command_exits_before_ready(
+    tmp_path: Path,
+) -> None:
+    ready_file = tmp_path / "ready"
+    with pytest.raises(RuntimeError, match="exited before creating its readiness file"):
+        _run_owned_process_tree(
+            [sys.executable, "-c", "pass"],
+            cwd=tmp_path,
+            env=os.environ.copy(),
+            timeout=0.5,
+            ready_file=ready_file,
+        )
+    assert not ready_file.exists()
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX session cleanup is Linux-gated")
+def test_owned_process_exit_before_readiness_cleans_descendant_promptly(
+    tmp_path: Path,
+) -> None:
+    descendant_pid_file = tmp_path / "descendant.pid"
+    ready_file = tmp_path / "never-ready"
+    script = (
+        "import os, subprocess, sys, time; "
+        "child = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(1.6)']); "
+        "temporary = os.environ['DESCENDANT_PID_FILE'] + '.tmp'; "
+        "stream = open(temporary, 'w'); stream.write(str(child.pid)); stream.close(); "
+        "os.replace(temporary, os.environ['DESCENDANT_PID_FILE']); time.sleep(0.1)"
+    )
+    env = os.environ.copy()
+    env.pop("PR282_SLOW_CHILD_START", None)
+    env["DESCENDANT_PID_FILE"] = str(descendant_pid_file)
+
+    started = time.monotonic()
+    with pytest.raises(RuntimeError, match="exited before creating its readiness file"):
+        _run_owned_process_tree(
+            [sys.executable, "-c", script],
+            cwd=tmp_path,
+            env=env,
+            timeout=0.5,
+            ready_file=ready_file,
+            readiness_timeout=5,
+        )
+    elapsed = time.monotonic() - started
+
+    assert (
+        elapsed < 1.5
+    ), "Readiness failure waited for inherited descendant pipes to close."
+    assert descendant_pid_file.is_file()
+    descendant_pid = int(descendant_pid_file.read_text(encoding="utf-8"))
+    try:
+        descendant = psutil.Process(descendant_pid)
+        assert descendant.status() == psutil.STATUS_ZOMBIE
+    except psutil.NoSuchProcess:
+        pass
 
 
 def test_canvas_query_template_is_in_the_deterministic_offline_bundle() -> None:

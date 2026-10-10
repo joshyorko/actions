@@ -1649,6 +1649,17 @@ The beta and production template deployment workflows change into
 Preserve that script's tracked executable mode (`100755`); a checkout that loses
 the mode fails before Python starts with shell exit 126. The active contract test
 checks both the executable bit and each workflow's direct invocation.
+The Canvas Query acceptance test that times out an owned process tree waits for
+a readiness marker published only after its grandchild starts before starting
+the short runtime-timeout clock. Keep readiness separately bounded and atomic:
+otherwise interpreter startup latency can expire the cleanup timeout before a
+descendant exists, producing a missing-PID fixture failure rather than testing
+descendant cleanup. The marker proves setup only; retain the process-tree
+identity checks and require the captured descendant to be gone or zombie after
+timeout cleanup. If the leader exits while the marker is being published,
+recheck the atomic marker before reporting early exit. Drain captured output
+with a short bound only: a descendant may inherit the pipes, so unbounded
+`communicate()` can block before identity-checked cleanup runs.
 
 ### Action Server tunnel verification
 
