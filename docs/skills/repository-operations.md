@@ -1370,11 +1370,17 @@ intact. Self-signed loopback certificates identify `localhost` in their subject
 alternative names; if the machine hostname exceeds X.509's 64-character common-name
 limit, use `localhost` for the common name while retaining the full hostname in the
 SAN. Let Uvicorn create and own the test's ephemeral listener and read its assigned
-port after startup. A Windows teardown timeout was observed after the expected
-untrusted-CA handshake failure while the test used an externally-created listener.
-The owned-listener topology keeps socket ownership within Uvicorn and simplifies
-fixture lifecycle; whether it resolves the Windows failure remains unverified until
-the test passes on a native Windows runner.
+port after startup. The test's synthetic TLS peer runs on a dedicated selector loop;
+the verifier client stays on the native AnyIO test loop. This isolates the server
+fixture's handling of the expected untrusted-CA handshake reset. Windows runs have
+reported `WinError 10054` in Proactor connection teardown followed by a
+`wait_closed()` timeout; using a Uvicorn-owned socket alone did not resolve it. The
+selector-loop fixture does not test server-side Proactor behavior, so only native
+Windows CI can verify the verifier client and preserved trust/auth assertions. Keep
+this loop boundary until a native Proactor peer completes the rejected-handshake
+cleanup without callback errors or a shutdown timeout. CPython issue
+[#158646](https://github.com/python/cpython/issues/158646) tracks an adjacent
+Windows TLS-reset failure in selector SSL tests; it is not this Proactor wait path.
 
 For authenticated legacy `action-server start --expose`, the public URL is logged
 only after a public `/config` response reports authentication enabled and the
