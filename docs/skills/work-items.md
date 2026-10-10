@@ -130,6 +130,47 @@ The `pypi` environment is a workflow reference only. Its approval and protection
 
 Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader accepts only its PEP 610 editable local-file `direct_url.json` root and resolves a contained `src/actions/work_items/__init__.py` or `actions/work_items/__init__.py`; it never consults project import paths, keeping shadow packages from controlling the REST adapter path.
 
+Convert a PEP 610 file URL path with `urllib.request.url2pathname` before
+constructing a `Path`. On Windows, a local drive URL has a URL path such as
+`/C:/...`; passing that URI spelling directly to `Path` does not produce the
+drive-rooted filesystem path. Keep both editable layouts and the project
+`actions.py` shadowing test, and use the hosted Windows run to verify native
+drive conversion; POSIX path simulations do not establish it.
+
+Native packaging must retain that filesystem source tree. The Action Server
+PyInstaller spec uses `collect_data_files('actions.work_items', include_py_files=True)`
+because hidden imports supply module names in the PYZ archive, not the initializer
+path required by the private loader. Collection stays within the child package;
+`actions/__init__.py` remains Core-owned. The management API stores its local
+SQLite database at the Runtime's `datadir/workitems.db`. Missing Runtime sources
+are not repaired by adding a dependency to an RCC action's `package.yaml`.
+The packaged Work Items smoke test uses a disposable datadir and exercises
+create, list, detail, persisted completion, and corrupt-payload responses through
+the actual executable. An unwrapped PyInstaller pass does not establish wrapper
+extraction, another operating system, or the embedded browser UI.
+
+`scripts/dakota_workitems_native_acceptance.py` adds a separate packaged-worker
+gate for both the frozen executable and Go wrapper. Its consumer action reserves
+and completes an input with parent-linked output, records a failed input with
+error details, recovers a harness-seeded stale reservation, and verifies state
+after Runtime restart. The seeded reservation does not simulate a process crash.
+The runner requires exactly both pytest cases to pass setup, call and teardown,
+plus one fresh atomic proof per executable in an invocation-specific directory.
+Proofs bind the runtime kind, executable SHA256 and task-local Core wheel SHA256;
+the runner rechecks artifacts before admitting success. Each attempt removes
+any prior receipt, then atomically writes a fresh `IN_PROGRESS` receipt and
+attempt ID before artifact checks or pytest. Ordinary failures write `FAIL` and
+mark cases `NOT_VERIFIED`; abrupt termination can leave `IN_PROGRESS`, which is
+not a passing result. Source SHA and build version arguments are caller claims,
+not verified build provenance. The credential-free native workflow runs this
+consumer gate on its Linux, macOS, and Windows matrix after the native artifact
+binding-lock tests. Keep a separate passing receipt for each platform and each
+frozen/Go executable; a Linux receipt does not establish Windows or macOS
+consumer acceptance, distributed or service-backend behavior, or full browser
+acceptance. The workflow also runs process ownership, management/browser and
+history acceptance; those checks do not replace this packaged-worker consumer
+gate.
+
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
 From the repository root when Poetry is unavailable for diagnostic-only host checks:
@@ -152,6 +193,20 @@ Ruff's configured `UP` fixes in `work-items/src/actions/work_items` are compatib
 - Exact JSON payload round trips and lifecycle exception mapping.
 - FileAdapter queue/state filtering, restart behavior, stable attachment ownership, and legacy migration.
 - Action Server datadir/queue isolation, triggers, scheduler, process environment clearing, and absent-package behavior.
+
+Work Items HTTP error tests exercise the Runtime's registered exception handler,
+not only a bare router. Coded exceptions retain structured `detail.code` and
+`detail.message` alongside legacy `error_code` and `message`; the UI prefers the
+structured fields. Missing Runtime support, package-load failure, and corrupt or
+unavailable local storage remain distinct. Malformed stored payloads return a
+bounded `work_items_storage_unavailable` error for detail and list, rather than
+404 or a successful empty queue. A genuinely missing item still returns 404.
+
+A failed private import removes the root and its `_actions_server_work_items.*`
+children, while preserving adjacent names such as `_actions_server_work_items_extra`.
+Retry tests replace the failed package source and prove that stale child modules
+are not reused. `State.DONE.value` is `COMPLETED`; the UI accepts that wire value
+and renders the completed state without changing the backend contract.
 
 ## Compatibility Contract Inventory
 
@@ -253,3 +308,333 @@ wheel/sdist rendering checks so the published long description matches the
 tested artifact.
 
 The current hardening plan is `docs/superpowers/plans/2026-08-05-work-items-hardening.md`. It records approved target behavior, not delivered behavior. Update this guide only when the corresponding implementation and verification evidence exists.
+
+Work Item creation fields must expose their visible Queue Name and Payload
+labels programmatically. Use unique control IDs per dialog, announce invalid
+JSON as an alert, associate the error with the payload field, and clear the
+invalid state when the user edits it. Verify those semantics through accessible
+roles and real packaged-browser creation rather than placeholder-only selectors.
+
+
+## Native browser and persistence acceptance
+
+The credential-free native build workflow runs
+`python scripts/verify_native_acceptance.py --source-sha <built-commit-sha>
+--receipt output/native-acceptance.json` through its prepared Poetry environment
+after building both `dist/action-server/action-server` and
+`dist/final/action-server` (with `.exe` on Windows). Install the declared
+Playwright browser from `action_server/frontend` with
+`npx playwright install chromium`. The workflow runs on Linux, macOS and Windows;
+only a completed PASS receipt from each platform establishes that platform cell.
+
+The harness opens the actual embedded UI in Chromium, signs in using a synthetic
+key, verifies a private HttpOnly cookie and authenticated WebSocket echo, and
+creates, lists and opens a synthetic Work Item through the UI before signing
+out. An intercepted browser HTTP 403 must fail the positive response contract
+before the real flow runs, so an auth error cannot silently count as acceptance.
+The native process then restarts against the same isolated data directory and
+must recover the created PENDING item. Empty queues return 200, missing IDs
+return 404, and deliberate corruption of the stopped synthetic SQLite store
+must return structured `work_items_storage_unavailable` HTTP 503. A cwd
+`actions.py` writes an execution marker if loaded; its absence verifies that
+project shadowing did not replace bundled support.
+
+Every run uses temporary synthetic project/storage directories and owns its
+Runtime/browser process trees, with startup, browser and cleanup deadlines.
+Temporary payloads and process logs are removed; the retained JSON receipt has
+build SHA, platform, architecture, executable SHA-256 hashes, actual package and
+browser versions, and the checks completed. Supply the SHA that built the
+binaries when probing existing artifacts; the harness checkout SHA is not
+artifact provenance. Optional `--frozen`, `--go-wrapper`, `--node` and
+`--browser-executable` flags support existing build artifacts/toolchains.
+
+The credential-free workflow is hand-maintained: it is absent from the
+`TARGETS` list in `.github/workflows/_gen_workflows.py`, so workflow regeneration
+does not overwrite it. Its native artifact contract step discovers both
+`test_native_artifact_manifest.py` and `test_native_artifact_provenance_archive.py`.
+
+The frozen provenance artifact is captured immediately after measurement and
+before Runtime execution, which can add bytecode under the package tree. Its
+existing GitHub artifact name now carries one deterministic PAX tar,
+`native-artifact-provenance.tar`, rather than separate globbed tree paths. The
+tar contains the full `dist/action-server/` tree plus
+`output/native-artifact-manifest.json` and its referenced
+`output/native-artifact-tree-inventory.json`; this preserves hidden files,
+symlink targets, and recorded modes. The manifest's
+`container_archive_path` identifies the tar, while each `archive_path` identifies
+a member within it. The complete tree and both metadata files are measured
+before archiving and remeasured afterward; any byte or inventory drift fails
+closed. Every symlink must have a relative target that resolves inside the
+frozen tree, including directory links. The executable locator must name the
+canonical direct child `action-server` or `action-server.exe` before its bytes
+are read. Keep acceptance receipts separate and do not regenerate the manifest
+or filter package files after measurement.
+
+The credential-free workflow retains the Go wrapper under the existing
+`action-server-unauthenticated-<runner-os>` artifact name and uploads the frozen
+provenance tar in the existing
+`action-server-native-provenance-<runner-os>-<run-id>-<attempt>` artifact. The manifest
+checks Git `HEAD` against `github.sha`, records actual Python and Go versions
+plus platform/architecture, and measures executable hashes and package-relative
+paths. Each runtime entry also records the frozen onedir tree hash and its
+relative-file/content digest, the generated `go-wrapper/assets/assets.zip`
+hash, and a deterministic hash over `go-wrapper/main.go`, `process.go`, `go.mod`,
+and `go.sum`. Those four source inputs have explicit `eol=lf` rules in
+`.gitattributes`: without them, Windows text checkout can hash CRLF worktree
+bytes while the committed source is LF. A regression compares every measured
+worktree input byte-for-byte with its Git blob. The manifest producer and
+independent UI consumer require the same ordered source inventory. Changing
+`process.go` changes the source binding
+while preserving executable and packaged-artifact measurements; omitting the
+helper fails manifest generation. These component values are read from the real
+build outputs after
+`build-executable --go-wrapper`; missing inputs fail manifest generation. The
+browser harness remeasures the checked-out archive and wrapper sources, the
+frozen tree, and extracted wrapper files before accepting UI behavior. The
+manifest does not attest a clean source tree or every build input. Ordinary
+path reads follow symlinks, so SHA-256 identifies bytes read through each named
+path without proving filesystem object identity. Artifact download entries
+identify the Go-wrapper artifact's root executable and the frozen artifact's
+`dist/action-server/...` path. This build does not supply a candidate Core wheel,
+so the manifest makes no Core-wheel provenance claim; the worker-consumer
+acceptance requires a separately measured task-local wheel. The manifest binds
+the source revision and named build inputs, but does not hash every build
+dependency or attest a clean source tree.
+
+On Linux, macOS, and Windows, the same workflow has a separate bounded Work
+Items consumer gate. Each matrix job builds `actions-core` as a wheel into a
+fresh runner-owned RCC home, then runs the real frozen and Go-wrapper
+executables against the synthetic API consumer test. The generated
+`spec-version: v2` package obtains
+`actions-work-items==0.4.4` from the public package registry and installs the
+exact candidate Core wheel with a supported `post-install` command after RCC
+creates the base environment. The consumer action checks the installed Core
+version and module ownership, then validates pip's install report against the
+candidate wheel path and SHA-256. File URLs in that report must be converted
+with the native platform's URL-to-path rules; Windows drive paths are not
+equivalent to a POSIX path formed directly from the URL's leading slash. The
+generated command quotes paths with native Windows command-line rules on
+Windows and POSIX shell rules elsewhere. No business-service credentials are
+used.
+The consumer test generates its action module from source fragments, so its
+regression test must execute a real module import: `compile()` alone does not
+evaluate module-level annotations or decorators. Keep every global referenced
+by an embedded helper in the generated module's own imports.
+
+The Action Server `typecheck` task checks both `src` and `tests` with
+`mypy --follow-imports=silent --show-column-numbers --namespace-packages
+--explicit-package-bases src tests`. A source-only mypy run does not qualify
+the packaged Work Items harness; type its receipt structures and test doubles
+against the same process and cleanup contracts exercised at runtime.
+
+For Action Server Python harness changes, `invoke lint` runs `ruff check src tests`
+using the package-discovered `action_server/ruff.toml`, then `ruff format --check`
+with the shared `devutils/ruff.toml` and the Action Server exclusions, then
+`isort --check src tests` using `action_server/pyproject.toml`. A Ruff rules
+check alone is not a complete lint receipt; scoped checks must preserve the
+same separate rules, formatting and import-sorting gates on the touched files.
+
+The runner hashes both executables and the wheel, requires fresh per-runtime
+API proofs, and accepts
+the optional native manifest only when its source SHA, platform, architecture,
+expected executable paths and measured executable hashes agree. Its receipt
+records the manifest hash and binding result. This hosted matrix collects a
+separate receipt on each of the three platforms; only a passing receipt
+establishes consumer acceptance for that platform. The Action Server must
+create the action Run and bind its artifact metadata before the generated Work
+Items consumer action executes. The native workflow runs platform lock tests
+before consumer acceptance; a failure during Run creation is a platform
+artifact-storage failure, not Work Items consumer evidence. The gate does not
+establish a clean-source attestation, wheel provenance inside the native build
+manifest, or live external-service behavior. The workflow retains a receipt
+even when the gate fails or is interrupted, then removes only its run-owned RCC
+home.
+
+This harness proves creation and restart persistence, not worker-driven Work
+Item state transitions, attachment behavior, accessibility or other browsers.
+Those cells remain separate acceptance requirements. A workflow build/version
+check alone is not native Work Items acceptance.
+
+For packaged Work Items storage-failure UI checks, keep Action Server's own
+database (`--db-file=server.db`) separate from the management API database at
+`datadir/workitems.db`. After the test-owned browser closes and its requests
+finish, remove the Work Items database's SQLite sidecars and corrupt only
+`workitems.db`; reload the actual UI and verify its real
+`work_items_storage_unavailable` response and visible Retry guidance. The
+Action Server process may stay up because each adapter operation opens its own
+SQLite connection. Pointing `--db-file` at `workitems.db` instead corrupts the
+Action Server migration database and prevents the Runtime from reaching the
+Work Items error path.
+
+Keyboard acceptance for a Work Items dialog must verify both Escape dismissal
+and focus returning to the control that opened it; dialog closure alone is not
+a keyboard pass. A Chromium probe of the earlier Linux Go-wrapper artifact from
+run `37978256399` (manifest source `006232d13bf322755419d99b96e506edf16a4353`,
+wrapper SHA-256 `8f77988e3d305a232667037cabc55222e18f0af2b6d81d6b45832f45a338f0b5`)
+found that Escape closed Create Work Item but left `document.activeElement` on
+`BODY` while its trigger remained present. The source fix renders both create
+buttons as `DialogTrigger` children of their controlled Radix dialog root; source
+regressions cover the empty and populated page triggers.
+
+The packaged Linux Work Items browser gate runs
+`native-workitems-ui-acceptance.mjs` against the measured frozen executable. A
+PASS_BOUNDED receipt at source `fafd43ed7bbd06ba4f6d25aed85eb40e46653185`,
+frozen SHA-256 `b7031dcc0870a0e78cbf95f604675a5f23eea684c3829c404be8522687e22084`,
+Runtime 1.0.3, and Chromium 151.0.7922.34 verified empty and populated actual
+SQLite queue reads, keyboard open/Escape focus restoration, detail readback, no
+horizontal overflow at 320px, and the real storage-unavailable 503 with Retry
+and no raw path. The frozen executable hash does not bind its adjacent onedir
+files: a later run found stale UI bytes beside the same executable hash. Frozen
+UI receipts therefore also hash the full package tree before and after browser
+execution. The Go-wrapper Linux gate packages that same measured frozen tree
+with the repository's `zip_go_wrapper_assets` helper and verifies the wrapper's
+embedded archive hash plus the extracted file-set hash. For wrapper tests, set
+`HOME` (Linux/macOS) or `LOCALAPPDATA` (Windows) to the test-owned Runtime home
+before both the version probe and server start; `ACTIONS_HOME` and
+`ROBOCORP_HOME` alone do not isolate the wrapper's extraction directory.
+
+The Python browser harness must require both a zero Node exit and a `PASS`
+receipt while serializing the receipt to a string for assertion details. Passing
+the nested receipt dictionary directly as `assert`'s message can make pytest's
+assertion rewriting raise `TypeError: sequence item 0: expected str instance,
+dict found`, hiding the browser stage's original phase and state. Keep a
+regression that verifies a nonzero child exit preserves its nested JSON receipt.
+
+A Linux PASS_BOUNDED Go-wrapper receipt at the same source SHA records wrapper
+SHA-256 `79544d8e093c41ef7f2328efd2d0d4fd22acd8989fdc1f34b2a647f37fee6f24`,
+embedded archive SHA-256 `840eb3567e161df9738196c959a8f2acec98c95619b1d1a670036739c5849773`,
+wrapper-source SHA-256 `dd1fca74676c2c10531397e7ffe8bf5499b5ba75a6692334b16fd0e12f50b68d`,
+and extracted-file-set SHA-256 `0eccdeebceb4c8a7f6bf94b8f12e37f4f3302e8726daffc68d0198ee5fb9ad50`.
+It verified the same empty/populated queue, Escape focus restoration, detail,
+320px layout, and real storage-unavailable states as the frozen gate. These are
+Linux results only. The native workflow runs separate frozen and Go-wrapper
+browser gates on Ubuntu and Windows; their receipts bind the manifest path,
+executable hash, and (for frozen builds) the onedir package-tree hash. Windows
+manifest paths include `.exe` for both runtimes, which the harness validates.
+Those Windows gates still require passing hosted receipts; macOS browser
+acceptance is not configured. Authorization denial, missing bundled support,
+and generic HTTP 500 remain `NOT_RUN` until their separately owned or supported
+packaged fixtures run. Do not use response interception as backend evidence.
+The browser receipt may say `PASS_BOUNDED` only after the bounded process-tree
+cleanup result confirms that the Runtime wrapper was reaped, its descendant
+snapshot was complete, and no observed descendant remains live. A normal return
+from `ActionServerProcess.stop()` is insufficient: its underlying tree killer
+can suppress process-control errors and return without observing the final
+state. Keep the observed zombie-descendant count separate; this gate does not
+claim universal child reaping. Startup failure applies the same observation to
+the locally created Runtime even when the startup helper has not returned it to
+the caller. If both startup and cleanup fail, retain both exception class names
+and the bounded cleanup result in the sanitized receipt while preserving the
+startup exception as the primary failure. An incomplete cleanup result leaves
+the receipt at `FAIL`.
+
+If the manifest's frozen-tree digest differs at UI-gate startup, retain both the
+build-time inventory beside the manifest and the harness's pretest inventory.
+Compare their relative paths, entry kinds, permission modes, symlink targets,
+and file-content hashes before changing inventory normalization or gate order.
+The inventory is diagnostic evidence; never recompute the trusted manifest
+value from the later tree to make a mismatch pass. Hosted Linux and Windows
+inventories showed new preload-action bytecode files under the frozen
+`_internal` tree after manifest creation; Windows also gained a downloaded RCC
+executable under `_internal/actions/server/bin`. Place the Work Items browser
+gate before other packaged Runtime gates and set `PYTHONDONTWRITEBYTECODE=1` for
+its Runtime and version probes. Its hosted tree check must still pass before
+that ordering change counts as verified behavior.
+
+After cleanup, the frozen browser gate also retains a post-runtime per-path
+inventory and an added/removed/changed entry report, including when the tree
+digest differs. Preserve the initial manifest digest and require every original
+entry to remain unchanged. The Action Server's `_download_rcc.py` contract puts
+the pinned RCC executable at `_internal/actions/server/bin/rcc-<version>`; if
+absent from the frozen build, the harness records that exact runtime-created
+file and its content digest as separate runtime state. Other added entries,
+removed files, or changed build entries fail the gate. Do not recalculate the
+trusted manifest hash from the post-runtime tree.
+
+Run the frozen browser gate from a task-owned copy of the onedir package. Verify
+the copy's full tree and executable hashes against the immutable manifest before
+launch, and verify the original build tree remains unchanged afterward. The Go
+wrapper extracts into a test-owned home; verify that extraction against the
+embedded archive before Runtime startup and inventory its post-runtime changes
+separately. This prevents one Runtime probe from changing the build artifact
+used by the next probe. Hosted Windows results must still verify the copy
+behavior and both UI cells.
+
+Subprocess debug/error messages and string representations must redact
+sensitive command-line switches before formatting the argument list.
+Use the shared process-argument redactor so Action Server's common and
+RoboUtils process wrappers agree on `--api-key` and its accepted abbreviations.
+Tests must prove the key value is absent from captured logs without placing the
+value in the assertion failure message.
+
+On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
+Job Object before releasing its three-byte stdin gate. Runtime, Node and their
+descendants inherit that ownership; closing the Job requests descendant termination
+even after their original leader exits. Successful cleanup additionally requires
+native proof that held descendant handles are already signaled at ownership-context
+return; the active-process accounting barrier alone has failed that assertion even
+with exact Job membership confirmed. The harness now captures and validates member
+handles before termination, waits them under one shared deadline, and rejects
+incomplete capture or cumulative process-count changes. This does not establish
+completion of processes that exited before capture. Job creation or assignment
+failure fails the gate. The workflow runs `python -m unittest discover -s scripts
+-p test_native_process_ownership.py -v`; the descendant lifetime test requires
+actual Windows and is skipped elsewhere. Linux gate tests do not establish
+Windows Job behavior. POSIX cleanup retains process-group ownership.
+
+Before deleting temporary native logs, acceptance rejects any occurrence of the
+synthetic API key using a phase-only failure message. This checks the native INFO
+startup path; verbose WebSocket credential redaction has separate transport
+tests. The frozen executable hash does not identify adjacent onedir files; retain
+that provenance limitation when using its receipt. The Go wrapper executable
+contains its archive; measure the archive hash and verify the test-owned
+extraction's file set when binding it to browser behavior.
+
+Startup exits retain only the exit code and bounded exception-class/import-module
+identifiers parsed from the final 64 KiB of the temporary log. Raw log lines,
+exception messages, paths and credentials are not copied into receipts. Treat
+these identifiers as diagnostics, not proof of a packaging cause. API keys are
+passed as `--api-key=<value>` so a generated leading hyphen remains a value.
+
+Windows startup can fail after a successful version probe even when Job ownership
+tests pass. To diagnose that boundary, inspect bounded tails from both redirected
+process output and `server_log.txt`; strip ANSI formatting before recognizing
+exception identifiers. Receipts retain only import module identifiers, traceback
+file basenames/line numbers/function identifiers and fixed diagnostic markers,
+never source lines or exception messages. An empty identifier list does not prove
+that imports succeeded. Keep startup failure blocking until the actual native
+platform rerun passes; a diagnostic-only repair does not accept that platform.
+
+Artifact storage roots must reject symbolic links and Windows reparse points
+(including junctions) in every path component. A changed spelling after
+`Path.resolve()` is not itself a link: Windows expands ordinary 8.3 directory
+names. Validate components first, then retain the canonical root for containment
+checks. Native Windows CI also exercises a real `GetShortPathNameW` alias and
+rejects a real junction both as a root and within it; only that platform run
+establishes the Windows behavior. The harness canonicalizes its own POSIX
+temporary directory to avoid macOS system `/var` aliases; this does not relax
+the configured user-root policy.
+
+Inspect each artifact path component with `lstat`, including when `exists()` is
+false: a dangling Windows junction can remain a reparse point after its target
+is removed. The Windows gate removes a junction target and verifies rejection
+again, rather than treating missing-target behavior as ordinary absence.
+
+SQLite connection context managers commit or roll back transactions but do not close
+the connection. Native acceptance fixtures must explicitly close them before removing
+their owned temporary data directories, particularly on Windows. Canonicalize the
+harness's own temporary root on POSIX before supplying it to the Runtime; this does
+not relax rejection of links in user-configured storage roots. A browser scenario
+passing before cleanup fails is a failed harness run, and startup diagnostics must
+remain attached to the exact binary receipt.
+
+The packaged browser harness also runs axe's WCAG 2 A/AA and 2.1 A/AA rules on
+sign-in, empty queue, create dialog and detail dialog. Wait for the asserted UI
+state, loaded fonts and finite animations before auditing; do not disable contrast
+rules or ignore violations. A deliberately unreadable temporary element must fail
+the contrast rule before the real states are checked, then is removed. Receipts
+contain only rule identifiers/counts, never DOM markup, keys or run payloads.
+These checks cover four settled Chromium states, not all routes, transition frames,
+manual keyboard/screen-reader behavior or other browsers. Preserve any earlier
+failure and its subject when a later audit passes; do not infer a product color fix
+from a timing-dependent result without identifying the failing element.

@@ -16,9 +16,7 @@ def _workflow():
 
 def _step(workflow, job, name):
     return next(
-        step
-        for step in workflow["jobs"][job]["steps"]
-        if step.get("name") == name
+        step for step in workflow["jobs"][job]["steps"] if step.get("name") == name
     )
 
 
@@ -28,7 +26,7 @@ def _run_shell_step(script, cwd, tmp_path, tag="actions_http-1.0.1"):
     poetry = fake_bin / "poetry"
     poetry.write_text(
         "#!/bin/sh\n"
-        "test \"$1 $2\" = \"version --short\"\n"
+        'test "$1 $2" = "version --short"\n'
         "printf '%s\\n' \"$PACKAGE_VERSION\"\n"
     )
     poetry.chmod(0o755)
@@ -64,19 +62,17 @@ def test_http_helper_release_verifies_pinned_exact_artifacts_before_publish():
         "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
     )
     assert any(
-        step.get("run") == "pipx install poetry==2.1.1"
-        for step in verify["steps"]
+        step.get("run") == "pipx install poetry==2.1.1" for step in verify["steps"]
     )
     assert build["run"] == "poetry build"
     assert " -C " not in build["run"]
     assert '"actions_http_helper-$package_version.tar.gz"' in artifacts["run"]
-    assert '"actions_http_helper-$package_version-py3-none-any.whl"' in artifacts[
-        "run"
-    ]
+    assert '"actions_http_helper-$package_version-py3-none-any.whl"' in artifacts["run"]
     assert "find dist -mindepth 1 -maxdepth 1 -printf '%f\\n'" in artifacts["run"]
-    assert '"$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 2' in artifacts[
-        "run"
-    ]
+    assert (
+        '"$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 2'
+        in artifacts["run"]
+    )
     twine_install = _step(workflow, "verify", "Install Twine 6.2.0")
     assert "twine==6.2.0" in twine_install["run"]
     assert "twine check --strict" in twine["run"]
@@ -89,9 +85,10 @@ def test_http_helper_release_verifies_pinned_exact_artifacts_before_publish():
     download = _step(workflow, "publish", "Download verified HTTP helper artifacts")
     assert download["with"]["name"] == "actions-http-helper-dist"
     verify_copy = _step(workflow, "publish", "Verify downloaded HTTP helper artifacts")
-    assert "(cd dist && sha256sum -c actions-http-helper-manifest.sha256)" in verify_copy[
-        "run"
-    ]
+    assert (
+        "(cd dist && sha256sum -c actions-http-helper-manifest.sha256)"
+        in verify_copy["run"]
+    )
     assert "diff -u" in verify_copy["run"]
 
 
@@ -113,8 +110,8 @@ def test_http_helper_publish_fails_closed_without_token_and_passes_configured_se
     poetry = fake_bin / "poetry"
     poetry.write_text(
         "#!/bin/sh\n"
-        "printf '%s\\n' \"$@\" > \"$ARGS_FILE\"\n"
-        f"printf '%s' \"${TOKEN_ENV}\" > \"$ENV_FILE\"\n"
+        'printf \'%s\\n\' "$@" > "$ARGS_FILE"\n'
+        f'printf \'%s\' "${TOKEN_ENV}" > "$ENV_FILE"\n'
     )
     poetry.chmod(0o755)
     base_env = os.environ.copy()
@@ -157,7 +154,9 @@ def test_http_helper_publish_fails_closed_without_token_and_passes_configured_se
 
 def test_http_helper_artifact_inventory_and_manifest_bind_exact_bytes(tmp_path):
     workflow = _workflow()
-    build_step = _step(workflow, "verify", "Verify exact HTTP helper artifact inventory")
+    build_step = _step(
+        workflow, "verify", "Verify exact HTTP helper artifact inventory"
+    )
     publish_step = _step(workflow, "publish", "Verify downloaded HTTP helper artifacts")
     package_root = tmp_path / "actions-http-helper"
     dist = package_root / "dist"
@@ -174,7 +173,9 @@ def test_http_helper_artifact_inventory_and_manifest_bind_exact_bytes(tmp_path):
         name: hashlib.sha256((dist / name).read_bytes()).hexdigest()
         for name in (wheel, sdist)
     }
-    assert manifest.splitlines() == [f"{expected[name]}  {name}" for name in sorted(expected)]
+    assert manifest.splitlines() == [
+        f"{expected[name]}  {name}" for name in sorted(expected)
+    ]
 
     downloaded = _run_shell_step(publish_step["run"], package_root, tmp_path)
     assert downloaded.returncode == 0, downloaded.stderr
@@ -194,7 +195,9 @@ def test_http_helper_inventory_rejects_wrong_tag_and_extra_files(tmp_path):
     (dist / "actions_http_helper-1.0.1-py3-none-any.whl").write_bytes(b"wheel")
     (dist / "actions_http_helper-1.0.1.tar.gz").write_bytes(b"sdist")
 
-    wrong_tag = _run_shell_step(step["run"], package_root, tmp_path, tag="actions_http-1.0.0")
+    wrong_tag = _run_shell_step(
+        step["run"], package_root, tmp_path, tag="actions_http-1.0.0"
+    )
     assert wrong_tag.returncode != 0
     assert not (dist / "actions-http-helper-manifest.sha256").exists()
 

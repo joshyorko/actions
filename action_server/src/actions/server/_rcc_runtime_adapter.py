@@ -14,13 +14,17 @@ import subprocess
 import threading
 import uuid
 from collections.abc import Callable, Sequence
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Literal
+from urllib.parse import urlsplit
+
+from actions.server._common.process import ProcessTreeCleanupResult
 
 RCC_VERSION = "v18.19.3"
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
+_PROVIDER_PROFILE_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,62}$")
 _ENVIRONMENT_FIELDS = (
     "spec-version",
     "dependencies",
@@ -31,6 +35,46 @@ _prepared_runtime_cache: dict[
     tuple[Path, str, str | None], tuple[str, RccRuntimeDescriptor]
 ] = {}
 _prepared_runtime_cache_lock = threading.Lock()
+
+
+def _validate_provider_reference(provider: str | None) -> str | None:
+    """Reject provider URLs that could persist credentials or argv controls."""
+
+    if provider is None:
+        return None
+    if not isinstance(provider, str) or not provider:
+        raise RccRuntimeError("provider", "provider reference is invalid")
+    if any(ord(character) < 32 or ord(character) == 127 for character in provider):
+        raise RccRuntimeError("provider", "provider reference contains control data")
+    try:
+        parsed = urlsplit(provider)
+        _ = parsed.port  # Validate numeric port syntax.
+    except ValueError:
+        raise RccRuntimeError("provider", "provider reference is invalid") from None
+    if (
+        parsed.username is not None
+        or parsed.password is not None
+        or parsed.query
+        or parsed.fragment
+    ):
+        raise RccRuntimeError(
+            "provider", "credential-bearing provider URL syntax is unsupported"
+        )
+    if any(character.isspace() for character in provider):
+        raise RccRuntimeError("provider", "provider reference contains whitespace")
+    if provider == "local":
+        return provider
+    if parsed.scheme or parsed.netloc:
+        if (
+            not provider.startswith(("http://", "https://"))
+            or not parsed.netloc
+            or not parsed.hostname
+        ):
+            raise RccRuntimeError("provider", "provider must be a valid HTTP(S) URL")
+        return provider
+    if not _PROVIDER_PROFILE_RE.fullmatch(provider):
+        raise RccRuntimeError("provider", "provider profile reference is invalid")
+    return provider
 
 
 class RccRuntimeError(RuntimeError):
@@ -52,6 +96,8 @@ class RccRuntimeDescriptor:
     rcc_version: str = RCC_VERSION
     runtime_kind: str = "rcc"
     contract_version: str = RCC_CONTRACT_VERSION
+    provider_reference: str | None = None
+    provider_context_bound: bool = True
 
     def __post_init__(self) -> None:
         if not _DIGEST_RE.fullmatch(self.artifact_digest):
@@ -64,6 +110,9 @@ class RccRuntimeDescriptor:
             r"[0-9a-f]{64}", self.environment_fingerprint
         ):
             raise RccRuntimeError("descriptor", "invalid environment fingerprint")
+        _validate_provider_reference(self.provider_reference)
+        if not isinstance(self.provider_context_bound, bool):
+            raise RccRuntimeError("descriptor", "invalid provider context binding")
 
     def to_dict(self) -> dict[str, object]:
         runtime = asdict(self)
@@ -76,7 +125,9 @@ class RccRuntimeDescriptor:
     @classmethod
     def from_dict(cls, value: object) -> "RccRuntimeDescriptor":
         if not isinstance(value, dict) or set(value) != {"runtime"}:
-            raise RccRuntimeError("descriptor", "expected a versioned runtime descriptor")
+            raise RccRuntimeError(
+                "descriptor", "expected a versioned runtime descriptor"
+            )
         runtime = value["runtime"]
         if not isinstance(runtime, dict):
             raise RccRuntimeError("descriptor", "runtime namespace is not an object")
@@ -84,12 +135,17 @@ class RccRuntimeDescriptor:
         if set(runtime) - allowed:
             raise RccRuntimeError("descriptor", "unknown runtime fields")
         runtime = dict(runtime)
+        if "provider_reference" not in runtime:
+            # Persisted legacy descriptors lack trust-carrier identity.
+            runtime["provider_context_bound"] = False
         if "kind" in runtime:
             runtime["runtime_kind"] = runtime.pop("kind")
         try:
             return cls(**runtime)
         except TypeError as exc:
-            raise RccRuntimeError("descriptor", "incomplete runtime descriptor") from exc
+            raise RccRuntimeError(
+                "descriptor", "incomplete runtime descriptor"
+            ) from exc
 
     @classmethod
     def from_json(cls, value: str) -> "RccRuntimeDescriptor":
@@ -142,9 +198,7 @@ def environment_spec_fingerprint(environment: Path) -> str:
     if not isinstance(package, dict):
         raise RccRuntimeError("resolve", "package environment must be a mapping")
     normalized = {key: package[key] for key in _ENVIRONMENT_FIELDS if key in package}
-    encoded = json.dumps(
-        normalized, sort_keys=True, separators=(",", ":"), default=str
-    )
+    encoded = json.dumps(normalized, sort_keys=True, separators=(",", ":"), default=str)
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
@@ -193,11 +247,23 @@ def _subprocess_runner(*args: str) -> tuple[int, str, str]:
     return completed.returncode, completed.stdout, completed.stderr
 
 
-def _run_json(phase: str, args: Sequence[str], runner: Runner = _subprocess_runner) -> dict:
+def _run_json(
+    phase: str, args: Sequence[str], runner: Runner = _subprocess_runner
+) -> dict:
     code, stdout, stderr = runner(*args)
     if code:
-        detail = (stderr or stdout).strip().splitlines()[-1:] or ["command failed"]
-        raise RccRuntimeError(phase, detail[0][:400])
+        output_lines = (stderr or stdout).strip().splitlines()
+        detail = next(
+            (
+                line.strip()
+                for line in reversed(output_lines)
+                if line.strip()
+                and not line.strip().startswith("[rcc] exit status will be:")
+                and not line.strip().startswith("Note: Now running rcc")
+            ),
+            "command failed",
+        )
+        raise RccRuntimeError(phase, detail[:400])
     try:
         loaded = json.loads(stdout)
     except (TypeError, ValueError, json.JSONDecodeError) as exc:
@@ -207,19 +273,45 @@ def _run_json(phase: str, args: Sequence[str], runner: Runner = _subprocess_runn
     return loaded
 
 
-def publish_artifact(environment: Path, rcc_location: Path, *, provider: str | None = None, runner: Runner = _subprocess_runner) -> str:
-    args = [str(rcc_location), "env", "publish", "--environment", str(environment), "--json"]
+def publish_artifact(
+    environment: Path,
+    rcc_location: Path,
+    *,
+    provider: str | None = None,
+    runner: Runner = _subprocess_runner,
+) -> str:
+    provider = _validate_provider_reference(provider)
+    args = [
+        str(rcc_location),
+        "env",
+        "publish",
+        "--environment",
+        str(environment),
+        "--json",
+    ]
     if provider:
         args.extend(["--provider", provider])
     return parse_artifact_digest(_run_json("publish", args, runner))
 
 
-def acquire_artifact(artifact_digest: str, rcc_location: Path, *, provider: str | None = None, runner: Runner = _subprocess_runner) -> dict:
+def acquire_artifact(
+    artifact_digest: str,
+    rcc_location: Path,
+    *,
+    provider: str | None = None,
+    runner: Runner = _subprocess_runner,
+) -> dict:
+    provider = _validate_provider_reference(provider)
     if not _DIGEST_RE.fullmatch(artifact_digest):
         raise RccRuntimeError("acquire", "invalid artifact digest")
     args = [
-        str(rcc_location), "env", "acquire", "--artifact", artifact_digest,
-        "--json", "--permissive-local",
+        str(rcc_location),
+        "env",
+        "acquire",
+        "--artifact",
+        artifact_digest,
+        "--json",
+        "--permissive-local",
     ]
     if provider:
         args.extend(["--provider", provider])
@@ -242,14 +334,17 @@ def prepare_runtime(
     environment: Path,
     rcc_location: Path,
     *,
+    environment_identity: Path | None = None,
     source_generation: str = "unknown",
     provider: str | None = None,
     previous_descriptor: RccRuntimeDescriptor | None = None,
     runner: Runner = _subprocess_runner,
 ) -> RccRuntimeDescriptor:
     environment = environment.resolve()
+    cache_identity = (environment_identity or environment).resolve()
+    provider = _validate_provider_reference(provider)
     environment_fingerprint = environment_spec_fingerprint(environment)
-    cache_key = (environment, environment_fingerprint, provider)
+    cache_key = (cache_identity, environment_fingerprint, provider)
     source_hash = source_generation
     if source_hash == "unknown":
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
@@ -270,6 +365,7 @@ def prepare_runtime(
             rcc_version=cached_descriptor.rcc_version,
             runtime_kind=cached_descriptor.runtime_kind,
             contract_version=cached_descriptor.contract_version,
+            provider_reference=provider,
         )
         with _prepared_runtime_cache_lock:
             _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -301,6 +397,7 @@ def prepare_runtime(
                 source_hash=source_hash,
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="rebuild",
+                provider_reference=provider,
             )
         else:
             descriptor = RccRuntimeDescriptor(
@@ -309,6 +406,7 @@ def prepare_runtime(
                 source_hash=source_hash,
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="warm-reuse",
+                provider_reference=provider,
             )
         with _prepared_runtime_cache_lock:
             _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -335,6 +433,7 @@ def prepare_runtime(
                 source_hash=source_hash,
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="rebuild",
+                provider_reference=provider,
             )
             with _prepared_runtime_cache_lock:
                 _prepared_runtime_cache[cache_key] = (
@@ -351,15 +450,19 @@ def prepare_runtime(
             rcc_version=descriptor.rcc_version,
             runtime_kind=descriptor.runtime_kind,
             contract_version=descriptor.contract_version,
+            provider_reference=provider,
         )
 
-    digest = publish_artifact(environment, rcc_location, provider=provider, runner=runner)
+    digest = publish_artifact(
+        environment, rcc_location, provider=provider, runner=runner
+    )
     acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
     descriptor = RccRuntimeDescriptor(
         artifact_digest=digest,
         source_generation=source_generation,
         source_hash=source_hash,
         environment_fingerprint=environment_fingerprint,
+        provider_reference=provider,
     )
     with _prepared_runtime_cache_lock:
         _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -374,10 +477,20 @@ def build_exec_command(
     receipt_file: Path | None,
     json_output: bool = True,
 ) -> list[str]:
+    if not descriptor.provider_context_bound:
+        raise RccRuntimeError(
+            "exec", "descriptor lacks provider trust context; reprepare required"
+        )
     args = [
-        str(rcc_location), "env", "exec", "--artifact", descriptor.artifact_digest,
+        str(rcc_location),
+        "env",
+        "exec",
+        "--artifact",
+        descriptor.artifact_digest,
         "--permissive-local",
     ]
+    if descriptor.provider_reference:
+        args.extend(["--provider", descriptor.provider_reference])
     if receipt_file is None and json_output:
         args.append("--json")
     elif receipt_file is not None:
@@ -402,6 +515,9 @@ class RccProcessHandle:
     def __init__(self, process: subprocess.Popen, receipt_file: Path):
         self.process = process
         self.receipt_file = receipt_file
+        self._owned_processes: list[object] | None = None
+        self._owned_snapshot_complete = False
+        self.last_cleanup_result: ProcessTreeCleanupResult | None = None
 
     @property
     def pid(self) -> int:
@@ -416,6 +532,41 @@ class RccProcessHandle:
 
     def wait(self, timeout: float | None = None) -> int:
         return self.process.wait(timeout=timeout)
+
+    def capture_owned_processes(self):
+        """Snapshot wrapper descendants before terminal shutdown can reparent them."""
+        from actions.server._common.process import snapshot_process_descendants
+
+        self._owned_processes = snapshot_process_descendants(self.process.pid)
+        self._owned_snapshot_complete = True
+        return self._owned_processes
+
+    def force_kill_until(self, deadline: float) -> ProcessTreeCleanupResult:
+        """Force-stop the captured wrapper tree and wait within one deadline."""
+        snapshot_error = None
+        from actions.server._common.process import force_kill_process_tree_until
+
+        if self._owned_processes is None:
+            try:
+                self.capture_owned_processes()
+            except Exception as exc:
+                self._owned_processes = []
+                snapshot_error = f"descendant snapshot unavailable: {exc}"
+        cleanup_result = force_kill_process_tree_until(
+            self.process,
+            self._owned_processes,
+            deadline,
+            snapshot_complete_before_call=self._owned_snapshot_complete,
+        )
+        if snapshot_error:
+            cleanup_result = replace(
+                cleanup_result,
+                descendant_snapshot_complete=False,
+                errors=(*cleanup_result.errors, snapshot_error),
+            )
+        self.last_cleanup_result = cleanup_result
+        self._owned_snapshot_complete = cleanup_result.descendant_snapshot_complete
+        return cleanup_result
 
 
 def new_receipt_path(datadir: Path) -> Path:
@@ -458,7 +609,10 @@ def read_receipt(receipt_file: Path, artifact_digest: str) -> dict:
         receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         raise RccRuntimeError("receipt", "missing or malformed RCC receipt") from exc
-    if not isinstance(receipt, dict) or receipt.get("artifactDigest") != artifact_digest:
+    if (
+        not isinstance(receipt, dict)
+        or receipt.get("artifactDigest") != artifact_digest
+    ):
         raise RccRuntimeError("receipt", "receipt artifact identity mismatch")
     verification = receipt.get("verification")
     if not isinstance(verification, dict) or verification.get("valid") is not True:

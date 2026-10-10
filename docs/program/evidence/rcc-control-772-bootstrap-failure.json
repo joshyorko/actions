@@ -1,0 +1,19 @@
+{
+  "observed_at_utc": "2026-10-10 08:00:42 UTC",
+  "repository": "joshyorko/actions",
+  "pr": 284,
+  "run_id": 38035543627,
+  "job_id": 114165080442,
+  "control_sha": "772b73d9e7f9da6c3ea939faff8ae76d37982da7",
+  "candidate_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+  "status": "FAIL_BOOTSTRAP_LIFECYCLE_NOT_RUN",
+  "failed_command": "\"$rcc\" --version 2>&1 | grep --fixed-strings --line-regexp --quiet \"v18.19.3\"",
+  "exit_code": 141,
+  "previous_accepted_proof_run": 38034464513,
+  "artifact": {
+    "id": 11663806574,
+    "zip_sha256": "e88ed85e33192272007d6823cb3a8510ddf047588dda064dd47cddfbc1a548e0"
+  },
+  "diagnosis_status": "Early-consumer SIGPIPE candidate; deterministic reproduction assigned before repair",
+  "next_owner": "luna_canvas_acceptance tests; root serializes generator fix"
+}

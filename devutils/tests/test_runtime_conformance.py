@@ -28,7 +28,9 @@ def test_exact_subject_is_order_independent_and_detects_changes():
 def test_admission_is_canonical_and_does_not_fallback():
     snapshot = admit({"capability": "c1"}, "shadow", "g1", _plan(), None)
     assert (snapshot.outcome, snapshot.reason, snapshot.mode) == (
-        "no_worker", "no eligible worker", "shadow"
+        "no_worker",
+        "no eligible worker",
+        "shadow",
     )
 
     revision = DeploymentRevision("d2", "c1", (_plan(),), "missing")

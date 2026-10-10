@@ -138,6 +138,31 @@ const runs = [
   },
 ];
 const knownRunIds = new Set(runs.map((run) => run.id));
+const runSummaries = runs.map(
+  ({
+    id,
+    status,
+    action_id,
+    start_time,
+    run_time,
+    numbered_id,
+    run_type,
+    action_name,
+    robot_package_path,
+    robot_task_name,
+  }) => ({
+    id,
+    status,
+    action_id,
+    start_time,
+    run_time,
+    numbered_id,
+    run_type,
+    action_name,
+    robot_package_path,
+    robot_task_name,
+  }),
+);
 const artifactList = [
   { name: "result.json", size_in_bytes: 128 },
   { name: "nested/trace.txt", size_in_bytes: 512 },
@@ -252,6 +277,8 @@ const rejectBody = (req, res, status, message) => {
 const dispatchRequest = (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const state = mode(req);
+  if (req.method === "GET" && url.pathname === "/browser-session" && !url.search)
+    return send(res, 200, { required: false, authenticated: true, transport_allowed: true, expires_in: null });
   if (req.method === "GET" && url.pathname === "/config" && !url.search)
     return send(res, 200, {
       expose_url: "",
@@ -259,6 +286,37 @@ const dispatchRequest = (req, res) => {
       version: "fixture-v1",
       mtime_uuid: "fixture-v1",
     });
+  if (
+    req.method === "GET" &&
+    url.pathname === "/api/runs/summary" &&
+    [...url.searchParams.keys()].every(
+      (key) => key === "limit" || key === "offset" || key === "run_type",
+    ) &&
+    url.searchParams.getAll("limit").length === 1 &&
+    Number(url.searchParams.get("limit")) >= 1 &&
+    Number(url.searchParams.get("limit")) <= 200 &&
+    url.searchParams.getAll("offset").length <= 1 &&
+    Number(url.searchParams.get("offset") ?? "0") >= 0 &&
+    url.searchParams.getAll("run_type").length <= 1 &&
+    state === "loading"
+  )
+    return delayed(req, res, runSummaries);
+  if (
+    req.method === "GET" &&
+    url.pathname === "/api/runs/summary" &&
+    [...url.searchParams.keys()].every(
+      (key) => key === "limit" || key === "offset" || key === "run_type",
+    ) &&
+    url.searchParams.getAll("limit").length === 1 &&
+    Number(url.searchParams.get("limit")) >= 1 &&
+    Number(url.searchParams.get("limit")) <= 200 &&
+    url.searchParams.getAll("offset").length <= 1 &&
+    Number(url.searchParams.get("offset") ?? "0") >= 0 &&
+    url.searchParams.getAll("run_type").length <= 1
+  )
+    return state === "error"
+      ? send(res, 500, { detail: "Fixture API error: runs unavailable." })
+      : send(res, 200, state === "empty" ? [] : runSummaries);
   if (
     req.method === "GET" &&
     url.pathname === "/api/actionPackages" &&
@@ -349,7 +407,11 @@ const dispatchRequest = (req, res) => {
           }
         : [],
     );
-  if (req.method === "GET" && url.pathname === "/api/ws" && !url.search)
+  if (
+    req.method === "GET" &&
+    ["/api/ws", "/api/ws/summary"].includes(url.pathname) &&
+    !url.search
+  )
     return send(res, 426, { detail: "WebSocket upgrade required" });
   if (
     req.method === "GET" &&

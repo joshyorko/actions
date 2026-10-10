@@ -1,7 +1,13 @@
+import errno
 import json
 import os
+import stat
+import sys
 import tempfile
-from pathlib import Path, PurePosixPath
+import time
+from collections.abc import Iterator
+from contextlib import contextmanager
+from pathlib import Path, PurePath, PurePosixPath, PureWindowsPath
 from typing import Any, Protocol
 
 
@@ -36,6 +42,87 @@ class ArtifactStorage(Protocol):
         ...
 
 
+def _relative_parts(path: PurePath, parent: PurePath) -> tuple[str, ...]:
+    """Compare local Windows drive prefixes without changing paths used for I/O."""
+    try:
+        return path.relative_to(parent).parts
+    except ValueError:
+        if not isinstance(path, PureWindowsPath) or not isinstance(
+            parent, PureWindowsPath
+        ):
+            raise
+
+        def local_drive_spelling(value: PureWindowsPath) -> PureWindowsPath:
+            drive = value.drive.removeprefix("\\\\?\\")
+            if (
+                value.root != "\\"
+                or len(drive) != 2
+                or drive[0]
+                not in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                or drive[1] != ":"
+            ):
+                raise ValueError("Paths do not have equivalent local drive anchors")
+            if any(
+                part in {".", ".."}
+                or part.endswith((".", " "))
+                or ":" in part
+                or PureWindowsPath(part).is_reserved()
+                for part in value.parts[1:]
+            ):
+                raise ValueError("Ambiguous Windows component across drive prefixes")
+            return PureWindowsPath(drive + "\\", *value.parts[1:])
+
+        return (
+            local_drive_spelling(path).relative_to(local_drive_spelling(parent)).parts
+        )
+
+
+def _is_link_or_reparse_point(path: Path) -> bool:
+    # lstat observes the directory entry even when a junction target is missing.
+    try:
+        info = path.lstat()
+    except FileNotFoundError:
+        return False
+    return stat.S_ISLNK(info.st_mode) or bool(
+        getattr(info, "st_file_attributes", 0)
+        & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+    )
+
+
+@contextmanager
+def _manifest_lock(path: Path) -> Iterator[None]:
+    # Keep this file in place: unlinking it can give concurrent writers different
+    # lock objects. The OS releases the lock even if its owning process exits.
+    with path.open("a+b") as stream:
+        if sys.platform == "win32":
+            import msvcrt
+
+            # Windows supports locking beyond EOF, so the persistent lock file
+            # need not be initialized or written while another writer holds it.
+            while True:
+                stream.seek(0)
+                try:
+                    msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+                    break
+                except OSError as error:
+                    if error.errno not in {errno.EACCES, errno.EAGAIN, errno.EDEADLK}:
+                        raise
+                    time.sleep(0.05)
+            try:
+                yield
+            finally:
+                stream.seek(0)
+                msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(stream, fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(stream, fcntl.LOCK_UN)
+
+
 class FilesystemArtifactStorage:
     _MANIFEST = ".action-server-run-bindings.json"
 
@@ -43,13 +130,18 @@ class FilesystemArtifactStorage:
         candidate = root.expanduser().absolute()
         if (
             not candidate.is_dir()
-            or candidate.resolve() != candidate
+            or any(
+                _is_link_or_reparse_point(part)
+                for part in (candidate, *candidate.parents)
+            )
             or not os.access(candidate, os.R_OK | os.W_OK | os.X_OK)
         ):
             raise ArtifactStorageConfigurationError(
                 f"Artifact storage root must be an existing non-symlink directory: {root}"
             )
-        self.root = candidate
+        # Windows expands 8.3 path components during resolve(). A spelling change
+        # is not evidence of a link; links/reparse ancestors were rejected above.
+        self.root = candidate.resolve(strict=True)
 
     @staticmethod
     def _canonical_key(value: str, label: str) -> PurePosixPath:
@@ -63,27 +155,31 @@ class FilesystemArtifactStorage:
         return key
 
     def _contained(self, path: Path, label: str, *, require_exists: bool) -> Path:
+        absolute_path = path.absolute()
         try:
-            relative = path.absolute().relative_to(self.root)
+            relative_parts = _relative_parts(absolute_path, self.root)
         except ValueError as error:
             raise ArtifactStorageConfigurationError(
                 f"{label} escapes storage root: {path}"
             ) from error
-        current = self.root
-        for part in relative.parts:
+        # Check directory entries through the candidate's actual I/O namespace.
+        current = absolute_path
+        for _ in relative_parts:
+            current = current.parent
+        for part in relative_parts:
             current /= part
-            if current.is_symlink():
+            if _is_link_or_reparse_point(current):
                 raise ArtifactStorageConfigurationError(
                     f"{label} contains a symlink: {path}"
                 )
         resolved = path.resolve(strict=False)
         try:
-            resolved.relative_to(self.root)
+            resolved_parts = _relative_parts(resolved, self.root)
         except ValueError as error:
             raise ArtifactStorageConfigurationError(
                 f"{label} escapes storage root: {path}"
             ) from error
-        if resolved == self.root:
+        if not resolved_parts:
             raise ArtifactStorageConfigurationError(
                 f"{label} cannot be the storage root: {path}"
             )
@@ -138,7 +234,10 @@ class FilesystemArtifactStorage:
             elif path.is_file():
                 resolved = self._contained(path, "Artifact path", require_exists=True)
                 files.append(
-                    (resolved.relative_to(run_dir).as_posix(), resolved.stat().st_size)
+                    (
+                        PurePosixPath(*_relative_parts(resolved, run_dir)).as_posix(),
+                        resolved.stat().st_size,
+                    )
                 )
         return sorted(files)
 
@@ -188,42 +287,38 @@ class FilesystemArtifactStorage:
     ) -> None:
         self._canonical_key(run_id, "run ID")
         key = self._canonical_key(relative_artifacts_dir, "artifact run key")
-        manifest = self._manifest_path(require_exists=False)
-        import fcntl
-
-        lock = self.root / f"{self._MANIFEST}.lock"
-        with lock.open("a+") as stream:
-            fcntl.flock(stream, fcntl.LOCK_EX)
+        lock = self._contained(
+            self.root / f"{self._MANIFEST}.lock",
+            "Artifact binding lock",
+            require_exists=False,
+        )
+        with _manifest_lock(lock):
+            manifest = self._manifest_path(require_exists=False)
             try:
-                try:
-                    bindings = json.loads(manifest.read_text())
-                except FileNotFoundError:
-                    bindings = {}
-                except (OSError, json.JSONDecodeError) as error:
-                    raise ArtifactStorageConfigurationError(
-                        "Corrupt artifact run binding manifest"
-                    ) from error
-                record = {"key": key.as_posix(), "metadata": metadata or {}}
-                if run_id in bindings and bindings[run_id] != record:
-                    raise ArtifactStorageConfigurationError(
-                        f"Conflicting artifact binding for run: {run_id}"
-                    )
-                self.run_artifacts_dir(relative_artifacts_dir)
-                bindings[run_id] = record
-                fd, temporary = tempfile.mkstemp(dir=self.root, prefix=".bindings-")
-                try:
-                    with os.fdopen(fd, "w", encoding="utf-8") as output:
-                        json.dump(
-                            bindings, output, sort_keys=True, separators=(",", ":")
-                        )
-                        output.flush()
-                        os.fsync(output.fileno())
-                    os.replace(temporary, manifest)
-                finally:
-                    if os.path.exists(temporary):
-                        os.unlink(temporary)
+                bindings = json.loads(manifest.read_text())
+            except FileNotFoundError:
+                bindings = {}
+            except (OSError, json.JSONDecodeError) as error:
+                raise ArtifactStorageConfigurationError(
+                    "Corrupt artifact run binding manifest"
+                ) from error
+            record = {"key": key.as_posix(), "metadata": metadata or {}}
+            if run_id in bindings and bindings[run_id] != record:
+                raise ArtifactStorageConfigurationError(
+                    f"Conflicting artifact binding for run: {run_id}"
+                )
+            self.run_artifacts_dir(relative_artifacts_dir)
+            bindings[run_id] = record
+            fd, temporary = tempfile.mkstemp(dir=self.root, prefix=".bindings-")
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8") as output:
+                    json.dump(bindings, output, sort_keys=True, separators=(",", ":"))
+                    output.flush()
+                    os.fsync(output.fileno())
+                os.replace(temporary, manifest)
             finally:
-                fcntl.flock(stream, fcntl.LOCK_UN)
+                if os.path.exists(temporary):
+                    os.unlink(temporary)
 
     def run_storage_key(self, run_id: str) -> str:
         try:

@@ -1,0 +1,27 @@
+{
+  "base": "integration/community-release-20261008",
+  "head": "b676daf3d51de89b1bfc51c90a76c01ed24d8bfb",
+  "next_action": "Await the exact b676 run and source review; if gates pass, root reviews admission. No current run result or issue acceptance is inferred.",
+  "observed_at_utc": "2026-10-10T00:19:23Z",
+  "owner": "Existing Work Items consumer lane; root retains integration/admission authority.",
+  "pr": 256,
+  "relationship_to_predecessor": {
+    "head": "dc205182253794cdf5a1fb5546acb01b106b209f",
+    "observation": "The 00:15Z receipt records the Windows Go-wrapper frozen_package_tree_sha256/build-input mismatch on dc205. That result remains bound to dc205 and is not transferred to b676."
+  },
+  "run": {
+    "id": 38008430418,
+    "jobs_observed_at_utc": "2026-10-10T00:19:23Z",
+    "state": "in_progress",
+    "status_counts": {
+      "in_progress": 6,
+      "skipped": 1,
+      "success": 6
+    },
+    "url": "https://github.com/joshyorko/actions/actions/runs/38008430418"
+  },
+  "schema_version": 1,
+  "scope_limit": "A current next-action pointer only; does not change the 00:16:55Z 21-PR cohort snapshot or any issue state.",
+  "source_review": "L source review underway, per root coordination update; no verdict asserted.",
+  "url": "https://github.com/joshyorko/actions/pull/256"
+}

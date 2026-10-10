@@ -2,6 +2,7 @@ import asyncio
 import logging
 import os
 import socket
+import sys
 import threading
 import typing
 from contextlib import asynccontextmanager
@@ -25,7 +26,9 @@ log = logging.getLogger(__name__)
 _reload_generation_lock = threading.RLock()
 
 
-def _reload_action_generation(action_routes, actions_process_pool, actions, packages):
+def _reload_action_generation(
+    action_routes, actions_process_pool, actions, packages, *, defer_publication=False
+):
     """Atomically commit a prepared process and HTTP/MCP route generation."""
     from copy import copy
 
@@ -36,6 +39,7 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
         old_packages = action_routes.action_package_id_to_action_package
         old_actions = action_routes.actions
         old_routes = list(app.router.routes)
+        old_openapi_schema = getattr(app, "openapi_schema", None)
         old_route_state = dict(action_routes.__dict__)
         old_process_generation = getattr(actions_process_pool, "generation", None)
         helper = action_routes.mcp_server_setup_helper
@@ -45,24 +49,15 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
             if key.startswith("_")
         }
         pool_committed = False
-        try:
-            actions_process_pool.on_reload(packages, actions)
-            pool_committed = True
-            old_generation = getattr(action_routes, "_process_pool_generation", 0)
-            action_routes._process_pool_generation = getattr(
-                actions_process_pool,
-                "generation",
-                old_generation + 1,
-            )
-            action_routes.unregister_http_actions()
-            action_routes.register_actions()
-        except BaseException:
-            app.router.routes[:] = old_routes
-            action_routes.__dict__.clear()
-            action_routes.__dict__.update(old_route_state)
-            helper.__dict__.update(old_helper_state)
-            if pool_committed:
-                try:
+
+        def rollback():
+            with _reload_generation_lock:
+                app.router.routes = old_routes
+                app.openapi_schema = old_openapi_schema
+                action_routes.__dict__.clear()
+                action_routes.__dict__.update(old_route_state)
+                helper.__dict__.update(old_helper_state)
+                if pool_committed:
                     actions_process_pool.on_reload(old_packages, old_actions)
                     if old_process_generation is not None:
                         restore_generation = getattr(
@@ -70,17 +65,43 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
                         )
                         if restore_generation is not None:
                             restore_generation(old_process_generation)
-                except BaseException:
-                    log.exception("Unable to roll back the process generation reload.")
+
+        try:
+            # Reject invalid HTTP/MCP catalogs before retiring the old pool.
+            old_generation = getattr(action_routes, "_process_pool_generation", 0)
+            action_routes._process_pool_generation = (
+                getattr(actions_process_pool, "generation", old_generation) + 1
+            )
+            prepared = action_routes.prepare_actions()
+            actions_process_pool.on_reload(packages, actions)
+            pool_committed = True
+        except BaseException:
+            try:
+                rollback()
+            except BaseException:
+                log.exception("Unable to roll back the process generation reload.")
+            raise
+
+        def publish():
+            with _reload_generation_lock:
+                action_routes.publish_prepared_actions(prepared)
+
+        if defer_publication:
+            return publish, rollback
+        try:
+            publish()
+        except BaseException:
+            rollback()
             raise
 
 
 class _ConfiguredAPIKeyMiddleware:
     """Reject protected requests before FastAPI can parse their body."""
 
-    def __init__(self, app, api_key: str):
+    def __init__(self, app, api_key: str, browser_sessions=None):
         self.app = app
         self.api_key = api_key
+        self.browser_sessions = browser_sessions
 
     @staticmethod
     def _is_public(path: str) -> bool:
@@ -108,7 +129,12 @@ class _ConfiguredAPIKeyMiddleware:
         if protected and not self._is_public(path) and not is_cors_preflight:
             from ._api_action_routes import _get_bearer_token
 
-            if _get_bearer_token(scope.get("headers", [])) != self.api_key:
+            authorized = (
+                self.browser_sessions.authorized(scope)
+                if self.browser_sessions is not None
+                else _get_bearer_token(scope.get("headers", [])) == self.api_key
+            )
+            if not authorized:
                 response = PlainTextResponse(
                     "Invalid or missing API Key", status_code=403
                 )
@@ -123,6 +149,7 @@ def _mount_artifact_static_files(
     backend: str,
     root: os.PathLike,
     api_key: str | None = None,
+    browser_sessions=None,
 ) -> None:
     if backend == "local":
         from starlette.types import ASGIApp
@@ -161,13 +188,17 @@ def _mount_artifact_static_files(
 
             static_files = AuthenticationMiddleware(
                 run_scoped_static_files,
-                backend=APIKeyAuthBackend(api_key=api_key),
+                backend=APIKeyAuthBackend(
+                    api_key=api_key, browser_sessions=browser_sessions
+                ),
             )
 
         app.mount("/artifacts", static_files, name="artifacts")
 
 
-async def _start_community_expose_impl(port: int, settings, api_key: str | None = None):
+async def _start_community_expose_impl(
+    port: int, settings, api_key: str | None = None, *, app=None, action_routes=None
+):
     """Start community expose and suppress provider startup failures."""
     from ._community_expose import TunnelManager, TunnelProvider
 
@@ -180,8 +211,33 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
     provider = provider_map.get(settings.expose_provider, TunnelProvider.AUTO)
     community_tunnel_manager = TunnelManager(preferred_provider=provider)
 
+    if provider is TunnelProvider.BORE:
+        log.error("Refusing the plain-HTTP Bore provider for Runtime exposure.")
+        return community_tunnel_manager
+
     try:
         tunnel = await community_tunnel_manager.start(port)
+
+        if api_key:
+            if action_routes is None or app is None:
+                raise RuntimeError("Authenticated MCP readiness probe unavailable")
+            release_origin = None
+            try:
+                release_origin = (
+                    action_routes.mcp_server_setup_helper.allow_tunnel_origin(
+                        tunnel.public_url
+                    )
+                )
+                community_tunnel_manager.add_stop_callback(release_origin)
+                await _verify_public_tunnel(tunnel.public_url, api_key, app)
+            except BaseException:
+                if release_origin is not None:
+                    release_origin()
+                try:
+                    await community_tunnel_manager.stop()
+                except BaseException:
+                    log.exception("Failed to stop unverified community tunnel.")
+                raise
 
         log.info(
             colored("\n  🌍 Public URL: ", "green", attrs=["bold"])
@@ -190,14 +246,14 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
 
         if api_key:
             log.info(
-                colored("  🔑 API Authorization Bearer key: ", attrs=["bold"])
-                + f"{api_key}\n"
+                "API key authentication enabled. Use your configured key; "
+                "automatically generated keys are stored in .api_key in the data directory."
             )
 
         log.info(colored(f"     (using {tunnel.provider.value})", attrs=["dark"]))
 
     except Exception as e:
-        log.error(f"Failed to start tunnel: {e}")
+        log.error("Failed to start tunnel (%s).", type(e).__name__)
         log.info(
             colored(
                 "     Tip: Install 'bore' for simple tunneling: ",
@@ -207,6 +263,115 @@ async def _start_community_expose_impl(port: int, settings, api_key: str | None 
         )
 
     return community_tunnel_manager
+
+
+async def _verify_public_tunnel(
+    public_url: str, api_key: str, app, *, transport=None
+) -> None:
+    """Verify the public Runtime identity and authenticated MCP initialize."""
+    import json
+    from urllib.parse import urlsplit
+
+    import httpx2
+    from mcp import ClientSession
+    from mcp.client.streamable_http import streamable_http_client
+
+    parsed = urlsplit(public_url)
+    if (
+        parsed.scheme != "https"
+        or not parsed.hostname
+        or parsed.username is not None
+        or parsed.password is not None
+        or parsed.query
+        or parsed.fragment
+        or parsed.path not in ("", "/")
+    ):
+        raise RuntimeError("Tunnel returned an invalid HTTPS URL")
+    try:
+        _ = parsed.port
+    except ValueError as exc:
+        raise RuntimeError("Tunnel returned an invalid HTTPS URL") from exc
+    origin = f"https://{parsed.netloc}"
+    loop = asyncio.get_running_loop()
+    deadline = loop.time() + 8.0
+
+    async def remaining_timeout() -> float:
+        remaining = deadline - loop.time()
+        if remaining <= 0:
+            raise TimeoutError("Tunnel verification deadline exceeded")
+        return remaining
+
+    async with asyncio.timeout_at(deadline):
+        expected_uuid = app.mtime_uuid
+        identity_client_options: dict[str, typing.Any] = {
+            "verify": True,
+            "follow_redirects": False,
+            "timeout": await remaining_timeout(),
+        }
+        if transport is not None:
+            identity_client_options["transport"] = transport
+        async with httpx2.AsyncClient(**identity_client_options) as client:
+            response = await client.get(f"{origin}/config", headers={"Origin": origin})
+            if response.is_redirect or str(response.url) != f"{origin}/config":
+                raise RuntimeError("Tunnel identity request redirected")
+            if response.status_code != 200:
+                raise RuntimeError("Tunnel identity request failed")
+            config = response.json()
+            if (
+                not config.get("auth_enabled")
+                or config.get("mtime_uuid") != expected_uuid
+                or app.mtime_uuid != expected_uuid
+            ):
+                raise RuntimeError("Tunnel Runtime identity mismatch")
+
+            init_body = {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "initialize",
+                "params": {
+                    "protocolVersion": "2025-06-18",
+                    "capabilities": {},
+                    "clientInfo": {
+                        "name": "action-server-expose-probe",
+                        "version": "1",
+                    },
+                },
+            }
+            unauth = await client.post(
+                f"{origin}/mcp",
+                headers={
+                    "Origin": origin,
+                    "Accept": "application/json, text/event-stream",
+                    "Content-Type": "application/json",
+                    "Mcp-Protocol-Version": "2025-06-18",
+                },
+                content=json.dumps(init_body),
+                timeout=await remaining_timeout(),
+            )
+            if unauth.status_code not in (401, 403):
+                raise RuntimeError("Tunnel did not enforce MCP authentication")
+
+        auth_client_options: dict[str, typing.Any] = {
+            "headers": {"Authorization": f"Bearer {api_key}", "Origin": origin},
+            "verify": True,
+            "follow_redirects": False,
+            "timeout": await remaining_timeout(),
+        }
+        if transport is not None:
+            auth_client_options["transport"] = transport
+        async with httpx2.AsyncClient(**auth_client_options) as client:
+            async with streamable_http_client(
+                f"{origin}/mcp", http_client=client
+            ) as streams:
+                async with ClientSession(streams[0], streams[1]) as session:
+                    await session.initialize()
+            if app.mtime_uuid != expected_uuid:
+                raise RuntimeError(
+                    "Tunnel Runtime identity changed during verification"
+                )
+
+
+_FILE_WATCHER_SHUTDOWN_TIMEOUT_SECONDS = 5.0
 
 
 @asynccontextmanager
@@ -231,15 +396,30 @@ async def _community_expose_lifespan(
     try:
         yield
     finally:
+        active_error = sys.exc_info()[1]
+        watcher_shutdown_error = None
+        if file_watcher is not None:
+            # Stop reloads while the database and process pool are still live.
+            file_watcher.stop()
+            # A reload callback can need the server loop, so never join it on
+            # the event-loop thread.
+            if file_watcher.ident is not None:
+                await asyncio.to_thread(
+                    file_watcher.join, _FILE_WATCHER_SHUTDOWN_TIMEOUT_SECONDS
+                )
+            if file_watcher.is_alive():
+                watcher_shutdown_error = RuntimeError(
+                    "Action Server file watcher did not stop within "
+                    f"{_FILE_WATCHER_SHUTDOWN_TIMEOUT_SECONDS:g} seconds"
+                )
+                log.error("%s", watcher_shutdown_error)
+
         community_tunnel_manager = get_tunnel_manager()
         if community_tunnel_manager is not None:
             try:
                 await community_tunnel_manager.stop()
             except Exception:
                 log.exception("Error stopping community tunnel manager.")
-
-        if file_watcher is not None:
-            file_watcher.stop()
 
         log.info("Stopping action server...")
         from actions.server._robo_utils.process import kill_process_and_subprocesses
@@ -259,6 +439,9 @@ async def _community_expose_lifespan(
                 kill_process_and_subprocesses(child.pid)
             except Exception:
                 log.exception("Error killing subprocess: %s", child.pid)
+
+        if watcher_shutdown_error is not None and active_error is None:
+            raise watcher_shutdown_error
 
 
 class _LoopHolder:
@@ -290,7 +473,7 @@ def start_server(
 
     from . import _actions_process_pool
     from ._api_action_package import action_package_api_router
-    from ._api_action_routes import _ActionRoutes, _get_bearer_token
+    from ._api_action_routes import _ActionRoutes
     from ._api_analytics import analytics_api_router
     from ._api_oauth2 import oauth2_api_router
     from ._api_robots import robots_api_router
@@ -330,23 +513,28 @@ def start_server(
     log.debug(f"Starting server. Settings:\n{settings_str}")
 
     app = get_app()
+    from ._browser_session import install_browser_sessions
+
+    browser_sessions = install_browser_sessions(app, api_key)
     if api_key:
-        app.add_middleware(_ConfiguredAPIKeyMiddleware, api_key=api_key)
+        app.add_middleware(
+            _ConfiguredAPIKeyMiddleware,
+            api_key=api_key,
+            browser_sessions=browser_sessions,
+        )
 
     from actions.server._artifact_storage import get_artifact_storage
 
     artifacts_dir = get_artifact_storage().root
 
-    def verify_api_key(
-        token: HTTPAuthorizationCredentials = Security(HTTPBearer(auto_error=True)),
-    ) -> HTTPAuthorizationCredentials:
-        if token.credentials != api_key:
-            raise HTTPException(
-                status_code=403,
-                detail="Invalid or missing API Key",
-            )
-        else:
-            return token
+    async def verify_api_key(
+        request: Request,
+        token: HTTPAuthorizationCredentials | None = Security(
+            HTTPBearer(auto_error=False)
+        ),
+    ) -> None:
+        if not browser_sessions.authorized(request.scope):
+            raise HTTPException(status_code=403, detail="Invalid or missing API Key")
 
     endpoint_dependencies: list[params.Depends] = []
     websocket_dependencies: list[params.Depends] = []
@@ -355,7 +543,7 @@ def start_server(
         endpoint_dependencies.append(Depends(verify_api_key))
 
         async def verify_websocket_api_key(websocket: WebSocket) -> None:
-            if _get_bearer_token(websocket.headers.raw) != api_key:
+            if not browser_sessions.authorized(websocket.scope):
                 raise WebSocketException(code=1008)
 
         websocket_dependencies.append(Depends(verify_websocket_api_key))
@@ -483,32 +671,38 @@ def start_server(
                     log.info("Reload explicitly called!")
                 else:
                     log.info("File-changes detected: auto-reloading!")
-                code = _import_actions(
-                    start_args,
-                    settings,
-                    disable_not_imported=True,
-                )
+
+                def publish_generation():
+                    actions_process_pool = (
+                        _actions_process_pool.get_actions_process_pool()
+                    )
+                    next_packages = {
+                        package.id: package for package in db.all(ActionPackage)
+                    }
+                    return _reload_action_generation(
+                        action_routes,
+                        actions_process_pool,
+                        db.all(Action),
+                        next_packages,
+                        defer_publication=True,
+                    )
+
+                try:
+                    code = _import_actions(
+                        start_args,
+                        settings,
+                        disable_not_imported=True,
+                        after_import=publish_generation,
+                    )
+                except Exception:
+                    log.exception("Unable to commit action generation reload.")
+                    return False
                 if code != 0:
                     log.info(
                         "Unable to do auto-reload (actions could not be imported)."
                     )
                     return False
 
-                actions_process_pool = _actions_process_pool.get_actions_process_pool()
-                next_packages = {
-                    package.id: package for package in db.all(ActionPackage)
-                }
-                next_actions = db.all(Action)
-                try:
-                    _reload_action_generation(
-                        action_routes,
-                        actions_process_pool,
-                        next_actions,
-                        next_packages,
-                    )
-                except BaseException:
-                    log.exception("Unable to commit action generation reload.")
-                    return False
                 app.update_mtime_uuid()
                 assert _LoopHolder.loop is not None
                 report_mtime_changed(_LoopHolder.loop)
@@ -615,6 +809,7 @@ def start_server(
         settings.artifact_storage_backend,
         artifacts_dir,
         api_key=api_key,
+        browser_sessions=browser_sessions,
     )
 
     # At this point the FastAPI app should be configured. What's missing now
@@ -658,7 +853,7 @@ def start_server(
         """Start community expose using open source tunnel providers."""
         nonlocal community_tunnel_manager
         community_tunnel_manager = await _start_community_expose_impl(
-            port, settings, api_key
+            port, settings, api_key, app=app, action_routes=action_routes
         )
 
     protocol = "https" if settings.use_https else "http"
@@ -668,6 +863,9 @@ def start_server(
         url = f"{protocol}://{host}:{port}"
         settings = get_settings()
         settings.base_url = url
+        app.state.trusted_server_origins = tuple(
+            dict.fromkeys((*app.state.trusted_server_origins, settings.base_url))
+        )
 
         log.info(
             colored("\n  ⚡️ Local MCP endpoint: ", "green", attrs=["bold"])
@@ -693,8 +891,7 @@ def start_server(
 
                 if api_key:
                     log.info(
-                        colored("  🔑 API Authorization Bearer key: ", attrs=["bold"])
-                        + f"{api_key}\n"
+                        "API key authentication enabled. Sign in with your configured key."
                     )
 
     @asynccontextmanager

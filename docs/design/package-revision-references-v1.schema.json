@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:actions:package-revision-references-v1-draft",
+  "title": "Experimental scoped Package Revision and Runtime Plan references",
+  "description": "Consumer-side reference envelope only; it is intentionally separate from portable Package Revision content and is not an approved production API schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["runtimePlanRef"],
+  "properties": {
+    "runtimePlanRef": {
+      "$ref": "#/$defs/runtimePlanRef"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "packageRevisionRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workspaceId", "packageId", "revisionDigest"],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "packageId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "revisionDigest": {
+          "$ref": "#/$defs/sha256",
+          "description": "The PackageRevisionId called revision_id in the #129 domain draft; the complete immutable package revision identity, not a source artifact or Runtime Plan digest."
+        }
+      }
+    },
+    "runtimePlanRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageRevisionRef",
+        "planDigest",
+        "planSchemaVersion",
+        "compatibilityDigest"
+      ],
+      "properties": {
+        "packageRevisionRef": {
+          "$ref": "#/$defs/packageRevisionRef",
+          "description": "The sole owning Package Revision reference in this envelope; a duplicate outer packageRevisionRef is forbidden."
+        },
+        "planDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "planSchemaVersion": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Positive PlanSchemaVersion from the #129 header contract. Registry support must be checked by a future consumer."
+        },
+        "compatibilityDigest": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

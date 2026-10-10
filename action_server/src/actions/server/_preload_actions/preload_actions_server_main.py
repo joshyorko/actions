@@ -9,6 +9,7 @@ import argparse
 import os
 import sys
 import traceback
+from importlib import metadata
 from typing import Any, Dict
 
 DEFAULT_TIMEOUT = 10
@@ -151,6 +152,17 @@ class MessagesHandler:
 
         while True:
             msg = self._readqueue.get()
+            if msg is None:
+                # Keep EOF visibly abnormal while distinguishing it from the
+                # explicit JSON-RPC exit notification handled below.
+                raise RuntimeError(
+                    "Unexpected EOF from the action-server worker stream."
+                )
+            if isinstance(msg, dict) and msg.get("method") == "exit":
+                # The reader stops after queueing exit. Any work already queued
+                # after it is discarded; the current synchronous command has
+                # completed before this consumer can observe the notification.
+                break
             self._on_message(msg)
 
     def _on_message(self, message):
@@ -257,12 +269,28 @@ class MessagesHandler:
     def _plugin_manager_kwargs(self, managed_parameters) -> Dict[str, Any]:
         try:
             # new
-            from actions._customization._extension_points import EPManagedParameters
-            from actions._customization._plugin_manager import PluginManager
-            from actions._managed_parameters import ManagedParameters
-            from actions._request import Request
+            from actions.server_integration import (
+                EPManagedParameters,
+                ManagedParameters,
+                PluginManager,
+            )
 
-        except ImportError:
+            from actions import Request
+
+        except ImportError as error:
+            # A modern Actions distribution must supply the public worker contract.
+            # Missing it must not silently disable managed Request injection.
+            try:
+                core_version = metadata.version("actions-core")
+            except metadata.PackageNotFoundError:
+                pass
+            else:
+                raise RuntimeError(
+                    "This Runtime requires actions-core >=1.0.2 in the worker "
+                    f"environment; installed {core_version} lacks the public "
+                    "integration contract. Update the package's actions-core pin "
+                    "and rebuild its environment."
+                ) from error
             # old (deprecated: using robocorp-actions).
             try:
                 # fmt: off

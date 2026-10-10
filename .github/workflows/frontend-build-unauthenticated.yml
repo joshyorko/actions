@@ -3,14 +3,16 @@ name: Action Server Build (Unauthenticated)
 on:
   pull_request:
     paths:
-      - 'action_server/frontend/**'
+      - 'action_server/**'
+      - 'work-items/**'
       - '.github/workflows/frontend-build-unauthenticated.yml'
   workflow_dispatch:
   push:
     branches:
       - community
     paths:
-      - 'action_server/frontend/**'
+      - 'action_server/**'
+      - 'work-items/**'
 
 defaults:
   run:
@@ -20,6 +22,7 @@ jobs:
   build-external:
     name: Build Action Server binary without credentials
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
@@ -43,7 +46,6 @@ jobs:
         run: |
           if [ -f ~/.npmrc ]; then
             echo "Error: .npmrc file found in home directory"
-            cat ~/.npmrc
             exit 1
           fi
           echo "[OK] No .npmrc file found"
@@ -62,6 +64,24 @@ jobs:
       
       - name: Install project
         run: uv run --no-project --python ${{ matrix.python }} inv devinstall
+
+      - name: Verify artifact binding locks on the native filesystem
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest -q
+          tests/action_server_tests/test_artifact_storage.py
+          tests/action_server_tests/test_artifact_binding_lock.py
+
+      - name: Verify tunnel pipe lifecycle on the native platform
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest -q
+          tests/action_server_tests/test_community_expose.py
+          tests/action_server_tests/test_community_expose_lifecycle.py
+
+      - name: Verify Robot publication on the native filesystem
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest -q
+          tests/action_server_tests/test_api_robots.py
+          tests/action_server_tests/test_directory_publication.py
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -84,12 +104,142 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
+      - name: Verify native artifact manifest contract
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} python
+          -m unittest discover -s scripts -p 'test_native_artifact*.py' -v
+
       - name: Build binary (unsigned, with Go wrapper)
         env:
           RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
           RC_ACTION_SERVER_DO_SELFTEST: 'true'
         run: uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper
       
+      - name: Record native binary and embedded component provenance
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} python
+          scripts/write_native_artifact_manifest.py
+          --source-sha "${{ github.sha }}"
+          --workflow-run-id "${{ github.run_id }}"
+          --workflow-run-attempt "${{ github.run_attempt }}"
+          --runner-os "${{ matrix.os }}"
+          --build-command "uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper"
+          --output output/native-artifact-manifest.json
+
+      - name: Create complete native provenance archive
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} python
+          scripts/archive_native_artifact_provenance.py
+
+      - name: Upload frozen executable and provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: action-server-native-provenance-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: action_server/output/native-artifact-provenance.tar
+          retention-days: 7
+
+      - name: Install Chromium for native acceptance
+        working-directory: action_server/frontend
+        run: npx playwright install chromium
+
+      - name: Verify packaged Work Items browser acceptance (frozen)
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-15'
+        timeout-minutes: 10
+        env:
+          DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/action-server/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
+          DAKOTA_WORKITEMS_UI_RUNTIME_KIND: frozen
+          DAKOTA_WORKITEMS_UI_SOURCE_SHA: ${{ github.sha }}
+          DAKOTA_WORKITEMS_UI_BUILD_MANIFEST: ${{ github.workspace }}/action_server/output/native-artifact-manifest.json
+          DAKOTA_WORKITEMS_UI_RECEIPT: ${{ github.workspace }}/action_server/output/dakota-workitems-ui-frozen-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}.json
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest
+          tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py
+          -q -n 1
+          --basetemp "${{ runner.temp }}/dakota-workitems-ui-frozen-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
+
+      - name: Verify packaged Work Items browser acceptance (Go wrapper)
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-15'
+        timeout-minutes: 10
+        env:
+          DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
+          DAKOTA_WORKITEMS_UI_RUNTIME_KIND: go-wrapper
+          DAKOTA_WORKITEMS_UI_SOURCE_SHA: ${{ github.sha }}
+          DAKOTA_WORKITEMS_UI_BUILD_MANIFEST: ${{ github.workspace }}/action_server/output/native-artifact-manifest.json
+          DAKOTA_WORKITEMS_UI_RECEIPT: ${{ github.workspace }}/action_server/output/dakota-workitems-ui-go-wrapper-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}.json
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run pytest
+          tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py
+          -q -n 1
+          --basetemp "${{ runner.temp }}/dakota-workitems-ui-go-wrapper-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
+
+      - name: Build candidate Core wheel for native Work Items acceptance
+        working-directory: ./actions
+        shell: bash
+        env:
+          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          uv run --no-project --python 3.12 python - <<'PY'
+          import os
+          from pathlib import Path
+
+          wheel_dir = Path(os.environ["DAKOTA_WORKITEMS_RCC_HOME"]) / "wheels"
+          wheel_dir.mkdir(parents=True, exist_ok=False)
+          PY
+          uv run --no-project --python 3.12 poetry build --format wheel --output "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}/wheels"
+          uv run --no-project --python 3.12 python - <<'PY'
+          import email
+          import os
+          import tomllib
+          import zipfile
+          from pathlib import Path
+
+          package = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+          expected_name = package["tool"]["poetry"]["name"]
+          expected_version = package["tool"]["poetry"]["version"]
+          wheel_dir = Path(os.environ["DAKOTA_WORKITEMS_RCC_HOME"]) / "wheels"
+          entries = list(wheel_dir.iterdir())
+          wheels = [path for path in entries if path.suffix == ".whl"]
+          assert len(entries) == len(wheels) == 1 and not wheels[0].is_symlink()
+          wheel = wheels[0]
+          assert wheel.name == f"actions_core-{expected_version}-py3-none-any.whl"
+          with zipfile.ZipFile(wheel) as archive:
+              metadata_paths = [name for name in archive.namelist() if name.endswith(".dist-info/METADATA")]
+              assert len(metadata_paths) == 1
+              metadata = email.message_from_bytes(archive.read(metadata_paths[0]))
+          assert metadata.get("Name", "").lower().replace("_", "-") == expected_name
+          assert metadata.get("Version") == expected_version
+          PY
+
+      - name: Verify Work Items consumer through frozen and Go runtimes
+        timeout-minutes: 20
+        env:
+          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run python
+          scripts/dakota_workitems_native_acceptance.py
+          --frozen dist/action-server/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
+          --go-wrapper dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
+          --source-sha "${{ github.sha }}"
+          --build-version "workflow-${{ github.run_id }}-${{ github.run_attempt }}"
+          --rcc-home "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
+          --build-manifest output/native-artifact-manifest.json
+          --receipt output/dakota-workitems-native-${{ github.run_id }}-${{ github.run_attempt }}.json
+
+      - name: Upload Work Items native acceptance receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dakota-workitems-native-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: action_server/output/dakota-workitems-native-${{ github.run_id }}-${{ github.run_attempt }}.json
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Clean task-owned Work Items RCC home
+        if: always()
+        env:
+          DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+        run: python -c "import os; import shutil; shutil.rmtree(os.environ['DAKOTA_WORKITEMS_RCC_HOME'], ignore_errors=True)"
+
       - name: Verify binary was built
         run: |
           if [ ! -f "dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}" ]; then
@@ -100,11 +250,39 @@ jobs:
           echo "[OK] Binary built successfully"
         shell: bash
       
-      - name: Test binary
-        run: |
-          ./dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }} version
-        shell: bash
-      
+      - name: Verify native process ownership
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run python
+          -m unittest discover -s scripts -p test_native_process_ownership.py -v
+
+      - name: Verify frozen and Go-wrapper browser and storage behavior
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run python
+          scripts/verify_native_acceptance.py
+          --source-sha "${{ github.sha }}"
+          --receipt output/native-acceptance.json
+
+      - name: Verify large stored Run history in frozen and Go-wrapper browsers
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} poetry run python
+          scripts/verify_native_history.py
+          --source-sha "${{ github.sha }}"
+          --receipt output/native-history.json
+
+      - name: Upload native acceptance receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-acceptance-${{ matrix.os }}-${{ github.sha }}
+          path: |
+            action_server/output/native-acceptance.json
+            action_server/output/native-history.json
+            action_server/output/dakota-workitems-ui-*-*.json
+            action_server/output/native-artifact-manifest.json
+            action_server/output/native-artifact-tree-inventory.json
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Upload binary artifact
         uses: actions/upload-artifact@v4
         with:

@@ -1,8 +1,10 @@
+import ast
 import json
 import os
 import shutil
 import stat
 import subprocess
+import sys
 import tomllib
 import zipfile
 from pathlib import Path
@@ -106,13 +108,193 @@ def _assert_no_legacy_contracts(texts: dict[str, str]) -> None:
 
 def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
     _assert_no_legacy_contracts(
-        {str(path.relative_to(REPO)): path.read_text(errors="replace") for path in _active_surface_files()}
+        {
+            str(path.relative_to(REPO)): path.read_text(errors="replace")
+            for path in _active_surface_files()
+        }
     )
+
+
+def _private_core_imports(source: str) -> list[int]:
+    violations = []
+    tree = ast.parse(source)
+    importlib_names: set[str] = set()
+    import_module_names: set[str] = set()
+    builtin_module_names: set[str] = set()
+    builtin_import_names = {"__import__"}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            importlib_names.update(
+                alias.asname or alias.name
+                for alias in node.names
+                if alias.name == "importlib"
+            )
+            importlib_names.update(
+                "importlib"
+                for alias in node.names
+                if alias.name.startswith("importlib.") and alias.asname is None
+            )
+            builtin_module_names.update(
+                alias.asname or alias.name
+                for alias in node.names
+                if alias.name == "builtins"
+            )
+        elif isinstance(node, ast.ImportFrom) and node.module == "importlib":
+            import_module_names.update(
+                alias.asname or alias.name
+                for alias in node.names
+                if alias.name == "import_module"
+            )
+        elif isinstance(node, ast.ImportFrom) and node.module == "builtins":
+            builtin_import_names.update(
+                alias.asname or alias.name
+                for alias in node.names
+                if alias.name == "__import__"
+            )
+
+    def static_string(node):
+        if isinstance(node, ast.Constant) and isinstance(node.value, str):
+            return node.value
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
+            left, right = static_string(node.left), static_string(node.right)
+            if left is not None and right is not None:
+                return left + right
+        return None
+
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom):
+            if (node.module or "").startswith("actions._") or (
+                node.module == "actions"
+                and any(alias.name.startswith("_") for alias in node.names)
+            ):
+                violations.append(node.lineno)
+        elif isinstance(node, ast.Import):
+            if any(alias.name.startswith("actions._") for alias in node.names):
+                violations.append(node.lineno)
+        elif isinstance(node, ast.Call):
+            function = node.func
+            builtin_import = (
+                isinstance(function, ast.Name) and function.id in builtin_import_names
+            ) or (
+                isinstance(function, ast.Attribute)
+                and function.attr == "__import__"
+                and isinstance(function.value, ast.Name)
+                and function.value.id in builtin_module_names
+            )
+            module_import = (
+                isinstance(function, ast.Name) and function.id in import_module_names
+            ) or (
+                isinstance(function, ast.Attribute)
+                and function.attr == "import_module"
+                and isinstance(function.value, ast.Name)
+                and function.value.id in importlib_names
+            )
+            if not builtin_import and not module_import:
+                continue
+            keywords = {keyword.arg: keyword.value for keyword in node.keywords}
+            module = static_string(node.args[0] if node.args else keywords.get("name"))
+            if module is None:
+                continue
+            if module_import and module.startswith("."):
+                package = static_string(
+                    keywords.get(
+                        "package", node.args[1] if len(node.args) > 1 else None
+                    )
+                )
+                if package and (
+                    package.startswith("actions._")
+                    or (package == "actions" and module.startswith("._"))
+                ):
+                    violations.append(node.lineno)
+            elif module.startswith("actions._"):
+                violations.append(node.lineno)
+            elif builtin_import and module == "actions":
+                fromlist = keywords.get(
+                    "fromlist", node.args[3] if len(node.args) > 3 else None
+                )
+                if isinstance(fromlist, (ast.List, ast.Tuple)) and any(
+                    (static_string(value) or "").startswith("_")
+                    for value in fromlist.elts
+                ):
+                    violations.append(node.lineno)
+    return violations
+
+
+def _private_core_imports_in_file(path: Path) -> list[int]:
+    return _private_core_imports(path.read_text(encoding="utf-8"))
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "from actions import _request as request",
+        "import importlib as loader\nloader.import_module('actions._request')",
+        "from importlib import import_module as load\nload('actions._request')",
+        "__import__('actions._request')",
+        "import importlib\nimportlib.import_module('._request', package='actions')",
+        "__import__('actions', fromlist=['_request'])",
+        "import importlib\nimportlib.import_module('actions.' + '_request')",
+        "import importlib\nimportlib.import_module(name='actions._request')",
+        "__import__(name='actions._request')",
+        "import importlib\nimportlib.import_module('.child', package='actions._request')",
+        "import importlib.util\nimportlib.import_module('actions._request')",
+        "from builtins import __import__ as load\nload('actions._request')",
+        "import builtins as loader\nloader.__import__('actions._request')",
+    ],
+)
+def test_private_import_detection_covers_aliases_and_static_dynamic_imports(source):
+    assert _private_core_imports(source)
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "from actions import ActionContext as Context",
+        "from actions.server_integration import PluginManager",
+        "import importlib\nimportlib.import_module('actions.server')",
+        "import importlib\nimportlib.import_module('other._request')",
+        "import importlib\nimportlib.import_module(module_name)",
+        "import actions.server._models",
+    ],
+)
+def test_private_import_detection_preserves_public_and_runtime_modules(source):
+    assert not _private_core_imports(source)
+
+
+def test_runtime_imports_core_only_through_public_modules():
+    source_root = REPO / "action_server/src/actions/server"
+    violations = []
+    for path in sorted(source_root.rglob("*.py")):
+        violations.extend(
+            f"{path.relative_to(REPO)}:{line}"
+            for line in _private_core_imports_in_file(path)
+        )
+
+    assert not violations, "Runtime imports Core-private modules:\n" + "\n".join(
+        violations
+    )
+
+
+def test_runtime_import_scan_decodes_utf8_source(tmp_path: Path):
+    source = tmp_path / "unicode.py"
+    source.write_bytes("# \u038f\n".encode("utf-8"))
+
+    assert _private_core_imports_in_file(source) == []
 
 
 def test_template_package_script_is_executable_for_direct_workflow_invocation():
     script = REPO / "templates/packaging/create-templates-package.sh"
-    assert script.stat().st_mode & stat.S_IXUSR, script
+    relative_script = script.relative_to(REPO).as_posix()
+    tracked_mode = subprocess.run(
+        ["git", "ls-files", "--stage", "--", relative_script],
+        cwd=REPO,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.split(maxsplit=1)[0]
+    assert tracked_mode == "100755", str(script)
+    if os.name != "nt":
+        assert script.stat().st_mode & stat.S_IXUSR, str(script)
 
     for workflow_name, config_name in (
         ("deploy-beta-templates.yml", "templates-beta.json"),
@@ -131,7 +313,9 @@ def test_removed_product_paths_do_not_exist():
 
 def test_runtime_has_no_data_server_or_data_context_compatibility():
     sources = {
-        "tools": (REPO / "action_server/src/actions/server/_common/tools.py").read_text(),
+        "tools": (
+            REPO / "action_server/src/actions/server/_common/tools.py"
+        ).read_text(),
         "contexts": (REPO / "actions/src/actions/_action_context.py").read_text(),
         "managed_parameters": (
             REPO / "actions/src/actions/_managed_parameters.py"
@@ -199,7 +383,7 @@ def test_runtime_metadata_uses_published_active_dependencies():
     assert dependencies["actions-work-items"] == "^0.4.4"
 
 
-def test_template_manifests_use_published_actions_dependencies():
+def test_template_manifests_pin_supported_worker_core():
     manifests = sorted((REPO / "templates").glob("*/package.yaml"))
     assert manifests
 
@@ -209,9 +393,9 @@ def test_template_manifests_use_published_actions_dependencies():
             for line in manifest.read_text().splitlines()
             if line.strip().startswith("- actions-")
         }
-        assert "actions-core=1.0.1" in dependencies, str(manifest)
+        assert "actions-core=1.0.2" in dependencies, str(manifest)
         assert not any(
-            dependency.startswith("actions-core") and dependency != "actions-core=1.0.1"
+            dependency.startswith("actions-core") and dependency != "actions-core=1.0.2"
             for dependency in dependencies
         ), str(manifest)
 
@@ -249,13 +433,6 @@ def _build_wheels(output: Path, python: Path) -> list[Path]:
     for name in ("actions", "actions-http-helper", "work-items", "action_server"):
         package = REPO / name
         command = [
-            "uv",
-            "run",
-            "--no-project",
-            "--python",
-            str(python),
-            "--with",
-            "poetry",
             "poetry",
             "build",
             "-f",
@@ -264,6 +441,9 @@ def _build_wheels(output: Path, python: Path) -> list[Path]:
             str(output),
         ]
         environment = os.environ.copy()
+        environment.pop("VIRTUAL_ENV", None)
+        environment.pop("POETRY_ACTIVE", None)
+        environment.pop("PYTHONPATH", None)
         if name == "action_server":
             environment["ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD"] = "true"
         subprocess.run(
@@ -291,14 +471,41 @@ def _runtime_python() -> Path:
     candidate: Path | None
     if configured:
         candidate = Path(configured)
+    elif sys.version_info[:2] in {(3, 12), (3, 13)}:
+        # Keep clean installs and probes on the active package interpreter
+        # instead of choosing a newer supported interpreter from PATH.
+        candidate = Path(sys.executable)
     else:
         candidate = next(
-            (Path(found) for version in ("3.13", "3.12") if (found := shutil.which(f"python{version}"))),
+            (
+                Path(found)
+                for version in ("3.13", "3.12")
+                if (found := shutil.which(f"python{version}"))
+            ),
             None,
         )
     if candidate is None or not candidate.exists():
         pytest.skip("Runtime wheel contract requires supported Python 3.13 or 3.12")
     return candidate
+
+
+def test_runtime_python_prefers_the_active_supported_interpreter(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    active_python = tmp_path / "python3.12"
+    path_python = tmp_path / "python3.13"
+    active_python.touch()
+    path_python.touch()
+    monkeypatch.delenv("ACTIONS_RUNTIME_TEST_PYTHON", raising=False)
+    monkeypatch.setattr(sys, "executable", str(active_python))
+    monkeypatch.setattr(sys, "version_info", (3, 12, 0, "final", 0))
+    monkeypatch.setattr(
+        shutil,
+        "which",
+        lambda name: str(path_python) if name == "python3.13" else None,
+    )
+
+    assert _runtime_python() == active_python
 
 
 def _install_and_probe(python: Path, wheels: list[Path]) -> None:
@@ -321,39 +528,132 @@ def _install_and_probe(python: Path, wheels: list[Path]) -> None:
     subprocess.run([str(python), "-m", "pip", "check"], check=True, env=environment)
     checkout = str(REPO.resolve())
     probe = f"""
+import base64
 import importlib
+import inspect
+import json
 import pathlib
+import tempfile
 
 for name in ("actions", "actions.mcp", "actions.work_items", "actions.server", "actions_http"):
     module = importlib.import_module(name)
     origin = pathlib.Path(module.__file__).resolve()
     assert not str(origin).startswith({checkout!r}), origin
+
+from actions import ActionContext, ActionsListActionTypedDict, Request
+assert ActionsListActionTypedDict.__required_keys__ == {{
+    "name", "line", "file", "docs", "input_schema", "output_schema",
+    "managed_params_schema", "options",
+}}
+encoded_context = base64.b64encode(
+    json.dumps({{"secrets": {{"token": "kept"}}}}).encode("utf-8")
+).decode("ascii")
+assert ActionContext(encoded_context).value == {{"secrets": {{"token": "kept"}}}}
+
+from actions.server_integration import (
+    DEFAULT_EXCLUSION_PATTERNS,
+    EPManagedParameters,
+    ManagedParameters,
+    PluginManager,
+    format_lint_results,
+)
+request = Request.model_validate({{"headers": {{"X-Request-ID": "request-1"}}, "cookies": {{}}}})
+managed = ManagedParameters({{"request": request}})
+plugin_manager = PluginManager()
+plugin_manager.set_instance(EPManagedParameters, managed)
+request_parameter = inspect.signature(lambda request: None).parameters["request"]
+assert plugin_manager.get_instance(EPManagedParameters) is managed
+assert managed.is_managed_param("request", param=request_parameter)
+assert managed.inject_managed_params(
+    inspect.signature(lambda request: None), None, {{}}, {{}}
+) == {{"request": request}}
+assert managed.get_request_contexts({{}}, {{}}).request is request
+from actions.server._preload_actions.preload_actions_server_main import MessagesHandler
+handler = MessagesHandler.__new__(MessagesHandler)
+worker_plugins = handler._plugin_manager_kwargs(
+    {{"request": {{"headers": {{"X-Request-ID": "worker-request"}}, "cookies": {{}}}}}}
+)["plugin_manager"]
+worker_request = worker_plugins.get_instance(EPManagedParameters).get_request_contexts({{}}, {{}}).request
+assert worker_request.headers["X-Request-ID"] == "worker-request"
+
+formatted = format_lint_results({{
+    "file": "actions.py",
+    "errors": [{{
+        "range": {{"start": {{"line": 7}}}},
+        "severity": 1,
+        "message": "missing description",
+    }}],
+}})
+assert formatted is not None and formatted.found_critical
+assert "Error (line 7): missing description" in formatted.message
+
+from actions.server.package.package_exclude import PackageExcludeHandler
+with tempfile.TemporaryDirectory() as directory:
+    root = pathlib.Path(directory)
+    (root / ".git").mkdir()
+    (root / ".git" / "config").write_text("ignored")
+    (root / "keep.txt").write_text("kept")
+    excludes = PackageExcludeHandler()
+    excludes.fill_exclude_patterns(DEFAULT_EXCLUSION_PATTERNS)
+    found = sorted(relative for _, relative in excludes.collect_files_excluding_patterns(root))
+    assert found == ["keep.txt"], found
+
+for name in (
+    "actions.server._actions_process_pool",
+    "actions.server._actions_import",
+    "actions.server._encryption",
+    "actions.server._new_project",
+    "actions.server._preload_actions.preload_actions_server_main",
+    "actions.server.package._package_metadata",
+):
+    importlib.import_module(name)
 """
     subprocess.run([str(python), "-c", probe], check=True, env=environment)
     subprocess.run(
         [str(python), "-m", "actions.server", "--help"], check=True, env=environment
     )
     subprocess.run(
-        [str(python.parent / "action-server"), "--help"], check=True, env=environment
+        [
+            str(
+                python.parent
+                / ("action-server.exe" if os.name == "nt" else "action-server")
+            ),
+            "--help",
+        ],
+        check=True,
+        env=environment,
     )
 
 
-def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(tmp_path):
+def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
+    tmp_path,
+):
     runtime_python = _runtime_python()
     wheelhouse = tmp_path / "wheelhouse"
     wheelhouse.mkdir()
     wheels = _build_wheels(wheelhouse, runtime_python)
 
     core_wheel = next(path for path in wheels if path.name.startswith("actions_core-"))
-    work_items_wheel = next(path for path in wheels if path.name.startswith("actions_work_items-"))
+    work_items_wheel = next(
+        path for path in wheels if path.name.startswith("actions_work_items-")
+    )
     with zipfile.ZipFile(core_wheel) as archive:
         assert "actions/__init__.py" in archive.namelist()
     with zipfile.ZipFile(work_items_wheel) as archive:
         assert "actions/__init__.py" not in archive.namelist()
 
-    runtime_wheel = next(path for path in wheels if path.name.startswith("actions_runtime-"))
+    runtime_wheel = next(
+        path for path in wheels if path.name.startswith("actions_runtime-")
+    )
     runtime_files = _wheel_files(runtime_wheel)
     metadata_name = next(name for name in runtime_files if name.endswith("/METADATA"))
+    assert (
+        "Requires-Dist: actions-core (>=1.0.2,<2.0.0)" in runtime_files[metadata_name]
+    )
+    assert (
+        "Requires-Dist: actions-http-helper (>=1.0.3,<2.0.0)"
+        in runtime_files[metadata_name]
+    )
     record_name = next(name for name in runtime_files if name.endswith("/RECORD"))
     required_payload = {
         "actions/server/_settings.py",
@@ -373,10 +673,13 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
         }
     )
 
-    for order in (("actions-runtime", "actions-core"), ("actions-core", "actions-runtime")):
+    for order in (
+        ("actions-runtime", "actions-core"),
+        ("actions-core", "actions-runtime"),
+    ):
         env_dir = tmp_path / ("venv-" + "-".join(order))
         subprocess.run([str(runtime_python), "-m", "venv", str(env_dir)], check=True)
-        python = env_dir / "bin/python"
+        python = env_dir / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
         _install_and_probe(python, wheels)
         environment = os.environ.copy()
         environment.pop("PYTHONPATH", None)

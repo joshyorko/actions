@@ -1,7 +1,13 @@
-# ADR 0129: Workspace-scoped capability deployments
+# Proposed ADR 0129: Workspace-scoped capability deployments
 
-- Status: Accepted
+- Status: Proposed (design only; not accepted for implementation)
 - Issue: joshyorko/actions#129
+
+This proposal records a design direction for open issue #129. No schema, API,
+or lifecycle behavior described here is shipped. Implementation and acceptance
+require the design gaps and gates in
+[`deployment-revisions-draft.md`](../design/deployment-revisions-draft.md) to
+be resolved against the target branch and both supported database backends.
 
 ## Decision
 
@@ -82,11 +88,13 @@ and may resolve the current revision and another allowed plan.
 Publishing a change validates package, plan, adapter, provider, and worker
 compatibility, then atomically advances `Deployment.current_revision_id`.
 Existing Runs retain their snapshots while new Runs use the new revision.
-Rollback advances the pointer to an existing revision and has no effect on
-in-flight Runs. Revisions, plans, artifacts, bindings, and worker profiles are
-retained while referenced by Runs, Attempts, Tasks, Work Items, artifacts,
-catalogs, or audit records; garbage collection is reference-aware and never
-rewrites provenance.
+Rollback publishes a new immutable revision whose configuration matches the
+chosen retained revision, links `previous_revision_id` to the current head and
+`rollback_of_revision_id` to the target, then atomically advances the pointer.
+It has no effect on in-flight Runs. Revisions, plans, artifacts, bindings,
+and worker profiles are retained while referenced by Runs, Attempts, Tasks,
+Work Items, artifacts, catalogs, or audit records; garbage collection is
+reference-aware and never rewrites provenance.
 
 Revocation blocks new resolutions and records an explicit blocked/manual
 recovery result for Runs whose pinned plan can no longer be satisfied. Mixed

@@ -1,9 +1,10 @@
 {
-  "hash": "0a0be924e42fd4ad299cf732790d9f2ddad01b4926dce4826ab9c2ec69e6140f",
+  "hash": "33b6ce2a6c1c9dab32eeca826baf8807ca7f0ac7419dcbc3d0c59a8274bbadff",
   "schema": 1,
   "templates": {
     "advanced": "Advanced - An example showcasing more advanced configuration features of Actions.",
     "basic": "Basic - Simple example showcasing some basic configuration.",
+    "mcp-v2-showcase": "MCP v2 Showcase - A local example of the stateless core MCP protocol.",
     "minimal": "Minimal - A bare bone starting template.",
     "workflow-producer-consumer": "Workflow/Producer-Consumer - Producer-consumer workflow pattern using work items."
   }

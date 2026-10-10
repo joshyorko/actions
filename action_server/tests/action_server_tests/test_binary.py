@@ -1,6 +1,18 @@
+import ast
+import json
+import sqlite3
 from pathlib import Path
 
 import pytest
+
+
+@pytest.mark.integration_test
+def test_binary_preserves_cli_usage_exit_code():
+    from actions.server._selftest import actions_server_run
+
+    result = actions_server_run(["devenv", "task"], returncode=2)
+    assert "usage: action-server devenv task" in result.stderr
+    assert "the following arguments are required: task_names" in result.stderr
 
 
 def get_internal_version_location(version: str) -> Path:
@@ -74,8 +86,103 @@ def test_binary_spec_bundles_repository_owned_rcc_asset():
     spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
 
     assert "rcc_datas" in spec
-    assert 'startswith("rcc-")' in spec
-    assert '"actions/server/bin"' in spec
+    assert "is_rcc_data(data)" in spec
+
+
+@pytest.mark.parametrize(
+    "data",
+    [
+        ("/checkout/src/actions/server/bin/rcc-18.19.3", "actions/server/bin"),
+        (
+            r"C:\checkout\src\actions\server\bin\rcc-18.19.3.exe",
+            r"actions\server\bin",
+        ),
+    ],
+)
+def test_rcc_spec_data_filter_accepts_native_path_separators(data):
+    from actions.server._build_common.rcc_bundle import is_rcc_data
+
+    assert is_rcc_data(data)
+
+
+@pytest.mark.parametrize(
+    "data",
+    [
+        (r"C:\checkout\src\actions\server\bin\other.exe", r"actions\server\bin"),
+        (
+            r"C:\checkout\src\actions\server\other\rcc-18.19.3.exe",
+            r"actions\server\other",
+        ),
+        (
+            r"C:\checkout\src\actions\server\bin\rcc-18.19.3.exe",
+            r"actions\server\bin-extra",
+        ),
+    ],
+)
+def test_rcc_spec_data_filter_rejects_unrelated_data(data):
+    from actions.server._build_common.rcc_bundle import is_rcc_data
+
+    assert not is_rcc_data(data)
+
+
+def test_binary_spec_preserves_work_items_python_sources_for_private_loader():
+    """The private loader needs Work Items source files in the extraction tree."""
+    spec_path = Path(__file__).parents[2] / "action-server.spec"
+    tree = ast.parse(spec_path.read_text(encoding="utf-8"))
+    calls = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "collect_data_files"
+    ]
+
+    work_items_collection = [
+        node
+        for node in calls
+        if node.args
+        and isinstance(node.args[0], ast.Constant)
+        and node.args[0].value == "actions.work_items"
+    ]
+    assert len(work_items_collection) == 1
+    assert any(
+        keyword.arg == "include_py_files"
+        and isinstance(keyword.value, ast.Constant)
+        and keyword.value.value is True
+        for keyword in work_items_collection[0].keywords
+    )
+
+    analysis = next(
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "Analysis"
+    )
+    datas = next(
+        keyword.value for keyword in analysis.keywords if keyword.arg == "datas"
+    )
+    assert any(
+        isinstance(node, ast.Name) and node.id == "work_items_datas"
+        for node in ast.walk(datas)
+    )
+    assert '"actions/__init__.py"' not in spec_path.read_text(encoding="utf-8")
+
+
+def test_work_items_pyinstaller_data_hook_keeps_only_child_package_sources():
+    """The hook resolves source under actions/work_items, never the core root."""
+    from PyInstaller.utils.hooks import collect_data_files
+
+    data_files = collect_data_files("actions.work_items", include_py_files=True)
+    extracted_paths = {
+        (Path(destination) / Path(source).name).as_posix()
+        for source, destination in data_files
+    }
+
+    assert "actions/work_items/__init__.py" in extracted_paths
+    assert "actions/work_items/_adapters/_sqlite.py" in extracted_paths
+    assert all(path.startswith("actions/work_items/") for path in extracted_paths)
+    assert "actions/__init__.py" not in extracted_paths
 
 
 @pytest.mark.integration_test
@@ -199,3 +306,89 @@ def test_binary_build():
                 os.remove(target_executable)
             except Exception:
                 raise RuntimeError(f"Failed to remove {target_executable}")
+
+
+@pytest.mark.integration_test
+def test_work_items_native_executable_api_round_trip(
+    action_server_process,
+    tmp_path: Path,
+) -> None:
+    """Exercise the frozen Runtime's own SQLite-backed Work Items API."""
+    from actions.work_items import SQLiteAdapter, State
+
+    from actions.server._selftest import ActionServerClient
+
+    project_dir = tmp_path / "action-project"
+    project_dir.mkdir()
+    (project_dir / "actions.py").write_text(
+        "PROJECT_ACTIONS = True\n", encoding="utf-8"
+    )
+    action_server_process.start(cwd=project_dir, actions_sync=False)
+    client = ActionServerClient(action_server_process)
+
+    empty_stats = client.get_json("/api/work-items/stats")
+    assert empty_stats == {
+        "queue_name": "default",
+        "pending": 0,
+        "in_progress": 0,
+        "done": 0,
+        "failed": 0,
+        "total": 0,
+    }
+
+    created = client.post_get_response(
+        "/api/work-items", {"payload": {"native_probe": "#208"}}
+    ).json()
+    item_id = created["id"]
+    assert created["state"] == State.PENDING.value
+    assert created["payload"] == {"native_probe": "#208"}
+
+    pending = client.get_json("/api/work-items", params={"state": "PENDING"})
+    assert pending["total"] == 1
+    assert pending["items"][0]["id"] == item_id
+    assert client.get_json(f"/api/work-items/{item_id}")["state"] == State.PENDING.value
+
+    db_path = action_server_process.datadir / "workitems.db"
+    assert db_path.is_file()
+    assert db_path.parent == action_server_process.datadir
+
+    # The management REST API intentionally has no reserve/release endpoint.
+    # Transition the disposable Runtime-owned database through the supported adapter,
+    # then verify the native API sees the persisted state.
+    adapter = SQLiteAdapter(
+        db_path=str(db_path),
+        files_dir=str(action_server_process.datadir / "work_item_files"),
+    )
+    assert adapter.reserve_input() == item_id
+    adapter.release_input(item_id, State.DONE)
+
+    done = client.get_json("/api/work-items", params={"state": "DONE"})
+    assert done["total"] == 1
+    assert done["items"][0]["id"] == item_id
+    assert client.get_json(f"/api/work-items/{item_id}")["state"] == State.DONE.value
+    final_stats = client.get_json("/api/work-items/stats")
+    assert final_stats["done"] == 1
+    assert final_stats["total"] == 1
+
+    # Exercise the packaged Runtime error handler with corrupt persisted data.
+    with sqlite3.connect(db_path) as connection:
+        connection.execute(
+            "UPDATE work_items SET payload = ? WHERE id = ?", ("not-json", item_id)
+        )
+
+    import actions_http
+
+    def get_error_response(path: str):
+        return actions_http.get(
+            client.build_full_url(path),
+            **client.requests_kwargs(),
+        )
+
+    detail_error = get_error_response(f"/api/work-items/{item_id}")
+    list_error = get_error_response("/api/work-items")
+    for response in (detail_error, list_error):
+        assert response.status_code == 503
+        body = json.loads(response.text)
+        assert body["detail"]["code"] == "work_items_storage_unavailable"
+        assert "not found" not in body["detail"]["message"].lower()
+        assert str(action_server_process.datadir) not in response.text

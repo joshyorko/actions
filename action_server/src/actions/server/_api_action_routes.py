@@ -64,8 +64,10 @@ class APIKeyAuthBackend(AuthenticationBackend):
     def __init__(
         self,
         api_key: str,
+        browser_sessions=None,
     ):
         self.api_key = api_key
+        self.browser_sessions = browser_sessions
 
     async def authenticate(
         self, conn: HTTPConnection
@@ -73,6 +75,13 @@ class APIKeyAuthBackend(AuthenticationBackend):
         from starlette.authentication import SimpleUser
         from starlette.exceptions import HTTPException
         from starlette.status import HTTP_403_FORBIDDEN
+
+        if self.browser_sessions is not None:
+            if not self.browser_sessions.authorized(conn.scope):
+                raise HTTPException(
+                    status_code=HTTP_403_FORBIDDEN, detail="Not authenticated"
+                )
+            return AuthCredentials([]), SimpleUser("authenticated")
 
         token = _get_bearer_token(conn.headers.raw)
         if token is None:
@@ -152,6 +161,7 @@ class _ActionRoutes:
                 streamable_http_path="/mcp",
                 json_response=True,
                 stateless_http=True,
+                transport_security=self.mcp_server_setup_helper.transport_security,
             )
         )
 
@@ -190,7 +200,49 @@ class _ActionRoutes:
         )
 
     def register_actions(self) -> None:
+        self.publish_prepared_actions(self.prepare_actions())
+
+    def publish_prepared_actions(self, prepared) -> None:
+        from ._app import get_app
+
+        app = get_app()
+        routes, helper, packages, actions, names = prepared
+        # Validate before either public catalog changes. Replacing the route
+        # list avoids exposing a remove/append interval to concurrent requests.
+        next_routes = [
+            route
+            for route in app.router.routes
+            if getattr(route, "path_format", None) not in self.registered_route_names
+        ]
+        next_routes.extend(routes)
+        self.mcp_server_setup_helper.publish_validated_catalog(helper)
+        app.router.routes = next_routes
+        app.openapi_schema = None
+        self.action_package_id_to_action_package = packages
+        self.actions = actions
+        self.registered_route_names = names
+
+    def prepare_actions(self) -> tuple:
+        """Validate the catalog and transactionally reserve its exact public keys."""
+        from ._models import get_db
+
+        db = get_db()
+        with db.transaction():
+            # Acquire the database writer before reading the catalog/history.
+            # SQLite's zero-row UPDATE promotes even an empty history table;
+            # PostgreSQL needs a table lock to serialize an empty table too.
+            if db.backend_name == "postgresql":
+                db.execute("LOCK TABLE mcp_catalog_name IN SHARE ROW EXCLUSIVE MODE")
+            else:
+                db.execute("UPDATE mcp_catalog_name SET id=id WHERE 0")
+            return self._prepare_actions()
+
+    def _prepare_actions(self) -> tuple:
+        """Build routes without changing the published catalog."""
         import json
+        from hashlib import sha256
+
+        from fastapi import APIRouter
 
         from actions.server._settings import (
             OPENAPI_SPEC_IS_CONSEQUENTIAL,
@@ -198,12 +250,11 @@ class _ActionRoutes:
         )
 
         from . import _actions_run
-        from ._app import get_app
-        from ._models import Action, ActionPackage, get_db
+        from ._models import Action, ActionPackage, McpCatalogName, get_db
         from .mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
         db = get_db()
-        app = get_app()
+        router = APIRouter()
         action: Action
         action_package_id_to_action_package: dict[str, ActionPackage] = dict(
             (action_package.id, action_package)
@@ -213,17 +264,11 @@ class _ActionRoutes:
         actions = db.all(Action)
         registered_route_names: set[str] = set()
         next_mcp_server_setup_helper = McpServerSetupHelper()
+        actions_to_register: list[tuple[ActionPackage, Action]] = []
         for action in actions:
             if not action.enabled:
                 # Disabled actions should not be registered.
                 continue
-
-            doc_desc: str | None = ""
-            if action.docs:
-                doc_desc = get_action_description_from_docs(action.docs)
-
-            if not doc_desc:
-                doc_desc = ""
 
             action_package = action_package_id_to_action_package.get(
                 action.action_package_id
@@ -244,6 +289,21 @@ class _ActionRoutes:
                         action.name,
                     )
                     continue
+            actions_to_register.append((action_package, action))
+
+        reserved_names = {binding.id: binding for binding in db.all(McpCatalogName)}
+        tool_names = next_mcp_server_setup_helper.resolve_tool_names(
+            actions_to_register
+        )
+        # HTTP exposes resources and prompts too; its operation namespace must
+        # therefore include every admitted action, not only MCP tools.
+        operation_ids = next_mcp_server_setup_helper.resolve_action_names(
+            actions_to_register
+        )
+        for action_package, action in actions_to_register:
+            doc_desc = (
+                get_action_description_from_docs(action.docs) if action.docs else ""
+            )
             display_name = _make_name_user_friendly(action.name)
             options = action.options
             action_kind = "action"
@@ -275,13 +335,13 @@ class _ActionRoutes:
             assert (
                 route_name not in registered_route_names
             ), f"Route: {route_name} already registered."
-            app.add_api_route(
+            router.add_api_route(
                 route_name,
                 func_fast_api,
                 name=action.name,
                 summary=display_name,
                 description=doc_desc,
-                operation_id=action.name,
+                operation_id=operation_ids[action.id],
                 methods=["POST"],
                 dependencies=self.endpoint_dependencies,
                 openapi_extra=openapi_extra,
@@ -289,16 +349,66 @@ class _ActionRoutes:
             registered_route_names.add(route_name)
 
             next_mcp_server_setup_helper.register_action(
-                func_internal, action_package, action, display_name, doc_desc
+                func_internal,
+                action_package,
+                action,
+                display_name,
+                doc_desc,
+                tool_name=tool_names.get(action.id),
             )
 
         # Build the complete catalog off to the side. The persistent MCP
         # endpoint publishes it in one pointer swap, so an admitted callback
         # can continue using its old generation while reload registers routes.
-        self.mcp_server_setup_helper.replace_catalog(next_mcp_server_setup_helper)
-        self.action_package_id_to_action_package = action_package_id_to_action_package
-        self.actions = actions
-        self.registered_route_names = registered_route_names
+        next_mcp_server_setup_helper._validate_ui_resource_references(
+            next_mcp_server_setup_helper._catalog
+        )
+        catalog = next_mcp_server_setup_helper._catalog
+        candidate_names: dict[str, McpCatalogName] = {}
+        for namespace, mapping in (
+            ("tool", catalog.tool_name_to_action_info),
+            ("resource", catalog.resource_to_action_info),
+            ("resource-template", catalog.resource_template_to_action_info),
+            ("prompt", catalog.prompt_name_to_action_info),
+        ):
+            for name, info in sorted(mapping.items()):
+                package = action_package_id_to_action_package[
+                    info.action.action_package_id
+                ]
+                identity = (package.name, info.action.name)
+                encoded_key = json.dumps([namespace, name]).encode("utf-8")
+                key = sha256(b"actions.mcp.catalog-key.v1\0" + encoded_key).hexdigest()
+                previous = reserved_names.get(key) or candidate_names.get(key)
+                if previous is not None and (previous.namespace, previous.name) != (
+                    namespace,
+                    name,
+                ):
+                    raise ValueError(
+                        "MCP catalog key digest collision; admission rejected."
+                    )
+                previous_identity = (
+                    (previous.package_name, previous.action_name) if previous else None
+                )
+                if previous_identity is not None and previous_identity != identity:
+                    raise ValueError(
+                        f"MCP {namespace} key {name!r} is reserved for {previous_identity!r}; "
+                        f"the candidate would assign it to {identity!r}. "
+                        "Rename the conflicting action or public key before retrying "
+                        "admission. Clients must rediscover the current MCP catalog."
+                    )
+                if previous is None:
+                    candidate_names[key] = McpCatalogName(
+                        key, namespace, name, *identity
+                    )
+        for binding in candidate_names.values():
+            db.insert(binding)
+        return (
+            router.routes,
+            next_mcp_server_setup_helper,
+            action_package_id_to_action_package,
+            actions,
+            registered_route_names,
+        )
 
     def unregister_http_actions(self):
         from actions.server._app import get_app

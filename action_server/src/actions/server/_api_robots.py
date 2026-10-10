@@ -1,4 +1,5 @@
 import asyncio
+import errno
 import ipaddress
 import logging
 import os
@@ -7,12 +8,11 @@ import socket
 import stat
 import tempfile
 import time
-import unicodedata
 import uuid
 import zipfile
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Dict, List, Optional
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlsplit, urlunsplit
 
 import fastapi
 import yaml
@@ -21,6 +21,10 @@ from fastapi.routing import APIRouter
 from pydantic import BaseModel
 
 from actions.server._database import datetime_to_str
+from actions.server._portable_paths import (
+    is_portable_path_component,
+    portable_path_collision_key,
+)
 from actions.server._rcc import get_rcc_robots
 from actions.server._runs_state_cache import get_global_runs_state
 from actions.server._settings import get_settings
@@ -279,9 +283,11 @@ def _validate_zip_members(
         if not raw_parts or any(part in {"", ".", ".."} for part in raw_parts):
             return False, "Zip contains an unsafe package root path", set()
 
-        normalized_parts = [
-            unicodedata.normalize("NFC", part).casefold() for part in raw_parts
-        ]
+        for part in raw_parts:
+            if not is_portable_path_component(part):
+                return False, "Zip contains an unsafe Windows destination path", set()
+
+        normalized_parts = [portable_path_collision_key(part) for part in raw_parts]
         normalized = "/".join(normalized_parts)
         for index in range(1, len(normalized_parts) + 1):
             normalized_prefix = "/".join(normalized_parts[:index])
@@ -376,63 +382,137 @@ def _sanitized_robot_name(value: Optional[str]) -> str:
     return name[:128]
 
 
+def _remove_owned_robot_staging(
+    staging_root: Path,
+    staging_root_identity: Optional[tuple[int, int]],
+    staging_package: Path,
+    staging_package_identity: Optional[tuple[int, int]],
+) -> None:
+    """Remove only staging paths whose directory identities are still ours."""
+    if staging_root_identity is None:
+        return
+
+    try:
+        root_stat = staging_root.lstat()
+    except FileNotFoundError:
+        return
+    if (
+        stat.S_ISLNK(root_stat.st_mode)
+        or not stat.S_ISDIR(root_stat.st_mode)
+        or (root_stat.st_dev, root_stat.st_ino) != staging_root_identity
+    ):
+        return
+
+    if staging_package_identity is not None:
+        try:
+            package_stat = staging_package.lstat()
+        except FileNotFoundError:
+            package_stat = None
+        if (
+            package_stat is not None
+            and not stat.S_ISLNK(package_stat.st_mode)
+            and stat.S_ISDIR(package_stat.st_mode)
+            and (package_stat.st_dev, package_stat.st_ino) == staging_package_identity
+        ):
+            shutil.rmtree(staging_package)
+
+    # rmdir deliberately refuses to remove a container if another entry has
+    # appeared after its package child was published or cleaned up.
+    try:
+        staging_root.rmdir()
+    except OSError as exc:
+        if exc.errno not in {errno.EEXIST, errno.ENOTEMPTY, errno.ENOENT}:
+            raise
+
+
 def _publish_robot_package(
     package_dir: Path, robot_name: Optional[str], extracted_name: Optional[str]
 ) -> tuple[str, Path]:
+    from actions.server._directory_publication import rename_directory_no_replace
+
     robots_root = ROBOTS_DIR.resolve()
     base_name = _sanitized_robot_name(robot_name or extracted_name)
 
     for _ in range(100):
-        final_name = base_name
-        target_dir = robots_root / final_name
-        if os.path.lexists(target_dir):
-            final_name = f"{base_name}_{uuid.uuid4().hex[:8]}"
+        staging_root = robots_root / f".{base_name}.staging-{uuid.uuid4().hex}"
+        staging_package = staging_root / "package"
+        staging_root_identity: Optional[tuple[int, int]] = None
+        staging_package_identity: Optional[tuple[int, int]] = None
+        target_dir = robots_root / base_name
+        try:
+            # Keep the copy in a private parent: copytree applies the source
+            # directory's mode to its destination with copystat.
+            staging_root.mkdir(mode=0o700)
+            staging_stat = staging_root.lstat()
+            staging_root_identity = (staging_stat.st_dev, staging_stat.st_ino)
+
+            staging_package.mkdir(mode=0o700)
+            package_stat = staging_package.lstat()
+            staging_package_identity = (package_stat.st_dev, package_stat.st_ino)
+            shutil.copytree(
+                package_dir, staging_package, symlinks=True, dirs_exist_ok=True
+            )
+            _validate_staged_tree(staging_package)
+            is_valid, message, admitted_name = _validate_robot_package(
+                staging_package, default_name=extracted_name
+            )
+            if not is_valid:
+                raise _RobotImportLimitError(message)
+
+            admitted_base_name = _sanitized_robot_name(
+                robot_name or admitted_name or extracted_name
+            )
+            base_name = admitted_base_name
+            final_name = base_name
             target_dir = robots_root / final_name
             if os.path.lexists(target_dir):
-                continue
+                final_name = f"{base_name}_{uuid.uuid4().hex[:8]}"
+                target_dir = robots_root / final_name
+                if os.path.lexists(target_dir):
+                    continue
 
-        temporary_target = robots_root / f".{final_name}.staging-{uuid.uuid4().hex}"
-        try:
-            shutil.copytree(package_dir, temporary_target, symlinks=True)
-            _validate_staged_tree(temporary_target)
             if os.path.lexists(target_dir):
                 raise FileExistsError(target_dir)
-            os.replace(temporary_target, target_dir)
+            rename_directory_no_replace(staging_package, target_dir)
+            # The package directory moved. Cleanup may remove only the now-empty
+            # container with its original identity; rmdir preserves later entries.
+            staging_package_identity = None
             return final_name, target_dir
         except FileExistsError:
             if not os.path.lexists(target_dir):
                 raise
         finally:
-            if os.path.lexists(temporary_target):
-                if temporary_target.is_dir() and not temporary_target.is_symlink():
-                    shutil.rmtree(temporary_target)
-                else:
-                    temporary_target.unlink()
+            _remove_owned_robot_staging(
+                staging_root,
+                staging_root_identity,
+                staging_package,
+                staging_package_identity,
+            )
 
     raise _RobotImportLimitError("Unable to allocate a safe robot publication path")
 
 
-def _validate_download_url(url: str) -> tuple[bool, str]:
+def _resolve_download_url(url: str) -> tuple[list[str], str]:
     try:
         parsed = urlparse(url)
         scheme = parsed.scheme.lower()
         hostname = parsed.hostname
         port = parsed.port
     except (TypeError, ValueError):
-        return False, "Robot download URL is invalid"
+        return [], "Robot download URL is invalid"
 
     if scheme != "https" or not hostname:
-        return False, "Robot download URL must use an allowed HTTPS host"
+        return [], "Robot download URL must use an allowed HTTPS host"
     if parsed.username or parsed.password or parsed.fragment:
-        return False, "Robot download URL contains disallowed credentials or fragment"
+        return [], "Robot download URL contains disallowed credentials or fragment"
     if any(ord(character) < 0x20 for character in url):
-        return False, "Robot download URL contains invalid characters"
+        return [], "Robot download URL contains invalid characters"
     if port is not None and not 1 <= port <= 65535:
-        return False, "Robot download URL has an invalid port"
+        return [], "Robot download URL has an invalid port"
 
     normalized_host = hostname.rstrip(".").lower()
     if normalized_host in {"localhost", "localhost.localdomain"}:
-        return False, "Robot download URL targets a private host"
+        return [], "Robot download URL targets a private host"
 
     try:
         addresses = {str(ipaddress.ip_address(normalized_host))}
@@ -443,14 +523,37 @@ def _validate_download_url(url: str) -> tuple[bool, str]:
             )
             addresses = {str(ipaddress.ip_address(item[4][0])) for item in address_info}
         except (OSError, UnicodeError, ValueError):
-            return False, "Robot download URL host cannot be verified"
+            return [], "Robot download URL host cannot be verified"
 
     if not addresses or any(
         not ipaddress.ip_address(address).is_global for address in addresses
     ):
-        return False, "Robot download URL targets a private host"
+        return [], "Robot download URL targets a private host"
 
-    return True, ""
+    return sorted(addresses), ""
+
+
+def _validate_download_url(url: str) -> tuple[bool, str]:
+    addresses, message = _resolve_download_url(url)
+    return bool(addresses), message
+
+
+def _pinned_download_request(
+    url: str, address: str
+) -> tuple[str, dict[str, str], dict[str, str]]:
+    parsed = urlsplit(url)
+    assert parsed.hostname is not None  # Established by URL admission.
+    hostname = parsed.hostname.encode("idna").decode("ascii")
+    authority = f"[{hostname}]" if ":" in hostname else hostname
+    if parsed.port is not None:
+        authority += f":{parsed.port}"
+    destination = f"[{address}]" if ":" in address else address
+    if parsed.port is not None:
+        destination += f":{parsed.port}"
+    pinned_url = urlunsplit((parsed.scheme, destination, parsed.path, parsed.query, ""))
+    # HTTP Host and TLS verification retain the original identity. Only TCP's
+    # destination changes to the admitted literal address; no second host lookup.
+    return pinned_url, {"Host": authority}, {"sni_hostname": hostname}
 
 
 async def _save_uploaded_robot(file: UploadFile) -> Path:
@@ -478,7 +581,9 @@ async def _save_uploaded_robot(file: UploadFile) -> Path:
         raise
 
 
-def _validate_robot_package(package_dir: Path) -> tuple[bool, str, Optional[str]]:
+def _validate_robot_package(
+    package_dir: Path, default_name: Optional[str] = None
+) -> tuple[bool, str, Optional[str]]:
     """
     Validate that a directory contains a valid robot package.
 
@@ -505,7 +610,7 @@ def _validate_robot_package(package_dir: Path) -> tuple[bool, str, Optional[str]
             if not tasks:
                 return False, "No tasks defined in robot.yaml", None
 
-            robot_name = robot_data.get("name", package_dir.name)
+            robot_name = robot_data.get("name", default_name or package_dir.name)
             return (
                 True,
                 f"Valid robot package (robot.yaml) with {len(tasks)} task(s)",
@@ -535,7 +640,7 @@ def _validate_robot_package(package_dir: Path) -> tuple[bool, str, Optional[str]
                     None,
                 )
 
-            robot_name = pkg_data.get("name", package_dir.name)
+            robot_name = pkg_data.get("name", default_name or package_dir.name)
             return (
                 True,
                 f"Valid robot package (package.yaml) with {len(tasks)} task(s)",
@@ -695,16 +800,24 @@ async def _download_from_url(url: str) -> tuple[bool, str, Optional[Path]]:
     download_succeeded = False
     try:
         async with asyncio.timeout(_MAX_ARCHIVE_SECONDS):
-            async with httpx.AsyncClient(
-                follow_redirects=False, timeout=_MAX_ARCHIVE_SECONDS
-            ) as client:
-                current_url = url
-                for redirect_count in range(_MAX_REDIRECTS + 1):
-                    valid_url, message = _validate_download_url(current_url)
-                    if not valid_url:
-                        return False, message, None
-
-                    async with client.stream("GET", current_url) as response:
+            current_url = url
+            for redirect_count in range(_MAX_REDIRECTS + 1):
+                addresses, message = _resolve_download_url(current_url)
+                if not addresses:
+                    return False, message, None
+                pinned_url, headers, extensions = _pinned_download_request(
+                    current_url, addresses[0]
+                )
+                # Pools are keyed by the literal address, not SNI. A fresh client
+                # prevents reuse of a prior hostname's TLS session or cookies.
+                async with httpx.AsyncClient(
+                    follow_redirects=False,
+                    timeout=_MAX_ARCHIVE_SECONDS,
+                    trust_env=False,
+                ) as client:
+                    async with client.stream(
+                        "GET", pinned_url, headers=headers, extensions=extensions
+                    ) as response:
                         if response.status_code in {301, 302, 303, 307, 308}:
                             location = response.headers.get("location")
                             if not location:
@@ -777,6 +890,8 @@ async def _download_from_url(url: str) -> tuple[bool, str, Optional[Path]]:
 
                         download_succeeded = True
                         return True, "Downloaded successfully", temporary_path
+
+        return False, "Robot download exceeded the redirect limit", None
 
     except _RobotImportLimitError as e:
         return False, str(e), None

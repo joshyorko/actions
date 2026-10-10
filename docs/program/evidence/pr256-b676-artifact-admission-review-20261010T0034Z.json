@@ -1,0 +1,31 @@
+{
+  "recorded_at": "2026-10-10T00:34:25.596Z",
+  "reviewer": {
+    "target": "cas-worker-01",
+    "thread": "01a1220f-944d-7f22-94a4-112dc13be035",
+    "turn": "01a12337-8c9e-7aa3-8c84-f01dc06591fb"
+  },
+  "head": "b676daf3d51de89b1bfc51c90a76c01ed24d8bfb",
+  "checkout": "1cb3183a650cb866a5569059c240a04189e15c58",
+  "tree": "62b8b2206f2322b9dfb82388f0495187593313d8",
+  "receipt": {
+    "path": "/workspaces/actions-worker-state/devsy-native-auth/run38008430418-pr256-admission/pr256-admission-receipt.json",
+    "bytes": 30390,
+    "sha256": "9b2b7c4428232b4ad9092e90b5b03bdfa3ee70d9cace9f2e1904b2c2f11d1ddc"
+  },
+  "result": "PASS bounded Linux/Windows frozen and Go-wrapper UI artifact admission; independent Devsy reviewer retrieved and verified actual ZIP bytes. Root has API metadata and this transcribed peer result, not local ZIP bytes.",
+  "checks": [
+    "Archive digests and sizes match GitHub API; CRC and safe path checks pass",
+    "All four UI receipts PASS_BOUNDED; normal and storage-error stages pass",
+    "Wrapper reaped, complete descendant snapshot, no live/zombie descendants or control errors",
+    "Original build trees unchanged; Windows isolated runtime adds only pinned RCC18.19.3 executable and directory with hash matching pin",
+    "Go extracted contents match embedded archive; platform permission normalization recorded"
+  ],
+  "limits": [
+    "macOS UI skipped",
+    "Not full #208 acceptance or release publication",
+    "PR admission still held for independently reproduced configured formatter failure on b676 harness"
+  ],
+  "documentation_disposition": "No extra prose needed beyond PR256 guide; accepted existing evidence/identity and isolation guidance covers review.",
+  "upstream_disposition": "none"
+}

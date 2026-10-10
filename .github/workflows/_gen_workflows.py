@@ -314,7 +314,15 @@ class BaseWorkflow:
     def generate(self):
         contents = yaml.safe_dump(self.full, sort_keys=False)
         path = CURDIR / self.target
-        final_header = AUTO_GEN_HEADER.rstrip("\n") if self.target == "actions_runtime_recovery.yml" else AUTO_GEN_HEADER
+        final_header = (
+            AUTO_GEN_HEADER.rstrip("\n")
+            if self.target
+            in {
+                "actions_runtime_recovery.yml",
+                "actions_runtime_frozen_catalog_rollback.yml",
+            }
+            else AUTO_GEN_HEADER
+        )
         print("Writing to ", path)
         path.write_text(
             f"""{AUTO_GEN_HEADER}
@@ -325,31 +333,6 @@ class BaseWorkflow:
 """,
             "utf-8",
         )
-
-    def is_beta_in_outputs(self):
-        # A step defining if it's a beta release. Needs 2 things:
-        # 1. Add to the outputs
-        # 2. Add to the steps
-        # 3. Add to the needs
-        # Can then be checked with:
-        #    if: ${{ needs.<job-name>.outputs.is_beta == 'false' }}
-        #
-        output = {
-            "is_beta": "${{ steps.check_beta.outputs.is_beta }}",
-        }
-        return output
-
-    def is_beta_in_steps(self):
-        step = {
-            "name": "Check if this is a beta release",
-            "id": "check_beta",
-            "run": """
-is_beta=${{ endsWith(github.ref_name, '-beta') }}
-echo "is_beta: $is_beta"
-echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
-""",
-        }
-        return step
 
     def install_with_devmode(self, env: dict | None = None):
         ret = {
@@ -463,11 +446,14 @@ echo "is_beta=$is_beta" >> "$GITHUB_OUTPUT"
 
     def check_runtime_release_head(self):
         return {
-            "name": "Verify Runtime tag matches current community",
+            "name": "Verify Runtime tag SHA and community ancestry",
             "shell": "bash",
             "run": """set -Eeuo pipefail
 git fetch origin community:refs/remotes/origin/community
-test "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/community)"
+tag_commit=$(git rev-parse \"$GITHUB_REF^{commit}\")
+event_commit=$(git rev-parse \"$GITHUB_SHA^{commit}\")
+test \"$tag_commit\" = \"$event_commit\"
+git merge-base --is-ancestor \"$GITHUB_SHA\" origin/community
 """,
             "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
         }
@@ -475,6 +461,7 @@ test "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/commu
     def build_action_server_binary(self):
         return {
             "name": "Build binary",
+            "shell": "bash",
             "env": {
                 "RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC": "true",
                 "RC_ACTION_SERVER_DO_SELFTEST": "true",
@@ -607,8 +594,6 @@ class BaseTests(BaseWorkflow):
                 "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
                 "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
                 "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
-                "ACTION_SERVER_TEST_ACCESS_CREDENTIALS": "${{ secrets.ACTION_SERVER_TEST_ACCESS_CREDENTIALS }}",
-                "ACTION_SERVER_TEST_HOSTNAME": "${{ secrets.ACTION_SERVER_TEST_HOSTNAME }}",
             },
             "run": f"{run_in_env}inv test",
         }
@@ -655,8 +640,24 @@ class ActionServerTests(BaseTests):
     require_build_oauth2_config = True
 
     @override
+    def on_part(self, dep_paths):
+        parts = super().on_part(dep_paths)
+        parts["on"]["pull_request"]["branches"] = [
+            "master",
+            "community",
+            "integration/**",
+        ]
+        return parts
+
+    @override
     def run_tests(self):
         return [
+            {
+                "name": "Test Go wrapper child lifecycle",
+                "working-directory": "action_server/go-wrapper",
+                "env": {"GOTOOLCHAIN": "local", "GOPROXY": "off"},
+                "run": "go test process.go process_test.go",
+            },
             # As we want to run the tests in the binary, we do the following:
             # 1. Build the binary
             # 2. Run the unit-tests (not integration) in the current environment
@@ -671,10 +672,13 @@ class ActionServerTests(BaseTests):
                     "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
                     "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
                     "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
-                    "ACTION_SERVER_TEST_ACCESS_CREDENTIALS": "${{ secrets.ACTION_SERVER_TEST_ACCESS_CREDENTIALS }}",
-                    "ACTION_SERVER_TEST_HOSTNAME": "${{ secrets.ACTION_SERVER_TEST_HOSTNAME }}",
                 },
                 "run": f"{run_in_env}poetry run inv test-not-integration",
+            },
+            {
+                "name": "Install Playwright Chromium for Runtime browser acceptance",
+                "working-directory": "action_server/frontend",
+                "run": "npx playwright install chromium",
             },
             {
                 "name": "Test (integration)",
@@ -682,10 +686,954 @@ class ActionServerTests(BaseTests):
                     "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
                     "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
                     "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
-                    "ACTION_SERVER_TEST_ACCESS_CREDENTIALS": "${{ secrets.ACTION_SERVER_TEST_ACCESS_CREDENTIALS }}",
-                    "ACTION_SERVER_TEST_HOSTNAME": "${{ secrets.ACTION_SERVER_TEST_HOSTNAME }}",
                 },
                 "run": f"{run_in_env}poetry run inv test-binary --jobs 0",
+            },
+        ]
+
+
+class ActionServerFrozenCatalogRollback(BaseWorkflow):
+    """Run managed catalog rollback and generation drain against a pinned Linux binary."""
+
+    name = "Actions Runtime Frozen Catalog Rollback"
+    target = "actions_runtime_frozen_catalog_rollback.yml"
+    project_name = "action_server"
+
+    @override
+    def __init__(self):
+        super().__init__()
+        self.full["permissions"] = {"contents": "read", "actions": "read"}
+
+    @override
+    def on_part(self, dep_paths):
+        return {
+            "on": {
+                "push": {
+                    "branches": [
+                        "test/frozen-catalog-rollback-20261010",
+                        "test/frozen-generation-drain-20261010",
+                    ],
+                    "paths": [
+                        ".github/workflows/_gen_workflows.py",
+                        ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+                        "action_server/scripts/verify_frozen_catalog_artifact.py",
+                        "action_server/scripts/verify_frozen_catalog_junit.py",
+                        "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+                        "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+                        "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py",
+                        "action_server/docs/DEVELOPMENT.md",
+                    ],
+                }
+            }
+        }
+
+    @override
+    def runs_on_and_strategy_part(self):
+        return {"runs-on": "ubuntu-24.04", "timeout-minutes": 45}
+
+    @override
+    def build_steps(self) -> list[dict]:
+        checkout = self.checkout_repo(pinned=True)
+        checkout["with"] = {"fetch-depth": 0}
+        return [
+            checkout,
+            *self.setup_python(pinned=True),
+            {
+                "name": "Initialize frozen acceptance evidence directory",
+                "run": 'mkdir -p "$RUNNER_TEMP/frozen-catalog-evidence"',
+            },
+            {
+                "name": "Fetch and hash-check the fixed native artifact",
+                "id": "artifact",
+                "shell": "bash",
+                "env": {
+                    "GITHUB_TOKEN": "${{ github.token }}",
+                    "ARTIFACT_ID": "11664669288",
+                    "EXPECTED_ARCHIVE_SIZE": "59369402",
+                    "EXPECTED_ARCHIVE_SHA256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286",
+                },
+                "run": "\n".join(
+                    [
+                        "set -Eeuo pipefail",
+                        "git merge-base --is-ancestor 31239cf99c7b264a0eab89660e93b391532ac305 HEAD",
+                        "test \"$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305^{tree})\" = d2ef7229651b6120db5cfa5995c65942ef768da8",
+                        'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/056d32601563a213643436e7df14e6ca0ea50516" | jq -er .commit.tree.sha)"',
+                        'test "$build_tree" = "$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305^{tree})"',
+                        'printf "%s\\n" "$build_tree" > "$RUNNER_TEMP/frozen-catalog-native-build-source-tree.txt"',
+                        "test \"$(git rev-parse HEAD:action_server/src/actions/server)\" = \"$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305:action_server/src/actions/server)\"",
+                        "git diff --quiet 31239cf99c7b264a0eab89660e93b391532ac305 HEAD -- action_server/src/actions/server",
+                        'archive="$RUNNER_TEMP/frozen-native.zip"',
+                        "curl --fail --silent --show-error --location \\",
+                        '  --header "Authorization: Bearer $GITHUB_TOKEN" \\',
+                        "  --header 'Accept: application/vnd.github+json' \\",
+                        '  "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" \\',
+                        '  --output "$archive"',
+                        'test "$(stat -c %s "$archive")" = "$EXPECTED_ARCHIVE_SIZE"',
+                        'echo "$EXPECTED_ARCHIVE_SHA256  $archive" | sha256sum --check --status',
+                        'mkdir -p "$RUNNER_TEMP/frozen-native-download"',
+                        'unzip -q "$archive" -d "$RUNNER_TEMP/frozen-native-download"',
+                    ]
+                ),
+            },
+            {
+                "name": "Verify full package provenance and frozen executable",
+                "id": "frozen",
+                "run": "\n".join(
+                    [
+                        "set -Eeuo pipefail",
+                        "uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_artifact.py \\",
+                        '  --provenance-tar "$RUNNER_TEMP/frozen-native-download/native-artifact-provenance.tar" \\',
+                        '  --destination "$RUNNER_TEMP/frozen-native-package" \\',
+                        '  --output "$RUNNER_TEMP/frozen-catalog-artifact-verification.json"',
+                    ]
+                ),
+            },
+            {
+                "name": "Install checksum-pinned RCC",
+                "id": "rcc",
+                "run": "\n".join(
+                    [
+                        "set -Eeuo pipefail",
+                        "destination=src/actions/server/bin/rcc-18.19.3",
+                        'mkdir -p "$(dirname "$destination")"',
+                        "curl --fail --silent --show-error --location \\",
+                        "  https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64 \\",
+                        '  --output "$destination"',
+                        "echo '7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428  '"
+                        + '"$destination" | sha256sum --check --status',
+                        'chmod 755 "$destination"',
+                        'sha256sum "$destination" > "$RUNNER_TEMP/frozen-catalog-rcc-sha256.txt"',
+                        '"$destination" version | tee "$RUNNER_TEMP/frozen-catalog-rcc-version.txt"',
+                    ]
+                ),
+            },
+            {
+                "name": "Install Action Server test dependencies",
+                "id": "dependencies",
+                "env": {"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "1"},
+                "run": "uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0 env -u VIRTUAL_ENV inv devinstall",
+            },
+            {
+                "name": "Run frozen managed rollback and drain acceptance",
+                "id": "acceptance",
+                "shell": "bash",
+                "env": {
+                    "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE": "${{ runner.temp }}/frozen-native-package/dist/action-server/action-server",
+                    "ACTIONS_HOME": "${{ runner.temp }}/frozen-actions-home",
+                    "ROBOTS_HOME": "${{ runner.temp }}/frozen-robots-home",
+                    "TMPDIR": "${{ runner.temp }}/frozen-tmp",
+                },
+                "run": "\n".join(
+                    [
+                        "set -Eeuo pipefail",
+                        'mkdir -p "$ACTIONS_HOME" "$ROBOTS_HOME" "$TMPDIR"',
+                        "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -c 'import pytest, sys; print(f\"pytest={pytest.__file__}; python={sys.executable}\")'",
+                        "set +e",
+                        "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -m integration_test -n 0 -q -s \\",
+                        "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good \\",
+                        "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers \\",
+                        "  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot \\",
+                        '  --junitxml="$RUNNER_TEMP/frozen-catalog-junit.xml" 2>&1 | tee "$RUNNER_TEMP/frozen-catalog-test.log"',
+                        "test_status=${PIPESTATUS[0]}",
+                        'if [ "$test_status" -eq 0 ]; then uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_junit.py \\',
+                        '  "$RUNNER_TEMP/frozen-catalog-junit.xml" "$RUNNER_TEMP/frozen-catalog-junit-summary.json" || test_status=$?; fi',
+                        'exit "$test_status"',
+                    ]
+                ),
+            },
+            {
+                "name": "Write final sanitized evidence receipt",
+                "if": "always()",
+                "shell": "bash",
+                "working-directory": "${{ runner.temp }}",
+                "env": {
+                    "ARTIFACT_OUTCOME": "${{ steps.artifact.outcome }}",
+                    "FROZEN_OUTCOME": "${{ steps.frozen.outcome }}",
+                    "RCC_OUTCOME": "${{ steps.rcc.outcome }}",
+                    "DEPENDENCIES_OUTCOME": "${{ steps.dependencies.outcome }}",
+                    "ACCEPTANCE_OUTCOME": "${{ steps.acceptance.outcome }}",
+                },
+                "run": "\n".join(
+                    [
+                        "python - <<'PY'",
+                        "import json, os",
+                        "from pathlib import Path",
+                        'root = Path(os.environ["RUNNER_TEMP"])',
+                        'steps = {name: os.environ.get(name + "_OUTCOME", "not-run") for name in ("ARTIFACT", "FROZEN", "RCC", "DEPENDENCIES", "ACCEPTANCE")}',
+                        'receipt = {"candidate_sha": "31239cf99c7b264a0eab89660e93b391532ac305", "candidate_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8", "native_build_source_sha": "056d32601563a213643436e7df14e6ca0ea50516", "native_build_source_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8", "native_build_workflow_run_id": "38039806634", "native_build_workflow_run_attempt": "1", "native_byte_verification_receipt_sha256": "3afbc8e2f4fe6e46bdd03512e82794e27cca3c705ad28c4a7711fb26b7fb349a", "control_sha": os.environ["GITHUB_SHA"], "artifact_id": "11664669288", "artifact_size": 59369402, "artifact_sha256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286", "wrapper_binary_artifact_id": "11665179231", "wrapper_binary_artifact_size": 77776642, "wrapper_binary_artifact_sha256": "72c3451b5a9f1d54632d7bdeaf36aa0ab3b43e9fbf021497b53db372a00c80a8", "wrapper_binary_size": 81977186, "wrapper_binary_sha256": "28cf80cb1d2811236ed64595b8b9d03a54d1904d63497eb39f34fb9bd67978f3", "wrapper_binary_verification_receipt_sha256": "1a87b8fac2810a5b7e8ce4916771ffe1d71e20494bd86562ad43666c79bb2896", "wrapper_execution_verified": False, "step_outcomes": steps, "status": "PASS" if all(value == "success" for value in steps.values()) else "FAIL_OR_NOT_RUN"}',
+                        'source_tree = root / "frozen-catalog-native-build-source-tree.txt"',
+                        'if source_tree.is_file(): receipt["native_build_source_tree_api_readback"] = source_tree.read_text(encoding="utf-8").strip()',
+                        'artifact_verification = root / "frozen-catalog-artifact-verification.json"',
+                        'if artifact_verification.is_file(): receipt["frozen_artifact_verification"] = json.loads(artifact_verification.read_text(encoding="utf-8"))',
+                        'junit = root / "frozen-catalog-junit-summary.json"',
+                        'if junit.is_file(): receipt["junit"] = json.loads(junit.read_text(encoding="utf-8"))',
+                        '(root / "frozen-catalog-summary.json").write_text(json.dumps(receipt, indent=2) + "\\n", encoding="utf-8")',
+                        "PY",
+                    ]
+                ),
+            },
+            {
+                "name": "Upload frozen acceptance evidence",
+                "if": "always()",
+                "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                "with": {
+                    "name": "frozen-catalog-rollback-${{ github.sha }}",
+                    "path": "${{ runner.temp }}/frozen-catalog-*",
+                    "if-no-files-found": "warn",
+                    "retention-days": 30,
+                },
+            },
+        ]
+
+
+
+RCC_ROLLBACK_SUMMARY_SCRIPT = r"""import hashlib
+import json
+import os
+import subprocess
+import sys
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+workspace = Path(os.environ["GITHUB_WORKSPACE"])
+control = workspace / "control"
+candidate = workspace / "candidate"
+evidence_dir = Path(os.environ["EVIDENCE_DIR"])
+evidence_dir.mkdir(parents=True, exist_ok=True)
+receipt_path = evidence_dir / "lifecycle-receipt.json"
+junit_path = Path(os.environ["JUNIT_PATH"])
+issues = []
+
+def git_value(root, *args):
+    try:
+        return subprocess.run(
+            ["git", "-C", str(root), *args],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+def file_sha256(path):
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+def read_json(path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+receipt = read_json(receipt_path)
+if not isinstance(receipt, dict):
+    receipt = {}
+source = receipt.get("source")
+source = source if isinstance(source, dict) else {}
+runtime = receipt.get("action_server_process_exit")
+runtime = runtime if isinstance(runtime, dict) else {}
+
+candidate_sha = git_value(candidate, "rev-parse", "HEAD")
+candidate_tree = git_value(candidate, "rev-parse", "HEAD^{tree}")
+control_sha = git_value(control, "rev-parse", "HEAD")
+control_tree = git_value(control, "rev-parse", "HEAD^{tree}")
+expected_candidate_sha = os.environ.get("EXPECTED_CANDIDATE_SHA")
+expected_candidate_tree = os.environ.get("EXPECTED_CANDIDATE_TREE")
+expected_control_sha = os.environ.get("EXPECTED_CONTROL_SHA")
+if candidate_sha != expected_candidate_sha:
+    issues.append("candidate_checkout_sha_mismatch")
+if candidate_tree != expected_candidate_tree:
+    issues.append("candidate_checkout_tree_mismatch")
+if control_sha != expected_control_sha:
+    issues.append("control_checkout_sha_mismatch")
+if source.get("commit") != candidate_sha:
+    issues.append("receipt_source_commit_mismatch")
+if source.get("tree") != candidate_tree:
+    issues.append("receipt_source_tree_mismatch")
+worker_libc_name = os.environ.get("RCC_WORKER_LIBC_NAME", "")
+worker_libc_version = os.environ.get("RCC_WORKER_LIBC_VERSION", "")
+try:
+    worker_libc_parts = tuple(
+        int(part) for part in worker_libc_version.split(".")[:2]
+    )
+except ValueError:
+    worker_libc_parts = ()
+worker_libc_compatible = worker_libc_name == "glibc" and worker_libc_parts >= (2, 36)
+if not worker_libc_compatible:
+    issues.append("runner_glibc_below_artifact_minimum_or_unknown")
+
+source_files = {
+    "action_package_handler": "action_server/src/actions/server/_action_package_handler.py",
+    "actions_import": "action_server/src/actions/server/_actions_import.py",
+    "runtime_adapter": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+    "rollback_test": "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+    "staged_consumer_test": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "source_staging": "action_server/src/actions/server/deployments/source_staging.py",
+    "source_read": "action_server/src/actions/server/deployments/source_read.py",
+    "source_manifest": "action_server/src/actions/server/deployments/source_manifest.py",
+    "acceptance_helper": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+}
+file_hashes = {name: file_sha256(candidate / path) for name, path in source_files.items()}
+receipt_hashes = source.get("runtime_module_sha256")
+receipt_hashes = receipt_hashes if isinstance(receipt_hashes, dict) else {}
+module_hashes_match = all(
+    receipt_hashes.get(name) == file_hashes[name]
+    for name in ("action_package_handler", "actions_import", "runtime_adapter")
+)
+module_origins = source.get("module_origins")
+module_origins = module_origins if isinstance(module_origins, dict) else {}
+module_origins_match = all(
+    Path(str(module_origins.get(name, ""))).resolve()
+    == (candidate / source_files[name]).resolve()
+    for name in ("action_package_handler", "actions_import", "runtime_adapter")
+)
+if not module_hashes_match:
+    issues.append("runtime_module_hash_mismatch")
+if not module_origins_match:
+    issues.append("runtime_module_origin_mismatch")
+
+test_counts = {"tests": 0, "failures": 0, "errors": 0, "skipped": 0}
+failed_case_names = []
+actual_case_counts = {"tests": 0, "failures": 0, "errors": 0, "skipped": 0}
+cases = []
+try:
+    junit_root = ET.parse(junit_path).getroot()
+    suites = [junit_root] if junit_root.tag == "testsuite" else list(junit_root.iter("testsuite"))
+    for suite in suites:
+        for key in test_counts:
+            test_counts[key] += int(suite.attrib.get(key, "0"))
+    cases = list(junit_root.iter("testcase"))
+    actual_case_counts["tests"] = len(cases)
+    for case in cases:
+        has_failure = case.find("failure") is not None
+        has_error = case.find("error") is not None
+        has_skipped = case.find("skipped") is not None
+        actual_case_counts["failures"] += int(has_failure)
+        actual_case_counts["errors"] += int(has_error)
+        actual_case_counts["skipped"] += int(has_skipped)
+        if has_failure or has_error:
+            failed_case_names.append(case.attrib.get("name", "unknown"))
+except (OSError, ET.ParseError, ValueError):
+    issues.append("junit_missing_or_invalid")
+if test_counts != actual_case_counts:
+    issues.append("junit_suite_counts_do_not_match_testcases")
+if test_counts != {"tests": 2, "failures": 0, "errors": 0, "skipped": 0}:
+    issues.append("test_result_not_exactly_two_passes")
+expected_test_identities = {
+    (
+        "test_current_candidate_import_rollback",
+        "test_current_candidate_failed_reload_keeps_last_good_action_usable",
+    ),
+    (
+        "test_source_staging_rcc_consumer",
+        "test_staged_package_executes_in_managed_rcc_runtime",
+    ),
+}
+observed_test_identities = {
+    (case.attrib.get("classname", "").rsplit(".", 1)[-1], case.attrib.get("name"))
+    for case in cases
+}
+test_identity_matches = (
+    len(cases) == 2 and observed_test_identities == expected_test_identities
+)
+if not test_identity_matches:
+    issues.append("unexpected_test_identity")
+
+try:
+    test_exit_code = int(os.environ.get("RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE", ""))
+except ValueError:
+    test_exit_code = None
+if test_exit_code != 0:
+    issues.append("test_process_exit_not_zero")
+
+staged_receipt_path = evidence_dir / "staged-consumer-receipt.json"
+staged_receipt = read_json(staged_receipt_path)
+source_digests = staged_receipt.get("source_sha256")
+staged_digests = staged_receipt.get("staged_sha256")
+staged_result = staged_receipt.get("typed_action_result")
+try:
+    source_inventory = json.loads(staged_receipt.get("source_inventory", ""))
+    staged_inventory = json.loads(staged_receipt.get("staged_inventory", ""))
+except (TypeError, json.JSONDecodeError):
+    source_inventory = None
+    staged_inventory = None
+source_action_digest = (
+    source_digests.get("action.py") if isinstance(source_digests, dict) else None
+)
+staged_action_digest = (
+    staged_digests.get("action.py") if isinstance(staged_digests, dict) else None
+)
+inventory_entries = (
+    source_inventory.get("entries") if isinstance(source_inventory, dict) else None
+)
+inventory_digests = (
+    {entry.get("path"): entry.get("sha256") for entry in inventory_entries}
+    if isinstance(inventory_entries, list)
+    and all(isinstance(entry, dict) for entry in inventory_entries)
+    else None
+)
+expected_staged_paths = {"action.py", "package.yaml"}
+expected_result_fields = {
+    "action_source_sha256",
+    "action_source_path",
+    "core_origin",
+    "core_version",
+    "python_executable",
+}
+managed_root = staged_receipt.get("managed_root")
+managed_root_path = Path(managed_root).resolve() if isinstance(managed_root, str) else None
+managed_worker_origins = (
+    isinstance(staged_result, dict)
+    and managed_root_path is not None
+    and Path(str(staged_result.get("python_executable", ""))).resolve().is_relative_to(managed_root_path)
+    and Path(str(staged_result.get("core_origin", ""))).resolve().is_relative_to(managed_root_path)
+)
+staged_receipt_valid = (
+    staged_receipt.get("status") == "PASS"
+    and staged_receipt.get("source_commit") == candidate_sha
+    and staged_receipt.get("source_tree") == candidate_tree
+    and isinstance(source_digests, dict)
+    and set(source_digests) == expected_staged_paths
+    and source_digests == staged_digests
+    and source_inventory == staged_inventory
+    and isinstance(source_inventory, dict)
+    and source_inventory.get("sourcePolicyVersion") == 1
+    and inventory_digests == source_digests
+    and source_action_digest == staged_action_digest
+    and isinstance(staged_result, dict)
+    and set(staged_result) == expected_result_fields
+    and all(isinstance(key, str) and isinstance(value, str) for key, value in staged_result.items())
+    and staged_result.get("action_source_sha256") == staged_action_digest
+    and staged_result.get("core_version") == "1.0.2"
+    and isinstance(staged_result.get("python_executable"), str)
+    and isinstance(staged_result.get("core_origin"), str)
+    and managed_worker_origins
+    and ".rcc-runtime-sources" in str(staged_result.get("action_source_path", ""))
+)
+if not staged_receipt_valid:
+    issues.append("staged_consumer_receipt_missing_or_invalid")
+
+expected_rcc_sha = os.environ.get("EXPECTED_RCC_SHA256")
+rcc_binary = Path(os.environ.get("ACTIONS_RUNTIME_RCC_BINARY", ""))
+actual_rcc_sha = file_sha256(rcc_binary)
+try:
+    rcc_result = subprocess.run(
+        [str(rcc_binary), "--version"], check=True, capture_output=True, text=True
+    )
+    actual_rcc_version = rcc_result.stdout.strip()
+except (OSError, subprocess.CalledProcessError):
+    actual_rcc_version = None
+expected_rcc_version = "v18.19.3"
+default_rcc_binary = Path(os.environ.get("ACTION_SERVER_RCC_DEFAULT", ""))
+default_rcc_sha = file_sha256(default_rcc_binary)
+try:
+    default_version_result = subprocess.run(
+        [str(default_rcc_binary), "--version"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    default_rcc_version = default_version_result.stdout.strip()
+except (OSError, subprocess.CalledProcessError):
+    default_rcc_version = None
+if actual_rcc_sha != expected_rcc_sha:
+    issues.append("rcc_binary_hash_mismatch")
+if actual_rcc_version != expected_rcc_version:
+    issues.append("rcc_binary_version_mismatch")
+if default_rcc_sha != expected_rcc_sha:
+    issues.append("action_server_default_rcc_hash_mismatch")
+if default_rcc_version != expected_rcc_version:
+    issues.append("action_server_default_rcc_version_mismatch")
+if receipt.get("rcc_sha256") != expected_rcc_sha:
+    issues.append("receipt_rcc_hash_mismatch")
+if receipt.get("rcc_version") != expected_rcc_version:
+    issues.append("receipt_rcc_version_mismatch")
+
+before = receipt.get("provider_ops_before_failure")
+after_failure = receipt.get("provider_ops_after_failure")
+after_recovery = receipt.get("provider_ops_after_recovery")
+provider_ops_equal = (
+    isinstance(before, list)
+    and bool(before)
+    and isinstance(after_failure, list)
+    and isinstance(after_recovery, list)
+    and before == after_failure == after_recovery
+)
+if not provider_ops_equal:
+    issues.append("provider_operations_changed_or_missing")
+
+run_expectations = {
+    "first_run": (2, "last-good"),
+    "second_run": (2, "last-good"),
+    "recovered_run": (2, "recovered"),
+}
+run_results_match = all(
+    isinstance(receipt.get(name), dict)
+    and receipt[name].get("status") == status
+    and receipt[name].get("result") == result
+    for name, (status, result) in run_expectations.items()
+)
+if not run_results_match:
+    issues.append("persisted_run_results_not_successful")
+if receipt.get("status") != "PASS":
+    issues.append("receipt_status_not_pass")
+if runtime.get("natural_exit_status") != "PASS":
+    issues.append("natural_exit_not_pass")
+natural_return_code = runtime.get("returncode_before_forced_cleanup")
+if type(natural_return_code) is not int or natural_return_code not in (0, 1):
+    issues.append("natural_return_code_missing_or_abnormal")
+if runtime.get("shutdown_request_succeeded") is not True:
+    issues.append("controlled_shutdown_not_confirmed")
+if runtime.get("forced_stop_used") is not False:
+    issues.append("forced_stop_was_used_or_unknown")
+if runtime.get("forced_cleanup_returncode_observed") is not True:
+    issues.append("forced_cleanup_return_code_unobserved")
+remaining = runtime.get("same_owned_descendants_remaining_after_stop")
+if not isinstance(remaining, list) or remaining:
+    issues.append("owned_descendants_remain_or_unknown")
+
+summary = {
+    "schema_version": 1,
+    "admission": {"passed": not issues, "issues": issues},
+    "source": {
+        "workflow_control_sha": control_sha,
+        "workflow_control_tree": control_tree,
+        "candidate_sha": candidate_sha,
+        "candidate_tree": candidate_tree,
+        "receipt_source_matches_candidate": source.get("commit") == candidate_sha and source.get("tree") == candidate_tree,
+        "files_sha256": file_hashes,
+        "runtime_module_hashes_match_candidate": module_hashes_match,
+        "runtime_module_origins_match_candidate": module_origins_match,
+    },
+    "rcc": {
+        "version": actual_rcc_version if actual_rcc_version == expected_rcc_version else "MISMATCH_OR_UNAVAILABLE",
+        "sha256": actual_rcc_sha,
+        "action_server_default_version": default_rcc_version if default_rcc_version == expected_rcc_version else "MISMATCH_OR_UNAVAILABLE",
+        "action_server_default_sha256": default_rcc_sha,
+        "receipt_matches_binary": receipt.get("rcc_sha256") == actual_rcc_sha and receipt.get("rcc_version") == actual_rcc_version,
+    },
+    "runner": {
+        "libc_name": worker_libc_name if worker_libc_name else "UNKNOWN",
+        "libc_version": worker_libc_version if worker_libc_version else "UNKNOWN",
+        "meets_artifact_minimum": worker_libc_compatible,
+    },
+    "test": {
+        "exit_code": test_exit_code,
+        "junit": test_counts,
+        "junit_counts_match_testcases": test_counts == actual_case_counts,
+        "expected_test_identity_matches": test_identity_matches,
+        "failed_case_names": failed_case_names,
+        "receipt_status": receipt.get("status", "NOT_RECORDED"),
+        "provider_operations_unchanged": provider_ops_equal,
+        "provider_operation_count": len(before) if isinstance(before, list) else 0,
+        "run_results_match": run_results_match,
+        "natural_exit_status": runtime.get("natural_exit_status"),
+        "natural_return_code_before_cleanup": natural_return_code if type(natural_return_code) is int and natural_return_code in (0, 1) else None,
+        "forced_stop_used": runtime.get("forced_stop_used"),
+        "forced_cleanup_returncode_observed": runtime.get("forced_cleanup_returncode_observed") is True,
+        "remaining_owned_descendant_count": len(remaining) if isinstance(remaining, list) else None,
+        "staged_consumer_receipt_status": staged_receipt.get("status", "NOT_RECORDED"),
+        "staged_consumer_receipt_valid": staged_receipt_valid,
+        "staged_action_sha256_matches": staged_action_digest == (staged_result.get("action_source_sha256") if isinstance(staged_result, dict) else None),
+        "managed_worker_origins_confirmed": managed_worker_origins,
+    },
+}
+(evidence_dir / "acceptance-summary.json").write_text(
+    json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+)
+lines = [
+    "Sanitized RCC provider rollback acceptance summary",
+    f"admission_passed={summary['admission']['passed']}",
+    f"admission_issues={','.join(issues)}",
+    f"workflow_control_sha={control_sha}",
+    f"candidate_sha={candidate_sha}",
+    f"candidate_tree={candidate_tree}",
+    f"runner_libc={worker_libc_name or 'UNKNOWN'} {worker_libc_version or 'UNKNOWN'}",
+    f"rcc_version={summary['rcc']['version']}",
+    f"rcc_sha256={actual_rcc_sha}",
+    f"pytest_exit_code={test_exit_code}",
+    f"receipt_status={receipt.get('status', 'NOT_RECORDED')}",
+    f"natural_exit_status={runtime.get('natural_exit_status')}",
+]
+(evidence_dir / "acceptance-summary.log").write_text("\n".join(lines) + "\n", encoding="utf-8")
+print("\n".join(lines))
+sys.exit(0 if not issues else 1)
+"""
+
+
+class ActionServerRccProviderRollback(BaseWorkflow):
+    name = "Action Server RCC provider rollback acceptance"
+    target = "actions_runtime_rcc_provider_rollback.yml"
+    project_name = "action_server"
+    rcc_sha256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    candidate_sha = "d376399f497fb98f47062e493219e063db8f08e1"
+    candidate_tree = "fb04c136e5e1a7ce709649b13cf895d84ac93c1a"
+
+    def __init__(self):
+        super().__init__()
+        # This job only checks out source and uploads a temporary test receipt.
+        # It does not publish packages or need an OIDC identity.
+        self.full["permissions"] = {"contents": "read"}
+
+    @override
+    def on_part(self, dep_paths):
+        paths = [
+            "developer/tests/test_rcc_provider_rollback_workflow.py",
+            "developer/tests/test_rcc_provider_rollback_summary.py",
+            "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+            "action_server/src/actions/server/deployments/source_staging.py",
+            "action_server/src/actions/server/deployments/source_read.py",
+            "action_server/src/actions/server/deployments/source_manifest.py",
+            ".github/workflows/_gen_workflows.py",
+            f".github/workflows/{self.target}",
+        ]
+        return {
+            "on": {
+                "push": {
+                    "branches": ["test/rcc-provider-rollback-hosted-20261010"],
+                    "paths": paths[:],
+                },
+            }
+        }
+
+    @override
+    def runs_on_and_strategy_part(self):
+        return {"runs-on": "ubuntu-24.04", "timeout-minutes": 30}
+
+    @override
+    def defaults_part(self):
+        return {"defaults": {"run": {"working-directory": "./candidate/action_server"}}}
+
+    @override
+    def generate(self):
+        super().generate()
+        generated_path = CURDIR / self.target
+        generated = generated_path.read_text(encoding="utf-8")
+        generated_path.write_text(generated.rstrip("\n") + "\n", encoding="utf-8")
+
+    @override
+    def build_steps(self) -> list[dict]:
+        evidence_dir = "${{ runner.temp }}/rcc-provider-rollback-evidence"
+        raw_log = "${{ runner.temp }}/rcc-provider-rollback-pytest.log"
+        junit_path = "${{ runner.temp }}/rcc-provider-rollback-junit.xml"
+        return [
+            {
+                "name": "Checkout workflow control revision",
+                "uses": "actions/checkout@v5",
+                "with": {
+                    "ref": "${{ github.sha }}",
+                    "path": "control",
+                    "fetch-depth": 1,
+                    "persist-credentials": False,
+                },
+            },
+            {
+                "name": "Checkout immutable Runtime candidate",
+                "uses": "actions/checkout@v5",
+                "with": {
+                    "ref": self.candidate_sha,
+                    "path": "candidate",
+                    "fetch-depth": 2,
+                    "persist-credentials": False,
+                },
+            },
+            {
+                "name": "Verify immutable Runtime candidate revision",
+                "shell": "bash",
+                "env": {
+                    "CANDIDATE_SHA": self.candidate_sha,
+                    "CANDIDATE_TREE": self.candidate_tree,
+                    "CONTROL_SHA": "${{ github.sha }}",
+                },
+                "run": """set -Eeuo pipefail
+actual=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD)
+test "$actual" = "$CANDIDATE_SHA"
+actual_tree=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD^{tree})
+test "$actual_tree" = "$CANDIDATE_TREE"
+control=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD)
+test "$control" = "$CONTROL_SHA"
+printf 'RCC_ROLLBACK_CANDIDATE_SHA=%s\\n' "$actual" >> "$GITHUB_ENV"
+printf 'RCC_ROLLBACK_CANDIDATE_TREE=%s\\n' "$actual_tree" >> "$GITHUB_ENV"
+printf 'RCC_ROLLBACK_CONTROL_SHA=%s\\n' "$control" >> "$GITHUB_ENV"
+printf 'control_sha=%s\\n' "$control"
+printf 'candidate_sha=%s\\n' "$actual"
+printf 'candidate_tree=%s\\n' "$actual_tree"
+""",
+            },
+            *self.setup_python(),
+            {
+                "name": "Verify runner libc supports the test artifact",
+                "shell": "bash",
+                "run": """set -Eeuo pipefail
+python3 - <<'PY'
+import os
+import platform
+import sys
+
+name, version = platform.libc_ver()
+try:
+    actual = tuple(int(part) for part in version.split(".")[:2])
+except ValueError:
+    actual = ()
+if name != "glibc" or actual < (2, 36):
+    raise SystemExit(f"test artifact requires glibc >= 2.36; runner reported {name} {version}")
+print(f"Verified runner libc: {name} {version} (minimum 2.36)")
+with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as stream:
+    stream.write(f"RCC_WORKER_LIBC_NAME={name}\\n")
+    stream.write(f"RCC_WORKER_LIBC_VERSION={version}\\n")
+PY
+""",
+            },
+            {
+                "name": "Install devutils requirements",
+                "run": "uv run --no-project --python 3.12 python -m pip install --break-system-packages -r ../devutils/requirements.txt",
+            },
+            {
+                "name": "Install and verify pinned RCC v18.19.3",
+                "shell": "bash",
+                "env": {"RCC_SHA256": self.rcc_sha256},
+                "run": """set -Eeuo pipefail
+mkdir -p "$RUNNER_TEMP/actions-rcc"
+rcc="$RUNNER_TEMP/actions-rcc/rcc"
+curl --fail --location --silent --show-error --retry 2 --connect-timeout 15 --max-time 180 \\
+  "https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64" \\
+  --output "$rcc.download"
+printf '%s  %s\\n' "$RCC_SHA256" "$rcc.download" | sha256sum --check --status -
+mv "$rcc.download" "$rcc"
+chmod 700 "$rcc"
+version_output="$("$rcc" --version 2>&1)"
+if ! grep --fixed-strings --line-regexp "v18.19.3" <<< "$version_output" >/dev/null; then
+  printf 'Unexpected RCC version output:\\n%s\\n' "$version_output" >&2
+  exit 1
+fi
+printf 'ACTIONS_RUNTIME_RCC_BINARY=%s\\n' "$rcc" >> "$GITHUB_ENV"
+printf 'RCC_SHA256=%s\\n' "$RCC_SHA256" >> "$GITHUB_ENV"
+"$rcc" --version
+sha256sum "$rcc"
+""",
+            },
+            {
+                "name": "Preseed and verify Action Server RCC",
+                "shell": "bash",
+                "env": {"RCC_SHA256": self.rcc_sha256},
+                "run": """set -Eeuo pipefail
+target="$GITHUB_WORKSPACE/candidate/action_server/src/actions/server/bin/rcc-18.19.3"
+mkdir -p "$(dirname "$target")"
+install -m 700 "$ACTIONS_RUNTIME_RCC_BINARY" "$target"
+printf '%s  %s\\n' "$RCC_SHA256" "$target" | sha256sum --check --status -
+test "$("$target" --version 2>/dev/null)" = "v18.19.3"
+sha256sum "$target"
+""",
+            },
+            {
+                "name": "Install Action Server developer environment",
+                "env": {"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "1"},
+                "run": "uv run --no-project --python 3.12 inv devinstall",
+            },
+            {
+                "name": "Reverify both RCC binaries after devinstall",
+                "shell": "bash",
+                "env": {"RCC_SHA256": self.rcc_sha256},
+                "run": """set -Eeuo pipefail
+runtime="$ACTIONS_RUNTIME_RCC_BINARY"
+default="$GITHUB_WORKSPACE/candidate/action_server/src/actions/server/bin/rcc-18.19.3"
+printf '%s  %s\\n%s  %s\\n' "$RCC_SHA256" "$runtime" "$RCC_SHA256" "$default" | sha256sum --check --status -
+test "$("$runtime" --version 2>/dev/null)" = "v18.19.3"
+test "$("$default" --version 2>/dev/null)" = "v18.19.3"
+sha256sum "$runtime" "$default"
+""",
+            },
+            {
+                "name": "Prepare isolated acceptance evidence",
+                "shell": "bash",
+                "run": f'mkdir -p "{evidence_dir}" "$RUNNER_TEMP/rcc-provider-rollback-tmp"',
+            },
+            {
+                "name": "Run current-candidate RCC provider rollback acceptance",
+                "shell": "bash",
+                "env": {
+                    "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
+                    "ACTIONS_RUNTIME_LIFECYCLE_RECEIPT": f"{evidence_dir}/lifecycle-receipt.json",
+                    "ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT": f"{evidence_dir}/staged-consumer-receipt.json",
+                    "PYTHONPATH": "${{ github.workspace }}/candidate/action_server/src:${{ github.workspace }}/candidate/actions/src",
+                    "TMPDIR": "${{ runner.temp }}/rcc-provider-rollback-tmp",
+                },
+                "run": f"""set -Eeuo pipefail
+export ACTIONS_RUNTIME_RCC_BINARY
+test -x "$ACTIONS_RUNTIME_RCC_BINARY"
+printf '%s  %s\\n' "$RCC_SHA256" "$ACTIONS_RUNTIME_RCC_BINARY" | sha256sum --check --status -
+set +e
+uv run --no-project --python 3.12 poetry run pytest -n 0 -vv -rA \\
+  -m 'integration_test and real_rcc' \\
+  tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable \\
+  tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime \\
+  --junitxml="{junit_path}" 2>&1 | tee "{raw_log}"
+status=${{PIPESTATUS[0]}}
+echo "RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE=$status" >> "$GITHUB_ENV"
+exit "$status"
+""",
+            },
+            {
+                "name": "Write sanitized source and test evidence",
+                "if": "always()",
+                "shell": "bash",
+                "working-directory": "${{ github.workspace }}",
+                "env": {
+                    "EVIDENCE_DIR": evidence_dir,
+                    "JUNIT_PATH": junit_path,
+                },
+                "run": """python - <<'PY'
+import hashlib
+import json
+import os
+import subprocess
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+candidate = Path(os.environ["GITHUB_WORKSPACE"]) / "candidate"
+control = Path(os.environ["GITHUB_WORKSPACE"]) / "control"
+evidence_dir = Path(os.environ["EVIDENCE_DIR"])
+evidence_dir.mkdir(parents=True, exist_ok=True)
+receipt_path = evidence_dir / "lifecycle-receipt.json"
+receipt_read_error = None
+try:
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8")) if receipt_path.is_file() else {}
+except (OSError, json.JSONDecodeError) as error:
+    receipt = {}
+    receipt_read_error = type(error).__name__
+
+def sha256(path):
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+source_paths = [
+    "action_server/src/actions/server/_action_package_handler.py",
+    "action_server/src/actions/server/_rcc_runtime_adapter.py",
+    "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+    "action_server/scripts/verify_dakota_rcc_acceptance.py",
+]
+test_cases = {"tests": 0, "failures": 0, "errors": 0, "skipped": 0, "failed_case_names": []}
+junit = Path(os.environ["JUNIT_PATH"])
+if junit.is_file():
+    try:
+        tree = ET.parse(junit)
+        suites = [tree.getroot()]
+        if tree.getroot().tag != "testsuite":
+            suites = list(tree.getroot().iter("testsuite"))
+        for suite in suites:
+            for key in ("tests", "failures", "errors", "skipped"):
+                test_cases[key] += int(suite.attrib.get(key, "0"))
+        for case in tree.getroot().iter("testcase"):
+            if case.find("failure") is not None or case.find("error") is not None:
+                test_cases["failed_case_names"].append(case.attrib.get("name", "unknown"))
+    except (OSError, ET.ParseError, ValueError) as error:
+        test_cases["junit_parse_error"] = type(error).__name__
+
+runtime = receipt.get("action_server_process_exit", {})
+if not isinstance(runtime, dict):
+    runtime = {}
+source = receipt.get("source", {})
+if not isinstance(source, dict):
+    source = {}
+module_hashes = source.get("runtime_module_sha256", {})
+before = receipt.get("provider_ops_before_failure", [])
+after = receipt.get("provider_ops_after_recovery", [])
+before = before if isinstance(before, list) else []
+after = after if isinstance(after, list) else []
+rcc_binary = Path(os.environ.get("ACTIONS_RUNTIME_RCC_BINARY", ""))
+rcc_hash = sha256(rcc_binary) if rcc_binary else None
+rcc_version = receipt.get("rcc_version")
+if rcc_binary.is_file() and not rcc_version:
+    version = subprocess.run([str(rcc_binary), "--version"], capture_output=True, text=True, check=False)
+    rcc_version = version.stdout.strip() or None
+try:
+    source_tree = subprocess.run(["git", "rev-parse", "HEAD^{tree}"], cwd=candidate, check=True, capture_output=True, text=True).stdout.strip()
+except (OSError, subprocess.CalledProcessError):
+    source_tree = None
+try:
+    control_tree = subprocess.run(["git", "rev-parse", "HEAD^{tree}"], cwd=control, check=True, capture_output=True, text=True).stdout.strip()
+except (OSError, subprocess.CalledProcessError):
+    control_tree = None
+summary = {
+    "schema_version": 1,
+    "source": {
+        "workflow_control_sha": os.environ.get("RCC_ROLLBACK_CONTROL_SHA"),
+        "workflow_control_tree": control_tree,
+        "candidate_sha": os.environ.get("RCC_ROLLBACK_CANDIDATE_SHA"),
+        "tree": source_tree,
+        "files_sha256": {path: sha256(candidate / path) for path in source_paths},
+        "runtime_module_sha256": module_hashes,
+    },
+    "rcc": {
+        "version": rcc_version,
+        "sha256": rcc_hash,
+    },
+    "test": {
+        "exit_code": os.environ.get("RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE"),
+        "junit": test_cases,
+        "receipt_status": receipt.get("status", "NOT_RECORDED"),
+        "failure_type": receipt.get("failure_type"),
+        "receipt_read_error": receipt_read_error,
+        "provider_operation_phases_before_failure": [op.get("phase") for op in before if isinstance(op, dict)],
+        "provider_operation_phases_after_recovery": [op.get("phase") for op in after if isinstance(op, dict)],
+        "run_statuses": [
+            (receipt.get(name) or {}).get("status")
+            for name in ("first_run", "second_run", "recovered_run")
+        ],
+        "natural_exit_status": runtime.get("natural_exit_status"),
+        "returncode_before_forced_cleanup": runtime.get("returncode_before_forced_cleanup"),
+        "forced_stop_used": runtime.get("forced_stop_used"),
+        "same_owned_descendants_remaining_after_stop": len(runtime.get("same_owned_descendants_remaining_after_stop", [])),
+    },
+}
+(evidence_dir / "acceptance-summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\\n", encoding="utf-8")
+lines = [
+    "Sanitized RCC provider rollback acceptance summary",
+    f"workflow_control_sha={summary['source']['workflow_control_sha']}",
+    f"candidate_sha={summary['source']['candidate_sha']}",
+    f"source_tree={summary['source']['tree']}",
+    f"rcc_version={summary['rcc']['version']}",
+    f"rcc_sha256={summary['rcc']['sha256']}",
+    f"pytest_exit_code={summary['test']['exit_code']}",
+    f"receipt_status={summary['test']['receipt_status']}",
+    f"natural_exit_status={summary['test']['natural_exit_status']}",
+    f"provider_operation_counts={len(before)} before / {len(after)} after",
+    f"failed_case_names={','.join(test_cases['failed_case_names'])}",
+]
+(evidence_dir / "acceptance-summary.log").write_text("\\n".join(lines) + "\\n", encoding="utf-8")
+PY
+""",
+            },
+            {
+                "name": "Validate RCC rollback admission",
+                "if": "always()",
+                "shell": "bash",
+                "working-directory": "${{ github.workspace }}",
+                "env": {
+                    "EVIDENCE_DIR": evidence_dir,
+                    "JUNIT_PATH": junit_path,
+                    "EXPECTED_CANDIDATE_SHA": self.candidate_sha,
+                    "EXPECTED_CANDIDATE_TREE": self.candidate_tree,
+                    "EXPECTED_CONTROL_SHA": "${{ github.sha }}",
+                    "EXPECTED_RCC_SHA256": self.rcc_sha256,
+                    "ACTION_SERVER_RCC_DEFAULT": "${{ github.workspace }}/candidate/action_server/src/actions/server/bin/rcc-18.19.3",
+                },
+                "run": "python3 - <<'PY'\n" + RCC_ROLLBACK_SUMMARY_SCRIPT + "\nPY",
+            },
+            {
+                "name": "Upload sanitized acceptance evidence",
+                "if": "always()",
+                "uses": "actions/upload-artifact@v4",
+                "with": {
+                    "name": "rcc-provider-rollback-${{ github.run_id }}-${{ github.run_attempt }}",
+                    "path": f"{evidence_dir}/acceptance-summary.*\n{evidence_dir}/staged-consumer-receipt.json",
+                    "if-no-files-found": "warn",
+                    "retention-days": 14,
+                },
             },
         ]
 
@@ -704,7 +1652,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
                     "tags": [f"{RUNTIME_TAG_PREFIX}*"],
                 },
                 "pull_request": {
-                    "branches": ["community"],
+                    "branches": ["community", "integration/**"],
                     "paths": [
                         ".github/workflows/_gen_workflows.py",
                         ".github/workflows/actions_runtime_pypi_release.yml",
@@ -714,6 +1662,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
                         "devutils/tests/test_runtime_release_workflows.py",
                         "docs/skills/repository-operations.md",
                         "action_server/scripts/publish_verified_runtime.py",
+                        "action_server/scripts/verify_published_runtime_floor.py",
                     ],
                 },
             }
@@ -794,6 +1743,7 @@ rm src/actions/server/bin/rcc* -f
                 "CIBW_SKIP": "pp*",
                 "CIBW_BUILD": CIBW_BUILD,
                 "CIBW_BUILD_VERBOSITY": 1,
+                "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse' || '' }}",
                 "CIBW_TEST_COMMAND": "python -m pip check && python -m actions.server version",
             },
         }
@@ -808,7 +1758,7 @@ rm src/actions/server/bin/rcc* -f
     def build_wheels_steps(self):
         steps = self.common_build_steps()
         steps.append(
-            self.install_devutils(additional_packages=["cibuildwheel==2.23.1"])
+            self.install_devutils(additional_packages=["cibuildwheel==2.23.4"])
         )
         steps.append(
             {
@@ -817,7 +1767,24 @@ rm src/actions/server/bin/rcc* -f
                 "run": "echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> \"$GITHUB_ENV\"",
             }
         )
+        steps.append({
+            "name": "Build candidate Core wheel for PR compatibility tests",
+            "if": "github.event_name == 'pull_request'",
+            "working-directory": "actions",
+            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-core-wheelhouse",
+        })
+        steps.append({
+            "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
+            "if": "github.event_name == 'pull_request'",
+            "working-directory": "actions-http-helper",
+            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-helper-wheelhouse",
+        })
         steps.append(self.build_manylinux_wheels())
+        steps.append({
+            "name": "Verify Runtime wheel with published Core and Helper",
+            "if": "github.event_name == 'pull_request'",
+            "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse",
+        })
         steps.append(self.upload_artifact_manylinux_wheels())
         return steps
 
@@ -828,7 +1795,21 @@ rm src/actions/server/bin/rcc* -f
         return matrix
 
     def publish_steps(self):
-        provenance = 'set -Eeuo pipefail\ngit fetch origin community:refs/remotes/origin/community\ngit merge-base --is-ancestor "$GITHUB_SHA" origin/community\ntest "$(git rev-parse \"$GITHUB_SHA^{commit}\")" = "$(git rev-parse origin/community)"\ntag_version=${GITHUB_REF_NAME#actions-runtime-}\ncd action_server\npackage_version=$(uv run --no-project --python 3.12 poetry version --short)\nif [[ "$tag_version" != "$package_version" ]]; then printf \'tag version %s does not match package version %s\\n\' "$tag_version" "$package_version" >&2; exit 1; fi'
+        provenance = """set -Eeuo pipefail
+git fetch origin community:refs/remotes/origin/community
+tag_commit=$(git rev-parse "$GITHUB_REF^{commit}")
+event_commit=$(git rev-parse "$GITHUB_SHA^{commit}")
+test "$tag_commit" = "$event_commit"
+git merge-base --is-ancestor "$GITHUB_SHA" origin/community
+tag_version=${GITHUB_REF_NAME#actions-runtime-}
+cd action_server
+package_version=$(uv run --no-project --python 3.12 poetry version --short)
+if [[ "$tag_version" != "$package_version" ]]; then
+  printf 'tag version %s does not match package version %s\\n' \
+    "$tag_version" "$package_version" >&2
+  exit 1
+fi
+"""
         inventory = f"""set -Eeuo pipefail
 cd action_server
 rm -rf actions-runtime-dist
@@ -936,6 +1917,10 @@ class ActionServerBinaryRelease(BaseWorkflow):
     project_name = "action_server"
     fail_fast = True
 
+    def __init__(self):
+        super().__init__()
+        self.full["permissions"] = {"contents": "read"}
+
     @override
     def on_part(self, dep_paths):
         return {
@@ -980,53 +1965,14 @@ for pair in \
   test ! -L "$binary"
   test "$(find "$directory" -mindepth 1 -maxdepth 1 | wc -l)" -eq 1
 done
-sha256sum linux64/action-server macos-arm64/action-server windows64/action-server.exe | sort > runtime-binary-manifest.sha256
+tag="$GITHUB_REF_NAME"
+{
+  sha256sum linux64/action-server | sed "s#  linux64/action-server#  ${tag}-linux64#"
+  sha256sum macos-arm64/action-server | sed "s#  macos-arm64/action-server#  ${tag}-macos-arm64#"
+  sha256sum windows64/action-server.exe | sed "s#  windows64/action-server.exe#  ${tag}-windows64.exe#"
+} | sort > "${tag}-sha256.txt"
 """,
         }
-
-    def verify_binary_release_inventory_before_handoff(self):
-        return {
-            "name": "Verify Runtime binary inventory before handoff",
-            "shell": "bash",
-            "run": """set -Eeuo pipefail
-cd build
-for pair in \
-  "linux64/action-server linux64" \
-  "macos-arm64/action-server macos-arm64" \
-  "windows64/action-server.exe windows64"; do
-  set -- $pair
-  binary=$1
-  directory=$2
-  test -f "$binary"
-  test ! -L "$binary"
-  test "$(find "$directory" -mindepth 1 -maxdepth 1 | wc -l)" -eq 1
-done
-sha256sum linux64/action-server macos-arm64/action-server windows64/action-server.exe | sort > runtime-binary-manifest.sha256
-""",
-        }
-
-    def set_version_on_ubuntu(self):
-        return {
-            "name": "Set version",
-            "run": f"""
-{run_in_env}poetry version --short > version.txt
-VERSION=$(cat version.txt)
-
-echo "Version: $VERSION"
-echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-""",
-            "id": "set_version",
-            "if": "${{ matrix.os == '" + UBUNTU_VERSION + "' }}",
-        }
-
-    def upload_artifact_action_server_version_on_ubuntu(self):
-        # Having a separate artifact for version.txt helps downstream workflows
-        return self.upload_artifact(
-            name="action-server-version",
-            path="action_server/version.txt",
-            if_clause="${{ matrix.os == '" + UBUNTU_VERSION + "' }}",
-            pinned=True,
-        )
 
     def build_steps(self) -> list[dict]:
         steps = (
@@ -1045,73 +1991,23 @@ echo "version=$VERSION" >> "$GITHUB_OUTPUT"
         steps.append(self.build_frontend())
         steps.append(self.build_oauth2_config())
 
-        steps.append(self.set_version_on_ubuntu())
         steps.extend(self.build_action_server_binary_cross_platform())
         steps.append(self.upload_artifact_with_asset_path())
-        steps.append(self.upload_artifact_action_server_version_on_ubuntu())
 
         return steps
-
-    def build_job_part(self):
-        build = super().build_job_part()
-        build["outputs"] = {"version": "${{ steps.set_version.outputs.version }}"}
-        return build
 
     @override
     def jobs_part(self):
         jobs = super().jobs_part()
-        jobs["jobs"]["deploy-s3"] = self.deploy_s3_job_part()
-        jobs["jobs"].update(self.trigger_brew_workflow_job_part())
         jobs["jobs"].update(self.release_job_part())
         return jobs
-
-    def trigger_brew_workflow_job_part(self):
-        return {
-            "trigger-brew-workflow": {
-                "needs": ["build", "deploy-s3"],
-                "defaults": {"run": {"working-directory": "."}},
-                "if": "${{ needs.deploy-s3.outputs.is_beta == 'false' }}",
-                "runs-on": UBUNTU_VERSION,
-                "steps": [
-                    {
-                        "name": "Wait for Downloads S3 Bucket to have the right content",
-                        "timeout-minutes": 5,
-                        "run": """
-EXPECTED_VERSION=${{ needs.build.outputs.version }}
-VERSION_URL="https://cdn.sema4.ai/action-server/releases/${EXPECTED_VERSION}/version.txt"
-echo "Expected version: $EXPECTED_VERSION"
-while true; do
-  DOWNLOADED_VERSION=$(curl -fsS --max-time 10 "$VERSION_URL")
-  echo "Downloaded version: $DOWNLOADED_VERSION"
-  echo "Expected version: $EXPECTED_VERSION"
-    if [ "$DOWNLOADED_VERSION" = "$EXPECTED_VERSION" ]; then
-      echo "Versions match."
-      break
-    else
-      echo "Versions do not match. Retrying in 30 seconds."
-    fi
-    sleep 30
-    done
-""",
-                    },
-                    {
-                        "name": "Trigger Brew Deploy Workflow",
-                        "run": """curl -X POST \
-           -H "Authorization: token ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}" \
-           -H "Accept: application/vnd.github.v3+json" \
-           https://api.github.com/repos/sema4ai/homebrew-tools/actions/workflows/publish.yml/dispatches \
-           -d '{"ref":"main","inputs":{"version":"${{ needs.build.outputs.version }}"}}'""",
-                    },
-                ],
-            },
-        }
 
     def release_job_part(self):
         return {
             "release": {
-                "if": "${{ needs.deploy-s3.outputs.is_beta == 'false' }}",
+                "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
                 "permissions": {"contents": "write"},
-                "needs": ["deploy-s3", "trigger-brew-workflow"],
+                "needs": ["build"],
                 "defaults": {"run": {"working-directory": "."}},
                 "runs-on": UBUNTU_VERSION,
                 "steps": [
@@ -1176,7 +2072,7 @@ while true; do
                             "file": "./linux64/action-server",
                             "asset_name": "${{ github.ref_name }}-linux64",
                             "tag": "${{ github.ref }}",
-                            "overwrite": True,
+                            "overwrite": False,
                         },
                     },
                     {
@@ -1187,7 +2083,7 @@ while true; do
                             "file": "./macos-arm64/action-server",
                             "asset_name": "${{ github.ref_name }}-macos-arm64",
                             "tag": "${{ github.ref }}",
-                            "overwrite": True,
+                            "overwrite": False,
                         },
                     },
                     {
@@ -1198,143 +2094,23 @@ while true; do
                             "file": "./windows64/action-server.exe",
                             "asset_name": "${{ github.ref_name }}-windows64.exe",
                             "tag": "${{ github.ref }}",
-                            "overwrite": True,
+                            "overwrite": False,
+                        },
+                    },
+                    {
+                        "name": "Upload Runtime SHA-256 manifest",
+                        "uses": "svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd",  # v2
+                        "with": {
+                            "repo_token": "${{ secrets.GITHUB_TOKEN }}",
+                            "file": "./${{ github.ref_name }}-sha256.txt",
+                            "asset_name": "${{ github.ref_name }}-sha256.txt",
+                            "tag": "${{ github.ref }}",
+                            "overwrite": False,
                         },
                     },
                 ],
             }
         }
-
-    def deploy_s3_job_part(self):
-        return {
-            "permissions": {
-                "id-token": "write",  # required by AWS aws-actions/configure-aws-credentials
-                "contents": "read",
-            },
-            "needs": ["build"],
-            "defaults": {
-                "run": {
-                    "working-directory": "./action_server",
-                },
-            },
-            "runs-on": UBUNTU_VERSION,
-            "outputs": {"is_beta": "${{ steps.check_beta.outputs.is_beta }}"},
-            "steps": self.deploy_s3_job_steps(),
-        }
-
-    def download_artifacts(self):
-        # It'll generate something as (for all the OSes we require):
-        #   - uses: actions/download-artifact@v4
-        #     with:
-        #       name: action-server-windows-2022
-        #       path: action_server/build/windows64/
-
-        ret = []
-        for os, path in [
-            ("windows-2022", "windows64"),
-            ("macos-15", "macos-arm64"),
-            (UBUNTU_VERSION, "linux64"),
-        ]:
-            ret.append(
-                {
-                    "name": f"Download artifact {os}",
-                    "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
-                    "with": {
-                        "name": f"action-server-{os}",
-                        "path": f"action_server/build/{path}/",
-                    },
-                }
-            )
-
-        ret.append(
-            {
-                "name": "Download artifact version",
-                "uses": "actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
-                "with": {
-                    "name": "action-server-version",
-                    "path": "action_server/build/",
-                },
-            }
-        )
-        return ret
-
-    def deploy_s3_job_steps(self):
-        steps = []
-        steps.append(self.checkout_repo(pinned=True))
-        steps.append(self.is_beta_in_steps())
-        steps.extend(self.download_artifacts())
-        steps.append(self.verify_binary_release_inventory_before_handoff())
-        steps.extend(self.upload_to_s3())
-        return steps
-
-    def upload_to_s3(self):
-        ret = []
-
-        ret.append(
-            {
-                "name": "Put files in s3-drop",
-                "run": """
-ls -l
-pwd
-ls -l build
-mkdir s3-drop
-mv build/version.txt s3-drop/
-mv build/macos-arm64 s3-drop/
-mv build/linux64 s3-drop/
-mv build/windows64 s3-drop/
-ls -l s3-drop/
-ver=$(cat s3-drop/version.txt)
-echo "actionServerVersion=${ver}" >> "$GITHUB_ENV"
-if [[ "$GITHUB_REF_NAME" == actions-runtime-* ]]; then
-  test "$ver" = "${GITHUB_REF_NAME#actions-runtime-}"
-fi
-test "$(find s3-drop -type f | wc -l)" -eq 4
-test -f s3-drop/linux64/action-server
-test -f s3-drop/macos-arm64/action-server
-test -f s3-drop/windows64/action-server.exe
-""",
-            }
-        )
-
-        ret.append(
-            self.upload_artifact(
-                name="action-server-artifacts-for-s3-${{ env.actionServerVersion }}",
-                path="action_server/s3-drop",
-                pinned=True,
-            )
-        )
-
-        ret.append(
-            {
-                "name": "Configure AWS credentials Dropbox bucket",
-                "uses": "aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df",
-                "with": {
-                    "aws-region": "eu-west-1",
-                    "role-to-assume": "arn:aws:iam::710450854638:role/github-action-robocorp-action-server",
-                },
-            }
-        )
-
-        ret.append(
-            {
-                "name": "AWS S3 copies",
-                "run": """
-if [ "${{ steps.check_beta.outputs.is_beta }}" = "false" ]; then
-  echo "Normal release, aws sync to drop-box, full pipeline"
-  aws s3 sync s3-drop s3://robocorp-action-server-build-drop-box
-else
-  echo "BETA RELEASE, only copy the executable for testing"
-  S3_BASE_URL="s3://downloads.robocorp.com/action-server/beta"
-  aws s3 cp s3-drop/version.txt $S3_BASE_URL/version.txt --cache-control max-age=120 --content-type "text/plain"
-  aws s3 cp s3-drop/windows64/action-server.exe $S3_BASE_URL/windows64/action-server.exe --cache-control max-age=120 --content-type "application/octet-stream"
-  aws s3 cp s3-drop/macos-arm64/action-server $S3_BASE_URL/macos-arm64/action-server --cache-control max-age=120 --content-type "application/octet-stream"
-  aws s3 cp s3-drop/linux64/action-server $S3_BASE_URL/linux64/action-server --cache-control max-age=120 --content-type "application/octet-stream"
-fi
-""",
-            }
-        )
-
-        return ret
 
 
 class ActionServerRuntimeRecovery(BaseWorkflow):
@@ -1881,31 +2657,6 @@ gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes" --repo "$GITH
                 "with": {"name": f"native-signing-{platform}", "path": f"native-signing/{platform}"},
             })
         steps.extend([self.binary_release_normalize(), self.binary_release_publish()])
-        # Reuse the normal handoff implementation with the immutable version.
-        handoff = ActionServerBinaryRelease()
-        steps.append({
-            "name": "Stage recovered binaries for existing handoffs",
-            "env": {"RELEASE_REF": "${{ inputs.release_ref }}"},
-            "run": "mkdir -p build && cp -R binaries/linux build/linux64 && cp -R binaries/macos build/macos-arm64 && cp -R binaries/windows build/windows64 && printf '%s\\n' \"${RELEASE_REF#actions-runtime-}\" > build/version.txt",
-        })
-        for step in handoff.upload_to_s3():
-            step = dict(step)
-            if "run" in step:
-                step["run"] = step["run"].replace("${{ steps.check_beta.outputs.is_beta }}", "false")
-            if "with" in step and "path" in step["with"]:
-                step["with"] = dict(step["with"])
-                step["with"]["path"] = "s3-drop"
-            steps.append(step)
-        for step in handoff.trigger_brew_workflow_job_part()["trigger-brew-workflow"]["steps"]:
-            step = dict(step)
-            step["env"] = {"RELEASE_REF": "${{ inputs.release_ref }}"}
-            step["run"] = step["run"].replace("${{ needs.build.outputs.version }}", "${RELEASE_REF#actions-runtime-}")
-            if step["name"] == "Trigger Brew Deploy Workflow":
-                step["run"] = step["run"].replace("curl -X POST", "curl --fail-with-body --max-time 30 -X POST").replace(
-                    "-d '{\"ref\":\"main\",\"inputs\":{\"version\":\"${RELEASE_REF#actions-runtime-}\"}}'",
-                    "-d \"$(jq -cn --arg version \"${RELEASE_REF#actions-runtime-}\" '{ref:\"main\",inputs:{version:$version}}')\"",
-                )
-            steps.append(step)
         return steps
 
     @override
@@ -1946,7 +2697,7 @@ gh release edit "$RELEASE_REF" --draft=false --notes-file "$notes" --repo "$GITH
                     "needs": ["validate", "binary-build"],
                     "if": "${{ needs.binary-build.result == 'success' }}",
                     "runs-on": UBUNTU_VERSION,
-                    "permissions": {"contents": "write", "id-token": "write"},
+                    "permissions": {"contents": "write"},
                     "defaults": {"run": {"working-directory": "."}},
                     "steps": self.binary_recovery_release_steps(),
                 },
@@ -1969,7 +2720,7 @@ class ActionsTests(BaseTests):
                     "paths": dep_paths[:] + [".github/workflows/_gen_workflows.py"],
                 },
                 "pull_request": {
-                    "branches": ["community"],
+                    "branches": ["community", "integration/**"],
                     "paths": dep_paths[:] + [".github/workflows/_gen_workflows.py"],
                 },
             }
@@ -2100,6 +2851,8 @@ class HttpHelperTests(BaseTests):
 
 TARGETS = [
     ActionServerTests(),
+    ActionServerRccProviderRollback(),
+    ActionServerFrozenCatalogRollback(),
     ActionsTests(),
     HttpHelperTests(),
     ActionServerPyPiRelease(),

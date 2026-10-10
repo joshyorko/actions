@@ -1,7 +1,6 @@
 """Smoke-test the public community quickstart."""
 
 import pytest
-
 from action_server_tests.fixtures import actions_server_run, run_async_in_new_thread
 
 pytestmark = pytest.mark.integration_test

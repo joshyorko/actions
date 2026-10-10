@@ -7,13 +7,14 @@ import sys
 import threading
 from collections import namedtuple
 from contextlib import contextmanager
+from dataclasses import dataclass
 from pathlib import Path
 from queue import Queue
-from typing import TYPE_CHECKING, Dict, Iterator, List, Optional, Set
+from typing import TYPE_CHECKING, Dict, Iterator, List, Literal, Optional, Set
 
-from actions._action_context import ActionContext
 from termcolor import colored
 
+from actions import ActionContext
 from actions.server._models import Action, ActionPackage, Run
 from actions.server._protocols import JSONValue
 
@@ -40,6 +41,21 @@ if sys.platform == "win32":
 _Key = namedtuple("_Key", "action_package_id, env, cwd")
 
 
+@dataclass(frozen=True)
+class WorkerRetirementResult:
+    state: Literal["execution_stopped", "crash_unverified", "pending"]
+    descendant_snapshot_complete: bool
+    reason: str = ""
+    cleanup: object | None = None
+
+    @property
+    def capacity_releasable(self) -> bool:
+        return self.state != "pending"
+
+    def __bool__(self) -> bool:
+        return self.capacity_releasable
+
+
 def _create_server_socket(host: str, port: int):
     try:
         server = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)
@@ -55,6 +71,22 @@ def _create_server_socket(host: str, port: int):
         raise
 
     return server
+
+
+def _worker_python_executable(
+    runtime_descriptor: object | None,
+    env: Dict[str, str],
+    *,
+    frozen: bool,
+    source_python: str,
+) -> Optional[str]:
+    """Select RCC's artifact Python without trusting persisted path hints."""
+
+    if runtime_descriptor is not None:
+        return "python"
+    if "PYTHON_EXE" in env:
+        return env["PYTHON_EXE"]
+    return None if frozen else source_python
 
 
 def _connect_to_socket(host, port):
@@ -108,7 +140,6 @@ class ProcessHandle:
             get_action_package_cwd,
         )
         from ._preload_actions.preload_actions_streams import JsonRpcStreamReaderThread
-        from ._robo_utils.process import build_python_launch_env
         from ._rcc_runtime_adapter import (
             RccProcessHandle,
             build_exec_command,
@@ -116,8 +147,17 @@ class ProcessHandle:
             load_descriptor,
             new_receipt_path,
         )
+        from ._robo_utils.process import build_python_launch_env
 
         self._post_run_args = post_run_args
+        self._retirement_lock = threading.Lock()
+        self._retirement_started = False
+        self._crash_unverified = False
+        self._exit_attempted = False
+        self._retirement_complete = False
+        self._retirement_result: WorkerRetirementResult | None = None
+        self._retirement_descendants: list[object] | None = None
+        self._retirement_snapshot_failed = False
 
         # If kill was internally called, we'll just check it instead of waiting for
         # the process to exit when is_alive() is called.
@@ -131,9 +171,7 @@ class ProcessHandle:
 
         persisted_env = json.loads(action_package.env_json)
         runtime_descriptor = load_descriptor(action_package.env_json)
-        env = {
-            key: value for key, value in persisted_env.items() if key != "runtime"
-        }
+        env = {key: value for key, value in persisted_env.items() if key != "runtime"}
         _add_preload_actions_dir_to_env_pythonpath(env)
         env = build_python_launch_env(env)
         # Shouldn't be there, but just making sure... if it is it can
@@ -151,19 +189,18 @@ class ProcessHandle:
             # the process doesn't exit!
             env["RC_DUMP_THREADS_AFTER_RUN"] = "0"
 
-        if runtime_descriptor is not None:
-            python_exe = None
-        elif "PYTHON_EXE" in env:
-            python_exe = env["PYTHON_EXE"]
-        else:
-            if is_frozen():
-                log.critical(
-                    f"Unable to create process for action package: {action_package} "
-                    "(environment does not contain PYTHON_EXE)."
-                )
-                return
-
-            python_exe = sys.executable
+        python_exe = _worker_python_executable(
+            runtime_descriptor,
+            env,
+            frozen=is_frozen(),
+            source_python=sys.executable,
+        )
+        if python_exe is None:
+            log.critical(
+                f"Unable to create process for action package: {action_package} "
+                "(environment does not contain PYTHON_EXE)."
+            )
+            return
 
         # stdin/stdout is no longer an option because numpy gets halted
         # if stdin is being read while importing numpy.
@@ -218,11 +255,16 @@ class ProcessHandle:
                     try:
                         connection_future.cancel()
                     except BaseException:
-                        log.debug("Unable to cancel the TCP accept future.", exc_info=True)
+                        log.debug(
+                            "Unable to cancel the TCP accept future.", exc_info=True
+                        )
                     try:
                         connection_future.result(timeout=1)
                     except BaseException:
-                        log.debug("TCP accept future finished during startup cleanup.", exc_info=True)
+                        log.debug(
+                            "TCP accept future finished during startup cleanup.",
+                            exc_info=True,
+                        )
 
             def cleanup_process():
                 try:
@@ -315,6 +357,7 @@ class ProcessHandle:
                     pass
             read_from = s.makefile("rb")
             write_to = s.makefile("wb")
+            self._socket = s
 
             self._writer = JsonRpcStreamWriter(write_to, sort_keys=True)
             self._reader = JsonRpcStreamReaderThread(
@@ -392,11 +435,195 @@ class ProcessHandle:
 
         self._kill_called = True
 
+        try:
+            from ._common.process import snapshot_process_descendants
+
+            self._retirement_descendants = snapshot_process_descendants(
+                self._process.pid
+            )
+        except Exception:
+            self._retirement_descendants = []
+            self._retirement_snapshot_failed = True
+            log.warning(
+                "Unable to snapshot descendants before active worker cancellation.",
+                exc_info=True,
+            )
+
         log.info("Subprocess kill [pid=%s]", self._process.pid)
-        if getattr(self, "_rcc_wrapper", None) is not None:
-            self._rcc_wrapper.kill()
+        wrapper = getattr(self, "_rcc_wrapper", None)
+        if wrapper is not None:
+            wrapper.kill()
         else:
             kill_process_and_subprocesses(self._process.pid)
+
+    def retire(self, deadline: Optional[float] = None) -> WorkerRetirementResult:
+        """Retire a completed worker by one bounded exit/force/reap deadline."""
+        import time
+
+        deadline = deadline if deadline is not None else time.monotonic() + 10.0
+        remaining = max(0.0, deadline - time.monotonic())
+        if not self._retirement_lock.acquire(timeout=remaining):
+            log.warning("Timed out waiting for another worker retirement attempt.")
+            return WorkerRetirementResult(
+                "pending",
+                descendant_snapshot_complete=False,
+                reason="retirement lock deadline expired",
+            )
+        try:
+            return self._retire_locked(deadline)
+        finally:
+            self._retirement_lock.release()
+
+    def _retire_locked(self, deadline: float) -> WorkerRetirementResult:
+        import time
+
+        from ._common.process import (
+            force_kill_process_tree_until,
+            snapshot_process_descendants,
+        )
+
+        force_reserve = 2.0
+        if self._retirement_complete:
+            assert self._retirement_result is not None
+            return self._retirement_result
+
+        if getattr(self, "_crash_unverified", False):
+            return self._record_unverified_crash(deadline)
+
+        if not getattr(self, "_retirement_started", False):
+            self._retirement_started = True
+            had_snapshot = self._retirement_descendants is not None
+            if (
+                not had_snapshot
+                and self._process.poll() is not None
+                and not self._kill_called
+            ):
+                self._crash_unverified = True
+                return self._record_unverified_crash(deadline)
+
+        wrapper = getattr(self, "_rcc_wrapper", None)
+        if self._retirement_descendants is None:
+            if self._process.poll() is not None:
+                self._retirement_descendants = []
+                self._retirement_snapshot_failed = True
+                log.error(
+                    "Cannot prove worker descendants after wrapper exited before retirement snapshot (pid=%s).",
+                    self._process.pid,
+                )
+            else:
+                try:
+                    self._retirement_descendants = snapshot_process_descendants(
+                        self._process.pid
+                    )
+                except Exception:
+                    log.exception("Unable to snapshot worker descendants before exit.")
+                    self._retirement_descendants = []
+                    self._retirement_snapshot_failed = True
+        snapshot_failed = self._retirement_snapshot_failed
+
+        if wrapper is not None and wrapper._owned_processes is None:
+            # The snapshot must precede the exit frame: a cleanly exiting
+            # RCC wrapper can reparent descendants before force cleanup.
+            wrapper._owned_processes = self._retirement_descendants
+            wrapper._owned_snapshot_complete = not snapshot_failed
+
+        exit_deadline = max(time.monotonic(), deadline - force_reserve)
+        if not self._kill_called and not self._exit_attempted and not snapshot_failed:
+            self._exit_attempted = True
+            try:
+                self._writer.write_with_deadline(
+                    {"method": "exit"}, self._socket, exit_deadline
+                )
+            except Exception:
+                log.warning(
+                    "Worker exit frame failed; switching to bounded force cleanup.",
+                    exc_info=True,
+                )
+        elif snapshot_failed or self._kill_called:
+            self._exit_attempted = True
+
+        if (
+            not self._kill_called
+            and not snapshot_failed
+            and self._process.poll() is None
+        ):
+            try:
+                self._process.wait(timeout=max(0.0, exit_deadline - time.monotonic()))
+            except subprocess.TimeoutExpired:
+                pass
+
+        if wrapper is not None:
+            cleanup = wrapper.force_kill_until(deadline)
+            complete = cleanup.execution_stopped
+        else:
+            cleanup = force_kill_process_tree_until(
+                self._process,
+                self._retirement_descendants,
+                deadline,
+                snapshot_complete_before_call=not snapshot_failed,
+            )
+            complete = cleanup.execution_stopped
+
+        self._retirement_snapshot_failed = not cleanup.descendant_snapshot_complete
+        if snapshot_failed:
+            complete = False
+        self._shutdown_retirement_socket()
+        remaining = max(0.0, deadline - time.monotonic())
+        self._reader.join(timeout=remaining)
+        if self._reader.is_alive():
+            complete = False
+            log.warning("Worker reader thread remains alive after retirement deadline.")
+        if complete:
+            self._retirement_complete = True
+            result = WorkerRetirementResult(
+                "execution_stopped",
+                descendant_snapshot_complete=cleanup.descendant_snapshot_complete,
+                cleanup=cleanup,
+            )
+        else:
+            log.warning("Worker retirement remains pending: %s", cleanup)
+            result = WorkerRetirementResult(
+                "pending",
+                descendant_snapshot_complete=cleanup.descendant_snapshot_complete,
+                reason="wrapper or descendant cleanup remains unconfirmed",
+                cleanup=cleanup,
+            )
+        self._retirement_result = result
+        return result
+
+    def _record_unverified_crash(self, deadline: float) -> WorkerRetirementResult:
+        import time
+
+        try:
+            self._process.wait(timeout=max(0.0, deadline - time.monotonic()))
+        except subprocess.TimeoutExpired:
+            return WorkerRetirementResult(
+                "pending", False, "crashed wrapper wait timed out"
+            )
+        self._shutdown_retirement_socket()
+        self._reader.join(timeout=max(0.0, deadline - time.monotonic()))
+        if self._reader.is_alive():
+            return WorkerRetirementResult(
+                "pending", False, "crashed worker reader remains alive"
+            )
+        result = WorkerRetirementResult(
+            "crash_unverified",
+            descendant_snapshot_complete=False,
+            reason="wrapper exited before descendant snapshot; coverage not proven",
+        )
+        log.error("Worker crashed before retirement snapshot: %s", result.reason)
+        self._retirement_complete = True
+        self._retirement_result = result
+        return result
+
+    def _shutdown_retirement_socket(self) -> None:
+        sock = getattr(self, "_socket", None)
+        if sock is None:
+            return
+        try:
+            sock.shutdown(socket_module.SHUT_RDWR)
+        except OSError:
+            pass
 
     def _do_run_action(
         self,
@@ -740,6 +967,7 @@ class ActionsProcessPool:
         self._lock = threading.Lock()
         self._running_processes: Dict[_Key, Set[ProcessHandle]] = {}
         self._idle_processes: Dict[_Key, Set[ProcessHandle]] = {}
+        self._pending_retirements: Dict[ProcessHandle, bool] = {}
 
         # Semaphore used to track running processes.
         self._processes_running_semaphore = threading.Semaphore(self.max_processes)
@@ -758,6 +986,9 @@ class ActionsProcessPool:
         call completes.  If preparation fails, newly-created idle workers are
         discarded and the old routing/idle generation is restored unchanged.
         """
+        failure = None
+        staged_to_retire = []
+        old_to_retire = []
         with self._lock:
             old_action_packages = self.action_package_id_to_action_package
             old_actions = self.actions
@@ -777,30 +1008,40 @@ class ActionsProcessPool:
                 self._warmup_processes_unlocked(include_running=False)
             except BaseException:
                 new_idle_processes = self._idle_processes
+                staged_to_retire = [
+                    process
+                    for processes in new_idle_processes.values()
+                    for process in processes
+                ]
                 self._idle_processes = old_idle_processes
                 self.action_package_id_to_action_package = old_action_packages
                 self.actions = old_actions
                 self._cycle_actions_iterator = old_cycle_actions_iterator
-                for idle_processes in new_idle_processes.values():
-                    for process in idle_processes:
-                        try:
-                            process.kill()
-                        except BaseException:
-                            log.exception(
-                                "Unable to clean up failed reload process."
-                            )
-                raise
+                import sys
 
-            # The routing switch is committed only after all new workers have
-            # started successfully.  Old running workers drain naturally and
-            # cannot be returned to the new idle generation.
-            for idle_processes in old_idle_processes.values():
-                for process in idle_processes:
-                    process.kill()
-            for running_processes in self._running_processes.values():
-                for process in running_processes:
-                    process.can_reuse = False
-            self._generation = getattr(self, "_generation", 0) + 1
+                failure = sys.exc_info()
+
+            if failure is None:
+                # The routing switch is committed only after all new workers
+                # started successfully. Old running workers drain naturally.
+                old_to_retire = [
+                    process
+                    for processes in old_idle_processes.values()
+                    for process in processes
+                ]
+                for running_processes in self._running_processes.values():
+                    for process in running_processes:
+                        process.can_reuse = False
+                self._generation = getattr(self, "_generation", 0) + 1
+
+        for process in staged_to_retire:
+            self._retire_detached(process, retained_capacity=False)
+        if failure is not None:
+            _, error, traceback = failure
+            assert error is not None
+            raise error.with_traceback(traceback)
+        for process in old_to_retire:
+            self._retire_detached(process, retained_capacity=False)
 
     @property
     def generation(self) -> int:
@@ -851,13 +1092,24 @@ class ActionsProcessPool:
 
     def dispose(self):
         with self._lock:
-            for processes in itertools.chain(
-                self._idle_processes.values(), self._running_processes.values()
-            ):
-                for process_handle in processes:
-                    process_handle.kill()
+            idle = [
+                process
+                for processes in self._idle_processes.values()
+                for process in processes
+            ]
+            running = [
+                process
+                for processes in self._running_processes.values()
+                for process in processes
+            ]
+            for process_handle in running:
+                process_handle.can_reuse = False
             self._idle_processes.clear()
             self._running_processes.clear()
+        for process_handle in idle:
+            self._retire_detached(process_handle, retained_capacity=False)
+        for process_handle in running:
+            process_handle.kill()
 
     def get_idle_processes_count(self) -> int:
         with self._lock:
@@ -888,7 +1140,49 @@ class ActionsProcessPool:
             self._running_processes.values(), self._idle_processes.values()
         ):
             count += len(v)
+        count += len(getattr(self, "_pending_retirements", {}))
         return count
+
+    def _retry_pending_retirements(self) -> None:
+        with self._lock:
+            pending = tuple(getattr(self, "_pending_retirements", {}))
+        for process_handle in pending:
+            try:
+                complete = bool(process_handle.retire())
+            except Exception:
+                log.exception("Pending worker retirement retry failed.")
+                complete = False
+            if complete:
+                removed = False
+                with self._lock:
+                    pending_retirements = getattr(self, "_pending_retirements", {})
+                    if process_handle in pending_retirements:
+                        retained_capacity = self._pending_retirements.pop(
+                            process_handle
+                        )
+                        removed = True
+                        if retained_capacity:
+                            self._processes_running_semaphore.release()
+                if removed:
+                    try:
+                        self._warmup_processes()
+                    except Exception:
+                        log.exception("Unable to warm up after pending retirement.")
+
+    def _retire_detached(
+        self, process_handle: ProcessHandle, *, retained_capacity: bool
+    ) -> bool:
+        try:
+            complete = bool(process_handle.retire())
+        except Exception:
+            log.exception("Detached worker retirement failed.")
+            complete = False
+        if not complete:
+            with self._lock:
+                if not hasattr(self, "_pending_retirements"):
+                    self._pending_retirements = {}
+                self._pending_retirements[process_handle] = retained_capacity
+        return complete
 
     def _add_to_idle_processes(self, process_handle: ProcessHandle):
         assert self._lock.locked(), "Lock must be acquired at this point."
@@ -944,9 +1238,7 @@ class ActionsProcessPool:
         from concurrent.futures import CancelledError
 
         current_generation = self.generation
-        request_generation = (
-            current_generation if generation is None else generation
-        )
+        request_generation = current_generation if generation is None else generation
         if action_package is None:
             action_package = self.action_package_id_to_action_package[
                 action.action_package_id
@@ -975,7 +1267,15 @@ class ActionsProcessPool:
                 # Each 2 seconds check again if we can acquire a process.
                 # Important: do it without acquiring `self._lock` (as it could lead
                 # to a deadlock if one depends on the other)
-                if not self._processes_running_semaphore.acquire(timeout=2):
+                acquired_process_semaphore = self._processes_running_semaphore.acquire(
+                    blocking=False
+                )
+                if not acquired_process_semaphore:
+                    self._retry_pending_retirements()
+                    acquired_process_semaphore = (
+                        self._processes_running_semaphore.acquire(timeout=2)
+                    )
+                if not acquired_process_semaphore:
                     if time.monotonic() > print_delayed_at:
                         log.info(
                             f"Delayed running action: {action.name} because "
@@ -984,7 +1284,6 @@ class ActionsProcessPool:
                         )
                         print_delayed_at = time.monotonic() + 10
                     continue
-                acquired_process_semaphore = True
 
                 with self._lock:
                     current_generation = getattr(self, "_generation", 0)
@@ -1016,7 +1315,9 @@ class ActionsProcessPool:
                         # No compatible process: we need to create one now.
                         n_running = self._get_running_processes_count_unlocked()
                         if n_running < self.max_processes:
-                            created_process = self._create_process(action, action_package)
+                            created_process = self._create_process(
+                                action, action_package
+                            )
                             if request_generation != current_generation:
                                 # A stale route may share a key with the new
                                 # generation.  Remove exactly the worker just
@@ -1079,6 +1380,7 @@ class ActionsProcessPool:
         try:
             yield process_handle
         finally:
+            should_retire = False
             with self._lock:
                 self._remove_from_running_processes(process_handle)
                 if process_handle.is_alive():
@@ -1089,14 +1391,14 @@ class ActionsProcessPool:
                                 f"Process Pool: Exited process ({process_handle.pid}) -- process marked as non-reusable."
                             )
                             # We cannot reuse it!
-                            process_handle.kill()
+                            should_retire = True
 
                         elif self.min_processes <= curr_idle:
                             log.debug(
                                 f"Process Pool: Exited process ({process_handle.pid}) -- min processes already satisfied."
                             )
                             # We cannot reuse it!
-                            process_handle.kill()
+                            should_retire = True
                         else:
                             log.debug(
                                 f"Process Pool: Adding back to pool ({process_handle.pid})."
@@ -1107,18 +1409,43 @@ class ActionsProcessPool:
                             f"Process Pool: Exited process ({process_handle.pid}) -- not reusing processes."
                         )
                         # We cannot reuse it!
-                        process_handle.kill()
+                        should_retire = True
+                else:
+                    # A completed/dead handle still needs an owned wrapper wait
+                    # and descendant cleanup before capacity can be returned.
+                    should_retire = True
 
-            # If needed recreate idle processes which were removed (needed
-            # especially when not reusing processes, but if some process
-            # crashes it's also needed).
+                if should_retire:
+                    if not hasattr(self, "_pending_retirements"):
+                        self._pending_retirements = {}
+                    self._pending_retirements[process_handle] = True
+
+            retirement_complete = False
+            retirement_owns_capacity = False
+            if should_retire:
+                try:
+                    retirement_complete = bool(process_handle.retire())
+                except Exception:
+                    log.exception("Worker retirement failed.")
+                if retirement_complete:
+                    with self._lock:
+                        if process_handle in self._pending_retirements:
+                            retirement_owns_capacity = self._pending_retirements.pop(
+                                process_handle
+                            )
+
+            # Refill only after a successful retirement is removed from total
+            # worker accounting. An unresolved handle continues to occupy its
+            # capacity slot and counts toward the warmup target.
             try:
                 self._warmup_processes()
             finally:
-                # Return capacity only after a terminated RCC wrapper has been
-                # waited on, preventing overlap with the next claimant. The
-                # release is guaranteed even when warmup cannot recover.
-                self._processes_running_semaphore.release()
+                if should_retire:
+                    if retirement_owns_capacity:
+                        with self._lock:
+                            self._processes_running_semaphore.release()
+                else:
+                    self._processes_running_semaphore.release()
 
 
 _actions_process_pool: Optional[ActionsProcessPool] = None

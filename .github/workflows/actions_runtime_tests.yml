@@ -31,6 +31,8 @@ permissions:
   pull_request:
     branches:
     - master
+    - community
+    - integration/**
     paths:
     - action_server/**
     - .github/workflows/actions_runtime_tests.yml
@@ -96,7 +98,14 @@ jobs:
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
       env:
         GH_TOKEN: ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}
+    - name: Test Go wrapper child lifecycle
+      working-directory: action_server/go-wrapper
+      env:
+        GOTOOLCHAIN: local
+        GOPROXY: 'off'
+      run: go test process.go process_test.go
     - name: Build binary
+      shell: bash
       env:
         RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
         RC_ACTION_SERVER_DO_SELFTEST: 'true'
@@ -134,18 +143,15 @@ jobs:
         GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}
         CI_CREDENTIALS: ${{ secrets.CI_CREDENTIALS }}
         CI_ENDPOINT: ${{ secrets.CI_ENDPOINT }}
-        ACTION_SERVER_TEST_ACCESS_CREDENTIALS: ${{ secrets.ACTION_SERVER_TEST_ACCESS_CREDENTIALS
-          }}
-        ACTION_SERVER_TEST_HOSTNAME: ${{ secrets.ACTION_SERVER_TEST_HOSTNAME }}
       run: uv run --no-project --python ${{ matrix.python }} poetry run inv test-not-integration
+    - name: Install Playwright Chromium for Runtime browser acceptance
+      working-directory: action_server/frontend
+      run: npx playwright install chromium
     - name: Test (integration)
       env:
         GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}
         CI_CREDENTIALS: ${{ secrets.CI_CREDENTIALS }}
         CI_ENDPOINT: ${{ secrets.CI_ENDPOINT }}
-        ACTION_SERVER_TEST_ACCESS_CREDENTIALS: ${{ secrets.ACTION_SERVER_TEST_ACCESS_CREDENTIALS
-          }}
-        ACTION_SERVER_TEST_HOSTNAME: ${{ secrets.ACTION_SERVER_TEST_HOSTNAME }}
       run: uv run --no-project --python ${{ matrix.python }} poetry run inv test-binary
         --jobs 0
     - name: '`inv lint`, potentially fixed with `inv pretty`'

@@ -2,8 +2,8 @@ import json
 import logging
 import subprocess
 import sys
-import uuid
 import typing
+import uuid
 from pathlib import Path
 from typing import Literal
 
@@ -13,9 +13,8 @@ from actions.server._robo_utils.callback import Callback, OnExitContextManager
 from actions.server.vendored_deps.termcolors import bold_yellow
 
 if typing.TYPE_CHECKING:
-    from actions._protocols import ActionsListActionTypedDict
-
-    from actions.server._models import ActionPackage
+    from actions import ActionsListActionTypedDict
+    from actions.server._models import Action, ActionPackage
 
 log = logging.getLogger(__name__)
 
@@ -48,6 +47,83 @@ class IHookOnActionsList(typing.Protocol):
 hook_on_actions_list: IHookOnActionsList = Callback(raise_exceptions=True)
 
 
+def import_action_packages(
+    *,
+    datadir: Path,
+    action_package_dirs: list[str],
+    disable_not_imported: bool,
+    skip_lint: bool,
+    whitelist: str,
+    after_import: typing.Callable[
+        [], tuple[typing.Callable[[], None], typing.Callable[[], None]]
+    ]
+    | None = None,
+) -> None:
+    """Collect a complete desired set before atomically admitting its catalog.
+
+    Environment resolution and metadata subprocesses run before taking the DB
+    writer lock. Additive imports retain omitted capabilities; synchronization
+    disables them only after every selected package has been collected.
+    """
+    from ._errors_action_server import ActionServerValidationError
+    from ._models import Action, ActionPackage, get_db
+
+    prepared: list[tuple[ActionPackage, list[Action]]] = []
+    candidate_cleanup: list[typing.Callable[[], None]] = []
+    rollback_generation = None
+    publish_generation = None
+    try:
+        for directory in action_package_dirs:
+            import_action_package(
+                datadir=datadir,
+                action_package_dir=directory,
+                disable_not_imported=disable_not_imported,
+                skip_lint=skip_lint,
+                whitelist=whitelist,
+                _prepared=prepared,
+                _candidate_cleanup=candidate_cleanup,
+            )
+        names = [package.name for package, _ in prepared]
+        if len(set(names)) != len(names):
+            raise ActionServerValidationError(
+                "Selected package directories must have distinct package identities."
+            )
+
+        db = get_db()
+        with db.transaction():
+            for package, actions in prepared:
+                _update_actions_in_db(package, actions, disable_not_imported, whitelist)
+            if disable_not_imported:
+                selected_ids = {
+                    package.id
+                    for package in db.all(ActionPackage)
+                    if package.name in names
+                }
+                for action in db.all(Action):
+                    if action.enabled and action.action_package_id not in selected_ids:
+                        db.update_by_id(Action, action.id, dict(enabled=False))
+            # Validate offline imports too: invalid catalogs must not persist
+            # for a later --actions-sync=false restart.
+            from ._api_action_routes import _ActionRoutes
+
+            _ActionRoutes(whitelist, []).prepare_actions()
+            if after_import is not None:
+                publish_generation, rollback_generation = after_import()
+    except BaseException:
+        # Preparation can change the pool, but public routes/catalogs remain
+        # untouched until commit succeeds. A commit failure restores that pool.
+        if rollback_generation is not None:
+            try:
+                rollback_generation()
+            except BaseException:
+                log.exception("Unable to restore the previous process generation.")
+        for cleanup in reversed(candidate_cleanup):
+            cleanup()
+        raise
+    if publish_generation is not None:
+        publish_generation()
+
+
 def import_action_package(
     *,
     datadir: Path,
@@ -55,6 +131,8 @@ def import_action_package(
     disable_not_imported: bool,
     skip_lint: bool,
     whitelist: str,
+    _prepared: list[tuple["ActionPackage", list["Action"]]] | None = None,
+    _candidate_cleanup: list[typing.Callable[[], None]] | None = None,
 ):
     """
     Imports action packages based on directories given in the filesystem.
@@ -78,8 +156,8 @@ def import_action_package(
     from ._errors_action_server import ActionServerValidationError
     from ._gen_ids import gen_uuid
     from ._models import ActionPackage, get_db
-    from ._robo_utils.process import build_python_launch_env
     from ._rcc_runtime_adapter import load_descriptor
+    from ._robo_utils.process import build_python_launch_env
 
     log.debug("Importing action package from: %s", action_package_dir)
 
@@ -108,19 +186,58 @@ def import_action_package(
             )
             return
 
-    condahash, use_env = action_package_handler.bootstrap_environment(
-        previous_descriptor=previous_descriptor
-    )
+    source_snapshot_owner = action_package_handler
+    source_snapshot_path = None
+    source_snapshot_created = False
+    if action_package_handler.uses_runtime_source_snapshots:
+        try:
+            (
+                source_snapshot_path,
+                source_snapshot_created,
+            ) = action_package_handler.prepare_runtime_source_snapshot()
+            original_package_yaml = action_package_handler.original_package_yaml
+            package_yaml_exists = action_package_handler.package_yaml_exists
+            import_path = action_package_handler.import_path
+            if source_snapshot_created and _candidate_cleanup is not None:
+                from functools import partial
+
+                _candidate_cleanup.append(
+                    partial(
+                        source_snapshot_owner.discard_runtime_source_snapshot,
+                        source_snapshot_path,
+                    )
+                )
+        except Exception as exc:
+            raise ActionServerValidationError(
+                f"Unable to preserve the last-good Action package source: {exc}"
+            ) from exc
+
+    try:
+        condahash, use_env = action_package_handler.bootstrap_environment(
+            previous_descriptor=previous_descriptor
+        )
+    except Exception as exc:
+        if source_snapshot_path is not None:
+            if source_snapshot_created:
+                source_snapshot_owner.discard_runtime_source_snapshot(
+                    source_snapshot_path
+                )
+            raise ActionServerValidationError(str(exc)) from exc
+        raise
 
     # Ok, we bootstrapped, now, let's collect the actions.
-    try:
-        # If the directory can be made relative to the datadir, save the
-        # directory as relative.
-        directory_path = import_path.relative_to(datadir)
-        assert import_path.samefile(directory_path)
-    except (AssertionError, ValueError):
-        # Otherwise use the absolute path.
+    if source_snapshot_path is not None:
+        # The worker resolves source snapshots as service-owned absolute paths.
         directory_path = import_path
+    else:
+        try:
+            # If the directory can be made relative to the datadir, save the
+            # directory as relative.
+            directory_path = import_path.relative_to(datadir)
+            assert import_path.samefile(directory_path)
+        except (AssertionError, ValueError):
+            # Otherwise use the absolute path.
+            directory_path = import_path
 
     action_package_id = gen_uuid("action_package")
 
@@ -146,8 +263,14 @@ def import_action_package(
         actions_library_version = _get_actions_version(
             env, import_path, "actions", runtime_descriptor=runtime_descriptor
         )
-    except Exception:
+    except Exception as actions_error:
         if runtime_descriptor is not None:
+            if source_snapshot_path is not None:
+                if source_snapshot_created:
+                    source_snapshot_owner.discard_runtime_source_snapshot(
+                        source_snapshot_path
+                    )
+                raise ActionServerValidationError(str(actions_error)) from actions_error
             raise
         ### TODO: Remove in the future!
 
@@ -155,7 +278,10 @@ def import_action_package(
         # Still support robocorp.actions for now (but warn the user).
         try:
             actions_library_version = _get_actions_version(
-                env, import_path, "robocorp.actions", runtime_descriptor=runtime_descriptor
+                env,
+                import_path,
+                "robocorp.actions",
+                runtime_descriptor=runtime_descriptor,
             )
             log.critical(
                 "Important: 'robocorp.actions' is deprecated!\n"
@@ -207,17 +333,40 @@ def import_action_package(
                 "this version of robocorp-actions will be removed)."
             )
 
-    _add_actions_to_db(
-        datadir,
-        env,
-        import_path,
-        action_package,
-        disable_not_imported=disable_not_imported,
-        skip_lint=skip_lint,
-        whitelist=whitelist,
-        actions_library_version=actions_library_version,
-        runtime_descriptor=runtime_descriptor,
-    )
+    try:
+        collected: list[tuple[ActionPackage, list[Action]]] = []
+        _add_actions_to_db(
+            datadir,
+            env,
+            import_path,
+            action_package,
+            disable_not_imported=disable_not_imported,
+            skip_lint=skip_lint,
+            whitelist=whitelist,
+            actions_library_version=actions_library_version,
+            runtime_descriptor=runtime_descriptor,
+            _prepared=collected,
+        )
+        source_snapshot_owner.validate_runtime_source_snapshot()
+        if _prepared is not None:
+            _prepared.extend(collected)
+        else:
+            for collected_package, collected_actions in collected:
+                _update_actions_in_db(
+                    collected_package,
+                    collected_actions,
+                    disable_not_imported,
+                    whitelist,
+                )
+    except Exception as exc:
+        if source_snapshot_path is not None:
+            if source_snapshot_created:
+                source_snapshot_owner.discard_runtime_source_snapshot(
+                    source_snapshot_path
+                )
+            if not isinstance(exc, ActionServerValidationError):
+                raise ActionServerValidationError(str(exc)) from exc
+        raise
 
 
 def _get_actions_version(
@@ -304,15 +453,13 @@ def _add_actions_to_db(
     whitelist: str,
     actions_library_version: tuple[int, ...],
     runtime_descriptor=None,
+    _prepared: list[tuple["ActionPackage", list["Action"]]] | None = None,
 ):
-    from dataclasses import asdict
-
-    from actions._lint_action import format_lint_results
+    from actions.server_integration import format_lint_results
 
     from actions.server._errors_action_server import ActionServerValidationError
     from actions.server._gen_ids import gen_uuid
-    from actions.server._models import Action, ActionPackage, get_db
-    from actions.server._whitelist import accept_action
+    from actions.server._models import Action
 
     if runtime_descriptor is None:
         from actions.server._settings import get_python_exe_from_env
@@ -362,7 +509,8 @@ cli.main(["{command}"])
             "import contextlib\n"
             f"with open({str(metadata_file)!r}, 'w', encoding='utf-8') as _out, "
             "contextlib.redirect_stdout(_out):\n"
-            + "    " + code.replace("\n", "\n    ")
+            + "    "
+            + code.replace("\n", "\n    ")
         )
     if runtime_descriptor is None:
         cmdline = [*command_prefix, "-c", code]
@@ -447,13 +595,6 @@ cli.main(["{command}"])
         actions = []
         for action_fields in actions_list_result:
             action_name = action_fields["name"]
-            if whitelist:
-                if not accept_action(whitelist, action_package.name, action_name):
-                    log.info(
-                        f"Action: {action_package.name}/{action_name} not imported because it has no match in the whitelist: {whitelist!r}"
-                    )
-                    continue
-
             filepath = Path(action_fields["file"]).absolute()
             try:
                 filepath = filepath.relative_to(import_path)
@@ -482,9 +623,41 @@ cli.main(["{command}"])
                 )
             )
 
+    names = [action.name for action in actions]
+    if len(set(names)) != len(names):
+        raise ActionServerValidationError(
+            f"Duplicate action name in package {action_package.name!r}"
+        )
+    if _prepared is not None:
+        _prepared.append((action_package, actions))
+    else:
+        _update_actions_in_db(action_package, actions, disable_not_imported, whitelist)
+
+
+def _update_actions_in_db(
+    action_package: "ActionPackage",
+    actions: list["Action"],
+    disable_not_imported: bool,
+    whitelist: str = "",
+) -> None:
+    from dataclasses import asdict
+
+    from ._models import Action, ActionPackage, get_db
+    from ._whitelist import accept_action
+
     db = get_db()
-    if disable_not_imported:
-        all_previously_existing_actions = db.all(Action)
+
+    def selected_actions(retained: set[str]) -> list[Action]:
+        # Additive imports retain already enabled capabilities. Refresh their
+        # metadata from the new source too, even if this import only selects a
+        # different action. Never admit an unselected new or disabled action.
+        return [
+            action
+            for action in actions
+            if not whitelist
+            or action.name in retained
+            or accept_action(whitelist, action_package.name, action.name)
+        ]
 
     try:
         existing_action_package = db.first(
@@ -497,14 +670,10 @@ cli.main(["{command}"])
         with db.transaction():
             log.info("Found new action package: %s", action_package.name)
             db.insert(action_package)
-            for action in actions:
+            for action in selected_actions(set()):
                 log.info("Found new action: %s", action.name)
                 db.insert(action)
 
-            if disable_not_imported:
-                for action in all_previously_existing_actions:
-                    log.info("Disabling action: %s", action.name)
-                    db.update_by_id(Action, action.id, dict(enabled=False))
     else:
         # We already have an existing action package with the same name. This
         # means we'll have to update it instead of adding a new one.
@@ -517,6 +686,30 @@ cli.main(["{command}"])
             "SELECT * FROM action WHERE action_package_id = ?",
             [existing_action_package.id],
         )
+
+        retained_names: set[str] = set()
+        if not disable_not_imported:
+            candidate_names = {action.name for action in actions}
+            omitted_names = sorted(
+                action.name
+                for action in existing_actions
+                if action.enabled and action.name not in candidate_names
+            )
+            if omitted_names:
+                from ._errors_action_server import ActionServerValidationError
+
+                raise ActionServerValidationError(
+                    f"Additive import of {action_package.name!r} would remove "
+                    f"enabled actions: {', '.join(omitted_names)}. "
+                    "The previous package remains admitted. Use start with "
+                    "--actions-sync=true and all desired --dir entries to "
+                    "explicitly reconcile removals."
+                )
+            retained_names = {
+                action.name for action in existing_actions if action.enabled
+            }
+
+        actions = selected_actions(retained_names)
 
         existing_action_name_to_action = {}
         for action in existing_actions:
@@ -550,7 +743,7 @@ cli.main(["{command}"])
                     seen_action_ids.add(action.id)
 
             if disable_not_imported:
-                for action in all_previously_existing_actions:
+                for action in existing_actions:
                     if action.id not in seen_action_ids:
                         log.info("Disabling action: %s", action.name)
                         db.update_by_id(Action, action.id, dict(enabled=False))

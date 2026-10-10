@@ -1,0 +1,82 @@
+{
+  "captured_at_utc": "2026-10-10T00:55Z",
+  "pr": 256,
+  "head_sha": "524e503b384a56bf854326c1f7f03833c60e6c53",
+  "base_branch": "integration/community-release-20261008",
+  "runs": {
+    "native": {
+      "workflow": "Action Server Build (Unauthenticated)",
+      "run_id": 38010164278,
+      "status": "success",
+      "os_jobs": {
+        "ubuntu-22.04": {
+          "job_id": 114088071720,
+          "status": "success",
+          "frozen_ui": "success",
+          "go_wrapper_ui": "success",
+          "consumer": "success",
+          "browser_storage": "success",
+          "large_history": "success"
+        },
+        "macos-15": {
+          "job_id": 114088071833,
+          "status": "success",
+          "frozen_ui": "skipped",
+          "go_wrapper_ui": "skipped",
+          "consumer": "success",
+          "browser_storage": "success",
+          "large_history": "success"
+        },
+        "windows-2022": {
+          "job_id": 114088071952,
+          "status": "success",
+          "frozen_ui": "success",
+          "go_wrapper_ui": "success",
+          "consumer": "success",
+          "browser_storage": "success",
+          "large_history": "success"
+        }
+      }
+    },
+    "rcc": {
+      "workflow": "RCC developer toolkit",
+      "run_id": 38010164271,
+      "status": "success",
+      "matrix_jobs": 6,
+      "matrix": "primary and N-1 across Linux, macOS, Windows; all success"
+    },
+    "coverage": {
+      "run_id": 38010164269,
+      "status": "success",
+      "duration": "8m39s"
+    },
+    "audit": {
+      "run_id": 38010164331,
+      "status": "success"
+    },
+    "work_items_release": {
+      "run_id": 38010164275,
+      "verify": "success",
+      "publish": "skipped"
+    }
+  },
+  "synthetic_checkout": {
+    "sha": "54825acf84d1995c3f1c5242e8cf3b670dc122ad",
+    "parents": [
+      "77e67de36606ac4cb958874249a61ceff79dcd01",
+      "524e503b384a56bf854326c1f7f03833c60e6c53"
+    ],
+    "tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+    "checkout_logs": "all three native OS logs report the same synthetic merge SHA"
+  },
+  "publication": "No publication occurred; publish job skipped.",
+  "limitations": [
+    "Observation only: no CI reruns, code edits, installs, artifact downloads, or remote writes.",
+    "Mac packaged frozen/Go UI checks are skipped by workflow configuration; separate consumer and browser/storage checks passed.",
+    "Issue #208 acceptance remains partial; this receipt is a CI observation, not an issue-completion claim."
+  ],
+  "prior_failed_heads_preserved": [
+    "1225ecf70b1685107bc1fc25de5bc69d6f716866",
+    "dc205182253794cdf5a1fb5546acb01b106b209f"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "recorded_at": "2026-10-10T00:10:56.070Z",
+  "pr": 256,
+  "head": "dc205182253794cdf5a1fb5546acb01b106b209f",
+  "parent": "1225ecf70b1685107bc1fc25de5bc69d6f716866",
+  "reviewer": "Cloud L /root/luna_release_notes",
+  "root_review": "ACCEPT bounded source; inspected exact diff and current _download_rcc.py contract",
+  "scope": "Frozen browser acceptance inventory and canonical guide only in this successor; no production downloader change.",
+  "invariants": [
+    "Original manifest digest retained",
+    "Removed or changed original entries fail",
+    "Only exact pinned runtime RCC binary plus its missing parent directory admitted as measured new state",
+    "All other additions including bytecode fail"
+  ],
+  "limits": [
+    "Recorded RCC binary digest identifies observed bytes; no independent publisher checksum attestation added",
+    "Hosted native proof pending at review; no release or whole-issue acceptance"
+  ],
+  "documentation": {
+    "file": "docs/skills/work-items.md",
+    "delta": "Explain generated RCC state versus immutable package provenance",
+    "native_reviewer_extra_sentence": "Rejected as redundant: current guide already requires post-runtime inventory and forbids replacing the trusted digest."
+  },
+  "upstream_disposition": "none",
+  "hosted_run": "https://github.com/joshyorko/actions/actions/runs/38007631113",
+  "validation": "git diff --check PASS",
+  "hosted_followup": {
+    "receipt": "pr256-native-ci-dc205-20261010T0013Z.json",
+    "result": "Windows frozen PASS; Windows Go-wrapper FAIL on manifest frozen_package_tree_sha256 versus build input; Linux both PASS; macOS UI SKIPPED. Admission held."
+  }
+}

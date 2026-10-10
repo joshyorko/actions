@@ -10,6 +10,7 @@ import os
 import subprocess
 import sys
 import threading
+import time
 import typing
 from dataclasses import dataclass
 from enum import Enum
@@ -19,6 +20,7 @@ from typing import Dict, List, Optional, Protocol, Sequence, Union
 from actions.server._common.protocols import IMonitor
 
 from .callback import Callback
+from .process_logging import redact_sensitive_arguments
 
 if typing.TYPE_CHECKING:
     from concurrent.futures import Future
@@ -220,7 +222,10 @@ class Process:
         )
         new_kwargs.update(kwargs)
         log.debug(
-            "Subprocess start [args=%s,cwd=%s,uid=%d]", self._args, self._cwd, self._uid
+            "Subprocess start [args=%s,cwd=%s,uid=%d]",
+            redact_sensitive_arguments(self._args),
+            self._cwd,
+            self._uid,
         )
         proc = self._proc = _popen_raise(self._args, **new_kwargs)
         log.debug("Subprocess started [pid=%s,uid=%d]", proc.pid, self._uid)
@@ -257,7 +262,10 @@ class Process:
         return self._proc.pid
 
     def __str__(self):
-        return f"Process [{subprocess.list2cmdline(self._args)}, cwd={self._cwd}, pid={self._proc.pid}, uid={self._uid}]"
+        args = subprocess.list2cmdline(redact_sensitive_arguments(self._args))
+        return (
+            f"Process [{args}, cwd={self._cwd}, pid={self._proc.pid}, uid={self._uid}]"
+        )
 
     def __repr__(self):
         return str(self)
@@ -324,7 +332,9 @@ def _popen(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 
@@ -339,7 +349,9 @@ def _popen_raise(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         raise
 
 
@@ -374,7 +386,9 @@ def _call(cmdline, **kwargs):
     try:
         subprocess.check_call(cmdline, **kwargs)
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 
@@ -412,6 +426,158 @@ def kill_process_and_subprocesses(pid, soft_kill_timeout: float = 1.0):
         log.debug(f"Process {pid} not found")
     except Exception as e:
         log.debug(f"Error killing process and subprocesses of {pid}: {e}")
+
+
+@dataclass(frozen=True)
+class ProcessTreeCleanupResult:
+    """Observed wrapper reap and descendant states; zombies remain separate."""
+
+    wrapper_reaped: bool
+    live_descendant_pids: tuple[int, ...]
+    zombie_descendant_pids: tuple[int, ...]
+    errors: tuple[str, ...]
+    descendant_snapshot_complete: bool = True
+
+    @property
+    def execution_stopped(self) -> bool:
+        """Whether wrapper was reaped and no observed descendant remains live."""
+        return (
+            self.wrapper_reaped
+            and not self.live_descendant_pids
+            and not self.errors
+            and self.descendant_snapshot_complete
+        )
+
+    @property
+    def descendant_reap_complete(self) -> bool:
+        """Whether the captured descendants were observed absent, not zombies."""
+        return self.execution_stopped and not self.zombie_descendant_pids
+
+
+def snapshot_process_descendants(pid: int):
+    """Return a point-in-time snapshot of a process's descendants."""
+    import psutil
+
+    return psutil.Process(pid).children(recursive=True)
+
+
+def force_kill_process_tree_until(
+    process: subprocess.Popen,
+    descendants,
+    deadline: float,
+    snapshot_complete_before_call: bool = True,
+) -> ProcessTreeCleanupResult:
+    """Terminate a captured process tree and report only observed completion."""
+    import psutil
+
+    errors = []
+    snapshot_complete = bool(descendants is not None) and snapshot_complete_before_call
+    if descendants is None:
+        descendants = []
+        snapshot_complete = False
+    captured_descendants = descendants
+    owned = {(child.pid, child.create_time()): child for child in captured_descendants}
+    known_identities = set(owned)
+    if process.poll() is None:
+        try:
+            for child in snapshot_process_descendants(process.pid):
+                identity = (child.pid, child.create_time())
+                if identity not in known_identities:
+                    known_identities.add(identity)
+                    owned[identity] = child
+                    captured_descendants.append(child)
+            snapshot_complete = True
+        except Exception as exc:
+            errors.append(f"snapshot descendants of pid {process.pid}: {exc}")
+            snapshot_complete = False
+
+    descendants = list(owned.values())
+    wrapper = None
+    if process.poll() is None:
+        try:
+            wrapper = psutil.Process(process.pid)
+        except psutil.NoSuchProcess:
+            pass
+
+    # Terminate descendants before their owner can exit and orphan them.
+    targets = list(reversed(descendants))
+    if wrapper is not None:
+        targets.append(wrapper)
+    for target in targets:
+        if time.monotonic() >= deadline:
+            break
+        try:
+            target.terminate()
+        except psutil.NoSuchProcess:
+            pass
+        except Exception as exc:
+            errors.append(f"terminate pid {target.pid}: {exc}")
+
+    # Popen exclusively owns wrapper wait/reap; psutil.wait_procs can consume
+    # the direct child's POSIX wait status and erase its real return code.
+    _, alive = psutil.wait_procs(
+        descendants,
+        timeout=min(0.2, max(0.0, deadline - time.monotonic()) / 8),
+    )
+    for target in alive:
+        if time.monotonic() >= deadline:
+            break
+        try:
+            target.kill()
+        except psutil.NoSuchProcess:
+            pass
+        except Exception as exc:
+            errors.append(f"kill pid {target.pid}: {exc}")
+
+    remaining = max(0.0, deadline - time.monotonic())
+    psutil.wait_procs(alive, timeout=min(0.2, remaining / 8))
+    # Give the owner time to reap its children before force-killing it. Only
+    # Popen may consume the direct wrapper's wait status.
+    wrapper_reserve = min(0.2, max(0.0, deadline - time.monotonic()) / 4)
+    try:
+        process.wait(timeout=max(0.0, deadline - time.monotonic() - wrapper_reserve))
+        wrapper_reaped = True
+    except subprocess.TimeoutExpired:
+        wrapper_reaped = False
+    except Exception as exc:
+        errors.append(f"wait wrapper pid {process.pid}: {exc}")
+        wrapper_reaped = False
+    if not wrapper_reaped and process.poll() is None and time.monotonic() < deadline:
+        try:
+            process.kill()
+        except OSError as exc:
+            errors.append(f"kill wrapper pid {process.pid}: {exc}")
+    if not wrapper_reaped:
+        try:
+            process.wait(timeout=max(0.0, deadline - time.monotonic()))
+            wrapper_reaped = True
+        except subprocess.TimeoutExpired:
+            errors.append(f"wrapper pid {process.pid} was not reaped before deadline")
+        except Exception as exc:
+            errors.append(f"wait wrapper pid {process.pid}: {exc}")
+
+    live = []
+    zombies = []
+    for child in descendants:
+        try:
+            if not child.is_running():
+                continue
+            if child.status() == psutil.STATUS_ZOMBIE:
+                zombies.append(child.pid)
+            else:
+                live.append(child.pid)
+        except psutil.NoSuchProcess:
+            pass
+        except Exception as exc:
+            errors.append(f"inspect pid {child.pid}: {exc}")
+
+    return ProcessTreeCleanupResult(
+        wrapper_reaped=wrapper_reaped,
+        live_descendant_pids=tuple(sorted(set(live))),
+        zombie_descendant_pids=tuple(sorted(set(zombies))),
+        errors=tuple(errors),
+        descendant_snapshot_complete=snapshot_complete,
+    )
 
 
 def kill_subprocesses(pid: int | None = None, soft_kill_timeout: float = 2) -> None:

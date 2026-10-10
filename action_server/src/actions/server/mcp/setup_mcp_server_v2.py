@@ -1,12 +1,16 @@
 import json
 import logging
 import re
-from collections.abc import Callable
+from collections import Counter
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from hashlib import sha256
 from typing import Any, Literal
+from urllib.parse import urlsplit
 
+from mcp import MCPError
 from mcp.types import (
+    INVALID_PARAMS,
     CallToolResult,
     GetPromptResult,
     ListPromptsResult,
@@ -63,10 +67,23 @@ class McpResponseHandler:
 
 
 class McpServerSetupHelper:
+    _catalog: _McpCatalog
+
     def __init__(self) -> None:
         from mcp.server import Server
+        from mcp.server.transport_security import TransportSecuritySettings
 
         self._init_state()
+        self.transport_security = TransportSecuritySettings(
+            enable_dns_rebinding_protection=True,
+            allowed_hosts=["127.0.0.1:*", "localhost:*", "[::1]:*"],
+            allowed_origins=[
+                "http://127.0.0.1:*",
+                "http://localhost:*",
+                "http://[::1]:*",
+            ],
+        )
+        self._tunnel_security_refs: dict[tuple[str, str], tuple[int, bool, bool]] = {}
         self.server = Server(
             "Action Server",
             on_list_tools=self._list_tools,
@@ -77,6 +94,93 @@ class McpServerSetupHelper:
             on_list_prompts=self._list_prompts,
             on_get_prompt=self._get_prompt,
         )
+
+    def allow_tunnel_origin(self, public_url: str) -> Callable[[], None]:
+        """Temporarily admit one validated HTTPS tunnel host and origin."""
+        from urllib.parse import urlsplit
+
+        parsed = urlsplit(public_url)
+        if (
+            parsed.scheme != "https"
+            or not parsed.hostname
+            or parsed.username is not None
+            or parsed.password is not None
+            or parsed.query
+            or parsed.fragment
+            or parsed.path not in ("", "/")
+        ):
+            raise ValueError("Invalid HTTPS tunnel URL")
+        try:
+            port = parsed.port
+        except ValueError as exc:
+            raise ValueError("Invalid HTTPS tunnel URL") from exc
+        if not parsed.netloc.isascii() or any(char.isspace() for char in parsed.netloc):
+            raise ValueError("Invalid HTTPS tunnel URL")
+        host = parsed.hostname.lower()
+        if port == 0:
+            raise ValueError("Invalid HTTPS tunnel URL")
+        if ":" in host:
+            import ipaddress
+
+            try:
+                ipaddress.IPv6Address(host)
+            except ValueError as exc:
+                raise ValueError("Invalid HTTPS tunnel URL") from exc
+        else:
+            labels = host.rstrip(".").split(".")
+            if any(
+                not label
+                or len(label) > 63
+                or label[0] == "-"
+                or label[-1] == "-"
+                or not label.replace("-", "").isalnum()
+                for label in labels
+            ):
+                raise ValueError("Invalid HTTPS tunnel URL")
+        authority = f"[{host}]" if ":" in host else host
+        if port is not None:
+            authority = f"{authority}:{port}"
+        if parsed.netloc.lower() != authority:
+            raise ValueError("Invalid HTTPS tunnel URL")
+        host_entry = authority
+        origin_entry = f"https://{authority}"
+        key = (host_entry, origin_entry)
+        settings = self.transport_security
+        current = self._tunnel_security_refs.get(key)
+        if current is None:
+            owns_host = host_entry not in settings.allowed_hosts
+            owns_origin = origin_entry not in settings.allowed_origins
+            if owns_host:
+                settings.allowed_hosts.append(host_entry)
+            if owns_origin:
+                settings.allowed_origins.append(origin_entry)
+            current = (0, owns_host, owns_origin)
+        self._tunnel_security_refs[key] = (current[0] + 1, current[1], current[2])
+        released = False
+
+        def release() -> None:
+            nonlocal released
+            if released:
+                return
+            released = True
+            state = self._tunnel_security_refs.get(key)
+            if state is None:
+                return
+            references, owns_host, owns_origin = state
+            if references > 1:
+                self._tunnel_security_refs[key] = (
+                    references - 1,
+                    owns_host,
+                    owns_origin,
+                )
+                return
+            del self._tunnel_security_refs[key]
+            if owns_host and host_entry in settings.allowed_hosts:
+                settings.allowed_hosts.remove(host_entry)
+            if owns_origin and origin_entry in settings.allowed_origins:
+                settings.allowed_origins.remove(origin_entry)
+
+        return release
 
     @staticmethod
     def _request_values(ctx: Any) -> tuple[dict[str, str], dict[str, str]]:
@@ -97,7 +201,18 @@ class McpServerSetupHelper:
             from actions.server._actions_run import IInternalFuncAPI
 
             headers, cookies = self._request_values(ctx)
-            action_info = catalog.tool_name_to_action_info[params.name]
+            action_info = catalog.tool_name_to_action_info.get(params.name)
+            if action_info is None:
+                return CallToolResult(
+                    content=[
+                        TextContent(
+                            type="text",
+                            text="Tool name is unavailable. Call tools/list to rediscover "
+                            "the current catalog before retrying.",
+                        )
+                    ],
+                    is_error=True,
+                )
             func: IInternalFuncAPI = action_info.func
             result = await func(
                 response_handler=McpResponseHandler(),
@@ -130,7 +245,9 @@ class McpServerSetupHelper:
     async def _list_resources(self, _ctx: Any, _params: Any) -> ListResourcesResult:
         catalog = self._catalog
         return ListResourcesResult(
-            resources=sorted(catalog.resources.values(), key=lambda item: str(item.uri)),
+            resources=sorted(
+                catalog.resources.values(), key=lambda item: str(item.uri)
+            ),
             **self._catalog_result_metadata(catalog),
         )
 
@@ -167,7 +284,11 @@ class McpServerSetupHelper:
                     ]
                     break
         if not action_info:
-            raise ValueError(f"No resource found for URI: {uri}")
+            raise MCPError(
+                INVALID_PARAMS,
+                f"No resource found for URI: {uri}. Rediscover with resources/list "
+                "and resources/templates/list before retrying.",
+            )
         headers, cookies = self._request_values(ctx)
         result = await action_info.func(
             response_handler=McpResponseHandler(),
@@ -188,7 +309,10 @@ class McpServerSetupHelper:
             _meta=action_info.mcp_meta,
             contents=[
                 TextResourceContents(
-                    uri=uri, text=text, mime_type=mime_type or default_mime
+                    uri=uri,
+                    text=text,
+                    mime_type=mime_type or default_mime,
+                    _meta=action_info.mcp_meta,
                 )
             ],
         )
@@ -205,7 +329,7 @@ class McpServerSetupHelper:
 
     @staticmethod
     def _catalog_revision(catalog: _McpCatalog) -> str:
-        catalog = {
+        catalog_contents = {
             "prompts": [
                 item.model_dump(by_alias=True, mode="json", exclude_none=True)
                 for item in sorted(catalog.prompts, key=lambda item: item.name)
@@ -227,10 +351,12 @@ class McpServerSetupHelper:
                 for item in sorted(catalog.tools, key=lambda item: item.name)
             ],
         }
-        canonical = json.dumps(catalog, sort_keys=True, separators=(",", ":"))
+        canonical = json.dumps(catalog_contents, sort_keys=True, separators=(",", ":"))
         return sha256(canonical.encode("utf-8")).hexdigest()
 
-    def _catalog_result_metadata(self, catalog: _McpCatalog | None = None) -> dict[str, Any]:
+    def _catalog_result_metadata(
+        self, catalog: _McpCatalog | None = None
+    ) -> dict[str, Any]:
         if catalog is None:
             catalog = self._catalog
         return {
@@ -241,7 +367,13 @@ class McpServerSetupHelper:
 
     async def _get_prompt(self, ctx: Any, params: Any) -> GetPromptResult:
         catalog = self._catalog
-        action_info = catalog.prompt_name_to_action_info[params.name]
+        action_info = catalog.prompt_name_to_action_info.get(params.name)
+        if action_info is None:
+            raise MCPError(
+                INVALID_PARAMS,
+                f"No prompt found for name: {params.name}. "
+                "Rediscover with prompts/list before retrying.",
+            )
         headers, cookies = self._request_values(ctx)
         result = await action_info.func(
             response_handler=McpResponseHandler(),
@@ -266,6 +398,55 @@ class McpServerSetupHelper:
         match = re.match(f"^{pattern}$", uri)
         return match.groupdict() if match else None
 
+    @staticmethod
+    def resolve_tool_names(
+        actions: Iterable[tuple[Any, Any]],
+    ) -> dict[str, str]:
+        """Name a complete, filtered tool set independently of database order."""
+        return McpServerSetupHelper.resolve_action_names(
+            (package, action)
+            for package, action in actions
+            if (json.loads(action.options) if action.options else {}).get("kind")
+            not in ("resource", "prompt")
+        )
+
+    @staticmethod
+    def resolve_action_names(
+        actions: Iterable[tuple[Any, Any]],
+    ) -> dict[str, str]:
+        """Preserve unambiguous bare names; qualify collisions deterministically."""
+        tools = [(package.name, action) for package, action in actions]
+        counts = Counter(action.name for _, action in tools)
+        names = {
+            action.id: action.name for _, action in tools if counts[action.name] == 1
+        }
+        used = set(names.values())
+        identities: set[tuple[str, str]] = set()
+        for package_name, action in sorted(
+            tools, key=lambda item: (item[0], item[1].name)
+        ):
+            identity = (package_name, action.name)
+            if identity in identities:
+                raise ValueError(f"duplicate tool identity: {identity!r}")
+            identities.add(identity)
+            if counts[action.name] == 1:
+                continue
+            stem = re.sub(r"[^A-Za-z0-9_.-]", "_", f"{package_name}__{action.name}")
+            name = stem
+            if len(name) > 64 or name in used:
+                # JSON pair encoding distinguishes embedded qualification separators.
+                digest = sha256(json.dumps(identity).encode("utf-8")).hexdigest()[:16]
+                suffix = f"_{digest}"
+                name = stem[: 64 - len(suffix)] + suffix
+                index = 1
+                while name in used:
+                    suffix = f"_{digest}_{index}"
+                    name = stem[: 64 - len(suffix)] + suffix
+                    index += 1
+            names[action.id] = name
+            used.add(name)
+        return names
+
     def register_action(
         self,
         func: Callable,
@@ -273,6 +454,8 @@ class McpServerSetupHelper:
         action: Any,
         display_name: str,
         doc_desc: str,
+        *,
+        tool_name: str | None = None,
     ) -> None:
         catalog = self._catalog
         options = json.loads(action.options) if action.options else {}
@@ -342,8 +525,9 @@ class McpServerSetupHelper:
             catalog.prompts.sort(key=lambda item: item.name)
             return
 
-        if action.name in catalog.tool_name_to_action_info:
-            raise ValueError(f"duplicate tool name: {action.name}")
+        tool_name = action.name if tool_name is None else tool_name
+        if tool_name in catalog.tool_name_to_action_info:
+            raise ValueError(f"duplicate tool name: {tool_name}")
         output_schema = json.loads(action.output_schema)
         if output_schema.get("type") == "string":
             output_schema_kind: OutputSchemaKind = "string"
@@ -360,7 +544,7 @@ class McpServerSetupHelper:
             }
         catalog.tools.append(
             Tool(
-                name=action.name,
+                name=tool_name,
                 description=doc_desc,
                 input_schema=json.loads(action.input_schema),
                 output_schema=use_output_schema,
@@ -374,13 +558,18 @@ class McpServerSetupHelper:
                 _meta=mcp_meta,
             )
         )
-        catalog.tool_name_to_action_info[action.name] = ActionInfo(
+        catalog.tool_name_to_action_info[tool_name] = ActionInfo(
             func, action, display_name, doc_desc, output_schema_kind, mcp_meta
         )
         catalog.tools.sort(key=lambda item: item.name)
 
     def replace_catalog(self, replacement: "McpServerSetupHelper") -> None:
         """Atomically publish a fully built catalog for the persistent server."""
+        self._validate_ui_resource_references(replacement._catalog)
+        self.publish_validated_catalog(replacement)
+
+    def publish_validated_catalog(self, replacement: "McpServerSetupHelper") -> None:
+        """Publish the private catalog already validated during preparation."""
         catalog = replacement._catalog
         self._catalog = catalog
         self._tools = catalog.tools
@@ -388,9 +577,72 @@ class McpServerSetupHelper:
         self._resources = catalog.resources
         self._resource_to_action_info = catalog.resource_to_action_info
         self._resource_templates = catalog.resource_templates
-        self._resource_template_to_action_info = catalog.resource_template_to_action_info
+        self._resource_template_to_action_info = (
+            catalog.resource_template_to_action_info
+        )
         self._prompts = catalog.prompts
         self._prompt_name_to_action_info = catalog.prompt_name_to_action_info
+
+    @staticmethod
+    def _validate_ui_resource_references(catalog: _McpCatalog) -> None:
+        """Validate MCP Apps associations before making a catalog visible."""
+        expected_mime_type = "text/html;profile=mcp-app"
+
+        def is_ui_uri(value: object) -> bool:
+            if not isinstance(value, str) or any(char.isspace() for char in value):
+                return False
+            try:
+                parsed = urlsplit(value)
+                _ = parsed.port
+            except ValueError:
+                return False
+            return parsed.scheme == "ui" and parsed.hostname is not None
+
+        def uses_ui_scheme(value: object) -> bool:
+            if not isinstance(value, str):
+                return False
+            try:
+                return urlsplit(value).scheme == "ui"
+            except ValueError:
+                return value[:3].lower() == "ui:"
+
+        for uri, action_info in catalog.resource_to_action_info.items():
+            meta = action_info.mcp_meta
+            has_ui_meta = isinstance(meta, dict) and "ui" in meta
+            if uses_ui_scheme(uri) or has_ui_meta:
+                resource = catalog.resources.get(uri)
+                if not is_ui_uri(uri) or resource is None:
+                    raise ValueError(
+                        f"MCP Apps resource {uri!r} has an invalid UI resource URI"
+                    )
+                if resource.mime_type != expected_mime_type:
+                    raise ValueError(
+                        f"MCP Apps resource {uri!r} must use MIME type {expected_mime_type!r}"
+                    )
+
+        for action_info in catalog.tool_name_to_action_info.values():
+            meta = action_info.mcp_meta
+            ui = meta.get("ui") if isinstance(meta, dict) else None
+            if not isinstance(ui, dict) or "resourceUri" not in ui:
+                continue
+            resource_uri = ui["resourceUri"]
+            if not isinstance(resource_uri, str):
+                raise ValueError(
+                    f"MCP tool {action_info.action.name} has an invalid UI resource URI"
+                )
+            if not is_ui_uri(resource_uri):
+                raise ValueError(
+                    f"MCP tool {action_info.action.name} has an invalid UI resource URI"
+                )
+            resource = catalog.resources.get(resource_uri)
+            if resource is None:
+                raise ValueError(
+                    f"MCP tool {action_info.action.name} references missing UI resource {resource_uri!r}"
+                )
+            if resource.mime_type != expected_mime_type:
+                raise ValueError(
+                    f"MCP UI resource {resource_uri!r} must use MIME type {expected_mime_type!r}"
+                )
 
     def unregister_actions(self) -> None:
         self._init_state()
@@ -402,6 +654,8 @@ class McpServerSetupHelper:
         self._resources = self._catalog.resources
         self._resource_to_action_info = self._catalog.resource_to_action_info
         self._resource_templates = self._catalog.resource_templates
-        self._resource_template_to_action_info = self._catalog.resource_template_to_action_info
+        self._resource_template_to_action_info = (
+            self._catalog.resource_template_to_action_info
+        )
         self._prompts = self._catalog.prompts
         self._prompt_name_to_action_info = self._catalog.prompt_name_to_action_info

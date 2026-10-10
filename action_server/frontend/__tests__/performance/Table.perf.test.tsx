@@ -8,19 +8,18 @@ import {
   TableBody,
   TableRow,
   TableHead,
-  TableCell,
+  TableCell
 } from '@/core/components/ui/Table';
 
 // Performance thresholds (in milliseconds)
 // Note: These are very conservative thresholds for jsdom test environment
-// Real browser performance is typically faster. Test environment has high variability.
+// jsdom timing has runner variability and does not measure browser frame rate.
 // These thresholds are meant to catch severe regressions, not measure exact performance.
 const PERF_THRESHOLDS = {
   SMALL_RENDER: 1000, // 100 rows should render in < 1000ms (very conservative for CI)
   MEDIUM_RENDER: 1500, // 500 rows should render in < 1500ms
   LARGE_RENDER: 2000, // 1000 rows should render in < 2000ms
-  FRAME_TIME: 16, // 60fps target (16.67ms per frame)
-  SCROLL_THRESHOLD: 32, // Allow up to 2 frames for scroll operations
+  UPDATE_TO_MOUNT_RATIO: 1.25 // Paired jsdom regression budget
 };
 
 // Test data generators
@@ -28,9 +27,9 @@ function generateRowData(count: number) {
   return Array.from({ length: count }, (_, index) => ({
     id: `row-${index}`,
     name: `Item ${index}`,
-    value: Math.random() * 1000,
+    value: index + 0.125,
     status: index % 2 === 0 ? 'active' : 'inactive',
-    timestamp: new Date(Date.now() - index * 1000).toISOString(),
+    timestamp: new Date(Date.UTC(2026, 0, 1) - index * 1000).toISOString()
   }));
 }
 
@@ -70,7 +69,7 @@ function measureRender(rowCount: number) {
   return {
     result,
     renderTime,
-    rowCount,
+    rowCount
   };
 }
 
@@ -81,7 +80,7 @@ function getMemoryUsage() {
     return {
       usedJSHeapSize: memory.usedJSHeapSize,
       totalJSHeapSize: memory.totalJSHeapSize,
-      jsHeapSizeLimit: memory.jsHeapSizeLimit,
+      jsHeapSizeLimit: memory.jsHeapSizeLimit
     };
   }
   return null;
@@ -197,22 +196,46 @@ describe('Table component - Performance benchmarks', () => {
         </Table>
       );
 
-      const { rerender } = render(<TestWrapper data={data} />);
-
-      // Measure re-render with updated data
+      // jsdom has no browser layout/frame scheduler. Fixed paired samples
+      // control for runner speed and retain every measurement.
+      const sampleCount = 5;
+      const mountTimes: number[] = [];
+      const updateTimes: number[] = [];
       const updatedData = data.map((row) => ({
         ...row,
-        value: row.value * 2,
+        value: row.value * 2
       }));
 
-      const startTime = performance.now();
-      rerender(<TestWrapper data={updatedData} />);
-      const rerenderTime = performance.now() - startTime;
+      for (let sample = 0; sample < sampleCount; sample++) {
+        const mountStart = performance.now();
+        const { rerender, container } = render(<TestWrapper data={data} />);
+        mountTimes.push(performance.now() - mountStart);
+        const originalRows = Array.from(container.querySelectorAll('tbody tr'));
 
-      console.log(`✓ Re-render time: ${rerenderTime.toFixed(2)}ms`);
+        const updateStart = performance.now();
+        rerender(<TestWrapper data={updatedData} />);
+        updateTimes.push(performance.now() - updateStart);
 
-      // Re-render should be fast (within frame budget)
-      expect(rerenderTime).toBeLessThan(PERF_THRESHOLDS.FRAME_TIME * 2);
+        const updatedRows = Array.from(container.querySelectorAll('tbody tr'));
+        expect(updatedRows).toHaveLength(data.length);
+        expect(container.querySelectorAll('tbody td')).toHaveLength(data.length * 3);
+        updatedRows.forEach((row, index) => {
+          expect(row).toBe(originalRows[index]);
+          expect(row.children[2].textContent).toBe(updatedData[index].value.toFixed(2));
+        });
+        cleanup();
+      }
+
+      const median = (values: number[]) => [...values].sort((a, b) => a - b)[2];
+      const mountMedian = median(mountTimes);
+      const updateMedian = median(updateTimes);
+      console.log('Paired table update samples (ms)', {
+        mountTimes,
+        updateTimes
+      });
+      expect(mountMedian).toBeGreaterThan(0);
+      expect(updateMedian / mountMedian).toBeLessThan(PERF_THRESHOLDS.UPDATE_TO_MOUNT_RATIO);
+      expect(mountMedian).toBeLessThan(PERF_THRESHOLDS.SMALL_RENDER);
     });
   });
 

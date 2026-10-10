@@ -28,8 +28,7 @@ import { useActionRunMutation } from '~/queries/actions';
 import { useActionServerContext } from '@/shared/context/actionServerContext';
 import { useWorkItems, useWorkItemStats, useWorkItemQueues, useCreateWorkItem } from '@/queries/workItems';
 import { Select, SelectItem } from '@/core/components/ui/Select';
-import { useLocalStorage } from '@/shared/hooks/useLocalStorage';
-import { Action, ActionPackage, Run, RunStatus, ServerConfig } from '@/shared/types';
+import { Action, ActionPackage, RunSummary, RunStatus, ServerConfig } from '@/shared/types';
 import { formDataToPayload, propertiesToFormData } from '@/shared/utils/formData';
 import { prettyPrint, downloadAsJson, copyToClipboard } from '@/shared/utils/helpers';
 import { cn } from '@/shared/utils/cn';
@@ -111,7 +110,7 @@ const findPackageForAction = (
   return packages.find((pkg) => pkg.actions.some((action) => action.id === actionId));
 };
 
-const getRunsForAction = (runs: Run[] | undefined, actionId: string | null): Run[] => {
+const getRunsForAction = (runs: RunSummary[] | undefined, actionId: string | null): RunSummary[] => {
   if (!runs || !actionId) {
     return [];
   }
@@ -309,7 +308,6 @@ export const ActionsPage = () => {
   const [jsonPayloadError, setJsonPayloadError] = useState<string | null>(null);
   const [contactEmail, setContactEmail] = useState<string>('');
   const [contactEmailError, setContactEmailError] = useState<string | null>(null);
-  const [apiKey, setApiKey] = useLocalStorage<string>('action-server-api-key', '');
   const [useAdvancedMode, setUseAdvancedMode] = useState(false);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [workItemQueue, setWorkItemQueue] = useState<string>('');
@@ -461,7 +459,6 @@ export const ActionsPage = () => {
           actionPackageName: selectedPackage.name,
           actionName: selectedAction.name,
           args: parsedPayload as Record<string, unknown>,
-          apiKey: apiKey || undefined,
           workItemQueue: workItemQueue || undefined,
         });
         setRunResult(result);
@@ -472,7 +469,7 @@ export const ActionsPage = () => {
         setRunError(message);
       }
     },
-    [apiKey, runAction, runPayload, selectedAction, selectedPackage, useAdvancedMode, formValues, workItemQueue],
+    [runAction, runPayload, selectedAction, selectedPackage, useAdvancedMode, formValues, workItemQueue],
   );
 
   if (loadedActions.isPending) {
@@ -736,19 +733,7 @@ export const ActionsPage = () => {
           </DialogHeader>
 
           <form className="space-y-4" onSubmit={handleRunSubmit}>
-            {loadedServerConfig.data?.auth_enabled && (
-              <div className="grid gap-2">
-                <label htmlFor="api-key" className="text-sm font-medium text-foreground">
-                  API Key
-                </label>
-                <Input
-                  id="api-key"
-                  value={apiKey}
-                  placeholder="Bearer key required for authentication"
-                  onChange={(event) => setApiKey(event.target.value)}
-                />
-              </div>
-            )}
+
 
             <div className="grid gap-2">
               <label htmlFor="contact-email" className="text-sm font-medium text-foreground">

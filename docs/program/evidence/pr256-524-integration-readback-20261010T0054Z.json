@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-10T00:54:58.472058+00:00",
+  "pr": 256,
+  "github": {
+    "baseRefName": "integration/community-release-20261008",
+    "headRefOid": "524e503b384a56bf854326c1f7f03833c60e6c53",
+    "mergeCommit": {
+      "oid": "c6b682012ae791e744cb7116600b3869d06c7b4d"
+    },
+    "mergedAt": "2026-10-10T00:54:25Z",
+    "state": "MERGED"
+  },
+  "merge_sha": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+  "merge_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+  "parents": [
+    "77e67de36606ac4cb958874249a61ceff79dcd01",
+    "524e503b384a56bf854326c1f7f03833c60e6c53"
+  ],
+  "tested_synthetic_sha": "54825acf84d1995c3f1c5242e8cf3b670dc122ad",
+  "tested_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+  "merge_tree_matches_tested_tree": true,
+  "publication": false,
+  "whole_issue_accepted": false
+}

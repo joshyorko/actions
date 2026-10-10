@@ -1,9 +1,9 @@
 import typing
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Iterator, Optional, Union
+from typing import Iterator, Literal, Optional, Union
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from pydantic.dataclasses import dataclass
 
 from actions.server._database import DBRules
@@ -65,6 +65,19 @@ class Action:  # Table name: action
     options: str = ""
 
 
+@dataclass
+class McpCatalogName:
+    """Permanent ownership of exact MCP keys, including retired keys."""
+
+    id: str  # Fixed-size digest of [namespace, name]; never recycled.
+    _db_rules.unique_indexes.add("McpCatalogName.id")
+
+    namespace: str
+    name: str
+    package_name: str
+    action_name: str
+
+
 RUN_ID_COUNTER = "run_id"
 ALL_COUNTERS = (RUN_ID_COUNTER,)
 
@@ -109,6 +122,21 @@ class Run:
     ] = None  # Path to robot package if run_type='robot'
     robot_task_name: Optional[str] = None  # Name of robot task if run_type='robot'
     robot_env_hash: Optional[str] = None  # RCC environment hash if run_type='robot'
+
+
+@dataclass
+class RunSummaryRecord:
+    """Database projection containing only fields needed by run-list views."""
+
+    id: str
+    status: int
+    action_id: str
+    start_time: str
+    run_time: Optional[float]
+    numbered_id: int
+    run_type: str
+    robot_package_path: Optional[str]
+    robot_task_name: Optional[str]
 
 
 @dataclass
@@ -421,6 +449,7 @@ def get_all_model_classes():
         Migration,
         ActionPackage,
         Action,
+        McpCatalogName,
         Run,
         Counter,
         UserSession,
@@ -507,7 +536,75 @@ def get_action_package_from_action(action: Action) -> ActionPackage:
     )
 
 
+RUN_LIST_MAX_ITEMS = 200
+RUN_LIST_MAX_RESPONSE_BYTES = 2_000_000
+RUN_SUMMARY_UNAVAILABLE_MESSAGE = (
+    "Run history is unavailable because stored run metadata is invalid."
+)
+RUN_LIST_MAX_ID_CHARS = 128
+RUN_LIST_MAX_ACTION_ID_CHARS = 128
+RUN_LIST_MAX_START_TIME_CHARS = 64
+RUN_LIST_MAX_ACTION_NAME_CHARS = 128
+RUN_LIST_MAX_ROBOT_PACKAGE_PATH_CHARS = 256
+RUN_LIST_MAX_ROBOT_TASK_NAME_CHARS = 128
+
+
+def _truncate_run_list_text(value: Optional[str], max_chars: int) -> Optional[str]:
+    if value is None:
+        return None
+    normalized = value.encode("utf-8", "replace").decode("utf-8")
+    if len(normalized) <= max_chars:
+        return normalized
+    return normalized[: max_chars - 1] + "…"
+
+
 class RunListItemModel(BaseModel):
+    """Bounded run metadata for list and WebSocket summary responses."""
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: str = Field(min_length=1, max_length=RUN_LIST_MAX_ID_CHARS)
+    status: int = Field(ge=0, le=4)
+    action_id: str = Field(max_length=RUN_LIST_MAX_ACTION_ID_CHARS)
+    start_time: str = Field(min_length=1, max_length=RUN_LIST_MAX_START_TIME_CHARS)
+    run_time: Optional[float] = Field(default=None, ge=0, le=1_000_000_000)
+    numbered_id: int = Field(ge=0, le=9_223_372_036_854_775_807)
+    run_type: Literal["action", "robot"] = "action"
+    action_name: Optional[str] = Field(
+        default=None, max_length=RUN_LIST_MAX_ACTION_NAME_CHARS
+    )
+    robot_package_path: Optional[str] = Field(
+        default=None, max_length=RUN_LIST_MAX_ROBOT_PACKAGE_PATH_CHARS
+    )
+    robot_task_name: Optional[str] = Field(
+        default=None, max_length=RUN_LIST_MAX_ROBOT_TASK_NAME_CHARS
+    )
+
+    @classmethod
+    def from_run(cls, run: Run | RunSummaryRecord) -> "RunListItemModel":
+        return cls(
+            id=run.id,
+            status=run.status,
+            action_id=run.action_id,
+            start_time=run.start_time,
+            run_time=run.run_time,
+            numbered_id=run.numbered_id,
+            run_type=typing.cast(Literal["action", "robot"], run.run_type),
+            action_name=_truncate_run_list_text(
+                getattr(run, "action_name", None), RUN_LIST_MAX_ACTION_NAME_CHARS
+            ),
+            robot_package_path=_truncate_run_list_text(
+                run.robot_package_path, RUN_LIST_MAX_ROBOT_PACKAGE_PATH_CHARS
+            ),
+            robot_task_name=_truncate_run_list_text(
+                run.robot_task_name, RUN_LIST_MAX_ROBOT_TASK_NAME_CHARS
+            ),
+        )
+
+
+class RunDetailModel(BaseModel):
+    """A single run's complete representation for detail and legacy-list routes."""
+
     model_config = ConfigDict(from_attributes=True)
 
     id: str
@@ -528,8 +625,3 @@ class RunListItemModel(BaseModel):
     robot_env_hash: Optional[str] = None
     stdout: Optional[str] = None
     stderr: Optional[str] = None
-
-
-class RunDetailModel(RunListItemModel):
-    # Inherit all fields, but can be extended for more details if needed
-    pass
