@@ -201,7 +201,7 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
     assert "actions/download-artifact@" in pypi
     assert "needs:" in pypi
     assert "Publish verified artifacts" in pypi
-    assert "cibuildwheel==2.23.1" in pypi
+    assert "cibuildwheel==2.23.4" in pypi
     assert "twine==6.2.0" in pypi
     assert "id-token: write" not in pypi
     assert "cp312-*macos*arm64" in pypi

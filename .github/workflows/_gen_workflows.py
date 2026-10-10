@@ -1678,7 +1678,7 @@ rm src/actions/server/bin/rcc* -f
     def build_wheels_steps(self):
         steps = self.common_build_steps()
         steps.append(
-            self.install_devutils(additional_packages=["cibuildwheel==2.23.1"])
+            self.install_devutils(additional_packages=["cibuildwheel==2.23.4"])
         )
         steps.append(
             {
