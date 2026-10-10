@@ -1777,6 +1777,10 @@ boundary, unchanged-environment reuse, relative `pythonpath`, and mode identity.
 The real-RCC failed-reload test separately checks persisted last-good execution
 and recovery; its receipt is revision-specific. These Linux results do not
 establish Windows ACL, frozen, strict-remote, or descendant-cleanup behavior.
+Bind each such receipt to the measured Git commit/tree and the actual imported
+Action Server module origins and file hashes; an environment-provided source
+SHA is only a label. Capture the server's bounded observed return code before
+discarding its process owner, separately from RCC terminal receipts.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.

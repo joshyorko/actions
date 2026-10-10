@@ -62,6 +62,11 @@ def _source_evidence() -> dict[str, object]:
         ).strip()
 
     changed_paths = git("diff", "--name-only", "HEAD^", "HEAD").splitlines()
+    runtime_modules = {
+        "action_package_handler": Path(package_handler_module.__file__).resolve(),
+        "actions_import": Path(actions_import_module.__file__).resolve(),
+        "runtime_adapter": Path(runtime_adapter_module.__file__).resolve(),
+    }
     return {
         "commit": git("rev-parse", "HEAD"),
         "tree": git("rev-parse", "HEAD^{tree}"),
@@ -71,17 +76,15 @@ def _source_evidence() -> dict[str, object]:
                 "status", "--porcelain", "--untracked-files=no"
             ).splitlines()
         ],
-        "changed_source_sha256": {
+        "parent_delta_file_sha256": {
             path: hashlib.sha256((root / path).read_bytes()).hexdigest()
             for path in changed_paths
             if (root / path).is_file()
         },
-        "module_origins": {
-            "action_package_handler": str(
-                Path(package_handler_module.__file__).resolve()
-            ),
-            "actions_import": str(Path(actions_import_module.__file__).resolve()),
-            "runtime_adapter": str(Path(runtime_adapter_module.__file__).resolve()),
+        "module_origins": {name: str(path) for name, path in runtime_modules.items()},
+        "runtime_module_sha256": {
+            name: hashlib.sha256(path.read_bytes()).hexdigest()
+            for name, path in runtime_modules.items()
         },
     }
 
