@@ -1765,7 +1765,7 @@ dependencies:
   conda-forge:
     - python=3.11.11
   pypi:
-    - actions-core=1.0.0
+    - actions-core=1.0.2
 """
     )
     action_file = package_dir / "action.py"
