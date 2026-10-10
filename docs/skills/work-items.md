@@ -353,8 +353,12 @@ checks Git `HEAD` against `github.sha`, records actual Python and Go versions
 plus platform/architecture, and measures executable hashes and package-relative
 paths. Each runtime entry also records the frozen onedir tree hash and its
 relative-file/content digest, the generated `go-wrapper/assets/assets.zip`
-hash, and a deterministic hash over `go-wrapper/main.go`, `go.mod`, and
-`go.sum`. These component values are read from the real build outputs after
+hash, and a deterministic hash over `go-wrapper/main.go`, `process.go`, `go.mod`,
+and `go.sum`. The manifest producer and independent UI consumer require the
+same ordered source inventory. Changing `process.go` changes the source binding
+while preserving executable and packaged-artifact measurements; omitting the
+helper fails manifest generation. These component values are read from the real
+build outputs after
 `build-executable --go-wrapper`; missing inputs fail manifest generation. The
 browser harness remeasures the checked-out archive and wrapper sources, the
 frozen tree, and extracted wrapper files before accepting UI behavior. The

@@ -545,6 +545,7 @@ def packaged_runtime_identity() -> (
     )
     source_paths = (
         "go-wrapper/main.go",
+        "go-wrapper/process.go",
         "go-wrapper/go.mod",
         "go-wrapper/go.sum",
     )

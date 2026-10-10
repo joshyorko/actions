@@ -133,6 +133,7 @@ def write_manifest(
     assets_zip = package / "go-wrapper" / "assets" / "assets.zip"
     wrapper_source_files = (
         "go-wrapper/main.go",
+        "go-wrapper/process.go",
         "go-wrapper/go.mod",
         "go-wrapper/go.sum",
     )
