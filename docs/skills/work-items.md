@@ -494,6 +494,15 @@ file and its content digest as separate runtime state. Other added entries,
 removed files, or changed build entries fail the gate. Do not recalculate the
 trusted manifest hash from the post-runtime tree.
 
+Run the frozen browser gate from a task-owned copy of the onedir package. Verify
+the copy's full tree and executable hashes against the immutable manifest before
+launch, and verify the original build tree remains unchanged afterward. The Go
+wrapper extracts into a test-owned home; verify that extraction against the
+embedded archive before Runtime startup and inventory its post-runtime changes
+separately. This prevents one Runtime probe from changing the build artifact
+used by the next probe. Hosted Windows results must still verify the copy
+behavior and both UI cells.
+
 Subprocess debug/error messages and string representations must redact
 sensitive command-line switches before formatting the argument list.
 Use the shared process-argument redactor so Action Server's common and

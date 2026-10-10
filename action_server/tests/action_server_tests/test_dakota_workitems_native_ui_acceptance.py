@@ -38,12 +38,18 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def packaged_tree_sha256(root: Path) -> str:
+def packaged_tree_sha256(
+    root: Path, *, exclude_root_files: set[str] | None = None
+) -> str:
+    excluded = exclude_root_files or set()
     digest = hashlib.sha256()
     for path in sorted(
         root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()
     ):
         relative = path.relative_to(root).as_posix().encode("utf-8")
+        if b"/" not in relative and relative.decode("utf-8") in excluded:
+            if path.is_file():
+                continue
         metadata = path.lstat()
         digest.update(
             relative + b"\0" + str(stat.S_IMODE(metadata.st_mode)).encode() + b"\0"
@@ -59,9 +65,15 @@ def packaged_tree_sha256(root: Path) -> str:
     return digest.hexdigest()
 
 
-def packaged_tree_inventory(root: Path) -> list[dict[str, str | int | None]]:
+def packaged_tree_inventory(
+    root: Path, *, exclude_root_files: set[str] | None = None
+) -> list[dict[str, str | int | None]]:
+    excluded = exclude_root_files or set()
     inventory = []
     for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+        relative = path.relative_to(root).as_posix()
+        if "/" not in relative and relative in excluded and path.is_file():
+            continue
         metadata = path.lstat()
         if path.is_symlink():
             kind = "symlink"
@@ -76,7 +88,7 @@ def packaged_tree_inventory(root: Path) -> list[dict[str, str | int | None]]:
             raise AssertionError("unsupported packaged artifact entry")
         inventory.append(
             {
-                "path": path.relative_to(root).as_posix(),
+                "path": relative,
                 "kind": kind,
                 "mode": stat.S_IMODE(metadata.st_mode),
                 "link_target": link_target,
@@ -84,6 +96,12 @@ def packaged_tree_inventory(root: Path) -> list[dict[str, str | int | None]]:
             }
         )
     return inventory
+
+
+def copy_frozen_package_tree(source: Path, destination: Path) -> Path:
+    return shutil.copytree(
+        source, destination, symlinks=True, copy_function=shutil.copy2
+    )
 
 
 def write_tree_inventory_snapshot(
@@ -95,6 +113,7 @@ def write_tree_inventory_snapshot(
     executable_sha: str,
     manifest_path: Path,
     package_root: Path,
+    exclude_root_files: set[str] | None = None,
 ) -> None:
     if not receipt_value:
         return
@@ -113,8 +132,12 @@ def write_tree_inventory_snapshot(
                 "platform": platform.system(),
                 "executable_sha256": executable_sha,
                 "manifest_sha256": sha256(manifest_path),
-                "package_tree_sha256": packaged_tree_sha256(package_root),
-                "entries": packaged_tree_inventory(package_root),
+                "package_tree_sha256": packaged_tree_sha256(
+                    package_root, exclude_root_files=exclude_root_files
+                ),
+                "entries": packaged_tree_inventory(
+                    package_root, exclude_root_files=exclude_root_files
+                ),
             },
             indent=2,
         )
@@ -194,33 +217,49 @@ def record_postruntime_tree_observation(
     receipt: dict,
     *,
     package_root: Path,
+    baseline_entries: list[dict],
+    baseline_tree_sha256: str,
+    baseline_kind: str,
+    stage: str,
+    exclude_root_files: set[str] | None,
+    immutable_package_root: Path,
+    immutable_package_tree_sha256: str,
     receipt_value: str | None,
     source_sha: str,
     runtime_kind: str,
     executable_sha: str,
     manifest_path: Path,
 ) -> None:
-    observed_sha = packaged_tree_sha256(package_root)
-    observed_entries = packaged_tree_inventory(package_root)
+    observed_sha = packaged_tree_sha256(
+        package_root, exclude_root_files=exclude_root_files
+    )
+    observed_entries = packaged_tree_inventory(
+        package_root, exclude_root_files=exclude_root_files
+    )
     write_tree_inventory_snapshot(
         receipt_value,
-        stage="post-runtime",
+        stage=stage,
         source_sha=source_sha,
         runtime_kind=runtime_kind,
         executable_sha=executable_sha,
         manifest_path=manifest_path,
         package_root=package_root,
+        exclude_root_files=exclude_root_files,
     )
-    baseline_path = manifest_path.parent / "native-artifact-tree-inventory.json"
-    baseline_entries = json.loads(baseline_path.read_text(encoding="utf-8"))
     delta = classify_runtime_tree_delta(
         baseline_entries, observed_entries, platform_name=platform.system()
     )
+    immutable_tree_sha = packaged_tree_sha256(immutable_package_root)
+    immutable_tree_unchanged = immutable_tree_sha == immutable_package_tree_sha256
+    failure_reason = delta["failure_reason"]
+    if failure_reason is None and not immutable_tree_unchanged:
+        failure_reason = "immutable_build_artifact_changed"
+    validation_passed = delta["valid"] and immutable_tree_unchanged
     report_path = None
     if receipt_value:
         receipt_path = Path(receipt_value)
         report = receipt_path.with_name(
-            f"{receipt_path.stem}-post-runtime-tree-diff.json"
+            f"{receipt_path.stem}-{stage}-tree-diff.json"
         )
         report.write_text(
             json.dumps(
@@ -228,13 +267,17 @@ def record_postruntime_tree_observation(
                     "schema_version": 1,
                     "source_sha": source_sha,
                     "runtime_kind": runtime_kind,
+                    "runtime_tree_kind": baseline_kind,
                     "platform": platform.system(),
                     "executable_sha256": executable_sha,
                     "manifest_sha256": sha256(manifest_path),
-                    "expected_package_tree_sha256": receipt["package_tree_sha256"],
+                    "expected_runtime_tree_sha256": baseline_tree_sha256,
                     "observed_package_tree_sha256": observed_sha,
-                    "runtime_delta_valid": delta["valid"],
-                    "runtime_delta_failure_reason": delta["failure_reason"],
+                    "expected_immutable_build_tree_sha256": immutable_package_tree_sha256,
+                    "observed_immutable_build_tree_sha256": immutable_tree_sha,
+                    "immutable_build_tree_unchanged": immutable_tree_unchanged,
+                    "runtime_delta_valid": validation_passed,
+                    "runtime_delta_failure_reason": failure_reason,
                     "runtime_generated_contract": {
                         "rcc_version": delta["rcc_version"],
                         "rcc_path": delta["expected_rcc_path"],
@@ -250,7 +293,8 @@ def record_postruntime_tree_observation(
             encoding="utf-8",
         )
         report_path = report.name
-    receipt["post_runtime_package_tree_sha256"] = observed_sha
+    receipt[f"{stage}_tree_sha256"] = observed_sha
+    receipt["immutable_build_tree_sha256_after_runtime"] = immutable_tree_sha
     receipt["post_runtime_tree_diff"] = {
         "added_count": len(delta["added"]),
         "removed_count": len(delta["removed"]),
@@ -258,8 +302,9 @@ def record_postruntime_tree_observation(
         "report_path": report_path,
     }
     receipt["post_runtime_tree_validation"] = {
-        "valid": delta["valid"],
-        "failure_reason": delta["failure_reason"],
+        "valid": validation_passed,
+        "failure_reason": failure_reason,
+        "immutable_build_tree_unchanged": immutable_tree_unchanged,
         "rcc_version": delta["rcc_version"],
         "runtime_generated_state": delta["runtime_generated_state"],
     }
@@ -352,6 +397,25 @@ def test_native_manifest_executable_paths_match_platform(
     runtime_kind: str, platform_name: str, expected_path: str
 ) -> None:
     assert packaged_artifact_relative_path(runtime_kind, platform_name) == expected_path
+
+
+@pytest.mark.parametrize(
+    ("platform_name", "expected"),
+    [
+        (
+            "Windows",
+            Path("localappdata/actions/bin/action-server/internal/1.2.3"),
+        ),
+        ("Linux", Path(".actions/bin/action-server/internal/1.2.3")),
+        ("Darwin", Path(".actions/bin/action-server/internal/1.2.3")),
+    ],
+)
+def test_wrapper_extraction_root_is_beneath_the_test_runtime_home(
+    tmp_path: Path, platform_name: str, expected: Path
+) -> None:
+    root = wrapper_extraction_root(tmp_path, "1.2.3", platform_name)
+    assert root == tmp_path / expected
+    assert root.is_relative_to(tmp_path)
 
 
 def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
@@ -521,6 +585,29 @@ def wrapper_home_environment(runtime_home: Path) -> dict[str, str]:
     if platform.system() == "Windows":
         return {"LOCALAPPDATA": str(runtime_home / "localappdata")}
     return {"HOME": str(runtime_home)}
+
+
+def wrapper_extraction_root(
+    runtime_home: Path, runtime_version: str, platform_name: str
+) -> Path:
+    if platform_name == "Windows":
+        return (
+            runtime_home
+            / "localappdata"
+            / "actions"
+            / "bin"
+            / "action-server"
+            / "internal"
+            / runtime_version
+        )
+    return (
+        runtime_home
+        / ".actions"
+        / "bin"
+        / "action-server"
+        / "internal"
+        / runtime_version
+    )
 
 
 def native_runtime_environment(runtime_home: Path) -> dict[str, str]:
@@ -755,6 +842,18 @@ def test_pretest_inventory_records_relative_entry_identity(tmp_path: Path) -> No
     ).hexdigest()
 
 
+def test_frozen_runtime_copy_preserves_measured_package_tree(tmp_path: Path) -> None:
+    source = tmp_path / "build-tree"
+    source.mkdir()
+    (source / "action-server.exe").write_bytes(b"native executable")
+    (source / "_internal").mkdir()
+    (source / "_internal/runtime.pyd").write_bytes(b"runtime module")
+    copy = copy_frozen_package_tree(source, tmp_path / "runtime-copy")
+
+    assert packaged_tree_sha256(copy) == packaged_tree_sha256(source)
+    assert sha256(copy / "action-server.exe") == sha256(source / "action-server.exe")
+
+
 def test_tree_inventory_diff_preserves_added_removed_and_changed_entries() -> None:
     baseline = [
         {
@@ -876,6 +975,7 @@ def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) 
     package.mkdir()
     (package / "module.py").write_bytes(b"packaged source")
     baseline = packaged_tree_inventory(package)
+    baseline_sha = packaged_tree_sha256(package)
     inventory_path = tmp_path / "native-artifact-tree-inventory.json"
     inventory_path.write_text(json.dumps(baseline), encoding="utf-8")
     manifest_path = tmp_path / "native-artifact-manifest.json"
@@ -883,12 +983,20 @@ def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) 
     receipt_path = tmp_path / "dakota-workitems-ui-frozen-test.json"
     receipt = {"package_tree_sha256": packaged_tree_sha256(package)}
 
-    generated = package / "__pycache__"
+    runtime_package = copy_frozen_package_tree(package, tmp_path / "runtime-copy")
+    generated = runtime_package / "__pycache__"
     generated.mkdir()
     (generated / "module.pyc").write_bytes(b"runtime-generated bytecode")
     record_postruntime_tree_observation(
         receipt,
-        package_root=package,
+        package_root=runtime_package,
+        baseline_entries=baseline,
+        baseline_tree_sha256=baseline_sha,
+        baseline_kind="task_owned_frozen_copy",
+        stage="frozen-copy-post-runtime",
+        exclude_root_files=None,
+        immutable_package_root=package,
+        immutable_package_tree_sha256=baseline_sha,
         receipt_value=str(receipt_path),
         source_sha="a" * 40,
         runtime_kind="frozen",
@@ -896,12 +1004,15 @@ def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) 
         manifest_path=manifest_path,
     )
 
-    report_path = tmp_path / "dakota-workitems-ui-frozen-test-post-runtime-tree-diff.json"
+    report_path = tmp_path / "dakota-workitems-ui-frozen-test-frozen-copy-post-runtime-tree-diff.json"
     report = json.loads(report_path.read_text(encoding="utf-8"))
     assert report["runtime_delta_valid"] is False
     assert report["runtime_delta_failure_reason"] == "unrecognized_runtime_generated_entry"
-    assert report["expected_package_tree_sha256"] == receipt["package_tree_sha256"]
-    assert report["observed_package_tree_sha256"] == receipt["post_runtime_package_tree_sha256"]
+    assert report["expected_runtime_tree_sha256"] == baseline_sha
+    assert report["observed_package_tree_sha256"] == receipt[
+        "frozen-copy-post-runtime_tree_sha256"
+    ]
+    assert report["immutable_build_tree_unchanged"] is True
     assert [entry["path"] for entry in report["added"]] == [
         "__pycache__",
         "__pycache__/module.pyc",
@@ -909,7 +1020,10 @@ def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) 
     assert report["removed"] == []
     assert report["changed"] == []
     assert receipt["post_runtime_tree_diff"]["added_count"] == 2
-    assert (tmp_path / "dakota-workitems-ui-frozen-test-post-runtime-tree-inventory.json").is_file()
+    assert (
+        tmp_path
+        / "dakota-workitems-ui-frozen-test-frozen-copy-post-runtime-tree-inventory.json"
+    ).is_file()
 
 
 def test_cleanup_failure_prevents_bounded_pass_receipt() -> None:
@@ -1013,8 +1127,12 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         runtime_kind,
         artifact,
     ) = packaged_runtime_identity()
-    package_root = executable.parent if runtime_kind == "frozen" else None
-    package_tree_sha = packaged_tree_sha256(package_root) if package_root else None
+    package_root = (
+        executable.parent
+        if runtime_kind == "frozen"
+        else executable.parents[1] / "action-server"
+    )
+    package_tree_sha = packaged_tree_sha256(package_root) if runtime_kind == "frozen" else None
     embedded_files_sha = artifact.get("embedded_files_sha256")
     assets_zip_sha = artifact.get("assets_zip_sha256")
     wrapper_source_sha = artifact.get("wrapper_source_sha256")
@@ -1029,10 +1147,6 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             assert isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest)
     node = os.environ.get("DAKOTA_WORKITEMS_UI_NODE") or shutil.which("node")
     assert node is not None
-    monkeypatch.setenv(
-        "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE", str(executable)
-    )
-
     project = tmp_path / "project"
     datadir = tmp_path / "datadir"
     runtime_home = tmp_path / "runtime-home"
@@ -1046,6 +1160,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         "source_sha": source_sha,
         "executable_sha256": executable_sha,
         "package_tree_sha256": package_tree_sha,
+        "immutable_build_tree_sha256": package_tree_sha or embedded_frozen_tree_sha,
         "embedded_files_sha256": embedded_files_sha,
         "assets_zip_sha256": assets_zip_sha,
         "wrapper_source_sha256": wrapper_source_sha,
@@ -1061,11 +1176,48 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         "states_not_run": STATES_NOT_RUN,
     }
     process: ActionServerProcess | None = None
+    runtime_package_root: Path | None = None
+    runtime_baseline_entries: list[dict] | None = None
+    runtime_baseline_tree_sha: str | None = None
+    runtime_baseline_kind: str | None = None
+    runtime_exclude_root_files: set[str] | None = None
+    runtime_executable = executable
+    extracted_root: Path | None = None
     try:
+        if runtime_kind == "frozen":
+            runtime_package_root = copy_frozen_package_tree(
+                package_root, tmp_path / "frozen-runtime-package"
+            )
+            runtime_executable = runtime_package_root / executable.relative_to(
+                package_root
+            )
+            runtime_baseline_tree_sha = packaged_tree_sha256(runtime_package_root)
+            if (
+                runtime_baseline_tree_sha != package_tree_sha
+                or sha256(runtime_executable) != executable_sha
+            ):
+                raise AssertionError("task-owned frozen package copy changed artifact bytes")
+            runtime_baseline_entries = packaged_tree_inventory(runtime_package_root)
+            runtime_baseline_kind = "task_owned_frozen_copy"
+            receipt["runtime_artifact_isolation"] = runtime_baseline_kind
+            write_tree_inventory_snapshot(
+                os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
+                stage="frozen-copy-pretest",
+                source_sha=source_sha,
+                runtime_kind=runtime_kind,
+                executable_sha=executable_sha,
+                manifest_path=Path(os.environ["DAKOTA_WORKITEMS_UI_BUILD_MANIFEST"]),
+                package_root=runtime_package_root,
+            )
+
+        monkeypatch.setenv(
+            "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE",
+            str(runtime_executable),
+        )
         version_env = os.environ.copy()
         version_env.update(native_runtime_environment(runtime_home))
         version = subprocess.run(
-            [str(executable), "version"],
+            [str(runtime_executable), "version"],
             cwd=project,
             env=version_env,
             capture_output=True,
@@ -1076,27 +1228,10 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         assert version.returncode == 0
         receipt["runtime_version"] = version.stdout.strip()
 
-        process = start_native_runtime(datadir, project, runtime_home, api_key)
         if runtime_kind == "go-wrapper":
-            if platform.system() == "Windows":
-                extracted_root = (
-                    runtime_home
-                    / "localappdata"
-                    / "actions"
-                    / "bin"
-                    / "action-server"
-                    / "internal"
-                    / receipt["runtime_version"]
-                )
-            else:
-                extracted_root = (
-                    runtime_home
-                    / ".actions"
-                    / "bin"
-                    / "action-server"
-                    / "internal"
-                    / receipt["runtime_version"]
-                )
+            extracted_root = wrapper_extraction_root(
+                runtime_home, receipt["runtime_version"], platform.system()
+            )
             assert extracted_root.is_dir()
             assert extracted_root.resolve().is_relative_to(runtime_home.resolve())
             assert (extracted_root / "app_hash").read_text().strip() == assets_zip_sha
@@ -1105,13 +1240,41 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 exclude_root_files={"app_hash", "extract.lock", "lastLaunchTouch"},
             )
             assert extracted_files_sha == embedded_files_sha
+            runtime_package_root = extracted_root
+            runtime_exclude_root_files = {
+                "app_hash",
+                "extract.lock",
+                "lastLaunchTouch",
+            }
+            runtime_baseline_entries = packaged_tree_inventory(
+                runtime_package_root,
+                exclude_root_files=runtime_exclude_root_files,
+            )
+            runtime_baseline_tree_sha = packaged_tree_sha256(
+                runtime_package_root,
+                exclude_root_files=runtime_exclude_root_files,
+            )
+            runtime_baseline_kind = "go_wrapper_extraction"
+            receipt["runtime_artifact_isolation"] = runtime_baseline_kind
+            write_tree_inventory_snapshot(
+                os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
+                stage="go-wrapper-pretest",
+                source_sha=source_sha,
+                runtime_kind=runtime_kind,
+                executable_sha=executable_sha,
+                manifest_path=Path(os.environ["DAKOTA_WORKITEMS_UI_BUILD_MANIFEST"]),
+                package_root=runtime_package_root,
+                exclude_root_files=runtime_exclude_root_files,
+            )
             receipt["wrapper_extraction"] = {
                 "path_relative_to_runtime_home": extracted_root.relative_to(
                     runtime_home
                 ).as_posix(),
                 "app_hash_matches_embedded_archive": True,
                 "extracted_files_sha256": extracted_files_sha,
+                "pre_runtime_tree_sha256": runtime_baseline_tree_sha,
             }
+        process = start_native_runtime(datadir, project, runtime_home, api_key)
         origin = f"http://{process.host}:{process.port}"
         normal = run_browser_stage(
             node,
@@ -1135,14 +1298,6 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             origin,
         )
         record_browser_stage(receipt, storage_error)
-        if runtime_kind == "go-wrapper":
-            assert (
-                packaged_files_sha256(
-                    extracted_root,
-                    exclude_root_files={"app_hash", "extract.lock", "lastLaunchTouch"},
-                )
-                == embedded_files_sha
-            )
     except BaseException as error:
         receipt["status"] = "FAIL"
         if isinstance(error, NativeRuntimeStartupError):
@@ -1158,11 +1313,25 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 stop_runtime_for_acceptance(process, receipt)
             except BaseException:
                 pass
-        if package_root is not None:
+        if (
+            runtime_package_root is not None
+            and runtime_baseline_entries is not None
+            and runtime_baseline_tree_sha is not None
+            and runtime_baseline_kind is not None
+        ):
             try:
                 record_postruntime_tree_observation(
                     receipt,
-                    package_root=package_root,
+                    package_root=runtime_package_root,
+                    baseline_entries=runtime_baseline_entries,
+                    baseline_tree_sha256=runtime_baseline_tree_sha,
+                    baseline_kind=runtime_baseline_kind,
+                    stage=f"{runtime_kind}-post-runtime",
+                    exclude_root_files=runtime_exclude_root_files,
+                    immutable_package_root=package_root,
+                    immutable_package_tree_sha256=receipt[
+                        "immutable_build_tree_sha256"
+                    ],
                     receipt_value=os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
                     source_sha=source_sha,
                     runtime_kind=runtime_kind,
@@ -1182,11 +1351,25 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             except BaseException:
                 write_receipt(receipt)
                 raise
-        if package_root is not None:
+        if (
+            runtime_package_root is not None
+            and runtime_baseline_entries is not None
+            and runtime_baseline_tree_sha is not None
+            and runtime_baseline_kind is not None
+        ):
             try:
                 record_postruntime_tree_observation(
                     receipt,
-                    package_root=package_root,
+                    package_root=runtime_package_root,
+                    baseline_entries=runtime_baseline_entries,
+                    baseline_tree_sha256=runtime_baseline_tree_sha,
+                    baseline_kind=runtime_baseline_kind,
+                    stage=f"{runtime_kind}-post-runtime",
+                    exclude_root_files=runtime_exclude_root_files,
+                    immutable_package_root=package_root,
+                    immutable_package_tree_sha256=receipt[
+                        "immutable_build_tree_sha256"
+                    ],
                     receipt_value=os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
                     source_sha=source_sha,
                     runtime_kind=runtime_kind,
@@ -1205,7 +1388,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 receipt["failure_phase"] = "post_runtime_package_tree_delta"
                 write_receipt(receipt)
                 raise AssertionError(
-                    "frozen package tree changed outside the runtime RCC download contract"
+                    "task-owned package tree changed outside the runtime RCC download contract"
                 )
         receipt["status"] = "PASS_BOUNDED"
         write_receipt(receipt)
