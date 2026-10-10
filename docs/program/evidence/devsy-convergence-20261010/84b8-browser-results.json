@@ -1,0 +1,44 @@
+{
+  "status": "PASS_LINUX_FINAL84B_BROWSER_ONLY",
+  "workflow_run": 38023233169,
+  "workflow_source": "2492f774841118496dbafd5e08b9066edaf170fa",
+  "branch_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+  "source_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+  "host_receipt_sha256": "b888c46f9597fba54d4a8074e7a8604e942969b59e7dc693b75a61b2e7ff8375",
+  "provenance_archive_sha256": "3fde14c1244e73670661eb0f16276bed4f3d91caf3a2a521182ba1680ce94be2",
+  "go_archive_sha256": "d7976d0aad3de470b7548eb5139205e4ed39b3d2421ae1d754d01d44f6d2b377",
+  "frozen_sha256": "28a5d465a19def24bd30f77ed4b45833ee3e46894fccab3c60f3521e1fbfe08b",
+  "go_sha256": "1606fc2961ad107ddb360a46a7bb3c055e750ab8e83c4a94931fc82722d13af9",
+  "frozen_tree_sha256": "dfbde7b1daee4a037325112f776ff56dcf6c2d2bce94973d398712711c4927f3",
+  "inventory_entries": 1181,
+  "postrun_tree_changes": 0,
+  "final_test_source_sha256": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+  "d8_test_source_sha256": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+  "test_source_byte_identical": true,
+  "results": [
+    {
+      "binary": "frozen",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 4.894,
+      "pass_marker": true,
+      "raw_output_sha256": "62be6fbd2b7018397cd08c8b805de7be93c2881eb78e7ddc94b2b7b0904806ba",
+      "redacted_log_sha256": "62be6fbd2b7018397cd08c8b805de7be93c2881eb78e7ddc94b2b7b0904806ba",
+      "log_path": "/workspaces/actions-worker-state/devsy-native-auth/d8dc-linux-cli-acceptance/final84b/browser/frozen/logs/pytest.redacted.log",
+      "driver_signals_sent": false
+    },
+    {
+      "binary": "go-wrapper",
+      "exit_code": 0,
+      "status": "PASS",
+      "elapsed_seconds": 6.567,
+      "pass_marker": true,
+      "raw_output_sha256": "c5785fde84d026b49c44a6959616b5570a88905f63ea1028a11903876dc45ee3",
+      "redacted_log_sha256": "c5785fde84d026b49c44a6959616b5570a88905f63ea1028a11903876dc45ee3",
+      "log_path": "/workspaces/actions-worker-state/devsy-native-auth/d8dc-linux-cli-acceptance/final84b/browser/go-wrapper/logs/pytest.redacted.log",
+      "driver_signals_sent": false
+    }
+  ],
+  "cleanup": "Both existing test/fixture cleanup paths returned without pytest failure; no driver-issued signals; no process-tree SIGTERM claim.",
+  "limits": "Linux loopback browser/API only; no CLI repeat, nativeverify, Windows/macOS, full-runtime or release claim."
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "root-reported-ci-status/v1",
+  "source": "Root user report; not a byte copy of Cloud evidence file",
+  "source_evidence_filename": "pr273-final-ci-84b8c70a-20261010T0438Z.json",
+  "source_original_file_sha256": "NOT_PROVIDED",
+  "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+  "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+  "matrix_counts": {
+    "success": 17,
+    "failure": 3,
+    "skip": 1
+  },
+  "failures": {
+    "Linux": "missing legacy ACTION_SERVER_TEST_ACCESS_CREDENTIALS",
+    "macOS": "missing legacy ACTION_SERVER_TEST_ACCESS_CREDENTIALS",
+    "Windows": "missing legacy ACTION_SERVER_TEST_ACCESS_CREDENTIALS"
+  },
+  "otherwise_passed": {
+    "Linux": {
+      "portable": 862,
+      "integration": 119
+    },
+    "macOS": {
+      "portable": 858,
+      "integration": 119
+    },
+    "Windows": {
+      "portable": 852,
+      "integration": 118
+    }
+  },
+  "lint": "PASS",
+  "type_checks": "PASS",
+  "docs": "PASS",
+  "limits": {
+    "full_Runtime_green": false,
+    "legacy_external_service_verified": false,
+    "credential_setup_modified": false,
+    "product_regression_established": false,
+    "publication_evidence": false,
+    "final_admission": "Root only"
+  }
+}

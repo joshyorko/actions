@@ -1,0 +1,447 @@
+{
+  "source_run": {
+    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "parents": [
+      "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+      "90f0d09e1da70e711e30352315797c74363dbba5"
+    ],
+    "synthetic": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "synthetic_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "synthetic_parents": [
+      "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "84b8c70a412db9594dfa2a6c5fcb3e8184db019b"
+    ],
+    "run": 38023233169
+  },
+  "reviewed_platforms": {
+    "Windows": {
+      "status": "PASS_INTERNAL_AND_RELEASE_BINDING",
+      "artifacts": {
+        "prov": {
+          "id": 11659055716,
+          "name": "action-server-native-provenance-windows-2022-38023233169-1",
+          "bytes": 48651833,
+          "api_sha256": "61f26b803c87c75bbb627ab6b746fc4e187117ec8e8ef4f1129fbd47e46e9375",
+          "actual_sha256": "61f26b803c87c75bbb627ab6b746fc4e187117ec8e8ef4f1129fbd47e46e9375",
+          "zip_crc": "PASS",
+          "members": 1
+        },
+        "go": {
+          "id": 11659031107,
+          "name": "action-server-unauthenticated-windows-2022",
+          "bytes": 53484051,
+          "api_sha256": "65abc5d5aad98b4fa241135e2de5cdd776cdba9101fa6eb40ad4145440aa5a45",
+          "actual_sha256": "65abc5d5aad98b4fa241135e2de5cdd776cdba9101fa6eb40ad4145440aa5a45",
+          "zip_crc": "PASS",
+          "members": 1
+        },
+        "small": {
+          "id": 11659685974,
+          "name": "native-acceptance-windows-2022-2492f774841118496dbafd5e08b9066edaf170fa",
+          "bytes": 470750,
+          "api_sha256": "b142ca9c4b11f4d81e53f84262ebe8f9f32fc0508d0063708a5906a14ae470b3",
+          "actual_sha256": "b142ca9c4b11f4d81e53f84262ebe8f9f32fc0508d0063708a5906a14ae470b3",
+          "zip_crc": "PASS",
+          "members": 14
+        },
+        "work": {
+          "id": 11660015780,
+          "name": "dakota-workitems-native-windows-2022-38023233169-1",
+          "bytes": 1583,
+          "api_sha256": "d52fcd75f54ee70e962eccb03d7200eb886d060f72977db7038f031624f9e9cc",
+          "actual_sha256": "d52fcd75f54ee70e962eccb03d7200eb886d060f72977db7038f031624f9e9cc",
+          "zip_crc": "PASS",
+          "members": 1
+        }
+      },
+      "manifest": {
+        "source_sha": "2492f774841118496dbafd5e08b9066edaf170fa",
+        "platform": "Windows",
+        "frozen": {
+          "path": "dist/action-server/action-server.exe",
+          "sha256": "10061eb88e22bb613c87309b6d1d1812d193b8b3326e442af7980a2f236933a9",
+          "embedded_files_sha256": "34ac140089072f5cdfe1e2f810bdf9d7c5f127f7c8c2861fca96544c43bf8f37",
+          "assets_zip_sha256": "663fe8dc11e02cb25b2c15f381b666098e35efbfc5f611614c6419db7043e810",
+          "assets_zip_path": "go-wrapper/assets/assets.zip",
+          "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+          "wrapper_source_files": [
+            "go-wrapper/main.go",
+            "go-wrapper/process.go",
+            "go-wrapper/go.mod",
+            "go-wrapper/go.sum"
+          ],
+          "frozen_package_tree_sha256": "7dc07a9a666b90e0e663ceb3e1a85da6683410183b2d7258d6ea8cb6b2ed6bcb",
+          "frozen_package_tree_inventory_path": "output/native-artifact-tree-inventory.json"
+        },
+        "go": {
+          "path": "dist/final/action-server.exe",
+          "sha256": "31b768982d23b5bcb3671fe18c51d9399ceb5b36ba429d8289434d04b90577b1",
+          "embedded_files_sha256": "34ac140089072f5cdfe1e2f810bdf9d7c5f127f7c8c2861fca96544c43bf8f37",
+          "assets_zip_sha256": "663fe8dc11e02cb25b2c15f381b666098e35efbfc5f611614c6419db7043e810",
+          "assets_zip_path": "go-wrapper/assets/assets.zip",
+          "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+          "wrapper_source_files": [
+            "go-wrapper/main.go",
+            "go-wrapper/process.go",
+            "go-wrapper/go.mod",
+            "go-wrapper/go.sum"
+          ],
+          "frozen_package_tree_sha256": "7dc07a9a666b90e0e663ceb3e1a85da6683410183b2d7258d6ea8cb6b2ed6bcb",
+          "frozen_package_tree_inventory_path": "output/native-artifact-tree-inventory.json"
+        }
+      },
+      "inventory": {
+        "tar_members": 1855,
+        "entries": 1852,
+        "inventory_entries": 1852,
+        "unsafe": [],
+        "duplicates": [],
+        "missing": [],
+        "extra": [],
+        "mismatches": [],
+        "tree_expected": "7dc07a9a666b90e0e663ceb3e1a85da6683410183b2d7258d6ea8cb6b2ed6bcb",
+        "tree_actual": "7dc07a9a666b90e0e663ceb3e1a85da6683410183b2d7258d6ea8cb6b2ed6bcb",
+        "embedded_expected": "34ac140089072f5cdfe1e2f810bdf9d7c5f127f7c8c2861fca96544c43bf8f37",
+        "embedded_actual": "34ac140089072f5cdfe1e2f810bdf9d7c5f127f7c8c2861fca96544c43bf8f37"
+      },
+      "frozen_sha256_actual": "10061eb88e22bb613c87309b6d1d1812d193b8b3326e442af7980a2f236933a9",
+      "go": {
+        "executable_sha256_actual": "31b768982d23b5bcb3671fe18c51d9399ceb5b36ba429d8289434d04b90577b1",
+        "assets_sha_expected": "663fe8dc11e02cb25b2c15f381b666098e35efbfc5f611614c6419db7043e810",
+        "assets_sha_actual": "663fe8dc11e02cb25b2c15f381b666098e35efbfc5f611614c6419db7043e810",
+        "assets_crc": "PASS",
+        "assets_count": 1708,
+        "embedded_files_actual": "34ac140089072f5cdfe1e2f810bdf9d7c5f127f7c8c2861fca96544c43bf8f37",
+        "pyc_paths": []
+      },
+      "rcc": {
+        "path": "_internal/actions/server/bin/rcc-18.19.3.exe",
+        "bytes": 19985408,
+        "frozen_sha": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        "go_asset_sha": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        "release_asset_id": 534050858,
+        "release_bytes": 19985408,
+        "release_sha": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        "release_match": true
+      },
+      "source_files_sha256": {
+        "go-wrapper/main.go": "9900e4a078a9034c34825c88fd41a87057d92bd8ba0c244af3ac72b32d20e5ac",
+        "go-wrapper/process.go": "0d4799bded1e3ea4541e842ecc759aede699402f32b5c3a71f6302324ec7bb54",
+        "go-wrapper/go.mod": "b4d98f6120e047040aa59a14d59ea1f49294ecfd04e2ec4f10b03fee9c8e7555",
+        "go-wrapper/go.sum": "072e70954536a64961274d732d95b3185697a9d4cd9221fe135dbdb8efedc0bb"
+      },
+      "source_aggregate_expected": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+      "source_aggregate_lf_actual": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+      "small_acceptance": {
+        "id": 11659685974,
+        "status": "PASS",
+        "source": "2492f774841118496dbafd5e08b9066edaf170fa",
+        "inventory_equals_TAR": true
+      },
+      "workitems": {
+        "id": 11660015780,
+        "status": "PASS",
+        "source": "2492f774841118496dbafd5e08b9066edaf170fa"
+      }
+    },
+    "macOS": {
+      "status": "PASS_INTERNAL_AND_RELEASE_BINDING",
+      "artifacts": {
+        "prov": {
+          "id": 11659290459,
+          "name": "action-server-native-provenance-macos-15-38023233169-1",
+          "bytes": 50685697,
+          "api_sha256": "219ee8a9933b846c9fd7ee11e4ec92e7ad50dd4299be778b6c198acf5731e6d0",
+          "actual_sha256": "219ee8a9933b846c9fd7ee11e4ec92e7ad50dd4299be778b6c198acf5731e6d0",
+          "zip_crc": "PASS",
+          "members": 1
+        },
+        "go": {
+          "id": 11659340546,
+          "name": "action-server-unauthenticated-macos-15",
+          "bytes": 58604575,
+          "api_sha256": "a7a1d2779cb78b99f93714e982275fb78faa32be55f5f4bf9b216c62cbf1fde5",
+          "actual_sha256": "a7a1d2779cb78b99f93714e982275fb78faa32be55f5f4bf9b216c62cbf1fde5",
+          "zip_crc": "PASS",
+          "members": 1
+        },
+        "small": {
+          "id": 11659440480,
+          "name": "native-acceptance-macos-15-2492f774841118496dbafd5e08b9066edaf170fa",
+          "bytes": 297703,
+          "api_sha256": "ea85031d119f765ef8cc79dca4053ffc9fea7bae516f9a0c8fa4e453d4151be7",
+          "actual_sha256": "ea85031d119f765ef8cc79dca4053ffc9fea7bae516f9a0c8fa4e453d4151be7",
+          "zip_crc": "PASS",
+          "members": 14
+        },
+        "work": {
+          "id": 11659770456,
+          "name": "dakota-workitems-native-macos-15-38023233169-1",
+          "bytes": 1567,
+          "api_sha256": "913f192967a8c90c338db381fb2afba7e2f618897470cf733374b3523abe388f",
+          "actual_sha256": "913f192967a8c90c338db381fb2afba7e2f618897470cf733374b3523abe388f",
+          "zip_crc": "PASS",
+          "members": 1
+        }
+      },
+      "manifest": {
+        "source_sha": "2492f774841118496dbafd5e08b9066edaf170fa",
+        "platform": "Darwin",
+        "frozen": {
+          "path": "dist/action-server/action-server",
+          "sha256": "e08dfb73ea0c2d2aa404f6cf7983db2ab50e689e8e71b01acd1454cfb4faa661",
+          "embedded_files_sha256": "919c4204562ff640575a8df57f68ae00758026bd56656dc44d1cff8d61163d82",
+          "assets_zip_sha256": "29360a35f2450a3615f23480448ed76c1ef0e479b5dc79de78891c82dba332d5",
+          "assets_zip_path": "go-wrapper/assets/assets.zip",
+          "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+          "wrapper_source_files": [
+            "go-wrapper/main.go",
+            "go-wrapper/process.go",
+            "go-wrapper/go.mod",
+            "go-wrapper/go.sum"
+          ],
+          "frozen_package_tree_sha256": "f6218a50dc5765ab953a3964ff77c191dfda7468223e95046cf9a09928edc646",
+          "frozen_package_tree_inventory_path": "output/native-artifact-tree-inventory.json"
+        },
+        "go": {
+          "path": "dist/final/action-server",
+          "sha256": "e9bb40520840eeec46828ff059df94124713191352c9d52e494b9764913d2113",
+          "embedded_files_sha256": "919c4204562ff640575a8df57f68ae00758026bd56656dc44d1cff8d61163d82",
+          "assets_zip_sha256": "29360a35f2450a3615f23480448ed76c1ef0e479b5dc79de78891c82dba332d5",
+          "assets_zip_path": "go-wrapper/assets/assets.zip",
+          "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+          "wrapper_source_files": [
+            "go-wrapper/main.go",
+            "go-wrapper/process.go",
+            "go-wrapper/go.mod",
+            "go-wrapper/go.sum"
+          ],
+          "frozen_package_tree_sha256": "f6218a50dc5765ab953a3964ff77c191dfda7468223e95046cf9a09928edc646",
+          "frozen_package_tree_inventory_path": "output/native-artifact-tree-inventory.json"
+        }
+      },
+      "inventory": {
+        "tar_members": 1168,
+        "entries": 1165,
+        "inventory_entries": 1165,
+        "unsafe": [],
+        "duplicates": [],
+        "missing": [],
+        "extra": [],
+        "mismatches": [],
+        "tree_expected": "f6218a50dc5765ab953a3964ff77c191dfda7468223e95046cf9a09928edc646",
+        "tree_actual": "f6218a50dc5765ab953a3964ff77c191dfda7468223e95046cf9a09928edc646",
+        "embedded_expected": "919c4204562ff640575a8df57f68ae00758026bd56656dc44d1cff8d61163d82",
+        "embedded_actual": "919c4204562ff640575a8df57f68ae00758026bd56656dc44d1cff8d61163d82"
+      },
+      "frozen_sha256_actual": "e08dfb73ea0c2d2aa404f6cf7983db2ab50e689e8e71b01acd1454cfb4faa661",
+      "go": {
+        "executable_sha256_actual": "e9bb40520840eeec46828ff059df94124713191352c9d52e494b9764913d2113",
+        "assets_sha_expected": "29360a35f2450a3615f23480448ed76c1ef0e479b5dc79de78891c82dba332d5",
+        "assets_sha_actual": "29360a35f2450a3615f23480448ed76c1ef0e479b5dc79de78891c82dba332d5",
+        "assets_crc": "PASS",
+        "assets_count": 1045,
+        "embedded_files_actual": "919c4204562ff640575a8df57f68ae00758026bd56656dc44d1cff8d61163d82",
+        "pyc_paths": []
+      },
+      "rcc": {
+        "path": "_internal/actions/server/bin/rcc-18.19.3",
+        "bytes": 20904864,
+        "frozen_sha": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+        "go_asset_sha": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+        "release_asset_id": 534050855,
+        "release_bytes": 20886722,
+        "release_sha": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+        "release_match": "MATCHES_PRIOR_VERIFIED_SIGNATURE_ONLY_PACKAGE_BYTES"
+      },
+      "source_files_sha256": {
+        "go-wrapper/main.go": "9900e4a078a9034c34825c88fd41a87057d92bd8ba0c244af3ac72b32d20e5ac",
+        "go-wrapper/process.go": "0d4799bded1e3ea4541e842ecc759aede699402f32b5c3a71f6302324ec7bb54",
+        "go-wrapper/go.mod": "b4d98f6120e047040aa59a14d59ea1f49294ecfd04e2ec4f10b03fee9c8e7555",
+        "go-wrapper/go.sum": "072e70954536a64961274d732d95b3185697a9d4cd9221fe135dbdb8efedc0bb"
+      },
+      "source_aggregate_expected": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+      "source_aggregate_lf_actual": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+      "small_acceptance": {
+        "id": 11659440480,
+        "status": "PASS",
+        "source": "2492f774841118496dbafd5e08b9066edaf170fa",
+        "inventory_equals_TAR": true
+      },
+      "workitems": {
+        "id": 11659770456,
+        "status": "PASS",
+        "source": "2492f774841118496dbafd5e08b9066edaf170fa"
+      }
+    }
+  },
+  "macOS_transform_reuse": {
+    "prior_receipt_sha256": "0cef9ea720987453f8db552ae379460281eb471ee1eb9784821c50dc74beba82",
+    "fresh_frozen_hash_size_equal_prior_input": true,
+    "fresh_go_asset_hash_size_equal_prior_input": true,
+    "prior_transform_result": "signature-only byte transform; receipt preserved",
+    "details": {
+      "release_bytes": 20886722,
+      "release_sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+      "bundle_bytes": 20904864,
+      "bundle_sha256": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+      "frozen_equals_go_asset": true,
+      "non_signature_byte_differences_outside_signature_metadata": 0,
+      "exact_changed_ranges": [
+        {
+          "range": [
+            1552,
+            1554
+          ],
+          "type": "__LINKEDIT.vmsize low bytes",
+          "release_hex": "c234",
+          "packaged_hex": "0080"
+        },
+        {
+          "range": [
+            1568,
+            1570
+          ],
+          "type": "__LINKEDIT.filesize low bytes",
+          "release_hex": "c234",
+          "packaged_hex": "a07b"
+        },
+        {
+          "range": [
+            2172,
+            2174
+          ],
+          "type": "LC_CODE_SIGNATURE.datasize low bytes",
+          "release_hex": "f278",
+          "packaged_hex": "d0bf"
+        }
+      ],
+      "changed_load_commands": [
+        {
+          "index": 4,
+          "command": "0x19",
+          "offset": 1520,
+          "size": 72,
+          "release_sha256": "063b5c08a175074fb87618f585f18900da3203e9bad97dee085fcfb3b059f3cb",
+          "bundle_sha256": "68e66cddce7034d0c019e6e96388d9154ae297bffdcb6d77c9742ca2250833e4",
+          "segment": "__LINKEDIT"
+        },
+        {
+          "index": 16,
+          "command": "0x1d",
+          "offset": 2160,
+          "size": 16,
+          "release_sha256": "1792063a35a74850b7efd83d1edfced333a072fff576e4d1e0e6aeb8ea5a4db5",
+          "bundle_sha256": "83e8815b4c9fba15b6bf2f470ec5d643e3b2db65806950678ce8ecbc6c10e127",
+          "segment": null
+        }
+      ],
+      "unchanged_load_command_indices": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "LC_RPATH_commands_present": [],
+      "LC_LOAD_DYLIB_indices_and_identical": [
+        11,
+        12,
+        13,
+        14
+      ],
+      "pre_signature_code_region": {
+        "range": [
+          2176,
+          20724688
+        ],
+        "sha256": "4fc8c833f32a5062f810c569812ce5e62c4476570d340fcbc78ecd24d0be703c",
+        "identical": true
+      },
+      "__LINKEDIT": {
+        "command_offset": 1520,
+        "fileoff_equal": true,
+        "vmsize_field_offset": 1552,
+        "release_vmsize": 472258,
+        "packaged_vmsize": 491520,
+        "filesize_field_offset": 1568,
+        "release_filesize": 472258,
+        "packaged_filesize": 490400
+      },
+      "release_LC_CODE_SIGNATURE": {
+        "load_command_offset": 2160,
+        "dataoff": 20724688,
+        "datasize": 162034,
+        "blob_sha256": "6d0c595ddfcd1c9cb09ea729d4b62244aa942caa43682910a18e9f6270df3631",
+        "superblob": {
+          "magic": "0xfade0cc0",
+          "length": 162034,
+          "count": 1,
+          "sha256": "6d0c595ddfcd1c9cb09ea729d4b62244aa942caa43682910a18e9f6270df3631",
+          "trailing_padding_bytes": 0,
+          "trailing_padding_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "slots": [
+            {
+              "slot_type": "0x0",
+              "blob_magic": "0xfade0c02",
+              "offset_in_superblob": 20,
+              "length": 162014,
+              "sha256": "9beb92a995fc0b598f119a687d10b89b6941726951ea218684ec5ac39e7ac34d"
+            }
+          ]
+        }
+      },
+      "bundled_LC_CODE_SIGNATURE": {
+        "load_command_offset": 2160,
+        "dataoff": 20724688,
+        "datasize": 180176,
+        "blob_sha256": "e7303752a337de9d4c4bb84e737346f64fe6b77a4fc8eb3e6689dbd7dc22f953",
+        "superblob": {
+          "magic": "0xfade0cc0",
+          "length": 162176,
+          "count": 3,
+          "sha256": "e7303752a337de9d4c4bb84e737346f64fe6b77a4fc8eb3e6689dbd7dc22f953",
+          "trailing_padding_bytes": 18000,
+          "trailing_padding_sha256": "a449143636d0c1e40605ef04ba2415d4b249ced9cac2ce491aafd20f45d300c8",
+          "slots": [
+            {
+              "slot_type": "0x0",
+              "blob_magic": "0xfade0c02",
+              "offset_in_superblob": 36,
+              "length": 162120,
+              "sha256": "c1a2c156bf86ab7d96addc89db31ba1b035d2aaf37f51fa9156ed3457cf858b7"
+            },
+            {
+              "slot_type": "0x2",
+              "blob_magic": "0xfade0c01",
+              "offset_in_superblob": 162156,
+              "length": 12,
+              "sha256": "987920904eab650e75788c054aa0b0524e6a80bfc71aa32df8d237a61743f986"
+            },
+            {
+              "slot_type": "0x10000",
+              "blob_magic": "0xfade0b01",
+              "offset_in_superblob": 162168,
+              "length": 8,
+              "sha256": "e6c83bc98a10348492c7d4d2378a54572ef29e1a5692ccd02b5e29f4b762d6a0"
+            }
+          ]
+        }
+      },
+      "all_other_bytes_equal": true,
+      "classification": "all differing bytes are confined to LC_CODE_SIGNATURE blob bytes plus the exact __LINKEDIT vmsize/filesize and LC_CODE_SIGNATURE datasize fields; all other headers, load commands, and pre-signature code/data bytes are identical. This proves the byte transformation is limited to signature data/required Mach-O metadata; it does not identify the actor or prove signature validity."
+    }
+  },
+  "limits": "Static archive/source/release-byte checks only; no binary execution. CI success is separate from this provenance receipt; no overall Runtime PASS."
+}

@@ -1,0 +1,232 @@
+{
+  "schema": "independent-macos-rcc-release-transform/v1",
+  "result": "PASS_SIGNATURE_ONLY_BYTE_TRANSFORM; TRANSFORMATION_CAUSE_SUPPORTED_BY_PINNED_PYINSTALLER_SOURCE; NO_EXECUTION",
+  "inputs": {
+    "release": {
+      "release_id": 378613428,
+      "tag": "v18.19.3",
+      "tag_commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "asset_id": 534050855,
+      "name": "rcc-macosarm64",
+      "bytes": 20886722,
+      "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+    },
+    "packaged_frozen_and_go_assets": {
+      "frozen_member": "dist/action-server/_internal/actions/server/bin/rcc-18.19.3",
+      "go_assets_member": "_internal/actions/server/bin/rcc-18.19.3",
+      "frozen_bytes": 20904864,
+      "frozen_sha256": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+      "go_bytes": 20904864,
+      "go_sha256": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+      "frozen_equals_go": true
+    },
+    "release_download_command": "gh release download v18.19.3 --repo joshyorko/rcc --pattern rcc-macosarm64 --dir /workspaces/actions-worker-state/devsy-native-review/6ece-3os",
+    "release_download_attempts": 1,
+    "release_api_metadata": "gh api repos/joshyorko/rcc/releases/378613428 --jq metadata-only; exact id/name/size/digest matched"
+  },
+  "exact_diff": {
+    "release_bytes": 20886722,
+    "release_sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+    "bundle_bytes": 20904864,
+    "bundle_sha256": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+    "frozen_equals_go_asset": true,
+    "non_signature_byte_differences_outside_signature_metadata": 0,
+    "exact_changed_ranges": [
+      {
+        "range": [
+          1552,
+          1554
+        ],
+        "type": "__LINKEDIT.vmsize low bytes",
+        "release_hex": "c234",
+        "packaged_hex": "0080"
+      },
+      {
+        "range": [
+          1568,
+          1570
+        ],
+        "type": "__LINKEDIT.filesize low bytes",
+        "release_hex": "c234",
+        "packaged_hex": "a07b"
+      },
+      {
+        "range": [
+          2172,
+          2174
+        ],
+        "type": "LC_CODE_SIGNATURE.datasize low bytes",
+        "release_hex": "f278",
+        "packaged_hex": "d0bf"
+      }
+    ],
+    "changed_load_commands": [
+      {
+        "index": 4,
+        "command": "0x19",
+        "offset": 1520,
+        "size": 72,
+        "release_sha256": "063b5c08a175074fb87618f585f18900da3203e9bad97dee085fcfb3b059f3cb",
+        "bundle_sha256": "68e66cddce7034d0c019e6e96388d9154ae297bffdcb6d77c9742ca2250833e4",
+        "segment": "__LINKEDIT"
+      },
+      {
+        "index": 16,
+        "command": "0x1d",
+        "offset": 2160,
+        "size": 16,
+        "release_sha256": "1792063a35a74850b7efd83d1edfced333a072fff576e4d1e0e6aeb8ea5a4db5",
+        "bundle_sha256": "83e8815b4c9fba15b6bf2f470ec5d643e3b2db65806950678ce8ecbc6c10e127",
+        "segment": null
+      }
+    ],
+    "unchanged_load_command_indices": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "LC_RPATH_commands_present": [],
+    "LC_LOAD_DYLIB_indices_and_identical": [
+      11,
+      12,
+      13,
+      14
+    ],
+    "pre_signature_code_region": {
+      "range": [
+        2176,
+        20724688
+      ],
+      "sha256": "4fc8c833f32a5062f810c569812ce5e62c4476570d340fcbc78ecd24d0be703c",
+      "identical": true
+    },
+    "__LINKEDIT": {
+      "command_offset": 1520,
+      "fileoff_equal": true,
+      "vmsize_field_offset": 1552,
+      "release_vmsize": 472258,
+      "packaged_vmsize": 491520,
+      "filesize_field_offset": 1568,
+      "release_filesize": 472258,
+      "packaged_filesize": 490400
+    },
+    "release_LC_CODE_SIGNATURE": {
+      "load_command_offset": 2160,
+      "dataoff": 20724688,
+      "datasize": 162034,
+      "blob_sha256": "6d0c595ddfcd1c9cb09ea729d4b62244aa942caa43682910a18e9f6270df3631",
+      "superblob": {
+        "magic": "0xfade0cc0",
+        "length": 162034,
+        "count": 1,
+        "sha256": "6d0c595ddfcd1c9cb09ea729d4b62244aa942caa43682910a18e9f6270df3631",
+        "trailing_padding_bytes": 0,
+        "trailing_padding_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "slots": [
+          {
+            "slot_type": "0x0",
+            "blob_magic": "0xfade0c02",
+            "offset_in_superblob": 20,
+            "length": 162014,
+            "sha256": "9beb92a995fc0b598f119a687d10b89b6941726951ea218684ec5ac39e7ac34d"
+          }
+        ]
+      }
+    },
+    "bundled_LC_CODE_SIGNATURE": {
+      "load_command_offset": 2160,
+      "dataoff": 20724688,
+      "datasize": 180176,
+      "blob_sha256": "e7303752a337de9d4c4bb84e737346f64fe6b77a4fc8eb3e6689dbd7dc22f953",
+      "superblob": {
+        "magic": "0xfade0cc0",
+        "length": 162176,
+        "count": 3,
+        "sha256": "e7303752a337de9d4c4bb84e737346f64fe6b77a4fc8eb3e6689dbd7dc22f953",
+        "trailing_padding_bytes": 18000,
+        "trailing_padding_sha256": "a449143636d0c1e40605ef04ba2415d4b249ced9cac2ce491aafd20f45d300c8",
+        "slots": [
+          {
+            "slot_type": "0x0",
+            "blob_magic": "0xfade0c02",
+            "offset_in_superblob": 36,
+            "length": 162120,
+            "sha256": "c1a2c156bf86ab7d96addc89db31ba1b035d2aaf37f51fa9156ed3457cf858b7"
+          },
+          {
+            "slot_type": "0x2",
+            "blob_magic": "0xfade0c01",
+            "offset_in_superblob": 162156,
+            "length": 12,
+            "sha256": "987920904eab650e75788c054aa0b0524e6a80bfc71aa32df8d237a61743f986"
+          },
+          {
+            "slot_type": "0x10000",
+            "blob_magic": "0xfade0b01",
+            "offset_in_superblob": 162168,
+            "length": 8,
+            "sha256": "e6c83bc98a10348492c7d4d2378a54572ef29e1a5692ccd02b5e29f4b762d6a0"
+          }
+        ]
+      }
+    },
+    "all_other_bytes_equal": true,
+    "classification": "all differing bytes are confined to LC_CODE_SIGNATURE blob bytes plus the exact __LINKEDIT vmsize/filesize and LC_CODE_SIGNATURE datasize fields; all other headers, load commands, and pre-signature code/data bytes are identical. This proves the byte transformation is limited to signature data/required Mach-O metadata; it does not identify the actor or prove signature validity."
+  },
+  "build_log": {
+    "job_id": 114122115515,
+    "run_id": 38021120872,
+    "path": "/workspaces/actions-worker-state/devsy-native-review/6ece-3os/macos-job-114122115515.log",
+    "sha256": "2eedf109b2b6d594405c21bfcc762734374d84dc60c8b3965e1f7785972e8993",
+    "RCC_collected_as_DATA_log_line": 4724,
+    "PyInstaller_log_lines": {
+      "identity_none": 5165,
+      "removing_signature_from_EXE": 5176,
+      "fixing_EXE_headers": 5179,
+      "resigning_EXE": 5181,
+      "GitHub_no_sign_flag": 5196
+    },
+    "log_scope": "These log summaries name the frozen Action Server EXE. Root-verified locked PyInstaller 6.16.0 source build_main.py:735-766 reclassifies Mach-O DATA as BINARY; utils.py:313-338 performs architecture/dependency/rpath preparation and sign_binary even with identity=None. The byte comparison independently shows only signature structures and required Mach-O size fields changed; this run had no LC_RPATH and no LC_LOAD_DYLIB differences. No actor attribution was inferred from the generic EXE log alone."
+  },
+  "source_and_prior_receipts": {
+    "native_run": 38021120872,
+    "source_head": "6ece09c439d12e02bcbde9dcd2164956b97829e2",
+    "source_tree": "a560aceae1fe26726989c5c17803bde477a26060",
+    "synthetic_source": "ccf6e06487a5f9a285d29b55a06fb175b72ca087",
+    "3a_receipt_sha256": "aaf4835da05159b496c3d446a4934292b8fd5ef33682c362bfc1f286b274e5f",
+    "6ece_receipt_sha256": "282e778aff1a9be637b2a33bc3854ebbdaffd27de147fd34b7d89510478a6b4e",
+    "both_prior_receipts_preserved": true
+  },
+  "evidence_files": {
+    "analysis_script_sha256": "372baba757b93d25a6077d8057e3e59369a11202194c4ae6deb1dfed14cab3ec",
+    "analysis_json_sha256": "b15c2b4665ee7204bd2052daf75ab9f8fc1a16fa001050f07098014ea134a1cd",
+    "release_binary_sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+    "raw_job_log_sha256": "2eedf109b2b6d594405c21bfcc762734374d84dc60c8b3965e1f7785972e8993"
+  },
+  "scope": "Static in-memory byte analysis only. No binary execution, test, source edit, credential change, or second release download. Signature validity was not tested.",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md, adjacent to native artifact provenance guidance.",
+    "exact_delta": "For macOS release-bundled Mach-O files, compare the exact owner-release bytes with the packaged bytes. Record every changed load-command field and signature blob range/hash; verify all remaining bytes and dylib/RPATH commands are identical before classifying a signature-only transform. PyInstaller 6.16.0 reclassifies Mach-O DATA as BINARY and runs architecture/dependency/rpath handling followed by sign_binary, including identity=None; still measure actual output instead of inferring that all differences are signatures.",
+    "durable_learning": "In 6ece, the packaged RCC equals its owner-release bytes outside the LC_CODE_SIGNATURE blob and the corresponding __LINKEDIT vmsize/filesize and LC_CODE_SIGNATURE datasize fields. All remaining load commands and the pre-signature content region match; no LC_RPATH is present and LC_LOAD_DYLIB commands are unchanged. The PyInstaller source/log explains the signing path, while exact byte comparison establishes this artifact\u2019s delta.",
+    "evidence": [
+      "Release asset 534050855 exact size/SHA verified before analysis; frozen TAR and Go embedded RCC bytes are byte-identical.",
+      "Diff ranges, field values, both SuperBlob slot inventories, padding and region hashes are in this receipt and the analysis JSON.",
+      "Exact macOS job 114122115515 log SHA and filtered signing lines are recorded; root verified PyInstaller 6.16.0 source references are listed above."
+    ],
+    "stale_or_ambiguous_guidance_removed": "No repository files changed in this read-only lane. Earlier uncertainty in receipt 282e778 remains preserved historically; this follow-up resolves the byte-level transform for the same 6ece candidate.",
+    "remaining_uncertainty": "The cryptographic validity/identity of the bundled signature was not verified; no native binary was executed."
+  },
+  "upstream_disposition": "none; no upstream defect found."
+}

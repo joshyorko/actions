@@ -1,0 +1,131 @@
+{
+  "status": "LINUX_STATIC_PROVENANCE_PASS",
+  "source": {
+    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "parents": [
+      "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+      "90f0d09e1da70e711e30352315797c74363dbba5"
+    ],
+    "workflow_synthetic": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "synthetic_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "synthetic_parents": [
+      "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "84b8c70a412db9594dfa2a6c5fcb3e8184db019b"
+    ],
+    "manifest_sha": "2492f774841118496dbafd5e08b9066edaf170fa"
+  },
+  "run": 38023233169,
+  "artifact_identities": {
+    "provenance": {
+      "id": 11659335348,
+      "name": "action-server-native-provenance-ubuntu-22.04-38023233169-1",
+      "bytes": 59337575,
+      "api_sha256": "3fde14c1244e73670661eb0f16276bed4f3d91caf3a2a521182ba1680ce94be2",
+      "actual_sha256": "3fde14c1244e73670661eb0f16276bed4f3d91caf3a2a521182ba1680ce94be2",
+      "zip_crc": "PASS",
+      "outer_member_count": 1
+    },
+    "go": {
+      "id": 11659780660,
+      "name": "action-server-unauthenticated-ubuntu-22.04",
+      "bytes": 77752001,
+      "api_sha256": "d7976d0aad3de470b7548eb5139205e4ed39b3d2421ae1d754d01d44f6d2b377",
+      "actual_sha256": "d7976d0aad3de470b7548eb5139205e4ed39b3d2421ae1d754d01d44f6d2b377",
+      "zip_crc": "PASS",
+      "outer_member_count": 1
+    },
+    "small": {
+      "id": 11660190314,
+      "name": "native-acceptance-ubuntu-22.04-2492f774841118496dbafd5e08b9066edaf170fa",
+      "bytes": 304930,
+      "api_sha256": "6ec76dc3a7ed7e45939a6d163a72b6a78408f5af7f157af930d9048e56f81057",
+      "actual_sha256": "6ec76dc3a7ed7e45939a6d163a72b6a78408f5af7f157af930d9048e56f81057",
+      "zip_crc": "PASS",
+      "outer_member_count": 14
+    },
+    "workitems": {
+      "id": 11659560717,
+      "name": "dakota-workitems-native-ubuntu-22.04-38023233169-1",
+      "bytes": 1564,
+      "api_sha256": "f42d1a13af68f9272d106f9a008578dca2c0ff7e0b1bc5fa61fa64eb50280452",
+      "actual_sha256": "f42d1a13af68f9272d106f9a008578dca2c0ff7e0b1bc5fa61fa64eb50280452",
+      "zip_crc": "PASS",
+      "outer_member_count": 1
+    }
+  },
+  "manifest_frozen": {
+    "path": "dist/action-server/action-server",
+    "sha256": "28a5d465a19def24bd30f77ed4b45833ee3e46894fccab3c60f3521e1fbfe08b",
+    "embedded_files_sha256": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df",
+    "assets_zip_sha256": "8fa425f0f6afa73168ef51421a542cf3e7a92e8cbfa3906b47100560e7e79e93",
+    "assets_zip_path": "go-wrapper/assets/assets.zip",
+    "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+    "wrapper_source_files": [
+      "go-wrapper/main.go",
+      "go-wrapper/process.go",
+      "go-wrapper/go.mod",
+      "go-wrapper/go.sum"
+    ],
+    "frozen_package_tree_sha256": "dfbde7b1daee4a037325112f776ff56dcf6c2d2bce94973d398712711c4927f3",
+    "frozen_package_tree_inventory_path": "output/native-artifact-tree-inventory.json"
+  },
+  "frozen_actual_sha256": "28a5d465a19def24bd30f77ed4b45833ee3e46894fccab3c60f3521e1fbfe08b",
+  "inventory": {
+    "tar_members": 1184,
+    "tree_entries": 1181,
+    "inventory_entries": 1181,
+    "unsafe_paths": [],
+    "duplicate_paths": [],
+    "missing": [],
+    "extra": [],
+    "mismatches": [],
+    "tree_sha_expected": "dfbde7b1daee4a037325112f776ff56dcf6c2d2bce94973d398712711c4927f3",
+    "tree_sha_actual": "dfbde7b1daee4a037325112f776ff56dcf6c2d2bce94973d398712711c4927f3",
+    "embedded_files_expected": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df",
+    "embedded_files_actual": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df"
+  },
+  "go": {
+    "path": "action-server",
+    "sha256_expected": "1606fc2961ad107ddb360a46a7bb3c055e750ab8e83c4a94931fc82722d13af9",
+    "sha256_actual": "1606fc2961ad107ddb360a46a7bb3c055e750ab8e83c4a94931fc82722d13af9",
+    "assets_zip_expected": "8fa425f0f6afa73168ef51421a542cf3e7a92e8cbfa3906b47100560e7e79e93",
+    "assets_zip_actual": "8fa425f0f6afa73168ef51421a542cf3e7a92e8cbfa3906b47100560e7e79e93",
+    "assets_zip_crc": "PASS",
+    "asset_count": 1060,
+    "embedded_files_expected": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df",
+    "embedded_files_actual": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df",
+    "pyc_paths": []
+  },
+  "rcc": {
+    "path": "_internal/actions/server/bin/rcc-18.19.3",
+    "bytes": 22282402,
+    "frozen_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "go_assets_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "release_owner": "joshyorko/rcc v18.19.3 release 378613428, tag 4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+    "release_asset_id": 534050859,
+    "release_bytes": 22282402,
+    "release_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "matches_release": true
+  },
+  "wrapper_source_files_sha256": {
+    "go-wrapper/main.go": "9900e4a078a9034c34825c88fd41a87057d92bd8ba0c244af3ac72b32d20e5ac",
+    "go-wrapper/process.go": "0d4799bded1e3ea4541e842ecc759aede699402f32b5c3a71f6302324ec7bb54",
+    "go-wrapper/go.mod": "b4d98f6120e047040aa59a14d59ea1f49294ecfd04e2ec4f10b03fee9c8e7555",
+    "go-wrapper/go.sum": "072e70954536a64961274d732d95b3185697a9d4cd9221fe135dbdb8efedc0bb"
+  },
+  "wrapper_source_aggregate_expected": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+  "wrapper_source_aggregate_git_lf": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+  "small_acceptance": {
+    "artifact_id": 11660190314,
+    "status": "PASS",
+    "source_sha": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "inventory_identical_to_tar": true
+  },
+  "workitems": {
+    "artifact_id": 11659560717,
+    "status": "PASS",
+    "source_sha": "2492f774841118496dbafd5e08b9066edaf170fa"
+  },
+  "method": "All files read in memory; nested archive inventory, link and content digests recomputed; no extraction or execution."
+}

@@ -1,0 +1,167 @@
+{
+  "schema": "actions.native-d8-linux-browser-acceptance/v1",
+  "status": "PASS_LINUX_CLI_AND_BROWSER_API_ONLY",
+  "scope_limits": [
+    "Linux only",
+    "two specified browser test runs only, one per binary",
+    "loopback runtime only",
+    "no full-runtime, Windows, macOS, or release claim",
+    "no worker SIGTERM topology claim"
+  ],
+  "source_binding": {
+    "run_id": 38022353748,
+    "workflow_checkout": "b20fc815aee5a4a303c7b90d6823b2351c30d452",
+    "workflow_tree": "4633ee098b97c09bb0552fc40bcf59d58e28ef5d",
+    "PR_head": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+    "reviewer_receipt_sha256": "67fc0f7c7b726405c0f9ea71d5abe0071e3ec78e073ccb493482acec9f33dda3"
+  },
+  "artifacts": {
+    "provenance_archive": {
+      "path": "/workspaces/actions-worker-state/devsy-native-review/d8dc-3os/linux-provenance.zip",
+      "bytes": 59339949,
+      "sha256": "cef2c76b286c842dc2d7b8dfe922b9bb24c0cfa4f6956e8fd277865db2d127c6"
+    },
+    "go_archive": {
+      "path": "/workspaces/actions-worker-state/devsy-native-review/d8dc-3os/linux-go.zip",
+      "bytes": 77752248,
+      "sha256": "699715590a187d2a8609594ca27b70d11e2a8296faff11f78f8d551242411f80"
+    },
+    "frozen_copy": {
+      "path": "/workspaces/actions-worker-state/devsy-native-auth/d8dc-linux-cli-acceptance/tree/action-server",
+      "sha256": "28a5d465a19def24bd30f77ed4b45833ee3e46894fccab3c60f3521e1fbfe08b"
+    },
+    "go_copy": {
+      "path": "/workspaces/actions-worker-state/devsy-native-auth/d8dc-linux-cli-acceptance/go/action-server",
+      "sha256": "ba4a7deae85b97a63bc9f394f253c09c7c6f6e08111a88cf692aaba00efc94a5"
+    },
+    "frozen_tree_inventory": {
+      "entries": 1181,
+      "hidden": 0,
+      "symlinks": 16,
+      "missing": 0,
+      "extra": 0,
+      "mismatches": 0,
+      "tree_sha256": "666e7825f12f7941c84c98a1df7dd01e2eb423f15c8248daecfeb7968bb034e0",
+      "embedded_files_sha256": "83224ef470e7805e4b3616078c35f8d877a9d69b65b74e1d3a256ab2c1e11194"
+    }
+  },
+  "harness_binding": {
+    "test": "action_server/tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+    "test_sha256": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+    "fixtures_sha256": "516ab050ab9d4b34deb4837555a0b71321877b97218d57e91c403aa01cb11288",
+    "process_owner_sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+    "pytest_config_sha256": "12cb8ba479c61c37a0ab84ec050200b81c6cb382c01df2f77fd51d68de7e48ab",
+    "node_modules": "read-only symlink to prepared auth frontend node_modules",
+    "package_lock_sha256": "ac27ea2d36851698a8d78bbd7cf1fe09957543f367a6dbd93efb26f88cf6a640",
+    "versions": {
+      "python": "3.12.15",
+      "pytest": "8.4.2",
+      "node": "20.19.3",
+      "@playwright/test": "1.62.1",
+      "playwright-core": "1.62.1",
+      "axe-core": "4.11.1",
+      "chromium_revision": "1234",
+      "chromium_version": "151.0.7922.34"
+    },
+    "prepared_python_lock_sha256": "6b4ef3b087598a9a3ceb29a1f04cba57e8743dea587783642c2c1a4c7ce4757e"
+  },
+  "results": {
+    "frozen": {
+      "binary": "frozen",
+      "status": "PASS",
+      "exit_code": 0,
+      "elapsed_seconds": 6.48,
+      "command": [
+        "prepared-python-3.12.15",
+        "-m",
+        "pytest",
+        "-q",
+        "-m",
+        "integration_test",
+        "test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix"
+      ],
+      "raw_capture_bytes": 234,
+      "raw_capture_sha256": "362f93551ec3d91a462d5357f42b079793156b28302b9a784b29602adc2a250a",
+      "redacted_log_bytes": 234,
+      "redacted_log_sha256": "362f93551ec3d91a462d5357f42b079793156b28302b9a784b29602adc2a250a",
+      "pass_marker": true,
+      "failure_marker": false,
+      "process_signals_sent_by_runner": false,
+      "log_path": "/workspaces/actions-worker-state/devsy-native-auth/d8dc-linux-cli-acceptance/browser-acceptance/frozen/logs/pytest.redacted.log"
+    },
+    "go_wrapper": {
+      "binary": "go-wrapper",
+      "status": "PASS",
+      "exit_code": 0,
+      "elapsed_seconds": 5.498,
+      "command": [
+        "prepared-python-3.12.15",
+        "-m",
+        "pytest",
+        "-q",
+        "-m",
+        "integration_test",
+        "test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix"
+      ],
+      "raw_capture_bytes": 234,
+      "raw_capture_sha256": "a2f7829331a945a047aa08bd601799eed3d8f4507de814c2356d1857f15fbc5f",
+      "redacted_log_bytes": 234,
+      "redacted_log_sha256": "a2f7829331a945a047aa08bd601799eed3d8f4507de814c2356d1857f15fbc5f",
+      "pass_marker": true,
+      "failure_marker": false,
+      "process_signals_sent_by_runner": false,
+      "log_path": "/workspaces/actions-worker-state/devsy-native-auth/d8dc-linux-cli-acceptance/browser-acceptance/go-wrapper/logs/pytest.redacted.log"
+    },
+    "cli_previous_same_d8_source": {
+      "status": "PASS",
+      "receipt_path": "/workspaces/actions-worker-state/devsy-native-auth/d8dc-linux-cli-acceptance/linux-cli-receipt.json",
+      "receipt_sha256": "fe306ac327a5d189d6c7024b07961f97a4b84a59365b498bb06eff96b7dcea9f",
+      "cases": "--help/version/invalid command exits 0/0/2"
+    },
+    "browser_api": "Both selected test executions exited 0 (pytest reported 1 passed); the test asserted its parsed child JSON receipt status PASS. No standalone child receipt is emitted by this test."
+  },
+  "cleanup": {
+    "test_fixture_and_browser_owned_process_contexts": "completed without reported teardown failure; pytest exit 0 for both runs",
+    "driver_forced_signals": false,
+    "timeout_cleanup_observed": false,
+    "full_process_tree_or_SIGTERM_claim": false
+  },
+  "postrun_integrity": {
+    "frozen_copy_changed_entries": 0,
+    "frozen_copy_sha256": "28a5d465a19def24bd30f77ed4b45833ee3e46894fccab3c60f3521e1fbfe08b",
+    "go_binary_sha256": "ba4a7deae85b97a63bc9f394f253c09c7c6f6e08111a88cf692aaba00efc94a5",
+    "go_wrapper_home_cache_delta": {
+      "entries": 1184,
+      "missing": 0,
+      "extra": [
+        "app_hash",
+        "extract.lock",
+        "lastLaunchTouch"
+      ],
+      "changed_field_counts": {
+        "kind": 16,
+        "link_target": 16,
+        "mode": 945,
+        "content_sha256": 0
+      },
+      "pyc_count": 0,
+      "location": "task-owned HOME only"
+    }
+  },
+  "worktrees": {
+    "auth_head": "c1c33ce77895d7b522f2229524d386ed72f8ba3b",
+    "auth_clean": true,
+    "d8_head": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+    "d8_clean": true,
+    "7f_history_preserved": true,
+    "source_changes": false
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "exact_delta": "The live browser-origin acceptance requires frontend Node module resolution for @playwright/test and axe-core as well as Node and Chromium. A checkout missing these prepared dependencies is blocked; do not substitute global modules or install dependencies during acceptance.",
+    "evidence": "d8 selected test source imports these packages; the prepared module versions matched the d8 lock, Chromium revision matched, and the test passed once per packaged binary.",
+    "stale_guidance_removed": "None; read-only proposal only.",
+    "remaining_uncertainty": "The test does not persist its child JSON receipt as a separate artifact; no standalone receipt file was emitted. The run does not cover process-tree SIGTERM behavior or other platforms."
+  },
+  "upstream_disposition": "none"
+}
