@@ -31,6 +31,117 @@ def test_artifact_digest_parser_accepts_only_exact_identity():
             parse_artifact_digest(payload)
 
 
+def test_publish_artifact_details_preserves_one_pinned_rcc_payload_and_provider():
+    from actions.server._rcc_runtime_adapter import (
+        RccPublishedArtifactDetails,
+        publish_artifact_details,
+    )
+
+    specification_digest = "sha256:" + "a" * 64
+    artifact_digest = "sha256:" + "b" * 64
+    provider = "https://cache.example:8134/root"
+    payload = {
+        "artifactDigest": artifact_digest,
+        "specificationDigest": specification_digest,
+        "legacyBlueprintKey": "fixture-blueprint",
+        "objectCount": 1,
+        "uploadedBytes": 12,
+        "reusedBytes": 34,
+    }
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return 0, json.dumps(payload), ""
+
+    details = publish_artifact_details(
+        Path("/package/package.yaml"),
+        Path("/opt/rcc"),
+        provider=provider,
+        runner=runner,
+    )
+
+    assert details == RccPublishedArtifactDetails(
+        specification_digest=specification_digest,
+        artifact_digest=artifact_digest,
+    )
+    assert calls == [
+        (
+            "/opt/rcc",
+            "env",
+            "publish",
+            "--environment",
+            "/package/package.yaml",
+            "--json",
+            "--provider",
+            provider,
+        )
+    ]
+
+
+@pytest.mark.parametrize(
+    "updates",
+    [
+        {"specificationDigest": None},
+        {"specificationDigest": "sha256:" + "a" * 63},
+        {"artifactDigest": None},
+        {"artifactDigest": "sha256:" + "b" * 63},
+        {"artifact_digest": "not-a-digest"},
+        {"digest": "sha256:" + "c" * 64},
+        {"artifact": {"digest": "sha256:" + "c" * 64}},
+        {"specification_digest": "sha256:" + "c" * 64},
+    ],
+)
+def test_publish_artifact_details_rejects_missing_malformed_or_conflicting_identity(
+    updates,
+):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        publish_artifact_details,
+    )
+
+    payload = {
+        "artifactDigest": "sha256:" + "a" * 64,
+        "specificationDigest": "sha256:" + "b" * 64,
+        **updates,
+    }
+
+    with pytest.raises(RccRuntimeError, match="publish"):
+        publish_artifact_details(
+            Path("/package/package.yaml"),
+            Path("/opt/rcc"),
+            runner=lambda *args: (0, json.dumps(payload), ""),
+        )
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"artifact": "sha256:" + "a" * 64},
+        {"artifact_digest": "sha256:" + "a" * 64},
+        {"artifactDigest": "sha256:" + "a" * 64},
+        {"digest": "sha256:" + "a" * 64},
+        {"artifact": {"digest": "sha256:" + "a" * 64}},
+        {"environment_artifact": {"digest": "sha256:" + "a" * 64}},
+    ],
+)
+def test_legacy_publish_artifact_keeps_artifact_only_payload_compatibility(payload):
+    from actions.server._rcc_runtime_adapter import publish_artifact
+
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return 0, json.dumps(payload), ""
+
+    assert (
+        publish_artifact(Path("/package/package.yaml"), Path("/opt/rcc"), runner=runner)
+        == "sha256:" + "a" * 64
+    )
+    assert len(calls) == 1
+    assert calls[0][1:3] == ("env", "publish")
+
+
 def test_runtime_descriptor_has_no_activation_path_authority():
     from actions.server._rcc_runtime_adapter import RccRuntimeDescriptor
 
