@@ -1136,7 +1136,7 @@
       "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
     }
   ],
-  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread\u2019s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
+  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread’s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
   "documentation_receipts": [
     {
       "lane": "Windows/RCC lifecycle review",
@@ -1268,7 +1268,7 @@
     },
     {
       "lane": "Current release/native worker reconciliation",
-      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254\u2013257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
+      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254–257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
     }
   ],
   "post_archive_observations": [
@@ -1371,7 +1371,7 @@
     },
     {
       "observed_at": "2026-10-09T19:36:24Z",
-      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255\u2013257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
+      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255–257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
     },
     {
       "event": "Existing RCC ToolkitTest command now discovers the graph regression wrapper: v18.19.3 local run exited 0, Ruff developer passed, pytest 26/26 passed; receipt evidence/community-graph-toolkit-test-20261009.json. No hosted workflow result is inferred; the immutable graph amendment ZIP is unchanged."
@@ -1446,7 +1446,7 @@
     },
     {
       "observed_at": "2026-10-09T22:23:22Z",
-      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07\u201322:11 read errors remain historical. No worker-lane progress is inferred."
+      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07–22:11 read errors remain historical. No worker-lane progress is inferred."
     }
   ],
   "admission_checkpoint": {
@@ -2673,7 +2673,7 @@
     "native_status": "completed",
     "bootstrap_request": "actions-bootstrap-20261009-1832",
     "native_permission_limitation": "Superseded: authorized native request/settings supplied approvalPolicy=never and sandbox.type=dangerFullAccess, confirmed from native response/settings-updated event. Do not infer from null aggregate effective configuration.",
-    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout\u2019s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe\u2026`, integration base at `3ed98dd\u2026`, upstream reporting docs at `57399b60\u2026`, and Actions Core release at `df7b0d66\u2026`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor\u2019s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
+    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout’s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe…`, integration base at `3ed98dd…`, upstream reporting docs at `57399b60…`, and Actions Core release at `df7b0d66…`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor’s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
     "engineering_threads_dispatched": 5,
     "old_approvals_resumed": false,
     "workspace_recreated": false,
@@ -4021,19 +4021,18 @@
     "scope": "The b676 artifact-admission PASS remains predecessor-bound; it is not relabeled as an exact 524e503b result. No whole #208 acceptance or publication."
   },
   "prior_current_convergence_update_20261010T0051Z": {
-    "observed_at_utc": "2026-10-10T00:55:27Z",
-    "path": "evidence/convergence-followup-20261010T0056Z.json",
-    "sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa",
+    "observed_at_utc": "2026-10-10T00:51:29Z",
+    "path": "evidence/convergence-followup-20261010T0051Z.json",
+    "sha256": "9712e067399bacfc8820fec77ee5592a1fda0be7466e9784a46e2bf2d9b4eb7d",
     "cohort": {
       "items": 21,
-      "target_integrated": 16,
-      "blocked_open": 5,
+      "target_integrated": 15,
+      "blocked_open": 6,
       "merge_ready": 0,
       "target_integrated_prs": [
         219,
         220,
         251,
-        256,
         257,
         259,
         262,
@@ -4052,94 +4051,89 @@
         216,
         217,
         218,
-        221
+        221,
+        256
       ]
     },
     "open_pr_audit": {
-      "path": "evidence/convergence-live-prs-20261010T0056Z.json",
-      "sha256": "e82b66d3c81960f134dbe6d76450519a9db312e96d21da2f5201b7431c0b47f7",
-      "open_count": 5,
+      "path": "evidence/convergence-live-prs-20261010T0051Z.json",
+      "sha256": "af7151912e6369ca7677e42369fdecefa098c02b17f6598c0986781a2b8f2ebe",
+      "open_count": 6,
       "all_drafts": true,
       "exact_pr_heads": {
         "215": "d07f79b355f976f97948720474fd050d0a32ea16",
         "216": "d26fa423080cec22522402f2193b17a5f32b336a",
         "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
         "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
-        "221": "c6b682012ae791e744cb7116600b3869d06c7b4d"
+        "221": "77e67de36606ac4cb958874249a61ceff79dcd01",
+        "256": "524e503b384a56bf854326c1f7f03833c60e6c53"
       }
     },
     "branch_readback": {
       "community": {
-        "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
         "ref": "refs/heads/community",
+        "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
         "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
       },
       "integration": {
-        "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
         "ref": "refs/heads/integration/community-release-20261008",
-        "tree": "7621ef2050941df416c1b7448859a8d3bb4ee443"
+        "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
+        "tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9"
       },
       "runtime_candidate": {
-        "head": "6a53578fac029a0696834c30438c858f5f0003be",
         "ref": "refs/heads/integration/runtime-release-final-20261009",
+        "head": "6a53578fac029a0696834c30438c858f5f0003be",
         "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
       },
       "source": "git ls-remote plus commit tree readback",
-      "receipt": "evidence/convergence-refs-20261010T0056Z.txt",
-      "receipt_sha256": "567ebe38b18bb448e5b43a016a40ef8abce3f5f4e08e700aa33de925fa9a2bdd"
+      "receipt": "evidence/convergence-refs-20261010T0051Z.txt",
+      "receipt_sha256": "ab50217bb955317ade4de75dacea7b4cb70c9ff6bc7f90c86a0fc247e1dcd2af"
     },
     "issue_acceptance_changed": false,
     "stage_counts_unchanged": true,
     "release_state": {
       "core": "1.0.2 published and verified",
-      "core_decorator_metadata_api": "Source remains unreleased and requires a separately versioned Core package.",
       "helper": "1.0.3 published and verified",
-      "runtime_native": "1.0.3 held and unpublished"
+      "runtime_native": "1.0.3 held and unpublished",
+      "core_meta_api": "Current source API remains unreleased and requires a separately versioned Core package; this is not a blanket Runtime release blocker beyond actual API consumers."
     },
     "pr221_current_readback": {
-      "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
-      "observed_at_utc": "2026-10-10T00:55:27Z",
+      "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
       "checks": {
-        "success": 4,
-        "in_progress": 20,
-        "queued": 4
+        "success": 29,
+        "skipped": 1
       },
-      "checkout_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
-      "admission": "New community-base exact-head checks are running; root owns admission.",
-      "receipt": "evidence/convergence-live-prs-20261010T0056Z.json",
-      "receipt_sha256": "e82b66d3c81960f134dbe6d76450519a9db312e96d21da2f5201b7431c0b47f7"
+      "merge_state": "CLEAN",
+      "receipt": "evidence/convergence-live-prs-20261010T0051Z.json"
     },
     "pr256_current_readback": {
       "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
-      "merge_sha": "c6b682012ae791e744cb7116600b3869d06c7b4d",
-      "merge_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
-      "tested_synthetic_sha": "54825acf84d1995c3f1c5242e8cf3b670dc122ad",
-      "run_id": 38010164278,
-      "observed_at_utc": "2026-10-10T00:54:25Z",
-      "source_review": "ACCEPT bounded source only",
-      "checks": {
-        "required": 12,
-        "success": 12,
-        "skipped": 1,
-        "publication": "SKIPPED"
+      "run_ids": {
+        "native": 38010164278,
+        "rcc": 38010164271,
+        "coverage": 38010164269,
+        "work_items_verify": 38010164275,
+        "audit": 38010164331
       },
-      "artifact_review": "PASS_BOUNDED for Linux and Windows; macOS UI not configured",
-      "merge_tree_matches_tested_tree": true,
-      "receipt": "evidence/pr256-524-integration-readback-20261010T0054Z.json",
-      "receipt_sha256": "edf9a463ee4e1b90b2ac4273a5568b8f150a0657c4dec564cbee719bd403fa4a",
-      "limits": "No whole #208 acceptance or publication; Cloud direct ZIP retrieval returned403, native review verified Linux/Windows artifact bytes."
+      "status_counts": {
+        "success": 12,
+        "skipped": 1
+      },
+      "source_review": "ACCEPT, bounded to 524e503b; configured Ruff, format, isort and diff checks pass.",
+      "artifact_review": "Pending; artifact API metadata was present but Cloud retrieval returned HTTP 403.",
+      "receipt": "evidence/pr256-check-readback-20261010T0051Z.json"
     },
     "rcc_status": {
       "remote_branch": "devsy/rcc-local-acceptance-20261009",
-      "broad_candidate_head": "6a0db09d2623d084ae0de43f7ec7737bd28ea157",
-      "reviewed_candidate": "c8e661a44ade26016725cbfb2b30663d32012059",
-      "status": "Not admitted. Independent source review is BLOCKED on a snapshot-pruning lifetime defect; no live concurrent regression yet. Additional candidate cleanup, immutable receipt binding, and observed server exit remain open.",
-      "review_receipt": "evidence/rcc-c8-independent-snapshot-review-20261010T0048Z.json",
-      "review_receipt_sha256": "2c4fcb6c32dbb1d6f93132f46bce7e1cfe75a07ca29096cb896bb3106345bee5",
-      "upstream_disposition": "none; local Runtime lifecycle wiring"
+      "last_remote_readback": "6a0db09d2623d084ae0de43f7ec7737bd28ea157",
+      "admission": "Not admitted; no #134 completion claim.",
+      "current_owner_report": "The existing native RCC producer is active on a newer local candidate referred to as c8, but its full SHA and remote readback were not present in the observed source refs. Owner is correcting candidate cleanup, receipt SHA binding, server-exit observation, and a reviewed prune path that might delete snapshots still used by live workers.",
+      "reported_turn_prefix": "01a12339",
+      "evidence_boundary": "c8 and the active-turn status are coordinator-reported; only 6a0db09 is verified here as the remote branch head. The correction/review is not yet an admitted checkpoint.",
+      "upstream_disposition": "none; no upstream defect confirmed."
     },
-    "upstream_disposition": "none; no upstream defect established",
-    "receipt_sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa"
+    "upstream_disposition": "none",
+    "receipt_sha256": "9712e067399bacfc8820fec77ee5592a1fda0be7466e9784a46e2bf2d9b4eb7d"
   },
   "prior_current_next_action_20261010T0051Z": {
     "observed_at_utc": "2026-10-10T00:19:23Z",
