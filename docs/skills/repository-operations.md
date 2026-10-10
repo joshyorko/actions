@@ -3032,6 +3032,25 @@ catalog-ownership migration, require a newly built artifact and acceptance run;
 the older receipt does not establish their native behavior, Go-wrapper execution,
 or full release acceptance.
 
+The RCC acceptance verifier defaults to source Runtime mode and intentionally
+filters `SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE` from inherited
+process environments. Frozen and Go-wrapper modes require explicit package,
+build manifest, full-tree inventory, and provenance archive inputs; validate the
+selected executable and the complete frozen package against those records before
+forwarding the selector to the worker. Keep the candidate checkout/tree and
+metadata-derived Core/Helper wheel hashes and versions separate from native build
+source/tree and run/attempt identities. A manifest's Git HEAD is not a clean
+source attestation. The synthetic Action reports its managed worker prefix and
+both installed distribution roots so the measured wheel versions are tied to the
+actual worker environment. Go-wrapper proof also requires the matching measured
+assets ZIP, a fresh task-owned `HOME`, and a post-run comparison of the extracted
+file inventory and digest against the manifest's embedded-file identity; record
+the extracted filesystem tree digest separately because ZIP extraction does not
+preserve the frozen tree's symlink and directory metadata. Receipts keep
+`runtime_mode=candidate-wheel` and identify the separately selected
+`action_server_mode`; source-mode success does not establish native execution.
+The offline positive cells retain their existing meanings for every mode.
+
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
 the Poetry/Invoke command with `VIRTUAL_ENV` unset, then explicitly check the

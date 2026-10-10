@@ -24,6 +24,9 @@ CURRENT_RECEIPT = (
 
 
 def _harness():
+    scripts_path = str(SCRIPT.parent)
+    if scripts_path not in sys.path:
+        sys.path.insert(0, scripts_path)
     spec = importlib.util.spec_from_file_location("dakota_rcc_acceptance", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -80,7 +83,7 @@ def test_cli_help_is_available_before_linux_execution_guard(monkeypatch, capsys)
         harness.main(["--help"])
 
     assert exit_info.value.code == 0
-    assert "candidate-wheel" in capsys.readouterr().out
+    assert "source" in capsys.readouterr().out
 
 
 def test_cli_refuses_existing_receipt_before_linux_execution_guard(
@@ -144,8 +147,8 @@ def test_dakota_local_rcc_action_over_authenticated_http(tmp_path):
         [
             sys.executable,
             str(SCRIPT),
-            "--mode",
-            "candidate-wheel",
+            "--action-server-mode",
+            "source",
             "--receipt",
             str(receipt_path),
         ],
