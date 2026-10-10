@@ -1,0 +1,90 @@
+"/workspace/work/actions-mk3-integration/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/work/actions-mk3-integration/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.015s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 5598d290-c866-2ae4-a51d-5dad5ce3ff34. (parent/pid: 2934/2935)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.376s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.632s  Fresh holotree done [with 4 workers on 5 CPUs].
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-integration/developer/tmp" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-integration/developer/tmp" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-integration/developer/tmp" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+....                                                                     [100%]
+4 passed in 0.13s
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was SUCCESS. @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  11:20
+OK.
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.

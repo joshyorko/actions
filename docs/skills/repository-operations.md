@@ -2351,7 +2351,10 @@ contracts, historical hashes or acceptance. Resolve pointer freshness from
 observation times on amendments and substages, preserving older snapshots.
 
 The current Core publisher listens to `actions-core-*` tag pushes and has no
-manual-dispatch trigger. The generic `inv make-release` still requires `master`;
-it is not the community Core entrypoint. Verify accepted community ancestry,
+manual-dispatch trigger. On accepted Core1.0.3 community `a70993fa`, the generic
+`inv make-release` still requires `master`. The newer Runtime integration helper
+requires `community`, canonical origin and refreshed ancestry. Inspect this
+shared helper at the exact release source; identical Core trees do not imply
+identical helper code. Verify accepted community ancestry,
 package version, and absence of both tag and registry version before an immutable
 tag push. Workflow success still requires registry-byte and installed-API readback.
