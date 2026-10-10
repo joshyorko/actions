@@ -389,3 +389,134 @@ def test_unsupported_features_fail_without_fallback(root_fd, monkeypatch, featur
         )
     with pytest.raises(NotImplementedError, match="Linux|no.follow|descriptor"):
         reader.read_selected_files(root_fd, [], protected_input_names=[])
+
+
+@pytest.mark.parametrize("acquisition", ["existing_device", "replacement_device"])
+def test_device_is_classified_before_any_readable_open(
+    tmp_path, root_fd, monkeypatch, acquisition
+):
+    reader = _reader()
+    (tmp_path / "input").write_bytes(b"regular")
+    real_open = os.open
+    device_root = real_open("/dev", os.O_RDONLY | os.O_DIRECTORY)
+    requested = []
+
+    def guard_device_open(path, flags, *args, **kwargs):
+        if path in {"null", "input"}:
+            requested.append(flags)
+            assert flags & os.O_PATH, "device acquisition attempted a read-capable open"
+            if acquisition == "replacement_device":
+                # Model the leaf changing to an actual device at the open syscall.
+                # The returned descriptor really pins /dev/null without driver open.
+                return real_open("null", flags, dir_fd=device_root)
+        return real_open(path, flags, *args, **kwargs)
+
+    def forbidden_read(*args):
+        raise AssertionError("device reached content read")
+
+    monkeypatch.setattr(reader.os, "open", guard_device_open)
+    monkeypatch.setattr(
+        reader.os, "supports_dir_fd", reader.os.supports_dir_fd | {guard_device_open}
+    )
+    monkeypatch.setattr(reader.os, "read", forbidden_read)
+    try:
+        with pytest.raises(ValueError, match="regular file"):
+            reader.read_selected_files(
+                device_root if acquisition == "existing_device" else root_fd,
+                ["null" if acquisition == "existing_device" else "input"],
+                protected_input_names=[],
+            )
+    finally:
+        os.close(device_root)
+    assert len(requested) == 1
+
+
+@pytest.mark.parametrize("failure", ["proc_directory", "proc_reopen", "wrong_object"])
+def test_procfd_failures_do_not_read_or_leak_descriptors(
+    tmp_path, root_fd, monkeypatch, failure
+):
+    reader = _reader()
+    (tmp_path / "input").write_bytes(b"selected")
+    (tmp_path / "other").write_bytes(b"other")
+    real_open = os.open
+
+    def fail_proc_open(path, flags, *args, **kwargs):
+        if failure == "proc_directory" and path == "/proc/self/fd":
+            raise FileNotFoundError("procfd unavailable")
+        if isinstance(path, str) and path.isdecimal() and "dir_fd" in kwargs:
+            if failure == "proc_reopen":
+                raise FileNotFoundError("procfd reopening unavailable")
+            if failure == "wrong_object":
+                return real_open(tmp_path / "other", flags)
+        return real_open(path, flags, *args, **kwargs)
+
+    def forbidden_read(*args):
+        raise AssertionError("failed procfd acquisition reached content read")
+
+    monkeypatch.setattr(reader.os, "open", fail_proc_open)
+    monkeypatch.setattr(
+        reader.os, "supports_dir_fd", reader.os.supports_dir_fd | {fail_proc_open}
+    )
+    monkeypatch.setattr(reader.os, "read", forbidden_read)
+    before = set(os.listdir("/proc/self/fd"))
+    with pytest.raises(
+        ValueError if failure == "wrong_object" else NotImplementedError
+    ):
+        reader.read_selected_files(root_fd, ["input"], protected_input_names=[])
+    assert set(os.listdir("/proc/self/fd")) == before
+    os.fstat(root_fd)
+
+
+def test_missing_o_path_fails_without_fallback(root_fd, monkeypatch):
+    reader = _reader()
+    monkeypatch.delattr(reader.os, "O_PATH")
+    with pytest.raises(NotImplementedError, match="Linux|descriptor"):
+        reader.read_selected_files(root_fd, [], protected_input_names=[])
+
+
+@pytest.mark.parametrize("replacement", ["regular", "device_link"])
+def test_procfd_reopen_pins_original_leaf_and_rejects_replacement(
+    tmp_path, root_fd, monkeypatch, replacement
+):
+    reader = _reader()
+    leaf = tmp_path / "input"
+    leaf.write_bytes(b"original")
+    real_open = os.open
+    changed = False
+
+    def replace_before_proc_reopen(path, flags, *args, **kwargs):
+        nonlocal changed
+        if path == "input":
+            assert flags & os.O_PATH
+        if (
+            not changed
+            and isinstance(path, str)
+            and path.isdecimal()
+            and "dir_fd" in kwargs
+        ):
+            changed = True
+            leaf.rename(tmp_path / "old")
+            if replacement == "regular":
+                leaf.write_bytes(b"replacement")
+            else:
+                leaf.symlink_to("/dev/null")
+            fd = real_open(path, flags, *args, **kwargs)
+            assert os.fstat(fd).st_ino == (tmp_path / "old").stat().st_ino
+            return fd
+        return real_open(path, flags, *args, **kwargs)
+
+    def forbidden_read(*args):
+        raise AssertionError("replaced source reached content read")
+
+    monkeypatch.setattr(reader.os, "open", replace_before_proc_reopen)
+    monkeypatch.setattr(
+        reader.os,
+        "supports_dir_fd",
+        reader.os.supports_dir_fd | {replace_before_proc_reopen},
+    )
+    monkeypatch.setattr(reader.os, "read", forbidden_read)
+    before = set(os.listdir("/proc/self/fd"))
+    with pytest.raises(ValueError, match="changed|binding"):
+        reader.read_selected_files(root_fd, ["input"], protected_input_names=[])
+    assert changed
+    assert set(os.listdir("/proc/self/fd")) == before

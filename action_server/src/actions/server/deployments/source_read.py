@@ -3,7 +3,9 @@
 The caller owns verification and authorization of the root directory descriptor.
 Opened-object and parent/name comparisons reject observed mutations, but do not
 establish an atomic tree snapshot, original root pathname, or selected-set
-completeness. No source or staging publication occurs here.
+completeness. This boundary requires trusted Linux kernel procfs at
+``/proc/self/fd`` to reopen owned, classified O_PATH descriptors. No source or
+staging publication occurs here.
 """
 
 from __future__ import annotations
@@ -55,6 +57,7 @@ class MeasuredSelectedFiles:
 @dataclass(frozen=True)
 class _OpenedPath:
     fd: int
+    pinned_fd: int
     object: ObjectObservation
     directories: tuple[ObjectObservation, ...]
 
@@ -70,7 +73,9 @@ def read_selected_files(
     Own only a duplicate of ``root_fd`` and traversal handles. Validate the entire
     name/protection proposal before reading content; recheck opened objects and
     their parent/name bindings during each read and in a final selected-path pass.
-    These observations cannot prove global atomic coherence against a writer.
+    Trusted Linux kernel procfs is required for reopening classified O_PATH
+    leaves; there is no ordinary-path fallback. These observations cannot prove
+    global atomic coherence against a writer.
     """
     _require_linux_descriptors()
     selected = tuple(_validated_names(selected_file_names, "entries"))
@@ -88,6 +93,7 @@ def read_selected_files(
         root = _observation(os.fstat(owned_root))
         if root.file_type != stat.S_IFDIR:
             raise ValueError("source root descriptor must identify a directory")
+        proc_fd = _open_proc_directory(handles)
         measured: list[MeasuredFile] = []
         total_bytes = 0
 
@@ -95,7 +101,7 @@ def read_selected_files(
             nonlocal total_bytes
             for name in selected:
                 parts = source_manifest._validated_parts(name)
-                with _opened_path(owned_root, parts) as opened:
+                with _opened_path(owned_root, proc_fd, parts) as opened:
                     content = _read_bytes(opened.fd, opened.object, total_bytes)
                 total_bytes += len(content)
                 measured.append(MeasuredFile(name, opened.object, opened.directories))
@@ -108,7 +114,7 @@ def read_selected_files(
         )
         for item in measured:
             parts = source_manifest._validated_parts(item.path)
-            with _opened_path(owned_root, parts) as opened:
+            with _opened_path(owned_root, proc_fd, parts) as opened:
                 if (
                     opened.object != item.object
                     or opened.directories != item.directories
@@ -124,7 +130,13 @@ def _require_linux_descriptors() -> None:
         sys.platform != "linux"
         or any(
             not getattr(os, name, 0)
-            for name in ("O_DIRECTORY", "O_NOFOLLOW", "O_NONBLOCK", "O_CLOEXEC")
+            for name in (
+                "O_DIRECTORY",
+                "O_NOFOLLOW",
+                "O_NONBLOCK",
+                "O_CLOEXEC",
+                "O_PATH",
+            )
         )
         or os.open not in os.supports_dir_fd
         or os.stat not in os.supports_dir_fd
@@ -146,6 +158,21 @@ def _own_fd(handles: ExitStack, fd: int) -> int:
     return fd
 
 
+def _open_proc_directory(handles: ExitStack) -> int:
+    try:
+        return _own_fd(
+            handles,
+            os.open(
+                "/proc/self/fd",
+                os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC,
+            ),
+        )
+    except OSError as exc:
+        raise NotImplementedError(
+            "trusted Linux /proc/self/fd support is required"
+        ) from exc
+
+
 def _observation(value: os.stat_result) -> ObjectObservation:
     return ObjectObservation(
         value.st_dev,
@@ -160,7 +187,9 @@ def _observation(value: os.stat_result) -> ObjectObservation:
 
 
 @contextmanager
-def _opened_path(root_fd: int, parts: tuple[str, ...]) -> Iterator[_OpenedPath]:
+def _opened_path(
+    root_fd: int, proc_fd: int, parts: tuple[str, ...]
+) -> Iterator[_OpenedPath]:
     with ExitStack() as handles:
         directory_handles = [root_fd]
         directories = [_observation(os.fstat(root_fd))]
@@ -175,20 +204,35 @@ def _opened_path(root_fd: int, parts: tuple[str, ...]) -> Iterator[_OpenedPath]:
             directory_handles.append(fd)
             directories.append(observed)
 
-        fd = _own_fd(
+        pinned_fd = _own_fd(
             handles,
             os.open(
                 parts[-1],
-                os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC,
+                os.O_PATH | os.O_NOFOLLOW | os.O_CLOEXEC,
                 dir_fd=directory_handles[-1],
             ),
         )
-        observed_file = _observation(os.fstat(fd))
+        observed_file = _observation(os.fstat(pinned_fd))
         if observed_file.file_type != stat.S_IFREG or observed_file.links != 1:
             raise ValueError("selected source must be a regular file without hardlinks")
         if observed_file.mode & 0o7000:
             raise ValueError("privileged source file mode bits are forbidden")
-        opened = _OpenedPath(fd, observed_file, tuple(directories))
+        pinned = _OpenedPath(pinned_fd, pinned_fd, observed_file, tuple(directories))
+        _verify_bindings(pinned, directory_handles, parts)
+        try:
+            fd = _own_fd(
+                handles,
+                os.open(
+                    str(pinned_fd),
+                    os.O_RDONLY | os.O_NONBLOCK | os.O_CLOEXEC,
+                    dir_fd=proc_fd,
+                ),
+            )
+        except OSError as exc:
+            raise NotImplementedError(
+                "trusted Linux procfd reopening is required"
+            ) from exc
+        opened = _OpenedPath(fd, pinned_fd, observed_file, tuple(directories))
         _verify_bindings(opened, directory_handles, parts)
         yield opened
         _verify_bindings(opened, directory_handles, parts)
@@ -208,7 +252,10 @@ def _verify_bindings(
             )
             if _observation(named) != expected:
                 raise ValueError("source directory name binding changed")
-    if _observation(os.fstat(opened.fd)) != opened.object:
+    if (
+        _observation(os.fstat(opened.fd)) != opened.object
+        or _observation(os.fstat(opened.pinned_fd)) != opened.object
+    ):
         raise ValueError("selected source file changed during measurement")
     named_file = os.stat(parts[-1], dir_fd=directory_handles[-1], follow_symlinks=False)
     if _observation(named_file) != opened.object:

@@ -2300,20 +2300,28 @@ a Package Revision identity or compiler output.
 Linux-only measurement boundary below a caller-verified directory descriptor.
 It borrows that descriptor by duplicating it, validates explicit selected and
 protected names through the supplied-inventory policy before content reads,
-and opens each directory component with `O_DIRECTORY | O_NOFOLLOW`. It opens
-selected leaves with `O_NOFOLLOW | O_NONBLOCK`, rejects non-regular files,
-hardlinks and privileged mode bits, and limits both observed file sizes and
-incrementally read bytes using the same file/total/count policy. Unsupported
-descriptor or no-follow features fail without a pathname fallback. Traversal
-handles close on success and failure; the caller's descriptor remains owned by
-the caller.
+and opens each directory component with `O_DIRECTORY | O_NOFOLLOW`. Selected
+leaves are first pinned with `O_PATH | O_NOFOLLOW`, then classified using
+`fstat`; non-regular files, hardlinks and privileged mode bits are rejected
+before any read-capable leaf open. The reader pins `/proc/self/fd` once per call,
+reopens each owned numeric leaf descriptor through that directory using
+`O_RDONLY | O_NONBLOCK | O_CLOEXEC`, and compares the readable handle with its
+pinned object before reading. It requires trusted Linux kernel procfs at that
+location and `O_PATH` support; an unavailable directory or failed descriptor
+reopening fails without a weaker pathname fallback. That procfs trust is a
+supported-environment assumption, not root authorization evidence. Both
+observed file sizes and incrementally read bytes use the same file/total/count
+policy. Owned root, procfs, traversal and leaf handles close on success and
+failure; the caller's descriptor remains owned by the caller.
 
 The result separates measured root/directory/file metadata from the portable
 canonical inventory. Opened objects bind device, inode, file type, mode, size,
 mtime, ctime and link count. Before and after each read, the reader compares
 opened metadata and no-follow parent/name bindings, then reopens the selected
 paths for a final comparison. Linux filesystem tests exercise actual links,
-hardlinks, FIFOs, replacement and mutation, bounded reads and descriptor cleanup.
+hardlinks, FIFOs and device descriptors, replacement and mutation, bounded reads,
+procfd reopening failure and descriptor cleanup. O_PATH classification prevents
+invoking a special-device driver's read-capable open before rejecting its type.
 These checks reject observed changes; they do not establish a complete-tree or
 globally atomic source snapshot against concurrent writers. The supplied root
 descriptor pins its object, not its original pathname, Workspace authorization,
