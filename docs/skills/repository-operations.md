@@ -2313,6 +2313,27 @@ perform a second publish solely to decorate an already prepared descriptor.
 This in-process pair is preparation evidence, not proof that package metadata
 was inspected or that RCC execution occurred.
 
+The private controlled-inspection entry point currently supports one
+harness-declared Linux fixture with an explicit provider. It stages the complete
+declared source inventory outside the output directory, measures the staged
+bytes before and after metadata collection, and rechecks the original source.
+The observation binds the canonical inventory digest and metadata digest to the
+same-publish specification/artifact pair, provider, completed RCC execution
+receipt, receipt materialization path and ID, managed Python/Core distribution
+origin, and child working directory. Metadata and receipt files are bounded,
+owner-private outputs outside selected source. RCC output, deadlines, and owned
+process cleanup are bounded; incomplete descendant or pipe cleanup fails the
+observation.
+
+This is a controlled fixture observation, not arbitrary package admission or a
+security sandbox. The pure compiler result continues to report
+`inspection_status="not_run"`; the separate RCC observation records whether
+that fixture inspection passed. Neither one proves Package Revision admission,
+authorization, or publication. Fake-RCC contracts verify the harness boundary
+and failure handling only. They do not establish that an actual published
+artifact was inspected; record that separately only after running the pinned
+RCC/provider gate against the actual artifact.
+
 Action Server snapshots package source before metadata import, including
 unmanaged and legacy packages. It validates the source identity again after
 metadata collection and rejects collection that altered included source files.
