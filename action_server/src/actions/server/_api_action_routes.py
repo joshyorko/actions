@@ -400,6 +400,31 @@ class _ActionRoutes:
                     candidate_names[key] = McpCatalogName(
                         key, namespace, name, *identity
                     )
+        from .mcp.resource_routing import reserve_resource_routing
+
+        catalog.resource_routing_history = reserve_resource_routing(
+            db,
+            [
+                (
+                    key,
+                    action_package_id_to_action_package[
+                        info.action.action_package_id
+                    ].name,
+                    info.action.name,
+                )
+                for key, info in catalog.resource_to_action_info.items()
+            ],
+            [
+                (
+                    key,
+                    action_package_id_to_action_package[
+                        info.action.action_package_id
+                    ].name,
+                    info.action.name,
+                )
+                for key, info in catalog.resource_template_to_action_info.items()
+            ],
+        )
         for binding in candidate_names.values():
             db.insert(binding)
         return (

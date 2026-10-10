@@ -211,6 +211,7 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
                 "counter",
                 "migration",
                 "mcp_catalog_name",
+                "mcp_resource_routing",
                 "o_auth2_user_data",
                 "run",
                 "schedule",
