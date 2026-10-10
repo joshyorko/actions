@@ -225,12 +225,26 @@ def test_acceptance_claims_are_not_presented_as_build_provenance():
 def test_native_package_yaml_replaces_core_with_measured_wheel_after_rcc_install(
     tmp_path: Path,
 ):
-    compile(NATIVE_TEST.PROCESSOR_ACTION, "dakota_workitems_processor.py", "exec")
-    wheel = tmp_path / "actions_core-1.0.2-py3-none-any.whl"
+    processor_path = tmp_path / "dakota_workitems_processor.py"
+    processor_path.write_text(NATIVE_TEST.PROCESSOR_ACTION, encoding="utf-8")
+    spec = importlib.util.spec_from_file_location(
+        "dakota_workitems_generated_processor", processor_path
+    )
+    assert spec is not None and spec.loader is not None
+    processor_module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = processor_module
+    try:
+        spec.loader.exec_module(processor_module)
+    finally:
+        sys.modules.pop(spec.name, None)
+    assert callable(processor_module.process_work_item)
+
+    wheel = tmp_path / "candidate wheels" / "actions_core-1.0.2-py3-none-any.whl"
+    wheel.parent.mkdir()
     wheel.write_bytes(b"candidate core wheel")
-    package = tmp_path / "package"
+    package = tmp_path / "consumer package"
     package.mkdir()
-    report = package / "core-install-report.json"
+    report = package / "core install report.json"
     package_yaml = package / "package.yaml"
     package_yaml.write_text(
         NATIVE_TEST.consumer_package_yaml(wheel, report), encoding="utf-8"
@@ -255,6 +269,20 @@ def test_native_package_yaml_replaces_core_with_measured_wheel_after_rcc_install
         str(report.resolve()),
         str(wheel.resolve()),
     ]
+
+
+def test_consumer_resolves_candidate_wheel_file_url_on_native_platform(tmp_path: Path):
+    wheel = tmp_path / "wheel with spaces" / "actions_core-1.0.2.whl"
+    wheel.parent.mkdir()
+
+    assert (
+        NATIVE_TEST._local_wheel_path_from_file_url(wheel.as_uri()) == wheel.resolve()
+    )
+
+
+def test_consumer_rejects_nonlocal_candidate_wheel_url():
+    with pytest.raises(ValueError, match="not a local file URL"):
+        NATIVE_TEST._local_wheel_path_from_file_url("https://example.test/core.whl")
 
 
 def test_build_manifest_binds_source_platform_paths_and_measured_bytes(

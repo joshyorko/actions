@@ -26,6 +26,15 @@ class NativeArtifactManifestTests(unittest.TestCase):
                 wrapper.parent.mkdir(parents=True)
                 frozen.write_bytes(b"frozen executable bytes")
                 wrapper.write_bytes(b"Go wrapper executable bytes")
+                (package / "dist/action-server/_internal").mkdir(parents=True)
+                (package / "dist/action-server/_internal/module.py").write_bytes(
+                    b"packaged module"
+                )
+                (package / "go-wrapper/assets").mkdir(parents=True)
+                (package / "go-wrapper/assets/assets.zip").write_bytes(b"assets")
+                (package / "go-wrapper/main.go").write_text("package main\n")
+                (package / "go-wrapper/go.mod").write_text("module fixture\n")
+                (package / "go-wrapper/go.sum").write_text("fixture checksum\n")
                 output = package / "output/native-artifact-manifest.json"
                 with (
                     mock.patch.object(
@@ -52,6 +61,12 @@ class NativeArtifactManifestTests(unittest.TestCase):
                         output=output,
                     )
                 saved = json.loads(output.read_text(encoding="utf-8"))
+                tree_inventory_path = (
+                    package / "output/native-artifact-tree-inventory.json"
+                )
+                tree_inventory = json.loads(
+                    tree_inventory_path.read_text(encoding="utf-8")
+                )
                 self.assertEqual(saved, result)
                 self.assertEqual(
                     result["artifacts"]["frozen"]["sha256"],
@@ -63,6 +78,45 @@ class NativeArtifactManifestTests(unittest.TestCase):
                 )
                 self.assertEqual(result["source_sha"], "a" * 40)
                 self.assertEqual(result["platform"], system)
+                self.assertEqual(
+                    tree_inventory,
+                    manifest_writer.packaged_tree_inventory(
+                        package / "dist/action-server"
+                    ),
+                )
+                for runtime in ("frozen", "go-wrapper"):
+                    artifact = result["artifacts"][runtime]
+                    self.assertEqual(
+                        artifact["embedded_files_sha256"],
+                        manifest_writer.packaged_files_sha256(
+                            package / "dist/action-server"
+                        ),
+                    )
+                    self.assertEqual(
+                        artifact["assets_zip_sha256"],
+                        hashlib.sha256(b"assets").hexdigest(),
+                    )
+                    self.assertEqual(
+                        artifact["wrapper_source_sha256"],
+                        manifest_writer.source_files_sha256(
+                            package,
+                            (
+                                "go-wrapper/main.go",
+                                "go-wrapper/go.mod",
+                                "go-wrapper/go.sum",
+                            ),
+                        ),
+                    )
+                    self.assertEqual(
+                        artifact["frozen_package_tree_sha256"],
+                        manifest_writer.packaged_tree_sha256(
+                            package / "dist/action-server"
+                        ),
+                    )
+                self.assertEqual(
+                    result["artifacts"]["go-wrapper"]["assets_zip_path"],
+                    "go-wrapper/assets/assets.zip",
+                )
                 self.assertEqual(
                     result["python_version"], manifest_writer.platform.python_version()
                 )
