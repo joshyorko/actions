@@ -4,6 +4,7 @@ import shutil
 import stat
 import uuid
 from pathlib import Path
+from typing import Callable
 
 log = logging.getLogger(__name__)
 
@@ -112,6 +113,7 @@ class ActionPackageHandler:
         self._package_yaml_contents = package_yaml_contents
         self._pythonpath_entries: tuple[str, ...] | None = None
         self._runtime_source_snapshot_package_yaml: Path | None = None
+        self._runtime_source_snapshot_validation: Callable[[], None] | None = None
 
     @property
     def package_yaml_contents(self) -> dict | None:
@@ -139,19 +141,13 @@ class ActionPackageHandler:
 
     @property
     def uses_runtime_source_snapshots(self) -> bool:
-        import os
-
-        spec = (self._package_yaml_contents or {}).get("spec-version")
-        return spec == "v2" and any(
-            os.environ.get(name)
-            for name in (
-                "ACTIONS_RUNTIME_RCC_PROVIDER",
-                "ACTIONS_REAL_RCC_ARTIFACT_TEST",
-            )
-        )
+        # Catalog rollback cannot preserve executable last-good behavior if a
+        # worker later reopens the caller's edited directory. This applies to
+        # ordinary/legacy packages as well as the RCC artifact adapter.
+        return True
 
     def create_runtime_source_snapshot(self) -> tuple[Path, bool]:
-        """Create an immutable service-owned copy for one RCC source generation."""
+        """Create a service-owned copy of one admitted package source generation."""
         from actions.server_integration import DEFAULT_EXCLUSION_PATTERNS
 
         from actions.server._errors_action_server import ActionServerValidationError
@@ -168,12 +164,70 @@ class ActionPackageHandler:
         exclusions.exclude_patterns.extend(
             ("**/.rcc-action-version-*", "**/.rcc-action-metadata-*.json")
         )
-        try:
-            relative_store = source_store.resolve().relative_to(source_root)
-        except ValueError:
-            pass
+        # Runtime state is not authored package source. In particular, a
+        # datadir nested below the package must not copy databases, credentials
+        # or Run artifacts into each successive source generation.
+        excluded_roots: set[Path] = set()
+        runtime_paths = [source_store]
+        datadir = self._datadir.resolve()
+        if datadir != source_root:
+            runtime_paths.append(datadir)
         else:
-            exclusions.exclude_patterns.append(f"{relative_store.as_posix()}/**")
+            # --datadir=. is a supported layout. Keep the authored files, but
+            # exclude the Runtime-owned entries instead of the entire root.
+            runtime_paths.extend(
+                datadir / name
+                for name in (
+                    "server.db",
+                    "server.db-wal",
+                    "server.db-shm",
+                    "server.db-journal",
+                    "workitems.db",
+                    "workitems.db-wal",
+                    "workitems.db-shm",
+                    "workitems.db-journal",
+                    "artifacts",
+                    "work_item_files",
+                    "secrets",
+                    "env-info",
+                    "rcc-receipts",
+                    "tmpdir",
+                    "server_log.txt",
+                    "action_server.lock",
+                    ".api_key",
+                )
+            )
+        from ._settings import get_settings
+
+        try:
+            settings = get_settings()
+        except AssertionError:
+            settings = None
+        if settings is not None and settings.datadir.resolve() == datadir:
+            if settings.db_file != ":memory:":
+                database_path = datadir / settings.db_file
+                runtime_paths.extend(
+                    Path(str(database_path) + suffix)
+                    for suffix in ("", "-wal", "-shm", "-journal")
+                )
+            runtime_paths.extend(
+                path
+                for path in (settings.artifacts_dir, settings.artifact_storage_root)
+                if path is not None
+            )
+        for path in runtime_paths:
+            try:
+                relative = path.resolve().relative_to(source_root)
+            except ValueError:
+                continue
+            if relative != Path("."):
+                excluded_roots.add(relative)
+
+        def is_runtime_state(relative: Path) -> bool:
+            return any(
+                relative == excluded or excluded in relative.parents
+                for excluded in excluded_roots
+            )
 
         def source_files(root: Path) -> list[tuple[Path, str]]:
             files = sorted(
@@ -182,6 +236,7 @@ class ActionPackageHandler:
                     for path, relative in exclusions.collect_files_excluding_patterns(
                         root
                     )
+                    if not is_runtime_state(Path(relative))
                 ),
                 key=lambda item: item[1],
             )
@@ -193,7 +248,11 @@ class ActionPackageHandler:
                             "RCC source snapshots require package file links to remain inside the package"
                         )
             for path in root.rglob("*"):
-                if path.is_symlink() and path.is_dir():
+                if (
+                    not is_runtime_state(path.relative_to(root))
+                    and path.is_symlink()
+                    and path.is_dir()
+                ):
                     raise ActionServerValidationError(
                         "RCC source snapshots do not support directory symlinks"
                     )
@@ -213,12 +272,22 @@ class ActionPackageHandler:
             return digest.hexdigest()
 
         files_before = source_files(source_root)
-        if not any(relative == "package.yaml" for _, relative in files_before):
+        if self.package_yaml_exists and not any(
+            relative == "package.yaml" for _, relative in files_before
+        ):
             raise ActionServerValidationError(
                 "RCC source snapshot is missing package.yaml"
             )
         source_signature = signature(source_root)
         destination = package_store / source_signature
+
+        def validate_selected_snapshot() -> None:
+            if signature(destination) != source_signature:
+                raise ActionServerValidationError(
+                    "Package source snapshot changed during environment or metadata collection"
+                )
+
+        self._runtime_source_snapshot_validation = validate_selected_snapshot
         if destination.is_dir():
             if signature(destination) != source_signature:
                 raise ActionServerValidationError(
@@ -263,8 +332,11 @@ class ActionPackageHandler:
 
         snapshot_package_yaml = snapshot / "package.yaml"
         try:
-            snapshot_yaml_bytes = snapshot_package_yaml.read_bytes()
-            snapshot_yaml = yaml.safe_load(snapshot_yaml_bytes.decode("utf-8"))
+            snapshot_yaml = (
+                yaml.safe_load(snapshot_package_yaml.read_text(encoding="utf-8"))
+                if snapshot_package_yaml.exists()
+                else None
+            )
         except (OSError, yaml.YAMLError) as exc:
             from actions.server._errors_action_server import ActionServerValidationError
 
@@ -277,7 +349,9 @@ class ActionPackageHandler:
             raise ActionServerValidationError(
                 "package.yaml changed while creating the RCC source snapshot"
             )
-        self._runtime_source_snapshot_package_yaml = snapshot_package_yaml
+        self._runtime_source_snapshot_package_yaml = (
+            snapshot_package_yaml if self.package_yaml_exists else None
+        )
         self._action_package_dir = str(snapshot)
         self._import_path = snapshot
         self._pythonpath_entries = None
@@ -292,6 +366,11 @@ class ActionPackageHandler:
                 self.discard_runtime_source_snapshot(snapshot)
             raise
         return snapshot, created
+
+    def validate_runtime_source_snapshot(self) -> None:
+        """Reject metadata collection which altered the selected source bytes."""
+        if self._runtime_source_snapshot_validation is not None:
+            self._runtime_source_snapshot_validation()
 
     def discard_runtime_source_snapshot(self, snapshot: Path) -> None:
         """Remove a newly created candidate after its import transaction fails."""
@@ -431,12 +510,14 @@ class ActionPackageHandler:
                 use_env = descriptor.to_dict()
             else:
                 rcc = get_rcc()
-                condahash = rcc.get_package_yaml_hash(
-                    self._original_package_yaml, devenv
+                environment_yaml = (
+                    self._runtime_source_snapshot_package_yaml
+                    or self._original_package_yaml
                 )
+                condahash = rcc.get_package_yaml_hash(environment_yaml, devenv)
 
                 env_info = rcc.create_env_and_get_vars(
-                    self._datadir, self._original_package_yaml, condahash, devenv
+                    self._datadir, environment_yaml, condahash, devenv
                 )
                 if not env_info.success:
                     raise ActionPackageError(
@@ -465,9 +546,16 @@ class ActionPackageHandler:
         package_root = self.package_root
         abspath_entries = []
         for p in pythonpath_entries:
-            if not os.path.isabs(p):
-                p = os.path.join(package_root, p)
-            entry = os.path.abspath(p)
+            original_root = self._original_package_yaml.parent
+            original_entry = (original_root / p).resolve()
+            try:
+                relative = original_entry.relative_to(original_root.resolve())
+            except ValueError:
+                # Explicit external imports retain their original location;
+                # they are not part of the package's source snapshot guarantee.
+                entry = str(original_entry)
+            else:
+                entry = str(Path(package_root) / relative)
             if not os.path.exists(entry):
                 log.critical(
                     f"The pythonpath entry: {p} does not exist in the filesystem (in {package_root}/package.yaml)."

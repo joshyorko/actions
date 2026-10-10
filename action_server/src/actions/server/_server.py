@@ -26,7 +26,9 @@ log = logging.getLogger(__name__)
 _reload_generation_lock = threading.RLock()
 
 
-def _reload_action_generation(action_routes, actions_process_pool, actions, packages):
+def _reload_action_generation(
+    action_routes, actions_process_pool, actions, packages, *, defer_publication=False
+):
     """Atomically commit a prepared process and HTTP/MCP route generation."""
     from copy import copy
 
@@ -37,6 +39,7 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
         old_packages = action_routes.action_package_id_to_action_package
         old_actions = action_routes.actions
         old_routes = list(app.router.routes)
+        old_openapi_schema = getattr(app, "openapi_schema", None)
         old_route_state = dict(action_routes.__dict__)
         old_process_generation = getattr(actions_process_pool, "generation", None)
         helper = action_routes.mcp_server_setup_helper
@@ -46,24 +49,15 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
             if key.startswith("_")
         }
         pool_committed = False
-        try:
-            actions_process_pool.on_reload(packages, actions)
-            pool_committed = True
-            old_generation = getattr(action_routes, "_process_pool_generation", 0)
-            action_routes._process_pool_generation = getattr(
-                actions_process_pool,
-                "generation",
-                old_generation + 1,
-            )
-            action_routes.unregister_http_actions()
-            action_routes.register_actions()
-        except BaseException:
-            app.router.routes[:] = old_routes
-            action_routes.__dict__.clear()
-            action_routes.__dict__.update(old_route_state)
-            helper.__dict__.update(old_helper_state)
-            if pool_committed:
-                try:
+
+        def rollback():
+            with _reload_generation_lock:
+                app.router.routes = old_routes
+                app.openapi_schema = old_openapi_schema
+                action_routes.__dict__.clear()
+                action_routes.__dict__.update(old_route_state)
+                helper.__dict__.update(old_helper_state)
+                if pool_committed:
                     actions_process_pool.on_reload(old_packages, old_actions)
                     if old_process_generation is not None:
                         restore_generation = getattr(
@@ -71,8 +65,33 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
                         )
                         if restore_generation is not None:
                             restore_generation(old_process_generation)
-                except BaseException:
-                    log.exception("Unable to roll back the process generation reload.")
+
+        try:
+            # Reject invalid HTTP/MCP catalogs before retiring the old pool.
+            old_generation = getattr(action_routes, "_process_pool_generation", 0)
+            action_routes._process_pool_generation = (
+                getattr(actions_process_pool, "generation", old_generation) + 1
+            )
+            prepared = action_routes.prepare_actions()
+            actions_process_pool.on_reload(packages, actions)
+            pool_committed = True
+        except BaseException:
+            try:
+                rollback()
+            except BaseException:
+                log.exception("Unable to roll back the process generation reload.")
+            raise
+
+        def publish():
+            with _reload_generation_lock:
+                action_routes.publish_prepared_actions(prepared)
+
+        if defer_publication:
+            return publish, rollback
+        try:
+            publish()
+        except BaseException:
+            rollback()
             raise
 
 
@@ -652,32 +671,38 @@ def start_server(
                     log.info("Reload explicitly called!")
                 else:
                     log.info("File-changes detected: auto-reloading!")
-                code = _import_actions(
-                    start_args,
-                    settings,
-                    disable_not_imported=True,
-                )
+
+                def publish_generation():
+                    actions_process_pool = (
+                        _actions_process_pool.get_actions_process_pool()
+                    )
+                    next_packages = {
+                        package.id: package for package in db.all(ActionPackage)
+                    }
+                    return _reload_action_generation(
+                        action_routes,
+                        actions_process_pool,
+                        db.all(Action),
+                        next_packages,
+                        defer_publication=True,
+                    )
+
+                try:
+                    code = _import_actions(
+                        start_args,
+                        settings,
+                        disable_not_imported=True,
+                        after_import=publish_generation,
+                    )
+                except Exception:
+                    log.exception("Unable to commit action generation reload.")
+                    return False
                 if code != 0:
                     log.info(
                         "Unable to do auto-reload (actions could not be imported)."
                     )
                     return False
 
-                actions_process_pool = _actions_process_pool.get_actions_process_pool()
-                next_packages = {
-                    package.id: package for package in db.all(ActionPackage)
-                }
-                next_actions = db.all(Action)
-                try:
-                    _reload_action_generation(
-                        action_routes,
-                        actions_process_pool,
-                        next_actions,
-                        next_packages,
-                    )
-                except BaseException:
-                    log.exception("Unable to commit action generation reload.")
-                    return False
                 app.update_mtime_uuid()
                 assert _LoopHolder.loop is not None
                 report_mtime_changed(_LoopHolder.loop)

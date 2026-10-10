@@ -200,7 +200,33 @@ class _ActionRoutes:
         )
 
     def register_actions(self) -> None:
+        self.publish_prepared_actions(self.prepare_actions())
+
+    def publish_prepared_actions(self, prepared) -> None:
+        from ._app import get_app
+
+        app = get_app()
+        routes, helper, packages, actions, names = prepared
+        # Validate before either public catalog changes. Replacing the route
+        # list avoids exposing a remove/append interval to concurrent requests.
+        next_routes = [
+            route
+            for route in app.router.routes
+            if getattr(route, "path_format", None) not in self.registered_route_names
+        ]
+        next_routes.extend(routes)
+        self.mcp_server_setup_helper.publish_validated_catalog(helper)
+        app.router.routes = next_routes
+        app.openapi_schema = None
+        self.action_package_id_to_action_package = packages
+        self.actions = actions
+        self.registered_route_names = names
+
+    def prepare_actions(self):
+        """Build and validate routes without changing the published catalog."""
         import json
+
+        from fastapi import APIRouter
 
         from actions.server._settings import (
             OPENAPI_SPEC_IS_CONSEQUENTIAL,
@@ -208,12 +234,11 @@ class _ActionRoutes:
         )
 
         from . import _actions_run
-        from ._app import get_app
         from ._models import Action, ActionPackage, get_db
         from .mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
         db = get_db()
-        app = get_app()
+        router = APIRouter()
         action: Action
         action_package_id_to_action_package: dict[str, ActionPackage] = dict(
             (action_package.id, action_package)
@@ -253,6 +278,11 @@ class _ActionRoutes:
         tool_names = next_mcp_server_setup_helper.resolve_tool_names(
             actions_to_register
         )
+        # HTTP exposes resources and prompts too; its operation namespace must
+        # therefore include every admitted action, not only MCP tools.
+        operation_ids = next_mcp_server_setup_helper.resolve_action_names(
+            actions_to_register
+        )
         for action_package, action in actions_to_register:
             doc_desc = (
                 get_action_description_from_docs(action.docs) if action.docs else ""
@@ -288,13 +318,13 @@ class _ActionRoutes:
             assert (
                 route_name not in registered_route_names
             ), f"Route: {route_name} already registered."
-            app.add_api_route(
+            router.add_api_route(
                 route_name,
                 func_fast_api,
                 name=action.name,
                 summary=display_name,
                 description=doc_desc,
-                operation_id=action.name,
+                operation_id=operation_ids[action.id],
                 methods=["POST"],
                 dependencies=self.endpoint_dependencies,
                 openapi_extra=openapi_extra,
@@ -313,10 +343,16 @@ class _ActionRoutes:
         # Build the complete catalog off to the side. The persistent MCP
         # endpoint publishes it in one pointer swap, so an admitted callback
         # can continue using its old generation while reload registers routes.
-        self.mcp_server_setup_helper.replace_catalog(next_mcp_server_setup_helper)
-        self.action_package_id_to_action_package = action_package_id_to_action_package
-        self.actions = actions
-        self.registered_route_names = registered_route_names
+        next_mcp_server_setup_helper._validate_ui_resource_references(
+            next_mcp_server_setup_helper._catalog
+        )
+        return (
+            router.routes,
+            next_mcp_server_setup_helper,
+            action_package_id_to_action_package,
+            actions,
+            registered_route_names,
+        )
 
     def unregister_http_actions(self):
         from actions.server._app import get_app

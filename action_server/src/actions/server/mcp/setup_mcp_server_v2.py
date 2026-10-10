@@ -380,12 +380,19 @@ class McpServerSetupHelper:
         actions: Iterable[tuple[Any, Any]],
     ) -> dict[str, str]:
         """Name a complete, filtered tool set independently of database order."""
-        tools = [
-            (package.name, action)
+        return McpServerSetupHelper.resolve_action_names(
+            (package, action)
             for package, action in actions
             if (json.loads(action.options) if action.options else {}).get("kind")
             not in ("resource", "prompt")
-        ]
+        )
+
+    @staticmethod
+    def resolve_action_names(
+        actions: Iterable[tuple[Any, Any]],
+    ) -> dict[str, str]:
+        """Preserve unambiguous bare names; qualify collisions deterministically."""
+        tools = [(package.name, action) for package, action in actions]
         counts = Counter(action.name for _, action in tools)
         names = {
             action.id: action.name for _, action in tools if counts[action.name] == 1
@@ -535,8 +542,12 @@ class McpServerSetupHelper:
 
     def replace_catalog(self, replacement: "McpServerSetupHelper") -> None:
         """Atomically publish a fully built catalog for the persistent server."""
+        self._validate_ui_resource_references(replacement._catalog)
+        self.publish_validated_catalog(replacement)
+
+    def publish_validated_catalog(self, replacement: "McpServerSetupHelper") -> None:
+        """Publish the private catalog already validated during preparation."""
         catalog = replacement._catalog
-        self._validate_ui_resource_references(catalog)
         self._catalog = catalog
         self._tools = catalog.tools
         self._tool_name_to_action_info = catalog.tool_name_to_action_info

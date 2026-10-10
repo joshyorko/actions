@@ -1,0 +1,894 @@
+diff --git a/action_server/src/actions/server/_action_package_handler.py b/action_server/src/actions/server/_action_package_handler.py
+index 6e2e10b3..6561240c 100644
+--- a/action_server/src/actions/server/_action_package_handler.py
++++ b/action_server/src/actions/server/_action_package_handler.py
+@@ -4,6 +4,7 @@ import shutil
+ import stat
+ import uuid
+ from pathlib import Path
++from typing import Callable
+ 
+ log = logging.getLogger(__name__)
+ 
+@@ -112,6 +113,7 @@ class ActionPackageHandler:
+         self._package_yaml_contents = package_yaml_contents
+         self._pythonpath_entries: tuple[str, ...] | None = None
+         self._runtime_source_snapshot_package_yaml: Path | None = None
++        self._runtime_source_snapshot_validation: Callable[[], None] | None = None
+ 
+     @property
+     def package_yaml_contents(self) -> dict | None:
+@@ -139,19 +141,13 @@ class ActionPackageHandler:
+ 
+     @property
+     def uses_runtime_source_snapshots(self) -> bool:
+-        import os
+-
+-        spec = (self._package_yaml_contents or {}).get("spec-version")
+-        return spec == "v2" and any(
+-            os.environ.get(name)
+-            for name in (
+-                "ACTIONS_RUNTIME_RCC_PROVIDER",
+-                "ACTIONS_REAL_RCC_ARTIFACT_TEST",
+-            )
+-        )
++        # Catalog rollback cannot preserve executable last-good behavior if a
++        # worker later reopens the caller's edited directory. This applies to
++        # ordinary/legacy packages as well as the RCC artifact adapter.
++        return True
+ 
+     def create_runtime_source_snapshot(self) -> tuple[Path, bool]:
+-        """Create an immutable service-owned copy for one RCC source generation."""
++        """Create a service-owned copy of one admitted package source generation."""
+         from actions.server_integration import DEFAULT_EXCLUSION_PATTERNS
+ 
+         from actions.server._errors_action_server import ActionServerValidationError
+@@ -168,12 +164,70 @@ class ActionPackageHandler:
+         exclusions.exclude_patterns.extend(
+             ("**/.rcc-action-version-*", "**/.rcc-action-metadata-*.json")
+         )
+-        try:
+-            relative_store = source_store.resolve().relative_to(source_root)
+-        except ValueError:
+-            pass
++        # Runtime state is not authored package source. In particular, a
++        # datadir nested below the package must not copy databases, credentials
++        # or Run artifacts into each successive source generation.
++        excluded_roots: set[Path] = set()
++        runtime_paths = [source_store]
++        datadir = self._datadir.resolve()
++        if datadir != source_root:
++            runtime_paths.append(datadir)
+         else:
+-            exclusions.exclude_patterns.append(f"{relative_store.as_posix()}/**")
++            # --datadir=. is a supported layout. Keep the authored files, but
++            # exclude the Runtime-owned entries instead of the entire root.
++            runtime_paths.extend(
++                datadir / name
++                for name in (
++                    "server.db",
++                    "server.db-wal",
++                    "server.db-shm",
++                    "server.db-journal",
++                    "workitems.db",
++                    "workitems.db-wal",
++                    "workitems.db-shm",
++                    "workitems.db-journal",
++                    "artifacts",
++                    "work_item_files",
++                    "secrets",
++                    "env-info",
++                    "rcc-receipts",
++                    "tmpdir",
++                    "server_log.txt",
++                    "action_server.lock",
++                    ".api_key",
++                )
++            )
++        from ._settings import get_settings
++
++        try:
++            settings = get_settings()
++        except AssertionError:
++            settings = None
++        if settings is not None and settings.datadir.resolve() == datadir:
++            if settings.db_file != ":memory:":
++                database_path = datadir / settings.db_file
++                runtime_paths.extend(
++                    Path(str(database_path) + suffix)
++                    for suffix in ("", "-wal", "-shm", "-journal")
++                )
++            runtime_paths.extend(
++                path
++                for path in (settings.artifacts_dir, settings.artifact_storage_root)
++                if path is not None
++            )
++        for path in runtime_paths:
++            try:
++                relative = path.resolve().relative_to(source_root)
++            except ValueError:
++                continue
++            if relative != Path("."):
++                excluded_roots.add(relative)
++
++        def is_runtime_state(relative: Path) -> bool:
++            return any(
++                relative == excluded or excluded in relative.parents
++                for excluded in excluded_roots
++            )
+ 
+         def source_files(root: Path) -> list[tuple[Path, str]]:
+             files = sorted(
+@@ -182,6 +236,7 @@ class ActionPackageHandler:
+                     for path, relative in exclusions.collect_files_excluding_patterns(
+                         root
+                     )
++                    if not is_runtime_state(Path(relative))
+                 ),
+                 key=lambda item: item[1],
+             )
+@@ -193,7 +248,11 @@ class ActionPackageHandler:
+                             "RCC source snapshots require package file links to remain inside the package"
+                         )
+             for path in root.rglob("*"):
+-                if path.is_symlink() and path.is_dir():
++                if (
++                    not is_runtime_state(path.relative_to(root))
++                    and path.is_symlink()
++                    and path.is_dir()
++                ):
+                     raise ActionServerValidationError(
+                         "RCC source snapshots do not support directory symlinks"
+                     )
+@@ -213,12 +272,22 @@ class ActionPackageHandler:
+             return digest.hexdigest()
+ 
+         files_before = source_files(source_root)
+-        if not any(relative == "package.yaml" for _, relative in files_before):
++        if self.package_yaml_exists and not any(
++            relative == "package.yaml" for _, relative in files_before
++        ):
+             raise ActionServerValidationError(
+                 "RCC source snapshot is missing package.yaml"
+             )
+         source_signature = signature(source_root)
+         destination = package_store / source_signature
++
++        def validate_selected_snapshot() -> None:
++            if signature(destination) != source_signature:
++                raise ActionServerValidationError(
++                    "Package source snapshot changed during environment or metadata collection"
++                )
++
++        self._runtime_source_snapshot_validation = validate_selected_snapshot
+         if destination.is_dir():
+             if signature(destination) != source_signature:
+                 raise ActionServerValidationError(
+@@ -263,8 +332,11 @@ class ActionPackageHandler:
+ 
+         snapshot_package_yaml = snapshot / "package.yaml"
+         try:
+-            snapshot_yaml_bytes = snapshot_package_yaml.read_bytes()
+-            snapshot_yaml = yaml.safe_load(snapshot_yaml_bytes.decode("utf-8"))
++            snapshot_yaml = (
++                yaml.safe_load(snapshot_package_yaml.read_text(encoding="utf-8"))
++                if snapshot_package_yaml.exists()
++                else None
++            )
+         except (OSError, yaml.YAMLError) as exc:
+             from actions.server._errors_action_server import ActionServerValidationError
+ 
+@@ -277,7 +349,9 @@ class ActionPackageHandler:
+             raise ActionServerValidationError(
+                 "package.yaml changed while creating the RCC source snapshot"
+             )
+-        self._runtime_source_snapshot_package_yaml = snapshot_package_yaml
++        self._runtime_source_snapshot_package_yaml = (
++            snapshot_package_yaml if self.package_yaml_exists else None
++        )
+         self._action_package_dir = str(snapshot)
+         self._import_path = snapshot
+         self._pythonpath_entries = None
+@@ -293,6 +367,11 @@ class ActionPackageHandler:
+             raise
+         return snapshot, created
+ 
++    def validate_runtime_source_snapshot(self) -> None:
++        """Reject metadata collection which altered the selected source bytes."""
++        if self._runtime_source_snapshot_validation is not None:
++            self._runtime_source_snapshot_validation()
++
+     def discard_runtime_source_snapshot(self, snapshot: Path) -> None:
+         """Remove a newly created candidate after its import transaction fails."""
+         import shutil
+@@ -431,12 +510,14 @@ class ActionPackageHandler:
+                 use_env = descriptor.to_dict()
+             else:
+                 rcc = get_rcc()
+-                condahash = rcc.get_package_yaml_hash(
+-                    self._original_package_yaml, devenv
++                environment_yaml = (
++                    self._runtime_source_snapshot_package_yaml
++                    or self._original_package_yaml
+                 )
++                condahash = rcc.get_package_yaml_hash(environment_yaml, devenv)
+ 
+                 env_info = rcc.create_env_and_get_vars(
+-                    self._datadir, self._original_package_yaml, condahash, devenv
++                    self._datadir, environment_yaml, condahash, devenv
+                 )
+                 if not env_info.success:
+                     raise ActionPackageError(
+@@ -465,9 +546,16 @@ class ActionPackageHandler:
+         package_root = self.package_root
+         abspath_entries = []
+         for p in pythonpath_entries:
+-            if not os.path.isabs(p):
+-                p = os.path.join(package_root, p)
+-            entry = os.path.abspath(p)
++            original_root = self._original_package_yaml.parent
++            original_entry = (original_root / p).resolve()
++            try:
++                relative = original_entry.relative_to(original_root.resolve())
++            except ValueError:
++                # Explicit external imports retain their original location;
++                # they are not part of the package's source snapshot guarantee.
++                entry = str(original_entry)
++            else:
++                entry = str(Path(package_root) / relative)
+             if not os.path.exists(entry):
+                 log.critical(
+                     f"The pythonpath entry: {p} does not exist in the filesystem (in {package_root}/package.yaml)."
+diff --git a/action_server/src/actions/server/_actions_import.py b/action_server/src/actions/server/_actions_import.py
+index d40988b7..f8c5d720 100644
+--- a/action_server/src/actions/server/_actions_import.py
++++ b/action_server/src/actions/server/_actions_import.py
+@@ -14,7 +14,7 @@ from actions.server.vendored_deps.termcolors import bold_yellow
+ 
+ if typing.TYPE_CHECKING:
+     from actions import ActionsListActionTypedDict
+-    from actions.server._models import ActionPackage
++    from actions.server._models import Action, ActionPackage
+ 
+ log = logging.getLogger(__name__)
+ 
+@@ -47,6 +47,83 @@ class IHookOnActionsList(typing.Protocol):
+ hook_on_actions_list: IHookOnActionsList = Callback(raise_exceptions=True)
+ 
+ 
++def import_action_packages(
++    *,
++    datadir: Path,
++    action_package_dirs: list[str],
++    disable_not_imported: bool,
++    skip_lint: bool,
++    whitelist: str,
++    after_import: typing.Callable[
++        [], tuple[typing.Callable[[], None], typing.Callable[[], None]]
++    ]
++    | None = None,
++) -> None:
++    """Collect a complete desired set before atomically admitting its catalog.
++
++    Environment resolution and metadata subprocesses run before taking the DB
++    writer lock. Additive imports retain omitted capabilities; synchronization
++    disables them only after every selected package has been collected.
++    """
++    from ._errors_action_server import ActionServerValidationError
++    from ._models import Action, ActionPackage, get_db
++
++    prepared: list[tuple[ActionPackage, list[Action]]] = []
++    candidate_cleanup: list[typing.Callable[[], None]] = []
++    rollback_generation = None
++    publish_generation = None
++    try:
++        for directory in action_package_dirs:
++            import_action_package(
++                datadir=datadir,
++                action_package_dir=directory,
++                disable_not_imported=disable_not_imported,
++                skip_lint=skip_lint,
++                whitelist=whitelist,
++                _prepared=prepared,
++                _candidate_cleanup=candidate_cleanup,
++            )
++        names = [package.name for package, _ in prepared]
++        if len(set(names)) != len(names):
++            raise ActionServerValidationError(
++                "Selected package directories must have distinct package identities."
++            )
++
++        db = get_db()
++        with db.transaction():
++            for package, actions in prepared:
++                _update_actions_in_db(package, actions, disable_not_imported)
++            if disable_not_imported:
++                selected_ids = {
++                    package.id
++                    for package in db.all(ActionPackage)
++                    if package.name in names
++                }
++                for action in db.all(Action):
++                    if action.enabled and action.action_package_id not in selected_ids:
++                        db.update_by_id(Action, action.id, dict(enabled=False))
++            # Validate offline imports too: invalid catalogs must not persist
++            # for a later --actions-sync=false restart.
++            from ._api_action_routes import _ActionRoutes
++
++            _ActionRoutes(whitelist, []).prepare_actions()
++            if after_import is not None:
++                publish_generation, rollback_generation = after_import()
++    except BaseException:
++        # Preparation can change the pool, but public routes/catalogs remain
++        # untouched until commit succeeds. A commit failure restores that pool.
++        if rollback_generation is not None:
++            try:
++                rollback_generation()
++            except BaseException:
++                log.exception("Unable to restore the previous process generation.")
++        for cleanup in reversed(candidate_cleanup):
++            cleanup()
++        raise
++    if publish_generation is not None:
++        publish_generation()
++
++
+ def import_action_package(
+     *,
+     datadir: Path,
+@@ -54,6 +131,8 @@ def import_action_package(
+     disable_not_imported: bool,
+     skip_lint: bool,
+     whitelist: str,
++    _prepared: list[tuple["ActionPackage", list["Action"]]] | None = None,
++    _candidate_cleanup: list[typing.Callable[[], None]] | None = None,
+ ):
+     """
+     Imports action packages based on directories given in the filesystem.
+@@ -119,6 +198,15 @@ def import_action_package(
+             original_package_yaml = action_package_handler.original_package_yaml
+             package_yaml_exists = action_package_handler.package_yaml_exists
+             import_path = action_package_handler.import_path
++            if source_snapshot_created and _candidate_cleanup is not None:
++                from functools import partial
++
++                _candidate_cleanup.append(
++                    partial(
++                        source_snapshot_owner.discard_runtime_source_snapshot,
++                        source_snapshot_path,
++                    )
++                )
+         except Exception as exc:
+             raise ActionServerValidationError(
+                 f"Unable to preserve the last-good Action package source: {exc}"
+@@ -246,6 +334,7 @@ def import_action_package(
+             )
+ 
+     try:
++        collected: list[tuple[ActionPackage, list[Action]]] = []
+         _add_actions_to_db(
+             datadir,
+             env,
+@@ -256,7 +345,16 @@ def import_action_package(
+             whitelist=whitelist,
+             actions_library_version=actions_library_version,
+             runtime_descriptor=runtime_descriptor,
++            _prepared=collected,
+         )
++        source_snapshot_owner.validate_runtime_source_snapshot()
++        if _prepared is not None:
++            _prepared.extend(collected)
++        else:
++            for collected_package, collected_actions in collected:
++                _update_actions_in_db(
++                    collected_package, collected_actions, disable_not_imported
++                )
+     except Exception as exc:
+         if source_snapshot_path is not None:
+             if source_snapshot_created:
+@@ -352,14 +450,13 @@ def _add_actions_to_db(
+     whitelist: str,
+     actions_library_version: tuple[int, ...],
+     runtime_descriptor=None,
++    _prepared: list[tuple["ActionPackage", list["Action"]]] | None = None,
+ ):
+-    from dataclasses import asdict
+-
+     from actions.server_integration import format_lint_results
+ 
+     from actions.server._errors_action_server import ActionServerValidationError
+     from actions.server._gen_ids import gen_uuid
+-    from actions.server._models import Action, ActionPackage, get_db
++    from actions.server._models import Action
+     from actions.server._whitelist import accept_action
+ 
+     if runtime_descriptor is None:
+@@ -531,9 +628,27 @@ cli.main(["{command}"])
+                 )
+             )
+ 
++    names = [action.name for action in actions]
++    if len(set(names)) != len(names):
++        raise ActionServerValidationError(
++            f"Duplicate action name in package {action_package.name!r}"
++        )
++    if _prepared is not None:
++        _prepared.append((action_package, actions))
++    else:
++        _update_actions_in_db(action_package, actions, disable_not_imported)
++
++
++def _update_actions_in_db(
++    action_package: "ActionPackage",
++    actions: list["Action"],
++    disable_not_imported: bool,
++) -> None:
++    from dataclasses import asdict
++
++    from ._models import Action, ActionPackage, get_db
++
+     db = get_db()
+-    if disable_not_imported:
+-        all_previously_existing_actions = db.all(Action)
+ 
+     try:
+         existing_action_package = db.first(
+@@ -550,10 +665,6 @@ cli.main(["{command}"])
+                 log.info("Found new action: %s", action.name)
+                 db.insert(action)
+ 
+-            if disable_not_imported:
+-                for action in all_previously_existing_actions:
+-                    log.info("Disabling action: %s", action.name)
+-                    db.update_by_id(Action, action.id, dict(enabled=False))
+     else:
+         # We already have an existing action package with the same name. This
+         # means we'll have to update it instead of adding a new one.
+@@ -567,6 +678,24 @@ cli.main(["{command}"])
+             [existing_action_package.id],
+         )
+ 
++        if not disable_not_imported:
++            candidate_names = {action.name for action in actions}
++            omitted_names = sorted(
++                action.name
++                for action in existing_actions
++                if action.enabled and action.name not in candidate_names
++            )
++            if omitted_names:
++                from ._errors_action_server import ActionServerValidationError
++
++                raise ActionServerValidationError(
++                    f"Additive import of {action_package.name!r} would remove "
++                    f"enabled actions: {', '.join(omitted_names)}. "
++                    "The previous package remains admitted. Use start with "
++                    "--actions-sync=true and all desired --dir entries to "
++                    "explicitly reconcile removals."
++                )
++
+         existing_action_name_to_action = {}
+         for action in existing_actions:
+             existing_action_name_to_action[action.name] = action
+@@ -599,7 +728,7 @@ cli.main(["{command}"])
+                     seen_action_ids.add(action.id)
+ 
+             if disable_not_imported:
+-                for action in all_previously_existing_actions:
++                for action in existing_actions:
+                     if action.id not in seen_action_ids:
+                         log.info("Disabling action: %s", action.name)
+                         db.update_by_id(Action, action.id, dict(enabled=False))
+diff --git a/action_server/src/actions/server/_api_action_routes.py b/action_server/src/actions/server/_api_action_routes.py
+index 6ed960ea..cfba24f8 100644
+--- a/action_server/src/actions/server/_api_action_routes.py
++++ b/action_server/src/actions/server/_api_action_routes.py
+@@ -200,20 +200,45 @@ class _ActionRoutes:
+         )
+ 
+     def register_actions(self) -> None:
++        self.publish_prepared_actions(self.prepare_actions())
++
++    def publish_prepared_actions(self, prepared) -> None:
++        from ._app import get_app
++
++        app = get_app()
++        routes, helper, packages, actions, names = prepared
++        # Validate before either public catalog changes. Replacing the route
++        # list avoids exposing a remove/append interval to concurrent requests.
++        next_routes = [
++            route
++            for route in app.router.routes
++            if getattr(route, "path_format", None) not in self.registered_route_names
++        ]
++        next_routes.extend(routes)
++        self.mcp_server_setup_helper.publish_validated_catalog(helper)
++        app.router.routes = next_routes
++        app.openapi_schema = None
++        self.action_package_id_to_action_package = packages
++        self.actions = actions
++        self.registered_route_names = names
++
++    def prepare_actions(self):
++        """Build and validate routes without changing the published catalog."""
+         import json
+ 
++        from fastapi import APIRouter
++
+         from actions.server._settings import (
+             OPENAPI_SPEC_IS_CONSEQUENTIAL,
+             OPENAPI_SPEC_OPERATION_KIND,
+         )
+ 
+         from . import _actions_run
+-        from ._app import get_app
+         from ._models import Action, ActionPackage, get_db
+         from .mcp.setup_mcp_server_from_actions import McpServerSetupHelper
+ 
+         db = get_db()
+-        app = get_app()
++        router = APIRouter()
+         action: Action
+         action_package_id_to_action_package: dict[str, ActionPackage] = dict(
+             (action_package.id, action_package)
+@@ -253,6 +278,11 @@ class _ActionRoutes:
+         tool_names = next_mcp_server_setup_helper.resolve_tool_names(
+             actions_to_register
+         )
++        # HTTP exposes resources and prompts too; its operation namespace must
++        # therefore include every admitted action, not only MCP tools.
++        operation_ids = next_mcp_server_setup_helper.resolve_action_names(
++            actions_to_register
++        )
+         for action_package, action in actions_to_register:
+             doc_desc = (
+                 get_action_description_from_docs(action.docs) if action.docs else ""
+@@ -288,13 +318,13 @@ class _ActionRoutes:
+             assert (
+                 route_name not in registered_route_names
+             ), f"Route: {route_name} already registered."
+-            app.add_api_route(
++            router.add_api_route(
+                 route_name,
+                 func_fast_api,
+                 name=action.name,
+                 summary=display_name,
+                 description=doc_desc,
+-                operation_id=action.name,
++                operation_id=operation_ids[action.id],
+                 methods=["POST"],
+                 dependencies=self.endpoint_dependencies,
+                 openapi_extra=openapi_extra,
+@@ -313,10 +343,16 @@ class _ActionRoutes:
+         # Build the complete catalog off to the side. The persistent MCP
+         # endpoint publishes it in one pointer swap, so an admitted callback
+         # can continue using its old generation while reload registers routes.
+-        self.mcp_server_setup_helper.replace_catalog(next_mcp_server_setup_helper)
+-        self.action_package_id_to_action_package = action_package_id_to_action_package
+-        self.actions = actions
+-        self.registered_route_names = registered_route_names
++        next_mcp_server_setup_helper._validate_ui_resource_references(
++            next_mcp_server_setup_helper._catalog
++        )
++        return (
++            router.routes,
++            next_mcp_server_setup_helper,
++            action_package_id_to_action_package,
++            actions,
++            registered_route_names,
++        )
+ 
+     def unregister_http_actions(self):
+         from actions.server._app import get_app
+diff --git a/action_server/src/actions/server/_cli_impl.py b/action_server/src/actions/server/_cli_impl.py
+index 8de85232..d02a38c5 100644
+--- a/action_server/src/actions/server/_cli_impl.py
++++ b/action_server/src/actions/server/_cli_impl.py
+@@ -646,6 +646,10 @@ def _import_actions(
+     base_args: ArgumentsNamespaceBaseImportOrStart,
+     settings: "Settings",
+     disable_not_imported: bool,
++    after_import: typing.Callable[
++        [], tuple[typing.Callable[[], None], typing.Callable[[], None]]
++    ]
++    | None = None,
+ ) -> int:
+     """
+     Args:
+@@ -663,14 +667,14 @@ def _import_actions(
+         base_args.dir = ["."]
+ 
+     try:
+-        for action_package_dir in base_args.dir:
+-            _actions_import.import_action_package(
+-                datadir=settings.datadir,
+-                action_package_dir=os.path.abspath(action_package_dir),
+-                skip_lint=base_args.skip_lint,
+-                disable_not_imported=disable_not_imported,
+-                whitelist=base_args.whitelist,
+-            )
++        _actions_import.import_action_packages(
++            datadir=settings.datadir,
++            action_package_dirs=[os.path.abspath(path) for path in base_args.dir],
++            skip_lint=base_args.skip_lint,
++            disable_not_imported=disable_not_imported,
++            whitelist=base_args.whitelist,
++            after_import=after_import,
++        )
+     except ActionServerValidationError as e:
+         log.critical(
+             bold_red(
+diff --git a/action_server/src/actions/server/_database.py b/action_server/src/actions/server/_database.py
+index afb8b031..af55df46 100644
+--- a/action_server/src/actions/server/_database.py
++++ b/action_server/src/actions/server/_database.py
+@@ -648,12 +648,16 @@ class Database:
+                     self.execute("BEGIN")
+                     try:
+                         yield
++                        conn.commit()
+                     except BaseException:
+                         log.exception("Error. Rolling back database")
+-                        conn.rollback()
++                        try:
++                            conn.rollback()
++                        except BaseException:
++                            # Preserve the admission/commit error; a rollback
++                            # error must not disguise the original failure.
++                            log.exception("Database rollback also failed")
+                         raise
+-                    else:
+-                        conn.commit()
+             except BaseException:
+                 if self.backend_name == "postgresql":
+                     log.exception("Error. Rolling back database")
+diff --git a/action_server/src/actions/server/_server.py b/action_server/src/actions/server/_server.py
+index 9ec6d00e..3684b01c 100644
+--- a/action_server/src/actions/server/_server.py
++++ b/action_server/src/actions/server/_server.py
+@@ -26,7 +26,9 @@ log = logging.getLogger(__name__)
+ _reload_generation_lock = threading.RLock()
+ 
+ 
+-def _reload_action_generation(action_routes, actions_process_pool, actions, packages):
++def _reload_action_generation(
++    action_routes, actions_process_pool, actions, packages, *, defer_publication=False
++):
+     """Atomically commit a prepared process and HTTP/MCP route generation."""
+     from copy import copy
+ 
+@@ -37,6 +39,7 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
+         old_packages = action_routes.action_package_id_to_action_package
+         old_actions = action_routes.actions
+         old_routes = list(app.router.routes)
++        old_openapi_schema = getattr(app, "openapi_schema", None)
+         old_route_state = dict(action_routes.__dict__)
+         old_process_generation = getattr(actions_process_pool, "generation", None)
+         helper = action_routes.mcp_server_setup_helper
+@@ -46,24 +49,15 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
+             if key.startswith("_")
+         }
+         pool_committed = False
+-        try:
+-            actions_process_pool.on_reload(packages, actions)
+-            pool_committed = True
+-            old_generation = getattr(action_routes, "_process_pool_generation", 0)
+-            action_routes._process_pool_generation = getattr(
+-                actions_process_pool,
+-                "generation",
+-                old_generation + 1,
+-            )
+-            action_routes.unregister_http_actions()
+-            action_routes.register_actions()
+-        except BaseException:
+-            app.router.routes[:] = old_routes
+-            action_routes.__dict__.clear()
+-            action_routes.__dict__.update(old_route_state)
+-            helper.__dict__.update(old_helper_state)
+-            if pool_committed:
+-                try:
++
++        def rollback():
++            with _reload_generation_lock:
++                app.router.routes = old_routes
++                app.openapi_schema = old_openapi_schema
++                action_routes.__dict__.clear()
++                action_routes.__dict__.update(old_route_state)
++                helper.__dict__.update(old_helper_state)
++                if pool_committed:
+                     actions_process_pool.on_reload(old_packages, old_actions)
+                     if old_process_generation is not None:
+                         restore_generation = getattr(
+@@ -71,8 +65,33 @@ def _reload_action_generation(action_routes, actions_process_pool, actions, pack
+                         )
+                         if restore_generation is not None:
+                             restore_generation(old_process_generation)
+-                except BaseException:
+-                    log.exception("Unable to roll back the process generation reload.")
++
++        try:
++            # Reject invalid HTTP/MCP catalogs before retiring the old pool.
++            old_generation = getattr(action_routes, "_process_pool_generation", 0)
++            action_routes._process_pool_generation = (
++                getattr(actions_process_pool, "generation", old_generation) + 1
++            )
++            prepared = action_routes.prepare_actions()
++            actions_process_pool.on_reload(packages, actions)
++            pool_committed = True
++        except BaseException:
++            try:
++                rollback()
++            except BaseException:
++                log.exception("Unable to roll back the process generation reload.")
++            raise
++
++        def publish():
++            with _reload_generation_lock:
++                action_routes.publish_prepared_actions(prepared)
++
++        if defer_publication:
++            return publish, rollback
++        try:
++            publish()
++        except BaseException:
++            rollback()
+             raise
+ 
+ 
+@@ -652,32 +671,38 @@ def start_server(
+                     log.info("Reload explicitly called!")
+                 else:
+                     log.info("File-changes detected: auto-reloading!")
+-                code = _import_actions(
+-                    start_args,
+-                    settings,
+-                    disable_not_imported=True,
+-                )
+-                if code != 0:
+-                    log.info(
+-                        "Unable to do auto-reload (actions could not be imported)."
+-                    )
+-                    return False
+ 
+-                actions_process_pool = _actions_process_pool.get_actions_process_pool()
+-                next_packages = {
+-                    package.id: package for package in db.all(ActionPackage)
+-                }
+-                next_actions = db.all(Action)
+-                try:
+-                    _reload_action_generation(
++                def publish_generation():
++                    actions_process_pool = (
++                        _actions_process_pool.get_actions_process_pool()
++                    )
++                    next_packages = {
++                        package.id: package for package in db.all(ActionPackage)
++                    }
++                    return _reload_action_generation(
+                         action_routes,
+                         actions_process_pool,
+-                        next_actions,
++                        db.all(Action),
+                         next_packages,
++                        defer_publication=True,
+                     )
+-                except BaseException:
++
++                try:
++                    code = _import_actions(
++                        start_args,
++                        settings,
++                        disable_not_imported=True,
++                        after_import=publish_generation,
++                    )
++                except Exception:
+                     log.exception("Unable to commit action generation reload.")
+                     return False
++                if code != 0:
++                    log.info(
++                        "Unable to do auto-reload (actions could not be imported)."
++                    )
++                    return False
++
+                 app.update_mtime_uuid()
+                 assert _LoopHolder.loop is not None
+                 report_mtime_changed(_LoopHolder.loop)
+diff --git a/action_server/src/actions/server/mcp/setup_mcp_server_v2.py b/action_server/src/actions/server/mcp/setup_mcp_server_v2.py
+index b38f3af8..29179acd 100644
+--- a/action_server/src/actions/server/mcp/setup_mcp_server_v2.py
++++ b/action_server/src/actions/server/mcp/setup_mcp_server_v2.py
+@@ -380,12 +380,19 @@ class McpServerSetupHelper:
+         actions: Iterable[tuple[Any, Any]],
+     ) -> dict[str, str]:
+         """Name a complete, filtered tool set independently of database order."""
+-        tools = [
+-            (package.name, action)
++        return McpServerSetupHelper.resolve_action_names(
++            (package, action)
+             for package, action in actions
+             if (json.loads(action.options) if action.options else {}).get("kind")
+             not in ("resource", "prompt")
+-        ]
++        )
++
++    @staticmethod
++    def resolve_action_names(
++        actions: Iterable[tuple[Any, Any]],
++    ) -> dict[str, str]:
++        """Preserve unambiguous bare names; qualify collisions deterministically."""
++        tools = [(package.name, action) for package, action in actions]
+         counts = Counter(action.name for _, action in tools)
+         names = {
+             action.id: action.name for _, action in tools if counts[action.name] == 1
+@@ -535,8 +542,12 @@ class McpServerSetupHelper:
+ 
+     def replace_catalog(self, replacement: "McpServerSetupHelper") -> None:
+         """Atomically publish a fully built catalog for the persistent server."""
++        self._validate_ui_resource_references(replacement._catalog)
++        self.publish_validated_catalog(replacement)
++
++    def publish_validated_catalog(self, replacement: "McpServerSetupHelper") -> None:
++        """Publish the private catalog already validated during preparation."""
+         catalog = replacement._catalog
+-        self._validate_ui_resource_references(catalog)
+         self._catalog = catalog
+         self._tools = catalog.tools
+         self._tool_name_to_action_info = catalog.tool_name_to_action_info
+diff --git a/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py b/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py
+index 61dd81f5..939bbffc 100644
+--- a/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py
++++ b/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py
+@@ -703,13 +703,11 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
+             self.registered_route_names = {"old-route"}
+             self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
+ 
+-        def unregister_http_actions(self):
+-            events.append("routes-unregister")
++        def prepare_actions(self):
++            events.append("routes-prepare")
++            return ["new-route"]
+ 
+-        def unregister_actions(self):
+-            events.append("routes-unregister")
+-
+-        def register_actions(self):
++        def publish_prepared_actions(self, prepared):
+             events.append("routes-register")
+ 
+     class FakePool:
+@@ -732,7 +730,7 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
+     release_old_call.set()
+     old_call_thread.join(timeout=2)
+ 
+-    assert events[:3] == ["pool-prepare", "routes-unregister", "routes-register"]
++    assert events[:3] == ["routes-prepare", "pool-prepare", "routes-register"]
+     assert events[-1] == "old-call-complete"
+     assert app.router.routes == ["old-route"]
+ 
+@@ -1026,14 +1024,7 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
+             self.registered_route_names = {"old-route"}
+             self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
+ 
+-        def unregister_actions(self):
+-            app.router.routes[:] = []
+-
+-        def unregister_http_actions(self):
+-            app.router.routes[:] = []
+-
+-        def register_actions(self):
+-            app.router.routes.append("new-route")
++        def prepare_actions(self):
+             raise RuntimeError("route preparation failed")
+ 
+     class FakePool:
+@@ -1056,10 +1047,7 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
+         )
+ 
+     assert app.router.routes == ["old-route"]
+-    assert pool.reloads == [
+-        ({"new": "new-package"}, ["new-action"]),
+-        ({"old": "old-package"}, ["old-action"]),
+-    ]
++    assert pool.reloads == []
+     assert pool.generation == 4
+ 
+ 

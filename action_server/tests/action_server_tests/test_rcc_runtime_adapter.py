@@ -703,13 +703,11 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
             self.registered_route_names = {"old-route"}
             self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
 
-        def unregister_http_actions(self):
-            events.append("routes-unregister")
+        def prepare_actions(self):
+            events.append("routes-prepare")
+            return ["new-route"]
 
-        def unregister_actions(self):
-            events.append("routes-unregister")
-
-        def register_actions(self):
+        def publish_prepared_actions(self, prepared):
             events.append("routes-register")
 
     class FakePool:
@@ -732,7 +730,7 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
     release_old_call.set()
     old_call_thread.join(timeout=2)
 
-    assert events[:3] == ["pool-prepare", "routes-unregister", "routes-register"]
+    assert events[:3] == ["routes-prepare", "pool-prepare", "routes-register"]
     assert events[-1] == "old-call-complete"
     assert app.router.routes == ["old-route"]
 
@@ -1026,14 +1024,7 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
             self.registered_route_names = {"old-route"}
             self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
 
-        def unregister_actions(self):
-            app.router.routes[:] = []
-
-        def unregister_http_actions(self):
-            app.router.routes[:] = []
-
-        def register_actions(self):
-            app.router.routes.append("new-route")
+        def prepare_actions(self):
             raise RuntimeError("route preparation failed")
 
     class FakePool:
@@ -1056,10 +1047,7 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
         )
 
     assert app.router.routes == ["old-route"]
-    assert pool.reloads == [
-        ({"new": "new-package"}, ["new-action"]),
-        ({"old": "old-package"}, ["old-action"]),
-    ]
+    assert pool.reloads == []
     assert pool.generation == 4
 
 

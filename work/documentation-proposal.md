@@ -1,0 +1,13 @@
+Canonical file proposed: docs/skills/repository-operations.md
+
+Replace the opening of the snapshot paragraph starting "For explicit spec-v2 RCC provider mode, Action Server snapshots the package source before metadata import." with:
+
+"Action Server snapshots included package source before metadata import for managed and unmanaged packages. Snapshot identity is revalidated after environment/bootstrap and metadata collection before any catalog admission; collection which changes included source bytes is rejected and a newly created candidate is removed. A datadir strictly nested inside the package is excluded in full. When datadir equals package root, authored source is retained while Runtime-owned state and configured database/artifact paths are excluded. Internal relative and absolute pythonpath entries resolve against the snapshot; external entries retain their original absolute resolution and remain mutable dependencies outside the included-source last-good guarantee. In explicit spec-v2 RCC provider mode, RCC receives the selected snapshot's package.yaml for environment fingerprinting and publish; the original absolute package.yaml path remains a separate environment_identity for cache reuse."
+
+Append after the snapshot paragraph:
+
+"Batch collection completes before SQLite writer admission. HTTP/MCP publication follows a successful catalog commit. A nondurable commit failure rolls back the same SQLite connection and compensates the prepared process generation, restoring route generation, cached OpenAPI, and MCP catalog contents before candidate cleanup. Additive imports retain omitted package identities; refreshing an existing selected package that omits a previously enabled action is rejected because the omitted action would otherwise refer to replacement source which no longer defines it. Use start --actions-sync=true with all desired --dir entries to reconcile removals. The independent test_p0_snapshot_reload_boundaries.py exercises the actual route/pool compensation closure with min_processes=0; it does not prove compensation of warmed RCC workers or external services."
+
+Evidence: exact candidate patch SHA c825af72f25df7fcc94ae3ce634d9d64cd4480edd2263d41fecb63e55792b2e4, seven independent tests passed 9.67s with installed actions-core1.0.2; CLI rejection/source preservation and explicit sync/HTTP execution checked. Superseded stale provider-only applicability and unqualified relative-path claim. Remaining uncertainty: warmed worker compensation, service/frozen/Windows integration and concurrent imports are not established by this bounded run.
+
+Upstream disposition: none. These defects were local candidate regressions in Actions #279; no external issue or dependency investigation was needed.
