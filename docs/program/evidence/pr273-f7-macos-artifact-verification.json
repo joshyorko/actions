@@ -1,0 +1,29 @@
+{
+  "observed_at_utc": "2026-10-10T07:36Z",
+  "pull_request": 273,
+  "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+  "candidate_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+  "workflow_run_id": 38032640853,
+  "tested_merge_source_sha": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4",
+  "tested_merge_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+  "platform": "macOS arm64",
+  "artifact": {
+    "id": 11662447275,
+    "archive_size_bytes": 50695849,
+    "archive_sha256": "17ee3b0de30d8bcc9176b3836900fac54aed60bda42aabbc7acab2c426db7568",
+    "manifest_sha256": "24be5627cf60f5d7844b7ac9ab524ad39eacd5e5342b1bf460219a1f1d6fb91e",
+    "inventory_sha256": "460edc2d91a5171710acd9ddf573986dbd1a3e0fd1a425cf518151f0e2ff50f1",
+    "inventory_entries": 1165,
+    "inventory_entries_verified": true,
+    "archive_members_exactly_match_inventory": true,
+    "frozen_tree_sha256": "8ab929c49488b4936f3591f0df57d6bd7b39c3352717621e82471062cd05a338",
+    "frozen_tree_digest_matches_manifest": true,
+    "frozen_executable_sha256": "544ae99b2cafe8dfeea328911add3f717371855825904c1454b3bcba5181977f",
+    "go_wrapper_sha256": "2405bf8a642abe6edaf436bfd050124d265402726e4e0f380c1eba4c5c41b382",
+    "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293"
+  },
+  "saved_manifest": "pr273-f7-macos-artifact/native-artifact-manifest.json",
+  "saved_inventory": "pr273-f7-macos-artifact/native-artifact-tree-inventory.json",
+  "binary_executed_by_reviewer": false,
+  "scope_note": "The workflow artifact is source-bound to the synthetic merge whose tree equals the PR head tree. This receipt verifies macOS native artifact provenance only; it is not a release publication or candidate Core wheel proof."
+}

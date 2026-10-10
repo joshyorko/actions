@@ -1,0 +1,278 @@
+{
+  "observed_at_utc": "2026-10-10 07:49:04 UTC",
+  "repository": "joshyorko/actions",
+  "integration": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+  "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+  "open_prs": [
+    {
+      "number": 284,
+      "title": "ci: verify real RCC provider rollback against Runtime candidate #273",
+      "draft": true,
+      "head": "772b73d9e7f9da6c3ea939faff8ae76d37982da7",
+      "branch": "test/rcc-provider-rollback-hosted-20261010",
+      "base": "fix/runtime-tests-integration-triggers-20261010",
+      "url": "https://github.com/joshyorko/actions/pull/284"
+    },
+    {
+      "number": 283,
+      "title": "feat: validate canonical Deployment values and typed references (#129 Slice 1a)",
+      "draft": true,
+      "head": "d03b0490be231b0b58a7e21b670ea6b3166b7170",
+      "branch": "feat/deployment-values-20261010",
+      "base": "integration/community-release-20261008",
+      "url": "https://github.com/joshyorko/actions/pull/283"
+    },
+    {
+      "number": 282,
+      "title": "feat(templates): checkpoint Canvas Query packaging for #127",
+      "draft": true,
+      "head": "92fe3fe6136e56998982ff1989e3e73fcbe58e48",
+      "branch": "feat/canvas-template-20261010",
+      "base": "integration/community-release-20261008",
+      "url": "https://github.com/joshyorko/actions/pull/282"
+    },
+    {
+      "number": 278,
+      "title": "fix: keep RCC acceptance CLI portable",
+      "draft": true,
+      "head": "c1c33ce77895d7b522f2229524d386ed72f8ba3b",
+      "branch": "fix/rcc-harness-portability-20261010",
+      "base": "integration/community-release-20261008",
+      "url": "https://github.com/joshyorko/actions/pull/278"
+    },
+    {
+      "number": 273,
+      "title": "fix: converge Runtime acceptance and multi-package catalogs",
+      "draft": false,
+      "head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "branch": "fix/runtime-tests-integration-triggers-20261010",
+      "base": "integration/community-release-20261008",
+      "url": "https://github.com/joshyorko/actions/pull/273"
+    },
+    {
+      "number": 272,
+      "title": "fix: retain last-good RCC source generations",
+      "draft": true,
+      "head": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+      "branch": "devsy/rcc-narrow-acceptance-20261010",
+      "base": "integration/community-release-20261008",
+      "url": "https://github.com/joshyorko/actions/pull/272"
+    },
+    {
+      "number": 221,
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "draft": true,
+      "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "branch": "integration/community-release-20261008",
+      "base": "community",
+      "url": "https://github.com/joshyorko/actions/pull/221"
+    },
+    {
+      "number": 218,
+      "title": "WIP: checkpoint native Work Items packaging and recovery",
+      "draft": true,
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "branch": "review/workitems-checkpoint-20261008",
+      "base": "community",
+      "url": "https://github.com/joshyorko/actions/pull/218"
+    },
+    {
+      "number": 217,
+      "title": "WIP: checkpoint Core public contracts and regression tests",
+      "draft": true,
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "branch": "review/core-checkpoint-20261008",
+      "base": "community",
+      "url": "https://github.com/joshyorko/actions/pull/217"
+    },
+    {
+      "number": 216,
+      "title": "WIP: checkpoint bounded Runtime history and WebSocket repairs",
+      "draft": true,
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "branch": "review/runtime-checkpoint-20261008",
+      "base": "community",
+      "url": "https://github.com/joshyorko/actions/pull/216"
+    },
+    {
+      "number": 215,
+      "title": "WIP: checkpoint community release safeguards for adversarial review",
+      "draft": true,
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "branch": "convergence/actions-full-graph-20261008",
+      "base": "community",
+      "url": "https://github.com/joshyorko/actions/pull/215"
+    }
+  ],
+  "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+  "candidate_checks": [
+    {
+      "name": "publish (3.12)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640836/job/114157665684",
+      "completed_at": "2026-10-10T07:03:57Z"
+    },
+    {
+      "name": "publish",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640905/job/114157069921",
+      "completed_at": "2026-10-10T06:58:41Z"
+    },
+    {
+      "name": "verify",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640905/job/114156605499",
+      "completed_at": "2026-10-10T06:58:41Z"
+    },
+    {
+      "name": "build (ubuntu-py3.12-devmode)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640874/job/114156605152",
+      "completed_at": "2026-10-10T07:10:01Z"
+    },
+    {
+      "name": "build (windows-py3.12-devmode)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640874/job/114156605125",
+      "completed_at": "2026-10-10T07:25:20Z"
+    },
+    {
+      "name": "build (macos-py3.12-devmode)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640874/job/114156605049",
+      "completed_at": "2026-10-10T07:09:13Z"
+    },
+    {
+      "name": "build-wheels (ubuntu-22.04)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640836/job/114156605008",
+      "completed_at": "2026-10-10T07:00:19Z"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640841/job/114156604893",
+      "completed_at": "2026-10-10T06:59:51Z"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640841/job/114156604840",
+      "completed_at": "2026-10-10T07:05:02Z"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640841/job/114156604833",
+      "completed_at": "2026-10-10T06:59:16Z"
+    },
+    {
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640853/job/114156604829",
+      "completed_at": "2026-10-10T07:04:33Z"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640841/job/114156604821",
+      "completed_at": "2026-10-10T06:58:40Z"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640841/job/114156604814",
+      "completed_at": "2026-10-10T06:58:15Z"
+    },
+    {
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640853/job/114156604812",
+      "completed_at": "2026-10-10T07:06:32Z"
+    },
+    {
+      "name": "build-sdist (ubuntu-py3.12)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640836/job/114156604761",
+      "completed_at": "2026-10-10T06:58:16Z"
+    },
+    {
+      "name": "build-wheels (windows-2022)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640836/job/114156604723",
+      "completed_at": "2026-10-10T07:02:07Z"
+    },
+    {
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640853/job/114156604640",
+      "completed_at": "2026-10-10T07:01:52Z"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640841/job/114156604627",
+      "completed_at": "2026-10-10T07:04:27Z"
+    },
+    {
+      "name": "coverage",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640839/job/114156604606",
+      "completed_at": "2026-10-10T07:04:56Z"
+    },
+    {
+      "name": "build-wheels (macos-15)",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640836/job/114156604603",
+      "completed_at": "2026-10-10T06:59:53Z"
+    },
+    {
+      "name": "audit",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38032640846/job/114156604592",
+      "completed_at": "2026-10-10T06:56:45Z"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "run_id": "38032640853",
+  "run_attempt": 1,
+  "platform": "Windows",
+  "architecture": "AMD64",
+  "source_sha": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4",
+  "source_sha_is_head": false,
+  "outer_zip_bytes": 48658876,
+  "outer_zip_sha256": "f66c168d7de4b846415251a8fa4b709d9e1351b207446fa7bcbd07599d426584",
+  "inner_tar_bytes": 95703040,
+  "inner_tar_sha256": "a6571a2e6f40a2059cdc22f6db9af2a696884e2ebafd0f6c1c235da3bc43e70c",
+  "manifest_sha256": "46d02e810103e667cd96229015b750187aef8ff53ed1f61367e9a45583c15f2d",
+  "inventory_sha256": "93968a77f769ad2ca3d0db6727ffe5680125643ca96f577fd61654b2f27f8521",
+  "tree_inventory_entries": 1852,
+  "archive_entries": 1855,
+  "archive_entry_set": "pass",
+  "archive_paths": "pass",
+  "archive_types_modes_bytes": "pass",
+  "canonical_tree_sha256": "8278b931bd3c9cd17b007b7b3bbae68d544a98e0684f1e3f4b168dff232a47a9",
+  "frozen_executable_path": "dist/action-server/action-server.exe",
+  "frozen_executable_sha256": "7df0c0a384d558f6cf023e670425a187f30034853703f8126496cdaac69be8ef",
+  "go_wrapper_sha256_recorded_but_payload_not_in_provenance_tar": "2bdda4080248f815c6ad58b22d5dbade15386759500cd6cc4bd8deffaaa32460",
+  "tar_ownership_timestamps_normalized": "pass",
+  "workflow_run_id_matches": true,
+  "workflow_attempt_matches": true,
+  "manifest_download_locator_matches": "pass",
+  "git_source_binding": "synthetic-merge-tree-equals-f7-head-tree",
+  "git_source_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+  "synthetic_merge_sha": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4",
+  "synthetic_merge_parents": [
+    "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "f7c6ed61f24fd9e98d1465c83042c5446466311b"
+  ],
+  "f7_head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+  "f7_head_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+  "sha_checks": {
+    "github_artifact_zip_digest": "f66c168d7de4b846415251a8fa4b709d9e1351b207446fa7bcbd07599d426584",
+    "downloaded_outer_zip_sha256": "f66c168d7de4b846415251a8fa4b709d9e1351b207446fa7bcbd07599d426584",
+    "matches": "pass"
+  },
+  "archive_summary": {
+    "entry_kind_counts": {
+      "directory": 145,
+      "file": 1710
+    },
+    "mode_counts": {
+      "0644": 2,
+      "0666": 1706,
+      "0777": 147
+    },
+    "regular_file_bytes": 94298488,
+    "directory_entries": 145,
+    "symlink_entries": 0,
+    "regular_file_entries": 1710,
+    "frozen_executable_bytes": 18042978
+  }
+}

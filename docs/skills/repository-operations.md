@@ -187,9 +187,11 @@ bearer; a successful bearer probe and an unauthorized browser request are
 different subjects.
 When adding a dated program amendment, regenerate the current graph, ledger,
 resume record and handoff through `scripts/project_community_execution_graph.py`.
-The CLI regression fixture must copy the current amendment and its declared
-evidence from the pointer, so a new checkpoint cannot silently omit its own
-hash-bound inputs. Keep historical receipts and retained contract text unchanged.
+The CLI regression fixture must copy the current amendment from its pointer
+and the declared evidence of every retained amendment. Copying only the latest
+receipt set drops the previous checkpoint's inputs as soon as it becomes
+historical, while `--check` still validates them. Keep historical receipts and
+retained contract text unchanged.
 Before committing an evidence archive, verify each selected receipt's bytes
 against its ledger SHA-256 and reject absolute or parent-traversal archive
 paths. Preserve running and skipped CI states separately from passing results.

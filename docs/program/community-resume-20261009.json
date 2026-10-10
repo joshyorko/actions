@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-10T07:13:00Z",
-  "status": "PR273 f7c6ed61 includes the accepted integration and narrow Windows canonical-fixture checkout repair; current-head Runtime CI remains pending. Canvas #127 draft PR282 preserves reviewed offline template work. Approved #129 Slice 1a has a local pure-value implementation under independent review. Real RCC provider rollback hosted admission is under review. All 54 original contracts remain: 53 open, only #210 accepted/closed. Devsy native reads fail with KubernetesError; existing worktrees/threads are preserved.",
+  "observed_at": "2026-10-10T07:53:20Z",
+  "status": "PR273 f7 has passed current-head Runtime and native validation on all three operating systems; complete native archives are verified. Real managed RCC failed-reload preservation/recovery passed run38034464513; frozen duplicate-catalog rollback and successful-switch old-Run drain remain distinct gates. PR283 Deployment values is under exact-head CI repair; PR284 has the reviewed Windows fixture correction pushed. No release or integration in this observation. All 54 original contracts remain, only #210 accepted/closed. Devsy cas-worker-01 is verified blocked by workspace_not_running; preserve its isolated worktrees and unresolved dispatch effects.",
   "integration_head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
   "release_ready": false,
@@ -2513,7 +2513,7 @@
     "whole_contract_complete": 1,
     "relationship_schema_version": 2,
     "relationship_policy": "Typed execution prerequisites and scoped criterion gates only; parent coordination, related product direction and full-acceptance aggregation are separately inspectable and nonblocking.",
-    "worker_stage_snapshot": "2026-10-09T20:21:15Z",
+    "worker_stage_snapshot": "2026-10-10T07:53:20Z",
     "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T201539Z.json",
     "worker_inventory_sha256": "a9773da10f37c14f8d5ab478375a3bb4cfccba0c2bd6616358af6d19cc834141"
   },
@@ -4330,14 +4330,14 @@
     }
   },
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T06:04:13Z",
+    "observed_at_utc": "2026-10-10 07:49:04 UTC",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-    "integration/community-release-20261008": "6d438feb6c92f8bb01428f665ac423fb101b4017",
-    "integration/runtime-release-final-20261009": "6a53578fac029a0696834c30438c858f5f0003be",
+    "integration/community-release-20261008": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
-    "receipt": "evidence/convergence-refs-20261010T0604Z.txt",
-    "receipt_sha256": "9a2c103dfdcdf8888508b0e8a38e6f42f21f37cdee3b45eb4c9c24970bfd0f21",
-    "source": "Fresh git ls-remote origin readback."
+    "receipt": "evidence/convergence-live-20261010T0800Z.json",
+    "receipt_sha256": "4cd3bfeaa1e706ebcd7d8001a1e363f8349d6891a4546b0e626d592dd56ea6cf",
+    "source": "Fresh GitHub refs, open PRs and exact candidate checks; individual receipt observation timestamps retained."
   },
   "current_evidence_correction": {
     "observed_at_utc": "2026-10-10T01:40:00Z",
@@ -4345,8 +4345,8 @@
     "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
     "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
   },
-  "checkpoint_status": "PR273 f7c6ed61 includes the accepted integration and narrow Windows canonical-fixture checkout repair; current-head Runtime CI remains pending. Canvas #127 draft PR282 preserves reviewed offline template work. Approved #129 Slice 1a has a local pure-value implementation under independent review. Real RCC provider rollback hosted admission is under review. All 54 original contracts remain: 53 open, only #210 accepted/closed. Devsy native reads fail with KubernetesError; existing worktrees/threads are preserved.",
-  "checkpoint_observed_at": "2026-10-10T07:13:00Z",
+  "checkpoint_status": "PR273 f7 has passed current-head Runtime and native validation on all three operating systems; complete native archives are verified. Real managed RCC failed-reload preservation/recovery passed run38034464513; frozen duplicate-catalog rollback and successful-switch old-Run drain remain distinct gates. PR283 Deployment values is under exact-head CI repair; PR284 has the reviewed Windows fixture correction pushed. No release or integration in this observation. All 54 original contracts remain, only #210 accepted/closed. Devsy cas-worker-01 is verified blocked by workspace_not_running; preserve its isolated worktrees and unresolved dispatch effects.",
+  "checkpoint_observed_at": "2026-10-10T07:53:20Z",
   "current_convergence": {
     "observed_at_utc": "2026-10-10T06:04:13Z",
     "path": "evidence/convergence-followup-20261010T0604Z.json",
@@ -6173,13 +6173,206 @@
         "cloud_cas_heartbeat": "luna_cas_heartbeat:bounded read-only readiness, no remote replacement",
         "devsy_supervisor": "BLOCKED: native KubernetesError, recorded worker state is historical"
       }
+    },
+    {
+      "id": "program-amendment-20261010T0753Z",
+      "observed_at_utc": "2026-10-10T07:53:20Z",
+      "summary": "PR273 f7 has passed current-head Runtime and native validation on all three operating systems; complete native archives are verified. Real managed RCC failed-reload preservation/recovery passed run38034464513; frozen duplicate-catalog rollback and successful-switch old-Run drain remain distinct gates. PR283 Deployment values is under exact-head CI repair; PR284 has the reviewed Windows fixture correction pushed. No release or integration in this observation. All 54 original contracts remain, only #210 accepted/closed. Devsy cas-worker-01 is verified blocked by workspace_not_running; preserve its isolated worktrees and unresolved dispatch effects.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "whole_issue_acceptance_changed": false
+      },
+      "worker_stage_snapshot": "2026-10-10T07:53:20Z",
+      "integration_checkpoint": {
+        "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+        "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "cohort": {
+          "items": 33,
+          "target_integrated": 22,
+          "open_blocked": 11,
+          "merge_ready": 0,
+          "target_integrated_prs": [
+            219,
+            220,
+            251,
+            256,
+            257,
+            259,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            274,
+            275,
+            276,
+            277,
+            280,
+            281
+          ],
+          "open_prs": [
+            215,
+            216,
+            217,
+            218,
+            221,
+            272,
+            273,
+            278,
+            282,
+            283,
+            284
+          ],
+          "scope": "Named PR target integration; independent of source containment, whole-issue acceptance, community merge and publication."
+        }
+      },
+      "pr273_status": {
+        "head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+        "tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+        "normal_ci": "20 SUCCESS, 1 SKIPPED; publication steps not executed",
+        "native_run": 38032640853,
+        "native_build_source": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4",
+        "source_relation": "Synthetic merge has the exact f7 tree; source SHA is not relabeled.",
+        "remaining_gates": [
+          "Frozen duplicate resource/template/prompt rejection and last-good restart",
+          "Actual successful-generation-switch old Run draining acceptance",
+          "Independent review and exact integration checks before merge",
+          "Authorized publication and external artifact verification; no Runtime1.0.3 publication yet"
+        ]
+      },
+      "deployment_values_checkpoint": {
+        "issue": 129,
+        "slice": "129-1a",
+        "pr": 283,
+        "head": "d03b0490be231b0b58a7e21b670ea6b3166b7170",
+        "base": "integration/community-release-20261008",
+        "merge_dependency": 273,
+        "state": "ACTIVE_CI_REPAIR",
+        "owner": "luna_release_notes",
+        "gate": "Windows UTF-8 vector fixture behavior, configured isort and test nominal-type checks; preserve strict negative validation"
+      },
+      "rcc_hosted_checkpoint": {
+        "pr": 284,
+        "head": "772b73d9e7f9da6c3ea939faff8ae76d37982da7",
+        "candidate": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+        "proof_run": 38034464513,
+        "proof_control_head": "e4f2f92292971408c48885e3e0a869cac9036630",
+        "proof_status": "PASS_SCOPED",
+        "prior_failure_run": 38034105493,
+        "remaining_pr_gate": "Native Windows primary/N-1 toolkit rerun after synthetic executable fixture portability repair"
+      },
+      "devsy": {
+        "target": "cas-worker-01",
+        "repository": "/workspaces/actions",
+        "worker_root": "/workspaces/actions-worktrees",
+        "protected_bootstrap": "/workspaces/cas-worker-01",
+        "supervisor_thread": "01a1222f-e720-7183-9634-2edb76d30326",
+        "supervisor_cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+        "observed_at_utc": "2026-10-10T07:45:17Z",
+        "workspace_uid": "default-ca-0b24d",
+        "pod_uid": "c08aeecd-3aa4-4077-947a-04ac381625e1",
+        "pod_phase": "Failed",
+        "inspect_target": "unresolved/workspace_not_running",
+        "discover_threads": "KubernetesError",
+        "disposition": "Preserve workers/worktrees; no provisioning/replays. Reconcile existing threads and exact ACTIONS cwd before dispatch after recovery."
+      },
+      "evidence": [
+        {
+          "path": "evidence/convergence-live-20261010T0800Z.json",
+          "size_bytes": 11373,
+          "sha256": "4cd3bfeaa1e706ebcd7d8001a1e363f8349d6891a4546b0e626d592dd56ea6cf"
+        },
+        {
+          "path": "evidence/pr273-f7-linux-artifact-verification.json",
+          "size_bytes": 1671,
+          "sha256": "ccd782e1cd7c631ae815bb8ae93db8a96baf57c7f6348b0b528183a5e87b7e5e"
+        },
+        {
+          "path": "evidence/pr273-f7-macos-artifact-verification.json",
+          "size_bytes": 1749,
+          "sha256": "b8a356f2824c1599d91ed33ccb9e104800b51bfe049e18782d6493f928e96174"
+        },
+        {
+          "path": "evidence/pr273-f7-windows-artifact-verification.json",
+          "size_bytes": 2394,
+          "sha256": "0da5dd0dc8afcd3e55997f6493bab0eec045adcb8745a7b9332f3c3593f0d4c7"
+        },
+        {
+          "path": "evidence/rcc-provider-rollback-38034464513/run.json",
+          "size_bytes": 1670,
+          "sha256": "f1122213986d5b21f335558fb98bac8b974b89bb2a01460c8532fb409b85f361"
+        },
+        {
+          "path": "evidence/rcc-provider-rollback-38034464513/acceptance-summary.log",
+          "size_bytes": 448,
+          "sha256": "69894eb892003a6c87c3e681369beca268169c829d759abff728496febd39659"
+        },
+        {
+          "path": "evidence/rcc-provider-rollback-38034464513/acceptance-summary.json",
+          "size_bytes": 2039,
+          "sha256": "c27e2d26cbfb7e687e54ca6dcda0475207edae6428bba29753d0e1c1300c1cba"
+        }
+      ],
+      "upstream_disposition": "none; identified CI portability failures are Actions-local. Ubuntu22 glibc2.35 fails the declared artifact floor; not evidence of an upstream defect.",
+      "accepted_scoped_criteria": [
+        {
+          "criterion_id": "134:managed-failed-reload-recovery-f7",
+          "owner_issue": 134,
+          "consumer_issue": 134,
+          "consumer_slice": "134-managed-rollback",
+          "description": "Actual managed RCC last-good execution across a failed reload and subsequent recovery",
+          "status": "ACCEPTED_EXECUTED_SCOPED_CRITERION_ONLY",
+          "decision": "Independent review accepted the exact f7 receipt from run38034464513: initial acquisition succeeds on glibc2.39; old Run survives a failed update, later last-good and recovered calls persist expected results; two initial provider operations, no additional observed operations in the measured phase; natural cleanup without observed surviving owned descendants.",
+          "consumer_slice_description": "Actual managed RCC failed-reload preservation and subsequent source-only recovery",
+          "consumer_slice_status": "PASS; FULL_134_NOT_COMPLETE",
+          "gate_scope": "No successful-switch in-flight drain, provider-dead offline execution, second-consumer acquisition, trust/lease matrix, frozen proof or whole-issue acceptance.",
+          "consumer_issue_reason": "Current candidate managed failed-reload recovery is executed and independently accepted; wider RCC provider, lease, trust, offline and platform contracts remain unaccepted.",
+          "consumer_issue_next_action": "Clear frozen duplicate-catalog and real successful-switch drain gates; then execute the smallest RCC consumer/lease/offline conformance gaps before generalizing adapters.",
+          "consumer_issue_classification": "ACTIVE",
+          "superseded_issue_level_prerequisites": [],
+          "evidence_path": "evidence/rcc-provider-rollback-38034464513/acceptance-summary.json",
+          "evidence_sha256": "c27e2d26cbfb7e687e54ca6dcda0475207edae6428bba29753d0e1c1300c1cba"
+        }
+      ],
+      "issue_metadata_updates": {
+        "129": {
+          "owner": "Cloud luna_release_notes CI repair; Sol independent review; root integration",
+          "checkpoint_pr": 283,
+          "next_bounded_action": "Repair exact-head test encoding, formatting and nominal-type checks; rerun affected matrix and retain PR273 merge dependency."
+        },
+        "134": {
+          "owner": "Cloud root integration with RCC/frozen acceptance and Sol independent review",
+          "checkpoint_pr": 284,
+          "next_bounded_action": "Clear frozen duplicate-catalog and real successful-switch drain gates; then execute the smallest RCC consumer/lease/offline conformance gaps before generalizing adapters."
+        }
+      },
+      "current_active_workers": {
+        "cloud_deployment_values": "luna_release_notes: PR283 exact-head CI repair, isolated deployment-values-ci-fix-20261010",
+        "cloud_rcc_hosted": "root: PR284 Windows correction pushed; actual managed rollback scoped proof PASS",
+        "cloud_frozen_catalog": "luna_worker_exit: frozen catalog rollback, isolated frozen-catalog-rollback-20261010",
+        "cloud_generation_drain": "luna_canvas_acceptance: real successful-switch old Run acceptance, isolated p0-generation-drain-20261010",
+        "cloud_independent_review": "sol_p0_snapshot_review: frozen harness, source generation drain and CI repairs",
+        "cloud_cas_heartbeat": "luna_cas_heartbeat: read-only diagnostics; no replacement or replay",
+        "devsy_supervisor": "BLOCKED workspace_not_running; last worker inventory remains historical"
+      }
     }
   ],
   "current_program_amendment": {
-    "id": "program-amendment-20261010T0713Z",
-    "observed_at_utc": "2026-10-10T07:13:00Z",
-    "path": "evidence/program-amendment-20261010T0713Z.json",
-    "sha256": "4e802498a6e294cd83ba254af89c23320a596a2db92480478995f21d21d7cab0"
+    "id": "program-amendment-20261010T0753Z",
+    "observed_at_utc": "2026-10-10T07:53:20Z",
+    "path": "evidence/program-amendment-20261010T0753Z.json",
+    "sha256": "1352a19efdb98de6d99914de250e4e71a4c478e131519d974ea1016021acaab7"
   },
   "prior_current_convergence_update_20261010T0441Z": {
     "observed_at_utc": "2026-10-10T04:41:32Z",
@@ -6337,5 +6530,74 @@
     "checks": "12 required exact-head checks passed; native artifact review PASS_BOUNDED; publication skipped",
     "scope_limit": "Bounded packaged Work Items cross-platform/browser checkpoint integrated to the named integration branch; no whole #208 acceptance or publication implied.",
     "receipt": "evidence/pr256-524-integration-readback-20261010T0054Z.json"
+  },
+  "prior_current_program_refs_20261010T0800Z": {
+    "observed_at_utc": "2026-10-10T06:04:13Z",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration/community-release-20261008": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "integration/runtime-release-final-20261009": "6a53578fac029a0696834c30438c858f5f0003be",
+    "release_ready": false,
+    "receipt": "evidence/convergence-refs-20261010T0604Z.txt",
+    "receipt_sha256": "9a2c103dfdcdf8888508b0e8a38e6f42f21f37cdee3b45eb4c9c24970bfd0f21",
+    "source": "Fresh git ls-remote origin readback."
+  },
+  "current_pr_convergence": {
+    "observed_at_utc": "2026-10-10T07:53:20Z",
+    "cohort": {
+      "items": 33,
+      "target_integrated": 22,
+      "open_blocked": 11,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        274,
+        275,
+        276,
+        277,
+        280,
+        281
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278,
+        282,
+        283,
+        284
+      ],
+      "scope": "Named PR target integration; independent of source containment, whole-issue acceptance, community merge and publication."
+    },
+    "path": "evidence/convergence-live-20261010T0800Z.json",
+    "sha256": "4cd3bfeaa1e706ebcd7d8001a1e363f8349d6891a4546b0e626d592dd56ea6cf",
+    "integration": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "release_ready": false,
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ]
   }
 }

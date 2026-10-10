@@ -190,7 +190,7 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.assertEqual("REVIEW", rows[127]["classification"])
         self.assertEqual("NOT_STARTED", rows[127]["retained_state"])
         self.assertIn("NOT_COMPLETE", rows[127]["reason"])
-        self.assertEqual("2026-10-10T07:13:00Z", graph["worker_stage_snapshot"])
+        self.assertEqual("2026-10-10T07:53:20Z", graph["worker_stage_snapshot"])
         self.assertEqual("ACTIVE", rows[129]["classification"])
         self.assertEqual("ACCEPTED_DESIGN_FOR_IMPLEMENTATION_ONLY", criteria["129:canonical-values-design-1a"]["status"])
         self.assertEqual("ACCEPTED_OFFLINE_CHECKPOINT_ONLY", criteria["127:offline-template-checkpoint"]["status"])
@@ -321,12 +321,13 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             target = repo / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, target)
-        # New dated amendments must be exercised by the CLI fixture without
-        # extending a historical hard-coded receipt list for every checkpoint.
+        # Check validates every retained amendment, including a former current
+        # one that has just become historical. Copy all declared evidence.
         current = self.ledger["current_program_amendment"]
-        current_path = ROOT / "docs/program" / current["path"]
-        current_payload = json.loads(current_path.read_text(encoding="utf-8"))
-        for relative in [current["path"]] + [item["path"] for item in current_payload["evidence"]]:
+        required = {current["path"]}
+        for amendment in self.ledger["supplemental_program_amendments"]:
+            required.update(item["path"] for item in amendment.get("evidence", []))
+        for relative in sorted(required):
             target = repo / "docs/program" / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / "docs/program" / relative, target)

@@ -1,6 +1,6 @@
 # Actions operational execution graph
 
-Worker-stage observation: 2026-10-10T07:13:00Z. All 54 retained contracts remain unfinished except accepted whole issue #210; this overlay does not change their raw states.
+Worker-stage observation: 2026-10-10T07:53:20Z. All 54 retained contracts remain unfinished except accepted whole issue #210; this overlay does not change their raw states.
 
 Relationship semantics: execution prerequisites gate only the identified implementation slice; parent/coordination and product/related edges never block execution; aggregation edges contribute to full parent acceptance. Only execution edges enter cycle/topological validation.
 
@@ -28,12 +28,12 @@ Counts: READY=0, ACTIVE=8, REVIEW=9, BLOCKED=28, INTEGRATED=8, COMPLETE=1.
 | [#125](https://github.com/joshyorko/actions/issues/125) | INTEGRATED | None | None | None | None | #128 | Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract. |
 | [#126](https://github.com/joshyorko/actions/issues/126) | ACTIVE | None | #93, #101 | #71, #99, #100, #127 | None | #219 | Continue independent artifact verification and remaining #126 protocol/host criteria; do not promote the Linux offline template proof to whole-issue acceptance. |
 | [#127](https://github.com/joshyorko/actions/issues/127) | REVIEW | None | #93, #101 | #71 | None | #282 | Clear fresh dependency resolution, TypeScript and opt-in Runtime/browser gates; route authorized-artifact dependency through #129/#83 common contracts, not a private resolver. |
-| [#129](https://github.com/joshyorko/actions/issues/129) | ACTIVE | None | None | None | None | #250 | Complete independent review of66b683, push recoverable checkpoint, then run exact-head gates; do not implement persistence/API/resolver under this slice. |
+| [#129](https://github.com/joshyorko/actions/issues/129) | ACTIVE | None | None | None | None | #283 | Repair exact-head test encoding, formatting and nominal-type checks; rerun affected matrix and retain PR273 merge dependency. |
 | [#130](https://github.com/joshyorko/actions/issues/130) | BLOCKED | None | None | None | None | See ledger | Await the existing Devsy coordinator supervisor dispatch, then implement the bounded immutable Package Revision schema and deterministic fixtures against accepted criterion 129:deployment-reference-envelope; keep full #129 production, #130 acceptance and the #135/#136 order unchanged. |
 | [#131](https://github.com/joshyorko/actions/issues/131) | BLOCKED | #125, #129, #130 | None | None | None | See ledger | Define provider data/knowledge references and authorized operations without product-tier coupling. |
 | [#132](https://github.com/joshyorko/actions/issues/132) | BLOCKED | #83, #90, #129 | None | None | None | See ledger | Implement durable business queue/review/lease semantics separately from Run ownership. |
 | [#133](https://github.com/joshyorko/actions/issues/133) | BLOCKED | #129, #130, #134, #143 | None | None | None | See ledger | Extend proven RCC adapter to worker execution using released provider/lease/exec contract. |
-| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None | None | None | None | #247 | Complete bounded actual local consumer proof while preserving warm FAIL, provider-503 negative, source/wheel/frozen cells, native limits, and full issue contract. |
+| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None | None | None | None | #284 | Clear frozen duplicate-catalog and real successful-switch drain gates; then execute the smallest RCC consumer/lease/offline conformance gaps before generalizing adapters. |
 | [#135](https://github.com/joshyorko/actions/issues/135) | BLOCKED | #129, #130 | None | None | None | See ledger | Compile deterministic Package Revisions and plans from current sources without machine-local identities. |
 | [#136](https://github.com/joshyorko/actions/issues/136) | BLOCKED | #135 | None | None | None | See ledger | Implement verified immutable source provider and worker-local cache with corruption rejection. |
 | [#138](https://github.com/joshyorko/actions/issues/138) | BLOCKED | #83, #84, #90, #129, #130, #143 | None | None | None | See ledger | Version worker protocol carrying exact pinned plans and explicit decline/cancel/recovery. |
@@ -85,6 +85,7 @@ Counts: READY=0, ACTIVE=8, REVIEW=9, BLOCKED=28, INTEGRATED=8, COMPLETE=1.
 | 125:public-package-boundary-template-127 | #125 | ACCEPTED_TEMPLATE_PUBLIC_BOUNDARY_ONLY | Use the public decorator/candidate-wheel authoring boundary for this template. No Canvas package archive or full #125 acceptance is established. Evidence: Root accepted the bounded public-package boundary consumed by #127 after source review; whole #125 and Canvas package archive remain open. |
 | 129:canonical-values-design-1a | #129 | ACCEPTED_DESIGN_FOR_IMPLEMENTATION_ONLY | Owner-approved pure canonical values and typed reference Slice1a Evidence: Owner approved only Slice1a; implementation is active and independently reviewed, with final copied-instance verification pending. |
 | 127:offline-template-checkpoint | #127 | ACCEPTED_OFFLINE_CHECKPOINT_ONLY | Reviewed offline template and fresh extracted project checkpoint Evidence: Draft PR282 preserves reviewed offline template implementation; full template acceptance still requires compatible published Core, Runtime/browser and authorized artifact semantics. |
+| 134:managed-failed-reload-recovery-f7 | #134 | ACCEPTED_EXECUTED_SCOPED_CRITERION_ONLY | Actual managed RCC last-good execution across a failed reload and subsequent recovery Evidence: Independent review accepted the exact f7 receipt from run38034464513: initial acquisition succeeds on glibc2.39; old Run survives a failed update, later last-good and recovered calls persist expected results; two initial provider operations, no additional observed operations in the measured phase; natural cleanup without observed surviving owned descendants. |
 
 ## Canvas implementation slices
 
@@ -102,6 +103,7 @@ Counts: READY=0, ACTIVE=8, REVIEW=9, BLOCKED=28, INTEGRATED=8, COMPLETE=1.
 | 99-A: Portable MCP App View renderer/resource bridge using the agreed fixture | #99 | ACCEPTED_SYSTEM_CHROMIUM_RUNTIME_SLICE; pinned Playwright, actual ChatGPT host and whole #99 remain open. | 97:ui-foundation, 98:canvas-artifact, 99-A:system-chromium-runtime-bridge |
 | 129-1a: Owner-approved pure canonical values and typed reference Slice1a | #129 | ACTIVE; NOT_COMPLETE | 129:canonical-values-design-1a |
 | 127-template: Reviewed offline template and fresh extracted project checkpoint | #127 | REVIEW; NOT_COMPLETE | 100-A, 100-B, 99-A, 125:public-package-boundary, 98:canvas-artifact, 98:canvas-artifact-consumed-resource-127, 125:public-package-boundary-template-127, 127:offline-template-checkpoint |
+| 134-managed-rollback: Actual managed RCC failed-reload preservation and subsequent source-only recovery | #134 | PASS; FULL_134_NOT_COMPLETE | 134:managed-failed-reload-recovery-f7 |
 
 ## Supplemental program amendments (outside the retained 54 issue contracts)
 
@@ -179,3 +181,11 @@ PR273 f7c6ed61 includes the accepted integration and narrow Windows canonical-fi
 |---|---|---|---|
 | `#129` 129:canonical-values-design-1a → `129-1a` | ACCEPTED_DESIGN_FOR_IMPLEMENTATION_ONLY | scoped criterion only | Owner-approved pure canonical values and typed reference Slice1a Decision: Owner approved only Slice1a; implementation is active and independently reviewed, with final copied-instance verification pending. Evidence: [evidence/issue-129-slice1a-approval-20261010.json](evidence/issue-129-slice1a-approval-20261010.json) (SHA-256 `3c869281a7ebc84061520c1f4b7ced0f76875fa35dd3c08bb82a6b13525376f5`).
 | `#127` 127:offline-template-checkpoint → `127-template` | ACCEPTED_OFFLINE_CHECKPOINT_ONLY | scoped criterion only | Reviewed offline template and fresh extracted project checkpoint Decision: Draft PR282 preserves reviewed offline template implementation; full template acceptance still requires compatible published Core, Runtime/browser and authorized artifact semantics. Evidence: [evidence/canvas-b794-root-final-review.log](evidence/canvas-b794-root-final-review.log) (SHA-256 `d7b8be751022b0a1e160ab361d3a9530776dba5a533e064b8bd36e896df3db50`).
+
+### program-amendment-20261010T0753Z — 2026-10-10T07:53:20Z
+
+PR273 f7 has passed current-head Runtime and native validation on all three operating systems; complete native archives are verified. Real managed RCC failed-reload preservation/recovery passed run38034464513; frozen duplicate-catalog rollback and successful-switch old-Run drain remain distinct gates. PR283 Deployment values is under exact-head CI repair; PR284 has the reviewed Windows fixture correction pushed. No release or integration in this observation. All 54 original contracts remain, only #210 accepted/closed. Devsy cas-worker-01 is verified blocked by workspace_not_running; preserve its isolated worktrees and unresolved dispatch effects.
+
+| Supplemental gate | Status | Accounting | Scope and evidence |
+|---|---|---|---|
+| `#134` 134:managed-failed-reload-recovery-f7 → `134-managed-rollback` | ACCEPTED_EXECUTED_SCOPED_CRITERION_ONLY | scoped criterion only | Actual managed RCC last-good execution across a failed reload and subsequent recovery Decision: Independent review accepted the exact f7 receipt from run38034464513: initial acquisition succeeds on glibc2.39; old Run survives a failed update, later last-good and recovered calls persist expected results; two initial provider operations, no additional observed operations in the measured phase; natural cleanup without observed surviving owned descendants. Evidence: [evidence/rcc-provider-rollback-38034464513/acceptance-summary.json](evidence/rcc-provider-rollback-38034464513/acceptance-summary.json) (SHA-256 `c27e2d26cbfb7e687e54ca6dcda0475207edae6428bba29753d0e1c1300c1cba`).

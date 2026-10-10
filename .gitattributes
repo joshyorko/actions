@@ -42,3 +42,13 @@ docs/program/evidence/pr273-f7-fixture-checkout-fix.log -text
 docs/program/evidence/canvas-b794-root-final-review.log -text
 docs/program/evidence/canvas-b794-root-fresh-extracted.log -text
 docs/program/evidence/program-amendment-20261010T0713Z.json -text
+
+# Immutable current acceptance receipts, recorded 20261010T0800Z.
+docs/program/evidence/convergence-live-20261010T0800Z.json -text
+docs/program/evidence/pr273-f7-linux-artifact-verification.json -text
+docs/program/evidence/pr273-f7-macos-artifact-verification.json -text
+docs/program/evidence/pr273-f7-windows-artifact-verification.json -text
+docs/program/evidence/rcc-provider-rollback-38034464513/run.json -text
+docs/program/evidence/rcc-provider-rollback-38034464513/acceptance-summary.log -text
+docs/program/evidence/rcc-provider-rollback-38034464513/acceptance-summary.json -text
+docs/program/evidence/program-amendment-20261010T0753Z.json -text
