@@ -1,0 +1,263 @@
+{
+  "observed_at_utc": "2026-10-10T20:21:09Z",
+  "source": {
+    "ref_read": "Read-only git ls-remote verified current branch refs for community, integration and tracked PR branches.",
+    "commit_details": "Read-only GitHub REST commit endpoint provided each current SHA, tree, ordered parents.",
+    "pr_state_and_check_counts": "Native gh pr view returned summarized PR state and check status rollup for the bounded cohort; no credentials/status beyond returned API fields are recorded."
+  },
+  "commands": [
+    "gh pr view <number> --json number,state,isDraft,headRefName,headRefOid,baseRefName,mergedAt,title,url,updatedAt,statusCheckRollup",
+    "git ls-remote origin refs/heads/community refs/heads/integration/community-release-20261008 refs/heads/<current PR heads>",
+    "git show -s --format=%T and %P <SHA>"
+  ],
+  "remote_refs": {
+    "refs/heads/community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "refs/heads/feat/canvas-template-20261010": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+    "refs/heads/feat/run-output-transport-20261010": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+    "refs/heads/feat/shared-run-output-20261010": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+    "refs/heads/fix/mcp-resource-routing-history-20261010": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "refs/heads/fix/rcc-published-artifact-details-20261010": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+    "refs/heads/integration/community-release-20261008": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "refs/heads/mk3/core-union-20261010": "73605934c1c948895410a5abaed6c225a396e038",
+    "refs/heads/test/canvas-runtime-cache-isolation-20261010": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+    "refs/heads/test/mcp-alias-frozen-control-20261010": "9e1059a12456faba64d11313d6dd8f943ad28912"
+  },
+  "commit_bindings": [
+    {
+      "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+      "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+      "parents": [
+        "aa78bc25b7662c163a59e19e81c97834cce24ba1"
+      ]
+    },
+    {
+      "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+      "parents": [
+        "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+        "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+      ]
+    },
+    {
+      "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+      "parents": [
+        "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+        "e886d26ebaefafa9189a69517f6707691b53662e"
+      ]
+    },
+    {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+      "parents": [
+        "e886d26ebaefafa9189a69517f6707691b53662e",
+        "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+      ]
+    },
+    {
+      "sha": "73605934c1c948895410a5abaed6c225a396e038",
+      "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+      "parents": [
+        "0f9422bbb366dcadc10ddea05f86a7f9ecad227c"
+      ]
+    },
+    {
+      "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+      "parents": [
+        "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+        "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "e886d26ebaefafa9189a69517f6707691b53662e"
+      ]
+    },
+    {
+      "sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+      "parents": [
+        "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "c2733957b047a2acf3d38c1cad7704a4bc69f15b"
+      ]
+    },
+    {
+      "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+      "parents": [
+        "dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+      ]
+    },
+    {
+      "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+      "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+      "parents": [
+        "e31506239fd0260d708a11440762537334f8d2d1"
+      ]
+    },
+    {
+      "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+      "parents": [
+        "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
+      ]
+    }
+  ],
+  "pull_requests": [
+    {
+      "baseRefName": "community",
+      "headRefName": "integration/community-release-20261008",
+      "headRefOid": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 221,
+      "state": "OPEN",
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "updatedAt": "2026-10-10T19:38:14Z",
+      "url": "https://github.com/joshyorko/actions/pull/221",
+      "checks": {},
+      "check_count": 0
+    },
+    {
+      "baseRefName": "integration/community-release-20261008",
+      "headRefName": "feat/canvas-template-20261010",
+      "headRefOid": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 282,
+      "state": "OPEN",
+      "title": "feat(templates): checkpoint Canvas Query packaging for #127",
+      "updatedAt": "2026-10-10T20:21:43Z",
+      "url": "https://github.com/joshyorko/actions/pull/282",
+      "checks": {
+        "QUEUED ": 5,
+        "IN_PROGRESS ": 4,
+        "COMPLETED SUCCESS": 7,
+        "COMPLETED CANCELLED": 2,
+        "COMPLETED FAILURE": 1,
+        "COMPLETED SKIPPED": 1
+      },
+      "check_count": 20
+    },
+    {
+      "baseRefName": "integration/community-release-20261008",
+      "headRefName": "test/mcp-alias-frozen-control-20261010",
+      "headRefOid": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 290,
+      "state": "OPEN",
+      "title": "test: verify catalog ownership in the frozen Runtime lifecycle",
+      "updatedAt": "2026-10-10T17:06:51Z",
+      "url": "https://github.com/joshyorko/actions/pull/290",
+      "checks": {
+        "COMPLETED SUCCESS": 26
+      },
+      "check_count": 26
+    },
+    {
+      "baseRefName": "integration/community-release-20261008",
+      "headRefName": "fix/mcp-resource-routing-history-20261010",
+      "headRefOid": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 292,
+      "state": "OPEN",
+      "title": "fix: preserve concrete MCP resource owners across catalog changes",
+      "updatedAt": "2026-10-10T16:21:39Z",
+      "url": "https://github.com/joshyorko/actions/pull/292",
+      "checks": {
+        "COMPLETED SUCCESS": 18,
+        "IN_PROGRESS ": 1
+      },
+      "check_count": 19
+    },
+    {
+      "baseRefName": "integration/community-release-20261008",
+      "headRefName": "feat/shared-run-output-20261010",
+      "headRefOid": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 299,
+      "state": "OPEN",
+      "title": "Add fenced shared Run-output foundations and verified abort cleanup",
+      "updatedAt": "2026-10-10T16:53:05Z",
+      "url": "https://github.com/joshyorko/actions/pull/299",
+      "checks": {
+        "COMPLETED SUCCESS": 20
+      },
+      "check_count": 20
+    },
+    {
+      "baseRefName": "feat/shared-run-output-20261010",
+      "headRefName": "feat/run-output-transport-20261010",
+      "headRefOid": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 300,
+      "state": "OPEN",
+      "title": "Add trusted Runtime transport for authorized shared Run output retrieval",
+      "updatedAt": "2026-10-10T16:53:51Z",
+      "url": "https://github.com/joshyorko/actions/pull/300",
+      "checks": {
+        "COMPLETED SUCCESS": 11
+      },
+      "check_count": 11
+    },
+    {
+      "baseRefName": "integration/community-release-20261008",
+      "headRefName": "fix/rcc-published-artifact-details-20261010",
+      "headRefOid": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+      "isDraft": true,
+      "mergedAt": null,
+      "number": 302,
+      "state": "OPEN",
+      "title": "feat(rcc): preserve authoritative publication specification identity",
+      "updatedAt": "2026-10-10T20:07:36Z",
+      "url": "https://github.com/joshyorko/actions/pull/302",
+      "checks": {
+        "COMPLETED SUCCESS": 12,
+        "QUEUED ": 2,
+        "IN_PROGRESS ": 1,
+        "COMPLETED CANCELLED": 2,
+        "COMPLETED FAILURE": 1,
+        "COMPLETED SKIPPED": 1
+      },
+      "check_count": 19
+    },
+    {
+      "baseRefName": "integration/community-release-20261008",
+      "headRefName": "mk3/core-union-20261010",
+      "headRefOid": "73605934c1c948895410a5abaed6c225a396e038",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 304,
+      "state": "OPEN",
+      "title": "Merge community Core promotion and pin Runtime registry floor verification",
+      "updatedAt": "2026-10-10T19:52:47Z",
+      "url": "https://github.com/joshyorko/actions/pull/304",
+      "checks": {
+        "COMPLETED SUCCESS": 16,
+        "IN_PROGRESS ": 2,
+        "QUEUED ": 4
+      },
+      "check_count": 22
+    },
+    {
+      "baseRefName": "integration/community-release-20261008",
+      "headRefName": "test/canvas-runtime-cache-isolation-20261010",
+      "headRefOid": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "isDraft": false,
+      "mergedAt": null,
+      "number": 305,
+      "state": "OPEN",
+      "title": "Keep Canvas acceptance build caches outside synchronized package source",
+      "updatedAt": "2026-10-10T20:19:59Z",
+      "url": "https://github.com/joshyorko/actions/pull/305",
+      "checks": {
+        "IN_PROGRESS ": 8,
+        "COMPLETED SUCCESS": 4,
+        "QUEUED ": 2
+      },
+      "check_count": 14
+    }
+  ],
+  "limits": "Snapshot is point-in-time and limited to tracked PR cohort 221/282/290/292/299/300/302/304/305; it does not establish release readiness, issue acceptance, or external Homebrew/registry state."
+}

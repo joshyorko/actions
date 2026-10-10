@@ -1,0 +1,125 @@
+{
+  "kind": "canvas_99_pinned_playwright_preflight",
+  "observed_at_utc": "2026-10-10T19:43:00Z",
+  "status": "PASS; exact local Runtime bridge and Playwright-managed Chromium proof completed on f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+  "checkout": {
+    "path": "/workspace/work/actions-mk3-canvas-proof",
+    "branch": "mk3/canvas-pinned-proof-20261010",
+    "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+    "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+    "clean": true
+  },
+  "test_contract": {
+    "test_file": "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+    "test_name": "test_canvas_view_calls_public_action_through_runtime_bridge",
+    "source_behavior": "Opt-in Runtime fixture builds Canvas HTML and candidate Core wheel, starts real Action Server with an ordinary public Action package, verifies tools/list + resources/read + MCP tool calls, then invokes the Playwright harness against the same resource and live Runtime Streamable HTTP endpoint; asserts SQLite Run records and writes a receipt.",
+    "resource_uri": "ui://action-canvas/v1/canvas.html?query-fixture=0.1",
+    "resource_mime": "text/html;profile=mcp-app",
+    "host": "local MCP Apps protocol harness, not ChatGPT; actual ChatGPT host remains NOT_RUN."
+  },
+  "locked_browser_contract": {
+    "package_lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+    "packages": {
+      "node_modules/@playwright/test": {
+        "version": "1.62.1",
+        "resolved": "https://registry.npmjs.org/@playwright/test/-/test-1.62.1.tgz",
+        "integrity": "sha512-DTcUc8qii+cpHvtOwggMtBRMjKZHXYWdw8syRYu2vtzuq4Wxphqq4NfCs5Zt44L6mA8rfDfj+PHnxFc/FeK6mQ=="
+      },
+      "node_modules/playwright": {
+        "version": "1.62.1",
+        "resolved": "https://registry.npmjs.org/playwright/-/playwright-1.62.1.tgz",
+        "integrity": "sha512-0M+L3LAD8/nm554LOla9Ayx0j0tmFZ0FBcoQ7F1VuVHpM/XpiC8RcDzBQB8W5+hA8L22THxELzeF+2WcUzvcLg=="
+      },
+      "node_modules/playwright-core": {
+        "version": "1.62.1",
+        "resolved": "https://registry.npmjs.org/playwright-core/-/playwright-core-1.62.1.tgz",
+        "integrity": "sha512-wPYSwEBJY9GHraISXqyqtx0na0LpO3XEX7jNDhntbex7tzUS7kLnZsOlFruFJB4Hi/rhDMjXGqHewDZ68nYZVw=="
+      }
+    },
+    "playwright_npm_script": "npm run test:canvas-harness -- --grep \"real Runtime Action result\""
+  },
+  "preflight_environment": {
+    "activated_rcc": {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "version": "v18.19.3",
+      "status": "verified after source /workspace/actions-cloud/activate.sh"
+    },
+    "rcc_task_gateway": "rcc task script -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/canvas-pinned/run_canvas_proof.py",
+    "activated_playwright_browsers_path": "/workspace/actions-cloud/cache/playwright",
+    "playwright_lock_identity": {
+      "@playwright/test": "1.62.1",
+      "playwright": "1.62.1",
+      "playwright-core": "1.62.1",
+      "playwright_core_browser_revision": "chromium 1234"
+    },
+    "managed_browser": {
+      "path": "/workspace/actions-cloud/cache/playwright/chromium-1234/chrome-linux64/chrome",
+      "version": "Google Chrome for Testing 151.0.7922.34",
+      "sha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71",
+      "revision_matches_locked_playwright": "yes"
+    },
+    "system_chromium": {
+      "path": "/usr/bin/chromium",
+      "version": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+      "is_pinned_playwright_browser": false,
+      "selection": "excluded by controlled PATH in launcher; source remains unchanged"
+    },
+    "package_workspace_status": "worktree action_server/.venv and frontend/node_modules absent at preparation; run RCC Bootstrap only after shared slot release",
+    "rcc_gateway_probe": "After sourcing activation, rcc --version = v18.19.3; RCC developer task setup/run will supply Python, Poetry, Node, uv.",
+    "old_unactivated_PATH_observation": "Superseded: /usr/bin/rcc is unrelated Qt; it is not the repository toolchain blocker."
+  },
+  "proposed_command_after_shared_slot_is_granted": [
+    "source /workspace/actions-cloud/activate.sh",
+    "rcc run -r developer/toolkit.yaml --dev -t Bootstrap",
+    "rcc task script -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/canvas-pinned/run_canvas_proof.py"
+  ],
+  "pinned_browser_selection_requirement": "Launcher now filters paths exposing chromium, then adds a symlink mirror of /usr/bin excluding only chromium and chromium-browser; it asserts no chromium is discoverable and required Poetry/uv/npm/Node tools remain. It clears active RCC/Poetry Python variables, prepends the branch action_server/.venv/bin, and unsets ACTIONS_RUNTIME_TEST_PYTHON.",
+  "expected_success_receipts": [
+    "Preserve the pytest temp receipt from /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/**/canvas-bridge-acceptance-receipt.json.",
+    "Separate compact verification receipt with exact source commit/tree, package-lock digest, @playwright/test/playwright/playwright-core versions, Playwright-managed Chromium executable version/SHA-256, Runtime resource URI/MIME/SHA-256, worker Core wheel digest/provenance, observed browser-to-Runtime MCP calls, and SQLite-persisted Run IDs/statuses/action names.",
+    "PASS applies only to pinned Playwright plus actual local Runtime bridge on the exact shared fixture; ChatGPT host, whole #99, and full Canvas acceptance remain NOT_RUN."
+  ],
+  "upstream_disposition": "none; fixture issue was Actions-owned, fixed locally and verified; no RCC upstream defect evidenced.",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "exact_delta_proposal": "For a Runtime source-sync acceptance fixture, keep all persistent build caches outside the action package directory. The Canvas acceptance currently assigns `UV_CACHE_DIR` beneath `tmp_path`, then starts Action Server with `cwd=tmp_path` and `actions_sync=True`; uv creates directory symlinks in that cache, and Runtime source snapshots reject directory symlinks inside a package. Put the per-test UV cache in a sibling temporary directory outside the synced package root. For pinned browser proof, the existing test also selects `shutil.which(\"chromium\")` as an explicit override: activate repository RCC, keep the lock-matched Playwright browser cache available, and use a controlled PATH that withholds system Chromium while retaining required tools; record the managed executable version and SHA-256 separately.",
+    "evidence": "Exact-head test source lines 249-261 puts UV_CACHE_DIR at `tmp_path/uv-cache`; it later starts Action Server with cwd=tmp_path and actions_sync=True (lines 406-411). Attempt 3 created `uv-cache/wheels-v5/pypi/poetry-core/2.5.0-py3-none-any -> .../archive-v0/...`; Runtime source validation at action_server/src/actions/server/_action_package_handler.py rejects directory symlinks and server log records this exact failure. Playwright lock 1.62.1 requires Chromium revision 1234, matching prepared Google Chrome for Testing 151.0.7922.34 SHA-256 0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71. The minimal fixture fix moved both UV_CACHE_DIR and TMPDIR to `tmp_path_factory.mktemp(\"canvas-runtime-build\")`, outside the action package source root; exact-head rerun passed.",
+    "stale_or_ambiguous_guidance_removed": "No documentation edited in this verification-only lane. Existing documentation says the real Runtime fixture is required, but does not call out the UV-cache/source-snapshot incompatibility or that visible system Chromium overrides Playwright-managed Chromium.",
+    "remaining_uncertainty": "No uncertainty remains for the bounded local Runtime plus pinned Playwright proof. ChatGPT/production host behavior, full #99 acceptance, and published Runtime integration remain outside this proof."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "FAILED_BEFORE_TEST_COLLECTION",
+      "invocation": "rcc task script -r developer/toolkit.yaml -- python .../run_canvas_proof.py; helper used Poetry -C directly from RCC Holotree environment",
+      "failure": "Poetry selected RCC Holotree Python because RCC CONDA environment variables were inherited; pytest imported RCC pytest and failed during plugin import with ModuleNotFoundError: No module named actions. This is a launcher environment issue, not browser or test behavior.",
+      "raw_logs": [
+        "attempt-01-stderr.log",
+        "attempt-01-stdout.log"
+      ],
+      "followup": "Adjusted helper to mirror developer/toolkit.py package_environment (unset active RCC/Python vars, prepend worktree action_server/.venv/bin, set Poetry package env flags) and launch the branch-owned Python directly. ACTIONS_RUNTIME_TEST_PYTHON is unset.",
+      "note": "These saved RCC logs correspond to the subsequent Poetry-environment diagnostic rather than the first focused-test traceback; the first failure is fully identified by the exception/status record. Do not treat this as browser/test evidence."
+    },
+    {
+      "attempt": 2,
+      "status": "FAILED_DURING_CANVAS_BUILD_BEFORE_BROWSER_LAUNCH",
+      "invocation": "branch-owned action_server/.venv/bin/python via RCC task script, after matching developer/toolkit.py package_environment; ACTIONS_RUNTIME_TEST_PYTHON unset and Chromium removed from PATH. Candidate Core wheel built successfully (actions_core-1.0.3).",
+      "failure": "npm run build:canvas failed with ENOENT spawn sh because the initial controlled PATH removed all of /usr/bin and /bin. No browser was launched and no Runtime/ChatGPT claim is made.",
+      "raw_logs": [
+        "attempt-02-stdout.log",
+        "attempt-02-stderr.log"
+      ],
+      "followup": "Launcher now builds a PATH-visible mirror of /usr/bin excluding only chromium and chromium-browser; this retains npm-required shell/system commands while preserving `shutil.which(\"chromium\") is None`."
+    },
+    {
+      "attempt": 4,
+      "status": "PASS",
+      "invocation": "source /workspace/actions-cloud/activate.sh && rcc task script -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/canvas-pinned/run_canvas_proof.py",
+      "checkout_head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "result": "1 passed, 2 deselected in 54.80s; same test produced exact canvas resource digest, candidate wheel provenance, three Python MCP calls, two browser MCP calls and five successful SQLite Run records. Playwright pinned browser was used; actual ChatGPT remains NOT_RUN.",
+      "receipt": "canvas-bridge-acceptance-receipt.json"
+    }
+  ],
+  "rcc_gateway_probe": "`rcc task script` supplies RCC Poetry path; package execution must mirror developer/toolkit.py package_environment, which clears active CONDA/VIRTUAL/PYTHON variables and prepends branch package .venv/bin.",
+  "pinned_browser_execution": "PASS: Playwright 1.62.1 default Chromium resolved to managed revision 1234; system Chromium was not discoverable through the controlled PATH."
+}

@@ -1138,6 +1138,56 @@ namespace changes, regenerate locks only from published versioned distributions;
 use source imports, wheel contents, and package-local tests for the interim
 candidate gate.
 
+## Bounded release and Runtime evidence
+
+For a PostgreSQL migration-concurrency receipt, bind two distinct operating-
+system child processes to two backend PIDs observed simultaneously waiting on
+the production advisory migration lock before release. Record both child
+outcomes, exact migration history, bootstrap-equivalent columns and indexes,
+preserved existing rows and counters, and cleanup of the owned service,
+credentials, and children. A v12-to-v13 `migrate_db` run proves that migration
+API boundary only; it does not prove CLI startup, mixed-version rollout,
+failure recovery, packaged workers, TLS, or whole-issue acceptance.
+
+For an installed Canvas worker, record the actual Core distribution version and
+the imported module's distribution ownership and origin. Hashes for sampled
+modules can bind those members to a separately verified published wheel, but
+they do not authenticate the complete installed wheel or prove cold registry
+acquisition. Identify the browser separately: system `PATH` Chromium is not a
+Playwright-managed download. Successful fixture teardown and absence of live
+children do not prove descendant reaping; report PID 1 zombies explicitly.
+
+Canvas Runtime fixtures synchronize their action-source directory. Put build
+caches and temporary state in a unique sibling directory, such as one created
+by `tmp_path_factory`; directory symlinks inside the synchronized source must
+continue to fail the strict snapshot. For a Playwright default-headless proof,
+retain `DEBUG=pw:browser` output with pytest capture disabled and bind the
+actual launch line to the executable hash and lock-matched browser revision.
+`chromium.executablePath()` may identify the full browser while Playwright
+launches `chromium-headless-shell`. Keep local candidate-wheel provenance
+separate from published-wheel provenance, and report the main process exit
+separately from zombie descendants.
+
+When composing private RCC inspection work, bind the adapter, compiler, tests,
+and portability-only assertions to the reviewed source blobs. A clean merge or
+pure type check is preparation evidence; it does not prove actual metadata
+inspection or compiler admission. Keep the supplied-input `not_run` boundary
+until a separate source-bound execution receipt exists, and compare the private
+baseline against current integration before promoting it.
+
+The native Runtime release uses the dedicated
+`action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md`, not the legacy
+`action_server/docs/CHANGELOG.md`. At PR304 source `73605934`, the generated
+native release workflow configures the dedicated file but also supplies a
+non-empty `release_text`; the pinned release action treats that text as an
+override and skips changelog extraction. The heading alone therefore does not
+reach the release body in the current workflow. If extraction is intended,
+remove that override and add an H2 matching the tag, for example
+`## actions-runtime-1.0.3`. The generic `inv set-version` helper updates the
+legacy changelog using `## <version> - <date>` and does not prepare the
+dedicated Runtime release notes. Recheck this behavior on the final accepted
+release source before publishing.
+
 ## Development Loop
 
 1. Inspect branch/status and package configuration.

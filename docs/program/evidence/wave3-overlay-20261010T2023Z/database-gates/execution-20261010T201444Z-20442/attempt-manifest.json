@@ -1,0 +1,55 @@
+{
+  "attempt_id": "20261010T201444Z-20442",
+  "result": "PASS",
+  "source": {
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+    "worktree_clean": true
+  },
+  "invocation": {
+    "cwd": "/workspace/work/actions-mk3-database-gates",
+    "command": "source /workspace/actions-cloud/activate.sh && ACTIONS84_PYTHON=/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python /workspace/actions-cloud/bin/rcc task script -r developer/toolkit.yaml --no-build -- bash /workspace/work/actions-mk3-evidence/database-gates/run_pg_migration_gate.sh",
+    "rcc_version": "18.19.3",
+    "prepared_python": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "prepared_python_version": "3.12.15",
+    "psycopg_version": "3.3.4"
+  },
+  "executed_files": {
+    "pg_migration_two_process.py": {
+      "path": "pg_migration_two_process.py",
+      "sha256": "cade9905e8f9af54dc9efd8ce815c7e01151dfcfccd50cfd6a58525adb31fb7e"
+    },
+    "run_pg_migration_gate.sh": {
+      "path": "run_pg_migration_gate.sh",
+      "sha256": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6"
+    },
+    "rcc-python-preflight.json": {
+      "path": "rcc-python-preflight.json",
+      "sha256": "21b320deaa8d2fc833565104087cecb35d687652b82711a0caf8d296cf56037d"
+    }
+  },
+  "prior_attempts": [
+    {
+      "attempt_id": "20261010T201047Z-18398",
+      "result": "FAIL_BEFORE_FIXTURE_OR_WORKERS",
+      "execution_receipt_sha256": "c00bcbdc19619c046d04b25a69d124ba7f4c0623651bf70b84ce545b01ce36e4",
+      "known_harness_sha256": "21882c80ec16cad18ba03fc68cd1565951d0c33904c2b655e149cce1152d41b9",
+      "known_wrapper_sha256": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6",
+      "failure": "URI urlencode converted spaces in PostgreSQL options to plus signs; server rejected +statement_timeout.",
+      "script_bytes": "missing historical script bytes; hashes and logs retained only"
+    },
+    {
+      "attempt_id": "20261010T201313Z-19440",
+      "result": "FAIL_OBSERVER_QUERY_BEFORE_LOCK_WAIT_PROOF",
+      "execution_receipt_sha256": "45ea3e9aa7d31b3e27b4e4c47655319cf04a038dfed60cb562f1c29d3bc021b9",
+      "known_harness_sha256": "46cf769dca7d34b820488571f305c9241d379f133db7fb0e14d08a39d16a7d9c",
+      "known_wrapper_sha256": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6",
+      "failure": "Psycopg placeholder parser rejected a literal percent in LIKE pattern; two children were terminated/reaped before wait proof.",
+      "script_bytes": "missing historical script bytes; hashes and logs retained only"
+    }
+  ],
+  "limitations": [
+    "The successful gate exercises the production migrate_db API, not full Action Server CLI startup.",
+    "The receipt does not complete issue 84, 83, or 129 acceptance."
+  ]
+}

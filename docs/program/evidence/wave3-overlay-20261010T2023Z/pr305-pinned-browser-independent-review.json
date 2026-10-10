@@ -1,0 +1,30 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "commands": [
+    "Read/hash outer+nested receipt, logs, candidate wheel, managed browser, lock/browsers metadata",
+    "Read controlled-PATH harness and exact fixture provenance/resource/DB assertions",
+    "Read-only SQLite persisted runs and canvas HTML hash; ps cleanup; git HEAD/tree/status"
+  ],
+  "exact_doc_delta": "Keep build caches and temporary state outside any synchronized Runtime action-source root, using unique tmp_path_factory sibling directories; directory symlinks under that source must continue to fail the strict snapshot. For default Playwright browser proof, retain the controlled PATH, lock and installed browser metadata, executable hash/version, and distinguish indirect default-selection evidence from an explicit per-run executable trace. Record local candidate-wheel provenance separately from published-wheel provenance and keep zombie descendants explicit.",
+  "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+  "limits": "Local bridge/resource/fixture proof only; synthetic status/opaque artifact handles do not establish artifact retrieval, authorization, production CSP/host behavior, ChatGPT, packaged/frozen workers or full #99 acceptance. Reviewer performed readbacks, no new browser execution.",
+  "log_hashes": {
+    "attempt-04-pytest-log.html": "2a8e59f8ea95514e433ee24c1b5a65c4011402c0cf27aa609036526decfe8dae",
+    "attempt-04-rcc-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "attempt-04-rcc-stdout.log": "822194bdeeba8886f7288e480087ef5a928ffd257e4de543eac30f79503e348c",
+    "attempt-04-runtime-server.log": "631d3c73f8025aad5276fcf6124eb74af19bfe951f385d86c85ad929fa7a0179"
+  },
+  "observations": [
+    "Exactf9c424/tree3d921 checkout clean. Final RCC task records 1 passed/2 deselected54.80s; prior three setup/cache failures retained. Fixture keeps build cache/temp outside synchronized source, preserving strict directory-symlink rejection.",
+    "Controlled PATH excludes system Chromium while retaining required tools. Playwright1.62.1 lock and installed browser metadata resolve revision1234, executable hash0b20b130. Nested fixture records default selection, not a direct per-run executable path; outer controlled-PATH/metadata evidence establishes the managed selection.",
+    "Local candidate Core wheel80f8e0b matches retained bytes, installed worker Core1.0.3 and direct_url source/hash checks. It is distinct from published wheel8e088b40.",
+    "Resource HTML hashfe8155dc independently matches retained canvas.html. Read-only SQLite confirms all five listed Python-MCP/browser action run IDs have passed status2; two additional render runs also passed.",
+    "Known headless descendants17288/17289 are PID1 zombies; no live known test child observed. Successful teardown does not prove complete descendant reaping."
+  ],
+  "receipt_sha256": "992f6e124f2f88e2d965a606d847f26dd680fb6cf14460dcb00946549b653196",
+  "reviewer": "independent Sol source/evidence review; no new test/browser/service execution",
+  "runtime_receipt_sha256": "1d06f8c13237afd11d7468e58e19cfcd29956d51748bfb1cdfbe17886976ea85",
+  "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+  "upstream_disposition": "none",
+  "verdict": "GO for exact fixture fix and bounded local candidate-Core Runtime bridge plus lock-matched Playwright browser proof; broader acceptance HOLD"
+}

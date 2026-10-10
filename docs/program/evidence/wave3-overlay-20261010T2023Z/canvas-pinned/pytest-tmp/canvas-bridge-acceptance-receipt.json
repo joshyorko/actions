@@ -1,0 +1,84 @@
+{
+  "schema_version": 2,
+  "actions_core_wheel": {
+    "path": "/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+    "sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8"
+  },
+  "worker": {
+    "worker_prefix": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a",
+    "actions_module": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a/lib/python3.12/site-packages/actions/__init__.py",
+    "actions_core_version": "1.0.3",
+    "direct_url_wheel": "/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+    "wheel_sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8"
+  },
+  "canvas_resource": {
+    "uri": "ui://action-canvas/v1/canvas.html?query-fixture=0.1",
+    "mime_type": "text/html;profile=mcp-app",
+    "sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852"
+  },
+  "browser": {
+    "executable": null,
+    "version": "Playwright-pinned Chromium",
+    "sha256": "not-recorded"
+  },
+  "playwright_pinned_browser": "used",
+  "runtime_call_observations": [
+    {
+      "caller": "python-mcp-client",
+      "tool": "canvas_fixture_search",
+      "result": "passed"
+    },
+    {
+      "caller": "python-mcp-client",
+      "tool": "canvas_fixture_artifact_status",
+      "result": "passed"
+    },
+    {
+      "caller": "python-mcp-client",
+      "tool": "canvas_fixture_worker_provenance",
+      "result": "passed"
+    },
+    {
+      "caller": "playwright-browser",
+      "tool": "canvas_fixture_search",
+      "result": "passed"
+    },
+    {
+      "caller": "playwright-browser",
+      "tool": "canvas_fixture_artifact_status",
+      "result": "passed"
+    }
+  ],
+  "persisted_run_records": [
+    {
+      "run_id": "run-001-eeac54e4-50d4-47be-b739-9d0fe2d24d9a",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_search"
+    },
+    {
+      "run_id": "run-002-5ef72390-dc87-46ed-9e53-3af9b8ebbce6",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_artifact_status"
+    },
+    {
+      "run_id": "run-003-7a98a8cc-e942-43d6-b3e0-f86822391d21",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_worker_provenance"
+    },
+    {
+      "run_id": "run-005-5630edde-1996-494c-b8b6-65d04c885237",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_search"
+    },
+    {
+      "run_id": "run-006-140ba77d-fbfa-429c-a868-30fae864e676",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_artifact_status"
+    }
+  ]
+}

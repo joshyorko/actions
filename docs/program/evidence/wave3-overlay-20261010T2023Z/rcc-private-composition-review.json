@@ -1,0 +1,44 @@
+{
+  "subject": "Private RCC preparation/compiler composition review",
+  "head": "f441afb5144843535314ca0a5f6966b0206f6b59",
+  "tree": "086277052fea6e7fcb61fa6487de5bb9a5e47a27",
+  "ordered_parents": [
+    "04bf65344ce59d884c770cffe8bc1ca5843dff9c",
+    "e8e8a9db1c762b31fb4c4f625168dc7337235483"
+  ],
+  "intermediate": {
+    "head": "04bf65344ce59d884c770cffe8bc1ca5843dff9c",
+    "tree": "f719c875d3fedc6c03fae9e0fa2b662bec1b4387",
+    "ordered_parents": [
+      "7eca36abce160b68f616eab9b7fdc9c4e7f2b053",
+      "01ca087a8cb58798cbce729a107c55f4dab75cf1"
+    ]
+  },
+  "decision": "GO private preparation baseline only",
+  "metadata_execution": "NOT_RUN",
+  "commands": [
+    "git rev-parse HEAD HEAD^{tree}; git status --short",
+    "git show --format=raw --no-patch f441afb5 and04bf6534",
+    "git ls-tree HEAD adapter/compiler",
+    "git show7eca:adapter andgit showf441:adapter piped SHA256",
+    "git diff7eca04bf name/status andcanonicalguide",
+    "git diff04bff441",
+    "git diff --exit-code01caf441 -- compiler/compiler_tests",
+    "git diff --check4e8af441"
+  ],
+  "observations": [
+    "Adapter blob6859a42c88347d6be0919621282bf87b183fecb6 andSHA256bf884d9a626a33299fb01ab869f671ed486095963cdd924c94d2edd54b20462c match exact7eca bytes.",
+    "Compiler blobbb67ad86b8809070b90d9bb32f763d0e60f77b13 and compiler contracttest bytes equal exact01ca.",
+    "First merge delta from7eca contains only compiler/test additions and16linecanonicalguide paragraph. Retains samepublish preparation paragraph and purecompiler suppliedinput/not_run paragraph.",
+    "Second merge delta onlytwo fullPathstringexpectedassertions from e8e8a9db.",
+    "Worktree clean; diffcheck passes.",
+    "Private union includes older inherited source relative to4e8a, including Canvas/workflow differences. It is not admitted current engineering/release baseline and must not be merged wholesale into integration as newinspection slice."
+  ],
+  "doc_proposal": {
+    "path": "docs/skills/repository-operations.md",
+    "delta": "When composing private inspection work, bind the exact adapter, compiler, tests and any portability-only assertions to their reviewed source blobs. A conflict-free or manually resolved merge is preparation evidence only; preserve the compiler supplied-input not_run boundary and require a distinct actual source-bound metadata execution receipt before inspection acceptance. Compare the private baseline with current integration before promotion so older inherited changes are not admitted accidentally.",
+    "evidence": "Exactf441 parent/blob/diff checks; 7eca preparation and01ca purecompiler bytes preserved, noinspectioncaller implemented.",
+    "uncertainty": "No test or actual inspection run on f441. Future implementation and exactdiff/CI are separate."
+  },
+  "upstream_disposition": "none"
+}

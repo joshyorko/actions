@@ -1,0 +1,40 @@
+{
+  "status": "RUNTIME_RELEASE_NOT_READY",
+  "observed_at_utc": "2026-10-10T20:23:55Z",
+  "community": {
+    "sha": "a70993fafc99a9f94041485542d5a720797ca394",
+    "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+    "status": "Core 1.0.3 published and byte/API/installed-consumer verified; see prior Core receipt in this bundle."
+  },
+  "integration": {
+    "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+    "status": "Current Runtime integration includes merged PR301 serialization/CI slice only."
+  },
+  "actions_core": "1.0.3 PUBLISHED_AND_READBACK_VERIFIED",
+  "actions_runtime": "1.0.3 NOT PUBLISHED; no immutable Runtime 1.0.3 tag, PyPI package, or native 1.0.3 release readback established here",
+  "actions_http_helper": "1.0.3 previously verified published",
+  "actions_work_items": "0.4.4 unchanged",
+  "declared_runtime_core_floor": "^1.0.2; PR304 canary must continue to assert exact 1.0.2 despite Core 1.0.3 being published.",
+  "point_in_time_pr_status_source": {
+    "path": "evidence/wave3-overlay-20261010T2023Z/live-pr-ref-snapshot.json",
+    "sha256": "1d32cad0c9091a28834e5cf9c7a8aa1d49549df994b3dc0abc17fe3e09f9565c"
+  },
+  "release_blocking_or_required_gates": [
+    "PR304 exact-head 73605934 source review is GO; 20:21:09Z rollup was 16 success, 2 in progress, 4 queued. Exact checks/review and merge remain pending.",
+    "PR302 exact-head e8e8 has the Windows published-wheel floor canary failure (run 38081239175/job 114298417674 installed Core 1.0.3 then asserted 1.0.2); Windows adapter devmode is active, native binary and both RCC toolkit jobs passed. Refresh against accepted PR304 union before disposition.",
+    "PR282 scoped independent installed-worker/system-Chromium receipt is GO; exact-head CI remains in progress/queued with retained earlier failures/cancellations, and the PR body still has a stale readback-pending phrase for root to refresh.",
+    "PR305 source and local browser proof are GO at f9c424; direct launch trace proves lock-matched headless-shell revision 1234 SHA e11fc9ce. At 20:21:09Z hosted rollup had 8 in progress, 3 success, 3 queued; these are not merge/whole-issue acceptance.",
+    "PR292 Windows check remains active (18 success, 1 active at 20:21:09Z); PR290/299/300 are blocked by separate stack/dependency gates despite green returned rollups.",
+    "The private RCC baseline f441afb/tree086277 includes reviewed preparation but only fake-RCC contract for active implementation; actual metadata inspection is NOT RUN and compiler admission is not accepted.",
+    "Issue #134 provider-backed warm path remains a separate read-only audit with HTTP 503 failure; selected-provider 503 negative does not prove warm reuse.",
+    "Issue #153 real browser/security acceptance remains required and is not established by local #282/#305 fixtures.",
+    "Issue #211 requires native release handoff evidence, including owning joshyorko/homebrew-tools install and upgrade proof; none is established in this checkpoint.",
+    "Current Runtime 1.0.3 release workflow, tag, PyPI package, native platform/signing assets and registry readbacks remain unrun/unverified on final accepted source.",
+    "Native release-note workflow currently passes a non-empty release_text that bypasses changelog extraction; workflow writer repair is pending. Do not rely on the section heading alone.",
+    "SQLite SAVEPOINT-start expected-red diagnosis is active; minimal source fix is uncommitted and not accepted or verified."
+  ],
+  "non_gates_scoped_observations": "#84 migration API, #282 installed worker/browser, and #99 local cache/browser fixture proof satisfy only their exact recorded slices and may be used by their narrow successors. They do not move whole-issue counts or release readiness.",
+  "source": "Exact Git ref + point-in-time native PR status snapshot and the source/evidence reviews in this checkpoint; root-supplied bounded runtime/status updates through 20:23:55Z.",
+  "scope": "No tag, release, registry/tap write, merge, issue closure or whole-issue acceptance was performed or requested by this overlay."
+}

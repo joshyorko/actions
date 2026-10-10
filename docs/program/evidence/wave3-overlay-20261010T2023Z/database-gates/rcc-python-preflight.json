@@ -1,0 +1,58 @@
+{
+  "activation_script": {
+    "path": "/workspace/actions-cloud/activate.sh",
+    "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+  },
+  "command": "source /workspace/actions-cloud/activate.sh; ACTIONS84_PYTHON=/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python PYTHONPATH=/workspace/work/actions-mk3-database-gates/actions/src:/workspace/work/actions-mk3-database-gates/action_server/src PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 /workspace/work/actions-mk3-pr302/action_server/.venv/bin/python - (read-only import/path/version inspection)",
+  "imported_origins": {
+    "actions": "/workspace/work/actions-mk3-database-gates/actions/src/actions/__init__.py",
+    "actions.server._database": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py",
+    "actions.server.migrations": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/migrations/__init__.py",
+    "actions.server.migrations.migration_add_mcp_catalog_names": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/migrations/migration_add_mcp_catalog_names.py",
+    "psycopg": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psycopg/__init__.py"
+  },
+  "interpreter": {
+    "actions_runtime_distribution_version": "1.0.2",
+    "metadata_equivalence": {
+      "action_server/poetry.lock": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+      "action_server/pyproject.toml": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+      "actions/poetry.lock": "b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15",
+      "actions/pyproject.toml": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3",
+      "comparison": "all listed files byte-identical between target 4e8a and prepared L302 checkout",
+      "developer/toolkit.yaml": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68"
+    },
+    "prepared_environment": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python (existing RCCBootstrap environment; no build/install)",
+    "psycopg_version": "3.3.4",
+    "resolved_runtime": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+    "sys_executable": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "version": "3.12.15"
+  },
+  "observed": "2026-10-10 UTC; read-only RCC interpreter/import/version/metadata preflight only; no service/test/install/bootstrap",
+  "proposed_invocation": "cd /workspace/work/actions-mk3-database-gates && source /workspace/actions-cloud/activate.sh && ACTIONS84_PYTHON=/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python /workspace/actions-cloud/bin/rcc task script -r developer/toolkit.yaml --no-build -- bash /workspace/work/actions-mk3-evidence/database-gates/run_pg_migration_gate.sh",
+  "rcc": {
+    "path": "/workspace/actions-cloud/bin/rcc",
+    "read_only_command": "source /workspace/actions-cloud/activate.sh; /workspace/actions-cloud/bin/rcc --version",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "18.19.3"
+  },
+  "source": {
+    "clean": true,
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "modules": {
+      "action_server/src/actions/server/_database.py": {
+        "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py",
+        "sha256": "5d3776fb85a36604b5c9dbc2c2169ee2770734330fea90ceda507515e4fc4638"
+      },
+      "action_server/src/actions/server/migrations/__init__.py": {
+        "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/migrations/__init__.py",
+        "sha256": "181c8e653d64319e58df7532e759612376ee0c91cd05423ea16f2e7318aa1541"
+      },
+      "action_server/src/actions/server/migrations/migration_add_mcp_catalog_names.py": {
+        "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/migrations/migration_add_mcp_catalog_names.py",
+        "sha256": "e4fe141fba0eeb37d6060b6421aa78858ea02ac1dd6d31501bc7275f9cdb1f6d"
+      }
+    },
+    "repo": "/workspace/work/actions-mk3-database-gates",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  }
+}

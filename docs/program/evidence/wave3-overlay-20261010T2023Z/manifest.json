@@ -1,0 +1,577 @@
+{
+  "manifest_version": 1,
+  "observed_at_utc": "2026-10-10T20:23:55Z",
+  "scope": "Replayable wave3 scoped gate evidence, source/log/runner support, current refs/status snapshot, worker observation, direct browser launch correction, prior-pointer and 54-row/archive preservation checks; no wheels/browser binaries/database files/secrets. The self-referential amendment receipt is excluded; it binds this manifest by SHA-256.",
+  "files": [
+    {
+      "path": "canvas-pinned/attempt-01-stderr.log",
+      "bytes": 177,
+      "sha256": "b7fe57785be556736431815e37b30c13afe62022fcbf1b474130cfba0d0a3e5e"
+    },
+    {
+      "path": "canvas-pinned/attempt-01-stdout.log",
+      "bytes": 99,
+      "sha256": "95c7295aa7d18e0bffb82572fcbad0551f6cfdd0d311c66f980c5e3ecd5410fd"
+    },
+    {
+      "path": "canvas-pinned/attempt-02-stderr.log",
+      "bytes": 734,
+      "sha256": "984b211e1207d323902eba382ab52b19a3a760125e49e62d3f18e17e57da9a2a"
+    },
+    {
+      "path": "canvas-pinned/attempt-02-stdout.log",
+      "bytes": 8585,
+      "sha256": "caa2073472b16fab2ab022a98edc4c345b1225746250c6a8bd50f2a68c4f9fdb"
+    },
+    {
+      "path": "canvas-pinned/attempt-03-pytest-log.html",
+      "bytes": 1012729,
+      "sha256": "87ae8e43bde8d4f7d20a41d035c05c9da2fdec89be5cc9b394bc55c3832845b6"
+    },
+    {
+      "path": "canvas-pinned/attempt-03-rcc-stderr.log",
+      "bytes": 734,
+      "sha256": "09ba9e9ab4684db3b0c45f958f5a395e2d2e633687b1f00f2e9813189cc43602"
+    },
+    {
+      "path": "canvas-pinned/attempt-03-rcc-stdout.log",
+      "bytes": 27106,
+      "sha256": "2e31198e84dcd32aaf635aeaeebabec61877aa84374ce5b1475794ebe31b2460"
+    },
+    {
+      "path": "canvas-pinned/attempt-03-runtime-server.log",
+      "bytes": 1045,
+      "sha256": "5683ab2353e7f7fc8dc086dee526d48c3e25e2d7ab32b1cb020897995514c160"
+    },
+    {
+      "path": "canvas-pinned/attempt-04-pytest-log.html",
+      "bytes": 990645,
+      "sha256": "2a8e59f8ea95514e433ee24c1b5a65c4011402c0cf27aa609036526decfe8dae"
+    },
+    {
+      "path": "canvas-pinned/attempt-04-rcc-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "canvas-pinned/attempt-04-rcc-stdout.log",
+      "bytes": 576,
+      "sha256": "822194bdeeba8886f7288e480087ef5a928ffd257e4de543eac30f79503e348c"
+    },
+    {
+      "path": "canvas-pinned/attempt-04-runtime-server.log",
+      "bytes": 20522,
+      "sha256": "631d3c73f8025aad5276fcf6124eb74af19bfe951f385d86c85ad929fa7a0179"
+    },
+    {
+      "path": "canvas-pinned/canvas-bridge-acceptance-receipt.json",
+      "bytes": 2845,
+      "sha256": "1d06f8c13237afd11d7468e58e19cfcd29956d51748bfb1cdfbe17886976ea85"
+    },
+    {
+      "path": "canvas-pinned/canvas-pinned-proof-receipt.json",
+      "bytes": 7141,
+      "sha256": "992f6e124f2f88e2d965a606d847f26dd680fb6cf14460dcb00946549b653196"
+    },
+    {
+      "path": "canvas-pinned/preflight.json",
+      "bytes": 11078,
+      "sha256": "b968301a7abe0f442318ea2d1fcab958c9bb944060838df711a2c7beb358da9a"
+    },
+    {
+      "path": "canvas-pinned/prior-failure-receipt-supersession.json",
+      "bytes": 1260,
+      "sha256": "03b3394df8e5d436d1ec4a28adf1213182a384fd630927637f335dc49ac9b2e5"
+    },
+    {
+      "path": "canvas-pinned/pytest-tmp/canvas-bridge-acceptance-receipt.json",
+      "bytes": 2845,
+      "sha256": "1d06f8c13237afd11d7468e58e19cfcd29956d51748bfb1cdfbe17886976ea85"
+    },
+    {
+      "path": "canvas-pinned/pytest-tmp/canvas.html",
+      "bytes": 416292,
+      "sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852"
+    },
+    {
+      "path": "canvas-pinned/pytest-tmp/canvas_actions.py",
+      "bytes": 3983,
+      "sha256": "3af022bc119671728e83e44648b2de73f9d4fcb2977dda9a25829acdd7a4822b"
+    },
+    {
+      "path": "canvas-pinned/pytest-tmp/package.yaml",
+      "bytes": 448,
+      "sha256": "6454f2ae9cfaef4aa22a8710c117b7f5e0b4e63db9d103ee769735410c4071ee"
+    },
+    {
+      "path": "canvas-pinned/run_canvas_proof.py",
+      "bytes": 3636,
+      "sha256": "71a5d5248dc78d70d106f545d9b88cb0f46bd6e88dd1c8f69b7d77817edcd4cb"
+    },
+    {
+      "path": "canvas-pinned-launch-trace/canvas-bridge-acceptance-receipt.json",
+      "bytes": 2897,
+      "sha256": "93abc2ea3c1ea02aa1dc6bfdd1292d2fd3999ced8d130f2621e34c3706d334d4"
+    },
+    {
+      "path": "canvas-pinned-launch-trace/launch-trace-receipt.json",
+      "bytes": 3242,
+      "sha256": "a91b4c0c25334574d31b43e2b1f6d57fac05ed3b36ae05da8d812d5b6be54a00"
+    },
+    {
+      "path": "canvas-pinned-launch-trace/rcc-stderr.log",
+      "bytes": 60324,
+      "sha256": "eb5e5a7bd40074d58e192367321f7c9bffc2b4cce5d35123f04f1f71f88b2a2f"
+    },
+    {
+      "path": "canvas-pinned-launch-trace/rcc-stdout.log",
+      "bytes": 2424,
+      "sha256": "121c358dc6b1958f8ad2669c13fb1a34a01c8015a647379bfb1405be06ac7ed2"
+    },
+    {
+      "path": "canvas-pinned-launch-trace/run_canvas_proof_with_launch_trace.py",
+      "bytes": 3689,
+      "sha256": "ff1d6207c7ee27ce725cd2bbeddf6d4bca1ba44d02f5184856381b6ec0905a1e"
+    },
+    {
+      "path": "core-publication/core-tag-preflight.json",
+      "bytes": 280,
+      "sha256": "05040113b425740815b49e7ca77ca0e9dedc91c517ceb4f4c32218b07f357be2"
+    },
+    {
+      "path": "core-publication/core-tag-push.txt",
+      "bytes": 108,
+      "sha256": "bd44566e55fb393625fb0c077bf2f8d26a371dc60d3008d3525f3df5c20b012e"
+    },
+    {
+      "path": "core-publication/publication-readback.json",
+      "bytes": 13718,
+      "sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39"
+    },
+    {
+      "path": "core-publication/pypi-readback.json",
+      "bytes": 1044,
+      "sha256": "b15c70129a506573654a46a5cc025f61d5c357f841df919998c1befa1dd40318"
+    },
+    {
+      "path": "core-publication/pypi_readback.py",
+      "bytes": 2226,
+      "sha256": "a33e00dfe62098bd35e43d7184d4a7f3dbbb2e325734829bf7462c1849046282"
+    },
+    {
+      "path": "core-publication/release-preflight.json",
+      "bytes": 2036,
+      "sha256": "ed321feb21d3928a0a89fef7511e16dcf8572f91ffb096453ad06bdeea103d17"
+    },
+    {
+      "path": "core-publication/workflow-artifact-readback.json",
+      "bytes": 938,
+      "sha256": "1a99879a3378c9ca8a170d9b7e1ae2782332044e7177bc62a1c8b09e83706f09"
+    },
+    {
+      "path": "current-git-bindings.json",
+      "bytes": 2184,
+      "sha256": "8e2eeb0c0d799671332d990d8c2926497aa64b746c50c478c3a3de4e6a8b2841"
+    },
+    {
+      "path": "current-worker-inventory.json",
+      "bytes": 2330,
+      "sha256": "bd4632daf56e7f89d73c0892bb9e20642095442b8e36006eb7221f4c226c5bef"
+    },
+    {
+      "path": "dakota-native-snapshots-20261010T200444Z.json",
+      "bytes": 1735,
+      "sha256": "ace3107cef5cb11209f804164e907618078730957c345b3ce695f73898b62381"
+    },
+    {
+      "path": "database-gates/execution-20261010T201047Z-18398/execution-receipt.json",
+      "bytes": 1749,
+      "sha256": "c00bcbdc19619c046d04b25a69d124ba7f4c0623651bf70b84ce545b01ce36e4"
+    },
+    {
+      "path": "database-gates/execution-20261010T201047Z-18398/execution-report.md",
+      "bytes": 2422,
+      "sha256": "11ef750298a540c5960ccd9381481134bd45f7da3e07bb351308bb9e5b670df3"
+    },
+    {
+      "path": "database-gates/execution-20261010T201047Z-18398/image-pull.log",
+      "bytes": 1666,
+      "sha256": "689bf4fe9fb5b184feb12bb759b8ab1d56aa1810819559fd655c3c35f51817dc"
+    },
+    {
+      "path": "database-gates/execution-20261010T201047Z-18398/interpreter-version.txt",
+      "bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    {
+      "path": "database-gates/execution-20261010T201047Z-18398/postgres.log",
+      "bytes": 3430,
+      "sha256": "cc6d0e6b554b707a192e1109043d9725048cf7bc2bd61e8838f4a5c38f2c016e"
+    },
+    {
+      "path": "database-gates/execution-20261010T201047Z-18398/test.log",
+      "bytes": 1269,
+      "sha256": "6d4a1c5fda8c6287ed33f2b4578854616a123189691603eeebbf6a8cc6a08101"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/execution-receipt.json",
+      "bytes": 2045,
+      "sha256": "45ea3e9aa7d31b3e27b4e4c47655319cf04a038dfed60cb562f1c29d3bc021b9"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/execution-report.md",
+      "bytes": 2158,
+      "sha256": "91d5b2554a6b838d465abe041e51e5c3dd6f0dc67c69470e3b4781260a1adad3"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/harness-child-cleanup.json",
+      "bytes": 1049,
+      "sha256": "46f6a07ab33d9e3d0fefaf3decda9384e1230456125c270cf0edac9d7dd8c167"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/image-pull.log",
+      "bytes": 422,
+      "sha256": "48915fb67ae5671bb60f23889d5e449bc6d45bd89c97fbf50cb4eb87f7606d65"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/interpreter-version.txt",
+      "bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/migration-worker-receipt.json",
+      "bytes": 1946,
+      "sha256": "ca84d5f780ceb1e97a4ff542fd3b98874e1b79a4834ca659b91d1db483e204fc"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/postgres.log",
+      "bytes": 3232,
+      "sha256": "c89c17e552a948704ec6f88c722c3704ceee6639f11bd20bd970976e5d4baa5f"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/test.log",
+      "bytes": 3640,
+      "sha256": "7efc68c80409790e455decdcf444196f4fbdcf113a3eed51c50b24cf606d3aad"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/worker-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/worker-0.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/worker-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "database-gates/execution-20261010T201313Z-19440/worker-1.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/attempt-manifest.json",
+      "bytes": 2836,
+      "sha256": "569bb1cbfb388d547e9fae4cfc7ef0e09e03b4dcc34e3d21d7e4893cd934f6ba"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/execution-receipt.json",
+      "bytes": 2045,
+      "sha256": "341bda35a4a629c966371866c5fc60416fcebaa9c42fdbfe78e2429482f16c88"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/execution-report.md",
+      "bytes": 3123,
+      "sha256": "11e0d26260b7e9fe56a2d3dcf6bc43f6fc9e9e67cefe63b037cd66cf8e3d0239"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/harness-child-cleanup.json",
+      "bytes": 1358,
+      "sha256": "1acc0000a7ea2a5d84ecef0668fec0c2b6f88fed7dab3e3c2e75c8a575ca32d9"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/image-pull.log",
+      "bytes": 422,
+      "sha256": "48915fb67ae5671bb60f23889d5e449bc6d45bd89c97fbf50cb4eb87f7606d65"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/interpreter-version.txt",
+      "bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/migration-worker-receipt.json",
+      "bytes": 2177,
+      "sha256": "a31a2ca57b02e8357b2c10fee03db7949b82fdee3e6650d139be44fabad0f514"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/pg_migration_two_process.py",
+      "bytes": 25499,
+      "sha256": "cade9905e8f9af54dc9efd8ce815c7e01151dfcfccd50cfd6a58525adb31fb7e"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/postgres.log",
+      "bytes": 3310,
+      "sha256": "8dec07d039ff8bff64d26aaeb76c455f640c81eabf1d1be9d1d18ca061d868d3"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/rcc-python-preflight.json",
+      "bytes": 4296,
+      "sha256": "21b320deaa8d2fc833565104087cecb35d687652b82711a0caf8d296cf56037d"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/run_pg_migration_gate.sh",
+      "bytes": 11050,
+      "sha256": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/test.log",
+      "bytes": 4092,
+      "sha256": "94c7f929b0eed90a78162ca8eef9cbf428b92c3e7ca270b90a2d09e55d4337e5"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/worker-0.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/worker-0.stdout.log",
+      "bytes": 940,
+      "sha256": "a7064a06d6b61d1c2a2b7f16e8437be38c9f62936ce1ee23be94168c9bf445f3"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/worker-1.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "database-gates/execution-20261010T201444Z-20442/worker-1.stdout.log",
+      "bytes": 940,
+      "sha256": "a0224d92550d385371e701a3fc950596ec34cc4cd61f2b6ae551e4d210eab800"
+    },
+    {
+      "path": "database-gates/harness-final-independent-review.json",
+      "bytes": 6972,
+      "sha256": "c8267caaafb5a42556c01adf4177db4521b35b61254dab3d2f7fa4d182118987"
+    },
+    {
+      "path": "database-gates/harness-final-independent-review.md",
+      "bytes": 1925,
+      "sha256": "b3e8b65a7e4c831d2dd69e4bcec54d557636e24efa3b414875810c46b4fcbf3b"
+    },
+    {
+      "path": "database-gates/issue-84-readiness-receipt.md",
+      "bytes": 17524,
+      "sha256": "f97635c1e154722776665e2ca59773ec5ac7a2024e8ea32f4feba91a1034ae2a"
+    },
+    {
+      "path": "database-gates/pg_migration_two_process.py",
+      "bytes": 25499,
+      "sha256": "cade9905e8f9af54dc9efd8ce815c7e01151dfcfccd50cfd6a58525adb31fb7e"
+    },
+    {
+      "path": "database-gates/rcc-python-preflight.json",
+      "bytes": 4296,
+      "sha256": "21b320deaa8d2fc833565104087cecb35d687652b82711a0caf8d296cf56037d"
+    },
+    {
+      "path": "database-gates/run_pg_migration_gate.sh",
+      "bytes": 11050,
+      "sha256": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6"
+    },
+    {
+      "path": "database-savepoint/focused-regression-red.log",
+      "bytes": 5877,
+      "sha256": "fbaf8eba6dc9a851a54f8148fd73e885aa2ce5af7d21844b34ba5bd02c6442d9"
+    },
+    {
+      "path": "database-savepoint/focused-regression-strengthened-red.log",
+      "bytes": 8749,
+      "sha256": "f93f3c0e62da05caa2576ab2a32ab955a810c63edd0708264ed7e8046856ff35"
+    },
+    {
+      "path": "database-savepoint/normal-nested-control.log",
+      "bytes": 371,
+      "sha256": "a83c6a20f56e7a2ce69571ab073e0da9165b4b58eb230997774575aea91a85d6"
+    },
+    {
+      "path": "database-savepoint/receipt.json",
+      "bytes": 6128,
+      "sha256": "c1c9dba58ae1961adaee5349be4e76f5388c4a9ab2d2e835c69039b3a7015559"
+    },
+    {
+      "path": "database-savepoint/reproduce_savepoint_authorizer.py",
+      "bytes": 1883,
+      "sha256": "6cbae155eea43d03419eb9c7d79ab74a2f1417978031d9a8d5cf1535d72cd596"
+    },
+    {
+      "path": "database-savepoint/run_focused_regression.py",
+      "bytes": 918,
+      "sha256": "ee6d3b3f75169df00474f568681a61b882d34a6387de2c1b449a28bc019cea81"
+    },
+    {
+      "path": "database-savepoint/sqlite-authorizer-repro.log",
+      "bytes": 5567,
+      "sha256": "674d4db115ea851e57c82c06a8bc52c92849e769e7ee67b44409f33d73d6ac00"
+    },
+    {
+      "path": "live-pr-ref-snapshot.json",
+      "bytes": 9889,
+      "sha256": "1d32cad0c9091a28834e5cf9c7a8aa1d49549df994b3dc0abc17fe3e09f9565c"
+    },
+    {
+      "path": "migration-api-actual-independent-review.json",
+      "bytes": 3512,
+      "sha256": "93c4ffc4175169dcd023abb197e825fdd59f1d0053dca37c03363d8e60911863"
+    },
+    {
+      "path": "migration-api-actual-independent-review.md",
+      "bytes": 1837,
+      "sha256": "ab8be8d30d09f9ae899b393edf37c29af9dc8816bbd4df3101c93ecdfcb66035"
+    },
+    {
+      "path": "pr282-acceptance/acceptance-receipt.json",
+      "bytes": 9856,
+      "sha256": "d8ae93a5fc2cca19dac84d5180ef772eba245e906e401b9afa43ef503c182346"
+    },
+    {
+      "path": "pr282-acceptance/logs/canvas-runtime-browser-rerun.log",
+      "bytes": 14152,
+      "sha256": "45d0497315927811f66d4f2a00744acefdd61c6ef6a6ddafd73bc4c441546c53"
+    },
+    {
+      "path": "pr282-acceptance/logs/canvas-runtime-browser.log",
+      "bytes": 71673,
+      "sha256": "e13c8338512dd84feb3d9bb76b0a60e5ba8590e302a430681aff083afe4c51f5"
+    },
+    {
+      "path": "pr282-acceptance/logs/rcc-frontend-test.log",
+      "bytes": 13818,
+      "sha256": "80fc97cb9824e0f6ca006886456be32ea35a29bfa8944895806c3b2aafd02d53"
+    },
+    {
+      "path": "pr282-acceptance/logs/template-bundles.log",
+      "bytes": 13070,
+      "sha256": "ca6c617c7f2030bc7d57848fa2db97c3800d4633606e4ff550f7d5b3e3a8c83d"
+    },
+    {
+      "path": "pr282-acceptance/logs/template-floor.log",
+      "bytes": 13084,
+      "sha256": "7848f74430777f1f85d0ebb8fa5d7674820463bb62060bb904c8d37c7743fe65"
+    },
+    {
+      "path": "pr282-acceptance/runner/pr282-checks.yaml",
+      "bytes": 788,
+      "sha256": "5735e9d0a7ab07cca6fc416e56c2eaddbe0efb5616c0621009c6ac9060ceb4e3"
+    },
+    {
+      "path": "pr282-acceptance/runner/run_package_pytest.py",
+      "bytes": 725,
+      "sha256": "280ce2e053592ab508912ae6dd3d343f06f46d62ede139b5f0fe5bff64efbd3b"
+    },
+    {
+      "path": "pr282-runtime-browser-independent-review.json",
+      "bytes": 3000,
+      "sha256": "83ea0e284251972885de6bd4fc0b0aec6870ae668c1cf062e7819a53ad227a51"
+    },
+    {
+      "path": "pr282-runtime-browser-independent-review.md",
+      "bytes": 1780,
+      "sha256": "27c0638001f5d3f80c780081d12dd140336411e0a788319236875bd1dc7e5027"
+    },
+    {
+      "path": "pr305-browser-identity-correction-review.json",
+      "bytes": 3996,
+      "sha256": "5ea39e16039eed169c806bbd929a978e07076e6aaa078ea7b4f0922907175ed9"
+    },
+    {
+      "path": "pr305-browser-identity-correction.json",
+      "bytes": 1665,
+      "sha256": "14f7d9c5f0badc83e4260d1db2db8fc6967c3abe06b9d479e7a20a22a371a5e1"
+    },
+    {
+      "path": "pr305-final-launch-trace-independent-review.json",
+      "bytes": 6387,
+      "sha256": "d06296123a1ff511d2f8ffaf13640e45d62729985a27a4f41068a43ca159e77a"
+    },
+    {
+      "path": "pr305-pinned-browser-independent-review.json",
+      "bytes": 3414,
+      "sha256": "432dbfd35f09ea7fb2495abeb032ffeefaf2289e99a96f59af1b3050d68437df"
+    },
+    {
+      "path": "pr305-pinned-browser-independent-review.md",
+      "bytes": 2151,
+      "sha256": "4f14e303d969d8edf6c9a5e97c39193a2e1995754736917a83e757e54c4dc85a"
+    },
+    {
+      "path": "preservation-check.json",
+      "bytes": 4545,
+      "sha256": "8e0721cd018589ae39957744854edffa287e4babea743a9e96bb051c85972b0d"
+    },
+    {
+      "path": "previous-pointer-audit.json",
+      "bytes": 5680,
+      "sha256": "c9a7a14510c1ca9c67d344061a49d5b082c86bea9a03264ead1f571d9677d253"
+    },
+    {
+      "path": "rcc-private-composition-review.json",
+      "bytes": 2816,
+      "sha256": "2182c19da2b41f3596f3b91f473c592d998f930303b4198f8d44188be3ffc086"
+    },
+    {
+      "path": "rcc-source-bound-inspection-proposal.json",
+      "bytes": 10036,
+      "sha256": "3768e8dcd81ce16c99a141ab60d57f16d7ae142ff0a9a890d8041d78d834b90c"
+    },
+    {
+      "path": "rcc-source-bound-inspection-proposal.md",
+      "bytes": 7613,
+      "sha256": "93f24daad7644f1434109fce1144f09ca7d8bd9d2b421c64fc7ceb523b0aaabf"
+    },
+    {
+      "path": "release-gates/pr302-windows-floor-failure.json",
+      "bytes": 2494,
+      "sha256": "ecbd1f1dba42c104aca0973d1c2f829e40285ae01c2014c8781c2b8ba2c6d2c3"
+    },
+    {
+      "path": "release-gates/pr304-final-floor-review.json",
+      "bytes": 2235,
+      "sha256": "9eb58690dc29f4e8f675ad8ed79ba3ec04f77032def9741936fd3bf102160f11"
+    },
+    {
+      "path": "release-readiness.json",
+      "bytes": 4139,
+      "sha256": "d6b6173e28588035dafd3a246362c4410843653394525ab49479ad48f6a11aee"
+    },
+    {
+      "path": "runtime-release-note-preparation/pr304-release-note-draft.md",
+      "bytes": 9442,
+      "sha256": "b388a12f7de5a1996008ec32bff1f1e5b24bdfd0ce23649e85bc353bf6db5f36"
+    },
+    {
+      "path": "runtime-ui-readiness/readiness.json",
+      "bytes": 6871,
+      "sha256": "53decec2f823d5b50ad8d6148b3d9191cccb8dd26327729927ac8367ce19d41f"
+    },
+    {
+      "path": "runtime-ui-readiness/readiness.md",
+      "bytes": 2622,
+      "sha256": "e694aeffa2748dcc129fb576c690599415cb187735523e961eb92c8bd01f1718"
+    },
+    {
+      "path": "scoped-gate-observations.json",
+      "bytes": 3756,
+      "sha256": "aa67363f452d47f087dfcb9fb4d1b15a08934d2f55e933d3f414ea459ec7f7f6"
+    },
+    {
+      "path": "wave3-readiness.md",
+      "bytes": 2571,
+      "sha256": "d7a40449bd92170838dd36b192a62356c6ccecc00f1edc7e68cd432eaa24a72f"
+    }
+  ]
+}

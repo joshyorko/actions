@@ -1,0 +1,121 @@
+{
+  "kind": "canvas_99_pinned_playwright_runtime_proof",
+  "observed_at_utc": "2026-10-10T20:06:16Z",
+  "status": "PASS for bounded local Runtime bridge + locked Playwright browser; production host NOT_RUN",
+  "checkout": {
+    "path": "/workspace/work/actions-mk3-canvas-proof",
+    "branch": "mk3/canvas-pinned-proof-20261010",
+    "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+    "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+    "clean": true,
+    "remote_branch": "test/canvas-runtime-cache-isolation-20261010",
+    "draft_pr": 305
+  },
+  "change": {
+    "file": "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+    "commit": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+    "description": "Move UV_CACHE_DIR and TMPDIR into a unique tmp_path_factory sibling outside the action source package synchronized by Runtime; source snapshot symlink rejection is unchanged."
+  },
+  "setup_validation": {
+    "rcc": "v18.19.3",
+    "bootstrap": "PASS",
+    "canonical_frontend_task": "PASS; npm ci and 280/280 Vitest tests",
+    "package_lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+  },
+  "focused_run": {
+    "command": "source /workspace/actions-cloud/activate.sh && rcc task script -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/canvas-pinned/run_canvas_proof.py",
+    "result": "1 passed, 2 deselected, 54.80s",
+    "test": "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge",
+    "rcc": "v18.19.3",
+    "python": "worktree action_server/.venv/bin/python (active RCC env/Python vars cleared; ACTIONS_RUNTIME_TEST_PYTHON unset)",
+    "browser_selection": "Controlled PATH excluded every chromium executable/alias while preserving required RCC and system commands; `shutil.which(\"chromium\")` returned no path, so Playwright default selection was used."
+  },
+  "browser": {
+    "package": "@playwright/test, playwright, playwright-core 1.62.1",
+    "lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+    "browser_revision": "1234",
+    "resolved_executable": "/workspace/actions-cloud/cache/playwright/chromium-1234/chrome-linux64/chrome",
+    "version": "Google Chrome for Testing 151.0.7922.34",
+    "sha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71",
+    "identity_basis": "RCC task Node 20.19.3 resolved chromium.executablePath() to this path; installed playwright-core browsers.json expected Chromium revision 1234; executable version and SHA-256 recorded. Test receipt records null executable because Playwright default was selected."
+  },
+  "runtime_receipt": {
+    "path": "canvas-bridge-acceptance-receipt.json",
+    "sha256": "1d06f8c13237afd11d7468e58e19cfcd29956d51748bfb1cdfbe17886976ea85",
+    "candidate_core_wheel": {
+      "path": "/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+      "sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8"
+    },
+    "worker": {
+      "worker_prefix": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a",
+      "actions_module": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a/lib/python3.12/site-packages/actions/__init__.py",
+      "actions_core_version": "1.0.3",
+      "direct_url_wheel": "/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+      "wheel_sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8"
+    },
+    "canvas_resource": {
+      "uri": "ui://action-canvas/v1/canvas.html?query-fixture=0.1",
+      "mime_type": "text/html;profile=mcp-app",
+      "sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852"
+    },
+    "python_mcp_calls": 3,
+    "playwright_browser_calls": 2,
+    "persisted_successful_run_records": [
+      {
+        "run_id": "run-001-eeac54e4-50d4-47be-b739-9d0fe2d24d9a",
+        "status": "passed",
+        "status_code": 2,
+        "action_name": "canvas_fixture_search"
+      },
+      {
+        "run_id": "run-002-5ef72390-dc87-46ed-9e53-3af9b8ebbce6",
+        "status": "passed",
+        "status_code": 2,
+        "action_name": "canvas_fixture_artifact_status"
+      },
+      {
+        "run_id": "run-003-7a98a8cc-e942-43d6-b3e0-f86822391d21",
+        "status": "passed",
+        "status_code": 2,
+        "action_name": "canvas_fixture_worker_provenance"
+      },
+      {
+        "run_id": "run-005-5630edde-1996-494c-b8b6-65d04c885237",
+        "status": "passed",
+        "status_code": 2,
+        "action_name": "canvas_fixture_search"
+      },
+      {
+        "run_id": "run-006-140ba77d-fbfa-429c-a868-30fae864e676",
+        "status": "passed",
+        "status_code": 2,
+        "action_name": "canvas_fixture_artifact_status"
+      }
+    ]
+  },
+  "claim_limits": {
+    "actual_chatgpt": "NOT_RUN",
+    "production_host_authorization_or_CSP": "NOT_PROVEN",
+    "artifact_resolution": "NOT_PROVEN",
+    "published_runtime_integration": "NOT_PROVEN"
+  },
+  "retained_prior_failure_logs": [
+    "attempt-01-stderr.log",
+    "attempt-01-stdout.log",
+    "attempt-02-stderr.log",
+    "attempt-02-stdout.log",
+    "attempt-03-rcc-stderr.log",
+    "attempt-03-rcc-stdout.log",
+    "attempt-03-runtime-server.log",
+    "attempt-03-pytest-log.html"
+  ],
+  "documentation_delta_proposal": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_text": "When a Runtime acceptance fixture synchronizes `tmp_path` as its action package, keep persistent build caches and temp state outside that root. uv creates directory symlinks in its cache, which the Runtime source snapshot correctly rejects inside a package; use `tmp_path_factory.mktemp` for a unique sibling build/cache directory. For pinned Playwright evidence, a visible `chromium` on PATH is an explicit override; activate the repository RCC toolchain, keep the lock-matched browser cache available, withhold system Chromium through a controlled PATH that retains required tools, and record managed executable version and SHA-256 separately.",
+    "evidence": "The original red attempt failed because uv placed a directory symlink beneath the synchronized source root. The minimal isolation change made the exact Runtime resource and browser test pass on commit f9c424f7; Playwright 1.62.1 resolved browser revision 1234 at the recorded path/hash.",
+    "stale_or_ambiguous_guidance_removed": "None; proposal only, no documentation edits in this lane.",
+    "remaining_uncertainty": "Actual ChatGPT and production host behavior remain outside this local proof."
+  },
+  "upstream_disposition": "none; Actions-owned fixture defect fixed and verified; no evidence of an RCC upstream defect.",
+  "process_cleanup": "RCC warned about child PIDs after success; ps confirmed all listed children were defunct zombies under PID 1, not live test workers. No live test process remained."
+}

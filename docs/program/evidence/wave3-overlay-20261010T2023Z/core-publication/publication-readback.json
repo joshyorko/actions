@@ -1,0 +1,267 @@
+{
+  "commands_and_receipts": {
+    "artifact_download_tool": "mcp__codex_apps__github_download_workflow_artifact(repo_full_name=\"joshyorko/actions\", artifact_id=11680287719, file_name=\"actions-core-dist-11680287719.zip\")",
+    "artifact_list_tool": "mcp__codex_apps__github_fetch_workflow_run_artifacts(repo_full_name=\"joshyorko/actions\", run_id=38080670608, name=\"actions-core-dist\")",
+    "artifact_validation_command": "python /workspace/work/actions-mk3-evidence/core-publication/verify_workflow_artifact.py --archive /workspace/work/actions-mk3-core-preflight/work/core-release-artifacts.zip --expected-archive-sha256 7a7e9b9dbcf207ec1f7fc2c07a57d927c76d792ac98d6b57b01f0bb8bf6f3483 --output-dir /workspace/work/actions-mk3-evidence/core-publication/workflow-dist --receipt /workspace/work/actions-mk3-evidence/core-publication/workflow-artifact-readback.json",
+    "manifest_validation_receipt": "/workspace/work/actions-mk3-evidence/core-publication/workflow-artifact-readback.json",
+    "pypi_validation_command": "python /workspace/work/actions-mk3-evidence/core-publication/pypi_readback.py --download-dir /workspace/work/actions-mk3-core-preflight/work/pypi-confirmed --receipt /workspace/work/actions-mk3-evidence/core-publication/pypi-readback.json",
+    "pypi_validation_receipt": "/workspace/work/actions-mk3-evidence/core-publication/pypi-readback.json",
+    "rcc_doctor_command": "source /workspace/actions-cloud/activate.sh && rcc run -r developer/toolkit.yaml --dev -t Doctor",
+    "rcc_task_config_path": "/workspace/work/actions-mk3-core-preflight/work/core-published-wheel-verify.yaml",
+    "readback_helpers": [
+      "/workspace/work/actions-mk3-evidence/core-publication/verify_workflow_artifact.py",
+      "/workspace/work/actions-mk3-evidence/core-publication/pypi_readback.py"
+    ],
+    "run_watch": "gh run watch 38080670608 --repo joshyorko/actions --interval 15",
+    "source_member_compare": "python - <<'PY': read wheel members actions/__init__.py, actions/mcp/__init__.py, actions/mcp/_metadata.py and compare bytes with git show a70993fafc99a9f94041485542d5a720797ca394:actions/src/<member>; all three matched.",
+    "tag_readback": "git ls-remote origin refs/tags/actions-core-1.0.3 'refs/tags/actions-core-1.0.3^{}'",
+    "workflow_observation": "gh run view 38080670608 --repo joshyorko/actions --json status,conclusion,headSha,headBranch,createdAt,updatedAt,jobs,url"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Post-publication release acceptance should compare actual downloaded PyPI wheel and sdist bytes to the tagged workflow manifest and run the published wheel through the canonical isolated consumer verifier; these are separate from green workflow publication.",
+    "evidence": "Actions Release run 38080670608, artifact 11680287719, verified manifest and PyPI downloads, RCC clean-wheel verifier success; see this receipt and pypi_readback.py / verify_workflow_artifact.py.",
+    "proposal_file": "/workspace/work/actions-mk3-evidence/core-publication/documentation-proposal.md",
+    "remaining_uncertainty": "None for this Core publication and byte/API readback; proposed guide wording remains subject to integration with PR304.",
+    "stale_or_ambiguous_guidance_removed": "Proposal clarifies existing generic release instructions without generalizing helper branch behavior. At Core source a70993, inv make-release requires master; newer Runtime helper source has different community/origin ancestry logic. Reconcile this addendum with the in-flight PR304 guide correction and avoid duplicate text."
+  },
+  "installed_consumer_verification": {
+    "assertions_passed": [
+      "wheel Name and Version match installed actions-core metadata",
+      "sole actions console entry point is actions.cli:main and executable is owned by the clean venv",
+      "actions.__version__ equals installed distribution version",
+      "actions and actions.mcp modules import from inside the isolated sys.prefix",
+      "public ActionContext and ActionsListActionTypedDict imports preserve identity",
+      "public mcp.tool and mcp.resource decorators retain valid metadata and reject invalid resource URI metadata",
+      "consumer actions list discovers hello action",
+      "consumer actions run returns {\"result\":\"Hello, world!\",\"message\":\"\",\"status\":\"PASS\"}"
+    ],
+    "cleanup": "verify_clean_wheel.py uses tempfile.TemporaryDirectory; after successful return, no /tmp/actions-core-clean-* directories remained and the RCC task session exited.",
+    "command": "source /workspace/actions-cloud/activate.sh && rcc run -r work/core-published-wheel-verify.yaml --dev --no-build -t VerifyPublishedWheel",
+    "consumer_commands_and_fixture": {
+      "fixture_source": "from actions import action\n@action\ndef hello(name: str = 'world') -> str:\n    return f'Hello, {name}!'\n",
+      "list_argv": [
+        "<clean-venv>/bin/actions",
+        "list",
+        "<fixture>/actions.py",
+        "--skip-lint"
+      ],
+      "list_stdout_json": [
+        {
+          "name": "hello"
+        }
+      ],
+      "mcp_probe": {
+        "invalid_metadata_rejected": {
+          "ui": {
+            "resourceUri": "https://invalid.example/view"
+          }
+        },
+        "resource_meta": {
+          "ui": {
+            "csp": {
+              "connectDomains": [
+                "https://api.example.test"
+              ]
+            }
+          }
+        },
+        "resource_mime_type": "text/html;profile=mcp-app",
+        "resource_uri": "ui://release-check/view",
+        "tool_meta": {
+          "ui": {
+            "resourceUri": "ui://release-check/view",
+            "visibility": [
+              "app"
+            ]
+          }
+        }
+      },
+      "run_argv": [
+        "<clean-venv>/bin/actions",
+        "run",
+        "<fixture>/actions.py",
+        "-a",
+        "hello",
+        "--json-output=<fixture>/result.json"
+      ],
+      "run_result_json": {
+        "message": "",
+        "result": "Hello, world!",
+        "status": "PASS"
+      }
+    },
+    "input": "independently downloaded PyPI wheel; SHA-256 8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+    "prepared_environment": "developer/setup.yaml, RCC Python 3.12.15, blueprint 318089d9095ad813; --no-build accepted the existing environment",
+    "rcc": "18.19.3",
+    "rcc_configuration_retries": {
+      "count": 3,
+      "reason": "Temporary task YAML first omitted required artifactsDir; next used tasks only under --dev; next omitted required tasks alongside devTasks. Each stopped during RCC config validation before verifier execution. Final YAML included artifactsDir, tasks, and devTasks; verifier then passed.",
+      "repository_source_changed": false
+    },
+    "rcc_task_robot_yaml": "artifactsDir: artifacts\ntasks:\n  VerifyPublishedWheel:\n    shell: python /workspace/work/actions-mk3-core-preflight/actions/scripts/verify_clean_wheel.py /workspace/work/actions-mk3-core-preflight/work/actions_core-1.0.3-py3-none-any.whl\ndevTasks:\n  VerifyPublishedWheel:\n    shell: python /workspace/work/actions-mk3-core-preflight/actions/scripts/verify_clean_wheel.py /workspace/work/actions-mk3-core-preflight/work/actions_core-1.0.3-py3-none-any.whl\nenvironmentConfigs:\n  - ../developer/setup.yaml\nPATH:\n  - .\n",
+    "result": "PASS",
+    "script": "/workspace/work/actions-mk3-core-preflight/actions/scripts/verify_clean_wheel.py",
+    "skipped": [],
+    "task_shell": "python /workspace/work/actions-mk3-core-preflight/actions/scripts/verify_clean_wheel.py /workspace/work/actions-mk3-core-preflight/work/actions_core-1.0.3-py3-none-any.whl"
+  },
+  "observed_at": "2026-10-10T19:46:01Z",
+  "published_wheel_identity": {
+    "accepted_source_member_matches": [
+      {
+        "matches_a709_source": true,
+        "sha256": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+        "wheel_member": "actions/__init__.py"
+      },
+      {
+        "matches_a709_source": true,
+        "sha256": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "wheel_member": "actions/mcp/__init__.py"
+      },
+      {
+        "matches_a709_source": true,
+        "sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c",
+        "wheel_member": "actions/mcp/_metadata.py"
+      }
+    ],
+    "console_entry_points": [
+      {
+        "name": "actions",
+        "value": "actions.cli:main"
+      }
+    ],
+    "metadata_name": "actions-core",
+    "metadata_version": "1.0.3",
+    "requires_python": ">=3.10,<4.0",
+    "runtime_versions": {
+      "actions.__version__": "1.0.3",
+      "actions.mcp.__version__": "0.0.3",
+      "importlib.metadata.version(actions-core)": "1.0.3"
+    }
+  },
+  "pypi_readback": {
+    "all_yanked_false": true,
+    "api_version": "1.0.3",
+    "files": [
+      {
+        "bytes": 103809,
+        "filename": "actions_core-1.0.3-py3-none-any.whl",
+        "pypi_upload_time": "2026-10-10T19:42:31.403205Z",
+        "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+        "url": "https://files.pythonhosted.org/packages/25/b9/86adaaf08f60deb47c749f8dc2b59a0c672b9278daf917304bffd613ba90/actions_core-1.0.3-py3-none-any.whl",
+        "yanked": false
+      },
+      {
+        "bytes": 84554,
+        "filename": "actions_core-1.0.3.tar.gz",
+        "pypi_upload_time": "2026-10-10T19:42:32.505606Z",
+        "sha256": "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691",
+        "url": "https://files.pythonhosted.org/packages/37/dc/ddb21765ddc7c471144e1ef247f1573cf1d438c0bbbe56e396120ea851a2/actions_core-1.0.3.tar.gz",
+        "yanked": false
+      }
+    ],
+    "package": "actions-core",
+    "receipt": "/workspace/work/actions-mk3-evidence/core-publication/pypi-readback.json",
+    "release_files_exactly_match_manifest": true,
+    "requires_python": "<4.0,>=3.10",
+    "result": "PASS: each downloaded PyPI file SHA-256 equals both PyPI API digest and Actions workflow artifact manifest"
+  },
+  "release_workflow": {
+    "annotations": [
+      "Non-blocking Node.js 20 deprecation notice",
+      "Non-blocking ubuntu-latest image migration notice"
+    ],
+    "completed_at": "2026-10-10T19:42:36Z",
+    "conclusion": "success",
+    "created_at": "2026-10-10T19:39:36Z",
+    "event": "push",
+    "head_branch": "actions-core-1.0.3",
+    "head_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+    "jobs": [
+      {
+        "completed_at": "2026-10-10T19:41:12Z",
+        "conclusion": "success",
+        "id": 114296751444,
+        "name": "verify",
+        "passed_steps": [
+          "Set up job",
+          "Checkout repository",
+          "Set up Python 3.10",
+          "Install Poetry",
+          "Synchronize Core dependencies",
+          "Check tag version",
+          "Build verified Core artifacts",
+          "Verify exact Core artifact inventory",
+          "Install Twine 6.2.0",
+          "Verify Core artifacts",
+          "Verify clean installed Core wheel",
+          "Upload verified Core artifacts",
+          "Complete job"
+        ],
+        "started_at": "2026-10-10T19:40:22Z"
+      },
+      {
+        "completed_at": "2026-10-10T19:42:35Z",
+        "conclusion": "success",
+        "id": 114297071402,
+        "name": "publish",
+        "passed_steps": [
+          "Set up job",
+          "Checkout repository",
+          "Set up Python 3.10",
+          "Install Poetry",
+          "Verify merged tag provenance",
+          "Download verified Core artifacts",
+          "Verify downloaded Core artifacts",
+          "Publish verified Core artifacts",
+          "Complete job"
+        ],
+        "started_at": "2026-10-10T19:42:10Z"
+      }
+    ],
+    "run_id": 38080670608,
+    "url": "https://github.com/joshyorko/actions/actions/runs/38080670608",
+    "workflow": "Actions Release",
+    "workflow_steps_skipped": []
+  },
+  "remaining_uncertainty": null,
+  "repository": "joshyorko/actions",
+  "result": "PASS: Core 1.0.3 publication, artifact byte readback, PyPI API/byte comparison, and installed public consumer verification",
+  "source": {
+    "annotated_tag_object": "2346af6d41f4a45d13ebaef0377b655774bc6cbc",
+    "commit": "a70993fafc99a9f94041485542d5a720797ca394",
+    "peeled_tag_commit": "a70993fafc99a9f94041485542d5a720797ca394",
+    "tag": "actions-core-1.0.3",
+    "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959"
+  },
+  "upstream_disposition": "none; no upstream defect investigated or reported",
+  "workflow_artifact": {
+    "archive_bytes": 185164,
+    "entries": [
+      "actions-core-manifest.sha256",
+      "actions_core-1.0.3-py3-none-any.whl",
+      "actions_core-1.0.3.tar.gz"
+    ],
+    "files": [
+      {
+        "bytes": 103809,
+        "filename": "actions_core-1.0.3-py3-none-any.whl",
+        "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265"
+      },
+      {
+        "bytes": 84554,
+        "filename": "actions_core-1.0.3.tar.gz",
+        "sha256": "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691"
+      }
+    ],
+    "github_api_digest": "sha256:7a7e9b9dbcf207ec1f7fc2c07a57d927c76d792ac98d6b57b01f0bb8bf6f3483",
+    "id": 11680287719,
+    "independently_downloaded_archive_sha256": "7a7e9b9dbcf207ec1f7fc2c07a57d927c76d792ac98d6b57b01f0bb8bf6f3483",
+    "manifest": [
+      "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691  actions_core-1.0.3.tar.gz",
+      "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265  actions_core-1.0.3-py3-none-any.whl"
+    ],
+    "name": "actions-core-dist",
+    "readback_receipt": "/workspace/work/actions-mk3-evidence/core-publication/workflow-artifact-readback.json"
+  }
+}

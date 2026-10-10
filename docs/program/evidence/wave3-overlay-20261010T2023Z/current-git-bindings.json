@@ -1,0 +1,58 @@
+{
+  "schema": "actions-current-git-binding/v1",
+  "repository": "joshyorko/actions",
+  "observed_at_utc": "2026-10-10T20:21:09Z",
+  "source": {
+    "ref_read": "Read-only git ls-remote verified current branch refs for community, integration and tracked PR branches.",
+    "commit_details": "Read-only GitHub REST commit endpoint provided each current SHA, tree, ordered parents.",
+    "pr_state_and_check_counts": "Native gh pr view returned summarized PR state and check status rollup for the bounded cohort; no credentials/status beyond returned API fields are recorded."
+  },
+  "bindings": {
+    "community": {
+      "sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959"
+    },
+    "integration": {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+    },
+    "open_prs": {
+      "221": {
+        "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+      },
+      "282": {
+        "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+        "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb"
+      },
+      "290": {
+        "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+        "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097"
+      },
+      "292": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+      },
+      "299": {
+        "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0"
+      },
+      "300": {
+        "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1"
+      },
+      "302": {
+        "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+        "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9"
+      },
+      "304": {
+        "sha": "73605934c1c948895410a5abaed6c225a396e038",
+        "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5"
+      },
+      "305": {
+        "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+        "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303"
+      }
+    }
+  }
+}

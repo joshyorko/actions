@@ -1,0 +1,95 @@
+{
+  "observed_at_utc": "2026-10-10T20:22:57.027258+00:00",
+  "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+  "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+  "clean": true,
+  "command": "source /workspace/actions-cloud/activate.sh && rcc task script -r developer/toolkit.yaml --no-build -- python /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/run_canvas_proof_with_launch_trace.py",
+  "result": "PASS: 1 passed, 2 deselected in 57.29s",
+  "reason": "Resolve full-Chrome companion executable versus actual headless-shell selection from prior receipt; no source change. Unique evidence/pytest paths preserve prior run.",
+  "browser": {
+    "selection": "Direct DEBUG=pw:browser launch trace",
+    "executable": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "version": "Google Chrome for Testing 151.0.7922.34",
+    "launched_pid": 26294,
+    "exit_code": 0,
+    "graceful_close_end": true,
+    "playwright_version": "1.62.1",
+    "revision": "1234"
+  },
+  "artifacts": {
+    "run_canvas_proof_with_launch_trace.py": {
+      "sha256": "ff1d6207c7ee27ce725cd2bbeddf6d4bca1ba44d02f5184856381b6ec0905a1e",
+      "bytes": 3689
+    },
+    "rcc-stdout.log": {
+      "sha256": "121c358dc6b1958f8ad2669c13fb1a34a01c8015a647379bfb1405be06ac7ed2",
+      "bytes": 2424
+    },
+    "rcc-stderr.log": {
+      "sha256": "eb5e5a7bd40074d58e192367321f7c9bffc2b4cce5d35123f04f1f71f88b2a2f",
+      "bytes": 60324
+    },
+    "canvas-bridge-acceptance-receipt.json": {
+      "sha256": "93abc2ea3c1ea02aa1dc6bfdd1292d2fd3999ced8d130f2621e34c3706d334d4",
+      "bytes": 2897
+    }
+  },
+  "browser_process_inventory": [
+    {
+      "pid": "16320",
+      "ppid": "1",
+      "state": "Z",
+      "command": "chrome_crashpad"
+    },
+    {
+      "pid": "16322",
+      "ppid": "1",
+      "state": "Z",
+      "command": "chrome_crashpad"
+    },
+    {
+      "pid": "16325",
+      "ppid": "1",
+      "state": "Z",
+      "command": "chromium"
+    },
+    {
+      "pid": "16326",
+      "ppid": "1",
+      "state": "Z",
+      "command": "chromium"
+    },
+    {
+      "pid": "17288",
+      "ppid": "1",
+      "state": "Z",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": "17289",
+      "ppid": "1",
+      "state": "Z",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": "26296",
+      "ppid": "1",
+      "state": "Z",
+      "command": "chrome-headless"
+    },
+    {
+      "pid": "26297",
+      "ppid": "1",
+      "state": "Z",
+      "command": "chrome-headless"
+    }
+  ],
+  "cleanup_scope": "Direct launch process exited0 and graceful close ended; inventory is host-wide and may include historical zombies. Complete descendant reaping is not asserted.",
+  "limits": [
+    "Actual ChatGPT NOT RUN",
+    "Production authorization/CSP and artifact resolution NOT PROVEN",
+    "Source-candidate Core wheel, not published Runtime release proof"
+  ],
+  "supersedes_identity_only": "Prior 0b20b130... hash identifies companion full Chrome; this run directly traces headless-shell e11fc9ce... . Prior successful functional evidence and correction receipt are retained."
+}

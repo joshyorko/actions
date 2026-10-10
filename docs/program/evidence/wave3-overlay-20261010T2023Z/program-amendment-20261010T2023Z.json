@@ -1,0 +1,1391 @@
+{
+  "id": "program-amendment-20261010T2023Z",
+  "observed_at_utc": "2026-10-10T20:23:55Z",
+  "summary": "Wave3 active checkpoint: independently reviewed, narrowly scoped migration API, installed Runtime/browser, and Canvas local browser observations are accepted only at those boundaries. PR305 managed-browser identity was resolved by a fresh direct launch trace. PR304/302/282 and Runtime release gates remain pending. SQLite savepoint fix and private RCC implementation remain active/unaccepted. All 54 original issue rows, states, classifications, typed relationships and 16 historical archives are preserved; #210 remains the sole whole-issue completion.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "raw_states_unchanged": true,
+    "accepted_issue_closures_unchanged": [
+      210
+    ],
+    "whole_issue_acceptance_changed": false,
+    "whole_issue_classification_counts_unchanged": true,
+    "typed_canvas_relationships_changed": false,
+    "historical_archives_changed": false
+  },
+  "previous_checkpoint": {
+    "id": "program-amendment-20261010T2005Z",
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "summary": "Dated additive 20:05Z status correction: current refs remain unchanged. PR302 exact Windows published-wheel floor canary fails because 1.0.3 was installed while the declared 1.0.2 floor was asserted; PR304 contains the fix but remains unaccepted, and PR302 adapter devmode remains active. PR282 worker reports one installed Runtime/browser pass, but independent durable-receipt readback is pending; PR305/#99 browser fixture rerun is in progress. Dakota native snapshots show no active thread flags (WorkItems completed; RCC interrupted); Devsy remains disabled. Preserve the 54 issue rows, raw states/captures, historical ZIPs, typed edges and whole-issue counts; only #210 remains whole-issue complete.",
+    "path": "evidence/wave3-overlay-20261010T2023Z/program-amendment-20261010T2005Z.json",
+    "sha256": "af2677f0cde30527bc835c02a6766d00b941933e1c5ce976c464323361b43f14",
+    "current_pointer_replaced": true
+  },
+  "prior_current_pointers": {
+    "previous_overlay": {
+      "id": "program-amendment-20261010T1958Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/program-amendment-20261010T1958Z.json",
+      "sha256": "05bd5b71e8094871171c504a90d106dfd865b8fda1ba01ff5db6f13320fe5d71",
+      "observed_at_utc": "2026-10-10T19:58:27Z"
+    },
+    "previous_binding": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/current-git-bindings.json",
+      "sha256": "2036fca8dfd5537762cc4529e9562104644c38786472552be94334ab3d72ff5f"
+    },
+    "previous_worker_inventory": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "source": "Current collaboration roster at overlay cutoff; root status updates. This is agent liveness/assigned work, not proof of repository source progress.",
+      "workers": [
+        {
+          "name": "root",
+          "status": "ACTIVE",
+          "scope": "Integration owner; PR/release admission and current GitHub check observation."
+        },
+        {
+          "name": "luna_core_release_preflight",
+          "status": "ACTIVE",
+          "scope": "Governance overlay author; this bounded task."
+        },
+        {
+          "name": "luna_database_gate_audit",
+          "status": "ACTIVE",
+          "scope": "Bounded database gate audit."
+        },
+        {
+          "name": "luna_graph_reconcile",
+          "status": "ACTIVE",
+          "scope": "Current reconciliation task; source status not inferred from liveness."
+        },
+        {
+          "name": "luna_pr282_template",
+          "status": "ACTIVE",
+          "scope": "PR282 template floor/generation gate."
+        },
+        {
+          "name": "sol_pr301_review",
+          "status": "ACTIVE",
+          "scope": "PR301 serialization slice review."
+        },
+        {
+          "name": "luna_pr302_portability",
+          "status": "COMPLETED",
+          "scope": "PR302 portability evidence delivered."
+        },
+        {
+          "name": "Devsy",
+          "status": "DISABLED",
+          "scope": "No dispatch, discovery, or calls."
+        },
+        {
+          "name": "Dakota",
+          "status": "UNKNOWN",
+          "scope": "Ownership clarification pending; no dispatch."
+        }
+      ],
+      "limitations": "Does not revive the older luna worker-name map or infer progress from active-agent status."
+    },
+    "previous_status": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/live-status-observation.json",
+      "sha256": "9b162461a8700e48b63bba48af0f25578a1e857d101c812e4b5f74de120ffb12",
+      "scope": "Root-reported current exact-head check counts; only bounded current PR observations, not a full branch/release gate inventory."
+    },
+    "previous_release_readiness": {
+      "status": "RUNTIME_RELEASE_NOT_READY",
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "community": "a70993fafc99a9f94041485542d5a720797ca394",
+      "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "actions_core": "1.0.3 PUBLISHED_AND_BYTE/API/INSTALLED_CONSUMER_VERIFIED",
+      "actions_runtime": "1.0.3 NOT PUBLISHED; no immutable Runtime 1.0.3 tag or PyPI readback established in this overlay",
+      "actions_http_helper": "1.0.3 published (prior verified current registry state)",
+      "actions_work_items": "0.4.4 unchanged",
+      "declared_runtime_core_floor": "^1.0.2; PR304 canary requirement remains exactly 1.0.2",
+      "remaining_gates": [
+        "PR304 exact-head checks/review/merge",
+        "PR302 exact-head Windows floor-canary failure must be refreshed against accepted PR304 union; Windows adapter devmode remains active",
+        "PR282 managed Runtime/browser consumer run",
+        "PR305 corrected actual Runtime/browser fixture rerun",
+        "PR292 Windows check; #290/#299/#300 blocked",
+        "7eca actual RCC metadata inspection remains NOT_RUN",
+        "Current Actions Runtime PyPI and native release artifact/tag/registry readback",
+        "Required Homebrew install/upgrade proof in owning joshyorko/homebrew-tools tap/workflow; not run in this overlay",
+        "Exact latest Runtime workflow/tag source review and named platform/security/registry gates not established by this scoped overlay"
+      ],
+      "source": "runtime-readiness-corrected receipt plus exact current PR source/review and root 19:58 check status observation."
+    },
+    "previous_next_action": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "owner": "Root retains integration, release and external publication authority.",
+      "status": "Wait for exact-head PR304/302/282/305 gates; keep PR292 Windows active and #290/#299/#300 blocked; after accepted head update, separately run the managed Runtime/browser consumer and remaining owning Runtime release gates.",
+      "scope": "No tag, dispatch, merge, issue closure or whole-issue acceptance authorized by this overlay."
+    }
+  },
+  "previous_current_state": {
+    "path": "evidence/wave3-overlay-20261010T2023Z/program-amendment-20261010T2005Z.json",
+    "sha256": "af2677f0cde30527bc835c02a6766d00b941933e1c5ce976c464323361b43f14",
+    "preservation_check": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/preservation-check.json",
+      "sha256": "8e0721cd018589ae39957744854edffa287e4babea743a9e96bb051c85972b0d"
+    },
+    "prior_current_pointer_copy_audit": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/previous-pointer-audit.json",
+      "sha256": "c9a7a14510c1ca9c67d344061a49d5b082c86bea9a03264ead1f571d9677d253"
+    }
+  },
+  "current_refs": {
+    "community": {
+      "sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+      "parents": [
+        "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "c2733957b047a2acf3d38c1cad7704a4bc69f15b"
+      ]
+    },
+    "integration": {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+      "parents": [
+        "e886d26ebaefafa9189a69517f6707691b53662e",
+        "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+      ]
+    },
+    "open_pr_heads": {
+      "221": {
+        "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+        "parents": [
+          "e886d26ebaefafa9189a69517f6707691b53662e",
+          "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+        ]
+      },
+      "282": {
+        "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+        "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+        "parents": [
+          "aa78bc25b7662c163a59e19e81c97834cce24ba1"
+        ]
+      },
+      "290": {
+        "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+        "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+        "parents": [
+          "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+          "d0e12c1e1a256664b506cd8b027292062c6e1109",
+          "e886d26ebaefafa9189a69517f6707691b53662e"
+        ]
+      },
+      "292": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+        "parents": [
+          "dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+        ]
+      },
+      "299": {
+        "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+        "parents": [
+          "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+          "e886d26ebaefafa9189a69517f6707691b53662e"
+        ]
+      },
+      "300": {
+        "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+        "parents": [
+          "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+          "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+        ]
+      },
+      "302": {
+        "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+        "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+        "parents": [
+          "e31506239fd0260d708a11440762537334f8d2d1"
+        ]
+      },
+      "304": {
+        "sha": "73605934c1c948895410a5abaed6c225a396e038",
+        "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+        "parents": [
+          "0f9422bbb366dcadc10ddea05f86a7f9ecad227c"
+        ]
+      },
+      "305": {
+        "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+        "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+        "parents": [
+          "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
+        ]
+      }
+    }
+  },
+  "current_pr_heads": {
+    "221": {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+    },
+    "282": {
+      "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+      "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb"
+    },
+    "290": {
+      "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097"
+    },
+    "292": {
+      "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+    },
+    "299": {
+      "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0"
+    },
+    "300": {
+      "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1"
+    },
+    "302": {
+      "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+      "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9"
+    },
+    "304": {
+      "sha": "73605934c1c948895410a5abaed6c225a396e038",
+      "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5"
+    },
+    "305": {
+      "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303"
+    }
+  },
+  "current_pr_inventory": {
+    "observed_at_utc": "2026-10-10T20:21:09Z",
+    "source": "Native GitHub PR views and remote ref bindings in this checkpoint; point-in-time summary, not a complete release audit.",
+    "open_pr_ids": [
+      221,
+      282,
+      290,
+      292,
+      299,
+      300,
+      302,
+      304,
+      305
+    ],
+    "heads": {
+      "221": {
+        "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+        "parents": [
+          "e886d26ebaefafa9189a69517f6707691b53662e",
+          "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+        ],
+        "base_ref": "community",
+        "state": "OPEN",
+        "status": "OPEN_RUNTIME_INTEGRATION_CANDIDATE; release gates outstanding",
+        "check_rollup": {},
+        "check_count": 0,
+        "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work"
+      },
+      "282": {
+        "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+        "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+        "parents": [
+          "aa78bc25b7662c163a59e19e81c97834cce24ba1"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "state": "OPEN",
+        "status": "OPEN_SCOPED_WORKER_BROWSER_GO; HOSTED_CHECKS_PENDING; BODY_REFRESH_NEEDED",
+        "check_rollup": {
+          "QUEUED ": 5,
+          "IN_PROGRESS ": 4,
+          "COMPLETED SUCCESS": 7,
+          "COMPLETED CANCELLED": 2,
+          "COMPLETED FAILURE": 1,
+          "COMPLETED SKIPPED": 1
+        },
+        "check_count": 20,
+        "title": "feat(templates): checkpoint Canvas Query packaging for #127"
+      },
+      "290": {
+        "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+        "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+        "parents": [
+          "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+          "d0e12c1e1a256664b506cd8b027292062c6e1109",
+          "e886d26ebaefafa9189a69517f6707691b53662e"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED_DEPENDENCY_STACK",
+        "check_rollup": {
+          "COMPLETED SUCCESS": 26
+        },
+        "check_count": 26,
+        "title": "test: verify catalog ownership in the frozen Runtime lifecycle"
+      },
+      "292": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+        "parents": [
+          "dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED_WINDOWS_ACTIVE",
+        "check_rollup": {
+          "COMPLETED SUCCESS": 18,
+          "IN_PROGRESS ": 1
+        },
+        "check_count": 19,
+        "title": "fix: preserve concrete MCP resource owners across catalog changes"
+      },
+      "299": {
+        "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+        "parents": [
+          "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+          "e886d26ebaefafa9189a69517f6707691b53662e"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED_DEPENDENCY_STACK",
+        "check_rollup": {
+          "COMPLETED SUCCESS": 20
+        },
+        "check_count": 20,
+        "title": "Add fenced shared Run-output foundations and verified abort cleanup"
+      },
+      "300": {
+        "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+        "parents": [
+          "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+          "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+        ],
+        "base_ref": "feat/shared-run-output-20261010",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED_DEPENDENCY_STACK",
+        "check_rollup": {
+          "COMPLETED SUCCESS": 11
+        },
+        "check_count": 11,
+        "title": "Add trusted Runtime transport for authorized shared Run output retrieval"
+      },
+      "302": {
+        "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+        "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+        "parents": [
+          "e31506239fd0260d708a11440762537334f8d2d1"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "state": "OPEN",
+        "status": "OPEN_SOURCE_GO; WINDOWS_FLOOR_CANARY_FAILURE; DEV_MODE_ACTIVE",
+        "check_rollup": {
+          "COMPLETED SUCCESS": 12,
+          "QUEUED ": 2,
+          "IN_PROGRESS ": 1,
+          "COMPLETED CANCELLED": 2,
+          "COMPLETED FAILURE": 1,
+          "COMPLETED SKIPPED": 1
+        },
+        "check_count": 19,
+        "title": "feat(rcc): preserve authoritative publication specification identity"
+      },
+      "304": {
+        "sha": "73605934c1c948895410a5abaed6c225a396e038",
+        "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+        "parents": [
+          "0f9422bbb366dcadc10ddea05f86a7f9ecad227c"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "state": "OPEN",
+        "status": "OPEN_SOURCE_GO; EXACT_HEAD_CHECKS_PENDING",
+        "check_rollup": {
+          "COMPLETED SUCCESS": 16,
+          "IN_PROGRESS ": 2,
+          "QUEUED ": 4
+        },
+        "check_count": 22,
+        "title": "Merge community Core promotion and pin Runtime registry floor verification"
+      },
+      "305": {
+        "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+        "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+        "parents": [
+          "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "state": "OPEN",
+        "status": "OPEN_READY_FOR_SCOPED_FIX; LOCAL_BROWSER_TRACE_GO; HOSTED_CHECKS_PENDING",
+        "check_rollup": {
+          "IN_PROGRESS ": 8,
+          "COMPLETED SUCCESS": 4,
+          "QUEUED ": 2
+        },
+        "check_count": 14,
+        "title": "Keep Canvas acceptance build caches outside synchronized package source"
+      }
+    },
+    "merged_prs": [
+      {
+        "number": 301,
+        "merge_commit": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "scope": "serialization/CI slice"
+      }
+    ]
+  },
+  "integration_checkpoint": {
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+    "parents": [
+      "e886d26ebaefafa9189a69517f6707691b53662e",
+      "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+    ],
+    "community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "scope": "Current integration baseline includes PR301 serialization/CI only; Core1.0.3 is separately published on community. This checkpoint adds no source code to integration.",
+    "cohort": {
+      "open_prs": [
+        282,
+        290,
+        292,
+        299,
+        300,
+        302,
+        304,
+        305
+      ],
+      "merged_scoped_prs": [
+        301
+      ],
+      "scope": "Tracked PR snapshot, not whole issue work."
+    }
+  },
+  "current_git_binding_receipt": {
+    "observed_at_utc": "2026-10-10T20:21:09Z",
+    "path": "evidence/wave3-overlay-20261010T2023Z/current-git-bindings.json",
+    "sha256": "8e2eeb0c0d799671332d990d8c2926497aa64b746c50c478c3a3de4e6a8b2841"
+  },
+  "current_ref_authority": {
+    "observed_at_utc": "2026-10-10T20:21:09Z",
+    "status": "AUTHORITATIVE_FOR_THIS_CUTOFF_ONLY",
+    "method": "Read-only git ls-remote plus GitHub REST commit tree/parent records and native gh PR state/check rollups. No publication/auth credential state inferred."
+  },
+  "current_hosted_run_observations": {
+    "observed_at_utc": "2026-10-10T20:21:09Z",
+    "path": "evidence/wave3-overlay-20261010T2023Z/live-pr-ref-snapshot.json",
+    "sha256": "1d32cad0c9091a28834e5cf9c7a8aa1d49549df994b3dc0abc17fe3e09f9565c",
+    "scope": "Bounded PR 221/282/290/292/299/300/302/304/305 snapshot; no continuous refresh after this cutoff. PR305 final browser-trace review was added separately at 20:22:57Z."
+  },
+  "current_worker_inventory": {
+    "observed_at_utc": "2026-10-10T20:23:55Z",
+    "path": "evidence/wave3-overlay-20261010T2023Z/current-worker-inventory.json",
+    "sha256": "ba1f86964180f5c07627d665b426e6cbeabdf55f9cf403257d1d58c75ab2eb4a",
+    "source": "Current native collaboration roster captured at checkpoint plus root-reported lane assignments. Dakota status is only the exact native snapshot at 20:04:43/44Z; code progress is not inferred from worker liveness."
+  },
+  "current_active_workers": {
+    "root": "ACTIVE; Integration, release admission and external publication authority.",
+    "luna_core_release_preflight": "ACTIVE; This isolated wave3 governance evidence/graph/guidance checkpoint.",
+    "luna_database_gate_audit": "ACTIVE; Read-only #134 warm readiness plus SQLite savepoint diagnosis/fix lane; no acceptance claimed.",
+    "luna_graph_reconcile": "ACTIVE; Graph reconciliation lane.",
+    "luna_pr282_template": "ACTIVE; PR282 template source/body follow-up; scoped installed worker/browser evidence independently reviewed.",
+    "luna_pr302_portability": "ACTIVE; PR302 portability follow-up; exact Windows canary refresh awaits accepted PR304 union.",
+    "sol_pr301_review": "ACTIVE; Independent scoped reviews; latest PR282/PR305/database gate reviews are archived in this checkpoint.",
+    "luna302_rcc_inspection": "ACTIVE; Root-assigned private f441 RCC inspection implementation; contract fake-RCC only; actual metadata execution NOT RUN.",
+    "Dakota": "Last exact native snapshots: WorkItems completed and RCC interrupted with no active flags at 20:04:43/44Z; no resume/create.",
+    "Devsy": "DISABLED; no discovery/dispatch/calls.",
+    "Astra": "NOT USED; no assignment/calls."
+  },
+  "current_preservation_check": {
+    "observed_at_utc": "2026-10-10T20:23:55Z",
+    "path": "evidence/wave3-overlay-20261010T2023Z/preservation-check.json",
+    "sha256": "8e0721cd018589ae39957744854edffa287e4babea743a9e96bb051c85972b0d",
+    "scope": "PASS vs df77 base: all 54 original ledger rows/states/acceptance, graph counts/typed Canvas relations, Work Items compatibility ledger and 16 ZIP bytes/hashes unchanged."
+  },
+  "pr304_status": {
+    "head": "73605934c1c948895410a5abaed6c225a396e038",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "source_review": "GO; floor canary requires exact 1.0.2",
+    "hosted": "16 success, 2 in progress, 4 queued at 20:21:09Z; no merge",
+    "receipt": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/release-gates/pr304-final-floor-review.json",
+      "sha256": "9eb58690dc29f4e8f675ad8ed79ba3ec04f77032def9741936fd3bf102160f11"
+    }
+  },
+  "pr302_status": {
+    "head": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+    "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+    "source_review": "GO",
+    "local_suite": "1,081 passed, 12 skipped (prior exact source)",
+    "hosted": "12 success; 1 Windows floor-canary failure; 2 queued, 1 active at 20:21:09Z; 2 cancelled, 1 skipped",
+    "windows_failure": {
+      "run": 38081239175,
+      "job": 114298417674,
+      "cause": "Windows published wheel installed Core1.0.3 but asserted declared floor1.0.2; same resolver canary corrected in PR304 current source.",
+      "adapter_devmode_job": 114298417836,
+      "status": "ACTIVE per root evidence"
+    },
+    "receipt": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/release-gates/pr302-windows-floor-failure.json",
+      "sha256": "ecbd1f1dba42c104aca0973d1c2f829e40285ae01c2014c8781c2b8ba2c6d2c3"
+    },
+    "refresh_condition": "Refresh exact PR302 union only after accepted PR304; do not classify this as the unrelated Path expectation."
+  },
+  "pr282_status": {
+    "head": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+    "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+    "source_review": "GO",
+    "scoped_receipt_sha256": "d8ae93a5fc2cca19dac84d5180ef772eba245e906e401b9afa43ef503c182346",
+    "scoped_gate": "published Core1.0.3 installed worker plus system-Chromium Runtime/browser proof GO",
+    "hosted": "7 success; 1 failure; 1 skipped; 2 cancelled; 4 in progress; 5 queued at 20:21:09Z; exact-head CI incomplete",
+    "body": "Receipt readback now exists, while PR body still says it is pending at cutoff; root plans a wording refresh."
+  },
+  "pr305_status": {
+    "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+    "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+    "source_review": "GO fixture-only correction",
+    "browser_proof": "GO exact local proof: fresh direct DEBUG=pw:browser trace launched managed headless-shell revision1234, SHA e11fc9ce; run 1 passed/2 deselected, PID26294 exit0; independent review GO",
+    "hosted": "8 in progress, 3 success, 3 queued in 20:21:09Z snapshot; root marked scoped source/proof ready at 20:19:59Z; PR remains open",
+    "limits": "No actual ChatGPT, auth/artifact, production CSP/host, published Runtime, frozen worker or full #99 acceptance; six descendant zombies mean complete reaping is not claimed.",
+    "receipt": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr305-final-launch-trace-independent-review.json",
+      "sha256": "d06296123a1ff511d2f8ffaf13640e45d62729985a27a4f41068a43ca159e77a"
+    },
+    "supersession": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr305-browser-identity-correction.json",
+      "sha256": "44404c6a7519e5ff35557547fc68c87e2622f22c2f903f57492401b66c867afb"
+    }
+  },
+  "pr292_status": {
+    "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "hosted": "18 success, 1 active Windows at 20:21:09Z",
+    "status": "OPEN; native/affected source-equivalence remains scoped; Windows gate active; PR290/299/300 blocked"
+  },
+  "rcc_source_status": {
+    "preparation_head": "7eca36abce160b68f616eab9b7fdc9c4e7f2b053",
+    "preparation": "Source/type GO only",
+    "private_implementation_head": "f441afb5144843535314ca0a5f6966b0206f6b59",
+    "private_tree": "086277052fea6e7fcb61fa6487de5bb9a5e47a27",
+    "implementation": "ACTIVE; contract fake-RCC only",
+    "actual_metadata_inspection": "NOT_RUN; no compiler admission or whole issue acceptance",
+    "composition_review": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/rcc-private-composition-review.json",
+      "sha256": "2182c19da2b41f3596f3b91f473c592d998f930303b4198f8d44188be3ffc086"
+    }
+  },
+  "savepoint_status": {
+    "baseline": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "diagnosis": "SQLite SAVEPOINT-start failure is expected-RED; actual SQLite authorizer reproduction and nested-control retained.",
+    "worktree": "/workspace/work/actions-mk3-db-savepoint has an active uncommitted minimal production fix plus test/docs edits at checkpoint; not executed/reviewed/accepted by this overlay.",
+    "receipt_sha256": "c1c9dba58ae1961adaee5349be4e76f5388c4a9ab2d2e835c69039b3a7015559",
+    "acceptance": "NONE; do not infer green from the prior 20:05 guide proposal."
+  },
+  "issue84_migration_api_status": {
+    "verdict": "ACCEPTED_SCOPED_ONLY",
+    "receipt": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/migration-api-actual-independent-review.json",
+      "sha256": "93c4ffc4175169dcd023abb197e825fdd59f1d0053dca37c03363d8e60911863"
+    },
+    "result": "Two-process PostgreSQL v12-to-v13 production migrate_db API lock gate only; no full #84 or #83/#129 acceptance."
+  },
+  "current_release_readiness": {
+    "status": "RUNTIME_RELEASE_NOT_READY",
+    "observed_at_utc": "2026-10-10T20:23:55Z",
+    "community": {
+      "sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+      "status": "Core 1.0.3 published and byte/API/installed-consumer verified; see prior Core receipt in this bundle."
+    },
+    "integration": {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+      "status": "Current Runtime integration includes merged PR301 serialization/CI slice only."
+    },
+    "actions_core": "1.0.3 PUBLISHED_AND_READBACK_VERIFIED",
+    "actions_runtime": "1.0.3 NOT PUBLISHED; no immutable Runtime 1.0.3 tag, PyPI package, or native 1.0.3 release readback established here",
+    "actions_http_helper": "1.0.3 previously verified published",
+    "actions_work_items": "0.4.4 unchanged",
+    "declared_runtime_core_floor": "^1.0.2; PR304 canary must continue to assert exact 1.0.2 despite Core 1.0.3 being published.",
+    "point_in_time_pr_status_source": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/live-pr-ref-snapshot.json",
+      "sha256": "1d32cad0c9091a28834e5cf9c7a8aa1d49549df994b3dc0abc17fe3e09f9565c"
+    },
+    "release_blocking_or_required_gates": [
+      "PR304 exact-head 73605934 source review is GO; 20:21:09Z rollup was 16 success, 2 in progress, 4 queued. Exact checks/review and merge remain pending.",
+      "PR302 exact-head e8e8 has the Windows published-wheel floor canary failure (run 38081239175/job 114298417674 installed Core 1.0.3 then asserted 1.0.2); Windows adapter devmode is active, native binary and both RCC toolkit jobs passed. Refresh against accepted PR304 union before disposition.",
+      "PR282 scoped independent installed-worker/system-Chromium receipt is GO; exact-head CI remains in progress/queued with retained earlier failures/cancellations, and the PR body still has a stale readback-pending phrase for root to refresh.",
+      "PR305 source and local browser proof are GO at f9c424; direct launch trace proves lock-matched headless-shell revision 1234 SHA e11fc9ce. At 20:21:09Z hosted rollup had 8 in progress, 3 success, 3 queued; these are not merge/whole-issue acceptance.",
+      "PR292 Windows check remains active (18 success, 1 active at 20:21:09Z); PR290/299/300 are blocked by separate stack/dependency gates despite green returned rollups.",
+      "The private RCC baseline f441afb/tree086277 includes reviewed preparation but only fake-RCC contract for active implementation; actual metadata inspection is NOT RUN and compiler admission is not accepted.",
+      "Issue #134 provider-backed warm path remains a separate read-only audit with HTTP 503 failure; selected-provider 503 negative does not prove warm reuse.",
+      "Issue #153 real browser/security acceptance remains required and is not established by local #282/#305 fixtures.",
+      "Issue #211 requires native release handoff evidence, including owning joshyorko/homebrew-tools install and upgrade proof; none is established in this checkpoint.",
+      "Current Runtime 1.0.3 release workflow, tag, PyPI package, native platform/signing assets and registry readbacks remain unrun/unverified on final accepted source.",
+      "Native release-note workflow currently passes a non-empty release_text that bypasses changelog extraction; workflow writer repair is pending. Do not rely on the section heading alone.",
+      "SQLite SAVEPOINT-start expected-red diagnosis is active; minimal source fix is uncommitted and not accepted or verified."
+    ],
+    "non_gates_scoped_observations": "#84 migration API, #282 installed worker/browser, and #99 local cache/browser fixture proof satisfy only their exact recorded slices and may be used by their narrow successors. They do not move whole-issue counts or release readiness.",
+    "source": "Exact Git ref + point-in-time native PR status snapshot and the source/evidence reviews in this checkpoint; root-supplied bounded runtime/status updates through 20:23:55Z.",
+    "scope": "No tag, release, registry/tap write, merge, issue closure or whole-issue acceptance was performed or requested by this overlay."
+  },
+  "release_ready": false,
+  "current_next_action": {
+    "observed_at_utc": "2026-10-10T20:23:55Z",
+    "owner": "Root retains integration, release and external publication authority.",
+    "status": "Finish/accept exact PR304 checks then re-evaluate PR302 on union; close PR282 hosted gates and correct body; complete PR305 hosted gates; retain PR292 Windows and dependency stack; review required actual RCC/#134 warm, #153 security/browser, #211 owning Homebrew install/upgrade and native Runtime publication/readback gates; verify release-note workflow fix on final source. Keep current SQLite fix and RCC implementation under separate review.",
+    "scope": "No merge, tag, release, registry/tap write, issue closure or whole-issue acceptance by this overlay."
+  },
+  "upstream_disposition": "none; the release-note override and source defects reviewed here are Actions-owned. No upstream issue/report opened.",
+  "documentation_disposition": {
+    "canonical_path": "docs/skills/repository-operations.md",
+    "updated": "Added exact PostgreSQL two-process migration gate boundaries, installed worker/browser identity caveats, synchronized source cache and actual Playwright launch tracing, private RCC composition boundary, and current Runtime release_text/changelog extraction condition.",
+    "evidence": "Independent reviews are hash-bound in evidence/wave3-overlay-20261010T2023Z; exact PR304 generator/workflow and pinned action behavior were read at current PR304 source."
+  },
+  "evidence": [
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-01-stderr.log",
+      "size_bytes": 177,
+      "sha256": "b7fe57785be556736431815e37b30c13afe62022fcbf1b474130cfba0d0a3e5e"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-01-stdout.log",
+      "size_bytes": 99,
+      "sha256": "95c7295aa7d18e0bffb82572fcbad0551f6cfdd0d311c66f980c5e3ecd5410fd"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-02-stderr.log",
+      "size_bytes": 734,
+      "sha256": "984b211e1207d323902eba382ab52b19a3a760125e49e62d3f18e17e57da9a2a"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-02-stdout.log",
+      "size_bytes": 8585,
+      "sha256": "caa2073472b16fab2ab022a98edc4c345b1225746250c6a8bd50f2a68c4f9fdb"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-03-pytest-log.html",
+      "size_bytes": 1012729,
+      "sha256": "87ae8e43bde8d4f7d20a41d035c05c9da2fdec89be5cc9b394bc55c3832845b6"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-03-rcc-stderr.log",
+      "size_bytes": 734,
+      "sha256": "09ba9e9ab4684db3b0c45f958f5a395e2d2e633687b1f00f2e9813189cc43602"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-03-rcc-stdout.log",
+      "size_bytes": 27106,
+      "sha256": "2e31198e84dcd32aaf635aeaeebabec61877aa84374ce5b1475794ebe31b2460"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-03-runtime-server.log",
+      "size_bytes": 1045,
+      "sha256": "5683ab2353e7f7fc8dc086dee526d48c3e25e2d7ab32b1cb020897995514c160"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-04-pytest-log.html",
+      "size_bytes": 990645,
+      "sha256": "2a8e59f8ea95514e433ee24c1b5a65c4011402c0cf27aa609036526decfe8dae"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-04-rcc-stderr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-04-rcc-stdout.log",
+      "size_bytes": 576,
+      "sha256": "822194bdeeba8886f7288e480087ef5a928ffd257e4de543eac30f79503e348c"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/attempt-04-runtime-server.log",
+      "size_bytes": 20522,
+      "sha256": "631d3c73f8025aad5276fcf6124eb74af19bfe951f385d86c85ad929fa7a0179"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/canvas-bridge-acceptance-receipt.json",
+      "size_bytes": 2845,
+      "sha256": "1d06f8c13237afd11d7468e58e19cfcd29956d51748bfb1cdfbe17886976ea85"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/canvas-pinned-proof-receipt.json",
+      "size_bytes": 7141,
+      "sha256": "992f6e124f2f88e2d965a606d847f26dd680fb6cf14460dcb00946549b653196"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/preflight.json",
+      "size_bytes": 11078,
+      "sha256": "b968301a7abe0f442318ea2d1fcab958c9bb944060838df711a2c7beb358da9a"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/prior-failure-receipt-supersession.json",
+      "size_bytes": 1260,
+      "sha256": "03b3394df8e5d436d1ec4a28adf1213182a384fd630927637f335dc49ac9b2e5"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/pytest-tmp/canvas-bridge-acceptance-receipt.json",
+      "size_bytes": 2845,
+      "sha256": "1d06f8c13237afd11d7468e58e19cfcd29956d51748bfb1cdfbe17886976ea85"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/pytest-tmp/canvas.html",
+      "size_bytes": 416292,
+      "sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/pytest-tmp/canvas_actions.py",
+      "size_bytes": 3983,
+      "sha256": "3af022bc119671728e83e44648b2de73f9d4fcb2977dda9a25829acdd7a4822b"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/pytest-tmp/package.yaml",
+      "size_bytes": 448,
+      "sha256": "6454f2ae9cfaef4aa22a8710c117b7f5e0b4e63db9d103ee769735410c4071ee"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned/run_canvas_proof.py",
+      "size_bytes": 3636,
+      "sha256": "71a5d5248dc78d70d106f545d9b88cb0f46bd6e88dd1c8f69b7d77817edcd4cb"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned-launch-trace/canvas-bridge-acceptance-receipt.json",
+      "size_bytes": 2897,
+      "sha256": "93abc2ea3c1ea02aa1dc6bfdd1292d2fd3999ced8d130f2621e34c3706d334d4"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned-launch-trace/launch-trace-receipt.json",
+      "size_bytes": 3242,
+      "sha256": "a91b4c0c25334574d31b43e2b1f6d57fac05ed3b36ae05da8d812d5b6be54a00"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned-launch-trace/rcc-stderr.log",
+      "size_bytes": 60324,
+      "sha256": "eb5e5a7bd40074d58e192367321f7c9bffc2b4cce5d35123f04f1f71f88b2a2f"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned-launch-trace/rcc-stdout.log",
+      "size_bytes": 2424,
+      "sha256": "121c358dc6b1958f8ad2669c13fb1a34a01c8015a647379bfb1405be06ac7ed2"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/canvas-pinned-launch-trace/run_canvas_proof_with_launch_trace.py",
+      "size_bytes": 3689,
+      "sha256": "ff1d6207c7ee27ce725cd2bbeddf6d4bca1ba44d02f5184856381b6ec0905a1e"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/core-publication/core-tag-preflight.json",
+      "size_bytes": 280,
+      "sha256": "05040113b425740815b49e7ca77ca0e9dedc91c517ceb4f4c32218b07f357be2"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/core-publication/core-tag-push.txt",
+      "size_bytes": 108,
+      "sha256": "bd44566e55fb393625fb0c077bf2f8d26a371dc60d3008d3525f3df5c20b012e"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/core-publication/publication-readback.json",
+      "size_bytes": 13718,
+      "sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/core-publication/pypi-readback.json",
+      "size_bytes": 1044,
+      "sha256": "b15c70129a506573654a46a5cc025f61d5c357f841df919998c1befa1dd40318"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/core-publication/pypi_readback.py",
+      "size_bytes": 2226,
+      "sha256": "a33e00dfe62098bd35e43d7184d4a7f3dbbb2e325734829bf7462c1849046282"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/core-publication/release-preflight.json",
+      "size_bytes": 2036,
+      "sha256": "ed321feb21d3928a0a89fef7511e16dcf8572f91ffb096453ad06bdeea103d17"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/core-publication/workflow-artifact-readback.json",
+      "size_bytes": 938,
+      "sha256": "1a99879a3378c9ca8a170d9b7e1ae2782332044e7177bc62a1c8b09e83706f09"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/current-git-bindings.json",
+      "size_bytes": 2184,
+      "sha256": "8e2eeb0c0d799671332d990d8c2926497aa64b746c50c478c3a3de4e6a8b2841"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/current-worker-inventory.json",
+      "size_bytes": 2330,
+      "sha256": "bd4632daf56e7f89d73c0892bb9e20642095442b8e36006eb7221f4c226c5bef"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/dakota-native-snapshots-20261010T200444Z.json",
+      "size_bytes": 1735,
+      "sha256": "ace3107cef5cb11209f804164e907618078730957c345b3ce695f73898b62381"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201047Z-18398/execution-receipt.json",
+      "size_bytes": 1749,
+      "sha256": "c00bcbdc19619c046d04b25a69d124ba7f4c0623651bf70b84ce545b01ce36e4"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201047Z-18398/execution-report.md",
+      "size_bytes": 2422,
+      "sha256": "11ef750298a540c5960ccd9381481134bd45f7da3e07bb351308bb9e5b670df3"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201047Z-18398/image-pull.log",
+      "size_bytes": 1666,
+      "sha256": "689bf4fe9fb5b184feb12bb759b8ab1d56aa1810819559fd655c3c35f51817dc"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201047Z-18398/interpreter-version.txt",
+      "size_bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201047Z-18398/postgres.log",
+      "size_bytes": 3430,
+      "sha256": "cc6d0e6b554b707a192e1109043d9725048cf7bc2bd61e8838f4a5c38f2c016e"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201047Z-18398/test.log",
+      "size_bytes": 1269,
+      "sha256": "6d4a1c5fda8c6287ed33f2b4578854616a123189691603eeebbf6a8cc6a08101"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/execution-receipt.json",
+      "size_bytes": 2045,
+      "sha256": "45ea3e9aa7d31b3e27b4e4c47655319cf04a038dfed60cb562f1c29d3bc021b9"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/execution-report.md",
+      "size_bytes": 2158,
+      "sha256": "91d5b2554a6b838d465abe041e51e5c3dd6f0dc67c69470e3b4781260a1adad3"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/harness-child-cleanup.json",
+      "size_bytes": 1049,
+      "sha256": "46f6a07ab33d9e3d0fefaf3decda9384e1230456125c270cf0edac9d7dd8c167"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/image-pull.log",
+      "size_bytes": 422,
+      "sha256": "48915fb67ae5671bb60f23889d5e449bc6d45bd89c97fbf50cb4eb87f7606d65"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/interpreter-version.txt",
+      "size_bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/migration-worker-receipt.json",
+      "size_bytes": 1946,
+      "sha256": "ca84d5f780ceb1e97a4ff542fd3b98874e1b79a4834ca659b91d1db483e204fc"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/postgres.log",
+      "size_bytes": 3232,
+      "sha256": "c89c17e552a948704ec6f88c722c3704ceee6639f11bd20bd970976e5d4baa5f"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/test.log",
+      "size_bytes": 3640,
+      "sha256": "7efc68c80409790e455decdcf444196f4fbdcf113a3eed51c50b24cf606d3aad"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/worker-0.stderr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/worker-0.stdout.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/worker-1.stderr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201313Z-19440/worker-1.stdout.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/attempt-manifest.json",
+      "size_bytes": 2836,
+      "sha256": "569bb1cbfb388d547e9fae4cfc7ef0e09e03b4dcc34e3d21d7e4893cd934f6ba"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/execution-receipt.json",
+      "size_bytes": 2045,
+      "sha256": "341bda35a4a629c966371866c5fc60416fcebaa9c42fdbfe78e2429482f16c88"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/execution-report.md",
+      "size_bytes": 3123,
+      "sha256": "11e0d26260b7e9fe56a2d3dcf6bc43f6fc9e9e67cefe63b037cd66cf8e3d0239"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/harness-child-cleanup.json",
+      "size_bytes": 1358,
+      "sha256": "1acc0000a7ea2a5d84ecef0668fec0c2b6f88fed7dab3e3c2e75c8a575ca32d9"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/image-pull.log",
+      "size_bytes": 422,
+      "sha256": "48915fb67ae5671bb60f23889d5e449bc6d45bd89c97fbf50cb4eb87f7606d65"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/interpreter-version.txt",
+      "size_bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/migration-worker-receipt.json",
+      "size_bytes": 2177,
+      "sha256": "a31a2ca57b02e8357b2c10fee03db7949b82fdee3e6650d139be44fabad0f514"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/pg_migration_two_process.py",
+      "size_bytes": 25499,
+      "sha256": "cade9905e8f9af54dc9efd8ce815c7e01151dfcfccd50cfd6a58525adb31fb7e"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/postgres.log",
+      "size_bytes": 3310,
+      "sha256": "8dec07d039ff8bff64d26aaeb76c455f640c81eabf1d1be9d1d18ca061d868d3"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/rcc-python-preflight.json",
+      "size_bytes": 4296,
+      "sha256": "21b320deaa8d2fc833565104087cecb35d687652b82711a0caf8d296cf56037d"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/run_pg_migration_gate.sh",
+      "size_bytes": 11050,
+      "sha256": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/test.log",
+      "size_bytes": 4092,
+      "sha256": "94c7f929b0eed90a78162ca8eef9cbf428b92c3e7ca270b90a2d09e55d4337e5"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/worker-0.stderr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/worker-0.stdout.log",
+      "size_bytes": 940,
+      "sha256": "a7064a06d6b61d1c2a2b7f16e8437be38c9f62936ce1ee23be94168c9bf445f3"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/worker-1.stderr.log",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/execution-20261010T201444Z-20442/worker-1.stdout.log",
+      "size_bytes": 940,
+      "sha256": "a0224d92550d385371e701a3fc950596ec34cc4cd61f2b6ae551e4d210eab800"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/harness-final-independent-review.json",
+      "size_bytes": 6972,
+      "sha256": "c8267caaafb5a42556c01adf4177db4521b35b61254dab3d2f7fa4d182118987"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/harness-final-independent-review.md",
+      "size_bytes": 1925,
+      "sha256": "b3e8b65a7e4c831d2dd69e4bcec54d557636e24efa3b414875810c46b4fcbf3b"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/issue-84-readiness-receipt.md",
+      "size_bytes": 17524,
+      "sha256": "f97635c1e154722776665e2ca59773ec5ac7a2024e8ea32f4feba91a1034ae2a"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/pg_migration_two_process.py",
+      "size_bytes": 25499,
+      "sha256": "cade9905e8f9af54dc9efd8ce815c7e01151dfcfccd50cfd6a58525adb31fb7e"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/rcc-python-preflight.json",
+      "size_bytes": 4296,
+      "sha256": "21b320deaa8d2fc833565104087cecb35d687652b82711a0caf8d296cf56037d"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-gates/run_pg_migration_gate.sh",
+      "size_bytes": 11050,
+      "sha256": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-savepoint/focused-regression-red.log",
+      "size_bytes": 5877,
+      "sha256": "fbaf8eba6dc9a851a54f8148fd73e885aa2ce5af7d21844b34ba5bd02c6442d9"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-savepoint/focused-regression-strengthened-red.log",
+      "size_bytes": 8749,
+      "sha256": "f93f3c0e62da05caa2576ab2a32ab955a810c63edd0708264ed7e8046856ff35"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-savepoint/normal-nested-control.log",
+      "size_bytes": 371,
+      "sha256": "a83c6a20f56e7a2ce69571ab073e0da9165b4b58eb230997774575aea91a85d6"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-savepoint/receipt.json",
+      "size_bytes": 6128,
+      "sha256": "c1c9dba58ae1961adaee5349be4e76f5388c4a9ab2d2e835c69039b3a7015559"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-savepoint/reproduce_savepoint_authorizer.py",
+      "size_bytes": 1883,
+      "sha256": "6cbae155eea43d03419eb9c7d79ab74a2f1417978031d9a8d5cf1535d72cd596"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-savepoint/run_focused_regression.py",
+      "size_bytes": 918,
+      "sha256": "ee6d3b3f75169df00474f568681a61b882d34a6387de2c1b449a28bc019cea81"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/database-savepoint/sqlite-authorizer-repro.log",
+      "size_bytes": 5567,
+      "sha256": "674d4db115ea851e57c82c06a8bc52c92849e769e7ee67b44409f33d73d6ac00"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/live-pr-ref-snapshot.json",
+      "size_bytes": 9889,
+      "sha256": "1d32cad0c9091a28834e5cf9c7a8aa1d49549df994b3dc0abc17fe3e09f9565c"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/migration-api-actual-independent-review.json",
+      "size_bytes": 3512,
+      "sha256": "93c4ffc4175169dcd023abb197e825fdd59f1d0053dca37c03363d8e60911863"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/migration-api-actual-independent-review.md",
+      "size_bytes": 1837,
+      "sha256": "ab8be8d30d09f9ae899b393edf37c29af9dc8816bbd4df3101c93ecdfcb66035"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-acceptance/acceptance-receipt.json",
+      "size_bytes": 9856,
+      "sha256": "d8ae93a5fc2cca19dac84d5180ef772eba245e906e401b9afa43ef503c182346"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-acceptance/logs/canvas-runtime-browser-rerun.log",
+      "size_bytes": 14152,
+      "sha256": "45d0497315927811f66d4f2a00744acefdd61c6ef6a6ddafd73bc4c441546c53"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-acceptance/logs/canvas-runtime-browser.log",
+      "size_bytes": 71673,
+      "sha256": "e13c8338512dd84feb3d9bb76b0a60e5ba8590e302a430681aff083afe4c51f5"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-acceptance/logs/rcc-frontend-test.log",
+      "size_bytes": 13818,
+      "sha256": "80fc97cb9824e0f6ca006886456be32ea35a29bfa8944895806c3b2aafd02d53"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-acceptance/logs/template-bundles.log",
+      "size_bytes": 13070,
+      "sha256": "ca6c617c7f2030bc7d57848fa2db97c3800d4633606e4ff550f7d5b3e3a8c83d"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-acceptance/logs/template-floor.log",
+      "size_bytes": 13084,
+      "sha256": "7848f74430777f1f85d0ebb8fa5d7674820463bb62060bb904c8d37c7743fe65"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-acceptance/runner/pr282-checks.yaml",
+      "size_bytes": 788,
+      "sha256": "5735e9d0a7ab07cca6fc416e56c2eaddbe0efb5616c0621009c6ac9060ceb4e3"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-acceptance/runner/run_package_pytest.py",
+      "size_bytes": 725,
+      "sha256": "280ce2e053592ab508912ae6dd3d343f06f46d62ede139b5f0fe5bff64efbd3b"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-runtime-browser-independent-review.json",
+      "size_bytes": 3000,
+      "sha256": "83ea0e284251972885de6bd4fc0b0aec6870ae668c1cf062e7819a53ad227a51"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr282-runtime-browser-independent-review.md",
+      "size_bytes": 1780,
+      "sha256": "27c0638001f5d3f80c780081d12dd140336411e0a788319236875bd1dc7e5027"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr305-browser-identity-correction-review.json",
+      "size_bytes": 3996,
+      "sha256": "5ea39e16039eed169c806bbd929a978e07076e6aaa078ea7b4f0922907175ed9"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr305-browser-identity-correction.json",
+      "size_bytes": 1665,
+      "sha256": "14f7d9c5f0badc83e4260d1db2db8fc6967c3abe06b9d479e7a20a22a371a5e1"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr305-final-launch-trace-independent-review.json",
+      "size_bytes": 6387,
+      "sha256": "d06296123a1ff511d2f8ffaf13640e45d62729985a27a4f41068a43ca159e77a"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr305-pinned-browser-independent-review.json",
+      "size_bytes": 3414,
+      "sha256": "432dbfd35f09ea7fb2495abeb032ffeefaf2289e99a96f59af1b3050d68437df"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/pr305-pinned-browser-independent-review.md",
+      "size_bytes": 2151,
+      "sha256": "4f14e303d969d8edf6c9a5e97c39193a2e1995754736917a83e757e54c4dc85a"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/preservation-check.json",
+      "size_bytes": 4545,
+      "sha256": "8e0721cd018589ae39957744854edffa287e4babea743a9e96bb051c85972b0d"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/previous-pointer-audit.json",
+      "size_bytes": 5680,
+      "sha256": "c9a7a14510c1ca9c67d344061a49d5b082c86bea9a03264ead1f571d9677d253"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/rcc-private-composition-review.json",
+      "size_bytes": 2816,
+      "sha256": "2182c19da2b41f3596f3b91f473c592d998f930303b4198f8d44188be3ffc086"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/rcc-source-bound-inspection-proposal.json",
+      "size_bytes": 10036,
+      "sha256": "3768e8dcd81ce16c99a141ab60d57f16d7ae142ff0a9a890d8041d78d834b90c"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/rcc-source-bound-inspection-proposal.md",
+      "size_bytes": 7613,
+      "sha256": "93f24daad7644f1434109fce1144f09ca7d8bd9d2b421c64fc7ceb523b0aaabf"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/release-gates/pr302-windows-floor-failure.json",
+      "size_bytes": 2494,
+      "sha256": "ecbd1f1dba42c104aca0973d1c2f829e40285ae01c2014c8781c2b8ba2c6d2c3"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/release-gates/pr304-final-floor-review.json",
+      "size_bytes": 2235,
+      "sha256": "9eb58690dc29f4e8f675ad8ed79ba3ec04f77032def9741936fd3bf102160f11"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/release-readiness.json",
+      "size_bytes": 4139,
+      "sha256": "d6b6173e28588035dafd3a246362c4410843653394525ab49479ad48f6a11aee"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/runtime-release-note-preparation/pr304-release-note-draft.md",
+      "size_bytes": 9442,
+      "sha256": "b388a12f7de5a1996008ec32bff1f1e5b24bdfd0ce23649e85bc353bf6db5f36"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/runtime-ui-readiness/readiness.json",
+      "size_bytes": 6871,
+      "sha256": "53decec2f823d5b50ad8d6148b3d9191cccb8dd26327729927ac8367ce19d41f"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/runtime-ui-readiness/readiness.md",
+      "size_bytes": 2622,
+      "sha256": "e694aeffa2748dcc129fb576c690599415cb187735523e961eb92c8bd01f1718"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/scoped-gate-observations.json",
+      "size_bytes": 3756,
+      "sha256": "aa67363f452d47f087dfcb9fb4d1b15a08934d2f55e933d3f414ea459ec7f7f6"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/wave3-readiness.md",
+      "size_bytes": 2571,
+      "sha256": "d7a40449bd92170838dd36b192a62356c6ccecc00f1edc7e68cd432eaa24a72f"
+    },
+    {
+      "path": "evidence/wave3-overlay-20261010T2023Z/manifest.json",
+      "size_bytes": 21388,
+      "sha256": "131fc0d6ca31d62ad82aff7e523dd0784f2c50089504bf2e7711894fa8c4f281"
+    }
+  ],
+  "scoped_gate_observations": [
+    {
+      "owner_issue": 301,
+      "criterion_id": "serialization-and-CI-slice",
+      "consumer_slice": "PR301 serialization/CI",
+      "status": "ACCEPTED_SCOPED_ONLY",
+      "description": "Exact reviewed PR301 source passed 20/20 exact-head checks and is merged as 4e8a262; scope remains serialization and CI only. No full #301, renderer, Canvas host, or whole issue acceptance.",
+      "decision": "Accept only the existing serialization/CI slice that PR301 review explicitly bounded.",
+      "evidence_path": "evidence/wave2-overlay-20261010T195827Z/pr301-review.json",
+      "evidence_sha256": "b092eeef6ff9e9a94617d9633942d0da1533a39ed43f0884d2644a68b9c40b5d"
+    },
+    {
+      "owner_issue": 282,
+      "criterion_id": "published-Core-1.0.3-template-prerequisite",
+      "consumer_slice": "PR282 Canvas-query Core floor",
+      "status": "SATISFIED_PREREQUISITE_ONLY; RUNTIME_BROWSER_WORKER_REPORT_PENDING_READBACK",
+      "description": "Published Core 1.0.3 bytes/API and installed public consumer passed; this satisfies only the package-floor prerequisite for PR282 Canvas-query template generation. A worker now reports one installed Runtime/browser pass, but no independent durable receipt readback is present at this cutoff; do not promote it.",
+      "decision": "Mark the publication predecessor available for the one declared 1.0.3 Canvas-query template floor; retain Runtime/browser and hosted gates as pending.",
+      "evidence_path": "evidence/wave2-overlay-20261010T195827Z/core-publication-readback.json",
+      "evidence_sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39"
+    },
+    {
+      "owner_issue": 84,
+      "criterion_id": "migration-api-two-process-v12-v13",
+      "consumer_slice": "Issue #84 shared Database migration API prerequisite",
+      "status": "ACCEPTED_SCOPED_ONLY",
+      "decision": "GO for exact-source PostgreSQL v12-to-v13 production migrate_db API process-lock gate only.",
+      "evidence": {
+        "path": "evidence/wave3-overlay-20261010T2023Z/migration-api-actual-independent-review.json",
+        "sha256": "93c4ffc4175169dcd023abb197e825fdd59f1d0053dca37c03363d8e60911863"
+      },
+      "execution_receipt_sha256": "341bda35a4a629c966371866c5fc60416fcebaa9c42fdbfe78e2429482f16c88",
+      "limits": "Does not close #84 or establish full CLI startup, wheel/native/TLS, mixed-version rollout, recovery, or issues #83/#129. Two prior failed attempts remain preserved; original test-script bytes are missing and disclosed in the attempt manifest; sanitized logs/receipts are retained."
+    },
+    {
+      "owner_issue": 282,
+      "criterion_id": "published-core-installed-worker-runtime-browser",
+      "consumer_slice": "PR282 Canvas-query worker/browser prerequisite",
+      "status": "ACCEPTED_SCOPED_ONLY",
+      "decision": "GO for published Core 1.0.3 installed-worker plus local system-Chromium Runtime/browser gate.",
+      "evidence": {
+        "path": "evidence/wave3-overlay-20261010T2023Z/pr282-runtime-browser-independent-review.json",
+        "sha256": "83ea0e284251972885de6bd4fc0b0aec6870ae668c1cf062e7819a53ad227a51"
+      },
+      "execution_receipt_sha256": "d8ae93a5fc2cca19dac84d5180ef772eba245e906e401b9afa43ef503c182346",
+      "limits": "Three sampled modules bind to independently verified published Core wheel but do not authenticate the complete installed wheel/cold acquisition. Authentication, artifact retrieval, frozen workers, actual ChatGPT and full issue acceptance remain unproved. System PATH Chromium is separate from managed Playwright browser; zombie descendants remain explicit. Current PR body still says independent readback pending at snapshot; root is to refresh that wording after linking the receipt."
+    },
+    {
+      "owner_issue": 99,
+      "criterion_id": "canvas-runtime-cache-isolation-and-local-managed-browser",
+      "consumer_slice": "PR305 cache-isolation fixture repair and local Playwright browser proof",
+      "status": "ACCEPTED_SCOPED_ONLY",
+      "decision": "GO for the exact f9c424 cache/TMPDIR fixture fix and local functional proof with a directly traced managed headless-shell launch identity.",
+      "evidence": {
+        "path": "evidence/wave3-overlay-20261010T2023Z/pr305-final-launch-trace-independent-review.json",
+        "sha256": "d06296123a1ff511d2f8ffaf13640e45d62729985a27a4f41068a43ca159e77a"
+      },
+      "source_review": {
+        "path": "evidence/wave3-overlay-20261010T2023Z/pr305-pinned-browser-independent-review.json",
+        "sha256": "432dbfd35f09ea7fb2495abeb032ffeefaf2289e99a96f59af1b3050d68437df"
+      },
+      "execution_receipt_sha256": "a91b4c0c25334574d31b43e2b1f6d57fac05ed3b36ae05da8d812d5b6be54a00",
+      "limits": "Source head f9c424f/tree3d921; hosted check rollup is point-in-time and still running/queued. The actual launch SHA is headless-shell e11fc9ce, not the full-Chrome companion hash 0b20. Candidate Core wheel is local and differs from published provenance. ChatGPT, auth, artifact resolution, production CSP/host, frozen worker, published Runtime and whole #99 acceptance remain open."
+    }
+  ],
+  "accepted_scoped_criteria": [],
+  "active_substages": [
+    {
+      "evidence_basis": "PR #286 exact reviewed head e7c42e94196beba04dbae85d8a38da78efd9767f/tree 16c81059bff80b6d85606d45ac7d46a88cdce597 was merged as 21064b1ad1e28d3e73749b7be19b98c79a98b93f with 19/19 exact-head checks passing and independent review approved (evidence/pr286-merge-20261010T1222Z/pr286-merge-receipt.json; comment 6097428470). Scope is the pure inventory prerequisite only; no filesystem acquisition, compiler, or issue-wide acceptance.",
+      "id": "135-source-policy-a",
+      "implementation_status": "MERGED_AT_21064B1; 19_EXACT_HEAD_CHECKS_PASS; INDEPENDENT_REVIEW_APPROVED; PURE_POLICY_SCOPE_ONLY; NO_WHOLE_ISSUE_ACCEPTANCE",
+      "limits": "This is an integrated pure policy/inventory prerequisite only. It does not physically acquire or compile source, establish filesystem admission, or accept a public source-admission API contract. Whole #135/#148 acceptance remains open.",
+      "owner": "root integration review; pure-policy implementation lane complete",
+      "owner_issue": 135,
+      "related_issue": 148,
+      "required_choices": [
+        "Keep legacy defaults and behavior unchanged.",
+        "Validate only explicitly supplied portable entries and protected paths.",
+        "Apply NFC, case/prefix collision, portable-path, entry-kind, and non-privileged mode rules.",
+        "Do not treat empty directories as source identity.",
+        "Enforce the stated entry, byte, depth, path, and component bounds."
+      ],
+      "scope": "Pure validation and canonical inventory of explicitly supplied source entries: selected/protected paths; Unicode NFC; case and prefix collisions; portable path rules; regular files and directories only; 0644/0755 without privilege; empty directories do not define identity; limits of 10000 entries, 50 MiB per file, 500 MiB total, depth 64, path length 4096, and component length 255.",
+      "shared_scope": "One cross-issue substage. #135 owns the active implementation work; #148 reuses the same portable path policy as a prerequisite, not a second implementation lane.",
+      "status": "INTEGRATED",
+      "title": "SOURCE-POLICY-A: deterministic validation/canonical inventory of explicitly supplied portable source entries",
+      "whole_issue_effect": "#135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The integrated scoped prerequisite changes no whole-issue classification or graph stage count.",
+      "writer_boundary": "New helper/module/tests and behavior-preserving extraction of the existing Robot portable-path predicate on an isolated branch; no filesystem-admission behavior."
+    },
+    {
+      "evidence_basis": "PR288 source-reader head 375614e53f3120c74caf3b732306b13eab99ffee/tree ede73323c44225ec4d7187aac1f261be0cd21375 merged at 5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa with 19/19 exact-head checks and independent combined-tree review. See evidence/pr288-merge-20261010T1350Z/pr288-merge-receipt.json. This is only private Linux selected-file measurement for #135/#148; full issues remain BLOCKED.",
+      "id": "135-source-read-a",
+      "implementation_status": "MERGED_AT_5E3B611; EXACT_HEAD_375614E; 19/19_CHECKS_PASS; INDEPENDENT_COMBINED_REVIEW_APPROVED; BOUNDED_READER_SLICE_INTEGRATED; NO_WHOLE_ISSUE_ACCEPTANCE",
+      "limits": "Linux trusted procfs is an explicit supported-environment assumption and failure is closed without fallback. This does not establish an atomic full-tree snapshot, selected-set completeness, original root pathname, Workspace authorization, staging coherence, compiler inspection, Package Revision, Runtime Plan, or provider acceptance. The accepted reader/source test receipt is narrow; current published PR288 merged, but later staging/RCC consumer remains NOT RUN.",
+      "owner": "Sol/source-confined-read existing lane; no duplicate source reader assigned.",
+      "owner_issue": 135,
+      "related_issue": 148,
+      "required_choices": [
+        "Measure only explicitly selected entries supplied by the caller.",
+        "Classify a pinned object before content-readable open; fail closed without required Linux O_PATH/procfd support.",
+        "Keep policy inventory separate from measured object facts.",
+        "Do not claim atomic snapshot, completeness, authorization, staging, or compiler identity from this bounded measurement."
+      ],
+      "scope": "Preflight explicit portable selected/protected file names with accepted SOURCE-POLICY-A; traverse beneath a caller-owned verified directory descriptor; pin selected leaves using Linux O_PATH/O_NOFOLLOW before fstat classification, then reopen via a pinned trusted procfd and compare handles; incrementally measure declared file and total byte bounds; compare parent/name and opened object observations before/after and revalidate selected paths.",
+      "shared_scope": "One bounded reader stage for #135, reusable by #148 as a prerequisite; distinct from whole-tree snapshot, staging, and RCC/compiler acceptance.",
+      "status": "INTEGRATED",
+      "title": "SOURCE-READ: bounded measurement of explicitly selected source files under a caller-supplied verified root descriptor",
+      "whole_issue_effect": "#135 remains BLOCKED by atomic/coherent snapshot and selected-set/global admission proof, staging and RCC inspection/adapter/runtime compiler plus capability identity/generation proof. #148 remains BLOCKED. No whole-issue stage/count/acceptance changes."
+    },
+    {
+      "current_followup": {
+        "control": "473e42ec8f7a9f3fed623efc135b550ac3c08190",
+        "limits": "Raw JUnit and lifecycle receipt were not uploaded. No real-RCC result for the new #302 publication-details API; no full #135/#148 acceptance.",
+        "owner": "source/RCC workflow lane",
+        "run": 38070431104,
+        "source_candidate": "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6",
+        "source_tree": "cdd4d65d914df9be3eaa4cf979d6b224fde431c3",
+        "status": "HOSTED_TWO_CASE_PASS_REVIEWED_WITH_RAW_RECEIPT_LIMIT",
+        "tests": "2 exact selected cases PASS; 0 failures/errors/skips"
+      },
+      "evidence_basis": "Hosted run 38070431104 attempt 1, job 114266535865, artifact 11676657463 (ZIP SHA-256 cf6200fde73448a211df5e2dfde658f9d07014b8866fcc8ba7c5ddd7225949c0); independent review evidence/current-open-pr-audit-20261010T1753Z/staged-rcc-two-case-review.md (SHA-256 7183db444978051a3bfafe275036fc5f2e870b0de9e39c9486117e106fc8786d).",
+      "id": "135-source-staging-a",
+      "implementation_status": "SOURCE_STAGE_INTEGRATED; EXACT_PINNED_TWO_CASE_RCC_CONSUMER_PASS; INDEPENDENT_REVIEWED_SANITIZED_SUMMARY; RAW_JUNIT_AND_LIFECYCLE_OMITTED; NO_WHOLE_ISSUE_ACCEPTANCE",
+      "limits": "The exact two-case hosted consumer passed at source 1e795c6/control 473e42e and an independent reviewer verified the strict validator, sanitized summary and job logs. Raw JUnit and lifecycle receipts were not uploaded. This does not establish full-source completeness, authorization, compiler identity, provider acceptance, release, or whole #135/#148 acceptance.",
+      "owner_issue": 135,
+      "related_issue": 148,
+      "scope": "Copy only measured selected regular files via descriptor-relative no-follow/exclusive creation into an empty caller-owned private directory; compare source observations, enforce byte limits, re-read and hash staged bytes, and clean only identity-matched entries.",
+      "shared_scope": "One proposed Linux staging consumer for the accepted #135/#148 source-read slice; not a second reader or whole-issue implementation.",
+      "status": "REVIEW",
+      "title": "SOURCE-STAGING: stage measured selected files under a borrowed private destination descriptor",
+      "whole_issue_effect": "#135 and #148 remain BLOCKED by complete source selection, capability/generation proof and additional runtime/compiler criteria. This scoped source-stage review changes no retained issue classification, original contract, or stage count."
+    },
+    {
+      "evidence_basis": "Current PR299 head 4cad04ca0e70d219f53452fa5911c6d61192fd0d/tree 5154dfbbff12e85b75e85d6138bfb6ff8eef27d0; queried standard workflow page returned successes. Independent review evidence/current-open-pr-audit-20261010T1842Z/pr299-dependency-independent-review.md recommends WAIT because PR299 contains PR292 while its separately declared native/affected gate remains outstanding.",
+      "id": "83-run-output-private-predecessor",
+      "implementation_status": "CURRENT_PUBLISHED_PR299_STANDARD_WORKFLOW_PAGE_GREEN; INDEPENDENT_REVIEW_WAITING_ON_PR292_NATIVE_AFFECTED_GATE; PRIVATE_PREDECESSOR_ONLY",
+      "limits": "Green dependent CI does not satisfy a specialized prerequisite absent from those workflows. Wait for exact PR292 native/affected evidence or an explicit owner re-scope. Transport/auth, Canvas, native execution and whole #83/#86/#129 remain separate.",
+      "owner_issue": 83,
+      "related_issues": [
+        86,
+        129
+      ],
+      "scope": "Private service/provider and database transactions for currentAttempt/epoch fencing, current grant checks, existing Run status/result authority, terminal output attachment and identity-checked staged cleanup.",
+      "status": "REVIEW",
+      "title": "Private Run-output state/fencing/staging predecessor",
+      "whole_issue_effect": "#83/#86/#129 remain governed by their unchanged original issue contracts; this private predecessor changes no whole-issue stage or acceptance."
+    },
+    {
+      "evidence_basis": "Current head/tree and parents are in evidence/current-open-pr-audit-20261010T1842Z/current-git-bindings.json; exact-head workflow observations are in hosted-run-observations.json. Earlier Windows timing failure belongs to prior head 37283a4 and is historical.",
+      "id": "100-canvas-python-typescript-roundtrip",
+      "implementation_status": "EXACT_CURRENT_HEAD_C734B9F; SEVEN_RETURNED_WORKFLOW_RUNS_SUCCESS; INDEPENDENT_REVIEW_GO; ROOT_RETAINS_MERGE_AUTHORITY; NO_WHOLE_CANVAS_ACCEPTANCE",
+      "limits": "Current head c734b9f850ec7b6bea8561b70312aca5c93dd6c1/tree 246f3185f936f8d9104e92b583ea8dd1ba34878a; seven returned exact-head workflows passed and reviewer recommends GO. PR stays open/draft at cutoff. This only verifies the fixture/CI substage; no browser/production Runtime/ChatGPT acceptance.",
+      "owner": "source_profile workflow author; independent review complete; root integration/publish owner.",
+      "owner_issue": 100,
+      "related_issue": 267,
+      "scope": "Run the existing Python-to-TypeScript-to-Python fixture through required bridge mode in the community frontend workflow; fail if bridge evidence is absent.",
+      "shared_scope": "One bounded cross-language fixture/API substage; the existing thin renderer lane remains separately scoped.",
+      "status": "REVIEW",
+      "title": "Canvas Python↔TypeScript↔Python fixture bridge in hosted frontend workflow",
+      "whole_issue_effect": "No retained issue stage/acceptance count changes."
+    }
+  ],
+  "active_substages_observed_at_utc": "2026-10-10T20:23:55Z",
+  "worker_stage_snapshot": "2026-10-10T07:53:20Z",
+  "evidence_manifest": {
+    "path": "evidence/wave3-overlay-20261010T2023Z/manifest.json",
+    "sha256": "131fc0d6ca31d62ad82aff7e523dd0784f2c50089504bf2e7711894fa8c4f281",
+    "file_count": 114
+  }
+}

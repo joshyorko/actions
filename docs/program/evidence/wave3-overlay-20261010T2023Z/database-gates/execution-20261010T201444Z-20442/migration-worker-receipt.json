@@ -1,0 +1,70 @@
+{
+  "cleanup_errors": [],
+  "controller_backend_pid": 98,
+  "module_identity": {
+    "actions.server._database": {
+      "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py",
+      "sha256": "5d3776fb85a36604b5c9dbc2c2169ee2770734330fea90ceda507515e4fc4638"
+    },
+    "actions.server.migrations": {
+      "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/migrations/__init__.py",
+      "sha256": "181c8e653d64319e58df7532e759612376ee0c91cd05423ea16f2e7318aa1541"
+    },
+    "actions.server.migrations.migration_add_mcp_catalog_names": {
+      "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/migrations/migration_add_mcp_catalog_names.py",
+      "sha256": "e4fe141fba0eeb37d6060b6421aa78858ea02ac1dd6d31501bc7275f9cdb1f6d"
+    }
+  },
+  "source": {
+    "dirty": false,
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "wait_observations": {
+    "actions84_433a01ce72c7_0": {
+      "backend_pid": 112,
+      "blocking_pids": [
+        98
+      ]
+    },
+    "actions84_433a01ce72c7_1": {
+      "backend_pid": 115,
+      "blocking_pids": [
+        98,
+        112
+      ]
+    }
+  },
+  "worker_identity_map": {
+    "actions84_433a01ce72c7_0": {
+      "backend_pid": 112,
+      "os_pid": 20772,
+      "returncode": 0
+    },
+    "actions84_433a01ce72c7_1": {
+      "backend_pid": 115,
+      "os_pid": 20773,
+      "returncode": 0
+    }
+  },
+  "worker_logs": {
+    "0": {
+      "pid": 20772,
+      "reaped": true,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 940,
+      "stdout_sha256": "a7064a06d6b61d1c2a2b7f16e8437be38c9f62936ce1ee23be94168c9bf445f3"
+    },
+    "1": {
+      "pid": 20773,
+      "reaped": true,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 940,
+      "stdout_sha256": "a0224d92550d385371e701a3fc950596ec34cc4cd61f2b6ae551e4d210eab800"
+    }
+  }
+}

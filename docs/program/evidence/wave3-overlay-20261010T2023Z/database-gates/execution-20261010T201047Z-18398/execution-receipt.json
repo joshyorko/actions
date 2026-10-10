@@ -1,0 +1,49 @@
+{
+  "artifacts": {
+    "image-pull.log": {
+      "bytes": 1666,
+      "sha256": "689bf4fe9fb5b184feb12bb759b8ab1d56aa1810819559fd655c3c35f51817dc"
+    },
+    "interpreter-version.txt": {
+      "bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    "postgres.log": {
+      "bytes": 3430,
+      "sha256": "cc6d0e6b554b707a192e1109043d9725048cf7bc2bd61e8838f4a5c38f2c016e"
+    },
+    "test.log": {
+      "bytes": 1269,
+      "sha256": "6d4a1c5fda8c6287ed33f2b4578854616a123189691603eeebbf6a8cc6a08101"
+    }
+  },
+  "credential_file_cleanup": "REMOVED_MODE_0600",
+  "image": {
+    "container_image_id": "sha256:79bd7c99e923138f136f8009d6bffa66e21e9d4fda5c0c561b00fc9c90cfe537",
+    "platform": "linux/amd64",
+    "postgres_version": "postgres (PostgreSQL) 17.11",
+    "reference": "docker.io/library/postgres@sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3"
+  },
+  "interpreter": {
+    "path": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "version": "3.12.15 (main, Oct  6 2026, 23:50:18) [GCC 15.3.0]"
+  },
+  "owned_container_cleanup": "REMOVED_AND_VERIFIED_ABSENT",
+  "server_log_status": "CAPTURED_SANITIZED",
+  "service": {
+    "container_id": "3b3c007d82dc4e7443f9a5b177217f1e1d6a6c74513d09cf410c2eb3c3fbe5bb",
+    "container_name": "actions84-migration-20261010T201047Z-18398",
+    "cpu_limit": 1,
+    "loopback_port": "32768",
+    "memory_limit": "512m",
+    "pids_limit": 64
+  },
+  "source": {
+    "dirty": false,
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "test_log_status": "SANITIZED",
+  "test_status": "1"
+}

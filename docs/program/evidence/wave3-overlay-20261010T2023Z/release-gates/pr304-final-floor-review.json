@@ -1,0 +1,30 @@
+{
+  "subject": "PR304 final floor-canary correction",
+  "head": "73605934c1c948895410a5abaed6c225a396e038",
+  "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+  "source_fix": "0f9422bbb366dcadc10ddea05f86a7f9ecad227c",
+  "comparison": "b954071cb8a48ab80d5ebeb6b46c3c47f297f751",
+  "merge_base": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+  "commands": [
+    "git diff b954071c 73605934 -- .",
+    "git show 73605934:action_server/scripts/verify_published_runtime_floor.py",
+    "git diff --check b954071c 73605934",
+    "git merge-tree --write-tree 4e8a2629 73605934"
+  ],
+  "observations": [
+    "Exact Core1.0.2 and Helper1.0.3 requirements added beside Runtime wheel prevent newest-compatible registry resolution from invalidating minimum-floor canary.",
+    "Only script argv and one full-argv regression test change; canonical guide adds precise seven-line floor-resolution rule.",
+    "Isolated no-cache public-index binary-only flags, exact report URL/hash checks, installed versions, pip check and checkout import guards unchanged.",
+    "diff --check succeeds; merge-tree exactly equals a8fe00af1858077273912d0b590f0f7a662c83d5.",
+    "Root reports88 tests pass with red/green; not reviewer-executed and not final hostedCI evidence."
+  ],
+  "decision": "GO source correction; HOLD merge until final exact-head CI gates",
+  "doc_proposal": {
+    "path": "docs/skills/repository-operations.md",
+    "delta": "Keep that registry-floor check deterministic when newer compatible dependencies are published: pass exact actions-core==EXPECTED_CORE and actions-http-helper==EXPECTED_HELPER requirements alongside the Runtime wheel in the isolated pip install. Keep pip-report URL/SHA validation and installed version/import-origin checks as separate gates. A newer compatible Core release does not change the minimum version this canary must exercise.",
+    "disposition": "Verified already applied in73605934; no additional cosmetic delta proposed.",
+    "evidence": "Original exact floor expected1.0.2 while newly published compatible1.0.3 resolved; corrected argv pins intended floor without weakening independent provenance gates.",
+    "uncertainty": "Final hosted execution pending."
+  },
+  "upstream_disposition": "none"
+}

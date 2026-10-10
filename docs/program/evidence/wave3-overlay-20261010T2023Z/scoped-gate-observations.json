@@ -1,0 +1,49 @@
+{
+  "observed_at_utc": "2026-10-10T20:23:55Z",
+  "accepted_scoped_observations": [
+    {
+      "owner_issue": 84,
+      "criterion_id": "migration-api-two-process-v12-v13",
+      "consumer_slice": "Issue #84 shared Database migration API prerequisite",
+      "status": "ACCEPTED_SCOPED_ONLY",
+      "decision": "GO for exact-source PostgreSQL v12-to-v13 production migrate_db API process-lock gate only.",
+      "evidence": {
+        "path": "evidence/wave3-overlay-20261010T2023Z/migration-api-actual-independent-review.json",
+        "sha256": "93c4ffc4175169dcd023abb197e825fdd59f1d0053dca37c03363d8e60911863"
+      },
+      "execution_receipt_sha256": "341bda35a4a629c966371866c5fc60416fcebaa9c42fdbfe78e2429482f16c88",
+      "limits": "Does not close #84 or establish full CLI startup, wheel/native/TLS, mixed-version rollout, recovery, or issues #83/#129. Two prior failed attempts remain preserved; original test-script bytes are missing and disclosed in the attempt manifest; sanitized logs/receipts are retained."
+    },
+    {
+      "owner_issue": 282,
+      "criterion_id": "published-core-installed-worker-runtime-browser",
+      "consumer_slice": "PR282 Canvas-query worker/browser prerequisite",
+      "status": "ACCEPTED_SCOPED_ONLY",
+      "decision": "GO for published Core 1.0.3 installed-worker plus local system-Chromium Runtime/browser gate.",
+      "evidence": {
+        "path": "evidence/wave3-overlay-20261010T2023Z/pr282-runtime-browser-independent-review.json",
+        "sha256": "83ea0e284251972885de6bd4fc0b0aec6870ae668c1cf062e7819a53ad227a51"
+      },
+      "execution_receipt_sha256": "d8ae93a5fc2cca19dac84d5180ef772eba245e906e401b9afa43ef503c182346",
+      "limits": "Three sampled modules bind to independently verified published Core wheel but do not authenticate the complete installed wheel/cold acquisition. Authentication, artifact retrieval, frozen workers, actual ChatGPT and full issue acceptance remain unproved. System PATH Chromium is separate from managed Playwright browser; zombie descendants remain explicit. Current PR body still says independent readback pending at snapshot; root is to refresh that wording after linking the receipt."
+    },
+    {
+      "owner_issue": 99,
+      "criterion_id": "canvas-runtime-cache-isolation-and-local-managed-browser",
+      "consumer_slice": "PR305 cache-isolation fixture repair and local Playwright browser proof",
+      "status": "ACCEPTED_SCOPED_ONLY",
+      "decision": "GO for the exact f9c424 cache/TMPDIR fixture fix and local functional proof with a directly traced managed headless-shell launch identity.",
+      "evidence": {
+        "path": "evidence/wave3-overlay-20261010T2023Z/pr305-final-launch-trace-independent-review.json",
+        "sha256": "d06296123a1ff511d2f8ffaf13640e45d62729985a27a4f41068a43ca159e77a"
+      },
+      "source_review": {
+        "path": "evidence/wave3-overlay-20261010T2023Z/pr305-pinned-browser-independent-review.json",
+        "sha256": "432dbfd35f09ea7fb2495abeb032ffeefaf2289e99a96f59af1b3050d68437df"
+      },
+      "execution_receipt_sha256": "a91b4c0c25334574d31b43e2b1f6d57fac05ed3b36ae05da8d812d5b6be54a00",
+      "limits": "Source head f9c424f/tree3d921; hosted check rollup is point-in-time and still running/queued. The actual launch SHA is headless-shell e11fc9ce, not the full-Chrome companion hash 0b20. Candidate Core wheel is local and differs from published provenance. ChatGPT, auth, artifact resolution, production CSP/host, frozen worker, published Runtime and whole #99 acceptance remain open."
+    }
+  ],
+  "accounting": "Informational scoped observations only. No new accepted_scoped_criteria, execution gates, typed edges, issue row/status/classification/count changes, or whole-issue acceptance."
+}

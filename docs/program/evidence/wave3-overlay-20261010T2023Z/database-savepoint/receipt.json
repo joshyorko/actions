@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "focused-regression-red.log": {
+      "bytes": 5877,
+      "sha256": "fbaf8eba6dc9a851a54f8148fd73e885aa2ce5af7d21844b34ba5bd02c6442d9"
+    },
+    "focused-regression-strengthened-red.log": {
+      "bytes": 8749,
+      "sha256": "f93f3c0e62da05caa2576ab2a32ab955a810c63edd0708264ed7e8046856ff35"
+    },
+    "normal-nested-control.log": {
+      "bytes": 371,
+      "sha256": "a83c6a20f56e7a2ce69571ab073e0da9165b4b58eb230997774575aea91a85d6"
+    },
+    "reproduce_savepoint_authorizer.py": {
+      "bytes": 1883,
+      "sha256": "6cbae155eea43d03419eb9c7d79ab74a2f1417978031d9a8d5cf1535d72cd596"
+    },
+    "run_focused_regression.py": {
+      "bytes": 918,
+      "sha256": "ee6d3b3f75169df00474f568681a61b882d34a6387de2c1b449a28bc019cea81"
+    },
+    "sqlite-authorizer-repro.log": {
+      "bytes": 5567,
+      "sha256": "674d4db115ea851e57c82c06a8bc52c92849e769e7ee67b44409f33d73d6ac00"
+    }
+  },
+  "cleanup": "Temporary worktree RCC symlink removed and checked absent. No shared PostgreSQL/container use; DB audit worker had already cleaned its service/credential artifacts. No external writes.",
+  "documentation_delta_proposal": "In docs/skills/repository-operations.md, add a short verified regression note: test nested transaction SAVEPOINT admission failures with a real SQLite authorizer denying SQLITE_SAVEPOINT/BEGIN; assert the original DBError and SQLite denial remain visible, nested body does not run, counter/connection recover, and a later same-connection nested transaction commits. Existing happy-path nested rollback coverage does not exercise SAVEPOINT creation failure. Evidence: this receipt, expected-red focused test, and passing existing nested-transaction control. No current guide instruction is contradicted; remaining uncertainty is behavior after any production repair and coverage against PostgreSQL.",
+  "focused_regression": {
+    "command": "source /workspace/actions-cloud/activate.sh && unset ACTIONS_RUNTIME_TEST_PYTHON && PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" PYTHONPATH=\"/workspace/work/actions-mk3-db-savepoint/action_server/src:/workspace/work/actions-mk3-db-savepoint/action_server/tests\" /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python /workspace/work/actions-mk3-evidence/database-savepoint/run_focused_regression.py",
+    "control": "Existing test_database_transactions_nested passed (1 passed): successful nested SAVEPOINT and nested rollback path remains healthy.",
+    "format": "Ruff format --check on the focused test file passed; git diff --check passed.",
+    "result": "Expected-red, 1 failed. The chained DBError and original sqlite3.DatabaseError are present with exact SQL and not-authorized message; observed surfaced exception is AssertionError. The nested body was not entered. Once the authorizer was removed, same-connection outer+nested work ran and read back its marker, but observed nesting was [2, 3], final threadlocal counter 1, and SQLite connection remained in transaction. The asserted correct outcome is surfaced DBError, nesting [1,2], counter 0, SQLite transaction false, marker readable.",
+    "test": "test_nested_transaction_savepoint_start_failure_preserves_error_and_counter"
+  },
+  "interpretation": "Confirmed local transaction-state/error-precedence defect candidate on SQLite at the recorded base. The evidence localizes it to incrementing thread-local nesting before SAVEPOINT execution and entering decrement finally only after SAVEPOINT succeeds. No production repair or post-fix proof was attempted.",
+  "reproducer": {
+    "command": "source /workspace/actions-cloud/activate.sh && rcc task script -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/database-savepoint/reproduce_savepoint_authorizer.py",
+    "mechanism": "Real sqlite3.Connection.set_authorizer returns SQLITE_DENY for SQLITE_SAVEPOINT / operation BEGIN; observed event (32, BEGIN, savepoint_0).",
+    "result": "SQLite raises DatabaseError: not authorized; Database.execute wraps this in DBError: Error running sql: savepoint savepoint_0; with values: None. The nested generator body is not entered. Outer transaction cleanup raises AssertionError: Error transaction nesting logic not correct!, masking the DBError.",
+    "script": "/workspace/work/actions-mk3-evidence/database-savepoint/reproduce_savepoint_authorizer.py",
+    "state_after_failure": {
+      "db_in_transaction": true,
+      "sqlite_connection_in_transaction": false,
+      "threadlocal_in_transaction": 1
+    }
+  },
+  "runtime": {
+    "database_module": "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py",
+    "dependencies": "Reused prepared interpreter and RCC cache; no install/bootstrap in DB worktree. A temporary local ignored-bin RCC symlink used for pytest autouse setup was removed and absence verified.",
+    "pytest_import_binding": "PYTHONPATH=/workspace/work/actions-mk3-db-savepoint/action_server/src:/workspace/work/actions-mk3-db-savepoint/action_server/tests; wrapper asserts module origin belongs to this checkout.",
+    "python": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 for RCC reproducer; prepared /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python for pytest",
+    "rcc": "v18.19.3, selected via source /workspace/actions-cloud/activate.sh",
+    "sqlite": "3.53.4"
+  },
+  "task": "Bounded SQLite SAVEPOINT-start failure diagnosis; no production patch",
+  "upstream_disposition": "No upstream report. Failure is reproduced in local transaction bookkeeping/error cleanup, with no evidence implicating an upstream dependency or maintained upstream defect.",
+  "worktree": {
+    "branch": "mk3/database-savepoint-repro-20261010",
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "path": "/workspace/work/actions-mk3-db-savepoint",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+    "working_tree": "Only action_server/tests/action_server_tests/test_database.py is modified; no production or documentation edits; git diff --check passed."
+  }
+}

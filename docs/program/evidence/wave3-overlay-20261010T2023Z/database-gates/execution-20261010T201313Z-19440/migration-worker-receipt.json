@@ -1,0 +1,56 @@
+{
+  "cleanup_errors": [],
+  "controller_backend_pid": 90,
+  "module_identity": {
+    "actions.server._database": {
+      "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py",
+      "sha256": "5d3776fb85a36604b5c9dbc2c2169ee2770734330fea90ceda507515e4fc4638"
+    },
+    "actions.server.migrations": {
+      "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/migrations/__init__.py",
+      "sha256": "181c8e653d64319e58df7532e759612376ee0c91cd05423ea16f2e7318aa1541"
+    },
+    "actions.server.migrations.migration_add_mcp_catalog_names": {
+      "path": "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/migrations/migration_add_mcp_catalog_names.py",
+      "sha256": "e4fe141fba0eeb37d6060b6421aa78858ea02ac1dd6d31501bc7275f9cdb1f6d"
+    }
+  },
+  "source": {
+    "dirty": false,
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "wait_observations": {},
+  "worker_identity_map": {
+    "actions84_4d64ffea1954_0": {
+      "backend_pid": null,
+      "os_pid": 19764,
+      "returncode": -15
+    },
+    "actions84_4d64ffea1954_1": {
+      "backend_pid": null,
+      "os_pid": 19765,
+      "returncode": -15
+    }
+  },
+  "worker_logs": {
+    "0": {
+      "pid": 19764,
+      "reaped": true,
+      "returncode": -15,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "1": {
+      "pid": 19765,
+      "reaped": true,
+      "returncode": -15,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

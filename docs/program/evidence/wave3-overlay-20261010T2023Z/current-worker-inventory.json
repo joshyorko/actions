@@ -1,0 +1,63 @@
+{
+  "observed_at_utc": "2026-10-10T20:23:55Z",
+  "source": "Current native collaboration roster captured at checkpoint plus root-reported lane assignments. Dakota status is only the exact native snapshot at 20:04:43/44Z; code progress is not inferred from worker liveness.",
+  "active_workers": [
+    {
+      "name": "root",
+      "status": "ACTIVE",
+      "scope": "Integration, release admission and external publication authority."
+    },
+    {
+      "name": "luna_core_release_preflight",
+      "status": "ACTIVE",
+      "scope": "This isolated wave3 governance evidence/graph/guidance checkpoint."
+    },
+    {
+      "name": "luna_database_gate_audit",
+      "status": "ACTIVE",
+      "scope": "Read-only #134 warm readiness plus SQLite savepoint diagnosis/fix lane; no acceptance claimed."
+    },
+    {
+      "name": "luna_graph_reconcile",
+      "status": "ACTIVE",
+      "scope": "Graph reconciliation lane."
+    },
+    {
+      "name": "luna_pr282_template",
+      "status": "ACTIVE",
+      "scope": "PR282 template source/body follow-up; scoped installed worker/browser evidence independently reviewed."
+    },
+    {
+      "name": "luna_pr302_portability",
+      "status": "ACTIVE",
+      "scope": "PR302 portability follow-up; exact Windows canary refresh awaits accepted PR304 union."
+    },
+    {
+      "name": "sol_pr301_review",
+      "status": "ACTIVE",
+      "scope": "Independent scoped reviews; latest PR282/PR305/database gate reviews are archived in this checkpoint."
+    },
+    {
+      "name": "luna302_rcc_inspection",
+      "status": "ACTIVE",
+      "scope": "Root-assigned private f441 RCC inspection implementation; contract fake-RCC only; actual metadata execution NOT RUN."
+    }
+  ],
+  "dakota": {
+    "status": "LAST_NATIVE_SNAPSHOT_NO_ACTIVE_FLAGS",
+    "observed_at_utc": "2026-10-10T20:04:43Z / 20:04:44Z",
+    "receipt": {
+      "path": "evidence/wave3-overlay-20261010T2023Z/dakota-native-snapshots-20261010T200444Z.json",
+      "sha256": "ace3107cef5cb11209f804164e907618078730957c345b3ce695f73898b62381"
+    },
+    "actions": "No resume/create; WorkItems latest turn completed, RCC latest turn interrupted."
+  },
+  "Devsy": {
+    "status": "DISABLED",
+    "actions": "No discovery, dispatch, or calls."
+  },
+  "Astra": {
+    "status": "NOT_USED",
+    "actions": "No assignment or calls."
+  }
+}

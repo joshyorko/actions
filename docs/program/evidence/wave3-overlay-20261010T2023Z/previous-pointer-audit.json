@@ -1,0 +1,117 @@
+{
+  "schema": "actions-wave3-previous-pointer-audit/v1",
+  "observed_at_utc": "2026-10-10T20:21:09Z",
+  "immutable_prior_amendment": {
+    "id": "program-amendment-20261010T2005Z",
+    "path": "evidence/wave2-overlay-20261010T2005Z/program-amendment-20261010T2005Z.json",
+    "sha256": "af2677f0cde30527bc835c02a6766d00b941933e1c5ce976c464323361b43f14"
+  },
+  "copied_prior_current_pointers": {
+    "previous_overlay": {
+      "id": "program-amendment-20261010T1958Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/program-amendment-20261010T1958Z.json",
+      "sha256": "05bd5b71e8094871171c504a90d106dfd865b8fda1ba01ff5db6f13320fe5d71",
+      "observed_at_utc": "2026-10-10T19:58:27Z"
+    },
+    "previous_binding": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/current-git-bindings.json",
+      "sha256": "2036fca8dfd5537762cc4529e9562104644c38786472552be94334ab3d72ff5f"
+    },
+    "previous_worker_inventory": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "source": "Current collaboration roster at overlay cutoff; root status updates. This is agent liveness/assigned work, not proof of repository source progress.",
+      "workers": [
+        {
+          "name": "root",
+          "status": "ACTIVE",
+          "scope": "Integration owner; PR/release admission and current GitHub check observation."
+        },
+        {
+          "name": "luna_core_release_preflight",
+          "status": "ACTIVE",
+          "scope": "Governance overlay author; this bounded task."
+        },
+        {
+          "name": "luna_database_gate_audit",
+          "status": "ACTIVE",
+          "scope": "Bounded database gate audit."
+        },
+        {
+          "name": "luna_graph_reconcile",
+          "status": "ACTIVE",
+          "scope": "Current reconciliation task; source status not inferred from liveness."
+        },
+        {
+          "name": "luna_pr282_template",
+          "status": "ACTIVE",
+          "scope": "PR282 template floor/generation gate."
+        },
+        {
+          "name": "sol_pr301_review",
+          "status": "ACTIVE",
+          "scope": "PR301 serialization slice review."
+        },
+        {
+          "name": "luna_pr302_portability",
+          "status": "COMPLETED",
+          "scope": "PR302 portability evidence delivered."
+        },
+        {
+          "name": "Devsy",
+          "status": "DISABLED",
+          "scope": "No dispatch, discovery, or calls."
+        },
+        {
+          "name": "Dakota",
+          "status": "UNKNOWN",
+          "scope": "Ownership clarification pending; no dispatch."
+        }
+      ],
+      "limitations": "Does not revive the older luna worker-name map or infer progress from active-agent status."
+    },
+    "previous_status": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/live-status-observation.json",
+      "sha256": "9b162461a8700e48b63bba48af0f25578a1e857d101c812e4b5f74de120ffb12",
+      "scope": "Root-reported current exact-head check counts; only bounded current PR observations, not a full branch/release gate inventory."
+    },
+    "previous_release_readiness": {
+      "status": "RUNTIME_RELEASE_NOT_READY",
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "community": "a70993fafc99a9f94041485542d5a720797ca394",
+      "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "actions_core": "1.0.3 PUBLISHED_AND_BYTE/API/INSTALLED_CONSUMER_VERIFIED",
+      "actions_runtime": "1.0.3 NOT PUBLISHED; no immutable Runtime 1.0.3 tag or PyPI readback established in this overlay",
+      "actions_http_helper": "1.0.3 published (prior verified current registry state)",
+      "actions_work_items": "0.4.4 unchanged",
+      "declared_runtime_core_floor": "^1.0.2; PR304 canary requirement remains exactly 1.0.2",
+      "remaining_gates": [
+        "PR304 exact-head checks/review/merge",
+        "PR302 exact-head Windows floor-canary failure must be refreshed against accepted PR304 union; Windows adapter devmode remains active",
+        "PR282 managed Runtime/browser consumer run",
+        "PR305 corrected actual Runtime/browser fixture rerun",
+        "PR292 Windows check; #290/#299/#300 blocked",
+        "7eca actual RCC metadata inspection remains NOT_RUN",
+        "Current Actions Runtime PyPI and native release artifact/tag/registry readback",
+        "Required Homebrew install/upgrade proof in owning joshyorko/homebrew-tools tap/workflow; not run in this overlay",
+        "Exact latest Runtime workflow/tag source review and named platform/security/registry gates not established by this scoped overlay"
+      ],
+      "source": "runtime-readiness-corrected receipt plus exact current PR source/review and root 19:58 check status observation."
+    },
+    "previous_next_action": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "owner": "Root retains integration, release and external publication authority.",
+      "status": "Wait for exact-head PR304/302/282/305 gates; keep PR292 Windows active and #290/#299/#300 blocked; after accepted head update, separately run the managed Runtime/browser consumer and remaining owning Runtime release gates.",
+      "scope": "No tag, dispatch, merge, issue closure or whole-issue acceptance authorized by this overlay."
+    }
+  },
+  "checks": {
+    "prior_pointer_values_equal_immutable_source": true,
+    "nested_object_identity_disjoint": true,
+    "prior_release_readiness_observed_at": "2026-10-10T19:58:27Z",
+    "expected_prior_release_readiness_observed_at": "2026-10-10T19:58:27Z",
+    "current_checkpoint_pointer_uses_20_05_amendment": true
+  },
+  "result": "PASS"
+}

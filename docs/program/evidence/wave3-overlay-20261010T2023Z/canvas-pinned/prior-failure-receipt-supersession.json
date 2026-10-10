@@ -1,0 +1,26 @@
+{
+  "kind": "receipt_supersession_record",
+  "recorded_at_utc": "2026-10-10T20:15:00Z",
+  "superseded_receipt": {
+    "path": "canvas-pinned-proof-receipt.json",
+    "known_sha256": "97a0baaa65f05d3bee24555018f5cc6011ffa0d364351cef24b13514c5b59fd2",
+    "status": "failed proof preparation/attempt record before the cache-isolation fix"
+  },
+  "supersession_reason": "The prior receipt bytes were overwritten when the final passing receipt was written. Exact old bytes are not present among retained files and are not reconstructed.",
+  "current_receipt": {
+    "path": "canvas-pinned-proof-receipt.json",
+    "sha256": "992f6e124f2f88e2d965a606d847f26dd680fb6cf14460dcb00946549b653196",
+    "status": "PASS for bounded local Runtime bridge + pinned Playwright, with ChatGPT NOT_RUN"
+  },
+  "retained_prior_attempt_logs": [
+    "attempt-01-stderr.log",
+    "attempt-01-stdout.log",
+    "attempt-02-stderr.log",
+    "attempt-02-stdout.log",
+    "attempt-03-rcc-stderr.log",
+    "attempt-03-rcc-stdout.log",
+    "attempt-03-runtime-server.log",
+    "attempt-03-pytest-log.html"
+  ],
+  "integrity_note": "This record preserves only the previously reported digest and retained log references. It does not claim to reproduce or preserve the old receipt content."
+}

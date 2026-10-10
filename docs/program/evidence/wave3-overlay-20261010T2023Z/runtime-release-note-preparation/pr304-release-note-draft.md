@@ -1,0 +1,47 @@
+# Runtime 1.0.3 release-note preparation
+
+Read-only review of `joshyorko/actions` current PR304 `73605934c1c948895410a5abaed6c225a396e038` (tree `a8fe00af1858077273912d0b590f0f7a662c83d5`, parent `0f9422bbb366dcadc10ddea05f86a7f9ecad227c`). This draft is scratch only; no source or release workflow was edited.
+
+## Proposed release-note section
+
+Use this exact tag-matching H2 if the native GitHub release is configured to parse the dedicated changelog:
+
+```markdown
+## actions-runtime-1.0.3
+
+- Add bounded Runtime history handling and load current Work Items in the Runtime UI.
+- Tighten browser-origin and authentication handling.
+- Harden Robot Framework download and archive handling, and refresh Runtime administration assets.
+- Keep the declared Core compatibility floor at `actions-core ^1.0.2`.
+```
+
+The feature wording reflects the existing 1.0.3 candidate description; it does not claim Canvas authoring/execution, a completed RCC-provider warm-cache path, or full acceptance of #134/#153/#211. Do not add PR302’s published specification/artifact identity API as a shipped feature: PR302 `e8e8a9db1c762b31fb4c4f625168dc7337235483` descends from `e31506239fd0260d708a11440762537334f8d2d1`; its common ancestor with accepted integration `4e8a26296608c232ce3dbd1f250ddb709b9459c9` is only `e886d26ebaefafa9189a69517f6707691b53662e`. The three-case RCC run at e315 is a real, independently reviewed scoped pass (`38075869631`, source `e315`, control `20bfbfd14fd554a594517dc567f7342da7ce7022`), and PR302’s e8e8 delta is limited to two `str(Path(...))` argv expectations. That preserves scoped source equivalence for the specific RCC consumer test, but does not put PR302 in the current Runtime release source or complete #134. Its receipt also notes that the original raw lifecycle receipt was not retained.
+
+For release extraction, the generated native workflow takes `changelog_file: action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md` and does not override `changelog_heading`; the pinned action’s default is `h2`. At tag `actions-runtime-1.0.3`, the matching section heading is exactly `## actions-runtime-1.0.3`. However, the generated workflow also supplies a non-empty `release_text`. At pinned action `Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803`, the README says non-empty `release_text` disables changelog parsing, and `entrypoint.sh` takes that branch instead of the `submark -O --h2 "$TAG"` extraction. Thus the current release job will use only its fixed generic text; this draft will not reach the release body until the generator stops passing `release_text` or deliberately constructs it from the changelog.
+
+Do not invoke generic `inv set-version` for this file. `devutils.invoke_utils.set_version` updates `action_server/docs/CHANGELOG.md`, and its helper expects `# Changelog` and creates `## <version> - <date>`. The dedicated Runtime file starts `# Actions Runtime Changelog`, and its release action matches the pushed tag, not that generic heading.
+
+## Gate disposition at this cutoff
+
+| Gate | Release disposition | Evidence and boundary |
+|---|---|---|
+| PR304 floor-canary correction | Blocking until exact-head gates/review are accepted. | Current source `73605934` pins the isolated canary to Core 1.0.2 and Helper 1.0.3 while keeping production `actions-core ^1.0.2`; it fixes the older `b954071` resolver failure. Root’s 20:11:59Z snapshot still shows 11 success, 5 in progress and 6 queued. Do not call the old failure current or call the correction accepted. Evidence: `/workspace/work/actions-mk3-evidence/pr304-final-floor-review.json`, `/workspace/work/actions-mk3-evidence/live-ci-current.json`. |
+| #134 local RCC adapter | Blocking for shipping the advertised RCC-backed Runtime without the failed required provider-warm behavior; #134 must remain open until its full contract is satisfied. | `runtime-1.0.3-retained-contract-audit-20261009.md` records the provider-backed offline-warm acceptance as FAIL: HTTP 503 prevented the warm Action/verification/wrapper success and zero-provider-request assertion. Its adapter, package handler, importer and rollback-test SHA-256 values match source files in 4e8a and PR304 736, so this behavior is not superseded by PR304’s floor-only fix. Selected-provider 503-before-execution negative is a pass, not warm reuse. Keep the failure tied to the exact retained run/source and rerun the required cases on the final accepted union. The independent PR302 3-case pass establishes only one publication identity-pair substage, with raw-lifecycle replay limitation; PR302 remains off the current integration ancestry. Evidence: `/workspace/work/actions/mk3-integration/docs/program/evidence/runtime-1.0.3-retained-contract-audit-20261009.md`, `/workspace/work/actions-mk3-evidence-tree/docs/program/evidence/current-open-pr-audit-20261010T1842Z/pr302-rcc-three-case-independent-review.json`, `/workspace/work/actions-mk3-evidence/pr302-portability/receipt.json`. |
+| #153 browser/security acceptance | Blocking security gate for 1.0.3. | Live issue is OPEN. The 2026-10-10 readiness receipt says no current-head browser or candidate-binary test was run. D8/84b results are narrow historical Linux tests and do not transfer. Require actual browser proof against the exact current frozen/Go-wrapper artifacts, retaining the issue’s Origin/auth/secret-leak boundaries; account for its browser WebSocket/streaming, malformed-Origin and supported-mode requirements. Evidence: `/workspace/work/actions-mk3-evidence/runtime-ui-readiness/readiness.json`; live `gh issue view 153` read at this review. |
+| #211 native handoff | Blocking for release/distribution completion after native assets exist. | Live issue is OPEN. Current generated Actions workflow has retired the old Sema4AI/CDN/S3 source calls, so the stale issue prose must not be repeated as a current caller defect. Its external handoff/hash acceptance and the explicitly required `joshyorko/homebrew-tools` tap CI/release plus Linux x86_64 and macOS arm64 install/upgrade proofs are still outstanding. Current tap/cask is 1.0.1; the current source has no Runtime 1.0.3 native assets to verify. Evidence: `/workspace/work/actions-mk3-evidence/core-release-readiness/runtime-readiness-corrected.json`; live `gh issue view 211` read at this review. |
+| Whole-graph successors | Not prerequisites to this local Runtime 1.0.3 release, subject to not claiming their behavior. | #134 explicitly excludes distributed workers, Kubernetes, PostgreSQL, Package v3 and remote Run execution. Keep the separate #133 substrate relationship, #143 adapter-neutral/second-adapter work, #90 distributed workers, and #130/#135 immutable-source work as their own contracts. Do not use their later acceptance to waive any local #134, #153, package, or native release gate. |
+| Final package/native publication | Blocking. | The exact final community-ancestral source, tag/version/changelog alignment, PR302/304/292 integration decisions, full required checks, sdist plus six platform/Python wheels, three native binaries, signed-or-explicit-unsigned state, and independent PyPI/GitHub asset readbacks remain required. The corrected readiness receipt identifies Runtime 1.0.3 and native assets as absent at its observation and requires tap proof after verified assets. |
+
+### Current issue state and limits
+
+Read-only `gh issue view` at this review reports #134, #153 and #211 OPEN; none was updated. Current release candidate is `4e8a26296608c232ce3dbd1f250ddb709b9459c9` plus PR304, not PR302. The live PR304 snapshot is still incomplete. Runtime 1.0.3 is not established as published by the cited readiness receipt. Do not turn scoped passes into whole-issue closures or release approval.
+
+## Canonical documentation proposal
+
+- Canonical file: `docs/skills/repository-operations.md`, in the Runtime release authority paragraph around lines 1041–1045.
+- Exact delta: “The generated native workflow passes a non-empty `release_text`, which disables changelog parsing in the pinned release action. To publish the dedicated Runtime changelog section, remove that override and add an H2 heading equal to the tag (for example, `## actions-runtime-1.0.3`); the action’s default `changelog_heading` is h2. The generic `inv set-version` helper updates `action_server/docs/CHANGELOG.md` in its `## <version> - <date>` format and does not prepare the dedicated Actions Runtime changelog.”
+- Evidence: current generated workflow and generator at PR304 736; action metadata/README/entrypoint at pinned action commit `57eb9bdce7a964e48788b9e78b5ac766cb684803` (action.yml blob `0e16d4c605351de4769e5868b2bed06065a4922a`, README blob `e1bc31be550074fbd6bcc6ac8c47994420f9b7e2`, entrypoint blob `01c471feff4d6dcd89ee1b114c4bb6ecf2048c3d`); exact `set_version` helper at current Actions source.
+- Stale/ambiguous guidance: current guide says native release notes come from the dedicated file but does not mention that the configured non-empty `release_text` bypasses it. Correct that claim with the actual workflow condition; do not imply the heading alone fixes delivery.
+- Remaining uncertainty: final tag/date and final feature wording depend on accepted exact release source and completion of the listed release gates.
+
+Upstream disposition: none; the release-note bypass is Actions workflow configuration, and the pinned release action follows its documented `release_text` behavior.

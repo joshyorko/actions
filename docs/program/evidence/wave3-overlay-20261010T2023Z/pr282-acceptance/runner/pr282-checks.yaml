@@ -1,0 +1,13 @@
+artifactsDir: artifacts
+environmentConfigs:
+  - ../developer/setup.yaml
+tasks:
+  Placeholder:
+    shell: python -c "pass"
+devTasks:
+  TemplateFloor:
+    shell: python run_package_pytest.py -q tests/contract_tests/test_active_contracts.py -k template_manifests_pin_supported_worker_core
+  TemplateBundles:
+    shell: python run_package_pytest.py -q tests/action_server_tests/test_template_bundle.py
+  CanvasRuntimeBrowser:
+    shell: python run_package_pytest.py --env ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 --env ACTIONS_HOME=/workspace/work/actions-mk3-pr282/work/actions-home --env UV_CACHE_DIR=/workspace/work/actions-mk3-pr282/work/uv-cache -q -m integration_test tests/action_server_tests/mcp/test_canvas_query_template.py -k test_canvas_template_runs_through_runtime_and_real_browser

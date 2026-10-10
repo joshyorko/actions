@@ -1,0 +1,23 @@
+{
+  "schema": "actions-pr305-browser-identity-correction/v1",
+  "observed_at_utc": "2026-10-10T20:23:55Z",
+  "initial_review": {
+    "path": "evidence/wave3-overlay-20261010T2023Z/pr305-pinned-browser-independent-review.json",
+    "sha256": "432dbfd35f09ea7fb2495abeb032ffeefaf2289e99a96f59af1b3050d68437df",
+    "scope": "Retained unchanged; its full-Chrome companion hash must not be described as the launched default-headless executable."
+  },
+  "intermediate_correction": {
+    "path": "pr305-browser-identity-correction-review.json",
+    "sha256": "5ea39e16039eed169c806bbd929a978e07076e6aaa078ea7b4f0922907175ed9"
+  },
+  "direct_launch_trace": {
+    "receipt_path": "canvas-pinned-launch-trace/launch-trace-receipt.json",
+    "receipt_sha256": "a91b4c0c25334574d31b43e2b1f6d57fac05ed3b36ae05da8d812d5b6be54a00",
+    "review_path": "pr305-final-launch-trace-independent-review.json",
+    "review_sha256": "d06296123a1ff511d2f8ffaf13640e45d62729985a27a4f41068a43ca159e77a",
+    "executable": "Playwright 1.62.1 / Chromium revision 1234 managed chromium-headless-shell",
+    "executable_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "result": "PASS 1 passed, 2 deselected; PID 26294 exit 0 and graceful close end observed."
+  },
+  "supersession": "The direct trace corrects only the browser identity assertion for the prior functional proof. It does not retroactively add a launch trace to that earlier run. Functional fixture/cache-isolation proof remains; broader ChatGPT/auth/artifact/frozen/published-Runtime acceptance remains unproven. Six zombie descendants were observed; complete descendant reaping is not claimed."
+}

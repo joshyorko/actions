@@ -1,0 +1,102 @@
+{
+  "Playwright_version": "1.62.1",
+  "artifact_byte_hash_verification": {
+    "canvas-bridge-acceptance-receipt.json": {
+      "bytes": 2897,
+      "sha256": "93abc2ea3c1ea02aa1dc6bfdd1292d2fd3999ced8d130f2621e34c3706d334d4"
+    },
+    "rcc-stderr.log": {
+      "bytes": 60324,
+      "sha256": "eb5e5a7bd40074d58e192367321f7c9bffc2b4cce5d35123f04f1f71f88b2a2f"
+    },
+    "rcc-stdout.log": {
+      "bytes": 2424,
+      "sha256": "121c358dc6b1958f8ad2669c13fb1a34a01c8015a647379bfb1405be06ac7ed2"
+    },
+    "run_canvas_proof_with_launch_trace.py": {
+      "bytes": 3689,
+      "sha256": "ff1d6207c7ee27ce725cd2bbeddf6d4bca1ba44d02f5184856381b6ec0905a1e"
+    }
+  },
+  "candidate_core_wheel": {
+    "path": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+    "sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8"
+  },
+  "canonical_file": "docs/skills/repository-operations.md",
+  "canvas_resource": {
+    "mime_type": "text/html;profile=mcp-app",
+    "sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852",
+    "uri": "ui://action-canvas/v1/canvas.html?query-fixture=0.1"
+  },
+  "commands": [
+    "Read/hash final stdout/stderr/runner, exact launch/exit lines and managed headless-shell binary; read lock/browser metadata",
+    "ps exact main/migrated PIDs; git HEAD/tree/status; original receipt SHA preservation readback"
+  ],
+  "exact_doc_delta": "For Playwright default headless evidence, retain DEBUG=pw:browser with pytest capture disabled and bind its actual launch line to the named executable hash and lock-matched revision. chromium.executablePath() may name the full browser while default headless launches chromium-headless-shell. Use fresh scratch evidence and basetemp directories to preserve earlier artifacts; record the main browser exit separately from any zombie descendants.",
+  "executable": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+  "executable_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+  "five_persisted_runs_independently_verified": [
+    {
+      "action_name": "canvas_fixture_search",
+      "run_id": "run-001-01c3736b-bf8e-4b6c-884b-6192d917dfe5",
+      "status": "passed",
+      "status_code": 2
+    },
+    {
+      "action_name": "canvas_fixture_artifact_status",
+      "run_id": "run-002-c1cc67b4-ecef-4bce-b1fd-2073c12cd547",
+      "status": "passed",
+      "status_code": 2
+    },
+    {
+      "action_name": "canvas_fixture_worker_provenance",
+      "run_id": "run-003-9a6f92e3-af8f-4e5a-917d-a40063cf4a23",
+      "status": "passed",
+      "status_code": 2
+    },
+    {
+      "action_name": "canvas_fixture_search",
+      "run_id": "run-005-f73545cd-ce1c-445b-a0ab-cc95a56bd2d5",
+      "status": "passed",
+      "status_code": 2
+    },
+    {
+      "action_name": "canvas_fixture_artifact_status",
+      "run_id": "run-006-fb1883d2-1c80-47c1-ac21-206f9a9d7e4c",
+      "status": "passed",
+      "status_code": 2
+    }
+  ],
+  "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+  "limits": "Scope remains local candidate-Core/Runtime bridge, not published Runtime acceptance, authentication, artifact retrieval, production CSP/host, ChatGPT, frozen workers or whole issue. Original reviewer corrections remain retained. No new test run by reviewer.",
+  "lock_matched_browser_revision": "1234",
+  "log_sha256": {
+    "rcc-stderr.log": "eb5e5a7bd40074d58e192367321f7c9bffc2b4cce5d35123f04f1f71f88b2a2f",
+    "rcc-stdout.log": "121c358dc6b1958f8ad2669c13fb1a34a01c8015a647379bfb1405be06ac7ed2",
+    "run_canvas_proof_with_launch_trace.py": "ff1d6207c7ee27ce725cd2bbeddf6d4bca1ba44d02f5184856381b6ec0905a1e"
+  },
+  "nested_runtime_receipt_sha256": "93abc2ea3c1ea02aa1dc6bfdd1292d2fd3999ced8d130f2621e34c3706d334d4",
+  "observations": [
+    "Retained launch line identifies managed chromium_headless_shell-1234 executable directly; PID26294 launch, exitCode0 and graceful-close end appear in same retained trace. Focused test1PASS/2deselected57.29s.",
+    "Runner exactlyff1d6207 differs only fresh evidence root, DEBUG=pw:browser, pytest-s and timeout300. RCC task main run SUCCESS. Exact checkout remains clean, original receipt hash unchanged.",
+    "Independent readback finds main browser PID26294 absent. All six migrated descendants25104/26223/26234/26235/26296/26297 are PID1 zombies. No complete process reaping claim.",
+    "Original full-Chrome0b20b130 hash is companion metadata. Fresh trace binds actual headless-shell hash e11fc9ce to this diagnostic replay; it does not retroactively add a launch trace to the earlier run.",
+    "Fresh nested Runtime receipt hash93abc2ea binds task-owned installed Core1.0.3/direct_url candidate wheel80f8e0b, resourcefe8155dc and five named Python-MCP/browser passed runs. Independent wheel/resource byte hashes and read-only SQLite action/status joins match all five records. Candidate wheel remains separate from published Core wheel."
+  ],
+  "owner_launch_trace_receipt_sha256": "a91b4c0c25334574d31b43e2b1f6d57fac05ed3b36ae05da8d812d5b6be54a00",
+  "source_writes": "none; parent ran bounded fresh scratch-only replay",
+  "supersedes_identity_review_only": {
+    "path": "/workspace/work/actions-mk3-evidence/pr305-browser-identity-correction-review.json",
+    "sha256": "5ea39e16039eed169c806bbd929a978e07076e6aaa078ea7b4f0922907175ed9"
+  },
+  "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+  "upstream_disposition": "none",
+  "verdict": "GO for exact f9c424 local functional proof with directly traced managed headless-shell launch identity; broader acceptance HOLD",
+  "worker_identity": {
+    "actions_core_version": "1.0.3",
+    "actions_module": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/lib/python3.12/site-packages/actions/__init__.py",
+    "direct_url_wheel": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+    "wheel_sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8",
+    "worker_prefix": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d"
+  }
+}

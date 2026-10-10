@@ -1,0 +1,84 @@
+{
+  "schema_version": 2,
+  "actions_core_wheel": {
+    "path": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+    "sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8"
+  },
+  "worker": {
+    "worker_prefix": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d",
+    "actions_module": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/lib/python3.12/site-packages/actions/__init__.py",
+    "actions_core_version": "1.0.3",
+    "direct_url_wheel": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+    "wheel_sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8"
+  },
+  "canvas_resource": {
+    "uri": "ui://action-canvas/v1/canvas.html?query-fixture=0.1",
+    "mime_type": "text/html;profile=mcp-app",
+    "sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852"
+  },
+  "browser": {
+    "executable": null,
+    "version": "Playwright-pinned Chromium",
+    "sha256": "not-recorded"
+  },
+  "playwright_pinned_browser": "used",
+  "runtime_call_observations": [
+    {
+      "caller": "python-mcp-client",
+      "tool": "canvas_fixture_search",
+      "result": "passed"
+    },
+    {
+      "caller": "python-mcp-client",
+      "tool": "canvas_fixture_artifact_status",
+      "result": "passed"
+    },
+    {
+      "caller": "python-mcp-client",
+      "tool": "canvas_fixture_worker_provenance",
+      "result": "passed"
+    },
+    {
+      "caller": "playwright-browser",
+      "tool": "canvas_fixture_search",
+      "result": "passed"
+    },
+    {
+      "caller": "playwright-browser",
+      "tool": "canvas_fixture_artifact_status",
+      "result": "passed"
+    }
+  ],
+  "persisted_run_records": [
+    {
+      "run_id": "run-001-01c3736b-bf8e-4b6c-884b-6192d917dfe5",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_search"
+    },
+    {
+      "run_id": "run-002-c1cc67b4-ecef-4bce-b1fd-2073c12cd547",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_artifact_status"
+    },
+    {
+      "run_id": "run-003-9a6f92e3-af8f-4e5a-917d-a40063cf4a23",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_worker_provenance"
+    },
+    {
+      "run_id": "run-005-f73545cd-ce1c-445b-a0ab-cc95a56bd2d5",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_search"
+    },
+    {
+      "run_id": "run-006-fb1883d2-1c80-47c1-ac21-206f9a9d7e4c",
+      "status": "passed",
+      "status_code": 2,
+      "action_name": "canvas_fixture_artifact_status"
+    }
+  ]
+}

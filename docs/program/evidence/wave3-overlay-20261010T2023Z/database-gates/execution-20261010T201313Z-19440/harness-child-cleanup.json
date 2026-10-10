@@ -1,0 +1,42 @@
+{
+  "children": [
+    {
+      "pid": 19764,
+      "reaped": true,
+      "returncode": -15
+    },
+    {
+      "pid": 19765,
+      "reaped": true,
+      "returncode": -15
+    }
+  ],
+  "cleanup_errors": [],
+  "controller_backend_pid": 90,
+  "wait_observations": {},
+  "waiting_backend_pids": {},
+  "worker_application_names": [
+    "actions84_4d64ffea1954_0",
+    "actions84_4d64ffea1954_1"
+  ],
+  "worker_logs": {
+    "0": {
+      "pid": 19764,
+      "reaped": true,
+      "returncode": -15,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "1": {
+      "pid": 19765,
+      "reaped": true,
+      "returncode": -15,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

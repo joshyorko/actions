@@ -1,0 +1,104 @@
+{
+  "canonical_documentation": {
+    "assessment": "No change proposed. Current guide lines 488-508 document browser-minted session semantics and direct Runtime preflight checks; lines 601+ require actual assembled Runtime artifact verification; lines 670+ separate local contracts from real-browser accessibility/responsive/contrast/screenshot acceptance; product-evidence section explicitly limits fixture-backed claims.",
+    "delta": "None.",
+    "file": "docs/skills/repository-operations.md"
+  },
+  "current_harness": {
+    "blob": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+    "evidence": "The same test SHA-256 is recorded in the retained D8 browser receipt, and the exact source file in this checkout hashes to it.",
+    "meaning": "Live Action Server process plus Chromium exercises API-key sign-in UI, browser-minted HttpOnly SameSite=Strict session cookie, cross-origin allowed/denied/null ambient request behavior, direct Runtime preflight/non-preflight status, missing/wrong bearer rejection, and API-key diagnostic/URL leakage checks.",
+    "source_path": "action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+    "test": "test_live_runtime_browser_origin_and_ambient_session_matrix"
+  },
+  "historical_binary_evidence": [
+    {
+      "PR_head": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+      "binaries": {
+        "frozen_sha256": "28a5d465a19def24bd30f77ed4b45833ee3e46894fccab3c60f3521e1fbfe08b",
+        "go_wrapper_sha256": "ba4a7deae85b97a63bc9f394f253c09c7c6f6e08111a88cf692aaba00efc94a5"
+      },
+      "receipt": "/workspace/work/actions-mk3-evidence-tree/docs/program/evidence/devsy-convergence-20261010/d8-browser-api-acceptance-receipt.json",
+      "results": {
+        "frozen": {
+          "log_sha256": "362f93551ec3d91a462d5357f42b079793156b28302b9a784b29602adc2a250a",
+          "pytest": "1 passed"
+        },
+        "go_wrapper": {
+          "log_sha256": "a2f7829331a945a047aa08bd601799eed3d8f4507de814c2356d1857f15fbc5f",
+          "pytest": "1 passed"
+        }
+      },
+      "scope": "Linux loopback browser/API only; two binaries; no full-runtime, Windows, macOS, release, or worker SIGTERM claim.",
+      "status": "PASS_LINUX_CLI_AND_BROWSER_API_ONLY",
+      "test_blob": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+      "toolchain": {
+        "chromium": "151.0.7922.34",
+        "chromium_revision": "1234",
+        "node": "20.19.3",
+        "playwright": "1.62.1",
+        "pytest": "8.4.2",
+        "python": "3.12.15"
+      },
+      "workflow_checkout": "b20fc815aee5a4a303c7b90d6823b2351c30d452",
+      "workflow_run": 38022353748
+    },
+    {
+      "binaries": {
+        "frozen_sha256": "28a5d465a19def24bd30f77ed4b45833ee3e46894fccab3c60f3521e1fbfe08b",
+        "go_wrapper_sha256": "1606fc2961ad107ddb360a46a7bb3c055e750ab8e83c4a94931fc82722d13af9"
+      },
+      "receipt": "/workspace/work/actions-mk3-evidence-tree/docs/program/evidence/devsy-convergence-20261010/84b8-browser-results.json",
+      "results": {
+        "frozen": {
+          "log_sha256": "62be6fbd2b7018397cd08c8b805de7be93c2881eb78e7ddc94b2b7b0904806ba",
+          "pytest": "1 passed"
+        },
+        "go_wrapper": {
+          "log_sha256": "c5785fde84d026b49c44a6959616b5570a88905f63ea1028a11903876dc45ee3",
+          "pytest": "1 passed"
+        }
+      },
+      "scope": "Linux browser/API only; no CLI repeat, nativeverify, Windows/macOS, or full-runtime claim.",
+      "source": "2492f774841118496dbafd5e08b9066edaf170fa",
+      "status": "PASS_LINUX_FINAL84B_BROWSER_ONLY",
+      "test_blob": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+      "workflow_run": 38023233169
+    }
+  ],
+  "live_issue": {
+    "comments": 0,
+    "contract_source": "live GitHub issue read with gh issue view; retained full acceptance body is preserved in the issue itself and summarized below",
+    "number": 153,
+    "state": "OPEN",
+    "title": "[security] Constrain browser origins and credentialed CORS with explicit deployment policy",
+    "url": "https://github.com/joshyorko/actions/issues/153"
+  },
+  "not_run": "No current-HEAD browser test or candidate binary test was run; this receipt is readiness only.",
+  "observed_at_utc": "2026-10-10",
+  "pr297_boundary": {
+    "accepted_claim": "Five fixed paired jsdom mount/update samples compared by medians, with updated-cell, retained DOM identity, DOM-size, and mount-budget assertions. The 1.25 ratio is a regression criterion, not a statistically calibrated browser-frame budget.",
+    "does_not_prove": "Actual Chromium/Firefox/WebKit Runtime rendering, responsiveness, visual acceptance, or credentialed origin behavior.",
+    "merge_commit": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+    "number": 297,
+    "state": "MERGED"
+  },
+  "remaining_issue153_gaps": "Historical and current test prove a narrow API-key-configured browser-session case. They do not establish full acceptance for malformed-origin behavior in-browser, browser WebSocket/streaming Origin checks, every supported auth/deployment mode, all supported package platforms, secret-free diagnostics across deployment, or exact current release binaries. Existing test_server_cors.py and test_server_websockets.py are in-process coverage and cannot substitute for an actual browser where that criterion applies.",
+  "repository": "https://github.com/joshyorko/actions.git",
+  "schema": "actions.runtime-ui-readiness/v1",
+  "smallest_release_relevant_next_gate": {
+    "artifact_scope": "For a source-bound check, run against exact current source. To make a release-artifact claim, run same browser test against exact current frozen and Go-wrapper artifact identities, separately binding source and SHA-256.",
+    "command": ".venv/bin/python -m pytest -q -m integration_test tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+    "current_prerequisites": "This worktree presently has no action_server/.venv and no action_server/frontend/node_modules; managed Chromium revision 1234 exists in shared cache. No setup or tests were run in this readiness lane due queued setup ownership.",
+    "cwd": "/workspace/work/actions-mk3-runtime-ui-gates/action_server",
+    "environment": "After the approved RCC Bootstrap, source /workspace/actions-cloud/activate.sh then override ACTIONS_RUNTIME_TEST_PYTHON to this worktree's action_server/.venv/bin/python. Activation sets PLAYWRIGHT_BROWSERS_PATH=/workspace/actions-cloud/cache/playwright and RCC Node on PATH."
+  },
+  "upstream_disposition": "none",
+  "worktree": {
+    "branch": "mk3/runtime-ui-gate-audit-20261010",
+    "clean": true,
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "path": "/workspace/work/actions-mk3-runtime-ui-gates",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  }
+}

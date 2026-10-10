@@ -1,0 +1,59 @@
+{
+  "children": [
+    {
+      "pid": 20772,
+      "reaped": true,
+      "returncode": 0
+    },
+    {
+      "pid": 20773,
+      "reaped": true,
+      "returncode": 0
+    }
+  ],
+  "cleanup_errors": [],
+  "controller_backend_pid": 98,
+  "wait_observations": {
+    "actions84_433a01ce72c7_0": {
+      "backend_pid": 112,
+      "blocking_pids": [
+        98
+      ]
+    },
+    "actions84_433a01ce72c7_1": {
+      "backend_pid": 115,
+      "blocking_pids": [
+        98,
+        112
+      ]
+    }
+  },
+  "waiting_backend_pids": {
+    "actions84_433a01ce72c7_0": 112,
+    "actions84_433a01ce72c7_1": 115
+  },
+  "worker_application_names": [
+    "actions84_433a01ce72c7_0",
+    "actions84_433a01ce72c7_1"
+  ],
+  "worker_logs": {
+    "0": {
+      "pid": 20772,
+      "reaped": true,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 940,
+      "stdout_sha256": "a7064a06d6b61d1c2a2b7f16e8437be38c9f62936ce1ee23be94168c9bf445f3"
+    },
+    "1": {
+      "pid": 20773,
+      "reaped": true,
+      "returncode": 0,
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 940,
+      "stdout_sha256": "a0224d92550d385371e701a3fc950596ec34cc4cd61f2b6ae551e4d210eab800"
+    }
+  }
+}

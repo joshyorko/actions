@@ -1,0 +1,45 @@
+{
+  "operation": "tools.codex.get_thread_snapshot through Executor",
+  "read_only": true,
+  "notes": "User corrected target to local and stored repository CWD; earlier dakota-target ResolutionError did not establish native state. No worker resumed/created. No filesystem/preserved-history inference.",
+  "snapshots": [
+    {
+      "lane": "work_items",
+      "target": "local",
+      "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+      "thread_id": "01a11d7a-e547-7423-8fc5-fc0148df2123",
+      "source": "native-app-server",
+      "thread_status": "notLoaded",
+      "active_flags": [],
+      "unknown_active_flags": false,
+      "latest_turn": {
+        "id": "01a12124-a8c4-7492-8798-7ce1fe2dc9d0",
+        "status": "completed",
+        "error_code": null
+      },
+      "native_updated_at": 1791557608,
+      "observed_at": "2026-10-10T20:04:43.433Z",
+      "revision": "7c204897bd8139d5e9b4ad44d440c85de3d55ef4e39703cbd7a24ae805c6f5c1",
+      "native_state_authoritative": true
+    },
+    {
+      "lane": "rcc",
+      "target": "local",
+      "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+      "thread_id": "01a11d7b-4029-7953-aba7-f3b487098b32",
+      "source": "native-app-server",
+      "thread_status": "notLoaded",
+      "active_flags": [],
+      "unknown_active_flags": false,
+      "latest_turn": {
+        "id": "01a1213e-6a35-7e53-80d7-803c46dfe2d9",
+        "status": "interrupted",
+        "error_code": null
+      },
+      "native_updated_at": 1791560364,
+      "observed_at": "2026-10-10T20:04:44.622Z",
+      "revision": "2b37c0faa55296cb704264286c20eaa2dde8b537120ce8c9afd7e86caa40471c",
+      "native_state_authoritative": true
+    }
+  ]
+}

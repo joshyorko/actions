@@ -1,0 +1,27 @@
+{
+  "bounded_followup": "Copy existing run_canvas_proof.py to a new evidence directory, change only evidence Path to that new directory and append -s to pytest argv so launch trace survives successful pytest capture. Keep exact checkout/control PATH/locks/package interpreter. From exact checkout invoke: source /workspace/actions-cloud/activate.sh && DEBUG=pw:browser /workspace/actions-cloud/bin/rcc task script -r developer/toolkit.yaml --no-build -- python NEW_DIR/run_canvas_proof.py . Retain bounded stdout/stderr, launch line and exited child evidence; hash launched path, bind lock/revision/source and re-read cleanup. Do not reuse old pytest basetemp, which would replace original receipt/candidate artifacts.",
+  "canonical_file": "docs/skills/repository-operations.md",
+  "exact_doc_delta": "For default headless Playwright runs, chromium.executablePath() names the full browser and may differ from the launched chromium-headless-shell. Bind an exact launched executable claim to a retained DEBUG=pw:browser launch line plus that executable hash/version and lock-matched browser revision; preserve source, worker, scope and cleanup identities separately. Use a fresh evidence/basetemp directory when tracing so earlier proof artifacts remain immutable.",
+  "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+  "identity_artifacts": {
+    "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "/workspace/work/actions-mk3-canvas-proof/action_server/frontend/node_modules/playwright-core/browsers.json": "f306eed529599b1eaf2f8a85db9de2b23e1a3fe36c2b66434b7c9434fb627a99",
+    "/workspace/work/actions-mk3-canvas-proof/action_server/frontend/node_modules/playwright-core/lib/coreBundle.js": "9393fa79e1c67c74edc26b610d65a4f7ed73d345a762465cc88340a33a2454ac",
+    "/workspace/work/actions-mk3-canvas-proof/action_server/frontend/node_modules/playwright/lib/index.js": "cb793062d359fd495f10e0916523f52c76a47fd0b6c4195451dabcd48638e862",
+    "/workspace/work/actions-mk3-canvas-proof/action_server/frontend/playwright.canvas-harness.config.ts": "a3cc7d0430c27756cd6cb42ca49811e47a9b3dc3618f816cfe1ce2504cf30e3c"
+  },
+  "observations": [
+    "Actual npm test:canvas-harness resolves playwright.canvas-harness.config.ts, browserName chromium with no channel or executable override under controlled PATH.",
+    "Installed Playwright1.62.1 defaults headless to true. Its getExecutableName(options) selects chromium-headless-shell for default headless, while chromium.executablePath() reports full chromium. Full Chrome hash0b20b130 therefore must not be attributed to the actual launch.",
+    "Installed browsers.json records both chromium and chromium-headless-shell revision1234/version151.0.7922.34. Retained expected headless-shell binary hash is e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f. This is expected-selection metadata, not an original per-run launch trace.",
+    "Prior functional evidence, candidate-wheel/resource/SQLite checks and PID1 zombie cleanup limits remain unchanged. No new browser test executed by reviewer. A small native --version query returned Google Chrome for Testing151.0.7922.34."
+  ],
+  "supersedes_browser_identity_claim_only": {
+    "path": "/workspace/work/actions-mk3-evidence/pr305-pinned-browser-independent-review.json",
+    "sha256": "432dbfd35f09ea7fb2495abeb032ffeefaf2289e99a96f59af1b3050d68437df"
+  },
+  "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+  "uncertainty": "Original run has no exact executable launch trace; headless-shell is strongly inferred by exact harness configuration, installed selector and named descendant processes. Do not call its hash directly observed in that run.",
+  "upstream_disposition": "none",
+  "verdict": "Functional managed-Playwright local Runtime proof remains GO; actual launched executable hash NOT_PROVEN until browser launch trace"
+}

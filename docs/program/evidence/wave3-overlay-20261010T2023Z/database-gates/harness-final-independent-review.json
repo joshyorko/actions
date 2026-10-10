@@ -1,0 +1,69 @@
+{
+  "subject": "Final independent preexecution review of bounded PG17 migrationAPI gate",
+  "decision": "GO exact files and proposed RCC command for root-authorized bounded execution; actual PostgreSQL acceptance NOT_RUN",
+  "source": {
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+    "worktree": "/workspace/work/actions-mk3-database-gates",
+    "clean": true
+  },
+  "reviewed_files": {
+    "/workspace/work/actions-mk3-evidence/database-gates/pg_migration_two_process.py": "21882c80ec16cad18ba03fc68cd1565951d0c33904c2b655e149cce1152d41b9",
+    "/workspace/work/actions-mk3-evidence/database-gates/run_pg_migration_gate.sh": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6",
+    "/workspace/work/actions-mk3-evidence/database-gates/rcc-python-preflight.json": "21b320deaa8d2fc833565104087cecb35d687652b82711a0caf8d296cf56037d",
+    "/workspace/work/actions-mk3-evidence/database-gates/two-process-harness-proposal.md": "0b8aee7d25e9f23f56dbde03e9853bf147af3b4c25552a7f47a397b9a34af90e",
+    "/workspace/work/actions-mk3-evidence/database-gates/postgres17-manifest-preflight.json": "e12eeba0aa12ec5f1b3db3e7469e012111635c202e11aceab4edc0d74939fabb"
+  },
+  "source_observations": [
+    "True production migrate_db invoked in two separate OS Python workers; actual migration13 pending rather than two current-schema no-ops.",
+    "Controller holds real transaction advisorylock; one current pg_stat_activity snapshot requires exact worker appnames, distinctbackendPIDs and pg_blocking_pids includingcontroller before release.",
+    "Worker result PID/modulebytes/interpreter match expected launch/source; current4e8a andclean tree checked.",
+    "Freshbootstrap baseline columns+indexdef equal finalmigration schema, namedhistory exactly12then13, onecatalogtable/record, emptycatalog, tablecounts/counters preserved.",
+    "Fixed Counter.id and dict-output iteration bugs; workerstdout/stderr limited64KiB via RLIMIT_FSIZE, retained/sanitized/hashes.",
+    "Current DBconnectiontimeout10s, statementtimeout120s, locktimeout90s; sharedworker60sdeadline and outerharness180s killafter10. Childcleanup attempts allactual spawnedchildren and records eachreap/error.",
+    "Docker immutablePG17 digest/platform/version readback,512MiB/1CPU/64pids, loopbackrandomport,0600generatedcredential file; boundedDocker operations including180spull.",
+    "Success/failureEXIT retains/sanitizeslogs and verifiedownerlabel/name container removal+absence; cleanupfailure exit125 instead ofreporting success.",
+    "Manifestreceipt requested/resolved exactaa90e97 OCIlinuxamd64 and17.11-alpine3.24 annotation; no actualpull/servicebeforethisreview."
+  ],
+  "toolchain": {
+    "prepared_python": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "python_version": "3.12.15",
+    "psycopg_version": "3.3.4",
+    "prepared_environment_authority": "Existing L302 RCCBootstrap environment; no new installs/bootstrap",
+    "manifest_config_byte_equivalence_independently_verified": {
+      "action_server/pyproject.toml": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+      "action_server/poetry.lock": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+      "actions/pyproject.toml": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3",
+      "actions/poetry.lock": "b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15",
+      "actions-http-helper/pyproject.toml": "1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d",
+      "actions-http-helper/poetry.lock": "8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13",
+      "devutils/pyproject.toml": "7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1",
+      "devutils/poetry.lock": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e",
+      "developer/toolkit.yaml": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68",
+      "developer/setup.yaml": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a"
+    },
+    "limits": "Installed Runtime distribution metadata1.0.2 is not candidatewheel evidence; exactcandidate source imports own behavior in this source-only gate.",
+    "proposed_command": "cd /workspace/work/actions-mk3-database-gates && source /workspace/actions-cloud/activate.sh && ACTIONS84_PYTHON=/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python /workspace/actions-cloud/bin/rcc task script -r developer/toolkit.yaml --no-build -- bash /workspace/work/actions-mk3-evidence/database-gates/run_pg_migration_gate.sh"
+  },
+  "reviewer_commands": [
+    "Read complete final harness and wrapper/proposal/preflight; independently compare SHA256 against frozen author hashes.",
+    "bash -n run_pg_migration_gate.sh: PASS",
+    "Python standard-library ast.parse exact harness: PASS; no execution.",
+    "git status --short andrev-parse HEAD/tree: clean exact4e8a/1b582.",
+    "Python standard-library compare all listed manifest/config bytes andSHA256 target4e8a againstprepared L302: all equal."
+  ],
+  "remaining_acceptance": [
+    "Actualrun notperformed byreviewer. Require actualtwo workers bothsuccessful and reaped, retainedsimultaneouswaitproof, finalstatus/schema and sanitized test/serverlogs.",
+    "Require actualpulled/runningimage identity and observedownedcontainer absence/credentialdeletion.",
+    "No fullCLIstartup, freshtransactionregression, wheel/frozen/TLS/mixed-version/recovery/#83/#129/whole#84 acceptance inferred.",
+    "Separate source-onlyfailedSAVEPOINT counter/error maskingedge sentroot; no actualdriver repro or sourcechange inthislane."
+  ],
+  "doc_proposal": {
+    "path": "docs/skills/repository-operations.md",
+    "placement": "Action Server shared database acceptance guidance",
+    "delta": "For a bounded PostgreSQL migration API gate, force a real pending migration in a fresh task-owned fixture, then observe both independent workers waiting simultaneously on the production transaction advisory lock before releasing it. Record controller/backend/OS identities and compare the final columns, unique indexes, named migration rows and untouched fixture state with the fresh production schema. Keep source imports and prepared-toolchain manifest equality explicit when reusing an interpreter. Bound service and child operations, sanitize logs on failure as well as success, and require verified named-container absence and child reaping; a cleanup failure must remain a failing receipt. This gate proves the tested migrate_db boundary, not complete CLI startup or wheel/frozen/TLS/mixed-version recovery acceptance.",
+    "evidence": "Reviewed exact source4e8a and frozenharness21882c80/wrapper6d26660e, source/preparedmetadata equality and registrymanifest readback.",
+    "uncertainty": "Actualservice/gate/cleanup receipts pending; no plannedbehavior documented as executed."
+  },
+  "upstream_disposition": "none"
+}

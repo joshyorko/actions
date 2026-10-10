@@ -1,0 +1,49 @@
+{
+  "artifact_hashes": {
+    "harness-child-cleanup.json": {
+      "bytes": 1358,
+      "sha256": "1acc0000a7ea2a5d84ecef0668fec0c2b6f88fed7dab3e3c2e75c8a575ca32d9"
+    },
+    "image-pull.log": {
+      "bytes": 422,
+      "sha256": "48915fb67ae5671bb60f23889d5e449bc6d45bd89c97fbf50cb4eb87f7606d65"
+    },
+    "interpreter-version.txt": {
+      "bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    "migration-worker-receipt.json": {
+      "bytes": 2177,
+      "sha256": "a31a2ca57b02e8357b2c10fee03db7949b82fdee3e6650d139be44fabad0f514"
+    },
+    "postgres.log": {
+      "bytes": 3310,
+      "sha256": "8dec07d039ff8bff64d26aaeb76c455f640c81eabf1d1be9d1d18ca061d868d3"
+    },
+    "test.log": {
+      "bytes": 4092,
+      "sha256": "94c7f929b0eed90a78162ca8eef9cbf428b92c3e7ca270b90a2d09e55d4337e5"
+    }
+  },
+  "canonical_file": "docs/skills/repository-operations.md",
+  "commands": [
+    "Read/hash execution receipt and six artifacts; read frozen harness/assertions and worker cleanup",
+    "Docker exact-ID absence readback; ps child PID absence; git status exact source"
+  ],
+  "exact_doc_delta": "A PostgreSQL migration-concurrency receipt must bind two distinct OS child PIDs to two backend PIDs observed simultaneously waiting on the production advisory migration lock before release. Record both child outcomes, exact migration history, bootstrap-equivalent columns/indexes, preserved existing rows/counters, and owned-service/credential/child cleanup. A v12-to-v13 migrate_db receipt proves that migration API boundary only; keep CLI startup, mixed versions, failure recovery, packaged workers, TLS and whole-issue acceptance separate.",
+  "harness_sha256": "cade9905e8f9af54dc9efd8ce815c7e01151dfcfccd50cfd6a58525adb31fb7e",
+  "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+  "limits": "Actual gate ran by Luna; reviewer independently read retained evidence and live cleanup state. First two scratch failures remain immutable and do not count as passing migration proof. No full #84/CLI/failure-recovery acceptance.",
+  "observations": [
+    "All six retained artifact hashes and byte counts match. Test status 0 on PostgreSQL 17.11 linux/amd64, immutable aa90e97 image, source 4e8a/tree1b582, prepared RCC-selected Python3.12.15.",
+    "Distinct OS children 20772/20773 map to backend112/115; one simultaneous observation records both blocked by controller98, second also by first112, before release. Both result PIDs match; both exit0/UP_TO_DATE and are reaped.",
+    "Frozen assertions establish exact named migration history12/13, single migration13 record/table, empty catalog, full columns/index parity with fresh production bootstrap and unchanged counters/existing table counts.",
+    "Owned container95abd086 was independently absent; credential/raw temporary files absent; child cleanup has no errors. Server logs have no ERROR/redundant-BEGIN, but include Alpine locale warning and transient temporary-init-server shutdown FATAL; no zero-warning/FATAL claim."
+  ],
+  "receipt_sha256": "341bda35a4a629c966371866c5fc60416fcebaa9c42fdbfe78e2429482f16c88",
+  "reviewer": "independent Sol source/evidence review; no new test/browser/service execution",
+  "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+  "upstream_disposition": "none",
+  "verdict": "GO for exact-source PostgreSQL v12-to-v13 two-independent-process migration API gate only",
+  "wrapper_sha256": "6d26660e3bbfe57fe57f6d5b021de5bae9d7076f9f5d2f881c2861da450121c6"
+}

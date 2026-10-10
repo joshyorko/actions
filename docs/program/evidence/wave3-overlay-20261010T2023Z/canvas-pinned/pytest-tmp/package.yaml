@@ -1,0 +1,12 @@
+spec-version: v2
+name: Canvas Runtime bridge acceptance
+description: Isolated fixture using the exact candidate Core wheel.
+version: 0.0.1
+dependencies:
+  conda-forge:
+    - python=3.12
+    - uv=0.9.26
+  pypi:
+    - actions-core=1.0.2
+post-install:
+  - python -m pip install --no-deps --force-reinstall /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl

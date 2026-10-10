@@ -1,0 +1,171 @@
+{
+  "browser": {
+    "classification": "system PATH executable (test selects shutil.which(\"chromium\") when present and passes it as CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH); not a Playwright-managed browser download",
+    "executable": "/usr/bin/chromium",
+    "executable_sha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+    "provenance_note": "Executable path/version/hash were measured immediately after the successful run in the same RCC-hosted system environment; the test does not emit these fields into its own result log.",
+    "test": "Playwright canvas-template-runtime spec, launched by test_canvas_template_runs_through_runtime_and_real_browser",
+    "version": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)"
+  },
+  "created_at_utc": "2026-10-10T20:07:35Z",
+  "decision": "PASS for scoped installed worker Runtime and browser gate; full issue acceptance remains limited",
+  "execution": {
+    "acceptance_task": {
+      "environment": {
+        "ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE": "1",
+        "ACTIONS_HOME": "/workspace/work/actions-mk3-pr282/work/actions-home",
+        "UV_CACHE_DIR": "/workspace/work/actions-mk3-pr282/work/uv-cache (outside synced template/project root)",
+        "browser": "system Chromium selected through PATH as described above"
+      },
+      "inner_pytest": "poetry run pytest -q -m integration_test tests/action_server_tests/mcp/test_canvas_query_template.py -k test_canvas_template_runs_through_runtime_and_real_browser",
+      "log": "logs/canvas-runtime-browser-rerun.log",
+      "log_sha256": "45d0497315927811f66d4f2a00744acefdd61c6ef6a6ddafd73bc4c441546c53",
+      "outer_command": "source /workspace/actions-cloud/activate.sh && rcc run -r work/pr282-checks.yaml --dev -t CanvasRuntimeBrowser",
+      "result": "PASS: 1 passed, 7 deselected in 14.01 seconds"
+    },
+    "bundle_test": {
+      "command": "poetry run pytest -q tests/action_server_tests/test_template_bundle.py",
+      "log": "logs/template-bundles.log",
+      "log_sha256": "ca6c617c7f2030bc7d57848fa2db97c3800d4633606e4ff550f7d5b3e3a8c83d",
+      "result": "PASS: 15 passed"
+    },
+    "canonical_frontend_setup": {
+      "command": "source /workspace/actions-cloud/activate.sh && rcc run -r developer/toolkit.yaml --dev -t FrontendTest",
+      "log": "logs/rcc-frontend-test.log",
+      "log_sha256": "80fc97cb9824e0f6ca006886456be32ea35a29bfa8944895806c3b2aafd02d53",
+      "result": "PASS: 31 test files, 280 frontend tests"
+    },
+    "floor_test": {
+      "command": "poetry run pytest -q tests/contract_tests/test_active_contracts.py -k template_manifests_pin_supported_worker_core",
+      "log": "logs/template-floor.log",
+      "log_sha256": "7848f74430777f1f85d0ebb8fa5d7674820463bb62060bb904c8d37c7743fe65",
+      "result": "PASS: 1 passed, 31 deselected"
+    },
+    "gateway": "/workspace/actions-cloud/activate.sh; RCC 18.19.3; Python 3.12.15",
+    "initial_attempt": {
+      "log": "logs/canvas-runtime-browser.log",
+      "log_sha256": "e13c8338512dd84feb3d9bb76b0a60e5ba8590e302a430681aff083afe4c51f5",
+      "result": "FAIL: 1 failed, 7 deselected in 36.78 seconds after worker version/hash probe and Runtime MCP checks passed; test stopped before browser launch because frontend Playwright CLI was absent (node_modules/@playwright/test/cli.js missing)."
+    },
+    "rcc_task_config": "runner/pr282-checks.yaml",
+    "rcc_task_config_sha256": "5735e9d0a7ab07cca6fc416e56c2eaddbe0efb5616c0621009c6ac9060ceb4e3",
+    "test_helper": "runner/run_package_pytest.py",
+    "test_helper_sha256": "280ce2e053592ab508912ae6dd3d343f06f46d62ede139b5f0fe5bff64efbd3b"
+  },
+  "limitations": [
+    "This is the scoped installed Core worker Runtime plus local browser integration gate only.",
+    "No complete-wheel verification was performed by the Canvas probe itself; evidence binds three module files to the independently verified published wheel receipt.",
+    "No authentication behavior or authorized artifact retrieval was proven; artifact:null remains a partial result.",
+    "Packaged/frozen worker execution was not tested.",
+    "ChatGPT rendering/execution was not tested.",
+    "No full issue acceptance or production output authorization claim is made."
+  ],
+  "logs_sha256": {
+    "canvas-runtime-browser-rerun.log": "45d0497315927811f66d4f2a00744acefdd61c6ef6a6ddafd73bc4c441546c53",
+    "canvas-runtime-browser.log": "e13c8338512dd84feb3d9bb76b0a60e5ba8590e302a430681aff083afe4c51f5",
+    "rcc-frontend-test.log": "80fc97cb9824e0f6ca006886456be32ea35a29bfa8944895806c3b2aafd02d53",
+    "template-bundles.log": "ca6c617c7f2030bc7d57848fa2db97c3800d4633606e4ff550f7d5b3e3a8c83d",
+    "template-floor.log": "7848f74430777f1f85d0ebb8fa5d7674820463bb62060bb904c8d37c7743fe65"
+  },
+  "published_core": {
+    "distribution": "actions-core",
+    "publication_readback_receipt": "/workspace/work/actions-mk3-evidence/core-publication/publication-readback.json",
+    "published_member_sha256": {
+      "actions": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+      "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+      "actions.mcp._metadata": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+    },
+    "source_commit": "a70993fafc99a9f94041485542d5a720797ca394",
+    "source_tag": "actions-core-1.0.3",
+    "source_tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+    "version": "1.0.3",
+    "wheel_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+    "wheel_url": "https://files.pythonhosted.org/packages/25/b9/86adaaf08f60deb47c749f8dc2b59a0c672b9278daf917304bffd613ba90/actions_core-1.0.3-py3-none-any.whl",
+    "worker_probe": {
+      "environment": "Managed Action Server worker environment created from the Canvas project; RCC gateway environment uses Python 3.12.15. No exact worker sys.prefix was persisted.",
+      "observed_distribution_version": "1.0.3",
+      "observed_module_sha256": {
+        "actions": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+        "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "actions.mcp._metadata": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+      },
+      "origin_checks": "Probe resolves imported module files, requires each to be listed in actions-core distribution RECORD and confined beneath worker sys.prefix; exact per-module path/sys.prefix values are asserted in-process but are not serialized by this test.",
+      "probe": "test-generated published_core_probe.py invoked through the running Action Server MCP tool published_core_identity",
+      "provenance_boundary": "Hashes bind these three observed module files to members of the independently verified wheel. They do not authenticate every installed wheel byte, the whole dependency graph, or prove a cold registry/cache acquisition."
+    }
+  },
+  "receipt_schema": "codex.pr282.acceptance.v1",
+  "repository": {
+    "base_head": "691b9c8687d721b4769ab7719ced68bff18b002f",
+    "branch": "mk3/pr282-template-20261010",
+    "commit_time": "2026-10-10T19:52:12Z",
+    "head": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+    "name": "joshyorko/actions",
+    "origin_fetch": "https://github.com/joshyorko/actions.git",
+    "subject": "test: bind Canvas worker to published Core wheel",
+    "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+    "worktree_observation": "Only untracked work/ scratch directory at receipt creation; no source edits beyond committed head."
+  },
+  "runtime_shutdown": {
+    "assessment": "No live Chromium/Chrome process was present in the post-run process inventory. PIDs 16325 and 16326 remained zombie entries with PPID 1; therefore this receipt does not claim complete process reaping. Other zombie entries from the shared environment are listed in observed_processes_at_receipt and are not attributed to this test unless explicitly named by its RCC log.",
+    "fixture_cleanup": "The action_server_process pytest fixture calls ActionServerProcess.stop() during teardown; the successful test and completed RCC task are recorded above.",
+    "observed_processes_at_receipt": [
+      {
+        "command": "chrome_crashpad",
+        "pid": 16320,
+        "ppid": 1,
+        "state": "Z"
+      },
+      {
+        "command": "chrome_crashpad",
+        "pid": 16322,
+        "ppid": 1,
+        "state": "Z"
+      },
+      {
+        "command": "chromium",
+        "pid": 16325,
+        "ppid": 1,
+        "state": "Z"
+      },
+      {
+        "command": "chromium",
+        "pid": 16326,
+        "ppid": 1,
+        "state": "Z"
+      },
+      {
+        "command": "chrome-headless",
+        "pid": 17288,
+        "ppid": 1,
+        "state": "Z"
+      },
+      {
+        "command": "chrome-headless",
+        "pid": 17289,
+        "ppid": 1,
+        "state": "Z"
+      }
+    ],
+    "rcc_postrun_warning": "RCC reported browser descendant PIDs 16325 and 16326 as migrated processes."
+  },
+  "subject": "PR282 Canvas template floor and installed Runtime/browser acceptance",
+  "template_floor_and_bundle": {
+    "aggregate_bundle_sha256": "c051c3e1db4f43393cb260c3a4066645c6793217f797a42bcab774887db1f03e",
+    "canvas_template_zip_sha256": "7500becb402d09c8adcf938c0cc6c6b69d817007c79951b97fbeee75162b943a",
+    "deterministic_bundle_review_receipt": "/workspace/work/actions-mk3-evidence/pr282-final-source-review.json",
+    "expected_core_floors": {
+      "advanced": "1.0.2",
+      "basic": "1.0.2",
+      "canvas-query": "1.0.3",
+      "mcp-v2-showcase": "1.0.2",
+      "minimal": "1.0.2",
+      "workflow-producer-consumer": "1.0.2"
+    },
+    "focused_results": {
+      "floor_contract": "1 passed, 31 deselected",
+      "template_bundle": "15 passed"
+    }
+  },
+  "upstream_disposition": "none; no upstream defect investigated or reported"
+}

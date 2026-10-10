@@ -1,0 +1,57 @@
+{
+  "artifacts": {
+    "harness-child-cleanup.json": {
+      "bytes": 1049,
+      "sha256": "46f6a07ab33d9e3d0fefaf3decda9384e1230456125c270cf0edac9d7dd8c167"
+    },
+    "image-pull.log": {
+      "bytes": 422,
+      "sha256": "48915fb67ae5671bb60f23889d5e449bc6d45bd89c97fbf50cb4eb87f7606d65"
+    },
+    "interpreter-version.txt": {
+      "bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    "migration-worker-receipt.json": {
+      "bytes": 1946,
+      "sha256": "ca84d5f780ceb1e97a4ff542fd3b98874e1b79a4834ca659b91d1db483e204fc"
+    },
+    "postgres.log": {
+      "bytes": 3232,
+      "sha256": "c89c17e552a948704ec6f88c722c3704ceee6639f11bd20bd970976e5d4baa5f"
+    },
+    "test.log": {
+      "bytes": 3640,
+      "sha256": "7efc68c80409790e455decdcf444196f4fbdcf113a3eed51c50b24cf606d3aad"
+    }
+  },
+  "credential_file_cleanup": "REMOVED_MODE_0600",
+  "image": {
+    "container_image_id": "sha256:79bd7c99e923138f136f8009d6bffa66e21e9d4fda5c0c561b00fc9c90cfe537",
+    "platform": "linux/amd64",
+    "postgres_version": "postgres (PostgreSQL) 17.11",
+    "reference": "docker.io/library/postgres@sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3"
+  },
+  "interpreter": {
+    "path": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "version": "3.12.15 (main, Oct  6 2026, 23:50:18) [GCC 15.3.0]"
+  },
+  "owned_container_cleanup": "REMOVED_AND_VERIFIED_ABSENT",
+  "server_log_status": "CAPTURED_SANITIZED",
+  "service": {
+    "container_id": "222eda294f180b7aae788c080b2c2bd659694ffaced7508a4f7522108061ed63",
+    "container_name": "actions84-migration-20261010T201313Z-19440",
+    "cpu_limit": 1,
+    "loopback_port": "32769",
+    "memory_limit": "512m",
+    "pids_limit": 64
+  },
+  "source": {
+    "dirty": false,
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "test_log_status": "SANITIZED",
+  "test_status": "1"
+}
