@@ -33,6 +33,7 @@ from actions.server.run_outputs.types import (
     ExecutionSnapshot,
     OutputRef,
     SealReceipt,
+    StagedSeal,
     canonical_uuid,
     output_id_from_handle,
 )
@@ -58,10 +59,13 @@ class OutputReader(Protocol):
 
 
 class OutputProvider(Protocol):
-    def stage(self, chunks: Iterable[bytes]) -> tuple[str, str, int]:
+    def stage(self, chunks: Iterable[bytes]) -> StagedSeal:
         ...
 
     def open(self, object_ref: str, digest: str, size: int) -> Any:
+        ...
+
+    def discard(self, staged: StagedSeal) -> None:
         ...
 
 
@@ -614,32 +618,95 @@ class RunOutputService:
                 str(_now(self.db) + retention_seconds * 1000),
             )
             _insert(self.db, output)
+        staged: StagedSeal | None = None
+        seal: SealReceipt | None = None
         try:
-            object_ref, digest, size = provider.stage(chunks)
-            seal = SealReceipt(object_ref=object_ref, digest=digest, size=size)
+            staged = provider.stage(chunks)
+            seal = SealReceipt.model_validate(staged.receipt)
             with _transaction(self.db):
                 self._fence(fence)
-                _update(
-                    self.db,
-                    RunOutput,
-                    output_id,
-                    seal.model_dump(),
-                )
-        except BaseException:
+                _update(self.db, RunOutput, output_id, seal.model_dump())
+        except BaseException as failure:
             try:
-                with _transaction(self.db):
-                    self.db.execute(
-                        "UPDATE run_output SET state='aborted' WHERE id=? AND state='provisional'",
-                        [output_id],
-                    )
-            except Exception:
-                logging.getLogger(__name__).warning(
-                    "Unable to mark provisional output aborted"
+                discardable = self._abort_stage(output, seal)
+            except BaseException:
+                failure.add_note(
+                    "Output abort outcome is uncertain; no provider discard was attempted."
                 )
+                logging.getLogger(__name__).warning(
+                    "Output abort outcome uncertain: %s", output_id
+                )
+            else:
+                if staged is not None and seal is not None and discardable:
+                    try:
+                        provider.discard(staged)
+                    except BaseException:
+                        failure.add_note(
+                            "Aborted output retains its measured seal for reconciliation; discard failed."
+                        )
+                        logging.getLogger(__name__).warning(
+                            "Aborted output discard failed: %s", output_id
+                        )
+                elif staged is not None:
+                    failure.add_note(
+                        "Provider discard skipped: output cleanup was not proven safe."
+                    )
             raise
         return OutputRef(
             workspace_id=pin.workspace_id, run_id=fence.run_id, output_id=output_id
         )
+
+    def _abort_stage(self, expected: RunOutput, seal: SealReceipt | None) -> bool:
+        """Commit an abort receipt; return discard eligibility only after commit."""
+        with _transaction(self.db):
+            _lock_run(self.db, expected.run_id)
+            row = _one(self.db, RunOutput, expected.id)
+            if (
+                row.run_id,
+                row.workspace_id,
+                row.run_attempt_id,
+                row.epoch,
+                row.provider_key,
+            ) != (
+                expected.run_id,
+                expected.workspace_id,
+                expected.run_attempt_id,
+                expected.epoch,
+                expected.provider_key,
+            ):
+                return False
+            if row.state not in ("provisional", "aborted"):
+                return False
+            run = _one(self.db, Run, expected.run_id)
+            if run.status == RunStatus.PASSED:
+                result = json.loads(run.result or "null")
+                if not isinstance(result, dict) or not isinstance(
+                    result.get("outputs"), list
+                ):
+                    return False
+                ref = OutputRef(
+                    workspace_id=row.workspace_id, run_id=row.run_id, output_id=row.id
+                ).model_dump()
+                if ref in result["outputs"]:
+                    return False
+            changes: dict[str, Any] = {"state": "aborted"}
+            discardable = False
+            if seal is not None:
+                if (row.object_ref, row.digest, row.size) not in (
+                    ("", "", 0),
+                    (seal.object_ref, seal.digest, seal.size),
+                ):
+                    return False
+                changes.update(seal.model_dump())
+                with self.db.cursor() as cursor:
+                    self.db.execute_query(
+                        cursor,
+                        "SELECT COUNT(*) FROM run_output WHERE provider_key=? AND object_ref=? AND id<>?",
+                        [row.provider_key, seal.object_ref, row.id],
+                    )
+                    discardable = cursor.fetchone()[0] == 0
+            _update(self.db, RunOutput, row.id, changes)
+        return discardable
 
     def publish(
         self, actor: Actor, fence: AttemptFence, outputs: list[OutputRef], result: Any

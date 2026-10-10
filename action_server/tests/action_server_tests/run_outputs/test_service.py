@@ -645,3 +645,269 @@ def test_registration_and_numbered_admission_take_installation_lock_before_works
     observed.clear()
     service.admit(actor, snap, {}, "key")
     assert observed[:2] == ["counter", "workspace"]
+
+
+def test_cancel_during_actual_stage_retains_abort_receipt_and_discards_owned_seal(
+    store,
+):
+    from actions.server.run_outputs.models import RunOutput
+
+    db, control, service, snap, actor, provider, root = store
+    run = service.admit(actor, snap, {}, "key")
+    fence = service.claim(run.id, uid(), lease_seconds=30)
+
+    def chunks():
+        yield b"cancelled body"
+        assert service.cancel(actor, run.id)
+
+    with pytest.raises(FenceRejected):
+        service.stage(
+            fence, chunks(), name="body", media_type="text/plain", retention_seconds=30
+        )
+    output = db.first(RunOutput)
+    assert output.state == "aborted"
+    assert output.object_ref and output.digest and output.size == len(b"cancelled body")
+    assert not list(root.iterdir())
+    assert db.first(Run, "SELECT * FROM run WHERE id=?", [run.id]).result is None
+
+
+def test_seal_transaction_failure_retains_abort_receipt_before_discard(
+    store, monkeypatch
+):
+    from actions.server.run_outputs.models import RunOutput
+
+    db, control, service, snap, actor, provider, root = store
+    run = service.admit(actor, snap, {}, "key")
+    fence = service.claim(run.id, uid(), lease_seconds=30)
+    original = db.update_by_id
+
+    def fail_seal(cls, key, changes):
+        original(cls, key, changes)
+        if cls is RunOutput and "object_ref" in changes and "state" not in changes:
+            raise RuntimeError("seal transaction failed")
+
+    monkeypatch.setattr(db, "update_by_id", fail_seal)
+    with pytest.raises(RuntimeError, match="seal transaction failed"):
+        service.stage(
+            fence, [b"body"], name="body", media_type="text/plain", retention_seconds=30
+        )
+    output = db.first(RunOutput)
+    assert (
+        output.state == "aborted"
+        and output.object_ref
+        and output.digest
+        and output.size == 4
+    )
+    assert not list(root.iterdir())
+    assert db.first(Run, "SELECT * FROM run WHERE id=?", [run.id]).result is None
+
+
+def test_discard_failure_preserves_original_fence_error_and_durable_receipt(
+    store, monkeypatch, caplog
+):
+    from actions.server.run_outputs.models import RunOutput
+
+    db, control, service, snap, actor, provider, root = store
+    run = service.admit(actor, snap, {}, "key")
+    fence = service.claim(run.id, uid(), lease_seconds=30)
+
+    def fail(staged):
+        raise OSError("discard unavailable")
+
+    monkeypatch.setattr(provider, "discard", fail)
+
+    def chunks():
+        yield b"body"
+        service.cancel(actor, run.id)
+
+    with pytest.raises(FenceRejected) as failure:
+        service.stage(
+            fence, chunks(), name="body", media_type="text/plain", retention_seconds=30
+        )
+    output = db.first(RunOutput)
+    assert (
+        output.state == "aborted"
+        and output.object_ref
+        and output.digest
+        and output.size == 4
+    )
+    assert (root / output.object_ref).exists()
+    assert "discard failed" in " ".join(failure.value.__notes__)
+    assert "discard failed" in caplog.text
+    from actions.server.run_outputs.types import OutputRef
+
+    ref = OutputRef(
+        workspace_id=output.workspace_id, run_id=run.id, output_id=output.id
+    )
+    with pytest.raises(AccessDenied):
+        with service.resolve(actor, snap.workspace_id, ref.handle):
+            pytest.fail("aborted receipt became a published output")
+
+
+def test_ambiguous_seal_and_abort_commits_do_not_discard_even_with_durable_abort(
+    store, monkeypatch
+):
+    import sqlite3
+
+    from actions.server._database import Database
+    from actions.server._models import get_all_model_classes
+    from actions.server.run_outputs.models import RunOutput
+
+    db, control, service, snap, actor, provider, root = store
+    run = service.admit(actor, snap, {}, "key")
+    fence = service.claim(run.id, uid(), lease_seconds=30)
+
+    class CommitFailure(RuntimeError):
+        pass
+
+    calls = []
+
+    class AmbiguousConnection(sqlite3.Connection):
+        def commit(self):
+            super().commit()
+            calls.append(len(calls) + 1)
+            if len(calls) in (2, 3):
+                raise CommitFailure(
+                    "seal commit ambiguous"
+                    if len(calls) == 2
+                    else "abort commit ambiguous"
+                )
+
+    original = sqlite3.connect
+    monkeypatch.setattr(
+        sqlite3,
+        "connect",
+        lambda *args, **kwargs: original(*args, **kwargs, factory=AmbiguousConnection),
+    )
+    monkeypatch.setattr(
+        provider,
+        "discard",
+        lambda staged: pytest.fail("uncertain commit caused discard"),
+    )
+    failed = Database(db.db_path)
+    with failed.connect():
+        failed.initialize(get_all_model_classes())
+        with pytest.raises(CommitFailure, match="seal commit ambiguous") as failure:
+            RunOutputService(failed, {snap.provider_key: provider}).stage(
+                fence,
+                [b"body"],
+                name="body",
+                media_type="text/plain",
+                retention_seconds=30,
+            )
+    output = db.first(RunOutput)
+    assert calls == [1, 2, 3]
+    assert (
+        output.state == "aborted"
+        and output.object_ref
+        and output.digest
+        and output.size == 4
+    )
+    assert (root / output.object_ref).exists()
+    assert "uncertain" in " ".join(failure.value.__notes__)
+
+
+def test_successfully_published_output_survives_stage_commit_exception_and_replay(
+    store, monkeypatch
+):
+    import sqlite3
+
+    from actions.server._database import Database
+    from actions.server._models import get_all_model_classes
+    from actions.server.run_outputs.models import RunOutput
+    from actions.server.run_outputs.types import OutputRef
+
+    db, control, service, snap, actor, provider, root = store
+    run = service.admit(actor, snap, {}, "key")
+    fence = service.claim(run.id, uid(), lease_seconds=30)
+    published = []
+    calls = []
+
+    class StageFailure(RuntimeError):
+        pass
+
+    class PublishedConnection(sqlite3.Connection):
+        def commit(self):
+            super().commit()
+            calls.append(len(calls) + 1)
+            if len(calls) == 2:
+                row = db.first(RunOutput)
+                ref = OutputRef(
+                    workspace_id=row.workspace_id, run_id=row.run_id, output_id=row.id
+                )
+                service.publish(actor, fence, [ref], {"winner": "durable"})
+                published.append(ref)
+                raise StageFailure("stage commit observer failed")
+
+    original = sqlite3.connect
+    monkeypatch.setattr(
+        sqlite3,
+        "connect",
+        lambda *args, **kwargs: original(*args, **kwargs, factory=PublishedConnection),
+    )
+    monkeypatch.setattr(
+        provider,
+        "discard",
+        lambda staged: pytest.fail("published output was discarded"),
+    )
+    failed = Database(db.db_path)
+    with failed.connect():
+        failed.initialize(get_all_model_classes())
+        with pytest.raises(StageFailure, match="observer failed"):
+            RunOutputService(failed, {snap.provider_key: provider}).stage(
+                fence,
+                [b"body"],
+                name="body",
+                media_type="text/plain",
+                retention_seconds=30,
+            )
+    output = db.first(RunOutput)
+    assert output.state == "final" and (root / output.object_ref).exists()
+    assert (
+        db.first(Run, "SELECT * FROM run WHERE id=?", [run.id]).status
+        == RunStatus.PASSED
+    )
+    service.publish(actor, fence, published, {"winner": "durable"})
+    with pytest.raises(FenceRejected):
+        service.publish(actor, fence, published, {"winner": "changed"})
+    with service.resolve(actor, snap.workspace_id, published[0].handle) as resolved:
+        assert resolved.read() == b"body"
+
+
+def test_abort_receipt_does_not_discard_object_referenced_by_another_record(
+    store, monkeypatch
+):
+    from dataclasses import replace
+
+    from actions.server.run_outputs.models import RunOutput
+
+    db, control, service, snap, actor, provider, root = store
+    run = service.admit(actor, snap, {}, "key")
+    fence = service.claim(run.id, uid(), lease_seconds=30)
+    original = provider.stage
+    original_ids = []
+
+    def referenced(chunks):
+        staged = original(chunks)
+        row = db.first(RunOutput)
+        original_ids.append(row.id)
+        duplicate = replace(row, id=uid(), **staged.receipt.model_dump())
+        with db.transaction():
+            db.insert(duplicate)
+        service.cancel(actor, run.id)
+        return staged
+
+    monkeypatch.setattr(provider, "stage", referenced)
+    monkeypatch.setattr(
+        provider,
+        "discard",
+        lambda staged: pytest.fail("referenced object was discarded"),
+    )
+    with pytest.raises(FenceRejected) as failure:
+        service.stage(
+            fence, [b"body"], name="body", media_type="text/plain", retention_seconds=30
+        )
+    row = db.first(RunOutput, "SELECT * FROM run_output WHERE id=?", original_ids)
+    assert row.state == "aborted" and row.object_ref and row.digest and row.size == 4
+    assert (root / row.object_ref).exists()
+    assert "not proven safe" in " ".join(failure.value.__notes__)

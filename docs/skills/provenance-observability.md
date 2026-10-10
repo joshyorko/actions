@@ -161,7 +161,15 @@ Publication uses DB time and the current owner/Attempt/epoch/live-lease/cancel
 predicate, then commits terminal Run status/result and final output attachments
 in one transaction. Exact terminal replay is reauthorized; changed input or
 result rejects. Provider sealing precedes this commit and may leave a sealed,
-non-authoritative orphan after rollback. Expired-owner recovery requires an
+non-authoritative orphan after rollback. If sealing completes but the subsequent
+fence/metadata transaction fails, the service first commits the measured
+ref/digest/size in an ABORTED receipt, then attempts provider discard only if
+that output is unattached and no other record references the object. Cleanup
+failure retains this receipt and preserves the original error. An ambiguous
+abort commit never permits deletion. Published output/replay remains untouched.
+A crash before the abort receipt, malformed provider response or unavailable DB
+can still leave an orphan without a durable cleanup reference; no GC/retry
+service is supplied here. Expired-owner recovery requires an
 explicit trusted operator receipt; the service does not retry external effects
 automatically or prove those effects were undone.
 

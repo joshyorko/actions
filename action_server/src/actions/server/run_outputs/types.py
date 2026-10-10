@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import base64
 import re
+from dataclasses import dataclass
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -126,3 +127,11 @@ class SealReceipt(_Value):
     digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
     size: int = Field(ge=0, le=64 * 1024 * 1024)
     _object = field_validator("object_ref")(canonical_uuid)
+
+
+@dataclass(frozen=True)
+class StagedSeal:
+    """Configured-provider seal plus private ownership proof, never serialized."""
+
+    receipt: SealReceipt
+    ownership: object

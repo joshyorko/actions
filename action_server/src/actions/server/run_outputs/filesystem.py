@@ -12,10 +12,11 @@ import stat
 import sys
 from collections.abc import Iterable, Iterator
 from contextlib import contextmanager
+from dataclasses import dataclass
 from typing import Callable, cast
 from uuid import uuid4
 
-from actions.server.run_outputs.types import canonical_uuid
+from actions.server.run_outputs.types import SealReceipt, StagedSeal, canonical_uuid
 
 MAX_OUTPUT_BYTES = 64 * 1024 * 1024
 CHUNK_BYTES = 64 * 1024
@@ -84,6 +85,12 @@ class _Reader:
         return b"".join(parts)
 
 
+@dataclass(frozen=True)
+class _FileOwnership:
+    issuer: object
+    identity: tuple
+
+
 class FilesystemOutputProvider:
     _nofollow: int
     _directory: int
@@ -94,10 +101,12 @@ class FilesystemOutputProvider:
     _proc: int
     _closed: bool
     _chmod: Callable[[int, int], None]
+    _issuer: object
 
     def __init__(self, verified_root_fd: int):
         if sys.platform != "linux":
             raise RuntimeError("filesystem output provider is Linux-only")
+        self._issuer = object()
         self._chmod = _fchmod()
         self._nofollow = _flag("O_NOFOLLOW")
         self._directory = _flag("O_DIRECTORY")
@@ -130,7 +139,7 @@ class FilesystemOutputProvider:
             os.close(self._root)
             self._closed = True
 
-    def stage(self, chunks: Iterable[bytes]) -> tuple[str, str, int]:
+    def stage(self, chunks: Iterable[bytes]) -> StagedSeal:
         if self._closed:
             raise ValueError("closed output provider")
         object_ref = str(uuid4())
@@ -184,7 +193,14 @@ class FilesystemOutputProvider:
                 raise ValueError("output object name changed during stage")
             os.fsync(self._root)
             complete = True
-            return object_ref, "sha256:" + digest.hexdigest(), size
+            return StagedSeal(
+                SealReceipt(
+                    object_ref=object_ref,
+                    digest="sha256:" + digest.hexdigest(),
+                    size=size,
+                ),
+                _FileOwnership(self._issuer, sealed_identity),
+            )
         finally:
             os.close(fd)
             if not complete:
@@ -246,3 +262,36 @@ class FilesystemOutputProvider:
             if reader_fd is not None:
                 os.close(reader_fd)
             os.close(pinned)
+
+    def discard(self, staged: StagedSeal) -> None:
+        """Only a measured object issued by this provider may be discarded.
+
+        The root has an exclusive trusted writer. POSIX cannot condition unlink
+        atomically on inode identity against a hostile writer after this check.
+        """
+        owner = staged.ownership
+        if not isinstance(owner, _FileOwnership) or owner.issuer is not self._issuer:
+            raise ValueError("seal does not belong to this output provider")
+        seal = SealReceipt.model_validate(staged.receipt)
+        try:
+            with self.open(seal.object_ref, seal.digest, seal.size) as reader:
+                if (
+                    _identity(os.fstat(reader.fd)) != owner.identity
+                    or _identity(
+                        os.stat(
+                            seal.object_ref, dir_fd=self._root, follow_symlinks=False
+                        )
+                    )
+                    != owner.identity
+                ):
+                    raise ValueError("owned output was replaced before discard")
+                os.unlink(seal.object_ref, dir_fd=self._root)
+                os.fsync(self._root)
+        except FileNotFoundError:
+            # Only absence of this owned name is idempotent. A failed procfd
+            # reopen while the object exists is still a cleanup failure.
+            try:
+                os.stat(seal.object_ref, dir_fd=self._root, follow_symlinks=False)
+            except FileNotFoundError:
+                return
+            raise

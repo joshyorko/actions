@@ -27,7 +27,8 @@ def provider(tmp_path):
 
 def test_actual_bytes_seal_read_and_descriptor_ownership(provider):
     storage, root, caller = provider
-    obj, digest, size = storage.stage([b"hello", b" world"])
+    seal = storage.stage([b"hello", b" world"]).receipt
+    obj, digest, size = seal.object_ref, seal.digest, seal.size
     assert digest == "sha256:" + hashlib.sha256(b"hello world").hexdigest()
     assert size == 11
     assert (root / obj).stat().st_mode & 0o7777 == 0o400
@@ -41,7 +42,8 @@ def test_actual_bytes_seal_read_and_descriptor_ownership(provider):
 @pytest.mark.parametrize("kind", ["symlink", "hardlink", "fifo", "corrupt", "mode"])
 def test_unsealed_or_replaced_objects_fail_closed(provider, kind):
     storage, root, caller = provider
-    obj, digest, size = storage.stage([b"hello"])
+    seal = storage.stage([b"hello"]).receipt
+    obj, digest, size = seal.object_ref, seal.digest, seal.size
     path = root / obj
     if kind == "symlink":
         path.unlink()
@@ -66,7 +68,8 @@ def test_unsealed_or_replaced_objects_fail_closed(provider, kind):
 
 def test_changed_bytes_during_open_stream_are_rejected(provider):
     storage, root, caller = provider
-    obj, digest, size = storage.stage([b"hello"])
+    seal = storage.stage([b"hello"]).receipt
+    obj, digest, size = seal.object_ref, seal.digest, seal.size
     with storage.open(obj, digest, size) as reader:
         (root / obj).chmod(0o600)
         (root / obj).write_bytes(b"other")
@@ -133,7 +136,8 @@ def test_device_substitution_is_pinned_without_read_capable_device_open(
     provider, monkeypatch
 ):
     storage, root, caller = provider
-    obj, digest, size = storage.stage([b"hello"])
+    seal = storage.stage([b"hello"]).receipt
+    obj, digest, size = seal.object_ref, seal.digest, seal.size
     original = os.open
     device_flags = []
 
@@ -151,3 +155,41 @@ def test_device_substitution_is_pinned_without_read_capable_device_open(
     assert len(device_flags) == 1
     assert device_flags[0] & getattr(os, "O_PATH")
     assert len(os.listdir("/proc/self/fd")) == before
+
+
+def test_discard_measured_owned_seal_is_idempotent_and_closes_descriptors(provider):
+    storage, root, caller = provider
+    staged = storage.stage([b"body"])
+    before = len(os.listdir("/proc/self/fd"))
+    storage.discard(staged)
+    storage.discard(staged)
+    assert not list(root.iterdir())
+    assert len(os.listdir("/proc/self/fd")) == before
+    os.fstat(caller)
+
+
+@pytest.mark.parametrize("kind", ["unowned", "replacement", "corrupt"])
+def test_discard_never_deletes_unowned_replaced_or_corrupt_seal(provider, kind):
+    storage, root, caller = provider
+    staged = storage.stage([b"body"])
+    path = root / staged.receipt.object_ref
+    before = len(os.listdir("/proc/self/fd"))
+    if kind == "unowned":
+        with FilesystemOutputProvider(caller) as other:
+            with pytest.raises(ValueError, match="belong"):
+                other.discard(staged)
+    else:
+        if kind == "replacement":
+            replacement = root / "replacement"
+            replacement.write_bytes(b"body")
+            replacement.chmod(0o400)
+            os.replace(replacement, path)
+        else:
+            path.chmod(0o600)
+            path.write_bytes(b"other")
+            path.chmod(0o400)
+        with pytest.raises(ValueError):
+            storage.discard(staged)
+    assert path.exists()
+    assert len(os.listdir("/proc/self/fd")) == before
+    os.fstat(caller)

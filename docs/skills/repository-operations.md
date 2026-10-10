@@ -2877,3 +2877,24 @@ checks. Keep provider roots outside legacy/static serving, and do not treat the
 existing global API token or a typed reference as a Workspace grant. Native,
 public authenticated transport, HTTP Range/HEAD, Windows provider and complete
 multi-adapter lifecycle acceptance need their own measured gates.
+
+
+A stage failure after provider sealing must retain actual seal metadata in the
+aborted output record before any cleanup. The private provider's transient owned
+seal includes issuer and object identity evidence; only ref/digest/size enter the
+DB. Discard validates that ownership, actual integrity and the current no-follow
+name binding. A byte-identical replacement or another provider's seal must not
+be deleted. Missing owned objects allow idempotent discard. Metadata commitment
+and deletion are separate: abort commit uncertainty skips deletion, and discard
+failure leaves a measured receipt for later reconciliation while preserving the
+original failure. Successful publication or another referencing record prevents
+discard. No protective metadata is erased after cleanup.
+
+The filesystem root requires an exclusive trusted writer for each generated
+object name. POSIX does not provide atomic inode-conditional unlink against a
+hostile same-euid writer after the final identity check; do not claim that
+protection. A crash between sealing and recording the abort, a malformed seal
+or a DB outage can still leave an unindexed orphan. General reconciliation/GC,
+crash-safe provider staging and automatic external-effect retry remain separate
+gates. Verify real cancel-during-stage, rolled-back seal writes, ambiguous
+commits, cleanup failures and successful-publication/replay safety.
