@@ -101,21 +101,29 @@ def _run_owned_process_tree(
             # reaps its leader, which keeps its private group ID authoritative
             # for an immediate-owner-exit timeout.
             owns_live_group = process.returncode is None
+            get_process_group = getattr(os, "getpgid", None)
+            kill_process_group = getattr(os, "killpg", None)
+            kill_signal = getattr(signal, "SIGKILL", None)
             if not owns_live_group:
                 for child in descendants:
                     try:
                         current = psutil.Process(child.pid)
                         if (
                             current.create_time() == child.create_time()
-                            and os.getpgid(child.pid) == process.pid
+                            and callable(get_process_group)
+                            and get_process_group(child.pid) == process.pid
                         ):
                             owns_live_group = True
                             break
                     except (ProcessLookupError, psutil.NoSuchProcess):
                         continue
-            if owns_live_group:
+            if (
+                owns_live_group
+                and callable(kill_process_group)
+                and kill_signal is not None
+            ):
                 try:
-                    os.killpg(process.pid, signal.SIGKILL)
+                    kill_process_group(process.pid, kill_signal)
                 except ProcessLookupError:
                     pass
         if process.poll() is None:
