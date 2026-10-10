@@ -1,0 +1,265 @@
+{
+  "observed_at_utc": "2026-10-10T04:41:32Z",
+  "repository": "joshyorko/actions",
+  "cohort": {
+    "items": 28,
+    "target_integrated": 20,
+    "open_blocked": 8,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      274,
+      275,
+      276,
+      277
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      278
+    ],
+    "scope": "Named PR target integration; issue-level completion, acceptance and release are separate."
+  },
+  "refs": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be"
+  },
+  "live_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261010T0441Z.json",
+    "sha256": "95555faaa394c24132def2d0693fc1c986a6e0f6293a4d5241f3b897edbd01fb"
+  },
+  "prior_0424_ancestry_audit": {
+    "path": "evidence/open-pr-convergence-audit-20261010T0424Z.json",
+    "sha256": "f8d45c99625223ea75d8dc8e6b8554765dc207d6c465f8d774bf6a762bea4e2d",
+    "observed_at_utc": "2026-10-10T04:24:53Z"
+  },
+  "candidate_84": {
+    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "actual_ci_checkout": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "synthetic_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "check_counts": {
+      "success": 17,
+      "failure": 3,
+      "skipped": 1,
+      "pending": 0,
+      "total": 21
+    },
+    "ci_receipt": {
+      "path": "evidence/pr273-final-ci-84b8c70a-20261010T0438Z.json",
+      "sha256": "41de56ae65550adf26070c17bbe3fd2af25191e37a90475fe6656259acff4920"
+    },
+    "config_correction_receipt": {
+      "path": "evidence/pr273-legacy-configuration-20261010T0440Z.json",
+      "sha256": "89712b689100136d7384e960021d69996964a863c8231cca276b30a7e5e550b5"
+    },
+    "ci_result": "17 success, 3 failure, 1 skipped, 0 pending. The three failures are the same credential assertion on Linux/macOS/Windows; all 3 OS lint/type/docs pass. Native all 3 OS PASS, all three wheel builds plus sdist PASS on retry, toolkit 6/6, coverage/verify/audit PASS. No publication."
+  },
+  "credentialed_cloud_test_failure": {
+    "workflow": "actions_runtime_tests.yml maps repository/org secrets into test-step environment; it has no GitHub `environment:` binding.",
+    "observed_inputs": {
+      "ACTION_SERVER_TEST_ACCESS_CREDENTIALS": "empty in both test-step environments on all three platforms",
+      "ACTION_SERVER_TEST_HOSTNAME": "empty in both test-step environments on all three platforms"
+    },
+    "test_failure": "credential assertion in test_cloud_list_organizations; no organization-list network request reached",
+    "target_contact": "No organization-list network request was reached. The `ci.robocorp.dev` literal is only a fallback when the hostname variable is absent; it was explicitly set empty here, and the credential assertion failed first.",
+    "action": "Confirm intended test endpoint and configure matching repository/organization secrets. Do not waive or change fallback behavior automatically; do not send secret values in chat.",
+    "external_behavior": "NOT_RUN: no request was attempted."
+  },
+  "d8_rcc_bounded_consumer_acceptance": {
+    "source_head": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+    "source_tree": "4633ee098b97c09bb0552fc40bcf59d58e28ef5d",
+    "test_file_sha256": "72fab0add909af1a1d24b3271e7de24f7fe52d6ccd29dbf5ea07eeb8d845c33b",
+    "five_runtime_module_sha256": {
+      "_action_package_handler.py": "d4505685cf274ea7ecd8f6b7b3ac47908943738624966c64359e643a6953ffba",
+      "_actions_import.py": "c7b02a7fd33c6672cbee01c16820d7812c9fa1d3bedc211e5f424bc4f2332c71",
+      "_rcc_runtime_adapter.py": "65abc1efe7879ffc325f84841b9630f05b8a5b11cdc3a32728daf7df7091edcb",
+      "_server.py": "18566e1d519e38237c7f125a56e5f92e7685b295114aa57e7505dd0e004b1a52",
+      "_watcher.py": "c8de55da89d3e752197a89a4e0b2efc6cdce5df60a2476e764ecdd214df691ca"
+    },
+    "source_relation": "Root/Sol verified the five Runtime module hashes and full test-file hash match PR273 head 84 byte-for-byte; no Core installed origin/hash or actual child environment was recorded.",
+    "result": "PASS for this bounded consumer test: last-good, last-good, then recovered outcomes; descriptor preserved; configured provider operations unchanged across failed reload and recovery; shutdown HTTP 200; process natural exit observed as 1 before cleanup, with no forced stop.",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "rcc_version": "v18.19.3",
+    "lifecycle_scope": "Captured descendant observation only; not a complete descendant-reaping claim. The observed natural exit is recorded before forced cleanup. The post-cleanup return code is not natural-exit evidence.",
+    "raw_files": [
+      {
+        "path": "evidence/rcc-d8-raw-readback-20261010/lifecycle-receipt.json",
+        "source_path": "/workspace/work/community-resume/evidence/rcc-d8-raw-readback-20261010/lifecycle-receipt.json",
+        "bytes": 8136,
+        "sha256": "d32caeb239c0f09e3d9e11123c8861d18889117cf1520d3bfb46ee94ee93de3b",
+        "copy_verified_byte_identical": true
+      },
+      {
+        "path": "evidence/rcc-d8-raw-readback-20261010/run.json",
+        "source_path": "/workspace/work/community-resume/evidence/rcc-d8-raw-readback-20261010/run.json",
+        "bytes": 3103,
+        "sha256": "9597f558028abcb76d72c1f0103cddfe857e58a0d7f56ea87fc6e536a11d00e5",
+        "copy_verified_byte_identical": true
+      },
+      {
+        "path": "evidence/rcc-d8-raw-readback-20261010/receipt-amendment-correction.json",
+        "source_path": "/workspace/work/community-resume/evidence/rcc-d8-raw-readback-20261010/receipt-amendment-correction.json",
+        "bytes": 895,
+        "sha256": "f3e68f02f196d018606c394e26dabab36a797b19078ff6a72a919440e0a3e146",
+        "copy_verified_byte_identical": true
+      }
+    ],
+    "review": "Root and Sol independently ACCEPT this narrow consumer gate after exact raw receipt readback.",
+    "limits": "Installed Core origin/hash and actual child environment are NOT_RECORDED. This gives no causal proof for the older 969219e7 natural -11 failure, does not prove all RCC leases/lifecycles, and is not full #134 acceptance."
+  },
+  "84_native_static_artifact_review": {
+    "status": "PASS; static byte/API review, no binary execution by reviewer",
+    "source_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "source_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "synthetic_merge": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "workflow_run": 38023233169,
+    "all_three_os_hosted_jobs": "PASS",
+    "independent_receipts_reported": [
+      {
+        "path": "/workspaces/actions-worker-state/devsy-native-review/84b8-3os/84b8-independent-summary.json",
+        "sha256": "2b3dd9de75b61aa6a7d23c72009407e3dc3a92c75cf374ddb9ba6b1c91f533ac"
+      },
+      {
+        "path": "/workspaces/actions-worker-state/devsy-native-review/84b8-3os/linux-independent-gate-receipt.json",
+        "sha256": "b888c46f9597fba54d4a8074e7a8604e942969b59e7dc693b75a61b2e7ff8375"
+      },
+      {
+        "path": "/workspaces/actions-worker-state/devsy-native-review/84b8-3os/other-os-review.json",
+        "sha256": "1f7148feee9c95defac9ef2b4546359658ae6ee82fe8bb1a4752abe43ec3f2da"
+      }
+    ],
+    "scope": "Reviewer reports all 12 archives matched API size/SHA, CRC/duplicate checks, and complete TAR path/type/mode/link/content inventories; frozen/Go binaries and embedded digests matched. Receipt files are on native reviewer storage and hashes are owner-reported here, not rehashed from Cloud."
+  },
+  "historical_failures_preserved": {
+    "wheel_http_503": "First exact-head Windows wheel attempt failed before Runtime build/tests when pinned get-virtualenv GitHub fetch returned HTTP 503; one authorized retry passed. Source evidence retained at evidence/pr273-wheel-windows-503-38023233207.md.",
+    "rcc_natural_minus_11": "Earlier 969219e7 HTTP 200 followed by natural exit -11 remains unexplained and FAIL; this bounded d8 pass does not erase it.",
+    "legacy_cloud_assertion": "Final Linux/macOS/Windows matrix has one same assertion failure per OS; all secret inputs blank, no network request; see correction receipt."
+  },
+  "issue_accounting": {
+    "retained_contracts": 54,
+    "issue_projection_sha256": "3629102800b720555de322bf3649fcbcb4991d3695f02b909caa9e205bed6f60",
+    "historical_archives_verified": 16,
+    "historical_archives": [
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v2.zip",
+        "sha256": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf",
+        "bytes": 6855
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v3.zip",
+        "sha256": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281",
+        "bytes": 7286
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v4.zip",
+        "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3",
+        "bytes": 7262
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009.zip",
+        "sha256": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7",
+        "bytes": 6683
+      },
+      {
+        "path": "evidence/community-20261008.zip",
+        "sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
+        "bytes": 456808
+      },
+      {
+        "path": "evidence/community-20261009-acceleration.zip",
+        "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48",
+        "bytes": 112671
+      },
+      {
+        "path": "evidence/community-20261009-checkpoint.zip",
+        "sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c",
+        "bytes": 87365
+      },
+      {
+        "path": "evidence/community-20261009-cloud-admission.zip",
+        "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0",
+        "bytes": 69121
+      },
+      {
+        "path": "evidence/community-20261009-convergence.zip",
+        "sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
+        "bytes": 165902
+      },
+      {
+        "path": "evidence/community-20261009-fanout.zip",
+        "sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e",
+        "bytes": 117686
+      },
+      {
+        "path": "evidence/community-20261009-final-checkpoint.zip",
+        "sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4",
+        "bytes": 129162
+      },
+      {
+        "path": "evidence/community-20261009-resume.zip",
+        "sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541",
+        "bytes": 123440
+      },
+      {
+        "path": "evidence/community-20261009-update.zip",
+        "sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4",
+        "bytes": 36121
+      },
+      {
+        "path": "evidence/community-20261009-update2.zip",
+        "sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31",
+        "bytes": 35524
+      },
+      {
+        "path": "evidence/community-20261009-update3.zip",
+        "sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842",
+        "bytes": 71453
+      },
+      {
+        "path": "evidence/http-helper-1.0.3-verified-dist.zip",
+        "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb",
+        "bytes": 30034
+      }
+    ],
+    "stages": {
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
+    },
+    "whole_issue_complete": [
+      210
+    ],
+    "issue_acceptance_changed": false
+  },
+  "release_state": {
+    "Core": "1.0.2 published and verified",
+    "Helper": "1.0.3 published and verified",
+    "Runtime/native": "1.0.3 held and unpublished"
+  },
+  "upstream_disposition": "None; no upstream defect established. The hosted configuration blocker is in the Actions workflow/test setup."
+}

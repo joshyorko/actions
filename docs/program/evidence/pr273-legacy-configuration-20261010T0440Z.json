@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10 04:40:29 UTC",
+  "repository": "joshyorko/actions",
+  "source_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+  "runtime_run": 38023233285,
+  "jobs": [
+    114128530973,
+    114128530800,
+    114128530931
+  ],
+  "observed_secret_inputs": {
+    "ACTION_SERVER_TEST_ACCESS_CREDENTIALS": "empty in both test-step environments on all three platforms",
+    "ACTION_SERVER_TEST_HOSTNAME": "empty in both test-step environments on all three platforms"
+  },
+  "workflow_scope": "actions_runtime_tests.yml has no job environment binding; references repository/org Actions secrets, not pypi environment",
+  "failure": "credential assertion in test_cloud_list_organizations; no organization-list network request reached",
+  "hostname_caveat": "test's os.environ.get default ci.robocorp.dev is only used if variable is absent; workflow explicitly supplies an empty value, and CLI falls back to stored/default hostname for falsey input. Do not claim an actual ci.robocorp.dev request occurred.",
+  "required_external_action": "Confirm intended test endpoint and configure matching repository/org Actions credential and hostname. Do not send credentials in chat. No gate waiver or automatic endpoint change.",
+  "sources": [
+    ".github/workflows/actions_runtime_tests.yml:158",
+    "action_server/tests/action_server_tests/test_cloud.py:13",
+    "action_server/src/actions/server/_actions_cloud.py:110",
+    "action_server/src/actions/server/_storage.py:20"
+  ],
+  "earlier_statements": "References to legacy ci.robocorp.dev describe the test's fallback literal, not a verified request target."
+}

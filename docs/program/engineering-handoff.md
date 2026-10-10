@@ -1,6 +1,12 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-10T04:36:34Z
+## Current convergence — 2026-10-10T04:41:32Z
+
+The 28-PR cohort remains 20 target-integrated, 8 open/blocked, and 0 merge-ready. PR273 remains a draft at `84b8c70a412db9594dfa2a6c5fcb3e8184db019b` on the exact synthetic merge `2492f774841118496dbafd5e08b9066edaf170fa`. Final hosted CI reports 17 success, 3 failure, 1 skipped and 0 pending: the same cloud-test credential assertion fails on Linux, macOS and Windows, while all three lint/type/docs jobs pass. Both `ACTION_SERVER_TEST_ACCESS_CREDENTIALS` and `ACTION_SERVER_TEST_HOSTNAME` were empty on all three OSes; the test stopped at the credential assertion before any network request. The `ci.robocorp.dev` fallback was not contacted. See the [configuration correction](evidence/pr273-legacy-configuration-20261010T0440Z.json), [final CI receipt](evidence/pr273-final-ci-84b8c70a-20261010T0438Z.json), and [dated checkpoint](evidence/convergence-followup-20261010T0441Z.json).
+
+Native checks, all wheel/sdist builds on retry, six toolkit jobs, coverage, verify and audit passed; no package was published. The d8 consumer proof remains accepted narrowly: raw receipt readback shows last-good, last-good, recovered, HTTP 200 and natural exit 1 before cleanup without forced stop. Installed Core origin and child environment are unrecorded, the descendant scope is captured-tree only, and the earlier natural `-11` is unexplained. No full #134 or release acceptance follows.
+
+## Historical convergence — 2026-10-10T04:36:34Z (superseded by the 04:41 amendment)
 
 The 28-PR cohort remains 20 target-integrated, 8 open/blocked, and 0 merge-ready. Community `36b8192dbb8143e016af3351f7d25b22a35c9944`, integration `6d438feb6c92f8bb01428f665ac423fb101b4017`, and runtime candidate `6a53578fac029a0696834c30438c858f5f0003be` were read back from remote refs. PR273 remains open/draft at `84b8c70a412db9594dfa2a6c5fcb3e8184db019b`; its tree equals the current synthetic merge tree. Exact-head native jobs, all wheel/sdist jobs on retry, six toolkit jobs, coverage, verify and audit pass. Runtime Linux/macOS are failed for the reported missing external credential; Windows was still in progress at observation. Publish was skipped. See the [live checkpoint](evidence/convergence-followup-20261010T0436Z.json), [PR audit](evidence/convergence-live-prs-20261010T0436Z.json), [exact checks](evidence/pr273-checks-20261010T0436Z.json), and [ref readback](evidence/convergence-refs-20261010T0436Z.json).
 

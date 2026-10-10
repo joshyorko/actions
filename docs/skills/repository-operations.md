@@ -1421,6 +1421,21 @@ or validate prebuilt frontend/binary artifacts carry the `integration_test` mark
 portable FastAPI/Starlette `TestClient` contracts require `httpx` in Action Server's
 locked development dependencies. Managed `package.yaml` fixtures use published,
 compatible Actions package versions rather than nonexistent future pins.
+
+For hosted cloud tests configured from GitHub repository or organization secrets,
+inspect the exact test-step environment mapping and assertion order before calling a
+failure a service outage or naming a request target. A secret unavailable to the
+workflow evaluates to an empty string; explicitly mapping that value also suppresses
+a Python `os.environ.get(name, default)` fallback. If an earlier assertion exits
+before the client call, the external request was not attempted. Record only whether
+secret inputs are present, never their values, and leave external behavior unverified
+until the intended endpoint and matching secret scope are configured. The 2026-10-10
+three-OS Actions Runtime receipt demonstrates this boundary: the credential assertion
+failed before any request when the workflow supplied empty credential and hostname
+values; its fallback host was not contacted. See
+`docs/program/evidence/pr273-final-ci-84b8c70a-20261010T0438Z.json` and
+`docs/program/evidence/pr273-legacy-configuration-20261010T0440Z.json`.
+
 The declared portable `test-not-integration` task does not recurse into
 `tests/action_server_tests/test_devenv/pack1/tests/`; Action Server's
 `norecursedirs` setting excludes that nested project fixture from discovery.

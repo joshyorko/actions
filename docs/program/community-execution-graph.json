@@ -2703,7 +2703,7 @@
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T04:36:34Z",
+    "observed_at_utc": "2026-10-10T04:41:32Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
     "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
@@ -2711,9 +2711,9 @@
     "integration_tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
     "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
     "release_ready": false,
-    "receipt": "evidence/convergence-refs-20261010T0436Z.json",
-    "receipt_sha256": "28a6cb53cd5824e675812cbb90f65aaa586a2b940ee551710172bd09d9db883e",
-    "source": "Fresh git ls-remote plus commit-tree readback."
+    "receipt": "evidence/convergence-refs-20261010T0441Z.json",
+    "receipt_sha256": "87fcc499548f4cda7c9cdd211c44e537e9023e581e42c7935538a86994447037",
+    "source": "Fresh git ls-remote and commit-tree readback."
   },
   "prior_current_program_refs_20261009T2253Z": {
     "community": "c30f953bae1a322e1d09549607ab42f1badce440",
@@ -3221,9 +3221,9 @@
     "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
   },
   "current_pr_convergence": {
-    "observed_at_utc": "2026-10-10T04:36:34Z",
-    "path": "evidence/convergence-followup-20261010T0436Z.json",
-    "sha256": "2dc25c45edaaebdd46e2f5d0bc5d098997edaa789c6e2ca05a20be36af3133d7",
+    "observed_at_utc": "2026-10-10T04:41:32Z",
+    "path": "evidence/convergence-followup-20261010T0441Z.json",
+    "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
     "cohort": {
       "items": 28,
       "target_integrated": 20,
@@ -3263,36 +3263,42 @@
       ],
       "scope": "Named PR target integration; issue-level completion, acceptance and release are separate."
     },
-    "open_pr_audit": "evidence/convergence-live-prs-20261010T0436Z.json",
-    "open_pr_audit_sha256": "f85f5df87e51df25ebefb61c285d27ab481f3b7fb5e448127ed53e3da9d97cce",
+    "open_pr_audit": "evidence/convergence-live-prs-20261010T0441Z.json",
+    "open_pr_audit_sha256": "95555faaa394c24132def2d0693fc1c986a6e0f6293a4d5241f3b897edbd01fb",
     "branch_readback": {
       "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
       "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
       "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be"
     },
-    "branch_readback_receipt": "evidence/convergence-refs-20261010T0436Z.json",
-    "branch_readback_sha256": "28a6cb53cd5824e675812cbb90f65aaa586a2b940ee551710172bd09d9db883e",
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0441Z.json",
+    "branch_readback_sha256": "87fcc499548f4cda7c9cdd211c44e537e9023e581e42c7935538a86994447037",
     "candidate_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
     "candidate_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
     "synthetic_tree_matches": true,
-    "checks_receipt": "evidence/pr273-checks-20261010T0436Z.json",
-    "checks_sha256": "67de70c11cc2713c9283f2f1f98f27dcbab71fac59b96c3929935334a2008ef6",
-    "bounded_d8_rcc_consumer": "PASS after raw receipt readback; child environment/Core origin unrecorded; prior -11 unexplained.",
+    "check_receipt": {
+      "path": "evidence/pr273-final-ci-84b8c70a-20261010T0438Z.json",
+      "sha256": "41de56ae65550adf26070c17bbe3fd2af25191e37a90475fe6656259acff4920"
+    },
+    "configuration_correction": {
+      "path": "evidence/pr273-legacy-configuration-20261010T0440Z.json",
+      "sha256": "89712b689100136d7384e960021d69996964a863c8231cca276b30a7e5e550b5"
+    },
+    "d8_rcc_bounded_consumer": "PASS after raw receipt readback; actual child env/Core origin unrecorded; previous -11 unexplained.",
     "issue_acceptance_changed": false,
     "stage_counts_unchanged": true,
     "release_ready": false
   },
   "current_next_action": {
-    "observed_at_utc": "2026-10-10T04:36:34Z",
-    "path": "evidence/convergence-followup-20261010T0436Z.json",
-    "sha256": "2dc25c45edaaebdd46e2f5d0bc5d098997edaa789c6e2ca05a20be36af3133d7",
+    "observed_at_utc": "2026-10-10T04:41:32Z",
+    "path": "evidence/convergence-followup-20261010T0441Z.json",
+    "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
     "pr": 273,
     "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
     "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
-    "status": "OPEN_DRAFT; native/wheel/toolkit/coverage/verify/audit checks passed; Runtime Linux/macOS failed on the reported missing external credential and Windows remained in progress at 04:36:34Z.",
-    "owner": "Root owns integration/admission; existing Runtime, native artifact and RCC owners own their bounded evidence.",
-    "pending": "Resolve the external test credential contract and Windows Runtime result; retain no-publication and no-whole-issue-completion boundaries.",
-    "scope": "The d8 receipt is a bounded consumer proof only. It does not resolve old -11 causality or establish full #134, overall Runtime, or release acceptance."
+    "status": "OPEN_DRAFT; 17/21 checks success, 3 failure, 1 skipped. All three Runtime OS failures are one pre-network credential assertion with blank credential and hostname inputs; all3OS lint/type/docs pass.",
+    "owner": "Root owns integration/admission; existing test/configuration owner must identify intended endpoint and set the repository/organization secret inputs; native/RCC owners retain their bounded proof scope.",
+    "pending": "Resolve hosted test endpoint/secret configuration and rerun required exact-head gate under authorized configuration; do not waive or change endpoint fallback. Preserve the 969 natural -11.",
+    "scope": "The d8 real-consumer proof is bounded and accepted, but no full #134, overall Runtime, publication or release acceptance is established."
   },
   "prior_current_program_refs_20261010T0136Z": {
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
@@ -3892,5 +3898,92 @@
     "release_ready": false,
     "receipt": "evidence/convergence-refs-20261010T0417Z.json",
     "receipt_sha256": "6ef0a61fd51b46190499700472f817e1a5fd74593c0e60c154a23767d89961c2"
+  },
+  "prior_current_pr_convergence_20261010T0436Z_exact": {
+    "observed_at_utc": "2026-10-10T04:36:34Z",
+    "path": "evidence/convergence-followup-20261010T0436Z.json",
+    "sha256": "2dc25c45edaaebdd46e2f5d0bc5d098997edaa789c6e2ca05a20be36af3133d7",
+    "cohort": {
+      "items": 28,
+      "target_integrated": 20,
+      "open_blocked": 8,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        274,
+        275,
+        276,
+        277
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278
+      ],
+      "scope": "Named PR target integration; issue-level completion, acceptance and release are separate."
+    },
+    "open_pr_audit": "evidence/convergence-live-prs-20261010T0436Z.json",
+    "open_pr_audit_sha256": "f85f5df87e51df25ebefb61c285d27ab481f3b7fb5e448127ed53e3da9d97cce",
+    "branch_readback": {
+      "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be"
+    },
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0436Z.json",
+    "branch_readback_sha256": "28a6cb53cd5824e675812cbb90f65aaa586a2b940ee551710172bd09d9db883e",
+    "candidate_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "candidate_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "synthetic_tree_matches": true,
+    "checks_receipt": "evidence/pr273-checks-20261010T0436Z.json",
+    "checks_sha256": "67de70c11cc2713c9283f2f1f98f27dcbab71fac59b96c3929935334a2008ef6",
+    "bounded_d8_rcc_consumer": "PASS after raw receipt readback; child environment/Core origin unrecorded; prior -11 unexplained.",
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "release_ready": false
+  },
+  "prior_current_next_action_20261010T0436Z_exact": {
+    "observed_at_utc": "2026-10-10T04:36:34Z",
+    "path": "evidence/convergence-followup-20261010T0436Z.json",
+    "sha256": "2dc25c45edaaebdd46e2f5d0bc5d098997edaa789c6e2ca05a20be36af3133d7",
+    "pr": 273,
+    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "status": "OPEN_DRAFT; native/wheel/toolkit/coverage/verify/audit checks passed; Runtime Linux/macOS failed on the reported missing external credential and Windows remained in progress at 04:36:34Z.",
+    "owner": "Root owns integration/admission; existing Runtime, native artifact and RCC owners own their bounded evidence.",
+    "pending": "Resolve the external test credential contract and Windows Runtime result; retain no-publication and no-whole-issue-completion boundaries.",
+    "scope": "The d8 receipt is a bounded consumer proof only. It does not resolve old -11 causality or establish full #134, overall Runtime, or release acceptance."
+  },
+  "prior_current_program_refs_20261010T0436Z_exact": {
+    "observed_at_utc": "2026-10-10T04:36:34Z",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "integration_tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false,
+    "receipt": "evidence/convergence-refs-20261010T0436Z.json",
+    "receipt_sha256": "28a6cb53cd5824e675812cbb90f65aaa586a2b940ee551710172bd09d9db883e",
+    "source": "Fresh git ls-remote plus commit-tree readback."
   }
 }
