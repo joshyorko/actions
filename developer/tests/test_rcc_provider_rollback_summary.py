@@ -59,6 +59,10 @@ def _fixture(tmp_path: Path):
         "action_server/src/actions/server/_actions_import.py": b"actions import\n",
         "action_server/src/actions/server/_rcc_runtime_adapter.py": b"runtime adapter\n",
         "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py": b"test\n",
+        "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": b"staged test\n",
+        "action_server/src/actions/server/deployments/source_staging.py": b"staging module\n",
+        "action_server/src/actions/server/deployments/source_read.py": b"source reader\n",
+        "action_server/src/actions/server/deployments/source_manifest.py": b"manifest policy\n",
         "action_server/scripts/verify_dakota_rcc_acceptance.py": b"helper\n",
     }
     candidate_sha, candidate_tree = _make_repository(
@@ -152,11 +156,49 @@ def _fixture(tmp_path: Path):
     )
     junit = tmp_path / "junit.xml"
     junit.write_text(
-        '<testsuite tests="1" failures="0" errors="0" skipped="0">'
+        '<testsuite tests="2" failures="0" errors="0" skipped="0">'
         '<testcase classname="tests.action_server_tests.test_current_candidate_import_rollback" '
         'name="test_current_candidate_failed_reload_keeps_last_good_action_usable"/>'
+        '<testcase classname="tests.action_server_tests.test_source_staging_rcc_consumer" '
+        'name="test_staged_package_executes_in_managed_rcc_runtime"/>'
         "</testsuite>",
         encoding="utf-8",
+    )
+    staged_receipt = {
+        "status": "PASS",
+        "source_commit": candidate_sha,
+        "source_tree": candidate_tree,
+        "source_inventory": json.dumps(
+            {
+                "sourcePolicyVersion": 1,
+                "entries": [
+                    {"path": "action.py", "sha256": "a" * 64},
+                    {"path": "package.yaml", "sha256": "b" * 64},
+                ],
+            }
+        ),
+        "staged_inventory": json.dumps(
+            {
+                "sourcePolicyVersion": 1,
+                "entries": [
+                    {"path": "action.py", "sha256": "a" * 64},
+                    {"path": "package.yaml", "sha256": "b" * 64},
+                ],
+            }
+        ),
+        "source_sha256": {"action.py": "a" * 64, "package.yaml": "b" * 64},
+        "staged_sha256": {"action.py": "a" * 64, "package.yaml": "b" * 64},
+        "managed_root": "/tmp/actions-home/holotree",
+        "typed_action_result": {
+            "action_source_sha256": "a" * 64,
+            "action_source_path": "/tmp/runtime-data/.rcc-runtime-sources/staged/action.py",
+            "core_version": "1.0.2",
+            "core_origin": "/tmp/actions-home/holotree/env/site-packages/actions/__init__.py",
+            "python_executable": "/tmp/actions-home/holotree/env/bin/python",
+        },
+    }
+    (evidence / "staged-consumer-receipt.json").write_text(
+        json.dumps(staged_receipt), encoding="utf-8"
     )
     env = {
         **os.environ,
@@ -200,6 +242,9 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
     assert summary["test"]["natural_return_code_before_cleanup"] == 0
     assert summary["test"]["forced_cleanup_returncode_observed"] is True
     assert summary["test"]["expected_test_identity_matches"] is True
+    assert summary["test"]["staged_consumer_receipt_status"] == "PASS"
+    assert summary["test"]["staged_consumer_receipt_valid"] is True
+    assert summary["test"]["staged_action_sha256_matches"] is True
     assert summary["runner"] == {
         "libc_name": "glibc",
         "libc_version": "2.39",
@@ -213,7 +258,7 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
 @pytest.mark.parametrize(
     ("mutation", "expected_issue"),
     [
-        ("skip", "test_result_not_exactly_one_pass"),
+        ("skip", "test_result_not_exactly_two_passes"),
         ("glibc_too_old", "runner_glibc_below_artifact_minimum_or_unknown"),
         ("missing_glibc", "runner_glibc_below_artifact_minimum_or_unknown"),
         ("missing_junit", "junit_missing_or_invalid"),
@@ -225,17 +270,22 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
         ("wrong_test_identity", "unexpected_test_identity"),
         ("missing_receipt", "receipt_status_not_pass"),
         ("stale_source", "receipt_source_commit_mismatch"),
+        ("stale_staged_source", "staged_consumer_receipt_missing_or_invalid"),
         ("cleanup_failure", "forced_stop_was_used_or_unknown"),
         ("unobserved_cleanup", "forced_cleanup_return_code_unobserved"),
         ("invalid_natural_exit", "natural_return_code_missing_or_abnormal"),
         ("provider_changed", "provider_operations_changed_or_missing"),
         ("rcc_mismatch", "receipt_rcc_hash_mismatch"),
+        ("staged_receipt_missing", "staged_consumer_receipt_missing_or_invalid"),
+        ("staged_digest_mismatch", "staged_consumer_receipt_missing_or_invalid"),
+        ("staged_result_digest_mismatch", "staged_consumer_receipt_missing_or_invalid"),
     ],
 )
 def test_exact_summary_script_rejects_incomplete_receipt(
     tmp_path: Path, mutation: str, expected_issue: str
 ) -> None:
     evidence, junit, receipt, env = _fixture(tmp_path)
+    staged_receipt_path = evidence / "staged-consumer-receipt.json"
     if mutation == "skip":
         junit.write_text(
             '<testsuite tests="1" failures="0" errors="0" skipped="1">'
@@ -288,6 +338,10 @@ def test_exact_summary_script_rejects_incomplete_receipt(
         (evidence / "lifecycle-receipt.json").unlink()
     elif mutation == "stale_source":
         receipt["source"]["commit"] = "0" * 40
+    elif mutation == "stale_staged_source":
+        staged_receipt = json.loads(staged_receipt_path.read_text(encoding="utf-8"))
+        staged_receipt["source_tree"] = "0" * 40
+        staged_receipt_path.write_text(json.dumps(staged_receipt), encoding="utf-8")
     elif mutation == "cleanup_failure":
         receipt["action_server_process_exit"]["forced_stop_used"] = True
     elif mutation == "unobserved_cleanup":
@@ -300,6 +354,15 @@ def test_exact_summary_script_rejects_incomplete_receipt(
         receipt["provider_ops_after_recovery"].append({"phase": "acquire"})
     elif mutation == "rcc_mismatch":
         receipt["rcc_sha256"] = "0" * 64
+    elif mutation == "staged_receipt_missing":
+        staged_receipt_path.unlink()
+    elif mutation in {"staged_digest_mismatch", "staged_result_digest_mismatch"}:
+        staged_receipt = json.loads(staged_receipt_path.read_text(encoding="utf-8"))
+        if mutation == "staged_digest_mismatch":
+            staged_receipt["staged_sha256"]["action.py"] = "c" * 64
+        else:
+            staged_receipt["typed_action_result"]["action_source_sha256"] = "c" * 64
+        staged_receipt_path.write_text(json.dumps(staged_receipt), encoding="utf-8")
     if mutation != "missing_receipt":
         (evidence / "lifecycle-receipt.json").write_text(
             json.dumps(receipt), encoding="utf-8"

@@ -2404,6 +2404,22 @@ The filesystem tests are Linux-only and skip on other platforms. Separate
 configured Mypy runs check this module and its tests for Linux, Win32, and
 Darwin; those type checks do not claim staging runtime support outside Linux.
 
+`test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime`
+is the opt-in Linux consumer proof. It stages the explicitly selected
+`package.yaml` and `action.py`, imports that staged package into the existing
+Runtime, executes its typed `dict[str, str]` Action through a real RCC worker,
+and checks the worker interpreter and `actions-core` origin under the
+task-owned managed `ACTIONS_HOME/holotree`. It compares source, staged, and
+worker-observed Action-file SHA-256 values and records a staged-consumer
+receipt bound to the candidate checkout commit and tree. The existing pinned
+RCC provider rollback workflow invokes this test alongside the rollback case
+and rejects a skipped or missing result. The
+proof is conditional on that exact hosted gate passing; a local test that is
+skipped because no task-owned managed provider is configured is NOT RUN, not
+acceptance evidence. This exercises one selected package through the current
+Runtime consumer; it does not prove complete source selection, source
+authorization, compiler/admission trust, or any package identity API.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold

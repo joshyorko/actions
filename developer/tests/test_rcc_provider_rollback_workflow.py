@@ -21,6 +21,10 @@ TEST_NODE = (
     "tests/action_server_tests/test_current_candidate_import_rollback.py::"
     "test_current_candidate_failed_reload_keeps_last_good_action_usable"
 )
+STAGED_CONSUMER_NODE = (
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::"
+    "test_staged_package_executes_in_managed_rcc_runtime"
+)
 RCC_VERSION = "v18.19.3"
 
 
@@ -85,6 +89,10 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert workflow["on"]["push"]["paths"] == [
         "developer/tests/test_rcc_provider_rollback_workflow.py",
         "developer/tests/test_rcc_provider_rollback_summary.py",
+        "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+        "action_server/src/actions/server/deployments/source_staging.py",
+        "action_server/src/actions/server/deployments/source_read.py",
+        "action_server/src/actions/server/deployments/source_manifest.py",
         ".github/workflows/_gen_workflows.py",
         WORKFLOW_RELATIVE_PATH,
     ]
@@ -164,6 +172,10 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     )
     assert "-n 0" in test["run"]
     assert TEST_NODE in test["run"]
+    assert STAGED_CONSUMER_NODE in test["run"]
+    assert test["env"]["ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT"].endswith(
+        "/staged-consumer-receipt.json"
+    )
     assert "pytest" in test["run"] and "inv test" not in test["run"]
 
     summary = next(
@@ -184,10 +196,12 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert admission["env"]["EXPECTED_CANDIDATE_SHA"] == CANDIDATE_SHA
     assert "receipt_source_commit_mismatch" in admission["run"]
     assert "runner_libc" in admission["run"]
-    assert "test_result_not_exactly_one_pass" in admission["run"]
+    assert "test_result_not_exactly_two_passes" in admission["run"]
+    assert "staged_consumer_receipt_missing_or_invalid" in admission["run"]
     assert "sys.exit(0 if not issues else 1)" in admission["run"]
     assert upload["if"] == "always()"
     assert "acceptance-summary.*" in upload["with"]["path"]
+    assert "staged-consumer-receipt.json" in upload["with"]["path"]
     assert "rcc-provider-rollback" in upload["with"]["name"]
     assert "workflow_control_sha" in summary["run"]
     assert "candidate_sha" in summary["run"]
