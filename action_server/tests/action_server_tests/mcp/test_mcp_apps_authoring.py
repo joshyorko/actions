@@ -1,4 +1,5 @@
 import asyncio
+import hashlib
 import importlib.util
 import json
 import os
@@ -195,7 +196,6 @@ def object_result() -> dict[str, str]:
         actions_sync=True,
         timeout=120,
     )
-
     async def check_routes() -> None:
         async with action_server_process.mcp_client() as session:
             listed = await session.list_tools()
@@ -268,6 +268,9 @@ def test_canvas_view_calls_public_action_through_runtime_bridge(
         timeout=120,
     )
     candidate_core_wheel = next(candidate_core_wheel_dir.glob("actions_core-*.whl"))
+    candidate_core_wheel_sha256 = hashlib.sha256(
+        candidate_core_wheel.read_bytes()
+    ).hexdigest()
     if os.name == "nt":
         quoted_wheel_path = subprocess.list2cmdline([str(candidate_core_wheel)])
     else:
@@ -294,12 +297,19 @@ def test_canvas_view_calls_public_action_through_runtime_bridge(
         encoding="utf-8"
     )
     (tmp_path / "canvas.html").write_text(canvas_html, encoding="utf-8")
-    (tmp_path / "canvas_actions.py").write_text(
-        '''
+    action_source = '''
+import hashlib
+import json
+import sys
+from importlib.metadata import distribution
 from pathlib import Path
+from urllib.parse import urlsplit
+from urllib.request import url2pathname
 
 from actions import mcp
 
+EXPECTED_CORE_WHEEL = Path("__EXPECTED_CORE_WHEEL__")
+EXPECTED_CORE_WHEEL_SHA256 = "__EXPECTED_CORE_WHEEL_SHA256__"
 UI_URI = "ui://action-canvas/v1/canvas.html?query-fixture=0.1"
 
 @mcp.resource(
@@ -347,9 +357,52 @@ def canvas_fixture_artifact_status(handle: str) -> dict[str, str]:
     if handle != "art_7Wk3qN9pL2xD5mR8sV4cY1":
         raise ValueError("Unknown fixture artifact handle.")
     return {"status": "ready"}
-''',
-        encoding="utf-8",
+
+@mcp.tool(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
+def canvas_fixture_worker_provenance() -> dict[str, str]:
+    core_distribution = distribution("actions-core")
+    actions_module = Path(__import__("actions").__file__).resolve()
+    installed_files = {
+        Path(core_distribution.locate_file(file)).resolve()
+        for file in (core_distribution.files or [])
+    }
+    if actions_module not in installed_files:
+        raise AssertionError("worker actions module is not owned by actions-core")
+
+    direct_url_value = core_distribution.read_text("direct_url.json")
+    if not direct_url_value:
+        raise AssertionError("worker actions-core has no direct_url.json")
+    direct_url = json.loads(direct_url_value)
+    source = urlsplit(direct_url.get("url", ""))
+    if source.scheme != "file" or source.netloc not in {"", "localhost"}:
+        raise AssertionError("worker actions-core was not installed from a local wheel")
+    installed_wheel = Path(url2pathname(source.path)).resolve()
+    if installed_wheel != EXPECTED_CORE_WHEEL.resolve():
+        raise AssertionError("worker actions-core direct_url differs from the candidate wheel")
+
+    archive = direct_url.get("archive_info", {})
+    installed_sha256 = archive.get("hashes", {}).get("sha256")
+    if installed_sha256 is None:
+        hash_value = archive.get("hash", "")
+        if hash_value.startswith("sha256="):
+            installed_sha256 = hash_value.removeprefix("sha256=")
+    candidate_sha256 = hashlib.sha256(installed_wheel.read_bytes()).hexdigest()
+    if installed_sha256 != EXPECTED_CORE_WHEEL_SHA256 or candidate_sha256 != EXPECTED_CORE_WHEEL_SHA256:
+        raise AssertionError("worker actions-core wheel SHA-256 differs from the candidate")
+    return {
+        "worker_prefix": sys.prefix,
+        "actions_module": str(actions_module),
+        "actions_core_version": core_distribution.version,
+        "direct_url_wheel": str(installed_wheel),
+        "wheel_sha256": candidate_sha256,
+    }
+'''
+    action_source = action_source.replace(
+        '"__EXPECTED_CORE_WHEEL__"', repr(str(candidate_core_wheel))
+    ).replace(
+        '"__EXPECTED_CORE_WHEEL_SHA256__"', repr(candidate_core_wheel_sha256)
     )
+    (tmp_path / "canvas_actions.py").write_text(action_source, encoding="utf-8")
 
     action_server_process.start(
         cwd=tmp_path,
@@ -357,6 +410,8 @@ def canvas_fixture_artifact_status(handle: str) -> dict[str, str]:
         actions_sync=True,
         timeout=120,
     )
+    runtime_rows: list[dict[str, str]] = []
+    worker_provenance: dict[str, str] = {}
 
     async def check_runtime_contract() -> None:
         async with action_server_process.mcp_client() as session:
@@ -391,6 +446,37 @@ def canvas_fixture_artifact_status(handle: str) -> dict[str, str]:
                 "artifact": {"handle": "art_7Wk3qN9pL2xD5mR8sV4cY1"},
                 "error": None,
             }
+            runtime_rows.append(
+                {"caller": "python-mcp-client", "tool": "canvas_fixture_search", "result": "passed"}
+            )
+
+            artifact_status = await session.call_tool(
+                "canvas_fixture_artifact_status",
+                {"handle": "art_7Wk3qN9pL2xD5mR8sV4cY1"},
+            )
+            assert artifact_status.structured_content == {"status": "ready"}
+            runtime_rows.append(
+                {
+                    "caller": "python-mcp-client",
+                    "tool": "canvas_fixture_artifact_status",
+                    "result": "passed",
+                }
+            )
+
+            provenance = await session.call_tool(
+                "canvas_fixture_worker_provenance", {}
+            )
+            assert provenance.structured_content is not None
+            worker_provenance.update(provenance.structured_content)
+            assert worker_provenance["wheel_sha256"] == candidate_core_wheel_sha256
+            assert Path(worker_provenance["worker_prefix"]).is_dir()
+            runtime_rows.append(
+                {
+                    "caller": "python-mcp-client",
+                    "tool": "canvas_fixture_worker_provenance",
+                    "result": "passed",
+                }
+            )
 
     assert run_async_in_new_thread(partial(check_runtime_contract)) is None
 
@@ -419,4 +505,62 @@ def canvas_fixture_artifact_status(handle: str) -> dict[str, str]:
         env=env,
         check=True,
         timeout=180,
+    )
+    runtime_rows.extend(
+        [
+            {
+                "caller": "playwright-browser",
+                "tool": "canvas_fixture_search",
+                "result": "passed",
+            },
+            {
+                "caller": "playwright-browser",
+                "tool": "canvas_fixture_artifact_status",
+                "result": "passed",
+            },
+        ]
+    )
+    if playwright_executable:
+        browser_version = subprocess.run(
+            [playwright_executable, "--version"],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=15,
+        ).stdout.strip()
+        browser_sha256 = hashlib.sha256(
+            Path(playwright_executable).read_bytes()
+        ).hexdigest()
+    else:
+        browser_version = "Playwright-pinned Chromium"
+        browser_sha256 = "not-recorded"
+    receipt_path = tmp_path / "canvas-bridge-acceptance-receipt.json"
+    receipt_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "actions_core_wheel": {
+                    "path": str(candidate_core_wheel),
+                    "sha256": candidate_core_wheel_sha256,
+                },
+                "worker": worker_provenance,
+                "canvas_resource": {
+                    "uri": CANVAS_RESOURCE_URI,
+                    "mime_type": "text/html;profile=mcp-app",
+                    "sha256": hashlib.sha256(canvas_html.encode("utf-8")).hexdigest(),
+                },
+                "browser": {
+                    "executable": playwright_executable,
+                    "version": browser_version,
+                    "sha256": browser_sha256,
+                },
+                "playwright_pinned_browser": "not-run"
+                if playwright_executable
+                else "used",
+                "runtime_rows": runtime_rows,
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
     )

@@ -36,6 +36,14 @@ Action Server, then the browser loads those exact HTML bytes and relays UI tool
 calls to the same Runtime's Streamable HTTP MCP endpoint. Its Playwright server
 uses a test-selected port and refuses to reuse an existing server.
 
+On success the test writes `canvas-bridge-acceptance-receipt.json` in its
+pytest temporary directory. The receipt binds the candidate wheel path and
+SHA-256 to the worker's `direct_url.json`, imported module path, and worker
+prefix; it also records the built resource digest, actual browser executable and
+version, pinned-browser status, and five successful Runtime tool-call rows.
+Preserve that receipt with the test output when recording acceptance; pytest
+may eventually remove its temporary directory.
+
 This verifies a candidate-source Runtime/worker bridge and a browser
 interaction with the real Action result; it does not prove published-wheel
 compatibility, a production host's policy or authorization, artifact resolution,

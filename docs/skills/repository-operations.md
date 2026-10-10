@@ -42,6 +42,11 @@ environments without Playwright's pinned browser; record its version and
 SHA-256 separately, and report the pinned Playwright browser as not run. This
 candidate-source integration does not prove published-wheel compatibility,
 production-host authorization/CSP, artifact resolution, or ChatGPT rendering.
+On success it writes `canvas-bridge-acceptance-receipt.json` under pytest's
+temporary test directory, binding the candidate wheel SHA and `direct_url.json`
+to the worker prefix and imported module and recording the built resource digest
+and five successful tool-call rows. Preserve this receipt before reusing the
+pytest `--basetemp` directory or allowing pytest to prune old temporary trees.
 
 The focused source tests exercise public decorators through the Runtime
 Streamable HTTP route. The process-level fixture additionally installs the
