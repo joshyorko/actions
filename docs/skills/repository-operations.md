@@ -2304,6 +2304,15 @@ replace it with a cache descriptor bound to that policy, and direct execution
 fails clearly until that context is established. The unit boundary is covered
 by `test_rcc_runtime_adapter.py`.
 
+Controlled inspection preparation must retain the specification and artifact
+digests returned by the same RCC publish operation as the prepared descriptor.
+The local environment fingerprint and acquire response do not establish the
+specification digest. Legacy descriptors or cache entries without that pair
+must be prepared again before inspection; never infer the missing value or
+perform a second publish solely to decorate an already prepared descriptor.
+This in-process pair is preparation evidence, not proof that package metadata
+was inspected or that RCC execution occurred.
+
 Action Server snapshots package source before metadata import, including
 unmanaged and legacy packages. It validates the source identity again after
 metadata collection and rejects collection that altered included source files.

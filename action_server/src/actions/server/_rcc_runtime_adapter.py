@@ -32,7 +32,8 @@ _ENVIRONMENT_FIELDS = (
     "post-install",
 )
 _prepared_runtime_cache: dict[
-    tuple[Path, str, str | None], tuple[str, RccRuntimeDescriptor]
+    tuple[Path, str, str | None],
+    tuple[str, RccRuntimeDescriptor, RccPublishedArtifactDetails | None],
 ] = {}
 _prepared_runtime_cache_lock = threading.Lock()
 
@@ -173,6 +174,19 @@ class RccPublishedArtifactDetails:
             self.artifact_digest
         ):
             raise RccRuntimeError("publish", "invalid sha256 artifact digest")
+
+
+@dataclass(frozen=True)
+class PreparedRccInspection:
+    """In-process preparation evidence for a later controlled inspection.
+
+    This object is not a durable descriptor or execution authority. The two
+    digests are the pair returned by one RCC publication used by preparation.
+    """
+
+    runtime_descriptor: RccRuntimeDescriptor
+    published_artifact_details: RccPublishedArtifactDetails
+    preparation_class: str
 
 
 def parse_artifact_digest(payload: object) -> str:
@@ -433,7 +447,29 @@ def acquire_artifact(
     return result
 
 
-def prepare_runtime(
+def _publish_and_acquire_runtime(
+    environment: Path,
+    rcc_location: Path,
+    *,
+    provider: str | None,
+    runner: Runner,
+    require_publication_details: bool,
+) -> tuple[str, RccPublishedArtifactDetails | None]:
+    if require_publication_details:
+        details = publish_artifact_details(
+            environment, rcc_location, provider=provider, runner=runner
+        )
+        digest = details.artifact_digest
+    else:
+        details = None
+        digest = publish_artifact(
+            environment, rcc_location, provider=provider, runner=runner
+        )
+    acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+    return digest, details
+
+
+def _prepare_runtime(
     environment: Path,
     rcc_location: Path,
     *,
@@ -442,7 +478,8 @@ def prepare_runtime(
     provider: str | None = None,
     previous_descriptor: RccRuntimeDescriptor | None = None,
     runner: Runner = _subprocess_runner,
-) -> RccRuntimeDescriptor:
+    require_publication_details: bool,
+) -> tuple[RccRuntimeDescriptor, RccPublishedArtifactDetails | None]:
     environment = environment.resolve()
     cache_identity = (environment_identity or environment).resolve()
     provider = _validate_provider_reference(provider)
@@ -453,6 +490,39 @@ def prepare_runtime(
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
     with _prepared_runtime_cache_lock:
         cached = _prepared_runtime_cache.get(cache_key)
+    cached_details = cached[2] if cached is not None else None
+
+    # A legacy cache entry carries only the artifact identity. Strict callers
+    # must initialize authoritative pair evidence with one new publication;
+    # neither a local environment fingerprint nor acquire output supplies it.
+    if require_publication_details and (
+        cached is None
+        or cached_details is None
+        or cached_details.artifact_digest != cached[1].artifact_digest
+    ):
+        digest, details = _publish_and_acquire_runtime(
+            environment,
+            rcc_location,
+            provider=provider,
+            runner=runner,
+            require_publication_details=True,
+        )
+        assert details is not None
+        descriptor = RccRuntimeDescriptor(
+            artifact_digest=digest,
+            source_generation=source_generation,
+            source_hash=source_hash,
+            environment_fingerprint=environment_fingerprint,
+            provider_reference=provider,
+        )
+        with _prepared_runtime_cache_lock:
+            _prepared_runtime_cache[cache_key] = (
+                environment_fingerprint,
+                descriptor,
+                details,
+            )
+        return descriptor, details
+
     if (
         cached is not None
         and source_generation != "unknown"
@@ -471,11 +541,23 @@ def prepare_runtime(
             provider_reference=provider,
         )
         with _prepared_runtime_cache_lock:
-            _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
-        return descriptor
+            _prepared_runtime_cache[cache_key] = (
+                environment_fingerprint,
+                descriptor,
+                cached_details,
+            )
+        return descriptor, cached_details
     if (
         previous_descriptor is not None
         and previous_descriptor.environment_fingerprint == environment_fingerprint
+        and (
+            not require_publication_details
+            or (
+                cached_details is not None
+                and cached_details.artifact_digest
+                == previous_descriptor.artifact_digest
+            )
+        )
     ):
         try:
             acquire_artifact(
@@ -490,10 +572,13 @@ def prepare_runtime(
             # The durable descriptor is an identity hint, not an activation
             # path.  If RCC cannot materialize that identity, publish a new
             # artifact and validate its exact identity before using it.
-            digest = publish_artifact(
-                environment, rcc_location, provider=provider, runner=runner
+            digest, cached_details = _publish_and_acquire_runtime(
+                environment,
+                rcc_location,
+                provider=provider,
+                runner=runner,
+                require_publication_details=require_publication_details,
             )
-            acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
             descriptor = RccRuntimeDescriptor(
                 artifact_digest=digest,
                 source_generation=source_generation,
@@ -512,10 +597,14 @@ def prepare_runtime(
                 provider_reference=provider,
             )
         with _prepared_runtime_cache_lock:
-            _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
-        return descriptor
+            _prepared_runtime_cache[cache_key] = (
+                environment_fingerprint,
+                descriptor,
+                cached_details,
+            )
+        return descriptor, cached_details
     if cached is not None:
-        _, descriptor = cached
+        _, descriptor, _ = cached
         try:
             acquire_artifact(
                 descriptor.artifact_digest,
@@ -526,10 +615,13 @@ def prepare_runtime(
         except RccRuntimeError as exc:
             if not exc.retryable:
                 raise
-            digest = publish_artifact(
-                environment, rcc_location, provider=provider, runner=runner
+            digest, cached_details = _publish_and_acquire_runtime(
+                environment,
+                rcc_location,
+                provider=provider,
+                runner=runner,
+                require_publication_details=require_publication_details,
             )
-            acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
             descriptor = RccRuntimeDescriptor(
                 artifact_digest=digest,
                 source_generation=source_generation,
@@ -542,9 +634,10 @@ def prepare_runtime(
                 _prepared_runtime_cache[cache_key] = (
                     environment_fingerprint,
                     descriptor,
+                    cached_details,
                 )
-            return descriptor
-        return RccRuntimeDescriptor(
+            return descriptor, cached_details
+        descriptor = RccRuntimeDescriptor(
             artifact_digest=descriptor.artifact_digest,
             source_generation=source_generation,
             source_hash=source_hash,
@@ -555,11 +648,15 @@ def prepare_runtime(
             contract_version=descriptor.contract_version,
             provider_reference=provider,
         )
+        return descriptor, cached_details
 
-    digest = publish_artifact(
-        environment, rcc_location, provider=provider, runner=runner
+    digest, cached_details = _publish_and_acquire_runtime(
+        environment,
+        rcc_location,
+        provider=provider,
+        runner=runner,
+        require_publication_details=require_publication_details,
     )
-    acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
     descriptor = RccRuntimeDescriptor(
         artifact_digest=digest,
         source_generation=source_generation,
@@ -568,8 +665,61 @@ def prepare_runtime(
         provider_reference=provider,
     )
     with _prepared_runtime_cache_lock:
-        _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
+        _prepared_runtime_cache[cache_key] = (
+            environment_fingerprint,
+            descriptor,
+            cached_details,
+        )
+    return descriptor, cached_details
+
+
+def prepare_runtime(
+    environment: Path,
+    rcc_location: Path,
+    *,
+    environment_identity: Path | None = None,
+    source_generation: str = "unknown",
+    provider: str | None = None,
+    previous_descriptor: RccRuntimeDescriptor | None = None,
+    runner: Runner = _subprocess_runner,
+) -> RccRuntimeDescriptor:
+    descriptor, _ = _prepare_runtime(
+        environment,
+        rcc_location,
+        environment_identity=environment_identity,
+        source_generation=source_generation,
+        provider=provider,
+        previous_descriptor=previous_descriptor,
+        runner=runner,
+        require_publication_details=False,
+    )
     return descriptor
+
+
+def prepare_runtime_for_inspection(
+    environment: Path,
+    rcc_location: Path,
+    *,
+    environment_identity: Path | None = None,
+    source_generation: str = "unknown",
+    provider: str | None = None,
+    runner: Runner = _subprocess_runner,
+) -> PreparedRccInspection:
+    descriptor, details = _prepare_runtime(
+        environment,
+        rcc_location,
+        environment_identity=environment_identity,
+        source_generation=source_generation,
+        provider=provider,
+        runner=runner,
+        require_publication_details=True,
+    )
+    assert details is not None
+    return PreparedRccInspection(
+        runtime_descriptor=descriptor,
+        published_artifact_details=details,
+        preparation_class=descriptor.preparation_class,
+    )
 
 
 def build_exec_command(

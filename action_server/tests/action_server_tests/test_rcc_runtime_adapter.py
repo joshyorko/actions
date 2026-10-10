@@ -688,6 +688,126 @@ def test_missing_persisted_artifact_republishes_and_acquires_new_identity(tmp_pa
     assert [call[2] for call in calls] == ["acquire", "publish", "acquire"]
 
 
+def test_inspection_preparation_retains_same_publication_pair_on_source_reuse(
+    tmp_path,
+):
+    from actions.server._rcc_runtime_adapter import (
+        RccPublishedArtifactDetails,
+        prepare_runtime_for_inspection,
+    )
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    artifact_digest = "sha256:" + "a" * 64
+    specification_digest = "sha256:" + "b" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        if args[2] == "publish":
+            return (
+                0,
+                json.dumps(
+                    {
+                        "artifactDigest": artifact_digest,
+                        "specificationDigest": specification_digest,
+                    }
+                ),
+                "",
+            )
+        return (
+            0,
+            json.dumps(
+                {"artifactDigest": artifact_digest, "verification": {"valid": True}}
+            ),
+            "",
+        )
+
+    first = prepare_runtime_for_inspection(
+        package_yaml,
+        Path("/opt/rcc"),
+        source_generation="source-1",
+        runner=runner,
+    )
+    second = prepare_runtime_for_inspection(
+        package_yaml,
+        Path("/opt/rcc"),
+        source_generation="source-2",
+        runner=runner,
+    )
+
+    assert [call[2] for call in calls] == ["publish", "acquire"]
+    assert first.published_artifact_details == RccPublishedArtifactDetails(
+        specification_digest=specification_digest,
+        artifact_digest=artifact_digest,
+    )
+    assert second.published_artifact_details == first.published_artifact_details
+    assert (
+        second.runtime_descriptor.artifact_digest
+        == first.runtime_descriptor.artifact_digest
+    )
+    assert second.runtime_descriptor.source_generation == "source-2"
+    assert second.preparation_class == "source-reuse"
+
+
+def test_inspection_preparation_republishes_when_legacy_cache_has_no_pair(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        prepare_runtime,
+        prepare_runtime_for_inspection,
+    )
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.11'}\n")
+    artifact_digest = "sha256:" + "c" * 64
+    specification_digest = "sha256:" + "d" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        if args[2] == "publish":
+            payload = (
+                {"artifact": artifact_digest}
+                if len(calls) == 1
+                else {
+                    "artifactDigest": artifact_digest,
+                    "specificationDigest": specification_digest,
+                }
+            )
+            return 0, json.dumps(payload), ""
+        return (
+            0,
+            json.dumps(
+                {"artifactDigest": artifact_digest, "verification": {"valid": True}}
+            ),
+            "",
+        )
+
+    legacy = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        source_generation="source-1",
+        runner=runner,
+    )
+    prepared = prepare_runtime_for_inspection(
+        package_yaml,
+        Path("/opt/rcc"),
+        source_generation="source-1",
+        runner=runner,
+    )
+
+    assert legacy.artifact_digest == artifact_digest
+    assert prepared.published_artifact_details.artifact_digest == artifact_digest
+    assert (
+        prepared.published_artifact_details.specification_digest == specification_digest
+    )
+    assert [call[2] for call in calls] == [
+        "publish",
+        "acquire",
+        "publish",
+        "acquire",
+    ]
+
+
 def test_acquire_rejects_invalid_artifact_verification():
     from actions.server._rcc_runtime_adapter import RccRuntimeError, acquire_artifact
 
