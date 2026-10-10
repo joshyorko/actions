@@ -512,9 +512,25 @@ browser gates on Ubuntu and Windows; their receipts bind the manifest path,
 executable hash, and (for frozen builds) the onedir package-tree hash. Windows
 manifest paths include `.exe` for both runtimes, which the harness validates.
 Those Windows gates still require passing hosted receipts; macOS browser
-acceptance is not configured. Authorization denial, missing bundled support,
-and generic HTTP 500 remain `NOT_RUN` until their separately owned or supported
-packaged fixtures run. Do not use response interception as backend evidence.
+acceptance is not configured. The native browser harness now has an
+authorization-denial stage: after signing in, it removes only its own
+`actions_browser_session` cookie, requires the packaged Runtime's Work Items
+request to return the real middleware-generated 403, verifies that
+`RuntimeAuthentication` gates the protected page behind the API-key sign-in
+form, then reauthenticates and reads the previously created item. This stage
+tests sign-in recovery, not the Work Items page's separate `Access denied`
+alert: the shared browser-auth observer treats any same-origin protected API
+403 as loss of session and the auth wrapper unmounts protected content. The
+browser stage receipt records the exact 403 status and middleware body. The
+outer acceptance receipt keeps `authorization_denial_ui` in `states_not_run`
+until that stage is attempted. An attempted failure moves it to `states_failed`
+and preserves the browser stage's `FAIL` receipt; only a `PASS` clears it from
+both maps. A normal-stage pass leaves the denial criterion `NOT_RUN`. This
+stage is implemented but has not yet produced a native artifact receipt; keep
+its acceptance pending until the exact packaged artifact run passes. Missing
+bundled support and generic HTTP 500 remain `NOT_RUN` until
+their separately owned or supported packaged fixtures run. Do not use response
+interception as backend evidence.
 The browser receipt may say `PASS_BOUNDED` only after the bounded process-tree
 cleanup result confirms that the Runtime wrapper was reaped, its descendant
 snapshot was complete, and no observed descendant remains live. A normal return
