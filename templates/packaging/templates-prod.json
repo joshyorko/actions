@@ -24,6 +24,11 @@
             "id": "mcp-v2-showcase",
             "name": "MCP v2 Showcase",
             "desc": "A local example of the stateless core MCP protocol."
+        },
+        {
+            "id": "canvas-query",
+            "name": "Canvas Query",
+            "desc": "A local typed Action rendered in the Canvas MCP App View."
         }
     ]
 }

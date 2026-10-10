@@ -85,6 +85,55 @@ SQLite-persisted Runtime Run records containing Run IDs, passed statuses, and
 action names. Preserve this receipt before reusing the pytest `--basetemp`
 directory or allowing pytest to prune old temporary trees.
 
+The Canvas Query template has a separate opt-in candidate-source gate:
+`ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE=1` runs
+`test_canvas_template_candidate_source_runs_through_runtime_and_real_browser`.
+It leaves the embedded bundle and production `actions-core=1.0.3` manifest
+unchanged, then adjusts only a disposable extracted project's manifest to use
+published Core 1.0.2 as the resolvable base and installs an exact wheel built
+from the checked-out Core source after environment creation. The Runtime worker
+must report a matching local-wheel `direct_url.json`, archive SHA-256, imported
+module ownership, and source revision/tree/blob IDs; the same built view is
+then exercised in a real browser against Runtime. This proves the candidate
+source path only. The production template's exact published-Core 1.0.3 gate
+remains separate and blocked until that dependency is published and verified.
+Pin `PYTHONPATH` to the absolute Runtime source path for this source-mode gate
+and probe the child interpreter from the extracted project's working directory;
+a relative path can silently select another checkout's editable Runtime. The
+worker must report the loaded `actions.mcp` and metadata-module paths and hashes,
+which are checked against both candidate wheel bytes and source blobs. Browser
+execution is currently a Linux hosted gate: launch Node in a fresh POSIX session
+and capture descendant PID/create-time identities while it runs. Signal the
+process group only while the original leader is still unreaped or a captured
+identity confirms that the original group remains; after the leader exits, its
+numeric group ID can be reused. Clean captured identities on completion or
+timeout, and skip this POSIX-specific regression on Windows. This also covers a
+Node parent that exits while a browser child keeps inherited output pipes open;
+killing only the Node PID is insufficient.
+The hosted candidate-source control belongs in
+`.github/workflows/frontend-build-unauthenticated.yml` on its Linux job: it
+already installs the lockfile-selected Chromium through the frontend's
+`node_modules`. From the `action_server` working directory, resolve the
+executable through `./frontend/node_modules/@playwright/test`, set its
+absolute path explicitly, and run only the opt-in candidate test with the
+checkout's Python Runtime source. Unset the frozen-executable selector and
+`VIRTUAL_ENV`, use task-local `ACTIONS_HOME`, `TMPDIR` and `UV_CACHE_DIR`,
+and reuse the same-job Playwright browser cache because later native browser
+checks consume it. Require JUnit to
+contain exactly that one test with no skips, failures, or errors before
+uploading its sanitized summary and provenance receipt. This workflow has no
+generated-file header, and `.github/workflows/_gen_workflows.py`'s `TARGETS`
+omits it, so a direct workflow edit is maintained.
+The default integration suite skips both opt-in Runtime/browser gates, so a
+skip is not browser evidence. The fixture's `artifact: null` response is
+deliberately partial: it is not a successful shared-schema result and does not
+prove authorized artifact retrieval or user-facing download behavior.
+Keep tests shipped inside the template self-contained: run them from a fresh
+`action-server new` extraction and read only files included in that extracted
+project. Tests that compare a packaged example with repository contract
+fixtures belong in the repository's test suite, since those fixtures are not
+present for a template user after extraction.
+
 The focused source tests exercise public decorators through the Runtime
 Streamable HTTP route. The process-level fixture additionally installs the
 exact candidate Core wheel into an isolated test environment before importing an
@@ -127,6 +176,13 @@ legacy test pins to 1.0.0 bootstrapped an environment but the worker exited
 before writing its result; a fixture pin to 0.10.0 could not be resolved. The
 Runtime's explicit minimum-version error and those fixture inputs identify a
 test-fixture incompatibility, not an RCC defect.
+
+Version metadata alone is not source provenance: a source-built candidate can
+have the same `1.0.2` version as the registry wheel while containing different
+API bytes. Bind candidate acceptance to its source revision/tree and wheel
+SHA-256, then verify that exact wheel through the worker's `direct_url.json`;
+keep its result distinct from a test of the unchanged manifest against the
+published wheel.
 
 Frozen integration fixtures that synchronize packages with `package.yaml` may
 need a cold RCC-managed environment before the server emits its ready-port
@@ -420,6 +476,18 @@ new upload and never replace an existing tag or distribution file.
 Publish dependency releases before changing template pins. After publication,
 update the source templates and regenerate the embedded template ZIP and its
 SHA-256 metadata together; source YAML changes alone do not update shipped templates.
+When adding an embedded community template, update the exact inventory in
+`test_new_list_templates` too: check both its human-readable listing and the
+complete `action-server new list-templates --json` name set. Bundle integrity
+tests do not verify that the CLI inventory assertion includes the new template.
+Template tests are shipped in the template archive, so verify them from a fresh
+archive extraction and keep their inputs and dependencies inside that template.
+Comparisons against monorepo contracts or fixtures belong in repository-level
+tests; an extracted template must not reach outside its files to load them.
+Keep unpublished Core pins explicitly provisional and do not present the
+dependent production template to users before publication and fresh resolution.
+For Canvas results, `artifact: null` is a deliberately partial local result,
+not a match for the shared `Success` schema's required artifact handle.
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
@@ -1629,6 +1697,17 @@ The beta and production template deployment workflows change into
 Preserve that script's tracked executable mode (`100755`); a checkout that loses
 the mode fails before Python starts with shell exit 126. The active contract test
 checks both the executable bit and each workflow's direct invocation.
+The Canvas Query acceptance test that times out an owned process tree waits for
+a readiness marker published only after its grandchild starts before starting
+the short runtime-timeout clock. Keep readiness separately bounded and atomic:
+otherwise interpreter startup latency can expire the cleanup timeout before a
+descendant exists, producing a missing-PID fixture failure rather than testing
+descendant cleanup. The marker proves setup only; retain the process-tree
+identity checks and require the captured descendant to be gone or zombie after
+timeout cleanup. If the leader exits while the marker is being published,
+recheck the atomic marker before reporting early exit. Drain captured output
+with a short bound only: a descendant may inherit the pipes, so unbounded
+`communicate()` can block before identity-checked cleanup runs.
 
 ### Action Server tunnel verification
 

@@ -384,18 +384,30 @@ def test_runtime_metadata_uses_published_active_dependencies():
 
 
 def test_template_manifests_pin_supported_worker_core():
-    manifests = sorted((REPO / "templates").glob("*/package.yaml"))
-    assert manifests
+    expected_core_versions = {
+        "advanced": "1.0.2",
+        "basic": "1.0.2",
+        "canvas-query": "1.0.3",
+        "minimal": "1.0.2",
+        "mcp-v2-showcase": "1.0.2",
+        "workflow-producer-consumer": "1.0.2",
+    }
+    manifests = {
+        manifest.parent.name: manifest
+        for manifest in sorted((REPO / "templates").glob("*/package.yaml"))
+    }
+    assert set(manifests) == set(expected_core_versions)
 
-    for manifest in manifests:
+    for template_name, manifest in manifests.items():
         dependencies = {
             line.strip()[2:]
             for line in manifest.read_text().splitlines()
             if line.strip().startswith("- actions-")
         }
-        assert "actions-core=1.0.2" in dependencies, str(manifest)
+        expected_core = f"actions-core={expected_core_versions[template_name]}"
+        assert expected_core in dependencies, str(manifest)
         assert not any(
-            dependency.startswith("actions-core") and dependency != "actions-core=1.0.2"
+            dependency.startswith("actions-core") and dependency != expected_core
             for dependency in dependencies
         ), str(manifest)
 

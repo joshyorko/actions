@@ -16,6 +16,9 @@ docs/program/evidence/canvas-execution-graph-amendment-20261009-v* -text
 docs/program/evidence/rcc-provider-rollback-38034464513/* -text
 docs/program/evidence/rcc-provider-rollback-38034105493/* -text
 
+# This byte-verified generated resource intentionally retains its proven build bytes.
+templates/canvas-query/canvas.html -whitespace linguist-generated
+
 # Native provenance hashes these Go inputs as exact source bytes on every OS.
 action_server/go-wrapper/main.go text eol=lf
 action_server/go-wrapper/process.go text eol=lf
