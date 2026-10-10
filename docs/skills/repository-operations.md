@@ -2535,15 +2535,33 @@ The fixture repair is source child `1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6`
 (tree `cdd4d65d914df9be3eaa4cf979d6b224fde431c3`), parent
 `2552a8c3419b213825294a51927843b2d61f662e`. It creates the test-owned runtime
 directory before SQLite opens and registers `get_all_model_classes()`, including
-`mcp_catalog_name`; it changes no production source. The prepared control
-successor pins that exact source commit and tree. Hosted consumer acceptance is
-still NOT RUN until that control is published and its exact two JUnit cases
-pass without skips with a source/tree-bound staged-consumer receipt. The earlier
-one-case rollback run does not prove the staged consumer.
-The summary validator requires exactly one `action.py` and one `package.yaml`
-entry in each inventory before comparing digest maps; duplicate, missing, or
-unexpected paths fail closed. Its synthetic receipt regressions verify only
-summary admission and do not change the staged consumer's NOT RUN status.
+`mcp_catalog_name`; it changes no production source. The later immutable
+publication-details candidate is `e31506239fd0260d708a11440762537334f8d2d1`
+(tree `c6569803d1338541809cd349f440b69977155446`). It adds a credential-free
+minimal package and invokes `publish_artifact_details()` once against the same
+task-owned loopback provider pattern. Its receipt binds the candidate and
+control commit/tree, RCC version/binary SHA-256, exact arguments, raw JSON and
+both canonical digests from that response. This demonstrates one RCC
+publication's reported metadata only; it does not compile or admit a complete
+Package Revision.
+
+The hosted provider-rollback successor selects exactly three JUnit cases:
+last-good rollback, managed staged-source consumption, and publication-details
+capture. Its validator requires three passes and zero skips, errors, or
+failures; it checks both inventories have exactly one `action.py` and one
+`package.yaml` before digest comparison, then checks the publication receipt's
+candidate/control/RCC identities, single invocation, loopback provider,
+raw-response hash, and matching canonical digest pair. Duplicate, missing, or
+unexpected inventory paths fail closed. The artifact retains raw JUnit,
+source/details receipts, a sanitized lifecycle summary containing allowlisted
+source hashes, bounded process PID/create-time identities, known phase/status
+enums, and typed terminal fields, and the admission summary. Unknown nested
+receipt fields, malformed values, raw argv, interpreter paths, and PYTHONPATH
+are omitted from the lifecycle summary. Until this exact control run passes,
+the new details proof remains NOT RUN; synthetic validator tests are not hosted
+RCC evidence. Earlier two-case receipts for the pinned `473e42` control and
+`1e795c6` staged-consumer source prove only their rollback and staged-consumer
+scope; they did not select or exercise `publish_artifact_details()`.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.

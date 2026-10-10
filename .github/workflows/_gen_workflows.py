@@ -889,11 +889,14 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
 
 RCC_ROLLBACK_SUMMARY_SCRIPT = r"""import hashlib
 import json
+import math
 import os
+import re
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import urlsplit
 
 workspace = Path(os.environ["GITHUB_WORKSPACE"])
 control = workspace / "control"
@@ -1019,8 +1022,8 @@ except (OSError, ET.ParseError, ValueError):
     issues.append("junit_missing_or_invalid")
 if test_counts != actual_case_counts:
     issues.append("junit_suite_counts_do_not_match_testcases")
-if test_counts != {"tests": 2, "failures": 0, "errors": 0, "skipped": 0}:
-    issues.append("test_result_not_exactly_two_passes")
+if test_counts != {"tests": 3, "failures": 0, "errors": 0, "skipped": 0}:
+    issues.append("test_result_not_exactly_three_passes")
 expected_test_identities = {
     (
         "test_current_candidate_import_rollback",
@@ -1030,13 +1033,17 @@ expected_test_identities = {
         "test_source_staging_rcc_consumer",
         "test_staged_package_executes_in_managed_rcc_runtime",
     ),
+    (
+        "test_source_staging_rcc_consumer",
+        "test_published_artifact_details_preserves_one_rcc_identity_pair",
+    ),
 }
 observed_test_identities = {
     (case.attrib.get("classname", "").rsplit(".", 1)[-1], case.attrib.get("name"))
     for case in cases
 }
 test_identity_matches = (
-    len(cases) == 2 and observed_test_identities == expected_test_identities
+    len(cases) == 3 and observed_test_identities == expected_test_identities
 )
 if not test_identity_matches:
     issues.append("unexpected_test_identity")
@@ -1160,6 +1167,120 @@ if receipt.get("rcc_sha256") != expected_rcc_sha:
 if receipt.get("rcc_version") != expected_rcc_version:
     issues.append("receipt_rcc_version_mismatch")
 
+published_details = read_json(evidence_dir / "published-details-receipt.json")
+if not isinstance(published_details, dict):
+    published_details = {}
+publication = published_details.get("publication")
+publication = publication if isinstance(publication, dict) else {}
+details_source = published_details.get("source")
+details_source = details_source if isinstance(details_source, dict) else {}
+details_control = published_details.get("control")
+details_control = details_control if isinstance(details_control, dict) else {}
+details_rcc = published_details.get("rcc")
+details_rcc = details_rcc if isinstance(details_rcc, dict) else {}
+raw_json = publication.get("raw_json")
+raw_payload = None
+if isinstance(raw_json, str):
+    try:
+        raw_payload = json.loads(raw_json)
+    except json.JSONDecodeError:
+        raw_payload = None
+specification_digest = publication.get("specification_digest")
+artifact_digest = publication.get("artifact_digest")
+provider = publication.get("provider")
+publish_args = publication.get("args")
+provider_is_loopback = False
+if isinstance(provider, str):
+    try:
+        parsed_provider = urlsplit(provider)
+        provider_is_loopback = (
+            not any(
+                ord(character) < 32
+                or ord(character) == 127
+                or character.isspace()
+                for character in provider
+            )
+            and parsed_provider.scheme == "http"
+            and parsed_provider.hostname == "127.0.0.1"
+            and parsed_provider.port is not None
+            and parsed_provider.username is None
+            and parsed_provider.password is None
+            and not parsed_provider.query
+            and not parsed_provider.fragment
+        )
+    except ValueError:
+        provider_is_loopback = False
+publish_args_valid = (
+    isinstance(publish_args, list)
+    and len(publish_args) == 8
+    and publish_args[:4]
+    == [
+        str(rcc_binary),
+        "env",
+        "publish",
+        "--environment",
+    ]
+    and isinstance(publish_args[4], str)
+    and Path(publish_args[4]).is_absolute()
+    and Path(publish_args[4]).name == "package.yaml"
+    and Path(publish_args[4]).parent.name == "minimal-package"
+    and publish_args[5:] == ["--json", "--provider", provider]
+)
+identity_digests_valid = (
+    isinstance(specification_digest, str)
+    and re.fullmatch(r"sha256:[0-9a-f]{64}", specification_digest) is not None
+    and isinstance(artifact_digest, str)
+    and re.fullmatch(r"sha256:[0-9a-f]{64}", artifact_digest) is not None
+)
+raw_json_hash_matches = (
+    isinstance(raw_json, str)
+    and publication.get("raw_json_sha256")
+    == hashlib.sha256(raw_json.encode("utf-8")).hexdigest()
+)
+raw_pair_matches = (
+    isinstance(raw_payload, dict)
+    and raw_payload.get("specificationDigest") == specification_digest
+    and raw_payload.get("artifactDigest") == artifact_digest
+)
+raw_aliases_match = isinstance(raw_payload, dict)
+if isinstance(raw_payload, dict):
+    if (
+        "specification_digest" in raw_payload
+        and raw_payload.get("specification_digest") != specification_digest
+    ):
+        raw_aliases_match = False
+    for alias in ("artifact_digest", "digest"):
+        if alias in raw_payload and raw_payload[alias] != artifact_digest:
+            raw_aliases_match = False
+    for alias in ("artifact", "environment_artifact"):
+        if alias not in raw_payload:
+            continue
+        value = raw_payload[alias]
+        if isinstance(value, dict) and "digest" in value:
+            value = value["digest"]
+        if value != artifact_digest:
+            raw_aliases_match = False
+published_details_valid = (
+    published_details.get("schema_version") == 1
+    and published_details.get("status") == "PASS"
+    and details_source.get("commit") == candidate_sha
+    and details_source.get("tree") == candidate_tree
+    and details_control.get("commit") == control_sha
+    and details_control.get("tree") == control_tree
+    and details_rcc.get("version") == expected_rcc_version
+    and details_rcc.get("sha256") == expected_rcc_sha
+    and type(publication.get("invocation_count")) is int
+    and publication.get("invocation_count") == 1
+    and provider_is_loopback
+    and publish_args_valid
+    and identity_digests_valid
+    and raw_pair_matches
+    and raw_aliases_match
+    and raw_json_hash_matches
+)
+if not published_details_valid:
+    issues.append("published_details_receipt_missing_or_invalid")
+
 before = receipt.get("provider_ops_before_failure")
 after_failure = receipt.get("provider_ops_after_failure")
 after_recovery = receipt.get("provider_ops_after_recovery")
@@ -1172,6 +1293,16 @@ provider_ops_equal = (
 )
 if not provider_ops_equal:
     issues.append("provider_operations_changed_or_missing")
+allowed_provider_phases = {"publish", "acquire", "build"}
+provider_phases_valid = provider_ops_equal and all(
+    isinstance(operation, dict)
+    and type(operation.get("phase")) is str
+    and operation.get("phase") in allowed_provider_phases
+    for phase_group in (before, after_failure, after_recovery)
+    for operation in phase_group
+)
+if not provider_phases_valid:
+    issues.append("provider_operation_phase_missing_or_invalid")
 
 run_expectations = {
     "first_run": (2, "last-good"),
@@ -1202,6 +1333,80 @@ if runtime.get("forced_cleanup_returncode_observed") is not True:
 remaining = runtime.get("same_owned_descendants_remaining_after_stop")
 if not isinstance(remaining, list) or remaining:
     issues.append("owned_descendants_remain_or_unknown")
+
+def safe_phase_list(value):
+    if not isinstance(value, list):
+        return []
+    return [
+        operation["phase"]
+        if isinstance(operation, dict)
+        and type(operation.get("phase")) is str
+        and operation.get("phase") in {"publish", "acquire", "build"}
+        else "INVALID"
+        for operation in value
+    ]
+
+def safe_process_identities(value):
+    if not isinstance(value, list):
+        return []
+    identities = []
+    for process in value:
+        if not isinstance(process, dict):
+            continue
+        identity = {}
+        if type(process.get("pid")) is int and process["pid"] > 0:
+            identity["pid"] = process["pid"]
+        try:
+            valid_create_time = (
+                type(process.get("create_time")) in (int, float)
+                and math.isfinite(process["create_time"])
+                and process["create_time"] > 0
+            )
+        except OverflowError:
+            valid_create_time = False
+        if valid_create_time:
+            identity["create_time"] = process["create_time"]
+        identities.append(identity)
+    return identities
+
+safe_natural_status = runtime.get("natural_exit_status")
+if type(safe_natural_status) is not str or safe_natural_status not in {"PASS", "FAIL", "NOT_RUN", "UNKNOWN"}:
+    safe_natural_status = "UNKNOWN"
+safe_return_code = runtime.get("returncode_before_forced_cleanup")
+if type(safe_return_code) is not int:
+    safe_return_code = None
+safe_runtime = {
+    "natural_exit_status": safe_natural_status,
+    "returncode_before_forced_cleanup": safe_return_code,
+    "shutdown_request_succeeded": runtime.get("shutdown_request_succeeded")
+    if type(runtime.get("shutdown_request_succeeded")) is bool
+    else None,
+    "forced_stop_used": runtime.get("forced_stop_used")
+    if type(runtime.get("forced_stop_used")) is bool
+    else None,
+    "forced_cleanup_returncode_observed": runtime.get("forced_cleanup_returncode_observed")
+    if type(runtime.get("forced_cleanup_returncode_observed")) is bool
+    else None,
+}
+if type(runtime.get("pid")) is int and runtime["pid"] > 0:
+    safe_runtime["pid"] = runtime["pid"]
+safe_module_hashes = {
+    name: file_hashes[name]
+    for name in ("action_package_handler", "actions_import", "runtime_adapter")
+    if file_hashes.get(name) is not None
+}
+safe_run_statuses = {}
+for run_name in ("first_run", "second_run", "recovered_run"):
+    run_value = receipt.get(run_name)
+    run_status = run_value.get("status") if isinstance(run_value, dict) else None
+    safe_run_statuses[run_name] = run_status if type(run_status) is int else "INVALID"
+safe_receipt_status = receipt.get("status")
+if type(safe_receipt_status) is not str or safe_receipt_status not in {"PASS", "FAIL"}:
+    safe_receipt_status = "NOT_RECORDED"
+safe_rcc_version = receipt.get("rcc_version")
+if safe_rcc_version != expected_rcc_version:
+    safe_rcc_version = "UNKNOWN"
+safe_rcc_sha = actual_rcc_sha if actual_rcc_sha == expected_rcc_sha else None
 
 summary = {
     "schema_version": 1,
@@ -1234,19 +1439,28 @@ summary = {
         "junit_counts_match_testcases": test_counts == actual_case_counts,
         "expected_test_identity_matches": test_identity_matches,
         "failed_case_names": failed_case_names,
-        "receipt_status": receipt.get("status", "NOT_RECORDED"),
+        "receipt_status": safe_receipt_status,
         "provider_operations_unchanged": provider_ops_equal,
         "provider_operation_count": len(before) if isinstance(before, list) else 0,
         "run_results_match": run_results_match,
-        "natural_exit_status": runtime.get("natural_exit_status"),
+        "natural_exit_status": safe_natural_status,
         "natural_return_code_before_cleanup": natural_return_code if type(natural_return_code) is int and natural_return_code in (0, 1) else None,
-        "forced_stop_used": runtime.get("forced_stop_used"),
+        "forced_stop_used": safe_runtime["forced_stop_used"],
         "forced_cleanup_returncode_observed": runtime.get("forced_cleanup_returncode_observed") is True,
         "remaining_owned_descendant_count": len(remaining) if isinstance(remaining, list) else None,
-        "staged_consumer_receipt_status": staged_receipt.get("status", "NOT_RECORDED"),
+        "staged_consumer_receipt_status": staged_receipt.get("status") if type(staged_receipt.get("status")) is str and staged_receipt.get("status") in {"PASS", "FAIL"} else "NOT_RECORDED",
         "staged_consumer_receipt_valid": staged_receipt_valid,
         "staged_action_sha256_matches": staged_action_digest == (staged_result.get("action_source_sha256") if isinstance(staged_result, dict) else None),
         "managed_worker_origins_confirmed": managed_worker_origins,
+        "published_details_receipt_status": published_details.get("status") if type(published_details.get("status")) is str and published_details.get("status") in {"PASS", "FAIL"} else "NOT_RECORDED",
+        "published_details_receipt_valid": published_details_valid,
+    },
+    "published_details": {
+        "specification_digest": specification_digest if identity_digests_valid else None,
+        "artifact_digest": artifact_digest if identity_digests_valid else None,
+        "raw_json_sha256": publication.get("raw_json_sha256") if raw_json_hash_matches else None,
+        "single_invocation": type(publication.get("invocation_count")) is int and publication.get("invocation_count") == 1,
+        "provider_is_loopback": provider_is_loopback,
     },
 }
 (evidence_dir / "acceptance-summary.json").write_text(
@@ -1262,12 +1476,41 @@ lines = [
     f"runner_libc={worker_libc_name or 'UNKNOWN'} {worker_libc_version or 'UNKNOWN'}",
     f"rcc_version={summary['rcc']['version']}",
     f"rcc_sha256={actual_rcc_sha}",
+    f"published_details_receipt_valid={published_details_valid}",
+    f"published_specification_digest={specification_digest if identity_digests_valid else 'INVALID'}",
+    f"published_artifact_digest={artifact_digest if identity_digests_valid else 'INVALID'}",
     f"pytest_exit_code={test_exit_code}",
-    f"receipt_status={receipt.get('status', 'NOT_RECORDED')}",
-    f"natural_exit_status={runtime.get('natural_exit_status')}",
+    f"receipt_status={safe_receipt_status}",
+    f"natural_exit_status={safe_natural_status}",
 ]
 (evidence_dir / "acceptance-summary.log").write_text("\n".join(lines) + "\n", encoding="utf-8")
 print("\n".join(lines))
+before_ops = receipt.get("provider_ops_before_failure", [])
+after_ops = receipt.get("provider_ops_after_recovery", [])
+
+lifecycle_summary = {
+    "schema_version": 1,
+    "status": safe_receipt_status,
+    "source": {
+        "commit": candidate_sha,
+        "tree": candidate_tree,
+        "runtime_module_sha256": safe_module_hashes,
+    },
+    "rcc": {"version": safe_rcc_version, "sha256": safe_rcc_sha},
+    "provider_operation_phases_before_failure": safe_phase_list(before_ops),
+    "provider_operation_phases_after_recovery": safe_phase_list(after_ops),
+    "run_statuses": safe_run_statuses,
+    "action_server_process_exit": safe_runtime,
+    "owned_descendants_before_stop": safe_process_identities(
+        runtime.get("owned_descendants_before_stop")
+    ),
+    "same_owned_descendants_remaining_after_stop": safe_process_identities(
+        runtime.get("same_owned_descendants_remaining_after_stop")
+    ),
+}
+(evidence_dir / "lifecycle-summary.json").write_text(
+    json.dumps(lifecycle_summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+)
 sys.exit(0 if not issues else 1)
 """
 
@@ -1277,8 +1520,8 @@ class ActionServerRccProviderRollback(BaseWorkflow):
     target = "actions_runtime_rcc_provider_rollback.yml"
     project_name = "action_server"
     rcc_sha256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    candidate_sha = "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6"
-    candidate_tree = "cdd4d65d914df9be3eaa4cf979d6b224fde431c3"
+    candidate_sha = "e31506239fd0260d708a11440762537334f8d2d1"
+    candidate_tree = "c6569803d1338541809cd349f440b69977155446"
 
     def __init__(self):
         super().__init__()
@@ -1363,10 +1606,13 @@ actual_tree=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD^{tree})
 test "$actual_tree" = "$CANDIDATE_TREE"
 control=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD)
 test "$control" = "$CONTROL_SHA"
+control_tree=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD^{tree})
 printf 'RCC_ROLLBACK_CANDIDATE_SHA=%s\\n' "$actual" >> "$GITHUB_ENV"
 printf 'RCC_ROLLBACK_CANDIDATE_TREE=%s\\n' "$actual_tree" >> "$GITHUB_ENV"
 printf 'RCC_ROLLBACK_CONTROL_SHA=%s\\n' "$control" >> "$GITHUB_ENV"
+printf 'RCC_ROLLBACK_CONTROL_TREE=%s\\n' "$control_tree" >> "$GITHUB_ENV"
 printf 'control_sha=%s\\n' "$control"
+printf 'control_tree=%s\\n' "$control_tree"
 printf 'candidate_sha=%s\\n' "$actual"
 printf 'candidate_tree=%s\\n' "$actual_tree"
 """,
@@ -1457,7 +1703,7 @@ sha256sum "$runtime" "$default"
             {
                 "name": "Prepare isolated acceptance evidence",
                 "shell": "bash",
-                "run": f'mkdir -p "{evidence_dir}" "$RUNNER_TEMP/rcc-provider-rollback-tmp"',
+                "run": f'mkdir -m 700 -p "{evidence_dir}" "$RUNNER_TEMP/rcc-provider-rollback-tmp" "$RUNNER_TEMP/rcc-provider-rollback-home"',
             },
             {
                 "name": "Run current-candidate RCC provider rollback acceptance",
@@ -1466,6 +1712,9 @@ sha256sum "$runtime" "$default"
                     "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
                     "ACTIONS_RUNTIME_LIFECYCLE_RECEIPT": f"{evidence_dir}/lifecycle-receipt.json",
                     "ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT": f"{evidence_dir}/staged-consumer-receipt.json",
+                    "ACTIONS_RUNTIME_PUBLISHED_DETAILS_RECEIPT": f"{evidence_dir}/published-details-receipt.json",
+                    "ACTIONS_HOME": "${{ runner.temp }}/rcc-provider-rollback-home",
+                    "ROBOCORP_HOME": "${{ runner.temp }}/rcc-provider-rollback-home",
                     "PYTHONPATH": "${{ github.workspace }}/candidate/action_server/src:${{ github.workspace }}/candidate/actions/src",
                     "TMPDIR": "${{ runner.temp }}/rcc-provider-rollback-tmp",
                 },
@@ -1478,6 +1727,7 @@ uv run --no-project --python 3.12 poetry run pytest -n 0 -vv -rA \\
   -m 'integration_test and real_rcc' \\
   tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable \\
   tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime \\
+  tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair \\
   --junitxml="{junit_path}" 2>&1 | tee "{raw_log}"
 status=${{PIPESTATUS[0]}}
 echo "RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE=$status" >> "$GITHUB_ENV"
@@ -1496,7 +1746,9 @@ exit "$status"
                 "run": """python - <<'PY'
 import hashlib
 import json
+import math
 import os
+import re
 import subprocess
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -1548,7 +1800,15 @@ if not isinstance(runtime, dict):
 source = receipt.get("source", {})
 if not isinstance(source, dict):
     source = {}
-module_hashes = source.get("runtime_module_sha256", {})
+module_paths = {
+    "action_package_handler": "action_server/src/actions/server/_action_package_handler.py",
+    "actions_import": "action_server/src/actions/server/_actions_import.py",
+    "runtime_adapter": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+}
+module_hashes = {
+    name: sha256(candidate / path) for name, path in module_paths.items()
+}
+module_hashes = {name: digest for name, digest in module_hashes.items() if digest is not None}
 before = receipt.get("provider_ops_before_failure", [])
 after = receipt.get("provider_ops_after_recovery", [])
 before = before if isinstance(before, list) else []
@@ -1584,18 +1844,19 @@ summary = {
     "test": {
         "exit_code": os.environ.get("RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE"),
         "junit": test_cases,
-        "receipt_status": receipt.get("status", "NOT_RECORDED"),
-        "failure_type": receipt.get("failure_type"),
+        "receipt_status": receipt.get("status") if type(receipt.get("status")) is str and receipt.get("status") in {"PASS", "FAIL"} else "NOT_RECORDED",
         "receipt_read_error": receipt_read_error,
-        "provider_operation_phases_before_failure": [op.get("phase") for op in before if isinstance(op, dict)],
-        "provider_operation_phases_after_recovery": [op.get("phase") for op in after if isinstance(op, dict)],
+        "provider_operation_phases_before_failure": [op["phase"] if isinstance(op, dict) and type(op.get("phase")) is str and op.get("phase") in {"publish", "acquire", "build"} else "INVALID" for op in before],
+        "provider_operation_phases_after_recovery": [op["phase"] if isinstance(op, dict) and type(op.get("phase")) is str and op.get("phase") in {"publish", "acquire", "build"} else "INVALID" for op in after],
         "run_statuses": [
             (receipt.get(name) or {}).get("status")
+            if type((receipt.get(name) or {}).get("status")) is int
+            else "INVALID"
             for name in ("first_run", "second_run", "recovered_run")
         ],
-        "natural_exit_status": runtime.get("natural_exit_status"),
-        "returncode_before_forced_cleanup": runtime.get("returncode_before_forced_cleanup"),
-        "forced_stop_used": runtime.get("forced_stop_used"),
+        "natural_exit_status": runtime.get("natural_exit_status") if type(runtime.get("natural_exit_status")) is str and runtime.get("natural_exit_status") in {"PASS", "FAIL", "NOT_RUN", "UNKNOWN"} else "UNKNOWN",
+        "returncode_before_forced_cleanup": runtime.get("returncode_before_forced_cleanup") if type(runtime.get("returncode_before_forced_cleanup")) is int else None,
+        "forced_stop_used": runtime.get("forced_stop_used") if type(runtime.get("forced_stop_used")) is bool else None,
         "same_owned_descendants_remaining_after_stop": len(runtime.get("same_owned_descendants_remaining_after_stop", [])),
     },
 }
@@ -1639,7 +1900,7 @@ PY
                 "uses": "actions/upload-artifact@v4",
                 "with": {
                     "name": "rcc-provider-rollback-${{ github.run_id }}-${{ github.run_attempt }}",
-                    "path": f"{evidence_dir}/acceptance-summary.*\n{evidence_dir}/staged-consumer-receipt.json",
+                    "path": f"{evidence_dir}/acceptance-summary.*\n{evidence_dir}/staged-consumer-receipt.json\n{evidence_dir}/published-details-receipt.json\n{evidence_dir}/lifecycle-summary.json\n{junit_path}",
                     "if-no-files-found": "warn",
                     "retention-days": 14,
                 },

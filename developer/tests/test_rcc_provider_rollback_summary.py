@@ -12,7 +12,6 @@ from pathlib import Path
 
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[2]
 GENERATOR_PATH = ROOT / ".github/workflows/_gen_workflows.py"
 
@@ -51,7 +50,7 @@ def _make_repository(root: Path, files: dict[str, bytes]) -> tuple[str, str]:
 def _fixture(tmp_path: Path):
     workspace = tmp_path / "workspace"
     workspace.mkdir()
-    control_sha, _ = _make_repository(
+    control_sha, control_tree = _make_repository(
         workspace / "control", {"control.txt": b"control"}
     )
     source_files = {
@@ -140,12 +139,16 @@ def _fixture(tmp_path: Path):
         "second_run": {"status": 2, "result": "last-good"},
         "recovered_run": {"status": 2, "result": "recovered"},
         "action_server_process_exit": {
+            "pid": 2401,
             "natural_exit_status": "PASS",
             "returncode_before_forced_cleanup": 0,
             "shutdown_request_succeeded": True,
             "forced_stop_used": False,
             "forced_cleanup_returncode_observed": True,
             "same_owned_descendants_remaining_after_stop": [],
+            "owned_descendants_before_stop": [
+                {"pid": 2402, "create_time": 1234.5, "argv": ["do-not-export"]}
+            ],
             "argv": ["do-not-export"],
         },
     }
@@ -156,11 +159,13 @@ def _fixture(tmp_path: Path):
     )
     junit = tmp_path / "junit.xml"
     junit.write_text(
-        '<testsuite tests="2" failures="0" errors="0" skipped="0">'
+        '<testsuite tests="3" failures="0" errors="0" skipped="0">'
         '<testcase classname="tests.action_server_tests.test_current_candidate_import_rollback" '
         'name="test_current_candidate_failed_reload_keeps_last_good_action_usable"/>'
         '<testcase classname="tests.action_server_tests.test_source_staging_rcc_consumer" '
         'name="test_staged_package_executes_in_managed_rcc_runtime"/>'
+        '<testcase classname="tests.action_server_tests.test_source_staging_rcc_consumer" '
+        'name="test_published_artifact_details_preserves_one_rcc_identity_pair"/>'
         "</testsuite>",
         encoding="utf-8",
     )
@@ -199,6 +204,48 @@ def _fixture(tmp_path: Path):
     }
     (evidence / "staged-consumer-receipt.json").write_text(
         json.dumps(staged_receipt), encoding="utf-8"
+    )
+    specification_digest = "sha256:" + "c" * 64
+    artifact_digest = "sha256:" + "d" * 64
+    raw_json = json.dumps(
+        {
+            "specificationDigest": specification_digest,
+            "artifactDigest": artifact_digest,
+            "legacyBlueprintKey": "fixture-blueprint",
+            "objectCount": 1,
+            "uploadedBytes": 12,
+            "reusedBytes": 34,
+        },
+        separators=(",", ":"),
+    )
+    minimal_environment = tmp_path / "minimal-package" / "package.yaml"
+    details_receipt = {
+        "schema_version": 1,
+        "status": "PASS",
+        "source": {"commit": candidate_sha, "tree": candidate_tree},
+        "control": {"commit": control_sha, "tree": control_tree},
+        "rcc": {"version": "v18.19.3", "sha256": rcc_sha},
+        "publication": {
+            "invocation_count": 1,
+            "provider": "http://127.0.0.1:43210",
+            "args": [
+                str(rcc_binary),
+                "env",
+                "publish",
+                "--environment",
+                str(minimal_environment),
+                "--json",
+                "--provider",
+                "http://127.0.0.1:43210",
+            ],
+            "specification_digest": specification_digest,
+            "artifact_digest": artifact_digest,
+            "raw_json": raw_json,
+            "raw_json_sha256": hashlib.sha256(raw_json.encode("utf-8")).hexdigest(),
+        },
+    }
+    (evidence / "published-details-receipt.json").write_text(
+        json.dumps(details_receipt), encoding="utf-8"
     )
     env = {
         **os.environ,
@@ -247,6 +294,18 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
     assert summary["test"]["staged_consumer_receipt_status"] == "PASS"
     assert summary["test"]["staged_consumer_receipt_valid"] is True
     assert summary["test"]["staged_action_sha256_matches"] is True
+    assert summary["test"]["published_details_receipt_valid"] is True
+    assert summary["published_details"]["specification_digest"] == "sha256:" + "c" * 64
+    assert summary["published_details"]["artifact_digest"] == "sha256:" + "d" * 64
+    assert summary["published_details"]["single_invocation"] is True
+    assert summary["published_details"]["provider_is_loopback"] is True
+    lifecycle = json.loads((evidence / "lifecycle-summary.json").read_text())
+    assert lifecycle["action_server_process_exit"]["natural_exit_status"] == "PASS"
+    assert "argv" not in lifecycle["action_server_process_exit"]
+    assert lifecycle["action_server_process_exit"]["pid"] == 2401
+    assert lifecycle["owned_descendants_before_stop"] == [
+        {"pid": 2402, "create_time": 1234.5}
+    ]
     assert summary["runner"] == {
         "libc_name": "glibc",
         "libc_version": "2.39",
@@ -255,12 +314,67 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
     text = (evidence / "acceptance-summary.json").read_text()
     assert "do-not-export" not in text
     assert "user:secret" not in text
+    lifecycle_text = (evidence / "lifecycle-summary.json").read_text()
+    assert "do-not-export" not in lifecycle_text
+    assert "user:secret" not in lifecycle_text
+
+
+def test_exact_summary_script_ignores_unexpected_nested_source_fields(
+    tmp_path: Path,
+) -> None:
+    evidence, _, receipt, env = _fixture(tmp_path)
+    receipt["source"]["runtime_module_sha256"]["unexpected_observer"] = {
+        "argv": "PRIVATE_OBSERVER_SENTINEL"
+    }
+    receipt["action_server_process_exit"]["owned_descendants_before_stop"][0][
+        "create_time"
+    ] = 10**1000
+    (evidence / "lifecycle-receipt.json").write_text(
+        json.dumps(receipt), encoding="utf-8"
+    )
+
+    result = _run_summary(env)
+
+    assert result.returncode == 0, result.stderr + result.stdout
+    lifecycle = json.loads((evidence / "lifecycle-summary.json").read_text())
+    assert "unexpected_observer" not in lifecycle["source"]["runtime_module_sha256"]
+    assert "PRIVATE_OBSERVER_SENTINEL" not in json.dumps(lifecycle)
+    assert "create_time" not in lifecycle["owned_descendants_before_stop"][0]
+
+
+def test_exact_summary_script_sanitizes_malformed_failure_fields(
+    tmp_path: Path,
+) -> None:
+    evidence, _, receipt, env = _fixture(tmp_path)
+    sentinel = "PRIVATE_OBSERVER_SENTINEL"
+    receipt["status"] = sentinel
+    receipt["failure_type"] = sentinel
+    receipt["provider_ops_before_failure"] = [{"phase": [sentinel]}]
+    receipt["provider_ops_after_recovery"] = [{"phase": [sentinel]}]
+    receipt["action_server_process_exit"]["pid"] = [sentinel]
+    receipt["action_server_process_exit"]["natural_exit_status"] = sentinel
+    receipt["first_run"]["status"] = sentinel
+    (evidence / "lifecycle-receipt.json").write_text(
+        json.dumps(receipt), encoding="utf-8"
+    )
+
+    result = _run_summary(env)
+
+    assert result.returncode != 0
+    lifecycle_text = (evidence / "lifecycle-summary.json").read_text()
+    assert sentinel not in lifecycle_text
+    lifecycle = json.loads(lifecycle_text)
+    assert lifecycle["status"] == "NOT_RECORDED"
+    assert lifecycle["provider_operation_phases_before_failure"] == ["INVALID"]
+    assert "pid" not in lifecycle["action_server_process_exit"]
+    assert lifecycle["action_server_process_exit"]["natural_exit_status"] == "UNKNOWN"
+    assert lifecycle["run_statuses"]["first_run"] == "INVALID"
 
 
 @pytest.mark.parametrize(
     ("mutation", "expected_issue"),
     [
-        ("skip", "test_result_not_exactly_two_passes"),
+        ("skip", "test_result_not_exactly_three_passes"),
         ("glibc_too_old", "runner_glibc_below_artifact_minimum_or_unknown"),
         ("missing_glibc", "runner_glibc_below_artifact_minimum_or_unknown"),
         ("missing_junit", "junit_missing_or_invalid"),
@@ -413,3 +527,96 @@ def test_exact_summary_script_rejects_incomplete_receipt(
     summary = json.loads((evidence / "acceptance-summary.json").read_text())
     assert summary["admission"]["passed"] is False
     assert expected_issue in summary["admission"]["issues"]
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "missing",
+        "malformed",
+        "wrong_source_commit",
+        "wrong_source_tree",
+        "wrong_control_commit",
+        "wrong_control_tree",
+        "wrong_rcc_hash",
+        "missing_specification_digest",
+        "malformed_specification_digest",
+        "conflicting_artifact_digest",
+        "conflicting_payload_alias",
+        "payload_digest_mismatch",
+        "raw_hash_mismatch",
+        "multiple_invocations",
+        "credentialed_provider",
+        "argument_provider_mismatch",
+        "provider_control_character",
+        "boolean_invocation_count",
+        "non_object_root",
+    ],
+)
+def test_exact_summary_script_rejects_invalid_published_details(
+    tmp_path: Path, mutation: str
+) -> None:
+    evidence, _, _, env = _fixture(tmp_path)
+    receipt_path = evidence / "published-details-receipt.json"
+    if mutation == "missing":
+        receipt_path.unlink()
+    elif mutation == "malformed":
+        receipt_path.write_text("{", encoding="utf-8")
+    elif mutation == "non_object_root":
+        receipt_path.write_text("[]", encoding="utf-8")
+    else:
+        details = json.loads(receipt_path.read_text(encoding="utf-8"))
+        publication = details["publication"]
+        if mutation == "wrong_source_commit":
+            details["source"]["commit"] = "0" * 40
+        elif mutation == "wrong_source_tree":
+            details["source"]["tree"] = "0" * 40
+        elif mutation == "wrong_control_commit":
+            details["control"]["commit"] = "0" * 40
+        elif mutation == "wrong_control_tree":
+            details["control"]["tree"] = "0" * 40
+        elif mutation == "wrong_rcc_hash":
+            details["rcc"]["sha256"] = "0" * 64
+        elif mutation == "missing_specification_digest":
+            del publication["specification_digest"]
+        elif mutation == "malformed_specification_digest":
+            publication["specification_digest"] = "sha256:" + "z" * 64
+        elif mutation == "conflicting_artifact_digest":
+            publication["artifact_digest"] = "sha256:" + "e" * 64
+        elif mutation == "payload_digest_mismatch":
+            raw = json.loads(publication["raw_json"])
+            raw["artifactDigest"] = "sha256:" + "e" * 64
+            publication["raw_json"] = json.dumps(raw, separators=(",", ":"))
+            publication["raw_json_sha256"] = hashlib.sha256(
+                publication["raw_json"].encode("utf-8")
+            ).hexdigest()
+        elif mutation == "conflicting_payload_alias":
+            raw = json.loads(publication["raw_json"])
+            raw["artifact_digest"] = "sha256:" + "e" * 64
+            publication["raw_json"] = json.dumps(raw, separators=(",", ":"))
+            publication["raw_json_sha256"] = hashlib.sha256(
+                publication["raw_json"].encode("utf-8")
+            ).hexdigest()
+        elif mutation == "raw_hash_mismatch":
+            publication["raw_json_sha256"] = "0" * 64
+        elif mutation == "multiple_invocations":
+            publication["invocation_count"] = 2
+        elif mutation == "boolean_invocation_count":
+            publication["invocation_count"] = True
+        elif mutation == "credentialed_provider":
+            publication["provider"] = "http://user:secret@127.0.0.1:43210"
+            publication["args"][-1] = publication["provider"]
+        elif mutation == "argument_provider_mismatch":
+            publication["args"][-1] = "http://127.0.0.1:43211"
+        elif mutation == "provider_control_character":
+            publication["provider"] = "http://127.0.0.1:43210\n"
+            publication["args"][-1] = publication["provider"]
+        receipt_path.write_text(json.dumps(details), encoding="utf-8")
+
+    result = _run_summary(env)
+    assert result.returncode != 0
+    summary = json.loads((evidence / "acceptance-summary.json").read_text())
+    assert summary["admission"]["passed"] is False
+    assert (
+        "published_details_receipt_missing_or_invalid" in summary["admission"]["issues"]
+    )

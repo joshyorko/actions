@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW_RELATIVE_PATH = ".github/workflows/actions_runtime_rcc_provider_rollback.yml"
 WORKFLOW_NAME = "actions_runtime_rcc_provider_rollback.yml"
 RCC_SHA256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-CANDIDATE_SHA = "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6"
-CANDIDATE_TREE = "cdd4d65d914df9be3eaa4cf979d6b224fde431c3"
+CANDIDATE_SHA = "e31506239fd0260d708a11440762537334f8d2d1"
+CANDIDATE_TREE = "c6569803d1338541809cd349f440b69977155446"
 TEST_NODE = (
     "tests/action_server_tests/test_current_candidate_import_rollback.py::"
     "test_current_candidate_failed_reload_keeps_last_good_action_usable"
@@ -25,6 +25,10 @@ TEST_NODE = (
 STAGED_CONSUMER_NODE = (
     "tests/action_server_tests/test_source_staging_rcc_consumer.py::"
     "test_staged_package_executes_in_managed_rcc_runtime"
+)
+PUBLISHED_DETAILS_NODE = (
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::"
+    "test_published_artifact_details_preserves_one_rcc_identity_pair"
 )
 RCC_VERSION = "v18.19.3"
 
@@ -134,6 +138,11 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert 'test "$actual_tree" = "$CANDIDATE_TREE"' in verify["run"]
     assert 'test "$control" = "$CONTROL_SHA"' in verify["run"]
     assert (
+        'control_tree=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD^{tree})'
+        in verify["run"]
+    )
+    assert "RCC_ROLLBACK_CONTROL_TREE" in verify["run"]
+    assert (
         workflow["defaults"]["run"]["working-directory"] == "./candidate/action_server"
     )
 
@@ -176,9 +185,17 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert "-n 0" in test["run"]
     assert TEST_NODE in test["run"]
     assert STAGED_CONSUMER_NODE in test["run"]
+    assert PUBLISHED_DETAILS_NODE in test["run"]
     assert test["env"]["ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT"].endswith(
         "/staged-consumer-receipt.json"
     )
+    assert test["env"]["ACTIONS_RUNTIME_PUBLISHED_DETAILS_RECEIPT"].endswith(
+        "/published-details-receipt.json"
+    )
+    assert (
+        test["env"]["ACTIONS_HOME"] == "${{ runner.temp }}/rcc-provider-rollback-home"
+    )
+    assert test["env"]["ROBOCORP_HOME"] == test["env"]["ACTIONS_HOME"]
     assert "pytest" in test["run"] and "inv test" not in test["run"]
 
     summary = next(
@@ -200,12 +217,17 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert admission["env"]["EXPECTED_CANDIDATE_TREE"] == CANDIDATE_TREE
     assert "receipt_source_commit_mismatch" in admission["run"]
     assert "runner_libc" in admission["run"]
-    assert "test_result_not_exactly_two_passes" in admission["run"]
+    assert "test_result_not_exactly_three_passes" in admission["run"]
     assert "staged_consumer_receipt_missing_or_invalid" in admission["run"]
+    assert "published_details_receipt_missing_or_invalid" in admission["run"]
+    assert "raw_json_sha256" in admission["run"]
     assert "sys.exit(0 if not issues else 1)" in admission["run"]
     assert upload["if"] == "always()"
     assert "acceptance-summary.*" in upload["with"]["path"]
     assert "staged-consumer-receipt.json" in upload["with"]["path"]
+    assert "published-details-receipt.json" in upload["with"]["path"]
+    assert "lifecycle-summary.json" in upload["with"]["path"]
+    assert "rcc-provider-rollback-junit.xml" in upload["with"]["path"]
     assert "rcc-provider-rollback" in upload["with"]["name"]
     assert "workflow_control_sha" in summary["run"]
     assert "candidate_sha" in summary["run"]
