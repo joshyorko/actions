@@ -2049,19 +2049,38 @@ is the package root, reserved Runtime-owned names and configured database and
 artifact paths are excluded. Internal `pythonpath` entries use snapshot files;
 external entries retain their original location and remain outside the
 last-good source guarantee. Old generations are retained, not pruned on import.
+Snapshot paths use one full SHA-256 generation component binding both package
+identity and source identity. Two nested 64-character components can exceed
+Windows' process working-directory limit even when copying those files works;
+`test_snapshot_launch_path_budget` checks the path budget and launches a real
+subprocess from a snapshot. Previously admitted directories are retained without
+renaming; a successful import selects the new layout. Keep the Runtime datadir
+short enough for the platform's process launch limits; this layout is not a
+claim of arbitrary-length Windows path support.
+For `WinError 267`, check absolute subprocess cwd length as well as directory
+existence: successful snapshot reads or `rcc ht hash` do not prove process launch.
+[Windows documents this limit](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setcurrentdirectory).
+Linux path-construction proof does not replace hosted Windows execution.
 The CLI lifecycle regressions in `test_cli_multi_package_sync.py` exercise
 additive imports, complete desired-set synchronization, real HTTP/MCP calls,
 controlled stop/restart, failed admission, and corrected-source recovery.
 Additive reimports that omit an enabled action fail before publication: retaining
 its old catalog record while replacing its source would advertise an
 unexecutable capability. Explicit desired-set sync is the removal operation.
+For additive whitelisted imports, already enabled actions in the same package
+remain admitted and their metadata is refreshed from the new source. Newly
+selected actions are admitted; unselected new or disabled actions are not.
+Removing an enabled action from the actual source still rejects the import.
+Desired-set synchronization continues to disable capabilities outside its
+whitelist. Runtime HTTP/MCP exposure applies the serving whitelist separately.
 
 For explicit spec-v2 RCC provider mode, RCC receives the selected snapshot's
 `package.yaml` for environment fingerprinting and publish; the original
 absolute `package.yaml` path is passed separately as `environment_identity` for
 cache reuse. RCC therefore reads the same package configuration paired with the
 selected source snapshot even if the live package changes during publish.
-Relative `pythonpath` entries resolve against the snapshot package root. Snapshot
+Relative `pythonpath` entries that resolve inside the original package use
+snapshot paths; entries outside it keep their original resolved location. Snapshot
 identity binds included relative paths, supported permission mode bits, and file
 bytes, and both newly copied and reused destinations are checked. Failed
 snapshot validation also discards only a newly created candidate; a reused

@@ -400,7 +400,7 @@ def test_metadata_collection_cannot_mutate_admitted_snapshot(tmp_path):
             assert db.all(ActionPackage)[0].directory == old_directory
     assert (Path(old_directory) / "state.txt").read_text() == "original generation"
     assert (root / "state.txt").read_text() == "original generation"
-    snapshots = list((data / ".rcc-runtime-sources").glob("*/*"))
+    snapshots = list((data / ".rcc-runtime-sources").iterdir())
     assert snapshots == [Path(old_directory)]
     print(
         "METADATA_MUTATION_REJECTED",

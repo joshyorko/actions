@@ -303,7 +303,7 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
         evidence["initial_runtime"] = runtime_row
         initial_source = Path(_read_package_source(database, package_dir.name))
         source_store = action_server_process.datadir / ".rcc-runtime-sources"
-        package_store = source_store / hashlib.sha256(b"package").hexdigest()
+        package_store = initial_source.parent
         assert initial_source.is_absolute() and initial_source.is_relative_to(
             source_store
         )

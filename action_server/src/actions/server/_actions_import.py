@@ -92,7 +92,7 @@ def import_action_packages(
         db = get_db()
         with db.transaction():
             for package, actions in prepared:
-                _update_actions_in_db(package, actions, disable_not_imported)
+                _update_actions_in_db(package, actions, disable_not_imported, whitelist)
             if disable_not_imported:
                 selected_ids = {
                     package.id
@@ -353,7 +353,10 @@ def import_action_package(
         else:
             for collected_package, collected_actions in collected:
                 _update_actions_in_db(
-                    collected_package, collected_actions, disable_not_imported
+                    collected_package,
+                    collected_actions,
+                    disable_not_imported,
+                    whitelist,
                 )
     except Exception as exc:
         if source_snapshot_path is not None:
@@ -457,7 +460,6 @@ def _add_actions_to_db(
     from actions.server._errors_action_server import ActionServerValidationError
     from actions.server._gen_ids import gen_uuid
     from actions.server._models import Action
-    from actions.server._whitelist import accept_action
 
     if runtime_descriptor is None:
         from actions.server._settings import get_python_exe_from_env
@@ -593,13 +595,6 @@ cli.main(["{command}"])
         actions = []
         for action_fields in actions_list_result:
             action_name = action_fields["name"]
-            if whitelist:
-                if not accept_action(whitelist, action_package.name, action_name):
-                    log.info(
-                        f"Action: {action_package.name}/{action_name} not imported because it has no match in the whitelist: {whitelist!r}"
-                    )
-                    continue
-
             filepath = Path(action_fields["file"]).absolute()
             try:
                 filepath = filepath.relative_to(import_path)
@@ -636,19 +631,33 @@ cli.main(["{command}"])
     if _prepared is not None:
         _prepared.append((action_package, actions))
     else:
-        _update_actions_in_db(action_package, actions, disable_not_imported)
+        _update_actions_in_db(action_package, actions, disable_not_imported, whitelist)
 
 
 def _update_actions_in_db(
     action_package: "ActionPackage",
     actions: list["Action"],
     disable_not_imported: bool,
+    whitelist: str = "",
 ) -> None:
     from dataclasses import asdict
 
     from ._models import Action, ActionPackage, get_db
+    from ._whitelist import accept_action
 
     db = get_db()
+
+    def selected_actions(retained: set[str]) -> list[Action]:
+        # Additive imports retain already enabled capabilities. Refresh their
+        # metadata from the new source too, even if this import only selects a
+        # different action. Never admit an unselected new or disabled action.
+        return [
+            action
+            for action in actions
+            if not whitelist
+            or action.name in retained
+            or accept_action(whitelist, action_package.name, action.name)
+        ]
 
     try:
         existing_action_package = db.first(
@@ -661,7 +670,7 @@ def _update_actions_in_db(
         with db.transaction():
             log.info("Found new action package: %s", action_package.name)
             db.insert(action_package)
-            for action in actions:
+            for action in selected_actions(set()):
                 log.info("Found new action: %s", action.name)
                 db.insert(action)
 
@@ -678,6 +687,7 @@ def _update_actions_in_db(
             [existing_action_package.id],
         )
 
+        retained_names: set[str] = set()
         if not disable_not_imported:
             candidate_names = {action.name for action in actions}
             omitted_names = sorted(
@@ -695,6 +705,11 @@ def _update_actions_in_db(
                     "--actions-sync=true and all desired --dir entries to "
                     "explicitly reconcile removals."
                 )
+            retained_names = {
+                action.name for action in existing_actions if action.enabled
+            }
+
+        actions = selected_actions(retained_names)
 
         existing_action_name_to_action = {}
         for action in existing_actions:

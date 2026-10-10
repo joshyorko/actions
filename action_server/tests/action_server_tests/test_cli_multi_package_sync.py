@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 import pytest
+
 from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
@@ -104,9 +105,13 @@ async def _mcp_tool_names(process: ActionServerProcess) -> set[str]:
 
 
 async def _call_mcp_tool(process: ActionServerProcess, tool_name: str) -> str:
+    from mcp.types import TextContent
+
     async with process.mcp_client() as session:
         result = await session.call_tool(tool_name, {})
-        return result.content[0].text
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        return content.text
 
 
 def _stop_naturally(process: ActionServerProcess) -> int:

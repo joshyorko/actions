@@ -4,9 +4,41 @@ from __future__ import annotations
 
 import os
 import stat
+import subprocess
+import sys
+import tempfile
 from pathlib import Path
 
 import pytest
+
+
+def test_snapshot_launch_path_budget() -> None:
+    """Snapshot bookkeeping must not exhaust Windows' process cwd budget."""
+    from actions.server._action_package_handler import ActionPackageHandler
+
+    with tempfile.TemporaryDirectory(prefix="snapshot-cwd-") as temporary:
+        root = Path(temporary)
+        package = root / "package"
+        package.mkdir()
+        (package / "value.txt").write_text("last-good", encoding="utf-8")
+        # A realistic nested Runtime datadir, still usable by CreateProcess.
+        # The former two 64-character identity directories exceed MAX_PATH.
+        assert len(str(root)) < 150
+        datadir = root / ("d" * (155 - len(str(root)) - 1))
+        snapshot, _ = ActionPackageHandler(
+            str(package), datadir
+        ).prepare_runtime_source_snapshot()
+        assert len(str(snapshot)) < 260, str(snapshot)
+        result = subprocess.check_output(
+            [
+                sys.executable,
+                "-c",
+                "from pathlib import Path; print(Path('value.txt').read_text())",
+            ],
+            cwd=snapshot,
+            text=True,
+        )
+        assert result.strip() == "last-good"
 
 
 def _write_package_yaml(path: Path, *, python: str = "3.12.15") -> None:

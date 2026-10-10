@@ -158,7 +158,6 @@ class ActionPackageHandler:
         package_key = hashlib.sha256(
             self._action_package_name.encode("utf-8")
         ).hexdigest()
-        package_store = source_store / package_key
         exclusions = PackageExcludeHandler()
         exclusions.fill_exclude_patterns(DEFAULT_EXCLUSION_PATTERNS)
         exclusions.exclude_patterns.extend(
@@ -279,7 +278,13 @@ class ActionPackageHandler:
                 "RCC source snapshot is missing package.yaml"
             )
         source_signature = signature(source_root)
-        destination = package_store / source_signature
+        # Keep both complete identities in one digest. Two nested SHA-256
+        # directory names exhaust CreateProcess's cwd budget on ordinary
+        # Windows datadirs, even when Python can copy the files successfully.
+        generation_key = hashlib.sha256(
+            f"{package_key}:{source_signature}".encode("ascii")
+        ).hexdigest()
+        destination = source_store / generation_key
 
         def validate_selected_snapshot() -> None:
             if signature(destination) != source_signature:
@@ -296,8 +301,7 @@ class ActionPackageHandler:
             return destination, False
 
         source_store.mkdir(parents=True, exist_ok=True, mode=0o700)
-        package_store.mkdir(exist_ok=True, mode=0o700)
-        staging = package_store / f".staging-{uuid.uuid4().hex}"
+        staging = source_store / f".staging-{uuid.uuid4().hex}"
         staging.mkdir(mode=0o700)
         try:
             for source, relative in files_before:
