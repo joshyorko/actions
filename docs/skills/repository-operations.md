@@ -81,6 +81,17 @@ before writing its result; a fixture pin to 0.10.0 could not be resolved. The
 Runtime's explicit minimum-version error and those fixture inputs identify a
 test-fixture incompatibility, not an RCC defect.
 
+Frozen integration fixtures that synchronize packages with `package.yaml` may
+need a cold RCC-managed environment before the server emits its ready-port
+line. In `test_cli_live_reload_multi_package.py`, CI run 38042377995 showed
+the first `holotree variables --space ... --no-retry-build` operation being
+terminated at the 30-second startup deadline on both Windows and macOS,
+before the watched-reload assertions began. Keep the 90-second allowance
+limited to the initial native-executable startup; this reuses the existing
+native acceptance startup budget. Source-mode startup remains at 30 seconds,
+as do the watcher and restart deadlines. Inspect child stderr before
+treating a timeout as an RCC or Runtime failure.
+
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
 separately against the current integration revision, checking both its imports
@@ -2704,3 +2715,31 @@ PyPI exposed no signed provenance attestation are recorded in
 Read non-ASCII JSON golden fixtures with an explicit `encoding="utf-8"` rather
 than `Path.read_text()`'s locale default so expected Unicode values are stable
 across Windows and POSIX test runners.
+
+## Frozen Runtime acceptance
+
+For frozen Runtime acceptance, bind the candidate commit and tree separately
+from the native build commit and tree. If the binary was built from a synthetic
+merge whose tree matches the candidate, record both identities and verify the
+tree equality; do not describe the binary as built from the candidate commit.
+Also retain the artifact and full package inventory digests, executable hash,
+and actual managed worker interpreter/Core origins. Run the exact expected
+cases with output capture disabled when their successful provenance is printed,
+and validate JUnit names, modules, failures, errors, and skips before calling
+the gate passed. Source-mode tests do not establish frozen behavior. A
+successful-generation drain is separate proof: start the new generation while
+an old Run is blocked, verify the old Run reads its immutable source snapshot
+after release, persist both outcomes, and check natural child cleanup
+independently.
+
+When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
+`VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
+the Poetry/Invoke command with `VIRTUAL_ENV` unset, then explicitly check the
+project interpreter and required test module with errexit still enabled. Invoke
+pytest as `poetry run python -m pytest` so module selection stays with that
+interpreter rather than depending on a `pytest` executable found on `PATH`.
+Do not treat a missing executable as permission to fall back to host tools or
+source-mode tests. In frozen catalog workflow run 38037036032, `inv devinstall`
+completed its Poetry install, but the subsequent `poetry run pytest` returned
+`Command not found: pytest`; the workflow now checks the selected pytest module
+and interpreter before execution.
