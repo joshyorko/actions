@@ -1,0 +1,38 @@
+{
+  "attempt_dir": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/followup-exec-attempt-20261010T2121Z",
+  "files": {
+    "attempt-summary.md": {
+      "sha256": "53964bab276c70570dc8b66424c4365050d60b28b7a9f14899ba00b7fa6e663e",
+      "size_bytes": 1764
+    },
+    "interpretation-correction.md": {
+      "sha256": "7db3f6cac050ccceaca1e09165264b08900c63b91bd11b19dd4723ffb6cebaa6",
+      "size_bytes": 2657
+    },
+    "launch-context.json": {
+      "sha256": "ebac78c1b9cbc2466d1ec366bc67c6959f31e68b9f9ce953372afaecd8119597",
+      "size_bytes": 2082
+    },
+    "post-run-readback.json": {
+      "sha256": "2703f4e83c7840fe639b2426e8f7938bf46db3d07f8036b8ab15955f905c6b6c",
+      "size_bytes": 6922
+    },
+    "runner.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "runner.stdout": {
+      "sha256": "b5be9737892a3bd62a2e40518dbef9981455800328aa307ab8a1b82a1a467be9",
+      "size_bytes": 164
+    },
+    "work/final-receipt.json": {
+      "sha256": "60351ad071d07c28b89d7e5eb0feab6fdd7a29b9da61bf4046b471721f09a64b",
+      "size_bytes": 8596
+    }
+  },
+  "no_upstream_defect_claim": true,
+  "retry_authorized_or_performed": false,
+  "schema_version": 1,
+  "status": "FAILED_INCOMPLETE_DIAGNOSTIC_WITH_ADDITIVE_SOURCE_INTERPRETATION",
+  "supersedes_index_sha256": "ecf94402e423b0b668cfb315fff8e6c79d2f32237e63c5a2e3cfdf7b397cb02c"
+}

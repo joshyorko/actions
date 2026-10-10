@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "status": "GO source union only; exact new-head CI required, no merge authorization",
+  "reviews": [
+    {
+      "PR": "302",
+      "head": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+      "tree": "bbc33916748d02e24fe37ce843594a1d8f67067d",
+      "ordered_parents": [
+        "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ],
+      "clean": true,
+      "common_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "incoming_count": 10,
+      "incoming_operations_equal": {
+        ".github/workflows/action_server_frontend_tests.yml": true,
+        "action_server/frontend/apps/canvas-view/src/query-results/CanvasContractRoundTrip.test.tsx": true,
+        "action_server/frontend/package-lock.json": true,
+        "action_server/frontend/package.json": true,
+        "action_server/scripts/verify_published_runtime_floor.py": true,
+        "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py": true,
+        "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": true,
+        "devutils/tests/test_runtime_release_workflows.py": true,
+        "docs/contracts/canvas/fixtures/README.md": true,
+        "docs/skills/repository-operations.md": true
+      },
+      "old_shared_operations_preserved": {
+        "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": true,
+        "docs/skills/repository-operations.md": true
+      },
+      "old_unshared_blob_bindings": {
+        "action_server/src/actions/server/_rcc_runtime_adapter.py": {
+          "equal": true,
+          "sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+        },
+        "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": {
+          "equal": true,
+          "sha256": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a"
+        }
+      },
+      "incoming_summary": "10files417insertions14deletions; exactly accepted first-parent operations with differing line positions/context ignored, no additional changed lines",
+      "observations": "PR302 adapter/source-staging-consumer test byte-identical to old head; shared RCC diagnostics and guide preserve both parents. PR282 all20source/template/bundle/browser/CLI files byte-identical to f743; sole shared guide combines both exact operation sequences."
+    },
+    {
+      "PR": "282",
+      "head": "66cc132367be02b05bc08c981b900a68d156cd52",
+      "tree": "ca8685372e67ce07b55f9a830a60134582107873",
+      "ordered_parents": [
+        "f74341b03b1e0e554c1b0af8f88cfc0bdce5cdaf",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ],
+      "clean": true,
+      "common_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "incoming_count": 10,
+      "incoming_operations_equal": {
+        ".github/workflows/action_server_frontend_tests.yml": true,
+        "action_server/frontend/apps/canvas-view/src/query-results/CanvasContractRoundTrip.test.tsx": true,
+        "action_server/frontend/package-lock.json": true,
+        "action_server/frontend/package.json": true,
+        "action_server/scripts/verify_published_runtime_floor.py": true,
+        "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py": true,
+        "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": true,
+        "devutils/tests/test_runtime_release_workflows.py": true,
+        "docs/contracts/canvas/fixtures/README.md": true,
+        "docs/skills/repository-operations.md": true
+      },
+      "old_shared_operations_preserved": {
+        "docs/skills/repository-operations.md": true
+      },
+      "old_unshared_blob_bindings": {
+        ".gitattributes": {
+          "equal": true,
+          "sha256": "56219a81652d0387a2ed6b5a68850238aa0954f98bb2890193ddd429b2eb56f1"
+        },
+        ".github/workflows/frontend-build-unauthenticated.yml": {
+          "equal": true,
+          "sha256": "af3586d88556764a6c9019c30261e6465aeedbaeff66a01c364f8d81dcd2e8de"
+        },
+        "action_server/frontend/apps/canvas-view/canvas-template-runtime.spec.ts": {
+          "equal": true,
+          "sha256": "dd400786cdfab55f0931d17cd486bc75a8f958659c23b75e02bed25116c7aa88"
+        },
+        "action_server/frontend/playwright.canvas-template.config.ts": {
+          "equal": true,
+          "sha256": "e0ff4d256d6a69be11161787149ff707679708ecc501cb50569cc59dd2544bfc"
+        },
+        "action_server/src/actions/server/templates/action-templates.yaml": {
+          "equal": true,
+          "sha256": "4aa45f2ccecd7ea7e1cd814875fbaff2c919f83ed1703fe4c9793fd0f0ec11d8"
+        },
+        "action_server/src/actions/server/templates/action-templates.zip": {
+          "equal": true,
+          "sha256": "c051c3e1db4f43393cb260c3a4066645c6793217f797a42bcab774887db1f03e"
+        },
+        "action_server/src/actions/server/templates/zips/canvas-query.zip": {
+          "equal": true,
+          "sha256": "7500becb402d09c8adcf938c0cc6c6b69d817007c79951b97fbeee75162b943a"
+        },
+        "action_server/tests/action_server_tests/mcp/test_canvas_query_template.py": {
+          "equal": true,
+          "sha256": "54aacbfde28f51472f28ed4f36a9571fb7b9ab7ce046dc0c9913240864ba339a"
+        },
+        "action_server/tests/action_server_tests/test_cli.py": {
+          "equal": true,
+          "sha256": "534abc4f1113d44663917874c96a5f3a9daf6c072bc74ccff2bfb3f5d4ceea47"
+        },
+        "action_server/tests/action_server_tests/test_template_bundle.py": {
+          "equal": true,
+          "sha256": "7cd7c07d0b54c306c459d7422d9fd2f750472df71dd5aee880629cda3cd7c88d"
+        },
+        "action_server/tests/contract_tests/test_active_contracts.py": {
+          "equal": true,
+          "sha256": "f6beae22e8965b2823a284f367b7465b187125347ec33099f38fff97621eb969"
+        },
+        "templates/canvas-query/LICENSE": {
+          "equal": true,
+          "sha256": "5dd447f3a4dafdcf24b0b60cc4f130e778ed1edb4b1fe7994fe8e87ed6eb9497"
+        },
+        "templates/canvas-query/README.md": {
+          "equal": true,
+          "sha256": "0425bca0deeba5d907952fa73b9f1058ae6f98f7989d7bc055dbc2ed849465c7"
+        },
+        "templates/canvas-query/acceptance-gates.json": {
+          "equal": true,
+          "sha256": "6b6074e5e48a1658e63c95986beec848303b042effaf74281d7182e857e3cee2"
+        },
+        "templates/canvas-query/canvas-resource.json": {
+          "equal": true,
+          "sha256": "284bc3b69fb854cf3641557885e425dfb4722302163b3def24e22c30cce5f19e"
+        },
+        "templates/canvas-query/canvas.html": {
+          "equal": true,
+          "sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852"
+        },
+        "templates/canvas-query/canvas_query.py": {
+          "equal": true,
+          "sha256": "78e6a14e9ffad62cd0b31949041e513c9774a25b210d69b122433c7796f74119"
+        },
+        "templates/canvas-query/package.yaml": {
+          "equal": true,
+          "sha256": "eec63118246ceb1c6b96bf787d77cce64bced6f3a5341ca574f75f7f614da146"
+        },
+        "templates/canvas-query/tests/test_canvas_query.py": {
+          "equal": true,
+          "sha256": "d1876a10c577383e30e9f8bb67f1efae7829d9343206c261c5d5089a243871be"
+        },
+        "templates/packaging/templates-prod.json": {
+          "equal": true,
+          "sha256": "859eabe709755b118df76c9fbdcdee137df9ebab74fac73d08e18f158f85fb7c"
+        }
+      },
+      "incoming_summary": "10files417insertions14deletions; exactly accepted first-parent operations with differing line positions/context ignored, no additional changed lines",
+      "observations": "PR302 adapter/source-staging-consumer test byte-identical to old head; shared RCC diagnostics and guide preserve both parents. PR282 all20source/template/bundle/browser/CLI files byte-identical to f743; sole shared guide combines both exact operation sequences."
+    }
+  ],
+  "accepted_incoming": {
+    "commit": "19380993febaa71238eaee3026b5c808773283ff",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "source_scope": "acceptedPR301fixture serialization, inherited deterministic timing assertions, Core release documentation and PR304 exact floor pins/test/guide; no broad Canvas/rendering acceptance"
+  },
+  "PR302_owner_evidence": {
+    "files": {
+      "receipt.md": {
+        "sha256": "ad014d53b07a55ed63cb62cee116c34140787d55023c11ed0b7dee760acd4b7b",
+        "bytes": 4531
+      },
+      "focused-gates-green.log": {
+        "sha256": "d27fb7cb5a9c169712b895b619797ee0f03994c306a2aad894912b935d71a743",
+        "bytes": 3861
+      },
+      "focused-gates.log": {
+        "sha256": "57283f49b050b53a782eb5b61eb4e176168d470baa27e8815f9aa1065bf91a83",
+        "bytes": 43908
+      },
+      "source-origins.log": {
+        "sha256": "5a375e286a1b61e339259244d78774e05aaa3f718db1713c92d9fa8f2948105e",
+        "bytes": 3904
+      }
+    },
+    "observed_result": "canonical RCC --no-build task script; subject adapter origin exact refreshed checkout, Python3.12.15 prepared env;24PASS2.03s. Historical first setup attempt24errors pinned default RCC absent retained. No test rerun by reviewer."
+  },
+  "acceptance_limits": [
+    "PR282 production/auth/actualChatGPT/frozen template gates remain open; browser prior source receipts retain exact old-head identity",
+    "template Core three sampled hashes do not authenticate whole distribution",
+    "PR302 no actual Package Revision/compiler/RCC source inspection admission",
+    "new union CI must bind exact current head or proven merge tree; old checks alone do not admit current head"
+  ],
+  "commands": [
+    "git rev-parse HEAD HEAD^{tree}; git show -s --format=%P HEAD; git status --porcelain; git merge-base HEAD^1 HEAD^2; git diff --stat each parent",
+    "For all incoming10files, compare full added/deleted-line operation sequences from commonbase->193 against oldhead->union, dropping only diff headers/hunk positions; all equal",
+    "For shared files compare old operation sequences commonbase->oldhead with193->union; all equal",
+    "For each unshared old-slice file compare entire Git blobs and SHA256; all equal",
+    "Read inherited retirement-deadline deterministic change and combined canonical guide; hash/read owner focused logs/receipt/import origins; no services, tests, installs, source changes or remote mutations"
+  ],
+  "canonical_doc_proposal": "When refreshing a previously reviewed slice, record both ordered parents and the final tree. Verify every unshared slice file is byte-identical to its reviewed parent, and shared-file additions/deletions preserve both admitted changes. Carried source acceptance is bounded to that slice; new exact-head or equivalent merge-tree CI remains required, and service/browser receipts keep their original source identities.",
+  "upstream_disposition": "none"
+}

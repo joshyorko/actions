@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "review": "independent read-only actual-followup interpretation and next-gate design",
+  "status": "HOLD #134; observed RCC trust failure matches pinned contract; no RCC defect established",
+  "attempt": {
+    "directory": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/followup-exec-attempt-20261010T2121Z",
+    "index_sha256": "ecf94402e423b0b668cfb315fff8e6c79d2f32237e63c5a2e3cfdf7b397cb02c",
+    "receipt_sha256": "60351ad071d07c28b89d7e5eb0feab6fdd7a29b9da61bf4046b471721f09a64b",
+    "post_readback_sha256": "2703f4e83c7840fe639b2426e8f7938bf46db3d07f8036b8ab15955f905c6b6c",
+    "runner_sha256": "29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c",
+    "artifact": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "files_verified": [
+      {
+        "file": "attempt-summary.md",
+        "sha256": "53964bab276c70570dc8b66424c4365050d60b28b7a9f14899ba00b7fa6e663e",
+        "bytes": 1764,
+        "binding_pass": true,
+        "owned_regular": true
+      },
+      {
+        "file": "launch-context.json",
+        "sha256": "ebac78c1b9cbc2466d1ec366bc67c6959f31e68b9f9ce953372afaecd8119597",
+        "bytes": 2082,
+        "binding_pass": true,
+        "owned_regular": true
+      },
+      {
+        "file": "post-run-readback.json",
+        "sha256": "2703f4e83c7840fe639b2426e8f7938bf46db3d07f8036b8ab15955f905c6b6c",
+        "bytes": 6922,
+        "binding_pass": true,
+        "owned_regular": true
+      },
+      {
+        "file": "runner.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0,
+        "binding_pass": true,
+        "owned_regular": true
+      },
+      {
+        "file": "runner.stdout",
+        "sha256": "b5be9737892a3bd62a2e40518dbef9981455800328aa307ab8a1b82a1a467be9",
+        "bytes": 164,
+        "binding_pass": true,
+        "owned_regular": true
+      },
+      {
+        "file": "work/final-receipt.json",
+        "sha256": "60351ad071d07c28b89d7e5eb0feab6fdd7a29b9da61bf4046b471721f09a64b",
+        "bytes": 8596,
+        "binding_pass": true,
+        "owned_regular": true
+      }
+    ]
+  },
+  "observations": {
+    "with_provider_exit": 1,
+    "native_duration_ms": 510,
+    "overall_duration_ms": 698,
+    "actual_GET_503_beyond_self_test": 1,
+    "stderr": "artifact trust attachment verification failed",
+    "receipt_complete": false,
+    "child_identity_observed": false,
+    "provider_omitted": "NOT_RUN",
+    "latest_B_verification": "invalid decision persisted for D; historical valid receipt retained separately",
+    "ready_manifest_metadata_python": "post-readback unchanged; complete CAS/content rehash not performed",
+    "verified_content_marker": "absent as expected from normal reconciliation, not corruption evidence",
+    "cleanup": "owned child44553 reaped and group gone according to runner; independent PID absent and port38593 has no listener; probe socket/threads stopped; harness cleanup only"
+  },
+  "pinned_RCC": {
+    "version": "18.19.3",
+    "source_commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+    "linux_binary_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "release_asset_bytes": 22282402,
+    "source_inventory": {
+      "artifacttrust/carrier.go": {
+        "sha256": "9bdbfefa0aeee043f6248addfc2216ee301844955e0e072d96dd9d0d85962264",
+        "bytes": 12935
+      },
+      "artifacttrust/receipt.go": {
+        "sha256": "c7920797b32c27da3ba3ee8986ed09852e568f82fd8c1c31686adbf54fbb9ef8",
+        "bytes": 3580
+      },
+      "artifacttrust/trust.go": {
+        "sha256": "c10b01c92564f36c20cba06cb1bbafdc2a0815d9713aafb2969deeeb2f9d5e4c",
+        "bytes": 33217
+      },
+      "cmd/carrier.go": {
+        "sha256": "e7f90b8d5c25299a5f0989062b13941a10c4f00060cb5f47cbc2a85bae34ee84",
+        "bytes": 2841
+      },
+      "cmd/environment.go": {
+        "sha256": "d0113e7d53dffa0876ca1a0189a5713fb4d86c29c8be6837b945a2ca440b333d",
+        "bytes": 2204
+      },
+      "cmd/environmentAcquire.go": {
+        "sha256": "9b743dd8864314ae30bd890efb5702c7c831223a5b71d6a3524ea2bbcf600caf",
+        "bytes": 4779
+      },
+      "cmd/environmentExec.go": {
+        "sha256": "1e62d683fc6d8b4fb7b43add6530dcc9188fc69a435b764d09bc2d68d4b3a1f2",
+        "bytes": 9103
+      },
+      "cmd/environmentPublish.go": {
+        "sha256": "1bc233eca22f99ffbb68cd5486a8a71fe209deb1d2c42f0cbeb62d945a13ac7d",
+        "bytes": 7498
+      },
+      "cmd/environmentTrustPolicy.go": {
+        "sha256": "e59829d1f9b42f867e46b4e6f868975303d2f0b327c5995a815843020af343cc",
+        "bytes": 3400
+      },
+      "common/identities.go": {
+        "sha256": "5818bb233b6830fd374acb7d4b854c81083a19c9fc4f0844452590535b00eb9e",
+        "bytes": 336
+      },
+      "common/strategies.go": {
+        "sha256": "19375a7ff79d22212fd0f99ad00424f4f1a2dba8388a56317b034da925aaa8cd",
+        "bytes": 1426
+      },
+      "common/variables.go": {
+        "sha256": "8ce23972affbbca0006436a6e35c03d7c05cf26bac41f163e62cbf4b7410ee6f",
+        "bytes": 9877
+      },
+      "docs/environment-artifact-trust.md": {
+        "sha256": "a2995e1a3997fc67663d62472c3bca2011926aec3e27c477bca2cef7234102be",
+        "bytes": 3509
+      },
+      "docs/environment-caching.md": {
+        "sha256": "f11228b45b22399f7f83e21a67af3a5dd5a8f7383fa830ab841c9fef754696c1",
+        "bytes": 8702
+      },
+      "environmentlifecycle/acquire.go": {
+        "sha256": "066e1e32381f9e80220eacc5dee4398a84be43e54d3686c379ca2a6611264582",
+        "bytes": 12302
+      },
+      "environmentlifecycle/acquire_test.go": {
+        "sha256": "fa8a3b65433fd5bace95b90543f17c16c46e6ba575eae8a03d3c3779f5190abf",
+        "bytes": 32468
+      },
+      "environmentlifecycle/execute.go": {
+        "sha256": "2c03a4f3d3d215d6dd7cac08bdaf52299c894663c07af163c157f4da843e7a66",
+        "bytes": 7591
+      },
+      "environmentlifecycle/execute_process_test.go": {
+        "sha256": "9555985e0feb97291dfe327e9827a5cb255c11b8d44a43006c9ccb72cee7a8af",
+        "bytes": 9883
+      },
+      "environmentlifecycle/lease.go": {
+        "sha256": "6ba204bbbfe2f87e3e757b045e8fa355e5656bedc3ca843d84dc7dd7a6c47b51",
+        "bytes": 6545
+      },
+      "environmentlifecycle/materialize.go": {
+        "sha256": "e633b399951bc0c7336fcd147a0fafaea79f7a24d51d448d405e13dc927b2833",
+        "bytes": 13592
+      },
+      "environmentlifecycle/reconcile.go": {
+        "sha256": "ac96e010c5d984f32c36ea610a525b0490b56e930637527e41b276677713d7cf",
+        "bytes": 3643
+      },
+      "environmentlifecycle/record.go": {
+        "sha256": "3a06628d9ad773f367fec26a7e8d9a15ccde69f618edbf07affbd1f8e29b5a53",
+        "bytes": 3719
+      },
+      "environmentlifecycle/roots.go": {
+        "sha256": "3db18e55fc600a9f7f68ebc3edf94f54ae650bfd6dd17daa5bda1be80b1bd6bc",
+        "bytes": 2450
+      },
+      "environmentlifecycle/trust.go": {
+        "sha256": "e89cf582fc408a8eddb45c3ab7ad946233dcf966cee8e4ff7e843b0db3a9c58f",
+        "bytes": 3585
+      }
+    },
+    "anchors": [
+      {
+        "file": "cmd/environmentTrustPolicy.go",
+        "line": 72,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/cmd/environmentTrustPolicy.go#L72",
+        "meaning": "explicit provider defaults to HTTP trust carrier; absent provider/carrier returns nil",
+        "sha256": "e59829d1f9b42f867e46b4e6f868975303d2f0b327c5995a815843020af343cc"
+      },
+      {
+        "file": "cmd/environmentExec.go",
+        "line": 77,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/cmd/environmentExec.go#L77",
+        "meaning": "Acquire with current trust context precedes execution",
+        "sha256": "1e62d683fc6d8b4fb7b43add6530dcc9188fc69a435b764d09bc2d68d4b3a1f2"
+      },
+      {
+        "file": "artifacttrust/carrier.go",
+        "line": 147,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/artifacttrust/carrier.go#L147",
+        "meaning": "404 is absence; 503 is carrier read failure",
+        "sha256": "9bdbfefa0aeee043f6248addfc2216ee301844955e0e072d96dd9d0d85962264"
+      },
+      {
+        "file": "artifacttrust/carrier.go",
+        "line": 323,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/artifacttrust/carrier.go#L323",
+        "meaning": "provenance is first attachment, non-absence errors abort",
+        "sha256": "9bdbfefa0aeee043f6248addfc2216ee301844955e0e072d96dd9d0d85962264"
+      },
+      {
+        "file": "environmentlifecycle/materialize.go",
+        "line": 186,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/materialize.go#L186",
+        "meaning": "reconcile, current trust evaluation, then warm materialization",
+        "sha256": "e633b399951bc0c7336fcd147a0fafaea79f7a24d51d448d405e13dc927b2833"
+      },
+      {
+        "file": "environmentlifecycle/trust.go",
+        "line": 63,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/trust.go#L63",
+        "meaning": "invalid current verification persists; later evaluation is fresh",
+        "sha256": "e89cf582fc408a8eddb45c3ab7ad946233dcf966cee8e4ff7e843b0db3a9c58f"
+      },
+      {
+        "file": "environmentlifecycle/lease.go",
+        "line": 73,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/lease.go#L73",
+        "meaning": "each new lease refreshes configured trust",
+        "sha256": "6ba204bbbfe2f87e3e757b045e8fa355e5656bedc3ca843d84dc7dd7a6c47b51"
+      },
+      {
+        "file": "environmentlifecycle/reconcile.go",
+        "line": 71,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/reconcile.go#L71",
+        "meaning": "verified-content is provisional intent, not readiness",
+        "sha256": "ac96e010c5d984f32c36ea610a525b0490b56e930637527e41b276677713d7cf"
+      },
+      {
+        "file": "docs/environment-artifact-trust.md",
+        "line": 41,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/docs/environment-artifact-trust.md#L41",
+        "meaning": "each new lease re-fetches configured carrier",
+        "sha256": "a2995e1a3997fc67663d62472c3bca2011926aec3e27c477bca2cef7234102be"
+      },
+      {
+        "file": "cmd/environmentPublish.go",
+        "line": 57,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/cmd/environmentPublish.go#L57",
+        "meaning": "publish defaults detached filesystem trust store under ROBOCORP_HOME",
+        "sha256": "1bc233eca22f99ffbb68cd5486a8a71fe209deb1d2c42f0cbeb62d945a13ac7d"
+      },
+      {
+        "file": "common/strategies.go",
+        "line": 67,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/common/strategies.go#L67",
+        "meaning": "explicit ROBOCORP_HOME controls RCC home",
+        "sha256": "19375a7ff79d22212fd0f99ad00424f4f1a2dba8388a56317b034da925aaa8cd"
+      }
+    ]
+  },
+  "diagnosis": [
+    "Explicit --provider with no explicit carrier selects HTTP trust carrier. Permissive-local permits an unsigned local fixture; it does not suppress failed carrier I/O. Current trust is reevaluated before local warm materialization and again before lease.",
+    "503 therefore aborts before child execution. Request path was not retained in this attempt: provenance is first-read source inference, not direct actual request-path proof.",
+    "New current verification/lease decisions are mutable. Previous byte-for-byte verification equality and preserved verified-content marker were incorrect followup readiness expectations; this supersedes that semantic interpretation while preserving historical review and attempt bytes.",
+    "ROBOCORP_HOME was explicit and unchanged. Private OS HOME/XDG/TMP do not establish a trust-store diversion. No HOME defect demonstrated.",
+    "The same selected-provider503 negative is already recorded in the canonical guide and verifier. It is a duplicated expected negative, not a fresh external fixture prerequisite failure.",
+    "Actions #134 still requires lazy verified warm execution with no network, reload without provider calls, configured-provider-unavailable restart success, A-to-B then warm zero calls, and frozen same lifecycle. Current adapter persists provider into exec and supplies no separate explicit offline trust profile; required positive remains unresolved. Do not redefine it as fail-closed negative acceptance."
+  ],
+  "runtime_comparison": {
+    "source_head": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+    "tree": "8471f44cc58f2dbe0226fbcf7d89445f440df2f0",
+    "clean": true,
+    "adapter_sha256": "65abc1efe7879ffc325f84841b9630f05b8a5b11cdc3a32728daf7df7091edcb",
+    "adapter_bytes_equal_accepted_19380993": true,
+    "adapter_lines": [
+      472,
+      490,
+      492
+    ],
+    "verifier_sha256": "8c3c84f0f417e12d68049938088b57a61e0140b2d6a303e35eb0f05c1a843235",
+    "known_negative_lines": [
+      1533,
+      1560,
+      1580
+    ],
+    "required_positive_lines": [
+      1640,
+      1731,
+      1880
+    ]
+  },
+  "supported_optional_capability_design": {
+    "scope": "one unsigned permissive-local controlled fixture only; advances knowledge for later explicit adapter policy design, not current Runtime/production trust acceptance",
+    "preflight": "fresh no-follow owned-file binding of retained B manifest/four metadata, ready, materialization ID/path/Python; preserve invalid latest verification, absent transient marker and history. No manual restore, copy, delete or edits to RCC state.",
+    "command_template": "PINNED_RCC env exec --artifact D --permissive-local --inherit-streams --receipt-file UNIQUE_COMPLETE_RECEIPT -- python -c CONTROLLED_IDENTITY_PROBE (omit --provider and --trust-carrier; explicit retained ROBOCORP_HOME/private Holotree; exact CLI output/receipt review before any run)",
+    "acceptance": "exit0; complete nontruncated owner-private no-follow RCC execution receipt exact D/materialization/path, valid fresh verification, leaseId and successful child exit; managed interpreter/prefix/Core distribution and cwd bound to exact retained materialization; zero observed probe calls; cleanup complete. Latest verification may change, provisional marker may be absent, references bookkeeping may change normally and must be reported.",
+    "mechanism": "With no provider or carrier, pinned resolver returns nil carrier and permissive-local makes a new local trust decision. Ready/CAS remains authoritative after earlier failed trust read; no source path requires restoring the provisional marker or stale verification.",
+    "actual": "NOT_RUN; no retry authorized by this review",
+    "explicit_local_carrier": "Supported --trust-carrier OWNED_REAL_DETACHED_STORE --trust-carrier-type filesystem can separate content provider from trust carrier. Existing publish store is ROBOCORP_HOME/artifacts/v1/trust. Inventory/provenance/signature/revocation and trusted roots must be genuinely bound; never select an empty directory or silently omit production trust to obtain success.",
+    "later_architecture": "Keep current provider continuity for legacy descriptors. Introduce a versioned explicit trust profile, separating immutable artifact/content-provider reference from RCC policy mode, detached carrier kind/reference, deployment-owned root identity/digest and revocation freshness semantics. Select the profile before preparation, never as a fallback after a provider/trust error. Under an explicitly admitted unsigned-local fixture profile, RCC supports provider-omitted digest exec. For signed deployment offline use an artifact-bound filesystem/archive detached carrier with deployment roots and fresh signed/revocation evidence; RCC reevaluates it locally at acquisition and lease, rejects invalid/stale/revoked evidence, and keeps the original content-provider context for a real cold acquisition. Do not cache a verification boolean or authorize a persisted interpreter path. Migrate provider-continuity tests to assert content identity plus explicit selected trust continuity, retain old-descriptor reprepare and HTTP503 negatives, and keep all134 warm-positive cells unchanged. Actual signed/offline capability and profile migration are not established by the unsigned-local probe."
+  },
+  "genuine_current_gate": {
+    "existing_command": "From exact PR308 checkout: prepared Python action_server/scripts/verify_dakota_rcc_acceptance.py --mode candidate-wheel --receipt UNIQUE_RECEIPT, through canonical rcc task script -r developer/toolkit.yaml --no-build -- reviewed prepared runner; explicit ACTIONS_RUNTIME_RCC_BINARY pinned, ACTIONS_ACCEPTANCE_POETRY pinned2.1.1, ACTIONS_ACCEPTANCE_ROBOCORP_HOME owned tool home; exact package metadata/source origins and inherited proxy/CA/TLS/loopback checked.",
+    "current_candidate": "Derives checked-out Core1.0.3/Helper1.0.3, builds local wheels, verifies wheel filename/METADATA and hashes, synthetic Action asserts distribution identities/ManagedParameters. No registry publication claim.",
+    "time_budget": "2400s proof Deadline; CLI watchdog2465s; process cleanup10s grace stages. An outer300s cap is not the declared canonical gate budget.",
+    "fields": [
+      "unauthenticated_rejection",
+      "authenticated_action",
+      "sqlite_run",
+      "artifact_verification",
+      "provider_backed_exec_fail_closed",
+      "wrapper_exit",
+      "process_cleanup",
+      "offline_warm_artifact_ready",
+      "offline_warm_action",
+      "offline_warm_artifact_verification",
+      "offline_warm_wrapper_exit",
+      "provider_unavailable",
+      "zero_requests_during_warm_runtime",
+      "warm_process_cleanup"
+    ],
+    "aggregate": "all declared cells PASS only; healthy private provider initially, then deliberately unavailable for negative and required warm-positive phases. No CLI cold-only or external healthy-provider mode.",
+    "artifact_limitation": "Current script ONLY selects candidate-wheel/source Runtime. ActionServerProcess supports SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE, but verifier allowlist and worker environment omit it; externally setting it does not select frozen/Go. Receipt hardcodes action_server_mode source. Retained frozen/Go needs a separate explicit reviewed selector/launch-binding harness; no existing command established for those artifacts.",
+    "priority": "Do not repeat accepted PR302 three-case/pair or documented same-provider503 negative as a new release gate. Current-Core cold source authenticated action/wrapper identity can fill stale1.0.2 evidence, but full #134 remains HOLD until required offline positives and artifact lifecycle pass under explicit supported trust contract."
+  },
+  "dedup": {
+    "method": "read-only GitHub API search explicitly is:issue/is:pull-request across open/closed, terms artifact trust/warm/trust carrier/local-materialization",
+    "relevant": [
+      {
+        "number": 118,
+        "kind": "issue",
+        "state": "open",
+        "scope": "existing artifact program"
+      },
+      {
+        "number": 126,
+        "kind": "issue",
+        "state": "closed",
+        "scope": "trust policy implementation"
+      },
+      {
+        "number": 122,
+        "kind": "issue",
+        "state": "closed",
+        "scope": "leases/reconciliation"
+      },
+      {
+        "number": 176,
+        "kind": "PR",
+        "state": "closed",
+        "scope": "trust implementation"
+      },
+      {
+        "number": 231,
+        "kind": "PR",
+        "state": "open",
+        "scope": "provider hosting/trust documentation; newer revision not pinned proof"
+      },
+      {
+        "number": 208,
+        "kind": "issue",
+        "state": "open",
+        "scope": "provider UX"
+      },
+      {
+        "number": 229,
+        "kind": "PR",
+        "state": "open",
+        "scope": "isolated lifecycle benchmarks"
+      }
+    ],
+    "classification": "No confirmed novel maintained RCC defect; no public report"
+  },
+  "canonical_doc_proposal": "For pinned RCC18.19.3, explicitly supplying a content provider also selects its HTTP detached-trust carrier unless a separate carrier is declared. Every acquisition/new lease evaluates that selected trust context before warm execution; permissive-local does not turn carrier503 into unsigned absence. Preserve Actions134 required offline-positive cells separately from selected-provider fail-closed negatives. Latest verification is a new mutable decision and verified-content is a reconciled intent marker, not readiness authority. Provider-omitted unsigned fixture execution can test local RCC capability, while production offline admission requires an explicit bound trust profile/carrier/roots and freshness policy; never silently drop provider trust. The current candidate-wheel verifier runs source Runtime with2400s proof budget and has no frozen/Go or cold-only selector.",
+  "commands_and_observations": [
+    "Read exact attempt index/final receipt/post-run readback; SHA-256+size+lstat every six indexed artifacts",
+    "Read pinned release tag/asset, source at immutable commit, and current PR308 verifier/adapter/guide",
+    "GitHub read-only search open+closed issues/PRs for artifact trust, warm, trust carrier, local-materialization; read relevant results",
+    "git rev-parse HEAD HEAD^{tree}; git status --porcelain on current verifier checkout",
+    "ps -o pid=,stat=,args= -p 44553; ss -ltn sport = :38593; no child/listener found",
+    "No RCC command, Runtime launch, restore, acquire, publish, service, install, source write, remote mutation or public report performed"
+  ],
+  "uncertainty": [
+    "provider-omitted actual execution not run",
+    "no whole-CAS rehash or fresh RCC verification in read-only diagnosis",
+    "no arbitrary production trust acceptance/security conclusion",
+    "no current frozen/Go RCC lifecycle acceptance",
+    "no full134 acceptance"
+  ],
+  "upstream_disposition": "none; expected pinned contract/harness expectation mismatch; no public issue filed",
+  "supersedes_template_only": {
+    "original_sha256": "635afb898e879e3204ebc9e05db7d679f789838d4dd16cf99c61a395e0fc2a75",
+    "reason": "Pinned cmd/environmentExec.go writes --receipt-file only with --inherit-streams. Correct the proposed future command, not actual observation."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "additive_to": "status.json and original attempt receipts; original receipts remain unchanged",
+  "dakota_snapshot": {
+    "action": "read-only snapshots only; no resume or worker creation",
+    "active_flags": [],
+    "historical_snapshot": "prior 20:04 observation remains historical and unchanged",
+    "latest_observed_at_utc": [
+      "2026-10-10T21:34:41.281Z",
+      "2026-10-10T21:34:42.379Z"
+    ],
+    "receipt_sha256": "537638e05e770e0c9a6ef7b8fa216376aa1bc6f8ed5e4610e7cc8b668ee922fc",
+    "target": "local",
+    "thread_state": "both notLoaded; Work Items latest turn completed; RCC latest turn interrupted",
+    "unknown_active_flags": false
+  },
+  "issue_134": {
+    "Sol_durable_source_anchor_review": "complete; v2 command proposal only adds --inherit-streams and does not alter the actual diagnosis",
+    "actual_attempt": "provider-present attempt returned exit 1 before execution after one actual HTTP 503; provider-omitted case NOT RUN",
+    "classification": "expected trust-carrier rejection, duplicating the canonical selected-provider 503 negative; no RCC defect, content corruption, external blocker or upstream report established",
+    "hard_requirement": "configured-provider-unavailable offline positive remains unproven and required",
+    "no_retry_restore_acquire_or_publish": true,
+    "offline_positive_actual_execution": "NOT RUN",
+    "pinned_contract": "with --trust-carrier absent, explicit --provider is the HTTP trust carrier; v18.19.3 verifies it before warm materialization and on each lease. --permissive-local does not bypass failed carrier I/O.",
+    "six_indexed_artifacts": "independent SHA-256, byte-size and ownership checks PASS",
+    "source_diagnosis_json_sha256": "635afb898e879e3204ebc9e05db7d679f789838d4dd16cf99c61a395e0fc2a75",
+    "source_diagnosis_markdown_sha256": "31840c8ca6718836d816ff6c533a31e087655c71c32b0760350c6bdfbfd35432",
+    "source_diagnosis_v2_json_sha256": "6ede7e31fd799201f60e25e4ce2e051839a28d56cf33ee8e0552cf0d384c6753",
+    "source_diagnosis_v2_supersedes_template_only_command": true,
+    "status": "HOLD",
+    "verification_interpretation": "latest verification is a mutable trust decision; verified-content is a reconciled provisional-intent marker, not readiness authority. Its absence and the new invalid decision do not prove old ready metadata was corrupt. No complete CAS/content rehash or fresh verification was performed."
+  },
+  "issue_208": {
+    "NOT_RUN": [
+      "missing-support UI",
+      "generic HTTP 500 UI",
+      "process crash recovery",
+      "non-Chromium browser"
+    ],
+    "authorization_denied_and_signin_recovery_test_implementation": "in progress under root authorization; not an acceptance result"
+  },
+  "observed_at_utc": "2026-10-10T21:41:10Z",
+  "pr_302_pr_282_union_review": {
+    "sha256": "ff4f068778737d923994eaf3dcd3ab5eb3f0349dd8225ce8a00f860763cfbf0a",
+    "status": "both reviewed source unions GO; current-head CI required; PR282 production gate remains blocked"
+  },
+  "pr_308": {
+    "artifact_selector": "absent; no cold-only or frozen/Go selector; selftest executable environment alone is filtered out",
+    "canonical_command_is_proposed_only": true,
+    "cli_watchdog_seconds": 2465,
+    "command_mode": "candidate-wheel only; do not imply an artifact selector exists",
+    "proof_budget_seconds": 2400,
+    "provider_acceptance": "NOT RUN",
+    "verifier_scope": "source Runtime candidate-wheel verifier only; derives Core/Helper1.0.3 and owns provider/offline phases"
+  },
+  "schema": "actions-wave6-scope-corrections/v1",
+  "upstream_disposition": "none; no confirmed defect is established"
+}

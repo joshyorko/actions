@@ -1832,6 +1832,19 @@ it is reacquired by Artifact digest and never by a persisted executable or
 materialization path. RCC acquire results must include exact identity and
 `verification.valid == true`; missing or invalid verification fails closed.
 
+For pinned RCC v18.19.3, an explicit HTTP provider also supplies the trust
+carrier unless a separate `--trust-carrier` is configured. Each new lease
+rechecks that carrier before warm reuse, and `--permissive-local` does not
+bypass a failed carrier request. Keep this selected-provider fail-closed
+negative separate from the required configured-provider-unavailable offline
+positive. After a failed verification, reconciliation may remove
+`verified-content.json` and replace the latest verification decision while
+preserving `ready.json` and the manifest state. The latest verification is a
+mutable trust decision; `verified-content.json` is a provisional-intent marker,
+not readiness authority, and its absence alone does not prove content
+corruption. Compare the retained identity and metadata before drawing a
+conclusion, and do not restore or rewrite the cache to manufacture a pass.
+
 If an RCC task retains only a bounded tail of an `env acquire --json` response,
 keep outer-response fields unknown when the beginning is missing. A complete,
 syntactically bounded nested `verification` object may be recovered read-only

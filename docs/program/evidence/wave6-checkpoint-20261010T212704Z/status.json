@@ -58,7 +58,7 @@
       "tree": "9977652bc1e8d21a6e3b4f906031a68ab11b4c40"
     },
     {
-      "additional_local_verification": "24 canonical RCC checks passed; union review pending; pushed new head",
+      "additional_local_verification": "24 canonical RCC checks passed; independent union review GO; new-head CI required",
       "checks": 18,
       "head": "d649c90112ee03c46f8b88c973849d7203f7e64a",
       "observed_check_statuses": [
@@ -69,7 +69,7 @@
       "tree": "bbc33916748d02e24fe37ce843594a1d8f67067d"
     },
     {
-      "additional_status": "pushed normal merge; draft remains blocked",
+      "additional_status": "pushed normal merge; union source review GO; new-head CI required; production gate remains blocked",
       "checks": 19,
       "head": "66cc132367be02b05bc08c981b900a68d156cd52",
       "integration_scope": "Accepted PR301 serialization/diagnostic work and PR304 runtime-floor evidence are present; original template source is unchanged.",
@@ -81,6 +81,10 @@
       "tree": "ca8685372e67ce07b55f9a830a60134582107873"
     }
   ],
+  "dakota_snapshot": {
+    "sha256": "537638e05e770e0c9a6ef7b8fa216376aa1bc6f8ed5e4610e7cc8b668ee922fc",
+    "status": "read-only local snapshots; both threads notLoaded, no active flags, Work Items last completed, RCC last interrupted; no resume or creation"
+  },
   "full54_readiness": {
     "contract_preservation": "54 retained contracts; 53 open and 1 accepted; 16 archives unchanged per prior reconciliation",
     "observed_at_utc": "2026-10-10T21:20:40Z",
@@ -104,10 +108,14 @@
     "staging_readiness_sha256": "b1ccafe4aa766bb54b9830b1466816a2b54eaf9a1000a29aa4231c24fbeb8fed",
     "synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0"
   },
-  "observed_at_utc": "2026-10-10T21:28:03Z",
+  "observed_at_utc": "2026-10-10T21:41:10Z",
   "post304_union_review": {
     "sha256": "6982169bccf4e6a754615e932b4c05188f251adfa6214cce5d144afe8feab727",
     "status": "GO source-publication readiness; new-head CI still required"
+  },
+  "pr302_pr282_union_review": {
+    "sha256": "ff4f068778737d923994eaf3dcd3ab5eb3f0349dd8225ce8a00f860763cfbf0a",
+    "status": "independent source unions GO; current-head CI required; PR282 production gate remains blocked"
   },
   "pr304": {
     "final_premerge_checks": 23,
@@ -121,14 +129,22 @@
   },
   "rcc_followup": {
     "attempt_id": "attempt-20261010T2121Z",
-    "classification": "actual bounded provider-present command failed before writing an exec receipt; provider-omitted case NOT RUN; no production/upstream defect claim",
-    "followup_status": "Sol source/contract diagnosis active; preserve original failure receipt unchanged and add correction separately when reviewed",
+    "attempt_index_v2_sha256": "8dc723c1743de03c107ff52a1b17953d52d4a35ae51ab4f8dda05e9d82465f42",
+    "classification": "expected pinned selected-provider HTTP trust-carrier 503; canonical negative duplicated, no defect claim",
     "independent_runner_readiness_review_sha256": "a271667d09dab0e1108d664985ecdd01b3fec39280423054c488abe16b659b6a",
     "index_sha256": "ecf94402e423b0b668cfb315fff8e6c79d2f32237e63c5a2e3cfdf7b397cb02c",
+    "interpretation_correction_sha256": "7db3f6cac050ccceaca1e09165264b08900c63b91bd11b19dd4723ffb6cebaa6",
     "interpretive_correction": "Current source semantics treat the explicit HTTP provider as the implicit trust carrier. Each new lease verifies the carrier before warm reuse; the probe supplied rejected content and returned 503. Missing verified-content can be provisional verification intent, while retained ready state remains intact. The harness therefore did not establish independent trust-carrier failure or content corruption.",
+    "issue_134_status": "HOLD: configured-provider-unavailable offline positive remains unproven and required; actual provider-omitted case NOT RUN",
     "post_run_readback_sha256": "2703f4e83c7840fe639b2426e8f7938bf46db3d07f8036b8ab15955f905c6b6c",
+    "proposed_future_verifier_command": "candidate-wheel source Runtime only; 2400-second proof budget, 2465-second CLI watchdog; command proposal is not executed and has no artifact selector",
     "receipt_sha256": "60351ad071d07c28b89d7e5eb0feab6fdd7a29b9da61bf4046b471721f09a64b",
-    "runner_sha256": "29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c"
+    "runner_sha256": "29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c",
+    "source_diagnosis_json_sha256": "635afb898e879e3204ebc9e05db7d679f789838d4dd16cf99c61a395e0fc2a75",
+    "source_diagnosis_markdown_sha256": "31840c8ca6718836d816ff6c533a31e087655c71c32b0760350c6bdfbfd35432",
+    "source_diagnosis_v2_json_sha256": "6ede7e31fd799201f60e25e4ce2e051839a28d56cf33ee8e0552cf0d384c6753",
+    "source_review": "Sol independent pinned-source diagnosis complete; v2 command proposal adds --inherit-streams only",
+    "verified_content_interpretation": "latest verification is mutable; verified-content is a provisional-intent marker, not readiness authority; absence is not corruption evidence"
   },
   "schema": "actions-wave6-current-status/v1",
   "upstream_disposition": "none; no confirmed upstream defect is reported"

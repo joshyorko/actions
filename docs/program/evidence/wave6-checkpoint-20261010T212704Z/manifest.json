@@ -8,6 +8,12 @@
       "source": "new scoped raw-byte attributes"
     },
     {
+      "bytes": 4122,
+      "path": "dakota/dakota-native-snapshots-20261010T213442Z.json",
+      "sha256": "537638e05e770e0c9a6ef7b8fa216376aa1bc6f8ed5e4610e7cc8b668ee922fc",
+      "source": "dakota-native-snapshots-20261010T213442Z.json"
+    },
+    {
       "bytes": 10195,
       "path": "graph/readiness-refresh-20261010T212040Z.json",
       "sha256": "1f315b4df0d6dda68df135b253308f90ed3362e6bc41a269ab278f9da14c20eb",
@@ -24,6 +30,18 @@
       "path": "post304-union/pr305-306-307-308-post304-union-independent-review.md",
       "sha256": "c0ae288aa2e6f06bdd46f2ccc927b331df7974f38b051736e79d4212558d4418",
       "source": "pr305-306-307-308-post304-union-independent-review.md"
+    },
+    {
+      "bytes": 10816,
+      "path": "pr302-pr282-union/independent-review.json",
+      "sha256": "ff4f068778737d923994eaf3dcd3ab5eb3f0349dd8225ce8a00f860763cfbf0a",
+      "source": "pr302-pr282-post304-union-independent-review.json"
+    },
+    {
+      "bytes": 693,
+      "path": "pr302-pr282-union/independent-review.md",
+      "sha256": "e493e9a6baccba9c446aa66afa75d539148bd7cd2f132f400d8861b8bec9e71a",
+      "source": "pr302-pr282-post304-union-independent-review.md"
     },
     {
       "bytes": 4531,
@@ -248,6 +266,12 @@
       "source": "new scoped raw-byte attributes"
     },
     {
+      "bytes": 1425,
+      "path": "rcc-followup/attempt-index-v2.json",
+      "sha256": "8dc723c1743de03c107ff52a1b17953d52d4a35ae51ab4f8dda05e9d82465f42",
+      "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/attempt-index-v2.json"
+    },
+    {
       "bytes": 1102,
       "path": "rcc-followup/attempt-index.json",
       "sha256": "ecf94402e423b0b668cfb315fff8e6c79d2f32237e63c5a2e3cfdf7b397cb02c",
@@ -266,19 +290,49 @@
       "source": "rcc-warm-readiness/followup-exec-runner-independent-final-review-29eb.json"
     },
     {
+      "bytes": 22534,
+      "path": "rcc-followup/independent-pinned-rcc-failure-diagnosis-v2.json",
+      "sha256": "6ede7e31fd799201f60e25e4ce2e051839a28d56cf33ee8e0552cf0d384c6753",
+      "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/independent-pinned-rcc-failure-diagnosis-v2.json"
+    },
+    {
+      "bytes": 21494,
+      "path": "rcc-followup/independent-pinned-rcc-failure-diagnosis.json",
+      "sha256": "635afb898e879e3204ebc9e05db7d679f789838d4dd16cf99c61a395e0fc2a75",
+      "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/independent-pinned-rcc-failure-diagnosis.json"
+    },
+    {
+      "bytes": 2234,
+      "path": "rcc-followup/independent-pinned-rcc-failure-diagnosis.md",
+      "sha256": "31840c8ca6718836d816ff6c533a31e087655c71c32b0760350c6bdfbfd35432",
+      "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/independent-pinned-rcc-failure-diagnosis.md"
+    },
+    {
+      "bytes": 2657,
+      "path": "rcc-followup/interpretation-correction.md",
+      "sha256": "7db3f6cac050ccceaca1e09165264b08900c63b91bd11b19dd4723ffb6cebaa6",
+      "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/interpretation-correction.md"
+    },
+    {
       "bytes": 6922,
       "path": "rcc-followup/post-run-readback.json",
       "sha256": "2703f4e83c7840fe639b2426e8f7938bf46db3d07f8036b8ab15955f905c6b6c",
       "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/post-run-readback.json"
     },
     {
-      "bytes": 5959,
+      "bytes": 3630,
+      "path": "scope-corrections.json",
+      "sha256": "7a5cb5e5d1a5b2cebad69e9f4b4f292664af5cc8bb089151bead6d71acd2384a",
+      "source": "additive root and independent review correction"
+    },
+    {
+      "bytes": 7503,
       "path": "status.json",
-      "sha256": "3a0a084f9dca7fa39f5febfc04542db4164ecf1de9fece0b1c34835b647d4c34",
+      "sha256": "de9d236c38aa1ade6db2bb7e217ef1e6e940535e0fb7aef1de6ea95fb2d35f69",
       "source": "derived; observations from named receipts and root exact-head update"
     }
   ],
-  "observed_at_utc": "2026-10-10T21:28:03Z",
+  "observed_at_utc": "2026-10-10T21:41:10Z",
   "schema": "actions-wave6-evidence/v1",
   "scope": "Additive text checkpoint and canonical guide delta only. No graph, ledger, original contract, source, archive or remote mutation. No secrets, signed URLs, private auth-route inventory, staged binaries, caches, or runtime databases.",
   "upstream_disposition": "none"
