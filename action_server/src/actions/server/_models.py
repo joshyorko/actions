@@ -78,6 +78,15 @@ class McpCatalogName:
     action_name: str
 
 
+@dataclass
+class McpResourceRouting:
+    """Complete admitted resource routing, retained to protect historical winners."""
+
+    id: str  # Fixed-size digest; compare the complete canonical payload too.
+    _db_rules.unique_indexes.add("McpResourceRouting.id")
+    routing_json: str
+
+
 RUN_ID_COUNTER = "run_id"
 ALL_COUNTERS = (RUN_ID_COUNTER,)
 
@@ -444,12 +453,14 @@ def run_status_to_str(run_status: int) -> str:
 
 def get_all_model_classes():
     from actions.server.migrations import Migration
+    from actions.server.run_outputs.models import MODEL_CLASSES
 
     return [
         Migration,
         ActionPackage,
         Action,
         McpCatalogName,
+        McpResourceRouting,
         Run,
         Counter,
         UserSession,
@@ -461,6 +472,7 @@ def get_all_model_classes():
         ScheduleExecution,
         Trigger,
         TriggerInvocation,
+        *MODEL_CLASSES,
     ]
 
 

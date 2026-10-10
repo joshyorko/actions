@@ -416,9 +416,21 @@ def test_v12_migration_creates_empty_history_matching_fresh_schema(tmp_path):
         expected_columns = db.list_table_and_columns()
         expected_indexes = db.list_indexes()
         with db.transaction():
+            # Restore the real pre-13 schema, including absence of migration 15.
+            for table in (
+                "run_output",
+                "run_attempt",
+                "run_pin",
+                "run_access_grant",
+                "run_admission",
+                "workspace",
+            ):
+                db.execute("DROP TABLE " + table)
             db.execute("DROP TABLE mcp_catalog_name")
+            db.execute("DROP TABLE mcp_resource_routing")
+            db.execute("DELETE FROM migration")
             db.execute(
-                "UPDATE migration SET id=12, name='reconcile_run_columns' WHERE id=13"
+                "INSERT INTO migration(id,name) VALUES(12,'reconcile_run_columns')"
             )
     assert migrate_db(path, CURRENT_VERSION)
     with load_db(path) as db:

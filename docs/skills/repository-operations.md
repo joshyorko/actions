@@ -789,18 +789,45 @@ catalog can finish on that generation. Serving whitelists and authentication
 still apply to original package/action identities. External alias-keyed grants
 are not established by reservations.
 
-Exact template-string ownership does not prevent different templates from
-matching the same concrete URI. For example, `example://{tenant}/item` and
-`example://acme/{resource}` both match `example://acme/item`; retiring one and
-admitting the other can change that concrete read's target. This observed
-cross-template matching ambiguity remains outside the exact-key guard and needs
-separate policy before claiming durable identity for every concrete resource URI.
-Cross-kind matching also remains unguarded: a prior direct resource
-`example://cross/new` can later match `example://cross/{item}`, while a prior
-`example://cross-old/{item}` read can later hit a new direct resource at
-`example://cross-old/item`. Direct URI lookup takes precedence over template
-matching. Exact namespace reservations therefore do not preserve concrete URI
-identity across namespaces or overlapping patterns.
+Concrete resource URI ownership also retains complete admitted routing
+projections in `mcp_resource_routing`, starting with migration 14. Each canonical
+projection records exact direct URI owners and lexically ordered template
+owners, using `(ActionPackage.name, Action.name)` pairs. Runtime resolves direct
+URIs first, then the first matching template, in both the current and historical
+projections. Before invoking a current callback, it rejects a URI whose winner
+in any recorded projection belongs to a different pair. This covers cross-kind
+capture (`example://cross/new` later matching `example://cross/{item}`, or an old
+template read later hitting a new direct URI), and distinct patterns such as
+`example://{tenant}/item` and `example://acme/{resource}` matching
+`example://acme/item`. It protects advertised expansions that were never read,
+without treating a shadowed historical template as the winner of a direct URI.
+Unavailable current routes return errors; history never restores an old callback.
+Same-owner revisions invoke the current callback and remain permitted.
+
+Routing history joins the existing serialized admission transaction and rollback
+boundary. Fixed-size domain-separated digests identify full RFC 8785 canonical
+payloads; full equality, shape, digest, and matcher-policy version 1 are validated
+before admission. Duplicate projections and metadata-only updates consume no new
+history; empty resource catalogs bind no URI and add no projection. Malformed,
+incompatible, colliding, missing, or overcapacity history fails admission without
+publication. Private hard limits are 256 projections, 10,000 aggregate route rows,
+and 16 MiB of aggregate canonical UTF-8 payloads. Capacity rejects the complete
+update and retains last-good; protective history is never evicted. A duplicate
+remains admissible at capacity. These bound storage and matching iterations,
+not regex CPU time: policy 1 preserves the existing anchored placeholder
+substitution, including unescaped literal regex characters. No URI grammar or
+template intersection solver is introduced.
+
+Discovery and descriptor revisions remain deterministic functions of the current
+admitted set. Read-time checks do not prove complete template disjointness at
+admission: an advertised template may contain concrete URIs that return historical
+ownership-conflict errors. Rediscovery cannot reauthorize such a URI; rename or
+choose a non-conflicting resource route. Migration cannot reconstruct unknown
+pre-upgrade routing precedence from exact-key rows, and a fresh/replaced database
+has no prior routing history. The guarantee covers recorded post-upgrade
+projections in the shared database, not arbitrary earlier advertisements,
+authorization grants, or code/revision identity. A call already admitted against
+an older immutable catalog may finish on that generation.
 
 HTTP paths, action display names, metadata, and dispatch
 targets remain tied to their original package/action. Resource URI and prompt
@@ -1742,6 +1769,12 @@ declared portable-suite result and hand it to the Action Server test-layout
 owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
 the package's discovery rules.
 
+CLI tests that parse nested MCP JSON responses should model the concrete
+response and transition shapes with `TypedDict`, then validate the decoded
+`object` at the HTTP boundary with a narrow `TypeGuard` before indexing. This
+keeps success and error variants explicit and avoids both untyped JSON access
+and broad `Any` annotations.
+
 The generated `actions_runtime_tests.yml` workflow is the configured full
 Action Server PR gate: it runs the portable and binary test tasks, then lint,
 typecheck, and docs checks. Its pull-request filter must retain the generated
@@ -2167,7 +2200,8 @@ compensation closure after nondurable SQLite commit failure with
 `min_processes=0`; it does not prove warmed RCC worker compensation or
 external-service rollback.
 When a reload test constructs a partial `Database` directly, register
-`McpCatalogName` alongside `ActionPackage` and `Action` before creating tables.
+`McpCatalogName` and `McpResourceRouting` alongside `ActionPackage` and `Action`
+before creating tables.
 `create_tables(get_model_db_rules())` creates only registered models; the rules
 do not add missing tables. Otherwise catalog admission fails before the injected
 commit failure, and the test never exercises generation compensation. Preserve
@@ -2338,7 +2372,23 @@ case in `test_cli_multi_package_sync.py` that honors
 new candidate artifact, since older frozen artifacts cannot prove this repair.
 The permanent exact-key admission guard above preserves historical ownership
 without changing deterministic current-set names. It does not fence calls by
-catalog revision or solve overlapping resource-template matching.
+catalog revision. `mcp/test_resource_history.py` separately covers historical
+concrete resource winners across overlapping templates and direct/template
+transitions, rejection before callback, same-owner revisions, restart, capacity,
+malformed history, commit rollback, and serialized two-process SQLite admission.
+This read-time guard retains the existing matcher; it does not solve arbitrary
+template intersection or reauthorize a conflicting URI after rediscovery.
+`test_cli_mcp_resource_history.py` adds one real CLI/HTTP `resources/read`
+acceptance node spanning direct-to-template, template-to-direct, and
+template-to-template owner changes. It verifies that candidate routes can be
+listed while a protected concrete read fails before the new callback, then
+checks same-owner callback revision, direct-over-template precedence, rename
+recovery, retired-resource unavailability, malformed watched-reload last-good
+behavior, and persisted denial after restart. The one JUnit node contains all
+three transition classes; it is not three separately counted test cases. In a
+frozen run its managed package fixtures pin `actions-core=1.0.2` and verify the
+worker's Core origin and version. Source-mode evidence remains distinct from a
+run against the actual new frozen Runtime artifact.
 The legacy `test_action_package_rename` makes the ownership boundary explicit:
 renaming `calculator` while retaining its `calculator_sum` MCP key is rejected,
 and the test compares every persisted column in the package, action, and owner
@@ -2983,3 +3033,75 @@ regression criterion, not a statistically calibrated browser budget. A single
 jsdom wall-clock measurement cannot establish browser frame rate: hosted run
 38056869588 measured 34.13ms against the old 32ms assertion without a rendering
 correctness failure. Controlled browser performance remains a separate proof.
+## Common Run-output migration and verification
+
+The private common Run-output service depends on migration 15, stacked after
+the MCP ownership and routing-history migrations 13/14. Register every model
+through `get_all_model_classes()` in fixtures that exercise Run reads or updates;
+partial custom schemas must include the normalized Run models. Missing tables
+fail closed and must not trigger a legacy authorization fallback. Upgrading
+creates no synthetic pins or grants for historical Runs and preserves their
+status, result, inputs and artifact directory.
+
+Legacy Run API tests that replace the in-memory `RunsState` must implement
+`is_scoped_run(run_id)` explicitly. A legacy-only fixture may return false only
+for the known Run it models as having no persisted `RunPin`; keep the production
+check intact so a real scoped Run cannot fall through to a legacy cache or
+durable artifact manifest. The durable-binding regression should still restart
+the storage object, recover legacy Run metadata, and verify the existing binary
+Range response.
+Historical fixtures built with the current `create_db()` must remove tables and
+indexes owned by later migrations before backdating the migration version.
+Changing only the version leaves future schema behind and can make forward
+migration repeat existing indexes. Preserve populated legacy-output archive
+assertions while restoring the intended historical schema boundary.
+
+Use independent processes to verify claim and conflicting terminal publication,
+and a real connection commit failure to verify rollback. SQLite must acquire
+its writer before reading the Run pin: a deferred read followed by a write can
+deadlock two interprocess lock upgrades even with an in-process Python lock.
+Run claim/resolve/publication uses the existing installation counter lock first
+on SQLite and Workspace row locks on PostgreSQL. Registration and numbered
+admission both take Counter before Workspace on either backend; reversing
+those two locks creates a PostgreSQL registration/admission deadlock cycle. Lease
+and retention milliseconds use decimal TEXT with BIGINT casts rather than the
+facade's PostgreSQL INTEGER mapping. PostgreSQL behavior requires an actual
+backend receipt; SQLite results do not establish it.
+
+The service rejects mutable raw-bind `Database.verbose` diagnostics instead of
+disabling global logging. It sanitizes SQL body errors before the Database
+transaction logs rollback, while preserving nonsensitive commit exception
+types. Verify both actual caplog and exception traceback with private-input or
+result sentinels. This is a narrow SQL-bind boundary, not general output or
+provider diagnostic redaction. Linux-only filesystem proofs skip elsewhere,
+while configured Linux/Windows/macOS type checks still apply. Required flags
+and callable capabilities use strict getters with no weaker fallback.
+
+Before exposing scoped Runs, audit every legacy SQL read, cache update, websocket
+subscription, request-ID lookup, artifact/manifest fallback and analytics query.
+Those paths exclude pins; the private resolver supplies current scoped access
+checks. Keep provider roots outside legacy/static serving, and do not treat the
+existing global API token or a typed reference as a Workspace grant. Native,
+public authenticated transport, HTTP Range/HEAD, Windows provider and complete
+multi-adapter lifecycle acceptance need their own measured gates.
+
+
+A stage failure after provider sealing must retain actual seal metadata in the
+aborted output record before any cleanup. The private provider's transient owned
+seal includes issuer and object identity evidence; only ref/digest/size enter the
+DB. Discard validates that ownership, actual integrity and the current no-follow
+name binding. A byte-identical replacement or another provider's seal must not
+be deleted. Missing owned objects allow idempotent discard. Metadata commitment
+and deletion are separate: abort commit uncertainty skips deletion, and discard
+failure leaves a measured receipt for later reconciliation while preserving the
+original failure. Successful publication or another referencing record prevents
+discard. No protective metadata is erased after cleanup.
+
+The filesystem root requires an exclusive trusted writer for each generated
+object name. POSIX does not provide atomic inode-conditional unlink against a
+hostile same-euid writer after the final identity check; do not claim that
+protection. A crash between sealing and recording the abort, a malformed seal
+or a DB outage can still leave an unindexed orphan. General reconciliation/GC,
+crash-safe provider staging and automatic external-effect retry remain separate
+gates. Verify real cancel-during-stage, rolled-back seal writes, ambiguous
+commits, cleanup failures and successful-publication/replay safety.
