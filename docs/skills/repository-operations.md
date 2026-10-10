@@ -1753,7 +1753,10 @@ databases without legacy `run` columns or schedule indexes can upgrade. Because
 `create_db` seeds one row at `CURRENT_VERSION`, focused migration fixtures downgrade
 that row to represent an older database rather than inserting a duplicate ID. Xdist tests that acquire OS-level
 mutexes use process-qualified names so concurrent workers and repeated suites cannot
-share global lock state.
+share global lock state. Keep the same generated name among the participants inside
+one test when they must contend. Mirrored Action Server tests that exercise `_common`
+and `_robo_utils` must not reuse a fixed global key across modules: xdist can run the
+two copies on separate workers, causing one test to fail before its timeout assertion.
 
 `Lint` is fail-fast across package boundaries: report which packages completed and which
 were not reached whenever it fails. The shared package task must call the explicit
