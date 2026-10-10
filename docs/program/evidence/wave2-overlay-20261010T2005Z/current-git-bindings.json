@@ -1,0 +1,200 @@
+{
+  "schema": "actions-current-git-binding/v1",
+  "repository": "joshyorko/actions",
+  "observed_at_utc": "2026-10-10T20:05:39Z",
+  "source": {
+    "ref_read": "Read-only `git ls-remote origin` for community, integration/community-release-20261008 and refs/pull/{221,282,290,292,299,300,302,304,305}/head at 2026-10-10T20:05:39Z; all SHAs equal the prior exact commit/tree bindings.",
+    "commit_details": "Existing local Git object database; git cat-file -p for commits available at observation. Older unchanged heads use the immutable 18:39Z independent binding receipt.",
+    "pr_state_and_check_counts": "No new complete native GitHub check census was available to this overlay after the root 19:58Z census. Later root messages supplied exact PR302 Windows job result and PR282/PR305 lane notes; those are scoped separately in live-status-observation.json. Shell gh API returned 401 at prior cutoff; no authentication claim."
+  },
+  "bindings": {
+    "integration": {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+    },
+    "open_prs": {
+      "221": {
+        "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+      },
+      "282": {
+        "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+        "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb"
+      },
+      "290": {
+        "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+        "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097"
+      },
+      "292": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+      },
+      "299": {
+        "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0"
+      },
+      "300": {
+        "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1"
+      },
+      "302": {
+        "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+        "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9"
+      },
+      "304": {
+        "sha": "73605934c1c948895410a5abaed6c225a396e038",
+        "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5"
+      },
+      "305": {
+        "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+        "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303"
+      }
+    }
+  },
+  "community": {
+    "remote_branch": "community",
+    "sha": "a70993fafc99a9f94041485542d5a720797ca394",
+    "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+    "parents": [
+      "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "c2733957b047a2acf3d38c1cad7704a4bc69f15b"
+    ]
+  },
+  "integration": {
+    "remote_branch": "integration/community-release-20261008",
+    "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+    "parents": [
+      "e886d26ebaefafa9189a69517f6707691b53662e",
+      "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+    ]
+  },
+  "open_pr_heads": {
+    "221": {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+      "parents": [
+        "e886d26ebaefafa9189a69517f6707691b53662e",
+        "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+      ],
+      "base_ref": "community",
+      "state": "OPEN",
+      "status": "OPEN_BLOCKED",
+      "scope": "Runtime integration candidate; latest integration includes PR301 serialization only; full release/graph gates remain."
+    },
+    "282": {
+      "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+      "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+      "parents": [
+        "aa78bc25b7662c163a59e19e81c97834cce24ba1"
+      ],
+      "base_ref": "integration/community-release-20261008",
+      "last_pr_payload_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "state": "OPEN",
+      "status": "SOURCE_GO; 19_CHECKS_QUEUED; MANAGED_RUNTIME_BROWSER_CONSUMER_PENDING",
+      "scope": "Final source/bundle review passed; published Core 1.0.3 unblocks the Canvas-query floor only. The managed Runtime/browser consumer remains NOT_RUN."
+    },
+    "290": {
+      "base_ref": "integration/community-release-20261008",
+      "draft": true,
+      "parents": [
+        "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+        "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "e886d26ebaefafa9189a69517f6707691b53662e"
+      ],
+      "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "state": "OPEN",
+      "status": "OPEN_BLOCKED",
+      "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+      "scope": "No new candidate acceptance; exact head and separate release/native gates remain blocked."
+    },
+    "292": {
+      "base_ref": "integration/community-release-20261008",
+      "draft": true,
+      "parents": [
+        "dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+      ],
+      "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "state": "OPEN",
+      "status": "OPEN_BLOCKED_WINDOWS_ACTIVE",
+      "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+      "scope": "Root reports 18 checks succeeded and Windows check active. Scoped native gate source equivalence is satisfied; no new native run or broad acceptance."
+    },
+    "299": {
+      "base_ref": "integration/community-release-20261008",
+      "draft": true,
+      "parents": [
+        "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+        "e886d26ebaefafa9189a69517f6707691b53662e"
+      ],
+      "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "state": "OPEN",
+      "status": "OPEN_BLOCKED",
+      "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+      "scope": "Remains blocked with dependent stack pending; no merge or whole-issue acceptance."
+    },
+    "300": {
+      "base_ref": "feat/shared-run-output-20261010",
+      "draft": true,
+      "parents": [
+        "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+        "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+      ],
+      "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "state": "OPEN",
+      "status": "OPEN_BLOCKED",
+      "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+      "scope": "Remains blocked with dependent stack pending; no merge or whole-issue acceptance."
+    },
+    "302": {
+      "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+      "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+      "parents": [
+        "e31506239fd0260d708a11440762537334f8d2d1"
+      ],
+      "base_ref": "integration/community-release-20261008",
+      "last_pr_payload_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "state": "OPEN",
+      "status": "SOURCE_GO; LOCAL_1081_PASS_12_SKIP; HOSTED_8_SUCCESS_6_ACTIVE_4_QUEUED",
+      "scope": "Local full non-integration suite 1,081 passed/12 skipped; current exact-head CI remains in progress/queued."
+    },
+    "304": {
+      "sha": "73605934c1c948895410a5abaed6c225a396e038",
+      "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+      "parents": [
+        "0f9422bbb366dcadc10ddea05f86a7f9ecad227c"
+      ],
+      "base_ref": "integration/community-release-20261008",
+      "base_sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "state": "OPEN",
+      "status": "SOURCE_GO; HOSTED_22_QUEUED",
+      "scope": "Floor-canary correction source review GO; exact-current-head hosted checks queued. Do not report superseded b954 failure as current."
+    },
+    "305": {
+      "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+      "parents": [
+        "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
+      ],
+      "base_ref": "integration/community-release-20261008",
+      "base_sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "state": "OPEN",
+      "status": "SOURCE_GO; HOSTED_14_QUEUED; BROWSER_FIXTURE_RERUN_PENDING",
+      "scope": "Fixture uv cache/TMPDIR correction only; strict symlink rejection remains; actual browser proof rerun pending."
+    }
+  },
+  "merged_runtime_prs": [
+    {
+      "number": 301,
+      "head": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1",
+      "head_tree": "246f3185f936f8d9104e92b583ea8dd1ba34878a",
+      "merge_commit": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "merge_tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+      "merge_parents": [
+        "e886d26ebaefafa9189a69517f6707691b53662e",
+        "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+      ],
+      "scope": "serialization and CI slice only; no whole-issue acceptance"
+    }
+  ]
+}

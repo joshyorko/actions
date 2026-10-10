@@ -1,0 +1,110 @@
+{
+  "schema": "actions-live-status-overlay/v1",
+  "observed_at_utc": "2026-10-10T19:58:27Z",
+  "cutoff_basis": "Latest live Git refs plus root native API check-count report at 19:58Z; current collaboration roster; exact evidence receipt copies retained in this directory.",
+  "repositories": {
+    "community": "joshyorko/actions@a70993fafc99a9f94041485542d5a720797ca394 (tree 562b49fc03bc4a16ef8a0b7b6f50b9bec88de959)",
+    "integration": "joshyorko/actions@4e8a26296608c232ce3dbd1f250ddb709b9459c9 (tree 1b582dd02b367e5216e60796a8da031e520aa12f)"
+  },
+  "core_1_0_3": {
+    "status": "PUBLISHED_AND_READ_BACK_PASS",
+    "tag": "actions-core-1.0.3",
+    "annotated_tag_object": "2346af6d41f4a45d13ebaef0377b655774bc6cbc",
+    "peeled_commit": "a70993fafc99a9f94041485542d5a720797ca394",
+    "workflow_run": 38080670608,
+    "artifact_id": 11680287719,
+    "wheel_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+    "sdist_sha256": "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691",
+    "pypi_bytes_match_workflow_manifest": true,
+    "isolated_public_consumer": "PASS via prepared RCC verifier",
+    "receipt": "evidence/wave2-overlay-20261010T195827Z/core-publication-readback.json",
+    "limitations": "Unblocks the #282 Canvas-query template Core 1.0.3 floor only; does not imply Runtime/browser consumer acceptance or Runtime release."
+  },
+  "pr301": {
+    "status": "MERGED_SCOPED_SERIALIZATION_ONLY",
+    "head": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1",
+    "merge": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "exact_head_checks": "20/20 success at reviewed head",
+    "scope": "Existing serialization and CI slice only; full #301 issue and any broader Canvas acceptance remain open."
+  },
+  "pull_requests": {
+    "282": {
+      "head": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+      "source_review": "GO_SOURCE_AND_DETERMINISTIC_BUNDLE",
+      "current_checks": "19 queued",
+      "remaining": "Installed managed Runtime/browser consumer proof pending; no full #282 acceptance."
+    },
+    "302": {
+      "head": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+      "source_review": "GO",
+      "local_nonintegration": "1081 passed, 12 skipped; portability/type/lint receipts attached",
+      "current_checks": "8 success, 6 in progress, 4 queued; fresh exact-head CI incomplete."
+    },
+    "304": {
+      "head": "73605934c1c948895410a5abaed6c225a396e038",
+      "source_review": "GO_SOURCE_CORRECTION",
+      "current_checks": "22 queued",
+      "remaining": "Exact-head CI/review/merge pending; Core 1.0.2 declared floor remains, even though latest Core is 1.0.3."
+    },
+    "305": {
+      "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "source_review": "GO_FIX_ONLY",
+      "current_checks": "14 queued",
+      "remaining": "Rerun actual browser fixture after moving uv cache and TMPDIR outside synchronized package; no #99 acceptance."
+    },
+    "292": {
+      "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "current_checks": "18 success, 1 active (Windows)",
+      "scoped_native": "Gate satisfied by root-verified source equivalence to accepted candidate; no fresh native execution claimed."
+    },
+    "290": {
+      "head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "status": "BLOCKED"
+    },
+    "299": {
+      "head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "status": "BLOCKED"
+    },
+    "300": {
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "status": "BLOCKED"
+    },
+    "221": {
+      "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "status": "OPEN_BLOCKED; full integration admission remains pending"
+    }
+  },
+  "rcc_7eca": {
+    "preparation_head": "7eca36abce160b68f616eab9b7fdc9c4e7f2b053",
+    "preparation_tree": "2890ce916a5a9ee9201239635a220f95ecfe9ee8",
+    "source_type_status": "GO; static type verification passed",
+    "actual_inspection": "NOT_RUN",
+    "compiler_proposal": "inspected/proposed only; no controlled metadata execution, runtime compiler acceptance, or issue closure."
+  },
+  "body_drift": {
+    "review_path": "evidence/wave2-overlay-20261010T195827Z/canvas-body-drift-review.json",
+    "review_observed_at": "2026-10-10T19:41:29Z",
+    "status": "retained historical accepted semantic review; its captured publication status is not silently rewritten. Original issue capture and raw contract hashes remain unchanged."
+  },
+  "readiness_history": {
+    "historical_core_only_report": "INVALID_FOR_CURRENT_RUNTIME_SOURCE; preserved as historical, not used for current facts.",
+    "corrected_current_source_report": "evidence/wave2-overlay-20261010T195827Z/runtime-readiness-corrected.json",
+    "correction": "PR304 is current 7360593 after root correction; PR282 is current 2c6de; PR302 is e8e8; old b954 CI failure is superseded. This correction does not assert all final Runtime release gates pass."
+  },
+  "worker_roster": "evidence/wave2-overlay-20261010T195827Z/current-workers.json",
+  "devsy": "DISABLED; no dispatch or calls",
+  "dakota": "UNKNOWN; ownership clarification pending; no dispatch",
+  "whole_issue_accounting": {
+    "retained_contract_rows": 54,
+    "raw_states_preserved": true,
+    "acceptance_captures_preserved": true,
+    "historical_archives_preserved": true,
+    "typed_canvas_edges_preserved": true,
+    "whole_issue_classification_counts_unchanged": true,
+    "only_whole_issue_complete": [
+      210
+    ],
+    "issue_acceptance_changed": false
+  },
+  "scope": "Only the existing PR301 serialization/CI slice is accepted; Core 1.0.3 publication is a satisfied prerequisite/unlock for the #282 Canvas-query template floor. No new graph edges, no new whole-issue acceptance, no runtime-release readiness claim."
+}

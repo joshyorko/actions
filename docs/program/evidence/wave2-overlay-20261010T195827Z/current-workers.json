@@ -1,0 +1,52 @@
+{
+  "observed_at_utc": "2026-10-10T19:58:27Z",
+  "source": "Current collaboration roster at overlay cutoff; root status updates. This is agent liveness/assigned work, not proof of repository source progress.",
+  "workers": [
+    {
+      "name": "root",
+      "status": "ACTIVE",
+      "scope": "Integration owner; PR/release admission and current GitHub check observation."
+    },
+    {
+      "name": "luna_core_release_preflight",
+      "status": "ACTIVE",
+      "scope": "Governance overlay author; this bounded task."
+    },
+    {
+      "name": "luna_database_gate_audit",
+      "status": "ACTIVE",
+      "scope": "Bounded database gate audit."
+    },
+    {
+      "name": "luna_graph_reconcile",
+      "status": "ACTIVE",
+      "scope": "Current reconciliation task; source status not inferred from liveness."
+    },
+    {
+      "name": "luna_pr282_template",
+      "status": "ACTIVE",
+      "scope": "PR282 template floor/generation gate."
+    },
+    {
+      "name": "sol_pr301_review",
+      "status": "ACTIVE",
+      "scope": "PR301 serialization slice review."
+    },
+    {
+      "name": "luna_pr302_portability",
+      "status": "COMPLETED",
+      "scope": "PR302 portability evidence delivered."
+    },
+    {
+      "name": "Devsy",
+      "status": "DISABLED",
+      "scope": "No dispatch, discovery, or calls."
+    },
+    {
+      "name": "Dakota",
+      "status": "UNKNOWN",
+      "scope": "Ownership clarification pending; no dispatch."
+    }
+  ],
+  "limitations": "Does not revive the older luna worker-name map or infer progress from active-agent status."
+}

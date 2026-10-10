@@ -1,0 +1,57 @@
+{
+  "observed_at_utc": "2026-10-10T20:05:39Z",
+  "source": "Live collaboration roster at 20:05:39Z, plus native-app-server snapshots captured 20:04:43/44Z. Agent liveness, native thread state, and code progress are distinct.",
+  "workers": [
+    {
+      "name": "root",
+      "status": "ACTIVE",
+      "scope": "Integration owner; PR/release admission and current GitHub check observation."
+    },
+    {
+      "name": "luna_core_release_preflight",
+      "status": "ACTIVE",
+      "scope": "Governance overlay author; this bounded task."
+    },
+    {
+      "name": "luna_database_gate_audit",
+      "status": "ACTIVE",
+      "scope": "Bounded database gate audit."
+    },
+    {
+      "name": "luna_graph_reconcile",
+      "status": "ACTIVE",
+      "scope": "Current reconciliation task; source status not inferred from liveness."
+    },
+    {
+      "name": "luna_pr282_template",
+      "status": "ACTIVE; worker reports one scoped installed Runtime/browser pass, durable receipt not yet present for independent readback",
+      "scope": "PR282 template floor/generation gate."
+    },
+    {
+      "name": "sol_pr301_review",
+      "status": "ACTIVE",
+      "scope": "PR301 serialization slice review."
+    },
+    {
+      "name": "luna_pr302_portability",
+      "status": "COMPLETED",
+      "scope": "PR302 portability evidence delivered."
+    },
+    {
+      "name": "Devsy",
+      "status": "DISABLED",
+      "scope": "No dispatch, discovery, or calls."
+    },
+    {
+      "name": "Dakota",
+      "status": "NO ACTIVE NATIVE THREAD FLAGS; local WorkItems latest turn completed and RCC latest turn interrupted; do not resume/create worker",
+      "scope": "Native snapshots at 20:04:43/44Z are authoritative for exact stored local repo CWD; see dakota-native-snapshots receipt. No new worker action authorized."
+    },
+    {
+      "name": "luna302_rcc_inspection",
+      "status": "ACTIVE; root-assigned bounded private source lane",
+      "scope": "RCC metadata inspection only on reviewed composition f441afb/tree 0862770; source-composition review pending; actual inspection NOT_RUN; no compiler admission or whole-issue acceptance."
+    }
+  ],
+  "limitations": "Does not revive the older luna worker-name map or infer progress from active-agent status."
+}

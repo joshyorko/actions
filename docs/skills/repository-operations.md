@@ -2346,6 +2346,8 @@ merge's ordered parents and complete tree. Bind CI evidence to the checkout
 recorded in job logs, not only the PR payload or mergeable flag. PR301's fresh
 review and local merge-tree computation independently confirmed this boundary.
 
+Some clones configure narrow `remote.origin.fetch` refspecs. A successful `git fetch origin <branch>` can update `FETCH_HEAD` without advancing the expected `refs/remotes/origin/<branch>` pointer. When a receipt names a remote-tracking ref, verify that exact ref resolves to the expected commit; if necessary fetch an explicit `refs/heads/<branch>:refs/remotes/origin/<branch>` refspec. A stale-path lookup after the short fetch is a ref-resolution failure, not evidence that the remote artifact contents failed validation.
+
 Fetch every page of the live issue collection with `state=all` and exclude objects
 with `pull_request`. Match the complete retained issue ID set, then compare
 current states and full UTF-8 body hashes separately from accepted criteria.
@@ -2370,6 +2372,8 @@ the prepared RCC interpreter. It checks installed module origins, version,
 public MCP metadata behavior and external `actions list` / `actions run`
 consumers. Publication, registry-byte readback and consumer behavior are separate
 evidence; none establishes a downstream Canvas or native release gate.
+
+Keep a downstream canary tied to its declared minimum, not the newest compatible version. The Runtime source declares `actions-core ^1.0.2`; its floor check must explicitly install `actions-core==1.0.2` even after Core 1.0.3 publishes, while checking the independent registry URLs/digests, installed version and import origin. Core 1.0.3 publication unlocks the #282 Canvas-query template floor, but does not satisfy its managed Runtime/browser consumer gate. Review the helper at each exact release source: Core community source `a70993fa` still requires `master` in `inv make-release`, while the newer Runtime helper requires canonical `origin/community` ancestry.
 
 When a subprocess adapter receives filesystem arguments as `Path`, construct
 expected argv path elements with `str(Path(...))`. Keep the entire argv assertion

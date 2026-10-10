@@ -207,3 +207,6 @@ docs/program/evidence/current-open-pr-audit-20261010T1842Z/** -text
 docs/program/evidence/current-worker-inventory-20261010T1842Z.json -text
 docs/program/evidence/program-amendment-20261010T1842Z.json -text
 docs/program/evidence/shared-run-output-20261010T1420Z/first-concurrency-run.log -text whitespace=-blank-at-eof
+# Wave 2 current binding/status receipts are immutable hash-bound evidence.
+docs/program/evidence/wave2-overlay-20261010T195827Z/** -text
+docs/program/evidence/wave2-overlay-20261010T20??Z/** -text

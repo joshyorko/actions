@@ -1,0 +1,9 @@
+{
+  "schema": "actions-wave2-fetch-refspec-correction/v1",
+  "observed_at_utc": "2026-10-10T19:58:27Z",
+  "repository": "joshyorko/actions",
+  "observation": "Root reported that this clone has narrow origin fetch refspecs. `git fetch origin handoff/actions-swarm-mk3-20261010` updated FETCH_HEAD but did not advance the expected remote-tracking ref, which remained at old commit 0191. An explicit refspec fetch `refs/heads/handoff/actions-swarm-mk3-20261010:refs/remotes/origin/handoff/actions-swarm-mk3-20261010` then verified the 15 remote files at df77d2a4aece354e5c7212f64ea718d17feec941.",
+  "impact": "The first wave2 manifest lookup failed because it used the stale tracking ref/path. The corrected fetch resolved all 15 expected files; no artifact-content mismatch or corruption was found.",
+  "source": "Root coordinator status update; independently retained commit/path identities and overlay verification are in adjacent receipts.",
+  "lesson": "A successful short-form git fetch may update FETCH_HEAD while leaving a named origin tracking ref unchanged; verify the exact resolved ref/commit or fetch with an explicit source:destination refspec."
+}

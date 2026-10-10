@@ -1,0 +1,99 @@
+{
+  "schema": "actions-runtime-release-readiness/v1",
+  "observed_at": "2026-10-10T19:50:26Z",
+  "mode": "read-only; no source, tag, release, dispatch, credential, or external-worker mutations",
+  "repository": "joshyorko/actions",
+  "checkout": {
+    "path": "/workspace/work/actions-mk3-core-preflight",
+    "branch": "mk3/core-preflight-20261010",
+    "head": "a70993fafc99a9f94041485542d5a720797ca394",
+    "working_tree_clean": true
+  },
+  "source_refs": {
+    "accepted_integration_pr221": {
+      "number": 221,
+      "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+      "remote_branch_tip": "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
+    },
+    "pr304": {
+      "number": 304,
+      "head": "b954071cb8a48ab80d5ebeb6b46c3c47f297f751",
+      "tree": "67604b85413197b2a116cdb4886eaf13df0ad021",
+      "state": "OPEN",
+      "base": "integration/community-release-20261008"
+    },
+    "community": "a70993fafc99a9f94041485542d5a720797ca394"
+  },
+  "related_prs": {
+    "290": {"head": "9e1059a12456faba64d11313d6dd8f943ad28912", "state": "OPEN", "checks_observed": "26 success"},
+    "292": {"head": "d0e12c1e1a256664b506cd8b027292062c6e1109", "state": "OPEN", "checks_observed": "18 success; build (windows-py3.12-devmode) in progress"},
+    "304": {"head": "b954071cb8a48ab80d5ebeb6b46c3c47f297f751", "state": "OPEN", "checks_observed": "4 success; 1 failure; 5 non-terminal; 2 cancelled; 1 skipped", "blocking_failure": {"workflow": "Actions Runtime PYPI Release", "run_id": 38080866612, "job": "build-wheels (ubuntu-22.04)", "step": "Verify Runtime wheel with published Core and Helper", "cause": "verify_published_runtime_floor.py pins EXPECTED_CORE=1.0.2 and exact 1.0.2 wheel SHA, but the published registry now resolves actions-core 1.0.3"}}
+  },
+  "distribution_state": {
+    "actions-core": {"pypi_latest": "1.0.3", "tag": "actions-core-1.0.3", "tag_target": "a70993fafc99a9f94041485542d5a720797ca394", "pypi_files": ["actions_core-1.0.3-py3-none-any.whl", "actions_core-1.0.3.tar.gz"], "publication_readback": "/workspace/work/actions-mk3-evidence/core-publication/publication-readback.json"},
+    "actions-runtime": {"pypi_latest": "1.0.2", "runtime_1_0_3_pypi_release": false, "runtime_1_0_3_tag": false, "latest_native_release": "actions-runtime-1.0.1", "runtime_1_0_3_native_release": false},
+    "actions-http-helper": {"pypi_latest": "1.0.3"},
+    "actions-work-items": {"pypi_latest": "0.4.4"}
+  },
+  "workflow_gates": {
+    "runtime_pypi": {
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "generator": ".github/workflows/_gen_workflows.py",
+      "trigger": "actions-runtime-* tag push; PR checks on community and integration/**",
+      "required": ["accepted community ancestry and tag/version match", "sdist plus exact wheel inventory", "published Core/Helper floor verification", "strict Twine metadata", "local publish verifier canary", "upload actions-runtime-dist artifact", "tag-run PYPI_TOKEN_ACTIONS_RUNTIME present before publishing", "public PyPI artifact/version/hash readback"]
+    },
+    "runtime_native": {
+      "path": ".github/workflows/actions_runtime_binary_release.yml",
+      "generator": ".github/workflows/_gen_workflows.py",
+      "trigger": "actions-runtime-* tag push",
+      "required": ["tag/version and community ancestry checks", "Ubuntu Linux, macOS arm64, and Windows builds", "all-or-none signing secret validation per signed platform (partial configuration fails; all absent yields unsigned build)", "native release and four immutable assets: linux64, macos-arm64, windows64.exe, SHA-256 manifest", "downloaded asset digest verification"],
+      "brew_dispatch": false
+    },
+    "core_release": {"path": "actions_release.yml", "trigger": "actions-core-* tag push", "workflow_dispatch": false, "current_core_release": "already published and independently read back"}
+  },
+  "homebrew": {
+    "owner_repo": "Sema4AI/homebrew-tools",
+    "workflow": ".github/workflows/publish.yml",
+    "workflow_id": 94931908,
+    "event": "workflow_dispatch with version input",
+    "latest_cask_version_observed": "3.2.0",
+    "cask_path": "Casks/action-server.rb",
+    "cask_platform": "macOS arm64 only",
+    "distribution_url_template": "https://cdn.sema4.ai/action-server/releases/<version>/macos-arm64/action-server",
+    "install": "brew install sema4ai/tools/action-server",
+    "upgrade": "brew upgrade action-server",
+    "manual_workflow_checks": "updates cask/hash, commits and pushes in Sema4AI/homebrew-tools, then taps/installs and checks action-server version on macOS",
+    "current_account_repo_permissions": "read-only (pull=true, push=false)",
+    "integration_workflow_dispatch": "no Homebrew dispatch in actions_runtime_binary_release.yml; recovery workflow has a separate legacy dispatch using GH_PAT_GHA_TO_ANOTHER_REPO",
+    "secret_boundary": "secret name is visible in workflow source; whether it is configured/valid is not observable from read-only API. No credential value inspected or printed."
+  },
+  "tool_availability": {
+    "gh": "available; authenticated API read as joshyorko; actions repo permissions admin/push; no write request performed",
+    "curl": "available",
+    "python": "available",
+    "brew": "not installed in this Linux environment",
+    "external_repo_write": "not available to current account in Sema4AI/homebrew-tools"
+  },
+  "remaining_acceptance": [
+    "Finish PR304 coverage and RCC toolkit checks, and fix/re-review its public-Core canary expectation to match the currently published Core 1.0.3 wheel (or otherwise verify the bounded compatibility contract without assuming PyPI continues to serve 1.0.2). Rerun exact-head Runtime wheel checks across all platforms and require no failed/cancelled publish-gating jobs.",
+    "Complete PR292 Windows job; obtain owner review/merge for PR292 and PR290. Passing checks alone are not merge acceptance.",
+    "Merge PR304, PR292, PR290, and any separately required canary fix into the release source; bind final release candidate commit/tree and verify required changes are in community ancestry.",
+    "Re-run all required source/coverage/toolkit/native/package gates on the final candidate; current observations are pre-merge and are not release evidence for a later union.",
+    "Before Runtime 1.0.3 tag creation, recheck tag and PyPI absence, version and published dependency floors; the tag must remain unused and point at accepted community source.",
+    "After tag, observe the single tag-triggered Runtime PyPI and binary workflows to success; independently read back PyPI files/hashes and the GitHub native assets/checksum manifest.",
+    "Decide whether legacy Homebrew cask/CDN delivery is part of this release acceptance. If yes, obtain an authorized Sema4AI/homebrew-tools maintainer action and verify macOS arm64 installation/upgrade. The current native workflow neither dispatches that tap workflow nor publishes its CDN payload."
+  ],
+  "smallest_next_cloud_actions": [
+    "Refresh only the in-flight PR304 and PR292 check states; retain exact-head job links/log cause.",
+    "Land the minimal canary expectation repair as a reviewable PR and rerun the published-floor gate; do not change version floors solely to silence the verifier.",
+    "After #292/#290/#304 and required canary acceptance, run final union hosted gates and then create the one unused Runtime tag only under the release owner's explicit release step."
+  ],
+  "documentation_delta_proposal": {
+    "target": "docs/skills/repository-operations.md",
+    "proposal": "Append a short Runtime distribution split: the tag workflow publishes PyPI plus GitHub native assets for Linux/macOS arm64/Windows; the legacy Sema4AI/tools Homebrew cask is a separate macOS arm64 CDN workflow and is not updated by the native GitHub release. State brew install/upgrade commands and require explicit owner decision and downstream readback if that channel is in release scope.",
+    "revision_specific_helper_rule": "Preserve PR304's distinction: accepted Core community source a70993fa still uses the older master guard, while the current Runtime integration helper requires community, canonical origin, and refreshed community ancestry. Do not generalize either rule across revisions.",
+    "source_edit": false
+  },
+  "upstream_disposition": "No upstream defect report drafted. This is a release-scope/ownership boundary, and the known canary mismatch is within joshyorko/actions release verification; report after its owner reviews a concrete fix if needed."
+}

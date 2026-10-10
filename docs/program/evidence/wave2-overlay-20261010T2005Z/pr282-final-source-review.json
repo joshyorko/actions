@@ -1,0 +1,83 @@
+{
+  "bundle_sha256": "c051c3e1db4f43393cb260c3a4066645c6793217f797a42bcab774887db1f03e",
+  "commands": [
+    "git diff 691b9c8687d721b4769ab7719ced68bff18b002f 2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+    "git diff aa78bc25b7662c163a59e19e81c97834cce24ba1 2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+    "git diff --check 691b9c8687d721b4769ab7719ced68bff18b002f 2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+    "Standard-library build_bundle in temporary output directory; compare all 8 outputs, nested ZIPs and every selected source byte; temporary directory removed.",
+    "SHA-256 preserved publication wheel then ZIP-read three exact members."
+  ],
+  "comparison_parent": "691b9c8687d721b4769ab7719ced68bff18b002f",
+  "decision": "GO source and deterministic bundle; HOLD acceptance until managed Runtime/browser consumer execution",
+  "doc_proposal": {
+    "delta": "For a published-Core template consumer gate, verify the managed worker imports files owned by the installed distribution, beneath its resolved interpreter prefix, at the declared version. Bind selected imported-module hashes to an independently verified registry wheel receipt and record exactly which members were measured. Matching sampled members does not authenticate every wheel member or prove a fresh registry acquisition; retain the complete artifact URL/SHA and install/cache provenance as separate evidence. Rebuild the complete embedded template bundle after source changes and verify all six template inventories, nested ZIP identity, and the outer metadata hash.",
+    "evidence": "Final2c6de979 probe measures three installed module files; full preserved wheelSHA8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265 independently checked; all8 deterministic outputs match.",
+    "path": "docs/skills/repository-operations.md",
+    "uncertainty": "No reviewer Runtime/browser execution; runtime consumer gate still pending."
+  },
+  "floors": {
+    "advanced": "actions-core=1.0.2",
+    "basic": "actions-core=1.0.2",
+    "canvas-query": "actions-core=1.0.3",
+    "mcp-v2-showcase": "actions-core=1.0.2",
+    "minimal": "actions-core=1.0.2",
+    "workflow-producer-consumer": "actions-core=1.0.2"
+  },
+  "head": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+  "nested_and_source_inventory": {
+    "advanced": {
+      "members": 15,
+      "sha256": "cb866f4b2992b892aa342dc10f00e0fefe76c35f0a2124af648f141e5a74b14d"
+    },
+    "basic": {
+      "members": 10,
+      "sha256": "c7a82d3442df36dd926e4cd97a25be34ed09ded8763d0eddfc69ab5fbca2b014"
+    },
+    "canvas-query": {
+      "members": 8,
+      "sha256": "7500becb402d09c8adcf938c0cc6c6b69d817007c79951b97fbeee75162b943a"
+    },
+    "mcp-v2-showcase": {
+      "members": 7,
+      "sha256": "933c8f5e92c01e8d8987861f53d4057a9c2a9c9528f7ee94d273c35b5d473bc6"
+    },
+    "minimal": {
+      "members": 10,
+      "sha256": "f2ee8ee4a49fabd9d19334bfbc4fbf9277c9f0cced27dee7e44a6b1a4bafad46"
+    },
+    "workflow-producer-consumer": {
+      "members": 4,
+      "sha256": "7c59a9807ba44a1b4b91f844857d2439935a04e6c26ff5350d78e9c4fac443ed"
+    }
+  },
+  "observations": [
+    "Exact six-template inventory: five Core1.0.2, Canvas Core1.0.3.",
+    "All8 regenerated outputs equal committed bytes; all inner members equal selected source bytes; nesting/hash checks succeed.",
+    "Verified preserved publication artifact fullSHA before independently extracting three member hashes; all equal probe constants.",
+    "Installed worker probe requires distribution ownership, resolved sys.prefix confinement, exact version and three imported module hashes.",
+    "Three sampled module hashes alone do not authenticate complete wheel, acquisition provenance, fresh cache, or entire imported dependency graph.",
+    "Missing authorized artifact binding remains blocked and artifact:null remains partial; no frozen/ChatGPT acceptance."
+  ],
+  "publication_artifact_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+  "published_module_sha256": {
+    "actions": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+    "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+    "actions.mcp._metadata": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+  },
+  "rebuilt_outputs_match": [
+    "action-templates.yaml",
+    "action-templates.zip",
+    "zips/advanced.zip",
+    "zips/basic.zip",
+    "zips/canvas-query.zip",
+    "zips/mcp-v2-showcase.zip",
+    "zips/minimal.zip",
+    "zips/workflow-producer-consumer.zip"
+  ],
+  "reviewed_followup": "aa78bc25b7662c163a59e19e81c97834cce24ba1..2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+  "scope": "Standard-library archive/source review, not Runtime or browser execution",
+  "subject": "PR282 revised installed-Core template consumer probe",
+  "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+  "upstream_disposition": "none",
+  "workspace_observation": "Initial reviewed committedcheckoutclean. Later ownerworktree had untracked action_server/setup.py during active L282 tooling; reviewer made no source writes or deletion. Review binds committedhead/tree, not a clean active test workspace."
+}

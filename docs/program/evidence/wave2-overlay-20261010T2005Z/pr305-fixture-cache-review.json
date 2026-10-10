@@ -1,0 +1,28 @@
+{
+  "subject": "Canvas Runtime fixture uv-cache isolation",
+  "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+  "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+  "parent": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+  "decision": "GO fixture source correction; HOLD actual browser acceptance until execution",
+  "commands": [
+    "git rev-parse HEAD HEAD^{tree}",
+    "git status --short",
+    "git diff 4e8a2629 f9c424f7",
+    "git diff --check 4e8a2629 f9c424f7",
+    "sed exact fixture source lines240-490"
+  ],
+  "observations": [
+    "One test fixture only; no production source change.",
+    "tmp_path_factory creates a unique sibling build directory; UV_CACHE_DIR and TMPDIR now point outside package tmp_path.",
+    "Candidate wheel remains candidate-core under package; version/provider/wheel direct_url/hash/installeddistribution assertions unchanged.",
+    "Runtime strict snapshot rejection of directory symlinks is preserved; avoiding generated uv cache is fixture input hygiene.",
+    "Reviewer diffcheck PASS; owner checkout clean at observation. Root reports earlier actual Runtime directory-symlink rejection; live browser rerun pending, not reviewer-executed."
+  ],
+  "doc_proposal": {
+    "path": "docs/skills/repository-operations.md",
+    "delta": "When an acceptance fixture snapshots tmp_path as its Action package, keep uv cache and temporary build state in a unique tmp_path_factory sibling directory. uv cache entries can include directory symlinks that the source snapshot correctly rejects. Keep the candidate wheel and its direct_url/SHA consumer assertions explicit; moving build state does not establish Runtime/browser acceptance or justify weakening the source snapshot policy.",
+    "evidence": "Exact f9c424f7 relocates only build environment paths; strict source reader and worker wheel checks unchanged.",
+    "uncertainty": "Actual corrected Runtime/browser execution still pending."
+  },
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,46 @@
+{
+  "disposition": "GO",
+  "scope": "PR301 serialization and CI slice only",
+  "reviewed_head": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1",
+  "head_tree": "246f3185f936f8d9104e92b583ea8dd1ba34878a",
+  "base": "e886d26ebaefafa9189a69517f6707691b53662e",
+  "prospective_merge": "6979048965f33153eff37c34b7c6ee393467f9da",
+  "merge_tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+  "ordered_parents": ["e886d26ebaefafa9189a69517f6707691b53662e", "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"],
+  "commands": [
+    {"command": "git merge-tree --write-tree e886d26ebaefafa9189a69517f6707691b53662e c734b9f850ec7b6bea8561b70312aca5c93dd6c1", "exit": 0, "output": "1b582dd02b367e5216e60796a8da031e520aa12f"},
+    {"command": "git diff --check e886d26ebaefafa9189a69517f6707691b53662e...HEAD", "exit": 0, "output": ""},
+    {"command": "git diff --name-only e886d26ebaefafa9189a69517f6707691b53662e 1b582dd02b367e5216e60796a8da031e520aa12f", "exit": 0, "observation": "Exactly eight reviewed workflow, test, npm manifest/lock and documentation files."},
+    {"command": "git diff e886d26ebaefafa9189a69517f6707691b53662e 1b582dd02b367e5216e60796a8da031e520aa12f -- action_server/src actions/src actions-http-helper/src work-items/src common", "exit": 0, "output": ""},
+    {"command": "git status --short --branch", "exit": 0, "observation": "Clean mk3/pr301-review-20261010 worktree at reviewed head."}
+  ],
+  "remote_observations": {
+    "checks": "20/20 completed success on exact c734 head",
+    "state": "open/draft, mergeable=true, mergeable_state=clean at review",
+    "stale_pr_payload_base": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+    "actual_base_proof": "live Git ref, prospective merge ordered parents, and hosted checkout logs agree on e886",
+    "frontend_run": 38074235916,
+    "frontend_job": 114277738441,
+    "frontend_checkout": "6979048965f33153eff37c34b7c6ee393467f9da",
+    "required_bridge": "8 passed, zero skips",
+    "runtime_frontend_suite": "31 files, 280 tests passed; later targeted invocations have their own skips",
+    "backend_jobs": [
+      {"os": "windows", "job": 114277738857, "passed": 988, "skipped": 94},
+      {"os": "macos", "job": 114277738848, "passed": 994, "skipped": 88},
+      {"os": "linux", "job": 114277738656, "passed": 1070, "skipped": 12}
+    ],
+    "timing_cases": "All four adjusted cases passed on every backend OS on exact prospective merge. Production deadline implementation unchanged."
+  },
+  "findings": [],
+  "limitations": ["No local pytest/npm execution", "No renderer/full Canvas grammar/Runtime authorization/foundry/real ChatGPT/whole-issue acceptance", "No source edits, installs, remote mutations, or owned live commands"],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "location": "Immediately after hosted-validation paragraph under Pull Request Triage",
+    "exact_addition": "A pull-request metadata response can retain an older `base.sha` after its named target branch advances. Resolve the live target Git ref separately and inspect the prospective merge’s ordered parents and complete tree. Bind carried-forward CI evidence to the checkout actually recorded in job logs; neither the PR payload’s base SHA nor a mergeable flag alone establishes the current tested union.",
+    "evidence": "PR301 payload f180 versus live e886; Git API merge parents, hosted logs, independently computed merge tree agree.",
+    "ambiguity_removed": "Treating PR metadata base SHA as authoritative live branch observation.",
+    "uncertainty": "No general GitHub defect or cause established."
+  },
+  "upstream_disposition": "none",
+  "post_review_parent_report": {"merge_commit": "4e8a26296608c232ce3dbd1f250ddb709b9459c9", "status": "Parent reported normal merge; not independently read back in this receipt."}
+}

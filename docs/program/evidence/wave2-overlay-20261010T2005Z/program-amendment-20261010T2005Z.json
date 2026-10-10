@@ -1,0 +1,805 @@
+{
+  "id": "program-amendment-20261010T2005Z",
+  "observed_at_utc": "2026-10-10T20:05:39Z",
+  "summary": "Dated additive 20:05Z status correction: current refs remain unchanged. PR302 exact Windows published-wheel floor canary fails because 1.0.3 was installed while the declared 1.0.2 floor was asserted; PR304 contains the fix but remains unaccepted, and PR302 adapter devmode remains active. PR282 worker reports one installed Runtime/browser pass, but independent durable-receipt readback is pending; PR305/#99 browser fixture rerun is in progress. Dakota native snapshots show no active thread flags (WorkItems completed; RCC interrupted); Devsy remains disabled. Preserve the 54 issue rows, raw states/captures, historical ZIPs, typed edges and whole-issue counts; only #210 remains whole-issue complete.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "raw_states_unchanged": true,
+    "accepted_issue_closures_unchanged": [
+      210
+    ],
+    "whole_issue_acceptance_changed": false,
+    "whole_issue_classification_counts_unchanged": true,
+    "typed_canvas_relationships_changed": false,
+    "historical_archives_changed": false
+  },
+  "previous_checkpoint": {
+    "id": "program-amendment-20261010T1958Z",
+    "observed_at_utc": "2026-10-10T19:58:27Z",
+    "summary": "Previous additive live overlay; all previous evidence and current pointers remain preserved in wave2-overlay-20261010T195827Z.",
+    "current_pointer_replaced": true
+  },
+  "prior_current_pointers": {
+    "previous_overlay": {
+      "id": "program-amendment-20261010T1958Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/program-amendment-20261010T1958Z.json",
+      "sha256": "05bd5b71e8094871171c504a90d106dfd865b8fda1ba01ff5db6f13320fe5d71",
+      "observed_at_utc": "2026-10-10T19:58:27Z"
+    },
+    "previous_binding": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/current-git-bindings.json",
+      "sha256": "2036fca8dfd5537762cc4529e9562104644c38786472552be94334ab3d72ff5f"
+    },
+    "previous_worker_inventory": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "source": "Current collaboration roster at overlay cutoff; root status updates. This is agent liveness/assigned work, not proof of repository source progress.",
+      "workers": [
+        {
+          "name": "root",
+          "status": "ACTIVE",
+          "scope": "Integration owner; PR/release admission and current GitHub check observation."
+        },
+        {
+          "name": "luna_core_release_preflight",
+          "status": "ACTIVE",
+          "scope": "Governance overlay author; this bounded task."
+        },
+        {
+          "name": "luna_database_gate_audit",
+          "status": "ACTIVE",
+          "scope": "Bounded database gate audit."
+        },
+        {
+          "name": "luna_graph_reconcile",
+          "status": "ACTIVE",
+          "scope": "Current reconciliation task; source status not inferred from liveness."
+        },
+        {
+          "name": "luna_pr282_template",
+          "status": "ACTIVE",
+          "scope": "PR282 template floor/generation gate."
+        },
+        {
+          "name": "sol_pr301_review",
+          "status": "ACTIVE",
+          "scope": "PR301 serialization slice review."
+        },
+        {
+          "name": "luna_pr302_portability",
+          "status": "COMPLETED",
+          "scope": "PR302 portability evidence delivered."
+        },
+        {
+          "name": "Devsy",
+          "status": "DISABLED",
+          "scope": "No dispatch, discovery, or calls."
+        },
+        {
+          "name": "Dakota",
+          "status": "UNKNOWN",
+          "scope": "Ownership clarification pending; no dispatch."
+        }
+      ],
+      "limitations": "Does not revive the older luna worker-name map or infer progress from active-agent status."
+    },
+    "previous_status": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "path": "evidence/wave2-overlay-20261010T195827Z/live-status-observation.json",
+      "sha256": "9b162461a8700e48b63bba48af0f25578a1e857d101c812e4b5f74de120ffb12",
+      "scope": "Root-reported current exact-head check counts; only bounded current PR observations, not a full branch/release gate inventory."
+    },
+    "previous_release_readiness": {
+      "status": "RUNTIME_RELEASE_NOT_READY",
+      "observed_at_utc": "2026-10-10T20:05:39Z",
+      "community": "a70993fafc99a9f94041485542d5a720797ca394",
+      "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "actions_core": "1.0.3 PUBLISHED_AND_BYTE/API/INSTALLED_CONSUMER_VERIFIED",
+      "actions_runtime": "1.0.3 NOT PUBLISHED; no immutable Runtime 1.0.3 tag or PyPI readback established in this overlay",
+      "actions_http_helper": "1.0.3 published (prior verified current registry state)",
+      "actions_work_items": "0.4.4 unchanged",
+      "declared_runtime_core_floor": "^1.0.2; PR304 canary requirement remains exactly 1.0.2",
+      "remaining_gates": [
+        "PR304 exact-head checks/review/merge; source GO only, with floor fix not accepted",
+        "PR302 exact-head Windows floor-canary failure must be refreshed after accepted PR304 union; adapter devmode active; Windows native and both RCC toolkit jobs pass",
+        "PR282 installed Runtime/browser pass is worker-reported but requires independent durable receipt readback; not full issue acceptance",
+        "PR305/#99 actual browser fixture rerun in progress; no acceptance receipt",
+        "PR292 Windows check; #290/#299/#300 remain blocked; last complete census was 19:58Z",
+        "7eca actual RCC metadata inspection remains NOT_RUN",
+        "Actions Runtime 1.0.3 tag/PyPI/native artifact readback",
+        "Required Homebrew install/upgrade proof in owning joshyorko/homebrew-tools tap/workflow",
+        "Exact latest Runtime workflow/tag source review and named platform/security/registry gates remain unestablished by this scoped overlay"
+      ],
+      "source": "Exact current Git refs plus bounded 20:05Z follow-up status; PR302 failure is bound to run/job receipt. The prior complete CI census is explicitly historical."
+    },
+    "previous_next_action": {
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "owner": "Root retains integration, release and external publication authority.",
+      "status": "Wait for exact-head PR304/302/282/305 gates; keep PR292 Windows active and #290/#299/#300 blocked; after accepted head update, separately run the managed Runtime/browser consumer and remaining owning Runtime release gates.",
+      "scope": "No tag, dispatch, merge, issue closure or whole-issue acceptance authorized by this overlay."
+    }
+  },
+  "current_refs": {
+    "community": {
+      "sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+      "parents": [
+        "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "c2733957b047a2acf3d38c1cad7704a4bc69f15b"
+      ]
+    },
+    "integration": {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+      "parents": [
+        "e886d26ebaefafa9189a69517f6707691b53662e",
+        "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+      ]
+    },
+    "open_pr_heads": {
+      "221": {
+        "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+        "parents": [
+          "e886d26ebaefafa9189a69517f6707691b53662e",
+          "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+        ]
+      },
+      "282": {
+        "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+        "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+        "parents": [
+          "aa78bc25b7662c163a59e19e81c97834cce24ba1"
+        ]
+      },
+      "290": {
+        "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+        "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+        "parents": [
+          "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+          "d0e12c1e1a256664b506cd8b027292062c6e1109",
+          "e886d26ebaefafa9189a69517f6707691b53662e"
+        ]
+      },
+      "292": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+        "parents": [
+          "dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+        ]
+      },
+      "299": {
+        "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+        "parents": [
+          "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+          "e886d26ebaefafa9189a69517f6707691b53662e"
+        ]
+      },
+      "300": {
+        "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+        "parents": [
+          "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+          "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+        ]
+      },
+      "302": {
+        "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+        "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+        "parents": [
+          "e31506239fd0260d708a11440762537334f8d2d1"
+        ]
+      },
+      "304": {
+        "sha": "73605934c1c948895410a5abaed6c225a396e038",
+        "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+        "parents": [
+          "0f9422bbb366dcadc10ddea05f86a7f9ecad227c"
+        ]
+      },
+      "305": {
+        "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+        "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+        "parents": [
+          "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
+        ]
+      }
+    }
+  },
+  "current_pr_heads": {
+    "221": {
+      "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+    },
+    "282": {
+      "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+      "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb"
+    },
+    "290": {
+      "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097"
+    },
+    "292": {
+      "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+    },
+    "299": {
+      "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0"
+    },
+    "300": {
+      "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1"
+    },
+    "302": {
+      "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+      "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9"
+    },
+    "304": {
+      "sha": "73605934c1c948895410a5abaed6c225a396e038",
+      "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5"
+    },
+    "305": {
+      "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303"
+    }
+  },
+  "current_pr_inventory": {
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "state_source": "Exact refs reread via git ls-remote at 20:05:39Z and unchanged; last complete exact-head native check census is root-reported 19:58Z. Follow-up status details are bounded and attributed in live-status-observation.json.",
+    "open_pr_ids": [
+      221,
+      282,
+      290,
+      292,
+      299,
+      300,
+      302,
+      304,
+      305
+    ],
+    "heads": {
+      "221": {
+        "sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+        "parents": [
+          "e886d26ebaefafa9189a69517f6707691b53662e",
+          "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+        ],
+        "base_ref": "community",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED",
+        "scope": "Runtime integration candidate; latest integration includes PR301 serialization only; full release/graph gates remain."
+      },
+      "282": {
+        "sha": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+        "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+        "parents": [
+          "aa78bc25b7662c163a59e19e81c97834cce24ba1"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "last_pr_payload_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "state": "OPEN",
+        "status": "SOURCE_GO; WORKER_REPORTS_ONE_INSTALLED_RUNTIME_BROWSER_PASS; DURABLE_RECEIPT_READBACK_PENDING; 19:58 check count historical",
+        "scope": "Final source/bundle review passed; published Core 1.0.3 unblocks the Canvas-query floor only. The managed Runtime/browser consumer remains NOT_RUN."
+      },
+      "290": {
+        "base_ref": "integration/community-release-20261008",
+        "draft": true,
+        "parents": [
+          "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+          "d0e12c1e1a256664b506cd8b027292062c6e1109",
+          "e886d26ebaefafa9189a69517f6707691b53662e"
+        ],
+        "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED",
+        "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+        "scope": "No new candidate acceptance; exact head and separate release/native gates remain blocked."
+      },
+      "292": {
+        "base_ref": "integration/community-release-20261008",
+        "draft": true,
+        "parents": [
+          "dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+        ],
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED_WINDOWS_ACTIVE",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+        "scope": "Root reports 18 checks succeeded and Windows check active. Scoped native gate source equivalence is satisfied; no new native run or broad acceptance."
+      },
+      "299": {
+        "base_ref": "integration/community-release-20261008",
+        "draft": true,
+        "parents": [
+          "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+          "e886d26ebaefafa9189a69517f6707691b53662e"
+        ],
+        "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED",
+        "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+        "scope": "Remains blocked with dependent stack pending; no merge or whole-issue acceptance."
+      },
+      "300": {
+        "base_ref": "feat/shared-run-output-20261010",
+        "draft": true,
+        "parents": [
+          "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+          "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+        ],
+        "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "state": "OPEN",
+        "status": "OPEN_BLOCKED",
+        "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+        "scope": "Remains blocked with dependent stack pending; no merge or whole-issue acceptance."
+      },
+      "302": {
+        "sha": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+        "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+        "parents": [
+          "e31506239fd0260d708a11440762537334f8d2d1"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "last_pr_payload_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "state": "OPEN",
+        "status": "SOURCE_GO; 19:58 census 8 SUCCESS/6 ACTIVE/4 QUEUED historical; exact Windows floor canary FAILED run 38081239175/job 114298417674; adapter devmode active; other reported Windows/native and RCC toolkit gates pass",
+        "scope": "Local 1081 passed/12 skipped. Refresh exact PR302 union after PR304 floor fix is accepted; do not attribute the current floor canary failure to the Path portability change."
+      },
+      "304": {
+        "sha": "73605934c1c948895410a5abaed6c225a396e038",
+        "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+        "parents": [
+          "0f9422bbb366dcadc10ddea05f86a7f9ecad227c"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "base_sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "state": "OPEN",
+        "status": "SOURCE_GO; 19:58 census 22 QUEUED historical; exact-head CI/review/merge pending",
+        "scope": "Floor-canary correction source review GO; exact-current-head hosted checks queued. Do not report superseded b954 failure as current."
+      },
+      "305": {
+        "sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+        "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+        "parents": [
+          "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
+        ],
+        "base_ref": "integration/community-release-20261008",
+        "base_sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "state": "OPEN",
+        "status": "SOURCE_GO; #99 browser fixture rerun in progress per root follow-up; no result receipt; 19:58 count 14 queued historical",
+        "scope": "Graph #99/PR305 browser proof. This is distinct from PR282 installed Runtime/browser consumer; no #99 acceptance."
+      }
+    },
+    "merged_prs": [
+      {
+        "number": 301,
+        "merge_commit": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+        "scope": "serialization/CI slice"
+      }
+    ],
+    "cohort_note": "Supersedes stale 18:42 eight-open-PR snapshot; named cohort is not whole-issue acceptance."
+  },
+  "integration_checkpoint": {
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+    "parents": [
+      "e886d26ebaefafa9189a69517f6707691b53662e",
+      "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+    ],
+    "community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "scope": "Current Runtime integration includes PR301 serialization/CI slice only; PR303 Core promotion is on community and Core 1.0.3 is published. Neither is Runtime release or whole-issue acceptance.",
+    "observed_at_utc": "2026-10-10T19:58:27Z",
+    "cohort": {
+      "open_prs": [
+        221,
+        282,
+        290,
+        292,
+        299,
+        300,
+        302,
+        304,
+        305
+      ],
+      "merged_scoped_prs": [
+        301
+      ],
+      "scope": "Current tracked PR disposition only; not all issue work."
+    }
+  },
+  "current_git_binding_receipt": {
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "path": "evidence/wave2-overlay-20261010T2005Z/current-git-bindings.json",
+    "sha256": "ed21f5fa0a05dcef0c92e002ed52cbc637ca47d969a37f564ecf6f918a999b02"
+  },
+  "current_ref_authority": {
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "status": "AUTHORITATIVE_FOR_THIS_CUTOFF_ONLY",
+    "method": "Read-only git ls-remote for all named heads; values match the prior commit/tree/parent binding receipt. No authenticated check-state inference."
+  },
+  "current_hosted_run_observations": {
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "path": "evidence/wave2-overlay-20261010T2005Z/live-status-observation.json",
+    "sha256": "8122988d27f371bf739e18ff883c7cd4a5043813d0e8fa640c9a2aa1de2d64e9",
+    "scope": "Bounded root-reported PR302 Windows result and PR282/PR305 lane notes. 19:58 full check counts are historical; no new full census."
+  },
+  "current_worker_inventory": {
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "path": "evidence/wave2-overlay-20261010T2005Z/current-workers.json",
+    "sha256": "866f95c8489d59700d5116551705989e75d0d1c745c575d193efb63bbd9120d2",
+    "source": "Current live collaboration roster plus exact Dakota native snapshots; code status is not inferred from liveness."
+  },
+  "current_active_workers": {
+    "root": "ACTIVE; integration/release owner",
+    "luna_core_release_preflight": "ACTIVE; isolated governance overlay",
+    "luna_database_gate_audit": "ACTIVE; bounded audit",
+    "luna_graph_reconcile": "ACTIVE; graph reconciliation",
+    "luna_pr282_template": "ACTIVE; reported one scoped pass, durable receipt pending independent readback",
+    "luna_pr302_portability": "COMPLETED; scoped portability evidence delivered",
+    "sol_pr301_review": "ACTIVE; scoped review",
+    "Devsy": "DISABLED; no dispatch/discovery/calls",
+    "Dakota": "Native WorkItems completed and RCC interrupted; neither has active flags; no resume/create.",
+    "luna302_rcc_inspection": "ACTIVE; root-assigned bounded private RCC inspection lane at f441afb5144843535314ca0a5f6966b0206f6b59/tree 086277052fea6e7fcb61fa6487de5bb9a5e47a27; Sol composition review pending, actual inspection NOT_RUN."
+  },
+  "current_preservation_check": {
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "path": "evidence/wave2-overlay-20261010T2005Z/preservation-check-current.json",
+    "sha256": "cf4855caca9e40950c3861f244f6bc9791ccd15a299ea57f7085a295b0869145",
+    "scope": "Final direct comparison against df77 baseline after all additive projection changes; 54 rows, types/counts, compatibility ledger and 16 ZIPs unchanged."
+  },
+  "pr282_readiness_repair": {
+    "status": "SOURCE_GO; CURRENT_HEAD_2C6DE; WORKER_REPORTS_ONE_INSTALLED_RUNTIME/BROWSER_PASS; DURABLE_RECEIPT_READBACK_PENDING; DO_NOT_PROMOTE",
+    "head": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+    "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+    "core_publication_prerequisite": "SATISFIED; see core-publication-readback.json",
+    "superseded_run_note": "Only the older aa78 root checkpoint queued/active runs were cancelled; all completed records are preserved. See pr282-superseded-ci-cancellation.json.",
+    "independent_readback": "PENDING: expected /workspace/work/actions-mk3-evidence/pr282-acceptance receipt was not present at 20:05:39Z. Worker report remains unverified by this overlay."
+  },
+  "pr304_status": {
+    "head": "73605934c1c948895410a5abaed6c225a396e038",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "source_review": "GO",
+    "hosted": "22 exact-head checks queued",
+    "runtime_declared_core_floor": "actions-core ^1.0.2; required canary remains 1.0.2 even after Core 1.0.3 publication",
+    "receipt": "evidence/wave2-overlay-20261010T195827Z/pr304-final-floor-review.json"
+  },
+  "pr302_status": {
+    "head": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+    "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+    "source_review": "GO",
+    "local_suite": "1081 passed, 12 skipped",
+    "hosted": "8 success, 6 in progress, 4 queued",
+    "receipt": "evidence/wave2-overlay-20261010T195827Z/pr302-portability-receipt.json",
+    "current_windows_failure": {
+      "run": 38081239175,
+      "job": 114298417674,
+      "cause": "Windows published-wheel job installed actions-core1.0.3 and the verifier asserted the declared 1.0.2 floor. This is the same canary-resolution defect fixed in PR304 current source 73605934; PR304 remains unaccepted and the PR302 base has not incorporated it.",
+      "windows_adapter_devmode_job": 114298417836,
+      "windows_adapter_devmode_status": "IN_PROGRESS",
+      "windows_native_binary": "PASS",
+      "rcc_toolkit_jobs": "BOTH_PASS",
+      "refresh_condition": "Re-evaluate exact PR302 merged/union source after PR304 is accepted; do not infer that current PR302 failed due to the Path portability expectation.",
+      "receipt": "evidence/wave2-overlay-20261010T2005Z/pr302-windows-floor-failure.json",
+      "reported_at_utc": "2026-10-10T20:04Z by root; underlying run 38081239175/job114298417674"
+    }
+  },
+  "pr305_status": {
+    "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+    "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+    "source_review": "GO fixture-only correction",
+    "hosted": "Actual #99/PR305 browser fixture rerun in progress per root; no receipt/result yet. Last complete 19:58 census (14 queued) is historical.",
+    "remaining": "Actual Runtime/browser fixture rerun pending; strict symlink rejection preserved.",
+    "receipt": "evidence/wave2-overlay-20261010T195827Z/pr305-fixture-cache-review.json"
+  },
+  "pr292_status": {
+    "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "hosted": "18 success, 1 active Windows check",
+    "scoped_native": "Source-equivalence gate root-verified satisfied; no new run. PR292, PR299 and PR300 remain blocked."
+  },
+  "rcc_source_status": {
+    "preparation_head": "7eca36abce160b68f616eab9b7fdc9c4e7f2b053",
+    "static_type_status": "GO",
+    "actual_inspection": "NOT_RUN; new root-assigned private RCC inspection lane active on baseline f441afb5144843535314ca0a5f6966b0206f6b59/tree 086277052fea6e7fcb61fa6487de5bb9a5e47a27 composing reviewed 7eca/01ca/e8e8; Sol composition review pending; no compiler admission or whole-issue acceptance.",
+    "receipt": "evidence/wave2-overlay-20261010T195827Z/rcc-preparation-types.json",
+    "proposal": "evidence/wave2-overlay-20261010T195827Z/rcc-source-bound-inspection-proposal.json",
+    "preparation_tree": "2890ce916a5a9ee9201239635a220f95ecfe9ee8",
+    "source_implementation": "ACTIVE; root reports private Cloud Luna302 bounded RCC inspection seam, current source tree f441afb5144843535314ca0a5f6966b0206f6b59 / 086277052fea6e7fcb61fa6487de5bb9a5e47a27; composition review pending."
+  },
+  "body_drift_history": {
+    "review_receipt": "evidence/wave2-overlay-20261010T195827Z/canvas-body-drift-review.json",
+    "review_sha256": "0a1a77c5a4b583d9251952eef64be5e56f852b059335c3a1b58749ba83d6d89f",
+    "observed_at_utc": "2026-10-10T19:41:29Z",
+    "status": "Preserved as a historical accepted semantic review; do not overwrite its captured issue bodies/hash or its then-current publication status. Current publication status is separate in this amendment."
+  },
+  "readiness_report_validity": {
+    "historical_core_baseline_report": {
+      "status": "INVALID_FOR_CURRENT_RUNTIME_SOURCE",
+      "path": "evidence/wave2-overlay-20261010T195827Z/historical-runtime-readiness.json",
+      "status_receipt": "evidence/wave2-overlay-20261010T195827Z/historical-readiness-status.md"
+    },
+    "corrected_runtime_source_report": {
+      "status": "VALID_FOR_ITS_19:53_CUTOFF_ONLY; superseded by this 19:58 overlay",
+      "path": "evidence/wave2-overlay-20261010T195827Z/runtime-readiness-corrected.json"
+    },
+    "current_facts": "This overlay updates PR304 to head 736 and includes PR282/302/305 live heads/check states. The old Core-only baseline remains preserved but not current."
+  },
+  "current_release_readiness": {
+    "status": "RUNTIME_RELEASE_NOT_READY",
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "actions_core": "1.0.3 PUBLISHED_AND_BYTE/API/INSTALLED_CONSUMER_VERIFIED",
+    "actions_runtime": "1.0.3 NOT PUBLISHED; no immutable Runtime 1.0.3 tag or PyPI readback established in this overlay",
+    "actions_http_helper": "1.0.3 published (prior verified current registry state)",
+    "actions_work_items": "0.4.4 unchanged",
+    "declared_runtime_core_floor": "^1.0.2; PR304 canary requirement remains exactly 1.0.2",
+    "remaining_gates": [
+      "PR304 exact-head checks/review/merge; source GO only, with floor fix not accepted",
+      "PR302 exact-head Windows floor-canary failure must be refreshed after accepted PR304 union; adapter devmode active; Windows native and both RCC toolkit jobs pass",
+      "PR282 installed Runtime/browser pass is worker-reported but requires independent durable receipt readback; not full issue acceptance",
+      "PR305/#99 actual browser fixture rerun in progress; no acceptance receipt",
+      "PR292 Windows check; #290/#299/#300 remain blocked; last complete census was 19:58Z",
+      "7eca actual RCC metadata inspection remains NOT_RUN",
+      "Actions Runtime 1.0.3 tag/PyPI/native artifact readback",
+      "Required Homebrew install/upgrade proof in owning joshyorko/homebrew-tools tap/workflow",
+      "Exact latest Runtime workflow/tag source review and named platform/security/registry gates remain unestablished by this scoped overlay"
+    ],
+    "source": "Exact current Git refs plus bounded 20:05Z follow-up status; PR302 failure is bound to run/job receipt. The prior complete CI census is explicitly historical."
+  },
+  "release_ready": false,
+  "current_next_action": {
+    "observed_at_utc": "2026-10-10T20:05:39Z",
+    "owner": "Root retains integration, release and external publication authority.",
+    "status": "Wait for PR304 exact-head gates/acceptance; refresh PR302 against accepted union. Independently read back PR282 durable receipt before counting its worker-reported pass. Await PR305/#99 browser rerun receipt. Maintain remaining Runtime release and Homebrew gates.",
+    "scope": "No merge, tag, dispatch, issue closure or whole-issue acceptance authorized by this overlay."
+  },
+  "upstream_disposition": "none; no maintained upstream defect established.",
+  "documentation_disposition": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "change": "Added source-specific Core-vs-Runtime helper, minimum-floor and downstream-consumer lesson based on exact source commits/reviews and verified Core readback. Added narrow-fetch-refspec lesson: verify the exact tracking ref, not only successful short fetch/FETCH_HEAD.",
+    "evidence": [
+      "evidence/wave2-overlay-20261010T195827Z/runtime-readiness-corrected.json",
+      "evidence/wave2-overlay-20261010T195827Z/pr304-final-floor-review.json",
+      "evidence/wave2-overlay-20261010T195827Z/core-publication-readback.json",
+      "evidence/wave2-overlay-20261010T2005Z/pr302-windows-floor-failure.json"
+    ],
+    "remaining_uncertainty": "PR304 exact-head CI and Runtime/browser proofs remain pending; PR282 worker report is not independently receipt-verified yet."
+  },
+  "evidence": [
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/canvas-body-drift-review.json",
+      "sha256": "0a1a77c5a4b583d9251952eef64be5e56f852b059335c3a1b58749ba83d6d89f",
+      "size_bytes": 11024
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/core-publication-readback.json",
+      "sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39",
+      "size_bytes": 13718
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/current-git-bindings.json",
+      "sha256": "ed21f5fa0a05dcef0c92e002ed52cbc637ca47d969a37f564ecf6f918a999b02",
+      "size_bytes": 8470
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/current-workers.json",
+      "sha256": "866f95c8489d59700d5116551705989e75d0d1c745c575d193efb63bbd9120d2",
+      "size_bytes": 2258
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/dakota-native-snapshots-20261010T200444Z.json",
+      "sha256": "ace3107cef5cb11209f804164e907618078730957c345b3ce695f73898b62381",
+      "size_bytes": 1735
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/fetch-refspec-correction.json",
+      "sha256": "bee59a6c92e76a363ea626736f8edb410e7864e8be4f017ffc19aa51bc8b451b",
+      "size_bytes": 1160
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/historical-readiness-status.md",
+      "sha256": "48ba8e1170567910c7b77661ec6529468a2ad216273b9574cd6a5d40fd86c99d",
+      "size_bytes": 931
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/historical-runtime-readiness.json",
+      "sha256": "93f19f1ed79e7a7f5a9af72748aad4607fa78caad2c054c92003f47ce2e93ebd",
+      "size_bytes": 8571
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/live-status-observation.json",
+      "sha256": "8122988d27f371bf739e18ff883c7cd4a5043813d0e8fa640c9a2aa1de2d64e9",
+      "size_bytes": 2462
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/pr282-final-source-review.json",
+      "sha256": "31f15dca9dd612be4d5f837f4234e2bd761c369fcf7a5031d01a52509b899e11",
+      "size_bytes": 5157
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/pr282-superseded-ci-cancellation.json",
+      "sha256": "96409c6a6060534d764ca08b22c842cf793cb47525f29f2378e4bcf0e77d3f23",
+      "size_bytes": 1562
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/pr301-review.json",
+      "sha256": "b092eeef6ff9e9a94617d9633942d0da1533a39ed43f0884d2644a68b9c40b5d",
+      "size_bytes": 3826
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/pr302-portability-receipt.json",
+      "sha256": "eb1ac8163f0590442deed9fd1db6fade5bfd19111f2c083f6a1ea882826184ad",
+      "size_bytes": 7024
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/pr302-windows-floor-failure.json",
+      "sha256": "ecbd1f1dba42c104aca0973d1c2f829e40285ae01c2014c8781c2b8ba2c6d2c3",
+      "size_bytes": 2494
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/pr304-final-floor-review.json",
+      "sha256": "9eb58690dc29f4e8f675ad8ed79ba3ec04f77032def9741936fd3bf102160f11",
+      "size_bytes": 2235
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/pr305-fixture-cache-review.json",
+      "sha256": "e49170e6c0ee50c286ff8d906a83ca17c7dc6d2a927c71a99acbc89105c91b23",
+      "size_bytes": 1970
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/preservation-check-current.json",
+      "sha256": "cf4855caca9e40950c3861f244f6bc9791ccd15a299ea57f7085a295b0869145",
+      "size_bytes": 4691
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/preservation-check.json",
+      "sha256": "1fc8264ce54c2c232bf8b98c3b9137f9845ae8b2fcbb4d5e19c255be10b205dc",
+      "size_bytes": 4230
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/rcc-preparation-types.json",
+      "sha256": "9c2a5d9514d61252de59d99006a0f625861fe6737c0080993aeb5161b3eacd28",
+      "size_bytes": 4171
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/rcc-source-bound-inspection-proposal.json",
+      "sha256": "3768e8dcd81ce16c99a141ab60d57f16d7ae142ff0a9a890d8041d78d834b90c",
+      "size_bytes": 10036
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/runtime-readiness-corrected.json",
+      "sha256": "d880d41c8918a36fb4419aceaa0822eb5988b95681e3490986233be6f882226c",
+      "size_bytes": 12205
+    }
+  ],
+  "scoped_gate_observations": [
+    {
+      "owner_issue": 301,
+      "criterion_id": "serialization-and-CI-slice",
+      "consumer_slice": "PR301 serialization/CI",
+      "status": "ACCEPTED_SCOPED_ONLY",
+      "description": "Exact reviewed PR301 source passed 20/20 exact-head checks and is merged as 4e8a262; scope remains serialization and CI only. No full #301, renderer, Canvas host, or whole issue acceptance.",
+      "decision": "Accept only the existing serialization/CI slice that PR301 review explicitly bounded.",
+      "evidence_path": "evidence/wave2-overlay-20261010T195827Z/pr301-review.json",
+      "evidence_sha256": "b092eeef6ff9e9a94617d9633942d0da1533a39ed43f0884d2644a68b9c40b5d"
+    },
+    {
+      "owner_issue": 282,
+      "criterion_id": "published-Core-1.0.3-template-prerequisite",
+      "consumer_slice": "PR282 Canvas-query Core floor",
+      "status": "SATISFIED_PREREQUISITE_ONLY; RUNTIME_BROWSER_WORKER_REPORT_PENDING_READBACK",
+      "description": "Published Core 1.0.3 bytes/API and installed public consumer passed; this satisfies only the package-floor prerequisite for PR282 Canvas-query template generation. A worker now reports one installed Runtime/browser pass, but no independent durable receipt readback is present at this cutoff; do not promote it.",
+      "decision": "Mark the publication predecessor available for the one declared 1.0.3 Canvas-query template floor; retain Runtime/browser and hosted gates as pending.",
+      "evidence_path": "evidence/wave2-overlay-20261010T195827Z/core-publication-readback.json",
+      "evidence_sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39"
+    }
+  ],
+  "accepted_scoped_criteria": [],
+  "repository_fetch_observation": {
+    "status": "ROOT_VERIFIED_FETCH_REF_CORRECTION; HISTORICAL_FROM_19:58_OVERLAY",
+    "receipt": "evidence/wave2-overlay-20261010T195827Z/fetch-refspec-correction.json",
+    "sha256": "bee59a6c92e76a363ea626736f8edb410e7864e8be4f017ffc19aa51bc8b451b",
+    "artifacts": "15 expected remote files verified at df77 after explicit refspec fetch; no artifact-content mismatch."
+  },
+  "active_substages": [
+    {
+      "evidence_basis": "PR #286 exact reviewed head e7c42e94196beba04dbae85d8a38da78efd9767f/tree 16c81059bff80b6d85606d45ac7d46a88cdce597 was merged as 21064b1ad1e28d3e73749b7be19b98c79a98b93f with 19/19 exact-head checks passing and independent review approved (evidence/pr286-merge-20261010T1222Z/pr286-merge-receipt.json; comment 6097428470). Scope is the pure inventory prerequisite only; no filesystem acquisition, compiler, or issue-wide acceptance.",
+      "id": "135-source-policy-a",
+      "implementation_status": "MERGED_AT_21064B1; 19_EXACT_HEAD_CHECKS_PASS; INDEPENDENT_REVIEW_APPROVED; PURE_POLICY_SCOPE_ONLY; NO_WHOLE_ISSUE_ACCEPTANCE",
+      "limits": "This is an integrated pure policy/inventory prerequisite only. It does not physically acquire or compile source, establish filesystem admission, or accept a public source-admission API contract. Whole #135/#148 acceptance remains open.",
+      "owner": "root integration review; pure-policy implementation lane complete",
+      "owner_issue": 135,
+      "related_issue": 148,
+      "required_choices": [
+        "Keep legacy defaults and behavior unchanged.",
+        "Validate only explicitly supplied portable entries and protected paths.",
+        "Apply NFC, case/prefix collision, portable-path, entry-kind, and non-privileged mode rules.",
+        "Do not treat empty directories as source identity.",
+        "Enforce the stated entry, byte, depth, path, and component bounds."
+      ],
+      "scope": "Pure validation and canonical inventory of explicitly supplied source entries: selected/protected paths; Unicode NFC; case and prefix collisions; portable path rules; regular files and directories only; 0644/0755 without privilege; empty directories do not define identity; limits of 10000 entries, 50 MiB per file, 500 MiB total, depth 64, path length 4096, and component length 255.",
+      "shared_scope": "One cross-issue substage. #135 owns the active implementation work; #148 reuses the same portable path policy as a prerequisite, not a second implementation lane.",
+      "status": "INTEGRATED",
+      "title": "SOURCE-POLICY-A: deterministic validation/canonical inventory of explicitly supplied portable source entries",
+      "whole_issue_effect": "#135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The integrated scoped prerequisite changes no whole-issue classification or graph stage count.",
+      "writer_boundary": "New helper/module/tests and behavior-preserving extraction of the existing Robot portable-path predicate on an isolated branch; no filesystem-admission behavior."
+    },
+    {
+      "evidence_basis": "PR288 source-reader head 375614e53f3120c74caf3b732306b13eab99ffee/tree ede73323c44225ec4d7187aac1f261be0cd21375 merged at 5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa with 19/19 exact-head checks and independent combined-tree review. See evidence/pr288-merge-20261010T1350Z/pr288-merge-receipt.json. This is only private Linux selected-file measurement for #135/#148; full issues remain BLOCKED.",
+      "id": "135-source-read-a",
+      "implementation_status": "MERGED_AT_5E3B611; EXACT_HEAD_375614E; 19/19_CHECKS_PASS; INDEPENDENT_COMBINED_REVIEW_APPROVED; BOUNDED_READER_SLICE_INTEGRATED; NO_WHOLE_ISSUE_ACCEPTANCE",
+      "limits": "Linux trusted procfs is an explicit supported-environment assumption and failure is closed without fallback. This does not establish an atomic full-tree snapshot, selected-set completeness, original root pathname, Workspace authorization, staging coherence, compiler inspection, Package Revision, Runtime Plan, or provider acceptance. The accepted reader/source test receipt is narrow; current published PR288 merged, but later staging/RCC consumer remains NOT RUN.",
+      "owner": "Sol/source-confined-read existing lane; no duplicate source reader assigned.",
+      "owner_issue": 135,
+      "related_issue": 148,
+      "required_choices": [
+        "Measure only explicitly selected entries supplied by the caller.",
+        "Classify a pinned object before content-readable open; fail closed without required Linux O_PATH/procfd support.",
+        "Keep policy inventory separate from measured object facts.",
+        "Do not claim atomic snapshot, completeness, authorization, staging, or compiler identity from this bounded measurement."
+      ],
+      "scope": "Preflight explicit portable selected/protected file names with accepted SOURCE-POLICY-A; traverse beneath a caller-owned verified directory descriptor; pin selected leaves using Linux O_PATH/O_NOFOLLOW before fstat classification, then reopen via a pinned trusted procfd and compare handles; incrementally measure declared file and total byte bounds; compare parent/name and opened object observations before/after and revalidate selected paths.",
+      "shared_scope": "One bounded reader stage for #135, reusable by #148 as a prerequisite; distinct from whole-tree snapshot, staging, and RCC/compiler acceptance.",
+      "status": "INTEGRATED",
+      "title": "SOURCE-READ: bounded measurement of explicitly selected source files under a caller-supplied verified root descriptor",
+      "whole_issue_effect": "#135 remains BLOCKED by atomic/coherent snapshot and selected-set/global admission proof, staging and RCC inspection/adapter/runtime compiler plus capability identity/generation proof. #148 remains BLOCKED. No whole-issue stage/count/acceptance changes."
+    },
+    {
+      "current_followup": {
+        "control": "473e42ec8f7a9f3fed623efc135b550ac3c08190",
+        "limits": "Raw JUnit and lifecycle receipt were not uploaded. No real-RCC result for the new #302 publication-details API; no full #135/#148 acceptance.",
+        "owner": "source/RCC workflow lane",
+        "run": 38070431104,
+        "source_candidate": "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6",
+        "source_tree": "cdd4d65d914df9be3eaa4cf979d6b224fde431c3",
+        "status": "HOSTED_TWO_CASE_PASS_REVIEWED_WITH_RAW_RECEIPT_LIMIT",
+        "tests": "2 exact selected cases PASS; 0 failures/errors/skips"
+      },
+      "evidence_basis": "Hosted run 38070431104 attempt 1, job 114266535865, artifact 11676657463 (ZIP SHA-256 cf6200fde73448a211df5e2dfde658f9d07014b8866fcc8ba7c5ddd7225949c0); independent review evidence/current-open-pr-audit-20261010T1753Z/staged-rcc-two-case-review.md (SHA-256 7183db444978051a3bfafe275036fc5f2e870b0de9e39c9486117e106fc8786d).",
+      "id": "135-source-staging-a",
+      "implementation_status": "SOURCE_STAGE_INTEGRATED; EXACT_PINNED_TWO_CASE_RCC_CONSUMER_PASS; INDEPENDENT_REVIEWED_SANITIZED_SUMMARY; RAW_JUNIT_AND_LIFECYCLE_OMITTED; NO_WHOLE_ISSUE_ACCEPTANCE",
+      "limits": "The exact two-case hosted consumer passed at source 1e795c6/control 473e42e and an independent reviewer verified the strict validator, sanitized summary and job logs. Raw JUnit and lifecycle receipts were not uploaded. This does not establish full-source completeness, authorization, compiler identity, provider acceptance, release, or whole #135/#148 acceptance.",
+      "owner_issue": 135,
+      "related_issue": 148,
+      "scope": "Copy only measured selected regular files via descriptor-relative no-follow/exclusive creation into an empty caller-owned private directory; compare source observations, enforce byte limits, re-read and hash staged bytes, and clean only identity-matched entries.",
+      "shared_scope": "One proposed Linux staging consumer for the accepted #135/#148 source-read slice; not a second reader or whole-issue implementation.",
+      "status": "REVIEW",
+      "title": "SOURCE-STAGING: stage measured selected files under a borrowed private destination descriptor",
+      "whole_issue_effect": "#135 and #148 remain BLOCKED by complete source selection, capability/generation proof and additional runtime/compiler criteria. This scoped source-stage review changes no retained issue classification, original contract, or stage count."
+    },
+    {
+      "evidence_basis": "Current PR299 head 4cad04ca0e70d219f53452fa5911c6d61192fd0d/tree 5154dfbbff12e85b75e85d6138bfb6ff8eef27d0; queried standard workflow page returned successes. Independent review evidence/current-open-pr-audit-20261010T1842Z/pr299-dependency-independent-review.md recommends WAIT because PR299 contains PR292 while its separately declared native/affected gate remains outstanding.",
+      "id": "83-run-output-private-predecessor",
+      "implementation_status": "CURRENT_PUBLISHED_PR299_STANDARD_WORKFLOW_PAGE_GREEN; INDEPENDENT_REVIEW_WAITING_ON_PR292_NATIVE_AFFECTED_GATE; PRIVATE_PREDECESSOR_ONLY",
+      "limits": "Green dependent CI does not satisfy a specialized prerequisite absent from those workflows. Wait for exact PR292 native/affected evidence or an explicit owner re-scope. Transport/auth, Canvas, native execution and whole #83/#86/#129 remain separate.",
+      "owner_issue": 83,
+      "related_issues": [
+        86,
+        129
+      ],
+      "scope": "Private service/provider and database transactions for currentAttempt/epoch fencing, current grant checks, existing Run status/result authority, terminal output attachment and identity-checked staged cleanup.",
+      "status": "REVIEW",
+      "title": "Private Run-output state/fencing/staging predecessor",
+      "whole_issue_effect": "#83/#86/#129 remain governed by their unchanged original issue contracts; this private predecessor changes no whole-issue stage or acceptance."
+    },
+    {
+      "evidence_basis": "Current head/tree and parents are in evidence/current-open-pr-audit-20261010T1842Z/current-git-bindings.json; exact-head workflow observations are in hosted-run-observations.json. Earlier Windows timing failure belongs to prior head 37283a4 and is historical.",
+      "id": "100-canvas-python-typescript-roundtrip",
+      "implementation_status": "EXACT_CURRENT_HEAD_C734B9F; SEVEN_RETURNED_WORKFLOW_RUNS_SUCCESS; INDEPENDENT_REVIEW_GO; ROOT_RETAINS_MERGE_AUTHORITY; NO_WHOLE_CANVAS_ACCEPTANCE",
+      "limits": "Current head c734b9f850ec7b6bea8561b70312aca5c93dd6c1/tree 246f3185f936f8d9104e92b583ea8dd1ba34878a; seven returned exact-head workflows passed and reviewer recommends GO. PR stays open/draft at cutoff. This only verifies the fixture/CI substage; no browser/production Runtime/ChatGPT acceptance.",
+      "owner": "source_profile workflow author; independent review complete; root integration/publish owner.",
+      "owner_issue": 100,
+      "related_issue": 267,
+      "scope": "Run the existing Python-to-TypeScript-to-Python fixture through required bridge mode in the community frontend workflow; fail if bridge evidence is absent.",
+      "shared_scope": "One bounded cross-language fixture/API substage; the existing thin renderer lane remains separately scoped.",
+      "status": "REVIEW",
+      "title": "Canvas Python\u2194TypeScript\u2194Python fixture bridge in hosted frontend workflow",
+      "whole_issue_effect": "No retained issue stage/acceptance count changes."
+    }
+  ],
+  "active_substages_observed_at_utc": "2026-10-10T18:42:10Z",
+  "worker_stage_snapshot": "2026-10-10T07:53:20Z"
+}

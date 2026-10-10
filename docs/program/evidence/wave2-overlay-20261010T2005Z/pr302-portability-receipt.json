@@ -1,0 +1,125 @@
+{
+  "base_commit": "e31506239fd0260d708a11440762537334f8d2d1",
+  "branch": "mk3/pr302-portability-20261010",
+  "commands": [
+    {
+      "command": "source /workspace/actions-cloud/activate.sh && rcc run -r developer/toolkit.yaml --dev -t Doctor",
+      "cwd": "/workspace/work/actions-mk3-pr302",
+      "purpose": "RCC Doctor",
+      "result": "pass"
+    },
+    {
+      "command": "source /workspace/actions-cloud/activate.sh && unset ACTIONS_RUNTIME_TEST_PYTHON && rcc run -r developer/toolkit.yaml --dev -t Bootstrap",
+      "cwd": "/workspace/work/actions-mk3-pr302",
+      "purpose": "RCC Bootstrap",
+      "result": "pass"
+    },
+    {
+      "command": "source /workspace/actions-cloud/activate.sh && unset ACTIONS_RUNTIME_TEST_PYTHON && rcc run -r developer/toolkit.yaml --dev -t ToolkitTest",
+      "cwd": "/workspace/work/actions-mk3-pr302",
+      "purpose": "RCC ToolkitTest",
+      "result": "62 passed"
+    },
+    {
+      "command": "ACTIONS_RUNTIME_TEST_PYTHON=/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python .venv/bin/python -m pytest -q tests/action_server_tests/test_rcc_runtime_adapter.py::test_publish_artifact_details_preserves_one_pinned_rcc_payload_and_provider",
+      "cwd": "/workspace/work/actions-mk3-pr302/action_server",
+      "purpose": "Focused regression",
+      "result": "1 passed"
+    },
+    {
+      "command": ".venv/bin/invoke test-not-integration",
+      "cwd": "/workspace/work/actions-mk3-pr302/action_server",
+      "purpose": "First full non-integration suite attempt",
+      "result": "failed for test-tool PATH setup; details below"
+    },
+    {
+      "command": "PATH=/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH ACTIONS_RUNTIME_TEST_PYTHON= .venv/bin/invoke test-not-integration",
+      "cwd": "/workspace/work/actions-mk3-pr302/action_server",
+      "purpose": "Full non-integration suite rerun",
+      "result": "1,081 passed, 12 skipped, 15 warnings in 195.45s"
+    },
+    {
+      "command": "PATH=/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH ACTIONS_RUNTIME_TEST_PYTHON= .venv/bin/invoke lint",
+      "cwd": "/workspace/work/actions-mk3-pr302/action_server",
+      "purpose": "Package lint",
+      "result": "pass; Markdown lint emitted unavailable-tool warning"
+    },
+    {
+      "command": "PATH=/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH ACTIONS_RUNTIME_TEST_PYTHON= .venv/bin/invoke typecheck",
+      "cwd": "/workspace/work/actions-mk3-pr302/action_server",
+      "purpose": "Mypy typecheck",
+      "result": "pass; 326 files"
+    },
+    {
+      "command": "git diff --check",
+      "cwd": "/workspace/work/actions-mk3-pr302",
+      "purpose": "Whitespace check",
+      "result": "pass"
+    }
+  ],
+  "commit": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+  "diff_scope": {
+    "change": "Replace POSIX path string expectations for Path-derived argv elements with str(Path(...)); preserve complete argv order and provider assertions.",
+    "change_stat": "1 file changed, 2 insertions(+), 2 deletions(-)",
+    "files": [
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py"
+    ]
+  },
+  "documentation_proposal": {
+    "delta": "Add guidance that expected argv values for Path-derived arguments should use str(Path(...)) so tests compare the platform-native path representation, while keeping full argv order and provider assertions.",
+    "evidence": "Windows CI run 38073317520, job 114275036013 reproduced the mismatch; local focused regression and full non-integration suite passed after the expectation-only repair.",
+    "stale_guidance": "None identified.",
+    "target": "docs/skills/repository-operations.md"
+  },
+  "environment": {
+    "checkout": "/workspace/work/actions-mk3-pr302",
+    "os": "Linux x86_64 (Debian GNU/Linux 13, trixie)",
+    "package": "/workspace/work/actions-mk3-pr302/action_server",
+    "poetry": "2.1.1",
+    "pytest": "8.4.2",
+    "python": "3.12.15",
+    "rcc": "18.19.3",
+    "rcc_activation": "/workspace/actions-cloud/activate.sh",
+    "rcc_developer_environment": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534",
+    "runtime_test_python_policy": "Unset ACTIONS_RUNTIME_TEST_PYTHON for RCC setup/toolkit tasks; use the branch venv explicitly for focused test. Empty ACTIONS_RUNTIME_TEST_PYTHON for suite/lint/typecheck so the in-worktree interpreter is selected."
+  },
+  "first_suite_failure": {
+    "cause": "The contract test subprocess could not find poetry on PATH (FileNotFoundError: 'poetry'); package test environment had not included the RCC developer environment bin directory.",
+    "resolution": "Rerun with RCC developer environment bin prefixed to PATH and ACTIONS_RUNTIME_TEST_PYTHON empty; rerun passed. No test or source change was made to address this environment-only failure.",
+    "summary": "1,080 passed, 12 skipped, 1 failed: contract_tests/test_active_contracts.py::test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders"
+  },
+  "lane": "PR302 Windows test expected paths",
+  "origin": "https://github.com/joshyorko/actions.git",
+  "parent": "e31506239fd0260d708a11440762537334f8d2d1",
+  "receipt_version": 1,
+  "remaining_validation": "Fresh Windows CI on this commit was pending at the local checkpoint; root owns CI admission and remote branch updates.",
+  "repository": "https://github.com/joshyorko/actions.git",
+  "retained_logs": [
+    {
+      "association": "pytest HTML output aligned by timestamp with the passing full-suite rerun; raw terminal summary was not retained separately",
+      "bytes": 1887841,
+      "mtime_utc": "2026-10-10T19:46:16.372158326Z",
+      "path": "/workspace/work/actions-mk3-pr302/action_server/tests/output/log.html",
+      "sha256": "24719436b4d76d0fc020bdba748bb69ab974dbd7010e03f4d1a67c8ad2209376"
+    },
+    {
+      "association": "pytest HTML output aligned by timestamp with the passing focused regression; raw terminal summary was not retained separately",
+      "bytes": 870281,
+      "mtime_utc": "2026-10-10T19:39:15.417314341Z",
+      "path": "/workspace/work/actions-mk3-pr302/action_server/output/log.html",
+      "sha256": "a907cae487e63d96733284a809c36faf950789c4222b3fbe28097e3e4ed924ec"
+    }
+  ],
+  "status": "committed-local-checkpoint",
+  "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+  "triggering_ci_failure": {
+    "failure": "The implementation correctly passed native Windows paths such as \\\\opt\\\\rcc and \\\\package\\\\package.yaml, while the test compared those argv entries to POSIX literals /opt/rcc and /package/package.yaml.",
+    "handoff_triage_receipt_sha256": "74bc43d928344691f5826cb93c1b0a51dfcbb30cf6c10176468d0a4f52518428",
+    "job_id": "114275036013",
+    "platform": "Windows 2022",
+    "run_id": "38073317520"
+  },
+  "upstream_disposition": "None. This is an in-repository test portability defect; no separate upstream issue is indicated.",
+  "worktree": "/workspace/work/actions-mk3-pr302",
+  "worktree_clean_at_receipt": true
+}

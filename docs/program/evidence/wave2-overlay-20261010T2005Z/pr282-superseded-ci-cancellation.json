@@ -1,0 +1,62 @@
+{
+  "observed_at": "2026-10-10T19:58:27.200469+00:00",
+  "scope": "superseded root-pushed PR282 checkpoint aa78; exact reviewed current2c6 replaces it; no other PR or release cancelled",
+  "runs": [
+    {
+      "run": 38081401191,
+      "workflow": "AI audit evidence",
+      "status": "queued",
+      "conclusion": null,
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    },
+    {
+      "run": 38081401188,
+      "workflow": "RCC developer toolkit",
+      "status": "queued",
+      "conclusion": null,
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    },
+    {
+      "run": 38081401193,
+      "workflow": "Action Server Tests",
+      "status": "queued",
+      "conclusion": null,
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    },
+    {
+      "run": 38081401206,
+      "workflow": "Actions Runtime PYPI Release",
+      "status": "queued",
+      "conclusion": null,
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    },
+    {
+      "run": 38081401238,
+      "workflow": "Action Server Build (Unauthenticated)",
+      "status": "queued",
+      "conclusion": null,
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    },
+    {
+      "run": 38081401209,
+      "workflow": "Measured Python coverage gate",
+      "status": "in_progress",
+      "conclusion": null,
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    },
+    {
+      "run": 38081401234,
+      "workflow": "Action Server Frontend tests",
+      "status": "in_progress",
+      "conclusion": null,
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    }
+  ]
+}

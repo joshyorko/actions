@@ -1,0 +1,131 @@
+{
+  "schema": "actions-runtime-release-readiness/v2",
+  "status": "current-source review; no publication or workflow mutation performed",
+  "observed_at": "2026-10-10T19:53:47Z",
+  "invalidates": "historical-readiness-status.md marks readiness.json/readiness.md INVALID_FOR_CURRENT_RUNTIME_SOURCE",
+  "repository": "joshyorko/actions",
+  "source_identities": {
+    "requested_accepted_integration": {
+      "commit": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+      "remote_branch": "integration/community-release-20261008"
+    },
+    "requested_pr304_snapshot": {
+      "commit": "b954071cb8a48ab80d5ebeb6b46c3c47f297f751",
+      "tree": "67604b85413197b2a116cdb4886eaf13df0ad021",
+      "status": "superseded; its published-floor verifier did not constrain pip resolution for Core 1.0.2 and the run failed after PyPI selected Core 1.0.3"
+    },
+    "current_local_integration_candidate": {
+      "commit": "0f9422bbb366dcadc10ddea05f86a7f9ecad227c",
+      "parent": "b954071cb8a48ab80d5ebeb6b46c3c47f297f751",
+      "subject": "fix(runtime): pin published floor canary dependencies",
+      "changes": ["action_server/scripts/verify_published_runtime_floor.py", "devutils/tests/test_runtime_release_workflows.py"],
+      "status": "root-owned integration worktree only; not a source edit made in this readiness lane"
+    },
+    "current_pr304_head": {
+      "number": 304,
+      "commit": "73605934c1c948895410a5abaed6c225a396e038",
+      "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+      "parent": "0f9422bbb366dcadc10ddea05f86a7f9ecad227c",
+      "subject": "docs: keep registry floor resolution deterministic",
+      "state": "OPEN",
+      "observed_checks": "new exact-head checks queued; latest failure from older b954 head is superseded and must not be reported as the current PR304 result"
+    },
+    "remote_integration_tip_observed": "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
+  },
+  "floor_verification_correction": {
+    "runtime_declared_core_floor": "actions-core ^1.0.2",
+    "required_canary_core": "1.0.2",
+    "published_latest_core_at_observation": "1.0.3",
+    "correct_behavior": "Explicitly constrain the isolated published-wheel install to actions-core==1.0.2 and actions-http-helper==1.0.3, then verify exact public PyPI URLs, hashes, installed versions, imports, pip check, and actions.server version. Do not raise the tested minimum to latest 1.0.3 merely to satisfy a resolver that otherwise selects it.",
+    "current_local_patch": "0f9422bbb366dcadc10ddea05f86a7f9ecad227c adds explicit floor requirements to the pip install command and regression assertions in devutils/tests/test_runtime_release_workflows.py",
+    "acceptance": "await exact-head PR304 tests/review/merge; root-pushed PR head 73605934 checks were queued at observation"
+  },
+  "related_prs": {
+    "290": {"head": "9e1059a12456faba64d11313d6dd8f943ad28912", "state": "OPEN", "checks": "all observed completed checks succeeded"},
+    "292": {"head": "d0e12c1e1a256664b506cd8b027292062c6e1109", "state": "OPEN", "checks": "18 succeeded; Windows py3.12 devmode remained in progress at observation"},
+    "304": {"head": "73605934c1c948895410a5abaed6c225a396e038", "state": "OPEN", "checks": "all new exact-head checks queued at observation"}
+  },
+  "release_workflows_at_requested_runtime_source": {
+    "generated_source": ".github/workflows/_gen_workflows.py",
+    "pypi_workflow": {
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "trigger": "actions-runtime-* tag push; PR verification on community and integration/**",
+      "artifact_contract": "one sdist plus six clean-tested wheels: cp312/cp313 across macOS arm64, manylinux x86_64, and Windows amd64; exact seven-file inventory and SHA-256 manifest",
+      "build_tests": "Poetry 2.1.1/committed lock; cibuildwheel 2.23.4+; every wheel runs pip check and python -m actions.server version; macOS deployment target 12.0",
+      "publish_gate": "tag/source/version and community ancestry; published-minimum floor verifier; strict Twine 6.2.0; local publisher dry-run; retained actions-runtime-dist; pypi environment and PYPI_TOKEN_ACTIONS_RUNTIME required; registry readback afterwards",
+      "workflow_dispatch": false
+    },
+    "native_workflow": {
+      "path": ".github/workflows/actions_runtime_binary_release.yml",
+      "trigger": "actions-runtime-* tag push",
+      "platforms": ["Linux x86_64", "macOS arm64", "Windows amd64"],
+      "checks": "tag/package version and community ancestry; required binary inventory; signing credentials all-or-none per signed platform; partial credentials fail, fully absent uses unsigned build",
+      "outputs": ["<tag>-linux64", "<tag>-macos-arm64", "<tag>-windows64.exe", "<tag>-sha256.txt"],
+      "publication": "GitHub release only; published release is created before sequential asset uploads; overwrite false; failures can leave partial release; no blind rerun/replacement",
+      "legacy_delivery": "Sema4AI Homebrew dispatch and Sema4AI/Robocorp CDN/S3 compatibility paths are retired"
+    },
+    "core": "Core 1.0.3 is already published; see /workspace/work/actions-mk3-evidence/core-publication/publication-readback.json"
+  },
+  "registry_and_release_observation": {
+    "actions-core": "PyPI latest 1.0.3; immutable actions-core-1.0.3 tag targets a70993fafc99a9f94041485542d5a720797ca394",
+    "actions-runtime": "PyPI latest 1.0.2; 1.0.3 absent; actions-runtime-1.0.3 tag and native GitHub release absent",
+    "actions-http-helper": "PyPI latest 1.0.3",
+    "actions-work-items": "PyPI latest 0.4.4",
+    "native_latest": "actions-runtime-1.0.1; tag target 0accc8f8cd1590957dec63d94e091aa945653614"
+  },
+  "homebrew_distribution": {
+    "canonical_guide": "docs/skills/repository-operations.md:1031-1061 and 1087-1107 in current Runtime integration candidate; use generated workflow source for executable behavior",
+    "owner_repository": "joshyorko/homebrew-tools",
+    "observed_default_branch": "main",
+    "observed_main_sha": "ce4ff32e73cc34385635b632374336adac285430",
+    "current_account_permissions": "admin/push on joshyorko/homebrew-tools and joshyorko/actions per normal gh REST repository metadata; no write probe/action",
+    "maintained_cask": "Casks/action-server.rb",
+    "current_cask_version": "1.0.1",
+    "current_cask_release": "action-server-1.0.1",
+    "platforms": ["Linux x86_64", "macOS Apple Silicon/arm64"],
+    "unsupported": ["macOS Intel", "Windows through Homebrew"],
+    "current_asset_identity": {
+      "linux_asset": "actions-runtime-1.0.1-linux64",
+      "linux_sha256": "191f40cfebcadbd53bf7b14988098b983b99b4efc1aa8d8ac9e8ada6ad37ab3b",
+      "mac_asset": "actions-runtime-1.0.1-macos-arm64",
+      "mac_sha256": "7e9ea6960107d6f6da6dadd7fd12a2c63f9c065d2a9f296aba765b34d24c47d8",
+      "readback": "joshyorko/actions actions-runtime-1.0.1 GitHub-release digests exactly match joshyorko/homebrew-tools action-server-1.0.1 mirrored asset digests and current cask SHA values"
+    },
+    "workflow": {
+      "manual": {"path": ".github/workflows/tap-manual.yml", "id": 255480165, "inputs": ["action=ci", "action=artifact", "action=release", "action=force-release", "package_id=action-server"]},
+      "ci": {"path": ".github/workflows/tap-ci.yml", "id": 255398935, "trigger": "PR and push to main; cask change runs package artifact check in Homebrew Dagger environment"},
+      "auto_update": {"path": ".github/workflows/tap-auto-update.yml", "id": 255480164, "slot": "action-server-daily"},
+      "retired_path": "Do not run Sema4AI/homebrew-tools publish.yml. Current maintained tap workflow and source are in joshyorko/homebrew-tools."
+    },
+    "verified_pipeline_contract": "The Dagger resolver selects stable actions-runtime-X.Y.Z only, requires both upstream Linux and macOS-arm64 assets, validates their GitHub SHA-256 digests, mirrors them into action-server-X.Y.Z, and renders/commits the updated cask. Package artifact check installs the cask, verifies executable/version/start help, and exercises a legacy 1.2.6 to current reinstall fixture. The existing artifact check does not establish real macOS-arm64 install/upgrade acceptance or a 1.0.1-to-1.0.3 brew upgrade on both supported systems.",
+    "required_release_sequence": [
+      "After upstream Runtime GitHub assets exist and their digest manifest has been independently checked, run maintained Tap Manual action=ci with package_id=action-server and require success.",
+      "Then run Tap Manual action=release with package_id=action-server. Verify the resulting action-server-1.0.3 tap release, its Linux and macOS mirrored asset digests, and committed Casks/action-server.rb version/URL/hash on joshyorko/homebrew-tools main.",
+      "Require the resulting Tap CI push run's action-server artifact check to pass.",
+      "Obtain actual Homebrew install and upgrade proof on Linux x86_64 and macOS arm64: clean install with brew install --cask joshyorko/tools/action-server; update from existing Runtime 1.0.1 using brew update && brew upgrade --cask joshyorko/tools/action-server; verify action-server version reports 1.0.3 and installed executable bytes correspond to the verified platform cask asset. Preserve command logs, host/OS/architecture, tap commit, cask and asset hashes. This proof is an explicit release gate, not optional.",
+      "For migration from historical Action Server 1.2.6, follow the documented explicit brew reinstall --cask joshyorko/tools/action-server path because Runtime 1.0.3 compares lower numerically. Record this separately from a normal 1.0.1-to-1.0.3 brew upgrade."
+    ],
+    "workflow_credential_boundary": "Tap Manual's run uses ${{ secrets.DAGGER_CLOUD_TOKEN }} for Dagger and the repository GITHUB_TOKEN for release/commit. Actions PyPI uses PYPI_TOKEN_ACTIONS_RUNTIME in the pypi environment. Secret values and presence were not checked. The gh account's repository permissions are metadata, not proof that workflow secrets are configured or valid."
+  },
+  "remaining_gates": [
+    "PR304 current head 73605934 exact-head coverage, Toolkit, candidate wheel, native build and package gates queued at observation; wait for all required checks and review/merge. The old b954 failure is resolved in source by explicit floor pins but is not yet accepted by hosted check evidence.",
+    "PR292 still has Windows devmode in progress; complete review/merge. PR290 checks observed green but remains open; obtain review/merge.",
+    "Re-run final merged union gates and bind Runtime tag commit/tree to accepted community ancestry, package version 1.0.3, changelog, wheel/binary artifacts, and release workflows.",
+    "Recheck Runtime tag and PyPI version absence immediately before tag allocation; do not mutate current immutable Core tag/release.",
+    "On successful Runtime tag release, independently verify PyPI seven-file manifest/hashes and native four-asset manifest/hashes; reconcile any partial native release before any attempt to continue.",
+    "Complete required Homebrew cask CI/release plus actual Linux x86_64 and macOS arm64 install/upgrade proof listed above."
+  ],
+  "smallest_next_actions": [
+    "Wait on PR304 checks for exact head 73605934; its canary pins published Core 1.0.2, preserving the declared minimum floor.",
+    "Finish #292 Windows check and obtain required review/merge for #290/#292/#304.",
+    "After final source union is accepted, execute tag-triggered Runtime PyPI/native gates and their independent registry/release readback.",
+    "After native assets are public and verified, run joshyorko/homebrew-tools Tap Manual ci then release, wait for Tap CI artifact check, and capture real Linux and macOS install/upgrade receipts."
+  ],
+  "tool_and_mutation_boundary": {
+    "gh": "authenticated as joshyorko; REST metadata confirms admin/push on both relevant repositories; API reads only performed",
+    "brew": "not installed in this Linux worker; no local Homebrew test ran",
+    "mutations": "none: no tag, release, workflow dispatch, source edit, secret write, or external worker",
+    "upstream_disposition": "No dependency upstream defect indicated. This lane records repo-owned release/tap gates only."
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "boundary": "Canonical RCC manifest plus exact subject toolkit.package_environment; reused RCC-Bootstrap package interpreter; configured full Runtime Mypy arguments, without Poetry invocation or install.",
+  "canonical_gateway": "rcc task script -r developer/toolkit.yaml --no-build -- python /workspace/work/actions-mk3-evidence/verify_rcc_preparation_types.py",
+  "command": [
+    "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "-m",
+    "mypy",
+    "--follow-imports=silent",
+    "--show-column-numbers",
+    "--namespace-packages",
+    "--explicit-package-bases",
+    "--cache-dir",
+    "/workspace/work/actions-mk3-evidence/rcc-preparation-mypy-cache",
+    "src",
+    "tests"
+  ],
+  "cwd": "/workspace/work/actions-mk3-rcc-review/action_server",
+  "elapsed_seconds": 10.748,
+  "error_count": 0,
+  "errors": [],
+  "exit_code": 0,
+  "limitations": [
+    "Static source verification only",
+    "No actual RCC package metadata inspection",
+    "No compiler advancement",
+    "No package Poetry release-gate claim"
+  ],
+  "log_sha256": "3cff125a819717bea5d65597f4a3cf6a0310cc64f7882e9dd41b129015c9e658",
+  "metadata_sha256": {
+    "action_server/poetry.lock": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+    "action_server/pyproject.toml": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+    "actions-http-helper/poetry.lock": "8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13",
+    "actions-http-helper/pyproject.toml": "1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d",
+    "actions/poetry.lock": "b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15",
+    "actions/pyproject.toml": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3",
+    "developer/setup.yaml": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a",
+    "developer/setup_windows_amd64.yaml": "86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001",
+    "developer/toolkit.py": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f",
+    "developer/toolkit.yaml": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68",
+    "devutils/poetry.lock": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e",
+    "devutils/pyproject.toml": "7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1",
+    "work-items/poetry.lock": "dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4",
+    "work-items/pyproject.toml": "a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e"
+  },
+  "outer_rcc_interpreter": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+  "prepared_checkout_head": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+  "provenance": {
+    "interpreter": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "mypy": "1.20.2",
+    "origins": {
+      "actions": "/workspace/work/actions-mk3-rcc-review/actions/src/actions/__init__.py",
+      "actions.server._rcc_runtime_adapter": "/workspace/work/actions-mk3-rcc-review/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "actions.work_items._types": "/workspace/work/actions-mk3-rcc-review/work-items/src/actions/work_items/_types.py",
+      "actions_http": "/workspace/work/actions-mk3-rcc-review/actions-http-helper/src/actions_http/__init__.py",
+      "devutils.invoke_utils": "/workspace/work/actions-mk3-rcc-review/devutils/src/devutils/invoke_utils.py"
+    },
+    "python": "3.12.15"
+  },
+  "rcc_version_marker": "v18.19.3",
+  "subject_final_status": "",
+  "subject_head": "7eca36abce160b68f616eab9b7fdc9c4e7f2b053",
+  "subject_tree": "2890ce916a5a9ee9201239635a220f95ecfe9ee8",
+  "summary": [
+    "tests/action_server_tests/test_mcp_tunnel_origin_scope.py:278:5: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]",
+    "tests/action_server_tests/test_mcp_tunnel_origin_scope.py:279:5: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]",
+    "Success: no issues found in 326 source files"
+  ]
+}

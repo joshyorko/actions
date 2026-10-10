@@ -1,0 +1,36 @@
+{
+  "schema": "actions-live-status-overlay/v1",
+  "observed_at_utc": "2026-10-10T20:05:39Z",
+  "cutoff_basis": "Read-only current Git refs at 20:05:39Z, root-reported 19:58 exact-head check census, and bounded follow-up messages through 20:04:44Z. No full refreshed Actions check census was available to this lane.",
+  "repositories": {
+    "community": "joshyorko/actions@a70993fafc99a9f94041485542d5a720797ca394 (tree 562b49fc03bc4a16ef8a0b7b6f50b9bec88de959)",
+    "integration": "joshyorko/actions@4e8a26296608c232ce3dbd1f250ddb709b9459c9 (tree 1b582dd02b367e5216e60796a8da031e520aa12f)"
+  },
+  "new_observations": {
+    "pr302_windows": {
+      "head": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+      "run": 38081239175,
+      "job": 114298417674,
+      "status": "FAIL declared-floor canary installed Core 1.0.3 while asserting ^1.0.2 floor. PR304 73605934 contains fix but is not accepted. Separate adapter devmode job 114298417836 remains active; Windows native and both RCC toolkit jobs passed.",
+      "receipt": "evidence/wave2-overlay-20261010T2005Z/pr302-windows-floor-failure.json"
+    },
+    "pr282": {
+      "head": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+      "worker_report": "one installed Runtime/browser pass",
+      "independent_readback": "PENDING: root requested durable /workspace/work/actions-mk3-evidence/pr282-acceptance receipt; directory not present at 20:05:39Z. Do not promote reported pass."
+    },
+    "pr305": {
+      "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "status": "actual Graph #99 browser fixture rerun in progress; no acceptance receipt yet. canvas-pinned is #99/PR305 evidence, distinct from PR282."
+    },
+    "dakota": {
+      "receipt": "evidence/wave2-overlay-20261010T2005Z/dakota-native-snapshots-20261010T200444Z.json",
+      "work_items": "native thread notLoaded; latest turn completed; no active flags",
+      "rcc": "native thread notLoaded; latest turn interrupted; no active flags",
+      "authority": "native-app-server exact stored local repo CWD; no worker resume/create."
+    },
+    "devsy": "DISABLED; no dispatch/discovery/calls"
+  },
+  "previous_census": "19:58Z root native API counts retained as historical for PR304 (22 queued), PR282 (19 queued), PR305 (14 queued), PR292 (18 success/1 active), not reasserted as current. Exact refs remained unchanged at this read.",
+  "scope": "Bounded status overlay only; no new issue acceptance, graph edge, merge or publication."
+}
