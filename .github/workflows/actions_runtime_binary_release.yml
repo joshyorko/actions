@@ -198,8 +198,6 @@ jobs:
       with:
         release_title: ${{ github.ref_name }}
         changelog_file: action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md
-        release_text: Actions Runtime binaries are available as assets. Run `action-server
-          -h` for usage instructions.
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093

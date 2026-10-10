@@ -1039,7 +1039,15 @@ GitHub `get-virtualenv` blob URL with the supported `bootstrap.pypa.io` URL
 The clean-break distribution identity is `actions-runtime`; its package version,
 `actions.server.__version__`, Runtime changelog, and `actions-runtime-X.Y.Z` tag
 must agree. Native release notes come from
-`action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md`; the historical
+`action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md`. The generated native
+workflow must leave `release_text` unset so the pinned release action reads
+that file; a non-empty `release_text` bypasses changelog parsing. The action's
+default heading level is H2 and its pinned `submark -O --h2 "$TAG"` lookup
+requires an exact heading such as `## actions-runtime-1.0.3` (a date suffix
+does not match). The selected section runs through the next H1 or H2, includes
+any H3 subsections, and omits its matched heading. The generic `inv set-version`
+helper updates the legacy `action_server/docs/CHANGELOG.md` using a dated H2;
+it does not prepare the dedicated Runtime changelog. The historical
 `action_server/docs/CHANGELOG.md` and `action-server-v1.2.x` tags remain a
 separate legacy delivery line. Tagged PyPI runs fail closed when
 `PYPI_TOKEN_ACTIONS_RUNTIME` is absent rather than reporting successful release

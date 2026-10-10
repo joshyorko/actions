@@ -1,4 +1,5 @@
 import importlib.util
+import re
 import tomllib
 from pathlib import Path
 
@@ -188,6 +189,43 @@ def test_native_runtime_release_uses_only_community_github_release_assets():
         or "Brew" in step.get("name", "")
         for step in recovery_release_steps
     )
+
+
+def test_native_runtime_release_notes_match_the_exact_tag_contract():
+    binary = yaml.safe_load(BINARY_WORKFLOW)
+    release_step = next(
+        step
+        for step in binary["jobs"]["release"]["steps"]
+        if step.get("name") == "Create GitHub release"
+    )
+    release_input = release_step["with"]
+    changelog = (
+        ROOT / "action_server" / "docs" / "ACTIONS_RUNTIME_CHANGELOG.md"
+    ).read_text()
+    tag = "actions-runtime-1.0.3"
+    headings = re.findall(r"^## (.+)$", changelog, flags=re.MULTILINE)
+    release_class_start = GENERATOR.index("class ActionServerBinaryRelease")
+    release_class_end = GENERATOR.index("class ActionServerRuntimeRecovery")
+    release_generator = GENERATOR[release_class_start:release_class_end]
+
+    assert release_input["changelog_file"] == (
+        "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md"
+    )
+    assert not release_input.get("release_text")
+    assert '"release_text"' not in release_generator
+    assert headings.count(tag) == 1
+    assert headings.index(tag) == 1
+    assert headings[0] == "Unreleased"
+    assert "## 1.0.2 - 2026-09-07" in changelog
+    assert "## 1.0.1 - 2026-09-07" in changelog
+    selected_body = changelog.split(f"## {tag}\n", 1)[1].split("\n## ", 1)[0]
+    assert selected_body.strip()
+    assert "Canvas" not in selected_body
+    assert not re.search(r"\bpublish(?:ed|ation)?\b", selected_body, re.IGNORECASE)
+    unreleased_body = changelog.split("## Unreleased\n", 1)[1].split(
+        f"## {tag}\n", 1
+    )[0]
+    assert all(issue in unreleased_body for issue in ("#134", "#153", "#211"))
 
 
 def test_legacy_action_server_changelog_is_not_the_runtime_release_source():
