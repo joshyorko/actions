@@ -2139,13 +2139,16 @@ native-platform lifecycle proof is implied. Tests for the protocol boundary
 are in `test_preload_actions_exit.py` and
 `test_rcc_runtime_adapter.py`.
 
-`ActionServerProcess.start()` owns the spawned test child and its stdout/stderr
-reader threads before readiness is established. Keep post-spawn startup work
-inside a failure-cleanup boundary: terminate and reap the owned process tree,
-then join its registered readers within one finite deadline, while re-raising
-the original startup exception if cleanup fails. Successful startup behavior
-and its readiness timeout remain unchanged; the synthetic timeout contract in
-`test_cli_mcp_resource_history.py` proves the owned child and both readers stop.
+`ActionServerProcess.start()` owns its direct child and registered stdout/stderr
+readers before readiness. Keep post-spawn startup work inside a failure-cleanup
+boundary: stop captured descendants, wait for and reap the direct `Popen` child,
+then join registered readers within one finite deadline. Preserve the original
+startup exception and attach cleanup errors or incomplete observations as
+notes. The cleanup result distinguishes stopped execution from descendant-reap
+completeness; a point-in-time snapshot does not prove universal descendant
+discovery or adoption. Successful startup and readiness timeouts remain
+unchanged. The synthetic timeout regression proves direct-child reap and both
+reader closures; native Windows startup remains a separate gate.
 
 The socketpair test that fills a send buffer is a kernel-buffer behavior check:
 it runs on POSIX runners and is skipped on Windows, where the same payload may
