@@ -1,0 +1,138 @@
+{
+  "accepted_integration": {
+    "23_exact_hosted_checks": "Parent reports passed before merge; no API re-query in this read-only composition review",
+    "head": "19380993febaa71238eaee3026b5c808773283ff",
+    "ordered_parents": [
+      "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "73605934c1c948895410a5abaed6c225a396e038"
+    ],
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "tree_equals_previously_tested_synthetic_merge856c": true
+  },
+  "boundaries": [
+    "No services, native execution, package tests, remote mutations or merges performed.",
+    "Prior tests/browser receipts retain their original exact head binding; full-tree unchanged slices are composition evidence, not fresh head CI.",
+    "Require exact new head hosted checks and final merge/base readback before any normal PR merge.",
+    "No full Canvas/renderer/ChatGPT, release publication, compiler advancement or whole issue acceptance."
+  ],
+  "commands": [
+    "git show -s --format=%H %T %P for each accepted/refreshed/union commit",
+    "git diff --name-only/--numstat/--binary/--check for first-parent incoming changes and accepted-base own deltas",
+    "git show/rev-parse exact blobs; stdlib byte comparison and original guide insertion projection",
+    "git status --porcelain=v1 --untracked-files=all in PR305/306 isolated worktrees"
+  ],
+  "documentation_proposal": "When refreshing a bounded candidate after accepted integration advances, retain ordered merge parents and whole-tree identity. Prove the original changed source/test blobs survive, then compare incoming paths to the accepted integration delta. For guides containing independent insertions, remove only the retained original insertion and verify the remaining complete guide equals accepted integration; textual patch hashes can differ because blob IDs and hunk context changed. A source-preserving union still needs exact new-head hosted CI and prospective merge/base readback; prior runtime receipts remain bound to their original heads.",
+  "observations": [
+    "Both PR305/306 include exactly three accepted incoming paths with84 inserted lines, preserving all original bounded implementation/test bytes.",
+    "PR306 guide retains the exact original SAVEPOINT paragraph; removing it reproduces the entire accepted guide. Patch hashes differ because first-parent guide already contains that insertion, while complete content projections establish both contributions.",
+    "PR307/308 new merge commits have whole-tree equality to the previously reviewed bounded checkpoints.",
+    "No conflicts or extra source content visible in final trees; commit history is ordered normal merge. This review establishes object/content facts, not editor activity."
+  ],
+  "reviewed_at_utc": "2026-10-10T21:23:19.086769+00:00",
+  "reviews": [
+    {
+      "clean": true,
+      "diff_check": "PASS",
+      "guide_preservation": "no original guide delta",
+      "head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "incoming_non_doc_blobs_exact_accepted": {
+        "action_server/scripts/verify_published_runtime_floor.py": true,
+        "devutils/tests/test_runtime_release_workflows.py": true
+      },
+      "incoming_numstat": [
+        "2\t0\taction_server/scripts/verify_published_runtime_floor.py",
+        "37\t0\tdevutils/tests/test_runtime_release_workflows.py",
+        "45\t0\tdocs/skills/repository-operations.md"
+      ],
+      "incoming_patch_sha256": "9e1135c0a6463be58588be7a1b22269f8ded0e26f76dd5805ad4a8a64a2cb0fb",
+      "incoming_paths": [
+        "action_server/scripts/verify_published_runtime_floor.py",
+        "devutils/tests/test_runtime_release_workflows.py",
+        "docs/skills/repository-operations.md"
+      ],
+      "ordered_parents": [
+        "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ],
+      "original_fix_paths": [
+        "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py"
+      ],
+      "original_non_doc_blobs_exact": {
+        "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py": true
+      },
+      "pr": 305,
+      "recommendation": "GO for source publication/new hosted checks; merge/acceptance not authorized by this review",
+      "tree": "ab17a0cf3970273c86d3c4f1d26d3da852c9585f",
+      "worktree": "/workspace/work/actions-mk3-canvas-proof"
+    },
+    {
+      "clean": true,
+      "diff_check": "PASS",
+      "guide_preservation": {
+        "inserted_sha256": "673d908c1a1485bb88136ca3cae9e49477b6f111552082b8e1a37b7469dfc156",
+        "original_inserted_bytes": 549,
+        "removing_only_original_insert_from_new_equals_entire_accepted_guide": true
+      },
+      "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "incoming_non_doc_blobs_exact_accepted": {
+        "action_server/scripts/verify_published_runtime_floor.py": true,
+        "devutils/tests/test_runtime_release_workflows.py": true
+      },
+      "incoming_numstat": [
+        "2\t0\taction_server/scripts/verify_published_runtime_floor.py",
+        "37\t0\tdevutils/tests/test_runtime_release_workflows.py",
+        "45\t0\tdocs/skills/repository-operations.md"
+      ],
+      "incoming_patch_sha256": "d2780e7463c1623b0a19d5518013d53ba9e3fe5a82ae5f9f51d7f4ef843c1a4a",
+      "incoming_paths": [
+        "action_server/scripts/verify_published_runtime_floor.py",
+        "devutils/tests/test_runtime_release_workflows.py",
+        "docs/skills/repository-operations.md"
+      ],
+      "ordered_parents": [
+        "1d742149b7341ebc5dd543aa8b7e446f7f9c8b5b",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ],
+      "original_fix_paths": [
+        "action_server/src/actions/server/_database.py",
+        "action_server/tests/action_server_tests/test_database.py",
+        "docs/skills/repository-operations.md"
+      ],
+      "original_non_doc_blobs_exact": {
+        "action_server/src/actions/server/_database.py": true,
+        "action_server/tests/action_server_tests/test_database.py": true
+      },
+      "pr": 306,
+      "recommendation": "GO for source publication/new hosted checks; merge/acceptance not authorized by this review",
+      "tree": "42f70afb88877335a71e9bc02ad2e85730d69442",
+      "worktree": "/workspace/work/actions-mk3-db-savepoint"
+    },
+    {
+      "entire_tree_identical_to_reviewed_checkpoint": true,
+      "head": "729594fc04758502ec2ed985adb428e2863a3bb1",
+      "old_checkpoint": "bad6a44752438216c47ebab7fac520e174f9649a",
+      "ordered_parents": [
+        "bad6a44752438216c47ebab7fac520e174f9649a",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ],
+      "pr": 307,
+      "recommendation": "Prior source GO carries through exact tree equality; new exact-head hosted checks required",
+      "tree": "1db860bf248e83aeedf521044633bbd221902282"
+    },
+    {
+      "entire_tree_identical_to_reviewed_checkpoint": true,
+      "head": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+      "old_checkpoint": "284880ca80bb666de6ef1bd970b493435bb7a8a9",
+      "ordered_parents": [
+        "284880ca80bb666de6ef1bd970b493435bb7a8a9",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ],
+      "pr": 308,
+      "recommendation": "Prior source GO carries through exact tree equality; new exact-head hosted checks required",
+      "tree": "8471f44cc58f2dbe0226fbcf7d89445f440df2f0"
+    }
+  ],
+  "schema_version": 1,
+  "status": "GO: source publication readiness for PR305/306 unions and source-equivalent PR307/308 refreshes; new-head CI required",
+  "upstream_disposition": "none"
+}

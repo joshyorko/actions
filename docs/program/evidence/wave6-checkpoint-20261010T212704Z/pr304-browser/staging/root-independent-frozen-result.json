@@ -1,0 +1,52 @@
+{
+  "schema": "actions.pr304-linux-frozen-browser-independent-review.v1",
+  "observed_at_utc": "2026-10-10T21:18:43.552140+00:00",
+  "reviewer": "root (independent of worker author)",
+  "verdict": "GO for one Linux frozen Origin/ambient-session test",
+  "source_head": "73605934c1c948895410a5abaed6c225a396e038",
+  "source_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+  "verified_files": {
+    "acceptance-receipt.json": "b5a7387fe65b058222156d15e21c1fe925e24c6599473e356df22497d76be5ff",
+    "junit.xml": "a0c41f788f19eb13061b57e3ef42dbf3f215adcfabdb5b35c875d5b73fb57c95",
+    "pytest-selection.json": "982dff7ba2896e67bc346c4761a72fb9ce7ee445a01ba787d646514423ff53a7",
+    "browser-harness-stdout.log": "621ede59a58f91e5f091f931d86fde2c82d58c47f5c23f061d73b4e55becbf03",
+    "browser-harness-stderr.log": "9ebaf2e1d2ef69be920585e8c56485f16a166eaa95ca8e4af51a6c6f5f839cdc",
+    "runtime-process-start.json": "ad95d75a0a25388d6d2c7b9f75d7d2d7d32ac647abd2e33f9299544e28ec321c",
+    "pytest-stdout.log": "fedcc92efe8941f5aaf83c4f841ba35f285e3307c015146dee66b8068a148283",
+    "pytest-stderr.log": "61d8f82e6552d09c742d8b13c2f580996abbd44a1c5e216780bb0c8592fe5d85"
+  },
+  "observed_pids_gone": [
+    43074,
+    43077,
+    43097
+  ],
+  "browser_revision": "1234",
+  "asserted_matrix": {
+    "allowed_origin": {
+      "browser_cookie": true,
+      "get": 403,
+      "preflight": 200,
+      "post": 403,
+      "script_read": "CORS-blocked"
+    },
+    "denied_origins": 2,
+    "null_origin": {
+      "get": 403,
+      "preflight": 400,
+      "post": 403
+    },
+    "auth_without_session": 403,
+    "wrong_bearer_with_session_cookie": 403
+  },
+  "limits": [
+    "No Windows/macOS result",
+    "No actual ChatGPT or whole #153 acceptance",
+    "No full host process reaping claim",
+    "Earlier two setup failures remain preserved"
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "Wave5 staging and outer Python identity guidance is substantiated by this actual successful full-package run; retain source, selected test, Runtime start, browser launch and cleanup as separate evidence."
+  },
+  "upstream_disposition": "none"
+}

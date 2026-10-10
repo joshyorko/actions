@@ -2303,6 +2303,16 @@ The receipt binds each executable hash to the supplied build commit; a frozen
 executable hash alone does not bind its adjacent distribution files. This check
 proves the summary client path, not bounded legacy `/api/runs` responses.
 
+For the browser Origin and ambient-session regression, bind the test to the exact
+source tree and staged native package, and keep frozen execution separate from
+the Go wrapper. Record the selected pytest node, JUnit result, runtime/browser
+identity and cleanup receipt for each artifact path. A staging-readiness review
+does not count as execution, and a passing Linux case does not establish the
+other operating systems, actual ChatGPT integration or whole-issue acceptance.
+If the staged package is incomplete and the runtime cannot start, record a
+staging failure with the browser test unrun; do not classify it as a source or
+browser defect.
+
 Mobile navigation must close on selecting the current route as well as a different
 route. A pathname-change effect alone misses the current-route case; retain an
 explicit navigation-selection callback and both regression assertions. CI must run

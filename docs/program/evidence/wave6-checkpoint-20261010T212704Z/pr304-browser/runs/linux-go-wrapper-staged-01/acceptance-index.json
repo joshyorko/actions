@@ -1,0 +1,189 @@
+{
+  "artifact": {
+    "artifact_zip_sha256": "65310919b0048615fbfb3dea1b1d95cf29aa773d68448f0c73fb889e89e4a237",
+    "expanded_runtime_matches_prior_frozen_executable": true,
+    "expanded_runtime_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/home/.actions/bin/action-server/internal/1.0.3/action-server",
+    "expanded_runtime_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+    "go_wrapper_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+    "isolated_home": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/home"
+  },
+  "browser": {
+    "revision": "1234",
+    "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "version": "Google Chrome for Testing 151.0.7922.34"
+  },
+  "cleanup": {
+    "complete_host_reaping_claimed": false,
+    "owned_zombies_observed": 0,
+    "reaped_descendants_reported": 0,
+    "runtime_and_browser_pids_observed_gone": true,
+    "supervisor": "clean_no_descendants"
+  },
+  "commands": {
+    "execution": [
+      "timeout",
+      "300s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "--no-build",
+      "-r",
+      "/workspace/work/actions-mk3-browser-security/developer/toolkit.yaml",
+      "--",
+      "/bin/bash",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/launcher.sh",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/runner.py",
+      "--kind",
+      "go-wrapper",
+      "--binary",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/go-wrapper-38081495661-attempt01/action-server",
+      "--run-dir",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01"
+    ],
+    "preflight": [
+      "timeout",
+      "120s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "--no-build",
+      "-r",
+      "/workspace/work/actions-mk3-browser-security/developer/toolkit.yaml",
+      "--",
+      "/bin/bash",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/launcher.sh",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/runner.py",
+      "--kind",
+      "go-wrapper",
+      "--binary",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/go-wrapper-38081495661-attempt01/action-server",
+      "--run-dir",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01",
+      "--preflight-only"
+    ]
+  },
+  "environment_note": "RCC no-build task preflight passed; log noted existing developer/tmp environment freeze/stdout/stderr files and succeeded without modification.",
+  "evidence": {
+    "acceptance_receipt": {
+      "bytes": 10905,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/acceptance-receipt.json",
+      "sha256": "858c7242e2217da61143789f5c5aa33f2039181c3ee3003295dabecf656c0884"
+    },
+    "browser_harness_result": {
+      "bytes": 166,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/browser-harness-result.json",
+      "sha256": "f2cf56f18a597571e00e5ed90fcf6ae95d6b65b44fec38b7aad2d39267211adb"
+    },
+    "browser_harness_stderr": {
+      "bytes": 6518,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/browser-harness-stderr.log",
+      "sha256": "436ba1b114823c16b5de6b76e312ccc4928a3550d587673bd3380edf0fb7821f"
+    },
+    "browser_harness_stdout": {
+      "bytes": 3487,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/browser-harness-stdout.log",
+      "sha256": "acf750120659e083d0b47aa0e40049f09dccdd969f0a17c378e8360e3640cbaf"
+    },
+    "embedded_frozen_runtime_binary": {
+      "bytes": 17625656,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/home/.actions/bin/action-server/internal/1.0.3/action-server",
+      "sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e"
+    },
+    "go_artifact_zip": {
+      "bytes": 77819514,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-artifact-readback/native-binary-11680772754.zip",
+      "sha256": "65310919b0048615fbfb3dea1b1d95cf29aa773d68448f0c73fb889e89e4a237"
+    },
+    "go_wrapper_binary": {
+      "bytes": 82022274,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/go-wrapper-38081495661-attempt01/action-server",
+      "sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b"
+    },
+    "junit": {
+      "bytes": 409,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/junit.xml",
+      "sha256": "3b327f0321f9371df59a236caf0185da25f80db571e3bb93fc69cae846e7d135"
+    },
+    "managed_browser": {
+      "bytes": 196975952,
+      "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f"
+    },
+    "prior_frozen_acceptance_index": {
+      "bytes": 7813,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/acceptance-index.json",
+      "sha256": "cd37866c503a2c83bb7845d03ab772f1ba06840b033465332039d30a3fa259ec"
+    },
+    "pytest_selection": {
+      "bytes": 184,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-selection.json",
+      "sha256": "982dff7ba2896e67bc346c4761a72fb9ce7ee445a01ba787d646514423ff53a7"
+    },
+    "pytest_stderr": {
+      "bytes": 12918,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-stderr.log",
+      "sha256": "6d0442ceea680cbb9103979fd74efa109bb4c9e7b0993ad2d52b0324ba89d5c4"
+    },
+    "pytest_stdout": {
+      "bytes": 233,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-stdout.log",
+      "sha256": "e67967da8c4c645864d6e9d814c659b7eeb68041fc86979ad0a4cec50347ec59"
+    },
+    "rcc_preflight_log": {
+      "bytes": 6014,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/preflight/go-wrapper-staged-preflight.log",
+      "sha256": "0a2a2e7f9f736ba4f74e68b99e9a34c0be62bb108025b109dfbd09d5b67c5a5f"
+    },
+    "rcc_run_log": {
+      "bytes": 3872,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/preflight/go-wrapper-staged-rcc-run.log",
+      "sha256": "92dc7b221c5e0485b7eea122f0556e09228af8a94297cc3edce9e765358ea92d"
+    },
+    "runtime_process_start": {
+      "bytes": 1753,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/runtime-process-start.json",
+      "sha256": "96174bd806e636b59860be3961fc2e23d3ea4ee3fe92d6b3e23a189c335c3c84"
+    },
+    "source_test": {
+      "bytes": 22374,
+      "path": "/workspace/work/actions-mk3-browser-security/action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+      "sha256": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c"
+    }
+  },
+  "execution": {
+    "elapsed_seconds": 8.339,
+    "outer_rcc_cap_seconds": 300,
+    "preflight_run_dir_created": false,
+    "preflight_status": "PREFLIGHT_PASS",
+    "pytest_elapsed_seconds": 6.959
+  },
+  "limitations": [
+    "One Linux Go-wrapper packaged artifact only; does not establish Windows/macOS coverage or blanket issue #153 acceptance.",
+    "Actual ChatGPT was not run.",
+    "Does not establish production deployment authorization, CSP, artifact resolution, frozen release signing, or full wheel authentication."
+  ],
+  "reviewed_launch_hashes": {
+    "capture_plugin_sha256": "4842113d1531f5e8d776d42d68aeee264dc9b3678ae388acff841778e5255cb0",
+    "contract_revision03_sha256": "09d7a362d69c599ed2ebd6f279b9207b6bcdde2e7d65e993d9382db71cedb42d",
+    "launcher_sha256": "afd00d62e1f15bc3b14e77a6cd3aca75512d8ef9842d82df16ddaa3fb0491c88",
+    "runner_sha256": "569b5d92c6c84660ecd3cb1d6e80a969eee34667cc8f3d2a1b7ccab887d78f7b"
+  },
+  "run_id": "linux-go-wrapper-staged-01",
+  "schema": "actions.pr153-linux-go-wrapper-browser-acceptance-index.v1",
+  "selection": {
+    "errors": 0,
+    "failures": 0,
+    "nodeid": "tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+    "passed": 1,
+    "returncode": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "source": {
+    "checkout_head": "73605934c1c948895410a5abaed6c225a396e038",
+    "checkout_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "workflow_run_id": "38081495661"
+  },
+  "status": "PASS_SCOPED_LINUX_GO_WRAPPER_MATRIX"
+}

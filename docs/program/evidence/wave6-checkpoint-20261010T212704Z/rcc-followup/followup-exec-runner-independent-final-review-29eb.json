@@ -1,0 +1,76 @@
+{
+  "bindings": {
+    "independent_B_recovery_sha256": "c077506b65d72b747f359812e6d2b4f5ecf9da948d4c1f88605bf2c2cd05c8d4",
+    "independent_static_readback_sha256": "4ed1b57f282459176743211ac42de96f76f8b61c3d23bffdf13e14fcf7ecc02e",
+    "initial_hold_receipt_sha256": "db17d820d5007b372d89bffbcce6279456b950abc89679fcedfb14699e327d0f",
+    "manifest_sha256": "691b957d17faf4c53f96c16b04944a0a360d57850309111097bee5f826fca460",
+    "proposal_sha256": "b5b856bbdb83f9dab68c0aaa749abc2e00d3756e1c16430a2ab8e43ff242a0d9",
+    "runner_sha256": "29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c"
+  },
+  "documentation_proposal": "Persist failed diagnostic evidence only under an exclusively created invocation-owned root. Parse complete bounded machine receipts and validate malformed nested fields without discarding the completed command. Bind actual launcher and retained materialization identities, and gate rejecting-provider counts after shutdown. Preserve earlier failed acquisition and unknown outer fields separately from any fresh paired-exec outcome. Report reference bookkeeping changes separately from immutable artifact/materialization corruption.",
+  "execution_status": "No RCC command, provider, listener, native binary or retained managed Python executed by reviewer. Root owns separate launch and heavy-slot coordination.",
+  "fixed_findings": {
+    "actual_launcher_binding": "Exact host Python resolved path/SHA required and actual executable/version/runner SHA retained.",
+    "final_provider_count": "Final stopped-probe snapshot must equal one503 self-test baseline before a PASS can remain.",
+    "malformed_verification": "null/list/bool verification becomes empty dict, failed receipt check retains command/cleanup record; independently confirmed all three fake cases.",
+    "preexisting_task_root_rejection": "Exclusive-creation ownership flag prevents any receipt persistence into the refused root; independently confirmed no files written."
+  },
+  "independent_checks": [
+    "sha256 exact frozen runner/proposal/manifest, reviewed full runner and diff from initial8aca",
+    "stdlib AST parse; imported module without main execution; invoked only read-only B/source preflight",
+    "stdlib fake helper+probe with null/list/bool verification each retains failed case",
+    "existing-root main rejection with fake-owned temporary review directory writes nothing; no helper/service/RCC loaded for that path"
+  ],
+  "next_step": "Use exact frozen runner through bound host launcher with a fresh unique root; one root-coordinated pair, then independent receipt/hash/PID/port/state readback. No automatic retry or republish/acquire.",
+  "reviewed_at_utc": "2026-10-10T21:21:13.844112+00:00",
+  "schema_version": 1,
+  "scope_limits": [
+    "Controlled retained Python3.12.15/Core1.0.2 local-ready API comparison only.",
+    "No current Core1.0.3, full Runtime startup, full issue134, production sandbox/auth/publication acceptance.",
+    "A success requires actual completed receipts and child/cleanup observations; source readiness and fake cases are not execution proof."
+  ],
+  "source": {
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "path": "/workspace/work/actions-mk3-rcc-warm-audit",
+    "status": "clean; verified with git status --porcelain --untracked-files=all",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "status": "GO: exact bounded retained-B paired-exec runner readiness only; execution NOT RUN",
+  "upstream_disposition": "none",
+  "validated_boundary": {
+    "RCC_binary_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "bounds": {
+      "cleanup_reserve_seconds": 20,
+      "native_child_cap_seconds": 25,
+      "overall_deadline_seconds": 120,
+      "work_deadline_seconds": 100
+    },
+    "child_python_identity": "Exact retained managed interpreter target+sys.prefix and3.12.15 marker required",
+    "cleanup": "Reviewed pinned helper enables Linux subreaper; reaps Popen leader before group absence and adopts/reaps only owned PGID after returncode is set. Nonblocking pipes and child/group termination use shared cleanup deadline; probe shutdown/socket/thread outcomes gate status.",
+    "cleanup_boundary": "Owned groups only; escaped process groups are not sandbox-contained; no production Runtime cleanup claim",
+    "deadline_precision": "Native-child/probe/cleanup waits use deadlines and duration above120s fails. Fixed local hash/receipt-persistence operations are bounded by byte caps, rather than individually interruptible filesystem deadlines.",
+    "host_launcher": "/usr/bin/python3.13",
+    "host_launcher_sha256": "17b78e0a93175e86f9ac03141924fd7a7f0c0c52e66b34bfa0de20ffef989df1",
+    "host_launcher_version": [
+      3,
+      13,
+      5
+    ],
+    "materialization_id": "a2484ce_5a1fac3_e58fc530",
+    "materialization_path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530",
+    "native_commands": [
+      "env exec --artifact exactD --provider http://127.0.0.1:38593 --permissive-local --inherit-streams --receipt-file unique -- python -c fixed_identity_marker",
+      "env exec --artifact exactD --permissive-local --inherit-streams --receipt-file unique -- python -c same_fixed_identity_marker"
+    ],
+    "network": "Inherited proxy/CA and NO_PROXY loopback merge; TLS enabled; values not serialized, structured identity fields preserved",
+    "no_publish_acquire_bootstrap_or_install": true,
+    "original_attempt2_gate": "FAIL; full acquire payload and cacheHit unknown; both exec modes NOT RUN",
+    "output": "Each stream32KiB nonblocking retained tail, event inventory256 with exact total, final receipt1MiB exclusive/private",
+    "probe": "Exclusive loopback38593;503-only, self-test baseline1, per-case/final zero additional requests, no headers or path retained; never contact or replace existing listener",
+    "read_only_B_preflight": "PASS; owner regular/no-follow capped ready/verified/verification/manifest/metadata/interpreter/reference files exact hash/identity",
+    "retained_artifact": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "state_policy": "Reviewed manifest/ready/content/verification/Python metadata hashes stable; live reference bookkeeping changes reported separately",
+    "strict_execution_receipt": "Complete owner single-link regular no-follow JSON at most1MiB; completed/int0/digest/materializationId/path/nonempty lease/local-materialization/valid verification exactD",
+    "whole_index_content_independently_rehashed": false
+  }
+}

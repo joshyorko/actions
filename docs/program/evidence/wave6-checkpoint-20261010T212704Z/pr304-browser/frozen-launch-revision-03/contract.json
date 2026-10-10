@@ -1,0 +1,66 @@
+{
+  "candidate": {
+    "plugin_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runner/pr153_capture_plugin.py",
+    "plugin_sha256": "4842113d1531f5e8d776d42d68aeee264dc9b3678ae388acff841778e5255cb0",
+    "runner_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runner/run_pr153_browser_acceptance.py",
+    "runner_sha256": "569b5d92c6c84660ecd3cb1d6e80a969eee34667cc8f3d2a1b7ccab887d78f7b",
+    "static_checks": {
+      "bash_syntax": "PASS",
+      "git_diff_check": "PASS",
+      "python_compile": "PASS",
+      "source_checkout_clean": "PASS"
+    },
+    "wrapper_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runner/launch_with_package_python.sh",
+    "wrapper_sha256": "afd00d62e1f15bc3b14e77a6cd3aca75512d8ef9842d82df16ddaa3fb0491c88"
+  },
+  "checkout": {
+    "branch": "mk3/browser-security-20261010",
+    "head": "73605934c1c948895410a5abaed6c225a396e038",
+    "source_worktree_status": "",
+    "synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5"
+  },
+  "cleanup_failure_recording": "On ProcessTreeCleanupError, persist the complete exception message after synthetic-key redaction even if captured process stdout/stderr are empty. Distinguish UNKNOWN cleanup observations from reaped/zombie/live states; never claim complete reaping.",
+  "corrected_no_service_preflight": {
+    "gate": "Must record/check parent sys.executable exactly `/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python`, parent sys.prefix exactly prepared action_server .venv, and psutil.__file__ within that venv before any pytest.",
+    "max_seconds": 60,
+    "rcc_command": "/workspace/actions-cloud/bin/rcc task script --no-build -r /workspace/work/actions-mk3-browser-security/developer/toolkit.yaml -- /bin/bash /workspace/work/actions-mk3-evidence/pr304-browser-security/runner/launch_with_package_python.sh /workspace/work/actions-mk3-evidence/pr304-browser-security/runner/run_pr153_browser_acceptance.py --kind frozen --binary /workspace/work/actions-mk3-evidence/pr304-browser-security/binaries/linux-frozen-action-server --run-dir /workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-preflight-corrected --preflight-only",
+    "service_or_browser_execution": false,
+    "source_activate": "/workspace/actions-cloud/activate.sh"
+  },
+  "diagnosis": {
+    "correction": "RCC starts a Bash wrapper, which clears VIRTUAL_ENV/Conda/Python/RCC robot path markers and execs the exact package Python symlink. Before spawning pytest, runner checks lexical sys.executable, exact package venv sys.prefix, and psutil origin within that venv, then retains these fields.",
+    "proven": "The failed outer runner raised ModuleNotFoundError for psutil. Direct invocation of the prepared package Python imports psutil from action_server/.venv/site-packages. RCC journal records task process names/count but not outer sys.prefix or module origin.",
+    "symlink_hypothesis": "The package venv Python symlink resolves to the same holotree executable as RCC Python. That may explain the prefix mismatch, but the failed attempt did not retain parent sys.executable/sys.prefix; the mechanism is not confirmed."
+  },
+  "failed_attempt": {
+    "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/failure-receipt.json",
+    "sha256": "029020b4f2d7ef3b522987b5df2d6b38bad4961f687ddcf6be9d39519f2fbb21"
+  },
+  "future_execution_if_preflight_passes_and_root_approves": {
+    "frozen_timeout_seconds": 300,
+    "helper_cleanup_grace_seconds": 6,
+    "helper_parent_deadline_seconds": 234,
+    "pytest_process_tree_timeout_seconds": 205,
+    "reason_for_outer_budget": "Existing browser harness allows up to 180 seconds; RCC outer cap is explicitly bounded at 300 seconds to cover the 234-second helper deadline plus RCC startup and receipt finalization.",
+    "run_frozen_then_stop_for_review_before_go_wrapper": true
+  },
+  "limitations": [
+    "The prior attempt produced no recorded JUnit, test selection, harness result, browser trace, or Runtime PID; no test result is established.",
+    "No retry, dependency install, service, or browser launch after the failure.",
+    "No actual ChatGPT, production auth/deployment, CSP, artifact-resolution, Windows/macOS, or blanket issue #153 claim."
+  ],
+  "measured_inputs": {
+    "browser_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "frozen_binary_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+    "go_wrapper_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+    "manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+    "workflow_run_id": "38081495661"
+  },
+  "previous_revision": {
+    "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runner/launch-contract-revision-02.json",
+    "sha256": "a3b564af0359c1fec63ec5fc120409246b5f1507d12e60b5a18bc0528f07e752"
+  },
+  "schema": "actions.pr153-browser-security-launch-contract-revision.v3",
+  "status": "FROZEN_FOR_ROOT_REVIEW; NO_RCC_RERUN_YET"
+}

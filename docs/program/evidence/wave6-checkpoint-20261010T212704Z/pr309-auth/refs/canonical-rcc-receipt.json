@@ -1,0 +1,52 @@
+{
+  "schema": "actions-runtime-auth-route-census-rcc-verification-v1",
+  "status": "canonical-rcc-outer-gateway-run-passed",
+  "preserves": {
+    "original_receipt": "/workspace/work/actions-mk3-evidence/auth-route-census/receipt.json",
+    "original_receipt_sha256": "dffd19bdbcddeac5bbd770cbc1f22ba1bea9cd3481e735626bf9eac83255ac50",
+    "source_correction": "/workspace/work/actions-mk3-evidence/auth-route-census/receipt-correction.json",
+    "source_correction_sha256": "6faf55e9457ad257f7279b0a7224bb236b82db59b0a73d3a7634a3f792ddb5b8"
+  },
+  "runner_history": {
+    "original_receipt_runner_sha256": "6b968313ffcca08840dcdf2b609b6a0d05613438dd0e9516d41c46be0cc9200d",
+    "original_runner_bytes_available": false,
+    "disclosure": "The original direct prepared-environment runner bytes were overwritten before this RCC audit. They were not reconstructed or relabeled as original. The run-focused-v2.sh file is a retained snapshot of the later direct diagnostic runner and is not byte-equivalent to the original receipt's runner hash.",
+    "retained_v2_runner": "/workspace/work/actions-mk3-evidence/auth-route-census/run-focused-v2.sh",
+    "retained_v2_runner_sha256": "3701005971f6db8137b08afb0ef966bd22ea7f9b35814beee2b45b62782887de",
+    "v2_scope": "Direct prepared-environment diagnostic only; not the canonical RCC proof."
+  },
+  "canonical_rcc_run": {
+    "repository": "joshyorko/actions",
+    "source_commit": "746030cb2ad8c4d116a45000a18d75ca15433182",
+    "source_tree": "9977652bc1e8d21a6e3b4f906031a68ab11b4c40",
+    "source_parent": "becc378cc699cd3d345c9d1f25255d73a2a9e8ab",
+    "outer_command": "source /workspace/actions-cloud/activate.sh && /workspace/actions-cloud/bin/rcc task script --no-build -r /workspace/work/actions-mk3-auth-route-census/developer/toolkit.yaml -- /bin/bash /workspace/work/actions-mk3-evidence/auth-route-census/run-rcc-focused-wrapper.sh",
+    "outer_invocation": "bash /workspace/work/actions-mk3-evidence/auth-route-census/run-rcc-focused.sh",
+    "outer_invocation_script": "/workspace/work/actions-mk3-evidence/auth-route-census/run-rcc-focused.sh",
+    "outer_invocation_script_sha256": "a8ab3c22fd5c5f88d9d8b268306edf2589fbf00dc95ad764c9e80dba68686f18",
+    "wrapper": "/workspace/work/actions-mk3-evidence/auth-route-census/run-rcc-focused-wrapper.sh",
+    "wrapper_sha256": "4a7d4b4f1bcf113e3bbd6aaa70d1d33261e6bc9ead50d99cb103af2ce1ba6951",
+    "stdout_log": "/workspace/work/actions-mk3-evidence/auth-route-census/canonical-rcc-focused.log",
+    "stdout_sha256": "6abd888152bbf2b10a6d3c04b3552763e72c1883954ad2319b438e85bd9b8c41",
+    "rcc": {
+      "binary": "/workspace/actions-cloud/bin/rcc",
+      "version": "v18.19.3",
+      "no_build": true,
+      "environment_result": "RCC accepted the no-build constraint and restored the existing cached holotree environment (blueprint 318089d9095ad813). No install/bootstrap command ran."
+    },
+    "prepared_runtime_interpreter": {
+      "executable": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+      "sys_prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+      "python_version": "3.12.15",
+      "pyproject_sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+      "poetry_lock_sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+      "module_origins_are_logged": true,
+      "all_action_server_core_test_modules_resolve_from_exact_worktree": true
+    },
+    "result": "4 passed, 1 deselected; Ruff check and Ruff format check passed",
+    "pytest_selection": "Auth route census plus test_log_verbosity.py under -m 'not integration_test'; its networked integration test was deselected.",
+    "service_boundary": "No Runtime listener, Uvicorn server, or action process pool started. No provider or live network check ran."
+  },
+  "status": "ready-for-root-review",
+  "upstream": "none"
+}

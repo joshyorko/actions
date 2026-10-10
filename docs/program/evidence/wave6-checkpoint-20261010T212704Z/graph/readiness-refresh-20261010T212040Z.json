@@ -1,0 +1,149 @@
+{
+  "schema": "actions-graph-readiness-refresh/v1",
+  "observed_at_utc": "2026-10-10T21:20:40Z",
+  "evidence_source": {
+    "branch": "handoff/actions-swarm-mk3-20261010",
+    "commit": "ba4bbda1acd43e893236a0d0076da65f27f7f76c",
+    "tree": "f22bcfe63deeb09c8b0dd5a1e6c7ead511d19397",
+    "engineering_baseline": false,
+    "worktree_clean": true,
+    "graph_path": "docs/program/community-execution-graph.json",
+    "graph_sha256": "c2fedf1b7618b76153451b8694cb8b850ee98a80e0b6dd1c50ecac5784c20a02",
+    "ledger_path": "docs/program/community-program-ledger.json",
+    "ledger_sha256": "c5e51e37e7a989a8c4946bde52655d2feae6bd610118760e4440c9c8be67ba00"
+  },
+  "contract_preservation": {
+    "retained_issue_contracts": 54,
+    "retained_contract_index_sha256": "1135e3aaf481341d5921bac7ab4ec5d726ffd2e8db0d17eaab90480e020902e8",
+    "live_issue_collection_records": 105,
+    "retained_ids_matched": 54,
+    "missing_retained_ids": [],
+    "live_state": {
+      "open": 53,
+      "closed": [
+        210
+      ],
+      "closed_unaccepted": []
+    },
+    "accepted_whole_issue_count": 1,
+    "retained_graph_stage_counts_historical": {
+      "READY": 0,
+      "ACTIVE": 8,
+      "REVIEW": 9,
+      "BLOCKED": 28,
+      "INTEGRATED": 8,
+      "COMPLETE": 1
+    },
+    "typed_relationship_schema": 2,
+    "typed_canvas_amendment": "canvas-execution-graph-20261009-v4",
+    "graph_ledger_source_mutations": false,
+    "historical_archives_mutated": false
+  },
+  "body_drift": {
+    "known_canvas_ids": [
+      99,
+      100,
+      126,
+      127
+    ],
+    "current_live_hashes_match_wave2_semantic_review": true,
+    "review": "docs/program/evidence/wave2-overlay-20261010T2005Z/canvas-body-drift-review.json",
+    "treatment": "The original 54 contract captures and typed acceptance remain authoritative. Keep the four live-body deltas as dated requirement proposals; do not overwrite captures or infer whole-issue acceptance.",
+    "unreviewed_new_body_drift": []
+  },
+  "ownership_basis": {
+    "source": "latest parent task owner directive",
+    "lanes": [
+      "root integration",
+      "LunaDB RCC exec scratch",
+      "LunaPR282 native browser",
+      "LunaCore auth route census",
+      "Sol independent review"
+    ],
+    "stale_resume_warning": "Graph current issue-state refresh is marked NOT_REFRESHED_FOR_LIVE_ISSUE_STATE at 2026-10-10T19:58:27Z; graph projection overlay is 20:23:55Z; embedded resume checkpoint is 2026-10-09T20:21:15Z and worker-stage snapshot is 07:53:20Z. These pointers do not establish current ownership or an available worker."
+  },
+  "ready_unowned_implementation_slices": [],
+  "nearest_successors_not_admitted": [
+    {
+      "issue": 151,
+      "candidate_slice": "Native Windows ACL isolation for Robot staging/publication, plus any separately reviewed root/source capability work.",
+      "retained_criteria": [
+        "private staging/publication access on supported platforms",
+        "root/source capability identity",
+        "native filesystem proof rather than chmod or cross-compilation claims"
+      ],
+      "already_accounted": "Merged PRs #200/#230/#232/#234/#240/#241/#244 and shared staging foundations cover archive limits, native no-replace publication, cleanup ownership, POSIX private staging, and copied-metadata admission. Canonical guide says Python mode bits do not prove Windows ACL isolation and root/source identity remains unproved.",
+      "dependencies": "No graph execution prerequisite is asserted. The live #151 contract requires one shared #148 staging writer; do not interpret that coordination rule as requiring all of #148 or package compiler #135 to close.",
+      "why_not_admitted": "Current root integration owner is active in the source/acceptance stack, and the permitted Windows principals/ACL policy is not specified by the retained contract. Resolve that policy and confirm the single staging writer before assigning a source change.",
+      "proposed_boundary_if_reopened": "Inspect/test only _publish_robot_package and Robot publication tests/workflow. First establish the intended Windows access-control principal set; then run the real native Windows ACL test and POSIX regression. No broad importer rewrite, no change to archive path rules, and no claim of full #151 acceptance.",
+      "canonical_source": "docs/skills/repository-operations.md, Robot source connection and portable archive identity"
+    },
+    {
+      "issue": 208,
+      "candidate_slice": "Residual packaged Work Items UI error/crash/accessibility criteria.",
+      "already_accounted": "PR304 exact-head native receipt and independent review accept Linux/Windows/macOS frozen/Go-wrapper consumer, browser, persistence and stale-reservation retry subgate; actual process-crash recovery is not proven.",
+      "why_not_admitted": "The remaining #208 lane is owned by root integration; do not duplicate the accepted three-OS artifact/consumer subgate. Keep denied, missing-support and generic-500 UI, actual process-crash recovery and remaining accessibility/non-Chromium cells open."
+    },
+    {
+      "issue": 152,
+      "candidate_slice": "Assembled API-key route/mount inventory and zero-side-effect authorization assertions.",
+      "already_accounted": "Representative protected-route and artifact containment tests exist; exact full inventory remains an unaccepted criterion.",
+      "why_not_admitted": "LunaCore currently owns the auth route-census lane. #148/#151 ingestion, #153 Origin policy, and #86 output ownership remain separate boundaries; do not duplicate or treat related work as blanket prerequisites."
+    },
+    {
+      "issues": [
+        99,
+        100,
+        126,
+        127
+      ],
+      "candidate_slice": "Canvas/MCP follow-ups after current implementation/browser owners finish.",
+      "already_accounted": "#99-A Runtime/resource/system-Chromium bridge, #100-A public authoring and #100-B one-fixture roundtrip are scoped accepted; PR301 is merged. #126 Linux installed-wheel offline project creation and mounted protocol proof are already present. PR282 owns the current native browser lane.",
+      "why_not_admitted": "#127 still has named #83/#129 authorized artifact criteria and fresh dependency/type/browser gates; #99 pinned browser is already owned, generalized #100 schema remains open, and actual ChatGPT host remains NOT RUN. Do not repeat accepted slices or claim host support."
+    },
+    {
+      "issues": [
+        212,
+        214
+      ],
+      "candidate_slice": "Runtime history UI and public tunnel/provider lifecycle acceptance.",
+      "already_accounted": "#212 already has paginated summary/detail source and route tests; PR216 is closed and PR221 remains the root-owned combined Runtime stack. #214 PR225/236 and PR261 cover passive lifecycle/owned process/authenticated legacy edge/loopback TLS subgates.",
+      "why_not_admitted": "#212 exact packaged/released browser evidence overlaps root integration and active auth/browser gates. #214 public provider identity/auth/TLS and standalone lifecycle remain unproven; actual provider configuration/network access is an unresolved external input. #152/#153 are related policy areas, not substituted criteria or inferred typed dependencies."
+    },
+    {
+      "issues": [
+        83,
+        84,
+        86,
+        90,
+        129,
+        131,
+        132,
+        143,
+        145,
+        196
+      ],
+      "candidate_slice": "Execution/adapters/workers, Work Item semantics, data plane and Control Room.",
+      "dependencies": "The graph’s typed execution edges remain specific: #143 depends on #134; #131 on #125/#129/#130; #132 on #83/#90/#129; #145 and #196 have their own named gates. Parent epics are not prerequisites.",
+      "why_not_admitted": "#134/#129 and the database/output/provider checkpoints are active or unaccepted; PR299/300 authorized private-output service acceptance remains pending. No source slice can bypass those exact criterion edges."
+    }
+  ],
+  "dedup_and_stale_projections": {
+    "removed_prior_duplicate": "#208 completed PR304 three-platform artifact/consumer subgate is not proposed again; only residual acceptance remains.",
+    "retired_old_next_action_examples": [
+      "#194 tests now exist in actions/tests/actions_core_tests/test_command_dispatch_and_variable_scope.py",
+      "#195 current source imports ActionContext from public actions and JSONValue from actions.server._protocols; old Core-private import claim is stale, though neither issue is thereby accepted."
+    ],
+    "historical_stage_counts_not_recomputed": true,
+    "original_contracts_and_typed_edges_unchanged": true
+  },
+  "canonical_documentation_delta_proposal": {
+    "file": "docs/skills/repository-operations.md",
+    "anchor": "Execution graph projection and live issue-state refresh guidance, immediately after the all-pages issue-refresh paragraph.",
+    "exact_delta": "Refresh ownership independently from issue state and graph projection. Record an observed_at_utc and scope for the active owner inventory; stale current_active_workers or resume_checkpoint data does not prove a worker is still active, that a slice is unowned, or that it may be dispatched. If current ownership cannot be verified, mark it unknown. Join current issue bodies, typed execution/slice gates, scoped receipts and owner evidence before declaring a successor ready; keep parent coordination and related-product edges nonblocking unless an explicit typed gate says otherwise.",
+    "evidence": "At the evidence head, graph issue-state refresh was explicitly stale at 19:58Z, the current overlay was 20:23:55Z, and the embedded resume checkpoint was from 2026-10-09. A live all-issue read at 21:20:40Z matched all 54 retained IDs; current owner lanes came from a newer explicit parent directive. No graph mutation was needed to distinguish these layers.",
+    "stale_ambiguity_removed": "Prevents historical owner/resume pointers from being treated as current availability or authorization to start a lane.",
+    "implementation": "Proposal only; no canonical guide edit in this read-only lane."
+  },
+  "upstream_disposition": "None. No new confirmed external defect; no external issue/report or remote write."
+}

@@ -1,0 +1,135 @@
+{
+  "current_pull_requests": [
+    {
+      "checks": 14,
+      "head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "observed_check_statuses": [
+        "QUEUED"
+      ],
+      "pr": 305,
+      "state": "OPEN"
+    },
+    {
+      "checks": 18,
+      "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "observed_check_statuses": [
+        "QUEUED"
+      ],
+      "pr": 306,
+      "state": "OPEN"
+    },
+    {
+      "checks": 22,
+      "completed_conclusions": [
+        "SUCCESS"
+      ],
+      "head": "729594fc04758502ec2ed985adb428e2863a3bb1",
+      "observed_check_statuses": [
+        "COMPLETED",
+        "IN_PROGRESS",
+        "QUEUED"
+      ],
+      "pr": 307,
+      "state": "OPEN"
+    },
+    {
+      "checks": 18,
+      "completed_conclusions": [
+        "SUCCESS"
+      ],
+      "head": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+      "observed_check_statuses": [
+        "COMPLETED",
+        "IN_PROGRESS",
+        "QUEUED"
+      ],
+      "pr": 308,
+      "state": "OPEN"
+    },
+    {
+      "checks": 18,
+      "head": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+      "observed_check_statuses": [
+        "QUEUED"
+      ],
+      "pr": 309,
+      "source_equivalent_reviewed_commit": "746030cb2ad8c4d116a45000a18d75ca15433182",
+      "state": "OPEN",
+      "tree": "9977652bc1e8d21a6e3b4f906031a68ab11b4c40"
+    },
+    {
+      "additional_local_verification": "24 canonical RCC checks passed; union review pending; pushed new head",
+      "checks": 18,
+      "head": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+      "observed_check_statuses": [
+        "QUEUED"
+      ],
+      "pr": 302,
+      "state": "OPEN",
+      "tree": "bbc33916748d02e24fe37ce843594a1d8f67067d"
+    },
+    {
+      "additional_status": "pushed normal merge; draft remains blocked",
+      "checks": 19,
+      "head": "66cc132367be02b05bc08c981b900a68d156cd52",
+      "integration_scope": "Accepted PR301 serialization/diagnostic work and PR304 runtime-floor evidence are present; original template source is unchanged.",
+      "observed_check_statuses": [
+        "QUEUED"
+      ],
+      "pr": 282,
+      "state": "OPEN",
+      "tree": "ca8685372e67ce07b55f9a830a60134582107873"
+    }
+  ],
+  "full54_readiness": {
+    "contract_preservation": "54 retained contracts; 53 open and 1 accepted; 16 archives unchanged per prior reconciliation",
+    "observed_at_utc": "2026-10-10T21:20:40Z",
+    "source_receipt_sha256": "1f315b4df0d6dda68df135b253308f90ed3362e6bc41a269ab278f9da14c20eb"
+  },
+  "linux_pr304_issue153_case": {
+    "frozen_acceptance_index_sha256": "cd37866c503a2c83bb7845d03ab772f1ba06840b033465332039d30a3fa259ec",
+    "go_wrapper_acceptance_index_sha256": "41a41228d225518aedb0c60c4108e474983823d61de8f0cacb00d7f9cbdf99a3",
+    "independent_frozen_review_sha256": "69f56affe49999230d828ebe14df6f55e298381a4571a470580bae42ed99fbdc",
+    "independent_go_review_sha256": "4ed5074a286198993a615b558b77b83282e527d26a87714e286f4a96c2c99176",
+    "limits": [
+      "no actual ChatGPT",
+      "not all three operating systems for #153",
+      "not full #153 or #208 acceptance",
+      "no staged binaries, caches, or runtime databases included"
+    ],
+    "result": "same selected Linux Origin/ambient-session browser test passed once against frozen runtime and once through Go wrapper",
+    "source_head": "73605934c1c948895410a5abaed6c225a396e038",
+    "source_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "staging_contract_sha256": "d8d738542b927dbb78319eb22dfed5bf0140486421086c2ed5f728476553dcd5",
+    "staging_readiness_sha256": "b1ccafe4aa766bb54b9830b1466816a2b54eaf9a1000a29aa4231c24fbeb8fed",
+    "synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0"
+  },
+  "observed_at_utc": "2026-10-10T21:28:03Z",
+  "post304_union_review": {
+    "sha256": "6982169bccf4e6a754615e932b4c05188f251adfa6214cce5d144afe8feab727",
+    "status": "GO source-publication readiness; new-head CI still required"
+  },
+  "pr304": {
+    "final_premerge_checks": 23,
+    "final_premerge_gates_sha256": "29f3020b3337b37d93adfeb5333b7532e4d4f08ee4933427e3941499bba98ed1",
+    "issue_scope": "three-OS native Work Items 0.4.4 subgate accepted; not full #208 or #153 completion",
+    "merged_commit": "19380993febaa71238eaee3026b5c808773283ff",
+    "merged_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "tested_source_head": "73605934c1c948895410a5abaed6c225a396e038",
+    "tested_source_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "tested_synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0"
+  },
+  "rcc_followup": {
+    "attempt_id": "attempt-20261010T2121Z",
+    "classification": "actual bounded provider-present command failed before writing an exec receipt; provider-omitted case NOT RUN; no production/upstream defect claim",
+    "followup_status": "Sol source/contract diagnosis active; preserve original failure receipt unchanged and add correction separately when reviewed",
+    "independent_runner_readiness_review_sha256": "a271667d09dab0e1108d664985ecdd01b3fec39280423054c488abe16b659b6a",
+    "index_sha256": "ecf94402e423b0b668cfb315fff8e6c79d2f32237e63c5a2e3cfdf7b397cb02c",
+    "interpretive_correction": "Current source semantics treat the explicit HTTP provider as the implicit trust carrier. Each new lease verifies the carrier before warm reuse; the probe supplied rejected content and returned 503. Missing verified-content can be provisional verification intent, while retained ready state remains intact. The harness therefore did not establish independent trust-carrier failure or content corruption.",
+    "post_run_readback_sha256": "2703f4e83c7840fe639b2426e8f7938bf46db3d07f8036b8ab15955f905c6b6c",
+    "receipt_sha256": "60351ad071d07c28b89d7e5eb0feab6fdd7a29b9da61bf4046b471721f09a64b",
+    "runner_sha256": "29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c"
+  },
+  "schema": "actions-wave6-current-status/v1",
+  "upstream_disposition": "none; no confirmed upstream defect is reported"
+}

@@ -1,0 +1,183 @@
+{
+  "case": {
+    "name": "with_provider",
+    "process_duration_ms": 510,
+    "process_returncode": 1,
+    "provider_argument_included": true,
+    "provider_omitted": "NOT RUN because first case failed",
+    "provider_probe_events": [
+      {
+        "method": "GET",
+        "sequence": 2,
+        "status": 503
+      }
+    ],
+    "provider_probe_total": 1,
+    "receipt_created": false,
+    "stderr_failure": "RCC v18.19.3 reported artifact trust attachment verification failed"
+  },
+  "classification": "FAILED_BOUNDED_PROVIDER_PRESENT_LOCAL_READY_CASE; provider-omitted case NOT RUN",
+  "cleanup": {
+    "independent_readback": {
+      "checks": [
+        {
+          "command": [
+            "ps",
+            "-p",
+            "44553",
+            "-o",
+            "pid="
+          ],
+          "exit_code": 1,
+          "meaning": "exact owned RCC child PID check",
+          "pid_absent": true,
+          "stderr_empty": true
+        },
+        {
+          "command": [
+            "pgrep",
+            "-x",
+            "rcc"
+          ],
+          "exit_code": 1,
+          "meaning": "RCC executable-name presence check only",
+          "no_rcc_comm_match": true,
+          "stderr_empty": true
+        },
+        {
+          "command": [
+            "ss",
+            "-ltnpH",
+            "sport",
+            "=",
+            "38593"
+          ],
+          "exit_code": 0,
+          "listener_lines": 0,
+          "meaning": "loopback probe port listener check",
+          "stderr_empty": true
+        }
+      ],
+      "scope_limit": "Runner-reported owned process-group absence and probe-thread/socket cleanup are primary; independent checks cover the recorded RCC PID and listener. No claim about unrelated host processes."
+    },
+    "runner": {
+      "child_reaped": true,
+      "child_returncode": 1,
+      "cleanup_errors": [],
+      "probe_shutdown_thread_stopped": true,
+      "probe_socket_closed": true,
+      "probe_thread_stopped": true,
+      "probe_total_requests": 2,
+      "process_group_gone": true
+    }
+  },
+  "execution": {
+    "attempt_dir": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/followup-exec-attempt-20261010T2121Z",
+    "duration_ms": 698,
+    "independent_runner_review_sha256": "a271667d09dab0e1108d664985ecdd01b3fec39280423054c488abe16b659b6a",
+    "launch_context_sha256": "ebac78c1b9cbc2466d1ec366bc67c6959f31e68b9f9ce953372afaecd8119597",
+    "manifest_sha256": "691b957d17faf4c53f96c16b04944a0a360d57850309111097bee5f826fca460",
+    "proposal_sha256": "b5b856bbdb83f9dab68c0aaa749abc2e00d3756e1c16430a2ab8e43ff242a0d9",
+    "runner_receipt_sha256": "60351ad071d07c28b89d7e5eb0feab6fdd7a29b9da61bf4046b471721f09a64b",
+    "runner_sha256": "29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c",
+    "runner_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner_stdout_sha256": "b5be9737892a3bd62a2e40518dbef9981455800328aa307ab8a1b82a1a467be9"
+  },
+  "full_issue_134_acceptance_claimed": false,
+  "limitations": [
+    "This is one selected-provider failure on retained Python 3.12.15/actions-core 1.0.2 fixture.",
+    "The paired provider-omitted condition did not run.",
+    "No current Core 1.0.3, full Runtime startup, broader #134, or upstream defect conclusion is established.",
+    "The RCC attempt changed B verification state; treat B as invalidated for this gate and do not rerun against it."
+  ],
+  "post_state_interpretation": {
+    "metadata_objects": [
+      {
+        "matches_manifest": true,
+        "name": "specification",
+        "sha256": "d8c7ad5e4aa8b82a36ae0ce35dafd8d2949183e22a8316e46abb67a1d3c5d95d",
+        "size": 1112
+      },
+      {
+        "matches_manifest": true,
+        "name": "legacyBlueprint",
+        "sha256": "7acb91fd13d10fb88a00813df73d79bd1c8f902ccd4bedc33858c188272964aa",
+        "size": 85
+      },
+      {
+        "matches_manifest": true,
+        "name": "catalog",
+        "sha256": "8934eadb8ef0081b951f81f65bd661c8649fbd0b136a3f5b8a4f365bff2ded61",
+        "size": 692107
+      },
+      {
+        "matches_manifest": true,
+        "name": "objectIndex",
+        "sha256": "1f8b3d07b988905b9a4c49c320955c31c29e3b763cb8cd7f5dc7738f6ea77e8b",
+        "size": 1469706
+      }
+    ],
+    "no_restoration_or_retry_performed": true,
+    "python_target_sha256": "793024e6cfb0b81cbf615186396daa54604f87dccaee99aceb87962ba62fa53e",
+    "ready_manifest_references": "ready and manifest hashes remain the same; references remain live for D with protected count unchanged",
+    "verification": "changed from valid true/code valid to valid false/code invalid for the same digest; new bytes hash 9980a5e95319db43878c3627f893195055a782ed49696ec4127c9518579ce965",
+    "verified_content": "missing; pre-run file hash was 8d4e32aaa51a8588cce1e7531da661492c7d8fe6d17a588ffa85955f137f2c28"
+  },
+  "post_state_readback": {
+    "manifest.json": {
+      "exists": true,
+      "nlink": 1,
+      "regular": true,
+      "sha256": "7d65e2b993743ff775230b72708e6c3ba73c4af86faa104393ed690875e403ee",
+      "size": 2175,
+      "uid": 1000
+    },
+    "ready.json": {
+      "exists": true,
+      "nlink": 1,
+      "regular": true,
+      "sha256": "ea6c954caab0bf73a69d05e07396441e680f68bdd0fc48efda85aba24e482675",
+      "size": 432,
+      "uid": 1000
+    },
+    "references.json": {
+      "exists": true,
+      "manifest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "nlink": 1,
+      "protected_count": 5459,
+      "regular": true,
+      "sha256": "41955394e7219761308ca734f38a2c980b7c41418f687bcb7a8dbdd35b7385da",
+      "size": 404116,
+      "state": "live",
+      "uid": 1000
+    },
+    "verification.json": {
+      "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "code": "invalid",
+      "exists": true,
+      "nlink": 1,
+      "regular": true,
+      "sha256": "9980a5e95319db43878c3627f893195055a782ed49696ec4127c9518579ce965",
+      "size": 510,
+      "uid": 1000,
+      "valid": false,
+      "verifiedAt": "2026-10-10T21:22:11Z"
+    },
+    "verified-content.json": {
+      "exists": false
+    }
+  },
+  "pre_state": {
+    "manifest_sha256": "7d65e2b993743ff775230b72708e6c3ba73c4af86faa104393ed690875e403ee",
+    "materialization_id": "a2484ce_5a1fac3_e58fc530",
+    "python_target_sha256": "793024e6cfb0b81cbf615186396daa54604f87dccaee99aceb87962ba62fa53e",
+    "ready_sha256": "ea6c954caab0bf73a69d05e07396441e680f68bdd0fc48efda85aba24e482675",
+    "references_protected_count": 5459,
+    "references_sha256": "41955394e7219761308ca734f38a2c980b7c41418f687bcb7a8dbdd35b7385da",
+    "references_state": "live",
+    "verification_sha256": "04b03fb319022ad00e260fa46ce1be1c61b288aea26d88e5ca3faa7e436fb808",
+    "verified_content_sha256": "8d4e32aaa51a8588cce1e7531da661492c7d8fe6d17a588ffa85955f137f2c28"
+  },
+  "production_or_upstream_defect_claimed": false,
+  "schema_version": 1
+}

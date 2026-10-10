@@ -1,0 +1,4 @@
+*.log -text -diff
+*.xml -text -diff
+*.py -diff
+*.sh -diff

@@ -1,0 +1,102 @@
+{
+  "bindings": {
+    "frozen-launch-revision-03/contract.json": "09d7a362d69c599ed2ebd6f279b9207b6bcdde2e7d65e993d9382db71cedb42d",
+    "frozen-launch-revision-03/launcher.sh": "afd00d62e1f15bc3b14e77a6cd3aca75512d8ef9842d82df16ddaa3fb0491c88",
+    "frozen-launch-revision-03/plugin.py": "4842113d1531f5e8d776d42d68aeee264dc9b3678ae388acff841778e5255cb0",
+    "frozen-launch-revision-03/runner.py": "569b5d92c6c84660ecd3cb1d6e80a969eee34667cc8f3d2a1b7ccab887d78f7b",
+    "frozen-launch-revision-03/snapshot-manifest.json": "065c0d716d7cd8f9bb2dbb9dc6b9434e4c349a26cdfb7ab55c1dff73d912d07b",
+    "runs/linux-frozen-corrected-01/acceptance-receipt.json": "fe8d0fbe31f53d34c845f16f74e7ae23344f06201c1326bfa340871da4726328",
+    "runs/linux-frozen-corrected-01/pytest-stderr.log": "bd5e7c2fcf4eca89a1a9b74e151fc66a96f3494977710fc8747b208a1aaa0f22",
+    "runs/linux-frozen-corrected-01/pytest-stdout.log": "88103cb8baf814396137f9fdb373b3a8af4bf833d4d3f2407b6ee5e113327a70",
+    "stage_linux_native_package.py": "4298ce4c8dd2173c3fa31f185659109cc34b2d1500fc42f2140a2b6cb1a9ed3f",
+    "staged/linux-frozen-38081495661-attempt01/staging-receipt.json": "a07ed2cadba98c2ebb0eb4c8032a0343c0306af9ca94b1c0bda971e2e4b819f1",
+    "staging/staging-execution-contract.json": "d8d738542b927dbb78319eb22dfed5bf0140486421086c2ed5f728476553dcd5"
+  },
+  "commands": [
+    "stdlib stream SHA256 provenance ZIP/nested TAR; tar/ZIP path/type/link and manifest/inventory readback, no extraction",
+    "stdlib lstat/SHA256 every staged inventory item; independent packaged tree/files digest reconstruction",
+    "git log -1 --format=%H %T and git status --porcelain=v1 --untracked-files=all at exact source worktree",
+    "stdlib byte compare prepared Runtime/Core pyproject+locks/toolkit and frontend package+lock",
+    "bash -n frozen launcher; stdlib ast.parse runner/plugin/stager; read exact source helper/test/Go asset embedding and retained failure excerpt"
+  ],
+  "distribution_readback": {
+    "actual_stage_path_set_equals_inventory": true,
+    "all_archive_paths_and_link_targets_contained": true,
+    "all_staged_links_resolve_to_in_tree_regular_files_with_declared_hash": true,
+    "all_staged_regular_content_mode_owner_and_nlink_one_checked": true,
+    "archive_inventory_equals_stage_inventory": true,
+    "archive_members": 1193,
+    "directories": 122,
+    "frozen_executable_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+    "go_wrapper_boundary": "Source embeds assets/assets.zip and expands full PyInstaller app under private HOME; standalone Go wrapper does not need adjacent _internal. No Go-wrapper execution approved by this frozen readiness review.",
+    "hardlinks": 0,
+    "independently_recomputed_packaged_files_sha256": "a8f53386f2a0572fb306b293998a33641a5474700d53708fa666133ef7c90c6d",
+    "independently_recomputed_packaged_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+    "libpython_compat_link": "libpython3.12.so.1.0",
+    "libpython_sha256": "49e94230e2ec954dc86398bb8b099275793843ec41d1e6c38b65764ebb1ccf90",
+    "manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+    "regular_files": 1052,
+    "stage_entries": 1190,
+    "stage_private_root_mode": "0o700",
+    "symlinks": 16,
+    "tar_sha256": "23e3b8145b4cc366ef43796c52d961cdeb915e350e6550a88072bdd12536ad6c",
+    "zip_sha256": "abfd2159ed3c3ff01801e42ad8cdffbf45f9d8ddcfaa189c6e6ebdfd62efd3ba"
+  },
+  "documentation_proposal": "For native browser acceptance, stage the complete hash-bound PyInstaller one-folder distribution with its adjacent _internal files and confined compatibility links; a matching executable hash alone is insufficient. Treat missing adjacent runtime libraries as staging failures. The Go wrapper embeds and expands its complete assets under the task-private home and has a separate standalone launch contract. Record exact package inventory/tree hash, prepared runner interpreter/prefix/module origins, selected Runtime argv and actual Playwright launch path/hash, together with owned cleanup results. Keep readiness, actual one-test browser results and full release/production acceptance separate.",
+  "limitations": [
+    "Read-only staging/runner review did not execute binaries, services, package tests, or browser.",
+    "Archive provenance binds Git HEAD and exact package bytes; it is not a clean-source attestation or signing/release acceptance.",
+    "Existing helper captures process output to temporary files and later reads it; this review establishes configured time/process cleanup bounds, not a universal byte-output quota.",
+    "Runner child environment is local-fixture focused; this test exercises no package installation or external artifact provider and proves no external-network readiness.",
+    "No actual ChatGPT, production authorization/deployment, CSP, artifact resolution, Windows/macOS, or blanket issue153 acceptance.",
+    "Observed PID zombies or unknown census results must remain explicit; no complete-reaping claim from a readiness check."
+  ],
+  "next_run_conditions": [
+    "Root owns run authorization/slot; invoke through canonical pinned RCC task --no-build, with outer300s timeout.",
+    "Pass --binary exactly staging contract frozen_executable and use fresh runs/linux-frozen-staged-01; old launch-contract preflight example still names original isolated executable.",
+    "Keep frozen runner/launcher/plugin bytes and referenced live capture plugin unchanged during the run.",
+    "Stop for exact result/hash/Runtime selected argv/browser launch/cleanup independent readback before any Go-wrapper run."
+  ],
+  "prior_failure": {
+    "classification": "selected test failed during packaged startup; executable exited255 with missing adjacent _internal/libpython3.12.so.1.0; no Runtime ready/browser behavior proof",
+    "corrected_distribution_supplies_missing_file": true,
+    "receipt_sha256": "fe8d0fbe31f53d34c845f16f74e7ae23344f06201c1326bfa340871da4726328"
+  },
+  "reviewed_at_utc": "2026-10-10T21:17:17.875254+00:00",
+  "runner_readback": {
+    "actual_browser_binding_gate": "DEBUG=pw:browser launched path hash must equal e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f with at least one launched PID",
+    "existing_owned_helper": "Linux separate subreaper supervises pytest and nested browser command, reaps owned descendants and fails uncertain cleanup",
+    "frontend_lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+    "frontend_package_and_lock_byte_equal_to_node_modules_source": true,
+    "frozen_and_live_bytes_equal": true,
+    "launcher": "clears active Python/Conda/RCC robot path markers and execs exact prepared package Python",
+    "launcher_sha256": "afd00d62e1f15bc3b14e77a6cd3aca75512d8ef9842d82df16ddaa3fb0491c88",
+    "lexical_executable_prefix_psutil_origin_gates": true,
+    "package_python": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "plugin_sha256": "4842113d1531f5e8d776d42d68aeee264dc9b3678ae388acff841778e5255cb0",
+    "prepared_runtime_core_pyproject_locks_and_toolkit_byte_equal": true,
+    "prior_actual_corrected_runner_identity_confirms_package_python_prefix_psutil": true,
+    "process_deadlines": {
+      "browser_nested_seconds": 180,
+      "cleanup_grace_seconds": 6,
+      "helper_parent_seconds": 234,
+      "outer_RCC_seconds": 300,
+      "pytest_owned_child_seconds": 205
+    },
+    "runner_sha256": "569b5d92c6c84660ecd3cb1d6e80a969eee34667cc8f3d2a1b7ccab887d78f7b",
+    "static_checks": "launcher bash -n and runner/plugin/stager AST parse pass",
+    "test_nodeid": "tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+    "unchanged_test_and_capture_wrappers": "Capture wrappers call original server start/browser harness and return original results; test assertions unchanged"
+  },
+  "schema_version": 1,
+  "source": {
+    "artifact_source_synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "attempt": 1,
+    "clean": true,
+    "head": "73605934c1c948895410a5abaed6c225a396e038",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "workflow_run_id": "38081495661"
+  },
+  "status": "GO: complete frozen-distribution and corrected-runner readiness only; browser acceptance NOT RUN by reviewer",
+  "upstream_disposition": "none"
+}

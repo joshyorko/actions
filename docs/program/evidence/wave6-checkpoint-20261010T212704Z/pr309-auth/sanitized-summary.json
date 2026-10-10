@@ -1,0 +1,27 @@
+{
+  "canonical_rcc_log_sha256": "6abd888152bbf2b10a6d3c04b3552763e72c1883954ad2319b438e85bd9b8c41",
+  "canonical_rcc_receipt_sha256": "36f3f3f094295baa284a47a67da7739c331cceb9adaa109f09a04919a45e82f9",
+  "correction_disclosure": "The correction is referenced by hash only; private route and authorization-policy wording is withheld from this checkpoint.",
+  "correction_sha256": "6faf55e9457ad257f7279b0a7224bb236b82db59b0a73d3a7634a3f792ddb5b8",
+  "historical_original_receipt_sha256": "dffd19bdbcddeac5bbd770cbc1f22ba1bea9cd3481e735626bf9eac83255ac50",
+  "independent_review_sha256": "6c353afb6a6bbe9bc3ff25fa647c3dc2c1927101974638cc2b01177e7a71a046",
+  "limits": [
+    "No service or actual ChatGPT acceptance",
+    "No whole #152 completion",
+    "Private route and authorization-policy inventory is intentionally omitted from this public checkpoint"
+  ],
+  "pr": 309,
+  "result": "4 passed, 1 integration deselected; Ruff check and format passed",
+  "runner_history": {
+    "disclosure": "Original direct prepared-environment runner bytes were overwritten before RCC audit; not reconstructed or relabeled. The retained later runner is diagnostic, not the original or canonical RCC runner.",
+    "later_diagnostic_runner_sha256": "3701005971f6db8137b08afb0ef966bd22ea7f9b35814beee2b45b62782887de",
+    "original_receipt_runner_sha256": "6b968313ffcca08840dcdf2b609b6a0d05613438dd0e9516d41c46be0cc9200d",
+    "original_runner_bytes_available": false
+  },
+  "schema": "actions-wave6-auth-route-census-summary/v1",
+  "scope": "registration-level test and documentation only; no request-level authorization or issue-completion claim",
+  "source_equivalent_reviewed_commit": "746030cb2ad8c4d116a45000a18d75ca15433182",
+  "source_head": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+  "source_tree": "9977652bc1e8d21a6e3b4f906031a68ab11b4c40",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,140 @@
+stderr: [2026-10-10 21:19:24] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/home/.actions/bin/action-server/internal/1.0.3/action-server start --actions-sync=false --port=0 --datadir=/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server --db-file=browser-origin.db -v --skip-lint --min-processes=0 --max-processes=20 --api-key=<redacted> --address=127.0.0.1 --cors-allow-origin=http://127.0.0.1:39535
+stderr: [2026-10-10 21:19:24] [actions.server._cli_impl: DEBUG] CWD: /workspace/work/actions-mk3-browser-security/action_server
+stderr: [2026-10-10 21:19:24] [actions.server._cli_impl: INFO]
+stderr:   ⚡️ Starting Action Server... v1.0.3
+stderr: 
+stderr: [2026-10-10 21:19:24] [actions.server._settings: INFO] Using user-specified datadir: /workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server
+stderr: [2026-10-10 21:19:24] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server/server_log.txt.
+stderr: [2026-10-10 21:19:24] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server/browser-origin.db
+stderr: [2026-10-10 21:19:24] [actions.server._cli_impl: DEBUG] Synchronize actions: False
+stderr: [2026-10-10 21:19:24] [actions.server._mode: INFO] Operating mode: standard
+stderr: [2026-10-10 21:19:24] [actions.server._server: DEBUG] Starting server. Settings:
+stderr:     artifacts_dir = PosixPath('/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server/artifacts')
+stderr:     datadir = PosixPath('/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server')
+stderr:     artifact_storage_backend = 'local'
+stderr:     artifact_storage_root = PosixPath('/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server/artifacts')
+stderr:     title = 'Actions Runtime'
+stderr:     address = '127.0.0.1'
+stderr:     port = 0
+stderr:     verbose = True
+stderr:     db_file = 'browser-origin.db'
+stderr:     database_url = None
+stderr:     expose_provider = 'auto'
+stderr:     server_url = 'http://127.0.0.1:0'
+stderr:     cors_allow_origins = ('http://127.0.0.1:39535',)
+stderr:     min_processes = 0
+stderr:     max_processes = 20
+stderr:     reuse_processes = False
+stderr:     full_openapi_spec = False
+stderr:     use_https = False
+stderr:     ssl_self_signed = False
+stderr:     ssl_keyfile = None
+stderr:     ssl_certfile = None
+stderr:     oauth2_settings = '/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/actions-home/action-server/oauth2_config.yaml'
+stderr:     base_url = None
+stderr:     enable_scheduler = True
+stderr:     scheduler_check_interval = 10.0
+stderr:     scheduler_max_concurrent_global = 10
+stderr:     enable_triggers = True
+stderr:     trigger_webhook_base_url = None
+stderr:     smtp_host = None
+stderr:     smtp_port = 587
+stderr:     smtp_user = None
+stderr:     smtp_password = None
+stderr:     smtp_from = None
+stderr:     smtp_use_tls = True
+stderr:     redis_url = None
+stderr:     redis_password = None
+stderr:     worker_concurrency = 4
+stderr:     worker_poll_timeout = 30
+stderr: [2026-10-10 21:19:25] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 21:19:25] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 21:19:25] [actions.server._actions_process_pool: DEBUG] ACTIONS_RUNTIME_POST_RUN_CMD not set (post run will be skipped).
+stderr: [2026-10-10 21:19:25] [asyncio: DEBUG] Using selector: EpollSelector
+stderr: [2026-10-10 21:19:25] [uvicorn.error: INFO] Started server process [43741]
+stderr: [2026-10-10 21:19:25] [uvicorn.error: INFO] Waiting for application startup.
+stderr: [2026-10-10 21:19:25] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager started
+stderr: [2026-10-10 21:19:25] [actions.server._server: DEBUG] Not exposing action server...
+stderr: [2026-10-10 21:19:25] [actions.server._server: INFO] Initializing scheduler engine...
+stderr: [2026-10-10 21:19:25] [actions.server._scheduler: INFO] Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+stderr: [2026-10-10 21:19:25] [actions.server._server: INFO]   ⏰ Scheduler started (check interval: 10.0s)
+stderr: [2026-10-10 21:19:25] [uvicorn.error: INFO] Application startup complete.
+stderr: [2026-10-10 21:19:25] [actions.server._server: INFO]
+stderr:   ⚡️ Local MCP endpoint: http://127.0.0.1:33765/mcp
+stderr: [2026-10-10 21:19:25] [actions.server._server: INFO]
+stderr:   ⚡️ Local Action Server: http://127.0.0.1:33765
+stderr: [2026-10-10 21:19:25] [actions.server._server: INFO]      Public access: use --expose to expose (OpenAPI only)
+stderr: [2026-10-10 21:19:25] [actions.server._server: INFO] API key authentication enabled. Sign in with your configured key.
+stderr: [2026-10-10 21:19:26] [uvicorn.access: INFO] 127.0.0.1:50188 - "GET / HTTP/1.1" 200
+stderr: [2026-10-10 21:19:26] [uvicorn.access: INFO] 127.0.0.1:50188 - "GET /browser-session HTTP/1.1" 200
+stderr: [2026-10-10 21:19:26] [uvicorn.access: INFO] 127.0.0.1:50190 - "GET /api/runs HTTP/1.1" 403
+stderr: [2026-10-10 21:19:26] [uvicorn.access: INFO] 127.0.0.1:50190 - "GET /browser-session HTTP/1.1" 200
+stderr: [2026-10-10 21:19:26] [uvicorn.access: INFO] 127.0.0.1:50190 - "GET /work-items HTTP/1.1" 200
+stderr: [2026-10-10 21:19:26] [uvicorn.access: INFO] 127.0.0.1:50190 - "GET /browser-session HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50190 - "POST /browser-session HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50190 - "GET /browser-session HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] = connection is CONNECTING
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < GET /api/ws/summary HTTP/1.1
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < host: 127.0.0.1:33765
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < connection: Upgrade
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < pragma: no-cache
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < cache-control: no-cache
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < upgrade: websocket
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < origin: http://127.0.0.1:33765
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < sec-websocket-version: 13
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < accept-encoding: gzip, deflate, br, zstd
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < cookie: <redacted>
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < sec-websocket-key: gGFWU0gQRaf2/zB5EBsoRw==
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < sec-websocket-extensions: permessage-deflate; client_max_window_bits
+stderr: [2026-10-10 21:19:27] [uvicorn.error: INFO] 127.0.0.1:50198 - "WebSocket /api/ws/summary" [accepted]
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > HTTP/1.1 101 Switching Protocols
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > Upgrade: websocket
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > Connection: Upgrade
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > Sec-WebSocket-Accept: njvG2pl7aD7IPogoQvIJikNIxGk=
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > Sec-WebSocket-Extensions: permessage-deflate
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > date: Sat, 10 Oct 2026 21:19:26 GMT
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > server: uvicorn
+stderr: [2026-10-10 21:19:27] [uvicorn.error: INFO] connection open
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] = connection is OPEN
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50190 - "GET /api/work-items?limit=100 HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50188 - "GET /api/work-items/stats HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < TEXT '{"event":"start_listen_run_events"}' [35 bytes]
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > TEXT '{"event":"runs_collected","data":[]}' [36 bytes]
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50220 - "GET /config HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50204 - "GET /api/actionPackages HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50212 - "GET /api/runs/summary?limit=200 HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50224 - "GET /api/runs HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50224 - "GET /api/runs HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50224 - "GET /browser-session HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] < CLOSE 1001 (going away) [2 bytes]
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] = connection is CLOSING
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] > CLOSE 1001 (going away) [2 bytes]
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] x half-closing TCP connection
+stderr: [2026-10-10 21:19:27] [uvicorn.error: DEBUG] = connection is CLOSED
+stderr: [2026-10-10 21:19:27] [actions.server._server_websockets: DEBUG] Client disconnected from websocket.
+stderr: [2026-10-10 21:19:27] [uvicorn.error: INFO] connection closed
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "GET /api/__origin_acceptance_backend__ HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "OPTIONS /api/__origin_acceptance_backend__ HTTP/1.1" 200
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "POST /api/__origin_acceptance_backend__ HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "GET /api/__origin_acceptance_backend__ HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "POST /api/__origin_acceptance_backend__ HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "OPTIONS /api/__origin_acceptance_backend__ HTTP/1.1" 400
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "GET /api/__origin_acceptance_backend__ HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "POST /api/__origin_acceptance_backend__ HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "OPTIONS /api/__origin_acceptance_backend__ HTTP/1.1" 400
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "GET /api/__origin_acceptance_backend__ HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "POST /api/__origin_acceptance_backend__ HTTP/1.1" 403
+stderr: [2026-10-10 21:19:27] [uvicorn.access: INFO] 127.0.0.1:50228 - "OPTIONS /api/__origin_acceptance_backend__ HTTP/1.1" 400
+TEST PROCESS: 2026-10-10 21:19:27,573 - actions.server._common.process - DEBUG - Killing process and subprocesses of: 43720
+stderr: [2026-10-10 21:19:27] [uvicorn.error: INFO] Shutting down
+stderr: [2026-10-10 21:19:27] [uvicorn.error: INFO] Waiting for application shutdown.
+stderr: [2026-10-10 21:19:27] [actions.server._server: INFO] Stopping scheduler...
+stderr: [2026-10-10 21:19:27] [actions.server._scheduler: INFO] Scheduler engine stopped
+stderr: [2026-10-10 21:19:27] [actions.server._server: INFO] Stopping action server...
+stderr: [2026-10-10 21:19:27] [actions.server._server: INFO] Killing sub-process when exiting action server: rcc-18.19.3 (pid: 43753)
+stderr: [2026-10-10 21:19:27] [actions.server._common.process: DEBUG] Killing process and subprocesses of: 43753
+stderr: [2026-10-10 21:19:27] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager shutting down
+stderr: [2026-10-10 21:19:27] [uvicorn.error: INFO] Application shutdown complete.
+stderr: [2026-10-10 21:19:27] [uvicorn.error: INFO] Finished server process [43741]
+stderr: Error executing action-server: signal: terminated

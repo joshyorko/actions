@@ -1,0 +1,26 @@
+{
+  "contract_sha256": "09d7a362d69c599ed2ebd6f279b9207b6bcdde2e7d65e993d9382db71cedb42d",
+  "files": {
+    "contract.json": {
+      "bytes": 5151,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/contract.json",
+      "sha256": "09d7a362d69c599ed2ebd6f279b9207b6bcdde2e7d65e993d9382db71cedb42d"
+    },
+    "launcher.sh": {
+      "bytes": 544,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/launcher.sh",
+      "sha256": "afd00d62e1f15bc3b14e77a6cd3aca75512d8ef9842d82df16ddaa3fb0491c88"
+    },
+    "plugin.py": {
+      "bytes": 3270,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/plugin.py",
+      "sha256": "4842113d1531f5e8d776d42d68aeee264dc9b3678ae388acff841778e5255cb0"
+    },
+    "runner.py": {
+      "bytes": 20541,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/runner.py",
+      "sha256": "569b5d92c6c84660ecd3cb1d6e80a969eee34667cc8f3d2a1b7ccab887d78f7b"
+    }
+  },
+  "schema": "actions.pr153-frozen-launch-snapshot.v1"
+}

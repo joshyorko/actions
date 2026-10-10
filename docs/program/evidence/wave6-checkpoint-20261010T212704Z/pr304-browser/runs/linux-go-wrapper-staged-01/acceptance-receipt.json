@@ -1,0 +1,197 @@
+{
+  "browser_launch": {
+    "launch_pids": [
+      43785
+    ],
+    "matches_expected_managed_browser": true,
+    "path_observed_in_debug_trace": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "trace_excerpt": [
+      "2026-10-10T21:19:26.024Z pw:browser <launching> /workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/tmp/playwright_chromiumdev_profile-aBGsCl --remote-debugging-pipe --no-startup-window"
+    ],
+    "version": "Google Chrome for Testing 151.0.7922.34"
+  },
+  "browser_pid_state_after_test": [
+    {
+      "is_running": false,
+      "pid": 43785,
+      "status": "gone"
+    }
+  ],
+  "cleanup_interpretation": {
+    "claims_complete_reaping": false,
+    "live_owned_processes": [],
+    "owned_zombie_processes": [],
+    "reaped_descendant_count_reported_by_supervisor": 0
+  },
+  "command": [
+    "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-s",
+    "--tb=short",
+    "-m",
+    "integration_test",
+    "-p",
+    "pr153_capture_plugin",
+    "--basetemp",
+    "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp",
+    "--junitxml",
+    "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/junit.xml",
+    "tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix"
+  ],
+  "elapsed_seconds": 8.339,
+  "environment": {
+    "ACTIONS_HOME": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/actions-home",
+    "DEBUG": "pw:browser",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "ROBOCORP_HOME": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/robocorp",
+    "ROBOTS_HOME": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/robots-home",
+    "node_path_override": "empty; resolved @playwright/test through lock-matched target frontend node_modules symlink",
+    "outer_active_python_environment_removed": true
+  },
+  "gate_errors": [],
+  "identity": {
+    "actions_core_origin": "/workspace/work/actions-mk3-browser-security/actions/src/actions/__init__.py",
+    "actions_server_origin": "/workspace/work/actions-mk3-browser-security/action_server/src/actions/server/__init__.py",
+    "browser_executable_preflight": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "browser_sha256_preflight": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "browser_version_preflight": "Google Chrome for Testing 151.0.7922.34",
+    "checkout_branch": "mk3/browser-security-20261010",
+    "checkout_head": "73605934c1c948895410a5abaed6c225a396e038",
+    "checkout_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "mcp_sdk_installed_origin": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/mcp/__init__.py",
+    "node_path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+    "node_version": "v20.19.3",
+    "package_python": "3.12.15 (main, Oct  6 2026, 23:50:18) [GCC 15.3.0]",
+    "package_python_prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+    "playwright_revision": "1234",
+    "playwright_test_version": "1.62.1",
+    "pr304_linux_manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+    "pr304_synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "pr304_synthetic_merge_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "runner_psutil_origin": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psutil/__init__.py",
+    "runner_python_base_prefix": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534",
+    "runner_python_executable": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "runner_python_prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+    "selected_runtime_kind": "go-wrapper",
+    "selected_runtime_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/go-wrapper-38081495661-attempt01/action-server",
+    "selected_runtime_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+    "source_test_sha256": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+    "tracked_checkout_clean": true,
+    "workflow_run_id": "38081495661"
+  },
+  "limitations": [
+    "This check exercises one PR304 Linux packaged artifact with the existing local browser test.",
+    "Actual ChatGPT was not run.",
+    "Production deployment authorization, CSP, artifact resolution, and frozen release signing are not established.",
+    "Linux results do not establish Windows/macOS coverage or blanket issue #153 acceptance."
+  ],
+  "log_paths": {
+    "browser_harness_stderr": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/browser-harness-stderr.log",
+    "browser_harness_stdout": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/browser-harness-stdout.log",
+    "junit": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/junit.xml",
+    "pytest_stderr": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-stderr.log",
+    "pytest_stdout": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-stdout.log"
+  },
+  "owned_process_supervisor": {
+    "cleanup_grace_seconds": 6,
+    "disposition": "clean_no_descendants",
+    "implementation": "/workspace/work/actions-mk3-browser-security/action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "reaped_descendants": 0,
+    "timeout_seconds": 205,
+    "unexpected_live_descendants": false
+  },
+  "pytest": {
+    "result": {
+      "errors": 0,
+      "failures": 0,
+      "harness_status": "PASS",
+      "selected_nodeid": "tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+      "skipped": 0,
+      "tests": 1
+    },
+    "returncode": 0,
+    "timed_out": false
+  },
+  "runtime_pid_state_after_test": [
+    {
+      "is_running": false,
+      "pid": 43720,
+      "status": "gone"
+    },
+    {
+      "is_running": false,
+      "pid": 43741,
+      "status": "gone"
+    },
+    {
+      "is_running": false,
+      "pid": 43753,
+      "status": "gone"
+    }
+  ],
+  "runtime_process_at_ready": {
+    "kind": "ActionServerProcess selected binary",
+    "process_tree_at_ready": [
+      {
+        "argv": [
+          "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/go-wrapper-38081495661-attempt01/action-server",
+          "start",
+          "--actions-sync=false",
+          "--port=0",
+          "--datadir=/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server",
+          "--db-file=browser-origin.db",
+          "-v",
+          "--skip-lint",
+          "--min-processes=0",
+          "--max-processes=20",
+          "--api-key=[redacted]",
+          "--address=127.0.0.1",
+          "--cors-allow-origin=http://127.0.0.1:39535"
+        ],
+        "name": "action-server",
+        "pid": 43720,
+        "ppid": 43713,
+        "status": "sleeping"
+      },
+      {
+        "argv": [
+          "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/home/.actions/bin/action-server/internal/1.0.3/action-server",
+          "start",
+          "--actions-sync=false",
+          "--port=0",
+          "--datadir=/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server",
+          "--db-file=browser-origin.db",
+          "-v",
+          "--skip-lint",
+          "--min-processes=0",
+          "--max-processes=20",
+          "--api-key=[redacted]",
+          "--address=127.0.0.1",
+          "--cors-allow-origin=http://127.0.0.1:39535"
+        ],
+        "name": "action-server",
+        "pid": 43741,
+        "ppid": 43720,
+        "status": "sleeping"
+      },
+      {
+        "observation_error": "ZombieProcess",
+        "pid": 43753
+      }
+    ],
+    "root_pid": 43720
+  },
+  "schema": "actions.pr153-native-browser-runtime-check.v2",
+  "status": "PASS",
+  "synthetic_key_redaction": {
+    "browser_helper_output_scrubbed_before_retention": true,
+    "retained_test_logs_contain_key": false,
+    "test_assertion_checks_server_stdout_and_stderr": true,
+    "test_uses_synthetic_test_key": true
+  },
+  "test": "action_server/tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+  "test_elapsed_seconds": 6.959
+}

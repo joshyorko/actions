@@ -1,0 +1,285 @@
+{
+  "base_commit": "ba4bbda1acd43e893236a0d0076da65f27f7f76c",
+  "files": [
+    {
+      "bytes": 36,
+      "path": ".gitattributes",
+      "sha256": "6b1a616bae9083fc4224e7fce894551c1175e7b91e4fcc673c63934604d4e53d",
+      "source": "new scoped raw-byte attributes"
+    },
+    {
+      "bytes": 10195,
+      "path": "graph/readiness-refresh-20261010T212040Z.json",
+      "sha256": "1f315b4df0d6dda68df135b253308f90ed3362e6bc41a269ab278f9da14c20eb",
+      "source": "graph-reconcile-latest/readiness-refresh-20261010T212040Z.json"
+    },
+    {
+      "bytes": 7520,
+      "path": "post304-union/pr305-306-307-308-post304-union-independent-review.json",
+      "sha256": "6982169bccf4e6a754615e932b4c05188f251adfa6214cce5d144afe8feab727",
+      "source": "pr305-306-307-308-post304-union-independent-review.json"
+    },
+    {
+      "bytes": 688,
+      "path": "post304-union/pr305-306-307-308-post304-union-independent-review.md",
+      "sha256": "c0ae288aa2e6f06bdd46f2ccc927b331df7974f38b051736e79d4212558d4418",
+      "source": "pr305-306-307-308-post304-union-independent-review.md"
+    },
+    {
+      "bytes": 4531,
+      "path": "pr302/receipt.md",
+      "sha256": "ad014d53b07a55ed63cb62cee116c34140787d55023c11ed0b7dee760acd4b7b",
+      "source": "pr302-floor-refresh-d649c901/receipt.md"
+    },
+    {
+      "bytes": 58,
+      "path": "pr304-browser/.gitattributes",
+      "sha256": "8f1c075f13c025f7fa881577ce2c38e0a36863bd1084a4c81ff8f57225522107",
+      "source": "new scoped raw-byte attributes"
+    },
+    {
+      "bytes": 5151,
+      "path": "pr304-browser/frozen-launch-revision-03/contract.json",
+      "sha256": "09d7a362d69c599ed2ebd6f279b9207b6bcdde2e7d65e993d9382db71cedb42d",
+      "source": "pr304-browser-security/frozen-launch-revision-03/contract.json"
+    },
+    {
+      "bytes": 544,
+      "path": "pr304-browser/frozen-launch-revision-03/launcher.sh",
+      "sha256": "afd00d62e1f15bc3b14e77a6cd3aca75512d8ef9842d82df16ddaa3fb0491c88",
+      "source": "pr304-browser-security/frozen-launch-revision-03/launcher.sh"
+    },
+    {
+      "bytes": 3270,
+      "path": "pr304-browser/frozen-launch-revision-03/plugin.py",
+      "sha256": "4842113d1531f5e8d776d42d68aeee264dc9b3678ae388acff841778e5255cb0",
+      "source": "pr304-browser-security/frozen-launch-revision-03/plugin.py"
+    },
+    {
+      "bytes": 20541,
+      "path": "pr304-browser/frozen-launch-revision-03/runner.py",
+      "sha256": "569b5d92c6c84660ecd3cb1d6e80a969eee34667cc8f3d2a1b7ccab887d78f7b",
+      "source": "pr304-browser-security/frozen-launch-revision-03/runner.py"
+    },
+    {
+      "bytes": 1148,
+      "path": "pr304-browser/frozen-launch-revision-03/snapshot-manifest.json",
+      "sha256": "065c0d716d7cd8f9bb2dbb9dc6b9434e4c349a26cdfb7ab55c1dff73d912d07b",
+      "source": "pr304-browser-security/frozen-launch-revision-03/snapshot-manifest.json"
+    },
+    {
+      "bytes": 7813,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/acceptance-index.json",
+      "sha256": "cd37866c503a2c83bb7845d03ab772f1ba06840b033465332039d30a3fa259ec",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/acceptance-index.json"
+    },
+    {
+      "bytes": 9965,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/acceptance-receipt.json",
+      "sha256": "b5a7387fe65b058222156d15e21c1fe925e24c6599473e356df22497d76be5ff",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/acceptance-receipt.json"
+    },
+    {
+      "bytes": 166,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/browser-harness-result.json",
+      "sha256": "ece2e6291857e136e5daae6db3164fd7888a235063608d53c6f509cdea8f121a",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/browser-harness-result.json"
+    },
+    {
+      "bytes": 6514,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/browser-harness-stderr.log",
+      "sha256": "9ebaf2e1d2ef69be920585e8c56485f16a166eaa95ca8e4af51a6c6f5f839cdc",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/browser-harness-stderr.log"
+    },
+    {
+      "bytes": 3487,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/browser-harness-stdout.log",
+      "sha256": "621ede59a58f91e5f091f931d86fde2c82d58c47f5c23f061d73b4e55becbf03",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/browser-harness-stdout.log"
+    },
+    {
+      "bytes": 409,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/junit.xml",
+      "sha256": "a0c41f788f19eb13061b57e3ef42dbf3f215adcfabdb5b35c875d5b73fb57c95",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/junit.xml"
+    },
+    {
+      "bytes": 184,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/pytest-selection.json",
+      "sha256": "982dff7ba2896e67bc346c4761a72fb9ce7ee445a01ba787d646514423ff53a7",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/pytest-selection.json"
+    },
+    {
+      "bytes": 12810,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/pytest-stderr.log",
+      "sha256": "61d8f82e6552d09c742d8b13c2f580996abbd44a1c5e216780bb0c8592fe5d85",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/pytest-stderr.log"
+    },
+    {
+      "bytes": 229,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/pytest-stdout.log",
+      "sha256": "fedcc92efe8941f5aaf83c4f841ba35f285e3307c015146dee66b8068a148283",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/pytest-stdout.log"
+    },
+    {
+      "bytes": 965,
+      "path": "pr304-browser/runs/linux-frozen-staged-01/runtime-process-start.json",
+      "sha256": "ad95d75a0a25388d6d2c7b9f75d7d2d7d32ac647abd2e33f9299544e28ec321c",
+      "source": "pr304-browser-security/runs/linux-frozen-staged-01/runtime-process-start.json"
+    },
+    {
+      "bytes": 9111,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/acceptance-index.json",
+      "sha256": "41a41228d225518aedb0c60c4108e474983823d61de8f0cacb00d7f9cbdf99a3",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/acceptance-index.json"
+    },
+    {
+      "bytes": 10905,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/acceptance-receipt.json",
+      "sha256": "858c7242e2217da61143789f5c5aa33f2039181c3ee3003295dabecf656c0884",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/acceptance-receipt.json"
+    },
+    {
+      "bytes": 166,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/browser-harness-result.json",
+      "sha256": "f2cf56f18a597571e00e5ed90fcf6ae95d6b65b44fec38b7aad2d39267211adb",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/browser-harness-result.json"
+    },
+    {
+      "bytes": 6518,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/browser-harness-stderr.log",
+      "sha256": "436ba1b114823c16b5de6b76e312ccc4928a3550d587673bd3380edf0fb7821f",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/browser-harness-stderr.log"
+    },
+    {
+      "bytes": 3487,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/browser-harness-stdout.log",
+      "sha256": "acf750120659e083d0b47aa0e40049f09dccdd969f0a17c378e8360e3640cbaf",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/browser-harness-stdout.log"
+    },
+    {
+      "bytes": 409,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/junit.xml",
+      "sha256": "3b327f0321f9371df59a236caf0185da25f80db571e3bb93fc69cae846e7d135",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/junit.xml"
+    },
+    {
+      "bytes": 184,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/pytest-selection.json",
+      "sha256": "982dff7ba2896e67bc346c4761a72fb9ce7ee445a01ba787d646514423ff53a7",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-selection.json"
+    },
+    {
+      "bytes": 12918,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/pytest-stderr.log",
+      "sha256": "6d0442ceea680cbb9103979fd74efa109bb4c9e7b0993ad2d52b0324ba89d5c4",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-stderr.log"
+    },
+    {
+      "bytes": 233,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/pytest-stdout.log",
+      "sha256": "e67967da8c4c645864d6e9d814c659b7eeb68041fc86979ad0a4cec50347ec59",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/pytest-stdout.log"
+    },
+    {
+      "bytes": 1753,
+      "path": "pr304-browser/runs/linux-go-wrapper-staged-01/runtime-process-start.json",
+      "sha256": "96174bd806e636b59860be3961fc2e23d3ea4ee3fe92d6b3e23a189c335c3c84",
+      "source": "pr304-browser-security/runs/linux-go-wrapper-staged-01/runtime-process-start.json"
+    },
+    {
+      "bytes": 8398,
+      "path": "pr304-browser/staging/independent-native-staging-readiness-review.json",
+      "sha256": "b1ccafe4aa766bb54b9830b1466816a2b54eaf9a1000a29aa4231c24fbeb8fed",
+      "source": "pr304-browser-security/staging/independent-native-staging-readiness-review.json"
+    },
+    {
+      "bytes": 2188,
+      "path": "pr304-browser/staging/root-independent-frozen-result.json",
+      "sha256": "69f56affe49999230d828ebe14df6f55e298381a4571a470580bae42ed99fbdc",
+      "source": "pr304-browser-security/staging/root-independent-frozen-result.json"
+    },
+    {
+      "bytes": 2207,
+      "path": "pr304-browser/staging/root-independent-go-result.json",
+      "sha256": "4ed5074a286198993a615b558b77b83282e527d26a87714e286f4a96c2c99176",
+      "source": "pr304-browser-security/staging/root-independent-go-result.json"
+    },
+    {
+      "bytes": 7984,
+      "path": "pr304-browser/staging/staging-execution-contract.json",
+      "sha256": "d8d738542b927dbb78319eb22dfed5bf0140486421086c2ed5f728476553dcd5",
+      "source": "pr304-browser-security/staging/staging-execution-contract.json"
+    },
+    {
+      "bytes": 5762,
+      "path": "pr304/final-premerge-gates.json",
+      "sha256": "29f3020b3337b37d93adfeb5333b7532e4d4f08ee4933427e3941499bba98ed1",
+      "source": "pr304-readonly/final-premerge-gates.json"
+    },
+    {
+      "bytes": 11009,
+      "path": "pr304/final-run-38081495661-evidence.json",
+      "sha256": "3feb68f5f30a846f633dbc93ba5a1a8c7950bbcc1ced6e97feb4d2d48e1e51cb",
+      "source": "pr304-readonly/final-run-38081495661-evidence.json"
+    },
+    {
+      "bytes": 3544,
+      "path": "pr304/independent-final-native-acceptance-review.json",
+      "sha256": "160a5700f08eb9f49806e158665bfa1bcb1444b86d79ba4c6c471087cfa6fcf6",
+      "source": "pr304-readonly/independent-final-native-acceptance-review.json"
+    },
+    {
+      "bytes": 3892,
+      "path": "pr309-auth/refs/canonical-rcc-receipt.json",
+      "sha256": "36f3f3f094295baa284a47a67da7739c331cceb9adaa109f09a04919a45e82f9",
+      "source": "auth-route-census/canonical-rcc-receipt.json"
+    },
+    {
+      "bytes": 1875,
+      "path": "pr309-auth/sanitized-summary.json",
+      "sha256": "b340f9ce8bb152374e8e26d2b09e197fd638df716efa27899ae5483f0f2c6ab7",
+      "source": "derived from retained receipts; private inventory omitted"
+    },
+    {
+      "bytes": 36,
+      "path": "rcc-followup/.gitattributes",
+      "sha256": "6b1a616bae9083fc4224e7fce894551c1175e7b91e4fcc673c63934604d4e53d",
+      "source": "new scoped raw-byte attributes"
+    },
+    {
+      "bytes": 1102,
+      "path": "rcc-followup/attempt-index.json",
+      "sha256": "ecf94402e423b0b668cfb315fff8e6c79d2f32237e63c5a2e3cfdf7b397cb02c",
+      "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/attempt-index.json"
+    },
+    {
+      "bytes": 8596,
+      "path": "rcc-followup/final-receipt.json",
+      "sha256": "60351ad071d07c28b89d7e5eb0feab6fdd7a29b9da61bf4046b471721f09a64b",
+      "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/work/final-receipt.json"
+    },
+    {
+      "bytes": 6639,
+      "path": "rcc-followup/followup-exec-runner-independent-final-review-29eb.json",
+      "sha256": "a271667d09dab0e1108d664985ecdd01b3fec39280423054c488abe16b659b6a",
+      "source": "rcc-warm-readiness/followup-exec-runner-independent-final-review-29eb.json"
+    },
+    {
+      "bytes": 6922,
+      "path": "rcc-followup/post-run-readback.json",
+      "sha256": "2703f4e83c7840fe639b2426e8f7938bf46db3d07f8036b8ab15955f905c6b6c",
+      "source": "rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/post-run-readback.json"
+    },
+    {
+      "bytes": 5959,
+      "path": "status.json",
+      "sha256": "3a0a084f9dca7fa39f5febfc04542db4164ecf1de9fece0b1c34835b647d4c34",
+      "source": "derived; observations from named receipts and root exact-head update"
+    }
+  ],
+  "observed_at_utc": "2026-10-10T21:28:03Z",
+  "schema": "actions-wave6-evidence/v1",
+  "scope": "Additive text checkpoint and canonical guide delta only. No graph, ledger, original contract, source, archive or remote mutation. No secrets, signed URLs, private auth-route inventory, staged binaries, caches, or runtime databases.",
+  "upstream_disposition": "none"
+}

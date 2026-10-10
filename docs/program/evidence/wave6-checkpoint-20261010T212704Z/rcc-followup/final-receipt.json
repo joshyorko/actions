@@ -1,0 +1,229 @@
+{
+  "b_snapshot_review_sha256": "c077506b65d72b747f359812e6d2b4f5ecf9da948d4c1f88605bf2c2cd05c8d4",
+  "cleanup": {
+    "probe_shutdown_thread_stopped": true,
+    "probe_socket_closed": true,
+    "probe_thread_stopped": true,
+    "probe_total_requests": 2,
+    "probe_truncated_events": 0
+  },
+  "commands": {
+    "with_provider": {
+      "name": "with_provider",
+      "passed": false,
+      "probe_requests": {
+        "retained": [
+          {
+            "method": "GET",
+            "sequence": 2,
+            "status": 503
+          }
+        ],
+        "total": 1,
+        "truncated": 0
+      },
+      "process": {
+        "cleanup_errors": [],
+        "command": [
+          "/workspace/actions-cloud/bin/rcc",
+          "env",
+          "exec",
+          "--artifact",
+          "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+          "--provider",
+          "http://127.0.0.1:38593",
+          "--permissive-local",
+          "--inherit-streams",
+          "--receipt-file",
+          "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/work/with_provider.json",
+          "--",
+          "python",
+          "-c",
+          "import json,sys;print('RCC_DIAG_PYTHON='+json.dumps({'executable':sys.executable,'prefix':sys.prefix,'version':list(sys.version_info[:3])}))"
+        ],
+        "duration_ms": 510,
+        "pgid": 44553,
+        "pid": 44553,
+        "process_group_gone": true,
+        "reaped": true,
+        "returncode": 1,
+        "run_exception": null,
+        "stderr_tail": "Error: artifact trust attachment verification failed\nNote: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.\nError: [rcc v18.19.3] artifact trust attachment verification failed\n[rcc] exit status will be: 1!\n",
+        "stderr_truncated": false,
+        "stdout_tail": "",
+        "stdout_truncated": false,
+        "timed_out": false
+      },
+      "provider_argument_included": true,
+      "python_identity": null,
+      "python_identity_passed": false,
+      "receipt_checks": {
+        "artifactDigest": null,
+        "cacheHit": null,
+        "exitCode": null,
+        "leaseId_present": false,
+        "materializationId": null,
+        "passed": false,
+        "path_matches_retained_B": false,
+        "status": null,
+        "verification_valid": null
+      },
+      "receipt_metadata": {
+        "error": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/work/actions-mk3-evidence/rcc-warm-readiness/followup-exec-attempt-20261010T2121Z/work/with_provider.json'",
+        "sha256": null,
+        "size_bytes": null,
+        "valid_json_object": false
+      }
+    }
+  },
+  "duration_ms": 698,
+  "fatal": "RuntimeError: with_provider local-ready exec case did not pass",
+  "helper": {
+    "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/frozen-launch/diagnose_rcc_local_ready_exec.py",
+    "sha256": "f4595ac56e6876760affe325a0551184b3dcb7f9564126941b2bef082c68df89"
+  },
+  "launcher": {
+    "resolved_executable": "/usr/bin/python3.13",
+    "runner_path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/followup-exec-runner-bundle-20261010T2119Z/reuse_B_local_ready_exec_gate.py",
+    "runner_sha256": "29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c",
+    "sha256": "17b78e0a93175e86f9ac03141924fd7a7f0c0c52e66b34bfa0de20ffef989df1",
+    "sys_executable": "/usr/bin/python3.13",
+    "version": [
+      3,
+      13,
+      5
+    ]
+  },
+  "limits": {
+    "cleanup_reserve_seconds": 20.0,
+    "event_cap": 256,
+    "overall_seconds": 120.0,
+    "per_child_seconds": 25.0,
+    "receipt_cap_bytes": 1048576,
+    "stdout_tail_bytes": 32768
+  },
+  "network_variable_names_passed": {
+    "ca_trust": [
+      "SSL_CERT_FILE",
+      "REQUESTS_CA_BUNDLE",
+      "NODE_EXTRA_CA_CERTS"
+    ],
+    "no_proxy": [
+      "NO_PROXY",
+      "no_proxy"
+    ],
+    "proxy": [
+      "HTTP_PROXY",
+      "HTTPS_PROXY",
+      "http_proxy",
+      "https_proxy"
+    ]
+  },
+  "probe": {
+    "bind": "127.0.0.1",
+    "final": {
+      "events": [
+        {
+          "method": "GET",
+          "sequence": 1,
+          "status": 503
+        },
+        {
+          "method": "GET",
+          "sequence": 2,
+          "status": 503
+        }
+      ],
+      "total": 2,
+      "truncated": 0
+    },
+    "port": 38593,
+    "role": "count-only loopback responder; no artifact service",
+    "self_test": {
+      "listener": "127.0.0.1",
+      "port": 38593,
+      "status": 503
+    },
+    "self_test_baseline": {
+      "events": [
+        {
+          "method": "GET",
+          "sequence": 1,
+          "status": 503
+        }
+      ],
+      "total": 1,
+      "truncated": 0
+    }
+  },
+  "purpose": "bounded paired env exec against retained local-ready B; no publish/acquire",
+  "rcc": {
+    "expected_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "path": "/workspace/actions-cloud/bin/rcc"
+  },
+  "retained_B": {
+    "digest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "home": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home",
+    "materialization_id": "a2484ce_5a1fac3_e58fc530"
+  },
+  "schema_version": 1,
+  "state_after": null,
+  "state_after_error": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/artifacts/v1/materializations/d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16/verified-content.json'",
+  "state_before": {
+    "acquire_cache_hit": "unknown",
+    "acquire_outer_payload_complete": false,
+    "acquire_tail_verification_sha256": "04b03fb319022ad00e260fa46ce1be1c61b288aea26d88e5ca3faa7e436fb808",
+    "hashes": {
+      "manifest.json": "7d65e2b993743ff775230b72708e6c3ba73c4af86faa104393ed690875e403ee",
+      "ready.json": "ea6c954caab0bf73a69d05e07396441e680f68bdd0fc48efda85aba24e482675",
+      "verification.json": "04b03fb319022ad00e260fa46ce1be1c61b288aea26d88e5ca3faa7e436fb808",
+      "verified-content.json": "8d4e32aaa51a8588cce1e7531da661492c7d8fe6d17a588ffa85955f137f2c28"
+    },
+    "independent_recovery_receipt_sha256": "c077506b65d72b747f359812e6d2b4f5ecf9da948d4c1f88605bf2c2cd05c8d4",
+    "manifest_canonical_bytes": 2084,
+    "materialization_id": "a2484ce_5a1fac3_e58fc530",
+    "materialization_path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530",
+    "metadata_objects": {
+      "catalog": {
+        "digest": "sha256:8934eadb8ef0081b951f81f65bd661c8649fbd0b136a3f5b8a4f365bff2ded61",
+        "sha256": "8934eadb8ef0081b951f81f65bd661c8649fbd0b136a3f5b8a4f365bff2ded61",
+        "size": 692107
+      },
+      "legacyBlueprint": {
+        "digest": "sha256:7acb91fd13d10fb88a00813df73d79bd1c8f902ccd4bedc33858c188272964aa",
+        "sha256": "7acb91fd13d10fb88a00813df73d79bd1c8f902ccd4bedc33858c188272964aa",
+        "size": 85
+      },
+      "objectIndex": {
+        "digest": "sha256:1f8b3d07b988905b9a4c49c320955c31c29e3b763cb8cd7f5dc7738f6ea77e8b",
+        "sha256": "1f8b3d07b988905b9a4c49c320955c31c29e3b763cb8cd7f5dc7738f6ea77e8b",
+        "size": 1469706
+      },
+      "specification": {
+        "digest": "sha256:d8c7ad5e4aa8b82a36ae0ce35dafd8d2949183e22a8316e46abb67a1d3c5d95d",
+        "sha256": "d8c7ad5e4aa8b82a36ae0ce35dafd8d2949183e22a8316e46abb67a1d3c5d95d",
+        "size": 1112
+      }
+    },
+    "python_alias_target": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530/bin/python3.12",
+    "python_target_sha256": "793024e6cfb0b81cbf615186396daa54604f87dccaee99aceb87962ba62fa53e",
+    "references": {
+      "manifest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "protected_count": 5459,
+      "sha256": "41955394e7219761308ca734f38a2c980b7c41418f687bcb7a8dbdd35b7385da",
+      "state": "live"
+    },
+    "verification_valid": true
+  },
+  "status": "DIAGNOSTIC_FAILURE",
+  "subject": {
+    "expected_head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "expected_tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "subject_and_tool_preflight": {
+    "clean": true,
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  }
+}

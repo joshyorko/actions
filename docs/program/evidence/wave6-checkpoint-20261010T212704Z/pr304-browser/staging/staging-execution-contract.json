@@ -1,0 +1,117 @@
+{
+  "go_wrapper": {
+    "archive_sha256": "65310919b0048615fbfb3dea1b1d95cf29aa773d68448f0c73fb889e89e4a237",
+    "code_path": "go-wrapper main.go embeds assets/assets.zip and expands the complete PyInstaller app into $HOME/.actions/bin/action-server/internal/<version>; the wrapper itself is a standalone executable and needs no adjacent _internal directory.",
+    "crc_error": null,
+    "manifest_embedded_asset_zip_sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c",
+    "manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+    "manifest_wrapper_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+    "member_bytes": 82022274,
+    "member_count": 1,
+    "member_name": "action-server",
+    "member_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+    "source_hashes": {
+      "main.go": "9900e4a078a9034c34825c88fd41a87057d92bd8ba0c244af3ac72b32d20e5ac",
+      "process.go": "0d4799bded1e3ea4541e842ecc759aede699402f32b5c3a71f6302324ec7bb54",
+      "workflows.py": "c9ad8b283417e563d62ff846398b87aafb583f32cd89ee815b9b34c96b615bef",
+      "zip_assets.py": "9dc909d6be1f6a23aef3f469fe2651e5328980c0f9ae88ec8a6d09da421bf432"
+    }
+  },
+  "limits": [
+    "The provenance manifest ties source identity to Git HEAD, not a clean-source attestation.",
+    "No binary was executed as part of package reconstruction.",
+    "No actual ChatGPT, production auth/deployment, CSP, or artifact resolution claim.",
+    "The previous frozen test attempt is a setup failure only; #153 remains unaccepted."
+  ],
+  "next_proposed_preflight_execution": {
+    "binary_execution_performed_during_this_staging_task": false,
+    "fresh_run_dir": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01",
+    "frozen_binary_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/action-server",
+    "outer_timeout_seconds": 300,
+    "requires_separate_root_go": true,
+    "test_process_tree_timeout_seconds": 205
+  },
+  "prior_frozen_attempt": {
+    "acceptance_receipt": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/acceptance-receipt.json",
+    "acceptance_receipt_sha256": "fe8d0fbe31f53d34c845f16f74e7ae23344f06201c1326bfa340871da4726328",
+    "classification": "Staging/setup omission; not a Runtime behavior verdict. No Go-wrapper attempt.",
+    "failure": "Frozen PyInstaller launcher exited 255 because the test used the measured executable as an isolated file and its required adjacent _internal/libpython3.12.so.1.0 was absent. The test was selected but Runtime never reached ready state and no browser launched.",
+    "process_census_after_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/process-census-after.txt",
+    "process_census_after_sha256": "61671d9822e19dbedde385fea9f82ce78e656573a4eb3fead5cecce186235395",
+    "process_supervisor": {
+      "cleanup_grace_seconds": 6,
+      "disposition": "clean_no_descendants",
+      "implementation": "/workspace/work/actions-mk3-browser-security/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "reaped_descendants": 0,
+      "timeout_seconds": 205,
+      "unexpected_live_descendants": false
+    },
+    "pytest_returncode": 1,
+    "pytest_selection": {
+      "collected_count": 1,
+      "collected_nodeids": [
+        "tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix"
+      ]
+    }
+  },
+  "provenance_archive": {
+    "hardlinks": 0,
+    "manifest_embedded_files_sha256": "a8f53386f2a0572fb306b293998a33641a5474700d53708fa666133ef7c90c6d",
+    "manifest_package_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+    "manifest_run_id": "38081495661",
+    "manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+    "manifest_source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "nested_member": "native-artifact-provenance.tar",
+    "nested_tar_bytes": 127313920,
+    "nested_tar_sha256": "23e3b8145b4cc366ef43796c52d961cdeb915e350e6550a88072bdd12536ad6c",
+    "package_directories": 122,
+    "package_inventory_entries": 1190,
+    "package_regular_files": 1052,
+    "package_symlinks": 16,
+    "safe_extraction_checks": "Validated every path before writing (absolute, parent, dot, backslash, Windows drive rejected); accepted only dirs/files/symlinks, zero hard links, verified all symlink targets remain in dist/action-server and resolve to in-tree files; custom exclusive/no-follow regular-file writes, symlinks created last; readback every inventory item.",
+    "tar_members": 1193,
+    "unsafe_paths": 0,
+    "zip_bytes": 59401424,
+    "zip_path": "/workspace/work/actions-mk3-evidence/pr304-artifact-readback/provenance-11680877496.zip",
+    "zip_sha256": "abfd2159ed3c3ff01801e42ad8cdffbf45f9d8ddcfaa189c6e6ebdfd62efd3ba"
+  },
+  "schema": "actions.pr304-native-executable-staging-contract.v1",
+  "staged_distribution": {
+    "compat_symlink": {
+      "path": "_internal/libpython3.12.so",
+      "target": "libpython3.12.so.1.0"
+    },
+    "destination_mode": "0o700",
+    "destination_private_root": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01",
+    "frozen_executable": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/action-server",
+    "frozen_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+    "full_member_manifest_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/staging-receipt.json",
+    "full_member_manifest_sha256": "a07ed2cadba98c2ebb0eb4c8032a0343c0306af9ca94b1c0bda971e2e4b819f1",
+    "internal_libpython": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/_internal/libpython3.12.so.1.0",
+    "internal_libpython_sha256": "49e94230e2ec954dc86398bb8b099275793843ec41d1e6c38b65764ebb1ccf90",
+    "manifest_algorithm_readback": {
+      "matches_published_manifest": true,
+      "packaged_files_sha256": "a8f53386f2a0572fb306b293998a33641a5474700d53708fa666133ef7c90c6d",
+      "packaged_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488"
+    },
+    "package_root": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server",
+    "stage_log_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staging/stage-run.log",
+    "stage_log_sha256": "92a5469bd7bf508e7d742cef6ec420f7d8b5ad632b0a9e837245c6e1d8536b28",
+    "stage_script_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/stage_linux_native_package.py",
+    "stage_script_sha256": "4298ce4c8dd2173c3fa31f185659109cc34b2d1500fc42f2140a2b6cb1a9ed3f"
+  },
+  "status": "PREPARED_AND_HASH_VERIFIED; NO_EXECUTABLE_LAUNCH_AUTHORIZED",
+  "workflow_path": {
+    "attempt": "1",
+    "documented_build": "poetry run inv build-executable --go-wrapper",
+    "frozen_artifact": "Uploaded native-artifact-provenance.tar contains dist/action-server as a PyInstaller one-folder package plus manifest and inventory.",
+    "native_acceptance_paths": "Workflow invokes frozen at dist/action-server/action-server and Go wrapper at dist/final/action-server.",
+    "pyinstaller_adjacent_requirement": "The measured frozen launcher expects sibling _internal/libpython3.12.so.1.0; verified present in full staged tree.",
+    "run_id": "38081495661",
+    "source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "workflow_file": {
+      "path": "/.github/workflows/frontend-build-unauthenticated.yml",
+      "sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d"
+    }
+  }
+}

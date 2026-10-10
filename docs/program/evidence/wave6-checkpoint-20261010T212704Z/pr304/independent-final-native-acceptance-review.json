@@ -1,0 +1,43 @@
+{
+  "archive_readback": {
+    "path": "/workspace/work/actions-mk3-evidence/pr304-readonly/independent-final-native-archive-readback.json",
+    "sha256": "f753f7ed6e31f0fe7d4f06512d504ba8d3376d4a5485fe9850a86d6e7ea1f421"
+  },
+  "canonical_doc_proposal": "Under packaged Origin/ambient-session acceptance, require explicit selection of the specific #153 test with each measured frozen/Go executable and exact source/run manifest. Unrelated native browser/storage passes cannot substitute. Under Work Items, record the three-OS frozen/Go consumer/browser/persistence subgate with per-OS candidate Core hashes, distinguish seeded stale reservation from crash recovery, and retain unrun UI states.",
+  "commands": [
+    "gh api run jobs: three native jobs completed/success exact head",
+    "gh api git commit: exact tree/ordered parents",
+    "Independent GitHub connector fetch_workflow_job_logs for three full native job logs; count all three #153 test identifiers",
+    "Python zipfile/tarfile streaming readback: nine artifact ZIP hashes; raw manifest/frozen bytes/standalone Go bytes/consumer receipt cross-binding, no extraction",
+    "sha256sum owner receipt and bounded census"
+  ],
+  "full_log_census": {
+    "path": "/workspace/work/actions-mk3-evidence/pr304-readonly/independent-final-native-log-census.json",
+    "sha256": "54788c8ad7ffbd8fd80e4b89d826630d411b2697f38d7bf4010c765203833432"
+  },
+  "head": "73605934c1c948895410a5abaed6c225a396e038",
+  "limits": [
+    "No test executions or services in this review.",
+    "Work Items recovery seeds stale reservation; no worker crash recovery simulation.",
+    "No authorization-denial/missing-support/generic500 UI, broad manual accessibility/nonChromium acceptance. Keep #208 open/unverified outside accepted subgate.",
+    "This native run establishes no #153 acceptance criterion and is not full release approval.",
+    "Candidate wheel raw bytes unavailable; no independent explanation of Windows hash difference."
+  ],
+  "observations": [
+    "All three consumer receipts PASS, 2 passed/0 failed, frozen and Go kinds, measured executable SHA exactly matches platform manifest and independently hashed retained bytes. Source/run/attempt are exact.",
+    "All three full job logs show two native UI module invocations at28 passed each, consumer2 passed, native storage/history PASS. The module28 count includes helper/unit cases, not28 browser scenarios.",
+    "Core1.0.3 candidate measured hash Linux/macOS8e088b40... equals separately verified published hash; Windowsaf607a2e... differs. Candidate wheel bytes are not in these archives; measured installation identity comes from consumer receipt.",
+    "All three complete decoded job logs have zero occurrences of file/function identifiers for test_live_runtime_browser_origin_and_ambient_session_matrix. No #153 runtime identity or selected invocation is proved.",
+    "Archive names contain no absolute/parent traversal paths; archives were streamed without extraction. Manifest checks Git HEAD, not source cleanliness, and follows links in named content read scope."
+  ],
+  "ordered_parents": [
+    "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "73605934c1c948895410a5abaed6c225a396e038"
+  ],
+  "owner_receipt_sha256": "3feb68f5f30a846f633dbc93ba5a1a8c7950bbcc1ced6e97feb4d2d48e1e51cb",
+  "run": 38081495661,
+  "status": "GO_SCOPED_WORK_ITEMS_THREE_OS_NATIVE_SUBGATE",
+  "synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+  "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+  "upstream_disposition": "none"
+}

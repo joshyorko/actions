@@ -1,0 +1,33 @@
+# Actions swarm wave 6 evidence checkpoint
+
+Observed 2026-10-10 21:28:03 UTC. This is an additive, text-only evidence checkpoint based on evidence commit `ba4bbda1acd43e893236a0d0076da65f27f7f76c`. It does not change the original issue graph, ledger, contracts or archives, and it performs no remote write. The complete file list and byte hashes are in [`wave6-checkpoint-20261010T212704Z/manifest.json`](../program/evidence/wave6-checkpoint-20261010T212704Z/manifest.json). The checkpoint preserves raw receipts unchanged where included; corrections are separate records.
+
+## PR304 merge and scoped acceptance
+
+PR304 merged as `19380993febaa71238eaee3026b5c808773283ff`, tree `a8fe00af1858077273912d0b590f0f7a662c83d5`. Its tested source head `73605934c1c948895410a5abaed6c225a396e038` has the same tree; run `38081495661` tested synthetic merge `856c0a47e27dda373d4e44aea2a5a26a1db287d0`. The retained final pre-merge gate receipt reports 23 checks successful. The separate independent acceptance review covers the three-OS native Work Items 0.4.4 subgate only. It does not complete all of #208, and that run did not select the specific #153 Origin/ambient-session test on any OS. Retained receipts: `pr304/`.
+
+The subsequent four-PR union review (`6982169bccf4e6a754615e932b4c05188f251adfa6214cce5d144afe8feab727`) is GO for the reviewed source unions/source-equivalent refreshes, with new-head CI still required. Exact current PR heads and the observed check states for #305–#309, #302 and #282 are recorded in `status.json`. At observation, #305, #306 and #309 checks were queued; #307 and #308 had some successful completed checks while other checks remained in progress/queued. No current whole-head gate is inferred from that partial status.
+
+## PR309 route-census source slice
+
+PR309 head `f23db9606f3801fd21a3e66adc0f9199fd115131`, tree `9977652bc1e8d21a6e3b4f906031a68ab11b4c40`, is source-equivalent to the separately reviewed commit `746030cb2ad8c4d116a45000a18d75ca15433182`. The root independent review and canonical RCC receipt support the route-registration test and guide only: 4 passed, 1 integration test deselected, Ruff check/format passed. This is not request-level authorization proof, a live service run, actual ChatGPT acceptance, or completion of #152. The original receipt and its correction are identified by immutable hashes in `pr309-auth/sanitized-summary.json`; the original direct runner bytes had been overwritten before the RCC audit and were not reconstructed. The later retained diagnostic runner is not the original runner. Private route and authorization-policy details are intentionally omitted from this public checkpoint.
+
+## PR304 Linux #153 browser case
+
+After PR304 merged, the one selected Origin/ambient-session test passed on Linux against both the frozen native runtime and the Go wrapper. The exact source/tree and synthetic merge are bound in both acceptance indexes; independent frozen and Go-wrapper readbacks agree with those identities. The selected pytest node, JUnit, runtime process identity, browser harness trace and cleanup receipts are retained under `pr304-browser/`, along with the runner, wrapper launcher and plugin source. The staging readiness review (`b1ccafe4aa766bb54b9830b1466816a2b54eaf9a1000a29aa4231c24fbeb8fed`) and staging execution contract (`d8d738542b927dbb78319eb22dfed5bf0140486421086c2ed5f728476553dcd5`) are preserved separately from the execution results. No staged binaries, caches or runtime databases are included. This is one Linux case in two artifact modes: actual ChatGPT, other operating systems for this case, and whole #153 acceptance remain open.
+
+## RCC retained-B follow-up
+
+Attempt `attempt-20261010T2121Z` is a genuine bounded provider-present command failure: RCC returned nonzero before producing an exec receipt; the paired provider-omitted case did not run. The original attempt index, final receipt and post-run readback remain byte-preserved in `rcc-followup/`. The independent review bound the runner (`29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c`) for execution readiness, which is distinct from accepting the attempt result.
+
+The initial interpretation is being corrected additively after source/contract diagnosis: the harness treated a rejecting content provider as an independent trust carrier. RCC v18.19.3 uses the explicit HTTP provider as that trust carrier and verifies the carrier before warm reuse; the observed 503 does not establish an independent trust-carrier failure or content corruption. Missing `verified-content` may be provisional verification intent while retained `ready` state remains intact. Keep the failed command, omitted case and no-defect conclusion; do not overstate the mutation as corruption. Sol's source/contract diagnosis is active; its correction will be a later additive receipt. No retry or provider-omitted case is claimed.
+
+## Current refreshes and full graph
+
+PR302 is now pushed at `d649c90112ee03c46f8b88c973849d7203f7e64a`, tree `bbc33916748d02e24fe37ce843594a1d8f67067d`; its refreshed focused RCC gates passed (24 tests), and union review remains pending. The copied PR302 receipt predates the push and truthfully records the state at that time; the current status record supersedes only its branch-publication field. PR282's pushed head is `66cc132367be02b05bc08c981b900a68d156cd52`, tree `ca8685372e67ce07b55f9a830a60134582107873`; new CI is queued and the draft remains blocked.
+
+The full-54 readiness refresh is bound by SHA-256 `1f315b4df0d6dda68df135b253308f90ed3362e6bc41a269ab278f9da14c20eb`. The existing census remains 54 retained contracts (53 open, 1 accepted) and 16 archives; no graph, contract, ledger or archive content is changed here. Historical accepted work remains distinct from remaining manual/crash/UI and issue-level criteria. Parent epics are not blanket prerequisites. No upstream report is proposed: no confirmed upstream defect is established by this evidence.
+
+## Canonical guide delta
+
+`docs/skills/repository-operations.md` now states how to bind the packaged Origin/ambient-session regression: exact source tree and staged package, separate frozen and Go-wrapper execution, selected pytest node, JUnit, runtime/browser identity and cleanup receipt. It also makes clear that staging readiness is not execution and that one Linux pass cannot establish other OSes, ChatGPT integration or whole-issue acceptance; an incomplete staged package that prevents runtime startup is recorded as a staging failure with browser test unrun. This is supported by the PR304 staging and execution receipts retained in this checkpoint.

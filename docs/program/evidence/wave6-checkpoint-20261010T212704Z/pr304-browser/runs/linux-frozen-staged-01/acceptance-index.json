@@ -1,0 +1,157 @@
+{
+  "cleanup": {
+    "complete_host_reaping_claimed": false,
+    "owned_zombies_observed": 0,
+    "reaped_descendants_reported": 0,
+    "runtime_and_browser_pids_observed_gone": true,
+    "supervisor": "clean_no_descendants"
+  },
+  "evidence": {
+    "acceptance_receipt": {
+      "bytes": 9965,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/acceptance-receipt.json",
+      "sha256": "b5a7387fe65b058222156d15e21c1fe925e24c6599473e356df22497d76be5ff"
+    },
+    "browser_harness_result": {
+      "bytes": 166,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/browser-harness-result.json",
+      "sha256": "ece2e6291857e136e5daae6db3164fd7888a235063608d53c6f509cdea8f121a"
+    },
+    "browser_harness_stderr": {
+      "bytes": 6514,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/browser-harness-stderr.log",
+      "sha256": "9ebaf2e1d2ef69be920585e8c56485f16a166eaa95ca8e4af51a6c6f5f839cdc"
+    },
+    "browser_harness_stdout": {
+      "bytes": 3487,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/browser-harness-stdout.log",
+      "sha256": "621ede59a58f91e5f091f931d86fde2c82d58c47f5c23f061d73b4e55becbf03"
+    },
+    "independent_staging_review": {
+      "bytes": 8398,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staging/independent-native-staging-readiness-review.json",
+      "sha256": "b1ccafe4aa766bb54b9830b1466816a2b54eaf9a1000a29aa4231c24fbeb8fed"
+    },
+    "junit": {
+      "bytes": 409,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/junit.xml",
+      "sha256": "a0c41f788f19eb13061b57e3ef42dbf3f215adcfabdb5b35c875d5b73fb57c95"
+    },
+    "managed_browser": {
+      "bytes": 196975952,
+      "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f"
+    },
+    "prior_failed_staging_attempt_receipt": {
+      "bytes": 6265,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/acceptance-receipt.json",
+      "sha256": "fe8d0fbe31f53d34c845f16f74e7ae23344f06201c1326bfa340871da4726328"
+    },
+    "pytest_selection": {
+      "bytes": 184,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/pytest-selection.json",
+      "sha256": "982dff7ba2896e67bc346c4761a72fb9ce7ee445a01ba787d646514423ff53a7"
+    },
+    "pytest_stderr": {
+      "bytes": 12810,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/pytest-stderr.log",
+      "sha256": "61d8f82e6552d09c742d8b13c2f580996abbd44a1c5e216780bb0c8592fe5d85"
+    },
+    "pytest_stdout": {
+      "bytes": 229,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/pytest-stdout.log",
+      "sha256": "fedcc92efe8941f5aaf83c4f841ba35f285e3307c015146dee66b8068a148283"
+    },
+    "rcc_log": {
+      "bytes": 3868,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/preflight/frozen-staged-rcc-run.log",
+      "sha256": "4a0a0ada8dce27c49e674d3c1d4e42f19d4960b73fa3548b77c13ca1c715402f"
+    },
+    "runtime_process_start": {
+      "bytes": 965,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/runtime-process-start.json",
+      "sha256": "ad95d75a0a25388d6d2c7b9f75d7d2d7d32ac647abd2e33f9299544e28ec321c"
+    },
+    "selected_frozen_executable": {
+      "bytes": 17625656,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/action-server",
+      "sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e"
+    },
+    "selected_frozen_libpython": {
+      "bytes": 32790528,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/_internal/libpython3.12.so.1.0",
+      "sha256": "49e94230e2ec954dc86398bb8b099275793843ec41d1e6c38b65764ebb1ccf90"
+    },
+    "source_test": {
+      "bytes": 22374,
+      "path": "/workspace/work/actions-mk3-browser-security/action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+      "sha256": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c"
+    },
+    "staging_receipt": {
+      "bytes": 273944,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/staging-receipt.json",
+      "sha256": "a07ed2cadba98c2ebb0eb4c8032a0343c0306af9ca94b1c0bda971e2e4b819f1"
+    }
+  },
+  "execution": {
+    "binary_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+    "browser_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "browser_version": "Google Chrome for Testing 151.0.7922.34",
+    "complete_app_directory_staged": true,
+    "kind": "frozen",
+    "managed_browser_revision": "1234",
+    "pytest_elapsed_seconds": 5.435,
+    "rcc_command": [
+      "timeout",
+      "300s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "--no-build",
+      "-r",
+      "/workspace/work/actions-mk3-browser-security/developer/toolkit.yaml",
+      "--",
+      "/bin/bash",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/launcher.sh",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/frozen-launch-revision-03/runner.py",
+      "--kind",
+      "frozen",
+      "--binary",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/action-server",
+      "--run-dir",
+      "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01"
+    ],
+    "rcc_outer_cap_seconds": 300
+  },
+  "limitations": [
+    "Linux only; does not establish Windows/macOS coverage or blanket issue #153 acceptance.",
+    "Actual ChatGPT was not run.",
+    "Does not establish production deployment authorization, CSP, artifact resolution, frozen release signing, or full wheel authentication.",
+    "No Go-wrapper run was authorized or performed."
+  ],
+  "prior_attempt": "linux-frozen-corrected-01 failed at startup with exit 255 because isolated executable path omitted adjacent _internal/libpython3.12.so.1.0; staging was corrected and independently reviewed before this single authorized run.",
+  "reviewed_launch_hashes": {
+    "capture_plugin_sha256": "4842113d1531f5e8d776d42d68aeee264dc9b3678ae388acff841778e5255cb0",
+    "contract_revision03_sha256": "09d7a362d69c599ed2ebd6f279b9207b6bcdde2e7d65e993d9382db71cedb42d",
+    "launcher_sha256": "afd00d62e1f15bc3b14e77a6cd3aca75512d8ef9842d82df16ddaa3fb0491c88",
+    "runner_sha256": "569b5d92c6c84660ecd3cb1d6e80a969eee34667cc8f3d2a1b7ccab887d78f7b"
+  },
+  "run_id": "linux-frozen-staged-01",
+  "schema": "actions.pr153-linux-frozen-browser-acceptance-index.v1",
+  "selection": {
+    "errors": 0,
+    "failures": 0,
+    "nodeid": "tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+    "passed": 1,
+    "returncode": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "source": {
+    "checkout_head": "73605934c1c948895410a5abaed6c225a396e038",
+    "checkout_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "workflow_run_id": "38081495661"
+  },
+  "status": "PASS_SCOPED_LINUX_FROZEN_MATRIX"
+}

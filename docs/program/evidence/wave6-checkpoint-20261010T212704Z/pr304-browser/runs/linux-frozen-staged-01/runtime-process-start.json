@@ -1,0 +1,31 @@
+{
+  "kind": "ActionServerProcess selected binary",
+  "process_tree_at_ready": [
+    {
+      "argv": [
+        "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/action-server",
+        "start",
+        "--actions-sync=false",
+        "--port=0",
+        "--datadir=/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server",
+        "--db-file=browser-origin.db",
+        "-v",
+        "--skip-lint",
+        "--min-processes=0",
+        "--max-processes=20",
+        "--api-key=[redacted]",
+        "--address=127.0.0.1",
+        "--cors-allow-origin=http://127.0.0.1:59881"
+      ],
+      "name": "action-server",
+      "pid": 43074,
+      "ppid": 43061,
+      "status": "sleeping"
+    },
+    {
+      "observation_error": "ZombieProcess",
+      "pid": 43077
+    }
+  ],
+  "root_pid": 43074
+}
