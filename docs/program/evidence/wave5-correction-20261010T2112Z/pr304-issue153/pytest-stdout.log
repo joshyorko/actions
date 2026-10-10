@@ -1,0 +1,28 @@
+F
+=================================== FAILURES ===================================
+_________ test_live_runtime_browser_origin_and_ambient_session_matrix __________
+src/actions/server/_selftest.py:192: in start
+    host, port = future.result(1)
+                 ^^^^^^^^^^^^^^^^
+../../../actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/concurrent/futures/_base.py:458: in result
+    raise TimeoutError()
+E   TimeoutError
+
+During handling of the above exception, another exception occurred:
+tests/action_server_tests/test_browser_origin_acceptance.py:454: in test_live_runtime_browser_origin_and_ambient_session_matrix
+    action_server_process.start(
+../../actions-mk3-evidence/pr304-browser-security/runner/pr153_capture_plugin.py:59: in capture_server_start
+    result = original_start(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/actions/server/_selftest.py:200: in start
+    raise ActionServerExitedError(
+E   actions.server._selftest.ActionServerExitedError: The process already exited with returncode: 255
+E   Args: ['/workspace/work/actions-mk3-evidence/pr304-browser-security/binaries/linux-frozen-action-server', 'start', '--actions-sync=false', '--port=0', '--datadir=/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/pytest-tmp/test_live_runtime_browser_orig0/.sema4ai-test-action-server', '--db-file=browser-origin.db', '-v', '--skip-lint', '--min-processes=0', '--max-processes=20', '--api-key=[redacted]', '--address=127.0.0.1', '--cors-allow-origin=http://127.0.0.1:33465']
+E   Elapsed time: 1.01s
+E   Stdout: 
+E   Stderr: [PYI-41205:ERROR] Failed to load Python shared library '/workspace/work/actions-mk3-evidence/pr304-browser-security/binaries/_internal/libpython3.12.so.1.0': /workspace/work/actions-mk3-evidence/pr304-browser-security/binaries/_internal/libpython3.12.so.1.0: cannot open shared object file: No such file or directory
+- generated xml file: /workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/junit.xml -
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix
+1 failed in 1.18s
+Log (html): /workspace/work/actions-mk3-browser-security/action_server/output/log.html
