@@ -1714,17 +1714,25 @@ separate outcomes. An Action may return `PASS` while intentional pool
 termination produces `status: failed`, `exitCode: -1`, and
 `reason: child exited non-zero`. That receipt remains a wrapper lifecycle
 failure even when artifact identity, verification, and lease identity validate.
-For reload/recovery receipts, retain the Action Server `Popen` owner before
-requesting stop and record its bounded observed return code separately from RCC
-wrapper receipts. A normal `start_server` return produces CLI exit 0. The
+For reload/recovery receipts, retain the Action Server `Popen` owner and poll
+its return code before any stop call; record that natural-exit observation
+separately from RCC wrapper receipts. `ActionServerProcess.stop()` delegates to
+`Process.stop()`, whose process-tree helper uses `psutil.wait_procs`; that helper
+can consume the direct child's wait status, so a later `Popen.poll()` value of 0
+is not natural-exit evidence. A normal `start_server` return produces CLI exit
+0. The
 explicit `/api/shutdown/` endpoint instead calls `_thread.interrupt_main()`;
 `_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
 the expected controlled API-interrupt outcome only when the receipt also proves
-that shutdown request and its successful response. A forced
-`ActionServerProcess.stop()` result, even with code 0, is not natural-shutdown
-evidence; unexplained nonzero or signal exits such as -11 remain failures. A
-`stop()` return is not process-exit evidence, and a captured descendant set
-only reports that observation; it does not prove complete tree reaping.
+that shutdown request and its successful 2xx response. An observed natural exit
+0 is acceptable only when captured before forced cleanup. Missing natural exit,
+an unsuccessful shutdown request, or unexplained exits such as 1 or -11 fail
+the shutdown receipt. If shutdown times out or the request fails, record
+`forced_stop_used: true`; the stop fallback is hygiene only and cannot replace
+the captured natural result. Preserve any post-stop `Popen.poll()` value as
+forced-cleanup-only evidence, never as natural exit. A `stop()` return is not
+process-exit evidence, and a captured descendant set only reports that
+observation; it does not prove complete tree reaping.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes
