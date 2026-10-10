@@ -1640,6 +1640,20 @@ by `test_binary_preserves_cli_usage_exit_code` in `test_binary.py`. The existing
 does not verify wrapper exit propagation. This argument-error boundary does
 not execute a developer task or require an RCC environment build.
 
+On POSIX, the wrapper subscribes to directed `SIGTERM` before starting its
+child, forwards it only through that child's `os.Process`, and waits for the
+same child's exit. Natural exit and launch failure unregister the handler.
+It does not signal a process group or enumerate descendants; the frozen
+Runtime retains ownership of worker shutdown. `SIGINT` keeps the existing
+foreground-group behavior to avoid forwarding a second terminal Ctrl+C to
+Uvicorn. Windows retains `cmd.Run()` without a new signal-forwarding claim.
+The standard-library subprocess tests run with
+`go test process.go process_test.go` from `action_server/go-wrapper`, without
+embedded Runtime assets. The full acceptance remains the built-wrapper
+`test_mcp_sse_does_not_starve_server_or_sigterm`, which must observe no live
+owned descendants after wrapper-directed SIGTERM. A source-only pass of that
+test verifies inner Runtime teardown, not wrapper forwarding.
+
 Before reinstalling or restarting Action Server, inspect the process table and listening
 sockets. A `GET /mcp` SSE request can expose receive-wrapper event-loop starvation when
 buffer exhaustion is followed by an endlessly ready synthetic `http.request`; sustained
