@@ -2891,3 +2891,15 @@ source-mode tests. In frozen catalog workflow run 38037036032, `inv devinstall`
 completed its Poetry install, but the subsequent `poetry run pytest` returned
 `Command not found: pytest`; the workflow now checks the selected pytest module
 and interpreter before execution.
+
+
+### Table update regression measurement
+
+The jsdom table update gate uses deterministic data and five fixed paired
+mount/update samples, retains every duration, and compares their medians. It
+checks updated cell values, retained row DOM identity and DOM size as well as
+the update/mount ratio and the existing mount budget. The ratio is a bounded
+regression criterion, not a statistically calibrated browser budget. A single
+jsdom wall-clock measurement cannot establish browser frame rate: hosted run
+38056869588 measured 34.13ms against the old 32ms assertion without a rendering
+correctness failure. Controlled browser performance remains a separate proof.
