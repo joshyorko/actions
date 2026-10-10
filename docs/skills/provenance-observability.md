@@ -117,6 +117,14 @@ absolute paths, symlinks, duplicate names, and oversized members.
 
 ## Verification matrix
 
+Platform-neutral CLI checks such as `--help` and refusal to overwrite an existing
+receipt must run before the Linux-only process-supervisor eligibility check; they
+must not create supervisor state. The RCC acceptance CLI still fails closed on
+unsupported platforms before candidate execution. Tests that prove Linux
+subreaper or process-group cleanup must be explicitly Linux-only. Skipping those
+process-proof tests elsewhere is not macOS or Windows cleanup acceptance, and a
+mocked `CompletedProcess` does not establish descendant cleanup.
+
 The dependency-free `devutils.runtime_conformance` module is the repository's
 small executable contract for this boundary. It canonicalizes exact-subject
 fingerprints, captures one immutable admission decision, selects only an
