@@ -1169,6 +1169,10 @@ they do not authorize Runtime API changes. The full-spec fixture is covered by
 `test_run_summary_fields_have_a_finite_page_budget`, and
 `test_configured_api_key_protects_assembled_surfaces` guard response shape,
 bounded summary data, and configured authentication.
+App-level Bearer enforcement can be absent from the OpenAPI `security` fields;
+an unchanged schema does not prove authentication. Verify the assembled server
+and router dependencies through the authentication regression, including the
+intentional public webhook exception.
 
 ### Action Server shared database
 
