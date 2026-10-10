@@ -2296,6 +2296,32 @@ identity, source and staging mutation coherence, and the staged inventory
 before making a trusted source or compiler claim. This proposal does not define
 a Package Revision identity or compiler output.
 
+`actions.server.deployments.source_read.read_selected_files` adds a private,
+Linux-only measurement boundary below a caller-verified directory descriptor.
+It borrows that descriptor by duplicating it, validates explicit selected and
+protected names through the supplied-inventory policy before content reads,
+and opens each directory component with `O_DIRECTORY | O_NOFOLLOW`. It opens
+selected leaves with `O_NOFOLLOW | O_NONBLOCK`, rejects non-regular files,
+hardlinks and privileged mode bits, and limits both observed file sizes and
+incrementally read bytes using the same file/total/count policy. Unsupported
+descriptor or no-follow features fail without a pathname fallback. Traversal
+handles close on success and failure; the caller's descriptor remains owned by
+the caller.
+
+The result separates measured root/directory/file metadata from the portable
+canonical inventory. Opened objects bind device, inode, file type, mode, size,
+mtime, ctime and link count. Before and after each read, the reader compares
+opened metadata and no-follow parent/name bindings, then reopens the selected
+paths for a final comparison. Linux filesystem tests exercise actual links,
+hardlinks, FIFOs, replacement and mutation, bounded reads and descriptor cleanup.
+These checks reject observed changes; they do not establish a complete-tree or
+globally atomic source snapshot against concurrent writers. The supplied root
+descriptor pins its object, not its original pathname, Workspace authorization,
+or selected-set completeness. This utility performs no staging, publication,
+compiler inspection or Package Revision creation, and does not change legacy
+Runtime or Robot imports. A stronger atomic snapshot contract remains a separate
+filesystem-level gate.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold
