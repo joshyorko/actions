@@ -1284,6 +1284,13 @@ named base and inspect a hypothetical merge with
 commit. A conflict-free merge tree does not prove that affected behavior was
 preserved: compare the affected paths against both parents and rerun their
 focused and package gates after the ordinary merge.
+For stacked PRs, use the exact published commit ancestry for conflict,
+containment, and refresh decisions. A local writer commit can have the same
+tree as a published commit but different parents, so a merge computed from the
+local ancestry can report conflicts absent from the published history. Fetch
+the exact published refs and rerun `git merge-tree` with those object IDs;
+tree equality establishes content equality, not shared ancestry or a need to
+refresh. This distinction was verified for PR288 and PR287 on 2026-10-10.
 
 ## RCC Developer Toolkit
 

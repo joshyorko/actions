@@ -137,6 +137,14 @@ docs/program/evidence/program-amendment-20261010T1222Z.json -text
 docs/program/evidence/pr286-merge-20261010T1222Z/** -text
 docs/program/evidence/pr288-cross-platform-20261010T1222Z/** -text
 docs/program/evidence/pr279-alias-gate-20261010T1222Z/** -text
+docs/program/evidence/pr285-merge-20261010T1241Z/** -text
+docs/program/evidence/pr288-head-20261010T1241Z/** -text
+docs/program/evidence/pr279-alias-identity-20261010T1241Z/** -text
+docs/program/evidence/program-amendment-20261010T1241Z.json -text
+# Raw baseline output is hash-bound and contains test-runner whitespace verbatim.
+docs/program/evidence/pr279-alias-identity-20261010T1241Z/*.log -diff
+docs/program/evidence/pr288-published-ancestry-20261010T1243Z/** -text
+docs/program/evidence/program-amendment-20261010T1243Z.json -text
 # Hash-bound captured test output is reviewed by digest and retained verbatim.
 docs/program/evidence/pr288-confined-read-20261010T1216Z/*.log -diff
 docs/program/evidence/pr288-cross-platform-20261010T1222Z/*.log -diff
