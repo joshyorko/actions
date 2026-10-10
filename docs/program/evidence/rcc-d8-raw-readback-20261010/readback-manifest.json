@@ -1,0 +1,30 @@
+{
+  "observed_at_utc": "2026-10-10T04:36:34Z",
+  "source_observed_at_utc": "2026-10-10T04:19:12Z",
+  "source": "/workspace/work/community-resume/evidence/rcc-d8-raw-readback-20261010",
+  "method": "Copied supplied producer files byte-for-byte; independently hashed Cloud copies.",
+  "files": [
+    {
+      "path": "evidence/rcc-d8-raw-readback-20261010/lifecycle-receipt.json",
+      "source_path": "/workspace/work/community-resume/evidence/rcc-d8-raw-readback-20261010/lifecycle-receipt.json",
+      "bytes": 8136,
+      "sha256": "d32caeb239c0f09e3d9e11123c8861d18889117cf1520d3bfb46ee94ee93de3b",
+      "copy_verified_byte_identical": true
+    },
+    {
+      "path": "evidence/rcc-d8-raw-readback-20261010/run.json",
+      "source_path": "/workspace/work/community-resume/evidence/rcc-d8-raw-readback-20261010/run.json",
+      "bytes": 3103,
+      "sha256": "9597f558028abcb76d72c1f0103cddfe857e58a0d7f56ea87fc6e536a11d00e5",
+      "copy_verified_byte_identical": true
+    },
+    {
+      "path": "evidence/rcc-d8-raw-readback-20261010/receipt-amendment-correction.json",
+      "source_path": "/workspace/work/community-resume/evidence/rcc-d8-raw-readback-20261010/receipt-amendment-correction.json",
+      "bytes": 895,
+      "sha256": "f3e68f02f196d018606c394e26dabab36a797b19078ff6a72a919440e0a3e146",
+      "copy_verified_byte_identical": true
+    }
+  ],
+  "excluded": "No malformed prior transcript was copied or reconstructed."
+}

@@ -1,6 +1,12 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-10T04:17:00Z
+## Current convergence — 2026-10-10T04:36:34Z
+
+The 28-PR cohort remains 20 target-integrated, 8 open/blocked, and 0 merge-ready. Community `36b8192dbb8143e016af3351f7d25b22a35c9944`, integration `6d438feb6c92f8bb01428f665ac423fb101b4017`, and runtime candidate `6a53578fac029a0696834c30438c858f5f0003be` were read back from remote refs. PR273 remains open/draft at `84b8c70a412db9594dfa2a6c5fcb3e8184db019b`; its tree equals the current synthetic merge tree. Exact-head native jobs, all wheel/sdist jobs on retry, six toolkit jobs, coverage, verify and audit pass. Runtime Linux/macOS are failed for the reported missing external credential; Windows was still in progress at observation. Publish was skipped. See the [live checkpoint](evidence/convergence-followup-20261010T0436Z.json), [PR audit](evidence/convergence-live-prs-20261010T0436Z.json), [exact checks](evidence/pr273-checks-20261010T0436Z.json), and [ref readback](evidence/convergence-refs-20261010T0436Z.json).
+
+The d8 real-consumer test is now independently accepted for its narrow rollback/recovery boundary: three expected successful outcomes, unchanged configured provider operations, shutdown HTTP 200, and natural process exit 1 observed before cleanup without a forced stop. The raw producer records are preserved [here](evidence/rcc-d8-raw-readback-20261010/). Five Runtime modules and the full test file match PR273 head 84 byte-for-byte. Actual child environment and installed Core origin/hash were not recorded; descendant observation is scoped to captured processes, the old `-11` remains unexplained, and this is not full #134 acceptance. Runtime/native 1.0.3 remains unpublished; no whole issue acceptance changed.
+
+## Historical convergence — 2026-10-10T04:17:00Z (superseded by the 04:36 amendment)
 
 The 28-PR cohort remains 20 target-integrated, 8 open/blocked and 0 merge-ready. Integration `6d438feb6c92f8bb01428f665ac423fb101b4017` and community `36b8192dbb8143e016af3351f7d25b22a35c9944` are unchanged. PR273 current head `84b8c70a412db9594dfa2a6c5fcb3e8184db019b` has tree `b2d4a1956770a37d714cc43a23a863abf23fa089`, matching the fresh synthetic merge tree. See the [dated checkpoint](evidence/convergence-followup-20261010T0417Z.json), [current scoped PR audit](evidence/convergence-live-prs-20261010T0417Z.json), and [ref readback](evidence/convergence-refs-20261010T0417Z.json).
 

@@ -1,0 +1,188 @@
+{
+  "observed_at_utc": "2026-10-10T04:36:34Z",
+  "source": "GitHub REST commit check-runs for exact PR273 head",
+  "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+  "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+  "synthetic_merge": "2492f774841118496dbafd5e08b9066edaf170fa",
+  "synthetic_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+  "check_runs": [
+    {
+      "name": "publish (3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114130266128",
+      "started_at": "2026-10-10T04:22:04Z",
+      "completed_at": "2026-10-10T04:22:33Z"
+    },
+    {
+      "name": "build-wheels (macos-15)",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114129269187",
+      "started_at": "2026-10-10T04:12:18Z",
+      "completed_at": "2026-10-10T04:14:12Z"
+    },
+    {
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114129268853",
+      "started_at": "2026-10-10T04:12:13Z",
+      "completed_at": "2026-10-10T04:13:09Z"
+    },
+    {
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114129268110",
+      "started_at": "2026-10-10T04:16:21Z",
+      "completed_at": "2026-10-10T04:22:01Z"
+    },
+    {
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114129267945",
+      "started_at": "2026-10-10T04:16:21Z",
+      "completed_at": "2026-10-10T04:19:03Z"
+    },
+    {
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "skipped",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233244/job/114128682503",
+      "started_at": "2026-10-10T04:13:05Z",
+      "completed_at": "2026-10-10T04:13:04Z"
+    },
+    {
+      "name": "build (ubuntu-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "failure",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233285/job/114128530973",
+      "started_at": "2026-10-10T04:12:14Z",
+      "completed_at": "2026-10-10T04:24:29Z"
+    },
+    {
+      "name": "build (windows-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null,
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233285/job/114128530931",
+      "started_at": "2026-10-10T04:12:14Z",
+      "completed_at": null
+    },
+    {
+      "name": "build (macos-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "failure",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233285/job/114128530800",
+      "started_at": "2026-10-10T04:12:19Z",
+      "completed_at": "2026-10-10T04:24:13Z"
+    },
+    {
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233244/job/114128530751",
+      "started_at": "2026-10-10T04:12:14Z",
+      "completed_at": "2026-10-10T04:13:04Z"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530696",
+      "started_at": "2026-10-10T04:12:14Z",
+      "completed_at": "2026-10-10T04:13:28Z"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530688",
+      "started_at": "2026-10-10T04:12:21Z",
+      "completed_at": "2026-10-10T04:14:10Z"
+    },
+    {
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233169/job/114128530670",
+      "started_at": "2026-10-10T04:12:17Z",
+      "completed_at": "2026-10-10T04:17:01Z"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530659",
+      "started_at": "2026-10-10T04:12:13Z",
+      "completed_at": "2026-10-10T04:13:21Z"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530657",
+      "started_at": "2026-10-10T04:12:20Z",
+      "completed_at": "2026-10-10T04:13:45Z"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530653",
+      "started_at": "2026-10-10T04:12:14Z",
+      "completed_at": "2026-10-10T04:20:27Z"
+    },
+    {
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233169/job/114128530619",
+      "started_at": "2026-10-10T04:12:14Z",
+      "completed_at": "2026-10-10T04:21:21Z"
+    },
+    {
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233222/job/114128530610",
+      "started_at": "2026-10-10T04:12:13Z",
+      "completed_at": "2026-10-10T04:12:22Z"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530596",
+      "started_at": "2026-10-10T04:12:14Z",
+      "completed_at": "2026-10-10T04:20:23Z"
+    },
+    {
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233169/job/114128530535",
+      "started_at": "2026-10-10T04:12:13Z",
+      "completed_at": "2026-10-10T04:18:14Z"
+    },
+    {
+      "name": "coverage",
+      "status": "completed",
+      "conclusion": "success",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233184/job/114128530474",
+      "started_at": "2026-10-10T04:12:14Z",
+      "completed_at": "2026-10-10T04:21:21Z"
+    }
+  ],
+  "interpretation": {
+    "native": "All three hosted native jobs PASS on exact synthetic merge 2492; independent static archive review for this source is separately byte/API verified, not behavioral execution.",
+    "wheels": "All three wheel builds and sdist PASS on the single authorized retry. The first Windows attempt HTTP 503 and failed run remain preserved.",
+    "toolkit": "All six primary/N-1 toolkit jobs PASS.",
+    "coverage": "PASS.",
+    "work_items_verify": "PASS; publish skipped.",
+    "audit": "PASS.",
+    "runtime": "Linux and macOS jobs failed on the external ACTION_SERVER_TEST_ACCESS_CREDENTIALS dependency, per root log diagnosis; Windows remains in progress at this check read. Lint, typing and documentation checks PASS per root status.",
+    "publication": "No publication: publish check skipped."
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "action_server_process_exit": {
+    "argv": [
+      "/workspaces/actions-worktrees/devsy-rcc-narrow-77e67de-20261009/action_server/.venv/bin/python",
+      "-m",
+      "actions.server",
+      "start",
+      "--actions-sync=true",
+      "--port=0",
+      "--datadir=/workspaces/actions-worker-state/devsy-rcc-local-acceptance/d8-rollback-acceptance-20261010/tmp/pytest-of-vscode/pytest-0/popen-gw0/test_current_candidate_failed_0/.sema4ai-test-action-server",
+      "--db-file=server.db",
+      "--skip-lint",
+      "--min-processes=0",
+      "--max-processes=1",
+      "--reuse-processes",
+      "--auto-reload"
+    ],
+    "descendant_observation_scope": "captured tree only; not a complete descendant-reaping claim",
+    "forced_cleanup_returncode_observed": true,
+    "forced_stop_used": false,
+    "interpreter": "/workspaces/actions-worktrees/devsy-rcc-narrow-77e67de-20261009/action_server/.venv/bin/python",
+    "natural_exit_failure": null,
+    "natural_exit_status": "PASS",
+    "owned_descendants_before_stop": [],
+    "pid": 227616,
+    "pythonpath": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src:/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/tests:/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/devutils/src",
+    "returncode_after_forced_cleanup": 1,
+    "returncode_after_forced_cleanup_is_natural_evidence": false,
+    "returncode_before_forced_cleanup": 1,
+    "same_owned_descendants_remaining_after_stop": [],
+    "shutdown_http_status": 200,
+    "shutdown_request_succeeded": true
+  },
+  "descriptor_preserved_after_failure": true,
+  "final_runtime": {
+    "artifact_digest": "sha256:3cfbf2bdebb43349a1b1c16c4c773e9b89fb166291a00f5a57e42b91117959ed",
+    "contract_version": "rcc-runtime/v1",
+    "environment_fingerprint": "887ce08653a10d5025284ba2373baeb98c34e0a20be2eae4ff8dc79b5e8a08dc",
+    "kind": "rcc",
+    "preparation_class": "local",
+    "provider_context_bound": true,
+    "provider_reference": "http://127.0.0.1:35985",
+    "rcc_version": "v18.19.3",
+    "source_generation": "8390633f42d702996e1b750f1a6176ff7f0187627a49a9fa41caf18d761b398b",
+    "source_hash": "8390633f42d702996e1b750f1a6176ff7f0187627a49a9fa41caf18d761b398b"
+  },
+  "first_run": {
+    "error_message": null,
+    "id": "run-000-c2dc6bb1-80ea-4bb9-ad1c-59beeac6e23a",
+    "result": "last-good",
+    "status": 2
+  },
+  "initial_runtime": {
+    "artifact_digest": "sha256:3cfbf2bdebb43349a1b1c16c4c773e9b89fb166291a00f5a57e42b91117959ed",
+    "contract_version": "rcc-runtime/v1",
+    "environment_fingerprint": "887ce08653a10d5025284ba2373baeb98c34e0a20be2eae4ff8dc79b5e8a08dc",
+    "kind": "rcc",
+    "preparation_class": "local",
+    "provider_context_bound": true,
+    "provider_reference": "http://127.0.0.1:35985",
+    "rcc_version": "v18.19.3",
+    "source_generation": "8390633f42d702996e1b750f1a6176ff7f0187627a49a9fa41caf18d761b398b",
+    "source_hash": "8390633f42d702996e1b750f1a6176ff7f0187627a49a9fa41caf18d761b398b"
+  },
+  "provider": "http://127.0.0.1:35985",
+  "provider_ops_after_failure": [
+    {
+      "phase": "publish",
+      "pid": 227629,
+      "provider": "http://127.0.0.1:35985"
+    },
+    {
+      "artifact": "sha256:3cfbf2bdebb43349a1b1c16c4c773e9b89fb166291a00f5a57e42b91117959ed",
+      "phase": "acquire",
+      "pid": 227985,
+      "provider": "http://127.0.0.1:35985"
+    }
+  ],
+  "provider_ops_after_recovery": [
+    {
+      "phase": "publish",
+      "pid": 227629,
+      "provider": "http://127.0.0.1:35985"
+    },
+    {
+      "artifact": "sha256:3cfbf2bdebb43349a1b1c16c4c773e9b89fb166291a00f5a57e42b91117959ed",
+      "phase": "acquire",
+      "pid": 227985,
+      "provider": "http://127.0.0.1:35985"
+    }
+  ],
+  "provider_ops_before_failure": [
+    {
+      "phase": "publish",
+      "pid": 227629,
+      "provider": "http://127.0.0.1:35985"
+    },
+    {
+      "artifact": "sha256:3cfbf2bdebb43349a1b1c16c4c773e9b89fb166291a00f5a57e42b91117959ed",
+      "phase": "acquire",
+      "pid": 227985,
+      "provider": "http://127.0.0.1:35985"
+    }
+  ],
+  "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "rcc_trace": [
+    {
+      "phase": [],
+      "pid": 227624
+    },
+    {
+      "phase": [
+        "publish"
+      ],
+      "pid": 227629
+    },
+    {
+      "phase": [
+        "acquire"
+      ],
+      "pid": 227985
+    },
+    {
+      "phase": [],
+      "pid": 228046
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228051
+    },
+    {
+      "phase": [],
+      "pid": 228065
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228071
+    },
+    {
+      "phase": [],
+      "pid": 228092
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228098
+    },
+    {
+      "phase": [],
+      "pid": 228119
+    },
+    {
+      "phase": [],
+      "pid": 228123
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228128
+    },
+    {
+      "phase": [],
+      "pid": 228142
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228147
+    },
+    {
+      "phase": [],
+      "pid": 228166
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228173
+    },
+    {
+      "phase": [],
+      "pid": 228197
+    },
+    {
+      "phase": [],
+      "pid": 228201
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228205
+    },
+    {
+      "phase": [],
+      "pid": 228220
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228224
+    },
+    {
+      "phase": [],
+      "pid": 228239
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 228244
+    }
+  ],
+  "rcc_version": "v18.19.3",
+  "recovered_run": {
+    "error_message": null,
+    "id": "run-002-f7ad5e3a-1d00-4fe9-a62a-97d8f8fcd03a",
+    "result": "recovered",
+    "status": 2
+  },
+  "recovered_runtime": {
+    "artifact_digest": "sha256:3cfbf2bdebb43349a1b1c16c4c773e9b89fb166291a00f5a57e42b91117959ed",
+    "contract_version": "rcc-runtime/v1",
+    "environment_fingerprint": "887ce08653a10d5025284ba2373baeb98c34e0a20be2eae4ff8dc79b5e8a08dc",
+    "kind": "rcc",
+    "preparation_class": "source-reuse",
+    "provider_context_bound": true,
+    "provider_reference": "http://127.0.0.1:35985",
+    "rcc_version": "v18.19.3",
+    "source_generation": "a5eba7155571bf36dad29e663e9e99c53f59e7af65f3080966fb90f2723cb6a9",
+    "source_hash": "a5eba7155571bf36dad29e663e9e99c53f59e7af65f3080966fb90f2723cb6a9"
+  },
+  "run_ids": [
+    "run-000-c2dc6bb1-80ea-4bb9-ad1c-59beeac6e23a",
+    "run-001-9f77c8b9-8c48-4c82-8d2b-a0c62b1a2374",
+    "run-002-f7ad5e3a-1d00-4fe9-a62a-97d8f8fcd03a"
+  ],
+  "second_run": {
+    "error_message": null,
+    "id": "run-001-9f77c8b9-8c48-4c82-8d2b-a0c62b1a2374",
+    "result": "last-good",
+    "status": 2
+  },
+  "shutdown_http_status": 200,
+  "source": {
+    "commit": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+    "dirty_paths": [],
+    "module_origins": {
+      "action_package_handler": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src/actions/server/_action_package_handler.py",
+      "actions_import": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src/actions/server/_actions_import.py",
+      "runtime_adapter": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src/actions/server/_rcc_runtime_adapter.py"
+    },
+    "parent_delta_file_sha256": {
+      "docs/program/evidence/pr273-exact-gates-20261010T0348Z.json": "ea4d685fd7eb58cc8fc29729c2c3eaa194b9e96e158e102617be6e557d7a9ce0",
+      "docs/program/evidence/watcher-convergence-20261010T0356Z.json": "949c9a3a886105b3e8389683bf2a8e28435e3df91044c25210c154f045933f0e"
+    },
+    "runtime_module_sha256": {
+      "action_package_handler": "d4505685cf274ea7ecd8f6b7b3ac47908943738624966c64359e643a6953ffba",
+      "actions_import": "c7b02a7fd33c6672cbee01c16820d7812c9fa1d3bedc211e5f424bc4f2332c71",
+      "runtime_adapter": "65abc1efe7879ffc325f84841b9630f05b8a5b11cdc3a32728daf7df7091edcb"
+    },
+    "tree": "4633ee098b97c09bb0552fc40bcf59d58e28ef5d"
+  },
+  "status": "PASS"
+}

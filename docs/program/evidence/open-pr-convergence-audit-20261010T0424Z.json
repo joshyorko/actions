@@ -1,0 +1,511 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T04:24:53Z",
+  "repository": "joshyorko/actions",
+  "method": {
+    "sources": [
+      "GitHub PR metadata via github_get_pr_info",
+      "GitHub pull-request workflow runs via github_fetch_commit_workflow_runs",
+      "GitHub job and step summaries via github_fetch_workflow_run_jobs",
+      "GitHub comparison API via github_compare_commits",
+      "GitHub review submissions/threads via GitHub review tools",
+      "git ls-remote against origin for current target refs"
+    ],
+    "limitations": [
+      "Workflow run listing is connector first-page data; it is not a complete repository-wide check census.",
+      "No source checkout, workflow rerun, PR mutation, merge, publication, or issue closure was performed."
+    ],
+    "review_counts": {
+      "formal_submissions": 0,
+      "inline_threads": 0
+    }
+  },
+  "live_refs": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "verified_by": "git ls-remote https://github.com/joshyorko/actions.git refs/heads/community refs/heads/integration/community-release-20261008"
+  },
+  "cohort": {
+    "total": 28,
+    "integrated": 20,
+    "blocked_open": 8,
+    "ready_open": 0,
+    "assessment": "Matches current governance snapshot; eight requested PRs remain open and none has an independent merge-ready disposition. Draft status is metadata only, not a blocker."
+  },
+  "ancestry": {
+    "prs_215_218": {
+      "against_integration": "Each exact PR head is an ancestor of current integration (compare status behind, ahead_by 0).",
+      "against_community": "Each diverges from current community with merge base 7c98236069171f57031218f938963238986293bd.",
+      "disposition": "Source is already integrated in the integration line but is not community-merged; do not cherry-pick or merge the old checkpoints independently."
+    },
+    "pr_272_into_273": {
+      "comparison": "969219e7aa398f61b11466a2dc16ac3143568ff5 is an ancestor of 84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+      "compare": "ahead_by 77, behind_by 0"
+    },
+    "pr_278_into_273": {
+      "comparison": "c1c33ce77895d7b522f2229524d386ed72f8ba3b is an ancestor of 84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+      "compare": "ahead_by 88, behind_by 0"
+    },
+    "pr_273_vs_integration": {
+      "comparison": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b is 76 commits ahead of 6d438feb6c92f8bb01428f665ac423fb101b4017 and has no commits behind it."
+    }
+  },
+  "pull_requests": [
+    {
+      "number": 215,
+      "state": "open",
+      "draft": true,
+      "mergeable": false,
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "base_branch": "community",
+      "base_sha_snapshot": "7c98236069171f57031218f938963238986293bd",
+      "owner": "Root owns integration/admission; checkpoint branch is convergence/actions-full-graph-20261008.",
+      "source_state": "Exact head is already contained in integration; not in community.",
+      "attached_pr_workflows": [
+        {
+          "id": 37785345641,
+          "name": "AI audit evidence",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785345557,
+          "name": "Actions Core Tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785345566,
+          "name": "Actions Runtime PYPI Release",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785345774,
+          "name": "RCC developer toolkit",
+          "conclusion": "success"
+        }
+      ],
+      "blocker": "Current community admission is through PR221 and its current combined candidate; isolated 2026-10-08 checkpoint checks do not establish current admission.",
+      "smallest_action": "No independent merge or cherry-pick; rely on the shared PR221/PR273 candidate gates.",
+      "dependency": "PR221 current integration candidate and its exact-head release/native acceptance."
+    },
+    {
+      "number": 216,
+      "state": "open",
+      "draft": true,
+      "mergeable": false,
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "base_branch": "community",
+      "base_sha_snapshot": "7c98236069171f57031218f938963238986293bd",
+      "owner": "Root owns integration/admission; checkpoint branch is review/runtime-checkpoint-20261008.",
+      "source_state": "Exact head is already contained in integration; not in community.",
+      "attached_pr_workflows": [
+        {
+          "id": 37827009812,
+          "name": "RCC developer toolkit",
+          "conclusion": "success"
+        },
+        {
+          "id": 37827009411,
+          "name": "Lighthouse CI",
+          "conclusion": "success"
+        },
+        {
+          "id": 37827009511,
+          "name": "Action Server Frontend tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 37827009432,
+          "name": "AI audit evidence",
+          "conclusion": "success"
+        },
+        {
+          "id": 37827009435,
+          "name": "Action Server Build (Unauthenticated)",
+          "conclusion": "success"
+        },
+        {
+          "id": 37827009686,
+          "name": "Actions Core Tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 37827009525,
+          "name": "Frontend Build",
+          "conclusion": "success"
+        },
+        {
+          "id": 37827009520,
+          "name": "Actions Runtime PYPI Release",
+          "conclusion": "success"
+        }
+      ],
+      "blocker": "Current community admission is through PR221 and its current combined candidate; isolated checkpoint checks do not prove current-head acceptance.",
+      "smallest_action": "No independent merge or cherry-pick; rely on the shared PR221/PR273 candidate gates.",
+      "dependency": "PR221 current integration candidate and exact-head package/platform acceptance."
+    },
+    {
+      "number": 217,
+      "state": "open",
+      "draft": true,
+      "mergeable": false,
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "base_branch": "community",
+      "base_sha_snapshot": "7c98236069171f57031218f938963238986293bd",
+      "owner": "Root owns integration/admission; checkpoint branch is review/core-checkpoint-20261008.",
+      "source_state": "Exact head is already contained in integration; not in community.",
+      "attached_pr_workflows": [
+        {
+          "id": 37831562324,
+          "name": "AI audit evidence",
+          "conclusion": "success"
+        },
+        {
+          "id": 37831562334,
+          "name": "Actions Runtime PYPI Release",
+          "conclusion": "success"
+        },
+        {
+          "id": 37831562347,
+          "name": "Actions Core Tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 37831562429,
+          "name": "RCC developer toolkit",
+          "conclusion": "success"
+        }
+      ],
+      "blocker": "No standalone source blocker identified. This checkpoint is superseded in the integration rollup; current Runtime/native acceptance remains open. Its original publication statements are historical and are superseded by current verified Helper 1.0.3/Core 1.0.2 publication evidence.",
+      "smallest_action": "Do not merge/pick independently; keep the current PR221 candidate as the sole community-admission path.",
+      "dependency": "PR221/PR273 current Runtime candidate gates; separately versioned newer Core API remains absent from published Core 1.0.2."
+    },
+    {
+      "number": 218,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "base_branch": "community",
+      "base_sha_snapshot": "7c98236069171f57031218f938963238986293bd",
+      "owner": "Root owns integration/admission; checkpoint branch is review/workitems-checkpoint-20261008.",
+      "source_state": "Exact head is already contained in integration; not in community.",
+      "attached_pr_workflows": [
+        {
+          "id": 37785524726,
+          "name": "AI audit evidence",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785524878,
+          "name": "Lighthouse CI",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785525053,
+          "name": "Frontend Build",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785524612,
+          "name": "Action Server Frontend tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785524905,
+          "name": "Work Items Release",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785524761,
+          "name": "Action Server Build (Unauthenticated)",
+          "conclusion": "success"
+        },
+        {
+          "id": 37785524551,
+          "name": "RCC developer toolkit",
+          "conclusion": "success"
+        }
+      ],
+      "blocker": "The bounded component is gated by the shared PR221/PR273 current native admission path. Draft/open metadata does not itself block admission; unfinished whole-issue #208 acceptance does not by itself block this bounded component slice.",
+      "smallest_action": "No independent merge/pick; await the combined PR273 exact-head native/current Runtime gates.",
+      "dependency": "PR273 native artifact/browser acceptance and remaining current combined gates."
+    },
+    {
+      "number": 221,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "base_branch": "community",
+      "base_sha_snapshot": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "owner": "Root owns the community integration and admission decision.",
+      "attached_pr_workflows": [
+        {
+          "id": 38019479122,
+          "name": "Lighthouse CI",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479204,
+          "name": "AI audit evidence",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479186,
+          "name": "HTTP Helper Tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479133,
+          "name": "Work Items Release",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479185,
+          "name": "Copilot Setup Steps",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479131,
+          "name": "Action Server Frontend tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479194,
+          "name": "Actions Core Tests",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479193,
+          "name": "Frontend Build",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479192,
+          "name": "Action Server Build (Unauthenticated)",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479138,
+          "name": "Actions Runtime PYPI Release",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479159,
+          "name": "Measured Python coverage gate",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019479125,
+          "name": "RCC developer toolkit",
+          "conclusion": "success"
+        }
+      ],
+      "blocker": "These 12 green workflows are bound to prior integration head 6d438feb; latest PR273 candidate has an exact-head Runtime integration credential failure plus current platform jobs still running.",
+      "smallest_action": "Complete and review the current PR273 exact-head gates, then root can make one combined admission decision.",
+      "dependency": "PR273 current-head runtime and independently reviewed RCC/browser evidence."
+    },
+    {
+      "number": 272,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+      "base_branch": "integration/community-release-20261008",
+      "base_sha_snapshot": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b",
+      "owner": "Devsy owns the RCC producer lane; Root owns integration admission.",
+      "source_state": "Exact head is an ancestor of PR273 head; no duplicate cherry-pick or separate merge is needed.",
+      "attached_pr_workflows": [
+        {
+          "id": 38019563155,
+          "name": "AI audit evidence",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019563214,
+          "name": "Measured Python coverage gate",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019563087,
+          "name": "Actions Runtime PYPI Release",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019563159,
+          "name": "Action Server Build (Unauthenticated)",
+          "conclusion": "success"
+        },
+        {
+          "id": 38019563074,
+          "name": "RCC developer toolkit",
+          "conclusion": "success"
+        }
+      ],
+      "blocker": "Owner-reported real-RCC failure on this checkpoint: HTTP shutdown succeeded, then process naturally exited -11; no native stack/cause. The newer PR273 rollback exit-1 observation is also owner-reported; independent receipt review is blocked on malformed transcript/raw-byte retrieval. Do not infer whole #134 acceptance from green attached jobs.",
+      "smallest_action": "Keep as superseded history; complete exact current PR273 admission and independent RCC receipt review; do not separately merge this older head.",
+      "dependency": "PR273 current exact-head gates and RCC natural-exit/receipt review."
+    },
+    {
+      "number": 273,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+      "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+      "base_branch": "integration/community-release-20261008",
+      "base_sha_snapshot": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "owner": "Root owns combined-candidate admission; RCC source producer/reviewer own the separately scoped RCC acceptance.",
+      "exact_head_workflows": [
+        {
+          "id": 38023233222,
+          "name": "AI audit evidence",
+          "conclusion": "success"
+        },
+        {
+          "id": 38023233285,
+          "name": "Action Server Tests",
+          "status": "in_progress",
+          "jobs": [
+            {
+              "name": "build (macos-py3.12-devmode)",
+              "status": "completed",
+              "conclusion": "failure",
+              "failing_step": "Test (integration)",
+              "exact_failure": "action_server_tests/test_cloud.py::test_cloud_list_organizations fails because ACTION_SERVER_TEST_ACCESS_CREDENTIALS is not set; 858 portable passed / 16 skipped, 119 integration passed / 15 skipped, 877 deselected.",
+              "trailing_gates": [
+                "inv isort passes",
+                "inv typecheck passes",
+                "inv docs --check completes; docs output path absent and skips"
+              ],
+              "job_id": 114128530800
+            },
+            {
+              "name": "build (ubuntu-py3.12-devmode)",
+              "status": "completed",
+              "conclusion": "failure",
+              "failing_step": "Test (integration)",
+              "exact_failure": "Root decoded the exact-head checkout log and confirmed the same missing ACTION_SERVER_TEST_ACCESS_CREDENTIALS failure in test_cloud_list_organizations; 862 portable passed / 12 skipped, 119 integration passed / 15 skipped, 877 deselected.",
+              "job_id": 114128530973
+            },
+            {
+              "name": "build (windows-py3.12-devmode)",
+              "status": "in_progress",
+              "conclusion": null,
+              "running_step": "Test (integration)",
+              "job_id": 114128530931
+            }
+          ]
+        },
+        {
+          "id": 38023233185,
+          "name": "RCC developer toolkit",
+          "conclusion": "success",
+          "jobs": "6/6 successful (primary and N-1 across Linux/macOS/Windows; Linux bootstrap/smoke ran, non-Linux bootstrap/smoke steps skipped by platform)."
+        },
+        {
+          "id": 38023233184,
+          "name": "Measured Python coverage gate",
+          "conclusion": "success",
+          "jobs": "coverage success"
+        },
+        {
+          "id": 38023233169,
+          "name": "Action Server Build (Unauthenticated)",
+          "conclusion": "success",
+          "jobs": "Ubuntu, Windows, macOS native build/acceptance jobs all success; provenance archive and packaged Work Items browser steps executed."
+        },
+        {
+          "id": 38023233207,
+          "name": "Actions Runtime PYPI Release",
+          "conclusion": "success",
+          "jobs": "Ubuntu/Windows/macOS wheels, Ubuntu sdist, published-Core/Helper compatibility checks all success. Publish job validation succeeds but tag provenance, credential and upload steps are skipped; no publication."
+        },
+        {
+          "id": 38023233244,
+          "name": "Work Items Release",
+          "conclusion": "success",
+          "jobs": "Verify success; publish skipped."
+        }
+      ],
+      "blocker": "Exact current Action Server Tests run remains in progress; macOS and Ubuntu integration steps fail only the legacy credential-dependent organization test (confirmed in exact-head logs), and Windows is still running. Lint, typecheck and docs workflow steps pass on completed Linux/macOS jobs. Separate RCC receipt review and browser/auth acceptance remain called out in the current candidate contract.",
+      "smallest_action": "Resolve or explicitly provide the required test credential through the existing authorized CI mechanism without weakening the test; wait for Windows and remaining exact-head checks; finish RCC receipt review and browser/auth acceptance before admission.",
+      "dependency": "Legacy ACTION_SERVER_TEST_ACCESS_CREDENTIALS availability for test_cloud_list_organizations; Windows completion; RCC/browser independent acceptance.",
+      "downstream_release_state": "Runtime 1.0.3 is unpublished. Publication is downstream of integration and is not a merge prerequisite; the PR publish job skipped tag provenance, credential and upload steps."
+    },
+    {
+      "number": 278,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "head": "c1c33ce77895d7b522f2229524d386ed72f8ba3b",
+      "base_branch": "integration/community-release-20261008",
+      "base_sha_snapshot": "46a06485f776265e64e84629c468f26b4389d2bd",
+      "owner": "Root owns integration admission; branch fix/rcc-harness-portability-20261010.",
+      "source_state": "Exact head is an ancestor of PR273 head; do not merge/cherry-pick separately.",
+      "attached_pr_workflows": [
+        {
+          "id": 38014327083,
+          "name": "RCC developer toolkit",
+          "conclusion": "success"
+        },
+        {
+          "id": 38014327095,
+          "name": "Action Server Build (Unauthenticated)",
+          "conclusion": "success"
+        },
+        {
+          "id": 38014327114,
+          "name": "Measured Python coverage gate",
+          "conclusion": "success"
+        },
+        {
+          "id": 38014327060,
+          "name": "Actions Runtime PYPI Release",
+          "conclusion": "success"
+        },
+        {
+          "id": 38014327084,
+          "name": "AI audit evidence",
+          "conclusion": "success"
+        }
+      ],
+      "blocker": "Superseded checkpoint; its own limited CI is green but the single combined PR273 current-head gate is not complete.",
+      "smallest_action": "No separate merge/pick; use PR273 combined proof and root's single admission action.",
+      "dependency": "PR273 exact-head Runtime, native, toolkit and RCC/browser gates."
+    }
+  ],
+  "no_publication": {
+    "runtime_pypi_run": 38023233207,
+    "successful_steps": [
+      "wheel/sdist build",
+      "exact artifact inventory/verification",
+      "published Core/Helper compatibility"
+    ],
+    "skipped_steps": [
+      "tag provenance verification",
+      "publish credential check",
+      "actual upload"
+    ],
+    "other_skipped_publish": "Work Items Release 38023233244 publish job skipped."
+  },
+  "documentation_improvement": {
+    "disposition": "No new canonical guide change proposed.",
+    "rationale": "Current program handoff and repository operations guidance already distinguish PR-base snapshots from live refs, integration ancestry from community admission, exact-head gates from predecessor proofs, skipped publication from actual release, and bounded component admission from whole-issue acceptance. This audit adds only timestamped evidence/status."
+  },
+  "upstream_disposition": {
+    "classification": "Local repository/CI admission state; no third-party defect confirmed.",
+    "action": "No upstream issue/report."
+  },
+  "amended_at_utc": "2026-10-10T04:28:17Z",
+  "amendments": [
+    {
+      "at_utc": "2026-10-10T04:28:17Z",
+      "change": "Clarified PR272 rollback evidence is owner-reported and independent receipt review is blocked on malformed transcript/raw-byte retrieval."
+    },
+    {
+      "at_utc": "2026-10-10T04:28:17Z",
+      "change": "Separated Runtime 1.0.3 unpublished state from PR273 merge blockers; publication is downstream and not a merge prerequisite."
+    }
+  ]
+}

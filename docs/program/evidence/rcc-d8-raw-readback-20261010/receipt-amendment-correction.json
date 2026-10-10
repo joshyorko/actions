@@ -1,0 +1,12 @@
+{
+  "correction_scope": "correct marker-file hash comparison in receipt-amendment.json; no source/test/RCC execution",
+  "equality_to_provided_expected_string": false,
+  "interpretation": "The old marker file matches the hash recorded in its run1 metadata. The supplied expected string is 62 hex characters, so no equality to it is claimed.",
+  "measured_marker_matches_run1_record": true,
+  "measured_old_marker_sha256": "ac552f20ace9a7d1d9b83dd08f3ac1a25995288d513ec9cee18dcd50cbae8718",
+  "original_amendment_sha256": "e2f8ee5bd1e4c537470f45935bae437fc38432426acba43958ccf22f8c26d157",
+  "provided_expected_marker_string": "ac552f20ace9a7d1d83dd08f3ac1a25995288d513ec9cee18dcd50cbae8718",
+  "provided_expected_string_is_valid_sha256_length": false,
+  "provided_expected_string_length": 62,
+  "run1_recorded_marker_sha256": "ac552f20ace9a7d1d9b83dd08f3ac1a25995288d513ec9cee18dcd50cbae8718"
+}
