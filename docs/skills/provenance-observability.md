@@ -52,6 +52,13 @@ The field mapping and regression cases are documented in the experimental
 schema draft; they do not approve the paused #129 production API or identifier
 syntax.
 
+The Package Revision fixtures under `docs/design/fixtures/package-revision-v1`
+have canonical UTF-8 JSON bytes with LF endings. Their scoped `.gitattributes`
+rule preserves those bytes on Windows checkouts with `core.autocrlf=true`.
+Verify checkout bytes as well as Git blobs; do not normalize test inputs or relax
+the byte comparisons to hide checkout conversion. This is fixture preservation,
+not approval of a production Package Revision digest algorithm.
+
 ## Admission and execution receipt
 
 Run creation stores one immutable `AdmissionSnapshot` containing the schema

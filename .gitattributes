@@ -24,3 +24,6 @@ action_server/go-wrapper/go.sum text eol=lf
 # Preserve the failed pre-test RCC bootstrap receipt byte-for-byte.
 docs/program/evidence/rcc-control-772-bootstrap-failure.json -text
 docs/program/evidence/rcc-control-772-bootstrap-failure.log -text
+
+# Package Revision fixtures assert canonical JSON bytes, including LF endings.
+docs/design/fixtures/package-revision-v1/*.json text eol=lf
