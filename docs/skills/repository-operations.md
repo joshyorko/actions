@@ -1746,6 +1746,12 @@ declared portable-suite result and hand it to the Action Server test-layout
 owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
 the package's discovery rules.
 
+CLI tests that parse nested MCP JSON responses should model the concrete
+response and transition shapes with `TypedDict`, then validate the decoded
+`object` at the HTTP boundary with a narrow `TypeGuard` before indexing. This
+keeps success and error variants explicit and avoids both untyped JSON access
+and broad `Any` annotations.
+
 The generated `actions_runtime_tests.yml` workflow is the configured full
 Action Server PR gate: it runs the portable and binary test tasks, then lint,
 typecheck, and docs checks. Its pull-request filter must retain the generated
