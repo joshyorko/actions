@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import ctypes
+from email.parser import Parser
 import hashlib
 import http.server
 import json
@@ -17,7 +18,9 @@ import sys
 import tempfile
 import threading
 import time
+import zipfile
 from pathlib import Path
+from typing import NamedTuple
 from urllib.parse import urlsplit
 
 RCC_VERSION = "v18.19.3"
@@ -51,6 +54,19 @@ _ENV_ALLOWLIST = {
     "COMSPEC",
     "PATHEXT",
 }
+
+
+class CandidateWheel(NamedTuple):
+    distribution: str
+    version: str
+    path: Path
+
+
+class CandidateWheels(NamedTuple):
+    core: CandidateWheel
+    helper: CandidateWheel
+
+
 _SAFE_EXTRA_ENV = {
     "ACTIONS_ACCEPTANCE_POETRY",
     "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
@@ -892,8 +908,9 @@ def build_candidate_wheels(
     source_env: dict[str, str],
     poetry: Path,
     deadline: Deadline,
-) -> tuple[Path, Path]:
-    repo_root = Path(__file__).resolve().parents[2]
+    repo_root: Path | None = None,
+) -> CandidateWheels:
+    repo_root = repo_root or Path(__file__).resolve().parents[2]
     wheelhouse = root / "candidate-wheelhouse"
     wheelhouse.mkdir()
     env = child_environment(
@@ -908,7 +925,26 @@ def build_candidate_wheels(
             "POETRY_CACHE_DIR": str(root / "poetry-cache"),
         },
     )
-    for package_dir in (repo_root / "actions-http-helper", repo_root / "actions"):
+    package_specs = (
+        (repo_root / "actions-http-helper", "actions-http-helper"),
+        (repo_root / "actions", "actions-core"),
+    )
+    versions: dict[str, str] = {}
+    for package_dir, distribution in package_specs:
+        result = run_owned_process(
+            [poetry, "version", "--short"],
+            cwd=package_dir,
+            env=env,
+            timeout_seconds=deadline.remaining(),
+        )
+        version = (result.stdout or "").strip()
+        if result.returncode or not version or any(c.isspace() for c in version):
+            raise RuntimeError(
+                f"pinned Poetry could not read {distribution} candidate version"
+            )
+        versions[distribution] = version
+
+    for package_dir, _distribution in package_specs:
         result = run_owned_process(
             [poetry, "build", "--format", "wheel", "--output", str(wheelhouse)],
             cwd=package_dir,
@@ -920,11 +956,69 @@ def build_candidate_wheels(
                 "pinned Poetry candidate wheel build failed: "
                 f"{(result.stderr or result.stdout)[-1000:]}"
             )
-    core = wheelhouse / "actions_core-1.0.2-py3-none-any.whl"
-    helper = wheelhouse / "actions_http_helper-1.0.3-py3-none-any.whl"
-    if not core.is_file() or not helper.is_file():
-        raise RuntimeError("Poetry did not produce the expected candidate wheels")
-    return core, helper
+
+    candidates: dict[str, CandidateWheel] = {}
+    for _package_dir, distribution in package_specs:
+        version = versions[distribution]
+        filename_distribution = distribution.replace("-", "_")
+        wheel = wheelhouse / (
+            f"{filename_distribution}-{version}-py3-none-any.whl"
+        )
+        if not wheel.is_file():
+            raise RuntimeError(
+                f"Poetry did not produce {distribution} {version} candidate wheel"
+            )
+        validate_candidate_wheel_metadata(
+            wheel, expected_distribution=distribution, expected_version=version
+        )
+        candidates[distribution] = CandidateWheel(
+            distribution=distribution, version=version, path=wheel
+        )
+    return CandidateWheels(
+        core=candidates["actions-core"],
+        helper=candidates["actions-http-helper"],
+    )
+
+
+def validate_candidate_wheel_metadata(
+    wheel: Path, *, expected_distribution: str, expected_version: str
+) -> None:
+    try:
+        with zipfile.ZipFile(wheel) as archive:
+            metadata_members = [
+                member
+                for member in archive.namelist()
+                if member.endswith(".dist-info/METADATA")
+            ]
+            if len(metadata_members) != 1:
+                raise RuntimeError(
+                    f"candidate wheel METADATA inventory is invalid: {wheel.name}"
+                )
+            metadata_text = archive.read(metadata_members[0]).decode("utf-8")
+    except (OSError, UnicodeDecodeError, zipfile.BadZipFile) as error:
+        raise RuntimeError(
+            f"candidate wheel METADATA could not be read: {wheel.name}"
+        ) from error
+
+    metadata = Parser().parsestr(metadata_text)
+    actual_distribution = metadata.get("Name")
+    actual_version = metadata.get("Version")
+    if (
+        actual_distribution != expected_distribution
+        or actual_version != expected_version
+    ):
+        raise RuntimeError(
+            f"candidate wheel METADATA mismatch for {wheel.name}: expected "
+            f"{expected_distribution}=={expected_version}, got "
+            f"{actual_distribution}=={actual_version}"
+        )
+
+
+def candidate_version_fields(wheels: CandidateWheels) -> dict[str, str]:
+    return {
+        "actions_core": wheels.core.version,
+        "actions_http_helper": wheels.helper.version,
+    }
 
 
 def sha256_file(path: Path) -> str:
@@ -933,6 +1027,17 @@ def sha256_file(path: Path) -> str:
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def candidate_wheel_records(wheels: CandidateWheels) -> dict[str, dict[str, str]]:
+    return {
+        wheel.distribution: {
+            "filename": wheel.path.name,
+            "version": wheel.version,
+            "sha256": sha256_file(wheel.path),
+        }
+        for wheel in (wheels.core, wheels.helper)
+    }
 
 
 def source_revision(repo_root: Path, *, env: dict[str, str], deadline: Deadline) -> str:
@@ -1155,19 +1260,13 @@ def _run(receipt_path: Path) -> dict[str, object]:
             source_env, task_root=root / "source-inspection", extra=tool_extra
         )
         source_sha = source_revision(repo_root, env=tool_env, deadline=deadline)
-        core_wheel, helper_wheel = build_candidate_wheels(
+        candidate_wheels = build_candidate_wheels(
             root, source_env=source_env, poetry=poetry, deadline=deadline
         )
-        wheel_records = {
-            "actions-core": {
-                "filename": core_wheel.name,
-                "sha256": sha256_file(core_wheel),
-            },
-            "actions-http-helper": {
-                "filename": helper_wheel.name,
-                "sha256": sha256_file(helper_wheel),
-            },
-        }
+        core_wheel = candidate_wheels.core
+        helper_wheel = candidate_wheels.helper
+        candidate_versions = candidate_version_fields(candidate_wheels)
+        wheel_records = candidate_wheel_records(candidate_wheels)
         package_dir = root / "package"
         package_dir.mkdir()
         (package_dir / "package.yaml").write_text(
@@ -1178,8 +1277,8 @@ dependencies:
   conda-forge:
     - python=3.12.15
   pypi:
-    - actions-core @ {core_wheel.as_uri()}
-    - actions-http-helper @ {helper_wheel.as_uri()}
+    - actions-core @ {core_wheel.path.as_uri()}
+    - actions-http-helper @ {helper_wheel.path.as_uri()}
 """,
             encoding="utf-8",
         )
@@ -1291,8 +1390,7 @@ dependencies:
             response.raise_for_status()
             expected_result = {
                 "result": "dakota-rcc-local-acceptance",
-                "actions_core": "1.0.2",
-                "actions_http_helper": "1.0.3",
+                **candidate_versions,
                 "server_integration": "ManagedParameters",
             }
             candidate_result = json.loads(response.json())
@@ -1671,8 +1769,7 @@ dependencies:
                     "sha256": rcc_sha256,
                 },
                 "candidate_wheels": wheel_records,
-                "actions_core": "1.0.2",
-                "actions_http_helper": "1.0.3",
+                **candidate_versions,
                 "server_integration": candidate_result["server_integration"],
                 "artifact_digest": digest,
                 "run_id": run_id,
@@ -1804,8 +1901,7 @@ dependencies:
             "source_sha": source_sha,
             "rcc": {"version": runtime["rcc_version"], "sha256": rcc_sha256},
             "candidate_wheels": wheel_records,
-            "actions_core": "1.0.2",
-            "actions_http_helper": "1.0.3",
+            **candidate_versions,
             "server_integration": candidate_result["server_integration"],
             "artifact_digest": digest,
             "run_id": run_id,
