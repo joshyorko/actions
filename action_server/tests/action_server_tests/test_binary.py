@@ -6,6 +6,15 @@ from pathlib import Path
 import pytest
 
 
+@pytest.mark.integration_test
+def test_binary_preserves_cli_usage_exit_code():
+    from actions.server._selftest import actions_server_run
+
+    result = actions_server_run(["devenv", "task"], returncode=2)
+    assert "usage: action-server devenv task" in result.stderr
+    assert "the following arguments are required: task_names" in result.stderr
+
+
 def get_internal_version_location(version: str) -> Path:
     import os
     import sys

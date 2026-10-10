@@ -1559,6 +1559,17 @@ then replaces a same-version extraction whose embedded hash differs. A release-s
 version reuses the old extraction after warning, so it can make a newly built wrapper
 launch stale code.
 
+The Go wrapper preserves the child executable's nonnegative exit code from
+`exec.ExitError` while retaining its execution diagnostic. Launcher errors and
+signal termination without an exit code remain status 1; a successful child
+returns status 0. CLI usage errors such as `action-server devenv task` without
+task names must remain status 2 through `dist/final/action-server`, as asserted
+by `test_binary_preserves_cli_usage_exit_code` in `test_binary.py`. The existing
+`invoke test-binary` integration gate selects that built wrapper through
+`SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE`; a source-only test pass
+does not verify wrapper exit propagation. This argument-error boundary does
+not execute a developer task or require an RCC environment build.
+
 Before reinstalling or restarting Action Server, inspect the process table and listening
 sockets. A `GET /mcp` SSE request can expose receive-wrapper event-loop starvation when
 buffer exhaustion is followed by an endlessly ready synthetic `http.request`; sustained
