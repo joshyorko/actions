@@ -290,8 +290,15 @@ jobs:
       id: wrapper_dependencies
       env:
         ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD: '1'
-      run: uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0
+      run: 'set -Eeuo pipefail
+
+        uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0
         env -u VIRTUAL_ENV inv devinstall
+
+        uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV
+        poetry env info --executable > "$RUNNER_TEMP/go-wrapper-catalog-evidence/test-python-path.txt"
+
+        test -x "$(cat "$RUNNER_TEMP/go-wrapper-catalog-evidence/test-python-path.txt")"'
     - name: Run the exact eleven Go-wrapper acceptance cases
       id: wrapper_acceptance
       shell: bash
@@ -305,13 +312,14 @@ jobs:
         ROBOTS_HOME: ${{ runner.temp }}/go-wrapper-robots-home
         TMPDIR: ${{ runner.temp }}/go-wrapper-tmp
       run: "set -Eeuo pipefail\nmkdir -p \"$HOME\" \"$ACTIONS_HOME\" \"$ROBOTS_HOME\"\
-        \ \"$TMPDIR\"\nuv run --no-project --python 3.12 --with poetry==2.1.1 env\
-        \ -u VIRTUAL_ENV poetry run python -c 'import pytest, sys; print(f\"pytest={pytest.__file__};\
-        \ python={sys.executable}\")'\nuv run --no-project --python 3.12 --with poetry==2.1.1\
-        \ env -u VIRTUAL_ENV poetry run python -m pytest -q -p no:robocorp_log_pytest\
-        \ tests/contract_tests/test_verify_frozen_catalog_junit.py tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py\n\
-        set +e\nuv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV\
-        \ poetry run python -m pytest -p scripts.frozen_wrapper_acceptance_plugin\
+        \ \"$TMPDIR\"\ntest_python=\"$(cat \"$RUNNER_TEMP/go-wrapper-catalog-evidence/test-python-path.txt\"\
+        )\"\ntest -x \"$test_python\"\nexport VIRTUAL_ENV=\"$(dirname \"$(dirname\
+        \ \"$test_python\")\")\"\nexport PATH=\"$VIRTUAL_ENV/bin:$PATH\"\n\"$test_python\"\
+        \ -c 'import pytest, sys; print(f\"pytest={pytest.__file__}; python={sys.executable}\"\
+        )' | tee \"$RUNNER_TEMP/go-wrapper-catalog-evidence/test-interpreter.txt\"\
+        \n\"$test_python\" -m pytest -q -p no:robocorp_log_pytest tests/contract_tests/test_verify_frozen_catalog_junit.py\
+        \ tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py\nset\
+        \ +e\n\"$test_python\" -m pytest -p scripts.frozen_wrapper_acceptance_plugin\
         \ -m integration_test -n 0 -q -s \\\n  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good\
         \ \\\n  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers\
         \ \\\n  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot\

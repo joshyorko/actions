@@ -121,6 +121,51 @@ def test_generated_wrapper_workflow_invokes_verifier_from_repository_root():
     assert "--source-root SOURCE_ROOT" in result.stdout
 
 
+def test_wrapper_acceptance_reuses_dependency_interpreter_across_home_isolation():
+    workflow_path = (
+        REPOSITORY_ROOT
+        / ".github/workflows/actions_runtime_frozen_catalog_rollback.yml"
+    )
+    workflow = yaml.safe_load(workflow_path.read_text(encoding="utf-8"))
+    steps = workflow["jobs"]["go_wrapper"]["steps"]
+    dependency_step = next(
+        step for step in steps if step.get("id") == "wrapper_dependencies"
+    )
+    acceptance_step = next(
+        step for step in steps if step.get("id") == "wrapper_acceptance"
+    )
+    interpreter_receipt = (
+        "$RUNNER_TEMP/go-wrapper-catalog-evidence/test-python-path.txt"
+    )
+
+    assert "inv devinstall" in dependency_step["run"]
+    assert (
+        f'poetry env info --executable > "{interpreter_receipt}"'
+        in dependency_step["run"]
+    )
+    assert "HOME" not in dependency_step.get("env", {})
+    assert acceptance_step["env"]["HOME"] == "${{ runner.temp }}/go-wrapper-home"
+    assert f'test_python="$(cat "{interpreter_receipt}")"' in acceptance_step["run"]
+    assert '"$test_python" -c \'import pytest, sys;' in acceptance_step["run"]
+    assert '"$test_python" -m pytest' in acceptance_step["run"]
+    assert "poetry run" not in acceptance_step["run"]
+    assert "test-interpreter.txt" in acceptance_step["run"]
+    subprocess.run(
+        ["bash", "-n"],
+        input=dependency_step["run"],
+        cwd=REPOSITORY_ROOT,
+        text=True,
+        check=True,
+    )
+    subprocess.run(
+        ["bash", "-n"],
+        input=acceptance_step["run"],
+        cwd=REPOSITORY_ROOT,
+        text=True,
+        check=True,
+    )
+
+
 @pytest.mark.parametrize(
     "kwargs,match",
     [
