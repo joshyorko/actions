@@ -130,6 +130,261 @@ jobs:
         working-directory: action_server/frontend
         run: npx playwright install chromium
 
+      - name: Verify Canvas candidate-source Runtime and browser acceptance
+        if: matrix.os == 'ubuntu-22.04'
+        timeout-minutes: 15
+        env:
+          ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE: '1'
+          ACTIONS_HOME: ${{ runner.temp }}/canvas-query-actions-${{ github.run_id }}-${{ github.run_attempt }}
+          TMPDIR: ${{ runner.temp }}/canvas-query-tmp-${{ github.run_id }}-${{ github.run_attempt }}
+          UV_CACHE_DIR: ${{ runner.temp }}/canvas-query-uv-${{ github.run_id }}-${{ github.run_attempt }}
+          CANVAS_TEMPLATE_CANDIDATE_RECEIPT_PATH: ${{ runner.temp }}/canvas-query-acceptance-${{ github.run_id }}-${{ github.run_attempt }}/candidate-source-receipt.json
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          unset SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE VIRTUAL_ENV
+          mkdir -p "$ACTIONS_HOME" "$TMPDIR" "$UV_CACHE_DIR" "$(dirname "$CANVAS_TEMPLATE_CANDIDATE_RECEIPT_PATH")"
+          poetry_cmd() {
+            uv run --no-project --python "${{ matrix.python }}" env -u VIRTUAL_ENV poetry "$@"
+          }
+          test "$(poetry_cmd --version)" = "Poetry (version 2.1.1)"
+          test -x "$(command -v node)"
+          test -x "$(command -v uv)"
+          test -f frontend/node_modules/@playwright/test/cli.js
+          export CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH="$(node -p 'require("./frontend/node_modules/@playwright/test").chromium.executablePath()')"
+          test -x "$CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"
+          poetry_cmd run python -c "import actions.server, pytest"
+          junit_raw="$TMPDIR/canvas-query-candidate-junit.xml"
+          junit_safe="$(dirname "$CANVAS_TEMPLATE_CANDIDATE_RECEIPT_PATH")/junit.xml"
+          receipt_safe="$(dirname "$CANVAS_TEMPLATE_CANDIDATE_RECEIPT_PATH")/candidate-source-receipt.sanitized.json"
+          set +e
+          poetry_cmd run python -m pytest \
+            tests/action_server_tests/mcp/test_canvas_query_template.py::test_canvas_template_candidate_source_runs_through_runtime_and_real_browser \
+            -q -n 0 \
+            --basetemp "$TMPDIR/pytest" \
+            --junitxml "$junit_raw" >"$TMPDIR/pytest.log" 2>&1
+          pytest_status=$?
+          set -e
+          source_sha="$(git rev-parse HEAD)"
+          source_tree="$(git rev-parse 'HEAD^{tree}')"
+          poetry_cmd run python - "$junit_raw" "$junit_safe" "$pytest_status" \
+            "$CANVAS_TEMPLATE_CANDIDATE_RECEIPT_PATH" "$receipt_safe" \
+            "$source_sha" "$source_tree" <<'PY'
+          import copy
+          import json
+          import re
+          import sys
+          import xml.etree.ElementTree as ET
+          import os
+          from pathlib import Path
+
+          raw_path, safe_path, status_text, receipt_path, receipt_safe, source_sha, source_tree = sys.argv[1:]
+          pytest_status = int(status_text)
+          if not Path(raw_path).is_file():
+              raise SystemExit("pytest did not produce JUnit XML")
+          raw_root = ET.parse(raw_path).getroot()
+          cases = list(raw_root.iter("testcase"))
+          expected = "test_canvas_template_candidate_source_runs_through_runtime_and_real_browser"
+          expected_class = "tests.action_server_tests.mcp.test_canvas_query_template"
+          suites = list(raw_root.iter("testsuite"))
+          skipped = sum(len(case.findall("skipped")) for case in cases)
+          failures = sum(len(case.findall("failure")) for case in cases)
+          errors = sum(len(case.findall("error")) for case in cases)
+          expected_counts = {
+              "tests": str(len(cases)),
+              "skipped": str(skipped),
+              "failures": str(failures),
+              "errors": str(errors),
+          }
+          reported_counts = (
+              suites[0].get("tests"),
+              suites[0].get("skipped"),
+              suites[0].get("failures"),
+              suites[0].get("errors"),
+          ) if len(suites) == 1 else ()
+          counter_nodes = [raw_root, *suites]
+          counters_match = all(
+              node.get(key) == value
+              for node in counter_nodes
+              for key, value in expected_counts.items()
+              if key in node.attrib
+          ) and reported_counts == tuple(expected_counts[key] for key in (
+              "tests",
+              "skipped",
+              "failures",
+              "errors",
+          ))
+          safe_root = ET.Element(
+              "testsuite",
+              {
+                  "name": "canvas-template-candidate-source",
+                  "tests": str(len(cases)),
+                  "skipped": str(skipped),
+                  "failures": str(failures),
+                  "errors": str(errors),
+                  "time": raw_root.get("time", "0"),
+              },
+          )
+          for case in cases:
+              case_class = case.get("classname", "")
+              case_name = case.get("name", "")
+              safe_case = ET.SubElement(
+                  safe_root,
+                  "testcase",
+                  {
+                      "classname": case_class,
+                      "name": case_name,
+                      "time": case.get("time", "0"),
+                  },
+              )
+              for tag in ("skipped", "failure", "error"):
+                  for _ in case.findall(tag):
+                      ET.SubElement(
+                          safe_case,
+                          tag,
+                          {"message": "Details withheld; inspect the workflow run."},
+                      )
+          ET.indent(safe_root)
+          ET.ElementTree(safe_root).write(
+              safe_path, encoding="utf-8", xml_declaration=True
+          )
+          junit_ok = (
+              len(suites) == 1
+              and len(cases) == 1
+              and cases[0].get("classname") == expected_class
+              and cases[0].get("name") == expected
+              and not skipped
+              and not failures
+              and not errors
+              and counters_match
+              and reported_counts == ("1", "0", "0", "0")
+          )
+          is_sha256 = lambda value: isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+          is_git_blob = lambda value: isinstance(value, str) and re.fullmatch(r"[0-9a-f]{40}", value) is not None
+          source_api_paths = {
+              "actions.mcp": "actions/src/actions/mcp/__init__.py",
+              "actions.mcp._metadata": "actions/src/actions/mcp/_metadata.py",
+          }
+          receipt_ok = False
+          if Path(receipt_path).is_file():
+              try:
+                  receipt = json.loads(Path(receipt_path).read_text(encoding="utf-8"))
+                  core = receipt.get("candidate_core", {})
+                  worker = core.get("worker", {})
+                  browser = receipt.get("browser", {})
+                  source_blobs = core.get("source_blobs", {})
+                  api_modules = worker.get("api_modules", {})
+                  runtime_args = core.get("runtime_process_args", [])
+                  api_paths_match = all(
+                      isinstance(api_modules.get(module), dict)
+                      and api_modules[module].get("git_blob") == source_blobs.get(path)
+                      and is_git_blob(api_modules[module].get("git_blob"))
+                      and Path(api_modules[module].get("path", "")).is_absolute()
+                      and is_sha256(api_modules[module].get("sha256"))
+                      for module, path in source_api_paths.items()
+                  )
+                  receipt_ok = (
+                      core.get("source_revision") == source_sha
+                      and core.get("source_tree") == source_tree
+                      and worker.get("source_revision") == source_sha
+                      and worker.get("source_tree") == source_tree
+                      and worker.get("wheel_sha256") == core.get("sha256")
+                      and Path(core.get("wheel_path", "")).is_absolute()
+                      and Path(worker.get("direct_url_wheel", "")).is_absolute()
+                      and is_sha256(core.get("sha256"))
+                      and is_git_blob(source_blobs.get("actions/pyproject.toml"))
+                      and Path(core.get("runtime_module_origin", "")).is_absolute()
+                      and is_sha256(core.get("runtime_module_sha256"))
+                      and isinstance(runtime_args, list)
+                      and len(runtime_args) >= 3
+                      and Path(runtime_args[0]).is_absolute()
+                      and runtime_args[1:3] == ["-m", "actions.server"]
+                      and is_sha256(receipt.get("template_zip_sha256"))
+                      and is_sha256(receipt.get("built_resource_sha256"))
+                      and is_sha256(receipt.get("production_package_manifest_sha256"))
+                      and is_sha256(receipt.get("candidate_acceptance_manifest_sha256"))
+                      and browser.get("status") == "passed"
+                      and bool(browser.get("version"))
+                      and Path(browser.get("path", "")).is_absolute()
+                      and is_sha256(browser.get("sha256"))
+                      and worker.get("source_blobs") == source_blobs
+                      and api_paths_match
+                  )
+              except (OSError, TypeError, ValueError, AttributeError):
+                  receipt_ok = False
+          if not junit_ok or pytest_status or not receipt_ok:
+              failure_root = ET.Element(
+                  "testsuite",
+                  {
+                      "name": "canvas-template-candidate-source",
+                      "tests": "1",
+                      "skipped": "0",
+                      "failures": "1",
+                      "errors": "0",
+                  },
+              )
+              failure_case = ET.SubElement(
+                  failure_root,
+                  "testcase",
+                  {"classname": expected_class, "name": expected},
+              )
+              ET.SubElement(
+                  failure_case,
+                  "failure",
+                  {"message": "Candidate source/browser acceptance failed verification."},
+              )
+              ET.indent(failure_root)
+              ET.ElementTree(failure_root).write(
+                  safe_path, encoding="utf-8", xml_declaration=True
+              )
+              raise SystemExit(
+                  f"Candidate acceptance did not produce one verified pass "
+                  f"(pytest={pytest_status}, tests={len(cases)}, skipped={skipped}, "
+                  f"failures={failures}, errors={errors}, receipt_valid={receipt_ok})"
+              )
+
+          redactions = [
+              (os.environ.get("GITHUB_WORKSPACE"), "<checkout>"),
+              (os.environ.get("RUNNER_TEMP"), "<runner-temp>"),
+              (os.environ.get("ACTIONS_HOME"), "<actions-home>"),
+              (os.environ.get("TMPDIR"), "<task-tmp>"),
+              (os.environ.get("UV_CACHE_DIR"), "<uv-cache>"),
+              (str(Path.home()), "<runner-home>"),
+          ]
+          redactions = sorted(
+              ((prefix, replacement) for prefix, replacement in redactions if prefix),
+              key=lambda item: len(item[0]),
+              reverse=True,
+          )
+
+          def redact(value):
+              if isinstance(value, str):
+                  for prefix, replacement in redactions:
+                      value = value.replace(prefix, replacement)
+                  return value
+              if isinstance(value, list):
+                  return [redact(item) for item in value]
+              if isinstance(value, dict):
+                  return {key: redact(item) for key, item in value.items()}
+              return value
+
+          Path(receipt_safe).write_text(
+              json.dumps(redact(copy.deepcopy(receipt)), indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Upload Canvas candidate-source receipt
+        if: always() && matrix.os == 'ubuntu-22.04'
+        uses: actions/upload-artifact@v4
+        with:
+          name: canvas-query-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/canvas-query-acceptance-${{ github.run_id }}-${{ github.run_attempt }}/candidate-source-receipt.sanitized.json
+            ${{ runner.temp }}/canvas-query-acceptance-${{ github.run_id }}-${{ github.run_attempt }}/junit.xml
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Verify packaged Work Items browser acceptance (frozen)
         if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022'
         timeout-minutes: 10

@@ -590,11 +590,16 @@ def canvas_candidate_core_provenance() -> dict[str, object]:
     assert (
         playwright_cli.is_file()
     ), "The configured frontend toolchain must provide Playwright."
-    browser = shutil.which("chromium")
+    browser = os.environ.get(
+        "CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"
+    ) or shutil.which("chromium")
     assert (
         browser is not None
     ), "Set up a real browser executable in the hosted acceptance job."
     browser_path = Path(browser).resolve()
+    assert browser_path.is_file() and os.access(
+        browser_path, os.X_OK
+    ), "The configured Chromium executable must exist and be executable."
     browser_version = subprocess.run(
         [str(browser_path), "--version"], capture_output=True, text=True, check=True
     ).stdout.strip()
@@ -660,7 +665,14 @@ def canvas_candidate_core_provenance() -> dict[str, object]:
             "This local Runtime/browser gate does not claim ChatGPT rendering.",
         ],
     }
-    (tmp_path / "canvas-template-candidate-source-receipt.json").write_text(
+    receipt_path = Path(
+        os.environ.get(
+            "CANVAS_TEMPLATE_CANDIDATE_RECEIPT_PATH",
+            str(tmp_path / "canvas-template-candidate-source-receipt.json"),
+        )
+    )
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt_path.write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
 

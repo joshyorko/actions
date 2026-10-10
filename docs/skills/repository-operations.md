@@ -75,6 +75,20 @@ numeric group ID can be reused. Clean captured identities on completion or
 timeout, and skip this POSIX-specific regression on Windows. This also covers a
 Node parent that exits while a browser child keeps inherited output pipes open;
 killing only the Node PID is insufficient.
+The hosted candidate-source control belongs in
+`.github/workflows/frontend-build-unauthenticated.yml` on its Linux job: it
+already installs the lockfile-selected Chromium through the frontend's
+`node_modules`. From the `action_server` working directory, resolve the
+executable through `./frontend/node_modules/@playwright/test`, set its
+absolute path explicitly, and run only the opt-in candidate test with the
+checkout's Python Runtime source. Unset the frozen-executable selector and
+`VIRTUAL_ENV`, use task-local `ACTIONS_HOME`, `TMPDIR` and `UV_CACHE_DIR`,
+and reuse the same-job Playwright browser cache because later native browser
+checks consume it. Require JUnit to
+contain exactly that one test with no skips, failures, or errors before
+uploading its sanitized summary and provenance receipt. This workflow has no
+generated-file header, and `.github/workflows/_gen_workflows.py`'s `TARGETS`
+omits it, so a direct workflow edit is maintained.
 The default integration suite skips both opt-in Runtime/browser gates, so a
 skip is not browser evidence. The fixture's `artifact: null` response is
 deliberately partial: it is not a successful shared-schema result and does not
