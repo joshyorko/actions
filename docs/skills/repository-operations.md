@@ -1714,7 +1714,10 @@ The native Work Items consumer step builds the candidate Core wheel from
 require exactly one wheel in a newly created task directory before installing
 it. Do not pin this candidate filename to the published Runtime floor: the
 candidate can advance independently, while `verify_published_runtime_floor.py`
-continues to verify the exact published Core 1.0.2 contract.
+continues to verify the exact published Core 1.0.2 contract. Run inline Python
+checks through the same explicitly selected interpreter as the build instead
+of bare `python`; a workflow host interpreter can lack standard-library
+modules required by the check.
 
 The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
 `_internal/actions/server/bin`. PyInstaller may report package-data destinations
