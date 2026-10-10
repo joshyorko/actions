@@ -2819,6 +2819,20 @@ A prior hosted receipt proves only its recorded nodes; a newly added Runtime
 behavior needs an artifact built from the final Runtime source/dependency inputs
 and a new frozen execution receipt. Source-mode CLI coverage is separate evidence.
 
+The a47 resource-history control is an eleven-case selector: it retains the ten
+rollback, drain, and package-sync cases and adds the exact CLI resource-owner
+history test from candidate `a47dc616`. Its control validates the copied test's
+Git blob, candidate/build tree equality, and the measured native archive,
+manifest, inventory, frozen executable, package-tree, and embedded-file digests.
+The measurement receipt binds source `a47dc616` to build commit `0045d91b` by
+identical tree `10e4b5fb`; it verifies Ubuntu frozen bytes only. The measured
+archive does not contain the separate Go wrapper, so this control makes no
+wrapper-byte or wrapper-execution claim. Until the hosted eleven-case JUnit
+gate completes, this candidate's frozen behavioral acceptance remains NOT RUN.
+Keep the earlier ten-case c782 receipt as historical evidence; neither it nor
+this pending control establishes full release acceptance or Windows/macOS
+behavior.
+
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
 the Poetry/Invoke command with `VIRTUAL_ENV` unset, then explicitly check the
