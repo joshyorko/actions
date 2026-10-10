@@ -130,6 +130,13 @@ The `pypi` environment is a workflow reference only. Its approval and protection
 
 Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader accepts only its PEP 610 editable local-file `direct_url.json` root and resolves a contained `src/actions/work_items/__init__.py` or `actions/work_items/__init__.py`; it never consults project import paths, keeping shadow packages from controlling the REST adapter path.
 
+Convert a PEP 610 file URL path with `urllib.request.url2pathname` before
+constructing a `Path`. On Windows, a local drive URL has a URL path such as
+`/C:/...`; passing that URI spelling directly to `Path` does not produce the
+drive-rooted filesystem path. Keep both editable layouts and the project
+`actions.py` shadowing test, and use the hosted Windows run to verify native
+drive conversion; POSIX path simulations do not establish it.
+
 Native packaging must retain that filesystem source tree. The Action Server
 PyInstaller spec uses `collect_data_files('actions.work_items', include_py_files=True)`
 because hidden imports supply module names in the PYZ archive, not the initializer
