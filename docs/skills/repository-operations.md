@@ -1694,9 +1694,11 @@ termination produces `status: failed`, `exitCode: -1`, and
 failure even when artifact identity, verification, and lease identity validate.
 For reload/recovery receipts, retain the Action Server `Popen` owner before
 requesting stop and record its bounded observed return code separately from RCC
-wrapper receipts. A `stop()` return is not process-exit evidence, and a captured
-descendant set only reports that observation; it does not prove complete tree
-reaping.
+wrapper receipts. The Action Server CLI returns 0 after normal server return;
+the reload/recovery gate requires that observed 0 and records any nonzero or
+signal exit as cleanup failure even if Actions passed. A `stop()` return is not
+process-exit evidence, and a captured descendant set only reports that
+observation; it does not prove complete tree reaping.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes

@@ -89,6 +89,20 @@ def _source_evidence() -> dict[str, object]:
     }
 
 
+def _action_server_exit_failure(returncode: int | None, observed: bool) -> str | None:
+    if not observed:
+        return "Action Server return code was not observed within the bounded wait"
+    if returncode != 0:
+        return f"Action Server exited abnormally with return code {returncode}"
+    return None
+
+
+def test_action_server_exit_receipt_rejects_abnormal_returncode() -> None:
+    assert _action_server_exit_failure(0, observed=True) is None
+    assert "-11" in (_action_server_exit_failure(-11, observed=True) or "")
+    assert _action_server_exit_failure(None, observed=False) is not None
+
+
 @pytest.mark.real_rcc
 @pytest.mark.integration_test
 def test_current_candidate_failed_reload_keeps_last_good_action_usable(
@@ -194,6 +208,9 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
     provider = None
     started_server = False
     server_exit_observed = False
+    server_cleanup_failure = None
+    primary_failure = False
+    cleanup_failures: list[str] = []
     try:
         provider, provider_url = provider_harness.start_provider(
             str(real_rcc),
@@ -360,6 +377,7 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
             evidence["status"] == "PASS"
         ), f"watcher did not recover after the failed reload: {recovered_run}"
     except Exception as exc:
+        primary_failure = True
         evidence["status"] = "FAIL"
         evidence["failure_type"] = type(exc).__name__
         evidence["failure"] = str(exc)[:1000]
@@ -378,7 +396,11 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
                 ]
             except psutil.Error:
                 server_tree_before_stop = []
-            action_server_process.stop()
+            stop_failure = None
+            try:
+                action_server_process.stop()
+            except Exception as exc:
+                stop_failure = f"Action Server stop failed: {type(exc).__name__}: {exc}"
             exit_deadline = time.monotonic() + 10
             while (
                 owned_server_process.returncode is None
@@ -406,25 +428,37 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
                 "interpreter": sys.executable,
                 "pythonpath": runtime_env.get("PYTHONPATH"),
             }
-            if not server_exit_observed:
+            server_cleanup_failure = _action_server_exit_failure(
+                owned_server_process.returncode, server_exit_observed
+            )
+            if server_cleanup_failure:
                 evidence["status"] = "FAIL"
-                evidence[
-                    "failure"
-                ] = "Action Server exit was not observed within 10 seconds"
+                evidence["cleanup_failure"] = server_cleanup_failure
+                cleanup_failures.append(server_cleanup_failure)
+            if stop_failure:
+                evidence["status"] = "FAIL"
+                evidence["action_server_stop_failure"] = stop_failure
+                cleanup_failures.append(stop_failure)
         if provider is not None:
-            provider_harness.terminate_process_tree(provider)
+            try:
+                provider_harness.terminate_process_tree(provider)
+            except Exception as exc:
+                cleanup_failures.append(
+                    f"selected RCC provider cleanup failed: {type(exc).__name__}: {exc}"
+                )
             if provider.poll() is None:
-                raise AssertionError("selected RCC provider was not reaped")
+                cleanup_failures.append("selected RCC provider was not reaped")
+        if cleanup_failures:
+            evidence["cleanup_failures"] = cleanup_failures
+            evidence["status"] = "FAIL"
         evidence["rcc_trace"] = _summarize_rcc_trace(trace_path)
         receipt_path = os.environ.get("ACTIONS_RUNTIME_LIFECYCLE_RECEIPT")
         if receipt_path:
             path = Path(receipt_path)
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n")
-        if started_server and not server_exit_observed:
-            raise AssertionError(
-                "Action Server return code was not observed within the bounded wait"
-            )
+        if cleanup_failures and not primary_failure:
+            raise AssertionError("; ".join(cleanup_failures))
 
 
 def _read_package_runtime(database: Path, package_name: str):
