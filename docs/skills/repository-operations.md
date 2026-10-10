@@ -1709,6 +1709,12 @@ acceptance tests and their marker contract. Run its frozen and Go-wrapper UI
 cases on Linux, Windows, and macOS; never make missing executable or manifest
 variables a skip. Keep the separate generic Runtime gate for non-native
 integration coverage.
+The native Work Items consumer step builds the candidate Core wheel from
+`actions/pyproject.toml`; derive its version from the built wheel metadata and
+require exactly one wheel in a newly created task directory before installing
+it. Do not pin this candidate filename to the published Runtime floor: the
+candidate can advance independently, while `verify_published_runtime_floor.py`
+continues to verify the exact published Core 1.0.2 contract.
 
 The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
 `_internal/actions/server/bin`. PyInstaller may report package-data destinations
