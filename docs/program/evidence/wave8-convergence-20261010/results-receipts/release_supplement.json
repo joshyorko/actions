@@ -1,0 +1,17 @@
+{
+  "helper_1_0_3_readback": {
+    "installed_test_limit": "Not rerun: downloaded registry wheel is byte-identical to independently verified candidate with12 installed-wheel tests; exact artifact evidence reused",
+    "path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/helper-1.0.3-publication-verified.json",
+    "publication_verified": true,
+    "sdist_sha256": "b8e4e8efb181d5748264f25f1803f47731cd4947fc015f009934d51cd7a78945",
+    "sha256": "abb39e8056b77085bebf727023056baf579e8ec5324f4325e7315c7881ac4f18",
+    "source_sha": "167378509ca33450d4478021214e2e74a0b46dda",
+    "tag": "actions_http-1.0.3",
+    "tag_object": "b4547f14c23308861f77682db41d1c18134e22c3",
+    "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+    "workflow_manifest_comparison": "PASS: exact retrieved wheel/sdist bytes match GitHub verified distribution manifest and PyPI SHA256"
+  },
+  "no_new_publication_or_execution": true,
+  "observed_at_utc": "2026-10-10T23:23:30.995042+00:00",
+  "schema": "wave8-release-readiness-publication-supplement-v1"
+}

@@ -138,6 +138,13 @@ tree before and after the target advances. Prior checks apply to the new
 candidate only when that tested tree is identical; otherwise rerun the relevant
 gates on the new tree. This separates component admission from the combined
 candidate gate without inferring either from issue-level completion.
+For a local stacked-PR union, an ordinary two-parent merge can preserve both
+parents while resolving an additive documentation conflict. Compare the full
+changed-path union and each non-documentation blob against its relevant parent,
+regenerate generated workflows from their source, and record scoped developer
+tests separately from package, dependency, hosted, and native gates. A clean
+local union and passing workflow-contract tests do not authorize a remote stack
+refresh while its dependency gate remains unaccepted.
 
 When projecting a multi-issue program into an execution graph, keep typed
 execution prerequisites, criterion/slice gates, parent coordination, related
@@ -197,6 +204,16 @@ Before committing an evidence archive, verify each selected receipt's bytes
 against its ledger SHA-256 and reject absolute or parent-traversal archive
 paths. Preserve running and skipped CI states separately from passing results.
 
+For a PostgreSQL failed-SAVEPOINT case, distinguish a healthy transaction
+permission denial from a statement that first aborts the outer transaction.
+PostgreSQL then rejects the later nested SAVEPOINT with SQLSTATE `25P02`;
+verify that the production transaction facade unwinds its nesting state, the
+connection returns to IDLE, the nested body did not run, and the same
+connection can recover. Keep SQLite authorizer-denial coverage as a separate
+failure mode. The bounded PostgreSQL 17.11 result at Actions source
+`1421fcf8` proves cleanup after an already-aborted transaction only; it does
+not prove a healthy-transaction SAVEPOINT privilege restriction or full #84.
+
 When platform, toolkit, or coverage jobs fail at the same test node and
 assertion, retain each job receipt and group the failures under their shared
 cause. For a process timeout, record the child command, configured timeout, and
@@ -205,6 +222,14 @@ test did not reach. Keep authorized bounded work in a separate active-substage
 overlay when its owning issue remains BLOCKED: scope admission is not accepted
 implementation, and must not change whole-issue classifications or stage
 counts.
+For a cancelled integration job, inspect the completed test summary and
+check-run annotations before deciding that tests never ran or replaying the
+whole job. A pytest failure summary followed by persistent child output and
+`threading._shutdown` can expose an owned-process cleanup gap. Preserve earlier
+test failures separately from the final cancellation, and repair bounded child
+and reader cleanup while retaining the original readiness error; do not hide
+the failure by increasing readiness or job timeouts. A diagnosis of one startup
+case does not accept the other affected cases or the whole issue.
 
 When transferring Git blobs through Python and JavaScript, compare the same
 units: Python string length counts Unicode code points, while JavaScript
@@ -860,7 +885,15 @@ Linux x86_64 and macOS arm64 Runtime assets. Prepare a tap update after the
 upstream assets exist and their GitHub SHA-256 digests are verified. The tap
 README documents the `action-server-daily` auto-update slot and its manual
 `action=ci` then `action=release` workflow inputs. Do not dispatch the retired
-Sema4AI `publish.yml` workflow.
+Sema4AI `publish.yml` workflow. Homebrew Cask acceptance follows the Actions
+native release. The current `action-server` Cask supports Linux x86_64 and
+macOS arm64; Windows remains a separate native asset. After native assets and
+their verified hashes exist, update the owned `joshyorko/homebrew-tools` tap
+through the documented slot or manual workflow, compare Cask digests to the
+Actions assets, and record clean install and upgrade proof on each supported
+Cask platform. A tap source change or green Actions release does not prove
+consumer installation. The current 1.0.1 Cask/hash match is only a baseline;
+Runtime 1.0.3 native assets and its Cask consumer proof remain pending.
 The normal binary job creates a published release before downloading/uploading
 the assets: `Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803`
 defaults to `create_draft=false` and `update_existing=false`. It then uploads
@@ -1192,6 +1225,14 @@ they do not authenticate the complete installed wheel or prove cold registry
 acquisition. Identify the browser separately: system `PATH` Chromium is not a
 Playwright-managed download. Successful fixture teardown and absence of live
 children do not prove descendant reaping; report PID 1 zombies explicitly.
+
+For installed Runtime-wheel private-import checks, a checkout AST guard and a
+clean Core-wheel probe do not prove the installed Runtime wheel. Bind the exact
+Runtime wheel digest and installed `.py` inventory, then scan every installed
+Runtime module in the clean environment while retaining public Core
+compatibility checks. Treat an inventory/scan proposal as design only until
+the exact wheel test is implemented and executed; design evidence does not
+close #195.
 
 Canvas Runtime fixtures synchronize their action-source directory. Put build
 caches and temporary state in a unique sibling directory, such as one created

@@ -1,0 +1,76 @@
+{
+  "status": "GO_SOURCE_ONLY; NEW_EXACT_HEAD_HOSTED_CHECKS_REQUIRED",
+  "head": "6cdf7c3158227d93ed57e46220204a08e4595142",
+  "tree": "42d258c6a8d98e4ae192f7738c8ff622189c6f70",
+  "ordered_parent": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+  "reviewed_at_utc": "2026-10-10T23:22:44.689980+00:00",
+  "owner_receipt_sha256": "316ad0c00f47b5850aa2a77d03b0b760a041b8bbd4d296a8a74038d3b85bcbca",
+  "changed_paths": [
+    "action_server/tests/action_server_tests/test_auth_route_inventory.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "independent_findings": [
+    "Diff changes only order of two adjacent nested imports plus six guide lines; route/auth/argv/provider/assertions unchanged.",
+    "Independent normalized non-import AST and multiset of import bindings are identical. _app/_settings alias owners are imported before both reordered lines in both versions, preserving fixture-capture protection.",
+    "Configured package isort uses Black profile; invoke_utils lint runs Ruff check/format and isort across src/tests. Guide accurately records nested-function import ordering."
+  ],
+  "owner_validation": {
+    "retained_red_green": "Configured isort RED and full package Python lint GREEN logs hash verified.",
+    "focused_pure": "1 PASS/2 deselected with --noconftest; scoped classification test only.",
+    "ordinary_file": "Blocked before RCC/autouse fixture execution because checkout bundled RCC executable absent. This is unverified rather than an auth-suite PASS.",
+    "markdownlint": "Executable unavailable; no Markdown lint PASS claimed."
+  },
+  "log_bindings": [
+    {
+      "check": "red",
+      "file": "isort-red.log",
+      "sha256": "72b51d109ba2bdd7c81c50edd55c3258fe6d066270319d38f37a38ae21751849",
+      "bytes": 5154
+    },
+    {
+      "check": "format",
+      "file": "format.log",
+      "sha256": "5875dc790181b32ad4a8d2977204480fbb4cfb68326b97b7e0ce8e7b23895069",
+      "bytes": 4079
+    },
+    {
+      "check": "AST",
+      "file": "ast-equivalence.log",
+      "sha256": "9d1b55786d00b7cd84c82b72fe1ec6e02954907ed280d307ad79b8376902899e",
+      "bytes": 79
+    },
+    {
+      "check": "focused_pure_test",
+      "file": "focused-pure.log",
+      "sha256": "8ed617d781019aefd6f3dccbb0e2a5c2bc33adf0940b277dd2d7bbd448604b5e",
+      "bytes": 4221
+    },
+    {
+      "check": "ordinary_focused_collection",
+      "file": "focused.log",
+      "sha256": "35c33c70df840ce0ec3b2855de196f750872af4580ed84115b55218cf11ad1fe",
+      "bytes": 10345
+    },
+    {
+      "check": "configured_lint",
+      "file": "lint.log",
+      "sha256": "cc4a08e79f963baefd52a5a11ec1006a7613cb4faebdf0022ddadb559701acbb",
+      "bytes": 4319
+    }
+  ],
+  "commands": [
+    "git diff parent f23db960..6cdf7c31; exact HEAD/tree/parent/clean readback",
+    "python3 -B source AST/import-binding equality only; no test/service executed",
+    "SHA256/byte readback six owner logs; source pyproject and invoke_utils lint declaration read"
+  ],
+  "admission_boundary": "Only mechanical source checkpoint GO. Root owns any authorized existing PR head update and exact remote head readback; new exact-head hosted CI and final-union requirements remain. Does not establish assembled auth/native/Runtime/security acceptance.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_delta": "The six-line owner paragraph records configured Ruff check/Ruff format/isort with Black profile and nested test imports. Accepted as accurate; retain configured package gate rather than declaring Ruff-only pass sufficient.",
+    "evidence": "Three-OS isort failure at old f23; configured isort RED/full Python lint GREEN on6cdf; independent non-import AST equality.",
+    "stale_or_ambiguous_guidance_removed": "No old text removed; closes ambiguity that Ruff format alone covers import-order lint.",
+    "remaining_uncertainty": "New hosted head not observed; ordinary file fixtures unverified here; Markdown linter unavailable."
+  },
+  "upstream_disposition": "none; repository-owned mechanical lint correction",
+  "no_source_tests_remote_mutations_or_services": true
+}

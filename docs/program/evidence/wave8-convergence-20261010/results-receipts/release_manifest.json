@@ -1,0 +1,23 @@
+{
+  "members": [
+    {
+      "bytes": 14162,
+      "path": "readiness.json",
+      "sha256": "c125821e49573f888a780ae4942dab69d76fb08fb9ee3f0615ebf6668bd05f19"
+    },
+    {
+      "bytes": 1094,
+      "path": "publication-supplement.json",
+      "sha256": "78ce4024c452e96fb4735e532c4a69c1456bd9eb2c60cb237156b59513922f33"
+    },
+    {
+      "bytes": 2113,
+      "path": "canonical-doc-proposal.md",
+      "sha256": "334d549149e68a15111fccb0ebbb50ff5aa9b7155fb8979a8612af1fb414f83f"
+    }
+  ],
+  "observed_at_utc": "2026-10-10T23:23:34.092848+00:00",
+  "schema": "wave8-release-readiness-manifest-v1",
+  "source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+  "source_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5"
+}

@@ -1,0 +1,66 @@
+{
+  "canonical_doc_delta": {
+    "evidence": "Exact two-parent local union10dcfcef, complete41-path comparison, four hash-bound RCC log/config objects and88 scoped tests.",
+    "exact_text": "For a stacked pull request, an ordinary local merge can preserve both parents and resolve the guide while a dependency gate remains unaccepted. Compare the complete changed-path union and source/test blobs to the candidate parent, and compare accepted package source plus generator/workflows to the integration parent. Regenerate and check byte equality from the combined checkout; record scoped test commands separately from package and hosted gates. A clean local union and passing generator contracts do not authorize remote stack refresh or acceptance until the dependency and exact-head gates are admitted.",
+    "target": "docs/skills/repository-operations.md, Live pull-request base identity, after combined-generator consistency paragraph",
+    "uncertainty": "PR292 Windows acceptance and subsequent exact-head hosted union gates remain open; no broader service/native or release claim."
+  },
+  "checked_log_and_config_bindings": {
+    "generator-rcc-dev.log": {
+      "bytes": 12933,
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/generator-rcc-dev.log",
+      "sha256": "a11be1be00fc5bd12567e0eb152dcc38be2914aba0d6848c1e0184aae05acc16"
+    },
+    "generator-robot-config.yaml": {
+      "bytes": 384,
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/generator-robot-config.yaml",
+      "sha256": "c5d10f768956fc1a52d75e94932841a5e51a276d7850b0d41dd8e880e2c5cb2c"
+    },
+    "workflow-test-robot-config.yaml": {
+      "bytes": 428,
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/workflow-test-robot-config.yaml",
+      "sha256": "7e39d4ff7784245c61cc2210445d88f2bb3d85f30c28723f021ad9ad37d263e4"
+    },
+    "workflow-tests.log": {
+      "bytes": 13018,
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/workflow-tests.log",
+      "sha256": "9164c649e6484c7d22072aedf36fd0891da4135c6d708028222dd5701b1c0477"
+    }
+  },
+  "commands_and_observations": [
+    {
+      "commands": "git show -s --format=%H/%T/%P HEAD; git status --porcelain; git merge-base HEAD^1 HEAD^2; git diff --stat/name-only/check against both parents and merge base",
+      "observed": "Exact head/tree and ordinary ordered parents match; clean; 41 changed paths since base equal the complete union of parent changed-path sets; whitespace check passes."
+    },
+    {
+      "commands": "Read complete first-parent source/test/workflow diff; compare every changed non-doc path to each parent with git diff --quiet; compare accepted Core source/pyproject/lock and generator/workflows to integration",
+      "observed": "All40 non-guide changed files have exactly one parent version including modes; no novel source resolution. Incoming frontend serialization/RCC timing tests/deterministic floor canary and release contract test are integration-identical. Private output implementation/tests/migration and adjacent admission/resource-history/source/test files are candidate-identical. Accepted Core source/metadata and generator/Core/PyPI/native workflows are integration-identical."
+    },
+    {
+      "commands": "Read canonical guide diff against both parents and scan conflict markers",
+      "observed": "Only guide has a combined blob. First-parent guide changes are additions only; candidate common Run-output section and routing-history guidance preserved. Incoming live target-ref/ordered-parent/Core publication guidance preserved. No conflict markers; no evidence-backed candidate paragraph removed."
+    },
+    {
+      "commands": "Hash/stat owner receipt and four retained log/config objects; read bounded generator/test summaries and exact retained task configs",
+      "observed": "All recorded hashes/bytes match. RCC18.19.3 developer-mode Generate log writes candidate workflows and ends actual main robot run SUCCESS; Test log executes exact candidate devutils/tests/test_runtime_release_workflows.py, reports88 passed in4.98s and RCC SUCCESS. Configs use developer setup and exact worktree paths. Current generated workflow files equal accepted integration; owner records no-diff regeneration, and current clean worktree supports that readback. No independent regeneration run."
+    }
+  ],
+  "commit": "10dcfcefe0be8b32033015ed313c9e033a8d5c74",
+  "limitations": [
+    "Source-preserving union only; this is not a new private output behavior/security review or full package/backend/native acceptance.",
+    "The88 tests are scoped developer-RCC workflow contracts, not a package-local release suite.",
+    "PR292 Windows job114257572296 canceled for6h timeout after six integration failures; that dependency remains unaccepted. This local candidate cannot authorize remote stack refresh/push/merge, and any later exact union requires hosted gates.",
+    "No remote ref refresh was performed by this reviewer;193 is the explicit accepted integration parent under review, not a claim of perpetual live-ref identity."
+  ],
+  "merge_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+  "observed_at_utc": "2026-10-10T23:31:03.487204+00:00",
+  "ordered_parents": [
+    "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+    "19380993febaa71238eaee3026b5c808773283ff"
+  ],
+  "owner_receipt_sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034",
+  "review_kind": "Independent read-only exact local ordinary-merge review; no tests, source edits, services or remote mutation",
+  "tree": "ac686670b04ae4308a4143c66ea314514658e0fa",
+  "upstream_disposition": "none; no upstream defect identified in this merge preservation review",
+  "verdict": "GO_LOCAL_REVIEW_ONLY"
+}

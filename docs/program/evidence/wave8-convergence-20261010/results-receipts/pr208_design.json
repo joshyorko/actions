@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "read_only_design",
+  "observed_at_utc": "2026-10-10T23:35:56Z",
+  "scope": "One dependency-ready frontend consumer-classification test slice for issue #208; no implementation, tests, or native acceptance performed.",
+  "source": {
+    "repository": "https://github.com/joshyorko/actions",
+    "pr": 310,
+    "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+    "tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+    "base": "19380993febaa71238eaee3026b5c808773283ff",
+    "source_review": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/root-independent-source-review-ec8bea13.json",
+      "sha256": "64972f5fd4c21806843608e394b473b1111b363c6f2feebcb715a6bcad2053ee",
+      "decision": "GO for scoped source checkpoint; not whole issue acceptance"
+    }
+  },
+  "issue_contract": {
+    "number": 208,
+    "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
+    "live_snapshot_path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/issue-closure-audit-20261010/open-issues-live.json",
+    "body_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c",
+    "acceptance_excerpt": "Browser checks against that actual packaged backend cover empty, populated, denied, unavailable, and backend-error states. Mock-only tests do not establish completion.",
+    "residual_native_states": [
+      "missing_runtime_support",
+      "generic_http_500"
+    ]
+  },
+  "observed_product_contract": {
+    "backend_path": "action_server/src/actions/server/_api_work_items.py",
+    "frontend_page": "action_server/frontend/src/core/pages/WorkItems.tsx",
+    "frontend_query": "action_server/frontend/src/queries/workItems.ts",
+    "frontend_classification": {
+      "work_items_runtime_unavailable": "Work Items support unavailable; update/reinstall Runtime and restart",
+      "unclassified_status_gte_500": "Work Items server error; check Action Server logs and retry"
+    },
+    "current_tests": {
+      "frontend_error_classification_tests_found": false,
+      "search_scope": "action_server/frontend/__tests__ and action_server/frontend/src/__tests__ at exact PR310 tree",
+      "nearby_test": "action_server/frontend/__tests__/runtime-shell.test.tsx covers Work Items navigation/empty state but no missing-support or generic-500 page classification",
+      "vitest_and_testing_library_available": true
+    },
+    "source_file_sha256": {
+      "action_server/src/actions/server/_api_work_items.py": "ce4c396419dc4d2b4db92b2a16798c81a1086b72b1d858f7ade1374de3e7e788",
+      "action_server/frontend/src/core/pages/WorkItems.tsx": "95325af2f8f40601c861288714a525212332fe90244b7611d88e706cedc16df0",
+      "action_server/frontend/src/queries/workItems.ts": "87de74f91960d658b98efc6d5478e1357ff13acdf7970ff0b7d74f8d98551449",
+      "action_server/frontend/__tests__/runtime-shell.test.tsx": "b8a147a93136b01b7f3fc8a46268590383c1439d8788ea5e7c728f344c592f51"
+    }
+  },
+  "retained_native_evidence": [
+    {
+      "runtime": "Linux frozen",
+      "runner_receipt": {
+        "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/runner-receipt.json",
+        "sha256": "8d4d47879787d09b639426213474623269a38bc1504cd24e35a16b462ba0fc18"
+      },
+      "acceptance_receipt": {
+        "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/acceptance-receipt.json",
+        "sha256": "bca359b7fbd2e7303e618a74dcd6b869e23970b98a7bb810cc698ef2968fa71f"
+      },
+      "independent_review": {
+        "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/root-independent-result-review.json",
+        "sha256": "0c53c964d0b443f98493df2cf3177fd95986db20cb8429ff250dd9d6def68664"
+      },
+      "status": "GO_SCOPED_LINUX_FROZEN_WORK_ITEMS_UI",
+      "passed_stages": [
+        "normal",
+        "authorization-denied",
+        "storage-error"
+      ],
+      "states_not_run": [
+        "missing_runtime_support",
+        "generic_http_500"
+      ]
+    },
+    {
+      "runtime": "Linux Go wrapper",
+      "runner_receipt": {
+        "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/runner-receipt.json",
+        "sha256": "2104142f78cddcaa85a99e5d23d21aad0725e86fccc52d781b962f35b6db5fc6"
+      },
+      "acceptance_receipt": {
+        "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/acceptance-receipt.json",
+        "sha256": "cd791fc251b7a400303d5846b32db4b44fdba101a3d812f409ece94b9d368440"
+      },
+      "independent_review": {
+        "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/root-independent-result-review.json",
+        "sha256": "48008003c839b5c1c2c333fc445acbeafd1809b300b8d6df36c7de4a2fc20519"
+      },
+      "status": "GO_SCOPED_LINUX_GO_WRAPPER_WORK_ITEMS_UI",
+      "passed_stages": [
+        "normal",
+        "authorization-denied",
+        "storage-error"
+      ],
+      "states_not_run": [
+        "missing_runtime_support",
+        "generic_http_500"
+      ]
+    }
+  ],
+  "recommended_disjoint_slice": {
+    "readiness": "READY_FOR_SEPARATE_FRONTEND_TEST_WRITER; source-only UI tests cannot satisfy native artifact gates",
+    "base_head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+    "owned_paths": [
+      "action_server/frontend/__tests__/work-items-error-classification.test.tsx",
+      "docs/skills/work-items.md"
+    ],
+    "test_contract": [
+      "Render WorkItems with a controlled WorkItemsApiError status=503 code=work_items_runtime_unavailable; assert accessible alert/title and Runtime update/reinstall/restart recovery text.",
+      "Render WorkItems with a generic status=500 error; assert generic server-error title and logs/retry guidance.",
+      "For both, assert no package.yaml instruction and no raw internal backend detail is surfaced.",
+      "Exercise Retry to verify refetch callback; use existing Vitest/Testing Library and isolated QueryClient/test state."
+    ],
+    "non_overlap": "Does not modify or repeat PR310 native denial/sign-in recovery, normal create/readback, storage-503 fixture, Python receipt bookkeeping, or Work Items package source/version.",
+    "not_acceptance": "Synthetic frontend responses verify only UI classification. They do not clear missing_runtime_support or generic_http_500 from native acceptance receipts."
+  },
+  "remaining_issue_gates": [
+    "real packaged missing-support browser state",
+    "real packaged generic HTTP 500 browser state",
+    "actual crash recovery",
+    "broader accessibility acceptance under #97",
+    "non-Chromium browser acceptance",
+    "all other issue #208 acceptance and platform-specific evidence not established by the cited receipts"
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/work-items.md",
+    "stale_source_paragraph": "This stage is implemented but has not yet produced a native artifact receipt; keep its acceptance pending until the exact packaged artifact run passes. Missing bundled support and generic HTTP 500 remain `NOT_RUN` until their separately owned or supported packaged fixtures run. Do not use response interception as backend evidence.",
+    "exact_replacement": "Independent Linux frozen and Go-wrapper native runs both passed the normal, authorization-denied/sign-in-recovery, and storage-error stages at this source/build. Those scoped results do not cover missing bundled support or a generic HTTP 500: keep both states `NOT_RUN` until a hash-bound packaged browser stage exercises each real backend condition. Frontend tests with synthetic responses may verify message classification, but do not clear native acceptance.",
+    "durable_learning": "Keep frontend classification tests distinct from hash-bound native backend acceptance; record passed native stages and retain unexercised backend states as NOT_RUN.",
+    "stale_or_ambiguous_guidance_removed": "The denial stage is no longer awaiting its first native artifact receipt; two scoped Linux receipts now pass it.",
+    "remaining_uncertainty": "No claim is made for Windows/macOS denial-stage coverage or either residual native backend state."
+  },
+  "upstream_disposition": "None; no confirmed upstream defect.",
+  "verification": "Design-only review of retained files and exact git source; no source writes, test execution, native attempt, remote mutation, or acceptance-state mutation."
+}

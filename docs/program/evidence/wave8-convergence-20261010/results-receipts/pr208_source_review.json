@@ -1,0 +1,38 @@
+{
+  "reviewer": "root independent source and retained-evidence review",
+  "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+  "tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+  "base": "19380993febaa71238eaee3026b5c808773283ff",
+  "base_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+  "artifact_build_commit": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+  "changed_paths": [
+    "action_server/frontend/scripts/native-workitems-ui-acceptance.mjs",
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py",
+    "docs/skills/work-items.md"
+  ],
+  "source_decision": "GO for checkpoint/PR publication; new exact-head CI and actual packaged case pending",
+  "reviewed_behavior": [
+    "Only test-owned session cookie removed; real same-origin Work Items request must return403 and exactmiddlewarebody",
+    "Global auth gating/signin recovery asserted, no HTTP interception or productauth change",
+    "Reauthentication exactexistingqueue readback and narrowviewport bound",
+    "Initial/normal-only leavesdenialNOT_RUN; actualdenialfailure recordedFAILED; successfulstage clears bothpending/failed",
+    "Existingnormal/storageerror behavior and cleanup preserved"
+  ],
+  "evidence": {
+    "focused_tests": "5 passed,26deselected through RCCgateway; receiptlogic only",
+    "test_log_sha256": "65c0953807427b5febcec9e924ee910f6cbee8984ec08c3210a610c893f1af9f",
+    "amendment_sha256": "2cdfc0b8a65ca977652487c0df3cfc6451bd093efd4beb91d86ee04f3183ccbf"
+  },
+  "native_acceptance": "NOT_RUN",
+  "runner_readiness": "HOLD until frozen runner review and manifest-bound assets.zip staged; current ignored assets.zip absent",
+  "scope_limits": [
+    "Not full208",
+    "Not actualChatGPT",
+    "No missing-support/generic500/crash/nonChromium acceptance"
+  ],
+  "documentation_improvement": {
+    "file": "docs/skills/work-items.md",
+    "learning": "Real middlewaredenial invokes global signin recovery; distinguish unattempted criterion from attemptedfailure and passingreceipt; nativeexecutionpending"
+  },
+  "upstream_disposition": "none; no confirmed dependency defect"
+}

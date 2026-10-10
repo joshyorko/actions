@@ -1,0 +1,45 @@
+{
+  "observed_at_utc": "2026-10-10T23:34:00Z",
+  "historical_ownership": {
+    "target": "local",
+    "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+    "work_items": {
+      "thread_id": "01a11d7a-e547-7423-8fc5-fc0148df2123",
+      "thread_status": "notLoaded",
+      "latest_turn_status": "completed",
+      "active_flags": [],
+      "observed_at_utc": "2026-10-10T23:24:39Z"
+    },
+    "rcc": {
+      "thread_id": "01a11d7b-4029-7953-aba7-f3b487098b32",
+      "thread_status": "notLoaded",
+      "latest_turn_status": "interrupted",
+      "active_flags": [],
+      "observed_at_utc": "2026-10-10T23:24:40Z"
+    }
+  },
+  "preflight": {
+    "thread_id": "01a12822-bbf0-7632-bc14-87d93f05f1b2",
+    "completed": true,
+    "summary": [
+      "## Preflight facts\n\n- **CWD / Git root:** `/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions`\n- **Origin:** `git@github.com:joshyorko/actions.git`\n- **Branch / HEAD:** `community` / `011c5482285ea516f39292100c429a905e6e3e36`\n- **Tree:** 1 untracked path, `action_server/src/sema4ai/`; no tracked modifications.\n- **Worktrees:** 73 registered records, including stale entries. The Dakota paths `/tmp/actions-134-dakota-20261008` and `/tmp/actions-134-dakota-resume-20261009` are missing. Other historical paths checked exist, including the registered cache Dakota worktree and `actions/.worktrees/dakota-workitems-acceptance-20261008`.\n- **New worktree parent:** No safe writable parent established. Existing candidates are owner-controlled, but this read-only environment reports them non-writable; do not create a worktree here.\n- **Objects:** All four requested commit objects are absent locally.\n- **Remote check:** `git ls-remote` failed before returning refs because SSH rejected `/etc/ssh/ssh_config.d/20-systemd-ssh-proxy.conf` permissions.\n- **Capacity:** `/home` has 170 GB available; `/tmp` has 7.7 GB. RAM: 8.1 GiB available; 20 CPUs; load averages 1.50, 1.40, 1.07. Repo is 2.5 GB.\n- **Processes:** Codex present; no matching RCC, PostgreSQL, browser, Luna, Astra, or native worker process found.\n- **Tools:** Codex CLI `0.162.1`. RCC resolves to `/home/linuxbrew/.linuxbrew/Caskroom/rcc/18.19.5/rcc-linux64`, version `18.19.5`; its command reported a read-only RCC lockfile warning. Poetry is absent from PATH. Python is `/usr/bin/python`, version `3.14.7`; `work-items/.venv` exists, other checked package venvs do not. Toolkit manifest routes setup through RCC tasks in `developer/toolkit.yaml`.\n- **Lane capacity:** Host capacity appears adequate for three inference lanes and at most one local heavy gate, but this checkout cannot support writer work in its current read-only view. RCC/toolchain readiness is also unverified.\n\n## Documentation improvement\n\n- **Canonical file changed or proposed:** Proposed `docs/skills/repository-operations.md`.\n- **Durable learning captured:** Add a preflight check for writable worktree parent, stale registered worktree paths, `/home` capacity, and RCC lockfile behavior before dispatching writer lanes.\n- **Evidence:** This inspection found 73 registered records, missing historical `/tmp` paths, non-writable candidate parents in the current view, 170 GB available under `/home`, and RCC’s read-only lockfile warning.\n- **Stale or ambiguous guidance removed:** None; read-only lane.\n- **Remaining uncertainty:** Whether candidate parents are writable in the intended non-sandboxed operator environment; remote refs and prepared RCC toolchain state.\n- **Upstream disposition:** none.\n\n**Disposition:** Stop before worker dispatch or workspace creation. No fetch, write, install, process control, or approval replay was performed.\n\n"
+    ]
+  },
+  "preparation": {
+    "turns": [
+      {
+        "id": "01a12827-58a9-7b62-a41c-a82a109b2226",
+        "status": "completed",
+        "items": [
+          {
+            "phase": "final_answer",
+            "text": "**Preparation stopped at the public Git transport check.** HTTPS access to `github.com` is blocked by the current sandbox allowlist, so I could not verify the live SHAs. I did not fetch objects or create worktrees.\n\n- **Writable root:** `.worktrees/` is writable. All three requested paths and branch names are currently free.\n- **Checkout preserved:** branch `community`, HEAD `011c5482285ea516f39292100c429a905e6e3e36`; untracked `action_server/src/sema4ai/` remains untouched.\n- **Required refs:** live SHA verification **BLOCKED**. Do not fetch or prepare from cached objects without that verification.\n- **RCC gateway:** **NOT RUN**. The repository pins RCC `v18.19.3`; that artifact was absent at the three checked candidate paths. No artifact hash was available. `work-items/pyproject.toml` declares Python `>=3.10,<4.0`; installed/prepared gateway compatibility remains unverified.\n- **Writers/workers:** none started. No source changes, installs, tests, publications, or process control.\n\n**Next commands after HTTPS access is available:** verify all three expected SHAs with public `git ls-remote`; only then fetch those exact refs into `refs/remotes/mk3-prep-*`, and create the three named worktrees in `.worktrees/`. Stop if any live SHA differs.\n\n**Documentation improvement**\n\n- **Canonical file changed or proposed:** Proposed `docs/skills/repository-operations.md`.\n- **Durable learning captured:** Require public HTTPS `ls-remote` SHA verification before fetching writer bases; keep preparation fetches in a dedicated ref namespace and leave stale worktree paths untouched.\n- **Evidence:** The requested public lookup was blocked by the sandbox network allowlist; the worktree destinations and branches were free.\n- **Stale or ambiguous guidance removed:** None.\n- **Remaining uncertainty:** Live SHAs, existence/hash of the pinned RCC artifact, and prepared-toolchain readiness.\n- **Upstream disposition:** none."
+          }
+        ]
+      }
+    ]
+  },
+  "writer_dispatch": "BLOCKED by native network allowlist; explicit execution-boundary authorization requested; no writer started",
+  "devsy": "DISABLED",
+  "original_threads_resumed": false
+}

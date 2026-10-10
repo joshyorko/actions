@@ -1,0 +1,290 @@
+{
+  "schema": "actions-wave8-recoverable-results/v1",
+  "payload_count": 40,
+  "files": [
+    {
+      "key": "pr309_owner",
+      "source": "/workspace/work/actions-mk3-evidence/pr309-import-order/checkpoint-6cdf7c31.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr309_owner.json",
+      "bytes": 4299,
+      "sha256": "316ad0c00f47b5850aa2a77d03b0b760a041b8bbd4d296a8a74038d3b85bcbca"
+    },
+    {
+      "key": "pr309_review",
+      "source": "/workspace/work/actions-mk3-evidence/pr309-import-order/independent-source-review-6cdf7c31.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr309_review.json",
+      "bytes": 4118,
+      "sha256": "7138cd2dcb7595ef91b1dc4f9361ac8486e10f88d64331f153e05916328230d2"
+    },
+    {
+      "key": "pr309_red_isort",
+      "source": "/workspace/work/actions-mk3-evidence/pr309-import-order/isort-red.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr309_red_isort.log",
+      "bytes": 5154,
+      "sha256": "72b51d109ba2bdd7c81c50edd55c3258fe6d066270319d38f37a38ae21751849"
+    },
+    {
+      "key": "pr309_lint",
+      "source": "/workspace/work/actions-mk3-evidence/pr309-import-order/lint.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr309_lint.log",
+      "bytes": 4319,
+      "sha256": "cc4a08e79f963baefd52a5a11ec1006a7613cb4faebdf0022ddadb559701acbb"
+    },
+    {
+      "key": "pr309_ast",
+      "source": "/workspace/work/actions-mk3-evidence/pr309-import-order/ast-equivalence.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr309_ast.log",
+      "bytes": 79,
+      "sha256": "9d1b55786d00b7cd84c82b72fe1ec6e02954907ed280d307ad79b8376902899e"
+    },
+    {
+      "key": "pr299_owner",
+      "source": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/merge-preparation-receipt.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_owner.json",
+      "bytes": 6578,
+      "sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034"
+    },
+    {
+      "key": "pr299_review",
+      "source": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/independent-local-merge-review-10dcfcef.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_review.json",
+      "bytes": 5835,
+      "sha256": "4eff29d4e2c34c0bb05cca496772be3a858a1e02a0d62acb93032a3e42fccf6f"
+    },
+    {
+      "key": "pr299_workflow_tests",
+      "source": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/workflow-tests.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_workflow_tests.log",
+      "bytes": 13018,
+      "sha256": "9164c649e6484c7d22072aedf36fd0891da4135c6d708028222dd5701b1c0477"
+    },
+    {
+      "key": "pg_manifest",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/attempt-manifest.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_manifest.json",
+      "bytes": 4169,
+      "sha256": "2e4496ae05267a88aa79e8cdef9485a7f6ae703dee58cc14da8783013bcf722d"
+    },
+    {
+      "key": "pg_result",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/probe-result.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_result.json",
+      "bytes": 1275,
+      "sha256": "1fdabcf5ce16f4602a868c5038edbfbbd940de5a7237edba26c385abace564d7"
+    },
+    {
+      "key": "pg_review",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/independent-postgresql-savepoint-result-review.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_review.json",
+      "bytes": 6678,
+      "sha256": "4cf0f23ff8beadbf705aadf4fc3f30957483d1655374aeaa7173b0edc6d75d6b"
+    },
+    {
+      "key": "pg_doc_proposal",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/canonical-guide-delta-proposal.md",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_doc_proposal.md",
+      "bytes": 2191,
+      "sha256": "156577232bd0cad72775df54ca37c5c9f6124c9b36e4db83cb3457960e6ddec9"
+    },
+    {
+      "key": "pr292_diagnosis",
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292-windows-independent-diagnosis.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr292_diagnosis.json",
+      "bytes": 7519,
+      "sha256": "8441d2e6a0095044242cf52c52d1651769f3a1ff725cc8e840938379b4fa962a"
+    },
+    {
+      "key": "pr292_readback",
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292-windows-authoritative-readback.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr292_readback.json",
+      "bytes": 6450,
+      "sha256": "930d708d57dc2da278954fbca92482707103b07a92c8af2d59c76925f8cae4f9"
+    },
+    {
+      "key": "pr195_design",
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/design-receipt.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr195_design.json",
+      "bytes": 7323,
+      "sha256": "97b22cb361af3013def60e4bbd13d9b287099768ef8ee725c3089f174833edf0"
+    },
+    {
+      "key": "release_manifest",
+      "source": "/workspace/work/actions-mk3-evidence/wave8-release-readiness/manifest.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/release_manifest.json",
+      "bytes": 726,
+      "sha256": "fa02cedae7b94166aff2d758230deff04c1fff6932880e956e6eed5213c65bab"
+    },
+    {
+      "key": "release_readiness",
+      "source": "/workspace/work/actions-mk3-evidence/wave8-release-readiness/readiness.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/release_readiness.json",
+      "bytes": 14162,
+      "sha256": "c125821e49573f888a780ae4942dab69d76fb08fb9ee3f0615ebf6668bd05f19"
+    },
+    {
+      "key": "release_supplement",
+      "source": "/workspace/work/actions-mk3-evidence/wave8-release-readiness/publication-supplement.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/release_supplement.json",
+      "bytes": 1094,
+      "sha256": "78ce4024c452e96fb4735e532c4a69c1456bd9eb2c60cb237156b59513922f33"
+    },
+    {
+      "key": "release_doc_proposal",
+      "source": "/workspace/work/actions-mk3-evidence/wave8-release-readiness/canonical-doc-proposal.md",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/release_doc_proposal.md",
+      "bytes": 2113,
+      "sha256": "334d549149e68a15111fccb0ebbb50ff5aa9b7155fb8979a8612af1fb414f83f"
+    },
+    {
+      "key": "dakota_preflight",
+      "source": "/workspace/work/actions-mk3-wave8-evidence/dakota-preparation-readback.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/dakota_preflight.json",
+      "bytes": 6128,
+      "sha256": "570394a83dd8f6478f6a94113dc74666de2cae78a265f5e5784defbbc9eff0cc"
+    },
+    {
+      "key": "ledger_readback",
+      "source": "/workspace/work/actions-mk3-wave8-evidence/ledger-results-readback.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/ledger_readback.json",
+      "bytes": 23143,
+      "sha256": "bbc1ca86837df0c8b65607a03be5b9c286fa5bb84fd63ad642caf448ff7acbf2"
+    },
+    {
+      "key": "pr208_design",
+      "source": "/workspace/work/actions-mk3-evidence/workitems-consumer-classification-design-208-20261010/design-receipt.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr208_design.json",
+      "bytes": 8539,
+      "sha256": "5f13e52a289b80ea8cd84cf56c413a26af69177923ded9559d9f66eda33fa04c"
+    },
+    {
+      "key": "pr208_doc_proposal",
+      "source": "/workspace/work/actions-mk3-evidence/workitems-consumer-classification-design-208-20261010/canonical-doc-proposal.md",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr208_doc_proposal.md",
+      "bytes": 1237,
+      "sha256": "13209f50143ff78d405ed2ec99d12e6c8a2e153b737bab03dc36d047b83c46b5"
+    },
+    {
+      "key": "pr208_frozen_receipt",
+      "source": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/acceptance-receipt.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr208_frozen_receipt.json",
+      "bytes": 6952,
+      "sha256": "bca359b7fbd2e7303e618a74dcd6b869e23970b98a7bb810cc698ef2968fa71f"
+    },
+    {
+      "key": "pr208_frozen_review",
+      "source": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/root-independent-result-review.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr208_frozen_review.json",
+      "bytes": 4186,
+      "sha256": "0c53c964d0b443f98493df2cf3177fd95986db20cb8429ff250dd9d6def68664"
+    },
+    {
+      "key": "pr208_go_receipt",
+      "source": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/acceptance-receipt.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr208_go_receipt.json",
+      "bytes": 7256,
+      "sha256": "cd791fc251b7a400303d5846b32db4b44fdba101a3d812f409ece94b9d368440"
+    },
+    {
+      "key": "pr208_go_review",
+      "source": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/root-independent-result-review.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr208_go_review.json",
+      "bytes": 1332,
+      "sha256": "48008003c839b5c1c2c333fc445acbeafd1809b300b8d6df36c7de4a2fc20519"
+    },
+    {
+      "key": "pr208_source_review",
+      "source": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/root-independent-source-review-ec8bea13.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr208_source_review.json",
+      "bytes": 2113,
+      "sha256": "64972f5fd4c21806843608e394b473b1111b363c6f2feebcb715a6bcad2053ee"
+    },
+    {
+      "key": "pg_artifact_image-inspect",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/image-inspect.txt",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_artifact_image-inspect.txt",
+      "bytes": 200,
+      "sha256": "8fa35a92bba06ecb2707d8cab6f631b5cb1069b2968c92ebbd454f9464e034d6"
+    },
+    {
+      "key": "pg_artifact_interpreter-version",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/interpreter-version.txt",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_artifact_interpreter-version.txt",
+      "bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    {
+      "key": "pg_artifact_postgres",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/postgres.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_artifact_postgres.log",
+      "bytes": 3621,
+      "sha256": "299acb2752cfed16e0b7043e1370ec9df77a04e335c9c730ea52b89128632e32"
+    },
+    {
+      "key": "pg_artifact_preflight",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/preflight.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_artifact_preflight.json",
+      "bytes": 389,
+      "sha256": "2218e285b20c587baecfd4ceb363228cda50ec0151cf12d568d84d41df3825f2"
+    },
+    {
+      "key": "pg_artifact_rcc-version",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/rcc-version.txt",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_artifact_rcc-version.txt",
+      "bytes": 112,
+      "sha256": "ea95416ff1e2018bef27f9387afd32d4099161343780bf87d0632aa6faeae254"
+    },
+    {
+      "key": "pg_artifact_test",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/test.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_artifact_test.log",
+      "bytes": 1908,
+      "sha256": "7e9aa8bc24942bd300cda8e700b609e2bbf4a1f8cefb66033d480d6f8a361aa3"
+    },
+    {
+      "key": "pg_executed_probe_failed_savepoint_postgresql",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/probe_failed_savepoint_postgresql.py",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_executed_probe_failed_savepoint_postgresql.py",
+      "bytes": 8626,
+      "sha256": "38819d621c9e82bb4b1a450303ad9a76739c4238966e789de87efefa3ffc4f95"
+    },
+    {
+      "key": "pg_executed_run_postgresql_savepoint_proof",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/run_postgresql_savepoint_proof.sh",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_executed_run_postgresql_savepoint_proof.sh",
+      "bytes": 15381,
+      "sha256": "2f83436217ac016ff059bf12081368eb3506d41f2a695cb81a03909a4b747477"
+    },
+    {
+      "key": "pg_execution_cleanup_addendum",
+      "source": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/execution-context-cleanup-addendum.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_execution_cleanup_addendum.json",
+      "bytes": 2274,
+      "sha256": "559175d5d2acafbd2cae635ef293ce48e4a0e622f506cd251bbc6ba99753efcd"
+    },
+    {
+      "key": "pr299_generator-rcc-dev",
+      "source": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/generator-rcc-dev.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_generator-rcc-dev.log",
+      "bytes": 12933,
+      "sha256": "a11be1be00fc5bd12567e0eb152dcc38be2914aba0d6848c1e0184aae05acc16"
+    },
+    {
+      "key": "pr299_generator-robot-config",
+      "source": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/generator-robot-config.yaml",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_generator-robot-config.yaml",
+      "bytes": 384,
+      "sha256": "c5d10f768956fc1a52d75e94932841a5e51a276d7850b0d41dd8e880e2c5cb2c"
+    },
+    {
+      "key": "pr299_workflow-test-robot-config",
+      "source": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/workflow-test-robot-config.yaml",
+      "path": "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_workflow-test-robot-config.yaml",
+      "bytes": 428,
+      "sha256": "7e39d4ff7784245c61cc2210445d88f2bb3d85f30c28723f021ad9ad37d263e4"
+    }
+  ],
+  "immutable_sources_preserved": true,
+  "large_raw_logs_and_binaries_excluded": true,
+  "pg_provenance_limit": "Outer RCC gateway is owner-attributed in the additive receipt; retrospective independent result GO is not future all-failure-path harness readiness.",
+  "ledger_time_note": "Earlier root ledger labels were coordinator-declared approximate times; embedded native observed_at timestamps remain authoritative. Root will publish a fresh exact-time status."
+}

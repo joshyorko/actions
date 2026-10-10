@@ -473,9 +473,14 @@ browser gates on Ubuntu and Windows; their receipts bind the manifest path,
 executable hash, and (for frozen builds) the onedir package-tree hash. Windows
 manifest paths include `.exe` for both runtimes, which the harness validates.
 Those Windows gates still require passing hosted receipts; macOS browser
-acceptance is not configured. Authorization denial, missing bundled support,
-and generic HTTP 500 remain `NOT_RUN` until their separately owned or supported
-packaged fixtures run. Do not use response interception as backend evidence.
+acceptance is not configured. Independent Linux frozen and Go-wrapper native
+runs both passed the normal, authorization-denied/sign-in-recovery, and
+storage-error stages at their recorded source/build. Those scoped results do
+not cover missing bundled support or a generic HTTP 500: keep both states
+`NOT_RUN` until a hash-bound packaged browser stage exercises each real backend
+condition. Frontend tests with synthetic responses may verify message
+classification, but do not clear native acceptance. Do not use response
+interception as backend evidence.
 The browser receipt may say `PASS_BOUNDED` only after the bounded process-tree
 cleanup result confirms that the Runtime wrapper was reaped, its descendant
 snapshot was complete, and no observed descendant remains live. A normal return

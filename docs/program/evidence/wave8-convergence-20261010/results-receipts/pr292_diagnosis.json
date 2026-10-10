@@ -1,0 +1,84 @@
+{
+  "status": "HOLD_WINDOWS_ACCEPTANCE; CONFIRMED_JOB_TIMEOUT_AND_PRIOR_TEST_FAILURES",
+  "reviewed_at_utc": "2026-10-10T23:21:37.157108+00:00",
+  "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+  "run": 38067347057,
+  "job": 114257572296,
+  "run_attempt": 1,
+  "tested_merge": "039bd60 (checkout log abbreviated ID); ordered head d0e12c1 into e886d26",
+  "job_started_at": "2026-10-10T16:46:01Z",
+  "job_completed_at": "2026-10-10T22:46:26Z",
+  "authoritative_cancellation_reason": {
+    "endpoint": "repos/joshyorko/actions/check-runs/114257572296/annotations?per_page=100",
+    "annotation_count": 3,
+    "message": "The job has exceeded the maximum execution time of 6h0m0s",
+    "classification": "GitHub maximum execution time; not an inferred manual/external cancellation."
+  },
+  "log_binding": {
+    "sha256": "76972236e5dc6863b1d020592449d246dce14f068639d69be1271d28b7defd47",
+    "utf8_bytes": 1191946,
+    "lines": 10380
+  },
+  "compact_readback_binding": {
+    "file": "/workspace/work/actions-mk3-evidence/wave8/pr292-windows-authoritative-readback.json",
+    "sha256": "930d708d57dc2da278954fbca92482707103b07a92c8af2d59c76925f8cae4f9",
+    "bytes": 6450
+  },
+  "source_bindings": [
+    {
+      "file": "action_server/src/actions/server/_selftest.py",
+      "sha256": "4666e9870a84e4a7b8eb740fdc90c6aa7caf2fff846298c25bb1a6e342092d71",
+      "git_blob": "bc32bccf7e238bb625e6cea87a2e1f141c3d80d4"
+    },
+    {
+      "file": "action_server/src/actions/server/_robo_utils/process.py",
+      "sha256": "ce78800a244682b7939dc812a5109e2995bee67d8fd8e19fdd8afe7e55e1a93b",
+      "git_blob": "cc35194f88ec6aac5718dcaeadab588ab18d380d"
+    },
+    {
+      "file": "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+      "sha256": "50444887672008940711466b0919bffe0306c80b4d4de42eb0802ac207d8cbd4",
+      "git_blob": "5fe18b942ba66f339ac076fa26add1908d70305e"
+    },
+    {
+      "file": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+      "sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34",
+      "git_blob": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    },
+    {
+      "file": ".github/workflows/actions_runtime_tests.yml",
+      "sha256": "9e6a7753bea73c5bd8f56caf9516fffc61768d0c719e445a1dc8808be5d65ab4",
+      "git_blob": "9f6837a49386528e7a09eb293885e7681084ec93"
+    }
+  ],
+  "observations": [
+    "Windows nonintegration suite1007PASS/94SKIP; Go lifecycle/build/frontend/artifact upload succeeded before integration. Linux114257572255 andmacOS114257572069 jobsSUCCESS remain accepted separately.",
+    "Integration summary at17:30:17:6FAIL/125PASS/18SKIP/1104DESELECTED in1795.89s. All6errors are ActionServerProcess.start readiness Future.result TimeoutError before the requested reload/catalog-generation behavior.",
+    "Failed tests: watched reload recovery; duplicateMCPkey(resource,template,prompt); resource owner history; successful generation drain. They are actual failures, not six cases merely missing due cancellation.",
+    "After summary,3762watchfiles periodic messages continue until22:46interrupt; Python threading._shutdown waits lock.acquire. Job annotation confirms six-hour cancellation.",
+    "Resource-history test calls _start at446 before try/finally447; _start calls process.start without failure cleanup. ActionServerProcess.start157\u2013209 creates live Process/output threads then raises timeout without stopping it. Reader threads39\u201360 are non-daemon and stop135\u2013144 does not retain/join readers. This concrete owned-test cleanup gap is consistent with post-summary hang; no full PID-to-specific failed test mapping is proved.",
+    "Captured failing child output is waiting in legacy RCC18.19.3 holotree variables during package startup; no ready address/completed RCC result was observed before90s deadline. Cold setup/network/cache cause is unresolved."
+  ],
+  "safest_next_finite_gate": {
+    "execution_now": "NOT AUTHORIZED_BY_THIS_REVIEW; no rerun or service performed",
+    "ownership": "Root must reconcile fresh Dakota/Executor ownership before assigning a single source writer or finite gate; tunnel unavailable/fresh external status UNKNOWN. Do not resume/create native threads.",
+    "precondition": "Review a minimal startup-failure cleanup change/regression first: exception after Process.start must stop/reap owned child/descendants and join/close output readers within a bounded cleanup reserve while preserving original TimeoutError. Do not daemonize away cleanup or raise readiness deadlines to hide the failure.",
+    "diagnostic_plan": "Then one exact-head Windows diagnostic on the single resource-history startup case, with a300s enclosing owned process-tree watchdog, unchanged90s native readiness assertion, separate20s cleanup reserve, bounded sanitized output and PID/reader reap receipt. Retain exact built frozen/Go package identity, original CLI flags/provider configuration and fresh owned dirs. Capture exact RCC child timing/status before port readiness to distinguish cold acquisition delay from Runtime behavior. No whole matrix replay until this finite gate proves clean exit and identifies the prerequisite.",
+    "proof_boundary": "One startup diagnosis does not pass the6behavior cases or whole292. After concrete repair/prerequisite resolution, re-run affected6cases plus exact-head configured package/native gates under explicit finite bounds; preserve previous Linux/macOS/source-equivalent proofs."
+  },
+  "commands": [
+    "Read exact wave8 AGENTS.md/repository skill/index/upstream-reporting; no bootstrap/install.",
+    "Read-only GitHub connector fetch_workflow_run_jobs38067347057, fetch_job_logs114257572296, commit_workflow_runsd0e12c1; complete decoded log10380lines/1191946UTF8bytes read in memory, SHA256 with known-vector checked implementation; only bounded excerpt retained.",
+    "Read-only gh api run/job/check-run metadata and3check-run annotations; no retry/cancel/rerun.",
+    "git show exactd0e12c1 helper/test/workflow source; no heavy tests/native execution."
+  ],
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "exact_delta": "For a cancelled integration job, inspect check-run annotations and the full test summary before treating it as an external cancellation or replaying it. A completed pytest failure summary followed by persistent child output and threading._shutdown can indicate owned-process cleanup failure. Startup helpers must install failure cleanup before invoking a child that can time out, and readiness failure must preserve its original error while stopping/reaping owned descendants and joining output readers under a finite cleanup deadline. Report earlier failed cases separately from the final job timeout; successful OS/native slices remain scoped evidence.",
+    "evidence": "ExactWindows check-run maximum6hannotation, prior6FAIL summary,5hpost-summary watcher output, source acquisition/finally ordering and non-daemon readers.",
+    "stale_ambiguity_removed": "Cancelled does not mean the tests never failed, and increasing/replaying whole job timeout is not a diagnosed repair.",
+    "remaining_uncertainty": "Why RCC cold startup exceeded readiness budget; exact survivor PID/test identity; fresh external ownership."
+  },
+  "upstream_disposition": "none; Actions-owned test cleanup gap and unidentified startup prerequisite, no confirmed RCC/dependency defect.",
+  "no_source_tests_remote_mutations_or_services": true
+}

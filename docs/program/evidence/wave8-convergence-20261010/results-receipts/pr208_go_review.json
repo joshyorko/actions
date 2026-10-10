@@ -1,0 +1,31 @@
+{
+  "build_source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+  "checks": [
+    "selected one pytest test; zero failures/errors/skips",
+    "retained result/log hashes",
+    "normal / real middleware403 / sign-in / reauth / storage503 stages",
+    "manifest-bound wrapper/full sibling distribution and fresh-HOME extracted-tree test",
+    "actual managed Chromium hash",
+    "bounded cleanup plus independently absent measured PIDs"
+  ],
+  "independent_pid_absence": {
+    "56049": false,
+    "56058": false,
+    "56059": false,
+    "56078": false,
+    "56154": false,
+    "56226": false
+  },
+  "limitations": [
+    "Prior setup-layout failure remains preserved",
+    "Linux Go-wrapper scope only, no full208/ChatGPT/nonChromium/accessibility/crash/generic500/missing-support proof"
+  ],
+  "reviewer": "root independent final review",
+  "runner_receipt_sha256": "2104142f78cddcaa85a99e5d23d21aad0725e86fccc52d781b962f35b6db5fc6",
+  "runtime_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+  "source_head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+  "source_tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+  "staging_review_sha256": "e11d1f98b257d1d08481f57b3870dcc62d5a510eec8b8539dabc301c6d6e5e23",
+  "status": "GO_SCOPED_LINUX_GO_WRAPPER_WORK_ITEMS_UI",
+  "upstream_disposition": "None"
+}

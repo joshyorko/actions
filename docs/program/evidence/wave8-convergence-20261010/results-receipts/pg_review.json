@@ -1,0 +1,68 @@
+{
+  "accepted_assertions": [
+    "Production Database.connect uses one psycopg autocommit connection throughout; real division by zero has SQLSTATE22012 and leaves outer transaction INERROR at nesting1.",
+    "Production nested transaction attempts generated SAVEPOINT and yields DBError chained to SQLSTATE25P02; nested body never enters. Exact SAVEPOINT error is preserved instead of an outer assertion masking it.",
+    "Outer psycopg transaction cleanup leaves nesting0 and connectionIDLE; same connection later commits outer-kept and inner-committed while inner-rolled-back is absent; final nesting0/IDLE."
+  ],
+  "canonical_doc_delta": {
+    "evidence": "This exact source-bound actual PostgreSQL17.11/psycopg3.3.4 receipt; accepted owner proposal hash in input bindings.",
+    "exact_text": "Keep backend fault injection explicit: SQLite authorizer denial tests SAVEPOINT creation in an otherwise usable transaction. In PostgreSQL, a failed statement can leave an outer transaction aborted (SQLSTATE 22012 for division by zero); the next nested Database.transaction() attempts its SAVEPOINT and fails with 25P02. Verify that the original SAVEPOINT DBError propagates, the nested body does not run, outer cleanup returns nesting to zero and the connection to IDLE, and the same connection later commits an outer row and a nested row while rolling back another nested row. Record both SQLSTATEs and the server/driver versions. This proves recovery from SAVEPOINT failure in an already-aborted transaction, not denial of SAVEPOINT in a healthy transaction.",
+    "target": "docs/skills/repository-operations.md, immediately after nested database transaction guidance around lines98\u2013104",
+    "uncertainty": "No broader transaction admission or full issue84 acceptance; no stale guidance removal needed."
+  },
+  "commands_and_observations": [
+    {
+      "commands": "git rev-parse HEAD; git rev-parse HEAD^{tree}; git show -s --format=%P HEAD; git status --porcelain; git show HEAD:<bound source files>",
+      "observed": "Exact head/tree/ordered parents above, clean; all three recorded source files equal committed bytes and recorded hashes."
+    },
+    {
+      "commands": "Read frozen probe/wrapper, production Database.transaction()/connect()/execute(), guide transaction paragraph; hash/stat all artifact/addendum/executed-file bindings",
+      "observed": "All seven original artifact byte/hash bindings, all nine addendum hashes, both executed files and four primary hashes match. No altered prior receipt."
+    },
+    {
+      "commands": "Compare prepared toolchain pyproject/locks and developer/toolkit.yaml; hash RCC binary; read preflight/probe/logs",
+      "observed": "Runtime/Core pyproject and Poetry locks plus toolkit YAML byte-identical to prepared PR302 tree. RCC binary hash matches manifest; preflight and actual probe report Python3.12.15, psycopg3.3.4, candidate Database module origin. Installed actions-runtime1.0.3 is metadata only; candidate module bytes are the source evidence."
+    },
+    {
+      "commands": "timeout 10 docker image inspect --format <ID/platform/digests> <recorded immutable image>; timeout 10 docker container ls --all --quiet --filter id=<exact owned ID>; /proc/66831 existence; loopback32771 connect_ex; list attempt dotfiles",
+      "observed": "Cached image ID/digest/linux-amd64 matches record; exact owned container absent with successful Docker read; probe PID absent, port refused, no raw/credential dotfiles."
+    },
+    {
+      "commands": "Read compact retained test/PostgreSQL logs; scan retained logs for PostgreSQL credential URLs/password assignments/generated 48-hex tokens without printing raw logs",
+      "observed": "PostgreSQL backend81 logs division by zero and subsequent savepoint savepoint_0 failure; test traceback preserves production DBError and PASS. No checked credential markers found; all attempt artifacts regular non-symlinks mode0600."
+    }
+  ],
+  "executed_probe_sha256": "38819d621c9e82bb4b1a450303ad9a76739c4238966e789de87efefa3ffc4f95",
+  "executed_wrapper_sha256": "2f83436217ac016ff059bf12081368eb3506d41f2a695cb81a03909a4b747477",
+  "harness_reuse_limits": [
+    "Do not infer future all-failure-path wrapper approval. Docker absence branches currently ignore list-command status during trap cleanup; this actual absence was independently checked with successful Docker status.",
+    "Sanitizer reads raw logs before truncating. The test invocation has file-size limit and 60s timeout, but the wrapper does not express one shared total cleanup deadline; raw removal is additive owner cleanup. This actual small successful attempt is accepted, not arbitrary rerun readiness."
+  ],
+  "input_sha256": {
+    "attempt-manifest.json": "2e4496ae05267a88aa79e8cdef9485a7f6ae703dee58cc14da8783013bcf722d",
+    "canonical-guide-delta-proposal.md": "156577232bd0cad72775df54ca37c5c9f6124c9b36e4db83cb3457960e6ddec9",
+    "execution-context-cleanup-addendum.json": "559175d5d2acafbd2cae635ef293ce48e4a0e622f506cd251bbc6ba99753efcd",
+    "postgres.log": "299acb2752cfed16e0b7043e1370ec9df77a04e335c9c730ea52b89128632e32",
+    "probe-result.json": "1fdabcf5ce16f4602a868c5038edbfbbd940de5a7237edba26c385abace564d7",
+    "test.log": "7e9aa8bc24942bd300cda8e700b609e2bbf4a1f8cefb66033d480d6f8a361aa3"
+  },
+  "observed_at_utc": "2026-10-10T23:29:43.989025+00:00",
+  "provenance_limits": [
+    "Canonical RCC task-script --no-build invocation is retained as owner execution-context/addendum attribution; manifest gateway flag is asserted by wrapper, not an independently captured outer RCC transcript. This review did not execute RCC.",
+    "No independent pre-run harness review was performed; this is retrospective result acceptance only."
+  ],
+  "review_kind": "Independent post-run read-only review; no independent pre-run review and no rerun",
+  "scope": "One source-bound PostgreSQL17.11 failed SAVEPOINT in an already-aborted transaction and same-connection recovery. No healthy-transaction SAVEPOINT permission denial, migration/process/CLI/full issue84, native/wheel/frozen or release acceptance.",
+  "source": {
+    "clean_readback": true,
+    "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+    "module_sha256": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4",
+    "ordered_parents": [
+      "1d742149b7341ebc5dd543aa8b7e446f7f9c8b5b",
+      "19380993febaa71238eaee3026b5c808773283ff"
+    ],
+    "tree": "42f70afb88877335a71e9bc02ad2e85730d69442"
+  },
+  "upstream_disposition": "none; Actions-owned repair accepted for this bounded result, no new maintained upstream defect identified",
+  "verdict": "GO_BOUNDED_POSTGRESQL_FAILED_SAVEPOINT_RECOVERY_RESULT"
+}

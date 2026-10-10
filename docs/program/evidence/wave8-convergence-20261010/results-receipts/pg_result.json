@@ -1,0 +1,31 @@
+{
+  "backend": "postgresql",
+  "connection_in_transaction_after_failed_outer_cleanup": false,
+  "connection_status_after_failed_outer_cleanup": "IDLE",
+  "connection_status_after_recovery": "IDLE",
+  "first_sqlstate": "22012",
+  "nesting_after_failed_outer_cleanup": 0,
+  "nesting_after_recovery": 0,
+  "outer_exception_type": "DBError",
+  "outer_nesting_before_nested": 1,
+  "postgres_server_version": "17.11",
+  "psycopg_version": "3.3.4",
+  "python_executable": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+  "python_pid": 66831,
+  "python_version": "3.12.15",
+  "same_connection_recovery_passed": true,
+  "same_connection_recovery_rows": [
+    "inner-committed",
+    "outer-kept"
+  ],
+  "savepoint_body_entered": false,
+  "savepoint_command_observed_in_error": true,
+  "savepoint_failure_sqlstate": "25P02",
+  "savepoint_failure_text": "Error running sql: 'savepoint savepoint_0;' with values: None",
+  "savepoint_failure_type": "DBError",
+  "source_module": "/workspace/work/actions-mk3-wave8-postgres/action_server/src/actions/server/_database.py",
+  "source_module_sha256": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4",
+  "state_after_setup": "IDLE",
+  "status": "PASS",
+  "transaction_state_before_savepoint": "INERROR"
+}

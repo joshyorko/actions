@@ -1,0 +1,96 @@
+{
+  "artifacts": {
+    "image-inspect.txt": {
+      "bytes": 200,
+      "sha256": "8fa35a92bba06ecb2707d8cab6f631b5cb1069b2968c92ebbd454f9464e034d6"
+    },
+    "interpreter-version.txt": {
+      "bytes": 15,
+      "sha256": "9bdce2f3bc127762fcb79db8faf0385c42e81e916436db64486d7162bc1d04e0"
+    },
+    "postgres.log": {
+      "bytes": 3621,
+      "sha256": "299acb2752cfed16e0b7043e1370ec9df77a04e335c9c730ea52b89128632e32"
+    },
+    "preflight.json": {
+      "bytes": 389,
+      "sha256": "2218e285b20c587baecfd4ceb363228cda50ec0151cf12d568d84d41df3825f2"
+    },
+    "probe-result.json": {
+      "bytes": 1275,
+      "sha256": "1fdabcf5ce16f4602a868c5038edbfbbd940de5a7237edba26c385abace564d7"
+    },
+    "rcc-version.txt": {
+      "bytes": 112,
+      "sha256": "ea95416ff1e2018bef27f9387afd32d4099161343780bf87d0632aa6faeae254"
+    },
+    "test.log": {
+      "bytes": 1908,
+      "sha256": "7e9aa8bc24942bd300cda8e700b609e2bbf4a1f8cefb66033d480d6f8a361aa3"
+    }
+  },
+  "executed_files": {
+    "probe_failed_savepoint_postgresql.py": {
+      "bytes": 8626,
+      "sha256": "38819d621c9e82bb4b1a450303ad9a76739c4238966e789de87efefa3ffc4f95"
+    },
+    "run_postgresql_savepoint_proof.sh": {
+      "bytes": 15381,
+      "sha256": "2f83436217ac016ff059bf12081368eb3506d41f2a695cb81a03909a4b747477"
+    }
+  },
+  "invocation": "source /workspace/actions-cloud/activate.sh && ACTIONS_SAVEPOINT_PYTHON=/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python /workspace/actions-cloud/bin/rcc task script -r developer/toolkit.yaml --no-build -- bash <this wrapper>",
+  "limitations": [
+    "One in-process production Database transaction path on PostgreSQL 17.11; no migration, full CLI/server, concurrency, wheel, frozen, native, or release claim.",
+    "The test deliberately aborts an outer PostgreSQL transaction with division by zero; a nested SAVEPOINT then fails with SQLSTATE 25P02. This validates application cleanup after that actual server error, not a server privilege that denies SAVEPOINT in a healthy transaction."
+  ],
+  "observed_at_utc": "20261010T232524Z-66536",
+  "result": {
+    "container_cleanup": "REMOVED_AND_VERIFIED_ABSENT",
+    "credential_cleanup": "REMOVED_AND_VERIFIED_ABSENT",
+    "preflight": "PASS",
+    "server_log_status": "CAPTURED_SANITIZED",
+    "test_exit_code": "0",
+    "test_log_status": "CAPTURED_SANITIZED",
+    "test_process_pid": "66831",
+    "test_status": "PASS"
+  },
+  "service": {
+    "container_id": "d0b3f1c37da91b8a73e3f61ba2f4cb096b71791afedf3055ec4dd4dcb7b8fe0b",
+    "container_name": "actions-db-savepoint-20261010T232524Z-66536",
+    "image": "docker.io/library/postgres@sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+    "image_id": "sha256:79bd7c99e923138f136f8009d6bffa66e21e9d4fda5c0c561b00fc9c90cfe537",
+    "loopback_port": "32771",
+    "observed_limits": "536870912 1000000000 64",
+    "platform": "linux/amd64",
+    "postgres_version": "postgres (PostgreSQL) 17.11",
+    "repo_digests": "[\"postgres@sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3\"]",
+    "requested_limits": {
+      "cpu": 1,
+      "memory": "512m",
+      "pids": 64
+    }
+  },
+  "source": {
+    "clean": true,
+    "files": {
+      "action_server/src/actions/server/_database.py": {
+        "sha256": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4"
+      },
+      "action_server/tests/action_server_tests/test_database.py": {
+        "sha256": "2e6d96554f20303c77fd7aac76c1a680376f128bbbbf463033d9054ba0075db2"
+      },
+      "docs/skills/repository-operations.md": {
+        "sha256": "151038d640694d95390ad34a2142c2b1f6feac27a6cac82384feeeda159d36b3"
+      }
+    },
+    "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+    "tree": "42f70afb88877335a71e9bc02ad2e85730d69442"
+  },
+  "toolchain": {
+    "canonical_rcc": "v18.19.3\nNote: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.",
+    "gateway_entered": true,
+    "prepared_python": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "rcc_executable_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  }
+}

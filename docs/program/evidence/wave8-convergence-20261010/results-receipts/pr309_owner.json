@@ -1,0 +1,39 @@
+{
+  "task": "PR309 bounded mechanical import-order correction",
+  "worktree": "/workspace/work/actions-mk3-wave8-pr309",
+  "branch": "mk3/wave8-pr309-import-order-20261010",
+  "base_commit": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+  "head_commit": "6cdf7c3158227d93ed57e46220204a08e4595142",
+  "head_tree": "42d258c6a8d98e4ae192f7738c8ff622189c6f70",
+  "status": "clean after commit",
+  "changed_paths": [
+    "action_server/tests/action_server_tests/test_auth_route_inventory.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "source_change": "Configured isort moved only the nested import `from actions.server._server import start_server` ahead of `from actions.server._settings import Settings`. No route/provider/argv/assertion code changed.",
+  "toolchain": {
+    "canonical_gateway": "set -o pipefail; source /workspace/actions-cloud/activate.sh && rcc task script --no-build -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/pr309-import-order/run_checks.py MODE",
+    "workdir": "/workspace/work/actions-mk3-wave8-pr309",
+    "RCC": "v18.19.3; /workspace/actions-cloud/bin/rcc SHA-256 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "prepared_python": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python, Python 3.12.15",
+    "isort": "5.13.2 from prepared Action Server environment; candidate/prepared pyproject.toml and poetry.lock SHA-256 matched expected hashes verified by runner; candidate actions.server import origin verified under this worktree."
+  },
+  "verification": {
+    "red": "Before formatting, configured `isort --check --diff tests/action_server_tests/test_auth_route_inventory.py` failed and reported precisely the two nested imports to swap. Log is isort-red.log, SHA-256 72b51d109ba2bdd7c81c50edd55c3258fe6d066270319d38f37a38ae21751849.",
+    "format": "Applied configured isort 5.13.2 to only the target test file. RCC gateway format.log SHA-256 5875dc790181b32ad4a8d2977204480fbb4cfb68326b97b7e0ce8e7b23895069.",
+    "AST": "Compared baseline HEAD and candidate AST: all non-import AST and multiset of import statements/bindings are identical; only import order differs. ast-equivalence.log SHA-256 9d1b55786d00b7cd84c82b72fe1ec6e02954907ed280d307ad79b8376902899e.",
+    "focused_pure_test": "`pytest --noconftest -q tests/action_server_tests/test_auth_route_inventory.py -k rejects_new_uncategorized_route`: 1 passed, 2 deselected. This avoids the file-level autouse RCC setup for the independent pure classification contract. focused-pure.log SHA-256 8ed617d781019aefd6f3dccbb0e2a5c2bc33adf0940b277dd2d7bbd448604b5e.",
+    "ordinary_focused_collection": "Attempted the full target file once; it stopped in the session autouse fixture because this worktree lacks action_server/bin/rcc-18.19.3. The fixture raises before RCC is invoked. No RCC/native/service test ran. focused.log SHA-256 35c33c70df840ce0ec3b2855de196f750872af4580ed84115b55218cf11ad1fe.",
+    "configured_lint": "`invoke lint` passed Ruff check, Ruff format check, and isort across src/tests; repository Markdown lint executable was unavailable. lint.log SHA-256 cc4a08e79f963baefd52a5a11ec1006a7613cb4faebdf0022ddadb559701acbb.",
+    "diff_check": "`git diff --check` passed before commit."
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "Records that Action Server invoke lint runs Ruff check, Ruff format, and isort using its Black profile, and that isort covers nested test-function imports. Advises using the configured gate after test import reordering while preserving route/contract assertions.",
+    "evidence": "action_server/pyproject.toml configures profile=black; devutils invoke lint implementation and successful lint output confirm the package gate; failing isort output came from imports nested in test_auth_route_inventory.py.",
+    "stale_guidance_removed": "None.",
+    "remaining_uncertainty": "Markdown lint binary is not available in the prepared environment; documented code change only."
+  },
+  "upstream_disposition": "None; no upstream defect investigated or confirmed.",
+  "scope_boundary": "Local source review candidate only. No push, merge, retarget, PR/issue mutation, actual RCC test, native test, service test, or publication."
+}

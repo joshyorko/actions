@@ -1,0 +1,456 @@
+{
+  "schema": "actions-wave8-results-convergence/v1",
+  "observed_at_utc": "2026-10-10T23:36:00Z",
+  "evidence_tree": {
+    "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+    "head": "050fa391fd599a2554a82e17d93a5e4d5a2bd317",
+    "tree": "b391d85c0656fc2ee50aa700dd7d9077a8a4d346"
+  },
+  "baseline": {
+    "integration": "19380993febaa71238eaee3026b5c808773283ff",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "community": "a70993fafc99a9f94041485542d5a720797ca394"
+  },
+  "evidence_files": {
+    "dispatch_contract": {
+      "path": "docs/program/evidence/wave8-convergence-20261010/dispatch-contract.json",
+      "bytes": 3059,
+      "sha256": "199df788a526022fed5c54d4accad455e057fbd27e74ec92cfb75587a5094bfc"
+    },
+    "pr309_owner": {
+      "path": "/workspace/work/actions-mk3-evidence/pr309-import-order/checkpoint-6cdf7c31.json",
+      "bytes": 4299,
+      "sha256": "316ad0c00f47b5850aa2a77d03b0b760a041b8bbd4d296a8a74038d3b85bcbca"
+    },
+    "pr309_review": {
+      "path": "/workspace/work/actions-mk3-evidence/pr309-import-order/independent-source-review-6cdf7c31.json",
+      "bytes": 4118,
+      "sha256": "7138cd2dcb7595ef91b1dc4f9361ac8486e10f88d64331f153e05916328230d2"
+    },
+    "pr309_red_isort": {
+      "path": "/workspace/work/actions-mk3-evidence/pr309-import-order/isort-red.log",
+      "bytes": 5154,
+      "sha256": "72b51d109ba2bdd7c81c50edd55c3258fe6d066270319d38f37a38ae21751849"
+    },
+    "pr309_lint": {
+      "path": "/workspace/work/actions-mk3-evidence/pr309-import-order/lint.log",
+      "bytes": 4319,
+      "sha256": "cc4a08e79f963baefd52a5a11ec1006a7613cb4faebdf0022ddadb559701acbb"
+    },
+    "pr309_ast": {
+      "path": "/workspace/work/actions-mk3-evidence/pr309-import-order/ast-equivalence.log",
+      "bytes": 79,
+      "sha256": "9d1b55786d00b7cd84c82b72fe1ec6e02954907ed280d307ad79b8376902899e"
+    },
+    "pr299_owner": {
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/merge-preparation-receipt.json",
+      "bytes": 6578,
+      "sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034"
+    },
+    "pr299_review": {
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/independent-local-merge-review-10dcfcef.json",
+      "bytes": 5835,
+      "sha256": "4eff29d4e2c34c0bb05cca496772be3a858a1e02a0d62acb93032a3e42fccf6f"
+    },
+    "pr299_workflow_tests": {
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/workflow-tests.log",
+      "bytes": 13018,
+      "sha256": "9164c649e6484c7d22072aedf36fd0891da4135c6d708028222dd5701b1c0477"
+    },
+    "pg_manifest": {
+      "path": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/attempt-manifest.json",
+      "bytes": 4169,
+      "sha256": "2e4496ae05267a88aa79e8cdef9485a7f6ae703dee58cc14da8783013bcf722d"
+    },
+    "pg_result": {
+      "path": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/probe-result.json",
+      "bytes": 1275,
+      "sha256": "1fdabcf5ce16f4602a868c5038edbfbbd940de5a7237edba26c385abace564d7"
+    },
+    "pg_review": {
+      "path": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/independent-postgresql-savepoint-result-review.json",
+      "bytes": 6678,
+      "sha256": "4cf0f23ff8beadbf705aadf4fc3f30957483d1655374aeaa7173b0edc6d75d6b"
+    },
+    "pg_doc_proposal": {
+      "path": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/canonical-guide-delta-proposal.md",
+      "bytes": 2191,
+      "sha256": "156577232bd0cad72775df54ca37c5c9f6124c9b36e4db83cb3457960e6ddec9"
+    },
+    "pr292_diagnosis": {
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292-windows-independent-diagnosis.json",
+      "bytes": 7519,
+      "sha256": "8441d2e6a0095044242cf52c52d1651769f3a1ff725cc8e840938379b4fa962a"
+    },
+    "pr292_readback": {
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292-windows-authoritative-readback.json",
+      "bytes": 6450,
+      "sha256": "930d708d57dc2da278954fbca92482707103b07a92c8af2d59c76925f8cae4f9"
+    },
+    "pr195_design": {
+      "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/design-receipt.json",
+      "bytes": 7323,
+      "sha256": "97b22cb361af3013def60e4bbd13d9b287099768ef8ee725c3089f174833edf0"
+    },
+    "release_manifest": {
+      "path": "/workspace/work/actions-mk3-evidence/wave8-release-readiness/manifest.json",
+      "bytes": 726,
+      "sha256": "fa02cedae7b94166aff2d758230deff04c1fff6932880e956e6eed5213c65bab"
+    },
+    "release_readiness": {
+      "path": "/workspace/work/actions-mk3-evidence/wave8-release-readiness/readiness.json",
+      "bytes": 14162,
+      "sha256": "c125821e49573f888a780ae4942dab69d76fb08fb9ee3f0615ebf6668bd05f19"
+    },
+    "release_supplement": {
+      "path": "/workspace/work/actions-mk3-evidence/wave8-release-readiness/publication-supplement.json",
+      "bytes": 1094,
+      "sha256": "78ce4024c452e96fb4735e532c4a69c1456bd9eb2c60cb237156b59513922f33"
+    },
+    "release_doc_proposal": {
+      "path": "/workspace/work/actions-mk3-evidence/wave8-release-readiness/canonical-doc-proposal.md",
+      "bytes": 2113,
+      "sha256": "334d549149e68a15111fccb0ebbb50ff5aa9b7155fb8979a8612af1fb414f83f"
+    },
+    "dakota_preflight": {
+      "path": "/workspace/work/actions-mk3-wave8-evidence/dakota-preparation-readback.json",
+      "bytes": 6128,
+      "sha256": "570394a83dd8f6478f6a94113dc74666de2cae78a265f5e5784defbbc9eff0cc"
+    },
+    "ledger_readback": {
+      "path": "/workspace/work/actions-mk3-wave8-evidence/ledger-results-readback.json",
+      "bytes": 23143,
+      "sha256": "bbc1ca86837df0c8b65607a03be5b9c286fa5bb84fd63ad642caf448ff7acbf2"
+    },
+    "pr208_design": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-consumer-classification-design-208-20261010/design-receipt.json",
+      "bytes": 8539,
+      "sha256": "5f13e52a289b80ea8cd84cf56c413a26af69177923ded9559d9f66eda33fa04c"
+    },
+    "pr208_doc_proposal": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-consumer-classification-design-208-20261010/canonical-doc-proposal.md",
+      "bytes": 1237,
+      "sha256": "13209f50143ff78d405ed2ec99d12e6c8a2e153b737bab03dc36d047b83c46b5"
+    },
+    "pr208_frozen_receipt": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/acceptance-receipt.json",
+      "bytes": 6952,
+      "sha256": "bca359b7fbd2e7303e618a74dcd6b869e23970b98a7bb810cc698ef2968fa71f"
+    },
+    "pr208_frozen_review": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/root-independent-result-review.json",
+      "bytes": 4186,
+      "sha256": "0c53c964d0b443f98493df2cf3177fd95986db20cb8429ff250dd9d6def68664"
+    },
+    "pr208_go_receipt": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/acceptance-receipt.json",
+      "bytes": 7256,
+      "sha256": "cd791fc251b7a400303d5846b32db4b44fdba101a3d812f409ece94b9d368440"
+    },
+    "pr208_go_review": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/root-independent-result-review.json",
+      "bytes": 1332,
+      "sha256": "48008003c839b5c1c2c333fc445acbeafd1809b300b8d6df36c7de4a2fc20519"
+    },
+    "pr208_source_review": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/root-independent-source-review-ec8bea13.json",
+      "bytes": 2113,
+      "sha256": "64972f5fd4c21806843608e394b473b1111b363c6f2feebcb715a6bcad2053ee"
+    }
+  },
+  "results": [
+    {
+      "lane": "PR309 mechanical import-order correction",
+      "source_commit": "6cdf7c3158227d93ed57e46220204a08e4595142",
+      "source_tree": "42d258c6a8d98e4ae192f7738c8ff622189c6f70",
+      "owner_receipt_sha256": "316ad0c00f47b5850aa2a77d03b0b760a041b8bbd4d296a8a74038d3b85bcbca",
+      "independent_review_sha256": "7138cd2dcb7595ef91b1dc4f9361ac8486e10f88d64331f153e05916328230d2",
+      "disposition": "ACCEPTED_SOURCE_ONLY",
+      "verified_slice": [
+        "only nested import ordering changed; non-import AST and import bindings unchanged",
+        "configured isort RED identified the two imports; formatter and configured lint passed",
+        "pure route-classifier regression passed 1; full target-file fixture stopped before RCC because pinned RCC fixture was absent"
+      ],
+      "not_run_or_remaining": [
+        "actual RCC/native/service acceptance",
+        "new exact-head hosted CI pending at coordinator readback",
+        "no push/merge/whole issue acceptance inferred by this source receipt"
+      ],
+      "doc_disposition": "The reviewed candidate already contains its canonical lint-guide delta. Preserve that source-bound paragraph when engineering integrates it; do not copy it into this evidence-tree change or present the source-only result as native acceptance.",
+      "coordinator_hosted_status_observed_at_utc": "2026-10-10T23:40:00Z",
+      "coordinator_hosted_status": "pushed exact head 6cdf7c31; 18 exact-head checks observed, 9 success and 9 pending; root will retain an additive CI receipt. This is not a completed hosted gate."
+    },
+    {
+      "lane": "PR299 ordinary local union",
+      "source_commit": "10dcfcefe0be8b32033015ed313c9e033a8d5c74",
+      "source_tree": "ac686670b04ae4308a4143c66ea314514658e0fa",
+      "owner_receipt_sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034",
+      "independent_review_sha256": "4eff29d4e2c34c0bb05cca496772be3a858a1e02a0d62acb93032a3e42fccf6f",
+      "disposition": "ACCEPTED_LOCAL_REVIEW_ONLY",
+      "verified_slice": [
+        "ordinary two-parent local merge preserved both parents",
+        "41 changed paths formed the complete parent union; guide conflict retained both evidence-backed sections",
+        "generated workflows unchanged; developer RCC workflow-contract test: 88 passed"
+      ],
+      "not_run_or_remaining": [
+        "PR292 Windows dependency remains unaccepted",
+        "package-local suite, hosted exact-union gates and native gates remain separate",
+        "remote stack refresh/merge not authorized by this receipt"
+      ],
+      "doc_disposition": "Apply the reviewed exact general rule on ordinary local unions, full path/blob comparison against parents, generated workflow regeneration and scoped-test separation."
+    },
+    {
+      "lane": "PostgreSQL failed-SAVEPOINT recovery",
+      "source_commit": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "source_tree": "42f70afb88877335a71e9bc02ad2e85730d69442",
+      "owner_result_sha256": "1fdabcf5ce16f4602a868c5038edbfbbd940de5a7237edba26c385abace564d7",
+      "execution_manifest_sha256": "2e4496ae05267a88aa79e8cdef9485a7f6ae703dee58cc14da8783013bcf722d",
+      "independent_review_sha256": "4cf0f23ff8beadbf705aadf4fc3f30957483d1655374aeaa7173b0edc6d75d6b",
+      "disposition": "ACCEPTED_BOUNDED_ACTUAL_RESULT",
+      "verified_slice": [
+        "RCC 18.19.3 task-script gateway entered with --no-build",
+        "PostgreSQL 17.11, psycopg 3.3.4, production Database.transaction path; preceding division-by-zero left transaction INERROR",
+        "nested SAVEPOINT returned SQLSTATE 25P02; wrapper unwound nesting to 0, connection returned IDLE and same-connection recovery passed",
+        "service and credential cleanup recorded removed/verified absent"
+      ],
+      "not_run_or_remaining": [
+        "healthy-transaction SAVEPOINT permission denial not tested",
+        "no migration, concurrency, CLI/full issue #84, native, wheel or release acceptance",
+        "this is one retrospective run; it does not approve a general PostgreSQL harness or authorize replay"
+      ],
+      "doc_disposition": "Apply the owner and Sol-reviewed distinction: SQLite authorizer denial is separate; PostgreSQL 25P02 follows an already-aborted transaction. Keep concrete proof limits explicit."
+    },
+    {
+      "lane": "PR292 Windows cancellation diagnosis",
+      "source_commit": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "tested_merge": "039bd60 (checkout log abbreviated ID); ordered head d0e12c1 into e886d26",
+      "owner_diagnosis_sha256": "8441d2e6a0095044242cf52c52d1651769f3a1ff725cc8e840938379b4fa962a",
+      "authoritative_readback_sha256": "930d708d57dc2da278954fbca92482707103b07a92c8af2d59c76925f8cae4f9",
+      "disposition": "ACCEPTED_DIAGNOSIS_ONLY; WINDOWS_ACCEPTANCE_HOLD",
+      "verified_slice": [
+        "exact run 38067347057/job 114257572296 at reviewed PR head",
+        "job log reported six pytest timeout failures, then persistent shutdown output and job cancellation after about six hours",
+        "integration and native build steps completed; the integration test step was canceled"
+      ],
+      "not_run_or_remaining": [
+        "no retry or source test performed by diagnosis lane",
+        "cold RCC startup prerequisite and exact survivor/test identity remain unresolved",
+        "not a pass for the six failed cases, Windows acceptance, PR292, or its dependents; a separate bounded startup-cleanup source lane is now active and its results are pending"
+      ],
+      "doc_disposition": "Apply the reviewed cancellation diagnosis rule: inspect final test summary and annotations, distinguish earlier failures from cancellation, repair bounded cleanup while retaining original readiness error, do not simply increase timeouts."
+    },
+    {
+      "lane": "#195 installed Runtime-wheel private-import boundary",
+      "owner_design_sha256": "97b22cb361af3013def60e4bbd13d9b287099768ef8ee725c3089f174833edf0",
+      "disposition": "ACCEPTED_DESIGN_ONLY; IMPLEMENTATION_AND_EXECUTION_NOT_RUN",
+      "verified_slice": [
+        "design distinguishes checkout AST guard and Core wheel check from installed Runtime wheel acceptance",
+        "proposed proof binds exact Runtime wheel, full installed Python-file inventory and clean-environment ownership before scanning modules"
+      ],
+      "not_run_or_remaining": [
+        "no implementation, build, install or actual wheel scan",
+        "no #195 acceptance; design does not prove published artifact contents"
+      ],
+      "doc_disposition": "Apply as a test-boundary rule with an explicit NOT RUN caveat, never as completed product behavior."
+    },
+    {
+      "lane": "Runtime release / closure tool preflight",
+      "source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "source_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+      "manifest_sha256": "fa02cedae7b94166aff2d758230deff04c1fff6932880e956e6eed5213c65bab",
+      "readiness_sha256": "c125821e49573f888a780ae4942dab69d76fb08fb9ee3f0615ebf6668bd05f19",
+      "supplement_sha256": "78ce4024c452e96fb4735e532c4a69c1456bd9eb2c60cb237156b59513922f33",
+      "disposition": "ACCEPTED_READ_ONLY_PREFLIGHT; RELEASE_NOT_READY",
+      "verified_slice": [
+        "Core and Helper 1.0.3 registry state recorded; Runtime latest was 1.0.2",
+        "Runtime 1.0.3 native release and current Homebrew Cask 1.0.3 absent; owning tap is joshyorko/homebrew-tools",
+        "current Cask 1.0.1 Linux x86_64/macOS arm64 digest baseline matches native 1.0.1; no Windows Cask stanza",
+        "native/PyPI release workflows and read-only tool limitations are documented in the receipt"
+      ],
+      "not_run_or_remaining": [
+        "#134 and #153 prepublication gates remain open; #211 handoff/hash and install/upgrade proofs remain pending native assets",
+        "Runtime 1.0.3 PyPI/native/Homebrew publication and consumer verification not performed",
+        "classic branch protection and GraphQL closingIssuesReferences/manual-closure authorization could not be established through approved connector",
+        "no credential values/status inferred; no tag, release, issue, PR, tap, or GitHub mutation"
+      ],
+      "doc_disposition": "Add platform-scoped clean install/upgrade Cask acceptance after verified native asset hashes exist; maintain the retired Sema4AI/CDN boundary and note #211 has stale retired target wording."
+    },
+    {
+      "lane": "Dakota/native preparation snapshot",
+      "source_receipt_sha256": "570394a83dd8f6478f6a94113dc74666de2cae78a265f5e5784defbbc9eff0cc",
+      "observed_at_utc": "2026-10-10T23:34:00Z",
+      "disposition": "ACCEPTED_PREFLIGHT_ONLY; NO_NATIVE_WRITER_DISPATCH",
+      "verified_slice": [
+        "historical thread snapshot records Work Items latest turn completed and RCC interrupted, both with no active flags at their timestamp",
+        "preparation turn found the destination worktree area writable but GitHub HTTPS blocked by sandbox allowlist; pinned RCC 18.19.3 artifact was absent at checked paths",
+        "explicit execution-boundary authorization remained pending; no writer started; Devsy disabled"
+      ],
+      "not_run_or_remaining": [
+        "an earlier snapshot in the same receipt reported candidate parents non-writable and SSH ls-remote failed on config permissions",
+        "these are separate environment observations: do not collapse them into one cause or infer the operator environment is read-only",
+        "no fetch, worktree creation, install, writer execution, or external/native acceptance"
+      ]
+    },
+    {
+      "lane": "Coordinator ledger readback",
+      "source_receipt_sha256": "bbc1ca86837df0c8b65607a03be5b9c286fa5bb84fd63ad642caf448ff7acbf2",
+      "observed_at_utc": "2026-10-10T23:36:00Z",
+      "disposition": "ACCEPTED_AS_EXACT_ISSUE_101_BODY_READBACK_ONLY",
+      "verified_slice": [
+        "exact updated #101 issue body returned with 22,741 characters and byte-exact readback flag true"
+      ],
+      "not_run_or_remaining": [
+        "does not validate timestamp text in body as wall-clock time; root indicated banner is approximate and will be refreshed",
+        "not a substitute for current API census, source gates or remaining proof receipts"
+      ]
+    },
+    {
+      "lane": "#208 Linux packaged error-classification stages",
+      "harness_source_commit": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+      "harness_source_tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+      "tested_runtime_build_source": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+      "frozen_artifact_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+      "go_wrapper_artifact_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+      "design_receipt_sha256": "5f13e52a289b80ea8cd84cf56c413a26af69177923ded9559d9f66eda33fa04c",
+      "frozen_acceptance_receipt_sha256": "bca359b7fbd2e7303e618a74dcd6b869e23970b98a7bb810cc698ef2968fa71f",
+      "frozen_independent_review_sha256": "0c53c964d0b443f98493df2cf3177fd95986db20cb8429ff250dd9d6def68664",
+      "go_wrapper_acceptance_receipt_sha256": "cd791fc251b7a400303d5846b32db4b44fdba101a3d812f409ece94b9d368440",
+      "go_wrapper_independent_review_sha256": "48008003c839b5c1c2c333fc445acbeafd1809b300b8d6df36c7de4a2fc20519",
+      "disposition": "ACCEPTED_SCOPED_LINUX_FROZEN_AND_GO_UI_STAGES; NOT_FULL_ISSUE_ACCEPTANCE",
+      "verified_slice": [
+        "Linux frozen and Go-wrapper PASS_BOUNDED receipts independently reviewed",
+        "both passed normal, actual middleware 403 authorization-denied/sign-in-recovery and real storage 503 stages",
+        "actual managed Chromium identity, bounded cleanup and artifact provenance read back in receipts"
+      ],
+      "not_run_or_remaining": [
+        "missing_runtime_support and generic_http_500 remain NOT_RUN in both receipts",
+        "no Windows/macOS or other-platform denial-stage result established by these receipts",
+        "actual crash recovery, broader accessibility, non-Chromium, ChatGPT and remaining #208 acceptance are not established"
+      ],
+      "identity_limit": "The packaged binaries were built from source 856c0a47. PR310 ec8bea13 is the harness/source-review and guide amendment; its documented runtime/build inputs are unchanged relative to the artifact source, but the two SHAs are distinct and are kept distinct here.",
+      "supplemental_evidence_reviewed_at_utc": "2026-10-10T23:40:13Z"
+    }
+  ],
+  "review_disposition_register": [
+    {
+      "assignment": "PR309 Cloud source lane",
+      "receipt": "owner checkpoint + Sol independent exact-source review",
+      "decision": "ACCEPTED_SOURCE_ONLY",
+      "reason": "source scope and bounded pure checks independently verified; RCC fixture prevented full target run; hosted/native gates still required"
+    },
+    {
+      "assignment": "PR299 Cloud local-union lane",
+      "receipt": "owner merge preparation + Sol independent merge review",
+      "decision": "ACCEPTED_LOCAL_REVIEW_ONLY",
+      "reason": "two-parent identity, full changed-path union and scoped 88-test result reviewed; PR292 dependency and hosted/native gates still open"
+    },
+    {
+      "assignment": "PostgreSQL Cloud execution lane",
+      "receipt": "attempt manifest/result + Sol independent post-run review",
+      "decision": "ACCEPTED_BOUNDED_RETROSPECTIVE_RESULT",
+      "reason": "actual source-bound bounded run and cleanup reviewed; does not authorize future harness or broader #84 acceptance"
+    },
+    {
+      "assignment": "PR292 Sol diagnosis follow-up",
+      "receipt": "independent diagnosis + authoritative run/job readback",
+      "decision": "ACCEPTED_DIAGNOSIS_ONLY",
+      "reason": "confirmed six failures plus timeout/cancellation sequence; Windows acceptance remains held"
+    },
+    {
+      "assignment": "#195 Cloud design lane",
+      "receipt": "design receipt with source/contract review facts",
+      "decision": "ACCEPTED_DESIGN_ONLY",
+      "reason": "useful test boundary, no implementation or execution evidence"
+    },
+    {
+      "assignment": "Release Cloud read-only lane",
+      "receipt": "release readiness manifest + read-only supplement",
+      "decision": "ACCEPTED_PREFLIGHT_ONLY",
+      "reason": "identified publisher tools and missing gates without external writes; no release readiness"
+    },
+    {
+      "assignment": "Dakota/native preparation",
+      "receipt": "sanitized preparation readback",
+      "decision": "ACCEPTED_PREFLIGHT_ONLY",
+      "reason": "ownership and environment constraints recorded; no worker dispatch or execution authorization"
+    },
+    {
+      "assignment": "PR309 guide change",
+      "receipt": "guide delta already in PR309 candidate source",
+      "decision": "PRESERVE_IN_CANDIDATE; DO_NOT_DUPLICATE",
+      "reason": "engineering integration owns carrying the source-bound guide change; source-only review is not native acceptance"
+    },
+    {
+      "assignment": "Sol independent followups",
+      "receipt": "Sol review receipts embedded in PR309, PR299, PostgreSQL and PR292 evidence files",
+      "decision": "ACCEPTED_WITH_SCOPE_LIMITS",
+      "reason": "source-only, exact local union, bounded actual database result, and cancellation diagnosis were each independently reviewed; the resulting scope limits remain as listed per lane"
+    },
+    {
+      "assignment": "#208 consumer-classification evidence/design followup",
+      "receipt": "source-bound design receipt plus exact frozen and Go-wrapper acceptance receipts and independent result reviews",
+      "decision": "ACCEPTED_SCOPED_LINUX_RESULT; FULL_ISSUE_OPEN",
+      "reason": "both artifacts pass the three listed Linux browser stages; missing-support and generic HTTP 500 remain NOT_RUN, and other issue criteria/platforms are not covered"
+    }
+  ],
+  "documentation": {
+    "changes": [
+      "Homebrew Cask consumer proof follows native publication and is platform-specific; current 1.0.1 matches are baseline only",
+      "local stacked-PR unions require parent/path comparison, generated-output regeneration, and separate scoped-gate reporting",
+      "cancelled integration jobs require final summary/annotation inspection and bounded cleanup diagnosis; cancellation does not erase earlier failures",
+      "PostgreSQL SQLSTATE 25P02 after an aborted transaction is distinct from a healthy-transaction SAVEPOINT denial and from SQLite authorizer coverage",
+      "installed Runtime-wheel private-import tests must bind exact wheel/inventory and remain design-only until executed",
+      "Work Items guide now records independently reviewed Linux frozen and Go-wrapper passes for normal, authorization-denied/sign-in-recovery, and storage-error stages, while retaining missing-support and generic-500 as NOT_RUN until real backend conditions are exercised by hash-bound packaged-browser stages."
+    ],
+    "preserved_not_repeated": [
+      "PR309 exact lint-guide delta already exists in its candidate source commit; candidate is pending engineering integration and actual native acceptance remains unproven",
+      "Runtime changelog extraction note remains source-specific to PR304 73605934 pending accepted release-source integration"
+    ],
+    "evidence": [
+      "PR299 Sol review sha256 4eff29d4e2c34c0bb05cca496772be3a858a1e02a0d62acb93032a3e42fccf6f",
+      "PostgreSQL Sol review sha256 4cf0f23ff8beadbf705aadf4fc3f30957483d1655374aeaa7173b0edc6d75d6b",
+      "PR292 diagnosis sha256 8441d2e6a0095044242cf52c52d1651769f3a1ff725cc8e840938379b4fa962a",
+      "Homebrew release proposal sha256 334d549149e68a15111fccb0ebbb50ff5aa9b7155fb8979a8612af1fb414f83f",
+      "#195 design sha256 97b22cb361af3013def60e4bbd13d9b287099768ef8ee725c3089f174833edf0",
+      "#208 design receipt sha256 5f13e52a289b80ea8cd84cf56c413a26af69177923ded9559d9f66eda33fa04c",
+      "#208 frozen receipt/review sha256 bca359b7fbd2e7303e618a74dcd6b869e23970b98a7bb810cc698ef2968fa71f / 0c53c964d0b443f98493df2cf3177fd95986db20cb8429ff250dd9d6def68664",
+      "#208 Go-wrapper receipt/review sha256 cd791fc251b7a400303d5846b32db4b44fdba101a3d812f409ece94b9d368440 / 48008003c839b5c1c2c333fc445acbeafd1809b300b8d6df36c7de4a2fc20519"
+    ],
+    "uncertainty": "Homebrew 1.0.3 installation/upgrade cannot run until published native assets and tap exist. PR292 root-owned repair and all exact-head gates remain independent. #208 missing-support and generic HTTP 500 real-backend states remain NOT_RUN; the binaries were built from 856c0a47 while the separate harness/docs candidate is ec8bea13.",
+    "canonical_files_changed": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/work-items.md"
+    ]
+  },
+  "upstream_disposition": "none; no confirmed third-party defect found. Findings are repository-owned gates, test design boundaries, or tool/environment limits; no upstream report prepared or filed.",
+  "mutations": {
+    "production_code_edits": false,
+    "documentation_edits": true,
+    "builds_or_installs": false,
+    "service_or_browser_execution": false,
+    "github_or_registry_or_tap_writes": false,
+    "commit_or_push": false
+  },
+  "current_followup_ownership_coordinator_reported": {
+    "not_part_of_original_wave8_results": "These are newer assignments and their results will be captured in later additive receipts; do not infer progress or acceptance here.",
+    "source_writer_1": {
+      "lane": "PR292 Windows startup cleanup; bounded production helper plus packaged selftest/process-helper work",
+      "worktree": "/workspace/work/actions-mk3-wave8-pr292",
+      "base": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "status": "ACTIVE; independent source review pending; no acceptance or receipt available in this checkpoint"
+    },
+    "source_writer_2": {
+      "lane": "#195 installed Runtime-wheel guard implementation",
+      "existing_owner": "LunaPR282",
+      "status": "ACTIVE; no source/result receipt available in this checkpoint"
+    },
+    "rcc_preparation": {
+      "owner": "LunaDatabase",
+      "status": "RCC pure preparation only; no actual RCC/runtime acceptance run"
+    },
+    "native_writers": 0,
+    "native_boundary": "Dakota preflight found GitHub HTTPS blocked and pinned RCC 18.19.3 absent; execution-boundary authorization remains pending. No native overlap is authorized.",
+    "observed_at_utc": "2026-10-10T23:40:13Z"
+  },
+  "supplemental_reviewed_at_utc": "2026-10-10T23:40:13Z"
+}

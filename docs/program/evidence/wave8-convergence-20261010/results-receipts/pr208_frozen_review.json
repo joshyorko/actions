@@ -1,0 +1,106 @@
+{
+  "build_source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+  "checks": [
+    "all retained receipt/log hashes",
+    "one collected test; JUnit one pass with zero skips, failures or errors",
+    "actual managed Chromium binary hash",
+    "normal / middleware 403 / sign-in recovery / reauthentication / storage 503 stages",
+    "320-pixel viewport with no horizontal overflow",
+    "attempted denial removed from NOT RUN and FAILED",
+    "bounded owned-process cleanup; independent PID absence"
+  ],
+  "files": {
+    "acceptance-receipt-frozen-copy-pretest-tree-inventory.json": {
+      "sha256": "67169c81ba1e322649832eafb32d6360ba9463d25c728b390f93177608beb407",
+      "size_bytes": 271723
+    },
+    "acceptance-receipt-frozen-post-runtime-tree-diff.json": {
+      "sha256": "43f0e5288e44998c45fcec53c9ec19245d22a42209e4e18debe3f4f5030905f6",
+      "size_bytes": 1113
+    },
+    "acceptance-receipt-frozen-post-runtime-tree-inventory.json": {
+      "sha256": "d14c95d402ae1c39515772d3edc6ae1d5206542773e56c8376e2c794f18ebfba",
+      "size_bytes": 271723
+    },
+    "acceptance-receipt-pretest-tree-inventory.json": {
+      "sha256": "edd92faaed518351c905449680e0d4f737a09962924fb2dde88261bd4d8ce2e2",
+      "size_bytes": 271711
+    },
+    "acceptance-receipt.json": {
+      "sha256": "bca359b7fbd2e7303e618a74dcd6b869e23970b98a7bb810cc698ef2968fa71f",
+      "size_bytes": 6952
+    },
+    "browser-stage-00-stderr.log": {
+      "sha256": "9f63151bf8737aa8bc06133551dce739944663ab53900b0cad461cccaaccd46d",
+      "size_bytes": 3848
+    },
+    "browser-stage-00-stdout.log": {
+      "sha256": "13756373206d2ec144927b9111475f7569b2aad5d0d135a4128c746c1798ffb5",
+      "size_bytes": 1771
+    },
+    "browser-stage-01-stderr.log": {
+      "sha256": "22cb8d3391564293160a3280ee97351f280b10fbf45cd04ee40fca5809caa626",
+      "size_bytes": 3636
+    },
+    "browser-stage-01-stdout.log": {
+      "sha256": "44c7b7e5729af4bbc291bf97d2f504ae5447af3b3d14a363e40267732e8d0e39",
+      "size_bytes": 870
+    },
+    "browser-stage-02-stderr.log": {
+      "sha256": "f03859863f6bf527518c3c6e073967c0cd805f9e9726bb0adea1e55189e4d200",
+      "size_bytes": 3629
+    },
+    "browser-stage-02-stdout.log": {
+      "sha256": "cec192313bba8ad51f9ddb52065b358ecf1e323ed197bc5f371d6261dafc2789",
+      "size_bytes": 281
+    },
+    "browser-stage-capture.json": {
+      "sha256": "066f736a26f87a311cdbc85a58d11dbabb412c76e73827beded65bdac3156303",
+      "size_bytes": 20296
+    },
+    "junit.xml": {
+      "sha256": "71a6b1238f6ea6c43fe9ea21c3fbf80a26ec1d4c6ff597bf9a583917f427150f",
+      "size_bytes": 435
+    },
+    "pytest-selection.json": {
+      "sha256": "538b1b074a97a3c14a6bf3255668c9f457d1c4fb64326fa03ecc461a6cefb025",
+      "size_bytes": 208
+    },
+    "pytest-stderr.log": {
+      "sha256": "ec4ffc4f35fe6acd65b097e5f382cd430bc1591962a848be57ecefc1363ea3d6",
+      "size_bytes": 28330
+    },
+    "pytest-stdout.log": {
+      "sha256": "c216f8f3894b86423234e2ab210eb915861a72367ebee94713d8789dba9b1074",
+      "size_bytes": 239
+    },
+    "runner-receipt.json": {
+      "sha256": "8d4d47879787d09b639426213474623269a38bc1504cd24e35a16b462ba0fc18",
+      "size_bytes": 35388
+    },
+    "runtime-process-start.json": {
+      "sha256": "2b56b915ed88e84a6b79dd9d6aa36217d10e36ca8df5c21c42de2bd462979116",
+      "size_bytes": 886
+    }
+  },
+  "independent_pid_absence": {
+    "53090": false,
+    "53093": false,
+    "53112": false,
+    "53182": false,
+    "53258": false
+  },
+  "limits": [
+    "Linux frozen artifact only",
+    "No full issue 208 acceptance",
+    "Generic HTTP 500 and missing support remain NOT RUN",
+    "Actual crash recovery, accessibility, non-Chromium and actual ChatGPT acceptance not established"
+  ],
+  "reviewer": "root independent final review",
+  "runner_receipt_sha256": "8d4d47879787d09b639426213474623269a38bc1504cd24e35a16b462ba0fc18",
+  "runtime_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+  "source_head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+  "source_tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+  "status": "GO_SCOPED_LINUX_FROZEN_WORK_ITEMS_UI",
+  "upstream_disposition": "None; no confirmed upstream defect"
+}

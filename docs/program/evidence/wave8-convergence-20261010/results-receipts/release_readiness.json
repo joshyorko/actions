@@ -1,0 +1,251 @@
+{
+  "accepted_audit": {
+    "accepted_issue_closure_readback": {
+      "audit_commit": "031012f53743b1ba76b5b44e2912a5eea355eb2b",
+      "path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/issue-closure-ledger-readback-20261010.json",
+      "readback_commit": "7a593cd645066c29e138c03a47ac174a6f95b101",
+      "readback_tree": "c9a95ff4ae93ea3a09e0d09348ec478caacae632",
+      "sha256": "4930088b195a2f1b6e2f92987456a3c611c13f632ea7a9abe27ba21bc0789e23"
+    },
+    "accepted_registry_audit": {
+      "path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/issue-closure-audit-20261010/final-pypi-readback.json",
+      "sha256": "8ccc365cf8dd458d17c4cb7a8ec0525434d45d3ad5ac153c59239d73497d5bf6"
+    },
+    "core_publication": {
+      "path": "/workspace/work/actions-mk3-evidence/core-publication/publication-readback.json",
+      "pypi_receipt_sha256": "b15c70129a506573654a46a5cc025f61d5c357f841df919998c1befa1dd40318",
+      "result": "PASS: exact tag, Actions Release artifact, PyPI bytes, and installed public API consumer verification",
+      "sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39",
+      "workflow_artifact_receipt_sha256": "1a99879a3378c9ca8a170d9b7e1ae2782332044e7177bc62a1c8b09e83706f09"
+    },
+    "prior_single_metadata_attempt": {
+      "path": "/workspace/work/actions-mk3-evidence/rcc-inspection-actual-runs/20261010T220850Z-core102/attempt-result.json",
+      "result": "RCC pre-run artifact-dir guard failed before frozen runner; provider/metadata inspection NOT RUN; no retry",
+      "sha256": "9ba8809d01cdd880ec961143e17c74b234d7d5632622ca28562cda87325df723"
+    }
+  },
+  "actions_performed": {
+    "RCC_or_provider_retry": false,
+    "issue_or_PR_mutation": false,
+    "publication_or_remote_mutation": false,
+    "source_worktree_edit": false
+  },
+  "current_release_source_and_gates": {
+    "PR221_integration_promotion": {
+      "associated_PR_workflow_runs": "13 completed success at exact head; PR-triggered checks only",
+      "base": "community",
+      "community_tip": "a70993fafc99a9f94041485542d5a720797ca394",
+      "draft": true,
+      "head": "19380993febaa71238eaee3026b5c808773283ff",
+      "merge_or_promotion": "not performed",
+      "state": "open"
+    },
+    "Runtime_source_package_version": "1.0.3 candidate at this checkout; not published",
+    "postpublication_issue_211": {
+      "current_body_updated_at": "2026-09-07T19:16:38Z",
+      "stale_wording": "Issue body still names Sema4AI tap and S3/CDN callers which current source/canonical guide says are retired; do not treat Sema4AI or completed homebrew-tools#103 as a live blocker.",
+      "state": "open",
+      "status": "Actions native handoff, exact hashes and tap synchronization acceptance not proven; installation/upgrade is necessarily pending native 1.0.3 assets"
+    },
+    "prepublication_issues": {
+      "#134": "open; actual metadata runner attempt failed before frozen runner due RCC pre-run artifact directory check; actual inspection NOT RUN. Existing feature/provider/lease/cold/warm/native criteria remain open.",
+      "#153": "open; closure audit records a scoped Linux frozen/Go real-browser pass only; the full origin/auth/mode/WebSocket/secret/platform acceptance remains unproven."
+    },
+    "release_workflows": {
+      "PyPI": {
+        "PR_checks_also_run": true,
+        "path": ".github/workflows/actions_runtime_pypi_release.yml",
+        "tag_trigger": "actions-runtime-*",
+        "tagged_release_requires_secret": "PYPI_TOKEN_ACTIONS_RUNTIME; value/status not inspected"
+      },
+      "native": {
+        "assets": "Linux, macOS arm64, Windows plus SHA256 manifest; overwrite false",
+        "path": ".github/workflows/actions_runtime_binary_release.yml",
+        "tag_and_community_ancestry_gate": true,
+        "trigger": "tag push actions-runtime-*",
+        "workflow_dispatch": false
+      }
+    },
+    "runtime_release_note_PR307": {
+      "base": "integration/community-release-20261008",
+      "checks_observed": [
+        "6 completed success",
+        "RCC developer toolkit queued"
+      ],
+      "draft": false,
+      "head": "729594fc04758502ec2ed985adb428e2863a3bb1",
+      "merged": false,
+      "source_review": "GO; acceptance is source review only, no release/tag",
+      "state": "open",
+      "tree": "1db860bf248e83aeedf521044633bbd221902282"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md, near current Runtime/Homebrew release section (about line 1055)",
+    "evidence": [
+      "current main Casks/action-server.rb blob cb56d191 (version 1.0.1, Linux/macOS arm64 platforms and SHA values)",
+      "current main auto-update-slots.json blob da12522 (action-server-daily -> action-server)",
+      "current main tap-manual.yml blob 74ff054 (action/package_id workflow inputs)",
+      "Actions and tap GitHub Releases API asset digests for Runtime 1.0.1 match on Linux/macOS",
+      "#211 remains open; current 1.0.3 assets/cask absent"
+    ],
+    "exact_delta": "Homebrew Cask acceptance follows the Actions native release. The current action-server Cask covers Linux x86_64 and macOS arm64 only; Windows is a separate native asset. After a version\u2019s native assets and verified hashes exist, update the tap through the action-server-daily slot or Tap Manual with package_id=action-server (action=ci then action=release), compare the Cask download hashes with the Actions release assets, and record clean install plus upgrade proof on each supported Cask platform. A Cask source update or green Actions release does not establish Homebrew consumer acceptance.",
+    "remaining_uncertainty": "Actual clean Homebrew install/upgrade runs for Runtime1.0.3 cannot occur until publication. Classic protection and GraphQL auto-close fields inaccessible through active connector.",
+    "stale_or_ambiguous_guidance_removed": "No source guide edit performed. Proposed delta adds the explicit platform consumer test gate; existing guide already correctly retires Sema4AI/CDN handoffs. Issue #211 body is stale on those targets, while its live hash-bound owned handoff requirement remains open."
+  },
+  "github_tools_and_boundaries": {
+    "automatic_closure_relationships": "Exact GraphQL `closingIssuesReferences` and manually configured closing relationships were unavailable through approved connector (REST issue/timeline/PR reads only; github_fetch is GET-only). Cross-reference timeline/body lexemes do not prove auto-closing. Closure audit records automatic closures UNKNOWN; 0 observed. No unsupported credential/path/tool bypass attempted.",
+    "classic_branch_protection": "GET /branches/community/protection and integration target protection returned 403 Resource not accessible by integration; required-versus-advisory policy remains UNKNOWN. Empty rulesets is not proof of no classic policy.",
+    "connector_identity_metadata": "github_get_repo reported `permissions.admin=true` for actions and homebrew-tools; no credential values queried or exposed.",
+    "issue_101": "open at latest readback; latest published ledger says 58 open issues, 13 open PRs, 0 PRs admitted ready; required/advisory policy UNKNOWN.",
+    "manual_issue_state_write_tool": "github_update_issue supports state=closed; not called. Only four audited narrow-contract recommendations (#162 #194 #209 #279) are manual close candidates; live API state readback confirms all four remain OPEN.",
+    "read_tools": [
+      "github_fetch",
+      "github_fetch_issue",
+      "github_fetch_pr",
+      "github_fetch_commit_workflow_runs",
+      "github_fetch_workflow_run_jobs",
+      "github_get_commit_combined_status",
+      "github_get_repo"
+    ],
+    "rulesets_api": "GET /repos/joshyorko/actions/rulesets returned []"
+  },
+  "native_and_homebrew": {
+    "1.0.3_install_upgrade_gate": "NOT RUN: Runtime 1.0.3 native assets and updated Cask do not exist. Required proof on the current cask-supported Linux x86_64 and macOS arm64: clean install and upgrade from the previous installed cask, with `action-server version` plus downloaded bytes/hash bound to published native assets. Windows is a separate native release target, not this cask.",
+    "cask": {
+      "blob": "cb56d191a553c312decd32b82ca13d2d5e596ceb",
+      "checksums_match_actions_native_1.0.1_assets": true,
+      "macOS_note": "unsigned; not notarized",
+      "path": "Casks/action-server.rb",
+      "supported_platforms": [
+        "Linux x86_64",
+        "macOS arm64"
+      ],
+      "version": "1.0.1",
+      "windows_cask": false
+    },
+    "homebrew_owner": "joshyorko/homebrew-tools (GitHub connector reports repo permission admin; default branch main)",
+    "runtime_1.0.1": {
+      "assets": {
+        "linux64": "191f40cfebcadbd53bf7b14988098b983b99b4efc1aa8d8ac9e8ada6ad37ab3b",
+        "macos-arm64": "7e9ea6960107d6f6da6dadd7fd12a2c63f9c065d2a9f296aba765b34d24c47d8",
+        "windows64.exe": "ce09cebc3f6f1f7ae3537e5b000092a8d54baedafbadd9d349b12aa53117a307"
+      },
+      "native_release": "https://github.com/joshyorko/actions/releases/tag/actions-runtime-1.0.1"
+    },
+    "runtime_1.0.2": {
+      "binary_workflow_run": {
+        "conclusion": "cancelled",
+        "event": "push",
+        "id": 34153903994
+      },
+      "native_release_api": "404",
+      "native_release_assets": [],
+      "pypi": "published 1.0.2",
+      "tag_commit": "d747d1839b53712937cb9293a34049c89ca507fa"
+    },
+    "runtime_1.0.3": {
+      "assets": [],
+      "release_api": "404",
+      "release_not_performed": true,
+      "tag": "absent in git ls-remote and GitHub refs API"
+    },
+    "tap_release": {
+      "assets_match_cask": "Linux x86_64 and macOS arm64 SHA256s exactly match Actions native 1.0.1 release",
+      "tag": "action-server-1.0.1"
+    },
+    "tap_workflow": {
+      "action-server_manual_value": "package_id=action-server",
+      "auto-update-slots_blob": "da12522fea88eb5d8f6ad032cd8494e64e94d8c2",
+      "inputs": [
+        "action=ci",
+        "action=artifact",
+        "action=release",
+        "action=force-release",
+        "package_id"
+      ],
+      "slot": "action-server-daily",
+      "tap-manual.yml_blob": "74ff054aef45a4d276b72007b42bd284f23ab348"
+    }
+  },
+  "observed_at_utc": "2026-10-10T23:23:16.564202+00:00",
+  "package_registry": {
+    "actions-core": {
+      "1.0.3": {
+        "published_public_api_and_bytes": "independently verified by prior receipt",
+        "sdist_sha256": "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691",
+        "source_commit": "a70993fafc99a9f94041485542d5a720797ca394",
+        "source_tag": "actions-core-1.0.3",
+        "source_tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+        "wheel_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+        "yanked": false
+      },
+      "latest": "1.0.3"
+    },
+    "actions-http-helper": {
+      "1.0.3": {
+        "sdist_sha256": "b8e4e8efb181d5748264f25f1803f47731cd4947fc015f009934d51cd7a78945",
+        "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+        "yanked": false
+      },
+      "latest": "1.0.3"
+    },
+    "actions-runtime": {
+      "1.0.2_files": [
+        {
+          "filename": "actions_runtime-1.0.2-cp312-cp312-macosx_12_0_arm64.whl",
+          "sha256": "a35c80e87098b7ce2c470200b884f003689e4b95e6dbe2e42ab6a42f19a17685"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+          "sha256": "9aef9ec55c17d90ec11a32d8d4da694def92502ba46a73621c35267f230873d3"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp312-cp312-win_amd64.whl",
+          "sha256": "b89354733eee403b5aa2e6827cf869164323c27dbdf677a9dd76e3bd4d80ac99"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp313-cp313-macosx_12_0_arm64.whl",
+          "sha256": "10b233797ea8a7e5163c1eb64fbac07cfb030db32efd4ddb4039192061bf3dae"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+          "sha256": "c3b4c796241e5e03774931b5c3a4b9829e645f0088132c3be63233e77283aca2"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp313-cp313-win_amd64.whl",
+          "sha256": "6117d8a4aace61e1b6cc3f574d8cbcce03b75d0786a7982121ae8654af92c7d5"
+        },
+        {
+          "filename": "actions_runtime-1.0.2.tar.gz",
+          "sha256": "289afb72273fb06b9790d5cd19d1be114cd3ad5c6a7c15d508f848d07993e5c2"
+        }
+      ],
+      "has_1.0.3": false,
+      "latest": "1.0.2"
+    },
+    "actions-work-items": {
+      "latest": "0.4.4",
+      "unchanged": true
+    },
+    "observation_method": "public PyPI JSON APIs; fetched read-only during this lane"
+  },
+  "schema": "wave8-release-closure-readiness-v1",
+  "source": {
+    "branch": "mk3/wave8-release-readiness-20261010",
+    "commit": "19380993febaa71238eaee3026b5c808773283ff",
+    "local_file_sha256": {
+      ".github/workflows/_gen_workflows.py": "8bca513c90021d256910a369a00a006533c7183940de46219a077a0b9ca17c55",
+      ".github/workflows/actions_runtime_binary_release.yml": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64",
+      ".github/workflows/actions_runtime_pypi_release.yml": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+      "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md": "8293b2120a5c5e76bafd215afa9005f273acf678bab0bf7f69f7af73df1c2f92",
+      "action_server/pyproject.toml": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+      "docs/skills/README.md": "bd584b2de9acddf3e6d640990e05a77dc36323f0972941563b6fd5b7c516d8e3",
+      "docs/skills/repository-operations.md": "9bcfccf7a6129675037497fa3952f4bd55029ab9eaaf37da133fedd11c0146f3"
+    },
+    "repo": "joshyorko/actions",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "worktree_clean": true
+  },
+  "upstream_disposition": "none: no confirmed third-party defect; Homebrew is an owned maintained repository and current Cask/workflow facts are valid."
+}

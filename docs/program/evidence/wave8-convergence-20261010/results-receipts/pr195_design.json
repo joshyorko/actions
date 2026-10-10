@@ -1,0 +1,74 @@
+{
+  "contract_evidence": [
+    {
+      "finding": "#195 remains HOLD_ONE_REMAINING_CLEAN_RUNTIME_WHEEL_PROOF; migrated source and source AST guard exist, but installed Runtime wheel private-import rejection has not been proven. Core clean-wheel proof and checkout source scan do not satisfy it.",
+      "path": "/workspace/work/actions-closure-audit/independent-narrow-contract-review-162-194-195-209.json",
+      "sha256": "4690bdabd0148734834c1deba2874fe7968933c5a3e1eed4bc9b9893cf84f099"
+    },
+    {
+      "finding": "Clarification preserves the #195 disposition and does not convert source-only evidence into installed-wheel proof.",
+      "path": "/workspace/work/actions-closure-audit/independent-narrow-contract-attribution-clarification.json",
+      "sha256": "906e43b8253f10d8d34db6748633e52d24c6ad6a4f80ae229d46c570cf3b5320"
+    },
+    {
+      "finding": "Public/private package-boundary issue describes Runtime's former imports from actions._action_context and actions._protocols and requests a clean-wheel guard.",
+      "path": "/workspace/work/actions-closure-audit/open-issues-live.json",
+      "sha256": "7e25e48a19a1b4cbabd3ca44b8d003bf6eb5fc20acee62b50e17115a450d46c2"
+    }
+  ],
+  "created_utc": "2026-10-10",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md (proposed only; no edit made)",
+    "durable_learning_captured": "Explicitly distinguish the checkout AST guard and Core clean-wheel probe from installed Runtime-wheel proof. Require complete installed actions-runtime .py inventory, clean-environment ownership, selected Runtime wheel digest/member-byte binding, and AST scan of every installed Runtime module, while retaining public Core compatibility checks.",
+    "evidence": "#195 independent contract review and clarification hashes above; current guard/probe locations in action_server/tests/contract_tests/test_active_contracts.py.",
+    "remaining_uncertainty": "No installed Runtime scan has run; the exact RCC task invocation and machine-readable probe payload should be fixed during implementation review. Acceptance remains pending test implementation and execution against exact wheel bytes.",
+    "stale_or_ambiguous_guidance_removed": "None; documentation has not been edited."
+  },
+  "gateway_feasibility": {
+    "canonical_route": "Use repository RCC v18.19.3 gateway and Doctor/Bootstrap/ToolkitTest as documented; no ad hoc package installs.",
+    "configuration": "developer/setup.yaml exists and pins the documented toolchain.",
+    "execution_status": "NOT RUN. No RCC task, bootstrap, wheel build/install, service, browser, or native gate was executed. The contract test builds and installs wheels, so it requires a writer-slot handoff and canonical prepared environment.",
+    "prepared_state": "RCC executable and shared managed holotree are present; action_server/.venv is absent in this fresh checkout."
+  },
+  "limitations": [
+    "This design is not an installed Runtime-wheel result and does not close #195.",
+    "No source edits, builds, wheel installs, publications, remote mutations, or workers were created.",
+    "Do not alter the public Core export or server-owned JSON migration."
+  ],
+  "observed_source": {
+    "checkout_scope": "test_runtime_imports_core_only_through_public_modules scans action_server/src/actions/server in the checkout only.",
+    "guard": "_private_core_imports(source) detects direct, aliased, and statically resolvable dynamic actions._* imports; existing parametrized regressions include importlib aliases, __import__, relative package forms, static concatenation, keyword name, and builtins aliases.",
+    "preserved_migration": "Runtime imports ActionContext from public actions and JSONValue from actions.server._protocols; no Runtime behavior/schema/API migration is proposed.",
+    "test_file": "action_server/tests/contract_tests/test_active_contracts.py",
+    "wheel_probe": "_install_and_probe installs the explicitly selected Runtime/Core/Helper/Work Items wheel files into clean virtual environments, checks pip consistency, and imports public/selected Runtime APIs outside the checkout in both uninstall orders. It does not run the private-Core AST guard against every installed Runtime module."
+  },
+  "proposed_smallest_change": {
+    "expected_negative_assertion": "Any direct, aliased, or statically resolvable dynamic import of actions._* in any installed Runtime Python module fails the installed-wheel compatibility test, even if that module is never imported during the smoke test.",
+    "expected_positive_assertion": "Current public ActionContext import and Runtime-owned actions.server._protocols JSONValue remain accepted in installed clean-wheel environments.",
+    "owning_file": "action_server/tests/contract_tests/test_active_contracts.py",
+    "production_files": [],
+    "regressions": [
+      "Synthetic tree traversal catches forbidden import forms outside the imported-module subset.",
+      "A deliberately mismatched installed member versus selected wheel entry is rejected as artifact/member mismatch.",
+      "No forbidden references in every source member of each selected installed Runtime wheel, with wheel digest and member SHA256s retained."
+    ],
+    "test_design": [
+      "Reuse _private_core_imports; add a tree-level regression with a synthetic installed Runtime root containing direct, aliased, and static dynamic actions._* imports in a non-imported extra module, and prove the tree traversal fails on that module.",
+      "In each existing clean wheel environment, enumerate every .py file in importlib.metadata.distribution('actions-runtime').files, resolve it under the clean environment, and fail if any Runtime source path is outside that environment or resolves into the checkout.",
+      "Bind the scan to the exact selected Runtime wheel: record wheel SHA256, compare each installed .py member's bytes/hash with the corresponding member in that exact wheel, and include the wheel identity and member path/hash inventory in the probe result. Do not treat package version alone or source checkout identity as artifact identity.",
+      "Apply _private_core_imports to every installed Runtime .py member and report offending member paths/lines; assert the complete member set was scanned, including modules never imported by the positive probe.",
+      "Keep current clean-wheel positive checks for public ActionContext/Request/server integration behavior, package origins, dependency consistency, and both Core/Runtime uninstall orders. Emit the same scan evidence for each fresh environment."
+    ]
+  },
+  "receipt_type": "read_only_design",
+  "repository": {
+    "branch": "mk3/wave8-installed-wheel-boundary-20261010",
+    "head": "19380993febaa71238eaee3026b5c808773283ff",
+    "path": "/workspace/work/actions-mk3-wave8-wheel-boundary",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "worktree_clean_at_inspection": true
+  },
+  "status": "DESIGN_ONLY_AWAITING_WRITER_SLOT",
+  "topic": "#195 installed Runtime wheel private Core import rejection",
+  "upstream_disposition": "None. This is a missing local acceptance proof, and inspection shows the migrated source imports use public Core API plus Runtime-owned JSONValue. No confirmed upstream defect was reproduced; do not report an issue."
+}

@@ -1,0 +1,16 @@
+tasks:
+  Test:
+    shell: python -m pytest -q /workspace/work/actions-mk3-wave8-pr299/devutils/tests/test_runtime_release_workflows.py
+devTasks:
+  Test:
+    shell: python -m pytest -q /workspace/work/actions-mk3-wave8-pr299/devutils/tests/test_runtime_release_workflows.py
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+artifactsDir: tmp-wave8-pr299
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore

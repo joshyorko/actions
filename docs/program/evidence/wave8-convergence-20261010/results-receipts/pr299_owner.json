@@ -1,0 +1,115 @@
+{
+  "schema": "pr299-normal-local-merge-preparation/v1",
+  "observed_at_utc": "2026-10-10T23:27:16Z",
+  "branch": "mk3/wave8-pr299-integration-union-20261010",
+  "local_candidate_commit": "10dcfcefe0be8b32033015ed313c9e033a8d5c74",
+  "combined_tree": "ac686670b04ae4308a4143c66ea314514658e0fa",
+  "ordered_parents": [
+    "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+    "19380993febaa71238eaee3026b5c808773283ff"
+  ],
+  "candidate_parent": {
+    "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+    "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0"
+  },
+  "live_integration_parent": {
+    "sha": "19380993febaa71238eaee3026b5c808773283ff",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "remote_ref": "origin/integration/community-release-20261008",
+    "fetch_verified": true
+  },
+  "merge_kind": "ordinary two-parent merge; local only; no rebase/cherry-pick/squash; no remote push or PR mutation",
+  "conflict_resolution": {
+    "conflicts": [
+      "docs/skills/repository-operations.md"
+    ],
+    "resolution": "Removed conflict markers and retained both independent, evidence-backed sections: private common Run-output migration/verification from candidate parent and live pull-request base identity/Core publication guidance from integration parent.",
+    "no_source_behavior_authored": true,
+    "conflict_markers_remaining": false
+  },
+  "preservation_checks": {
+    "private_output_source_and_tests_identical_to_candidate_parent": true,
+    "checked_paths": [
+      "action_server/src/actions/server/run_outputs",
+      "action_server/tests/action_server_tests/run_outputs",
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py"
+    ],
+    "core_generator_and_workflow_files_identical_to_live_integration_parent": true,
+    "checked_core_paths": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_core_tests.yml",
+      ".github/workflows/actions_runtime_pypi_release.yml",
+      ".github/workflows/actions_runtime_binary_release.yml"
+    ],
+    "generated_workflow_regeneration_clean": true,
+    "git_worktree_clean_after_commit": true,
+    "private_output_service_blob": "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+  },
+  "verification": [
+    {
+      "command": "source /workspace/actions-cloud/activate.sh && rcc run --dev --no-build --robot developer/wave8-pr299-verification.yaml -t Generate",
+      "result": "PASS; pinned RCC v18.19.3; generated workflow outputs unchanged in repository",
+      "log": {
+        "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/generator-rcc-dev.log",
+        "sha256": "a11be1be00fc5bd12567e0eb152dcc38be2914aba0d6848c1e0184aae05acc16",
+        "bytes": 12933
+      }
+    },
+    {
+      "command": "source /workspace/actions-cloud/activate.sh && rcc run --dev --no-build --robot developer/wave8-pr299-verification.yaml -t Test",
+      "result": "PASS; 88 passed in 4.98s; RCC developer toolchain pytest 8.3.4/PyYAML 6.0.2; bounded test module is devutils/tests/test_runtime_release_workflows.py",
+      "log": {
+        "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/workflow-tests.log",
+        "sha256": "9164c649e6484c7d22072aedf36fd0891da4135c6d708028222dd5701b1c0477",
+        "bytes": 13018
+      }
+    },
+    {
+      "command": "git diff --check HEAD^1 HEAD",
+      "result": "PASS"
+    },
+    {
+      "command": "git diff --quiet 4cad04ca0e70d219f53452fa5911c6d61192fd0d HEAD -- private Run-output source/test paths",
+      "result": "PASS; source/test blobs are preserved unchanged from candidate parent"
+    },
+    {
+      "command": "git diff --quiet 19380993febaa71238eaee3026b5c808773283ff HEAD -- Core workflow generator and accepted Core workflow files",
+      "result": "PASS; files unchanged from live integration parent"
+    }
+  ],
+  "verification_limitations": [
+    "No package-local Poetry release suite or heavy service/native/hosted gates run in this bounded merge-preparation lane. RCC developer Python targeted tests are scoped evidence, not a replacement for a package-local release suite.",
+    "PR292 Windows acceptance is currently canceled/unaccepted per parent instruction. This commit is a local review candidate only; it is not eligible for publication/merge based on this receipt."
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "The combined guide retains the private Run-output lifecycle/rollback and security boundaries together with live target-ref/ordered-parent checks and generated Core-workflow consistency/tag ancestry guidance. The incoming generated workflows were regenerated from _gen_workflows.py and remained byte-identical.",
+    "evidence": "Both sections are preserved at integration source tree; developer generator and 88 release-workflow contract tests passed.",
+    "stale_or_ambiguous_guidance_removed": "Only merge conflict markers were removed; no evidence-backed section was discarded. RCC task invocation was corrected to developer mode with the repository\u2019s setup configuration; initial host-interpreter attempts are retained in scratch logs and not treated as validation.",
+    "remaining_uncertainty": "PR292 dependency and post-merge exact-head CI remain unaccepted/unrun; no hosted or whole private-output package gate was performed."
+  },
+  "upstream_disposition": "none; no upstream defect was identified",
+  "remote_or_issue_mutations": false,
+  "logs": {
+    "generator-rcc-dev.log": {
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/generator-rcc-dev.log",
+      "sha256": "a11be1be00fc5bd12567e0eb152dcc38be2914aba0d6848c1e0184aae05acc16",
+      "bytes": 12933
+    },
+    "workflow-tests.log": {
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/workflow-tests.log",
+      "sha256": "9164c649e6484c7d22072aedf36fd0891da4135c6d708028222dd5701b1c0477",
+      "bytes": 13018
+    },
+    "generator-robot-config.yaml": {
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/generator-robot-config.yaml",
+      "sha256": "c5d10f768956fc1a52d75e94932841a5e51a276d7850b0d41dd8e880e2c5cb2c",
+      "bytes": 384
+    },
+    "workflow-test-robot-config.yaml": {
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/workflow-test-robot-config.yaml",
+      "sha256": "7e39d4ff7784245c61cc2210445d88f2bb3d85f30c28723f021ad9ad37d263e4",
+      "bytes": 428
+    }
+  }
+}

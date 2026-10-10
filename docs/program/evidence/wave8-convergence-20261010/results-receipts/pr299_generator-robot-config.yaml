@@ -1,0 +1,16 @@
+tasks:
+  Generate:
+    shell: python /workspace/work/actions-mk3-wave8-pr299/.github/workflows/_gen_workflows.py
+devTasks:
+  Generate:
+    shell: python /workspace/work/actions-mk3-wave8-pr299/.github/workflows/_gen_workflows.py
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+artifactsDir: tmp-wave8-pr299
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
