@@ -50,6 +50,41 @@ SQLite-persisted Runtime Run records containing Run IDs, passed statuses, and
 action names. Preserve this receipt before reusing the pytest `--basetemp`
 directory or allowing pytest to prune old temporary trees.
 
+The Canvas Query template has a separate opt-in candidate-source gate:
+`ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE=1` runs
+`test_canvas_template_candidate_source_runs_through_runtime_and_real_browser`.
+It leaves the embedded bundle and production `actions-core=1.0.3` manifest
+unchanged, then adjusts only a disposable extracted project's manifest to use
+published Core 1.0.2 as the resolvable base and installs an exact wheel built
+from the checked-out Core source after environment creation. The Runtime worker
+must report a matching local-wheel `direct_url.json`, archive SHA-256, imported
+module ownership, and source revision/tree/blob IDs; the same built view is
+then exercised in a real browser against Runtime. This proves the candidate
+source path only. The production template's exact published-Core 1.0.3 gate
+remains separate and blocked until that dependency is published and verified.
+Pin `PYTHONPATH` to the absolute Runtime source path for this source-mode gate
+and probe the child interpreter from the extracted project's working directory;
+a relative path can silently select another checkout's editable Runtime. The
+worker must report the loaded `actions.mcp` and metadata-module paths and hashes,
+which are checked against both candidate wheel bytes and source blobs. Browser
+execution is currently a Linux hosted gate: launch Node in a fresh POSIX session
+and capture descendant PID/create-time identities while it runs. Signal the
+process group only while the original leader is still unreaped or a captured
+identity confirms that the original group remains; after the leader exits, its
+numeric group ID can be reused. Clean captured identities on completion or
+timeout, and skip this POSIX-specific regression on Windows. This also covers a
+Node parent that exits while a browser child keeps inherited output pipes open;
+killing only the Node PID is insufficient.
+The default integration suite skips both opt-in Runtime/browser gates, so a
+skip is not browser evidence. The fixture's `artifact: null` response is
+deliberately partial: it is not a successful shared-schema result and does not
+prove authorized artifact retrieval or user-facing download behavior.
+Keep tests shipped inside the template self-contained: run them from a fresh
+`action-server new` extraction and read only files included in that extracted
+project. Tests that compare a packaged example with repository contract
+fixtures belong in the repository's test suite, since those fixtures are not
+present for a template user after extraction.
+
 The focused source tests exercise public decorators through the Runtime
 Streamable HTTP route. The process-level fixture additionally installs the
 exact candidate Core wheel into an isolated test environment before importing an
@@ -66,6 +101,12 @@ contracts, so a Runtime importing them declares `actions-core ^1.0.2` in its
 production dependency metadata. This is release preparation, not publication.
 Core must be published and independently verified before that Runtime release;
 neither an editable source install nor an old published wheel proves pairing.
+Version metadata alone is not source provenance: a source-built candidate can
+have the same `1.0.2` version as the registry wheel while containing different
+API bytes. Bind candidate acceptance to its source revision/tree and wheel
+SHA-256, then verify that exact wheel through the worker's `direct_url.json`;
+keep its result distinct from a test of the unchanged manifest against the
+published wheel.
 
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
