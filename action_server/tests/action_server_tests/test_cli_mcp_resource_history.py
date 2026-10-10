@@ -5,13 +5,25 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+from typing import Literal, TypeGuard, TypedDict
 
 import httpx
 import pytest
 
 from actions.server._selftest import ActionServerProcess
 
-_TRANSITIONS = (
+
+class ResourceTransition(TypedDict):
+    name: str
+    old_uri: str
+    old_kind: Literal["direct", "template"]
+    old_parameter: str | None
+    candidate_uri: str
+    candidate_kind: Literal["direct", "template"]
+    other_candidate_uri: str | None
+
+
+_TRANSITIONS: tuple[ResourceTransition, ...] = (
     {
         "name": "direct_to_template",
         "old_uri": "direct://host/value",
@@ -42,9 +54,82 @@ _TRANSITIONS = (
 )
 
 
-def _route_source(
-    routes: tuple[tuple[str, str, str, str | None], ...], *, managed: bool
-) -> str:
+class MCPResource(TypedDict, total=False):
+    uri: str
+    uriTemplate: str
+
+
+class MCPContent(TypedDict):
+    text: str
+
+
+class MCPResult(TypedDict, total=False):
+    resources: list[MCPResource]
+    resourceTemplates: list[MCPResource]
+    contents: list[MCPContent]
+
+
+class MCPError(TypedDict):
+    message: str
+
+
+class MCPResponse(TypedDict, total=False):
+    result: MCPResult
+    error: MCPError
+
+
+ResourceSurface = TypedDict(
+    "ResourceSurface",
+    {
+        "resources/list": MCPResponse,
+        "resources/templates/list": MCPResponse,
+    },
+)
+
+
+Route = tuple[str, str, str, str | None]
+
+
+def _is_mcp_response(value: object) -> TypeGuard[MCPResponse]:
+    if not isinstance(value, dict):
+        return False
+
+    if "error" in value:
+        error = value["error"]
+        if not isinstance(error, dict) or not isinstance(error.get("message"), str):
+            return False
+
+    if "result" in value:
+        result = value["result"]
+        if not isinstance(result, dict):
+            return False
+        if "resources" in result:
+            resources = result["resources"]
+            if not isinstance(resources, list) or any(
+                not isinstance(item, dict) or not isinstance(item.get("uri"), str)
+                for item in resources
+            ):
+                return False
+        if "resourceTemplates" in result:
+            templates = result["resourceTemplates"]
+            if not isinstance(templates, list) or any(
+                not isinstance(item, dict)
+                or not isinstance(item.get("uriTemplate"), str)
+                for item in templates
+            ):
+                return False
+        if "contents" in result:
+            contents = result["contents"]
+            if not isinstance(contents, list) or any(
+                not isinstance(item, dict) or not isinstance(item.get("text"), str)
+                for item in contents
+            ):
+                return False
+
+    return ("error" in value) != ("result" in value)
+
+
+def _route_source(routes: tuple[Route, ...], *, managed: bool) -> str:
     lines = ["from actions import mcp", ""]
     for name, uri, value, parameter in routes:
         signature = f"{parameter}: str" if parameter else ""
@@ -112,9 +197,7 @@ def _write_package(
     temporary.replace(source)
 
 
-def _mcp(
-    client: httpx.Client, method: str, params: dict[str, object]
-) -> dict[str, object]:
+def _mcp(client: httpx.Client, method: str, params: dict[str, object]) -> MCPResponse:
     headers = {
         "Accept": "application/json, text/event-stream",
         "MCP-Protocol-Version": "2026-07-28",
@@ -141,35 +224,47 @@ def _mcp(
         },
     )
     assert response.status_code in {200, 400}, response.text
-    return response.json()
+    payload: object = response.json()
+    assert _is_mcp_response(payload), response.text
+    return payload
 
 
-def _read(client: httpx.Client, uri: str) -> dict[str, object]:
+def _read(client: httpx.Client, uri: str) -> MCPResponse:
     return _mcp(client, "resources/read", {"uri": uri})
 
 
-def _resource_surface(client: httpx.Client) -> dict[str, object]:
+def _resource_surface(client: httpx.Client) -> ResourceSurface:
     return {
-        method: _mcp(client, method, {})
-        for method in ("resources/list", "resources/templates/list")
+        "resources/list": _mcp(client, "resources/list", {}),
+        "resources/templates/list": _mcp(client, "resources/templates/list", {}),
     }
 
 
 def _route_is_listed(client: httpx.Client, uri: str, *, template: bool) -> bool:
     surface = _resource_surface(client)
-    key = "resourceTemplates" if template else "resources"
-    item_key = "uriTemplate" if template else "uri"
-    method = "resources/templates/list" if template else "resources/list"
-    return any(item.get(item_key) == uri for item in surface[method]["result"][key])
+    response = (
+        surface["resources/templates/list"] if template else surface["resources/list"]
+    )
+    assert "result" in response
+    if template:
+        templates = response["result"].get("resourceTemplates")
+        assert templates is not None
+        return any(item.get("uriTemplate") == uri for item in templates)
+    resources = response["result"].get("resources")
+    assert resources is not None
+    return any(item.get("uri") == uri for item in resources)
 
 
 def _read_text(client: httpx.Client, uri: str) -> str:
     result = _read(client, uri)
     assert "error" not in result, result
-    return result["result"]["contents"][0]["text"]
+    assert "result" in result
+    contents = result["result"].get("contents")
+    assert contents
+    return contents[0]["text"]
 
 
-def _old_owner_value(transition: dict[str, str | None], revision: str) -> str:
+def _old_owner_value(transition: ResourceTransition, revision: str) -> str:
     value = f"owner-a:{revision}:{transition['name']}"
     if transition["old_parameter"]:
         value += f":{transition['old_parameter']}"
@@ -182,10 +277,8 @@ def _assert_mcp_error(client: httpx.Client, uri: str, expected: str) -> None:
     assert expected in result["error"]["message"]
 
 
-def _write_a_routes(
-    *, revision: str, include_claims: bool
-) -> tuple[tuple[str, str, str, str | None], ...]:
-    routes = [
+def _write_a_routes(*, revision: str, include_claims: bool) -> tuple[Route, ...]:
+    routes: list[Route] = [
         (
             "control_direct",
             "control://same/value",
@@ -219,9 +312,9 @@ def _old_template(index: int) -> str:
     return "template://host/{item}" if index == 1 else "overlap://{tenant}/value"
 
 
-def _write_b_routes(*, phase: str) -> tuple[tuple[str, str, str, str | None], ...]:
+def _write_b_routes(*, phase: str) -> tuple[Route, ...]:
     if phase == "candidate":
-        routes = [
+        routes: list[Route] = [
             (
                 f"owner_b_claim_{index}",
                 transition["candidate_uri"],
