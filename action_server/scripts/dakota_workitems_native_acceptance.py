@@ -10,8 +10,11 @@ import platform
 import re
 import tempfile
 import uuid
+import zipfile
 from collections import defaultdict
 from contextlib import contextmanager
+from email.parser import BytesParser
+from email.policy import default
 from pathlib import Path
 from typing import Iterator
 
@@ -126,9 +129,7 @@ def validate_build_manifest(
         "frozen": Path("dist/action-server") / f"action-server{suffix}",
         "go-wrapper": Path("dist/final") / f"action-server{suffix}",
     }
-    if set(executables) != set(CASE_ENV) or set(executable_hashes) != set(
-        CASE_ENV
-    ):
+    if set(executables) != set(CASE_ENV) or set(executable_hashes) != set(CASE_ENV):
         raise AcceptanceFailure("build_manifest_executable_set_invalid")
     for kind in CASE_ENV:
         artifact = artifacts.get(kind)
@@ -188,7 +189,47 @@ def fresh_proof_workspace(parent: Path) -> Iterator[Path]:
         yield Path(path)
 
 
-def _validate_proof_shape(proof: object, kind: str) -> dict:
+def inspect_core_wheel(wheel_dir: Path) -> tuple[Path, str]:
+    """Select one task-local Core wheel and read its version from wheel metadata."""
+    try:
+        entries = list(wheel_dir.iterdir())
+    except OSError as error:
+        raise AcceptanceFailure("core_wheel_directory_unreadable") from error
+    if (
+        len(entries) != 1
+        or entries[0].is_symlink()
+        or not entries[0].is_file()
+        or entries[0].suffix != ".whl"
+    ):
+        raise AcceptanceFailure("core_wheel_inventory_invalid")
+
+    wheel = entries[0]
+    try:
+        with zipfile.ZipFile(wheel) as archive:
+            metadata_paths = [
+                name
+                for name in archive.namelist()
+                if name.endswith(".dist-info/METADATA")
+            ]
+            if len(metadata_paths) != 1:
+                raise AcceptanceFailure("core_wheel_metadata_invalid")
+            metadata = BytesParser(policy=default).parsebytes(
+                archive.read(metadata_paths[0])
+            )
+    except (OSError, zipfile.BadZipFile, KeyError) as error:
+        raise AcceptanceFailure("core_wheel_unreadable") from error
+
+    version = metadata.get("Version")
+    if (
+        metadata.get("Name", "").lower().replace("_", "-") != "actions-core"
+        or not version
+        or wheel.name != f"actions_core-{version}-py3-none-any.whl"
+    ):
+        raise AcceptanceFailure("core_wheel_identity_invalid")
+    return wheel, version
+
+
+def _validate_proof_shape(proof: object, kind: str, core_version: str) -> dict:
     if not isinstance(proof, dict):
         raise AcceptanceFailure(f"proof_shape_{kind}")
     expected_keys = {
@@ -208,7 +249,7 @@ def _validate_proof_shape(proof: object, kind: str) -> dict:
     if (
         not isinstance(installation, dict)
         or set(installation) != CORE_INSTALLATION_FIELDS
-        or installation["actions_core_version"] != "1.0.2"
+        or installation["actions_core_version"] != core_version
         or installation["actions_module_owned_by_distribution"] is not True
         or installation["install_source_matches_candidate"] is not True
         or installation["wheel_sha256"] != proof["actions_core_wheel_sha256"]
@@ -226,6 +267,7 @@ def validate_case_proofs(
     proof_dir: Path,
     executable_hashes: dict[str, str],
     core_wheel_hash: str,
+    core_version: str,
 ) -> dict[str, dict]:
     """Require one fresh proof per binary, bound to the measured executable and wheel."""
     expected_names = {f"{kind}.json" for kind in CASE_ENV}
@@ -244,7 +286,7 @@ def validate_case_proofs(
         proof_path = proof_dir / f"{kind}.json"
         try:
             proof = _validate_proof_shape(
-                json.loads(proof_path.read_text(encoding="utf-8")), kind
+                json.loads(proof_path.read_text(encoding="utf-8")), kind, core_version
             )
         except (OSError, json.JSONDecodeError) as error:
             raise AcceptanceFailure(f"proof_unreadable_{kind}") from error
@@ -263,10 +305,13 @@ def finalize_success(
     proof_dir: Path,
     executable_hashes: dict[str, str],
     core_wheel_hash: str,
+    core_version: str,
 ) -> None:
     """Mark PASS only after exact test cases and all bound proofs validate."""
     outcomes = validate_pytest_reports(result_code, reports)
-    proofs = validate_case_proofs(proof_dir, executable_hashes, core_wheel_hash)
+    proofs = validate_case_proofs(
+        proof_dir, executable_hashes, core_wheel_hash, core_version
+    )
     for case in receipt["cases"]:
         kind = case["kind"]
         case["status"] = outcomes[kind]
@@ -277,7 +322,9 @@ def finalize_success(
     receipt["status"] = "PASS"
 
 
-def initial_receipt(source_sha_claim: str, build_version_claim: str) -> dict:
+def initial_receipt(
+    source_sha_claim: str, build_version_claim: str, core_version: str
+) -> dict:
     return {
         "schema_version": 2,
         "attempt_id": str(uuid.uuid4()),
@@ -291,7 +338,7 @@ def initial_receipt(source_sha_claim: str, build_version_claim: str) -> dict:
         "test_harness_sqlite_writes": ["seed stale reservation fixture only"],
         "recovery_fixture_limit": "stale persisted reservation seeded by harness; process crash not simulated",
         "worker_dependencies": {
-            "actions-core": "1.0.2 candidate wheel installed by post-install",
+            "actions-core": f"{core_version} candidate wheel installed by post-install",
             "actions-work-items": "0.4.4",
         },
         "checks": [
@@ -347,8 +394,7 @@ def main() -> int:
     if not re.fullmatch(r"[0-9a-f]{40}", args.source_sha):
         parser.error("source SHA must be a full lowercase commit SHA")
 
-    core_wheel = args.rcc_home / "wheels" / "actions_core-1.0.2-py3-none-any.whl"
-    receipt = initial_receipt(args.source_sha, args.build_version)
+    receipt = initial_receipt(args.source_sha, args.build_version, "uninspected")
 
     return_code = 1
     try:
@@ -359,8 +405,10 @@ def main() -> int:
         args.receipt.unlink(missing_ok=True)
         _write_receipt(args.receipt, receipt)
 
-        if not core_wheel.is_file():
-            raise AcceptanceFailure("actions_core_1_0_2_task_local_wheel_missing")
+        core_wheel, core_version = inspect_core_wheel(args.rcc_home / "wheels")
+        receipt["worker_dependencies"][
+            "actions-core"
+        ] = f"{core_version} candidate wheel installed by post-install"
         wheel_hash = sha256(core_wheel)
         receipt["actions_core_wheel_sha256"] = wheel_hash
 
@@ -399,6 +447,7 @@ def main() -> int:
         os.environ["DAKOTA_WORKITEMS_RCC_HOME"] = str(args.rcc_home.resolve())
         os.environ["DAKOTA_WORKITEMS_CORE_WHEEL"] = str(core_wheel.resolve())
         os.environ["DAKOTA_WORKITEMS_CORE_WHEEL_SHA256"] = wheel_hash
+        os.environ["DAKOTA_WORKITEMS_CORE_VERSION"] = core_version
         os.environ["ACTIONS_HOME"] = str(args.rcc_home.resolve())
         os.environ["ROBOCORP_HOME"] = str(args.rcc_home.resolve())
         for kind, executable in executables.items():
@@ -431,6 +480,7 @@ def main() -> int:
                 proof_dir,
                 executable_hashes,
                 wheel_hash,
+                core_version,
             )
 
         return_code = 0
