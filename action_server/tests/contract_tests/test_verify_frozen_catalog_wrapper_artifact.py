@@ -1,6 +1,7 @@
 import hashlib
 import importlib.util
 import json
+import os
 import stat
 import subprocess
 import sys
@@ -81,8 +82,17 @@ def test_wrapper_verifier_extracts_one_exact_executable_member(tmp_path, monkeyp
     target = VERIFIER.verify(archive, destination, output, source_root)
 
     assert target == destination / "action-server"
+    assert target.is_file()
+    assert not target.is_symlink()
     assert target.read_bytes() == data
-    assert stat.S_IMODE(target.stat().st_mode) == 0o755
+    with zipfile.ZipFile(archive) as verified_archive:
+        member = verified_archive.infolist()[0]
+        assert member.create_system == 3
+        assert stat.S_IMODE(member.external_attr >> 16) == 0o755
+    if os.name == "posix":
+        # The verifier chmods the extracted file, which preserves POSIX mode
+        # bits on Linux/macOS but is not a Windows filesystem contract.
+        assert stat.S_IMODE(target.stat().st_mode) == 0o755
     record = json.loads(output.read_text(encoding="utf-8"))
     assert record["archive_and_member_verified"] is True
     assert record["binary_sha256"] == hashlib.sha256(data).hexdigest()
@@ -150,20 +160,23 @@ def test_wrapper_acceptance_reuses_dependency_interpreter_across_home_isolation(
     assert '"$test_python" -m pytest' in acceptance_step["run"]
     assert "poetry run" not in acceptance_step["run"]
     assert "test-interpreter.txt" in acceptance_step["run"]
-    subprocess.run(
-        ["bash", "-n"],
-        input=dependency_step["run"],
-        cwd=REPOSITORY_ROOT,
-        text=True,
-        check=True,
-    )
-    subprocess.run(
-        ["bash", "-n"],
-        input=acceptance_step["run"],
-        cwd=REPOSITORY_ROOT,
-        text=True,
-        check=True,
-    )
+    if os.name == "posix":
+        # On Windows, PATH may resolve bash to a WSL shim without a distro.
+        # The assertions above still check the platform-neutral shell contract.
+        subprocess.run(
+            ["bash", "-n"],
+            input=dependency_step["run"],
+            cwd=REPOSITORY_ROOT,
+            text=True,
+            check=True,
+        )
+        subprocess.run(
+            ["bash", "-n"],
+            input=acceptance_step["run"],
+            cwd=REPOSITORY_ROOT,
+            text=True,
+            check=True,
+        )
 
 
 @pytest.mark.parametrize(

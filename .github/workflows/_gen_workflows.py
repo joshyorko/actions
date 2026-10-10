@@ -722,6 +722,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "action_server/scripts/verify_frozen_catalog_artifact.py",
                         "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py",
                         "action_server/scripts/verify_frozen_catalog_junit.py",
+                        "action_server/scripts/verify_frozen_catalog_harness.py",
                         "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
                         "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
                         "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py",
@@ -729,6 +730,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
                         "action_server/scripts/frozen_wrapper_acceptance_plugin.py",
                         "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
+                        "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
                         "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
                         "action_server/docs/DEVELOPMENT.md",
                     ],
@@ -773,17 +775,12 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                 "run": "\n".join(
                     [
                         "set -Eeuo pipefail",
-                        "git merge-base --is-ancestor c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD",
-                        "test \"$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2^{tree})\" = 75a108db7d608e1316d59c96918213471409f31a",
+                        'uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_harness.py --source-root .. --output "$RUNNER_TEMP/frozen-catalog-evidence/harness-verification.json"',
                         'candidate_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/a47dc616069afdb0488aaed651abf0ceb9a82035" | jq -er .commit.tree.sha)"',
                         'test "$candidate_tree" = 10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6',
                         'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/0045d91b2b5010b4b3706f777325e04b8eda805d" | jq -er .commit.tree.sha)"',
                         'test "$build_tree" = "$candidate_tree"',
                         'printf "%s\\n" "$build_tree" > "$RUNNER_TEMP/frozen-catalog-native-build-source-tree.txt"',
-                        'test "$(git hash-object tests/action_server_tests/test_cli_mcp_resource_history.py)" = 69e2a468916f9982206573e8f5b71c6f2db8c8e7',
-                        "test \"$(git rev-parse HEAD:action_server/src/actions/server)\" = \"$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2:action_server/src/actions/server)\"",
-                        "git diff --quiet c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD -- action_server/src actions/src actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock actions/pyproject.toml actions/poetry.lock actions-http-helper/pyproject.toml actions-http-helper/poetry.lock",
-                        'printf "%s\n" "action_server/src actions/src actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock actions/pyproject.toml actions/poetry.lock actions-http-helper/pyproject.toml actions-http-helper/poetry.lock" > "$RUNNER_TEMP/frozen-catalog-runtime-inputs-verified.txt"',
                         'archive="$RUNNER_TEMP/frozen-native.zip"',
                         "curl --fail --silent --show-error --location \\",
                         '  --header "Authorization: Bearer $GITHUB_TOKEN" \\',
@@ -850,7 +847,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "set -Eeuo pipefail",
                         'mkdir -p "$ACTIONS_HOME" "$ROBOTS_HOME" "$TMPDIR"',
                         "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -c 'import pytest, sys; print(f\"pytest={pytest.__file__}; python={sys.executable}\")'",
-                        "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -q -p no:robocorp_log_pytest tests/contract_tests/test_verify_frozen_catalog_junit.py",
+                        "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -q -p no:robocorp_log_pytest tests/contract_tests/test_verify_frozen_catalog_junit.py tests/contract_tests/test_verify_frozen_catalog_harness.py",
                         "set +e",
                         "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -m integration_test -n 0 -q -s \\",
                         "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good \\",
@@ -887,17 +884,18 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         'steps = {name: os.environ.get(name + "_OUTCOME", "not-run") for name in ("ARTIFACT", "FROZEN", "RCC", "DEPENDENCIES", "ACCEPTANCE")}',
                         'rcc_version_file = root / "frozen-catalog-rcc-version.txt"',
                         'rcc_sha_file = root / "frozen-catalog-rcc-sha256.txt"',
-                        'receipt = {"candidate_sha": "a47dc616069afdb0488aaed651abf0ceb9a82035", "candidate_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_source_sha": "0045d91b2b5010b4b3706f777325e04b8eda805d", "native_build_source_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_workflow_run_id": "38060994147", "native_build_workflow_run_attempt": "1", "native_byte_verification_receipt_sha256": "dc7725c13c273fbca186539f18b43bc2d3701f9e2704dc9b8b596de3112aa951", "control_sha": os.environ["GITHUB_SHA"], "test_harness_runtime_baseline_sha": "c78288c3a0f07ba1013109c790f8e8b375a852d2", "test_harness_runtime_baseline_tree": "75a108db7d608e1316d59c96918213471409f31a", "resource_history_test_blob": "69e2a468916f9982206573e8f5b71c6f2db8c8e7", "artifact_id": "11673805091", "artifact_size": 59391509, "artifact_sha256": "26a60e999d62009ea83d70aac949a3c3bbf09895ea90119a7a39b2a05306e2f8", "go_wrapper": "NOT_VERIFIED; separate wrapper artifact is not included in the measured provenance TAR", "step_outcomes": steps, "status": "PASS" if all(value == "success" for value in steps.values()) else "FAIL_OR_NOT_RUN"}',
+                        'receipt = {"candidate_sha": "a47dc616069afdb0488aaed651abf0ceb9a82035", "candidate_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_source_sha": "0045d91b2b5010b4b3706f777325e04b8eda805d", "native_build_source_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_workflow_run_id": "38060994147", "native_build_workflow_run_attempt": "1", "native_byte_verification_receipt_sha256": "dc7725c13c273fbca186539f18b43bc2d3701f9e2704dc9b8b596de3112aa951", "control_sha": os.environ["GITHUB_SHA"], "resource_history_test_blob": "5fe18b942ba66f339ac076fa26add1908d70305e", "artifact_id": "11673805091", "artifact_size": 59391509, "artifact_sha256": "26a60e999d62009ea83d70aac949a3c3bbf09895ea90119a7a39b2a05306e2f8", "go_wrapper": "NOT_VERIFIED; separate wrapper artifact is not included in the measured provenance TAR", "step_outcomes": steps, "status": "PASS" if all(value == "success" for value in steps.values()) else "FAIL_OR_NOT_RUN"}',
                         'if rcc_version_file.is_file(): receipt["rcc_version"] = rcc_version_file.read_text(encoding="utf-8").strip()',
                         'if rcc_sha_file.is_file(): receipt["rcc_sha256"] = rcc_sha_file.read_text(encoding="utf-8").split()[0]',
                         'source_tree = root / "frozen-catalog-native-build-source-tree.txt"',
                         'if source_tree.is_file(): receipt["native_build_source_tree_api_readback"] = source_tree.read_text(encoding="utf-8").strip()',
-                        'runtime_inputs = root / "frozen-catalog-runtime-inputs-verified.txt"',
-                        'if runtime_inputs.is_file(): receipt["runtime_inputs_verified"] = runtime_inputs.read_text(encoding="utf-8").strip()',
                         'artifact_verification = root / "frozen-catalog-artifact-verification.json"',
                         'if artifact_verification.is_file(): receipt["frozen_artifact_verification"] = json.loads(artifact_verification.read_text(encoding="utf-8"))',
                         'junit = root / "frozen-catalog-junit-summary.json"',
                         'if junit.is_file(): receipt["junit"] = json.loads(junit.read_text(encoding="utf-8"))',
+                        'harness = root / "frozen-catalog-evidence/harness-verification.json"',
+                        'if harness.is_file(): receipt["test_harness"] = json.loads(harness.read_text(encoding="utf-8"))',
+                        'if receipt.get("test_harness", {}).get("status") != "PASS" or receipt.get("test_harness", {}).get("control_sha") != os.environ["GITHUB_SHA"]: receipt["status"] = "FAIL_OR_NOT_RUN"',
                         '(root / "frozen-catalog-summary.json").write_text(json.dumps(receipt, indent=2) + "\\n", encoding="utf-8")',
                         "PY",
                     ]
@@ -947,15 +945,11 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         [
                             "set -Eeuo pipefail",
                             'cd "$GITHUB_WORKSPACE"',
-                            "git merge-base --is-ancestor c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD",
-                            "test \"$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2^{tree})\" = 75a108db7d608e1316d59c96918213471409f31a",
+                            'uv run --no-project --python 3.12 python action_server/scripts/verify_frozen_catalog_harness.py --source-root . --output "$RUNNER_TEMP/go-wrapper-catalog-evidence/harness-verification.json"',
                             'candidate_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/$EXPECTED_CANDIDATE_SHA" | jq -er .commit.tree.sha)"',
                             'test "$candidate_tree" = 10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6',
                             'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/0045d91b2b5010b4b3706f777325e04b8eda805d" | jq -er .commit.tree.sha)"',
                             'test "$build_tree" = "$candidate_tree"',
-                            'test "$(git hash-object action_server/tests/action_server_tests/test_cli_mcp_resource_history.py)" = 69e2a468916f9982206573e8f5b71c6f2db8c8e7',
-                            "git diff --quiet \"$EXPECTED_CANDIDATE_SHA\" HEAD -- action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py action_server/tests/action_server_tests/test_cli_successful_generation_drain.py action_server/tests/action_server_tests/test_cli_multi_package_sync.py action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
-                            "git diff --quiet c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD -- action_server/src actions/src actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock actions/pyproject.toml actions/poetry.lock actions-http-helper/pyproject.toml actions-http-helper/poetry.lock",
                             'metadata="$RUNNER_TEMP/go-wrapper-artifact-metadata.json"',
                             'curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID" --output "$metadata"',
                             'jq -e --argjson id "$ARTIFACT_ID" --argjson run "$EXPECTED_RUN_ID" --arg name "$EXPECTED_ARTIFACT_NAME" --arg head "$EXPECTED_CANDIDATE_SHA" --argjson size "$EXPECTED_ARCHIVE_SIZE" \' .id == $id and .name == $name and .size_in_bytes == $size and .expired == false and .workflow_run.id == $run and .workflow_run.head_sha == $head \' "$metadata" > /dev/null',
@@ -964,8 +958,8 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                             'test "$(stat -c %s "$archive")" = "$EXPECTED_ARCHIVE_SIZE"',
                             'echo "$EXPECTED_ARCHIVE_SHA256  $archive" | sha256sum --check --status',
                             "uv run --no-project --python 3.12 python action_server/scripts/verify_frozen_catalog_wrapper_artifact.py \\",
-                            "  --archive \"$archive\" \\",
-                            "  --destination \"$RUNNER_TEMP/go-wrapper-native\" \\",
+                            '  --archive "$archive" \\',
+                            '  --destination "$RUNNER_TEMP/go-wrapper-native" \\',
                             "  --source-root action_server \\",
                             '  --output "$RUNNER_TEMP/go-wrapper-catalog-evidence/wrapper-artifact-verification.json"',
                             'rm "$archive"',
@@ -1027,17 +1021,23 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                             'export VIRTUAL_ENV="$(dirname "$(dirname "$test_python")")"',
                             'export PATH="$VIRTUAL_ENV/bin:$PATH"',
                             '"$test_python" -c \'import pytest, sys; print(f"pytest={pytest.__file__}; python={sys.executable}")\' | tee "$RUNNER_TEMP/go-wrapper-catalog-evidence/test-interpreter.txt"',
-                            '"$test_python" -m pytest -q -p no:robocorp_log_pytest tests/contract_tests/test_verify_frozen_catalog_junit.py tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py',
+                            '"$test_python" -m pytest -q -p no:robocorp_log_pytest tests/contract_tests/test_verify_frozen_catalog_junit.py tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py tests/contract_tests/test_verify_frozen_catalog_harness.py',
                             "set +e",
-                            '"$test_python" -m pytest -p scripts.frozen_wrapper_acceptance_plugin -m integration_test -n 0 -q -s ' + "\\",
-                            "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good " + "\\",
-                            "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers " + "\\",
-                            "  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot " + "\\",
-                            "  tests/action_server_tests/test_cli_multi_package_sync.py " + "\\",
-                            "  tests/action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart " + "\\",
+                            '"$test_python" -m pytest -p scripts.frozen_wrapper_acceptance_plugin -m integration_test -n 0 -q -s '
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good "
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers "
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot "
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_multi_package_sync.py "
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart "
+                            + "\\",
                             '  --junitxml="$RUNNER_TEMP/go-wrapper-catalog-evidence/junit.xml" 2>&1 | tee "$RUNNER_TEMP/go-wrapper-catalog-evidence/test.log"',
                             "test_status=${PIPESTATUS[0]}",
-                            "if [ \"$test_status\" -eq 0 ]; then uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_junit.py \\",
+                            'if [ "$test_status" -eq 0 ]; then uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_junit.py \\',
                             '  "$RUNNER_TEMP/go-wrapper-catalog-evidence/junit.xml" "$RUNNER_TEMP/go-wrapper-catalog-evidence/junit-summary.json" || test_status=$?; fi',
                             'echo "GO_WRAPPER_TEST_EXIT_CODE=$test_status" >> "$GITHUB_ENV"',
                             'exit "$test_status"',
@@ -1054,7 +1054,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "EXPECTED_FROZEN_BINARY_SHA256": "b4bfb975bc8b54cb6fc5408f3ea88e2a65bcb06324ffa72826d29a19d59f95a8",
                         "EVIDENCE_DIR": "${{ runner.temp }}/go-wrapper-catalog-evidence",
                     },
-                    "run": "python - <<'PY'\nimport hashlib, json, os, stat\nfrom pathlib import Path\nhome = Path(os.environ[\"HOME\"]).resolve()\nexpected = os.environ[\"EXPECTED_FROZEN_BINARY_SHA256\"]\nmatches = list(home.glob(\".actions/bin/action-server/internal/*/action-server\"))\nif len(matches) != 1:\n    raise SystemExit(\"wrapper did not leave exactly one extracted frozen executable\")\nbinary = matches[0]\nif binary.is_symlink() or not stat.S_ISREG(binary.stat().st_mode) or stat.S_IMODE(binary.stat().st_mode) != 0o755:\n    raise SystemExit(\"wrapper-extracted frozen executable type or mode is invalid\")\ndigest = hashlib.sha256()\nwith binary.open(\"rb\") as stream:\n    for chunk in iter(lambda: stream.read(1024 * 1024), b\"\"):\n        digest.update(chunk)\nactual = digest.hexdigest()\nif actual != expected:\n    raise SystemExit(\"wrapper-extracted frozen executable digest does not match candidate\")\nrecord = {\"relative_path\": binary.relative_to(home).as_posix(), \"mode\": stat.S_IMODE(binary.stat().st_mode), \"size\": binary.stat().st_size, \"sha256\": actual, \"matches_measured_frozen_candidate\": True}\nPath(os.environ[\"EVIDENCE_DIR\"], \"wrapper-extracted-frozen-verification.json\").write_text(json.dumps(record, indent=2) + \"\\n\", encoding=\"utf-8\")\nPY",
+                    "run": 'python - <<\'PY\'\nimport hashlib, json, os, stat\nfrom pathlib import Path\nhome = Path(os.environ["HOME"]).resolve()\nexpected = os.environ["EXPECTED_FROZEN_BINARY_SHA256"]\nmatches = list(home.glob(".actions/bin/action-server/internal/*/action-server"))\nif len(matches) != 1:\n    raise SystemExit("wrapper did not leave exactly one extracted frozen executable")\nbinary = matches[0]\nif binary.is_symlink() or not stat.S_ISREG(binary.stat().st_mode) or stat.S_IMODE(binary.stat().st_mode) != 0o755:\n    raise SystemExit("wrapper-extracted frozen executable type or mode is invalid")\ndigest = hashlib.sha256()\nwith binary.open("rb") as stream:\n    for chunk in iter(lambda: stream.read(1024 * 1024), b""):\n        digest.update(chunk)\nactual = digest.hexdigest()\nif actual != expected:\n    raise SystemExit("wrapper-extracted frozen executable digest does not match candidate")\nrecord = {"relative_path": binary.relative_to(home).as_posix(), "mode": stat.S_IMODE(binary.stat().st_mode), "size": binary.stat().st_size, "sha256": actual, "matches_measured_frozen_candidate": True}\nPath(os.environ["EVIDENCE_DIR"], "wrapper-extracted-frozen-verification.json").write_text(json.dumps(record, indent=2) + "\\n", encoding="utf-8")\nPY',
                 },
                 {
                     "name": "Write separate Go-wrapper acceptance receipt",
@@ -1075,15 +1075,15 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                             "from pathlib import Path",
                             'evidence = Path(os.environ["RUNNER_TEMP"]) / "go-wrapper-catalog-evidence"',
                             'steps = {name: os.environ.get(name + "_OUTCOME", "not-run") for name in ("ARTIFACT", "RCC", "DEPENDENCIES", "ACCEPTANCE", "WRAPPER_RUNTIME")}',
-                            'receipt = {"candidate_sha": "a47dc616069afdb0488aaed651abf0ceb9a82035", "candidate_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_source_sha": "0045d91b2b5010b4b3706f777325e04b8eda805d", "native_build_source_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_run_id": "38060994147", "native_build_run_attempt": "1", "wrapper_artifact_id": "11673147409", "wrapper_archive_size": 77810317, "wrapper_archive_sha256": "5caa374143633ed8faeb27fbd9aa6daf20b704e46599434af373685d02026764", "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293", "wrapper_measurement_receipt_sha256": "e05e37a1f3194c518dd9ea22e19d4e01cfce15f991feaaf00a655b167c840910", "native_measurement_receipt_sha256": "dc7725c13c273fbca186539f18b43bc2d3701f9e2704dc9b8b596de3112aa951", "control_sha": os.environ["GITHUB_SHA"], "harness_runtime_baseline_sha": "c78288c3a0f07ba1013109c790f8e8b375a852d2", "resource_history_test_blob": "69e2a468916f9982206573e8f5b71c6f2db8c8e7", "expected_junit_tests": 11, "step_outcomes": steps}',
-                            'for name, filename in (("artifact_verification", "wrapper-artifact-verification.json"), ("junit", "junit-summary.json"), ("wrapper_process_lifecycle", "wrapper-process-lifecycle.json"), ("wrapper_extracted_frozen_binary", "wrapper-extracted-frozen-verification.json")):',
-                            '    path = evidence / filename',
+                            'receipt = {"candidate_sha": "a47dc616069afdb0488aaed651abf0ceb9a82035", "candidate_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_source_sha": "0045d91b2b5010b4b3706f777325e04b8eda805d", "native_build_source_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_run_id": "38060994147", "native_build_run_attempt": "1", "wrapper_artifact_id": "11673147409", "wrapper_archive_size": 77810317, "wrapper_archive_sha256": "5caa374143633ed8faeb27fbd9aa6daf20b704e46599434af373685d02026764", "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293", "wrapper_measurement_receipt_sha256": "e05e37a1f3194c518dd9ea22e19d4e01cfce15f991feaaf00a655b167c840910", "native_measurement_receipt_sha256": "dc7725c13c273fbca186539f18b43bc2d3701f9e2704dc9b8b596de3112aa951", "control_sha": os.environ["GITHUB_SHA"], "resource_history_test_blob": "5fe18b942ba66f339ac076fa26add1908d70305e", "expected_junit_tests": 11, "step_outcomes": steps}',
+                            'for name, filename in (("test_harness", "harness-verification.json"), ("artifact_verification", "wrapper-artifact-verification.json"), ("junit", "junit-summary.json"), ("wrapper_process_lifecycle", "wrapper-process-lifecycle.json"), ("wrapper_extracted_frozen_binary", "wrapper-extracted-frozen-verification.json")):',
+                            "    path = evidence / filename",
                             '    if path.is_file(): receipt[name] = json.loads(path.read_text(encoding="utf-8"))',
                             'for name, filename in (("rcc_sha256", "rcc-sha256.txt"), ("rcc_version", "rcc-version.txt")):',
-                            '    path = evidence / filename',
+                            "    path = evidence / filename",
                             '    if path.is_file(): receipt[name] = path.read_text(encoding="utf-8").split()[0]',
                             'lifecycle = receipt.get("wrapper_process_lifecycle", {})',
-                            'receipt["status"] = "PASS" if all(value == "success" for value in steps.values()) and lifecycle.get("status") == "PASS" else "FAIL_OR_NOT_RUN"',
+                            'receipt["status"] = "PASS" if all(value == "success" for value in steps.values()) and lifecycle.get("status") == "PASS" and receipt.get("test_harness", {}).get("status") == "PASS" and receipt.get("test_harness", {}).get("control_sha") == os.environ["GITHUB_SHA"] else "FAIL_OR_NOT_RUN"',
                             '(evidence / "go-wrapper-catalog-summary.json").write_text(json.dumps(receipt, indent=2) + "\\n", encoding="utf-8")',
                             "PY",
                         ]
@@ -1158,9 +1158,12 @@ candidate_tree = git_value(candidate, "rev-parse", "HEAD^{tree}")
 control_sha = git_value(control, "rev-parse", "HEAD")
 control_tree = git_value(control, "rev-parse", "HEAD^{tree}")
 expected_candidate_sha = os.environ.get("EXPECTED_CANDIDATE_SHA")
+expected_candidate_tree = os.environ.get("EXPECTED_CANDIDATE_TREE")
 expected_control_sha = os.environ.get("EXPECTED_CONTROL_SHA")
 if candidate_sha != expected_candidate_sha:
     issues.append("candidate_checkout_sha_mismatch")
+if candidate_tree != expected_candidate_tree:
+    issues.append("candidate_checkout_tree_mismatch")
 if control_sha != expected_control_sha:
     issues.append("control_checkout_sha_mismatch")
 if source.get("commit") != candidate_sha:
@@ -1184,6 +1187,10 @@ source_files = {
     "actions_import": "action_server/src/actions/server/_actions_import.py",
     "runtime_adapter": "action_server/src/actions/server/_rcc_runtime_adapter.py",
     "rollback_test": "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+    "staged_consumer_test": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "source_staging": "action_server/src/actions/server/deployments/source_staging.py",
+    "source_read": "action_server/src/actions/server/deployments/source_read.py",
+    "source_manifest": "action_server/src/actions/server/deployments/source_manifest.py",
     "acceptance_helper": "action_server/scripts/verify_dakota_rcc_acceptance.py",
 }
 file_hashes = {name: file_sha256(candidate / path) for name, path in source_files.items()}
@@ -1230,15 +1237,24 @@ except (OSError, ET.ParseError, ValueError):
     issues.append("junit_missing_or_invalid")
 if test_counts != actual_case_counts:
     issues.append("junit_suite_counts_do_not_match_testcases")
-if test_counts != {"tests": 1, "failures": 0, "errors": 0, "skipped": 0}:
-    issues.append("test_result_not_exactly_one_pass")
-expected_test_name = "test_current_candidate_failed_reload_keeps_last_good_action_usable"
-expected_test_module = "test_current_candidate_import_rollback"
+if test_counts != {"tests": 2, "failures": 0, "errors": 0, "skipped": 0}:
+    issues.append("test_result_not_exactly_two_passes")
+expected_test_identities = {
+    (
+        "test_current_candidate_import_rollback",
+        "test_current_candidate_failed_reload_keeps_last_good_action_usable",
+    ),
+    (
+        "test_source_staging_rcc_consumer",
+        "test_staged_package_executes_in_managed_rcc_runtime",
+    ),
+}
+observed_test_identities = {
+    (case.attrib.get("classname", "").rsplit(".", 1)[-1], case.attrib.get("name"))
+    for case in cases
+}
 test_identity_matches = (
-    len(cases) == 1
-    and cases[0].attrib.get("name") == expected_test_name
-    and cases[0].attrib.get("classname", "").rsplit(".", 1)[-1]
-    == expected_test_module
+    len(cases) == 2 and observed_test_identities == expected_test_identities
 )
 if not test_identity_matches:
     issues.append("unexpected_test_identity")
@@ -1249,6 +1265,73 @@ except ValueError:
     test_exit_code = None
 if test_exit_code != 0:
     issues.append("test_process_exit_not_zero")
+
+staged_receipt_path = evidence_dir / "staged-consumer-receipt.json"
+staged_receipt = read_json(staged_receipt_path)
+source_digests = staged_receipt.get("source_sha256")
+staged_digests = staged_receipt.get("staged_sha256")
+staged_result = staged_receipt.get("typed_action_result")
+try:
+    source_inventory = json.loads(staged_receipt.get("source_inventory", ""))
+    staged_inventory = json.loads(staged_receipt.get("staged_inventory", ""))
+except (TypeError, json.JSONDecodeError):
+    source_inventory = None
+    staged_inventory = None
+source_action_digest = (
+    source_digests.get("action.py") if isinstance(source_digests, dict) else None
+)
+staged_action_digest = (
+    staged_digests.get("action.py") if isinstance(staged_digests, dict) else None
+)
+inventory_entries = (
+    source_inventory.get("entries") if isinstance(source_inventory, dict) else None
+)
+inventory_digests = (
+    {entry.get("path"): entry.get("sha256") for entry in inventory_entries}
+    if isinstance(inventory_entries, list)
+    and all(isinstance(entry, dict) for entry in inventory_entries)
+    else None
+)
+expected_staged_paths = {"action.py", "package.yaml"}
+expected_result_fields = {
+    "action_source_sha256",
+    "action_source_path",
+    "core_origin",
+    "core_version",
+    "python_executable",
+}
+managed_root = staged_receipt.get("managed_root")
+managed_root_path = Path(managed_root).resolve() if isinstance(managed_root, str) else None
+managed_worker_origins = (
+    isinstance(staged_result, dict)
+    and managed_root_path is not None
+    and Path(str(staged_result.get("python_executable", ""))).resolve().is_relative_to(managed_root_path)
+    and Path(str(staged_result.get("core_origin", ""))).resolve().is_relative_to(managed_root_path)
+)
+staged_receipt_valid = (
+    staged_receipt.get("status") == "PASS"
+    and staged_receipt.get("source_commit") == candidate_sha
+    and staged_receipt.get("source_tree") == candidate_tree
+    and isinstance(source_digests, dict)
+    and set(source_digests) == expected_staged_paths
+    and source_digests == staged_digests
+    and source_inventory == staged_inventory
+    and isinstance(source_inventory, dict)
+    and source_inventory.get("sourcePolicyVersion") == 1
+    and inventory_digests == source_digests
+    and source_action_digest == staged_action_digest
+    and isinstance(staged_result, dict)
+    and set(staged_result) == expected_result_fields
+    and all(isinstance(key, str) and isinstance(value, str) for key, value in staged_result.items())
+    and staged_result.get("action_source_sha256") == staged_action_digest
+    and staged_result.get("core_version") == "1.0.2"
+    and isinstance(staged_result.get("python_executable"), str)
+    and isinstance(staged_result.get("core_origin"), str)
+    and managed_worker_origins
+    and ".rcc-runtime-sources" in str(staged_result.get("action_source_path", ""))
+)
+if not staged_receipt_valid:
+    issues.append("staged_consumer_receipt_missing_or_invalid")
 
 expected_rcc_sha = os.environ.get("EXPECTED_RCC_SHA256")
 rcc_binary = Path(os.environ.get("ACTIONS_RUNTIME_RCC_BINARY", ""))
@@ -1369,6 +1452,10 @@ summary = {
         "forced_stop_used": runtime.get("forced_stop_used"),
         "forced_cleanup_returncode_observed": runtime.get("forced_cleanup_returncode_observed") is True,
         "remaining_owned_descendant_count": len(remaining) if isinstance(remaining, list) else None,
+        "staged_consumer_receipt_status": staged_receipt.get("status", "NOT_RECORDED"),
+        "staged_consumer_receipt_valid": staged_receipt_valid,
+        "staged_action_sha256_matches": staged_action_digest == (staged_result.get("action_source_sha256") if isinstance(staged_result, dict) else None),
+        "managed_worker_origins_confirmed": managed_worker_origins,
     },
 }
 (evidence_dir / "acceptance-summary.json").write_text(
@@ -1399,7 +1486,8 @@ class ActionServerRccProviderRollback(BaseWorkflow):
     target = "actions_runtime_rcc_provider_rollback.yml"
     project_name = "action_server"
     rcc_sha256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    candidate_sha = "f7c6ed61f24fd9e98d1465c83042c5446466311b"
+    candidate_sha = "d376399f497fb98f47062e493219e063db8f08e1"
+    candidate_tree = "fb04c136e5e1a7ce709649b13cf895d84ac93c1a"
 
     def __init__(self):
         super().__init__()
@@ -1412,6 +1500,10 @@ class ActionServerRccProviderRollback(BaseWorkflow):
         paths = [
             "developer/tests/test_rcc_provider_rollback_workflow.py",
             "developer/tests/test_rcc_provider_rollback_summary.py",
+            "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+            "action_server/src/actions/server/deployments/source_staging.py",
+            "action_server/src/actions/server/deployments/source_read.py",
+            "action_server/src/actions/server/deployments/source_manifest.py",
             ".github/workflows/_gen_workflows.py",
             f".github/workflows/{self.target}",
         ]
@@ -1470,18 +1562,22 @@ class ActionServerRccProviderRollback(BaseWorkflow):
                 "shell": "bash",
                 "env": {
                     "CANDIDATE_SHA": self.candidate_sha,
+                    "CANDIDATE_TREE": self.candidate_tree,
                     "CONTROL_SHA": "${{ github.sha }}",
                 },
                 "run": """set -Eeuo pipefail
 actual=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD)
 test "$actual" = "$CANDIDATE_SHA"
+actual_tree=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD^{tree})
+test "$actual_tree" = "$CANDIDATE_TREE"
 control=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD)
 test "$control" = "$CONTROL_SHA"
 printf 'RCC_ROLLBACK_CANDIDATE_SHA=%s\\n' "$actual" >> "$GITHUB_ENV"
+printf 'RCC_ROLLBACK_CANDIDATE_TREE=%s\\n' "$actual_tree" >> "$GITHUB_ENV"
 printf 'RCC_ROLLBACK_CONTROL_SHA=%s\\n' "$control" >> "$GITHUB_ENV"
 printf 'control_sha=%s\\n' "$control"
 printf 'candidate_sha=%s\\n' "$actual"
-printf 'candidate_tree=%s\\n' "$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD^{tree})"
+printf 'candidate_tree=%s\\n' "$actual_tree"
 """,
             },
             *self.setup_python(),
@@ -1578,6 +1674,7 @@ sha256sum "$runtime" "$default"
                 "env": {
                     "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
                     "ACTIONS_RUNTIME_LIFECYCLE_RECEIPT": f"{evidence_dir}/lifecycle-receipt.json",
+                    "ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT": f"{evidence_dir}/staged-consumer-receipt.json",
                     "PYTHONPATH": "${{ github.workspace }}/candidate/action_server/src:${{ github.workspace }}/candidate/actions/src",
                     "TMPDIR": "${{ runner.temp }}/rcc-provider-rollback-tmp",
                 },
@@ -1589,6 +1686,7 @@ set +e
 uv run --no-project --python 3.12 poetry run pytest -n 0 -vv -rA \\
   -m 'integration_test and real_rcc' \\
   tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable \\
+  tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime \\
   --junitxml="{junit_path}" 2>&1 | tee "{raw_log}"
 status=${{PIPESTATUS[0]}}
 echo "RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE=$status" >> "$GITHUB_ENV"
@@ -1737,6 +1835,7 @@ PY
                     "EVIDENCE_DIR": evidence_dir,
                     "JUNIT_PATH": junit_path,
                     "EXPECTED_CANDIDATE_SHA": self.candidate_sha,
+                    "EXPECTED_CANDIDATE_TREE": self.candidate_tree,
                     "EXPECTED_CONTROL_SHA": "${{ github.sha }}",
                     "EXPECTED_RCC_SHA256": self.rcc_sha256,
                     "ACTION_SERVER_RCC_DEFAULT": "${{ github.workspace }}/candidate/action_server/src/actions/server/bin/rcc-18.19.3",
@@ -1749,7 +1848,7 @@ PY
                 "uses": "actions/upload-artifact@v4",
                 "with": {
                     "name": "rcc-provider-rollback-${{ github.run_id }}-${{ github.run_attempt }}",
-                    "path": f"{evidence_dir}/acceptance-summary.*",
+                    "path": f"{evidence_dir}/acceptance-summary.*\n{evidence_dir}/staged-consumer-receipt.json",
                     "if-no-files-found": "warn",
                     "retention-days": 14,
                 },
@@ -2836,14 +2935,115 @@ class ActionsTests(BaseTests):
             "on": {
                 "push": {
                     "branches": ["community", "wip"],
-                    "paths": dep_paths[:],
+                    "paths": dep_paths[:] + [".github/workflows/_gen_workflows.py"],
                 },
                 "pull_request": {
-                    "branches": ["community"],
-                    "paths": dep_paths[:],
+                    "branches": ["community", "integration/**"],
+                    "paths": dep_paths[:] + [".github/workflows/_gen_workflows.py"],
                 },
             }
         }
+
+    @override
+    def jobs_part(self):
+        jobs = super().jobs_part()["jobs"]
+        jobs["candidate-wheel"] = {
+            "runs-on": UBUNTU_VERSION,
+            "timeout-minutes": 30,
+            "permissions": {"contents": "read"},
+            "steps": [
+                {
+                    "name": "Checkout repository",
+                    "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+                },
+                {
+                    "name": "Set up Python 3.10",
+                    "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+                    "with": {"python-version": "3.10"},
+                },
+                {"name": "Install Poetry", "run": "pipx install poetry==2.1.1"},
+                {
+                    "name": "Synchronize Core dependencies",
+                    "run": "poetry sync --no-interaction",
+                },
+                {"name": "Build Core candidate artifacts", "run": "poetry build"},
+                {
+                    "name": "Verify exact Core artifact inventory",
+                    "shell": "bash",
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "package_version=$(poetry version --short)",
+                            'printf \'%s\\n\' "actions_core-$package_version-py3-none-any.whl" "actions_core-$package_version.tar.gz" | sort > /tmp/core-expected',
+                            "find dist -mindepth 1 -maxdepth 1 -printf '%f\\n' | sort > /tmp/core-actual",
+                            "diff -u /tmp/core-expected /tmp/core-actual",
+                            'test "$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 2',
+                            'test -f "dist/actions_core-$package_version-py3-none-any.whl"',
+                            'test ! -L "dist/actions_core-$package_version-py3-none-any.whl"',
+                            'test -f "dist/actions_core-$package_version.tar.gz"',
+                            'test ! -L "dist/actions_core-$package_version.tar.gz"',
+                        ]
+                    ),
+                },
+                {
+                    "name": "Install Twine 6.2.0",
+                    "run": "poetry run python -m pip install twine==6.2.0",
+                },
+                {
+                    "name": "Verify Core candidate artifacts",
+                    "run": "poetry run twine check --strict dist/*.whl dist/*.tar.gz",
+                },
+                {
+                    "name": "Verify clean installed Core candidate wheel",
+                    "shell": "bash",
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "wheel=\"$(find dist -maxdepth 1 -name 'actions_core-*.whl' -print -quit)\"",
+                            'test -n "$wheel"',
+                            'python scripts/verify_clean_wheel.py "$wheel"',
+                        ]
+                    ),
+                },
+                {
+                    "name": "Record candidate artifact hashes and provenance",
+                    "shell": "bash",
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-core-manifest.sha256",
+                            'test "$(git rev-parse HEAD)" = "$GITHUB_SHA"',
+                            "python - <<'PY'",
+                            "import json, os, subprocess",
+                            "source_sha = os.environ['GITHUB_SHA']",
+                            "source_tree = subprocess.check_output(['git', 'rev-parse', f'{source_sha}^{{tree}}'], text=True).strip()",
+                            "receipt = {",
+                            "    'source_sha': source_sha,",
+                            "    'source_tree': source_tree,",
+                            "    'workflow_run_id': os.environ['GITHUB_RUN_ID'],",
+                            "    'workflow_run_attempt': int(os.environ['GITHUB_RUN_ATTEMPT']),",
+                            "    'event_name': os.environ['GITHUB_EVENT_NAME'],",
+                            "    'ref': os.environ['GITHUB_REF'],",
+                            "}",
+                            "with open('dist/actions-core-candidate-provenance.json', 'w', encoding='utf-8') as output:",
+                            "    json.dump(receipt, output, indent=2, sort_keys=True)",
+                            "    output.write('\\n')",
+                            "PY",
+                        ]
+                    ),
+                },
+                {
+                    "name": "Upload verified Core candidate artifacts",
+                    "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                    "with": {
+                        "name": "actions-core-candidate-dist",
+                        "path": "actions/dist",
+                        "if-no-files-found": "error",
+                    },
+                },
+            ],
+        }
+        return {"jobs": jobs}
 
 
 class HttpHelperTests(BaseTests):

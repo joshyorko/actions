@@ -1548,46 +1548,232 @@ def test_port_in_use(action_server_process: ActionServerProcess, tmpdir):
 
 
 @pytest.mark.integration_test
-def test_action_package_rename(
-    action_server_process: ActionServerProcess, client: ActionServerClient, tmpdir
-):
-    calculator = Path(tmpdir) / "calculator" / "action_calculator.py"
-    calculator.parent.mkdir(parents=True, exist_ok=True)
-    calculator.write_text(
-        """
-from actions import action
+def test_action_package_rename(action_server_process: ActionServerProcess, tmpdir):
+    import httpx
+
+    from actions.server._models import load_db
+    from actions.server._selftest import ActionServerExitedError
+
+    calculator_dir = Path(tmpdir) / "calculator"
+    calculator_file = calculator_dir / "action_calculator.py"
+    calculator_dir.mkdir(parents=True, exist_ok=True)
+    calculator_file.write_text(
+        """from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
     return v1 + v2
-"""
+""",
+        encoding="utf-8",
     )
+
+    datadir = action_server_process.datadir
+
+    def persisted_state():
+        with load_db(datadir / "server.db") as db:
+            with db.connect():
+                with db.cursor() as cursor:
+                    rows = []
+                    for query in (
+                        "SELECT * FROM action_package ORDER BY id",
+                        "SELECT * FROM action ORDER BY id",
+                        "SELECT * FROM mcp_catalog_name ORDER BY id",
+                    ):
+                        db.execute_query(cursor, query)
+                        columns = tuple(column[0] for column in cursor.description)
+                        rows.append(
+                            tuple(
+                                dict(zip(columns, row, strict=True))
+                                for row in cursor.fetchall()
+                            )
+                        )
+                return tuple(rows)
+
+    def call_mcp(process, method: str, params: dict):
+        headers = {
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2026-07-28",
+            "Mcp-Method": method,
+        }
+        if "name" in params:
+            headers["Mcp-Name"] = params["name"]
+        with httpx.Client(
+            base_url=f"http://{process.host}:{process.port}",
+            timeout=10,
+            trust_env=False,
+        ) as mcp_client:
+            response = mcp_client.post(
+                "/mcp",
+                headers=headers,
+                json={
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": method,
+                    "params": {
+                        **params,
+                        "_meta": {
+                            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+                            "io.modelcontextprotocol/clientCapabilities": {},
+                        },
+                    },
+                },
+            )
+        assert response.status_code == 200, response.text
+        payload = response.json()
+        assert "error" not in payload, payload
+        return payload["result"]
+
+    def assert_serves_calculation(
+        process: ActionServerProcess,
+        expected_path: str,
+        tool_name: str,
+        expected_tools: set[str],
+    ) -> None:
+        current_client = ActionServerClient(process)
+        openapi = json.loads(current_client.get_openapi_json())
+        assert list(openapi["paths"].keys()) == [expected_path]
+        response = current_client.post_get_response(
+            expected_path.lstrip("/"),
+            {"v1": 2.0, "v2": 3.0},
+        )
+        assert response.status_code == 200, response.text
+        assert response.json() == 5.0
+
+        tools = call_mcp(process, "tools/list", {})["tools"]
+        assert {tool["name"] for tool in tools} == expected_tools
+        result = call_mcp(
+            process,
+            "tools/call",
+            {"name": tool_name, "arguments": {"v1": 2.0, "v2": 3.0}},
+        )
+        assert result["structuredContent"] == {"result": 5.0}
 
     action_server_process.start(
-        actions_sync=True, cwd=Path(tmpdir / "calculator"), db_file="server.db"
+        actions_sync=True, cwd=calculator_dir, db_file="server.db"
     )
-    # Check that the actions are there
-    openapi1 = json.loads(client.get_openapi_json())
-    action_server_process.stop()
-
-    action_server_process = ActionServerProcess(Path(action_server_process.datadir))
-
-    os.rename(Path(tmpdir) / "calculator", Path(tmpdir) / "calculator_new")
-    action_server_process.start(
-        actions_sync=True, cwd=Path(tmpdir / "calculator_new"), db_file="server.db"
-    )
-    client = ActionServerClient(action_server_process)
+    original_path = "/api/actions/calculator/calculator-sum/run"
     try:
-        openapi2 = json.loads(client.get_openapi_json())
+        assert_serves_calculation(
+            action_server_process,
+            original_path,
+            "calculator_sum",
+            {"calculator_sum"},
+        )
+        original_state = persisted_state()
     finally:
         action_server_process.stop()
 
-    assert list(openapi1["paths"].keys()) == [
-        "/api/actions/calculator/calculator-sum/run"
-    ]
-    assert list(openapi2["paths"].keys()) == [
-        "/api/actions/calculator-new/calculator-sum/run"
-    ]
+    calculator_new_dir = Path(tmpdir) / "calculator_new"
+    os.rename(calculator_dir, calculator_new_dir)
+
+    rejected_process = ActionServerProcess(datadir)
+    with pytest.raises(ActionServerExitedError) as error:
+        rejected_process.start(
+            actions_sync=True, cwd=calculator_new_dir, db_file="server.db"
+        )
+    diagnostic = str(error.value) + rejected_process.get_stderr()
+    rejected_process.stop()
+    assert (
+        "MCP tool key 'calculator_sum' is reserved for ('calculator', 'calculator_sum')"
+        in diagnostic
+    )
+    assert persisted_state() == original_state
+
+    # The rejected rename leaves the original package pool and public action
+    # usable after a sync-free restart from its last-good source directory.
+    os.rename(calculator_new_dir, calculator_dir)
+    retained_process = ActionServerProcess(datadir)
+    retained_process.start(cwd=calculator_dir, db_file="server.db")
+    try:
+        assert_serves_calculation(
+            retained_process,
+            original_path,
+            "calculator_sum",
+            {"calculator_sum"},
+        )
+        assert persisted_state() == original_state
+    finally:
+        retained_process.stop()
+
+    # A package rename is still supported when the new package also adopts a
+    # fresh public action/MCP key instead of capturing the old owner's key.
+    os.rename(calculator_dir, calculator_new_dir)
+    calculator_file = calculator_new_dir / "action_calculator.py"
+    calculator_file.write_text(
+        """from actions import action
+
+@action
+def calculator_sum_renamed(v1: float, v2: float) -> float:
+    return v1 + v2
+""",
+        encoding="utf-8",
+    )
+
+    renamed_path = "/api/actions/calculator-new/calculator-sum-renamed/run"
+    renamed_process = ActionServerProcess(datadir)
+    renamed_process.start(
+        actions_sync=True, cwd=calculator_new_dir, db_file="server.db"
+    )
+    try:
+        assert_serves_calculation(
+            renamed_process,
+            renamed_path,
+            "calculator_sum_renamed",
+            {"calculator_sum_renamed"},
+        )
+        renamed_state = persisted_state()
+        packages, actions, bindings = renamed_state
+        assert any(package["name"] == "calculator" for package in packages)
+        assert any(package["name"] == "calculator_new" for package in packages)
+        assert any(
+            action["name"] == "calculator_sum_renamed" and action["enabled"]
+            for action in actions
+        )
+        assert (
+            "tool",
+            "calculator_sum",
+            "calculator",
+            "calculator_sum",
+        ) in {
+            (
+                binding["namespace"],
+                binding["name"],
+                binding["package_name"],
+                binding["action_name"],
+            )
+            for binding in bindings
+        }
+        assert (
+            "tool",
+            "calculator_sum_renamed",
+            "calculator_new",
+            "calculator_sum_renamed",
+        ) in {
+            (
+                binding["namespace"],
+                binding["name"],
+                binding["package_name"],
+                binding["action_name"],
+            )
+            for binding in bindings
+        }
+    finally:
+        renamed_process.stop()
+
+    restarted_process = ActionServerProcess(datadir)
+    restarted_process.start(
+        actions_sync=True, cwd=calculator_new_dir, db_file="server.db"
+    )
+    try:
+        assert_serves_calculation(
+            restarted_process,
+            renamed_path,
+            "calculator_sum_renamed",
+            {"calculator_sum_renamed"},
+        )
+        assert persisted_state() == renamed_state
+    finally:
+        restarted_process.stop()
 
 
 @pytest.mark.integration_test

@@ -30,6 +30,7 @@ permissions:
     - action_server/scripts/verify_frozen_catalog_artifact.py
     - action_server/scripts/verify_frozen_catalog_wrapper_artifact.py
     - action_server/scripts/verify_frozen_catalog_junit.py
+    - action_server/scripts/verify_frozen_catalog_harness.py
     - action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py
     - action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py
     - action_server/tests/action_server_tests/test_cli_successful_generation_drain.py
@@ -37,6 +38,7 @@ permissions:
     - action_server/tests/action_server_tests/test_cli_mcp_resource_history.py
     - action_server/scripts/frozen_wrapper_acceptance_plugin.py
     - action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py
+    - action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py
     - action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py
     - action_server/docs/DEVELOPMENT.md
 defaults:
@@ -67,27 +69,17 @@ jobs:
         ARTIFACT_ID: '11673805091'
         EXPECTED_ARCHIVE_SIZE: '59391509'
         EXPECTED_ARCHIVE_SHA256: 26a60e999d62009ea83d70aac949a3c3bbf09895ea90119a7a39b2a05306e2f8
-      run: "set -Eeuo pipefail\ngit merge-base --is-ancestor c78288c3a0f07ba1013109c790f8e8b375a852d2\
-        \ HEAD\ntest \"$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2^{tree})\"\
-        \ = 75a108db7d608e1316d59c96918213471409f31a\ncandidate_tree=\"$(curl --fail\
-        \ --silent --show-error --location --header \"Authorization: Bearer $GITHUB_TOKEN\"\
-        \ --header \"Accept: application/vnd.github+json\" \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/a47dc616069afdb0488aaed651abf0ceb9a82035\"\
+      run: "set -Eeuo pipefail\nuv run --no-project --python 3.12 python scripts/verify_frozen_catalog_harness.py\
+        \ --source-root .. --output \"$RUNNER_TEMP/frozen-catalog-evidence/harness-verification.json\"\
+        \ncandidate_tree=\"$(curl --fail --silent --show-error --location --header\
+        \ \"Authorization: Bearer $GITHUB_TOKEN\" --header \"Accept: application/vnd.github+json\"\
+        \ \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/a47dc616069afdb0488aaed651abf0ceb9a82035\"\
         \ | jq -er .commit.tree.sha)\"\ntest \"$candidate_tree\" = 10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6\n\
         build_tree=\"$(curl --fail --silent --show-error --location --header \"Authorization:\
         \ Bearer $GITHUB_TOKEN\" --header \"Accept: application/vnd.github+json\"\
         \ \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/0045d91b2b5010b4b3706f777325e04b8eda805d\"\
         \ | jq -er .commit.tree.sha)\"\ntest \"$build_tree\" = \"$candidate_tree\"\
         \nprintf \"%s\\n\" \"$build_tree\" > \"$RUNNER_TEMP/frozen-catalog-native-build-source-tree.txt\"\
-        \ntest \"$(git hash-object tests/action_server_tests/test_cli_mcp_resource_history.py)\"\
-        \ = 69e2a468916f9982206573e8f5b71c6f2db8c8e7\ntest \"$(git rev-parse HEAD:action_server/src/actions/server)\"\
-        \ = \"$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2:action_server/src/actions/server)\"\
-        \ngit diff --quiet c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD -- action_server/src\
-        \ actions/src actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock\
-        \ actions/pyproject.toml actions/poetry.lock actions-http-helper/pyproject.toml\
-        \ actions-http-helper/poetry.lock\nprintf \"%s\n\" \"action_server/src actions/src\
-        \ actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock\
-        \ actions/pyproject.toml actions/poetry.lock actions-http-helper/pyproject.toml\
-        \ actions-http-helper/poetry.lock\" > \"$RUNNER_TEMP/frozen-catalog-runtime-inputs-verified.txt\"\
         \narchive=\"$RUNNER_TEMP/frozen-native.zip\"\ncurl --fail --silent --show-error\
         \ --location \\\n  --header \"Authorization: Bearer $GITHUB_TOKEN\" \\\n \
         \ --header 'Accept: application/vnd.github+json' \\\n  \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip\"\
@@ -129,9 +121,9 @@ jobs:
         \ poetry run python -c 'import pytest, sys; print(f\"pytest={pytest.__file__};\
         \ python={sys.executable}\")'\nuv run --no-project --python 3.12 --with poetry==2.1.1\
         \ env -u VIRTUAL_ENV poetry run python -m pytest -q -p no:robocorp_log_pytest\
-        \ tests/contract_tests/test_verify_frozen_catalog_junit.py\nset +e\nuv run\
-        \ --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry\
-        \ run python -m pytest -m integration_test -n 0 -q -s \\\n  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good\
+        \ tests/contract_tests/test_verify_frozen_catalog_junit.py tests/contract_tests/test_verify_frozen_catalog_harness.py\n\
+        set +e\nuv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV\
+        \ poetry run python -m pytest -m integration_test -n 0 -q -s \\\n  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good\
         \ \\\n  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers\
         \ \\\n  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot\
         \ \\\n  tests/action_server_tests/test_cli_multi_package_sync.py \\\n  tests/action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart\
@@ -171,9 +163,7 @@ jobs:
         "native_build_source_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6", "native_build_workflow_run_id":
         "38060994147", "native_build_workflow_run_attempt": "1", "native_byte_verification_receipt_sha256":
         "dc7725c13c273fbca186539f18b43bc2d3701f9e2704dc9b8b596de3112aa951", "control_sha":
-        os.environ["GITHUB_SHA"], "test_harness_runtime_baseline_sha": "c78288c3a0f07ba1013109c790f8e8b375a852d2",
-        "test_harness_runtime_baseline_tree": "75a108db7d608e1316d59c96918213471409f31a",
-        "resource_history_test_blob": "69e2a468916f9982206573e8f5b71c6f2db8c8e7",
+        os.environ["GITHUB_SHA"], "resource_history_test_blob": "5fe18b942ba66f339ac076fa26add1908d70305e",
         "artifact_id": "11673805091", "artifact_size": 59391509, "artifact_sha256":
         "26a60e999d62009ea83d70aac949a3c3bbf09895ea90119a7a39b2a05306e2f8", "go_wrapper":
         "NOT_VERIFIED; separate wrapper artifact is not included in the measured provenance
@@ -189,10 +179,6 @@ jobs:
         if source_tree.is_file(): receipt["native_build_source_tree_api_readback"]
         = source_tree.read_text(encoding="utf-8").strip()
 
-        runtime_inputs = root / "frozen-catalog-runtime-inputs-verified.txt"
-
-        if runtime_inputs.is_file(): receipt["runtime_inputs_verified"] = runtime_inputs.read_text(encoding="utf-8").strip()
-
         artifact_verification = root / "frozen-catalog-artifact-verification.json"
 
         if artifact_verification.is_file(): receipt["frozen_artifact_verification"]
@@ -201,6 +187,13 @@ jobs:
         junit = root / "frozen-catalog-junit-summary.json"
 
         if junit.is_file(): receipt["junit"] = json.loads(junit.read_text(encoding="utf-8"))
+
+        harness = root / "frozen-catalog-evidence/harness-verification.json"
+
+        if harness.is_file(): receipt["test_harness"] = json.loads(harness.read_text(encoding="utf-8"))
+
+        if receipt.get("test_harness", {}).get("status") != "PASS" or receipt.get("test_harness",
+        {}).get("control_sha") != os.environ["GITHUB_SHA"]: receipt["status"] = "FAIL_OR_NOT_RUN"
 
         (root / "frozen-catalog-summary.json").write_text(json.dumps(receipt, indent=2)
         + "\n", encoding="utf-8")
@@ -241,28 +234,20 @@ jobs:
         EXPECTED_RUN_ID: '38060994147'
         EXPECTED_ARTIFACT_NAME: action-server-unauthenticated-ubuntu-22.04
         EXPECTED_CANDIDATE_SHA: a47dc616069afdb0488aaed651abf0ceb9a82035
-      run: "set -Eeuo pipefail\ncd \"$GITHUB_WORKSPACE\"\ngit merge-base --is-ancestor\
-        \ c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD\ntest \"$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2^{tree})\"\
-        \ = 75a108db7d608e1316d59c96918213471409f31a\ncandidate_tree=\"$(curl --fail\
-        \ --silent --show-error --location --header \"Authorization: Bearer $GITHUB_TOKEN\"\
-        \ --header \"Accept: application/vnd.github+json\" \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/$EXPECTED_CANDIDATE_SHA\"\
+      run: "set -Eeuo pipefail\ncd \"$GITHUB_WORKSPACE\"\nuv run --no-project --python\
+        \ 3.12 python action_server/scripts/verify_frozen_catalog_harness.py --source-root\
+        \ . --output \"$RUNNER_TEMP/go-wrapper-catalog-evidence/harness-verification.json\"\
+        \ncandidate_tree=\"$(curl --fail --silent --show-error --location --header\
+        \ \"Authorization: Bearer $GITHUB_TOKEN\" --header \"Accept: application/vnd.github+json\"\
+        \ \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/$EXPECTED_CANDIDATE_SHA\"\
         \ | jq -er .commit.tree.sha)\"\ntest \"$candidate_tree\" = 10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6\n\
         build_tree=\"$(curl --fail --silent --show-error --location --header \"Authorization:\
         \ Bearer $GITHUB_TOKEN\" --header \"Accept: application/vnd.github+json\"\
         \ \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/0045d91b2b5010b4b3706f777325e04b8eda805d\"\
         \ | jq -er .commit.tree.sha)\"\ntest \"$build_tree\" = \"$candidate_tree\"\
-        \ntest \"$(git hash-object action_server/tests/action_server_tests/test_cli_mcp_resource_history.py)\"\
-        \ = 69e2a468916f9982206573e8f5b71c6f2db8c8e7\ngit diff --quiet \"$EXPECTED_CANDIDATE_SHA\"\
-        \ HEAD -- action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py\
-        \ action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py\
-        \ action_server/tests/action_server_tests/test_cli_successful_generation_drain.py\
-        \ action_server/tests/action_server_tests/test_cli_multi_package_sync.py action_server/tests/action_server_tests/test_cli_mcp_resource_history.py\n\
-        git diff --quiet c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD -- action_server/src\
-        \ actions/src actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock\
-        \ actions/pyproject.toml actions/poetry.lock actions-http-helper/pyproject.toml\
-        \ actions-http-helper/poetry.lock\nmetadata=\"$RUNNER_TEMP/go-wrapper-artifact-metadata.json\"\
-        \ncurl --fail --silent --show-error --location --header \"Authorization: Bearer\
-        \ $GITHUB_TOKEN\" --header \"Accept: application/vnd.github+json\" \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID\"\
+        \nmetadata=\"$RUNNER_TEMP/go-wrapper-artifact-metadata.json\"\ncurl --fail\
+        \ --silent --show-error --location --header \"Authorization: Bearer $GITHUB_TOKEN\"\
+        \ --header \"Accept: application/vnd.github+json\" \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID\"\
         \ --output \"$metadata\"\njq -e --argjson id \"$ARTIFACT_ID\" --argjson run\
         \ \"$EXPECTED_RUN_ID\" --arg name \"$EXPECTED_ARTIFACT_NAME\" --arg head \"\
         $EXPECTED_CANDIDATE_SHA\" --argjson size \"$EXPECTED_ARCHIVE_SIZE\" ' .id\
@@ -318,8 +303,8 @@ jobs:
         \ -c 'import pytest, sys; print(f\"pytest={pytest.__file__}; python={sys.executable}\"\
         )' | tee \"$RUNNER_TEMP/go-wrapper-catalog-evidence/test-interpreter.txt\"\
         \n\"$test_python\" -m pytest -q -p no:robocorp_log_pytest tests/contract_tests/test_verify_frozen_catalog_junit.py\
-        \ tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py\nset\
-        \ +e\n\"$test_python\" -m pytest -p scripts.frozen_wrapper_acceptance_plugin\
+        \ tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py tests/contract_tests/test_verify_frozen_catalog_harness.py\n\
+        set +e\n\"$test_python\" -m pytest -p scripts.frozen_wrapper_acceptance_plugin\
         \ -m integration_test -n 0 -q -s \\\n  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good\
         \ \\\n  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers\
         \ \\\n  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot\
@@ -379,23 +364,24 @@ jobs:
         wrapper_source_sha256\": \"dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293\"\
         , \"wrapper_measurement_receipt_sha256\": \"e05e37a1f3194c518dd9ea22e19d4e01cfce15f991feaaf00a655b167c840910\"\
         , \"native_measurement_receipt_sha256\": \"dc7725c13c273fbca186539f18b43bc2d3701f9e2704dc9b8b596de3112aa951\"\
-        , \"control_sha\": os.environ[\"GITHUB_SHA\"], \"harness_runtime_baseline_sha\"\
-        : \"c78288c3a0f07ba1013109c790f8e8b375a852d2\", \"resource_history_test_blob\"\
-        : \"69e2a468916f9982206573e8f5b71c6f2db8c8e7\", \"expected_junit_tests\":\
-        \ 11, \"step_outcomes\": steps}\nfor name, filename in ((\"artifact_verification\"\
-        , \"wrapper-artifact-verification.json\"), (\"junit\", \"junit-summary.json\"\
-        ), (\"wrapper_process_lifecycle\", \"wrapper-process-lifecycle.json\"), (\"\
-        wrapper_extracted_frozen_binary\", \"wrapper-extracted-frozen-verification.json\"\
-        )):\n    path = evidence / filename\n    if path.is_file(): receipt[name]\
-        \ = json.loads(path.read_text(encoding=\"utf-8\"))\nfor name, filename in\
-        \ ((\"rcc_sha256\", \"rcc-sha256.txt\"), (\"rcc_version\", \"rcc-version.txt\"\
-        )):\n    path = evidence / filename\n    if path.is_file(): receipt[name]\
-        \ = path.read_text(encoding=\"utf-8\").split()[0]\nlifecycle = receipt.get(\"\
-        wrapper_process_lifecycle\", {})\nreceipt[\"status\"] = \"PASS\" if all(value\
-        \ == \"success\" for value in steps.values()) and lifecycle.get(\"status\"\
-        ) == \"PASS\" else \"FAIL_OR_NOT_RUN\"\n(evidence / \"go-wrapper-catalog-summary.json\"\
-        ).write_text(json.dumps(receipt, indent=2) + \"\\n\", encoding=\"utf-8\")\n\
-        PY"
+        , \"control_sha\": os.environ[\"GITHUB_SHA\"], \"resource_history_test_blob\"\
+        : \"5fe18b942ba66f339ac076fa26add1908d70305e\", \"expected_junit_tests\":\
+        \ 11, \"step_outcomes\": steps}\nfor name, filename in ((\"test_harness\"\
+        , \"harness-verification.json\"), (\"artifact_verification\", \"wrapper-artifact-verification.json\"\
+        ), (\"junit\", \"junit-summary.json\"), (\"wrapper_process_lifecycle\", \"\
+        wrapper-process-lifecycle.json\"), (\"wrapper_extracted_frozen_binary\", \"\
+        wrapper-extracted-frozen-verification.json\")):\n    path = evidence / filename\n\
+        \    if path.is_file(): receipt[name] = json.loads(path.read_text(encoding=\"\
+        utf-8\"))\nfor name, filename in ((\"rcc_sha256\", \"rcc-sha256.txt\"), (\"\
+        rcc_version\", \"rcc-version.txt\")):\n    path = evidence / filename\n  \
+        \  if path.is_file(): receipt[name] = path.read_text(encoding=\"utf-8\").split()[0]\n\
+        lifecycle = receipt.get(\"wrapper_process_lifecycle\", {})\nreceipt[\"status\"\
+        ] = \"PASS\" if all(value == \"success\" for value in steps.values()) and\
+        \ lifecycle.get(\"status\") == \"PASS\" and receipt.get(\"test_harness\",\
+        \ {}).get(\"status\") == \"PASS\" and receipt.get(\"test_harness\", {}).get(\"\
+        control_sha\") == os.environ[\"GITHUB_SHA\"] else \"FAIL_OR_NOT_RUN\"\n(evidence\
+        \ / \"go-wrapper-catalog-summary.json\").write_text(json.dumps(receipt, indent=2)\
+        \ + \"\\n\", encoding=\"utf-8\")\nPY"
     - name: Upload Go-wrapper acceptance evidence
       if: always()
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

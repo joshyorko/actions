@@ -76,6 +76,7 @@ _LEGACY_BOOLEAN_COLUMNS = {
     "NOTIFY_ON_SUCCESS",
     "NOTIFICATION_SENT",
 }
+_WINDOWS_DRIVE_PATH = re.compile(r"^[A-Za-z]:(?:\\|/(?!/))")
 
 
 def _tokenize_sql(sql: str) -> List[_SQLToken]:
@@ -361,6 +362,11 @@ def redact_database_url(value: Union[Path, str]) -> Union[Path, str]:
 
 def normalize_database_url(value: Union[Path, str]) -> Union[Path, str]:
     if not isinstance(value, str):
+        return value
+    # urlsplit treats rooted drive paths such as C:\data\server.db as a
+    # one-letter URL scheme. Preserve those filesystem paths before scheme
+    # validation so Database can select SQLite normally on Windows.
+    if _WINDOWS_DRIVE_PATH.match(value):
         return value
 
     try:
