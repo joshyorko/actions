@@ -1917,6 +1917,44 @@ starts workers with RCC `env exec --artifact DIGEST --permissive-local
 --inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
 release.
 
+The current-candidate rollback/provider acceptance is a separate, explicitly
+opt-in hosted Linux workflow. It checks out its workflow-control revision and
+the Runtime candidate as separate repositories, verifies the candidate's full
+commit SHA before installing or testing it, and binds the sanitized receipt to
+both checkouts. This prevents a mutable PR head or synthetic workflow merge
+commit from being mistaken for the source under test. The test
+`test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable`
+requires `ACTIONS_REAL_RCC_ARTIFACT_TEST=1` and an
+`ACTIONS_RUNTIME_RCC_BINARY` whose RCC v18.19.3 bytes match the pinned SHA-256.
+The workflow selects that one test with xdist disabled, uses the normal Action
+Server developer install path, and uploads a sanitized receipt/source-hash
+summary even if the test fails. Its ordinary-suite skip is not acceptance
+evidence.
+
+The admission summary fails closed unless JUnit records exactly one passed,
+non-skipped test, with suite totals matching the actual testcase result
+elements and the expected rollback test name/module; the lifecycle receipt is
+`PASS` and binds to the checked-out
+candidate commit/tree; imported runtime modules originate from and hash-match
+that candidate; both the runtime RCC and Action Server's default RCC path match
+the pinned version and digest; provider-operation snapshots and expected
+persisted Run results agree; and natural shutdown has an observed pre-cleanup
+return code of 0 or 1, followed by an observed cleanup return code, without
+forced stop or observed surviving owned descendants. The always-run summary
+executes from the workspace root and uploads only sanitized evidence, so a
+skipped test, missing receipt, inconsistent JUnit counters, or failed checkout
+cannot appear green.
+
+This is a cold preparation test, not a warm-cache or offline test: the fixture
+creates a fresh `ROBOCORP_HOME`, an empty temporary RCC `cache serve` provider,
+and a package environment requiring Python 3.12.15 and `actions-core=1.0.2`.
+The initial `env publish`/`env acquire` may access configured package sources
+and materialize a new environment. Keep it on hosted capacity; do not run it
+under a cache-only assumption or a tight local disk reserve. The proof covers
+source-only rollback/recovery and observed provider-operation stability for
+this focused test; it does not establish provider-dead warm execution, frozen
+packaging, in-flight drain, or full #134 acceptance.
+
 TCP worker startup owns its listener, accept future, and spawned wrapper.
 Startup failure attempts listener closure, accept cancellation, and wrapper
 cleanup while preserving the primary exception. Completed-worker retirement has
