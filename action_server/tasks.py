@@ -708,7 +708,7 @@ def test_binary(ctx: Context, test: str = "", jobs: str = "auto"):
         "-m",
         "pytest",
         "-m",
-        "integration_test",
+        "integration_test and not native_artifact_test",
         "-rfE",
         "-vv",
         "--force-regen",

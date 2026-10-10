@@ -52,6 +52,13 @@ The field mapping and regression cases are documented in the experimental
 schema draft; they do not approve the paused #129 production API or identifier
 syntax.
 
+The Package Revision fixtures under `docs/design/fixtures/package-revision-v1`
+have canonical UTF-8 JSON bytes with LF endings. Their scoped `.gitattributes`
+rule preserves those bytes on Windows checkouts with `core.autocrlf=true`.
+Verify checkout bytes as well as Git blobs; do not normalize test inputs or relax
+the byte comparisons to hide checkout conversion. This is fixture preservation,
+not approval of a production Package Revision digest algorithm.
+
 ## Admission and execution receipt
 
 Run creation stores one immutable `AdmissionSnapshot` containing the schema
@@ -139,6 +146,14 @@ disk/GC state, and a redaction manifest. It rejects archive traversal,
 absolute paths, symlinks, duplicate names, and oversized members.
 
 ## Verification matrix
+
+Platform-neutral CLI checks such as `--help` and refusal to overwrite an existing
+receipt must run before the Linux-only process-supervisor eligibility check; they
+must not create supervisor state. The RCC acceptance CLI still fails closed on
+unsupported platforms before candidate execution. Tests that prove Linux
+subreaper or process-group cleanup must be explicitly Linux-only. Skipping those
+process-proof tests elsewhere is not macOS or Windows cleanup acceptance, and a
+mocked `CompletedProcess` does not establish descendant cleanup.
 
 The dependency-free `devutils.runtime_conformance` module is the repository's
 small executable contract for this boundary. It canonicalizes exact-subject

@@ -78,6 +78,28 @@ components:
       - version
       title: ActionPackageApi
       type: object
+    AnalyticsSummary:
+      description: Summary statistics for all runs.
+      properties:
+        avg_duration_ms:
+          title: Avg Duration Ms
+          type: number
+        runs_today:
+          title: Runs Today
+          type: integer
+        success_rate:
+          title: Success Rate
+          type: number
+        total_runs:
+          title: Total Runs
+          type: integer
+      required:
+      - total_runs
+      - success_rate
+      - avg_duration_ms
+      - runs_today
+      title: AnalyticsSummary
+      type: object
     ArtifactInfo:
       properties:
         name:
@@ -91,6 +113,31 @@ components:
       - size_in_bytes
       title: ArtifactInfo
       type: object
+    Body_import_robot_api_robots_import_post:
+      properties:
+        file:
+          anyOf:
+          - format: binary
+            type: string
+          - type: 'null'
+          title: File
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+      title: Body_import_robot_api_robots_import_post
+      type: object
+    Body_upload_file_api_work_items__item_id__files_post:
+      properties:
+        file:
+          format: binary
+          title: File
+          type: string
+      required:
+      - file
+      title: Body_upload_file_api_work_items__item_id__files_post
+      type: object
     CreatedReferenceId:
       properties:
         reference_id:
@@ -100,6 +147,232 @@ components:
       - reference_id
       title: CreatedReferenceId
       type: object
+    CronValidateRequest:
+      description: Request to validate a cron expression.
+      properties:
+        cron_expression:
+          title: Cron Expression
+          type: string
+        timezone:
+          default: UTC
+          title: Timezone
+          type: string
+      required:
+      - cron_expression
+      title: CronValidateRequest
+      type: object
+    CronValidateResponse:
+      description: Response for cron validation.
+      properties:
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        human_readable:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Human Readable
+        next_runs:
+          items:
+            type: string
+          title: Next Runs
+          type: array
+        valid:
+          title: Valid
+          type: boolean
+      required:
+      - valid
+      title: CronValidateResponse
+      type: object
+    ExecutionResponse:
+      description: Response for schedule execution.
+      properties:
+        actual_end_time:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Actual End Time
+        actual_start_time:
+          title: Actual Start Time
+          type: string
+        attempt_number:
+          title: Attempt Number
+          type: integer
+        duration_ms:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Duration Ms
+        error_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Code
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+        id:
+          title: Id
+          type: string
+        notification_error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notification Error
+        notification_sent:
+          title: Notification Sent
+          type: boolean
+        result:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Result
+        run_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+        schedule_id:
+          title: Schedule Id
+          type: string
+        scheduled_time:
+          title: Scheduled Time
+          type: string
+        skip_reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Skip Reason
+        status:
+          title: Status
+          type: string
+        work_item_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Id
+      required:
+      - id
+      - schedule_id
+      - scheduled_time
+      - actual_start_time
+      - status
+      - attempt_number
+      - notification_sent
+      title: ExecutionResponse
+      type: object
+    GroupCreateRequest:
+      description: Request to create a schedule group.
+      properties:
+        color:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Color
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        name:
+          maxLength: 255
+          minLength: 1
+          title: Name
+          type: string
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+      required:
+      - name
+      title: GroupCreateRequest
+      type: object
+    GroupListResponse:
+      description: Response with list of groups.
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/GroupResponse'
+          title: Groups
+          type: array
+        total:
+          title: Total
+          type: integer
+      required:
+      - groups
+      - total
+      title: GroupListResponse
+      type: object
+    GroupResponse:
+      description: Response with group details.
+      properties:
+        color:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Color
+        created_at:
+          title: Created At
+          type: string
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        id:
+          title: Id
+          type: string
+        name:
+          title: Name
+          type: string
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+        schedule_count:
+          default: 0
+          title: Schedule Count
+          type: integer
+      required:
+      - id
+      - name
+      - created_at
+      title: GroupResponse
+      type: object
+    GroupUpdateRequest:
+      description: Request to update a schedule group.
+      properties:
+        color:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Color
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        name:
+          anyOf:
+          - maxLength: 255
+            minLength: 1
+            type: string
+          - type: 'null'
+          title: Name
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+      title: GroupUpdateRequest
+      type: object
     HTTPValidationError:
       properties:
         errors:
@@ -108,6 +381,54 @@ components:
           title: Errors
           type: array
       title: HTTPValidationError
+      type: object
+    InvocationResponse:
+      description: Response for trigger invocation.
+      properties:
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+        id:
+          title: Id
+          type: string
+        invoked_at:
+          title: Invoked At
+          type: string
+        payload:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Payload
+        run_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+        source_ip:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Ip
+        status:
+          title: Status
+          type: string
+        trigger_id:
+          title: Trigger Id
+          type: string
+        work_item_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Id
+      required:
+      - id
+      - trigger_id
+      - invoked_at
+      - status
+      title: InvocationResponse
       type: object
     OAuth2StatusResponseForProvider:
       properties:
@@ -139,7 +460,216 @@ components:
       - metadata
       title: OAuth2StatusResponseForProvider
       type: object
+    PreviewRunsRequest:
+      description: Request to preview next run times.
+      properties:
+        count:
+          default: 10
+          maximum: 100.0
+          minimum: 1.0
+          title: Count
+          type: integer
+        cron_expression:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cron Expression
+        interval_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Interval Seconds
+        once_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Once At
+        schedule_type:
+          title: Schedule Type
+          type: string
+        timezone:
+          default: UTC
+          title: Timezone
+          type: string
+        weekday_config:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Weekday Config
+      required:
+      - schedule_type
+      title: PreviewRunsRequest
+      type: object
+    PreviewRunsResponse:
+      description: Response with next run times.
+      properties:
+        next_runs:
+          items:
+            type: string
+          title: Next Runs
+          type: array
+      required:
+      - next_runs
+      title: PreviewRunsResponse
+      type: object
+    QueueStatsResponse:
+      description: Response with queue statistics.
+      properties:
+        done:
+          title: Done
+          type: integer
+        failed:
+          title: Failed
+          type: integer
+        in_progress:
+          title: In Progress
+          type: integer
+        pending:
+          title: Pending
+          type: integer
+        queue_name:
+          title: Queue Name
+          type: string
+        total:
+          title: Total
+          type: integer
+      required:
+      - queue_name
+      - pending
+      - in_progress
+      - done
+      - failed
+      - total
+      title: QueueStatsResponse
+      type: object
+    RobotCatalogResponseAPI:
+      properties:
+        robots:
+          items:
+            $ref: '#/components/schemas/RobotPackageDetailAPI'
+          title: Robots
+          type: array
+      required:
+      - robots
+      title: RobotCatalogResponseAPI
+      type: object
+    RobotImportResponseAPI:
+      properties:
+        message:
+          title: Message
+          type: string
+        robot_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Robot Name
+        robot_path:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Robot Path
+        success:
+          title: Success
+          type: boolean
+      required:
+      - success
+      - message
+      title: RobotImportResponseAPI
+      type: object
+    RobotPackageDetailAPI:
+      properties:
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        environment_hash:
+          default: ''
+          title: Environment Hash
+          type: string
+        name:
+          title: Name
+          type: string
+        path:
+          title: Path
+          type: string
+        tasks:
+          default: []
+          items:
+            $ref: '#/components/schemas/RobotTaskInfoAPI'
+          title: Tasks
+          type: array
+      required:
+      - name
+      - path
+      title: RobotPackageDetailAPI
+      type: object
+    RobotRunRequestAPI:
+      properties:
+        inputs:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Inputs
+        robot_package_path:
+          title: Robot Package Path
+          type: string
+        task_name:
+          title: Task Name
+          type: string
+        use_secrets:
+          default: false
+          title: Use Secrets
+          type: boolean
+      required:
+      - robot_package_path
+      - task_name
+      title: RobotRunRequestAPI
+      type: object
+    RobotRunResponseAPI:
+      properties:
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        run_id:
+          title: Run Id
+          type: string
+        status:
+          title: Status
+          type: string
+      required:
+      - run_id
+      - status
+      title: RobotRunResponseAPI
+      type: object
+    RobotTaskInfoAPI:
+      properties:
+        docs:
+          default: ''
+          title: Docs
+          type: string
+        env:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Env
+        name:
+          title: Name
+          type: string
+      required:
+      - name
+      title: RobotTaskInfoAPI
+      type: object
     RunDetailModel:
+      description: A single run's complete representation for detail and legacy-list
+        routes.
       properties:
         action_id:
           title: Action Id
@@ -238,93 +768,717 @@ components:
       title: RunIdFromRequestId
       type: object
     RunListItemModel:
+      description: Bounded run metadata for list and WebSocket summary responses.
       properties:
         action_id:
+          maxLength: 128
           title: Action Id
           type: string
         action_name:
           anyOf:
-          - type: string
+          - maxLength: 128
+            type: string
           - type: 'null'
           title: Action Name
-        error_message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error Message
         id:
+          maxLength: 128
+          minLength: 1
           title: Id
           type: string
-        inputs:
-          title: Inputs
-          type: string
         numbered_id:
+          maximum: 9.223372036854776e+18
+          minimum: 0.0
           title: Numbered Id
           type: integer
-        relative_artifacts_dir:
-          title: Relative Artifacts Dir
-          type: string
-        request_id:
-          default: ''
-          title: Request Id
-          type: string
-        result:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Result
-        robot_env_hash:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Robot Env Hash
         robot_package_path:
           anyOf:
-          - type: string
+          - maxLength: 256
+            type: string
           - type: 'null'
           title: Robot Package Path
         robot_task_name:
           anyOf:
-          - type: string
+          - maxLength: 128
+            type: string
           - type: 'null'
           title: Robot Task Name
         run_time:
           anyOf:
-          - type: number
+          - maximum: 1000000000.0
+            minimum: 0.0
+            type: number
           - type: 'null'
           title: Run Time
         run_type:
           default: action
+          enum:
+          - action
+          - robot
           title: Run Type
           type: string
         start_time:
+          maxLength: 64
+          minLength: 1
           title: Start Time
           type: string
         status:
+          maximum: 4.0
+          minimum: 0.0
           title: Status
           type: integer
-        stderr:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stderr
-        stdout:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Stdout
       required:
       - id
       - status
       - action_id
       - start_time
-      - run_time
-      - inputs
-      - result
-      - error_message
-      - relative_artifacts_dir
       - numbered_id
       title: RunListItemModel
+      type: object
+    RunsByAction:
+      description: Run counts grouped by action.
+      properties:
+        action_name:
+          title: Action Name
+          type: string
+        avg_duration_ms:
+          title: Avg Duration Ms
+          type: number
+        failed:
+          title: Failed
+          type: integer
+        package_name:
+          title: Package Name
+          type: string
+        passed:
+          title: Passed
+          type: integer
+        total:
+          title: Total
+          type: integer
+      required:
+      - action_name
+      - package_name
+      - total
+      - passed
+      - failed
+      - avg_duration_ms
+      title: RunsByAction
+      type: object
+    RunsByDay:
+      description: Run counts grouped by date.
+      properties:
+        date:
+          title: Date
+          type: string
+        failed:
+          title: Failed
+          type: integer
+        passed:
+          title: Passed
+          type: integer
+        total:
+          title: Total
+          type: integer
+      required:
+      - date
+      - total
+      - passed
+      - failed
+      title: RunsByDay
+      type: object
+    ScheduleCreateRequest:
+      description: Request to create a schedule.
+      properties:
+        action_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Id
+        cron_expression:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cron Expression
+        dependency_mode:
+          default: after_success
+          pattern: ^(after_success|after_any)$
+          title: Dependency Mode
+          type: string
+        depends_on_schedule_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Depends On Schedule Id
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        enabled:
+          default: true
+          title: Enabled
+          type: boolean
+        execution_mode:
+          default: run
+          pattern: ^(run|work_item)$
+          title: Execution Mode
+          type: string
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        inputs:
+          additionalProperties: true
+          title: Inputs
+          type: object
+        interval_seconds:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Interval Seconds
+        max_concurrent:
+          default: 1
+          minimum: 1.0
+          title: Max Concurrent
+          type: integer
+        name:
+          maxLength: 255
+          minLength: 1
+          title: Name
+          type: string
+        notification_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notification Email
+        notification_webhook_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notification Webhook Url
+        notify_on_failure:
+          default: false
+          title: Notify On Failure
+          type: boolean
+        notify_on_success:
+          default: false
+          title: Notify On Success
+          type: boolean
+        once_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Once At
+        priority:
+          default: 0
+          minimum: 0.0
+          title: Priority
+          type: integer
+        rate_limit_enabled:
+          default: false
+          title: Rate Limit Enabled
+          type: boolean
+        rate_limit_max_per_day:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Rate Limit Max Per Day
+        rate_limit_max_per_hour:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Rate Limit Max Per Hour
+        retry_backoff_multiplier:
+          default: 2.0
+          minimum: 1.0
+          title: Retry Backoff Multiplier
+          type: number
+        retry_delay_seconds:
+          default: 60
+          minimum: 1.0
+          title: Retry Delay Seconds
+          type: integer
+        retry_enabled:
+          default: false
+          title: Retry Enabled
+          type: boolean
+        retry_max_attempts:
+          default: 3
+          minimum: 1.0
+          title: Retry Max Attempts
+          type: integer
+        schedule_type:
+          pattern: ^(cron|interval|weekday|once)$
+          title: Schedule Type
+          type: string
+        skip_if_running:
+          default: false
+          title: Skip If Running
+          type: boolean
+        tags:
+          items:
+            type: string
+          title: Tags
+          type: array
+        timeout_seconds:
+          default: 3600
+          minimum: 1.0
+          title: Timeout Seconds
+          type: integer
+        timezone:
+          default: UTC
+          title: Timezone
+          type: string
+        weekday_config:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Weekday Config
+        work_item_queue:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Queue
+      required:
+      - name
+      - schedule_type
+      title: ScheduleCreateRequest
+      type: object
+    ScheduleListResponse:
+      description: Response with list of schedules.
+      properties:
+        schedules:
+          items:
+            $ref: '#/components/schemas/ScheduleResponse'
+          title: Schedules
+          type: array
+        total:
+          title: Total
+          type: integer
+      required:
+      - schedules
+      - total
+      title: ScheduleListResponse
+      type: object
+    ScheduleResponse:
+      description: Response with schedule details.
+      properties:
+        action_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Id
+        action_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Name
+        created_at:
+          title: Created At
+          type: string
+        cron_expression:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cron Expression
+        dependency_mode:
+          title: Dependency Mode
+          type: string
+        depends_on_schedule_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Depends On Schedule Id
+        depends_on_schedule_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Depends On Schedule Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        enabled:
+          title: Enabled
+          type: boolean
+        execution_mode:
+          title: Execution Mode
+          type: string
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        group_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Name
+        id:
+          title: Id
+          type: string
+        inputs:
+          additionalProperties: true
+          title: Inputs
+          type: object
+        interval_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Interval Seconds
+        last_run_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Run At
+        max_concurrent:
+          title: Max Concurrent
+          type: integer
+        name:
+          title: Name
+          type: string
+        next_run_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Run At
+        notification_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notification Email
+        notification_webhook_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notification Webhook Url
+        notify_on_failure:
+          title: Notify On Failure
+          type: boolean
+        notify_on_success:
+          title: Notify On Success
+          type: boolean
+        once_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Once At
+        priority:
+          title: Priority
+          type: integer
+        rate_limit_enabled:
+          title: Rate Limit Enabled
+          type: boolean
+        rate_limit_max_per_day:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Rate Limit Max Per Day
+        rate_limit_max_per_hour:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Rate Limit Max Per Hour
+        retry_backoff_multiplier:
+          title: Retry Backoff Multiplier
+          type: number
+        retry_delay_seconds:
+          title: Retry Delay Seconds
+          type: integer
+        retry_enabled:
+          title: Retry Enabled
+          type: boolean
+        retry_max_attempts:
+          title: Retry Max Attempts
+          type: integer
+        schedule_type:
+          title: Schedule Type
+          type: string
+        skip_if_running:
+          title: Skip If Running
+          type: boolean
+        tags:
+          items:
+            type: string
+          title: Tags
+          type: array
+        timeout_seconds:
+          title: Timeout Seconds
+          type: integer
+        timezone:
+          title: Timezone
+          type: string
+        updated_at:
+          title: Updated At
+          type: string
+        weekday_config:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Weekday Config
+        work_item_queue:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Queue
+      required:
+      - id
+      - name
+      - execution_mode
+      - inputs
+      - schedule_type
+      - timezone
+      - enabled
+      - created_at
+      - updated_at
+      - skip_if_running
+      - max_concurrent
+      - timeout_seconds
+      - retry_enabled
+      - retry_max_attempts
+      - retry_delay_seconds
+      - retry_backoff_multiplier
+      - rate_limit_enabled
+      - dependency_mode
+      - notify_on_failure
+      - notify_on_success
+      - tags
+      - priority
+      title: ScheduleResponse
+      type: object
+    ScheduleStatsResponse:
+      description: Response with schedule statistics.
+      properties:
+        active:
+          title: Active
+          type: integer
+        executions_24h:
+          title: Executions 24H
+          type: integer
+        failed_24h:
+          title: Failed 24H
+          type: integer
+        paused:
+          title: Paused
+          type: integer
+        running:
+          title: Running
+          type: integer
+        success_rate_7d:
+          title: Success Rate 7D
+          type: number
+        total:
+          title: Total
+          type: integer
+      required:
+      - total
+      - active
+      - paused
+      - running
+      - failed_24h
+      - success_rate_7d
+      - executions_24h
+      title: ScheduleStatsResponse
+      type: object
+    ScheduleUpdateRequest:
+      description: Request to update a schedule.
+      properties:
+        action_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Id
+        cron_expression:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Cron Expression
+        dependency_mode:
+          anyOf:
+          - pattern: ^(after_success|after_any)$
+            type: string
+          - type: 'null'
+          title: Dependency Mode
+        depends_on_schedule_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Depends On Schedule Id
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+        execution_mode:
+          anyOf:
+          - pattern: ^(run|work_item)$
+            type: string
+          - type: 'null'
+          title: Execution Mode
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        inputs:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Inputs
+        interval_seconds:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Interval Seconds
+        max_concurrent:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Max Concurrent
+        name:
+          anyOf:
+          - maxLength: 255
+            minLength: 1
+            type: string
+          - type: 'null'
+          title: Name
+        notification_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notification Email
+        notification_webhook_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notification Webhook Url
+        notify_on_failure:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Notify On Failure
+        notify_on_success:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Notify On Success
+        once_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Once At
+        priority:
+          anyOf:
+          - minimum: 0.0
+            type: integer
+          - type: 'null'
+          title: Priority
+        rate_limit_enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Rate Limit Enabled
+        rate_limit_max_per_day:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Rate Limit Max Per Day
+        rate_limit_max_per_hour:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Rate Limit Max Per Hour
+        retry_backoff_multiplier:
+          anyOf:
+          - minimum: 1.0
+            type: number
+          - type: 'null'
+          title: Retry Backoff Multiplier
+        retry_delay_seconds:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Retry Delay Seconds
+        retry_enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Retry Enabled
+        retry_max_attempts:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Retry Max Attempts
+        schedule_type:
+          anyOf:
+          - pattern: ^(cron|interval|weekday|once)$
+            type: string
+          - type: 'null'
+          title: Schedule Type
+        skip_if_running:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Skip If Running
+        tags:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tags
+        timeout_seconds:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Timeout Seconds
+        timezone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Timezone
+        weekday_config:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Weekday Config
+        work_item_queue:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Queue
+      title: ScheduleUpdateRequest
+      type: object
+    SecretResponse:
+      description: Response with webhook secret.
+      properties:
+        webhook_secret:
+          title: Webhook Secret
+          type: string
+      required:
+      - webhook_secret
+      title: SecretResponse
       type: object
     SetSecretData:
       properties:
@@ -350,6 +1504,240 @@ components:
       - success
       title: StatusResponseModel
       type: object
+    TriggerCreateRequest:
+      description: Request to create a trigger.
+      properties:
+        action_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Id
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        enabled:
+          default: true
+          title: Enabled
+          type: boolean
+        execution_mode:
+          default: run
+          pattern: ^(run|work_item)$
+          title: Execution Mode
+          type: string
+        inputs_template:
+          additionalProperties: true
+          title: Inputs Template
+          type: object
+        name:
+          maxLength: 255
+          minLength: 1
+          title: Name
+          type: string
+        rate_limit_enabled:
+          default: false
+          title: Rate Limit Enabled
+          type: boolean
+        rate_limit_max_per_minute:
+          default: 60
+          minimum: 1.0
+          title: Rate Limit Max Per Minute
+          type: integer
+        trigger_type:
+          default: webhook
+          pattern: ^(webhook|email|file_watch)$
+          title: Trigger Type
+          type: string
+        webhook_method:
+          default: POST
+          pattern: ^(POST|PUT)$
+          title: Webhook Method
+          type: string
+        webhook_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Webhook Secret
+        work_item_queue:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Queue
+      required:
+      - name
+      title: TriggerCreateRequest
+      type: object
+    TriggerListResponse:
+      description: Response with list of triggers.
+      properties:
+        total:
+          title: Total
+          type: integer
+        triggers:
+          items:
+            $ref: '#/components/schemas/TriggerResponse'
+          title: Triggers
+          type: array
+      required:
+      - triggers
+      - total
+      title: TriggerListResponse
+      type: object
+    TriggerResponse:
+      description: Response with trigger details.
+      properties:
+        action_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Id
+        action_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Name
+        created_at:
+          title: Created At
+          type: string
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        enabled:
+          title: Enabled
+          type: boolean
+        execution_mode:
+          title: Execution Mode
+          type: string
+        id:
+          title: Id
+          type: string
+        inputs_template:
+          additionalProperties: true
+          title: Inputs Template
+          type: object
+        last_triggered_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Triggered At
+        name:
+          title: Name
+          type: string
+        rate_limit_enabled:
+          title: Rate Limit Enabled
+          type: boolean
+        rate_limit_max_per_minute:
+          title: Rate Limit Max Per Minute
+          type: integer
+        trigger_count:
+          title: Trigger Count
+          type: integer
+        trigger_type:
+          title: Trigger Type
+          type: string
+        updated_at:
+          title: Updated At
+          type: string
+        webhook_method:
+          title: Webhook Method
+          type: string
+        webhook_secret_configured:
+          title: Webhook Secret Configured
+          type: boolean
+        webhook_url:
+          title: Webhook Url
+          type: string
+        work_item_queue:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Queue
+      required:
+      - id
+      - name
+      - execution_mode
+      - inputs_template
+      - trigger_type
+      - webhook_url
+      - webhook_secret_configured
+      - webhook_method
+      - enabled
+      - created_at
+      - updated_at
+      - trigger_count
+      - rate_limit_enabled
+      - rate_limit_max_per_minute
+      title: TriggerResponse
+      type: object
+    TriggerUpdateRequest:
+      description: Request to update a trigger.
+      properties:
+        action_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Id
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+        execution_mode:
+          anyOf:
+          - pattern: ^(run|work_item)$
+            type: string
+          - type: 'null'
+          title: Execution Mode
+        inputs_template:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Inputs Template
+        name:
+          anyOf:
+          - maxLength: 255
+            minLength: 1
+            type: string
+          - type: 'null'
+          title: Name
+        rate_limit_enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Rate Limit Enabled
+        rate_limit_max_per_minute:
+          anyOf:
+          - minimum: 1.0
+            type: integer
+          - type: 'null'
+          title: Rate Limit Max Per Minute
+        webhook_method:
+          anyOf:
+          - pattern: ^(POST|PUT)$
+            type: string
+          - type: 'null'
+          title: Webhook Method
+        webhook_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Webhook Secret
+        work_item_queue:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Queue
+      title: TriggerUpdateRequest
+      type: object
     ValidationError:
       properties:
         loc:
@@ -371,6 +1759,121 @@ components:
       - type
       title: ValidationError
       type: object
+    WebhookInvokeResponse:
+      description: Response for webhook invocation.
+      properties:
+        invocation_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Invocation Id
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+        run_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Run Id
+        status:
+          title: Status
+          type: string
+        work_item_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Work Item Id
+      required:
+      - status
+      title: WebhookInvokeResponse
+      type: object
+    WorkItemCreate:
+      description: Request to create/seed a work item.
+      properties:
+        payload:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Payload
+        queue_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Queue Name
+      title: WorkItemCreate
+      type: object
+    WorkItemListResponse:
+      description: Response with list of work items.
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/WorkItemResponse'
+          title: Items
+          type: array
+        total:
+          title: Total
+          type: integer
+      required:
+      - items
+      - total
+      title: WorkItemListResponse
+      type: object
+    WorkItemResponse:
+      description: Response with work item details.
+      properties:
+        created_at:
+          title: Created At
+          type: string
+        error_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Code
+        error_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error Message
+        files:
+          default: []
+          items:
+            type: string
+          title: Files
+          type: array
+        id:
+          title: Id
+          type: string
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+        payload:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Payload
+        queue_name:
+          title: Queue Name
+          type: string
+        state:
+          title: State
+          type: string
+        updated_at:
+          title: Updated At
+          type: string
+      required:
+      - id
+      - queue_name
+      - state
+      - created_at
+      - updated_at
+      title: WorkItemResponse
+      type: object
 info:
   title: Actions Runtime
   version: <removed-for-compare>
@@ -387,9 +1890,48 @@ paths:
                 type: string
           description: Successful Response
       summary: Serve Index
+  /actions/oauth2:
+    get:
+      description: 'Callback that should''ve been registered in the OAuth2 callback
+        to
+
+        complete the authentication flow.'
+      operationId: oauth2_redirect_actions_oauth2_get
+      parameters:
+      - in: query
+        name: state
+        required: false
+        schema:
+          default: ''
+          title: State
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Oauth2 Redirect
   /actions/{full_path}:
     get:
       operationId: serve_index_actions__full_path__get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Index
+  /analytics:
+    get:
+      operationId: serve_index_analytics_get
       responses:
         '200':
           content:
@@ -412,6 +1954,140 @@ paths:
                 type: array
           description: Successful Response
       summary: List Action Packages
+  /api/analytics/runs-by-action:
+    get:
+      description: "Returns run counts grouped by action.\n\nReturns:\n    List of\
+        \ RunsByAction objects sorted by total runs descending"
+      operationId: get_runs_by_action_api_analytics_runs_by_action_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RunsByAction'
+                title: Response Get Runs By Action Api Analytics Runs By Action Get
+                type: array
+          description: Successful Response
+      summary: Get Runs By Action
+  /api/analytics/runs-by-day:
+    get:
+      description: "Returns run counts grouped by day.\n\nArgs:\n    days: Number\
+        \ of days to look back (default 30)\n\nReturns:\n    List of RunsByDay objects\
+        \ sorted by date ascending"
+      operationId: get_runs_by_day_api_analytics_runs_by_day_get
+      parameters:
+      - in: query
+        name: days
+        required: false
+        schema:
+          default: 30
+          title: Days
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RunsByDay'
+                title: Response Get Runs By Day Api Analytics Runs By Day Get
+                type: array
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Runs By Day
+  /api/analytics/summary:
+    get:
+      description: "Returns summary statistics for all runs.\n\nReturns:\n    AnalyticsSummary\
+        \ with total_runs, success_rate, avg_duration_ms, runs_today"
+      operationId: get_analytics_summary_api_analytics_summary_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsSummary'
+          description: Successful Response
+      summary: Get Analytics Summary
+  /api/robots/catalog:
+    get:
+      description: 'Get catalog of available robot packages.
+
+
+        Scans configured directories for robot packages (package.yaml with tasks).'
+      operationId: get_robot_catalog_api_robots_catalog_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RobotCatalogResponseAPI'
+          description: Successful Response
+      summary: Get Robot Catalog
+  /api/robots/import:
+    post:
+      description: 'Import a robot package from a file upload or URL.
+
+
+        Either ''file'' (a .zip upload) or ''url'' (a URL to download from) must be
+        provided.
+
+
+        The robot package must contain a package.yaml with tasks defined.'
+      operationId: import_robot_api_robots_import_post
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_import_robot_api_robots_import_post'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RobotImportResponseAPI'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Import Robot
+  /api/robots/run:
+    post:
+      description: 'Execute a robot task and track its execution.
+
+
+        The task is executed asynchronously and the run status can be monitored
+
+        via the /api/runs/{run_id} endpoint.'
+      operationId: run_robot_task_api_robots_run_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RobotRunRequestAPI'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RobotRunResponseAPI'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Run Robot Task
   /api/runs:
     get:
       operationId: list_runs_api_runs_get
@@ -432,7 +2108,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/RunListItemModel'
+                  $ref: '#/components/schemas/RunDetailModel'
                 title: Response List Runs Api Runs Get
                 type: array
           description: Successful Response
@@ -468,6 +2144,54 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Run Id From Request Id
+  /api/runs/summary:
+    get:
+      operationId: list_run_summaries_api_runs_summary_get
+      parameters:
+      - description: Filter by run type (e.g., 'action', 'robot')
+        in: query
+        name: run_type
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by run type (e.g., 'action', 'robot')
+          title: Run Type
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 200
+          maximum: 200
+          minimum: 1
+          title: Limit
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          minimum: 0
+          title: Offset
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RunListItemModel'
+                title: Response List Run Summaries Api Runs Summary Get
+                type: array
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: List Run Summaries
   /api/runs/{run_id}:
     get:
       operationId: show_run_api_runs__run_id__get
@@ -686,6 +2410,467 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Get Run Log Html
+  /api/schedule-groups:
+    get:
+      description: List all schedule groups.
+      operationId: list_groups_api_schedule_groups_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupListResponse'
+          description: Successful Response
+      summary: List Groups
+    post:
+      description: Create a new schedule group.
+      operationId: create_group_api_schedule_groups_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Create Group
+  /api/schedule-groups/{group_id}:
+    delete:
+      description: Delete a schedule group.
+      operationId: delete_group_api_schedule_groups__group_id__delete
+      parameters:
+      - in: path
+        name: group_id
+        required: true
+        schema:
+          title: Group Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Delete Group
+    patch:
+      description: Update a schedule group.
+      operationId: update_group_api_schedule_groups__group_id__patch
+      parameters:
+      - in: path
+        name: group_id
+        required: true
+        schema:
+          title: Group Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Update Group
+  /api/schedules:
+    get:
+      description: List all schedules with optional filters.
+      operationId: list_schedules_api_schedules_get
+      parameters:
+      - in: query
+        name: enabled
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+      - in: query
+        name: action_id
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Id
+      - in: query
+        name: group_id
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+      - in: query
+        name: schedule_type
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Schedule Type
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleListResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: List Schedules
+    post:
+      description: Create a new schedule.
+      operationId: create_schedule_api_schedules_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Create Schedule
+  /api/schedules/preview-runs:
+    post:
+      description: Preview next run times for a schedule configuration.
+      operationId: preview_runs_api_schedules_preview_runs_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewRunsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewRunsResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Preview Runs
+  /api/schedules/stats:
+    get:
+      description: Get schedule statistics for dashboard.
+      operationId: get_schedule_stats_api_schedules_stats_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleStatsResponse'
+          description: Successful Response
+      summary: Get Schedule Stats
+  /api/schedules/timezones:
+    get:
+      description: List available timezones.
+      operationId: list_timezones_api_schedules_timezones_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+      summary: List Timezones
+  /api/schedules/validate-cron:
+    post:
+      description: Validate a cron expression and show next runs.
+      operationId: validate_cron_api_schedules_validate_cron_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CronValidateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CronValidateResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Validate Cron
+  /api/schedules/{schedule_id}:
+    delete:
+      description: Delete a schedule.
+      operationId: delete_schedule_api_schedules__schedule_id__delete
+      parameters:
+      - in: path
+        name: schedule_id
+        required: true
+        schema:
+          title: Schedule Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Delete Schedule
+    get:
+      description: Get a specific schedule by ID.
+      operationId: get_schedule_api_schedules__schedule_id__get
+      parameters:
+      - in: path
+        name: schedule_id
+        required: true
+        schema:
+          title: Schedule Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Schedule
+    patch:
+      description: Update an existing schedule.
+      operationId: update_schedule_api_schedules__schedule_id__patch
+      parameters:
+      - in: path
+        name: schedule_id
+        required: true
+        schema:
+          title: Schedule Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Update Schedule
+  /api/schedules/{schedule_id}/disable:
+    post:
+      description: Disable a schedule.
+      operationId: disable_schedule_api_schedules__schedule_id__disable_post
+      parameters:
+      - in: path
+        name: schedule_id
+        required: true
+        schema:
+          title: Schedule Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Disable Schedule
+  /api/schedules/{schedule_id}/duplicate:
+    post:
+      description: Duplicate/clone a schedule.
+      operationId: duplicate_schedule_api_schedules__schedule_id__duplicate_post
+      parameters:
+      - in: path
+        name: schedule_id
+        required: true
+        schema:
+          title: Schedule Id
+          type: string
+      - in: query
+        name: new_name
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: New Name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Duplicate Schedule
+  /api/schedules/{schedule_id}/enable:
+    post:
+      description: Enable a schedule.
+      operationId: enable_schedule_api_schedules__schedule_id__enable_post
+      parameters:
+      - in: path
+        name: schedule_id
+        required: true
+        schema:
+          title: Schedule Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Enable Schedule
+  /api/schedules/{schedule_id}/executions:
+    get:
+      description: Get execution history for a schedule.
+      operationId: list_executions_api_schedules__schedule_id__executions_get
+      parameters:
+      - in: path
+        name: schedule_id
+        required: true
+        schema:
+          title: Schedule Id
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          title: Limit
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          title: Offset
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExecutionResponse'
+                title: Response List Executions Api Schedules  Schedule Id  Executions
+                  Get
+                type: array
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: List Executions
+  /api/schedules/{schedule_id}/trigger:
+    post:
+      description: Manually trigger a schedule execution.
+      operationId: trigger_schedule_api_schedules__schedule_id__trigger_post
+      parameters:
+      - in: path
+        name: schedule_id
+        required: true
+        schema:
+          title: Schedule Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Trigger Schedule
   /api/secrets:
     post:
       description: "API to set secrets in memory which will later be passed on to\
@@ -719,6 +2904,616 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Set Secrets
+  /api/triggers:
+    get:
+      description: List all triggers with optional filters.
+      operationId: list_triggers_api_triggers_get
+      parameters:
+      - in: query
+        name: enabled
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+      - in: query
+        name: trigger_type
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Trigger Type
+      - in: query
+        name: action_id
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Action Id
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerListResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: List Triggers
+    post:
+      description: Create a new trigger.
+      operationId: create_trigger_api_triggers_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Create Trigger
+  /api/triggers/webhook/{trigger_id}:
+    post:
+      description: 'Public webhook endpoint for triggering actions.
+
+
+        This endpoint is called by external systems to invoke a trigger.'
+      operationId: invoke_webhook_api_triggers_webhook__trigger_id__post
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookInvokeResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Invoke Webhook
+    put:
+      description: 'Public webhook endpoint for triggering actions.
+
+
+        This endpoint is called by external systems to invoke a trigger.'
+      operationId: invoke_webhook_api_triggers_webhook__trigger_id__put
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookInvokeResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Invoke Webhook
+  /api/triggers/{trigger_id}:
+    delete:
+      description: Delete a trigger.
+      operationId: delete_trigger_api_triggers__trigger_id__delete
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Delete Trigger
+    get:
+      description: Get a specific trigger by ID.
+      operationId: get_trigger_api_triggers__trigger_id__get
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Trigger
+    patch:
+      description: Update an existing trigger.
+      operationId: update_trigger_api_triggers__trigger_id__patch
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Update Trigger
+  /api/triggers/{trigger_id}/invocations:
+    get:
+      description: Get invocation history for a trigger.
+      operationId: list_invocations_api_triggers__trigger_id__invocations_get
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 50
+          title: Limit
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          title: Offset
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/InvocationResponse'
+                title: Response List Invocations Api Triggers  Trigger Id  Invocations
+                  Get
+                type: array
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: List Invocations
+  /api/triggers/{trigger_id}/regenerate-secret:
+    post:
+      description: Regenerate the webhook secret for a trigger.
+      operationId: regenerate_trigger_secret_api_triggers__trigger_id__regenerate_secret_post
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Regenerate Trigger Secret
+  /api/triggers/{trigger_id}/secret:
+    get:
+      description: Get the webhook secret for a trigger.
+      operationId: get_trigger_secret_api_triggers__trigger_id__secret_get
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Trigger Secret
+  /api/triggers/{trigger_id}/test:
+    post:
+      description: 'Test a trigger with a sample payload.
+
+
+        This is for testing triggers from the UI without needing external calls.'
+      operationId: test_trigger_api_triggers__trigger_id__test_post
+      parameters:
+      - in: path
+        name: trigger_id
+        required: true
+        schema:
+          title: Trigger Id
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - additionalProperties: true
+                type: object
+              - type: 'null'
+              title: Payload
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookInvokeResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Test Trigger
+  /api/work-items:
+    get:
+      description: "List work items in a queue.\n\nArgs:\n    queue_name: Queue to\
+        \ list (default: default)\n    state: Filter by state (PENDING, IN_PROGRESS,\
+        \ DONE, FAILED)\n    limit: Maximum items to return"
+      operationId: list_work_items_api_work_items_get
+      parameters:
+      - in: query
+        name: queue_name
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Queue Name
+      - in: query
+        name: state
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: State
+      - in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          title: Limit
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkItemListResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: List Work Items
+    post:
+      description: 'Seed a new input work item into the queue.
+
+
+        This is typically used by producer tasks to create work for consumers.'
+      operationId: create_work_item_api_work_items_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkItemCreate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkItemResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Create Work Item
+  /api/work-items/stats:
+    get:
+      description: Get statistics for a queue.
+      operationId: get_queue_stats_api_work_items_stats_get
+      parameters:
+      - in: query
+        name: queue_name
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Queue Name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueueStatsResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Queue Stats
+  /api/work-items/{item_id}:
+    delete:
+      description: Delete a work item and its files.
+      operationId: delete_work_item_api_work_items__item_id__delete
+      parameters:
+      - in: path
+        name: item_id
+        required: true
+        schema:
+          title: Item Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Delete Work Item
+    get:
+      description: Get details of a specific work item.
+      operationId: get_work_item_api_work_items__item_id__get
+      parameters:
+      - in: path
+        name: item_id
+        required: true
+        schema:
+          title: Item Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkItemResponse'
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Get Work Item
+  /api/work-items/{item_id}/files:
+    get:
+      description: List files attached to a work item.
+      operationId: list_files_api_work_items__item_id__files_get
+      parameters:
+      - in: path
+        name: item_id
+        required: true
+        schema:
+          title: Item Id
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: List Files
+    post:
+      description: Upload a file attachment to a work item.
+      operationId: upload_file_api_work_items__item_id__files_post
+      parameters:
+      - in: path
+        name: item_id
+        required: true
+        schema:
+          title: Item Id
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_file_api_work_items__item_id__files_post'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Upload File
+  /api/work-items/{item_id}/files/{filename}:
+    delete:
+      description: Delete a file from a work item.
+      operationId: delete_file_api_work_items__item_id__files__filename__delete
+      parameters:
+      - in: path
+        name: item_id
+        required: true
+        schema:
+          title: Item Id
+          type: string
+      - in: path
+        name: filename
+        required: true
+        schema:
+          title: Filename
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Delete File
+    get:
+      description: Download a file from a work item.
+      operationId: download_file_api_work_items__item_id__files__filename__get
+      parameters:
+      - in: path
+        name: item_id
+        required: true
+        schema:
+          title: Item Id
+          type: string
+      - in: path
+        name: filename
+        required: true
+        schema:
+          title: Filename
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Download File
+  /artifacts/{run_id}:
+    get:
+      operationId: serve_artifact_index_artifacts__run_id__get
+      parameters:
+      - in: path
+        name: run_id
+        required: true
+        schema:
+          title: Run Id
+          type: string
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+          description: Validation Error
+      summary: Serve Artifact Index
   /config:
     get:
       operationId: serve_config_config_get
@@ -732,6 +3527,17 @@ paths:
                 type: object
           description: Successful Response
       summary: Serve Config
+  /logs/{full_path}:
+    get:
+      operationId: serve_index_logs__full_path__get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Index
   /oauth2/create-reference-id:
     get:
       description: 'Creates a new reference ID (using this reference it''s later possible
@@ -876,6 +3682,28 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
           description: Validation Error
       summary: Oauth2 Status
+  /overview:
+    get:
+      operationId: serve_index_overview_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Index
+  /robots:
+    get:
+      operationId: serve_index_robots_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Index
   /runs/{full_path}:
     get:
       operationId: serve_index_runs__full_path__get
@@ -887,33 +3715,27 @@ paths:
                 type: string
           description: Successful Response
       summary: Serve Index
-  /actions/oauth2:
+  /schedules:
     get:
-      description: 'Callback that should''ve been registered in the OAuth2 callback
-        to
-
-        complete the authentication flow.'
-      operationId: oauth2_redirect_actions_oauth2_get
-      parameters:
-      - in: query
-        name: state
-        required: false
-        schema:
-          default: ''
-          title: State
-          type: string
+      operationId: serve_index_schedules_get
       responses:
         '200':
           content:
-            application/json:
-              schema: {}
-          description: Successful Response
-        '422':
-          content:
-            application/json:
+            text/html:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-          description: Validation Error
-      summary: Oauth2 Redirect
+                type: string
+          description: Successful Response
+      summary: Serve Index
+  /work-items:
+    get:
+      operationId: serve_index_work_items_get
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: string
+          description: Successful Response
+      summary: Serve Index
 servers:
 - url: http://localhost:0

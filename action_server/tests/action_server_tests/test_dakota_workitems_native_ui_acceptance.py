@@ -272,6 +272,26 @@ def classify_runtime_tree_delta(
     }
 
 
+def require_bundled_rcc_baseline(
+    entries: list[PackageTreeEntry], *, platform_name: str
+) -> PackageTreeEntry:
+    """Require pinned RCC in the frozen package before starting the Runtime."""
+    from actions.server._download_rcc import RCC_VERSION
+
+    executable = f"_internal/actions/server/bin/rcc-{RCC_VERSION}"
+    if platform_name == "Windows":
+        executable += ".exe"
+    match = next((entry for entry in entries if entry.get("path") == executable), None)
+    if match is None:
+        raise AssertionError(
+            f"pinned RCC is missing from the pre-runtime package inventory: {executable}"
+        )
+    if match.get("kind") != "file":
+        raise AssertionError(f"pre-runtime RCC entry is not a file: {executable}")
+    require_sha256(match.get("content_sha256"), "pre-runtime RCC content_sha256")
+    return match
+
+
 def record_postruntime_tree_observation(
     receipt: dict[str, object],
     *,
@@ -545,6 +565,7 @@ def packaged_runtime_identity() -> (
     )
     source_paths = (
         "go-wrapper/main.go",
+        "go-wrapper/process.go",
         "go-wrapper/go.mod",
         "go-wrapper/go.sum",
     )
@@ -1068,6 +1089,39 @@ def test_runtime_rcc_download_is_measured_separately_from_immutable_tree(
     assert result["runtime_generated_state"] == observed
 
 
+@pytest.mark.parametrize(
+    ("platform_name", "suffix"), [("Linux", ""), ("Windows", ".exe")]
+)
+def test_native_runtime_requires_pinned_rcc_in_pre_runtime_inventory(
+    platform_name: str, suffix: str
+) -> None:
+    executable = f"_internal/actions/server/bin/rcc-18.19.3{suffix}"
+    entry: PackageTreeEntry = {
+        "path": executable,
+        "kind": "file",
+        "mode": 493,
+        "link_target": None,
+        "content_sha256": "c" * 64,
+    }
+
+    assert require_bundled_rcc_baseline([entry], platform_name=platform_name) == entry
+    with pytest.raises(AssertionError, match="pre-runtime package inventory"):
+        require_bundled_rcc_baseline([], platform_name=platform_name)
+
+
+def test_native_runtime_rejects_invalid_pinned_rcc_baseline_entry() -> None:
+    entry: PackageTreeEntry = {
+        "path": "_internal/actions/server/bin/rcc-18.19.3.exe",
+        "kind": "directory",
+        "mode": 493,
+        "link_target": None,
+        "content_sha256": None,
+    }
+
+    with pytest.raises(AssertionError, match="not a file"):
+        require_bundled_rcc_baseline([entry], platform_name="Windows")
+
+
 def test_runtime_tree_delta_rejects_mutation_of_an_immutable_build_entry() -> None:
     baseline: list[PackageTreeEntry] = [
         {
@@ -1254,6 +1308,7 @@ def test_bounded_observation_reaps_only_the_owned_runtime_process() -> None:
 
 
 @pytest.mark.integration_test
+@pytest.mark.native_artifact_test
 def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -1424,6 +1479,24 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 "extracted_files_sha256": extracted_files_sha,
                 "pre_runtime_tree_sha256": runtime_baseline_tree_sha,
             }
+        assert runtime_baseline_entries is not None
+        try:
+            bundled_rcc = require_bundled_rcc_baseline(
+                runtime_baseline_entries, platform_name=platform.system()
+            )
+        except AssertionError as error:
+            receipt["bundled_rcc_baseline"] = {
+                "status": "FAIL",
+                "failure": str(error),
+                "runtime_artifact_isolation": runtime_baseline_kind,
+            }
+            raise
+        receipt["bundled_rcc_baseline"] = {
+            "status": "PASS",
+            "path": bundled_rcc["path"],
+            "sha256": bundled_rcc["content_sha256"],
+            "runtime_artifact_isolation": runtime_baseline_kind,
+        }
         process = start_native_runtime(datadir, project, runtime_home, api_key)
         origin = f"http://{process.host}:{process.port}"
         normal = run_browser_stage(

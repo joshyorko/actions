@@ -334,15 +334,17 @@ def prepare_runtime(
     environment: Path,
     rcc_location: Path,
     *,
+    environment_identity: Path | None = None,
     source_generation: str = "unknown",
     provider: str | None = None,
     previous_descriptor: RccRuntimeDescriptor | None = None,
     runner: Runner = _subprocess_runner,
 ) -> RccRuntimeDescriptor:
     environment = environment.resolve()
+    cache_identity = (environment_identity or environment).resolve()
     provider = _validate_provider_reference(provider)
     environment_fingerprint = environment_spec_fingerprint(environment)
-    cache_key = (environment, environment_fingerprint, provider)
+    cache_key = (cache_identity, environment_fingerprint, provider)
     source_hash = source_generation
     if source_hash == "unknown":
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()

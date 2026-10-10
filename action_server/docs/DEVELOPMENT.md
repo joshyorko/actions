@@ -36,7 +36,7 @@
   typecheck              Type check code
 ```
 
-- To run `inv test`: you need to set `ACTION_SERVER_TEST_ACCESS_CREDENTIALS` which is an access credential to `ci.robocloud.dev`
+- The `cloud list-organizations` CLI regression uses a deterministic HTTP-client response and synthetic credentials. It does not require a hosted Control Room account; use real credentials only when manually exercising a configured Control Room.
 - To run individual tests: `python -m pytest tests/action_server_tests/mcp/test_mcp_integration.py::test_mcp_integration_with_actions_in_no_conda_mcp -v`
 
 ## Release process

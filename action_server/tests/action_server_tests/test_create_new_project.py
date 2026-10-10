@@ -21,8 +21,8 @@ def test_create_new_project_uses_embedded_template(tmpdir) -> None:
 
 
 def test_create_mcp_v2_showcase_from_embedded_bundle(tmp_path, monkeypatch) -> None:
-    from actions.server._new_project import handle_new_project
     from actions.server import _new_project_helpers as helpers
+    from actions.server._new_project import handle_new_project
 
     templates_path = tmp_path / "action-templates"
     project_path = tmp_path / "mcp-showcase"

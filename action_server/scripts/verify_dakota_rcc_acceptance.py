@@ -17,8 +17,8 @@ import sys
 import tempfile
 import threading
 import time
-from urllib.parse import urlsplit
 from pathlib import Path
+from urllib.parse import urlsplit
 
 RCC_VERSION = "v18.19.3"
 RCC_SHA256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
@@ -1849,16 +1849,22 @@ def require_supported_platform() -> None:
         raise RuntimeError("Dakota RCC acceptance cleanup is verified on Linux only")
 
 
-def main(argv: list[str] | None = None) -> int:
-    if argv is None:
-        argv = sys.argv[1:]
-    if argv == ["--_supervisor"]:
-        return _supervisor_main()
+def _cli_platform_is_supported() -> bool:
     try:
         require_supported_platform()
     except RuntimeError as exc:
         print(str(exc), file=sys.stderr)
-        return 2
+        return False
+    return True
+
+
+def main(argv: list[str] | None = None) -> int:
+    if argv is None:
+        argv = sys.argv[1:]
+    if argv == ["--_supervisor"]:
+        if not _cli_platform_is_supported():
+            return 2
+        return _supervisor_main()
     args = _parser().parse_args(argv)
     if args.mode != "candidate-wheel":
         raise AssertionError("unreachable unsupported mode")
@@ -1869,6 +1875,8 @@ def main(argv: list[str] | None = None) -> int:
             file=sys.stderr,
         )
         return 1
+    if not _cli_platform_is_supported():
+        return 2
     if not args._worker:
         try:
             source_env = dict(os.environ)

@@ -453,6 +453,7 @@ git merge-base --is-ancestor \"$GITHUB_SHA\" origin/community
     def build_action_server_binary(self):
         return {
             "name": "Build binary",
+            "shell": "bash",
             "env": {
                 "RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC": "true",
                 "RC_ACTION_SERVER_DO_SELFTEST": "true",
@@ -585,8 +586,6 @@ class BaseTests(BaseWorkflow):
                 "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
                 "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
                 "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
-                "ACTION_SERVER_TEST_ACCESS_CREDENTIALS": "${{ secrets.ACTION_SERVER_TEST_ACCESS_CREDENTIALS }}",
-                "ACTION_SERVER_TEST_HOSTNAME": "${{ secrets.ACTION_SERVER_TEST_HOSTNAME }}",
             },
             "run": f"{run_in_env}inv test",
         }
@@ -633,8 +632,24 @@ class ActionServerTests(BaseTests):
     require_build_oauth2_config = True
 
     @override
+    def on_part(self, dep_paths):
+        parts = super().on_part(dep_paths)
+        parts["on"]["pull_request"]["branches"] = [
+            "master",
+            "community",
+            "integration/**",
+        ]
+        return parts
+
+    @override
     def run_tests(self):
         return [
+            {
+                "name": "Test Go wrapper child lifecycle",
+                "working-directory": "action_server/go-wrapper",
+                "env": {"GOTOOLCHAIN": "local", "GOPROXY": "off"},
+                "run": "go test process.go process_test.go",
+            },
             # As we want to run the tests in the binary, we do the following:
             # 1. Build the binary
             # 2. Run the unit-tests (not integration) in the current environment
@@ -649,10 +664,13 @@ class ActionServerTests(BaseTests):
                     "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
                     "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
                     "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
-                    "ACTION_SERVER_TEST_ACCESS_CREDENTIALS": "${{ secrets.ACTION_SERVER_TEST_ACCESS_CREDENTIALS }}",
-                    "ACTION_SERVER_TEST_HOSTNAME": "${{ secrets.ACTION_SERVER_TEST_HOSTNAME }}",
                 },
                 "run": f"{run_in_env}poetry run inv test-not-integration",
+            },
+            {
+                "name": "Install Playwright Chromium for Runtime browser acceptance",
+                "working-directory": "action_server/frontend",
+                "run": "npx playwright install chromium",
             },
             {
                 "name": "Test (integration)",
@@ -660,8 +678,6 @@ class ActionServerTests(BaseTests):
                     "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
                     "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
                     "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
-                    "ACTION_SERVER_TEST_ACCESS_CREDENTIALS": "${{ secrets.ACTION_SERVER_TEST_ACCESS_CREDENTIALS }}",
-                    "ACTION_SERVER_TEST_HOSTNAME": "${{ secrets.ACTION_SERVER_TEST_HOSTNAME }}",
                 },
                 "run": f"{run_in_env}poetry run inv test-binary --jobs 0",
             },

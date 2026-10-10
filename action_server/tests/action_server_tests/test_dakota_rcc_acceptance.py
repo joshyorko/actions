@@ -68,6 +68,34 @@ def test_cli_rejects_existing_receipt_before_creating_supervisor_state(tmp_path)
     assert not (tmp_path / "cli-supervisor").exists()
 
 
+def test_cli_help_is_available_before_linux_execution_guard(monkeypatch, capsys):
+    harness = _harness()
+    monkeypatch.setattr(harness.sys, "platform", "darwin")
+
+    with pytest.raises(SystemExit) as exit_info:
+        harness.main(["--help"])
+
+    assert exit_info.value.code == 0
+    assert "candidate-wheel" in capsys.readouterr().out
+
+
+def test_cli_refuses_existing_receipt_before_linux_execution_guard(
+    tmp_path, monkeypatch, capsys
+):
+    harness = _harness()
+    monkeypatch.setattr(harness.sys, "platform", "darwin")
+    receipt_path = tmp_path / "previous-pass.json"
+    original = b'{"acceptance_status":"PASS","source_sha":"historical"}\n'
+    receipt_path.write_bytes(original)
+
+    result = harness.main(["--receipt", str(receipt_path)])
+
+    assert result == 1
+    assert "existing acceptance receipt" in capsys.readouterr().err
+    assert receipt_path.read_bytes() == original
+    assert not (tmp_path / "cli-supervisor").exists()
+
+
 def test_historical_candidate_receipt_keeps_failed_wrapper_cell():
     receipt = json.loads(HISTORICAL_RECEIPT.read_text(encoding="utf-8"))
 
@@ -288,7 +316,7 @@ def test_candidate_poetry_resolves_pinned_executable_under_rcc_home(
     )
 
 
-def test_evidence_is_retained_outside_run_temp_with_private_mode(tmp_path):
+def test_evidence_is_retained_outside_run_temp(tmp_path):
     harness = _harness()
     temp_root = tmp_path / "disposable"
     temp_root.mkdir()
@@ -298,11 +326,29 @@ def test_evidence_is_retained_outside_run_temp_with_private_mode(tmp_path):
     harness.write_evidence(receipt, evidence, temp_root=temp_root)
 
     assert json.loads(receipt.read_text(encoding="utf-8")) == evidence
-    assert receipt.stat().st_mode & 0o777 == 0o600
     with pytest.raises(FileExistsError):
         harness.write_evidence(receipt, evidence, temp_root=temp_root)
     with pytest.raises(ValueError, match="outside"):
         harness.write_evidence(temp_root / "inside.json", evidence, temp_root=temp_root)
+
+
+@pytest.mark.skipif(
+    os.name == "nt",
+    reason="POSIX permission bits do not establish Windows ACL isolation",
+)
+def test_evidence_receipt_uses_private_posix_mode(tmp_path):
+    harness = _harness()
+    temp_root = tmp_path / "disposable"
+    temp_root.mkdir()
+    receipt = tmp_path / "evidence.json"
+
+    harness.write_evidence(
+        receipt,
+        {"source_sha": "a" * 40, "candidate_wheel_sha256": "b" * 64},
+        temp_root=temp_root,
+    )
+
+    assert receipt.stat().st_mode & 0o777 == 0o600
 
 
 def test_failed_rcc_wrapper_exit_keeps_overall_acceptance_failed():
@@ -452,6 +498,10 @@ def test_supervisor_process_enumeration_errors_fail_closed(monkeypatch):
         harness._supervisor_children(psutil)
 
 
+@pytest.mark.skipif(
+    not hasattr(os, "fchmod"),
+    reason="Supervisor cleanup receipt permission update requires POSIX fchmod",
+)
 def test_supervisor_cleanup_failure_demotes_existing_receipt(tmp_path):
     harness = _harness()
     receipt = tmp_path / "receipt.json"
@@ -479,6 +529,7 @@ def test_supervisor_cleanup_failure_demotes_existing_receipt(tmp_path):
     }
 
 
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux process-supervisor contract")
 def test_owned_linux_process_accepts_path_arguments(tmp_path):
     harness = _harness()
     result = harness.run_owned_process(
@@ -505,6 +556,19 @@ def test_acceptance_fails_closed_before_side_effects_on_non_linux(monkeypatch):
     assert harness.main(["--receipt", "/tmp/unused-dakota-receipt.json"]) == 2
 
 
+def test_hidden_supervisor_fails_closed_on_non_linux(monkeypatch):
+    harness = _harness()
+    monkeypatch.setattr(harness.sys, "platform", "darwin")
+    monkeypatch.setattr(
+        harness,
+        "_supervisor_main",
+        lambda: pytest.fail("unsupported platform reached the process supervisor"),
+    )
+
+    assert harness.main(["--_supervisor"]) == 2
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux process-group cleanup proof")
 def test_total_timeout_terminates_owned_descendant_processes(tmp_path):
     harness = _harness()
     pid_file = tmp_path / "child.pid"

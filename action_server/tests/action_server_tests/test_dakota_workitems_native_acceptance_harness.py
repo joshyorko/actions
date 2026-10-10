@@ -37,6 +37,64 @@ NATIVE_TEST_SPEC = importlib.util.spec_from_file_location(
 assert NATIVE_TEST_SPEC is not None and NATIVE_TEST_SPEC.loader is not None
 NATIVE_TEST = importlib.util.module_from_spec(NATIVE_TEST_SPEC)
 NATIVE_TEST_SPEC.loader.exec_module(NATIVE_TEST)
+UI_TEST_PATH = Path(__file__).with_name("test_dakota_workitems_native_ui_acceptance.py")
+
+
+def _collect_nodeids(test_path: Path, *, marker: str | None = None):
+    command = [
+        sys.executable,
+        "-m",
+        "pytest",
+        "--collect-only",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+    ]
+    if marker is not None:
+        command.extend(["-m", marker])
+    command.append(str(test_path))
+    environment = os.environ.copy()
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    return subprocess.run(
+        command,
+        cwd=NATIVE_TEST_PATH.parents[1],
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+
+
+def test_native_artifact_cases_are_selected_only_by_their_exact_artifact_gate():
+    generic_marker = "integration_test and not native_artifact_test"
+    generic_consumer = _collect_nodeids(NATIVE_TEST_PATH, marker=generic_marker)
+    assert generic_consumer.returncode == 5, (
+        generic_consumer.stdout + generic_consumer.stderr
+    )
+    assert "test_packaged_runtime_executes_work_item_consumer_lifecycle" not in (
+        generic_consumer.stdout + generic_consumer.stderr
+    )
+
+    dedicated_consumer = _collect_nodeids(NATIVE_TEST_PATH, marker="integration_test")
+    assert dedicated_consumer.returncode == 0, (
+        dedicated_consumer.stdout + dedicated_consumer.stderr
+    )
+    for suffix in RUNNER.CASE_SUFFIX.values():
+        assert suffix in dedicated_consumer.stdout
+
+    generic_ui = _collect_nodeids(UI_TEST_PATH, marker=generic_marker)
+    assert generic_ui.returncode == 5, generic_ui.stdout + generic_ui.stderr
+    assert (
+        "test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery"
+        not in (generic_ui.stdout + generic_ui.stderr)
+    )
+
+    dedicated_ui = _collect_nodeids(UI_TEST_PATH)
+    assert dedicated_ui.returncode == 0, dedicated_ui.stdout + dedicated_ui.stderr
+    assert (
+        "test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery"
+        in (dedicated_ui.stdout)
+    )
 
 
 def reports_for(
@@ -259,16 +317,20 @@ def test_native_package_yaml_replaces_core_with_measured_wheel_after_rcc_install
     assert handler.get_pythonpath_entries() == (".",)
     post_install = contents["post-install"]
     assert len(post_install) == 1
-    assert shlex.split(post_install[0]) == [
+    expected_install_args = [
         "python",
         "-m",
         "pip",
         "install",
         "--force-reinstall",
         "--report",
-        str(report.resolve()),
-        str(wheel.resolve()),
+        report.resolve().as_posix(),
+        wheel.resolve().as_posix(),
     ]
+    if os.name == "nt":
+        assert post_install[0] == subprocess.list2cmdline(expected_install_args)
+    else:
+        assert shlex.split(post_install[0]) == expected_install_args
 
 
 def test_consumer_resolves_candidate_wheel_file_url_on_native_platform(tmp_path: Path):
@@ -289,8 +351,9 @@ def test_build_manifest_binds_source_platform_paths_and_measured_bytes(
     tmp_path: Path, monkeypatch
 ):
     package = tmp_path / "action_server"
-    frozen = package / "dist" / "action-server" / "action-server"
-    wrapper = package / "dist" / "final" / "action-server"
+    suffix = ".exe" if RUNNER.platform.system() == "Windows" else ""
+    frozen = package / "dist" / "action-server" / f"action-server{suffix}"
+    wrapper = package / "dist" / "final" / f"action-server{suffix}"
     frozen.parent.mkdir(parents=True)
     wrapper.parent.mkdir(parents=True)
     frozen.write_bytes(b"frozen bytes")
@@ -333,8 +396,9 @@ def test_build_manifest_binds_source_platform_paths_and_measured_bytes(
 )
 def test_build_manifest_rejects_unbound_claims(tmp_path, mutation, failure):
     package = tmp_path / "action_server"
-    frozen = package / "dist" / "action-server" / "action-server"
-    wrapper = package / "dist" / "final" / "action-server"
+    suffix = ".exe" if RUNNER.platform.system() == "Windows" else ""
+    frozen = package / "dist" / "action-server" / f"action-server{suffix}"
+    wrapper = package / "dist" / "final" / f"action-server{suffix}"
     frozen.parent.mkdir(parents=True)
     wrapper.parent.mkdir(parents=True)
     frozen.write_bytes(b"frozen bytes")

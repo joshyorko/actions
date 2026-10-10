@@ -1,0 +1,311 @@
+{
+  "observed_at_utc": "2026-10-10T03:05:30Z",
+  "repository": "joshyorko/actions",
+  "source_revision": "governance worktree HEAD a8b05ef71bae853d9f6f0cda210ed7fe3fe981c6 before this amendment",
+  "cohort": {
+    "items": 28,
+    "target_integrated": 18,
+    "open_blocked": 10,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      274,
+      275
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      276,
+      277,
+      278
+    ],
+    "source": "Current PR metadata API read at 2026-10-10T03:05:30Z; target-only integration is distinct from whole-issue acceptance."
+  },
+  "refs": {
+    "community": {
+      "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+    },
+    "integration": {
+      "head": "d54687003b865bf2ea520d7cacf54e4badbbf8cf",
+      "tree": "e10b0c54d26d00b7b51c27b115327530da0edc61"
+    },
+    "runtime_candidate": {
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    },
+    "source": "Fresh git ls-remote; integration tree read from local commit object, branch head verified remotely."
+  },
+  "pr274_integration": {
+    "state": "merged",
+    "merged_at_utc": "2026-10-10T03:03:06Z",
+    "source_head": "def1a6bd07822ef8f45db45cd4e4eaa7fa628989",
+    "tested_synthetic_merge": "325ea5c6d258289c0b66332276b4cb125c76aee4",
+    "merge_sha": "d54687003b865bf2ea520d7cacf54e4badbbf8cf",
+    "tree": "e10b0c54d26d00b7b51c27b115327530da0edc61",
+    "scope": "Bounded packaged Work Items harness typing checkpoint; no whole #208 acceptance."
+  },
+  "pr273_candidate": {
+    "state": "open_draft",
+    "head": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+    "tree": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+    "pr_base_at_run": "46a06485f776265e64e84629c468f26b4389d2bd",
+    "tested_merge": "c5c003a2d3d9dc9006be7221c61d8c25d3530201",
+    "tested_merge_parents": [
+      "46a06485f776265e64e84629c468f26b4389d2bd",
+      "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c"
+    ],
+    "tested_tree": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+    "synthetic_tree_on_current_integration": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+    "current_synthetic_tree_equals_tested_tree": true,
+    "tree_method": "Local git merge-tree --write-tree integration/d546 + head/7b7; tested merge c5 tree read from commit object.",
+    "github_mergeable_at_api_read": false,
+    "status": "BLOCKED",
+    "runtime_run": {
+      "run_id": 38017606117,
+      "ubuntu_job": 114111272613,
+      "ubuntu": {
+        "portable_passed": 817,
+        "portable_skipped": 11,
+        "integration_passed": 118,
+        "integration_failed": 1,
+        "integration_skipped": 15,
+        "failure": "Missing ACTION_SERVER_TEST_ACCESS_CREDENTIALS for the legacy credentialed test."
+      },
+      "macos_job": 114111272435,
+      "macos": {
+        "portable_passed": 813,
+        "portable_skipped": 15,
+        "integration_passed": 118,
+        "integration_failed": 1,
+        "integration_skipped": 15,
+        "failure": "Missing ACTION_SERVER_TEST_ACCESS_CREDENTIALS for the legacy credentialed test."
+      },
+      "windows_job": 114111272483,
+      "windows": {
+        "portable_passed": 806,
+        "portable_skipped": 22,
+        "portable_warnings": 14,
+        "integration_passed": 112,
+        "integration_failed": 6,
+        "integration_skipped": 16,
+        "integration_deselected": 831,
+        "duration_seconds": 800.17,
+        "failures": [
+          "Missing ACTION_SERVER_TEST_ACCESS_CREDENTIALS for the legacy credentialed test.",
+          "Four frontend build tests could not resolve npm.cmd (WinError 2).",
+          "Credential-log test decoded UTF-8 output with the Windows cp1252 default."
+        ]
+      },
+      "ownership": "Root owns combined candidate; Cloud TLS lane owns the five Windows npm/UTF-8 failures. Missing legacy credential remains external/NOT_RUN; it was not bypassed.",
+      "other_runtime_gates": {
+        "go_wrapper_lifecycle": "PASS on POSIX jobs; Windows POSIX signal case is platform-inapplicable.",
+        "five_openapi_goldens": "PASS on all three OS",
+        "mypy": "304 PASS on all three OS",
+        "lint_and_docs": "PASS on all three OS"
+      }
+    },
+    "native_workflow": {
+      "run_id": 38017606102,
+      "status": "PASS on Linux, Windows and macOS",
+      "artifact_independent_review": "BLOCKED; see native_artifact_review"
+    },
+    "rcc_toolkit": {
+      "run_id": 38017606134,
+      "status": "PASS; all six primary/N-1 jobs"
+    },
+    "coverage": {
+      "run_id": 38017606169,
+      "status": "PASS"
+    },
+    "wheel_validation": {
+      "run_id": 38017606205,
+      "status": "PASS; all build, test and verify steps passed; publish step SKIPPED"
+    },
+    "work_items": {
+      "run_id": 38017606147,
+      "verify": "PASS",
+      "publish": "SKIPPED"
+    },
+    "overall": "No combined PR273 gate pass: Runtime suite is failing and independent artifact review is blocked. Runtime/native 1.0.3 remains unpublished."
+  },
+  "native_artifact_review": {
+    "status": "BLOCKED",
+    "reviewer": "Existing Devsy native-review lane; final receipt reported by root heartbeat; full JSON transfer pending.",
+    "reported_receipt_path": "/workspaces/actions-worker-state/devsy-native-review/7b-3os-artifact-provenance-review.json",
+    "reported_receipt_sha256": "07f382814ad8a2b78959091b8ec6bd5a7868b10cf5f989ac1f8cd775490aa5ea",
+    "cloud_remeasured": false,
+    "findings_reported": [
+      "Five post-manifest bytecode members on each OS.",
+      "Windows provenance archive includes a downloaded RCC executable absent from manifest.",
+      "macOS archive omits hidden dylibs and dereferences symlinks.",
+      "Package-tree inventory is missing from each provenance archive.",
+      "Windows wrapper source hash reflects CRLF checkout bytes and differs from LF Git blob bytes; Cloud independently reproduced LF/CRLF aggregate difference."
+    ],
+    "root_local_fix": {
+      "head": "f1d8417581a3d5e84491eb7dd4d6b435b1068e2c",
+      "tree": "c4896b9fb80d508cdcb79746d461cea931a5625a",
+      "status": "unpublished/unpushed candidate; order correction alone is incomplete and the existing Cloud graph lane is extending archive fidelity."
+    },
+    "limits": "Workflow build PASS does not establish archive fidelity. Do not call the reported review SHA Cloud-verified; do not claim final artifact provenance admission."
+  },
+  "rcc_natural_cleanup": {
+    "status": "BLOCKED",
+    "candidate_head_reported": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+    "candidate_tree_reported": "f139ebb38c943647c5e7c0bd6786b5d7c9385465",
+    "tests_reported": {
+      "passed": 70,
+      "opt_in_skipped": 2
+    },
+    "real_probe": {
+      "shutdown_http_status": 200,
+      "natural_exit_code": -11,
+      "forced_stop_used": false,
+      "result": "FAIL"
+    },
+    "reported_log_sha256": "4ec946dfadd6327d055dc32bc7478e0b81b1474b657d441de95700de2fc30b8b",
+    "reported_receipt_sha256": "e79c93956477f95908eb0bd0efdd04339fd6afaa2178414cb2d57a1df1604813",
+    "source": "Original Devsy RCC completion reported through heartbeat; full JSON transfer/re-readback is pending. Hashes are reported, not Cloud-remeasured.",
+    "upstream_disposition": "none; local Actions Runtime lifecycle; no upstream RCC defect established."
+  },
+  "issue_invariants": {
+    "issue_objects": 54,
+    "issue_array_canonical_json_sha256": "3629102800b720555de322bf3649fcbcb4991d3695f02b909caa9e205bed6f60",
+    "whole_issue_acceptance_changed": false,
+    "issue_stage_counts": {
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
+    },
+    "completed_issue_ids": [
+      210
+    ],
+    "archive_count": 16,
+    "all_previous_archive_hashes_unchanged": true,
+    "archives": {
+      "canvas-execution-graph-amendment-20261009-v2.zip": {
+        "bytes": 6855,
+        "sha256": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf"
+      },
+      "canvas-execution-graph-amendment-20261009-v3.zip": {
+        "bytes": 7286,
+        "sha256": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281"
+      },
+      "canvas-execution-graph-amendment-20261009-v4.zip": {
+        "bytes": 7262,
+        "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3"
+      },
+      "canvas-execution-graph-amendment-20261009.zip": {
+        "bytes": 6683,
+        "sha256": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7"
+      },
+      "community-20261008.zip": {
+        "bytes": 456808,
+        "sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705"
+      },
+      "community-20261009-acceleration.zip": {
+        "bytes": 112671,
+        "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
+      },
+      "community-20261009-checkpoint.zip": {
+        "bytes": 87365,
+        "sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c"
+      },
+      "community-20261009-cloud-admission.zip": {
+        "bytes": 69121,
+        "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0"
+      },
+      "community-20261009-convergence.zip": {
+        "bytes": 165902,
+        "sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237"
+      },
+      "community-20261009-fanout.zip": {
+        "bytes": 117686,
+        "sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e"
+      },
+      "community-20261009-final-checkpoint.zip": {
+        "bytes": 129162,
+        "sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4"
+      },
+      "community-20261009-resume.zip": {
+        "bytes": 123440,
+        "sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541"
+      },
+      "community-20261009-update.zip": {
+        "bytes": 36121,
+        "sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4"
+      },
+      "community-20261009-update2.zip": {
+        "bytes": 35524,
+        "sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31"
+      },
+      "community-20261009-update3.zip": {
+        "bytes": 71453,
+        "sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842"
+      },
+      "http-helper-1.0.3-verified-dist.zip": {
+        "bytes": 30034,
+        "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+      }
+    }
+  },
+  "release_state": {
+    "core_1_0_2": "Published and verified; exact artifact receipt remains in docs/program/evidence/core-1.0.2-pypi-verification-20261009.json.",
+    "http_helper_1_0_3": "Published and verified.",
+    "runtime_native_1_0_3": "Held and unpublished; wheel-validation publish step was skipped."
+  },
+  "documentation_delta": {
+    "repository_operations": "Correct stale candidate wording: Core 1.0.2 is published and its verified exact wheel is the supported floor for ActionContext/actions.server_integration; source-only MCP meta= API remains outside it and requires a separately versioned Core release. Add a direct registry receipt link.",
+    "stacked_pr_admission": "Document full merge-base diff review and synthetic merge-tree equality after target advances; only identical tested trees carry their prior checks to a refreshed base. PR274 merge did not change the effective PR273 synthetic tree (9bc3...), but PR273 remains blocked by failing Runtime cells and archive fidelity.",
+    "artifact_fidelity": "Add durable guidance that a provenance manifest and green workflow do not prove the uploaded archive equals the complete built filesystem tree: independently enumerate and hash all entries (including hidden files, symlinks, modes and downloaded runtime binaries) and compare to the declared inventory. For source hashes on Windows, measure the actual checkout bytes used by the build; LF Git blob bytes can differ from CRLF checkout bytes.",
+    "evidence": "Root-reported artifact review and exact root convergence receipt; independent receipt content is not yet transferred to Cloud."
+  },
+  "upstream_disposition": "none; these are Actions CI/artifact/lifecycle issues, with no verified upstream finding.",
+  "limits": [
+    "Current 10 open PRs are recorded by the live PR API audit; their open/draft/mergeable fields do not represent full issue acceptance.",
+    "PR273 is based on old integration 46a; its current synthetic tree equals the tested tree, but GitHub reports mergeable false and normal admission remains pending.",
+    "Native workflow pass is distinct from independent archive verification, which is blocked.",
+    "RCC natural cleanup failed despite HTTP shutdown 200; no forced stop was used and no cleanup PASS is claimed.",
+    "54 whole issue records and stage accounting remain unchanged; only #210 is complete.",
+    "No Runtime/native publication, community admission, or issue closure follows from these bounded results."
+  ],
+  "receipt_sources": {
+    "root_checkpoint": {
+      "path": "evidence/convergence-root-receipt-20261010T0304Z.json",
+      "sha256": "9d6e96e382bb2b35273d9d78a407578c52cffeea75d0eb3e2a64092a100ffbde"
+    },
+    "open_pr_api_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0305Z.json",
+      "sha256": "8c28c612684ce8afb2eb9530dfbc236407384980beaf9642fa056aa54fa0cee6"
+    },
+    "tested_merge_readback": {
+      "tested_merge": "c5c003a2d3d9dc9006be7221c61d8c25d3530201",
+      "tested_tree": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+      "current_synthetic_tree": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+      "receipt_method": "Git commit/tree read plus local merge-tree."
+    }
+  }
+}

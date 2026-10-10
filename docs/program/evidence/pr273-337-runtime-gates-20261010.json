@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-10T02:28:08Z",
+  "repository": "joshyorko/actions",
+  "pull_request": 273,
+  "candidate_sha": "337e6fded1241f75526d88534bf15aa8c80c7ce6",
+  "tested_merge_sha": "e0fcfb5b97ebda01e921b2fbc23d8c872f3be7c9",
+  "base_sha": "46a06485f776265e64e84629c468f26b4389d2bd",
+  "candidate_and_tested_tree_oid": "f95d2d0f46295eaea28da41704850f316b0a114d",
+  "runtime_run": 38016137616,
+  "status": "FAIL",
+  "jobs": [
+    {
+      "platform": "Linux",
+      "job_id": 114106698335,
+      "failed": 7,
+      "passed": 112,
+      "skipped": 15,
+      "deselected": 831,
+      "remaining": [
+        "five stale OpenAPI snapshots",
+        "Go wrapper SIGTERM leaves exact owned Runtime descendants alive",
+        "missing ACTION_SERVER_TEST_ACCESS_CREDENTIALS"
+      ],
+      "typecheck_source_files": 304
+    },
+    {
+      "platform": "macOS",
+      "job_id": 114106698472,
+      "failed": 7,
+      "passed": 112,
+      "skipped": 15,
+      "deselected": 831,
+      "remaining": [
+        "five stale OpenAPI snapshots",
+        "Go wrapper SIGTERM leaves exact owned Runtime descendants alive",
+        "missing ACTION_SERVER_TEST_ACCESS_CREDENTIALS"
+      ],
+      "typecheck_source_files": 304
+    },
+    {
+      "platform": "Windows",
+      "job_id": 114106698457,
+      "failed": 7,
+      "passed": 799,
+      "skipped": 22,
+      "remaining": [
+        "six Work Items editable URL / native harness portability failures",
+        "TLS fixture Proactor connection-lost callback reset and shutdown timeout"
+      ]
+    }
+  ],
+  "other_runs": [
+    {
+      "id": 38016137642,
+      "scope": "three-platform native build and packaged acceptance",
+      "status": "PASS"
+    },
+    {
+      "id": 38016137639,
+      "scope": "RCC developer toolkit",
+      "status": "PASS"
+    },
+    {
+      "id": 38016137632,
+      "scope": "measured Python coverage",
+      "status": "PASS"
+    },
+    {
+      "id": 38016137686,
+      "scope": "Runtime wheel validation (no publication)",
+      "status": "PASS"
+    },
+    {
+      "id": 38016137636,
+      "scope": "Work Items verification (no publication)",
+      "status": "PASS"
+    },
+    {
+      "id": 38016137661,
+      "scope": "AI audit evidence",
+      "status": "PASS"
+    }
+  ],
+  "disposition": "Historical exact-source result. Subsequent fixes require fresh hosted validation. No release or owning-issue acceptance."
+}

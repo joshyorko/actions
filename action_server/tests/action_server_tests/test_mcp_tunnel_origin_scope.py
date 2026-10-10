@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import socket
+import threading
 
 import pytest
 
@@ -258,45 +259,107 @@ async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
 
     monkeypatch.setenv("NO_PROXY", "*")
     monkeypatch.setenv("no_proxy", "*")
-    async with mcp_app.router.lifespan_context(mcp_app):
-        listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        listener.bind(("127.0.0.1", 0))
-        listener.listen(128)
-        port = listener.getsockname()[1]
+    # The HTTPS peer models the external tunnel endpoint. Keep it on its own
+    # selector loop so a rejected handshake reset does not strand a Windows
+    # Proactor server transport; the verifier remains on the native test loop.
+    config = uvicorn.Config(
+        recorder,
+        host="127.0.0.1",
+        port=0,
+        log_level="critical",
+        ssl_certfile=str(certfile),
+        ssl_keyfile=str(keyfile),
+    )
+    server = uvicorn.Server(config)
+    server_started = threading.Event()
+    server_stopped = threading.Event()
+    server_errors: list[BaseException] = []
+    server_callback_errors: list[dict[str, object]] = []
+    server_loop: asyncio.AbstractEventLoop | None = None
+    server_task: asyncio.Task[None] | None = None
+
+    async def serve_loopback_tls_server():
+        nonlocal server_loop, server_task
+        server_loop = asyncio.get_running_loop()
+
+        def record_callback_error(
+            loop: asyncio.AbstractEventLoop, context: dict[str, object]
+        ) -> None:
+            server_callback_errors.append(context)
+            loop.default_exception_handler(context)
+
+        server_loop.set_exception_handler(record_callback_error)
+        async with mcp_app.router.lifespan_context(mcp_app):
+            server_task = asyncio.create_task(server.serve())
+            try:
+                for _ in range(500):
+                    if server.started:
+                        server_started.set()
+                        break
+                    if server_task.done():
+                        await server_task
+                    await asyncio.sleep(0.01)
+                assert server.started, "loopback TLS server did not start"
+                await server_task
+            finally:
+                server.should_exit = True
+                if not server_task.done():
+                    await asyncio.wait_for(server_task, timeout=5)
+
+    def run_loopback_tls_server():
+        try:
+            with asyncio.Runner(loop_factory=asyncio.SelectorEventLoop) as runner:
+                runner.run(serve_loopback_tls_server())
+        except BaseException as exc:
+            server_errors.append(exc)
+        finally:
+            server_stopped.set()
+
+    server_thread = threading.Thread(
+        target=run_loopback_tls_server,
+        name="loopback-tls-server",
+        daemon=True,
+    )
+    server_thread.start()
+
+    def release_origin() -> None:
+        pass
+
+    try:
+        started = await asyncio.to_thread(server_started.wait, 5)
+        assert started, f"loopback TLS server did not start: {server_errors!r}"
+        assert server.servers and server.servers[0].sockets
+        port = server.servers[0].sockets[0].getsockname()[1]
         url = f"https://localhost:{port}"
         release_origin = helper.allow_tunnel_origin(url)
-        config = uvicorn.Config(
-            recorder,
-            log_level="critical",
-            ssl_certfile=str(certfile),
-            ssl_keyfile=str(keyfile),
-        )
-        server = uvicorn.Server(config)
-        server_task = asyncio.create_task(server.serve(sockets=[listener]))
-        try:
-            for _ in range(500):
-                if server.started:
-                    break
-                if server_task.done():
-                    await server_task
-                await asyncio.sleep(0.01)
-            assert server.started, "loopback TLS server did not start"
 
-            monkeypatch.setenv("SSL_CERT_FILE", str(untrusted_certfile))
-            with pytest.raises(httpx2.ConnectError):
-                await _verify_public_tunnel(url, "synthetic-key", app)
-            assert recorder.paths == []
-
-            monkeypatch.setenv("SSL_CERT_FILE", str(certfile))
+        monkeypatch.setenv("SSL_CERT_FILE", str(untrusted_certfile))
+        with pytest.raises(httpx2.ConnectError):
             await _verify_public_tunnel(url, "synthetic-key", app)
-            assert "/config" in recorder.paths
-            assert "/mcp" in recorder.paths
-            assert tool_calls == []
-        finally:
-            release_origin()
-            server.should_exit = True
-            try:
-                await asyncio.wait_for(server_task, timeout=5)
-            finally:
-                listener.close()
+        assert recorder.paths == []
+
+        monkeypatch.setenv("SSL_CERT_FILE", str(certfile))
+        await _verify_public_tunnel(url, "synthetic-key", app)
+        assert "/config" in recorder.paths
+        assert "/mcp" in recorder.paths
+        assert tool_calls == []
+    finally:
+        release_origin()
+        server.should_exit = True
+        stopped = await asyncio.to_thread(server_stopped.wait, 5)
+        if not stopped:
+            if server_loop is not None and server_task is not None:
+                server_loop.call_soon_threadsafe(server_task.cancel)
+                stopped = await asyncio.to_thread(server_stopped.wait, 1)
+        if not stopped:
+            pytest.fail("loopback TLS server thread did not stop after cancellation")
+        await asyncio.to_thread(server_thread.join, 1)
+        assert (
+            not server_thread.is_alive()
+        ), "loopback TLS server thread is still running"
+        if server_errors:
+            raise AssertionError("loopback TLS server failed") from server_errors[0]
+        if server_callback_errors:
+            raise AssertionError(
+                f"loopback TLS server callback errors: {server_callback_errors!r}"
+            )

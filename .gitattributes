@@ -7,6 +7,18 @@
 *.js text
 *.md text
 
+# Migration source is a byte-level historical contract; preserve LF on every OS.
+action_server/src/actions/server/migrations/*.py text eol=lf
+
 # These archive payloads are checked byte-for-byte against their manifests.
 # Do not apply text checkout conversion to their committed evidence bytes.
 docs/program/evidence/canvas-execution-graph-amendment-20261009-v* -text
+
+# Native provenance hashes these Go inputs as exact source bytes on every OS.
+action_server/go-wrapper/main.go text eol=lf
+action_server/go-wrapper/process.go text eol=lf
+action_server/go-wrapper/go.mod text eol=lf
+action_server/go-wrapper/go.sum text eol=lf
+
+# Package Revision fixtures assert canonical JSON bytes, including LF endings.
+docs/design/fixtures/package-revision-v1/*.json text eol=lf

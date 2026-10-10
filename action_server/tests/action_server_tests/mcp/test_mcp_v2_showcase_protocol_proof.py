@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 from action_server_tests.fixtures import run_async_in_new_thread
+
 from actions.server._selftest import ActionServerProcess
 
 
