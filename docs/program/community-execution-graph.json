@@ -46,7 +46,7 @@
   "current_active_workers": {
     "101": "Root owns integration/governance. Ref readback at 2026-10-09T23:26Z: community d2741a18976f75467355282ad3caa5b99b4c505e; integration 4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f; Runtime candidate 6a53578fac029a0696834c30438c858f5f0003be. Ref observation only; no worker-progress or release-readiness inference.",
     "99": "F owns #99-A pure React renderer/shared fixture; local and remote branch head c971ccec8903535783a61a05cd058abf5de3623a. Six component tests, TypeScript and schema PASS were reported at prior head 842c32d5; current-head validation is not confirmed. Production main/bridge and actual browser remain NOT_RUN.",
-    "100": "E owns #100-A PR263 head948df916ebe8750caebc71cc821bb5b76f16c273; bounded source review ACCEPT, 38 focused + 1 real-process + 2 wheel tests PASS. Broader configured Cloud suites are blocked; full remote gates are assigned. E is implementing #100-B Python roundtrip using F’s shared fixture. PR254 a7eec7 is docs-only and merged to integration; no whole-issue acceptance.",
+    "100": "E owns #100-A PR263 head948df916ebe8750caebc71cc821bb5b76f16c273; bounded source review ACCEPT, 38 focused + 1 real-process + 2 wheel tests PASS. Broader configured Cloud suites are blocked; full remote gates are assigned. E is implementing #100-B Python roundtrip using F\u2019s shared fixture. PR254 a7eec7 is docs-only and merged to integration; no whole-issue acceptance.",
     "126": "A owns PR265 template generator repair on feature/mcp-v2-showcase-template-20261009 at9193989985de15dc6d5fecfd655042957cf9926c. The authored-devdata generator regression is being repaired; PR body reports49 focused+4 template local PASS, clean-wheel NOT_RUN and hosted checks pending. PR262 source-protocol proof is separate and accepted; whole #126 remains open.",
     "134": "Existing remote Sol coordinator and RCC lane own #134 implementation/consumer work; root owns integration/architecture acceptance; F is independent reviewer. Latest coordinator activity report was20:36Z and covered five lane histories, not current activity for every lane. Whole #134 acceptance remains open.",
     "153": "Native auth source recovery/push only: PR264 branch devsy/native-auth-acceptance-20261009 at173ca8e59245581ab1b048fbad42a29c41418cab. Do not infer browser acceptance.",
@@ -546,8 +546,8 @@
       "foundation_pr": null,
       "checkpoint_pr": null,
       "unresolved_open_issue_dependencies": [],
-      "reason": "#100-A PR263 source seam is independently accepted with 38 focused, one real-process and two wheel tests passing; broader configured Cloud suites are blocked and full remote review gates are assigned. E is implementing #100-B Python/JSON roundtrip on F’s shared fixture. PR254 is docs-only and does not complete #100.",
-      "next_bounded_action": "Complete #100-B Python/JSON roundtrip using F’s shared fixture; preserve fixture/schema-only limits and keep Runtime dispatch, Workspace authorization and whole #100 acceptance open.",
+      "reason": "#100-A PR263 source seam is independently accepted with 38 focused, one real-process and two wheel tests passing; broader configured Cloud suites are blocked and full remote review gates are assigned. E is implementing #100-B Python/JSON roundtrip on F\u2019s shared fixture. PR254 is docs-only and does not complete #100.",
+      "next_bounded_action": "Complete #100-B Python/JSON roundtrip using F\u2019s shared fixture; preserve fixture/schema-only limits and keep Runtime dispatch, Workspace authorization and whole #100 acceptance open.",
       "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
       "scoped_dependencies": [
         {
@@ -1126,7 +1126,7 @@
     },
     {
       "issue": 149,
-      "title": "🐝 Hive Advisory Report",
+      "title": "\ud83d\udc1d Hive Advisory Report",
       "retained_state": "NOT_STARTED",
       "classification": "REVIEW",
       "partial_foundation": false,
@@ -2705,20 +2705,24 @@
   "current_program_refs": {
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
-    "integration": "c6b682012ae791e744cb7116600b3869d06c7b4d",
-    "integration_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+    "integration": "46a06485f776265e64e84629c468f26b4389d2bd",
+    "integration_tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9",
     "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
     "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
-    "release_ready": false
+    "release_ready": false,
+    "source": "git ls-remote and local commit-tree readback",
+    "observed_at_utc": "2026-10-10T01:36:00Z",
+    "receipt": "evidence/convergence-refs-20261010T0136Z.txt",
+    "receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033"
   },
   "current_pr_convergence": {
-    "observed_at_utc": "2026-10-10T00:55:27Z",
-    "path": "evidence/convergence-followup-20261010T0056Z.json",
-    "sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa",
+    "observed_at_utc": "2026-10-10T01:35:00Z",
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
     "cohort": {
-      "items": 21,
+      "items": 27,
       "target_integrated": 16,
-      "blocked_open": 5,
+      "open_blocked": 11,
       "merge_ready": 0,
       "target_integrated_prs": [
         219,
@@ -2738,99 +2742,69 @@
         270,
         271
       ],
-      "blocked_open_prs": [
+      "open_prs": [
         215,
         216,
         217,
         218,
-        221
+        221,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277
       ]
     },
     "open_pr_audit": {
-      "path": "evidence/convergence-live-prs-20261010T0056Z.json",
-      "sha256": "e82b66d3c81960f134dbe6d76450519a9db312e96d21da2f5201b7431c0b47f7",
-      "open_count": 5,
-      "all_drafts": true,
+      "path": "evidence/convergence-live-prs-20261010T0135Z.json",
+      "sha256": "56e647f20c93698e901bf641e52826f53d3f3c4052852c4e917caf6387c64107",
+      "open_count": 11,
+      "all_drafts": false,
       "exact_pr_heads": {
         "215": "d07f79b355f976f97948720474fd050d0a32ea16",
         "216": "d26fa423080cec22522402f2193b17a5f32b336a",
         "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
         "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
-        "221": "c6b682012ae791e744cb7116600b3869d06c7b4d"
+        "221": "46a06485f776265e64e84629c468f26b4389d2bd",
+        "272": "2def236adf76f6731c88c29d9d27e5181de6275f",
+        "273": "f30aed327adcf148d69f45c71b742dd89bb6f617",
+        "274": "a0d727eb7831f855e284d005f3048755cbfdc1be",
+        "275": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+        "276": "bd10bb575a7327563892ce29623a5afc327fd82e",
+        "277": "417c9c0222dfd57b2537ef51b8ace50bfac6187b"
       }
     },
     "branch_readback": {
       "community": {
         "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-        "ref": "refs/heads/community",
-        "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+        "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+        "ref": "refs/heads/community"
       },
       "integration": {
-        "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
-        "ref": "refs/heads/integration/community-release-20261008",
-        "tree": "7621ef2050941df416c1b7448859a8d3bb4ee443"
+        "head": "46a06485f776265e64e84629c468f26b4389d2bd",
+        "tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9",
+        "ref": "refs/heads/integration/community-release-20261008"
       },
       "runtime_candidate": {
         "head": "6a53578fac029a0696834c30438c858f5f0003be",
-        "ref": "refs/heads/integration/runtime-release-final-20261009",
-        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
-      },
-      "source": "git ls-remote plus commit tree readback",
-      "receipt": "evidence/convergence-refs-20261010T0056Z.txt",
-      "receipt_sha256": "567ebe38b18bb448e5b43a016a40ef8abce3f5f4e08e700aa33de925fa9a2bdd"
+        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+        "ref": "refs/heads/integration/runtime-release-final-20261009"
+      }
     },
+    "branch_readback_at": "2026-10-10T01:36:00Z",
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0136Z.txt",
+    "branch_readback_receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033",
     "issue_acceptance_changed": false,
     "stage_counts_unchanged": true,
-    "exact_pr221_status": {
-      "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
-      "observed_at_utc": "2026-10-10T00:55:27Z",
-      "checks": {
-        "success": 4,
-        "in_progress": 20,
-        "queued": 4
-      },
-      "checkout_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
-      "admission": "New community-base exact-head checks are running; root owns admission.",
-      "receipt": "evidence/convergence-live-prs-20261010T0056Z.json",
-      "receipt_sha256": "e82b66d3c81960f134dbe6d76450519a9db312e96d21da2f5201b7431c0b47f7"
-    },
-    "pr256_current_status": {
-      "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
-      "merge_sha": "c6b682012ae791e744cb7116600b3869d06c7b4d",
-      "merge_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
-      "tested_synthetic_sha": "54825acf84d1995c3f1c5242e8cf3b670dc122ad",
-      "run_id": 38010164278,
-      "observed_at_utc": "2026-10-10T00:54:25Z",
-      "source_review": "ACCEPT bounded source only",
-      "checks": {
-        "required": 12,
-        "success": 12,
-        "skipped": 1,
-        "publication": "SKIPPED"
-      },
-      "artifact_review": "PASS_BOUNDED for Linux and Windows; macOS UI not configured",
-      "merge_tree_matches_tested_tree": true,
-      "receipt": "evidence/pr256-524-integration-readback-20261010T0054Z.json",
-      "receipt_sha256": "edf9a463ee4e1b90b2ac4273a5568b8f150a0657c4dec564cbee719bd403fa4a",
-      "limits": "No whole #208 acceptance or publication; Cloud direct ZIP retrieval returned403, native review verified Linux/Windows artifact bytes."
-    },
     "release_state": {
       "core": "1.0.2 published and verified",
-      "core_decorator_metadata_api": "Source remains unreleased and requires a separately versioned Core package.",
       "helper": "1.0.3 published and verified",
-      "runtime_native": "1.0.3 held and unpublished"
+      "runtime_native": "1.0.3 held and unpublished",
+      "publication": "No publication performed in this checkpoint."
     },
-    "rcc_status": {
-      "remote_branch": "devsy/rcc-local-acceptance-20261009",
-      "broad_candidate_head": "6a0db09d2623d084ae0de43f7ec7737bd28ea157",
-      "reviewed_candidate": "c8e661a44ade26016725cbfb2b30663d32012059",
-      "status": "Not admitted. Independent source review is BLOCKED on a snapshot-pruning lifetime defect; no live concurrent regression yet. Additional candidate cleanup, immutable receipt binding, and observed server exit remain open.",
-      "review_receipt": "evidence/rcc-c8-independent-snapshot-review-20261010T0048Z.json",
-      "review_receipt_sha256": "2c4fcb6c32dbb1d6f93132f46bce7e1cfe75a07ca29096cb896bb3106345bee5",
-      "upstream_disposition": "none; local Runtime lifecycle wiring"
-    },
-    "upstream_disposition": "none; no upstream defect established",
-    "receipt_sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa"
+    "upstream_disposition": "none",
+    "receipt_sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
   },
   "prior_current_program_refs_20261009T2253Z": {
     "community": "c30f953bae1a322e1d09549607ab42f1badce440",
@@ -2908,19 +2882,20 @@
     "diagnosis_receipt_sha256": "e30adc70a3bfc10b06dbed7eddec2763921dd1f85a3a77df79b779fbeae992c6"
   },
   "current_next_action": {
-    "observed_at_utc": "2026-10-10T00:55:27Z",
-    "path": "evidence/convergence-followup-20261010T0056Z.json",
-    "sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa",
-    "pr": 221,
-    "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+    "observed_at_utc": "2026-10-10T01:35:00Z",
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "pr": 273,
+    "head": "f30aed327adcf148d69f45c71b742dd89bb6f617",
     "status_counts": {
-      "success": 4,
-      "in_progress": 20,
-      "queued": 4
+      "FAILURE": 3,
+      "SUCCESS": 10,
+      "IN_PROGRESS": 2
     },
-    "source_review": "PR256 source review and exact 12 required hosted checks passed on 524e503b; bounded Linux/Windows artifact review PASS_BOUNDED; PR256 merged c6b682 with tested tree equality.",
-    "pending": "PR221 has new community-base hosted checks queued/running after integration changed to c6b682; PR218 remains a separate draft packaged Work Items checkpoint.",
-    "scope": "Target integration is not whole-issue acceptance, Runtime/native publication, or release readiness."
+    "owner": "Root integration",
+    "source_review": "Component PRs274\u2013277 have bounded source reviews accepted; PR273 itself remains at its published head with three failed checks.",
+    "pending": "Push a single composed candidate and run configured combined Runtime/Work Items/native gates on that exact head.",
+    "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
   },
   "prior_current_next_action_20261010T0019Z": {
     "observed_at_utc": "2026-10-10T00:19:23Z",
@@ -3093,5 +3068,150 @@
     "source_review": "ACCEPT bounded to exact head 524e503b; all 12 required hosted checks pass; publication skipped.",
     "pending": "Independent peer review of exact-head native artifacts. GitHub artifact metadata was transcribed, but Cloud byte retrieval returned HTTP 403; reported digests are not locally byte-verified.",
     "scope": "Do not mark merge-ready or infer #208 acceptance until peer review is complete. b676 artifact-admission result remains predecessor-bound."
+  },
+  "prior_current_program_refs_20261010T0056Z": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "integration": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+    "integration_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false
+  },
+  "prior_current_pr_convergence_20261010T0056Z": {
+    "observed_at_utc": "2026-10-10T00:55:27Z",
+    "path": "evidence/convergence-followup-20261010T0056Z.json",
+    "sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa",
+    "cohort": {
+      "items": 21,
+      "target_integrated": 16,
+      "blocked_open": 5,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "blocked_open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0056Z.json",
+      "sha256": "e82b66d3c81960f134dbe6d76450519a9db312e96d21da2f5201b7431c0b47f7",
+      "open_count": 5,
+      "all_drafts": true,
+      "exact_pr_heads": {
+        "215": "d07f79b355f976f97948720474fd050d0a32ea16",
+        "216": "d26fa423080cec22522402f2193b17a5f32b336a",
+        "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+        "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
+        "221": "c6b682012ae791e744cb7116600b3869d06c7b4d"
+      }
+    },
+    "branch_readback": {
+      "community": {
+        "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "ref": "refs/heads/community",
+        "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+      },
+      "integration": {
+        "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+        "ref": "refs/heads/integration/community-release-20261008",
+        "tree": "7621ef2050941df416c1b7448859a8d3bb4ee443"
+      },
+      "runtime_candidate": {
+        "head": "6a53578fac029a0696834c30438c858f5f0003be",
+        "ref": "refs/heads/integration/runtime-release-final-20261009",
+        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+      },
+      "source": "git ls-remote plus commit tree readback",
+      "receipt": "evidence/convergence-refs-20261010T0056Z.txt",
+      "receipt_sha256": "567ebe38b18bb448e5b43a016a40ef8abce3f5f4e08e700aa33de925fa9a2bdd"
+    },
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "exact_pr221_status": {
+      "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+      "observed_at_utc": "2026-10-10T00:55:27Z",
+      "checks": {
+        "success": 4,
+        "in_progress": 20,
+        "queued": 4
+      },
+      "checkout_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+      "admission": "New community-base exact-head checks are running; root owns admission.",
+      "receipt": "evidence/convergence-live-prs-20261010T0056Z.json",
+      "receipt_sha256": "e82b66d3c81960f134dbe6d76450519a9db312e96d21da2f5201b7431c0b47f7"
+    },
+    "pr256_current_status": {
+      "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+      "merge_sha": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+      "merge_tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+      "tested_synthetic_sha": "54825acf84d1995c3f1c5242e8cf3b670dc122ad",
+      "run_id": 38010164278,
+      "observed_at_utc": "2026-10-10T00:54:25Z",
+      "source_review": "ACCEPT bounded source only",
+      "checks": {
+        "required": 12,
+        "success": 12,
+        "skipped": 1,
+        "publication": "SKIPPED"
+      },
+      "artifact_review": "PASS_BOUNDED for Linux and Windows; macOS UI not configured",
+      "merge_tree_matches_tested_tree": true,
+      "receipt": "evidence/pr256-524-integration-readback-20261010T0054Z.json",
+      "receipt_sha256": "edf9a463ee4e1b90b2ac4273a5568b8f150a0657c4dec564cbee719bd403fa4a",
+      "limits": "No whole #208 acceptance or publication; Cloud direct ZIP retrieval returned403, native review verified Linux/Windows artifact bytes."
+    },
+    "release_state": {
+      "core": "1.0.2 published and verified",
+      "core_decorator_metadata_api": "Source remains unreleased and requires a separately versioned Core package.",
+      "helper": "1.0.3 published and verified",
+      "runtime_native": "1.0.3 held and unpublished"
+    },
+    "rcc_status": {
+      "remote_branch": "devsy/rcc-local-acceptance-20261009",
+      "broad_candidate_head": "6a0db09d2623d084ae0de43f7ec7737bd28ea157",
+      "reviewed_candidate": "c8e661a44ade26016725cbfb2b30663d32012059",
+      "status": "Not admitted. Independent source review is BLOCKED on a snapshot-pruning lifetime defect; no live concurrent regression yet. Additional candidate cleanup, immutable receipt binding, and observed server exit remain open.",
+      "review_receipt": "evidence/rcc-c8-independent-snapshot-review-20261010T0048Z.json",
+      "review_receipt_sha256": "2c4fcb6c32dbb1d6f93132f46bce7e1cfe75a07ca29096cb896bb3106345bee5",
+      "upstream_disposition": "none; local Runtime lifecycle wiring"
+    },
+    "upstream_disposition": "none; no upstream defect established",
+    "receipt_sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa"
+  },
+  "prior_current_next_action_20261010T0056Z": {
+    "observed_at_utc": "2026-10-10T00:55:27Z",
+    "path": "evidence/convergence-followup-20261010T0056Z.json",
+    "sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa",
+    "pr": 221,
+    "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+    "status_counts": {
+      "success": 4,
+      "in_progress": 20,
+      "queued": 4
+    },
+    "source_review": "PR256 source review and exact 12 required hosted checks passed on 524e503b; bounded Linux/Windows artifact review PASS_BOUNDED; PR256 merged c6b682 with tested tree equality.",
+    "pending": "PR221 has new community-base hosted checks queued/running after integration changed to c6b682; PR218 remains a separate draft packaged Work Items checkpoint.",
+    "scope": "Target integration is not whole-issue acceptance, Runtime/native publication, or release readiness."
   }
 }
