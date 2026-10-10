@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 from action_server_tests.fixtures import actions_server_run
+
 from actions.server._selftest import ActionServerProcess
 
 

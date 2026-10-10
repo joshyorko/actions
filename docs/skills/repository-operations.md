@@ -1745,6 +1745,13 @@ separate outcomes. An Action may return `PASS` while intentional pool
 termination produces `status: failed`, `exitCode: -1`, and
 `reason: child exited non-zero`. That receipt remains a wrapper lifecycle
 failure even when artifact identity, verification, and lease identity validate.
+For reload/recovery receipts, retain the Action Server `Popen` owner before
+requesting stop and record its bounded observed return code separately from RCC
+wrapper receipts. The Action Server CLI returns 0 after normal server return;
+the reload/recovery gate requires that observed 0 and records any nonzero or
+signal exit as cleanup failure even if Actions passed. A `stop()` return is not
+process-exit evidence, and a captured descendant set only reports that
+observation; it does not prove complete tree reaping.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes
@@ -1799,6 +1806,36 @@ unknown: preparation must acquire it under the current configured policy or
 replace it with a cache descriptor bound to that policy, and direct execution
 fails clearly until that context is established. The unit boundary is covered
 by `test_rcc_runtime_adapter.py`.
+
+For explicit spec-v2 RCC provider mode, Action Server snapshots the package
+source before metadata import. RCC receives the selected snapshot's
+`package.yaml` for environment fingerprinting and publish; the original
+absolute `package.yaml` path is passed separately as `environment_identity` for
+cache reuse. RCC therefore reads the same package configuration paired with the
+selected source snapshot even if the live package changes during publish.
+Relative `pythonpath` entries resolve against the snapshot package root. Snapshot
+identity binds included relative paths, supported permission mode bits, and file
+bytes, and both newly copied and reused destinations are checked. Failed
+snapshot validation also discards only a newly created candidate; a reused
+snapshot is preserved. Failed metadata import discards only a new candidate and
+retains the last-good ActionPackage/source generation. Successful package
+imports retain earlier source generations: the standalone `action-server
+import` path can share a datadir with live workers, so pruning by current
+imported generation alone can invalidate their source paths. Lease-safe source
+generation collection is not implemented. The regression tests
+`test_snapshot_pins_environment_yaml_across_aba_edit`,
+`test_snapshot_prepare_discards_new_mismatched_candidate_only`,
+`test_snapshot_prepare_preserves_reused_snapshot_on_validation_failure`,
+`test_snapshot_environment_input_preserves_original_cache_identity`, and
+`test_snapshot_identity_changes_when_executable_mode_changes` cover the ABA
+boundary, unchanged-environment reuse, relative `pythonpath`, and mode identity.
+The real-RCC failed-reload test separately checks persisted last-good execution
+and recovery; its receipt is revision-specific. These Linux results do not
+establish Windows ACL, frozen, strict-remote, or descendant-cleanup behavior.
+Bind each such receipt to the measured Git commit/tree and the actual imported
+Action Server module origins and file hashes; an environment-provided source
+SHA is only a label. Capture the server's bounded observed return code before
+discarding its process owner, separately from RCC terminal receipts.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.

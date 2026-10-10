@@ -13,20 +13,13 @@ from typing import Any
 import pytest
 from jsonschema import Draft202012Validator
 
-
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
-_FIXTURE_DIRECTORY = (
-    _REPOSITORY_ROOT / "docs" / "contracts" / "canvas" / "fixtures"
-)
+_FIXTURE_DIRECTORY = _REPOSITORY_ROOT / "docs" / "contracts" / "canvas" / "fixtures"
 _SCHEMA = json.loads(
-    (_FIXTURE_DIRECTORY / "query-results-v0.1.schema.json").read_text(
-        encoding="utf-8"
-    )
+    (_FIXTURE_DIRECTORY / "query-results-v0.1.schema.json").read_text(encoding="utf-8")
 )
 _FIXTURE = json.loads(
-    (_FIXTURE_DIRECTORY / "query-results-v0.1.fixture.json").read_text(
-        encoding="utf-8"
-    )
+    (_FIXTURE_DIRECTORY / "query-results-v0.1.fixture.json").read_text(encoding="utf-8")
 )
 _VALIDATOR = Draft202012Validator(_SCHEMA)
 
