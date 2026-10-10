@@ -1,0 +1,34 @@
+{
+  "accepted_doc_delta": "Generated native workflow must leave release_text unset so pinned release action parses the dedicated Runtime changelog. Default H2 lookup requires complete title equal to tag; date suffix does not match. Section ends at next H1/H2, includes H3 and omits selected heading. Generic inv set-version prepares legacy dated H2, not dedicated Runtime section.",
+  "additional_doc_proposal": "Retain the exact custom RCC task configuration and bounded stdout result for release-contract checks; a reported passing count with deleted temporary task/logs is owner-reported validation and cannot be independently hash-read-back. Generated YAML/source review remains separate from actual upstream parser execution and publication acceptance.",
+  "canonical_file": "docs/skills/repository-operations.md",
+  "changed_files_sha256": {
+    ".github/workflows/_gen_workflows.py": "7be6c43b3928c136dfa36b0cb8a2ca82c22963ca4426dfdd95c4a0ba586b4b0f",
+    ".github/workflows/actions_runtime_binary_release.yml": "9afb1ceee5175f9a306ad8406880ff25ce17c6e2753203a39827f1b389c40255",
+    "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md": "cfd64fa3aff92fa53a2231ed3e0517e1798bd9e27c93e801456726af44b09997",
+    "devutils/tests/test_actions_runtime_release_line.py": "78b5a997dd734c57e922295f7b1b54adee9bb34e379f5890e78673b2786171a3",
+    "docs/skills/repository-operations.md": "161870e432f7791ded805becf11eca196f7a7a5875012d8809aba2ac21aaa4e9"
+  },
+  "engineering_base": "73605934c1c948895410a5abaed6c225a396e038",
+  "head": "bad6a44752438216c47ebab7fac520e174f9649a",
+  "limits": "No upstream parser image/binary execution, source test rerun, hosted CI admission, tag, publication or remote mutation by reviewer. No raw local test receipt from owner.",
+  "observations": [
+    "Exactbad6/tree1db860 clean. Five-file cumulative delta removes only release_text from generator/native generated job, adds exact tag H2/nonempty feature body, configured extraction contract and canonical guide; immutable action pin, tag/Core source, release triggers/permissions/assets/publish logic unchanged.",
+    "Final small follow-up fixes default/explicit h2 assertion and preserves Runtime1.0.3 unpublished/no approval/tag/artifacts state under Unreleased. #134/#153 prepublication gates and #211 postpublication handoff remain explicit; selected release section makes no Canvas feature/publication claim.",
+    "Pinned action/submark source behavior independently verified in design receipt503f70ca: no nonempty override enables literal exact H2 lookup; date suffix not supported. Added regression binds generated inputs and exacttag section, including default h2. It is configuration contract evidence, not execution of upstream parser binary.",
+    "Owner reports expected RED at old nonempty release_text, canonical generator exit0 and final focused two-suite97PASS via RCC, locked prepared environment Ruff exit0/diffcheckPASS. Owner retained no stdout logs or temporary RCC task config, so reviewer cannot hash/readback those executions or claim independent test execution. Source review and independent diffcheck remain GO; required exact-head CI is separate."
+  ],
+  "owner_reported_commands": [
+    "source /workspace/actions-cloud/activate.sh && rcc run -r /tmp/actions-runtime-release-note-tests.yaml --dev -t FocusedDevutilsReleaseTests",
+    "/workspace/actions/devutils/.venv/bin/python .github/workflows/_gen_workflows.py",
+    "/workspace/actions/devutils/.venv/bin/ruff check devutils/tests/test_actions_runtime_release_line.py"
+  ],
+  "parent": "35e98072e7d7814c7575e106c15580a010570cc4",
+  "reviewer_commands": [
+    "git HEAD/tree/status/cumulative diff/diffcheck; inspect final changelog, test, generator, YAML and canonical guide",
+    "Read pinned action57eb9bd/submark0.3.1 source as bound in retained design receipt"
+  ],
+  "tree": "1db860bf248e83aeedf521044633bbd221902282",
+  "upstream_disposition": "none; Actions-local release configuration correction",
+  "verdict": "GO exact bounded release-note source checkpoint; hosted CI/release acceptance/publication separate"
+}

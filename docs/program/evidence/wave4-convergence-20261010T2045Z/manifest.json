@@ -1,0 +1,312 @@
+{
+  "schema": "actions-convergence-evidence/v1",
+  "observed_at_utc": "2026-10-10T20:45:21.714748+00:00",
+  "scope": "Incremental finished review and diagnosis receipts. Does not rewrite original54 contracts, infer whole acceptance, include credential URLs, or publish private in-progress review findings. Live PR states are timestamped snapshots, not immutable acceptance.",
+  "files": [
+    {
+      "path": "convergence-20261010T2044Z/observation.json",
+      "bytes": 1148,
+      "sha256": "fd0ec618c33defa4c086015d6f3deae5d81fc21262419e2c2786ba8369977686"
+    },
+    {
+      "path": "convergence-20261010T2044Z/pr282.json",
+      "bytes": 8000,
+      "sha256": "0fd386075b8e510b9c38dddd211c72493d15016859e0417e5c99f053e6071d8f"
+    },
+    {
+      "path": "convergence-20261010T2044Z/pr292.json",
+      "bytes": 8183,
+      "sha256": "7a19007498b5e58d4e32019f843b5c2fac7a8c862183e7f7744f97e7465b2db8"
+    },
+    {
+      "path": "convergence-20261010T2044Z/pr302.json",
+      "bytes": 8182,
+      "sha256": "7e276bcd62bc313b4f57d2126281079aff4e465b4690ba96ea9b3d41210645d6"
+    },
+    {
+      "path": "convergence-20261010T2044Z/pr304.json",
+      "bytes": 9686,
+      "sha256": "0a3cea8ad21e047851aab35009c461e9104bf45dbd2097ecc30045cb94130ab5"
+    },
+    {
+      "path": "convergence-20261010T2044Z/pr305.json",
+      "bytes": 6218,
+      "sha256": "5567d4a340c735988662b4cc6969d560481ef131e53de830735d0ec768d388f8"
+    },
+    {
+      "path": "convergence-20261010T2044Z/pr306.json",
+      "bytes": 8110,
+      "sha256": "1699a1da977f2cbe44a27ef37d94769c3ea63c027c9c742af0b3529907be9de2"
+    },
+    {
+      "path": "convergence-20261010T2044Z/pr307.json",
+      "bytes": 4633,
+      "sha256": "7a52890f3e57782d56af2bdfcbb3a0a6b9ee235df153d18e428abea625db6d84"
+    },
+    {
+      "path": "database-savepoint/base-comparison-gateway.log",
+      "bytes": 5095,
+      "sha256": "a9f5d73d81400bace53e604720b0b2f035319359a533897e20e3e113514c638d"
+    },
+    {
+      "path": "database-savepoint/base-inherited-failures.log",
+      "bytes": 102528,
+      "sha256": "bcde4b010f173e5f711e9b768c16730de6a74a5136806942118ec2a8587f0077"
+    },
+    {
+      "path": "database-savepoint/base-lint.log",
+      "bytes": 2875,
+      "sha256": "8c4fc5034247943559faf52b307ee8e3930b09a7a5c4185804fe8bd04e5ea075"
+    },
+    {
+      "path": "database-savepoint/clean-wheel-test-contained-rcc.log",
+      "bytes": 4271,
+      "sha256": "bbfc94730893fa689be3407cb97031b068ee54630481b3789b1683e3777dd5d7"
+    },
+    {
+      "path": "database-savepoint/corrected-checks-gateway.log",
+      "bytes": 6721,
+      "sha256": "2c930dc71e21fdfde539cc442809da17916d702ccc45c11e8d66578d41ab1ffc"
+    },
+    {
+      "path": "database-savepoint/corrected-checks-venv-linked-gateway.log",
+      "bytes": 6722,
+      "sha256": "60fc2057c7582b06e638365c715a661e7a4f95fb1401bf665b9a5b9cb3b4236f"
+    },
+    {
+      "path": "database-savepoint/corrected-focused.log",
+      "bytes": 181,
+      "sha256": "86a61cfca0879aa57d4a684afbc6ad92b87e4ba4ef4af1153412f597a468a316"
+    },
+    {
+      "path": "database-savepoint/corrected-inherited-failures.log",
+      "bytes": 11950,
+      "sha256": "9e469c36f1405fc7a3ed6bffcb7ff7043c67242b40fa3c2478117ab5fe5da1ac"
+    },
+    {
+      "path": "database-savepoint/corrected-lint.log",
+      "bytes": 411,
+      "sha256": "a6795da31f483f62d72dba2d041a7dc78fa7475c7cf0b10f6ef049055a35cb70"
+    },
+    {
+      "path": "database-savepoint/corrected-typecheck.log",
+      "bytes": 1622,
+      "sha256": "448576a4e9b89f92a26a903340134b6716014ea5eecfc07f130a8089886beba2"
+    },
+    {
+      "path": "database-savepoint/database-tests.log",
+      "bytes": 274,
+      "sha256": "20a0ef8e07af4cfb8dd9cc3873dedded68ab558f8d40ccaced45b7cc35967658"
+    },
+    {
+      "path": "database-savepoint/final-checks-gateway.log",
+      "bytes": 5306,
+      "sha256": "c69bcdacdda2417bed51dde6d0df18dca2a02ec5f2ccdeabeeb1f953759acdbb"
+    },
+    {
+      "path": "database-savepoint/final-database-suite.log",
+      "bytes": 274,
+      "sha256": "785ab02dcc6bb76f0c4258861410c18b31479f9b22d502a28df68566f5b3896c"
+    },
+    {
+      "path": "database-savepoint/final-focused.log",
+      "bytes": 181,
+      "sha256": "25d45b594f871b2571a514bfb6aa5e6c7d5560a9068d44cf210ba5f16a01fd79"
+    },
+    {
+      "path": "database-savepoint/final-lint.log",
+      "bytes": 411,
+      "sha256": "a6795da31f483f62d72dba2d041a7dc78fa7475c7cf0b10f6ef049055a35cb70"
+    },
+    {
+      "path": "database-savepoint/final-typecheck.log",
+      "bytes": 1622,
+      "sha256": "448576a4e9b89f92a26a903340134b6716014ea5eecfc07f130a8089886beba2"
+    },
+    {
+      "path": "database-savepoint/fix-receipt.json",
+      "bytes": 7627,
+      "sha256": "b141411ae592a468a016d886d06031957b768232b36f0f4f5c520808e1448b04"
+    },
+    {
+      "path": "database-savepoint/focused-red-to-green.log",
+      "bytes": 181,
+      "sha256": "1599eb8d449c421950c8a00d7df70108ca986ed9338faa0a8c4c19ef1d19ca53"
+    },
+    {
+      "path": "database-savepoint/focused-regression-red.log",
+      "bytes": 5877,
+      "sha256": "fbaf8eba6dc9a851a54f8148fd73e885aa2ce5af7d21844b34ba5bd02c6442d9"
+    },
+    {
+      "path": "database-savepoint/focused-regression-strengthened-red.log",
+      "bytes": 8749,
+      "sha256": "f93f3c0e62da05caa2576ab2a32ab955a810c63edd0708264ed7e8046856ff35"
+    },
+    {
+      "path": "database-savepoint/normal-nested-control.log",
+      "bytes": 371,
+      "sha256": "a83c6a20f56e7a2ce69571ab073e0da9165b4b58eb230997774575aea91a85d6"
+    },
+    {
+      "path": "database-savepoint/poetry-build-diagnostic-gateway.log",
+      "bytes": 8335,
+      "sha256": "8e4c8233f735e2faed83047ab6df9da59baca8a495681b57dc7459376c6f8bb3"
+    },
+    {
+      "path": "database-savepoint/poetry-environment-check.log",
+      "bytes": 4454,
+      "sha256": "03af4fc5783f954f07255703c87622ac7b2520ff40e42a6e0b2dc8e6b507b3ed"
+    },
+    {
+      "path": "database-savepoint/poetry-target-venv.log",
+      "bytes": 4145,
+      "sha256": "78040f0ad21f39f42599f1505438e7298fc02d9a88d9080af7de6aff50b449ef"
+    },
+    {
+      "path": "database-savepoint/receipt.json",
+      "bytes": 6128,
+      "sha256": "c1c9dba58ae1961adaee5349be4e76f5388c4a9ab2d2e835c69039b3a7015559"
+    },
+    {
+      "path": "database-savepoint/reproduce_savepoint_authorizer.py",
+      "bytes": 1883,
+      "sha256": "6cbae155eea43d03419eb9c7d79ab74a2f1417978031d9a8d5cf1535d72cd596"
+    },
+    {
+      "path": "database-savepoint/run_base_comparison.py",
+      "bytes": 2677,
+      "sha256": "a2ae0ede83a1493edd1ad42df5bad027856885df2a3c9b7209c79f2e238de0f2"
+    },
+    {
+      "path": "database-savepoint/run_clean_wheel_test.py",
+      "bytes": 1430,
+      "sha256": "e49b95ca366701ff4e8c07dbcdd058b199ac20a62ab081f383d2ff72a9a0b6c9"
+    },
+    {
+      "path": "database-savepoint/run_corrected_checks.py",
+      "bytes": 4186,
+      "sha256": "1605d8ddbffd65e48e770524e7e3c9ca9940ee17ff42496e5433bee4489b0d9f"
+    },
+    {
+      "path": "database-savepoint/run_final_db_checks.py",
+      "bytes": 2983,
+      "sha256": "9f25df624ea6861b1f273b48f55f5454b662ce39775ca0b4a42e20750a3179ff"
+    },
+    {
+      "path": "database-savepoint/run_focused_regression.py",
+      "bytes": 918,
+      "sha256": "ee6d3b3f75169df00474f568681a61b882d34a6387de2c1b449a28bc019cea81"
+    },
+    {
+      "path": "database-savepoint/run_poetry_build_diagnostic.py",
+      "bytes": 2123,
+      "sha256": "941008acbc1b9ffc49943adce7d4d4721066af941fca3eea91a4ed4b29183eef"
+    },
+    {
+      "path": "database-savepoint/run_runtime_checks.py",
+      "bytes": 3283,
+      "sha256": "5056263a241b24c65cf4085120d00ccbcb1f060d8102365604b2778ae686feca"
+    },
+    {
+      "path": "database-savepoint/runtime-checks-gateway.log",
+      "bytes": 6721,
+      "sha256": "8d215c730ae103e53605b41d606fb7f3cbcd489b80ee6c93f68c02439190c8e8"
+    },
+    {
+      "path": "database-savepoint/runtime-full-non-integration.log",
+      "bytes": 401703,
+      "sha256": "9deeac836ba2d54c57bb7ef2ea5a4353545d7c529c0eca527a2c27f8a4117c41"
+    },
+    {
+      "path": "database-savepoint/runtime-lint.log",
+      "bytes": 2875,
+      "sha256": "8c4fc5034247943559faf52b307ee8e3930b09a7a5c4185804fe8bd04e5ea075"
+    },
+    {
+      "path": "database-savepoint/runtime-typecheck.log",
+      "bytes": 1622,
+      "sha256": "448576a4e9b89f92a26a903340134b6716014ea5eecfc07f130a8089886beba2"
+    },
+    {
+      "path": "database-savepoint/savepoint-fix-independent-review.json",
+      "bytes": 6457,
+      "sha256": "50f4148abdc3c1785a608d8e5f5650e6fcc233235f5e114b517a33cbebd849ab"
+    },
+    {
+      "path": "database-savepoint/sqlite-authorizer-repro.log",
+      "bytes": 5567,
+      "sha256": "674d4db115ea851e57c82c06a8bc52c92849e769e7ee67b44409f33d73d6ac00"
+    },
+    {
+      "path": "database-savepoint/verify_poetry_environment.py",
+      "bytes": 1561,
+      "sha256": "88ce7518a91a27419a9f6e8d1878837d4739c81856a31384e77595c1cca9b5f8"
+    },
+    {
+      "path": "pr282-cli-inventory/green-final.log",
+      "bytes": 1638,
+      "sha256": "606b83f0a3487d1c69a853c77786f358ac36b5738a5816f76ebdc1e03ae32106"
+    },
+    {
+      "path": "pr282-cli-inventory/independent-final-review.json",
+      "bytes": 2986,
+      "sha256": "d2f415cd45d6785eb668a1d22b9943e7bbb078e3819fac42be6950a082b5fefd"
+    },
+    {
+      "path": "pr282-cli-inventory/lint.log",
+      "bytes": 1460,
+      "sha256": "fa815e5e38785ab4a953462086b89f3e0f29f1419b405235aab04fc8ac14f535"
+    },
+    {
+      "path": "pr282-cli-inventory/receipt.json",
+      "bytes": 4272,
+      "sha256": "aca848c234896c7b730348711845ced25f466e37bd529279d8a476abbd7c651a"
+    },
+    {
+      "path": "pr282-cli-inventory/red.log",
+      "bytes": 4058,
+      "sha256": "dadc50d54508fcbaad57169823d7af2e78d2979bdad8225cd1ca5535ee9fb466"
+    },
+    {
+      "path": "pr282-cli-inventory/run_focused.py",
+      "bytes": 2065,
+      "sha256": "b934a5a31a61e40bf1040360814b5c87b0f851b934aef779019299725252e85e"
+    },
+    {
+      "path": "pr282-cli-inventory/type.log",
+      "bytes": 1502,
+      "sha256": "11560849a360bcb727153f01e4e3ee092bca7cc706c93c711e5f68bc94b7d00e"
+    },
+    {
+      "path": "pr282-readonly/linux-devmode-failure.json",
+      "bytes": 3076,
+      "sha256": "c6bf20d3a3ba0fe488860ec3c2f62d2e415cf96ec3de82b2c66ae43dab136387"
+    },
+    {
+      "path": "pr304-artifact-readback/download-method.json",
+      "bytes": 1160,
+      "sha256": "b05f080ec12819dad4cdee9aed7787db4a4358c45e74880758265dc06abd6b0f"
+    },
+    {
+      "path": "pr306-readonly/linux-wheel-floor-failure.json",
+      "bytes": 1900,
+      "sha256": "ae67c9926117851a4969ac818ab1c9b10cb7c9c718bae0778166d6c92b5a520c"
+    },
+    {
+      "path": "runtime-rcc-candidate-version/diagnosis.json",
+      "bytes": 4552,
+      "sha256": "53b921fd72a10756115b31cfb15396b6d16ba782072146889eb769f9aec1b6e3"
+    },
+    {
+      "path": "runtime-release-note-preparation/independent-release-note-final-source-review.json",
+      "bytes": 4090,
+      "sha256": "fb539283e97c35bc33835e382f41a96d6bbdcb47210f96982b404586029115a6"
+    },
+    {
+      "path": "wave3-remote-readback.json",
+      "bytes": 124,
+      "sha256": "ca56455da917fbd35b87fca6b66907c8d99864216828d3eda3a7bbcbccff3568"
+    }
+  ]
+}

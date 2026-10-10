@@ -1,0 +1,91 @@
+{
+  "accepted_exact_doc_delta": "For nested database transactions, acquire the SAVEPOINT before incrementing the thread-local nesting count. If SAVEPOINT creation fails, the original database error must propagate, the nested body must not run, and outer cleanup must restore both the nesting count and connection state. Cover this admission failure with a real SQLite authorizer that denies SQLITE_SAVEPOINT/BEGIN, then verify the same connection can commit a later nested transaction. The existing successful nested rollback test does not exercise SAVEPOINT creation failure.",
+  "additional_doc_proposal": "When reusing a manifest-matched prepared package environment inside RCC, clear the toolkit ACTIVE_ENVIRONMENT_VARIABLES before package subprocesses and verify Poetry selected prefix plus exact source origin. Package wheel fixtures must not bind included RCC assets through a symlink outside the package root; use a bounded owned contained copy with exact selected-binary hash and cleanup, or the canonical package preparation. Keep earlier failed tool-context runs separate from passing source checks.",
+  "canonical_file": "docs/skills/repository-operations.md",
+  "changed_files": [
+    "action_server/src/actions/server/_database.py",
+    "action_server/tests/action_server_tests/test_database.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "commands": [
+    "git HEAD/tree/parent/status; diff names/check and exact database source transformation against parent",
+    "Read/hash14 retained log artifacts and final fix receipt; read exact regression/controlflow/gateway/toolchain/cleanup evidence"
+  ],
+  "file_sha256": {
+    "action_server/src/actions/server/_database.py": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4",
+    "action_server/tests/action_server_tests/test_database.py": "2e6d96554f20303c77fd7aac76c1a680376f128bbbbf463033d9054ba0075db2",
+    "docs/skills/repository-operations.md": "25a13a57daed33c2b5c7c089ca652f0d41d02482c6fecf20ef83f77283cf0995"
+  },
+  "fix_receipt_sha256": "b141411ae592a468a016d886d06031957b768232b36f0f4f5c520808e1448b04",
+  "head": "1d742149b7341ebc5dd543aa8b7e446f7f9c8b5b",
+  "limits": "No PostgreSQL authorizer-equivalent/recovery case rerun; the source guard/count ordering is shared across backends but actual regression is SQLite. Existing PG migration API gate is normal migration, not validation of this failed SAVEPOINT path. No full non-integration rerun or hosted CI yet; no whole #84 acceptance or release approval.",
+  "observations": [
+    "Only production change moves nesting-count increment after successful SAVEPOINT execution. Outer count already nonzero satisfies execute guard. Successful nesting still1\u21922\u21921\u21920; acquisition failure leaves outer count1 for cleanup to0 and preserves original DBError. Naming, locking, body exception rollback and finally semantics otherwise unchanged.",
+    "Real SQLite authorizer RED shows denied SAVEPOINT SQL wrapped in DBError then masked by outer AssertionError/counter leak. Exact regression checks event, original wrapped/underlying error, body not entered, same-connection later nested commit with [1,2], count0 and idle SQLite state. Meaningful behavioral coverage, not a mock of internal execute.",
+    "Corrected actual RCC --no-build/manifest-matched Poetry gateway verifies candidate database origin. Focused2PASS, DB61PASS/12PGSKIP, configured lint and Mypy326PASS. Corrected5 former wide failures PASS plus contained-RCC clean-wheel contract1PASS.",
+    "Initial widerun6FAIL/1064PASS/13SKIP is retained. Leaked outer RCC environment caused five failures; temporary external RCC symlink caused Poetry project-root escape. Corrected checks resolved all six affected nodes. Full suite was not rerun; no full suite PASS claim.",
+    "Commit1d742149 parent4e8a treeaa2c456 clean; only source/test/canonical guide changed. Temporary package environment link/RCC artifact removed, no shared toolchain changes or installs in reviewer lane."
+  ],
+  "parent": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+  "tree": "aa2c45671859852b8a003ed61fc50671236385e7",
+  "upstream_disposition": "none; Actions-owned confirmed defect, no upstream dependency defect",
+  "verdict": "GO for bounded SAVEPOINT-acquisition bookkeeping/error-preservation fix; exact-head hosted CI and full issue acceptance separate",
+  "verified_log_hashes": {
+    "clean-wheel-test-contained-rcc.log": {
+      "bytes": 4271,
+      "sha256": "bbfc94730893fa689be3407cb97031b068ee54630481b3789b1683e3777dd5d7"
+    },
+    "corrected-checks-gateway.log": {
+      "bytes": 6721,
+      "sha256": "2c930dc71e21fdfde539cc442809da17916d702ccc45c11e8d66578d41ab1ffc"
+    },
+    "corrected-inherited-failures.log": {
+      "bytes": 11950,
+      "sha256": "9e469c36f1405fc7a3ed6bffcb7ff7043c67242b40fa3c2478117ab5fe5da1ac"
+    },
+    "final-checks-gateway.log": {
+      "bytes": 5306,
+      "sha256": "c69bcdacdda2417bed51dde6d0df18dca2a02ec5f2ccdeabeeb1f953759acdbb"
+    },
+    "final-database-suite.log": {
+      "bytes": 274,
+      "sha256": "785ab02dcc6bb76f0c4258861410c18b31479f9b22d502a28df68566f5b3896c"
+    },
+    "final-focused.log": {
+      "bytes": 181,
+      "sha256": "25d45b594f871b2571a514bfb6aa5e6c7d5560a9068d44cf210ba5f16a01fd79"
+    },
+    "final-lint.log": {
+      "bytes": 411,
+      "sha256": "a6795da31f483f62d72dba2d041a7dc78fa7475c7cf0b10f6ef049055a35cb70"
+    },
+    "final-typecheck.log": {
+      "bytes": 1622,
+      "sha256": "448576a4e9b89f92a26a903340134b6716014ea5eecfc07f130a8089886beba2"
+    },
+    "focused-regression-red.log": {
+      "bytes": 5877,
+      "sha256": "fbaf8eba6dc9a851a54f8148fd73e885aa2ce5af7d21844b34ba5bd02c6442d9"
+    },
+    "focused-regression-strengthened-red.log": {
+      "bytes": 8749,
+      "sha256": "f93f3c0e62da05caa2576ab2a32ab955a810c63edd0708264ed7e8046856ff35"
+    },
+    "poetry-build-diagnostic-gateway.log": {
+      "bytes": 8335,
+      "sha256": "8e4c8233f735e2faed83047ab6df9da59baca8a495681b57dc7459376c6f8bb3"
+    },
+    "runtime-checks-gateway.log": {
+      "bytes": 6721,
+      "sha256": "8d215c730ae103e53605b41d606fb7f3cbcd489b80ee6c93f68c02439190c8e8"
+    },
+    "runtime-full-non-integration.log": {
+      "bytes": 401703,
+      "sha256": "9deeac836ba2d54c57bb7ef2ea5a4353545d7c529c0eca527a2c27f8a4117c41"
+    },
+    "sqlite-authorizer-repro.log": {
+      "bytes": 5567,
+      "sha256": "674d4db115ea851e57c82c06a8bc52c92849e769e7ee67b44409f33d73d6ac00"
+    }
+  }
+}

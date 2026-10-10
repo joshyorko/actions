@@ -1,0 +1,41 @@
+{
+  "schema": "codex.pr282.ci-failure.v1",
+  "observed_at_utc": "2026-10-10",
+  "repository": "joshyorko/actions",
+  "pr": 282,
+  "head": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+  "tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+  "workflow_run": 38081659107,
+  "job": 114299650930,
+  "check": "build (ubuntu-py3.12-devmode)",
+  "result": "failure",
+  "failed_step": "Test (integration)",
+  "command": "uv run --no-project --python 3.12 poetry run inv test-binary --jobs 0",
+  "pytest_command": "python -m pytest -m 'integration_test and not native_artifact_test' -rfE -vv --force-regen -n 0",
+  "failed_test": "action_server/tests/action_server_tests/test_cli.py::test_new_list_templates",
+  "error": "AssertionError at test_cli.py:56: expected {'advanced','basic','mcp-v2-showcase','minimal','workflow-producer-consumer'}; actual also contains 'canvas-query'.",
+  "classification": "Product behavior lists the newly embedded canvas-query template; exact-list CLI regression test was not updated. Confirmed test/expectation drift, no evidence of a production CLI defect or environment failure.",
+  "supporting_source": {
+    "relevant_commit": "92fe3fe6 feat(templates): checkpoint Canvas Query packaging and input validation",
+    "test_expectation_commit": "553e20c4 test: assert full production template listing",
+    "relation": "Canvas Query production template was added on parallel history before exact-list assertion; assertion added without canvas-query and survived merge."
+  },
+  "excerpt": [
+    "action_server_tests/test_cli.py::test_new_list_templates FAILED [19%]",
+    "action_server/tests/action_server_tests/test_cli.py:56: AssertionError",
+    "template_names = {'basic', 'workflow-producer-consumer', 'mcp-v2-showcase', 'advanced', 'minimal', 'canvas-query'}",
+    "1 failed, 130 passed, 19 skipped, 1091 deselected in 733.77s"
+  ],
+  "checks": {
+    "test_not_integration": "passed",
+    "playwright_install": "passed",
+    "lint": "passed",
+    "typecheck": "passed",
+    "docs_check": "passed",
+    "windows_floor": "separate known failure in job 114299651046; not part of this diagnosis"
+  },
+  "recommended_next_action": "Update test_new_list_templates to include canvas-query in the exact JSON-name set (and optionally assert its human-readable listing), then rerun the bounded CLI test and Linux integration check on the next PR head.",
+  "canonical_documentation_delta_proposal": "In docs/skills/repository-operations.md near the generated-template guidance, add: 'When adding an embedded community template, update the exact `action-server new list-templates --json` inventory assertion in `test_new_list_templates` as well as regenerating the embedded bundle and SHA metadata. A passing bundle test alone does not keep the CLI inventory assertion synchronized.'",
+  "upstream_disposition": "None. This is a repository test expectation mismatch, not a confirmed upstream dependency defect. Draft only; no issue filing.",
+  "evidence_source": "GitHub Actions connector job logs fetched successfully; only compact excerpts retained here."
+}

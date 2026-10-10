@@ -1,0 +1,76 @@
+[1;37mpoetry run ruff check src tests[0m
+src/actions/server/_common/oauth2_settings.py:30:16: E721 Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+   |
+29 |             field_type = field_info.type
+30 |             if field_type == str:
+   |                ^^^^^^^^^^^^^^^^^ E721
+31 |                 ret[field_name] = value
+32 |             else:
+   |
+
+src/actions/server/_database.py:1289:12: E721 Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+     |
+1287 |             not_null = True
+1288 | 
+1289 |         if field_cls == int:
+     |            ^^^^^^^^^^^^^^^^ E721
+1290 |             use = "INTEGER"
+     |
+
+src/actions/server/_database.py:1292:14: E721 Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+     |
+1290 |             use = "INTEGER"
+1291 | 
+1292 |         elif field_cls == str:
+     |              ^^^^^^^^^^^^^^^^ E721
+1293 |             use = "TEXT"
+     |
+
+src/actions/server/_database.py:1295:14: E721 Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+     |
+1293 |             use = "TEXT"
+1294 | 
+1295 |         elif field_cls == bool and not not_null:
+     |              ^^^^^^^^^^^^^^^^^ E721
+1296 |             use = "BOOLEAN" if self.backend_name == "postgresql" else "INTEGER"
+     |
+
+src/actions/server/_database.py:1298:14: E721 Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+     |
+1296 |             use = "BOOLEAN" if self.backend_name == "postgresql" else "INTEGER"
+1297 | 
+1298 |         elif field_cls == bool and not_null:
+     |              ^^^^^^^^^^^^^^^^^ E721
+1299 |             try:
+1300 |                 default_value = getattr(cls, name)
+     |
+
+src/actions/server/_database.py:1327:14: E721 Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+     |
+1325 |             )
+1326 | 
+1327 |         elif field_cls == float:
+     |              ^^^^^^^^^^^^^^^^^^ E721
+1328 |             use = "REAL"
+     |
+
+src/actions/server/_database.py:1335:25: E721 Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+     |
+1333 |         use = f"{name} {use}"
+1334 | 
+1335 |         if not_null and field_cls != bool:
+     |                         ^^^^^^^^^^^^^^^^^ E721
+1336 |             use = f"{use} NOT NULL"
+     |
+
+src/actions/server/_database.py:1343:16: E721 Use `is` and `is not` for type comparisons, or `isinstance()` for isinstance checks
+     |
+1341 |             pass
+1342 |         else:
+1343 |             if field_cls == str:
+     |                ^^^^^^^^^^^^^^^^ E721
+1344 |                 if default_value is None:
+1345 |                     use = f"{use} DEFAULT NULL"
+     |
+
+Found 8 errors.

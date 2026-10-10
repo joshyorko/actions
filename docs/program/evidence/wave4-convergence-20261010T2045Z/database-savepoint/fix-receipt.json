@@ -1,0 +1,109 @@
+{
+  "base": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+  "branch": "mk3/database-savepoint-repro-20261010",
+  "changed_files": [
+    "action_server/src/actions/server/_database.py",
+    "action_server/tests/action_server_tests/test_database.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "commit": "1d742149b7341ebc5dd543aa8b7e446f7f9c8b5b",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Added guidance that nested transaction logic must acquire SAVEPOINT before incrementing the nesting counter and that real authorizer denial regression coverage must verify original error, skipped nested body, state recovery, and same-connection commit.",
+    "evidence": "Expected-red real SQLite authorizer reproduction and focused regression; final focused/database tests and clean-wheel test pass.",
+    "remaining_uncertainty": "Full non-integration suite not rerun after corrected environment; PostgreSQL tests skipped/not run here; exact-head hosted CI and Sol review remain pending.",
+    "stale_or_ambiguous_guidance_removed": "None; the guide did not cover SAVEPOINT-admission failures. Added a precise note distinguishing existing nested rollback coverage."
+  },
+  "exact_commands": {
+    "authorizer_repro": "source /workspace/actions-cloud/activate.sh && rcc task script -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/database-savepoint/reproduce_savepoint_authorizer.py",
+    "clean_wheel": "source /workspace/actions-cloud/activate.sh && taskset -c 0 rcc task script --no-build -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/database-savepoint/run_clean_wheel_test.py",
+    "final_gate": "source /workspace/actions-cloud/activate.sh && taskset -c 0 rcc task script --no-build -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/database-savepoint/run_final_db_checks.py"
+  },
+  "implementation": "Moved nested thread-local transaction-count increment after successful SAVEPOINT execution. Savepoint naming and the existing rollback/yield/final decrement block remain unchanged. A denied SAVEPOINT leaves the outer count available for cleanup, so the original DBError propagates and the count/connection return to idle.",
+  "logs": {
+    "clean-wheel-test-contained-rcc.log": {
+      "bytes": 4271,
+      "sha256": "bbfc94730893fa689be3407cb97031b068ee54630481b3789b1683e3777dd5d7"
+    },
+    "corrected-checks-gateway.log": {
+      "bytes": 6721,
+      "sha256": "2c930dc71e21fdfde539cc442809da17916d702ccc45c11e8d66578d41ab1ffc"
+    },
+    "corrected-inherited-failures.log": {
+      "bytes": 11950,
+      "sha256": "9e469c36f1405fc7a3ed6bffcb7ff7043c67242b40fa3c2478117ab5fe5da1ac"
+    },
+    "final-checks-gateway.log": {
+      "bytes": 5306,
+      "sha256": "c69bcdacdda2417bed51dde6d0df18dca2a02ec5f2ccdeabeeb1f953759acdbb"
+    },
+    "final-database-suite.log": {
+      "bytes": 274,
+      "sha256": "785ab02dcc6bb76f0c4258861410c18b31479f9b22d502a28df68566f5b3896c"
+    },
+    "final-focused.log": {
+      "bytes": 181,
+      "sha256": "25d45b594f871b2571a514bfb6aa5e6c7d5560a9068d44cf210ba5f16a01fd79"
+    },
+    "final-lint.log": {
+      "bytes": 411,
+      "sha256": "a6795da31f483f62d72dba2d041a7dc78fa7475c7cf0b10f6ef049055a35cb70"
+    },
+    "final-typecheck.log": {
+      "bytes": 1622,
+      "sha256": "448576a4e9b89f92a26a903340134b6716014ea5eecfc07f130a8089886beba2"
+    },
+    "focused-regression-red.log": {
+      "bytes": 5877,
+      "sha256": "fbaf8eba6dc9a851a54f8148fd73e885aa2ce5af7d21844b34ba5bd02c6442d9"
+    },
+    "focused-regression-strengthened-red.log": {
+      "bytes": 8749,
+      "sha256": "f93f3c0e62da05caa2576ab2a32ab955a810c63edd0708264ed7e8046856ff35"
+    },
+    "poetry-build-diagnostic-gateway.log": {
+      "bytes": 8335,
+      "sha256": "8e4c8233f735e2faed83047ab6df9da59baca8a495681b57dc7459376c6f8bb3"
+    },
+    "runtime-checks-gateway.log": {
+      "bytes": 6721,
+      "sha256": "8d215c730ae103e53605b41d606fb7f3cbcd489b80ee6c93f68c02439190c8e8"
+    },
+    "runtime-full-non-integration.log": {
+      "bytes": 401703,
+      "sha256": "9deeac836ba2d54c57bb7ef2ea5a4353545d7c529c0eca527a2c27f8a4117c41"
+    },
+    "sqlite-authorizer-repro.log": {
+      "bytes": 5567,
+      "sha256": "674d4db115ea851e57c82c06a8bc52c92849e769e7ee67b44409f33d73d6ac00"
+    }
+  },
+  "regression": "Real SQLite authorizer rejects SQLITE_SAVEPOINT/BEGIN. Test proves exact wrapped DBError and underlying not-authorized sqlite3.DatabaseError remain visible, nested body is not entered, same connection later commits outer+nested work, counter is 0, and SQLite is no longer in a transaction.",
+  "task": "Bounded SQLite nested SAVEPOINT failure fix",
+  "toolchain": {
+    "RCC_test_artifact": "A regular temporary copy of selected RCC v18.19.3 was placed at the expected ignored package bin path so pytest setup passed and Poetry wheel construction kept the included file inside the package. Copy and temporary .venv link were removed before commit. No installation or shared toolchain mutation.",
+    "gateway": "RCC v18.19.3 `rcc task script --no-build -r developer/toolkit.yaml -- python <evidence runner>`",
+    "manifest_sha256": {
+      "action_server/poetry.lock": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+      "action_server/pyproject.toml": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f"
+    },
+    "poetry_environment_verified": "/workspace/work/actions-mk3-canvas-proof/action_server/.venv",
+    "prepared_venv": "/workspace/work/actions-mk3-canvas-proof/action_server/.venv",
+    "ruff": "0.1.15 from the manifest-matched Action Server Poetry environment",
+    "runtime_module_origin": "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py",
+    "runtime_test_python": "/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python"
+  },
+  "tree": "aa2c45671859852b8a003ed61fc50671236385e7",
+  "upstream_disposition": "none; the defect is in Actions Runtime transaction state/error cleanup.",
+  "verification": {
+    "clean_wheel_installed_consumer_contract": "1 passed in 59.51s after replacing the temporary external symlink with a contained regular RCC copy.",
+    "configured_runtime_lint": "PASS (Ruff check, Ruff format, isort; optional Markdown lint absent from PATH and reported by task without failing it).",
+    "configured_runtime_typecheck": "PASS (Mypy; success across 326 source files).",
+    "database_and_shared_database_tests": "61 passed, 12 skipped; skips are PostgreSQL-only tests with no local PostgreSQL service run in this lane.",
+    "focused_and_existing_nested_control": "2 passed",
+    "full_non_integration_suite": "Initial wrong-environment attempt: 1064 passed, 13 skipped, 6 failed. Five failures came from the outer RCC CONDA/PYTHON variables leaking into package subprocesses; the sixth came from this lane temporary RCC symlink escaping the package during Poetry wheel build. Corrected focused checks for all six affected tests pass across corrected-targeted run and isolated clean-wheel rerun. Full suite was not rerun after correction, per parent direction.",
+    "lint_interim": "An initial lint command ran under leaked RCC context and surfaced 8 E721 findings; corrected package_environment/Poetry invocation passed configured lint. No lint source edits were made.",
+    "other_five_full_suite_failures": "All five package/RCC tests from the initial full-suite diagnostic passed in the corrected environment.",
+    "whitespace": "git diff --check passed before commit; commit working tree clean."
+  }
+}

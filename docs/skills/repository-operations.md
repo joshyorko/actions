@@ -2443,3 +2443,22 @@ Distinguish dated requirements, evidence/status updates and editorial changes;
 map accepted slices to typed criteria with evidence and explicit limits. Retain
 both captured and live body hashes. A single fixture, browser harness or protocol
 slice does not accept generalized rendering, actual ChatGPT or a whole contract.
+
+### Retained CI artifact and command evidence
+
+A successful GitHub artifact connector download returns a reusable file reference
+and temporary `download_url`. Fetch that supported URL into an owned workspace
+path, then measure the ZIP and selected members before using their contents as
+acceptance evidence. A zero-byte output left by a failed GitHub signed redirect
+is not an artifact. File Service IDs are not Sediment IDs, and temporary signed
+URLs must not be copied into durable receipts. A small worker receipt can name
+binary or wheel hashes without containing those bytes; verify the corresponding
+artifact separately before claiming byte equality.
+
+Retain the exact task configuration, runner, command output, exit status and
+source identity for local acceptance. A later source review cannot turn an
+owner-reported pass count into independently measured command evidence when its
+original output is missing. Keep that attribution explicit and use subsequent
+exact-head CI as separate evidence. If a removed temporary configuration was
+printed in retained logs, state that recovery source rather than claiming the
+original file survived.

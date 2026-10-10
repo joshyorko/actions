@@ -1,0 +1,33 @@
+{
+  "accepted_exact_doc_delta": "When adding an embedded community template, update the exact inventory in test_new_list_templates too: check both its human-readable listing and the complete action-server new list-templates --json name set. Bundle integrity tests do not verify that the CLI inventory assertion includes the new template.",
+  "canonical_file": "docs/skills/repository-operations.md",
+  "commands": [
+    "git HEAD/tree/parent/status/diffcheck; read exact2-file diff",
+    "Hash/read owner receipt, RED/GREEN/Ruff/Mypy logs and runner; retain available exact RCC task config",
+    "Compare candidate/prepared Runtime pyproject and lock bytes"
+  ],
+  "head": "f74341b03b1e0e554c1b0af8f88cfc0bdce5cdaf",
+  "limits": "No new full suite/binary/browser execution, remote update or publication by reviewer. Hosted exact-head CI and outstanding authentication/artifact/frozen/ChatGPT/production gates remain separate.",
+  "observations": [
+    "Exactf743/tree66b295 parent2c6 clean. Only test_cli.py two assertions and canonical guide4-line note changed; source templates, generated bundle and production Runtime code remain byte-unchanged.",
+    "Human Canvas Query assertion and canvas-query member preserve exact six-name JSON inventory, matching previously verified six-template inventory at2c6. No weakening to subset-only assertion.",
+    "Retained RCC RED proves actual CLI includes canvas-query while old exact expected set omitted it; final focusedGREEN1PASS0.47s, targetedRuff PASS and Mypy1 sourcefilePASS. Four retained log hashes match receipt.",
+    "Runner clears outer RCC activation vars, binds ACTIONS_RUNTIME_TEST_PYTHON to preparedPR282 interpreter and verifies candidate Runtime module origin. Independent Runtime pyproject+lock byte equality confirms prepared reuse. No install or reviewer test execution.",
+    "Temporary RCC symlink used only for focusedCLI fixture, not wheelbuild; committed checkout clean and ignored RCC artifact removed. New browser rerun unnecessary because only assertion/docs changed; original browser evidence remains bound to its original2c6 head."
+  ],
+  "owner_receipt_sha256": "aca848c234896c7b730348711845ced25f466e37bd529279d8a476abbd7c651a",
+  "parent": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+  "retained_task_config": {
+    "available": false
+  },
+  "runner_sha256": "b934a5a31a61e40bf1040360814b5c87b0f851b934aef779019299725252e85e",
+  "tree": "66b295165ff42a123ff5091024eaa3f5b787f8f5",
+  "upstream_disposition": "none",
+  "verdict": "GO exact two-assertion CLI inventory repair plus canonical note; production/full issue gates separate",
+  "verified_logs_sha256": {
+    "green-final.log": "606b83f0a3487d1c69a853c77786f358ac36b5738a5816f76ebdc1e03ae32106",
+    "lint.log": "fa815e5e38785ab4a953462086b89f3e0f29f1419b405235aab04fc8ac14f535",
+    "red.log": "dadc50d54508fcbaad57169823d7af2e78d2979bdad8225cd1ca5535ee9fb466",
+    "type.log": "11560849a360bcb727153f01e4e3ee092bca7cc706c93c711e5f68bc94b7d00e"
+  }
+}

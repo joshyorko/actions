@@ -1,0 +1,12 @@
+{
+  "pr": 306,
+  "head": "1d742149b7341ebc5dd543aa8b7e446f7f9c8b5b",
+  "run": 38084472803,
+  "job": 114307968426,
+  "classification": "Known registry floor canary selects Core1.0.3 but asserts1.0.2; PR304 exact constraints fix required before refresh. Not a SAVEPOINT failure.",
+  "excerpts": [
+    "2026-10-10T20:39:50.5337232Z   Downloading actions_core-1.0.3-py3-none-any.whl.metadata (4.9 kB)",
+    "2026-10-10T20:39:52.9290810Z Downloading actions_core-1.0.3-py3-none-any.whl (103 kB)",
+    "2026-10-10T20:39:56.7108952Z subprocess.CalledProcessError: Command '['/tmp/runtime-registry-floor-sqxcfheu/venv/bin/python', '-c', '\\nimport pathlib, sys\\nroot = pathlib.Path(\\'/home/runner/work/actions/actions\\')\\noffenders = []\\nfor index, value in enumerate(sys.path):\\n    path = pathlib.Path(value or pathlib.Path.cwd()).resolve()\\n    try:\\n        path.relative_to(root)\\n    except ValueError:\\n        continue\\n    offenders.append(f\"sys.path[{index}]: {path}\")\\nif offenders:\\n    message = \"Python search paths point into the source checkout:\\\\n\"\\n    raise SystemExit(message + \"\\\\n\".join(offenders))\\n\\nimport json, pathlib, sys\\nfrom importlib.metadata import version\\nassert version(\\'actions-runtime\\') == \\'1.0.3\\'\\nassert version(\\'actions-core\\') == \\'1.0.2\\'\\nassert version(\\'actions-http-helper\\') == \\'1.0.3\\'\\nimport actions\\nimport actions.server\\nimport actions.mcp\\nimport actions_http\\nprint(\\'REGISTRY_FLOOR_IMPORT_PATHS=\\' + json.dumps({\\n    \\'sys_path\\': [str(pathlib.Path.cwd()) if not entry else entry for entry in sys.path],\\n    \\'modules\\': {\\n        \\'actions\\': actions.__file__,\\n        \\'actions.server\\': actions.server.__file__,\\n        \\'actions.mcp\\': actions.mcp.__file__,\\n        \\'actions_http\\': actions_http.__file__,\\n    },\\n}))\\n']' returned non-zero exit status 1."
+  ]
+}

@@ -1,0 +1,1788 @@
+bringing up nodes...
+bringing up nodes...
+
+F[gw1] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_package_metadata_api0/test_package')
+data_regression = <pytest_regressions.data_regression.DataRegressionFixture object at 0x7f836dcbe6c0>
+
+    def test_package_metadata_api(datadir, data_regression):
+        from actions.server import api
+    
+        action_package_dir = Path(datadir / "pack_secrets")
+>       found = api.package_metadata(action_package_dir, datadir=Path(datadir / "data"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/action_server_tests/test_package.py:244: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+action_package_dir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_package_metadata_api0/test_package/pack_secrets')
+
+    def package_metadata(
+        action_package_dir: Path, *, datadir: Optional[Path] = None
+    ) -> dict:
+        """
+        Collects metadata from the action package in the target dir and returns it.
+    
+        Args:
+            action_package_dir: The directory with the action package whose metadata
+                should be collected.
+            datadir: Directory to store the data for operating the actions server
+                (by default a datadir will be generated based on the `action_package_dir`).
+    
+        Returns:
+            A dict containing the metadata.
+    
+        Raises:
+            RuntimeError if it was not possible to collect the metadata.
+        """
+        import json
+    
+        from actions.server._selftest import actions_server_run
+    
+        any_return = None
+        cmdline: list[str] = ["package", "metadata"]
+        if datadir:
+            cmdline.extend(["--datadir", str(datadir)])
+        result = actions_server_run(
+            cmdline,
+            returncode=any_return,
+            cwd=str(action_package_dir),
+            capture_output=True,
+        )
+    
+        if result.returncode == 0:
+            return json.loads(result.stdout)
+>       raise RuntimeError(
+            f"It was not possible to collect the package metadata.\nStdout:\n{result.stdout}\nStderr:\n{result.stderr}"
+        )
+E       RuntimeError: It was not possible to collect the package metadata.
+E       Stdout:
+E       
+E       Stderr:
+E       
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_package_metadata_api0/test_package/data
+E       Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_package_metadata_api0/test_package/data/server_log.txt.
+E       Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 840, in _main_retcode
+E           return handle_package_command(base_args)
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_build_cli.py", line 353, in handle_package_command
+E           package_metadata_or_returncode: str | int = collect_package_metadata(
+E                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_metadata.py", line 186, in collect_package_metadata
+E           returncode = _main_retcode(
+E                        ^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1075, in _command_requiring_datadir
+E           code = _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+
+src/actions/server/api.py:40: RuntimeError
+F[gw0] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package')
+data_regression = <pytest_regressions.data_regression.DataRegressionFixture object at 0x7fb9c13eba40>
+
+    def test_package_metadata_oauth2_secrets(datadir, data_regression):
+        from actions.server._selftest import actions_server_run
+    
+>       output = actions_server_run(
+            [
+                "package",
+                "metadata",
+                "--datadir",
+                str(datadir / "data"),
+            ],
+            returncode=0,
+            cwd=datadir / "pack_oauth2_secrets",
+        )
+
+tests/action_server_tests/test_package.py:211: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/actions/server/_selftest.py:459: in actions_server_run
+    return run_python_module(
+src/actions/server/_selftest.py:479: in run_python_module
+    return run_command_line(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cmdline = ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'package', 'metadata', '--datadir', ...]
+returncode = 0
+cwd = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package/pack_oauth2_secrets')
+additional_env = None, timeout = None, capture_output = True
+
+    def run_command_line(
+        cmdline,
+        returncode: Optional[Union[Literal["error"], int]],
+        cwd=None,
+        additional_env: Optional[Dict[str, str]] = None,
+        timeout=None,
+        capture_output=True,
+    ) -> CompletedProcess:
+        cp = os.environ.copy()
+        cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+        cp["PYTHONIOENCODING"] = "utf-8"
+        if additional_env:
+            cp.update(additional_env)
+        result = subprocess.run(
+            cmdline,
+            capture_output=capture_output,
+            text=True,
+            env=cp,
+            cwd=cwd,
+            timeout=timeout,
+            encoding="utf-8",
+        )
+    
+        if returncode is None:
+            return result
+    
+        if returncode == "error" and result.returncode:
+            return result
+    
+        if result.returncode == returncode:
+            return result
+    
+        # Not really that helpful in general and very verbose...
+        # env_str = "\n".join(str(x) for x in sorted(cp.items()))
+>       raise AssertionError(
+            f"""Expected returncode: {returncode}. Found: {result.returncode}.
+    === stdout:
+    {result.stdout}
+    
+    === stderr:
+    {result.stderr}
+    
+    === Args:
+    {cmdline}
+    
+    """
+        )
+E       AssertionError: Expected returncode: 0. Found: 1.
+E       === stdout:
+E       
+E       
+E       === stderr:
+E       
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package/data
+E       Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package/data/server_log.txt.
+E       Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 840, in _main_retcode
+E           return handle_package_command(base_args)
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_build_cli.py", line 353, in handle_package_command
+E           package_metadata_or_returncode: str | int = collect_package_metadata(
+E                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_metadata.py", line 186, in collect_package_metadata
+E           returncode = _main_retcode(
+E                        ^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1075, in _command_requiring_datadir
+E           code = _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+E       
+E       
+E       
+E       === Args:
+E       ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'package', 'metadata', '--datadir', '/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package/data']
+
+src/actions/server/_selftest.py:523: AssertionError
+F[gw1] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+action_server_datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server')
+strategy = 'no-conda'
+
+    @pytest.mark.parametrize(
+        "strategy",
+        ["no-conda", "package.yaml", "package.yaml:uv"],
+    )
+    def test_import_action_server_strategies(
+        action_server_datadir: Path,
+        strategy: str,
+    ) -> None:
+        from action_server_tests.fixtures import actions_server_run, get_in_resources
+    
+        from actions.server._models import Action, ActionPackage, load_db
+    
+        if strategy == "package.yaml":
+            root_dir = get_in_resources("hello")
+        elif strategy == "package.yaml:uv":
+            root_dir = get_in_resources("hello_uv")
+        else:
+            assert strategy == "no-conda"
+            root_dir = get_in_resources("no_conda", "greeter")
+    
+>       actions_server_run(
+            [
+                "import",
+                f"--dir={root_dir}",
+                "--db-file=server.db",
+                "-v",
+                "--datadir",
+                action_server_datadir,
+            ],
+            returncode=0,
+        )
+
+tests/action_server_tests/test_server.py:220: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/actions/server/_selftest.py:459: in actions_server_run
+    return run_python_module(
+src/actions/server/_selftest.py:479: in run_python_module
+    return run_command_line(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cmdline = ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'import', '--dir=/...-mk3-db-savepoint-base/action_server/tests/action_server_tests/resources/no_conda/greeter', '--db-file=server.db', ...]
+returncode = 0, cwd = None, additional_env = None, timeout = None
+capture_output = True
+
+    def run_command_line(
+        cmdline,
+        returncode: Optional[Union[Literal["error"], int]],
+        cwd=None,
+        additional_env: Optional[Dict[str, str]] = None,
+        timeout=None,
+        capture_output=True,
+    ) -> CompletedProcess:
+        cp = os.environ.copy()
+        cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+        cp["PYTHONIOENCODING"] = "utf-8"
+        if additional_env:
+            cp.update(additional_env)
+        result = subprocess.run(
+            cmdline,
+            capture_output=capture_output,
+            text=True,
+            env=cp,
+            cwd=cwd,
+            timeout=timeout,
+            encoding="utf-8",
+        )
+    
+        if returncode is None:
+            return result
+    
+        if returncode == "error" and result.returncode:
+            return result
+    
+        if result.returncode == returncode:
+            return result
+    
+        # Not really that helpful in general and very verbose...
+        # env_str = "\n".join(str(x) for x in sorted(cp.items()))
+>       raise AssertionError(
+            f"""Expected returncode: {returncode}. Found: {result.returncode}.
+    === stdout:
+    {result.stdout}
+    
+    === stderr:
+    {result.stderr}
+    
+    === Args:
+    {cmdline}
+    
+    """
+        )
+E       AssertionError: Expected returncode: 0. Found: 1.
+E       === stdout:
+E       
+E       
+E       === stderr:
+E       [2026-10-10 20:24:31] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py import --dir=/workspace/work/actions-mk3-db-savepoint-base/action_server/tests/action_server_tests/resources/no_conda/greeter --db-file=server.db -v --datadir /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server
+E       [2026-10-10 20:24:31] [actions.server._cli_impl: DEBUG] CWD: /workspace/work/actions-mk3-db-savepoint-base/action_server
+E       [2026-10-10 20:24:31] [actions.server._cli_impl: INFO] 
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       [2026-10-10 20:24:31] [actions.server._settings: INFO] Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server
+E       [2026-10-10 20:24:32] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server/server_log.txt.
+E       [2026-10-10 20:24:32] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server/server.db
+E       [2026-10-10 20:24:32] [actions.server._actions_import: DEBUG] Importing action package from: /workspace/work/actions-mk3-db-savepoint-base/action_server/tests/action_server_tests/resources/no_conda/greeter
+E       [2026-10-10 20:24:32] [robocorp.log._rewrite_filtering: DEBUG] ROBOT_ROOTS ['/workspace/work/actions-mk3-db-savepoint/developer']
+E       
+E       [2026-10-10 20:24:32] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+E       [2026-10-10 20:24:32] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12/site-packages']
+E       
+E       [2026-10-10 20:24:32] [actions.server._action_package_handler: INFO] Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       [2026-10-10 20:24:32] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: greeter.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1035, in _command_requiring_datadir
+E           return _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+E       
+E       
+E       
+E       === Args:
+E       ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'import', '--dir=/workspace/work/actions-mk3-db-savepoint-base/action_server/tests/action_server_tests/resources/no_conda/greeter', '--db-file=server.db', '-v', '--datadir', PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server')]
+
+src/actions/server/_selftest.py:523: AssertionError
+F[gw0] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package')
+data_regression = <pytest_regressions.data_regression.DataRegressionFixture object at 0x7fb9c03cf830>
+
+    def test_package_metadata_secrets(datadir, data_regression):
+        from actions.server._selftest import actions_server_run
+    
+>       output = actions_server_run(
+            [
+                "package",
+                "metadata",
+                "--datadir",
+                str(datadir / "data"),
+            ],
+            returncode=0,
+            cwd=datadir / "pack_secrets",
+        )
+
+tests/action_server_tests/test_package.py:227: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/actions/server/_selftest.py:459: in actions_server_run
+    return run_python_module(
+src/actions/server/_selftest.py:479: in run_python_module
+    return run_command_line(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cmdline = ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'package', 'metadata', '--datadir', ...]
+returncode = 0
+cwd = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package/pack_secrets')
+additional_env = None, timeout = None, capture_output = True
+
+    def run_command_line(
+        cmdline,
+        returncode: Optional[Union[Literal["error"], int]],
+        cwd=None,
+        additional_env: Optional[Dict[str, str]] = None,
+        timeout=None,
+        capture_output=True,
+    ) -> CompletedProcess:
+        cp = os.environ.copy()
+        cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+        cp["PYTHONIOENCODING"] = "utf-8"
+        if additional_env:
+            cp.update(additional_env)
+        result = subprocess.run(
+            cmdline,
+            capture_output=capture_output,
+            text=True,
+            env=cp,
+            cwd=cwd,
+            timeout=timeout,
+            encoding="utf-8",
+        )
+    
+        if returncode is None:
+            return result
+    
+        if returncode == "error" and result.returncode:
+            return result
+    
+        if result.returncode == returncode:
+            return result
+    
+        # Not really that helpful in general and very verbose...
+        # env_str = "\n".join(str(x) for x in sorted(cp.items()))
+>       raise AssertionError(
+            f"""Expected returncode: {returncode}. Found: {result.returncode}.
+    === stdout:
+    {result.stdout}
+    
+    === stderr:
+    {result.stderr}
+    
+    === Args:
+    {cmdline}
+    
+    """
+        )
+E       AssertionError: Expected returncode: 0. Found: 1.
+E       === stdout:
+E       
+E       
+E       === stderr:
+E       
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package/data
+E       Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package/data/server_log.txt.
+E       Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 840, in _main_retcode
+E           return handle_package_command(base_args)
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_build_cli.py", line 353, in handle_package_command
+E           package_metadata_or_returncode: str | int = collect_package_metadata(
+E                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_metadata.py", line 186, in collect_package_metadata
+E           returncode = _main_retcode(
+E                        ^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1075, in _command_requiring_datadir
+E           code = _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+E       
+E       
+E       
+E       === Args:
+E       ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'package', 'metadata', '--datadir', '/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package/data']
+
+src/actions/server/_selftest.py:523: AssertionError
+F[gw1] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+tmpdir = local('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0')
+action_server_datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server')
+
+    def test_import_default_value(
+        tmpdir,
+        action_server_datadir: Path,
+    ) -> None:
+        from action_server_tests.fixtures import actions_server_run
+    
+        from actions.server._database import Database
+        from actions.server._models import Action, load_db
+    
+        action_server_datadir.mkdir(parents=True, exist_ok=True)
+        db_path = action_server_datadir / "server.db"
+        assert not db_path.exists()
+    
+        calculator = Path(tmpdir) / "v1" / "calculator" / "action_calculator.py"
+        calculator.parent.mkdir(parents=True, exist_ok=True)
+        calculator.write_text(
+            """
+    from actions import action
+    
+    @action
+    def calculator_sum(v1: int = 5) -> float:
+        return v1 + v2
+    """
+        )
+    
+>       actions_server_run(
+            [
+                "import",
+                f"--dir={calculator.parent}",
+                "--db-file=server.db",
+                "-v",
+                "--skip-lint",
+                "--datadir",
+                action_server_datadir,
+            ],
+            returncode=0,
+        )
+
+tests/action_server_tests/test_server.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/actions/server/_selftest.py:459: in actions_server_run
+    return run_python_module(
+src/actions/server/_selftest.py:479: in run_python_module
+    return run_command_line(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cmdline = ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'import', '--dir=/...d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/v1/calculator', '--db-file=server.db', ...]
+returncode = 0, cwd = None, additional_env = None, timeout = None
+capture_output = True
+
+    def run_command_line(
+        cmdline,
+        returncode: Optional[Union[Literal["error"], int]],
+        cwd=None,
+        additional_env: Optional[Dict[str, str]] = None,
+        timeout=None,
+        capture_output=True,
+    ) -> CompletedProcess:
+        cp = os.environ.copy()
+        cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+        cp["PYTHONIOENCODING"] = "utf-8"
+        if additional_env:
+            cp.update(additional_env)
+        result = subprocess.run(
+            cmdline,
+            capture_output=capture_output,
+            text=True,
+            env=cp,
+            cwd=cwd,
+            timeout=timeout,
+            encoding="utf-8",
+        )
+    
+        if returncode is None:
+            return result
+    
+        if returncode == "error" and result.returncode:
+            return result
+    
+        if result.returncode == returncode:
+            return result
+    
+        # Not really that helpful in general and very verbose...
+        # env_str = "\n".join(str(x) for x in sorted(cp.items()))
+>       raise AssertionError(
+            f"""Expected returncode: {returncode}. Found: {result.returncode}.
+    === stdout:
+    {result.stdout}
+    
+    === stderr:
+    {result.stderr}
+    
+    === Args:
+    {cmdline}
+    
+    """
+        )
+E       AssertionError: Expected returncode: 0. Found: 1.
+E       === stdout:
+E       
+E       
+E       === stderr:
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py import --dir=/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/v1/calculator --db-file=server.db -v --skip-lint --datadir /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: DEBUG] CWD: /workspace/work/actions-mk3-db-savepoint-base/action_server
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: INFO] 
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       [2026-10-10 20:24:33] [actions.server._settings: INFO] Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server/server_log.txt.
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server/server.db
+E       [2026-10-10 20:24:33] [actions.server._actions_import: DEBUG] Importing action package from: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/v1/calculator
+E       [2026-10-10 20:24:33] [robocorp.log._rewrite_filtering: DEBUG] ROBOT_ROOTS ['/workspace/work/actions-mk3-db-savepoint/developer']
+E       
+E       [2026-10-10 20:24:33] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+E       [2026-10-10 20:24:33] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12/site-packages']
+E       
+E       [2026-10-10 20:24:33] [actions.server._action_package_handler: INFO] Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       [2026-10-10 20:24:33] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: calculator.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1035, in _command_requiring_datadir
+E           return _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+E       
+E       
+E       
+E       === Args:
+E       ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'import', '--dir=/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/v1/calculator', '--db-file=server.db', '-v', '--skip-lint', '--datadir', PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server')]
+
+src/actions/server/_selftest.py:523: AssertionError
+F[gw0] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+tmp_path = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_runtime_clean_wheels_inst0')
+
+    def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
+        tmp_path,
+    ):
+        runtime_python = _runtime_python()
+        wheelhouse = tmp_path / "wheelhouse"
+        wheelhouse.mkdir()
+>       wheels = _build_wheels(wheelhouse, runtime_python)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/contract_tests/test_active_contracts.py:634: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/contract_tests/test_active_contracts.py:449: in _build_wheels
+    subprocess.run(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = True, timeout = None, check = True
+popenargs = (['poetry', 'build', '-f', 'wheel', '-o', '/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_runtime_clean_wheels_inst0/wheelhouse'],)
+kwargs = {'cwd': PosixPath('/workspace/work/actions-mk3-db-savepoint-base/action_server'), 'env': {'ACTIONS_CLOUD_ROOT': '/work...SER_MANAGEMENT_SOCKET_PATH': '/home/agent/.local/run/browser-management/socket', ...}, 'stderr': -1, 'stdout': -1, ...}
+process = <Popen: returncode: 1 args: ['poetry', 'build', '-f', 'wheel', '-o', '/works...>
+stdout = 'Building actions-runtime (1.0.3)\nBuilding wheel\n'
+stderr = '\nPEP517 build of a dependency failed\n\nBackend subprocess exited when trying to invoke build_wheel\n\n    | Command...this by running pip wheel --no-cache-dir --use-pep517 "/workspace/work/actions-mk3-db-savepoint-base/action_server".\n'
+retcode = 1
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout (seconds) is given and the process takes too long,
+         a TimeoutExpired exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['poetry', 'build', '-f', 'wheel', '-o', '/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_runtime_clean_wheels_inst0/wheelhouse']' returned non-zero exit status 1.
+
+../../../actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py:571: CalledProcessError
+                                                                   [100%]
+=================================== FAILURES ===================================
+__________________________ test_package_metadata_api ___________________________
+[gw1] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_package_metadata_api0/test_package')
+data_regression = <pytest_regressions.data_regression.DataRegressionFixture object at 0x7f836dcbe6c0>
+
+    def test_package_metadata_api(datadir, data_regression):
+        from actions.server import api
+    
+        action_package_dir = Path(datadir / "pack_secrets")
+>       found = api.package_metadata(action_package_dir, datadir=Path(datadir / "data"))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/action_server_tests/test_package.py:244: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+action_package_dir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_package_metadata_api0/test_package/pack_secrets')
+
+    def package_metadata(
+        action_package_dir: Path, *, datadir: Optional[Path] = None
+    ) -> dict:
+        """
+        Collects metadata from the action package in the target dir and returns it.
+    
+        Args:
+            action_package_dir: The directory with the action package whose metadata
+                should be collected.
+            datadir: Directory to store the data for operating the actions server
+                (by default a datadir will be generated based on the `action_package_dir`).
+    
+        Returns:
+            A dict containing the metadata.
+    
+        Raises:
+            RuntimeError if it was not possible to collect the metadata.
+        """
+        import json
+    
+        from actions.server._selftest import actions_server_run
+    
+        any_return = None
+        cmdline: list[str] = ["package", "metadata"]
+        if datadir:
+            cmdline.extend(["--datadir", str(datadir)])
+        result = actions_server_run(
+            cmdline,
+            returncode=any_return,
+            cwd=str(action_package_dir),
+            capture_output=True,
+        )
+    
+        if result.returncode == 0:
+            return json.loads(result.stdout)
+>       raise RuntimeError(
+            f"It was not possible to collect the package metadata.\nStdout:\n{result.stdout}\nStderr:\n{result.stderr}"
+        )
+E       RuntimeError: It was not possible to collect the package metadata.
+E       Stdout:
+E       
+E       Stderr:
+E       
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_package_metadata_api0/test_package/data
+E       Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_package_metadata_api0/test_package/data/server_log.txt.
+E       Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 840, in _main_retcode
+E           return handle_package_command(base_args)
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_build_cli.py", line 353, in handle_package_command
+E           package_metadata_or_returncode: str | int = collect_package_metadata(
+E                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_metadata.py", line 186, in collect_package_metadata
+E           returncode = _main_retcode(
+E                        ^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1075, in _command_requiring_datadir
+E           code = _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+
+src/actions/server/api.py:40: RuntimeError
+_____________________ test_package_metadata_oauth2_secrets _____________________
+[gw0] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package')
+data_regression = <pytest_regressions.data_regression.DataRegressionFixture object at 0x7fb9c13eba40>
+
+    def test_package_metadata_oauth2_secrets(datadir, data_regression):
+        from actions.server._selftest import actions_server_run
+    
+>       output = actions_server_run(
+            [
+                "package",
+                "metadata",
+                "--datadir",
+                str(datadir / "data"),
+            ],
+            returncode=0,
+            cwd=datadir / "pack_oauth2_secrets",
+        )
+
+tests/action_server_tests/test_package.py:211: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/actions/server/_selftest.py:459: in actions_server_run
+    return run_python_module(
+src/actions/server/_selftest.py:479: in run_python_module
+    return run_command_line(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cmdline = ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'package', 'metadata', '--datadir', ...]
+returncode = 0
+cwd = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package/pack_oauth2_secrets')
+additional_env = None, timeout = None, capture_output = True
+
+    def run_command_line(
+        cmdline,
+        returncode: Optional[Union[Literal["error"], int]],
+        cwd=None,
+        additional_env: Optional[Dict[str, str]] = None,
+        timeout=None,
+        capture_output=True,
+    ) -> CompletedProcess:
+        cp = os.environ.copy()
+        cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+        cp["PYTHONIOENCODING"] = "utf-8"
+        if additional_env:
+            cp.update(additional_env)
+        result = subprocess.run(
+            cmdline,
+            capture_output=capture_output,
+            text=True,
+            env=cp,
+            cwd=cwd,
+            timeout=timeout,
+            encoding="utf-8",
+        )
+    
+        if returncode is None:
+            return result
+    
+        if returncode == "error" and result.returncode:
+            return result
+    
+        if result.returncode == returncode:
+            return result
+    
+        # Not really that helpful in general and very verbose...
+        # env_str = "\n".join(str(x) for x in sorted(cp.items()))
+>       raise AssertionError(
+            f"""Expected returncode: {returncode}. Found: {result.returncode}.
+    === stdout:
+    {result.stdout}
+    
+    === stderr:
+    {result.stderr}
+    
+    === Args:
+    {cmdline}
+    
+    """
+        )
+E       AssertionError: Expected returncode: 0. Found: 1.
+E       === stdout:
+E       
+E       
+E       === stderr:
+E       
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package/data
+E       Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package/data/server_log.txt.
+E       Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 840, in _main_retcode
+E           return handle_package_command(base_args)
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_build_cli.py", line 353, in handle_package_command
+E           package_metadata_or_returncode: str | int = collect_package_metadata(
+E                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_metadata.py", line 186, in collect_package_metadata
+E           returncode = _main_retcode(
+E                        ^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1075, in _command_requiring_datadir
+E           code = _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+E       
+E       
+E       
+E       === Args:
+E       ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'package', 'metadata', '--datadir', '/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_oauth2_s0/test_package/data']
+
+src/actions/server/_selftest.py:523: AssertionError
+________________ test_import_action_server_strategies[no-conda] ________________
+[gw1] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+action_server_datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server')
+strategy = 'no-conda'
+
+    @pytest.mark.parametrize(
+        "strategy",
+        ["no-conda", "package.yaml", "package.yaml:uv"],
+    )
+    def test_import_action_server_strategies(
+        action_server_datadir: Path,
+        strategy: str,
+    ) -> None:
+        from action_server_tests.fixtures import actions_server_run, get_in_resources
+    
+        from actions.server._models import Action, ActionPackage, load_db
+    
+        if strategy == "package.yaml":
+            root_dir = get_in_resources("hello")
+        elif strategy == "package.yaml:uv":
+            root_dir = get_in_resources("hello_uv")
+        else:
+            assert strategy == "no-conda"
+            root_dir = get_in_resources("no_conda", "greeter")
+    
+>       actions_server_run(
+            [
+                "import",
+                f"--dir={root_dir}",
+                "--db-file=server.db",
+                "-v",
+                "--datadir",
+                action_server_datadir,
+            ],
+            returncode=0,
+        )
+
+tests/action_server_tests/test_server.py:220: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/actions/server/_selftest.py:459: in actions_server_run
+    return run_python_module(
+src/actions/server/_selftest.py:479: in run_python_module
+    return run_command_line(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cmdline = ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'import', '--dir=/...-mk3-db-savepoint-base/action_server/tests/action_server_tests/resources/no_conda/greeter', '--db-file=server.db', ...]
+returncode = 0, cwd = None, additional_env = None, timeout = None
+capture_output = True
+
+    def run_command_line(
+        cmdline,
+        returncode: Optional[Union[Literal["error"], int]],
+        cwd=None,
+        additional_env: Optional[Dict[str, str]] = None,
+        timeout=None,
+        capture_output=True,
+    ) -> CompletedProcess:
+        cp = os.environ.copy()
+        cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+        cp["PYTHONIOENCODING"] = "utf-8"
+        if additional_env:
+            cp.update(additional_env)
+        result = subprocess.run(
+            cmdline,
+            capture_output=capture_output,
+            text=True,
+            env=cp,
+            cwd=cwd,
+            timeout=timeout,
+            encoding="utf-8",
+        )
+    
+        if returncode is None:
+            return result
+    
+        if returncode == "error" and result.returncode:
+            return result
+    
+        if result.returncode == returncode:
+            return result
+    
+        # Not really that helpful in general and very verbose...
+        # env_str = "\n".join(str(x) for x in sorted(cp.items()))
+>       raise AssertionError(
+            f"""Expected returncode: {returncode}. Found: {result.returncode}.
+    === stdout:
+    {result.stdout}
+    
+    === stderr:
+    {result.stderr}
+    
+    === Args:
+    {cmdline}
+    
+    """
+        )
+E       AssertionError: Expected returncode: 0. Found: 1.
+E       === stdout:
+E       
+E       
+E       === stderr:
+E       [2026-10-10 20:24:31] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py import --dir=/workspace/work/actions-mk3-db-savepoint-base/action_server/tests/action_server_tests/resources/no_conda/greeter --db-file=server.db -v --datadir /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server
+E       [2026-10-10 20:24:31] [actions.server._cli_impl: DEBUG] CWD: /workspace/work/actions-mk3-db-savepoint-base/action_server
+E       [2026-10-10 20:24:31] [actions.server._cli_impl: INFO] 
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       [2026-10-10 20:24:31] [actions.server._settings: INFO] Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server
+E       [2026-10-10 20:24:32] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server/server_log.txt.
+E       [2026-10-10 20:24:32] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server/server.db
+E       [2026-10-10 20:24:32] [actions.server._actions_import: DEBUG] Importing action package from: /workspace/work/actions-mk3-db-savepoint-base/action_server/tests/action_server_tests/resources/no_conda/greeter
+E       [2026-10-10 20:24:32] [robocorp.log._rewrite_filtering: DEBUG] ROBOT_ROOTS ['/workspace/work/actions-mk3-db-savepoint/developer']
+E       
+E       [2026-10-10 20:24:32] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+E       [2026-10-10 20:24:32] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12/site-packages']
+E       
+E       [2026-10-10 20:24:32] [actions.server._action_package_handler: INFO] Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       [2026-10-10 20:24:32] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: greeter.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1035, in _command_requiring_datadir
+E           return _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+E       
+E       
+E       
+E       === Args:
+E       ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'import', '--dir=/workspace/work/actions-mk3-db-savepoint-base/action_server/tests/action_server_tests/resources/no_conda/greeter', '--db-file=server.db', '-v', '--datadir', PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server')]
+
+src/actions/server/_selftest.py:523: AssertionError
+________________________ test_package_metadata_secrets _________________________
+[gw0] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package')
+data_regression = <pytest_regressions.data_regression.DataRegressionFixture object at 0x7fb9c03cf830>
+
+    def test_package_metadata_secrets(datadir, data_regression):
+        from actions.server._selftest import actions_server_run
+    
+>       output = actions_server_run(
+            [
+                "package",
+                "metadata",
+                "--datadir",
+                str(datadir / "data"),
+            ],
+            returncode=0,
+            cwd=datadir / "pack_secrets",
+        )
+
+tests/action_server_tests/test_package.py:227: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/actions/server/_selftest.py:459: in actions_server_run
+    return run_python_module(
+src/actions/server/_selftest.py:479: in run_python_module
+    return run_command_line(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cmdline = ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'package', 'metadata', '--datadir', ...]
+returncode = 0
+cwd = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package/pack_secrets')
+additional_env = None, timeout = None, capture_output = True
+
+    def run_command_line(
+        cmdline,
+        returncode: Optional[Union[Literal["error"], int]],
+        cwd=None,
+        additional_env: Optional[Dict[str, str]] = None,
+        timeout=None,
+        capture_output=True,
+    ) -> CompletedProcess:
+        cp = os.environ.copy()
+        cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+        cp["PYTHONIOENCODING"] = "utf-8"
+        if additional_env:
+            cp.update(additional_env)
+        result = subprocess.run(
+            cmdline,
+            capture_output=capture_output,
+            text=True,
+            env=cp,
+            cwd=cwd,
+            timeout=timeout,
+            encoding="utf-8",
+        )
+    
+        if returncode is None:
+            return result
+    
+        if returncode == "error" and result.returncode:
+            return result
+    
+        if result.returncode == returncode:
+            return result
+    
+        # Not really that helpful in general and very verbose...
+        # env_str = "\n".join(str(x) for x in sorted(cp.items()))
+>       raise AssertionError(
+            f"""Expected returncode: {returncode}. Found: {result.returncode}.
+    === stdout:
+    {result.stdout}
+    
+    === stderr:
+    {result.stderr}
+    
+    === Args:
+    {cmdline}
+    
+    """
+        )
+E       AssertionError: Expected returncode: 0. Found: 1.
+E       === stdout:
+E       
+E       
+E       === stderr:
+E       
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package/data
+E       Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package/data/server_log.txt.
+E       Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 840, in _main_retcode
+E           return handle_package_command(base_args)
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_build_cli.py", line 353, in handle_package_command
+E           package_metadata_or_returncode: str | int = collect_package_metadata(
+E                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/package/_package_metadata.py", line 186, in collect_package_metadata
+E           returncode = _main_retcode(
+E                        ^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1075, in _command_requiring_datadir
+E           code = _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+E       
+E       
+E       
+E       === Args:
+E       ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'package', 'metadata', '--datadir', '/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_package_metadata_secrets0/test_package/data']
+
+src/actions/server/_selftest.py:523: AssertionError
+__________________________ test_import_default_value ___________________________
+[gw1] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+tmpdir = local('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0')
+action_server_datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server')
+
+    def test_import_default_value(
+        tmpdir,
+        action_server_datadir: Path,
+    ) -> None:
+        from action_server_tests.fixtures import actions_server_run
+    
+        from actions.server._database import Database
+        from actions.server._models import Action, load_db
+    
+        action_server_datadir.mkdir(parents=True, exist_ok=True)
+        db_path = action_server_datadir / "server.db"
+        assert not db_path.exists()
+    
+        calculator = Path(tmpdir) / "v1" / "calculator" / "action_calculator.py"
+        calculator.parent.mkdir(parents=True, exist_ok=True)
+        calculator.write_text(
+            """
+    from actions import action
+    
+    @action
+    def calculator_sum(v1: int = 5) -> float:
+        return v1 + v2
+    """
+        )
+    
+>       actions_server_run(
+            [
+                "import",
+                f"--dir={calculator.parent}",
+                "--db-file=server.db",
+                "-v",
+                "--skip-lint",
+                "--datadir",
+                action_server_datadir,
+            ],
+            returncode=0,
+        )
+
+tests/action_server_tests/test_server.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/actions/server/_selftest.py:459: in actions_server_run
+    return run_python_module(
+src/actions/server/_selftest.py:479: in run_python_module
+    return run_command_line(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cmdline = ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'import', '--dir=/...d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/v1/calculator', '--db-file=server.db', ...]
+returncode = 0, cwd = None, additional_env = None, timeout = None
+capture_output = True
+
+    def run_command_line(
+        cmdline,
+        returncode: Optional[Union[Literal["error"], int]],
+        cwd=None,
+        additional_env: Optional[Dict[str, str]] = None,
+        timeout=None,
+        capture_output=True,
+    ) -> CompletedProcess:
+        cp = os.environ.copy()
+        cp["PYTHONPATH"] = os.pathsep.join([x for x in sys.path if x])
+        cp["PYTHONIOENCODING"] = "utf-8"
+        if additional_env:
+            cp.update(additional_env)
+        result = subprocess.run(
+            cmdline,
+            capture_output=capture_output,
+            text=True,
+            env=cp,
+            cwd=cwd,
+            timeout=timeout,
+            encoding="utf-8",
+        )
+    
+        if returncode is None:
+            return result
+    
+        if returncode == "error" and result.returncode:
+            return result
+    
+        if result.returncode == returncode:
+            return result
+    
+        # Not really that helpful in general and very verbose...
+        # env_str = "\n".join(str(x) for x in sorted(cp.items()))
+>       raise AssertionError(
+            f"""Expected returncode: {returncode}. Found: {result.returncode}.
+    === stdout:
+    {result.stdout}
+    
+    === stderr:
+    {result.stderr}
+    
+    === Args:
+    {cmdline}
+    
+    """
+        )
+E       AssertionError: Expected returncode: 0. Found: 1.
+E       === stdout:
+E       
+E       
+E       === stderr:
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py import --dir=/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/v1/calculator --db-file=server.db -v --skip-lint --datadir /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: DEBUG] CWD: /workspace/work/actions-mk3-db-savepoint-base/action_server
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: INFO] 
+E         ⚡️ Starting Action Server... v1.0.3
+E       
+E       [2026-10-10 20:24:33] [actions.server._settings: INFO] Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server/server_log.txt.
+E       [2026-10-10 20:24:33] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server/server.db
+E       [2026-10-10 20:24:33] [actions.server._actions_import: DEBUG] Importing action package from: /workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/v1/calculator
+E       [2026-10-10 20:24:33] [robocorp.log._rewrite_filtering: DEBUG] ROBOT_ROOTS ['/workspace/work/actions-mk3-db-savepoint/developer']
+E       
+E       [2026-10-10 20:24:33] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+E       [2026-10-10 20:24:33] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12/site-packages']
+E       
+E       [2026-10-10 20:24:33] [actions.server._action_package_handler: INFO] Adding action without a managed environment (package.yaml unavailable).
+E           Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+E       [2026-10-10 20:24:33] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: calculator.
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'actions'
+E       Traceback (most recent call last):
+E         File "<string>", line 1, in <module>
+E       ModuleNotFoundError: No module named 'robocorp'
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 413, in _get_actions_version
+E           output = subprocess.check_output(cmdline, env=env, cwd=cwd)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 466, in check_output
+E           return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+E           raise CalledProcessError(retcode, process.args,
+E       subprocess.CalledProcessError: Command '['/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3', '-c', 'import actions;print(actions.__version__)']' returned non-zero exit status 1.
+E       
+E       During handling of the above exception, another exception occurred:
+E       
+E       Traceback (most recent call last):
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/__main__.py", line 18, in <module>
+E           main(args)
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/cli.py", line 62, in main
+E           retcode = _main_retcode(args)
+E                     ^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 888, in _main_retcode
+E           return _command_requiring_datadir(
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 1035, in _command_requiring_datadir
+E           return _import_actions(
+E                  ^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_cli_impl.py", line 670, in _import_actions
+E           _actions_import.import_action_packages(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 77, in import_action_packages
+E           import_action_package(
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 263, in import_action_package
+E           actions_library_version = _get_actions_version(
+E                                     ^^^^^^^^^^^^^^^^^^^^^
+E         File "/workspace/work/actions-mk3-db-savepoint-base/action_server/src/actions/server/_actions_import.py", line 415, in _get_actions_version
+E           raise RuntimeError(msg)
+E       RuntimeError: Unable to get actions version.
+E       
+E       This usually means that `actions` is not installed in the python
+E       environment (make sure that `actions`
+E       is defined in your `package.yaml`).
+E       
+E       Python executable being used:
+E       /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3
+E       
+E       
+E       
+E       === Args:
+E       ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'import', '--dir=/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/v1/calculator', '--db-file=server.db', '-v', '--skip-lint', '--datadir', PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw1/test_import_default_value0/.sema4ai-test-action-server')]
+
+src/actions/server/_selftest.py:523: AssertionError
+_ test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders __
+[gw0] linux -- Python 3.12.15 /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+tmp_path = PosixPath('/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_runtime_clean_wheels_inst0')
+
+    def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
+        tmp_path,
+    ):
+        runtime_python = _runtime_python()
+        wheelhouse = tmp_path / "wheelhouse"
+        wheelhouse.mkdir()
+>       wheels = _build_wheels(wheelhouse, runtime_python)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/contract_tests/test_active_contracts.py:634: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/contract_tests/test_active_contracts.py:449: in _build_wheels
+    subprocess.run(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = True, timeout = None, check = True
+popenargs = (['poetry', 'build', '-f', 'wheel', '-o', '/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_runtime_clean_wheels_inst0/wheelhouse'],)
+kwargs = {'cwd': PosixPath('/workspace/work/actions-mk3-db-savepoint-base/action_server'), 'env': {'ACTIONS_CLOUD_ROOT': '/work...SER_MANAGEMENT_SOCKET_PATH': '/home/agent/.local/run/browser-management/socket', ...}, 'stderr': -1, 'stdout': -1, ...}
+process = <Popen: returncode: 1 args: ['poetry', 'build', '-f', 'wheel', '-o', '/works...>
+stdout = 'Building actions-runtime (1.0.3)\nBuilding wheel\n'
+stderr = '\nPEP517 build of a dependency failed\n\nBackend subprocess exited when trying to invoke build_wheel\n\n    | Command...this by running pip wheel --no-cache-dir --use-pep517 "/workspace/work/actions-mk3-db-savepoint-base/action_server".\n'
+retcode = 1
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout (seconds) is given and the process takes too long,
+         a TimeoutExpired exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['poetry', 'build', '-f', 'wheel', '-o', '/workspace/actions-cloud/robocorp/temp/ef6d03f0a5d2544e/pytest-of-agent/pytest-0/popen-gw0/test_runtime_clean_wheels_inst0/wheelhouse']' returned non-zero exit status 1.
+
+../../../actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py:571: CalledProcessError
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_package.py::test_package_metadata_api
+FAILED tests/action_server_tests/test_package.py::test_package_metadata_oauth2_secrets
+FAILED tests/action_server_tests/test_server.py::test_import_action_server_strategies[no-conda]
+FAILED tests/action_server_tests/test_package.py::test_package_metadata_secrets
+FAILED tests/action_server_tests/test_server.py::test_import_default_value - ...
+FAILED tests/contract_tests/test_active_contracts.py::test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders
+6 failed in 18.73s
+Log (html): /workspace/work/actions-mk3-db-savepoint-base/action_server/output/log.html

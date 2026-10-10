@@ -1,0 +1,110 @@
+{
+  "baseRefName": "mk3/core-union-20261010",
+  "headRefName": "fix/runtime-release-changelog-selection-20261010",
+  "headRefOid": "bad6a44752438216c47ebab7fac520e174f9649a",
+  "mergeStateStatus": "UNSTABLE",
+  "number": 307,
+  "state": "OPEN",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084631989/job/114308483393",
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "startedAt": "2026-10-10T20:40:19Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:40:17Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084631950/job/114308483319",
+      "name": "audit",
+      "startedAt": "2026-10-10T20:40:05Z",
+      "status": "COMPLETED",
+      "workflowName": "AI audit evidence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:44:18Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084632043/job/114308483866",
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "startedAt": "2026-10-10T20:40:10Z",
+      "status": "COMPLETED",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084631989/job/114308483601",
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "startedAt": "2026-10-10T20:40:03Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084632043/job/114308483711",
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "startedAt": "2026-10-10T20:44:20Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084632043/job/114308483774",
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "startedAt": "2026-10-10T20:40:03Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084631989/job/114308483581",
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "startedAt": "2026-10-10T20:40:03Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084631989/job/114308483818",
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "startedAt": "2026-10-10T20:40:03Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084631989/job/114308483596",
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "startedAt": "2026-10-10T20:40:03Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:43:45Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084631989/job/114308483540",
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "startedAt": "2026-10-10T20:40:40Z",
+      "status": "COMPLETED",
+      "workflowName": "RCC developer toolkit"
+    }
+  ]
+}

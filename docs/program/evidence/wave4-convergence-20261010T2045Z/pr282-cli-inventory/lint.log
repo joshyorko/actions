@@ -1,0 +1,26 @@
+"/workspace/work/actions-mk3-pr282-cli/work/pr282-cli-checks.yaml" as robot.yaml is:
+environmentConfigs:
+  - developer/setup.yaml
+tasks:
+  Placeholder:
+    shell: python -c "pass"
+devTasks:
+  CliFocused:
+    shell: python /workspace/work/actions-mk3-evidence/pr282-cli-inventory/run_focused.py
+  CliLint:
+    shell: python /workspace/work/actions-mk3-evidence/pr282-cli-inventory/run_focused.py lint
+  CliType:
+    shell: python /workspace/work/actions-mk3-evidence/pr282-cli-inventory/run_focused.py type
+artifactsDir: tmp-green
+
+Note: Operating in developer mode. Using 'devTasks:' instead of 'tasks:'.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-pr282-cli/work/tmp-green" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-pr282-cli/work/tmp-green" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+PYTHON=/workspace/work/actions-mk3-pr282/action_server/.venv/bin/python
+RUNTIME=/workspace/work/actions-mk3-pr282-cli/action_server/src/actions/server/__init__.py
+OK.
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.

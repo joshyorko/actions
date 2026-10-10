@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "read_only_candidate_version_diagnosis",
+  "scope": "Issue #134 candidate-wheel verifier version assumptions on current PR304 source",
+  "source": {
+    "repository": "joshyorko/actions",
+    "worktree": "/workspace/work/actions-mk3-integration",
+    "ref": "mk3/integration-20261010",
+    "commit": "73605934c1c948895410a5abaed6c225a396e038",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "status_at_inspection": "clean"
+  },
+  "source_metadata": [
+    {
+      "path": "actions/pyproject.toml",
+      "lines": "1-3",
+      "distribution": "actions-core",
+      "version": "1.0.3",
+      "sha256": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3"
+    },
+    {
+      "path": "actions-http-helper/pyproject.toml",
+      "lines": "1-3",
+      "distribution": "actions-http-helper",
+      "version": "1.0.3",
+      "sha256": "1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d"
+    }
+  ],
+  "verifier": {
+    "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+    "stale_sites": [
+      {
+        "lines": "911-927",
+        "detail": "Builds wheels from checked-out actions-http-helper/ and actions/ source, then requires actions_core-1.0.2-py3-none-any.whl; current source build produces Core 1.0.3. This path check aborts before provider or Runtime fixture execution."
+      },
+      {
+        "lines": "1292-1297",
+        "detail": "Synthetic Action response is compared against actions_core 1.0.2 and helper 1.0.3 literals."
+      },
+      {
+        "lines": "1673-1676",
+        "detail": "First receipt branch hardcodes actions_core 1.0.2 and helper 1.0.3."
+      },
+      {
+        "lines": "1805-1809",
+        "detail": "Second receipt branch hardcodes actions_core 1.0.2 and helper 1.0.3."
+      }
+    ]
+  },
+  "historical_evidence": {
+    "errata_path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/issue-134-readiness-errata-20261010.md",
+    "errata_sha256": "fa1fad69863064961fff9e1ec84ec15dcaad6dc05ccd16f439ebdfd652a0a79c",
+    "disposition": "Historical provider-dead warm failure remains BLOCKED by retained evidence; current-head reproduction is NOT RUN. The errata says the old 1.0.2 wheel assumption is stale on current source and no candidate-wheel command was run. Historical receipts remain bound to their recorded source; do not reclassify them as current-head results."
+  },
+  "proposed_repair": {
+    "summary": "Derive Core and Helper candidate identities from the checked-out package metadata or built wheel METADATA, then bind wheel selection, synthetic Action expectations, and both receipt branches to those identities. Preserve receipt field shapes and immutable historical receipts.",
+    "regression_boundary": "Add a service-free unit test in action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py. Stub Poetry build to emit wheels matching the checked-out package metadata (Core 1.0.3 and Helper 1.0.3), then verify wheel identity selection and that those exact versions flow to the synthetic Action expectation and serialized receipt identity. The old code should fail at its hardcoded Core 1.0.2 wheel path. Do not start RCC, a provider, Action Server, or a package install in this unit test.",
+    "separate_contract": "Keep Runtime production-floor tests that intentionally consume published actions-core 1.0.2 distinct from this candidate-wheel test, which builds the current checked-out Core source."
+  },
+  "documentation_delta_proposal": {
+    "canonical_path": "docs/skills/repository-operations.md",
+    "location": "Immediately after the historical Dakota candidate-wheel result around lines 2619-2632",
+    "text": "The recorded Core 1.0.2 candidate-wheel result is specific to source d9a2d118. PR304 source 73605934 declares Core 1.0.3, while verify_dakota_rcc_acceptance.py still expects the 1.0.2 wheel and Action identity. Do not rerun the current-head candidate-wheel harness until its fixture derives wheel, Action, and receipt versions from the candidate source; historical receipts remain tied to their original source.",
+    "evidence": "Exact PR304 tree a8fe00af; package pyproject metadata and verifier sites above; additive #134 errata."
+  },
+  "execution": {
+    "source_edits": false,
+    "wheel_builds": false,
+    "verifier_runs": false,
+    "rcc_or_runtime_services_started": false,
+    "installs": false,
+    "upstream_issue_or_report": false
+  },
+  "upstream_disposition": "none"
+}

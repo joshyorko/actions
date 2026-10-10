@@ -1,0 +1,5 @@
+python: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+database_module: /workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py
+.                                                                        [100%]
+1 passed in 0.06s
+Log (html): /workspace/work/actions-mk3-db-savepoint/action_server/tests/output/log.html

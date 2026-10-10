@@ -1,0 +1,14 @@
+{
+  "observed_at_utc": "2026-10-10T20:40:53.868015+00:00",
+  "repository": "joshyorko/actions",
+  "run_id": 38081495661,
+  "artifact_id": 11682165026,
+  "direct_github_cli": "FAILED redirect HTTP403; zero byte file was not artifact evidence",
+  "supported_method": "github_download_workflow_artifact connector -> structuredContent.file_uri.download_url -> bounded curl; no Sediment download or credential bypass",
+  "archive": "workitems-macos.zip",
+  "bytes": 1559,
+  "sha256": "93dbc18e30e2e8c8161ef63fc99df0d46d185d2009f668a0e3cd291ea8235e7a",
+  "scope": "Archive and JSON inspected; inner native binary bytes not in this small receipt artifact; independent provenance artifact retrieval delegated",
+  "canonical_doc_delta": "For retained GitHub Actions artifacts, a successful connector response supplies a reusable file reference and download_url. Use that supported temporary URL to obtain bytes in the workspace, then verify archive and member hashes. A zero-byte file left by a failed signed GitHub redirect is not artifact evidence; File Service IDs are not Sediment IDs. Keep signed URLs out of durable receipts.",
+  "upstream_disposition": "none"
+}

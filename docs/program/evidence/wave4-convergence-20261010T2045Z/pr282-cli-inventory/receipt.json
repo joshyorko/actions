@@ -1,0 +1,80 @@
+{
+  "schema": "codex.pr282.cli-inventory-fix.v1",
+  "repository": "joshyorko/actions",
+  "pull_request": 282,
+  "branch": "mk3/pr282-cli-inventory-20261010",
+  "starting_head": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+  "starting_tree": "bf2d56775ec3e9d002c25466024022f5608d1dcb",
+  "commit": "f74341b03b1e0e554c1b0af8f88cfc0bdce5cdaf",
+  "tree": "66b295165ff42a123ff5091024eaa3f5b787f8f5",
+  "parent": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+  "subject": "test(action-server): synchronize embedded template inventory",
+  "worktree": "/workspace/work/actions-mk3-pr282-cli",
+  "worktree_state": "clean after commit; no push or PR edit",
+  "change": {
+    "files": [
+      "action_server/tests/action_server_tests/test_cli.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "behavior": "Keep exact JSON set equality and include shipped canvas-query; also assert Canvas Query appears in human-readable listing.",
+    "production_source_changed": false,
+    "generated_or_binary_changes_committed": false
+  },
+  "verification": {
+    "gateway": "source /workspace/actions-cloud/activate.sh; RCC 18.19.3",
+    "lockfile": {
+      "path": "action_server/poetry.lock",
+      "sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+      "matched_prepared_pr282_environment": true
+    },
+    "prepared_environment": {
+      "path": "/workspace/work/actions-mk3-pr282/action_server/.venv",
+      "python": "3.12.15",
+      "actions_runtime": "1.0.3",
+      "ruff": "0.1.15",
+      "mypy": "1.20.2"
+    },
+    "commands": [
+      "source /workspace/actions-cloud/activate.sh && rcc run -r work/pr282-cli-checks.yaml --dev -t CliFocused",
+      "source /workspace/actions-cloud/activate.sh && rcc run -r work/pr282-cli-checks.yaml --dev -t CliLint",
+      "source /workspace/actions-cloud/activate.sh && rcc run -r work/pr282-cli-checks.yaml --dev -t CliType",
+      "git diff --check"
+    ],
+    "red": {
+      "result": "expected failure: exact CLI inventory test actual set contained canvas-query while expected set omitted it",
+      "test": "tests/action_server_tests/test_cli.py::test_new_list_templates",
+      "log": "red.log",
+      "log_sha256": "dadc50d54508fcbaad57169823d7af2e78d2979bdad8225cd1ca5535ee9fb466"
+    },
+    "green": {
+      "result": "1 passed in 0.47s",
+      "log": "green-final.log",
+      "log_sha256": "606b83f0a3487d1c69a853c77786f358ac36b5738a5816f76ebdc1e03ae32106"
+    },
+    "lint": {
+      "result": "Ruff check passed on tests/action_server_tests/test_cli.py",
+      "log": "lint.log",
+      "log_sha256": "fa815e5e38785ab4a953462086b89f3e0f29f1419b405235aab04fc8ac14f535"
+    },
+    "typecheck": {
+      "result": "Mypy reported Success: no issues found in 1 source file",
+      "log": "type.log",
+      "log_sha256": "11560849a360bcb727153f01e4e3ee092bca7cc706c93c711e5f68bc94b7d00e"
+    },
+    "diff_check": "passed"
+  },
+  "temporary_setup": "The first focused attempt confirmed the fresh checkout lacked the ignored bundled RCC binary required by the test fixture. For the verified attempts, the already-prepared RCC 18.19.3 binary from the sibling PR282 worktree was temporarily symlinked at the expected ignored path; symlink and generated outputs were removed before commit. No install occurred.",
+  "independent_review": {
+    "reviewer": "/root/sol_pr301_review",
+    "result": "GO; confirms the exact six-template inventory and four-line guide note are bounded and correct."
+  },
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "durable_learning": "Adding an embedded template requires updating test_new_list_templates human-readable and complete JSON inventory assertions; bundle integrity tests do not cover CLI listing membership.",
+    "evidence": "GitHub run 38081659107/job 114299650930 exact-head failure plus local focused RED/GREEN.",
+    "stale_or_ambiguous_guidance_removed": "Added missing synchronization guidance; no contradictory existing statement was found.",
+    "remaining_uncertainty": "The full packaged-binary suite and PR282 hosted gates were not rerun; root-owned PR CI remains authoritative."
+  },
+  "upstream_disposition": "none",
+  "scope_limit": "No full suite, browser rerun, remote write, or PR edit."
+}

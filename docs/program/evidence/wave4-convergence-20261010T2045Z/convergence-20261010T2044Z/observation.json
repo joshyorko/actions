@@ -1,0 +1,41 @@
+{
+  "observed_at_utc": "2026-10-10T20:44:36.036106+00:00",
+  "scope": "Read-only current PR observations; no whole-contract acceptance inferred",
+  "prs": [
+    {
+      "pr": 292,
+      "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "base": "integration/community-release-20261008"
+    },
+    {
+      "pr": 302,
+      "head": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+      "base": "integration/community-release-20261008"
+    },
+    {
+      "pr": 304,
+      "head": "73605934c1c948895410a5abaed6c225a396e038",
+      "base": "integration/community-release-20261008"
+    },
+    {
+      "pr": 305,
+      "head": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "base": "integration/community-release-20261008"
+    },
+    {
+      "pr": 306,
+      "head": "1d742149b7341ebc5dd543aa8b7e446f7f9c8b5b",
+      "base": "integration/community-release-20261008"
+    },
+    {
+      "pr": 307,
+      "head": "bad6a44752438216c47ebab7fac520e174f9649a",
+      "base": "mk3/core-union-20261010"
+    },
+    {
+      "pr": 282,
+      "head": "f74341b03b1e0e554c1b0af8f88cfc0bdce5cdaf",
+      "base": "integration/community-release-20261008"
+    }
+  ]
+}

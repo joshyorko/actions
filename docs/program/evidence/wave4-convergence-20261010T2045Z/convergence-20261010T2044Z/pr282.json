@@ -1,0 +1,200 @@
+{
+  "baseRefName": "integration/community-release-20261008",
+  "headRefName": "feat/canvas-template-20261010",
+  "headRefOid": "f74341b03b1e0e554c1b0af8f88cfc0bdce5cdaf",
+  "mergeStateStatus": "UNSTABLE",
+  "number": 282,
+  "state": "OPEN",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084849977/job/114309119821",
+      "name": "audit",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "AI audit evidence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850011/job/114309120233",
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084849976/job/114309119781",
+      "name": "action-server-frontend-tests",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Frontend tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850025/job/114309120152",
+      "name": "build (ubuntu-py3.12-devmode)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850001/job/114309119895",
+      "name": "build-sdist (ubuntu-py3.12)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Actions Runtime PYPI Release"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850004/job/114309119989",
+      "name": "coverage",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": ".github/workflows/coverage-gate.yml"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084849985/job/114309120003",
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850011/job/114309120214",
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850025/job/114309119922",
+      "name": "build (windows-py3.12-devmode)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084849985/job/114309119798",
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850011/job/114309120015",
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850025/job/114309120167",
+      "name": "build (macos-py3.12-devmode)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084849985/job/114309119955",
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084849985/job/114309120164",
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084849985/job/114309119978",
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084849985/job/114309119961",
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850001/job/114309119914",
+      "name": "build-wheels (ubuntu-22.04)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Actions Runtime PYPI Release"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850001/job/114309119766",
+      "name": "build-wheels (windows-2022)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Actions Runtime PYPI Release"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38084850001/job/114309119848",
+      "name": "build-wheels (macos-15)",
+      "startedAt": "2026-10-10T20:43:21Z",
+      "status": "QUEUED",
+      "workflowName": "Actions Runtime PYPI Release"
+    }
+  ]
+}

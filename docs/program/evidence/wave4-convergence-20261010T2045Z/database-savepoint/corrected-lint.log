@@ -1,0 +1,5 @@
+[1;37mpoetry run ruff check src tests[0m
+[1;37mpoetry run ruff format --check --config /workspace/work/actions-mk3-canvas-proof/devutils/ruff.toml --exclude=_static_contents.py,_oauth2_config.py src tests[0m
+294 files already formatted
+[1;37mpoetry run isort --check src tests[0m
+Markdown lint wasn't found in PATH, consider installing and adding it in order to be able to lint package's *.md documents.

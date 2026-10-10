@@ -1,0 +1,240 @@
+{
+  "baseRefName": "integration/community-release-20261008",
+  "headRefName": "mk3/core-union-20261010",
+  "headRefOid": "73605934c1c948895410a5abaed6c225a396e038",
+  "mergeStateStatus": "UNSTABLE",
+  "number": 304,
+  "state": "OPEN",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:05:23Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495648/job/114299160613",
+      "name": "audit",
+      "startedAt": "2026-10-10T20:05:10Z",
+      "status": "COMPLETED",
+      "workflowName": "AI audit evidence"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:06:43Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495661/job/114299160781",
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "startedAt": "2026-10-10T20:00:57Z",
+      "status": "COMPLETED",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:16:37Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495682/job/114299161091",
+      "name": "build (ubuntu-py3.12-devmode)",
+      "startedAt": "2026-10-10T19:58:47Z",
+      "status": "COMPLETED",
+      "workflowName": "Action Server Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:02:50Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495668/job/114299161133",
+      "name": "build (ubuntu-py3.10-devmode)",
+      "startedAt": "2026-10-10T20:01:32Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Core Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T19:59:47Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495663/job/114299160841",
+      "name": "build-sdist (ubuntu-py3.12)",
+      "startedAt": "2026-10-10T19:58:48Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Runtime PYPI Release"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:08:02Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495656/job/114299160624",
+      "name": "coverage",
+      "startedAt": "2026-10-10T19:58:29Z",
+      "status": "COMPLETED",
+      "workflowName": ".github/workflows/coverage-gate.yml"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:10:51Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495671/job/114299160964",
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "startedAt": "2026-10-10T20:01:53Z",
+      "status": "COMPLETED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:18:40Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495661/job/114299160955",
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "startedAt": "2026-10-10T20:09:07Z",
+      "status": "COMPLETED",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:39:53Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495682/job/114299160939",
+      "name": "build (windows-py3.12-devmode)",
+      "startedAt": "2026-10-10T20:01:51Z",
+      "status": "COMPLETED",
+      "workflowName": "Action Server Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:01:51Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495668/job/114299161042",
+      "name": "build (windows-py3.10-devmode)",
+      "startedAt": "2026-10-10T19:58:43Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Core Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:20:10Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495671/job/114299161235",
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "startedAt": "2026-10-10T20:17:01Z",
+      "status": "COMPLETED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495682/job/114299161171",
+      "name": "build (macos-py3.12-devmode)",
+      "startedAt": "2026-10-10T19:52:07Z",
+      "status": "QUEUED",
+      "workflowName": "Action Server Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:38:51Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495661/job/114299161007",
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "startedAt": "2026-10-10T20:32:41Z",
+      "status": "COMPLETED",
+      "workflowName": "Action Server Build (Unauthenticated)"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:28:51Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495668/job/114299161135",
+      "name": "build (macos-py3.10-devmode)",
+      "startedAt": "2026-10-10T20:27:49Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Core Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:07:50Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495671/job/114299161167",
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "startedAt": "2026-10-10T20:04:43Z",
+      "status": "COMPLETED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:17:49Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495671/job/114299161102",
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "startedAt": "2026-10-10T20:07:52Z",
+      "status": "COMPLETED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:24:43Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495671/job/114299161208",
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "startedAt": "2026-10-10T20:20:53Z",
+      "status": "COMPLETED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:12:09Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495671/job/114299161266",
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "startedAt": "2026-10-10T20:09:00Z",
+      "status": "COMPLETED",
+      "workflowName": "RCC developer toolkit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T19:59:23Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495668/job/114299160884",
+      "name": "candidate-wheel",
+      "startedAt": "2026-10-10T19:58:31Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Core Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:05:08Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495663/job/114299161058",
+      "name": "build-wheels (ubuntu-22.04)",
+      "startedAt": "2026-10-10T20:02:34Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Runtime PYPI Release"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:07:10Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495663/job/114299161168",
+      "name": "build-wheels (windows-2022)",
+      "startedAt": "2026-10-10T20:02:53Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Runtime PYPI Release"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:31:54Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495663/job/114299161048",
+      "name": "build-wheels (macos-15)",
+      "startedAt": "2026-10-10T20:30:20Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Runtime PYPI Release"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-10T20:32:26Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/joshyorko/actions/actions/runs/38081495663/job/114306879661",
+      "name": "publish (3.12)",
+      "startedAt": "2026-10-10T20:31:57Z",
+      "status": "COMPLETED",
+      "workflowName": "Actions Runtime PYPI Release"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+python: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+database_module: /workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py
+expected_source: /workspace/work/actions-mk3-db-savepoint/action_server/src
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_nested_transaction_savepoint_start_failure_preserves_error_and_counter __
+
+    def test_nested_transaction_savepoint_start_failure_preserves_error_and_counter():
+        import sqlite3
+    
+        from actions.server._database import DBError
+    
+        db = Database(":memory:")
+        savepoint_attempts = []
+        nested_body_entered = False
+    
+        with db.connect():
+            connection = db._tlocal.conn
+            with db.transaction():
+                db.execute("CREATE TABLE savepoint_failure_probe (value TEXT);")
+    
+            def deny_savepoint_start(action, first, second, _database, _source):
+                if action == sqlite3.SQLITE_SAVEPOINT:
+                    savepoint_attempts.append((action, first, second))
+                    if first == "BEGIN":
+                        return sqlite3.SQLITE_DENY
+                return sqlite3.SQLITE_OK
+    
+            connection.set_authorizer(deny_savepoint_start)
+            observed_error = None
+            try:
+                with db.transaction():
+                    with db.transaction():
+                        nested_body_entered = True
+            except Exception as error:
+                observed_error = error
+            finally:
+                connection.set_authorizer(None)
+    
+            error_chain = []
+            current_error = observed_error
+            while current_error is not None and current_error not in error_chain:
+                error_chain.append(current_error)
+                current_error = current_error.__context__
+    
+            wrapped_sql_error = next(
+                (error for error in error_chain if isinstance(error, DBError)), None
+            )
+            sqlite_error = (
+                wrapped_sql_error.__context__ if wrapped_sql_error is not None else None
+            )
+    
+            # The same connection must remain usable after the denied SAVEPOINT.
+            recovery_nesting = []
+            with db.transaction():
+                recovery_nesting.append(db._tlocal.in_transaction)
+                with db.transaction():
+                    recovery_nesting.append(db._tlocal.in_transaction)
+                    db.execute(
+                        "INSERT INTO savepoint_failure_probe (value) VALUES ('recovered');"
+                    )
+            recovered_values = connection.execute(
+                "SELECT value FROM savepoint_failure_probe;"
+            ).fetchall()
+    
+            assert savepoint_attempts == [
+                (sqlite3.SQLITE_SAVEPOINT, "BEGIN", "savepoint_0")
+            ]
+>           assert (
+            
+                type(observed_error),
+                type(wrapped_sql_error),
+                str(wrapped_sql_error),
+                type(sqlite_error),
+                str(sqlite_error),
+                nested_body_entered,
+                recovery_nesting,
+                db._tlocal.in_transaction,
+                connection.in_transaction,
+                recovered_values,
+            ) == (
+                DBError,
+                DBError,
+                "Error running sql: 'savepoint savepoint_0;' with values: None",
+                sqlite3.DatabaseError,
+                "not authorized",
+                False,
+                [1, 2],
+                0,
+                False,
+                [("recovered",)],
+            )
+E           AssertionError: Failed: assert (type(observed_error), type(wrapped_sql_error), str(wrapped_sql_error), type(sqlite_error), str(sqlite_error), nested_body_entered, recovery_nesting, db._tlocal.in_transaction, connection.in_transaction, recovered_values) == (DBError, DBError, "Error running sql: 'savepoint savepoint_0;' with values: None", sqlite3.DatabaseError, 'not authorized', False, [1, 2], 0, False, [('recovered',)])
+E           Variables:
+E             (type(observed_error), type(wrapped_sql_error), str(wrapped_sql_error), type(sqlite_error), str(sqlite_error), nested_body_entered, recovery_nesting, db._tlocal.in_transaction, connection.in_transaction, recovered_values) = (<class 'AssertionError'>, <class 'actions.server._database.DBError'>, "Error running sql: 'savepoint savepoint_0;' with values: None", <class 'sqlite3.DatabaseError'>, 'not authorized', False, [2, 3], 1, True, [('recovered',)])
+E             (DBError, DBError, "Error running sql: 'savepoint savepoint_0;' with values: None", sqlite3.DatabaseError, 'not authorized', False, [1, 2], 0, False, [('recovered',)]) = (<class 'actions.server._database.DBError'>, <class 'actions.server._database.DBError'>, "Error running sql: 'savepoint savepoint_0;' with values: None", <class 'sqlite3.DatabaseError'>, 'not authorized', False, [1, 2], 0, False, [('recovered',)])
+
+action_server_tests/test_database.py:509: AssertionError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-10 20:16:19,014 - actions.server._database - ERROR - Error. Rolling back database
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 1154, in execute
+    conn.execute(sql)
+sqlite3.DatabaseError: not authorized
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 656, in transaction
+    yield
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/tests/action_server_tests/test_database.py", line 473, in test_nested_transaction_savepoint_start_failure_preserves_error_and_counter
+    with db.transaction():
+         ^^^^^^^^^^^^^^^^
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 629, in transaction
+    self.execute(f"savepoint {savepoint_name};")
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 1158, in execute
+    self._raise_execute_error(
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql: 'savepoint savepoint_0;' with values: None
+------------------------------ Captured log call -------------------------------
+ERROR    actions.server._database:_database.py:659 Error. Rolling back database
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 1154, in execute
+    conn.execute(sql)
+sqlite3.DatabaseError: not authorized
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 656, in transaction
+    yield
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/tests/action_server_tests/test_database.py", line 473, in test_nested_transaction_savepoint_start_failure_preserves_error_and_counter
+    with db.transaction():
+         ^^^^^^^^^^^^^^^^
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 629, in transaction
+    self.execute(f"savepoint {savepoint_name};")
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 1158, in execute
+    self._raise_execute_error(
+  File "/workspace/work/actions-mk3-db-savepoint/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql: 'savepoint savepoint_0;' with values: None
+=========================== short test summary info ============================
+FAILED action_server_tests/test_database.py::test_nested_transaction_savepoint_start_failure_preserves_error_and_counter
+1 failed in 1.15s
+Log (html): /workspace/work/actions-mk3-db-savepoint/action_server/tests/output/log.html
