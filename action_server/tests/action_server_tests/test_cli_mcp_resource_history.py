@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
-from typing import Literal, TypeGuard, TypedDict
+from typing import Literal, TypedDict, TypeGuard
 
 import httpx
 import pytest
