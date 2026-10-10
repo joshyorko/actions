@@ -571,7 +571,7 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
     receipt_path.write_text(
         json.dumps(
             {
-                "schema_version": 1,
+                "schema_version": 2,
                 "actions_core_wheel": {
                     "path": str(candidate_core_wheel),
                     "sha256": candidate_core_wheel_sha256,
