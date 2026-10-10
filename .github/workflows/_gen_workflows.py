@@ -2020,7 +2020,6 @@ tag="$GITHUB_REF_NAME"
                         "with": {
                             "release_title": "${{ github.ref_name }}",
                             "changelog_file": RUNTIME_CHANGELOG_PATH,
-                            "release_text": "Actions Runtime binaries are available as assets. Run `action-server -h` for usage instructions.",
                         },
                         "env": {"GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}"},
                     },
