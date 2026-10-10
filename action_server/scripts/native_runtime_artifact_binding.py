@@ -55,7 +55,7 @@ def _check_bounded_tree(root: Path) -> None:
             raise ValueError("native package exceeds the aggregate size limit")
 
 
-def _check_tar_member_limit(path: Path) -> None:
+def _check_tar_member_limit(path: Path, *, metadata_sizes: dict[str, int]) -> None:
     if path.stat().st_size > MAX_NATIVE_PROVENANCE_BYTES:
         raise ValueError("native provenance archive exceeds the size limit")
     try:
@@ -69,6 +69,14 @@ def _check_tar_member_limit(path: Path) -> None:
                 if member.size < 0 or member.size > MAX_NATIVE_FILE_BYTES:
                     raise ValueError(
                         "native provenance member exceeds the per-file size limit"
+                    )
+                expected_metadata_size = metadata_sizes.get(member.name)
+                if (
+                    expected_metadata_size is not None
+                    and member.size != expected_metadata_size
+                ):
+                    raise ValueError(
+                        "native provenance metadata member size does not match external input"
                     )
                 declared_bytes += member.size
                 if declared_bytes > MAX_NATIVE_TOTAL_BYTES:
@@ -128,14 +136,20 @@ def validate_native_artifact(
     frozen_tree = (package_root / "dist" / "action-server").resolve(strict=True)
     if not frozen_tree.is_relative_to(package_root) or not frozen_tree.is_dir():
         raise ValueError("native frozen package root escapes selected bundle")
-    for path, limit, label in (
+    for metadata_path, limit, label in (
         (manifest_path, MAX_NATIVE_MANIFEST_BYTES, "manifest"),
         (inventory_path, MAX_NATIVE_INVENTORY_BYTES, "inventory"),
     ):
-        if path.stat().st_size > limit:
+        if metadata_path.stat().st_size > limit:
             raise ValueError(f"native provenance {label} exceeds the size limit")
     _check_bounded_tree(frozen_tree)
-    _check_tar_member_limit(provenance_path)
+    _check_tar_member_limit(
+        provenance_path,
+        metadata_sizes={
+            provenance.MANIFEST_ARCHIVE_PATH: manifest_path.stat().st_size,
+            provenance.INVENTORY_ARCHIVE_PATH: inventory_path.stat().st_size,
+        },
+    )
     manifest, entries, manifest_bytes, inventory_bytes = provenance._measure(
         frozen_tree, manifest_path, inventory_path
     )

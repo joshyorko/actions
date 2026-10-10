@@ -21,7 +21,7 @@ import threading
 import time
 import zipfile
 from pathlib import Path
-from typing import NamedTuple
+from typing import TYPE_CHECKING, NamedTuple
 from urllib.parse import urlsplit
 
 
@@ -53,7 +53,9 @@ def _load_sibling_module(name: str):
 _load_sibling_module("write_native_artifact_manifest")
 _load_sibling_module("archive_native_artifact_provenance")
 _native_binding = _load_sibling_module("native_runtime_artifact_binding")
-ValidatedNativeArtifact = _native_binding.ValidatedNativeArtifact
+if TYPE_CHECKING:
+    from native_runtime_artifact_binding import ValidatedNativeArtifact
+
 validate_go_extraction = _native_binding.validate_go_extraction
 validate_native_artifact = _native_binding.validate_native_artifact
 

@@ -146,6 +146,20 @@ def test_native_binding_rejects_companion_tree_outside_selected_bundle(tmp_path)
         )
 
 
+def test_provenance_metadata_tar_members_are_bounded_by_external_inputs(tmp_path):
+    package, manifest, inventory, provenance, _, _ = _fixture(tmp_path)
+    metadata_sizes = {
+        archive_writer.MANIFEST_ARCHIVE_PATH: manifest.stat().st_size,
+        archive_writer.INVENTORY_ARCHIVE_PATH: inventory.stat().st_size,
+    }
+
+    binding._check_tar_member_limit(provenance, metadata_sizes=metadata_sizes)
+
+    metadata_sizes[archive_writer.MANIFEST_ARCHIVE_PATH] += 1
+    with pytest.raises(ValueError, match="metadata member size"):
+        binding._check_tar_member_limit(provenance, metadata_sizes=metadata_sizes)
+
+
 def test_go_wrapper_requires_exact_embedded_zip_and_binds_extraction(tmp_path):
     package, manifest, inventory, provenance, assets, _ = _fixture(tmp_path)
 
