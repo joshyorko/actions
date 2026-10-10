@@ -282,6 +282,17 @@ class ActionPackageHandler:
         self._import_path = snapshot
         self._pythonpath_entries = None
 
+    def prepare_runtime_source_snapshot(self) -> tuple[Path, bool]:
+        """Create and validate a snapshot, discarding only a failed new candidate."""
+        snapshot, created = self.create_runtime_source_snapshot()
+        try:
+            self.use_runtime_source_snapshot(snapshot)
+        except BaseException:
+            if created:
+                self.discard_runtime_source_snapshot(snapshot)
+            raise
+        return snapshot, created
+
     def discard_runtime_source_snapshot(self, snapshot: Path) -> None:
         """Remove a newly created candidate after its import transaction fails."""
         import shutil

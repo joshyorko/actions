@@ -1692,6 +1692,11 @@ separate outcomes. An Action may return `PASS` while intentional pool
 termination produces `status: failed`, `exitCode: -1`, and
 `reason: child exited non-zero`. That receipt remains a wrapper lifecycle
 failure even when artifact identity, verification, and lease identity validate.
+For reload/recovery receipts, retain the Action Server `Popen` owner before
+requesting stop and record its bounded observed return code separately from RCC
+wrapper receipts. A `stop()` return is not process-exit evidence, and a captured
+descendant set only reports that observation; it does not prove complete tree
+reaping.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes
@@ -1756,9 +1761,12 @@ selected source snapshot even if the live package changes during publish.
 Relative `pythonpath` entries resolve against the snapshot package root. Snapshot
 identity binds included relative paths, supported permission mode bits, and file
 bytes, and both newly copied and reused destinations are checked. Failed
-metadata import discards only a new candidate and retains the last-good
-ActionPackage/source generation. The regression tests
+snapshot validation also discards only a newly created candidate; a reused
+snapshot is preserved. Failed metadata import discards only a new candidate and
+retains the last-good ActionPackage/source generation. The regression tests
 `test_snapshot_pins_environment_yaml_across_aba_edit`,
+`test_snapshot_prepare_discards_new_mismatched_candidate_only`,
+`test_snapshot_prepare_preserves_reused_snapshot_on_validation_failure`,
 `test_snapshot_environment_input_preserves_original_cache_identity`, and
 `test_snapshot_identity_changes_when_executable_mode_changes` cover the ABA
 boundary, unchanged-environment reuse, relative `pythonpath`, and mode identity.

@@ -77,6 +77,82 @@ def test_snapshot_pins_environment_yaml_across_aba_edit(
     assert handler.original_package_yaml == (tmp_path / package_yaml).absolute()
 
 
+def test_snapshot_prepare_discards_new_mismatched_candidate_only(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server._action_package_handler import ActionPackageHandler
+    from actions.server._errors_action_server import ActionServerValidationError
+
+    package = tmp_path / "package"
+    package.mkdir()
+    package_yaml = package / "package.yaml"
+    _write_package_yaml(package_yaml)
+    (package / "action.py").write_text("VALUE = 'last-good'\n", encoding="utf-8")
+    datadir = tmp_path / "service-data"
+
+    current = ActionPackageHandler(str(package), datadir)
+    last_good, created = current.create_runtime_source_snapshot()
+    assert created
+    current.use_runtime_source_snapshot(last_good)
+    last_good_yaml = (last_good / "package.yaml").read_bytes()
+
+    candidate = ActionPackageHandler(str(package), datadir)
+    create_candidate = candidate.create_runtime_source_snapshot
+
+    def edit_before_snapshot_copy():
+        _write_package_yaml(package_yaml, python="3.11.9")
+        return create_candidate()
+
+    monkeypatch.setattr(
+        candidate, "create_runtime_source_snapshot", edit_before_snapshot_copy
+    )
+    with pytest.raises(ActionServerValidationError, match="package.yaml changed"):
+        candidate.prepare_runtime_source_snapshot()
+
+    package_store = last_good.parent
+    assert [path for path in package_store.iterdir() if path.is_dir()] == [last_good]
+    assert (last_good / "package.yaml").read_bytes() == last_good_yaml
+
+
+def test_snapshot_prepare_preserves_reused_snapshot_on_validation_failure(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from actions.server._action_package_handler import ActionPackageHandler
+    from actions.server._errors_action_server import ActionServerValidationError
+
+    package = tmp_path / "package"
+    package.mkdir()
+    package_yaml = package / "package.yaml"
+    _write_package_yaml(package_yaml)
+    (package / "action.py").write_text("VALUE = 'last-good'\n", encoding="utf-8")
+    datadir = tmp_path / "service-data"
+
+    current = ActionPackageHandler(str(package), datadir)
+    last_good, created = current.create_runtime_source_snapshot()
+    assert created
+    selected_bytes = (last_good / "package.yaml").read_bytes()
+
+    candidate = ActionPackageHandler(str(package), datadir)
+    create_candidate = candidate.create_runtime_source_snapshot
+
+    def corrupt_reused_snapshot_after_selection():
+        snapshot, was_created = create_candidate()
+        assert snapshot == last_good and not was_created
+        _write_package_yaml(snapshot / "package.yaml", python="3.11.9")
+        return snapshot, was_created
+
+    monkeypatch.setattr(
+        candidate,
+        "create_runtime_source_snapshot",
+        corrupt_reused_snapshot_after_selection,
+    )
+    with pytest.raises(ActionServerValidationError, match="package.yaml changed"):
+        candidate.prepare_runtime_source_snapshot()
+
+    assert last_good.is_dir()
+    assert (last_good / "package.yaml").read_bytes() != selected_bytes
+
+
 @pytest.mark.skipif(os.name == "nt", reason="POSIX permission mode identity")
 def test_snapshot_identity_changes_when_executable_mode_changes(
     tmp_path: Path,

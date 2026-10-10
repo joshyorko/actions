@@ -50,6 +50,42 @@ def _read_package_source(database: Path, package_name: str):
     return row[0] if row else None
 
 
+def _source_evidence() -> dict[str, object]:
+    root = Path(__file__).resolve().parents[3]
+    import actions.server._action_package_handler as package_handler_module
+    import actions.server._actions_import as actions_import_module
+    import actions.server._rcc_runtime_adapter as runtime_adapter_module
+
+    def git(*args: str) -> str:
+        return subprocess.check_output(
+            ["git", "-C", str(root), *args], text=True
+        ).strip()
+
+    changed_paths = git("diff", "--name-only", "HEAD^", "HEAD").splitlines()
+    return {
+        "commit": git("rev-parse", "HEAD"),
+        "tree": git("rev-parse", "HEAD^{tree}"),
+        "dirty_paths": [
+            line[3:]
+            for line in git(
+                "status", "--porcelain", "--untracked-files=no"
+            ).splitlines()
+        ],
+        "changed_source_sha256": {
+            path: hashlib.sha256((root / path).read_bytes()).hexdigest()
+            for path in changed_paths
+            if (root / path).is_file()
+        },
+        "module_origins": {
+            "action_package_handler": str(
+                Path(package_handler_module.__file__).resolve()
+            ),
+            "actions_import": str(Path(actions_import_module.__file__).resolve()),
+            "runtime_adapter": str(Path(runtime_adapter_module.__file__).resolve()),
+        },
+    }
+
+
 @pytest.mark.real_rcc
 @pytest.mark.integration_test
 def test_current_candidate_failed_reload_keeps_last_good_action_usable(
@@ -128,7 +164,7 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
     database = action_server_process.datadir / "server.db"
     run_ids: list[str] = []
     evidence: dict[str, object] = {
-        "source_sha": os.environ["ACTIONS_RUNTIME_SOURCE_SHA"],
+        "source": _source_evidence(),
         "rcc_version": rcc_version,
         "rcc_sha256": real_rcc_sha,
         "status": "NOT_RUN",
@@ -154,6 +190,7 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
     Path(provider_environment["TMPDIR"]).mkdir()
     provider = None
     started_server = False
+    server_exit_observed = False
     try:
         provider, provider_url = provider_harness.start_provider(
             str(real_rcc),
@@ -326,7 +363,51 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
         raise
     finally:
         if started_server:
+            owned_server_process = action_server_process.process
+            server_pid = owned_server_process.pid
+            server_returncode_before_stop = owned_server_process.returncode
+            try:
+                import psutil
+
+                server_tree_before_stop: list[dict[str, int | float]] = [
+                    {"pid": child.pid, "create_time": child.create_time()}
+                    for child in psutil.Process(server_pid).children(recursive=True)
+                ]
+            except psutil.Error:
+                server_tree_before_stop = []
             action_server_process.stop()
+            exit_deadline = time.monotonic() + 10
+            while (
+                owned_server_process.returncode is None
+                and time.monotonic() < exit_deadline
+            ):
+                time.sleep(0.05)
+            server_exit_observed = owned_server_process.returncode is not None
+            remaining_descendants = []
+            for descendant in server_tree_before_stop:
+                try:
+                    process = psutil.Process(int(descendant["pid"]))
+                    if process.create_time() == descendant["create_time"]:
+                        remaining_descendants.append(descendant)
+                except psutil.Error:
+                    pass
+            evidence["action_server_process_exit"] = {
+                "pid": server_pid,
+                "returncode_before_stop": server_returncode_before_stop,
+                "returncode_after_stop": owned_server_process.returncode,
+                "bounded_exit_observed": server_exit_observed,
+                "owned_descendants_before_stop": server_tree_before_stop,
+                "same_owned_descendants_remaining_after_stop": remaining_descendants,
+                "descendant_observation_scope": "captured tree only; not a complete descendant-reaping claim",
+                "argv": owned_server_process._args,
+                "interpreter": sys.executable,
+                "pythonpath": runtime_env.get("PYTHONPATH"),
+            }
+            if not server_exit_observed:
+                evidence["status"] = "FAIL"
+                evidence[
+                    "failure"
+                ] = "Action Server exit was not observed within 10 seconds"
         if provider is not None:
             provider_harness.terminate_process_tree(provider)
             if provider.poll() is None:
@@ -337,6 +418,10 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
             path = Path(receipt_path)
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n")
+        if started_server and not server_exit_observed:
+            raise AssertionError(
+                "Action Server return code was not observed within the bounded wait"
+            )
 
 
 def _read_package_runtime(database: Path, package_name: str):

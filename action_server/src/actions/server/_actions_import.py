@@ -115,8 +115,7 @@ def import_action_package(
             (
                 source_snapshot_path,
                 source_snapshot_created,
-            ) = action_package_handler.create_runtime_source_snapshot()
-            action_package_handler.use_runtime_source_snapshot(source_snapshot_path)
+            ) = action_package_handler.prepare_runtime_source_snapshot()
             original_package_yaml = action_package_handler.original_package_yaml
             package_yaml_exists = action_package_handler.package_yaml_exists
             import_path = action_package_handler.import_path
