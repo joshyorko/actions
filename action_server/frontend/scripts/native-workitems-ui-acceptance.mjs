@@ -286,6 +286,10 @@ async function authorizationDenied() {
         return { status: response.status, body: await response.text() };
     });
     lastStatus = denied.status;
+    evidence.authorizationDenied = {
+        httpStatus: denied.status,
+        body: denied.body,
+    };
     assert.equal(denied.status, 403);
     assert.equal(denied.body, "Invalid or missing API Key");
 

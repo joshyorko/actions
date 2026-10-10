@@ -521,11 +521,14 @@ form, then reauthenticates and reads the previously created item. This stage
 tests sign-in recovery, not the Work Items page's separate `Access denied`
 alert: the shared browser-auth observer treats any same-origin protected API
 403 as loss of session and the auth wrapper unmounts protected content. The
-stage is implemented but has not yet produced a native artifact receipt; keep
-its acceptance pending until the exact packaged artifact run passes. Missing
-bundled support and generic HTTP 500 remain `NOT_RUN` until their separately
-owned or supported packaged fixtures run. Do not use response interception as
-backend evidence.
+browser stage receipt records the exact 403 status and middleware body. The
+outer acceptance receipt keeps `authorization_denial_ui` in `states_not_run`
+until that stage returns `PASS`; a normal-stage pass or failed denial attempt
+does not clear it. This stage is implemented but has not yet produced a native
+artifact receipt; keep its acceptance pending until the exact packaged artifact
+run passes. Missing bundled support and generic HTTP 500 remain `NOT_RUN` until
+their separately owned or supported packaged fixtures run. Do not use response
+interception as backend evidence.
 The browser receipt may say `PASS_BOUNDED` only after the bounded process-tree
 cleanup result confirms that the Runtime wrapper was reaped, its descendant
 snapshot was complete, and no observed descendant remains live. A normal return

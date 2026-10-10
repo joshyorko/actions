@@ -26,6 +26,7 @@ PACKAGE = Path(__file__).resolve().parents[2]
 FRONTEND = PACKAGE / "frontend"
 BROWSER_SCRIPT = FRONTEND / "scripts" / "native-workitems-ui-acceptance.mjs"
 STATES_NOT_RUN = {
+    "authorization_denial_ui": "native packaged denial/recovery stage has not passed",
     "missing_runtime_support": "cannot be induced without mutating the package",
     "generic_http_500": "no supported native backend fault fixture",
 }
@@ -635,6 +636,11 @@ def record_browser_stage(
     if not isinstance(script_exit_code, int):
         raise AssertionError("browser receipt script_exit_code is not an integer")
     validate_browser_stage_result(script_exit_code, browser_stage)
+    if browser_stage.get("stage") == "authorization-denied":
+        states_not_run = acceptance_receipt.get("states_not_run")
+        if not is_string_keyed_object(states_not_run):
+            raise AssertionError("acceptance receipt states_not_run is not an object")
+        states_not_run.pop("authorization_denial_ui", None)
 
 
 def run_browser_stage(
@@ -701,6 +707,69 @@ def test_browser_stage_is_recorded_before_failure_is_raised() -> None:
         record_browser_stage(acceptance_receipt, browser_stage)
 
     assert acceptance_receipt["browser_stages"] == [browser_stage]
+
+
+def test_failed_authorization_denial_stage_remains_not_run() -> None:
+    acceptance_receipt: dict[str, object] = {
+        "browser_stages": [],
+        "states_not_run": dict(STATES_NOT_RUN),
+    }
+    browser_stage = {
+        "status": "FAIL",
+        "stage": "authorization-denied",
+        "script_exit_code": 1,
+        "states": {
+            "authorizationDenied": {
+                "httpStatus": 403,
+                "body": "Invalid or missing API Key",
+            }
+        },
+    }
+
+    with pytest.raises(AssertionError):
+        record_browser_stage(acceptance_receipt, browser_stage)
+
+    assert acceptance_receipt["browser_stages"] == [browser_stage]
+    assert "authorization_denial_ui" in acceptance_receipt["states_not_run"]
+
+
+def test_successful_authorization_denial_stage_clears_not_run() -> None:
+    acceptance_receipt: dict[str, object] = {
+        "browser_stages": [],
+        "states_not_run": dict(STATES_NOT_RUN),
+    }
+    browser_stage = {
+        "status": "PASS",
+        "stage": "authorization-denied",
+        "script_exit_code": 0,
+        "states": {
+            "authorizationDenied": {
+                "httpStatus": 403,
+                "body": "Invalid or missing API Key",
+            }
+        },
+    }
+
+    record_browser_stage(acceptance_receipt, browser_stage)
+
+    assert "authorization_denial_ui" not in acceptance_receipt["states_not_run"]
+
+
+def test_normal_stage_does_not_clear_authorization_denial_not_run() -> None:
+    acceptance_receipt: dict[str, object] = {
+        "browser_stages": [],
+        "states_not_run": dict(STATES_NOT_RUN),
+    }
+    browser_stage = {
+        "status": "PASS",
+        "stage": "normal",
+        "script_exit_code": 0,
+        "states": {},
+    }
+
+    record_browser_stage(acceptance_receipt, browser_stage)
+
+    assert "authorization_denial_ui" in acceptance_receipt["states_not_run"]
 
 
 def wrapper_home_environment(runtime_home: Path) -> dict[str, str]:
@@ -1374,7 +1443,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         "work_items_database": "datadir/workitems.db",
         "storage_fault_fixture": "test-owned datadir/workitems.db; Action Server DB remains server.db",
         "browser_stages": [],
-        "states_not_run": STATES_NOT_RUN,
+        "states_not_run": dict(STATES_NOT_RUN),
     }
     process: ActionServerProcess | None = None
     runtime_package_root: Path | None = None
