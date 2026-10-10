@@ -1,0 +1,25 @@
+{
+  "scope": "template source and generated Canvas resource only",
+  "artifact_access": {
+    "state": "blocked-by-missing-authorized-binding",
+    "existing_runtime_routes": [
+      "GET /api/runs/{run_id}/artifacts",
+      "GET /api/runs/{run_id}/artifacts/text-content?artifact_names=...",
+      "GET /api/runs/{run_id}/artifacts/binary-content?artifact_name=..."
+    ],
+    "gap": "Runtime routes resolve content through a run ID plus artifact_names or artifact_name; the Canvas MCP View has no caller-owned Workspace/application/revision binding resolver to authorize a selected artifact.",
+    "template_behavior": "No artifact handle, fetch, status, or success claim is emitted."
+  },
+  "successful_search_shape": {
+    "state": "partial",
+    "artifact": null,
+    "shared_success_schema": "not-satisfied",
+    "reason": "The shared QueryResults Success schema requires a non-null Artifact.handle; this template has no authorized artifact resolver."
+  },
+  "core_dependency": {
+    "declared_version": "1.0.3",
+    "state": "provisional-unpublished-prerequisite",
+    "required_gate": "Publish Core 1.0.3, then verify fresh dependency resolution and published-wheel compatibility before exposing this production template.",
+    "evidence_limit": "Current source-based acceptance does not prove the published wheel or packaged/frozen Action Server."
+  }
+}

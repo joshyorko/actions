@@ -297,6 +297,14 @@ new upload and never replace an existing tag or distribution file.
 Publish dependency releases before changing template pins. After publication,
 update the source templates and regenerate the embedded template ZIP and its
 SHA-256 metadata together; source YAML changes alone do not update shipped templates.
+Template tests are shipped in the template archive, so verify them from a fresh
+archive extraction and keep their inputs and dependencies inside that template.
+Comparisons against monorepo contracts or fixtures belong in repository-level
+tests; an extracted template must not reach outside its files to load them.
+Keep unpublished Core pins explicitly provisional and do not present the
+dependent production template to users before publication and fresh resolution.
+For Canvas results, `artifact: null` is a deliberately partial local result,
+not a match for the shared `Success` schema's required artifact handle.
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.

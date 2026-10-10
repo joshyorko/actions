@@ -1,9 +1,10 @@
 {
-  "hash": "33b6ce2a6c1c9dab32eeca826baf8807ca7f0ac7419dcbc3d0c59a8274bbadff",
+  "hash": "394550b4b09da606208cf3f6ed0c2ce9af50a5ccff216af161e11a9a7de72299",
   "schema": 1,
   "templates": {
     "advanced": "Advanced - An example showcasing more advanced configuration features of Actions.",
     "basic": "Basic - Simple example showcasing some basic configuration.",
+    "canvas-query": "Canvas Query - A local typed Action rendered in the Canvas MCP App View.",
     "mcp-v2-showcase": "MCP v2 Showcase - A local example of the stateless core MCP protocol.",
     "minimal": "Minimal - A bare bone starting template.",
     "workflow-producer-consumer": "Workflow/Producer-Consumer - Producer-consumer workflow pattern using work items."
