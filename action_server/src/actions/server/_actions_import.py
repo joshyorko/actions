@@ -398,6 +398,7 @@ def _get_actions_version(
             runtime_descriptor,
             ["python", "-c", version_code],
             receipt_file=None,
+            package_root=Path(cwd),
         )
     msg = f"""Unable to get {libname} version.
 
@@ -474,6 +475,7 @@ def _add_actions_to_db(
             runtime_descriptor,
             ["python"],
             receipt_file=None,
+            package_root=Path(import_path),
         )[:-1]
 
     if actions_library_version > (1, 0, 1):

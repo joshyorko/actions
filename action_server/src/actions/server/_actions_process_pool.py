@@ -294,6 +294,7 @@ class ProcessHandle:
                         runtime_descriptor,
                         worker_command,
                         receipt_file=receipt_file,
+                        package_root=cwd,
                     )
                 else:
                     cmdline = worker_command
@@ -377,6 +378,7 @@ class ProcessHandle:
                     runtime_descriptor,
                     worker_command,
                     receipt_file=receipt_file,
+                    package_root=cwd,
                 )
             else:
                 cmdline = worker_command

@@ -123,6 +123,387 @@ def test_provider_trust_reference_is_bound_to_exec_and_never_redacted(tmp_path):
     assert command[command.index("--provider") + 1] == provider
 
 
+def test_local_detached_profile_uses_one_carrier_for_publish_acquire_and_exec(
+    tmp_path, monkeypatch
+):
+    from actions.server._rcc_runtime_adapter import build_exec_command, prepare_runtime
+
+    package_root = tmp_path / "package"
+    package_root.mkdir()
+    package_yaml = package_root / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    allowed_root = tmp_path / "trust-root"
+    allowed_root.mkdir(mode=0o700)
+    carrier = allowed_root / "detached-store"
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_PROFILE", "local-detached-v1")
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_ROOT", str(allowed_root))
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", str(carrier))
+
+    provider = "local"
+    digest = "sha256:" + "a" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        if args[2] == "publish":
+            return 0, json.dumps({"artifact": digest}), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    descriptor = prepare_runtime(
+        package_yaml, Path("/opt/rcc"), provider=provider, runner=runner
+    )
+    source_only = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        provider=provider,
+        source_generation="source-next",
+        runner=runner,
+    )
+    command = build_exec_command(
+        Path("/opt/rcc"),
+        descriptor,
+        ["python"],
+        receipt_file=None,
+        package_root=package_root,
+    )
+
+    assert [args[2] for args in calls] == ["publish", "acquire"]
+    for args in [*calls, command]:
+        assert args[args.index("--provider") + 1] == provider
+        assert args[args.index("--trust-carrier") + 1] == str(carrier)
+        assert args[args.index("--trust-carrier-type") + 1] == "filesystem"
+    assert descriptor.contract_version == "rcc-runtime/v2"
+    assert descriptor.trust_profile_id == "local-detached-v1"
+    assert descriptor.trust_carrier_kind == "filesystem"
+    assert descriptor.trust_carrier_reference == str(carrier)
+    assert descriptor.preparation_class == "local"
+    assert source_only.preparation_class == "source-reuse"
+    assert source_only.artifact_digest == descriptor.artifact_digest
+    assert [args[2] for args in calls] == ["publish", "acquire"]
+    assert carrier.is_dir()
+
+
+def test_local_detached_profile_revalidates_existing_exact_artifact(
+    tmp_path, monkeypatch
+):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        environment_spec_fingerprint,
+        prepare_runtime,
+    )
+
+    package_root = tmp_path / "package"
+    package_root.mkdir()
+    package_yaml = package_root / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    allowed_root = tmp_path / "trust-root"
+    allowed_root.mkdir(mode=0o700)
+    carrier = allowed_root / "detached-store"
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_PROFILE", "local-detached-v1")
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_ROOT", str(allowed_root))
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", str(carrier))
+    digest = "sha256:" + "b" * 64
+    previous = RccRuntimeDescriptor(
+        artifact_digest=digest,
+        environment_fingerprint=environment_spec_fingerprint(package_yaml),
+        provider_reference="local",
+    )
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    descriptor = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        provider="local",
+        previous_descriptor=previous,
+        runner=runner,
+    )
+
+    assert [args[2] for args in calls] == ["acquire"]
+    assert calls[0][calls[0].index("--provider") + 1] == "local"
+    assert calls[0][calls[0].index("--trust-carrier") + 1] == str(carrier)
+    assert descriptor.artifact_digest == digest
+    assert descriptor.preparation_class == "trust-revalidation"
+    assert descriptor.contract_version == "rcc-runtime/v2"
+
+
+def test_local_detached_profile_transition_does_not_publish_on_failed_revalidation(
+    tmp_path, monkeypatch
+):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        RccRuntimeError,
+        environment_spec_fingerprint,
+        prepare_runtime,
+    )
+
+    package_root = tmp_path / "package"
+    package_root.mkdir()
+    package_yaml = package_root / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    allowed_root = tmp_path / "trust-root"
+    allowed_root.mkdir(mode=0o700)
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_PROFILE", "local-detached-v1")
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_ROOT", str(allowed_root))
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", str(allowed_root / "store"))
+    previous = RccRuntimeDescriptor(
+        artifact_digest="sha256:" + "c" * 64,
+        environment_fingerprint=environment_spec_fingerprint(package_yaml),
+        provider_reference="local",
+    )
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return 1, "", "artifact is not materialized"
+
+    with pytest.raises(RccRuntimeError, match="profile change"):
+        prepare_runtime(
+            package_yaml,
+            Path("/opt/rcc"),
+            provider="local",
+            previous_descriptor=previous,
+            runner=runner,
+        )
+
+    assert [args[2] for args in calls] == ["acquire"]
+
+
+def test_local_exec_rejects_changed_trust_carrier(tmp_path, monkeypatch):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        build_exec_command,
+        prepare_runtime,
+    )
+
+    package_root = tmp_path / "package"
+    package_root.mkdir()
+    package_yaml = package_root / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    allowed_root = tmp_path / "trust-root"
+    allowed_root.mkdir(mode=0o700)
+    original_carrier = allowed_root / "store-a"
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_PROFILE", "local-detached-v1")
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_ROOT", str(allowed_root))
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", str(original_carrier))
+    digest = "sha256:" + "d" * 64
+    descriptor = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        provider="local",
+        runner=lambda *args: (
+            0,
+            json.dumps(
+                {"artifact": digest}
+                if args[2] == "publish"
+                else {"artifactDigest": digest, "verification": {"valid": True}}
+            ),
+            "",
+        ),
+    )
+    changed_carrier = allowed_root / "store-b"
+    changed_carrier.mkdir(mode=0o700)
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", str(changed_carrier))
+
+    with pytest.raises(RccRuntimeError, match="trust profile changed"):
+        build_exec_command(
+            Path("/opt/rcc"),
+            descriptor,
+            ["python"],
+            receipt_file=None,
+            package_root=package_root,
+        )
+
+
+def test_removed_local_profile_fails_closed_without_publishing(tmp_path, monkeypatch):
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, prepare_runtime
+
+    package_root = tmp_path / "package"
+    package_root.mkdir()
+    package_yaml = package_root / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    allowed_root = tmp_path / "trust-root"
+    allowed_root.mkdir(mode=0o700)
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_PROFILE", "local-detached-v1")
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_ROOT", str(allowed_root))
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", str(allowed_root / "store"))
+    digest = "sha256:" + "e" * 64
+
+    def valid_runner(*args):
+        return (
+            0,
+            json.dumps(
+                {"artifact": digest}
+                if args[2] == "publish"
+                else {"artifactDigest": digest, "verification": {"valid": True}}
+            ),
+            "",
+        )
+
+    previous = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        provider="local",
+        runner=valid_runner,
+    )
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TRUST_PROFILE")
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TRUST_ROOT")
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER")
+    calls = []
+
+    with pytest.raises(RccRuntimeError, match="profile change"):
+        prepare_runtime(
+            package_yaml,
+            Path("/opt/rcc"),
+            previous_descriptor=previous,
+            runner=lambda *args: calls.append(args)
+            or (1, "", "local trust carrier rejected"),
+        )
+
+    assert [args[2] for args in calls] == ["acquire"]
+    assert calls[0][calls[0].index("--provider") + 1] == "local"
+    assert "--trust-carrier" not in calls[0]
+
+
+def test_partial_local_trust_configuration_fails_before_rcc_location(
+    monkeypatch, tmp_path
+):
+    from actions.server._action_package_handler import ActionPackageHandler
+    from actions.server.vendored_deps.action_package_handling.cli_errors import (
+        ActionPackageError,
+    )
+
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_PROVIDER", raising=False)
+    monkeypatch.delenv("ACTIONS_REAL_RCC_ARTIFACT_TEST", raising=False)
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TRUST_PROFILE", raising=False)
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TRUST_CARRIER", raising=False)
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_ROOT", str(tmp_path / "root"))
+    package_dir = tmp_path / "package"
+    package_dir.mkdir()
+    (package_dir / "package.yaml").write_text(
+        "version: 0.1\nspec-version: v2\ndependencies: {}\n"
+    )
+    monkeypatch.setattr(
+        "actions.server._rcc_runtime_adapter.get_rcc_location",
+        lambda: pytest.fail("invalid profile reached RCC location resolution"),
+    )
+
+    with pytest.raises(ActionPackageError, match="Invalid RCC trust profile"):
+        ActionPackageHandler(
+            str(package_dir), tmp_path / "data"
+        ).bootstrap_environment()
+
+
+def test_local_detached_profile_rejects_carrier_inside_package_before_rcc(
+    tmp_path, monkeypatch
+):
+    from actions.server._rcc_runtime_adapter import RccRuntimeError, prepare_runtime
+
+    allowed_root = tmp_path / "allowed"
+    allowed_root.mkdir(mode=0o700)
+    package_root = allowed_root / "package"
+    package_root.mkdir(mode=0o700)
+    package_yaml = package_root / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_PROFILE", "local-detached-v1")
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TRUST_ROOT", str(allowed_root))
+    monkeypatch.setenv(
+        "ACTIONS_RUNTIME_RCC_TRUST_CARRIER", str(package_root / "trust-store")
+    )
+    calls = []
+
+    with pytest.raises(RccRuntimeError, match="package"):
+        prepare_runtime(
+            package_yaml,
+            Path("/opt/rcc"),
+            runner=lambda *args: calls.append(args) or (1, "", "must not run"),
+        )
+
+    assert calls == []
+
+
+def test_local_trust_profile_requires_explicit_complete_configuration():
+    from actions.server.rcc_trust_profile import (
+        TRUST_CARRIER_ENV,
+        TRUST_PROFILE_ENV,
+        TRUST_ROOT_ENV,
+        resolve_trust_profile,
+    )
+
+    for environment in (
+        {TRUST_CARRIER_ENV: "/tmp/carrier"},
+        {TRUST_PROFILE_ENV: "local-detached-v1"},
+        {
+            TRUST_PROFILE_ENV: "local-detached-v1",
+            TRUST_ROOT_ENV: "/tmp/root",
+        },
+        {TRUST_PROFILE_ENV: "unknown-v1"},
+    ):
+        with pytest.raises(ValueError):
+            resolve_trust_profile(environment, create_carrier=False)
+
+
+def test_local_trust_profile_rejects_symlinked_carrier_component(tmp_path):
+    from actions.server.rcc_trust_profile import resolve_trust_profile
+
+    root = tmp_path / "root"
+    root.mkdir(mode=0o700)
+    actual = root / "actual"
+    actual.mkdir(mode=0o700)
+    alias = root / "alias"
+    alias.symlink_to(actual, target_is_directory=True)
+
+    with pytest.raises(ValueError, match="symlink"):
+        resolve_trust_profile(
+            {
+                "ACTIONS_RUNTIME_RCC_TRUST_PROFILE": "local-detached-v1",
+                "ACTIONS_RUNTIME_RCC_TRUST_ROOT": str(root),
+                "ACTIONS_RUNTIME_RCC_TRUST_CARRIER": str(alias / "carrier"),
+            }
+        )
+
+
+def test_local_trust_profile_requires_private_owned_root_and_carrier(tmp_path):
+    from actions.server.rcc_trust_profile import resolve_trust_profile
+
+    root = tmp_path / "root"
+    root.mkdir(mode=0o755)
+    root.chmod(0o755)
+    carrier = root / "carrier"
+
+    with pytest.raises(ValueError, match="private"):
+        resolve_trust_profile(
+            {
+                "ACTIONS_RUNTIME_RCC_TRUST_PROFILE": "local-detached-v1",
+                "ACTIONS_RUNTIME_RCC_TRUST_ROOT": str(root),
+                "ACTIONS_RUNTIME_RCC_TRUST_CARRIER": str(carrier),
+            }
+        )
+
+    root.chmod(0o700)
+    carrier.mkdir(mode=0o700)
+    carrier.chmod(0o750)
+    with pytest.raises(ValueError, match="private"):
+        resolve_trust_profile(
+            {
+                "ACTIONS_RUNTIME_RCC_TRUST_PROFILE": "local-detached-v1",
+                "ACTIONS_RUNTIME_RCC_TRUST_ROOT": str(root),
+                "ACTIONS_RUNTIME_RCC_TRUST_CARRIER": str(carrier),
+            }
+        )
+
+
 @pytest.mark.parametrize("provider", ["local", "dakota-cache", "http://cache:8134"])
 def test_supported_provider_reference_forms_are_preserved(tmp_path, provider):
     from actions.server._rcc_runtime_adapter import (

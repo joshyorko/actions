@@ -484,15 +484,40 @@ class ActionPackageHandler:
                 if self._package_yaml_contents
                 else None
             )
-            artifact_mode = os.environ.get(
-                "ACTIONS_RUNTIME_RCC_PROVIDER"
-            ) or os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST")
+            artifact_mode = (
+                os.environ.get("ACTIONS_RUNTIME_RCC_PROVIDER")
+                or os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST")
+                or os.environ.get("ACTIONS_RUNTIME_RCC_TRUST_PROFILE")
+                or os.environ.get("ACTIONS_RUNTIME_RCC_TRUST_ROOT")
+                or os.environ.get("ACTIONS_RUNTIME_RCC_TRUST_CARRIER")
+                or previous_descriptor is not None
+            )
             if spec_version == "v2" and not devenv and artifact_mode:
                 from ._rcc_runtime_adapter import (
                     compute_source_generation,
                     get_rcc_location,
                     prepare_runtime,
                 )
+
+                if any(
+                    os.environ.get(name)
+                    for name in (
+                        "ACTIONS_RUNTIME_RCC_TRUST_PROFILE",
+                        "ACTIONS_RUNTIME_RCC_TRUST_ROOT",
+                        "ACTIONS_RUNTIME_RCC_TRUST_CARRIER",
+                    )
+                ):
+                    from .rcc_trust_profile import resolve_trust_profile
+
+                    try:
+                        resolve_trust_profile(
+                            os.environ,
+                            package_roots=(Path(self._import_path),),
+                        )
+                    except ValueError as exc:
+                        raise ActionPackageError(
+                            f"Invalid RCC trust profile: {exc}"
+                        ) from exc
 
                 environment_yaml = (
                     self._runtime_source_snapshot_package_yaml
@@ -513,6 +538,17 @@ class ActionPackageHandler:
                 condahash = descriptor.artifact_digest
                 use_env = descriptor.to_dict()
             else:
+                if any(
+                    os.environ.get(name)
+                    for name in (
+                        "ACTIONS_RUNTIME_RCC_TRUST_PROFILE",
+                        "ACTIONS_RUNTIME_RCC_TRUST_ROOT",
+                        "ACTIONS_RUNTIME_RCC_TRUST_CARRIER",
+                    )
+                ):
+                    raise ActionPackageError(
+                        "RCC trust profiles require a spec-v2 package outside developer mode."
+                    )
                 rcc = get_rcc()
                 environment_yaml = (
                     self._runtime_source_snapshot_package_yaml
