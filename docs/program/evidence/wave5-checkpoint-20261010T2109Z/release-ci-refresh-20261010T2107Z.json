@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T21:07:45Z",
+  "method": "GitHub connector read-only calls; gh CLI returned 401 in the task context. No reruns, cancels, merge, or mutation.",
+  "pr304": {
+    "repository": "joshyorko/actions",
+    "pr_number": 304,
+    "state": "open",
+    "head_sha": "73605934c1c948895410a5abaed6c225a396e038",
+    "base_sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "prospective_merge_commit": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "prospective_merge_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "mergeable": true,
+    "workflow_runs_for_exact_head": {
+      "total": 7,
+      "completed_success": 6,
+      "in_progress": 1,
+      "failure": 0,
+      "runs": [
+        {
+          "id": 38081495648,
+          "name": "AI audit evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38081495656,
+          "name": "Measured Python coverage gate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38081495671,
+          "name": "RCC developer toolkit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38081495661,
+          "name": "Action Server Build (Unauthenticated)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38081495668,
+          "name": "Actions Core Tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38081495663,
+          "name": "Actions Runtime PYPI Release",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38081495682,
+          "name": "Action Server Tests",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ]
+    },
+    "active_matrix_run": {
+      "run_id": 38081495682,
+      "name": "Action Server Tests",
+      "jobs_total": 3,
+      "success": 2,
+      "in_progress": 1,
+      "failure": 0,
+      "jobs": [
+        {
+          "id": 114299160939,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114299161091,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114299161171,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "active_step": "Test (integration)"
+        }
+      ]
+    },
+    "combined_commit_status_api": {
+      "statuses": [],
+      "note": "The combined-status endpoint returned no legacy status contexts; workflow-run counts above are from Actions runs queried by exact commit SHA."
+    }
+  },
+  "pr292": {
+    "repository": "joshyorko/actions",
+    "pr_number": 292,
+    "state": "open",
+    "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "base_sha": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+    "workflow_runs_for_exact_head": {
+      "total": 6,
+      "completed_success": 5,
+      "in_progress": 1,
+      "failure": 0,
+      "runs": [
+        {
+          "id": 38067347074,
+          "name": "AI audit evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38067347022,
+          "name": "Actions Runtime PYPI Release",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38067347037,
+          "name": "Action Server Build (Unauthenticated)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38067347057,
+          "name": "Action Server Tests",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 38067347087,
+          "name": "Measured Python coverage gate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 38067347035,
+          "name": "RCC developer toolkit",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "requested_windows_job": {
+      "run_id": 38067347057,
+      "job_id": 114257572296,
+      "name": "build (windows-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null,
+      "steps_completed_success": 15,
+      "current_step": "Test (integration)",
+      "steps_pending": 6,
+      "prior_completed_matrix_jobs": [
+        "macos-py3.12-devmode: success",
+        "ubuntu-py3.12-devmode: success"
+      ],
+      "steps_completed_skipped": 1
+    }
+  },
+  "pr305_candidate_core_wheel": {
+    "pr_number": 305,
+    "head_sha": "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+    "tree": "3d9210abefb1e9d2f5b031e2a20870d7950ae303",
+    "receipt": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/canvas-bridge-acceptance-receipt.json",
+    "receipt_sha256": "93abc2ea3c1ea02aa1dc6bfdd1292d2fd3999ced8d130f2621e34c3706d334d4",
+    "wheel_path": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl",
+    "wheel_sha256_observed": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8",
+    "wheel_size_bytes": 103816,
+    "metadata_member": "actions_core-1.0.3.dist-info/METADATA",
+    "metadata_name": "actions-core",
+    "metadata_version": "1.0.3",
+    "receipt_and_pr_body_claim_match": true,
+    "contradiction_resolution": "The earlier 1.0.2 summary is stale/incorrect. Existing exact-head candidate wheel bytes and METADATA, receipt, worker direct_url/version fields, independent review and current PR305 body all consistently identify Core 1.0.3. No correction to PR305 is needed.",
+    "independent_launch_trace_review": "/workspace/work/actions-mk3-evidence/pr305-final-launch-trace-independent-review.json",
+    "independent_launch_trace_review_sha256": "d06296123a1ff511d2f8ffaf13640e45d62729985a27a4f41068a43ca159e77a"
+  },
+  "canonical_guide_delta_proposal": "When refreshing Actions status, query workflow runs by the exact PR head SHA and retain the separate workflow and matrix-job counts; a green workflow list with one active matrix cell is still pending. For candidate dependency identity, bind the existing receipt's digest to the retained wheel bytes and inspect wheel METADATA; do not carry a prior summary version into the current artifact. The combined-status endpoint can be empty even when Actions workflow runs are active.",
+  "upstream_disposition": "none; local status/evidence interpretation only"
+}

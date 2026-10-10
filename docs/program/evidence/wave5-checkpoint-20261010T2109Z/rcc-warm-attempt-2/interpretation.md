@@ -1,0 +1,13 @@
+# Attempt 2 result and evidence limits
+
+This is the one authorized second attempt, using the corrected proxy/CA-preserving runner with inherited TLS verification. The immutable task receipt is `task-work/receipt.json` (SHA-256 `56b7e0b40b79b2d9630400dd39eb2209935623d9e17f4fc4644bdcd7adae22af`); its launcher and exact frozen inputs are retained in `launch-context.json` and `frozen-launch/`. The result manifest is `result-manifest.json` (SHA-256 `1d0bc9c35df83d7e3d02d104041508d24eae85abfa737999da40e8ddc671cb15`).
+
+The attempt completed in 75.6 seconds, below the 300-second cap. Pinned RCC v18.19.3 cold-published fixture Artifact A in 53.8 seconds, exit 0, with digest `sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16`. This confirms the corrected environment passed the publish stage for this fixture.
+
+Consumer B's `env acquire` exited 0 after 19.0 seconds, but its 32 KiB retained stdout tail was truncated. The runner could not parse an exact returned digest or affirmative verification (`returned_digest=null`, `verification_valid=null`) and stopped before either `env exec` comparison. Therefore the strict diagnostic outcome is `PREFLIGHT_OR_RUN_FAILURE`; this receipt does not establish either a successful or failed verified B acquisition, and it says nothing about with-provider versus omitted-provider execution. The observed blocker is insufficient retained acquire output for the planned evidence gate. No second interpretation can be made from the truncated tail.
+
+Owned publisher/acquirer children and the provider were reaped; the receipt records all owned process groups gone and cleanup errors empty. Independent process/listener checks after completion showed no listed owned PIDs and no listener on the recorded provider port.
+
+A receipt-redaction issue also limits exact invocation evidence: redaction included individual `NO_PROXY` components, so common loopback strings were replaced in free-form command/log text; the provider URL fields and artifact digest are retained separately. The same substring replacement altered some text in the recorded environment-variable-name list. The receipt has not been edited; no inherited proxy or CA values were emitted by the saved bounded output. The runner source and proposal remain frozen exactly as reviewed, so this is recorded as a limitation of this attempt's diagnostics rather than silently rewriting its history.
+
+No further RCC retry is authorized or planned. No local-ready `env exec` case ran, no current Core 1.0.3 gate ran, and #134/full Runtime release acceptance remains unproven. This is not evidence of an upstream RCC defect.

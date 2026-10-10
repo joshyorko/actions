@@ -1,0 +1,118 @@
+{
+  "schema": "actions.pr304.native-readonly-evidence.v2",
+  "scope": "Final read-only reconciliation of PR304 run 38081495661 native Work Items evidence and whether it executed the specific #153 live browser Origin/ambient-session test.",
+  "repository": "joshyorko/actions",
+  "pull_request": {
+    "number": 304,
+    "head_sha": "73605934c1c948895410a5abaed6c225a396e038",
+    "base_sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tested_synthetic_merge_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "tested_synthetic_merge_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "parents_in_order": [
+      "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "73605934c1c948895410a5abaed6c225a396e038"
+    ],
+    "identity_binding": "PR API reports head/base and merge SHA; GitHub commit API reports the tree and ordered parents. Each OS log prints the checkout as Merge 73605934... into 4e8a262... and its git log -1 SHA as 856c0a47... . Each platform manifest and Work Items receipt also records source SHA 856c0a47... and workflow run ID 38081495661."
+  },
+  "jobs": [
+    {"id": 114299160781, "os": "ubuntu-22.04", "status": "completed", "conclusion": "success"},
+    {"id": 114299160955, "os": "windows-2022", "status": "completed", "conclusion": "success"},
+    {"id": 114299161007, "os": "macos-15", "status": "completed", "conclusion": "success"}
+  ],
+  "work_items_scoped_acceptance": {
+    "package": "actions-work-items 0.4.4",
+    "consumer_case": "test_packaged_runtime_executes_work_item_consumer_lifecycle, parametrized as frozen and go-wrapper",
+    "consumer_result_by_os": "Each small retained Work Items receipt reports status PASS, 2 passed, 0 failed, with one PASS case for each executable.",
+    "ui_case": "test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery",
+    "ui_result_by_os": "The native UI test module was invoked once with each runtime kind on every OS; each invocation reports 28 passed and no skip. The 28 count is for the full module (helpers/unit cases plus one actual packaged browser case), not 28 browser scenarios.",
+    "additional_native_gates": "All three job logs report frozen and go-wrapper native browser/storage acceptance PASS and large native history PASS.",
+    "consumer_assertions_in_retained_receipts": [
+      "success transition and parent-linked output",
+      "failure transition with synthetic error details",
+      "seeded stale-reservation retry and completion",
+      "same-datadir Runtime restart readback with two done, one failed, zero pending/in-progress, and verified output parent links",
+      "worker Core distribution identity, candidate install source, and measured wheel hash"
+    ],
+    "recovery_limit": "The harness seeds a persisted stale reservation; it does not simulate worker/process crash recovery.",
+    "candidate_core": {
+      "version": "1.0.3",
+      "published_pypi_wheel_sha256_from_separate_core_readback": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+      "linux_candidate_wheel_sha256_in_worker_receipt": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+      "macos_candidate_wheel_sha256_in_worker_receipt": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+      "windows_candidate_wheel_sha256_in_worker_receipt": "af607a2e3a82ca827f26d8cc2822c7067c7768e6cf42becb74a0519f021b7553",
+      "limit": "The candidate wheel is not retained in these artifacts. Worker receipts bind each measured hash to the installed candidate and pip report. Linux/macOS candidate hashes equal the independently verified published wheel hash; Windows candidate hash differs, so this run does not establish byte identity with the published PyPI wheel on Windows. No inference is made about the cause of that difference."
+    },
+    "worker_artifact_readback": [
+      {
+        "os": "Linux",
+        "receipt_zip_id": 11681475517,
+        "receipt_zip_sha256": "9881421e7c9ec2a6b7f59f8454703cd35e8869a7cab147e53f9662fb3ce0446b",
+        "provenance_archive_zip_sha256": "abfd2159ed3c3ff01801e42ad8cdffbf45f9d8ddcfaa189c6e6ebdfd62efd3ba",
+        "native_go_wrapper_artifact_zip_sha256": "65310919b0048615fbfb3dea1b1d95cf29aa773d68448f0c73fb889e89e4a237",
+        "manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+        "frozen_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+        "go_wrapper_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+        "archive_bindings": "Receipt inner manifest SHA matches the raw manifest bytes in provenance TAR; frozen hash matches TAR bytes/manifest/receipt; Go-wrapper hash matches standalone uploaded binary ZIP/manifest/receipt."
+      },
+      {
+        "os": "Windows",
+        "receipt_zip_id": 11681322116,
+        "receipt_zip_sha256": "c951c4f91e4caeb89489a7f974730d984c3e26c191fa44c69bda5870b5dcc7d4",
+        "provenance_archive_zip_sha256": "f9d198ecb3561bf6e2ea634471d9ca025e2d99453228e19ee19f42d29862c3e9",
+        "native_go_wrapper_artifact_zip_sha256": "9b5837b5995191a9b408f38489497ce1b04c6a75f5fd35a939571070e669b57e",
+        "manifest_sha256": "43ab3c55ae841ce748a31507f3b979ba4cbc391b7d69c96122d0c83582e39a2d",
+        "frozen_sha256": "71d0c99ee4e16671fec48b8876be44009b235d5f5ccc8498897a52b4f9b85f3b",
+        "go_wrapper_sha256": "715d6cf85908a17c7d9c3ad9449afd3f231567298b26a42ccbeae29df2689575",
+        "archive_bindings": "Receipt inner manifest SHA matches the raw manifest bytes in provenance TAR; frozen hash matches TAR bytes/manifest/receipt; Go-wrapper hash matches standalone uploaded binary ZIP/manifest/receipt."
+      },
+      {
+        "os": "macOS",
+        "receipt_zip_id": 11682165026,
+        "receipt_zip_sha256": "93dbc18e30e2e8c8161ef63fc99df0d46d185d2009f668a0e3cd291ea8235e7a",
+        "provenance_archive_zip_sha256": "3f3035667bcbe9d13d4591f4112af4f4a169304ab4c8c90225ce94e95266648a",
+        "native_go_wrapper_artifact_zip_sha256": "97e00fe0e4d61530826652cd3a6da9ac959a47f0f3f5d622ee853ff348a97bc5",
+        "manifest_sha256": "3e5d3845148cb166b395e1e6f15621d13aa9fc452060c1f25d3244f39da08039",
+        "frozen_sha256": "6dd40611da818730961e09d75df1a36dd1274f24656051ef9e489f5d747faebe",
+        "go_wrapper_sha256": "7fa73e6675e2e79f83b086e003aaa3f374f67a766d666f669ce1ad315bf17c89",
+        "archive_bindings": "Receipt inner manifest SHA matches the raw manifest bytes in provenance TAR; frozen hash matches TAR bytes/manifest/receipt; Go-wrapper hash matches standalone uploaded binary ZIP/manifest/receipt."
+      }
+    ],
+    "artifact_integrity": "GitHub API artifact digests match downloaded ZIP bytes. Provenance TARs were read as archive streams without extracting any files; no absolute/parent traversal names were found. Per OS manifest source SHA and run ID match the synthetic merge and run. The manifest itself states its source identity is Git HEAD, not a clean-source attestation.",
+    "remaining_issue_208_limits": [
+      "authorization-denial UI is not run",
+      "missing-Runtime-support UI is not run",
+      "generic backend HTTP 500 UI is not run",
+      "stale reservation is not a process-crash simulation",
+      "broader manual accessibility/non-Chromium acceptance is not established"
+    ],
+    "issue_208_disposition": "The three-OS frozen/Go-wrapper native Work Items consumer/browser/persistence subgate now has fresh evidence at the exact synthetic merge. Keep issue #208 open/unverified until its remaining acceptance criteria are proven."
+  },
+  "issue_153_specific_test": {
+    "file": "action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+    "test": "test_live_runtime_browser_origin_and_ambient_session_matrix",
+    "source_sha256_at_4e8a_checkout": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+    "source_unchanged_in_pr_head": true,
+    "per_os_execution": {
+      "Linux": "NOT RUN: zero occurrences of the file/function in full job log; no pytest invocation in the command census.",
+      "Windows": "NOT RUN: zero occurrences of the file/function in full job log; no pytest invocation in the command census.",
+      "macOS": "NOT RUN: zero occurrences of the file/function in full job log; no pytest invocation in the command census."
+    },
+    "runtime_identity": "No frozen or Go-wrapper runtime identity is bound to this #153 case in this run. Separate Work Items native browser/storage passes do not execute the Origin/ambient-session test and cannot be attributed to it.",
+    "source_fixture_limit": "The test starts ActionServerProcess; that fixture selects a packaged executable only when SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE is explicitly set, and otherwise invokes the current Python module. The test has no frozen/Go parameterization. This source observation is not hosted execution evidence.",
+    "issue_153_disposition": "This run closes no #153 acceptance criterion. It does not indicate the test failed; the test was not selected. Do not infer blanket #153 acceptance."
+  },
+  "canonical_documentation_delta_proposal": "At the existing real-browser Origin/ambient-session note in docs/skills/repository-operations.md (around line 1833), state that source-test presence or unrelated frozen/Go browser-storage gates do not prove packaged #153 coverage. Record packaged coverage only when this specific test is selected with explicit frozen and Go-wrapper executable identities and a source/run-bound manifest. For docs/skills/work-items.md, record the exact three-OS Work Items 0.4.4 subgate, candidate Core hashes per OS, Windows-versus-published hash distinction, unrun UI states, and stale-reservation limitation while retaining issue #208 as open/unverified.",
+  "upstream_disposition": "None; no upstream defect or report identified.",
+  "evidence_files": {
+    "log_census": {"path": "/workspace/work/actions-mk3-evidence/pr304-readonly/browser-origin-log-census.txt", "sha256": "598db7f9252d1afa332c19a69a834bdc381b85f59da07339cae4c8e4eba6998d"},
+    "macos_log_excerpt": {"path": "/workspace/work/actions-mk3-evidence/pr304-readonly/macos-bounded-excerpt.log", "sha256": "121af993b526c1f51c89f8f09dad926dcb050d2633e30380116b5500494e8189"},
+    "artifact_readback_dir": "/workspace/work/actions-mk3-evidence/pr304-artifact-readback",
+    "prior_workitems_readiness_receipt": "/workspace/work/actions-mk3-evidence/workitems-readiness-audit-20261010.json",
+    "prior_pr304_acceptance_receipt": "/workspace/work/actions-mk3-evidence/pr304-readonly/acceptance-reconciliation.json"
+  },
+  "limits": [
+    "No source edits, test execution, services, workflow dispatch, workers, or remote writes were performed.",
+    "The candidate Core wheel itself was not retained in the Work Items artifacts; its measured hash comes from the authenticated small test receipt, not independent local wheel bytes.",
+    "The #153 test was inspected as source only; no production auth/session behavior is inferred from its presence."
+  ]
+}

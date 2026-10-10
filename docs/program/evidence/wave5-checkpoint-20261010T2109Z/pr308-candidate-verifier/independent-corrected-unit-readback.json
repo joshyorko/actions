@@ -1,0 +1,15 @@
+{
+  "doc_proposal": "Retain prior source-version candidate guide paragraph and document test context/manifest/source origins when attributing environment failures. Unit helper PASS is separate from actual RCC acceptance.",
+  "head": "284880ca80bb666de6ef1bd970b493435bb7a8a9",
+  "observations": [
+    "Original broad30PASS/7FAIL attribution corrected additively; initial receipt unchanged.",
+    "Retained corrected canonical RCC task script --no-build loge84ec740... reports37PASS/1real-RCC deselected. Runnerb37ce791... clears inherited RCC/Poetry vars and binds prepared Python plus explicit candidate source origins; actual logged origins agree.",
+    "Independent Runtime pyproject+lock byte equality against prepared checkout PASS; exact retained toolkit/setup byte equality PASS.",
+    "No actual RCC provider/Runtime acceptance or registry identity proved by unit tests."
+  ],
+  "owner_correction_sha256": "7ff40b1eb3c65914d5200433a3cb4addbc3069582da0cd2f5bc5f8ec53970a26",
+  "prior_independent_review_sha256": "f92903fec8029fcc1583849f6ee7d00e282f1ae606d5daf768d9e33078349778",
+  "status": "GO_SCOPED_SOURCE_REPAIR_AND_CORRECTED_UNIT_READBACK",
+  "tree": "8471f44cc58f2dbe0226fbcf7d89445f440df2f0",
+  "upstream_disposition": "none"
+}

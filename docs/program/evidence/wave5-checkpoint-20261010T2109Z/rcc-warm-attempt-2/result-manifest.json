@@ -1,0 +1,30 @@
+{
+  "acquire_B": {
+    "duration_ms": 19013,
+    "passed": false,
+    "returncode": 0,
+    "returned_digest": null,
+    "stdout_truncated": true,
+    "verification_valid": null
+  },
+  "attempt": "attempt-20261010T2101Z",
+  "attempt_count": 1,
+  "cleanup": {
+    "all_owned_processes_reaped": true,
+    "provider_service": {
+      "errors": [],
+      "process_group_gone": true,
+      "reaped": true,
+      "returncode": 0
+    }
+  },
+  "duration_ms": 75596,
+  "publish_A": {
+    "artifact_digest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "duration_ms": 53774,
+    "returncode": 0
+  },
+  "receipt_sha256": "56b7e0b40b79b2d9630400dd39eb2209935623d9e17f4fc4644bdcd7adae22af",
+  "retry_authorized": false,
+  "status": "PREFLIGHT_OR_RUN_FAILURE"
+}

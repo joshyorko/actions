@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "supersedes_interpretation_only": {
+    "receipt": "implementation-verification.json",
+    "sha256": "99c6ff448f334dd74d23fdb00545d510cfa6275d8ece8add195c15acdb96382c",
+    "preserved": true,
+    "correction": "The earlier lightweight-environment 7-failure unit-suite result was not seven psutil failures: six failures were due to missing psutil; test_acquire_diagnostic_uses_machine_result_and_optional_provider separately failed exact_digest assertion. Its likely explanation was incomplete source import-path binding, not proven from that run."
+  },
+  "source_identity": {
+    "commit": "284880ca80bb666de6ef1bd970b493435bb7a8a9",
+    "tree": "8471f44cc58f2dbe0226fbcf7d89445f440df2f0",
+    "parent": "73605934c1c948895410a5abaed6c225a396e038",
+    "worktree_clean": true
+  },
+  "prepared_manifest_match": {
+    "subject_runtime_pyproject_sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+    "prepared_runtime_pyproject_sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+    "subject_runtime_poetry_lock_sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+    "prepared_runtime_poetry_lock_sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+    "comparison": "byte-for-byte equality"
+  },
+  "execution": {
+    "gateway_command": "source /workspace/actions-cloud/activate.sh && rcc task script -r developer/toolkit.yaml --no-build -- python /workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/prepared-runtime-suite.py",
+    "task_manifest_path": "/workspace/work/actions-mk3-rcc-candidate-version/developer/toolkit.yaml",
+    "task_manifest_sha256": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68",
+    "effective_setup_path": "/workspace/work/actions-mk3-rcc-candidate-version/developer/setup.yaml",
+    "effective_setup_sha256": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a",
+    "runner": "prepared-runtime-suite.py",
+    "runner_sha256": "b37ce791be71c65a86cb164e6d03341ef9ff3a517f53a0a1cf672ac1c2637478",
+    "stdout": "prepared-runtime-suite.stdout.txt",
+    "stdout_sha256": "e84ec74013ed4ff6793feb1cd9f767c8b19aa6df56cbddeceab1e74c61c084e4",
+    "prepared_python": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "python_version": "3.12.15",
+    "pytest_version": "8.3.4",
+    "psutil_version": "5.9.8",
+    "target_imports": {
+      "actions": "/workspace/work/actions-mk3-rcc-candidate-version/actions/src/actions/__init__.py",
+      "actions.server._rcc_runtime_adapter": "/workspace/work/actions-mk3-rcc-candidate-version/action_server/src/actions/server/_rcc_runtime_adapter.py"
+    },
+    "isolated_environment": "Runner constructed a fresh environment with only prepared VIRTUAL_ENV/PATH and explicit candidate source PYTHONPATH; inherited RCC and Poetry variables were omitted. No installs, host Python fallback, or actual provider/Runtime acceptance command.",
+    "result": "37 passed, 1 deselected, 1857 warnings in 2.73 seconds",
+    "deselected": "The marked real-RCC/integration test was excluded."
+  },
+  "cleanup": {
+    "live_test_processes": "none observed after completion",
+    "temporary_data": "under prepared-suite-tmp in this evidence directory"
+  },
+  "limitations": [
+    "Unit suite only; does not establish provider-backed or Runtime RCC acceptance."
+  ],
+  "upstream_disposition": "none"
+}

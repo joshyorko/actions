@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "scope": "service-free RCC candidate-wheel verifier repair; no Runtime/provider execution or package installation",
+  "source": {
+    "repository": "joshyorko/actions",
+    "branch": "mk3/rcc-candidate-version-20261010",
+    "base_commit": "73605934c1c948895410a5abaed6c225a396e038",
+    "commit": "284880ca80bb666de6ef1bd970b493435bb7a8a9",
+    "tree": "8471f44cc58f2dbe0226fbcf7d89445f440df2f0",
+    "worktree_clean": true,
+    "files": {
+      "action_server/scripts/verify_dakota_rcc_acceptance.py": "8c3c84f0f417e12d68049938088b57a61e0140b2d6a303e35eb0f05c1a843235",
+      "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": "714a26fa0f10e3724758cd177bcb11be18fb5c4d7e91a950c64a8f3128d8d2f2",
+      "docs/skills/repository-operations.md": "6da645a8b18571b29abb68f25ead2bbeb4a4f2f4d02c56000154415200c513cc"
+    }
+  },
+  "changes": [
+    "Reads Core and HTTP Helper candidate versions with the pinned Poetry executable from each checked-out package.",
+    "Requires the expected versioned wheel filename and exactly one readable wheel METADATA whose Name and Version match checked-out source metadata.",
+    "Carries explicit version and SHA-256 in the candidate wheel inventory, and source-derived Core/Helper versions into the synthetic Action expectation and terminal receipts.",
+    "Keeps production dependency floors and historical immutable receipts unchanged; guide states local candidate identity does not prove publication or provider-backed Runtime acceptance."
+  ],
+  "verification": {
+    "toolchain": "RCC v18.19.3 with prepared repository setup; no ad hoc installs",
+    "red": {
+      "command": "source /workspace/actions-cloud/activate.sh && rcc run -r /workspace/work/actions-mk3-rcc-candidate-version/developer/candidate-version-tests.yaml --dev -t CandidateVersionContract",
+      "result": "2 failed, 36 deselected: old hardcoded wheel expectation rejected current-source 1.0.3 wheel in both parameter cases",
+      "stdout_sha256": "803137a9e01b6b33a71f6d62eeb9c8d7669f473ccfb25af58062fe4bef236ea8"
+    },
+    "green": {
+      "command": "source /workspace/actions-cloud/activate.sh && rcc run -r /workspace/work/actions-mk3-rcc-candidate-version/developer/candidate-version-tests.yaml --dev -t CandidateVersionContract",
+      "result": "2 passed, 36 deselected; 1.0.3 source wheel accepted and 1.0.2 METADATA mismatch rejected",
+      "stdout_sha256": "a2d559b85c9388011403ac507a75fe1fdd314af41744fd932575d0cb2e010c0c"
+    },
+    "ruff": {
+      "command": "source /workspace/actions-cloud/activate.sh && rcc run -r /workspace/work/actions-mk3-rcc-candidate-version/developer/candidate-version-tests.yaml --dev -t CandidateVersionLint",
+      "result": "All checks passed",
+      "stdout_sha256": "a493d03639f35611d1f403b8facc6a2b3d448016c9ff5b0854099f8899279cb9"
+    },
+    "broader_unit_attempt": {
+      "result": "30 passed, 7 failed, 1 deselected. Failures were attributable to missing psutil in the lightweight setup; process-supervisor contracts could not initialize. No provider or Runtime was executed.",
+      "stdout_sha256": "18b96ca007ed3a39b9b9ebd3735845da9e7b39e40463619bb351e916873c3b0b",
+      "cleanup": "The test's local fake-provider child PID 36687 was SIGKILLed; it was no longer live and observed as an init-owned zombie. No live test child remained at final process check."
+    },
+    "task_config": "candidate-version-tests.yaml",
+    "task_config_sha256": "b026ba1f6a433f5be14f8b2e9aac9661ca5b462c15b7656d052af0ff2a1a4f2e"
+  },
+  "historical_diagnosis": {
+    "receipt": "diagnosis.json",
+    "sha256": "53b921fd72a10756115b31cfb15396b6d16ba782072146889eb769f9aec1b6e3",
+    "errata": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/issue-134-readiness-errata-20261010.md"
+  },
+  "upstream_disposition": "none; no issue or external report",
+  "not_established": [
+    "actual provider-backed warm acceptance",
+    "Runtime publication or source acceptance",
+    "registry artifact identity"
+  ]
+}

@@ -1,0 +1,96 @@
+"/workspace/work/actions-mk3-rcc-candidate-version/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/work/actions-mk3-rcc-candidate-version/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.014s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+Note: 'no-build' setting is active. Only cached, prebuild, or imported environments are allowed!
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 5598d290-c866-2ae4-a51d-5dad5ce3ff34. (parent/pid: 38164/38167)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.331s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.574s  Fresh holotree done [with 4 workers on 5 CPUs].
+Prepared Runtime manifest matched by pyproject.toml and poetry.lock SHA-256.
+Prepared Python: /workspace/work/actions-mk3-pr302/action_server/.venv/bin/python
+  File "<string>", line 2
+    expected = {'actions': r'/workspace/work/actions-mk3-rcc-candidate-version/actions/src/actions', '
+                                                                                                     ^
+SyntaxError: unterminated string literal (detected at line 2)
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/prepared-runtime-suite.py", line 55, in <module>
+    subprocess.run([str(python), "-c", preflight], cwd=repo / "action_server", env=env, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python', '-c', "import importlib, os, sys\nexpected = {'actions': r'/workspace/work/actions-mk3-rcc-candidate-version/actions/src/actions', '\n'actions.server._rcc_runtime_adapter': r'/workspace/work/actions-mk3-rcc-candidate-version/action_server/src/actions/server'}\nfor name, prefix in expected.items():\n    module = importlib.import_module(name)\n    origin = getattr(module, '__file__', None)\n    if origin is None or not os.path.realpath(origin).startswith(os.path.realpath(prefix)):\n        raise SystemExit(f'wrong target import: {name} -> {origin}')\nprint('TARGET_PYTHON=' + sys.executable)\nprint('TARGET_PREFIX=' + sys.prefix)\nprint('TARGET_ACTIONS=' + importlib.import_module('actions').__file__)\nprint('TARGET_RUNTIME_ADAPTER=' + importlib.import_module('actions.server._rcc_runtime_adapter').__file__)\nprint('TARGET_PSUTIL=' + importlib.import_module('psutil').__file__)\nprint('TARGET_PYTEST=' + importlib.import_module('pytest').__file__)"]' returned non-zero exit status 1.
+Process 38173: exit status 1, command: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 [/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/prepared-runtime-suite.py] [v18.19.3/38167]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  10:13
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+Error: exit status 1 (robot run exit)
+[rcc] exit status will be: 10!

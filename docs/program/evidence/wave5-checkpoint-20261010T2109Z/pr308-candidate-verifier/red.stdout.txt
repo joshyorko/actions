@@ -1,0 +1,486 @@
+"/workspace/work/actions-mk3-rcc-candidate-version/developer/candidate-version-tests.yaml" as robot.yaml is:
+tasks:
+  Placeholder:
+    shell: echo unused
+devTasks:
+  CandidateVersionContract:
+    shell: python -m pytest --noconftest -c /dev/null -p no:cacheprovider --basetemp=/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-tmp --disable-warnings /workspace/work/actions-mk3-rcc-candidate-version/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py -k candidate_wheels_follow_checked_out_versions_and_validate_metadata -q
+environmentConfigs:
+  - setup.yaml
+PATH:
+  - ..
+artifactsDir: /workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/rcc-artifacts
+
+Note: Operating in developer mode. Using 'devTasks:' instead of 'tasks:'.
+Note! For now, resolved effective environment configuration file is "/workspace/work/actions-mk3-rcc-candidate-version/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.025s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 5598d290-c866-2ae4-a51d-5dad5ce3ff34. (parent/pid: 35778/35779)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.499s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.937s  Fresh holotree done [with 4 workers on 5 CPUs].
+Wanted  Version  Origin  |  No.  |  Available           Version       Origin       |  Status
+------  -------  ------  +  ---  +  ---------           -------       ------       +  ------
+-       -        -       |    1  |  CacheControl        0.14.4        pypi         |  N/A
+-       -        -       |    2  |  PyYAML              6.0.2         pypi         |  N/A
+-       -        -       |    3  |  RapidFuzz           3.14.6        pypi         |  N/A
+-       -        -       |    4  |  SecretStorage       3.5.0         pypi         |  N/A
+-       -        -       |    5  |  _go_select          2.3.0         conda-forge  |  N/A
+-       -        -       |    6  |  _openmp_mutex       4.5           conda-forge  |  N/A
+-       -        -       |    7  |  anyio               4.15.1        pypi         |  N/A
+-       -        -       |    8  |  build               1.6.1         pypi         |  N/A
+-       -        -       |    9  |  bzip2               1.0.8         conda-forge  |  N/A
+-       -        -       |   10  |  c-ares              1.34.8        conda-forge  |  N/A
+-       -        -       |   11  |  ca-certificates     2026.7.22     conda-forge  |  N/A
+-       -        -       |   12  |  certifi             2026.7.22     pypi         |  N/A
+-       -        -       |   13  |  cffi                2.1.1         pypi         |  N/A
+-       -        -       |   14  |  charset-normalizer  3.5.2         pypi         |  N/A
+-       -        -       |   15  |  cleo                2.1.0         pypi         |  N/A
+-       -        -       |   16  |  crashtest           0.4.1         pypi         |  N/A
+-       -        -       |   17  |  cryptography        50.0.2        pypi         |  N/A
+-       -        -       |   18  |  distlib             0.4.3         pypi         |  N/A
+-       -        -       |   19  |  dulwich             0.22.8        pypi         |  N/A
+-       -        -       |   20  |  fastjsonschema      2.22.2        pypi         |  N/A
+-       -        -       |   21  |  filelock            3.32.7        pypi         |  N/A
+-       -        -       |   22  |  findpython          0.6.3         pypi         |  N/A
+-       -        -       |   23  |  git                 2.46.0        conda-forge  |  N/A
+-       -        -       |   24  |  go                  1.23.6        conda-forge  |  N/A
+-       -        -       |   25  |  h11                 0.16.0        pypi         |  N/A
+-       -        -       |   26  |  httpcore            1.0.9         pypi         |  N/A
+-       -        -       |   27  |  httpx               0.28.1        pypi         |  N/A
+-       -        -       |   28  |  icu                 75.1          conda-forge  |  N/A
+-       -        -       |   29  |  idna                3.20          pypi         |  N/A
+-       -        -       |   30  |  iniconfig           2.3.1         pypi         |  N/A
+-       -        -       |   31  |  installer           0.7.0         pypi         |  N/A
+-       -        -       |   32  |  invoke              2.2.0         pypi         |  N/A
+-       -        -       |   33  |  jaraco.classes      3.4.0         pypi         |  N/A
+-       -        -       |   34  |  jaraco.context      6.1.2         pypi         |  N/A
+-       -        -       |   35  |  jaraco.functools    4.6.0         pypi         |  N/A
+-       -        -       |   36  |  jeepney             0.9.0         pypi         |  N/A
+-       -        -       |   37  |  jq                  1.7.1         conda-forge  |  N/A
+-       -        -       |   38  |  keyring             25.7.0        pypi         |  N/A
+-       -        -       |   39  |  keyutils            1.6.3         conda-forge  |  N/A
+-       -        -       |   40  |  krb5                1.22.2        conda-forge  |  N/A
+-       -        -       |   41  |  ld_impl_linux-64    2.46.1        conda-forge  |  N/A
+-       -        -       |   42  |  libcurl             8.21.0        conda-forge  |  N/A
+-       -        -       |   43  |  libedit             3.1.20260512  conda-forge  |  N/A
+-       -        -       |   44  |  libev               4.33          conda-forge  |  N/A
+-       -        -       |   45  |  libexpat            2.8.5         conda-forge  |  N/A
+-       -        -       |   46  |  libffi              3.7.0         conda-forge  |  N/A
+-       -        -       |   47  |  libgcc              16.2.0        conda-forge  |  N/A
+-       -        -       |   48  |  libgcc-ng           16.2.0        conda-forge  |  N/A
+-       -        -       |   49  |  libgfortran         16.2.0        conda-forge  |  N/A
+-       -        -       |   50  |  libgfortran5        16.2.0        conda-forge  |  N/A
+-       -        -       |   51  |  libgomp             16.2.0        conda-forge  |  N/A
+-       -        -       |   52  |  libiconv            1.18          conda-forge  |  N/A
+-       -        -       |   53  |  liblzma             5.8.3         conda-forge  |  N/A
+-       -        -       |   54  |  libnghttp2          1.68.1        conda-forge  |  N/A
+-       -        -       |   55  |  libnsl              2.0.1         conda-forge  |  N/A
+-       -        -       |   56  |  libpython           3.12.15       conda-forge  |  N/A
+-       -        -       |   57  |  libsqlite           3.53.4        conda-forge  |  N/A
+-       -        -       |   58  |  libssh2             1.11.1        conda-forge  |  N/A
+-       -        -       |   59  |  libstdcxx           16.2.0        conda-forge  |  N/A
+-       -        -       |   60  |  libstdcxx-ng        16.2.0        conda-forge  |  N/A
+-       -        -       |   61  |  libuuid             2.42.4        conda-forge  |  N/A
+-       -        -       |   62  |  libuv               1.52.1        conda-forge  |  N/A
+-       -        -       |   63  |  libxcrypt           4.4.38        conda-forge  |  N/A
+-       -        -       |   64  |  libzlib             1.3.2         conda-forge  |  N/A
+-       -        -       |   65  |  more-itertools      11.1.0        pypi         |  N/A
+-       -        -       |   66  |  msgpack             1.2.3         pypi         |  N/A
+-       -        -       |   67  |  ncurses             6.6           conda-forge  |  N/A
+-       -        -       |   68  |  nodejs              20.19.3       conda-forge  |  N/A
+-       -        -       |   69  |  oniguruma           6.9.10        conda-forge  |  N/A
+-       -        -       |   70  |  openssl             3.6.5         conda-forge  |  N/A
+-       -        -       |   71  |  packaging           26.3          conda-forge  |  N/A
+-       -        -       |   72  |  pbs-installer       2025.12.17    pypi         |  N/A
+-       -        -       |   73  |  pcre2               10.44         conda-forge  |  N/A
+-       -        -       |   74  |  perl                5.44.0        conda-forge  |  N/A
+-       -        -       |   75  |  pip                 25.0.1        conda-forge  |  N/A
+-       -        -       |   76  |  pkginfo             1.13          pypi         |  N/A
+-       -        -       |   77  |  platformdirs        4.12.4        pypi         |  N/A
+-       -        -       |   78  |  pluggy              1.6.0         pypi         |  N/A
+-       -        -       |   79  |  poetry              2.1.1         pypi         |  N/A
+-       -        -       |   80  |  poetry-core         2.1.1         pypi         |  N/A
+-       -        -       |   81  |  pycparser           3.1           pypi         |  N/A
+-       -        -       |   82  |  pyproject_hooks     1.3.3         pypi         |  N/A
+-       -        -       |   83  |  pytest              8.3.4         pypi         |  N/A
+-       -        -       |   84  |  python              3.12.15       conda-forge  |  N/A
+-       -        -       |   85  |  readline            8.3           conda-forge  |  N/A
+-       -        -       |   86  |  requests            2.34.2        pypi         |  N/A
+-       -        -       |   87  |  requests-toolbelt   1.0.0         pypi         |  N/A
+-       -        -       |   88  |  ruff                0.8.6         pypi         |  N/A
+-       -        -       |   89  |  setuptools          84.0.0        conda-forge  |  N/A
+-       -        -       |   90  |  shellingham         1.5.4         pypi         |  N/A
+-       -        -       |   91  |  tk                  8.6.13        conda-forge  |  N/A
+-       -        -       |   92  |  tomlkit             0.15.1        pypi         |  N/A
+-       -        -       |   93  |  trove-classifiers   2026.9.21.13  pypi         |  N/A
+-       -        -       |   94  |  typing_extensions   4.16.0        pypi         |  N/A
+-       -        -       |   95  |  tzdata              2026c         conda-forge  |  N/A
+-       -        -       |   96  |  urllib3             2.8.0         pypi         |  N/A
+-       -        -       |   97  |  uv                  0.9.26        conda-forge  |  N/A
+-       -        -       |   98  |  virtualenv          20.39.1       pypi         |  N/A
+-       -        -       |   99  |  wheel               0.48.0        conda-forge  |  N/A
+-       -        -       |  100  |  zlib                1.3.2         conda-forge  |  N/A
+-       -        -       |  101  |  zstandard           0.25.0        pypi         |  N/A
+-       -        -       |  102  |  zstd                1.5.7         conda-forge  |  N/A
+------  -------  ------  +  ---  +  ---------           -------       ------       +  ------
+Wanted  Version  Origin  |  No.  |  Available           Version       Origin       |  Status
+
+--
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-rcc-candidate-version/developer/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/rcc-artifacts" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-rcc-candidate-version/developer/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/rcc-artifacts" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-rcc-candidate-version/developer/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/rcc-artifacts" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_candidate_wheels_follow_checked_out_versions_and_validate_metadata[1.0.3] _
+
+tmp_path = PosixPath('/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-tmp/test_candidate_wheels_follow_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f1a8e3f2450>
+core_metadata_version = '1.0.3'
+
+    @pytest.mark.parametrize("core_metadata_version", ["1.0.3", "1.0.2"])
+    def test_candidate_wheels_follow_checked_out_versions_and_validate_metadata(
+        tmp_path, monkeypatch, core_metadata_version
+    ):
+        harness = _harness()
+        source_root = tmp_path / "source"
+        (source_root / "actions").mkdir(parents=True)
+        (source_root / "actions-http-helper").mkdir()
+        script_dir = source_root / "action_server" / "scripts"
+        script_dir.mkdir(parents=True)
+        monkeypatch.setattr(
+            harness,
+            "__file__",
+            str(script_dir / "verify_dakota_rcc_acceptance.py"),
+        )
+        source_versions = {
+            "actions": ("actions-core", "1.0.3"),
+            "actions-http-helper": ("actions-http-helper", "1.0.3"),
+        }
+        for directory, (distribution, version) in source_versions.items():
+            (source_root / directory / "pyproject.toml").write_text(
+                f'[tool.poetry]\nname = "{distribution}"\nversion = "{version}"\n',
+                encoding="utf-8",
+            )
+    
+        def fake_poetry(command, *, cwd, **kwargs):
+            project = tomllib.loads((Path(cwd) / "pyproject.toml").read_text())[
+                "tool"
+            ]["poetry"]
+            distribution = project["name"]
+            version = project["version"]
+            if command[1] == "version":
+                return SimpleNamespace(returncode=0, stdout=f"{version}\n", stderr="")
+    
+            wheelhouse = Path(command[command.index("--output") + 1])
+            filename_distribution = distribution.replace("-", "_")
+            wheel = wheelhouse / (
+                f"{filename_distribution}-{version}-py3-none-any.whl"
+            )
+            metadata_path = f"{filename_distribution}-{version}.dist-info/METADATA"
+            metadata_version = (
+                core_metadata_version if distribution == "actions-core" else version
+            )
+            with zipfile.ZipFile(wheel, "w") as archive:
+                archive.writestr(
+                    metadata_path,
+                    f"Metadata-Version: 2.1\nName: {distribution}\nVersion: {metadata_version}\n\n",
+                )
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+    
+        monkeypatch.setattr(harness, "run_owned_process", fake_poetry)
+        task_root = tmp_path / "task"
+        task_root.mkdir()
+        arguments = {
+            "root": task_root,
+            "source_env": {
+                "PATH": os.environ.get("PATH", os.defpath),
+                "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": str(tmp_path / "rcc-home"),
+            },
+            "poetry": Path("/pinned/poetry"),
+            "deadline": harness.Deadline.after(30),
+        }
+        if core_metadata_version != "1.0.3":
+            with pytest.raises(RuntimeError, match="wheel METADATA"):
+                harness.build_candidate_wheels(**arguments)
+            return
+    
+>       candidate_wheels = harness.build_candidate_wheels(**arguments)
+
+../action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py:291: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-tmp/test_candidate_wheels_follow_c0/task')
+
+    def build_candidate_wheels(
+        root: Path,
+        *,
+        source_env: dict[str, str],
+        poetry: Path,
+        deadline: Deadline,
+    ) -> tuple[Path, Path]:
+        repo_root = Path(__file__).resolve().parents[2]
+        wheelhouse = root / "candidate-wheelhouse"
+        wheelhouse.mkdir()
+        env = child_environment(
+            source_env,
+            task_root=root / "poetry-build",
+            extra={
+                "ACTIONS_ACCEPTANCE_POETRY": str(poetry),
+                "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": source_env[
+                    "ACTIONS_ACCEPTANCE_ROBOCORP_HOME"
+                ],
+                "ROBOCORP_HOME": source_env["ACTIONS_ACCEPTANCE_ROBOCORP_HOME"],
+                "POETRY_CACHE_DIR": str(root / "poetry-cache"),
+            },
+        )
+        for package_dir in (repo_root / "actions-http-helper", repo_root / "actions"):
+            result = run_owned_process(
+                [poetry, "build", "--format", "wheel", "--output", str(wheelhouse)],
+                cwd=package_dir,
+                env=env,
+                timeout_seconds=deadline.remaining(),
+            )
+            if result.returncode:
+                raise RuntimeError(
+                    "pinned Poetry candidate wheel build failed: "
+                    f"{(result.stderr or result.stdout)[-1000:]}"
+                )
+        core = wheelhouse / "actions_core-1.0.2-py3-none-any.whl"
+        helper = wheelhouse / "actions_http_helper-1.0.3-py3-none-any.whl"
+        if not core.is_file() or not helper.is_file():
+>           raise RuntimeError("Poetry did not produce the expected candidate wheels")
+E           RuntimeError: Poetry did not produce the expected candidate wheels
+
+../action_server/scripts/verify_dakota_rcc_acceptance.py:926: RuntimeError
+_ test_candidate_wheels_follow_checked_out_versions_and_validate_metadata[1.0.2] _
+
+tmp_path = PosixPath('/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-tmp/test_candidate_wheels_follow_c1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f1a8e3f9f40>
+core_metadata_version = '1.0.2'
+
+    @pytest.mark.parametrize("core_metadata_version", ["1.0.3", "1.0.2"])
+    def test_candidate_wheels_follow_checked_out_versions_and_validate_metadata(
+        tmp_path, monkeypatch, core_metadata_version
+    ):
+        harness = _harness()
+        source_root = tmp_path / "source"
+        (source_root / "actions").mkdir(parents=True)
+        (source_root / "actions-http-helper").mkdir()
+        script_dir = source_root / "action_server" / "scripts"
+        script_dir.mkdir(parents=True)
+        monkeypatch.setattr(
+            harness,
+            "__file__",
+            str(script_dir / "verify_dakota_rcc_acceptance.py"),
+        )
+        source_versions = {
+            "actions": ("actions-core", "1.0.3"),
+            "actions-http-helper": ("actions-http-helper", "1.0.3"),
+        }
+        for directory, (distribution, version) in source_versions.items():
+            (source_root / directory / "pyproject.toml").write_text(
+                f'[tool.poetry]\nname = "{distribution}"\nversion = "{version}"\n',
+                encoding="utf-8",
+            )
+    
+        def fake_poetry(command, *, cwd, **kwargs):
+            project = tomllib.loads((Path(cwd) / "pyproject.toml").read_text())[
+                "tool"
+            ]["poetry"]
+            distribution = project["name"]
+            version = project["version"]
+            if command[1] == "version":
+                return SimpleNamespace(returncode=0, stdout=f"{version}\n", stderr="")
+    
+            wheelhouse = Path(command[command.index("--output") + 1])
+            filename_distribution = distribution.replace("-", "_")
+            wheel = wheelhouse / (
+                f"{filename_distribution}-{version}-py3-none-any.whl"
+            )
+            metadata_path = f"{filename_distribution}-{version}.dist-info/METADATA"
+            metadata_version = (
+                core_metadata_version if distribution == "actions-core" else version
+            )
+            with zipfile.ZipFile(wheel, "w") as archive:
+                archive.writestr(
+                    metadata_path,
+                    f"Metadata-Version: 2.1\nName: {distribution}\nVersion: {metadata_version}\n\n",
+                )
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+    
+        monkeypatch.setattr(harness, "run_owned_process", fake_poetry)
+        task_root = tmp_path / "task"
+        task_root.mkdir()
+        arguments = {
+            "root": task_root,
+            "source_env": {
+                "PATH": os.environ.get("PATH", os.defpath),
+                "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": str(tmp_path / "rcc-home"),
+            },
+            "poetry": Path("/pinned/poetry"),
+            "deadline": harness.Deadline.after(30),
+        }
+        if core_metadata_version != "1.0.3":
+            with pytest.raises(RuntimeError, match="wheel METADATA"):
+>               harness.build_candidate_wheels(**arguments)
+
+../action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py:288: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-tmp/test_candidate_wheels_follow_c1/task')
+
+    def build_candidate_wheels(
+        root: Path,
+        *,
+        source_env: dict[str, str],
+        poetry: Path,
+        deadline: Deadline,
+    ) -> tuple[Path, Path]:
+        repo_root = Path(__file__).resolve().parents[2]
+        wheelhouse = root / "candidate-wheelhouse"
+        wheelhouse.mkdir()
+        env = child_environment(
+            source_env,
+            task_root=root / "poetry-build",
+            extra={
+                "ACTIONS_ACCEPTANCE_POETRY": str(poetry),
+                "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": source_env[
+                    "ACTIONS_ACCEPTANCE_ROBOCORP_HOME"
+                ],
+                "ROBOCORP_HOME": source_env["ACTIONS_ACCEPTANCE_ROBOCORP_HOME"],
+                "POETRY_CACHE_DIR": str(root / "poetry-cache"),
+            },
+        )
+        for package_dir in (repo_root / "actions-http-helper", repo_root / "actions"):
+            result = run_owned_process(
+                [poetry, "build", "--format", "wheel", "--output", str(wheelhouse)],
+                cwd=package_dir,
+                env=env,
+                timeout_seconds=deadline.remaining(),
+            )
+            if result.returncode:
+                raise RuntimeError(
+                    "pinned Poetry candidate wheel build failed: "
+                    f"{(result.stderr or result.stdout)[-1000:]}"
+                )
+        core = wheelhouse / "actions_core-1.0.2-py3-none-any.whl"
+        helper = wheelhouse / "actions_http_helper-1.0.3-py3-none-any.whl"
+        if not core.is_file() or not helper.is_file():
+>           raise RuntimeError("Poetry did not produce the expected candidate wheels")
+E           RuntimeError: Poetry did not produce the expected candidate wheels
+
+../action_server/scripts/verify_dakota_rcc_acceptance.py:926: RuntimeError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-tmp/test_candidate_wheels_follow_c1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f1a8e3f9f40>
+core_metadata_version = '1.0.2'
+
+    @pytest.mark.parametrize("core_metadata_version", ["1.0.3", "1.0.2"])
+    def test_candidate_wheels_follow_checked_out_versions_and_validate_metadata(
+        tmp_path, monkeypatch, core_metadata_version
+    ):
+        harness = _harness()
+        source_root = tmp_path / "source"
+        (source_root / "actions").mkdir(parents=True)
+        (source_root / "actions-http-helper").mkdir()
+        script_dir = source_root / "action_server" / "scripts"
+        script_dir.mkdir(parents=True)
+        monkeypatch.setattr(
+            harness,
+            "__file__",
+            str(script_dir / "verify_dakota_rcc_acceptance.py"),
+        )
+        source_versions = {
+            "actions": ("actions-core", "1.0.3"),
+            "actions-http-helper": ("actions-http-helper", "1.0.3"),
+        }
+        for directory, (distribution, version) in source_versions.items():
+            (source_root / directory / "pyproject.toml").write_text(
+                f'[tool.poetry]\nname = "{distribution}"\nversion = "{version}"\n',
+                encoding="utf-8",
+            )
+    
+        def fake_poetry(command, *, cwd, **kwargs):
+            project = tomllib.loads((Path(cwd) / "pyproject.toml").read_text())[
+                "tool"
+            ]["poetry"]
+            distribution = project["name"]
+            version = project["version"]
+            if command[1] == "version":
+                return SimpleNamespace(returncode=0, stdout=f"{version}\n", stderr="")
+    
+            wheelhouse = Path(command[command.index("--output") + 1])
+            filename_distribution = distribution.replace("-", "_")
+            wheel = wheelhouse / (
+                f"{filename_distribution}-{version}-py3-none-any.whl"
+            )
+            metadata_path = f"{filename_distribution}-{version}.dist-info/METADATA"
+            metadata_version = (
+                core_metadata_version if distribution == "actions-core" else version
+            )
+            with zipfile.ZipFile(wheel, "w") as archive:
+                archive.writestr(
+                    metadata_path,
+                    f"Metadata-Version: 2.1\nName: {distribution}\nVersion: {metadata_version}\n\n",
+                )
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+    
+        monkeypatch.setattr(harness, "run_owned_process", fake_poetry)
+        task_root = tmp_path / "task"
+        task_root.mkdir()
+        arguments = {
+            "root": task_root,
+            "source_env": {
+                "PATH": os.environ.get("PATH", os.defpath),
+                "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": str(tmp_path / "rcc-home"),
+            },
+            "poetry": Path("/pinned/poetry"),
+            "deadline": harness.Deadline.after(30),
+        }
+        if core_metadata_version != "1.0.3":
+>           with pytest.raises(RuntimeError, match="wheel METADATA"):
+E           AssertionError: Regex pattern did not match.
+E            Regex: 'wheel METADATA'
+E            Input: 'Poetry did not produce the expected candidate wheels'
+
+../action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py:287: AssertionError
+=========================== short test summary info ============================
+FAILED ../../../../dev::test_candidate_wheels_follow_checked_out_versions_and_validate_metadata[1.0.3]
+FAILED ../../../../dev::test_candidate_wheels_follow_checked_out_versions_and_validate_metadata[1.0.2]
+2 failed, 36 deselected, 2 warnings in 0.21s
+Process 35787: exit status 1, command: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 [-m pytest --noconftest -c /dev/null -p no:cacheprovider --basetemp=/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-tmp --disable-warnings /workspace/work/actions-mk3-rcc-candidate-version/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py -k candidate_wheels_follow_checked_out_versions_and_validate_metadata -q] [v18.19.3/35779]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  15:23
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+Error: exit status 1 (robot run exit)
+[rcc] exit status will be: 10!

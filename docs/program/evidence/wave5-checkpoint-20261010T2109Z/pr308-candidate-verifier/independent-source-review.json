@@ -1,0 +1,54 @@
+{
+  "canonical_doc_proposal": "The committed guide paragraph correctly requires checked-out source version, expected filename and wheel METADATA agreement and carries version/SHA through candidate receipts. Keep historical Core1.0.2 evidence tied to its source revision; a dynamically identified1.0.3 candidate still needs actual provider-backed acceptance. For failed test diagnostics, distinguish visible missing-dependency tracebacks from swallowed adapter/import assertions rather than attributing all failures to one cause.",
+  "clean": true,
+  "commands": [
+    "git show complete3file diff; rev-parse HEAD/tree/parent; status --porcelain; diff --check HEAD^",
+    "Read candidate-wheel builder, pinned Poetry resolution, all synthetic Action/terminal receipt consumers",
+    "Hash-read RED/GREEN/lint/broader unit logs and retained exact task config"
+  ],
+  "head": "284880ca80bb666de6ef1bd970b493435bb7a8a9",
+  "limits": [
+    "No current provider/Runtime/action or registry acceptance was run by owner for this patch or reviewer.",
+    "Broader unit suite is not PASS; fail attribution correction is evidence only, unrelated source behavior unchanged from parent.",
+    "Current implementation expects these pure-Python package wheel names; source review covers current checked-out1.0.3 versions, not arbitrary future wheel tag/version normalization."
+  ],
+  "observations": [
+    "Version lookup uses existing pinned RCC Poetry2.1.1 executable against each checked-out package before building. Core/Helper current metadata both1.0.3.",
+    "Expected versioned wheel filename and exactly one readable METADATA Name/Version agreement required before candidate admission. Versions, filenames and SHA flow into inventory, synthetic result expectation and success/warm-failure receipts.",
+    "Only verifier/test/canonicalguide changed; immutable Core/tag/publication/floors untouched.",
+    "Retained RCC RED2FAIL expected old Core1.0.2 filename, GREEN2PASS/36deselected including positive1.0.3 and negative metadata1.0.2, RuffPASS. Reviewer did not rerun tests.",
+    "Broader owner attempt30PASS/7FAIL/1deselected;6failures visibly missing psutil. Acquire diagnostic failure exact_digestFalse has no displayed exception because existing adapter import/parser catches broadly. All7psutil attribution is unsupported and additive correction requested.",
+    "Exact RCC taskconfig retained hashb026ba1f6a433f5be14f8b2e9aac9661ca5b462c15b7656d052af0ff2a1a4f2e; local fake provider36687 killed perowner, not independently observed cleanup."
+  ],
+  "owner_receipt_sha256": "99c6ff448f334dd74d23fdb00545d510cfa6275d8ece8add195c15acdb96382c",
+  "parent": "73605934c1c948895410a5abaed6c225a396e038",
+  "status": "GO_SCOPED_SOURCE_REPAIR",
+  "test_artifacts": {
+    "green.stdout.txt": {
+      "bytes": 13931,
+      "sha256": "a2d559b85c9388011403ac507a75fe1fdd314af41744fd932575d0cb2e010c0c"
+    },
+    "lint.stdout.txt": {
+      "bytes": 13825,
+      "sha256": "a493d03639f35611d1f403b8facc6a2b3d448016c9ff5b0854099f8899279cb9"
+    },
+    "prepared-runtime-preflight-failure.stdout.txt": {
+      "bytes": 5382,
+      "sha256": "8c0cc516c58706b508fb600b8c10ad5f6a8e2352519d6a6e0419bc5de5897354"
+    },
+    "prepared-runtime-suite.stdout.txt": {
+      "bytes": 5170,
+      "sha256": "e84ec74013ed4ff6793feb1cd9f767c8b19aa6df56cbddeceab1e74c61c084e4"
+    },
+    "red.stdout.txt": {
+      "bytes": 28569,
+      "sha256": "803137a9e01b6b33a71f6d62eeb9c8d7669f473ccfb25af58062fe4bef236ea8"
+    },
+    "unit-suite.stdout.txt": {
+      "bytes": 41140,
+      "sha256": "18b96ca007ed3a39b9b9ebd3735845da9e7b39e40463619bb351e916873c3b0b"
+    }
+  },
+  "tree": "8471f44cc58f2dbe0226fbcf7d89445f440df2f0",
+  "upstream_disposition": "none"
+}

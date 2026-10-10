@@ -1,0 +1,127 @@
+{
+  "schema": "actions-wave5-preservation/v1",
+  "observed_at_utc": "2026-10-10T21:09:08Z",
+  "base_commit": "6e7402857d1bf16a7beeb590e7170987534ad727",
+  "graph": {
+    "path": "docs/program/community-execution-graph.json",
+    "sha256": "c2fedf1b7618b76153451b8694cb8b850ee98a80e0b6dd1c50ecac5784c20a02",
+    "issues": 54,
+    "issue_body_manifest_sha256": "1135e3aaf481341d5921bac7ab4ec5d726ffd2e8db0d17eaab90480e020902e8"
+  },
+  "ledger": {
+    "path": "docs/program/community-program-ledger.json",
+    "sha256": "c5e51e37e7a989a8c4946bde52655d2feae6bd610118760e4440c9c8be67ba00",
+    "retained_issue_contracts": 54,
+    "open_issues": 53,
+    "accepted_issue_closures": [
+      {
+        "accepted": true,
+        "audit": "evidence/release-contract-audit-20261009.md",
+        "closed": true,
+        "issue": 210,
+        "note": "Issue record body/comments/raw intake state remain preserved; current acceptance is a separate overlay.",
+        "owner_comment_id": 6087641984
+      }
+    ]
+  },
+  "historical_evidence_archives": [
+    {
+      "path": "docs/program/evidence/canvas-execution-graph-amendment-20261009-v2.zip",
+      "git_blob": "80e3dfceb190cfd1b2687acd7f824de2d5fc63f7",
+      "bytes": 6855,
+      "sha256": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf"
+    },
+    {
+      "path": "docs/program/evidence/canvas-execution-graph-amendment-20261009-v3.zip",
+      "git_blob": "268dbc8784588079c6b58acd89cc6eeefb52747b",
+      "bytes": 7286,
+      "sha256": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281"
+    },
+    {
+      "path": "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.zip",
+      "git_blob": "ee5b35deb34dd73e8a75dc7735d5828dee5cd1ec",
+      "bytes": 7262,
+      "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3"
+    },
+    {
+      "path": "docs/program/evidence/canvas-execution-graph-amendment-20261009.zip",
+      "git_blob": "d6b3817dbaaff54143b15e6194c384cef1acb8a7",
+      "bytes": 6683,
+      "sha256": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7"
+    },
+    {
+      "path": "docs/program/evidence/community-20261008.zip",
+      "git_blob": "a36911c32e609ad1713d695241e4c91b142f8662",
+      "bytes": 456808,
+      "sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-acceleration.zip",
+      "git_blob": "6f2b4cef91170048ae505bc27b02808fe32abc5e",
+      "bytes": 112671,
+      "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-checkpoint.zip",
+      "git_blob": "84b2ffef3e961829a11d53c8aa181f67e1414fff",
+      "bytes": 87365,
+      "sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-cloud-admission.zip",
+      "git_blob": "487be56458900d9066f8cd73c1ef2130a8fc8727",
+      "bytes": 69121,
+      "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-convergence.zip",
+      "git_blob": "092fb9ef82bcf9b8fff8407e31bfa36188873675",
+      "bytes": 165902,
+      "sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-fanout.zip",
+      "git_blob": "ff3430aa80a21c3823573093938db65580242cfd",
+      "bytes": 117686,
+      "sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-final-checkpoint.zip",
+      "git_blob": "a9affb792168cd2d92f497d29c64991df4bd546c",
+      "bytes": 129162,
+      "sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-resume.zip",
+      "git_blob": "0ca1a8f2d22803db055f7dabee1f8da624226d45",
+      "bytes": 123440,
+      "sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-update.zip",
+      "git_blob": "2b42b29bcf25399c20324328e0964fc5cce7992c",
+      "bytes": 36121,
+      "sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-update2.zip",
+      "git_blob": "69f6feb227fac56f82641af85470f8b90b3a5d89",
+      "bytes": 35524,
+      "sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31"
+    },
+    {
+      "path": "docs/program/evidence/community-20261009-update3.zip",
+      "git_blob": "0596a8975efb244505600950c70265cb0d5b0e7c",
+      "bytes": 71453,
+      "sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842"
+    },
+    {
+      "path": "docs/program/evidence/http-helper-1.0.3-verified-dist.zip",
+      "git_blob": "e53eea62f8ca95dadcda246714b19a6fa8e38b0f",
+      "bytes": 30034,
+      "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+    }
+  ],
+  "archive_count": 16,
+  "verification": "Hashes calculated from the exact base commit Git blobs; branch diff is additions-only under the new wave5 handoff/evidence paths."
+}
