@@ -99,6 +99,8 @@ Recovery artifacts live **in this handoff Git tree**, not only in RAM or an expi
 
 Read [the recovery procedure](recovery-20261010/README.md) and `artifact-manifest.json` before importing. Bundles require their advertised public prerequisites; clone/fetch public branches first, then `git bundle verify`. Import into a fresh repository/namespace, never overwrite active refs. Do not execute archived probes, apply patches or extract into an existing worktree blindly. Generated databases, cache environments, credentials, private keys, temporary configuration and compiled distributions are not committed.
 
+A separate `large-evidence.zip.part-*` supplement preserves oversized historical ledger/native/test receipts. Its exact sizes, order and hashes are in `artifact-manifest.json` and `large-evidence-archive-verification.json`. The first public handoff commit `b547679fd3804df5d2d9bca310dbbef271ad0fa9` remains in ancestry. Remote readback found that its artifact manifest accidentally included the manifest's previous version as a self-entry. All 61 file bytes matched their Git blobs. A normal follow-up fixes that bookkeeping error and adds the large receipts; no historical artifact is overwritten. Use the successor launch prompt's final commit, not the earlier manifest.
+
 ## Acceptance and remaining uncertainty
 
 Receipts retain exact commands and package/module/artifact identities. Paths from the old host are provenance, not promised executable paths in the successor. Use the supported prepared RCC/Poetry toolchain; do not replace a failed setup with ad hoc installs.

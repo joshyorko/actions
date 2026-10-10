@@ -4,15 +4,9 @@
   "files": [
     {
       "path": "docs/handoffs/recovery-20261010/README.md",
-      "bytes": 3271,
-      "sha256": "43416c4a4fd62599110541297e2148f9589d6030c7e9d0aee9c4abcdfb90385d",
-      "git_blob": "37baebec385808acb74dbc008b6ca6caf0c1a1c8"
-    },
-    {
-      "path": "docs/handoffs/recovery-20261010/artifact-manifest.json",
-      "bytes": 15361,
-      "sha256": "a2a6c36ce5f7f81b4254e12e6018e9ec3e5b042f20bb89033d099eff341a28dd",
-      "git_blob": "c278533212b88108c1fadf292db526151d1d0091"
+      "bytes": 3436,
+      "sha256": "932db7d838c0db0d7756a33742c0c112d28e3b9e302501f5cee7081dd24fc96f",
+      "git_blob": "ab0286b5146e17c6a2b5fe87dd0e4e1ac1503714"
     },
     {
       "path": "docs/handoffs/recovery-20261010/bundle-recovery-verification.json",
@@ -97,6 +91,36 @@
       "bytes": 4502,
       "sha256": "521ba25932282c9d382883e2bcadbc71bebb4690053f3f8060f9f4c00073c0a8",
       "git_blob": "ccbaea10b2a91da45d630d61fd6fbc7434bd8ab0"
+    },
+    {
+      "path": "docs/handoffs/recovery-20261010/large-evidence-archive-verification.json",
+      "bytes": 3375,
+      "sha256": "c077d7ff544656b563bf30d034a23359de955c74033cb51df65d1ac142b2b253",
+      "git_blob": "176aa10721b67564e793b8cb4b8372b1f6a5ff36"
+    },
+    {
+      "path": "docs/handoffs/recovery-20261010/large-evidence.zip.part-001",
+      "bytes": 4194304,
+      "sha256": "5a5b27373cd99c7702c42d2b620610caf0866b4e88a37301367e4ab553c1ba91",
+      "git_blob": "376f18ca653f7484391cf27afe2a5c823d04bb5a"
+    },
+    {
+      "path": "docs/handoffs/recovery-20261010/large-evidence.zip.part-002",
+      "bytes": 4194304,
+      "sha256": "138ac554b632ddc39f05d03a2ff379ac5b5360a7184bea44ee628dd044b0de9e",
+      "git_blob": "a6d5a7e6795e3e4c2bbca983581b94c4bc0cf931"
+    },
+    {
+      "path": "docs/handoffs/recovery-20261010/large-evidence.zip.part-003",
+      "bytes": 4194304,
+      "sha256": "80aa9fdd35a4de72036f31abdf3cb9d314fab0526f97cf965ddc44685faa7321",
+      "git_blob": "9e775b4d710e9eb787ddc6ec555cbb0832d48c5e"
+    },
+    {
+      "path": "docs/handoffs/recovery-20261010/large-evidence.zip.part-004",
+      "bytes": 1591152,
+      "sha256": "eb3e0f4cd74681126826ab11276ef233fdab0ed473f186da59af29239cb7b10b",
+      "git_blob": "e58fcca19ca3f628d535b43fdcb95a7644c8cc64"
     },
     {
       "path": "docs/handoffs/recovery-20261010/live-github/all-current-issue-states.json",
@@ -327,6 +351,12 @@
       "git_blob": "867116b6b233efc86d43feba7088a727e20bcc64"
     },
     {
+      "path": "docs/handoffs/recovery-20261010/publication-readback-correction.json",
+      "bytes": 534,
+      "sha256": "c8c2cb9ffca3a031436275bff920ad77bdfb1ca6931b137bee9ed41d3fa49989",
+      "git_blob": "5e03a40ddb4752ef1896b99dcae02f7ccdc58258"
+    },
+    {
       "path": "docs/handoffs/recovery-20261010/remote-checkpoints.json",
       "bytes": 2991,
       "sha256": "9b972d63506b92ce6af24c0015406ce3336a07c896dfbe4f512380b8a4a4c926",
@@ -375,5 +405,83 @@
     "all_member_hash_validation": "PASS"
   },
   "public_base_commit": "5203ea848e14462f546da9c03e73beab406f5863",
-  "public_base_tree": "4b78bf27c4bcbb7425c851d2d7304da35f29e90a"
+  "public_base_tree": "4b78bf27c4bcbb7425c851d2d7304da35f29e90a",
+  "supplemental_evidence_archive": {
+    "ordered_parts": [
+      "large-evidence.zip.part-001",
+      "large-evidence.zip.part-002",
+      "large-evidence.zip.part-003",
+      "large-evidence.zip.part-004"
+    ],
+    "bytes": 14174064,
+    "sha256": "9ba8d826309fc412a77f11cd979122550313495ac8f3ebc95b50687e0e08461f",
+    "member_count": 14,
+    "all_member_hash_validation": "PASS",
+    "excluded": [
+      {
+        "path": "/workspace/work/ledger0910-preservation-before.json",
+        "bytes": 2275131,
+        "sha256": "74725e078fb208380b18b5f63669d96414bf74b8f2447a63b560e39d9ee4c27f",
+        "git_blob": "75439863e79e1690b5ec592b3dd29c70977e18e6",
+        "known_recoverable_git": false,
+        "reason": "Exact duplicate of selected oversized receipt"
+      },
+      {
+        "path": "/workspace/work/run-output-transport-review-dad2/exact/docs/program/community-program-ledger.json",
+        "bytes": 2553107,
+        "sha256": "eb2d439167a3cc20aa8371f0bf6d34365fce037796ec84a05c0133757932cb95",
+        "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b",
+        "known_recoverable_git": true,
+        "reason": "Exact bytes in protected Git history"
+      },
+      {
+        "path": "/workspace/work/run-output-transport-review-dad2/fixed/docs/program/community-program-ledger.json",
+        "bytes": 2553107,
+        "sha256": "eb2d439167a3cc20aa8371f0bf6d34365fce037796ec84a05c0133757932cb95",
+        "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b",
+        "known_recoverable_git": true,
+        "reason": "Exact bytes in protected Git history"
+      },
+      {
+        "path": "/tmp/work/canvas-actions-home-final/pkgs/uv-0.9.26-h76e24b7_0/info/licenses/THIRDPARTY.yml",
+        "bytes": 5917786,
+        "sha256": "bb78aeddf7db8bedcc2c5e7b1ed9b1dddc8def982a68a1217f6d5912553ba833",
+        "git_blob": "971f1e25e60843170aa4ef36cf84bc0379bb1165",
+        "known_recoverable_git": false,
+        "reason": "Reconstructable dependency cache or generated recovery object index"
+      },
+      {
+        "path": "/tmp/work/pr279-e41/docs/program/community-program-ledger.json",
+        "bytes": 2553107,
+        "sha256": "eb2d439167a3cc20aa8371f0bf6d34365fce037796ec84a05c0133757932cb95",
+        "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b",
+        "known_recoverable_git": true,
+        "reason": "Exact bytes in protected Git history"
+      },
+      {
+        "path": "/tmp/work/canvas-actions-home/pkgs/uv-0.9.26-h76e24b7_0/info/licenses/THIRDPARTY.yml",
+        "bytes": 5917786,
+        "sha256": "bb78aeddf7db8bedcc2c5e7b1ed9b1dddc8def982a68a1217f6d5912553ba833",
+        "git_blob": "971f1e25e60843170aa4ef36cf84bc0379bb1165",
+        "known_recoverable_git": false,
+        "reason": "Reconstructable dependency cache or generated recovery object index"
+      },
+      {
+        "path": "/dev/shm/handoff-reachable-git-objects.txt",
+        "bytes": 1979285,
+        "sha256": "17db8f16adf79c653490f6cf94850a25e4614169bc4ffc34c5cea7c6140ef9bb",
+        "git_blob": "d5bf8226d74f38b51bb50dfaa443f249c450d424",
+        "known_recoverable_git": false,
+        "reason": "Reconstructable dependency cache or generated recovery object index"
+      },
+      {
+        "path": "/dev/shm/docs/program/community-program-ledger.json",
+        "bytes": 2553107,
+        "sha256": "eb2d439167a3cc20aa8371f0bf6d34365fce037796ec84a05c0133757932cb95",
+        "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b",
+        "known_recoverable_git": true,
+        "reason": "Exact bytes in protected Git history"
+      }
+    ]
+  }
 }

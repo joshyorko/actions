@@ -9,7 +9,7 @@ These files preserve the retiring Cloud coordinator's exact local histories and 
 5. For dirty work, prefer the named recovery branch and compare its tree with `remote-checkpoints.json`. Exact original local history and original staged/unstaged patches are also protected. Local and server-authored commit SHAs can differ despite identical full trees. Never relabel one as the other.
 6. Resume the existing owner or assign a bounded successor only after live ownership is reconciled. The TLS checkpoint includes unverified deletions, and the older RCC control is stale. Neither is a ready fix. Original datadirs, credentials, caches, locks and process state were intentionally excluded.
 
-The evidence archive contains 6,666 members. `untracked-evidence-selection.json` records exact duplicates, bytes already available in protected Git history, and excluded machine/generated state. The archive is a durable evidence location, not a claim that every old experiment is correct or current.
+The main evidence archive contains 6,666 members. The separately ordered `large-evidence.zip.part-*` supplement protects oversized historical ledger and native/test receipts, with its own manifest and hashes. `untracked-evidence-selection.json` records exact duplicates, bytes already available in protected Git history, and excluded machine/generated state. The archives are durable evidence locations, not a claim that every old experiment is correct or current.
 
 `remote-refs-final.tsv` is a dated observation of 197 refs before the final handoff branch existed. `remote-checkpoints.json` maps the eight dirty checkpoint branches; the main document adds the strict RCC and governance checkpoints. Re-read live refs before scheduling.
 

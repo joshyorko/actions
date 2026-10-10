@@ -1,0 +1,6 @@
+{
+  "prior_handoff_commit": "b547679fd3804df5d2d9bca310dbbef271ad0fa9",
+  "finding": "All 61 published files read back as exact Git blobs; manifest accidentally listed its prior version during regeneration. Self-entry expected15361 bytes but actual16159.",
+  "repair": "Exclude artifact-manifest.json from its own file list. Retain prior commit in ancestry; no artifact bytes or prior failure overwritten.",
+  "supplement": "Additional oversized historical evidence protected before transfer; generated cache/index bytes excluded."
+}

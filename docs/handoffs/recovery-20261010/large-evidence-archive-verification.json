@@ -1,0 +1,78 @@
+{
+  "ordered_parts": [
+    "large-evidence.zip.part-001",
+    "large-evidence.zip.part-002",
+    "large-evidence.zip.part-003",
+    "large-evidence.zip.part-004"
+  ],
+  "bytes": 14174064,
+  "sha256": "9ba8d826309fc412a77f11cd979122550313495ac8f3ebc95b50687e0e08461f",
+  "member_count": 14,
+  "all_member_hash_validation": "PASS",
+  "excluded": [
+    {
+      "path": "/workspace/work/ledger0910-preservation-before.json",
+      "bytes": 2275131,
+      "sha256": "74725e078fb208380b18b5f63669d96414bf74b8f2447a63b560e39d9ee4c27f",
+      "git_blob": "75439863e79e1690b5ec592b3dd29c70977e18e6",
+      "known_recoverable_git": false,
+      "reason": "Exact duplicate of selected oversized receipt"
+    },
+    {
+      "path": "/workspace/work/run-output-transport-review-dad2/exact/docs/program/community-program-ledger.json",
+      "bytes": 2553107,
+      "sha256": "eb2d439167a3cc20aa8371f0bf6d34365fce037796ec84a05c0133757932cb95",
+      "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b",
+      "known_recoverable_git": true,
+      "reason": "Exact bytes in protected Git history"
+    },
+    {
+      "path": "/workspace/work/run-output-transport-review-dad2/fixed/docs/program/community-program-ledger.json",
+      "bytes": 2553107,
+      "sha256": "eb2d439167a3cc20aa8371f0bf6d34365fce037796ec84a05c0133757932cb95",
+      "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b",
+      "known_recoverable_git": true,
+      "reason": "Exact bytes in protected Git history"
+    },
+    {
+      "path": "/tmp/work/canvas-actions-home-final/pkgs/uv-0.9.26-h76e24b7_0/info/licenses/THIRDPARTY.yml",
+      "bytes": 5917786,
+      "sha256": "bb78aeddf7db8bedcc2c5e7b1ed9b1dddc8def982a68a1217f6d5912553ba833",
+      "git_blob": "971f1e25e60843170aa4ef36cf84bc0379bb1165",
+      "known_recoverable_git": false,
+      "reason": "Reconstructable dependency cache or generated recovery object index"
+    },
+    {
+      "path": "/tmp/work/pr279-e41/docs/program/community-program-ledger.json",
+      "bytes": 2553107,
+      "sha256": "eb2d439167a3cc20aa8371f0bf6d34365fce037796ec84a05c0133757932cb95",
+      "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b",
+      "known_recoverable_git": true,
+      "reason": "Exact bytes in protected Git history"
+    },
+    {
+      "path": "/tmp/work/canvas-actions-home/pkgs/uv-0.9.26-h76e24b7_0/info/licenses/THIRDPARTY.yml",
+      "bytes": 5917786,
+      "sha256": "bb78aeddf7db8bedcc2c5e7b1ed9b1dddc8def982a68a1217f6d5912553ba833",
+      "git_blob": "971f1e25e60843170aa4ef36cf84bc0379bb1165",
+      "known_recoverable_git": false,
+      "reason": "Reconstructable dependency cache or generated recovery object index"
+    },
+    {
+      "path": "/dev/shm/handoff-reachable-git-objects.txt",
+      "bytes": 1979285,
+      "sha256": "17db8f16adf79c653490f6cf94850a25e4614169bc4ffc34c5cea7c6140ef9bb",
+      "git_blob": "d5bf8226d74f38b51bb50dfaa443f249c450d424",
+      "known_recoverable_git": false,
+      "reason": "Reconstructable dependency cache or generated recovery object index"
+    },
+    {
+      "path": "/dev/shm/docs/program/community-program-ledger.json",
+      "bytes": 2553107,
+      "sha256": "eb2d439167a3cc20aa8371f0bf6d34365fce037796ec84a05c0133757932cb95",
+      "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b",
+      "known_recoverable_git": true,
+      "reason": "Exact bytes in protected Git history"
+    }
+  ]
+}
