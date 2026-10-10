@@ -185,7 +185,7 @@ jobs:
         --break-system-packages -r ../devutils/requirements.txt
 
         uv run --no-project --python ${{ matrix.python }}  python -m pip install --break-system-packages
-        cibuildwheel==2.23.1'
+        cibuildwheel==2.23.4'
     - name: Set macOS deployment target
       if: ${{ matrix.name == 'macos' }}
       run: echo 'MACOSX_DEPLOYMENT_TARGET=12.0' >> "$GITHUB_ENV"
