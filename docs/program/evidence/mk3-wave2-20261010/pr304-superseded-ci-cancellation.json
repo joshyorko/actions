@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-10-10T19:53:31.669032+00:00",
+  "scope": "root-owned superseded PR304 pull_request verification only; current head73605934 replaces these; PR292 untouched",
+  "runs": [
+    {
+      "run": 38080866611,
+      "head": "b954071cb8a48ab80d5ebeb6b46c3c47f297f751",
+      "observed_status": "queued",
+      "workflow": "RCC developer toolkit",
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    },
+    {
+      "run": 38080866608,
+      "head": "b954071cb8a48ab80d5ebeb6b46c3c47f297f751",
+      "observed_status": "completed",
+      "workflow": "Measured Python coverage gate",
+      "action": "already_completed_no_change"
+    },
+    {
+      "run": 38080735136,
+      "head": "64de4dd1167183e7aa188d873ca463b14737b477",
+      "observed_status": "queued",
+      "workflow": "RCC developer toolkit",
+      "cancel_exit": 0,
+      "cancel_response": "{}"
+    }
+  ]
+}

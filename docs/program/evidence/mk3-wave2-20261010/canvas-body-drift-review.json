@@ -1,0 +1,99 @@
+{
+  "kind": "canvas_issue_body_drift_semantic_review",
+  "observed_at_utc": "2026-10-10T19:41:29Z",
+  "scope": "Read-only semantic comparison of the four current GitHub issue bodies that differed from the captured 54-contract source; no issue, PR, graph or source mutation.",
+  "source": {
+    "repository": "joshyorko/actions",
+    "captured_contract_source_commit": "5203ea848e14462f546da9c03e73beab406f5863",
+    "live_issue_bodies": "GitHub REST GET /repos/joshyorko/actions/issues/{99,100,126,127}; exact bodies saved in /workspace/work/actions-mk3-evidence/canvas-body-drift-live.json",
+    "typed_contracts": "docs/program/community-program-ledger.json; docs/program/community-execution-graph.json; latest supplemental amendment program-amendment-20261010T1842Z",
+    "root_steering_after_handoff": {
+      "PR301_merged": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "Core_1_0_3_workflow": "38080670608 queued on immutable actions-core-1.0.3 tag at community a70993; not published",
+      "core_union": "64de4dd1 on mk3/core-union-20261010 opening PR"
+    },
+    "root_updates_not_independently_rechecked": true
+  },
+  "issue_reviews": [
+    {
+      "issue": 99,
+      "title": "Build the shared CanvasSpec renderer and MCP App View foundation",
+      "live_state": "open",
+      "updated_at": "2026-10-09T19:35:07Z",
+      "recorded_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e",
+      "live_body_sha256": "957d1412f0cb1af0434ebb52eb99ac3be57f2fb42fdd4b4638b76f0426319b24",
+      "live_body_chars": 6656,
+      "semantic_review": {
+        "drift_class": "explicit dated research/execution amendment, not mere editorial change; original one-line goal retained as opening text.",
+        "already_accounted": "Typed #99-A accepts the same-resource Runtime + system-Chromium bridge only (receipt evidence/canvas-runtime-bridge-receipt-final-v2.json, SHA-256 441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c). The graph names pinned Playwright, actual ChatGPT host, and remaining whole-issue gates as open. #93 is coordination; #71 is related/product direction.",
+        "open_added_requirements": "The live body adds 99-B ChatGPT-native entrypoint/context/deep-link/remount behavior and broad renderer/error/CSP/offline/a11y/access-control and packaged-artifact criteria. The graph separately identifies pinned Playwright as a remaining browser criterion; that wording comes from the current typed next-action record, not from the live body diff. Actual host remains NOT_RUN.",
+        "classification": "The live-body amendment adds refined renderer and host acceptance details. Existing graph accounts the accepted 99-A boundary and leaves actual-host/whole-issue work open; it separately lists pinned Playwright as an open successor criterion. Neither is accepted by implication.",
+        "candidate_next_slice": "One pinned Playwright browser criterion using the already accepted shared fixture/resource and Runtime route. Bind receipt to exact lock/Playwright version, wheel/module/resource digest and run result. Explicitly record actual ChatGPT host as NOT_RUN; make no host-support claim."
+      }
+    },
+    {
+      "issue": 100,
+      "title": "Define Canvas authoring contracts in actions-core without package proliferation",
+      "live_state": "open",
+      "updated_at": "2026-10-09T19:34:29Z",
+      "recorded_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
+      "live_body_sha256": "7ecc079e380a695d8a8886bf175023c48b78819a32012650088ff4f5710fa995",
+      "live_body_chars": 6216,
+      "semantic_review": {
+        "drift_class": "explicit dated research/execution amendment defining two scoped deliverables and added acceptance details.",
+        "already_accounted": "100-A public decorator/ui-resource authoring and 100-B one shared-fixture Python/JSON/TypeScript interchange bridge are separately accepted in program-amendment-20261010T0625Z. PR301 is now reported by root as merged at 4e8a26296608c232ce3dbd1f250ddb709b9459c9. Accepted evidence remains slice-limited.",
+        "open_added_requirements": "Generalized CanvasSpec/schema source of truth beyond the single shared fixture, Workspace/deployed authorization, production dispatch, broader malformed-resource/runtime/package/wheel gates, reuse decision, and full #100 acceptance.",
+        "classification": "The amendment’s 100-A/100-B labels and slice boundaries are accounted. PR301 adds the hosted bridge for one fixture; it does not generalize the schema or close #100.",
+        "candidate_next_slice": "No additional #100 work is needed to unblock #99 pinned Playwright. If pursued later, propose a separate reviewed criterion for generalized interchange before implementation."
+      }
+    },
+    {
+      "issue": 126,
+      "title": "feat: add an MCP v2 capabilities showcase template",
+      "live_state": "open",
+      "updated_at": "2026-10-09T19:37:10Z",
+      "recorded_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f",
+      "live_body_sha256": "51a7d0e02335aa285a653becf942dcc55adc45322c4c665655c349d7f0e5a623",
+      "live_body_chars": 4040,
+      "semantic_review": {
+        "drift_class": "explicit dated protocol/Canvas-separation amendment with concrete advertised-capability requirements.",
+        "already_accounted": "Typed ledger accepts only `126:linux-installed-wheel-offline-project-creation` (evidence/mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json, SHA-256 5f28fb2e544c834e65a055d77dbbfc270669a267d62e54194abdb5d4fd78334a); next action preserves independent artifact and remaining protocol/host gates.",
+        "open_added_requirements": "Advertised `server/discover` and mounted Runtime trace, exact-version capability matrix, Tasks/run semantics, optional interaction/idempotency cells, metadata/private-state behavior, and host support. These have not been accepted by Linux offline project-creation evidence.",
+        "classification": "The typed amendment prevents whole-issue promotion and records protocol/host work as remaining, but new concrete protocol cells are not individually modeled as accepted scoped criteria.",
+        "candidate_next_slice": "Not the immediate successor: can be scheduled as a bounded MCP protocol matrix after #99 work with exact mounted Runtime evidence; do not advertise unsupported/NOT_RUN cells."
+      }
+    },
+    {
+      "issue": 127,
+      "title": "feat: add a community Canvas template",
+      "live_state": "open",
+      "updated_at": "2026-10-09T19:35:38Z",
+      "recorded_contract_sha256": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0",
+      "live_body_sha256": "26693f41244e70da16eb75cf9ac240d384ba18db6b63787c06376fb608778db6",
+      "live_body_chars": 4408,
+      "semantic_review": {
+        "drift_class": "explicit dated dependency-cycle correction and vertical acceptance amendment; makes prior issue-level dependency language slice-specific.",
+        "already_accounted": "Typed graph treats #93/#101 as coordination and #71 as related/product direction; #99/#100 whole issues are not blanket blocking edges. Typed amendments accept 99-A, 100-A, 100-B, the consumed-resource 98 slice, and the public-package 125 boundary. The graph records offline template checkpoint only and not full #127.",
+        "open_added_requirements": "Full packaged public API/resource/real Runtime interaction proof, fresh dependency/TypeScript/browser gates, authorized artifact semantics through shared #83/#129 contracts, and remaining #125/#98 acceptance. Root reports tag workflow 38080670608 queued for immutable Core 1.0.3 at community a70993, not published.",
+        "classification": "Most dependency correction is already represented by typed edge categories and accepted prerequisite slices. PR282 remains blocked until actual Core 1.0.3 registry bytes/API and its consumer gates pass; queueing the tag workflow is not publication.",
+        "candidate_next_slice": "Defer template gate dependent on published Core. Do not wait for whole #71/#93/#101 or full #99/#100, but do require named slices plus release/artifact/authorization gates."
+      }
+    }
+  ],
+  "smallest_dependency_ready_successor": {
+    "issue": 99,
+    "criterion": "Pinned Playwright browser proof for the existing shared Canvas fixture and same accepted resource through Runtime.",
+    "why_ready": "Accepted 99-A system-Chromium Runtime/resource slice exists; 100-A and one-fixture 100-B are accepted and PR301 has now merged. Typed #93 coordination and #71 product-direction relationships do not block this child slice.",
+    "limits": "One browser/fixture criterion only. It does not establish actual ChatGPT host support, the complete renderer, generalized CanvasSpec, packaged foundry or whole #99 acceptance.",
+    "explicit_host_status": "Actual ChatGPT host NOT_RUN; make no actual ChatGPT support claim.",
+    "evidence_to_bind": "Exact source/head and tree; lockfile and Playwright/browser versions; installed Runtime/module and resource hashes; test/run result; unsupported/error cases in the bounded fixture."
+  },
+  "documentation_improvement_update": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "exact_delta_update": "When a current issue body differs from a retained acceptance contract, classify the diff before updating the graph: identify explicit dated requirement amendments, evidence/status changes, and editorial or formatting changes. Map accepted amendments to typed scoped criteria with evidence and limits; keep added but unaccepted criteria open. Acceptance of a named slice (for example, #99-A system Chromium or #100-B one-fixture serialization) does not satisfy adjacent criteria such as pinned Playwright, a generalized schema, actual host behavior, or full issue closure. Preserve the captured body/hash as historical provenance and record the live body/hash separately.",
+    "evidence": "Four current issue bodies contain explicit dated 2026-10-09 research/execution amendments. Existing typed records accept only #99-A system Chromium, #100-A public authoring, #100-B shared-fixture roundtrip, #126 Linux offline wheel project creation, and scoped #127 prerequisite/checkpoint slices. #99 pinned Playwright and actual-host gates remain open; #100 generalized schema remains open; #126 protocol/host cells remain open; #127 Core 1.0.3 is queued but not published.",
+    "ambiguity_removed": "The original body-vs-contract byte mismatch alone did not show whether requirements were new, accounted, or accepted. The semantic review classifies those separately and preserves exact accepted-slice limits.",
+    "remaining_uncertainty": "Root-provided PR/tag workflow updates were not independently queried in this bounded lane. No acceptance is inferred from the queued workflow, and the semantic review does not create or accept new criteria."
+  },
+  "upstream_disposition": "none; no upstream defect investigation was required."
+}

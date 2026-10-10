@@ -2070,8 +2070,11 @@ cross-host credential stripping, including 303 method changes.
 ### Worker Core compatibility admission
 
 Runtime 1.0.3 candidate workers require Core 1.0.2's public integration API.
-The bundled candidate templates pin Core 1.0.2; publish and verify that Core
-release before publishing Runtime. Core 1.0.1 does not provide the new API.
+Verify each template's exact declared Core version against the public API it
+uses. The PR282 Canvas template requires Core 1.0.3 for MCP decorator `meta=`;
+the five existing templates retain Core 1.0.2. Core 1.0.3 publication and its
+clean consumer readback do not replace Canvas's installed Runtime/browser gate.
+Core 1.0.1 does not provide the worker integration API.
 Existing package environments containing it require an explicit dependency
 update and environment rebuild; they receive an actionable error instead of
 silently omitting managed Request injection. The legacy Robocorp path applies
@@ -2251,7 +2254,7 @@ narrower and must not be cited as proof of the full tuple matrix.
 Template README files ship verbatim in the embedded project archives because the
 bundle builder includes every source file. After changing active template guidance,
 regenerate the individual and combined ZIPs with the repository builder; compare
-all four manifest IDs, complete archive inventories, source README/package bytes,
+the exact branch's manifest IDs, complete archive inventories, source README/package bytes,
 and nested versus standalone ZIP equality. A documentation-only source change does
 not reach newly generated projects until these resources are rebuilt. Keep dependency
 pins and legal/history files unchanged when only product guidance is being repaired.
@@ -2358,3 +2361,31 @@ shared helper at the exact release source; identical Core trees do not imply
 identical helper code. Verify accepted community ancestry,
 package version, and absence of both tag and registry version before an immutable
 tag push. Workflow success still requires registry-byte and installed-API readback.
+
+After a Core tag workflow succeeds, fetch its `actions-core-dist` artifact and
+retain `actions-core-manifest.sha256`. Compare PyPI's exact release inventory and
+digests to that manifest, download both distributions, and recompute their
+SHA-256. Run `actions/scripts/verify_clean_wheel.py <published-wheel>` through
+the prepared RCC interpreter. It checks installed module origins, version,
+public MCP metadata behavior and external `actions list` / `actions run`
+consumers. Publication, registry-byte readback and consumer behavior are separate
+evidence; none establishes a downstream Canvas or native release gate.
+
+When a subprocess adapter receives filesystem arguments as `Path`, construct
+expected argv path elements with `str(Path(...))`. Keep the entire argv assertion
+so platform portability does not weaken argument order, flags or provider checks.
+Linux success does not substitute for the repaired Windows assertion's fresh CI.
+
+The separately reviewed `prepare_runtime_for_inspection` checkpoint keys its
+in-process cache by resolved environment identity, normalized environment
+fingerprint and provider. Source-generation reuse retains the authoritative
+publication pair without another acquire. Its caller-supplied source generation
+does not prove measured source, current artifact availability, metadata discovery
+or descendant cleanup. Those require separately executed source-bound inspection
+and lifecycle evidence; preparation tests and type checks alone cannot supply it.
+
+Classify live issue-body drift before proposing an additive graph amendment.
+Distinguish dated requirements, evidence/status updates and editorial changes;
+map accepted slices to typed criteria with evidence and explicit limits. Retain
+both captured and live body hashes. A single fixture, browser harness or protocol
+slice does not accept generalized rendering, actual ChatGPT or a whole contract.

@@ -1,0 +1,81 @@
+{
+  "observed_at_utc": "2026-10-10T19:53:45.045370+00:00",
+  "scope": "Bounded immutable wave2 evidence; no binaries, credentials, cache state or original-contract rewrites.",
+  "files": [
+    {
+      "path": "core-publication/publication-readback.json",
+      "bytes": 13718,
+      "sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39"
+    },
+    {
+      "path": "core-publication/pypi-readback.json",
+      "bytes": 1044,
+      "sha256": "b15c70129a506573654a46a5cc025f61d5c357f841df919998c1befa1dd40318"
+    },
+    {
+      "path": "core-publication/release-preflight.json",
+      "bytes": 2036,
+      "sha256": "ed321feb21d3928a0a89fef7511e16dcf8572f91ffb096453ad06bdeea103d17"
+    },
+    {
+      "path": "core-publication/workflow-artifact-readback.json",
+      "bytes": 938,
+      "sha256": "1a99879a3378c9ca8a170d9b7e1ae2782332044e7177bc62a1c8b09e83706f09"
+    },
+    {
+      "path": "core-publication/actions-core-manifest.sha256",
+      "bytes": 194,
+      "sha256": "34b1be2005ef0a75c99fa13bd21d7116b7d520bf0d8b432bd8107f3d5fbade8c"
+    },
+    {
+      "path": "core-publication/documentation-proposal.md",
+      "bytes": 2357,
+      "sha256": "00aa65b6fba92f2f8a2ca9a41ebdd4058510c8b90b04018f9ffea01dedb76b83"
+    },
+    {
+      "path": "canvas-body-drift-review.json",
+      "bytes": 11024,
+      "sha256": "0a1a77c5a4b583d9251952eef64be5e56f852b059335c3a1b58749ba83d6d89f"
+    },
+    {
+      "path": "canvas-body-drift-live.json",
+      "bytes": 22659,
+      "sha256": "53c8dbc7b43ab9d8b58e2a9e4e27a0bdb5f450f8a05239aa9d109eea16fc4f93"
+    },
+    {
+      "path": "pr302-portability-review.json",
+      "bytes": 3420,
+      "sha256": "5f1317cbf45c2cd5f3c0a3adb9d3a8f3d9e41cf81ba850671bed398db0cedd38"
+    },
+    {
+      "path": "pr302-portability-review.md",
+      "bytes": 2005,
+      "sha256": "ae3453aa65e58d36bec40757982a3b5b36c8eddf6f2f77d24119ea1d7743d6ad"
+    },
+    {
+      "path": "rcc-preparation-types.json",
+      "bytes": 4171,
+      "sha256": "9c2a5d9514d61252de59d99006a0f625861fe6737c0080993aeb5161b3eacd28"
+    },
+    {
+      "path": "rcc-preparation-types.md",
+      "bytes": 3659,
+      "sha256": "ab2f2667acd3d5ebe763e743aef82811ee3f2d9b6c560d2a444a17ec9e8d3ac7"
+    },
+    {
+      "path": "rcc-preparation-types.log",
+      "bytes": 1484,
+      "sha256": "3cff125a819717bea5d65597f4a3cf6a0310cc64f7882e9dd41b129015c9e658"
+    },
+    {
+      "path": "pr304-runtime-floor-failure.json",
+      "bytes": 7408,
+      "sha256": "9ad7449c6fe218cb82445d27bd7483c482565e445c2c6ac83c9ee0308357a2d3"
+    },
+    {
+      "path": "pr304-superseded-ci-cancellation.json",
+      "bytes": 889,
+      "sha256": "083c7207e66761a910b0cda287428cafe2ecaa1ffffe8850cd58fa2fefe9f19b"
+    }
+  ]
+}

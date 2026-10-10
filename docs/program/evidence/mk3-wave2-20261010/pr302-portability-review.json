@@ -1,0 +1,32 @@
+{
+  "disposition": "GO for the exact portability delta; merge admission HOLD pending new-head hosted checks",
+  "head": "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+  "tree": "0392a8b0e5976bb489b53a198240b0d561ee3ad9",
+  "parent": "e31506239fd0260d708a11440762537334f8d2d1",
+  "delta": "Exactly two expected argv literals changed to str(Path(...)) in test_publish_artifact_details_preserves_one_pinned_rcc_payload_and_provider; no production or canonical guide diff.",
+  "commands": [
+    {"command": "git log -1 --format='%H %T %P %s' e8e8a9db1c762b31fb4c4f625168dc7337235483", "observation": "Exact head/tree/single parent verified."},
+    {"command": "git diff e31506239fd0260d708a11440762537334f8d2d1 e8e8a9db1c762b31fb4c4f625168dc7337235483", "observation": "Only the two expected path strings change."},
+    {"command": "git diff --check e31506239fd0260d708a11440762537334f8d2d1 e8e8a9db1c762b31fb4c4f625168dc7337235483", "exit": 0},
+    {"command": "git diff --name-only e31506239fd0260d708a11440762537334f8d2d1 e8e8a9db1c762b31fb4c4f625168dc7337235483 -- action_server/src docs/skills/repository-operations.md", "exit": 0, "output": ""},
+    {"command": "git status --short --branch", "cwd": "/workspace/work/actions-mk3-pr302", "observation": "Clean owner checkout; reviewer wrote no source."}
+  ],
+  "findings": [],
+  "observations": [
+    "The tested producer already renders supplied RCC executable and environment Path objects with str; expected argv now uses exactly the same platform-dependent Path rendering.",
+    "Exact env/publish/--environment/--json/--provider order, exact provider identity, one captured invocation, and same-response spec/artifact identity assertion remain unchanged.",
+    "No path normalization or relaxed assertion was introduced; mocked inputs do not establish that those synthetic paths exist or actual RCC execution happened.",
+    "Remote PR302 exact head matched; open/draft, mergeable true/unstable; 18 exact-head checks observed, 16 queued/2 in progress. No fresh hosted Windows acceptance claimed.",
+    "Separate strict preparation7eca and its fresh type PASS remain a different source candidate; this portability delta does not integrate or execute inspection."
+  ],
+  "tests": "Reviewer did not run tests for this two-line read-only delta; exact hosted checks pending.",
+  "documentation_improvement": {
+    "file": "docs/skills/repository-operations.md",
+    "location": "RCC publication-pair verification guidance",
+    "exact_addition": "When an RCC argv contract test passes synthetic `Path` values to a producer that uses `str(path)`, derive the expected executable and environment strings from the same `Path` values. Keep the full ordered argv, provider, invocation count, and same-response publication-pair assertions exact. Do not normalize production arguments or relax equality to accommodate Windows rendering; mocked synthetic paths establish argv construction, not path existence or real RCC execution.",
+    "evidence": "Exact e315-to-e8e8 two-line test delta and unchanged producer str(Path) argv construction; prior handoff recorded actual Windows expectation failure.",
+    "ambiguity_removed": "POSIX literal path strings falsely treated as portable expectations or mock argv acceptance conflated with execution.",
+    "uncertainty": "New-head hosted Windows and actual inspection not executed by reviewer."
+  },
+  "upstream_disposition": "none"
+}

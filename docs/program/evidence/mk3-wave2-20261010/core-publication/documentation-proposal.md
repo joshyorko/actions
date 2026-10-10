@@ -1,0 +1,11 @@
+# Proposed repository guidance delta: Core publication readback
+
+Add the following after the existing Core tag-workflow paragraph in `docs/skills/repository-operations.md`:
+
+> After a Core tag workflow succeeds, fetch its `actions-core-dist` artifact and retain the `actions-core-manifest.sha256` readback. Compare PyPI's release file list and published checksums with that manifest, then download each wheel and source archive and recompute SHA-256 to verify the actual registry bytes. Run `actions/scripts/verify_clean_wheel.py <published-wheel>` through the prepared RCC Python environment. The verifier installs the exact wheel into a temporary clean environment, checks that `actions` and `actions.mcp` import from that environment and that `actions.__version__` matches the installed `actions-core` distribution, exercises public MCP tool/resource metadata validation, and runs the public `actions list` and `actions run` commands. Workflow publish success, registry byte readback, and installed consumer behavior are separate evidence.
+
+Keep release-helper guidance revision-specific. In Core release source `a70993fafc99a9f94041485542d5a720797ca394`, `devutils/src/devutils/invoke_utils.py` makes `inv make-release` require local branch `master`; do not generalize that source guard to newer Runtime integration helpers, whose community release path uses its own canonical-origin/ancestry checks. The Actions Core workflow itself is triggered by a pushed `actions-core-*` tag and checks that the tag commit is an ancestor of `origin/community`.
+
+Evidence: Actions Release run `38080670608` (verify and publish jobs passed); artifact `11680287719` archive SHA-256 `7a7e9b9dbcf207ec1f7fc2c07a57d927c76d792ac98d6b57b01f0bb8bf6f3483`; published wheel SHA-256 `8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265`; published sdist SHA-256 `1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691`; independent PyPI downloads matched both the workflow manifest and PyPI JSON; the clean-wheel consumer verifier passed under RCC 18.19.3. Full receipt: `publication-readback.json`.
+
+This proposal supplements existing guidance to verify registry artifacts by specifying byte-level comparison and the exact installed consumer verifier. It does not claim the verifier is a full Canvas, browser, or downstream application acceptance gate.

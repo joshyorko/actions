@@ -1,0 +1,52 @@
+{
+  "accepted_source": {
+    "branch_readback": "origin/community was the accepted commit",
+    "commit": "a70993fafc99a9f94041485542d5a720797ca394",
+    "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959"
+  },
+  "observed_at": "2026-10-10T19:38:00Z",
+  "pre_tag_registry": {
+    "actions_core_1_0_3_present": false,
+    "actions_core_1_0_3_tag_absent": true,
+    "actions_core_latest": "1.0.2",
+    "actions_work_items_0_4_4_present": true,
+    "actions_work_items_latest": "0.4.4"
+  },
+  "promotion": {
+    "candidate_artifact": {
+      "archive_bytes": 185504,
+      "archive_sha256": "129cdf34cd685c8e1141d83d1694479cffe4d19fe5232f6878f4832e2ef34db1",
+      "assessment": "Hosted candidate-wheel job is source/wheel preparation evidence; tag workflow rebuilds and verifies release bytes.",
+      "download_attempt": "GitHub artifact endpoint returned HTTP 403; no bytes independently inspected",
+      "id": 11677329133,
+      "name": "actions-core-candidate-dist"
+    },
+    "candidate_run_id": 38074887213,
+    "candidate_run_url": "https://github.com/joshyorko/actions/actions/runs/38074887213",
+    "conclusion": "success",
+    "head_commit": "c2733957b047a2acf3d38c1cad7704a4bc69f15b",
+    "head_tree_matches_accepted_tree": true,
+    "merged_at": "2026-10-10T18:35:25Z",
+    "passed_jobs": [
+      "candidate-wheel",
+      "build (ubuntu-py3.10-devmode)",
+      "build (windows-py3.10-devmode)",
+      "build (macos-py3.10-devmode)"
+    ],
+    "pr": 303
+  },
+  "repository": "joshyorko/actions",
+  "tag_preflight_receipt": "/workspace/work/actions-mk3-evidence/core-tag-preflight.json",
+  "tag_push_receipt": "/workspace/work/actions-mk3-evidence/core-tag-push.txt",
+  "toolchain": {
+    "bootstrap_and_toolkittest": "NOT_RUN in bounded preflight",
+    "command": "source /workspace/actions-cloud/activate.sh && rcc run -r developer/toolkit.yaml --dev -t Doctor",
+    "go": "1.23.6",
+    "invoke": "2.2.0",
+    "node": "20.19.3",
+    "poetry": "2.1.1",
+    "python": "3.12.15",
+    "rcc": "18.19.3",
+    "result": "PASS"
+  }
+}
