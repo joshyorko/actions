@@ -1,0 +1,74 @@
+{
+  "launch": {
+    "candidate_plugin_sha256": "4842113d1531f5e8d776d42d68aeee264dc9b3678ae388acff841778e5255cb0",
+    "candidate_runner_sha256": "2d416dffc5b4cafc04e92a304770914ac08daea2966058b018ed855ce3966362",
+    "command": "source /workspace/actions-cloud/activate.sh; timeout 238s /workspace/actions-cloud/bin/rcc task script --no-build -r /workspace/work/actions-mk3-browser-security/developer/toolkit.yaml -- /workspace/work/actions-mk3-pr302/action_server/.venv/bin/python /workspace/work/actions-mk3-evidence/pr304-browser-security/runner/run_pr153_browser_acceptance.py --kind frozen --binary /workspace/work/actions-mk3-evidence/pr304-browser-security/binaries/linux-frozen-action-server --run-dir /workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen",
+    "inner_runner_traceback": "ModuleNotFoundError: No module named psutil at runner line 181 inspect_owned_pids; RCC stderr gives stack at runner line 367 after run_owned_pytest returned.",
+    "rcc": "/workspace/actions-cloud/bin/rcc v18.19.3",
+    "rcc_exit_code": 10
+  },
+  "limits": [
+    "No test PASS is claimed.",
+    "No Go-wrapper attempt occurred.",
+    "No dependencies were installed.",
+    "No retry or source change was made."
+  ],
+  "observations": {
+    "direct_package_python_probe": {
+      "base_prefix": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534",
+      "executable": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+      "executable_realpath": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+      "psutil_origin": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psutil/__init__.py"
+    },
+    "outer_python_identity": "Not retained in the failed run; the runner only recorded its package-python probe, not parent sys.executable/sys.prefix/sys.path.",
+    "preflight_identity": "PASS against checkout head 73605934c1c948895410a5abaed6c225a396e038/tree a8fe00af1858077273912d0b590f0f7a662c83d5, source hash, frozen binary hash, browser hash/version, Node v20.19.3 and Playwright 1.62.1. This did not prove the parent interpreter prefix.",
+    "process_cleanup": "RCC journal final process count is 0. Read-only host census is retained. No task-owned Runtime/browser PID was recorded; current census showed no live action-server or headless Chromium command, but host had pre-existing zombie processes. Complete host reaping is not claimed.",
+    "pytest_result": "No JUnit, pytest-selection, browser harness, browser debug trace, or runtime process-start artifact exists. Captured pytest stdout/stderr files are empty. Therefore actual test selection/execution/result is NOT ESTABLISHED; no browser/runtime PID was recorded.",
+    "rcc_journal_processes": "RCC journal records task processes 40320 python3.12 and 40330 python, then final process count 0."
+  },
+  "retained_files": {
+    "process-census.txt": {
+      "bytes": 4999,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/process-census.txt",
+      "sha256": "4650a0246933c02e020a5e6a27abf10b0d78dd7ce32ca28ae37b833948a143fb"
+    },
+    "pytest-stderr.log": {
+      "bytes": 0,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/pytest-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pytest-stdout.log": {
+      "bytes": 0,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/pytest-stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rcc-environment.yaml": {
+      "bytes": 2008,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/rcc-environment.yaml",
+      "sha256": "90fc0205b1cf24c39ac0ea41cf3def46fcc1a2a000481413a191427ef601dc22"
+    },
+    "rcc-journal.jsonl": {
+      "bytes": 4364,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/rcc-journal.jsonl",
+      "sha256": "8117092954f75b9af82d94eaa206f61fc47161f79c5885fdac7ecee167a69ca8"
+    },
+    "rcc-stderr.log": {
+      "bytes": 715,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/rcc-stderr.log",
+      "sha256": "d044a81d49ac1cd385e1b3a5e443e729fd294b0a582cc70b045b6d7c05e89fa5"
+    },
+    "rcc-stdout.log": {
+      "bytes": 0,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/rcc-stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rcc-task.log": {
+      "bytes": 5059,
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/failed-attempt-01/rcc-task.log",
+      "sha256": "026af6efe8dccfdb8c53c8b253249cb21cbfea063044373eeae5dc5ee695ddad"
+    }
+  },
+  "schema": "actions.pr153-frozen-attempt-failure.v1",
+  "status": "FAILED_RUNNER_SETUP_AFTER_RCC_LAUNCH; TEST_RESULT_NOT_ESTABLISHED"
+}

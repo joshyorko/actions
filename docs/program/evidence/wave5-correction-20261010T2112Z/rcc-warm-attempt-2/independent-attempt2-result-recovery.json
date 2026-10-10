@@ -1,0 +1,293 @@
+{
+  "acquire": {
+    "automatic_passed": false,
+    "automatic_returned_digest": null,
+    "automatic_verification_valid": null,
+    "cacheHit": "unknown",
+    "duration_ms": 19013,
+    "exit": 0,
+    "full_outer_payload": "unknown",
+    "stdout_truncated": true
+  },
+  "cleanup": {
+    "boundary": "diagnostic Linux subreaper and owned process groups; escaped groups not contained; no production cleanup proof",
+    "command_groups": [
+      {
+        "cleanup_errors": [],
+        "pid": 40226,
+        "process_group_gone": true,
+        "reaped": true
+      },
+      {
+        "cleanup_errors": [],
+        "pid": 40055,
+        "process_group_gone": true,
+        "reaped": true
+      }
+    ],
+    "independent_live_checks": {
+      "ps_pids": [
+        40031,
+        40055,
+        40226
+      ],
+      "ps_result": "no rows, exit1",
+      "ss_port": 38593,
+      "ss_result": "header only; no listener"
+    },
+    "owner_receipt": {
+      "all_owned_processes_reaped": true,
+      "child_processes_reaped": true,
+      "provider_output_threads_stopped": true,
+      "provider_service": {
+        "created": true,
+        "errors": [],
+        "pid": 40031,
+        "process_group_gone": true,
+        "reaped": true,
+        "returncode": 0
+      }
+    }
+  },
+  "commands": [
+    "stdlib json raw_decode on retained receipt tail; byte compare with persisted verification",
+    "stdlib lstat/resolve/read_bytes/SHA256 for retained manifest, ready, verification, metadata objects and managed Python target",
+    "ps -o pid=,stat=,args= -p 40031,40055,40226",
+    "ss -ltn 'sport = :38593'"
+  ],
+  "documentation_proposal": "Keep complete bounded machine JSON separate from diagnostic output tails. Reject oversized JSON explicitly or capture it in an owner-private bounded file and record its bytes/hash before parsing required fields. Redact sensitive free-form values without altering structured identity, loopback address or variable-name fields. A complete nested value recovered from retained bytes may support an additive observation; preserve the original failed gate, unknown outer fields and unrun execution checks. Bind any continuation to the owned retained manifest/materialization and independently review its exact source and lifecycle before execution.",
+  "files": {
+    "interpretation.md": {
+      "ancestor_symlinks": false,
+      "bytes": 2639,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "41002fbe854cdf046595ccc99ada012e713fb6b8147a97a116c98d71544732ed",
+      "uid": 1000
+    },
+    "launch-context.json": {
+      "ancestor_symlinks": false,
+      "bytes": 2417,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "0a397164684572f71745c4f7944d805f1c8ed6b21c3ae3196656ae4c95d93dbc",
+      "uid": 1000
+    },
+    "result-manifest.json": {
+      "ancestor_symlinks": false,
+      "bytes": 781,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "1d0bc9c35df83d7e3d02d104041508d24eae85abfa737999da40e8ddc671cb15",
+      "uid": 1000
+    },
+    "task-work/consumer-home/artifacts/v1/content/manifests/sha256/d7/8a/d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16": {
+      "ancestor_symlinks": false,
+      "bytes": 2175,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "7d65e2b993743ff775230b72708e6c3ba73c4af86faa104393ed690875e403ee",
+      "uid": 1000
+    },
+    "task-work/consumer-home/artifacts/v1/content/objects/sha256/1f/8b/1f8b3d07b988905b9a4c49c320955c31c29e3b763cb8cd7f5dc7738f6ea77e8b": {
+      "ancestor_symlinks": false,
+      "bytes": 1469706,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "1f8b3d07b988905b9a4c49c320955c31c29e3b763cb8cd7f5dc7738f6ea77e8b",
+      "uid": 1000
+    },
+    "task-work/consumer-home/artifacts/v1/content/objects/sha256/7a/cb/7acb91fd13d10fb88a00813df73d79bd1c8f902ccd4bedc33858c188272964aa": {
+      "ancestor_symlinks": false,
+      "bytes": 85,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "7acb91fd13d10fb88a00813df73d79bd1c8f902ccd4bedc33858c188272964aa",
+      "uid": 1000
+    },
+    "task-work/consumer-home/artifacts/v1/content/objects/sha256/89/34/8934eadb8ef0081b951f81f65bd661c8649fbd0b136a3f5b8a4f365bff2ded61": {
+      "ancestor_symlinks": false,
+      "bytes": 692107,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "8934eadb8ef0081b951f81f65bd661c8649fbd0b136a3f5b8a4f365bff2ded61",
+      "uid": 1000
+    },
+    "task-work/consumer-home/artifacts/v1/content/objects/sha256/d8/c7/d8c7ad5e4aa8b82a36ae0ce35dafd8d2949183e22a8316e46abb67a1d3c5d95d": {
+      "ancestor_symlinks": false,
+      "bytes": 1112,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "d8c7ad5e4aa8b82a36ae0ce35dafd8d2949183e22a8316e46abb67a1d3c5d95d",
+      "uid": 1000
+    },
+    "task-work/consumer-home/artifacts/v1/materializations/d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16/ready.json": {
+      "ancestor_symlinks": false,
+      "bytes": 432,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "ea6c954caab0bf73a69d05e07396441e680f68bdd0fc48efda85aba24e482675",
+      "uid": 1000
+    },
+    "task-work/consumer-home/artifacts/v1/materializations/d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16/verified-content.json": {
+      "ancestor_symlinks": false,
+      "bytes": 443,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "8d4e32aaa51a8588cce1e7531da661492c7d8fe6d17a588ffa85955f137f2c28",
+      "uid": 1000
+    },
+    "task-work/consumer-home/artifacts/v1/verification/sha256_d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16.json": {
+      "ancestor_symlinks": false,
+      "bytes": 594,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "04b03fb319022ad00e260fa46ce1be1c61b288aea26d88e5ca3faa7e436fb808",
+      "uid": 1000
+    },
+    "task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530/bin/python3.12": {
+      "ancestor_symlinks": false,
+      "bytes": 31903952,
+      "links": 1,
+      "mode": "0o775",
+      "regular": true,
+      "sha256": "793024e6cfb0b81cbf615186396daa54604f87dccaee99aceb87962ba62fa53e",
+      "uid": 1000
+    },
+    "task-work/receipt.json": {
+      "ancestor_symlinks": false,
+      "bytes": 44195,
+      "links": 1,
+      "mode": "0o600",
+      "regular": true,
+      "sha256": "56b7e0b40b79b2d9630400dd39eb2209935623d9e17f4fc4644bdcd7adae22af",
+      "uid": 1000
+    }
+  },
+  "limitations": [
+    "Original automatic gate FAIL and exec NOT RUN remain unchanged.",
+    "Complete outer acquire payload and cacheHit cannot be recovered from this tail.",
+    "Persisted verification/ready states are historical snapshots; no fresh re-verification or managed interpreter execution.",
+    "Manifest identity and four metadata-object hashes do not constitute rehashing all indexed environment content.",
+    "Immutable receipt redaction obscures loopback command argument and some environment-variable spellings; do not infer missing raw payload.",
+    "Launch context first_attempt_receipt_sha256 has a typo; its frozen-files binding has the correct original digest.",
+    "No RCC/Runtime defect or full issue134 acceptance established."
+  ],
+  "manifest_binding": {
+    "all_content_index_entries_rehashed": false,
+    "artifact_digest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "builder": {
+      "compatibilityKey": "v12-gzip-sha256",
+      "kind": "rcc-holotree-v12",
+      "rccVersion": "v18.19.3"
+    },
+    "canonical_identity_bytes": 2084,
+    "compact_object_without_artifactDigest_preserving_parsed_field_order_sha256": "d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "four_referenced_metadata_objects_hash_size_verified": true,
+    "fresh_RCC_verification_executed": false,
+    "platform": {
+      "arch": "amd64",
+      "os": "linux",
+      "rccPlatform": "linux_amd64"
+    },
+    "python_requirement": {
+      "abi": "cpython-312-x86_64-linux-gnu",
+      "implementation": "cpython",
+      "version": "3.12.15"
+    },
+    "raw_file_sha256": "7d65e2b993743ff775230b72708e6c3ba73c4af86faa104393ed690875e403ee",
+    "specification_digest": "sha256:d8c7ad5e4aa8b82a36ae0ce35dafd8d2949183e22a8316e46abb67a1d3c5d95d"
+  },
+  "original_exec_cases": {},
+  "original_fatal": "RuntimeError: consumer B did not acquire and verify exact Artifact",
+  "original_status": "PREFLIGHT_OR_RUN_FAILURE",
+  "publish": {
+    "artifact_digest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "duration_ms": 53774,
+    "exit": 0
+  },
+  "recovery": {
+    "byte_identical_to_persisted_verification": true,
+    "decoded_tail_bytes": 32768,
+    "raw_decode_span_half_open": [
+      32172,
+      32766
+    ],
+    "raw_decode_span_units": "ASCII characters and UTF-8 bytes",
+    "raw_value_bytes": 594,
+    "raw_value_sha256": "04b03fb319022ad00e260fa46ce1be1c61b288aea26d88e5ca3faa7e436fb808",
+    "receipt_field": "commands.acquire_B.stdout_tail",
+    "remaining_suffix": "}\n",
+    "scope": "complete nested verification object, not complete outer acquisition JSON",
+    "unique_marker_offset": 32157,
+    "verification": {
+      "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "builder": "rcc-holotree-v12",
+      "code": "valid",
+      "decisionID": "sha256:4c2abe9b8ad4914feb40acf01f909c41aca54fbbc84439b9e78919640207a22a",
+      "platform": "linux_amd64",
+      "policyDigest": "sha256:7252b27a0266abd2c3a688e89326e739aed446c3418a8a2248ef01d1b740b6ae",
+      "policyMode": "permissive-local",
+      "policyRevision": "artifacttrust/v1",
+      "revocationCheckedAt": "2026-10-10T21:03:00Z",
+      "revocationSnapshot": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "valid": true,
+      "verifiedAt": "2026-10-10T21:03:00Z"
+    }
+  },
+  "retained_materialization": {
+    "ancestor_symlinks": false,
+    "directory_mode": "0o700",
+    "home_mode": "0o750 beneath private 0o700 attempt/task-work ancestors",
+    "path_confined_to_consumer_home": true,
+    "path_owned_uid": 1000,
+    "python_alias": {
+      "relative_path": "task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530/bin/python",
+      "resolved_target": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530/bin/python3.12",
+      "symlink_target": "python3.12",
+      "target_confined_to_exact_materialization": true
+    },
+    "ready": {
+      "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "createdAt": "2026-10-10T21:03:00.049547503Z",
+      "legacyBlueprintKey": "01d412d33d96ccf3",
+      "materializationId": "a2484ce_5a1fac3_e58fc530",
+      "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530",
+      "state": "ready",
+      "verifiedAt": "2026-10-10T21:03:00.905875103Z"
+    },
+    "verified_content": {
+      "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "createdAt": "2026-10-10T21:03:00.049547503Z",
+      "legacyBlueprintKey": "01d412d33d96ccf3",
+      "materializationId": "a2484ce_5a1fac3_e58fc530",
+      "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530",
+      "state": "verified-content",
+      "verifiedAt": "2026-10-10T21:03:00.049547503Z"
+    }
+  },
+  "reviewed_at_utc": "2026-10-10T21:11:08.224527+00:00",
+  "schema_version": 1,
+  "scope": "read-only result and retained-state recovery; no RCC command or interpreter execution",
+  "source": {
+    "clean": true,
+    "fixture_source": "/workspace/work/actions-mk3-rcc-warm-audit/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "fixture_source_sha256": "2345704fa32e0d477a2f6b1c71be86e06a8de5e509e750d62098da22d0e808f9",
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "root": "/workspace/work/actions-mk3-rcc-warm-audit",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "status": "GO for scoped readback and additive evidence recovery; HOLD any exec acceptance",
+  "upstream_disposition": "none"
+}

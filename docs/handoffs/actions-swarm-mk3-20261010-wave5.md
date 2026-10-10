@@ -3,6 +3,10 @@
 This additive checkpoint starts from `6e7402857d1bf16a7beeb590e7170987534ad727`.
 It records source reviews and bounded acceptance evidence; it is not an
 engineering baseline, graph amendment, issue closure, or release approval.
+See the linked [additive correction](actions-swarm-mk3-20261010-wave5-correction.md)
+for the distinct PR305 Canvas versus PR304 #153 evidence and the independently
+recovered nested RCC verification; the original receipts and first checkpoint
+remain retained unchanged.
 The new evidence directory's manifest
 (`wave5-checkpoint-20261010T2109Z/manifest.json`, SHA-256
 `abdbeb116c2df53cefb052af74c760fd6915a035e48fc0135d6d8033a3625feb`)

@@ -1,0 +1,149 @@
+{
+  "schema": "actions-wave5-correction-evidence/v1",
+  "observed_at_utc": "2026-10-10T21:15:26Z",
+  "base_commit": "6e7402857d1bf16a7beeb590e7170987534ad727",
+  "previous_wave5_commit": "8e0ce989317a986d02b64c5ef4cfcf88c93fb14",
+  "previous_wave5_manifest_sha256": "abdbeb116c2df53cefb052af74c760fd6915a035e48fc0135d6d8033a3625feb",
+  "scope": "Additive correction. Original task receipts and previous evidence manifest remain unchanged. Text-only; raw log-like source files preserve exact bytes under scoped -text attributes.",
+  "files": [
+    {
+      "path": "pr304-issue153/.gitattributes",
+      "bytes": 12,
+      "sha256": "5fa85cf355d19712ee18b111269fdca7fd5e4926c699207da54f6d655d1b8a84"
+    },
+    {
+      "path": "pr304-issue153/corrected-selected-case-receipt.json",
+      "bytes": 6265,
+      "sha256": "fe8d0fbe31f53d34c845f16f74e7ae23344f06201c1326bfa340871da4726328",
+      "source": "pr304-browser-security/runs/linux-frozen-corrected-01/acceptance-receipt.json"
+    },
+    {
+      "path": "pr304-issue153/initial-runner-failure.json",
+      "bytes": 5114,
+      "sha256": "029020b4f2d7ef3b522987b5df2d6b38bad4961f687ddcf6be9d39519f2fbb21",
+      "source": "pr304-browser-security/failed-attempt-01/failure-receipt.json"
+    },
+    {
+      "path": "pr304-issue153/junit.xml",
+      "bytes": 3212,
+      "sha256": "9cdf125b31c785a73b86f6bf647dca43983cae9b533e590cbfaec3580f243b4c",
+      "source": "pr304-browser-security/runs/linux-frozen-corrected-01/junit.xml"
+    },
+    {
+      "path": "pr304-issue153/pytest-selection.json",
+      "bytes": 184,
+      "sha256": "982dff7ba2896e67bc346c4761a72fb9ce7ee445a01ba787d646514423ff53a7",
+      "source": "pr304-browser-security/runs/linux-frozen-corrected-01/pytest-selection.json"
+    },
+    {
+      "path": "pr304-issue153/pytest-stderr.log",
+      "bytes": 325,
+      "sha256": "bd5e7c2fcf4eca89a1a9b74e151fc66a96f3494977710fc8747b208a1aaa0f22",
+      "source": "pr304-browser-security/runs/linux-frozen-corrected-01/pytest-stderr.log"
+    },
+    {
+      "path": "pr304-issue153/pytest-stdout.log",
+      "bytes": 2391,
+      "sha256": "88103cb8baf814396137f9fdb373b3a8af4bf833d4d3f2407b6ee5e113327a70",
+      "source": "pr304-browser-security/runs/linux-frozen-corrected-01/pytest-stdout.log"
+    },
+    {
+      "path": "pr308-candidate-verifier/.gitattributes",
+      "bytes": 19,
+      "sha256": "ed2757e8ac67326a4cdc8b783e191db915d6a0acae3e11d2b6e9e8cd9721d0ee"
+    },
+    {
+      "path": "pr308-candidate-verifier/candidate-version-tests.yaml",
+      "bytes": 1253,
+      "sha256": "b026ba1f6a433f5be14f8b2e9aac9661ca5b462c15b7656d052af0ff2a1a4f2e",
+      "source": "runtime-rcc-candidate-version/candidate-version-tests.yaml"
+    },
+    {
+      "path": "pr308-candidate-verifier/prepared-runtime-setup.yaml",
+      "bytes": 331,
+      "sha256": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a",
+      "source": "runtime-rcc-candidate-version/prepared-runtime-setup.yaml"
+    },
+    {
+      "path": "pr308-candidate-verifier/prepared-runtime-suite.py",
+      "bytes": 2960,
+      "sha256": "b37ce791be71c65a86cb164e6d03341ef9ff3a517f53a0a1cf672ac1c2637478",
+      "source": "runtime-rcc-candidate-version/prepared-runtime-suite.py"
+    },
+    {
+      "path": "pr308-candidate-verifier/prepared-runtime-toolkit.yaml",
+      "bytes": 945,
+      "sha256": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68",
+      "source": "runtime-rcc-candidate-version/prepared-runtime-toolkit.yaml"
+    },
+    {
+      "path": "rcc-warm-attempt-2/acquire-readback-correction.md",
+      "bytes": 2828,
+      "sha256": "4d19feb40ab14e5a3db9d9fd9fc93e31dcd9f1ebe1f0ad632b177bed0450e749",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/acquire-readback-correction.md"
+    },
+    {
+      "path": "rcc-warm-attempt-2/consumer-B-verification.json",
+      "bytes": 594,
+      "sha256": "04b03fb319022ad00e260fa46ce1be1c61b288aea26d88e5ca3faa7e436fb808",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/independent-acquire-verification-recovered.json"
+    },
+    {
+      "path": "rcc-warm-attempt-2/frozen-runner.py",
+      "bytes": 51626,
+      "sha256": "f4595ac56e6876760affe325a0551184b3dcb7f9564126941b2bef082c68df89",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/frozen-launch/diagnose_rcc_local_ready_exec.py"
+    },
+    {
+      "path": "rcc-warm-attempt-2/independent-attempt2-result-recovery.json",
+      "bytes": 12451,
+      "sha256": "c077506b65d72b747f359812e6d2b4f5ecf9da948d4c1f88605bf2c2cd05c8d4",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/independent-attempt2-result-recovery.json"
+    },
+    {
+      "path": "rcc-warm-attempt-2/independent-attempt2-result-recovery.md",
+      "bytes": 2044,
+      "sha256": "c41d7c257f6eb83f4be556650162255b21e4fff84e781f1df5a4448c783468c7",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/independent-attempt2-result-recovery.md"
+    },
+    {
+      "path": "rcc-warm-attempt-2/launch-context.json",
+      "bytes": 2417,
+      "sha256": "0a397164684572f71745c4f7944d805f1c8ed6b21c3ae3196656ae4c95d93dbc",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/launch-context.json"
+    },
+    {
+      "path": "rcc-warm-attempt-2/ready.json",
+      "bytes": 432,
+      "sha256": "ea6c954caab0bf73a69d05e07396441e680f68bdd0fc48efda85aba24e482675",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/artifacts/v1/materializations/d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16/ready.json"
+    },
+    {
+      "path": "rcc-warm-attempt-2/task-receipt.json",
+      "bytes": 44195,
+      "sha256": "56b7e0b40b79b2d9630400dd39eb2209935623d9e17f4fc4644bdcd7adae22af",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/task-work/receipt.json"
+    },
+    {
+      "path": "rcc-warm-attempt-2/verified-content.json",
+      "bytes": 443,
+      "sha256": "8d4e32aaa51a8588cce1e7531da661492c7d8fe6d17a588ffa85955f137f2c28",
+      "source": "rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/artifacts/v1/materializations/d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16/verified-content.json"
+    }
+  ],
+  "documentation": {
+    "canonical_guide": "docs/skills/repository-operations.md",
+    "sha256": "822ecdd5d57358a9152809d080cd3d5415c2037d50e62974f44e1ac47c31c8bc",
+    "bytes": 175002,
+    "handoff_correction": "docs/handoffs/actions-swarm-mk3-20261010-wave5-correction.md",
+    "handoff_sha256": "795c92204346c29122e5fd6baea6441cb74f05e708575c3efa1dd7a7febde063",
+    "handoff_bytes": 3548,
+    "wave5_index_handoff": "docs/handoffs/actions-swarm-mk3-20261010-wave5.md",
+    "wave5_index_handoff_sha256": "4dea483b6efe7b0d3d6e915c231d39cbba7dc300a9c418b946f3fa5503e155ea",
+    "wave5_prior_handoff_sha256": "a95cbfc65c8067814c60deaf0111ebe764df8b9023e0e6879b9ebc63c54dce50",
+    "canonical_guide_sha256": "822ecdd5d57358a9152809d080cd3d5415c2037d50e62974f44e1ac47c31c8bc",
+    "handoff_correction_sha256": "baf751ec255ceae18d228a83b5b6993b00a7dcd692a49304283ca100a08f9dea",
+    "handoff_correction_bytes": 4103
+  },
+  "upstream_disposition": "none"
+}

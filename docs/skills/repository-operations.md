@@ -1347,8 +1347,8 @@ refresh. This distinction was verified for PR288 and PR287 on 2026-10-10.
 
 ### RCC release acceptance pins
 
-The latest published stable release from `joshyorko/rcc` is `v18.19.3`,
-published 2026-08-28, with tag target
+The primary developer-toolkit matrix pins the published stable release
+`v18.19.3`, published 2026-08-28, with tag target
 `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`; the GitHub release is neither a
 draft nor a prerelease. Direct downloads matched the publisher API digests:
 `rcc-linux64` `7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428`,
@@ -1832,6 +1832,31 @@ it is reacquired by Artifact digest and never by a persisted executable or
 materialization path. RCC acquire results must include exact identity and
 `verification.valid == true`; missing or invalid verification fails closed.
 
+If an RCC task retains only a bounded tail of an `env acquire --json` response,
+keep outer-response fields unknown when the beginning is missing. A complete,
+syntactically bounded nested `verification` object may be recovered read-only
+only when its exact bytes and digest bind to the consumer's retained ready and
+verified-content metadata. Record that recovery separately: it does not recover
+unknown outer fields such as `cacheHit`, change the original strict automatic
+gate result, rehash every indexed environment file, or establish a later
+`env exec` outcome. Keep acquisition verification, content rehash and execution
+as distinct evidence.
+
+When an RCC-launched Python runner crosses a package-venv wrapper, capture
+`sys.executable`, `sys.prefix`, `sys.base_prefix` and relevant module origins
+from the actual outer runner. A venv executable can resolve through a shared RCC
+Python while its active `sys.prefix` remains the package `.venv`; executable
+realpath alone does not identify the active environment. Verify that the
+required modules come from the intended prepared environment before launching
+tests or native children.
+
+For a retained frozen executable that loads adjacent support files, stage the
+complete expected directory layout, including its sibling `_internal` tree,
+before invocation. A missing adjacent shared library is a staging/startup
+failure; it proves neither that a browser test ran nor a product source defect.
+Record collection, native process startup and browser launch as separate
+outcomes, and claim browser execution only when its launch is evidenced.
+
 The gated real proof is run with the released RCC binary and explicit gate:
 
 ```bash
@@ -1986,6 +2011,16 @@ exercise detached live writers and fast-exiting adopted children, but source
 Runtime/candidate-wheel receipts still show a failed RCC wrapper. These harness
 checks do not establish production pool retirement, lease-release ordering,
 frozen Runtime acceptance or remote-provider acceptance.
+
+The Dakota RCC candidate-wheel verifier derives Core and HTTP Helper versions
+from each checked-out package using the pinned Poetry executable, then checks
+that each built wheel's filename and embedded `METADATA` agree with those source
+versions. Carry the candidate version and measured SHA-256 into the synthetic
+Action expectation and terminal receipts. This identifies a local candidate;
+it does not establish registry publication or provider-backed Runtime
+acceptance. Keep historical receipts bound to their recorded source revision:
+a Core 1.0.2 result is not a current-source result when checked-out metadata
+declares 1.0.3.
 
 With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
 recorded digest through the same provider and each returned the exact digest

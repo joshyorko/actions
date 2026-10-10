@@ -1,0 +1,15 @@
+tasks:
+  Placeholder:
+    shell: echo unused
+devTasks:
+  CandidateVersionContract:
+    shell: python -m pytest --noconftest -c /dev/null -p no:cacheprovider --basetemp=/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-tmp --disable-warnings /workspace/work/actions-mk3-rcc-candidate-version/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py -k candidate_wheels_follow_checked_out_versions_and_validate_metadata -q
+  CandidateVersionLint:
+    shell: ruff check /workspace/work/actions-mk3-rcc-candidate-version/action_server/scripts/verify_dakota_rcc_acceptance.py /workspace/work/actions-mk3-rcc-candidate-version/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py
+  CandidateVersionUnitSuite:
+    shell: python -m pytest --noconftest -c /dev/null -p no:cacheprovider --basetemp=/workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/pytest-unit-tmp --disable-warnings -m 'not integration_test and not real_rcc' /workspace/work/actions-mk3-rcc-candidate-version/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py -q
+environmentConfigs:
+  - setup.yaml
+PATH:
+  - ..
+artifactsDir: /workspace/work/actions-mk3-evidence/runtime-rcc-candidate-version/rcc-artifacts

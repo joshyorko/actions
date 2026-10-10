@@ -1,0 +1,43 @@
+{
+  "attempt": "attempt-20261010T2101Z",
+  "authorized_once": true,
+  "cwd": "/workspace",
+  "first_attempt_receipt_sha256": "5f26791b3808a157e1a8ac7866ca1b28ba493bda44e01ad57e2b9aec5ca358f1",
+  "frozen_files_sha256": {
+    "candidate-manifest.json": "2bc6618273c111a30ebdd124e90d4aeaec34d133619a085a272ae554016ddbff",
+    "diagnose_rcc_local_ready_exec.py": "f4595ac56e6876760affe325a0551184b3dcb7f9564126941b2bef082c68df89",
+    "first-attempt-receipt.json": "5f26791b3808a157a1e8ac7866ca1b28ba493bda44e01ad57e2b9aec5ca358f1",
+    "minimal-rcc-exec-diagnostic-proposal-v3.md": "a41a16bc64ad667f81d1bc0e29e77b680192366f81fdd04969ec9f8260665a39",
+    "network-context-correction-v2.md": "184307ebf369d8dda3fd823ece6cb6225ae40417bec07c8ff67b77dad2c98cad",
+    "proxy-head-receipt.json": "ebc0c101549e2fe237a0984d5897614d92607ea2eff92c9dfd3266fdc284d1d4"
+  },
+  "invocation_argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-u",
+    "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/frozen-launch/diagnose_rcc_local_ready_exec.py",
+    "--task-root",
+    "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work",
+    "--receipt",
+    "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/receipt.json"
+  ],
+  "launcher_python": {
+    "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7",
+    "version": "3.12.14"
+  },
+  "overall_deadline_seconds": 300,
+  "pinned_rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "prepared_utc": "2026-10-10T21:01:31.285534+00:00",
+  "publish_deadline_seconds": 180,
+  "review_status": "GO",
+  "sol_review": {
+    "exact_environment_head_receipt_sha256": "093482c3fce743e0fcd7c0548069058dc0894180ad1c4e4a60e205492fcb679c",
+    "manifest_sha256": "2bc6618273c111a30ebdd124e90d4aeaec34d133619a085a272ae554016ddbff",
+    "proposal_sha256": "a41a16bc64ad667f81d1bc0e29e77b680192366f81fdd04969ec9f8260665a39",
+    "runner_sha256": "f4595ac56e6876760affe325a0551184b3dcb7f9564126941b2bef082c68df89"
+  },
+  "started": true,
+  "started_utc": "2026-10-10T21:01:45.292932+00:00",
+  "subject_head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+  "subject_tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+}

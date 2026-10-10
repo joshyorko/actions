@@ -1,0 +1,113 @@
+{
+  "browser_launch": {
+    "launch_pids": [],
+    "matches_expected_managed_browser": false,
+    "path_observed_in_debug_trace": null,
+    "sha256": null,
+    "trace_excerpt": [],
+    "version": "Google Chrome for Testing 151.0.7922.34"
+  },
+  "browser_pid_state_after_test": [],
+  "cleanup_interpretation": {
+    "claims_complete_reaping": false,
+    "live_owned_processes": [],
+    "owned_zombie_processes": [],
+    "reaped_descendant_count_reported_by_supervisor": 0
+  },
+  "command": [
+    "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-s",
+    "--tb=short",
+    "-m",
+    "integration_test",
+    "-p",
+    "pr153_capture_plugin",
+    "--basetemp",
+    "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/pytest-tmp",
+    "--junitxml",
+    "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/junit.xml",
+    "tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix"
+  ],
+  "elapsed_seconds": 4.054,
+  "environment": {
+    "ACTIONS_HOME": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/actions-home",
+    "DEBUG": "pw:browser",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "ROBOCORP_HOME": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/robocorp",
+    "ROBOTS_HOME": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/robots-home",
+    "node_path_override": "empty; resolved @playwright/test through lock-matched target frontend node_modules symlink",
+    "outer_active_python_environment_removed": true
+  },
+  "gate_errors": [],
+  "identity": {
+    "actions_core_origin": "/workspace/work/actions-mk3-browser-security/actions/src/actions/__init__.py",
+    "actions_server_origin": "/workspace/work/actions-mk3-browser-security/action_server/src/actions/server/__init__.py",
+    "browser_executable_preflight": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "browser_sha256_preflight": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "browser_version_preflight": "Google Chrome for Testing 151.0.7922.34",
+    "checkout_branch": "mk3/browser-security-20261010",
+    "checkout_head": "73605934c1c948895410a5abaed6c225a396e038",
+    "checkout_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "mcp_sdk_installed_origin": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/mcp/__init__.py",
+    "node_path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+    "node_version": "v20.19.3",
+    "package_python": "3.12.15 (main, Oct  6 2026, 23:50:18) [GCC 15.3.0]",
+    "package_python_prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+    "playwright_revision": "1234",
+    "playwright_test_version": "1.62.1",
+    "pr304_linux_manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+    "pr304_synthetic_merge": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "pr304_synthetic_merge_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "runner_psutil_origin": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psutil/__init__.py",
+    "runner_python_base_prefix": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534",
+    "runner_python_executable": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "runner_python_prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+    "selected_runtime_kind": "frozen",
+    "selected_runtime_path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/binaries/linux-frozen-action-server",
+    "selected_runtime_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+    "source_test_sha256": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c",
+    "tracked_checkout_clean": true,
+    "workflow_run_id": "38081495661"
+  },
+  "limitations": [
+    "This check exercises one PR304 Linux packaged artifact with the existing local browser test.",
+    "Actual ChatGPT was not run.",
+    "Production deployment authorization, CSP, artifact resolution, and frozen release signing are not established.",
+    "Linux results do not establish Windows/macOS coverage or blanket issue #153 acceptance."
+  ],
+  "log_paths": {
+    "browser_harness_stderr": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/browser-harness-stderr.log",
+    "browser_harness_stdout": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/browser-harness-stdout.log",
+    "junit": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/junit.xml",
+    "pytest_stderr": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/pytest-stderr.log",
+    "pytest_stdout": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-corrected-01/pytest-stdout.log"
+  },
+  "owned_process_supervisor": {
+    "cleanup_grace_seconds": 6,
+    "disposition": "clean_no_descendants",
+    "implementation": "/workspace/work/actions-mk3-browser-security/action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "reaped_descendants": 0,
+    "timeout_seconds": 205,
+    "unexpected_live_descendants": false
+  },
+  "pytest": {
+    "result": null,
+    "returncode": 1,
+    "timed_out": false
+  },
+  "runtime_pid_state_after_test": [],
+  "runtime_process_at_ready": null,
+  "schema": "actions.pr153-native-browser-runtime-check.v2",
+  "status": "FAIL",
+  "synthetic_key_redaction": {
+    "browser_helper_output_scrubbed_before_retention": true,
+    "retained_test_logs_contain_key": false,
+    "test_assertion_checks_server_stdout_and_stderr": true,
+    "test_uses_synthetic_test_key": true
+  },
+  "test": "action_server/tests/action_server_tests/test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+  "test_elapsed_seconds": 2.702
+}
