@@ -1407,6 +1407,16 @@ declared portable-suite result and hand it to the Action Server test-layout
 owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
 the package's discovery rules.
 
+The generated `actions_runtime_tests.yml` workflow is the configured full
+Action Server PR gate: it runs the portable and binary test tasks, then lint,
+typecheck, and docs checks. Its pull-request filter must retain the generated
+dependency paths while covering `master`, `community`, and `integration/**`;
+otherwise PRs targeting the maintained community or integration branches skip
+these checks. Keep this filter scoped to `ActionServerTests` in
+`.github/workflows/_gen_workflows.py`; do not broaden the unrelated Core or
+HTTP-helper workflow filters. Regenerate the workflow from that source and
+verify the hosted workflow on PRs to both maintained branches.
+
 The real-browser Origin and ambient-session acceptance in
 `test_browser_origin_acceptance.py` runs Chromium against the actual Runtime
 HTTP server. Its Node HTTP requests and browser `fetch` calls have independent

@@ -633,6 +633,16 @@ class ActionServerTests(BaseTests):
     require_build_oauth2_config = True
 
     @override
+    def on_part(self, dep_paths):
+        parts = super().on_part(dep_paths)
+        parts["on"]["pull_request"]["branches"] = [
+            "master",
+            "community",
+            "integration/**",
+        ]
+        return parts
+
+    @override
     def run_tests(self):
         return [
             # As we want to run the tests in the binary, we do the following:

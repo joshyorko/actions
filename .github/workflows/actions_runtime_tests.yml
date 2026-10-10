@@ -31,6 +31,8 @@ permissions:
   pull_request:
     branches:
     - master
+    - community
+    - integration/**
     paths:
     - action_server/**
     - .github/workflows/actions_runtime_tests.yml
