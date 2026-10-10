@@ -438,6 +438,9 @@ manifest, and import checks do not catch malformed post-inline HTML: serve the
 exact Runtime artifact through a real browser before visual acceptance and
 prove the root renders, no external JS/CSS request remains, no console/page
 error occurs, and the inline script contains no raw HTML boundary.
+The credential-free build contract therefore checks that Runtime JavaScript and
+CSS are present inline in `dist/index.html` and that it has no external script or
+stylesheet references; checking for standalone `.js` or `.css` bundles is stale.
 Each standalone `build:runtime` and `build:canvas` command also emits the
 corresponding reproducible CycloneDX `sbom.json`; `build:artifacts` composes
 those per-root commands. This keeps the default missing-root repair path
@@ -1448,7 +1451,11 @@ HTTP-helper workflow filters. Regenerate the workflow from that source and
 verify the hosted workflow on PRs to both maintained branches. The generated
 Action Server `Build binary` step uses POSIX shell syntax, so set its shell to
 `bash` explicitly for Windows runners instead of relying on their PowerShell
-default.
+default. Its integration step runs real Chromium acceptance, so install the
+locked Playwright Chromium with `npx playwright install chromium` from
+`action_server/frontend` after the portable tests and before integration tests;
+the preceding frontend build has already run `npm ci` and this install must not
+duplicate that build or alter credentials.
 
 The real-browser Origin and ambient-session acceptance in
 `test_browser_origin_acceptance.py` runs Chromium against the actual Runtime

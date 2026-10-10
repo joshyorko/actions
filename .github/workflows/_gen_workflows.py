@@ -666,6 +666,11 @@ class ActionServerTests(BaseTests):
                 "run": f"{run_in_env}poetry run inv test-not-integration",
             },
             {
+                "name": "Install Playwright Chromium for Runtime browser acceptance",
+                "working-directory": "action_server/frontend",
+                "run": "npx playwright install chromium",
+            },
+            {
                 "name": "Test (integration)",
                 "env": {
                     "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
