@@ -1378,7 +1378,9 @@ reported `WinError 10054` in Proactor connection teardown followed by a
 selector-loop fixture does not test server-side Proactor behavior, so only native
 Windows CI can verify the verifier client and preserved trust/auth assertions. Keep
 this loop boundary until a native Proactor peer completes the rejected-handshake
-cleanup without callback errors or a shutdown timeout. CPython issue
+cleanup without callback errors or a shutdown timeout. The dedicated server loop
+records callback errors, forwards them to asyncio's default exception handler, and
+fails the test after bounded cleanup if any occurred. CPython issue
 [#158646](https://github.com/python/cpython/issues/158646) tracks an adjacent
 Windows TLS-reset failure in selector SSL tests; it is not this Proactor wait path.
 

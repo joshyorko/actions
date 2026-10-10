@@ -274,12 +274,21 @@ async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
     server_started = threading.Event()
     server_stopped = threading.Event()
     server_errors: list[BaseException] = []
+    server_callback_errors: list[dict[str, object]] = []
     server_loop: asyncio.AbstractEventLoop | None = None
     server_task: asyncio.Task[None] | None = None
 
     async def serve_loopback_tls_server():
         nonlocal server_loop, server_task
         server_loop = asyncio.get_running_loop()
+
+        def record_callback_error(
+            loop: asyncio.AbstractEventLoop, context: dict[str, object]
+        ) -> None:
+            server_callback_errors.append(context)
+            loop.default_exception_handler(context)
+
+        server_loop.set_exception_handler(record_callback_error)
         async with mcp_app.router.lifespan_context(mcp_app):
             server_task = asyncio.create_task(server.serve())
             try:
@@ -344,9 +353,13 @@ async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
                 stopped = await asyncio.to_thread(server_stopped.wait, 1)
         if not stopped:
             pytest.fail("loopback TLS server thread did not stop after cancellation")
-        server_thread.join(timeout=0)
+        await asyncio.to_thread(server_thread.join, 1)
         assert (
             not server_thread.is_alive()
         ), "loopback TLS server thread is still running"
         if server_errors:
             raise AssertionError("loopback TLS server failed") from server_errors[0]
+        if server_callback_errors:
+            raise AssertionError(
+                f"loopback TLS server callback errors: {server_callback_errors!r}"
+            )
