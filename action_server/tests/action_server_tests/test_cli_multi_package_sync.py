@@ -5,24 +5,34 @@ from pathlib import Path
 from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
-def _write_action(package_dir: Path, function_name: str, result: str) -> None:
+def _write_actions(package_dir: Path, action_results: dict[str, str]) -> None:
     package_dir.mkdir(exist_ok=True)
-    (package_dir / "package_actions.py").write_text(
-        "from actions import action\n\n"
-        "@action\n"
-        f"def {function_name}() -> str:\n"
-        f"    return {result!r}\n",
-        encoding="utf-8",
-    )
+    source = ["from actions import action", ""]
+    for function_name, result in action_results.items():
+        source.extend(
+            [
+                "@action",
+                f"def {function_name}() -> str:",
+                f"    return {result!r}",
+                "",
+            ]
+        )
+    (package_dir / "package_actions.py").write_text("\n".join(source), encoding="utf-8")
 
 
-def _action_states(datadir: Path) -> tuple[set[str], dict[str, bool]]:
+def _action_states(datadir: Path) -> tuple[set[str], dict[tuple[str, str], bool]]:
     from actions.server._models import Action, ActionPackage, load_db
 
     with load_db(datadir / "shared.sqlite") as db:
         with db.connect():
-            packages = {package.name for package in db.all(ActionPackage)}
-            actions = {action.name: action.enabled for action in db.all(Action)}
+            packages_by_id = {
+                package.id: package.name for package in db.all(ActionPackage)
+            }
+            packages = set(packages_by_id.values())
+            actions = {
+                (packages_by_id[action.action_package_id], action.name): action.enabled
+                for action in db.all(Action)
+            }
     return packages, actions
 
 
@@ -41,31 +51,40 @@ def _start_sync(datadir: Path, cwd: Path, directories: tuple[Path, ...]):
     return process
 
 
-def _visible_openapi_paths(client: ActionServerClient) -> set[str]:
-    return set(json.loads(client.get_openapi_json())["paths"])
-
-
 async def _mcp_tool_names(process: ActionServerProcess) -> set[str]:
     async with process.mcp_client() as session:
         return {tool.name for tool in (await session.list_tools()).tools}
+
+
+async def _call_mcp_tool(process: ActionServerProcess, tool_name: str) -> str:
+    async with process.mcp_client() as session:
+        result = await session.call_tool(tool_name, {})
+        return result.content[0].text
 
 
 def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
     package_a = tmp_path / "package_a"
     package_b = tmp_path / "package_b"
     package_c = tmp_path / "package_c"
-    _write_action(package_a, "from_package_a_v1", "A1")
-    _write_action(package_b, "from_package_b", "B")
+    _write_actions(package_a, {"from_package_a_v1": "A1", "do_it": "A-do_it"})
+    _write_actions(package_b, {"from_package_b": "B", "do_it": "B-do_it"})
     datadir = tmp_path / "runtime-data"
 
-    def assert_public_catalog(process, expected_actions: set[str]) -> None:
+    def assert_public_catalog(
+        process, expected_routes: set[str], expected_mcp_tools: set[str]
+    ) -> None:
         client = ActionServerClient(process)
-        paths = _visible_openapi_paths(client)
-        for action_name in expected_actions:
-            action_slug = action_name.replace("_", "-")
-            assert any(action_slug in path for path in paths)
+        openapi = json.loads(client.get_openapi_json())
+        paths = set(openapi["paths"])
+        assert expected_routes <= paths
         tool_names = asyncio.run(_mcp_tool_names(process))
-        assert expected_actions <= tool_names
+        assert expected_mcp_tools <= tool_names
+        same_named_routes = [path for path in paths if path.endswith("/do-it/run")]
+        assert len(same_named_routes) == 2
+        operation_ids = {
+            openapi["paths"][path]["post"]["operationId"] for path in same_named_routes
+        }
+        assert len(operation_ids) == 2
 
     # The first directory order must retain both packages in shared metadata,
     # HTTP, and MCP catalogs, and both actions must actually execute.
@@ -73,16 +92,35 @@ def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
     try:
         packages, actions = _action_states(datadir)
         assert packages == {"package_a", "package_b"}
-        assert actions == {"from_package_a_v1": True, "from_package_b": True}
-        assert_public_catalog(process, set(actions))
+        assert actions == {
+            ("package_a", "from_package_a_v1"): True,
+            ("package_a", "do_it"): True,
+            ("package_b", "from_package_b"): True,
+            ("package_b", "do_it"): True,
+        }
+        expected_routes = {
+            "/api/actions/package-a/from-package-a-v1/run",
+            "/api/actions/package-a/do-it/run",
+            "/api/actions/package-b/from-package-b/run",
+            "/api/actions/package-b/do-it/run",
+        }
+        expected_mcp_tools = {
+            "from_package_a_v1",
+            "from_package_b",
+            "package_a__do_it",
+            "package_b__do_it",
+        }
+        assert_public_catalog(process, expected_routes, expected_mcp_tools)
         client = ActionServerClient(process)
-        for name, result in (("from-package-a-v1", "A1"), ("from-package-b", "B")):
-            path = next(
-                path
-                for path in _visible_openapi_paths(client)
-                if f"/{name}/run" in path
-            )
+        for path, result in (
+            ("/api/actions/package-a/from-package-a-v1/run", "A1"),
+            ("/api/actions/package-b/from-package-b/run", "B"),
+            ("/api/actions/package-a/do-it/run", "A-do_it"),
+            ("/api/actions/package-b/do-it/run", "B-do_it"),
+        ):
             assert json.loads(client.post_get_str(path.lstrip("/"), {})) == result
+        assert asyncio.run(_call_mcp_tool(process, "package_a__do_it")) == "A-do_it"
+        assert asyncio.run(_call_mcp_tool(process, "package_b__do_it")) == "B-do_it"
     finally:
         process.stop()
 
@@ -92,23 +130,54 @@ def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
         try:
             packages, actions = _action_states(datadir)
             assert packages == {"package_a", "package_b"}
-            assert actions == {"from_package_a_v1": True, "from_package_b": True}
-            assert_public_catalog(process, set(actions))
+            assert actions == {
+                ("package_a", "from_package_a_v1"): True,
+                ("package_a", "do_it"): True,
+                ("package_b", "from_package_b"): True,
+                ("package_b", "do_it"): True,
+            }
+            assert_public_catalog(process, expected_routes, expected_mcp_tools)
+            client = ActionServerClient(process)
+            for package_slug, tool_name, expected_result in (
+                ("package-a", "package_a__do_it", "A-do_it"),
+                ("package-b", "package_b__do_it", "B-do_it"),
+            ):
+                path = f"api/actions/{package_slug}/do-it/run"
+                assert json.loads(client.post_get_str(path, {})) == expected_result
+                assert (
+                    asyncio.run(_call_mcp_tool(process, tool_name)) == expected_result
+                )
         finally:
             process.stop()
 
     # A package-local change replaces its previous action without affecting B.
-    _write_action(package_a, "from_package_a_v2", "A2")
+    _write_actions(package_a, {"from_package_a_v2": "A2", "do_it": "A-do_it-v2"})
     process = _start_sync(datadir, tmp_path, (package_a, package_b))
     try:
         packages, actions = _action_states(datadir)
         assert packages == {"package_a", "package_b"}
         assert actions == {
-            "from_package_a_v1": False,
-            "from_package_a_v2": True,
-            "from_package_b": True,
+            ("package_a", "from_package_a_v1"): False,
+            ("package_a", "from_package_a_v2"): True,
+            ("package_a", "do_it"): True,
+            ("package_b", "from_package_b"): True,
+            ("package_b", "do_it"): True,
         }
-        assert_public_catalog(process, {"from_package_a_v2", "from_package_b"})
+        assert_public_catalog(
+            process,
+            {
+                "/api/actions/package-a/from-package-a-v2/run",
+                "/api/actions/package-a/do-it/run",
+                "/api/actions/package-b/from-package-b/run",
+                "/api/actions/package-b/do-it/run",
+            },
+            {
+                "from_package_a_v2",
+                "from_package_b",
+                "package_a__do_it",
+                "package_b__do_it",
+            },
+        )
     finally:
         process.stop()
 
@@ -118,28 +187,47 @@ def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
         packages, actions = _action_states(datadir)
         assert packages == {"package_a", "package_b"}
         assert actions == {
-            "from_package_a_v1": False,
-            "from_package_a_v2": True,
-            "from_package_b": False,
+            ("package_a", "from_package_a_v1"): False,
+            ("package_a", "from_package_a_v2"): True,
+            ("package_a", "do_it"): True,
+            ("package_b", "from_package_b"): False,
+            ("package_b", "do_it"): False,
         }
-        assert_public_catalog(process, {"from_package_a_v2"})
+        assert_public_catalog(
+            process,
+            {
+                "/api/actions/package-a/from-package-a-v2/run",
+                "/api/actions/package-a/do-it/run",
+            },
+            {"from_package_a_v2", "package_a__do_it"},
+        )
     finally:
         process.stop()
 
     # Add C while retaining A; B remains disabled because it is outside the
     # entire desired set for this start invocation.
-    _write_action(package_c, "from_package_c", "C")
+    _write_actions(package_c, {"from_package_c": "C"})
     process = _start_sync(datadir, tmp_path, (package_c, package_a))
     try:
         packages, actions = _action_states(datadir)
         assert packages == {"package_a", "package_b", "package_c"}
         assert actions == {
-            "from_package_a_v1": False,
-            "from_package_a_v2": True,
-            "from_package_b": False,
-            "from_package_c": True,
+            ("package_a", "from_package_a_v1"): False,
+            ("package_a", "from_package_a_v2"): True,
+            ("package_a", "do_it"): True,
+            ("package_b", "from_package_b"): False,
+            ("package_b", "do_it"): False,
+            ("package_c", "from_package_c"): True,
         }
-        assert_public_catalog(process, {"from_package_a_v2", "from_package_c"})
+        assert_public_catalog(
+            process,
+            {
+                "/api/actions/package-a/from-package-a-v2/run",
+                "/api/actions/package-a/do-it/run",
+                "/api/actions/package-c/from-package-c/run",
+            },
+            {"from_package_a_v2", "from_package_c", "package_a__do_it"},
+        )
     finally:
         process.stop()
 
@@ -151,8 +239,8 @@ def test_start_sync_rejects_bad_later_package_without_partial_database_update(
 
     package_a = tmp_path / "package_a"
     package_b = tmp_path / "package_b"
-    _write_action(package_a, "from_package_a_v1", "A1")
-    _write_action(package_b, "from_package_b", "B1")
+    _write_actions(package_a, {"from_package_a_v1": "A1"})
+    _write_actions(package_b, {"from_package_b": "B1"})
     datadir = tmp_path / "runtime-data"
 
     for package in (package_a, package_b):
@@ -169,10 +257,13 @@ def test_start_sync_rejects_bad_later_package_without_partial_database_update(
         )
     assert _action_states(datadir) == (
         {"package_a", "package_b"},
-        {"from_package_a_v1": True, "from_package_b": True},
+        {
+            ("package_a", "from_package_a_v1"): True,
+            ("package_b", "from_package_b"): True,
+        },
     )
 
-    _write_action(package_a, "from_package_a_v2", "A2")
+    _write_actions(package_a, {"from_package_a_v2": "A2"})
     missing_package_b = tmp_path / "package_b_missing"
     actions_server_run(
         [
@@ -192,5 +283,8 @@ def test_start_sync_rejects_bad_later_package_without_partial_database_update(
     # neither A's newly collected action nor a disable of old A/B is committed.
     assert _action_states(datadir) == (
         {"package_a", "package_b"},
-        {"from_package_a_v1": True, "from_package_b": True},
+        {
+            ("package_a", "from_package_a_v1"): True,
+            ("package_b", "from_package_b"): True,
+        },
     )
