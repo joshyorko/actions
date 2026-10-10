@@ -16,15 +16,29 @@ so a failed catalog admission leaves the previous catalog in place.
 `visibility: ["app"]` is a host projection hint, never backend authorization.
 
 Canvas acceptance separates the component suite, the fixture-only simulated
-browser host, and a real Runtime bridge. The bounded bridge test is
+browser host, and a real Runtime bridge. The bounded bridge test is explicitly
+opt-in (`ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1`); an ordinary integration-suite
+run skips it and provides no browser acceptance evidence. Run it with an
+isolated RCC home and temporary caches, for example:
+
+```sh
+ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 \
+ACTIONS_HOME=/tmp/canvas-runtime-actions-home \
+UV_CACHE_DIR=/tmp/canvas-runtime-uv-cache \
+TMPDIR=/tmp \
+python -m pytest -m integration_test -q action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py -k canvas_view_calls_public_action_through_runtime_bridge
+```
+
+The bounded bridge test is
 `test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge`:
 it builds the Canvas HTML and an exact-checkout `actions-core` wheel, installs
 that wheel into the isolated RCC worker after environment creation, reads the
 resource and public decorator metadata from a running Action Server, and drives
 the same built view through browser calls to that Runtime's Streamable HTTP MCP
 endpoint. Do not replace this with a fabricated tool response or a direct
-component test. The browser test accepts an explicit local Chromium executable
-for environments without Playwright's pinned browser; record its version and
+component test. The browser test allocates a test-selected port and refuses to
+reuse an existing server. It accepts an explicit local Chromium executable for
+environments without Playwright's pinned browser; record its version and
 SHA-256 separately, and report the pinned Playwright browser as not run. This
 candidate-source integration does not prove published-wheel compatibility,
 production-host authorization/CSP, artifact resolution, or ChatGPT rendering.

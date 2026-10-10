@@ -2,7 +2,9 @@ import asyncio
 import importlib.util
 import json
 import os
+import shlex
 import shutil
+import socket
 import subprocess
 from collections.abc import Callable
 from functools import partial
@@ -238,6 +240,10 @@ def object_result() -> dict[str, str]:
 
 
 @pytest.mark.integration_test
+@pytest.mark.skipif(
+    os.environ.get("ACTIONS_CANVAS_RUNTIME_ACCEPTANCE") != "1",
+    reason="Set ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 to run the RCC/browser acceptance.",
+)
 def test_canvas_view_calls_public_action_through_runtime_bridge(
     action_server_process: ActionServerProcess, tmp_path
 ) -> None:
@@ -262,6 +268,10 @@ def test_canvas_view_calls_public_action_through_runtime_bridge(
         timeout=120,
     )
     candidate_core_wheel = next(candidate_core_wheel_dir.glob("actions_core-*.whl"))
+    if os.name == "nt":
+        quoted_wheel_path = subprocess.list2cmdline([str(candidate_core_wheel)])
+    else:
+        quoted_wheel_path = shlex.quote(str(candidate_core_wheel))
     package_yaml = tmp_path / "package.yaml"
     package_yaml.write_text(
         "spec-version: v2\n"
@@ -275,7 +285,8 @@ def test_canvas_view_calls_public_action_through_runtime_bridge(
         "  pypi:\n"
         "    - actions-core=1.0.2\n"
         "post-install:\n"
-        f"  - python -m pip install --no-deps --force-reinstall {candidate_core_wheel}\n",
+        "  - python -m pip install --no-deps --force-reinstall "
+        f"{quoted_wheel_path}\n",
         encoding="utf-8",
     )
     subprocess.run(["npm", "run", "build:canvas"], cwd=frontend_root, check=True)
@@ -345,7 +356,6 @@ def canvas_fixture_artifact_status(handle: str) -> dict[str, str]:
         db_file="server.db",
         actions_sync=True,
         timeout=120,
-        env={"ACTIONS_HOME": str(tmp_path / "actions-home")},
     )
 
     async def check_runtime_contract() -> None:
@@ -393,6 +403,9 @@ def canvas_fixture_artifact_status(handle: str) -> dict[str, str]:
     env["CANVAS_RUNTIME_MCP_URL"] = (
         f"http://127.0.0.1:{action_server_process.port}/mcp"
     )
+    with socket.socket() as port_probe:
+        port_probe.bind(("127.0.0.1", 0))
+        env["CANVAS_HARNESS_PORT"] = str(port_probe.getsockname()[1])
     subprocess.run(
         [
             "npm",

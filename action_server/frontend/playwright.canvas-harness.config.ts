@@ -1,11 +1,15 @@
 import { defineConfig } from "@playwright/test";
 
+const harnessPort = process.env.CANVAS_HARNESS_PORT ?? "4180";
+const harnessUrl = `http://127.0.0.1:${harnessPort}`;
+const runtimeAcceptance = Boolean(process.env.CANVAS_RUNTIME_MCP_URL);
+
 export default defineConfig({
     testDir: "./apps/canvas-view",
     testMatch: "host-harness.spec.ts",
     use: {
         browserName: "chromium",
-        baseURL: "http://127.0.0.1:4180",
+        baseURL: harnessUrl,
         launchOptions: process.env.CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
             ? {
                   executablePath:
@@ -15,9 +19,9 @@ export default defineConfig({
     },
     webServer: {
         command:
-            "npm run dev -- --mode canvas --host 127.0.0.1 --port 4180 --strictPort",
-        url: "http://127.0.0.1:4180/host-harness.html",
-        reuseExistingServer: !process.env.CI,
+            `npm run dev -- --mode canvas --host 127.0.0.1 --port ${harnessPort} --strictPort`,
+        url: `${harnessUrl}/host-harness.html`,
+        reuseExistingServer: runtimeAcceptance ? false : !process.env.CI,
         timeout: 30_000,
     },
 });

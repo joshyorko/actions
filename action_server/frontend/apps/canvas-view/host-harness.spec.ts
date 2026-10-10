@@ -7,6 +7,7 @@ import {
 } from "@modelcontextprotocol/client";
 
 const CANVAS_RESOURCE_URI = "ui://action-canvas/v1/canvas.html?query-fixture=0.1";
+const HARNESS_ORIGIN = `http://127.0.0.1:${process.env.CANVAS_HARNESS_PORT ?? "4180"}`;
 
 const builtCanvasResource = await readFile(
     new URL("../../dist-canvas/index.html", import.meta.url),
@@ -25,7 +26,7 @@ test("official MCP Apps bridge handles fixture calls and host context lifecycle"
     const externalRequests: string[] = [];
     await page.route("**/*", async (route) => {
         const url = new URL(route.request().url());
-        if (url.origin !== "http://127.0.0.1:4180") {
+        if (url.origin !== HARNESS_ORIGIN) {
             externalRequests.push(url.href);
             return route.abort();
         }
@@ -116,7 +117,7 @@ test("official bridge renders a real Runtime Action result", async ({ page }) =>
         const externalRequests: string[] = [];
         await page.route("**/*", async (route) => {
             const url = new URL(route.request().url());
-            if (url.origin !== "http://127.0.0.1:4180") {
+            if (url.origin !== HARNESS_ORIGIN) {
                 externalRequests.push(url.href);
                 return route.abort();
             }
