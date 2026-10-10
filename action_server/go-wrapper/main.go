@@ -395,6 +395,11 @@ func extractAndRun(config RunConfig) {
 	err = cmd.Run()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error executing %s: %s\n", config.ExecutableName, err)
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			if code := exitErr.ExitCode(); code >= 0 {
+				os.Exit(code)
+			}
+		}
 		os.Exit(1)
 	}
 }
