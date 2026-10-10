@@ -588,6 +588,54 @@ def test_changed_rcc_context_revalidates_cached_exact_artifact(
     assert updated.preparation_class == "context-revalidation"
 
 
+def test_equivalent_home_spelling_revalidates_cached_exact_artifact(
+    tmp_path, monkeypatch
+):
+    from actions.server._rcc_runtime_adapter import prepare_runtime
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    digest = "sha256:" + "e" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return (
+            0,
+            json.dumps(
+                {"artifact": digest}
+                if args[2] == "publish"
+                else {"artifactDigest": digest, "verification": {"valid": True}}
+            ),
+            "",
+        )
+
+    monkeypatch.delenv("ROBOCORP_HOME", raising=False)
+    home = tmp_path / "owned-home"
+    home.mkdir()
+    monkeypatch.setenv("HOME", str(home))
+    initial = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        source_generation="source-home-a",
+        runner=runner,
+    )
+
+    # RCC's symbolic user identity hashes the raw HOME spelling, even though
+    # these paths resolve to the same filesystem location.
+    monkeypatch.setenv("HOME", str(home) + "/.")
+    updated = prepare_runtime(
+        package_yaml,
+        Path("/opt/rcc"),
+        source_generation="source-home-b",
+        runner=runner,
+    )
+
+    assert [args[2] for args in calls] == ["publish", "acquire", "acquire"]
+    assert updated.artifact_digest == initial.artifact_digest == digest
+    assert updated.preparation_class == "context-revalidation"
+
+
 @pytest.mark.parametrize("provider", ["local", "dakota-cache", "http://cache:8134"])
 def test_supported_provider_reference_forms_are_preserved(tmp_path, provider):
     from actions.server._rcc_runtime_adapter import (

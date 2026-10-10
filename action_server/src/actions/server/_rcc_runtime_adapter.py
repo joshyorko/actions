@@ -268,8 +268,20 @@ def _runtime_context_identity(
 ) -> tuple[str, ...]:
     """Return process-local RCC/home context without persisting machine paths."""
     robo_home = os.environ.get("ROBOCORP_HOME", "")
+    # RCC's symbolic user identity hashes os.UserHomeDir() as returned. Preserve
+    # the exact HOME spelling because lexical aliases can select distinct RCC
+    # materialization prefixes even when they resolve to the same directory.
+    raw_home = os.environ.get("HOME")
+    home_spelling = (
+        f"env:{raw_home}"
+        if raw_home is not None
+        else f"default:{os.path.expanduser('~')}"
+    )
     home = _canonical_context_path(os.path.expanduser("~"))
     effective_robo_home = _canonical_context_path(robo_home) if robo_home else ""
+    relative_robo_home_cwd = (
+        os.getcwd() if robo_home and not os.path.isabs(robo_home) else ""
+    )
     runtime_contract = (
         RCC_TRUST_CONTRACT_VERSION
         if trust_profile.is_local_detached
@@ -281,7 +293,10 @@ def _runtime_context_identity(
         RCC_VERSION,
         runtime_contract,
         home,
+        home_spelling,
         effective_robo_home,
+        robo_home,
+        relative_robo_home_cwd,
     )
 
 
