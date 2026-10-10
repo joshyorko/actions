@@ -1911,6 +1911,18 @@ For hosted pull-request validation, record the actual checkout SHA from the work
 
 A check or workflow display name is a label, not a unique run identity; names are reused across workflow files and matrix variants. Record the repository, workflow path, run/job, event checkout SHA/tree, operating system, interpreter, and package/version when interpreting a result. A test count does not identify the Python version. An artifact ID is an identifier, not its size or digest: verify downloaded bytes and member hashes before claiming artifact contents, and distinguish workflow-reported metadata from independently verified bytes.
 
+When a hosted acceptance artifact contains only a sanitized summary, distinguish
+that summary from the underlying JUnit XML and full lifecycle receipt. Verify
+the summary-producing checks against their exact source and corroborate the
+expected test execution in the job log; do not claim to have downloaded or
+inspected omitted raw evidence. A setup or invocation failure before pytest
+leaves the lifecycle cases NOT RUN, even if artifact upload succeeds. Preserve
+that receipt separately from a later corrected run.
+Before pushing an evidence amendment, verify every referenced receipt exists in
+the commit, not just the working directory. Repository ignore rules can exclude
+sanitized `.log` receipts even when their hashes are already in the manifest;
+explicitly stage only the reviewed receipt and verify its committed blob.
+
 Classify a merge against the PR's named target. A stacked PR merged into its feature or repair base is integrated only into that branch; source containment or exact merge-tree identity does not mean the change reached `integration` or `community`, and neither proves whole-issue acceptance or release admission. Record the target branch, merge commit and tree separately from downstream refs and issue status. Likewise, a native worker reported `ACTIVE` or an accepted turn proves control-plane state, not current implementation progress. Record progress from timestamped worktree HEAD/diff and exact test evidence; treat source transfer/readback as source availability only.
 
 ## MCP gateway metadata

@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-10-10T08:25:24Z",
+  "target": "cas-worker-01",
+  "owner_profile": "ins_b2687eed-2275-4f4f-a636-996ba563d262",
+  "owner_status": {
+    "name": "cas-worker-01",
+    "workspace_uid": "default-ca-0b24d",
+    "identity_verified": true,
+    "diagnostics_allowed": true,
+    "new_request_allowed": false
+  },
+  "owner_diagnostics": {
+    "pod": "devsy-default-ca-0b24d",
+    "pod_uid": "c08aeecd-3aa4-4077-947a-04ac381625e1",
+    "pod_phase": "Failed",
+    "native_daemon": {
+      "status": "unverified"
+    }
+  },
+  "native_target_resolution": {
+    "target": "cas-worker-01",
+    "status": "unresolved",
+    "error_code": "workspace_not_running"
+  },
+  "native_discover_threads": {
+    "cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+    "limit": 1,
+    "error": "thread/list failed closed (KubernetesError); inspect target diagnostics"
+  },
+  "native_thread_effects": "unknown; no native snapshots available",
+  "action": "read-only owner status, diagnostics, inspect_target, discover_threads"
+}

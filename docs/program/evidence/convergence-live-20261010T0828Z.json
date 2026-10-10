@@ -1,0 +1,117 @@
+{
+  "observed_at_utc": "2026-10-10T08:28:38Z",
+  "open_prs": [
+    {
+      "number": 285,
+      "head": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+      "head_branch": "test/frozen-catalog-rollback-20261010",
+      "base": "integration/community-release-20261008",
+      "base_sha": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/285"
+    },
+    {
+      "number": 284,
+      "head": "9fd092ba0e8a61a9d90ceb7b033977beed0d5989",
+      "head_branch": "test/rcc-provider-rollback-hosted-20261010",
+      "base": "fix/runtime-tests-integration-triggers-20261010",
+      "base_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/284"
+    },
+    {
+      "number": 283,
+      "head": "58a7dcabb94ce7012f99446902bd4e5128cadb79",
+      "head_branch": "feat/deployment-values-20261010",
+      "base": "integration/community-release-20261008",
+      "base_sha": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/283"
+    },
+    {
+      "number": 282,
+      "head": "92fe3fe6136e56998982ff1989e3e73fcbe58e48",
+      "head_branch": "feat/canvas-template-20261010",
+      "base": "integration/community-release-20261008",
+      "base_sha": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/282"
+    },
+    {
+      "number": 278,
+      "head": "c1c33ce77895d7b522f2229524d386ed72f8ba3b",
+      "head_branch": "fix/rcc-harness-portability-20261010",
+      "base": "integration/community-release-20261008",
+      "base_sha": "46a06485f776265e64e84629c468f26b4389d2bd",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/278"
+    },
+    {
+      "number": 273,
+      "head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "head_branch": "fix/runtime-tests-integration-triggers-20261010",
+      "base": "integration/community-release-20261008",
+      "base_sha": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "draft": false,
+      "url": "https://github.com/joshyorko/actions/pull/273"
+    },
+    {
+      "number": 272,
+      "head": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+      "head_branch": "devsy/rcc-narrow-acceptance-20261010",
+      "base": "integration/community-release-20261008",
+      "base_sha": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/272"
+    },
+    {
+      "number": 221,
+      "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "head_branch": "integration/community-release-20261008",
+      "base": "community",
+      "base_sha": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/221"
+    },
+    {
+      "number": 218,
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "head_branch": "review/workitems-checkpoint-20261008",
+      "base": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/218"
+    },
+    {
+      "number": 217,
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "head_branch": "review/core-checkpoint-20261008",
+      "base": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/217"
+    },
+    {
+      "number": 216,
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "head_branch": "review/runtime-checkpoint-20261008",
+      "base": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/216"
+    },
+    {
+      "number": 215,
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "head_branch": "convergence/actions-full-graph-20261008",
+      "base": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "draft": true,
+      "url": "https://github.com/joshyorko/actions/pull/215"
+    }
+  ],
+  "integration": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+  "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+  "refs_observed_at_utc": "2026-10-10T08:24:59Z",
+  "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b"
+}

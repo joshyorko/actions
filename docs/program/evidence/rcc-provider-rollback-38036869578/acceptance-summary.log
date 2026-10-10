@@ -1,0 +1,12 @@
+Sanitized RCC provider rollback acceptance summary
+admission_passed=True
+admission_issues=
+workflow_control_sha=06885e75f8d2054bb3273934c3cc38d5e9e8d4f2
+candidate_sha=f7c6ed61f24fd9e98d1465c83042c5446466311b
+candidate_tree=6cb691b44666347f3e0de68c9830bd6824a4a0a0
+runner_libc=glibc 2.39
+rcc_version=v18.19.3
+rcc_sha256=7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
+pytest_exit_code=0
+receipt_status=PASS
+natural_exit_status=PASS

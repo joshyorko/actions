@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-10 08:25:34 UTC",
+  "decision": "ACCEPT_FOR_HOSTED_LAUNCH_ONLY",
+  "control_sha": "0f3d60acbe74c0d272f0dc1bb887cb0cb408fc6a",
+  "control_tree": "ed98acc3561a83a6b9feaed64fb928211b868049",
+  "parent_correction": "d33660a9ae979350d4d0de1c64ecb28fbbd01aaf",
+  "changes": [
+    "Both Invoke devinstall and separate Poetry invocations explicitly unset uv VIRTUAL_ENV.",
+    "Required pytest import/interpreter preflight executes under set-e.",
+    "Acceptance uses Poetry-selected python -m pytest; no PATH pytest fallback.",
+    "Existing binary/source/provenance and exact unskipped JUnit gates unchanged."
+  ],
+  "selector_probe": {
+    "script": "poetry-selector-probe-211.py",
+    "script_sha256": "0202a0e97e66bc6a1fbae079323b31edc54fb2be8fa062352317ce2987a1d975",
+    "log": "poetry-selector-probe-211.log",
+    "log_sha256": "26ab8ca72c919d46c1dca17d136b4eafc24950dd7cc02f3037b9aba4c55307d6",
+    "executed_env_manager_source": "https://raw.githubusercontent.com/python-poetry/poetry/2.1.1/src/poetry/utils/env/env_manager.py",
+    "env_manager_source_sha256": "b623a7981301aa800d8f4dc43718fa0b9366eeb0e41ede0c85697e1a3bafb559",
+    "support_dependencies": "Cached Poetry2.5.1, Python3.12.15; no exact Poetry2.1.1 full CLI toolchain installed.",
+    "proof": "Two different private no-pip Python3.12 tool environments each become the incorrect inherited-VIRTUAL_ENV target; after removing VIRTUAL_ENV, exact2.1.1 EnvManager.get resolves the same project-path/name/Python-minor canonical environment despite differing PATH prefixes. Selected canonical Python executes with canonical sys.prefix.",
+    "scope_limit": "This executes exact2.1.1 selector code with cached compatible support dependencies. It is not a full uv install/lock/package installation or hosted acceptance test.",
+    "cleanup": "All three private no-pip environments and fixture project/cache removed by owned TemporaryDirectory; no shared package environment mutated."
+  },
+  "hosted_history": {
+    "failed_run": 38037036032,
+    "outcome": "Reported dependency invocation failure: subsequent Poetry invocation could not find pytest. Frozen lifecycle tests NOT_RUN.",
+    "new_frozen_hosted_result": "NOT_RUN_BY_REVIEWER; passing four-case hosted receipt remains required."
+  },
+  "canonical_docs_delta": "0f3 guide already records unset VIRTUAL_ENV, fatal preflight and python -m pytest rather than host executable fallback. Retain failed run as invocation failure; source selector proof does not satisfy frozen acceptance.",
+  "upstream_disposition": "Actions-local workflow invocation repair. No confirmed RCC or Poetry upstream defect, no upstream issue filed.",
+  "additional_cold_selection_proof": {
+    "script": "poetry-selector-probe-211-cold.py",
+    "script_sha256": "0f87c4d94da8609fbc5f16f60dc33a085f8875ef3d9e11d7b017b9d175f0a0be",
+    "log": "poetry-selector-probe-211-cold.log",
+    "log_sha256": "9b536d0db47bdedd2ec81c593eaf20a18dfe89f46b49a85b69df8ba1be93682f",
+    "result": "Without inherited VIRTUAL_ENV and without any project environment yet, exact2.1.1 selector returns the non-venv base environment, not the first uv tool prefix; create_venv therefore proceeds to configured project environment creation. Once that environment exists, both tool prefixes select it."
+  }
+}

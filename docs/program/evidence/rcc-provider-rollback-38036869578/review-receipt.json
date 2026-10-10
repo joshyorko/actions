@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-10T08:19:40Z",
+  "reviewer": "independent Sol source/evidence lane",
+  "decision": "ACCEPT_BOUNDED_LINUX_MANAGED_RCC_FAILURE_RECOVERY",
+  "repository": "joshyorko/actions",
+  "run_id": 38036869578,
+  "run_attempt": 1,
+  "job_id": 114169012841,
+  "control_sha": "06885e75f8d2054bb3273934c3cc38d5e9e8d4f2",
+  "control_tree": "8fb8cd445bea762815b10ea56c7b3265d08ef8a1",
+  "candidate_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+  "candidate_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+  "artifact": {
+    "id": 11663538970,
+    "name": "rcc-provider-rollback-38036869578-1",
+    "size_bytes": 1529,
+    "sha256": "f2eb536604f16d76efb8b6976a0b47fea7adbe6933d2a469ae0b5305ed4c890c",
+    "files": {
+      "acceptance-summary.json": {
+        "bytes": 2039,
+        "sha256": "f35b46932a6b1cdadc0063b99324db85da7139a0444f9ea9e691661840a89a57"
+      },
+      "acceptance-summary.log": {
+        "bytes": 448,
+        "sha256": "7428fbd4a0160a2e541bdb42fef57bb2fd242b0b47e0a4ff4834c661f90c8d9d"
+      }
+    }
+  },
+  "commands": {
+    "cwd": "candidate/action_server",
+    "pytest": "uv run --no-project --python 3.12 poetry run pytest -n 0 -vv -rA -m 'integration_test and real_rcc' tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable --junitxml=\"$RUNNER_TEMP/rcc-provider-rollback-junit.xml\"",
+    "opt_in": "ACTIONS_REAL_RCC_ARTIFACT_TEST=1",
+    "rcc": "checksum-pinned v18.19.3, SHA256 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "homes": "isolated runner-temporary RCC provider/test/evidence directories; loopback provider"
+  },
+  "independent_checks": [
+    "Live run and job metadata report SUCCESS at exact control SHA/tree; all admission/setup/test/upload steps successful.",
+    "Downloaded archive measured SHA256 matches GitHub artifact digest; archive contains only two expected sanitized summary files.",
+    "Five candidate source blob hashes independently measured from Git f7 exactly match downloaded summary.",
+    "Decoded job log shows actual expected test PASSED, 1 passed in 61.26s; malformed reload rejection and three actual Run artifacts appear.",
+    "Fail-closed admission summary reports actual expected JUnit identity, one test, zero failures/errors/skips, reconciled counts, pytest exit0, receiptPASS.",
+    "Both RCC binaries match fixed checksum/version; glibc2.39 meets artifact minimum2.36.",
+    "Summary confirms persisted last-good/last-good/recovered Run results, unchanged two provider environment operations, natural exit1, no forced Runtime stop, observed cleanup return code, zero captured owned descendants remaining."
+  ],
+  "comparison": {
+    "prior_accepted_run": 38034464513,
+    "prior_artifact_id": 11663219434,
+    "prior_zip_sha256": "a5ab71966d175bde8556a3f7e976630ab13aed9f5d9306c8045dc7c5bcf9d0f8",
+    "same_candidate_source_files": true,
+    "same_runner_rcc_test_and_cleanup_facts": true,
+    "difference": "Only workflow control SHA/tree differ in sanitized summary; bootstrap control changed to wait for producer completion before version matching."
+  },
+  "preserved_failed_history": {
+    "run_id": 38035543627,
+    "job_id": 114165080442,
+    "control_sha": "772b73d9e7f9da6c3ea939faff8ae76d37982da7",
+    "exit_code": 141,
+    "outcome": "BOOTSTRAP_FAILURE_LIFECYCLE_NOT_RUN",
+    "receipt": "docs/program/evidence/rcc-control-772-bootstrap-failure.json",
+    "note": "Retain independently; the new passing run neither rewrites nor turns this pre-pytest failure into lifecycle acceptance."
+  },
+  "limits": [
+    "Raw JUnit XML and full lifecycle receipt are not in the uploaded artifact. Counts/identity/cleanup/results were checked through the reviewed fail-closed control script's sanitized summary, corroborated by decoded actual job log and source-bound test.",
+    "Runtime parent is source-mode f7 with real managed RCC workers; this is not frozen duplicate-key rollback or frozen Runtime acceptance.",
+    "The managed artifact requests Python3.12.15/actions-core1.0.2. The compact RCC upload has no separate actual worker Core origin/hash or publisher wheel attestation.",
+    "Failed-update old-Run survival plus fresh last-good and later recovery are proven; the blocked old Run completes before valid replacement. Successful-generation old-Run draining remains separate proof.",
+    "No macOS/Windows managed-provider, provider-dead warm/offline behavior, sandbox/security boundary, automatic snapshot collection, complete orphan inventory, release publication, or whole #279/#101 acceptance."
+  ],
+  "local_evidence": {
+    "directory": "/workspace/work/rcc-review-38036869578",
+    "metadata_sha256": "c04bab7657b71bd420e2fe36514d2b7c3a9fce7ffe5658aa5c647ddabf1a6cd6",
+    "sanitized_log_excerpts_sha256": "d69ac9ee21e88a7236a187a60d6e80a9185575b173881432c3c4c21856a8afdf",
+    "full_job_log_saved": false,
+    "credentials_saved": false,
+    "new_runtime_execution": false
+  },
+  "canonical_docs_delta": "Existing repository-operations producer-completion and frozen/source proof rules already cover the result. Add this exact passing receipt as evidence; preserve the772 bootstrap failure as NOT RUN. No broader canonical acceptance claim.",
+  "upstream_disposition": "Actions-local control repair; no confirmed other-repository defect and no upstream report."
+}

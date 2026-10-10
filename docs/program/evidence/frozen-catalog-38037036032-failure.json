@@ -1,0 +1,53 @@
+{
+  "record_type": "hosted_frozen_catalog_rollback_failure",
+  "timestamp_utc": "2026-10-10T08:12Z",
+  "repository": "joshyorko/actions",
+  "branch": "test/frozen-catalog-rollback-20261010",
+  "head_sha": "bca5ad8d8f1af7040dd3f9062dd890258304db97",
+  "tree_sha": "a3645fbe06bcf8588f77cdd1d23b86a50666ebce",
+  "workflow": {
+    "name": "Actions Runtime Frozen Catalog Rollback",
+    "run_id": 38037036032,
+    "event": "push",
+    "conclusion": "failure"
+  },
+  "job": {
+    "name": "build",
+    "id": 114169513488,
+    "conclusion": "failure"
+  },
+  "stages": {
+    "setup": "passed",
+    "artifact_fetch_and_hash_check": "passed",
+    "full_package_provenance_and_frozen_executable": "passed",
+    "pinned_rcc_install": "passed",
+    "action_server_test_dependencies": "passed",
+    "frozen_managed_rollback_acceptance": "failed_before_pytest",
+    "final_sanitized_evidence_receipt": "passed",
+    "evidence_upload": "passed"
+  },
+  "failing_command": "uv run --no-project --python 3.12 --with poetry==2.1.1 poetry run pytest -m integration_test -n 0 -q -s tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+  "failure": {
+    "message": "Command not found: pytest",
+    "exit_code": 1
+  },
+  "acceptance_tests": {
+    "executed": false,
+    "not_run": [
+      "initial managed Runtime with packages A=A1 and B=B1, including calls through both actions",
+      "malformed watched B update preserves the last-good A/B catalog and calls",
+      "corrected B2 update is admitted while A remains available",
+      "controlled natural shutdown and restart preserve the admitted A=A1/B=B2 state"
+    ],
+    "result": "No frozen runtime behavior was demonstrated by this run.",
+    "test_target": "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers"
+  },
+  "artifact": {
+    "id": 11663739029,
+    "name": "frozen-catalog-rollback-bca5ad8d8f1af7040dd3f9062dd890258304db97",
+    "size_bytes": 1958,
+    "sha256": "fdd21e0d1781f28835882f876c5e22cb0970e03711d9b31b56ce03f74eaf8f60",
+    "expires_at": "2026-11-09T08:12:29Z"
+  },
+  "disposition": "Harness invocation blocker; preserve as failed evidence. No rerun or waiver is implied."
+}

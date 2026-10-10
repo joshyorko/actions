@@ -1,0 +1,251 @@
+{
+  "id": "program-amendment-20261010T0828Z",
+  "observed_at_utc": "2026-10-10T08:28:38Z",
+  "summary": "PR283 exact-head Runtime/native checks now pass across all three OS; PR273 remains its merge prerequisite. PR284 actual managed RCC failed-reload recovery passed run38036869578; its attributes-only f7 merge preserves that scoped execution evidence and current toolkit checks continue. PR285 now owns the frozen four-case gate: the first hosted invocation failed before pytest; reviewed project-interpreter correction385f1e is pushed and new hosted execution remains pending. Source successful-generation drain passed separately. Canvas candidate Core wheel is reproducible and its four extracted-template tests pass, but published dependency, Runtime/browser and authorized-artifact gates remain distinct. Devsy remains Failed/workspace_not_running at08:25:24Z; explicit CAS cwd worktree guidance is pushed. No integration, release or whole-issue acceptance in this checkpoint; all54 original contracts remain.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": false,
+    "raw_contracts_or_historical_archives_changed": false,
+    "whole_issue_acceptance_changed": false
+  },
+  "integration_checkpoint": {
+    "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "refs_observed_at_utc": "2026-10-10T08:24:59Z",
+    "cohort": {
+      "items": 34,
+      "target_integrated": 22,
+      "open_blocked": 12,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        274,
+        275,
+        276,
+        277,
+        280,
+        281
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278,
+        282,
+        283,
+        284,
+        285
+      ],
+      "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
+    }
+  },
+  "current_pr_heads": {
+    "285": {
+      "head": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+      "base": "integration/community-release-20261008",
+      "head_branch": "test/frozen-catalog-rollback-20261010"
+    },
+    "284": {
+      "head": "9fd092ba0e8a61a9d90ceb7b033977beed0d5989",
+      "base": "fix/runtime-tests-integration-triggers-20261010",
+      "head_branch": "test/rcc-provider-rollback-hosted-20261010"
+    },
+    "283": {
+      "head": "58a7dcabb94ce7012f99446902bd4e5128cadb79",
+      "base": "integration/community-release-20261008",
+      "head_branch": "feat/deployment-values-20261010"
+    },
+    "282": {
+      "head": "92fe3fe6136e56998982ff1989e3e73fcbe58e48",
+      "base": "integration/community-release-20261008",
+      "head_branch": "feat/canvas-template-20261010"
+    },
+    "278": {
+      "head": "c1c33ce77895d7b522f2229524d386ed72f8ba3b",
+      "base": "integration/community-release-20261008",
+      "head_branch": "fix/rcc-harness-portability-20261010"
+    },
+    "273": {
+      "head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "base": "integration/community-release-20261008",
+      "head_branch": "fix/runtime-tests-integration-triggers-20261010"
+    },
+    "272": {
+      "head": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+      "base": "integration/community-release-20261008",
+      "head_branch": "devsy/rcc-narrow-acceptance-20261010"
+    },
+    "221": {
+      "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "base": "community",
+      "head_branch": "integration/community-release-20261008"
+    },
+    "218": {
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "base": "community",
+      "head_branch": "review/workitems-checkpoint-20261008"
+    },
+    "217": {
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "base": "community",
+      "head_branch": "review/core-checkpoint-20261008"
+    },
+    "216": {
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "base": "community",
+      "head_branch": "review/runtime-checkpoint-20261008"
+    },
+    "215": {
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "base": "community",
+      "head_branch": "convergence/actions-full-graph-20261008"
+    }
+  },
+  "remaining_critical_path": [
+    {
+      "pr": 273,
+      "gate": "Four frozen managed catalog rollback cases must execute and pass; source successful-generation drain is separate accepted evidence.",
+      "owner": "luna_worker_exit implementation; sol_p0_snapshot_review independent review; root integration"
+    },
+    {
+      "pr": 285,
+      "gate": "Exact-head hosted four-case result after invocation repair; normal PR checks; PR273 merge prerequisite.",
+      "owner": "luna_worker_exit; root"
+    },
+    {
+      "pr": 284,
+      "gate": "Current9fd toolkit matrix; PR273 prerequisite. Exact0688 managed receipt accepted, unchanged Runtime/workflow/test bytes after attributes-only f7 merge.",
+      "owner": "root; luna_release_notes monitoring"
+    },
+    {
+      "pr": 283,
+      "gate": "PR273 prerequisite and final required-check readback; all reported exact58a7 matrices passed.",
+      "owner": "root; luna_release_notes monitoring"
+    },
+    {
+      "pr": 282,
+      "gate": "Published Core floor, explicit Runtime/browser acceptance, authorized retrievable artifact. Candidate-only wheel proof cannot waive production manifest or artifact requirements.",
+      "owner": "luna_canvas_acceptance"
+    }
+  ],
+  "rcc_execution": {
+    "run": 38036869578,
+    "control": "06885e75f8d2054bb3273934c3cc38d5e9e8d4f2",
+    "candidate": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "status": "PASS_SCOPED",
+    "artifact_id": 11663538970,
+    "zip_sha256": "f2eb536604f16d76efb8b6976a0b47fea7adbe6933d2a469ae0b5305ed4c890c",
+    "limit": "Reviewed fail-closed summary and actual log; raw JUnit/full lifecycle receipt not uploaded; no frozen/managed-successful-switch/full-issue claim."
+  },
+  "frozen_execution": {
+    "failed_run": 38037036032,
+    "failed_control": "bca5ad8d8f1af7040dd3f9062dd890258304db97",
+    "failed_status": "PYTEST_INVOCATION_FAILURE_LIFECYCLE_NOT_RUN",
+    "corrected_control": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+    "new_status": "PENDING_HOSTED_EXECUTION",
+    "review": "Accepted control correction; selector probe uses exact2.1.1 EnvManager code with cached2.5.1 support dependencies, not complete pinned CLI proof."
+  },
+  "devsy": {
+    "observed_at_utc": "2026-10-10T08:25:24Z",
+    "target": "cas-worker-01",
+    "workspace_uid": "default-ca-0b24d",
+    "status": "BLOCKED_WORKSPACE_NOT_RUNNING",
+    "cause": "unknown; no reason field in diagnostics",
+    "supervisor_thread": "01a1222f-e720-7183-9634-2edb76d30326",
+    "supervisor_cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+    "directory_contract": {
+      "repository": "/workspaces/actions",
+      "workers": "/workspaces/actions-worktrees/<worker>",
+      "protected_bootstrap": "/workspaces/cas-worker-01"
+    },
+    "guidance_commit": "3c305f5586b50bbaf1188a7c99b27abc269620c8",
+    "disposition": "No replacement, provisioning, replay or current cleanliness claim; reconcile existing thread effects after recovery."
+  },
+  "evidence": [
+    {
+      "path": "evidence/convergence-live-20261010T0828Z.json",
+      "size_bytes": 4407,
+      "sha256": "c14abd3b81b54cc67289cf4fb77e2bd2d7c89c0bac75b4c14d9449676117ee61"
+    },
+    {
+      "path": "evidence/convergence-live-20261010T0824Z.json",
+      "size_bytes": 11483,
+      "sha256": "6dc04bd4e786e943f9f67a73fa64f13898eaaed6f113ea3ca832861b73208b76"
+    },
+    {
+      "path": "evidence/frozen-catalog-38037036032-failure.json",
+      "size_bytes": 2293,
+      "sha256": "3e9a48cf49caca3a448f92316d040debe0ed8534b8b9b3e19fd8c8edb6310c9d"
+    },
+    {
+      "path": "evidence/rcc-provider-rollback-38036869578/review-receipt.json",
+      "size_bytes": 5414,
+      "sha256": "75d41c986778c05a97550cc40b5f061ab9fbd35ff628568facc22b7d2abebce2"
+    },
+    {
+      "path": "evidence/rcc-provider-rollback-38036869578/acceptance-summary.json",
+      "size_bytes": 2039,
+      "sha256": "f35b46932a6b1cdadc0063b99324db85da7139a0444f9ea9e691661840a89a57"
+    },
+    {
+      "path": "evidence/rcc-provider-rollback-38036869578/acceptance-summary.log",
+      "size_bytes": 448,
+      "sha256": "7428fbd4a0160a2e541bdb42fef57bb2fd242b0b47e0a4ff4834c661f90c8d9d"
+    },
+    {
+      "path": "evidence/frozen-poetry-selector-review-20261010.json",
+      "size_bytes": 3328,
+      "sha256": "9447238a400aa1038308bd2a7cac01d251df4bb98bbb7ebfc44fda77c5b6a7a5"
+    },
+    {
+      "path": "evidence/cas-heartbeat-20261010T0825Z.json",
+      "size_bytes": 1028,
+      "sha256": "52c0a4e950111945da139e4dfc03d40c5aa7d8ef93944079ff04a48b1de6afb7"
+    }
+  ],
+  "accepted_scoped_criteria": [],
+  "issue_metadata_updates": {
+    "129": {
+      "owner": "root integration; luna_release_notes exact-head monitoring",
+      "checkpoint_pr": 283,
+      "next_bounded_action": "Integrate reviewed Slice1a after PR273 and final required checks; preserve strict canonical-value contracts."
+    },
+    "134": {
+      "owner": "root integration with source/frozen acceptance and independent Sol review",
+      "checkpoint_pr": 284,
+      "next_bounded_action": "Complete current toolkit matrix and PR273/frozen gates; retain exact managed failed-reload proof, then address remaining provider/lease/offline criteria."
+    }
+  },
+  "current_active_workers": {
+    "cloud_canvas": "luna_canvas_acceptance: candidate-only Runtime/browser predecessor in existing Canvas worktree; production manifest/artifact gates unchanged",
+    "cloud_ci": "luna_release_notes: exact-head checks and immutable failure evidence",
+    "cloud_frozen": "luna_worker_exit: correction completed/pushed, awaiting hosted execution",
+    "cloud_review": "sol_p0_snapshot_review: control review completed, available for hosted receipt review",
+    "cloud_cas_heartbeat": "luna_cas_heartbeat: bounded read-only checks",
+    "devsy_supervisor": "BLOCKED; last lane inventory historical, no current native progress claim"
+  },
+  "upstream_disposition": "Actions-local test environment and attributes repairs; no confirmed new upstream defect."
+}

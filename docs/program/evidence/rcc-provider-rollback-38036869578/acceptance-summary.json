@@ -1,0 +1,56 @@
+{
+  "admission": {
+    "issues": [],
+    "passed": true
+  },
+  "rcc": {
+    "action_server_default_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "action_server_default_version": "v18.19.3",
+    "receipt_matches_binary": true,
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "v18.19.3"
+  },
+  "runner": {
+    "libc_name": "glibc",
+    "libc_version": "2.39",
+    "meets_artifact_minimum": true
+  },
+  "schema_version": 1,
+  "source": {
+    "candidate_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "candidate_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+    "files_sha256": {
+      "acceptance_helper": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+      "action_package_handler": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+      "actions_import": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+      "rollback_test": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b",
+      "runtime_adapter": "65abc1efe7879ffc325f84841b9630f05b8a5b11cdc3a32728daf7df7091edcb"
+    },
+    "receipt_source_matches_candidate": true,
+    "runtime_module_hashes_match_candidate": true,
+    "runtime_module_origins_match_candidate": true,
+    "workflow_control_sha": "06885e75f8d2054bb3273934c3cc38d5e9e8d4f2",
+    "workflow_control_tree": "8fb8cd445bea762815b10ea56c7b3265d08ef8a1"
+  },
+  "test": {
+    "exit_code": 0,
+    "expected_test_identity_matches": true,
+    "failed_case_names": [],
+    "forced_cleanup_returncode_observed": true,
+    "forced_stop_used": false,
+    "junit": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 1
+    },
+    "junit_counts_match_testcases": true,
+    "natural_exit_status": "PASS",
+    "natural_return_code_before_cleanup": 1,
+    "provider_operation_count": 2,
+    "provider_operations_unchanged": true,
+    "receipt_status": "PASS",
+    "remaining_owned_descendant_count": 0,
+    "run_results_match": true
+  }
+}
