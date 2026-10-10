@@ -496,8 +496,39 @@ def test_concurrent_processes_serialize_empty_history_allocation(
             while not all(
                 (tmp_path / package).exists() for package in ("package1", "package2")
             ):
-                assert time.monotonic() < deadline
-                assert all(child.poll() is None for child in children)
+                if time.monotonic() >= deadline:
+                    states = []
+                    for child in children:
+                        marker = Path(child.args[-1])
+                        state = (
+                            f"pid={child.pid} returncode={child.poll()} "
+                            f"marker={str(marker)!r} marker_exists={marker.exists()}"
+                        )
+                        if child.poll() is not None:
+                            stdout, stderr = child.communicate(timeout=5)
+                            state += (
+                                f" stdout={stdout[-2000:]!r} "
+                                f"stderr={stderr[-4000:]!r}"
+                            )
+                        states.append(state)
+                    pytest.fail(
+                        "timed out waiting for catalog preparation children to "
+                        "signal readiness:\n" + "\n".join(states)
+                    )
+                exited = [child for child in children if child.poll() is not None]
+                if exited:
+                    diagnostics = []
+                    for child in exited:
+                        stdout, stderr = child.communicate(timeout=5)
+                        diagnostics.append(
+                            f"pid={child.pid} returncode={child.returncode} "
+                            f"marker={child.args[-1]!r} "
+                            f"stdout={stdout[-2000:]!r} stderr={stderr[-4000:]!r}"
+                        )
+                    pytest.fail(
+                        "catalog preparation child exited before signaling "
+                        "readiness:\n" + "\n".join(diagnostics)
+                    )
                 time.sleep(0.01)
             blocker.commit()
         results = []
