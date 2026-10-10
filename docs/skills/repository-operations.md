@@ -2105,6 +2105,15 @@ reload. The reload lock alone does not provide this request-level pinning. The i
 compensation closure after nondurable SQLite commit failure with
 `min_processes=0`; it does not prove warmed RCC worker compensation or
 external-service rollback.
+When a reload test constructs a partial `Database` directly, register
+`McpCatalogName` alongside `ActionPackage` and `Action` before creating tables.
+`create_tables(get_model_db_rules())` creates only registered models; the rules
+do not add missing tables. Otherwise catalog admission fails before the injected
+commit failure, and the test never exercises generation compensation. Preserve
+the original commit-error identity, rollback event order, and last-good catalog
+ownership assertions when extending this fixture. Use a candidate-only public
+key to prove its reservation exists before the failed commit and disappears
+after rollback; reusing the same logical identity would add no reservation.
 
 Scheduled executions capture the current process-pool object, generation token,
 and ActionPackage before dispatching their worker thread; a reload that replaces
