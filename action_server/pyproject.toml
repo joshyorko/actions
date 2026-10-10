@@ -93,6 +93,7 @@ testpaths = ["tests"]
 markers = [
     "real_rcc: gated real RCC Environment Artifact execution proof",
     "postgresql: requires a PostgreSQL service",
+    "native_artifact_test: requires a source-bound packaged Runtime artifact manifest",
 ]
 filterwarnings = [
     "ignore:ast.Str is deprecated.*:DeprecationWarning:robocorp\\.log\\._ast_utils",

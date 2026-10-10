@@ -37,6 +37,64 @@ NATIVE_TEST_SPEC = importlib.util.spec_from_file_location(
 assert NATIVE_TEST_SPEC is not None and NATIVE_TEST_SPEC.loader is not None
 NATIVE_TEST = importlib.util.module_from_spec(NATIVE_TEST_SPEC)
 NATIVE_TEST_SPEC.loader.exec_module(NATIVE_TEST)
+UI_TEST_PATH = Path(__file__).with_name("test_dakota_workitems_native_ui_acceptance.py")
+
+
+def _collect_nodeids(test_path: Path, *, marker: str | None = None):
+    command = [
+        sys.executable,
+        "-m",
+        "pytest",
+        "--collect-only",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+    ]
+    if marker is not None:
+        command.extend(["-m", marker])
+    command.append(str(test_path))
+    environment = os.environ.copy()
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    return subprocess.run(
+        command,
+        cwd=NATIVE_TEST_PATH.parents[1],
+        env=environment,
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+
+
+def test_native_artifact_cases_are_selected_only_by_their_exact_artifact_gate():
+    generic_marker = "integration_test and not native_artifact_test"
+    generic_consumer = _collect_nodeids(NATIVE_TEST_PATH, marker=generic_marker)
+    assert generic_consumer.returncode == 5, (
+        generic_consumer.stdout + generic_consumer.stderr
+    )
+    assert "test_packaged_runtime_executes_work_item_consumer_lifecycle" not in (
+        generic_consumer.stdout + generic_consumer.stderr
+    )
+
+    dedicated_consumer = _collect_nodeids(NATIVE_TEST_PATH, marker="integration_test")
+    assert dedicated_consumer.returncode == 0, (
+        dedicated_consumer.stdout + dedicated_consumer.stderr
+    )
+    for suffix in RUNNER.CASE_SUFFIX.values():
+        assert suffix in dedicated_consumer.stdout
+
+    generic_ui = _collect_nodeids(UI_TEST_PATH, marker=generic_marker)
+    assert generic_ui.returncode == 5, generic_ui.stdout + generic_ui.stderr
+    assert (
+        "test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery"
+        not in (generic_ui.stdout + generic_ui.stderr)
+    )
+
+    dedicated_ui = _collect_nodeids(UI_TEST_PATH)
+    assert dedicated_ui.returncode == 0, dedicated_ui.stdout + dedicated_ui.stderr
+    assert (
+        "test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery"
+        in (dedicated_ui.stdout)
+    )
 
 
 def reports_for(

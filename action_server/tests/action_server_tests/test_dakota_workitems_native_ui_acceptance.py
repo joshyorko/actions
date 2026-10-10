@@ -1254,6 +1254,7 @@ def test_bounded_observation_reaps_only_the_owned_runtime_process() -> None:
 
 
 @pytest.mark.integration_test
+@pytest.mark.native_artifact_test
 def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

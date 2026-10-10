@@ -1482,6 +1482,18 @@ locked Playwright Chromium with `npx playwright install chromium` from
 the preceding frontend build has already run `npm ci` and this install must not
 duplicate that build or alter credentials.
 
+The generic `inv test-binary` selects
+`integration_test and not native_artifact_test`. The three exact-artifact
+Work Items acceptance cases keep both markers and run in
+`frontend-build-unauthenticated.yml`: its consumer harness checks the frozen
+and Go-wrapper cases against the current build manifest and Core wheel, while
+its direct UI test invocations supply the matching executable and manifest.
+That workflow is filtered to `action_server/**`, which includes changes to the
+acceptance tests and their marker contract. Run its frozen and Go-wrapper UI
+cases on Linux, Windows, and macOS; never make missing executable or manifest
+variables a skip. Keep the separate generic Runtime gate for non-native
+integration coverage.
+
 The real-browser Origin and ambient-session acceptance in
 `test_browser_origin_acceptance.py` runs Chromium against the actual Runtime
 HTTP server. Its Node HTTP requests and browser `fetch` calls have independent

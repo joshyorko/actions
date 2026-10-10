@@ -131,7 +131,7 @@ jobs:
         run: npx playwright install chromium
 
       - name: Verify packaged Work Items browser acceptance (frozen)
-        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022'
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-15'
         timeout-minutes: 10
         env:
           DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/action-server/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
@@ -146,7 +146,7 @@ jobs:
           --basetemp "${{ runner.temp }}/dakota-workitems-ui-frozen-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}"
 
       - name: Verify packaged Work Items browser acceptance (Go wrapper)
-        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022'
+        if: matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-15'
         timeout-minutes: 10
         env:
           DAKOTA_WORKITEMS_UI_EXECUTABLE: ${{ github.workspace }}/action_server/dist/final/action-server${{ matrix.os == 'windows-2022' && '.exe' || '' }}
