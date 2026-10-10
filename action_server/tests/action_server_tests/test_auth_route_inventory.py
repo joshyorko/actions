@@ -194,8 +194,8 @@ def test_assembled_auth_route_inventory_stops_before_server_start(
     from actions.server import _app, _settings
     from actions.server._models import create_db
     from actions.server._protocols import ArgumentsNamespaceStart
-    from actions.server._settings import Settings
     from actions.server._server import start_server
+    from actions.server._settings import Settings
 
     _app.get_app.cache_clear()
     request.addfinalizer(_app.get_app.cache_clear)

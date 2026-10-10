@@ -1236,6 +1236,12 @@ address the first failure before treating lint as green. The configured
 `devutils` gates in `developer/toolkit.py` run `pytest tests` and `ruff check
 src tests`.
 
+Action Server's `invoke lint` also runs Ruff check, Ruff format, and isort for
+`src` and `tests`; its `pyproject.toml` sets isort's Black profile. Isort checks
+imports nested inside test functions as well as module-level imports. When a
+test edit only reorders imports, use this package gate and verify the route or
+contract assertions remain unchanged.
+
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
 `uvx --from poetry==2.1.1 poetry check --lock`. Run the lock command a second
