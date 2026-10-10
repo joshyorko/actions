@@ -8,6 +8,11 @@ The open PR audit includes #215–218, #221 and #272–277. PRs215–217 are dir
 
 Root reports configured Runtime validation exposing 21 Linux integration failures, 6 macOS portable failures, and Windows typing failures (6 Action Server/Core plus 19 Work Items). Root's local combined Win32 mypy over 301 files leaves 7 pre-existing Cloud/Core/stub errors while all 25 newly exposed Windows/Work Items errors are fixed; this is not a full typecheck pass. No combined candidate is admitted until it is published and the required gates pass on that exact source. Core1.0.2 and Helper1.0.3 remain published/verified; Runtime/native1.0.3 remains held and unpublished. No whole-issue acceptance changed.
 
+
+## Current evidence correction — 2026-10-10T01:40:00Z
+
+The 01:35 snapshot remains unchanged. The sanitized root-local Win32 mypy output it cited is now preserved at [the exact log](evidence/combined-e1e30ef-windows-typecheck.txt), byte-identical to source SHA-256 43e889d85131a79fb5c869dbda7c09c15cde0f70fd80722e11bfa64666a14277. The six Windows platform typing errors were Action Server Runtime errors, not Core errors; the separate Work Items set is distinct. Current GitHub readback shows PR276 head `bd10bb57` unchanged and its base now `integration/community-release-20261008`, following the root's normal base update. Its rollup is 27 success, 2 in progress, and 1 skipped; it is not merged and checks are not complete. See the [correction receipt](evidence/convergence-correction-20261010T0140Z.json).
+
 ## Historical convergence snapshot — 2026-10-10T00:55:27Z (superseded by the 2026-10-10T01:33:00Z amendment)
 
 The 21-PR cohort is now 16 integrated to their recorded targets, 5 open/blocked, and 0 merge-ready. Community is `36b8192dbb8143e016af3351f7d25b22a35c9944`; integration is `c6b682012ae791e744cb7116600b3869d06c7b4d` (tree `7621ef2050941df416c1b7448859a8d3bb4ee443`); Runtime candidate is `6a53578fac029a0696834c30438c858f5f0003be`. The 54 issue records remain unchanged: 53 open, #210 accepted/closed, and 0 whole-issue review-ready. See the [00:55 convergence receipt](evidence/convergence-followup-20261010T0056Z.json).

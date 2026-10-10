@@ -13053,5 +13053,11 @@
     "source_review": "PR256 source review and exact 12 required hosted checks passed on 524e503b; bounded Linux/Windows artifact review PASS_BOUNDED; PR256 merged c6b682 with tested tree equality.",
     "pending": "PR221 has new community-base hosted checks queued/running after integration changed to c6b682; PR218 remains a separate draft packaged Work Items checkpoint.",
     "scope": "Target integration is not whole-issue acceptance, Runtime/native publication, or release readiness."
+  },
+  "current_evidence_correction": {
+    "observed_at_utc": "2026-10-10T01:40:00Z",
+    "path": "evidence/convergence-correction-20261010T0140Z.json",
+    "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
+    "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
   }
 }

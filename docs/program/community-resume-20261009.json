@@ -4335,5 +4335,11 @@
     "observed_at_utc": "2026-10-10T01:36:00Z",
     "receipt": "evidence/convergence-refs-20261010T0136Z.txt",
     "receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033"
+  },
+  "current_evidence_correction": {
+    "observed_at_utc": "2026-10-10T01:40:00Z",
+    "path": "evidence/convergence-correction-20261010T0140Z.json",
+    "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
+    "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
   }
 }
