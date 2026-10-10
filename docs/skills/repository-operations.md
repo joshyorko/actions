@@ -1708,6 +1708,13 @@ python -m unittest discover -s .devcontainer/tests -p 'test_*.py' -v
 
 Every dispatch includes the mandatory documentation receipt from root `AGENTS.md`. Mutating lanes update canonical guidance in their branch when write scopes permit. Read-only or isolated lanes propose an exact delta. The integration lane records rejected proposals and the reason; silent discard is forbidden.
 
+Before writing, verify the assigned checkout's absolute Git root, branch, HEAD,
+and dirty state against its recorded owner. A separate branch in the same
+checkout does not isolate its files or index: parallel writers require separate
+worktree paths. Do not switch another lane's checkout to your branch. If an
+ownership mismatch is discovered after edits, preserve the changes and hand
+back a committed checkpoint before the owner restores its branch.
+
 ## Verification Receipts
 
 Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
