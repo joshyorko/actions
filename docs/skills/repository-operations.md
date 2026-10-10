@@ -179,6 +179,14 @@ the native Windows path. Hash-manifested Canvas amendment artifacts also use
 `-text` in `.gitattributes`: Git checkout conversion must not rewrite evidence
 bytes before the validator checks the recorded size and digest.
 
+For a source file whose committed bytes are a historical contract, scope its
+`.gitattributes` rule to preserve the required checkout line endings and test a
+small Git checkout with `core.autocrlf=true`; do not change the historical hash
+to match one operating system's working-tree conversion. Portable source scans
+should decode UTF-8 explicitly, and diagnostic paths should use `/` separators.
+For executable scripts, assert the Git index mode (`100755`) on every platform;
+filesystem execute bits are meaningful only on POSIX hosts.
+
 For Canvas fixture work, distinguish schema/round-trip evidence from product
 authorization: the current MCP dispatcher selects a registered tool by name,
 and legacy Run/artifact routes use server-level credentials rather than a
