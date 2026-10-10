@@ -486,8 +486,13 @@ that ordering change counts as verified behavior.
 
 After cleanup, the frozen browser gate also retains a post-runtime per-path
 inventory and an added/removed/changed entry report, including when the tree
-digest fails. Compare that report to the immutable build inventory; do not
-admit the browser result or alter the trusted hash when runtime writes occur.
+digest differs. Preserve the initial manifest digest and require every original
+entry to remain unchanged. The Action Server's `_download_rcc.py` contract puts
+the pinned RCC executable at `_internal/actions/server/bin/rcc-<version>`; if
+absent from the frozen build, the harness records that exact runtime-created
+file and its content digest as separate runtime state. Other added entries,
+removed files, or changed build entries fail the gate. Do not recalculate the
+trusted manifest hash from the post-runtime tree.
 
 Subprocess debug/error messages and string representations must redact
 sensitive command-line switches before formatting the argument list.

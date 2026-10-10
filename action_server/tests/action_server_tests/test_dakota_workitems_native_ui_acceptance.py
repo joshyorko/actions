@@ -149,6 +149,47 @@ def compare_package_tree_inventories(
     return {"added": added, "removed": removed, "changed": changed}
 
 
+def classify_runtime_tree_delta(
+    baseline: list[dict], observed: list[dict], *, platform_name: str
+) -> dict:
+    from actions.server._download_rcc import RCC_VERSION
+
+    difference = compare_package_tree_inventories(baseline, observed)
+    bin_path = "_internal/actions/server/bin"
+    executable_path = f"{bin_path}/rcc-{RCC_VERSION}"
+    if platform_name == "Windows":
+        executable_path += ".exe"
+    allowed_paths = {bin_path, executable_path}
+    added_by_path = {entry["path"]: entry for entry in difference["added"]}
+    reason = None
+    if difference["removed"] or difference["changed"]:
+        reason = "immutable_entry_changed"
+    elif set(added_by_path) - allowed_paths:
+        reason = "unrecognized_runtime_generated_entry"
+    elif bin_path in added_by_path and executable_path not in added_by_path:
+        reason = "runtime_rcc_directory_without_binary"
+    elif executable_path in added_by_path:
+        binary = added_by_path[executable_path]
+        if binary.get("kind") != "file" or re.fullmatch(
+            r"[0-9a-f]{64}", str(binary.get("content_sha256", ""))
+        ) is None:
+            reason = "runtime_rcc_binary_identity_missing"
+        elif bin_path not in added_by_path and bin_path not in {
+            entry["path"] for entry in baseline
+        }:
+            reason = "runtime_rcc_parent_directory_missing"
+    return {
+        "valid": reason is None,
+        "failure_reason": reason,
+        "runtime_generated_state": (
+            difference["added"] if reason is None else []
+        ),
+        "rcc_version": RCC_VERSION,
+        "expected_rcc_path": executable_path,
+        **difference,
+    }
+
+
 def record_postruntime_tree_observation(
     receipt: dict,
     *,
@@ -172,7 +213,9 @@ def record_postruntime_tree_observation(
     )
     baseline_path = manifest_path.parent / "native-artifact-tree-inventory.json"
     baseline_entries = json.loads(baseline_path.read_text(encoding="utf-8"))
-    difference = compare_package_tree_inventories(baseline_entries, observed_entries)
+    delta = classify_runtime_tree_delta(
+        baseline_entries, observed_entries, platform_name=platform.system()
+    )
     report_path = None
     if receipt_value:
         receipt_path = Path(receipt_value)
@@ -190,7 +233,16 @@ def record_postruntime_tree_observation(
                     "manifest_sha256": sha256(manifest_path),
                     "expected_package_tree_sha256": receipt["package_tree_sha256"],
                     "observed_package_tree_sha256": observed_sha,
-                    **difference,
+                    "runtime_delta_valid": delta["valid"],
+                    "runtime_delta_failure_reason": delta["failure_reason"],
+                    "runtime_generated_contract": {
+                        "rcc_version": delta["rcc_version"],
+                        "rcc_path": delta["expected_rcc_path"],
+                    },
+                    "runtime_generated_state": delta["runtime_generated_state"],
+                    "added": delta["added"],
+                    "removed": delta["removed"],
+                    "changed": delta["changed"],
                 },
                 indent=2,
             )
@@ -200,10 +252,16 @@ def record_postruntime_tree_observation(
         report_path = report.name
     receipt["post_runtime_package_tree_sha256"] = observed_sha
     receipt["post_runtime_tree_diff"] = {
-        "added_count": len(difference["added"]),
-        "removed_count": len(difference["removed"]),
-        "changed_count": len(difference["changed"]),
+        "added_count": len(delta["added"]),
+        "removed_count": len(delta["removed"]),
+        "changed_count": len(delta["changed"]),
         "report_path": report_path,
+    }
+    receipt["post_runtime_tree_validation"] = {
+        "valid": delta["valid"],
+        "failure_reason": delta["failure_reason"],
+        "rcc_version": delta["rcc_version"],
+        "runtime_generated_state": delta["runtime_generated_state"],
     }
 
 
@@ -714,6 +772,7 @@ def test_tree_inventory_diff_preserves_added_removed_and_changed_entries() -> No
             "content_sha256": "b" * 64,
         },
     ]
+
     observed = [
         {
             "path": "changed.py",
@@ -744,6 +803,74 @@ def test_tree_inventory_diff_preserves_added_removed_and_changed_entries() -> No
     ]
 
 
+@pytest.mark.parametrize(
+    ("platform_name", "suffix"), [("Linux", ""), ("Windows", ".exe")]
+)
+def test_runtime_rcc_download_is_measured_separately_from_immutable_tree(
+    platform_name: str, suffix: str
+) -> None:
+    from actions.server._download_rcc import RCC_VERSION
+
+    executable_path = f"_internal/actions/server/bin/rcc-{RCC_VERSION}{suffix}"
+    observed = [
+        {
+            "path": "_internal/actions/server/bin",
+            "kind": "directory",
+            "mode": 511,
+            "link_target": None,
+            "content_sha256": None,
+        },
+        {
+            "path": executable_path,
+            "kind": "file",
+            "mode": 511,
+            "link_target": None,
+            "content_sha256": "c" * 64,
+        },
+    ]
+
+    result = classify_runtime_tree_delta([], observed, platform_name=platform_name)
+    assert result["valid"] is True
+    assert result["rcc_version"] == "18.19.3"
+    assert result["expected_rcc_path"] == executable_path
+    assert result["runtime_generated_state"] == observed
+
+
+def test_runtime_tree_delta_rejects_mutation_of_an_immutable_build_entry() -> None:
+    baseline = [
+        {
+            "path": "module.py",
+            "kind": "file",
+            "mode": 420,
+            "link_target": None,
+            "content_sha256": "a" * 64,
+        }
+    ]
+    observed = [{**baseline[0], "content_sha256": "b" * 64}]
+
+    result = classify_runtime_tree_delta(baseline, observed, platform_name="Windows")
+    assert result["valid"] is False
+    assert result["failure_reason"] == "immutable_entry_changed"
+    assert result["runtime_generated_state"] == []
+
+
+def test_runtime_tree_delta_rejects_unexplained_additions() -> None:
+    observed = [
+        {
+            "path": "_internal/actions/server/__pycache__",
+            "kind": "directory",
+            "mode": 493,
+            "link_target": None,
+            "content_sha256": None,
+        }
+    ]
+
+    result = classify_runtime_tree_delta([], observed, platform_name="Windows")
+    assert result["valid"] is False
+    assert result["failure_reason"] == "unrecognized_runtime_generated_entry"
+    assert result["runtime_generated_state"] == []
+
+
 def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) -> None:
     package = tmp_path / "package"
     package.mkdir()
@@ -771,6 +898,8 @@ def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) 
 
     report_path = tmp_path / "dakota-workitems-ui-frozen-test-post-runtime-tree-diff.json"
     report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert report["runtime_delta_valid"] is False
+    assert report["runtime_delta_failure_reason"] == "unrecognized_runtime_generated_entry"
     assert report["expected_package_tree_sha256"] == receipt["package_tree_sha256"]
     assert report["observed_package_tree_sha256"] == receipt["post_runtime_package_tree_sha256"]
     assert [entry["path"] for entry in report["added"]] == [
@@ -1070,13 +1199,13 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 receipt["failure_phase"] = "post_runtime_tree_inventory"
                 write_receipt(receipt)
                 raise
-            if receipt["post_runtime_package_tree_sha256"] != package_tree_sha:
+            if not receipt["post_runtime_tree_validation"]["valid"]:
                 receipt["status"] = "FAIL"
                 receipt["failure_type"] = "AssertionError"
-                receipt["failure_phase"] = "post_runtime_package_tree"
+                receipt["failure_phase"] = "post_runtime_package_tree_delta"
                 write_receipt(receipt)
                 raise AssertionError(
-                    "frozen package tree changed during Work Items UI acceptance"
+                    "frozen package tree changed outside the runtime RCC download contract"
                 )
         receipt["status"] = "PASS_BOUNDED"
         write_receipt(receipt)
