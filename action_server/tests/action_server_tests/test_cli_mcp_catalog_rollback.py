@@ -199,7 +199,16 @@ def _runtime(
             },
             additional_args=["--address=127.0.0.1"]
             + [f"--dir={directory}" for directory in directories],
-            timeout=30,
+            # A fresh frozen-test ACTIONS_HOME may need to create the managed
+            # package environment before the server reports its ready port.
+            # Keep source-mode startup's shorter deadline unchanged.
+            timeout=(
+                90
+                if directories
+                and "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"
+                in os.environ
+                else 30
+            ),
         )
         if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
             import psutil

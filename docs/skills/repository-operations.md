@@ -81,6 +81,15 @@ before writing its result; a fixture pin to 0.10.0 could not be resolved. The
 Runtime's explicit minimum-version error and those fixture inputs identify a
 test-fixture incompatibility, not an RCC defect.
 
+Frozen integration fixtures that synchronize packages with `package.yaml` may
+need a cold RCC-managed environment before the server emits its ready-port
+line. Keep that startup deadline scoped to the packaged managed-environment
+fixture; a captured CI run showed the first successful `holotree variables`
+operation alone taking 28.86 seconds, so a 30-second whole-startup deadline
+expired before the server became ready. Preserve a shorter deadline for
+source-mode fixtures and inspect child stderr before treating a timeout as an
+RCC or Runtime failure.
+
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
 separately against the current integration revision, checking both its imports
