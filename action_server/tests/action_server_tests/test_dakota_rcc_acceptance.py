@@ -5,9 +5,12 @@ import signal
 import subprocess
 import sys
 import time
+import tomllib
 import urllib.error
 import urllib.request
+import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -24,6 +27,7 @@ def _harness():
     spec = importlib.util.spec_from_file_location("dakota_rcc_acceptance", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
@@ -215,6 +219,94 @@ def test_child_environment_keeps_ca_and_proxy_settings_without_credentials(tmp_p
     assert result["HOME"] == str(tmp_path / "isolated" / "home")
     assert not {"GITHUB_TOKEN", "AWS_SECRET_ACCESS_KEY", "ACTIONS_API_KEY"} & set(
         result
+    )
+
+
+@pytest.mark.parametrize("core_metadata_version", ["1.0.3", "1.0.2"])
+def test_candidate_wheels_follow_checked_out_versions_and_validate_metadata(
+    tmp_path, monkeypatch, core_metadata_version
+):
+    harness = _harness()
+    source_root = tmp_path / "source"
+    (source_root / "actions").mkdir(parents=True)
+    (source_root / "actions-http-helper").mkdir()
+    script_dir = source_root / "action_server" / "scripts"
+    script_dir.mkdir(parents=True)
+    monkeypatch.setattr(
+        harness,
+        "__file__",
+        str(script_dir / "verify_dakota_rcc_acceptance.py"),
+    )
+    source_versions = {
+        "actions": ("actions-core", "1.0.3"),
+        "actions-http-helper": ("actions-http-helper", "1.0.3"),
+    }
+    for directory, (distribution, version) in source_versions.items():
+        (source_root / directory / "pyproject.toml").write_text(
+            f'[tool.poetry]\nname = "{distribution}"\nversion = "{version}"\n',
+            encoding="utf-8",
+        )
+
+    def fake_poetry(command, *, cwd, **kwargs):
+        project = tomllib.loads((Path(cwd) / "pyproject.toml").read_text())[
+            "tool"
+        ]["poetry"]
+        distribution = project["name"]
+        version = project["version"]
+        if command[1] == "version":
+            return SimpleNamespace(returncode=0, stdout=f"{version}\n", stderr="")
+
+        wheelhouse = Path(command[command.index("--output") + 1])
+        filename_distribution = distribution.replace("-", "_")
+        wheel = wheelhouse / (
+            f"{filename_distribution}-{version}-py3-none-any.whl"
+        )
+        metadata_path = f"{filename_distribution}-{version}.dist-info/METADATA"
+        metadata_version = (
+            core_metadata_version if distribution == "actions-core" else version
+        )
+        with zipfile.ZipFile(wheel, "w") as archive:
+            archive.writestr(
+                metadata_path,
+                f"Metadata-Version: 2.1\nName: {distribution}\nVersion: {metadata_version}\n\n",
+            )
+        return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+    monkeypatch.setattr(harness, "run_owned_process", fake_poetry)
+    task_root = tmp_path / "task"
+    task_root.mkdir()
+    arguments = {
+        "root": task_root,
+        "source_env": {
+            "PATH": os.environ.get("PATH", os.defpath),
+            "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": str(tmp_path / "rcc-home"),
+        },
+        "poetry": Path("/pinned/poetry"),
+        "deadline": harness.Deadline.after(30),
+    }
+    if core_metadata_version != "1.0.3":
+        with pytest.raises(RuntimeError, match="wheel METADATA"):
+            harness.build_candidate_wheels(**arguments)
+        return
+
+    candidate_wheels = harness.build_candidate_wheels(**arguments)
+
+    assert candidate_wheels.core.version == "1.0.3"
+    assert candidate_wheels.helper.version == "1.0.3"
+    assert candidate_wheels.core.path.name == "actions_core-1.0.3-py3-none-any.whl"
+    assert candidate_wheels.helper.path.name == (
+        "actions_http_helper-1.0.3-py3-none-any.whl"
+    )
+    assert harness.candidate_version_fields(candidate_wheels) == {
+        "actions_core": "1.0.3",
+        "actions_http_helper": "1.0.3",
+    }
+    wheel_records = harness.candidate_wheel_records(candidate_wheels)
+    assert wheel_records.keys() == {"actions-core", "actions-http-helper"}
+    assert wheel_records["actions-core"]["version"] == "1.0.3"
+    assert wheel_records["actions-http-helper"]["version"] == "1.0.3"
+    assert wheel_records["actions-core"]["filename"] == (
+        "actions_core-1.0.3-py3-none-any.whl"
     )
 
 

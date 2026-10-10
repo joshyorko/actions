@@ -2658,6 +2658,16 @@ Runtime/candidate-wheel receipts still show a failed RCC wrapper. These harness
 checks do not establish production pool retirement, lease-release ordering,
 frozen Runtime acceptance or remote-provider acceptance.
 
+The Dakota RCC candidate-wheel verifier derives Core and HTTP Helper versions
+from each checked-out package using the pinned Poetry executable, then checks
+that each built wheel's filename and `METADATA` agree with that source version.
+The same candidate identities flow into the synthetic Action expectation and
+success or failure receipt. This identifies the local candidate under test; it
+does not establish a registry publication or provider-backed Runtime result.
+Keep historical receipts bound to their recorded source revision: a prior
+Core 1.0.2 candidate result is not a current-source result when the checked-out
+Core metadata declares 1.0.3.
+
 With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
 recorded digest through the same provider and each returned the exact digest
 with `verification.valid: true`. After the provider's digest-addressed
