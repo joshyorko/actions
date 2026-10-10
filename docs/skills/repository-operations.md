@@ -1431,6 +1431,12 @@ validation rejects missing PostgreSQL hosts, malformed authorities, and ports
 outside `1..65535` before connection or SQLite fallback. CLI argument, datadir,
 and new migration diagnostics must use the database URL redactor, which removes
 userinfo, query, and fragment data without changing the connection value.
+Before URL scheme detection, preserve rooted Windows drive paths in either
+`C:\...` or `C:/...` form as SQLite filesystem paths: `urlsplit` otherwise
+interprets the drive letter as a URL scheme. UNC paths remain filesystem paths,
+while other unsupported schemes, including single-letter forms such as
+`x://host/db`, still fail instead of falling back to SQLite. Drive-relative
+spellings such as `C:relative.db` remain outside the supported exception.
 Scheme detection and redaction are case-insensitive, while the validated
 connection string passed to psycopg retains its original bytes. New migration
 status and CLI diagnostics use the redactor; the byte-immutable legacy
