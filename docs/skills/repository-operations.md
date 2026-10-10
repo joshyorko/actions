@@ -95,6 +95,15 @@ view/result lifecycle works, or a packaged Runtime release accepts it.
 
 ## Core and Runtime compatibility
 
+For nested database transactions, acquire the SAVEPOINT before incrementing
+the thread-local nesting count. If SAVEPOINT creation fails, the original
+database error must propagate, the nested body must not run, and outer cleanup
+must restore both the nesting count and connection state. Cover this admission
+failure with a real SQLite authorizer that denies `SQLITE_SAVEPOINT`/`BEGIN`,
+then verify the same connection can commit a later nested transaction. The
+existing successful nested rollback test does not exercise SAVEPOINT creation
+failure.
+
 Actions Core pull requests run a non-publishing candidate-wheel gate on Ubuntu
 with the release-pinned Python 3.10 and Poetry 2.1.1 toolchain. It synchronizes
 the locked environment, builds the wheel and source archive, checks the exact

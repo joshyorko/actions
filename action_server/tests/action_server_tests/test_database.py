@@ -445,6 +445,92 @@ def test_database_transactions_nested():
         )
 
 
+def test_nested_transaction_savepoint_start_failure_preserves_error_and_counter():
+    import sqlite3
+
+    from actions.server._database import DBError
+
+    db = Database(":memory:")
+    savepoint_attempts = []
+    nested_body_entered = False
+
+    with db.connect():
+        connection = db._tlocal.conn
+        with db.transaction():
+            db.execute("CREATE TABLE savepoint_failure_probe (value TEXT);")
+
+        def deny_savepoint_start(action, first, second, _database, _source):
+            if action == sqlite3.SQLITE_SAVEPOINT:
+                savepoint_attempts.append((action, first, second))
+                if first == "BEGIN":
+                    return sqlite3.SQLITE_DENY
+            return sqlite3.SQLITE_OK
+
+        connection.set_authorizer(deny_savepoint_start)
+        observed_error = None
+        try:
+            with db.transaction():
+                with db.transaction():
+                    nested_body_entered = True
+        except Exception as error:
+            observed_error = error
+        finally:
+            connection.set_authorizer(None)
+
+        error_chain = []
+        current_error = observed_error
+        while current_error is not None and current_error not in error_chain:
+            error_chain.append(current_error)
+            current_error = current_error.__context__
+
+        wrapped_sql_error = next(
+            (error for error in error_chain if isinstance(error, DBError)), None
+        )
+        sqlite_error = (
+            wrapped_sql_error.__context__ if wrapped_sql_error is not None else None
+        )
+
+        # The same connection must remain usable after the denied SAVEPOINT.
+        recovery_nesting = []
+        with db.transaction():
+            recovery_nesting.append(db._tlocal.in_transaction)
+            with db.transaction():
+                recovery_nesting.append(db._tlocal.in_transaction)
+                db.execute(
+                    "INSERT INTO savepoint_failure_probe (value) VALUES ('recovered');"
+                )
+        recovered_values = connection.execute(
+            "SELECT value FROM savepoint_failure_probe;"
+        ).fetchall()
+
+        assert savepoint_attempts == [
+            (sqlite3.SQLITE_SAVEPOINT, "BEGIN", "savepoint_0")
+        ]
+        assert (
+            type(observed_error),
+            type(wrapped_sql_error),
+            str(wrapped_sql_error),
+            type(sqlite_error),
+            str(sqlite_error),
+            nested_body_entered,
+            recovery_nesting,
+            db._tlocal.in_transaction,
+            connection.in_transaction,
+            recovered_values,
+        ) == (
+            DBError,
+            DBError,
+            "Error running sql: 'savepoint savepoint_0;' with values: None",
+            sqlite3.DatabaseError,
+            "not authorized",
+            False,
+            [1, 2],
+            0,
+            False,
+            [("recovered",)],
+        )
+
+
 def test_database_concurrency(datadir):
     db = Database(datadir / "my.db")
     with db.connect():
