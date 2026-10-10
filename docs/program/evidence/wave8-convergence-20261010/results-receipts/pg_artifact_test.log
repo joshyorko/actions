@@ -1,0 +1,27 @@
+Error. Rolling back database
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-wave8-postgres/action_server/src/actions/server/_database.py", line 1154, in execute
+    conn.execute(sql)
+  File "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psycopg/connection.py", line 300, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-wave8-postgres/action_server/src/actions/server/_database.py", line 652, in transaction
+    yield
+  File "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/probe_failed_savepoint_postgresql.py", line 97, in <module>
+    with database.transaction():
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/workspace/work/actions-mk3-wave8-postgres/action_server/src/actions/server/_database.py", line 628, in transaction
+    self.execute(f"savepoint {savepoint_name};")
+  File "/workspace/work/actions-mk3-wave8-postgres/action_server/src/actions/server/_database.py", line 1158, in execute
+    self._raise_execute_error(
+  File "/workspace/work/actions-mk3-wave8-postgres/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql: 'savepoint savepoint_0;' with values: None
+{"status": "PASS", "receipt": "/workspace/work/actions-mk3-evidence/database-savepoint/postgresql-savepoint-proof-20261010T2320Z/execution-20261010T232524Z-66536/probe-result.json"}

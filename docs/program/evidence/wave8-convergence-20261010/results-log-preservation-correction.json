@@ -1,0 +1,16 @@
+{
+  "prior_checkpoint": "8116f54ce1b28d596f08d415ecd5d4ed672ef120",
+  "prior_manifest_completeness": "NOT PROVEN: repository ignore rules omitted admitted small .log payloads; initial staged verification correctly failed.",
+  "corrective_action": "Explicitly staged only the listed immutable sanitized log payloads; no original artifact amended.",
+  "added_paths": [
+    "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr309_red_isort.log",
+    "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr309_lint.log",
+    "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr309_ast.log",
+    "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_workflow_tests.log",
+    "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_artifact_postgres.log",
+    "docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_artifact_test.log",
+    "docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_generator-rcc-dev.log"
+  ],
+  "current_staged_payload_count": 40,
+  "all_payload_git_blob_bytes_and_hashes_match": true
+}
