@@ -223,17 +223,11 @@ class _ActionRoutes:
         actions = db.all(Action)
         registered_route_names: set[str] = set()
         next_mcp_server_setup_helper = McpServerSetupHelper()
+        actions_to_register: list[tuple[ActionPackage, Action]] = []
         for action in actions:
             if not action.enabled:
                 # Disabled actions should not be registered.
                 continue
-
-            doc_desc: str | None = ""
-            if action.docs:
-                doc_desc = get_action_description_from_docs(action.docs)
-
-            if not doc_desc:
-                doc_desc = ""
 
             action_package = action_package_id_to_action_package.get(
                 action.action_package_id
@@ -254,6 +248,15 @@ class _ActionRoutes:
                         action.name,
                     )
                     continue
+            actions_to_register.append((action_package, action))
+
+        tool_names = next_mcp_server_setup_helper.resolve_tool_names(
+            actions_to_register
+        )
+        for action_package, action in actions_to_register:
+            doc_desc = (
+                get_action_description_from_docs(action.docs) if action.docs else ""
+            )
             display_name = _make_name_user_friendly(action.name)
             options = action.options
             action_kind = "action"
@@ -299,7 +302,12 @@ class _ActionRoutes:
             registered_route_names.add(route_name)
 
             next_mcp_server_setup_helper.register_action(
-                func_internal, action_package, action, display_name, doc_desc
+                func_internal,
+                action_package,
+                action,
+                display_name,
+                doc_desc,
+                tool_name=tool_names.get(action.id),
             )
 
         # Build the complete catalog off to the side. The persistent MCP

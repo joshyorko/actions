@@ -1,6 +1,182 @@
 import pytest
 
 
+@pytest.mark.parametrize("selection", ["all", "whitelist", "disabled"])
+def test_package_scoped_http_actions_have_distinct_mcp_tools(monkeypatch, selection):
+    from fastapi.testclient import TestClient
+
+    from actions.server import _actions_run, _app
+    from actions.server._api_action_routes import _ActionRoutes
+    from actions.server._models import ActionPackage, create_db
+
+    app = _app._CustomFastAPI()
+    monkeypatch.setattr(_app, "get_app", lambda: app)
+
+    def generate(action_package, action, display_name, **_kwargs):
+        async def http_action():
+            return action.id
+
+        async def internal_action(**_kwargs):
+            return action.id
+
+        return http_action, internal_action, {}
+
+    monkeypatch.setattr(_actions_run, "generate_func_from_action", generate)
+    routes = _ActionRoutes(
+        whitelist="package1/do_it" if selection == "whitelist" else None,
+        endpoint_dependencies=[],
+    )
+    with create_db(":memory:") as db:
+        with db.transaction():
+            for name in ("package1", "package2"):
+                package = ActionPackage(name, name, name, "hash", "{}")
+                db.insert(package)
+                action = _catalog_action(
+                    action_id=f"{name}-action",
+                    name="do_it",
+                    options={"_meta": {"package": name}},
+                    docs="Run this action",
+                )
+                action.action_package_id = name
+                action.enabled = selection != "disabled" or name == "package1"
+                db.insert(action)
+        routes.register_actions()
+        routes.setup_mcp_server(None)
+
+        with TestClient(app, base_url="http://localhost:8080") as client:
+            packages = ("package1", "package2") if selection == "all" else ("package1",)
+            for name in packages:
+                response = client.post(f"/api/actions/{name}/do-it/run")
+                assert response.status_code == 200
+                assert response.json() == f"{name}-action"
+
+            def mcp_request(method, params):
+                params = {
+                    **params,
+                    "_meta": {
+                        "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+                        "io.modelcontextprotocol/clientCapabilities": {},
+                    },
+                }
+                response = client.post(
+                    "/mcp",
+                    headers={
+                        "Accept": "application/json, text/event-stream",
+                        "MCP-Protocol-Version": "2026-07-28",
+                        "Mcp-Method": method,
+                        **({"Mcp-Name": params["name"]} if "name" in params else {}),
+                    },
+                    json={
+                        "jsonrpc": "2.0",
+                        "id": 1,
+                        "method": method,
+                        "params": params,
+                    },
+                )
+                assert response.status_code == 200, response.text
+                return response.json()["result"]
+
+            tools = mcp_request("tools/list", {})["tools"]
+            expected_names = (
+                ["package1__do_it", "package2__do_it"]
+                if selection == "all"
+                else ["do_it"]
+            )
+            assert [tool["name"] for tool in tools] == expected_names
+            for package_name, tool in zip(packages, tools):
+                assert tool["_meta"] == {"package": package_name}
+                assert tool["annotations"]["title"] == "Do It"
+                result = mcp_request("tools/call", {"name": tool["name"]})
+                assert result["content"][0]["text"] == f"{package_name}-action"
+                assert result["_meta"]["package"] == package_name
+
+
+def test_collision_names_reserve_bare_names_and_are_order_independent():
+    import re
+    from types import SimpleNamespace
+
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
+
+    pairs = []
+    for index, (package_name, action_name) in enumerate(
+        [
+            ("package1", "do_it"),
+            ("package2", "do_it"),
+            ("other", "package1__do_it"),
+            ("a b", "repeat"),
+            ("a?b", "repeat"),
+            ("x" * 90 + "a", "repeat"),
+            ("x" * 90 + "b", "repeat"),
+            ("unicode", "工具" * 40),
+            ("a__b", "c"),
+            ("a", "b__c"),
+            ("other-c", "c"),
+            ("other-b", "b__c"),
+        ]
+    ):
+        action = _catalog_action(
+            action_id=str(index), name=action_name, options={}, docs=""
+        )
+        pairs.append((SimpleNamespace(name=package_name), action))
+
+    names = McpServerSetupHelper.resolve_tool_names(pairs)
+    assert names == McpServerSetupHelper.resolve_tool_names(list(reversed(pairs)))
+    assert len(set(names.values())) == len(pairs)
+    assert names["2"] == "package1__do_it"
+    assert names["0"].startswith("package1__do_it_")
+    assert names["1"] == "package2__do_it"
+    assert names["7"] == "工具" * 40
+    for action_id, name in names.items():
+        if action_id not in ("2", "7"):
+            assert re.fullmatch(r"[A-Za-z0-9_.-]{1,64}", name)
+
+    revisions = []
+    for order in (pairs, pairs[::-1]):
+        helper = McpServerSetupHelper()
+        for package, action in order:
+            helper.register_action(
+                lambda **kwargs: "result",
+                package,
+                action,
+                action.name,
+                action.docs,
+                tool_name=names[action.id],
+            )
+            assert helper._tool_name_to_action_info[names[action.id]].action is action
+        assert [tool.name for tool in helper._tools] == sorted(names.values())
+        revisions.append(helper.catalog_revision)
+    assert revisions[0] == revisions[1]
+
+    # Forced digest collisions still retain every action deterministically.
+    from unittest.mock import patch
+
+    with patch("actions.server.mcp.setup_mcp_server_v2.sha256") as digest:
+        digest.return_value.hexdigest.return_value = "0" * 64
+        forced_names = McpServerSetupHelper.resolve_tool_names(pairs)
+        assert len(set(forced_names.values())) == len(pairs)
+        assert forced_names == McpServerSetupHelper.resolve_tool_names(pairs[::-1])
+
+
+def test_tool_names_exclude_resources_and_prompts_and_reject_duplicate_identity():
+    from types import SimpleNamespace
+
+    from actions.server.mcp.setup_mcp_server_from_actions import McpServerSetupHelper
+
+    package = SimpleNamespace(name="package")
+    pairs = [
+        (
+            package,
+            _catalog_action(
+                action_id=kind, name="repeat", options={"kind": kind}, docs=""
+            ),
+        )
+        for kind in ("tool", "resource", "prompt")
+    ]
+    assert McpServerSetupHelper.resolve_tool_names(pairs) == {"tool": "repeat"}
+    with pytest.raises(ValueError, match="duplicate tool identity"):
+        McpServerSetupHelper.resolve_tool_names([pairs[0], pairs[0]])
+
+
 def test_call_tool_uses_admitted_catalog_during_concurrent_reload(monkeypatch):
     import asyncio
     import threading
