@@ -141,7 +141,9 @@ def test_assembled_websocket_session_credentials_never_reach_logs(tmp_path: Path
     datadir = tmp_path / "data"
     stderr_path = tmp_path / "stderr.txt"
     stdout_path = tmp_path / "stdout.txt"
-    with stderr_path.open("w") as stderr, stdout_path.open("w") as stdout:
+    # The child writes UTF-8 to redirected streams on every platform; inspect
+    # those exact bytes with the same explicit encoding as the file logger.
+    with stderr_path.open("wb") as stderr, stdout_path.open("wb") as stdout:
         process = subprocess.Popen(
             [
                 sys.executable,
@@ -160,7 +162,11 @@ def test_assembled_websocket_session_credentials_never_reach_logs(tmp_path: Path
             cwd=tmp_path,
             stdout=stdout,
             stderr=stderr,
-            env={**os.environ, "ACTIONS_SKIP_UPDATE_CHECK": "1"},
+            env={
+                **os.environ,
+                "ACTIONS_SKIP_UPDATE_CHECK": "1",
+                "PYTHONIOENCODING": "utf-8",
+            },
         )
         try:
             with httpx.Client(base_url=origin, trust_env=False, timeout=10) as client:
@@ -205,8 +211,10 @@ def test_assembled_websocket_session_credentials_never_reach_logs(tmp_path: Path
             except subprocess.TimeoutExpired:
                 process.kill()
                 process.wait(timeout=10)
-    output = stdout_path.read_text() + stderr_path.read_text()
-    disk = (datadir / "server_log.txt").read_text()
+    output = stdout_path.read_bytes().decode("utf-8") + stderr_path.read_bytes().decode(
+        "utf-8"
+    )
+    disk = (datadir / "server_log.txt").read_text(encoding="utf-8")
     for text in (output, disk):
         assert "cookie: <redacted>" in text.casefold()
         assert "verified-handshake" in text
