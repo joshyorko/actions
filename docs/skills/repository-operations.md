@@ -735,7 +735,11 @@ streaming/SSE disconnect watchers can spin without yielding, starve the server e
 loop, and prevent unrelated HTTP work and graceful signal shutdown from progressing.
 The lifecycle regression boundary opens a raw `GET /mcp` SSE connection and, while it
 remains open, proves that an unrelated HTTP route responds within a finite bound,
-`SIGTERM` terminates Action Server, and its observed preload children stop.
+`SIGTERM` terminates Action Server, and its owned action workers stop. Frozen
+Action Server tests may launch an inner server process beneath the executable
+wrapper, so worker readiness and shutdown checks must inspect the recursive
+process tree, identify preload workers, and retain `(pid, creation_time)` pairs
+to avoid treating a reused PID as the original child.
 Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
 tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
