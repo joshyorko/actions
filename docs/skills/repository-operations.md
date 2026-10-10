@@ -526,6 +526,15 @@ Sign-out and expired-session status unmount providers, clear their query cache
 and disconnect browser subscriptions. The browser rechecks on protected HTTP
 403, focus, expiry and a 15-second interval for revocation in another tab.
 
+Community PRs touching `actions/**` run Actions Core Tests. Its non-publishing
+candidate-wheel job builds the exact-source wheel and sdist, checks their
+inventory, validates and clean-installs the wheel, and retains artifact hashes
+with source/run provenance. A passing candidate job is not PyPI publication or
+consumer acceptance. The tagged Core publisher also requires its source commit
+to be an ancestor of `origin/community`; an integration-only candidate cannot
+satisfy that gate. Verify the published wheel and installed public API before
+updating a template's supported dependency floor.
+
 The Actions Core tag release workflow admits exactly the version-matched
 `actions_core` universal wheel and source archive. Its Linux verify job rejects
 extra entries and symlinked artifacts, records SHA-256 digests, and uploads the
@@ -1829,6 +1838,13 @@ checks through the same explicitly selected interpreter as the build instead
 of bare `python`; a workflow host interpreter can lack standard-library
 modules required by the check.
 
+Keep that registry-floor check deterministic when newer compatible dependencies
+are published: pass exact `actions-core==EXPECTED_CORE` and
+`actions-http-helper==EXPECTED_HELPER` requirements alongside the Runtime wheel
+in the isolated pip install. Keep pip-report URL/SHA validation and installed
+version/import-origin checks as separate gates. A newer compatible Core release
+does not change the minimum version this canary must exercise.
+
 The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
 `_internal/actions/server/bin`. PyInstaller may report package-data destinations
 with native Windows backslashes; normalize both source and destination
@@ -3033,3 +3049,32 @@ regression criterion, not a statistically calibrated browser budget. A single
 jsdom wall-clock measurement cannot establish browser frame rate: hosted run
 38056869588 measured 34.13ms against the old 32ms assertion without a rendering
 correctness failure. Controlled browser performance remains a separate proof.
+
+### Live pull-request base identity
+
+A pull-request metadata response can retain an older `base.sha` after its named
+target branch advances. Resolve the live target Git ref separately and inspect
+the prospective merge's ordered parents and complete tree. Bind carried-forward
+CI evidence to the checkout actually recorded in job logs; neither the PR
+payload's base SHA nor a mergeable flag alone establishes the current tested union.
+
+When merging a package-only community promotion into Runtime integration, retain
+the integration target in the generated package test workflow's PR branch list.
+Regenerate from the combined workflow generator and compare its output, preserving
+the promoted candidate-artifact job and tag publisher's community-ancestry gate.
+Resolving a generator conflict without this check can omit integration CI even
+when the package source itself is identical in both parents.
+
+Core publication is triggered by pushing an unused `actions-core-<version>` tag
+whose commit is already merged to `community`. The current `Actions Release`
+workflow has no `workflow_dispatch` trigger. The generic `inv make-release`
+helper on the current Runtime integration requires `community`, canonical origin,
+and refreshed community ancestry. The accepted Core1.0.3 community checkout
+`a70993fa` still has the older `master` guard. Inspect the helper at the exact
+release source before choosing an entrypoint; identical Core package trees do
+not imply identical shared release helpers.
+Before a tag push, verify the exact accepted source, package version, community
+ancestry, and absence of both the remote tag and registry version. A successful
+tag workflow must still be followed by registry file/hash and installed public
+API verification. Never move a tag or replace a published distribution to recover
+a failed release.

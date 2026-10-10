@@ -151,6 +151,8 @@ def install_command(python: Path, wheel: Path, report: Path) -> list[str]:
         "--report",
         str(report),
         str(wheel.resolve()),
+        f"actions-core=={EXPECTED_CORE}",
+        f"actions-http-helper=={EXPECTED_HELPER}",
     ]
 
 
