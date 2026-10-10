@@ -218,3 +218,5 @@ docs/program/evidence/wave4-convergence-20261010T2045Z/**/*.log -diff -whitespac
 docs/program/evidence/issue-closure-audit-20261010/** -text
 docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.csv whitespace=cr-at-eol
 docs/program/evidence/issue-closure-ledger-readback-20261010.json -text
+# Restarted Cloud wave8 dispatch and results retain their receipt bytes.
+docs/program/evidence/wave8-convergence-20261010/** -text

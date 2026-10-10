@@ -1,0 +1,16 @@
+{
+  "scope": "Wave8 restart source-bound dispatch receipts only; prior audit immutable",
+  "evidence_parent": "7a593cd645066c29e138c03a47ac174a6f95b101",
+  "payloads": [
+    {
+      "path": "dispatch-contract.json",
+      "bytes": 3059,
+      "sha256": "199df788a526022fed5c54d4accad455e057fbd27e74ec92cfb75587a5094bfc"
+    },
+    {
+      "path": "initial-exact-head-ci.json",
+      "bytes": 38637,
+      "sha256": "974760cbbd52a68836e8723bf566a3231ab55e73489a16dbc6edcdafa8228004"
+    }
+  ]
+}

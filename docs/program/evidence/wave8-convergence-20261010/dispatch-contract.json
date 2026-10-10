@@ -1,0 +1,78 @@
+{
+  "observed_at_utc": "2026-10-10 23:19:06 UTC",
+  "refs": {
+    "community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "integration": "19380993febaa71238eaee3026b5c808773283ff",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "audit": "7a593cd645066c29e138c03a47ac174a6f95b101"
+  },
+  "authority": "User2026-10-10: proceed with convergence and get swarm started again; bounded Cloud work resumed. Devsy DISABLED; no Astra.",
+  "native_ownership": "Executor tunnel NOT_FOUND/not seen300s; no fresh Dakota snapshot; last states remain historical. No overlapping native RCC/WorkItems implementation dispatched.",
+  "pr292_windows": "CANCELLED; NOT ACCEPTED. Sol diagnosis assigned before retry.",
+  "capacity": {
+    "source_writers_max": 2,
+    "assigned_writers": [
+      "PR309import-order",
+      "PR299localmergecandidate"
+    ],
+    "heavy_service_gates_max": 1,
+    "heavy_gate_owner": "PostgreSQL failed-SAVEPOINT verification"
+  },
+  "worker_boundaries": [
+    {
+      "owner": "luna_pr302_portability",
+      "role": "PR309 mechanical repair",
+      "worktree": [
+        "/workspace/work/actions-mk3-wave8-pr309",
+        "mk3/wave8-pr309-import-order-20261010",
+        "f23db9606f3801fd21a3e66adc0f9199fd115131"
+      ]
+    },
+    {
+      "owner": "luna_graph_reconcile",
+      "role": "PR299 normal local union only",
+      "worktree": [
+        "/workspace/work/actions-mk3-wave8-pr299",
+        "mk3/wave8-pr299-integration-union-20261010",
+        "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+      ]
+    },
+    {
+      "owner": "luna_database_gate_audit",
+      "role": "Actual PostgreSQL verification; source read-only",
+      "worktree": [
+        "/workspace/work/actions-mk3-wave8-postgres",
+        "mk3/wave8-postgres-savepoint-proof-20261010",
+        "1421fcf85c1b681aef1fe58fe2902f776f208167"
+      ]
+    },
+    {
+      "owner": "luna_pr282_template",
+      "role": "#195 installed-byte-boundary design, read-only until writer slot",
+      "worktree": [
+        "/workspace/work/actions-mk3-wave8-wheel-boundary",
+        "mk3/wave8-installed-wheel-boundary-20261010",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    },
+    {
+      "owner": "luna_core_release_preflight",
+      "role": "Publication/closure tool and release read-only reconciliation",
+      "worktree": [
+        "/workspace/work/actions-mk3-wave8-release",
+        "mk3/wave8-release-readiness-20261010",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    },
+    {
+      "owner": "sol_pr301_review",
+      "role": "Windows cancellation diagnosis and independent reviews; read-only",
+      "worktree": [
+        "/workspace/work/actions-mk3-wave8-review",
+        "mk3/wave8-review-20261010",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    }
+  ],
+  "stop_conditions": "Each bounded assignment stops after its exact-SHA checkpoint/proof/design/review; no native worker creation/resume, source remote push, PR merge/retarget/close, tags/packages/releases without coordinator review and gate reconciliation."
+}
