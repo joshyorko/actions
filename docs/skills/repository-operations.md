@@ -2,6 +2,37 @@
 
 ## MCP Apps public metadata
 
+## Canvas query-results fixture interchange
+
+The merged PR267 renderer decision uses a thin Actions-owned React view with
+the official `@modelcontextprotocol/ext-apps` 2.0.3 bridge. json-render and
+A2UI were inspected alternatives, not integrated. This accepts the bounded
+renderer choice for the one query-results fixture; the JSON Schema remains a
+fixture-only proposal, not a released CanvasSpec grammar. Keep richer renderer,
+Runtime authorization, real Action dispatch, and host acceptance as separate
+claims.
+
+`docs/contracts/canvas/fixtures/query-results-v0.1.schema.json` is the single
+Draft 2020-12 schema for this fixture. The Python interchange test validates
+and serializes the checked-in values. When the prepared frontend Node/Vitest
+workspace is present, it also sends compact Python JSON through the TypeScript
+test, validates and reserializes it there, then validates the returned JSON in
+Python and checks exact serialized-byte preservation. Local runs without Node or
+Vitest skip this bridge; the skip is NOT RUN, not a 100-B round-trip pass. The
+community frontend PR workflow runs the same Python test after `npm ci` with
+`ACTIONS_CANVAS_REQUIRE_ROUNDTRIP=1`, so a missing Node/Vitest bridge fails CI.
+
+The frontend test uses the directly pinned, test-only `ajv@8.17.1`
+Draft 2020-12 validator against that same JSON Schema. Its TypeScript dispatch
+checks retain fixed typed adapter methods and reject client-added tool/binding
+selectors; fixture binding labels remain descriptive and grant no authority.
+Ajv is not imported by the Canvas entrypoint. A clean Canvas build produced the
+same 416,292-byte HTML resource and SHA-256
+`fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852` after
+adding the test dependency. The local browser harness uses a test-only hash CSP
+and simulated host; Axe checks disable color-contrast, and neither is a
+production-host or ChatGPT acceptance claim.
+
 The Actions Core public `mcp.tool` and `mcp.resource` decorators accept `meta=`
 as a detached JSON object, bounded to 64 KiB and 16 nesting levels. They reject
 non-JSON values and validate the stable MCP Apps `ui.resourceUri`, `ui.visibility`

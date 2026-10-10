@@ -6,6 +6,8 @@ on:
       - "community"
     paths:
       - "action_server/frontend/**"
+      - "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py"
+      - "docs/contracts/canvas/fixtures/**"
       - ".github/workflows/action_server_frontend_tests.yml"
 
 permissions:
@@ -25,9 +27,26 @@ jobs:
         with:
           node-version: 20.x
 
-      - name: Run Tests
+      - name: Use Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Install frontend and fixture-bridge dependencies
         run: |
           npm ci
+          python -m pip install "pytest==8.4.2" "jsonschema==4.26.0"
+
+      - name: Run required Python-TypeScript fixture round trip
+        run: >-
+          python -m pytest -p no:cacheprovider -p no:robocorp_log_pytest
+          --confcutdir=../tests/action_server_tests
+          ../tests/action_server_tests/test_canvas_query_results_fixture.py -q
+        env:
+          ACTIONS_CANVAS_REQUIRE_ROUNDTRIP: "1"
+
+      - name: Run frontend tests
+        run: |
           npm run build:runtime
           npm run build:canvas
           npm test
