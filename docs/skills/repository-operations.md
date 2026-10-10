@@ -1375,6 +1375,22 @@ and child cleanup; manager-stop failures are logged and isolated so they do
 not replace the body exception or skip later cleanup. Failed child enumeration
 logs and treats the child set as empty.
 
+#### TLS and loopback regression
+
+Tunnel verification uses certificate verification, checks the local Runtime
+identity before probing MCP, confirms MCP authentication rejects an unauthenticated
+initialize request, and then performs an authenticated initialize. Keep the
+loopback regression test's untrusted-CA rejection and authenticated request checks
+intact. Self-signed loopback certificates identify `localhost` in their subject
+alternative names; if the machine hostname exceeds X.509's 64-character common-name
+limit, use `localhost` for the common name while retaining the full hostname in the
+SAN. Let Uvicorn create and own the test's ephemeral listener and read its assigned
+port after startup. A Windows teardown timeout was observed after the expected
+untrusted-CA handshake failure while the test used an externally-created listener.
+The owned-listener topology keeps socket ownership within Uvicorn and simplifies
+fixture lifecycle; whether it resolves the Windows failure remains unverified until
+the test passes on a native Windows runner.
+
 For authenticated legacy `action-server start --expose`, the public URL is logged
 only after a public `/config` response reports authentication enabled and the
 same `mtime_uuid` as the in-memory Runtime, an unauthenticated MCP initialize is
