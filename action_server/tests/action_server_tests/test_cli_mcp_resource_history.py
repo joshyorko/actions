@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import os
+import sys
+import threading
 from pathlib import Path
 from typing import Literal, TypedDict, TypeGuard
 
@@ -407,6 +409,111 @@ def _stop(process: ActionServerProcess, client: httpx.Client) -> None:
         sleep=0.05,
     )
     assert process.process.returncode == 1
+
+
+def test_action_server_start_timeout_reaps_child_and_output_readers(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from actions.server._robo_utils import process as process_module
+
+    base_process = process_module.Process
+
+    class SleepingProcess(base_process):
+        def __init__(self, _args, cwd=None, env=None):
+            super().__init__(
+                [sys.executable, "-c", "import time; time.sleep(60)"],
+                cwd=cwd,
+                env=env,
+            )
+
+    monkeypatch.setattr(process_module, "Process", SleepingProcess)
+    existing_threads = {thread.ident for thread in threading.enumerate()}
+    server = ActionServerProcess(tmp_path)
+    with pytest.raises(TimeoutError) as startup_failure:
+        server.start(timeout=0)
+
+    process = server.process
+    readers = getattr(process, "_reader_threads", None)
+    if readers is None:
+        readers = [
+            thread
+            for thread in threading.enumerate()
+            if thread.ident not in existing_threads
+            and thread.name in {"stream_reader_stdout", "stream_reader_stderr"}
+        ]
+    try:
+        assert process.returncode is not None, (
+            "startup timeout left its child running; "
+            f"cleanup notes={getattr(startup_failure.value, '__notes__', [])}"
+        )
+        assert len(readers) == 2
+        assert all(
+            not reader.is_alive() for reader in readers
+        ), "startup timeout left output reader threads running"
+    finally:
+        # Keep a failing red run bounded and free of leaked child processes.
+        if process.returncode is None:
+            process.stop()
+            process.join()
+        for reader in readers:
+            reader.join(timeout=1)
+
+
+def test_action_server_start_preserves_error_when_cleanup_raises(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from actions.server._robo_utils import process as process_module
+
+    base_process = process_module.Process
+
+    class CleanupFailureProcess(base_process):
+        def __init__(self, _args, cwd=None, env=None):
+            super().__init__(
+                [sys.executable, "-c", "import time; time.sleep(60)"],
+                cwd=cwd,
+                env=env,
+            )
+
+        def _stop_and_reap_until(self, _deadline):
+            raise RuntimeError("synthetic cleanup failure")
+
+    monkeypatch.setattr(process_module, "Process", CleanupFailureProcess)
+    server = ActionServerProcess(tmp_path)
+    with pytest.raises(TimeoutError) as startup_failure:
+        server.start(timeout=0)
+
+    process = server.process
+    try:
+        assert "synthetic cleanup failure" in " ".join(
+            getattr(startup_failure.value, "__notes__", [])
+        )
+    finally:
+        # Cleanup failure must not replace the startup error or leak the child.
+        if process.returncode is None:
+            process.stop()
+            process.join()
+        for reader in process._reader_threads:
+            reader.join(timeout=1)
+
+
+def test_action_server_start_failure_before_spawn_keeps_original_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from actions.server._robo_utils import process as process_module
+
+    base_process = process_module.Process
+
+    class SpawnFailureProcess(base_process):
+        def start(self, *args, **kwargs):
+            raise OSError("synthetic spawn failure")
+
+    monkeypatch.setattr(process_module, "Process", SpawnFailureProcess)
+    server = ActionServerProcess(tmp_path)
+    with pytest.raises(OSError, match="synthetic spawn failure"):
+        server.start(timeout=0)
+
+    assert server.process._proc is None
+    assert server.process._reader_threads == []
 
 
 @pytest.mark.integration_test

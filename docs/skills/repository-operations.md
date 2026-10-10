@@ -2139,6 +2139,14 @@ native-platform lifecycle proof is implied. Tests for the protocol boundary
 are in `test_preload_actions_exit.py` and
 `test_rcc_runtime_adapter.py`.
 
+`ActionServerProcess.start()` owns the spawned test child and its stdout/stderr
+reader threads before readiness is established. Keep post-spawn startup work
+inside a failure-cleanup boundary: terminate and reap the owned process tree,
+then join its registered readers within one finite deadline, while re-raising
+the original startup exception if cleanup fails. Successful startup behavior
+and its readiness timeout remain unchanged; the synthetic timeout contract in
+`test_cli_mcp_resource_history.py` proves the owned child and both readers stop.
+
 The socketpair test that fills a send buffer is a kernel-buffer behavior check:
 it runs on POSIX runners and is skipped on Windows, where the same payload may
 not saturate the pair. Keep a deterministic `socket.timeout` test on all

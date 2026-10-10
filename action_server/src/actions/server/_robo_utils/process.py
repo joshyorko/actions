@@ -7,11 +7,16 @@ import os
 import subprocess
 import sys
 import threading
+import time
 from pathlib import Path
 from typing import Dict, List, Optional, Protocol, Union
 
 # Note: keep this import for backward compatibility
-from actions.server._common.process import kill_process_and_subprocesses
+from actions.server._common.process import (
+    ProcessTreeCleanupResult,
+    force_kill_process_tree_until,
+    kill_process_and_subprocesses,
+)
 from actions.server._common.process_logging import redact_sensitive_arguments
 from actions.server._preload_actions.preload_actions_autoexit import is_process_alive
 
@@ -36,7 +41,7 @@ def _stream_reader(stream, on_output):
         log.error("Error reading stream: %s", e)
 
 
-def _start_reader_threads(process, on_stdout, on_stderr):
+def _start_reader_threads(process, on_stdout, on_stderr, on_thread_created=None):
     threads = []
     if on_stdout is not None:
         threads.append(
@@ -57,6 +62,8 @@ def _start_reader_threads(process, on_stdout, on_stderr):
         )
 
     for t in threads:
+        if on_thread_created is not None:
+            on_thread_created(t)
         t.start()
 
 
@@ -74,6 +81,7 @@ class Process:
         self._cwd = cwd or Path.cwd()
         self._env = {**os.environ, **(env or {})}
         self._proc: Optional[subprocess.Popen] = None
+        self._reader_threads: list[threading.Thread] = []
         self.on_stderr = Callback()
         self.on_stdout = Callback()
 
@@ -122,7 +130,37 @@ class Process:
         on_stderr = None
         if read_stderr:
             on_stderr = self._on_stderr
-        _start_reader_threads(self._proc, on_stdout, on_stderr)
+        self._reader_threads = []
+        _start_reader_threads(
+            self._proc, on_stdout, on_stderr, self._reader_threads.append
+        )
+
+    def _stop_and_reap_until(
+        self, deadline: float
+    ) -> tuple[Optional[ProcessTreeCleanupResult], tuple[str, ...]]:
+        """Stop a child tree and join its output readers before a deadline."""
+        cleanup_result = None
+        cleanup_error = None
+        try:
+            if self._proc is not None:
+                # Preserve the final two seconds for pipe readers to observe EOF
+                # and exit after the wrapper and its descendants have stopped.
+                tree_deadline = max(time.monotonic(), deadline - 2.0)
+                cleanup_result = force_kill_process_tree_until(
+                    self._proc, None, tree_deadline
+                )
+        except BaseException as exc:
+            cleanup_error = exc
+        finally:
+            for reader in self._reader_threads:
+                if reader.ident is not None:
+                    reader.join(timeout=max(0.0, deadline - time.monotonic()))
+        active_readers = tuple(
+            reader.name for reader in self._reader_threads if reader.is_alive()
+        )
+        if cleanup_error is not None:
+            raise cleanup_error
+        return cleanup_result, active_readers
 
     def _on_stderr(self, line):
         if len(self.on_stderr) > 0:
