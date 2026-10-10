@@ -8,10 +8,15 @@ an Actions Runtime release.
 
 ## Unreleased
 
+Runtime 1.0.3 remains an unpublished source candidate. Preparing its tag-
+matching notes does not establish release approval, a tag, or published
+artifacts.
+
 Candidate acceptance and downstream handoff remain tracked separately from the
-versioned release notes. Issue [#134](https://github.com/joshyorko/actions/issues/134)
-still requires its provider-backed offline-warm RCC acceptance; a selected-
-provider 503-before-execution check does not establish warm reuse. Issue
+versioned release notes. Prepublication acceptance gates remain open: issue
+[#134](https://github.com/joshyorko/actions/issues/134) still requires its
+provider-backed offline-warm RCC acceptance; a selected-provider
+503-before-execution check does not establish warm reuse. Issue
 [#153](https://github.com/joshyorko/actions/issues/153) still requires its
 real-browser security acceptance. Issue
 [#211](https://github.com/joshyorko/actions/issues/211) covers post-publication

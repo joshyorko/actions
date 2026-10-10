@@ -211,6 +211,7 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     assert release_input["changelog_file"] == (
         "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md"
     )
+    assert release_input.get("changelog_heading", "h2") == "h2"
     assert not release_input.get("release_text")
     assert '"release_text"' not in release_generator
     assert headings.count(tag) == 1
