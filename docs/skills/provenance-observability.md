@@ -145,6 +145,47 @@ worker readiness, cache/provider health, correlated failures/evidence/logs,
 disk/GC state, and a redaction manifest. It rejects archive traversal,
 absolute paths, symlinks, duplicate names, and oversized members.
 
+## Private common Run-output boundary
+
+`actions.server.run_outputs` keeps the existing `Run.status` and `Run.result`
+authoritative. Migration 15 adds normalized admission pins, Attempts, outputs,
+Workspace records and exact persisted grants. Trusted control-plane registration
+pins Deployment, Package Revision, Capability, Runtime Plan, worker, policy,
+provider and schema references and checks the actual Action/Package identity.
+Registration is not compiler admission or proof of provider authenticity. Actor
+IDs must come from trusted authentication; a UUID or the legacy global API key
+does not grant Workspace access.
+
+Admission rechecks execute access and immutable request/idempotency identity.
+Publication uses DB time and the current owner/Attempt/epoch/live-lease/cancel
+predicate, then commits terminal Run status/result and final output attachments
+in one transaction. Exact terminal replay is reauthorized; changed input or
+result rejects. Provider sealing precedes this commit and may leave a sealed,
+non-authoritative orphan after rollback. Expired-owner recovery requires an
+explicit trusted operator receipt; the service does not retry external effects
+automatically or prove those effects were undone.
+
+An `art_` handle encodes only the generated output UUID. Resolution requires the
+expected Workspace, a DB-backed Run/output attachment and current persisted
+Deployment read access before provider access. The handle is neither a bearer
+grant nor a provider path/key. Grant revocation affects future resolutions;
+an already authorized descriptor stream retains its read authority. Legacy
+Run lists, details, request-ID lookup, notifications, manifest fallback,
+artifact APIs and analytics exclude pinned Runs rather than infer public
+Workspace authorization.
+
+The private filesystem provider requires Linux descriptor features and trusted
+kernel procfs, borrows a verified service-owned root FD, and measures/seals actual
+bounded bytes. It rejects special objects through an O_PATH pin before any
+read-capable open. Its root must be separate from legacy artifact/static mounts.
+It is not a hostile-tree snapshot, public HTTP Range/HEAD service or Windows
+runtime implementation. Initial bounds are 256 KiB inputs, 1 MiB result envelope,
+64 output records per Run (including aborted records), 64 MiB per object,
+64 KiB chunks, leases up to one hour and retention up to one year. Full quotas,
+GC, output-secret policy, compiler/provider admission, production actor/provider
+wiring, adapters and Canvas transport remain separate gates; this private slice
+does not accept whole #83/#86/#129/#127.
+
 ## Verification matrix
 
 Platform-neutral CLI checks such as `--help` and refusal to overwrite an existing

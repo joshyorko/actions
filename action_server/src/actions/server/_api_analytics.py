@@ -125,6 +125,7 @@ def get_analytics_summary() -> AnalyticsSummary:
                         ELSE 0
                     END) as runs_today
                 FROM run
+                WHERE NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)
                 """.format(today_expression=today_expression),
                 [
                     RunStatus.PASSED,
@@ -176,6 +177,7 @@ def get_runs_by_day(days: int = 30) -> List[RunsByDay]:
                     SUM(CASE WHEN status = ? THEN 1 ELSE 0 END) as failed
                 FROM run
                 WHERE {start_time_expression} >= {cutoff_expression}
+                AND NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)
                 GROUP BY {date_expression}
                 ORDER BY run_date ASC
                 """.format(
@@ -226,6 +228,7 @@ def get_runs_by_action() -> List[RunsByAction]:
                 FROM run r
                 JOIN action a ON r.action_id = a.id
                 JOIN action_package ap ON a.action_package_id = ap.id
+                WHERE NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=r.id)
                 GROUP BY a.id, a.name, ap.name
                 ORDER BY total DESC
                 """,

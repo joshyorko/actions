@@ -453,6 +453,7 @@ def run_status_to_str(run_status: int) -> str:
 
 def get_all_model_classes():
     from actions.server.migrations import Migration
+    from actions.server.run_outputs.models import MODEL_CLASSES
 
     return [
         Migration,
@@ -471,6 +472,7 @@ def get_all_model_classes():
         ScheduleExecution,
         Trigger,
         TriggerInvocation,
+        *MODEL_CLASSES,
     ]
 
 

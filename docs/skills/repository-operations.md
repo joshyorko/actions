@@ -2837,3 +2837,43 @@ source-mode tests. In frozen catalog workflow run 38037036032, `inv devinstall`
 completed its Poetry install, but the subsequent `poetry run pytest` returned
 `Command not found: pytest`; the workflow now checks the selected pytest module
 and interpreter before execution.
+
+
+## Common Run-output migration and verification
+
+The private common Run-output service depends on migration 15, stacked after
+the MCP ownership and routing-history migrations 13/14. Register every model
+through `get_all_model_classes()` in fixtures that exercise Run reads or updates;
+partial custom schemas must include the normalized Run models. Missing tables
+fail closed and must not trigger a legacy authorization fallback. Upgrading
+creates no synthetic pins or grants for historical Runs and preserves their
+status, result, inputs and artifact directory.
+
+Use independent processes to verify claim and conflicting terminal publication,
+and a real connection commit failure to verify rollback. SQLite must acquire
+its writer before reading the Run pin: a deferred read followed by a write can
+deadlock two interprocess lock upgrades even with an in-process Python lock.
+Run claim/resolve/publication uses the existing installation counter lock first
+on SQLite and Workspace row locks on PostgreSQL. Registration and numbered
+admission both take Counter before Workspace on either backend; reversing
+those two locks creates a PostgreSQL registration/admission deadlock cycle. Lease
+and retention milliseconds use decimal TEXT with BIGINT casts rather than the
+facade's PostgreSQL INTEGER mapping. PostgreSQL behavior requires an actual
+backend receipt; SQLite results do not establish it.
+
+The service rejects mutable raw-bind `Database.verbose` diagnostics instead of
+disabling global logging. It sanitizes SQL body errors before the Database
+transaction logs rollback, while preserving nonsensitive commit exception
+types. Verify both actual caplog and exception traceback with private-input or
+result sentinels. This is a narrow SQL-bind boundary, not general output or
+provider diagnostic redaction. Linux-only filesystem proofs skip elsewhere,
+while configured Linux/Windows/macOS type checks still apply. Required flags
+and callable capabilities use strict getters with no weaker fallback.
+
+Before exposing scoped Runs, audit every legacy SQL read, cache update, websocket
+subscription, request-ID lookup, artifact/manifest fallback and analytics query.
+Those paths exclude pins; the private resolver supplies current scoped access
+checks. Keep provider roots outside legacy/static serving, and do not treat the
+existing global API token or a typed reference as a Workspace grant. Native,
+public authenticated transport, HTTP Range/HEAD, Windows provider and complete
+multi-adapter lifecycle acceptance need their own measured gates.
