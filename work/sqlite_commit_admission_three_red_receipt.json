@@ -1,0 +1,35 @@
+{
+  "command": [
+    "/workspace/actions/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "--noconftest",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-p",
+    "no:cacheprovider",
+    "-q",
+    "-s",
+    "action_server/tests/action_server_tests/test_sqlite_commit_admission.py"
+  ],
+  "cwd": "/workspace/work/community-resume/runtime-wrapper-exit-code",
+  "returncode": 1,
+  "module_bindings": {
+    "actions.server._database": {
+      "path": "/workspace/work/community-resume/workitems-ci/action_server/src/actions/server/_database.py",
+      "sha256": "267578997e40a32b70cd84814fe321ae72eefcd8eb722e9b65274ee48e21054b"
+    },
+    "actions.server._actions_import": {
+      "path": "/workspace/work/community-resume/workitems-ci/action_server/src/actions/server/_actions_import.py",
+      "sha256": "7649cbfcaea4d32e7e45d285c698afd70cc697592eb9d30cafb446f3bcafb6f9"
+    },
+    "actions.server._api_action_routes": {
+      "path": "/workspace/work/community-resume/workitems-ci/action_server/src/actions/server/_api_action_routes.py",
+      "sha256": "b77948419ebd88a8abc42fb26d01a6defbede5e4bd6ed7d7e5160c248fda484a"
+    }
+  },
+  "modules_unchanged_during_run": true,
+  "test_sha256": "3e2747638fb7bbf7918f7d1850d22cafb1e5584544c74daea6bff3e4b641e672",
+  "log_sha256": "8f9c36b906071bf5db8011b20fc8c4a6078a8164e31b211dd6706274e9db8a79",
+  "scope": "real same SQLite connection; batch metadata collection and route preparation mocked; no RCC/native/server integration claim"
+}
