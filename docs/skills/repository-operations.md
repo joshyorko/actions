@@ -60,6 +60,14 @@ view/result lifecycle works, or a packaged Runtime release accepts it.
 
 ## Core and Runtime compatibility
 
+Actions Core pull requests run a non-publishing candidate-wheel gate on Ubuntu
+with the release-pinned Python 3.10 and Poetry 2.1.1 toolchain. It synchronizes
+the locked environment, builds the wheel and source archive, checks the exact
+artifact inventory and Twine metadata, then installs the wheel in a fresh
+environment and verifies the public API from outside the source tree. This is
+prepublication candidate evidence only: it does not prove that PyPI serves
+these bytes. Publication remains confined to the separately gated tag release.
+
 Core 1.0.1 does not contain `ActionContext`, `ActionsListActionTypedDict` or
 `actions.server_integration`; published Core 1.0.2 contains these public
 contracts. A Runtime importing them declares `actions-core ^1.0.2` in production
