@@ -1,0 +1,27 @@
+Read-only hosted CI failure receipt — PR301 Windows devmode
+Captured: 2026-10-10 17:56:30 UTC
+Repository: joshyorko/actions
+PR: 301
+Head: 37283a400be9448b378eaf5caa9ff1e718a95d24
+Base: integration/community-release-20261008 @ f18058b6c614d065fe821d98b0039f1db736e5cb
+Workflow run: 38072443699
+Job: 114272472223 (build / windows-py3.12-devmode)
+Job conclusion: failure
+
+Sanitized failure excerpt:
+- Source/test: action_server/tests/action_server_tests/test_rcc_runtime_adapter.py::test_retirement_lock_wait_uses_caller_deadline, line 1325
+- Assertion: `time.monotonic() - started < 0.25`
+- Observed value: `time.monotonic() - started = 0.625`
+- Summary: 1 failed, 984 passed, 94 skipped, 14 warnings in 326.69s (0:05:26)
+- The same test had an earlier failure excerpt at 17:52:24Z and final pytest summary at 17:53:07Z. Windows job exited code 1.
+- Other exact-head matrix state at capture: Ubuntu devmode passed; macOS devmode was still in progress. Frontend round-trip job 114272471983 passed separately (see `pr301-frontend-roundtrip-run38072443699-job114272471983-20261010T1749Z.txt`).
+
+Scope: deterministic Windows test failure in caller-deadline timing assertion. Does not establish a production timeout defect by itself; no production timeout change is authorized by this receipt. Root assigned a bounded test-fixture correction. No rerun or mutation was performed.
+
+Documentation improvement:
+- Canonical file changed or proposed: docs/skills/repository-operations.md (already updated on the reviewed PR301 trigger patch).
+- Durable learning captured: integration-target PRs must schedule the frontend workflow; bridge skips are not evidence. This Windows timing result is test evidence, not a basis for production timeout claims.
+- Evidence: exact run/job/head and bounded excerpt above; frontend round-trip receipt cited above.
+- Stale or ambiguous guidance removed: none proposed from this failure.
+- Remaining uncertainty: behavior after the assigned fixture correction; live browser/ChatGPT acceptance remains NOT RUN.
+Upstream disposition: none; no upstream defect identified.

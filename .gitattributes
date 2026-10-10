@@ -15,6 +15,9 @@ docs/program/evidence/canvas-execution-graph-amendment-20261009-v* -text
 docs/program/evidence/devsy-convergence-20261010/** -text
 # Amendment pointers and receipts are checked byte-for-byte by their recorded digests.
 docs/program/evidence/program-amendment-20261010T*.json -text
+# Current PR audit payloads are also hash-bound by their dated amendments.
+docs/program/evidence/current-open-pr-audit-20261010T1753Z/** -text
+docs/program/evidence/current-open-pr-audit-20261010T1758Z/** -text
 docs/program/evidence/devsy-current-slice-status-20261010T0514Z.json -text
 docs/program/evidence/mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json -text
 docs/program/evidence/cas-dispatch-20261010T0500Z.json -text

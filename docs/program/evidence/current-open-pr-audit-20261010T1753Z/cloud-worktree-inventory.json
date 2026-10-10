@@ -1,0 +1,929 @@
+{
+  "ignored_files_included": false,
+  "observed_at_utc": "2026-10-10T17:51:14Z",
+  "source": "git worktree list --porcelain; per-worktree git status --porcelain=v1 -z",
+  "status_errors": 0,
+  "with_unfinished_paths": 10,
+  "worktree_count": 99,
+  "worktrees": [
+    {
+      "HEAD": "7c98236069171f57031218f938963238986293bd",
+      "branch": "refs/heads/work",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/actions"
+    },
+    {
+      "HEAD": "2293b1a9490e3d3e846651803b68300319a3e1a3",
+      "detached": "",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/dev/shm/root-pr301-ci-trigger-20261010"
+    },
+    {
+      "HEAD": "082691e0c7fc646fd0d8a142ffcaea82b950bec7",
+      "branch": "refs/heads/test/windows-alias-history-startup-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/alias-history-startup-20261010"
+    },
+    {
+      "HEAD": "4587271c87f21d52985be67ffe60a46a0b96a01c",
+      "branch": "refs/heads/feat/canvas-template-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/canvas-template-20261010"
+    },
+    {
+      "HEAD": "401d9dde38812bcff2de2d57311adf5c02f239e7",
+      "branch": "refs/heads/fix/dakota-native-core-wheel-version-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/dakota-core-wheel-version-20261010"
+    },
+    {
+      "HEAD": "66b68325435b300bc04f338e6bdf97f5a479b890",
+      "branch": "refs/heads/feat/deployment-values-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/deployment-values-20261010"
+    },
+    {
+      "HEAD": "4c4f2daa94370118a29cccb2a05c48c23a0e6a9e",
+      "branch": "refs/heads/review/deployment-values-ci-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/deployment-values-ci-20261010"
+    },
+    {
+      "HEAD": "ab189865167336035ed311910055ea08403ac37f",
+      "branch": "refs/heads/fix/deployment-values-ci-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/deployment-values-ci-fix-20261010"
+    },
+    {
+      "HEAD": "1e4493bf339bb910fd4e886dcc33f5bb67e02f51",
+      "branch": "refs/heads/test/frozen-catalog-rollback-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/frozen-catalog-rollback-20261010"
+    },
+    {
+      "HEAD": "5514911b9b854670d2a3af41bf035f6d30cc2641",
+      "branch": "refs/heads/test/frozen-control-a47-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/frozen-control-a47-20261010"
+    },
+    {
+      "HEAD": "4c37fb7aa5414c0c64df530e1ed3b969881cdf04",
+      "branch": "refs/heads/test/frozen-control-resource-history-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/frozen-control-resource-history-20261010"
+    },
+    {
+      "HEAD": "822e21d526d9e2144a6c1c3f44f82a278e069099",
+      "branch": "refs/heads/test/frozen-generation-drain-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/frozen-generation-drain-20261010"
+    },
+    {
+      "HEAD": "85d144b6364db0ea833fd5d9bf497baa3b5bd881",
+      "branch": "refs/heads/fix/mcp-alias-commit-compensation-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/mcp-alias-compensation-20261010"
+    },
+    {
+      "HEAD": "571e555612412fc1ba4c7f49eb360c286bf8bfc0",
+      "branch": "refs/heads/test/mcp-alias-frozen-control-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/mcp-alias-identity-20261010"
+    },
+    {
+      "HEAD": "444349e576e52ed5164e71e6e2843f65fb4f530f",
+      "branch": "refs/heads/fix/mcp-resource-routing-history-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/mcp-resource-history-20261010"
+    },
+    {
+      "HEAD": "2334e8fab49e9696a3149cd815f8a2090f4bc315",
+      "branch": "refs/heads/test/mcp-resource-history-cli-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/mcp-resource-history-cli-20261010"
+    },
+    {
+      "HEAD": "af36a46df41caa9676b6a0968c5e60a59bf8f9c9",
+      "branch": "refs/heads/test/p0-generation-drain-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/p0-generation-drain-20261010"
+    },
+    {
+      "HEAD": "ddcccb9d3eb04e438b0e4aa576be9068b7703b1c",
+      "branch": "refs/heads/test/package-rename-owner-protection-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/package-rename-owner-protection-20261010"
+    },
+    {
+      "HEAD": "bc4740a642527aa2fa0f368900ff55f5a21c9550",
+      "branch": "refs/heads/fix/parallel-system-mutex-test-names-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/parallel-system-mutex-test-names-20261010"
+    },
+    {
+      "HEAD": "5d06c0d7d8bdb242247f71f23bc0889b770cb48a",
+      "branch": "refs/heads/fix/rcc-proof-tests-portability-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/rcc-control-portability-20261010"
+    },
+    {
+      "HEAD": "43b800f0dc8b763da16189b7fce8df35d53f1c07",
+      "branch": "refs/heads/test/rcc-provider-rollback-hosted-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/rcc-provider-ci-20261010"
+    },
+    {
+      "HEAD": "e94882cde4f5688885b35c77a18e78d317242ad3",
+      "branch": "refs/heads/fix/rcc-published-artifact-details-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/rcc-published-artifact-details-20261010"
+    },
+    {
+      "HEAD": "473e42ec8f7a9f3fed623efc135b550ac3c08190",
+      "branch": "refs/heads/test/rcc-published-details-control-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": ".github/workflows/_gen_workflows.py",
+          "status": " M"
+        }
+      ],
+      "worktree": "/tmp/work/actions-worktrees/rcc-published-details-control-20261010"
+    },
+    {
+      "HEAD": "c931b31f7b258e3eec93369c4c5cd64885d0e5b6",
+      "branch": "refs/heads/feat/shared-run-output-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/shared-run-output-20261010"
+    },
+    {
+      "HEAD": "4a2d3cdd5cd81d7fe61e2691e86e8b27698d54a3",
+      "branch": "refs/heads/integration/shared-run-output-reviewed-292-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/shared-run-output-integration-20261010"
+    },
+    {
+      "HEAD": "ddac2b72977ab05ef784bf38ffab60abd4f3268f",
+      "branch": "refs/heads/feat/source-confined-read-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/source-confined-read-20261010"
+    },
+    {
+      "HEAD": "e5f4405017d29647c19fa43e909678c56de9be13",
+      "branch": "refs/heads/feat/portable-source-policy-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/source-policy-20261010"
+    },
+    {
+      "HEAD": "633f5de99c4e6f26664566699222cde1e9f97509",
+      "branch": "refs/heads/fix/windows-sqlite-path-url-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/actions-worktrees/windows-sqlite-path-url-20261010"
+    },
+    {
+      "HEAD": "13db7030416f7b64f9a577b800a629549e23903e",
+      "branch": "refs/heads/test/canvas-runtime-bridge-acceptance-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/canvas-runtime-bridge"
+    },
+    {
+      "HEAD": "508175cb2f07243f2bd337965fc9a612b87d193d",
+      "branch": "refs/heads/test/p0-mcp-catalog-rollback-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/p0-mcp-catalog-rollback"
+    },
+    {
+      "HEAD": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+      "branch": "refs/heads/test/p0-mcp-catalog-rollback-baseline-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+          "status": "??"
+        }
+      ],
+      "worktree": "/tmp/work/p0-mcp-catalog-rollback-baseline"
+    },
+    {
+      "HEAD": "14510a8aa9dc8d96a448f3cae8d79223cb7feb17",
+      "branch": "refs/heads/fix/runtime-log-credentials-test-xdist-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/tmp/work/runtime-log-credentials"
+    },
+    {
+      "HEAD": "d0285027cec5367601aa524f6bc42d101d017b3d",
+      "branch": "refs/heads/review/p0-snapshot-reload-sol",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": "action_server/src/actions/server/_action_package_handler.py",
+          "status": " M"
+        },
+        {
+          "path": "action_server/src/actions/server/_actions_import.py",
+          "status": " M"
+        },
+        {
+          "path": "action_server/src/actions/server/_api_action_routes.py",
+          "status": " M"
+        },
+        {
+          "path": "action_server/src/actions/server/_cli_impl.py",
+          "status": " M"
+        },
+        {
+          "path": "action_server/src/actions/server/_database.py",
+          "status": " M"
+        },
+        {
+          "path": "action_server/src/actions/server/_server.py",
+          "status": " M"
+        },
+        {
+          "path": "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+          "status": " M"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+          "status": " M"
+        },
+        {
+          "path": "work/",
+          "status": "??"
+        }
+      ],
+      "worktree": "/tmp/work/sol-p0-snapshot-review"
+    },
+    {
+      "HEAD": "84124f240aa3a464d4c7a4336be80bb4288c8336",
+      "branch": "refs/heads/release/actions-core-1.0.3-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/core-1.0.3-20261010"
+    },
+    {
+      "HEAD": "4c750c7b8416c655784d103cc0a78fc7421b7f64",
+      "branch": "refs/heads/test/frontend-update-benchmark-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/frontend-update-benchmark-20261010"
+    },
+    {
+      "HEAD": "a35a8ab436c4ac90f033acb0b9cca4459ab508cd",
+      "branch": "refs/heads/fix/pr282-owned-process-timeout-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/pr282-owned-process-timeout-20261010"
+    },
+    {
+      "HEAD": "588918b0a63966ebc275393f15acc5aec6476cf3",
+      "branch": "refs/heads/integration/pr290-controls-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/pr290-convergence-20261010"
+    },
+    {
+      "HEAD": "49bf5b4b01490c7a553bbadb3cb4c0b9be08daa1",
+      "branch": "refs/heads/fix/pr290-windows-contract-tests-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/pr290-windows-contract-tests-20261010"
+    },
+    {
+      "HEAD": "da56d4cb6729143e8d61a966f3aef0c428146091",
+      "branch": "refs/heads/fix/pr299-legacy-artifact-fixture-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/pr299-legacy-artifact-fixture-20261010"
+    },
+    {
+      "HEAD": "f984e03359bdd88a51365effc260965f4ab02931",
+      "branch": "refs/heads/feat/shared-output-transport-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/shared-output-transport-20261010"
+    },
+    {
+      "HEAD": "aaa103c43d0180ec7b4fdd4047e13d0eb8324808",
+      "branch": "refs/heads/feat/source-confined-staging-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/source-confined-staging-20261010"
+    },
+    {
+      "HEAD": "dcf916e10919915d6e20b9c611cb0196e14ec4aa",
+      "branch": "refs/heads/feat/staged-rcc-consumer-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/actions-worktrees/staged-rcc-consumer-20261010"
+    },
+    {
+      "HEAD": "ca76d62ab206c9095d47384407ebb85821f02e73",
+      "branch": "refs/heads/feat/canvas-100b-typescript-roundtrip-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/canvas-100b-typescript-roundtrip-20261010"
+    },
+    {
+      "HEAD": "e032e95d38c91aead08d30b42ec7620b8ea726a4",
+      "branch": "refs/heads/integration/cloud-convergence-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/admission"
+    },
+    {
+      "HEAD": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "branch": "refs/heads/docs/api-source-links-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/api-doc-source-links"
+    },
+    {
+      "HEAD": "653e1dc9597a120a4b3a7a21645f8a1e731c6695",
+      "branch": "refs/heads/fix/windows-artifact-binding-lock-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/artifact-lock-portability"
+    },
+    {
+      "HEAD": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "branch": "refs/heads/feature/issue-100a-public-mcp-app-authoring-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/canvas-authoring"
+    },
+    {
+      "HEAD": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "branch": "refs/heads/docs/issue-100-authoring-decision-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/canvas-decision"
+    },
+    {
+      "HEAD": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+      "branch": "refs/heads/test/issue-100b-fixture-roundtrip-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/canvas-fixture-python"
+    },
+    {
+      "HEAD": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+      "branch": "refs/heads/feature/issue-99a-query-renderer-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/canvas-renderer"
+    },
+    {
+      "HEAD": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "branch": "refs/heads/integration/community-release-20261008",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/convergence"
+    },
+    {
+      "HEAD": "1abafea4e08766a71a4f4fe8173101af1e368428",
+      "branch": "refs/heads/release/http-helper-credential-check-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/credential-check"
+    },
+    {
+      "HEAD": "57399b60496b98fea020f26e576d47bcb0d440bf",
+      "branch": "refs/heads/docs/upstream-reporting-policy-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/deployment-admission"
+    },
+    {
+      "HEAD": "65bbc11f2d1ea9a3521d3af5ee908f151861cf25",
+      "branch": "refs/heads/review/design-checkpoints-20261008",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/design-checkpoint-refresh"
+    },
+    {
+      "HEAD": "96da42fcfbb62f98f31ec11ab8871b55da422c05",
+      "branch": "refs/heads/fix/frozen-parent-pid-test-topology-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/frozen-parent-pid"
+    },
+    {
+      "HEAD": "063dd7d2bb243d443d2187f04e2a75a95bb084f4",
+      "branch": "refs/heads/resume/community-evidence-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/governance"
+    },
+    {
+      "HEAD": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "branch": "refs/heads/resume/community-blockers-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/integration"
+    },
+    {
+      "HEAD": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
+      "branch": "refs/heads/fix/retire-robocorp-cloud-gate-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/legacy-cloud-gate"
+    },
+    {
+      "HEAD": "553e20c45d7e5f49ac71876c97a35579acb33c73",
+      "branch": "refs/heads/fix/list-templates-contract-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/list-templates-contract"
+    },
+    {
+      "HEAD": "d506a53f12c231bcc5902b6562c3de2c7ca6591f",
+      "branch": "refs/heads/fix/mcp-colliding-action-names-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/mcp-colliding-action-names"
+    },
+    {
+      "HEAD": "961a813d34c39dc6b3820420f83268c0e708f319",
+      "branch": "refs/heads/fix/core-overload-format-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/mcp-metadata-lint-fix"
+    },
+    {
+      "HEAD": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "branch": "refs/heads/test/mcp-v2-showcase-protocol-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/mcp-showcase-proof"
+    },
+    {
+      "HEAD": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "branch": "refs/heads/feature/mcp-v2-showcase-template-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/mcp-showcase-template"
+    },
+    {
+      "HEAD": "a63f714baf6bedb22dbadb65017c0a0a658e892e",
+      "branch": "refs/heads/devsy/native-auth-acceptance-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": "work/",
+          "status": "??"
+        }
+      ],
+      "worktree": "/workspace/work/community-resume/native-auth-proof"
+    },
+    {
+      "HEAD": "7501198b3cbd834a79c132d398abb5e05c852582",
+      "branch": "refs/heads/release/package-credential-availability-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/package-credential-check"
+    },
+    {
+      "HEAD": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "branch": "refs/heads/resume/rcc-review-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": "work/",
+          "status": "??"
+        }
+      ],
+      "worktree": "/workspace/work/community-resume/rcc"
+    },
+    {
+      "HEAD": "6a53578fac029a0696834c30438c858f5f0003be",
+      "branch": "refs/heads/integration/runtime-release-final-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/release-final"
+    },
+    {
+      "HEAD": "b690b262c564ed9f085e2df3863af500ff29fddf",
+      "branch": "refs/heads/resume/robot-native-gates-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/robot"
+    },
+    {
+      "HEAD": "72a60344c40e6f153dab0f71b30b073e9b259226",
+      "branch": "refs/heads/repair/robot-cleanup-ownership-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/robot-cleanup"
+    },
+    {
+      "HEAD": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "branch": "refs/heads/test/robot-filesystem-identity-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/robot-filesystem-identity"
+    },
+    {
+      "HEAD": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
+      "branch": "refs/heads/test/robot-package-yaml-admission-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/robot-final-copy"
+    },
+    {
+      "HEAD": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "branch": "refs/heads/repair/robot-private-staging-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/robot-staging"
+    },
+    {
+      "HEAD": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "detached": "",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/runtime-combined-validation"
+    },
+    {
+      "HEAD": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "branch": "refs/heads/release/runtime-registry-compatibility-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/runtime-registry-canary"
+    },
+    {
+      "HEAD": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "branch": "refs/heads/docs/runtime-1.0.3-release-notes-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/runtime-release-notes"
+    },
+    {
+      "HEAD": "78969ac65cea0576f9584d6a136cec6bebe0032b",
+      "branch": "refs/heads/fix/multipackage-import-repro-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/runtime-wheel-test-interpreter"
+    },
+    {
+      "HEAD": "9c2f0df6f54a78d98842082c311f130c6d809797",
+      "branch": "refs/heads/test/sqlite-commit-admission-regression-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": "work/",
+          "status": "??"
+        }
+      ],
+      "worktree": "/workspace/work/community-resume/runtime-wrapper-exit-code"
+    },
+    {
+      "HEAD": "29decdcb4ac6712f278b61e3722e0ad9217c60ba",
+      "branch": "refs/heads/integration/native-checksum-admission-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": "work/",
+          "status": "??"
+        }
+      ],
+      "worktree": "/workspace/work/community-resume/sol-native-review"
+    },
+    {
+      "HEAD": "54dae1c0a8383797fa99ba5c50e2a2cf2d829302",
+      "branch": "refs/heads/fix/tls-long-hostname-certificate-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/tls-long-hostname"
+    },
+    {
+      "HEAD": "b67b99c15d77b213d0ea34eda0444b6a18b1c3d3",
+      "branch": "refs/heads/fix/tls-windows-proactor-teardown-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": ".coverage-thresholds.json",
+          "status": " D"
+        },
+        {
+          "path": ".coveragerc",
+          "status": " D"
+        },
+        {
+          "path": ".editorconfig",
+          "status": " D"
+        },
+        {
+          "path": ".eslintignore",
+          "status": " D"
+        },
+        {
+          "path": ".gitignore",
+          "status": " D"
+        },
+        {
+          "path": ".prettierignore",
+          "status": " D"
+        },
+        {
+          "path": ".project",
+          "status": " D"
+        },
+        {
+          "path": ".pydevproject",
+          "status": " D"
+        },
+        {
+          "path": "AGENTS.md",
+          "status": " D"
+        },
+        {
+          "path": "CLAUDE.md",
+          "status": " D"
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "status": " D"
+        },
+        {
+          "path": "LICENSE",
+          "status": " D"
+        },
+        {
+          "path": "NOTICE.md",
+          "status": " D"
+        },
+        {
+          "path": "README.md",
+          "status": " D"
+        },
+        {
+          "path": "action_server/.gitignore",
+          "status": " D"
+        },
+        {
+          "path": "action_server/README.md",
+          "status": " D"
+        },
+        {
+          "path": "action_server/action-server.spec",
+          "status": " D"
+        },
+        {
+          "path": "action_server/build.py",
+          "status": " D"
+        },
+        {
+          "path": "action_server/poetry.lock",
+          "status": " D"
+        },
+        {
+          "path": "action_server/poetry.toml",
+          "status": " D"
+        },
+        {
+          "path": "action_server/pyproject.toml",
+          "status": " D"
+        },
+        {
+          "path": "action_server/ruff.toml",
+          "status": " D"
+        },
+        {
+          "path": "action_server/tasks.py",
+          "status": " D"
+        },
+        {
+          "path": "action_server/tasks_cdn.py",
+          "status": " D"
+        },
+        {
+          "path": "action_server/tests/conftest.py",
+          "status": " D"
+        },
+        {
+          "path": "docs/BUILD_INSTRUCTIONS.md",
+          "status": " D"
+        },
+        {
+          "path": "docs/ai-ops-runbook.md",
+          "status": " D"
+        },
+        {
+          "path": "docs/metrics.md",
+          "status": " D"
+        },
+        {
+          "path": "docs/review-rubric.md",
+          "status": " D"
+        },
+        {
+          "path": "env.json",
+          "status": " D"
+        },
+        {
+          "path": "tasks.py",
+          "status": " D"
+        },
+        {
+          "path": "verify_t026a.py",
+          "status": " D"
+        }
+      ],
+      "worktree": "/workspace/work/community-resume/tls-windows-teardown"
+    },
+    {
+      "HEAD": "554630899c6eab23b922ba6558347e7f2c439c00",
+      "branch": "refs/heads/resume/tunnel-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/tunnel"
+    },
+    {
+      "HEAD": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "branch": "refs/heads/feature/tunnel-edge-verification-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/tunnel-edge"
+    },
+    {
+      "HEAD": "274042cd555d0340dc07e86f651986ab49ba85a7",
+      "branch": "refs/heads/test/tunnel-tls-acceptance-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/tunnel-tls-acceptance"
+    },
+    {
+      "HEAD": "71f55ddd1ce34720db0e13433a2f1f5c9eed70a0",
+      "branch": "refs/heads/release/actions-core-1.0.2-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/wheel-inventory"
+    },
+    {
+      "HEAD": "c6af71b8e3880b9d99f351ac4d17a99744114365",
+      "branch": "refs/heads/fix/windows-runtime-contract-tests-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/windows-contract-tests"
+    },
+    {
+      "HEAD": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+      "branch": "refs/heads/fix/windows-runtime-typecheck-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/windows-runtime-typecheck"
+    },
+    {
+      "HEAD": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+      "branch": "refs/heads/repair/rcc-trust-context-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/worker-exit"
+    },
+    {
+      "HEAD": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e",
+      "branch": "refs/heads/release/http-helper-redirect-fix-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/workitems"
+    },
+    {
+      "HEAD": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "branch": "refs/heads/feature/workitems-native-artifact-manifest-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/workitems-artifacts"
+    },
+    {
+      "HEAD": "511cc3863a58165a9e61e87a258348b50126aca0",
+      "branch": "refs/heads/fix/runtime-tests-integration-triggers-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": "LICENSE",
+          "status": " M"
+        },
+        {
+          "path": "tasks.py",
+          "status": " M"
+        },
+        {
+          "path": "verify_t026a.py",
+          "status": " M"
+        }
+      ],
+      "worktree": "/workspace/work/community-resume/workitems-ci"
+    },
+    {
+      "HEAD": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+      "branch": "refs/heads/fix/workitems-reservation-test-barrier-20261009",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/community-resume/workitems-reservation-fix"
+    },
+    {
+      "HEAD": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "branch": "refs/heads/test/d10-samefile-repro-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/d10-samefile-repro-20261010"
+    },
+    {
+      "HEAD": "e18b3d5931946969dcc29b825ca902f10d9f8b78",
+      "branch": "refs/heads/review/pr282-integration-doc-resolution-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/pr282-integration-doc-resolution-20261010"
+    },
+    {
+      "HEAD": "22bd1371adf559db36c32942c235f0aaf77f1cf4",
+      "branch": "refs/heads/fix/pr292-resource-history-test-typing-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/pr292-resource-history-typing-20261010"
+    },
+    {
+      "HEAD": "345df52bf73e0049c83ba345d1ed593c0abe68cd",
+      "branch": "refs/heads/test/rcc-control-source-fixture-repin-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/rcc-control-source-fixture-repin-20261010"
+    },
+    {
+      "HEAD": "922223a330003ec64808e25843ae448bfae6dc4a",
+      "branch": "refs/heads/test/source-staged-rcc-control-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [
+        {
+          "path": ".github/workflows/_gen_workflows.py",
+          "status": " M"
+        },
+        {
+          "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+          "status": " M"
+        },
+        {
+          "path": "developer/tests/test_rcc_provider_rollback_workflow.py",
+          "status": " M"
+        },
+        {
+          "path": "docs/skills/repository-operations.md",
+          "status": " M"
+        }
+      ],
+      "worktree": "/workspace/work/source-staged-rcc-control-20261010"
+    },
+    {
+      "HEAD": "922223a330003ec64808e25843ae448bfae6dc4a",
+      "branch": "refs/heads/feat/source-staged-rcc-current-candidate-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/source-staged-rcc-current-candidate-20261010"
+    },
+    {
+      "HEAD": "f103edc9015128bb5e6d3875208c4077644e8fe4",
+      "branch": "refs/heads/test/staged-rcc-control-current-candidate-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/staged-rcc-current-integration-candidate-20261010"
+    },
+    {
+      "HEAD": "1284310db62220534977e8db52fd33351e59a4a1",
+      "branch": "refs/heads/fix/staged-rcc-consumer-dbdir-20261010",
+      "status_exit_code": 0,
+      "tracked_or_untracked_changes": [],
+      "worktree": "/workspace/work/staged-rcc-dbdir-repair-20261010"
+    }
+  ]
+}

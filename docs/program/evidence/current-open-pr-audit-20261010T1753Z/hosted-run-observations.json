@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T17:52:58Z",
+  "repository": "joshyorko/actions",
+  "method_and_limit": "Read-only PR workflow-run first-page queries plus selected job-step reads. This is a bounded snapshot, not an assertion that every configured check or run was inventoried. Run and job outcomes remain tied to the exact head/control recorded here; queued and in-progress work remains pending.",
+  "observations": {
+    "221": {
+      "head": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+      "visible_run_summaries": [
+        {"run_id": 38066894394, "workflow": "Actions Runtime PYPI Release", "conclusion": "success"},
+        {"run_id": 38066894339, "workflow": "HTTP Helper Tests", "conclusion": "success"},
+        {"run_id": 38066894467, "workflow": "RCC developer toolkit", "conclusion": "success"},
+        {"run_id": 38066894337, "workflow": "Actions Core Tests", "conclusion": "success"},
+        {"run_id": 38066894500, "workflow": "Measured Python coverage gate", "conclusion": "success"},
+        {"run_id": 38066894359, "workflow": "Action Server Frontend tests", "conclusion": "success"},
+        {"run_id": 38066894334, "workflow": "AI audit evidence", "conclusion": "success"},
+        {"run_id": 38066894314, "workflow": "Work Items Release", "conclusion": "success"},
+        {"run_id": 38066894433, "workflow": "Frontend Build", "conclusion": "success"},
+        {"run_id": 38066894297, "workflow": "Lighthouse CI", "conclusion": "success"},
+        {"run_id": 38066894280, "workflow": "Action Server Tests", "conclusion": "success"},
+        {"run_id": 38066894409, "workflow": "Action Server Build (Unauthenticated)", "conclusion": "success"}
+      ],
+      "scope": "Only returned visible run summaries; this does not satisfy #221's remaining lifecycle, release/artifact, merged-integration or owning-issue gates."
+    },
+    "282": {
+      "published_head": "691b9c8687d721b4769ab7719ced68bff18b002f",
+      "tree": "ad7c3076a4c6b7c663c60d2d4759098dec8cf91b",
+      "locally_reviewed_same_tree_commit": "a35a8ab436c4ac90f033acb0b9cca4459ab508cd",
+      "review_receipt": "pr282-readiness-independent-review.json",
+      "review_receipt_sha256": "b8138283054a3125aa5e566591aae6a778d04c29121d7d8a2f937afe0c75d33d",
+      "hosted_current_head_observation": {
+        "run_id": 38072440057,
+        "test_summary": {"passed": 1070, "skipped": 12, "failed": 1},
+        "failure": "The single named failure is the existing Core 1.0.3 floor/API contract; published Core remains 1.0.2. The existing guard is not waived or raised.",
+        "source": "Root's exact-head hosted observation, cross-checked against PR API head 691b9c... and its tree."
+      },
+      "other_visible_runs": [
+        {"run_id": 38072440010, "workflow": "Measured Python coverage gate", "conclusion": "failure; same Core-floor contract blocker reported"},
+        {"run_id": 38072440033, "workflow": "RCC developer toolkit", "conclusion": "failure; same Core-floor contract blocker reported"}
+      ],
+      "scope": "The exact inherited-pipe readiness regression is green at the published tree-equivalent source. This does not resolve the Core floor or accept the Canvas template issue."
+    },
+    "290": {
+      "head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+      "current_broad_hosted_runs_at_query": [
+        {"run_id": 38070414469, "workflow": "Action Server Tests", "status": "in_progress"},
+        {"run_id": 38070414513, "workflow": "RCC developer toolkit", "status": "queued"},
+        {"run_id": 38070414514, "workflow": "Measured Python coverage gate", "conclusion": "success"},
+        {"run_id": 38070414533, "workflow": "Action Server Build (Unauthenticated)", "conclusion": "success"}
+      ],
+      "scoped_frozen_acceptance": {
+        "run_id": 38070410096,
+        "review_receipt": "pr290-frozen-native-go-review.json",
+        "review_receipt_sha256": "64c2f3eaafb3f760392db9675b455b81e2654b4e9ab46541f192663f2310a3b6",
+        "native_and_go_wrapper": "11 exact cases each, zero failures/errors/skips; independent review PASS for the pinned candidate/control/artifacts",
+        "go_wrapper_lifecycle": "25/25 process records verified; wrapper return code observed as 1 after natural child/wrapper exit. A zero exit code is not claimed or required by this validator."
+      },
+      "limits": "The scoped frozen result is not a full exact-head PR acceptance or release claim; historical failures remain attached only to their older source/control."
+    },
+    "292": {
+      "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+      "current_action_server_test_run": {"run_id": 38067347057, "status": "in_progress"},
+      "external_setup": "A previous PyPI connection-reset observation and a single queued/running retry remain separately recorded; no retry result was available in this cutoff.",
+      "status": "OPEN_BLOCKED; no product failure inferred from the setup reset."
+    },
+    "299": {
+      "head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+      "current_action_server_test_run": {"run_id": 38069465004, "status": "in_progress"},
+      "scope": "Private shared Run-output predecessor. Public authentication/Canvas production acceptance and exact complete hosted gates remain open."
+    },
+    "300": {
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+      "bounded_review": {"receipt": "pr300-loopback-review.json", "sha256": "7562e2aaf7bd357a6d208faf629b53b7a0d25f51cb46ab74bfe1fa7d748a95d5", "result": "73 focused private-output/transport tests and the loopback auth/grant/reader-cleanup probe PASS with trusted test Actor; no production identity, Canvas producer, browser or ChatGPT claim."},
+      "scope": "Transport-only. Full issue and exact final-head hosted acceptance remain open."
+    },
+    "301": {
+      "head": "37283a400be9448b378eaf5caa9ff1e718a95d24",
+      "tree": "202ea161ae1c7ad31383cbb5101c61ae25803fa0",
+      "required_bridge": {"run_id": 38072443699, "job_id": 114272471983, "receipt": "pr301-frontend-bridge-run.txt", "receipt_sha256": "1f0375955a4dd05c5fc1b10c58b574dcd7f9f82838004e83b7b53505d6cf55ca", "result": "PASS: required Python↔TypeScript↔Python bridge 8 passed, 0 skipped; frontend Vitest 280 passed."},
+      "remaining_hosted_jobs_at_query": [
+        {"run_id": 38072443699, "job_id": 114272472093, "platform": "macOS", "status": "in_progress"},
+        {"run_id": 38072443699, "job_id": 114272472223, "platform": "Windows", "status": "in_progress"}
+      ],
+      "limits": "No live browser, published package, ChatGPT, or whole Canvas issue acceptance is established."
+    },
+    "302": {
+      "head": "e31506239fd0260d708a11440762537334f8d2d1",
+      "tree": "c6569803d1338541809cd349f440b69977155446",
+      "parent": "22c7b6548c9346bcb50172ff607388a878736cd4",
+      "visible_new_head_runs": [
+        {"run_id": 38073317355, "workflow": "Measured Python coverage gate", "status": "queued"},
+        {"run_id": 38073317367, "workflow": "AI audit evidence", "status": "queued"},
+        {"run_id": 38073317395, "workflow": "Action Server Build (Unauthenticated)", "status": "queued"},
+        {"run_id": 38073317461, "workflow": "Actions Runtime PYPI Release", "status": "queued"},
+        {"run_id": 38073317467, "workflow": "RCC developer toolkit", "status": "queued"},
+        {"run_id": 38073317520, "workflow": "Action Server Tests", "status": "queued"}
+      ],
+      "source_review": {"commit": "e94882cde4f5688885b35c77a18e78d317242ad3", "tree": "c6569803d1338541809cd349f440b69977155446", "receipt": "pr302-source-review.md", "receipt_sha256": "9293ec3d6ade7a4964be2decab09e413e4b580a53d92a375b0161b7dc0abdbaa", "source_checks_sha256": "f4ff86acdf4c9a5af3ccc9b967375bfa5edd017c9129c4cf194878289d07a9ab"},
+      "real_rcc_details_api": "NOT_RUN; existing two-case staged-RCC proof covers the legacy artifact-only API and must not be attributed to this new API."
+    }
+  },
+  "global_scope_limits": [
+    "Current CI runs remain separate from source acceptance, current integration, whole issue acceptance, and release publication.",
+    "The native 11-case and Go-wrapper 11-case results are tied to the exact reviewed #290 control/candidate/artifacts, not other operating systems or a new artifact candidate.",
+    "The #135 source/RCC two-case proof does not compile complete source or establish full source admission; the raw JUnit and lifecycle receipts were not uploaded, so the independent review is bounded to its strict hosted validator, sanitized summary, and job log.",
+    "The Core 1.0.3 candidate remains unpublished; published minimum Core 1.0.2 and its existing guard are unchanged.",
+    "No ChatGPT/browser acceptance, release publication, Devsy readiness, or whole-issue completion is claimed."
+  ]
+}

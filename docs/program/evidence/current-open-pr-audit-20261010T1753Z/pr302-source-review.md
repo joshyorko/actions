@@ -1,0 +1,27 @@
+APPROVE source-only proof preparation at e94882cde4f5688885b35c77a18e78d317242ad3/treec6569803d1338541809cd349f440b69977155446. Its parent c12495ab043361176569453da764caeab5a0d864/treee376f3e7cdc1a2cbf2fb33652459d4b14adfd8cd is preserved; c124 parent68638aa contains the admitted staged SQLite fixture repair. This approval does not approve a not-yet-pinned hosted control or actual RCC outcome.
+
+Scope and evidence
+- New integration_test+real_rcc Linux-only selector test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair calls publish_artifact_details once. It wraps the unchanged real _subprocess_runner, captures exact argv/returncode/stdout and matches returned specification/artifact canonical digests to the same raw JSON. It does not manufacture JSON, use local fingerprint, parse another publish or use acquisition/cache output.
+- RCC binary measured against pinned v18.19.3 Linux hash and version. Provider is a task-owned existing start_provider helper requiring credential-free HTTP loopback. Exact explicit selected-provider URL is preserved through argv. Existing provider helper/production adapter/cache/lifecycle/source rules unchanged. Provider daemon is stopped/reaped as fixture cleanup; that is not a claim of natural cache-server exit. Existing hosted Runtime natural-stop checks must remain in the three-case control.
+- Receipts bind candidate HEAD/tree to control-supplied immutable tuple and record control commit/tree, RCC version/hash, one publication, exact raw stdout and hash and both digests. Control still needs independently to validate its own bindings and strict canonical digests/count/provider/args/raw-response consistency. These assertions only preserve RCC-reported metadata, not provider authenticity, compiler or complete-source identity.
+- SQLite fixture creates directory before opening file and registers every get_all_model_classes table before catalog admission. A service-free test checks current mcp_catalog_name exists. create_tables owns its connection/transaction, so moving fixture creation before consumer db.connect is correct.
+- Production files identical to independently approved a778 adapter checkpoint; source changes after it are only test fixture/proof and canonical guidance.
+
+Independent pure verification from /tmp/work/actions-worktrees/rcc-published-artifact-details-20261010/action_server:
+env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/dev/shm/actions-rcc-details-review-20261010 PYTHONPATH=/tmp/work/actions-worktrees/rcc-published-artifact-details-20261010/action_server/src:/tmp/work/deployment-values-deps/site-packages /workspace/work/community-resume/worker-exit/action_server/.venv/bin/python -m pytest -p no:robocorp_log_pytest -p no:cacheprovider --confcutdir=tests/action_server_tests -m 'not real_rcc' -q tests/action_server_tests/test_rcc_runtime_adapter.py tests/action_server_tests/test_source_staging_rcc_consumer.py --basetemp=/dev/shm/actions-rcc-details-review-20261010/c124
+74 passed,3 deselected,6 warnings: two unknown integration_test marker warnings due deliberately excluded outer conftest and four existing log.warn deprecation warnings. No RCC executable, bootstrap or install. Actual real prepared termcolor module, no shim.
+
+Configured c124 checks: Ruff/shared devutils formatting/Mypy PASS; Isort FAIL at shortened models import retained in source-c124-checks.json. Sole e948 correction collapses that import, test AST identical; no repeat of 74 tests required for unchanged behavior. Exact e948 checks all PASS: Ruff check, Ruff format --check --config ../devutils/ruff.toml, Isort --check, Mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases on adapter, adapter tests, staged consumer tests. Full argv/output in source-e948-checks.json. Worktree clean.
+
+Hosted readiness and residuals
+- Existing accepted control473/source1e795/artifact11676657463 tuple unchanged. It exercised two cases and its raw JUnit/lifecycle were not uploaded; prior receipt remains bounded hosted-validator-attested there.
+- New three-case control remains PENDING immutable publication source pin and independent review. Actual new publication details proof is NOT RUN. Raw JUnit/lifecycle and raw details JSON receipt retention and fail-closed validation are required for independent actual-artifact replay. No full #135/#134/#129/Package Revision claim.
+
+Documentation improvement:
+- Canonical file changed or proposed: same-commit docs/skills/repository-operations.md accepted; author metadata paragraph plus staged-catalog fixture paragraph.
+- Durable learning captured: pin publication metadata proof to candidate/control/RCC identities and the single exact JSON response; current staged fixture must use complete model registry and pre-create its private DB directory, with service-free fixture verification.
+- Evidence: immutable source diff, actual DB fixture test within74purePASS, original and fixed configured lint/type receipts, unchanged production blob, real-runner capture/source binding inspected.
+- Stale or ambiguous guidance removed: artifact-only prior proof cannot stand in for new metadata API; partial historical catalog fixtures cannot safely admit current catalog schema.
+- Remaining uncertainty: actual three-case hosted run/raw artifact and natural-stop outcome, then separate deterministic compiler criteria.
+
+Upstream disposition: none. No dependency defect identified; no GitHub mutation or local RCC execution.

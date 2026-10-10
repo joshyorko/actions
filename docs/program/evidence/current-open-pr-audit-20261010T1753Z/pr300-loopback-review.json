@@ -1,0 +1,46 @@
+{
+  "review": "PR300 actual loopback transport acceptance probe",
+  "result": "PASS for bounded HTTP transport behavior only",
+  "source": {
+    "commit": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+    "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+    "module_blobs": {
+      "action_server/src/actions/server/_server.py": "6f5e6fe658fb2d7c2dd2271bf2169adbe18be86b",
+      "action_server/src/actions/server/run_outputs/transport.py": "32d72daf3037f72ff7caa63d74025735df9a4d22",
+      "action_server/src/actions/server/run_outputs/service.py": "55f5c09aeb0a3e9199b56916bb7fee41708b35c6",
+      "action_server/src/actions/server/run_outputs/filesystem.py": "89170173dd0f1771e1a9923bb6f2f2b28448dd1",
+      "action_server/src/actions/server/_models.py": "405304f2e593fdfe949b431851eb0dae39c6ab96",
+      "action_server/src/actions/server/_database.py": "e7d9e6d06d8db537c81a24888615f9b7b74e8753",
+      "action_server/tests/action_server_tests/run_outputs/test_transport.py": "61e30daed53076ab802e7fe7a7a3d40920d6f601"
+    }
+  },
+  "execution": {
+    "interpreter": "/workspace/work/community-resume/worker-exit/action_server/.venv/bin/python",
+    "dependency_support": "/tmp/work/deployment-values-deps/site-packages (prepared rfc8785 dependency)",
+    "probe_source": "probe.py",
+    "probe_sha256": "8572875702cf4fe8ac5fe38cef6948a4d4e50cea1d7c48f7c7734b5f268ed94c",
+    "log": "pytest.log",
+    "log_sha256": "ef4ebc018563ccbb95ba445223b059b1c5dd36433e4c1332497e58c705fcdf94",
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/tmp/work/deployment-values-deps/site-packages:/dev/shm/pr300-loopback-source2/action_server/src:/dev/shm/pr300-loopback-source2/actions/src:/dev/shm/pr300-loopback-source2/actions-http-helper/src:/dev/shm/pr300-loopback-source2/work-items/src:/dev/shm/pr300-loopback-source2/action_server/tests /workspace/work/community-resume/worker-exit/action_server/.venv/bin/python -m pytest -p no:cacheprovider -p no:robocorp_log_pytest --basetemp=/dev/shm/pr300-loopback-probe/final-tmp /dev/shm/pr300-loopback-probe/probe.py -q -s",
+    "pytest": "2 passed, 2 warnings in 1.88s",
+    "warnings": "websockets legacy deprecation warnings only"
+  },
+  "coverage": {
+    "runtime": "Exact 3cad source modules imported from archive of published commit; module-origin assertions passed",
+    "transport": "Actual Runtime start_server/uvicorn bound 127.0.0.1 with an ephemeral port; HTTPConnection and raw socket used; no public address or tunnel",
+    "storage": "Existing test_service fixture used real temporary SQLite and FilesystemOutputProvider; no fake database/provider",
+    "positive": "Authorized GET returned exact byte sequence loopback bytes 00 ff and expected content type, content length, no-store and nosniff headers",
+    "denials": "Invalid installation key returned 403; unknown test credential remained 404 despite caller-supplied X-Actor-ID; wrong workspace and revoked grant returned generic 404 before additional provider opens",
+    "disconnect": "A 16 MiB published output was requested over TCP; client closed after response headers; owned reader closed and process FD count returned to the pre-request count",
+    "shutdown": "Each test stopped the Runtime server and joined its thread"
+  },
+  "trust_boundary": "The test injected a trusted server-owned credential-to-Actor callback. This proves transport behavior only; it does not prove production identity authentication, Canvas integration, deployment wiring, public exposure, native/browser behavior, or full PR300 acceptance.",
+  "documentation_improvement": {
+    "target": "docs/skills/provenance-observability.md, Runtime output transport verification boundary",
+    "change": "State that TestClient/ASGI tests prove in-process route semantics, while TCP streaming and disconnect claims require a loopback socket test; explicitly label a test-supplied Actor callback as transport-only evidence, not deployed authentication or Canvas integration.",
+    "reason": "The existing exact-head tests cover route/service semantics and ASGI disconnect, but do not exercise an HTTP socket. The loopback probe supplies that distinct bounded evidence.",
+    "evidence": "Published source commit 3cad4fd6d9fb386451b3b76d7b1103256eec54e; probe.py and pytest.log hashes above; two loopback tests passed.",
+    "limitations": "No production authenticator, Canvas client, public endpoint/tunnel, native/browsers, deployment configuration, or hosted PR300 status is proven."
+  },
+  "upstream_disposition": "None; no upstream defect was found."
+}

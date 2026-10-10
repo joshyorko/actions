@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T17:52:58Z",
+  "repository": "joshyorko/actions",
+  "method": "Read-only GitHub pull-request API state/head/base reads followed by read-only Git data commit-object reads for each reported head and the integration checkpoint.",
+  "integration": {
+    "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+    "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+    "parents": [
+      "f18058b6c614d065fe821d98b0039f1db736e5cb",
+      "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+    ],
+    "pull_request": 221,
+    "target_branch": "community",
+    "target_branch_sha": "36b8192dbb8143e016af3351f7d25b22a35c9944"
+  },
+  "open_prs": {
+    "221": {
+      "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7"
+    },
+    "282": {
+      "sha": "691b9c8687d721b4769ab7719ced68bff18b002f",
+      "tree": "ad7c3076a4c6b7c663c60d2d4759098dec8cf91b"
+    },
+    "290": {
+      "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097"
+    },
+    "292": {
+      "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+    },
+    "299": {
+      "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0"
+    },
+    "300": {
+      "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1"
+    },
+    "301": {
+      "sha": "37283a400be9448b378eaf5caa9ff1e718a95d24",
+      "tree": "202ea161ae1c7ad31383cbb5101c61ae25803fa0"
+    },
+    "302": {
+      "sha": "e31506239fd0260d708a11440762537334f8d2d1",
+      "tree": "c6569803d1338541809cd349f440b69977155446"
+    }
+  },
+  "pull_request_api_metadata": {
+    "221": {
+      "state": "open",
+      "draft": true,
+      "base_ref": "community",
+      "base_sha_at_read": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "head_ref": "integration/community-release-20261008",
+      "parents": [
+        "f18058b6c614d065fe821d98b0039f1db736e5cb",
+        "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+      ]
+    },
+    "282": {
+      "state": "open",
+      "draft": true,
+      "base_ref": "integration/community-release-20261008",
+      "base_sha_at_read": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "head_ref": "feat/canvas-template-20261010",
+      "parents": [
+        "421fac66e265de619eef7d4f9d171a6095f4a907"
+      ]
+    },
+    "290": {
+      "state": "open",
+      "draft": true,
+      "base_ref": "integration/community-release-20261008",
+      "base_sha_at_read": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "head_ref": "test/mcp-alias-frozen-control-20261010",
+      "parents": [
+        "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+        "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "e886d26ebaefafa9189a69517f6707691b53662e"
+      ]
+    },
+    "292": {
+      "state": "open",
+      "draft": true,
+      "base_ref": "integration/community-release-20261008",
+      "base_sha_at_read": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "head_ref": "fix/mcp-resource-routing-history-20261010",
+      "parents": [
+        "dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+      ]
+    },
+    "299": {
+      "state": "open",
+      "draft": true,
+      "base_ref": "integration/community-release-20261008",
+      "base_sha_at_read": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "head_ref": "feat/shared-run-output-20261010",
+      "parents": [
+        "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+        "e886d26ebaefafa9189a69517f6707691b53662e"
+      ]
+    },
+    "300": {
+      "state": "open",
+      "draft": true,
+      "base_ref": "feat/shared-run-output-20261010",
+      "base_sha_at_read": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "head_ref": "feat/run-output-transport-20261010",
+      "parents": [
+        "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+        "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+      ]
+    },
+    "301": {
+      "state": "open",
+      "draft": true,
+      "base_ref": "integration/community-release-20261008",
+      "base_sha_at_read": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+      "head_ref": "feat/canvas-100b-typescript-roundtrip-20261010",
+      "parents": [
+        "47d307c1fe1f55ca14b13425f2ce5c367d90210c"
+      ]
+    },
+    "302": {
+      "state": "open",
+      "draft": true,
+      "base_ref": "integration/community-release-20261008",
+      "base_sha_at_read": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "head_ref": "fix/rcc-published-artifact-details-20261010",
+      "parents": [
+        "22c7b6548c9346bcb50172ff607388a878736cd4"
+      ]
+    }
+  },
+  "equivalent_local_tree_observations": [
+    {
+      "local_commit": "a35a8ab436c4ac90f033acb0b9cca4459ab508cd",
+      "local_tree": "ad7c3076a4c6b7c663c60d2d4759098dec8cf91b",
+      "published_pr_head": "691b9c8687d721b4769ab7719ced68bff18b002f",
+      "published_tree": "ad7c3076a4c6b7c663c60d2d4759098dec8cf91b",
+      "scope": "Content tree is identical; local and remote commit IDs/parents differ. Hosted results bind to the published SHA 691b9c..., not local a35a8..."
+    }
+  ],
+  "limits": "All eight PR API states read OPEN. Current PR head/tree pairs are bound to Git commit objects. PR API base_sha is recorded separately because a stacked PR's configured base can be behind the current integration pointer; target integration remains the separately verified e886 commit/tree. This receipt makes no CI conclusion.",
+  "bindings": {
+    "observed_at_utc": "2026-10-10T17:52:58Z",
+    "source": "Read-only GitHub pull-request API state/head/base reads followed by read-only Git data commit-object reads for each reported head and the integration checkpoint.",
+    "integration": {
+      "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7"
+    },
+    "open_prs": {
+      "221": {
+        "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7"
+      },
+      "282": {
+        "sha": "691b9c8687d721b4769ab7719ced68bff18b002f",
+        "tree": "ad7c3076a4c6b7c663c60d2d4759098dec8cf91b"
+      },
+      "290": {
+        "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+        "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097"
+      },
+      "292": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+      },
+      "299": {
+        "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0"
+      },
+      "300": {
+        "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1"
+      },
+      "301": {
+        "sha": "37283a400be9448b378eaf5caa9ff1e718a95d24",
+        "tree": "202ea161ae1c7ad31383cbb5101c61ae25803fa0"
+      },
+      "302": {
+        "sha": "e31506239fd0260d708a11440762537334f8d2d1",
+        "tree": "c6569803d1338541809cd349f440b69977155446"
+      }
+    }
+  }
+}

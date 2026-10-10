@@ -1,0 +1,28 @@
+Read-only hosted CI receipt — PR301 frontend / fixture bridge
+Captured: 2026-10-10 17:49:07 UTC
+Repository: joshyorko/actions
+PR: 301
+Head: 37283a400be9448b378eaf5caa9ff1e718a95d24
+Base: integration/community-release-20261008 @ f18058b6c614d065fe821d98b0039f1db736e5cb
+Workflow run: 38072443699
+Job: 114272471983 (action-server-frontend-tests)
+Job conclusion: success
+
+Required fixture bridge evidence from hosted job log:
+- ACTIONS_CANVAS_REQUIRE_ROUNDTRIP=1
+- Command: python -m pytest -p no:cacheprovider -p no:robocorp_log_pytest --confcutdir=../tests/action_server_tests ../tests/action_server_tests/test_canvas_query_results_fixture.py -q
+- Result: 8 passed in 1.32s; zero skipped in this required fixture-specific invocation.
+- Frontend Vitest suite: 31 test files passed; 280 tests passed.
+- Quality topology Vitest invocation separately reported 6 passed and 274 skipped (31 files); standalone ui-system invocation reported 6 passed. These skips do not apply to the required 8-test Python↔TypeScript bridge.
+- Job completed successfully; no error markers found in the examined log summary.
+- No Playwright, live host, or ChatGPT acceptance execution appears in this job evidence; those remain NOT RUN / unproven.
+
+Scope: establishes hosted execution of the required Python↔TypeScript fixture round trip and the stated frontend test/build job only. It is not live browser-host, published package, or ChatGPT acceptance evidence.
+
+Documentation improvement:
+- Canonical file changed or proposed: docs/skills/repository-operations.md (PR301 trigger patch).
+- Durable learning captured: integration-target PRs must schedule Action Server Frontend tests; a local/CI skipped bridge is not execution evidence, while ACTIONS_CANVAS_REQUIRE_ROUNDTRIP=1 enforces the required hosted bridge.
+- Evidence: this exact-head run and job, plus PR301 trigger patch review at commit 2293b1a9490e3d3e846651803b68300319a3e1a3 / tree 202ea161ae1c7ad31383cbb5101c61ae25803fa0.
+- Stale or ambiguous guidance removed: none identified beyond the added integration trigger and scope clarification.
+- Remaining uncertainty: actual browser/live ChatGPT acceptance remains NOT RUN.
+Upstream disposition: none; this is repository CI scheduling and documentation.

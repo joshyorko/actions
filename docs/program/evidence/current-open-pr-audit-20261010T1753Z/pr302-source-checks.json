@@ -1,0 +1,56 @@
+[
+  {
+    "argv": [
+      "/workspace/work/community-resume/worker-exit/action_server/.venv/bin/ruff",
+      "check",
+      "src/actions/server/_rcc_runtime_adapter.py",
+      "tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/workspace/work/community-resume/worker-exit/action_server/.venv/bin/ruff",
+      "format",
+      "--check",
+      "--config",
+      "../devutils/ruff.toml",
+      "src/actions/server/_rcc_runtime_adapter.py",
+      "tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py"
+    ],
+    "returncode": 0,
+    "stdout": "3 files already formatted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/workspace/work/community-resume/worker-exit/action_server/.venv/bin/isort",
+      "--check",
+      "src/actions/server/_rcc_runtime_adapter.py",
+      "tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/workspace/work/community-resume/worker-exit/action_server/.venv/bin/mypy",
+      "--follow-imports=silent",
+      "--show-column-numbers",
+      "--namespace-packages",
+      "--explicit-package-bases",
+      "src/actions/server/_rcc_runtime_adapter.py",
+      "tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py"
+    ],
+    "returncode": 0,
+    "stdout": "Success: no issues found in 3 source files\n",
+    "stderr": ""
+  }
+]

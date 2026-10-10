@@ -1,0 +1,36 @@
+{
+  "reviewer": "luna_cas_receipt_audit",
+  "reviewed_commit": "a35a8ab436c4ac90f033acb0b9cca4459ab508cd",
+  "reviewed_tree": "ad7c3076a4c6b7c663c60d2d4759098dec8cf91b",
+  "parent": "027dcb68383c053b0b284c3c6a39d9bd18481d56",
+  "author_receipt": {
+    "path": "/workspace/work/pr282-owned-process-timeout-20261010/successor-receipt.json",
+    "sha256": "b0de42142b15644f6cc0e994ee607b2f054ef1bbebbf17fd833c1043f6f80728"
+  },
+  "review": {
+    "verdict": "APPROVE",
+    "scope": "test harness process-readiness timeout and repository operations guidance only",
+    "findings": [],
+    "checks": [
+      {
+        "command": "git diff --check 027dcb68383c053b0b284c3c6a39d9bd18481d56 a35a8ab436c4ac90f033acb0b9cca4459ab508cd",
+        "result": "PASS"
+      },
+      {
+        "command": "pytest -p no:robocorp_log_pytest -c /dev/null --confcutdir=action_server/tests/action_server_tests/mcp: test_owned_process_timeout_stops_its_descendant, test_owned_process_readiness_fails_if_command_exits_before_ready, test_owned_process_exit_before_readiness_cleans_descendant_promptly",
+        "result": "3 passed"
+      },
+      {
+        "command": "pytest -p no:robocorp_log_pytest -p no:cacheprovider -c /dev/null --confcutdir=action_server/tests/action_server_tests/mcp with PR282_SLOW_CHILD_START=1: test_owned_process_timeout_stops_its_descendant",
+        "result": "1 passed; delayed-start readiness control retained"
+      }
+    ],
+    "assessment": "The earlier unbounded communicate call is replaced with a 50ms bounded drain after a second atomic readiness-marker check. Descendants are sampled before the leader-exit decision and after readiness; existing identity-checked process-tree cleanup remains unchanged. The new inherited-pipe regression covers prompt cleanup when the leader exits without a marker, and the prior descendant-timeout and slow-start controls still pass. The test continues to require a finite readiness timeout, an atomic marker, and descendant termination (gone or zombie). No production implementation, dependency floor, manifest, or cleanup assertion was weakened.",
+    "limits": [
+      "Review did not run the full repository suite, native RCC scenario, browser integration, or Windows process cleanup.",
+      "Configured pytest emitted only unknown integration_test mark warnings; the robocorp logging plugin and pytest cache provider were disabled to avoid ambient fixture/output effects."
+    ],
+    "upstream_disposition": "None; this is repository-local test-harness and guidance work, with no verified external defect."
+  },
+  "workspace_note": "No tracked source changes were made. An earlier pytest invocation on the parent candidate generated ignored action_server/output/log.html; prior bytes were unknown, so it was preserved and not restored or deleted."
+}

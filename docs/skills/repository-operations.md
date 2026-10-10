@@ -1957,6 +1957,7 @@ the commit SHA and tree SHA together in a hash-bound receipt. Validate the
 projection against that receipt before regenerating canonical ledger views.
 Keep replaced values in an explicitly historical field; never carry stale
 head/tree pairs forward as current. A tree SHA typo must fail validation.
+When a local reviewed commit is coalesced or recreated as a different published PR commit, record both identities and bind hosted results to the actual remote PR head SHA. Matching tree SHAs support content equivalence only; they do not transfer commit ancestry or change the identity named by a hosted run.
 
 A check or workflow display name is a label, not a unique run identity; names are reused across workflow files and matrix variants. Record the repository, workflow path, run/job, event checkout SHA/tree, operating system, interpreter, and package/version when interpreting a result. A test count does not identify the Python version. An artifact ID is an identifier, not its size or digest: verify downloaded bytes and member hashes before claiming artifact contents, and distinguish workflow-reported metadata from independently verified bytes.
 
