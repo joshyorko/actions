@@ -41,6 +41,12 @@ import the actions saving the settings to a given datadir and then
 start the server pointing to that datadir asking the `action-server`
 not to synchronize the actions again when starting.
 
+Known limitation: do not combine multiple `--dir` values with
+`start --actions-sync=true` yet. Synchronizing each directory currently
+disables actions imported from an earlier directory in the same invocation.
+Use the additive `import` commands below and start with
+`--actions-sync=false` to serve all of the imported directories.
+
 Example:
 
 ```
