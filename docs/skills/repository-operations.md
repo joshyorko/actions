@@ -517,6 +517,16 @@ Sign-out and expired-session status unmount providers, clear their query cache
 and disconnect browser subscriptions. The browser rechecks on protected HTTP
 403, focus, expiry and a 15-second interval for revocation in another tab.
 
+`test_auth_route_inventory.py` captures the assembled FastAPI route objects
+through `start_server()`'s `before_start` callback, after HTTP, WebSocket, UI,
+and artifact registrations. The callback returns `False` to stop before
+process-pool or Uvicorn startup. Its explicit route-class, path, method, and
+mount inventory includes hidden routes and the registered dynamic action; the
+local `StaticFiles` mount is recorded as a terminal mount because it exposes no
+nested route list. A new unclassified route fails the inventory. This checks
+registration coverage, not authorization behavior: CORS preflight and request
+authorization remain covered by their existing request-level tests.
+
 Community PRs touching `actions/**` run Actions Core Tests. Its non-publishing
 candidate-wheel job builds the exact-source wheel and sdist, checks their
 inventory, validates and clean-installs the wheel, and retains artifact hashes
