@@ -259,21 +259,20 @@ async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
     monkeypatch.setenv("NO_PROXY", "*")
     monkeypatch.setenv("no_proxy", "*")
     async with mcp_app.router.lifespan_context(mcp_app):
-        listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        listener.bind(("127.0.0.1", 0))
-        listener.listen(128)
-        port = listener.getsockname()[1]
-        url = f"https://localhost:{port}"
-        release_origin = helper.allow_tunnel_origin(url)
         config = uvicorn.Config(
             recorder,
+            host="127.0.0.1",
+            port=0,
             log_level="critical",
             ssl_certfile=str(certfile),
             ssl_keyfile=str(keyfile),
         )
         server = uvicorn.Server(config)
-        server_task = asyncio.create_task(server.serve(sockets=[listener]))
+        server_task = asyncio.create_task(server.serve())
+
+        def release_origin() -> None:
+            pass
+
         try:
             for _ in range(500):
                 if server.started:
@@ -282,6 +281,10 @@ async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
                     await server_task
                 await asyncio.sleep(0.01)
             assert server.started, "loopback TLS server did not start"
+            assert server.servers and server.servers[0].sockets
+            port = server.servers[0].sockets[0].getsockname()[1]
+            url = f"https://localhost:{port}"
+            release_origin = helper.allow_tunnel_origin(url)
 
             monkeypatch.setenv("SSL_CERT_FILE", str(untrusted_certfile))
             with pytest.raises(httpx2.ConnectError):
@@ -296,7 +299,4 @@ async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
         finally:
             release_origin()
             server.should_exit = True
-            try:
-                await asyncio.wait_for(server_task, timeout=5)
-            finally:
-                listener.close()
+            await asyncio.wait_for(server_task, timeout=5)
