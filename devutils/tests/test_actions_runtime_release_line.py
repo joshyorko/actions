@@ -84,7 +84,7 @@ def test_runtime_artifact_matrix_and_community_provenance_are_explicit():
     assert "cp313-*manylinux*x86_64" in PYPI_WORKFLOW
     assert "cp312-*win*amd64" in PYPI_WORKFLOW
     assert "cp313-*win*amd64" in PYPI_WORKFLOW
-    assert "cibuildwheel==2.23.1" in PYPI_WORKFLOW
+    assert "cibuildwheel==2.23.4" in PYPI_WORKFLOW
     assert "twine==6.2.0" in PYPI_WORKFLOW
     assert (
         'RCC_VERSION = "18.19.3"' in (ROOT / "action_server" / "build.py").read_text()
