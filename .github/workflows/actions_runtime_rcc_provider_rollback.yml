@@ -22,6 +22,10 @@ permissions:
     paths:
     - developer/tests/test_rcc_provider_rollback_workflow.py
     - developer/tests/test_rcc_provider_rollback_summary.py
+    - action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py
+    - action_server/src/actions/server/deployments/source_staging.py
+    - action_server/src/actions/server/deployments/source_read.py
+    - action_server/src/actions/server/deployments/source_manifest.py
     - .github/workflows/_gen_workflows.py
     - .github/workflows/actions_runtime_rcc_provider_rollback.yml
 defaults:
@@ -42,14 +46,15 @@ jobs:
     - name: Checkout immutable Runtime candidate
       uses: actions/checkout@v5
       with:
-        ref: f7c6ed61f24fd9e98d1465c83042c5446466311b
+        ref: d376399f497fb98f47062e493219e063db8f08e1
         path: candidate
         fetch-depth: 2
         persist-credentials: false
     - name: Verify immutable Runtime candidate revision
       shell: bash
       env:
-        CANDIDATE_SHA: f7c6ed61f24fd9e98d1465c83042c5446466311b
+        CANDIDATE_SHA: d376399f497fb98f47062e493219e063db8f08e1
+        CANDIDATE_TREE: fb04c136e5e1a7ce709649b13cf895d84ac93c1a
         CONTROL_SHA: ${{ github.sha }}
       run: 'set -Eeuo pipefail
 
@@ -57,11 +62,17 @@ jobs:
 
         test "$actual" = "$CANDIDATE_SHA"
 
+        actual_tree=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD^{tree})
+
+        test "$actual_tree" = "$CANDIDATE_TREE"
+
         control=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD)
 
         test "$control" = "$CONTROL_SHA"
 
         printf ''RCC_ROLLBACK_CANDIDATE_SHA=%s\n'' "$actual" >> "$GITHUB_ENV"
+
+        printf ''RCC_ROLLBACK_CANDIDATE_TREE=%s\n'' "$actual_tree" >> "$GITHUB_ENV"
 
         printf ''RCC_ROLLBACK_CONTROL_SHA=%s\n'' "$control" >> "$GITHUB_ENV"
 
@@ -69,8 +80,7 @@ jobs:
 
         printf ''candidate_sha=%s\n'' "$actual"
 
-        printf ''candidate_tree=%s\n'' "$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse
-        HEAD^{tree})"
+        printf ''candidate_tree=%s\n'' "$actual_tree"
 
         '
     - name: Install the latest version of uv
@@ -159,6 +169,7 @@ jobs:
       env:
         ACTIONS_REAL_RCC_ARTIFACT_TEST: '1'
         ACTIONS_RUNTIME_LIFECYCLE_RECEIPT: ${{ runner.temp }}/rcc-provider-rollback-evidence/lifecycle-receipt.json
+        ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT: ${{ runner.temp }}/rcc-provider-rollback-evidence/staged-consumer-receipt.json
         PYTHONPATH: ${{ github.workspace }}/candidate/action_server/src:${{ github.workspace
           }}/candidate/actions/src
         TMPDIR: ${{ runner.temp }}/rcc-provider-rollback-tmp
@@ -166,6 +177,7 @@ jobs:
         \nprintf '%s  %s\\n' \"$RCC_SHA256\" \"$ACTIONS_RUNTIME_RCC_BINARY\" | sha256sum\
         \ --check --status -\nset +e\nuv run --no-project --python 3.12 poetry run\
         \ pytest -n 0 -vv -rA \\\n  -m 'integration_test and real_rcc' \\\n  tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable\
+        \ \\\n  tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime\
         \ \\\n  --junitxml=\"${{ runner.temp }}/rcc-provider-rollback-junit.xml\"\
         \ 2>&1 | tee \"${{ runner.temp }}/rcc-provider-rollback-pytest.log\"\nstatus=${PIPESTATUS[0]}\n\
         echo \"RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE=$status\" >> \"$GITHUB_ENV\"\n\
@@ -257,7 +269,8 @@ jobs:
       env:
         EVIDENCE_DIR: ${{ runner.temp }}/rcc-provider-rollback-evidence
         JUNIT_PATH: ${{ runner.temp }}/rcc-provider-rollback-junit.xml
-        EXPECTED_CANDIDATE_SHA: f7c6ed61f24fd9e98d1465c83042c5446466311b
+        EXPECTED_CANDIDATE_SHA: d376399f497fb98f47062e493219e063db8f08e1
+        EXPECTED_CANDIDATE_TREE: fb04c136e5e1a7ce709649b13cf895d84ac93c1a
         EXPECTED_CONTROL_SHA: ${{ github.sha }}
         EXPECTED_RCC_SHA256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
         ACTION_SERVER_RCC_DEFAULT: ${{ github.workspace }}/candidate/action_server/src/actions/server/bin/rcc-18.19.3
@@ -282,11 +295,13 @@ jobs:
         HEAD\")\ncandidate_tree = git_value(candidate, \"rev-parse\", \"HEAD^{tree}\"\
         )\ncontrol_sha = git_value(control, \"rev-parse\", \"HEAD\")\ncontrol_tree\
         \ = git_value(control, \"rev-parse\", \"HEAD^{tree}\")\nexpected_candidate_sha\
-        \ = os.environ.get(\"EXPECTED_CANDIDATE_SHA\")\nexpected_control_sha = os.environ.get(\"\
+        \ = os.environ.get(\"EXPECTED_CANDIDATE_SHA\")\nexpected_candidate_tree =\
+        \ os.environ.get(\"EXPECTED_CANDIDATE_TREE\")\nexpected_control_sha = os.environ.get(\"\
         EXPECTED_CONTROL_SHA\")\nif candidate_sha != expected_candidate_sha:\n   \
-        \ issues.append(\"candidate_checkout_sha_mismatch\")\nif control_sha != expected_control_sha:\n\
-        \    issues.append(\"control_checkout_sha_mismatch\")\nif source.get(\"commit\"\
-        ) != candidate_sha:\n    issues.append(\"receipt_source_commit_mismatch\"\
+        \ issues.append(\"candidate_checkout_sha_mismatch\")\nif candidate_tree !=\
+        \ expected_candidate_tree:\n    issues.append(\"candidate_checkout_tree_mismatch\"\
+        )\nif control_sha != expected_control_sha:\n    issues.append(\"control_checkout_sha_mismatch\"\
+        )\nif source.get(\"commit\") != candidate_sha:\n    issues.append(\"receipt_source_commit_mismatch\"\
         )\nif source.get(\"tree\") != candidate_tree:\n    issues.append(\"receipt_source_tree_mismatch\"\
         )\nworker_libc_name = os.environ.get(\"RCC_WORKER_LIBC_NAME\", \"\")\nworker_libc_version\
         \ = os.environ.get(\"RCC_WORKER_LIBC_VERSION\", \"\")\ntry:\n    worker_libc_parts\
@@ -298,6 +313,10 @@ jobs:
         ,\n    \"actions_import\": \"action_server/src/actions/server/_actions_import.py\"\
         ,\n    \"runtime_adapter\": \"action_server/src/actions/server/_rcc_runtime_adapter.py\"\
         ,\n    \"rollback_test\": \"action_server/tests/action_server_tests/test_current_candidate_import_rollback.py\"\
+        ,\n    \"staged_consumer_test\": \"action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py\"\
+        ,\n    \"source_staging\": \"action_server/src/actions/server/deployments/source_staging.py\"\
+        ,\n    \"source_read\": \"action_server/src/actions/server/deployments/source_read.py\"\
+        ,\n    \"source_manifest\": \"action_server/src/actions/server/deployments/source_manifest.py\"\
         ,\n    \"acceptance_helper\": \"action_server/scripts/verify_dakota_rcc_acceptance.py\"\
         ,\n}\nfile_hashes = {name: file_sha256(candidate / path) for name, path in\
         \ source_files.items()}\nreceipt_hashes = source.get(\"runtime_module_sha256\"\
@@ -327,29 +346,70 @@ jobs:
         name\", \"unknown\"))\nexcept (OSError, ET.ParseError, ValueError):\n    issues.append(\"\
         junit_missing_or_invalid\")\nif test_counts != actual_case_counts:\n    issues.append(\"\
         junit_suite_counts_do_not_match_testcases\")\nif test_counts != {\"tests\"\
-        : 1, \"failures\": 0, \"errors\": 0, \"skipped\": 0}:\n    issues.append(\"\
-        test_result_not_exactly_one_pass\")\nexpected_test_name = \"test_current_candidate_failed_reload_keeps_last_good_action_usable\"\
-        \nexpected_test_module = \"test_current_candidate_import_rollback\"\ntest_identity_matches\
-        \ = (\n    len(cases) == 1\n    and cases[0].attrib.get(\"name\") == expected_test_name\n\
-        \    and cases[0].attrib.get(\"classname\", \"\").rsplit(\".\", 1)[-1]\n \
-        \   == expected_test_module\n)\nif not test_identity_matches:\n    issues.append(\"\
-        unexpected_test_identity\")\n\ntry:\n    test_exit_code = int(os.environ.get(\"\
-        RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE\", \"\"))\nexcept ValueError:\n    test_exit_code\
-        \ = None\nif test_exit_code != 0:\n    issues.append(\"test_process_exit_not_zero\"\
-        )\n\nexpected_rcc_sha = os.environ.get(\"EXPECTED_RCC_SHA256\")\nrcc_binary\
-        \ = Path(os.environ.get(\"ACTIONS_RUNTIME_RCC_BINARY\", \"\"))\nactual_rcc_sha\
-        \ = file_sha256(rcc_binary)\ntry:\n    rcc_result = subprocess.run(\n    \
-        \    [str(rcc_binary), \"--version\"], check=True, capture_output=True, text=True\n\
-        \    )\n    actual_rcc_version = rcc_result.stdout.strip()\nexcept (OSError,\
-        \ subprocess.CalledProcessError):\n    actual_rcc_version = None\nexpected_rcc_version\
-        \ = \"v18.19.3\"\ndefault_rcc_binary = Path(os.environ.get(\"ACTION_SERVER_RCC_DEFAULT\"\
-        , \"\"))\ndefault_rcc_sha = file_sha256(default_rcc_binary)\ntry:\n    default_version_result\
-        \ = subprocess.run(\n        [str(default_rcc_binary), \"--version\"],\n \
-        \       check=True,\n        capture_output=True,\n        text=True,\n  \
-        \  )\n    default_rcc_version = default_version_result.stdout.strip()\nexcept\
-        \ (OSError, subprocess.CalledProcessError):\n    default_rcc_version = None\n\
-        if actual_rcc_sha != expected_rcc_sha:\n    issues.append(\"rcc_binary_hash_mismatch\"\
-        )\nif actual_rcc_version != expected_rcc_version:\n    issues.append(\"rcc_binary_version_mismatch\"\
+        : 2, \"failures\": 0, \"errors\": 0, \"skipped\": 0}:\n    issues.append(\"\
+        test_result_not_exactly_two_passes\")\nexpected_test_identities = {\n    (\n\
+        \        \"test_current_candidate_import_rollback\",\n        \"test_current_candidate_failed_reload_keeps_last_good_action_usable\"\
+        ,\n    ),\n    (\n        \"test_source_staging_rcc_consumer\",\n        \"\
+        test_staged_package_executes_in_managed_rcc_runtime\",\n    ),\n}\nobserved_test_identities\
+        \ = {\n    (case.attrib.get(\"classname\", \"\").rsplit(\".\", 1)[-1], case.attrib.get(\"\
+        name\"))\n    for case in cases\n}\ntest_identity_matches = (\n    len(cases)\
+        \ == 2 and observed_test_identities == expected_test_identities\n)\nif not\
+        \ test_identity_matches:\n    issues.append(\"unexpected_test_identity\")\n\
+        \ntry:\n    test_exit_code = int(os.environ.get(\"RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE\"\
+        , \"\"))\nexcept ValueError:\n    test_exit_code = None\nif test_exit_code\
+        \ != 0:\n    issues.append(\"test_process_exit_not_zero\")\n\nstaged_receipt_path\
+        \ = evidence_dir / \"staged-consumer-receipt.json\"\nstaged_receipt = read_json(staged_receipt_path)\n\
+        source_digests = staged_receipt.get(\"source_sha256\")\nstaged_digests = staged_receipt.get(\"\
+        staged_sha256\")\nstaged_result = staged_receipt.get(\"typed_action_result\"\
+        )\ntry:\n    source_inventory = json.loads(staged_receipt.get(\"source_inventory\"\
+        , \"\"))\n    staged_inventory = json.loads(staged_receipt.get(\"staged_inventory\"\
+        , \"\"))\nexcept (TypeError, json.JSONDecodeError):\n    source_inventory\
+        \ = None\n    staged_inventory = None\nsource_action_digest = (\n    source_digests.get(\"\
+        action.py\") if isinstance(source_digests, dict) else None\n)\nstaged_action_digest\
+        \ = (\n    staged_digests.get(\"action.py\") if isinstance(staged_digests,\
+        \ dict) else None\n)\ninventory_entries = (\n    source_inventory.get(\"entries\"\
+        ) if isinstance(source_inventory, dict) else None\n)\ninventory_digests =\
+        \ (\n    {entry.get(\"path\"): entry.get(\"sha256\") for entry in inventory_entries}\n\
+        \    if isinstance(inventory_entries, list)\n    and all(isinstance(entry,\
+        \ dict) for entry in inventory_entries)\n    else None\n)\nexpected_staged_paths\
+        \ = {\"action.py\", \"package.yaml\"}\nexpected_result_fields = {\n    \"\
+        action_source_sha256\",\n    \"action_source_path\",\n    \"core_origin\"\
+        ,\n    \"core_version\",\n    \"python_executable\",\n}\nmanaged_root = staged_receipt.get(\"\
+        managed_root\")\nmanaged_root_path = Path(managed_root).resolve() if isinstance(managed_root,\
+        \ str) else None\nmanaged_worker_origins = (\n    isinstance(staged_result,\
+        \ dict)\n    and managed_root_path is not None\n    and Path(str(staged_result.get(\"\
+        python_executable\", \"\"))).resolve().is_relative_to(managed_root_path)\n\
+        \    and Path(str(staged_result.get(\"core_origin\", \"\"))).resolve().is_relative_to(managed_root_path)\n\
+        )\nstaged_receipt_valid = (\n    staged_receipt.get(\"status\") == \"PASS\"\
+        \n    and staged_receipt.get(\"source_commit\") == candidate_sha\n    and\
+        \ staged_receipt.get(\"source_tree\") == candidate_tree\n    and isinstance(source_digests,\
+        \ dict)\n    and set(source_digests) == expected_staged_paths\n    and source_digests\
+        \ == staged_digests\n    and source_inventory == staged_inventory\n    and\
+        \ isinstance(source_inventory, dict)\n    and source_inventory.get(\"sourcePolicyVersion\"\
+        ) == 1\n    and inventory_digests == source_digests\n    and source_action_digest\
+        \ == staged_action_digest\n    and isinstance(staged_result, dict)\n    and\
+        \ set(staged_result) == expected_result_fields\n    and all(isinstance(key,\
+        \ str) and isinstance(value, str) for key, value in staged_result.items())\n\
+        \    and staged_result.get(\"action_source_sha256\") == staged_action_digest\n\
+        \    and staged_result.get(\"core_version\") == \"1.0.2\"\n    and isinstance(staged_result.get(\"\
+        python_executable\"), str)\n    and isinstance(staged_result.get(\"core_origin\"\
+        ), str)\n    and managed_worker_origins\n    and \".rcc-runtime-sources\"\
+        \ in str(staged_result.get(\"action_source_path\", \"\"))\n)\nif not staged_receipt_valid:\n\
+        \    issues.append(\"staged_consumer_receipt_missing_or_invalid\")\n\nexpected_rcc_sha\
+        \ = os.environ.get(\"EXPECTED_RCC_SHA256\")\nrcc_binary = Path(os.environ.get(\"\
+        ACTIONS_RUNTIME_RCC_BINARY\", \"\"))\nactual_rcc_sha = file_sha256(rcc_binary)\n\
+        try:\n    rcc_result = subprocess.run(\n        [str(rcc_binary), \"--version\"\
+        ], check=True, capture_output=True, text=True\n    )\n    actual_rcc_version\
+        \ = rcc_result.stdout.strip()\nexcept (OSError, subprocess.CalledProcessError):\n\
+        \    actual_rcc_version = None\nexpected_rcc_version = \"v18.19.3\"\ndefault_rcc_binary\
+        \ = Path(os.environ.get(\"ACTION_SERVER_RCC_DEFAULT\", \"\"))\ndefault_rcc_sha\
+        \ = file_sha256(default_rcc_binary)\ntry:\n    default_version_result = subprocess.run(\n\
+        \        [str(default_rcc_binary), \"--version\"],\n        check=True,\n\
+        \        capture_output=True,\n        text=True,\n    )\n    default_rcc_version\
+        \ = default_version_result.stdout.strip()\nexcept (OSError, subprocess.CalledProcessError):\n\
+        \    default_rcc_version = None\nif actual_rcc_sha != expected_rcc_sha:\n\
+        \    issues.append(\"rcc_binary_hash_mismatch\")\nif actual_rcc_version !=\
+        \ expected_rcc_version:\n    issues.append(\"rcc_binary_version_mismatch\"\
         )\nif default_rcc_sha != expected_rcc_sha:\n    issues.append(\"action_server_default_rcc_hash_mismatch\"\
         )\nif default_rcc_version != expected_rcc_version:\n    issues.append(\"action_server_default_rcc_version_mismatch\"\
         )\nif receipt.get(\"rcc_sha256\") != expected_rcc_sha:\n    issues.append(\"\
@@ -408,10 +468,14 @@ jobs:
         : runtime.get(\"forced_stop_used\"),\n        \"forced_cleanup_returncode_observed\"\
         : runtime.get(\"forced_cleanup_returncode_observed\") is True,\n        \"\
         remaining_owned_descendant_count\": len(remaining) if isinstance(remaining,\
-        \ list) else None,\n    },\n}\n(evidence_dir / \"acceptance-summary.json\"\
-        ).write_text(\n    json.dumps(summary, indent=2, sort_keys=True) + \"\\n\"\
-        , encoding=\"utf-8\"\n)\nlines = [\n    \"Sanitized RCC provider rollback\
-        \ acceptance summary\",\n    f\"admission_passed={summary['admission']['passed']}\"\
+        \ list) else None,\n        \"staged_consumer_receipt_status\": staged_receipt.get(\"\
+        status\", \"NOT_RECORDED\"),\n        \"staged_consumer_receipt_valid\": staged_receipt_valid,\n\
+        \        \"staged_action_sha256_matches\": staged_action_digest == (staged_result.get(\"\
+        action_source_sha256\") if isinstance(staged_result, dict) else None),\n \
+        \       \"managed_worker_origins_confirmed\": managed_worker_origins,\n  \
+        \  },\n}\n(evidence_dir / \"acceptance-summary.json\").write_text(\n    json.dumps(summary,\
+        \ indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\"\n)\nlines = [\n\
+        \    \"Sanitized RCC provider rollback acceptance summary\",\n    f\"admission_passed={summary['admission']['passed']}\"\
         ,\n    f\"admission_issues={','.join(issues)}\",\n    f\"workflow_control_sha={control_sha}\"\
         ,\n    f\"candidate_sha={candidate_sha}\",\n    f\"candidate_tree={candidate_tree}\"\
         ,\n    f\"runner_libc={worker_libc_name or 'UNKNOWN'} {worker_libc_version\
@@ -427,7 +491,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: rcc-provider-rollback-${{ github.run_id }}-${{ github.run_attempt }}
-        path: ${{ runner.temp }}/rcc-provider-rollback-evidence/acceptance-summary.*
+        path: '${{ runner.temp }}/rcc-provider-rollback-evidence/acceptance-summary.*
+
+          ${{ runner.temp }}/rcc-provider-rollback-evidence/staged-consumer-receipt.json'
         if-no-files-found: warn
         retention-days: 14
 

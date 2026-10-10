@@ -821,23 +821,46 @@ guarantees tracked by issue #82. Do not add Canvas behavior merely to maintain
 this adapter seam.
 
 The proposed [ADR 0100 MCP App authoring contract](../adr/0100-mcp-app-authoring-contract.md)
-records evidence, not an implemented public API. On its cited source revision,
-`actions.mcp.@tool` accepts title and safety hints, while `@resource` accepts
-URI, MIME type, and size; neither decorator publicly attaches MCP Apps
-`_meta.ui.resourceUri`. Runtime tests that construct `Action.options["_meta"]`
-directly prove the internal server can preserve metadata, not that package
-authors can declare it through a supported API. Keep the public authoring
-gap distinct from the broader CanvasSpec schema and renderer work. The latest
-#100 contract permits a bounded 100-A authoring slice without waiting for
-unrelated #125 rows; verify the consumed dependency, package, template, and
-security criteria on the exact candidate. A public `meta` decorator input is
-bounded JSON: reject cycles, non-finite values, non-string keys, and excessive
-depth/size; validate supported MCP Apps URI/visibility/CSP fields while
-preserving unrelated namespaced metadata. Runtime must resolve the UI URI to an
-exact `ui://` resource with `text/html;profile=mcp-app` before atomically
-publishing the new catalog. Serve it through `resources/read`; do not require
-UI-only entries in `resources/list`. App-only visibility is host/catalog
-routing, never backend authorization.
+was merged by PR #254 (commit `a7eec7b1644183dc81e37e1ed9b7be20fa20c87e`);
+that PR was documentation only. The bounded 100-A public authoring API was
+implemented separately by PR #263 (commit
+`948df916ebe8750caebc71cc821bb5b76f16c273`): ordinary packages can attach
+bounded MCP Apps metadata through `actions.mcp.tool(meta=...)` and
+`actions.mcp.resource(meta=...)`, and a real Action Server process exercised
+discovery, `resources/read`, and public tool calls with a candidate Core wheel.
+This is source/candidate evidence, not a claim that published Core 1.0.2 has
+the API or that #100 is complete. Keep 100-A separate from the broader
+CanvasSpec interchange (100-B), shared renderer/bridge (#99-A), and optional
+actual-host proof (#99-B).
+
+PR #291 merged a non-publishing Core 1.0.3 candidate-wheel gate at commit
+`3c5278bbc0d12efa7b9108c713bdc6c982fc54d9`. Its candidate run
+38055636255 passed and retained artifact 11671500340; the verified wheel SHA-256
+is `8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265`.
+The PR records that no tag or PyPI publication occurred. Candidate-wheel
+evidence therefore does not clear a template dependency on `actions-core=1.0.3`:
+verify the published registry wheel with a clean install before advancing the
+supported-worker Core floor. Do not weaken the existing floor test or infer
+registry compatibility from the source checkout or retained candidate artifact.
+
+The current PR #282 head `bab27a93664494965db8a86761ea5685a3be6618` (tree
+`72257e07a78d33ec1d3d067fa0da83369eea0357`) declares that 1.0.3 dependency,
+while Action Server Tests run 38042719836 and RCC toolkit run 38042719804
+still require 1.0.2; refresh and rerun against the current integration after
+the registry prerequisite is met. The earlier candidate Runtime/browser PASS
+(run 38041682069) is bound to predecessor tree
+`80a6ef315411a446db00c234ff9a5a294d91fc00`, not this head. PR #282 also returns
+`artifact: null`; authorized replica-readable output and retrieval remain
+dependent on the shared #86/#83/#129 contracts. Actual ChatGPT operation is
+separate host evidence and has not been established by the MCP Apps harness.
+
+For any accepted public metadata API, keep the boundary strict: reject cycles,
+non-finite values, non-string keys, and excessive depth/size; validate supported
+MCP Apps URI/visibility/CSP fields while preserving unrelated namespaced
+metadata. Runtime must resolve the UI URI to an exact `ui://` resource with
+`text/html;profile=mcp-app` before atomically publishing the new catalog. Serve
+it through `resources/read`; do not require UI-only entries in `resources/list`.
+App-only visibility is host/catalog routing, never backend authorization.
 
 This metadata API accepts only exact built-in `bool`, `int`, and `float` values
 (plus strings and null); it rejects numeric subclasses. A finite-number check
@@ -2437,10 +2460,67 @@ invoking a special-device driver's read-capable open before rejecting its type.
 These checks reject observed changes; they do not establish a complete-tree or
 globally atomic source snapshot against concurrent writers. The supplied root
 descriptor pins its object, not its original pathname, Workspace authorization,
-or selected-set completeness. This utility performs no staging, publication,
+or selected-set completeness. The reader performs no staging, publication,
 compiler inspection or Package Revision creation, and does not change legacy
 Runtime or Robot imports. A stronger atomic snapshot contract remains a separate
 filesystem-level gate.
+
+`actions.server.deployments.source_staging.stage_selected_files` is a separate
+consumer boundary for that measured selection. The caller supplies an empty,
+owner-private destination directory descriptor; source and destination
+descriptors remain caller-owned. The helper reopens each selected source through
+the confined reader, compares its observations with the measured inventory,
+creates only descriptor-relative no-follow directories and exclusive files,
+normalizes file modes, enforces the same byte bounds while copying, then
+re-reads the staged files and checks the final source bindings before returning
+an inventory derived from the staged bytes. It requires exclusive write access
+to the owner-private destination for the duration of staging. Directory
+creation and the following no-follow identity observation are not atomic, so a
+hostile concurrent writer with the caller's effective UID is outside this
+boundary; the observed identity checks do not claim race-proof binding against
+such a writer. On failure it removes only identity-matched files and
+directories created by that call; an unexpected unowned entry is preserved. If
+file or directory identity could not be observed or cleanup cannot verify
+ownership, the original error is retained with a note naming the unresolved
+entry. This binds the
+proposed inventory to bytes observed in the staged tree, but still does not
+prove complete selection, authorization, trust, or a globally atomic source
+snapshot. It is not a compiler or Package
+Revision API and does not modify the legacy Robot ZIP/import path. The bounded
+Linux contract suite exercises successful mode normalization, invalid and
+non-empty destinations, links/special files, source/staged-byte mutation, and
+failure cleanup; it does not establish an RCC consumer/import proof.
+The staging failure tests inject errors after mkdir at identity observation,
+directory open, and fstat; when identity cannot be established they require the
+original exception to survive with an explicit unresolved-cleanup note.
+The same behavior is tested when initial fstat of an exclusive leaf-file
+descriptor fails: its path remains unresolved rather than being unlinked
+without an identity.
+The filesystem tests are Linux-only and skip on other platforms. Separate
+configured Mypy runs check this module and its tests for Linux, Win32, and
+Darwin; those type checks do not claim staging runtime support outside Linux.
+
+`test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime`
+is the opt-in Linux consumer proof. It stages the explicitly selected
+`package.yaml` and `action.py`, imports that staged package into the existing
+Runtime, executes its typed `dict[str, str]` Action through a real RCC worker,
+and checks the worker interpreter and `actions-core` origin under the
+task-owned managed `ACTIONS_HOME/holotree`. It compares source, staged, and
+worker-observed Action-file SHA-256 values and records a staged-consumer
+receipt bound to the candidate checkout commit and tree. The existing pinned
+RCC provider rollback workflow invokes this test alongside the rollback case
+and rejects a skipped or missing result. The
+proof is conditional on that exact hosted gate passing; a local test that is
+skipped because no task-owned managed provider is configured is NOT RUN, not
+acceptance evidence. This exercises one selected package through the current
+Runtime consumer; it does not prove complete source selection, source
+authorization, compiler/admission trust, or any package identity API.
+On 2026-10-10 the immutable consumer-gate candidate advanced from
+`f7c6ed61f24fd9e98d1465c83042c5446466311b`, which predates this test and is
+not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`
+(tree `fb04c136e5e1a7ce709649b13cf895d84ac93c1a`). The earlier local gated
+collection had no task-owned RCC provider configured and remains NOT RUN; the
+new pin does not retroactively change that result.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
