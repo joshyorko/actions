@@ -2065,14 +2065,56 @@ Final reports list exact commands and outcomes, external/service tests skipped, 
 
 Managed spec-v2 Action packages use the provisional RCC runtime adapter only
 when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
-explicitly opts into artifact mode. Without either opt-in, legacy bootstrap
-remains active. In artifact mode, durable runtime authority is the exact
+explicitly opts into artifact mode, or when an explicit
+`ACTIONS_RUNTIME_RCC_TRUST_PROFILE` is configured. Without an opt-in, legacy
+bootstrap remains active. In artifact mode, durable runtime authority is the exact
 `sha256:` Environment Artifact digest and RCC `env exec`; persisted activation
 paths (`PYTHON_EXE`, `CONDA_PREFIX`, `ROBOCORP_HOME`, and
 Holotree/materialization paths) are not authority. The existing process pool
 starts workers with RCC `env exec --artifact DIGEST --permissive-local
 --inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
 release.
+
+For an operator-controlled local fixture, `local-detached-v1` separates
+the Environment Artifact content provider from RCC's filesystem trust carrier.
+Set `ACTIONS_RUNTIME_RCC_TRUST_PROFILE=local-detached-v1`, provide an absolute
+`ACTIONS_RUNTIME_RCC_TRUST_ROOT` owned and private to the current user, and set
+`ACTIONS_RUNTIME_RCC_TRUST_CARRIER` to a directory below that root and outside
+the selected package source. RCC may create missing carrier directories with
+private permissions. The configured root and every carrier component must be
+owned and private; path traversal rejects symlinks and shared-writable
+directories. This first implementation validates POSIX ownership and
+no-follow directory access and fails closed on platforms where those checks
+are unavailable. It does not claim equivalent Windows ACL validation.
+
+The adapter retains the same `ACTIONS_RUNTIME_RCC_PROVIDER` content identity
+on publish, acquire, and exec, and adds `--trust-carrier PATH` followed by
+`--trust-carrier-type filesystem` to each operation. Acquire and exec keep the
+existing `--permissive-local` policy. RCC publication generates its normal
+detached trust files in the selected carrier; later acquisition and execution
+evaluate that same carrier. A `local` content provider is distinct from this
+filesystem trust setting: the provider-coupled v1 default treats its implicit
+carrier as an HTTP endpoint, so it cannot use the literal `local` provider as a
+filesystem trust directory.
+
+The local profile is recorded as `rcc-runtime/v2` with its profile digest and
+carrier identity. It contains no interpreter or materialization path. Cache
+identity includes the selected profile, canonical RCC executable/version and
+contract, the effective user home, and an explicit `ROBOCORP_HOME` override.
+A change in those runtime-context inputs reacquires the exact cached artifact
+before reuse. The transient cache key retains the exact `HOME` spelling used by
+RCC's symbolic user identity and the raw `ROBOCORP_HOME` override (including
+the working directory for a relative override), since equivalent-looking paths
+can select different materialization prefixes. These paths remain process-local
+and are not persisted in the runtime descriptor. Source-only reuse skips
+preparation calls only when that context is unchanged. Changing profiles
+requires successful revalidation of the exact existing artifact before reuse,
+and a failed profile revalidation does not silently publish a replacement.
+Source-only reuse keeps the same artifact and profile. This is local functional
+behavior under RCC's existing permissive-local policy, not strict signed remote
+acceptance or an offline freshness guarantee. Fake adapter contracts verify
+command construction and fail-closed path checks; they do not prove that actual RCC
+accepted a real detached carrier. Keep that distinction in test receipts.
 
 The current-candidate rollback/provider acceptance is a separate, explicitly
 opt-in hosted Linux workflow. It checks out its workflow-control revision and

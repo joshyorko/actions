@@ -16,13 +16,20 @@ import uuid
 from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 from urllib.parse import urlsplit
 
 from actions.server._common.process import ProcessTreeCleanupResult
+from actions.server.rcc_trust_profile import (
+    RccTrustProfile,
+    profile_from_fields,
+    provider_coupled_profile,
+    resolve_trust_profile,
+)
 
 RCC_VERSION = "v18.19.3"
 RCC_CONTRACT_VERSION = "rcc-runtime/v1"
+RCC_TRUST_CONTRACT_VERSION = "rcc-runtime/v2"
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 _PROVIDER_PROFILE_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,62}$")
 _ENVIRONMENT_FIELDS = (
@@ -32,7 +39,8 @@ _ENVIRONMENT_FIELDS = (
     "post-install",
 )
 _prepared_runtime_cache: dict[
-    tuple[Path, str, str | None], tuple[str, RccRuntimeDescriptor]
+    tuple[Path, str, str | None, str, tuple[str, ...]],
+    tuple[str, RccRuntimeDescriptor],
 ] = {}
 _prepared_runtime_cache_lock = threading.Lock()
 
@@ -98,13 +106,20 @@ class RccRuntimeDescriptor:
     contract_version: str = RCC_CONTRACT_VERSION
     provider_reference: str | None = None
     provider_context_bound: bool = True
+    trust_profile_id: str | None = None
+    trust_profile_digest: str | None = None
+    trust_carrier_kind: str | None = None
+    trust_carrier_reference: str | None = None
 
     def __post_init__(self) -> None:
         if not _DIGEST_RE.fullmatch(self.artifact_digest):
             raise RccRuntimeError("descriptor", "invalid sha256 artifact digest")
         if self.runtime_kind != "rcc":
             raise RccRuntimeError("descriptor", "unsupported runtime kind")
-        if self.contract_version != RCC_CONTRACT_VERSION:
+        if self.contract_version not in {
+            RCC_CONTRACT_VERSION,
+            RCC_TRUST_CONTRACT_VERSION,
+        }:
             raise RccRuntimeError("descriptor", "unsupported adapter contract")
         if self.environment_fingerprint and not re.fullmatch(
             r"[0-9a-f]{64}", self.environment_fingerprint
@@ -113,9 +128,42 @@ class RccRuntimeDescriptor:
         _validate_provider_reference(self.provider_reference)
         if not isinstance(self.provider_context_bound, bool):
             raise RccRuntimeError("descriptor", "invalid provider context binding")
+        trust_fields = (
+            self.trust_profile_id,
+            self.trust_profile_digest,
+            self.trust_carrier_kind,
+            self.trust_carrier_reference,
+        )
+        if self.contract_version == RCC_CONTRACT_VERSION:
+            if any(value is not None for value in trust_fields):
+                raise RccRuntimeError(
+                    "descriptor", "v1 descriptor cannot carry detached trust fields"
+                )
+        else:
+            if any(value is None for value in trust_fields):
+                raise RccRuntimeError(
+                    "descriptor", "v2 descriptor has incomplete trust profile"
+                )
+            try:
+                profile_from_fields(
+                    self.trust_profile_id or "",
+                    self.trust_carrier_kind,
+                    self.trust_carrier_reference,
+                    self.trust_profile_digest or "",
+                )
+            except ValueError as exc:
+                raise RccRuntimeError("descriptor", str(exc)) from exc
 
     def to_dict(self) -> dict[str, object]:
         runtime = asdict(self)
+        if self.contract_version == RCC_CONTRACT_VERSION:
+            for field in (
+                "trust_profile_id",
+                "trust_profile_digest",
+                "trust_carrier_kind",
+                "trust_carrier_reference",
+            ):
+                runtime.pop(field)
         runtime["kind"] = runtime.pop("runtime_kind")
         return {"runtime": runtime}
 
@@ -259,6 +307,72 @@ def parse_published_artifact_details(payload: object) -> RccPublishedArtifactDet
 Runner = Callable[..., tuple[int, str, str]]
 
 
+def _descriptor_trust_fields(profile: RccTrustProfile) -> dict[str, Any]:
+    if not profile.is_local_detached:
+        return {}
+    return {
+        "contract_version": RCC_TRUST_CONTRACT_VERSION,
+        "trust_profile_id": profile.profile_id,
+        "trust_profile_digest": profile.profile_digest,
+        "trust_carrier_kind": profile.carrier_kind,
+        "trust_carrier_reference": profile.carrier_reference,
+    }
+
+
+def _resolve_profile(
+    *, environment: Path, environment_identity: Path | None = None
+) -> RccTrustProfile:
+    roots = [environment.parent]
+    if environment_identity is not None:
+        roots.append(environment_identity.parent)
+    try:
+        return resolve_trust_profile(os.environ, package_roots=roots)
+    except ValueError as exc:
+        raise RccRuntimeError("trust", str(exc)) from exc
+
+
+def _canonical_context_path(value: str) -> str:
+    expanded = os.path.expandvars(os.path.expanduser(value))
+    return os.path.normcase(os.path.abspath(os.path.normpath(expanded)))
+
+
+def _runtime_context_identity(
+    rcc_location: Path, trust_profile: RccTrustProfile
+) -> tuple[str, ...]:
+    """Return process-local RCC/home context without persisting machine paths."""
+    robo_home = os.environ.get("ROBOCORP_HOME", "")
+    # RCC's symbolic user identity hashes os.UserHomeDir() as returned. Preserve
+    # the exact HOME spelling because lexical aliases can select distinct RCC
+    # materialization prefixes even when they resolve to the same directory.
+    raw_home = os.environ.get("HOME")
+    home_spelling = (
+        f"env:{raw_home}"
+        if raw_home is not None
+        else f"default:{os.path.expanduser('~')}"
+    )
+    home = _canonical_context_path(os.path.expanduser("~"))
+    effective_robo_home = _canonical_context_path(robo_home) if robo_home else ""
+    relative_robo_home_cwd = (
+        os.getcwd() if robo_home and not os.path.isabs(robo_home) else ""
+    )
+    runtime_contract = (
+        RCC_TRUST_CONTRACT_VERSION
+        if trust_profile.is_local_detached
+        else RCC_CONTRACT_VERSION
+    )
+    rcc_executable = Path(rcc_location).expanduser().resolve(strict=False)
+    return (
+        str(rcc_executable),
+        RCC_VERSION,
+        runtime_contract,
+        home,
+        home_spelling,
+        effective_robo_home,
+        robo_home,
+        relative_robo_home_cwd,
+    )
+
+
 def environment_spec_fingerprint(environment: Path) -> str:
     """Return a deterministic fingerprint of package environment inputs."""
 
@@ -350,10 +464,12 @@ def _publish_artifact_payload(
     environment: Path,
     rcc_location: Path,
     *,
-    provider: str | None,
-    runner: Runner,
+    provider: str | None = None,
+    trust_profile: RccTrustProfile | None = None,
+    runner: Runner = _subprocess_runner,
 ) -> dict:
     provider = _validate_provider_reference(provider)
+    trust_profile = trust_profile or provider_coupled_profile()
     args = [
         str(rcc_location),
         "env",
@@ -364,6 +480,7 @@ def _publish_artifact_payload(
     ]
     if provider:
         args.extend(["--provider", provider])
+    args.extend(trust_profile.rcc_arguments())
     return _run_json("publish", args, runner)
 
 
@@ -372,11 +489,16 @@ def publish_artifact(
     rcc_location: Path,
     *,
     provider: str | None = None,
+    trust_profile: RccTrustProfile | None = None,
     runner: Runner = _subprocess_runner,
 ) -> str:
     return parse_artifact_digest(
         _publish_artifact_payload(
-            environment, rcc_location, provider=provider, runner=runner
+            environment,
+            rcc_location,
+            provider=provider,
+            trust_profile=trust_profile,
+            runner=runner,
         )
     )
 
@@ -386,13 +508,18 @@ def publish_artifact_details(
     rcc_location: Path,
     *,
     provider: str | None = None,
+    trust_profile: RccTrustProfile | None = None,
     runner: Runner = _subprocess_runner,
 ) -> RccPublishedArtifactDetails:
     """Publish once and return RCC's unmodified specification/artifact digests."""
 
     return parse_published_artifact_details(
         _publish_artifact_payload(
-            environment, rcc_location, provider=provider, runner=runner
+            environment,
+            rcc_location,
+            provider=provider,
+            trust_profile=trust_profile,
+            runner=runner,
         )
     )
 
@@ -402,9 +529,11 @@ def acquire_artifact(
     rcc_location: Path,
     *,
     provider: str | None = None,
+    trust_profile: RccTrustProfile | None = None,
     runner: Runner = _subprocess_runner,
 ) -> dict:
     provider = _validate_provider_reference(provider)
+    trust_profile = trust_profile or provider_coupled_profile()
     if not _DIGEST_RE.fullmatch(artifact_digest):
         raise RccRuntimeError("acquire", "invalid artifact digest")
     args = [
@@ -418,6 +547,7 @@ def acquire_artifact(
     ]
     if provider:
         args.extend(["--provider", provider])
+    args.extend(trust_profile.rcc_arguments())
     try:
         result = _run_json("acquire", args, runner)
     except RccRuntimeError as exc:
@@ -440,21 +570,46 @@ def prepare_runtime(
     environment_identity: Path | None = None,
     source_generation: str = "unknown",
     provider: str | None = None,
+    trust_profile: RccTrustProfile | None = None,
     previous_descriptor: RccRuntimeDescriptor | None = None,
     runner: Runner = _subprocess_runner,
 ) -> RccRuntimeDescriptor:
     environment = environment.resolve()
     cache_identity = (environment_identity or environment).resolve()
+    if provider is None and previous_descriptor is not None:
+        provider = previous_descriptor.provider_reference
     provider = _validate_provider_reference(provider)
+    if trust_profile is None:
+        trust_profile = _resolve_profile(
+            environment=environment, environment_identity=environment_identity
+        )
     environment_fingerprint = environment_spec_fingerprint(environment)
-    cache_key = (cache_identity, environment_fingerprint, provider)
+    cache_identity_key = (
+        cache_identity,
+        environment_fingerprint,
+        provider,
+        trust_profile.profile_digest,
+    )
+    context_identity = _runtime_context_identity(rcc_location, trust_profile)
+    cache_key = (*cache_identity_key, context_identity)
     source_hash = source_generation
     if source_hash == "unknown":
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
     with _prepared_runtime_cache_lock:
         cached = _prepared_runtime_cache.get(cache_key)
+        cached_key = cache_key if cached is not None else None
+        if cached is None:
+            for candidate_key, candidate in reversed(
+                tuple(_prepared_runtime_cache.items())
+            ):
+                if candidate_key[:4] == cache_identity_key:
+                    cached_key = candidate_key
+                    cached = candidate
+                    break
+    cached_context_changed = cached is not None and cached_key != cache_key
     if (
         cached is not None
+        and not cached_context_changed
         and source_generation != "unknown"
         and source_generation != cached[1].source_generation
     ):
@@ -467,8 +622,8 @@ def prepare_runtime(
             preparation_class="source-reuse",
             rcc_version=cached_descriptor.rcc_version,
             runtime_kind=cached_descriptor.runtime_kind,
-            contract_version=cached_descriptor.contract_version,
             provider_reference=provider,
+            **_descriptor_trust_fields(trust_profile),
         )
         with _prepared_runtime_cache_lock:
             _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -477,23 +632,49 @@ def prepare_runtime(
         previous_descriptor is not None
         and previous_descriptor.environment_fingerprint == environment_fingerprint
     ):
+        previous_profile_digest = (
+            previous_descriptor.trust_profile_digest
+            if previous_descriptor.contract_version == RCC_TRUST_CONTRACT_VERSION
+            else provider_coupled_profile().profile_digest
+        )
+        profile_changed = previous_profile_digest != trust_profile.profile_digest
+        context_changed_for_previous = (
+            cached_context_changed
+            and cached is not None
+            and cached[1].artifact_digest == previous_descriptor.artifact_digest
+        )
         try:
             acquire_artifact(
                 previous_descriptor.artifact_digest,
                 rcc_location,
                 provider=provider,
+                trust_profile=trust_profile,
                 runner=runner,
             )
         except RccRuntimeError as exc:
+            if profile_changed:
+                raise RccRuntimeError(
+                    "trust", "profile change could not revalidate the existing artifact"
+                ) from exc
             if not exc.retryable:
                 raise
             # The durable descriptor is an identity hint, not an activation
             # path.  If RCC cannot materialize that identity, publish a new
             # artifact and validate its exact identity before using it.
             digest = publish_artifact(
-                environment, rcc_location, provider=provider, runner=runner
+                environment,
+                rcc_location,
+                provider=provider,
+                trust_profile=trust_profile,
+                runner=runner,
             )
-            acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+            acquire_artifact(
+                digest,
+                rcc_location,
+                provider=provider,
+                trust_profile=trust_profile,
+                runner=runner,
+            )
             descriptor = RccRuntimeDescriptor(
                 artifact_digest=digest,
                 source_generation=source_generation,
@@ -501,6 +682,7 @@ def prepare_runtime(
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="rebuild",
                 provider_reference=provider,
+                **_descriptor_trust_fields(trust_profile),
             )
         else:
             descriptor = RccRuntimeDescriptor(
@@ -508,8 +690,17 @@ def prepare_runtime(
                 source_generation=source_generation,
                 source_hash=source_hash,
                 environment_fingerprint=environment_fingerprint,
-                preparation_class="warm-reuse",
+                preparation_class=(
+                    "trust-revalidation"
+                    if profile_changed
+                    else (
+                        "context-revalidation"
+                        if context_changed_for_previous
+                        else "warm-reuse"
+                    )
+                ),
                 provider_reference=provider,
+                **_descriptor_trust_fields(trust_profile),
             )
         with _prepared_runtime_cache_lock:
             _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -521,15 +712,26 @@ def prepare_runtime(
                 descriptor.artifact_digest,
                 rcc_location,
                 provider=provider,
+                trust_profile=trust_profile,
                 runner=runner,
             )
         except RccRuntimeError as exc:
             if not exc.retryable:
                 raise
             digest = publish_artifact(
-                environment, rcc_location, provider=provider, runner=runner
+                environment,
+                rcc_location,
+                provider=provider,
+                trust_profile=trust_profile,
+                runner=runner,
             )
-            acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+            acquire_artifact(
+                digest,
+                rcc_location,
+                provider=provider,
+                trust_profile=trust_profile,
+                runner=runner,
+            )
             descriptor = RccRuntimeDescriptor(
                 artifact_digest=digest,
                 source_generation=source_generation,
@@ -537,6 +739,7 @@ def prepare_runtime(
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="rebuild",
                 provider_reference=provider,
+                **_descriptor_trust_fields(trust_profile),
             )
             with _prepared_runtime_cache_lock:
                 _prepared_runtime_cache[cache_key] = (
@@ -544,28 +747,49 @@ def prepare_runtime(
                     descriptor,
                 )
             return descriptor
-        return RccRuntimeDescriptor(
+        revalidated = RccRuntimeDescriptor(
             artifact_digest=descriptor.artifact_digest,
             source_generation=source_generation,
             source_hash=source_hash,
             environment_fingerprint=environment_fingerprint,
-            preparation_class=descriptor.preparation_class,
+            preparation_class=(
+                "context-revalidation"
+                if cached_context_changed
+                else descriptor.preparation_class
+            ),
             rcc_version=descriptor.rcc_version,
             runtime_kind=descriptor.runtime_kind,
-            contract_version=descriptor.contract_version,
             provider_reference=provider,
+            **_descriptor_trust_fields(trust_profile),
         )
+        with _prepared_runtime_cache_lock:
+            _prepared_runtime_cache[cache_key] = (
+                environment_fingerprint,
+                revalidated,
+            )
+        return revalidated
 
     digest = publish_artifact(
-        environment, rcc_location, provider=provider, runner=runner
+        environment,
+        rcc_location,
+        provider=provider,
+        trust_profile=trust_profile,
+        runner=runner,
     )
-    acquire_artifact(digest, rcc_location, provider=provider, runner=runner)
+    acquire_artifact(
+        digest,
+        rcc_location,
+        provider=provider,
+        trust_profile=trust_profile,
+        runner=runner,
+    )
     descriptor = RccRuntimeDescriptor(
         artifact_digest=digest,
         source_generation=source_generation,
         source_hash=source_hash,
         environment_fingerprint=environment_fingerprint,
         provider_reference=provider,
+        **_descriptor_trust_fields(trust_profile),
     )
     with _prepared_runtime_cache_lock:
         _prepared_runtime_cache[cache_key] = (environment_fingerprint, descriptor)
@@ -579,10 +803,29 @@ def build_exec_command(
     *,
     receipt_file: Path | None,
     json_output: bool = True,
+    package_root: Path | None = None,
 ) -> list[str]:
     if not descriptor.provider_context_bound:
         raise RccRuntimeError(
             "exec", "descriptor lacks provider trust context; reprepare required"
+        )
+    package_roots = (package_root,) if package_root is not None else ()
+    try:
+        active_profile = resolve_trust_profile(
+            os.environ, package_roots=package_roots, create_carrier=False
+        )
+    except ValueError as exc:
+        raise RccRuntimeError("trust", str(exc)) from exc
+    descriptor_profile_digest = (
+        descriptor.trust_profile_digest
+        if descriptor.contract_version == RCC_TRUST_CONTRACT_VERSION
+        else provider_coupled_profile().profile_digest
+    )
+    if active_profile.profile_digest != descriptor_profile_digest:
+        raise RccRuntimeError("exec", "trust profile changed; reprepare required")
+    if active_profile.is_local_detached and package_root is None:
+        raise RccRuntimeError(
+            "exec", "package root is required to validate local trust carrier"
         )
     args = [
         str(rcc_location),
@@ -594,6 +837,7 @@ def build_exec_command(
     ]
     if descriptor.provider_reference:
         args.extend(["--provider", descriptor.provider_reference])
+    args.extend(active_profile.rcc_arguments())
     if receipt_file is None and json_output:
         args.append("--json")
     elif receipt_file is not None:
