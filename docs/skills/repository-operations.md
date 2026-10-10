@@ -81,6 +81,17 @@ before writing its result; a fixture pin to 0.10.0 could not be resolved. The
 Runtime's explicit minimum-version error and those fixture inputs identify a
 test-fixture incompatibility, not an RCC defect.
 
+Frozen integration fixtures that synchronize packages with `package.yaml` may
+need a cold RCC-managed environment before the server emits its ready-port
+line. In `test_cli_live_reload_multi_package.py`, CI run 38042377995 showed
+the first `holotree variables --space ... --no-retry-build` operation being
+terminated at the 30-second startup deadline on both Windows and macOS,
+before the watched-reload assertions began. Keep the 90-second allowance
+limited to the initial native-executable startup; this reuses the existing
+native acceptance startup budget. Source-mode startup remains at 30 seconds,
+as do the watcher and restart deadlines. Inspect child stderr before
+treating a timeout as an RCC or Runtime failure.
+
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
 separately against the current integration revision, checking both its imports
@@ -2317,6 +2328,24 @@ Action Server module origins and file hashes; an environment-provided source
 SHA is only a label. Capture the server's bounded observed return code before
 discarding its process owner, separately from RCC terminal receipts.
 
+The portable inventory proposal in
+`actions.server.deployments.source_manifest.validate_proposed_inventory` is a
+pure check over explicitly supplied entry bytes, entry kinds, permission-only
+modes, and protected input names. It consumes entries incrementally, enforces
+10,000 entries, 50 MiB per file, 500 MiB total, path depth 64, 4,096 UTF-8 path
+bytes, and 255 bytes per component. Paths must already be NFC POSIX-relative
+names; Windows-unsafe names, case-fold collisions at any prefix, links and
+special entry kinds, privileged mode bits, and missing protected regular files
+are rejected. File modes become 0644 or 0755 according to executable bits,
+explicit directories are omitted from the sourcePolicyVersion 1 canonical inventory,
+and file sizes and hashes are derived from the supplied bytes. Its
+`ProposedInventoryValidation` result is not filesystem acquisition or snapshot
+evidence. The caller must separately establish selected-set completeness,
+no-follow root confinement, actual regular-file/link/hardlink/special-file
+identity, source and staging mutation coherence, and the staged inventory
+before making a trusted source or compiler claim. This proposal does not define
+a Package Revision identity or compiler output.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold
@@ -2725,3 +2754,44 @@ PyPI exposed no signed provenance attestation are recorded in
 Read non-ASCII JSON golden fixtures with an explicit `encoding="utf-8"` rather
 than `Path.read_text()`'s locale default so expected Unicode values are stable
 across Windows and POSIX test runners.
+
+## Frozen Runtime acceptance
+
+For frozen Runtime acceptance, bind the candidate commit and tree separately
+from the native build commit and tree. If the binary was built from a synthetic
+merge whose tree matches the candidate, record both identities and verify the
+tree equality; do not describe the binary as built from the candidate commit.
+Also retain the artifact and full package inventory digests, executable hash,
+and actual managed worker interpreter/Core origins. Run the exact expected
+cases with output capture disabled when their successful provenance is printed,
+and validate JUnit names, modules, failures, errors, and skips before calling
+the gate passed. Source-mode tests do not establish frozen behavior. A
+successful-generation drain is separate proof: start the new generation while
+an old Run is blocked, verify the new Run completes while the old one remains
+running, then verify the old Run reads its immutable source snapshot after
+release. Persist both outcomes, record the managed worker PID and creation time
+for each generation, and verify natural child cleanup independently. The
+frozen catalog workflow includes this as a fifth case and checks the actual
+frozen parent plus each worker's managed interpreter and Core 1.0.2 identity;
+source-mode success is not a substitute for the hosted native receipt. The
+five-case hosted run [38050870256](https://github.com/joshyorko/actions/actions/runs/38050870256)
+passed all five cases without skips under control `4e5f8200`, against native
+candidate `31239cf9` and its verified same-tree build `056d3260`. Independent
+artifact review confirmed both managed workers, v2 completion while v1 was
+running, the original v1 result, and controlled natural shutdown. This is Linux
+frozen evidence for that candidate only. Later production changes, including the
+catalog-ownership migration, require a newly built artifact and acceptance run;
+the older receipt does not establish their native behavior, Go-wrapper execution,
+or full release acceptance.
+
+When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
+`VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
+the Poetry/Invoke command with `VIRTUAL_ENV` unset, then explicitly check the
+project interpreter and required test module with errexit still enabled. Invoke
+pytest as `poetry run python -m pytest` so module selection stays with that
+interpreter rather than depending on a `pytest` executable found on `PATH`.
+Do not treat a missing executable as permission to fall back to host tools or
+source-mode tests. In frozen catalog workflow run 38037036032, `inv devinstall`
+completed its Poetry install, but the subsequent `poetry run pytest` returned
+`Command not found: pytest`; the workflow now checks the selected pytest module
+and interpreter before execution.

@@ -8,7 +8,6 @@ import socket
 import stat
 import tempfile
 import time
-import unicodedata
 import uuid
 import zipfile
 from pathlib import Path, PurePosixPath, PureWindowsPath
@@ -22,6 +21,10 @@ from fastapi.routing import APIRouter
 from pydantic import BaseModel
 
 from actions.server._database import datetime_to_str
+from actions.server._portable_paths import (
+    is_portable_path_component,
+    portable_path_collision_key,
+)
 from actions.server._rcc import get_rcc_robots
 from actions.server._runs_state_cache import get_global_runs_state
 from actions.server._settings import get_settings
@@ -280,24 +283,11 @@ def _validate_zip_members(
         if not raw_parts or any(part in {"", ".", ".."} for part in raw_parts):
             return False, "Zip contains an unsafe package root path", set()
 
-        reserved_names = {"CON", "PRN", "AUX", "NUL", "CLOCK$", "CONIN$", "CONOUT$"}
-        reserved_names.update(
-            f"{prefix}{digit}" for prefix in ("COM", "LPT") for digit in "123456789¹²³"
-        )
         for part in raw_parts:
-            basename = part.split(".", 1)[0].rstrip(" ").upper()
-            if (
-                part.endswith((".", " "))
-                or basename in reserved_names
-                or any(
-                    character in '<>:"|?*' or ord(character) < 32 for character in part
-                )
-            ):
+            if not is_portable_path_component(part):
                 return False, "Zip contains an unsafe Windows destination path", set()
 
-        normalized_parts = [
-            unicodedata.normalize("NFC", part).casefold() for part in raw_parts
-        ]
+        normalized_parts = [portable_path_collision_key(part) for part in raw_parts]
         normalized = "/".join(normalized_parts)
         for index in range(1, len(normalized_parts) + 1):
             normalized_prefix = "/".join(normalized_parts[:index])
