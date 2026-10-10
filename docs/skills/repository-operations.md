@@ -1829,6 +1829,13 @@ checks through the same explicitly selected interpreter as the build instead
 of bare `python`; a workflow host interpreter can lack standard-library
 modules required by the check.
 
+Keep that registry-floor check deterministic when newer compatible dependencies
+are published: pass exact `actions-core==EXPECTED_CORE` and
+`actions-http-helper==EXPECTED_HELPER` requirements alongside the Runtime wheel
+in the isolated pip install. Keep pip-report URL/SHA validation and installed
+version/import-origin checks as separate gates. A newer compatible Core release
+does not change the minimum version this canary must exercise.
+
 The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
 `_internal/actions/server/bin`. PyInstaller may report package-data destinations
 with native Windows backslashes; normalize both source and destination
