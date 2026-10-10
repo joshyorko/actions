@@ -43,19 +43,11 @@ def _fixture(tmp_path: Path):
     operations = tmp_path / "operations"
     operations.mkdir(mode=0o700)
 
-    fake_runtime = tmp_path / "fake-managed-runtime"
-    fake_site = fake_runtime / "lib" / "python3.12" / "site-packages"
-    fake_bin = fake_runtime / "bin"
-    fake_bin.mkdir(parents=True)
-    python_shim = fake_bin / "python"
-    python_shim.write_text(
-        "#!/bin/sh\nexec " + sys.executable + " \"$@\"\n",
-        encoding="utf-8",
-    )
-    python_shim.chmod(0o755)
+    fake_site = tmp_path / "fake-managed-site"
     (fake_site / "sitecustomize.py").parent.mkdir(parents=True, exist_ok=True)
     (fake_site / "sitecustomize.py").write_text(
-        f"import sys; sys.prefix = {str(fake_runtime)!r}; sys.executable = {str(python_shim)!r}\n",
+        "import os, sys; sys.prefix = os.environ['FIXTURE_PREFIX']; "
+        "sys.executable = os.environ['FIXTURE_PYTHON']\n",
         encoding="utf-8",
     )
     config_file = tmp_path / "fixture-config.json"
@@ -95,10 +87,8 @@ def _fixture(tmp_path: Path):
     fake_rcc = tmp_path / "rcc-fixture"
     fake_rcc.write_text(
         "#!" + sys.executable + "\n"
-        "import json, os, signal, subprocess, sys, time\n"
+        "import json, os, shutil, signal, subprocess, sys\n"
         f"FAKE_SITE = {str(fake_site)!r}\n"
-        f"FAKE_BIN = {str(fake_bin)!r}\n"
-        f"FAKE_RUNTIME = {str(fake_runtime)!r}\n"
         f"CONFIG = {str(config_file)!r}\n"
         f"SPEC = {SPEC_DIGEST!r}\n"
         f"ARTIFACT = {ARTIFACT_DIGEST!r}\n"
@@ -124,15 +114,27 @@ def _fixture(tmp_path: Path):
         "    separator = args.index('--')\n"
         "    command = args[separator + 1:]\n"
         "    receipt_path = args[args.index('--receipt-file') + 1]\n"
+        "    runtime = os.path.join(os.environ['ROBOCORP_HOME'], 'fixture-materialization')\n"
+        "    site = os.path.join(runtime, 'lib', 'python3.12', 'site-packages')\n"
+        "    fake_bin = os.path.join(runtime, 'bin')\n"
+        "    os.makedirs(fake_bin, mode=0o700)\n"
+        "    shutil.copytree(FAKE_SITE, site)\n"
+        "    python_path = os.path.join(fake_bin, 'python')\n"
+        "    with open(python_path, 'w', encoding='utf-8') as shim: shim.write('#!/bin/sh\\nexec ' + sys.executable + ' \"$@\"\\n')\n"
+        "    os.chmod(python_path, 0o700)\n"
         "    child_env = dict(os.environ)\n"
-        "    child_env['PATH'] = FAKE_BIN + os.pathsep + child_env['PATH']\n"
-        "    child_env['PYTHONPATH'] = FAKE_SITE\n"
+        "    child_env['PATH'] = fake_bin + os.pathsep + child_env['PATH']\n"
+        "    child_env['PYTHONPATH'] = site\n"
+        "    child_env['FIXTURE_PREFIX'] = os.path.join(os.path.dirname(runtime), 'wrong-prefix') if config.get('wrong_prefix') else runtime\n"
+        "    child_env['FIXTURE_PYTHON'] = python_path\n"
         "    if mode == 'timeout':\n"
         "        command = ['python', '-c', 'import time; time.sleep(10)']\n"
         "    assert command[0] == 'python', 'inspection must use managed interpreter command'\n"
-        "    child = subprocess.run(command, cwd=os.getcwd(), env=child_env, check=False)\n"
+        "    child = subprocess.run(command, cwd=runtime, env=child_env, check=False)\n"
         "    with open(receipt_path, 'w', encoding='utf-8') as receipt:\n"
-        "        json.dump({'artifactDigest': ARTIFACT, 'verification': {'valid': True}, 'leaseId': 'fixture-lease', 'status': config.get('receipt_status', 'completed'), 'exitCode': config.get('receipt_exit_code', child.returncode)}, receipt)\n"
+        "        receipt_materialization = '/tmp' if config.get('receipt_outside') else runtime\n"
+        "        materialization_id = '' if config.get('missing_materialization_id') else 'fixture-materialization-id'\n"
+        "        json.dump({'artifactDigest': ARTIFACT, 'verification': {'valid': True}, 'leaseId': 'fixture-lease', 'materializationId': materialization_id, 'path': receipt_materialization, 'status': config.get('receipt_status', 'completed'), 'exitCode': config.get('receipt_exit_code', child.returncode)}, receipt)\n"
         "    raise SystemExit(child.returncode)\n"
         "else:\n"
         "    raise SystemExit('unexpected RCC invocation: ' + repr(args))\n",
@@ -191,15 +193,17 @@ def test_inspects_exact_staged_fixture_through_bounded_rcc_and_compiles_proposal
     assert declaration.observation.provider_reference == PROVIDER
     assert declaration.observation.core_version == "1.0.2"
     assert (
-        "fake-managed-runtime/lib/python3.12/site-packages/actions/__init__.py"
+        "fixture-materialization/lib/python3.12/site-packages/actions/__init__.py"
         in declaration.observation.core_module_origin
     )
-    assert "fake-managed-runtime/lib/python3.12/site-packages" in declaration.observation.core_distribution_root
+    assert "fixture-materialization/lib/python3.12/site-packages" in declaration.observation.core_distribution_root
     assert declaration.observation.core_distribution_record_sha256
     assert declaration.observation.core_sys_prefix
-    assert declaration.observation.managed_python.endswith("fake-managed-runtime/bin/python")
-    assert declaration.observation.managed_prefix.endswith("fake-managed-runtime")
-    assert declaration.observation.materialization_cwd.startswith(str(operations))
+    assert declaration.observation.managed_python.endswith("fixture-materialization/bin/python")
+    assert declaration.observation.managed_prefix.endswith("fixture-materialization")
+    assert declaration.observation.materialization_path == declaration.observation.managed_prefix
+    assert declaration.observation.materialization_id == "fixture-materialization-id"
+    assert declaration.observation.materialization_cwd == declaration.observation.materialization_path
     assert declaration.observation.receipt_path.startswith(str(output))
     assert declaration.observation.exit_code == 0
     assert declaration.observation.cleanup.descendant_reap_complete
@@ -285,6 +289,24 @@ def test_rejects_receipt_that_does_not_confirm_success(tmp_path, receipt_values)
     source, output, operations, rcc = _fixture(tmp_path)
     _configure(rcc, **receipt_values)
     with pytest.raises(ValueError, match="does not confirm this completed invocation"):
+        _inspect(source, output, operations, rcc)
+    assert list(operations.iterdir()) == []
+
+
+@pytest.mark.parametrize(
+    ("receipt_values", "message"),
+    [
+        ({"receipt_outside": True}, "escapes the private RCC home"),
+        ({"wrong_prefix": True}, "outside its interpreter prefix"),
+        ({"missing_materialization_id": True}, "materialization identity is missing"),
+    ],
+)
+def test_binds_managed_python_to_receipt_materialization(
+    tmp_path, receipt_values, message
+):
+    source, output, operations, rcc = _fixture(tmp_path)
+    _configure(rcc, **receipt_values)
+    with pytest.raises(ValueError, match=message):
         _inspect(source, output, operations, rcc)
     assert list(operations.iterdir()) == []
 

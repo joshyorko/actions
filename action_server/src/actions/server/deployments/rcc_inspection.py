@@ -52,6 +52,8 @@ class InspectionObservation:
     core_sys_prefix: str
     managed_python: str
     managed_prefix: str
+    materialization_path: str
+    materialization_id: str
     materialization_cwd: str
     exit_code: int
     receipt_path: str
@@ -93,7 +95,7 @@ def _private_environment(operation_root: Path) -> dict[str, str]:
 def _run_bounded_rcc_process(
     command: list[str], *, cwd: Path, env: dict[str, str], output_limit: int,
     deadline: float, receipt: Path,
-) -> tuple[int, bytes, bytes, ProcessTreeCleanupResult]:
+    ) -> tuple[int, bytes, bytes, ProcessTreeCleanupResult]:
     """Run an RCC command with nonblocking drains and owned-tree cleanup."""
     process = subprocess.Popen(
         command, cwd=cwd, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -235,8 +237,8 @@ def _core_metadata_script(metadata_path: Path) -> str:
 
 
 def _load_metadata(
-    raw: bytes, package_dir: Path, operation_root: Path
-) -> tuple[dict[str, Any], str, str, str, str, str, str, str, str, bytes]:
+    raw: bytes, package_dir: Path, materialization_path: Path
+) -> tuple[dict[str, Any], str, str, str, str, str, str, str, bytes]:
     if len(raw) > _OUTPUT_LIMIT:
         raise ValueError("inspection metadata exceeds its bound")
     value = json.loads(raw.decode("utf-8"))
@@ -275,10 +277,17 @@ def _load_metadata(
             raise ValueError(
                 "installed Core provenance is outside its interpreter prefix"
             ) from None
-    try:
-        materialization_cwd.relative_to(operation_root.resolve())
-    except ValueError:
-        raise ValueError("RCC materialization directory is outside this operation") from None
+    if prefix != materialization_path.resolve(strict=True):
+        raise ValueError("managed Python prefix differs from RCC receipt materialization")
+    for evidence_path in (origin, distribution_root, python):
+        try:
+            evidence_path.relative_to(materialization_path.resolve(strict=True))
+        except ValueError:
+            raise ValueError(
+                "installed Core provenance is outside RCC receipt materialization"
+            ) from None
+    if materialization_cwd != materialization_path.resolve(strict=True):
+        raise ValueError("RCC child working directory differs from receipt materialization")
     if Path(core["python"]).name != "python":
         raise ValueError("RCC inspection did not use the managed python command")
     if not core["recorded_origin"] or len(core["record_sha256"]) != 64:
@@ -299,7 +308,6 @@ def _load_metadata(
         core["record_sha256"],
         str(prefix),
         str(python),
-        str(prefix),
         str(materialization_cwd),
         raw,
     )
@@ -560,6 +568,27 @@ def inspect_controlled_fixture(
             or receipt["exitCode"] != 0
         ):
             raise ValueError("RCC receipt does not confirm this completed invocation")
+        materialization_id = receipt.get("materializationId")
+        materialization_value = receipt.get("path")
+        if not isinstance(materialization_id, str) or not materialization_id:
+            raise ValueError("RCC receipt materialization identity is missing")
+        if not isinstance(materialization_value, str) or not materialization_value:
+            raise ValueError("RCC receipt materialization path is missing")
+        rcc_home = Path(env["ROBOCORP_HOME"]).resolve(strict=True)
+        materialization_path = Path(materialization_value).resolve(strict=True)
+        try:
+            materialization_path.relative_to(rcc_home)
+        except ValueError:
+            raise ValueError(
+                "RCC receipt materialization path escapes the private RCC home"
+            ) from None
+        materialization_facts = materialization_path.stat()
+        if (
+            materialization_path == rcc_home
+            or not stat.S_ISDIR(materialization_facts.st_mode)
+            or materialization_facts.st_uid != os.geteuid()
+        ):
+            raise ValueError("RCC receipt materialization is not an owned directory")
         (
             metadata,
             core_version,
@@ -568,11 +597,12 @@ def inspect_controlled_fixture(
             core_record_sha256,
             core_sys_prefix,
             managed_python,
-            managed_prefix,
             materialization_cwd,
             metadata_bytes,
         ) = _load_metadata(
-            _read_owned_regular_file(metadata_file, _OUTPUT_LIMIT), staged, root
+            _read_owned_regular_file(metadata_file, _OUTPUT_LIMIT),
+            staged,
+            materialization_path,
         )
         supplied_actions = _supplied_actions(metadata, declared_actions, staged)
         compilation = package_compiler.compile_controlled_fixture(
@@ -623,7 +653,9 @@ def inspect_controlled_fixture(
             core_distribution_record_sha256=core_record_sha256,
             core_sys_prefix=core_sys_prefix,
             managed_python=managed_python,
-            managed_prefix=managed_prefix,
+            managed_prefix=str(materialization_path),
+            materialization_path=str(materialization_path),
+            materialization_id=materialization_id,
             materialization_cwd=materialization_cwd,
             exit_code=code,
             receipt_path=str(receipt_file),
