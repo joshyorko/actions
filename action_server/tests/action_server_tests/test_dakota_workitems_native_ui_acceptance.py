@@ -14,7 +14,9 @@ import subprocess
 import sys
 import tempfile
 import time
+from collections.abc import Mapping
 from pathlib import Path
+from typing import Literal, TypedDict, TypeGuard
 
 import pytest
 
@@ -28,6 +30,58 @@ STATES_NOT_RUN = {
     "missing_runtime_support": "cannot be induced without mutating the package",
     "generic_http_500": "no supported native backend fault fixture",
 }
+
+
+class PackageTreeEntry(TypedDict):
+    path: str
+    kind: str
+    mode: int
+    link_target: str | None
+    content_sha256: str | None
+
+
+class PackageTreeChange(TypedDict):
+    path: str
+    fields: list[str]
+    baseline: PackageTreeEntry
+    observed: PackageTreeEntry
+
+
+class PackageTreeDifference(TypedDict):
+    added: list[PackageTreeEntry]
+    removed: list[PackageTreeEntry]
+    changed: list[PackageTreeChange]
+
+
+class RuntimeTreeDelta(PackageTreeDifference):
+    valid: bool
+    failure_reason: str | None
+    runtime_generated_state: list[PackageTreeEntry]
+    rcc_version: str
+    expected_rcc_path: str
+
+
+class CleanupObservation(TypedDict, total=False):
+    wrapper_started: bool
+    wrapper_reaped: bool
+    live_descendant_count: int
+    zombie_descendant_count: int
+    descendant_snapshot_complete: bool
+    control_error_count: int
+    control_failure_type: str
+    snapshot_failure_type: str | None
+    stop_failure_type: str | None
+
+
+def is_string_keyed_object(value: object) -> TypeGuard[dict[str, object]]:
+    return isinstance(value, dict) and all(isinstance(key, str) for key in value)
+
+
+def receipt_section(receipt: Mapping[str, object], key: str) -> dict[str, object]:
+    value = receipt.get(key)
+    if not is_string_keyed_object(value):
+        raise AssertionError(f"acceptance receipt field {key} is not an object")
+    return value
 
 
 def sha256(path: Path) -> str:
@@ -67,9 +121,9 @@ def packaged_tree_sha256(
 
 def packaged_tree_inventory(
     root: Path, *, exclude_root_files: set[str] | None = None
-) -> list[dict[str, str | int | None]]:
+) -> list[PackageTreeEntry]:
     excluded = exclude_root_files or set()
-    inventory = []
+    inventory: list[PackageTreeEntry] = []
     for path in sorted(
         root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()
     ):
@@ -149,13 +203,13 @@ def write_tree_inventory_snapshot(
 
 
 def compare_package_tree_inventories(
-    baseline: list[dict], observed: list[dict]
-) -> dict[str, list[dict]]:
+    baseline: list[PackageTreeEntry], observed: list[PackageTreeEntry]
+) -> PackageTreeDifference:
     before = {entry["path"]: entry for entry in baseline}
     after = {entry["path"]: entry for entry in observed}
     added = [after[path] for path in sorted(after.keys() - before.keys())]
     removed = [before[path] for path in sorted(before.keys() - after.keys())]
-    changed = []
+    changed: list[PackageTreeChange] = []
     for path in sorted(before.keys() & after.keys()):
         fields = [
             field
@@ -175,8 +229,11 @@ def compare_package_tree_inventories(
 
 
 def classify_runtime_tree_delta(
-    baseline: list[dict], observed: list[dict], *, platform_name: str
-) -> dict:
+    baseline: list[PackageTreeEntry],
+    observed: list[PackageTreeEntry],
+    *,
+    platform_name: str,
+) -> RuntimeTreeDelta:
     from actions.server._download_rcc import RCC_VERSION
 
     difference = compare_package_tree_inventories(baseline, observed)
@@ -216,10 +273,10 @@ def classify_runtime_tree_delta(
 
 
 def record_postruntime_tree_observation(
-    receipt: dict,
+    receipt: dict[str, object],
     *,
     package_root: Path,
-    baseline_entries: list[dict],
+    baseline_entries: list[PackageTreeEntry],
     baseline_tree_sha256: str,
     baseline_kind: str,
     stage: str,
@@ -336,12 +393,19 @@ def wrapper_source_sha256(root: Path, relative_paths: tuple[str, ...]) -> str:
     return digest.hexdigest()
 
 
-def require_measured_digest(artifact: dict, field: str, measured: str) -> None:
+def require_sha256(value: object, field: str) -> str:
+    if not isinstance(value, str):
+        raise AssertionError(f"manifest field {field} is missing or invalid")
+    if re.fullmatch(r"[0-9a-f]{64}", value) is None:
+        raise AssertionError(f"manifest field {field} is missing or invalid")
+    return value
+
+
+def require_measured_digest(
+    artifact: Mapping[str, object], field: str, measured: str
+) -> None:
     recorded = artifact.get(field)
-    assert isinstance(recorded, str), f"manifest field {field} is missing or invalid"
-    assert re.fullmatch(
-        r"[0-9a-f]{64}", recorded
-    ), f"manifest field {field} is missing or invalid"
+    recorded = require_sha256(recorded, field)
     assert recorded == measured, f"manifest field {field} does not match build input"
 
 
@@ -350,7 +414,7 @@ class NativeRuntimeStartupError(AssertionError):
         self,
         primary_error: Exception,
         cleanup_error: Exception | None = None,
-        cleanup_observation: dict | None = None,
+        cleanup_observation: CleanupObservation | None = None,
     ):
         self.primary_error = primary_error
         self.cleanup_error = cleanup_error
@@ -362,7 +426,11 @@ class NativeRuntimeStartupError(AssertionError):
 
 
 class NativeRuntimeCleanupError(AssertionError):
-    def __init__(self, observation: dict, stop_error: BaseException | None = None):
+    def __init__(
+        self,
+        observation: CleanupObservation,
+        stop_error: BaseException | None = None,
+    ):
         self.observation = observation
         self.stop_error = stop_error
         detail = (
@@ -418,20 +486,37 @@ def test_wrapper_extraction_root_is_beneath_the_test_runtime_home(
     assert root.is_relative_to(tmp_path)
 
 
-def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
+def packaged_runtime_identity() -> (
+    tuple[Path, str, str, str, Literal["frozen", "go-wrapper"], dict[str, object]]
+):
     executable_value = os.environ.get("DAKOTA_WORKITEMS_UI_EXECUTABLE")
     source_sha = os.environ.get("DAKOTA_WORKITEMS_UI_SOURCE_SHA", "")
-    runtime_kind = os.environ.get("DAKOTA_WORKITEMS_UI_RUNTIME_KIND", "frozen")
+    runtime_kind_value = os.environ.get("DAKOTA_WORKITEMS_UI_RUNTIME_KIND", "frozen")
     manifest_value = os.environ.get("DAKOTA_WORKITEMS_UI_BUILD_MANIFEST")
     assert executable_value and manifest_value
     assert re.fullmatch(r"[0-9a-f]{40}", source_sha)
-    assert runtime_kind in {"frozen", "go-wrapper"}
+    if runtime_kind_value == "frozen":
+        runtime_kind: Literal["frozen", "go-wrapper"] = "frozen"
+    elif runtime_kind_value == "go-wrapper":
+        runtime_kind = "go-wrapper"
+    else:
+        raise AssertionError("native Runtime kind must be frozen or go-wrapper")
 
     executable = Path(executable_value).resolve()
-    manifest = json.loads(Path(manifest_value).read_text(encoding="utf-8"))
+    manifest_value_data: object = json.loads(
+        Path(manifest_value).read_text(encoding="utf-8")
+    )
+    assert is_string_keyed_object(
+        manifest_value_data
+    ), "native manifest must be an object"
+    manifest = manifest_value_data
     assert manifest.get("source_sha") == source_sha
     assert manifest.get("platform") == platform.system()
-    artifact = manifest.get("artifacts", {}).get(runtime_kind, {})
+    artifacts_value = manifest.get("artifacts")
+    assert is_string_keyed_object(artifacts_value), "native artifacts must be an object"
+    artifact_value = artifacts_value.get(runtime_kind)
+    assert is_string_keyed_object(artifact_value), "selected artifact must be an object"
+    artifact = artifact_value
     expected_path = packaged_artifact_relative_path(runtime_kind, platform.system())
     assert artifact.get("path") == expected_path
     executable_sha = sha256(executable)
@@ -475,17 +560,21 @@ def packaged_runtime_identity() -> tuple[Path, str, str, str, str, dict]:
         "assets_zip_sha256",
         sha256(PACKAGE / "go-wrapper/assets/assets.zip"),
     )
+    architecture = manifest.get("architecture")
+    assert isinstance(
+        architecture, str
+    ), "native manifest architecture must be a string"
     return (
         executable,
         source_sha,
         executable_sha,
-        manifest["architecture"],
+        architecture,
         runtime_kind,
         artifact,
     )
 
 
-def write_receipt(receipt: dict) -> None:
+def write_receipt(receipt: dict[str, object]) -> None:
     destination_value = os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT")
     if not destination_value:
         return
@@ -505,7 +594,9 @@ def write_receipt(receipt: dict) -> None:
             temporary.unlink(missing_ok=True)
 
 
-def validate_browser_stage_result(returncode: int, receipt: dict) -> dict:
+def validate_browser_stage_result(
+    returncode: int, receipt: Mapping[str, object]
+) -> Mapping[str, object]:
     if returncode != 0 or receipt.get("status") != "PASS":
         raise AssertionError(
             json.dumps({"returncode": returncode, "receipt": receipt}, sort_keys=True)
@@ -513,9 +604,17 @@ def validate_browser_stage_result(returncode: int, receipt: dict) -> dict:
     return receipt
 
 
-def record_browser_stage(acceptance_receipt: dict, browser_stage: dict) -> None:
-    acceptance_receipt["browser_stages"].append(browser_stage)
-    validate_browser_stage_result(browser_stage["script_exit_code"], browser_stage)
+def record_browser_stage(
+    acceptance_receipt: dict[str, object], browser_stage: dict[str, object]
+) -> None:
+    stages = acceptance_receipt.get("browser_stages")
+    if not isinstance(stages, list):
+        raise AssertionError("acceptance receipt browser_stages is not a list")
+    stages.append(browser_stage)
+    script_exit_code = browser_stage.get("script_exit_code")
+    if not isinstance(script_exit_code, int):
+        raise AssertionError("browser receipt script_exit_code is not an integer")
+    validate_browser_stage_result(script_exit_code, browser_stage)
 
 
 def run_browser_stage(
@@ -544,9 +643,12 @@ def run_browser_stage(
     if len(result.stdout) > 65536:
         raise AssertionError("browser receipt exceeded its size limit")
     try:
-        receipt = json.loads(result.stdout)
+        receipt_value: object = json.loads(result.stdout)
     except json.JSONDecodeError:
         raise AssertionError("browser acceptance returned an invalid receipt") from None
+    if not is_string_keyed_object(receipt_value):
+        raise AssertionError("browser acceptance returned a non-object receipt")
+    receipt = receipt_value
     receipt["script_exit_code"] = result.returncode
     return receipt
 
@@ -566,7 +668,7 @@ def test_browser_nonzero_exit_preserves_nested_failure_receipt() -> None:
 
 
 def test_browser_stage_is_recorded_before_failure_is_raised() -> None:
-    acceptance_receipt = {"browser_stages": []}
+    acceptance_receipt: dict[str, object] = {"browser_stages": []}
     browser_stage = {
         "status": "FAIL",
         "stage": "normal",
@@ -636,20 +738,28 @@ def start_native_runtime(
             env=native_runtime_environment(runtime_home),
         )
     except Exception as error:
-        cleanup_receipt: dict = {}
+        cleanup_receipt: dict[str, object] = {}
+        cleanup_observation: CleanupObservation | None
         try:
-            stop_runtime_for_acceptance(process, cleanup_receipt)
+            cleanup_observation = stop_runtime_for_acceptance(process, cleanup_receipt)
         except Exception as cleanup_error:
+            cleanup_observation = (
+                cleanup_error.observation
+                if isinstance(cleanup_error, NativeRuntimeCleanupError)
+                else None
+            )
             raise NativeRuntimeStartupError(
-                error, cleanup_error, cleanup_receipt.get("cleanup_observation")
+                error, cleanup_error, cleanup_observation
             ) from None
         raise NativeRuntimeStartupError(
-            error, cleanup_observation=cleanup_receipt.get("cleanup_observation")
+            error, cleanup_observation=cleanup_observation
         ) from None
     return process
 
 
-def stop_runtime_for_acceptance(process: ActionServerProcess, receipt: dict) -> None:
+def stop_runtime_for_acceptance(
+    process: ActionServerProcess, receipt: dict[str, object]
+) -> CleanupObservation:
     from actions.server._common.process import (
         ProcessTreeCleanupResult,
         force_kill_process_tree_until,
@@ -685,7 +795,7 @@ def stop_runtime_for_acceptance(process: ActionServerProcess, receipt: dict) -> 
                 snapshot_complete_before_call=snapshot_complete,
             )
         except BaseException as error:
-            observation = {
+            cleanup_failure_observation: CleanupObservation = {
                 "wrapper_started": True,
                 "wrapper_reaped": False,
                 "live_descendant_count": 0,
@@ -696,12 +806,14 @@ def stop_runtime_for_acceptance(process: ActionServerProcess, receipt: dict) -> 
                 "snapshot_failure_type": snapshot_failure_type,
                 "stop_failure_type": type(stop_error).__name__ if stop_error else None,
             }
-            receipt["cleanup_observation"] = observation
+            receipt["cleanup_observation"] = cleanup_failure_observation
             receipt["cleanup_failure_type"] = type(error).__name__
             receipt["status"] = "FAIL"
-            raise NativeRuntimeCleanupError(observation, stop_error) from None
+            raise NativeRuntimeCleanupError(
+                cleanup_failure_observation, stop_error
+            ) from None
 
-    observation = {
+    observation: CleanupObservation = {
         "wrapper_started": child is not None,
         "wrapper_reaped": result.wrapper_reaped,
         "live_descendant_count": len(result.live_descendant_pids),
@@ -721,6 +833,23 @@ def stop_runtime_for_acceptance(process: ActionServerProcess, receipt: dict) -> 
         receipt["cleanup_failure_type"] = cleanup_type
         receipt["status"] = "FAIL"
         raise NativeRuntimeCleanupError(observation, stop_error) from None
+    return observation
+
+
+class NoOpStopActionServerProcess(ActionServerProcess):
+    def stop(self) -> None:
+        return None
+
+
+def cleanup_test_runtime(
+    datadir: Path, child: subprocess.Popen | None = None
+) -> NoOpStopActionServerProcess:
+    from actions.server._robo_utils.process import Process
+
+    process = NoOpStopActionServerProcess(datadir)
+    process._process = Process(["test-runtime"], cwd=datadir)
+    process.process._proc = child
+    return process
 
 
 def test_native_runtime_startup_failure_stops_created_process(
@@ -790,12 +919,13 @@ def test_native_runtime_startup_preserves_cleanup_failure_type(
             raise RuntimeError("cleanup detail is not emitted")
 
     monkeypatch.setattr(sys.modules[__name__], "ActionServerProcess", StartupProcess)
-    with pytest.raises(AssertionError) as error:
+    with pytest.raises(NativeRuntimeStartupError) as error:
         start_native_runtime(tmp_path, tmp_path, tmp_path, "test-key")
     assert "TimeoutError" in str(error.value)
     assert isinstance(error.value.primary_error, TimeoutError)
-    assert isinstance(error.value.cleanup_error, NativeRuntimeCleanupError)
-    assert isinstance(error.value.cleanup_error.stop_error, RuntimeError)
+    cleanup_error = error.value.cleanup_error
+    assert isinstance(cleanup_error, NativeRuntimeCleanupError)
+    assert isinstance(cleanup_error.stop_error, RuntimeError)
 
 
 def test_missing_and_mismatched_manifest_digests_fail_closed() -> None:
@@ -858,7 +988,7 @@ def test_frozen_runtime_copy_preserves_measured_package_tree(tmp_path: Path) -> 
 
 
 def test_tree_inventory_diff_preserves_added_removed_and_changed_entries() -> None:
-    baseline = [
+    baseline: list[PackageTreeEntry] = [
         {
             "path": "changed.py",
             "kind": "file",
@@ -875,7 +1005,7 @@ def test_tree_inventory_diff_preserves_added_removed_and_changed_entries() -> No
         },
     ]
 
-    observed = [
+    observed: list[PackageTreeEntry] = [
         {
             "path": "changed.py",
             "kind": "file",
@@ -914,7 +1044,7 @@ def test_runtime_rcc_download_is_measured_separately_from_immutable_tree(
     from actions.server._download_rcc import RCC_VERSION
 
     executable_path = f"_internal/actions/server/bin/rcc-{RCC_VERSION}{suffix}"
-    observed = [
+    observed: list[PackageTreeEntry] = [
         {
             "path": "_internal/actions/server/bin",
             "kind": "directory",
@@ -939,7 +1069,7 @@ def test_runtime_rcc_download_is_measured_separately_from_immutable_tree(
 
 
 def test_runtime_tree_delta_rejects_mutation_of_an_immutable_build_entry() -> None:
-    baseline = [
+    baseline: list[PackageTreeEntry] = [
         {
             "path": "module.py",
             "kind": "file",
@@ -948,7 +1078,7 @@ def test_runtime_tree_delta_rejects_mutation_of_an_immutable_build_entry() -> No
             "content_sha256": "a" * 64,
         }
     ]
-    observed = [{**baseline[0], "content_sha256": "b" * 64}]
+    observed: list[PackageTreeEntry] = [{**baseline[0], "content_sha256": "b" * 64}]
 
     result = classify_runtime_tree_delta(baseline, observed, platform_name="Windows")
     assert result["valid"] is False
@@ -957,7 +1087,7 @@ def test_runtime_tree_delta_rejects_mutation_of_an_immutable_build_entry() -> No
 
 
 def test_runtime_tree_delta_rejects_unexplained_additions() -> None:
-    observed = [
+    observed: list[PackageTreeEntry] = [
         {
             "path": "_internal/actions/server/__pycache__",
             "kind": "directory",
@@ -984,7 +1114,7 @@ def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) 
     manifest_path = tmp_path / "native-artifact-manifest.json"
     manifest_path.write_text("{}\n", encoding="utf-8")
     receipt_path = tmp_path / "dakota-workitems-ui-frozen-test.json"
-    receipt = {"package_tree_sha256": packaged_tree_sha256(package)}
+    receipt: dict[str, object] = {"package_tree_sha256": packaged_tree_sha256(package)}
 
     runtime_package = copy_frozen_package_tree(package, tmp_path / "runtime-copy")
     generated = runtime_package / "__pycache__"
@@ -1028,32 +1158,44 @@ def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) 
     ]
     assert report["removed"] == []
     assert report["changed"] == []
-    assert receipt["post_runtime_tree_diff"]["added_count"] == 2
+    assert receipt_section(receipt, "post_runtime_tree_diff")["added_count"] == 2
     assert (
         tmp_path
         / "dakota-workitems-ui-frozen-test-frozen-copy-post-runtime-tree-inventory.json"
     ).is_file()
 
 
-def test_cleanup_failure_prevents_bounded_pass_receipt() -> None:
-    class FailingCleanup:
-        process = type("Wrapped", (), {"_proc": None})()
-
-        def stop(self):
+def test_cleanup_failure_prevents_bounded_pass_receipt(tmp_path: Path) -> None:
+    class FailingCleanup(NoOpStopActionServerProcess):
+        def stop(self) -> None:
             raise OSError("cleanup details stay private")
 
-    receipt = {"status": "IN_PROGRESS"}
+    process = FailingCleanup(tmp_path)
+    from actions.server._robo_utils.process import Process
+
+    process._process = Process(["test-runtime"], cwd=tmp_path)
+    receipt: dict[str, object] = {"status": "IN_PROGRESS"}
     with pytest.raises(NativeRuntimeCleanupError):
-        stop_runtime_for_acceptance(FailingCleanup(), receipt)
+        stop_runtime_for_acceptance(process, receipt)
     assert receipt["status"] == "FAIL"
     assert receipt["cleanup_failure_type"] == "OSError"
-    assert receipt["cleanup_observation"]["stop_failure_type"] == "OSError"
+    assert (
+        receipt_section(receipt, "cleanup_observation")["stop_failure_type"]
+        == "OSError"
+    )
 
 
 def test_normal_stop_return_with_observed_live_descendant_fails_closed(
-    monkeypatch: pytest.MonkeyPatch,
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     from actions.server._common.process import ProcessTreeCleanupResult
+
+    child_process = subprocess.Popen(
+        [sys.executable, "-c", "import time; time.sleep(30)"],
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
 
     class Child:
         pid = 321
@@ -1061,24 +1203,11 @@ def test_normal_stop_return_with_observed_live_descendant_fails_closed(
         def create_time(self):
             return 123.5
 
-    class Wrapper:
-        pid = 123
-
-        def poll(self):
-            return None
-
-    class RuntimeProcess:
-        _proc = Wrapper()
-
-    class Runtime:
-        process = RuntimeProcess()
-
-        def stop(self):
-            return None
+    process = cleanup_test_runtime(tmp_path, child_process)
 
     monkeypatch.setattr(
         "actions.server._common.process.snapshot_process_descendants",
-        lambda pid: [Child()] if pid == 123 else [],
+        lambda pid: [Child()] if pid == child_process.pid else [],
     )
     monkeypatch.setattr(
         "actions.server._common.process.force_kill_process_tree_until",
@@ -1086,12 +1215,18 @@ def test_normal_stop_return_with_observed_live_descendant_fails_closed(
             True, (321,), (), (), descendant_snapshot_complete=True
         ),
     )
-    receipt = {"status": "IN_PROGRESS"}
-    with pytest.raises(NativeRuntimeCleanupError):
-        stop_runtime_for_acceptance(Runtime(), receipt)
-    assert receipt["status"] == "FAIL"
-    assert receipt["cleanup_observation"]["wrapper_reaped"] is True
-    assert receipt["cleanup_observation"]["live_descendant_count"] == 1
+    receipt: dict[str, object] = {"status": "IN_PROGRESS"}
+    try:
+        with pytest.raises(NativeRuntimeCleanupError):
+            stop_runtime_for_acceptance(process, receipt)
+        assert receipt["status"] == "FAIL"
+        observation = receipt_section(receipt, "cleanup_observation")
+        assert observation["wrapper_reaped"] is True
+        assert observation["live_descendant_count"] == 1
+    finally:
+        if child_process.poll() is None:
+            child_process.kill()
+            child_process.wait(timeout=2)
 
 
 def test_bounded_observation_reaps_only_the_owned_runtime_process() -> None:
@@ -1102,22 +1237,16 @@ def test_bounded_observation_reaps_only_the_owned_runtime_process() -> None:
         stderr=subprocess.DEVNULL,
     )
 
-    class RuntimeProcess:
-        _proc = child
+    process = cleanup_test_runtime(Path.cwd(), child)
 
-    class Runtime:
-        process = RuntimeProcess()
-
-        def stop(self):
-            return None
-
-    receipt = {"status": "IN_PROGRESS"}
+    receipt: dict[str, object] = {"status": "IN_PROGRESS"}
     try:
-        stop_runtime_for_acceptance(Runtime(), receipt)
+        stop_runtime_for_acceptance(process, receipt)
         assert child.poll() is not None
-        assert receipt["cleanup_observation"]["wrapper_reaped"] is True
-        assert receipt["cleanup_observation"]["live_descendant_count"] == 0
-        assert "zombie_descendant_count" in receipt["cleanup_observation"]
+        observation = receipt_section(receipt, "cleanup_observation")
+        assert observation["wrapper_reaped"] is True
+        assert observation["live_descendant_count"] == 0
+        assert "zombie_descendant_count" in observation
     finally:
         if child.poll() is None:
             child.kill()
@@ -1149,13 +1278,20 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
     wrapper_source_sha = artifact.get("wrapper_source_sha256")
     embedded_frozen_tree_sha = artifact.get("frozen_package_tree_sha256")
     if runtime_kind == "go-wrapper":
-        for digest in (
-            embedded_files_sha,
-            assets_zip_sha,
-            wrapper_source_sha,
-            embedded_frozen_tree_sha,
-        ):
-            assert isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest)
+        embedded_files_sha = require_sha256(embedded_files_sha, "embedded_files_sha256")
+        assets_zip_sha = require_sha256(assets_zip_sha, "assets_zip_sha256")
+        wrapper_source_sha = require_sha256(wrapper_source_sha, "wrapper_source_sha256")
+        embedded_frozen_tree_sha = require_sha256(
+            embedded_frozen_tree_sha, "frozen_package_tree_sha256"
+        )
+    if runtime_kind == "frozen":
+        assert package_tree_sha is not None
+        immutable_build_tree_sha = package_tree_sha
+    else:
+        immutable_build_tree_sha = require_sha256(
+            artifact.get("frozen_package_tree_sha256"),
+            "frozen_package_tree_sha256",
+        )
     node = os.environ.get("DAKOTA_WORKITEMS_UI_NODE") or shutil.which("node")
     assert node is not None
     project = tmp_path / "project"
@@ -1165,13 +1301,13 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         directory.mkdir()
 
     api_key = secrets.token_urlsafe(32)
-    receipt = {
+    receipt: dict[str, object] = {
         "schema_version": 1,
         "status": "IN_PROGRESS",
         "source_sha": source_sha,
         "executable_sha256": executable_sha,
         "package_tree_sha256": package_tree_sha,
-        "immutable_build_tree_sha256": package_tree_sha or embedded_frozen_tree_sha,
+        "immutable_build_tree_sha256": immutable_build_tree_sha,
         "embedded_files_sha256": embedded_files_sha,
         "assets_zip_sha256": assets_zip_sha,
         "wrapper_source_sha256": wrapper_source_sha,
@@ -1188,7 +1324,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
     }
     process: ActionServerProcess | None = None
     runtime_package_root: Path | None = None
-    runtime_baseline_entries: list[dict] | None = None
+    runtime_baseline_entries: list[PackageTreeEntry] | None = None
     runtime_baseline_tree_sha: str | None = None
     runtime_baseline_kind: str | None = None
     runtime_exclude_root_files: set[str] | None = None
@@ -1239,11 +1375,12 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             check=False,
         )
         assert version.returncode == 0
-        receipt["runtime_version"] = version.stdout.strip()
+        runtime_version = version.stdout.strip()
+        receipt["runtime_version"] = runtime_version
 
         if runtime_kind == "go-wrapper":
             extracted_root = wrapper_extraction_root(
-                runtime_home, receipt["runtime_version"], platform.system()
+                runtime_home, runtime_version, platform.system()
             )
             assert extracted_root.is_dir()
             assert extracted_root.resolve().is_relative_to(runtime_home.resolve())
@@ -1342,9 +1479,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                     stage=f"{runtime_kind}-post-runtime",
                     exclude_root_files=runtime_exclude_root_files,
                     immutable_package_root=package_root,
-                    immutable_package_tree_sha256=receipt[
-                        "immutable_build_tree_sha256"
-                    ],
+                    immutable_package_tree_sha256=immutable_build_tree_sha,
                     receipt_value=os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
                     source_sha=source_sha,
                     runtime_kind=runtime_kind,
@@ -1382,9 +1517,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                     stage=f"{runtime_kind}-post-runtime",
                     exclude_root_files=runtime_exclude_root_files,
                     immutable_package_root=package_root,
-                    immutable_package_tree_sha256=receipt[
-                        "immutable_build_tree_sha256"
-                    ],
+                    immutable_package_tree_sha256=immutable_build_tree_sha,
                     receipt_value=os.environ.get("DAKOTA_WORKITEMS_UI_RECEIPT"),
                     source_sha=source_sha,
                     runtime_kind=runtime_kind,
@@ -1399,7 +1532,8 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 receipt["failure_phase"] = "post_runtime_tree_inventory"
                 write_receipt(receipt)
                 raise
-            if not receipt["post_runtime_tree_validation"]["valid"]:
+            validation = receipt_section(receipt, "post_runtime_tree_validation")
+            if validation.get("valid") is not True:
                 receipt["status"] = "FAIL"
                 receipt["failure_type"] = "AssertionError"
                 receipt["failure_phase"] = "post_runtime_package_tree_delta"
