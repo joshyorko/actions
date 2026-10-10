@@ -238,6 +238,18 @@ def test_migrate_archives_legacy_output_before_historical_migration_11(
     db_path = tmp_path / "migration-v10-populated.db"
     with create_db(db_path) as db:
         with db.transaction():
+            # Backdating must also remove schema owned by later migrations.
+            for table in (
+                "run_output",
+                "run_attempt",
+                "run_pin",
+                "run_access_grant",
+                "run_admission",
+                "workspace",
+                "mcp_resource_routing",
+                "mcp_catalog_name",
+            ):
+                db.execute("DROP TABLE " + table)
             db.execute("UPDATE migration SET id = ?, name = ?", [10, "add_schedules"])
             db.execute("ALTER TABLE run ADD COLUMN stdout TEXT")
             db.execute("ALTER TABLE run ADD COLUMN stderr TEXT")

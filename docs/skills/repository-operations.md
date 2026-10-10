@@ -2940,6 +2940,11 @@ partial custom schemas must include the normalized Run models. Missing tables
 fail closed and must not trigger a legacy authorization fallback. Upgrading
 creates no synthetic pins or grants for historical Runs and preserves their
 status, result, inputs and artifact directory.
+Historical fixtures built with the current `create_db()` must remove tables and
+indexes owned by later migrations before backdating the migration version.
+Changing only the version leaves future schema behind and can make forward
+migration repeat existing indexes. Preserve populated legacy-output archive
+assertions while restoring the intended historical schema boundary.
 
 Use independent processes to verify claim and conflicting terminal publication,
 and a real connection commit failure to verify rollback. SQLite must acquire
