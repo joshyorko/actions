@@ -1434,9 +1434,14 @@ selection and direct cleanup tests. A direct `TunnelManager.stop()` test is
 insufficient for lifecycle coverage: the Action Server lifespan must await the
 created manager's stop before the final child-process cleanup runs. Lifespan
 teardown runs in `finally`, so body exceptions still trigger manager, watcher,
-and child cleanup; manager-stop failures are logged and isolated so they do
-not replace the body exception or skip later cleanup. Failed child enumeration
-logs and treats the child set as empty.
+and child cleanup. It signals the file watcher first, then awaits its thread
+join off the event loop for at most five seconds while reload dependencies remain
+live. A watcher timeout is an explicit cleanup failure; a stop request alone is
+not proof of termination. Manager-stop failures are logged and isolated so they
+do not replace the body exception or skip later cleanup. Failed child enumeration
+logs and treats the child set as empty. This lifecycle fix does not establish the
+cause of an observed RCC natural exit `-11`; packaged native shutdown evidence
+must still record the pre-cleanup return code.
 
 #### TLS and loopback regression
 

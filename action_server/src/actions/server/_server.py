@@ -2,6 +2,7 @@ import asyncio
 import logging
 import os
 import socket
+import sys
 import threading
 import typing
 from contextlib import asynccontextmanager
@@ -351,6 +352,9 @@ async def _verify_public_tunnel(
                 )
 
 
+_FILE_WATCHER_SHUTDOWN_TIMEOUT_SECONDS = 5.0
+
+
 @asynccontextmanager
 async def _community_expose_lifespan(
     app: FastAPI,
@@ -373,15 +377,30 @@ async def _community_expose_lifespan(
     try:
         yield
     finally:
+        active_error = sys.exc_info()[1]
+        watcher_shutdown_error = None
+        if file_watcher is not None:
+            # Stop reloads while the database and process pool are still live.
+            file_watcher.stop()
+            # A reload callback can need the server loop, so never join it on
+            # the event-loop thread.
+            if file_watcher.ident is not None:
+                await asyncio.to_thread(
+                    file_watcher.join, _FILE_WATCHER_SHUTDOWN_TIMEOUT_SECONDS
+                )
+            if file_watcher.is_alive():
+                watcher_shutdown_error = RuntimeError(
+                    "Action Server file watcher did not stop within "
+                    f"{_FILE_WATCHER_SHUTDOWN_TIMEOUT_SECONDS:g} seconds"
+                )
+                log.error("%s", watcher_shutdown_error)
+
         community_tunnel_manager = get_tunnel_manager()
         if community_tunnel_manager is not None:
             try:
                 await community_tunnel_manager.stop()
             except Exception:
                 log.exception("Error stopping community tunnel manager.")
-
-        if file_watcher is not None:
-            file_watcher.stop()
 
         log.info("Stopping action server...")
         from actions.server._robo_utils.process import kill_process_and_subprocesses
@@ -401,6 +420,9 @@ async def _community_expose_lifespan(
                 kill_process_and_subprocesses(child.pid)
             except Exception:
                 log.exception("Error killing subprocess: %s", child.pid)
+
+        if watcher_shutdown_error is not None and active_error is None:
+            raise watcher_shutdown_error
 
 
 class _LoopHolder:

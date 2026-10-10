@@ -896,8 +896,16 @@ def test_community_expose_lifespan_preserves_body_error_and_runs_cleanup(
             raise RuntimeError("stop failure")
 
     class _FileWatcher:
+        ident = 1
+
         def stop(self):
             events.append("watcher_stop")
+
+        def join(self, _timeout):
+            events.append("watcher_join")
+
+        def is_alive(self):
+            return False
 
     class _Child:
         pid = 42
@@ -933,8 +941,9 @@ def test_community_expose_lifespan_preserves_body_error_and_runs_cleanup(
 
     assert events == [
         "running",
-        "tunnel_stop",
         "watcher_stop",
+        "watcher_join",
+        "tunnel_stop",
         "children_listed",
         "child_killed",
     ]
@@ -950,8 +959,16 @@ def test_community_expose_lifespan_isolates_tunnel_stop_failure(monkeypatch, cap
             raise RuntimeError("stop failure")
 
     class _FileWatcher:
+        ident = 1
+
         def stop(self):
             events.append("watcher_stop")
+
+        def join(self, _timeout):
+            events.append("watcher_join")
+
+        def is_alive(self):
+            return False
 
     class _Child:
         pid = 42
@@ -986,8 +1003,9 @@ def test_community_expose_lifespan_isolates_tunnel_stop_failure(monkeypatch, cap
 
     assert events == [
         "running",
-        "tunnel_stop",
         "watcher_stop",
+        "watcher_join",
+        "tunnel_stop",
         "children_listed",
         "child_killed",
     ]

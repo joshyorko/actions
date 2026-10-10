@@ -31,6 +31,8 @@ class ActionServerFileWatcher(threading.Thread):
             stop_event=self._stop_event,
             ignore_permission_denied=True,
         ):
+            if self._stop_event.is_set():
+                break
             self._do_reload()
 
     def stop(self):
