@@ -2614,16 +2614,15 @@ class ActionsTests(BaseTests):
 
     @override
     def on_part(self, dep_paths):
-        paths = dep_paths[:] + [".github/workflows/_gen_workflows.py"]
         return {
             "on": {
                 "push": {
                     "branches": ["community", "wip"],
-                    "paths": paths,
+                    "paths": dep_paths[:] + [".github/workflows/_gen_workflows.py"],
                 },
                 "pull_request": {
-                    "branches": ["community"],
-                    "paths": paths,
+                    "branches": ["community", "integration/**"],
+                    "paths": dep_paths[:] + [".github/workflows/_gen_workflows.py"],
                 },
             }
         }

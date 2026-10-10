@@ -135,6 +135,7 @@ def verify(wheel):
         )
 
         mcp_metadata_probe = """
+import importlib.metadata as metadata
 import sys
 from pathlib import Path
 
@@ -143,6 +144,7 @@ from actions import _hooks
 from actions import mcp
 
 installed_root = Path(sys.prefix).resolve()
+assert actions.__version__ == metadata.version("actions-core")
 for module in (actions, mcp):
     assert Path(module.__file__).resolve().is_relative_to(installed_root), module.__file__
 

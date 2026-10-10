@@ -21,7 +21,7 @@ permissions:
     branches:
     - community
     - wip
-    paths: &id001
+    paths:
     - actions/**
     - .github/workflows/actions_core_tests.yml
     - devutils/**
@@ -30,7 +30,13 @@ permissions:
   pull_request:
     branches:
     - community
-    paths: *id001
+    - integration/**
+    paths:
+    - actions/**
+    - .github/workflows/actions_core_tests.yml
+    - devutils/**
+    - actions-http-helper/**
+    - .github/workflows/_gen_workflows.py
 defaults:
   run:
     working-directory: ./actions
