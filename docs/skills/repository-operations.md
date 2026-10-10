@@ -2284,6 +2284,18 @@ earlier download-failure note, retain that original receipt and add a dated
 correction binding the artifact ID, archive digest, manifest and source-tree
 comparison; do not infer registry publication or replace the historical note.
 
+For private Run-output staging, retain the existing Run status/result as the sole
+lifecycle authority and publish a terminal result plus its output handle in one
+conditional database transaction. When cancellation or staging failure requires
+cleanup, first durably seal the attempt as aborted; discard only the exact
+provider-issued stage identity after that commit is known successful. If the
+abort commit outcome is ambiguous, preserve the staged object for reconciliation
+instead of deleting it. This bounds cleanup for the tested local provider; it
+does not establish public transport authorization, arbitrary-provider identity,
+crash-before-seal recovery, or full #83/#86/#129 acceptance. The October 10
+private predecessor was tested on its exact source/combined trees and a pinned
+PostgreSQL service; keep those results separate from hosted/native execution.
+
 The Core release workflow runs verification on `actions-core-*` tag pushes;
 its publish job requires the peeled tag commit to be an ancestor of
 `origin/community` and the tag version to match package metadata. Integrate the

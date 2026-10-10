@@ -1,0 +1,118 @@
+{
+  "captured_at_utc": "2026-10-10 15:18:52 UTC",
+  "source": "GitHub connector read-only fetch_pr for each listed PR; exact published head/base refs",
+  "scope": "Open PR inventory only; not issue acceptance, merge authorization, or release readiness.",
+  "cohort": {
+    "items": 44,
+    "target_integrated": 32,
+    "superseded_unmerged": 4,
+    "open_blocked": 8,
+    "merge_ready": 0,
+    "open_prs": [
+      221,
+      282,
+      289,
+      290,
+      292,
+      297,
+      298,
+      299
+    ],
+    "superseded_prs": [
+      215,
+      216,
+      217,
+      218
+    ]
+  },
+  "open_prs": [
+    {
+      "pr": 221,
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "head": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "base": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "base_branch": "community",
+      "updated_at": "2026-10-10T14:10:30Z"
+    },
+    {
+      "pr": 282,
+      "title": "feat(templates): checkpoint Canvas Query packaging for #127",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "head": "bab27a93664494965db8a86761ea5685a3be6618",
+      "base": "31239cf99c7b264a0eab89660e93b391532ac305",
+      "base_branch": "integration/community-release-20261008",
+      "updated_at": "2026-10-10T09:48:55Z"
+    },
+    {
+      "pr": 289,
+      "title": "fix: preserve historical MCP catalog name ownership",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "head": "7ca665aaa4b180a78f532a4419e4d17bf4ced801",
+      "base": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "base_branch": "integration/community-release-20261008",
+      "updated_at": "2026-10-10T15:07:13Z"
+    },
+    {
+      "pr": 290,
+      "title": "test: verify catalog ownership in the frozen Runtime lifecycle",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "head": "a337d0b9bbb6c4babda712b39368273d77e610a9",
+      "base": "c6d729f29167f04080ab5547955d6398a6ee49d0",
+      "base_branch": "integration/community-release-20261008",
+      "updated_at": "2026-10-10T13:36:00Z"
+    },
+    {
+      "pr": 292,
+      "title": "fix: preserve concrete MCP resource owners across catalog changes",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "head": "58b411f0ecf7f2ecf2be16308ae7c4991b6df1b2",
+      "base": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "base_branch": "integration/community-release-20261008",
+      "updated_at": "2026-10-10T15:07:19Z"
+    },
+    {
+      "pr": 297,
+      "title": "test: measure table updates with paired jsdom samples",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "head": "4d9c348a65365ef4e4c26baddada79c754bc8dd1",
+      "base": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "base_branch": "integration/community-release-20261008",
+      "updated_at": "2026-10-10T15:07:17Z"
+    },
+    {
+      "pr": 298,
+      "title": "feat: stage selected source bytes beneath private directory descriptors",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "head": "fc582797cc754ae6dcf7602d98d6079f0004b29d",
+      "base": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "base_branch": "integration/community-release-20261008",
+      "updated_at": "2026-10-10T15:07:23Z"
+    },
+    {
+      "pr": 299,
+      "title": "Add fenced shared Run-output foundations and verified abort cleanup",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "head": "a62d02a76eec2b1322a03d5d5f541951d9cc241b",
+      "base": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "base_branch": "integration/community-release-20261008",
+      "updated_at": "2026-10-10T15:12:30Z"
+    }
+  ]
+}

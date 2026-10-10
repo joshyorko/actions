@@ -1,0 +1,136 @@
+{
+  "artifacts": {
+    "postgres-server.log": {
+      "bytes": 5330,
+      "path": "postgres-server.log",
+      "sha256": "67d3a4b219d1c8e555a2938e13c16ee41c64681bd50d485f931d936501829342"
+    },
+    "postgres-version-and-migration.txt": {
+      "bytes": 92,
+      "path": "postgres-version-and-migration.txt",
+      "sha256": "ee621bf29d8b19baf234ad24c29e95bb220b598de28b8dfffb7aa99b42342f47"
+    },
+    "seal-abort-acceptance.py": {
+      "bytes": 13514,
+      "path": "seal-abort-acceptance.py",
+      "sha256": "faf9786aee65139a35fd7803bd06b80746b0e0e58ee75be01ed00c21a1f74c1e"
+    },
+    "seal-abort-postgres-acceptance.log": {
+      "bytes": 4955,
+      "path": "seal-abort-postgres-acceptance.log",
+      "sha256": "635129d6a120f602cbc48da84d70c246ea15db47fc8bc0513c14434fa4c42901"
+    },
+    "shared-db-postgres.stdout": {
+      "bytes": 4716,
+      "path": "shared-db-postgres.stdout",
+      "sha256": "f44a1dfa8fea666d113c7e6535245b31c33e2226376195d85158181396f03d6f"
+    },
+    "shared-db-postgres.xml": {
+      "bytes": 2119,
+      "path": "shared-db-postgres.xml",
+      "sha256": "bddca3c59a25dae2b1b85fdc874f811ef3ba888164ace74d5abd74ac50d95725"
+    }
+  },
+  "commands": {
+    "focused_acceptance": "PYTHONPATH as recorded above; ACTIONS_TEST_DATABASE_URL=postgresql://postgres:<redacted task secret>@127.0.0.1:32773/actions_test; /workspace/work/community-resume/worker-exit/action_server/.venv/bin/python /dev/shm/pg-run-output-c931/acceptance.py",
+    "shared_postgresql_suite": "cd /dev/shm/pg-shared-run-output-c931/action_server && PYTHONDONTWRITEBYTECODE=1 TMPDIR=/dev/shm/pg-run-output-c931/tmp PYTHONPATH=/dev/shm/pg-shared-run-output-c931/actions/src:/dev/shm/pg-shared-run-output-c931/actions-http-helper/src:/dev/shm/pg-shared-run-output-c931/action_server/src:/dev/shm/pg-shared-run-output-c931/action_server/tests:/tmp/work/deployment-values-deps/site-packages /workspace/work/community-resume/worker-exit/action_server/.venv/bin/python -m pytest -p no:robocorp_log_pytest --confcutdir=tests/action_server_tests -m postgresql -q -s tests/action_server_tests/test_database_shared.py --basetemp=/dev/shm/pg-run-output-c931/pytest-basetemp --junitxml=/workspace/work/shared-run-output-postgres-c931/shared-db-postgres.xml"
+  },
+  "documentation": "The successor canonical guide already documents durable aborted seal metadata, discard eligibility, ambiguous commit behavior, publication/reference protection, and explicit verification cases; no further doc edit is proposed from this acceptance run.",
+  "limitations": [
+    "Linux-only FilesystemOutputProvider proof; no Windows/macOS filesystem-provider claim.",
+    "Database shared suite used --confcutdir because only selected repository files were extracted; 11 marker warnings are recorded.",
+    "The commit-then-raise cases deterministically emulate caller-visible ambiguous acknowledgement after the real PostgreSQL commit; they do not simulate a network partition during server commit.",
+    "No implementation edits, installs, image pulls, native RCC test, or source-worktree changes."
+  ],
+  "postgres": {
+    "container_id": "1f40c6af2d78c4a44515c9098224ea6fa4c2a811811d92fb2eefc7c74a8eb311",
+    "credential_handling": "Random task-owned secret in mode-0600 /dev/shm file, mounted read-only as Docker secret; command/receipt use redacted URL form; byte scans found no secret in saved artifacts.",
+    "current_migration": 15,
+    "host_binding": "127.0.0.1:32773",
+    "image": "postgres@sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+    "image_id": "sha256:79bd7c99e923138f136f8009d6bffa66e21e9d4fda5c0c561b00fc9c90cfe537",
+    "limits": {
+      "cpus": 1,
+      "database_tmpfs": "512 MiB",
+      "memory_bytes": 1073741824,
+      "pids": 128
+    },
+    "version": "PostgreSQL 17.11"
+  },
+  "prior_receipt_preservation": {
+    "path": "/workspace/work/shared-run-output-postgres-4705/postgresql-acceptance-receipt.json",
+    "sha256_before_and_after": "586620e4c06891d70ea3f2ccd75b84ce57b4fde8d67e241791a86c6dd9a031aa"
+  },
+  "results": {
+    "focused_seal_abort_cases": {
+      "ambiguous_abort_commit": "PASS; wrapper raised only after actual PostgreSQL abort commit returned; durable ABORTED seal remained, object remained, provider discard was not called, and caller preserved FenceRejected with uncertainty note.",
+      "confirmed_abort": "PASS; committed ABORTED row retained measured ref/digest/size, then the actual provider discarded the unreferenced owned seal.",
+      "duplicate_reference": "PASS; a second DB row referenced the same object; cancellation committed the original abort seal, left the shared object in place and did not call discard.",
+      "postgres_statement_rollback_and_privacy": "PASS; invalid actual PostgreSQL statement rolled back, service error/logs contained no private bind sentinel, abort receipt committed and sole owned file was discarded.",
+      "publication_transaction_atomicity": "PASS; failure after Run status/result update rolled back Run/result/RunOutput/RunAttempt; retry committed successfully.",
+      "published_output_and_replay": "PASS; after actual seal commit a real publish ran before simulated post-commit stage exception; final object remained, exact replay succeeded, changed replay rejected, and authorized resolution returned exact bytes.",
+      "register_admit_lock_order": "PASS; actual trace for both methods was Counter then Workspace."
+    },
+    "module_identity": "Focused acceptance emitted the exact imported service path and SHA-256; all Runtime/Core/test module origins resolved beneath the immutable extracted c931 snapshot.",
+    "shared_postgresql_suite": {
+      "cases": [
+        "tests.action_server_tests.test_database_shared::test_postgresql_bound_json_operators_and_array_rhs_execute",
+        "tests.action_server_tests.test_database_shared::test_postgresql_run_output_archive_preserves_values_and_reruns",
+        "tests.action_server_tests.test_database_shared::test_postgresql_run_output_archive_collision_preserves_data_and_retries[stdout]",
+        "tests.action_server_tests.test_database_shared::test_postgresql_run_output_archive_collision_preserves_data_and_retries[stderr]",
+        "tests.action_server_tests.test_database_shared::test_concurrent_postgresql_startup_archives_legacy_run_outputs_once",
+        "tests.action_server_tests.test_database_shared::test_postgresql_schema_introspection_uses_effective_search_path",
+        "tests.action_server_tests.test_database_shared::test_two_runtime_processes_claim_one_due_schedule",
+        "tests.action_server_tests.test_database_shared::test_two_database_instances_preserve_concurrent_atomic_updates",
+        "tests.action_server_tests.test_database_shared::test_postgresql_transaction_boundaries_emit_no_redundant_begin_notice",
+        "tests.action_server_tests.test_database_shared::test_postgresql_transaction_rolls_back_failed_state_update",
+        "tests.action_server_tests.test_database_shared::test_concurrent_postgresql_startup_applies_migrations_once",
+        "tests.action_server_tests.test_database_shared::test_postgresql_production_models_are_visible_across_instances"
+      ],
+      "deselected": 39,
+      "errors": 0,
+      "failed": 0,
+      "passed": 12,
+      "skipped": 0,
+      "warning_count": 11,
+      "warning_reason": "Unknown integration_test markers from isolated archive plus --confcutdir; no tests skipped or failed."
+    }
+  },
+  "runtime": {
+    "PYTHONPATH": "/dev/shm/pg-shared-run-output-c931/actions/src:/dev/shm/pg-shared-run-output-c931/actions-http-helper/src:/dev/shm/pg-shared-run-output-c931/action_server/src:/dev/shm/pg-shared-run-output-c931/action_server/tests:/tmp/work/deployment-values-deps/site-packages",
+    "executable": "/workspace/work/community-resume/worker-exit/action_server/.venv/bin/python",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "psycopg": "3.3.4",
+    "pytest": "8.4.2",
+    "python": "3.12.15",
+    "rfc8785": "0.1.4"
+  },
+  "source": {
+    "commit": "c931b31f7b258e3eec93369c4c5cd64885d0e5b6",
+    "git_blobs": {
+      "database_adapter": "af55df46a6381972acf5493fcfa682995dfeb7f5",
+      "filesystem_provider": "89170173dd0f1771e1a9923bb8532f2b28448dd1",
+      "migration_15": "3629ef55d42815acc7c1701bdd5b6949d3394ec6",
+      "postgres_suite": "5f97380cf72fb9f87e0cda23ff992dd9720ac7f8",
+      "run_output_service_fixture": "4fcd73a8764c52f2681ba909541d578ddd2457cf",
+      "run_output_types": "cac30880373c26f648bb1c835fb74449f567cb22",
+      "run_outputs_service": "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+    },
+    "import_origins": {
+      "action_server_tests.run_outputs.test_service": "/dev/shm/pg-shared-run-output-c931/action_server/tests/action_server_tests/run_outputs/test_service.py",
+      "action_server_tests.test_database_shared": "/dev/shm/pg-shared-run-output-c931/action_server/tests/action_server_tests/test_database_shared.py",
+      "actions": "/dev/shm/pg-shared-run-output-c931/actions/src/actions/__init__.py",
+      "actions.server._database": "/dev/shm/pg-shared-run-output-c931/action_server/src/actions/server/_database.py",
+      "actions.server.run_outputs.filesystem": "/dev/shm/pg-shared-run-output-c931/action_server/src/actions/server/run_outputs/filesystem.py",
+      "actions.server.run_outputs.service": "/dev/shm/pg-shared-run-output-c931/action_server/src/actions/server/run_outputs/service.py",
+      "actions.server.run_outputs.types": "/dev/shm/pg-shared-run-output-c931/action_server/src/actions/server/run_outputs/types.py",
+      "actions_http": "/dev/shm/pg-shared-run-output-c931/actions-http-helper/src/actions_http/__init__.py"
+    },
+    "parent": "4705b96c8b422e3ed73170f1156292f77ec31bf4",
+    "source_snapshot": "/dev/shm/pg-shared-run-output-c931; git archive extracted from pinned commit",
+    "tree": "a6980fc434b49eecd734c192abe375589ebfeb69",
+    "working_tree": "clean before and after verification"
+  },
+  "title": "Independent PostgreSQL acceptance of Run-output seal abort successor",
+  "upstream_disposition": "None; no upstream issue identified."
+}

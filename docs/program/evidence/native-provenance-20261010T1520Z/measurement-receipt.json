@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-10T15:10:43Z",
+  "review_type": "read-only streamed provenance measurement; no extraction or execution",
+  "repository": "joshyorko/actions",
+  "workflow": {
+    "run_id": "38060994147",
+    "attempt": 1,
+    "run_status_at_observation": "in_progress",
+    "event": "pull_request",
+    "branch": "fix/mcp-resource-routing-history-20261010",
+    "run_head_sha": "a47dc616069afdb0488aaed651abf0ceb9a82035",
+    "producer_job_id": "114239051356",
+    "producer_job_name": "Build Action Server binary without credentials (ubuntu-22.04)",
+    "producer_job_status": "completed",
+    "producer_job_conclusion": "success",
+    "build_step_command": "uv run --no-project --python 3.12 poetry run inv build-executable --go-wrapper",
+    "manifest_step_source_sha": "0045d91b2b5010b4b3706f777325e04b8eda805d",
+    "manifest_step_run_id_attempt": "38060994147/1",
+    "log_observations": [
+      "Job log records write_native_artifact_manifest.py with source SHA 0045d91b2b5010b4b3706f777325e04b8eda805d, run 38060994147, attempt 1, and ubuntu-22.04.",
+      "Job log records upload of action-server-native-provenance-ubuntu-22.04-38060994147-1.zip, 59391509 bytes, digest 26a60e999d62009ea83d70aac949a3c3bbf09895ea90119a7a39b2a05306e2f8, artifact ID 11673805091."
+    ],
+    "other_matrix_state_at_observation": {
+      "macos-15": "job completed success; not independently measured here",
+      "windows-2022": "job in progress; not independently measured here"
+    }
+  },
+  "source_binding": {
+    "manifest_source_sha": "0045d91b2b5010b4b3706f777325e04b8eda805d",
+    "source_commit_api_url": "https://api.github.com/repos/joshyorko/actions/git/commits/0045d91b2b5010b4b3706f777325e04b8eda805d",
+    "source_commit_tree_sha": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6",
+    "source_commit_parents": [
+      "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "a47dc616069afdb0488aaed651abf0ceb9a82035"
+    ],
+    "run_head_commit_tree_sha": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6",
+    "candidate_source_commit_tree_sha": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6",
+    "source_tree_binding": "PASS; source merge commit, run head, and candidate source commit have identical full Git tree SHA"
+  },
+  "artifact": {
+    "id": 11673805091,
+    "name": "action-server-native-provenance-ubuntu-22.04-38060994147-1",
+    "size_bytes": 59391509,
+    "api_digest": "sha256:26a60e999d62009ea83d70aac949a3c3bbf09895ea90119a7a39b2a05306e2f8",
+    "local_zip_sha256": "26a60e999d62009ea83d70aac949a3c3bbf09895ea90119a7a39b2a05306e2f8",
+    "artifact_run_id": "38060994147",
+    "artifact_head_sha": "a47dc616069afdb0488aaed651abf0ceb9a82035",
+    "zip_member_count": 1,
+    "zip_member": "native-artifact-provenance.tar",
+    "tar_streamed_without_extracting": true,
+    "tar_member_count": 1194,
+    "frozen_package_inventory_entries": 1191,
+    "frozen_package_inventory_kind_counts": {
+      "file": 1053,
+      "directory": 122,
+      "symlink": 16
+    },
+    "detached_manifest_sha256": "07aff6e9a0415397a9758163401a3342b0f066a7e6cd87a7f294dcc73f656b81",
+    "detached_inventory_sha256": "db3864c883dda15ba56de3b3009f9d15cf2fdad971cfefedb7523897936d6dac",
+    "tar_manifest_exact_bytes_match": true,
+    "tar_inventory_exact_bytes_match": true,
+    "symlink_validation": "PASS; all 16 targets are relative, remain within the frozen tree, resolve to packaged files, and no archive path was followed outside the stream"
+  },
+  "recomputed_digests": {
+    "frozen_executable_sha256_expected": "b4bfb975bc8b54cb6fc5408f3ea88e2a65bcb06324ffa72826d29a19d59f95a8",
+    "frozen_executable_sha256_measured": "b4bfb975bc8b54cb6fc5408f3ea88e2a65bcb06324ffa72826d29a19d59f95a8",
+    "frozen_package_tree_sha256_expected": "f70b20cea354c33da89d4d52cb8d4f6e60c1401ef2992e75162265711df597bf",
+    "frozen_package_tree_sha256_measured": "f70b20cea354c33da89d4d52cb8d4f6e60c1401ef2992e75162265711df597bf",
+    "embedded_files_sha256_expected": "b6f81872dc4aa8684209ce047fb7b47cd552f5e18153b2882df745dc63cc47aa",
+    "embedded_files_sha256_measured": "b6f81872dc4aa8684209ce047fb7b47cd552f5e18153b2882df745dc63cc47aa",
+    "measurement_algorithm_source": "action_server/scripts/write_native_artifact_manifest.py at 0045d91b2b5010b4b3706f777325e04b8eda805d",
+    "measurement_algorithm_source_sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b"
+  },
+  "scope_and_limits": {
+    "provenance_measurement": "PASS for the Ubuntu frozen executable and frozen package tree in this artifact",
+    "native_acceptance_suite": "NOT RUN by this review; a separate 11-case acceptance review remains distinct",
+    "full_native_matrix": "NOT COMPLETE at observation; Windows job was in progress",
+    "release_acceptance": "NOT RUN",
+    "go_wrapper": "NOT VERIFIED; wrapper binary is a separate artifact and is absent from this TAR. Manifest wrapper fields are claims only in this review.",
+    "inventory_listing_diagnostic": "Inventory comparison is provenance measurement only, not a behavioral or acceptance test.",
+    "wrapper_not_in_archive_diagnostic": "Absence is an artifact-scope diagnostic, not evidence of wrapper failure or proof of wrapper correctness.",
+    "old_receipt_5ebc": "left unchanged"
+  }
+}
