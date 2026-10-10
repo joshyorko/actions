@@ -3052,7 +3052,11 @@ when the package source itself is identical in both parents.
 Core publication is triggered by pushing an unused `actions-core-<version>` tag
 whose commit is already merged to `community`. The current `Actions Release`
 workflow has no `workflow_dispatch` trigger. The generic `inv make-release`
-helper still requires `master` and is not the Core community release entrypoint.
+helper on the current Runtime integration requires `community`, canonical origin,
+and refreshed community ancestry. The accepted Core1.0.3 community checkout
+`a70993fa` still has the older `master` guard. Inspect the helper at the exact
+release source before choosing an entrypoint; identical Core package trees do
+not imply identical shared release helpers.
 Before a tag push, verify the exact accepted source, package version, community
 ancestry, and absence of both the remote tag and registry version. A successful
 tag workflow must still be followed by registry file/hash and installed public
