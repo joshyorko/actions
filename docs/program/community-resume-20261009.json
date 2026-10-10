@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repository": "joshyorko/actions",
   "observed_at": "2026-10-10T05:01:12Z",
-  "status": "A 05:03 coordination read supersedes the 05:01 dispatch-status statement: the requested #126 and #279 Devsy turns failed before execution because the selected gpt-6.1-luna model was unsupported for ChatGPT; neither has an implementation checkpoint or test result. Await heartbeat discovery of supported models before v2 redispatch. The existing supervisor remains active; #130 schema work still awaits supervisor dispatch. The accepted #129 interface criterion remains limited to bounded #130 schema/fixture work.",
+  "status": "Recovered coordinator evidence from commit 655b044a7bbe464eeebccb1a61a2833992e12d8a (tree 07d0ffa90c379d6f86aecc55a516a824bf314710): all 10 SHA256SUMS entries match source Git blobs and were copied byte-for-byte. These native/browser/RCC/CI receipts document the exact 84b8c70a source and its historical result only; they do not validate current P0 candidate b9e9722a or establish full issue acceptance. The 05:08 coordination status is linked separately. Devsy workspace was reported pod FAILED and daemon UNVERIFIED; #126 and #279 retry outcomes are unknown/no replay, #130 supervisor dispatch is pending with scheduler state unknown, and #99 bounded Cloud acceptance is underway after ownership preflight. Root reports local RCC source prefix 66 with 3 DB tests passing and 1 opt-in skip, but full source P0 acceptance remains pending test-retention and the exact source SHA was not supplied. No original-54 status/stage or historical archive changes are included.",
   "integration_head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
   "release_ready": false,
@@ -4271,8 +4271,8 @@
     "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
     "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
   },
-  "checkpoint_status": "A 05:03 coordination read supersedes the 05:01 dispatch-status statement: the requested #126 and #279 Devsy turns failed before execution because the selected gpt-6.1-luna model was unsupported for ChatGPT; neither has an implementation checkpoint or test result. Await heartbeat discovery of supported models before v2 redispatch. The existing supervisor remains active; #130 schema work still awaits supervisor dispatch. The accepted #129 interface criterion remains limited to bounded #130 schema/fixture work.",
-  "checkpoint_observed_at": "2026-10-10T05:03:14Z",
+  "checkpoint_status": "Recovered coordinator evidence from commit 655b044a7bbe464eeebccb1a61a2833992e12d8a (tree 07d0ffa90c379d6f86aecc55a516a824bf314710): all 10 SHA256SUMS entries match source Git blobs and were copied byte-for-byte. These native/browser/RCC/CI receipts document the exact 84b8c70a source and its historical result only; they do not validate current P0 candidate b9e9722a or establish full issue acceptance. The 05:08 coordination status is linked separately. Devsy workspace was reported pod FAILED and daemon UNVERIFIED; #126 and #279 retry outcomes are unknown/no replay, #130 supervisor dispatch is pending with scheduler state unknown, and #99 bounded Cloud acceptance is underway after ownership preflight. Root reports local RCC source prefix 66 with 3 DB tests passing and 1 opt-in skip, but full source P0 acceptance remains pending test-retention and the exact source SHA was not supplied. No original-54 status/stage or historical archive changes are included.",
+  "checkpoint_observed_at": "2026-10-10T05:08:53Z",
   "current_convergence": {
     "path": "evidence/convergence-followup-20261010T0441Z.json",
     "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
@@ -5118,12 +5118,102 @@
       },
       "accepted_scoped_criteria": [],
       "upstream_disposition": "none; these are Actions orchestration and test-gate concerns."
+    },
+    {
+      "id": "program-amendment-20261010T0509Z",
+      "observed_at_utc": "2026-10-10T05:08:53Z",
+      "supersedes_current_worker_observation": "program-amendment-20261010T0503Z",
+      "summary": "Recovered coordinator evidence from commit 655b044a7bbe464eeebccb1a61a2833992e12d8a (tree 07d0ffa90c379d6f86aecc55a516a824bf314710): all 10 SHA256SUMS entries match source Git blobs and were copied byte-for-byte. These native/browser/RCC/CI receipts document the exact 84b8c70a source and its historical result only; they do not validate current P0 candidate b9e9722a or establish full issue acceptance. The 05:08 coordination status is linked separately. Devsy workspace was reported pod FAILED and daemon UNVERIFIED; #126 and #279 retry outcomes are unknown/no replay, #130 supervisor dispatch is pending with scheduler state unknown, and #99 bounded Cloud acceptance is underway after ownership preflight. Root reports local RCC source prefix 66 with 3 DB tests passing and 1 opt-in skip, but full source P0 acceptance remains pending test-retention and the exact source SHA was not supplied. No original-54 status/stage or historical archive changes are included.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false
+      },
+      "recovered_coordinator_evidence": {
+        "source_branch": "devsy/coordinator-20261009",
+        "source_commit": "655b044a7bbe464eeebccb1a61a2833992e12d8a",
+        "source_tree": "07d0ffa90c379d6f86aecc55a516a824bf314710",
+        "source_parent": "26b0194590e14656bff92dce3665dccab09837a3",
+        "manifest_path": "evidence/devsy-convergence-20261010/SHA256SUMS",
+        "manifest_sha256": "cd553a336578aed4db2c4d65c197282706227f35f3ed11297131164f91cbb585",
+        "entry_count": 10,
+        "verification": "Each manifest SHA256 matched the exact Git blob bytes before copy and the copied bytes after copy.",
+        "scope_limit": "Old 84b8 source receipts do not validate b9e9722a or current P0 acceptance."
+      },
+      "current_status_evidence_path": "evidence/devsy-convergence-status-20261010T0508Z.json",
+      "evidence": [
+        {
+          "path": "evidence/devsy-convergence-20261010/84b8-browser-results.json",
+          "size_bytes": 2436,
+          "sha256": "00263f90dd93e3efd943e7c40396f9bdc4e743eb385bb304c97ba1811cd59297"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/84b8-independent-summary.json",
+          "size_bytes": 15774,
+          "sha256": "2b3dd9de75b61aa6a7d23c72009407e3dc3a92c75cf374ddb9ba6b1c91f533ac"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/84b8-linux-independent-gate-receipt.json",
+          "size_bytes": 6063,
+          "sha256": "b888c46f9597fba54d4a8074e7a8604e942969b59e7dc693b75a61b2e7ff8375"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/84b8-other-os-review.json",
+          "size_bytes": 19220,
+          "sha256": "1f7148feee9c95defac9ef2b4546359658ae6ee82fe8bb1a4752abe43ec3f2da"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/d8-browser-api-acceptance-receipt.json",
+          "size_bytes": 7511,
+          "sha256": "3702d3e0403b12276db4401e35aff3f8f912de52250068d51945eb8d07996591"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/d8-lifecycle-receipt.json",
+          "size_bytes": 8136,
+          "sha256": "d32caeb239c0f09e3d9e11123c8861d18889117cf1520d3bfb46ee94ee93de3b"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/d8-receipt-amendment-correction.json",
+          "size_bytes": 895,
+          "sha256": "f3e68f02f196d018606c394e26dabab36a797b19078ff6a72a919440e0a3e146"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/d8-run.json",
+          "size_bytes": 3103,
+          "sha256": "9597f558028abcb76d72c1f0103cddfe857e58a0d7f56ea87fc6e536a11d00e5"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/macos-rcc-release-transform-independent-receipt.json",
+          "size_bytes": 10609,
+          "sha256": "0cef9ea720987453f8db552ae379460281eb471ee1eb9784821c50dc74beba82"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/root-reported-final84-CI-status.json",
+          "size_bytes": 1212,
+          "sha256": "3b42dd6295d76ea8f3ebfd36b1a49cebf01ad0da6d530599f985ed134ad49e11"
+        },
+        {
+          "path": "evidence/devsy-convergence-20261010/SHA256SUMS",
+          "size_bytes": 987,
+          "sha256": "cd553a336578aed4db2c4d65c197282706227f35f3ed11297131164f91cbb585"
+        },
+        {
+          "path": "evidence/devsy-convergence-status-20261010T0508Z.json",
+          "size_bytes": 2410,
+          "sha256": "ffea1f417ee3aa23c23fe8ba15307c733021049263047b646d15d43a4e120e76"
+        }
+      ],
+      "upstream_disposition": "none; no confirmed third-party defect is established by these observations."
     }
   ],
   "current_program_amendment": {
-    "observed_at_utc": "2026-10-10T05:03:14Z",
-    "path": "evidence/program-amendment-20261010T0503Z.json",
-    "sha256": "24b1fa24b8e54ced694789caae87a0a33adf59df191d6bd9430c249512ce27f1",
+    "observed_at_utc": "2026-10-10T05:08:53Z",
+    "path": "evidence/program-amendment-20261010T0509Z.json",
+    "sha256": "e7b42d156555d2d288786c802f5930c0c430bdddb5480117eb8cd9c6c3ec9bc0",
     "supplemental_issue_ids": [
       279
     ],
@@ -5131,6 +5221,7 @@
       "129:deployment-reference-envelope -> 130-schema"
     ],
     "retired_hosted_gate_source": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
-    "hosted_acceptance": "NOT_RUN"
+    "hosted_acceptance": "NOT_RUN",
+    "recovered_evidence_commit": "655b044a7bbe464eeebccb1a61a2833992e12d8a"
   }
 }

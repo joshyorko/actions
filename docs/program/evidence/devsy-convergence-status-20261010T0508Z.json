@@ -1,0 +1,49 @@
+{
+  "schema": "devsy-convergence-status/v1",
+  "observed_at_utc": "2026-10-10T05:08:53Z",
+  "source": "Root coordination report in the active task thread; not a direct native executor reread.",
+  "recovered_native_source": {
+    "branch": "devsy/coordinator-20261009",
+    "commit": "655b044a7bbe464eeebccb1a61a2833992e12d8a",
+    "tree": "07d0ffa90c379d6f86aecc55a516a824bf314710",
+    "parent": "26b0194590e14656bff92dce3665dccab09837a3",
+    "manifest_path": "devsy-convergence-20261010/SHA256SUMS",
+    "manifest_sha256": "cd553a336578aed4db2c4d65c197282706227f35f3ed11297131164f91cbb585",
+    "manifest_entries_verified_against_source_git_blobs": 10,
+    "manifest_entries_copied_byte_exactly": 10,
+    "limits": "The contained acceptance reports apply to source 84b8c70a and its recorded synthetic CI merge; they do not validate the newer P0 candidate."
+  },
+  "current_lane_observations": {
+    "devsy_owner_workspace": {
+      "observed_at_utc": "2026-10-10T05:05:00Z",
+      "uid": "default-ca-0b24d",
+      "pod_status": "FAILED",
+      "daemon_status": "UNVERIFIED"
+    },
+    "issue_126": {
+      "devsy_dispatch": "FAILED_BEFORE_EXECUTION_UNSUPPORTED_MODEL; retry execution state unknown",
+      "sol_v2_attempt": "accepted wrapper request; completion/status UNKNOWN",
+      "current_cloud_owner": "Cloud graph/Luna bounded fallback acceptance and independent artifact verification",
+      "whole_issue_acceptance": "OPEN"
+    },
+    "issue_279": {
+      "v2_dispatch": "KubernetesError; completion/status UNKNOWN; no replay observed",
+      "current_candidate": "b9e9722a plus WIP; full P0 remains pending test retention",
+      "whole_issue_acceptance": "OPEN"
+    },
+    "issue_130": {
+      "supervisor_dispatch": "pending; remote scheduler state unknown",
+      "implementation": "no implementation checkpoint reported"
+    },
+    "issue_99": {
+      "current_cloud_owner": "Luna Canvas acceptance after ownership preflight",
+      "acceptance": "bounded; no whole-issue completion implied"
+    },
+    "issue_134_local_source": {
+      "source": "root reports a local RCC snapshot at prefix 66 with 3 DB tests passing and 1 opt-in skip",
+      "source_sha": "not provided in this observation",
+      "full_source_gate": "pending test-retention regression; not accepted"
+    }
+  },
+  "upstream_disposition": "none; no confirmed upstream defect is established by this coordination snapshot."
+}

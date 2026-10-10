@@ -66,6 +66,23 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.assertEqual(entry["size_bytes"], len(content))
         self.assertEqual(entry["sha256"], hashlib.sha256(content).hexdigest())
 
+        receipts = ROOT / "docs/program/evidence/devsy-convergence-20261010"
+        manifest_path = receipts / "SHA256SUMS"
+        for line in manifest_path.read_text(encoding="ascii").splitlines():
+            digest, name = line.split("  ", 1)
+            receipt_path = f"docs/program/evidence/devsy-convergence-20261010/{name}"
+            attributes = subprocess.run(
+                ["git", "check-attr", "text", "--", receipt_path],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+            )
+            self.assertTrue(attributes.stdout.rstrip().endswith(": text: unset"), attributes.stdout)
+            receipt = (receipts / name).read_bytes()
+            self.assertEqual(digest, hashlib.sha256(receipt).hexdigest(), name)
+
     def test_canvas_parent_cycle_is_removed_from_execution_dag(self) -> None:
         upgraded = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
         old_rows = {row["issue"]: row for row in upgraded["issues"]}
@@ -221,11 +238,21 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             "docs/program/evidence/pr129-pr130-contract-review-20261010T0455Z.md",
             "docs/program/evidence/issue-130-criterion-acceptance-6094007327.json",
             "docs/program/evidence/program-amendment-20261010T0503Z.json",
+            "docs/program/evidence/program-amendment-20261010T0509Z.json",
+            "docs/program/evidence/devsy-convergence-status-20261010T0508Z.json",
             "docs/skills/repository-operations.md",
         ):
             target = repo / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, target)
+        source_evidence = ROOT / "docs/program/evidence/devsy-convergence-20261010"
+        destination_evidence = repo / "docs/program/evidence/devsy-convergence-20261010"
+        destination_evidence.mkdir(parents=True, exist_ok=True)
+        for relative in ["SHA256SUMS"] + [
+            line.split("  ", 1)[1]
+            for line in (source_evidence / "SHA256SUMS").read_text(encoding="ascii").splitlines()
+        ]:
+            shutil.copy2(source_evidence / relative, destination_evidence / relative)
         graph_path = repo / "docs/program/community-execution-graph.json"
         graph = json.loads(graph_path.read_text(encoding="utf-8"))
         graph.pop("relationship_amendment", None)

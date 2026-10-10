@@ -1,0 +1,327 @@
+{
+  "schema": "independent-84b8-final-head-artifact-binding/v1",
+  "result": "PASS_STATIC_NATIVE_ARTIFACT_PROVENANCE_ALL_OS; NOT_FULL_RUNTIME_OR_RELEASE_ACCEPTANCE",
+  "reviewer_checkout": {
+    "head": "26b0194590e14656bff92dce3665dccab09837a3",
+    "branch": "devsy/native-review-20261009",
+    "dirty_paths": []
+  },
+  "source_identity": {
+    "PR_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "PR_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "PR_parents": [
+      "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+      "90f0d09e1da70e711e30352315797c74363dbba5"
+    ],
+    "workflow_run": 38023233169,
+    "run_head_sha": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "synthetic_checkout_commit": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "synthetic_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "synthetic_parents": [
+      "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "84b8c70a412db9594dfa2a6c5fcb3e8184db019b"
+    ],
+    "manifest_source_sha_all_platforms": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "linux_workflow_log_checkout": "refs/remotes/pull/273/merge; git log -1 returns 2492f774841118496dbafd5e08b9066edaf170fa",
+    "run_jobs": {
+      "ubuntu-22.04": "success",
+      "windows-2022": "success",
+      "macos-15": "success"
+    }
+  },
+  "fresh_artifacts": [
+    {
+      "os": "Linux",
+      "kind": "provenance",
+      "id": 11659335348,
+      "name": "action-server-native-provenance-ubuntu-22.04-38023233169-1",
+      "bytes": 59337575,
+      "api_sha256": "3fde14c1244e73670661eb0f16276bed4f3d91caf3a2a521182ba1680ce94be2",
+      "actual_sha256": "3fde14c1244e73670661eb0f16276bed4f3d91caf3a2a521182ba1680ce94be2",
+      "zip_crc": "PASS",
+      "outer_member_count": 1
+    },
+    {
+      "os": "Linux",
+      "kind": "go",
+      "id": 11659780660,
+      "name": "action-server-unauthenticated-ubuntu-22.04",
+      "bytes": 77752001,
+      "api_sha256": "d7976d0aad3de470b7548eb5139205e4ed39b3d2421ae1d754d01d44f6d2b377",
+      "actual_sha256": "d7976d0aad3de470b7548eb5139205e4ed39b3d2421ae1d754d01d44f6d2b377",
+      "zip_crc": "PASS",
+      "outer_member_count": 1
+    },
+    {
+      "os": "Linux",
+      "kind": "small",
+      "id": 11660190314,
+      "name": "native-acceptance-ubuntu-22.04-2492f774841118496dbafd5e08b9066edaf170fa",
+      "bytes": 304930,
+      "api_sha256": "6ec76dc3a7ed7e45939a6d163a72b6a78408f5af7f157af930d9048e56f81057",
+      "actual_sha256": "6ec76dc3a7ed7e45939a6d163a72b6a78408f5af7f157af930d9048e56f81057",
+      "zip_crc": "PASS",
+      "outer_member_count": 14
+    },
+    {
+      "os": "Linux",
+      "kind": "workitems",
+      "id": 11659560717,
+      "name": "dakota-workitems-native-ubuntu-22.04-38023233169-1",
+      "bytes": 1564,
+      "api_sha256": "f42d1a13af68f9272d106f9a008578dca2c0ff7e0b1bc5fa61fa64eb50280452",
+      "actual_sha256": "f42d1a13af68f9272d106f9a008578dca2c0ff7e0b1bc5fa61fa64eb50280452",
+      "zip_crc": "PASS",
+      "outer_member_count": 1
+    },
+    {
+      "os": "Windows",
+      "kind": "prov",
+      "id": 11659055716,
+      "name": "action-server-native-provenance-windows-2022-38023233169-1",
+      "bytes": 48651833,
+      "api_sha256": "61f26b803c87c75bbb627ab6b746fc4e187117ec8e8ef4f1129fbd47e46e9375",
+      "actual_sha256": "61f26b803c87c75bbb627ab6b746fc4e187117ec8e8ef4f1129fbd47e46e9375",
+      "zip_crc": "PASS",
+      "members": 1
+    },
+    {
+      "os": "Windows",
+      "kind": "go",
+      "id": 11659031107,
+      "name": "action-server-unauthenticated-windows-2022",
+      "bytes": 53484051,
+      "api_sha256": "65abc5d5aad98b4fa241135e2de5cdd776cdba9101fa6eb40ad4145440aa5a45",
+      "actual_sha256": "65abc5d5aad98b4fa241135e2de5cdd776cdba9101fa6eb40ad4145440aa5a45",
+      "zip_crc": "PASS",
+      "members": 1
+    },
+    {
+      "os": "Windows",
+      "kind": "small",
+      "id": 11659685974,
+      "name": "native-acceptance-windows-2022-2492f774841118496dbafd5e08b9066edaf170fa",
+      "bytes": 470750,
+      "api_sha256": "b142ca9c4b11f4d81e53f84262ebe8f9f32fc0508d0063708a5906a14ae470b3",
+      "actual_sha256": "b142ca9c4b11f4d81e53f84262ebe8f9f32fc0508d0063708a5906a14ae470b3",
+      "zip_crc": "PASS",
+      "members": 14
+    },
+    {
+      "os": "Windows",
+      "kind": "work",
+      "id": 11660015780,
+      "name": "dakota-workitems-native-windows-2022-38023233169-1",
+      "bytes": 1583,
+      "api_sha256": "d52fcd75f54ee70e962eccb03d7200eb886d060f72977db7038f031624f9e9cc",
+      "actual_sha256": "d52fcd75f54ee70e962eccb03d7200eb886d060f72977db7038f031624f9e9cc",
+      "zip_crc": "PASS",
+      "members": 1
+    },
+    {
+      "os": "macOS",
+      "kind": "prov",
+      "id": 11659290459,
+      "name": "action-server-native-provenance-macos-15-38023233169-1",
+      "bytes": 50685697,
+      "api_sha256": "219ee8a9933b846c9fd7ee11e4ec92e7ad50dd4299be778b6c198acf5731e6d0",
+      "actual_sha256": "219ee8a9933b846c9fd7ee11e4ec92e7ad50dd4299be778b6c198acf5731e6d0",
+      "zip_crc": "PASS",
+      "members": 1
+    },
+    {
+      "os": "macOS",
+      "kind": "go",
+      "id": 11659340546,
+      "name": "action-server-unauthenticated-macos-15",
+      "bytes": 58604575,
+      "api_sha256": "a7a1d2779cb78b99f93714e982275fb78faa32be55f5f4bf9b216c62cbf1fde5",
+      "actual_sha256": "a7a1d2779cb78b99f93714e982275fb78faa32be55f5f4bf9b216c62cbf1fde5",
+      "zip_crc": "PASS",
+      "members": 1
+    },
+    {
+      "os": "macOS",
+      "kind": "small",
+      "id": 11659440480,
+      "name": "native-acceptance-macos-15-2492f774841118496dbafd5e08b9066edaf170fa",
+      "bytes": 297703,
+      "api_sha256": "ea85031d119f765ef8cc79dca4053ffc9fea7bae516f9a0c8fa4e453d4151be7",
+      "actual_sha256": "ea85031d119f765ef8cc79dca4053ffc9fea7bae516f9a0c8fa4e453d4151be7",
+      "zip_crc": "PASS",
+      "members": 14
+    },
+    {
+      "os": "macOS",
+      "kind": "work",
+      "id": 11659770456,
+      "name": "dakota-workitems-native-macos-15-38023233169-1",
+      "bytes": 1567,
+      "api_sha256": "913f192967a8c90c338db381fb2afba7e2f618897470cf733374b3523abe388f",
+      "actual_sha256": "913f192967a8c90c338db381fb2afba7e2f618897470cf733374b3523abe388f",
+      "zip_crc": "PASS",
+      "members": 1
+    }
+  ],
+  "outer_zip_check": {
+    "archive_count": 12,
+    "all_crc_pass": true,
+    "duplicates": 0,
+    "inventory_file_sha256": "0bf580269dc2f07a6dcdb0448929a4a7a9d4db788b8dc3c63bc78c3790bf154a"
+  },
+  "per_os": {
+    "Linux": {
+      "status": "LINUX_STATIC_PROVENANCE_PASS",
+      "receipt_sha256": "b888c46f9597fba54d4a8074e7a8604e942969b59e7dc693b75a61b2e7ff8375",
+      "inventory": {
+        "tar_members": 1184,
+        "tree_entries": 1181,
+        "inventory_entries": 1181,
+        "unsafe_paths": [],
+        "duplicate_paths": [],
+        "missing": [],
+        "extra": [],
+        "mismatches": [],
+        "tree_sha_expected": "dfbde7b1daee4a037325112f776ff56dcf6c2d2bce94973d398712711c4927f3",
+        "tree_sha_actual": "dfbde7b1daee4a037325112f776ff56dcf6c2d2bce94973d398712711c4927f3",
+        "embedded_files_expected": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df",
+        "embedded_files_actual": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df"
+      },
+      "frozen_sha256": "28a5d465a19def24bd30f77ed4b45833ee3e46894fccab3c60f3521e1fbfe08b",
+      "Go": {
+        "path": "action-server",
+        "sha256_expected": "1606fc2961ad107ddb360a46a7bb3c055e750ab8e83c4a94931fc82722d13af9",
+        "sha256_actual": "1606fc2961ad107ddb360a46a7bb3c055e750ab8e83c4a94931fc82722d13af9",
+        "assets_zip_expected": "8fa425f0f6afa73168ef51421a542cf3e7a92e8cbfa3906b47100560e7e79e93",
+        "assets_zip_actual": "8fa425f0f6afa73168ef51421a542cf3e7a92e8cbfa3906b47100560e7e79e93",
+        "assets_zip_crc": "PASS",
+        "asset_count": 1060,
+        "embedded_files_expected": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df",
+        "embedded_files_actual": "7842411834aab389133349fd81c013090003b6801b066493ac6205a8ba0652df",
+        "pyc_paths": []
+      },
+      "RCC": {
+        "path": "_internal/actions/server/bin/rcc-18.19.3",
+        "bytes": 22282402,
+        "frozen_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "go_assets_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "release_owner": "joshyorko/rcc v18.19.3 release 378613428, tag 4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "release_asset_id": 534050859,
+        "release_bytes": 22282402,
+        "release_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "matches_release": true
+      },
+      "source_aggregate_match": true
+    },
+    "Windows": {
+      "status": "PASS_INTERNAL_AND_RELEASE_BINDING",
+      "inventory": {
+        "tar_members": 1855,
+        "entries": 1852,
+        "inventory_entries": 1852,
+        "unsafe": [],
+        "duplicates": [],
+        "missing": [],
+        "extra": [],
+        "mismatches": [],
+        "tree_expected": "7dc07a9a666b90e0e663ceb3e1a85da6683410183b2d7258d6ea8cb6b2ed6bcb",
+        "tree_actual": "7dc07a9a666b90e0e663ceb3e1a85da6683410183b2d7258d6ea8cb6b2ed6bcb",
+        "embedded_expected": "34ac140089072f5cdfe1e2f810bdf9d7c5f127f7c8c2861fca96544c43bf8f37",
+        "embedded_actual": "34ac140089072f5cdfe1e2f810bdf9d7c5f127f7c8c2861fca96544c43bf8f37"
+      },
+      "frozen_sha256": "10061eb88e22bb613c87309b6d1d1812d193b8b3326e442af7980a2f236933a9",
+      "Go": {
+        "executable_sha256_actual": "31b768982d23b5bcb3671fe18c51d9399ceb5b36ba429d8289434d04b90577b1",
+        "assets_sha_expected": "663fe8dc11e02cb25b2c15f381b666098e35efbfc5f611614c6419db7043e810",
+        "assets_sha_actual": "663fe8dc11e02cb25b2c15f381b666098e35efbfc5f611614c6419db7043e810",
+        "assets_crc": "PASS",
+        "assets_count": 1708,
+        "embedded_files_actual": "34ac140089072f5cdfe1e2f810bdf9d7c5f127f7c8c2861fca96544c43bf8f37",
+        "pyc_paths": []
+      },
+      "RCC": {
+        "path": "_internal/actions/server/bin/rcc-18.19.3.exe",
+        "bytes": 19985408,
+        "frozen_sha": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        "go_asset_sha": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        "release_asset_id": 534050858,
+        "release_bytes": 19985408,
+        "release_sha": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        "release_match": true
+      },
+      "source_aggregate_match": true
+    },
+    "macOS": {
+      "status": "PASS_INTERNAL_AND_RELEASE_BINDING",
+      "inventory": {
+        "tar_members": 1168,
+        "entries": 1165,
+        "inventory_entries": 1165,
+        "unsafe": [],
+        "duplicates": [],
+        "missing": [],
+        "extra": [],
+        "mismatches": [],
+        "tree_expected": "f6218a50dc5765ab953a3964ff77c191dfda7468223e95046cf9a09928edc646",
+        "tree_actual": "f6218a50dc5765ab953a3964ff77c191dfda7468223e95046cf9a09928edc646",
+        "embedded_expected": "919c4204562ff640575a8df57f68ae00758026bd56656dc44d1cff8d61163d82",
+        "embedded_actual": "919c4204562ff640575a8df57f68ae00758026bd56656dc44d1cff8d61163d82"
+      },
+      "frozen_sha256": "e08dfb73ea0c2d2aa404f6cf7983db2ab50e689e8e71b01acd1454cfb4faa661",
+      "Go": {
+        "executable_sha256_actual": "e9bb40520840eeec46828ff059df94124713191352c9d52e494b9764913d2113",
+        "assets_sha_expected": "29360a35f2450a3615f23480448ed76c1ef0e479b5dc79de78891c82dba332d5",
+        "assets_sha_actual": "29360a35f2450a3615f23480448ed76c1ef0e479b5dc79de78891c82dba332d5",
+        "assets_crc": "PASS",
+        "assets_count": 1045,
+        "embedded_files_actual": "919c4204562ff640575a8df57f68ae00758026bd56656dc44d1cff8d61163d82",
+        "pyc_paths": []
+      },
+      "RCC": {
+        "path": "_internal/actions/server/bin/rcc-18.19.3",
+        "bytes": 20904864,
+        "frozen_sha": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+        "go_asset_sha": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+        "release_asset_id": 534050855,
+        "release_bytes": 20886722,
+        "release_sha": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+        "release_match": "MATCHES_PRIOR_VERIFIED_SIGNATURE_ONLY_PACKAGE_BYTES"
+      },
+      "source_aggregate_match": true,
+      "signature_transform_receipt": "0cef9ea720987453f8db552ae379460281eb471ee1eb9784821c50dc74beba82",
+      "reuse_eligibility": "PASS: fresh frozen and Go RCC size/hash both equal the exact measured 6ece transformed bytes"
+    }
+  },
+  "evidence_files": {
+    "linux_receipt_sha256": "b888c46f9597fba54d4a8074e7a8604e942969b59e7dc693b75a61b2e7ff8375",
+    "other_os_detail_sha256": "1f7148feee9c95defac9ef2b4546359658ae6ee82fe8bb1a4752abe43ec3f2da",
+    "outer_zip_inventory_sha256": "0bf580269dc2f07a6dcdb0448929a4a7a9d4db788b8dc3c63bc78c3790bf154a",
+    "workflow_log_sha256": "44690d9f737c1c59da7fc0548f165bf63ee95e467c1cb8da0996cf1e651029d6",
+    "linux_verifier_sha256": "85bebd81fea97ef3f27e0309d6439d85b4e87c444fe4c12b2bef3d7ce144824b",
+    "other_os_verifier_sha256": "9970c552fb1208bbc142d174127b603ce49c7d14ed4440acc3d147717138307c"
+  },
+  "preserved_prior_receipts": {
+    "7b": [
+      "07f382814ad8a2b78959091b8ec6bd5a7868b10cf5f989ac1f8cd775490aa5ea",
+      "b01244e974855bdef04ab9d44210a5eb0a931c50a9b9b60dd0f906d955d2e4eb"
+    ],
+    "3a": "aaf4835da05159b496c3d446a4934292b8fd5ef33682c362bfc1f286b274e5f",
+    "6ece": "282e778aff1a9be637b2a33bc3854ebbdaffd27de147fd34b7d89510478a6b4e",
+    "6ece_macos_transform": "0cef9ea720987453f8db552ae379460281eb471ee1eb9784821c50dc74beba82",
+    "d8_linux": "67fc0f7c7b726405c0f9ea71d5abe0071e3ec78e073ccb493482acec9f33dda3",
+    "d8_other_os": "d280568a3e77293806aff3a2b513c8e1eab2edd4a9576a4849a159abfd61c1f2"
+  },
+  "method": "API archive size/SHA verified for all 12 fresh artifacts; outer CRC and duplicate-member check; complete in-memory TAR inventory kinds/modes/links/content; recomputed file/tree digests; actual frozen and Go binary hashes; embedded assets zip digest/CRC/path/content; Git LF source aggregate. No extraction, filtering, native execution, tests or builds.",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md, adjacent to native artifact provenance guidance.",
+    "exact_delta": "Bind each native build to its workflow merge checkout SHA, parent/tree, and per-platform manifest; verify complete unfiltered archive inventories and recomputed content/tree digests, then bind frozen/Go executables and required RCC payloads to owning release bytes. Reuse a macOS signature transform only when both current distributions match the prior measured size and SHA; otherwise compare the new bytes without assumption.",
+    "durable_learning": "The workflow checked out synthetic merge commit 2492f774 (parent 84b8), not bare PR head; all manifests and tree hashes matched that checkout. All three fresh RCC payloads bind either directly to the release bytes (Linux/Windows) or to the exact prior verified macOS signature-only output (both copies match).",
+    "evidence": [
+      "Run 38023233169 metadata and Linux job checkout log; Git commit/tree/parent objects for 84b8 and 2492.",
+      "All fresh 12 artifact metadata and bytes; per-OS verifier receipts; exact prior macOS transform receipt."
+    ],
+    "stale_or_ambiguous_guidance_removed": "No repository files changed in this read-only lane. Proposal specifies source merge-checkout binding and exact-hash-qualified transform reuse.",
+    "remaining_uncertainty": "Native artifact provenance only; no binary execution or full Runtime/release acceptance was performed."
+  },
+  "upstream_disposition": "none; no confirmed upstream defect."
+}

@@ -11,6 +11,8 @@ Observed 2026-10-10T05:01:12Z. The 04:41 convergence paragraph below remains a h
 
 Observed 2026-10-10T05:03:14Z. A 05:03 coordination read supersedes the 05:01 dispatch-status statement: the requested #126 and #279 Devsy turns failed before execution because the selected gpt-6.1-luna model was unsupported for ChatGPT; neither has an implementation checkpoint or test result. Await heartbeat discovery of supported models before v2 redispatch. The existing supervisor remains active; #130 schema work still awaits supervisor dispatch. The accepted #129 interface criterion remains limited to bounded #130 schema/fixture work.
 
+Observed 2026-10-10T05:08:53Z. Recovered coordinator evidence from commit 655b044a7bbe464eeebccb1a61a2833992e12d8a (tree 07d0ffa90c379d6f86aecc55a516a824bf314710): all 10 SHA256SUMS entries match source Git blobs and were copied byte-for-byte. These native/browser/RCC/CI receipts document the exact 84b8c70a source and its historical result only; they do not validate current P0 candidate b9e9722a or establish full issue acceptance. The 05:08 coordination status is linked separately. Devsy workspace was reported pod FAILED and daemon UNVERIFIED; #126 and #279 retry outcomes are unknown/no replay, #130 supervisor dispatch is pending with scheduler state unknown, and #99 bounded Cloud acceptance is underway after ownership preflight. Root reports local RCC source prefix 66 with 3 DB tests passing and 1 opt-in skip, but full source P0 acceptance remains pending test-retention and the exact source SHA was not supplied. No original-54 status/stage or historical archive changes are included.
+
 <!-- supplemental-program-amendment:end -->
 
 ## Previous convergence snapshot — 2026-10-10T04:41:32Z (superseded by the 05:01 amendment)

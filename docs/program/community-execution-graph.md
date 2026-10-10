@@ -111,3 +111,10 @@ A 05:03 coordination read supersedes the 05:01 dispatch-status statement: the re
 
 | Supplemental gate | Status | Accounting | Scope and evidence |
 |---|---|---|---|
+
+### program-amendment-20261010T0509Z — 2026-10-10T05:08:53Z
+
+Recovered coordinator evidence from commit 655b044a7bbe464eeebccb1a61a2833992e12d8a (tree 07d0ffa90c379d6f86aecc55a516a824bf314710): all 10 SHA256SUMS entries match source Git blobs and were copied byte-for-byte. These native/browser/RCC/CI receipts document the exact 84b8c70a source and its historical result only; they do not validate current P0 candidate b9e9722a or establish full issue acceptance. The 05:08 coordination status is linked separately. Devsy workspace was reported pod FAILED and daemon UNVERIFIED; #126 and #279 retry outcomes are unknown/no replay, #130 supervisor dispatch is pending with scheduler state unknown, and #99 bounded Cloud acceptance is underway after ownership preflight. Root reports local RCC source prefix 66 with 3 DB tests passing and 1 opt-in skip, but full source P0 acceptance remains pending test-retention and the exact source SHA was not supplied. No original-54 status/stage or historical archive changes are included.
+
+| Supplemental gate | Status | Accounting | Scope and evidence |
+|---|---|---|---|

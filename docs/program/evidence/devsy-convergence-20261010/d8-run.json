@@ -1,0 +1,45 @@
+{
+  "command": "ACTIONS_REAL_RCC_ARTIFACT_TEST=1 ACTIONS_RUNTIME_RCC_BINARY=<pinned-18.19.3> ACTIONS_RUNTIME_LIFECYCLE_RECEIPT=<unique-task-state> PYTHONPATH=<d8 action_server src/tests + devutils/src> prepared-python -B -m pytest -rfE -vv --force-regen -n 2 tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable",
+  "core_fixture_pin": "actions-core=1.0.2 (from test package.yaml)",
+  "cpu_affinity": [
+    0,
+    1
+  ],
+  "cwd": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server",
+  "diagnostic_environment_removed": {
+    "ACTIONS_EXIT_DIAG_CHILD_MARKER_PATH": true,
+    "ACTIONS_EXIT_DIAG_FILE": true,
+    "ACTIONS_EXIT_DIAG_SITE_DIR": true,
+    "previous_sitecustomize_path_component": true
+  },
+  "elapsed_seconds": 119.889,
+  "exit_code": 0,
+  "log_bytes": 1061,
+  "log_path": "/workspaces/actions-worker-state/devsy-rcc-local-acceptance/d8-rollback-acceptance-20261010/pytest.log",
+  "log_sha256": "0c88baba7a3ed856a9e5f0a1e0fd43bb75a96e25a73931a44c929bb34ea35aeb",
+  "python_version": "Python 3.12.15",
+  "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "receipt_bytes": 8136,
+  "receipt_path": "/workspaces/actions-worker-state/devsy-rcc-local-acceptance/d8-rollback-acceptance-20261010/lifecycle-receipt.json",
+  "receipt_sha256": "d32caeb239c0f09e3d9e11123c8861d18889117cf1520d3bfb46ee94ee93de3b",
+  "reviewed_watcher_commit": "f0b31ac4578e7e87ddf5a1f94d01ef6b252e7a2e",
+  "runtime_module_origins": {
+    "_action_package_handler.py": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src/actions/server/_action_package_handler.py",
+    "_actions_import.py": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src/actions/server/_actions_import.py",
+    "_rcc_runtime_adapter.py": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src/actions/server/_rcc_runtime_adapter.py",
+    "_server.py": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src/actions/server/_server.py",
+    "_watcher.py": "/workspaces/actions-worktrees/devsy-rcc-d8-rollback-acceptance-20261010/action_server/src/actions/server/_watcher.py"
+  },
+  "runtime_module_sha256": {
+    "_action_package_handler.py": "d4505685cf274ea7ecd8f6b7b3ac47908943738624966c64359e643a6953ffba",
+    "_actions_import.py": "c7b02a7fd33c6672cbee01c16820d7812c9fa1d3bedc211e5f424bc4f2332c71",
+    "_rcc_runtime_adapter.py": "65abc1efe7879ffc325f84841b9630f05b8a5b11cdc3a32728daf7df7091edcb",
+    "_server.py": "18566e1d519e38237c7f125a56e5f92e7685b295114aa57e7505dd0e004b1a52",
+    "_watcher.py": "c8de55da89d3e752197a89a4e0b2efc6cdce5df60a2476e764ecdd214df691ca"
+  },
+  "source_clean_before_run": true,
+  "source_head": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+  "source_tree": "4633ee098b97c09bb0552fc40bcf59d58e28ef5d",
+  "test_file_sha256": "72fab0add909af1a1d24b3271e7de24f7fe52d6ccd29dbf5ea07eeb8d845c33b",
+  "xdist_workers": 2
+}
