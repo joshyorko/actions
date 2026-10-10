@@ -5,8 +5,7 @@ import types
 
 import pytest
 
-from actions.server import _watcher
-from actions.server import _server
+from actions.server import _server, _watcher
 
 
 def _install_watchfiles(monkeypatch, watch):
