@@ -2278,6 +2278,24 @@ Action Server module origins and file hashes; an environment-provided source
 SHA is only a label. Capture the server's bounded observed return code before
 discarding its process owner, separately from RCC terminal receipts.
 
+The portable inventory proposal in
+`actions.server.deployments.source_manifest.validate_proposed_inventory` is a
+pure check over explicitly supplied entry bytes, entry kinds, permission-only
+modes, and protected input names. It consumes entries incrementally, enforces
+10,000 entries, 50 MiB per file, 500 MiB total, path depth 64, 4,096 UTF-8 path
+bytes, and 255 bytes per component. Paths must already be NFC POSIX-relative
+names; Windows-unsafe names, case-fold collisions at any prefix, links and
+special entry kinds, privileged mode bits, and missing protected regular files
+are rejected. File modes become 0644 or 0755 according to executable bits,
+explicit directories are omitted from the sourcePolicyVersion 1 canonical inventory,
+and file sizes and hashes are derived from the supplied bytes. Its
+`ProposedInventoryValidation` result is not filesystem acquisition or snapshot
+evidence. The caller must separately establish selected-set completeness,
+no-follow root confinement, actual regular-file/link/hardlink/special-file
+identity, source and staging mutation coherence, and the staged inventory
+before making a trusted source or compiler claim. This proposal does not define
+a Package Revision identity or compiler output.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold
