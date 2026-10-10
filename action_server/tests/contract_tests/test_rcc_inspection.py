@@ -31,6 +31,54 @@ ACTION_SOURCE = (
 SOURCE_CONTENTS = {"action.py": ACTION_SOURCE, "package.yaml": PACKAGE_YAML}
 
 
+def test_private_inspection_environment_preserves_network_context(tmp_path, monkeypatch):
+    from actions.server.deployments.rcc_inspection import _private_environment
+
+    proxy_names = (
+        "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY",
+        "http_proxy", "https_proxy", "all_proxy",
+    )
+    ca_names = (
+        "SSL_CERT_FILE", "SSL_CERT_DIR", "REQUESTS_CA_BUNDLE",
+        "CURL_CA_BUNDLE", "PIP_CERT", "NODE_EXTRA_CA_CERTS",
+    )
+    for name in proxy_names + ca_names + ("NO_PROXY", "no_proxy"):
+        monkeypatch.delenv(name, raising=False)
+    expected = {
+        "HTTP_PROXY": "http://upper-http-proxy.invalid:8080",
+        "HTTPS_PROXY": "http://upper-https-proxy.invalid:8080",
+        "ALL_PROXY": "socks5://upper-all-proxy.invalid:1080",
+        "http_proxy": "http://lower-http-proxy.invalid:8080",
+        "https_proxy": "http://lower-https-proxy.invalid:8080",
+        "all_proxy": "socks5://lower-all-proxy.invalid:1080",
+        "SSL_CERT_FILE": "/configured/ca-bundle.pem",
+        "SSL_CERT_DIR": "/configured/ca-directory",
+        "REQUESTS_CA_BUNDLE": "/configured/requests-ca.pem",
+        "CURL_CA_BUNDLE": "/configured/curl-ca.pem",
+        "PIP_CERT": "/configured/pip-ca.pem",
+        "NODE_EXTRA_CA_CERTS": "/configured/node-ca.pem",
+        "NO_PROXY": "service.internal,127.0.0.1",
+        "no_proxy": "other.internal,localhost",
+    }
+    for name, value in expected.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.setenv("UNRELATED_INSPECTION_SECRET", "must-not-be-forwarded")
+
+    operation_root = tmp_path / "operation"
+    operation_root.mkdir(mode=0o700)
+    env = _private_environment(operation_root)
+
+    assert {name: env[name] for name in proxy_names + ca_names} == {
+        name: value for name, value in expected.items() if name in proxy_names + ca_names
+    }
+    assert env["NO_PROXY"] == env["no_proxy"] == (
+        "service.internal,127.0.0.1,other.internal,localhost,::1"
+    )
+    assert "UNRELATED_INSPECTION_SECRET" not in env
+    assert env["HOME"] == str(operation_root / "home")
+    assert env["ROBOCORP_HOME"] == str(operation_root / "rcc-home")
+
+
 def _fixture(tmp_path: Path):
     source = tmp_path / "fixture-source"
     source.mkdir(mode=0o700)
@@ -181,6 +229,8 @@ def test_inspects_exact_staged_fixture_through_bounded_rcc_and_compiles_proposal
     sibling = operations / "rcc-inspect-unrelated"
     sibling.mkdir(mode=0o700)
     monkeypatch.setenv("FIXTURE_SECRET_SENTINEL", "must-not-enter-rcc")
+    monkeypatch.setenv("HTTPS_PROXY", "http://proxy-secret.invalid:8080")
+    monkeypatch.setenv("REQUESTS_CA_BUNDLE", "/private/configured-ca.pem")
     _configure(rcc)
 
     declaration = _inspect(source, output, operations, rcc)
@@ -221,6 +271,8 @@ def test_inspects_exact_staged_fixture_through_bounded_rcc_and_compiles_proposal
     assert declaration.observation.metadata_sha256
     assert declaration.observation.receipt_sha256
     assert declaration.observation.operation_cleanup_complete
+    assert "http://proxy-secret.invalid:8080" not in repr(declaration.observation)
+    assert "/private/configured-ca.pem" not in repr(declaration.observation)
     assert sorted(path.name for path in source.iterdir()) == [
         "action.py",
         "package.yaml",

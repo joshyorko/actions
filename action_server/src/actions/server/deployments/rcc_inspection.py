@@ -36,6 +36,16 @@ from actions.server.deployments.ids import CapabilityId, PackageId
 _OUTPUT_LIMIT = 1024 * 1024
 _RECEIPT_LIMIT = 64 * 1024
 _CLEANUP_SECONDS = 3.0
+_PROXY_ENV_NAMES = (
+    "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY",
+    "http_proxy", "https_proxy", "all_proxy",
+)
+_CA_TRUST_ENV_NAMES = (
+    "SSL_CERT_FILE", "SSL_CERT_DIR", "REQUESTS_CA_BUNDLE",
+    "CURL_CA_BUNDLE", "PIP_CERT", "NODE_EXTRA_CA_CERTS",
+)
+_NO_PROXY_ENV_NAMES = ("NO_PROXY", "no_proxy")
+_LOOPBACK_NO_PROXY = ("127.0.0.1", "localhost", "::1")
 
 
 @dataclass(frozen=True)
@@ -89,6 +99,26 @@ def _private_environment(operation_root: Path) -> dict[str, str]:
     for name in ("LANG", "LC_ALL", "SSL_CERT_FILE", "SSL_CERT_DIR", "SYSTEMROOT", "WINDIR"):
         if name in os.environ:
             env[name] = os.environ[name]
+    for name in _PROXY_ENV_NAMES + _CA_TRUST_ENV_NAMES:
+        if name in os.environ:
+            env[name] = os.environ[name]
+    no_proxy_values: list[str] = []
+    seen_no_proxy: set[str] = set()
+    for name in _NO_PROXY_ENV_NAMES:
+        for value in os.environ.get(name, "").split(","):
+            item = value.strip()
+            key = item.casefold()
+            if item and key not in seen_no_proxy:
+                no_proxy_values.append(item)
+                seen_no_proxy.add(key)
+    for item in _LOOPBACK_NO_PROXY:
+        key = item.casefold()
+        if key not in seen_no_proxy:
+            no_proxy_values.append(item)
+            seen_no_proxy.add(key)
+    combined_no_proxy = ",".join(no_proxy_values)
+    for name in _NO_PROXY_ENV_NAMES:
+        env[name] = combined_no_proxy
     return env
 
 

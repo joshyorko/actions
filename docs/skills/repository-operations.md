@@ -2315,15 +2315,19 @@ was inspected or that RCC execution occurred.
 
 The private controlled-inspection entry point currently supports one
 harness-declared Linux fixture with an explicit provider. It stages the complete
-declared source inventory outside the output directory, measures the staged
-bytes before and after metadata collection, and rechecks the original source.
+declared source inventory in an operation-private directory and keeps
+metadata/receipt outputs outside selected source. It measures the staged bytes
+before and after metadata collection, and rechecks the original source.
 The observation binds the canonical inventory digest and metadata digest to the
 same-publish specification/artifact pair, provider, completed RCC execution
 receipt, receipt materialization path and ID, managed Python/Core distribution
 origin, and child working directory. Metadata and receipt files are bounded,
 owner-private outputs outside selected source. RCC output, deadlines, and owned
 process cleanup are bounded; incomplete descendant or pipe cleanup fails the
-observation.
+observation. The child environment keeps private HOME/cache/temp directories
+and forwards only configured HTTP(S)/ALL proxy settings and CA trust selectors,
+while merging existing `NO_PROXY` spellings with loopback exclusions. TLS
+verification remains enabled; other ambient host variables are not forwarded.
 
 This is a controlled fixture observation, not arbitrary package admission or a
 security sandbox. The pure compiler result continues to report
