@@ -246,15 +246,19 @@ def object_result() -> dict[str, str]:
     reason="Set ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 to run the RCC/browser acceptance.",
 )
 def test_canvas_view_calls_public_action_through_runtime_bridge(
-    action_server_process: ActionServerProcess, tmp_path
+    action_server_process: ActionServerProcess, tmp_path, tmp_path_factory
 ) -> None:
     repository_root = Path(__file__).resolve().parents[4]
     frontend_root = repository_root / "action_server" / "frontend"
+    # Action Server snapshots tmp_path as the action package below. uv's cache
+    # contains directory symlinks, so keep cache and temporary build state in a
+    # unique sibling directory rather than inside the synchronized package.
+    build_temp_dir = tmp_path_factory.mktemp("canvas-runtime-build")
     candidate_core_wheel_dir = tmp_path / "candidate-core"
     candidate_core_wheel_dir.mkdir()
     build_env = os.environ.copy()
-    build_env["UV_CACHE_DIR"] = str(tmp_path / "uv-cache")
-    build_env["TMPDIR"] = str(tmp_path)
+    build_env["UV_CACHE_DIR"] = str(build_temp_dir / "uv-cache")
+    build_env["TMPDIR"] = str(build_temp_dir)
     subprocess.run(
         [
             shutil.which("uv") or "uv",
