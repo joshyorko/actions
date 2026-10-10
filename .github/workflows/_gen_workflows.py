@@ -453,6 +453,7 @@ git merge-base --is-ancestor \"$GITHUB_SHA\" origin/community
     def build_action_server_binary(self):
         return {
             "name": "Build binary",
+            "shell": "bash",
             "env": {
                 "RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC": "true",
                 "RC_ACTION_SERVER_DO_SELFTEST": "true",

@@ -99,6 +99,7 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}
     - name: Build binary
+      shell: bash
       env:
         RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
         RC_ACTION_SERVER_DO_SELFTEST: 'true'

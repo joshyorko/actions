@@ -1415,7 +1415,10 @@ otherwise PRs targeting the maintained community or integration branches skip
 these checks. Keep this filter scoped to `ActionServerTests` in
 `.github/workflows/_gen_workflows.py`; do not broaden the unrelated Core or
 HTTP-helper workflow filters. Regenerate the workflow from that source and
-verify the hosted workflow on PRs to both maintained branches.
+verify the hosted workflow on PRs to both maintained branches. The generated
+Action Server `Build binary` step uses POSIX shell syntax, so set its shell to
+`bash` explicitly for Windows runners instead of relying on their PowerShell
+default.
 
 The real-browser Origin and ambient-session acceptance in
 `test_browser_origin_acceptance.py` runs Chromium against the actual Runtime
