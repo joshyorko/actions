@@ -427,7 +427,14 @@ def test_forward_schema_repair_is_registered_after_historical_migration_nine():
 
 
 @pytest.mark.parametrize(
-    "value", ["mysql://localhost/actions_test", "example://db", "postgresql://[bad"]
+    "value",
+    [
+        "mysql://localhost/actions_test",
+        "example://db",
+        "x://host/db",
+        "C:relative.db",
+        "postgresql://[bad",
+    ],
 )
 def test_database_rejects_unsupported_url_schemes(value):
     with pytest.raises(ValueError) as error:
@@ -478,6 +485,23 @@ def test_database_accepts_valid_postgresql_urls_without_mutating_connection_valu
 
     assert isinstance(normalized, str)
     assert database.db_path == normalized
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        r"C:\actions\data\server.db",
+        "C:/actions/data/server.db",
+        r"\\server\share\actions.db",
+        "//server/share/actions.db",
+    ],
+)
+def test_database_accepts_windows_sqlite_filesystem_paths(value):
+    normalized = normalize_database_url(value)
+    database = Database(value)
+
+    assert normalized == value
+    assert database.db_path == Path(value)
 
 
 def test_postgresql_schedule_claim_fences_connection_loss(monkeypatch):

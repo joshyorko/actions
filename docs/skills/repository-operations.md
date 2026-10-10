@@ -60,6 +60,18 @@ view/result lifecycle works, or a packaged Runtime release accepts it.
 
 ## Core and Runtime compatibility
 
+Actions Core pull requests run a non-publishing candidate-wheel gate on Ubuntu
+with the release-pinned Python 3.10 and Poetry 2.1.1 toolchain. It synchronizes
+the locked environment, builds the wheel and source archive, checks the exact
+artifact inventory and Twine metadata, then installs the wheel in a fresh
+environment and verifies the public API from outside the source tree. This is
+prepublication candidate evidence only: it does not prove that PyPI serves
+these bytes. After all checks pass, the gate retains the wheel and source
+archive with a SHA-256 manifest and source/run/attempt provenance as the
+`actions-core-candidate-dist` workflow artifact. That artifact supports exact
+candidate review; publication remains confined to the separately gated tag
+release.
+
 Core 1.0.1 does not contain `ActionContext`, `ActionsListActionTypedDict` or
 `actions.server_integration`; published Core 1.0.2 contains these public
 contracts. A Runtime importing them declares `actions-core ^1.0.2` in production
@@ -376,6 +388,11 @@ SHA-256 metadata together; source YAML changes alone do not update shipped templ
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
+For Core 1.0.3, the release verifier also exercises the public MCP Apps
+`actions.mcp.tool(meta=...)` and `actions.mcp.resource(meta=...)` APIs from the
+installed wheel, including metadata validation. Source tests or a private
+candidate wheel do not prove the registry-published Core version; verify the
+exact PyPI wheel in a fresh worker before admitting a template pin.
 A nonempty package-secret check proves presence only; it does not test PyPI
 authentication, token scope, upload, or publication. Keep those facts separate
 from a candidate wheel's index-resolution proof. For example, a fresh Core
@@ -1458,6 +1475,12 @@ validation rejects missing PostgreSQL hosts, malformed authorities, and ports
 outside `1..65535` before connection or SQLite fallback. CLI argument, datadir,
 and new migration diagnostics must use the database URL redactor, which removes
 userinfo, query, and fragment data without changing the connection value.
+Before URL scheme detection, preserve rooted Windows drive paths in either
+`C:\...` or `C:/...` form as SQLite filesystem paths: `urlsplit` otherwise
+interprets the drive letter as a URL scheme. UNC paths remain filesystem paths,
+while other unsupported schemes, including single-letter forms such as
+`x://host/db`, still fail instead of falling back to SQLite. Drive-relative
+spellings such as `C:relative.db` remain outside the supported exception.
 Scheme detection and redaction are case-insensitive, while the validated
 connection string passed to psycopg retains its original bytes. New migration
 status and CLI diagnostics use the redactor; the byte-immutable legacy
@@ -1753,6 +1776,15 @@ acceptance tests and their marker contract. Run its frozen and Go-wrapper UI
 cases on Linux, Windows, and macOS; never make missing executable or manifest
 variables a skip. Keep the separate generic Runtime gate for non-native
 integration coverage.
+The native Work Items consumer step builds the candidate Core wheel from
+`actions/pyproject.toml`; derive its version from the built wheel metadata and
+require exactly one wheel in a newly created task directory before installing
+it. Do not pin this candidate filename to the published Runtime floor: the
+candidate can advance independently, while `verify_published_runtime_floor.py`
+continues to verify the exact published Core 1.0.2 contract. Run inline Python
+checks through the same explicitly selected interpreter as the build instead
+of bare `python`; a workflow host interpreter can lack standard-library
+modules required by the check.
 
 The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
 `_internal/actions/server/bin`. PyInstaller may report package-data destinations
@@ -2311,6 +2343,27 @@ transitions, rejection before callback, same-owner revisions, restart, capacity,
 malformed history, commit rollback, and serialized two-process SQLite admission.
 This read-time guard retains the existing matcher; it does not solve arbitrary
 template intersection or reauthorize a conflicting URI after rediscovery.
+`test_cli_mcp_resource_history.py` adds one real CLI/HTTP `resources/read`
+acceptance node spanning direct-to-template, template-to-direct, and
+template-to-template owner changes. It verifies that candidate routes can be
+listed while a protected concrete read fails before the new callback, then
+checks same-owner callback revision, direct-over-template precedence, rename
+recovery, retired-resource unavailability, malformed watched-reload last-good
+behavior, and persisted denial after restart. The one JUnit node contains all
+three transition classes; it is not three separately counted test cases. In a
+frozen run its managed package fixtures pin `actions-core=1.0.2` and verify the
+worker's Core origin and version. Source-mode evidence remains distinct from a
+run against the actual new frozen Runtime artifact.
+The legacy `test_action_package_rename` makes the ownership boundary explicit:
+renaming `calculator` while retaining its `calculator_sum` MCP key is rejected,
+and the test compares every persisted column in the package, action, and owner
+tables before and after that failed sync. This includes package environment and
+hash fields and action docs, source locations, schemas, consequence flags,
+managed parameters, and options. A sync-free restart must still serve the
+original HTTP route and MCP tool. Renaming the package with a fresh action key
+then proves HTTP/MCP dispatch and another synchronized restart. Source-mode
+results do not replace acceptance against the newly built frozen Runtime after
+this guard changes.
 
 `test_cli_live_reload_multi_package.py` exercises actual unmanaged two-package
 watched failure and recovery. After malformed decorated B is rejected, it checks
@@ -2387,6 +2440,45 @@ no-follow root confinement, actual regular-file/link/hardlink/special-file
 identity, source and staging mutation coherence, and the staged inventory
 before making a trusted source or compiler claim. This proposal does not define
 a Package Revision identity or compiler output.
+
+`actions.server.deployments.source_read.read_selected_files` adds a private,
+Linux-only measurement boundary below a caller-verified directory descriptor.
+It borrows that descriptor by duplicating it, validates explicit selected and
+protected names through the supplied-inventory policy before content reads,
+and opens each directory component with `O_DIRECTORY | O_NOFOLLOW`. Selected
+leaves are first pinned with `O_PATH | O_NOFOLLOW`, then classified using
+`fstat`; non-regular files, hardlinks and privileged mode bits are rejected
+before any read-capable leaf open. The reader pins `/proc/self/fd` once per call,
+reopens each owned numeric leaf descriptor through that directory using
+`O_RDONLY | O_NONBLOCK | O_CLOEXEC`, and compares the readable handle with its
+pinned object before reading. It requires trusted Linux kernel procfs at that
+location and `O_PATH` support; an unavailable directory or failed descriptor
+reopening fails without a weaker pathname fallback. That procfs trust is a
+supported-environment assumption, not root authorization evidence. Both
+observed file sizes and incrementally read bytes use the same file/total/count
+policy. Owned root, procfs, traversal and leaf handles close on success and
+failure; the caller's descriptor remains owned by the caller.
+Resolve required Linux flags through checked attribute access after the platform
+gate. Reject missing, non-integer, boolean or non-positive flags rather than
+substitute weaker open modes. Linux-only private code is still checked by the
+Windows/macOS typecheck jobs; run configured mypy checks for Linux, `win32` and
+`darwin` before publishing this reader or its tests.
+
+The result separates measured root/directory/file metadata from the portable
+canonical inventory. Opened objects bind device, inode, file type, mode, size,
+mtime, ctime and link count. Before and after each read, the reader compares
+opened metadata and no-follow parent/name bindings, then reopens the selected
+paths for a final comparison. Linux filesystem tests exercise actual links,
+hardlinks, FIFOs and device descriptors, replacement and mutation, bounded reads,
+procfd reopening failure and descriptor cleanup. O_PATH classification prevents
+invoking a special-device driver's read-capable open before rejecting its type.
+These checks reject observed changes; they do not establish a complete-tree or
+globally atomic source snapshot against concurrent writers. The supplied root
+descriptor pins its object, not its original pathname, Workspace authorization,
+or selected-set completeness. This utility performs no staging, publication,
+compiler inspection or Package Revision creation, and does not change legacy
+Runtime or Robot imports. A stronger atomic snapshot contract remains a separate
+filesystem-level gate.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
