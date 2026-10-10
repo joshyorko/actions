@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,6 +14,25 @@ import write_native_artifact_manifest as manifest_writer
 
 
 class NativeArtifactManifestTests(unittest.TestCase):
+    def test_wrapper_source_inputs_match_committed_bytes_on_every_os(self):
+        package = Path(__file__).resolve().parents[1]
+        repository = package.parent
+        relative_paths = (
+            "go-wrapper/main.go",
+            "go-wrapper/process.go",
+            "go-wrapper/go.mod",
+            "go-wrapper/go.sum",
+        )
+        for relative in relative_paths:
+            path = package / relative
+            committed = subprocess.run(
+                ["git", "show", f"HEAD:action_server/{relative}"],
+                cwd=repository,
+                check=True,
+                capture_output=True,
+            ).stdout
+            self.assertEqual(path.read_bytes(), committed, relative)
+
     def test_records_hashes_for_unix_and_windows_suffixes(self):
         for system, suffix in (("Linux", ""), ("Windows", ".exe")):
             with self.subTest(
@@ -138,8 +158,28 @@ class NativeArtifactManifestTests(unittest.TestCase):
                     f"dist/action-server/action-server{suffix}",
                 )
                 self.assertEqual(
+                    result["artifact_downloads"]["frozen"]["container_archive_path"],
+                    "native-artifact-provenance.tar",
+                )
+                self.assertEqual(
+                    result["artifact_downloads"]["frozen"]["tree_archive_path"],
+                    "dist/action-server",
+                )
+                self.assertEqual(
+                    result["artifact_downloads"]["frozen"]["inventory_archive_path"],
+                    "output/native-artifact-tree-inventory.json",
+                )
+                self.assertEqual(
                     result["artifact_downloads"]["manifest"]["archive_path"],
                     "output/native-artifact-manifest.json",
+                )
+                self.assertEqual(
+                    result["artifact_downloads"]["manifest"]["container_archive_path"],
+                    "native-artifact-provenance.tar",
+                )
+                self.assertEqual(
+                    result["artifact_downloads"]["manifest"]["inventory_archive_path"],
+                    "output/native-artifact-tree-inventory.json",
                 )
                 self.assertIn("no candidate Core wheel", result["provenance_scope"])
 

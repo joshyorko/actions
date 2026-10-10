@@ -107,7 +107,7 @@ jobs:
       - name: Verify native artifact manifest contract
         run: >-
           uv run --no-project --python ${{ matrix.python }} python
-          -m unittest discover -s scripts -p test_native_artifact_manifest.py -v
+          -m unittest discover -s scripts -p 'test_native_artifact*.py' -v
 
       - name: Build binary (unsigned, with Go wrapper)
         env:
@@ -126,13 +126,16 @@ jobs:
           --build-command "uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper"
           --output output/native-artifact-manifest.json
 
+      - name: Create complete native provenance archive
+        run: >-
+          uv run --no-project --python ${{ matrix.python }} python
+          scripts/archive_native_artifact_provenance.py
+
       - name: Upload frozen executable and provenance
         uses: actions/upload-artifact@v4
         with:
           name: action-server-native-provenance-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: |
-            action_server/dist/action-server/
-            action_server/output/native-artifact-manifest.json
+          path: action_server/output/native-artifact-provenance.tar
           retention-days: 7
 
       - name: Install Chromium for native acceptance
