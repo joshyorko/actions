@@ -140,6 +140,9 @@ def _open_root(path: Path) -> int:
             if not stat.S_ISDIR(metadata.st_mode):
                 os.close(child)
                 raise ValueError("trust root path contains a non-directory")
+            if metadata.st_uid not in (0, os.geteuid()):
+                os.close(child)
+                raise ValueError("trust root path contains a foreign-owned directory")
             if mode & 0o022 and not (metadata.st_uid == 0 and mode & stat.S_ISVTX):
                 os.close(child)
                 raise ValueError(

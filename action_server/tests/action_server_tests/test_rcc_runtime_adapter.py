@@ -504,6 +504,90 @@ def test_local_trust_profile_requires_private_owned_root_and_carrier(tmp_path):
         )
 
 
+def test_local_trust_root_rejects_foreign_owned_ancestor(tmp_path, monkeypatch):
+    import os
+    from types import SimpleNamespace
+
+    from actions.server.rcc_trust_profile import _open_root
+
+    if os.name != "posix":
+        pytest.skip("POSIX directory ownership checks are not available")
+    root = tmp_path / "root"
+    root.mkdir(mode=0o700)
+    original_fstat = os.fstat
+    calls = 0
+
+    def foreign_owner_first_component(descriptor):
+        nonlocal calls
+        result = original_fstat(descriptor)
+        calls += 1
+        if calls == 1:
+            return SimpleNamespace(
+                st_mode=result.st_mode,
+                st_uid=os.geteuid() + 10000,
+            )
+        return result
+
+    monkeypatch.setattr(os, "fstat", foreign_owner_first_component)
+    with pytest.raises(ValueError, match="foreign-owned"):
+        _open_root(root)
+
+
+@pytest.mark.parametrize("context_change", ["home", "robocorp_home", "rcc_location"])
+def test_changed_rcc_context_revalidates_cached_exact_artifact(
+    tmp_path, monkeypatch, context_change
+):
+    from actions.server._rcc_runtime_adapter import prepare_runtime
+
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    digest = "sha256:" + "f" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return (
+            0,
+            json.dumps(
+                {"artifact": digest}
+                if args[2] == "publish"
+                else {"artifactDigest": digest, "verification": {"valid": True}}
+            ),
+            "",
+        )
+
+    rcc_location = Path("/opt/rcc-a")
+    monkeypatch.delenv("ROBOCORP_HOME", raising=False)
+    monkeypatch.setenv("HOME", str(tmp_path / "home-a"))
+    if context_change == "robocorp_home":
+        monkeypatch.setenv("ROBOCORP_HOME", str(tmp_path / "robocorp-a"))
+
+    initial = prepare_runtime(
+        package_yaml,
+        rcc_location,
+        source_generation="source-a",
+        runner=runner,
+    )
+    if context_change == "home":
+        monkeypatch.setenv("HOME", str(tmp_path / "home-b"))
+    elif context_change == "robocorp_home":
+        monkeypatch.setenv("ROBOCORP_HOME", str(tmp_path / "robocorp-b"))
+    else:
+        rcc_location = Path("/opt/rcc-b")
+
+    updated = prepare_runtime(
+        package_yaml,
+        rcc_location,
+        source_generation="source-b",
+        runner=runner,
+    )
+
+    assert [args[2] for args in calls] == ["publish", "acquire", "acquire"]
+    assert calls[-1][0] == str(rcc_location)
+    assert updated.artifact_digest == initial.artifact_digest == digest
+    assert updated.preparation_class == "context-revalidation"
+
+
 @pytest.mark.parametrize("provider", ["local", "dakota-cache", "http://cache:8134"])
 def test_supported_provider_reference_forms_are_preserved(tmp_path, provider):
     from actions.server._rcc_runtime_adapter import (

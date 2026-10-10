@@ -2099,10 +2099,14 @@ filesystem trust directory.
 
 The local profile is recorded as `rcc-runtime/v2` with its profile digest and
 carrier identity. It contains no interpreter or materialization path. Cache
-identity includes the selected profile; changing profiles requires successful
-revalidation of the exact existing artifact before reuse, and a failed
-revalidation does not silently publish a replacement. Source-only reuse still
-keeps the same artifact and profile. This is local functional behavior under
+identity includes the selected profile, canonical RCC executable/version and
+contract, the effective user home, and an explicit `ROBOCORP_HOME` override.
+A change in those runtime-context inputs reacquires the exact cached artifact
+before reuse. Source-only reuse skips preparation calls only when that context
+is unchanged. Changing profiles requires successful revalidation of the exact
+existing artifact before reuse, and a failed profile revalidation does not
+silently publish a replacement. Source-only reuse keeps the same artifact and
+profile. This is local functional behavior under
 RCC's existing permissive-local policy, not strict signed remote acceptance or
 an offline freshness guarantee. Fake adapter contracts verify command
 construction and fail-closed path checks; they do not prove that actual RCC

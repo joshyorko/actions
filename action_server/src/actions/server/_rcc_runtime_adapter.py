@@ -39,7 +39,8 @@ _ENVIRONMENT_FIELDS = (
     "post-install",
 )
 _prepared_runtime_cache: dict[
-    tuple[Path, str, str | None, str], tuple[str, RccRuntimeDescriptor]
+    tuple[Path, str, str | None, str, tuple[str, ...]],
+    tuple[str, RccRuntimeDescriptor],
 ] = {}
 _prepared_runtime_cache_lock = threading.Lock()
 
@@ -257,6 +258,33 @@ def _resolve_profile(
         raise RccRuntimeError("trust", str(exc)) from exc
 
 
+def _canonical_context_path(value: str) -> str:
+    expanded = os.path.expandvars(os.path.expanduser(value))
+    return os.path.normcase(os.path.abspath(os.path.normpath(expanded)))
+
+
+def _runtime_context_identity(
+    rcc_location: Path, trust_profile: RccTrustProfile
+) -> tuple[str, ...]:
+    """Return process-local RCC/home context without persisting machine paths."""
+    robo_home = os.environ.get("ROBOCORP_HOME", "")
+    home = _canonical_context_path(os.path.expanduser("~"))
+    effective_robo_home = _canonical_context_path(robo_home) if robo_home else ""
+    runtime_contract = (
+        RCC_TRUST_CONTRACT_VERSION
+        if trust_profile.is_local_detached
+        else RCC_CONTRACT_VERSION
+    )
+    rcc_executable = Path(rcc_location).expanduser().resolve(strict=False)
+    return (
+        str(rcc_executable),
+        RCC_VERSION,
+        runtime_contract,
+        home,
+        effective_robo_home,
+    )
+
+
 def environment_spec_fingerprint(environment: Path) -> str:
     """Return a deterministic fingerprint of package environment inputs."""
 
@@ -428,19 +456,32 @@ def prepare_runtime(
             environment=environment, environment_identity=environment_identity
         )
     environment_fingerprint = environment_spec_fingerprint(environment)
-    cache_key = (
+    cache_identity_key = (
         cache_identity,
         environment_fingerprint,
         provider,
         trust_profile.profile_digest,
     )
+    context_identity = _runtime_context_identity(rcc_location, trust_profile)
+    cache_key = (*cache_identity_key, context_identity)
     source_hash = source_generation
     if source_hash == "unknown":
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
     with _prepared_runtime_cache_lock:
         cached = _prepared_runtime_cache.get(cache_key)
+        cached_key = cache_key if cached is not None else None
+        if cached is None:
+            for candidate_key, candidate in reversed(
+                tuple(_prepared_runtime_cache.items())
+            ):
+                if candidate_key[:4] == cache_identity_key:
+                    cached_key = candidate_key
+                    cached = candidate
+                    break
+    cached_context_changed = cached is not None and cached_key != cache_key
     if (
         cached is not None
+        and not cached_context_changed
         and source_generation != "unknown"
         and source_generation != cached[1].source_generation
     ):
@@ -469,6 +510,11 @@ def prepare_runtime(
             else provider_coupled_profile().profile_digest
         )
         profile_changed = previous_profile_digest != trust_profile.profile_digest
+        context_changed_for_previous = (
+            cached_context_changed
+            and cached is not None
+            and cached[1].artifact_digest == previous_descriptor.artifact_digest
+        )
         try:
             acquire_artifact(
                 previous_descriptor.artifact_digest,
@@ -517,7 +563,13 @@ def prepare_runtime(
                 source_hash=source_hash,
                 environment_fingerprint=environment_fingerprint,
                 preparation_class=(
-                    "trust-revalidation" if profile_changed else "warm-reuse"
+                    "trust-revalidation"
+                    if profile_changed
+                    else (
+                        "context-revalidation"
+                        if context_changed_for_previous
+                        else "warm-reuse"
+                    )
                 ),
                 provider_reference=provider,
                 **_descriptor_trust_fields(trust_profile),
@@ -567,17 +619,27 @@ def prepare_runtime(
                     descriptor,
                 )
             return descriptor
-        return RccRuntimeDescriptor(
+        revalidated = RccRuntimeDescriptor(
             artifact_digest=descriptor.artifact_digest,
             source_generation=source_generation,
             source_hash=source_hash,
             environment_fingerprint=environment_fingerprint,
-            preparation_class=descriptor.preparation_class,
+            preparation_class=(
+                "context-revalidation"
+                if cached_context_changed
+                else descriptor.preparation_class
+            ),
             rcc_version=descriptor.rcc_version,
             runtime_kind=descriptor.runtime_kind,
             provider_reference=provider,
             **_descriptor_trust_fields(trust_profile),
         )
+        with _prepared_runtime_cache_lock:
+            _prepared_runtime_cache[cache_key] = (
+                environment_fingerprint,
+                revalidated,
+            )
+        return revalidated
 
     digest = publish_artifact(
         environment,
