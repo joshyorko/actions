@@ -1,0 +1,24 @@
+{
+  "checked_at_utc": "2026-10-10T22:09:21.473828+00:00",
+  "corrects": "attempt-result.json matching_live_runner_processes field",
+  "gateway_process_group_gone": true,
+  "no_provider_pid_group_or_port_was_created": true,
+  "no_rerun_or_artifact_cleanup_performed": true,
+  "provider_was_never_launched": true,
+  "rcc_reported_pids_absent_from_proc": [
+    {
+      "pid": 54935,
+      "proc_entry_exists": false
+    },
+    {
+      "pid": 54936,
+      "proc_entry_exists": false
+    },
+    {
+      "pid": 54958,
+      "proc_entry_exists": false
+    }
+  ],
+  "reason": "The prior ps substring matcher included its own audit shell because the command text contained the runner path; that match is a checker false positive.",
+  "schema": "rcc-core102-cleanup-readback-correction-v1"
+}

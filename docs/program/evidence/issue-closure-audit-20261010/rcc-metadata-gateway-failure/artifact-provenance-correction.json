@@ -1,0 +1,25 @@
+{
+  "corrects": "attempt-result.json retained_prior_artifacts_untouched claim",
+  "files_observed_after_attempt": [
+    {
+      "mtime_utc": "2026-10-10T22:08:51.609460+00:00",
+      "path": "/workspace/work/actions-mk3-rcc-inspection/developer/tmp/environment_linux_amd64_freeze.yaml",
+      "size": 2008
+    },
+    {
+      "mtime_utc": "2026-10-10T22:08:51.881467+00:00",
+      "path": "/workspace/work/actions-mk3-rcc-inspection/developer/tmp/stderr.log",
+      "size": 35
+    },
+    {
+      "mtime_utc": "2026-10-10T22:08:51.609460+00:00",
+      "path": "/workspace/work/actions-mk3-rcc-inspection/developer/tmp/stdout.log",
+      "size": 0
+    }
+  ],
+  "operator_cleanup_or_restore": "none performed",
+  "rcc_observation": "RCC reported three artifact files already present at its pre-run check. Their observed mtimes fall during the attempt, and no pre-launch stat snapshot exists, so this run cannot establish whether each file predated launch or was written by RCC during environment setup.",
+  "recorded_at_utc": "2026-10-10T22:09:28.747366+00:00",
+  "runner_or_provider_started": false,
+  "schema": "rcc-core102-artifact-provenance-correction-v1"
+}

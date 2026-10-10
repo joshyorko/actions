@@ -1,0 +1,43 @@
+{
+  "capture_readers_joined": true,
+  "elapsed_seconds": 2.426,
+  "ended_at_utc": "2026-10-10T22:08:53.008387+00:00",
+  "gateway_command": [
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "--no-build",
+    "-r",
+    "/workspace/work/actions-mk3-rcc-inspection/developer/toolkit.yaml",
+    "--",
+    "/bin/bash",
+    "/workspace/work/actions-mk3-evidence/rcc-inspection-actual-readiness/frozen-v3/run-one-shot.sh",
+    "/workspace/work/actions-mk3-evidence/rcc-inspection-actual-runs/20261010T220850Z-core102"
+  ],
+  "gateway_process_group": 54936,
+  "returncode": 10,
+  "run_root": "/workspace/work/actions-mk3-evidence/rcc-inspection-actual-runs/20261010T220850Z-core102",
+  "schema": "rcc-metadata-inspection-gateway-supervisor-v1",
+  "started_at_utc": "2026-10-10T22:08:50.582343+00:00",
+  "streams": {
+    "stderr": {
+      "captured_bytes": 4177,
+      "captured_sha256": "5c019a47047ed8d1c3300885b7431fc65b4aec5cde26f9a262fb1cd4d2da4b25",
+      "path": "/workspace/work/actions-mk3-evidence/rcc-inspection-actual-runs/20261010T220850Z-core102/gateway-stderr.bin",
+      "sha256_all": "5c019a47047ed8d1c3300885b7431fc65b4aec5cde26f9a262fb1cd4d2da4b25",
+      "total_bytes": 4177,
+      "truncated": false
+    },
+    "stdout": {
+      "captured_bytes": 0,
+      "captured_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "/workspace/work/actions-mk3-evidence/rcc-inspection-actual-runs/20261010T220850Z-core102/gateway-stdout.bin",
+      "sha256_all": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "total_bytes": 0,
+      "truncated": false
+    }
+  },
+  "term_grace_seconds": 3.0,
+  "timed_out": false,
+  "watchdog_seconds": 210.0
+}

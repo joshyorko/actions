@@ -214,3 +214,6 @@ docs/program/evidence/wave3-overlay-20261010T2023Z/** -text
 # Wave 4 receipts and captured command output are hash-bound original bytes.
 docs/program/evidence/wave4-convergence-20261010T2045Z/** -text
 docs/program/evidence/wave4-convergence-20261010T2045Z/**/*.log -diff -whitespace
+# Closure-audit JSON/CSV/excerpts are checked against immutable SHA256 manifests.
+docs/program/evidence/issue-closure-audit-20261010/** -text
+docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.csv whitespace=cr-at-eol

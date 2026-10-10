@@ -1,0 +1,38 @@
+{
+  "observed_at_utc": "2026-10-10T22:31:58.961360+00:00",
+  "edges": [
+    {
+      "prerequisite_pr": 292,
+      "consumer_pr": 290,
+      "current_predecessor_head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "current_consumer_head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "current_predecessor_head_is_ancestor": true,
+      "meaning": "Declared acceptance/refresh dependency for292/290/299/300, not inferred from simple issue reference"
+    },
+    {
+      "prerequisite_pr": 292,
+      "consumer_pr": 299,
+      "current_predecessor_head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "current_consumer_head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "current_predecessor_head_is_ancestor": true,
+      "meaning": "Declared acceptance/refresh dependency for292/290/299/300, not inferred from simple issue reference"
+    },
+    {
+      "prerequisite_pr": 299,
+      "consumer_pr": 300,
+      "current_predecessor_head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "current_consumer_head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "current_predecessor_head_is_ancestor": true,
+      "meaning": "Declared acceptance/refresh dependency for292/290/299/300, not inferred from simple issue reference"
+    },
+    {
+      "prerequisite_pr": 308,
+      "consumer_pr": 282,
+      "current_predecessor_head": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+      "current_consumer_head": "66cc132367be02b05bc08c981b900a68d156cd52",
+      "current_predecessor_head_is_ancestor": false,
+      "meaning": "PR308 is not a PR282 source dependency; selector worker is merely existing lane ownership, retain separate chains"
+    }
+  ],
+  "note": "Git ancestry and semantic acceptance prerequisites are separate. No retarget/merge/rebase performed."
+}

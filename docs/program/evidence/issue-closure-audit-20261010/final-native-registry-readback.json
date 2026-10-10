@@ -1,0 +1,15 @@
+{
+  "observed_at_utc": "2026-10-10 22:50:33 UTC",
+  "method": "Approved GitHub connector read-only release API",
+  "native_latest": {
+    "tag": "actions-runtime-1.0.1",
+    "published_at": "2026-09-07T18:10:51Z",
+    "html_url": "https://github.com/joshyorko/actions/releases/tag/actions-runtime-1.0.1",
+    "id": 384254001
+  },
+  "homebrew_final_read": {
+    "status": "UNAVAILABLE",
+    "note": "Attempted Casks/actions-runtime.rb read did not return a file. Earlier owning-repository evidence remains the last verified1.0.1 cask; no new install or upgrade proof."
+  },
+  "publication_performed": false
+}

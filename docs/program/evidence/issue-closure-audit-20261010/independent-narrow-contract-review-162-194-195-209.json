@@ -1,0 +1,179 @@
+{
+  "status": "NARROW_CONTRACT_REVIEW_COMPLETE; NO_CLOSURE_ACTION",
+  "reviewed_at_utc": "2026-10-10T22:40:25.237071+00:00",
+  "source_head": "19380993febaa71238eaee3026b5c808773283ff",
+  "source_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+  "scope": "Criterion-specific independent read-only review of #162/#194/#195/#209. Findings do not establish full Runtime/native/security/release acceptance; closure/publication actions remain outside current bookkeeping scope.",
+  "input_bindings": [
+    {
+      "file": "open-issues-live.json",
+      "sha256": "7e25e48a19a1b4cbabd3ca44b8d003bf6eb5fc20acee62b50e17115a450d46c2",
+      "bytes": 786654
+    },
+    {
+      "file": "matrix/private-issue-comment-snapshots-20261010.json",
+      "sha256": "311dfa7a9302b004b2827207b21a7560aa6114133e5fc22090814c316222bc7e",
+      "bytes": 566071
+    },
+    {
+      "file": "narrow-coverage-current-excerpt.json",
+      "sha256": "5e972f798fa0da8e3c18719a150e5bc3cc7bc3feabdce43e0151618d21863c3e",
+      "bytes": 2817
+    },
+    {
+      "file": "narrow-core-current-excerpts.json",
+      "sha256": "61ae93b782f6c5171895ee4cd6b49e275fe5730209fed7fa65d839bc6c91623a",
+      "bytes": 16546
+    },
+    {
+      "file": "narrow209-primary-rcc-excerpt.json",
+      "sha256": "fceaf2598a9666fd97b3a7d6147ed64d441fc83205a0a2adf437c7c2b182d286",
+      "bytes": 7262
+    },
+    {
+      "file": "narrow209-origin-auth-current-excerpts-v2.json",
+      "sha256": "a112ef8c3eebbcb0d16408371c2da82ee948fa68531b8421595eefedf7f41784",
+      "bytes": 22803
+    }
+  ],
+  "source_bindings": [
+    {
+      "file": ".github/workflows/coverage-gate.yml",
+      "git_blob": "d5ed7d50a00166fe117e76f45e54ab7860bad0e0",
+      "sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf"
+    },
+    {
+      "file": ".coverage-thresholds.json",
+      "git_blob": "8fd76860e95b90443b48c6533ecf09146e0a1d15",
+      "sha256": "ecd94eb374435c9628068af905a6c0f42f293196042e4392231f1def800dacb6"
+    },
+    {
+      "file": ".coveragerc",
+      "git_blob": "1dfdbb8c4c670e216ca03def05df24df1e4f3560",
+      "sha256": "45ae5a7bf50c597a9193e440ac228f7362b7a3e04564ab92e4e0e3f1f809e184"
+    },
+    {
+      "file": "developer/coverage_gate.py",
+      "git_blob": "33d860c34c61d7385f6c9d0d81a5c1837cccb5a7",
+      "sha256": "9b6aa9c42bc11935a545c76e6b9a5299987b4cc28a4fe27806efcffa1c15eb83"
+    },
+    {
+      "file": "actions/tests/actions_core_tests/test_command_dispatch_and_variable_scope.py",
+      "git_blob": "d3bd3f8d72485e1c164c1554b56fb8218964abaa",
+      "sha256": "9ae27fc91f4d5e0f75957e9e379e3ef827fc9573d3c899bbc22f697c0b58d583"
+    },
+    {
+      "file": "actions/src/actions/_variables_scope.py",
+      "git_blob": "c8c7708041de73e891a4ad405fb60752dcb8b9cb",
+      "sha256": "79c18151af2e12f3e5a28c5bb4c1810b986da135c4bac4bb4d9de0b9db71e901"
+    },
+    {
+      "file": "actions/src/actions/__init__.py",
+      "git_blob": "b6721b365f79c1737128856c8c7037284460b031",
+      "sha256": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2"
+    },
+    {
+      "file": "actions/scripts/verify_clean_wheel.py",
+      "git_blob": "8907efaabbbd303804513d7980bcc49ca61bfd2a",
+      "sha256": "0cf8cf6473b92dab66f8a8e01d7d76ada0a850f8f91dc6eb55c2389aa0538968"
+    },
+    {
+      "file": "action_server/src/actions/server/_actions_process_pool.py",
+      "git_blob": "af261b4d40870ecf5415980ae1b3e2923f0734b1",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "file": "action_server/src/actions/server/_encryption.py",
+      "git_blob": "fd5392a703766aa81cd3933fab9025f9dce6db43",
+      "sha256": "84527b5cd4794c19797c4e42d78f8f1a9964458f0b82144d8f4e132ea40e7dd9"
+    },
+    {
+      "file": "action_server/tests/contract_tests/test_active_contracts.py",
+      "git_blob": "b7ca26e6aa1fb958adaec817364088939a8d7336",
+      "sha256": "47e26236e930386c6c35b6acdd35d9985f4cde0f43748fee714fb61f9fe3dd32"
+    },
+    {
+      "file": "action_server/tests/action_server_tests/test_log_verbosity.py",
+      "git_blob": "447faa1ce3d3f8e5d63b4b66b7e5f9fa19f70a7c",
+      "sha256": "c987104e2d5aeb31886c846afdc8ecd8e62b45e08e3923328cf26f4048cfe5fa"
+    },
+    {
+      "file": "action_server/tests/action_server_tests/test_server_cors.py",
+      "git_blob": "06aeed497d11660fce40e3b40cdd52be6fa106f0",
+      "sha256": "d702157c63863869ead3c6f39ec9965416c5ba4213f61874540300c2f7d61a37"
+    }
+  ],
+  "issues": [
+    {
+      "issue": 162,
+      "disposition": "GO_NARROW_CRITERION",
+      "criterion": "Repository-owned coverage-gate file plus owner-requested real measured monorepo baseline rather than arbitrary/package placeholder.",
+      "observations": [
+        "Exact integration owns coverage-gate.yml and .coverage-thresholds.json; Python coverage aggregation measures every maintained src/*.py in all5declared packages, rejects missing/inconsistent source counts and any failing suite, and enforces measured53.38floor.",
+        "Portable work-items persistent service and Runtime integration suite exclusions are explicit; coverage includes all maintained source statements, not service-only/full installed-wheel coverage.",
+        "Current run38087231077/job114316164038 has measurement and receipt-upload success; excerpt shows18447covered statements and57.2764%, exceeding53.38.18447 is covered statements, not total statements.",
+        "Committed baseline counts15906/29796 equal53.3830044%, floored to53.38 by the repository baseline recorder. Current real measurement and enforcement satisfy the practical narrow criterion."
+      ],
+      "limitation": "Historical baseline source identity is not independently recovered: recorded inventory155ad5d5... differs from a pure committed259-file inventory at recorded baseline7c450 (d3088844...). This may include measured-worktree/generated-source context. Preserve the discrepancy; do not claim exact historical baseline reproduction or original receipt authentication. It does not invalidate the observed current real5-package coverage gate."
+    },
+    {
+      "issue": 194,
+      "disposition": "GO_NARROW_CONTRACT",
+      "criterion": "Focused command invalid/malformed/handler paths and variable creation/lookup/mutation/cleanup/missing behavior, existing package-suite execution and CI coverage.",
+      "observations": [
+        "All8focused tests exist and each has a current exact193 hosted PASSED line in Core job114316164476/run38087231079.",
+        "Command tests cover malformed argparse input, registered handler exception propagation, and absent selected action. Scope tests cover none outside context, active lookup/creation, rejected overlapping context preserving outer state, exception cleanup, thread isolation, mutation, and freshness.",
+        "Scope implementation intentionally supports one active thread-local context; nested creation is rejected. The overlap test verifies this actual contract rather than inventing a nested variable-map API.",
+        "All3Core source jobs and clean Core1.0.3wheel job114316164282 succeeded; real monorepo coverage gate above succeeded."
+      ],
+      "focused_passed_tests": [
+        "test_malformed_command_arguments_return_argparse_error_code",
+        "test_registered_command_handler_errors_propagate",
+        "test_run_handler_reports_missing_selected_action",
+        "test_variable_scope_is_missing_outside_context_and_restored_afterward",
+        "test_overlapping_variable_scope_is_rejected_without_losing_outer_scope",
+        "test_variable_scope_is_cleared_when_context_body_raises",
+        "test_variable_scope_is_isolated_per_thread",
+        "test_variable_scope_active_lookup_observes_mutations_and_next_scope_is_fresh"
+      ],
+      "limitation": "No new tests were run by this reviewer; no assertion of exhaustive command or arbitrary nested-variable semantics."
+    },
+    {
+      "issue": 195,
+      "disposition": "HOLD_ONE_REMAINING_CLEAN_RUNTIME_WHEEL_PROOF",
+      "criterion": "Public Core context/server-owned JSON migration plus clean-wheel compatibility test rejecting Runtime imports of private actions._* Core modules.",
+      "observations": [
+        "Public ActionContext export is in actions.__all__, lazily available; Runtime process-pool imports it from actions. Runtime encryption/process-pool JSONValue comes from actions.server._protocols.",
+        "Source AST guard scans maintained Runtime modules and rejects direct, aliased and statically resolvable dynamic private Core imports.",
+        "Clean Core wheel verifier tests public exports and Core1.0.3candidate installed probe passed.",
+        "Existing Runtime clean-wheel contract installs/probes wheels outside checkout and checks public API behavior, but its private-Core import guard is applied to checkout source. The installed Runtime probe imports selected Runtime modules without a private-import rejection assertion, and whole Runtime wheel content is not passed through that guard."
+      ],
+      "remaining_gate": "Retain a passed clean installed Runtime-wheel compatibility guard against private actions._* imports, with exact wheel/source identity, or explicitly accept an equivalent archive-wide Runtime wheel AST rejection bound to those installed bytes. Source-only guard plus clean Core-wheel probe does not satisfy this remaining requested test.",
+      "limitation": "No source defect found in migrated call sites; this is a specific missing acceptance-proof/test requirement, not a full Runtime HOLD by scanner origin."
+    },
+    {
+      "issue": 209,
+      "disposition": "GO_NARROW_CONTRACT",
+      "criterion": "Explained reproduction, before/after regression, strict allowed/disallowed/no-Origin/effective-port/API-key policy preserved, affected package and hosted primary Ubuntu gate pass, durable lesson.",
+      "observations": [
+        "Owner comment6087143055 records exact00beb890 RED ordered startup-redaction/WebSocket pair, captured fake get_settings import alias cause,11-line repair and2/2GREEN plus full suite441PASS/10skip; focused RED/GREEN are writer-observed evidence, not newly rerun or separately retained reviewer logs.",
+        "Exact integrated test imports alias owner _app before patching _settings.get_settings, patches both accessors, clears app cache before use and registers cleanup. This directly fixes the described import-order leak without weakening production policy.",
+        "Primary RCC18.19.3Ubuntu run38081495671/job114299160964 passed; focused effective-port/no-Origin and disallowed-Origin cases have PASSED lines.",
+        "Treea8fe is independently identical for source73605934, synthetic856c0a47 and integrated19380993; gate binding is tree equivalence, not a claim current193commit was the historical workflow head.",
+        "Source-equivalent ActionServerTests run38081495682/job114299161091 passes real configured-api-key WebSocket and reflected-host/forwarded-host rejection; all3OSjobs successful.",
+        "Test inline canonical lesson records alias-owner import before monkeypatch and cache cleanup."
+      ],
+      "limitation": "Historical entire hosted worker import order was not reconstructed; current primary success and narrow repair acceptance do not establish whole Origin/native/ChatGPT/security acceptance."
+    }
+  ],
+  "commands": [
+    "Read retained exact issue bodies and owner comments5382879980/6087143055 and all4bounded hosted excerpts; hash-bind inputs.",
+    "git show19380993:<listed source files>; source blob/SHA256 binding and focused assertion/control-flow review.",
+    "Match all8focused source test names to actual hosted PASSED lines.",
+    "git rev-parse19380993^{tree},73605934^{tree},856c0a47^{tree}; independently confirm all equal a8fe.",
+    "Read-only git ls-tree plus git cat-file --batch of259baseline src/*.py blobs; compute historical declared source digest, retain mismatch without modification."
+  ],
+  "canonical_guide_proposal": "When reconciling narrow quality issues, bind each explicit acceptance clause separately. A current real coverage measurement may satisfy a measured-gate criterion without proving service/installed-wheel coverage; record exclusions and any historical baseline provenance uncertainty. Public Core exports and source AST guards do not substitute for a requested clean Runtime-wheel boundary check. Fixture-only import-alias repairs can close their demonstrated regression after exact-tree primary gate evidence while broader product/security gates remain open.",
+  "no_tests_services_source_or_remote_mutations": true,
+  "upstream_disposition": "none"
+}

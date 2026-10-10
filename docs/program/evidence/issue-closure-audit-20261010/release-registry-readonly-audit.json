@@ -1,0 +1,53 @@
+{
+  "immutable_tag_readback": "2346af6d41f4a45d13ebaef0377b655774bc6cbc\trefs/tags/actions-core-1.0.3\na70993fafc99a9f94041485542d5a720797ca394\trefs/tags/actions-core-1.0.3^{}\n",
+  "observed_at": "2026-10-10T22:18:40.508999+00:00",
+  "publication_performed": false,
+  "registry": {
+    "actions-core": {
+      "has_1_0_3": true,
+      "latest": "1.0.3",
+      "release_1_0_3": [
+        {
+          "filename": "actions_core-1.0.3-py3-none-any.whl",
+          "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+          "size": 103809,
+          "yanked": false
+        },
+        {
+          "filename": "actions_core-1.0.3.tar.gz",
+          "sha256": "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691",
+          "size": 84554,
+          "yanked": false
+        }
+      ]
+    },
+    "actions-http-helper": {
+      "has_1_0_3": true,
+      "latest": "1.0.3",
+      "release_1_0_3": [
+        {
+          "filename": "actions_http_helper-1.0.3-py3-none-any.whl",
+          "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+          "size": 14690,
+          "yanked": false
+        },
+        {
+          "filename": "actions_http_helper-1.0.3.tar.gz",
+          "sha256": "b8e4e8efb181d5748264f25f1803f47731cd4947fc015f009934d51cd7a78945",
+          "size": 15302,
+          "yanked": false
+        }
+      ]
+    },
+    "actions-runtime": {
+      "has_1_0_3": false,
+      "latest": "1.0.2",
+      "release_1_0_3": []
+    },
+    "actions-work-items": {
+      "has_1_0_3": false,
+      "latest": "0.4.4",
+      "release_1_0_3": []
+    }
+  }
+}

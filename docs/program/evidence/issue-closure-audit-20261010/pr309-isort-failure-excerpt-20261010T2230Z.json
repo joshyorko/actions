@@ -1,0 +1,20 @@
+{
+  "pr": 309,
+  "head": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+  "run": 38087402532,
+  "ubuntu_job": 114316669192,
+  "all_jobs_lint_failed": [
+    114316669003,
+    114316669123,
+    114316669192
+  ],
+  "integration_test_step": "success on all3 OS; full job not PASS",
+  "failure": "isort --check src tests: test_auth_route_inventory.py Imports are incorrectly sorted and/or formatted.",
+  "excerpt": [
+    "2026-10-10T21:56:42.5920182Z \u001b[1;37mpoetry run isort --check src tests\u001b[0m",
+    "2026-10-10T21:56:42.5922137Z ERROR: /home/runner/work/actions/actions/action_server/tests/action_server_tests/test_auth_route_inventory.py Imports are incorrectly sorted and/or formatted.",
+    "2026-10-10T21:56:42.9127534Z ##[error]Process completed with exit code 1."
+  ],
+  "source_fix": "NOT RUN during bookkeeping audit",
+  "upstream": "repository-owned formatting defect; no upstream report"
+}

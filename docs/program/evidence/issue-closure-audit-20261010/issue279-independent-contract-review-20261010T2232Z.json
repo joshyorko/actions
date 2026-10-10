@@ -1,0 +1,117 @@
+{
+  "schema": "issue-contract-independent-review/v1",
+  "issue": 279,
+  "reviewer": "root integration coordinator, independent from PR273 implementation",
+  "observed_at_utc": "2026-10-10T22:25:55.417557+00:00",
+  "source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+  "source_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+  "issue_contract_body_sha256": "9266780c5e193f6ce09bdb33524e6ccda367566d89398e7be432abf07482fcf8",
+  "implementation_pr": 273,
+  "integrated_merge": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+  "files": [
+    {
+      "path": "action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "path": "action_server/tests/action_server_tests/test_cli_multi_package_sync.py",
+      "sha256": "6e45597f99b2b91f6d9c8cd3a5014d31523981419770fef2bed3a000dd64f002"
+    },
+    {
+      "path": "action_server/docs/guides/00-startup-command-line.md",
+      "sha256": "e3c959851cbace01cdca98f009fe2e0549a8100b335994c347103b101c4bfd30"
+    }
+  ],
+  "hosted_current_source_run": 38081495682,
+  "test_excerpt_objects": [
+    {
+      "file": "pr279-current-job-114299160939-excerpt.json",
+      "sha256": "f6db73e453e74d127e8855a011f662d49a3a58710eec72d625f131d2a1fa96a7",
+      "data": {
+        "job": 114299160939,
+        "isError": false,
+        "keys": [
+          "content"
+        ],
+        "logCharacters": 547772,
+        "selectedLines": [
+          "2026-10-10T20:23:50.2396576Z action_server_tests\\test_cli_multi_package_sync.py::test_additive_import_serves_duplicate_action_names_across_restart PASSED [ 28%]\r",
+          "2026-10-10T20:24:33.3749732Z action_server_tests\\test_cli_multi_package_sync.py::test_start_sync_treats_repeated_dirs_as_one_desired_set PASSED [ 29%]\r",
+          "2026-10-10T20:24:45.5192330Z action_server_tests\\test_cli_multi_package_sync.py::test_start_sync_rejects_bad_later_package_without_partial_database_update PASSED [ 29%]\r",
+          "2026-10-10T20:25:07.4665162Z action_server_tests\\test_cli_multi_package_sync.py::test_failed_sync_keeps_last_good_unmanaged_package_sources PASSED [ 30%]\r",
+          "2026-10-10T20:25:30.2671933Z action_server_tests\\test_cli_multi_package_sync.py::test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers PASSED [ 31%]\r"
+        ]
+      }
+    },
+    {
+      "file": "pr279-current-job-114299161091-excerpt.json",
+      "sha256": "243a1411b20aad0f0a8346b627bc64bd52e0f73221e10da628f52d830707e6ba",
+      "data": {
+        "job": 114299161091,
+        "isError": false,
+        "keys": [
+          "content"
+        ],
+        "logCharacters": 1276589,
+        "selectedLines": [
+          "2026-10-10T20:09:26.7816713Z action_server_tests/test_cli_multi_package_sync.py::test_additive_import_serves_duplicate_action_names_across_restart PASSED [ 28%]",
+          "2026-10-10T20:09:46.9333908Z action_server_tests/test_cli_multi_package_sync.py::test_start_sync_treats_repeated_dirs_as_one_desired_set PASSED [ 29%]",
+          "2026-10-10T20:09:54.6563458Z action_server_tests/test_cli_multi_package_sync.py::test_start_sync_rejects_bad_later_package_without_partial_database_update PASSED [ 29%]",
+          "2026-10-10T20:10:07.2028025Z action_server_tests/test_cli_multi_package_sync.py::test_failed_sync_keeps_last_good_unmanaged_package_sources PASSED [ 30%]",
+          "2026-10-10T20:10:18.9097907Z action_server_tests/test_cli_multi_package_sync.py::test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers PASSED [ 31%]"
+        ]
+      }
+    },
+    {
+      "file": "pr279-current-job-114299161171-excerpt.json",
+      "sha256": "12b27f8009698dcf221a523d5d0e79baf8af0d70fb579cb79cd80fc689875fc4",
+      "data": {
+        "job": 114299161171,
+        "isError": false,
+        "keys": [
+          "content"
+        ],
+        "logCharacters": 1139105,
+        "selectedLines": [
+          "2026-10-10T21:10:53.4552750Z action_server_tests/test_cli_multi_package_sync.py::test_additive_import_serves_duplicate_action_names_across_restart PASSED [ 28%]",
+          "2026-10-10T21:11:09.3600190Z action_server_tests/test_cli_multi_package_sync.py::test_start_sync_treats_repeated_dirs_as_one_desired_set PASSED [ 29%]",
+          "2026-10-10T21:11:15.0253610Z action_server_tests/test_cli_multi_package_sync.py::test_start_sync_rejects_bad_later_package_without_partial_database_update PASSED [ 29%]",
+          "2026-10-10T21:11:24.1811470Z action_server_tests/test_cli_multi_package_sync.py::test_failed_sync_keeps_last_good_unmanaged_package_sources PASSED [ 30%]",
+          "2026-10-10T21:11:32.4710980Z action_server_tests/test_cli_multi_package_sync.py::test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers PASSED [ 31%]"
+        ]
+      }
+    }
+  ],
+  "contract_mapping": [
+    {
+      "criterion": "Sequential imports retain both packages across restart with actions-sync=false and permit execution",
+      "test": "test_additive_import_serves_duplicate_action_names_across_restart"
+    },
+    {
+      "criterion": "Repeated --dir startup admits both package catalogs and actions with actions-sync=true",
+      "test": "test_start_sync_treats_repeated_dirs_as_one_desired_set"
+    },
+    {
+      "criterion": "Updating A preserves B; reversing/repeating dir arguments has no winner-dependent behavior",
+      "test": "test_start_sync_treats_repeated_dirs_as_one_desired_set"
+    },
+    {
+      "criterion": "Adding C preserves A/B; omitting B from a complete desired set deliberately deactivates B only",
+      "test": "test_start_sync_treats_repeated_dirs_as_one_desired_set"
+    },
+    {
+      "criterion": "Document additive vs desired-set behavior and complete repeated-dir command",
+      "doc": "action_server/docs/guides/00-startup-command-line.md:37"
+    }
+  ],
+  "verdict": "SCOPED_ACCEPTANCE_GO; whole narrow #279 contract close-ready recommendation",
+  "closure_action_taken": false,
+  "remaining_technical_gate": "none found in narrow issue contract; explicit owner closure action recommended after reviewing exact evidence",
+  "excluded_scope": [
+    "RCC adapter whole-issue acceptance",
+    "managed revision rollback/generation-drain contract",
+    "Runtime1.0.3 release",
+    "parent epics"
+  ],
+  "upstream_disposition": "none"
+}

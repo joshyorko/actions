@@ -1,0 +1,56 @@
+{
+  "schema": "engineering-results-audit-amendment/v1",
+  "recorded_at_utc": "2026-10-10T22:31:13.101733+00:00",
+  "work_items_version": "0.4.4",
+  "pr310": {
+    "source": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+    "source_tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+    "native_build_source": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "native_build_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "production_input_equivalence": "bound in reviewed manifest; complete source and build trees differ",
+    "linux_frozen_browser": "PASS one selected actual managed-browser test, zero skips/failures/errors",
+    "linux_go_browser": "PASS one selected actual managed-browser test, zero skips/failures/errors",
+    "earlier_go_layout_setup": "FAIL before runtime/browser; preserved in wave7",
+    "whole_issue208": "NOT ACCEPTED; missing-support/generic500/crash/accessibility/non-Chromium and full platform acceptance remain",
+    "actual_ChatGPT": "NOT RUN"
+  },
+  "rcc_metadata_inspection": {
+    "gateway": "FAIL pre-run RCC artifact-directory guard",
+    "inspection": "NOT RUN",
+    "provider": "NOT RUN",
+    "runner": "NOT RUN",
+    "artifact_origin": "UNKNOWN; no prelaunch stat, current-attempt mtimes; additive correction retained",
+    "cleanup": "owned process group gone; earlier process-search self-match corrected; no retry/deletion"
+  },
+  "local_rcc_source_lanes": {
+    "local_detached_profile": {
+      "head": "14a7810ca3f48d3021f7b76721a58f60e4a7b897",
+      "tree": "75be9f5639639701093e17a36db7eaafc2aaed66",
+      "source_review": "GO only source",
+      "source_review_sha256": "54240deecb0672e8a8707a8bdc9207322706747e4ca17b3086520377c1afa64d",
+      "actual_Rcc": "NOT RUN",
+      "remote_delivery": "LOCAL ONLY"
+    },
+    "native_artifact_selector": {
+      "original_head": "993aa545775733483284718257e6d5467c989a50",
+      "original_source_review": "HOLD, private details excluded",
+      "corrected_head": "aa29fc8a281492b8276df065daba570177107410",
+      "corrected_tree": "f69ec7ff8478766e0c4aa7bc235132dc1db42272",
+      "corrected_review": "IN PROGRESS at observation; not accepted from owner tests",
+      "actual_Rcc_native_gate": "NOT RUN",
+      "remote_delivery": "LOCAL ONLY"
+    }
+  },
+  "historical_native_workers": {
+    "observed_at_utc": "2026-10-10T21:34:41Z",
+    "Executor_target": "local",
+    "stored_cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+    "Work_Items_thread_status": "notLoaded; latest turn completed; no active flags",
+    "RCC_thread_status": "notLoaded; latest turn interrupted; no active flags",
+    "read_only": "neither resumed nor created",
+    "historical_Canvas_heartbeat": "UNKNOWN"
+  },
+  "Devsy": "DISABLED; no new authorization",
+  "release_actions_during_audit": "NONE",
+  "upstream_disposition": "none"
+}

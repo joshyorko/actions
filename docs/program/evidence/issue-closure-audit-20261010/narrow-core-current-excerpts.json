@@ -1,0 +1,460 @@
+{
+  "source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+  "run": 38087231079,
+  "jobs": {
+    "jobs": [
+      {
+        "id": 114316164282,
+        "name": "candidate-wheel",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38087231079,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Checkout repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Set up Python 3.10",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install Poetry",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Synchronize Core dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Build Core candidate artifacts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Verify exact Core artifact inventory",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Install Twine 6.2.0",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Verify Core candidate artifacts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Verify clean installed Core candidate wheel",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Record candidate artifact hashes and provenance",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Upload verified Core candidate artifacts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Post Set up Python 3.10",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          },
+          {
+            "name": "Post Checkout repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          }
+        ]
+      },
+      {
+        "id": 114316164388,
+        "name": "build (windows-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38087231079,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Checkout repository and submodules",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Install the latest version of uv",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install Python 3.10",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install devutils requirements",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Install project (not dev)",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 6
+          },
+          {
+            "name": "Install project (dev)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Setup node",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Test",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "`inv lint`, potentially fixed with `inv pretty`",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "`inv typecheck`",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "`inv docs` with checking on files changed",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Post Setup node",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Post Install the latest version of uv",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          },
+          {
+            "name": "Post Checkout repository and submodules",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          }
+        ]
+      },
+      {
+        "id": 114316164451,
+        "name": "build (macos-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38087231079,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Checkout repository and submodules",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Install the latest version of uv",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install Python 3.10",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install devutils requirements",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Install project (not dev)",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 6
+          },
+          {
+            "name": "Install project (dev)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Setup node",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Test",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "`inv lint`, potentially fixed with `inv pretty`",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "`inv typecheck`",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "`inv docs` with checking on files changed",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Post Setup node",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Post Install the latest version of uv",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          },
+          {
+            "name": "Post Checkout repository and submodules",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          }
+        ]
+      },
+      {
+        "id": 114316164476,
+        "name": "build (ubuntu-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38087231079,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Checkout repository and submodules",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Install the latest version of uv",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install Python 3.10",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install devutils requirements",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Install project (not dev)",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 6
+          },
+          {
+            "name": "Install project (dev)",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Setup node",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Test",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "`inv lint`, potentially fixed with `inv pretty`",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "`inv typecheck`",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "`inv docs` with checking on files changed",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Post Setup node",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Post Install the latest version of uv",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          },
+          {
+            "name": "Post Checkout repository and submodules",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          }
+        ]
+      }
+    ]
+  },
+  "ubuntu": {
+    "job": 114316164476,
+    "excerpt": [
+      "2026-10-10T21:21:48.9906997Z tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_malformed_command_arguments_return_argparse_error_code ",
+      "2026-10-10T21:21:48.9942900Z [gw1]\u001b[36m [  3%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_malformed_command_arguments_return_argparse_error_code ",
+      "2026-10-10T21:21:48.9947013Z tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_registered_command_handler_errors_propagate ",
+      "2026-10-10T21:21:48.9948510Z [gw1]\u001b[36m [  3%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_registered_command_handler_errors_propagate ",
+      "2026-10-10T21:21:49.0224097Z tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_run_handler_reports_missing_selected_action ",
+      "2026-10-10T21:21:49.0239959Z [gw1]\u001b[36m [  3%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_run_handler_reports_missing_selected_action ",
+      "2026-10-10T21:21:49.0286728Z tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_variable_scope_is_missing_outside_context_and_restored_afterward ",
+      "2026-10-10T21:21:49.0289787Z [gw1]\u001b[36m [  4%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_variable_scope_is_missing_outside_context_and_restored_afterward ",
+      "2026-10-10T21:21:49.0306733Z tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_overlapping_variable_scope_is_rejected_without_losing_outer_scope ",
+      "2026-10-10T21:21:49.0309206Z [gw1]\u001b[36m [  4%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_overlapping_variable_scope_is_rejected_without_losing_outer_scope ",
+      "2026-10-10T21:21:49.0310659Z tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_variable_scope_is_cleared_when_context_body_raises ",
+      "2026-10-10T21:21:49.0312251Z [gw1]\u001b[36m [  4%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_variable_scope_is_cleared_when_context_body_raises ",
+      "2026-10-10T21:21:49.0313445Z tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_variable_scope_is_isolated_per_thread ",
+      "2026-10-10T21:21:49.0317365Z [gw1]\u001b[36m [  5%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_variable_scope_is_isolated_per_thread ",
+      "2026-10-10T21:21:49.0318786Z tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_variable_scope_active_lookup_observes_mutations_and_next_scope_is_fresh ",
+      "2026-10-10T21:21:49.0320610Z [gw1]\u001b[36m [  5%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_variable_scope_active_lookup_observes_mutations_and_next_scope_is_fresh ",
+      "2026-10-10T21:21:51.0406900Z tests/actions_core_tests/test_public_runtime_contract.py::test_runtime_contract_types_are_public_root_exports_and_keep_private_aliases ",
+      "2026-10-10T21:21:51.0412292Z [gw0]\u001b[36m [ 20%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_public_runtime_contract.py::test_runtime_contract_types_are_public_root_exports_and_keep_private_aliases ",
+      "2026-10-10T21:21:51.0588192Z tests/actions_core_tests/test_public_runtime_contract.py::test_action_context_public_export_does_not_eagerly_import_context_module ",
+      "2026-10-10T21:21:51.1556929Z [gw0]\u001b[36m [ 20%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_public_runtime_contract.py::test_action_context_public_export_does_not_eagerly_import_context_module ",
+      "2026-10-10T21:21:51.2706316Z tests/actions_core_tests/test_public_runtime_contract.py::test_lazy_action_context_is_discoverable_without_eager_import ",
+      "2026-10-10T21:21:51.2715872Z [gw0]\u001b[36m [ 20%] \u001b[0m\u001b[32mPASSED\u001b[0m tests/actions_core_tests/test_public_runtime_contract.py::test_lazy_action_context_is_discoverable_without_eager_import "
+    ]
+  },
+  "cleanwheel": {
+    "job": 114316164282,
+    "excerpt": [
+      "2026-10-10T21:20:53.4891545Z \u001b[36;1mpython scripts/verify_clean_wheel.py \"$wheel\"\u001b[0m",
+      "2026-10-10T21:21:07.5317244Z verified clean actions-core wheel: /home/runner/work/actions/actions/actions/dist/actions_core-1.0.3-py3-none-any.whl"
+    ]
+  }
+}

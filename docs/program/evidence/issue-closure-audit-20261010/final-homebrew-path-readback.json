@@ -1,0 +1,11 @@
+{
+  "observed_at_utc": "2026-10-10 22:50:56 UTC",
+  "repository": "joshyorko/homebrew-tools",
+  "main_commit": "ce4ff32e73cc34385635b632374336adac285430",
+  "cask_path": "Casks/action-server.rb",
+  "git_blob": "cb56d191a553c312decd32b82ca13d2d5e596ceb",
+  "version": "1.0.1",
+  "actual_install_upgrade": "NOT_RUN",
+  "publication_performed": false,
+  "correction": "The preceding Casks/actions-runtime.rb guess was unavailable; actual owning path discovered from non-truncated live tree."
+}

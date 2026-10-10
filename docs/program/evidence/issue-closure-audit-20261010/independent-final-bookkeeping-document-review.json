@@ -1,0 +1,296 @@
+{
+  "status": "GO_QUALIFIED_BOOKKEEPING_DOCUMENTS; PUBLIC_LEDGER_LINK_SUBSTITUTION_REQUIRED",
+  "reviewed_at_utc": "2026-10-10T22:50:47.807681+00:00",
+  "scope": "Final independent read-only document/count/identity/logical-gate audit. No source edits, tests, workers, remote or closure actions. Review receipt is outside durable payload to avoid manifest races.",
+  "input_bindings": [
+    {
+      "path": "/workspace/work/actions-closure-audit/ledger101-current-top.md",
+      "sha256": "0f346e925ac267b113f57c588c76aec71a9704a0449cf0dd086b928cab3940fb",
+      "bytes": 5374
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/issue-closure-audit-20261010/README.md",
+      "sha256": "eda927907599303330566070c698c51abe9473b2a7666b89f1121e86eee4d635",
+      "bytes": 11797
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+      "sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+      "bytes": 1336161
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/issue-closure-audit-20261010/open-pr-reconciliation.json",
+      "sha256": "9a16bbe014d82baa64346aee66bbec59d5783882d7f0460340f50244c22ee279",
+      "bytes": 60302
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/issue-closure-audit-20261010/final-exact-head-ci-census.json",
+      "sha256": "1f9737fa003c13e1b110b6424cfd43fcf19b922494e6401bff6ed43a6d969fa7",
+      "bytes": 36838
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/durable/docs/program/evidence/issue-closure-audit-20261010/worker-activity-readback.json",
+      "sha256": "6b29ddf8dfb98928ac5ed7690ebfa23657c2b7f7bc5a6e066d22e7e1bade9e4a",
+      "bytes": 789
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/independent-closure-and-pr-reconciliation-review.json",
+      "sha256": "9669cb22799dcb21c62d30ea2f8adcf7dd10aae715075fd39d2bc6f1337f30ae",
+      "bytes": 13268
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/independent-narrow-contract-review-162-194-195-209.json",
+      "sha256": "4690bdabd0148734834c1deba2874fe7968933c5a3e1eed4bc9b9893cf84f099",
+      "bytes": 12562
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/independent-narrow-contract-attribution-clarification.json",
+      "sha256": "906e43b8253f10d8d34db6748633e52d24c6ad6a4f80ae229d46c570cf3b5320",
+      "bytes": 2632
+    },
+    {
+      "path": "/workspace/work/actions-closure-audit/issue279-independent-contract-review-20261010T2232Z.json",
+      "sha256": "73a1e867e1f7851033fc54d39bac084a12ec1d21afa041c260e59ca71d0f0dcb",
+      "bytes": 6305
+    }
+  ],
+  "issue_count": 58,
+  "unique_issue_ids": [
+    71,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    90,
+    91,
+    92,
+    93,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    125,
+    126,
+    127,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    151,
+    152,
+    153,
+    155,
+    162,
+    194,
+    195,
+    196,
+    208,
+    209,
+    211,
+    212,
+    214,
+    279,
+    293,
+    294,
+    295,
+    296
+  ],
+  "exclusive_primary_state_counts": {
+    "Blocked/scoped successor; full implementation not established": 27,
+    "Integrated foundation; whole issue unaccepted": 9,
+    "Awaiting scoped review/integration/acceptance": 8,
+    "Active coordination; full campaign remains open": 1,
+    "Implementing/verification; source checkpoints only": 1,
+    "Advisory/quality contract; acceptance unproved": 3,
+    "Accepted narrow contract; integrated": 4,
+    "Release/distribution gated": 1,
+    "Blocked by explicit human review": 4
+  },
+  "primary_sum": 58,
+  "close_ready_recommendations": [
+    162,
+    194,
+    209,
+    279
+  ],
+  "remaining_open_or_human_determination": 54,
+  "admitted_ready_prs": 0,
+  "held_prs": 13,
+  "draft_prs": 7,
+  "closure_claim": {
+    "automatic_closures": "UNKNOWN;0observed",
+    "premature_closure_risk": "UNKNOWN;0observed",
+    "basis": "Prior independently verified complete449range/2119ancestry/body/publicNoneyet observations remain qualified; authoritative authenticated closingIssuesReferences not obtained. No new authenticated relationship result is inferred by final docs.",
+    "latent_subpr_keyword_phrases": "Historical negative phrases remain a wording caveat, not established221closure relationships."
+  },
+  "final_ci_snapshot": {
+    "started_utc": "2026-10-10 22:45:44 UTC",
+    "finished_utc": "2026-10-10 22:45:45 UTC",
+    "rows": [
+      {
+        "pr": 310,
+        "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+        "workflow_counts": {
+          "success": 4,
+          "queued": 3
+        }
+      },
+      {
+        "pr": 309,
+        "head": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+        "tree": "9977652bc1e8d21a6e3b4f906031a68ab11b4c40",
+        "workflow_counts": {
+          "failure": 1,
+          "queued": 2,
+          "success": 3
+        }
+      },
+      {
+        "pr": 308,
+        "head": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "tree": "7ab1ba4642ee41a6254c9a56e388ea63a1623a9f",
+        "workflow_counts": {
+          "queued": 4,
+          "success": 2
+        }
+      },
+      {
+        "pr": 307,
+        "head": "729594fc04758502ec2ed985adb428e2863a3bb1",
+        "tree": "1db860bf248e83aeedf521044633bbd221902282",
+        "workflow_counts": {
+          "queued": 1,
+          "success": 5,
+          "in_progress": 1
+        }
+      },
+      {
+        "pr": 306,
+        "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+        "tree": "42f70afb88877335a71e9bc02ad2e85730d69442",
+        "workflow_counts": {
+          "queued": 2,
+          "success": 4
+        }
+      },
+      {
+        "pr": 305,
+        "head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+        "tree": "ab17a0cf3970273c86d3c4f1d26d3da852c9585f",
+        "workflow_counts": {
+          "queued": 2,
+          "success": 2,
+          "in_progress": 1
+        }
+      },
+      {
+        "pr": 302,
+        "head": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+        "tree": "bbc33916748d02e24fe37ce843594a1d8f67067d",
+        "workflow_counts": {
+          "queued": 2,
+          "success": 4
+        }
+      },
+      {
+        "pr": 300,
+        "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+        "workflow_counts": {
+          "success": 3
+        }
+      },
+      {
+        "pr": 299,
+        "head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+        "workflow_counts": {
+          "success": 6
+        }
+      },
+      {
+        "pr": 292,
+        "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+        "workflow_counts": {
+          "success": 5,
+          "in_progress": 1
+        }
+      },
+      {
+        "pr": 290,
+        "head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+        "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+        "workflow_counts": {
+          "success": 7
+        }
+      },
+      {
+        "pr": 282,
+        "head": "66cc132367be02b05bc08c981b900a68d156cd52",
+        "tree": "ca8685372e67ce07b55f9a830a60134582107873",
+        "workflow_counts": {
+          "queued": 3,
+          "success": 4
+        }
+      },
+      {
+        "pr": 221,
+        "head": "19380993febaa71238eaee3026b5c808773283ff",
+        "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+        "workflow_counts": {
+          "queued": 1,
+          "success": 12
+        }
+      }
+    ],
+    "required_vs_advisory": "UNKNOWN",
+    "interpretation": "Final additive census supersedes earlier status snapshots while preserving history. All returned runs bind exact PR heads. Workflow success is not admission or publication. PR292 Windows integration remains in_progress; PR309 ActionServerTests failure remains;299actualconflict retained."
+  },
+  "worker_activity": {
+    "known_cloud_running": 0,
+    "reachable_cloud_completed": 6,
+    "source_checkpoint_lanes": 2,
+    "assigned_issue_scope": 134,
+    "external_canvas_or_heartbeat": "UNKNOWN",
+    "total_active_implementation_lanes": "UNKNOWN",
+    "interpretation": "Two retained source-only checkpoints are an ownership overlay on one issue, not two currently running workers or two additional issue contracts."
+  },
+  "logical_gate_findings": [
+    "Four narrow recommendations match independent receipts; #195cleaninstalledRuntimeprivateimport rejection proof remains held. Advisory/scanner origin does not erase issue contracts.",
+    "#221integration19380993/treea8fe and livecommunitya709 identities are retained; no acceptance of an untested all-PR combined tree is inferred.",
+    "#292ancestry before290/299 and299before300 does not erase conflict/Windows/refresh gates. The27successors are explicitly not all blocked; distinct blocker countUNKNOWN.",
+    "Local#134profile14a7810/tree75be9 andselector7c0b6/tree0fc2e remain source-onlyGO. Actual metadata inspectionNOTRUN is not silently promoted to acceptance.",
+    "Core/Helper publication is distinguished from unreleasedRuntime1.0.3, native/Homebrew1.0.1 and WorkItems0.4.4. Release-labelledPR workflows are not publication.",
+    "Scoped Linux frozen/Go UI PASS, two-process migration proof and fixture disconnect repair do not close fullRuntime/native/ChatGPT/platform/auth/database acceptance.",
+    "#293\u2013296human holds/no dispatch and Devsy disabled remain explicit."
+  ],
+  "public_ledger_preparation_note": {
+    "file": "ledger101-current-top.md",
+    "unsubstituted_placeholder_occurrences": 5,
+    "required_action": "Replace __AUDIT_COMMIT__ with the immutable published audit commit before posting the public ledger. This source is a preparation template; no broken-link publication is approved. No edit performed by reviewer."
+  },
+  "canonical_guide_proposal": "Keep final CI census additive and explicitly superseding older status observations. Report completed source-checkpoint lanes separately from running worker counts, preserve UNKNOWN for unavailable authenticated closure/policy/external-worker fields, and resolve immutable audit links before posting an operator ledger.",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,102 @@
+{
+  "source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+  "run": 38087231077,
+  "job": 114316164038,
+  "jobs": {
+    "jobs": [
+      {
+        "id": 114316164038,
+        "name": "coverage",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 38087231077,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Select task-local RCC and receipt directories",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Cache RCC holotree",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install pinned RCC",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Check pinned toolchain",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Bootstrap declared package environments",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Run toolkit contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Measure portable package suite coverage",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Upload coverage receipts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Post Cache RCC holotree",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          }
+        ]
+      }
+    ]
+  },
+  "excerpt": [
+    "2026-10-10T21:57:14.4876557Z     \"covered_statements\": 18447,",
+    "2026-10-10T21:57:14.4878282Z     \"statement_percent\": 57.2764",
+    "2026-10-10T21:57:14.4879251Z   \"minimum_statement_percent\": 53.38,"
+  ]
+}

@@ -1,0 +1,1173 @@
+{
+  "live_parent_subissue_snapshot": "/workspace/work/actions-closure-audit/open-issues-live.json",
+  "method": "GitHub REST GET only through github_fetch",
+  "relationship_records": [
+    {
+      "issue": 296,
+      "page_size": 100,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/296/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/296/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 295,
+      "page_size": 100,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/295/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/295/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 294,
+      "page_size": 100,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/294/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/294/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 293,
+      "page_size": 100,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/293/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/293/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 279,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/279/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/279/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 214,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/214/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/214/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 212,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/212/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/212/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 211,
+      "page_size": 100,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/211/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/211/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 209,
+      "page_size": 100,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/209/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/209/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 208,
+      "page_size": 100,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/208/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/208/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 196,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/196/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/196/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 195,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/195/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/195/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 194,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/194/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/194/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 162,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/162/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/162/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 155,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/155/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/155/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 153,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/153/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/153/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 152,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/152/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/152/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 151,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/151/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/151/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 149,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/149/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/149/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 148,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/148/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/148/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 147,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/147/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/147/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 146,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/146/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/146/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 145,
+      "page_size": 100,
+      "parent": {
+        "number": 93,
+        "url": "https://github.com/joshyorko/actions/issues/93"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/145/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/145/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 144,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/144/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/144/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 143,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/143/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/143/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 142,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/142/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/142/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 141,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/141/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/141/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 140,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/140/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/140/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 139,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/139/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/139/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 138,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/138/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/138/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 136,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/136/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/136/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 135,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/135/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/135/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 134,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/134/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/134/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 133,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/133/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/133/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 132,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/132/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/132/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 131,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/131/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/131/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 130,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/130/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/130/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 129,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/129/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/129/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 127,
+      "page_size": 100,
+      "parent": {
+        "number": 93,
+        "url": "https://github.com/joshyorko/actions/issues/93"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/127/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/127/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 126,
+      "page_size": 100,
+      "parent": {
+        "number": 93,
+        "url": "https://github.com/joshyorko/actions/issues/93"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/126/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/126/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 125,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/125/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/125/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 101,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/101/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [
+        {
+          "number": 93,
+          "url": "https://github.com/joshyorko/actions/issues/93"
+        },
+        {
+          "number": 208,
+          "url": "https://github.com/joshyorko/actions/issues/208"
+        },
+        {
+          "number": 209,
+          "url": "https://github.com/joshyorko/actions/issues/209"
+        },
+        {
+          "number": 210,
+          "url": "https://github.com/joshyorko/actions/issues/210"
+        },
+        {
+          "number": 211,
+          "url": "https://github.com/joshyorko/actions/issues/211"
+        },
+        {
+          "number": 293,
+          "url": "https://github.com/joshyorko/actions/issues/293"
+        },
+        {
+          "number": 294,
+          "url": "https://github.com/joshyorko/actions/issues/294"
+        },
+        {
+          "number": 295,
+          "url": "https://github.com/joshyorko/actions/issues/295"
+        },
+        {
+          "number": 296,
+          "url": "https://github.com/joshyorko/actions/issues/296"
+        }
+      ],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/101/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 100,
+      "page_size": 100,
+      "parent": {
+        "number": 93,
+        "url": "https://github.com/joshyorko/actions/issues/93"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/100/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/100/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 99,
+      "page_size": 100,
+      "parent": {
+        "number": 93,
+        "url": "https://github.com/joshyorko/actions/issues/93"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/99/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/99/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 98,
+      "page_size": 100,
+      "parent": {
+        "number": 93,
+        "url": "https://github.com/joshyorko/actions/issues/93"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/98/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/98/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 97,
+      "page_size": 100,
+      "parent": {
+        "number": 93,
+        "url": "https://github.com/joshyorko/actions/issues/93"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/97/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/97/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 96,
+      "page_size": 100,
+      "parent": {
+        "number": 93,
+        "url": "https://github.com/joshyorko/actions/issues/93"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/96/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/96/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 93,
+      "page_size": 100,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/93/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "subissues": [
+        {
+          "number": 96,
+          "url": "https://github.com/joshyorko/actions/issues/96"
+        },
+        {
+          "number": 97,
+          "url": "https://github.com/joshyorko/actions/issues/97"
+        },
+        {
+          "number": 98,
+          "url": "https://github.com/joshyorko/actions/issues/98"
+        },
+        {
+          "number": 99,
+          "url": "https://github.com/joshyorko/actions/issues/99"
+        },
+        {
+          "number": 100,
+          "url": "https://github.com/joshyorko/actions/issues/100"
+        },
+        {
+          "number": 145,
+          "url": "https://github.com/joshyorko/actions/issues/145"
+        },
+        {
+          "number": 126,
+          "url": "https://github.com/joshyorko/actions/issues/126"
+        },
+        {
+          "number": 127,
+          "url": "https://github.com/joshyorko/actions/issues/127"
+        }
+      ],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/93/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 92,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/92/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/92/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 91,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/91/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/91/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 90,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/90/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/90/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 87,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/87/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/87/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 86,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/86/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/86/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 85,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/85/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/85/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 84,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/84/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/84/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 83,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/83/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/83/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 82,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/82/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/82/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 71,
+      "page_size": 100,
+      "parent": null,
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/71/parent",
+      "parent_none_basis": {
+        "api_message": "No parent issue found",
+        "http_status": 404
+      },
+      "parent_status": "none",
+      "parent_status_semantics": "confirmed_absent_by_explicit_endpoint_response",
+      "subissues": [],
+      "subissues_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/71/sub_issues?per_page=100&page=1",
+      "subissues_has_more": false,
+      "subissues_page_count": 1,
+      "subissues_status": "known"
+    },
+    {
+      "issue": 210,
+      "page_size": null,
+      "parent": {
+        "number": 101,
+        "url": "https://github.com/joshyorko/actions/issues/101"
+      },
+      "parent_endpoint": "https://api.github.com/repos/joshyorko/actions/issues/210/parent",
+      "parent_status": "present",
+      "parent_status_semantics": "present",
+      "scope": "supplemental reciprocal check; #210 is not among current 58 open issues",
+      "subissues": null,
+      "subissues_status": "not_queried"
+    }
+  ],
+  "repository": "joshyorko/actions",
+  "retrieved_at_utc": "2026-10-10T22:16:13Z",
+  "schema_version": 1,
+  "timeline_221": {
+    "endpoint": "GET /repos/joshyorko/actions/issues/221/timeline?per_page=100&page=N",
+    "interpretation": "296 timeline entries across pages 1-3. Only event types cross-referenced, deployed, renamed, committed; no closed, connected, or disconnected timeline event observed. Twelve issue cross-reference events were observed; they are references, not closing association evidence.",
+    "pages": [
+      {
+        "count": 100,
+        "cross_references": [
+          {
+            "at": "2026-10-08T21:12:56Z",
+            "source_number": 215,
+            "source_type": "issue",
+            "title": "WIP: checkpoint community release safeguards for adversarial review"
+          },
+          {
+            "at": "2026-10-08T21:12:58Z",
+            "source_number": 216,
+            "source_type": "issue",
+            "title": "WIP: checkpoint bounded Runtime history and WebSocket repairs"
+          },
+          {
+            "at": "2026-10-08T21:12:59Z",
+            "source_number": 217,
+            "source_type": "issue",
+            "title": "WIP: checkpoint Core public contracts and regression tests"
+          },
+          {
+            "at": "2026-10-08T21:13:01Z",
+            "source_number": 218,
+            "source_type": "issue",
+            "title": "WIP: checkpoint native Work Items packaging and recovery"
+          },
+          {
+            "at": "2026-10-08T21:13:02Z",
+            "source_number": 219,
+            "source_type": "issue",
+            "title": "docs: refresh paused deployment and MCP design checkpoints"
+          },
+          {
+            "at": "2026-10-09T22:28:08Z",
+            "source_number": 269,
+            "source_type": "issue",
+            "title": "Fix Work Items reservation regression synchronization"
+          },
+          {
+            "at": "2026-10-09T22:37:29Z",
+            "source_number": 220,
+            "source_type": "issue",
+            "title": "Preserve Actions campaign ledger, Cloud ownership, and exact acceptance evidence"
+          }
+        ],
+        "event_counts": {
+          "committed": 73,
+          "cross-referenced": 7,
+          "deployed": 19,
+          "renamed": 1
+        },
+        "page": 1
+      },
+      {
+        "count": 100,
+        "cross_references": [],
+        "event_counts": {
+          "committed": 96,
+          "deployed": 4
+        },
+        "page": 2
+      },
+      {
+        "count": 96,
+        "cross_references": [
+          {
+            "at": "2026-10-10T12:45:57Z",
+            "source_number": 101,
+            "source_type": "issue",
+            "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory"
+          },
+          {
+            "at": "2026-10-10T14:07:59Z",
+            "source_number": 279,
+            "source_type": "issue",
+            "title": "Preserve sibling packages during multi-directory actions-sync startup"
+          },
+          {
+            "at": "2026-10-10T14:13:50Z",
+            "source_number": 297,
+            "source_type": "issue",
+            "title": "test: measure table updates with paired jsdom samples"
+          },
+          {
+            "at": "2026-10-10T18:13:05Z",
+            "source_number": 303,
+            "source_type": "issue",
+            "title": "release(core): promote verified 1.0.3 source independently of Runtime"
+          },
+          {
+            "at": "2026-10-10T19:40:30Z",
+            "source_number": 304,
+            "source_type": "issue",
+            "title": "Merge community Core promotion and pin Runtime registry floor verification"
+          }
+        ],
+        "event_counts": {
+          "committed": 81,
+          "cross-referenced": 5,
+          "deployed": 10
+        },
+        "page": 3
+      }
+    ]
+  }
+}

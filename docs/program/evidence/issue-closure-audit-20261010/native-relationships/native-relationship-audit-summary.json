@@ -1,0 +1,992 @@
+{
+  "canonical_coordination_edge_comparison": [
+    {
+      "child_or_scope": 99,
+      "native_parent_endpoint": true,
+      "native_subissue_edge": true,
+      "parent_or_coordinator": 93
+    },
+    {
+      "child_or_scope": 100,
+      "native_parent_endpoint": true,
+      "native_subissue_edge": true,
+      "parent_or_coordinator": 93
+    },
+    {
+      "child_or_scope": 126,
+      "native_parent_endpoint": true,
+      "native_subissue_edge": true,
+      "parent_or_coordinator": 93
+    },
+    {
+      "child_or_scope": 127,
+      "native_parent_endpoint": true,
+      "native_subissue_edge": true,
+      "parent_or_coordinator": 93
+    },
+    {
+      "child_or_scope": 93,
+      "native_parent_endpoint": true,
+      "native_subissue_edge": true,
+      "parent_or_coordinator": 101
+    },
+    {
+      "child_or_scope": 126,
+      "native_parent_endpoint": false,
+      "native_subissue_edge": false,
+      "parent_or_coordinator": 101
+    },
+    {
+      "child_or_scope": 127,
+      "native_parent_endpoint": false,
+      "native_subissue_edge": false,
+      "parent_or_coordinator": 101
+    }
+  ],
+  "counts": {
+    "canonical_coordination_edges": 7,
+    "canonical_coordination_edges_also_native_parent": 5,
+    "canonical_coordination_edges_also_native_subissue": 5,
+    "canonical_graph_issue_records": 54,
+    "endpoint_parent_absence_404_explicit": 42,
+    "graph_issues_not_in_live_open_snapshot": [
+      210
+    ],
+    "live_open_issues": 58,
+    "live_open_not_in_graph": [
+      279,
+      293,
+      294,
+      295,
+      296
+    ],
+    "native_edges_matching_exact_coordination": 5,
+    "native_edges_not_projected_as_typed_edge": 9,
+    "native_edges_reconciled": 17,
+    "native_edges_with_any_canonical_typed_pair": 8,
+    "parent_endpoint_exact_none": 42,
+    "parent_endpoint_present": 16,
+    "parent_endpoint_unknown": 0,
+    "subissue_endpoint_known": 58
+  },
+  "disposition": "Read-only relationship audit; no GitHub mutations. Native parents are coordination/organizational metadata, not blockers by themselves. Canonical typed dependencies remain separate.",
+  "input_sha256": {
+    "community-execution-graph.json": "e911cb7b180ba4e29fe9cc9ceda02030561a19fb21f14de91b1629e20b575707",
+    "native-relationship-endpoints-live.json": "599789a75d4514439016aa354ba7a1ccd80c086a41520dea2045d60ef92a8bb0",
+    "open_issues_live.json": "7e25e48a19a1b4cbabd3ca44b8d003bf6eb5fc20acee62b50e17115a450d46c2",
+    "open_prs_live.json": "5273af37f2964aa416a7997f41915e84da5b2f888d3ee14cc9ee4111dc6afe32"
+  },
+  "issues": [
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 71,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        84,
+        129,
+        134,
+        143
+      ],
+      "issue": 82,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        84,
+        129,
+        135,
+        143
+      ],
+      "issue": 83,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 84,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        84,
+        129
+      ],
+      "issue": 85,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        84,
+        129
+      ],
+      "issue": 86,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        84,
+        129
+      ],
+      "issue": 87,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        84,
+        129,
+        130,
+        143
+      ],
+      "issue": 90,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 91,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        85,
+        87,
+        129,
+        143
+      ],
+      "issue": 92,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [
+        101
+      ],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 93,
+      "native_parent": 101,
+      "native_parent_is_in_coordination_parents": true,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 96,
+      "native_parent": 93,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 97,
+      "native_parent": 93,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 98,
+      "native_parent": 93,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [
+        93
+      ],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 99,
+      "native_parent": 93,
+      "native_parent_is_in_coordination_parents": true,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [
+        93
+      ],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 100,
+      "native_parent": 93,
+      "native_parent_is_in_coordination_parents": true,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 101,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 125,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [
+        93,
+        101
+      ],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 126,
+      "native_parent": 93,
+      "native_parent_is_in_coordination_parents": true,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [
+        93,
+        101
+      ],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 127,
+      "native_parent": 93,
+      "native_parent_is_in_coordination_parents": true,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 129,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        129
+      ],
+      "issue": 130,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        125,
+        129,
+        130
+      ],
+      "issue": 131,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        90,
+        129
+      ],
+      "issue": 132,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        129,
+        130,
+        134,
+        143
+      ],
+      "issue": 133,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 134,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        129,
+        130
+      ],
+      "issue": 135,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        135
+      ],
+      "issue": 136,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        84,
+        90,
+        129,
+        130,
+        143
+      ],
+      "issue": 138,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        143
+      ],
+      "issue": 139,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        84,
+        86,
+        87,
+        129,
+        138
+      ],
+      "issue": 140,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        85,
+        129,
+        130,
+        132,
+        143,
+        147
+      ],
+      "issue": 141,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        138,
+        139,
+        143,
+        144
+      ],
+      "issue": 142,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        134
+      ],
+      "issue": 143,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        134,
+        135,
+        143
+      ],
+      "issue": 144,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        129,
+        143,
+        144
+      ],
+      "issue": 145,
+      "native_parent": 93,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        134,
+        143,
+        144
+      ],
+      "issue": 146,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        83,
+        129,
+        130,
+        143,
+        144
+      ],
+      "issue": 147,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        135
+      ],
+      "issue": 148,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 149,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 151,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 152,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 153,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 155,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 162,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 194,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 195,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [
+        134,
+        152,
+        153,
+        208,
+        214
+      ],
+      "issue": 196,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 208,
+      "native_parent": 101,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 209,
+      "native_parent": 101,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 211,
+      "native_parent": 101,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 212,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": true,
+      "canonical_typed_dependencies": [],
+      "issue": 214,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": false,
+      "canonical_typed_dependencies": null,
+      "issue": 279,
+      "native_parent": null,
+      "native_parent_is_in_coordination_parents": null,
+      "native_parent_status": "none"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": false,
+      "canonical_typed_dependencies": null,
+      "issue": 293,
+      "native_parent": 101,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": false,
+      "canonical_typed_dependencies": null,
+      "issue": 294,
+      "native_parent": 101,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": false,
+      "canonical_typed_dependencies": null,
+      "issue": 295,
+      "native_parent": 101,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    },
+    {
+      "canonical_coordination_parents": [],
+      "canonical_issue_present": false,
+      "canonical_typed_dependencies": null,
+      "issue": 296,
+      "native_parent": 101,
+      "native_parent_is_in_coordination_parents": false,
+      "native_parent_status": "present"
+    }
+  ],
+  "limitations": [
+    "Endpoint errors are UNKNOWN, not no relation; none of the 58 endpoint calls returned errors.",
+    "Subissue lists returned at most 9 entries on page 1, so no pagination beyond page 1 was needed.",
+    "The supplemental parent read for #210 was performed only to reconcile its appearance as a closed/currently-not-open child of #101.",
+    "No GraphQL closingIssuesReferences result is claimed. GitHub timeline cross-references are not themselves closing relationships."
+  ],
+  "native_parent_subissue_edge_comparison": [
+    {
+      "canonical_edge_kinds": [
+        "full_acceptance_aggregation_pair"
+      ],
+      "child": 96,
+      "parent": 93,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [
+        "full_acceptance_aggregation_pair"
+      ],
+      "child": 97,
+      "parent": 93,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [
+        "full_acceptance_aggregation_pair"
+      ],
+      "child": 98,
+      "parent": 93,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [
+        "coordination_parent_exact",
+        "full_acceptance_aggregation_pair"
+      ],
+      "child": 99,
+      "parent": 93,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [
+        "coordination_parent_exact",
+        "full_acceptance_aggregation_pair"
+      ],
+      "child": 100,
+      "parent": 93,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [
+        "coordination_parent_exact",
+        "full_acceptance_aggregation_pair"
+      ],
+      "child": 126,
+      "parent": 93,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [
+        "coordination_parent_exact",
+        "full_acceptance_aggregation_pair"
+      ],
+      "child": 127,
+      "parent": 93,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 145,
+      "parent": 93,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [
+        "coordination_parent_exact",
+        "full_acceptance_aggregation_pair"
+      ],
+      "child": 93,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 208,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 209,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 210,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 211,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 293,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 294,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 295,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    },
+    {
+      "canonical_edge_kinds": [],
+      "child": 296,
+      "parent": 101,
+      "seen_parent_endpoint": true,
+      "seen_subissues_endpoint": true
+    }
+  ],
+  "repo": "joshyorko/actions",
+  "retrieved_at_utc": "2026-10-10T22:16:13Z",
+  "schema_version": 1,
+  "timeline_221": {
+    "bounded_result": "Pages 1-3 returned 100, 100, and 96 entries; page 4 was empty. Event types were cross-referenced (12), deployed (33), renamed (1), committed (250). No closed/connected/disconnected event was present. Cross-reference events are not proof of PR closing relationships.",
+    "closing_or_manual_connection_events": [],
+    "endpoint": "GET /repos/joshyorko/actions/issues/221/timeline?per_page=100&page=N",
+    "event_total": 296,
+    "interpretation": "296 timeline entries across pages 1-3. Only event types cross-referenced, deployed, renamed, committed; no closed, connected, or disconnected timeline event observed. Twelve issue cross-reference events were observed; they are references, not closing association evidence.",
+    "pages": [
+      {
+        "count": 100,
+        "cross_references": [
+          {
+            "at": "2026-10-08T21:12:56Z",
+            "source_number": 215,
+            "source_type": "issue",
+            "title": "WIP: checkpoint community release safeguards for adversarial review"
+          },
+          {
+            "at": "2026-10-08T21:12:58Z",
+            "source_number": 216,
+            "source_type": "issue",
+            "title": "WIP: checkpoint bounded Runtime history and WebSocket repairs"
+          },
+          {
+            "at": "2026-10-08T21:12:59Z",
+            "source_number": 217,
+            "source_type": "issue",
+            "title": "WIP: checkpoint Core public contracts and regression tests"
+          },
+          {
+            "at": "2026-10-08T21:13:01Z",
+            "source_number": 218,
+            "source_type": "issue",
+            "title": "WIP: checkpoint native Work Items packaging and recovery"
+          },
+          {
+            "at": "2026-10-08T21:13:02Z",
+            "source_number": 219,
+            "source_type": "issue",
+            "title": "docs: refresh paused deployment and MCP design checkpoints"
+          },
+          {
+            "at": "2026-10-09T22:28:08Z",
+            "source_number": 269,
+            "source_type": "issue",
+            "title": "Fix Work Items reservation regression synchronization"
+          },
+          {
+            "at": "2026-10-09T22:37:29Z",
+            "source_number": 220,
+            "source_type": "issue",
+            "title": "Preserve Actions campaign ledger, Cloud ownership, and exact acceptance evidence"
+          }
+        ],
+        "event_counts": {
+          "committed": 73,
+          "cross-referenced": 7,
+          "deployed": 19,
+          "renamed": 1
+        },
+        "page": 1
+      },
+      {
+        "count": 100,
+        "cross_references": [],
+        "event_counts": {
+          "committed": 96,
+          "deployed": 4
+        },
+        "page": 2
+      },
+      {
+        "count": 96,
+        "cross_references": [
+          {
+            "at": "2026-10-10T12:45:57Z",
+            "source_number": 101,
+            "source_type": "issue",
+            "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory"
+          },
+          {
+            "at": "2026-10-10T14:07:59Z",
+            "source_number": 279,
+            "source_type": "issue",
+            "title": "Preserve sibling packages during multi-directory actions-sync startup"
+          },
+          {
+            "at": "2026-10-10T14:13:50Z",
+            "source_number": 297,
+            "source_type": "issue",
+            "title": "test: measure table updates with paired jsdom samples"
+          },
+          {
+            "at": "2026-10-10T18:13:05Z",
+            "source_number": 303,
+            "source_type": "issue",
+            "title": "release(core): promote verified 1.0.3 source independently of Runtime"
+          },
+          {
+            "at": "2026-10-10T19:40:30Z",
+            "source_number": 304,
+            "source_type": "issue",
+            "title": "Merge community Core promotion and pin Runtime registry floor verification"
+          }
+        ],
+        "event_counts": {
+          "committed": 81,
+          "cross-referenced": 5,
+          "deployed": 10
+        },
+        "page": 3
+      }
+    ],
+    "pagination_complete": true
+  }
+}

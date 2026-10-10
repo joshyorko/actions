@@ -1,0 +1,153 @@
+{
+  "all_keyword_candidates": [
+    {
+      "context": "Fix pkg_resources deprecation warning in action-server\n\nFixes #283\n\n- Removed unused 'import pkg_resources' from action-server.spec\n- Added warnin",
+      "issue": 283,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "fbb95f6656895f244a940c67237ae16c50b29a5c"
+    },
+    {
+      "context": "`--expose` is working properly again (it broke in `2.11.0`). Fixes #244. (#248)\n\n",
+      "issue": 244,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "368964386db00689090aee15cfa713479583cc47"
+    },
+    {
+      "context": "Drop 'version' from package.yaml. Fixes #340\n",
+      "issue": 340,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "4193999a94a959d7c70beb3ab5ce45cdef06775f"
+    },
+    {
+      "context": "Argument names always shown, added (item) to the fields related to list items. Fixes #370\n\n",
+      "issue": 370,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "9168be49484ff97e4269d836feea53665ce6dbf2"
+    },
+    {
+      "context": "r to stdout so that commands which are expected to write to stdout don't break. Fixes #350\n",
+      "issue": 350,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "6d43f810e11c8f688eb30c5ef6a4cfa15a50a0ab"
+    },
+    {
+      "context": "Add support for 'action-server package metadata'. Fixes #311\n\n",
+      "issue": 311,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "631bd081ea6fc0594c996279c26436fc66c45954"
+    },
+    {
+      "context": "ve --expose websocket connection to send contents if the connection is dropped. Fixes #303\n",
+      "issue": 303,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "3d87f7a39149369ed0de25f5a7553f579f8abe61"
+    },
+    {
+      "context": "d issue where `\"sqlite3.OperationalError: database is locked\"` could be raised. Fixes #309\n",
+      "issue": 309,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "0c960df4fb87042feb33509e84ac37f176ab0c4c"
+    },
+    {
+      "context": "Improve websocket handling (for builtin UI). Fixes #234\n",
+      "issue": 234,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "5456ceec7f5c157d40552479e88bbb77602d49d6"
+    },
+    {
+      "context": "Notify if action description has more than 300 chars. Fixes #250\n",
+      "issue": 250,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "e84b80e313f851807a3ce65e94e40a12996e4d8e"
+    },
+    {
+      "context": "ix websocket reconnection (was getting a new session whenever it re-connected). Fixes #276\n",
+      "issue": 276,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "1569f3c7e0b5ba0ace27497f9fe756f379b7c919"
+    },
+    {
+      "context": "Add support for receiving the headers in the @action. Fixes #167\n",
+      "issue": 167,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "155201ffbd2097aec6a873cfde6e16472b17b527"
+    },
+    {
+      "context": "and output in @action / added support for pydantic models in the Action Server. Fixes #266 (#289)\n\n",
+      "issue": 266,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "1e985b53d8916a3e9beeaab61ee4dd0b691a1de6"
+    },
+    {
+      "context": "Fix message saying: action-server.yaml is available at: ../conda.yaml. Fixes #228\n",
+      "issue": 228,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "ff3458cfb399eecea3703cb9062157f5ed6f9d20"
+    },
+    {
+      "context": "Make sure that default value type is properly kept. Fixes #189\n\n",
+      "issue": 189,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "1df97f9f4c37512126d4a754ba3bfed825fb3f6d"
+    },
+    {
+      "context": "Use action-server.yaml instead of conda.yaml to define the env. Fixes #184\n",
+      "issue": 184,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "26a512a909781e3bbc172d127f4fa4c22d14d4b4"
+    },
+    {
+      "context": "ult the minimum number of processes is now 2, improve version validation error. Fixes #144\n",
+      "issue": 144,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "0999dcaca6f95f533e1e61b382f53b97755d5d6c"
+    },
+    {
+      "context": "ssion)` is only called once and `@teardown(scope=session)` is no longer called. Fixes #171\n",
+      "issue": 171,
+      "keyword": "Fixes",
+      "new_to_community": false,
+      "repository": "joshyorko/actions",
+      "sha": "eea4fb634bab1ef273e0b4d1c2c9e9f582db9791"
+    }
+  ],
+  "complete_reachable_commit_count": 2119,
+  "head": "19380993febaa71238eaee3026b5c808773283ff",
+  "is_shallow_repository": false,
+  "new_to_community_commit_count": 449,
+  "note": "Historical ancestor keywords already reachable from community cannot newly close issues on this promotion. New-to-community range is the landing scope."
+}

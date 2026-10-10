@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "status": "PASS_BOUNDED",
+  "source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+  "executable_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+  "package_tree_sha256": null,
+  "immutable_build_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+  "embedded_files_sha256": "a8f53386f2a0572fb306b293998a33641a5474700d53708fa666133ef7c90c6d",
+  "assets_zip_sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c",
+  "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+  "embedded_frozen_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+  "runtime_kind": "go-wrapper",
+  "runtime_version": "1.0.3",
+  "platform": "Linux",
+  "architecture": "x86_64",
+  "action_server_database": "server.db",
+  "work_items_database": "datadir/workitems.db",
+  "storage_fault_fixture": "test-owned datadir/workitems.db; Action Server DB remains server.db",
+  "browser_stages": [
+    {
+      "status": "PASS",
+      "stage": "normal",
+      "states": {
+        "runtimeConfigStatus": 200,
+        "emptyQueue": {
+          "httpStatus": 200,
+          "total": 0
+        },
+        "emptyNarrowWidth": {
+          "viewportWidth": 320,
+          "documentWidth": 320,
+          "bodyWidth": 320
+        },
+        "createTriggerSemantics": {
+          "ariaHaspopup": "dialog",
+          "ariaExpanded": "false",
+          "outerHtml": "<button class=\"inline-flex items-center justify-center gap-2 text-sm font-medium rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-[var(--duration-interaction)] motion-reduce:transition-none bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md h-10 px-4 py-2 mt-6\" type=\"button\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-_r_1_\" data-state=\"closed\"><svg class=\"h-4 w-4 mr-2\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"></line><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line></svg>Create First Item</button>"
+        },
+        "createDialogBounds": {
+          "viewportWidth": 320,
+          "left": 21.760009765625,
+          "right": 298.239990234375,
+          "width": 276.47998046875
+        },
+        "dialogEscapeFocus": {
+          "tagName": "BUTTON",
+          "id": "",
+          "role": "",
+          "ariaLabel": "",
+          "text": "Create First Item"
+        },
+        "dialogEscapeRestoresFocus": true,
+        "populatedQueue": {
+          "httpStatus": 200,
+          "total": 1,
+          "state": "PENDING",
+          "queueName": "default",
+          "createdInDatadirBackend": true
+        },
+        "detailReadback": {
+          "visible": true,
+          "payloadVisible": true,
+          "stateVisible": true
+        },
+        "populatedNarrowWidth": {
+          "viewportWidth": 320,
+          "documentWidth": 320,
+          "bodyWidth": 320
+        },
+        "browserVersion": "151.0.7922.34"
+      },
+      "script_exit_code": 0
+    },
+    {
+      "status": "PASS",
+      "stage": "authorization-denied",
+      "states": {
+        "runtimeConfigStatus": 200,
+        "browserSessionCookieRemoved": true,
+        "authorizationDenied": {
+          "httpStatus": 403,
+          "body": "Invalid or missing API Key"
+        },
+        "protectedWorkItemsHidden": true,
+        "signInRecoveryVisible": true,
+        "packageYamlInstructionVisible": false,
+        "reauthenticatedQueueReadback": {
+          "httpStatus": 200,
+          "total": 1,
+          "state": "PENDING",
+          "payload": {
+            "synthetic": "native-workitems-ui"
+          }
+        },
+        "responses": [
+          {
+            "path": "/api/work-items",
+            "status": 403
+          },
+          {
+            "path": "/browser-session",
+            "status": 200
+          },
+          {
+            "path": "/browser-session",
+            "status": 200
+          },
+          {
+            "path": "/browser-session",
+            "status": 200
+          },
+          {
+            "path": "/browser-session",
+            "status": 200
+          },
+          {
+            "path": "/api/work-items",
+            "status": 200
+          },
+          {
+            "path": "/api/work-items/stats",
+            "status": 200
+          },
+          {
+            "path": "/api/work-items",
+            "status": 200
+          }
+        ],
+        "narrowWidth": {
+          "viewportWidth": 320,
+          "documentWidth": 320,
+          "bodyWidth": 320
+        },
+        "browserVersion": "151.0.7922.34"
+      },
+      "script_exit_code": 0
+    },
+    {
+      "status": "PASS",
+      "stage": "storage-error",
+      "states": {
+        "runtimeConfigStatus": 200,
+        "storageUnavailable": {
+          "httpStatus": 503,
+          "code": "work_items_storage_unavailable",
+          "retryVisible": true,
+          "rawPathExposed": false
+        },
+        "storageNarrowWidth": {
+          "viewportWidth": 320,
+          "documentWidth": 320,
+          "bodyWidth": 320
+        }
+      },
+      "script_exit_code": 0
+    }
+  ],
+  "states_not_run": {
+    "missing_runtime_support": "cannot be induced without mutating the package",
+    "generic_http_500": "no supported native backend fault fixture"
+  },
+  "states_failed": {},
+  "runtime_artifact_isolation": "go_wrapper_extraction",
+  "wrapper_extraction": {
+    "path_relative_to_runtime_home": ".actions/bin/action-server/internal/1.0.3",
+    "app_hash_matches_embedded_archive": true,
+    "extracted_files_sha256": "a8f53386f2a0572fb306b293998a33641a5474700d53708fa666133ef7c90c6d",
+    "pre_runtime_tree_sha256": "7f68bb8253031a68c5e99a36ef722f89f1140e2e183d22fad09e6749e7278911"
+  },
+  "bundled_rcc_baseline": {
+    "status": "PASS",
+    "path": "_internal/actions/server/bin/rcc-18.19.3",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "runtime_artifact_isolation": "go_wrapper_extraction"
+  },
+  "cleanup_observation": {
+    "wrapper_started": true,
+    "wrapper_reaped": true,
+    "live_descendant_count": 0,
+    "zombie_descendant_count": 0,
+    "descendant_snapshot_complete": true,
+    "control_error_count": 0,
+    "snapshot_failure_type": null,
+    "stop_failure_type": null
+  },
+  "go-wrapper-post-runtime_tree_sha256": "7f68bb8253031a68c5e99a36ef722f89f1140e2e183d22fad09e6749e7278911",
+  "immutable_build_tree_sha256_after_runtime": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+  "post_runtime_tree_diff": {
+    "added_count": 0,
+    "removed_count": 0,
+    "changed_count": 0,
+    "report_path": "acceptance-receipt-go-wrapper-post-runtime-tree-diff.json"
+  },
+  "post_runtime_tree_validation": {
+    "valid": true,
+    "failure_reason": null,
+    "immutable_build_tree_unchanged": true,
+    "rcc_version": "18.19.3",
+    "runtime_generated_state": []
+  }
+}

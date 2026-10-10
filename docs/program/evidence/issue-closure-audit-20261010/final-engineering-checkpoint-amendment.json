@@ -1,0 +1,39 @@
+{
+  "kind": "additive-final-source-checkpoint-update",
+  "observed_at_utc": "2026-10-10T22:46:52Z",
+  "supersedes_status_only": "engineering-results-amendment.json selector earlier in-progress state; prior bytes remain preserved",
+  "issue": 134,
+  "local_only_source_lanes": [
+    {
+      "owner": "Existing Luna PR302 portability worker; detached RCC profile lane",
+      "head": "14a7810ca3f48d3021f7b76721a58f60e4a7b897",
+      "tree": "75be9f5639639701093e17a36db7eaafc2aaed66",
+      "independent_review": "SOURCE_ONLY_GO",
+      "review_sha256": "54240deecb0672e8a8707a8bdc9207322706747e4ca17b3086520377c1afa64d",
+      "actual_provider_or_rcc_acceptance": "NOT_RUN"
+    },
+    {
+      "owner": "Existing Luna PR282 template worker; native artifact selector lane",
+      "head": "7c0b6fdcf49bd9c5cc663326a30d7df37a5fb203",
+      "tree": "0fc2e7fa94abbbe3d3bc448d31aac5fe26f7ba40",
+      "independent_review": "SOURCE_ONLY_GO",
+      "review_sha256": "f86b5762add21be043172e8dfbbeaaaaac8f590a76cc7525970656c14407326c",
+      "owner_receipt_sha256": "6b5738034dafa6e0aa874de25ed1348ac89592571bf8a89c5efb43844d50f660",
+      "actual_provider_or_native_or_rcc_acceptance": "NOT_RUN"
+    }
+  ],
+  "ownership": "Both existing workers reached their assigned local source checkpoint stop conditions. No source PR push, merge, actual gateway dispatch or replacement worker was performed by this bookkeeping intervention.",
+  "historical_native_worker_readonly_reconciliation": {
+    "observed_at_utc": "2026-10-10T21:34:41Z",
+    "target": "local",
+    "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+    "work_items_thread": {"id": "01a11d7a-e547-7423-8fc5-fc0148df2123", "thread_status": "notLoaded", "latest_turn_status": "completed", "active_flags": false},
+    "rcc_thread": {"id": "01a11d7b-4029-7953-aba7-f3b487098b32", "thread_status": "notLoaded", "latest_turn_status": "interrupted", "active_flags": false},
+    "workers_resumed_or_created": false,
+    "historical_canvas_or_heartbeat_worker_status": "UNKNOWN"
+  },
+  "actual_metadata_gateway_result": "FAILED_PRE_RUN: artifact-directory guard; runner/provider/metadata inspection NOT_RUN; no retry",
+  "work_items_version": "0.4.4",
+  "devsy": "DISABLED",
+  "upstream_disposition": "none"
+}

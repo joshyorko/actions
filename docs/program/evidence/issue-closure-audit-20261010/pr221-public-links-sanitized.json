@@ -1,0 +1,10 @@
+{
+  "http_status": 200,
+  "issue_urls": [],
+  "note": "Public read-only UI response; raw markup with CSRF/form tokens is not published.",
+  "observed_at": "2026-10-10T22:14:39.804583+00:00",
+  "response_sha256": "bfbef2c0ff269a992302fc072aa0f681b38e55826209f07ad7a182a5e3ccb98e",
+  "response_size_bytes": 403,
+  "url": "https://github.com/joshyorko/actions/pull/221/partials/links?has_github_issues=false",
+  "visible_text": "None yet"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "kind": "additive-attribution-clarification",
+  "observed_at_utc": "2026-10-10T22:40:52.190580+00:00",
+  "prior_receipt_sha256": "4690bdabd0148734834c1deba2874fe7968933c5a3e1eed4bc9b9893cf84f099",
+  "dispositions_unchanged": {
+    "162": "GO_NARROW_CRITERION",
+    "194": "GO_NARROW_CONTRACT",
+    "195": "HOLD_ONE_REMAINING_CLEAN_RUNTIME_WHEEL_PROOF",
+    "209": "GO_NARROW_CONTRACT"
+  },
+  "baseline_clarification": "Cause of historical committed-source versus recorded measured-source inventory mismatch is UNKNOWN. Do not infer generated sources or a particular worktree mutation. The recorder independently reads git HEAD and actual worktree source bytes without asserting a clean worktree. Current real five-suite measurement/inventory enforcement/threshold/upload satisfy #162 criterion; exact original measured-source attribution remains a separate provenance limitation.",
+  "historical_owner_baseline_record": {
+    "pr": 227,
+    "body_sha256": "357b003e622ea7b4f81dde3b7939fd153c3bb2b112134e59b24dab22163e1825",
+    "retained_collection_sha256": "b578eb8f14507c46c2c9ab32724b13badc4ab8cc758ee427c48a9152c52cfae9",
+    "declared_source": "5bbf5beb47785fdbab80f50cd9afabf62f92c6d1",
+    "baseline": "15906/29796=53.383%; floor53.38%",
+    "ordinary_verification": "15908/29796=53.3897%; owner-recorded all5PASS",
+    "limitation": "Owner PR body, not a recovered original machine receipt or independent rerun."
+  },
+  "issue209_canonical_guidance_verified": {
+    "source": "19380993febaa71238eaee3026b5c808773283ff",
+    "file": "docs/skills/repository-operations.md",
+    "git_blob": "66bef06142d4e3ceb9e90f2ea55d5f9bb19bfadb",
+    "sha256": "9bcfccf7a6129675037497fa3952f4bd55029ab9eaaf37da133fedd11c0146f3",
+    "first_line": 1007,
+    "text": "Import modules that bind dependency aliases before patching the dependency's\nsource module. Otherwise the first import captures the patched callable, and\nmonkeypatch teardown restores that fake as the alias's original. Patch the\nalready-imported `_app` and `_settings` modules together and clear `get_app`'s\ncache around fake server startup. Regress\n`test_verbose_server_startup_redacts_database_url_credentials` immediately\nbefore the CORS/WebSocket admission tests in one pytest process; an isolated\nadmission test cannot detect the leaked empty allowlist.",
+    "meaning": "The issue-requested durable repository lesson is already present in the canonical guide, in addition to the regression inline comment; no new documentation prerequisite remains for #209."
+  },
+  "upstream_disposition": "none",
+  "no_tests_mutations_or_services": true
+}

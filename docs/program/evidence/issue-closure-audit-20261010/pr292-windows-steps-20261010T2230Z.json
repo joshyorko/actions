@@ -1,0 +1,155 @@
+{
+  "pr": 292,
+  "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+  "run": 38067347057,
+  "job": 114257572296,
+  "observed_at_utc": "2026-10-10 22:27 UTC",
+  "result": {
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Checkout repository and submodules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Install the latest version of uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Install Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Install devutils requirements",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Install project (not dev)",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6
+      },
+      {
+        "name": "Install project (dev)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Setup go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Setup node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Build frontend",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10
+      },
+      {
+        "name": "Build OAuth2 config",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Test Go wrapper child lifecycle",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Build binary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      },
+      {
+        "name": "Upload artifact: action_server/dist/final/",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14
+      },
+      {
+        "name": "Test (not integration)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15
+      },
+      {
+        "name": "Install Playwright Chromium for Runtime browser acceptance",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16
+      },
+      {
+        "name": "Test (integration)",
+        "status": "in_progress",
+        "conclusion": null,
+        "number": 17
+      },
+      {
+        "name": "`inv lint`, potentially fixed with `inv pretty`",
+        "status": "pending",
+        "conclusion": null,
+        "number": 18
+      },
+      {
+        "name": "`inv typecheck`",
+        "status": "pending",
+        "conclusion": null,
+        "number": 19
+      },
+      {
+        "name": "`inv docs` with checking on files changed",
+        "status": "pending",
+        "conclusion": null,
+        "number": 20
+      },
+      {
+        "name": "Post Setup node",
+        "status": "pending",
+        "conclusion": null,
+        "number": 37
+      },
+      {
+        "name": "Post Setup go",
+        "status": "pending",
+        "conclusion": null,
+        "number": 38
+      },
+      {
+        "name": "Post Install the latest version of uv",
+        "status": "pending",
+        "conclusion": null,
+        "number": 39
+      },
+      {
+        "name": "Post Checkout repository and submodules",
+        "status": "pending",
+        "conclusion": null,
+        "number": 40
+      }
+    ]
+  }
+}

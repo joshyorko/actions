@@ -1,0 +1,12 @@
+{
+  "close_ready_issue_ids": [
+    162,
+    194,
+    209,
+    279
+  ],
+  "review": "independent-narrow-contract-review-162-194-195-209.json",
+  "review_sha256": "4690bdabd0148734834c1deba2874fe7968933c5a3e1eed4bc9b9893cf84f099",
+  "issue279_review_sha256": "73a1e867e1f7851033fc54d39bac084a12ec1d21afa041c260e59ca71d0f0dcb",
+  "action": "Recommend explicit owner closure only; issue state is unchanged."
+}

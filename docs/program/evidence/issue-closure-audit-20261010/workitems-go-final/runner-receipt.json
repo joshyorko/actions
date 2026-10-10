@@ -1,0 +1,590 @@
+{
+  "browser_launch": {
+    "launch_pids": [
+      56078,
+      56154,
+      56226
+    ],
+    "managed_browser_match": true,
+    "observed_executable": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "version": "Google Chrome for Testing 151.0.7922.34"
+  },
+  "browser_pid_state_after_test": [
+    {
+      "is_running": false,
+      "pid": 56078,
+      "status": "gone"
+    },
+    {
+      "is_running": false,
+      "pid": 56154,
+      "status": "gone"
+    },
+    {
+      "is_running": false,
+      "pid": 56226,
+      "status": "gone"
+    }
+  ],
+  "browser_stages": [
+    {
+      "command": [
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+        "/workspace/work/actions-mk3-workitems-ui-errors/action_server/frontend/scripts/native-workitems-ui-acceptance.mjs"
+      ],
+      "input_api_key_redacted": true,
+      "receipt": {
+        "script_exit_code": 0,
+        "stage": "normal",
+        "states": {
+          "browserVersion": "151.0.7922.34",
+          "createDialogBounds": {
+            "left": 21.760009765625,
+            "right": 298.239990234375,
+            "viewportWidth": 320,
+            "width": 276.47998046875
+          },
+          "createTriggerSemantics": {
+            "ariaExpanded": "false",
+            "ariaHaspopup": "dialog",
+            "outerHtml": "<button class=\"inline-flex items-center justify-center gap-2 text-sm font-medium rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-[var(--duration-interaction)] motion-reduce:transition-none bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md h-10 px-4 py-2 mt-6\" type=\"button\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-_r_1_\" data-state=\"closed\"><svg class=\"h-4 w-4 mr-2\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"></line><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line></svg>Create First Item</button>"
+          },
+          "detailReadback": {
+            "payloadVisible": true,
+            "stateVisible": true,
+            "visible": true
+          },
+          "dialogEscapeFocus": {
+            "ariaLabel": "",
+            "id": "",
+            "role": "",
+            "tagName": "BUTTON",
+            "text": "Create First Item"
+          },
+          "dialogEscapeRestoresFocus": true,
+          "emptyNarrowWidth": {
+            "bodyWidth": 320,
+            "documentWidth": 320,
+            "viewportWidth": 320
+          },
+          "emptyQueue": {
+            "httpStatus": 200,
+            "total": 0
+          },
+          "populatedNarrowWidth": {
+            "bodyWidth": 320,
+            "documentWidth": 320,
+            "viewportWidth": 320
+          },
+          "populatedQueue": {
+            "createdInDatadirBackend": true,
+            "httpStatus": 200,
+            "queueName": "default",
+            "state": "PENDING",
+            "total": 1
+          },
+          "runtimeConfigStatus": 200
+        },
+        "status": "PASS"
+      },
+      "returncode": 0,
+      "stage": "normal",
+      "stderr": "2026-10-10T22:12:22.611Z pw:browser <launching> /workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/pytest-tmp/test_packaged_work_items_ui_cr0/browser-profile-normal --remote-debugging-pipe about:blank\n2026-10-10T22:12:22.615Z pw:browser <launched> pid=56078\n2026-10-10T22:12:22.650Z pw:browser [pid=56078][err] [1010/221222.649030:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:22.651Z pw:browser [pid=56078][err] [1010/221222.651178:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:22.651Z pw:browser [pid=56078][err] [1010/221222.651209:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:22.669Z pw:browser [pid=56078][err] [1010/221222.664914:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1655] drmGetDevices2() has not found any devices\n2026-10-10T22:12:22.670Z pw:browser [pid=56078][err] [1010/221222.670259:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.\n2026-10-10T22:12:22.805Z pw:browser [pid=56078][err] [1010/221222.804500:WARNING:device/bluetooth/dbus/bluez_dbus_manager.cc:209] Floss manager service not available, cannot set Floss enable/disable.\n2026-10-10T22:12:24.163Z pw:browser [pid=56078][err] [1010/221224.163840:INFO:CONSOLE:60] \"Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.\", source: http://127.0.0.1:44849/work-items (60)\n2026-10-10T22:12:24.610Z pw:browser [pid=56078] <gracefully close start>\n2026-10-10T22:12:24.630Z pw:browser [pid=56078] <process did exit: exitCode=0, signal=null>\n2026-10-10T22:12:24.630Z pw:browser [pid=56078] starting temporary directories cleanup\n2026-10-10T22:12:24.631Z pw:browser [pid=56078] finished temporary directories cleanup\n2026-10-10T22:12:24.631Z pw:browser [pid=56078] <gracefully close end>\n",
+      "stderr_file": "browser-stage-00-stderr.log",
+      "stdout": "{\"status\":\"PASS\",\"stage\":\"normal\",\"states\":{\"runtimeConfigStatus\":200,\"emptyQueue\":{\"httpStatus\":200,\"total\":0},\"emptyNarrowWidth\":{\"viewportWidth\":320,\"documentWidth\":320,\"bodyWidth\":320},\"createTriggerSemantics\":{\"ariaHaspopup\":\"dialog\",\"ariaExpanded\":\"false\",\"outerHtml\":\"<button class=\\\"inline-flex items-center justify-center gap-2 text-sm font-medium rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-[var(--duration-interaction)] motion-reduce:transition-none bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md h-10 px-4 py-2 mt-6\\\" type=\\\"button\\\" aria-haspopup=\\\"dialog\\\" aria-expanded=\\\"false\\\" aria-controls=\\\"radix-_r_1_\\\" data-state=\\\"closed\\\"><svg class=\\\"h-4 w-4 mr-2\\\" width=\\\"16\\\" height=\\\"16\\\" viewBox=\\\"0 0 24 24\\\" fill=\\\"none\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"2\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"><line x1=\\\"12\\\" y1=\\\"5\\\" x2=\\\"12\\\" y2=\\\"19\\\"></line><line x1=\\\"5\\\" y1=\\\"12\\\" x2=\\\"19\\\" y2=\\\"12\\\"></line></svg>Create First Item</button>\"},\"createDialogBounds\":{\"viewportWidth\":320,\"left\":21.760009765625,\"right\":298.239990234375,\"width\":276.47998046875},\"dialogEscapeFocus\":{\"tagName\":\"BUTTON\",\"id\":\"\",\"role\":\"\",\"ariaLabel\":\"\",\"text\":\"Create First Item\"},\"dialogEscapeRestoresFocus\":true,\"populatedQueue\":{\"httpStatus\":200,\"total\":1,\"state\":\"PENDING\",\"queueName\":\"default\",\"createdInDatadirBackend\":true},\"detailReadback\":{\"visible\":true,\"payloadVisible\":true,\"stateVisible\":true},\"populatedNarrowWidth\":{\"viewportWidth\":320,\"documentWidth\":320,\"bodyWidth\":320},\"browserVersion\":\"151.0.7922.34\"}}\n",
+      "stdout_file": "browser-stage-00-stdout.log"
+    },
+    {
+      "command": [
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+        "/workspace/work/actions-mk3-workitems-ui-errors/action_server/frontend/scripts/native-workitems-ui-acceptance.mjs"
+      ],
+      "input_api_key_redacted": true,
+      "receipt": {
+        "script_exit_code": 0,
+        "stage": "authorization-denied",
+        "states": {
+          "authorizationDenied": {
+            "body": "Invalid or missing API Key",
+            "httpStatus": 403
+          },
+          "browserSessionCookieRemoved": true,
+          "browserVersion": "151.0.7922.34",
+          "narrowWidth": {
+            "bodyWidth": 320,
+            "documentWidth": 320,
+            "viewportWidth": 320
+          },
+          "packageYamlInstructionVisible": false,
+          "protectedWorkItemsHidden": true,
+          "reauthenticatedQueueReadback": {
+            "httpStatus": 200,
+            "payload": {
+              "synthetic": "native-workitems-ui"
+            },
+            "state": "PENDING",
+            "total": 1
+          },
+          "responses": [
+            {
+              "path": "/api/work-items",
+              "status": 403
+            },
+            {
+              "path": "/browser-session",
+              "status": 200
+            },
+            {
+              "path": "/browser-session",
+              "status": 200
+            },
+            {
+              "path": "/browser-session",
+              "status": 200
+            },
+            {
+              "path": "/browser-session",
+              "status": 200
+            },
+            {
+              "path": "/api/work-items",
+              "status": 200
+            },
+            {
+              "path": "/api/work-items/stats",
+              "status": 200
+            },
+            {
+              "path": "/api/work-items",
+              "status": 200
+            }
+          ],
+          "runtimeConfigStatus": 200,
+          "signInRecoveryVisible": true
+        },
+        "status": "PASS"
+      },
+      "returncode": 0,
+      "stage": "authorization-denied",
+      "stderr": "2026-10-10T22:12:25.103Z pw:browser <launching> /workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/pytest-tmp/test_packaged_work_items_ui_cr0/browser-profile-authorization-denied --remote-debugging-pipe about:blank\n2026-10-10T22:12:25.106Z pw:browser <launched> pid=56154\n2026-10-10T22:12:25.149Z pw:browser [pid=56154][err] [1010/221225.148986:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:25.150Z pw:browser [pid=56154][err] [1010/221225.150050:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:25.150Z pw:browser [pid=56154][err] [1010/221225.150071:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:25.176Z pw:browser [pid=56154][err] [1010/221225.176308:WARNING:device/bluetooth/dbus/bluez_dbus_manager.cc:209] Floss manager service not available, cannot set Floss enable/disable.\n2026-10-10T22:12:25.192Z pw:browser [pid=56154][err] [1010/221225.177266:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1655] drmGetDevices2() has not found any devices\n2026-10-10T22:12:25.204Z pw:browser [pid=56154][err] [1010/221225.197023:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.\n2026-10-10T22:12:26.230Z pw:browser [pid=56154] <gracefully close start>\n2026-10-10T22:12:26.249Z pw:browser [pid=56154] <process did exit: exitCode=0, signal=null>\n2026-10-10T22:12:26.249Z pw:browser [pid=56154] starting temporary directories cleanup\n2026-10-10T22:12:26.250Z pw:browser [pid=56154] finished temporary directories cleanup\n2026-10-10T22:12:26.250Z pw:browser [pid=56154] <gracefully close end>\n",
+      "stderr_file": "browser-stage-01-stderr.log",
+      "stdout": "{\"status\":\"PASS\",\"stage\":\"authorization-denied\",\"states\":{\"runtimeConfigStatus\":200,\"browserSessionCookieRemoved\":true,\"authorizationDenied\":{\"httpStatus\":403,\"body\":\"Invalid or missing API Key\"},\"protectedWorkItemsHidden\":true,\"signInRecoveryVisible\":true,\"packageYamlInstructionVisible\":false,\"reauthenticatedQueueReadback\":{\"httpStatus\":200,\"total\":1,\"state\":\"PENDING\",\"payload\":{\"synthetic\":\"native-workitems-ui\"}},\"responses\":[{\"path\":\"/api/work-items\",\"status\":403},{\"path\":\"/browser-session\",\"status\":200},{\"path\":\"/browser-session\",\"status\":200},{\"path\":\"/browser-session\",\"status\":200},{\"path\":\"/browser-session\",\"status\":200},{\"path\":\"/api/work-items\",\"status\":200},{\"path\":\"/api/work-items/stats\",\"status\":200},{\"path\":\"/api/work-items\",\"status\":200}],\"narrowWidth\":{\"viewportWidth\":320,\"documentWidth\":320,\"bodyWidth\":320},\"browserVersion\":\"151.0.7922.34\"}}\n",
+      "stdout_file": "browser-stage-01-stdout.log"
+    },
+    {
+      "command": [
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+        "/workspace/work/actions-mk3-workitems-ui-errors/action_server/frontend/scripts/native-workitems-ui-acceptance.mjs"
+      ],
+      "input_api_key_redacted": true,
+      "receipt": {
+        "script_exit_code": 0,
+        "stage": "storage-error",
+        "states": {
+          "runtimeConfigStatus": 200,
+          "storageNarrowWidth": {
+            "bodyWidth": 320,
+            "documentWidth": 320,
+            "viewportWidth": 320
+          },
+          "storageUnavailable": {
+            "code": "work_items_storage_unavailable",
+            "httpStatus": 503,
+            "rawPathExposed": false,
+            "retryVisible": true
+          }
+        },
+        "status": "PASS"
+      },
+      "returncode": 0,
+      "stage": "storage-error",
+      "stderr": "2026-10-10T22:12:26.690Z pw:browser <launching> /workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/pytest-tmp/test_packaged_work_items_ui_cr0/browser-profile-storage-error --remote-debugging-pipe about:blank\n2026-10-10T22:12:26.693Z pw:browser <launched> pid=56226\n2026-10-10T22:12:26.726Z pw:browser [pid=56226][err] [1010/221226.725581:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:26.726Z pw:browser [pid=56226][err] [1010/221226.726744:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:26.727Z pw:browser [pid=56226][err] [1010/221226.726947:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory\n2026-10-10T22:12:26.740Z pw:browser [pid=56226][err] [1010/221226.740568:WARNING:device/bluetooth/dbus/bluez_dbus_manager.cc:209] Floss manager service not available, cannot set Floss enable/disable.\n2026-10-10T22:12:26.755Z pw:browser [pid=56226][err] [1010/221226.745009:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1655] drmGetDevices2() has not found any devices\n2026-10-10T22:12:26.760Z pw:browser [pid=56226][err] [1010/221226.758896:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process.\n2026-10-10T22:12:27.624Z pw:browser [pid=56226] <gracefully close start>\n2026-10-10T22:12:27.646Z pw:browser [pid=56226] <process did exit: exitCode=0, signal=null>\n2026-10-10T22:12:27.646Z pw:browser [pid=56226] starting temporary directories cleanup\n2026-10-10T22:12:27.647Z pw:browser [pid=56226] finished temporary directories cleanup\n2026-10-10T22:12:27.647Z pw:browser [pid=56226] <gracefully close end>\n",
+      "stderr_file": "browser-stage-02-stderr.log",
+      "stdout": "{\"status\":\"PASS\",\"stage\":\"storage-error\",\"states\":{\"runtimeConfigStatus\":200,\"storageUnavailable\":{\"httpStatus\":503,\"code\":\"work_items_storage_unavailable\",\"retryVisible\":true,\"rawPathExposed\":false},\"storageNarrowWidth\":{\"viewportWidth\":320,\"documentWidth\":320,\"bodyWidth\":320}}}\n",
+      "stdout_file": "browser-stage-02-stdout.log"
+    }
+  ],
+  "cleanup_interpretation": {
+    "claims_complete_reaping": true,
+    "live_pids": [],
+    "supervisor_reaped_descendants": 6,
+    "unknown_observation_pids": [],
+    "zombie_pids": []
+  },
+  "elapsed_seconds": 39.139,
+  "identity": {
+    "assets_zip": {
+      "path": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/go-wrapper/assets/assets.zip",
+      "sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c"
+    },
+    "browser": {
+      "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "revision": "1234",
+      "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+      "version": "Google Chrome for Testing 151.0.7922.34"
+    },
+    "checkout": {
+      "branch": "test/workitems-ui-errors-20261010",
+      "clean": true,
+      "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+      "tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5"
+    },
+    "frontend_dependencies": {
+      "lock_path": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/frontend/package-lock.json",
+      "lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+      "node_modules_is_symlink": true,
+      "node_modules_resolved": "/workspace/work/actions-mk3-canvas-proof/action_server/frontend/node_modules"
+    },
+    "manifest": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-artifact-manifest-856c0a47.json",
+      "sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+      "source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+      "workflow_run_id": "38081495661"
+    },
+    "node": {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+      "playwright_test_version": "1.62.1",
+      "version": "v20.19.3"
+    },
+    "python": {
+      "executable": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+      "prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+      "psutil_origin": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psutil/__init__.py",
+      "source_origins": {
+        "actions": "/workspace/work/actions-mk3-workitems-ui-errors/actions/src/actions/__init__.py",
+        "actions_server": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/src/actions/server/__init__.py",
+        "mcp": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/mcp/__init__.py",
+        "prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv"
+      }
+    },
+    "selected_runtime": {
+      "kind": "go-wrapper",
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/staged/go-layout-v1/dist/final/action-server",
+      "sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b"
+    },
+    "test": {
+      "nodeid": "tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery",
+      "sha256": "e51eecacc70b6cd4bc381bdd3e488b1af730f620ce9f02fbdc5c3cb5cbaa1ba3"
+    }
+  },
+  "limitations": [
+    "Local packaged Linux UI test only; actual ChatGPT, production authorization/deployment, broad issue #208, crash recovery, missing support, generic HTTP 500, accessibility and non-Chromium are not established."
+  ],
+  "pytest": {
+    "command": [
+      "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-s",
+      "--tb=short",
+      "-m",
+      "integration_test",
+      "-p",
+      "workitems_capture_plugin",
+      "--basetemp",
+      "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/pytest-tmp",
+      "--junitxml",
+      "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/junit.xml",
+      "tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery"
+    ],
+    "junit": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 1
+    },
+    "returncode": 0,
+    "selection": {
+      "collected_count": 1,
+      "collected_nodeids": [
+        "tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery"
+      ]
+    },
+    "timed_out": false
+  },
+  "retained_log_sha256": {
+    "acceptance-receipt.json": "cd791fc251b7a400303d5846b32db4b44fdba101a3d812f409ece94b9d368440",
+    "browser-stage-capture.json": "873ca3a5d9ab528dece44b0538694e799876b0ccc469604c283fa760495908cc",
+    "junit.xml": "492179b294384e6437595dbf8028a98cc1c54f86c4314f592b71dcb46a2ecfe9",
+    "pytest-stderr.log": "1e4d54308a00c8974e6478c70184196b1dac8a71a07d932884eeecd25c921266",
+    "pytest-stdout.log": "7cecfe9a8b3e92415ec4563e47ea31bfc6a49a533a3c4eb3d032db88b8b30a4c",
+    "runtime-process-start.json": "1ac5684aaceab9c1817021e480e5b1b9c10923fb8b290d9e2ad648af489af457"
+  },
+  "runtime_pid_state_after_test": [
+    {
+      "is_running": false,
+      "pid": 56049,
+      "status": "gone"
+    },
+    {
+      "is_running": false,
+      "pid": 56058,
+      "status": "gone"
+    },
+    {
+      "is_running": false,
+      "pid": 56059,
+      "status": "gone"
+    }
+  ],
+  "runtime_process_at_ready": {
+    "process_tree_at_ready": [
+      {
+        "argv": [
+          "/workspace/work/actions-mk3-evidence/workitems-ui-errors/staged/go-layout-v1/dist/final/action-server",
+          "start",
+          "--actions-sync=false",
+          "--port=0",
+          "--datadir=/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/pytest-tmp/test_packaged_work_items_ui_cr0/datadir",
+          "--db-file=server.db",
+          "-v",
+          "--skip-lint",
+          "--min-processes=0",
+          "--max-processes=1",
+          "--address=127.0.0.1",
+          "--api-key=[redacted-api-key]"
+        ],
+        "name": "action-server",
+        "pid": 56049,
+        "ppid": 56014,
+        "status": "sleeping"
+      },
+      {
+        "argv": [
+          "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/pytest-tmp/test_packaged_work_items_ui_cr0/runtime-home/.actions/bin/action-server/internal/1.0.3/action-server",
+          "start",
+          "--actions-sync=false",
+          "--port=0",
+          "--datadir=/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/pytest-tmp/test_packaged_work_items_ui_cr0/datadir",
+          "--db-file=server.db",
+          "-v",
+          "--skip-lint",
+          "--min-processes=0",
+          "--max-processes=1",
+          "--address=127.0.0.1",
+          "--api-key=[redacted-api-key]"
+        ],
+        "name": "action-server",
+        "pid": 56058,
+        "ppid": 56049,
+        "status": "sleeping"
+      },
+      {
+        "observation_error": "ZombieProcess",
+        "pid": 56059
+      }
+    ],
+    "root_pid": 56049
+  },
+  "runtime_receipt": {
+    "action_server_database": "server.db",
+    "architecture": "x86_64",
+    "assets_zip_sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c",
+    "browser_stages": [
+      {
+        "script_exit_code": 0,
+        "stage": "normal",
+        "states": {
+          "browserVersion": "151.0.7922.34",
+          "createDialogBounds": {
+            "left": 21.760009765625,
+            "right": 298.239990234375,
+            "viewportWidth": 320,
+            "width": 276.47998046875
+          },
+          "createTriggerSemantics": {
+            "ariaExpanded": "false",
+            "ariaHaspopup": "dialog",
+            "outerHtml": "<button class=\"inline-flex items-center justify-center gap-2 text-sm font-medium rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-[var(--duration-interaction)] motion-reduce:transition-none bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md h-10 px-4 py-2 mt-6\" type=\"button\" aria-haspopup=\"dialog\" aria-expanded=\"false\" aria-controls=\"radix-_r_1_\" data-state=\"closed\"><svg class=\"h-4 w-4 mr-2\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"></line><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line></svg>Create First Item</button>"
+          },
+          "detailReadback": {
+            "payloadVisible": true,
+            "stateVisible": true,
+            "visible": true
+          },
+          "dialogEscapeFocus": {
+            "ariaLabel": "",
+            "id": "",
+            "role": "",
+            "tagName": "BUTTON",
+            "text": "Create First Item"
+          },
+          "dialogEscapeRestoresFocus": true,
+          "emptyNarrowWidth": {
+            "bodyWidth": 320,
+            "documentWidth": 320,
+            "viewportWidth": 320
+          },
+          "emptyQueue": {
+            "httpStatus": 200,
+            "total": 0
+          },
+          "populatedNarrowWidth": {
+            "bodyWidth": 320,
+            "documentWidth": 320,
+            "viewportWidth": 320
+          },
+          "populatedQueue": {
+            "createdInDatadirBackend": true,
+            "httpStatus": 200,
+            "queueName": "default",
+            "state": "PENDING",
+            "total": 1
+          },
+          "runtimeConfigStatus": 200
+        },
+        "status": "PASS"
+      },
+      {
+        "script_exit_code": 0,
+        "stage": "authorization-denied",
+        "states": {
+          "authorizationDenied": {
+            "body": "Invalid or missing API Key",
+            "httpStatus": 403
+          },
+          "browserSessionCookieRemoved": true,
+          "browserVersion": "151.0.7922.34",
+          "narrowWidth": {
+            "bodyWidth": 320,
+            "documentWidth": 320,
+            "viewportWidth": 320
+          },
+          "packageYamlInstructionVisible": false,
+          "protectedWorkItemsHidden": true,
+          "reauthenticatedQueueReadback": {
+            "httpStatus": 200,
+            "payload": {
+              "synthetic": "native-workitems-ui"
+            },
+            "state": "PENDING",
+            "total": 1
+          },
+          "responses": [
+            {
+              "path": "/api/work-items",
+              "status": 403
+            },
+            {
+              "path": "/browser-session",
+              "status": 200
+            },
+            {
+              "path": "/browser-session",
+              "status": 200
+            },
+            {
+              "path": "/browser-session",
+              "status": 200
+            },
+            {
+              "path": "/browser-session",
+              "status": 200
+            },
+            {
+              "path": "/api/work-items",
+              "status": 200
+            },
+            {
+              "path": "/api/work-items/stats",
+              "status": 200
+            },
+            {
+              "path": "/api/work-items",
+              "status": 200
+            }
+          ],
+          "runtimeConfigStatus": 200,
+          "signInRecoveryVisible": true
+        },
+        "status": "PASS"
+      },
+      {
+        "script_exit_code": 0,
+        "stage": "storage-error",
+        "states": {
+          "runtimeConfigStatus": 200,
+          "storageNarrowWidth": {
+            "bodyWidth": 320,
+            "documentWidth": 320,
+            "viewportWidth": 320
+          },
+          "storageUnavailable": {
+            "code": "work_items_storage_unavailable",
+            "httpStatus": 503,
+            "rawPathExposed": false,
+            "retryVisible": true
+          }
+        },
+        "status": "PASS"
+      }
+    ],
+    "bundled_rcc_baseline": {
+      "path": "_internal/actions/server/bin/rcc-18.19.3",
+      "runtime_artifact_isolation": "go_wrapper_extraction",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "status": "PASS"
+    },
+    "cleanup_observation": {
+      "control_error_count": 0,
+      "descendant_snapshot_complete": true,
+      "live_descendant_count": 0,
+      "snapshot_failure_type": null,
+      "stop_failure_type": null,
+      "wrapper_reaped": true,
+      "wrapper_started": true,
+      "zombie_descendant_count": 0
+    },
+    "embedded_files_sha256": "a8f53386f2a0572fb306b293998a33641a5474700d53708fa666133ef7c90c6d",
+    "embedded_frozen_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+    "executable_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+    "go-wrapper-post-runtime_tree_sha256": "7f68bb8253031a68c5e99a36ef722f89f1140e2e183d22fad09e6749e7278911",
+    "immutable_build_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+    "immutable_build_tree_sha256_after_runtime": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+    "package_tree_sha256": null,
+    "platform": "Linux",
+    "post_runtime_tree_diff": {
+      "added_count": 0,
+      "changed_count": 0,
+      "removed_count": 0,
+      "report_path": "acceptance-receipt-go-wrapper-post-runtime-tree-diff.json"
+    },
+    "post_runtime_tree_validation": {
+      "failure_reason": null,
+      "immutable_build_tree_unchanged": true,
+      "rcc_version": "18.19.3",
+      "runtime_generated_state": [],
+      "valid": true
+    },
+    "runtime_artifact_isolation": "go_wrapper_extraction",
+    "runtime_kind": "go-wrapper",
+    "runtime_version": "1.0.3",
+    "schema_version": 1,
+    "source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "states_failed": {},
+    "states_not_run": {
+      "generic_http_500": "no supported native backend fault fixture",
+      "missing_runtime_support": "cannot be induced without mutating the package"
+    },
+    "status": "PASS_BOUNDED",
+    "storage_fault_fixture": "test-owned datadir/workitems.db; Action Server DB remains server.db",
+    "work_items_database": "datadir/workitems.db",
+    "wrapper_extraction": {
+      "app_hash_matches_embedded_archive": true,
+      "extracted_files_sha256": "a8f53386f2a0572fb306b293998a33641a5474700d53708fa666133ef7c90c6d",
+      "path_relative_to_runtime_home": ".actions/bin/action-server/internal/1.0.3",
+      "pre_runtime_tree_sha256": "7f68bb8253031a68c5e99a36ef722f89f1140e2e183d22fad09e6749e7278911"
+    },
+    "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293"
+  },
+  "status": "PASS_BOUNDED",
+  "supervisor": {
+    "cleanup_grace_seconds": 6,
+    "disposition": "reaped_exited_descendants",
+    "implementation": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "reaped_descendants": 6,
+    "timeout_seconds": 205
+  }
+}

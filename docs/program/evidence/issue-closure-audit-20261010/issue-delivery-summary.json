@@ -1,0 +1,197 @@
+{
+  "schema": "actions-issue-delivery-counts/final-narrow-review-revision",
+  "observed_at_utc": "2026-10-10T22:44:44Z",
+  "supersedes": "/workspace/work/actions-closure-audit/matrix/issue-delivery-matrix-2026-10-10T223737Z.json",
+  "matrix_path": "/workspace/work/actions-closure-audit/matrix/issue-delivery-matrix-2026-10-10T224444Z.json",
+  "matrix_sha256": "f90fc32a4cdf065f6066e24e6a6f9eb98c635a7f5375f166efd10577b5d87c5d",
+  "markdown_path": "/workspace/work/actions-closure-audit/matrix/issue-delivery-matrix-2026-10-10T224444Z.md",
+  "markdown_sha256": "7e72c361b5448f6029ffddfdb541bfe08062e66507a79ac95fd62faad3f2453c",
+  "primary_partition": {
+    "counts": {
+      "NARROW_CLOSE_READY_CANDIDATE": 4,
+      "EXPLICIT_HUMAN_HOLD_NO_DISPATCH": 4,
+      "RETAINED_ADVISORY_OR_SCANNER_ORIGIN": 3,
+      "COORDINATION_CHECKPOINT": 1,
+      "DISTRIBUTION_AND_PUBLICATION": 1,
+      "EXISTING_ENGINEERING_ACCEPTANCE_OPEN": 1,
+      "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN": 8,
+      "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN": 9,
+      "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE": 27
+    },
+    "members": {
+      "NARROW_CLOSE_READY_CANDIDATE": [
+        162,
+        194,
+        209,
+        279
+      ],
+      "EXPLICIT_HUMAN_HOLD_NO_DISPATCH": [
+        293,
+        294,
+        295,
+        296
+      ],
+      "RETAINED_ADVISORY_OR_SCANNER_ORIGIN": [
+        149,
+        155,
+        195
+      ],
+      "COORDINATION_CHECKPOINT": [
+        101
+      ],
+      "DISTRIBUTION_AND_PUBLICATION": [
+        211
+      ],
+      "EXISTING_ENGINEERING_ACCEPTANCE_OPEN": [
+        134
+      ],
+      "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN": [
+        99,
+        100,
+        126,
+        127,
+        153,
+        208,
+        212,
+        214
+      ],
+      "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN": [
+        84,
+        91,
+        96,
+        97,
+        98,
+        125,
+        129,
+        151,
+        152
+      ],
+      "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE": [
+        71,
+        82,
+        83,
+        85,
+        86,
+        87,
+        90,
+        92,
+        93,
+        130,
+        131,
+        132,
+        133,
+        135,
+        136,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        196
+      ]
+    },
+    "total": 58,
+    "definition": "Disjoint operational issue-count buckets for ledger bookkeeping only; close-ready entries are recommendations for owner confirmation, not closed issues. They do not assert full acceptance or sum active work lanes. Parent/hierarchy references are not promoted into prerequisites."
+  },
+  "active_issue_scopes_distinct_issues": [
+    134
+  ],
+  "active_issue_scope_count": 1,
+  "active_implementation_lanes": 2,
+  "active_lane_note": "Both current active source lanes belong to #134: trust profile and PR308 artifact selector; each received source-only GO. Actual native/provider/RCC acceptance remains NOT RUN.",
+  "scoped_evidence": {
+    "100": "PR301 serialization slice accepted/merged; Core 1.0.3 published verified; whole #100 open",
+    "153": "Linux frozen and Go Origin/ambient-session test cases scoped PASS independently reviewed; whole #153 open",
+    "208": "three-OS native subgate accepted; new denial cases Linux only; whole #208 open",
+    "211": "Core 1.0.3 published/verified; Actions Runtime 1.0.3 absent; native/Homebrew gated"
+  },
+  "source_receipts": {
+    "pr301_scoped_review": {
+      "path": "/workspace/work/actions-mk3-evidence/pr301-review.json",
+      "sha256": "b092eeef6ff9e9a94617d9633942d0da1533a39ed43f0884d2644a68b9c40b5d"
+    },
+    "core_publication_readback": {
+      "path": "/workspace/work/actions-mk3-evidence/core-publication/publication-readback.json",
+      "sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39"
+    },
+    "core_pypi_readback": {
+      "path": "/workspace/work/actions-mk3-evidence/core-publication/pypi-readback.json",
+      "sha256": "b15c70129a506573654a46a5cc025f61d5c357f841df919998c1befa1dd40318"
+    },
+    "runtime_release_status": {
+      "path": "/workspace/work/actions-mk3-evidence/core-release-readiness/runtime-readiness-corrected.json",
+      "sha256": "d880d41c8918a36fb4419aceaa0822eb5988b95681e3490986233be6f882226c"
+    },
+    "pr304_final_native_workitems_review": {
+      "path": "/workspace/work/actions-mk3-evidence/pr304-readonly/independent-final-native-acceptance-review.json",
+      "sha256": "160a5700f08eb9f49806e158665bfa1bcb1444b86d79ba4c6c471087cfa6fcf6"
+    },
+    "pr304_workitems_independent_reconciliation": {
+      "path": "/workspace/work/actions-mk3-evidence/pr304-readonly/independent-workitems-acceptance-reconciliation-review.json",
+      "sha256": "41078b7513649a70c048f45fada01b1a5f0e86ac98058607e433e8d1fdc7e720"
+    },
+    "pr153_linux_frozen_receipt": {
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-frozen-staged-01/acceptance-receipt.json",
+      "sha256": "b5a7387fe65b058222156d15e21c1fe925e24c6599473e356df22497d76be5ff"
+    },
+    "pr153_linux_frozen_independent_review": {
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staging/root-independent-frozen-result.json",
+      "sha256": "69f56affe49999230d828ebe14df6f55e298381a4571a470580bae42ed99fbdc"
+    },
+    "pr153_linux_go_receipt": {
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/runs/linux-go-wrapper-staged-01/acceptance-receipt.json",
+      "sha256": "858c7242e2217da61143789f5c5aa33f2039181c3ee3003295dabecf656c0884"
+    },
+    "pr153_linux_go_independent_review": {
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staging/root-independent-go-result.json",
+      "sha256": "4ed5074a286198993a615b558b77b83282e527d26a87714e286f4a96c2c99176"
+    },
+    "pr310_linux_frozen_ui_receipt": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/runner-receipt.json",
+      "sha256": "8d4d47879787d09b639426213474623269a38bc1504cd24e35a16b462ba0fc18"
+    },
+    "pr310_linux_go_ui_receipt": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/runner-receipt.json",
+      "sha256": "2104142f78cddcaa85a99e5d23d21aad0725e86fccc52d781b962f35b6db5fc6"
+    },
+    "pr310_linux_frozen_ui_independent_review": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/root-independent-result-review.json",
+      "sha256": "0c53c964d0b443f98493df2cf3177fd95986db20cb8429ff250dd9d6def68664"
+    },
+    "pr310_linux_go_ui_independent_review": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-layout-attempt-03/root-independent-result-review.json",
+      "sha256": "48008003c839b5c1c2c333fc445acbeafd1809b300b8d6df36c7de4a2fc20519"
+    }
+  },
+  "upstream_disposition": "none; no confirmed upstream defect in this audit",
+  "close_ready_recommendation_issue_ids": [
+    162,
+    194,
+    209,
+    279
+  ],
+  "close_ready_recommendation_count": 4,
+  "advisory_or_scanner_origin_issue_ids": [
+    149,
+    155,
+    195
+  ],
+  "issue_195_hold": "Clean installed Runtime-wheel private actions._* import rejection remains missing.",
+  "narrow_contract_review": {
+    "path": "/workspace/work/actions-closure-audit/independent-narrow-contract-review-162-194-195-209.json",
+    "sha256": "4690bdabd0148734834c1deba2874fe7968933c5a3e1eed4bc9b9893cf84f099",
+    "attribution_clarification_path": "/workspace/work/actions-closure-audit/independent-narrow-contract-attribution-clarification.json",
+    "attribution_clarification_sha256": "906e43b8253f10d8d34db6748633e52d24c6ad6a4f80ae229d46c570cf3b5320"
+  },
+  "issue279_independent_review": {
+    "path": "/workspace/work/actions-closure-audit/issue279-independent-contract-review-20261010T2232Z.json",
+    "sha256": "73a1e867e1f7851033fc54d39bac084a12ec1d21afa041c260e59ca71d0f0dcb"
+  },
+  "no_mutations": "All recommendations are bookkeeping only; no issue closure/status mutation or source/remote write occurred."
+}

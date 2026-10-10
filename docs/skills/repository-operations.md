@@ -292,6 +292,42 @@ its retained contract in final vertical verification rather than reopening it
 automatically. #149 remains a living advisory record, and closed quickstart #154
 and homebrew-tools#103 must not generate duplicate execution work.
 
+### Default-branch promotion and issue closure audit
+
+Before a promotion PR becomes merge-ready, bind its live base/head commits and
+trees, fetch complete PR collections, and scan every commit newly reachable
+from the default branch. A paginated PR commit endpoint may omit part of a large
+integration history; use the non-shallow Git range and retain its complete ID
+set. Scan the current promotion description separately. Merged sub-PR
+descriptions are references to audit; their closing wording does not become
+the promotion description.
+
+Record GitHub's authenticated closing relationships separately from keyword
+candidates and public Development-panel observations. An empty public panel
+supports zero observed links; an inaccessible `closingIssuesReferences` field
+remains UNKNOWN. Do not report zero authoritative closures or zero premature
+closure risks from an unavailable field. Recheck the relationships at the
+final merge head and reconcile actual issue state if the merge happens first.
+
+Give each open issue one primary operational category so the issue census sums
+without double-counting. Keep scoped implementation, acceptance, integration,
+publication, advisory origin and PR/check counts in separate fields. A parent
+or sub-issue relationship is not an execution prerequisite. Current-head checks
+and a clean merge simulation do not waive draft, dependency, independent-review,
+combined-tree or publication gates. If required-versus-advisory policy cannot be
+read, mark it UNKNOWN rather than calling every observed check required.
+
+Bind narrow quality issues to their explicit acceptance clauses. Current real
+coverage measurement can prove a measured gate while retaining historical
+baseline provenance uncertainty. A source import guard does not substitute for
+a requested clean installed-wheel boundary check; a fixture-only regression
+can be accepted without declaring its broader product contract complete.
+
+Evidence: `docs/program/evidence/issue-closure-audit-20261010/` records the
+complete commit-range scan, observed public links, independent review, native
+relationship census and exact-head workflow observations. This evidence branch
+does not promote source or alter issue/PR state.
+
 ## Package Boundaries
 
 Core, Runtime, and HTTP helper distribution metadata identifies Joshua Yorko as

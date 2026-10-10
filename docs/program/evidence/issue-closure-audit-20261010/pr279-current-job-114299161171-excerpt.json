@@ -1,0 +1,15 @@
+{
+  "job": 114299161171,
+  "isError": false,
+  "keys": [
+    "content"
+  ],
+  "logCharacters": 1139105,
+  "selectedLines": [
+    "2026-10-10T21:10:53.4552750Z action_server_tests/test_cli_multi_package_sync.py::test_additive_import_serves_duplicate_action_names_across_restart PASSED [ 28%]",
+    "2026-10-10T21:11:09.3600190Z action_server_tests/test_cli_multi_package_sync.py::test_start_sync_treats_repeated_dirs_as_one_desired_set PASSED [ 29%]",
+    "2026-10-10T21:11:15.0253610Z action_server_tests/test_cli_multi_package_sync.py::test_start_sync_rejects_bad_later_package_without_partial_database_update PASSED [ 29%]",
+    "2026-10-10T21:11:24.1811470Z action_server_tests/test_cli_multi_package_sync.py::test_failed_sync_keeps_last_good_unmanaged_package_sources PASSED [ 30%]",
+    "2026-10-10T21:11:32.4710980Z action_server_tests/test_cli_multi_package_sync.py::test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers PASSED [ 31%]"
+  ]
+}

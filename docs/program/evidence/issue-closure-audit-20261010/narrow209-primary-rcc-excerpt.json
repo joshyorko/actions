@@ -1,0 +1,218 @@
+{
+  "source_commit": "73605934c1c948895410a5abaed6c225a396e038",
+  "synthetic_build_source": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+  "exact_tree_equivalent_integrated_commit": "19380993febaa71238eaee3026b5c808773283ff",
+  "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+  "run": 38081495671,
+  "job": 114299160964,
+  "retained_final_source_gate": {
+    "observed_at_utc": "2026-10-10 21:19:53 UTC",
+    "pr": 304,
+    "head": "73605934c1c948895410a5abaed6c225a396e038",
+    "base": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "merge_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "mergeable": true,
+    "workflows": [
+      {
+        "run_id": 38081495648,
+        "name": "AI audit evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114299160613,
+            "name": "audit",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run_id": 38081495656,
+        "name": "Measured Python coverage gate",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114299160624,
+            "name": "coverage",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run_id": 38081495671,
+        "name": "RCC developer toolkit",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114299160964,
+            "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161102,
+            "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161167,
+            "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161208,
+            "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161235,
+            "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161266,
+            "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run_id": 38081495661,
+        "name": "Action Server Build (Unauthenticated)",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114299160781,
+            "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299160955,
+            "name": "Build Action Server binary without credentials (windows-2022)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161007,
+            "name": "Build Action Server binary without credentials (macos-15)",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run_id": 38081495668,
+        "name": "Actions Core Tests",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114299160884,
+            "name": "candidate-wheel",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161042,
+            "name": "build (windows-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161133,
+            "name": "build (ubuntu-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161135,
+            "name": "build (macos-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run_id": 38081495663,
+        "name": "Actions Runtime PYPI Release",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114299160841,
+            "name": "build-sdist (ubuntu-py3.12)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161048,
+            "name": "build-wheels (macos-15)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161058,
+            "name": "build-wheels (ubuntu-22.04)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161168,
+            "name": "build-wheels (windows-2022)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114306879661,
+            "name": "publish (3.12)",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run_id": 38081495682,
+        "name": "Action Server Tests",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114299160939,
+            "name": "build (windows-py3.12-devmode)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161091,
+            "name": "build (ubuntu-py3.12-devmode)",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "id": 114299161171,
+            "name": "build (macos-py3.12-devmode)",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "excerpt": [
+    "2026-10-10T20:07:02.3078425Z action_server_tests/test_dakota_workitems_native_acceptance_harness.py::test_build_manifest_rejects_unbound_claims[source_sha-build_manifest_source_sha_mismatch] ",
+    "2026-10-10T20:07:02.3092443Z [gw0] [ 50%] PASSED action_server_tests/test_dakota_workitems_native_acceptance_harness.py::test_build_manifest_rejects_unbound_claims[source_sha-build_manifest_source_sha_mismatch] ",
+    "2026-10-10T20:08:07.5211879Z action_server_tests/test_server_cors.py::test_assembled_websocket_allows_effective_port_and_no_origin ",
+    "2026-10-10T20:08:07.5224895Z [gw0] [ 59%] PASSED action_server_tests/test_server_cors.py::test_assembled_websocket_allows_effective_port_and_no_origin "
+  ]
+}

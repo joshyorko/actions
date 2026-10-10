@@ -1,0 +1,1217 @@
+{
+  "closed_pr_count": 192,
+  "closing_keyword_candidates_in_reachable_merged_pr_bodies": [
+    {
+      "context": "the first public-authoring checkpoint separately; a docs merge cannot close #100. Complete rich result preservation, package-size/dependency proof, se",
+      "issue": 100,
+      "keyword": "close",
+      "pr": 254,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "emain pending. This PR targets the integration checkpoint; it neither closes #162 nor authorizes a release.\n",
+      "issue": 162,
+      "keyword": "closes",
+      "pr": 227,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Closes #154\n\nTracking PR for the existing four-file community quickstart implemen",
+      "issue": 154,
+      "keyword": "Closes",
+      "pr": 213,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "workflow and bounded PR audit-evidence workflow\n\n## Issues completed\n\nCloses #183.\nCloses #184.\nCloses #185.\nCloses #178.\nCloses #181.\n\nThe implementat",
+      "issue": 183,
+      "keyword": "Closes",
+      "pr": 193,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "bounded PR audit-evidence workflow\n\n## Issues completed\n\nCloses #183.\nCloses #184.\nCloses #185.\nCloses #178.\nCloses #181.\n\nThe implementation consolida",
+      "issue": 184,
+      "keyword": "Closes",
+      "pr": 193,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "dit-evidence workflow\n\n## Issues completed\n\nCloses #183.\nCloses #184.\nCloses #185.\nCloses #178.\nCloses #181.\n\nThe implementation consolidates these ove",
+      "issue": 185,
+      "keyword": "Closes",
+      "pr": 193,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "workflow\n\n## Issues completed\n\nCloses #183.\nCloses #184.\nCloses #185.\nCloses #178.\nCloses #181.\n\nThe implementation consolidates these overlapping ACMM",
+      "issue": 178,
+      "keyword": "Closes",
+      "pr": 193,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Issues completed\n\nCloses #183.\nCloses #184.\nCloses #185.\nCloses #178.\nCloses #181.\n\nThe implementation consolidates these overlapping ACMM/AEF gaps aro",
+      "issue": 181,
+      "keyword": "Closes",
+      "pr": 193,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Closes #137\n\nDefines the versioned end-to-end provenance, audit, OpenTelemetry, r",
+      "issue": 137,
+      "keyword": "Closes",
+      "pr": 190,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "nts three review tiers and the classification rules.\n\n## ACMM issues\n\nCloses #158.\nCloses #165.\nCloses #180.\nCloses #182.\n\nDefers #177 because the repo",
+      "issue": 158,
+      "keyword": "Closes",
+      "pr": 192,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "iew tiers and the classification rules.\n\n## ACMM issues\n\nCloses #158.\nCloses #165.\nCloses #180.\nCloses #182.\n\nDefers #177 because the repository has no",
+      "issue": 165,
+      "keyword": "Closes",
+      "pr": 192,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": " the classification rules.\n\n## ACMM issues\n\nCloses #158.\nCloses #165.\nCloses #180.\nCloses #182.\n\nDefers #177 because the repository has no native risk-",
+      "issue": 180,
+      "keyword": "Closes",
+      "pr": 192,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "cation rules.\n\n## ACMM issues\n\nCloses #158.\nCloses #165.\nCloses #180.\nCloses #182.\n\nDefers #177 because the repository has no native risk-config consum",
+      "issue": 182,
+      "keyword": "Closes",
+      "pr": 192,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Closes #120\nProgresses #101\n\n## Summary\n\n- Regenerated `devutils/poetry.lock` wit",
+      "issue": 120,
+      "keyword": "Closes",
+      "pr": 122,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "## Summary\n\n- Closes #89 with deterministic, revisioned MCP tool/resource/resource-template/pr",
+      "issue": 89,
+      "keyword": "Closes",
+      "pr": 113,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Closes #95\n\n## Bounded repair\n\n- Runtime artifact query params model `string | r",
+      "issue": 95,
+      "keyword": "Closes",
+      "pr": 110,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Closes #88\n\n## Scope\n\n- Repairs MCP gateway metadata privacy/cardinality without",
+      "issue": 88,
+      "keyword": "Closes",
+      "pr": 108,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Closes #94\n\n## Repair\n\n- Default `inv validate-artifact` repairs a missing canon",
+      "issue": 94,
+      "keyword": "Closes",
+      "pr": 106,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Closes #80\n\n## Factory state\n\nThis draft exposes the accepted MCP v2/stateless R",
+      "issue": 80,
+      "keyword": "Closes",
+      "pr": 104,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "Closes #102\n\nParent factory: #101\nCritical path to: #80\n\n## Outcome\n\nPrepare the ",
+      "issue": 102,
+      "keyword": "Closes",
+      "pr": 103,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "ecationWarning`\n  - `264 passed, 10 xfailed`\n- Ruff and mypy passed.\n\nFixes #78\n",
+      "issue": 78,
+      "keyword": "Fixes",
+      "pr": 79,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": " guidance and the mandatory agent documentation-improvement contract\n\nCloses #69.\n\n## Validation\n\n- Dev Container static contract: 4 passed\n- pinned t",
+      "issue": 69,
+      "keyword": "Closes",
+      "pr": 70,
+      "repository": "joshyorko/actions"
+    },
+    {
+      "context": "nts>\n> \n\n\n</details>\n\n\n\n<!-- START COPILOT CODING AGENT SUFFIX -->\n\n- Fixes joshyorko/actions#54\n\n<!-- START COPILOT CODING AGENT TIPS -->\n---\n\n\u2728 Let Copilot coding a",
+      "issue": 54,
+      "keyword": "Fixes",
+      "pr": 57,
+      "repository": "joshyorko/actions"
+    }
+  ],
+  "merged_prs_reachable_from_integration": [
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "73605934c1c948895410a5abaed6c225a396e038",
+      "merge_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "pr": 304
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1",
+      "merge_sha": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "pr": 301
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "c2733957b047a2acf3d38c1cad7704a4bc69f15b",
+      "merge_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "pr": 303
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "fc582797cc754ae6dcf7602d98d6079f0004b29d",
+      "merge_sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "pr": 298
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "4d9c348a65365ef4e4c26baddada79c754bc8dd1",
+      "merge_sha": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+      "pr": 297
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "7ca665aaa4b180a78f532a4419e4d17bf4ced801",
+      "merge_sha": "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+      "pr": 289
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "merge_sha": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "pr": 291
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "375614e53f3120c74caf3b732306b13eab99ffee",
+      "merge_sha": "5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa",
+      "pr": 288
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "4e5f8200628572d5308b0d3abd5ff16353600036",
+      "merge_sha": "c6d729f29167f04080ab5547955d6398a6ee49d0",
+      "pr": 287
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "8ef0cce463d1eb9f3228d7658c113ceb6a18d554",
+      "merge_sha": "c545472776a92a4f6d326c9503a780949549063f",
+      "pr": 285
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "e7c42e94196beba04dbae85d8a38da78efd9767f",
+      "merge_sha": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
+      "pr": 286
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "c7c18da18f2dfc1134773ea725c7b7de38c14e5c",
+      "merge_sha": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+      "pr": 284
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79",
+      "merge_sha": "31239cf99c7b264a0eab89660e93b391532ac305",
+      "pr": 283
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "c1c33ce77895d7b522f2229524d386ed72f8ba3b",
+      "merge_sha": "ef2b32b33799b10c09f1b0c002687c2f7ff21ab5",
+      "pr": 278
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+      "merge_sha": "b9ccc184aee6575fb39c7f57c9845a3da6d1e089",
+      "pr": 272
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "merge_sha": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+      "pr": 273
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "0357585b51864e158f50c7479af001ba6daf5b06",
+      "merge_sha": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "pr": 280
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "13db7030416f7b64f9a577b800a629549e23903e",
+      "merge_sha": "9afa0b22b856a8047fa7774044d403c28b328fb5",
+      "pr": 281
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "bf435498de94acc5e64f89dfe3dcd3916b5046f3",
+      "merge_sha": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "pr": 277
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "54dae1c0a8383797fa99ba5c50e2a2cf2d829302",
+      "merge_sha": "be9890c8b7dccd915539492778eb48bb7addc3ec",
+      "pr": 276
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "def1a6bd07822ef8f45db45cd4e4eaa7fa628989",
+      "merge_sha": "d54687003b865bf2ea520d7cacf54e4badbbf8cf",
+      "pr": 274
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+      "merge_sha": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b",
+      "pr": 275
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "524e503b384a56bf854326c1f7f03833c60e6c53",
+      "merge_sha": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+      "pr": 256
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "65bbc11f2d1ea9a3521d3af5ee908f151861cf25",
+      "merge_sha": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "pr": 219
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "961a813d34c39dc6b3820420f83268c0e708f319",
+      "merge_sha": "0999bb1de5f2be4190635da127090cfbbd741705",
+      "pr": 271
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "5efcfebf1c572808a441e2360d1c1e68a77020a9",
+      "merge_sha": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+      "pr": 270
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "bdc88f38af21046a2d905e90b2a21a9769152a87",
+      "merge_sha": "d2741a18976f75467355282ad3caa5b99b4c505e",
+      "pr": 220
+    },
+    {
+      "base_branch": "integration/runtime-release-final-20261009",
+      "head_sha": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "merge_sha": "6a53578fac029a0696834c30438c858f5f0003be",
+      "pr": 265
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+      "merge_sha": "cb2668a82c6d414dd094b02e075f3ac298ac8228",
+      "pr": 269
+    },
+    {
+      "base_branch": "integration/runtime-release-final-20261009",
+      "head_sha": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+      "merge_sha": "e2fb0f461f70129af0673aa5886f95ee581992d9",
+      "pr": 267
+    },
+    {
+      "base_branch": "integration/runtime-release-final-20261009",
+      "head_sha": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "merge_sha": "975975fea45ef99322645e46d8e66809277cdfa6",
+      "pr": 263
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "a63f714baf6bedb22dbadb65017c0a0a658e892e",
+      "merge_sha": "4a717c77053947f4ad2892783211af5edbe5783d",
+      "pr": 264
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "653e1dc9597a120a4b3a7a21645f8a1e731c6695",
+      "merge_sha": "4e82a8c3b72565f1f1891602f32c9d92e62fce6c",
+      "pr": 268
+    },
+    {
+      "base_branch": "integration/runtime-release-final-20261009",
+      "head_sha": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "merge_sha": "923e4e9db6236c8a48977c0b71236f1dc0f14563",
+      "pr": 262
+    },
+    {
+      "base_branch": "integration/runtime-release-final-20261009",
+      "head_sha": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "merge_sha": "c853118376a2eefbaee06d53c584a2ffc6dd6d14",
+      "pr": 259
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "29decdcb4ac6712f278b61e3722e0ad9217c60ba",
+      "merge_sha": "0ce9fcefab66b28c9fce4d71cd5d8bdeb38e02d5",
+      "pr": 257
+    },
+    {
+      "base_branch": "feature/issue-99a-query-renderer-20261009",
+      "head_sha": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+      "merge_sha": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+      "pr": 266
+    },
+    {
+      "base_branch": "integration/runtime-release-final-20261009",
+      "head_sha": "274042cd555d0340dc07e86f651986ab49ba85a7",
+      "merge_sha": "204593afdbbb6a5be51c2c5fab3758805ad4412c",
+      "pr": 261
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "merge_sha": "446ff1b3328028154684c035f4e395ae35284067",
+      "pr": 254
+    },
+    {
+      "base_branch": "integration/runtime-release-final-20261009",
+      "head_sha": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "merge_sha": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+      "pr": 260
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "merge_sha": "c30f953bae1a322e1d09549607ab42f1badce440",
+      "pr": 255
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+      "pr": 258
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+      "merge_sha": "26b0194590e14656bff92dce3665dccab09837a3",
+      "pr": 253
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "71f55ddd1ce34720db0e13433a2f1f5c9eed70a0",
+      "merge_sha": "011c5482285ea516f39292100c429a905e6e3e36",
+      "pr": 248
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e",
+      "merge_sha": "167378509ca33450d4478021214e2e74a0b46dda",
+      "pr": 249
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "57399b60496b98fea020f26e576d47bcb0d440bf",
+      "merge_sha": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+      "pr": 252
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "29f213e021e5c828aee43de16604ad41cfe88965",
+      "merge_sha": "f6125b6a7a09666765ca7398486df5f5249228d0",
+      "pr": 247
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "4cc65b3eaa7558952391b085d147f8ce2f604fbd",
+      "merge_sha": "601c954da93a43d4315bdcb7a087d28c2087f442",
+      "pr": 246
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "6e94860c0b8fc2692727982a57ce635063c86ce4",
+      "merge_sha": "f65a1661ead8405e27e8e32d4f882ece2b36addd",
+      "pr": 245
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
+      "merge_sha": "25a992c79a805c9e1827bdfd7b2b4b2f8f22adc9",
+      "pr": 244
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "e032e95d38c91aead08d30b42ec7620b8ea726a4",
+      "merge_sha": "3ed98ddbac3354c59414b8411b295db2e15d3545",
+      "pr": 250
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "7fffa3a53c321a1990819bbe3fc08dca4115e74d",
+      "merge_sha": "00c207fe1ebae20804056e2b17982476ee75386a",
+      "pr": 243
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "1b0217c810b7522416003ef8e6d5ded3016d3735",
+      "merge_sha": "303592ff4c7b02b9f4d03c93f4ab79253ca79a17",
+      "pr": 242
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "7d2563925b03bc586cef6d61876960ec1a55d4f0",
+      "merge_sha": "bd1661393b71d92779bb405cfb92372442b340ac",
+      "pr": 240
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "merge_sha": "1fb5aaebcc7f9954abc1319e86e900e7ffd3fe72",
+      "pr": 237
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "bd1661393b71d92779bb405cfb92372442b340ac",
+      "merge_sha": "a99b45d6a846be15d5130fc0ff25119474dcee6f",
+      "pr": 241
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "merge_sha": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
+      "pr": 236
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "merge_sha": "c3e3d556002170a1b736ef74fe4189883b5b73b5",
+      "pr": 235
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63",
+      "merge_sha": "7758ec168524e96900bdc0f47b1e379a55a91536",
+      "pr": 239
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "merge_sha": "134dfbee08ef5a06664bcd1ed37bca0ea1a573b9",
+      "pr": 234
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "49becb96767d4fc225fb9cb79162db9a9d1dafd8",
+      "merge_sha": "46e1c40de93ee4aea7a4e3dd98bcb22ad9cce0af",
+      "pr": 231
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "554630899c6eab23b922ba6558347e7f2c439c00",
+      "merge_sha": "701275b6ecb9e670dd0ed1282ace1cb2f22b65f9",
+      "pr": 225
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "134dfbee08ef5a06664bcd1ed37bca0ea1a573b9",
+      "merge_sha": "76a73d276cc7e3d671e6e07f8f33aafb6ee1f96c",
+      "pr": 238
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "80764aca73d50ff7325f581bb87d732af84df914",
+      "merge_sha": "4626cc56bdde0cee92010ae1b985e5d385e4c0d2",
+      "pr": 233
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "72a60344c40e6f153dab0f71b30b073e9b259226",
+      "merge_sha": "376ed4c15c76ccf1b5e3b70985e681946bffd249",
+      "pr": 232
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "b690b262c564ed9f085e2df3863af500ff29fddf",
+      "merge_sha": "ea08faf39e107113ae50a529770ce1ca1a422d05",
+      "pr": 230
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "merge_sha": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
+      "pr": 229
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "f8ccace43feaa52fd3bf376715efa9fa8cbcc5bb",
+      "merge_sha": "8c3cd76cdd937debdaaf72d5c0a0e0b118b6bc46",
+      "pr": 228
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "fc09d0b26a80201587de310e24042787252ae3af",
+      "merge_sha": "0595b4faa9ac6194f539f1a94bd62d24e1ad8ce9",
+      "pr": 227
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "8524e9c3e9bc35bfc17f70f887d9d0b680856af3",
+      "merge_sha": "18ce74179aba9d10f701e447f65dfe9e2d5d225e",
+      "pr": 226
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "28b021c6307c5c993f0ba2859d0da2ae3d9e8c94",
+      "merge_sha": "7b1b9b1d4a7fb3aae60eb22e5c3faf6ca91396ab",
+      "pr": 224
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "e4e54d31647b7d44cdd7c07d6006596186db8317",
+      "merge_sha": "954405940951eaefe61f5919e2a1572b732e8064",
+      "pr": 223
+    },
+    {
+      "base_branch": "integration/community-release-20261008",
+      "head_sha": "2bbf3afceda39a0d8dfa4b9e1a3ed96f3ad9b61f",
+      "merge_sha": "6ee7440a8cf2cb107f5943e1d09f45e2fb4a4655",
+      "pr": 222
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "e034c3de90d6469aa3204d7c562974b2b3eefa29",
+      "merge_sha": "8bdce09944c9e370917a8222243cd1a239ea7060",
+      "pr": 213
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "cce2ae20deb000d44999ec79cc16d824b0b839fa",
+      "merge_sha": "d747d1839b53712937cb9293a34049c89ca507fa",
+      "pr": 207
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "17f550ba1fc0c2816b2bcda4a00c69f5691d814c",
+      "merge_sha": "10846fca91a7b49e458a75a0ff0923a005a0f53e",
+      "pr": 206
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "6f9b84867a4021e791a46c2c22f15f1b31fc7c2d",
+      "merge_sha": "b3ebf1b2c4830cd548ea32567cd100dac67baadd",
+      "pr": 205
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "5b9c07176d41673832c23f0c7ea609931fa4223d",
+      "merge_sha": "e88d6c08e730fb6f7ffd886d53e64e3d06f54677",
+      "pr": 204
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "a086c56a91c82ef7fee0c16383a8e103e2014d02",
+      "merge_sha": "9d2cd7c774013975c7968210b584df33bfa94257",
+      "pr": 203
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "f24effb18bdc9328ec929102e04af9e827bbe747",
+      "merge_sha": "0accc8f8cd1590957dec63d94e091aa945653614",
+      "pr": 202
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "3c5d9c82999e4d672c8d0ee8ba51733062bbf142",
+      "merge_sha": "89ea8e2eb168e0da3adae0ab3e67915e23b314ab",
+      "pr": 201
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "8c30779fd284c22c3fc978ca0850d8faacc43f94",
+      "merge_sha": "b0c24cbe8f38ef23725c612a2436fe6a0bc9e902",
+      "pr": 200
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "1a556431f2be605d2b4b928e0596eb43718752d7",
+      "merge_sha": "eee76f4fd54f80bab3dcb4b0ab9f3d72e2a09935",
+      "pr": 197
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "3c215a89bc14bfe00b4cd0e3936bdb451d0a1e30",
+      "merge_sha": "20b144de68249c1e62728a21196362432d2474b3",
+      "pr": 119
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "b8f1ba19434e38d98cec997fdc95377d01b767da",
+      "merge_sha": "69f4fd211b5381469481c23de2c4504d87c4f277",
+      "pr": 112
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "d666f57dd21ae4964af54fb9083cf7bfce46ce48",
+      "merge_sha": "f43102ce26f337efefbd968f38235fc29127b369",
+      "pr": 115
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "ba8fabf4a176776a115710b9a9932b91919084c0",
+      "merge_sha": "2cf12e070f0221637a94b32174586730562a3fee",
+      "pr": 109
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "fce1da2fcd048a678cdb2e8f16935fd69082bd02",
+      "merge_sha": "d34fd1df6a34673587c0b5f3348076e213d4faac",
+      "pr": 199
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "7b4c9253ff35be15f899adb31f2a50d9b397b8d9",
+      "merge_sha": "ab7e2b7dbf844e55c43b8f59d4cc1cf62d31bba8",
+      "pr": 198
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "2c746ab6a7a689a6ad8d45e25ba72014212d8dfe",
+      "merge_sha": "157e14569c86e2b7e52050909d4c7cb42b9f3166",
+      "pr": 128
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "f3c120fce1afa40da702eb771e62346214f81450",
+      "merge_sha": "cdc891eec2c864392a906615a439f0b5f24f58dc",
+      "pr": 172
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "2e2e31c803770a28faca4a6129c3e0fdcf793890",
+      "merge_sha": "f6a3a92192620dec7dafa057975b39856f4f7909",
+      "pr": 193
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "cad7a9b4cdf1e918faac8e932d277f78d6a7329d",
+      "merge_sha": "a3abcae5c80be8afb5927e1c87ba04a337c60c61",
+      "pr": 191
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "8af0e5627245d795a8ec6e2ddb3560d17fd42ca7",
+      "merge_sha": "b868d62ec38fb9491730568b4da17c4b56fa30c1",
+      "pr": 190
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "ee7e8186d9748e720d83a15fc17f672527b34fd7",
+      "merge_sha": "7a00139b796d0d5b287764879e84deefcad2abb8",
+      "pr": 192
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "30aca04ea6ed164f39d266845df0e7f5b2375e39",
+      "merge_sha": "77a50508a52d55de4570bf973dd43428048b8802",
+      "pr": 124
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "07e2e84614a21a498fbced1fc9d610b055b19af2",
+      "merge_sha": "4621013277f9d489ff1258a66f77caee9133436a",
+      "pr": 122
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "5bf35d2be87ff9e02f736a13dc28dd21898b9d35",
+      "merge_sha": "4be069f3940bf2127a37f76925e102c4664ce1e4",
+      "pr": 116
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "3abce8d6d17b987d33d8d9b64f644c142402e61d",
+      "merge_sha": "a3e24aed4771789285a1028e3bfbd682b5d87abc",
+      "pr": 118
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "318c0996baa0e969309506005592c1679a9fc86b",
+      "merge_sha": "15cfb17661ba49ad2cac23d70007b6ce715de6be",
+      "pr": 114
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "1e85622775695b0d0f0050372a066c734c68ed9c",
+      "merge_sha": "f7d427a2d09b50fb5e50791dacfbb6d346dc9009",
+      "pr": 117
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "1b3ba27ca3bb1f820a0400f6f9843080134d08fa",
+      "merge_sha": "3ece53c6aff72600b548ae777b47590d48c27899",
+      "pr": 111
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "acaf09833cb7b5e8f37b6f532efac088ebf2ac63",
+      "merge_sha": "195bcfb3554f5bdb0c785d3a6f8e3def81c80cc7",
+      "pr": 113
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "eb817cdc5481529cbe0e6e976c13725088d966db",
+      "merge_sha": "0d1d35a6521a92a2f02995ce02215f6eb737e58e",
+      "pr": 110
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "f33f427df2410151c6a1388176677d01fea060ab",
+      "merge_sha": "d20c1e36ae1673ebdeaac7b08a2c7d6fbde7ae98",
+      "pr": 108
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "5c8738c292baca534ec9653375c40086714b4832",
+      "merge_sha": "440f7ed05a510bf40c86266abfe2c36163154bdd",
+      "pr": 105
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "014f0591c315c5b0f3bd80f8c4d63030663537f5",
+      "merge_sha": "bb9c1b8c5f87a6f7b5a318708f3a774237279532",
+      "pr": 106
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "dc87e632102de03152777fc7db2c6be2b5f3ad9a",
+      "merge_sha": "e8a1669a7c634e16be99c45a0d2fb794b1171b5b",
+      "pr": 104
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "c2b58675cbcaff4461fd5f2bfd6c421f6531c37a",
+      "merge_sha": "c8462043571112858c093b5ee02ae1d1563929aa",
+      "pr": 103
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "9035e4d274eaa3d6c509e89e588051264fee7299",
+      "merge_sha": "6e1f0c027de071699e8c5b8417b1ad9e5d84a6bf",
+      "pr": 81
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "63135817c0f57d01aa15838581d3fee9cfde8629",
+      "merge_sha": "7e78d43db6b3480ee46e35bfec87c48affc55e55",
+      "pr": 79
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "f691e6e4c110218513059383120500da2a69a795",
+      "merge_sha": "ac96890c84ac42308e828cb082b96d32b2329b03",
+      "pr": 77
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "b72a6dab273576d9311b88f03212c4c3c84861c3",
+      "merge_sha": "7557abf941eaf9a2421d32dbd5c8f22374e94231",
+      "pr": 76
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "6324f17c3e6a400c608600b3c6ae04e1b739a837",
+      "merge_sha": "a67ed55de0788b80b9ccb9a7df9a2edb724b4c5e",
+      "pr": 75
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "955a6a0400c8ea7b3199fd566dfc478ef1cc4d97",
+      "merge_sha": "1cbbcef6d461f9bd7bba276eddfbd672cabc27d1",
+      "pr": 74
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "2287015b96c5140ff1efdf5ab5236661630f20ce",
+      "merge_sha": "4bdffa8d8a5a5c1dd5d57c0e871064fc7848a0e1",
+      "pr": 73
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "495228f47a66a36f2613c628d94a8d951a01c911",
+      "merge_sha": "888bdad7eb8f4474b9bc62bb667fbd28135d59b3",
+      "pr": 72
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "b03ea27d13fe4dec2f47eb92510704a7800dc2b3",
+      "merge_sha": "69f16d11daac89df40aae5784b3fa8dfcd89f66a",
+      "pr": 70
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "a46365e46fce490d50ac100d8f164706f00980db",
+      "merge_sha": "7e63577ae0f85bf4112c78ab9b8d7fcb7fcd8f27",
+      "pr": 64
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "df82d9268b9a12393f1fa917004488e1a7856aa7",
+      "merge_sha": "1d4892a51439f38ef5b462a970da4ecab27727b2",
+      "pr": 66
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "2fe1d5e817c720bbe22b6090fe6a5c1b8a72df34",
+      "merge_sha": "2df1b8b2a979d25bc02b3da379dfc2c258465244",
+      "pr": 63
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "8b7df7a665b6954a5aea2ad3a58eba95b84063cb",
+      "merge_sha": "6eedb08d5dce539d9edec43ca890854f5ebba7c7",
+      "pr": 62
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "20a2b167dde1be5d4eac7bfd77a5ebc32fa82329",
+      "merge_sha": "a74f9feb16df74cde2720857eea631e99c5bab39",
+      "pr": 61
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "b12967317856017737374dc714b1c84074852347",
+      "merge_sha": "eecd7f0d585b5762a83d8f55e9072baf99566589",
+      "pr": 60
+    },
+    {
+      "base_branch": "community",
+      "head_sha": "b7ee6682e4d137eb5bd6ec408320751d7710ecc8",
+      "merge_sha": "ee1d22abc88dc18299c928ded2f75334b8d108c8",
+      "pr": 58
+    },
+    {
+      "base_branch": "feature/action-server-analytics",
+      "head_sha": "e68895493528c79408c6cd873d2a5801e4491475",
+      "merge_sha": "ebdfa240e35208a44acce4c107a5bc439de4b6d2",
+      "pr": 57
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "d46d6933240c4205b239b51074913ff7b23a1fa8",
+      "merge_sha": "d46d6933240c4205b239b51074913ff7b23a1fa8",
+      "pr": 53
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "470a322a74a2f64e5317dd00fcb0c83d47fee79e",
+      "merge_sha": "470a322a74a2f64e5317dd00fcb0c83d47fee79e",
+      "pr": 52
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "0f974864c6ec7b5719057760aeb924fdaa080552",
+      "merge_sha": "0f974864c6ec7b5719057760aeb924fdaa080552",
+      "pr": 51
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "c7a2ca8aef511d080b88255e723e9d9c21ea62eb",
+      "merge_sha": "c7a2ca8aef511d080b88255e723e9d9c21ea62eb",
+      "pr": 50
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "b38593e816d363a582462f99527467353fdffe0f",
+      "merge_sha": "b38593e816d363a582462f99527467353fdffe0f",
+      "pr": 49
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "68d47ec4adc305c740feb2f6149be82ff305b538",
+      "merge_sha": "68d47ec4adc305c740feb2f6149be82ff305b538",
+      "pr": 48
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "208e289ddcc0be82aa070dca60d0b88b748cbca2",
+      "merge_sha": "208e289ddcc0be82aa070dca60d0b88b748cbca2",
+      "pr": 47
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "1b6f1d4cfed066c0672333bbab874adcbe239233",
+      "merge_sha": "1b6f1d4cfed066c0672333bbab874adcbe239233",
+      "pr": 46
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "156d21791f694475303f15f62d4c09cc19f93806",
+      "merge_sha": "156d21791f694475303f15f62d4c09cc19f93806",
+      "pr": 45
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "f5e71d43ae362bac52452ea97f1adee70fd562ff",
+      "merge_sha": "f5e71d43ae362bac52452ea97f1adee70fd562ff",
+      "pr": 44
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "82458b0c80ebf834fac17aecdad013fab4f20c6e",
+      "merge_sha": "82458b0c80ebf834fac17aecdad013fab4f20c6e",
+      "pr": 43
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "9e4597f59298903cffe05a4dac6f009ac25be219",
+      "merge_sha": "9e4597f59298903cffe05a4dac6f009ac25be219",
+      "pr": 42
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "7ee0ce00318a82b2b9c2c02240d62d71370b19cb",
+      "merge_sha": "7ee0ce00318a82b2b9c2c02240d62d71370b19cb",
+      "pr": 41
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "5e0ee983c1a3db4348efdbd28a29258d65091863",
+      "merge_sha": "5e0ee983c1a3db4348efdbd28a29258d65091863",
+      "pr": 40
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "e7b4255f0d6ce249f6729c9978fbe0894c1e7988",
+      "merge_sha": "e7b4255f0d6ce249f6729c9978fbe0894c1e7988",
+      "pr": 39
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "d66cc77c0458b19b1c56a53188ac4b7de58855cb",
+      "merge_sha": "d66cc77c0458b19b1c56a53188ac4b7de58855cb",
+      "pr": 38
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "ac6297b8edb72657dbd25bd1eefe01d86b581431",
+      "merge_sha": "ac6297b8edb72657dbd25bd1eefe01d86b581431",
+      "pr": 37
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "640c24415619386e04d73ae2c925ea43e5b0728e",
+      "merge_sha": "640c24415619386e04d73ae2c925ea43e5b0728e",
+      "pr": 36
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "9056a918be659e5430c55a781f0e7d82b1db970b",
+      "merge_sha": "9056a918be659e5430c55a781f0e7d82b1db970b",
+      "pr": 33
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "2d2a478fafb2f111777bc01495a1ba244bc63bc3",
+      "merge_sha": "2d2a478fafb2f111777bc01495a1ba244bc63bc3",
+      "pr": 32
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "592b535b2d649ec67ab492fe4fadcae92c6d2793",
+      "merge_sha": "592b535b2d649ec67ab492fe4fadcae92c6d2793",
+      "pr": 31
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "ae58609d02d65f87e59f085bfdf0967184c1c202",
+      "merge_sha": "ae58609d02d65f87e59f085bfdf0967184c1c202",
+      "pr": 30
+    },
+    {
+      "base_branch": "003-open-core-build",
+      "head_sha": "5446f3bf71042b4ec0fe93f0cd5cffd437abdeaf",
+      "merge_sha": "038b6afb5f47f5cb690672e26713f48d97c6351d",
+      "pr": 29
+    },
+    {
+      "base_branch": "003-open-core-build",
+      "head_sha": "1afed93bf8746b77561ecaed6f6fcec303a8c8f4",
+      "merge_sha": "30e39fb22652324a2601f6d9c3946b609978c371",
+      "pr": 28
+    },
+    {
+      "base_branch": "003-open-core-build",
+      "head_sha": "179f7ddb9edb715d633b01a46d9cfb75add68c55",
+      "merge_sha": "446dbc7c32e9182a1510799305b8f533e7faa075",
+      "pr": 26
+    },
+    {
+      "base_branch": "002-build-packaging-bug",
+      "head_sha": "2c16abf3451a10e85255e2cef74d1f7c966b89b4",
+      "merge_sha": "4390dc7a83a978426755d0f026ee43a04e2bb3b8",
+      "pr": 24
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "c08b33883b8670d83408de7bf5aceb63ceaa8227",
+      "merge_sha": "c08b33883b8670d83408de7bf5aceb63ceaa8227",
+      "pr": 21
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "e787f7af10b912589fc1dae8c2cd9adbf12ab291",
+      "merge_sha": "e787f7af10b912589fc1dae8c2cd9adbf12ab291",
+      "pr": 20
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "728a4cbc8641ea25b27f4847f31b434f9c5d7779",
+      "merge_sha": "728a4cbc8641ea25b27f4847f31b434f9c5d7779",
+      "pr": 19
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "7973baaedc8142b2f059b34da03afecf04f080fd",
+      "merge_sha": "7973baaedc8142b2f059b34da03afecf04f080fd",
+      "pr": 18
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "cfc5e7d9af33f256197adace2613c2fca698df3f",
+      "merge_sha": "cfc5e7d9af33f256197adace2613c2fca698df3f",
+      "pr": 17
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "3c58338ce7b00fe46fd403848af5c15f486f9e83",
+      "merge_sha": "3c58338ce7b00fe46fd403848af5c15f486f9e83",
+      "pr": 16
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "34531bc30ea1c533e09a6642d34be0874bdf0625",
+      "merge_sha": "34531bc30ea1c533e09a6642d34be0874bdf0625",
+      "pr": 15
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "d2d43297c570c95e0788ea09ec126e509ac4963b",
+      "merge_sha": "d2d43297c570c95e0788ea09ec126e509ac4963b",
+      "pr": 14
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "81466b8661e8eed75bc857dada6dff25ef4d5189",
+      "merge_sha": "81466b8661e8eed75bc857dada6dff25ef4d5189",
+      "pr": 13
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "fbee0f7bb044c8612c3301b9190e12ac9279d415",
+      "merge_sha": "fbee0f7bb044c8612c3301b9190e12ac9279d415",
+      "pr": 12
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "fc6f660ede9e0a365fe6ab73ffb4606b71c459f0",
+      "merge_sha": "fc6f660ede9e0a365fe6ab73ffb4606b71c459f0",
+      "pr": 11
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "3e5fec1792a2192abf4ebc76db357d20b18a51b9",
+      "merge_sha": "3e5fec1792a2192abf4ebc76db357d20b18a51b9",
+      "pr": 10
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "083c6ea5c03adaaae867abf32c3316b60e5aa246",
+      "merge_sha": "083c6ea5c03adaaae867abf32c3316b60e5aa246",
+      "pr": 9
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "c242a34ff54b2b19986d7c6c65b27774d93a34dd",
+      "merge_sha": "c242a34ff54b2b19986d7c6c65b27774d93a34dd",
+      "pr": 8
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "9e39d0fa32f3bd608782663a4b7ae6c6242a8069",
+      "merge_sha": "9e39d0fa32f3bd608782663a4b7ae6c6242a8069",
+      "pr": 7
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "368964386db00689090aee15cfa713479583cc47",
+      "merge_sha": "368964386db00689090aee15cfa713479583cc47",
+      "pr": 6
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "dcb5c12b029dd020cb0163cd632aae19bc7f0e9f",
+      "merge_sha": "dcb5c12b029dd020cb0163cd632aae19bc7f0e9f",
+      "pr": 5
+    },
+    {
+      "base_branch": "master",
+      "head_sha": "cb68eb1909bba63c540351e313802b782d4279de",
+      "merge_sha": "cb68eb1909bba63c540351e313802b782d4279de",
+      "pr": 4
+    },
+    {
+      "base_branch": "feat/roboto",
+      "head_sha": "4b1709a168ce89684355a7a0bc92f0c727562010",
+      "merge_sha": "d07162b8d0a5bb6aa02f43b7f366d17ba4c71a97",
+      "pr": 2
+    }
+  ],
+  "missing_merge_objects": [
+    {
+      "merge_sha": "ddbbfb68e3431878f01ebfd61de461ff749dc498",
+      "pr": 251
+    },
+    {
+      "merge_sha": "9d9479e842effbcb56d2ec0017c23593d192a56d",
+      "pr": 68
+    },
+    {
+      "merge_sha": "2999a74784245dbf038e37e1f3efccea8aabea0e",
+      "pr": 67
+    },
+    {
+      "merge_sha": "952ab86a185727ebeb96d0e033697bc1db654bcf",
+      "pr": 65
+    },
+    {
+      "merge_sha": "8abab363b3d39d07f94e374550c9878ec5369fab",
+      "pr": 59
+    }
+  ],
+  "note": "Merged sub-PR description keywords do not alone establish closure from later integration PR; default-branch target and authoritative relationship semantics must be checked."
+}

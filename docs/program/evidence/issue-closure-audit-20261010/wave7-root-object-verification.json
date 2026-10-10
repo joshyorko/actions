@@ -1,0 +1,16 @@
+{
+  "schema": "evidence-checkpoint-independent-verification/v1",
+  "observed_at_utc": "2026-10-10T22:27:13.475087+00:00",
+  "commit": "ed9b8bda76d533a1b1f73202bc5f3c8366674075",
+  "payload_count": 54,
+  "payload_hashes_and_byte_sizes": "PASS against Git objects",
+  "text_only": "PASS",
+  "credential_pattern_scan": "PASS; pattern scan is bounded and no full environment captured",
+  "original_contract_graph_resume_unchanged": [
+    "docs/program/community-program-ledger.json",
+    "docs/program/community-execution-graph.json",
+    "docs/program/community-resume-20261009.json"
+  ],
+  "provenance": "Evidence source only; not Runtime engineering baseline",
+  "upstream_disposition": "none"
+}

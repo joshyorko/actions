@@ -1,0 +1,36 @@
+{
+  "complete_integration_commit_count": 2119,
+  "original_receipt_sha256": "8b5deec42f731ed90ddde2627367965e38dedcc1c4586091d12e7a28035c9107",
+  "rows": [
+    {
+      "explanation": "Exact ID is absent from complete non-shallow reachable commit list; lack of a separate loose object does not make ancestry unknown. Tree-equivalent historical IDs remain separate.",
+      "merge_sha": "ddbbfb68e3431878f01ebfd61de461ff749dc498",
+      "pr": 251,
+      "reachable_in_complete_integration_ancestry": false
+    },
+    {
+      "explanation": "Exact ID is absent from complete non-shallow reachable commit list; lack of a separate loose object does not make ancestry unknown. Tree-equivalent historical IDs remain separate.",
+      "merge_sha": "9d9479e842effbcb56d2ec0017c23593d192a56d",
+      "pr": 68,
+      "reachable_in_complete_integration_ancestry": false
+    },
+    {
+      "explanation": "Exact ID is absent from complete non-shallow reachable commit list; lack of a separate loose object does not make ancestry unknown. Tree-equivalent historical IDs remain separate.",
+      "merge_sha": "2999a74784245dbf038e37e1f3efccea8aabea0e",
+      "pr": 67,
+      "reachable_in_complete_integration_ancestry": false
+    },
+    {
+      "explanation": "Exact ID is absent from complete non-shallow reachable commit list; lack of a separate loose object does not make ancestry unknown. Tree-equivalent historical IDs remain separate.",
+      "merge_sha": "952ab86a185727ebeb96d0e033697bc1db654bcf",
+      "pr": 65,
+      "reachable_in_complete_integration_ancestry": false
+    },
+    {
+      "explanation": "Exact ID is absent from complete non-shallow reachable commit list; lack of a separate loose object does not make ancestry unknown. Tree-equivalent historical IDs remain separate.",
+      "merge_sha": "8abab363b3d39d07f94e374550c9878ec5369fab",
+      "pr": 59,
+      "reachable_in_complete_integration_ancestry": false
+    }
+  ]
+}
