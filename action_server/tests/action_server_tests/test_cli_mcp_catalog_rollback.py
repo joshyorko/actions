@@ -205,8 +205,7 @@ def _runtime(
             timeout=(
                 90
                 if directories
-                and "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"
-                in os.environ
+                and "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ
                 else 30
             ),
         )
