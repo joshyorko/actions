@@ -45,7 +45,7 @@ The `Actions Runtime Frozen Catalog Rollback` workflow runs the duplicate public
 
 This workflow invokes Poetry from a `uv run` tool environment. Remove the inherited `VIRTUAL_ENV` before invoking Poetry, or Poetry can install project dependencies into uv's temporary tool environment instead of the Action Server virtualenv. Keep the pytest module/interpreter preflight under `set -e`, then run the suite with `poetry run python -m pytest`; a missing test module is an invocation failure, not a reason to fall back to host pytest or source-only tests.
 
-Successful-generation drain is a separate source-mode test. It starts v2 while a v1 Run is blocked, proves the released old Run returns data from its immutable v1 snapshot, persists both Runs' results, and independently verifies natural child cleanup. Do not infer this behavior from malformed-reload rollback or from frozen catalog cases.
+The successful-generation drain test is included as the fifth case in the frozen workflow. In frozen mode it uses the pinned managed Python 3.12, uv 0.9.26, and actions-core 1.0.2 environment; it records both worker identities and checks that v2 completes while the blocked v1 Run still returns its immutable snapshot. It also verifies the frozen parent executable and natural worker cleanup. The source-mode focused run passes, but native five-case acceptance is **NOT RUN** until a hosted run produces a new five-case receipt. Run 38042374430 remains historical four-case evidence and must not be relabeled or replaced by this change. Do not infer frozen drain behavior from malformed-reload rollback or source-mode pytest.
 
 ## Release process
 

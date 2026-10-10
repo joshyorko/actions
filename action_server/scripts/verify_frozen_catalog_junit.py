@@ -1,4 +1,4 @@
-"""Fail closed unless all frozen rollback cases ran and passed without skips."""
+"""Fail closed unless all frozen catalog rollback and drain cases passed."""
 
 from __future__ import annotations
 
@@ -24,6 +24,10 @@ EXPECTED_CASES = {
         "tests.action_server_tests.test_cli_live_reload_multi_package",
         "test_failed_watched_reload_keeps_both_packages_and_recovers",
     ),
+    (
+        "tests.action_server_tests.test_cli_successful_generation_drain",
+        "test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
+    ),
 }
 
 
@@ -41,9 +45,9 @@ def main() -> int:
     failures = sum(len(case.findall("failure")) for case in cases)
     errors = sum(len(case.findall("error")) for case in cases)
     skipped = sum(len(case.findall("skipped")) for case in cases)
-    if names != EXPECTED_CASES or len(cases) != 4 or failures or errors or skipped:
+    if names != EXPECTED_CASES or len(cases) != 5 or failures or errors or skipped:
         raise SystemExit(
-            "frozen rollback JUnit result did not contain exactly four passing expected cases"
+            "frozen catalog JUnit result did not contain exactly five passing expected cases"
         )
     args.output.write_text(
         json.dumps(
