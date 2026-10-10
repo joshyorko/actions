@@ -7,6 +7,26 @@ import sys
 from pathlib import Path
 
 
+def _rename_with_native_flags(
+    source: Path, destination: Path, symbol: str, cwd_fd: int, flags: int
+) -> None:
+    library = ctypes.CDLL(None, use_errno=True)
+    rename = getattr(library, symbol, None)
+    if rename is None:
+        raise OSError(errno.ENOTSUP, "Atomic no-replace rename is unavailable")
+    rename.argtypes = [
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    ]
+    rename.restype = ctypes.c_int
+    if rename(cwd_fd, os.fsencode(source), cwd_fd, os.fsencode(destination), flags):
+        error = ctypes.get_errno()
+        raise OSError(error, "Atomic no-replace directory publication failed")
+
+
 def rename_directory_no_replace(source: Path, destination: Path) -> None:
     """Publish a complete same-filesystem directory without replacing any entry.
 
@@ -20,26 +40,9 @@ def rename_directory_no_replace(source: Path, destination: Path) -> None:
         # https://docs.python.org/3/library/os.html#os.rename
         os.rename(source, destination)
         return
-
     if sys.platform == "linux":
-        symbol, cwd_fd, exclusive = "renameat2", -100, 1  # RENAME_NOREPLACE
+        _rename_with_native_flags(source, destination, "renameat2", -100, 1)
     elif sys.platform == "darwin":
-        symbol, cwd_fd, exclusive = "renameatx_np", -2, 4  # RENAME_EXCL
+        _rename_with_native_flags(source, destination, "renameatx_np", -2, 4)
     else:
         raise OSError(errno.ENOTSUP, "Atomic no-replace publication is unsupported")
-
-    library = ctypes.CDLL(None, use_errno=True)
-    rename = getattr(library, symbol, None)
-    if rename is None:
-        raise OSError(errno.ENOTSUP, "Atomic no-replace rename is unavailable")
-    rename.argtypes = [
-        ctypes.c_int,
-        ctypes.c_char_p,
-        ctypes.c_int,
-        ctypes.c_char_p,
-        ctypes.c_uint,
-    ]
-    rename.restype = ctypes.c_int
-    if rename(cwd_fd, os.fsencode(source), cwd_fd, os.fsencode(destination), exclusive):
-        error = ctypes.get_errno()
-        raise OSError(error, "Atomic no-replace directory publication failed")
