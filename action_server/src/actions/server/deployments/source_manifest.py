@@ -3,6 +3,10 @@
 This pure policy boundary cannot prove how entries were acquired. In particular,
 callers remain responsible for no-follow confinement, source mutation checks,
 and accurate regular-file/link/hardlink/special-file classification.
+
+Source policy version 1 requires already-NFC POSIX-relative portable paths,
+explicit selected and protected inputs, and regular-file modes normalized to
+0644 or 0755. Empty directories are omitted from the canonical inventory.
 """
 
 from __future__ import annotations
@@ -11,7 +15,7 @@ import hashlib
 import json
 import unicodedata
 from dataclasses import dataclass
-from typing import Iterable, TypeVar
+from typing import Iterable, Iterator, TypeVar
 
 from actions.server._portable_paths import (
     is_portable_path_component,
@@ -25,6 +29,7 @@ MAX_TOTAL_BYTES = 500 * 1024 * 1024
 MAX_PATH_DEPTH = 64
 MAX_PATH_BYTES = 4096
 MAX_COMPONENT_BYTES = 255
+SOURCE_POLICY_VERSION = 1
 _T = TypeVar("_T")
 
 
@@ -105,16 +110,13 @@ def validate_proposed_inventory(
     inputs explicitly. This function performs no filesystem access and makes
     no source snapshot, trust, Package Revision, or Runtime Plan claim.
     """
-    supplied_entries = _bounded_values(entries, "entries")
-    protected_names = _bounded_values(protected_input_names, "protected inputs")
-
     declared: dict[str, str] = {}
     original_prefixes: dict[str, str] = {}
     path_kinds: dict[str, str] = {}
     files: list[ProposedInventoryEntry] = []
     total_bytes = 0
 
-    for entry in supplied_entries:
+    for entry in _bounded_values(entries, "entries"):
         if not isinstance(entry, SuppliedSourceEntry):
             raise TypeError("entries must be SuppliedSourceEntry values")
         parts = _validated_parts(entry.path)
@@ -148,9 +150,14 @@ def validate_proposed_inventory(
                 raise ValueError("directory entries cannot carry content or mode")
             continue
 
-        if type(entry.content) is not bytes:
+        if not isinstance(entry.content, bytes):
             raise ValueError("regular-file entries require supplied bytes")
-        if type(entry.mode) is not int or entry.mode < 0 or entry.mode > 0o7777:
+        if (
+            isinstance(entry.mode, bool)
+            or not isinstance(entry.mode, int)
+            or entry.mode < 0
+            or entry.mode > 0o7777
+        ):
             raise ValueError("regular-file mode must be POSIX permission bits")
         if entry.mode & 0o7000:
             raise ValueError("privileged file mode bits are forbidden")
@@ -171,7 +178,7 @@ def validate_proposed_inventory(
         )
 
     selected_files = {entry.path for entry in files}
-    for protected_name in protected_names:
+    for protected_name in _bounded_values(protected_input_names, "protected inputs"):
         _validated_parts(protected_name)
         if protected_name not in selected_files:
             raise ValueError(
@@ -183,20 +190,19 @@ def validate_proposed_inventory(
     return ProposedInventoryValidation(tuple(files), canonical_bytes)
 
 
-def _bounded_values(values: Iterable[_T], label: str) -> tuple[_T, ...]:
+def _bounded_values(values: Iterable[_T], label: str) -> Iterator[_T]:
     if isinstance(values, (str, bytes)):
         raise TypeError(f"{label} must be an iterable of separate values")
-    bounded = []
-    for value in values:
-        if len(bounded) == MAX_ENTRIES:
+    for count, value in enumerate(values):
+        if count >= MAX_ENTRIES:
             raise ValueError(f"{label} exceed the entry limit")
-        bounded.append(value)
-    return tuple(bounded)
+        yield value
 
 
 def _encode_inventory(entries: tuple[ProposedInventoryEntry, ...]) -> bytes:
     return json.dumps(
         {
+            "sourcePolicyVersion": SOURCE_POLICY_VERSION,
             "entries": [
                 {
                     "path": entry.path,
@@ -205,7 +211,7 @@ def _encode_inventory(entries: tuple[ProposedInventoryEntry, ...]) -> bytes:
                     "sha256": entry.sha256,
                 }
                 for entry in entries
-            ]
+            ],
         },
         ensure_ascii=False,
         separators=(",", ":"),

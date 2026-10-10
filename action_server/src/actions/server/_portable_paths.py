@@ -14,9 +14,7 @@ _WINDOWS_RESERVED_NAMES = {
     "CONOUT$",
 }
 _WINDOWS_RESERVED_NAMES.update(
-    f"{prefix}{digit}"
-    for prefix in ("COM", "LPT")
-    for digit in "123456789¹²³"
+    f"{prefix}{digit}" for prefix in ("COM", "LPT") for digit in "123456789¹²³"
 )
 _WINDOWS_INVALID_CHARACTERS = frozenset('<>:"|?*')
 
