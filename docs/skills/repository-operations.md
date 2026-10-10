@@ -1226,6 +1226,11 @@ address the first failure before treating lint as green. The configured
 `devutils` gates in `developer/toolkit.py` run `pytest tests` and `ruff check
 src tests`.
 
+Runtime's `inv lint` also checks test-file formatting with
+`ruff format --check --config ../devutils/ruff.toml`. When validating a focused
+Runtime test change, use that configuration as well as `ruff check`; passing
+the tests or the lint rules alone does not establish formatter acceptance.
+
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
 `uvx --from poetry==2.1.1 poetry check --lock`. Run the lock command a second

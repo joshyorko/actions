@@ -248,9 +248,9 @@ def test_candidate_wheels_follow_checked_out_versions_and_validate_metadata(
         )
 
     def fake_poetry(command, *, cwd, **kwargs):
-        project = tomllib.loads((Path(cwd) / "pyproject.toml").read_text())[
-            "tool"
-        ]["poetry"]
+        project = tomllib.loads((Path(cwd) / "pyproject.toml").read_text())["tool"][
+            "poetry"
+        ]
         distribution = project["name"]
         version = project["version"]
         if command[1] == "version":
@@ -258,9 +258,7 @@ def test_candidate_wheels_follow_checked_out_versions_and_validate_metadata(
 
         wheelhouse = Path(command[command.index("--output") + 1])
         filename_distribution = distribution.replace("-", "_")
-        wheel = wheelhouse / (
-            f"{filename_distribution}-{version}-py3-none-any.whl"
-        )
+        wheel = wheelhouse / (f"{filename_distribution}-{version}-py3-none-any.whl")
         metadata_path = f"{filename_distribution}-{version}.dist-info/METADATA"
         metadata_version = (
             core_metadata_version if distribution == "actions-core" else version
