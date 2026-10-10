@@ -68,6 +68,34 @@ def test_cli_rejects_existing_receipt_before_creating_supervisor_state(tmp_path)
     assert not (tmp_path / "cli-supervisor").exists()
 
 
+def test_cli_help_is_available_before_linux_execution_guard(monkeypatch, capsys):
+    harness = _harness()
+    monkeypatch.setattr(harness.sys, "platform", "darwin")
+
+    with pytest.raises(SystemExit) as exit_info:
+        harness.main(["--help"])
+
+    assert exit_info.value.code == 0
+    assert "candidate-wheel" in capsys.readouterr().out
+
+
+def test_cli_refuses_existing_receipt_before_linux_execution_guard(
+    tmp_path, monkeypatch, capsys
+):
+    harness = _harness()
+    monkeypatch.setattr(harness.sys, "platform", "darwin")
+    receipt_path = tmp_path / "previous-pass.json"
+    original = b'{"acceptance_status":"PASS","source_sha":"historical"}\n'
+    receipt_path.write_bytes(original)
+
+    result = harness.main(["--receipt", str(receipt_path)])
+
+    assert result == 1
+    assert "existing acceptance receipt" in capsys.readouterr().err
+    assert receipt_path.read_bytes() == original
+    assert not (tmp_path / "cli-supervisor").exists()
+
+
 def test_historical_candidate_receipt_keeps_failed_wrapper_cell():
     receipt = json.loads(HISTORICAL_RECEIPT.read_text(encoding="utf-8"))
 
@@ -479,6 +507,7 @@ def test_supervisor_cleanup_failure_demotes_existing_receipt(tmp_path):
     }
 
 
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux process-supervisor contract")
 def test_owned_linux_process_accepts_path_arguments(tmp_path):
     harness = _harness()
     result = harness.run_owned_process(
@@ -505,6 +534,19 @@ def test_acceptance_fails_closed_before_side_effects_on_non_linux(monkeypatch):
     assert harness.main(["--receipt", "/tmp/unused-dakota-receipt.json"]) == 2
 
 
+def test_hidden_supervisor_fails_closed_on_non_linux(monkeypatch):
+    harness = _harness()
+    monkeypatch.setattr(harness.sys, "platform", "darwin")
+    monkeypatch.setattr(
+        harness,
+        "_supervisor_main",
+        lambda: pytest.fail("unsupported platform reached the process supervisor"),
+    )
+
+    assert harness.main(["--_supervisor"]) == 2
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux process-group cleanup proof")
 def test_total_timeout_terminates_owned_descendant_processes(tmp_path):
     harness = _harness()
     pid_file = tmp_path / "child.pid"
