@@ -2422,6 +2422,12 @@ skipped because no task-owned managed provider is configured is NOT RUN, not
 acceptance evidence. This exercises one selected package through the current
 Runtime consumer; it does not prove complete source selection, source
 authorization, compiler/admission trust, or any package identity API.
+On 2026-10-10 the immutable consumer-gate candidate advanced from
+`f7c6ed61f24fd9e98d1465c83042c5446466311b`, which predates this test and is
+not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`
+(tree `fb04c136e5e1a7ce709649b13cf895d84ac93c1a`). The earlier local gated
+collection had no task-owned RCC provider configured and remains NOT RUN; the
+new pin does not retroactively change that result.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.

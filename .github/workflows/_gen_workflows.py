@@ -940,9 +940,12 @@ candidate_tree = git_value(candidate, "rev-parse", "HEAD^{tree}")
 control_sha = git_value(control, "rev-parse", "HEAD")
 control_tree = git_value(control, "rev-parse", "HEAD^{tree}")
 expected_candidate_sha = os.environ.get("EXPECTED_CANDIDATE_SHA")
+expected_candidate_tree = os.environ.get("EXPECTED_CANDIDATE_TREE")
 expected_control_sha = os.environ.get("EXPECTED_CONTROL_SHA")
 if candidate_sha != expected_candidate_sha:
     issues.append("candidate_checkout_sha_mismatch")
+if candidate_tree != expected_candidate_tree:
+    issues.append("candidate_checkout_tree_mismatch")
 if control_sha != expected_control_sha:
     issues.append("control_checkout_sha_mismatch")
 if source.get("commit") != candidate_sha:
@@ -1265,7 +1268,8 @@ class ActionServerRccProviderRollback(BaseWorkflow):
     target = "actions_runtime_rcc_provider_rollback.yml"
     project_name = "action_server"
     rcc_sha256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    candidate_sha = "f7c6ed61f24fd9e98d1465c83042c5446466311b"
+    candidate_sha = "d376399f497fb98f47062e493219e063db8f08e1"
+    candidate_tree = "fb04c136e5e1a7ce709649b13cf895d84ac93c1a"
 
     def __init__(self):
         super().__init__()
@@ -1340,18 +1344,22 @@ class ActionServerRccProviderRollback(BaseWorkflow):
                 "shell": "bash",
                 "env": {
                     "CANDIDATE_SHA": self.candidate_sha,
+                    "CANDIDATE_TREE": self.candidate_tree,
                     "CONTROL_SHA": "${{ github.sha }}",
                 },
                 "run": """set -Eeuo pipefail
 actual=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD)
 test "$actual" = "$CANDIDATE_SHA"
+actual_tree=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD^{tree})
+test "$actual_tree" = "$CANDIDATE_TREE"
 control=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD)
 test "$control" = "$CONTROL_SHA"
 printf 'RCC_ROLLBACK_CANDIDATE_SHA=%s\\n' "$actual" >> "$GITHUB_ENV"
+printf 'RCC_ROLLBACK_CANDIDATE_TREE=%s\\n' "$actual_tree" >> "$GITHUB_ENV"
 printf 'RCC_ROLLBACK_CONTROL_SHA=%s\\n' "$control" >> "$GITHUB_ENV"
 printf 'control_sha=%s\\n' "$control"
 printf 'candidate_sha=%s\\n' "$actual"
-printf 'candidate_tree=%s\\n' "$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD^{tree})"
+printf 'candidate_tree=%s\\n' "$actual_tree"
 """,
             },
             *self.setup_python(),
@@ -1609,6 +1617,7 @@ PY
                     "EVIDENCE_DIR": evidence_dir,
                     "JUNIT_PATH": junit_path,
                     "EXPECTED_CANDIDATE_SHA": self.candidate_sha,
+                    "EXPECTED_CANDIDATE_TREE": self.candidate_tree,
                     "EXPECTED_CONTROL_SHA": "${{ github.sha }}",
                     "EXPECTED_RCC_SHA256": self.rcc_sha256,
                     "ACTION_SERVER_RCC_DEFAULT": "${{ github.workspace }}/candidate/action_server/src/actions/server/bin/rcc-18.19.3",

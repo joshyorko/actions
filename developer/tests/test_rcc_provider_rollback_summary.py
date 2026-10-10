@@ -206,6 +206,7 @@ def _fixture(tmp_path: Path):
         "EVIDENCE_DIR": str(evidence),
         "JUNIT_PATH": str(junit),
         "EXPECTED_CANDIDATE_SHA": candidate_sha,
+        "EXPECTED_CANDIDATE_TREE": candidate_tree,
         "EXPECTED_CONTROL_SHA": control_sha,
         "EXPECTED_RCC_SHA256": rcc_sha,
         "RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE": "0",
@@ -235,6 +236,7 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
     summary = json.loads((evidence / "acceptance-summary.json").read_text())
     assert summary["admission"] == {"passed": True, "issues": []}
     assert summary["source"]["receipt_source_matches_candidate"] is True
+    assert len(summary["source"]["candidate_tree"]) == 40
     assert summary["source"]["runtime_module_hashes_match_candidate"] is True
     assert summary["source"]["runtime_module_origins_match_candidate"] is True
     assert summary["test"]["provider_operations_unchanged"] is True
@@ -270,6 +272,7 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
         ("wrong_test_identity", "unexpected_test_identity"),
         ("missing_receipt", "receipt_status_not_pass"),
         ("stale_source", "receipt_source_commit_mismatch"),
+        ("candidate_tree_mismatch", "candidate_checkout_tree_mismatch"),
         ("stale_staged_source", "staged_consumer_receipt_missing_or_invalid"),
         ("cleanup_failure", "forced_stop_was_used_or_unknown"),
         ("unobserved_cleanup", "forced_cleanup_return_code_unobserved"),
@@ -338,6 +341,8 @@ def test_exact_summary_script_rejects_incomplete_receipt(
         (evidence / "lifecycle-receipt.json").unlink()
     elif mutation == "stale_source":
         receipt["source"]["commit"] = "0" * 40
+    elif mutation == "candidate_tree_mismatch":
+        env["EXPECTED_CANDIDATE_TREE"] = "0" * 40
     elif mutation == "stale_staged_source":
         staged_receipt = json.loads(staged_receipt_path.read_text(encoding="utf-8"))
         staged_receipt["source_tree"] = "0" * 40
