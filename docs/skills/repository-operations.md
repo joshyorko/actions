@@ -2327,7 +2327,8 @@ process cleanup are bounded; incomplete descendant or pipe cleanup fails the
 observation. The child environment keeps private HOME/cache/temp directories
 and forwards only configured HTTP(S)/ALL proxy settings and CA trust selectors,
 while merging existing `NO_PROXY` spellings with loopback exclusions. TLS
-verification remains enabled; other ambient host variables are not forwarded.
+verification remains enabled. The runner retains its small process-variable
+allowlist; unrelated ambient host variables are not forwarded.
 
 This is a controlled fixture observation, not arbitrary package admission or a
 security sandbox. The pure compiler result continues to report
