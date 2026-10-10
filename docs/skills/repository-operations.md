@@ -2614,6 +2614,30 @@ Deployment schema or replace wheel, frozen, TLS or failure-recovery acceptance.
 Inspect the server log even when pytest passes: driver transaction warnings can
 expose a missing regression despite successful state assertions.
 
+## Deployment canonical values (Slice 1a)
+
+The bounded `actions-canonical-json/v1` implementation lives in
+`actions.server.deployments`: it validates strict UTF-8 JSON before NFC
+normalization, rejects duplicate/normalized-colliding keys, invalid Unicode,
+non-finite and binary64-overflow/underflow numbers, and exact integral values
+outside the interoperable safe-integer range, then delegates byte serialization
+to the exact `rfc8785==0.1.4` dependency. Its immutable reference models validate
+canonical UUID/hash syntax and compare only explicitly supplied Workspace or
+Package Revision scope. Frozen Pydantic refs and scalar IDs revalidate existing
+instances; scope helpers revalidate both operands before comparing them. These
+pure values establish neither reference existence
+nor caller authorization, and do not implement database, resolver, command
+hash, adapter-payload, or registry behavior. Keep RFC 8785 serializer vectors
+separate from this stricter accepted-input domain. The dependency wheel SHA-256,
+Apache-2.0 license, matching upstream-tag source hashes, and the limitation that
+PyPI exposed no signed provenance attestation are recorded in
+[`deployment-canonical-values-slice1a-20261010.md`](../program/evidence/deployment-canonical-values-slice1a-20261010.md).
+Read non-ASCII JSON golden fixtures with an explicit `encoding="utf-8"` rather
+than `Path.read_text()`'s locale default so expected Unicode values are stable
+across Windows and POSIX test runners.
+
+## Frozen Runtime acceptance
+
 For frozen Runtime acceptance, bind the candidate commit and tree separately
 from the native build commit and tree. If the binary was built from a synthetic
 merge whose tree matches the candidate, record both identities and verify the
