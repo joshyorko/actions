@@ -1,0 +1,111 @@
+{
+  "id": "program-amendment-20261010T0501Z",
+  "observed_at_utc": "2026-10-10T05:01:12Z",
+  "summary": "The 04:41 convergence paragraph below remains a historical snapshot: its blank-credential CI failures are immutable evidence, but the hosted Robocorp prerequisite is retired by explicit user steering. The separately filed P0 #279 regression gate is outside the original 54 retained issue contracts; its assigned turn is accepted/in-progress, with no source checkpoint reported here. The replacement local CLI/request-signing contract is not yet admitted on the current integration head. The #129 interface criterion is accepted for bounded #130 schema/fixture work only; implementation awaits supervisor dispatch.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": false,
+    "raw_contracts_or_historical_archives_changed": false,
+    "live_original_54_state_at_observation": {
+      "open": 53,
+      "closed_accepted_issue_210": 1
+    }
+  },
+  "supplemental_issue_gates": [
+    {
+      "issue": 279,
+      "title": "Preserve sibling packages during multi-directory actions-sync startup",
+      "status": "OPEN",
+      "priority": "P0",
+      "url": "https://github.com/joshyorko/actions/issues/279",
+      "accounting_position": "outside_original_54_issue_accounting",
+      "parent_issue": 101,
+      "parent_relationship": "coordination and tracking only; #279 states it does not block #129/#130/#135 design work",
+      "scope": "For one start invocation with repeated --dir values, synchronization should treat the full supplied directory set as desired state. Preserve sequential-import behavior and test actions omitted from the full set. Excludes managed-RCC rollback, atomic generation, and last-good runtime claims.",
+      "reproduction": {
+        "source_commit": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+        "description": "Sequential imports retain both actions; one start --actions-sync=true --dir=A --dir=B disables package A action while leaving package B enabled.",
+        "path": "evidence/pr273-multipackage-disable-reproduction-84b8c70a.md",
+        "sha256": "c5a68660a44b10be90db8baf2bb6bc4ce56df47574fcc1d35409e7a45bb6438f"
+      },
+      "issue_readback": {
+        "path": "evidence/issue-279-readback-20261010T0455Z.json",
+        "sha256": "dbb9e98f024a20a75fb713e57a57df8f5a28b663c3f59be73a15e1ecd031e4d4",
+        "observed_state": "OPEN"
+      },
+      "implementation_status": "Turn accepted/in progress; no source checkpoint or test result included in this snapshot",
+      "implementation_turn": "01a1242e-d1fa-7a73-b4dd-d9c66e029e55"
+    }
+  ],
+  "retired_hosted_gates": [
+    {
+      "name": "ACTION_SERVER_TEST_ACCESS_CREDENTIALS / ACTION_SERVER_TEST_HOSTNAME hosted cloud test configuration",
+      "disposition": "RETIRED_BY_EXPLICIT_USER_STEERING",
+      "user_steering": "we are not using robocorp stuff lose i if we don't need it",
+      "replacement_contract": "The cloud list-organizations test invokes the public CLI while replacing only actions_http.get, and verifies request URL, HMAC authorization, JSON output, and secret non-disclosure.",
+      "source_commit": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
+      "source_tree": "f99ff2b3927aa8fa093beae67c031e3444d0d47e",
+      "source_parent": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+      "remote_head_verified": true,
+      "focused_test_result": "1 passed in 0.16s with both former variables unset.",
+      "integration_status": "Source pushed; integration/current-head CI not run.",
+      "hosted_acceptance": "NOT_RUN; no Control Room, Robocorp service, or external-network pass is claimed.",
+      "evidence_path": "evidence/hosted-robocorp-gate-retirement-20261010T0455Z.json",
+      "evidence_sha256": "d2c7039c93b9dd972abd4ff4c975d9e6e9e2160f91b361b31b7114b171300ccd"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/pr273-multipackage-disable-reproduction-84b8c70a.md",
+      "size_bytes": 3867,
+      "sha256": "c5a68660a44b10be90db8baf2bb6bc4ce56df47574fcc1d35409e7a45bb6438f"
+    },
+    {
+      "path": "evidence/issue-279-readback-20261010T0455Z.json",
+      "size_bytes": 2651,
+      "sha256": "dbb9e98f024a20a75fb713e57a57df8f5a28b663c3f59be73a15e1ecd031e4d4"
+    },
+    {
+      "path": "evidence/hosted-robocorp-gate-retirement-20261010T0455Z.json",
+      "size_bytes": 2271,
+      "sha256": "d2c7039c93b9dd972abd4ff4c975d9e6e9e2160f91b361b31b7114b171300ccd"
+    },
+    {
+      "path": "evidence/pr129-pr130-contract-review-20261010T0455Z.md",
+      "size_bytes": 6319,
+      "sha256": "2dd2d86a93ed3bf54e9a1067d08f7f6f5dd04eeb60cdb56d4ad6a737fd5e3bb4"
+    },
+    {
+      "path": "evidence/issue-130-criterion-acceptance-6094007327.json",
+      "size_bytes": 5243,
+      "sha256": "a85823f5ce3e177aed1b29364fa4022692187cfd85471f2ae7dd5e60b9f8941f"
+    }
+  ],
+  "upstream_disposition": "none; both the #279 behavior and test-gate configuration are local Actions concerns.",
+  "accepted_scoped_criteria": [
+    {
+      "criterion_id": "129:deployment-reference-envelope",
+      "owner_issue": 129,
+      "status": "ACCEPTED_FOR_130_SCHEMA_ONLY",
+      "consumer_issue": 130,
+      "consumer_slice": "130-schema",
+      "description": "Full Workspace-scoped service references identify Package and immutable revision; RuntimePlanRef identifies the owning Package Revision and immutable plan digest/schema/compatibility identity. Portable artifact payloads must not include Workspace installation IDs or deployed values. Logical binding references remain separate from deployed values; declared-plan selection is explicit with no fallback; Run/retry pinning remains owned by #83.",
+      "decision": "Accepted in the Cloud integration owner comment on #130 at 2026-10-10T05:00:48Z. This is only the interface prerequisite for bounded schema/fixture work; the paused #129 packet and #129 production acceptance remain unapproved. #143 retains dynamic adapter admission after #134; #135/#136 implementation order is unchanged.",
+      "consumer_slice_description": "Bounded immutable Package Revision schema and deterministic fixtures",
+      "consumer_slice_status": "READY_FOR_BOUNDED_SCHEMA_FIXTURE; supervisor dispatch pending; no production/full #130 acceptance",
+      "gate_scope": "Accepted interface prerequisite only for bounded #130 schema/fixture work; no full #129 API, migration, production, Run/Attempt storage, or #143 dynamic-adapter admission acceptance.",
+      "superseded_issue_level_prerequisites": [
+        129
+      ],
+      "consumer_issue_reason": "The named #129 deployment-reference-envelope criterion is accepted only as an interface prerequisite for the bounded 130-schema slice. Full #129 production and full #130 acceptance remain open; #135/#136 implementation order is unchanged.",
+      "consumer_issue_next_action": "Await the existing Devsy coordinator supervisor dispatch, then implement the bounded immutable Package Revision schema and deterministic fixtures against accepted criterion 129:deployment-reference-envelope; keep full #129 production, #130 acceptance and the #135/#136 order unchanged.",
+      "evidence_path": "evidence/issue-130-criterion-acceptance-6094007327.json",
+      "evidence_sha256": "a85823f5ce3e177aed1b29364fa4022692187cfd85471f2ae7dd5e60b9f8941f",
+      "owner_authority_url": "https://github.com/joshyorko/actions/issues/130#issuecomment-6094007327"
+    }
+  ]
+}

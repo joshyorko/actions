@@ -1,0 +1,37 @@
+{
+  "id": "program-amendment-20261010T0503Z",
+  "observed_at_utc": "2026-10-10T05:03:14Z",
+  "supersedes_current_worker_observation": "program-amendment-20261010T0501Z",
+  "summary": "A 05:03 coordination read supersedes the 05:01 dispatch-status statement: the requested #126 and #279 Devsy turns failed before execution because the selected gpt-6.1-luna model was unsupported for ChatGPT; neither has an implementation checkpoint or test result. Await heartbeat discovery of supported models before v2 redispatch. The existing supervisor remains active; #130 schema work still awaits supervisor dispatch. The accepted #129 interface criterion remains limited to bounded #130 schema/fixture work.",
+  "worker_dispatch_observation": {
+    "observation_source": "Root coordination status message in the active task thread; this is a coordination report, not a native executor readback.",
+    "observation_time_utc": "2026-10-10T05:03:14Z",
+    "model": "gpt-6.1-luna",
+    "failure": "Model unsupported for ChatGPT; both requested turns failed before execution.",
+    "turns": [
+      {
+        "issue": 126,
+        "turn": "01a1242e-7ff8-75f3-9234-e027400a6fbb",
+        "status": "FAILED_BEFORE_EXECUTION"
+      },
+      {
+        "issue": 279,
+        "turn": "01a1242e-d1fa-7a73-b4dd-d9c66e029e55",
+        "status": "FAILED_BEFORE_EXECUTION"
+      }
+    ],
+    "next_action": "Heartbeat must discover supported model identities before v2 redispatch; do not count either lane as active implementation.",
+    "supervisor_status": "ACTIVE_REPORTED"
+  },
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": false,
+    "raw_contracts_or_historical_archives_changed": false
+  },
+  "accepted_scoped_criteria": [],
+  "upstream_disposition": "none; these are Actions orchestration and test-gate concerns."
+}

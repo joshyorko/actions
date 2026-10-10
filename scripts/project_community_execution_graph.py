@@ -34,7 +34,9 @@ AMENDMENT_NOTE = (
     "Cloud gates blocked; E is beginning #100-B's Python roundtrip on F's shared fixture. #126 PR265 generator repair has "
     "49 focused and four template tests reported PASS locally; clean-wheel is NOT_RUN and hosted checks are pending. "
     "Common #83 Run/Attempt, #129 Workspace Deployment/authorization, #130 Package Revision/capability and #135 compiler "
-    "criteria remain unaccepted. Integration is 446ff1b3; PR254 is a docs-only merge and does not complete #100. See "
+    "criteria were unaccepted at the 2026-10-09T21:02Z snapshot. The 2026-10-10T05:01Z supplement accepts only the named "
+    "#129 deployment-reference-envelope criterion for bounded #130 schema/fixture work; full #129 production acceptance "
+    "remains open. Integration is 446ff1b3; PR254 is a docs-only merge and does not complete #100. See "
     "evidence/current-worker-inventory-20261009T2102Z.json and "
     "evidence/canvas-common-api-authorization-seams-20261009.md. Historical untyped edges remain audit provenance; "
     "all 54 retained issue contracts and raw states are unchanged."
@@ -58,9 +60,63 @@ def _is_canvas_parent_or_child_edge(source: int, target: int) -> str | None:
     return None
 
 
+def apply_named_scoped_criteria(graph: dict, ledger: dict) -> dict:
+    """Apply owner-accepted criterion gates without promoting whole issues."""
+    amendments = ledger.get("supplemental_program_amendments", [])
+    for amendment in amendments:
+        for decision in amendment.get("accepted_scoped_criteria", []):
+            model = graph["relationship_model"]
+            issue = decision["owner_issue"]
+            consumer_slice = decision["consumer_slice"]
+            criterion_id = decision["criterion_id"]
+            issue_row = next(row for row in graph["issues"] if row["issue"] == decision["consumer_issue"])
+            issue_row["unresolved_open_issue_dependencies"] = [
+                dependency for dependency in issue_row["unresolved_open_issue_dependencies"]
+                if dependency not in decision.get("superseded_issue_level_prerequisites", [])
+            ]
+            model["execution_prerequisites"] = [
+                edge for edge in model["execution_prerequisites"]
+                if not (
+                    edge["consumer"] == decision["consumer_issue"]
+                    and edge["prerequisite"] in decision.get("superseded_issue_level_prerequisites", [])
+                )
+            ]
+            criterion = {
+                "id": criterion_id,
+                "owner_issue": issue,
+                "description": decision["description"],
+                "status": decision["status"],
+                "evidence_basis": decision["decision"],
+            }
+            model["criteria"] = [item for item in model["criteria"] if item["id"] != criterion_id]
+            model["criteria"].append(criterion)
+            slice_row = {
+                "id": consumer_slice,
+                "issue": decision["consumer_issue"],
+                "description": decision["consumer_slice_description"],
+                "status": decision["consumer_slice_status"],
+            }
+            model["execution_slices"] = [item for item in model["execution_slices"] if item["id"] != consumer_slice]
+            model["execution_slices"].append(slice_row)
+            gate = {
+                "prerequisite": criterion_id,
+                "consumer_slice": consumer_slice,
+                "scope": decision["gate_scope"],
+            }
+            model["scoped_execution_gates"] = [
+                edge for edge in model["scoped_execution_gates"]
+                if not (edge["prerequisite"] == criterion_id and edge["consumer_slice"] == consumer_slice)
+            ]
+            model["scoped_execution_gates"].append(gate)
+            issue_row["reason"] = decision["consumer_issue_reason"]
+            issue_row["next_bounded_action"] = decision["consumer_issue_next_action"]
+    return graph
+
+
 def upgrade_relationships(graph: dict, ledger: dict) -> dict:
     """Migrate one legacy projection; schema-v2 data is authoritative thereafter."""
     if graph.get("relationship_schema_version") == 2 and graph.get("relationship_amendment") == "canvas-execution-graph-20261009-v4":
+        graph = apply_named_scoped_criteria(graph, ledger)
         validate_graph(graph, ledger)
         return graph
     if graph.get("relationship_schema_version") == 2 and graph.get("relationship_amendment") not in (None, "canvas-execution-graph-20261009-v1", "canvas-execution-graph-20261009-v2", "canvas-execution-graph-20261009-v3"):
@@ -117,7 +173,7 @@ def upgrade_relationships(graph: dict, ledger: dict) -> dict:
     # These contracts consume bounded criteria, not completion of the entire
     # upstream issue. Preserve the historical edges below for audit, while
     # recording the active prerequisite in the slice DAG.
-    for consumer, prerequisites in {71: {83, 99, 100, 129, 130, 135}, 99: {97, 98}, 126: {125}, 127: {99, 100}}.items():
+    for consumer, prerequisites in {71: {83, 99, 100, 129, 130, 135}, 99: {97, 98}, 126: {125}, 127: {99, 100}, 130: {129}}.items():
         rows[consumer]["unresolved_open_issue_dependencies"] = [
             issue for issue in rows[consumer]["unresolved_open_issue_dependencies"]
             if issue not in prerequisites
@@ -168,6 +224,7 @@ def upgrade_relationships(graph: dict, ledger: dict) -> dict:
         {"id": "126-source-protocol", "issue": 126, "description": "Bounded source-protocol proof; not SDK/template acceptance", "status": "ACTIVE"},
         {"id": "71-local", "issue": 71, "description": "Local generated application vertical on common Package/Deployment/Run/compiler services", "status": "NOT_IMPLEMENTED"},
         {"id": "71-host", "issue": 71, "description": "Optional host/distribution acceptance after portable product behavior", "status": "NOT_IMPLEMENTED"},
+        {"id": "130-schema", "issue": 130, "description": "Bounded immutable Package Revision schema and deterministic fixtures", "status": "READY_FOR_BOUNDED_SCHEMA_FIXTURE; assigned to DevsySol; no production/full #130 acceptance"},
     ]
     criteria = [
         {"id": "125:public-package-boundary", "owner_issue": 125, "description": "Relevant public package and MCP resource boundary", "status": "PARTIAL_NOT_ACCEPTED", "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR128 foundation merged but full #125 acceptance remains open."},
@@ -175,6 +232,7 @@ def upgrade_relationships(graph: dict, ledger: dict) -> dict:
         {"id": "98:canvas-artifact", "owner_issue": 98, "description": "Consumed Canvas artifact, manifest and build criteria", "status": "PARTIAL_NOT_ACCEPTED", "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR115 foundation merged and acceptance gates remain open."},
         {"id": "83:run-attempt-authority", "owner_issue": 83, "description": "Minimum local Run/Attempt ownership and lifecycle semantics", "status": "NOT_IMPLEMENTED", "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted Run/Attempt implementation recorded."},
         {"id": "129:deployment-binding", "owner_issue": 129, "description": "Minimum local Deployment identity and bindings", "status": "PARTIAL_NOT_ACCEPTED", "evidence_basis": "Graph stage INTEGRATED; retained state IMPLEMENTED_UNVERIFIED; PR250 contains a design-only probe, not production Deployment acceptance."},
+        {"id": "129:deployment-reference-envelope", "owner_issue": 129, "description": "Interface prerequisite for #130 schema work: full Workspace/Package/immutable revision references; package-scoped RuntimePlanRef digest plus schema/compatibility identity; logical binding references separated from deployed values; explicit declared-plan selection with no fallback; Run/retry pinning remains owned by #83.", "status": "ACCEPTED_FOR_130_SCHEMA_ONLY", "evidence_basis": "Root architecture decision 2026-10-10, based on live #129/#130 bodies, merged PR250 design/probe, and independent contract review; does not approve the paused full #129 packet or production acceptance. See evidence/pr129-pr130-contract-review-20261010T0455Z.md."},
         {"id": "130:package-revision", "owner_issue": 130, "description": "Immutable generated Package Revision contract", "status": "NOT_IMPLEMENTED", "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted Package Revision implementation recorded."},
         {"id": "135:compiler", "owner_issue": 135, "description": "Minimum package-to-revision/compiler contract", "status": "NOT_IMPLEMENTED", "evidence_basis": "Graph stage BLOCKED; retained state NOT_STARTED; no accepted compiler implementation recorded."},
         {"id": "91:authorization-boundary", "owner_issue": 91, "description": "Host-mode authorization boundary when protected/share functionality is exposed", "status": "PARTIAL_NOT_ACCEPTED", "evidence_basis": "Graph stage INTEGRATED; retained state NOT_STARTED; PR250 is a bounded SDK/auth foundation, while public authorization remains open."},
@@ -200,6 +258,7 @@ def upgrade_relationships(graph: dict, ledger: dict) -> dict:
         {"prerequisite": "71-local", "consumer_slice": "71-host", "scope": "Host integration consumes a working portable local vertical"},
         {"prerequisite": "91:authorization-boundary", "consumer_slice": "71-host", "scope": "Only if host mode exposes protected/share functionality"},
         {"prerequisite": "214:public-edge-boundary", "consumer_slice": "71-host", "scope": "Only for remote/share acceptance, not local fixture proof"},
+        {"prerequisite": "129:deployment-reference-envelope", "consumer_slice": "130-schema", "scope": "Accepted interface prerequisite only for bounded #130 schema/fixture work; no full #129 API, migration, production, Run/Attempt storage, or #143 dynamic-adapter admission acceptance."},
     ]
     related_edges.extend([
         {"issue": 93, "related_issue": 71, "basis": "product ownership; not a child execution prerequisite"},
@@ -238,6 +297,8 @@ def upgrade_relationships(graph: dict, ledger: dict) -> dict:
     rows[100]["next_bounded_action"] = "Continue the isolated 100-A public authoring slice while preserving PR254 as review-only; do not infer 100-B or whole #100 acceptance."
     rows[127]["reason"] = "#127-template consumes accepted #100-A/#100-B/#99-A slices and only relevant #125/#98 criteria. #71 is product direction and full-acceptance aggregation; #93/#101 are coordination, not execution prerequisites."
     rows[127]["next_bounded_action"] = "Build the packaged Canvas template when its scoped authoring, renderer, public-package and artifact gates pass; it does not wait for #71, #93 or #101 to close."
+    rows[130]["reason"] = "The named #129 deployment-reference-envelope criterion is accepted only as an interface prerequisite for the bounded 130-schema slice. Full #129 production and full #130 acceptance remain open; #135/#136 implementation order is unchanged."
+    rows[130]["next_bounded_action"] = "Under DevsySol, implement the bounded immutable Package Revision schema and deterministic fixtures against accepted criterion 129:deployment-reference-envelope; keep full #129 production, #130 acceptance and the #135/#136 order unchanged."
 
     def unique_edges(edges: list[dict]) -> list[dict]:
         seen = set()
@@ -272,6 +333,7 @@ def upgrade_relationships(graph: dict, ledger: dict) -> dict:
         "amendment_source": "GitHub #71 comment 6087930051, #93 comment 6087948973, #101 comment 6087955791, #220 comment 6087968408, #254 comment 6087962754",
     }
     graph["scope"] = "Typed operational relationships; retained issue contracts and raw states remain unchanged. Only execution prerequisites participate in cycle/topological validation."
+    graph = apply_named_scoped_criteria(graph, ledger)
     validate_graph(graph, ledger)
     return graph
 
@@ -306,6 +368,20 @@ def validate_graph(graph: dict, ledger: dict) -> list[int]:
     expected_counts = {stage: sum(row["classification"] == stage for row in rows) for stage in ["READY", "ACTIVE", "REVIEW", "BLOCKED", "INTEGRATED", "COMPLETE"]}
     if graph.get("counts") != expected_counts:
         raise ValueError(f"Stage counts are stale: expected {expected_counts}, observed {graph.get('counts')}")
+    # Supplemental program gates are dated amendments, not additions to the
+    # retained 54-issue contract projection or its stage counts.
+    amendments = ledger.get("supplemental_program_amendments", [])
+    if graph.get("supplemental_program_amendments", []) != amendments:
+        raise ValueError("Supplemental program amendments differ from the ledger source")
+    retained_issue_ids = set(by_id)
+    for amendment in amendments:
+        for gate in amendment.get("supplemental_issue_gates", []):
+            if gate.get("issue") in retained_issue_ids:
+                raise ValueError("Supplemental issue gate must remain outside the retained issue projection")
+            if gate.get("accounting_position") != "outside_original_54_issue_accounting":
+                raise ValueError("Supplemental issue gate must declare its separate accounting position")
+            if gate.get("issue") == 279 and gate.get("priority") != "P0":
+                raise ValueError("The supplemental #279 regression gate must retain its reviewed P0 priority")
 
     model = graph["relationship_model"]
     ids = set(by_id)
@@ -350,6 +426,15 @@ def validate_graph(graph: dict, ledger: dict) -> list[int]:
         else:
             raise ValueError(f"Unknown criterion or slice prerequisite: {edge}")
         dependencies[f"slice:{consumer}"].add(prerequisite_node)
+    accepted_129_envelope = criteria.get("129:deployment-reference-envelope", {})
+    if accepted_129_envelope.get("status") != "ACCEPTED_FOR_130_SCHEMA_ONLY":
+        raise ValueError("The #129 reference-envelope criterion must remain scoped to accepted #130 schema work")
+    if not any(
+        edge.get("prerequisite") == "129:deployment-reference-envelope"
+        and edge.get("consumer_slice") == "130-schema"
+        for edge in model["scoped_execution_gates"]
+    ):
+        raise ValueError("The accepted #129 envelope criterion must gate the 130-schema slice")
     topo = _topological_order(dependencies, all_nodes)
 
     expected_coordination: dict[int, set[int]] = defaultdict(set)
@@ -400,7 +485,7 @@ def validate_graph(graph: dict, ledger: dict) -> list[int]:
         raise ValueError("#127 must not wait for #71/#93/#101 completion")
     if 127 not in by_id[71]["full_acceptance_aggregation"]:
         raise ValueError("#71 full acceptance must retain its #127 template aggregation")
-    issue_level_gates = {71: {83, 99, 100, 129, 130, 135}, 99: {97, 98}, 126: {125}, 127: {99, 100}}
+    issue_level_gates = {71: {83, 99, 100, 129, 130, 135}, 99: {97, 98}, 126: {125}, 127: {99, 100}, 130: {129}}
     for issue, whole_issue_prerequisites in issue_level_gates.items():
         if set(by_id[issue]["unresolved_open_issue_dependencies"]) & whole_issue_prerequisites:
             raise ValueError(f"#{issue} must use scoped criterion gates instead of whole-issue prerequisites")
@@ -468,7 +553,79 @@ def render_markdown(graph: dict) -> str:
     for item in model["execution_slices"]:
         gates = [edge["prerequisite"] for edge in model["scoped_execution_gates"] if edge["consumer_slice"] == item["id"]]
         slices.append(f"| {item['id']}: {item['description']} | #{item['issue']} | {item['status']} | {', '.join(gates) if gates else 'None recorded'} |")
-    return "\n".join(header + rows + criteria + slices) + "\n"
+    amendments = ["", "## Supplemental program amendments (outside the retained 54 issue contracts)", ""]
+    for amendment in graph.get("supplemental_program_amendments", []):
+        amendments.append(f"### {amendment['id']} — {amendment['observed_at_utc']}")
+        amendments.append("")
+        amendments.append(amendment["summary"])
+        amendments.append("")
+        amendments.append("| Supplemental gate | Status | Accounting | Scope and evidence |")
+        amendments.append("|---|---|---|---|")
+        for gate in amendment.get("supplemental_issue_gates", []):
+            evidence = gate.get("reproduction", {})
+            progress = gate.get("implementation_status", "")
+            proof = f"{evidence.get('description', '')} Source `{evidence.get('source_commit', '')}`; [receipt]({evidence.get('path', '')}) (SHA-256 `{evidence.get('sha256', '')}`). Implementation observation: {progress}"
+            amendments.append(
+                f"| [#{gate['issue']}]({gate['url']}) {gate['title']} | {gate['status']} | outside original 54 | {gate['scope']} {proof} |"
+            )
+        for gate in amendment.get("retired_hosted_gates", []):
+            amendments.append(
+                f"| Retired hosted gate: `{gate['name']}` | RETIRED_BY_USER_STEERING | outside issue stages | "
+                f"{gate['replacement_contract']} Source `{gate['source_commit']}`; focused local test {gate['focused_test_result']}; "
+                f"hosted/external acceptance `{gate['hosted_acceptance']}`."
+            )
+        for criterion in amendment.get("accepted_scoped_criteria", []):
+            amendments.append(
+                f"| `#{criterion['owner_issue']}` {criterion['criterion_id']} → `{criterion['consumer_slice']}` | "
+                f"{criterion['status']} | scoped criterion only | {criterion['description']} "
+                f"Decision: {criterion['decision']} Evidence: [{criterion['evidence_path']}]({criterion['evidence_path']}) "
+                f"(SHA-256 `{criterion['evidence_sha256']}`)."
+            )
+        amendments.append("")
+    return "\n".join(header + rows + criteria + slices + amendments).rstrip() + "\n"
+
+
+def sync_supplemental_amendment_note(path: Path, anchor: str, amendments: list[dict]) -> None:
+    """Render the latest supplemental issue/gate amendment in narrative docs."""
+    start = "<!-- supplemental-program-amendment:start -->"
+    end = "<!-- supplemental-program-amendment:end -->"
+    sections = [start, "", "## Supplemental program amendment"]
+    for amendment in amendments:
+        sections.extend(["", f"Observed {amendment['observed_at_utc']}. {amendment['summary']}"])
+        for gate in amendment.get("supplemental_issue_gates", []):
+            evidence = gate.get("reproduction", {})
+            sections.append(
+                f"- [#{gate['issue']}]({gate['url']}) is an OPEN {gate.get('priority', 'scoped')} gate "
+                f"outside the original 54 issue contracts. {gate['scope']} Reproduction: "
+                f"[source-backed receipt]({evidence.get('path', '')}) (SHA-256 `{evidence.get('sha256', '')}`). "
+                f"Implementation: {gate.get('implementation_status', 'not reported')}."
+            )
+        for gate in amendment.get("retired_hosted_gates", []):
+            sections.append(
+                f"- `{gate['name']}` was retired as a hosted-service prerequisite by explicit user steering; "
+                f"the replacement contract is source `{gate['source_commit']}` and its focused local test passed. "
+                f"The change is not yet admitted on the current integration head; hosted/external acceptance is "
+                f"`{gate['hosted_acceptance']}`. Details: [{gate['evidence_path']}]({gate['evidence_path']}) "
+                f"(SHA-256 `{gate['evidence_sha256']}`)."
+            )
+        for criterion in amendment.get("accepted_scoped_criteria", []):
+            sections.append(
+                f"- `{criterion['criterion_id']}` enables only `{criterion['consumer_slice']}` for bounded schema/fixture work. "
+                f"{criterion['decision']} Evidence: [{criterion['evidence_path']}]({criterion['evidence_path']}) "
+                f"(SHA-256 `{criterion['evidence_sha256']}`)."
+            )
+    sections.extend(["", end])
+    block = "\n".join(sections)
+    text = path.read_text(encoding="utf-8")
+    if start in text and end in text:
+        before, rest = text.split(start, 1)
+        _, after = rest.split(end, 1)
+        text = before.rstrip() + "\n\n" + block + "\n\n" + after.lstrip("\n ")
+    else:
+        if anchor not in text:
+            raise ValueError(f"Cannot find supplemental amendment insertion anchor in {path}")
+        text = text.replace(anchor, anchor + "\n\n" + block + "\n", 1)
+    path.write_text(text, encoding="utf-8")
 
 
 def sync_markdown_note(path: Path, anchor: str) -> None:
@@ -487,6 +644,25 @@ def sync_markdown_note(path: Path, anchor: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def label_superseded_convergence_snapshots() -> None:
+    """Keep immutable prior CI observations visibly historical after amendments."""
+    ledger_text = LEDGER_MARKDOWN_PATH.read_text(encoding="utf-8")
+    ledger_text = ledger_text.replace("[Active Cloud checkpoint]", "[Previous convergence snapshot]", 1)
+    LEDGER_MARKDOWN_PATH.write_text(ledger_text, encoding="utf-8")
+    handoff_text = HANDOFF_PATH.read_text(encoding="utf-8")
+    handoff_text = handoff_text.replace(
+        "## Current convergence — 2026-10-10T04:41:32Z",
+        "## Previous convergence snapshot — 2026-10-10T04:41:32Z (superseded by the 05:01 amendment)",
+        1,
+    )
+    handoff_text = handoff_text.replace(
+        "## Previous convergence snapshot — 2026-10-10T04:41:32Z (superseded by the 04:58 amendment)",
+        "## Previous convergence snapshot — 2026-10-10T04:41:32Z (superseded by the 05:01 amendment)",
+        1,
+    )
+    HANDOFF_PATH.write_text(handoff_text, encoding="utf-8")
+
+
 def update_graph_metadata(path: Path, graph: dict) -> None:
     data = json.loads(path.read_text(encoding="utf-8"))
     data["execution_graph"]["relationship_schema_version"] = 2
@@ -496,6 +672,17 @@ def update_graph_metadata(path: Path, graph: dict) -> None:
     )
     data["execution_graph"]["counts"] = graph["counts"]
     data["execution_graph"]["whole_contract_complete"] = graph["counts"]["COMPLETE"]
+    data["supplemental_program_amendments"] = graph.get("supplemental_program_amendments", [])
+    data["current_program_amendment"] = graph.get("current_program_amendment")
+    if graph.get("current_program_amendment"):
+        current = graph["current_program_amendment"]
+        amendment = next(
+            item for item in graph.get("supplemental_program_amendments", [])
+            if item["id"] == Path(current["path"]).stem
+        )
+        data["status"] = amendment["summary"]
+        data["checkpoint_status"] = amendment["summary"]
+        data["checkpoint_observed_at"] = current["observed_at_utc"]
     archive = PROGRAM / "evidence" / "canvas-execution-graph-amendment-20261009-v4.zip"
     manifest = PROGRAM / "evidence" / "canvas-execution-graph-amendment-20261009-v4.manifest.json"
     if archive.is_file() and manifest.is_file():
@@ -516,6 +703,8 @@ def main() -> None:
     graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
     ledger = json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
     if args.apply:
+        graph["supplemental_program_amendments"] = copy.deepcopy(ledger.get("supplemental_program_amendments", []))
+        graph["current_program_amendment"] = copy.deepcopy(ledger.get("current_program_amendment"))
         graph = upgrade_relationships(graph, ledger)
         GRAPH_PATH.write_text(json.dumps(graph, indent=2) + "\n", encoding="utf-8")
         MARKDOWN_PATH.write_text(render_markdown(graph), encoding="utf-8")
@@ -523,22 +712,47 @@ def main() -> None:
         update_graph_metadata(RESUME_PATH, graph)
         sync_markdown_note(LEDGER_MARKDOWN_PATH, "| Issue | Wave | Retained state | Owner / PR | Next bounded action |")
         sync_markdown_note(HANDOFF_PATH, "# Actions Community engineering handoff — active Cloud checkpoint")
+        label_superseded_convergence_snapshots()
+        supplemental = graph.get("supplemental_program_amendments", [])
+        if supplemental:
+            sync_supplemental_amendment_note(
+                LEDGER_MARKDOWN_PATH,
+                "# Community engineering ledger",
+                supplemental,
+            )
+            sync_supplemental_amendment_note(
+                HANDOFF_PATH,
+                "# Actions Community engineering handoff — active Cloud checkpoint",
+                supplemental,
+            )
     elif args.check:
         validate_graph(graph, ledger)
         if MARKDOWN_PATH.read_text(encoding="utf-8") != render_markdown(graph):
             raise SystemExit("community-execution-graph.md is stale; run with --apply")
         for path in (LEDGER_PATH, RESUME_PATH):
             document = json.loads(path.read_text(encoding="utf-8"))
+            if document.get("supplemental_program_amendments", []) != graph.get("supplemental_program_amendments", []):
+                raise SystemExit(f"{path.name} has stale supplemental program amendments")
+            if document.get("current_program_amendment") != graph.get("current_program_amendment"):
+                raise SystemExit(f"{path.name} has a stale current program amendment pointer")
             if document["execution_graph"].get("relationship_schema_version") != 2:
                 raise SystemExit(f"{path.name} lacks typed graph schema metadata")
             if document["execution_graph"].get("counts") != graph["counts"]:
                 raise SystemExit(f"{path.name} has stale stage counts")
             if document["execution_graph"].get("whole_contract_complete") != graph["counts"]["COMPLETE"]:
                 raise SystemExit(f"{path.name} has a stale whole-contract completion count")
+            current_amendment = document.get("current_program_amendment")
+            if current_amendment:
+                amendment_path = PROGRAM / current_amendment["path"]
+                if hashlib.sha256(amendment_path.read_bytes()).hexdigest() != current_amendment["sha256"]:
+                    raise SystemExit(f"{path.name} has an invalid current program amendment hash")
         for path in (LEDGER_MARKDOWN_PATH, HANDOFF_PATH):
             text = path.read_text(encoding="utf-8")
             if "<!-- canvas-graph-amendment:start -->" not in text or AMENDMENT_NOTE not in text:
                 raise SystemExit(f"{path.name} lacks the dated graph amendment note")
+            amendments = graph.get("supplemental_program_amendments", [])
+            if amendments and "<!-- supplemental-program-amendment:start -->" not in text:
+                raise SystemExit(f"{path.name} lacks the supplemental program amendment note")
         for path in (LEDGER_PATH, RESUME_PATH):
             document = json.loads(path.read_text(encoding="utf-8"))
             archive = document.get("graph_amendment_archive")
@@ -560,6 +774,14 @@ def main() -> None:
                 with zipfile.ZipFile(archive_path) as zf:
                     if set(zf.namelist()) != expected_members or zf.read("manifest.json") != manifest_path.read_bytes():
                         raise SystemExit("Amendment ZIP members/manifest do not match the checked manifest")
+        for amendment in graph.get("supplemental_program_amendments", []):
+            for entry in amendment.get("evidence", []):
+                evidence_path = PROGRAM / entry["path"]
+                if not evidence_path.is_file():
+                    raise SystemExit(f"Missing supplemental amendment evidence: {entry['path']}")
+                payload = evidence_path.read_bytes()
+                if len(payload) != entry["size_bytes"] or hashlib.sha256(payload).hexdigest() != entry["sha256"]:
+                    raise SystemExit(f"Supplemental amendment evidence hash mismatch: {entry['path']}")
     else:
         parser.error("choose --apply or --check")
     print(f"validated {len(graph['issues'])} issue projections; COMPLETE={graph['counts'].get('COMPLETE', 0)}")

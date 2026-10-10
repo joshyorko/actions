@@ -20,6 +20,7 @@ from project_community_execution_graph import (
     ROOT,
     _topological_order,
     render_markdown,
+    sync_supplemental_amendment_note,
     upgrade_relationships,
     validate_graph,
 )
@@ -110,6 +111,43 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             self.assertEqual(digest, row["acceptance_contract_sha256"])
         self.assertEqual([210], [row["issue"] for row in rows.values() if row["classification"] == "COMPLETE"])
 
+    def test_supplemental_issue_gate_does_not_change_original_issue_accounting(self) -> None:
+        graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
+        self.assertEqual(54, len(self.ledger["issues"]))
+        self.assertEqual(54, len(graph["issues"]))
+        self.assertEqual({"READY": 0, "ACTIVE": 7, "REVIEW": 8, "BLOCKED": 29, "INTEGRATED": 9, "COMPLETE": 1}, graph["counts"])
+        amendment = self.ledger["supplemental_program_amendments"][0]
+        gate = amendment["supplemental_issue_gates"][0]
+        self.assertEqual(279, gate["issue"])
+        self.assertEqual("outside_original_54_issue_accounting", gate["accounting_position"])
+        self.assertNotIn(279, {row["issue"] for row in graph["issues"]})
+        validate_graph(graph, self.ledger)
+        markdown = render_markdown(graph)
+        self.assertIn("Supplemental program amendments (outside the retained 54 issue contracts)", markdown)
+        self.assertIn("#279", markdown)
+        self.assertIn("RETIRED_BY_EXPLICIT_USER_STEERING", str(amendment))
+
+    def test_supplemental_issue_cannot_be_added_to_retained_contract_projection(self) -> None:
+        graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
+        graph["issues"].append(copy.deepcopy(graph["issues"][0]))
+        graph["issues"][-1]["issue"] = 279
+        graph["issues"][-1]["classification"] = "BLOCKED"
+        with self.assertRaisesRegex(ValueError, "exactly 54 matching issue projections"):
+            validate_graph(graph, self.ledger)
+
+    def test_accepted_129_interface_unblocks_only_130_schema_slice(self) -> None:
+        graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
+        model = graph["relationship_model"]
+        criterion = next(item for item in model["criteria"] if item["id"] == "129:deployment-reference-envelope")
+        slice_row = next(item for item in model["execution_slices"] if item["id"] == "130-schema")
+        self.assertEqual("ACCEPTED_FOR_130_SCHEMA_ONLY", criterion["status"])
+        self.assertIn("READY_FOR_BOUNDED_SCHEMA_FIXTURE", slice_row["status"])
+        self.assertTrue(any(edge["prerequisite"] == criterion["id"] and edge["consumer_slice"] == "130-schema" for edge in model["scoped_execution_gates"]))
+        rows = {item["issue"]: item for item in graph["issues"]}
+        self.assertEqual("BLOCKED", rows[130]["classification"])
+        self.assertNotIn(129, rows[130]["unresolved_open_issue_dependencies"])
+        self.assertIn(129, rows[135]["unresolved_open_issue_dependencies"])
+
     def test_projection_is_idempotent(self) -> None:
         once = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
         twice = upgrade_relationships(copy.deepcopy(once), self.ledger)
@@ -176,6 +214,13 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json",
             "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.json",
             "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.md",
+            "docs/program/evidence/pr273-multipackage-disable-reproduction-84b8c70a.md",
+            "docs/program/evidence/issue-279-readback-20261010T0455Z.json",
+            "docs/program/evidence/hosted-robocorp-gate-retirement-20261010T0455Z.json",
+            "docs/program/evidence/program-amendment-20261010T0501Z.json",
+            "docs/program/evidence/pr129-pr130-contract-review-20261010T0455Z.md",
+            "docs/program/evidence/issue-130-criterion-acceptance-6094007327.json",
+            "docs/program/evidence/program-amendment-20261010T0503Z.json",
             "docs/skills/repository-operations.md",
         ):
             target = repo / relative
@@ -236,6 +281,22 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.assertIn("100-A", output)
         self.assertIn("83:run-attempt-authority", output)
         self.assertEqual(output, render_markdown(upgraded))
+
+    def test_supplemental_markers_are_separated_from_following_prose(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            document = Path(temporary) / "handoff.md"
+            document.write_text(
+                "Intro.\n\n<!-- supplemental-program-amendment:start -->\nold\n"
+                "<!-- supplemental-program-amendment:end --> Following historical text.\n",
+                encoding="utf-8",
+            )
+            sync_supplemental_amendment_note(
+                document,
+                "unused anchor",
+                [{"observed_at_utc": "2026-10-10T05:03:14Z", "summary": "Current status."}],
+            )
+            rendered = document.read_text(encoding="utf-8")
+        self.assertIn("<!-- supplemental-program-amendment:end -->\n\nFollowing historical text.", rendered)
 
 
 if __name__ == "__main__":

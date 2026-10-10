@@ -1,0 +1,35 @@
+{
+  "schema": "actions-hosted-gate-retirement-evidence/v1",
+  "observed_at_utc": "2026-10-10T04:55:37Z",
+  "source": {
+    "repository": "joshyorko/actions",
+    "branch": "fix/retire-robocorp-cloud-gate-20261010",
+    "commit": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
+    "tree": "f99ff2b3927aa8fa093beae67c031e3444d0d47e",
+    "parent": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "remote_head_readback": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
+    "remote_matches_local": true,
+    "tracked_worktree_clean": true
+  },
+  "user_steering": "we are not using robocorp stuff lose i if we don't need it",
+  "change": {
+    "summary": "Removed ACTION_SERVER_TEST_ACCESS_CREDENTIALS and ACTION_SERVER_TEST_HOSTNAME workflow mappings for the cloud list-organizations test; replaced hosted-service dependency with a public CLI test that patches actions_http.get and verifies URL, HMAC authorization, JSON response, and secret non-disclosure.",
+    "files": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_core_tests.yml",
+      ".github/workflows/actions_runtime_tests.yml",
+      ".github/workflows/http_helper_tests.yml",
+      "action_server/tests/action_server_tests/test_cloud.py",
+      "action_server/docs/DEVELOPMENT.md",
+      "docs/skills/repository-operations.md"
+    ]
+  },
+  "focused_validation": {
+    "command": "env -u ACTION_SERVER_TEST_ACCESS_CREDENTIALS -u ACTION_SERVER_TEST_HOSTNAME PYTHONPATH=/workspace/work/community-resume/legacy-cloud-gate/action_server/src:/workspace/work/community-resume/legacy-cloud-gate/actions/src /workspace/actions/action_server/.venv/bin/python -m pytest -q tests/action_server_tests/test_cloud.py::test_cloud_list_organizations_uses_cli_http_contract",
+    "result": "1 passed in 0.16s",
+    "network": "The HTTP boundary was monkeypatched; no hosted service request was made."
+  },
+  "hosted_acceptance": "NOT_RUN at this source checkpoint; no external Robocorp/Control Room acceptance is claimed.",
+  "upstream_disposition": "none; this is a local test/workflow configuration change.",
+  "replacement_integration_status": "The source commit is pushed on its own branch but has not been admitted into the current integration head; exact current-head hosted checks are NOT_RUN."
+}

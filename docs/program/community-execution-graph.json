@@ -682,11 +682,9 @@
       "partial_foundation": false,
       "foundation_pr": null,
       "checkpoint_pr": null,
-      "unresolved_open_issue_dependencies": [
-        129
-      ],
-      "reason": "Unresolved contract edge(s): #129 (REVIEW, raw implemented_unverified)",
-      "next_bounded_action": "Freeze portable immutable capability/runtime-plan bundle schema after Deployment identity review.",
+      "unresolved_open_issue_dependencies": [],
+      "reason": "The named #129 deployment-reference-envelope criterion is accepted only as an interface prerequisite for the bounded 130-schema slice. Full #129 production and full #130 acceptance remain open; #135/#136 implementation order is unchanged.",
+      "next_bounded_action": "Await the existing Devsy coordinator supervisor dispatch, then implement the bounded immutable Package Revision schema and deterministic fixtures against accepted criterion 129:deployment-reference-envelope; keep full #129 production, #130 acceptance and the #135/#136 order unchanged.",
       "acceptance_contract_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
       "prior_untyped_dependency_projection": [
         129
@@ -1545,11 +1543,6 @@
         "scope": "current projected contract gate"
       },
       {
-        "prerequisite": 129,
-        "consumer": 130,
-        "scope": "current projected contract gate"
-      },
-      {
         "prerequisite": 125,
         "consumer": 131,
         "scope": "current projected contract gate"
@@ -1940,6 +1933,11 @@
         "prerequisite": "214:public-edge-boundary",
         "consumer_slice": "71-host",
         "scope": "Only for remote/share acceptance, not local fixture proof"
+      },
+      {
+        "prerequisite": "129:deployment-reference-envelope",
+        "consumer_slice": "130-schema",
+        "scope": "Accepted interface prerequisite only for bounded #130 schema/fixture work; no full #129 API, migration, production, Run/Attempt storage, or #143 dynamic-adapter admission acceptance."
       }
     ],
     "criteria": [
@@ -2005,6 +2003,13 @@
         "description": "Remote/share acceptance boundary, not local fixture proof",
         "status": "PARTIAL_NOT_ACCEPTED",
         "evidence_basis": "Graph stage REVIEW; retained state IN_PROGRESS; live provider/TLS and standalone lifecycle gates remain open."
+      },
+      {
+        "id": "129:deployment-reference-envelope",
+        "owner_issue": 129,
+        "description": "Full Workspace-scoped service references identify Package and immutable revision; RuntimePlanRef identifies the owning Package Revision and immutable plan digest/schema/compatibility identity. Portable artifact payloads must not include Workspace installation IDs or deployed values. Logical binding references remain separate from deployed values; declared-plan selection is explicit with no fallback; Run/retry pinning remains owned by #83.",
+        "status": "ACCEPTED_FOR_130_SCHEMA_ONLY",
+        "evidence_basis": "Accepted in the Cloud integration owner comment on #130 at 2026-10-10T05:00:48Z. This is only the interface prerequisite for bounded schema/fixture work; the paused #129 packet and #129 production acceptance remain unapproved. #143 retains dynamic adapter admission after #134; #135/#136 implementation order is unchanged."
       }
     ],
     "coordination_parent_edges": [
@@ -2696,6 +2701,12 @@
         "issue": 71,
         "description": "Optional host/distribution acceptance after portable product behavior",
         "status": "NOT_IMPLEMENTED"
+      },
+      {
+        "id": "130-schema",
+        "issue": 130,
+        "description": "Bounded immutable Package Revision schema and deterministic fixtures",
+        "status": "READY_FOR_BOUNDED_SCHEMA_FIXTURE; supervisor dispatch pending; no production/full #130 acceptance"
       }
     ],
     "amendment_source": "GitHub #71 comment 6087930051, #93 comment 6087948973, #101 comment 6087955791, #220 comment 6087968408, #254 comment 6087962754"
@@ -3289,16 +3300,13 @@
     "release_ready": false
   },
   "current_next_action": {
-    "observed_at_utc": "2026-10-10T04:41:32Z",
-    "path": "evidence/convergence-followup-20261010T0441Z.json",
-    "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
-    "pr": 273,
-    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
-    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
-    "status": "OPEN_DRAFT; 17/21 checks success, 3 failure, 1 skipped. All three Runtime OS failures are one pre-network credential assertion with blank credential and hostname inputs; all3OS lint/type/docs pass.",
-    "owner": "Root owns integration/admission; existing test/configuration owner must identify intended endpoint and set the repository/organization secret inputs; native/RCC owners retain their bounded proof scope.",
-    "pending": "Resolve hosted test endpoint/secret configuration and rerun required exact-head gate under authorized configuration; do not waive or change endpoint fallback. Preserve the 969 natural -11.",
-    "scope": "The d8 real-consumer proof is bounded and accepted, but no full #134, overall Runtime, publication or release acceptance is established."
+    "observed_at_utc": "2026-10-10T05:01:12Z",
+    "path": "evidence/program-amendment-20261010T0501Z.json",
+    "sha256": "fc5acdfc5b421f027e80e3eaaceb4d306321368e9e5b54939720c082f321c2fc",
+    "status": "Supplemental amendment: #279 is an OPEN P0 gate outside the original 54 contracts; its implementation turn is accepted/in progress, with no source checkpoint or test result in this snapshot. The 84b 17/21 result remains historical; its unused Robocorp credential prerequisite was retired by user steering. Source replacement 42f9b8ef is pushed, with integration/current-head CI NOT_RUN. Criterion 129:deployment-reference-envelope is accepted for bounded #130 schema/fixture work only; supervisor dispatch is pending.",
+    "owner": "Root owns integration/coordination; the #279 implementation turn is accepted/in progress but has no checkpoint reported here. The existing Devsy coordinator owns #130; supervisor dispatch remains pending.",
+    "pending": "Continue the focused #279 correction preserving additive imports and disabling only packages omitted from the complete desired set. Separately admit source 42f9b8ef through the current integration tree and run exact-head checks; do not restore the retired external credential prerequisite. Await supervisor dispatch for 130-schema.",
+    "scope": "Original 54 issue states/stages/contracts unchanged; #279 is supplemental. #129 production and full #130 acceptance remain open."
   },
   "prior_current_program_refs_20261010T0136Z": {
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
@@ -3985,5 +3993,168 @@
     "receipt": "evidence/convergence-refs-20261010T0436Z.json",
     "receipt_sha256": "28a6cb53cd5824e675812cbb90f65aaa586a2b940ee551710172bd09d9db883e",
     "source": "Fresh git ls-remote plus commit-tree readback."
+  },
+  "supplemental_program_amendments": [
+    {
+      "id": "program-amendment-20261010T0501Z",
+      "observed_at_utc": "2026-10-10T05:01:12Z",
+      "summary": "The 04:41 convergence paragraph below remains a historical snapshot: its blank-credential CI failures are immutable evidence, but the hosted Robocorp prerequisite is retired by explicit user steering. The separately filed P0 #279 regression gate is outside the original 54 retained issue contracts; its assigned turn is accepted/in-progress, with no source checkpoint reported here. The replacement local CLI/request-signing contract is not yet admitted on the current integration head. The #129 interface criterion is accepted for bounded #130 schema/fixture work only; implementation awaits supervisor dispatch.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "live_original_54_state_at_observation": {
+          "open": 53,
+          "closed_accepted_issue_210": 1
+        }
+      },
+      "supplemental_issue_gates": [
+        {
+          "issue": 279,
+          "title": "Preserve sibling packages during multi-directory actions-sync startup",
+          "status": "OPEN",
+          "priority": "P0",
+          "url": "https://github.com/joshyorko/actions/issues/279",
+          "accounting_position": "outside_original_54_issue_accounting",
+          "parent_issue": 101,
+          "parent_relationship": "coordination and tracking only; #279 states it does not block #129/#130/#135 design work",
+          "scope": "For one start invocation with repeated --dir values, synchronization should treat the full supplied directory set as desired state. Preserve sequential-import behavior and test actions omitted from the full set. Excludes managed-RCC rollback, atomic generation, and last-good runtime claims.",
+          "reproduction": {
+            "source_commit": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+            "description": "Sequential imports retain both actions; one start --actions-sync=true --dir=A --dir=B disables package A action while leaving package B enabled.",
+            "path": "evidence/pr273-multipackage-disable-reproduction-84b8c70a.md",
+            "sha256": "c5a68660a44b10be90db8baf2bb6bc4ce56df47574fcc1d35409e7a45bb6438f"
+          },
+          "issue_readback": {
+            "path": "evidence/issue-279-readback-20261010T0455Z.json",
+            "sha256": "dbb9e98f024a20a75fb713e57a57df8f5a28b663c3f59be73a15e1ecd031e4d4",
+            "observed_state": "OPEN"
+          },
+          "implementation_status": "Turn accepted/in progress; no source checkpoint or test result included in this snapshot",
+          "implementation_turn": "01a1242e-d1fa-7a73-b4dd-d9c66e029e55"
+        }
+      ],
+      "retired_hosted_gates": [
+        {
+          "name": "ACTION_SERVER_TEST_ACCESS_CREDENTIALS / ACTION_SERVER_TEST_HOSTNAME hosted cloud test configuration",
+          "disposition": "RETIRED_BY_EXPLICIT_USER_STEERING",
+          "user_steering": "we are not using robocorp stuff lose i if we don't need it",
+          "replacement_contract": "The cloud list-organizations test invokes the public CLI while replacing only actions_http.get, and verifies request URL, HMAC authorization, JSON output, and secret non-disclosure.",
+          "source_commit": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
+          "source_tree": "f99ff2b3927aa8fa093beae67c031e3444d0d47e",
+          "source_parent": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+          "remote_head_verified": true,
+          "focused_test_result": "1 passed in 0.16s with both former variables unset.",
+          "integration_status": "Source pushed; integration/current-head CI not run.",
+          "hosted_acceptance": "NOT_RUN; no Control Room, Robocorp service, or external-network pass is claimed.",
+          "evidence_path": "evidence/hosted-robocorp-gate-retirement-20261010T0455Z.json",
+          "evidence_sha256": "d2c7039c93b9dd972abd4ff4c975d9e6e9e2160f91b361b31b7114b171300ccd"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "evidence/pr273-multipackage-disable-reproduction-84b8c70a.md",
+          "size_bytes": 3867,
+          "sha256": "c5a68660a44b10be90db8baf2bb6bc4ce56df47574fcc1d35409e7a45bb6438f"
+        },
+        {
+          "path": "evidence/issue-279-readback-20261010T0455Z.json",
+          "size_bytes": 2651,
+          "sha256": "dbb9e98f024a20a75fb713e57a57df8f5a28b663c3f59be73a15e1ecd031e4d4"
+        },
+        {
+          "path": "evidence/hosted-robocorp-gate-retirement-20261010T0455Z.json",
+          "size_bytes": 2271,
+          "sha256": "d2c7039c93b9dd972abd4ff4c975d9e6e9e2160f91b361b31b7114b171300ccd"
+        },
+        {
+          "path": "evidence/pr129-pr130-contract-review-20261010T0455Z.md",
+          "size_bytes": 6319,
+          "sha256": "2dd2d86a93ed3bf54e9a1067d08f7f6f5dd04eeb60cdb56d4ad6a737fd5e3bb4"
+        },
+        {
+          "path": "evidence/issue-130-criterion-acceptance-6094007327.json",
+          "size_bytes": 5243,
+          "sha256": "a85823f5ce3e177aed1b29364fa4022692187cfd85471f2ae7dd5e60b9f8941f"
+        }
+      ],
+      "upstream_disposition": "none; both the #279 behavior and test-gate configuration are local Actions concerns.",
+      "accepted_scoped_criteria": [
+        {
+          "criterion_id": "129:deployment-reference-envelope",
+          "owner_issue": 129,
+          "status": "ACCEPTED_FOR_130_SCHEMA_ONLY",
+          "consumer_issue": 130,
+          "consumer_slice": "130-schema",
+          "description": "Full Workspace-scoped service references identify Package and immutable revision; RuntimePlanRef identifies the owning Package Revision and immutable plan digest/schema/compatibility identity. Portable artifact payloads must not include Workspace installation IDs or deployed values. Logical binding references remain separate from deployed values; declared-plan selection is explicit with no fallback; Run/retry pinning remains owned by #83.",
+          "decision": "Accepted in the Cloud integration owner comment on #130 at 2026-10-10T05:00:48Z. This is only the interface prerequisite for bounded schema/fixture work; the paused #129 packet and #129 production acceptance remain unapproved. #143 retains dynamic adapter admission after #134; #135/#136 implementation order is unchanged.",
+          "consumer_slice_description": "Bounded immutable Package Revision schema and deterministic fixtures",
+          "consumer_slice_status": "READY_FOR_BOUNDED_SCHEMA_FIXTURE; supervisor dispatch pending; no production/full #130 acceptance",
+          "gate_scope": "Accepted interface prerequisite only for bounded #130 schema/fixture work; no full #129 API, migration, production, Run/Attempt storage, or #143 dynamic-adapter admission acceptance.",
+          "superseded_issue_level_prerequisites": [
+            129
+          ],
+          "consumer_issue_reason": "The named #129 deployment-reference-envelope criterion is accepted only as an interface prerequisite for the bounded 130-schema slice. Full #129 production and full #130 acceptance remain open; #135/#136 implementation order is unchanged.",
+          "consumer_issue_next_action": "Await the existing Devsy coordinator supervisor dispatch, then implement the bounded immutable Package Revision schema and deterministic fixtures against accepted criterion 129:deployment-reference-envelope; keep full #129 production, #130 acceptance and the #135/#136 order unchanged.",
+          "evidence_path": "evidence/issue-130-criterion-acceptance-6094007327.json",
+          "evidence_sha256": "a85823f5ce3e177aed1b29364fa4022692187cfd85471f2ae7dd5e60b9f8941f",
+          "owner_authority_url": "https://github.com/joshyorko/actions/issues/130#issuecomment-6094007327"
+        }
+      ]
+    },
+    {
+      "id": "program-amendment-20261010T0503Z",
+      "observed_at_utc": "2026-10-10T05:03:14Z",
+      "supersedes_current_worker_observation": "program-amendment-20261010T0501Z",
+      "summary": "A 05:03 coordination read supersedes the 05:01 dispatch-status statement: the requested #126 and #279 Devsy turns failed before execution because the selected gpt-6.1-luna model was unsupported for ChatGPT; neither has an implementation checkpoint or test result. Await heartbeat discovery of supported models before v2 redispatch. The existing supervisor remains active; #130 schema work still awaits supervisor dispatch. The accepted #129 interface criterion remains limited to bounded #130 schema/fixture work.",
+      "worker_dispatch_observation": {
+        "observation_source": "Root coordination status message in the active task thread; this is a coordination report, not a native executor readback.",
+        "observation_time_utc": "2026-10-10T05:03:14Z",
+        "model": "gpt-6.1-luna",
+        "failure": "Model unsupported for ChatGPT; both requested turns failed before execution.",
+        "turns": [
+          {
+            "issue": 126,
+            "turn": "01a1242e-7ff8-75f3-9234-e027400a6fbb",
+            "status": "FAILED_BEFORE_EXECUTION"
+          },
+          {
+            "issue": 279,
+            "turn": "01a1242e-d1fa-7a73-b4dd-d9c66e029e55",
+            "status": "FAILED_BEFORE_EXECUTION"
+          }
+        ],
+        "next_action": "Heartbeat must discover supported model identities before v2 redispatch; do not count either lane as active implementation.",
+        "supervisor_status": "ACTIVE_REPORTED"
+      },
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false
+      },
+      "accepted_scoped_criteria": [],
+      "upstream_disposition": "none; these are Actions orchestration and test-gate concerns."
+    }
+  ],
+  "current_program_amendment": {
+    "observed_at_utc": "2026-10-10T05:03:14Z",
+    "path": "evidence/program-amendment-20261010T0503Z.json",
+    "sha256": "24b1fa24b8e54ced694789caae87a0a33adf59df191d6bd9430c249512ce27f1",
+    "supplemental_issue_ids": [
+      279
+    ],
+    "accepted_scoped_criteria": [
+      "129:deployment-reference-envelope -> 130-schema"
+    ],
+    "retired_hosted_gate_source": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
+    "hosted_acceptance": "NOT_RUN"
   }
 }

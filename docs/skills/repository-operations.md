@@ -148,6 +148,11 @@ superseded untyped projection as audit provenance, but run cycle and
 topological validation only over active execution prerequisites (including
 slice-to-slice gates). Record the authoritative source for each reclassification
 and verify that issue contracts, raw states, and accounting did not change.
+When a newly filed issue follows a frozen intake snapshot, retain it as a dated
+supplemental gate outside the original issue-contract list until the accounting
+baseline is explicitly amended. Render and validate it separately from the
+retained issue rows and stage counts, with a source-backed reproduction and a
+live issue readback; do not silently add it to the original contract inventory.
 The community graph validator is part of `ToolkitTest`: run
 `rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`. The existing
 `.github/workflows/developer_toolkit.yml` pull-request matrix discovers its
