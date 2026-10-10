@@ -693,7 +693,7 @@ class ActionServerTests(BaseTests):
 
 
 class ActionServerFrozenCatalogRollback(BaseWorkflow):
-    """Run managed catalog rollback, generation drain, and alias checks on Linux."""
+    """Run catalog rollback, generation drain, and all multi-package sync cases on Linux."""
 
     name = "Actions Runtime Frozen Catalog Rollback"
     target = "actions_runtime_frozen_catalog_rollback.yml"
@@ -751,20 +751,21 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                 "shell": "bash",
                 "env": {
                     "GITHUB_TOKEN": "${{ github.token }}",
-                    "ARTIFACT_ID": "11664669288",
-                    "EXPECTED_ARCHIVE_SIZE": "59369402",
-                    "EXPECTED_ARCHIVE_SHA256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286",
+                    "ARTIFACT_ID": "11670088364",
+                    "EXPECTED_ARCHIVE_SIZE": "59379919",
+                    "EXPECTED_ARCHIVE_SHA256": "2f441b87bb274db975ad3a1b57d3566f99d235bc3c5627c74c4e8782d5ace5c5",
                 },
                 "run": "\n".join(
                     [
                         "set -Eeuo pipefail",
-                        "git merge-base --is-ancestor 31239cf99c7b264a0eab89660e93b391532ac305 HEAD",
-                        "test \"$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305^{tree})\" = d2ef7229651b6120db5cfa5995c65942ef768da8",
-                        'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/056d32601563a213643436e7df14e6ca0ea50516" | jq -er .commit.tree.sha)"',
-                        'test "$build_tree" = "$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305^{tree})"',
+                        "git merge-base --is-ancestor c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD",
+                        "test \"$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2^{tree})\" = 75a108db7d608e1316d59c96918213471409f31a",
+                        'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/7421c8a40f7b086204a8ff2bf909b1ea71e528a0" | jq -er .commit.tree.sha)"',
+                        'test "$build_tree" = "$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2^{tree})"',
                         'printf "%s\\n" "$build_tree" > "$RUNNER_TEMP/frozen-catalog-native-build-source-tree.txt"',
-                        "test \"$(git rev-parse HEAD:action_server/src/actions/server)\" = \"$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305:action_server/src/actions/server)\"",
-                        "git diff --quiet 31239cf99c7b264a0eab89660e93b391532ac305 HEAD -- action_server/src/actions/server",
+                        "test \"$(git rev-parse HEAD:action_server/src/actions/server)\" = \"$(git rev-parse c78288c3a0f07ba1013109c790f8e8b375a852d2:action_server/src/actions/server)\"",
+                        "git diff --quiet c78288c3a0f07ba1013109c790f8e8b375a852d2 HEAD -- action_server/src actions/src actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock actions/pyproject.toml actions-http-helper/pyproject.toml",
+                        'printf "%s\n" "action_server/src actions/src actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock actions/pyproject.toml actions-http-helper/pyproject.toml" > "$RUNNER_TEMP/frozen-catalog-runtime-inputs-verified.txt"',
                         'archive="$RUNNER_TEMP/frozen-native.zip"',
                         "curl --fail --silent --show-error --location \\",
                         '  --header "Authorization: Bearer $GITHUB_TOKEN" \\',
@@ -817,7 +818,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                 "run": "uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0 env -u VIRTUAL_ENV inv devinstall",
             },
             {
-                "name": "Run frozen managed rollback, drain, and alias acceptance",
+                "name": "Run frozen rollback, drain, and multi-package sync acceptance",
                 "id": "acceptance",
                 "shell": "bash",
                 "env": {
@@ -837,7 +838,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good \\",
                         "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers \\",
                         "  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot \\",
-                        "  tests/action_server_tests/test_cli_multi_package_sync.py::test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers \\",
+                        "  tests/action_server_tests/test_cli_multi_package_sync.py \\",
                         '  --junitxml="$RUNNER_TEMP/frozen-catalog-junit.xml" 2>&1 | tee "$RUNNER_TEMP/frozen-catalog-test.log"',
                         "test_status=${PIPESTATUS[0]}",
                         'if [ "$test_status" -eq 0 ]; then uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_junit.py \\',
@@ -865,9 +866,11 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "from pathlib import Path",
                         'root = Path(os.environ["RUNNER_TEMP"])',
                         'steps = {name: os.environ.get(name + "_OUTCOME", "not-run") for name in ("ARTIFACT", "FROZEN", "RCC", "DEPENDENCIES", "ACCEPTANCE")}',
-                        'receipt = {"candidate_sha": "31239cf99c7b264a0eab89660e93b391532ac305", "candidate_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8", "native_build_source_sha": "056d32601563a213643436e7df14e6ca0ea50516", "native_build_source_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8", "native_build_workflow_run_id": "38039806634", "native_build_workflow_run_attempt": "1", "native_byte_verification_receipt_sha256": "3afbc8e2f4fe6e46bdd03512e82794e27cca3c705ad28c4a7711fb26b7fb349a", "control_sha": os.environ["GITHUB_SHA"], "artifact_id": "11664669288", "artifact_size": 59369402, "artifact_sha256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286", "wrapper_binary_artifact_id": "11665179231", "wrapper_binary_artifact_size": 77776642, "wrapper_binary_artifact_sha256": "72c3451b5a9f1d54632d7bdeaf36aa0ab3b43e9fbf021497b53db372a00c80a8", "wrapper_binary_size": 81977186, "wrapper_binary_sha256": "28cf80cb1d2811236ed64595b8b9d03a54d1904d63497eb39f34fb9bd67978f3", "wrapper_binary_verification_receipt_sha256": "1a87b8fac2810a5b7e8ce4916771ffe1d71e20494bd86562ad43666c79bb2896", "wrapper_execution_verified": False, "step_outcomes": steps, "status": "PASS" if all(value == "success" for value in steps.values()) else "FAIL_OR_NOT_RUN"}',
+                        'receipt = {"candidate_sha": "c78288c3a0f07ba1013109c790f8e8b375a852d2", "candidate_tree": "75a108db7d608e1316d59c96918213471409f31a", "native_build_source_sha": "7421c8a40f7b086204a8ff2bf909b1ea71e528a0", "native_build_source_tree": "75a108db7d608e1316d59c96918213471409f31a", "native_build_workflow_run_id": "38053977419", "native_build_workflow_run_attempt": "1", "native_byte_verification_receipt_sha256": "1ea75cefe71a5c45388b0696daabed804c748e8045c1499dab49d756593fc9d0", "control_sha": os.environ["GITHUB_SHA"], "artifact_id": "11670088364", "artifact_size": 59379919, "artifact_sha256": "2f441b87bb274db975ad3a1b57d3566f99d235bc3c5627c74c4e8782d5ace5c5", "wrapper_binary_artifact_id": "11670543378", "wrapper_binary_artifact_size": 77790357, "wrapper_binary_artifact_sha256": "f76366d093d85b98626acc911b9ffbbde3b3b12933394b826f7072a37649251a", "wrapper_binary_size": 81989490, "wrapper_binary_sha256": "669618bfd93de2ea83d18625d2dd346ed62b32690ffffbe6306d5520715fcd61", "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293", "wrapper_binary_verification_receipt_sha256": "1ea75cefe71a5c45388b0696daabed804c748e8045c1499dab49d756593fc9d0", "wrapper_execution_verified": False, "step_outcomes": steps, "status": "PASS" if all(value == "success" for value in steps.values()) else "FAIL_OR_NOT_RUN"}',
                         'source_tree = root / "frozen-catalog-native-build-source-tree.txt"',
                         'if source_tree.is_file(): receipt["native_build_source_tree_api_readback"] = source_tree.read_text(encoding="utf-8").strip()',
+                        'runtime_inputs = root / "frozen-catalog-runtime-inputs-verified.txt"',
+                        'if runtime_inputs.is_file(): receipt["runtime_inputs_verified"] = runtime_inputs.read_text(encoding="utf-8").strip()',
                         'artifact_verification = root / "frozen-catalog-artifact-verification.json"',
                         'if artifact_verification.is_file(): receipt["frozen_artifact_verification"] = json.loads(artifact_verification.read_text(encoding="utf-8"))',
                         'junit = root / "frozen-catalog-junit-summary.json"',

@@ -2784,12 +2784,18 @@ catalog-ownership migration, require a newly built artifact and acceptance run;
 the older receipt does not establish their native behavior, Go-wrapper execution,
 or full release acceptance.
 
-The catalog-ownership migration adds a sixth frozen case for rejecting a
-captured historical MCP alias and recovering after the action is renamed. Its
-source-mode CLI result is separate from frozen acceptance: bind the six-case
-control to the migration candidate's newly measured native artifact and full
-build provenance before dispatch. The five-case receipt above remains evidence
-only for candidate `31239cf9`; it must not be carried forward as migration proof.
+The catalog-ownership migration control includes all five multi-package sync
+CLI cases, covering additive import/restart, desired-set deduplication, bad
+later-package rollback, last-good unmanaged sources, and historical-alias
+rejection/recovery. Its source-mode CLI result is separate from frozen
+acceptance: the ten-case control is pinned to a separately measured native
+artifact for candidate `c78288c3`; its independent byte receipt verifies the build
+tree, manifest, inventory, package tree, frozen executable, and wrapper artifact.
+Artifact provenance does not establish the ten frozen test outcomes. Before
+using the artifact from a later test/docs-only control commit, verify the complete
+build tree and unchanged Runtime source/dependency inputs; rebuild if those inputs
+change. The five-case receipt above remains evidence only for candidate `31239cf9`
+and must not be carried forward as migration proof.
 
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
