@@ -1,9 +1,0 @@
-line-length = 88
-
-extend-exclude = [
-    "*vendor*",
-    # Exclude TDD tests for unimplemented features
-    "tests/build_system_tests",
-    "tests/contract_tests",
-    "tests/integration_tests",
-]
