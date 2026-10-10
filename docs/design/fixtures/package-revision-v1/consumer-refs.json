@@ -1,0 +1,17 @@
+{
+  "packageRevisionRef": {
+    "packageId": "customer-support",
+    "revisionDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "workspaceId": "workspace-test"
+  },
+  "runtimePlanRef": {
+    "compatibilityDigest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+    "packageRevisionRef": {
+      "packageId": "customer-support",
+      "revisionDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "workspaceId": "workspace-test"
+    },
+    "planDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+    "planSchemaVersion": "actions.runtime-plan/v1-draft"
+  }
+}

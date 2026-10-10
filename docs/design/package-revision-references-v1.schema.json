@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:actions:package-revision-references-v1-draft",
+  "title": "Experimental scoped Package Revision and Runtime Plan references",
+  "description": "Consumer-side reference envelope only; it is intentionally separate from portable Package Revision content and is not an approved production API schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["packageRevisionRef", "runtimePlanRef"],
+  "properties": {
+    "packageRevisionRef": {
+      "$ref": "#/$defs/packageRevisionRef"
+    },
+    "runtimePlanRef": {
+      "$ref": "#/$defs/runtimePlanRef"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "packageRevisionRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workspaceId", "packageId", "revisionDigest"],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "packageId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "revisionDigest": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "runtimePlanRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageRevisionRef",
+        "planDigest",
+        "planSchemaVersion",
+        "compatibilityDigest"
+      ],
+      "properties": {
+        "packageRevisionRef": {
+          "$ref": "#/$defs/packageRevisionRef"
+        },
+        "planDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "planSchemaVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "compatibilityDigest": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

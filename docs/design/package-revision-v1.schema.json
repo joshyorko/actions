@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:actions:package-revision-v1-draft",
+  "title": "Experimental portable Package Revision fixture schema",
+  "description": "A bounded design fixture for the accepted #130 package/reference boundary; this is not an approved production manifest syntax or digest algorithm.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "identity",
+    "sourceArtifact",
+    "compatibility",
+    "capabilities",
+    "logicalBindingRequirements",
+    "runtimePlans"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "actions.package-revision/v1-draft"
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageId",
+        "logicalName",
+        "revisionDigest",
+        "compilerNormalizationVersion"
+      ],
+      "properties": {
+        "packageId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "logicalName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "revisionDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "compilerNormalizationVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "sourceArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["digest", "mediaType", "byteLength"],
+      "properties": {
+        "digest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "mediaType": {
+          "const": "application/vnd.actions.package-source+zip"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actionsRuntimeRange", "actionsCoreRange"],
+      "properties": {
+        "actionsRuntimeRange": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "actionsCoreRange": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/capability"
+      }
+    },
+    "logicalBindingRequirements": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/bindingRequirement"
+      }
+    },
+    "runtimePlans": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/runtimePlan"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]*$"
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "inputSchemaDigest",
+        "outputSchemaDigest",
+        "compatiblePlanDigests",
+        "bindingRequirementIds"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "enum": ["action", "robot-task", "workflow", "dev-task"]
+        },
+        "inputSchemaDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "outputSchemaDigest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "compatiblePlanDigests": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sha256"
+          }
+        },
+        "bindingRequirementIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      }
+    },
+    "bindingRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "required", "capabilityIds", "requestedScopes"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "enum": [
+            "secret",
+            "oauth",
+            "data",
+            "knowledge",
+            "queue",
+            "artifacts",
+            "package-source",
+            "runtime-artifact",
+            "network"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "capabilityIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "requestedScopes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      }
+    },
+    "environmentRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name", "constraint"],
+      "properties": {
+        "kind": {
+          "enum": ["python-version", "python-package", "system-package", "feature"]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "constraint": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      }
+    },
+    "runtimePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "digest",
+        "schemaVersion",
+        "runtimeKind",
+        "contractId",
+        "adapterVersionRange",
+        "requiredFeatures",
+        "compatibleCapabilityIds",
+        "environmentRequirements",
+        "adapterSpecification"
+      ],
+      "properties": {
+        "digest": {
+          "$ref": "#/$defs/sha256"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "runtimeKind": {
+          "enum": ["rcc", "uv", "python", "robot-framework"]
+        },
+        "contractId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+        },
+        "adapterVersionRange": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "requiredFeatures": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "compatibleCapabilityIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "environmentRequirements": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/environmentRequirement"
+          }
+        },
+        "adapterSpecification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schemaId", "schemaVersion", "payloadDigest"],
+          "properties": {
+            "schemaId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "schemaVersion": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "payloadDigest": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        }
+      }
+    }
+  }
+}

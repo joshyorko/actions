@@ -1,0 +1,72 @@
+{
+  "capabilities": [
+    {
+      "bindingRequirementIds": [
+        "crm-read"
+      ],
+      "compatiblePlanDigests": [
+        "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+      ],
+      "id": "customers.lookup",
+      "inputSchemaDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "kind": "action",
+      "outputSchemaDigest": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+    }
+  ],
+  "compatibility": {
+    "actionsCoreRange": ">=1.0.2,<2.0.0",
+    "actionsRuntimeRange": ">=1.0.3,<2.0.0"
+  },
+  "identity": {
+    "compilerNormalizationVersion": "package-normalizer/v1-draft",
+    "logicalName": "customer-support",
+    "packageId": "customer-support",
+    "revisionDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "logicalBindingRequirements": [
+    {
+      "capabilityIds": [
+        "customers.lookup"
+      ],
+      "id": "crm-read",
+      "kind": "oauth",
+      "requestedScopes": [
+        "contacts.read"
+      ],
+      "required": true
+    }
+  ],
+  "runtimePlans": [
+    {
+      "adapterSpecification": {
+        "payloadDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "schemaId": "actions.rcc-environment-specification",
+        "schemaVersion": "v1-draft"
+      },
+      "adapterVersionRange": ">=18.19.3,<19.0.0",
+      "compatibleCapabilityIds": [
+        "customers.lookup"
+      ],
+      "contractId": "rcc-runtime/v1",
+      "digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "environmentRequirements": [
+        {
+          "constraint": ">=3.12,<3.14",
+          "kind": "python-version",
+          "name": "python"
+        }
+      ],
+      "requiredFeatures": [
+        "task.exec"
+      ],
+      "runtimeKind": "rcc",
+      "schemaVersion": "actions.runtime-plan/v1-draft"
+    }
+  ],
+  "schemaVersion": "actions.package-revision/v1-draft",
+  "sourceArtifact": {
+    "byteLength": 4096,
+    "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "mediaType": "application/vnd.actions.package-source+zip"
+  }
+}
