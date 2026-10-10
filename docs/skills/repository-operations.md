@@ -2521,6 +2521,19 @@ not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`
 (tree `fb04c136e5e1a7ce709649b13cf895d84ac93c1a`). The earlier local gated
 collection had no task-owned RCC provider configured and remains NOT RUN; the
 new pin does not retroactively change that result.
+The current candidate is `2552a8c3419b213825294a51927843b2d61f662e`
+(tree `af7e419414261525c89db5511c5cbbc6f07981b0`), a fixture-only child of
+the published PR #298 merge `e886d26ebaefafa9189a69517f6707691b53662e`
+(tree `016664a8e0d01dec36accf4fe5d39cb0b7bebef7`). Its custom database setup
+registers the complete current model registry and asserts the
+`mcp_catalog_name` table exists. The refreshed two-case hosted RCC gate remains
+NOT RUN until this exact candidate and its control commit are published and the
+gate passes. The earlier one-case rollback run does not prove the staged
+consumer.
+The summary validator requires exactly one `action.py` and one `package.yaml`
+entry in each inventory before comparing digest maps; duplicate, missing, or
+unexpected paths fail closed. Its synthetic receipt regressions verify only
+summary admission and do not change the staged consumer's NOT RUN status.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.

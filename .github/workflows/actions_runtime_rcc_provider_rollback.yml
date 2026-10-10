@@ -46,15 +46,15 @@ jobs:
     - name: Checkout immutable Runtime candidate
       uses: actions/checkout@v5
       with:
-        ref: d376399f497fb98f47062e493219e063db8f08e1
+        ref: 2552a8c3419b213825294a51927843b2d61f662e
         path: candidate
         fetch-depth: 2
         persist-credentials: false
     - name: Verify immutable Runtime candidate revision
       shell: bash
       env:
-        CANDIDATE_SHA: d376399f497fb98f47062e493219e063db8f08e1
-        CANDIDATE_TREE: fb04c136e5e1a7ce709649b13cf895d84ac93c1a
+        CANDIDATE_SHA: 2552a8c3419b213825294a51927843b2d61f662e
+        CANDIDATE_TREE: af7e419414261525c89db5511c5cbbc6f07981b0
         CONTROL_SHA: ${{ github.sha }}
       run: 'set -Eeuo pipefail
 
@@ -269,8 +269,8 @@ jobs:
       env:
         EVIDENCE_DIR: ${{ runner.temp }}/rcc-provider-rollback-evidence
         JUNIT_PATH: ${{ runner.temp }}/rcc-provider-rollback-junit.xml
-        EXPECTED_CANDIDATE_SHA: d376399f497fb98f47062e493219e063db8f08e1
-        EXPECTED_CANDIDATE_TREE: fb04c136e5e1a7ce709649b13cf895d84ac93c1a
+        EXPECTED_CANDIDATE_SHA: 2552a8c3419b213825294a51927843b2d61f662e
+        EXPECTED_CANDIDATE_TREE: af7e419414261525c89db5511c5cbbc6f07981b0
         EXPECTED_CONTROL_SHA: ${{ github.sha }}
         EXPECTED_RCC_SHA256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
         ACTION_SERVER_RCC_DEFAULT: ${{ github.workspace }}/candidate/action_server/src/actions/server/bin/rcc-18.19.3
@@ -367,18 +367,23 @@ jobs:
         \ = None\n    staged_inventory = None\nsource_action_digest = (\n    source_digests.get(\"\
         action.py\") if isinstance(source_digests, dict) else None\n)\nstaged_action_digest\
         \ = (\n    staged_digests.get(\"action.py\") if isinstance(staged_digests,\
-        \ dict) else None\n)\ninventory_entries = (\n    source_inventory.get(\"entries\"\
-        ) if isinstance(source_inventory, dict) else None\n)\ninventory_digests =\
-        \ (\n    {entry.get(\"path\"): entry.get(\"sha256\") for entry in inventory_entries}\n\
-        \    if isinstance(inventory_entries, list)\n    and all(isinstance(entry,\
-        \ dict) for entry in inventory_entries)\n    else None\n)\nexpected_staged_paths\
-        \ = {\"action.py\", \"package.yaml\"}\nexpected_result_fields = {\n    \"\
-        action_source_sha256\",\n    \"action_source_path\",\n    \"core_origin\"\
-        ,\n    \"core_version\",\n    \"python_executable\",\n}\nmanaged_root = staged_receipt.get(\"\
-        managed_root\")\nmanaged_root_path = Path(managed_root).resolve() if isinstance(managed_root,\
-        \ str) else None\nmanaged_worker_origins = (\n    isinstance(staged_result,\
-        \ dict)\n    and managed_root_path is not None\n    and Path(str(staged_result.get(\"\
-        python_executable\", \"\"))).resolve().is_relative_to(managed_root_path)\n\
+        \ dict) else None\n)\nexpected_staged_paths = {\"action.py\", \"package.yaml\"\
+        }\n\ndef exact_inventory_digests(inventory):\n    entries = inventory.get(\"\
+        entries\") if isinstance(inventory, dict) else None\n    if not isinstance(entries,\
+        \ list) or len(entries) != len(expected_staged_paths):\n        return None\n\
+        \    if not all(isinstance(entry, dict) for entry in entries):\n        return\
+        \ None\n    paths = [entry.get(\"path\") for entry in entries]\n    if any(not\
+        \ isinstance(path, str) for path in paths):\n        return None\n    if len(set(paths))\
+        \ != len(expected_staged_paths) or set(paths) != expected_staged_paths:\n\
+        \        return None\n    return {entry[\"path\"]: entry.get(\"sha256\") for\
+        \ entry in entries}\n\n\nsource_inventory_digests = exact_inventory_digests(source_inventory)\n\
+        staged_inventory_digests = exact_inventory_digests(staged_inventory)\nexpected_result_fields\
+        \ = {\n    \"action_source_sha256\",\n    \"action_source_path\",\n    \"\
+        core_origin\",\n    \"core_version\",\n    \"python_executable\",\n}\nmanaged_root\
+        \ = staged_receipt.get(\"managed_root\")\nmanaged_root_path = Path(managed_root).resolve()\
+        \ if isinstance(managed_root, str) else None\nmanaged_worker_origins = (\n\
+        \    isinstance(staged_result, dict)\n    and managed_root_path is not None\n\
+        \    and Path(str(staged_result.get(\"python_executable\", \"\"))).resolve().is_relative_to(managed_root_path)\n\
         \    and Path(str(staged_result.get(\"core_origin\", \"\"))).resolve().is_relative_to(managed_root_path)\n\
         )\nstaged_receipt_valid = (\n    staged_receipt.get(\"status\") == \"PASS\"\
         \n    and staged_receipt.get(\"source_commit\") == candidate_sha\n    and\
@@ -386,30 +391,30 @@ jobs:
         \ dict)\n    and set(source_digests) == expected_staged_paths\n    and source_digests\
         \ == staged_digests\n    and source_inventory == staged_inventory\n    and\
         \ isinstance(source_inventory, dict)\n    and source_inventory.get(\"sourcePolicyVersion\"\
-        ) == 1\n    and inventory_digests == source_digests\n    and source_action_digest\
-        \ == staged_action_digest\n    and isinstance(staged_result, dict)\n    and\
-        \ set(staged_result) == expected_result_fields\n    and all(isinstance(key,\
-        \ str) and isinstance(value, str) for key, value in staged_result.items())\n\
-        \    and staged_result.get(\"action_source_sha256\") == staged_action_digest\n\
-        \    and staged_result.get(\"core_version\") == \"1.0.2\"\n    and isinstance(staged_result.get(\"\
-        python_executable\"), str)\n    and isinstance(staged_result.get(\"core_origin\"\
-        ), str)\n    and managed_worker_origins\n    and \".rcc-runtime-sources\"\
-        \ in str(staged_result.get(\"action_source_path\", \"\"))\n)\nif not staged_receipt_valid:\n\
-        \    issues.append(\"staged_consumer_receipt_missing_or_invalid\")\n\nexpected_rcc_sha\
-        \ = os.environ.get(\"EXPECTED_RCC_SHA256\")\nrcc_binary = Path(os.environ.get(\"\
-        ACTIONS_RUNTIME_RCC_BINARY\", \"\"))\nactual_rcc_sha = file_sha256(rcc_binary)\n\
-        try:\n    rcc_result = subprocess.run(\n        [str(rcc_binary), \"--version\"\
-        ], check=True, capture_output=True, text=True\n    )\n    actual_rcc_version\
-        \ = rcc_result.stdout.strip()\nexcept (OSError, subprocess.CalledProcessError):\n\
-        \    actual_rcc_version = None\nexpected_rcc_version = \"v18.19.3\"\ndefault_rcc_binary\
-        \ = Path(os.environ.get(\"ACTION_SERVER_RCC_DEFAULT\", \"\"))\ndefault_rcc_sha\
-        \ = file_sha256(default_rcc_binary)\ntry:\n    default_version_result = subprocess.run(\n\
-        \        [str(default_rcc_binary), \"--version\"],\n        check=True,\n\
-        \        capture_output=True,\n        text=True,\n    )\n    default_rcc_version\
-        \ = default_version_result.stdout.strip()\nexcept (OSError, subprocess.CalledProcessError):\n\
-        \    default_rcc_version = None\nif actual_rcc_sha != expected_rcc_sha:\n\
-        \    issues.append(\"rcc_binary_hash_mismatch\")\nif actual_rcc_version !=\
-        \ expected_rcc_version:\n    issues.append(\"rcc_binary_version_mismatch\"\
+        ) == 1\n    and source_inventory_digests == source_digests\n    and staged_inventory_digests\
+        \ == staged_digests\n    and source_action_digest == staged_action_digest\n\
+        \    and isinstance(staged_result, dict)\n    and set(staged_result) == expected_result_fields\n\
+        \    and all(isinstance(key, str) and isinstance(value, str) for key, value\
+        \ in staged_result.items())\n    and staged_result.get(\"action_source_sha256\"\
+        ) == staged_action_digest\n    and staged_result.get(\"core_version\") ==\
+        \ \"1.0.2\"\n    and isinstance(staged_result.get(\"python_executable\"),\
+        \ str)\n    and isinstance(staged_result.get(\"core_origin\"), str)\n    and\
+        \ managed_worker_origins\n    and \".rcc-runtime-sources\" in str(staged_result.get(\"\
+        action_source_path\", \"\"))\n)\nif not staged_receipt_valid:\n    issues.append(\"\
+        staged_consumer_receipt_missing_or_invalid\")\n\nexpected_rcc_sha = os.environ.get(\"\
+        EXPECTED_RCC_SHA256\")\nrcc_binary = Path(os.environ.get(\"ACTIONS_RUNTIME_RCC_BINARY\"\
+        , \"\"))\nactual_rcc_sha = file_sha256(rcc_binary)\ntry:\n    rcc_result =\
+        \ subprocess.run(\n        [str(rcc_binary), \"--version\"], check=True, capture_output=True,\
+        \ text=True\n    )\n    actual_rcc_version = rcc_result.stdout.strip()\nexcept\
+        \ (OSError, subprocess.CalledProcessError):\n    actual_rcc_version = None\n\
+        expected_rcc_version = \"v18.19.3\"\ndefault_rcc_binary = Path(os.environ.get(\"\
+        ACTION_SERVER_RCC_DEFAULT\", \"\"))\ndefault_rcc_sha = file_sha256(default_rcc_binary)\n\
+        try:\n    default_version_result = subprocess.run(\n        [str(default_rcc_binary),\
+        \ \"--version\"],\n        check=True,\n        capture_output=True,\n   \
+        \     text=True,\n    )\n    default_rcc_version = default_version_result.stdout.strip()\n\
+        except (OSError, subprocess.CalledProcessError):\n    default_rcc_version\
+        \ = None\nif actual_rcc_sha != expected_rcc_sha:\n    issues.append(\"rcc_binary_hash_mismatch\"\
+        )\nif actual_rcc_version != expected_rcc_version:\n    issues.append(\"rcc_binary_version_mismatch\"\
         )\nif default_rcc_sha != expected_rcc_sha:\n    issues.append(\"action_server_default_rcc_hash_mismatch\"\
         )\nif default_rcc_version != expected_rcc_version:\n    issues.append(\"action_server_default_rcc_version_mismatch\"\
         )\nif receipt.get(\"rcc_sha256\") != expected_rcc_sha:\n    issues.append(\"\

@@ -282,6 +282,24 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
         ("staged_receipt_missing", "staged_consumer_receipt_missing_or_invalid"),
         ("staged_digest_mismatch", "staged_consumer_receipt_missing_or_invalid"),
         ("staged_result_digest_mismatch", "staged_consumer_receipt_missing_or_invalid"),
+        (
+            "duplicate_source_inventory_path",
+            "staged_consumer_receipt_missing_or_invalid",
+        ),
+        ("missing_source_inventory_path", "staged_consumer_receipt_missing_or_invalid"),
+        (
+            "unexpected_source_inventory_path",
+            "staged_consumer_receipt_missing_or_invalid",
+        ),
+        (
+            "duplicate_staged_inventory_path",
+            "staged_consumer_receipt_missing_or_invalid",
+        ),
+        ("missing_staged_inventory_path", "staged_consumer_receipt_missing_or_invalid"),
+        (
+            "unexpected_staged_inventory_path",
+            "staged_consumer_receipt_missing_or_invalid",
+        ),
     ],
 )
 def test_exact_summary_script_rejects_incomplete_receipt(
@@ -367,6 +385,23 @@ def test_exact_summary_script_rejects_incomplete_receipt(
             staged_receipt["staged_sha256"]["action.py"] = "c" * 64
         else:
             staged_receipt["typed_action_result"]["action_source_sha256"] = "c" * 64
+        staged_receipt_path.write_text(json.dumps(staged_receipt), encoding="utf-8")
+    elif "_inventory_path" in mutation:
+        staged_receipt = json.loads(staged_receipt_path.read_text(encoding="utf-8"))
+        inventory_name = (
+            "source_inventory"
+            if mutation.endswith("source_inventory_path")
+            else "staged_inventory"
+        )
+        inventory = json.loads(staged_receipt[inventory_name])
+        entries = inventory["entries"]
+        if mutation.startswith("duplicate_"):
+            entries.append(dict(entries[0]))
+        elif mutation.startswith("missing_"):
+            entries.pop()
+        else:
+            entries[1]["path"] = "unexpected.json"
+        staged_receipt[inventory_name] = json.dumps(inventory)
         staged_receipt_path.write_text(json.dumps(staged_receipt), encoding="utf-8")
     if mutation != "missing_receipt":
         (evidence / "lifecycle-receipt.json").write_text(

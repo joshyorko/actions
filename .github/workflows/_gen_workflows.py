@@ -1065,16 +1065,24 @@ source_action_digest = (
 staged_action_digest = (
     staged_digests.get("action.py") if isinstance(staged_digests, dict) else None
 )
-inventory_entries = (
-    source_inventory.get("entries") if isinstance(source_inventory, dict) else None
-)
-inventory_digests = (
-    {entry.get("path"): entry.get("sha256") for entry in inventory_entries}
-    if isinstance(inventory_entries, list)
-    and all(isinstance(entry, dict) for entry in inventory_entries)
-    else None
-)
 expected_staged_paths = {"action.py", "package.yaml"}
+
+def exact_inventory_digests(inventory):
+    entries = inventory.get("entries") if isinstance(inventory, dict) else None
+    if not isinstance(entries, list) or len(entries) != len(expected_staged_paths):
+        return None
+    if not all(isinstance(entry, dict) for entry in entries):
+        return None
+    paths = [entry.get("path") for entry in entries]
+    if any(not isinstance(path, str) for path in paths):
+        return None
+    if len(set(paths)) != len(expected_staged_paths) or set(paths) != expected_staged_paths:
+        return None
+    return {entry["path"]: entry.get("sha256") for entry in entries}
+
+
+source_inventory_digests = exact_inventory_digests(source_inventory)
+staged_inventory_digests = exact_inventory_digests(staged_inventory)
 expected_result_fields = {
     "action_source_sha256",
     "action_source_path",
@@ -1100,7 +1108,8 @@ staged_receipt_valid = (
     and source_inventory == staged_inventory
     and isinstance(source_inventory, dict)
     and source_inventory.get("sourcePolicyVersion") == 1
-    and inventory_digests == source_digests
+    and source_inventory_digests == source_digests
+    and staged_inventory_digests == staged_digests
     and source_action_digest == staged_action_digest
     and isinstance(staged_result, dict)
     and set(staged_result) == expected_result_fields
@@ -1268,8 +1277,8 @@ class ActionServerRccProviderRollback(BaseWorkflow):
     target = "actions_runtime_rcc_provider_rollback.yml"
     project_name = "action_server"
     rcc_sha256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    candidate_sha = "d376399f497fb98f47062e493219e063db8f08e1"
-    candidate_tree = "fb04c136e5e1a7ce709649b13cf895d84ac93c1a"
+    candidate_sha = "2552a8c3419b213825294a51927843b2d61f662e"
+    candidate_tree = "af7e419414261525c89db5511c5cbbc6f07981b0"
 
     def __init__(self):
         super().__init__()
