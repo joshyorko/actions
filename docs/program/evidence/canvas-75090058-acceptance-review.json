@@ -1,0 +1,34 @@
+{
+  "accepted_controls": [
+    "Absolute child Runtime source PYTHONPATH plus same-interpreter/project-cwd origin probe and source-mode process args assertion.",
+    "Actual managed actions.mcp and actions.mcp._metadata file origins/bytes measured and matched to validated candidate wheel/source.",
+    "Bounded descendant snapshots plus private POSIX group timeout cleanup; group signal requires unreaped leader or captured PID/create_time-validated original group member.",
+    "Immediate-owner-exit regression has explicit POSIX scope and bounded wait for absent/inert child."
+  ],
+  "canonical_docs_delta": "Existing corrected guide now records Linux gate scope, absolute Runtime binding, measured worker MCP bytes, group authority after leader reap, POSIX regression skip and separate production gate. Preserve actual opt-in NOT RUN.",
+  "date": "2026-10-10",
+  "independent_probe": {
+    "body": "Import exact reviewed helper from absolute test file. Probe-local Linux subreaper; tiny parent sleeps0.1s, spawns sleep60 child inheriting pipes, writes child PID/create_time, exits0. Call helper timeout0.5s. Expect TimeoutExpired; allow1s for absent/zombie. Unconditional finally identity-checks and terminates if live, waitpid reaps exact adopted child, temporary directory removed, subreaper disabled.",
+    "cleanup": "No live child or new zombie left by final probe.",
+    "exit_code": 0,
+    "interpreter": "/tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python",
+    "output": [
+      "PASS75090058: immediate owner exit; inherited-pipe timeout; no live owned child after bounded wait",
+      "FINALLY: identity-owned descendant reaped; temporary directory removed on exit"
+    ],
+    "pythonpath": "/tmp/work/actions-worktrees/canvas-template-20261010/action_server/src:/tmp/work/actions-worktrees/canvas-template-20261010/action_server/tests:/tmp/work/actions-worktrees/canvas-template-20261010/devutils/src",
+    "resources": "Two tiny owned Python processes only; no browser, RCC, downloads, install or shared environment mutation."
+  },
+  "limits": [
+    "Observed Linux timeout cleanup; no full unseen-descendant census or complete orphan-reaping guarantee.",
+    "Actual candidate wheel/Runtime/browser opt-in not executed in this review.",
+    "Production Core1.0.3 manifest, deterministic bundle, published-Core and artifact requirements remain unchanged.",
+    "Earlier diagnostic zombies312503 and314447 underPID1 are preserved in previous immutable review notes; final successful probe does not erase that history."
+  ],
+  "owner_checks": "Reported focused module4PASS2SKIP; Ruff/format/isort/mypy pass. Independently inspected clean tree and diff check; did not repeat full suite.",
+  "reviewed_head": "75090058be75bb7187fb09d4c4173c311ea3f13c",
+  "reviewed_tree": "805538b5230b5d2456a8a7807fb2d4f7ebb17c6d",
+  "upstream_disposition": "Actions-local test/control repair; no confirmed external repository defect or upstream issue filed.",
+  "verdict": "ACCEPT for hosted candidate gate preparation; actual Runtime/browser opt-in NOT RUN",
+  "worktree": "/tmp/work/actions-worktrees/canvas-template-20261010"
+}

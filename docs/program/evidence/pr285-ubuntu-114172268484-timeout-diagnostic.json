@@ -1,0 +1,40 @@
+{
+  "record_type": "sanitized_hosted_startup_timeout_diagnostic",
+  "timestamp_utc": "2026-10-10T08:43Z",
+  "workflow": {
+    "repository": "joshyorko/actions",
+    "run_id": 38037962872,
+    "head_sha": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+    "event": "pull_request"
+  },
+  "job": {
+    "id": 114172268484,
+    "name": "build (ubuntu-py3.12-devmode)",
+    "failed_step": "Test (integration)"
+  },
+  "tests": {
+    "failed": [
+      "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+      "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]"
+    ],
+    "other_relevant": [
+      "test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers PASSED",
+      "all four test_cli_multi_package_sync.py cases PASSED"
+    ],
+    "aggregate": "126 passed, 17 skipped, 3 failed, 920 deselected in 654.44s"
+  },
+  "failure_observation": {
+    "exception": "TimeoutError in ActionServerProcess.start while waiting for server address from child stdout",
+    "configured_startup_timeout_seconds": 30,
+    "sanitized_stderr_excerpt": [
+      "Runtime v1.0.3 started; action package A was imported.",
+      "RCC reported a fresh private holotree and began bootstrapping.",
+      "At about 29 seconds after startup, package B import began and RCC hash completed; no server address/listen marker had been emitted.",
+      "The child was terminated at the 30-second startup timeout."
+    ],
+    "interpretation": "Observed process-start deadline expiry before server readiness. These logs do not establish a deeper Runtime/RCC defect or the duplicate-validation result; no duplicate rejection assertion was reached."
+  },
+  "artifact_or_secret_data": "Omitted; this receipt contains no raw runner environment or credentials.",
+  "local_log_path": "Sanitized excerpt only; full decoded GitHub log remains available from the exact workflow job endpoint."
+}

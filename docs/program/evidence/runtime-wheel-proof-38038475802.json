@@ -1,0 +1,69 @@
+{
+  "observed_at": "2026-10-10T08:56:02Z",
+  "purpose": "Independently derive the exact tested CPython 3.12 Runtime wheel digest from the Linux wheel artifact without extracting the artifact archive.",
+  "repository": "joshyorko/actions",
+  "workflow_run_id": 38038475802,
+  "job_id": 114176397990,
+  "job_name": "build-wheels (ubuntu-22.04)",
+  "job_steps": {
+    "build_and_clean_test_wheels": "success",
+    "verify_runtime_wheel_with_published_core_and_helper": "success",
+    "upload_wheel_artifact": "success"
+  },
+  "source": {
+    "checkout_commit": "18b35aadee4fdaba3af854ffd99c79f3f2ee8d98",
+    "tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+    "pull_request": 221
+  },
+  "artifact": {
+    "artifact_id": 11664661954,
+    "name": "Linux-wheels",
+    "size_bytes": 28226965,
+    "sha256": "270e467015e479c3e551b076df6446a25a65db770533d56fa3a1a6ac866d56ef",
+    "downloaded_path": "/workspace/work/community-resume/evidence/runtime-wheel-proof-20261010/runtime-linux-wheels-38038475802.zip",
+    "outer_zip_crc_check": "passed",
+    "wheel_count": 2
+  },
+  "runtime_wheel": {
+    "filename": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "size_bytes": 14143383,
+    "sha256": "634ec5ec1bf153f8e8d0c5ab9342eb36be95bd983ae581723e8dac34e114f413",
+    "metadata_path": "actions_runtime-1.0.3.dist-info/METADATA",
+    "record_path": "actions_runtime-1.0.3.dist-info/RECORD",
+    "record_sha256": "aa4bf2845662619385624e765c8891094fabe1d632683e17299a18516aa36e24",
+    "record_entries": 205,
+    "record_hashed_entries_verified": 204,
+    "wheel_file_entries": 205,
+    "name": "actions-runtime",
+    "version": "1.0.3",
+    "requires_python": ">=3.12,<3.14",
+    "requires_dist": [
+      "actions-core (>=1.0.2,<2.0.0)",
+      "actions-http-helper (>=1.0.3,<2.0.0)"
+    ]
+  },
+  "public_dependency_verifier": {
+    "step": "Verify Runtime wheel with published Core and Helper",
+    "result": "success",
+    "runtime_install": "The candidate 1.0.3 cp312 wheel was installed in a fresh Python 3.12 environment and passed import-origin checks plus pip check.",
+    "dependencies_from_uncached_pip_report": {
+      "actions-core": {
+        "version": "1.0.2",
+        "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+        "source": "https://files.pythonhosted.org/packages/b6/ed/33c5999ac5e932434fcc5b392420efdf9b25922ca02a76622b856759ea16/actions_core-1.0.2-py3-none-any.whl"
+      },
+      "actions-http-helper": {
+        "version": "1.0.3",
+        "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+        "source": "https://files.pythonhosted.org/packages/53/3b/cefc0608e6ec71697c60c68ede2efa306fd7d50b1736c4b6b094b3424dc6/actions_http_helper-1.0.3-py3-none-any.whl"
+      }
+    },
+    "source_evidence": "Workflow run jobs and step readback plus decoded log for job 114176397990; successful verifier log reports uncached PyPI dependency artifacts and exact hashes above. The verifier script asserts both exact PyPI URLs and SHA-256 values."
+  },
+  "scope_limits": [
+    "This proves the individual CPython 3.12 wheel bytes and the job\u2019s clean published-dependency verification for the PR candidate.",
+    "It does not prove PyPI publication of Runtime 1.0.3 or release/tag authorization.",
+    "No wheel installation or rebuild was performed in this environment."
+  ],
+  "documentation_disposition": "No additional repository-operations text proposed: existing guidance already requires exact source/artifact binding and published dependency hashes; this receipt supplies the concrete tested wheel digest."
+}

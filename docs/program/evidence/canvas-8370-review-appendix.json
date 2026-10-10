@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-10",
+  "diagnostic_probe": {
+    "cleanup_limit": "No live child remains; no broad cleanup or complete reap claimed. Initial earlier diagnostic zombie312503 also remains separately documented. Unrelated observed git zombie314477 was not touched or attributed.",
+    "future_probe_rule": "Identity-scoped terminate/waitpid in unconditional finally, including assertion and report failures.",
+    "kind": "Tiny Python equivalent, probe-local Linux subreaper; no browser/RCC/install",
+    "result": "Helper timed out and signaled group; immediate child status was still RUNNING, so diagnostic assertion failed before own reap. Subsequent inspection found identified Python descendant314447 inert zombie underPID1."
+  },
+  "findings": [
+    "Always-on parent-exits-first cleanup test needs explicit supported POSIX scope; candidate browser gate is Linux-only.",
+    "Unconditional group signal after communicate reaps the leader can race group-ID reuse. Signal only while leader remains unreaped or an owned captured identity proves original group still exists.",
+    "Immediate child absent/zombie assertion can run before group SIGKILL completes; bound observation with a finite wait."
+  ],
+  "reviewed_head": "8370ca6b1005c720b48beaf40d1742e6c147beb4",
+  "scope": "Linux observed timeout cleanup; no full unseen-descendant census or complete orphan-reaping acceptance. Actual browser gate remains NOT RUN.",
+  "upstream_disposition": "Actions-local test/control corrections; no confirmed external defect.",
+  "verdict": "changes-needed; successor pending"
+}

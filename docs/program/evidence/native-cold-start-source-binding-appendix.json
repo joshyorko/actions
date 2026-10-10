@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-10",
+  "kind": "native-cold-start-source-binding-appendix",
+  "run": 38037962872,
+  "job": 114172268484,
+  "actual_native_job_checkout": {
+    "sha": "e3e23602200663dc30fa90cbe559bb53016f69c5",
+    "tree": "ed98acc3561a83a6b9feaed64fb928211b868049",
+    "parents": [
+      "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "385f1e2385b80f4c2ddbc5f534032c186db09de5"
+    ]
+  },
+  "published_pr_head": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+  "published_pr_tree": "ed98acc3561a83a6b9feaed64fb928211b868049",
+  "source_relation": "Actual synthetic job tree equals published385f and reviewed0f3 parent exactly.",
+  "reviewed_repair": "e795ced84e96d876af76ddcf80391e0b7fcef160",
+  "repair_tree": "f1898614311ffb09e863393e8da0e03d55fcb8a7",
+  "verdict": "ACCEPT scoped deadline repair for new hosted execution; no changed Runtime source or prior failed-run acceptance.",
+  "upstream_disposition": "Actions-local test correction; no confirmed external defect."
+}

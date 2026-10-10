@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-10",
+  "reviews": [
+    {
+      "sha": "e795ced84e96d876af76ddcf80391e0b7fcef160",
+      "verdict": "ACCEPT for fresh hosted execution; no hosted success claimed",
+      "scope": "Test-only native startup deadline 90s when synchronizing directories with a configured frozen executable. Source-mode and no-directory deadline remain30s; no retries, skips, source/control mutation.",
+      "failure": {
+        "run": 38037962872,
+        "job": 114172268484,
+        "actual_job_checkout": "e3e2360 (synthetic merge385f into35b32)",
+        "frozen_control_parent": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+        "facts": [
+          "Runtime launch08:35:26.839",
+          "Successful first holotree variables operation28.86s",
+          "PackageB collection08:35:56",
+          "Fixture forces stop08:35:57.135 before ready-port",
+          "All3 collision cells fail TimeoutError at _selftest.py:198"
+        ]
+      },
+      "limits": [
+        "Three collision assertions were not reached in this failed native run.",
+        "Prior dedicated frozen4PASS receipt remains exact earlier proof; this patch requires new hosted validation."
+      ],
+      "upstream_disposition": "Actions-local test deadline correction; no confirmed RCC or other external defect."
+    },
+    {
+      "sha": "f45c6b958ee2d8db0d6ba49b74d8f6b1ccbb3988",
+      "verdict": "CHANGES NEEDED",
+      "accepted_fixes": [
+        "Runtime child absolute PYTHONPATH, same-interpreter/cwd import probe and explicit source args",
+        "Actual managed actions.mcp and actions.mcp._metadata distribution paths/file SHA256 checked against validated candidate wheel/source"
+      ],
+      "remaining_finding": "Owned timeout helper only captures descendants at initial Popen and again while parent is alive. Parent exits before timeout with later-spawned pipe-inheriting child: communicate times out, no descendant captured, live child escapes.",
+      "probe": {
+        "kind": "Actual lightweight Python process equivalent; no browser/RCC/install",
+        "command_behavior": "Parent sleeps0.1s, spawns sleep60 child inheriting output pipes, writes child PID, exits0. Helper timeout0.5s.",
+        "result": "TIMEOUT_RETURNED; CHILD_STILL_LIVE True",
+        "cleanup": "Probe-local subreaper killed only identified PID/create_time child, waitpid reaped it, TemporaryDirectory removed. No new zombie or live child left."
+      },
+      "required_correction": "Supervise/capture the owned descendants throughout command execution and preserve cleanup when owner exits before communicate timeout; add exact regression.",
+      "limits": [
+        "Actual Runtime/browser opt-in NOT RUN.",
+        "Production template/published-Core/artifact gates unchanged.",
+        "Initial earlier diagnostic zombiePID312503 underPID1 remains separately documented; this probe created none."
+      ],
+      "upstream_disposition": "Actions-local test/control finding; no external issue filed."
+    }
+  ]
+}

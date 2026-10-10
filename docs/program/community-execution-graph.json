@@ -58,14 +58,14 @@
     "cloud_rcc_hosted": "root: PR284 Windows correction pushed; actual managed rollback scoped proof PASS",
     "cloud_independent_review": "sol_p0_snapshot_review: frozen harness, source generation drain and CI repairs",
     "cloud_release_ci": "luna_release_notes:exact f7 CI read-only",
-    "cloud_cas_heartbeat": "luna_cas_heartbeat: bounded read-only checks",
+    "cloud_cas_heartbeat": "luna_cas_heartbeat: bounded read-only window complete; last09:04:59Z sample stillFailed",
     "devsy_supervisor": "BLOCKED; last lane inventory historical, no current native progress claim",
     "cloud_frozen_catalog": "luna_worker_exit: frozen catalog rollback, isolated frozen-catalog-rollback-20261010",
     "cloud_generation_drain": "luna_canvas_acceptance: real successful-switch old Run acceptance, isolated p0-generation-drain-20261010",
-    "cloud_canvas": "luna_canvas_acceptance: candidate-only Runtime/browser predecessor in existing Canvas worktree; production manifest/artifact gates unchanged",
-    "cloud_ci": "luna_release_notes: exact-head checks and immutable failure evidence",
-    "cloud_frozen": "luna_worker_exit: frozen control accepted and gate executed; now audits remaining native/registry release gates without publication",
-    "cloud_review": "sol_p0_snapshot_review: frozen receipt accepted; Canvas candidate-source gate review active"
+    "cloud_canvas": "luna_canvas_acceptance: existing PR282; hosted candidate Runtime/browser control under independent review",
+    "cloud_ci": "luna_release_notes: read-only exact-head CI monitoring through09:25Z; root alone dispatches reruns",
+    "cloud_frozen": "luna_worker_exit: bounded wheel proof and successor reconnaissance complete; available for next disjoint assignment",
+    "cloud_review": "sol_p0_snapshot_review: refresh merges accepted; Canvas hosted control under review"
   },
   "current_review_checkpoints": {
     "91": {
@@ -681,7 +681,7 @@
       "checkpoint_pr": 283,
       "unresolved_open_issue_dependencies": [],
       "reason": "Owner approved only Slice1a; implementation is active and independently reviewed, with final copied-instance verification pending. NOT_COMPLETE.",
-      "next_bounded_action": "Finish the remaining exact-head N-1 macOS toolkit gate and integrate reviewed Slice1a; PR273 prerequisite is integrated. Preserve strict canonical-value contracts.",
+      "next_bounded_action": "Slice1a is integrated and scoped-source accepted. Bind the next consumer to its exact canonical-value/reference criteria; production digest preimages, persistence, authorization and resolver contracts remain unaccepted.",
       "acceptance_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
       "prior_untyped_dependency_projection": [],
       "coordination_parents": [],
@@ -795,7 +795,7 @@
       "checkpoint_pr": 284,
       "unresolved_open_issue_dependencies": [],
       "reason": "Current candidate managed failed-reload recovery is executed and independently accepted; wider RCC provider, lease, trust, offline and platform contracts remain unaccepted.",
-      "next_bounded_action": "Finish current macOS toolkit cells and integrate reviewed control; preserve executed managed/frozen scope boundaries, then address remaining provider/lease/offline criteria.",
+      "next_bounded_action": "Finish current refreshed-head toolkit gates and integrate reviewed RCC control; preserve managed/frozen exact-source limits and address remaining provider/lease/offline criteria.",
       "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d",
       "prior_untyped_dependency_projection": [],
       "coordination_parents": [],
@@ -2856,13 +2856,13 @@
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T08:37:06Z",
+    "observed_at_utc": "2026-10-10T08:59:45Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-    "integration/community-release-20261008": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+    "integration/community-release-20261008": "31239cf99c7b264a0eab89660e93b391532ac305",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
-    "receipt": "evidence/pr273-integration-20261010.json",
-    "receipt_sha256": "28aa08cd3d1cf11636a28e983af73a0c801b92072983ce558359f2341d6bae60"
+    "receipt": "evidence/pr283-integration-20261010.json",
+    "receipt_sha256": "7a0de129ec251ba3474d00712c52a8630c1c7e35da23b27f021048285e977b48"
   },
   "prior_current_program_refs_20261009T2253Z": {
     "community": "c30f953bae1a322e1d09549607ab42f1badce440",
@@ -3370,11 +3370,11 @@
     "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
   },
   "current_pr_convergence": {
-    "observed_at_utc": "2026-10-10T08:41:26Z",
+    "observed_at_utc": "2026-10-10T09:10:09Z",
     "cohort": {
       "items": 34,
-      "target_integrated": 25,
-      "open_blocked": 9,
+      "target_integrated": 26,
+      "open_blocked": 8,
       "merge_ready": 0,
       "target_integrated_prs": [
         219,
@@ -3401,7 +3401,8 @@
         277,
         278,
         280,
-        281
+        281,
+        283
       ],
       "open_prs": [
         215,
@@ -3410,15 +3411,14 @@
         218,
         221,
         282,
-        283,
         284,
         285
       ],
       "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
     },
-    "path": "evidence/pr273-integration-20261010.json",
-    "sha256": "28aa08cd3d1cf11636a28e983af73a0c801b92072983ce558359f2341d6bae60",
-    "integration": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+    "path": "evidence/pr283-integration-20261010.json",
+    "sha256": "7a0de129ec251ba3474d00712c52a8630c1c7e35da23b27f021048285e977b48",
+    "integration": "31239cf99c7b264a0eab89660e93b391532ac305",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
@@ -5881,13 +5881,267 @@
         "devsy_supervisor": "BLOCKED; last lane inventory historical, no current native progress claim"
       },
       "upstream_disposition": "Actions-local test environment and attributes repairs; no confirmed new upstream defect."
+    },
+    {
+      "id": "program-amendment-20261010T0910Z",
+      "observed_at_utc": "2026-10-10T09:10:09Z",
+      "summary": "PR283 is integrated at 31239cf9 with its exact independently reviewed and fully checked tree. Only #129 Slice1a canonical values and reference envelopes are source-accepted; no whole issue closes. Existing PR284/285 are refreshed by ordinary merges onto that integration head, preserving accepted test/control bytes and requiring fresh current-head CI. The cold frozen-startup deadline repair is independently reviewed, pushed and passed its fixed-f7 standalone gate; older failed runs remain preserved. Canvas candidate-only acceptance is independently reviewed and pushed, while its real hosted browser control is still under review. Linux Runtime wheel bytes and public Core/Helper pairing are independently verified for the earlier exact integration tree; Runtime1.0.3 remains unpublished. Devsy still reports a Failed pod, so existing worktrees and uncertain thread effects are preserved. All54 contracts and historical archive hashes remain unchanged.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "whole_issue_acceptance_changed": false
+      },
+      "integration_checkpoint": {
+        "head": "31239cf99c7b264a0eab89660e93b391532ac305",
+        "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "refs_observed_at_utc": "2026-10-10T08:59:45Z",
+        "cohort": {
+          "items": 34,
+          "target_integrated": 26,
+          "open_blocked": 8,
+          "merge_ready": 0,
+          "target_integrated_prs": [
+            219,
+            220,
+            251,
+            256,
+            257,
+            259,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            280,
+            281,
+            283
+          ],
+          "open_prs": [
+            215,
+            216,
+            217,
+            218,
+            221,
+            282,
+            284,
+            285
+          ],
+          "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
+        }
+      },
+      "current_pr_heads": {
+        "285": {
+          "head": "499f3f71a8f945baaffee3c6ad028b0a30479c7b",
+          "base": "integration/community-release-20261008",
+          "head_branch": "test/frozen-catalog-rollback-20261010"
+        },
+        "284": {
+          "head": "c7c18da18f2dfc1134773ea725c7b7de38c14e5c",
+          "base": "integration/community-release-20261008",
+          "head_branch": "test/rcc-provider-rollback-hosted-20261010"
+        },
+        "282": {
+          "head": "ac912033559db740191e46cadc2ba12fbf0b612b",
+          "base": "integration/community-release-20261008",
+          "head_branch": "feat/canvas-template-20261010"
+        },
+        "221": {
+          "head": "31239cf99c7b264a0eab89660e93b391532ac305",
+          "base": "community",
+          "head_branch": "integration/community-release-20261008"
+        },
+        "218": {
+          "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+          "base": "community",
+          "head_branch": "review/workitems-checkpoint-20261008"
+        },
+        "217": {
+          "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+          "base": "community",
+          "head_branch": "review/core-checkpoint-20261008"
+        },
+        "216": {
+          "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+          "base": "community",
+          "head_branch": "review/runtime-checkpoint-20261008"
+        },
+        "215": {
+          "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+          "base": "community",
+          "head_branch": "convergence/actions-full-graph-20261008"
+        }
+      },
+      "remaining_critical_path": [
+        {
+          "pr": 285,
+          "gate": "Refreshed source/control merge independently reviewed; fresh current-head hosted checks remain required. Earlier managed/frozen receipts retain exact f7 scope.",
+          "owner": "luna_worker_exit; root"
+        },
+        {
+          "pr": 284,
+          "gate": "Refreshed source/control merge independently reviewed; fresh current-head hosted checks remain required. Earlier managed/frozen receipts retain exact f7 scope.",
+          "owner": "root; luna_release_notes monitoring"
+        },
+        {
+          "pr": 282,
+          "gate": "Published Core floor, explicit Runtime/browser acceptance, authorized retrievable artifact. Candidate-only wheel proof cannot waive production manifest or artifact requirements.",
+          "owner": "luna_canvas_acceptance"
+        },
+        {
+          "pr": 221,
+          "owner": "root integration; existing CI/release lanes",
+          "gate": "New31239 integration matrix, final native/registry release admission and externally retrieved artifacts. No community merge/tag/publication yet."
+        }
+      ],
+      "rcc_execution": {
+        "run": 38036869578,
+        "control": "06885e75f8d2054bb3273934c3cc38d5e9e8d4f2",
+        "candidate": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+        "status": "PASS_SCOPED",
+        "artifact_id": 11663538970,
+        "zip_sha256": "f2eb536604f16d76efb8b6976a0b47fea7adbe6933d2a469ae0b5305ed4c890c",
+        "limit": "Reviewed fail-closed summary and actual log; raw JUnit/full lifecycle receipt not uploaded; no frozen/managed-successful-switch/full-issue claim."
+      },
+      "frozen_execution": {
+        "failed_run": 38037036032,
+        "failed_control": "bca5ad8d8f1af7040dd3f9062dd890258304db97",
+        "failed_status": "PYTEST_INVOCATION_FAILURE_LIFECYCLE_NOT_RUN",
+        "corrected_control": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+        "new_status": "PASS_INDEPENDENTLY_ACCEPTED_SCOPED_GATE",
+        "review": "Accepted control correction; selector probe uses exact2.1.1 EnvManager code with cached2.5.1 support dependencies, not complete pinned CLI proof.",
+        "passed_run": 38037959456,
+        "passed_job": 114172258002,
+        "artifact_id": 11664661140,
+        "artifact_sha256": "10a7a62db7d38fd2110e8d036bd0c7660054fa706e68278e3a992b6673be3c8f",
+        "raw_junit_sha256": "7037e54da7e0c887a35964b02088083cf735932e9da23d7aa6ce889556a528b5",
+        "limits": "Linux frozen rollback only; no complete orphan inventory, managed successful-generation drain, other-platform collision proof, publication or whole-issue acceptance.",
+        "deadline_repair": {
+          "local": "e795ced84e96d876af76ddcf80391e0b7fcef160",
+          "published": "c00c7f6953b6370630885b7e9eacf8dddb6ec94c",
+          "passed_fixed_f7_run": 38039472339,
+          "scope": "90s only frozen startup with package roots;30s source/no-root preserved. Refreshed499 source validation remains pending."
+        }
+      },
+      "devsy": {
+        "observed_at_utc": "2026-10-10T09:04:59Z",
+        "target": "cas-worker-01",
+        "workspace_uid": "default-ca-0b24d",
+        "status": "BLOCKED_WORKSPACE_NOT_RUNNING",
+        "cause": "unknown; no reason field in diagnostics",
+        "supervisor_thread": "01a1222f-e720-7183-9634-2edb76d30326",
+        "supervisor_cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+        "directory_contract": {
+          "repository": "/workspaces/actions",
+          "workers": "/workspaces/actions-worktrees/<worker>",
+          "protected_bootstrap": "/workspaces/cas-worker-01"
+        },
+        "guidance_commit": "3c305f5586b50bbaf1188a7c99b27abc269620c8",
+        "disposition": "No replacement, provisioning, replay or current cleanliness claim; reconcile existing thread effects after recovery."
+      },
+      "evidence": [
+        {
+          "path": "evidence/pr283-integration-20261010.json",
+          "size_bytes": 5598,
+          "sha256": "7a0de129ec251ba3474d00712c52a8630c1c7e35da23b27f021048285e977b48"
+        },
+        {
+          "path": "evidence/runtime-macos-download-503-20261010.json",
+          "size_bytes": 909,
+          "sha256": "cf9f1db3e58b3160a86a98cc7b7478205641feff6341979f1dd9addcdb473a0d"
+        },
+        {
+          "path": "evidence/runtime-wheel-proof-38038475802.json",
+          "size_bytes": 3681,
+          "sha256": "b45ca08875a4c9d29a5723e033dfd4114bd6bbb0f694f8d32d52f942ee091cd3"
+        },
+        {
+          "path": "evidence/pr285-ubuntu-114172268484-timeout-diagnostic.json",
+          "size_bytes": 2146,
+          "sha256": "ba073d56a4bc7813bc0bb9284bc6aa964354ced4a1930beebadbf9702b8254ee"
+        },
+        {
+          "path": "evidence/canvas-and-cold-start-review-20261010.json",
+          "size_bytes": 2990,
+          "sha256": "60b3b0cde715191ef678a636f64e9f5e9be0ad7b4d9bd8ef708d6e10c871be36"
+        },
+        {
+          "path": "evidence/native-cold-start-failure-excerpts.log",
+          "size_bytes": 9952,
+          "sha256": "8d97c4d267584460d53f00719756ae2f7c4c3d0a703f8aed91c7f2d948582364"
+        },
+        {
+          "path": "evidence/native-cold-start-source-binding-appendix.json",
+          "size_bytes": 982,
+          "sha256": "5f4750e3f82627722e9fdd354e06f6a97a4eb2b98c5e5e0d12fec4bd95d3ca7c"
+        },
+        {
+          "path": "evidence/canvas-8370-review-appendix.json",
+          "size_bytes": 1578,
+          "sha256": "87fa3574e04dcbb9c547b911b556349560b16476371cbd78b04d280a2967ed4b"
+        },
+        {
+          "path": "evidence/canvas-75090058-acceptance-review.json",
+          "size_bytes": 3144,
+          "sha256": "9fc99a8e74026bd5fa4176053ad490255908def5a24dc613dc2e86f7dd6ba45b"
+        },
+        {
+          "path": "evidence/current-integration-refresh-review.json",
+          "size_bytes": 2524,
+          "sha256": "93b1d7452c5d73de184595cfda2a1570bbf64f983011133339a38630e445893a"
+        },
+        {
+          "path": "evidence/cas-heartbeat-20261010T0905Z.json",
+          "size_bytes": 1084,
+          "sha256": "94064b9ba8c56ca896aa29017b3720e64022ab5f01322d1e08ec173f2ece2f39"
+        }
+      ],
+      "accepted_scoped_criteria": [],
+      "issue_metadata_updates": {
+        "129": {
+          "owner": "root integration; luna_release_notes exact-head monitoring",
+          "checkpoint_pr": 283,
+          "next_bounded_action": "Slice1a is integrated and scoped-source accepted. Bind the next consumer to its exact canonical-value/reference criteria; production digest preimages, persistence, authorization and resolver contracts remain unaccepted."
+        },
+        "134": {
+          "owner": "root integration with source/frozen acceptance and independent Sol review",
+          "checkpoint_pr": 284,
+          "next_bounded_action": "Finish current refreshed-head toolkit gates and integrate reviewed RCC control; preserve managed/frozen exact-source limits and address remaining provider/lease/offline criteria."
+        }
+      },
+      "current_active_workers": {
+        "cloud_canvas": "luna_canvas_acceptance: existing PR282; hosted candidate Runtime/browser control under independent review",
+        "cloud_ci": "luna_release_notes: read-only exact-head CI monitoring through09:25Z; root alone dispatches reruns",
+        "cloud_frozen": "luna_worker_exit: bounded wheel proof and successor reconnaissance complete; available for next disjoint assignment",
+        "cloud_review": "sol_p0_snapshot_review: refresh merges accepted; Canvas hosted control under review",
+        "cloud_cas_heartbeat": "luna_cas_heartbeat: bounded read-only window complete; last09:04:59Z sample stillFailed",
+        "devsy_supervisor": "BLOCKED; last lane inventory historical, no current native progress claim"
+      },
+      "upstream_disposition": "Actions-local harness corrections; no confirmed RCC/dependency defect. Download HTTP503 treated as bounded service failure, not speculative upstream bug.",
+      "next_successor_boundary": "PR280 experimental schema and PR283 value primitives do not establish a production compiler. #135 local-source snapshot slice needs explicit format/inclusion/link/mode criteria and #148 helper reuse review; no speculative compiler writer dispatched."
     }
   ],
   "current_program_amendment": {
-    "id": "program-amendment-20261010T0841Z",
-    "observed_at_utc": "2026-10-10T08:41:26Z",
-    "path": "evidence/program-amendment-20261010T0841Z.json",
-    "sha256": "d6be9c288482897e005d1de550827e3b5e8d1b060e8c8a19a6639727c6eb2ee3"
+    "id": "program-amendment-20261010T0910Z",
+    "observed_at_utc": "2026-10-10T09:10:09Z",
+    "path": "evidence/program-amendment-20261010T0910Z.json",
+    "sha256": "41f28a1bb4696a375732e4e7917363aaa5a2f6830cef65ea0c8d57fa6fa8bbf2"
   },
   "prior_current_pr_convergence_20261010T0441Z": {
     "observed_at_utc": "2026-10-10T04:41:32Z",
@@ -6253,6 +6507,75 @@
     "path": "evidence/convergence-live-20261010T0828Z.json",
     "sha256": "c14abd3b81b54cc67289cf4fb77e2bd2d7c89c0bac75b4c14d9449676117ee61",
     "integration": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "release_ready": false,
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ]
+  },
+  "prior_current_program_refs_20261010T0910Z": {
+    "observed_at_utc": "2026-10-10T08:37:06Z",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration/community-release-20261008": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+    "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "release_ready": false,
+    "receipt": "evidence/pr273-integration-20261010.json",
+    "receipt_sha256": "28aa08cd3d1cf11636a28e983af73a0c801b92072983ce558359f2341d6bae60"
+  },
+  "prior_current_pr_convergence_20261010T0910Z": {
+    "observed_at_utc": "2026-10-10T08:41:26Z",
+    "cohort": {
+      "items": 34,
+      "target_integrated": 25,
+      "open_blocked": 9,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        280,
+        281
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        282,
+        283,
+        284,
+        285
+      ],
+      "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
+    },
+    "path": "evidence/pr273-integration-20261010.json",
+    "sha256": "28aa08cd3d1cf11636a28e983af73a0c801b92072983ce558359f2341d6bae60",
+    "integration": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,

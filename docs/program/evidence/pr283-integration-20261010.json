@@ -1,0 +1,168 @@
+{
+  "observed_at_utc": "2026-10-10T08:59:45Z",
+  "repository": "joshyorko/actions",
+  "pr": 283,
+  "head": "58a7dcabb94ce7012f99446902bd4e5128cadb79",
+  "base_before": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+  "merge_commit": "31239cf99c7b264a0eab89660e93b391532ac305",
+  "merge_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+  "merge_parents": [
+    "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+    "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+  ],
+  "review": "Independent Sol review accepted exact local ab189 tree; published admission comments6095379818 and6095903806",
+  "review_threads": [],
+  "reviews": [],
+  "branch_protected": false,
+  "rulesets": [],
+  "checks": [
+    {
+      "id": 114169734982,
+      "name": "publish (3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114168295240,
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "skipped",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915760,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915741,
+      "name": "build-wheels (macos-15)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915731,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915618,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915408,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915406,
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915399,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915394,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915389,
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166915377,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914995,
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914957,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914841,
+      "name": "build (macos-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914781,
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914751,
+      "name": "build (windows-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914683,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914678,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914533,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "id": 114166914456,
+      "name": "coverage",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    }
+  ],
+  "scope": "#129 Slice1a only; source-accepted canonical values and reference envelopes, not persistence/auth/resolver/full Deployment acceptance or publication."
+}

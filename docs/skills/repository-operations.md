@@ -196,6 +196,13 @@ Before committing an evidence archive, verify each selected receipt's bytes
 against its ledger SHA-256 and reject absolute or parent-traversal archive
 paths. Preserve running and skipped CI states separately from passing results.
 
+When transferring Git blobs through Python and JavaScript, compare the same
+units: Python string length counts Unicode code points, while JavaScript
+`string.length` counts UTF-16 code units. Non-BMP fixture characters can make
+those counts differ without any corruption. Compare code points or encoded
+bytes, then require the returned Git blob and tree IDs to match the local
+objects before updating a branch with its expected-head lease.
+
 For package provenance archives, compare the complete extracted filesystem to
 the build inventory; a valid embedded manifest or green workflow does not prove
 that the archive contains every measured entry. Include hidden files, shared

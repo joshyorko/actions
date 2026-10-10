@@ -74,3 +74,17 @@ docs/program/evidence/frozen-catalog-38037959456/frozen-catalog-summary.json -te
 docs/program/evidence/frozen-catalog-38037959456/sanitized-test-excerpts.log -text
 docs/program/evidence/cas-heartbeat-20261010T0835Z.json -text
 docs/program/evidence/program-amendment-20261010T0841Z.json -text
+
+# Immutable convergence receipts, recorded 20261010T0910Z.
+docs/program/evidence/pr283-integration-20261010.json -text
+docs/program/evidence/runtime-macos-download-503-20261010.json -text
+docs/program/evidence/runtime-wheel-proof-38038475802.json -text
+docs/program/evidence/pr285-ubuntu-114172268484-timeout-diagnostic.json -text
+docs/program/evidence/canvas-and-cold-start-review-20261010.json -text
+docs/program/evidence/native-cold-start-failure-excerpts.log -text -whitespace
+docs/program/evidence/native-cold-start-source-binding-appendix.json -text
+docs/program/evidence/canvas-8370-review-appendix.json -text
+docs/program/evidence/canvas-75090058-acceptance-review.json -text
+docs/program/evidence/current-integration-refresh-review.json -text
+docs/program/evidence/cas-heartbeat-20261010T0905Z.json -text
+docs/program/evidence/program-amendment-20261010T0910Z.json -text

@@ -1,0 +1,41 @@
+{
+  "canonical_docs_delta": "Accepted manual guide union plus heading only; no additional claim or acceptance expansion.",
+  "date": "2026-10-10",
+  "independent_checks": [
+    "Both worktrees clean; exact SHA/tree/parents match.",
+    "Both actions and action_server/src, action_server/poetry.lock and action_server/pyproject.toml exactly equal integration31239 by empty git diff.",
+    "Frozen developer/.github/scripts and three accepted lifecycle test files exactly equal e795 by empty git diff.",
+    "RCC developer/.github/scripts exactly equal d558 by empty git diff.",
+    "Both git diff --check pass.",
+    "Guide diff contains insertion only; both original guide sections retained.",
+    "Frozen and RCC narrow dedicated push paths exclude all refresh-only changed files."
+  ],
+  "integration_sha": "31239cf99c7b264a0eab89660e93b391532ac305",
+  "limits": "No heavy tests, installs, source edits, pushes or merges executed by reviewer. Fresh current-head CI remains required.",
+  "proof_boundary": "Historical native frozen and RCC receipts remain candidatef7 only. Frozen unchanged guard requires control HEAD Runtime source tree==f7, so deliberately rejects a refreshed non-f7 HEAD if retriggered; current-head normal PR CI must validate the integrated source. RCC workflow still checks out separate immutablef7 candidate. No historical result relabeled as new-source acceptance.",
+  "reviews": [
+    {
+      "local_sha": "af19ae093628514c4469b5f0df6f3703c598ca82",
+      "parents": [
+        "e795ced84e96d876af76ddcf80391e0b7fcef160",
+        "31239cf99c7b264a0eab89660e93b391532ac305"
+      ],
+      "pr": 285,
+      "resolution": "Preserve append-only Deployment canonical values guide and full frozen acceptance guide; add Frozen Runtime acceptance heading. No source or accepted frozen control changes.",
+      "tree": "a93a6618c5beb2483ef4f5e7233a318074d34c60",
+      "verdict": "ACCEPT refresh for publication and current-head PR CI"
+    },
+    {
+      "local_sha": "5d06c0d7d8bdb242247f71f23bc0889b770cb48a",
+      "parents": [
+        "d558d323dfab10e38d9c9062e95a2e4c06b8d219",
+        "31239cf99c7b264a0eab89660e93b391532ac305"
+      ],
+      "pr": 284,
+      "resolution": "Automatic merge; accepted RCC control unchanged. Deployment guide added from integration.",
+      "tree": "a3d627658f116525c96e0da83aafa37b2ec59413",
+      "verdict": "ACCEPT refresh for publication and current-head PR CI"
+    }
+  ],
+  "upstream_disposition": "Repository-local merge refresh; no confirmed external defect."
+}

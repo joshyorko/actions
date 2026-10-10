@@ -1,0 +1,14 @@
+{
+  "failure_run": 38038475802,
+  "failed_job": 114173798358,
+  "failure": "cibuildwheel virtualenv download HTTP503 before build",
+  "sanitized_log_excerpts": [
+    "2026-10-10T08:48:53.1520230Z     base_python, env = setup_python(",
+    "2026-10-10T08:48:53.1523790Z     virtualenv_app = _ensure_virtualenv(version)",
+    "2026-10-10T08:48:53.1526090Z     download(url, path)",
+    "2026-10-10T08:48:53.1589920Z urllib.error.HTTPError: HTTP Error 503: Service Unavailable"
+  ],
+  "root_rerun": "One specific-job rerun requested; tool success. Run attempt2 macOS job114176383919 subsequently SUCCESS.",
+  "duplicate_attempt": "Monitor erroneously attempted another specific-job rerun after notification; GitHub403 already-running, no additional rerun effect. Read-only boundary reasserted.",
+  "publication": "Credential and publication steps remain intentionally skipped for PR verification; no release."
+}

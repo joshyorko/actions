@@ -1,0 +1,82 @@
+2026-10-10T08:28:00.4656009Z 
+2026-10-10T08:28:00.4656831Z HEAD is now at e3e2360 Merge 385f1e2385b80f4c2ddbc5f534032c186db09de5 into 35b32e76b3704dc47d856103ae62221c9a9f0789
+2026-10-10T08:28:00.4659836Z ##[endgroup]
+2026-10-10T08:34:48.1769533Z action_server_tests/test_cli.py::test_oauth2_actions_config PASSED       [ 25%]
+2026-10-10T08:35:26.8357396Z action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers PASSED [ 26%]
+2026-10-10T08:35:57.2581302Z action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource] FAILED [ 26%]
+2026-10-10T08:43:21.5535259Z             CancelledError: If the future was cancelled.
+2026-10-10T08:43:21.5535946Z             TimeoutError: If the future didn't finish executing before the given
+2026-10-10T08:43:21.5536415Z                 timeout.
+2026-10-10T08:43:21.5544118Z                 else:
+2026-10-10T08:43:21.5544421Z >                   raise TimeoutError()
+2026-10-10T08:43:21.5544749Z E                   TimeoutError
+2026-10-10T08:43:21.5544922Z 
+2026-10-10T08:43:21.5545504Z /home/runner/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py:458: TimeoutError
+2026-10-10T08:43:21.5546008Z 
+2026-10-10T08:43:21.5628664Z                         break
+2026-10-10T08:43:21.5629161Z                     except TimeoutError:
+2026-10-10T08:43:21.5629692Z                         if is_debugger_active():
+2026-10-10T08:43:21.5630842Z                         if time.monotonic() - initial_time >= timeout:
+2026-10-10T08:43:21.5631262Z >                           raise TimeoutError()
+2026-10-10T08:43:21.5631613Z E                           TimeoutError
+2026-10-10T08:43:21.5631799Z 
+2026-10-10T08:43:21.5632024Z ../src/actions/server/_selftest.py:198: TimeoutError
+2026-10-10T08:43:21.5632542Z ----------------------------- Captured stderr call -----------------------------
+2026-10-10T08:43:21.5635886Z TEST PROCESS: 2026-10-10 08:35:26,839 - actions.server._robo_utils.process - DEBUG - Subprocess start [args=['/home/runner/work/actions/actions/action_server/dist/final/action-server', 'start', '--actions-sync=true', '--port=0', '--datadir=/tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/runtime-data', '--db-file=catalog.sqlite', '-v', '--skip-lint', '--min-processes=0', '--max-processes=2', '--reuse-processes', '--address=127.0.0.1', '--dir=/tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/package_a', '--dir=/tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/package_b'],cwd=/tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0,uid=25]
+2026-10-10T08:43:21.5639146Z TEST PROCESS: 2026-10-10 08:35:26,840 - actions.server._robo_utils.process - DEBUG - Subprocess started [pid=9800,uid=25]
+2026-10-10T08:43:21.5642143Z stderr: [2026-10-10 08:35:27] [actions.server._cli_impl: DEBUG] Arguments: /home/runner/.actions/bin/action-server/internal/1.0.3/action-server start --actions-sync=true --port=0 --datadir=/tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/runtime-data --db-file=catalog.sqlite -v --skip-lint --min-processes=0 --max-processes=2 --reuse-processes --address=127.0.0.1 --dir=/tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/package_a --dir=/tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/package_b
+2026-10-10T08:43:21.5747013Z stderr: ]
+2026-10-10T08:43:21.5749843Z stderr: [2026-10-10 08:35:56] [actions.server._rcc: INFO] Output from: /home/runner/.actions/bin/action-server/internal/1.0.3/_internal/actions/server/bin/rcc-18.19.3 holotree variables --space 460c42919b8a21c5 /tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/runtime-data/.rcc-runtime-sources/4b161d6e188b34bb73e7ed2d241abb7bb3fef2197fd970e78220ee2a7e482b3d/package.yaml --config /tmp/pytest-of-runner/pytest-1/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp (took: 28.86s): [
+2026-10-10T08:43:21.5752023Z stderr:   {
+2026-10-10T08:43:21.5788849Z stderr: 
+2026-10-10T08:43:21.5789916Z stderr: [2026-10-10 08:35:56] [actions.server._actions_import: INFO] Python interpreter path: /tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3
+2026-10-10T08:43:21.5791164Z stderr: [2026-10-10 08:35:56] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: package_a.
+2026-10-10T08:43:21.5792328Z stderr: [2026-10-10 08:35:56] [actions.server._actions_import: DEBUG] Importing action package from: /tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/package_b
+2026-10-10T08:43:21.5793680Z stderr: [2026-10-10 08:35:56] [actions.server._action_package_handler: INFO] Action package seems ok. Bootstrapping RCC environment (please wait, this can take a long time).
+2026-10-10T08:43:21.5796462Z stderr: [2026-10-10 08:35:56] [actions.server._rcc: DEBUG] Running: /home/runner/.actions/bin/action-server/internal/1.0.3/_internal/actions/server/bin/rcc-18.19.3 ht hash /tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/runtime-data/.rcc-runtime-sources/9ec0b8a7a0038234184da6a81224b00d78dee2e56907574419d53c3da8060d1b/package.yaml --silent --no-temp-management --warranty-voided --controller action-server --bundled --robocorp
+2026-10-10T08:43:21.5800436Z stderr: [2026-10-10 08:35:56] [actions.server._rcc: INFO] Output from: /home/runner/.actions/bin/action-server/internal/1.0.3/_internal/actions/server/bin/rcc-18.19.3 ht hash /tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/runtime-data/.rcc-runtime-sources/9ec0b8a7a0038234184da6a81224b00d78dee2e56907574419d53c3da8060d1b/package.yaml --silent --no-temp-management --warranty-voided --controller action-server --bundled --robocorp (took: 0.02s): 460c42919b8a21c5
+2026-10-10T08:43:21.5802169Z stderr: 
+2026-10-10T08:43:21.5803220Z stderr: [2026-10-10 08:35:56] [actions.server._actions_import: INFO] Python interpreter path: /tmp/pytest-of-runner/pytest-1/test_duplicate_mcp_key_rejects0/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3
+2026-10-10T08:43:21.5804623Z stderr: [2026-10-10 08:35:56] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: package_b.
+2026-10-10T08:43:21.5805543Z TEST PROCESS: 2026-10-10 08:35:57,135 - actions.server._robo_utils.process - DEBUG - Subprocess kill [pid=9800,uid=25]
+2026-10-10T08:43:21.5865884Z             CancelledError: If the future was cancelled.
+2026-10-10T08:43:21.5866565Z             TimeoutError: If the future didn't finish executing before the given
+2026-10-10T08:43:21.5867018Z                 timeout.
+2026-10-10T08:43:21.5873996Z                 else:
+2026-10-10T08:43:21.5874283Z >                   raise TimeoutError()
+2026-10-10T08:43:21.5874613Z E                   TimeoutError
+2026-10-10T08:43:21.5874781Z 
+2026-10-10T08:43:21.5875353Z /home/runner/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py:458: TimeoutError
+2026-10-10T08:43:21.5875850Z 
+2026-10-10T08:43:21.5955610Z                         break
+2026-10-10T08:43:21.5956044Z                     except TimeoutError:
+2026-10-10T08:43:21.5956567Z                         if is_debugger_active():
+2026-10-10T08:43:21.5957726Z                         if time.monotonic() - initial_time >= timeout:
+2026-10-10T08:43:21.5958153Z >                           raise TimeoutError()
+2026-10-10T08:43:21.5958767Z E                           TimeoutError
+2026-10-10T08:43:21.5958970Z 
+2026-10-10T08:43:21.5959191Z ../src/actions/server/_selftest.py:198: TimeoutError
+2026-10-10T08:43:21.5959856Z ----------------------------- Captured stderr call -----------------------------
+2026-10-10T08:43:21.6192580Z             CancelledError: If the future was cancelled.
+2026-10-10T08:43:21.6193260Z             TimeoutError: If the future didn't finish executing before the given
+2026-10-10T08:43:21.6193717Z                 timeout.
+2026-10-10T08:43:21.6201066Z                 else:
+2026-10-10T08:43:21.6201368Z >                   raise TimeoutError()
+2026-10-10T08:43:21.6201703Z E                   TimeoutError
+2026-10-10T08:43:21.6201872Z 
+2026-10-10T08:43:21.6202444Z /home/runner/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py:458: TimeoutError
+2026-10-10T08:43:21.6202943Z 
+2026-10-10T08:43:21.6274713Z                         break
+2026-10-10T08:43:21.6274991Z                     except TimeoutError:
+2026-10-10T08:43:21.6275334Z                         if is_debugger_active():
+2026-10-10T08:43:21.6276119Z                         if time.monotonic() - initial_time >= timeout:
+2026-10-10T08:43:21.6276305Z >                           raise TimeoutError()
+2026-10-10T08:43:21.6276465Z E                           TimeoutError
+2026-10-10T08:43:21.6276474Z 
+2026-10-10T08:43:21.6276691Z ../src/actions/server/_selftest.py:198: TimeoutError
+2026-10-10T08:43:21.6276993Z ----------------------------- Captured stderr call -----------------------------
+2026-10-10T08:43:22.0246611Z =========================== short test summary info ============================
+2026-10-10T08:43:22.0247426Z FAILED action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource] - TimeoutError
+2026-10-10T08:43:22.0248191Z FAILED action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template] - TimeoutError
+2026-10-10T08:43:22.0249361Z FAILED action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt] - TimeoutError
+2026-10-10T08:43:22.0249731Z ==== 3 failed, 126 passed, 17 skipped, 920 deselected in 654.44s (0:10:54) =====
