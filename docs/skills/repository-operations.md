@@ -1215,6 +1215,24 @@ selection does not establish native Windows or cross-host shared-filesystem
 behavior. These containment checks do not close pathname replacement races
 against a writer with authority to mutate the storage namespace.
 
+Windows non-strict path resolution can retain an extended local-drive prefix
+(`\\?\C:\...`) while the already resolved storage root uses `C:\...`. The
+artifact containment comparisons treat only fully qualified ordinary and
+extended letter-drive anchors as equivalent. Comparisons across prefixes reject
+ambiguous components such as trailing dots/spaces, reserved device names,
+alternate-stream separators, and parent traversal. They preserve the resolved
+paths for I/O and perform link/reparse checks in the candidate's I/O namespace;
+storage-root rejection remains enforced. They do not equate UNC, device, or
+volume GUID namespaces with a different spelling. File-list relative names use the
+same comparison boundary. A concurrent creator of an intermediate directory
+can change the missing-path Windows error during resolution; a subsequent
+passing concurrent-publication run does not prove this spelling boundary is
+fixed. The host-neutral drive-prefix tests cover accepted and rejected path
+pairs. `test_storage_handles_mixed_resolved_drive_prefixes` exercises real
+Windows file operations with controlled resolver spellings; run it with the
+existing spawned concurrent-publication test on native Windows. Linux results
+and controlled spellings do not establish the exact native resolver race.
+
 The direct two-instance/concurrent-update and concurrent-startup acceptance is
 in `action_server/tests/action_server_tests/test_database_shared.py` and
 requires `ACTIONS_TEST_DATABASE_URL`; SQLite tests remain service-free.

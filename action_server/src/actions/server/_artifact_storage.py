@@ -7,7 +7,7 @@ import tempfile
 import time
 from collections.abc import Iterator
 from contextlib import contextmanager
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePath, PurePosixPath, PureWindowsPath
 from typing import Any, Protocol
 
 
@@ -40,6 +40,41 @@ class ArtifactStorage(Protocol):
 
     def read_bytes(self, relative_artifacts_dir: str, name: str) -> bytes:
         ...
+
+
+def _relative_parts(path: PurePath, parent: PurePath) -> tuple[str, ...]:
+    """Compare local Windows drive prefixes without changing paths used for I/O."""
+    try:
+        return path.relative_to(parent).parts
+    except ValueError:
+        if not isinstance(path, PureWindowsPath) or not isinstance(
+            parent, PureWindowsPath
+        ):
+            raise
+
+        def local_drive_spelling(value: PureWindowsPath) -> PureWindowsPath:
+            drive = value.drive.removeprefix("\\\\?\\")
+            if (
+                value.root != "\\"
+                or len(drive) != 2
+                or drive[0]
+                not in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                or drive[1] != ":"
+            ):
+                raise ValueError("Paths do not have equivalent local drive anchors")
+            if any(
+                part in {".", ".."}
+                or part.endswith((".", " "))
+                or ":" in part
+                or PureWindowsPath(part).is_reserved()
+                for part in value.parts[1:]
+            ):
+                raise ValueError("Ambiguous Windows component across drive prefixes")
+            return PureWindowsPath(drive + "\\", *value.parts[1:])
+
+        return (
+            local_drive_spelling(path).relative_to(local_drive_spelling(parent)).parts
+        )
 
 
 def _is_link_or_reparse_point(path: Path) -> bool:
@@ -120,14 +155,18 @@ class FilesystemArtifactStorage:
         return key
 
     def _contained(self, path: Path, label: str, *, require_exists: bool) -> Path:
+        absolute_path = path.absolute()
         try:
-            relative = path.absolute().relative_to(self.root)
+            relative_parts = _relative_parts(absolute_path, self.root)
         except ValueError as error:
             raise ArtifactStorageConfigurationError(
                 f"{label} escapes storage root: {path}"
             ) from error
-        current = self.root
-        for part in relative.parts:
+        # Check directory entries through the candidate's actual I/O namespace.
+        current = absolute_path
+        for _ in relative_parts:
+            current = current.parent
+        for part in relative_parts:
             current /= part
             if _is_link_or_reparse_point(current):
                 raise ArtifactStorageConfigurationError(
@@ -135,12 +174,12 @@ class FilesystemArtifactStorage:
                 )
         resolved = path.resolve(strict=False)
         try:
-            resolved.relative_to(self.root)
+            resolved_parts = _relative_parts(resolved, self.root)
         except ValueError as error:
             raise ArtifactStorageConfigurationError(
                 f"{label} escapes storage root: {path}"
             ) from error
-        if resolved == self.root:
+        if not resolved_parts:
             raise ArtifactStorageConfigurationError(
                 f"{label} cannot be the storage root: {path}"
             )
@@ -195,7 +234,10 @@ class FilesystemArtifactStorage:
             elif path.is_file():
                 resolved = self._contained(path, "Artifact path", require_exists=True)
                 files.append(
-                    (resolved.relative_to(run_dir).as_posix(), resolved.stat().st_size)
+                    (
+                        PurePosixPath(*_relative_parts(resolved, run_dir)).as_posix(),
+                        resolved.stat().st_size,
+                    )
                 )
         return sorted(files)
 
