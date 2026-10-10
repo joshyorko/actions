@@ -59,14 +59,15 @@ def test_import_command_uses_artifact_exec_not_python_exe(tmp_path):
     )
 
     descriptor = RccRuntimeDescriptor(artifact_digest="sha256:" + "c" * 64)
+    rcc_location = tmp_path / "rcc"
     command = build_exec_command(
-        Path("/opt/rcc"),
+        rcc_location,
         descriptor,
         ["python", "-c", "import actions"],
         receipt_file=None,
     )
     assert command[:5] == [
-        "/opt/rcc",
+        str(rcc_location),
         "env",
         "exec",
         "--artifact",
