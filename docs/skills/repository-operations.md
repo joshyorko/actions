@@ -146,6 +146,13 @@ Check both the affected Windows target and the native target, then run the
 existing platform behavior tests. A focused `mypy --platform win32` invocation
 is diagnostic unless the repository's configured CI runs that target.
 
+The Dakota RCC candidate acceptance script fails closed outside Linux. Its
+receipt cleanup uses POSIX `fchmod`; keep cleanup-demotion and permission-mode
+assertions limited to platforms that provide that contract. On Windows, retain
+checks for receipt contents, no-overwrite, and containment, but do not interpret
+`st_mode` bits as ACL isolation or add a `chmod` fallback that claims private
+Windows permissions. Native Windows ACL behavior remains unverified.
+
 ## Community program evidence
 
 The [community issue ledger](../program/community-program-ledger.md) retains
@@ -178,6 +185,14 @@ non-UTF-8 POSIX locale, while the existing Windows ToolkitTest cell exercises
 the native Windows path. Hash-manifested Canvas amendment artifacts also use
 `-text` in `.gitattributes`: Git checkout conversion must not rewrite evidence
 bytes before the validator checks the recorded size and digest.
+
+For a source file whose committed bytes are a historical contract, scope its
+`.gitattributes` rule to preserve the required checkout line endings and test a
+small Git checkout with `core.autocrlf=true`; do not change the historical hash
+to match one operating system's working-tree conversion. Portable source scans
+should decode UTF-8 explicitly, and diagnostic paths should use `/` separators.
+For executable scripts, assert the Git index mode (`100755`) on every platform;
+filesystem execute bits are meaningful only on POSIX hosts.
 
 For Canvas fixture work, distinguish schema/round-trip evidence from product
 authorization: the current MCP dispatcher selects a registered tool by name,
@@ -1141,6 +1156,24 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+### Action Server OpenAPI golden snapshots
+
+When an OpenAPI snapshot fails, compare parsed expected and observed JSON before
+refreshing it. Reconcile new paths and schemas against mounted routers and
+existing API tests; verify removed paths, HTTP methods, and security
+requirements separately. For existing responses, preserve tested validation,
+privacy, and size bounds. Snapshot refreshes record the current source contract;
+they do not authorize Runtime API changes. The full-spec fixture is covered by
+`test_server_full_openapi_flag`, while
+`test_run_api_openapi_distinguishes_legacy_summary_and_detail_contracts`,
+`test_run_summary_fields_have_a_finite_page_budget`, and
+`test_configured_api_key_protects_assembled_surfaces` guard response shape,
+bounded summary data, and configured authentication.
+App-level Bearer enforcement can be absent from the OpenAPI `security` fields;
+an unchanged schema does not prove authentication. Verify the assembled server
+and router dependencies through the authentication regression, including the
+intentional public webhook exception.
+
 ### Action Server shared database
 
 Action Server keeps SQLite as the default datadir-local backend. A shared
@@ -1514,6 +1547,11 @@ locked Playwright Chromium with `npx playwright install chromium` from
 `action_server/frontend` after the portable tests and before integration tests;
 the preceding frontend build has already run `npm ci` and this install must not
 duplicate that build or alter credentials.
+The same OS matrix runs `go test process.go process_test.go` before packaging,
+with the installed Go toolchain and module downloads disabled. These standard-
+library subprocess tests cover wrapper child ownership and exit handling;
+the POSIX signal cases skip Windows. They supplement, rather than replace,
+the later tests against the built wrapper and its frozen Runtime children.
 
 The generic `inv test-binary` selects
 `integration_test and not native_artifact_test`. The three exact-artifact
@@ -1615,6 +1653,20 @@ by `test_binary_preserves_cli_usage_exit_code` in `test_binary.py`. The existing
 does not verify wrapper exit propagation. This argument-error boundary does
 not execute a developer task or require an RCC environment build.
 
+On POSIX, the wrapper subscribes to directed `SIGTERM` before starting its
+child, forwards it only through that child's `os.Process`, and waits for the
+same child's exit. Natural exit and launch failure unregister the handler.
+It does not signal a process group or enumerate descendants; the frozen
+Runtime retains ownership of worker shutdown. `SIGINT` keeps the existing
+foreground-group behavior to avoid forwarding a second terminal Ctrl+C to
+Uvicorn. Windows retains `cmd.Run()` without a new signal-forwarding claim.
+The standard-library subprocess tests run with
+`go test process.go process_test.go` from `action_server/go-wrapper`, without
+embedded Runtime assets. The full acceptance remains the built-wrapper
+`test_mcp_sse_does_not_starve_server_or_sigterm`, which must observe no live
+owned descendants after wrapper-directed SIGTERM. A source-only pass of that
+test verifies inner Runtime teardown, not wrapper forwarding.
+
 Before reinstalling or restarting Action Server, inspect the process table and listening
 sockets. A `GET /mcp` SSE request can expose receive-wrapper event-loop starvation when
 buffer exhaustion is followed by an endlessly ready synthetic `http.request`; sustained
@@ -1701,6 +1753,13 @@ python -m unittest discover -s .devcontainer/tests -p 'test_*.py' -v
 
 Every dispatch includes the mandatory documentation receipt from root `AGENTS.md`. Mutating lanes update canonical guidance in their branch when write scopes permit. Read-only or isolated lanes propose an exact delta. The integration lane records rejected proposals and the reason; silent discard is forbidden.
 
+Before writing, verify the assigned checkout's absolute Git root, branch, HEAD,
+and dirty state against its recorded owner. A separate branch in the same
+checkout does not isolate its files or index: parallel writers require separate
+worktree paths. Do not switch another lane's checkout to your branch. If an
+ownership mismatch is discovered after edits, preserve the changes and hand
+back a committed checkpoint before the owner restores its branch.
+
 ## Verification Receipts
 
 Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
@@ -1763,6 +1822,13 @@ failed RCC receipts, or establish full #134 acceptance. No live RCC/provider or
 native-platform lifecycle proof is implied. Tests for the protocol boundary
 are in `test_preload_actions_exit.py` and
 `test_rcc_runtime_adapter.py`.
+
+The socketpair test that fills a send buffer is a kernel-buffer behavior check:
+it runs on POSIX runners and is skipped on Windows, where the same payload may
+not saturate the pair. Keep a deterministic `socket.timeout` test on all
+platforms to verify bounded-timeout conversion, socket shutdown, and timeout
+restoration independently of kernel buffering. This portable test does not
+establish native Windows send-buffer timeout behavior.
 
 The provisional adapter classifies reload inputs from normalized environment
 fields (`spec-version`, dependency sets, and post-install commands), not from

@@ -317,16 +317,20 @@ def test_native_package_yaml_replaces_core_with_measured_wheel_after_rcc_install
     assert handler.get_pythonpath_entries() == (".",)
     post_install = contents["post-install"]
     assert len(post_install) == 1
-    assert shlex.split(post_install[0]) == [
+    expected_install_args = [
         "python",
         "-m",
         "pip",
         "install",
         "--force-reinstall",
         "--report",
-        str(report.resolve()),
-        str(wheel.resolve()),
+        report.resolve().as_posix(),
+        wheel.resolve().as_posix(),
     ]
+    if os.name == "nt":
+        assert post_install[0] == subprocess.list2cmdline(expected_install_args)
+    else:
+        assert shlex.split(post_install[0]) == expected_install_args
 
 
 def test_consumer_resolves_candidate_wheel_file_url_on_native_platform(tmp_path: Path):
@@ -347,8 +351,9 @@ def test_build_manifest_binds_source_platform_paths_and_measured_bytes(
     tmp_path: Path, monkeypatch
 ):
     package = tmp_path / "action_server"
-    frozen = package / "dist" / "action-server" / "action-server"
-    wrapper = package / "dist" / "final" / "action-server"
+    suffix = ".exe" if RUNNER.platform.system() == "Windows" else ""
+    frozen = package / "dist" / "action-server" / f"action-server{suffix}"
+    wrapper = package / "dist" / "final" / f"action-server{suffix}"
     frozen.parent.mkdir(parents=True)
     wrapper.parent.mkdir(parents=True)
     frozen.write_bytes(b"frozen bytes")
@@ -391,8 +396,9 @@ def test_build_manifest_binds_source_platform_paths_and_measured_bytes(
 )
 def test_build_manifest_rejects_unbound_claims(tmp_path, mutation, failure):
     package = tmp_path / "action_server"
-    frozen = package / "dist" / "action-server" / "action-server"
-    wrapper = package / "dist" / "final" / "action-server"
+    suffix = ".exe" if RUNNER.platform.system() == "Windows" else ""
+    frozen = package / "dist" / "action-server" / f"action-server{suffix}"
+    wrapper = package / "dist" / "final" / f"action-server{suffix}"
     frozen.parent.mkdir(parents=True)
     wrapper.parent.mkdir(parents=True)
     frozen.write_bytes(b"frozen bytes")

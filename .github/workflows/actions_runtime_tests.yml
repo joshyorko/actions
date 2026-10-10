@@ -98,6 +98,12 @@ jobs:
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
       env:
         GH_TOKEN: ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}
+    - name: Test Go wrapper child lifecycle
+      working-directory: action_server/go-wrapper
+      env:
+        GOTOOLCHAIN: local
+        GOPROXY: 'off'
+      run: go test process.go process_test.go
     - name: Build binary
       shell: bash
       env:

@@ -8,7 +8,8 @@ from pathlib import Path
 from threading import Lock
 from types import ModuleType
 from typing import Any
-from urllib.parse import unquote, urlparse
+from urllib.parse import urlparse
+from urllib.request import url2pathname
 
 _MODULE_NAME = "_actions_server_work_items"
 _lock = Lock()
@@ -72,7 +73,7 @@ def locate_work_items_package() -> Path:
         )
 
     try:
-        editable_root = Path(unquote(parsed_url.path)).resolve()
+        editable_root = Path(url2pathname(parsed_url.path)).resolve()
         if not editable_root.is_dir():
             raise WorkItemsPackageUnavailableError(
                 "Unable to locate actions-work-items package"

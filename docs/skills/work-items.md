@@ -130,6 +130,13 @@ The `pypi` environment is a workflow reference only. Its approval and protection
 
 Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader accepts only its PEP 610 editable local-file `direct_url.json` root and resolves a contained `src/actions/work_items/__init__.py` or `actions/work_items/__init__.py`; it never consults project import paths, keeping shadow packages from controlling the REST adapter path.
 
+Convert a PEP 610 file URL path with `urllib.request.url2pathname` before
+constructing a `Path`. On Windows, a local drive URL has a URL path such as
+`/C:/...`; passing that URI spelling directly to `Path` does not produce the
+drive-rooted filesystem path. Keep both editable layouts and the project
+`actions.py` shadowing test, and use the hosted Windows run to verify native
+drive conversion; POSIX path simulations do not establish it.
+
 Native packaging must retain that filesystem source tree. The Action Server
 PyInstaller spec uses `collect_data_files('actions.work_items', include_py_files=True)`
 because hidden imports supply module names in the PYZ archive, not the initializer
@@ -353,8 +360,12 @@ checks Git `HEAD` against `github.sha`, records actual Python and Go versions
 plus platform/architecture, and measures executable hashes and package-relative
 paths. Each runtime entry also records the frozen onedir tree hash and its
 relative-file/content digest, the generated `go-wrapper/assets/assets.zip`
-hash, and a deterministic hash over `go-wrapper/main.go`, `go.mod`, and
-`go.sum`. These component values are read from the real build outputs after
+hash, and a deterministic hash over `go-wrapper/main.go`, `process.go`, `go.mod`,
+and `go.sum`. The manifest producer and independent UI consumer require the
+same ordered source inventory. Changing `process.go` changes the source binding
+while preserving executable and packaged-artifact measurements; omitting the
+helper fails manifest generation. These component values are read from the real
+build outputs after
 `build-executable --go-wrapper`; missing inputs fail manifest generation. The
 browser harness remeasures the checked-out archive and wrapper sources, the
 frozen tree, and extracted wrapper files before accepting UI behavior. The

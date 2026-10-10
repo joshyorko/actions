@@ -12669,8 +12669,8 @@
       "259": "PR259 at reported head prefix85f7 is independently accepted; hosted CI is running."
     }
   },
-  "checkpoint_status": "ACTIVE integration checkpoint at 2026-10-10T01:35:00Z: 16 of 27 scoped PRs are integrated to their recorded targets; 11 remain open/blocked and 0 are merge-ready. Main integration is 46a06485; PR256 remains the latest newly integrated bounded checkpoint. PR273 combined validation remains pending; no whole-issue acceptance changed.",
-  "checkpoint_observed_at": "2026-10-10T01:35:00Z",
+  "checkpoint_status": "ACTIVE engineering checkpoint at 2026-10-10T02:11:20Z: 16 of 28 scoped PRs are integrated to their recorded targets; 12 remain open/blocked and 0 are merge-ready. Community is 36b8192d; main integration is 46a06485; Runtime candidate is 6a53578f. PR273 is the current combined validation candidate at 7f233e2a. Its native build/Work Items browser workflow and six RCC toolkit jobs passed, but configured Runtime run 38015195327 has a Linux integration failure (7 failed, 112 passed, 15 skipped) while macOS and Windows jobs remain in progress. No whole-issue acceptance or publication changed.",
+  "checkpoint_observed_at": "2026-10-10T02:11:20Z",
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
@@ -12714,53 +12714,6 @@
     "scope_limit": "Bounded packaged Work Items cross-platform/browser checkpoint integrated to the named integration branch; no whole #208 acceptance or publication implied.",
     "receipt": "evidence/pr256-524-integration-readback-20261010T0054Z.json"
   },
-  "current_convergence_update": {
-    "path": "evidence/convergence-followup-20261010T0135Z.json",
-    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
-    "observed_at_utc": "2026-10-10T01:35:00Z",
-    "cohort": {
-      "items": 27,
-      "target_integrated": 16,
-      "open_blocked": 11,
-      "merge_ready": 0,
-      "target_integrated_prs": [
-        219,
-        220,
-        251,
-        256,
-        257,
-        259,
-        262,
-        263,
-        264,
-        265,
-        266,
-        267,
-        268,
-        269,
-        270,
-        271
-      ],
-      "open_prs": [
-        215,
-        216,
-        217,
-        218,
-        221,
-        272,
-        273,
-        274,
-        275,
-        276,
-        277
-      ]
-    },
-    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-    "integration": "46a06485f776265e64e84629c468f26b4389d2bd",
-    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
-    "issue_acceptance_changed": false,
-    "receipt_sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
-  },
   "prior_current_integration_checkpoint_pr258": {
     "pr": 258,
     "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
@@ -12801,22 +12754,6 @@
     "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
     "issue_acceptance_changed": false,
     "receipt_sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360"
-  },
-  "current_next_action": {
-    "observed_at_utc": "2026-10-10T01:35:00Z",
-    "path": "evidence/convergence-followup-20261010T0135Z.json",
-    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
-    "pr": 273,
-    "head": "f30aed327adcf148d69f45c71b742dd89bb6f617",
-    "status_counts": {
-      "FAILURE": 3,
-      "SUCCESS": 10,
-      "IN_PROGRESS": 2
-    },
-    "owner": "Root integration",
-    "source_review": "Component PRs274\u2013277 have bounded source reviews accepted; PR273 itself remains at its published head with three failed checks.",
-    "pending": "Push a single composed candidate and run configured combined Runtime/Work Items/native gates on that exact head.",
-    "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
   },
   "prior_current_convergence_update_20261010T0017Z": {
     "path": "evidence/convergence-followup-20261010T0017Z.json",
@@ -13059,5 +12996,138 @@
     "path": "evidence/convergence-correction-20261010T0140Z.json",
     "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
     "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
+  },
+  "prior_current_convergence_update_20261010T0135Z": {
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "observed_at_utc": "2026-10-10T01:35:00Z",
+    "cohort": {
+      "items": 27,
+      "target_integrated": 16,
+      "open_blocked": 11,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277
+      ]
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "46a06485f776265e64e84629c468f26b4389d2bd",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "issue_acceptance_changed": false,
+    "receipt_sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
+  },
+  "prior_current_next_action_20261010T0135Z": {
+    "observed_at_utc": "2026-10-10T01:35:00Z",
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "pr": 273,
+    "head": "f30aed327adcf148d69f45c71b742dd89bb6f617",
+    "status_counts": {
+      "FAILURE": 3,
+      "SUCCESS": 10,
+      "IN_PROGRESS": 2
+    },
+    "owner": "Root integration",
+    "source_review": "Component PRs274\u2013277 have bounded source reviews accepted; PR273 itself remains at its published head with three failed checks.",
+    "pending": "Push a single composed candidate and run configured combined Runtime/Work Items/native gates on that exact head.",
+    "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
+  },
+  "current_convergence_update": {
+    "path": "evidence/convergence-followup-20261010T0211Z.json",
+    "sha256": "128e332ea91bbc0efb16d4319c4e0f8703a9c8a10ee87bddc4bf0c8d182f33d6",
+    "observed_at_utc": "2026-10-10T02:11:20Z",
+    "cohort": {
+      "items": 28,
+      "target_integrated": 16,
+      "open_blocked": 12,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278
+      ]
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "46a06485f776265e64e84629c468f26b4389d2bd",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "open_pr_audit": "evidence/convergence-live-prs-20261010T0211Z.json",
+    "open_pr_audit_sha256": "bccec098d85a09f08210d475abe92b5ab743b9f0cd9542c2878fd1d96e455582",
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "runtime_validation": "PR273 run38015195327: Linux integration failure (7 failed,112 passed,15 skipped); macOS and Windows still in progress at observation time. Native/work-items run38015195279 and RCC toolkit run38015195328 succeeded.",
+    "release_state": {
+      "core": "1.0.2 published and verified",
+      "helper": "1.0.3 published and verified",
+      "runtime_native": "1.0.3 held and unpublished",
+      "publication": "No publication performed."
+    },
+    "upstream_disposition": "none; the current failures are in Actions tests/CI. No upstream RCC defect established."
+  },
+  "current_next_action": {
+    "observed_at_utc": "2026-10-10T02:11:20Z",
+    "path": "evidence/convergence-followup-20261010T0211Z.json",
+    "sha256": "128e332ea91bbc0efb16d4319c4e0f8703a9c8a10ee87bddc4bf0c8d182f33d6",
+    "pr": 273,
+    "head": "7f233e2a9a18866f3bb04aca1f3f9155b96e889b",
+    "tree": "4f6880df0413bfd578af432ee6c7770560b1904c",
+    "status": "OPEN_DRAFT; native/Work Items browser and RCC toolkit checks passed; configured Runtime validation is still failing/in progress.",
+    "owner": "Root integration; Sol owns the focused wrapper SIGTERM/descendant-lifecycle diagnosis.",
+    "pending": "Triage the seven Linux integration failures without weakening tests; obtain final macOS/Windows results and independent validation of workflow-reported artifact evidence; rerun only after a reviewed source correction.",
+    "scope": "No current combined-gate PASS, whole-issue acceptance, Runtime/native publication, or release readiness."
   }
 }
