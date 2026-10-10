@@ -451,9 +451,8 @@ def _runtime_python() -> Path:
     if configured:
         candidate = Path(configured)
     elif sys.version_info[:2] in {(3, 12), (3, 13)}:
-        # The contract runs under Poetry's selected package interpreter. Keep
-        # wheel creation and clean installation on that same ABI even when a
-        # newer supported interpreter also happens to be earlier on PATH.
+        # Keep clean installs and probes on the active package interpreter
+        # instead of choosing a newer supported interpreter from PATH.
         candidate = Path(sys.executable)
     else:
         candidate = next(
