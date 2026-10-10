@@ -60,6 +60,46 @@ def test_historical_migration_contents_are_immutable():
         assert hashlib.sha256(content).hexdigest() == expected_sha256
 
 
+def test_historical_migration_checkout_preserves_git_blob_bytes(tmp_path):
+    repo = tmp_path / "checkout"
+    repo.mkdir()
+    migration_path = "action_server/src/actions/server/migrations/migration_initial.py"
+    expected_blob = subprocess.run(
+        ["git", "show", f"HEAD:{migration_path}"],
+        cwd=Path(__file__).parents[3],
+        check=True,
+        capture_output=True,
+    ).stdout
+
+    (repo / ".gitattributes").write_bytes(
+        (Path(__file__).parents[3] / ".gitattributes").read_bytes()
+    )
+    destination = repo / migration_path
+    destination.parent.mkdir(parents=True)
+    destination.write_bytes(expected_blob)
+
+    def git(*args: str) -> None:
+        subprocess.run(["git", *args], cwd=repo, check=True, capture_output=True)
+
+    git("init", "--quiet")
+    git("config", "core.autocrlf", "true")
+    git("add", ".gitattributes", migration_path)
+    git(
+        "-c",
+        "user.name=Test",
+        "-c",
+        "user.email=test@example.invalid",
+        "commit",
+        "--quiet",
+        "-m",
+        "fixture",
+    )
+    destination.write_bytes(expected_blob.replace(b"\n", b"\r\n"))
+    git("checkout", "--force", "HEAD", "--", migration_path)
+
+    assert destination.read_bytes() == expected_blob
+
+
 def test_database_selects_postgres_for_explicit_url():
     db = Database("postgresql://localhost/actions_test")
 

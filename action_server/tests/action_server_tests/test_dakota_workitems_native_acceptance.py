@@ -197,6 +197,7 @@ def _write_atomic_proof(proof_dir: Path, runtime_kind: str, proof: object) -> Pa
 
 
 @pytest.mark.integration_test
+@pytest.mark.native_artifact_test
 @pytest.mark.parametrize(
     ("runtime_kind", "executable_variable"),
     [

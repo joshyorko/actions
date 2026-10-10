@@ -21,6 +21,7 @@ from PyInstaller.utils.hooks import (
     collect_submodules,
     copy_metadata,
 )
+from actions.server._build_common.rcc_bundle import is_rcc_data  # noqa: E402
 
 PyInstaller.config.CONF["excludes"] = ["_pyi_rth_nltk"]
 
@@ -60,11 +61,7 @@ psycopg_hiddenimports = [
 ]
 psycopg_binaries = collect_dynamic_libs("psycopg_binary")
 new_datas = []
-rcc_datas = [
-    data
-    for data in action_server_datas
-    if data[1] == "actions/server/bin" and os.path.basename(data[0]).startswith("rcc-")
-]
+rcc_datas = [data for data in action_server_datas if is_rcc_data(data)]
 for data in action_server_datas:
     if ".mypy_cache" in data[0]:
         continue

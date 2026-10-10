@@ -1,0 +1,73 @@
+{
+  "observed_at": "2026-10-10T03:04:00Z",
+  "accepted_integration": {
+    "sha": "d54687003b865bf2ea520d7cacf54e4badbbf8cf",
+    "pr": 274,
+    "head": "def1a6bd07822ef8f45db45cd4e4eaa7fa628989",
+    "tested_merge": "325ea5c6d258289c0b66332276b4cb125c76aee4",
+    "tree": "e10b0c54d26d00b7b51c27b115327530da0edc61",
+    "merged_at": "2026-10-10T03:03:06Z"
+  },
+  "cohort": {
+    "total": 28,
+    "integrated": 18,
+    "blocked": 10,
+    "merge_ready": 0
+  },
+  "candidate_7b_windows": {
+    "run": 38017606117,
+    "job": 114111272483,
+    "tested_merge": "c5c003a2d3d9dc9006be7221c61d8c25d3530201",
+    "portable": {
+      "passed": 806,
+      "skipped": 22
+    },
+    "integration": {
+      "passed": 112,
+      "failed": 6,
+      "skipped": 16,
+      "deselected": 831
+    },
+    "failures": [
+      "test_cloud_list_organizations: missing ACTION_SERVER_TEST_ACCESS_CREDENTIALS",
+      "four frontend build tests: Windows npm executable lookup WinError2",
+      "assembled credential logging test: default cp1252 read of UTF8 output"
+    ],
+    "source": "GitHub completed job log independently read by root"
+  },
+  "native_review": {
+    "status": "BLOCKED",
+    "source": "existing Devsy reviewer final receipt reported through heartbeat; full JSON transfer pending",
+    "path": "/workspaces/actions-worker-state/devsy-native-review/7b-3os-artifact-provenance-review.json",
+    "sha256": "07f382814ad8a2b78959091b8ec6bd5a7868b10cf5f989ac1f8cd775490aa5ea",
+    "limits": "Do not present reported receipt digest as Cloud-remeasured bytes",
+    "findings": [
+      "five post-manifest bytecode members on each OS",
+      "Windows provenance archive has extra downloaded RCC executable",
+      "macOS hidden dylibs omitted and symlinks dereferenced",
+      "tree inventory omitted from all provenance archives",
+      "Windows wrapper-source digest differs due to CRLF; LF/CRLF aggregates independently reproduced by Cloud"
+    ]
+  },
+  "rcc_cleanup_correction": {
+    "status": "BLOCKED",
+    "source": "original Devsy RCC completed turn reported through heartbeat; exact checkpoint push/transfer pending",
+    "head": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+    "tree": "f139ebb38c943647c5e7c0bd6786b5d7c9385465",
+    "tests": "70 passed, 2 opt-in skipped",
+    "real_probe": {
+      "http_shutdown": 200,
+      "natural_returncode": -11,
+      "forced_stop_used": false,
+      "result": "FAIL"
+    },
+    "log_sha256_reported": "4ec946dfadd6327d055dc32bc7478e0b81b1474b657d441de95700de2fc30b8b",
+    "receipt_sha256_reported": "e79c93956477f95908eb0bd0efdd04339fd6afaa2178414cb2d57a1df1604813"
+  },
+  "local_candidate_unpushed": {
+    "head": "f1d8417581a3d5e84491eb7dd4d6b435b1068e2c",
+    "tree": "c4896b9fb80d508cdcb79746d461cea931a5625a",
+    "owner": "root",
+    "change": "Move frozen provenance capture before Runtime execution; incomplete alone, faithful tar archive fix in existing Cloud graph lane"
+  }
+}

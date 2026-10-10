@@ -30,6 +30,10 @@ def calculator_sum(v1: float, v2: float) -> float:
 @action
 def calculator_subtract(v1: float, v2: float) -> float:
     return v1 - v2
+
+@action
+def unselected_multiply(v1: float, v2: float) -> float:
+    return v1 * v2
 """
     )
 
@@ -80,10 +84,23 @@ def calculator_subtract(v1: float, v2: float) -> float:
 
     check_actions_enabled(2, 2)
 
+    # Refresh retained capabilities from the new source without admitting an
+    # unrelated capability outside this import's whitelist.
+    calculator.write_text(
+        calculator.read_text().replace(
+            "    return v1 + v2",
+            '    """Updated sum documentation."""\n    return v1 + v2',
+        )
+    )
     # Re-importing the same action should not add a new action.
     import_action("calculator_subtract")
 
     check_actions_enabled(2, 2)
+    with load_db(db_path) as db:
+        with db.connect():
+            actions = {action.name: action for action in db.all(Action)}
+            assert "unselected_multiply" not in actions
+            assert "Updated sum documentation." in actions["calculator_sum"].docs
 
     clear_actions()
 

@@ -130,6 +130,13 @@ The `pypi` environment is a workflow reference only. Its approval and protection
 
 Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader accepts only its PEP 610 editable local-file `direct_url.json` root and resolves a contained `src/actions/work_items/__init__.py` or `actions/work_items/__init__.py`; it never consults project import paths, keeping shadow packages from controlling the REST adapter path.
 
+Convert a PEP 610 file URL path with `urllib.request.url2pathname` before
+constructing a `Path`. On Windows, a local drive URL has a URL path such as
+`/C:/...`; passing that URI spelling directly to `Path` does not produce the
+drive-rooted filesystem path. Keep both editable layouts and the project
+`actions.py` shadowing test, and use the hosted Windows run to verify native
+drive conversion; POSIX path simulations do not establish it.
+
 Native packaging must retain that filesystem source tree. The Action Server
 PyInstaller spec uses `collect_data_files('actions.work_items', include_py_files=True)`
 because hidden imports supply module names in the PYZ archive, not the initializer
@@ -343,18 +350,44 @@ artifact provenance. Optional `--frozen`, `--go-wrapper`, `--node` and
 
 The credential-free workflow is hand-maintained: it is absent from the
 `TARGETS` list in `.github/workflows/_gen_workflows.py`, so workflow regeneration
-does not overwrite it.
+does not overwrite it. Its native artifact contract step discovers both
+`test_native_artifact_manifest.py` and `test_native_artifact_provenance_archive.py`.
+
+The frozen provenance artifact is captured immediately after measurement and
+before Runtime execution, which can add bytecode under the package tree. Its
+existing GitHub artifact name now carries one deterministic PAX tar,
+`native-artifact-provenance.tar`, rather than separate globbed tree paths. The
+tar contains the full `dist/action-server/` tree plus
+`output/native-artifact-manifest.json` and its referenced
+`output/native-artifact-tree-inventory.json`; this preserves hidden files,
+symlink targets, and recorded modes. The manifest's
+`container_archive_path` identifies the tar, while each `archive_path` identifies
+a member within it. The complete tree and both metadata files are measured
+before archiving and remeasured afterward; any byte or inventory drift fails
+closed. Every symlink must have a relative target that resolves inside the
+frozen tree, including directory links. The executable locator must name the
+canonical direct child `action-server` or `action-server.exe` before its bytes
+are read. Keep acceptance receipts separate and do not regenerate the manifest
+or filter package files after measurement.
 
 The credential-free workflow retains the Go wrapper under the existing
-`action-server-unauthenticated-<runner-os>` artifact name and separately uploads
-the frozen executable and manifest in
-`action-server-native-provenance-<runner-os>-<run-id>-<attempt>`. The manifest
+`action-server-unauthenticated-<runner-os>` artifact name and uploads the frozen
+provenance tar in the existing
+`action-server-native-provenance-<runner-os>-<run-id>-<attempt>` artifact. The manifest
 checks Git `HEAD` against `github.sha`, records actual Python and Go versions
 plus platform/architecture, and measures executable hashes and package-relative
 paths. Each runtime entry also records the frozen onedir tree hash and its
 relative-file/content digest, the generated `go-wrapper/assets/assets.zip`
-hash, and a deterministic hash over `go-wrapper/main.go`, `go.mod`, and
-`go.sum`. These component values are read from the real build outputs after
+hash, and a deterministic hash over `go-wrapper/main.go`, `process.go`, `go.mod`,
+and `go.sum`. Those four source inputs have explicit `eol=lf` rules in
+`.gitattributes`: without them, Windows text checkout can hash CRLF worktree
+bytes while the committed source is LF. A regression compares every measured
+worktree input byte-for-byte with its Git blob. The manifest producer and
+independent UI consumer require the same ordered source inventory. Changing
+`process.go` changes the source binding
+while preserving executable and packaged-artifact measurements; omitting the
+helper fails manifest generation. These component values are read from the real
+build outputs after
 `build-executable --go-wrapper`; missing inputs fail manifest generation. The
 browser harness remeasures the checked-out archive and wrapper sources, the
 frozen tree, and extracted wrapper files before accepting UI behavior. The

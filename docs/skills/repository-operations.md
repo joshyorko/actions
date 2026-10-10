@@ -107,14 +107,29 @@ can match an already-published wheel. Neither test proves that published Core
 bytes contain the candidate API, a host renders the resource, a full MCP Apps
 view/result lifecycle works, or a packaged Runtime release accepts it.
 
-## Core and Runtime candidate compatibility
+## Core and Runtime compatibility
 
 Core 1.0.1 does not contain `ActionContext`, `ActionsListActionTypedDict` or
-`actions.server_integration`. The candidate Core 1.0.2 introduces these public
-contracts, so a Runtime importing them declares `actions-core ^1.0.2` in its
-production dependency metadata. This is release preparation, not publication.
-Core must be published and independently verified before that Runtime release;
-neither an editable source install nor an old published wheel proves pairing.
+`actions.server_integration`; published Core 1.0.2 contains these public
+contracts. A Runtime importing them declares `actions-core ^1.0.2` in production
+metadata and must verify the exact registry wheel it consumes. An editable
+source install or candidate wheel does not prove that registry bytes match.
+The publication and wheel identity are recorded in the [Core 1.0.2 registry
+verification receipt](../program/evidence/core-1.0.2-pypi-verification-20261009.json).
+Later source-only APIs, including the newer MCP `meta=` surface, are not covered
+by this Core 1.0.2 publication; promote them through a separately versioned and
+verified Core release before raising a Runtime floor to consume them.
+
+Runtime-executed Action Server test packages must likewise pin the published
+`actions-core=1.0.2` wheel. The Runtime worker imports `EPManagedParameters`,
+`ManagedParameters`, and `PluginManager` from `actions.server_integration`.
+Verified PyPI metadata for 1.0.2 declares Python `>=3.10,<4`, and its wheel
+contains that module and all three exports. In the bounded RCC 18.19.3 run,
+legacy test pins to 1.0.0 bootstrapped an environment but the worker exited
+before writing its result; a fixture pin to 0.10.0 could not be resolved. The
+Runtime's explicit minimum-version error and those fixture inputs identify a
+test-fixture incompatibility, not an RCC defect.
+
 Version metadata alone is not source provenance: a source-built candidate can
 have the same `1.0.2` version as the registry wheel while containing different
 API bytes. Bind candidate acceptance to its source revision/tree and wheel
@@ -202,6 +217,17 @@ attributing them, and do not remove the proxy or weaken server authorization
 to make tests pass. Local mock-server connectivity is distinct from a real
 provider or authenticated product-browser contract.
 
+Keep ordinary CLI request coverage independent from hosted-service credentials
+when the transport contract can be tested locally. The Action Server's
+`cloud list-organizations` regression invokes the public CLI and replaces only
+the HTTP client boundary with a deterministic response, checking its URL,
+HMAC authorization header, and JSON output. This preserves CLI and
+request-signing coverage without requiring a Control Room secret or claiming
+hosted-service acceptance; use a separate explicitly configured acceptance
+test when the real provider behavior is the subject.
+The current fixture is single-page (`has_more: false`); it does not exercise
+the `has_more`/`next` pagination branch in `list_organizations`.
+
 The locked MCP Python SDK 2.0.0 validates authorization-server issuer URLs as
 HTTPS, allowing HTTP only for localhost and loopback IPs, and rejects issuer
 queries and fragments. Its CIMD URL helper accepts HTTPS URLs with a non-root
@@ -227,16 +253,35 @@ Check both the affected Windows target and the native target, then run the
 existing platform behavior tests. A focused `mypy --platform win32` invocation
 is diagnostic unless the repository's configured CI runs that target.
 
+The Dakota RCC candidate acceptance script fails closed outside Linux. Its
+receipt cleanup uses POSIX `fchmod`; keep cleanup-demotion and permission-mode
+assertions limited to platforms that provide that contract. On Windows, retain
+checks for receipt contents, no-overwrite, and containment, but do not interpret
+`st_mode` bits as ACL isolation or add a `chmod` fallback that claims private
+Windows permissions. Native Windows ACL behavior remains unverified.
+
 ## Community program evidence
 
 The [community issue ledger](../program/community-program-ledger.md) retains
 every open issue's full acceptance body and comments in its machine-readable
 companion. A checkpoint PR or green workflow establishes only the exact tested
-slice, not whole issue acceptance. Keep source, installed-wheel, native,
+slice, not whole issue acceptance. When a consumer is not implemented yet,
+evaluate its prerequisites using the producer's scoped evidence; the consumer's
+own integration test is an acceptance gate for that implementation, not a
+precondition to creating it. Refresh stale graph reasons through a dated current
+projection while preserving original contract hashes and archived contract bytes.
+Keep source, installed-wheel, native,
 packaged-browser and published-artifact receipts separate, recording the exact
 candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
 publication success. Recheck dependency sequencing against each retained
 contract before implementation; a cross-reference alone is not a blocking edge.
+For a stacked PR, review the full diff from its actual merge base rather than
+relying on its title or last commit. When a reviewed component is integrated
+separately from a combined candidate, compare the candidate's synthetic merge
+tree before and after the target advances. Prior checks apply to the new
+candidate only when that tested tree is identical; otherwise rerun the relevant
+gates on the new tree. This separates component admission from the combined
+candidate gate without inferring either from issue-level completion.
 
 When projecting a multi-issue program into an execution graph, keep typed
 execution prerequisites, criterion/slice gates, parent coordination, related
@@ -260,6 +305,14 @@ the native Windows path. Hash-manifested Canvas amendment artifacts also use
 `-text` in `.gitattributes`: Git checkout conversion must not rewrite evidence
 bytes before the validator checks the recorded size and digest.
 
+For a source file whose committed bytes are a historical contract, scope its
+`.gitattributes` rule to preserve the required checkout line endings and test a
+small Git checkout with `core.autocrlf=true`; do not change the historical hash
+to match one operating system's working-tree conversion. Portable source scans
+should decode UTF-8 explicitly, and diagnostic paths should use `/` separators.
+For executable scripts, assert the Git index mode (`100755`) on every platform;
+filesystem execute bits are meaningful only on POSIX hosts.
+
 For Canvas fixture work, distinguish schema/round-trip evidence from product
 authorization: the current MCP dispatcher selects a registered tool by name,
 and legacy Run/artifact routes use server-level credentials rather than a
@@ -282,6 +335,19 @@ different subjects.
 Before committing an evidence archive, verify each selected receipt's bytes
 against its ledger SHA-256 and reject absolute or parent-traversal archive
 paths. Preserve running and skipped CI states separately from passing results.
+
+For package provenance archives, compare the complete extracted filesystem to
+the build inventory; a valid embedded manifest or green workflow does not prove
+that the archive contains every measured entry. Include hidden files, shared
+libraries, symlink targets, executable modes, generated bytecode and downloaded
+runtime binaries in the comparison, or explicitly define and verify exclusions.
+On Windows, hash the actual checkout bytes consumed by the build: CRLF checkout
+conversion can make a source-file digest differ from the LF Git blob. Either
+bind the manifest to those measured bytes or enforce and test a stable checkout
+line-ending policy. The 2026-10-10 PR273 artifact review reports these exact
+boundaries; its full reviewer receipt remains pending Cloud transfer, so it is
+not represented as locally remeasured evidence (see
+`docs/program/evidence/convergence-followup-20261010T0305Z.json`).
 
 When resuming remote work, read the recorded thread's authoritative status and
 last completion/cleanup report before dispatching another turn. A pushed branch
@@ -536,6 +602,9 @@ manifest, and import checks do not catch malformed post-inline HTML: serve the
 exact Runtime artifact through a real browser before visual acceptance and
 prove the root renders, no external JS/CSS request remains, no console/page
 error occurs, and the inline script contains no raw HTML boundary.
+The credential-free build contract therefore checks that Runtime JavaScript and
+CSS are present inline in `dist/index.html` and that it has no external script or
+stylesheet references; checking for standalone `.js` or `.css` bundles is stale.
 Each standalone `build:runtime` and `build:canvas` command also emits the
 corresponding reproducible CycloneDX `sbom.json`; `build:artifacts` composes
 those per-root commands. This keeps the default missing-root repair path
@@ -546,7 +615,9 @@ disables source maps, and is checked by `npm run validate:artifacts` against a
 the canonical shipped-payload inventory: retained `artifact-manifest.json` and
 `sbom.json` metadata are excluded from that budget. The hosted frontend build
 must invoke this same dual-root validator rather than recursively summing a
-`dist` directory.
+`dist` directory. Windows integration tests must resolve npm and invoke its
+`npm-cli.js` through the resolved Node executable; `npm.cmd` is a batch file and
+cannot be launched as a normal `subprocess.run` executable without a shell.
 The JavaScript and Python validators independently enumerate shipped files and
 structural directories, require sorted normalized relative paths with an exact
 directory inventory, and
@@ -650,7 +721,7 @@ task-entrypoint regression that rejects injected removed-product imports.
 
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
-the form `actions_http-<version>` and the repository secret
+the form `actions_http-<version>` and the secret available to its `pypi` environment,
 `PYPI_TOKEN_ACTIONS_HTTP_HELPER`; neither publishing nor secret discovery is
 performed by local verification. The helper reads network settings from
 `~/.actions/network-settings.yaml` on Linux/macOS and
@@ -702,12 +773,46 @@ The supported wire contract is MCP `2026-07-28`: discover, then make stateless
 per-request `/mcp` calls without `initialize`/`initialized` or
 `Mcp-Session-Id`; `/sse` is intentionally absent. SDK v2 catalog results carry
 `ttlMs: 0` and `cacheScope: private`, so they are immediately stale rather than
-indefinitely cacheable. Each tools/resources/resource-templates/prompts result
+indefinitely cacheable. Within one admitted catalog, each
+tools/resources/resource-templates/prompts result
 also carries the same `actions.catalogRevision` SHA-256 fingerprint, computed
 from the canonical sorted MCP surface. Tool names, resource URIs, resource
 template URIs, and prompt names must be unique; duplicate keys are rejected at
 registration so each catalog's primary-key ordering is total without reordering
-semantic arrays inside schemas. Re-registering actions on reload therefore
+semantic arrays inside schemas. Runtime resolves tool names from the complete
+enabled, package-resolved, whitelist-accepted action set before registration.
+Unambiguous tools keep their exact bare action name. Colliding tools use
+`<package-name>__<action-name>`, with non-ASCII or unsupported characters replaced
+by `_`. Generated aliases use `[A-Za-z0-9_.-]` and at most 64 characters; this is
+an alias policy, not a new validation rule for existing bare names. Bare names
+are reserved first. Package/action sorting, a SHA-256 suffix over the JSON-encoded
+identity pair, and a numeric suffix on remaining collisions make aliases unique
+and independent of database order. `ActionPackage.name` has a database unique
+index and identifies package imports/updates; UUIDs and filesystem paths do not
+enter alias generation.
+
+MCP tool names identify the current admitted catalog only. Adding, removing,
+disabling, or filtering colliding tools can change another tool's advertised
+name. A generated alias such as `package_a__do_it` can later identify a literal
+action with that name in another package; a stale call can execute that different
+action. Clients must rediscover the current catalog instead of retaining aliases
+across catalog changes. `actions.catalogRevision` supports rediscovery but is
+not a call precondition. It fingerprints advertised descriptors, so implementation
+changes with identical descriptors preserve it. Generated alias text is neither
+a durable action identity nor an authorization grant: serving whitelists match
+original package/action identities before alias resolution. Safe identity
+compatibility for previously discovered aliases across changing catalogs is not
+implemented; current-catalog determinism does not establish that guarantee.
+
+HTTP paths, action display names, metadata, and dispatch
+targets remain tied to their original package/action. Resource URI and prompt
+key checks remain unchanged. The regression in
+`action_server/tests/action_server_tests/mcp/test_setup_mcp_server.py` uses a real
+in-memory database and ASGI HTTP/MCP routes, with worker execution stubbed, to
+prove two packages' `do_it` actions list and call separately. It also covers
+whitelist/disabled filtering, preserved bare names, qualification/sanitization/
+length collisions, and forced digest collisions in opposite action orders.
+Re-registering actions on reload therefore
 changes the revision when the surface changes. The independent-process
 acceptance starts separate Runtime processes with equivalent catalogs in
 opposite definition order and a third process with an extra tool, proving
@@ -853,7 +958,11 @@ streaming/SSE disconnect watchers can spin without yielding, starve the server e
 loop, and prevent unrelated HTTP work and graceful signal shutdown from progressing.
 The lifecycle regression boundary opens a raw `GET /mcp` SSE connection and, while it
 remains open, proves that an unrelated HTTP route responds within a finite bound,
-`SIGTERM` terminates Action Server, and its observed preload children stop.
+`SIGTERM` terminates Action Server, and its owned action workers stop. Frozen
+Action Server tests may launch an inner server process beneath the executable
+wrapper, so worker readiness and shutdown checks must inspect the recursive
+process tree, identify preload workers, and retain `(pid, creation_time)` pairs
+to avoid treating a reused PID as the original child.
 Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
 tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
@@ -1205,6 +1314,24 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+### Action Server OpenAPI golden snapshots
+
+When an OpenAPI snapshot fails, compare parsed expected and observed JSON before
+refreshing it. Reconcile new paths and schemas against mounted routers and
+existing API tests; verify removed paths, HTTP methods, and security
+requirements separately. For existing responses, preserve tested validation,
+privacy, and size bounds. Snapshot refreshes record the current source contract;
+they do not authorize Runtime API changes. The full-spec fixture is covered by
+`test_server_full_openapi_flag`, while
+`test_run_api_openapi_distinguishes_legacy_summary_and_detail_contracts`,
+`test_run_summary_fields_have_a_finite_page_budget`, and
+`test_configured_api_key_protects_assembled_surfaces` guard response shape,
+bounded summary data, and configured authentication.
+App-level Bearer enforcement can be absent from the OpenAPI `security` fields;
+an unchanged schema does not prove authentication. Verify the assembled server
+and router dependencies through the authentication regression, including the
+intentional public webhook exception.
+
 ### Action Server shared database
 
 Action Server keeps SQLite as the default datadir-local backend. A shared
@@ -1245,6 +1372,24 @@ release does not perform application cleanup. A Linux pass or mocked platform
 selection does not establish native Windows or cross-host shared-filesystem
 behavior. These containment checks do not close pathname replacement races
 against a writer with authority to mutate the storage namespace.
+
+Windows non-strict path resolution can retain an extended local-drive prefix
+(`\\?\C:\...`) while the already resolved storage root uses `C:\...`. The
+artifact containment comparisons treat only fully qualified ordinary and
+extended letter-drive anchors as equivalent. Comparisons across prefixes reject
+ambiguous components such as trailing dots/spaces, reserved device names,
+alternate-stream separators, and parent traversal. They preserve the resolved
+paths for I/O and perform link/reparse checks in the candidate's I/O namespace;
+storage-root rejection remains enforced. They do not equate UNC, device, or
+volume GUID namespaces with a different spelling. File-list relative names use the
+same comparison boundary. A concurrent creator of an intermediate directory
+can change the missing-path Windows error during resolution; a subsequent
+passing concurrent-publication run does not prove this spelling boundary is
+fixed. The host-neutral drive-prefix tests cover accepted and rejected path
+pairs. `test_storage_handles_mixed_resolved_drive_prefixes` exercises real
+Windows file operations with controlled resolver spellings; run it with the
+existing spawned concurrent-publication test on native Windows. Linux results
+and controlled spellings do not establish the exact native resolver race.
 
 The direct two-instance/concurrent-update and concurrent-startup acceptance is
 in `action_server/tests/action_server_tests/test_database_shared.py` and
@@ -1390,7 +1535,10 @@ The embedded bundle is the sole runtime authority: project creation performs no
 metadata or archive network request. The production inventory is `minimal`,
 `basic`, `advanced`, `workflow-producer-consumer`, and `mcp-v2-showcase`; the
 separate beta inventory remains a selected subset and is not a production
-generator input. The MCP v2 Showcase uses static public data and demonstrates
+generator input. The CLI `new list-templates --json` regression asserts this
+exact five-ID inventory and human-readable showcase entry. Regenerate the
+embedded catalog and update that assertion together when the registry changes.
+The MCP v2 Showcase uses static public data and demonstrates
 core stateless MCP only; its GET/SSE example proves channel open/close, not tool
 progress, MCP Apps, Canvas, or durable Tasks. A cache hash mismatch, byte mismatch, traversal path, duplicate member,
 or symlink causes reseeding from the embedded bundle. A symlinked cache directory is
@@ -1417,9 +1565,38 @@ selection and direct cleanup tests. A direct `TunnelManager.stop()` test is
 insufficient for lifecycle coverage: the Action Server lifespan must await the
 created manager's stop before the final child-process cleanup runs. Lifespan
 teardown runs in `finally`, so body exceptions still trigger manager, watcher,
-and child cleanup; manager-stop failures are logged and isolated so they do
-not replace the body exception or skip later cleanup. Failed child enumeration
-logs and treats the child set as empty.
+and child cleanup. It signals the file watcher first, then awaits its thread
+join off the event loop for at most five seconds while reload dependencies remain
+live. A watcher timeout is an explicit cleanup failure; a stop request alone is
+not proof of termination. Manager-stop failures are logged and isolated so they
+do not replace the body exception or skip later cleanup. Failed child enumeration
+logs and treats the child set as empty. This lifecycle fix does not establish the
+cause of an observed RCC natural exit `-11`; packaged native shutdown evidence
+must still record the pre-cleanup return code.
+
+#### TLS and loopback regression
+
+Tunnel verification uses certificate verification, checks the local Runtime
+identity before probing MCP, confirms MCP authentication rejects an unauthenticated
+initialize request, and then performs an authenticated initialize. Keep the
+loopback regression test's untrusted-CA rejection and authenticated request checks
+intact. Self-signed loopback certificates identify `localhost` in their subject
+alternative names; if the machine hostname exceeds X.509's 64-character common-name
+limit, use `localhost` for the common name while retaining the full hostname in the
+SAN. Let Uvicorn create and own the test's ephemeral listener and read its assigned
+port after startup. The test's synthetic TLS peer runs on a dedicated selector loop;
+the verifier client stays on the native AnyIO test loop. This isolates the server
+fixture's handling of the expected untrusted-CA handshake reset. Windows runs have
+reported `WinError 10054` in Proactor connection teardown followed by a
+`wait_closed()` timeout; using a Uvicorn-owned socket alone did not resolve it. The
+selector-loop fixture does not test server-side Proactor behavior, so only native
+Windows CI can verify the verifier client and preserved trust/auth assertions. Keep
+this loop boundary until a native Proactor peer completes the rejected-handshake
+cleanup without callback errors or a shutdown timeout. The dedicated server loop
+records callback errors, forwards them to asyncio's default exception handler, and
+fails the test after bounded cleanup if any occurred. CPython issue
+[#158646](https://github.com/python/cpython/issues/158646) tracks an adjacent
+Windows TLS-reset failure in selector SSL tests; it is not this Proactor wait path.
 
 For authenticated legacy `action-server start --expose`, the public URL is logged
 only after a public `/config` response reports authentication enabled and the
@@ -1535,6 +1712,50 @@ declared portable-suite result and hand it to the Action Server test-layout
 owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
 the package's discovery rules.
 
+The generated `actions_runtime_tests.yml` workflow is the configured full
+Action Server PR gate: it runs the portable and binary test tasks, then lint,
+typecheck, and docs checks. Its pull-request filter must retain the generated
+dependency paths while covering `master`, `community`, and `integration/**`;
+otherwise PRs targeting the maintained community or integration branches skip
+these checks. Keep this filter scoped to `ActionServerTests` in
+`.github/workflows/_gen_workflows.py`; do not broaden the unrelated Core or
+HTTP-helper workflow filters. Regenerate the workflow from that source and
+verify the hosted workflow on PRs to both maintained branches. The generated
+Action Server `Build binary` step uses POSIX shell syntax, so set its shell to
+`bash` explicitly for Windows runners instead of relying on their PowerShell
+default. Its integration step runs real Chromium acceptance, so install the
+locked Playwright Chromium with `npx playwright install chromium` from
+`action_server/frontend` after the portable tests and before integration tests;
+the preceding frontend build has already run `npm ci` and this install must not
+duplicate that build or alter credentials.
+The same OS matrix runs `go test process.go process_test.go` before packaging,
+with the installed Go toolchain and module downloads disabled. These standard-
+library subprocess tests cover wrapper child ownership and exit handling;
+the POSIX signal cases skip Windows. They supplement, rather than replace,
+the later tests against the built wrapper and its frozen Runtime children.
+
+The generic `inv test-binary` selects
+`integration_test and not native_artifact_test`. The three exact-artifact
+Work Items acceptance cases keep both markers and run in
+`frontend-build-unauthenticated.yml`: its consumer harness checks the frozen
+and Go-wrapper cases against the current build manifest and Core wheel, while
+its direct UI test invocations supply the matching executable and manifest.
+That workflow is filtered to `action_server/**`, which includes changes to the
+acceptance tests and their marker contract. Run its frozen and Go-wrapper UI
+cases on Linux, Windows, and macOS; never make missing executable or manifest
+variables a skip. Keep the separate generic Runtime gate for non-native
+integration coverage.
+
+The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
+`_internal/actions/server/bin`. PyInstaller may report package-data destinations
+with native Windows backslashes; normalize both source and destination
+separators when selecting RCC data in the spec. Native artifact acceptance must
+find the platform-specific pinned RCC file in the frozen-package inventory
+before starting the Runtime server (or after the Go wrapper's version-only
+extraction, which returns before RCC initialization). A later runtime download
+may be recorded as a separate tree delta, but cannot establish that RCC shipped
+in the artifact.
+
 The real-browser Origin and ambient-session acceptance in
 `test_browser_origin_acceptance.py` runs Chromium against the actual Runtime
 HTTP server. Its Node HTTP requests and browser `fetch` calls have independent
@@ -1611,6 +1832,44 @@ gate. Developer builds must retain a version containing the word `local`: the Go
 then replaces a same-version extraction whose embedded hash differs. A release-style
 version reuses the old extraction after warning, so it can make a newly built wrapper
 launch stale code.
+
+The Go wrapper preserves the child executable's nonnegative exit code from
+`exec.ExitError` while retaining its execution diagnostic. Launcher errors and
+signal termination without an exit code remain status 1; a successful child
+returns status 0. CLI usage errors such as `action-server devenv task` without
+task names must remain status 2 through `dist/final/action-server`, as asserted
+by `test_binary_preserves_cli_usage_exit_code` in `test_binary.py`. The existing
+`invoke test-binary` integration gate selects that built wrapper through
+`SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE`; a source-only test pass
+does not verify wrapper exit propagation. This argument-error boundary does
+not execute a developer task or require an RCC environment build.
+
+On POSIX, the wrapper subscribes to directed `SIGTERM` before starting its
+child, forwards it only through that child's `os.Process`, and waits for the
+same child's exit. Natural exit and launch failure unregister the handler.
+It does not signal a process group or enumerate descendants; the frozen
+Runtime retains ownership of worker shutdown. `SIGINT` keeps the existing
+foreground-group behavior to avoid forwarding a second terminal Ctrl+C to
+Uvicorn. Windows retains `cmd.Run()` without a new signal-forwarding claim.
+The standard-library subprocess tests run with
+`go test process.go process_test.go` from `action_server/go-wrapper`, without
+embedded Runtime assets. The full acceptance remains the built-wrapper
+`test_mcp_sse_does_not_starve_server_or_sigterm`, which must observe no live
+owned descendants after wrapper-directed SIGTERM. A source-only pass of that
+test verifies inner Runtime teardown, not wrapper forwarding.
+
+When `SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE` is set,
+`actions_server_run` routes CLI operations such as `import` through the frozen
+executable as well as using it for `ActionServerProcess`. Native CLI fixtures
+therefore need a valid managed `package.yaml` and a compatible pre-cached RCC
+environment; raw unmanaged action directories are rejected by frozen `import`.
+Keep that package metadata conditional in fixtures that also run against the
+source-installed Runtime, so the wheel/source boundary remains covered without
+changing its legacy fixture semantics. The multipackage sync boundary is
+`test_cli_multi_package_sync.py`; its installed-wheel and frozen-executable
+results are separate evidence. Reuse one empty test `HOME` for the module's
+pytest invocation: the Go wrapper extracts its frozen executable under
+`HOME/.actions/bin`, and a per-test home causes a full extraction for every test.
 
 Before reinstalling or restarting Action Server, inspect the process table and listening
 sockets. A `GET /mcp` SSE request can expose receive-wrapper event-loop starvation when
@@ -1698,6 +1957,13 @@ python -m unittest discover -s .devcontainer/tests -p 'test_*.py' -v
 
 Every dispatch includes the mandatory documentation receipt from root `AGENTS.md`. Mutating lanes update canonical guidance in their branch when write scopes permit. Read-only or isolated lanes propose an exact delta. The integration lane records rejected proposals and the reason; silent discard is forbidden.
 
+Before writing, verify the assigned checkout's absolute Git root, branch, HEAD,
+and dirty state against its recorded owner. A separate branch in the same
+checkout does not isolate its files or index: parallel writers require separate
+worktree paths. Do not switch another lane's checkout to your branch. If an
+ownership mismatch is discovered after edits, preserve the changes and hand
+back a committed checkpoint before the owner restores its branch.
+
 ## Verification Receipts
 
 Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
@@ -1761,6 +2027,13 @@ native-platform lifecycle proof is implied. Tests for the protocol boundary
 are in `test_preload_actions_exit.py` and
 `test_rcc_runtime_adapter.py`.
 
+The socketpair test that fills a send buffer is a kernel-buffer behavior check:
+it runs on POSIX runners and is skipped on Windows, where the same payload may
+not saturate the pair. Keep a deterministic `socket.timeout` test on all
+platforms to verify bounded-timeout conversion, socket shutdown, and timeout
+restoration independently of kernel buffering. This portable test does not
+establish native Windows send-buffer timeout behavior.
+
 The provisional adapter classifies reload inputs from normalized environment
 fields (`spec-version`, dependency sets, and post-install commands), not from
 the entire package descriptor. A source-only change therefore reuses the
@@ -1775,13 +2048,22 @@ old-generation workers non-reusable only after successful warmup, and restores
 the old routing/idle generation if preparation fails; old workers remain leased
 until their call completes and the wrapper is reaped.
 
-Auto-reload prepares the process generation before changing HTTP/MCP action
-routes. Route and pool updates are serialized as one generation transition;
+Auto-reload validates the complete HTTP/MCP route candidate before preparing
+the process generation. Package metadata collection precedes the database
+writer lock; desired-set catalog writes commit together, and public route
+publication follows that commit. A failed database commit rolls back the
+connection and restores the staged process generation. Each HTTP/MCP catalog
+is replaced as a complete snapshot; this does not promise simultaneous reads
+across the database, HTTP and MCP surfaces. Reload updates are serialized;
 each registered handler captures its process-generation token and package, so a
 request admitted through an old route cannot look up a new pool generation
 after reload. If route registration fails, the prior route snapshot and
 process generation are restored and the watcher reports an unsuccessful
-reload. The reload lock alone does not provide this request-level pinning.
+reload. The reload lock alone does not provide this request-level pinning. The independent
+`test_p0_snapshot_reload_boundaries.py` exercises the actual route/pool
+compensation closure after nondurable SQLite commit failure with
+`min_processes=0`; it does not prove warmed RCC worker compensation or
+external-service rollback.
 
 Scheduled executions capture the current process-pool object, generation token,
 and ActionPackage before dispatching their worker thread; a reload that replaces
@@ -1820,6 +2102,25 @@ separate outcomes. An Action may return `PASS` while intentional pool
 termination produces `status: failed`, `exitCode: -1`, and
 `reason: child exited non-zero`. That receipt remains a wrapper lifecycle
 failure even when artifact identity, verification, and lease identity validate.
+For reload/recovery receipts, retain the Action Server `Popen` owner and poll
+its return code before any stop call; record that natural-exit observation
+separately from RCC wrapper receipts. `ActionServerProcess.stop()` delegates to
+`Process.stop()`, whose process-tree helper uses `psutil.wait_procs`; that helper
+can consume the direct child's wait status, so a later `Popen.poll()` value of 0
+is not natural-exit evidence. A normal `start_server` return produces CLI exit
+0. The
+explicit `/api/shutdown/` endpoint instead calls `_thread.interrupt_main()`;
+`_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
+the expected controlled API-interrupt outcome only when the receipt also proves
+that shutdown request and its successful 2xx response. An observed natural exit
+0 is acceptable only when captured before forced cleanup. Missing natural exit,
+an unsuccessful shutdown request, or unexplained exits such as 1 or -11 fail
+the shutdown receipt. If shutdown times out or the request fails, record
+`forced_stop_used: true`; the stop fallback is hygiene only and cannot replace
+the captured natural result. Preserve any post-stop `Popen.poll()` value as
+forced-cleanup-only evidence, never as natural exit. A `stop()` return is not
+process-exit evidence, and a captured descendant set only reports that
+observation; it does not prove complete tree reaping.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes
@@ -1874,6 +2175,112 @@ unknown: preparation must acquire it under the current configured policy or
 replace it with a cache descriptor bound to that policy, and direct execution
 fails clearly until that context is established. The unit boundary is covered
 by `test_rcc_runtime_adapter.py`.
+
+Action Server snapshots package source before metadata import, including
+unmanaged and legacy packages. It validates the source identity again after
+metadata collection and rejects collection that altered included source files.
+Runtime state is excluded even when the datadir is inside the package; when it
+is the package root, reserved Runtime-owned names and configured database and
+artifact paths are excluded. Internal `pythonpath` entries use snapshot files;
+external entries retain their original location and remain outside the
+last-good source guarantee. Old generations are retained, not pruned on import.
+Snapshot paths use one full SHA-256 generation component binding both package
+identity and source identity. Two nested 64-character components can exceed
+Windows' process working-directory limit even when copying those files works;
+`test_snapshot_launch_path_budget` checks the path budget and launches a real
+subprocess from a snapshot. Previously admitted directories are retained without
+renaming; a successful import selects the new layout. Keep the Runtime datadir
+short enough for the platform's process launch limits; this layout is not a
+claim of arbitrary-length Windows path support.
+For `WinError 267`, check absolute subprocess cwd length as well as directory
+existence: successful snapshot reads or `rcc ht hash` do not prove process launch.
+[Windows documents this limit](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setcurrentdirectory).
+Linux path-construction proof does not replace hosted Windows execution.
+The CLI lifecycle regressions in `test_cli_multi_package_sync.py` exercise
+additive imports, complete desired-set synchronization, real HTTP/MCP calls,
+controlled stop/restart, failed admission, and corrected-source recovery.
+The public-decorator regression `test_cli_mcp_catalog_rollback.py` rejects
+duplicate resource URIs, resource-template URIs, and prompt names across a
+complete candidate package set through real unmanaged CLI/Runtime subprocesses.
+Its candidate changes package A and adds colliding C while omitting previously
+admitted B. Each case checks unchanged Action/ActionPackage rows, old included
+source bytes, and snapshot-store contents, then restarts without synchronization
+and checks identical tools/resources/templates/prompts catalogs and revisions
+plus old HTTP/MCP execution. With every Runtime child pinned to affected baseline
+`84b8c70a`, startup disables A while importing B, so the initial A call fails before
+duplicate admission is reached. The earlier retained baseline receipt seeded the
+catalog through a repaired editable installation, then ran the candidate command
+on affected source: that mixed-seed observation disabled A and B, erased the
+duplicate, and started a server instead of rejecting the batch. Preserve that
+receipt as candidate-admission evidence, not an isolated baseline lifecycle.
+Duplicate-key checks must run
+against the complete desired catalog before committing replacements or omissions;
+helper-only collision tests do not prove that boundary. This source-subprocess
+proof was executed with installed Core 1.0.2; frozen and managed-RCC acceptance
+remain separate. Tool aliases identify capabilities within the current catalog;
+clients must rediscover after catalog changes. Deterministic current names,
+TTL-zero/private catalogs and the shared descriptor fingerprint support this
+policy, but do not preserve historical alias identity or fence a call against a
+concurrent catalog revision. A formerly qualified alias can become a literal
+action's name. External alias-keyed authorization grants are not covered.
+
+`test_cli_live_reload_multi_package.py` exercises actual unmanaged two-package
+watched failure and recovery. After malformed decorated B is rejected, it checks
+unchanged admitted DB/source/catalog and fresh HTTP/MCP execution of both old
+packages, then checks a valid B update and natural shutdown/restart. It measures
+the actual worker Core module origin/hash/version. This proof is separate from
+opted-in real-RCC provider rollback and from in-flight generation draining.
+
+Pin an absolute Runtime source path in each CLI child's `PYTHONPATH` when its cwd
+differs from pytest's. Relative entries can silently select an editable install;
+the parent module origin does not prove the child's origin. Check import
+resolution with the child's interpreter, cwd and environment; compare actual
+worker origins with that result rather than a fixed Core version or an editable
+distribution's metadata file location. Preserve public decorator markers in
+malformed collection fixtures: a file without a marker is skipped and may
+represent intentional removal. During watched convergence, poll one catalog
+response; separate list requests can straddle a valid generation change, so
+compare shared revisions only after the admitted surface is stable.
+
+Additive reimports that omit an enabled action fail before publication: retaining
+its old catalog record while replacing its source would advertise an
+unexecutable capability. Explicit desired-set sync is the removal operation.
+For additive whitelisted imports, already enabled actions in the same package
+remain admitted and their metadata is refreshed from the new source. Newly
+selected actions are admitted; unselected new or disabled actions are not.
+Removing an enabled action from the actual source still rejects the import.
+Desired-set synchronization continues to disable capabilities outside its
+whitelist. Runtime HTTP/MCP exposure applies the serving whitelist separately.
+
+For explicit spec-v2 RCC provider mode, RCC receives the selected snapshot's
+`package.yaml` for environment fingerprinting and publish; the original
+absolute `package.yaml` path is passed separately as `environment_identity` for
+cache reuse. RCC therefore reads the same package configuration paired with the
+selected source snapshot even if the live package changes during publish.
+Relative `pythonpath` entries that resolve inside the original package use
+snapshot paths; entries outside it keep their original resolved location. Snapshot
+identity binds included relative paths, supported permission mode bits, and file
+bytes, and both newly copied and reused destinations are checked. Failed
+snapshot validation also discards only a newly created candidate; a reused
+snapshot is preserved. Failed metadata import discards only a new candidate and
+retains the last-good ActionPackage/source generation. Successful package
+imports retain earlier source generations: the standalone `action-server
+import` path can share a datadir with live workers, so pruning by current
+imported generation alone can invalidate their source paths. Lease-safe source
+generation collection is not implemented. The regression tests
+`test_snapshot_pins_environment_yaml_across_aba_edit`,
+`test_snapshot_prepare_discards_new_mismatched_candidate_only`,
+`test_snapshot_prepare_preserves_reused_snapshot_on_validation_failure`,
+`test_snapshot_environment_input_preserves_original_cache_identity`, and
+`test_snapshot_identity_changes_when_executable_mode_changes` cover the ABA
+boundary, unchanged-environment reuse, relative `pythonpath`, and mode identity.
+The real-RCC failed-reload test separately checks persisted last-good execution
+and recovery; its receipt is revision-specific. These Linux results do not
+establish Windows ACL, frozen, strict-remote, or descendant-cleanup behavior.
+Bind each such receipt to the measured Git commit/tree and the actual imported
+Action Server module origins and file hashes; an environment-provided source
+SHA is only a label. Capture the server's bounded observed return code before
+discarding its process owner, separately from RCC terminal receipts.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
@@ -2050,6 +2457,15 @@ for `--api-key`, in both separate and equals forms. HTTP header names are
 case-insensitive; the actual Uvicorn DEBUG handshake lowercases incoming
 Cookie headers. Exercise the real assembled server with DEBUG transport enabled
 when validating redaction, and prove its handshake/echo before inspecting logs.
+The assembled child test fixes `PYTHONIOENCODING=utf-8`, captures redirected
+stdout/stderr as bytes, and decodes those streams and the UTF-8 rotating log
+explicitly before checking for credentials. Do not rely on Windows' default
+text encoding or weaken the credential assertions with replacement decoding.
+When a pytest logging test calls the application root-logger setup functions,
+temporarily detach and later restore ambient root handlers, then flush only the
+handlers created by that test. Autouse logging fixtures can bind handlers to a
+pytest capture stream that is closed by fixture teardown; flushing every root
+handler can fail before the test reaches its credential assertions.
 Proxy redirects must replace only automatically generated Host headers for the
 new destination while retaining explicit caller Host intent and normal urllib3
 cross-host credential stripping, including 303 method changes.
@@ -2252,3 +2668,25 @@ suite establishes its tested database behavior; it does not prove the proposed
 Deployment schema or replace wheel, frozen, TLS or failure-recovery acceptance.
 Inspect the server log even when pytest passes: driver transaction warnings can
 expose a missing regression despite successful state assertions.
+
+## Deployment canonical values (Slice 1a)
+
+The bounded `actions-canonical-json/v1` implementation lives in
+`actions.server.deployments`: it validates strict UTF-8 JSON before NFC
+normalization, rejects duplicate/normalized-colliding keys, invalid Unicode,
+non-finite and binary64-overflow/underflow numbers, and exact integral values
+outside the interoperable safe-integer range, then delegates byte serialization
+to the exact `rfc8785==0.1.4` dependency. Its immutable reference models validate
+canonical UUID/hash syntax and compare only explicitly supplied Workspace or
+Package Revision scope. Frozen Pydantic refs and scalar IDs revalidate existing
+instances; scope helpers revalidate both operands before comparing them. These
+pure values establish neither reference existence
+nor caller authorization, and do not implement database, resolver, command
+hash, adapter-payload, or registry behavior. Keep RFC 8785 serializer vectors
+separate from this stricter accepted-input domain. The dependency wheel SHA-256,
+Apache-2.0 license, matching upstream-tag source hashes, and the limitation that
+PyPI exposed no signed provenance attestation are recorded in
+[`deployment-canonical-values-slice1a-20261010.md`](../program/evidence/deployment-canonical-values-slice1a-20261010.md).
+Read non-ASCII JSON golden fixtures with an explicit `encoding="utf-8"` rather
+than `Path.read_text()`'s locale default so expected Unicode values are stable
+across Windows and POSIX test runners.

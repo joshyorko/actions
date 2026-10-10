@@ -648,12 +648,16 @@ class Database:
                     self.execute("BEGIN")
                     try:
                         yield
+                        conn.commit()
                     except BaseException:
                         log.exception("Error. Rolling back database")
-                        conn.rollback()
+                        try:
+                            conn.rollback()
+                        except BaseException:
+                            # Preserve the admission/commit error; a rollback
+                            # error must not disguise the original failure.
+                            log.exception("Database rollback also failed")
                         raise
-                    else:
-                        conn.commit()
             except BaseException:
                 if self.backend_name == "postgresql":
                     log.exception("Error. Rolling back database")

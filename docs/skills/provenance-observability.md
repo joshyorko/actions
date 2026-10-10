@@ -29,6 +29,36 @@ Runtime Plan. A parent/child Run, workflow fan-out/fan-in, Work Item, and
 interaction link uses an explicit typed link with its source and destination
 Workspace checks.
 
+Portable Package Revision content is separate from its consumer-side scoped
+references. The manifest may declare logical Package identity, capability and
+environment requirements, Runtime Plans, and logical binding requirements;
+Workspace IDs, Deployment binding references/values, credentials, provider
+URLs, Worker Profiles, and host-local paths do not belong in that portable
+content. A consumer-side `PackageRevisionRef` carries Workspace, logical
+Package, and immutable revision identity; a `RuntimePlanRef` additionally
+identifies its owning Package Revision and immutable plan digest/schema/
+compatibility identity. The experimental schema and fixtures in
+`docs/design/package-revision-v1-schema-draft.md` exercise only these structural
+boundaries. Their example digests are not production digest calculations, and
+schema validation does not prove cross-reference resolution or Run pinning.
+The reference experiment has one authoritative owning package reference at
+`runtimePlanRef.packageRevisionRef`; an outer duplicate is forbidden even if
+it matches. Its `revisionDigest` is the complete `PackageRevisionId` called
+`revision_id` in the #129 domain draft, separate from source artifact and plan
+digests. Plan schema versions are positive JSON integers in both portable plan
+headers and scoped references. The registry's supported versions and the
+reference's match to an immutable manifest still require consumer validation.
+The field mapping and regression cases are documented in the experimental
+schema draft; they do not approve the paused #129 production API or identifier
+syntax.
+
+The Package Revision fixtures under `docs/design/fixtures/package-revision-v1`
+have canonical UTF-8 JSON bytes with LF endings. Their scoped `.gitattributes`
+rule preserves those bytes on Windows checkouts with `core.autocrlf=true`.
+Verify checkout bytes as well as Git blobs; do not normalize test inputs or relax
+the byte comparisons to hide checkout conversion. This is fixture preservation,
+not approval of a production Package Revision digest algorithm.
+
 ## Admission and execution receipt
 
 Run creation stores one immutable `AdmissionSnapshot` containing the schema
@@ -116,6 +146,14 @@ disk/GC state, and a redaction manifest. It rejects archive traversal,
 absolute paths, symlinks, duplicate names, and oversized members.
 
 ## Verification matrix
+
+Platform-neutral CLI checks such as `--help` and refusal to overwrite an existing
+receipt must run before the Linux-only process-supervisor eligibility check; they
+must not create supervisor state. The RCC acceptance CLI still fails closed on
+unsupported platforms before candidate execution. Tests that prove Linux
+subreaper or process-group cleanup must be explicitly Linux-only. Skipping those
+process-proof tests elsewhere is not macOS or Windows cleanup acceptance, and a
+mocked `CompletedProcess` does not establish descendant cleanup.
 
 The dependency-free `devutils.runtime_conformance` module is the repository's
 small executable contract for this boundary. It canonicalizes exact-subject

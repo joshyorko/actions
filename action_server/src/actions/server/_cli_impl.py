@@ -646,6 +646,10 @@ def _import_actions(
     base_args: ArgumentsNamespaceBaseImportOrStart,
     settings: "Settings",
     disable_not_imported: bool,
+    after_import: typing.Callable[
+        [], tuple[typing.Callable[[], None], typing.Callable[[], None]]
+    ]
+    | None = None,
 ) -> int:
     """
     Args:
@@ -663,14 +667,14 @@ def _import_actions(
         base_args.dir = ["."]
 
     try:
-        for action_package_dir in base_args.dir:
-            _actions_import.import_action_package(
-                datadir=settings.datadir,
-                action_package_dir=os.path.abspath(action_package_dir),
-                skip_lint=base_args.skip_lint,
-                disable_not_imported=disable_not_imported,
-                whitelist=base_args.whitelist,
-            )
+        _actions_import.import_action_packages(
+            datadir=settings.datadir,
+            action_package_dirs=[os.path.abspath(path) for path in base_args.dir],
+            skip_lint=base_args.skip_lint,
+            disable_not_imported=disable_not_imported,
+            whitelist=base_args.whitelist,
+            after_import=after_import,
+        )
     except ActionServerValidationError as e:
         log.critical(
             bold_red(

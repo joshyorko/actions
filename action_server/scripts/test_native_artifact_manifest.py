@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,6 +14,25 @@ import write_native_artifact_manifest as manifest_writer
 
 
 class NativeArtifactManifestTests(unittest.TestCase):
+    def test_wrapper_source_inputs_match_committed_bytes_on_every_os(self):
+        package = Path(__file__).resolve().parents[1]
+        repository = package.parent
+        relative_paths = (
+            "go-wrapper/main.go",
+            "go-wrapper/process.go",
+            "go-wrapper/go.mod",
+            "go-wrapper/go.sum",
+        )
+        for relative in relative_paths:
+            path = package / relative
+            committed = subprocess.run(
+                ["git", "show", f"HEAD:action_server/{relative}"],
+                cwd=repository,
+                check=True,
+                capture_output=True,
+            ).stdout
+            self.assertEqual(path.read_bytes(), committed, relative)
+
     def test_records_hashes_for_unix_and_windows_suffixes(self):
         for system, suffix in (("Linux", ""), ("Windows", ".exe")):
             with self.subTest(
@@ -33,6 +53,7 @@ class NativeArtifactManifestTests(unittest.TestCase):
                 (package / "go-wrapper/assets").mkdir(parents=True)
                 (package / "go-wrapper/assets/assets.zip").write_bytes(b"assets")
                 (package / "go-wrapper/main.go").write_text("package main\n")
+                (package / "go-wrapper/process.go").write_text("package main\n")
                 (package / "go-wrapper/go.mod").write_text("module fixture\n")
                 (package / "go-wrapper/go.sum").write_text("fixture checksum\n")
                 output = package / "output/native-artifact-manifest.json"
@@ -102,6 +123,7 @@ class NativeArtifactManifestTests(unittest.TestCase):
                             package,
                             (
                                 "go-wrapper/main.go",
+                                "go-wrapper/process.go",
                                 "go-wrapper/go.mod",
                                 "go-wrapper/go.sum",
                             ),
@@ -136,10 +158,97 @@ class NativeArtifactManifestTests(unittest.TestCase):
                     f"dist/action-server/action-server{suffix}",
                 )
                 self.assertEqual(
+                    result["artifact_downloads"]["frozen"]["container_archive_path"],
+                    "native-artifact-provenance.tar",
+                )
+                self.assertEqual(
+                    result["artifact_downloads"]["frozen"]["tree_archive_path"],
+                    "dist/action-server",
+                )
+                self.assertEqual(
+                    result["artifact_downloads"]["frozen"]["inventory_archive_path"],
+                    "output/native-artifact-tree-inventory.json",
+                )
+                self.assertEqual(
                     result["artifact_downloads"]["manifest"]["archive_path"],
                     "output/native-artifact-manifest.json",
                 )
+                self.assertEqual(
+                    result["artifact_downloads"]["manifest"]["container_archive_path"],
+                    "native-artifact-provenance.tar",
+                )
+                self.assertEqual(
+                    result["artifact_downloads"]["manifest"]["inventory_archive_path"],
+                    "output/native-artifact-tree-inventory.json",
+                )
                 self.assertIn("no candidate Core wheel", result["provenance_scope"])
+
+    def test_process_source_changes_binding_without_changing_artifact_measurements(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as directory:
+            package = Path(directory) / "action_server"
+            frozen = package / "dist/action-server/action-server"
+            wrapper = package / "dist/final/action-server"
+            assets = package / "go-wrapper/assets/assets.zip"
+            for artifact in (frozen, wrapper, assets):
+                artifact.parent.mkdir(parents=True, exist_ok=True)
+                artifact.write_bytes(artifact.name.encode("utf-8"))
+            sources = {
+                "go-wrapper/main.go": b"package main\n",
+                "go-wrapper/process.go": b"package main\nfunc runChild() {}\n",
+                "go-wrapper/go.mod": b"module fixture\n",
+                "go-wrapper/go.sum": b"fixture checksum\n",
+            }
+            for relative, content in sources.items():
+                (package / relative).write_bytes(content)
+
+            def subprocess_result(args, **_kwargs):
+                return mock.Mock(stdout="a" * 40 if args[0] == "git" else "go fixture")
+
+            with (
+                mock.patch.object(
+                    manifest_writer.subprocess, "run", side_effect=subprocess_result
+                ),
+                mock.patch.object(
+                    manifest_writer.platform, "system", return_value="Linux"
+                ),
+            ):
+                arguments = dict(
+                    source_sha="a" * 40,
+                    workflow_run_id="1",
+                    workflow_run_attempt="1",
+                    runner_os="ubuntu-22.04",
+                    build_command="build-executable --go-wrapper",
+                    output=package / "output/native-artifact-manifest.json",
+                )
+                before = manifest_writer.write_manifest(package, **arguments)
+                process_source = package / "go-wrapper/process.go"
+                process_source.write_bytes(
+                    b"package main\nfunc runChild() { return }\n"
+                )
+                after = manifest_writer.write_manifest(package, **arguments)
+                expected_digest = hashlib.sha256(
+                    b"".join(
+                        relative.encode("utf-8")
+                        + b"\0"
+                        + hashlib.sha256(content).digest()
+                        for relative, content in sources.items()
+                    )
+                ).hexdigest()
+                for kind in ("frozen", "go-wrapper"):
+                    original = dict(before["artifacts"][kind])
+                    changed = dict(after["artifacts"][kind])
+                    self.assertEqual(original["wrapper_source_files"], list(sources))
+                    self.assertEqual(original["wrapper_source_sha256"], expected_digest)
+                    self.assertNotEqual(
+                        original.pop("wrapper_source_sha256"),
+                        changed.pop("wrapper_source_sha256"),
+                    )
+                    self.assertEqual(original, changed)
+                process_source.unlink()
+                with self.assertRaisesRegex(FileNotFoundError, "process.go"):
+                    manifest_writer.write_manifest(package, **arguments)
 
     def test_rejects_unverified_source_sha_and_missing_outputs(self):
         with tempfile.TemporaryDirectory() as directory:

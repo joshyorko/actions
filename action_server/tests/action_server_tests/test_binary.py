@@ -6,6 +6,15 @@ from pathlib import Path
 import pytest
 
 
+@pytest.mark.integration_test
+def test_binary_preserves_cli_usage_exit_code():
+    from actions.server._selftest import actions_server_run
+
+    result = actions_server_run(["devenv", "task"], returncode=2)
+    assert "usage: action-server devenv task" in result.stderr
+    assert "the following arguments are required: task_names" in result.stderr
+
+
 def get_internal_version_location(version: str) -> Path:
     import os
     import sys
@@ -77,8 +86,43 @@ def test_binary_spec_bundles_repository_owned_rcc_asset():
     spec = (Path(__file__).parents[2] / "action-server.spec").read_text()
 
     assert "rcc_datas" in spec
-    assert 'startswith("rcc-")' in spec
-    assert '"actions/server/bin"' in spec
+    assert "is_rcc_data(data)" in spec
+
+
+@pytest.mark.parametrize(
+    "data",
+    [
+        ("/checkout/src/actions/server/bin/rcc-18.19.3", "actions/server/bin"),
+        (
+            r"C:\checkout\src\actions\server\bin\rcc-18.19.3.exe",
+            r"actions\server\bin",
+        ),
+    ],
+)
+def test_rcc_spec_data_filter_accepts_native_path_separators(data):
+    from actions.server._build_common.rcc_bundle import is_rcc_data
+
+    assert is_rcc_data(data)
+
+
+@pytest.mark.parametrize(
+    "data",
+    [
+        (r"C:\checkout\src\actions\server\bin\other.exe", r"actions\server\bin"),
+        (
+            r"C:\checkout\src\actions\server\other\rcc-18.19.3.exe",
+            r"actions\server\other",
+        ),
+        (
+            r"C:\checkout\src\actions\server\bin\rcc-18.19.3.exe",
+            r"actions\server\bin-extra",
+        ),
+    ],
+)
+def test_rcc_spec_data_filter_rejects_unrelated_data(data):
+    from actions.server._build_common.rcc_bundle import is_rcc_data
+
+    assert not is_rcc_data(data)
 
 
 def test_binary_spec_preserves_work_items_python_sources_for_private_loader():

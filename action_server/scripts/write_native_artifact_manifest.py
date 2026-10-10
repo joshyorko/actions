@@ -133,6 +133,7 @@ def write_manifest(
     assets_zip = package / "go-wrapper" / "assets" / "assets.zip"
     wrapper_source_files = (
         "go-wrapper/main.go",
+        "go-wrapper/process.go",
         "go-wrapper/go.mod",
         "go-wrapper/go.sum",
     )
@@ -181,12 +182,17 @@ def write_manifest(
             "frozen": {
                 "artifact_name": f"action-server-native-provenance-{runner_os}-"
                 f"{workflow_run_id}-{workflow_run_attempt}",
+                "container_archive_path": "native-artifact-provenance.tar",
+                "tree_archive_path": "dist/action-server",
                 "archive_path": "dist/action-server/" + binaries["frozen"].name,
+                "inventory_archive_path": "output/native-artifact-tree-inventory.json",
             },
             "manifest": {
                 "artifact_name": f"action-server-native-provenance-{runner_os}-"
                 f"{workflow_run_id}-{workflow_run_attempt}",
+                "container_archive_path": "native-artifact-provenance.tar",
                 "archive_path": "output/native-artifact-manifest.json",
+                "inventory_archive_path": "output/native-artifact-tree-inventory.json",
             },
         },
         "provenance_scope": "checks Git HEAD only (not a clean-source attestation); hashes named file contents and frozen-tree metadata (file reads follow symlinks); no candidate Core wheel is included",

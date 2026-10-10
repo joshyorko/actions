@@ -59,14 +59,15 @@ def test_import_command_uses_artifact_exec_not_python_exe(tmp_path):
     )
 
     descriptor = RccRuntimeDescriptor(artifact_digest="sha256:" + "c" * 64)
+    rcc_location = tmp_path / "rcc"
     command = build_exec_command(
-        Path("/opt/rcc"),
+        rcc_location,
         descriptor,
         ["python", "-c", "import actions"],
         receipt_file=None,
     )
     assert command[:5] == [
-        "/opt/rcc",
+        str(rcc_location),
         "env",
         "exec",
         "--artifact",
@@ -278,6 +279,60 @@ def test_source_only_reload_reuses_verified_artifact_without_republishing(tmp_pa
     assert first.artifact_digest == second.artifact_digest == digest
     assert second.source_generation == "source-2"
     assert second.provider_reference == "http://127.0.0.1:8134"
+
+
+def test_snapshot_environment_input_preserves_original_cache_identity(tmp_path):
+    from actions.server._rcc_runtime_adapter import prepare_runtime
+
+    original = tmp_path / "package" / "package.yaml"
+    original.parent.mkdir()
+    original.write_text("spec-version: v2\ndependencies: {python: '3.12'}\n")
+    snapshot_one = tmp_path / "data" / "snapshot-one" / "package.yaml"
+    snapshot_two = tmp_path / "data" / "snapshot-two" / "package.yaml"
+    snapshot_one.parent.mkdir(parents=True)
+    snapshot_two.parent.mkdir(parents=True)
+    snapshot_one.write_text(
+        "spec-version: v2\ndependencies: {python: '3.12'}\nname: first\n"
+    )
+    snapshot_two.write_text(
+        "spec-version: v2\ndependencies: {python: '3.12'}\nname: second\n"
+    )
+    digest = "sha256:" + "a" * 64
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        if args[2] == "publish":
+            return 0, json.dumps({"artifact": digest}), ""
+        return (
+            0,
+            json.dumps({"artifactDigest": digest, "verification": {"valid": True}}),
+            "",
+        )
+
+    first = prepare_runtime(
+        snapshot_one,
+        Path("/opt/rcc"),
+        environment_identity=original,
+        source_generation="source-one",
+        provider="http://127.0.0.1:8134",
+        runner=runner,
+    )
+    second = prepare_runtime(
+        snapshot_two,
+        Path("/opt/rcc"),
+        environment_identity=original,
+        source_generation="source-two",
+        provider="http://127.0.0.1:8134",
+        previous_descriptor=first,
+        runner=runner,
+    )
+
+    assert [call[2] for call in calls] == ["publish", "acquire"]
+    assert calls[0][calls[0].index("--environment") + 1] == str(snapshot_one)
+    assert first.artifact_digest == second.artifact_digest == digest
+    assert second.source_generation == "source-two"
+    assert second.preparation_class == "source-reuse"
 
 
 def test_cached_artifact_is_revalidated_and_rebuilt_when_materialization_disappears(
@@ -648,13 +703,11 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
             self.registered_route_names = {"old-route"}
             self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
 
-        def unregister_http_actions(self):
-            events.append("routes-unregister")
+        def prepare_actions(self):
+            events.append("routes-prepare")
+            return ["new-route"]
 
-        def unregister_actions(self):
-            events.append("routes-unregister")
-
-        def register_actions(self):
+        def publish_prepared_actions(self, prepared):
             events.append("routes-register")
 
     class FakePool:
@@ -677,7 +730,7 @@ def test_route_and_pool_reload_commits_after_inflight_old_call(monkeypatch):
     release_old_call.set()
     old_call_thread.join(timeout=2)
 
-    assert events[:3] == ["pool-prepare", "routes-unregister", "routes-register"]
+    assert events[:3] == ["routes-prepare", "pool-prepare", "routes-register"]
     assert events[-1] == "old-call-complete"
     assert app.router.routes == ["old-route"]
 
@@ -971,14 +1024,7 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
             self.registered_route_names = {"old-route"}
             self.mcp_server_setup_helper = SimpleNamespace(_catalog=["old"])
 
-        def unregister_actions(self):
-            app.router.routes[:] = []
-
-        def unregister_http_actions(self):
-            app.router.routes[:] = []
-
-        def register_actions(self):
-            app.router.routes.append("new-route")
+        def prepare_actions(self):
             raise RuntimeError("route preparation failed")
 
     class FakePool:
@@ -1001,10 +1047,7 @@ def test_route_registration_failure_restores_routes_and_pool_generation(monkeypa
         )
 
     assert app.router.routes == ["old-route"]
-    assert pool.reloads == [
-        ({"new": "new-package"}, ["new-action"]),
-        ({"old": "old-package"}, ["old-action"]),
-    ]
+    assert pool.reloads == []
     assert pool.generation == 4
 
 
@@ -1711,7 +1754,7 @@ dependencies:
   conda-forge:
     - python=3.11.11
   pypi:
-    - actions-core=1.0.0
+    - actions-core=1.0.2
 """
     )
     action_file = package_dir / "action.py"
