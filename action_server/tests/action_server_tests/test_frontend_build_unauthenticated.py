@@ -165,8 +165,12 @@ class TestUnauthenticatedBuild:
         # Runtime intentionally inlines its Vite assets into a single HTML file.
         parser = _RuntimeInlineAssets()
         parser.feed(index_html.read_text(encoding="utf-8"))
-        assert any(parser.inline_javascript), "No inline Runtime JavaScript found"
-        assert any(parser.inline_css), "No inline Runtime CSS found"
+        assert any(
+            chunk.strip() for chunk in parser.inline_javascript
+        ), "No inline Runtime JavaScript found"
+        assert any(
+            chunk.strip() for chunk in parser.inline_css
+        ), "No inline Runtime CSS found"
         assert not parser.external_javascript, (
             "Runtime HTML references external JavaScript: "
             f"{parser.external_javascript}"
