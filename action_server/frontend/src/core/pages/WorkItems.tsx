@@ -7,6 +7,7 @@ import { Input } from '@/core/components/ui/Input';
 import { Select, SelectItem } from '@/core/components/ui/Select';
 import {
   Dialog,
+  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -265,12 +266,18 @@ function StatCard({ label, value, percentage, state }: StatCardProps): JSX.Eleme
 
 // Create Item Dialog Component
 interface CreateItemDialogProps {
+  children: React.ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   defaultQueueName?: string;
 }
 
-function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDialogProps): JSX.Element {
+function CreateItemDialog({
+  children,
+  open,
+  onOpenChange,
+  defaultQueueName,
+}: CreateItemDialogProps): JSX.Element {
   const formId = useId();
   const errorId = `${formId}-error`;
   const [queueName, setQueueName] = useState(defaultQueueName || '');
@@ -315,6 +322,7 @@ function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDi
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[600px] w-[90vw]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -644,17 +652,17 @@ export function WorkItemsPage(): JSX.Element {
           <p className="mt-2 max-w-sm text-sm text-muted-foreground">
             Start automating workflows by creating your first work item
           </p>
-          <Button className="mt-6" onClick={() => setCreateDialogOpen(true)}>
-            <PlusIcon className="h-4 w-4 mr-2" />
-            Create First Item
-          </Button>
+          <CreateItemDialog
+            open={createDialogOpen}
+            onOpenChange={setCreateDialogOpen}
+            defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
+          >
+            <Button className="mt-6">
+              <PlusIcon className="h-4 w-4 mr-2" />
+              Create First Item
+            </Button>
+          </CreateItemDialog>
         </div>
-
-        <CreateItemDialog
-          open={createDialogOpen}
-          onOpenChange={setCreateDialogOpen}
-          defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
-        />
       </div>
     );
   }
@@ -683,10 +691,16 @@ export function WorkItemsPage(): JSX.Element {
                 </SelectItem>
               ))}
             </Select>
-            <Button onClick={() => setCreateDialogOpen(true)}>
-              <PlusIcon className="h-4 w-4 mr-2" />
-              Create Item
-            </Button>
+            <CreateItemDialog
+              open={createDialogOpen}
+              onOpenChange={setCreateDialogOpen}
+              defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
+            >
+              <Button>
+                <PlusIcon className="h-4 w-4 mr-2" />
+                Create Item
+              </Button>
+            </CreateItemDialog>
           </div>
         </div>
 
@@ -826,11 +840,6 @@ export function WorkItemsPage(): JSX.Element {
       </div>
 
       {/* Dialogs */}
-      <CreateItemDialog
-        open={createDialogOpen}
-        onOpenChange={setCreateDialogOpen}
-        defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
-      />
       <ItemDetailDialog
         open={detailDialogOpen}
         onOpenChange={setDetailDialogOpen}

@@ -20,6 +20,7 @@ from typing import Dict, List, Optional, Protocol, Sequence, Union
 from actions.server._common.protocols import IMonitor
 
 from .callback import Callback
+from .process_logging import redact_sensitive_arguments
 
 if typing.TYPE_CHECKING:
     from concurrent.futures import Future
@@ -221,7 +222,10 @@ class Process:
         )
         new_kwargs.update(kwargs)
         log.debug(
-            "Subprocess start [args=%s,cwd=%s,uid=%d]", self._args, self._cwd, self._uid
+            "Subprocess start [args=%s,cwd=%s,uid=%d]",
+            redact_sensitive_arguments(self._args),
+            self._cwd,
+            self._uid,
         )
         proc = self._proc = _popen_raise(self._args, **new_kwargs)
         log.debug("Subprocess started [pid=%s,uid=%d]", proc.pid, self._uid)
@@ -258,7 +262,10 @@ class Process:
         return self._proc.pid
 
     def __str__(self):
-        return f"Process [{subprocess.list2cmdline(self._args)}, cwd={self._cwd}, pid={self._proc.pid}, uid={self._uid}]"
+        args = subprocess.list2cmdline(redact_sensitive_arguments(self._args))
+        return (
+            f"Process [{args}, cwd={self._cwd}, pid={self._proc.pid}, uid={self._uid}]"
+        )
 
     def __repr__(self):
         return str(self)
@@ -325,7 +332,9 @@ def _popen(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 
@@ -340,7 +349,9 @@ def _popen_raise(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         raise
 
 
@@ -375,7 +386,9 @@ def _call(cmdline, **kwargs):
     try:
         subprocess.check_call(cmdline, **kwargs)
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 
