@@ -226,7 +226,10 @@ def test_failed_watched_reload_keeps_both_packages_and_recovers(
                 f"--dir={package_a}",
                 f"--dir={package_b}",
             ],
-            timeout=30,
+            # The first native managed package environment may be cold on CI.
+            # Windows and macOS logs show RCC spending almost 30 seconds in
+            # `holotree variables` before the server emits its ready address.
+            timeout=90 if native_executable else 30,
         )
         import psutil
 

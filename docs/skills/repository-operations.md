@@ -83,12 +83,14 @@ test-fixture incompatibility, not an RCC defect.
 
 Frozen integration fixtures that synchronize packages with `package.yaml` may
 need a cold RCC-managed environment before the server emits its ready-port
-line. Keep that startup deadline scoped to the packaged managed-environment
-fixture; a captured CI run showed the first successful `holotree variables`
-operation alone taking 28.86 seconds, so a 30-second whole-startup deadline
-expired before the server became ready. Preserve a shorter deadline for
-source-mode fixtures and inspect child stderr before treating a timeout as an
-RCC or Runtime failure.
+line. In `test_cli_live_reload_multi_package.py`, CI run 38042377995 showed
+the first `holotree variables --space ... --no-retry-build` operation being
+terminated at the 30-second startup deadline on both Windows and macOS,
+before the watched-reload assertions began. Keep the 90-second allowance
+limited to the initial native-executable startup; this reuses the existing
+native acceptance startup budget. Source-mode startup remains at 30 seconds,
+as do the watcher and restart deadlines. Inspect child stderr before
+treating a timeout as an RCC or Runtime failure.
 
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
@@ -1925,6 +1927,66 @@ Holotree/materialization paths) are not authority. The existing process pool
 starts workers with RCC `env exec --artifact DIGEST --permissive-local
 --inherit-streams --receipt-file PATH -- ...` and must reap that wrapper before
 release.
+
+The current-candidate rollback/provider acceptance is a separate, explicitly
+opt-in hosted Linux workflow. It checks out its workflow-control revision and
+the Runtime candidate as separate repositories, verifies the candidate's full
+commit SHA before installing or testing it, and binds the sanitized receipt to
+both checkouts. This prevents a mutable PR head or synthetic workflow merge
+commit from being mistaken for the source under test. The test
+`test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable`
+requires `ACTIONS_REAL_RCC_ARTIFACT_TEST=1` and an
+`ACTIONS_RUNTIME_RCC_BINARY` whose RCC v18.19.3 bytes match the pinned SHA-256.
+The workflow selects that one test with xdist disabled, uses the normal Action
+Server developer install path, and uploads a sanitized receipt/source-hash
+summary even if the test fails. Its ordinary-suite skip is not acceptance
+evidence.
+
+The admission summary fails closed unless JUnit records exactly one passed,
+non-skipped test, with suite totals matching the actual testcase result
+elements and the expected rollback test name/module; the lifecycle receipt is
+`PASS` and binds to the checked-out
+candidate commit/tree; imported runtime modules originate from and hash-match
+that candidate; both the runtime RCC and Action Server's default RCC path match
+the pinned version and digest; provider-operation snapshots and expected
+persisted Run results agree; and natural shutdown has an observed pre-cleanup
+return code of 0 or 1, followed by an observed cleanup return code, without
+forced stop or observed surviving owned descendants. The always-run summary
+executes from the workspace root and uploads only sanitized evidence, so a
+skipped test, missing receipt, inconsistent JUnit counters, or failed checkout
+cannot appear green.
+
+The admission-summary tests execute both synthetic RCC paths to verify version
+and digest checks. These fixtures need a host-native executable format: a
+POSIX shebang script on Unix, and a `.cmd` file for both the primary and copied
+default path on Windows. A copied batch file without its `.cmd` suffix still
+fails Windows process creation. Keep the negative admission cases enabled;
+Linux fixture tests do not replace the native Windows toolkit matrix.
+
+With shell `pipefail`, do not validate a producer's version using a downstream
+`grep -q`: the early match can close the pipe before the producer finishes,
+causing SIGPIPE/status 141 despite a matching version. Capture the command's
+output only after successful completion, then match the expected complete line
+from that captured output. Keep nonzero producer exits fatal. A bootstrap
+failure before pytest is NOT RUN for the lifecycle test; retain its receipt
+separately from earlier successful runs.
+
+This is a cold preparation test, not a warm-cache or offline test: the fixture
+creates a fresh `ROBOCORP_HOME`, an empty temporary RCC `cache serve` provider,
+and a package environment requiring Python 3.12.15 and `actions-core=1.0.2`.
+That artifact requires glibc 2.36 or newer. The first hosted attempt on
+Ubuntu 22.04 (glibc 2.35) failed during initial acquire, before the rollback
+scenario; its sanitized admission result is retained at
+`docs/program/evidence/rcc-provider-rollback-38034105493/`. Run this dedicated
+acceptance on Ubuntu 24.04 and record the measured libc version. Keep the
+artifact compatibility check fail-closed; do not lower the package requirement
+to fit an older runner.
+The initial `env publish`/`env acquire` may access configured package sources
+and materialize a new environment. Keep it on hosted capacity; do not run it
+under a cache-only assumption or a tight local disk reserve. The proof covers
+source-only rollback/recovery and observed provider-operation stability for
+this focused test; it does not establish provider-dead warm execution, frozen
+packaging, in-flight drain, or full #134 acceptance.
 
 TCP worker startup owns its listener, accept future, and spawned wrapper.
 Startup failure attempts listener closure, accept cancellation, and wrapper
