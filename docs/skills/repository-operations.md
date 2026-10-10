@@ -923,8 +923,13 @@ lazydocs to emit those APIs into Core's docs. Before accepting output, verify
 `actions` resolves from the Core source tree and `actions.server` and
 `actions.work_items` are unavailable. Do not patch generated `docs/api` links
 by hand. `test_invoke_utils.py` asserts the source base so a repository-owner or
-branch regression is caught. The configured `devutils` gates in
-`developer/toolkit.py` run `pytest tests` and `ruff check src tests`.
+branch regression is caught. The Actions Core `inv lint` task is fail-fast and
+runs `ruff check src tests`, `ruff format --check --config
+../devutils/ruff.toml src tests`, then `isort --check src tests`. Passing Ruff
+checks alone does not prove this complete lint gate; run all three in order and
+address the first failure before treating lint as green. The configured
+`devutils` gates in `developer/toolkit.py` run `pytest tests` and `ruff check
+src tests`.
 
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
@@ -1044,6 +1049,8 @@ Prefer evidence in this order:
 5. External upstream documentation pinned to the inspected version.
 
 Do not convert a commit message, design proposal, or skipped test into a current-behavior claim. Before interrupting a long RCC or pytest command, verify the PID, full command, working directory, ancestry, and owning task receipt. Timing or a shared process group alone does not establish ownership; leave ambiguous shared processes to the integration owner.
+
+When refreshing a preserved ADR from a newer branch, identify the exact source revision for its updated design claims and keep its design-only boundary explicit. A refined packet does not establish implementation or issue acceptance; verify those separately against current source and acceptance evidence.
 
 ## Clean-break package boundaries
 
