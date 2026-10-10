@@ -772,18 +772,45 @@ catalog can finish on that generation. Serving whitelists and authentication
 still apply to original package/action identities. External alias-keyed grants
 are not established by reservations.
 
-Exact template-string ownership does not prevent different templates from
-matching the same concrete URI. For example, `example://{tenant}/item` and
-`example://acme/{resource}` both match `example://acme/item`; retiring one and
-admitting the other can change that concrete read's target. This observed
-cross-template matching ambiguity remains outside the exact-key guard and needs
-separate policy before claiming durable identity for every concrete resource URI.
-Cross-kind matching also remains unguarded: a prior direct resource
-`example://cross/new` can later match `example://cross/{item}`, while a prior
-`example://cross-old/{item}` read can later hit a new direct resource at
-`example://cross-old/item`. Direct URI lookup takes precedence over template
-matching. Exact namespace reservations therefore do not preserve concrete URI
-identity across namespaces or overlapping patterns.
+Concrete resource URI ownership also retains complete admitted routing
+projections in `mcp_resource_routing`, starting with migration 14. Each canonical
+projection records exact direct URI owners and lexically ordered template
+owners, using `(ActionPackage.name, Action.name)` pairs. Runtime resolves direct
+URIs first, then the first matching template, in both the current and historical
+projections. Before invoking a current callback, it rejects a URI whose winner
+in any recorded projection belongs to a different pair. This covers cross-kind
+capture (`example://cross/new` later matching `example://cross/{item}`, or an old
+template read later hitting a new direct URI), and distinct patterns such as
+`example://{tenant}/item` and `example://acme/{resource}` matching
+`example://acme/item`. It protects advertised expansions that were never read,
+without treating a shadowed historical template as the winner of a direct URI.
+Unavailable current routes return errors; history never restores an old callback.
+Same-owner revisions invoke the current callback and remain permitted.
+
+Routing history joins the existing serialized admission transaction and rollback
+boundary. Fixed-size domain-separated digests identify full RFC 8785 canonical
+payloads; full equality, shape, digest, and matcher-policy version 1 are validated
+before admission. Duplicate projections and metadata-only updates consume no new
+history; empty resource catalogs bind no URI and add no projection. Malformed,
+incompatible, colliding, missing, or overcapacity history fails admission without
+publication. Private hard limits are 256 projections, 10,000 aggregate route rows,
+and 16 MiB of aggregate canonical UTF-8 payloads. Capacity rejects the complete
+update and retains last-good; protective history is never evicted. A duplicate
+remains admissible at capacity. These bound storage and matching iterations,
+not regex CPU time: policy 1 preserves the existing anchored placeholder
+substitution, including unescaped literal regex characters. No URI grammar or
+template intersection solver is introduced.
+
+Discovery and descriptor revisions remain deterministic functions of the current
+admitted set. Read-time checks do not prove complete template disjointness at
+admission: an advertised template may contain concrete URIs that return historical
+ownership-conflict errors. Rediscovery cannot reauthorize such a URI; rename or
+choose a non-conflicting resource route. Migration cannot reconstruct unknown
+pre-upgrade routing precedence from exact-key rows, and a fresh/replaced database
+has no prior routing history. The guarantee covers recorded post-upgrade
+projections in the shared database, not arbitrary earlier advertisements,
+authorization grants, or code/revision identity. A call already admitted against
+an older immutable catalog may finish on that generation.
 
 HTTP paths, action display names, metadata, and dispatch
 targets remain tied to their original package/action. Resource URI and prompt
@@ -2106,7 +2133,8 @@ compensation closure after nondurable SQLite commit failure with
 `min_processes=0`; it does not prove warmed RCC worker compensation or
 external-service rollback.
 When a reload test constructs a partial `Database` directly, register
-`McpCatalogName` alongside `ActionPackage` and `Action` before creating tables.
+`McpCatalogName` and `McpResourceRouting` alongside `ActionPackage` and `Action`
+before creating tables.
 `create_tables(get_model_db_rules())` creates only registered models; the rules
 do not add missing tables. Otherwise catalog admission fails before the injected
 commit failure, and the test never exercises generation compensation. Preserve
@@ -2277,7 +2305,12 @@ case in `test_cli_multi_package_sync.py` that honors
 new candidate artifact, since older frozen artifacts cannot prove this repair.
 The permanent exact-key admission guard above preserves historical ownership
 without changing deterministic current-set names. It does not fence calls by
-catalog revision or solve overlapping resource-template matching.
+catalog revision. `mcp/test_resource_history.py` separately covers historical
+concrete resource winners across overlapping templates and direct/template
+transitions, rejection before callback, same-owner revisions, restart, capacity,
+malformed history, commit rollback, and serialized two-process SQLite admission.
+This read-time guard retains the existing matcher; it does not solve arbitrary
+template intersection or reauthorize a conflicting URI after rediscovery.
 
 `test_cli_live_reload_multi_package.py` exercises actual unmanaged two-package
 watched failure and recovery. After malformed decorated B is rejected, it checks
