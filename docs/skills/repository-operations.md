@@ -767,6 +767,12 @@ matching the same concrete URI. For example, `example://{tenant}/item` and
 admitting the other can change that concrete read's target. This observed
 cross-template matching ambiguity remains outside the exact-key guard and needs
 separate policy before claiming durable identity for every concrete resource URI.
+Cross-kind matching also remains unguarded: a prior direct resource
+`example://cross/new` can later match `example://cross/{item}`, while a prior
+`example://cross-old/{item}` read can later hit a new direct resource at
+`example://cross-old/item`. Direct URI lookup takes precedence over template
+matching. Exact namespace reservations therefore do not preserve concrete URI
+identity across namespaces or overlapping patterns.
 
 HTTP paths, action display names, metadata, and dispatch
 targets remain tied to their original package/action. Resource URI and prompt
