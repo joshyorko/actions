@@ -14,6 +14,9 @@ import yaml
 ROOT = Path(__file__).parents[2]
 WORKFLOWS = ROOT / ".github" / "workflows"
 PUBLISHER = ROOT / "action_server" / "scripts" / "publish_verified_runtime.py"
+FLOOR_VERIFIER = (
+    ROOT / "action_server" / "scripts" / "verify_published_runtime_floor.py"
+)
 BASELINE_REF = os.environ.get("RUNTIME_RELEASE_TEST_BASELINE")
 
 
@@ -34,6 +37,16 @@ def repository_text(relative_path):
 
 def load_publisher():
     spec = importlib.util.spec_from_file_location("publish_verified_runtime", PUBLISHER)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_floor_verifier():
+    spec = importlib.util.spec_from_file_location(
+        "verify_published_runtime_floor", FLOOR_VERIFIER
+    )
     assert spec and spec.loader
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -335,6 +348,30 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
         for step in workflow["jobs"][job_name]["steps"]:
             if "secrets." in str(step):
                 assert step.get("if") == "github.event_name == 'push'"
+
+
+def test_published_runtime_floor_install_pins_exact_public_core_and_helper():
+    verifier = load_floor_verifier()
+    python = ROOT / "isolated" / "bin" / "python"
+    wheel = ROOT / "dist" / "actions_runtime-1.0.3-cp312-cp312-manylinux.whl"
+    report = ROOT / "install-report.json"
+
+    assert verifier.install_command(python, wheel, report) == [
+        str(python),
+        "-m",
+        "pip",
+        "install",
+        "--isolated",
+        "--no-cache-dir",
+        "--index-url",
+        "https://pypi.org/simple",
+        "--only-binary=:all:",
+        "--report",
+        str(report),
+        str(wheel.resolve()),
+        "actions-core==1.0.2",
+        "actions-http-helper==1.0.3",
+    ]
 
 
 def _native_release_provenance_step():
