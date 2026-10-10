@@ -1746,6 +1746,12 @@ declared portable-suite result and hand it to the Action Server test-layout
 owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
 the package's discovery rules.
 
+CLI tests that parse nested MCP JSON responses should model the concrete
+response and transition shapes with `TypedDict`, then validate the decoded
+`object` at the HTTP boundary with a narrow `TypeGuard` before indexing. This
+keeps success and error variants explicit and avoids both untyped JSON access
+and broad `Any` annotations.
+
 The generated `actions_runtime_tests.yml` workflow is the configured full
 Action Server PR gate: it runs the portable and binary test tasks, then lint,
 typecheck, and docs checks. Its pull-request filter must retain the generated
@@ -2946,6 +2952,14 @@ partial custom schemas must include the normalized Run models. Missing tables
 fail closed and must not trigger a legacy authorization fallback. Upgrading
 creates no synthetic pins or grants for historical Runs and preserves their
 status, result, inputs and artifact directory.
+
+Legacy Run API tests that replace the in-memory `RunsState` must implement
+`is_scoped_run(run_id)` explicitly. A legacy-only fixture may return false only
+for the known Run it models as having no persisted `RunPin`; keep the production
+check intact so a real scoped Run cannot fall through to a legacy cache or
+durable artifact manifest. The durable-binding regression should still restart
+the storage object, recover legacy Run metadata, and verify the existing binary
+Range response.
 Historical fixtures built with the current `create_db()` must remove tables and
 indexes owned by later migrations before backdating the migration version.
 Changing only the version leaves future schema behind and can make forward
