@@ -2284,6 +2284,16 @@ new candidate artifact, since older frozen artifacts cannot prove this repair.
 The permanent exact-key admission guard above preserves historical ownership
 without changing deterministic current-set names. It does not fence calls by
 catalog revision or solve overlapping resource-template matching.
+The legacy `test_action_package_rename` makes the ownership boundary explicit:
+renaming `calculator` while retaining its `calculator_sum` MCP key is rejected,
+and the test compares every persisted column in the package, action, and owner
+tables before and after that failed sync. This includes package environment and
+hash fields and action docs, source locations, schemas, consequence flags,
+managed parameters, and options. A sync-free restart must still serve the
+original HTTP route and MCP tool. Renaming the package with a fresh action key
+then proves HTTP/MCP dispatch and another synchronized restart. Source-mode
+results do not replace acceptance against the newly built frozen Runtime after
+this guard changes.
 
 `test_cli_live_reload_multi_package.py` exercises actual unmanaged two-package
 watched failure and recovery. After malformed decorated B is rejected, it checks
