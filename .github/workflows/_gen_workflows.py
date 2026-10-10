@@ -746,6 +746,17 @@ if source.get("commit") != candidate_sha:
     issues.append("receipt_source_commit_mismatch")
 if source.get("tree") != candidate_tree:
     issues.append("receipt_source_tree_mismatch")
+worker_libc_name = os.environ.get("RCC_WORKER_LIBC_NAME", "")
+worker_libc_version = os.environ.get("RCC_WORKER_LIBC_VERSION", "")
+try:
+    worker_libc_parts = tuple(
+        int(part) for part in worker_libc_version.split(".")[:2]
+    )
+except ValueError:
+    worker_libc_parts = ()
+worker_libc_compatible = worker_libc_name == "glibc" and worker_libc_parts >= (2, 36)
+if not worker_libc_compatible:
+    issues.append("runner_glibc_below_artifact_minimum_or_unknown")
 
 source_files = {
     "action_package_handler": "action_server/src/actions/server/_action_package_handler.py",
@@ -917,6 +928,11 @@ summary = {
         "action_server_default_sha256": default_rcc_sha,
         "receipt_matches_binary": receipt.get("rcc_sha256") == actual_rcc_sha and receipt.get("rcc_version") == actual_rcc_version,
     },
+    "runner": {
+        "libc_name": worker_libc_name if worker_libc_name else "UNKNOWN",
+        "libc_version": worker_libc_version if worker_libc_version else "UNKNOWN",
+        "meets_artifact_minimum": worker_libc_compatible,
+    },
     "test": {
         "exit_code": test_exit_code,
         "junit": test_counts,
@@ -944,6 +960,7 @@ lines = [
     f"workflow_control_sha={control_sha}",
     f"candidate_sha={candidate_sha}",
     f"candidate_tree={candidate_tree}",
+    f"runner_libc={worker_libc_name or 'UNKNOWN'} {worker_libc_version or 'UNKNOWN'}",
     f"rcc_version={summary['rcc']['version']}",
     f"rcc_sha256={actual_rcc_sha}",
     f"pytest_exit_code={test_exit_code}",
@@ -988,7 +1005,7 @@ class ActionServerRccProviderRollback(BaseWorkflow):
 
     @override
     def runs_on_and_strategy_part(self):
-        return {"runs-on": UBUNTU_VERSION, "timeout-minutes": 30}
+        return {"runs-on": "ubuntu-24.04", "timeout-minutes": 30}
 
     @override
     def defaults_part(self):
@@ -1047,6 +1064,29 @@ printf 'candidate_tree=%s\\n' "$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse 
 """,
             },
             *self.setup_python(),
+            {
+                "name": "Verify runner libc supports the test artifact",
+                "shell": "bash",
+                "run": """set -Eeuo pipefail
+python3 - <<'PY'
+import os
+import platform
+import sys
+
+name, version = platform.libc_ver()
+try:
+    actual = tuple(int(part) for part in version.split(".")[:2])
+except ValueError:
+    actual = ()
+if name != "glibc" or actual < (2, 36):
+    raise SystemExit(f"test artifact requires glibc >= 2.36; runner reported {name} {version}")
+print(f"Verified runner libc: {name} {version} (minimum 2.36)")
+with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as stream:
+    stream.write(f"RCC_WORKER_LIBC_NAME={name}\\n")
+    stream.write(f"RCC_WORKER_LIBC_VERSION={version}\\n")
+PY
+""",
+            },
             {
                 "name": "Install devutils requirements",
                 "run": "uv run --no-project --python 3.12 python -m pip install --break-system-packages -r ../devutils/requirements.txt",

@@ -1948,6 +1948,13 @@ cannot appear green.
 This is a cold preparation test, not a warm-cache or offline test: the fixture
 creates a fresh `ROBOCORP_HOME`, an empty temporary RCC `cache serve` provider,
 and a package environment requiring Python 3.12.15 and `actions-core=1.0.2`.
+That artifact requires glibc 2.36 or newer. The first hosted attempt on
+Ubuntu 22.04 (glibc 2.35) failed during initial acquire, before the rollback
+scenario; its sanitized admission result is retained at
+`docs/program/evidence/rcc-provider-rollback-38034105493/`. Run this dedicated
+acceptance on Ubuntu 24.04 and record the measured libc version. Keep the
+artifact compatibility check fail-closed; do not lower the package requirement
+to fit an older runner.
 The initial `env publish`/`env acquire` may access configured package sources
 and materialize a new environment. Keep it on hosted capacity; do not run it
 under a cache-only assumption or a tight local disk reserve. The proof covers

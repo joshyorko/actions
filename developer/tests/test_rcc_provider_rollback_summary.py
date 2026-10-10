@@ -147,6 +147,8 @@ def _fixture(tmp_path: Path):
         "EXPECTED_CONTROL_SHA": control_sha,
         "EXPECTED_RCC_SHA256": rcc_sha,
         "RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE": "0",
+        "RCC_WORKER_LIBC_NAME": "glibc",
+        "RCC_WORKER_LIBC_VERSION": "2.39",
         "ACTIONS_RUNTIME_RCC_BINARY": str(rcc_binary),
         "ACTION_SERVER_RCC_DEFAULT": str(default_rcc),
     }
@@ -178,6 +180,11 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
     assert summary["test"]["natural_return_code_before_cleanup"] == 0
     assert summary["test"]["forced_cleanup_returncode_observed"] is True
     assert summary["test"]["expected_test_identity_matches"] is True
+    assert summary["runner"] == {
+        "libc_name": "glibc",
+        "libc_version": "2.39",
+        "meets_artifact_minimum": True,
+    }
     text = (evidence / "acceptance-summary.json").read_text()
     assert "do-not-export" not in text
     assert "user:secret" not in text
@@ -187,6 +194,8 @@ def test_exact_summary_script_admits_complete_passing_receipt(tmp_path: Path) ->
     ("mutation", "expected_issue"),
     [
         ("skip", "test_result_not_exactly_one_pass"),
+        ("glibc_too_old", "runner_glibc_below_artifact_minimum_or_unknown"),
+        ("missing_glibc", "runner_glibc_below_artifact_minimum_or_unknown"),
         ("missing_junit", "junit_missing_or_invalid"),
         ("malformed_junit", "junit_missing_or_invalid"),
         ("missing_testcase", "junit_suite_counts_do_not_match_testcases"),
@@ -214,6 +223,10 @@ def test_exact_summary_script_rejects_incomplete_receipt(
             "</testsuite>",
             encoding="utf-8",
         )
+    elif mutation == "glibc_too_old":
+        env["RCC_WORKER_LIBC_VERSION"] = "2.35"
+    elif mutation == "missing_glibc":
+        env.pop("RCC_WORKER_LIBC_VERSION")
     elif mutation == "missing_junit":
         junit.unlink()
     elif mutation == "malformed_junit":

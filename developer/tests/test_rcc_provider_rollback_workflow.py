@@ -57,7 +57,7 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     ]
 
     job = workflow["jobs"]["build"]
-    assert job["runs-on"] == "ubuntu-22.04"
+    assert job["runs-on"] == "ubuntu-24.04"
     assert job["timeout-minutes"] == "30"
     steps = job["steps"]
     control_checkout = next(
@@ -102,6 +102,15 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert "rcc-linux64" in rcc_install["run"]
     assert "sha256sum --check" in rcc_install["run"]
 
+    libc_check = next(
+        step
+        for step in steps
+        if step["name"] == "Verify runner libc supports the test artifact"
+    )
+    assert "platform.libc_ver()" in libc_check["run"]
+    assert "actual < (2, 36)" in libc_check["run"]
+    assert steps.index(libc_check) < steps.index(rcc_install)
+
     test = next(
         step
         for step in steps
@@ -134,6 +143,7 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert admission["working-directory"] == "${{ github.workspace }}"
     assert admission["env"]["EXPECTED_CANDIDATE_SHA"] == CANDIDATE_SHA
     assert "receipt_source_commit_mismatch" in admission["run"]
+    assert "runner_libc" in admission["run"]
     assert "test_result_not_exactly_one_pass" in admission["run"]
     assert "sys.exit(0 if not issues else 1)" in admission["run"]
     assert upload["if"] == "always()"

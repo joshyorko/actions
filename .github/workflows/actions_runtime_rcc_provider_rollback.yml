@@ -29,7 +29,7 @@ defaults:
     working-directory: ./candidate/action_server
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
     - name: Checkout workflow control revision
@@ -79,6 +79,17 @@ jobs:
         enable-cache: true
     - name: Install Python 3.12
       run: uv python install 3.12
+    - name: Verify runner libc supports the test artifact
+      shell: bash
+      run: "set -Eeuo pipefail\npython3 - <<'PY'\nimport os\nimport platform\nimport\
+        \ sys\n\nname, version = platform.libc_ver()\ntry:\n    actual = tuple(int(part)\
+        \ for part in version.split(\".\")[:2])\nexcept ValueError:\n    actual =\
+        \ ()\nif name != \"glibc\" or actual < (2, 36):\n    raise SystemExit(f\"\
+        test artifact requires glibc >= 2.36; runner reported {name} {version}\")\n\
+        print(f\"Verified runner libc: {name} {version} (minimum 2.36)\")\nwith open(os.environ[\"\
+        GITHUB_ENV\"], \"a\", encoding=\"utf-8\") as stream:\n    stream.write(f\"\
+        RCC_WORKER_LIBC_NAME={name}\\n\")\n    stream.write(f\"RCC_WORKER_LIBC_VERSION={version}\\\
+        n\")\nPY\n"
     - name: Install devutils requirements
       run: uv run --no-project --python 3.12 python -m pip install --break-system-packages
         -r ../devutils/requirements.txt
@@ -275,6 +286,12 @@ jobs:
         \    issues.append(\"control_checkout_sha_mismatch\")\nif source.get(\"commit\"\
         ) != candidate_sha:\n    issues.append(\"receipt_source_commit_mismatch\"\
         )\nif source.get(\"tree\") != candidate_tree:\n    issues.append(\"receipt_source_tree_mismatch\"\
+        )\nworker_libc_name = os.environ.get(\"RCC_WORKER_LIBC_NAME\", \"\")\nworker_libc_version\
+        \ = os.environ.get(\"RCC_WORKER_LIBC_VERSION\", \"\")\ntry:\n    worker_libc_parts\
+        \ = tuple(\n        int(part) for part in worker_libc_version.split(\".\"\
+        )[:2]\n    )\nexcept ValueError:\n    worker_libc_parts = ()\nworker_libc_compatible\
+        \ = worker_libc_name == \"glibc\" and worker_libc_parts >= (2, 36)\nif not\
+        \ worker_libc_compatible:\n    issues.append(\"runner_glibc_below_artifact_minimum_or_unknown\"\
         )\n\nsource_files = {\n    \"action_package_handler\": \"action_server/src/actions/server/_action_package_handler.py\"\
         ,\n    \"actions_import\": \"action_server/src/actions/server/_actions_import.py\"\
         ,\n    \"runtime_adapter\": \"action_server/src/actions/server/_rcc_runtime_adapter.py\"\
@@ -373,6 +390,9 @@ jobs:
         \ \"MISMATCH_OR_UNAVAILABLE\",\n        \"action_server_default_sha256\":\
         \ default_rcc_sha,\n        \"receipt_matches_binary\": receipt.get(\"rcc_sha256\"\
         ) == actual_rcc_sha and receipt.get(\"rcc_version\") == actual_rcc_version,\n\
+        \    },\n    \"runner\": {\n        \"libc_name\": worker_libc_name if worker_libc_name\
+        \ else \"UNKNOWN\",\n        \"libc_version\": worker_libc_version if worker_libc_version\
+        \ else \"UNKNOWN\",\n        \"meets_artifact_minimum\": worker_libc_compatible,\n\
         \    },\n    \"test\": {\n        \"exit_code\": test_exit_code,\n       \
         \ \"junit\": test_counts,\n        \"junit_counts_match_testcases\": test_counts\
         \ == actual_case_counts,\n        \"expected_test_identity_matches\": test_identity_matches,\n\
@@ -392,12 +412,14 @@ jobs:
         \ acceptance summary\",\n    f\"admission_passed={summary['admission']['passed']}\"\
         ,\n    f\"admission_issues={','.join(issues)}\",\n    f\"workflow_control_sha={control_sha}\"\
         ,\n    f\"candidate_sha={candidate_sha}\",\n    f\"candidate_tree={candidate_tree}\"\
-        ,\n    f\"rcc_version={summary['rcc']['version']}\",\n    f\"rcc_sha256={actual_rcc_sha}\"\
-        ,\n    f\"pytest_exit_code={test_exit_code}\",\n    f\"receipt_status={receipt.get('status',\
-        \ 'NOT_RECORDED')}\",\n    f\"natural_exit_status={runtime.get('natural_exit_status')}\"\
-        ,\n]\n(evidence_dir / \"acceptance-summary.log\").write_text(\"\\n\".join(lines)\
-        \ + \"\\n\", encoding=\"utf-8\")\nprint(\"\\n\".join(lines))\nsys.exit(0 if\
-        \ not issues else 1)\n\nPY"
+        ,\n    f\"runner_libc={worker_libc_name or 'UNKNOWN'} {worker_libc_version\
+        \ or 'UNKNOWN'}\",\n    f\"rcc_version={summary['rcc']['version']}\",\n  \
+        \  f\"rcc_sha256={actual_rcc_sha}\",\n    f\"pytest_exit_code={test_exit_code}\"\
+        ,\n    f\"receipt_status={receipt.get('status', 'NOT_RECORDED')}\",\n    f\"\
+        natural_exit_status={runtime.get('natural_exit_status')}\",\n]\n(evidence_dir\
+        \ / \"acceptance-summary.log\").write_text(\"\\n\".join(lines) + \"\\n\",\
+        \ encoding=\"utf-8\")\nprint(\"\\n\".join(lines))\nsys.exit(0 if not issues\
+        \ else 1)\n\nPY"
     - name: Upload sanitized acceptance evidence
       if: always()
       uses: actions/upload-artifact@v4
