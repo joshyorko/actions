@@ -15,6 +15,20 @@ resolves to a resource with that MIME type before replacing the active catalog,
 so a failed catalog admission leaves the previous catalog in place.
 `visibility: ["app"]` is a host projection hint, never backend authorization.
 
+Canvas acceptance separates the component suite, the fixture-only simulated
+browser host, and a real Runtime bridge. The bounded bridge test is
+`test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge`:
+it builds the Canvas HTML and an exact-checkout `actions-core` wheel, installs
+that wheel into the isolated RCC worker after environment creation, reads the
+resource and public decorator metadata from a running Action Server, and drives
+the same built view through browser calls to that Runtime's Streamable HTTP MCP
+endpoint. Do not replace this with a fabricated tool response or a direct
+component test. The browser test accepts an explicit local Chromium executable
+for environments without Playwright's pinned browser; record its version and
+SHA-256 separately, and report the pinned Playwright browser as not run. This
+candidate-source integration does not prove published-wheel compatibility,
+production-host authorization/CSP, artifact resolution, or ChatGPT rendering.
+
 The focused source tests exercise public decorators through the Runtime
 Streamable HTTP route. The process-level fixture additionally installs the
 exact candidate Core wheel into an isolated test environment before importing an

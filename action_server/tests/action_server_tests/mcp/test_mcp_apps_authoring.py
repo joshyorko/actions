@@ -1,8 +1,12 @@
 import asyncio
 import importlib.util
 import json
+import os
+import shutil
+import subprocess
 from collections.abc import Callable
 from functools import partial
+from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
@@ -13,6 +17,9 @@ from mcp.client.streamable_http import streamable_http_client
 from mcp.types import ReadResourceResult, TextContent, TextResourceContents
 
 from actions.server._selftest import ActionServerProcess
+
+
+CANVAS_RESOURCE_URI = "ui://action-canvas/v1/canvas.html?query-fixture=0.1"
 
 
 def test_public_mcp_apps_metadata_through_runtime_streamable_route(
@@ -228,3 +235,175 @@ def object_result() -> dict[str, str]:
             assert structured.meta["ui"]["visibility"] == ["app"]
 
     assert run_async_in_new_thread(partial(check_routes)) is None
+
+
+@pytest.mark.integration_test
+def test_canvas_view_calls_public_action_through_runtime_bridge(
+    action_server_process: ActionServerProcess, tmp_path
+) -> None:
+    repository_root = Path(__file__).resolve().parents[4]
+    frontend_root = repository_root / "action_server" / "frontend"
+    candidate_core_wheel_dir = tmp_path / "candidate-core"
+    candidate_core_wheel_dir.mkdir()
+    build_env = os.environ.copy()
+    build_env["UV_CACHE_DIR"] = str(tmp_path / "uv-cache")
+    build_env["TMPDIR"] = str(tmp_path)
+    subprocess.run(
+        [
+            shutil.which("uv") or "uv",
+            "build",
+            "--wheel",
+            "--out-dir",
+            str(candidate_core_wheel_dir),
+            str(repository_root / "actions"),
+        ],
+        env=build_env,
+        check=True,
+        timeout=120,
+    )
+    candidate_core_wheel = next(candidate_core_wheel_dir.glob("actions_core-*.whl"))
+    package_yaml = tmp_path / "package.yaml"
+    package_yaml.write_text(
+        "spec-version: v2\n"
+        "name: Canvas Runtime bridge acceptance\n"
+        "description: Isolated fixture using the exact candidate Core wheel.\n"
+        "version: 0.0.1\n"
+        "dependencies:\n"
+        "  conda-forge:\n"
+        "    - python=3.12\n"
+        "    - uv=0.9.26\n"
+        "  pypi:\n"
+        "    - actions-core=1.0.2\n"
+        "post-install:\n"
+        f"  - python -m pip install --no-deps --force-reinstall {candidate_core_wheel}\n",
+        encoding="utf-8",
+    )
+    subprocess.run(["npm", "run", "build:canvas"], cwd=frontend_root, check=True)
+    canvas_html = (frontend_root / "dist-canvas" / "index.html").read_text(
+        encoding="utf-8"
+    )
+    (tmp_path / "canvas.html").write_text(canvas_html, encoding="utf-8")
+    (tmp_path / "canvas_actions.py").write_text(
+        '''
+from pathlib import Path
+
+from actions import mcp
+
+UI_URI = "ui://action-canvas/v1/canvas.html?query-fixture=0.1"
+
+@mcp.resource(
+    UI_URI,
+    mime_type="text/html;profile=mcp-app",
+    meta={"ui": {"csp": {}}},
+)
+def canvas_view() -> str:
+    return Path(__file__).with_name("canvas.html").read_text(encoding="utf-8")
+
+@mcp.tool(
+    read_only_hint=True,
+    destructive_hint=False,
+    idempotent_hint=True,
+    open_world_hint=False,
+    meta={"ui": {"resourceUri": UI_URI, "visibility": ["model", "app"]}},
+)
+def canvas_fixture_search(query: str) -> dict[str, object]:
+    if query.casefold() == "alpha":
+        return {
+            "rows": [
+                {"id": "record-001", "title": "Alpha guide", "category": "Guide"},
+                {"id": "record-002", "title": "Alpha checklist", "category": "Checklist"},
+            ],
+            "artifact": {"handle": "art_7Wk3qN9pL2xD5mR8sV4cY1"},
+            "error": None,
+        }
+    return {
+        "rows": [],
+        "artifact": None,
+        "error": {
+            "code": "no_matches",
+            "message": "No records matched that query.",
+        },
+    }
+
+@mcp.tool(
+    read_only_hint=True,
+    destructive_hint=False,
+    idempotent_hint=True,
+    open_world_hint=False,
+    meta={"ui": {"resourceUri": UI_URI, "visibility": ["app"]}},
+)
+def canvas_fixture_artifact_status(handle: str) -> dict[str, str]:
+    if handle != "art_7Wk3qN9pL2xD5mR8sV4cY1":
+        raise ValueError("Unknown fixture artifact handle.")
+    return {"status": "ready"}
+''',
+        encoding="utf-8",
+    )
+
+    action_server_process.start(
+        cwd=tmp_path,
+        db_file="server.db",
+        actions_sync=True,
+        timeout=120,
+        env={"ACTIONS_HOME": str(tmp_path / "actions-home")},
+    )
+
+    async def check_runtime_contract() -> None:
+        async with action_server_process.mcp_client() as session:
+            listed = await session.list_tools()
+            search_tool = next(
+                tool for tool in listed.tools if tool.name == "canvas_fixture_search"
+            )
+            assert search_tool.meta is not None
+            assert search_tool.meta["ui"] == {
+                "resourceUri": CANVAS_RESOURCE_URI,
+                "visibility": ["model", "app"],
+            }
+
+            resource = await session.read_resource(CANVAS_RESOURCE_URI)
+            resource_content = resource.contents[0]
+            assert isinstance(resource_content, TextResourceContents)
+            assert resource_content.mime_type == "text/html;profile=mcp-app"
+            assert resource_content.text == canvas_html
+
+            result = await session.call_tool(
+                "canvas_fixture_search", {"query": "alpha"}
+            )
+            assert result.structured_content == {
+                "rows": [
+                    {"id": "record-001", "title": "Alpha guide", "category": "Guide"},
+                    {
+                        "id": "record-002",
+                        "title": "Alpha checklist",
+                        "category": "Checklist",
+                    },
+                ],
+                "artifact": {"handle": "art_7Wk3qN9pL2xD5mR8sV4cY1"},
+                "error": None,
+            }
+
+    assert run_async_in_new_thread(partial(check_runtime_contract)) is None
+
+    playwright_executable = shutil.which("chromium")
+    if playwright_executable:
+        env = os.environ.copy()
+        env["CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"] = playwright_executable
+    else:
+        env = os.environ.copy()
+    env["CANVAS_RUNTIME_MCP_URL"] = (
+        f"http://127.0.0.1:{action_server_process.port}/mcp"
+    )
+    subprocess.run(
+        [
+            "npm",
+            "run",
+            "test:canvas-harness",
+            "--",
+            "--grep",
+            "real Runtime Action result",
+        ],
+        cwd=frontend_root,
+        env=env,
+        check=True,
+        timeout=180,
+    )
