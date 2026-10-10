@@ -126,6 +126,19 @@ configuration, token issuer/audience checks, or CIMD handling by an external
 authorization server. Action-provider OAuth remains a separate credential
 flow.
 
+## Windows type-checking of platform-specific APIs
+
+A Windows-targeted mypy run still analyzes platform-guarded branches, while
+Windows typeshed omits POSIX-only members such as `os.getuid` and `os.fchmod`.
+Keep the runtime `os.name` guard and isolate those calls behind narrow typed
+wrappers using the platform API lookup; do not silence the error with a broad
+`Any` or type-ignore. Likewise, when each supported platform selects different
+native syscall constants, pass the constants within each branch to a shared
+helper instead of reading locals assigned only in a platform-dependent branch.
+Check both the affected Windows target and the native target, then run the
+existing platform behavior tests. A focused `mypy --platform win32` invocation
+is diagnostic unless the repository's configured CI runs that target.
+
 ## Community program evidence
 
 The [community issue ledger](../program/community-program-ledger.md) retains

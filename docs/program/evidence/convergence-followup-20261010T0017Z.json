@@ -1,0 +1,247 @@
+{
+  "branch_readback": {
+    "community": {
+      "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "ref": "refs/heads/community",
+      "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+    },
+    "integration": {
+      "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
+      "ref": "refs/heads/integration/community-release-20261008",
+      "tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9"
+    },
+    "observed_at_utc": "2026-10-10T00:16:55Z",
+    "runtime_candidate": {
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "ref": "refs/heads/integration/runtime-release-final-20261009",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    },
+    "source": "git ls-remote plus commit tree readback in the governance worktree"
+  },
+  "cohort": {
+    "definition": "21-PR convergence cohort established by live GitHub pull request states; integrated means merged to each PR recorded target, not full owning-issue completion.",
+    "integrated_prs": [
+      219,
+      220,
+      251,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271
+    ],
+    "items": 21,
+    "merge_ready": 0,
+    "open_blocked": 6,
+    "open_blocked_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      256
+    ],
+    "source": "Live GitHub PR states at the current checkpoint; six open rows and their exact heads are detailed below.",
+    "target_integrated": 15
+  },
+  "historical_receipts_preserved": [
+    "evidence/convergence-followup-20261009T2328Z.json",
+    "evidence/pr221-core-python310-lint-blocker-38004253328.json",
+    "evidence/pr256-a1904783-browser-digest-mismatch-20261009.md"
+  ],
+  "invariant_checks": {
+    "all_original_archive_hashes_unchanged": true,
+    "baseline_commit": "cfd6c8a7f9332d226feef560fff07c0bd976064f",
+    "current_archive_count": 16,
+    "issue_projection_sha256_after": "2e456f91eadf4776459e38890bd5d02fc940bad5082e3ed146a2298ecea5abe9",
+    "issue_projection_sha256_before": "2e456f91eadf4776459e38890bd5d02fc940bad5082e3ed146a2298ecea5abe9",
+    "issue_projection_unchanged": true,
+    "original_archive_count": 16,
+    "original_archives": {
+      "docs/program/evidence/canvas-execution-graph-amendment-20261009-v2.zip": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf",
+      "docs/program/evidence/canvas-execution-graph-amendment-20261009-v3.zip": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281",
+      "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.zip": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3",
+      "docs/program/evidence/canvas-execution-graph-amendment-20261009.zip": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7",
+      "docs/program/evidence/community-20261008.zip": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
+      "docs/program/evidence/community-20261009-acceleration.zip": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48",
+      "docs/program/evidence/community-20261009-checkpoint.zip": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c",
+      "docs/program/evidence/community-20261009-cloud-admission.zip": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0",
+      "docs/program/evidence/community-20261009-convergence.zip": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
+      "docs/program/evidence/community-20261009-fanout.zip": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e",
+      "docs/program/evidence/community-20261009-final-checkpoint.zip": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4",
+      "docs/program/evidence/community-20261009-resume.zip": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541",
+      "docs/program/evidence/community-20261009-update.zip": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4",
+      "docs/program/evidence/community-20261009-update2.zip": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31",
+      "docs/program/evidence/community-20261009-update3.zip": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842",
+      "docs/program/evidence/http-helper-1.0.3-verified-dist.zip": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+    },
+    "retained_issue_contracts": 54
+  },
+  "issue_accounting": {
+    "accepted_closed": [
+      210
+    ],
+    "changed": false,
+    "currently_open": 53,
+    "graph_stage_counts": {
+      "ACTIVE": 7,
+      "BLOCKED": 29,
+      "COMPLETE": 1,
+      "INTEGRATED": 9,
+      "READY": 0,
+      "REVIEW": 8
+    },
+    "retained_contracts": 54,
+    "whole_issue_review_ready": 0
+  },
+  "limitations": [
+    "Target integration and exact-head CI do not establish whole-issue acceptance.",
+    "PR221 pull-request CI skips publication; the candidate remains unpublished.",
+    "PR256 source review acceptance is scoped to source; Windows Go-wrapper manifest/build-input failure blocks admission.",
+    "macOS UI steps are skipped; no ChatGPT-host or whole #208 proof is claimed.",
+    "No issue state, acceptance contract, dependency, or completion accounting changed.",
+    "Upstream disposition: none; no upstream defect is established."
+  ],
+  "observed_at_utc": "2026-10-10T00:16:55Z",
+  "open_prs": [
+    {
+      "base": "community",
+      "blocker": "GitHub reports merge conflict. Root should compare unique delta against #221; route any still-needed release safeguard change through #221, otherwise supersede this draft. Its exact-head checks remain valid for this SHA.",
+      "draft": true,
+      "exact_head_checks": {
+        "success": 16
+      },
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "mergeability_observed_at_utc": "2026-10-10T00:08:00Z",
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "number": 215,
+      "url": "https://github.com/joshyorko/actions/pull/215"
+    },
+    {
+      "base": "community",
+      "blocker": "GitHub reports merge conflict. Root should account unique Runtime history/WebSocket delta in #221 before resolving or superseding the draft. Its exact-head checks remain valid for this SHA.",
+      "draft": true,
+      "exact_head_checks": {
+        "success": 23
+      },
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "mergeability_observed_at_utc": "2026-10-10T00:08:00Z",
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "number": 216,
+      "url": "https://github.com/joshyorko/actions/pull/216"
+    },
+    {
+      "base": "community",
+      "blocker": "GitHub reports merge conflict. Root should account unique Core changes through the right release route; the new decorator API still requires a separately versioned Core release and compatibility proof. Its exact-head checks remain valid for this SHA.",
+      "draft": true,
+      "exact_head_checks": {
+        "success": 15
+      },
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "mergeability_observed_at_utc": "2026-10-10T00:08:00Z",
+      "mergeable": false,
+      "mergeable_state": "dirty",
+      "number": 217,
+      "url": "https://github.com/joshyorko/actions/pull/217"
+    },
+    {
+      "base": "community",
+      "blocker": "Clean mergeability does not change draft status. Root to decide whether this older source checkpoint is still needed after #256 current packaged Work Items consumer acceptance; do not infer whole #208 acceptance.",
+      "draft": true,
+      "exact_head_checks": {
+        "skipped": 1,
+        "success": 16
+      },
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "mergeability_observed_at_utc": "2026-10-10T00:08:00Z",
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "number": 218,
+      "url": "https://github.com/joshyorko/actions/pull/218"
+    },
+    {
+      "base": "community",
+      "blocker": "Required exact-head checks pass; publication jobs/steps were skipped. PR remains a candidate only: #256 Windows Go-wrapper acceptance remains failed and current Runtime/native 1.0.3 stays unpublished.",
+      "draft": true,
+      "exact_head_checks": {
+        "skipped": 1,
+        "success": 29
+      },
+      "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
+      "number": 221,
+      "synthetic_checkout": "0a5e33ca27c7728bc1620954b14908fd76dfdc56",
+      "tested_tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9",
+      "url": "https://github.com/joshyorko/actions/pull/221"
+    },
+    {
+      "base": "integration/community-release-20261008",
+      "blocker": "Linux frozen and Go-wrapper gates pass; Windows frozen UI passes but Go-wrapper fails because manifest frozen_package_tree_sha256 differs from build input (1 failed, 20 passed). macOS UI steps are skipped while consumer, storage and large-history checks pass. RCC primary/N-1 6/6 pass; verify, coverage and audit pass; publication skipped. Same owner is porting a narrow correction against integration 77e; focused tests are reported pass, configured full suite remains pending.",
+      "draft": true,
+      "exact_head_checks": {
+        "failure": 1,
+        "skipped": 1,
+        "success": 11
+      },
+      "head": "dc205182253794cdf5a1fb5546acb01b106b209f",
+      "number": 256,
+      "run_id": 38007631113,
+      "source_review": "ACCEPT bounded source only",
+      "synthetic_checkout": "adb8c8982a24a4451fefab65658c68246e80b85e",
+      "tested_tree": "e36577ca79c9520014f3f7c338a8546257788f7b",
+      "url": "https://github.com/joshyorko/actions/pull/256"
+    }
+  ],
+  "pr221_exact_head_ci": {
+    "core_matrix_receipt": {
+      "path": "evidence/pr221-core-python310-green-77e67de-38006225927.json",
+      "sha256": "47d40c2f4e246c43d2d0237f0269802da1cf6efc6bed360ecb6fbe38b93caf1c",
+      "size_bytes": 1570
+    },
+    "receipt": {
+      "path": "evidence/pr221-release-critical-checks-77e67de-20261010T0001Z.json",
+      "sha256": "7f199f9b9cb3aff778cde67eca0fef288e14be29df318cc8771fa3cafa9e818c",
+      "size_bytes": 1859
+    },
+    "result": "All recorded checks passed except explicitly skipped publication steps. Synthetic checkout parents are community 36b8192 and PR head 77e; checkout tree equals integration tree a2c6e78. No publish occurred."
+  },
+  "pr256_exact_head_acceptance": {
+    "admission": "BLOCKED",
+    "native_ci_receipt": {
+      "path": "evidence/pr256-native-ci-dc205-20261010T0013Z.json",
+      "sha256": "40f1f38a33f30dbc428b244fd27c4d6a58ef79301c3aed904c77e3240abaab18",
+      "size_bytes": 3168
+    },
+    "next_action": "The existing Work Items owner is porting the narrow manifest/build-input correction to the 77e integration base; root retains integration authority. Focused tests are reported passing, but the configured full suite is pending. Re-run the exact Windows Go-wrapper gate and full configured matrix on the corrected exact head before admission.",
+    "source_review_receipt": {
+      "path": "evidence/pr256-dc205-independent-source-review.json",
+      "sha256": "b0bda7c0d7ea4044418063c9b2d5a17a3244e066305e90cc4425595ceb8ebf68",
+      "size_bytes": 1656
+    }
+  },
+  "rcc_state": {
+    "broad_candidate_head": "6a0db09d2623d084ae0de43f7ec7737bd28ea157",
+    "dispatch_receipt": "evidence/rcc-narrow-port-20261010T0007Z-request.json",
+    "dispatch_receipt_limit": "These copied records prove the authorized existing-thread dispatch, settings and target branch/base; focused-test PASS and full-suite-pending are separate root-reported status, not proven by the dispatch response.",
+    "dispatch_response": "evidence/rcc-narrow-port-20261010T0007Z-response.json",
+    "remote_branch": "devsy/rcc-local-acceptance-20261009",
+    "scope_limit": "Dispatch establishes the authorized branch/base/work ownership; root reported the focused-test result. Neither that result nor the broad source head establishes #134 acceptance.",
+    "status": "Safely pushed/source checkpoint; not integrated/admitted. The same RCC owner is porting a narrow change against integration 77e. Focused tests are reported passing; full configured suite pending."
+  },
+  "release_state": {
+    "core": "1.0.2 published and verified",
+    "core_decorator_metadata_api": "Source remains unreleased and requires a separately versioned Core package.",
+    "helper": "1.0.3 published and verified",
+    "runtime_native": "1.0.3 held and unpublished"
+  },
+  "repository": "https://github.com/joshyorko/actions",
+  "schema_version": 1
+}

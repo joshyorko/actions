@@ -1,0 +1,43 @@
+{
+  "observed_at": "2026-10-10T00:44:37Z",
+  "pr": 256,
+  "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+  "base": "77e67de36606ac4cb958874249a61ceff79dcd01",
+  "source_review": {
+    "reviewer": "/root/luna_release_notes",
+    "disposition": "ACCEPT",
+    "scope": "Formatting successors of independently accepted b676daf3; applicable PR-owned Python files",
+    "checks": [
+      "configured Ruff check PASS",
+      "configured Ruff format check PASS with Action Server exclusions",
+      "configured isort check PASS",
+      "git diff --check PASS"
+    ],
+    "semantics": "AST unchanged vs b676 except intended ordering of pathlib/types standard-library imports in test_log_credentials.py; test bodies unchanged",
+    "documentation": "Shared formatting config is devutils/ruff.toml via uppercase module-global ROOT; Ruff rules auto-discover action_server/ruff.toml. Earlier reviewer claim about formatter config withdrawn after source inspection."
+  },
+  "hosted": {
+    "state": "PENDING",
+    "native_run": 38010164278,
+    "rcc_run": 38010164271,
+    "coverage_run": 38010164269,
+    "work_items_run": 38010164275,
+    "audit_run": 38010164331,
+    "merge_source": "54825acf84d1995c3f1c5242e8cf3b670dc122ad",
+    "tree": "7621ef2050941df416c1b7448859a8d3bb4ee443"
+  },
+  "github_reviews": {
+    "review_decision": null,
+    "review_threads": 0,
+    "reviews": 0,
+    "comments": 0,
+    "is_draft": true,
+    "mergeable": true,
+    "merge_state": "UNSTABLE"
+  },
+  "limits": [
+    "Prior artifact bytes and b676 receipts remain bound to predecessor; no descendant artifact claim.",
+    "macOS-specific Work Items UI is not configured.",
+    "No whole issue acceptance or publication."
+  ]
+}

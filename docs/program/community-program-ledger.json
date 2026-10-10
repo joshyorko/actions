@@ -540,7 +540,7 @@
         145
       ],
       "criticality": "P1",
-      "next_bounded_action": "Continue PR256 packaged Work Items cross-platform/browser acceptance after resolving the generated-module NameError; Linux consumer evidence is not whole issue acceptance.",
+      "next_bounded_action": "PR256 is integrated at c6b682 with bounded Linux/Windows packaged consumer/browser proof; verify the remaining #208 contract and preserve macOS UI and issue-level acceptance as open.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -3131,7 +3131,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Continue the independent local/provider-free actual consumer acceptance lane after PR253 merge. Preserve the warm-harness FAIL and same-provider503 negative PASS separately; full RCC trust/native/consumer/restart contract remains open.",
+      "next_bounded_action": "Keep #134 open: the c8 source review found an unsafe snapshot-pruning call path; retain snapshots until all live-generation references are proven clear, and separately close candidate cleanup, immutable receipt binding and observed Runtime exit gates.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -12648,7 +12648,7 @@
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261009-convergence.zip",
   "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
-  "integration_head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+  "integration_head": "77e67de36606ac4cb958874249a61ceff79dcd01",
   "additional_compute": {
     "cloud": "Reused bounded Luna lanes plus one evidence-backed Sol review; no uncontrolled recursion or API fallback",
     "devsy": "WAITING FOR HIT THE GAS; pending request preserved without calls",
@@ -12669,8 +12669,8 @@
       "259": "PR259 at reported head prefix85f7 is independently accepted; hosted CI is running."
     }
   },
-  "checkpoint_status": "ACTIVE integration; 13/20 scoped PRs merged to named targets, 7 open/blocked, 0 merge-ready; PR221 has a confirmed Ruff format-only blocker with separate three-OS tests/docs/types passing; no issue closure or release publication admitted",
-  "checkpoint_observed_at": "2026-10-09T23:29:14Z",
+  "checkpoint_status": "ACTIVE integration checkpoint at 2026-10-10T00:55:27Z: 16 of 21 cohort PRs are integrated to their recorded targets; 5 remain open/blocked and 0 are merge-ready. PR256 is integrated with bounded Linux/Windows artifact verification; no #208 whole-issue acceptance or publication is implied. PR221 is retesting on the updated integration head. RCC remains unadmitted; no issue acceptance changed.",
+  "checkpoint_observed_at": "2026-10-10T00:55:27Z",
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
@@ -12705,16 +12705,68 @@
     "manifest": "evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json"
   },
   "current_integration_checkpoint": {
-    "pr": 270,
-    "source_head": "5efcfebf1c572808a441e2360d1c1e68a77020a9",
-    "merge_sha": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
-    "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012",
-    "merged_at": "2026-10-09T23:24:16Z",
-    "checks": "13 exact-head hosted checks succeeded; publication steps skipped",
-    "scope_limit": "Scoped metadata lint/docs repair integrated to the named integration branch; no issue acceptance, Runtime publication, or release readiness implied.",
-    "receipt": "evidence/pr270-admission-readback-20261009.json"
+    "pr": 256,
+    "source_head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+    "merge_sha": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+    "tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+    "merged_at": "2026-10-10T00:54:25Z",
+    "checks": "12 required exact-head checks passed; native artifact review PASS_BOUNDED; publication skipped",
+    "scope_limit": "Bounded packaged Work Items cross-platform/browser checkpoint integrated to the named integration branch; no whole #208 acceptance or publication implied.",
+    "receipt": "evidence/pr256-524-integration-readback-20261010T0054Z.json"
   },
   "current_convergence_update": {
+    "path": "evidence/convergence-followup-20261010T0056Z.json",
+    "sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa",
+    "observed_at_utc": "2026-10-10T00:55:27Z",
+    "cohort": {
+      "items": 21,
+      "target_integrated": 16,
+      "blocked_open": 5,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "blocked_open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221
+      ]
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "issue_acceptance_changed": false,
+    "receipt_sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa"
+  },
+  "prior_current_integration_checkpoint_pr258": {
+    "pr": 258,
+    "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+    "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+    "tested_merge": "526f84813bb808d5a5dc2f7a26bed6467be79c3f",
+    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+    "tree_matches_tested_merge": true,
+    "merged_at": "2026-10-09T20:20:30Z",
+    "scope": "No issue closure or Runtime publication/readiness implied.",
+    "receipt": "evidence/integration-pr258-admission-20261009.json"
+  },
+  "prior_current_convergence_update_20261009T2328Z": {
     "path": "evidence/convergence-followup-20261009T2328Z.json",
     "sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360",
     "cohort": {
@@ -12744,15 +12796,199 @@
     "issue_acceptance_changed": false,
     "receipt_sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360"
   },
-  "prior_current_integration_checkpoint_pr258": {
-    "pr": 258,
-    "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
-    "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
-    "tested_merge": "526f84813bb808d5a5dc2f7a26bed6467be79c3f",
-    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
-    "tree_matches_tested_merge": true,
-    "merged_at": "2026-10-09T20:20:30Z",
-    "scope": "No issue closure or Runtime publication/readiness implied.",
-    "receipt": "evidence/integration-pr258-admission-20261009.json"
+  "current_next_action": {
+    "observed_at_utc": "2026-10-10T00:55:27Z",
+    "path": "evidence/convergence-followup-20261010T0056Z.json",
+    "sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa",
+    "pr": 221,
+    "head": "c6b682012ae791e744cb7116600b3869d06c7b4d",
+    "status_counts": {
+      "success": 4,
+      "in_progress": 20,
+      "queued": 4
+    },
+    "source_review": "PR256 source review and exact 12 required hosted checks passed on 524e503b; bounded Linux/Windows artifact review PASS_BOUNDED; PR256 merged c6b682 with tested tree equality.",
+    "pending": "PR221 has new community-base hosted checks queued/running after integration changed to c6b682; PR218 remains a separate draft packaged Work Items checkpoint.",
+    "scope": "Target integration is not whole-issue acceptance, Runtime/native publication, or release readiness."
+  },
+  "prior_current_convergence_update_20261010T0017Z": {
+    "path": "evidence/convergence-followup-20261010T0017Z.json",
+    "sha256": "0d140c66f578eca689ebc2c7f8a4e0c1198fbf40e0d9e1c7ff46e104e76cceda",
+    "cohort": {
+      "items": 21,
+      "target_integrated": 15,
+      "blocked_open": 6,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "blocked_open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        256
+      ]
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "77e67de36606ac4cb958874249a61ceff79dcd01",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "issue_acceptance_changed": false,
+    "receipt_sha256": "0d140c66f578eca689ebc2c7f8a4e0c1198fbf40e0d9e1c7ff46e104e76cceda"
+  },
+  "prior_current_next_action_20261010T0019Z": {
+    "observed_at_utc": "2026-10-10T00:19:23Z",
+    "path": "evidence/convergence-pr256-next-action-20261010T0019Z.json",
+    "sha256": "28aff7271a640257fcb66919a6db3cbd5a6632e26fba99c0aaf62399ad02d0d7",
+    "pr": 256,
+    "head": "b676daf3d51de89b1bfc51c90a76c01ed24d8bfb",
+    "run_id": 38008430418,
+    "run_status": "in_progress",
+    "status_counts": {
+      "success": 6,
+      "in_progress": 6,
+      "skipped": 1
+    },
+    "scope": "Next action pointer only; predecessor dc205 failure remains in the 00:16:55Z checkpoint."
+  },
+  "prior_current_convergence_update_20261010T0049Z": {
+    "path": "evidence/convergence-followup-20261010T0049Z.json",
+    "sha256": "9127046abad53c84b7f1e715a25a42d32a234b5265c0dbf72fadb01c21e739cf",
+    "observed_at_utc": "2026-10-10T00:49:38Z",
+    "cohort": {
+      "items": 21,
+      "target_integrated": 15,
+      "blocked_open": 6,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "blocked_open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        256
+      ]
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "77e67de36606ac4cb958874249a61ceff79dcd01",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "issue_acceptance_changed": false,
+    "receipt_sha256": "9127046abad53c84b7f1e715a25a42d32a234b5265c0dbf72fadb01c21e739cf"
+  },
+  "prior_current_next_action_20261010T0049Z": {
+    "observed_at_utc": "2026-10-10T00:49:38Z",
+    "path": "evidence/convergence-followup-20261010T0049Z.json",
+    "sha256": "9127046abad53c84b7f1e715a25a42d32a234b5265c0dbf72fadb01c21e739cf",
+    "pr": 256,
+    "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+    "run_ids": {
+      "native": 38010164278,
+      "rcc": 38010164271,
+      "coverage": 38010164269
+    },
+    "status_counts": {
+      "in_progress": 3,
+      "success": 9,
+      "skipped": 1
+    },
+    "source_review": "ACCEPT, bounded to 524e503b; exact-head hosted checks remain in progress.",
+    "scope": "The b676 artifact-admission PASS remains predecessor-bound; it is not relabeled as an exact 524e503b result. No whole #208 acceptance or publication."
+  },
+  "prior_current_integration_checkpoint_20261010T0051Z": {
+    "pr": 270,
+    "source_head": "5efcfebf1c572808a441e2360d1c1e68a77020a9",
+    "merge_sha": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+    "tree": "e706a9b93258df863d50ce67cb00ee09a62d6012",
+    "merged_at": "2026-10-09T23:24:16Z",
+    "checks": "13 exact-head hosted checks succeeded; publication steps skipped",
+    "scope_limit": "Scoped metadata lint/docs repair integrated to the named integration branch; no issue acceptance, Runtime publication, or release readiness implied.",
+    "receipt": "evidence/pr270-admission-readback-20261009.json"
+  },
+  "prior_current_convergence_update_20261010T0051Z": {
+    "path": "evidence/convergence-followup-20261010T0051Z.json",
+    "sha256": "9712e067399bacfc8820fec77ee5592a1fda0be7466e9784a46e2bf2d9b4eb7d",
+    "observed_at_utc": "2026-10-10T00:51:29Z",
+    "cohort": {
+      "items": 21,
+      "target_integrated": 15,
+      "blocked_open": 6,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "blocked_open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        256
+      ]
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "77e67de36606ac4cb958874249a61ceff79dcd01",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "issue_acceptance_changed": false,
+    "receipt_sha256": "9712e067399bacfc8820fec77ee5592a1fda0be7466e9784a46e2bf2d9b4eb7d"
+  },
+  "prior_current_next_action_20261010T0051Z": {
+    "observed_at_utc": "2026-10-10T00:51:29Z",
+    "path": "evidence/convergence-followup-20261010T0051Z.json",
+    "sha256": "9712e067399bacfc8820fec77ee5592a1fda0be7466e9784a46e2bf2d9b4eb7d",
+    "pr": 256,
+    "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+    "status_counts": {
+      "success": 12,
+      "skipped": 1
+    },
+    "source_review": "ACCEPT bounded to exact head 524e503b; all 12 required hosted checks pass; publication skipped.",
+    "pending": "Independent peer review of exact-head native artifacts. GitHub artifact metadata was transcribed, but Cloud byte retrieval returned HTTP 403; reported digests are not locally byte-verified.",
+    "scope": "Do not mark merge-ready or infer #208 acceptance until peer review is complete. b676 artifact-admission result remains predecessor-bound."
   }
 }
