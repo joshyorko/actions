@@ -54,6 +54,7 @@ creates a fake handle nor reports a simulated artifact status. See
 The project declares `actions-core=1.0.3`, the published version required for
 the public `meta` decorator arguments used here. An independent clean install
 verified the published wheel's public metadata API with an external Actions CLI
-consumer. This template's Runtime/browser gate remains separate and must use a
-fresh install of the published dependency; the source-based acceptance path
-does not establish that consumer path or a packaged/frozen Action Server.
+consumer. This template's Runtime/browser gate remains separate and must bind
+the managed worker's installed Core modules to the published-wheel receipt;
+the source-based acceptance path does not establish that consumer path or a
+packaged/frozen Action Server.

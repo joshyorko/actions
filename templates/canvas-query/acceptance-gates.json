@@ -19,7 +19,7 @@
   "core_dependency": {
     "declared_version": "1.0.3",
     "state": "published-wheel-verified; template-runtime-consumer-pending",
-    "required_gate": "Run the Canvas template Runtime/browser gate with a fresh install of published Core 1.0.3 before claiming this template's installed-consumer compatibility.",
+    "required_gate": "Run the Canvas template Runtime/browser gate and require the managed worker's installed Core modules to match the published 1.0.3 wheel receipt before claiming this template's installed-consumer compatibility.",
     "evidence_limit": "The independent Core receipt verifies the published wheel's public metadata API with an external Actions CLI consumer. It does not prove this template's Runtime/browser consumer, a packaged/frozen Action Server, authorized artifact retrieval, or ChatGPT rendering."
   }
 }

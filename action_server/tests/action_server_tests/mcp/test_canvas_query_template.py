@@ -26,6 +26,16 @@ from actions.server._selftest import ActionServerProcess
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
 EMBEDDED_TEMPLATES = REPOSITORY_ROOT / "action_server/src/actions/server/templates"
+PUBLISHED_CORE_WHEEL_SHA256 = (
+    "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265"
+)
+PUBLISHED_CORE_MODULE_SHA256 = {
+    "actions": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+    "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+    "actions.mcp._metadata": (
+        "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+    ),
+}
 
 
 def _run_owned_process_tree(
@@ -785,22 +795,52 @@ def test_canvas_template_runs_through_runtime_and_real_browser(
     project = _create_project(tmp_path, "canvas-query-runtime")
     (project / "published_core_probe.py").write_text(
         """from importlib.metadata import distribution
+import hashlib
 from pathlib import Path
+import sys
 
+import actions
 import actions.mcp
+import actions.mcp._metadata
 from actions.mcp import tool
+
+PUBLISHED_CORE_WHEEL_SHA256 = (
+    "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265"
+)
+PUBLISHED_CORE_MODULE_SHA256 = {
+    "actions": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+    "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+    "actions.mcp._metadata": (
+        "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+    ),
+}
 
 
 @tool
 def published_core_identity() -> dict[str, str]:
     core = distribution("actions-core")
-    module = Path(actions.mcp.__file__).resolve()
+    modules = {
+        "actions": Path(actions.__file__).resolve(),
+        "actions.mcp": Path(actions.mcp.__file__).resolve(),
+        "actions.mcp._metadata": Path(actions.mcp._metadata.__file__).resolve(),
+    }
     installed_files = {
         Path(core.locate_file(item)).resolve() for item in (core.files or [])
     }
-    if module not in installed_files:
-        raise AssertionError("actions.mcp is not owned by installed actions-core")
-    return {"version": core.version}
+    if any(module not in installed_files for module in modules.values()):
+        raise AssertionError("an Actions module is not owned by installed actions-core")
+    if any(not module.is_relative_to(sys.prefix) for module in modules.values()):
+        raise AssertionError("an Actions module is outside the managed environment")
+    module_hashes = {
+        name: hashlib.sha256(module.read_bytes()).hexdigest()
+        for name, module in modules.items()
+    }
+    if core.version != "1.0.3" or module_hashes != PUBLISHED_CORE_MODULE_SHA256:
+        raise AssertionError(
+            "installed actions-core differs from the independently verified "
+            f"published wheel {PUBLISHED_CORE_WHEEL_SHA256}"
+        )
+    return {"version": core.version, **module_hashes}
 """,
         encoding="utf-8",
     )
@@ -818,7 +858,13 @@ def published_core_identity() -> dict[str, str]:
                 tool for tool in listed.tools if tool.name == "published_core_identity"
             )
             core_identity = await session.call_tool(core_tool.name, {})
-            assert core_identity.structured_content == {"version": "1.0.3"}
+            assert core_identity.structured_content == {
+                "version": "1.0.3",
+                **PUBLISHED_CORE_MODULE_SHA256,
+            }, (
+                "Worker module bytes must match published Core wheel "
+                f"{PUBLISHED_CORE_WHEEL_SHA256}."
+            )
 
             search_tool = next(
                 tool for tool in listed.tools if tool.name == "canvas_fixture_search"
