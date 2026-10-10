@@ -2515,6 +2515,11 @@ skipped because no task-owned managed provider is configured is NOT RUN, not
 acceptance evidence. This exercises one selected package through the current
 Runtime consumer; it does not prove complete source selection, source
 authorization, compiler/admission trust, or any package identity API.
+The consumer's test-only SQLite catalog creates its private data directory
+before opening the database and registers `get_all_model_classes()` so schema
+additions such as `McpCatalogName` are included. Keep a service-free SQLite
+fixture test for this setup separate from the RCC-managed action execution
+proof, so missing fixture prerequisites fail without provisioning RCC.
 On 2026-10-10 the immutable consumer-gate candidate advanced from
 `f7c6ed61f24fd9e98d1465c83042c5446466311b`, which predates this test and is
 not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`

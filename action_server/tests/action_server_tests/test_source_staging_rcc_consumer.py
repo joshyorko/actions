@@ -6,12 +6,42 @@ import hashlib
 import importlib.util
 import json
 import os
+import sqlite3
 import stat
 import subprocess
 import sys
 from pathlib import Path
 
 import pytest
+
+
+def _create_runtime_catalog_database(data_dir: Path):
+    """Create the consumer test catalog using the complete Runtime registry."""
+    from actions.server._database import Database
+    from actions.server._models import get_all_model_classes, get_model_db_rules
+
+    data_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+    database = Database(data_dir / "catalog.sqlite")
+    database.initialize(get_all_model_classes())
+    database.create_tables(get_model_db_rules())
+    return database
+
+
+def test_runtime_catalog_database_fixture_creates_directory_and_current_schema(
+    tmp_path: Path,
+):
+    """Exercise the SQLite consumer fixture without an RCC-managed environment."""
+    database = _create_runtime_catalog_database(tmp_path / "runtime-data")
+
+    assert database.db_path.is_file()
+    with sqlite3.connect(database.db_path) as connection:
+        # This table is part of the current registry and must be available to
+        # the real staged-source consumer before package admission begins.
+        table = connection.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+            ("mcp_catalog_name",),
+        ).fetchone()
+    assert table == ("mcp_catalog_name",)
 
 
 @pytest.mark.integration_test
@@ -161,27 +191,18 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
         import actions.server._models as models
         from actions.server._actions_import import import_action_package
         from actions.server._actions_process_pool import ActionsProcessPool
-        from actions.server._database import Database
         from actions.server._models import (
             Action,
             ActionPackage,
-            McpCatalogName,
             Run,
             RunStatus,
-            get_all_model_classes,
-            get_model_db_rules,
         )
         from actions.server._rcc_runtime_adapter import load_descriptor
         from actions.server._settings import Settings
 
         data_dir = tmp_path / "runtime-data"
-        database = Database(data_dir / "catalog.sqlite")
+        database = _create_runtime_catalog_database(data_dir)
         with database.connect():
-            model_classes = get_all_model_classes()
-            assert McpCatalogName in model_classes
-            database.initialize(model_classes)
-            database.create_tables(get_model_db_rules())
-            assert "mcp_catalog_name" in database.list_table_names()
             models._global_db = database
             try:
                 import_action_package(
