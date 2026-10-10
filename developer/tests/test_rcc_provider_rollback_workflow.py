@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW_RELATIVE_PATH = ".github/workflows/actions_runtime_rcc_provider_rollback.yml"
 WORKFLOW_NAME = "actions_runtime_rcc_provider_rollback.yml"
 RCC_SHA256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-CANDIDATE_SHA = "d376399f497fb98f47062e493219e063db8f08e1"
-CANDIDATE_TREE = "fb04c136e5e1a7ce709649b13cf895d84ac93c1a"
+CANDIDATE_SHA = "922223a330003ec64808e25843ae448bfae6dc4a"
+CANDIDATE_TREE = "af7e419414261525c89db5511c5cbbc6f07981b0"
 TEST_NODE = (
     "tests/action_server_tests/test_current_candidate_import_rollback.py::"
     "test_current_candidate_failed_reload_keeps_last_good_action_usable"

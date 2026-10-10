@@ -2521,6 +2521,15 @@ not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`
 (tree `fb04c136e5e1a7ce709649b13cf895d84ac93c1a`). The earlier local gated
 collection had no task-owned RCC provider configured and remains NOT RUN; the
 new pin does not retroactively change that result.
+The current integration candidate is `922223a330003ec64808e25843ae448bfae6dc4a`
+(tree `af7e419414261525c89db5511c5cbbc6f07981b0`), merging the published
+integration input `f18058b6c614d065fe821d98b0039f1db736e5cb` with PR #298 head
+`fc582797cc754ae6dcf7602d98d6079f0004b29d`. Its consumer fixture registers the
+complete model registry and asserts the current `mcp_catalog_name` table exists;
+it does not omit MCP ownership from the database schema. The refreshed two-case
+hosted RCC gate remains NOT RUN until its exact candidate and control pins are
+published and the gate passes. The earlier one-case rollback run does not prove
+the staged consumer.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
