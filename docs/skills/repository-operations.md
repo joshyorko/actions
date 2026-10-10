@@ -153,6 +153,7 @@ supplemental gate outside the original issue-contract list until the accounting
 baseline is explicitly amended. Render and validate it separately from the
 retained issue rows and stage counts, with a source-backed reproduction and a
 live issue readback; do not silently add it to the original contract inventory.
+For a current status refresh, read the repository issue collection across all pages, match every retained issue ID, and record open/closed state separately from the retained contract and acceptance decision. A closed issue is not automatically accepted; only its explicit full-contract acceptance evidence can change the acceptance classification. Record unmatched IDs or newly closed-but-unaccepted issues explicitly instead of inferring a clean audit from partial pages.
 The community graph validator is part of `ToolkitTest`: run
 `rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`. The existing
 `.github/workflows/developer_toolkit.yml` pull-request matrix discovers its

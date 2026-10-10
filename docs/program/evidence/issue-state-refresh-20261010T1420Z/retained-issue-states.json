@@ -1,0 +1,355 @@
+{
+  "observed_at_utc": "2026-10-10T14:20:48Z",
+  "source": "GitHub REST API through the approved read-only GitHub connector",
+  "request": "GET https://api.github.com/repos/joshyorko/actions/issues?state=all&per_page=100&page={1..4}",
+  "pagination": {
+    "pages_requested": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rows_returned_by_page": [
+      100,
+      100,
+      97,
+      0
+    ],
+    "total_rows_returned": 297
+  },
+  "match": {
+    "retained_issue_ids": 54,
+    "matched": 54,
+    "missing": [],
+    "open": 53,
+    "closed": 1
+  },
+  "closed_but_unaccepted_issue_ids": [],
+  "states": [
+    {
+      "issue": 71,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 82,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 83,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 84,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 85,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 86,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 87,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 90,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 91,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 92,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 93,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 96,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 97,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 98,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 99,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 100,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 101,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 125,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 126,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 127,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 129,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 130,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 131,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 132,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 133,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 134,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 135,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 136,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 138,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 139,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 140,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 141,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 142,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 143,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 144,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 145,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 146,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 147,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 148,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 149,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 151,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 152,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 153,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 155,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 162,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 194,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 195,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 196,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 208,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 209,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 210,
+      "github_state": "closed",
+      "closed_at": "2026-10-09T19:17:52Z",
+      "whole_issue_acceptance": "accepted"
+    },
+    {
+      "issue": 211,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 212,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    },
+    {
+      "issue": 214,
+      "github_state": "open",
+      "closed_at": null,
+      "whole_issue_acceptance": "unchanged/not accepted"
+    }
+  ],
+  "interpretation": "This is a live open/closed metadata refresh. It does not itself establish acceptance. #210 was already represented in retained evidence as fully accepted and owner-closed; its original contract/state snapshot was not rewritten. All other 53 retained issues remain open. No issue acceptance or stage classification changed."
+}

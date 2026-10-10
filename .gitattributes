@@ -166,3 +166,13 @@ docs/program/evidence/pr279-alias-identity-20261010T1300Z/*.log -diff
 docs/program/evidence/pr279-alias-identity-20261010T1300Z/source-cli/*.log -diff
 docs/program/evidence/pr289-current-ci-20261010T1332Z/*.txt -diff
 docs/program/evidence/pr290-windows-and-guide-20261010T1350Z/*.txt -diff
+# 2026-10-10 14:20Z governance checkpoint receipts are hash-bound inputs.
+docs/program/evidence/current-open-pr-audit-20261010T1415Z/** -text
+docs/program/evidence/issue-state-refresh-20261010T1420Z/** -text
+docs/program/evidence/pr221-core-floor-failure-20261010T1420Z/** -text
+docs/program/evidence/pr289-followup-20261010T1415Z/** -text
+docs/program/evidence/pr291-merge-20261010T1411Z/** -text
+docs/program/evidence/pr292-native-build-20261010T1405Z/** -text
+docs/program/evidence/shared-run-output-20261010T1420Z/** -text
+docs/program/evidence/program-amendment-20261010T142*.json -text
+docs/program/evidence/source-confined-staging-20261010T1410Z/** -text

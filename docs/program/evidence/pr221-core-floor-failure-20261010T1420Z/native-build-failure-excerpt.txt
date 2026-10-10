@@ -1,0 +1,11 @@
+2026-10-10T14:14:36.4765637Z python -c "import os; from pathlib import Path; (Path(os.environ['DAKOTA_WORKITEMS_RCC_HOME']) / 'wheels').mkdir(parents=True, exist_ok=True)"
+2026-10-10T14:14:36.4766155Z uv run --no-project --python 3.12 poetry build --format wheel --output "/home/runner/work/_temp/dakota-workitems-rcc-ubuntu-22.04-38058570144-1/wheels"
+2026-10-10T14:14:36.4766812Z python -c "import os; from pathlib import Path; assert (Path(os.environ['DAKOTA_WORKITEMS_RCC_HOME']) / 'wheels' / 'actions_core-1.0.2-py3-none-any.whl').is_file()"
+2026-10-10T14:14:36.6968387Z Creating virtualenv actions-core-839uw6ME-py3.12 in /home/runner/.cache/pypoetry/virtualenvs
+2026-10-10T14:14:36.7443857Z Building actions-core (1.0.3)
+2026-10-10T14:14:36.7744070Z   - Building wheel
+2026-10-10T14:14:36.7934386Z   - Built actions_core-1.0.3-py3-none-any.whl
+2026-10-10T14:14:36.9109051Z Traceback (most recent call last):
+2026-10-10T14:14:36.9109332Z   File "<string>", line 1, in <module>
+2026-10-10T14:14:36.9109535Z AssertionError
+2026-10-10T14:14:36.9166591Z ##[error]Process completed with exit code 1.

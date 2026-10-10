@@ -1,0 +1,362 @@
+PR #292 exact head: 5ebc97c12e99ae98dacacfe8ace170620d581649
+Workflow run: 38056483855, attempt: 1, started 2026-10-10T13:38:17Z
+Job: 114225948492 (Windows py3.12 devmode)
+Source: GitHub Actions job log; bounded sanitized pytest failure excerpt through totals
+
+2026-10-10T13:55:46.8232359Z ================================== FAILURES ===================================
+2026-10-10T13:55:46.8232929Z ______ test_concurrent_processes_retain_serialized_routing_history[True] ______
+2026-10-10T13:55:46.8234070Z [gw1] win32 -- Python 3.12.15 C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Scripts\python.exe
+2026-10-10T13:55:46.8234617Z 
+2026-10-10T13:55:46.8235208Z tmp_path = WindowsPath('C:/Users/runneradmin/AppData/Local/Temp/pytest-of-runneradmin/pytest-0/popen-gw1/test_concurrent_processes_reta0')
+2026-10-10T13:55:46.8236033Z monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000025D20A6BBF0>
+2026-10-10T13:55:46.8236444Z same_catalog = True
+2026-10-10T13:55:46.8236575Z 
+2026-10-10T13:55:46.8236811Z     @pytest.mark.parametrize("same_catalog", [True, False])
+2026-10-10T13:55:46.8237320Z     def test_concurrent_processes_retain_serialized_routing_history(
+2026-10-10T13:55:46.8237774Z         tmp_path, monkeypatch, same_catalog
+2026-10-10T13:55:46.8253092Z     ):
+2026-10-10T13:55:46.8253536Z         from mcp import MCPError
+2026-10-10T13:55:46.8253884Z     
+2026-10-10T13:55:46.8254205Z         from actions.server import _actions_run
+2026-10-10T13:55:46.8254735Z         from actions.server._api_action_routes import _ActionRoutes
+2026-10-10T13:55:46.8255198Z         from actions.server._models import (
+2026-10-10T13:55:46.8255536Z             ActionPackage,
+2026-10-10T13:55:46.8255852Z             McpResourceRouting,
+2026-10-10T13:55:46.8256130Z             create_db,
+2026-10-10T13:55:46.8256376Z             load_db,
+2026-10-10T13:55:46.8256591Z         )
+2026-10-10T13:55:46.8256763Z     
+2026-10-10T13:55:46.8257024Z         path = tmp_path / "catalog.db"
+2026-10-10T13:55:46.8257377Z         with create_db(path) as db:
+2026-10-10T13:55:46.8257722Z             with db.transaction():
+2026-10-10T13:55:46.8258088Z                 for package, uri in [
+2026-10-10T13:55:46.8258557Z                     ("one", "example://{tenant}/item"),
+2026-10-10T13:55:46.8259276Z                     ("two", "example://acme/{resource}"),
+2026-10-10T13:55:46.8259614Z                 ]:
+2026-10-10T13:55:46.8260177Z                     db.insert(ActionPackage(package, package, ".", "hash", "{}"))
+2026-10-10T13:55:46.8260638Z                     db.insert(
+2026-10-10T13:55:46.8261334Z                         _action(package, "read", options={"kind": "resource", "uri": uri})
+2026-10-10T13:55:46.8261749Z                     )
+2026-10-10T13:55:46.8261987Z         children = []
+2026-10-10T13:55:46.8262280Z         environment = dict(os.environ)
+2026-10-10T13:55:46.8262693Z         environment["PYTHONPATH"] = os.pathsep.join(
+2026-10-10T13:55:46.8263020Z             [
+2026-10-10T13:55:46.8263444Z                 str(Path(__file__).resolve().parents[3] / "src"),
+2026-10-10T13:55:46.8263925Z                 environment.get("PYTHONPATH", ""),
+2026-10-10T13:55:46.8264223Z             ]
+2026-10-10T13:55:46.8264405Z         )
+2026-10-10T13:55:46.8264591Z         try:
+2026-10-10T13:55:46.8264990Z             with sqlite3.connect(path, timeout=10) as blocker:
+2026-10-10T13:55:46.8265460Z                 blocker.execute("BEGIN IMMEDIATE")
+2026-10-10T13:55:46.8265853Z                 for index in range(2):
+2026-10-10T13:55:46.8266284Z                     marker = tmp_path / str(index)
+2026-10-10T13:55:46.8266665Z                     children.append(
+2026-10-10T13:55:46.8267070Z                         subprocess.Popen(
+2026-10-10T13:55:46.8267423Z                             [
+2026-10-10T13:55:46.8267848Z                                 sys.executable,
+2026-10-10T13:55:46.8268255Z                                 "-c",
+2026-10-10T13:55:46.8268649Z                                 _CHILD,
+2026-10-10T13:55:46.8269062Z                                 str(path),
+2026-10-10T13:55:46.8269825Z                                 "one/read" if same_catalog or index == 0 else "two/read",
+2026-10-10T13:55:46.8270368Z                                 str(marker),
+2026-10-10T13:55:46.8270718Z                             ],
+2026-10-10T13:55:46.8271113Z                             env=environment,
+2026-10-10T13:55:46.8271607Z                             stdout=subprocess.PIPE,
+2026-10-10T13:55:46.8272225Z                             stderr=subprocess.PIPE,
+2026-10-10T13:55:46.8272670Z                             text=True,
+2026-10-10T13:55:46.8272991Z                         )
+2026-10-10T13:55:46.8273248Z                     )
+2026-10-10T13:55:46.8273602Z                 deadline = time.monotonic() + 20
+2026-10-10T13:55:46.8274231Z                 while not all((tmp_path / str(index)).exists() for index in range(2)):
+2026-10-10T13:55:46.8274818Z                     assert time.monotonic() < deadline
+2026-10-10T13:55:46.8275247Z >                   assert all(child.poll() is None for child in children)
+2026-10-10T13:55:46.8275618Z                     
+2026-10-10T13:55:46.8276093Z E                   AssertionError: Failed: assert all((child.poll() is None for child in children))
+2026-10-10T13:55:46.8276559Z E                   Variables:
+2026-10-10T13:55:46.8276834Z E                     all(...) = False
+2026-10-10T13:55:46.8277008Z 
+2026-10-10T13:55:46.8277456Z action_server_tests\mcp\test_resource_history.py:547: AssertionError
+2026-10-10T13:55:46.8278031Z _____ test_concurrent_processes_retain_serialized_routing_history[False] ______
+2026-10-10T13:55:46.8278908Z [gw1] win32 -- Python 3.12.15 C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Scripts\python.exe
+2026-10-10T13:55:46.8279436Z 
+2026-10-10T13:55:46.8280020Z tmp_path = WindowsPath('C:/Users/runneradmin/AppData/Local/Temp/pytest-of-runneradmin/pytest-0/popen-gw1/test_concurrent_processes_reta1')
+2026-10-10T13:55:46.8280835Z monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000025D20B983B0>
+2026-10-10T13:55:46.8281232Z same_catalog = False
+2026-10-10T13:55:46.8281365Z 
+2026-10-10T13:55:46.8281593Z     @pytest.mark.parametrize("same_catalog", [True, False])
+2026-10-10T13:55:46.8282203Z     def test_concurrent_processes_retain_serialized_routing_history(
+2026-10-10T13:55:46.8282674Z         tmp_path, monkeypatch, same_catalog
+2026-10-10T13:55:46.8282946Z     ):
+2026-10-10T13:55:46.8283199Z         from mcp import MCPError
+2026-10-10T13:55:46.8283422Z     
+2026-10-10T13:55:46.8283714Z         from actions.server import _actions_run
+2026-10-10T13:55:46.8284199Z         from actions.server._api_action_routes import _ActionRoutes
+2026-10-10T13:55:46.8284651Z         from actions.server._models import (
+2026-10-10T13:55:46.8284976Z             ActionPackage,
+2026-10-10T13:55:46.8285281Z             McpResourceRouting,
+2026-10-10T13:55:46.8285544Z             create_db,
+2026-10-10T13:55:46.8285787Z             load_db,
+2026-10-10T13:55:46.8285983Z         )
+2026-10-10T13:55:46.8286145Z     
+2026-10-10T13:55:46.8286397Z         path = tmp_path / "catalog.db"
+2026-10-10T13:55:46.8286730Z         with create_db(path) as db:
+2026-10-10T13:55:46.8287065Z             with db.transaction():
+2026-10-10T13:55:46.8287424Z                 for package, uri in [
+2026-10-10T13:55:46.8287888Z                     ("one", "example://{tenant}/item"),
+2026-10-10T13:55:46.8288394Z                     ("two", "example://acme/{resource}"),
+2026-10-10T13:55:46.8288709Z                 ]:
+2026-10-10T13:55:46.8289269Z                     db.insert(ActionPackage(package, package, ".", "hash", "{}"))
+2026-10-10T13:55:46.8289716Z                     db.insert(
+2026-10-10T13:55:46.8290398Z                         _action(package, "read", options={"kind": "resource", "uri": uri})
+2026-10-10T13:55:46.8290824Z                     )
+2026-10-10T13:55:46.8291054Z         children = []
+2026-10-10T13:55:46.8291343Z         environment = dict(os.environ)
+2026-10-10T13:55:46.8291746Z         environment["PYTHONPATH"] = os.pathsep.join(
+2026-10-10T13:55:46.8292057Z             [
+2026-10-10T13:55:46.8292476Z                 str(Path(__file__).resolve().parents[3] / "src"),
+2026-10-10T13:55:46.8292961Z                 environment.get("PYTHONPATH", ""),
+2026-10-10T13:55:46.8293254Z             ]
+2026-10-10T13:55:46.8293437Z         )
+2026-10-10T13:55:46.8293743Z         try:
+2026-10-10T13:55:46.8294136Z             with sqlite3.connect(path, timeout=10) as blocker:
+2026-10-10T13:55:46.8294614Z                 blocker.execute("BEGIN IMMEDIATE")
+2026-10-10T13:55:46.8295017Z                 for index in range(2):
+2026-10-10T13:55:46.8295440Z                     marker = tmp_path / str(index)
+2026-10-10T13:55:46.8295825Z                     children.append(
+2026-10-10T13:55:46.8296234Z                         subprocess.Popen(
+2026-10-10T13:55:46.8296569Z                             [
+2026-10-10T13:55:46.8296994Z                                 sys.executable,
+2026-10-10T13:55:46.8297394Z                                 "-c",
+2026-10-10T13:55:46.8297795Z                                 _CHILD,
+2026-10-10T13:55:46.8298208Z                                 str(path),
+2026-10-10T13:55:46.8298975Z                                 "one/read" if same_catalog or index == 0 else "two/read",
+2026-10-10T13:55:46.8299515Z                                 str(marker),
+2026-10-10T13:55:46.8299869Z                             ],
+2026-10-10T13:55:46.8300257Z                             env=environment,
+2026-10-10T13:55:46.8300748Z                             stdout=subprocess.PIPE,
+2026-10-10T13:55:46.8301240Z                             stderr=subprocess.PIPE,
+2026-10-10T13:55:46.8301640Z                             text=True,
+2026-10-10T13:55:46.8301953Z                         )
+2026-10-10T13:55:46.8302201Z                     )
+2026-10-10T13:55:46.8302556Z                 deadline = time.monotonic() + 20
+2026-10-10T13:55:46.8303182Z                 while not all((tmp_path / str(index)).exists() for index in range(2)):
+2026-10-10T13:55:46.8303752Z                     assert time.monotonic() < deadline
+2026-10-10T13:55:46.8304175Z >                   assert all(child.poll() is None for child in children)
+2026-10-10T13:55:46.8304642Z                     
+2026-10-10T13:55:46.8305129Z E                   AssertionError: Failed: assert all((child.poll() is None for child in children))
+2026-10-10T13:55:46.8305589Z E                   Variables:
+2026-10-10T13:55:46.8305855Z E                     all(...) = False
+2026-10-10T13:55:46.8306016Z 
+2026-10-10T13:55:46.8306269Z action_server_tests\mcp\test_resource_history.py:547: AssertionError
+2026-10-10T13:55:46.8306818Z _____ test_concurrent_processes_serialize_empty_history_allocation[True] ______
+2026-10-10T13:55:46.8307688Z [gw0] win32 -- Python 3.12.15 C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Scripts\python.exe
+2026-10-10T13:55:46.8308212Z 
+2026-10-10T13:55:46.8308777Z tmp_path = WindowsPath('C:/Users/runneradmin/AppData/Local/Temp/pytest-of-runneradmin/pytest-0/popen-gw0/test_concurrent_processes_seri0')
+2026-10-10T13:55:46.8309397Z same_catalog = True
+2026-10-10T13:55:46.8309518Z 
+2026-10-10T13:55:46.8309746Z     @pytest.mark.parametrize("same_catalog", [True, False])
+2026-10-10T13:55:46.8310238Z     def test_concurrent_processes_serialize_empty_history_allocation(
+2026-10-10T13:55:46.8310653Z         tmp_path, same_catalog
+2026-10-10T13:55:46.8310874Z     ):
+2026-10-10T13:55:46.8311381Z         from actions.server._models import ActionPackage, McpCatalogName, create_db, load_db
+2026-10-10T13:55:46.8311792Z     
+2026-10-10T13:55:46.8312039Z         path = tmp_path / "actions.db"
+2026-10-10T13:55:46.8312357Z         with create_db(path) as db:
+2026-10-10T13:55:46.8312682Z             with db.transaction():
+2026-10-10T13:55:46.8313113Z                 for package in ("package1", "package2"):
+2026-10-10T13:55:46.8313754Z                     db.insert(ActionPackage(package, package, ".", "hash", "{}"))
+2026-10-10T13:55:46.8314321Z                     db.insert(_action(package, "do_it"))
+2026-10-10T13:55:46.8314619Z         children = []
+2026-10-10T13:55:46.8314900Z         environment = dict(os.environ)
+2026-10-10T13:55:46.8315292Z         environment["PYTHONPATH"] = os.pathsep.join(
+2026-10-10T13:55:46.8315589Z             [
+2026-10-10T13:55:46.8316652Z                 str(Path(__file__).resolve().parents[3] / "src"),
+2026-10-10T13:55:46.8317136Z                 environment.get("PYTHONPATH", ""),
+2026-10-10T13:55:46.8317434Z             ]
+2026-10-10T13:55:46.8317618Z         )
+2026-10-10T13:55:46.8317795Z         try:
+2026-10-10T13:55:46.8318283Z             # Both child processes reach catalog preparation while a real SQLite
+2026-10-10T13:55:46.8318936Z             # writer holds the empty table. Neither may observe/allocate history
+2026-10-10T13:55:46.8319564Z             # until the previous writer's reservation transaction finishes.
+2026-10-10T13:55:46.8320126Z             with sqlite3.connect(path, timeout=10) as blocker:
+2026-10-10T13:55:46.8320596Z                 blocker.execute("BEGIN IMMEDIATE")
+2026-10-10T13:55:46.8321110Z                 for package in ("package1", "package2"):
+2026-10-10T13:55:46.8321563Z                     marker = tmp_path / package
+2026-10-10T13:55:46.8321950Z                     children.append(
+2026-10-10T13:55:46.8322356Z                         subprocess.Popen(
+2026-10-10T13:55:46.8322690Z                             [
+2026-10-10T13:55:46.8323122Z                                 sys.executable,
+2026-10-10T13:55:46.8323518Z                                 "-c",
+2026-10-10T13:55:46.8323902Z                                 _CHILD,
+2026-10-10T13:55:46.8324313Z                                 str(path),
+2026-10-10T13:55:46.8324962Z                                 ("" if same_catalog else f"{package}/do_it"),
+2026-10-10T13:55:46.8325450Z                                 str(marker),
+2026-10-10T13:55:46.8325797Z                             ],
+2026-10-10T13:55:46.8326236Z                             env=environment,
+2026-10-10T13:55:46.8326715Z                             stdout=subprocess.PIPE,
+2026-10-10T13:55:46.8327298Z                             stderr=subprocess.PIPE,
+2026-10-10T13:55:46.8327713Z                             text=True,
+2026-10-10T13:55:46.8328008Z                         )
+2026-10-10T13:55:46.8328266Z                     )
+2026-10-10T13:55:46.8328613Z                 deadline = time.monotonic() + 20
+2026-10-10T13:55:46.8328960Z                 while not all(
+2026-10-10T13:55:46.8329589Z                     (tmp_path / package).exists() for package in ("package1", "package2")
+2026-10-10T13:55:46.8329990Z                 ):
+2026-10-10T13:55:46.8330366Z                     if time.monotonic() >= deadline:
+2026-10-10T13:55:46.8330746Z                         states = []
+2026-10-10T13:55:46.8331160Z                         for child in children:
+2026-10-10T13:55:46.8331667Z                             marker = Path(child.args[-1])
+2026-10-10T13:55:46.8332069Z                             state = (
+2026-10-10T13:55:46.8332715Z                                 f"pid={child.pid} returncode={child.poll()} "
+2026-10-10T13:55:46.8333524Z                                 f"marker={str(marker)!r} marker_exists={marker.exists()}"
+2026-10-10T13:55:46.8333949Z                             )
+2026-10-10T13:55:46.8334427Z                             if child.poll() is not None:
+2026-10-10T13:55:46.8335107Z                                 stdout, stderr = child.communicate(timeout=5)
+2026-10-10T13:55:46.8335594Z                                 state += (
+2026-10-10T13:55:46.8336185Z                                     f" stdout={stdout[-2000:]!r} "
+2026-10-10T13:55:46.8336784Z                                     f"stderr={stderr[-4000:]!r}"
+2026-10-10T13:55:46.8337179Z                                 )
+2026-10-10T13:55:46.8337596Z                             states.append(state)
+2026-10-10T13:55:46.8337985Z                         pytest.fail(
+2026-10-10T13:55:46.8338664Z                             "timed out waiting for catalog preparation children to "
+2026-10-10T13:55:46.8339340Z                             "signal readiness:\n" + "\n".join(states)
+2026-10-10T13:55:46.8339692Z                         )
+2026-10-10T13:55:46.8340288Z                     exited = [child for child in children if child.poll() is not None]
+2026-10-10T13:55:46.8340833Z                     if exited:
+2026-10-10T13:55:46.8341196Z                         diagnostics = []
+2026-10-10T13:55:46.8341600Z                         for child in exited:
+2026-10-10T13:55:46.8342212Z                             stdout, stderr = child.communicate(timeout=5)
+2026-10-10T13:55:46.8342722Z                             diagnostics.append(
+2026-10-10T13:55:46.8343420Z                                 f"pid={child.pid} returncode={child.returncode} "
+2026-10-10T13:55:46.8344028Z                                 f"marker={child.args[-1]!r} "
+2026-10-10T13:55:46.8344764Z                                 f"stdout={stdout[-2000:]!r} stderr={stderr[-4000:]!r}"
+2026-10-10T13:55:46.8345173Z                             )
+2026-10-10T13:55:46.8345431Z >                       pytest.fail(
+2026-10-10T13:55:46.8346077Z                             "catalog preparation child exited before signaling "
+2026-10-10T13:55:46.8346713Z                             "readiness:\n" + "\n".join(diagnostics)
+2026-10-10T13:55:46.8347059Z                         )
+2026-10-10T13:55:46.8347478Z E                       Failed: catalog preparation child exited before signaling readiness:
+2026-10-10T13:55:46.8352205Z E                       pid=4388 returncode=1 marker='C:\\Users\\runneradmin\\AppData\\Local\\Temp\\pytest-of-runneradmin\\pytest-0\\popen-gw0\\test_concurrent_processes_seri0\\package2' stdout='' stderr='Traceback (most recent call last):\n  File "<string>", line 13, in <module>\n  File "C:\\Users\\runneradmin\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\contextlib.py", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_models.py", line 498, in load_db\n    db = Database(db_path)\n         ^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 418, in __init__\n    normalized = normalize_database_url(db_path)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 392, in normalize_database_url\n    raise ValueError("Unsupported database URL; only PostgreSQL URLs are supported")\nValueError: Unsupported database URL; only PostgreSQL URLs are supported\n'
+2026-10-10T13:55:46.8355764Z 
+2026-10-10T13:55:46.8355971Z action_server_tests\mcp\test_alias_history.py:530: Failed
+2026-10-10T13:55:46.8356496Z _____ test_concurrent_processes_serialize_empty_history_allocation[False] _____
+2026-10-10T13:55:46.8357360Z [gw0] win32 -- Python 3.12.15 C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Scripts\python.exe
+2026-10-10T13:55:46.8357881Z 
+2026-10-10T13:55:46.8358447Z tmp_path = WindowsPath('C:/Users/runneradmin/AppData/Local/Temp/pytest-of-runneradmin/pytest-0/popen-gw0/test_concurrent_processes_seri1')
+2026-10-10T13:55:46.8359076Z same_catalog = False
+2026-10-10T13:55:46.8359208Z 
+2026-10-10T13:55:46.8359432Z     @pytest.mark.parametrize("same_catalog", [True, False])
+2026-10-10T13:55:46.8359931Z     def test_concurrent_processes_serialize_empty_history_allocation(
+2026-10-10T13:55:46.8360345Z         tmp_path, same_catalog
+2026-10-10T13:55:46.8360572Z     ):
+2026-10-10T13:55:46.8361080Z         from actions.server._models import ActionPackage, McpCatalogName, create_db, load_db
+2026-10-10T13:55:46.8361495Z     
+2026-10-10T13:55:46.8361743Z         path = tmp_path / "actions.db"
+2026-10-10T13:55:46.8362069Z         with create_db(path) as db:
+2026-10-10T13:55:46.8362394Z             with db.transaction():
+2026-10-10T13:55:46.8362814Z                 for package in ("package1", "package2"):
+2026-10-10T13:55:46.8363449Z                     db.insert(ActionPackage(package, package, ".", "hash", "{}"))
+2026-10-10T13:55:46.8364015Z                     db.insert(_action(package, "do_it"))
+2026-10-10T13:55:46.8364315Z         children = []
+2026-10-10T13:55:46.8364680Z         environment = dict(os.environ)
+2026-10-10T13:55:46.8365064Z         environment["PYTHONPATH"] = os.pathsep.join(
+2026-10-10T13:55:46.8365362Z             [
+2026-10-10T13:55:46.8365775Z                 str(Path(__file__).resolve().parents[3] / "src"),
+2026-10-10T13:55:46.8366248Z                 environment.get("PYTHONPATH", ""),
+2026-10-10T13:55:46.8366540Z             ]
+2026-10-10T13:55:46.8366717Z         )
+2026-10-10T13:55:46.8366894Z         try:
+2026-10-10T13:55:46.8367369Z             # Both child processes reach catalog preparation while a real SQLite
+2026-10-10T13:55:46.8368018Z             # writer holds the empty table. Neither may observe/allocate history
+2026-10-10T13:55:46.8368635Z             # until the previous writer's reservation transaction finishes.
+2026-10-10T13:55:46.8369181Z             with sqlite3.connect(path, timeout=10) as blocker:
+2026-10-10T13:55:46.8369647Z                 blocker.execute("BEGIN IMMEDIATE")
+2026-10-10T13:55:46.8370115Z                 for package in ("package1", "package2"):
+2026-10-10T13:55:46.8370553Z                     marker = tmp_path / package
+2026-10-10T13:55:46.8370927Z                     children.append(
+2026-10-10T13:55:46.8371323Z                         subprocess.Popen(
+2026-10-10T13:55:46.8371654Z                             [
+2026-10-10T13:55:46.8372078Z                                 sys.executable,
+2026-10-10T13:55:46.8372477Z                                 "-c",
+2026-10-10T13:55:46.8372864Z                                 _CHILD,
+2026-10-10T13:55:46.8373273Z                                 str(path),
+2026-10-10T13:55:46.8373918Z                                 ("" if same_catalog else f"{package}/do_it"),
+2026-10-10T13:55:46.8374407Z                                 str(marker),
+2026-10-10T13:55:46.8374758Z                             ],
+2026-10-10T13:55:46.8375222Z                             env=environment,
+2026-10-10T13:55:46.8375713Z                             stdout=subprocess.PIPE,
+2026-10-10T13:55:46.8376209Z                             stderr=subprocess.PIPE,
+2026-10-10T13:55:46.8376617Z                             text=True,
+2026-10-10T13:55:46.8376915Z                         )
+2026-10-10T13:55:46.8377162Z                     )
+2026-10-10T13:55:46.8377519Z                 deadline = time.monotonic() + 20
+2026-10-10T13:55:46.8377868Z                 while not all(
+2026-10-10T13:55:46.8378493Z                     (tmp_path / package).exists() for package in ("package1", "package2")
+2026-10-10T13:55:46.8378904Z                 ):
+2026-10-10T13:55:46.8379283Z                     if time.monotonic() >= deadline:
+2026-10-10T13:55:46.8379671Z                         states = []
+2026-10-10T13:55:46.8380105Z                         for child in children:
+2026-10-10T13:55:46.8380609Z                             marker = Path(child.args[-1])
+2026-10-10T13:55:46.8381020Z                             state = (
+2026-10-10T13:55:46.8381671Z                                 f"pid={child.pid} returncode={child.poll()} "
+2026-10-10T13:55:46.8382491Z                                 f"marker={str(marker)!r} marker_exists={marker.exists()}"
+2026-10-10T13:55:46.8382919Z                             )
+2026-10-10T13:55:46.8383398Z                             if child.poll() is not None:
+2026-10-10T13:55:46.8384082Z                                 stdout, stderr = child.communicate(timeout=5)
+2026-10-10T13:55:46.8384572Z                                 state += (
+2026-10-10T13:55:46.8385170Z                                     f" stdout={stdout[-2000:]!r} "
+2026-10-10T13:55:46.8385779Z                                     f"stderr={stderr[-4000:]!r}"
+2026-10-10T13:55:46.8386183Z                                 )
+2026-10-10T13:55:46.8386609Z                             states.append(state)
+2026-10-10T13:55:46.8386996Z                         pytest.fail(
+2026-10-10T13:55:46.8387679Z                             "timed out waiting for catalog preparation children to "
+2026-10-10T13:55:46.8388451Z                             "signal readiness:\n" + "\n".join(states)
+2026-10-10T13:55:46.8388816Z                         )
+2026-10-10T13:55:46.8389411Z                     exited = [child for child in children if child.poll() is not None]
+2026-10-10T13:55:46.8389881Z                     if exited:
+2026-10-10T13:55:46.8390247Z                         diagnostics = []
+2026-10-10T13:55:46.8390662Z                         for child in exited:
+2026-10-10T13:55:46.8391283Z                             stdout, stderr = child.communicate(timeout=5)
+2026-10-10T13:55:46.8391796Z                             diagnostics.append(
+2026-10-10T13:55:46.8392498Z                                 f"pid={child.pid} returncode={child.returncode} "
+2026-10-10T13:55:46.8393125Z                                 f"marker={child.args[-1]!r} "
+2026-10-10T13:55:46.8393875Z                                 f"stdout={stdout[-2000:]!r} stderr={stderr[-4000:]!r}"
+2026-10-10T13:55:46.8394286Z                             )
+2026-10-10T13:55:46.8394560Z >                       pytest.fail(
+2026-10-10T13:55:46.8395209Z                             "catalog preparation child exited before signaling "
+2026-10-10T13:55:46.8395848Z                             "readiness:\n" + "\n".join(diagnostics)
+2026-10-10T13:55:46.8396483Z                         )
+2026-10-10T13:55:46.8397095Z E                       Failed: catalog preparation child exited before signaling readiness:
+2026-10-10T13:55:46.8401830Z E                       pid=4512 returncode=1 marker='C:\\Users\\runneradmin\\AppData\\Local\\Temp\\pytest-of-runneradmin\\pytest-0\\popen-gw0\\test_concurrent_processes_seri1\\package1' stdout='' stderr='Traceback (most recent call last):\n  File "<string>", line 13, in <module>\n  File "C:\\Users\\runneradmin\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\contextlib.py", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_models.py", line 498, in load_db\n    db = Database(db_path)\n         ^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 418, in __init__\n    normalized = normalize_database_url(db_path)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 392, in normalize_database_url\n    raise ValueError("Unsupported database URL; only PostgreSQL URLs are supported")\nValueError: Unsupported database URL; only PostgreSQL URLs are supported\n'
+2026-10-10T13:55:46.8409704Z E                       pid=1984 returncode=1 marker='C:\\Users\\runneradmin\\AppData\\Local\\Temp\\pytest-of-runneradmin\\pytest-0\\popen-gw0\\test_concurrent_processes_seri1\\package2' stdout='' stderr='Traceback (most recent call last):\n  File "<string>", line 13, in <module>\n  File "C:\\Users\\runneradmin\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\contextlib.py", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_models.py", line 498, in load_db\n    db = Database(db_path)\n         ^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 418, in __init__\n    normalized = normalize_database_url(db_path)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 392, in normalize_database_url\n    raise ValueError("Unsupported database URL; only PostgreSQL URLs are supported")\nValueError: Unsupported database URL; only PostgreSQL URLs are supported\n'
+2026-10-10T13:55:46.8413214Z 
+2026-10-10T13:55:46.8413432Z action_server_tests\mcp\test_alias_history.py:530: Failed
+2026-10-10T13:55:46.8413897Z ============================== warnings summary ===============================
+2026-10-10T13:55:46.8414660Z tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+2026-10-10T13:55:46.8416473Z   C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Lib\site-packages\websockets\legacy\__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+2026-10-10T13:55:46.8417748Z     warnings.warn(  # deprecated in 14.0 - 2024-11-09
+2026-10-10T13:55:46.8417963Z 
+2026-10-10T13:55:46.8418452Z tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+2026-10-10T13:55:46.8419937Z   C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+2026-10-10T13:55:46.8421074Z     from websockets.server import WebSocketServerProtocol
+2026-10-10T13:55:46.8421321Z 
+2026-10-10T13:55:46.8421646Z tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py: 1 warning
+2026-10-10T13:55:46.8422240Z tests/action_server_tests/test_rcc_runtime_adapter.py: 4 warnings
+2026-10-10T13:55:46.8422773Z tests/action_server_tests/test_rcc_runtime_source_snapshots.py: 7 warnings
+2026-10-10T13:55:46.8423702Z   D:\a\actions\actions\action_server\src\actions\server\_action_package_handler.py:90: DeprecationWarning: The 'warn' method is deprecated, use 'warning' instead
+2026-10-10T13:55:46.8424377Z     log.warn(
+2026-10-10T13:55:46.8424484Z 
+2026-10-10T13:55:46.8424773Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-10-10T13:55:46.8425291Z =========================== short test summary info ===========================
+2026-10-10T13:55:46.8426506Z FAILED action_server_tests\mcp\test_resource_history.py::test_concurrent_processes_retain_serialized_routing_history[True] - AssertionError: Failed: assert all((child.poll() is None for child in children))
+2026-10-10T13:55:46.8427344Z Variables:
+2026-10-10T13:55:46.8427547Z   all(...) = False
+2026-10-10T13:55:46.8428517Z FAILED action_server_tests\mcp\test_resource_history.py::test_concurrent_processes_retain_serialized_routing_history[False] - AssertionError: Failed: assert all((child.poll() is None for child in children))
+2026-10-10T13:55:46.8429329Z Variables:
+2026-10-10T13:55:46.8429523Z   all(...) = False
+2026-10-10T13:55:46.8430417Z FAILED action_server_tests\mcp\test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[True] - Failed: catalog preparation child exited before signaling readiness:
+2026-10-10T13:55:46.8435377Z pid=4388 returncode=1 marker='C:\\Users\\runneradmin\\AppData\\Local\\Temp\\pytest-of-runneradmin\\pytest-0\\popen-gw0\\test_concurrent_processes_seri0\\package2' stdout='' stderr='Traceback (most recent call last):\n  File "<string>", line 13, in <module>\n  File "C:\\Users\\runneradmin\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\contextlib.py", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_models.py", line 498, in load_db\n    db = Database(db_path)\n         ^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 418, in __init__\n    normalized = normalize_database_url(db_path)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 392, in normalize_database_url\n    raise ValueError("Unsupported database URL; only PostgreSQL URLs are supported")\nValueError: Unsupported database URL; only PostgreSQL URLs are supported\n'
+2026-10-10T13:55:46.8439656Z FAILED action_server_tests\mcp\test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[False] - Failed: catalog preparation child exited before signaling readiness:
+2026-10-10T13:55:46.8444661Z pid=4512 returncode=1 marker='C:\\Users\\runneradmin\\AppData\\Local\\Temp\\pytest-of-runneradmin\\pytest-0\\popen-gw0\\test_concurrent_processes_seri1\\package1' stdout='' stderr='Traceback (most recent call last):\n  File "<string>", line 13, in <module>\n  File "C:\\Users\\runneradmin\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\contextlib.py", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_models.py", line 498, in load_db\n    db = Database(db_path)\n         ^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 418, in __init__\n    normalized = normalize_database_url(db_path)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 392, in normalize_database_url\n    raise ValueError("Unsupported database URL; only PostgreSQL URLs are supported")\nValueError: Unsupported database URL; only PostgreSQL URLs are supported\n'
+2026-10-10T13:55:47.1424363Z pid=1984 returncode=1 marker='C:\\Users\\runneradmin\\AppData\\Local\\Temp\\pytest-of-runneradmin\\pytest-0\\popen-gw0\\test_concurrent_processes_seri1\\package2' stdout='' stderr='Traceback (most recent call last):\n  File "<string>", line 13, in <module>\n  File "C:\\Users\\runneradmin\\AppData\\Roaming\\uv\\python\\cpython-3.12-windows-x86_64-none\\Lib\\contextlib.py", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_models.py", line 498, in load_db\n    db = Database(db_path)\n         ^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 418, in __init__\n    normalized = normalize_database_url(db_path)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "D:\\a\\actions\\actions\\action_server\\src\\actions\\server\\_database.py", line 392, in normalize_database_url\n    raise ValueError("Unsupported database URL; only PostgreSQL URLs are supported")\nValueError: Unsupported database URL; only PostgreSQL URLs are supported\n'
+2026-10-10T13:55:47.1429686Z ===== 4 failed, 995 passed, 22 skipped, 14 warnings in 365.38s (0:06:05) ======

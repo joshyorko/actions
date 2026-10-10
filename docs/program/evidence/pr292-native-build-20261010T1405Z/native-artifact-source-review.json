@@ -1,0 +1,93 @@
+{
+  "review": "independent PR292 Ubuntu native-artifact measurement; metadata streamed in memory",
+  "status": "MEASURED_FOR_SOURCE_BINDING; native alias acceptance NOT RUN",
+  "pr": 292,
+  "published_head": {
+    "sha": "5ebc97c12e99ae98dacacfe8ace170620d581649",
+    "tree": "768ec7bb91f0636c17440d2920c0db1d84a93ec4"
+  },
+  "github_build_merge_commit": {
+    "sha": "8468e632bb9af556b17d2ff5dc02483dc43c4198",
+    "tree": "768ec7bb91f0636c17440d2920c0db1d84a93ec4",
+    "parents": [
+      "c6d729f29167f04080ab5547955d6398a6ee49d0",
+      "5ebc97c12e99ae98dacacfe8ace170620d581649"
+    ],
+    "tree_equals_published_head": true
+  },
+  "workflow": {
+    "run_id": 38056483790,
+    "attempt": 1,
+    "event": "pull_request",
+    "ubuntu_job_id": 114225947910,
+    "ubuntu_job": "Build Action Server binary without credentials (ubuntu-22.04)",
+    "ubuntu_conclusion": "success",
+    "run_head_sha": "5ebc97c12e99ae98dacacfe8ace170620d581649"
+  },
+  "provenance_artifact": {
+    "id": 11671331630,
+    "name": "action-server-native-provenance-ubuntu-22.04-38056483790-1",
+    "zip_bytes": 59384503,
+    "github_sha256": "5693a103efc22478be0c698b647241e18389cc0cf8e6cee42d74421ffe766b0d",
+    "measured_sha256": "5693a103efc22478be0c698b647241e18389cc0cf8e6cee42d74421ffe766b0d",
+    "tar_member": "native-artifact-provenance.tar",
+    "tar_uncompressed_bytes": 127272960,
+    "downloaded_to_disk": false
+  },
+  "manifest": {
+    "path": "output/native-artifact-manifest.json",
+    "sha256": "c4b2d4aad687692e2c0fcd0b6a558fe729d7eac06ade3f4f4cc2fb3e24b17540",
+    "source_sha": "8468e632bb9af556b17d2ff5dc02483dc43c4198",
+    "workflow_run_id": "38056483790",
+    "workflow_run_attempt": "1",
+    "platform": "Linux",
+    "architecture": "x86_64",
+    "python_version": "3.12.15",
+    "go_version": "go version go1.23.12 linux/amd64",
+    "frozen": {
+      "path": "dist/action-server/action-server",
+      "sha256": "105bb607b5eff980a393f3ae59ab9819d53cde99840ffe9aaf062e7e246fc19e",
+      "embedded_files_sha256": "2fa6012e1a280116a1abfbb2c58b28c01c6f8033f2c2424a94336c14c119cdce",
+      "frozen_package_tree_sha256": "c562d5c7410618e76ed8e9d0a65ff2b63d70c1f5e02d6470a8a96e7fbb7d2b78"
+    },
+    "go_wrapper": {
+      "path": "dist/final/action-server",
+      "sha256": "71e6a8b78539f6b44f0058c4be955716d13845911e359ea6c1fff31e1a653b14",
+      "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+      "assets_zip_sha256_manifest_only": "fdfc56ea13bf765020c1f510077575241f3ca33c29bac8cfa96b2059a1ccfd0d"
+    }
+  },
+  "inventory": {
+    "path": "output/native-artifact-tree-inventory.json",
+    "sha256": "1be212cc3bc7c90ed9a7d399f0d1faa6db4a2ea276da443bb0677c86f17e9d07",
+    "entries": 1190,
+    "tar_vs_inventory_mismatches": 0,
+    "recomputed_package_tree_sha256": "c562d5c7410618e76ed8e9d0a65ff2b63d70c1f5e02d6470a8a96e7fbb7d2b78",
+    "recomputed_embedded_files_sha256": "2fa6012e1a280116a1abfbb2c58b28c01c6f8033f2c2424a94336c14c119cdce"
+  },
+  "go_wrapper_artifact": {
+    "id": 11671701710,
+    "name": "action-server-unauthenticated-ubuntu-22.04",
+    "zip_bytes": 77800816,
+    "github_sha256": "44e379cf49945d5b0aa79b9f2c28e06a0d7d3d710acc0a614588793abbe6efb5",
+    "measured_zip_sha256": "44e379cf49945d5b0aa79b9f2c28e06a0d7d3d710acc0a614588793abbe6efb5",
+    "member": "action-server",
+    "member_bytes": 82001770,
+    "member_sha256": "71e6a8b78539f6b44f0058c4be955716d13845911e359ea6c1fff31e1a653b14",
+    "matches_manifest": true
+  },
+  "wrapper_source": {
+    "source_sha256_recomputed": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293",
+    "matches_manifest": true,
+    "github_git_tree_blob_ids": {
+      "main.go": "87738b86b23016eb2d3ca486a338957f7eb2a41c",
+      "process.go": "42c7f1092fb78897069581e173266aa2d56cfbb5",
+      "go.mod": "7609a11774b307a63e4c46a37136903819454359",
+      "go.sum": "50c942eb3ae22570912ef0cdd82f9271eb4cd750"
+    }
+  },
+  "acceptance_boundary": "This receipt binds fresh Ubuntu frozen and Go-wrapper artifacts to the PR292 candidate tree. It is not the native ten-case acceptance receipt or full build matrix completion. The assets ZIP input digest is retained from the manifest but its transient pre-embedding bytes were not separately available in these uploaded artifacts.",
+  "canonical_documentation": "No new durable review lesson beyond the accepted canonical repository-operations guidance; keep the source-bound artifact pin tuple and explicit old-artifact exclusion with the native acceptance receipt.",
+  "upstream_disposition": "None; local Actions defect.",
+  "limitations": "Manifest provenance attests Git HEAD/source tree and listed file hashes but explicitly does not attest a clean source tree. No artifact was extracted or written to overlay disk; artifact ZIP payloads were read in memory."
+}

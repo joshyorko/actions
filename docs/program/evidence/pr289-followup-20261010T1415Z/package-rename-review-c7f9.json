@@ -1,0 +1,29 @@
+{
+  "review": "package-rename-owner-protection",
+  "commit": "c7f9ec32735e530d522f9a2379cd562f195d522e",
+  "tree": "e888ee9ed26eb46432a7230ddc6fc3957b17fc5c",
+  "parent": "633f5de99c4e6f26664566699222cde1e9f97509",
+  "decision": "BLOCKED",
+  "scope": "read-only source review; no code or GitHub mutation",
+  "diff_files": [
+    "action_server/tests/action_server_tests/test_server.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "diff_check": "PASS",
+  "static_review": {
+    "collision_rejection": "checks the exact calculator_sum tool-owner diagnostic",
+    "rekeyed_http_mcp_restart": "checks exact HTTP path and MCP tool set before and after sync restart; checks successful HTTP and MCP calls",
+    "last_good_state": "compares package/action/owner tuples after rejection, but omits conda_hash and env_json from ActionPackage and multiple Action fields; does not prove full last-good rows",
+    "finding": "Expand snapshot to full persisted package/action rows (or narrow the requested guarantee/docs claim)."
+  },
+  "source_test": {
+    "result": "NOT RUN / environment-blocked; no pass claimed",
+    "attempts": [
+      "Existing prepared venv reached server, but inherited persisted actions_http proxy routed localhost request to proxy:8080 and got 403.",
+      "Isolated HOME removed that route; environment's installed Actions Core lacked actions.server_integration, so candidate worker could not execute the action. Exporting matching parent source into scratch did not provision that module into RCC's isolated worker runtime. No packages were installed."
+    ]
+  },
+  "native_acceptance": "NOT RUN; must use newly source-bound hosted artifact",
+  "canonical_docs": "Candidate adds source-vs-frozen acceptance boundary in docs/skills/repository-operations.md; clarify partial-row evidence if full-row snapshot is not added.",
+  "upstream_disposition": "none"
+}

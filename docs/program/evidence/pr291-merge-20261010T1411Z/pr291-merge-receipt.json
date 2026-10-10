@@ -1,0 +1,170 @@
+{
+  "observed_at": "2026-10-10T14:11:10.963Z",
+  "pr": 291,
+  "head": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+  "integration": {
+    "sha": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+    "node_id": "C_kwDOOI-QjNoAKGRlMmI5YTg4NGE3YmY3NTMyMGQwYzNlZmI5Mjk0YjhlYzE3OWM1Yzg",
+    "url": "https://api.github.com/repos/joshyorko/actions/git/commits/de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+    "html_url": "https://github.com/joshyorko/actions/commit/de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+    "author": {
+      "name": "Josh Yorko",
+      "email": "54248591+joshyorko@users.noreply.github.com",
+      "date": "2026-10-10T14:10:28Z"
+    },
+    "committer": {
+      "name": "GitHub",
+      "email": "noreply@github.com",
+      "date": "2026-10-10T14:10:28Z"
+    },
+    "tree": {
+      "sha": "7e1051985cc386f839d4f2d84b8b739b55e1a81a",
+      "url": "https://api.github.com/repos/joshyorko/actions/git/trees/7e1051985cc386f839d4f2d84b8b739b55e1a81a"
+    },
+    "message": "Merge Core 1.0.3 candidate preparation and verified wheel gate\n\nrelease: prepare Core 1.0.3 with a non-publishing wheel gate",
+    "parents": [
+      {
+        "sha": "5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa",
+        "html_url": "https://github.com/joshyorko/actions/commit/5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa"
+      },
+      {
+        "sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+        "html_url": "https://github.com/joshyorko/actions/commit/3c5278bbc0d12efa7b9108c713bdc6c982fc54d9"
+      }
+    ],
+    "verification": {
+      "verified": true,
+      "reason": "valid",
+      "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqykdUCRC1aQ7uu5UhlAAAGt4QAHWtFR6k6M30M63eFYB9X0Ud\ne1cHr2PlbGoQov3tAobmh87uZCFQV5aToEofW/V53l8ow2ynYZLNzv52tKtcmNiq\nAug3JS24FYzee7snqpLNjmadwLIfOvL7UNz8pFTPbOUpgp3yP90vY4kZF63Es8Q5\nMqf/0QNGtHaZ5C6GcWzZ680Ts61RQlXYQUNrgzcFf8TbkFVYiYxNV0WJQj53+oXJ\nbL8bPVBYITdWIFNU/+6MghFISb0MfJ7WKDQSxIHMrVGQcQLAVVFQ6PfPuUA4/jVp\nwcmgSnR9un/2rS3Pl6kRyDFBlQnUaEAsCszMduDTwkCHrfFcHNCly0xofE/xQPoC\n7BH7QEkgfCFBZT93YB2r0TMGOBkm+uWFX2GBSBCbq+JEBlYN8VC1h58Pc5iM7QZf\nA9o+YJ9c182BWCK530d4MkwrpREVNBoJKA65+gWjUoS9+109osLbYEtkWdW8RcVM\nB8T7jJA5wCR3oNmCgQzXWDslkgyursmo0WTfI6sKZEF9e9DWh92EFHHa8p+bOxP1\ng/qLQQTLS4amM6aS3LTUMP4fzrjqva3jc3gthNVcrFPq3S5Mr+i6YExVQ1Iulib2\ngvu0NTiXnteAmLIIrLnAJEiaEiNGXVpwjzW5CbM7OVEw06331koruGci0a71U/Aw\nVsFKVjnbj3UEEwW4HKPR\n=FM3r\n-----END PGP SIGNATURE-----\n",
+      "payload": "tree 7e1051985cc386f839d4f2d84b8b739b55e1a81a\nparent 5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa\nparent 3c5278bbc0d12efa7b9108c713bdc6c982fc54d9\nauthor Josh Yorko <54248591+joshyorko@users.noreply.github.com> 1791641428 -0400\ncommitter GitHub <noreply@github.com> 1791641428 -0400\n\nMerge Core 1.0.3 candidate preparation and verified wheel gate\n\nrelease: prepare Core 1.0.3 with a non-publishing wheel gate",
+      "verified_at": "2026-10-10T14:10:29Z"
+    }
+  },
+  "checks": [
+    {
+      "name": "publish (3.12)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114225094341
+    },
+    {
+      "name": "build-sdist (ubuntu-py3.12)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413694
+    },
+    {
+      "name": "build-wheels (windows-2022)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413616
+    },
+    {
+      "name": "build-wheels (macos-15)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413600
+    },
+    {
+      "name": "build-wheels (ubuntu-22.04)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413409
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413254
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413237
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413220
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413198
+    },
+    {
+      "name": "build (windows-py3.12-devmode)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413169
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413165
+    },
+    {
+      "name": "build (ubuntu-py3.12-devmode)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223413120
+    },
+    {
+      "name": "build (ubuntu-py3.10-devmode)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223412981
+    },
+    {
+      "name": "build (macos-py3.12-devmode)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223412979
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223412966
+    },
+    {
+      "name": "build (macos-py3.10-devmode)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223412928
+    },
+    {
+      "name": "build (windows-py3.10-devmode)",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223412911
+    },
+    {
+      "name": "coverage",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223412817
+    },
+    {
+      "name": "audit",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223412778
+    },
+    {
+      "name": "candidate-wheel",
+      "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "conclusion": "success",
+      "id": 114223412722
+    }
+  ],
+  "review": "Root reviewed exact candidate and independently validated source-bound wheel/sdist; combined tree reviewed against current integration5e3.",
+  "branch_protection_read": "403; no bypass. Merge API enforced repository policies.",
+  "release": "Not tagged or published; candidate-wheel evidence only."
+}

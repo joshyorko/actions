@@ -1,0 +1,11 @@
+{
+  "captured_at_utc": "2026-10-10 14:10:19 UTC",
+  "source": "GitHub connector read-only REST fetch; exact-head check-runs",
+  "observations": [
+    {"pr": 221, "head": "5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa", "base": "36b8192dbb8143e016af3351f7d25b22a35c9944", "counts": {"success": 30, "failure": 1, "in_progress": 1, "skipped": 1}, "pending": [{"name": "build (windows-py3.12-devmode)", "job_id": 114227041297}], "failure_job": {"name": "action-server-frontend-tests", "job_id": 114227041036, "signature": "Table.perf re-render timing 34.133778ms not less than 32ms"}},
+    {"pr": 289, "head": "2116a36e2015070d3b7e08a5362ed8442aee8331", "base": "c6d729f29167f04080ab5547955d6398a6ee49d0", "counts": {"success": 13, "failure": 4, "cancelled": 1, "skipped": 1}},
+    {"pr": 290, "head": "a337d0b9bbb6c4babda712b39368273d77e610a9", "base": "c6d729f29167f04080ab5547955d6398a6ee49d0", "counts": {"success": 14, "failure": 4, "cancelled": 1, "skipped": 1}},
+    {"pr": 291, "head": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9", "base": "c6d729f29167f04080ab5547955d6398a6ee49d0", "counts": {"success": 20}, "failed": []},
+    {"pr": 292, "head": "5ebc97c12e99ae98dacacfe8ace170620d581649", "base": "c6d729f29167f04080ab5547955d6398a6ee49d0", "counts": {"success": 12, "failure": 3, "in_progress": 1, "cancelled": 2, "skipped": 1}, "pending": [{"name": "build (ubuntu-py3.12-devmode)", "job_id": 114225948717}]}
+  ]
+}

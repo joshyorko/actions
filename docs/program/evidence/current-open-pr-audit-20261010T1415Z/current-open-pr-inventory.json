@@ -1,0 +1,61 @@
+{
+  "captured_at_utc": "2026-10-10T14:15:00Z",
+  "source": "Root-reported read-only GitHub connector audit; exact refs and cohort were communicated directly. The raw API payload was not retained.",
+  "scope": "Current open PR inventory only; not issue acceptance, merge authorization, or release readiness.",
+  "cohort": {
+    "items": 42,
+    "target_integrated": 32,
+    "superseded_unmerged": 4,
+    "open_blocked": 6,
+    "merge_ready": 0,
+    "open_prs": [
+      221,
+      282,
+      289,
+      290,
+      292,
+      297
+    ],
+    "superseded_prs": [
+      215,
+      216,
+      217,
+      218
+    ]
+  },
+  "open_prs": [
+    {
+      "pr": 221,
+      "head": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "status": "OPEN; current integration candidate has a recorded native build failure described in this amendment."
+    },
+    {
+      "pr": 282,
+      "head": "bab27a93664494965db8a86761ea5685a3be6618",
+      "status": "OPEN_BLOCKED; published Core 1.0.2 remains the consumer floor; Core 1.0.3 candidate is integrated but not published."
+    },
+    {
+      "pr": 289,
+      "head": "2116a36e2015070d3b7e08a5362ed8442aee8331",
+      "status": "OPEN_BLOCKED; current published head remains unchanged. Windows path and rename-fixture repairs are unpublished and under review."
+    },
+    {
+      "pr": 290,
+      "head": "a337d0b9bbb6c4babda712b39368273d77e610a9",
+      "status": "OPEN_BLOCKED; last exact-head inventory has four failures; Linux ten-case scoped acceptance remains limited to its exact artifact tuple."
+    },
+    {
+      "pr": 292,
+      "head": "5ebc97c12e99ae98dacacfe8ace170620d581649",
+      "status": "OPEN_BLOCKED; source/PG review accepted narrowly; hosted checks have Windows and macOS failures, and measured artifact is not native alias acceptance."
+    },
+    {
+      "pr": 297,
+      "head": "45a9d7468ebb24b45f65ded294b8ba3bc1ec1ed4",
+      "tree": "c947c60d6b6f71fb857a1d0e3c146f32ef9779ca",
+      "base": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "status": "OPEN; reviewed frontend timing-blocker repair with local focused/full and configured type/lint checks reported passing; hosted checks pending."
+    }
+  ],
+  "retained_scoped_results": "PR291 is no longer open: it merged at de2b9a after exact-head checks and combined-tree review. PR288 remains integrated at 5e3b. PR215–218 remain superseded/unmerged and are not counted integrated."
+}
