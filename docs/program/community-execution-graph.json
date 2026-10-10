@@ -2703,7 +2703,7 @@
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T03:42:00Z",
+    "observed_at_utc": "2026-10-10T04:17:00Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
     "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
@@ -2711,8 +2711,8 @@
     "integration_tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
     "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
     "release_ready": false,
-    "receipt": "evidence/convergence-refs-20261010T0341Z.json",
-    "receipt_sha256": "81aac628f661db142b6682b31dec96c97c334c701aadd74fc51c8927cd639f2e"
+    "receipt": "evidence/convergence-refs-20261010T0417Z.json",
+    "receipt_sha256": "6ef0a61fd51b46190499700472f817e1a5fd74593c0e60c154a23767d89961c2"
   },
   "prior_current_program_refs_20261009T2253Z": {
     "community": "c30f953bae1a322e1d09549607ab42f1badce440",
@@ -3220,9 +3220,9 @@
     "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
   },
   "current_pr_convergence": {
-    "observed_at_utc": "2026-10-10T03:42:00Z",
-    "path": "evidence/convergence-followup-20261010T0342Z.json",
-    "sha256": "0c07eb359c222b4bdbbd4ea71ec8f511d78bfab25ae7e3dfb5b6ec2ef29fbafd",
+    "observed_at_utc": "2026-10-10T04:17:00Z",
+    "path": "evidence/convergence-followup-20261010T0417Z.json",
+    "sha256": "8289afdae05cca2e3d4847c8f5b6587afa54dbe1f7f6e21b7bbaec05cfd16317",
     "cohort": {
       "items": 28,
       "target_integrated": 20,
@@ -3261,34 +3261,32 @@
         278
       ]
     },
-    "open_pr_audit": "evidence/convergence-live-prs-20261010T0341Z.json",
-    "open_pr_audit_sha256": "6b54ab1f5780fdb11da240a8fff262c73bf3c0134142cfdf2cb9dced26ff4f35",
+    "open_pr_audit": "evidence/convergence-live-prs-20261010T0417Z.json",
+    "open_pr_audit_sha256": "5672b2991650a990107901d1ffd66b6c0e8701a95c1ed09b46d435086e065171",
     "branch_readback": {
       "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
       "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
       "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be"
     },
-    "branch_readback_receipt": "evidence/convergence-refs-20261010T0341Z.json",
-    "pr273_head": "6ece09c439d12e02bcbde9dcd2164956b97829e2",
-    "pr273_tree": "a560aceae1fe26726989c5c17803bde477a26060",
-    "synthetic_merge": "ccf6e06487a5f9a285d29b55a06fb175b72ca087",
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0417Z.json",
+    "candidate_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "candidate_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
     "synthetic_tree_matches": true,
     "issue_acceptance_changed": false,
     "stage_counts_unchanged": true,
     "release_ready": false
   },
   "current_next_action": {
-    "observed_at_utc": "2026-10-10T03:42:00Z",
-    "path": "evidence/convergence-followup-20261010T0342Z.json",
-    "sha256": "0c07eb359c222b4bdbbd4ea71ec8f511d78bfab25ae7e3dfb5b6ec2ef29fbafd",
+    "observed_at_utc": "2026-10-10T04:17:00Z",
+    "path": "evidence/convergence-followup-20261010T0417Z.json",
+    "sha256": "8289afdae05cca2e3d4847c8f5b6587afa54dbe1f7f6e21b7bbaec05cfd16317",
     "pr": 273,
-    "head": "6ece09c439d12e02bcbde9dcd2164956b97829e2",
-    "tree": "a560aceae1fe26726989c5c17803bde477a26060",
-    "synthetic_merge": "ccf6e06487a5f9a285d29b55a06fb175b72ca087",
-    "status": "OPEN_DRAFT; current exact-head hosted workflows remain in progress; the current synthetic merge tree matches candidate tree.",
-    "owner": "Root owns combined candidate/admission; existing RCC owner may perform the newly authorized one diagnostic-only instrumented rerun.",
-    "pending": "Wait for current exact-head gates and the instrumented diagnostic result; preserve uninstrumented -11 as FAIL. Artifact-byte admission remains separate and unresolved.",
-    "scope": "Instrumented diagnostic is not a release acceptance PASS; no issue completion or publication."
+    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "status": "OPEN_DRAFT, mergeable; exact-head Runtime/native/wheel/toolkit/coverage/Work Items checks remain in progress, with Windows 503 retry underway.",
+    "owner": "Root owns integration/candidate; existing reviewers and native/RCC owners own their bounded evidence.",
+    "pending": "Finish current exact-head jobs and one authorized wheel retry. Independently read back the d8 RCC pass receipt and preserve old -11 failure; establish actual 84 artifact and package gates before admission.",
+    "scope": "No merge, release publication or whole issue acceptance follows."
   },
   "prior_current_program_refs_20261010T0136Z": {
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
@@ -3715,6 +3713,89 @@
   },
   "prior_current_program_refs_20261010T0341Z": {
     "observed_at_utc": "2026-10-10T03:41:00Z",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "integration_tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false,
+    "receipt": "evidence/convergence-refs-20261010T0341Z.json",
+    "receipt_sha256": "81aac628f661db142b6682b31dec96c97c334c701aadd74fc51c8927cd639f2e"
+  },
+  "prior_current_pr_convergence_20261010T0342Z": {
+    "observed_at_utc": "2026-10-10T03:42:00Z",
+    "path": "evidence/convergence-followup-20261010T0342Z.json",
+    "sha256": "0c07eb359c222b4bdbbd4ea71ec8f511d78bfab25ae7e3dfb5b6ec2ef29fbafd",
+    "cohort": {
+      "items": 28,
+      "target_integrated": 20,
+      "open_blocked": 8,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        274,
+        275,
+        276,
+        277
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278
+      ]
+    },
+    "open_pr_audit": "evidence/convergence-live-prs-20261010T0341Z.json",
+    "open_pr_audit_sha256": "6b54ab1f5780fdb11da240a8fff262c73bf3c0134142cfdf2cb9dced26ff4f35",
+    "branch_readback": {
+      "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be"
+    },
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0341Z.json",
+    "pr273_head": "6ece09c439d12e02bcbde9dcd2164956b97829e2",
+    "pr273_tree": "a560aceae1fe26726989c5c17803bde477a26060",
+    "synthetic_merge": "ccf6e06487a5f9a285d29b55a06fb175b72ca087",
+    "synthetic_tree_matches": true,
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "release_ready": false
+  },
+  "prior_current_next_action_20261010T0342Z": {
+    "observed_at_utc": "2026-10-10T03:42:00Z",
+    "path": "evidence/convergence-followup-20261010T0342Z.json",
+    "sha256": "0c07eb359c222b4bdbbd4ea71ec8f511d78bfab25ae7e3dfb5b6ec2ef29fbafd",
+    "pr": 273,
+    "head": "6ece09c439d12e02bcbde9dcd2164956b97829e2",
+    "tree": "a560aceae1fe26726989c5c17803bde477a26060",
+    "synthetic_merge": "ccf6e06487a5f9a285d29b55a06fb175b72ca087",
+    "status": "OPEN_DRAFT; current exact-head hosted workflows remain in progress; the current synthetic merge tree matches candidate tree.",
+    "owner": "Root owns combined candidate/admission; existing RCC owner may perform the newly authorized one diagnostic-only instrumented rerun.",
+    "pending": "Wait for current exact-head gates and the instrumented diagnostic result; preserve uninstrumented -11 as FAIL. Artifact-byte admission remains separate and unresolved.",
+    "scope": "Instrumented diagnostic is not a release acceptance PASS; no issue completion or publication."
+  },
+  "prior_current_program_refs_20261010T0342Z": {
+    "observed_at_utc": "2026-10-10T03:42:00Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
     "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",

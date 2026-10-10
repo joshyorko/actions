@@ -1,6 +1,14 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-10T03:42:00Z
+## Current convergence — 2026-10-10T04:17:00Z
+
+The 28-PR cohort remains 20 target-integrated, 8 open/blocked and 0 merge-ready. Integration `6d438feb6c92f8bb01428f665ac423fb101b4017` and community `36b8192dbb8143e016af3351f7d25b22a35c9944` are unchanged. PR273 current head `84b8c70a412db9594dfa2a6c5fcb3e8184db019b` has tree `b2d4a1956770a37d714cc43a23a863abf23fa089`, matching the fresh synthetic merge tree. See the [dated checkpoint](evidence/convergence-followup-20261010T0417Z.json), [current scoped PR audit](evidence/convergence-live-prs-20261010T0417Z.json), and [ref readback](evidence/convergence-refs-20261010T0417Z.json).
+
+The current candidate's exact-head Runtime/native/wheel/toolkit/coverage and Work Items verification are mixed or in progress. MacOS wheel passed; the Windows wheel attempt failed before Runtime build when GitHub returned HTTP 503 fetching `get-virtualenv 20.29.3`; Ubuntu wheel attempt was cancelled. Root authorized one failed-job retry, which was in progress at observation. The macOS pinned-RCC 20-second download timeout on the prior attempt is separately retained; no failed attempt is overwritten.
+
+Predecessor d8's independent native artifact review verified downloaded archive bytes, complete TAR inventory/modes/links/content and platform RCC executable hashes for its tested synthetic merge. This is predecessor-bound evidence; it does not replace current 84 exact-head hosted native jobs. For d8, the owner reports one real-RCC run PASS in 118.44 seconds (HTTP 200, natural exit 1, no forced stop). Independent review remains BLOCKED because receipt contents/path, exact execution-source origin and Core provenance are not available for readback. The old `969219e7` natural exit `-11` remains unexplained; a single later pass does not erase it. Runtime/native 1.0.3 remains unpublished, and no issue acceptance changed.
+
+## Historical convergence snapshot — 2026-10-10T03:42:00Z (superseded by the 2026-10-10T04:17:00Z amendment)
 
 The 28-PR cohort remains 20 target-integrated, 8 open/blocked and 0 merge-ready. Integration is `6d438feb6c92f8bb01428f665ac423fb101b4017`; community is `36b8192dbb8143e016af3351f7d25b22a35c9944`. PR273 head `6ece09c4` and its synthetic merge `ccf6e064` have tree `a560aceae`. Exact-head workflows remain in progress. See the [03:42 receipt](evidence/convergence-followup-20261010T0342Z.json) and the [03:41 PR audit](evidence/convergence-live-prs-20261010T0341Z.json).
 

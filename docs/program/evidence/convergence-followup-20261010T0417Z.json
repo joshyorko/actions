@@ -1,0 +1,426 @@
+{
+  "observed_at_utc": "2026-10-10T04:17:00Z",
+  "repository": "joshyorko/actions",
+  "cohort": {
+    "items": 28,
+    "target_integrated": 20,
+    "open_blocked": 8,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      274,
+      275,
+      276,
+      277
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      278
+    ],
+    "scope": "Named PR target integration; issue-level completion, acceptance and release are separate."
+  },
+  "refs": {
+    "community": {
+      "branch": "community",
+      "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+    },
+    "integration": {
+      "branch": "integration/community-release-20261008",
+      "head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "tree": "92e79c92f2f64585cbe66f068f5757f205fbe976"
+    },
+    "runtime_candidate": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    }
+  },
+  "live_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261010T0417Z.json",
+    "sha256": "5672b2991650a990107901d1ffd66b6c0e8701a95c1ed09b46d435086e065171"
+  },
+  "historical_open_pr_audit": {
+    "path": "evidence/open-pr-convergence-audit-20261010T0337Z.json",
+    "sha256": "9fbbaa9cd0e426b258aa071c21b892f81f9c2442920852e94b3b0ae370e6ad4b",
+    "captured_at": "2026-10-10T03:37:54Z",
+    "limits": "Prior ancestry/ownership read; PR base SHA is historical API snapshot, not current target tip."
+  },
+  "exact_candidate_check_observation": {
+    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "synthetic_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "observed_at": "2026-10-10T04:17:00Z",
+    "check_runs": [
+      {
+        "name": "build-wheels (macos-15)",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114129269187"
+      },
+      {
+        "name": "build-sdist (ubuntu-py3.12)",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114129268853"
+      },
+      {
+        "name": "build-wheels (windows-2022)",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114129268110"
+      },
+      {
+        "name": "build-wheels (ubuntu-22.04)",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233207/job/114129267945"
+      },
+      {
+        "name": "publish",
+        "status": "completed",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233244/job/114128682503"
+      },
+      {
+        "name": "build (ubuntu-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233285/job/114128530973"
+      },
+      {
+        "name": "build (windows-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233285/job/114128530931"
+      },
+      {
+        "name": "build (macos-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233285/job/114128530800"
+      },
+      {
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233244/job/114128530751"
+      },
+      {
+        "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530696"
+      },
+      {
+        "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530688"
+      },
+      {
+        "name": "Build Action Server binary without credentials (macos-15)",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233169/job/114128530670"
+      },
+      {
+        "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530659"
+      },
+      {
+        "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530657"
+      },
+      {
+        "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530653"
+      },
+      {
+        "name": "Build Action Server binary without credentials (windows-2022)",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233169/job/114128530619"
+      },
+      {
+        "name": "audit",
+        "status": "completed",
+        "conclusion": "success",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233222/job/114128530610"
+      },
+      {
+        "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233185/job/114128530596"
+      },
+      {
+        "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233169/job/114128530535"
+      },
+      {
+        "name": "coverage",
+        "status": "in_progress",
+        "conclusion": null,
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38023233184/job/114128530474"
+      }
+    ]
+  },
+  "candidate_84": {
+    "change_from_d8": "One watcher test import ordering change; no production-source changes, reviewed by root; focused watcher tests 6 pass in 1.31s and import-sort passed. Full-source tests/matrix remain tied to respective commits.",
+    "current_hosted_runs": {
+      "runtime": {
+        "id": 38023233285,
+        "status": "in_progress",
+        "note": "Linux/Windows jobs in progress at read; macOS current state from check-runs is in progress."
+      },
+      "native": {
+        "id": 38023233169,
+        "status": "in_progress",
+        "platforms": [
+          "Linux",
+          "Windows",
+          "macOS"
+        ]
+      },
+      "wheel": {
+        "id": 38023233207,
+        "first_attempt": {
+          "Windows": "FAIL: pinned get-virtualenv 20.29.3 GitHub bootstrap HTTP 503 before Runtime build/tests; receipt evidence/pr273-wheel-windows-503-38023233207.md",
+          "Ubuntu": "CANCELLED",
+          "macOS": "PASS"
+        },
+        "retry": "Root requested one failed-job rerun at 04:16:18Z (HTTP 201); at 04:17 Windows and Ubuntu wheel jobs are in progress. Mac RCC timeout on prior d8 attempt is preserved separately at evidence/pr273-wheel-macos-rcc-timeout-38022353591.md."
+      },
+      "toolkit": {
+        "id": 38023233185,
+        "status": "4 of 6 primary/N-1 jobs succeeded, 2 Linux jobs in progress at 04:17"
+      },
+      "coverage": {
+        "id": 38023233184,
+        "status": "in_progress"
+      },
+      "work_items_verify": {
+        "id": 38023233244,
+        "status": "in_progress"
+      },
+      "audit": {
+        "id": 38023233222,
+        "status": "success"
+      },
+      "verify": {
+        "id": 38023233244,
+        "status": "success; publish skipped"
+      }
+    }
+  },
+  "predecessor_d8_runtime": {
+    "run_id": 38022353614,
+    "linux": {
+      "portable": "862 passed,12 skipped",
+      "integration": "119 passed,15 skipped,1 missing external credential failure",
+      "isort": "failed before fix in test_watcher_shutdown.py"
+    },
+    "macos": {
+      "portable": "858 passed,16 skipped",
+      "integration": "119 passed,15 skipped,1 missing external credential failure",
+      "isort": "failed before fix in test_watcher_shutdown.py"
+    },
+    "windows_predecessor_6ece": "846 passed,22 skipped; 118 passed,16 skipped and the sole missing external credential failure. Distinct from d8 Linux/Mac imports issue."
+  },
+  "predecessor_d8_native": {
+    "source_head": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+    "source_tree": "4633ee098b97c09bb0552fc40bcf59d58e28ef5d",
+    "synthetic_merge": "b20fc815aee5a4a303c7b90d6823b2351c30d452",
+    "synthetic_merge_parents": [
+      "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "d8dc7a6cd27efd5b460976300e12633b93d3a8dd"
+    ],
+    "workflow_run": 38022353748,
+    "workflow_result": "all 3 OS native jobs PASS",
+    "independent_artifact_review": "PASS for d8 synthetic source; 12 API ZIP size/SHA matched; CRC/no duplicates; TAR entries path/kind/mode/link/content exact; frozen/Go executables and manifests bound; not executed by static reviewer. Does not replace 84 exact-head hosted native run, which is pending.",
+    "rcc_binaries": {
+      "linux": {
+        "bytes": 22282402,
+        "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+      },
+      "windows": {
+        "bytes": 19985408,
+        "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+      },
+      "macos_frozen_and_go": {
+        "bytes": 20904864,
+        "sha256": "dc8a3e572a47d13d2c4420c6efaa17eb4557c7b02b4da641bce4b930b73cce09",
+        "qualification": "Exact 6ece signature-transform bytes; signature validity NOT_RUN."
+      }
+    },
+    "native_review_receipts_reported": [
+      {
+        "path": "/workspaces/actions-worker-state/devsy-native-review/d8dc-3os/d8dc-3os-independent-summary.json",
+        "sha256": "dfa6bb6d8814fb3e97217a7ee848dade9e7305b6de8e0437cd06b073ffb2210a"
+      },
+      {
+        "path": "/workspaces/actions-worker-state/devsy-native-review/d8dc-3os/linux-independent-gate-receipt.json",
+        "sha256": "67fc0f7c7b726405c0f9ea71d5abe0071e3ec78e073ccb493482acec9f33dda3"
+      },
+      {
+        "path": "/workspaces/actions-worker-state/devsy-native-review/d8dc-3os/other-os-review.json",
+        "sha256": "d280568a3e77293806aff3a2b513c8e1eab2edd4a9576a4849a159abfd61c1f2"
+      }
+    ],
+    "transfer_limit": "Receipt paths/hashes were reported by heartbeat; native reviewer performed downloaded-byte checks, but the receipt files are unavailable to this Cloud worktree for rehash."
+  },
+  "predecessor_d8_rcc": {
+    "source_head": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+    "owner_reported_result": "one real RCC run PASS in 118.44s, HTTP 200 and natural Runtime exit 1, no forced cleanup",
+    "review_status": "BLOCKED on exact receipt contents/path, independent execution-source origin, launch environment and Core provenance readback; not full #134 acceptance.",
+    "pinned_rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "owner_reported_artifact_hashes": {
+      "log_bytes": 1061,
+      "log_sha256": "0c88baba7a3ed856a9e5f0a1e0fd43bb75a96e25a73931a44c929bb34ea35aeb",
+      "lifecycle_receipt_bytes": 8136,
+      "lifecycle_receipt_sha256": "d32caeb239c0f09e3d9e11123c8861d18889117cf1520d3bfb46ee94ee93de3b",
+      "run_record_sha256": "9597f558028abcb76d72c1f0103cddfe857e58a0d7f56ea87fc6e536a11d00e5"
+    },
+    "exact_file_paths": "Not yet supplied; reported hashes are not independently rehashed in Cloud.",
+    "older_failure": "Original 969219e7 natural exit -11 is retained as unexplained; one d8 successful controlled run does not erase the older failure or establish retries."
+  },
+  "wheel_failure_history": {
+    "d8_macos": "Pinned RCC GitHub download timed out after 20s before wheel construction; predecessor run had previously succeeded, so this was environmental and required a candidate retry.",
+    "84_windows": "get-virtualenv 20.29.3 GitHub fetch returned HTTP 503 before Runtime build/tests; one failed-job retry is pending."
+  },
+  "issue_accounting": {
+    "retained_contracts": 54,
+    "issue_projection_sha256": "3629102800b720555de322bf3649fcbcb4991d3695f02b909caa9e205bed6f60",
+    "historical_archives_verified": 16,
+    "historical_archives": [
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v2.zip",
+        "sha256": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf",
+        "bytes": 6855
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v3.zip",
+        "sha256": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281",
+        "bytes": 7286
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v4.zip",
+        "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3",
+        "bytes": 7262
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009.zip",
+        "sha256": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7",
+        "bytes": 6683
+      },
+      {
+        "path": "evidence/community-20261008.zip",
+        "sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
+        "bytes": 456808
+      },
+      {
+        "path": "evidence/community-20261009-acceleration.zip",
+        "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48",
+        "bytes": 112671
+      },
+      {
+        "path": "evidence/community-20261009-checkpoint.zip",
+        "sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c",
+        "bytes": 87365
+      },
+      {
+        "path": "evidence/community-20261009-cloud-admission.zip",
+        "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0",
+        "bytes": 69121
+      },
+      {
+        "path": "evidence/community-20261009-convergence.zip",
+        "sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
+        "bytes": 165902
+      },
+      {
+        "path": "evidence/community-20261009-fanout.zip",
+        "sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e",
+        "bytes": 117686
+      },
+      {
+        "path": "evidence/community-20261009-final-checkpoint.zip",
+        "sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4",
+        "bytes": 129162
+      },
+      {
+        "path": "evidence/community-20261009-resume.zip",
+        "sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541",
+        "bytes": 123440
+      },
+      {
+        "path": "evidence/community-20261009-update.zip",
+        "sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4",
+        "bytes": 36121
+      },
+      {
+        "path": "evidence/community-20261009-update2.zip",
+        "sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31",
+        "bytes": 35524
+      },
+      {
+        "path": "evidence/community-20261009-update3.zip",
+        "sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842",
+        "bytes": 71453
+      },
+      {
+        "path": "evidence/http-helper-1.0.3-verified-dist.zip",
+        "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb",
+        "bytes": 30034
+      }
+    ],
+    "stages": {
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
+    },
+    "whole_issue_complete": [
+      210
+    ],
+    "issue_acceptance_changed": false
+  },
+  "release_state": {
+    "Core": "1.0.2 published and verified",
+    "Helper": "1.0.3 published and verified",
+    "Runtime/native": "1.0.3 held and unpublished"
+  },
+  "upstream_disposition": "None; no upstream defect established. Current blockers/proofs are Actions-owned."
+}

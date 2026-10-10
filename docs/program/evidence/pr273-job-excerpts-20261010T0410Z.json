@@ -1,0 +1,42 @@
+{
+  "observed_at": "2026-10-10T04:10Z",
+  "candidate_head": "d8dc7a6cd27efd5b460976300e12633b93d3a8dd",
+  "candidate_tree": "4633ee098b97c09bb0552fc40bcf59d58e28ef5d",
+  "logs": [
+    {
+      "job_id": 114125869494,
+      "lines": [
+        "2026-10-10T03:57:17.1148829Z HEAD is now at b20fc81 Merge d8dc7a6cd27efd5b460976300e12633b93d3a8dd into 6d438feb6c92f8bb01428f665ac423fb101b4017",
+        "2026-10-10T04:00:05.0088209Z =========== 862 passed, 12 skipped, 15 warnings in 90.88s (0:01:30) ============",
+        "2026-10-10T04:04:35.9425682Z FAILED action_server_tests/test_cloud.py::test_cloud_list_organizations - AssertionError: ACTION_SERVER_TEST_ACCESS_CREDENTIALS environment required for test.",
+        "2026-10-10T04:04:35.9426657Z ==== 1 failed, 119 passed, 15 skipped, 877 deselected in 261.79s (0:04:21) =====",
+        "2026-10-10T04:04:37.7336439Z ERROR: /home/runner/work/actions/actions/action_server/tests/action_server_tests/test_watcher_shutdown.py Imports are incorrectly sorted and/or formatted."
+      ]
+    },
+    {
+      "job_id": 114125869525,
+      "lines": [
+        "2026-10-10T03:57:23.9801810Z HEAD is now at b20fc81 Merge d8dc7a6cd27efd5b460976300e12633b93d3a8dd into 6d438feb6c92f8bb01428f665ac423fb101b4017",
+        "2026-10-10T04:01:01.7127820Z =========== 858 passed, 16 skipped, 15 warnings in 108.31s (0:01:48) ===========",
+        "2026-10-10T04:06:29.7349930Z FAILED action_server_tests/test_cloud.py::test_cloud_list_organizations - AssertionError: ACTION_SERVER_TEST_ACCESS_CREDENTIALS environment required for test.",
+        "2026-10-10T04:06:29.7351690Z ==== 1 failed, 119 passed, 15 skipped, 877 deselected in 315.83s (0:05:15) =====",
+        "2026-10-10T04:06:32.6289820Z ERROR: /Users/runner/work/actions/actions/action_server/tests/action_server_tests/test_watcher_shutdown.py Imports are incorrectly sorted and/or formatted."
+      ]
+    },
+    {
+      "job_id": 114122115473,
+      "lines": [
+        "2026-10-10T03:35:59.5163740Z HEAD is now at ccf6e06 Merge 6ece09c439d12e02bcbde9dcd2164956b97829e2 into 6d438feb6c92f8bb01428f665ac423fb101b4017\r",
+        "2026-10-10T03:45:21.1217342Z ========== 846 passed, 22 skipped, 14 warnings in 348.07s (0:05:48) ===========\r",
+        "2026-10-10T04:00:44.1354993Z FAILED action_server_tests\\test_cloud.py::test_cloud_list_organizations - AssertionError: ACTION_SERVER_TEST_ACCESS_CREDENTIALS environment required for test.\r",
+        "2026-10-10T04:00:44.1357100Z ==== 1 failed, 118 passed, 16 skipped, 871 deselected in 903.77s (0:15:03) ====\r"
+      ]
+    },
+    {
+      "job_id": 114125869867,
+      "lines": [
+        "2026-10-10T03:57:19.2594109Z HEAD is now at b20fc81 Merge d8dc7a6cd27efd5b460976300e12633b93d3a8dd into 6d438feb6c92f8bb01428f665ac423fb101b4017"
+      ]
+    }
+  ]
+}

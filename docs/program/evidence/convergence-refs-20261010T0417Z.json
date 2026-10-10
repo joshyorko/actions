@@ -1,0 +1,30 @@
+{
+  "observed_at_utc": "2026-10-10T04:17:00Z",
+  "source": "git ls-remote and local tree reads",
+  "refs": {
+    "community": {
+      "branch": "community",
+      "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+    },
+    "integration": {
+      "branch": "integration/community-release-20261008",
+      "head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "tree": "92e79c92f2f64585cbe66f068f5757f205fbe976"
+    },
+    "runtime_candidate": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    }
+  },
+  "candidate": {
+    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "synthetic_merge_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "tree_matches": true,
+    "workflow_synthetic_merge": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "workflow_synthetic_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "workflow_checkout_observed": "Root reports Windows wheel failure log checkout at merge2492; candidate exact source included."
+  }
+}
