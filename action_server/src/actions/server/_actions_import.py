@@ -266,9 +266,6 @@ def import_action_package(
             if not isinstance(exc, ActionServerValidationError):
                 raise ActionServerValidationError(str(exc)) from exc
         raise
-    else:
-        if source_snapshot_path is not None and not disable_not_imported:
-            source_snapshot_owner.prune_runtime_source_snapshots(source_snapshot_path)
 
 
 def _get_actions_version(

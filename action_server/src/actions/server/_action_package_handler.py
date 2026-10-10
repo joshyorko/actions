@@ -305,21 +305,6 @@ class ActionPackageHandler:
             return
         shutil.rmtree(candidate, ignore_errors=True)
 
-    def prune_runtime_source_snapshots(self, keep: Path) -> None:
-        """Prune stale snapshots only during startup, before workers are leased."""
-        import shutil
-
-        current = keep.resolve()
-        source_store = (self._datadir / ".rcc-runtime-sources").resolve()
-        try:
-            package_store = current.parent
-            package_store.relative_to(source_store)
-        except ValueError:
-            return
-        for candidate in package_store.iterdir():
-            if candidate != current and candidate.is_dir():
-                shutil.rmtree(candidate, ignore_errors=True)
-
     def get_pythonpath_entries(self) -> tuple[str, ...]:
         """
         Returns:

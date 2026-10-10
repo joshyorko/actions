@@ -1763,7 +1763,11 @@ identity binds included relative paths, supported permission mode bits, and file
 bytes, and both newly copied and reused destinations are checked. Failed
 snapshot validation also discards only a newly created candidate; a reused
 snapshot is preserved. Failed metadata import discards only a new candidate and
-retains the last-good ActionPackage/source generation. The regression tests
+retains the last-good ActionPackage/source generation. Successful package
+imports retain earlier source generations: the standalone `action-server
+import` path can share a datadir with live workers, so pruning by current
+imported generation alone can invalidate their source paths. Lease-safe source
+generation collection is not implemented. The regression tests
 `test_snapshot_pins_environment_yaml_across_aba_edit`,
 `test_snapshot_prepare_discards_new_mismatched_candidate_only`,
 `test_snapshot_prepare_preserves_reused_snapshot_on_validation_failure`,

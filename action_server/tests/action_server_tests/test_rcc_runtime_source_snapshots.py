@@ -153,6 +153,59 @@ def test_snapshot_prepare_preserves_reused_snapshot_on_validation_failure(
     assert (last_good / "package.yaml").read_bytes() != selected_bytes
 
 
+def test_import_does_not_prune_previous_runtime_snapshot(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    from types import SimpleNamespace
+
+    from actions.server._action_package_handler import ActionPackageHandler
+    from actions.server._actions_import import import_action_package
+
+    package = tmp_path / "package"
+    package.mkdir()
+    _write_package_yaml(package / "package.yaml")
+    action = package / "action.py"
+    action.write_text("VALUE = 'last-good'\n", encoding="utf-8")
+    datadir = tmp_path / "service-data"
+
+    previous = ActionPackageHandler(str(package), datadir)
+    old_snapshot, created = previous.create_runtime_source_snapshot()
+    assert created
+    old_action = old_snapshot / "action.py"
+    action.write_text("VALUE = 'new-generation'\n", encoding="utf-8")
+
+    class ExistingPackageDB:
+        def first(self, *_args):
+            return SimpleNamespace(env_json="{}")
+
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_PROVIDER", "local")
+    monkeypatch.setattr("actions.server._models.get_db", lambda: ExistingPackageDB())
+    monkeypatch.setattr(
+        ActionPackageHandler,
+        "bootstrap_environment",
+        lambda self, **_kwargs: ("environment", {"PYTHON_EXE": "/bin/python"}),
+    )
+    monkeypatch.setattr(
+        "actions.server._actions_import._get_actions_version",
+        lambda *_args, **_kwargs: (1, 0, 0),
+    )
+    monkeypatch.setattr(
+        "actions.server._actions_import._add_actions_to_db",
+        lambda *_args, **_kwargs: None,
+    )
+
+    import_action_package(
+        datadir=datadir,
+        action_package_dir=str(package),
+        disable_not_imported=False,
+        skip_lint=True,
+        whitelist="",
+    )
+
+    assert old_snapshot.is_dir()
+    assert old_action.read_text(encoding="utf-8") == "VALUE = 'last-good'\n"
+
+
 @pytest.mark.skipif(os.name == "nt", reason="POSIX permission mode identity")
 def test_snapshot_identity_changes_when_executable_mode_changes(
     tmp_path: Path,
