@@ -1966,14 +1966,115 @@ class ActionsTests(BaseTests):
             "on": {
                 "push": {
                     "branches": ["community", "wip"],
-                    "paths": dep_paths[:],
+                    "paths": dep_paths[:] + [".github/workflows/_gen_workflows.py"],
                 },
                 "pull_request": {
                     "branches": ["community"],
-                    "paths": dep_paths[:],
+                    "paths": dep_paths[:] + [".github/workflows/_gen_workflows.py"],
                 },
             }
         }
+
+    @override
+    def jobs_part(self):
+        jobs = super().jobs_part()["jobs"]
+        jobs["candidate-wheel"] = {
+            "runs-on": UBUNTU_VERSION,
+            "timeout-minutes": 30,
+            "permissions": {"contents": "read"},
+            "steps": [
+                {
+                    "name": "Checkout repository",
+                    "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+                },
+                {
+                    "name": "Set up Python 3.10",
+                    "uses": "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+                    "with": {"python-version": "3.10"},
+                },
+                {"name": "Install Poetry", "run": "pipx install poetry==2.1.1"},
+                {
+                    "name": "Synchronize Core dependencies",
+                    "run": "poetry sync --no-interaction",
+                },
+                {"name": "Build Core candidate artifacts", "run": "poetry build"},
+                {
+                    "name": "Verify exact Core artifact inventory",
+                    "shell": "bash",
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "package_version=$(poetry version --short)",
+                            'printf \'%s\\n\' "actions_core-$package_version-py3-none-any.whl" "actions_core-$package_version.tar.gz" | sort > /tmp/core-expected',
+                            "find dist -mindepth 1 -maxdepth 1 -printf '%f\\n' | sort > /tmp/core-actual",
+                            "diff -u /tmp/core-expected /tmp/core-actual",
+                            'test "$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 2',
+                            'test -f "dist/actions_core-$package_version-py3-none-any.whl"',
+                            'test ! -L "dist/actions_core-$package_version-py3-none-any.whl"',
+                            'test -f "dist/actions_core-$package_version.tar.gz"',
+                            'test ! -L "dist/actions_core-$package_version.tar.gz"',
+                        ]
+                    ),
+                },
+                {
+                    "name": "Install Twine 6.2.0",
+                    "run": "poetry run python -m pip install twine==6.2.0",
+                },
+                {
+                    "name": "Verify Core candidate artifacts",
+                    "run": "poetry run twine check --strict dist/*.whl dist/*.tar.gz",
+                },
+                {
+                    "name": "Verify clean installed Core candidate wheel",
+                    "shell": "bash",
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "wheel=\"$(find dist -maxdepth 1 -name 'actions_core-*.whl' -print -quit)\"",
+                            'test -n "$wheel"',
+                            'python scripts/verify_clean_wheel.py "$wheel"',
+                        ]
+                    ),
+                },
+                {
+                    "name": "Record candidate artifact hashes and provenance",
+                    "shell": "bash",
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-core-manifest.sha256",
+                            'test "$(git rev-parse HEAD)" = "$GITHUB_SHA"',
+                            "python - <<'PY'",
+                            "import json, os, subprocess",
+                            "source_sha = os.environ['GITHUB_SHA']",
+                            "source_tree = subprocess.check_output(['git', 'rev-parse', f'{source_sha}^{{tree}}'], text=True).strip()",
+                            "receipt = {",
+                            "    'source_sha': source_sha,",
+                            "    'source_tree': source_tree,",
+                            "    'workflow_run_id': os.environ['GITHUB_RUN_ID'],",
+                            "    'workflow_run_attempt': int(os.environ['GITHUB_RUN_ATTEMPT']),",
+                            "    'event_name': os.environ['GITHUB_EVENT_NAME'],",
+                            "    'ref': os.environ['GITHUB_REF'],",
+                            "}",
+                            "with open('dist/actions-core-candidate-provenance.json', 'w', encoding='utf-8') as output:",
+                            "    json.dump(receipt, output, indent=2, sort_keys=True)",
+                            "    output.write('\\n')",
+                            "PY",
+                        ]
+                    ),
+                },
+                {
+                    "name": "Upload verified Core candidate artifacts",
+                    "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                    "with": {
+                        "name": "actions-core-candidate-dist",
+                        "path": "actions/dist",
+                        "if-no-files-found": "error",
+                    },
+                },
+            ],
+        }
+        return {"jobs": jobs}
 
 
 class HttpHelperTests(BaseTests):
