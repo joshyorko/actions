@@ -1,4 +1,4 @@
-"""Fail closed unless all ten frozen catalog rollback, drain, and multi-package sync cases passed."""
+"""Fail closed unless all eleven frozen catalog, drain, sync, and history cases passed."""
 
 from __future__ import annotations
 
@@ -48,6 +48,10 @@ EXPECTED_CASES = {
         "tests.action_server_tests.test_cli_multi_package_sync",
         "test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers",
     ),
+    (
+        "tests.action_server_tests.test_cli_mcp_resource_history",
+        "test_cli_resource_owner_history_across_reload_and_restart",
+    ),
 }
 
 
@@ -65,9 +69,9 @@ def main() -> int:
     failures = sum(len(case.findall("failure")) for case in cases)
     errors = sum(len(case.findall("error")) for case in cases)
     skipped = sum(len(case.findall("skipped")) for case in cases)
-    if names != EXPECTED_CASES or len(cases) != 10 or failures or errors or skipped:
+    if names != EXPECTED_CASES or len(cases) != 11 or failures or errors or skipped:
         raise SystemExit(
-            "frozen catalog JUnit result did not contain exactly ten passing expected cases"
+            "frozen catalog JUnit result did not contain exactly eleven passing expected cases"
         )
     args.output.write_text(
         json.dumps(

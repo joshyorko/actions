@@ -47,6 +47,8 @@ This workflow invokes Poetry from a `uv run` tool environment. Remove the inheri
 
 The successful-generation drain test was added as the fifth case in the frozen workflow. Hosted run 38050870256 passed all five cases against candidate 31239cf9 and its same-tree build 056d3260; it recorded the managed workers, v2 completion while v1 was blocked, v1's original result, and natural shutdown. This historical receipt does not cover the later catalog-ownership migration in PR289. The ten-case control adds all five multi-package sync CLI cases, including alias-capture rejection/recovery, and passed in hosted run 38055229055 against the measured c782 native artifact. Source-mode results and artifact provenance remain separate from that execution receipt. Run 38042374430 remains the separate historical four-case receipt. Do not infer frozen alias recovery from source-mode pytest or from the earlier candidate's five-case run.
 
+The resource-owner history CLI case is selected as a separate eleventh node in the prepared control, covering concrete URI ownership across reload and restart. Frozen execution for that node is **NOT RUN**: the ten-case receipt above predates the resource-history implementation and does not cover it. Use a newly measured artifact bound to the final Runtime source/dependency inputs before claiming frozen acceptance.
+
 ## Release process
 
 To release a new version use `inv` commands (in the `/action_server` directory):

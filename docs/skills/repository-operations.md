@@ -2813,6 +2813,12 @@ build tree and unchanged Runtime source/dependency inputs; rebuild if those inpu
 change. The five-case receipt above remains evidence only for candidate `31239cf9`
 and must not be carried forward as migration proof.
 
+When extending a frozen acceptance set, update the exact pytest node selection,
+JUnit allowlist/count, validator contract fixture, and generated workflow together.
+A prior hosted receipt proves only its recorded nodes; a newly added Runtime
+behavior needs an artifact built from the final Runtime source/dependency inputs
+and a new frozen execution receipt. Source-mode CLI coverage is separate evidence.
+
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
 the Poetry/Invoke command with `VIRTUAL_ENV` unset, then explicitly check the

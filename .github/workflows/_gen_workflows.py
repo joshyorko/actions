@@ -693,7 +693,7 @@ class ActionServerTests(BaseTests):
 
 
 class ActionServerFrozenCatalogRollback(BaseWorkflow):
-    """Run catalog rollback, generation drain, and all multi-package sync cases on Linux."""
+    """Run frozen rollback, generation drain, sync, and resource-history cases on Linux."""
 
     name = "Actions Runtime Frozen Catalog Rollback"
     target = "actions_runtime_frozen_catalog_rollback.yml"
@@ -713,6 +713,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "test/frozen-catalog-rollback-20261010",
                         "test/frozen-generation-drain-20261010",
                         "test/mcp-alias-frozen-control-20261010",
+                        "test/frozen-control-resource-history-20261010",
                     ],
                     "paths": [
                         ".github/workflows/_gen_workflows.py",
@@ -723,6 +724,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
                         "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py",
                         "action_server/tests/action_server_tests/test_cli_multi_package_sync.py",
+                        "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
                         "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
                         "action_server/docs/DEVELOPMENT.md",
                     ],
@@ -818,7 +820,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                 "run": "uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0 env -u VIRTUAL_ENV inv devinstall",
             },
             {
-                "name": "Run frozen rollback, drain, and multi-package sync acceptance",
+                "name": "Run frozen rollback, drain, sync, and resource-history acceptance",
                 "id": "acceptance",
                 "shell": "bash",
                 "env": {
@@ -839,6 +841,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers \\",
                         "  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot \\",
                         "  tests/action_server_tests/test_cli_multi_package_sync.py \\",
+                        "  tests/action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart \\",
                         '  --junitxml="$RUNNER_TEMP/frozen-catalog-junit.xml" 2>&1 | tee "$RUNNER_TEMP/frozen-catalog-test.log"',
                         "test_status=${PIPESTATUS[0]}",
                         'if [ "$test_status" -eq 0 ]; then uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_junit.py \\',
