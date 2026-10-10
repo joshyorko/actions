@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-09T23:28:00Z",
+  "observed_at": "2026-10-10T00:16:55Z",
   "status": "ACTIVE engineering checkpoint at 2026-10-10T00:16:55Z: 15 of 21 scoped PRs are integrated to their recorded targets; 6 remain open/blocked and 0 are merge-ready. Community is 36b8192d and integration/PR221 is 77e67de3. PR221 exact-head checks pass except publication steps skipped. PR256 source review is bounded ACCEPT at dc205182; Linux frozen/Go-wrapper and Windows frozen pass, Windows Go-wrapper fails its manifest/build-input hash check, and macOS UI steps are skipped. The existing owner is porting a narrow correction against 77e; focused tests are reported pass, configured full suite pending. Helper1.0.3/Core1.0.2 are published; Runtime/native1.0.3 is held and unpublished. No whole-issue acceptance changed. Current next-action pointer only: PR256 head b676daf3 run38008430418 is in progress; the earlier dc205 Windows Go-wrapper failure remains bound to that predecessor.",
   "integration_head": "77e67de36606ac4cb958874249a61ceff79dcd01",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
