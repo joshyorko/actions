@@ -217,3 +217,4 @@ docs/program/evidence/wave4-convergence-20261010T2045Z/**/*.log -diff -whitespac
 # Closure-audit JSON/CSV/excerpts are checked against immutable SHA256 manifests.
 docs/program/evidence/issue-closure-audit-20261010/** -text
 docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.csv whitespace=cr-at-eol
+docs/program/evidence/issue-closure-ledger-readback-20261010.json -text
