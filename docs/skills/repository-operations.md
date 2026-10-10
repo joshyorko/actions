@@ -1539,6 +1539,11 @@ locked Playwright Chromium with `npx playwright install chromium` from
 `action_server/frontend` after the portable tests and before integration tests;
 the preceding frontend build has already run `npm ci` and this install must not
 duplicate that build or alter credentials.
+The same OS matrix runs `go test process.go process_test.go` before packaging,
+with the installed Go toolchain and module downloads disabled. These standard-
+library subprocess tests cover wrapper child ownership and exit handling;
+the POSIX signal cases skip Windows. They supplement, rather than replace,
+the later tests against the built wrapper and its frozen Runtime children.
 
 The generic `inv test-binary` selects
 `integration_test and not native_artifact_test`. The three exact-artifact

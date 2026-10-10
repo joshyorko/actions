@@ -646,6 +646,12 @@ class ActionServerTests(BaseTests):
     @override
     def run_tests(self):
         return [
+            {
+                "name": "Test Go wrapper child lifecycle",
+                "working-directory": "action_server/go-wrapper",
+                "env": {"GOTOOLCHAIN": "local", "GOPROXY": "off"},
+                "run": "go test process.go process_test.go",
+            },
             # As we want to run the tests in the binary, we do the following:
             # 1. Build the binary
             # 2. Run the unit-tests (not integration) in the current environment
