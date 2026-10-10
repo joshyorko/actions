@@ -1,5 +1,19 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
+## Current convergence — 2026-10-10T03:42:00Z
+
+The 28-PR cohort remains 20 target-integrated, 8 open/blocked and 0 merge-ready. Integration is `6d438feb6c92f8bb01428f665ac423fb101b4017`; community is `36b8192dbb8143e016af3351f7d25b22a35c9944`. PR273 head `6ece09c4` and its synthetic merge `ccf6e064` have tree `a560aceae`. Exact-head workflows remain in progress. See the [03:42 receipt](evidence/convergence-followup-20261010T0342Z.json) and the [03:41 PR audit](evidence/convergence-live-prs-20261010T0341Z.json).
+
+Root authorized one diagnostic-only instrumented RCC rerun by the existing owner, pending execution. It must separate cleanup/helper/CLI/interpreter-finalization returns; it does not change production code or dependencies and cannot be treated as release PASS. Preserve the earlier uninstrumented natural exit `-11` failure. Current independent Windows archive-byte review remains blocked. No issue acceptance or publication changed.
+
+## Historical convergence snapshot — 2026-10-10T03:41:00Z (superseded by the 2026-10-10T03:42:00Z amendment)
+
+The 28-PR cohort is 20 target-integrated, 8 open/blocked and 0 merge-ready. Community is `36b8192dbb8143e016af3351f7d25b22a35c9944`; integration is `6d438feb6c92f8bb01428f665ac423fb101b4017` (tree `92e79c92f2f64585cbe66f068f5757f205fbe976`); Runtime candidate is `6a53578fac029a0696834c30438c858f5f0003be`. All 54 issue contracts and whole-issue stage counts remain unchanged. See the [dated receipt](evidence/convergence-followup-20261010T0341Z.json), [current PR audit](evidence/convergence-live-prs-20261010T0341Z.json), and [ref readback](evidence/convergence-refs-20261010T0341Z.json). The corrected [03:37 ancestry audit](evidence/open-pr-convergence-audit-20261010T0337Z.json) is also retained.
+
+PR273 is open and mergeable at `6ece09c439d12e02bcbde9dcd2164956b97829e2`. Its tree `a560aceae1fe26726989c5c17803bde477a26060` matches a fresh synthetic merge against current integration. Sol accepted the bounded source correction; root reports 41 local tests PASS with 4 integration tests deselected. At 2026-10-10T03:41:00Z, the exact-head Runtime (`38021120834`), native (`38021120872`), wheel retry (`38021120824`), RCC toolkit (`38021120806`) and coverage (`38021120812`) workflows were still running. The first wheel attempt failed during `wcwidth 0.8.2` download with a BrokenPipe/ProtocolError transport failure; it is retained separately while the authorized retry proceeds. Verification succeeded with publish skipped; publication was not performed.
+
+The separate native reviewer still reports that the Windows frozen/Go RCC binary is missing from its independent archive proof, so workflow green alone cannot clear release admission. PR272's corrected current body says its `969219e7` source is already in PR273; its HTTP-shutdown-200/natural-exit-`-11` probe remains FAIL. PR278 is also contained in the current PR273 candidate. PR215–218 source heads are ancestors of integration, not community; no duplicate cherry-pick is needed. Runtime/native 1.0.3 is unpublished. No upstream defect or new whole-issue acceptance is asserted.
+
 ## Current convergence — 2026-10-10T03:10:33Z
 
 The 28-PR cohort is 20 integrated to their recorded targets, 8 open/blocked and 0 merge-ready. Community is `36b8192dbb8143e016af3351f7d25b22a35c9944`; integration is `6d438feb6c92f8bb01428f665ac423fb101b4017` (tree `92e79c92f2f64585cbe66f068f5757f205fbe976`); Runtime candidate is `6a53578fac029a0696834c30438c858f5f0003be`. See the [dated receipt](evidence/convergence-followup-20261010T0310Z.json), [live PR audit](evidence/convergence-live-prs-20261010T0310Z.json), and [ref readback](evidence/convergence-refs-20261010T0310Z.json). The ledger retains all 54 contracts, 53 open, #210 accepted/closed, zero whole-issue review-ready, and unchanged stage counts.
