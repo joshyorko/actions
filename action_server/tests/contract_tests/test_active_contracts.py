@@ -220,6 +220,10 @@ def _private_core_imports(source: str) -> list[int]:
     return violations
 
 
+def _private_core_imports_in_file(path: Path) -> list[int]:
+    return _private_core_imports(path.read_text(encoding="utf-8"))
+
+
 @pytest.mark.parametrize(
     "source",
     [
@@ -263,7 +267,7 @@ def test_runtime_imports_core_only_through_public_modules():
     for path in sorted(source_root.rglob("*.py")):
         violations.extend(
             f"{path.relative_to(REPO)}:{line}"
-            for line in _private_core_imports(path.read_text())
+            for line in _private_core_imports_in_file(path)
         )
 
     assert not violations, "Runtime imports Core-private modules:\n" + "\n".join(
@@ -271,9 +275,26 @@ def test_runtime_imports_core_only_through_public_modules():
     )
 
 
+def test_runtime_import_scan_decodes_utf8_source(tmp_path: Path):
+    source = tmp_path / "unicode.py"
+    source.write_bytes("# \u038f\n".encode("utf-8"))
+
+    assert _private_core_imports_in_file(source) == []
+
+
 def test_template_package_script_is_executable_for_direct_workflow_invocation():
     script = REPO / "templates/packaging/create-templates-package.sh"
-    assert script.stat().st_mode & stat.S_IXUSR, script
+    relative_script = script.relative_to(REPO).as_posix()
+    tracked_mode = subprocess.run(
+        ["git", "ls-files", "--stage", "--", relative_script],
+        cwd=REPO,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.split(maxsplit=1)[0]
+    assert tracked_mode == "100755", str(script)
+    if os.name != "nt":
+        assert script.stat().st_mode & stat.S_IXUSR, str(script)
 
     for workflow_name, config_name in (
         ("deploy-beta-templates.yml", "templates-beta.json"),

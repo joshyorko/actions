@@ -354,7 +354,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
         # Arrange
         violations = [
             ImportViolation(
-                file_path=Path("src/core/Dashboard.tsx"),
+                file_path=Path(r"src\core\Dashboard.tsx"),
                 line_number=3,
                 import_statement="import { Button } from '@sema4ai/components';",
                 prohibited_module="@sema4ai/components",
@@ -368,6 +368,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
 
         # Assert
         assert "src/core/Dashboard.tsx:3" in report
+        assert r"src\core\Dashboard.tsx:3" not in report
         assert "@sema4ai/components" in report
         assert "error" in report.lower()
 

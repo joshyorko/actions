@@ -166,8 +166,8 @@ class TreeShaker:
 
         for violation in violations:
             file_path = violation.file_path
-            if isinstance(file_path, Path):
-                file_path = str(file_path)
+            # Reports are portable diagnostics even when generated on Windows.
+            file_path = str(file_path).replace("\\", "/")
 
             report_lines.append(
                 f"  {file_path}:{violation.line_number} - "
