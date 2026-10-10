@@ -134,6 +134,8 @@ HMAC authorization header, and JSON output. This preserves CLI and
 request-signing coverage without requiring a Control Room secret or claiming
 hosted-service acceptance; use a separate explicitly configured acceptance
 test when the real provider behavior is the subject.
+The current fixture is single-page (`has_more: false`); it does not exercise
+the `has_more`/`next` pagination branch in `list_organizations`.
 
 The locked MCP Python SDK 2.0.0 validates authorization-server issuer URLs as
 HTTPS, allowing HTTP only for localhost and loopback IPs, and rejects issuer
@@ -172,7 +174,12 @@ Windows permissions. Native Windows ACL behavior remains unverified.
 The [community issue ledger](../program/community-program-ledger.md) retains
 every open issue's full acceptance body and comments in its machine-readable
 companion. A checkpoint PR or green workflow establishes only the exact tested
-slice, not whole issue acceptance. Keep source, installed-wheel, native,
+slice, not whole issue acceptance. When a consumer is not implemented yet,
+evaluate its prerequisites using the producer's scoped evidence; the consumer's
+own integration test is an acceptance gate for that implementation, not a
+precondition to creating it. Refresh stale graph reasons through a dated current
+projection while preserving original contract hashes and archived contract bytes.
+Keep source, installed-wheel, native,
 packaged-browser and published-artifact receipts separate, recording the exact
 candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
 publication success. Recheck dependency sequencing against each retained
@@ -2093,6 +2100,22 @@ Linux path-construction proof does not replace hosted Windows execution.
 The CLI lifecycle regressions in `test_cli_multi_package_sync.py` exercise
 additive imports, complete desired-set synchronization, real HTTP/MCP calls,
 controlled stop/restart, failed admission, and corrected-source recovery.
+The public-decorator regression `test_cli_mcp_catalog_rollback.py` rejects
+duplicate resource URIs, resource-template URIs, and prompt names across a
+complete candidate package set through real unmanaged CLI/Runtime subprocesses.
+Its candidate changes package A and adds colliding C while omitting previously
+admitted B. Each case checks unchanged Action/ActionPackage rows, old included
+source bytes, and snapshot-store contents, then restarts without synchronization
+and checks identical tools/resources/templates/prompts catalogs and revisions
+plus old HTTP/MCP execution. On the affected baseline, per-package synchronization
+disabled A and B before the final catalog was built, erased the duplicate, and
+started a server instead of rejecting the batch. Duplicate-key checks must run
+against the complete desired catalog before committing replacements or omissions;
+helper-only collision tests do not prove that boundary. This source-subprocess
+proof uses installed Core 1.0.2; frozen and managed-RCC acceptance remain separate.
+Compatibility for previously discovered tool aliases across catalog changes
+remains open.
+
 Additive reimports that omit an enabled action fail before publication: retaining
 its old catalog record while replacing its source would advertise an
 unexecutable capability. Explicit desired-set sync is the removal operation.
