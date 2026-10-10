@@ -226,7 +226,15 @@ that is null is not evidence of either access level. Before creating worktrees,
 verify machine, Git root/origin, exact approved base, intended branch, and any
 existing target path's branch/HEAD/dirty state; preserve rather than reset an
 existing checkout. Keep the CAS machine target separate from the repository
-checkout and worker CWD. Give each mutation a unique request ID; after a timeout
+checkout and worker CWD. CAS thread creation and continuation accept an explicit
+absolute `cwd`; that binds execution to a directory but does not create or
+validate a Git worktree. The remote coordinator must first create or reconcile
+one distinct Actions worktree and branch per writer, then pass that verified
+path on the native thread request. Reserve `/workspaces/cas-worker-01` for CAS
+bootstrap code; Actions workers use `/workspaces/actions-worktrees/<worker>`
+backed by `/workspaces/actions`. A failed workspace must recover and its
+existing threads be reconciled before any dispatch; changing `cwd` cannot
+repair workspace readiness. Give each mutation a unique request ID; after a timeout
 or HTTP 502, discover its exact thread/request and CWD before retrying, and
 reconcile an already-active mutation instead of replaying it. Record worktree
 cleanliness as a timestamped observation. Native user authorization does not
