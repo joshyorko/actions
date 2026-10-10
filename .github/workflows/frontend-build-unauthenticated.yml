@@ -178,7 +178,7 @@ jobs:
         env:
           DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
-          python - <<'PY'
+          uv run --no-project --python 3.12 python - <<'PY'
           import os
           from pathlib import Path
 
@@ -186,7 +186,7 @@ jobs:
           wheel_dir.mkdir(parents=True, exist_ok=False)
           PY
           uv run --no-project --python 3.12 poetry build --format wheel --output "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}/wheels"
-          python - <<'PY'
+          uv run --no-project --python 3.12 python - <<'PY'
           import email
           import os
           import tomllib
