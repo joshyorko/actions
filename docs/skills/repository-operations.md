@@ -475,7 +475,9 @@ disables source maps, and is checked by `npm run validate:artifacts` against a
 the canonical shipped-payload inventory: retained `artifact-manifest.json` and
 `sbom.json` metadata are excluded from that budget. The hosted frontend build
 must invoke this same dual-root validator rather than recursively summing a
-`dist` directory.
+`dist` directory. Windows integration tests must resolve npm and invoke its
+`npm-cli.js` through the resolved Node executable; `npm.cmd` is a batch file and
+cannot be launched as a normal `subprocess.run` executable without a shell.
 The JavaScript and Python validators independently enumerate shipped files and
 structural directories, require sorted normalized relative paths with an exact
 directory inventory, and
@@ -2160,6 +2162,10 @@ for `--api-key`, in both separate and equals forms. HTTP header names are
 case-insensitive; the actual Uvicorn DEBUG handshake lowercases incoming
 Cookie headers. Exercise the real assembled server with DEBUG transport enabled
 when validating redaction, and prove its handshake/echo before inspecting logs.
+The assembled child test fixes `PYTHONIOENCODING=utf-8`, captures redirected
+stdout/stderr as bytes, and decodes those streams and the UTF-8 rotating log
+explicitly before checking for credentials. Do not rely on Windows' default
+text encoding or weaken the credential assertions with replacement decoding.
 Proxy redirects must replace only automatically generated Host headers for the
 new destination while retaining explicit caller Host intent and normal urllib3
 cross-host credential stripping, including 303 method changes.
