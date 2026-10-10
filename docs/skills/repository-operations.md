@@ -1913,13 +1913,22 @@ old-generation workers non-reusable only after successful warmup, and restores
 the old routing/idle generation if preparation fails; old workers remain leased
 until their call completes and the wrapper is reaped.
 
-Auto-reload prepares the process generation before changing HTTP/MCP action
-routes. Route and pool updates are serialized as one generation transition;
+Auto-reload validates the complete HTTP/MCP route candidate before preparing
+the process generation. Package metadata collection precedes the database
+writer lock; desired-set catalog writes commit together, and public route
+publication follows that commit. A failed database commit rolls back the
+connection and restores the staged process generation. Each HTTP/MCP catalog
+is replaced as a complete snapshot; this does not promise simultaneous reads
+across the database, HTTP and MCP surfaces. Reload updates are serialized;
 each registered handler captures its process-generation token and package, so a
 request admitted through an old route cannot look up a new pool generation
 after reload. If route registration fails, the prior route snapshot and
 process generation are restored and the watcher reports an unsuccessful
-reload. The reload lock alone does not provide this request-level pinning.
+reload. The reload lock alone does not provide this request-level pinning. The independent
+`test_p0_snapshot_reload_boundaries.py` exercises the actual route/pool
+compensation closure after nondurable SQLite commit failure with
+`min_processes=0`; it does not prove warmed RCC worker compensation or
+external-service rollback.
 
 Scheduled executions capture the current process-pool object, generation token,
 and ActionPackage before dispatching their worker thread; a reload that replaces
@@ -2032,8 +2041,22 @@ replace it with a cache descriptor bound to that policy, and direct execution
 fails clearly until that context is established. The unit boundary is covered
 by `test_rcc_runtime_adapter.py`.
 
-For explicit spec-v2 RCC provider mode, Action Server snapshots the package
-source before metadata import. RCC receives the selected snapshot's
+Action Server snapshots package source before metadata import, including
+unmanaged and legacy packages. It validates the source identity again after
+metadata collection and rejects collection that altered included source files.
+Runtime state is excluded even when the datadir is inside the package; when it
+is the package root, reserved Runtime-owned names and configured database and
+artifact paths are excluded. Internal `pythonpath` entries use snapshot files;
+external entries retain their original location and remain outside the
+last-good source guarantee. Old generations are retained, not pruned on import.
+The CLI lifecycle regressions in `test_cli_multi_package_sync.py` exercise
+additive imports, complete desired-set synchronization, real HTTP/MCP calls,
+controlled stop/restart, failed admission, and corrected-source recovery.
+Additive reimports that omit an enabled action fail before publication: retaining
+its old catalog record while replacing its source would advertise an
+unexecutable capability. Explicit desired-set sync is the removal operation.
+
+For explicit spec-v2 RCC provider mode, RCC receives the selected snapshot's
 `package.yaml` for environment fingerprinting and publish; the original
 absolute `package.yaml` path is passed separately as `environment_identity` for
 cache reuse. RCC therefore reads the same package configuration paired with the
