@@ -727,18 +727,46 @@ and independent of database order. `ActionPackage.name` has a database unique
 index and identifies package imports/updates; UUIDs and filesystem paths do not
 enter alias generation.
 
-MCP tool names identify the current admitted catalog only. Adding, removing,
-disabling, or filtering colliding tools can change another tool's advertised
-name. A generated alias such as `package_a__do_it` can later identify a literal
-action with that name in another package; a stale call can execute that different
-action. Clients must rediscover the current catalog instead of retaining aliases
-across catalog changes. `actions.catalogRevision` supports rediscovery but is
-not a call precondition. It fingerprints advertised descriptors, so implementation
-changes with identical descriptors preserve it. Generated alias text is neither
-a durable action identity nor an authorization grant: serving whitelists match
-original package/action identities before alias resolution. Safe identity
-compatibility for previously discovered aliases across changing catalogs is not
-implemented; current-catalog determinism does not establish that guarantee.
+MCP names remain deterministic functions of the complete admitted action set;
+reservation history never changes an advertised alias or descriptor fingerprint.
+Before admission, Runtime checks durable ownership of exact public tool names,
+resource URIs, resource-template strings, and prompt names in the existing
+catalog database. Each namespace/key belongs to its original
+`(ActionPackage.name, Action.name)` pair. Disabled, omitted, filtered, or deleted
+actions leave reservations behind. A candidate that would reassign a reserved
+key to another pair is rejected before publication. Rename the conflicting
+action or public key and retry the complete update; transactional import/reload
+failure retains the previous database, catalog, and executable generation.
+This deliberately rejects unsafe updates rather than assigning history-dependent
+fallback names, preserving equivalent admitted catalogs across replicas.
+
+The `mcp_catalog_name` table is part of the existing database and migration
+lifecycle. Admission acquires the SQLite writer or PostgreSQL table lock before
+reading the catalog/history, validates the complete candidate, and persists new
+reservations in the same transaction. Indexed IDs are fixed-size SHA-256 digests
+of domain-separated JSON namespace/key pairs; exact namespace/key text is also
+stored and a digest collision fails admission. No public-key length limit is
+introduced. The four namespaces are separate. Restart or another process using
+the same database retains ownership; a fresh/replaced database has no such
+history. Migration 13 starts with empty history and cannot reconstruct unknown
+pre-upgrade advertisements. Clients must rediscover on upgrade and after catalog
+changes. This guarantee covers recorded admissions, not arbitrary earlier names.
+
+Retired keys do not forward calls to hidden or disabled actions. Unavailable
+tools return `isError` with `tools/list` guidance; unavailable resources/prompts
+return protocol errors naming their discovery methods. `actions.catalogRevision`
+is a descriptor fingerprint, not a call precondition or authorization grant;
+identical descriptors preserve it, and a call already admitted against an old
+catalog can finish on that generation. Serving whitelists and authentication
+still apply to original package/action identities. External alias-keyed grants
+are not established by reservations.
+
+Exact template-string ownership does not prevent different templates from
+matching the same concrete URI. For example, `example://{tenant}/item` and
+`example://acme/{resource}` both match `example://acme/item`; retiring one and
+admitting the other can change that concrete read's target. This observed
+cross-template matching ambiguity remains outside the exact-key guard and needs
+separate policy before claiming durable identity for every concrete resource URI.
 
 HTTP paths, action display names, metadata, and dispatch
 targets remain tied to their original package/action. Resource URI and prompt
@@ -2213,12 +2241,17 @@ Duplicate-key checks must run
 against the complete desired catalog before committing replacements or omissions;
 helper-only collision tests do not prove that boundary. This source-subprocess
 proof was executed with installed Core 1.0.2; frozen and managed-RCC acceptance
-remain separate. Tool aliases identify capabilities within the current catalog;
-clients must rediscover after catalog changes. Deterministic current names,
-TTL-zero/private catalogs and the shared descriptor fingerprint support this
-policy, but do not preserve historical alias identity or fence a call against a
-concurrent catalog revision. A formerly qualified alias can become a literal
-action's name. External alias-keyed authorization grants are not covered.
+remain separate. The historical-identity regression in
+`mcp/test_alias_history.py` covers exact public keys with mounted MCP calls,
+retirement diagnostics, transactional rejection/rename recovery, restart,
+unchanged descriptor revisions across unrelated histories, and two real SQLite
+processes allocating an initially empty history. The same transition has a CLI
+case in `test_cli_multi_package_sync.py` that honors
+`SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE`; run it against the actual
+new candidate artifact, since older frozen artifacts cannot prove this repair.
+The permanent exact-key admission guard above preserves historical ownership
+without changing deterministic current-set names. It does not fence calls by
+catalog revision or solve overlapping resource-template matching.
 
 `test_cli_live_reload_multi_package.py` exercises actual unmanaged two-package
 watched failure and recovery. After malformed decorated B is rejected, it checks

@@ -65,6 +65,19 @@ class Action:  # Table name: action
     options: str = ""
 
 
+@dataclass
+class McpCatalogName:
+    """Permanent ownership of exact MCP keys, including retired keys."""
+
+    id: str  # Fixed-size digest of [namespace, name]; never recycled.
+    _db_rules.unique_indexes.add("McpCatalogName.id")
+
+    namespace: str
+    name: str
+    package_name: str
+    action_name: str
+
+
 RUN_ID_COUNTER = "run_id"
 ALL_COUNTERS = (RUN_ID_COUNTER,)
 
@@ -436,6 +449,7 @@ def get_all_model_classes():
         Migration,
         ActionPackage,
         Action,
+        McpCatalogName,
         Run,
         Counter,
         UserSession,

@@ -421,7 +421,7 @@ def test_forward_schema_repair_aborts_on_archive_collision_and_retries(
 
 
 def test_forward_schema_repair_is_registered_after_historical_migration_nine():
-    assert CURRENT_VERSION == 12
+    assert CURRENT_VERSION >= 12
     assert MIGRATION_ID_TO_NAME[9] == "add_robot_run_columns"
     assert MIGRATION_ID_TO_NAME[12] == "reconcile_run_columns"
 

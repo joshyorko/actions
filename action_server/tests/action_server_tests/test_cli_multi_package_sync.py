@@ -565,3 +565,73 @@ def test_failed_sync_keeps_last_good_unmanaged_package_sources(tmp_path):
             assert asyncio.run(_call_mcp_tool(process, mcp_name)) == expected
     finally:
         _stop_naturally(process)
+
+
+@pytest.mark.integration_test
+def test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers(tmp_path):
+    """Exercise the candidate CLI, including the native executable override."""
+    from actions.server._selftest import actions_server_run
+
+    package_a = tmp_path / "package_a"
+    package_b = tmp_path / "package_b"
+    package_c = tmp_path / "package_c"
+    _write_actions(package_a, {"do_it": "A-original"})
+    _write_actions(package_b, {"do_it": "B-original"})
+    _write_actions(package_c, {"package_a__do_it": "C-capture"})
+    datadir = tmp_path / "runtime-data"
+    process = _start_sync(datadir, tmp_path, (package_a, package_b))
+    try:
+        assert "package_a__do_it" in asyncio.run(_mcp_tool_names(process))
+        assert asyncio.run(_call_mcp_tool(process, "package_a__do_it")) == "A-original"
+    finally:
+        _stop_naturally(process)
+    previous = _action_states(datadir)
+
+    rejected = actions_server_run(
+        [
+            "start",
+            "--actions-sync=true",
+            f"--dir={package_a}",
+            f"--dir={package_c}",
+            "--db-file=shared.sqlite",
+            f"--datadir={datadir}",
+            "--skip-lint",
+        ],
+        returncode=1,
+        cwd=tmp_path,
+        timeout=60,
+    )
+    diagnostic = "\n".join(
+        value.decode("utf-8", errors="replace")
+        if isinstance(value, bytes)
+        else value or ""
+        for value in (rejected.stdout, rejected.stderr)
+    )
+    assert "reserved" in diagnostic and "package_a__do_it" in diagnostic
+    assert _action_states(datadir) == previous
+    process = _start_existing_imports(datadir, tmp_path)
+    try:
+        assert asyncio.run(_call_mcp_tool(process, "package_a__do_it")) == "A-original"
+    finally:
+        _stop_naturally(process)
+
+    _write_actions(package_c, {"renamed_action": "C-corrected"})
+    process = _start_sync(datadir, tmp_path, (package_a, package_c))
+    try:
+        assert asyncio.run(_mcp_tool_names(process)) == {"do_it", "renamed_action"}
+        assert asyncio.run(_call_mcp_tool(process, "do_it")) == "A-original"
+        assert asyncio.run(_call_mcp_tool(process, "renamed_action")) == "C-corrected"
+
+        async def stale_call():
+            async with process.mcp_client() as session:
+                result = await session.call_tool("package_a__do_it", {})
+                from mcp.types import TextContent
+
+                assert result.is_error
+                content = result.content[0]
+                assert isinstance(content, TextContent)
+                assert "tools/list" in content.text
+
+        asyncio.run(stale_call())
+    finally:
+        _stop_naturally(process)
