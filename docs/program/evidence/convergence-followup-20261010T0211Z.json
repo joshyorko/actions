@@ -1,0 +1,137 @@
+{
+  "observed_at_utc": "2026-10-10T02:11:20Z",
+  "repository": "joshyorko/actions",
+  "cohort": {
+    "items": 28,
+    "target_integrated": 16,
+    "open_blocked": 12,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278
+    ]
+  },
+  "refs": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "46a06485f776265e64e84629c468f26b4389d2bd",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "release_ready": false,
+    "source": "current git ls-remote readback at approximately 02:11 UTC"
+  },
+  "current_candidate": {
+    "pr": 273,
+    "head": "7f233e2a9a18866f3bb04aca1f3f9155b96e889b",
+    "tree": "4f6880df0413bfd578af432ee6c7770560b1904c",
+    "base": "integration/community-release-20261008",
+    "base_head": "46a06485f776265e64e84629c468f26b4389d2bd",
+    "draft": true,
+    "mergeable": true,
+    "workflow_observations": [
+      {
+        "run": 38015195279,
+        "status": "SUCCESS on Windows, macOS and Linux",
+        "jobs": {
+          "linux": 114103799063,
+          "windows": 114103798833,
+          "macos": 114103799082
+        },
+        "scope": "Native build and browser/consumer acceptance; both packaged Work Items frozen and Go-wrapper UI steps passed on all three OSes. Workflow-reported receipt only; independent artifact-byte validation is pending."
+      },
+      {
+        "run": 38015195328,
+        "status": "SUCCESS",
+        "jobs": [
+          114103799132,
+          114103799215,
+          114103799232,
+          114103799236,
+          114103799280,
+          114103799309
+        ],
+        "scope": "RCC developer toolkit primary and N-1 jobs across Linux, macOS and Windows."
+      },
+      {
+        "run": 38015195327,
+        "observed_at_utc": "2026-10-10T02:11:00Z",
+        "linux_job": {
+          "id": 114103799121,
+          "status": "FAILURE",
+          "failed_step": "Test (integration)",
+          "summary": {
+            "failed": 7,
+            "passed": 112,
+            "skipped": 15,
+            "deselected": 827
+          }
+        },
+        "linux_failures": [
+          "action_server_tests/test_action_unicode.py::test_action_unicode \u2014 fixture differs under --force-regen",
+          "action_server_tests/test_cloud.py::test_cloud_list_organizations \u2014 required test credential absent",
+          "action_server_tests/test_server.py::test_import_no_conda \u2014 fixture differs under --force-regen",
+          "action_server_tests/test_server.py::test_server_full_openapi_flag \u2014 fixture differs under --force-regen",
+          "action_server_tests/test_server_parent_pid.py::test_mcp_sse_does_not_starve_server_or_sigterm \u2014 owned descendants remained after SIGTERM",
+          "action_server_tests/test_server_whitelist.py::test_whitelist_on_start \u2014 fixture differs under --force-regen",
+          "action_server_tests/test_server_whitelist.py::test_whitelist_on_start_run \u2014 fixture differs under --force-regen"
+        ],
+        "macos_job": {
+          "id": 114103799220,
+          "status": "IN_PROGRESS"
+        },
+        "windows_job": {
+          "id": 114103799272,
+          "status": "IN_PROGRESS"
+        },
+        "interpretation": "Configured Runtime validation is not passing; Linux has distinct fixture, credential, and owned-descendant failures. Do not collapse these into one environmental cause."
+      }
+    ],
+    "prior_run_failure_receipt": {
+      "path": "evidence/pr273-03c-runtime-failures-20261010.json",
+      "sha256": "8f52255c9c1e43386d360b73c5935f42f71bac7c37357746742ba5795a6cd314"
+    }
+  },
+  "issue_state": {
+    "whole_issue_acceptance_changed": false,
+    "issue_stage_counts_unchanged": true,
+    "runtime_native_1_0_3": "held and unpublished"
+  },
+  "upstream_disposition": "none; observed findings are in the Actions repository and no upstream RCC defect is established.",
+  "limits": [
+    "PR-target merges and PR cohort counts are not whole-issue acceptance.",
+    "Workflow-reported artifact checks do not establish independent artifact-byte retrieval/validation.",
+    "No Runtime/native publication or release readiness is established."
+  ],
+  "open_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261010T0211Z.json",
+    "sha256": "bccec098d85a09f08210d475abe92b5ab743b9f0cd9542c2878fd1d96e455582",
+    "open_count": 12,
+    "source": "Normalized exact GitHub PR metadata readback; details in linked audit."
+  }
+}
