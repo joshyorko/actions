@@ -12,7 +12,6 @@ import zipfile
 from email.parser import BytesParser
 from pathlib import Path
 
-
 TIMEOUT_SECONDS = 60
 
 
@@ -50,7 +49,9 @@ def verify(wheel):
     if wheel.suffix != ".whl" or not wheel.is_file():
         raise ValueError(f"expected an existing wheel: {wheel}")
     with zipfile.ZipFile(wheel) as archive:
-        metadata_paths = [name for name in archive.namelist() if name.endswith(".dist-info/METADATA")]
+        metadata_paths = [
+            name for name in archive.namelist() if name.endswith(".dist-info/METADATA")
+        ]
         if len(metadata_paths) != 1:
             raise ValueError("expected exactly one wheel METADATA file")
         expected = BytesParser().parsebytes(archive.read(metadata_paths[0]))
@@ -89,7 +90,10 @@ def verify(wheel):
                 environment,
             ).stdout
         )
-        if metadata["name"] != "actions-core" or metadata["version"] != expected["Version"]:
+        if (
+            metadata["name"] != "actions-core"
+            or metadata["version"] != expected["Version"]
+        ):
             raise AssertionError(f"unexpected installed distribution: {metadata!r}")
         scripts = [
             script for script in metadata["scripts"] if script["name"] == "actions"
@@ -126,6 +130,55 @@ def verify(wheel):
                 "assert integration.PluginManager is _plugin_manager.PluginManager; "
                 "assert integration.format_lint_results is _lint_action.format_lint_results",
             ],
+            fixture_dir,
+            environment,
+        )
+
+        mcp_metadata_probe = """
+import importlib.metadata as metadata
+import sys
+from pathlib import Path
+
+import actions
+from actions import _hooks
+from actions import mcp
+
+installed_root = Path(sys.prefix).resolve()
+assert actions.__version__ == metadata.version("actions-core")
+for module in (actions, mcp):
+    assert Path(module.__file__).resolve().is_relative_to(installed_root), module.__file__
+
+captured = []
+_hooks.on_action_func_found = lambda func, options: captured.append(options)
+
+def handler():
+    return "ok"
+
+tool_meta = {
+    "ui": {
+        "resourceUri": "ui://release-check/view",
+        "visibility": ["app"],
+    }
+}
+resource_meta = {"ui": {"csp": {"connectDomains": ["https://api.example.test"]}}}
+mcp.tool(meta=tool_meta)(handler)
+mcp.resource(
+    "ui://release-check/view",
+    mime_type="text/html;profile=mcp-app",
+    meta=resource_meta,
+)(handler)
+assert captured[0]["_meta"] == tool_meta, captured
+assert captured[1]["_meta"] == resource_meta, captured
+
+try:
+    mcp.tool(meta={"ui": {"resourceUri": "https://invalid.example/view"}})(handler)
+except ValueError:
+    pass
+else:
+    raise AssertionError("invalid MCP Apps metadata was accepted by the wheel")
+"""
+        _run(
+            [str(python), "-c", mcp_metadata_probe],
             fixture_dir,
             environment,
         )

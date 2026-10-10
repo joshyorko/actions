@@ -60,6 +60,18 @@ view/result lifecycle works, or a packaged Runtime release accepts it.
 
 ## Core and Runtime compatibility
 
+Actions Core pull requests run a non-publishing candidate-wheel gate on Ubuntu
+with the release-pinned Python 3.10 and Poetry 2.1.1 toolchain. It synchronizes
+the locked environment, builds the wheel and source archive, checks the exact
+artifact inventory and Twine metadata, then installs the wheel in a fresh
+environment and verifies the public API from outside the source tree. This is
+prepublication candidate evidence only: it does not prove that PyPI serves
+these bytes. After all checks pass, the gate retains the wheel and source
+archive with a SHA-256 manifest and source/run/attempt provenance as the
+`actions-core-candidate-dist` workflow artifact. That artifact supports exact
+candidate review; publication remains confined to the separately gated tag
+release.
+
 Core 1.0.1 does not contain `ActionContext`, `ActionsListActionTypedDict` or
 `actions.server_integration`; published Core 1.0.2 contains these public
 contracts. A Runtime importing them declares `actions-core ^1.0.2` in production
@@ -376,6 +388,11 @@ SHA-256 metadata together; source YAML changes alone do not update shipped templ
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
+For Core 1.0.3, the release verifier also exercises the public MCP Apps
+`actions.mcp.tool(meta=...)` and `actions.mcp.resource(meta=...)` APIs from the
+installed wheel, including metadata validation. Source tests or a private
+candidate wheel do not prove the registry-published Core version; verify the
+exact PyPI wheel in a fresh worker before admitting a template pin.
 A nonempty package-secret check proves presence only; it does not test PyPI
 authentication, token scope, upload, or publication. Keep those facts separate
 from a candidate wheel's index-resolution proof. For example, a fresh Core
