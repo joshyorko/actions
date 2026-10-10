@@ -13,7 +13,7 @@ import time
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, cast
 from urllib.parse import urlsplit
 
 import psutil
@@ -22,6 +22,17 @@ from ._community_expose import TunnelManager, TunnelProvider
 
 _STATE_NAME = "action-server-expose.json"
 _ACTIVE_MANAGER: TunnelManager | None = None
+
+
+def _posix_getuid() -> int:
+    # Typeshed omits POSIX-only os APIs during Windows platform checks. Calls
+    # remain behind the existing `os.name != "nt"` guards below.
+    return cast(Callable[[], int], getattr(os, "getuid"))()
+
+
+def _posix_fchmod(file_descriptor: int, mode: int) -> None:
+    # Keep the POSIX permission operation explicit without suppressing mypy.
+    cast(Callable[[int, int], None], getattr(os, "fchmod"))(file_descriptor, mode)
 
 
 @contextmanager
@@ -54,7 +65,7 @@ def _actions_home(*, create: bool) -> Path:
         if _is_reparse_point(metadata) or not stat.S_ISDIR(metadata.st_mode):
             raise RuntimeError("ACTIONS_HOME must be a real directory.")
         if os.name != "nt" and (
-            metadata.st_uid != os.getuid() or metadata.st_mode & 0o077
+            metadata.st_uid != _posix_getuid() or metadata.st_mode & 0o077
         ):
             raise RuntimeError("ACTIONS_HOME must be owned and private.")
     return home
@@ -106,7 +117,7 @@ def _read_state() -> dict[str, Any] | None:
             os.close(descriptor)
             return {"status": "failed", "reason": "state-path-invalid"}
         if os.name != "nt" and (
-            metadata.st_uid != os.getuid() or metadata.st_mode & 0o077
+            metadata.st_uid != _posix_getuid() or metadata.st_mode & 0o077
         ):
             os.close(descriptor)
             return {"status": "failed", "reason": "state-permissions-invalid"}
@@ -130,7 +141,7 @@ def _write_state(data: dict[str, Any]) -> None:
     fd, temporary = tempfile.mkstemp(prefix=f"{_STATE_NAME}.", dir=path.parent)
     try:
         if os.name != "nt":
-            os.fchmod(fd, 0o600)
+            _posix_fchmod(fd, 0o600)
         with os.fdopen(fd, "w", encoding="utf-8") as stream:
             json.dump(data, stream, sort_keys=True)
             stream.flush()
