@@ -19,8 +19,12 @@ workspace is present, it also sends compact Python JSON through the TypeScript
 test, validates and reserializes it there, then validates the returned JSON in
 Python and checks exact serialized-byte preservation. Local runs without Node or
 Vitest skip this bridge; the skip is NOT RUN, not a 100-B round-trip pass. The
-community frontend PR workflow runs the same Python test after `npm ci` with
+frontend PR workflow is configured for `community` and `integration/**` targets
+and runs the same Python test after `npm ci` with
 `ACTIONS_CANVAS_REQUIRE_ROUNDTRIP=1`, so a missing Node/Vitest bridge fails CI.
+Check event branch and path filters before treating backend/native green checks
+as complete frontend evidence: a required fixture round trip that never
+scheduled remains **NOT RUN**.
 
 The frontend test uses the directly pinned, test-only `ajv@8.17.1`
 Draft 2020-12 validator against that same JSON Schema. Its TypeScript dispatch

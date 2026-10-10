@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - "community"
+      - "integration/**"
     paths:
       - "action_server/frontend/**"
       - "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py"
