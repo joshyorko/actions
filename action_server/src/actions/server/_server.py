@@ -20,6 +20,8 @@ from ._protocols import ArgumentsNamespaceStart, IBeforeStartCallback
 if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
+    from .run_outputs.transport import RunOutputTransport
+
 log = logging.getLogger(__name__)
 
 
@@ -452,6 +454,8 @@ def start_server(
     start_args: ArgumentsNamespaceStart,
     api_key: str | None,
     before_start: Sequence[IBeforeStartCallback],
+    *,
+    run_output_transport: "RunOutputTransport | None" = None,
 ) -> None:
     import threading
     from dataclasses import asdict
@@ -549,6 +553,11 @@ def start_server(
         websocket_dependencies.append(Depends(verify_websocket_api_key))
 
     websocket_dependencies.append(Depends(verify_websocket_origin))
+
+    if run_output_transport is not None:
+        from .run_outputs.transport import install_run_output_transport
+
+        install_run_output_transport(app, run_output_transport, endpoint_dependencies)
 
     action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
     action_routes.setup_mcp_server(api_key)
