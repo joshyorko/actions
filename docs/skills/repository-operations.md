@@ -2946,6 +2946,14 @@ partial custom schemas must include the normalized Run models. Missing tables
 fail closed and must not trigger a legacy authorization fallback. Upgrading
 creates no synthetic pins or grants for historical Runs and preserves their
 status, result, inputs and artifact directory.
+
+Legacy Run API tests that replace the in-memory `RunsState` must implement
+`is_scoped_run(run_id)` explicitly. A legacy-only fixture may return false only
+for the known Run it models as having no persisted `RunPin`; keep the production
+check intact so a real scoped Run cannot fall through to a legacy cache or
+durable artifact manifest. The durable-binding regression should still restart
+the storage object, recover legacy Run metadata, and verify the existing binary
+Range response.
 Historical fixtures built with the current `create_db()` must remove tables and
 indexes owned by later migrations before backdating the migration version.
 Changing only the version leaves future schema behind and can make forward
